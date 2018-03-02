@@ -15,6 +15,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "css-loader": "^0.28.9",
     "d3": "^4.13.0",
+    "geolib": "^2.0.24",
     "next": "^5.0.0",
     "node-geo-distance": "^1.2.0",
     "postcss-loader": "^2.1.0",
