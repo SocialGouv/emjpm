@@ -1,6 +1,6 @@
-import TabeRow from "./TabeRow";
+import TableRowMandataire from "./TableRowMandataire";
 
-const TableTi = ({ rows, updateFilters, openModal }) => {
+const TableMandataire = ({ rows, updateFilters, openModal }) => {
   return (
     <div className="row">
       <table
@@ -51,9 +51,9 @@ const TableTi = ({ rows, updateFilters, openModal }) => {
         </thead>
         <tbody>
           {rows.map(mandataire => (
-            <TabeRow
+            <TableRowMandataire
               key={mandataire.properties.tel}
-              manda={mandataire}
+              mandataire={mandataire}
               updateFilters={this.updateFilters}
               onClick={() => openModal(mandataire)}
             />
@@ -63,4 +63,4 @@ const TableTi = ({ rows, updateFilters, openModal }) => {
     </div>
   );
 };
-export default TableTi;
+export default TableMandataire;
