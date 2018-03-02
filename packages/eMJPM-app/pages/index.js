@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import TableTI from "./TableTI";
 import CpOval from "./CpOval";
 import Navigation from "./Navigation";
-
+import geolib from 'geolib';
 
 const styles = {
     fontFamily: "sans-serif",
@@ -42,12 +42,11 @@ class Mandataires extends React.Component {
         searchType: "",
         searchNom: "",
         searchVille: "",
-        searchTi: "",
-        searchContact: "",
-        searchDispo: "",
         currentMandataire: "",
         modalIsOpen: false,
-        pageOfItems: []
+        postcode: "",
+        postcodeData: ""
+
     };
 
     componentDidMount() {
@@ -69,9 +68,27 @@ class Mandataires extends React.Component {
     };
     updateFilters = (filters) => {
         this.setState(filters);
+    };
+    updatePostcode = (postcode) => {
+        this.setState(postcode);
+    };
+    findPostcode = (postcode) => {
+        const postUrl = "https://api-adresse.data.gouv.fr/search/?q=postcode=" + (postcode.postcode).toString();
+        console.log(this.state)
+        console.log(postcode.postcode)
+        console.log(postUrl)
+        return fetch(postUrl)
+            .then(response => response.json())
+            .then(json => {
+                this.setState({
+                    postcodeData: json.features
+                });
+            });
+
     }
 
     render() {
+
         let filteredMandataires = this.state.data.filter(mandataire => {
             return (
                 mandataire.properties.type
@@ -85,15 +102,40 @@ class Mandataires extends React.Component {
                     .indexOf(this.state.searchVille.toLowerCase()) !== -1
             );
         });
-
         filteredMandataires.sort(sortByDispo);
-        console.log(filteredMandataires.map(m => m.properties.disponibilite))
+        console.log(filteredMandataires)
+        console.log(this.state)
+        let s = [];
+        if (!this.state.postcodeData || this.state.postcode !== "") {
+            s = filteredMandataires
+        } else {
+            if (this.state.postcodeData.length) {
+                const testGeolib = geolib.orderByDistance({
+                        latitude: this.state.postcodeData[0].geometry.coordinates[0],
+                        longitude: this.state.postcodeData[0].geometry.coordinates[1]
+                    },
+                    filteredMandataires.map(mandataire => (
+                        {
+                            latitude: mandataire.geometry.coordinates[0],
+                            longitude: mandataire.geometry.coordinates[1], ...mandataire
+                        })
+                    )
+                );
+                s = testGeolib
+            } else {
+                s = filteredMandataires
+            }
+        }
         return (
             <div>
                 <br/>
+                <div>
+                    <CpOval findPostcode={this.findPostcode}/>
+                </div>
                 <div className="container">
+
                     <TableTI
-                        rows={filteredMandataires}
+                        rows={s}
                         updateFilters={this.updateFilters}
                         openModal={this.openModal}
                     />
@@ -102,7 +144,7 @@ class Mandataires extends React.Component {
                         isOpen={this.state.modalIsOpen}
                         onRequestClose={this.closeModal}
                         style={customStyles}
-                        contentLabel="Example Modal"
+                        contentLabel="mandataire"
                     >
                         {this.state.currentMandataire && (
                             <div>
@@ -155,10 +197,6 @@ const App = () => (
 
     <div style={styles}>
         <Navigation/>
-        <div>
-            <CpOval/>
-        </div>
-
         <Mandataires/>
     </div>
 );

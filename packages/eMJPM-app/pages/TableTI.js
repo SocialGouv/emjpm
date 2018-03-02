@@ -7,7 +7,7 @@ const TableTi = ({
                  }) => {
     return (
         <div className="row">
-            <div
+            <table
                 className="table table-bordered table-striped responsive table-hover "
                 style={{tableLayout: "fixed", backgroundColor: "#eaf4f9"}}
             >
@@ -16,7 +16,7 @@ const TableTi = ({
                     <td style={{border: 0, color: "white"}}>
                         <select
                             id="type"
-                            class="custom-select mr-sm-2"
+                            className="custom-select mr-sm-2"
                             onChange={e => updateFilters({searchType: e.target.value})}
                         >
                             <option value="">Type MJPM...</option>
@@ -56,15 +56,15 @@ const TableTi = ({
                 </thead>
                 <tbody>
                 {rows.map(mandataire => (
-
                     <TabeRow
+                        key={mandataire.properties.tel}
                         manda={mandataire}
                         updateFilters={this.updateFilters}
                         onClick={() => openModal(mandataire)}
                     />
                 ))}
                 </tbody>
-            </div>
+            </table>
         </div>
     );
 };
