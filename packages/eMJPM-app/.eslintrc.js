@@ -1,42 +1,25 @@
 module.exports = {
-
-
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true
+    env: {
+        browser: true,
+        commonjs: true,
+        es6: true
     },
-    "extends": [
-        "plugin:prettier/recommended"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
+    parser: "babel-eslint",
+    extends: ["plugin:prettier/recommended"],
+    parserOptions: {
+        ecmaVersion: 7,
+        ecmaFeatures: {
+            experimentalObjectRestSpread: true,
+            jsx: true
         },
-        "sourceType": "module"
+        sourceType: "module",
+        prettierOptions: {
+            printWidth: 100,
+            tabWidth: 2
+        }
     },
-    "plugins": [
-        "react",
-        "prettier"
-    ],
-    "rules": {
-        "indent": [
-            "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
-        ],
-        "prettier/prettier": "error",
-        "semi": [
-            "error",
-            "always"
-        ]
+    plugins: ["react", "prettier"],
+    rules: {
+        "prettier/prettier": "error"
     }
 };
