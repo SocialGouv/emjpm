@@ -1,8 +1,6 @@
-import { render } from "react-dom";
-
-class CpOval extends React.Component {
+class CodePostalMandataire extends React.Component {
   state = {
-    cp: ""
+    codepostal: ""
   };
   render() {
     return (
@@ -24,8 +22,10 @@ class CpOval extends React.Component {
                     type={"text"}
                     className={"form-control"}
                     placeholder={"Code Postal"}
-                    value={this.state.cp}
-                    onChange={e => this.setState({ cp: e.target.value })}
+                    value={this.state.codepostal}
+                    onChange={e =>
+                      this.setState({ codepostal: e.target.value })
+                    }
                   />
                 </div>
                 <div className="col-3">
@@ -33,7 +33,9 @@ class CpOval extends React.Component {
                     type="button"
                     className="btn btn-secondary"
                     onClick={e =>
-                      this.props.findPostcode({ postcode: this.state.cp })
+                      this.props.findPostcode({
+                        postcode: this.state.codepostal
+                      })
                     }
                   >
                     Ok
@@ -49,4 +51,4 @@ class CpOval extends React.Component {
   }
 }
 
-export default CpOval;
+export default CodePostalMandataire;

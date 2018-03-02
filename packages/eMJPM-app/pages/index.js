@@ -1,12 +1,12 @@
-import { render } from "react-dom";
 import fetch from "isomorphic-fetch";
-import TabeRow from "./TabeRow";
+import TableRowMandataire from "../src/components/TableRowMandataire";
 import Modal from "react-modal";
 import "bootstrap/dist/css/bootstrap.css";
-import TableTI from "./TableTI";
-import CpOval from "./CpOval";
-import Navigation from "./Navigation";
+import TableMandataire from "../src/components/TableMandataire";
+import CodePostalMandataire from "../src/components/CodePostalMandataire";
+import Navigation from "../src/components/Navigation";
 import geolib from "geolib";
+import RowModal from "../src/components/RowModal";
 
 const styles = {
   fontFamily: "sans-serif",
@@ -24,8 +24,8 @@ const customStyles = {
 };
 
 const sortByDispo = (a, b) => {
-  const dispoA = parseInt(a.properties.disponibilite, 10) || -Infinity;
-  const dispoB = parseInt(b.properties.disponibilite, 10) || -Infinity;
+  const dispoA = parseInt(a, 10) || -Infinity;
+  const dispoB = parseInt(b, 10) || -Infinity;
   if (dispoA < dispoB) {
     return 1;
   }
@@ -44,12 +44,11 @@ class Mandataires extends React.Component {
     searchVille: "",
     currentMandataire: "",
     modalIsOpen: false,
-    postcode: "",
     postcodeData: ""
   };
 
   componentDidMount() {
-    const url = "http://127.0.0.1:3000/static/info.json";
+    const url = "/static/info.json";
     fetch(url)
       .then(response => response.json())
       .then(json => {
@@ -68,16 +67,10 @@ class Mandataires extends React.Component {
   updateFilters = filters => {
     this.setState(filters);
   };
-  updatePostcode = postcode => {
-    this.setState(postcode);
-  };
   findPostcode = postcode => {
     const postUrl =
       "https://api-adresse.data.gouv.fr/search/?q=postcode=" +
       postcode.postcode.toString();
-    console.log(this.state);
-    console.log(postcode.postcode);
-    console.log(postUrl);
     return fetch(postUrl)
       .then(response => response.json())
       .then(json => {
@@ -101,11 +94,11 @@ class Mandataires extends React.Component {
           .indexOf(this.state.searchVille.toLowerCase()) !== -1
       );
     });
-    filteredMandataires.sort(sortByDispo);
-    console.log(filteredMandataires);
-    console.log(this.state);
+    filteredMandataires.sort((a, b) =>
+      sortByDispo(a.properties.disponibilite, b.properties.disponibilite)
+    );
     let s = [];
-    if (!this.state.postcodeData || this.state.postcode !== "") {
+    if (!this.state.postcodeData) {
       s = filteredMandataires;
     } else {
       if (this.state.postcodeData.length) {
@@ -125,14 +118,15 @@ class Mandataires extends React.Component {
         s = filteredMandataires;
       }
     }
+    const currentMandataireModal = this.state.currentMandataire.properties;
     return (
       <div>
         <br />
         <div>
-          <CpOval findPostcode={this.findPostcode} />
+          <CodePostalMandataire findPostcode={this.findPostcode} />
         </div>
         <div className="container">
-          <TableTI
+          <TableMandataire
             rows={s}
             updateFilters={this.updateFilters}
             openModal={this.openModal}
@@ -153,29 +147,20 @@ class Mandataires extends React.Component {
                   {this.state.currentMandataire.properties.nom}
                 </h2>
 
-                <div style={{ textAlign: "left" }}>
-                  <b>Type:</b> {this.state.currentMandataire.properties.type}
-                </div>
-                <div style={{ textAlign: "left" }}>
-                  <b>Contact:</b>{" "}
-                  {this.state.currentMandataire.properties.contact}
-                </div>
-                <div style={{ textAlign: "left" }}>
-                  <b>Adresse:</b>{" "}
-                  {this.state.currentMandataire.properties.adresse}
-                </div>
-                <div style={{ textAlign: "left" }}>
-                  <b>Ville:</b> {this.state.currentMandataire.properties.ville}
-                </div>
-                <div style={{ textAlign: "left" }}>
-                  <b>Tel:</b> {this.state.currentMandataire.properties.tel}
-                </div>
-                <div style={{ textAlign: "left" }}>
-                  <b>Email:</b> {this.state.currentMandataire.properties.email}
-                </div>
-                <div style={{ textAlign: "left" }}>
-                  <b>Ti:</b> {this.state.currentMandataire.properties.ti}
-                </div>
+                <RowModal label="Type:" value={currentMandataireModal.type} />
+                <RowModal
+                  label="Contact:"
+                  value={currentMandataireModal.contact}
+                />
+                <RowModal
+                  label="Adresse:"
+                  value={currentMandataireModal.adresse}
+                />
+                <RowModal label="Type:" value={currentMandataireModal.type} />
+                <RowModal label="Ville:" value={currentMandataireModal.ville} />
+                <RowModal label="Tel:" value={currentMandataireModal.tel} />
+                <RowModal label="Email:" value={currentMandataireModal.email} />
+                <RowModal label="Ti:" value={currentMandataireModal.ti} />
                 <br />
                 <div style={{ align: "center" }}>
                   <button className={"btn btn-dark"} onClick={this.closeModal}>
