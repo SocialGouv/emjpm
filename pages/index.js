@@ -57,6 +57,7 @@ const filterMandataires = (mandataires, filters) => {
         latitude: filters.postcodeCoordinates[0],
         longitude: filters.postcodeCoordinates[1]
       },
+      // add lat/lng properties to mandataires data so they can be sorted and returned as is
       filteredMandataires.map(mandataire => ({
         latitude: mandataire.geometry.coordinates[0],
         longitude: mandataire.geometry.coordinates[1],
@@ -130,8 +131,8 @@ class Mandataires extends React.Component {
 
     return (
       <div>
-        <br />
         <CodePostalMandataire findPostcode={this.findPostcode} />
+        <br />
         <div className="container">
           <TableMandataire
             rows={filteredMandataires}
@@ -146,7 +147,7 @@ class Mandataires extends React.Component {
           >
             {this.state.currentMandataire && (
               <div>
-                <h2 style={{ textAlign: "center" }} ref={subtitle => (this.subtitle = subtitle)}>
+                <h2 style={{ textAlign: "center" }}>
                   {this.state.currentMandataire.properties.nom}
                 </h2>
                 <RowModal label="Type:" value={currentMandataireModal.type} />
