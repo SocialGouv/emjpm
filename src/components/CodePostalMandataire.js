@@ -8,11 +8,10 @@ class CodePostalMandataire extends React.Component {
         <div className="row">
           <div className="col-4" />
           <div className="col-4" style={{ align: "center" }}>
-            <br />
             <img
               style={{ width: "25%", float: "left" }}
-              src="/static/images/carte.jpg"
-              alt="carte presention"
+              src="/static/images/locate.svg"
+              alt="carte presentation"
             />
             <div style={{ float: "rigth" }}>
               <p>Au plus proche du majeur protégé</p>
