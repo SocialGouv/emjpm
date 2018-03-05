@@ -18,7 +18,7 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
               }
             `}</style>
             <tr style={{ backgroundColor: "#c4eeffa8" }}>
-              <td style={{ width: 150 }}>
+              <td style={{ width: 180 }}>
                 <select
                   id="type"
                   className="custom-select mr-sm-2"
@@ -50,7 +50,7 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
                   onChange={e => updateFilters({ searchNom: e.target.value })}
                 />
               </td>
-              <td style={{ textAlign: "center", verticalAlign: "middle", width: 80 }}>
+              <td style={{ textAlign: "center", verticalAlign: "middle", width: 120 }}>
                 Disponibilite
               </td>
               <td style={{ textAlign: "center", verticalAlign: "middle", width: 150 }}>Contact</td>

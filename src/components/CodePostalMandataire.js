@@ -9,8 +9,8 @@ const CodePostalMandataire = ({ findPostcode }) => {
   return (
     <div
       style={{
-        width: 350,
-        height: 80,
+        width: 400,
+        height: 100,
         borderRadius: 5,
         padding: 10,
         backgroundColor: "#ffedad",
@@ -18,21 +18,37 @@ const CodePostalMandataire = ({ findPostcode }) => {
       }}
     >
       <img
-        style={{ width: 60, float: "left" }}
+        style={{ width: 80, float: "left", verticalAlign: "middle" }}
         src="/static/images/locate.svg"
         alt="carte presentation"
       />
-      <div style={{ fontSize: "1.3em", marginBottom: 5 }}>Au plus proche du majeur protégé</div>
+      <div style={{ fontSize: "1.3rem", marginBottom: 5 }}>Au plus proche du majeur protégé</div>
       <div>
         <input
-          style={{ width: 100, textAlign: "center", display: "inline", clear: "both" }}
+          style={{
+            fontSize: "1.3rem",
+            width: 130,
+            textAlign: "center",
+            display: "inline",
+            clear: "both",
+            verticalAlign: "top"
+          }}
           ref={node => (input = node)}
           type="text"
           className="form-control"
           placeholder="Code Postal"
           onKeyDown={onKeyDown}
         />
-        <button style={{ width: 50 }} type="button" className="btn btn-secondary" onClick={submit}>
+        <button
+          style={{
+            width: 50,
+            fontSize: "1.3rem",
+            verticalAlign: "top"
+          }}
+          type="button"
+          className="btn btn-secondary"
+          onClick={submit}
+        >
           Ok
         </button>
       </div>
