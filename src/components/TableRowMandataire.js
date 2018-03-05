@@ -17,33 +17,30 @@ const Phone = ({ num }) => {
   );
 };
 
+const Cell = ({ style, title, children }) => (
+  <td className="pagination-centered" style={{ fontSize: "0.8em", ...style }} title={title}>
+    <style jsx>{`
+      td {
+        vertical-align: middle !important;
+      }
+    `}</style>
+    {children}
+  </td>
+);
+
 const TableRowMandataire = ({ mandataire, onClick }) => {
-  const { ville, type, nom, disponibilite, tel } = mandataire.properties;
+  console.log("mandataire", mandataire);
+  const { ville, type, nom, disponibilite, tel, contact } = mandataire.properties;
   return (
     <tr>
-      <style jsx>{`
-        td {
-          vertical-align: middle !important;
-        }
-      `}</style>
-      <td className="pagination-centered" style={{ fontSize: "0.8em" }}>
-        {type.toUpperCase()}
-      </td>
-      <td className="pagination-centered" style={{ fontSize: "0.8em" }}>
-        {ville}
-      </td>
-      <td className="pagination-centered" style={{ fontSize: "0.8em" }}>
-        {nom}
-      </td>
-      <td className="pagination-centered" style={{ fontSize: "0.8em" }}>
-        {disponibilite}
-      </td>
-      <td className="pagination-centered" style={{ fontSize: "0.8em" }}>
-        {cleanTels(tel).map(t => <Phone key={t} num={t} />)}
-      </td>
-      <td style={{ width: "10% !important" }} title="Voir les détails du mandataire">
+      <Cell>{type.toUpperCase()}</Cell>
+      <Cell>{ville}</Cell>
+      <Cell>{nom || contact}</Cell>
+      <Cell>{disponibilite}</Cell>
+      <Cell>{cleanTels(tel).map(t => <Phone key={t} num={t} />)}</Cell>
+      <Cell style={{ width: "10% !important" }} title="Voir les détails du mandataire">
         <FaSearch onClick={onClick} style={{ cursor: "pointer" }} />
-      </td>
+      </Cell>
     </tr>
   );
 };
