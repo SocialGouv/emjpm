@@ -6,17 +6,26 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
       <div className="offset-1 col-lg-10">
         <table
           className="table table-bordered table-striped responsive table-hover"
-          style={{ tableLayout: "fixed", backgroundColor: "#eaf4f9" }}
+          style={{ tableLayout: "fixed" }}
         >
           <thead>
-            <tr style={{ backgroundColor: "white", alignText: "center" }}>
-              <td style={{ border: 0, color: "white", width: 150 }}>
+            <style jsx>{`
+              input {
+                margin-bottom: 0 !important;
+              }
+              td {
+                border: 1px solid #ade8ff !important;
+              }
+            `}</style>
+            <tr style={{ backgroundColor: "#c4eeffa8" }}>
+              <td style={{ width: 150 }}>
                 <select
                   id="type"
                   className="custom-select mr-sm-2"
+                  style={{ marginLeft: 20 }}
                   onChange={e => updateFilters({ searchType: e.target.value })}
                 >
-                  <option value="">Type MJPM...</option>
+                  <option value="">Type MJPM</option>
                   <option value="preposes">Préposés</option>
                   <option value="prives">Individuels</option>
                   <option value="services">Services</option>
