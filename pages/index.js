@@ -23,6 +23,17 @@ const customStyles = {
   }
 };
 
+// postCode => [lat, lon]
+const getPostCodeCoordinates = postCode => {
+  // return null if no input
+  if (!postCode || !postCode.trim()) {
+    return Promise.resolve(null);
+  }
+  return fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
+    .then(response => response.json())
+    .then(json => json.features[0].geometry.coordinates);
+};
+
 const sortByDispo = (a, b) => {
   const dispoA = parseInt(a, 10) || -Infinity;
   const dispoB = parseInt(b, 10) || -Infinity;
@@ -32,7 +43,6 @@ const sortByDispo = (a, b) => {
   if (dispoA > dispoB) {
     return -1;
   }
-  // names must be equal
   return 0;
 };
 
@@ -44,7 +54,7 @@ class Mandataires extends React.Component {
     searchVille: "",
     currentMandataire: "",
     modalIsOpen: false,
-    postcodeData: ""
+    postcodeCoordinates: ""
   };
 
   componentDidMount() {
@@ -67,56 +77,48 @@ class Mandataires extends React.Component {
   updateFilters = filters => {
     this.setState(filters);
   };
-  findPostcode = postcode => {
-    const postUrl =
-      "https://api-adresse.data.gouv.fr/search/?q=postcode=" +
-      postcode.postcode.toString();
-    return fetch(postUrl)
-      .then(response => response.json())
-      .then(json => {
-        this.setState({
-          postcodeData: json.features
-        });
-      });
+  findPostcode = postCode => {
+    getPostCodeCoordinates(postCode).then(coordinates =>
+      this.setState({
+        postcodeCoordinates: coordinates
+      })
+    );
   };
 
   render() {
     let filteredMandataires = this.state.data.filter(mandataire => {
       return (
-        mandataire.properties.type
-          .toLowerCase()
-          .indexOf(this.state.searchType.toLowerCase()) !== -1 &&
-        mandataire.properties.nom
-          .toLowerCase()
-          .indexOf(this.state.searchNom.toLowerCase()) !== -1 &&
-        mandataire.properties.ville
-          .toLowerCase()
-          .indexOf(this.state.searchVille.toLowerCase()) !== -1
+        mandataire.properties.type.toLowerCase().indexOf(this.state.searchType.toLowerCase()) !==
+          -1 &&
+        mandataire.properties.nom.toLowerCase().indexOf(this.state.searchNom.toLowerCase()) !==
+          -1 &&
+        mandataire.properties.ville.toLowerCase().indexOf(this.state.searchVille.toLowerCase()) !==
+          -1
       );
     });
     filteredMandataires.sort((a, b) =>
       sortByDispo(a.properties.disponibilite, b.properties.disponibilite)
     );
     let s = [];
-    if (!this.state.postcodeData) {
+    if (!this.state.postcodeCoordinates) {
       s = filteredMandataires;
     } else {
-      if (this.state.postcodeData.length) {
-        const testGeolib = geolib.orderByDistance(
-          {
-            latitude: this.state.postcodeData[0].geometry.coordinates[0],
-            longitude: this.state.postcodeData[0].geometry.coordinates[1]
-          },
-          filteredMandataires.map(mandataire => ({
-            latitude: mandataire.geometry.coordinates[0],
-            longitude: mandataire.geometry.coordinates[1],
-            ...mandataire
-          }))
-        );
-        s = testGeolib;
-      } else {
-        s = filteredMandataires;
-      }
+      // if (this.state.postcodeCoordinates.length) {
+      const testGeolib = geolib.orderByDistance(
+        {
+          latitude: this.state.postcodeCoordinates[0],
+          longitude: this.state.postcodeCoordinates[1]
+        },
+        filteredMandataires.map(mandataire => ({
+          latitude: mandataire.geometry.coordinates[0],
+          longitude: mandataire.geometry.coordinates[1],
+          ...mandataire
+        }))
+      );
+      s = testGeolib;
+      // } else {
+      //   s = filteredMandataires;
+      // }
     }
     const currentMandataireModal = this.state.currentMandataire.properties;
     return (

@@ -1,6 +1,6 @@
 class CodePostalMandataire extends React.Component {
   state = {
-    codepostal: ""
+    codePostal: ""
   };
   render() {
     return (
@@ -22,21 +22,15 @@ class CodePostalMandataire extends React.Component {
                     type={"text"}
                     className={"form-control"}
                     placeholder={"Code Postal"}
-                    value={this.state.codepostal}
-                    onChange={e =>
-                      this.setState({ codepostal: e.target.value })
-                    }
+                    value={this.state.codePostal}
+                    onChange={e => this.setState({ codePostal: e.target.value })}
                   />
                 </div>
                 <div className="col-3">
                   <button
                     type="button"
                     className="btn btn-secondary"
-                    onClick={e =>
-                      this.props.findPostcode({
-                        postcode: this.state.codepostal
-                      })
-                    }
+                    onClick={e => this.props.findPostcode(this.state.codePostal)}
                   >
                     Ok
                   </button>
