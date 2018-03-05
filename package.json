@@ -14,19 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
-    "d3": "^4.13.0",
     "geolib": "^2.0.24",
     "next": "^5.0.0",
-    "node-geo-distance": "^1.2.0",
     "react": "^16.2.0",
-    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.2.0",
-    "react-fontawesome": "^1.6.1",
-    "react-icon": "^1.0.0",
-    "react-modal": "^3.3.1",
-    "react-octicon": "^3.0.1",
-    "react-paginate": "^5.1.0",
-    "reactstrap": "^5.0.0-beta"
+    "react-icons": "^2.2.7",
+    "react-modal": "^3.3.1"
   },
   "devDependencies": {
     "@zeit/next-css": "^0.1.2",
