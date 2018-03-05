@@ -50,10 +50,24 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
                   onChange={e => updateFilters({ searchNom: e.target.value })}
                 />
               </td>
-              <td style={{ textAlign: "center", verticalAlign: "middle", width: 120 }}>
+              <td
+                style={{
+                  textAlign: "center",
+                  verticalAlign: "middle",
+                  width: 120
+                }}
+              >
                 Disponibilite
               </td>
-              <td style={{ textAlign: "center", verticalAlign: "middle", width: 150 }}>Contact</td>
+              <td
+                style={{
+                  textAlign: "center",
+                  verticalAlign: "middle",
+                  width: 150
+                }}
+              >
+                Contact
+              </td>
               <td style={{ width: 40 }} />
             </tr>
           </thead>

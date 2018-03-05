@@ -2,7 +2,6 @@ import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import geolib from "geolib";
 
-import TableRowMandataire from "../src/components/TableRowMandataire";
 import TableMandataire from "../src/components/TableMandataire";
 import CodePostalMandataire from "../src/components/CodePostalMandataire";
 import Navigation from "../src/components/Navigation";

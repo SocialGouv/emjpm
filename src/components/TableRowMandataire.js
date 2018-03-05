@@ -2,7 +2,7 @@ import FaSearch from "react-icons/lib/fa/search";
 
 // todo: improve tel parsing
 const cleanTels = tel => {
-  const tel2 = tel.replace(/[\.-\s]/g, "");
+  const tel2 = tel.replace(/[.-\s]/g, "");
   if (tel2.length > 10) {
     return [tel2.substring(0, 10), tel2.substring(10, 20), tel2.substring(20)].filter(Boolean);
   }
@@ -30,7 +30,6 @@ const Cell = ({ style, title, children }) => (
 );
 
 const TableRowMandataire = ({ mandataire, onClick }) => {
-  console.log("mandataire", mandataire);
   const { ville, type, nom, disponibilite, tel, contact } = mandataire.properties;
   return (
     <tr>

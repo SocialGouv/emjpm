@@ -5,21 +5,22 @@ module.exports = {
         es6: true
     },
     parser: "babel-eslint",
-    extends: ["plugin:prettier/recommended"],
+    extends: ["eslint:recommended", "plugin:react/recommended", "plugin:prettier/recommended"],
     parserOptions: {
         ecmaVersion: 7,
         ecmaFeatures: {
             experimentalObjectRestSpread: true,
             jsx: true
         },
-        sourceType: "module",
-        prettierOptions: {
-            printWidth: 100,
-            tabWidth: 2
-        }
+        sourceType: "module"
     },
     plugins: ["react", "prettier"],
+    globals: {
+        React: true
+    },
     rules: {
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "warn"
     }
 };
