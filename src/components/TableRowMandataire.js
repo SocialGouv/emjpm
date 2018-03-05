@@ -21,6 +21,11 @@ const TableRowMandataire = ({ mandataire, onClick }) => {
   const { ville, type, nom, disponibilite, tel } = mandataire.properties;
   return (
     <tr>
+      <style jsx>{`
+        td {
+          vertical-align: middle !important;
+        }
+      `}</style>
       <td className="pagination-centered" style={{ fontSize: "0.8em" }}>
         {type.toUpperCase()}
       </td>

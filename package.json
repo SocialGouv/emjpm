@@ -19,7 +19,8 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-icons": "^2.2.7",
-    "react-modal": "^3.3.1"
+    "react-modal": "^3.3.1",
+    "styled-jsx": "^2.2.5"
   },
   "devDependencies": {
     "@zeit/next-css": "^0.1.2",
