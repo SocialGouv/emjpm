@@ -4,6 +4,11 @@ export default class MyDocument extends Document {
   render() {
     return (
       <html>
+        <style jsx global>{`
+          html {
+            font-size: 14px;
+          }
+        `}</style>
         <Head>
           <link rel="stylesheet" href="/_next/static/style.css" />
         </Head>
