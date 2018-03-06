@@ -1,17 +1,19 @@
 import fetch from "isomorphic-fetch";
-import TableRowMandataire from "../src/components/TableRowMandataire";
 import Modal from "react-modal";
-import "bootstrap/dist/css/bootstrap.css";
+import geolib from "geolib";
+
 import TableMandataire from "../src/components/TableMandataire";
 import CodePostalMandataire from "../src/components/CodePostalMandataire";
 import Navigation from "../src/components/Navigation";
-import geolib from "geolib";
 import RowModal from "../src/components/RowModal";
+
+import "bootstrap/dist/css/bootstrap.css";
 
 const styles = {
   fontFamily: "sans-serif",
   textAlign: "center"
 };
+
 const customStyles = {
   content: {
     top: "50%",
@@ -23,6 +25,49 @@ const customStyles = {
   }
 };
 
+// postCode => [lat, lon]
+const getPostCodeCoordinates = postCode => {
+  // return null if no input
+  if (!postCode || !postCode.trim()) {
+    return Promise.resolve(null);
+  }
+  return fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
+    .then(response => response.json())
+    .then(json => json.features[0].geometry.coordinates);
+};
+
+// filter and sort list of mandataires
+const filterMandataires = (mandataires, filters) => {
+  let filteredMandataires = mandataires.filter(mandataire => {
+    return (
+      mandataire.properties.type.toLowerCase().indexOf(filters.searchType.toLowerCase()) !== -1 &&
+      mandataire.properties.nom.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
+      mandataire.properties.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1
+    );
+  });
+
+  filteredMandataires.sort((a, b) =>
+    sortByDispo(a.properties.disponibilite, b.properties.disponibilite)
+  );
+
+  if (filters.postcodeCoordinates) {
+    filteredMandataires = geolib.orderByDistance(
+      {
+        latitude: filters.postcodeCoordinates[0],
+        longitude: filters.postcodeCoordinates[1]
+      },
+      // add lat/lng properties to mandataires data so they can be sorted and returned as is
+      filteredMandataires.map(mandataire => ({
+        latitude: mandataire.geometry.coordinates[0],
+        longitude: mandataire.geometry.coordinates[1],
+        ...mandataire
+      }))
+    );
+  }
+
+  return filteredMandataires;
+};
+
 const sortByDispo = (a, b) => {
   const dispoA = parseInt(a, 10) || -Infinity;
   const dispoB = parseInt(b, 10) || -Infinity;
@@ -32,7 +77,6 @@ const sortByDispo = (a, b) => {
   if (dispoA > dispoB) {
     return -1;
   }
-  // names must be equal
   return 0;
 };
 
@@ -44,7 +88,7 @@ class Mandataires extends React.Component {
     searchVille: "",
     currentMandataire: "",
     modalIsOpen: false,
-    postcodeData: ""
+    postcodeCoordinates: ""
   };
 
   componentDidMount() {
@@ -67,71 +111,33 @@ class Mandataires extends React.Component {
   updateFilters = filters => {
     this.setState(filters);
   };
-  findPostcode = postcode => {
-    const postUrl =
-      "https://api-adresse.data.gouv.fr/search/?q=postcode=" +
-      postcode.postcode.toString();
-    return fetch(postUrl)
-      .then(response => response.json())
-      .then(json => {
-        this.setState({
-          postcodeData: json.features
-        });
-      });
-  };
+  findPostcode = postCode =>
+    getPostCodeCoordinates(postCode).then(coordinates =>
+      this.setState({
+        postcodeCoordinates: coordinates
+      })
+    );
 
   render() {
-    let filteredMandataires = this.state.data.filter(mandataire => {
-      return (
-        mandataire.properties.type
-          .toLowerCase()
-          .indexOf(this.state.searchType.toLowerCase()) !== -1 &&
-        mandataire.properties.nom
-          .toLowerCase()
-          .indexOf(this.state.searchNom.toLowerCase()) !== -1 &&
-        mandataire.properties.ville
-          .toLowerCase()
-          .indexOf(this.state.searchVille.toLowerCase()) !== -1
-      );
+    const filteredMandataires = filterMandataires(this.state.data, {
+      searchType: this.state.searchType,
+      searchNom: this.state.searchNom,
+      searchVille: this.state.searchVille,
+      postcodeCoordinates: this.state.postcodeCoordinates
     });
-    filteredMandataires.sort((a, b) =>
-      sortByDispo(a.properties.disponibilite, b.properties.disponibilite)
-    );
-    let s = [];
-    if (!this.state.postcodeData) {
-      s = filteredMandataires;
-    } else {
-      if (this.state.postcodeData.length) {
-        const testGeolib = geolib.orderByDistance(
-          {
-            latitude: this.state.postcodeData[0].geometry.coordinates[0],
-            longitude: this.state.postcodeData[0].geometry.coordinates[1]
-          },
-          filteredMandataires.map(mandataire => ({
-            latitude: mandataire.geometry.coordinates[0],
-            longitude: mandataire.geometry.coordinates[1],
-            ...mandataire
-          }))
-        );
-        s = testGeolib;
-      } else {
-        s = filteredMandataires;
-      }
-    }
+
     const currentMandataireModal = this.state.currentMandataire.properties;
+
     return (
       <div>
+        <CodePostalMandataire findPostcode={this.findPostcode} />
         <br />
-        <div>
-          <CodePostalMandataire findPostcode={this.findPostcode} />
-        </div>
         <div className="container">
           <TableMandataire
-            rows={s}
+            rows={filteredMandataires}
             updateFilters={this.updateFilters}
             openModal={this.openModal}
           />
-
           <Modal
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
@@ -140,23 +146,12 @@ class Mandataires extends React.Component {
           >
             {this.state.currentMandataire && (
               <div>
-                <h2
-                  style={{ textAlign: "center" }}
-                  ref={subtitle => (this.subtitle = subtitle)}
-                >
+                <h2 style={{ textAlign: "center" }}>
                   {this.state.currentMandataire.properties.nom}
                 </h2>
-
                 <RowModal label="Type:" value={currentMandataireModal.type} />
-                <RowModal
-                  label="Contact:"
-                  value={currentMandataireModal.contact}
-                />
-                <RowModal
-                  label="Adresse:"
-                  value={currentMandataireModal.adresse}
-                />
-                <RowModal label="Type:" value={currentMandataireModal.type} />
+                <RowModal label="Contact:" value={currentMandataireModal.contact} />
+                <RowModal label="Adresse:" value={currentMandataireModal.adresse} />
                 <RowModal label="Ville:" value={currentMandataireModal.ville} />
                 <RowModal label="Tel:" value={currentMandataireModal.tel} />
                 <RowModal label="Email:" value={currentMandataireModal.email} />

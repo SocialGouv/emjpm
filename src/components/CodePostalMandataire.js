@@ -1,54 +1,59 @@
-class CodePostalMandataire extends React.Component {
-  state = {
-    codepostal: ""
+const CodePostalMandataire = ({ findPostcode }) => {
+  let input;
+  const onKeyDown = e => {
+    if (e.keyCode === 13) {
+      submit();
+    }
   };
-  render() {
-    return (
-      <div className="container" style={{ heigth: "30%" }}>
-        <div className="row">
-          <div className="col-4" />
-          <div className="col-4" style={{ align: "center" }}>
-            <br />
-            <img
-              style={{ width: "25%", float: "left" }}
-              src="/static/images/carte.jpg"
-              alt="carte presention"
-            />
-            <div style={{ float: "rigth" }}>
-              <p>Au plus proche du majeur protégé</p>
-              <div className="row">
-                <div className="col-7">
-                  <input
-                    type={"text"}
-                    className={"form-control"}
-                    placeholder={"Code Postal"}
-                    value={this.state.codepostal}
-                    onChange={e =>
-                      this.setState({ codepostal: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="col-3">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={e =>
-                      this.props.findPostcode({
-                        postcode: this.state.codepostal
-                      })
-                    }
-                  >
-                    Ok
-                  </button>
-                </div>
-              </div>
-            </div>
-            <br />
-          </div>
-        </div>
+  const submit = () => findPostcode(input.value);
+  return (
+    <div
+      style={{
+        width: 400,
+        height: 100,
+        borderRadius: 5,
+        padding: 10,
+        backgroundColor: "#ffedad",
+        margin: "0 auto"
+      }}
+    >
+      <img
+        style={{ width: 80, float: "left", verticalAlign: "middle" }}
+        src="/static/images/locate.svg"
+        alt="carte presentation"
+      />
+      <div style={{ fontSize: "1.3rem", marginBottom: 5 }}>Au plus proche du majeur protégé</div>
+      <div>
+        <input
+          style={{
+            fontSize: "1.3rem",
+            width: 130,
+            textAlign: "center",
+            display: "inline",
+            clear: "both",
+            verticalAlign: "top"
+          }}
+          ref={node => (input = node)}
+          type="text"
+          className="form-control"
+          placeholder="Code Postal"
+          onKeyDown={onKeyDown}
+        />
+        <button
+          style={{
+            width: 50,
+            fontSize: "1.3rem",
+            verticalAlign: "top"
+          }}
+          type="button"
+          className="btn btn-secondary"
+          onClick={submit}
+        >
+          Ok
+        </button>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default CodePostalMandataire;
