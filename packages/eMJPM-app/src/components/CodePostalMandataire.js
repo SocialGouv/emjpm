@@ -22,7 +22,7 @@ const CodePostalMandataire = ({ findPostcode }) => {
         src="/static/images/locate.svg"
         alt="carte presentation"
       />
-      <div style={{ fontSize: "1.3rem", marginBottom: 5 }}>Au plus proche du majeur protégé</div>
+      <div style={{ fontSize: "1.1rem", marginBottom: 5 }}>Au plus proche du majeur protégé</div>
       <div>
         <input
           style={{

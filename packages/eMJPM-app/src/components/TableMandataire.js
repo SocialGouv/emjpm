@@ -18,11 +18,11 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
               }
             `}</style>
             <tr style={{ backgroundColor: "#c4eeffa8" }}>
-              <td style={{ width: 180 }}>
+              <td style={{ width: 180,textAlign: "left" }}>
                 <select
                   id="type"
                   className="custom-select mr-sm-2"
-                  style={{ marginLeft: 20 }}
+                  style={{ marginLeft: 0, textAlign: "left" }}
                   onChange={e => updateFilters({ searchType: e.target.value })}
                 >
                   <option value="">Type MJPM</option>
@@ -36,7 +36,7 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
                 <input
                   type={"text"}
                   className="form-control mb-2"
-                  style={{ textAlign: "center" }}
+                  style={{ textAlign: "left" }}
                   placeholder={"Lieux"}
                   onChange={e => updateFilters({ searchVille: e.target.value })}
                 />
@@ -44,7 +44,7 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
               <td>
                 <input
                   type={"text"}
-                  style={{ textAlign: "center" }}
+                  style={{ textAlign: "left" }}
                   className="form-control mb-2"
                   placeholder={"Identité"}
                   onChange={e => updateFilters({ searchNom: e.target.value })}
@@ -59,15 +59,15 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
               >
                 Disponibilite
               </td>
-              <td
-                style={{
-                  textAlign: "center",
-                  verticalAlign: "middle",
-                  width: 150
-                }}
-              >
-                Contact
-              </td>
+              {/*<td*/}
+                {/*style={{*/}
+                  {/*textAlign: "center",*/}
+                  {/*verticalAlign: "middle",*/}
+                  {/*width: 150*/}
+                {/*}}*/}
+              {/*>*/}
+                {/*Contact*/}
+              {/*</td>*/}
               <td style={{ width: 40 }} />
             </tr>
           </thead>
