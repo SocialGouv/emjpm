@@ -1,5 +1,4 @@
-var locate = require("../../locate.svg")
-
+const locate = require("../../static/images/locate.svg");
 
 const CodePostalMandataire = ({ findPostcode }) => {
   let input;
