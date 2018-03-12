@@ -33,11 +33,11 @@ const TableRowMandataire = ({ mandataire, onClick }) => {
   const { ville, type, nom, disponibilite, tel, contact } = mandataire.properties;
   return (
     <tr>
-      <Cell>{type.toUpperCase()}</Cell>
-      <Cell>{ville}</Cell>
-      <Cell>{nom || contact}</Cell>
+      <Cell style={{textAlign: "left"}}>{type.toUpperCase()}</Cell>
+      <Cell style={{textAlign: "left"}}>{ville}</Cell>
+      <Cell style={{textAlign: "left"}}>{nom || contact}</Cell>
       <Cell>{disponibilite}</Cell>
-      <Cell>{cleanTels(tel).map(t => <Phone key={t} num={t} />)}</Cell>
+      {/*<Cell>{cleanTels(tel).map(t => <Phone key={t} num={t} />)}</Cell>*/}
       <Cell style={{ width: "10% !important" }} title="Voir les détails du mandataire">
         <FaSearch onClick={onClick} style={{ cursor: "pointer" }} />
       </Cell>

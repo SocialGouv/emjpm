@@ -600,7 +600,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "AGOUDJIL Sabine",
@@ -626,7 +626,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "BECUWE Christine épouse HUE",
@@ -651,7 +651,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "BERNARD Nadine",
@@ -678,7 +678,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "BOURLEZ Annie",
@@ -704,7 +704,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "BRIDOUX Pierre",
@@ -730,7 +730,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "BRIFFAUT Caroline",
@@ -756,7 +756,7 @@
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
         "disponibilite": 20,
-        "type": "prives",
+        "type": "individuels",
         "nom": "",
         "contact": "CARACOTTE Joël",
         "adresse": "15, Boulevard Militaire",
@@ -786,7 +786,7 @@
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
         "disponibilite": 2,
-        "type": "prives",
+        "type": "individuels",
         "nom": "",
         "contact": "CONRATTE Alexandrine",
         "adresse": "11, rue Albert Duplat",
@@ -811,7 +811,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "CORNIL Judith",
@@ -836,7 +836,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "DE REU Jacques",
@@ -861,7 +861,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "DECLERCQ Xavier",
@@ -888,7 +888,7 @@
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
         "disponibilite": 2,
-        "type": "prives",
+        "type": "individuels",
         "nom": "",
         "contact": "DEGELDER Nathalie",
         "adresse": "2, rue Charles Demory\nappt 2B",
@@ -913,7 +913,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "DRUELLE Laëtitia",
@@ -938,7 +938,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "DUHAIN Annie",
@@ -963,7 +963,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "DULIEU José",
@@ -989,7 +989,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "DUQUENNE Valérie",
@@ -1015,7 +1015,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "FAUVARQUE Christelle",
@@ -1044,7 +1044,7 @@
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
         "disponibilite": 1,
-        "type": "prives",
+        "type": "individuels",
         "nom": "",
         "contact": "FOUCART Christelle",
         "adresse": "12 bis, rue du Cateau",
@@ -1069,7 +1069,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "GODIN Olivier",
@@ -1095,7 +1095,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "GOFFETTE Juliette",
@@ -1121,7 +1121,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "GOLABEK née QUILLET Véronique",
@@ -1148,7 +1148,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "HAVREZ Philippe",
@@ -1174,7 +1174,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "LAFFRA Vincent",
@@ -1200,7 +1200,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "LEMOINE Muriel",
@@ -1226,7 +1226,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "LEMUE Laurence",
@@ -1252,7 +1252,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "LOINTIER Gérard",
@@ -1279,7 +1279,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "LOYER Laurent",
@@ -1307,7 +1307,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "MAREL Dominique",
@@ -1334,7 +1334,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "MARTIN Marie-Bénédicte",
@@ -1361,7 +1361,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "MASSON Estelle",
@@ -1387,7 +1387,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "MAZURELLE FLEURY David",
@@ -1413,7 +1413,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "MERCHIER Valérie",
@@ -1438,7 +1438,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "MICHEL Sophie",
@@ -1464,7 +1464,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "NACER Mariame",
@@ -1489,7 +1489,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "NONNEZ Christelle",
@@ -1514,7 +1514,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "POIRETTE Frédéric",
@@ -1540,7 +1540,7 @@
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
         "disponibilite": 20,
-        "type": "prives",
+        "type": "individuels",
         "nom": "",
         "contact": "PROVOST Dominique",
         "adresse": "BP 30007",
@@ -1564,7 +1564,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "ROBLIN Véronique",
@@ -1589,7 +1589,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "ROUCOU Dominique",
@@ -1615,7 +1615,7 @@
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
         "disponibilite": 2,
-        "type": "prives",
+        "type": "individuels",
         "nom": "",
         "contact": "SCHINCARIOL Laurence",
         "adresse": "18, rue Sonneville",
@@ -1639,7 +1639,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "SONNEVILLE Christophe",
@@ -1666,7 +1666,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "TAVARES AMARAL Emmanuelle",
@@ -1691,7 +1691,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "nom": "",
         "disponibilite": "",
         "contact": "THERY née LEPERS Anne-Cécile",
@@ -1717,7 +1717,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "TIRMARCHE Claudy",
@@ -1742,7 +1742,7 @@
       "properties": {
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
-        "type": "prives",
+        "type": "individuels",
         "disponibilite": "",
         "nom": "",
         "contact": "TIRMARCHE Josiane",
@@ -1768,7 +1768,7 @@
         "marker-symbol": "heart",
         "marker-color": "5e5fff",
         "disponibilite": 23,
-        "type": "prives",
+        "type": "individuels",
         "nom": "",
         "contact": "TULLIEZ Isabelle",
         "adresse": "2, rue Charpetier",
