@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
           }
         `}</style>
         <Head>
-          <link rel="stylesheet" href="/_next/static/style.css" />
+          <link rel="stylesheet" href="/lebontuteur-app/_next/static/style.css" />
         </Head>
         <body>
           <Main />
