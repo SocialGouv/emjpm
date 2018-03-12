@@ -1,3 +1,6 @@
+var locate = require("../../locate.svg")
+
+
 const CodePostalMandataire = ({ findPostcode }) => {
   let input;
   const onKeyDown = e => {
@@ -19,7 +22,7 @@ const CodePostalMandataire = ({ findPostcode }) => {
     >
       <img
         style={{ width: 80, float: "left", verticalAlign: "middle" }}
-        src="/static/images/locate.svg"
+        src={locate}
         alt="carte presentation"
       />
       <div style={{ fontSize: "1.1rem", marginBottom: 5 }}>Au plus proche du majeur protégé</div>

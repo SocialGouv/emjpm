@@ -29,6 +29,14 @@ const Cell = ({ style, title, children }) => (
   </td>
 );
 
+// const colorMatch =(disponibilite) => {
+// if (isponibilite > 5 && disponibilite < 600)
+//     if (disponibilite > 5 && disponibilite < 600)
+//     '0-19'     : 'red',
+//     '20-59'    : 'orange',
+//     '60-100'   : 'green'
+// };
+
 const TableRowMandataire = ({ mandataire, onClick }) => {
   const { ville, type, nom, disponibilite, tel, contact } = mandataire.properties;
   return (
