@@ -1,0 +1,2178 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.031671,
+          50.611169
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "disponibilite": 4,
+        "marker-color": "00c048",
+        "type": "preposes",
+        "nom": "CHRU",
+        "contact": "BLAUWBLOMME Cathy",
+        "adresse": "2, avenue Oscar Lambret",
+        "ville": "LILLE CEDEX",
+        "tel": "03 20 44 46 03",
+        "email": "cathy.blauwblomme@chru-lille.fr",
+        "ti": [
+          "Lille"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.879932,
+          50.687158
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "disponibilite": 6,
+        "type": "preposes",
+        "nom": "EPSM Lille Métropole - ARMENTIERES",
+        "contact": "CAPRON Yannick",
+        "adresse": "BP 10",
+        "ville": "ARMENTIERES CEDEX",
+        "tel": "03 20 10 21 93",
+        "email": "ycapron@epsm-lm.fr",
+        "ti": [
+          "Lille",
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.999297,
+          50.019214
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "disponibilite": 10,
+        "type": "preposes",
+        "nom": "EHPAD \"Les Vertes Années\"",
+        "contact": "DAMMAN Joëlle",
+        "adresse": "11, rue du Général Leclerc",
+        "ville": "WIGNEHIES",
+        "tel": "03 27 56 43 00",
+        "email": "comptabilite.ehpad.wignehies@orange.fr",
+        "ti": [
+          "Avesnes-sur-Helpe"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.181973,
+          50.744189
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "disponibilite": -5,
+        "type": "preposes",
+        "nom": "CH TOURCOING",
+        "contact": "DEMORY Delphine",
+        "adresse": "115, rue du Président Coty",
+        "ville": "TOURCOING",
+        "tel": "03 20 69 41 66\n03 62 59 00 70",
+        "email": "ddemory@ch-tourcoing.fr",
+        "ti": [
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.43492,
+          50.445219
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "disponibilite": 0,
+        "type": "preposes",
+        "nom": "CH ST AMAND LES EAUX",
+        "contact": "DESCOMBRIS Olivier",
+        "adresse": "19, rue des anciens d'AFN",
+        "ville": "SAINT AMAND LES EAUX",
+        "tel": "03 27 22 96 84\n03 27 22 96 00",
+        "email": "odescombris@chsa.fr",
+        "ti": [
+          "Valenciennes"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.229181,
+          50.166547
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "disponibilite": "",
+        "type": "preposes",
+        "nom": "CH CAMBRAI",
+        "contact": "DESSAINT Valérie",
+        "adresse": "516, avenue de Paris\nBP 389",
+        "ville": "CAMBRAI CEDEX",
+        "tel": "03 27 73 68 08",
+        "email": "v.dessaint@ch-cambrai.fr",
+        "ti": [
+          "Cambrai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.197473,
+          50.683136
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "disponibilite": 10,
+        "type": "preposes",
+        "nom": "CH ROUBAIX",
+        "contact": "DEFRANCE Eléonore",
+        "adresse": "20, avenue Julien\nBP 359",
+        "ville": "ROUBAIX",
+        "tel": "03 20 99 32 73\n03 20 99 31 31",
+        "email": "eleonore.defrance@ch-roubaix.fr",
+        "ti": [
+          "Lille",
+          "Roubaix"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.959465,
+          50.278635
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CH Maubeuge",
+        "contact": "DUEZ Pascale",
+        "adresse": "13, boulevard Pasteur\nBP 60249",
+        "ville": "MAUBEUGE Cedex",
+        "tel": "03 27 69 44 07",
+        "email": "duez.pascale@ch-sambre-avesnois.fr",
+        "ti": [
+          "Maubeuge"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.318515,
+          50.279252
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "EHPAD Bouchain",
+        "contact": "DURAND Maelle",
+        "adresse": "581, rue Hubert Gallez",
+        "ville": "BOUCHAIN",
+        "tel": "03 27 35 70 21",
+        "email": "maelle.durand@ehpad-dronsart.fr",
+        "ti": [
+          "Valenciennes"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.116281,
+          50.687982
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CHI WASQUEHAL",
+        "contact": "DUTOIT Fabienne",
+        "adresse": "2 rue Salvador Allendé\nBP 165",
+        "ville": "WASQUEHAL CEDEX",
+        "tel": "03 20 89 65 52\n06 28 76 30 84",
+        "email": "fdutoit@ch-wasquehal.fr",
+        "ti": [
+          "Lille",
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.395517,
+          51.038
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "Maison des personnes âgées\nCH Dunkerque",
+        "contact": "LANDAIS Sophie",
+        "adresse": "130, avenue Louis Herbeaux",
+        "ville": "DUNKERQUE",
+        "tel": "03 28 28 56 04",
+        "email": "sophie.lemaitre@ch-dunkerque.fr",
+        "ti": [
+          "Dunkerque"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.021211,
+          50.547655
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CH SECLIN CARVIN",
+        "contact": "LECART Sylvie",
+        "adresse": "Avenue des marronniers\nBP 109",
+        "ville": "SECLIN CEDEX",
+        "tel": "03 20 62 75 34",
+        "email": "sylvie.lecart@ghsc.fr",
+        "ti": [
+          "Lille",
+          "Lens"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.011753,
+          50.639931
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CCAS LILLE",
+        "contact": "LEPEZ Guy",
+        "adresse": "Hôtel de Ville\nBP 1282",
+        "ville": "LILLE CEDEX",
+        "tel": "03 20 49 50 90",
+        "email": "glepez@mairie-lille.fr",
+        "ti": [
+          "Lille"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.879932,
+          50.687158
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "EPSM Lille Métropole - ARMENTIERES",
+        "contact": "LISIAK Denis",
+        "adresse": "BP 10",
+        "ville": "ARMENTIERES CEDEX",
+        "tel": "03 20 10 20 54\n03 20 10 20 10",
+        "email": "dlisiak@epsm-lille-metropole.fr",
+        "ti": [
+          "Lille",
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.538218,
+          50.616934
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "EPSM ST VENANT",
+        "contact": "MARTEL Philippe",
+        "adresse": "20, rue de Busnes",
+        "ville": "ST VENANT",
+        "tel": "03 21 63 76 19",
+        "email": "pmartel@epsm-stvenant.fr",
+        "ti": [
+          "Béthune",
+          "Lens",
+          "St Omer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.898128,
+          50.942804
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CH CALAIS - EHPAD LA ROSELIERE",
+        "contact": "MOLMY Christine",
+        "adresse": "Boulevard des Justes",
+        "ville": "CALAIS",
+        "tel": "03 62 61 51 17",
+        "email": "c.molmy@ch-calais.fr",
+        "ti": [
+          "Calais"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.540411,
+          50.728525
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CH HAZEBROUCK - EHPAD Clos des Tilleuls",
+        "contact": "PETILLON Vanessa",
+        "adresse": "1, rue de l'Hôpital",
+        "ville": "HAZEBROUCK",
+        "tel": "03 28 42 67 00",
+        "email": "vpetillon@ch-hazebrouck.fr",
+        "ti": [
+          "Hazebrouck"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.868868,
+          50.68364
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CH ARMENTIERES",
+        "contact": "POTTIER Valérie",
+        "adresse": "112, rue Sadi Carnot",
+        "ville": "ARMENTIERES",
+        "tel": "03 20 48 37 15",
+        "email": "v.pottier@ch-armentieres.fr",
+        "ti": [
+          "Lille"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.662316,
+          50.41628
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CH MONTREUIL",
+        "contact": "QUENEHEN Sylvie",
+        "adresse": "Route départementale 140",
+        "ville": "RANG DU FLIERS",
+        "tel": "03 21 89 45 45",
+        "email": "squenehen@ch-montreuil.fr\n",
+        "ti": [
+          "Montreuil-sur-Mer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.621286,
+          50.566115
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "IDAC CALMETTE",
+        "contact": "RAMBUR Géraldine",
+        "adresse": "Route de Widehem",
+        "ville": "CAMIERS",
+        "tel": "03 21 89 70 13\n03 21 89 70 00",
+        "email": "grambur@ch-idac-camiers.fr\nItremelet@ch-idac-camiers.fr (secr dir)",
+        "ti": [
+          "Boulogne-sur-Mer",
+          "Montreuil-sur-mer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.946082,
+          50.429942
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CH HENIN BEAUMONT",
+        "contact": "STRZEMINSKI Anne-Marie",
+        "adresse": "585, avnue des déportés",
+        "ville": "HENIN BEAUMONT",
+        "tel": "03 21 08 14 17",
+        "email": "anne-marie.strzeminski@ch-henin.fr",
+        "ti": [
+          "Lens"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.495721,
+          50.361514
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CH VALENCIENNES",
+        "contact": "TIRLEMONT Delphine",
+        "adresse": "Avenue Desandrouins",
+        "ville": "VALENCIENNES",
+        "tel": "03 27 47 50 80",
+        "email": "tirlemont-d@ch-valenciennes.fr",
+        "ti": [
+          "Valenciennes"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.286168,
+          50.354969
+        ]
+      },
+      "properties": {
+        "marker-symbol": "hospital",
+        "marker-color": "00c048",
+        "type": "preposes",
+        "disponibilite": "",
+        "nom": "CH SOMAIN",
+        "contact": "VEZILIER Colette",
+        "adresse": "61 bis, rue Joseph Bouliez\nBP 19",
+        "ville": "SOMAIN",
+        "tel": "03 27 93 09 39\n03 27 93 09 09",
+        "email": "c.vezilier@ch-somain.fr",
+        "ti": [
+          "Valenciennes",
+          "Douai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.496421,
+          50.356354
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "AGOUDJIL Sabine",
+        "adresse": "46 rue Casimir Perier",
+        "ville": "VALENCIENNES",
+        "tel": "06 95 53 05 98",
+        "email": "agoudjil.mjpm@hotmail.fr",
+        "ti": [
+          "Valenciennes",
+          "Cambrai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.924826,
+          50.810919
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "BECUWE Christine épouse HUE",
+        "adresse": "272, rue du Puits\nECOTTES",
+        "ville": "LICQUES",
+        "tel": "06 18 24 61 67\n03 21 85 70 79",
+        "email": "c.hue.mjpm@orange.fr",
+        "ti": [
+          "Boulogne-sur-mer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.732759,
+          50.737179
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "BERNARD Nadine",
+        "adresse": "BP 101",
+        "ville": "BAILLEUL",
+        "tel": "06 52 11 94 41",
+        "email": "nadinebernard.mjpm@gmail.com",
+        "ti": [
+          "Dunkerque",
+          "Lille",
+          "St Omer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.13722,
+          50.726137
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "BOURLEZ Annie",
+        "adresse": "BP 80046",
+        "ville": "BONDUES",
+        "tel": "06 87 39 91 49",
+        "email": "mjpm@bourlez.com",
+        "ti": [
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.404781,
+          50.640763
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "BRIDOUX Pierre",
+        "adresse": "31 avenue Vauban",
+        "ville": "AIRE SUR LA LYS",
+        "tel": "03 21 88 09 53\n06 47 52 61 69",
+        "email": "bridoux.pierre@orange.fr\ncabinet.bridoux.mjpm@orange.fr",
+        "ti": [
+          "Béthune",
+          "Montreuil-sur-Mer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.18589,
+          50.185912
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "BRIFFAUT Caroline",
+        "adresse": "1836 route d'Arras",
+        "ville": "RAILLENCOURT SAINTE OLLE",
+        "tel": "06 80 16 59 87\n03 27 70 58 45",
+        "email": "briffaut.caroline@neuf.fr",
+        "ti": [
+          "Valenciennes"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.039158,
+          50.375996
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "disponibilite": 20,
+        "type": "individuels",
+        "nom": "",
+        "contact": "CARACOTTE Joël",
+        "adresse": "15, Boulevard Militaire",
+        "ville": "HESDIN",
+        "tel": "06 13 38 72 58",
+        "email": "joel62140@yahoo.fr",
+        "ti": [
+          "Arras",
+          "Boulogne-sur-Mer",
+          "Calais",
+          "Lens",
+          "Montreuil-sur-Mer",
+          "St Omer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.869412,
+          50.492015
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "disponibilite": 2,
+        "type": "individuels",
+        "nom": "",
+        "contact": "CONRATTE Alexandrine",
+        "adresse": "11, rue Albert Duplat",
+        "ville": "WINGLES",
+        "tel": "06 67 76 97 05",
+        "email": "a.conratte.mjpm.pdc@gmail.com",
+        "ti": [
+          "Béthune",
+          "Lens"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.078607,
+          50.370351
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "CORNIL Judith",
+        "adresse": "BP 60262",
+        "ville": "DOUAI",
+        "tel": "06 98 26 35 85",
+        "email": "judith.cornil@gmail.com",
+        "ti": [
+          "Douai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.782997,
+          50.131028
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "DE REU Jacques",
+        "adresse": "4, rue de Bapaume",
+        "ville": "ACHIET LE GRAND",
+        "tel": "06 03 31 27 26",
+        "email": "de-reu-jacques@wanadoo.fr",
+        "ti": [
+          "Arras"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.145481,
+          50.625592
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "DECLERCQ Xavier",
+        "adresse": "BP 60055",
+        "ville": "LILLE Cedex",
+        "tel": "06 68 97 45 83",
+        "email": "x.declercq@yahoo.fr",
+        "ti": [
+          "Lille",
+          "Roubaix"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.75856,
+          50.305685
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "disponibilite": 2,
+        "type": "individuels",
+        "nom": "",
+        "contact": "DEGELDER Nathalie",
+        "adresse": "2, rue Charles Demory\nappt 2B",
+        "ville": "STE CATHERINE",
+        "tel": "07 82 19 78 78",
+        "email": "degelder.mandataire@gmail.com",
+        "ti": [
+          "Arras",
+          "Lens"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.888829,
+          50.4969
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "DRUELLE Laëtitia",
+        "adresse": "BP 27",
+        "ville": "MEURCHIN",
+        "tel": "06 61 79 78 67",
+        "email": "laetitia.druelle.mjpm@gmail.com",
+        "ti": [
+          "Douai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.038921,
+          50.19789
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "DUHAIN Annie",
+        "adresse": "29, route de Maubeuge",
+        "ville": "DIMECHAUX",
+        "tel": "06 73 41 20 62",
+        "email": "annieduhain@hotmail.fr",
+        "ti": [
+          "Avesnes-sur-Helpe"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.085457,
+          50.680961
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "DULIEU José",
+        "adresse": "60, rue des Chrysanthèmes",
+        "ville": "MARCQ EN BAROEUL",
+        "tel": "06 67 93 83 98",
+        "email": "j.dulieu.tuteur@gmail.com",
+        "ti": [
+          "Lille",
+          "Roubaix"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.069171,
+          50.654891
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "DUQUENNE Valérie",
+        "adresse": "BP 60113",
+        "ville": "LA MADELEINE CEDEX",
+        "tel": "06 84 40 54 05",
+        "email": "vduquenne@orange.fr",
+        "ti": [
+          "Lille",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.233098,
+          50.61735
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "FAUVARQUE Christelle",
+        "adresse": "86, rue Louis Deffontaine",
+        "ville": "BAISIEUX",
+        "tel": "06 75 92 40 19",
+        "email": "surdi-tutelle@neuf.fr",
+        "ti": [
+          "Hazebrouck",
+          "Lille",
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.531006,
+          50.199573
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "disponibilite": 1,
+        "type": "individuels",
+        "nom": "",
+        "contact": "FOUCART Christelle",
+        "adresse": "12 bis, rue du Cateau",
+        "ville": "ROMERIES",
+        "tel": "06 71 81 00 27",
+        "email": "foucartchristelle.mjpm@yahoo.fr",
+        "ti": [
+          "Maubeuge",
+          "Avesnes-sur-helpe"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.023995,
+          50.648626
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "GODIN Olivier",
+        "adresse": "BP 30112",
+        "ville": "LAMBERSART Cedex",
+        "tel": "06 61 14 33 37",
+        "email": "olivier.godin@mjpm-npdc.fr",
+        "ti": [
+          "Lille",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.247709,
+          50.472555
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "GOFFETTE Juliette",
+        "adresse": "3, rue Poterne",
+        "ville": "ORCHIES",
+        "tel": "07 60 91 59 59",
+        "email": "juliette.goffette.mandataire@gmail.com",
+        "ti": [
+          "Valenciennes",
+          "Douai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.096022,
+          50.670128
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "GOLABEK née QUILLET Véronique",
+        "adresse": "BP 42015",
+        "ville": "MARCQ EN BAROEUL",
+        "tel": "06 61 74 28 11",
+        "email": "veronique.golabek@live.fr",
+        "ti": [
+          "Lille",
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.496477,
+          50.356427
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "HAVREZ Philippe",
+        "adresse": "44, rue Casimir Périer",
+        "ville": "VALENCIENNES",
+        "tel": "06 08 21 52 26",
+        "email": "philippehavrez@gmail.com",
+        "ti": [
+          "Valenciennes",
+          "Cambrai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.52302,
+          50.330449
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "LAFFRA Vincent",
+        "adresse": "65, avenue de la Libération",
+        "ville": "AULNOY-LEZ VALENCIENNES",
+        "tel": "06 66 96 56 53",
+        "email": "vincentlaffra@gmail.com",
+        "ti": [
+          "Maubeuge",
+          "Avesnes-sur-Helpe"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.87564,
+          50.198588
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "LEMOINE Muriel",
+        "adresse": "5, rue des Anciens Combattants",
+        "ville": "CROISILLES",
+        "tel": "07 60 83 83 66",
+        "email": "mjpm.lemoinemuriel@hotmail.fr",
+        "ti": [
+          "Douai",
+          "Arras"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.243341,
+          50.47427
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "LEMUE Laurence",
+        "adresse": "BP 80069",
+        "ville": "ORCHIES Cedex",
+        "tel": "06 01 71 61 01",
+        "email": "laurence.lemue.mjpm@gmail.com",
+        "ti": [
+          "Valenciennes",
+          "Douai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.480919,
+          50.212903
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "LOINTIER Gérard",
+        "adresse": "39, rue François Macarez",
+        "ville": "HAUSSY",
+        "tel": "06 82 64 87 17",
+        "email": "tutelles.lointier@gmail.com",
+        "ti": [
+          "Valenciennes",
+          "Cambrai",
+          "Avesnes-sur-Helpe"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.453831,
+          50.438328
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "LOYER Laurent",
+        "adresse": "445, rue de l'Europe",
+        "ville": "DIEVAL",
+        "tel": "06 82 10 29 95\n02 21 41 53 21",
+        "email": "laurent_loyer@orange.fr",
+        "ti": [
+          "Arras",
+          "Béthune",
+          "Lens",
+          "St Omer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.723651,
+          50.490821
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "MAREL Dominique",
+        "adresse": "49, route Nationale",
+        "ville": "BEUTIN",
+        "tel": "06 73 54 23 17",
+        "email": "dominiquemarel.mjpm@laposte.net",
+        "ti": [
+          "Arras",
+          "Boulogne-sur-Mer",
+          "Montreuil-sur-Mer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.096022,
+          50.670128
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "MARTIN Marie-Bénédicte",
+        "adresse": "BP 21051",
+        "ville": "MARCQ EN BAROEUL",
+        "tel": "06 14 91 90 16",
+        "email": "marie.martin12@wanadoo.fr",
+        "ti": [
+          "Lille",
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.068591,
+          50.638437
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "MASSON Estelle",
+        "adresse": "BP 10061",
+        "ville": "ROUBAIX CEDEX 01",
+        "tel": "06 65 62 77 30",
+        "email": "estellemasson.mjpm@gmail.com",
+        "ti": [
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.115448,
+          50.521131
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "MAZURELLE FLEURY David",
+        "adresse": "BP 30053",
+        "ville": "PONT A MARCQ",
+        "tel": "06 95 79 73 75",
+        "email": "dm.mjpm@yahoo.fr",
+        "ti": [
+          "Lille",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.117701,
+          50.633085
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "MERCHIER Valérie",
+        "adresse": "3, rue de la Guinguette",
+        "ville": "HELLEMMES",
+        "tel": "06 47 17 15 85",
+        "email": "valerie.merchier@dbmail.com",
+        "ti": [
+          "Hazebrouck"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.13722,
+          50.726137
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "MICHEL Sophie",
+        "adresse": "BP 80054",
+        "ville": "BONDUES Cedex",
+        "tel": "06 72 10 47 24",
+        "email": "smichel.mjpm@gmail.com",
+        "ti": [
+          "Lille",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.154652,
+          50.687291
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "NACER Mariame",
+        "adresse": "BP 10005",
+        "ville": "WASQUEHAL",
+        "tel": "07 61 04 59 55",
+        "email": "mnacer-mjpm@outlook.fr",
+        "ti": [
+          "Roubaix"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.0764887,
+          50.6535607
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "NONNEZ Christelle",
+        "adresse": "BP 40058",
+        "ville": "LA MADELEINE Cedex",
+        "tel": "06 95 67 09 40",
+        "email": "mjpm.nonnez@free.fr",
+        "ti": [
+          "Lille"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.437487,
+          50.447468
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "POIRETTE Frédéric",
+        "adresse": "92, rue Louise de Bettignies",
+        "ville": "SAINT AMAND LES EAUX",
+        "tel": "06 74 63 75 43\n03 27 48 06 35",
+        "email": "f.poirette@wanadoo.fr",
+        "ti": [
+          "Valenciennes"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.802346,
+          50.301984
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "disponibilite": 20,
+        "type": "individuels",
+        "nom": "",
+        "contact": "PROVOST Dominique",
+        "adresse": "BP 30007",
+        "ville": "SAINT LAURENT BLANGY",
+        "tel": "06 84 20 11 68",
+        "email": "mjpm@cabinet-provost.fr",
+        "ti": [
+          "Arras"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.139886,
+          50.702392
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "ROBLIN Véronique",
+        "adresse": "BP 20163",
+        "ville": "MOUVAUX",
+        "tel": "06 98 88 51 15",
+        "email": "mjpm.roblin@gmail.com",
+        "ti": [
+          "Lille"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.375518,
+          51.037327
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "ROUCOU Dominique",
+        "adresse": "BP 70033",
+        "ville": "DUNKERQUE Cedex 2",
+        "tel": "06 85 73 99 48",
+        "email": "domi.roucou@wanadoo.fr",
+        "ti": [
+          "Dunkerque"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.955184,
+          50.53658
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "disponibilite": 2,
+        "type": "individuels",
+        "nom": "",
+        "contact": "SCHINCARIOL Laurence",
+        "adresse": "18, rue Sonneville",
+        "ville": "ALLENNES-LES-MARAIS",
+        "tel": "",
+        "email": "laurence.schincariol@orange.fr",
+        "ti": [
+          "Hazebrouck"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.214199,
+          50.567672
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "SONNEVILLE Christophe",
+        "adresse": "BP 40075",
+        "ville": "CYSOING",
+        "tel": "06 86 50 24 85",
+        "email": "christophesonneville@orange.fr",
+        "ti": [
+          "Lille",
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.742708,
+          50.4518
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "TAVARES AMARAL Emmanuelle",
+        "adresse": "BP 14",
+        "ville": "GRENAY",
+        "tel": "06 98 17 07 90",
+        "email": "emmanuelletavares@live.fr",
+        "ti": [
+          "Douai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.113319,
+          50.523037
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "nom": "",
+        "disponibilite": "",
+        "contact": "THERY née LEPERS Anne-Cécile",
+        "adresse": "173, rue Nationale\nBP 90 023",
+        "ville": "PONT A MARCQ",
+        "tel": "06 43 25 58 71",
+        "email": "ac.thery.mjpm@gmail.com",
+        "ti": [
+          "Lille",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.77546,
+          50.289265
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "TIRMARCHE Claudy",
+        "adresse": "74, rue Gambetta",
+        "ville": "ARRAS",
+        "tel": "03 21 51 00 01",
+        "email": "tirmarche.mandataires@gmail.com",
+        "ti": [
+          "Arras"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.77546,
+          50.289265
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "type": "individuels",
+        "disponibilite": "",
+        "nom": "",
+        "contact": "TIRMARCHE Josiane",
+        "adresse": "74, rue Gambetta",
+        "ville": "ARRAS",
+        "tel": "06 75 61 07 24",
+        "email": "tirmarche.mandataires@gmail.com",
+        "ti": [
+          "Arras"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.289148,
+          51.015536
+        ]
+      },
+      "properties": {
+        "marker-symbol": "heart",
+        "marker-color": "5e5fff",
+        "disponibilite": 23,
+        "type": "individuels",
+        "nom": "",
+        "contact": "TULLIEZ Isabelle",
+        "adresse": "2, rue Charpetier",
+        "ville": "GRANDE SYNTHE",
+        "tel": "03 28 26 48 12\n06 42 48 89 78",
+        "email": "isabelle.tulliez@orange.fr",
+        "ti": [
+          "Dunkerque"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.063877,
+          50.632786
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "type": "services",
+        "disponibilite": "",
+        "nom": "ASSOCIATION POUR LA GESTION\nDES SERVICES SPÉCIALISÉS (AGSS)",
+        "contact": "M. VANDERCHOOTEN\nPrésident de l'AGSS",
+        "adresse": "144, rue du Molinel",
+        "ville": "LILLE",
+        "tel": "03.20.54.25.00\n03.20.54.00.20",
+        "email": "lmannarino@agss.fr",
+        "ti": [
+          "Dunkerque",
+          "Hazebrouck",
+          "Lille",
+          "Roubaix",
+          "Tourcoing",
+          "Valenciennes",
+          "Douai",
+          "Cambrai",
+          "Maubeuge",
+          "Avesnes-sur-Helpe"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.157536,
+          50.724455
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "type": "services",
+        "disponibilite": "",
+        "nom": "CENTRE COMMUNAL D'ACTION SOCIALE\nDE TOURCOING (CCAS)",
+        "contact": "M.DELANNOY\nPrésident du CCAS",
+        "adresse": "7, rue Gabriel Péri",
+        "ville": "TOURCOING",
+        "tel": "03.20.11.34.34",
+        "email": "juliette.van-laethem@ccas-tourcoing.fr",
+        "ti": [
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.105793,
+          50.642106
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "type": "services",
+        "disponibilite": "",
+        "nom": "ASSOCIATION ARIANE",
+        "contact": "M.HELLE\nPrésident d'ARIANE",
+        "adresse": "14, avenue Robert Schumann\nBP 74",
+        "ville": "MONS EN BAROEUL",
+        "tel": "03.20.43.23.30",
+        "email": "lionel.barbier@ariane.asso.fr",
+        "ti": [
+          "Dunkerque",
+          "Hazebrouck",
+          "Lille",
+          "Roubaix",
+          "Tourcoing",
+          "Valenciennes",
+          "Douai",
+          "Cambrai",
+          "Maubeuge",
+          "Avesnes-sur-Helpe"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.040718,
+          50.634702
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "disponibilite": 4,
+        "type": "services",
+        "nom": "ASAPN",
+        "contact": "M. BOISFLEURY\nPrésident d'ASAPN",
+        "adresse": "Centre Vauban\n199-201, rue Colbert\nBâtiment Ypres\nBP 10 055",
+        "ville": "LILLE CEDEX",
+        "tel": "03.28.38.05.07",
+        "email": "idelaby@asapn.org\ncbassez@asapn.org",
+        "ti": [
+          "Dunkerque",
+          "Hazebrouck",
+          "Lille",
+          "Roubaix",
+          "Tourcoing",
+          "Valenciennes",
+          "Douai",
+          "Cambrai"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.051324,
+          50.632385
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "type": "services",
+        "disponibilite": "",
+        "nom": "ATI NORD",
+        "contact": "M.DEVOLDERE\nPrésident d'ATI NORD",
+        "adresse": "194, rue Nationale\n1e étage -\n96 rue nationale",
+        "ville": "LILLE",
+        "tel": "03.28.38.07.70",
+        "email": "sabrina.kierzunska@atinord.asso.fr",
+        "ti": [
+          "Dunkerque",
+          "Hazebrouck",
+          "Lille",
+          "Roubaix",
+          "Tourcoing",
+          "Valenciennes",
+          "Douai",
+          "Cambrai",
+          "Maubeuge",
+          "Avesnes-sur-Helpe"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.9641,
+          50.292512
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "disponibilite": 4,
+        "type": "services",
+        "nom": "SOCIÉTÉ DES INTÉRÊTS POPULAIRES (SIP)",
+        "contact": "M.HANICOTTE\nPrésident de SIP",
+        "adresse": "71 Boulevard Molière",
+        "ville": "MAUBEUGE",
+        "tel": "03.27.62.47.11\n06.83.40.82.35",
+        "email": "sip@sip59.org\nmh.hiolle@sip59.org",
+        "ti": [
+          "Valenciennes",
+          "Cambrai",
+          "Maubeuge",
+          "Avesnes-sur-Helpe"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.513392,
+          50.35319
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "disponibilite": "",
+        "type": "services",
+        "nom": "CROIX MARINE",
+        "contact": "M.VANEECLOO\nPrésident de Croix Marine",
+        "adresse": "SAST\n62 rue du Faubourg de Paris",
+        "ville": "VALENCIENNES",
+        "tel": "03.27.09.03.30",
+        "email": "sast.croixmarine@wanadoo.fr",
+        "ti": [
+          "Valenciennes"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.059469,
+          50.65245
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "disponibilite": "",
+        "type": "services",
+        "nom": "ASSOCIATION DES CURATEURS DE LILLE (ACL)",
+        "contact": "M.DETAVERNIER\nPrésident d'ACL",
+        "adresse": "4, rue Delesalle\nBât. B\nBP 20083",
+        "ville": "LA MADELEINE",
+        "tel": "03.20.31.96.20\n06.86.44.03.24\n06.24.41.45.50",
+        "email": "association@acl-lille.fr\namable.gerard@acl-lille.fr\ndetavernier.alain@aliceadsl.fr",
+        "ti": [
+          "Lille",
+          "Roubaix",
+          "Tourcoing"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.773481,
+          50.287425
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "disponibilite": "",
+        "type": "services",
+        "nom": "ASSOCIATION DÉPARTEMENTALE\nD'ACTIONS EDUCATIVES (ADAE)",
+        "contact": "M.RAMET\nPrésident de l'ADAE",
+        "adresse": "16, boulevard Carnot\nC560201",
+        "ville": "ARRAS",
+        "tel": "03.21.71.30.79",
+        "email": "corine.duhamel@adae62-siege.asso.fr\ncaroline.PERNOT@adae62-siege.asso.fr\nadae.62@wanadoo.fr",
+        "ti": [
+          "Arras",
+          "Béthune",
+          "Boulogne-sur-Mer",
+          "Calais",
+          "lens",
+          "Montreuil-sur-Mer",
+          "Saint Omer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.617016,
+          50.539597
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "disponibilite": "",
+        "type": "services",
+        "nom": "ASRL - SERVICE TUTÉLAIRE ET DE\nPROTECTION (STP)",
+        "contact": "Mr Pierre Lemaire\nPrésident du STP",
+        "adresse": "541 av de la Morinie\n\nSiège : Centre Vauban\n199-201 rue Colbert\nBât Ypres, 4e Etage",
+        "ville": "ANNEZIN\n\nSiège : LILLE",
+        "tel": "03.21.40.22.06\n03 20 14 92 30 (secr dir)",
+        "email": "tdemont@stp.asso.fr\nj.pechon@stp.asso.fr\ncdesbonnets@asrl.asso.fr (secr dir)\nsiege@asrl.asso.fr",
+        "ti": [
+          "Arras",
+          "Béthune",
+          "Boulogne-sur-Mer",
+          "Calais",
+          "lens",
+          "Montreuil-sur-Mer",
+          "Saint Omer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.633337,
+          50.526967
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "type": "services",
+        "disponibilite": "",
+        "nom": "ASSOCIATION TUTÉLAIRE\nDU PAS DE CALAIS (ATPC)",
+        "contact": "M.Alain QUENEL\nPrésident de l'ATPC",
+        "adresse": "641, boulevard Jean Moulin",
+        "ville": "BÉTHUNE CEDEX",
+        "tel": "03.21.63.74.74",
+        "email": "Aboone@atpc.asso.fr",
+        "ti": [
+          "Arras",
+          "Béthune",
+          "Boulogne-sur-Mer",
+          "Calais",
+          "lens",
+          "Montreuil-sur-Mer",
+          "Saint Omer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.749605,
+          50.295917
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "disponibilite": 7,
+        "type": "services",
+        "nom": "SERVICE ACCOMPAGNEMENT ET\nACTIONS SPÉCIALISÉES LA VIE ACTIVE\n(VA)",
+        "contact": "M.DUCONSEIL\nPrésident de SAAP",
+        "adresse": "Rue Chardin\nCS 40058",
+        "ville": "ARRAS CEDEX",
+        "tel": "03.21.23.90.61",
+        "email": "FMercier@tutelles-vieactive.com\nchelin@tutelles-vieactive.com",
+        "ti": [
+          "Arras",
+          "Béthune",
+          "Boulogne-sur-Mer",
+          "Calais",
+          "lens",
+          "Montreuil-sur-Mer",
+          "Saint Omer"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.668242,
+          50.516278
+        ]
+      },
+      "properties": {
+        "marker-symbol": "city",
+        "marker-color": "ffe33b",
+        "disponibilite": "",
+        "type": "services",
+        "nom": "UDAPEI 62",
+        "contact": "M.Le Président de l'Association\nUDAPEI 62",
+        "adresse": "1216 rue Delbecque",
+        "ville": "BEUVRY",
+        "tel": "03.21.68.16.83",
+        "email": "brigitte.dore@udapei62.fr\ndelphine.carette@udapei62.fr\nelodie.darras@udapei62.fr",
+        "ti": [
+          "Arras",
+          "Béthune",
+          "Boulogne-sur-Mer",
+          "Calais",
+          "lens",
+          "Montreuil-sur-Mer",
+          "Saint Omer"
+        ]
+      }
+    }
+  ]
+}
