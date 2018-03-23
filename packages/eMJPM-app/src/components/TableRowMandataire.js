@@ -1,4 +1,5 @@
 import FaSearch from "react-icons/lib/fa/search";
+import "../../static/css/custom.css";
 
 // todo: improve tel parsing
 const cleanTels = tel => {
@@ -18,16 +19,18 @@ const Phone = ({ num }) => {
   );
 };
 
-const Cell = ({ style, title, children }) => (
-  <td className="pagination-centered" style={{ fontSize: "0.8em", ...style }} title={title}>
+const Cell = ({ style, title, children, value }) => (
+  <td className={`pagination-centered ${colorMandatairesRetangle(value)}`} style={{ fontSize: "0.8em",textAlign: "left", ...style }} title={title}>
     <style jsx>{`
       td {
         vertical-align: middle !important;
+        textAlign: "left"
       }
     `}</style>
     {children}
   </td>
 );
+
 
 // const colorMatch =(disponibilite) => {
 // if (isponibilite > 5 && disponibilite < 600)
@@ -36,19 +39,59 @@ const Cell = ({ style, title, children }) => (
 //     '20-59'    : 'orange',
 //     '60-100'   : 'green'
 // };
+const colorMandataires = (value) =>{
+    if (value && value < 1) {
+        return "red"
+    }
+    else if (value && value > 5){
+        return "green"
+    }
+    else if (value && value < 6 && value > 0) {
+        return "orange"
+    }
+    else {
+        return "gris"
+    }
+};
 
+const colorMandatairesRetangle = (value) =>{
+    if (value && value < 1) {
+        return "redrectangle"
+    }
+    else if (value && value > 5){
+        return "greenrectangle"
+    }
+    else if (value && value < 6 && value > 0) {
+        return "orangerectangle"
+    }
+};
 const TableRowMandataire = ({ mandataire, onClick }) => {
-  const { ville, type, nom, disponibilite, tel, contact } = mandataire.properties;
+  const { ville, type, nom, disponibilite, contact, codepostal, dispo_max } = mandataire.properties;
   return (
-    <tr>
-      <Cell style={{textAlign: "left"}}>{type.toUpperCase()}</Cell>
-      <Cell style={{textAlign: "left"}}>{ville}</Cell>
-      <Cell style={{textAlign: "left"}}>{nom || contact}</Cell>
-      <Cell>{disponibilite}</Cell>
+
+    <tr onClick={onClick} style={{ cursor: "pointer" }} >
+        <td style={{width: "100px", verticalAlign: "middle",textAlign: "left"}}>
+            <div className={`${colorMandataires(dispo_max - disponibilite)}`}  style={{lineHeight: "40px",fontSize: "0.7em"}}> {type.toUpperCase().substr(0, 1)}</div>
+        </td>
+
+        <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "left"}} >
+            <b >{nom || contact }</b><br /> <div style={{color: "#cccccc"}}>{type.toUpperCase()} </div>
+        </td>
+        <Cell ><b>{codepostal} - {ville} </b></Cell>
+
+        <td style={{ fontSize: "0.8em", verticalAlign: "middle",display: "flex"}}>
+            {mandataire.properties.specialites.map(spe => (
+                <div  style={{backgroundColor: "#b5b5b5",marginTop: "2px",marginRight: "3px",padding: "3px", borderRadius: "5px"}} key = {spe}> {spe} </div>
+            ))}
+        </td>
+
+        <td style={{ fontSize: "0.8em", verticalAlign: "middle"}}>
+            <div className={`${colorMandatairesRetangle(dispo_max - disponibilite)}`} style={{lineHeight: "40px",borderRadius: "5px"}}> {disponibilite} / {dispo_max}</div>
+        </td>
       {/*<Cell>{cleanTels(tel).map(t => <Phone key={t} num={t} />)}</Cell>*/}
-      <Cell style={{ width: "10% !important" }} title="Voir les détails du mandataire">
-        <FaSearch onClick={onClick} style={{ cursor: "pointer" }} />
-      </Cell>
+      {/*<Cell style={{ width: "10% !important" }} title="Voir les détails du mandataire">*/}
+        {/*<FaSearch onClick={onClick} style={{ cursor: "pointer" }} />*/}
+      {/*</Cell>*/}
     </tr>
   );
 };

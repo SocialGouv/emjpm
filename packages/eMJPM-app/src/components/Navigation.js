@@ -1,5 +1,5 @@
 // todo: hack: force embedding the SVG due to some webpack+next+static issues in a gh-pages env
-const logo = require("!!url-loader?limit=0!../../static/images/gouv.svg");
+const logo = require("!!url-loader?limit=0!../../static/images/image lebontuteur.beta.gouv.fr.png");
 
 const Navigation = () => (
   <ul className="nav">

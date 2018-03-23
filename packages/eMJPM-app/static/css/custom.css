@@ -1,3 +1,113 @@
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-    background-color: #eaeced;
+/*.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {*/
+    /*background-color: #eaeced;*/
+/*}*/
+
+.red{
+    background-color: #f05659;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    color: white;
+    text-align: center;
+}
+.green{
+    background-color: #43b04a;
+    height: 40px;
+    width: 40px;
+    color: white;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+}
+.orange{
+    background-color: #eb9123;
+    height: 40px;
+    width: 40px;
+    color: white;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+
+}
+.gris{
+    background-color: grey;
+    height: 40px;
+    width: 40px;
+    color: white;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+
+}
+
+.redrectangle{
+
+    background-color: #f05659;
+    width: 100px;
+    color: white;
+    height: 40px;
+    display: inline-block;
+}
+.greenrectangle{
+
+    background-color: #43b04a;
+    width: 100px;
+    color: white;
+    height: 40px;
+    display: inline-block;
+}
+.orangerectangle{
+
+    background-color: #eb9123;
+    width: 100px;
+    color: white;
+    height: 40px;
+    display: inline-block;
+}
+
+.grisrectangle{
+
+    background-color: grey;
+    margin-bottom: 2px;
+    width: 300px;
+    color: white;
+    height: 33%;
+    display: inline-block;
+}
+.greenrectangleModal{
+
+    background-color: #6ba650;
+    width: 200px;
+    color: white;
+    height: 40px;
+    display: inline-block;
+}
+.Modal {
+    position: absolute;
+    width: 900px !important;
+    height: 450px !important;
+    top: 60px;
+    left: 60px;
+    right: 60px;
+    bottom: 60px;
+    background-color: #f2f2f2;
+}
+
+.Overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: grey;
+}
+
+.leaflet-container {
+    height: 400px !important;
+}
+.leaflet-marker-icon{
+    background-image: url("../images/icone-lieu.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
 }
