@@ -20,7 +20,10 @@ module.exports = {
     process: true,
     cy: true,
     describe: true,
-    it: true
+    it: true,
+    before: true,
+    beforeEach: true,
+    Cypress: true
   },
   rules: {
     "prettier/prettier": "error",

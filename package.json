@@ -5,7 +5,6 @@
   "main": "index.js",
   "homepage": "https://socialgouv.github.io/emjpm-app",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "next dev",
     "dev": "next",
     "lint": "eslint pages src --fix",
@@ -15,7 +14,13 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "flow": "flow",
-    "cypress": "cypress open"
+    "cypress:open": "cypress open",
+    "cypress:api-reset": "cd ../eMJPM-api && NODE_ENV=test npm run seeds",
+    "cypress:start-api":
+      "cd ../eMJPM-api && NODE_ENV=test PORT=4003 npm run migrate-seeds-and-start",
+    "cypress:start-app": "API_URL=http://127.0.0.1:4003 NODE_ENV=test npm run start -- --port 3003",
+    "cypress:start": "concurrently \"npm run cypress:start-api\" \"npm run cypress:start-app\"",
+    "cypress": "start-server-and-test cypress:start http://localhost:3003 cypress:open"
   },
   "keywords": [],
   "license": "ISC",
@@ -55,6 +60,7 @@
     "babel-eslint": "^8.2.3",
     "babel-preset-flow": "^6.23.0",
     "babel-runtime": "^6.26.0",
+    "concurrently": "^3.6.0",
     "css-loader": "^0.28.9",
     "cypress": "^3.0.1",
     "dotenv": "^5.0.1",
@@ -67,6 +73,7 @@
     "json-loader": "^0.5.7",
     "postcss-loader": "^2.1.0",
     "prettier": "^1.11.1",
+    "start-server-and-test": "^1.5.0",
     "style-loader": "^0.20.3"
   }
 }
