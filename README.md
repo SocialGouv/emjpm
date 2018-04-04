@@ -1,7 +1,8 @@
 # Get Started
 
 git clone git@github.com:SocialGouv/eMJPM-api.git
-cd eMJPJ-api
+
+cd eMJPM-api
 
 npm install
 
@@ -10,4 +11,3 @@ docker-compose up
 
 # Run
 npm start
-```
