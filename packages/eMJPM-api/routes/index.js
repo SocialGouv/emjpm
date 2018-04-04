@@ -1,35 +1,42 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var queries = require('../db/queries');
-
+var queries = require("../db/queries");
 
 /* GET home page. */
 
+function loggedIn(req, res, next) {
+    if (req.user) {
+        next();
+    } else {
+        res.redirect("/auth/login");
+    }
+}
 
-
-router.get('/mandataires', function(req, res, next) {
-    queries.getAll()
-        .then(function(mandataires) {
-            res.status(200).json(mandataires);
-        })
-        .catch(function(error) {
-            next(error);
-        });
-});
-router.get('/mandataires/:id', function(req, res, next) {
-    queries.getSingle(req.params.id)
+router.post("/mandataires/index", function(req, res, next) {
+    queries
+        .getAllMandataire(req.body.ti_id)
         .then(function(mandataire) {
             res.status(200).json(mandataire);
         })
         .catch(function(error) {
             next(error);
-
+        })
+        .map(spe => queries.getSingle(spe));
+});
+router.get("/mandataires/:id", function(req, res, next) {
+    queries
+        .getSingle(req.params.id)
+        .then(function(mandataire) {
+            res.status(200).json(mandataire);
+        })
+        .catch(function(error) {
+            next(error);
         });
-
 });
 
-router.post('/mandataires', function(req, res, next) {
-    queries.add(req.body)
+router.post("/mandataires", function(req, res, next) {
+    queries
+        .add(req.body)
         .then(function(mandataireID) {
             return queries.getSingle(mandataireID);
         })
@@ -41,8 +48,9 @@ router.post('/mandataires', function(req, res, next) {
         });
 });
 
-router.put('/mandataires/:id', function(req, res, next) {
-    queries.update(req.params.id, req.body)
+router.put("/mandataires/:id", function(req, res, next) {
+    queries
+        .update(req.params.id, req.body)
         .then(function() {
             return queries.getSingle(req.params.id);
         })
@@ -54,11 +62,10 @@ router.put('/mandataires/:id', function(req, res, next) {
         });
 });
 
-
-
-router.get('/commentaires', function(req, res, next) {
-    console.log(res)
-    queries.getAllCommentaire()
+router.post("/commentaires/index", function(req, res, next) {
+    console.log(res);
+    queries
+        .getAllCommentaire(req.body.mandataire_id, req.body.ti_id)
         .then(function(commentaires) {
             res.status(200).json(commentaires);
         })
@@ -66,20 +73,88 @@ router.get('/commentaires', function(req, res, next) {
             next(error);
         });
 });
-router.get('/commentaires/:id', function(req, res, next) {
-    queries.getSingleCommentaire(req.params.id)
+router.get("/commentaires/:id", function(req, res, next) {
+    queries
+        .getSingleCommentaire(req.params.id)
         .then(function(commentaire) {
             res.status(200).json(commentaire);
         })
         .catch(function(error) {
             next(error);
-
         });
-
 });
 
-router.post('/commentaires', function(req, res, next) {
-    queries.addCommentaire(req.body)
+router.post("/commentaires", function(req, res, next) {
+    queries
+        .addCommentaire(req.body)
+        .then(function(commentaireID) {
+            return queries.getSingleCommentaire(commentaireID);
+        })
+        .then(function(commentaire) {
+            res.status(200).json(commentaire);
+        })
+        .catch(function(error) {
+            next(error);
+        });
+});
+
+router.delete("/commentaires", function(req, res, next) {
+    queries
+        .getSingle(req.body.co_id)
+        .then(function(show) {
+            queries
+                .deleteItem(req.body.co_id)
+                .then(function() {
+                    res.status(200).json(show);
+                })
+                .catch(function(error) {
+                    next(error);
+                });
+        })
+        .catch(function(error) {
+            next(error);
+        });
+});
+
+router.put("/commentaires", function(req, res, next) {
+    queries
+        .updateCommentaire(req.body.co_id, req.body)
+        .then(function() {
+            return queries.getSingle(req.body.id);
+        })
+        .then(function(commentaire) {
+            res.status(200).json(commentaire);
+        })
+        .catch(function(error) {
+            next(error);
+        });
+});
+
+router.get("/mesures", function(req, res, next) {
+    console.log(res);
+    queries
+        .getAllCommentaire()
+        .then(function(commentaires) {
+            res.status(200).json(commentaires);
+        })
+        .catch(function(error) {
+            next(error);
+        });
+});
+router.get("/mesures/:id", function(req, res, next) {
+    queries
+        .getSingleCommentaire(req.params.id)
+        .then(function(commentaire) {
+            res.status(200).json(commentaire);
+        })
+        .catch(function(error) {
+            next(error);
+        });
+});
+
+router.post("/mesures", function(req, res, next) {
+    queries
+        .addCommentaire(req.body)
         .then(function(commentaireID) {
             return queries.getSingle(commentaireID);
         })
@@ -91,8 +166,9 @@ router.post('/commentaires', function(req, res, next) {
         });
 });
 
-router.put('/commentaires/:id', function(req, res, next) {
-    queries.updateCommentaire(req.params.id, req.body)
+router.put("/mesures/:id", function(req, res, next) {
+    queries
+        .updateCommentaire(req.params.id, req.body)
         .then(function() {
             return queries.getSingle(req.params.id);
         })
@@ -104,57 +180,8 @@ router.put('/commentaires/:id', function(req, res, next) {
         });
 });
 
-
-router.get('/mesures', function(req, res, next) {
-    console.log(res)
-    queries.getAllCommentaire()
-        .then(function(commentaires) {
-            res.status(200).json(commentaires);
-        })
-        .catch(function(error) {
-            next(error);
-        });
-});
-router.get('/mesures/:id', function(req, res, next) {
-    queries.getSingleCommentaire(req.params.id)
-        .then(function(commentaire) {
-            res.status(200).json(commentaire);
-        })
-        .catch(function(error) {
-            next(error);
-
-        });
-
-});
-
-router.post('/mesures', function(req, res, next) {
-    queries.addCommentaire(req.body)
-        .then(function(commentaireID) {
-            return queries.getSingle(commentaireID);
-        })
-        .then(function(commentaire) {
-            res.status(200).json(commentaire);
-        })
-        .catch(function(error) {
-            next(error);
-        });
-});
-
-router.put('/mesures/:id', function(req, res, next) {
-    queries.updateCommentaire(req.params.id, req.body)
-        .then(function() {
-            return queries.getSingle(req.params.id);
-        })
-        .then(function(commentaire) {
-            res.status(200).json(commentaire);
-        })
-        .catch(function(error) {
-            next(error);
-        });
-});
-
-router.get('/', function(req, res, next) {
-    res.render('index', { title: 'Express' });
+router.get("/", function(req, res, next) {
+    res.render("index", { title: "Express" });
 });
 
 module.exports = router;

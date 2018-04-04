@@ -1,4 +1,5 @@
 var express = require("express");
+var cors = require("cors");
 var path = require("path");
 var favicon = require("serve-favicon");
 var logger = require("morgan");
@@ -13,7 +14,20 @@ var authRoutes = require("./routes/auth");
 
 var app = express();
 
-// view engine setup
+var whitelist = ["http://localhost:3000"];
+var corsOptions = {
+    credentials: true,
+    origin: function(origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    }
+};
+
+app.options("*", cors(corsOptions));
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
@@ -36,7 +50,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api/v1', routes);
+app.use("/api/v1", routes);
 app.use("/auth", authRoutes);
 app.use("/", users);
 
@@ -70,6 +84,6 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-app.listen(3002);
+app.listen(3007);
 
 module.exports = app;
