@@ -40,13 +40,10 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
 
 router.get("/logout", authHelpers.loginRequired, (req, res, next) => {
     //console.log(req)
-  req.logout();
+    req.logout();
     //return
     handleResponse(res, 200, "success");
-
 });
-
-// *** helpers *** //
 
 function handleLogin(req, user) {
     return new Promise((resolve, reject) => {

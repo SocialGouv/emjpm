@@ -6,9 +6,9 @@ exports.up = function(knex, Promise) {
         table.integer('mandataire_id')
             .references('id')
             .inTable('mandataires');
-        table.integer('user_id')
+        table.integer('ti_id')
             .references('id')
-            .inTable('users');
+            .inTable('tis');
         table.dateTime('postDate');
     });
 };

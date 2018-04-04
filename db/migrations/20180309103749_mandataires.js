@@ -11,7 +11,9 @@ exports.up = function(knex, Promise) {
         table.float('latitude').notNullable();
         table.float('longitude').notNullable();
         table.string('adresse').notNullable();
-        table.integer('capacite').notNullable();
+        table.integer('capacite');
+        table.integer('disponibilite');
+        table.integer('dispo_max');
         table.integer('curatelle');
         table.integer('sauvegarde');
         table.integer('curatelle_renforce');
