@@ -18,6 +18,11 @@ function getAll() {
     return Mandataires().select();
 }
 
+
+function uploadAll(data) {
+    return Mandataires().insert(data);
+}
+
 function getAllMandataire(ti_id) {
     return knex
         .from("mandatairetis")
@@ -25,8 +30,8 @@ function getAllMandataire(ti_id) {
         .innerJoin("mandataires", "mandatairetis.ti_id", "mandataires.id");
 }
 
-function add(show) {
-    return Mandataires().insert(show, "id");
+function add(mandataire) {
+    return Mandataires().insert(madataire);
 }
 
 function getSingle(mandataireID) {
@@ -34,9 +39,9 @@ function getSingle(mandataireID) {
         .where("id", parseInt(mandataireID))
         .first();
 }
-function update(showID, updates) {
+function update(mandataireID, updates) {
     return Mandataires()
-        .where("id", parseInt(showID))
+        .where("id", parseInt(mandataireID))
         .update(updates);
 }
 
@@ -75,13 +80,13 @@ function getAllMesure(mandataire_id) {
     return knex("mesures").where("mandataire_id", parseInt(mandataire_id));
 }
 
-function addMesure(commentaireID) {
-    return knex("mesures").insert(commentaireID, "id");
+function addMesure(mesureID) {
+    return knex("mesures").insert(mesureID);
 }
 
-function getSingleMesure(commentaireID) {
+function getSingleMesure(mesureID) {
     return knex("mesures")
-        .where("id", parseInt(commentaireID))
+        .where("id", parseInt(mesureID))
         .first();
 }
 function updateMesure(commentaireID, updates) {
@@ -110,5 +115,6 @@ module.exports = {
     addMesure: addMesure,
     getSingleMesure: getSingleMesure,
     updateMesure: updateMesure,
-    deleteItem: deleteItem
+    deleteItem: deleteItem,
+    uploadAll: uploadAll
 };
