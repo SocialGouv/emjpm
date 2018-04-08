@@ -101,13 +101,28 @@
     right: 0;
     bottom: 0;
     background-color: grey;
+    z-index: 9000;
 }
 
+.hello .leaflet-container {
+    height: 600px !important;
+}
 .leaflet-container {
     height: 400px !important;
 }
+
 .leaflet-marker-icon{
     background-image: url("../images/icone-lieu.jpg");
     background-repeat: no-repeat;
     background-position: center center;
+}
+.react-tabs__tab--selected {
+    border-color: white !important;
+    color: black !important;
+}
+.react-tabs__tab {
+    color: blue !important;
+}
+#root__title{
+    text-align: left;
 }
