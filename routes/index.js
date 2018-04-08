@@ -39,8 +39,8 @@ router.get("/loginIn", function(req, res, next) {
 router.post("/mandataires/index", function(req, res, next) {
     queries
         .getAllMandataire(req.body.ti_id)
-        .then(function(mandataire) {
-            res.status(200).json(mandataire);
+        .then(function(mandataires) {
+            res.status(200).json(mandataires);
         })
         .catch(function(error) {
             next(error);
@@ -154,7 +154,7 @@ router.put("/commentaires", function(req, res, next) {
         });
 });
 
-router.get("/mesures",loggedIn, function(req, res, next) {
+router.get("/mesures", function(req, res, next) {
     console.log(res);
     queries
         .getAllCommentaire()
@@ -177,10 +177,11 @@ router.get("/mesures/:id", function(req, res, next) {
 });
 
 router.post("/mesures", function(req, res, next) {
+   console.log(req.body)
     queries
-        .addCommentaire(req.body)
-        .then(function(commentaireID) {
-            return queries.getSingle(commentaireID);
+        .addMesure(req.body)
+        .then(function(mesureID) {
+            return queries.getSingleMesure(mesureID);
         })
         .then(function(commentaire) {
             res.status(200).json(commentaire);
@@ -198,6 +199,17 @@ router.put("/mesures/:id", function(req, res, next) {
         })
         .then(function(commentaire) {
             res.status(200).json(commentaire);
+        })
+        .catch(function(error) {
+            next(error);
+        });
+});
+
+router.post("/services", function(req, res, next) {
+    queries
+        .getAllServices(req.body)
+        .then(function(services) {
+            res.status(200).json(services);
         })
         .catch(function(error) {
             next(error);
