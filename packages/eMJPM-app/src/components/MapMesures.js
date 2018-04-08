@@ -57,13 +57,12 @@ import CodePostalMandataire from "./CodePostalMandataire";
 //     markers: PropTypes.array.isRequired
 // };
 
-class Mapstry extends React.Component {
+class MapMesures extends React.Component {
     state = {
         zoom: 13
     };
 
     render() {
-        console.log(this.props.mesure);
         //
         // const markers = [
         //     { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
@@ -72,11 +71,9 @@ class Mapstry extends React.Component {
         // ]
 
         return (
-            <div>
+            <div className="hello">
                 <Map
-                    center={[
-                        this.props.postccodeMandataire[1] || 50.633,
-                        this.props.postccodeMandataire[0] || 3.066
+                    center={[50.633, 3.066
                     ]}
                     zoom={this.state.zoom}
                 >
@@ -87,27 +84,23 @@ class Mapstry extends React.Component {
                     {this.props.mesure &&
                     this.props.mesure.map(manda => (
                         <Marker
-                            key={manda.latitude}
-                            position={[manda.latitude, manda.longitude]}
+                            key={manda.geometry.coordinates[0]}
+                            position={[
+                                manda.geometry.coordinates[1],
+                                manda.geometry.coordinates[0]
+                            ]}
                             style={{ backgroundColor: "black" }}
                         >
-                            <Popup>
-                  <span>
-                      {manda.nom} <br />
-                      {manda.tel} <br />
-                      {manda.type} <br />
-                      {manda.date_ouverture} <br />
-                  </span>
-                            </Popup>
                         </Marker>
                     ))};
                 </Map>
             </div>
+
         );
     }
 }
 
-export default Mapstry;
+export default MapMesures;
 
 {
     /*<Map center={center} zoom={this.state.zoom}>*/
