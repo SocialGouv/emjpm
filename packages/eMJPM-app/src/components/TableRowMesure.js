@@ -43,6 +43,16 @@ const Cell = ({ style, title, children, value }) => (
 );
 
 
+const customStyles = {
+    content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)"
+    }
+};
 // const colorMatch =(disponibilite) => {
 // if (isponibilite > 5 && disponibilite < 600)
 //     if (disponibilite > 5 && disponibilite < 600)
@@ -127,8 +137,26 @@ class TableRowMesure extends React.Component {
             });
     };
 
+    openModal = mandataire => {
+        this.setState({ modalIsOpen: true, currentMandataire: mandataire });
+    };
+    closeModal = () => {
+        this.setState({ modalIsOpen: false });
+    };
+
     render() {
+
+
         const {ville, type, nom, contact, codepostal, dispo_max, date_ouverture, type_mesure, genre, age, sattus} = this.props.mesure.properties;
+
+        const formData = {
+            date_ouverture: `${date_ouverture}`,
+            code_postal:  `${codepostal}`,
+            genre: `${genre}`,
+            age: `${age}`,
+            status: `${sattus}`,
+        };
+
         return (
             <div>
             <tr style={{cursor: "pointer"}}>
@@ -153,13 +181,13 @@ class TableRowMesure extends React.Component {
 
 
             <Modal
-        isOpen={this.state.modalIsOpen}
-        onRequestClose={this.closeModal}
-        style={customStyles}
-        contentLabel="mandataire"
-        background= "#e9ecef"
-        className="Modal"
-        overlayClassName="Overlay"
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          style={customStyles}
+          contentLabel="mandataire"
+          background="#e9ecef"
+          className="Modal"
+          overlayClassName="Overlay"
 
             >
             <Form

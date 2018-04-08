@@ -183,21 +183,21 @@ class Mandataires extends React.Component {
         specialite: ""
     };
 
-    static async getInitialProps(ctx) {
-        // If it does not exist session, it gets redirected
-        if (redirectIfNotAuthenticated(ctx)) {
-            return {};
-        }
-
-        const id = ctx.query && ctx.query.id;
-        const jwt = getJwt(ctx);
-        const res = await (id ? getUser(jwt, id) : getCurrentUser(jwt));
-        return {
-            user: res.data,
-            authenticated: !!jwt,
-            query: !!id
-        };
-    }
+    // static async getInitialProps(ctx) {
+    //     // If it does not exist session, it gets redirected
+    //     if (redirectIfNotAuthenticated(ctx)) {
+    //         return {};
+    //     }
+    //
+    //     const id = ctx.query && ctx.query.id;
+    //     const jwt = getJwt(ctx);
+    //     const res = await (id ? getUser(jwt, id) : getCurrentUser(jwt));
+    //     return {
+    //         user: res.data,
+    //         authenticated: !!jwt,
+    //         query: !!id
+    //     };
+    // }
 
     componentDidMount() {
         const url = "http://localhost:3005/api/v1/mandataires/index";
