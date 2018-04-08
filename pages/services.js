@@ -34,12 +34,22 @@ class MandatairesIndex extends React.Component {
     };
 
     componentDidMount() {
-        const urlmesure = "/static/mesures.json";
-        fetch(urlmesure)
+        const url = "http://localhost:3005/api/v1/srvices";
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Credentials": "true",
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                service_id: 1
+            })
+        })
             .then(response => response.json())
             .then(json => {
                 this.setState({
-                    datamesure: json.features
+                    data: json
                 });
             });
     }
