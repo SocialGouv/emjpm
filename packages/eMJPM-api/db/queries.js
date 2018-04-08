@@ -27,7 +27,7 @@ function getAllMandataire(ti_id) {
     return knex
         .from("mandatairetis")
         .where("ti_id", parseInt(ti_id))
-        .innerJoin("mandataires", "mandatairetis.ti_id", "mandataires.id");
+        .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
 }
 
 function add(mandataire) {
@@ -101,6 +101,11 @@ function updateMesure(commentaireID, updates) {
         .update(updates);
 }
 
+
+function getAllServices(service_id) {
+    return knex("mandataires").where("service_id", parseInt(service_id));
+}
+
 function getsingleUsers(email) {
     return knex("users").where("email", email);
 }
@@ -123,5 +128,6 @@ module.exports = {
     updateMesure: updateMesure,
     deleteItem: deleteItem,
     uploadAll: uploadAll,
-    getSingleUser: getSingleUser
+    getSingleUser: getSingleUser,
+    getAllServices: getAllServices
 };
