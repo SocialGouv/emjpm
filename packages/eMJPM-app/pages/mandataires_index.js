@@ -24,12 +24,12 @@ import "../node_modules/react-tabs/style/react-tabs.css";
 import App from "./index";
 // import { redirectIfNotAuthenticated, getJwt } from "../lib/auth";
 // import { getUser, getCurrentUser } from "../services/userApi";
-import {
-    BrowserRouter as Router,
-    Route,
-    Redirect,
-    withRouter
-} from "react-router-dom";
+// import {
+//     BrowserRouter as Router,
+//     Route,
+//     Redirect,
+//     withRouter
+// } from "react-router-dom";
 
 import AppLogin from "./login";
 
@@ -70,45 +70,45 @@ class MandatairesIndex extends React.Component {
     //     // };
     // }
 
-    componentDidMount() {
-        const url = "http://localhost:3005/api/v1/mesures/index";
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Access-Control-Allow-Credentials": "true",
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                mandataire_id: 1
-            })
-        })
-            .then(response => response.json())
-            .then(json => {
-                this.setState({
-                    datamesure: json
-                });
-            });
+    // componentDidMount() {
+    //     const url = "http://localhost:3005/api/v1/mesures/index";
+    //     fetch(url, {
+    //         method: "POST",
+    //         headers: {
+    //             "Access-Control-Allow-Credentials": "true",
+    //             Accept: "application/json",
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({
+    //             mandataire_id: 1
+    //         })
+    //     })
+    //         .then(response => response.json())
+    //         .then(json => {
+    //             this.setState({
+    //                 datamesure: json
+    //             });
+    //         });
 
-        const mandataireurl = "http://localhost:3005/api/v1/mandataires";
-        fetch(mandataireurl, {
-            method: "POST",
-            headers: {
-                "Access-Control-Allow-Credentials": "true",
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id: 1
-            })
-        })
-            .then(response => response.json())
-            .then(json => {
-                this.setState({
-                    currentMandataire: json
-                });
-            });
-    }
+        // const mandataireurl = "http://localhost:3005/api/v1/mandataires";
+        // fetch(mandataireurl, {
+        //     method: "POST",
+        //     headers: {
+        //         "Access-Control-Allow-Credentials": "true",
+        //         Accept: "application/json",
+        //         "Content-Type": "application/json"
+        //     },
+        //     body: JSON.stringify({
+        //         id: 1
+        //     })
+        // })
+        //     .then(response => response.json())
+        //     .then(json => {
+        //         this.setState({
+        //             currentMandataire: json
+        //         });
+        //     });
+    // }
     render() {
         const filteredMesures = this.state.datamesure;
         return (
@@ -163,25 +163,25 @@ class MandatairesIndex extends React.Component {
     }
 }
 
-// export default MandatairesIndex;
+export default MandatairesIndex;
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-        {...rest}
-        render={props =>
-            fakeAuth.isAuthenticated === true ? (
-                <Component {...props} />
-            ) : (
-                <Redirect
-                    to={{
-                        pathname: "/login",
-                        state: { from: props.location }
-                    }}
-                />
-            )
-        }
-    />
-);
+// const PrivateRoute = ({ component: Component, ...rest }) => (
+//     <Route
+//         {...rest}
+//         render={props =>
+//             fakeAuth.isAuthenticated === true ? (
+//                 <Component {...props} />
+//             ) : (
+//                 <Redirect
+//                     to={{
+//                         pathname: "/login",
+//                         state: { from: props.location }
+//                     }}
+//                 />
+//             )
+//         }
+//     />
+// );
 
 // const AuthButton = withRouter(({ history }) => (
 //     fakeAuth.isAuthenticated ? (
@@ -195,18 +195,18 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 //     )
 // ))
 
-export default function AuthExample() {
-    return (
-        <Router>
-            <div>
-                {/*<AuthButton/>*/}
-                {/*<ul>*/}
-                {/*<li><Link to="/public">Public Page</Link></li>*/}
-                {/*<li><Link to="/protected">Protected Page</Link></li>*/}
-                {/*</ul>*/}
-                <Route path="/login" component={AppLogin} />
-                <PrivateRoute path="/manataire_index" component={MandatairesIndex} />
-            </div>
-        </Router>
-    );
-}
+// export default function AuthExample() {
+//     return (
+//         {/*<Router>*/}
+//             {/*<div>*/}
+//                 {/*/!*<AuthButton/>*!/*/}
+//                 {/*/!*<ul>*!/*/}
+//                 {/*/!*<li><Link to="/public">Public Page</Link></li>*!/*/}
+//                 {/*/!*<li><Link to="/protected">Protected Page</Link></li>*!/*/}
+//                 {/*/!*</ul>*!/*/}
+//                 {/*<Route path="/login" component={AppLogin} />*/}
+//                 {/*<PrivateRoute path="/manataire_index" component={MandatairesIndex} />*/}
+//             {/*</div>*/}
+//         {/*</Router>*/}
+//     );
+// }
