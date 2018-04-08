@@ -25,6 +25,7 @@ const schema = {
         dispo_max: { type: "string", title: "dispo_max", default: "" }
     }
 };
+
 const formData = {};
 
 class FormulaireMandataire extends React.Component {
@@ -34,16 +35,16 @@ class FormulaireMandataire extends React.Component {
         currentMandataire: ""
     };
 
-    componentDidMount() {
-        const urlmesure = "http://localhost:3005/api/v1/mandataires/31";
-        fetch(urlmesure)
-            .then(response => response.json())
-            .then(json => {
-                this.setState({
-                    datamesure: json
-                });
-            });
-    }
+    // componentDidMount() {
+    //     const urlmesure = "http://localhost:3005/api/v1/mandataires/1";
+    //     fetch(urlmesure)
+    //         .then(response => response.json())
+    //         .then(json => {
+    //             this.setState({
+    //                 datamesure: json
+    //             });
+    //         });
+    // }
     // const url = `http://localhost:3005/api/v1/mandataires/${this.props.currentMandataireModal.id}`;
 
     onSubmit = ({ formData }) => {
@@ -58,8 +59,14 @@ class FormulaireMandataire extends React.Component {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                username: formData.identifiant,
-                password: formData.password
+                type: formData.type,
+                etablissement: formData.etablissement,
+                adresse: formData.adresse,
+                telephone: formData.telephone,
+                email: formData.email,
+                code_postal: formData.code_postal,
+                ville: formData.ville,
+                dispo_max: formData.dispo_max
             })
         })
             .then(response => response.json())
@@ -80,25 +87,35 @@ class FormulaireMandataire extends React.Component {
         this.setState({ modalIsOpen: false });
     };
     render() {
+        const formData = {
+            type: `${this.props.currentMandataireModal.type}`,
+            etablissement: `${this.props.currentMandataireModal.etabissement}`,
+            adresse: `${this.props.currentMandataireModal.adresse}`,
+            telephone: `${this.props.currentMandataireModal.telephone}`,
+            email: `${this.props.currentMandataireModal.email}`,
+            code_postal: `${this.props.currentMandataireModal.code_postal}`,
+            ville: `${this.props.currentMandataireModal.ville}`,
+            dispo_max: `${this.props.currentMandataireModal.dispo_max}`
+        };
         console.log(this.state.datamesure);
         return (
             <div>
-                {this.state.datamesure && (
+                {this.props.currentMandataireModal && (
                     <div className="container" style={{ marginTop: "30px" }}>
                         <div className="row">
                             <div className="col-6">
                                 <div style={{ textAlign: "left" }}>
-                                    {this.state.datamesure.type}
+                                    {this.props.currentMandataireModal.type}
                                     services
                                 </div>
                                 <b style={{ textAlign: "left", fontSize: "1.5em" }}>
-                                    {this.state.datamesure.etablissement}
+                                    {this.props.currentMandataireModal.etablissement}
                                 </b>
 
                                 <RowModal value={this.props.currentMandataireModal.adresse} />
                                 <div style={{ textAlign: "left" }}>
-                                    {this.state.datamesure.code_postal}{" "}
-                                    {this.state.datamesure.ville}
+                                    {this.props.currentMandataireModal.code_postal}{" "}
+                                    {this.props.currentMandataireModale.ville}
                                 </div>
                                 <br />
                                 {/*<RowModal*/}
@@ -106,10 +123,10 @@ class FormulaireMandataire extends React.Component {
                                 {/*value={this.state.datamesure.contact}*/}
                                 {/*/>*/}
                                 <div style={{ textAlign: "left" }}>
-                                    {this.state.datamesure.telephone}
+                                    {this.props.currentMandataireModal.telephone}
                                 </div>
                                 <div style={{ textAlign: "left" }}>
-                                    {this.state.datamesure.email}
+                                    {this.props.currentMandataireModal.email}
                                 </div>
                                 <br />
 
@@ -143,8 +160,9 @@ class FormulaireMandataire extends React.Component {
                                     }}
                                 >
                                     <div>
-                                        Mesures en cours : {this.state.datamesure.disponibilite} /{" "}
-                                        {this.state.datamesure.dispo_max}
+                                        Mesures en cours :{" "}
+                                        {this.props.currentMandataireModal.disponibilite} /{" "}
+                                        {this.props.currentMandataireModal.dispo_max}
                                     </div>
                                 </div>
                                 <br />
