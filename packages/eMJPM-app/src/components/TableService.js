@@ -1,6 +1,6 @@
-import TableRowMandataire from "./TableRowMandataire";
+import TableRowMesure from "./TableRowMesure";
 
-const TableMandataire = ({ rows, updateFilters, openModal }) => {
+const TableMesure = ({ rows, openModal }) => {
   return (
       <div className="col-lg-12" style={{padding: "0px"}}>
         <table
@@ -18,11 +18,14 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
             {/*`}</style>*/}
             <tr >
               <td style={{ width: "40%",textAlign: "left" ,color: "#696969",borderTopWidth: "0px"}} colSpan="2" >
-                Nom ou établissement
+                Date d'ouverture
               </td>
 
               <td style={{ width: "30%",textAlign: "left",color: "#696969",borderTopWidth: "0px" }}>
-                Code Postal et Ville
+                Résidence du majeur
+              </td>
+              <td style={{ width: "30%",textAlign: "left",color: "#696969",borderTopWidth: "0px" }}>
+                  Type de mesure
               </td>
               <td
                 style={{
@@ -33,17 +36,21 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
                     borderTopWidth: "0px"
                 }}
               >
-                Mesures en cours
+                Genre
               </td>
+                <td style={{ width: "30%",textAlign: "left",color: "#696969",borderTopWidth: "0px" }}>
+                    Age
+                </td>
+                <td style={{ width: "30%",textAlign: "left",color: "#696969",borderTopWidth: "0px" }}>
+                    Statut
+                </td>
             </tr>
           </thead>
           <tbody>
-            {rows.map(mandataire => (
-              <TableRowMandataire
-                key={mandataire.telephone}
-                mandataire={mandataire}
-                updateFilters={this.updateFilters}
-                onClick={() => openModal(mandataire)}
+            {rows.map(mesure => (
+              <TableRowMesure
+                key={mesure.properties.tel}
+                mesure={mesure}
               />
             ))}
           </tbody>
@@ -51,4 +58,4 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
       </div>
   );
 };
-export default TableMandataire;
+export default TableMesure;

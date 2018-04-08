@@ -65,23 +65,20 @@ const colorMandatairesRetangle = (value) =>{
         return "orangerectangle"
     }
 };
-const TableRowMandataire = ({ mandataire, onClick }) => {
-  const { ville, type, etablissement, disponibilite, referent, code_postal, dispo_max } = mandataire;
+const TableRowMesure = ({ mesure}) => {
+  const { ville, type, nom, disponibilite, contact, codepostal, dispo_max } = mesure.properties;
   return (
 
-    <tr onClick={onClick} style={{ cursor: "pointer" }} >
+    <tr style={{ cursor: "pointer" }} >
         <td style={{width: "100px", verticalAlign: "middle",textAlign: "left"}}>
             <div className={`${colorMandataires(dispo_max - disponibilite)}`}  style={{lineHeight: "40px",fontSize: "0.7em"}}> {type.toUpperCase().substr(0, 1)}</div>
         </td>
 
         <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "left"}} >
-            <b >{etablissement || referent }</b><br /> <div style={{color: "#cccccc"}}>{type.toUpperCase()} </div>
+            <b >{nom || contact }</b><br /> <div style={{color: "#cccccc"}}>{type.toUpperCase()} </div>
         </td>
-        <Cell ><b>{code_postal} - {ville} </b></Cell>
+        <Cell ><b>{codepostal} - {ville} </b></Cell>
 
-        <td style={{ fontSize: "0.8em", verticalAlign: "middle"}}>
-            <div className={`${colorMandatairesRetangle(dispo_max - disponibilite)}`} style={{lineHeight: "40px",borderRadius: "5px"}}> {disponibilite} / {dispo_max}</div>
-        </td>
       {/*<Cell>{cleanTels(tel).map(t => <Phone key={t} num={t} />)}</Cell>*/}
       {/*<Cell style={{ width: "10% !important" }} title="Voir les détails du mandataire">*/}
         {/*<FaSearch onClick={onClick} style={{ cursor: "pointer" }} />*/}
@@ -90,4 +87,4 @@ const TableRowMandataire = ({ mandataire, onClick }) => {
   );
 };
 
-export default TableRowMandataire;
+export default TableRowMesure;
