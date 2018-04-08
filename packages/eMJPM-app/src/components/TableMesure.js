@@ -15,8 +15,10 @@ import MesureInput from "./MesureInput";
 
 
         onClick = () => {
+            const todayElements = document.getElementsByClassName('mesure_button');
             if (this.state.showResults === false){
             this.setState({ showResults: true });
+            todayElements.style.display = 'none';
             } else {
                 this.setState({ showResults: false });
             }
@@ -35,8 +37,9 @@ import MesureInput from "./MesureInput";
       <div className="col-lg-12" style={{padding: "0px"}}>
           <br />
           <div className="row">
-          <button type="button" className="btn btn-success" onClick={this.onClick} style={{align: "left"}}>Ouvrir une nouvelle mesure</button>
+          <button type="button" className="btn btn-success mesure_button" onClick={this.onClick} style={{align: "left"}}>Ouvrir une nouvelle mesure</button>
                  <div>
+                     <br />
                   { this.state.showResults ? <MesureInput /> : null }
               </div>
           </div>

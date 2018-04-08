@@ -70,47 +70,50 @@ class MandatairesIndex extends React.Component {
     //     // };
     // }
 
-    // componentDidMount() {
-    //     const url = "http://localhost:3005/api/v1/mesures/index";
-    //     fetch(url, {
-    //         method: "POST",
-    //         headers: {
-    //             "Access-Control-Allow-Credentials": "true",
-    //             Accept: "application/json",
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({
-    //             mandataire_id: 1
-    //         })
-    //     })
-    //         .then(response => response.json())
-    //         .then(json => {
-    //             this.setState({
-    //                 datamesure: json
-    //             });
-    //         });
+    componentDidMount() {
+        const url = "http://localhost:3005/api/v1/mesures/index";
+        fetch(url, {
+            credentials: "include",
+            method: "POST",
+            headers: {
+                "Access-Control-Allow-Credentials": "true",
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                mandataire_id: 1
+            })
+        })
+            .then(response => response.json())
+            .then(json => {
+                this.setState({
+                    datamesure: json
+                });
+            });
 
-        // const mandataireurl = "http://localhost:3005/api/v1/mandataires";
-        // fetch(mandataireurl, {
-        //     method: "POST",
-        //     headers: {
-        //         "Access-Control-Allow-Credentials": "true",
-        //         Accept: "application/json",
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify({
-        //         id: 1
-        //     })
-        // })
-        //     .then(response => response.json())
-        //     .then(json => {
-        //         this.setState({
-        //             currentMandataire: json
-        //         });
-        //     });
-    // }
+        const mandataireurl = "http://localhost:3005/api/v1/mandataires/1";
+        fetch(mandataireurl)
+            .then(response => response.json())
+            .then(json => {
+                this.setState({
+                    currentMandataire: json
+                });
+            });
+    }
+
     render() {
         const filteredMesures = this.state.datamesure;
+        console.log(111);
+        console.log(
+            fetch("http://localhost:3005/api/v1/mandataires/1")
+                .then(response => response.json())
+                .then(json => {
+                    this.setState({
+                        currentMandataire: json
+                    });
+                })
+        );
+
         return (
             <div>
                 <Navigation />

@@ -4,32 +4,39 @@ import TableMesure from "./TableMesure";
 const schema = {
     title: "",
     type: "object",
-    required: [""],
+    required: ["type", "codePostal", "commune", "civilite", "annee", "residence"],
     properties: {
         ouverture: {
             type: "string",
             title: "Ouverture de la mesure",
             default: "A new task"
         },
-        type: { type: "string", title: "Type de mesure", default: false },
-        codePostal: { type: "string", title: "Code Postal", default: false },
-        commune: { type: "string", title: "Commune", default: false },
-        civilite: { type: "string", title: "Type de mesure", default: false },
-        annee: { type: "string", title: "Type de mesure", default: false },
-        residence: { type: "string", title: "Residence", default: false }
+        type: {
+            type: "string",
+            enum: [
+                "Curatelle",
+                "Curatelle renforcée",
+                "Tutelle",
+                "Protetion de Justice"
+            ]
+        },
+        codePostal: { type: "string", title: "Code Postal" },
+        commune: { type: "string", title: "Commune" },
+        civilite: { type: "string", enum: ["Madame", "Monsieur"] },
+        annee: { type: "integer" },
+        residence: { type: "string", enum: ["A Domicile", "En Etablissement"] }
     }
 };
 
 const uiSchema = {
     ouverture: {
         "ui:widget": "date" // could also be "select"
-    },
-    annee: {
-        "ui:widget": "date" // could also be "select"
     }
 };
 
 const getPostCodeCoordinates = postCode => {
+    console.log(postCode);
+    console.log(111);
     // return null if no input
     if (!postCode || !postCode.trim()) {
         return Promise.resolve(null);
@@ -58,7 +65,13 @@ class MesureInput extends React.Component {
         );
 
     onSubmit = ({ formData }) => {
-        this.findPostcode(formData.commune);
+        console.log(222);
+        console.log(getPostCodeCoordinates(formData.codePostal));
+        console.log(333);
+        this.findPostcode(formData.codePostal);
+        console.log(formData);
+        console.log(this.findPostcode(formData.codePostal));
+        console.log(this.state.postcodeCoordinates);
         const url = "http://localhost:3005/api/v1/mesures";
         fetch(url, {
             method: "POST",
@@ -70,14 +83,18 @@ class MesureInput extends React.Component {
             body: JSON.stringify({
                 code_postal: formData.codePostal,
                 ville: formData.commune,
+                etablissement: "hello",
+                latitude: 1,
+                longitude: 1,
+                mandataire_id: 1,
+                postdate: "",
                 annee: formData.annee,
                 type: formData.type,
                 date_ouverture: formData.ouverture,
                 residence: formData.residence,
-                civilite: formData.civilite,
-                longitude: this.state.postcodeCoordinates[0],
-                latitude: this.state.postcodeCoordinates[1],
-                mandataire_id: 1
+                civilite: formData.civilite
+                // longitude: this.state.postcodeCoordinates[0],
+                // latitude: this.state.postcodeCoordinates[1],
             })
         })
             .then(response => response.json())
@@ -89,7 +106,11 @@ class MesureInput extends React.Component {
     };
 
     render() {
-        return <Form schema={schema} onSubmit={this.onSubmit} />;
+        return (
+            <div>
+                <Form schema={schema} uiSchema={uiSchema} onSubmit={this.onSubmit} />;
+            </div>
+        );
     }
 }
 

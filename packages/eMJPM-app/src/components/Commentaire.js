@@ -18,12 +18,7 @@ const schema = {
 
 };
 
-const formData = ({ comment }) => {
-    if(comment !== "") {
-        `co_comment: ${comment}`
-    }
-
-};
+const formData = {};
 
 
 
@@ -83,7 +78,7 @@ class Commentaire extends React.Component {
             })
     };
 
-    onUpdte = ({comment}) => {
+    onUpdate = ({comment}) => {
         const url = "http://localhost:3005/api/v1/commentaires";
         fetch((url), {
             method: "PUT",
@@ -129,6 +124,10 @@ class Commentaire extends React.Component {
 
     render() {
 
+        const formData = {
+            co_comment: `${this.state.data}`,
+        };
+
         return (
 <div className="form-group">
 <label htmlFor="exampleFormControlTextarea1"><b>Ajoutez vos notes </b></label>
@@ -136,7 +135,7 @@ class Commentaire extends React.Component {
 <br />
     <Form
         schema={schema}
-        formData={formData("")}
+        formData={formData}
         onSubmit={this.onSubmit}
    >
 
@@ -153,6 +152,7 @@ class Commentaire extends React.Component {
 
 <hr />
     {this.state.data.map(comments => (
+
         <div>
         <div style={{backgroundColor: "#b5b5b5", fontSize: "0.8em"}}> {comments.co_comment} <br /></div>
         <button type="submit" onClick={() => this.onDelete(comments)}> supprimer </button>
