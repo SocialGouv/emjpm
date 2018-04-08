@@ -17,8 +17,8 @@ import "../static/css/hero.css";
 import "../static/css/panel.css";
 import "../static/css/footer.css";
 import "../static/css/custom.css";
-import { redirectIfNotAuthenticated, getJwt } from "../lib/auth";
-import { getUser, getCurrentUser } from "../services/userApi";
+// import { redirectIfNotAuthenticated, getJwt } from "../lib/auth";
+// import { getUser, getCurrentUser } from "../services/userApi";
 
 const styles = {
     fontFamily: "sans-serif",
