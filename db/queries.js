@@ -49,6 +49,12 @@ function getAllUsers() {
     return Users().select();
 }
 
+function getSingleUser(userID) {
+    return Users()
+        .where("id", parseInt(userID))
+        .first();
+}
+
 function getAllCommentaire(mandataire_id, ti_id) {
     return Commentaires().where({
         mandataire_id: parseInt(mandataire_id),
@@ -116,5 +122,6 @@ module.exports = {
     getSingleMesure: getSingleMesure,
     updateMesure: updateMesure,
     deleteItem: deleteItem,
-    uploadAll: uploadAll
+    uploadAll: uploadAll,
+    getSingleUser: getSingleUser
 };
