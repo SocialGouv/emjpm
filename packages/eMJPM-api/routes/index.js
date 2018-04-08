@@ -11,11 +11,9 @@ const dataObj = csv.toObject(file)
         queries.uploadAll(dataObj)
     .then(() => {
         console.log('Import data done!')
-        process.exit(0)
     })
     .catch(() => {
         console.log('Import data failed')
-        process.exit(0)
     }) });
 
 /* GET home page. */
@@ -24,9 +22,19 @@ function loggedIn(req, res, next) {
     if (req.user) {
         next();
     } else {
-        res.redirect("/auth/login");
+        res.redirect("http://localhost:3000/login");
     }
 }
+
+
+router.get("/loginIn", function(req, res, next) {
+    if (req.user) {
+        next();
+    } else {
+        res.redirect("http://localhost:3000/login");
+    }
+});
+
 
 router.post("/mandataires/index", function(req, res, next) {
     queries
@@ -146,7 +154,7 @@ router.put("/commentaires", function(req, res, next) {
         });
 });
 
-router.get("/mesures", function(req, res, next) {
+router.get("/mesures",loggedIn, function(req, res, next) {
     console.log(res);
     queries
         .getAllCommentaire()
