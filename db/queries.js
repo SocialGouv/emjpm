@@ -38,6 +38,14 @@ function getSingle(mandataireID) {
     .where("id", parseInt(mandataireID))
     .first();
 }
+
+function getTiByUserId(userId) {
+  return knex
+    .from("tis")
+    .where("user_id", parseInt(userId))
+    .first();
+}
+
 function update(mandataireID, updates) {
   return Mandataires()
     .where("id", parseInt(mandataireID))
@@ -109,9 +117,9 @@ function getsingleUsers(email) {
 }
 
 module.exports = {
-  getAllUsers: getAllUsers,
-  getAllMandataires: getAllMandataires,
-  getAll: getAll,
+  getAllUsers,
+  getAllMandataires,
+  getAll,
   getSingle: getSingle,
   add: add,
   update: update,
@@ -127,5 +135,6 @@ module.exports = {
   deleteItem: deleteItem,
   uploadAll: uploadAll,
   getSingleUser: getSingleUser,
-  getAllServices: getAllServices
+  getAllServices: getAllServices,
+  getTiByUserId
 };

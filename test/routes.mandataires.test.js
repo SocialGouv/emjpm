@@ -43,17 +43,15 @@ describe("routes : auth", () => {
           return agent
             .get("/api/v1/mandataires")
             .then(function(res) {
-              //  console.log("res2", res);
               res.redirects.length.should.eql(0);
               res.status.should.eql(200);
               res.type.should.eql("application/json");
               res.body.length.should.eql(1);
               done();
+              // todo : check que les mandataires soient bien filtés
             })
             .catch(err => {
-              //console.log("err", err);
               throw err;
-              //throw new Error("should not fail");
             });
         });
     });
