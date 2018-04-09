@@ -22,18 +22,10 @@ const SECRET_KEY =
 
 const corsOptions = {
   credentials: true,
-  origin: function(origin, callback) {
-    if (corsWhitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  }
+  origin: true
 };
 
-app.options("*", cors(corsOptions));
-
-//app.use(logger("dev"));
+app.use(cors(corsOptions));
 
 app.use(cookieParser());
 
