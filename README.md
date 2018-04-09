@@ -27,3 +27,10 @@ docker exec -it emjpm-postgres createdb -U postgres backendlebontuteur_db_1
 
 ./node_modules/.bin/knex seed:run --env development
 ```
+
+
+### Env
+
+ - `CORS_WHITELIST` : ajouter un host à la whitelist CORS
+ - `PORT` : port
+ - `SECRET_KEY` : sessions secret key
