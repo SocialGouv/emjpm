@@ -87,8 +87,10 @@ app.use(function(err, req, res, next) {
 
 const port = process.env.PORT || 3005;
 
-app.listen(port, () => {
-  console.log(`Listening on http://127.0.0.1:${port}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Listening on http://127.0.0.1:${port}`);
+  });
+}
 
 module.exports = app;

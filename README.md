@@ -14,22 +14,33 @@ npm install
 
 `docker-compose up`
 
-### Create Database
+
+## Seeds
+
+
+### Developement
 
 ```sh
+
 docker exec -it emjpm-postgres createdb -U postgres backendlebontuteur_db_1
-```
 
-### Seed
-
-```sh
 ./node_modules/.bin/knex migrate:latest --env development
 
 ./node_modules/.bin/knex seed:run --env development
 ```
 
+### Tests
 
-### Env
+```sht
+
+docker exec -it emjpm-postgres createdb -U postgres backendlebontuteur_db_1_test
+
+./node_modules/.bin/knex migrate:latest --env test
+
+./node_modules/.bin/knex seed:run --env test
+```
+
+## Env
 
  - `CORS_WHITELIST` : ajouter un host à la whitelist CORS
  - `PORT` : port

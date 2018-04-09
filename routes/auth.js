@@ -32,7 +32,7 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         if (err) {
           return next(err);
         }
-        return handleResponse(res, 200, "Success");
+        return handleResponse(res, 200, "success");
       });
     }
   })(req, res, next);
