@@ -127,6 +127,8 @@ const sortByDispo = (a, b) => {
   return 0;
 };
 
+const API_URL = process.env.API_URL || "http://localhost:3005";
+
 class Mandataires extends React.Component {
   state = {
     data: [],
@@ -160,17 +162,18 @@ class Mandataires extends React.Component {
   // }
 
   componentDidMount() {
-    const url = "http://localhost:3005/api/v1/mandataires/index";
+    const url = `${API_URL}/api/v1/mandataires`;
     fetch(url, {
-      method: "POST",
+      method: "GET",
+      credentials: "include",
       headers: {
         "Access-Control-Allow-Credentials": "true",
         Accept: "application/json",
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        ti_id: 1
-      })
+      }
+      // body: JSON.stringify({
+      //   ti_id: 1
+      // })
     })
       .then(response => response.json())
       .then(json => {

@@ -25,7 +25,6 @@ import Router from "next/router";
 import MandatairesIndex from "./mandataires_index";
 import Form from "react-jsonschema-form";
 import { redirectIfAuthenticated } from "../lib/auth";
-import axios from "axios";
 
 // import {
 //     // BrowserRouter as Router,
