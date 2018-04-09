@@ -2,6 +2,7 @@ version: "3"
 services:
  db:
    image: postgres
+   container_name: emjpm-postgres
    environment:
      - POSTGRES_USER=postgres
      - POSTGRES_PASSWORD=test

@@ -1,28 +1,29 @@
-# Get Started
+# e-mjpm API
 
+## Get Started
+
+```sh
 git clone git@github.com:SocialGouv/eMJPM-api.git
 
 cd eMJPM-api
 
 npm install
+```
 
-# Run the Database
-docker-compose up
+## Run
 
-# Create Database
+`docker-compose up`
 
-database development
-connect on psql:
+### Create Database
 
-psql -p 5434 -U postgres -h localhost
+```sh
+docker exec -it emjpm-postgres createdb -U postgres backendlebontuteur_db_1
+```
 
-CREATE DATABASE backendlebontuteur_db_1;
+### Seed
 
-ON eMJPM-api:
+```sh
+./node_modules/.bin/knex migrate:latest --env development
 
-knex migrate:latest --env development
-
-knex seed:run --env development
-
-# Run
-npm start
+./node_modules/.bin/knex seed:run --env development
+```
