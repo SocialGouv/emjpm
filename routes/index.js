@@ -1,90 +1,43 @@
-var express = require("express");
-var router = express.Router();
-var queries = require("../db/queries");
+const express = require("express");
 
-var csv = require("csvjson");
-var fs = require("fs");
+const router = express.Router();
+const queries = require("../db/queries");
 
-router.post("/upload", function(req, res, next) {
-  const file = fs.readFileSync("./mandataire.csv", "utf8");
-  const dataObj = csv.toObject(file);
-  queries
-    .uploadAll(dataObj)
-    .then(() => {
-      console.log("Import data done!");
-    })
-    .catch(() => {
-      console.log("Import data failed");
-    });
-});
+// var csv = require("csvjson");
+// var fs = require("fs");
+
+// router.post("/upload", function(req, res, next) {
+//   const file = fs.readFileSync("./mandataire.csv", "utf8");
+//   const dataObj = csv.toObject(file);
+//   queries
+//     .uploadAll(dataObj)
+//     .then(() => {
+//       console.log("Import data done!");
+//     })
+//     .catch(() => {
+//       console.log("Import data failed");
+//     });
+// });
 
 /* GET home page. */
 
-function loggedIn(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.redirect("http://localhost:3000/login");
-  }
-}
+// function loggedIn(req, res, next) {
+//   if (req.user) {
+//     next();
+//   } else {
+//     res.redirect("http://localhost:3000/login");
+//   }
+// }
 
-router.get("/loginIn", function(req, res, next) {
-  if (req.user) {
-    next();
-  } else {
-    res.redirect("http://localhost:3000/login");
-  }
-});
+// router.get("/loginIn", function(req, res, next) {
+//   if (req.user) {
+//     next();
+//   } else {
+//     res.redirect("http://localhost:3000/login");
+//   }
+// });
 
-router.post("/mandataires/index", function(req, res, next) {
-  queries
-    .getAllMandataire(req.body.ti_id)
-    .then(function(mandataires) {
-      res.status(200).json(mandataires);
-    })
-    .catch(function(error) {
-      next(error);
-    })
-    .map(spe => queries.getSingle(spe));
-});
-router.get("/mandataires/:id", function(req, res, next) {
-  queries
-    .getSingle(req.params.id)
-    .then(function(mandataire) {
-      res.status(200).json(mandataire);
-    })
-    .catch(function(error) {
-      next(error);
-    });
-});
-
-router.post("/mandataires", function(req, res, next) {
-  queries
-    .add(req.body)
-    .then(function(mandataireID) {
-      return queries.getSingle(mandataireID);
-    })
-    .then(function(mandataire) {
-      res.status(200).json(mandataire);
-    })
-    .catch(function(error) {
-      next(error);
-    });
-});
-
-router.put("/mandataires/:id", function(req, res, next) {
-  queries
-    .update(req.params.id, req.body)
-    .then(function() {
-      return queries.getSingle(req.params.id);
-    })
-    .then(function(mandataire) {
-      res.status(200).json(mandataire);
-    })
-    .catch(function(error) {
-      next(error);
-    });
-});
+router.use("/mandataires", require("./mandataires"));
 
 router.post("/commentaires/index", function(req, res, next) {
   console.log(res);
@@ -205,19 +158,19 @@ router.put("/mesures/:id", function(req, res, next) {
     });
 });
 
-router.post("/services", function(req, res, next) {
-  queries
-    .getAllServices(req.body)
-    .then(function(services) {
-      res.status(200).json(services);
-    })
-    .catch(function(error) {
-      next(error);
-    });
-});
+// router.post("/services", function(req, res, next) {
+//   queries
+//     .getAllServices(req.body)
+//     .then(function(services) {
+//       res.status(200).json(services);
+//     })
+//     .catch(function(error) {
+//       next(error);
+//     });
+// });
 
 router.get("/", function(req, res, next) {
-  res.render("index", { title: "Express" });
+  res.json({ title: "API eMJPM" });
 });
 
 module.exports = router;

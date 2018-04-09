@@ -22,7 +22,7 @@ function uploadAll(data) {
   return Mandataires().insert(data);
 }
 
-function getAllMandataire(ti_id) {
+function getAllMandataires(ti_id) {
   return knex
     .from("mandatairetis")
     .where("ti_id", parseInt(ti_id))
@@ -110,7 +110,7 @@ function getsingleUsers(email) {
 
 module.exports = {
   getAllUsers: getAllUsers,
-  getAllMandataire: getAllMandataire,
+  getAllMandataires: getAllMandataires,
   getAll: getAll,
   getSingle: getSingle,
   add: add,
