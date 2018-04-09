@@ -62,10 +62,10 @@ function getSingleUser(userID) {
     .first();
 }
 
-function getAllCommentaire(mandataire_id, ti_id) {
+function getAllCommentaires(mandataire_id, ti_id) {
   return Commentaires().where({
     mandataire_id: parseInt(mandataire_id),
-    user_id: parseInt(ti_id)
+    ti_id: parseInt(ti_id)
   });
 }
 
@@ -124,7 +124,7 @@ module.exports = {
   add: add,
   update: update,
   getsingleUsers: getsingleUsers,
-  getAllCommentaire: getAllCommentaire,
+  getAllCommentaires: getAllCommentaires,
   addCommentaire: addCommentaire,
   getSingleCommentaire: getSingleCommentaire,
   updateCommentaire: updateCommentaire,

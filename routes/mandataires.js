@@ -57,4 +57,6 @@ router.get("/", async (req, res, next) => {
 //     });
 // });
 
+router.use("/", require("./commentaires"));
+
 module.exports = router;

@@ -13,7 +13,7 @@ const knex = require("../db/knex");
 chai.use(chaiHttp);
 passportStub.install(server);
 
-describe("routes : mandataires", () => {
+describe("routes : commentaires", () => {
   beforeEach(() => {
     return knex.migrate
       .rollback()
@@ -30,8 +30,8 @@ describe("routes : mandataires", () => {
     return knex.migrate.rollback();
   });
 
-  describe("GET /api/v1/mandataires", () => {
-    it("should get list of mandataires", done => {
+  describe("GET /api/v1/mandataires/1/commentaires", () => {
+    it("should get list of commentaires for given mandataire", done => {
       var agent = chai.request.agent(server);
       agent
         .post("/auth/login")
@@ -41,14 +41,15 @@ describe("routes : mandataires", () => {
         })
         .then(function(res) {
           return agent
-            .get("/api/v1/mandataires")
+            .get("/api/v1/mandataires/1/commentaires")
             .then(function(res) {
               res.redirects.length.should.eql(0);
               res.status.should.eql(200);
               res.type.should.eql("application/json");
               res.body.length.should.eql(1);
+              res.body[0].co_comment.should.eql("Hello, world");
               done();
-              // todo : check que les mandataires soient bien filtés
+              // todo : check que les commentaires soient bien filtés
             })
             .catch(err => {
               throw err;
