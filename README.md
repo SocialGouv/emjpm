@@ -18,7 +18,7 @@ psql -p 5434 -U postgres -h localhost
 
 CREATE DATABASE backendlebontuteur_db_1;
 
-ON cd eMJPM-api:
+ON eMJPM-api:
 
 knex migrate:latest --env development
 
