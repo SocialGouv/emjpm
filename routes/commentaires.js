@@ -26,14 +26,47 @@ router.post("/:mandataireId/commentaires", async (req, res, next) => {
     .then(function(commentaireID) {
       return queries.getAllCommentaires(req.params.mandataireId, ti.id);
     })
-    .then(function(commentaire) {
-      res.status(200).json(commentaire);
+    .then(function(commentaires) {
+      res.status(200).json(commentaires);
     })
     .catch(function(error) {
       next(error);
     });
 });
 
+router.delete("/:mandataireId/commentaires/:commentaireId", async (req, res, next) => {
+  // secu : ensure TI can write on this mandataire + add related test
+  const ti = await queries.getTiByUserId(req.user.id);
+  queries
+    .deleteCommentaire(req.params.commentaireId)
+    .then(function(commentaireID) {
+      return queries.getAllCommentaires(req.params.mandataireId, ti.id);
+    })
+    .then(function(commentaires) {
+      res.status(200).json(commentaires);
+    })
+    .catch(function(error) {
+      next(error);
+    });
+});
+
+// router.delete("/", function(req, res, next) {
+//   queries
+//     .getSingle(req.body.co_id)
+//     .then(function(show) {
+//       queries
+//         .deleteItem(req.body.co_id)
+//         .then(function() {
+//           res.status(200).json(show);
+//         })
+//         .catch(function(error) {
+//           next(error);
+//         });
+//     })
+//     .catch(function(error) {
+//       next(error);
+//     });
+// });
 // router.get("/", function(req, res, next) {
 //   res.render("commentaires", { title: "Express" });
 // });
@@ -69,24 +102,6 @@ router.post("/:mandataireId/commentaires", async (req, res, next) => {
 //     })
 //     .then(function(commentaire) {
 //       res.status(200).json(commentaire);
-//     })
-//     .catch(function(error) {
-//       next(error);
-//     });
-// });
-
-// router.delete("/", function(req, res, next) {
-//   queries
-//     .getSingle(req.body.co_id)
-//     .then(function(show) {
-//       queries
-//         .deleteItem(req.body.co_id)
-//         .then(function() {
-//           res.status(200).json(show);
-//         })
-//         .catch(function(error) {
-//           next(error);
-//         });
 //     })
 //     .catch(function(error) {
 //       next(error);

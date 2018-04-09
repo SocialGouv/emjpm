@@ -72,7 +72,7 @@ function getAllCommentaires(mandataire_id, ti_id) {
 function addCommentaire(data) {
   return Commentaires().insert(data);
 }
-function deleteItem(showID) {
+function deleteCommentaire(showID) {
   return Commentaires()
     .where("co_id", parseInt(showID))
     .del();
@@ -132,7 +132,7 @@ module.exports = {
   addMesure: addMesure,
   getSingleMesure: getSingleMesure,
   updateMesure: updateMesure,
-  deleteItem: deleteItem,
+  deleteCommentaire: deleteCommentaire,
   uploadAll: uploadAll,
   getSingleUser: getSingleUser,
   getAllServices: getAllServices,

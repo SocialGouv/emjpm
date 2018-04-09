@@ -89,4 +89,26 @@ describe("routes : commentaires", () => {
   //   // TODO
   //   "1".should.eql(2);
   // });
+
+  it("should delete commentaire for given mandataire", done => {
+    var agent = chai.request.agent(server);
+    agent
+      .post("/auth/login")
+      .send({
+        username: "jeremy",
+        password: "johnson123"
+      })
+      .then(function(res) {
+        return agent.delete("/api/v1/mandataires/1/commentaires/1").then(function(res) {
+          res.redirects.length.should.eql(0);
+          res.status.should.eql(200);
+          res.type.should.eql("application/json");
+          res.body.length.should.eql(0);
+          done();
+        });
+      })
+      .catch(err => {
+        throw err;
+      });
+  });
 });
