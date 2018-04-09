@@ -101,6 +101,14 @@ router.put("/mesures/:id", function(req, res, next) {
 //     });
 // });
 
+router.get("/ping", function(req, res, next) {
+  if (!req.user) {
+    res.status(401).json({ success: false });
+  } else {
+    res.json({ success: true });
+  }
+});
+
 router.get("/", function(req, res, next) {
   res.json({ title: "API eMJPM" });
 });
