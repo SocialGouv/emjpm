@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const logger = require("morgan");
+//const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const passport = require("passport");
@@ -33,7 +33,7 @@ const corsOptions = {
 
 app.options("*", cors(corsOptions));
 
-app.use(logger("dev"));
+//app.use(logger("dev"));
 
 app.use(cookieParser());
 
