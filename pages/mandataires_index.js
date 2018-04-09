@@ -34,136 +34,126 @@ import App from "./index";
 import AppLogin from "./login";
 
 const styles = {
-    fontFamily: "sans-serif",
-    textAlign: "center"
+  fontFamily: "sans-serif",
+  textAlign: "center"
 };
 
 const MapSearchMesures = dynamic(import("../src/components/MapMesures"), {
-    ssr: false,
-    loading: () => (
-        <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
-    )
+  ssr: false,
+  loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
 
 class MandatairesIndex extends React.Component {
-    state = {
-        data: [],
-        datamesure: [],
-        currentMandataire: ""
-    };
-    // static async getInitialProps(ctx) {
-    //
-    //     console.log(222)
-    //     // If it does not exist session, it gets redirected
-    //     if (redirectIfNotAuthenticated(ctx)) {
-    //         return {};
-    //     }
-    //     //
-    //     // const id = ctx.query && ctx.query.id;
-    //     // const jwt = getJwt(ctx);
-    //     // const res = await (id ? getUser(jwt, id) : getCurrentUser(jwt));
-    //     // // const res = await (id ? getUser(jwt, id) : getCurrentUser(jwt));
-    //     // return {
-    //     //     user: res.data,
-    //     //     authenticated: !!jwt,
-    //     //     query: !!id
-    //     // };
-    // }
+  state = {
+    data: [],
+    datamesure: [],
+    currentMandataire: ""
+  };
+  // static async getInitialProps(ctx) {
+  //
+  //     console.log(222)
+  //     // If it does not exist session, it gets redirected
+  //     if (redirectIfNotAuthenticated(ctx)) {
+  //         return {};
+  //     }
+  //     //
+  //     // const id = ctx.query && ctx.query.id;
+  //     // const jwt = getJwt(ctx);
+  //     // const res = await (id ? getUser(jwt, id) : getCurrentUser(jwt));
+  //     // // const res = await (id ? getUser(jwt, id) : getCurrentUser(jwt));
+  //     // return {
+  //     //     user: res.data,
+  //     //     authenticated: !!jwt,
+  //     //     query: !!id
+  //     // };
+  // }
 
-    componentDidMount() {
-        const url = "http://localhost:3005/api/v1/mesures/index";
-        fetch(url, {
-            credentials: "include",
-            method: "POST",
-            headers: {
-                "Access-Control-Allow-Credentials": "true",
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                mandataire_id: 1
-            })
+  componentDidMount() {
+    const url = "http://localhost:3005/api/v1/mesures/index";
+    fetch(url, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Credentials": "true",
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        mandataire_id: 1
+      })
+    })
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          datamesure: json
+        });
+      });
+
+    const mandataireurl = "http://localhost:3005/api/v1/mandataires/1";
+    fetch(mandataireurl)
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          currentMandataire: json
+        });
+      });
+  }
+
+  render() {
+    const filteredMesures = this.state.datamesure;
+    console.log(111);
+    console.log(
+      fetch("http://localhost:3005/api/v1/mandataires/1")
+        .then(response => response.json())
+        .then(json => {
+          this.setState({
+            currentMandataire: json
+          });
         })
-            .then(response => response.json())
-            .then(json => {
-                this.setState({
-                    datamesure: json
-                });
-            });
+    );
 
-        const mandataireurl = "http://localhost:3005/api/v1/mandataires/1";
-        fetch(mandataireurl)
-            .then(response => response.json())
-            .then(json => {
-                this.setState({
-                    currentMandataire: json
-                });
-            });
-    }
-
-    render() {
-        const filteredMesures = this.state.datamesure;
-        console.log(111);
-        console.log(
-            fetch("http://localhost:3005/api/v1/mandataires/1")
-                .then(response => response.json())
-                .then(json => {
-                    this.setState({
-                        currentMandataire: json
-                    });
-                })
-        );
-
-        return (
-            <div>
-                <Navigation />
-                <Tabs>
-                    <TabList>
-                        <div
-                            className="panel"
-                            style={{
-                                textAlign: "left",
-                                backgroundSize: "cover",
-                                heigth: "100px !important",
-                                backgroundColor: "#cccccc"
-                            }}
-                        >
-                            <div
-                                className="panel__container"
-                                style={{ paddingBottom: "0px" }}
-                            >
-                                <div
-                                    className="container"
-                                    style={{ paddingRight: "27px", paddingLeft: "27px" }}
-                                >
-                                    <h2 style={{ color: "black" }}> Mme Isabelle Tulliez </h2>
-                                    <Tab>Mesures en cours</Tab>
-                                    <Tab>Vos informations</Tab>
-                                </div>
-                            </div>
-                        </div>
-                    </TabList>
-                    <div className="container">
-                        <TabPanel>
-                            <TableMesure rows={filteredMesures} />
-                        </TabPanel>
-                        {/*<TabPanel>*/}
-                        {/*<MapSearchMesures mesure={filteredMesures} />*/}
-                        {/*</TabPanel>*/}
-                        {/*<TabPanel>*/}
-                        {/*<TableMesure rows={filteredMesures} />*/}
-                        {/*</TabPanel>*/}
-                        <TabPanel>
-                            <FormulaireMandataire
-                                currentMandataireModal={this.state.currentMandataire}
-                            />
-                        </TabPanel>
-                    </div>
-                </Tabs>
-                <Footer />
+    return (
+      <div>
+        <Navigation />
+        <Tabs>
+          <TabList>
+            <div
+              className="panel"
+              style={{
+                textAlign: "left",
+                backgroundSize: "cover",
+                heigth: "100px !important",
+                backgroundColor: "#cccccc"
+              }}
+            >
+              <div className="panel__container" style={{ paddingBottom: "0px" }}>
+                <div className="container" style={{ paddingRight: "27px", paddingLeft: "27px" }}>
+                  <h2 style={{ color: "black" }}> Mme Isabelle Tulliez </h2>
+                  <Tab>Mesures en cours</Tab>
+                  <Tab>Vos informations</Tab>
+                </div>
+              </div>
             </div>
-        );
-    }
+          </TabList>
+          <div className="container">
+            <TabPanel>
+              <TableMesure rows={filteredMesures} />
+            </TabPanel>
+            {/*<TabPanel>*/}
+            {/*<MapSearchMesures mesure={filteredMesures} />*/}
+            {/*</TabPanel>*/}
+            {/*<TabPanel>*/}
+            {/*<TableMesure rows={filteredMesures} />*/}
+            {/*</TabPanel>*/}
+            <TabPanel>
+              <FormulaireMandataire currentMandataireModal={this.state.currentMandataire} />
+            </TabPanel>
+          </div>
+        </Tabs>
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default MandatairesIndex;

@@ -27,144 +27,139 @@ import axios from "axios";
 
 import Link from "next/link";
 
-import {
-    BrowserRouter as Router,
-    Route,
-    Redirect,
-    withRouter
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect, withRouter } from "react-router-dom";
 
 const styles = {
-    fontFamily: "sans-serif",
-    textAlign: "center"
+  fontFamily: "sans-serif",
+  textAlign: "center"
 };
 const schema = {
-    title: "Se connecter",
-    type: "object",
-    required: [],
-    properties: {
-        identifiant: { type: "string", title: " ", default: "Identifiant" },
-        password: { type: "string", title: " ", default: "password" },
-        done: {
-            type: "boolean",
-            title: " se souvenir de mes informations ",
-            default: false
-        }
+  title: "Se connecter",
+  type: "object",
+  required: [],
+  properties: {
+    identifiant: { type: "string", title: " ", default: "Identifiant" },
+    password: { type: "string", title: " ", default: "password" },
+    done: {
+      type: "boolean",
+      title: " se souvenir de mes informations ",
+      default: false
     }
+  }
 };
 
 const formData = {};
 
 class LoginIndex extends React.Component {
-    state = {
-        datamesure: "",
-        error: false,
-        history: "",
-        redirectToReferrer: false
-    };
+  state = {
+    datamesure: "",
+    error: false,
+    history: "",
+    redirectToReferrer: false
+  };
 
-    //     onSubmit = ({formData}) => {
-    //     return axios.post("http://localhost:3005/auth/login", {
-    //     username: formData.identifiant,
-    //     password: formData.password
-    // })
-    // .then(function (response) {
-    //     console.log(response);
-    // })
-    //     .catch(function (error) {
-    //         console.log(error);
-    //     });
+  //     onSubmit = ({formData}) => {
+  //     return axios.post("http://localhost:3005/auth/login", {
+  //     username: formData.identifiant,
+  //     password: formData.password
+  // })
+  // .then(function (response) {
+  //     console.log(response);
+  // })
+  //     .catch(function (error) {
+  //         console.log(error);
+  //     });
 
-    onSubmit = ({ formData }) => {
-        const url = "http://localhost:3005/auth/login";
-        fetch(url, {
-            credentials: "include",
-            method: "POST",
-            headers: {
-                "Access-Control-Allow-Origin": "*",
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: formData.identifiant,
-                password: formData.password
-            })
-        })
-            .then(response => response.json())
-            .then(json => {
-                this.setState({
-                    datamesure: json
-                });
-            });
+  onSubmit = ({ formData }) => {
+    const url = "http://localhost:3005/auth/login";
+    fetch(url, {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        username: formData.identifiant,
+        password: formData.password
+      })
+    })
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          datamesure: json
+        });
+      });
 
-        // store.set('loggedIn', true);
-    };
+    // store.set('loggedIn', true);
+  };
 
-    render() {
-        return (
-            <div style={{ textAlign: "center" }}>
-                <Navigation />
+  render() {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <Navigation />
 
-                <div
-                    style={{
-                        textAlign: "center",
-                        backgroundSize: "cover",
-                        heigth: "60%",
-                        backgroundColor: "#cccccc",
-                        width: "60%",
-                        margin: "0 auto",
-                        paddingTop: "70px",
-                        paddingBotttom: "70px"
-                    }}
-                >
-                    <div
-                        style={{
-                            textAlign: "center",
-                            fontSize: "2em",
-                            paddingBottom: "15px"
-                        }}
-                    >
-                        <b>Espace professionnels </b>
-                    </div>
+        <div
+          style={{
+            textAlign: "center",
+            backgroundSize: "cover",
+            heigth: "60%",
+            backgroundColor: "#cccccc",
+            width: "60%",
+            margin: "0 auto",
+            paddingTop: "70px",
+            paddingBotttom: "70px"
+          }}
+        >
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "2em",
+              paddingBottom: "15px"
+            }}
+          >
+            <b>Espace professionnels </b>
+          </div>
 
-                    <div
-                        style={{
-                            textAlign: "center",
-                            backgroundSize: "cover",
-                            heigth: "30% !important",
-                            backgroundColor: "white",
-                            width: "50%",
-                            margin: "0 auto",
-                            marginBottom: "70px",
-                            border: "black 1px",
-                            borderStyle: "solid",
-                            borderRadius: "10px",
-                            padding: "10px",
-                            paddingRight: "30%",
-                            display: "inline-block"
-                        }}
-                    >
-                        <Form schema={schema} formData={formData} onSubmit={this.onSubmit}>
-                            <div style={{ textAlign: "left", paddingBottom: "10px" }}>
-                                <button type="submit" className="btn btn-success">
-                                    Me connecter
-                                </button>
-                            </div>
-                        </Form>
-                    </div>
-                </div>
-                <div
-                    style={{
-                        position: "fixed",
-                        width: "100%",
-                        bottom: "0"
-                    }}
-                >
-                    <Footer />
-                </div>
-            </div>
-        );
-    }
+          <div
+            style={{
+              textAlign: "center",
+              backgroundSize: "cover",
+              heigth: "30% !important",
+              backgroundColor: "white",
+              width: "50%",
+              margin: "0 auto",
+              marginBottom: "70px",
+              border: "black 1px",
+              borderStyle: "solid",
+              borderRadius: "10px",
+              padding: "10px",
+              paddingRight: "30%",
+              display: "inline-block"
+            }}
+          >
+            <Form schema={schema} formData={formData} onSubmit={this.onSubmit}>
+              <div style={{ textAlign: "left", paddingBottom: "10px" }}>
+                <button type="submit" className="btn btn-success">
+                  Me connecter
+                </button>
+              </div>
+            </Form>
+          </div>
+        </div>
+        <div
+          style={{
+            position: "fixed",
+            width: "100%",
+            bottom: "0"
+          }}
+        >
+          <Footer />
+        </div>
+      </div>
+    );
+  }
 }
 
 // const AuthButton = withRouter(({ history }) => (
