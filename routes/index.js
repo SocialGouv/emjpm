@@ -38,6 +38,7 @@ const queries = require("../db/queries");
 // });
 
 router.use("/mandataires", require("./mandataires"));
+router.use("/mesures", require("./mesures"));
 
 router.get("/mesures", function(req, res, next) {
   console.log(res);

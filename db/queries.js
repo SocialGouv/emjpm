@@ -29,6 +29,13 @@ function getAllMandataires(ti_id) {
     .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
 }
 
+function getAllMesuresByMandataires(ti_id) {
+    return knex.from("mesures")
+        .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
+        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id));
+}
+
+
 function add(mandataire) {
   return Mandataires().insert(madataire);
 }
@@ -136,5 +143,6 @@ module.exports = {
   uploadAll: uploadAll,
   getSingleUser: getSingleUser,
   getAllServices: getAllServices,
-  getTiByUserId
+  getTiByUserId,
+  getAllMesuresByMandataires
 };

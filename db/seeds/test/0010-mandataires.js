@@ -25,5 +25,30 @@ exports.seed = function(knex, Promise) {
         specilite: "personnes agees",
         service_id: 1
       });
+    })
+.then(function() {
+        // Inserts seed entries one by one in series
+        return knex("mandataires").insert({
+            etablissement: "test2",
+            email: "panam@paris.com",
+            type: "preposes",
+            code_postal: "75000",
+            ville: "Paris",
+            telephone: "0237100000",
+            tribunal_instance: "arras",
+            latitude: 1,
+            longitude: 1,
+            adresse: "21 rue de houx",
+            capacite: 1,
+            disponibilite: 2,
+            dispo_max: 3,
+            curatelle: 4,
+            sauvegarde: 5,
+            curatelle_renforce: 6,
+            referent: "aucun",
+            commentaire: "specialite",
+            specilite: "personnes agees",
+            service_id: 1
+        });
     });
 };
