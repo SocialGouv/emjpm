@@ -22,89 +22,83 @@ import "../static/css/custom.css";
 import "../node_modules/react-tabs/style/react-tabs.css";
 
 const styles = {
-    fontFamily: "sans-serif",
-    textAlign: "center"
+  fontFamily: "sans-serif",
+  textAlign: "center"
 };
 
 class MandatairesIndex extends React.Component {
-    state = {
-        data: [],
-        datamesure: [],
-        currentMandataire: ""
-    };
+  state = {
+    data: [],
+    datamesure: [],
+    currentMandataire: ""
+  };
 
-    componentDidMount() {
-        const url = "http://localhost:3005/api/v1/srvices";
-        fetch(url, {
-            method: "POST",
-            headers: {
-                "Access-Control-Allow-Credentials": "true",
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                service_id: 1
-            })
-        })
-            .then(response => response.json())
-            .then(json => {
-                this.setState({
-                    data: json
-                });
-            });
-    }
-    render() {
-        const filteredMesures = this.state.datamesure;
-        return (
-            <div>
-                <Tabs>
-                    <TabList>
-                        <div
-                            className="panel"
-                            style={{
-                                textAlign: "left",
-                                backgroundSize: "cover",
-                                heigth: "100px !important",
-                                backgroundColor: "#cccccc"
-                            }}
-                        >
-                            <div
-                                className="panel__container"
-                                style={{ paddingBottom: "0px" }}
-                            >
-                                <div
-                                    className="container"
-                                    style={{ paddingRight: "27px", paddingLeft: "27px" }}
-                                >
-                                    <h2 style={{ color: "black" }}> Mme Isabelle Tulliez </h2>
-                                    <Tab>Mesures en cours</Tab>
-                                    <Tab>Information des antennes</Tab>
-                                </div>
-                            </div>
-                        </div>
-                    </TabList>
-                    <div className="container">
-                        <TabPanel>
-                            <TableMesure rows={filteredMesures} />
-                        </TabPanel>
-                        <TabPanel>
-                            <FormulaireMandataire />
-                        </TabPanel>
-                    </div>
-                </Tabs>
-                <Footer />
+  componentDidMount() {
+    const url = "http://localhost:3005/api/v1/srvices";
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Access-Control-Allow-Credentials": "true",
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        service_id: 1
+      })
+    })
+      .then(response => response.json())
+      .then(json => {
+        this.setState({
+          data: json
+        });
+      });
+  }
+  render() {
+    const filteredMesures = this.state.datamesure;
+    return (
+      <div>
+        <Tabs>
+          <TabList>
+            <div
+              className="panel"
+              style={{
+                textAlign: "left",
+                backgroundSize: "cover",
+                heigth: "100px !important",
+                backgroundColor: "#cccccc"
+              }}
+            >
+              <div className="panel__container" style={{ paddingBottom: "0px" }}>
+                <div className="container" style={{ paddingRight: "27px", paddingLeft: "27px" }}>
+                  <h2 style={{ color: "black" }}> Mme Isabelle Tulliez </h2>
+                  <Tab>Mesures en cours</Tab>
+                  <Tab>Information des antennes</Tab>
+                </div>
+              </div>
             </div>
-        );
-    }
+          </TabList>
+          <div className="container">
+            <TabPanel>
+              <TableMesure rows={filteredMesures} />
+            </TabPanel>
+            <TabPanel>
+              <FormulaireMandataire />
+            </TabPanel>
+          </div>
+        </Tabs>
+        <Footer />
+      </div>
+    );
+  }
 }
 
 const AppMandataireIndex = () => (
-    <div style={styles}>
-        <Navigation />
-        <div style={{ overflowY: "auto", maxHeight: "100vh" }}>
-            <MandatairesIndex />
-        </div>
+  <div style={styles}>
+    <Navigation />
+    <div style={{ overflowY: "auto", maxHeight: "100vh" }}>
+      <MandatairesIndex />
     </div>
+  </div>
 );
 
 export default AppMandataireIndex;

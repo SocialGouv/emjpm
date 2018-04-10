@@ -9,19 +9,19 @@ const CodePostalMandataire = ({ findPostcode }) => {
   };
   const submit = () => findPostcode(input.value);
   return (
-      <div>
-        <input
-          style={{
-              border: "1px solid",
-              borderColor: "black"
-          }}
-          ref={node => (input = node)}
-          type="text"
-          className="form-control"
-          placeholder="Code Postal du MJPM"
-          onKeyDown={onKeyDown}
-        />
-      </div>
+    <div>
+      <input
+        style={{
+          border: "1px solid",
+          borderColor: "black"
+        }}
+        ref={node => (input = node)}
+        type="text"
+        className="form-control"
+        placeholder="Code Postal du MJPM"
+        onKeyDown={onKeyDown}
+      />
+    </div>
   );
 };
 
