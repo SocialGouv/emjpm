@@ -25,13 +25,7 @@
 //     </GoogleMap>
 // )
 
-import {
-    Map,
-    Marker,
-    Popup,
-    TileLayer,
-    PropTypes as MapPropTypes
-} from "react-leaflet";
+import { Map, Marker, Popup, TileLayer, PropTypes as MapPropTypes } from "react-leaflet";
 import "../../static/css/custom.css";
 import CodePostalMandataire from "./CodePostalMandataire";
 
@@ -58,68 +52,59 @@ import CodePostalMandataire from "./CodePostalMandataire";
 // };
 
 class MapMesures extends React.Component {
-    state = {
-        zoom: 13
-    };
+  state = {
+    zoom: 13
+  };
 
-    render() {
-        //
-        // const markers = [
-        //     { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
-        //     { key: 'marker2', position: [51.51, -0.1], children: 'My second popup' },
-        //     { key: 'marker3', position: [51.49, -0.05], children: 'My third popup' },
-        // ]
+  render() {
+    //
+    // const markers = [
+    //     { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
+    //     { key: 'marker2', position: [51.51, -0.1], children: 'My second popup' },
+    //     { key: 'marker3', position: [51.49, -0.05], children: 'My third popup' },
+    // ]
 
-        return (
-            <div className="hello">
-                <Map
-                    center={[50.633, 3.066
-                    ]}
-                    zoom={this.state.zoom}
-                >
-                    <TileLayer
-                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                        url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-                    />
-                    {this.props.mesure &&
-                    this.props.mesure.map(manda => (
-                        <Marker
-                            key={manda.geometry.coordinates[0]}
-                            position={[
-                                manda.geometry.coordinates[1],
-                                manda.geometry.coordinates[0]
-                            ]}
-                            style={{ backgroundColor: "black" }}
-                        >
-                        </Marker>
-                    ))};
-                </Map>
-            </div>
-
-        );
-    }
+    return (
+      <div className="hello">
+        <Map center={[50.633, 3.066]} zoom={this.state.zoom}>
+          <TileLayer
+            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+          />
+          {this.props.mesure &&
+            this.props.mesure.map(manda => (
+              <Marker
+                key={manda.geometry.coordinates[0]}
+                position={[manda.geometry.coordinates[1], manda.geometry.coordinates[0]]}
+                style={{ backgroundColor: "black" }}
+              />
+            ))};
+        </Map>
+      </div>
+    );
+  }
 }
 
 export default MapMesures;
 
 {
-    /*<Map center={center} zoom={this.state.zoom}>*/
+  /*<Map center={center} zoom={this.state.zoom}>*/
 }
 {
-    /*<TileLayer*/
+  /*<TileLayer*/
 }
 {
-    /*attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"*/
+  /*attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"*/
 }
 {
-    /*url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/
+  /*url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/
 }
 {
-    /*/>*/
+  /*/>*/
 }
 {
-    /*<MyMarkersList markers={markers} />*/
+  /*<MyMarkersList markers={markers} />*/
 }
 {
-    /*</Map>*/
+  /*</Map>*/
 }

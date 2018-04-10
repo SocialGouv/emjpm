@@ -25,13 +25,7 @@
 //     </GoogleMap>
 // )
 
-import {
-    Map,
-    Marker,
-    Popup,
-    TileLayer,
-    PropTypes as MapPropTypes
-} from "react-leaflet";
+import { Map, Marker, Popup, TileLayer, PropTypes as MapPropTypes } from "react-leaflet";
 import "../../static/css/custom.css";
 import CodePostalMandataire from "./CodePostalMandataire";
 
@@ -58,75 +52,75 @@ import CodePostalMandataire from "./CodePostalMandataire";
 // };
 
 class Mapstry extends React.Component {
-    state = {
-        zoom: 13
-    };
+  state = {
+    zoom: 13
+  };
 
-    render() {
-        console.log(this.props.mesure);
-        //
-        // const markers = [
-        //     { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
-        //     { key: 'marker2', position: [51.51, -0.1], children: 'My second popup' },
-        //     { key: 'marker3', position: [51.49, -0.05], children: 'My third popup' },
-        // ]
+  render() {
+    console.log(this.props.mesure);
+    //
+    // const markers = [
+    //     { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
+    //     { key: 'marker2', position: [51.51, -0.1], children: 'My second popup' },
+    //     { key: 'marker3', position: [51.49, -0.05], children: 'My third popup' },
+    // ]
 
-        return (
-            <div>
-                <Map
-                    center={[
-                        this.props.postccodeMandataire[1] || 50.633,
-                        this.props.postccodeMandataire[0] || 3.066
-                    ]}
-                    zoom={this.state.zoom}
-                >
-                    <TileLayer
-                        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                        url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-                    />
-                    {this.props.mesure &&
-                    this.props.mesure.map(manda => (
-                        <Marker
-                            key={manda.latitude}
-                            position={[manda.latitude, manda.longitude]}
-                            style={{ backgroundColor: "black" }}
-                        >
-                            <Popup>
+    return (
+      <div>
+        <Map
+          center={[
+            this.props.postccodeMandataire[1] || 50.633,
+            this.props.postccodeMandataire[0] || 3.066
+          ]}
+          zoom={this.state.zoom}
+        >
+          <TileLayer
+            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+          />
+          {this.props.mesure &&
+            this.props.mesure.map(manda => (
+              <Marker
+                key={manda.latitude}
+                position={[manda.latitude, manda.longitude]}
+                style={{ backgroundColor: "black" }}
+              >
+                <Popup>
                   <span>
-                      {manda.nom} <br />
-                      {manda.tel} <br />
-                      {manda.type} <br />
-                      {manda.date_ouverture} <br />
+                    {manda.nom} <br />
+                    {manda.tel} <br />
+                    {manda.type} <br />
+                    {manda.date_ouverture} <br />
                   </span>
-                            </Popup>
-                        </Marker>
-                    ))};
-                </Map>
-            </div>
-        );
-    }
+                </Popup>
+              </Marker>
+            ))};
+        </Map>
+      </div>
+    );
+  }
 }
 
 export default Mapstry;
 
 {
-    /*<Map center={center} zoom={this.state.zoom}>*/
+  /*<Map center={center} zoom={this.state.zoom}>*/
 }
 {
-    /*<TileLayer*/
+  /*<TileLayer*/
 }
 {
-    /*attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"*/
+  /*attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"*/
 }
 {
-    /*url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/
+  /*url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/
 }
 {
-    /*/>*/
+  /*/>*/
 }
 {
-    /*<MyMarkersList markers={markers} />*/
+  /*<MyMarkersList markers={markers} />*/
 }
 {
-    /*</Map>*/
+  /*</Map>*/
 }
