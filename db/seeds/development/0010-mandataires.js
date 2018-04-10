@@ -24,7 +24,7 @@ exports.seed = function(knex, Promise) {
         commentaire: "specialite",
         specilite: "personnes agees",
         service_id: 1,
-        user_id: 3
+          user_id: 3
       });
     })
 .then(function() {

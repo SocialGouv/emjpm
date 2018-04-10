@@ -40,57 +40,6 @@ const queries = require("../db/queries");
 router.use("/mandataires", require("./mandataires"));
 router.use("/mesures", require("./mesures"));
 
-router.get("/mesures", function(req, res, next) {
-  console.log(res);
-  queries
-    .getAllCommentaire()
-    .then(function(commentaires) {
-      res.status(200).json(commentaires);
-    })
-    .catch(function(error) {
-      next(error);
-    });
-});
-router.get("/mesures/:id", function(req, res, next) {
-  queries
-    .getSingleCommentaire(req.params.id)
-    .then(function(commentaire) {
-      res.status(200).json(commentaire);
-    })
-    .catch(function(error) {
-      next(error);
-    });
-});
-
-router.post("/mesures", function(req, res, next) {
-  console.log(req.body);
-  queries
-    .addMesure(req.body)
-    .then(function(mesureID) {
-      return queries.getSingleMesure(mesureID);
-    })
-    .then(function(commentaire) {
-      res.status(200).json(commentaire);
-    })
-    .catch(function(error) {
-      next(error);
-    });
-});
-
-router.put("/mesures/:id", function(req, res, next) {
-  queries
-    .updateCommentaire(req.params.id, req.body)
-    .then(function() {
-      return queries.getSingle(req.params.id);
-    })
-    .then(function(commentaire) {
-      res.status(200).json(commentaire);
-    })
-    .catch(function(error) {
-      next(error);
-    });
-});
-
 // router.post("/services", function(req, res, next) {
 //   queries
 //     .getAllServices(req.body)
