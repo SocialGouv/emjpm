@@ -41,7 +41,7 @@ describe("routes : mandataireMesures", () => {
                 })
                 .then(function(res) {
                     return agent
-                        .get("api/v1/mandataires/1/mesures")
+                        .get("/api/v1/mandataires/1/mesures")
                         .then(function(res) {
                             res.status.should.eql(200);
                             res.type.should.eql("application/json");
