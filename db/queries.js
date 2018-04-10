@@ -29,12 +29,23 @@ function getAllMandataires(ti_id) {
     .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
 }
 
+function getAllMesures(mandataireID) {
+    return knex("mesures")
+        .where("mandataire_id", parseInt(mandataireID));
+}
+
 function getAllMesuresByMandataires(ti_id) {
     return knex.from("mesures")
         .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
         .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id));
 }
 
+function getMandataireByUserId(userId) {
+    return knex
+        .from("mandataires")
+        .where("user_id", parseInt(userId))
+        .first();
+}
 
 function add(mandataire) {
   return Mandataires().insert(madataire);
@@ -57,6 +68,11 @@ function update(mandataireID, updates) {
   return Mandataires()
     .where("id", parseInt(mandataireID))
     .update(updates);
+}
+function deleteMesure(showID) {
+    return knex("mesures")
+        .where("id", parseInt(showID))
+        .del();
 }
 
 function getAllUsers() {
@@ -109,9 +125,9 @@ function getSingleMesure(mesureID) {
     .where("id", parseInt(mesureID))
     .first();
 }
-function updateMesure(commentaireID, updates) {
+function updateMesure(mesureID, updates) {
   return knex("mesures")
-    .where("id", parseInt(commentaireID))
+    .where("id", parseInt(mesureID))
     .update(updates);
 }
 
@@ -144,5 +160,8 @@ module.exports = {
   getSingleUser: getSingleUser,
   getAllServices: getAllServices,
   getTiByUserId,
-  getAllMesuresByMandataires
+  getAllMesuresByMandataires,
+  getAllMesures,
+  getMandataireByUserId,
+    deleteMesure
 };
