@@ -76,9 +76,10 @@ const doLogin = formData => {
   return fetch(url, {
     credentials: "include",
     method: "POST",
+    // dont set headers to prevent cors preflight requests
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
+      //  Accept: "application/json",
+      //  "Content-Type": "application/json"
     },
     body: JSON.stringify(formData)
   }); //.then(response => response.json());
