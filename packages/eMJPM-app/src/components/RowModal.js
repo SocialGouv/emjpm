@@ -1,7 +1,8 @@
 const RowModal = ({ label, value }) => (
   <div style={{ textAlign: "left" }}>
-    <b>{label}</b><br />
-      {value}
+    <b>{label}</b>
+    <br />
+    {value}
   </div>
 );
 
