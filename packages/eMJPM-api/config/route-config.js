@@ -1,20 +1,16 @@
-(function (routeConfig) {
+(function(routeConfig) {
+  "use strict";
 
-    'use strict';
+  routeConfig.init = function(app) {
+    // *** routes *** //
+    const routes = require("../routes/index");
+    const authRoutes = require("../routes/auth");
+    const userRoutes = require("../routes/users");
 
-    routeConfig.init = function (app) {
+    // *** register routes *** //
 
-        // *** routes *** //
-        const routes = require('../routes/index');
-        const authRoutes = require('../routes/auth');
-        const userRoutes = require('../routes/users');
-
-        // *** register routes *** //
-
-        app.use('/auth', authRoutes);
-        app.use('/', routes);
-        app.use('/', userRoutes);
-
-    };
-
+    app.use("/auth", authRoutes);
+    app.use("/", routes);
+    app.use("/", userRoutes);
+  };
 })(module.exports);
