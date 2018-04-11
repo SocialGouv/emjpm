@@ -77,7 +77,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
-const port = process.env.PORT || 3005;
+const port = process.env.PORT || 4000;
 
 if (require.main === module) {
   app.listen(port, () => {

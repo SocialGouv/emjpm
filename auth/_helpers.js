@@ -56,7 +56,7 @@ function mandataireRequired(req, res, next) {
 }
 
 function loginRedirect(req, res, next) {
-  if (req.user) return res.status(401).json({ status: "You are already logged in" });
+  if (req.user) return res.status(200).json({ status: "You are already logged in" });
   return next();
 }
 
