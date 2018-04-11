@@ -69,7 +69,7 @@ const FormContent = styled.div`
   padding-bottom: 10px;
 `;
 
-const API_URL = process.env.API_URL || "http://localhost:3005";
+const API_URL = process.env.API_URL;
 
 const doLogin = formData => {
   const url = `${API_URL}/auth/login`;
