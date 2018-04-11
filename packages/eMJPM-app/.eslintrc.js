@@ -16,7 +16,8 @@ module.exports = {
     },
     plugins: ["react", "prettier"],
     globals: {
-        React: true
+        React: true,
+        process: true
     },
     rules: {
         "prettier/prettier": "error",
