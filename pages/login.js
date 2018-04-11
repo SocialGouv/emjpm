@@ -69,19 +69,20 @@ const FormContent = styled.div`
   padding-bottom: 10px;
 `;
 
-const API_URL = process.env.API_URL || "http://localhost:3005";
+const API_URL = process.env.API_URL;
 
 const doLogin = formData => {
   const url = `${API_URL}/auth/login`;
   return fetch(url, {
     credentials: "include",
     method: "POST",
+    // dont set headers to prevent cors preflight requests
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
+      //  Accept: "application/json",
+        "Content-Type": "application/json"
     },
     body: JSON.stringify(formData)
-  }).then(response => response.json());
+  }); //.then(response => response.json());
 };
 
 class LoginIndex extends React.Component {
@@ -98,9 +99,11 @@ class LoginIndex extends React.Component {
       },
       () => {
         doLogin(formData)
-          .then(json => {
-            // DO REDIR
-            Router.replace("/tis");
+          .then(res => {
+            if (res.status > 300) {
+              throw new Error(res.status);
+            }
+            Router.push("/tis");
           })
           .catch(e => {
             this.setState({

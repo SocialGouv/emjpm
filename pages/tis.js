@@ -127,7 +127,7 @@ const sortByDispo = (a, b) => {
   return 0;
 };
 
-const API_URL = process.env.API_URL || "http://localhost:3005";
+const API_URL = process.env.API_URL;
 
 class Mandataires extends React.Component {
   state = {
