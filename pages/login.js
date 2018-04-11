@@ -79,7 +79,7 @@ const doLogin = formData => {
     // dont set headers to prevent cors preflight requests
     headers: {
       //  Accept: "application/json",
-      //  "Content-Type": "application/json"
+        "Content-Type": "application/json"
     },
     body: JSON.stringify(formData)
   }); //.then(response => response.json());
