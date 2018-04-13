@@ -16,28 +16,36 @@ const schema = {
   }
 };
 
+
+
+const API_URL = process.env.API_URL;
+
 const formData = {};
+
+const uiSchema = {
+    co_comment: {
+            "ui:widget": "textarea"
+        }
+}
 
 class Commentaire extends React.Component {
   state = {
     data: [],
-    datamesure: [],
+    datamesure: "",
     updatemessage: ""
   };
 
   componentDidMount() {
-    const url = "http://localhost:3005/api/v1/commentaires/index";
+      console.log(this.props.currentMandataire.mandataire_id)
+    const url = `${API_URL}/api/v1/mandataires/${ this.props.currentMandataire.mandataire_id }/commentaires`;
     fetch(url, {
-      method: "POST",
+        credentials: "include",
+      method: "GET",
       headers: {
         "Access-Control-Allow-Credentials": "true",
         Accept: "application/json",
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        mandataire_id: this.props.currentMandataire.mandataire_id,
-        user_id: 1
-      })
+      }
     })
       .then(response => response.json())
       .then(json => {
@@ -51,75 +59,51 @@ class Commentaire extends React.Component {
   }
 
   onSubmit = ({ formData }) => {
-    const url = "http://localhost:3005/api/v1/commentaires";
-    fetch(url, {
+    const url = `${API_URL}/api/v1/mandataires/${ this.props.currentMandataire.mandataire_id }/commentaires`;
+      fetch(url, {
+      credentials: "include",
       method: "POST",
       headers: {
-        "Access-Control-Allow-Credentials": "true",
-        Accept: "application/json",
-        "Content-Type": "application/json"
+          "Access-Control-Allow-Credentials": "true",
+          Accept: "application/json",
+          "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        co_comment: formData.co_comment,
-        mandataire_id: this.props.currentMandataire.mandataire_id,
-        user_id: 1
+        co_comment: formData.co_comment
       })
     })
       .then(response => response.json())
       .then(json => {
         this.setState({
-          datamesure: json
+          data: json
         });
-      });
-  };
-
-  onUpdate = ({ comment }) => {
-    const url = "http://localhost:3005/api/v1/commentaires";
-    fetch(url, {
-      method: "PUT",
-      headers: {
-        "Access-Control-Allow-Credentials": "true",
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        co_id: comment.id,
-        co_comment: this.state.updatemessage
       })
-    })
-      .then(response => response.json())
-      .then(json => {
-        this.setState({
-          datamesure: json
-        });
-      });
+    .catch(function(error) {
+  });
   };
 
   onDelete = comments => {
-    const url = "http://localhost:3005/api/v1/commentaires";
+      const url = `${API_URL}/api/v1/mandataires/${ this.props.currentMandataire.mandataire_id }/commentaires/${ comments.co_id }`;
     fetch(url, {
+      credentials: "include",
       method: "DELETE",
       headers: {
         "Access-Control-Allow-Credentials": "true",
         Accept: "application/json",
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        co_id: comments.co_id
-      })
+      }
     })
       .then(response => response.json())
       .then(json => {
         this.setState({
-          datamesure: json
+          data: json
         });
       });
   };
 
   render() {
-    const formData = {
-      co_comment: `${this.state.data}`
-    };
+      console.log(111)
+console.log(this.state.data)
 
     return (
       <div className="form-group">
@@ -128,7 +112,7 @@ class Commentaire extends React.Component {
         </label>
         {/*<textarea className="form-control" id="exampleFormControlTextarea1" placeholder={"Ecrivez votre note"} rows="3" style={{boxShadow: "3px 3px"}}> </textarea>*/}
         <br />
-        <Form schema={schema} formData={formData} onSubmit={this.onSubmit}>
+        <Form schema={schema} formData={formData} uiSchema={uiSchema} onSubmit={this.onSubmit}>
           <div style={{ textAlign: "left", paddingBottom: "10px" }}>
             <button
               type="submit"
@@ -145,26 +129,19 @@ class Commentaire extends React.Component {
         </Form>
 
         <hr />
+         < div style={{overflow: "scroll", height: "250px"}}>
         {this.state.data.map(comments => (
-          <div>
+          <div id={comments.id}>
             <div style={{ backgroundColor: "#b5b5b5", fontSize: "0.8em" }}>
               {" "}
               {comments.co_comment} <br />
             </div>
-            <button type="submit" onClick={() => this.onDelete(comments)}>
-              {" "}
-              supprimer{" "}
-            </button>
-
-            <div>
-              <input type="text" value={comments.co_comment} onChange={e => this.updateState(e)} />
-              <button type="submit" onClick={() => this.onUpdate(comments)}>
-                {" "}
-                supprimer{" "}
-              </button>
-            </div>
+Ajouté le : {comments.postDate.slice(0,10)} {" "}
+              <a type="submit" onClick={() => this.onDelete(comments)}> supprimer</a>
+              <br />
           </div>
         ))}
+      </div>
       </div>
     );
   }
