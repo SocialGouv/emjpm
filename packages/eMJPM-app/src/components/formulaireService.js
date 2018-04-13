@@ -13,7 +13,7 @@ import apiFetch from "./Api";
 const schema = {
     title: "Modifier vos informations",
     type: "object",
-    required: ['nom','prenom','telephone','adresse','code_postal','ville','secretariat','nb_secretariat'],
+    required: [],
     properties: {
         nom: { type: "string", title: "Nom", default: "" },
         prenom: { type: "string", title: "Prénom", default: "" },
@@ -60,7 +60,9 @@ class FormulaireMandataire extends React.Component {
                 ville: formData.ville,
                 dispo_max: formData.dispo_max,
                 secretariat: formData.secretariat,
-                nb_secretariat: formData.nb_secretariat
+                nb_secretariat: formData.nb_secretariat,
+                disponibilite: formData.disponibilite
+
             })
         }).then(json => {
             this.setState({
@@ -92,7 +94,8 @@ class FormulaireMandataire extends React.Component {
             nb_secretariat: `${this.props.currentMandataireModal.nb_secretariat}`,
             email: `${this.props.currentMandataireModal.email}`,
             code_postal: `${this.props.currentMandataireModal.code_postal}`,
-            dispo_max: `${this.props.currentMandataireModal.dispo_max}`
+            dispo_max: `${this.props.currentMandataireModal.dispo_max}`,
+            disponibilite: `${this.props.currentMandataireModal.disponibilite}
         };
         return (
             <div>
@@ -137,6 +140,11 @@ class FormulaireMandataire extends React.Component {
                                     this.props.currentMandataireModal.nb_secretariat
                                 } <br />
                                     <br />
+                                    <b> Mesure disponible </b>
+                                    <br />
+
+                                    {this.props.currentMandataireModal.disponibilite}
+                                    <br />
                                     <button className={"btn btn-dark"} onClick={this.openModal} >
                                         Modifier mes information
                                     </button>
@@ -155,7 +163,6 @@ class FormulaireMandataire extends React.Component {
                     className="ModalInformation"
                     overlayClassName="Overlay"
                 >
-                    <button onClick={this.closeModal}>X</button>
                     <Form schema={schema} formData={formData} onSubmit={this.onSubmit}>
                         <div style={{ textAlign: "left", paddingBottom: "10px" }}>
                             <button type="submit" className="btn btn-success">

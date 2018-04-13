@@ -28,6 +28,8 @@ const styles = {
   textAlign: "center"
 };
 
+const API_URL = process.env.API_URL;
+
 const customStyles = {
   content: {
     top: "50%",
@@ -57,6 +59,7 @@ const customStyles = {
 //             return res;
 //         })
 //         .then(res => res.json());
+
 
 const MapSearch = dynamic(import("../src/components/Map"), {
   ssr: false,
@@ -149,8 +152,6 @@ const sortByDispo = (a, b) => {
   return 0;
 };
 
-const API_URL = process.env.API_URL;
-
 class Mandataires extends React.Component {
   state = {
     data: [],
@@ -216,6 +217,20 @@ class Mandataires extends React.Component {
     //     });
   }
 
+    onlogout = () => {
+        console.log("098765")
+        fetch(`${API_URL}/auth/logout`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            }})
+            .then(response => response.json())
+            .then(json => {
+                Router.push("/login");
+            });
+    };
+
   openModal = mandataire => {
     this.setState({ modalIsOpen: true, currentMandataire: mandataire });
   };
@@ -263,6 +278,9 @@ class Mandataires extends React.Component {
 
     return (
       <div>
+          <button type="submit" className="nav-link" onClick={this.onlogout}>Logout</button>
+        <Navigation
+              onlogout={this.onlogout} />
         <PanelGris
           findPostcode={this.findPostcode}
           updateFilters={this.updateFilters}
@@ -291,6 +309,7 @@ class Mandataires extends React.Component {
               className="Modal"
               overlayClassName="Overlay"
             >
+                <button onClick={this.closeModal}>X</button>
               {this.state.currentMandataire && (
                 <div className="container" style={{ marginTop: "30px" }}>
                   <div className="row">
@@ -360,7 +379,6 @@ class Mandataires extends React.Component {
 
 const App = () => (
   <div style={styles}>
-    <Navigation />
     <div style={{ overflowY: "auto", maxHeight: "100vh" }}>
       <Mandataires />
     </div>

@@ -34,6 +34,7 @@ import App from "./index";
 import AppLogin from "./login";
 import apiFetch from "../src/components/Api";
 import FooterBottom from "../src/components/FooterBottom"
+import Router from "next/router";
 const styles = {
   fontFamily: "sans-serif",
   textAlign: "center"
@@ -43,6 +44,7 @@ const MapSearchMesures = dynamic(import("../src/components/MapMesures"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
+const API_URL = process.env.API_URL;
 
 class MandatairesIndex extends React.Component {
   state = {
@@ -89,11 +91,30 @@ class MandatairesIndex extends React.Component {
           });
   }
 
+    onlogout = () => {
+      console.log("098765")
+        fetch(`${API_URL}/auth/logout`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            }})
+            .then(response => response.json())
+            .then(json => {
+                Router.push("/login");
+            });
+    };
+
+    updateMesure = mesures => {
+        this.setState({datamesure: mesures })
+    };
+
   render() {
     const filteredMesures = this.state.datamesure;
     return (
       <div>
-
+          <button type="submit" className="nav-link" onClick={this.onlogout}>Logout</button>
+          <Navigation  />
         <Tabs>
           <TabList>
             <div
@@ -116,7 +137,8 @@ class MandatairesIndex extends React.Component {
           </TabList>
           <div className="container">
             <TabPanel>
-              <TableMesure rows={filteredMesures} />
+              <TableMesure rows={filteredMesures}
+                           updateMesure={ this.updateMesure }/>
             </TabPanel>
             <TabPanel>
               <FormulaireMandataire currentMandataireModal={this.state.currentMandataire} />
@@ -130,7 +152,7 @@ class MandatairesIndex extends React.Component {
 
 const Apprender = () => (
     <div style={styles}>
-            <Navigation />
+
 
         <div style={{ overflowY: "auto", maxHeight: "70vh" }}>
             <MandatairesIndex />
