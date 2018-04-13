@@ -33,7 +33,12 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         if (err) {
           return next(err);
         }
-        return handleResponse(res, 200, "success");
+        console.log(user.mandataire)
+        if (user.mandataire === true){
+        return handleResponse(res, 200,"success" ,"/mandataires_index");
+        } else {
+        return handleResponse(res, 200, "success" , "/tis" );
+        }
       });
     }
   })(req, res, next);
@@ -44,8 +49,8 @@ router.get("/logout", authHelpers.loginRequired, (req, res, next) => {
   handleResponse(res, 200, "success");
 });
 
-function handleResponse(res, code, statusMsg) {
-  res.status(code).json({ status: statusMsg });
+function handleResponse(res, code, statusMsg ,url) {
+  res.status(code).json({ status: statusMsg ,url: url });
 }
 
 module.exports = router;
