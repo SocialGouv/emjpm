@@ -22,8 +22,8 @@ class TableMesure extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className="col-lg-12" style={{ padding: "0px" }}>
+      <div className="container">
+        <div className="col-lg-12">
           <br />
           <div className="row">
             <button
@@ -59,7 +59,7 @@ class TableMesure extends React.Component {
               </td>
 
               <td
-                style={{ width: "20%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
+                style={{ width: "22%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
               >
                 <b>Résidence du majeur </b>
               </td>
@@ -84,7 +84,7 @@ class TableMesure extends React.Component {
                 <b> Age </b>
               </td>
               <td
-                style={{ width: "20%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
+                style={{ width: "10%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
               >
                 <b> Statut </b>
               </td>
@@ -92,7 +92,7 @@ class TableMesure extends React.Component {
           </thead>
           <tbody>
             {this.props.rows.map(mesure => (
-              <TableRowMesure key={mesure.telephone} mesure={mesure} />
+              <TableRowMesure key={mesure.id} mesure={mesure} />
             ))}
           </tbody>
         </table>

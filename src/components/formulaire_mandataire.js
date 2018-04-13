@@ -8,185 +8,170 @@ import "../../static/css/footer.css";
 import "../../static/css/custom.css";
 import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
+import apiFetch from "./Api";
 
 const schema = {
-  title: "Se connecter",
-  type: "object",
-  required: [],
-  properties: {
-    message: { type: "string", title: "message", default: "" },
-    type: { type: "string", title: "type", default: "" },
-    etablissement: { type: "string", title: "etablissement", default: "" },
-    adresse: { type: "string", title: "adresse", default: "" },
-    telephone: { type: "string", title: "telephone", default: "" },
-    email: { type: "string", title: "email", default: "" },
-    code_postal: { type: "string", title: "coe_postal", default: "" },
-    ville: { type: "string", title: "ville", default: "" },
-    dispo_max: { type: "string", title: "dispo_max", default: "" }
-  }
+    title: "Modifier vos informations",
+    type: "object",
+    required: [],
+    properties: {
+        nom: { type: "string", title: "Nom", default: "" },
+        prenom: { type: "string", title: "Prénom", default: "" },
+        telephone: { type: "string", title: "Téléphone", default: "" },
+        telephone_portable: {
+            type: "string",
+            title: "Téléphone Portable",
+            default: ""
+        },
+        email: { type: "string", title: "Adresse email", default: "" },
+        adresse: { type: "string", title: "Rue", default: "" },
+        code_postal: { type: "string", title: "Code Postal", default: "" },
+        ville: { type: "string", title: "Commune", default: "" },
+        dispo_max: {
+            type: "string",
+            title: "Nombre de mesures souhaitées",
+            default: ""
+        },
+        secretariat: { type: "string", title: "Secretariat", default: "" },
+        nb_secretariat: { type: "string", title: "", default: "" }
+    }
 };
 
 const formData = {};
 
 class FormulaireMandataire extends React.Component {
-  state = {
-    data: [],
-    datamesure: [],
-    currentMandataire: ""
-  };
-
-  // componentDidMount() {
-  //     const urlmesure = "http://localhost:3005/api/v1/mandataires/1";
-  //     fetch(urlmesure)
-  //         .then(response => response.json())
-  //         .then(json => {
-  //             this.setState({
-  //                 datamesure: json
-  //             });
-  //         });
-  // }
-  // const url = `http://localhost:3005/api/v1/mandataires/${this.props.currentMandataireModal.id}`;
-
-  onSubmit = ({ formData }) => {
-    // const url = `http://localhost:3005/mandataires/${this.props.currentMandataireModal.id}`;
-
-    const url = `http://localhost:3005/mandataires/1`;
-    fetch(url, {
-      method: "PUT",
-      headers: {
-        "Access-Control-Allow-Credentials": "true",
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        type: formData.type,
-        etablissement: formData.etablissement,
-        adresse: formData.adresse,
-        telephone: formData.telephone,
-        email: formData.email,
-        code_postal: formData.code_postal,
-        ville: formData.ville,
-        dispo_max: formData.dispo_max
-      })
-    })
-      .then(response => response.json())
-      .then(json => {
-        this.setState({
-          datamesure: json
-        });
-      });
-  };
-
-  openModal = mandataire => {
-    this.setState({
-      modalIsOpen: true,
-      currentMandataireModal: this.props.currentMandataireModal
-    });
-  };
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
-  };
-  render() {
-    const formData = {
-      type: `${this.props.currentMandataireModal.type}`,
-      etablissement: `${this.props.currentMandataireModal.etabissement}`,
-      adresse: `${this.props.currentMandataireModal.adresse}`,
-      telephone: `${this.props.currentMandataireModal.telephone}`,
-      email: `${this.props.currentMandataireModal.email}`,
-      code_postal: `${this.props.currentMandataireModal.code_postal}`,
-      ville: `${this.props.currentMandataireModal.ville}`,
-      dispo_max: `${this.props.currentMandataireModal.dispo_max}`
+    state = {
+        data: [],
+        datamesure: [],
+        currentMandataire: ""
     };
-    console.log(this.state.datamesure);
-    return (
-      <div>
-        {this.props.currentMandataireModal && (
-          <div className="container" style={{ marginTop: "30px" }}>
-            <div className="row">
-              <div className="col-6">
-                <div style={{ textAlign: "left" }}>
-                  {this.props.currentMandataireModal.type}
-                  services
-                </div>
-                <b style={{ textAlign: "left", fontSize: "1.5em" }}>
-                  {this.props.currentMandataireModal.etablissement}
-                </b>
 
-                <RowModal value={this.props.currentMandataireModal.adresse} />
-                <div style={{ textAlign: "left" }}>
-                  {this.props.currentMandataireModal.code_postal}{" "}
-                  {this.props.currentMandataireModale.ville}
-                </div>
-                <br />
-                {/*<RowModal*/}
-                {/*label="Contact"*/}
-                {/*value={this.state.datamesure.contact}*/}
-                {/*/>*/}
-                <div style={{ textAlign: "left" }}>
-                  {this.props.currentMandataireModal.telephone}
-                </div>
-                <div style={{ textAlign: "left" }}>{this.props.currentMandataireModal.email}</div>
-                <br />
+    onSubmit = ({ formData }) => {
+        apiFetch(`/mandataires/1`, {
+            method: "PUT",
+            body: JSON.stringify({
+                nom: formData.nom,
+                prenom: formData.prenom,
+                telephone: formData.telephone,
+                telephone_portable: formData.telephone_portable,
+                email: formData.email,
+                adresse: formData.adresse,
+                code_postal: formData.code_postal,
+                ville: formData.ville,
+                dispo_max: formData.dispo_max,
+                secretariat: formData.secretariat,
+                nb_secretariat: formData.nb_secretariat
+            })
+        }).then(json => {
+            this.setState({
+                currentMandataire: json
+            });
+        });
+    };
 
-                {/*<RowModal*/}
-                {/*label="Nombre de mesures souhaités"*/}
-                {/*value={this.state.datamesure.ti}*/}
-                {/*/>*/}
+    openModal = mandataire => {
+        this.setState({
+            modalIsOpen: true,
+            currentMandataireModal: this.props.currentMandataireModal
+        });
+    };
+    closeModal = () => {
+        this.setState({ modalIsOpen: false });
+    };
+    render() {
+        const formData = {
+            nom: `${this.props.currentMandataireModal.nom}`,
+            prenom: `${this.props.currentMandataireModal.prenom}`,
+            telephone: `${this.props.currentMandataireModal.telephone}`,
+            telephone_portable: `${
+                this.props.currentMandataireModal.telephone_portable
+                }`,
+            ville: `${this.props.currentMandataireModal.ville}`,
+            etablissement: `${this.props.currentMandataireModal.etabissement}`,
+            adresse: `${this.props.currentMandataireModal.adresse}`,
+            secretariat: `${this.props.currentMandataireModal.secretariat}`,
+            nb_secretariat: `${this.props.currentMandataireModal.nb_secretariat}`,
+            email: `${this.props.currentMandataireModal.email}`,
+            code_postal: `${this.props.currentMandataireModal.code_postal}`,
+            dispo_max: `${this.props.currentMandataireModal.dispo_max}`
+        };
+        return (
+            <div>
+                {this.props.currentMandataireModal && (
+                    <div className="container" style={{ marginTop: "30px" }}>
+                        <div className="row">
+                            <div className="col-6">
+                                <div style={{ textAlign: "left" }}>
+                                    <b>
+                                        {this.props.currentMandataireModal.prenom}{" "}
+                                        {this.props.currentMandataireModal.nom}
+                                    </b>
+                                    <br />
+                                    {this.props.currentMandataireModal.type.toUpperCase()}
 
-                {/*<RowModal*/}
-                {/*label="Secrétariat"*/}
-                {/*value={this.state.datamesure.ti}*/}
-                {/*/>*/}
+                                <br />
+                                    <br />
+                                <b>Contact</b>
+                                <br />
+                                {this.props.currentMandataireModal.prenom}{" "}
+                                {this.props.currentMandataireModal.nom}
+                                <br />
+                                {this.props.currentMandataireModal.telephone}
+                                <br />
+                                {this.props.currentMandataireModal.telephone_portable}
+                                    <br />
+                                    <br />
+                                    <b> Adresse</b>
+                                    <br />
+                                    {this.props.currentMandataireModal.adresse}<br />
+                                    {this.props.currentMandataireModal.code_postal}{" "}<br />
+                                    {this.props.currentMandataireModal.ville}
+                                <br />
+                                    <br />
+                                    <b> Nombre de mesures souhaitées</b><br />
+                                    {this.props.currentMandataireModal.dispo_max}
+                                <br />
+                                    <br />
+                                    <b> Secrétariat</b>
+                                    <br />
+                                    {this.props.currentMandataireModal.secretariat} - {
+                                    this.props.currentMandataireModal.nb_secretariat
+                                } <br />
+                                    <br />
+                                    <b>  Seulement pour les Services <br /> Mesure disponible </b>
+                                    <br />
 
-                {/*<RowModal*/}
-                {/*label="Tribunal Instance"*/}
-                {/*value={this.state.datamesure.ti}*/}
-                {/*/>*/}
-                <br />
-                <div style={{ align: "center" }}>
-                  <button className={"btn btn-dark"} onClick={this.openModal} />
-                </div>
-              </div>
-              <div className="col-6">
-                <div
-                  className="greenrectangleModal"
-                  style={{
-                    verticalAlign: "middle",
-                    textAlign: "center",
-                    borderBottom: "20px",
-                    lineHeight: "40px"
-                  }}
+                                    {this.props.currentMandataireModal.disponibilite}
+                                    <br />
+                                    <button className={"btn btn-dark"} onClick={this.openModal} >
+                                        Modifier mes information
+                                    </button>
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                )}
+
+                <Modal
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}
+                    contentLabel="mandataire"
+                    background="#e9ecef"
+                    className="ModalInformation"
+                    overlayClassName="Overlay"
                 >
-                  <div>
-                    Mesures en cours : {this.props.currentMandataireModal.disponibilite} /{" "}
-                    {this.props.currentMandataireModal.dispo_max}
-                  </div>
-                </div>
-                <br />
-              </div>
+                    <Form schema={schema} formData={formData} onSubmit={this.onSubmit}>
+                        <div style={{ textAlign: "left", paddingBottom: "10px" }}>
+                            <button type="submit" className="btn btn-success">
+                                Enregistrer
+                            </button>
+                        </div>
+                    </Form>
+                </Modal>
             </div>
-          </div>
-        )}
-
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          contentLabel="mandataire"
-          background="#e9ecef"
-          className="Modal"
-          overlayClassName="Overlay"
-        >
-          <Form schema={schema} formData={formData} onSubmit={this.onSubmit}>
-            <div style={{ textAlign: "left", paddingBottom: "10px" }}>
-              <button type="submit" className="btn btn-success">
-                Enregistrer
-              </button>
-            </div>
-          </Form>
-        </Modal>
-      </div>
-    );
-  }
+        );
+    }
 }
 
 export default FormulaireMandataire;
