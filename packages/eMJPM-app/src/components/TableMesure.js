@@ -92,7 +92,9 @@ class TableMesure extends React.Component {
           </thead>
           <tbody>
             {this.props.rows.map(mesure => (
-              <TableRowMesure key={mesure.id} mesure={mesure} />
+              <TableRowMesure key={mesure.id} mesure={mesure}
+
+                              updateMesure={this.props.updateMesure}/>
             ))}
           </tbody>
         </table>
