@@ -85,6 +85,8 @@ function getSingleUser(userID) {
     .first();
 }
 
+
+
 function getAllCommentaires(mandataire_id, ti_id) {
   return Commentaires().where({
     mandataire_id: parseInt(mandataire_id),
@@ -115,6 +117,11 @@ function updateCommentaire(commentaireID, updates) {
 function getAllMesure(mandataire__id) {
   return knex("mesures").where("mandataire_id", parseInt(mandataire__id));
 }
+
+function CapaciteMandataire(mandataireID) {
+    return knex("mesures").count('*').where({"mandataire_id": parseInt(mandataireID),status: 'Mesure en cours'});
+}
+
 
 function addMesure(mesureID) {
   return knex("mesures").insert(mesureID);
@@ -163,5 +170,6 @@ module.exports = {
   getAllMesuresByMandataires,
   getAllMesures,
   getMandataireByUserId,
-    deleteMesure
+    deleteMesure,
+    CapaciteMandataire
 };

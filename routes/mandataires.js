@@ -48,6 +48,25 @@ router.get("/",loginRequired, async (req, res, next) => {
         });
 });
 
+
+
+router.put("/:mandataireId/capacite", async (req, res, next) => {
+    const ti = await queries.getMandataireByUserId(req.user.id);
+    const capaciteMandataire = queries.CapaciteMandataire(ti.id)
+    console.log (capaciteMandataire)
+    queries
+        .update(ti.id, {disponibilite: capaciteMandataire})
+        .then(function() {
+            return queries.getSingle(ti.id);
+        })
+        .then(function(mandataire) {
+            res.status(200).json(mandataire);
+        })
+        .catch(function(error) {
+            next(error);
+        });
+});
+
 // router.post("/", function(req, res, next) {
 //   queries
 //     .add(req.body)
