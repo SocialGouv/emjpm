@@ -3,6 +3,10 @@ const express = require("express");
 const router = express.Router();
 const queries = require("../db/queries");
 
+
+const {loginRequired} = require("../auth/_helpers");
+
+
 router.put("/:mandataireId", async (req, res, next) => {
     const ti = await queries.getMandataireByUserId(req.user.id);
     queries
@@ -30,7 +34,8 @@ router.get("/:mandataireId", async (req, res, next) => {
         });
 });
 
-router.get("/", async (req, res, next) => {
+
+router.get("/",loginRequired, async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
     queries
         .getAllMandataires(ti.id)
