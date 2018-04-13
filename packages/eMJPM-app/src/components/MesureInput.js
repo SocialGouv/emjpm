@@ -17,6 +17,7 @@ const schema = {
       enum: ["Curatelle", "Curatelle renforcée", "Tutelle", "Protetion de Justice"]
     },
     codePostal: { type: "string", title: "Code Postal" },
+      etablissement: { type: "string", title: "Etablissement" },
     commune: { type: "string", title: "Commune" },
     civilite: { type: "string", enum: ["Madame", "Monsieur"] },
     annee: { type: "integer" },
@@ -39,7 +40,7 @@ const getPostCodeCoordinates = postCode => {
   }
   return fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
     .then(response => response.json())
-    .then(json => json);
+   // .then(json => json);
 };
 
 class MesureInput extends React.Component {
@@ -48,11 +49,13 @@ class MesureInput extends React.Component {
     datamesure: [],
     currentMandataire: "",
     showResults: false,
-    postcodeCoordinates: ""
+    postcodeCoordinates: "",
+      resultcapcite: ""
   };
 
   findPostcode = postCode =>
     getPostCodeCoordinates(postCode).then(coordinates =>
+        console.log('coordinates', coordinates, postCode),
       this.setState({
         postcodeCoordinates: coordinates
       })
@@ -70,29 +73,38 @@ class MesureInput extends React.Component {
     console.log(this.state.postcodeCoordinates);
 
 
-
-      apiFetch(`/mandataires/1/mesures`,{
-        method: "POST",
-        body: JSON.stringify({
-        code_postal: formData.codePostal,
-        ville: formData.commune,
-        etablissement: "hello",
-        latitude: 1,
-        longitude: 1,
-        mandataire_id: 1,
-        annee: formData.annee,
-        type: formData.type,
-        date_ouverture: formData.ouverture,
-        residence: formData.residence,
-        civilite: formData.civilite
-        // longitude: this.state.postcodeCoordinates[0],
-        // latitude: this.state.postcodeCoordinates[1],
-      })
-    }).then(json => {
-        this.setState({
-          datamesure: json
-        });
-      });
+    getPostCodeCoordinates(formData.codePostal).then(coordinates => {
+      console.log(coordinates);
+        apiFetch(`/mandataires/1/mesures`, {
+            method: "POST",
+            body: JSON.stringify({
+                code_postal: formData.codePostal,
+                ville: formData.commune,
+                etablissement: formData.etablissement,
+                latitude: coordinates[0],
+                longitude: coordinates[1],
+                annee: formData.annee,
+                type: formData.type,
+                date_ouverture: formData.ouverture,
+                residence: formData.residence,
+                civilite: formData.civilite,
+                status: "Mesure en cours"
+                // longitude: this.state.postcodeCoordinates[0],
+                // latitude: this.state.postcodeCoordinates[1],
+            })
+        }).then(json => {
+            return apiFetch(`/mandataires/1/capacite`, {
+                method: "PUT"
+            }).then(() => {
+              return json
+            })
+        }).then(json2 => {
+            this.props.updateMesure(json2);
+        }).catch(e => {
+          console.log(e)
+            throw e
+        })
+    })
   };
 
   render() {
