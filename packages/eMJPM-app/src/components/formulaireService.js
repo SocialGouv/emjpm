@@ -39,7 +39,7 @@ const schema = {
 
 const formData = {};
 
-class FormulaireMandataire extends React.Component {
+class FormulaireService extends React.Component {
     state = {
         data: [],
         datamesure: [],
@@ -95,7 +95,7 @@ class FormulaireMandataire extends React.Component {
             email: `${this.props.currentMandataireModal.email}`,
             code_postal: `${this.props.currentMandataireModal.code_postal}`,
             dispo_max: `${this.props.currentMandataireModal.dispo_max}`,
-            disponibilite: `${this.props.currentMandataireModal.disponibilite}
+            disponibilite: `${this.props.currentMandataireModal.disponibilite}`
         };
         return (
             <div>
@@ -176,4 +176,4 @@ class FormulaireMandataire extends React.Component {
     }
 }
 
-export default FormulaireMandataire;
+export default FormulaireService;

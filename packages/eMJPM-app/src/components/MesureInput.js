@@ -63,16 +63,6 @@ class MesureInput extends React.Component {
 
 
   onSubmit = ({ formData }) => {
-    console.log(this.state.postcodeCoordinates);
-    console.log(222);
-    console.log(getPostCodeCoordinates(formData.codePostal));
-    console.log(333);
-    this.findPostcode(formData.codePostal);
-    console.log(formData);
-    console.log(this.findPostcode(formData.codePostal));
-    console.log(this.state.postcodeCoordinates);
-
-
     getPostCodeCoordinates(formData.codePostal).then(coordinates => {
       console.log(coordinates);
         apiFetch(`/mandataires/1/mesures`, {
