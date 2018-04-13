@@ -2,6 +2,7 @@ import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
+import FooterBottom from "../src/components/FooterBottom"
 
 import Navigation from "../src/components/Navigation";
 import Footer from "../src/components/Footer";
@@ -72,47 +73,52 @@ const FormContent = styled.div`
 const API_URL = process.env.API_URL;
 
 const doLogin = formData => {
-  const url = `${API_URL}/auth/login`;
-  return fetch(url, {
-    credentials: "include",
-    method: "POST",
-    // dont set headers to prevent cors preflight requests
-    headers: {
-      //  Accept: "application/json",
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify(formData)
-  }); //.then(response => response.json());
+    const url = `${API_URL}/auth/login`;
+    return fetch(url, {
+        credentials: "include",
+        method: "POST",
+        headers: {
+            //  Accept: "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+    })
+        .then(res => {
+            console.log(res)
+            if (res.status > 400) {
+                // unauthorized
+                throw new Error(res.status);
+            }
+
+            return res.json();
+        })
+        .then(json => {
+            console.log(json.url)
+            Router.push(json.url);
+        });
 };
 
 class LoginIndex extends React.Component {
-  state = {
-    error: null,
-    formData: {}
-  };
-
-  onSubmit = ({ formData }) => {
-    this.setState(
-      {
+    state = {
         error: null,
-        formData
-      },
-      () => {
-        doLogin(formData)
-          .then(res => {
-            if (res.status > 300) {
-              throw new Error(res.status);
+        formData: {}
+    };
+
+    onSubmit = ({ formData }) => {
+        this.setState(
+            {
+                error: null,
+                formData
+            },
+            () => {
+                doLogin(formData).catch(e => {
+                    this.setState({
+                        error: "Impossible de se connecter"
+                    });
+                });
             }
-            Router.push("/tis");
-          })
-          .catch(e => {
-            this.setState({
-              error: "Impossible de se connecter"
-            });
-          });
-      }
-    );
-  };
+        );
+    };
 
   render() {
     return (
@@ -142,11 +148,19 @@ class LoginIndex extends React.Component {
             bottom: "0"
           }}
         >
-          <Footer />
         </div>
       </div>
     );
   }
 }
 
-export default LoginIndex;
+const Apprender = () => (
+    <div>
+        <div style={{ overflowY: "auto", maxHeight: "100vh" }}>
+            <LoginIndex />
+        </div>
+        <FooterBottom />
+    </div>
+);
+
+export default Apprender;

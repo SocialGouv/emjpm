@@ -32,7 +32,8 @@ import App from "./index";
 // } from "react-router-dom";
 
 import AppLogin from "./login";
-
+import apiFetch from "../src/components/Api";
+import FooterBottom from "../src/components/FooterBottom"
 const styles = {
   fontFamily: "sans-serif",
   textAlign: "center"
@@ -69,52 +70,30 @@ class MandatairesIndex extends React.Component {
   // }
 
   componentDidMount() {
-    const url = "http://localhost:3005/api/v1/mesures/index";
-    fetch(url, {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Access-Control-Allow-Credentials": "true",
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        mandataire_id: 1
-      })
-    })
-      .then(response => response.json())
-      .then(json => {
-        this.setState({
-          datamesure: json
-        });
-      });
 
-    const mandataireurl = "http://localhost:3005/api/v1/mandataires/1";
-    fetch(mandataireurl)
-      .then(response => response.json())
-      .then(json => {
-        this.setState({
-          currentMandataire: json
-        });
-      });
+
+
+      apiFetch(`/mandataires/1/mesures`,)
+          .then(json => {
+              this.setState({
+                  datamesure: json
+              });
+          });
+
+
+      apiFetch(`/mandataires/1`,)
+          .then(json => {
+              this.setState({
+                  currentMandataire: json
+              });
+          });
   }
 
   render() {
     const filteredMesures = this.state.datamesure;
-    console.log(111);
-    console.log(
-      fetch("http://localhost:3005/api/v1/mandataires/1")
-        .then(response => response.json())
-        .then(json => {
-          this.setState({
-            currentMandataire: json
-          });
-        })
-    );
-
     return (
       <div>
-        <Navigation />
+
         <Tabs>
           <TabList>
             <div
@@ -128,7 +107,7 @@ class MandatairesIndex extends React.Component {
             >
               <div className="panel__container" style={{ paddingBottom: "0px" }}>
                 <div className="container" style={{ paddingRight: "27px", paddingLeft: "27px" }}>
-                  <h2 style={{ color: "black" }}> Mme Isabelle Tulliez </h2>
+                  <h2 style={{ color: "black" }}> {this.state.currentMandataire.nom} {this.state.currentMandataire.prenom} </h2>
                   <Tab>Mesures en cours</Tab>
                   <Tab>Vos informations</Tab>
                 </div>
@@ -139,24 +118,32 @@ class MandatairesIndex extends React.Component {
             <TabPanel>
               <TableMesure rows={filteredMesures} />
             </TabPanel>
-            {/*<TabPanel>*/}
-            {/*<MapSearchMesures mesure={filteredMesures} />*/}
-            {/*</TabPanel>*/}
-            {/*<TabPanel>*/}
-            {/*<TableMesure rows={filteredMesures} />*/}
-            {/*</TabPanel>*/}
             <TabPanel>
               <FormulaireMandataire currentMandataireModal={this.state.currentMandataire} />
             </TabPanel>
           </div>
         </Tabs>
-        <Footer />
       </div>
     );
   }
 }
 
-export default MandatairesIndex;
+const Apprender = () => (
+    <div style={styles}>
+            <Navigation />
+
+        <div style={{ overflowY: "auto", maxHeight: "70vh" }}>
+            <MandatairesIndex />
+        </div>
+        <div style={{ overflowY: "auto", maxHeight: "20vh" }}>
+            <FooterBottom />
+        </div>
+
+    </div>
+);
+
+export default Apprender;
+
 
 // const PrivateRoute = ({ component: Component, ...rest }) => (
 //     <Route

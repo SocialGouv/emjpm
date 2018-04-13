@@ -8,6 +8,8 @@ import ImageBandeau from "../src/components/ImageBandeau";
 import PanelGris from "../src/components/PanelGris";
 import Footer from "../src/components/Footer";
 import Commentaire from "../src/components/Commentaire";
+import apiFetch from "../src/components/Api";
+
 import dynamic from "next/dynamic";
 // import { Map, Marker, Popup, TileLayer } from "react-leaflet-universal";
 // import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
@@ -19,6 +21,7 @@ import "../static/css/footer.css";
 import "../static/css/custom.css";
 // import { redirectIfNotAuthenticated, getJwt } from "../lib/auth";
 // import { getUser, getCurrentUser } from "../services/userApi";
+import Router from "next/router";
 
 const styles = {
   fontFamily: "sans-serif",
@@ -35,6 +38,25 @@ const customStyles = {
     transform: "translate(-50%, -50%)"
   }
 };
+
+// const apiFetch = (route, params) =>
+//     fetch(`${API_URL}/api/v1${route}`, {
+//         method: "GET",
+//         credentials: "include",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         ...params
+//     })
+//         .then(res => {
+//             // intercept
+//             if (res.status === 401) {
+//                 Router.push("/login");
+//                 return;
+//             }
+//             return res;
+//         })
+//         .then(res => res.json());
 
 const MapSearch = dynamic(import("../src/components/Map"), {
   ssr: false,
@@ -162,25 +184,28 @@ class Mandataires extends React.Component {
   // }
 
   componentDidMount() {
-    const url = `${API_URL}/api/v1/mandataires`;
-    fetch(url, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Access-Control-Allow-Credentials": "true",
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
+
+      apiFetch("/mandataires",)
+          .then(json => {
+              this.setState({
+                  data: json
+              });
+          });
+    // const url = `${API_URL}/api/v1/mandataires`;
+    // fetch(url, {
+    //   method: "GET",
+    //   credentials: "include",
+    //   headers: {
+    //     "Access-Control-Allow-Credentials": "true",
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json"
+    //   }
       // body: JSON.stringify({
       //   ti_id: 1
       // })
-    })
-      .then(response => response.json())
-      .then(json => {
-        this.setState({
-          data: json
-        });
-      });
+    // })
+      // .then(response => response.json())
+
     // const urlmesure = "/static/mesures.json";
     // fetch(urlmesure)
     //     .then(response => response.json())
@@ -208,7 +233,6 @@ class Mandataires extends React.Component {
     );
 
   render() {
-    console.log(this.state.data);
     const filteredMandataires = filterMandataires(
       this.state.data,
       {

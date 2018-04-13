@@ -1,5 +1,6 @@
 import Form from "react-jsonschema-form";
 import TableMesure from "./TableMesure";
+import apiFetch from "./Api";
 
 const schema = {
   title: "",
@@ -9,7 +10,7 @@ const schema = {
     ouverture: {
       type: "string",
       title: "Ouverture de la mesure",
-      default: "A new task"
+
     },
     type: {
       type: "string",
@@ -57,7 +58,9 @@ class MesureInput extends React.Component {
       })
     );
 
+
   onSubmit = ({ formData }) => {
+    console.log(this.state.postcodeCoordinates);
     console.log(222);
     console.log(getPostCodeCoordinates(formData.codePostal));
     console.log(333);
@@ -65,22 +68,18 @@ class MesureInput extends React.Component {
     console.log(formData);
     console.log(this.findPostcode(formData.codePostal));
     console.log(this.state.postcodeCoordinates);
-    const url = "http://localhost:3005/api/v1/mesures";
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Access-Control-Allow-Credentials": "true",
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
+
+
+
+      apiFetch(`/mandataires/1/mesures`,{
+        method: "POST",
+        body: JSON.stringify({
         code_postal: formData.codePostal,
         ville: formData.commune,
         etablissement: "hello",
         latitude: 1,
         longitude: 1,
         mandataire_id: 1,
-        postdate: "",
         annee: formData.annee,
         type: formData.type,
         date_ouverture: formData.ouverture,
@@ -89,9 +88,7 @@ class MesureInput extends React.Component {
         // longitude: this.state.postcodeCoordinates[0],
         // latitude: this.state.postcodeCoordinates[1],
       })
-    })
-      .then(response => response.json())
-      .then(json => {
+    }).then(json => {
         this.setState({
           datamesure: json
         });
