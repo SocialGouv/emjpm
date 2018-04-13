@@ -31,7 +31,7 @@ function getAllMandataires(ti_id) {
 
 function getAllMesures(mandataireID) {
     return knex("mesures")
-        .where("mandataire_id", parseInt(mandataireID));
+        .where({"mandataire_id": parseInt(mandataireID),status: 'Mesure en cours'});
 }
 
 function getAllMesuresByMandataires(ti_id) {
@@ -112,8 +112,8 @@ function updateCommentaire(commentaireID, updates) {
     .update(updates);
 }
 
-function getAllMesure(mandataire_id) {
-  return knex("mesures").where("mandataire_id", parseInt(mandataire_id));
+function getAllMesure(mandataire__id) {
+  return knex("mesures").where("mandataire_id", parseInt(mandataire__id));
 }
 
 function addMesure(mesureID) {

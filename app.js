@@ -11,6 +11,9 @@ const authRoutes = require("./routes/auth");
 
 const app = express();
 
+
+process.on('unhandledRejection', r => console.log(r));
+
 const corsWhitelist = ["http://localhost:3000", "http://127.0.0.1:3000"];
 if (process.env.CORS_WHITELIST) {
   corsWhitelist.push(process.env.CORS_WHITELIST);
