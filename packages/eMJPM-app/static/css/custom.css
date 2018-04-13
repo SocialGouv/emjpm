@@ -86,12 +86,24 @@
 .Modal {
     position: absolute;
     width: 900px !important;
-    height: 450px !important;
+    height: 700px !important;
     top: 60px;
     left: 60px;
     right: 60px;
     bottom: 60px;
     background-color: #f2f2f2;
+}
+
+.ModalInformation {
+    position: absolute;
+    width: 900px !important;
+    height: 900px !important;
+    top: 60px;
+    left: 60px;
+    right: 60px;
+    bottom: 60px;
+    background-color: #f2f2f2;
+    overflow: scroll;
 }
 
 .Overlay {
@@ -129,4 +141,8 @@
 
 .mesure_button{
 
+}
+
+#root_co_comment{
+    height: 70px;
 }

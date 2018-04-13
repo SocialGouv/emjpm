@@ -9,7 +9,7 @@ import "../../static/css/footer.css";
 import "../../static/css/custom.css";
 import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
-
+import apiFetch from "./Api";
 // todo: improve tel parsing
 const cleanTels = tel => {
   const tel2 = tel.replace(/[.-\s]/g, "");
@@ -130,6 +130,22 @@ class TableRowMesure extends React.Component {
       });
   };
 
+
+
+    onChange = ({e}) => {
+    apiFetch(`/mandataires/1/mesures/`, {
+        method: "POST",
+        body: JSON.stringify({
+           status: e
+            // longitude: this.state.postcodeCoordinates[0],
+            // latitude: this.state.postcodeCoordinates[1],
+        })
+    }).then(json => {
+        this.setState({
+            datamesure: json
+        });
+    });
+    }
   openModal = mandataire => {
     this.setState({ modalIsOpen: true, currentMandataire: mandataire });
   };
@@ -143,25 +159,26 @@ class TableRowMesure extends React.Component {
       type,
       nom,
       contact,
-      codepostal,
+      code_postal,
       dispo_max,
       date_ouverture,
       type_mesure,
       genre,
       age,
-      sattus
-    } = this.props.mesure.properties;
+      status,
+      annee,
+      civilite
+    } = this.props.mesure;
 
     const formData = {
       date_ouverture: `${date_ouverture}`,
-      code_postal: `${codepostal}`,
+      code_postal: `${code_postal}`,
       genre: `${genre}`,
       age: `${age}`,
-      status: `${sattus}`
+      status: `${status}`
     };
 
     return (
-      <div>
         <tr style={{ cursor: "pointer" }}>
           <td
             className={`pagination-centered`}
@@ -169,46 +186,42 @@ class TableRowMesure extends React.Component {
               fontSize: "0.8em",
               color: "rgb(204, 204, 204)",
               textAlign: "left",
-              verticalAlign: "middle !important"
+                lineHeight: "40px"
             }}
           >
-            {date_ouverture}
+            {date_ouverture.slice(0,10)}
           </td>
           <Cell>
             <b>
-              {codepostal} - {ville}{" "}
+              {code_postal} - {ville}{" "}
             </b>
           </Cell>
-          <Cell>{type_mesure}</Cell>
-          <Cell>{genre} </Cell>
-          <Cell>{age} </Cell>
-          <Cell>{sattus} </Cell>
+          <Cell>{type}</Cell>
+          <Cell>{civilite} </Cell>
+          <Cell>{annee} </Cell>
+          <td>
+            <div className="dropdown" id={this.props.mesure.id}>
+                <button className="btn btn-secondary dropdown-toggle" type="button" id={this.props.mesure.id} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mesure en cours
+                </button>
+                <div className="dropdown-menu" aria-labelledby={this.props.mesure.id}>
+                    <a className="dropdown-item" href="#"> Mesure en cours</a>
+                    <a className="dropdown-item" href="#"> Eteindre mesure</a>
+                </div>
+            </div>
+          </td>
           {/*<Cell>{cleanTels(tel).map(t => <Phone key={t} num={t} />)}</Cell>*/}
           {/*<Cell style={{ width: "10% !important" }} title="Voir les détails du mandataire">*/}
           {/*<FaSearch onClick={onClick} style={{ cursor: "pointer" }} />*/}
           {/*</Cell>*/}
-        </tr>
+          </tr>
 
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="mandataire"
-          background="#e9ecef"
-          className="Modal"
-          overlayClassName="Overlay"
-        >
-          <Form schema={schema} formData={formData} onSubmit={this.onSubmit}>
-            <div style={{ textAlign: "left", paddingBottom: "10px" }}>
-              <button type="submit" className="btn btn-success">
-                Update
-              </button>
-            </div>
-          </Form>
-        </Modal>
-      </div>
-    );
-  }
+
+
+
+
+
+    ) }
 }
 
 export default TableRowMesure;
