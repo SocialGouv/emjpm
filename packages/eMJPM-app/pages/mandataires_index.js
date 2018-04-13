@@ -154,7 +154,7 @@ const Apprender = () => (
     <div style={styles}>
 
 
-        <div style={{ overflowY: "auto", maxHeight: "70vh" }}>
+        <div style={{ overflowY: "auto", maxHeight: "90vh" }}>
             <MandatairesIndex />
         </div>
         <div style={{ overflowY: "auto", maxHeight: "20vh" }}>
