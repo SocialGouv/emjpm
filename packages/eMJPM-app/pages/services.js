@@ -21,7 +21,7 @@ import "../static/css/custom.css";
 import "../node_modules/react-tabs/style/react-tabs.css";
 import App from "./index";
 
-import FormulaireServices from "../src/components/FormulaireServices";
+import FormulaireService from "../src/components/formulaireService";
 import AppLogin from "./login";
 import apiFetch from "../src/components/Api";
 import FooterBottom from "../src/components/FooterBottom"
@@ -84,7 +84,7 @@ class MandatairesIndex extends React.Component {
                     </TabList>
                     <div className="container">
                         <TabPanel>
-                            <FormulaireServices currentMandataireModal={this.state.currentMandataire} />
+                            <FormulaireService currentMandataireModal={this.state.currentMandataire} />
                         </TabPanel>
                     </div>
                 </Tabs>
