@@ -101,7 +101,8 @@ class TableRowMesure extends React.Component {
   state = {
     data: [],
     datamesure: [],
-    currentMesure: ""
+    currentMesure: "",
+    mesureId: ""
   };
 
   onSubmit = ({ formData }) => {
@@ -132,26 +133,39 @@ class TableRowMesure extends React.Component {
 
 
 
-    onChange = ({e}) => {
-    apiFetch(`/mandataires/1/mesures/`, {
-        method: "POST",
+    onClick = (e) => {
+    apiFetch(`/mandataires/1/mesures/${e}`, {
+        method: "PUT",
         body: JSON.stringify({
-           status: e
+           status: "Eteindre mesure"
             // longitude: this.state.postcodeCoordinates[0],
             // latitude: this.state.postcodeCoordinates[1],
         })
     }).then(json => {
-        this.setState({
-            datamesure: json
-        });
-    });
-    }
+            return apiFetch(`/mandataires/1/capacite`, {
+                method: "PUT"
+            }).then(() => {
+                return json
+            })
+        }).then(json2 => {
+console.log(123);
+            console.log(json2);
+        this.props.updateMesure(json2);  // callback parent with data
+        }).catch(e => {
+            console.log(e)
+            throw e
+        })
+    };
   openModal = mandataire => {
-    this.setState({ modalIsOpen: true, currentMandataire: mandataire });
+    this.setState({ modalIsOpen: true, mesureId: mandataire });
   };
-  closeModal = () => {
-    this.setState({ modalIsOpen: false });
+  closeModalAnnuler = () => {
+      this.onClick(this.state.mesureId);
+      this.closeModal()
   };
+    closeModal = () => {
+        this.setState({ modalIsOpen: false });
+    };
 
   render() {
     const {
@@ -179,7 +193,7 @@ class TableRowMesure extends React.Component {
     };
 
     return (
-        <tr style={{ cursor: "pointer" }}>
+        <tr >
           <td
             className={`pagination-centered`}
             style={{
@@ -200,20 +214,46 @@ class TableRowMesure extends React.Component {
           <Cell>{civilite} </Cell>
           <Cell>{annee} </Cell>
           <td>
-            <div className="dropdown" id={this.props.mesure.id}>
-                <button className="btn btn-secondary dropdown-toggle" type="button" id={this.props.mesure.id} data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Mesure en cours
-                </button>
-                <div className="dropdown-menu" aria-labelledby={this.props.mesure.id}>
-                    <a className="dropdown-item" href="#"> Mesure en cours</a>
-                    <a className="dropdown-item" href="#"> Eteindre mesure</a>
-                </div>
-            </div>
+              <button className={"btn btn-dark"} onClick={() => this.openModal(this.props.mesure.id)} >
+                  Eteindre la mesure
+              </button>
+              {/*<DropdownMenu userName="Chris Smith">*/}
+                  {/*<MenuItem text="Home" location="/home" />*/}
+                  {/*<MenuItem text="Edit Profile" location="/profile" />*/}
+                  {/*<MenuItem text="Change Password" location="/change-password" />*/}
+                  {/*<MenuItem text="Privacy Settings" location="/privacy-settings" />*/}
+                  {/*<MenuItem text="Delete Account" onClick={this.deleteAccount} />*/}
+                  {/*<MenuItem text="Logout" onClick={this.logout} />*/}
+              {/*</DropdownMenu>*/}
           </td>
           {/*<Cell>{cleanTels(tel).map(t => <Phone key={t} num={t} />)}</Cell>*/}
           {/*<Cell style={{ width: "10% !important" }} title="Voir les détails du mandataire">*/}
           {/*<FaSearch onClick={onClick} style={{ cursor: "pointer" }} />*/}
           {/*</Cell>*/}
+            <Modal
+                isOpen={this.state.modalIsOpen}
+                onRequestClose={this.closeModal}
+                contentLabel="mandataire"
+                background="#e9ecef"
+                className="ModalMesure"
+                overlayClassName="Overlay"
+            >
+                <button onClick={this.closeModal}>X</button>
+                <div style={{ textAlign: "center" }}>
+                    <b>
+                Eteindre la mesure? <br />
+
+              Etes vous sur de vouloir eteind cette mesure
+                    </b>
+                    <br />
+                <button type="submit" onClick={this.closeModalAnnuler} className="btn btn-success">
+                    Valider
+                </button>{" "}
+                    <button onClick={this.closeModal} className="btn btn-success">
+                        Annuler
+                    </button>
+                </div>
+            </Modal>
           </tr>
 
 

@@ -105,6 +105,17 @@
     background-color: #f2f2f2;
     overflow: scroll;
 }
+.ModalMesure{
+    position: absolute;
+    width: 20% !important;
+    height: 20% !important;
+    top: 40%;
+    left: 40%;
+    right: 60px;
+    bottom: 60px;
+    background-color: #f2f2f2;
+    overflow: scroll;
+}
 
 .Overlay {
     position: fixed;
