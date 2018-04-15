@@ -43,29 +43,6 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                 onChange={e => updateFilters({ searchNom: e.target.value })}
               />
             </div>
-            <div className="col-3">
-              <select
-                id="type"
-                className=" custom-select mr-sm-2"
-                style={{
-                  marginLeft: 0,
-                  textAlign: "left",
-                  border: "1px solid"
-                }}
-                onChange={e => updateFilters({ specialite: e.target.value })}
-              >
-                <option value="">Spécialités</option>
-                <option value="Langage des signes">Langage des signes</option>
-                <option value="Langues étrangères">Langues étrangères</option>
-                <option value="Gros patrimoine">Gros patrimoine</option>
-                <option value="Droit de filiation">Droit de filiation</option>
-                <option value="Personnes âgées">Personnes âgées</option>
-                <option value="Handicap">Handicap</option>
-                <option value="Psychopathologie">Psychopathologie</option>
-                <option value="Comportements violents">Comportements violents</option>
-                <option value="Radicalisation">Radicalisation</option>
-              </select>
-            </div>
           </div>
           <br />
           <div className="row">
@@ -84,7 +61,7 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                     })
                   }
                   type="checkbox"
-                  value="Individuels"
+                  value="Individuel "
                   className="form-check-input"
                   id="inlineCheckbox1"
                 />
@@ -111,7 +88,7 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                     })
                   }
                   type="checkbox"
-                  value="Preposes"
+                  value="Prepose"
                   className="form-check-input"
                   id="inlineCheckbox2"
                 />
@@ -137,7 +114,7 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                     })
                   }
                   type="checkbox"
-                  value="Services"
+                  value="Service"
                   className="form-check-input"
                   id="inlineCheckbox3"
                 />

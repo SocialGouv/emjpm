@@ -26,17 +26,9 @@ class TableMesure extends React.Component {
         <div className="col-lg-12">
           <br />
           <div className="row">
-            <button
-              type="button"
-              className="btn btn-success mesure_button"
-              onClick={this.onClick}
-              style={{ align: "left" }}
-            >
-              Ouvrir une nouvelle mesure
-            </button>
             <div>
               <br />
-              {this.state.showResults ? <MesureInput /> : null}
+              <MesureInput updateMesure={this.props.updateMesure} />
             </div>
           </div>
         </div>
@@ -92,9 +84,7 @@ class TableMesure extends React.Component {
           </thead>
           <tbody>
             {this.props.rows.map(mesure => (
-              <TableRowMesure key={mesure.id} mesure={mesure}
-
-                              updateMesure={this.props.updateMesure}/>
+              <TableRowMesure  key={mesure.id} mesure={mesure} updateMesure={this.props.updateMesure}/>
             ))}
           </tbody>
         </table>

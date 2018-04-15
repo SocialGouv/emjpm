@@ -1,6 +1,8 @@
 import Form from "react-jsonschema-form";
 import TableMesure from "./TableMesure";
 import apiFetch from "./Api";
+import Modal from "react-modal";
+
 
 const schema = {
   title: "",
@@ -9,8 +11,7 @@ const schema = {
   properties: {
     ouverture: {
       type: "string",
-      title: "Ouverture de la mesure",
-
+      title: "Ouverture de la mesure"
     },
     type: {
       type: "string",
@@ -19,7 +20,7 @@ const schema = {
     codePostal: { type: "string", title: "Code Postal" },
       etablissement: { type: "string", title: "Etablissement" },
     commune: { type: "string", title: "Commune" },
-    civilite: { type: "string", enum: ["Madame", "Monsieur"] },
+    civilite: { type: "string", enum: ["F", "M"] },
     annee: { type: "integer" },
     residence: { type: "string", enum: ["A Domicile", "En Etablissement"] }
   }
@@ -42,6 +43,7 @@ const getPostCodeCoordinates = postCode => {
     .then(response => response.json())
    // .then(json => json);
 };
+const formData = {}
 
 class MesureInput extends React.Component {
   state = {
@@ -50,7 +52,8 @@ class MesureInput extends React.Component {
     currentMandataire: "",
     showResults: false,
     postcodeCoordinates: "",
-      resultcapcite: ""
+      resultcapcite: "",
+      modalIsOpen: false
   };
 
   findPostcode = postCode =>
@@ -62,17 +65,19 @@ class MesureInput extends React.Component {
     );
 
 
+
+
+
   onSubmit = ({ formData }) => {
     getPostCodeCoordinates(formData.codePostal).then(coordinates => {
-      console.log(coordinates);
         apiFetch(`/mandataires/1/mesures`, {
             method: "POST",
             body: JSON.stringify({
                 code_postal: formData.codePostal,
                 ville: formData.commune,
                 etablissement: formData.etablissement,
-                latitude: coordinates[0],
-                longitude: coordinates[1],
+                latitude: coordinates.features[0].geometry.coordinates[0],
+                longitude: coordinates.features[0].geometry.coordinates[1],
                 annee: formData.annee,
                 type: formData.type,
                 date_ouverture: formData.ouverture,
@@ -95,12 +100,50 @@ class MesureInput extends React.Component {
             throw e
         })
     })
+      this.closeModal()
   };
 
+    openModal = mandataire => {
+        this.setState({ modalIsOpen: true });
+    };
+    closeModal = () => {
+        this.setState({ modalIsOpen: false });
+    };
+
   render() {
+
+      const formData ={}
+
+
+
     return (
       <div>
-        <Form schema={schema} uiSchema={uiSchema} onSubmit={this.onSubmit} />;
+                  <button
+                      type="button"
+                      className="btn btn-success mesure_button"
+                      onClick={this.openModal}
+                      style={{ align: "left" }}
+                  >
+                      Ouvrir une nouvelle mesure
+                  </button>
+
+          <Modal
+              isOpen={this.state.modalIsOpen}
+              onRequestClose={this.closeModal}
+              contentLabel="mandataire"
+              background="#e9ecef"
+              className="ModalInputMesure"
+              overlayClassName="Overlay"
+          >
+              <button onClick={this.closeModal}>X</button>
+              <div style={{ textAlign: "center" }}>
+                  <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={this.onSubmit} >
+                      <button type="submit" className="btn btn-success">
+                          Valider
+                      </button>
+                  </Form>
+              </div>
+          </Modal>
       </div>
     );
   }
