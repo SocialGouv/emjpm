@@ -192,6 +192,15 @@ class Mandataires extends React.Component {
                   data: json
               });
           });
+
+
+      apiFetch("/mesures",)
+          .then(json => {
+              this.setState({
+                  datamesure: json
+              });
+          })
+      console.log(this.state.datamesure);
     // const url = `${API_URL}/api/v1/mandataires`;
     // fetch(url, {
     //   method: "GET",
@@ -278,15 +287,17 @@ class Mandataires extends React.Component {
 
     return (
       <div>
-          <button type="submit" className="nav-link" onClick={this.onlogout}>Logout</button>
-        <Navigation
-              onlogout={this.onlogout} />
-        <PanelGris
+          <div style={{textAlign: "right", paddingRight: "20px"}}>
+              <button type="submit" className="btn btn-linkt" onClick={this.onlogout}>Logout</button>
+          </div>
+        <Navigation/>
+
+          <PanelGris
           findPostcode={this.findPostcode}
           updateFilters={this.updateFilters}
           type={this.state.type}
         />
-        <MapSearch mesure={filteredMesures} postccodeMandataire={this.state.postcodeCoordinates} />
+        <MapSearch mesure={filteredMesures} postcodeMandataire={this.state.postcodeCoordinates} />
         <br />
         <div className="container">
           <div style={{ textAlign: "left", fontSize: "2em", padding: "15px" }}>
@@ -331,7 +342,7 @@ class Mandataires extends React.Component {
                       <div style={{ textAlign: "left" }}>{currentMandataireModal.email}</div>
                       <br />
 
-                      <RowModal label="Tribunal Instance" value={currentMandataireModal.ti} />
+                      {/*<RowModal label="Tribunal Instance" value={currentMandataireModal.ti} />*/}
                       <br />
                       <div style={{ align: "center" }}>
                         {/*<button*/}

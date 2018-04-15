@@ -148,8 +148,6 @@ class TableRowMesure extends React.Component {
                 return json
             })
         }).then(json2 => {
-console.log(123);
-            console.log(json2);
         this.props.updateMesure(json2);  // callback parent with data
         }).catch(e => {
             console.log(e)
