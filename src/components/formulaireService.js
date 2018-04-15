@@ -43,7 +43,8 @@ class FormulaireService extends React.Component {
     state = {
         data: [],
         datamesure: [],
-        currentMandataire: ""
+        currentMandataire: "",
+        modalIsOpen: false
     };
 
     onSubmit = ({ formData }) => {
@@ -65,16 +66,14 @@ class FormulaireService extends React.Component {
 
             })
         }).then(json => {
-            this.setState({
-                currentMandataire: json
-            });
+                this.props.updateMadataire(json);
         });
+        this.closeModal()
     };
 
     openModal = mandataire => {
         this.setState({
             modalIsOpen: true,
-            currentMandataireModal: this.props.currentMandataireModal
         });
     };
     closeModal = () => {

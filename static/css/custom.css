@@ -116,6 +116,18 @@
     background-color: #f2f2f2;
     overflow: scroll;
 }
+.ModalInputMesure{
+
+    position: absolute;
+    width: 450px !important;
+    height: 900px !important;
+    top: 60px;
+    left: 60px;
+    right: 60px;
+    bottom: 60px;
+    background-color: #f2f2f2;
+    overflow: scroll;
+}
 
 .Overlay {
     position: fixed;

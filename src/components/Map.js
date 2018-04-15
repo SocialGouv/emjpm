@@ -25,7 +25,7 @@
 //     </GoogleMap>
 // )
 
-import { Map, Marker, Popup, TileLayer, PropTypes as MapPropTypes } from "react-leaflet";
+import { Map, Marker, Popup,CircleMarker, TileLayer, PropTypes as MapPropTypes } from "react-leaflet";
 import "../../static/css/custom.css";
 import CodePostalMandataire from "./CodePostalMandataire";
 
@@ -68,8 +68,8 @@ class Mapstry extends React.Component {
       <div>
         <Map
           center={[
-            this.props.postccodeMandataire[1] || 50.633,
-            this.props.postccodeMandataire[0] || 3.066
+            this.props.postcodeMandataire[1] || 50.633,
+            this.props.postcodeMandataire[0] || 3.066
           ]}
           zoom={this.state.zoom}
         >
@@ -87,7 +87,7 @@ class Mapstry extends React.Component {
                 <Popup>
                   <span>
                     {manda.nom} <br />
-                    {manda.tel} <br />
+                      {manda.prenom} <br />
                     {manda.type} <br />
                     {manda.date_ouverture} <br />
                   </span>

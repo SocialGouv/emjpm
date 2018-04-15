@@ -25,6 +25,7 @@ import FormulaireService from "../src/components/formulaireService";
 import AppLogin from "./login";
 import apiFetch from "../src/components/Api";
 import FooterBottom from "../src/components/FooterBottom"
+import Router from "next/router";
 const styles = {
     fontFamily: "sans-serif",
     textAlign: "center"
@@ -58,11 +59,29 @@ class MandatairesIndex extends React.Component {
             });
     }
 
+    onlogout = () => {
+        fetch(`${API_URL}/auth/logout`, {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            }})
+            .then(response => response.json())
+            .then(json => {
+                Router.push("/login");
+            });
+    };
+    updateMadataire = mesures => {
+        this.setState({currentMandataire: mesures })
+    };
+
     render() {
         const filteredMesures = this.state.datamesure;
         return (
             <div>
-
+                <div style={{textAlign: "right", paddingRight: "20px"}}>
+                    <button type="submit" className="btn btn-linkt" onClick={this.onlogout}>Logout</button>
+                </div>
                 <Tabs>
                     <TabList>
                         <div
@@ -84,7 +103,7 @@ class MandatairesIndex extends React.Component {
                     </TabList>
                     <div className="container">
                         <TabPanel>
-                            <FormulaireService currentMandataireModal={this.state.currentMandataire} />
+                            <FormulaireService currentMandataireModal={this.state.currentMandataire} updateMadataire={this.updateMadataire}/>
                         </TabPanel>
                     </div>
                 </Tabs>

@@ -92,7 +92,6 @@ class MandatairesIndex extends React.Component {
   }
 
     onlogout = () => {
-      console.log("098765")
         fetch(`${API_URL}/auth/logout`, {
             method: "GET",
             credentials: "include",
@@ -109,11 +108,17 @@ class MandatairesIndex extends React.Component {
         this.setState({datamesure: mesures })
     };
 
+    updateMadataire = mesures => {
+        this.setState({currentMandataire: mesures })
+    };
+
   render() {
     const filteredMesures = this.state.datamesure;
     return (
       <div>
-          <button type="submit" className="nav-link" onClick={this.onlogout}>Logout</button>
+          <div style={{textAlign: "right", paddingRight: "20px"}}>
+              <button type="submit" className="btn btn-linkt" onClick={this.onlogout}>Logout</button>
+          </div>
           <Navigation  />
         <Tabs>
           <TabList>
@@ -137,11 +142,10 @@ class MandatairesIndex extends React.Component {
           </TabList>
           <div className="container">
             <TabPanel>
-              <TableMesure rows={filteredMesures}
-                           updateMesure={ this.updateMesure }/>
+              <TableMesure rows={filteredMesures} updateMesure={ this.updateMesure }/>
             </TabPanel>
             <TabPanel>
-              <FormulaireMandataire currentMandataireModal={this.state.currentMandataire} />
+              <FormulaireMandataire currentMandataireModal={this.state.currentMandataire} updateMadataire={this.updateMadataire} />
             </TabPanel>
           </div>
         </Tabs>
