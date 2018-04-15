@@ -43,7 +43,8 @@ class FormulaireMandataire extends React.Component {
     state = {
         data: [],
         datamesure: [],
-        currentMandataire: ""
+        currentMandataire: "",
+        modalIsOpen: false
     };
 
     onSubmit = ({ formData }) => {
@@ -63,21 +64,20 @@ class FormulaireMandataire extends React.Component {
                 nb_secretariat: formData.nb_secretariat
             })
         }).then(json => {
-            this.setState({
-                currentMandataire: json
-            });
+                this.props.updateMadataire(json);
         });
+        this.closeModal()
     };
 
+
     openModal = mandataire => {
-        this.setState({
-            modalIsOpen: true,
-            currentMandataireModal: this.props.currentMandataireModal
-        });
+        this.setState({ modalIsOpen: true });
     };
     closeModal = () => {
         this.setState({ modalIsOpen: false });
     };
+
+
     render() {
         const formData = {
             nom: `${this.props.currentMandataireModal.nom}`,
