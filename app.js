@@ -8,11 +8,12 @@ const session = require("express-session");
 const routes = require("./routes/index");
 const users = require("./routes/users");
 const authRoutes = require("./routes/auth");
+const Knex = require("knex");
+const KnexSessionStore = require("connect-session-knex")(session);
 
 const app = express();
 
-
-process.on('unhandledRejection', r => console.log(r));
+process.on("unhandledRejection", r => console.log(r));
 
 const corsWhitelist = ["http://localhost:3000", "http://127.0.0.1:3000"];
 if (process.env.CORS_WHITELIST) {
@@ -35,13 +36,37 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(
-  session({
-    secret: SECRET_KEY,
-    resave: false,
-    saveUninitialized: true
-  })
-);
+// use persistents sessions in production
+if (process.env.NODE_ENV === "production") {
+  console.log("process.env.DATABASE_URL", process.env.DATABASE_URL);
+  const knex = Knex({
+    client: "pg",
+    connection: process.env.DATABASE_URL
+  });
+
+  const store = new KnexSessionStore({
+    knex
+  });
+
+  app.use(
+    session({
+      secret: SECRET_KEY,
+      cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 10 // ten days
+      },
+      store: store
+    })
+  );
+} else {
+  app.use(
+    session({
+      secret: SECRET_KEY,
+      resave: false,
+      saveUninitialized: true
+    })
+  );
+}
+
 app.use(passport.initialize());
 app.use(passport.session());
 
