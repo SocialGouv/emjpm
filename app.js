@@ -75,7 +75,7 @@ if (app.get("env") === "development") {
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json({
-    message: err.message,
+    //message: err.message,
     error: {}
   });
 });
@@ -83,8 +83,8 @@ app.use(function(err, req, res, next) {
 const port = process.env.PORT || 4000;
 
 if (require.main === module) {
-  app.listen(port,"0.0.0.0", () => {
-    console.log(`Listening on http://127.0.0.1:${port}`);
+  app.listen(port, "0.0.0.0", () => {
+    console.log(`Listening on http://127.0.0.1:${port} [${process.env.NODE_ENV || "development"}]`);
   });
 }
 

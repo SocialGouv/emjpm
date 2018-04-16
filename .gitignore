@@ -2,3 +2,4 @@ node_modules
 .idea
 .next
 .vscode
+docker-compose.override.yaml
