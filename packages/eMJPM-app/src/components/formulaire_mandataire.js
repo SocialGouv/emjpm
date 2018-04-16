@@ -13,7 +13,7 @@ import apiFetch from "./Api";
 const schema = {
     title: "Modifier vos informations",
     type: "object",
-    required: ['nom','prenom','telephone','adresse','code_postal','ville'],
+    required: ['nom','prenom','telephone','adresse','code_postal','ville','secretariat','nb_secretariat'],
     properties: {
         nom: { type: "string", title: "Nom", default: "" },
         prenom: { type: "string", title: "Prénom", default: "" },
@@ -32,20 +32,22 @@ const schema = {
             title: "Nombre de mesures souhaitées",
             default: ""
         },
-        secretariat: { type: "boolean", title: "Secretariat", default: "" },
-        nb_secretariat: { type: "integer", title: "", default: "" }
+        secretariat: { type: "string", title: "Secretariat", default: "" },
+        nb_secretariat: { type: "string", title: "", default: "" }
+        // secretariat: { type: "boolean", title: "Secretariat", default: "" },
+        // nb_secretariat: { type: "integer", title: "", default: "" }
     }
 };
 
 
 
 const uiSchema =  {
-    secretariat: {
-        "ui:widget": "select" // could also be "select"
-    },
-    nb_secretariat: {
-        "ui:widget": "updown"
-    }
+    // secretariat: {
+    //     "ui:widget": "select" // could also be "select"
+    // },
+    // nb_secretariat: {
+    //     "ui:widget": "updown"
+    // }
 };
 
 const formData = {};
