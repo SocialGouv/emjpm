@@ -10,4 +10,4 @@ ENV NODE_ENV production
 
 RUN npm install
 
-ENTRYPOINT ["npm", "run", "migrate-and-start"]
+ENTRYPOINT ["npm", "run", "wait-migrate-and-start"]
