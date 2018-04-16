@@ -54,3 +54,11 @@ Les users et noms des dbs sont définis dans les `docker-compose` et sont initia
 ### Se connecter à Postgres:
 
 `docker exec -it emjpm-postgres psql -U postgres`
+
+### Récupérer un dump Postgres:
+
+```docker exec -t -u postgres emjpm-postgres pg_dumpall -c > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql```
+
+### Restaurer un dump Postgres:
+
+`cat dump.sql | docker exec -i emjpm-postgres psql -U postgres`
