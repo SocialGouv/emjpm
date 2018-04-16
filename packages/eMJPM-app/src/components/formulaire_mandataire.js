@@ -13,7 +13,7 @@ import apiFetch from "./Api";
 const schema = {
     title: "Modifier vos informations",
     type: "object",
-    required: ['nom','prenom','telephone','adresse','code_postal','ville','secretariat','nb_secretariat'],
+    required: ['nom','prenom','telephone','adresse','code_postal','ville'],
     properties: {
         nom: { type: "string", title: "Nom", default: "" },
         prenom: { type: "string", title: "Prénom", default: "" },
