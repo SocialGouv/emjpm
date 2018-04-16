@@ -32,8 +32,19 @@ const schema = {
             title: "Nombre de mesures souhaitées",
             default: ""
         },
-        secretariat: { type: "string", title: "Secretariat", default: "" },
-        nb_secretariat: { type: "string", title: "", default: "" }
+        secretariat: { type: "boolean", title: "Secretariat", default: "" },
+        nb_secretariat: { type: "integer", title: "", default: "" }
+    }
+};
+
+
+
+const uiSchema =  {
+    secretariat: {
+        "ui:widget": "select" // could also be "select"
+    },
+    nb_secretariat: {
+        "ui:widget": "updown"
     }
 };
 
@@ -156,7 +167,7 @@ class FormulaireMandataire extends React.Component {
                     overlayClassName="Overlay"
                 >
                     <button onClick={this.closeModal}>X</button>
-                    <Form schema={schema} formData={formData} onSubmit={this.onSubmit}>
+                    <Form schema={schema} formData={formData} uiSchema={uiSchema} onSubmit={this.onSubmit}>
                         <div style={{ textAlign: "left", paddingBottom: "10px" }}>
                             <button type="submit" className="btn btn-success">
                                 Enregistrer

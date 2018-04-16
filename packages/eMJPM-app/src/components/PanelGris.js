@@ -1,4 +1,4 @@
-import CodePostalMandataire from "./CodePostalMandataire";
+import {CodePostalMandataire} from "./CodePostalMandataire";
 
 const PanelGris = ({ findPostcode, updateFilters, type }) => {
   return (

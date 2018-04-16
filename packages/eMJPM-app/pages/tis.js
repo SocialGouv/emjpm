@@ -127,6 +127,7 @@ const filterMandataires = (mandataires, filters) => {
 };
 
 const filterMesures = (mesures, filters) => {
+    // let filteredMesures = mesures
   let filteredMesures = mesures.filter(mesure => {
     return (
       mesure.type.toLowerCase().indexOf(filters.searchType.toLowerCase()) !== -1 &&
