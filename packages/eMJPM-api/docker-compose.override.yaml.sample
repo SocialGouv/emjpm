@@ -1,0 +1,25 @@
+version: "3"
+services:
+  db:
+    environment:
+      # master password
+      - POSTGRES_PASSWORD=masterPassword
+      # API dedicated password
+      - POSTGRES_API_USER_PASSWORD=apiPassword
+  api:
+    container_name: emjpm-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - DATABASE_URL=psql://api:apiPassword@db/emjpm_prod
+      - NODE_ENV=production
+      - PORT=4000
+      - SECRET_KEY=xyz
+    ports:
+      - 4000:4000
+    depends_on:
+      - db
+    links:
+      - db
