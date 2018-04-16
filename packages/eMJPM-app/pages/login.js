@@ -19,14 +19,24 @@ const schema = {
   type: "object",
   required: ["username", "password"],
   properties: {
-    username: { type: "string", title: "", default: "ad@ad.com" },
-    password: { type: "string", title: "", default: "johnson123" },
-    done: {
-      type: "boolean",
-      title: " se souvenir de mes informations ",
-      default: false
-    }
+    username: { type: "string", title: "", default: "" },
+    password: { type: "string", title: "", default: "" },
+    // done: {
+    //   type: "boolean",
+    //   title: " se souvenir de mes informations ",
+    //   default: false
+    // }
   }
+};
+
+const uiSchema =  {
+    password: {
+        "ui:placeholder": "Mot de passe",
+        "ui:widget": "password" // could also be "select"
+    },
+    username: {
+        "ui:placeholder": "Identifiant"
+    }
 };
 
 //const formData = {};
@@ -127,7 +137,7 @@ class LoginIndex extends React.Component {
         <LoginBox>
           <Title>Espace professionnels</Title>
           <FormWrapper>
-            <Form schema={schema} formData={this.state.formData} onSubmit={this.onSubmit}>
+            <Form schema={schema} uiSchema={uiSchema} formData={this.state.formData} onSubmit={this.onSubmit}>
               <FormContent>
                 {this.state.error && (
                   <div className="alert alert-danger" role="alert">

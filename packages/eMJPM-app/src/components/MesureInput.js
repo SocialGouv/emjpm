@@ -7,7 +7,7 @@ import Modal from "react-modal";
 const schema = {
   title: "",
   type: "object",
-  required: ["type", "codePostal", "commune", "civilite", "annee", "residence"],
+  required: ["type", "codePostal", "commune", "civilite", "annee", "residence","ouverture"],
   properties: {
     ouverture: {
       type: "string",
@@ -69,8 +69,12 @@ class MesureInput extends React.Component {
 
 
   onSubmit = ({ formData }) => {
+      console.log(formData)
+
     getPostCodeCoordinates(formData.codePostal).then(coordinates => {
-        apiFetch(`/mandataires/1/mesures`, {
+        console.log(coordinates.features[0].geometry.coordinates[0])
+        console.log(coordinates.features[0].geometry.coordinates[1])
+       return apiFetch(`/mandataires/1/mesures`, {
             method: "POST",
             body: JSON.stringify({
                 code_postal: formData.codePostal,
@@ -88,17 +92,20 @@ class MesureInput extends React.Component {
                 // latitude: this.state.postcodeCoordinates[1],
             })
         }).then(json => {
+console.log(json)
             return apiFetch(`/mandataires/1/capacite`, {
                 method: "PUT"
             }).then(() => {
               return json
             })
         }).then(json2 => {
+           console.log(json2)
             this.props.updateMesure(json2);
-        }).catch(e => {
-          console.log(e)
-            throw e
         })
+
+    }).catch(e => {
+    console.log(e)
+    throw e
     })
       this.closeModal()
   };
