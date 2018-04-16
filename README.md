@@ -8,22 +8,25 @@ git clone git@github.com:SocialGouv/eMJPM-api.git
 cd eMJPM-api
 
 npm install
+
+npm start
 ```
 
 ## Run
 
-`docker-compose up`
+Pour lancer un PostgreSQL sur le port 5434 : `docker-compose up`
 
+Les users et noms des dbs sont définis dans les `docker-compose` et sont initialisés par le script [db/postgres-init.sh](./db/postgres-init.sh) :
+
+ - le super user Postgres est `postgres`
+ - le user pour l'api est `api`
+ - 3 bases sont créées initialement : `emjpm_prod, emjpm_dev, emjpm_test` et l'user api a accès à toutes ces bases.
 
 ## Seeds
-
 
 ### Developement
 
 ```sh
-
-docker exec -it emjpm-postgres createdb -U postgres backendlebontuteur_db_1
-
 ./node_modules/.bin/knex migrate:latest --env development
 
 ./node_modules/.bin/knex seed:run --env development
@@ -31,17 +34,23 @@ docker exec -it emjpm-postgres createdb -U postgres backendlebontuteur_db_1
 
 ### Tests
 
-```sht
-
-docker exec -it emjpm-postgres createdb -U postgres backendlebontuteur_db_1_test
-
+```sh
 ./node_modules/.bin/knex migrate:latest --env test
 
 ./node_modules/.bin/knex seed:run --env test
 ```
 
-## Env
+## Prod
 
- - `CORS_WHITELIST` : ajouter un host à la whitelist CORS
- - `PORT` : port
- - `SECRET_KEY` : sessions secret key
+ - Créer le fichier `docker-compose.override.yaml` avec les valeurs de production
+ - Builder l'image :
+ - `docker-compose build`
+ - Lancer PostgreSQL + l'API : `docker-compose restart`
+
+### Executer une commande sur le container de l'API:
+
+`docker exec emjpm-api ./node_modules/.bin/knex migrate:latest --env production`
+
+### Se connecter à Postgres:
+
+`docker exec -it emjpm-postgres psql -U postgres`

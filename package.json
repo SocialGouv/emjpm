@@ -5,7 +5,9 @@
   "scripts": {
     "start": "node app.js",
     "test": "mocha",
-    "eslint": "eslint *.js **/*.js --fix"
+    "eslint": "eslint *.js **/*.js --fix",
+    "migrate-and-start": "knex migrate:latest && npm start",
+    "wait-migrate-and-start": "sleep 10 && knex migrate:latest && npm start"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
