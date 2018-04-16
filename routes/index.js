@@ -3,21 +3,22 @@ const pkg = require("../package.json");
 const router = express.Router();
 const queries = require("../db/queries");
 
-// var csv = require("csvjson");
-// var fs = require("fs");
+var csv = require("csvjson");
+var fs = require("fs");
 
-// router.post("/upload", function(req, res, next) {
-//   const file = fs.readFileSync("./mandataire.csv", "utf8");
-//   const dataObj = csv.toObject(file);
-//   queries
-//     .uploadAll(dataObj)
-//     .then(() => {
-//       console.log("Import data done!");
-//     })
-//     .catch(() => {
-//       console.log("Import data failed");
-//     });
-// });
+router.post("/upload", function(req, res, next) {
+  const file = fs.readFileSync("./test1.csv", "utf8");
+  const dataObj = csv.toObject(file);
+  console.log(dataObj)
+  queries
+    .uploadAll(dataObj)
+    .then(() => {
+      console.log("Import data done!");
+    })
+    .catch(() => {
+      console.log("Import data failed");
+    });
+});
 
 /* GET home page. */
 
