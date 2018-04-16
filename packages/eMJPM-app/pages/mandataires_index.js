@@ -113,6 +113,7 @@ class MandatairesIndex extends React.Component {
     };
 
   render() {
+      console.log(this.state.datamesure)
     const filteredMesures = this.state.datamesure;
     return (
       <div>
@@ -158,7 +159,7 @@ const Apprender = () => (
     <div style={styles}>
 
 
-        <div style={{ overflowY: "auto", maxHeight: "90vh" }}>
+        <div style={{ overflowY: "auto", maxHeight: "80vh" }}>
             <MandatairesIndex />
         </div>
         <div style={{ overflowY: "auto", maxHeight: "20vh" }}>

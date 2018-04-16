@@ -241,7 +241,7 @@ class TableRowMesure extends React.Component {
                     <b>
                 Eteindre la mesure? <br />
 
-              Etes vous sur de vouloir eteind cette mesure
+              Etes vous sur de vouloir éteindre cette mesure
                     </b>
                     <br />
                 <button type="submit" onClick={this.closeModalAnnuler} className="btn btn-success">
