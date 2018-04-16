@@ -19,7 +19,7 @@ function getAll() {
 }
 
 function uploadAll(data) {
-  return Mandataires().insert(data);
+  return knex("mesures").insert(data);
 }
 
 function getAllMandataires(ti_id) {
@@ -36,6 +36,7 @@ function getAllMesures(mandataireID) {
 
 function getAllMesuresByMandataires(ti_id) {
     return knex.from("mesures")
+        .where("status" , "Mesure en cours")
         .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
         .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id));
 }
@@ -124,7 +125,7 @@ function CapaciteMandataire(mandataireID) {
 
 
 function addMesure(mesureID) {
-  return knex("mesures").insert(mesureID);
+  return knex("mesures").debug().insert(mesureID);
 }
 
 function getSingleMesure(mesureID) {
