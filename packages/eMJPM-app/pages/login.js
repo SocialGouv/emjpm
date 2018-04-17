@@ -17,7 +17,7 @@ import "../static/css/custom.css";
 const schema = {
   title: "Se connecter",
   type: "object",
-  required: ["username", "password"],
+  required: ["username","password"],
   properties: {
     username: { type: "string", title: "", default: "" },
     password: { type: "string", title: "", default: "" },
@@ -32,10 +32,16 @@ const schema = {
 const uiSchema =  {
     password: {
         "ui:placeholder": "Mot de passe",
-        "ui:widget": "password" // could also be "select"
+        "ui:widget": "password",
+        "ui:options": {
+            label: false
+        }// could also be "select"
     },
     username: {
-        "ui:placeholder": "Identifiant"
+        "ui:placeholder": "Identifiant",
+        "ui:options": {
+            label: false
+        }
     }
 };
 
@@ -48,12 +54,13 @@ const LoginBox = styled.div`
   background-color: #cccccc;
   width: 60%;
   margin: 0 auto;
+  margin-top:50px
   padding-top: 70px;
   padding-botttom: 70px;
 `;
 
 const Title = styled.div`
-  text-align: center;
+  text-align: left;
   font-size: 2em;
   padding-bottom: 15px;
   font-weight: bold;
@@ -132,25 +139,29 @@ class LoginIndex extends React.Component {
 
   render() {
     return (
-      <div style={{ textAlign: "center" }}>
-        <Navigation />
-        <LoginBox>
+      <div className="container" >
+          <div className="offset-3 col-6">
           <Title>Espace professionnels</Title>
-          <FormWrapper>
-            <Form schema={schema} uiSchema={uiSchema} formData={this.state.formData} onSubmit={this.onSubmit}>
-              <FormContent>
-                {this.state.error && (
-                  <div className="alert alert-danger" role="alert">
-                    {this.state.error}
-                  </div>
-                )}
-                <button type="submit" className="btn btn-success">
-                  Me connecter
-                </button>
-              </FormContent>
-            </Form>
-          </FormWrapper>
-        </LoginBox>
+          <div className="jumbotron" style={{backgroundColor: "white"}}>
+              <div className="col-6">
+                  <Form schema={schema} uiSchema={uiSchema} formData={this.state.formData} onSubmit={this.onSubmit}>
+
+                      <FormContent>
+                          {this.state.error && (
+                              <div className="alert alert-danger" role="alert">
+                                  {this.state.error}
+                              </div>
+                          )}
+                          <button type="submit" className="btn btn-success">
+                              Me connecter
+                          </button>
+                      </FormContent>
+                  </Form>
+              </div>
+          </div>
+          </div>
+
+
         <div
           style={{
             position: "fixed",
@@ -166,7 +177,9 @@ class LoginIndex extends React.Component {
 
 const Apprender = () => (
     <div>
-        <div style={{ overflowY: "auto", maxHeight: "100vh" }}>
+        <Navigation />
+        <div style={{ overflowY: "auto",backgroundColor: "#cad4de",minHeight: "1000px"}}>
+        <br />
             <LoginIndex />
         </div>
         <FooterBottom />
