@@ -7,7 +7,7 @@ import Modal from "react-modal";
 const schema = {
   title: "",
   type: "object",
-  required: ["type", "codePostal", "commune", "civilite", "annee", "residence","ouverture"],
+  required: ["codePostal", "commune", "civilite", "annee", "residence","ouverture"],
   properties: {
     ouverture: {
       type: "string",
@@ -15,14 +15,14 @@ const schema = {
     },
     type: {
       type: "string",
-      enum: ["Curatelle", "Curatelle renforcée", "Tutelle", "Protetion de Justice"]
+      enum: ["Curatelle", "Curatelle renforcée", "Tutelle", "Mesure ad hoc", "Sauvegarde de justice"]
     },
     codePostal: { type: "string", title: "Code Postal" },
       etablissement: { type: "string", title: "Etablissement" },
     commune: { type: "string", title: "Commune" },
-    civilite: { type: "string", enum: ["F", "M"] },
+    civilite: { type: "string", enum: ["F", "H"] },
     annee: { type: "integer" },
-    residence: { type: "string", enum: ["A Domicile", "En Etablissement"] }
+    residence: { type: "string", enum: ["A domicile", "En établissement"] }
   }
 };
 
@@ -64,24 +64,17 @@ class MesureInput extends React.Component {
       })
     );
 
-
-
-
-
   onSubmit = ({ formData }) => {
-      console.log(formData)
 
     getPostCodeCoordinates(formData.codePostal).then(coordinates => {
-        console.log(coordinates.features[0].geometry.coordinates[0])
-        console.log(coordinates.features[0].geometry.coordinates[1])
        return apiFetch(`/mandataires/1/mesures`, {
             method: "POST",
             body: JSON.stringify({
                 code_postal: formData.codePostal,
                 ville: formData.commune,
                 etablissement: formData.etablissement,
-                latitude: coordinates.features[0].geometry.coordinates[0],
-                longitude: coordinates.features[0].geometry.coordinates[1],
+                latitude: coordinates.features[0].geometry.coordinates[1],
+                longitude: coordinates.features[0].geometry.coordinates[0],
                 annee: formData.annee,
                 type: formData.type,
                 date_ouverture: formData.ouverture,
@@ -99,12 +92,10 @@ console.log(json)
               return json
             })
         }).then(json2 => {
-           console.log(json2)
             this.props.updateMesure(json2);
         })
 
     }).catch(e => {
-    console.log(e)
     throw e
     })
       this.closeModal()

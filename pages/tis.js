@@ -86,8 +86,8 @@ const filterMandataires = (mandataires, filters) => {
         (mandataire.type.toLowerCase().indexOf(filters.searchTypeIn.toLowerCase()) !== -1 &&
           mandataire.type.toLowerCase().indexOf(filters.searchTypePr.toLowerCase()) !== -1 &&
           mandataire.type.toLowerCase().indexOf(filters.searchTypeSe.toLowerCase()) !== -1) &&
-        (mandataire.referent.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 ||
-          mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1) &&
+        // (mandataire.referent.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 ||
+          mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
         mandataire.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1
       );
     } else {
@@ -96,10 +96,10 @@ const filterMandataires = (mandataires, filters) => {
         (mandataire.type.toLowerCase().indexOf(filters.searchTypeIn.toLowerCase()) !== -1 ||
           mandataire.type.toLowerCase().indexOf(filters.searchTypePr.toLowerCase()) !== -1 ||
           mandataire.type.toLowerCase().indexOf(filters.searchTypeSe.toLowerCase()) !== -1) &&
-        (mandataire.referent.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 ||
-          mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1) &&
-        mandataire.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1 &&
-        mandataire.specialites.indexOf(filters.specialite) !== -1
+        // (mandataire.referent.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 ||
+          mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
+        mandataire.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1
+        // mandataire.specialites.indexOf(filters.specialite) !== -1
       );
     }
   });
@@ -134,7 +134,7 @@ const filterMesures = (mesures, filters) => {
       (mesure.type.toLowerCase().indexOf(filters.searchTypeIn.toLowerCase()) !== -1 &&
         mesure.type.toLowerCase().indexOf(filters.searchTypePr.toLowerCase()) !== -1 &&
         mesure.type.toLowerCase().indexOf(filters.searchTypeSe.toLowerCase()) !== -1) &&
-      mesure.nom.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
+      // mesure.nom.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
       mesure.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1
     );
   });
@@ -285,7 +285,8 @@ class Mandataires extends React.Component {
     const mandatairesCount = filteredMandataires.length;
 
     const currentMandataireModal = this.state.currentMandataire;
-
+console.log(this.state.postcodeCoordinates)
+      console.log(1112)
     return (
       <div>
           <div style={{textAlign: "right", paddingRight: "20px"}}>
