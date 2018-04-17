@@ -117,11 +117,11 @@ class MandatairesIndex extends React.Component {
     const filteredMesures = this.state.datamesure;
     return (
       <div>
+          <Navigation  />
           <div style={{textAlign: "right", paddingRight: "20px"}}>
               <button type="submit" className="btn btn-linkt" onClick={this.onlogout}>Logout</button>
           </div>
-          <Navigation  />
-        <Tabs>
+          <Tabs>
           <TabList>
             <div
               className="panel"

@@ -5,12 +5,11 @@ const logo = require("!!url-loader?limit=0!../../static/images/logo_emjpm.png");
 
 
 const Navigation = () => (
-  <ul className="nav" style={{textAlign: "center" }}>
-    <li className="navbar-brand">
-      <img src={logo} style={{ width: "40%" }} alt="Accueil de eMJPM.beta.gouv.fr" />
-    </li>
-
-  </ul>
+  <div className="container">
+      <div style={{textAlign: "center" }}>
+      <img src={logo} style={{ width: "30%" }} alt="Accueil de eMJPM.beta.gouv.fr" />
+      </div>
+  </div>
 );
 
 export default Navigation;

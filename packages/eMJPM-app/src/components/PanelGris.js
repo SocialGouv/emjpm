@@ -1,4 +1,4 @@
-import {CodePostalMandataire} from "./CodePostalMandataire";
+import CodePostalMandataire from "./CodePostalMandataire";
 
 const PanelGris = ({ findPostcode, updateFilters, type }) => {
   return (
@@ -61,7 +61,7 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                     })
                   }
                   type="checkbox"
-                  value="Individuel "
+                  value="Individuel"
                   className="form-check-input"
                   id="inlineCheckbox1"
                 />

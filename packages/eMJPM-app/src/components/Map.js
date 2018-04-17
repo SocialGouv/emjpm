@@ -57,6 +57,7 @@ class Mapstry extends React.Component {
   };
 
   render() {
+      console.log(this.props.postcodeMandataire)
     //
     // const markers = [
     //     { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
