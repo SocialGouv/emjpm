@@ -160,7 +160,7 @@ class FormulaireMandataire extends React.Component {
         return (
             <div className="container">
                 {this.props.currentMandataireModal && (
-                    <div className="container" style={{ marginTop: "30px" }}>
+                    <div className="container">
                         <div className="row">
                             <div className="col-6">
                                 <div style={{ textAlign: "left" }}>
@@ -221,7 +221,7 @@ class FormulaireMandataire extends React.Component {
                 >
                     <button onClick={this.closeModal}>X</button>
                     <Form schema={schema} formData={formData} uiSchema={uiSchema} onSubmit={this.onSubmit}>
-                        <div style={{ textAlign: "left", paddingBottom: "10px" }}>
+                        <div style={{ textAlign: "left", paddingBottom: "10px",marginLeft: "20px" }}>
                             <button type="submit" className="btn btn-success">
                                 Enregistrer
                             </button>

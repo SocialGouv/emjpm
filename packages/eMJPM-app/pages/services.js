@@ -35,6 +35,8 @@ const MapSearchMesures = dynamic(import("../src/components/MapMesures"), {
     ssr: false,
     loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
+const logo = require("!!url-loader?limit=0!../static/images/logo_emjpm.png");
+
 
 class MandatairesIndex extends React.Component {
     state = {
@@ -79,8 +81,9 @@ class MandatairesIndex extends React.Component {
         const filteredMesures = this.state.datamesure;
         return (
             <div>
-                <div style={{textAlign: "right", paddingRight: "20px"}}>
-                    <button type="submit" className="btn btn-linkt" onClick={this.onlogout}>Logout</button>
+                <div className="" style={{verticalAlign: "center", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
+                    <img src={logo} style={{ width: "20%"}} alt="Accueil de eMJPM.beta.gouv.fr" />
+                    <button type="submit" style={{position: "absolute",right: "100px"}} className="btn btn-linkt" onClick={this.onlogout}>Se déconnecter</button>
                 </div>
                 <Tabs>
                     <TabList>
@@ -90,20 +93,24 @@ class MandatairesIndex extends React.Component {
                                 textAlign: "left",
                                 backgroundSize: "cover",
                                 heigth: "100px !important",
-                                backgroundColor: "#cccccc"
+                                backgroundColor: "#cad4de"
                             }}
                         >
                             <div className="panel__container" style={{ paddingBottom: "0px" }}>
-                                <div className="container" style={{ paddingRight: "27px", paddingLeft: "27px" }}>
+                                <div className="container" style={{ paddingRight: "0px", paddingLeft: "0px" }}>
                                     <h2 style={{ color: "black" }}> {this.state.currentMandataire.nom} {this.state.currentMandataire.prenom} </h2>
+                                    <div style={{backgroundColor: "#ebeff2", lineHeight: "40px",paddingBottom: "5px" }}>
                                     <Tab>Vos informations</Tab>
                                 </div>
                             </div>
+                            </div>
                         </div>
                     </TabList>
-                    <div className="container">
+                    <div className="container" style={{ backgroundColor: "white",minHeight: "70vh"}}>
                         <TabPanel>
+                            <div style={{minHeight: "70vh", paddingTop: "10px"}}>
                             <FormulaireService currentMandataireModal={this.state.currentMandataire} updateMadataire={this.updateMadataire}/>
+                            </div>
                         </TabPanel>
                     </div>
                 </Tabs>
@@ -114,13 +121,11 @@ class MandatairesIndex extends React.Component {
 
 const Apprender = () => (
     <div style={styles}>
-        <Navigation />
-
-        <div style={{ overflowY: "auto", maxHeight: "70vh" }}>
+        <div style={{ overflowY: "auto", minHeight: "70vh",backgroundColor: "#cad4de"}}>
             <MandatairesIndex />
         </div>
         <div style={{ overflowY: "auto", maxHeight: "20vh" }}>
-            <FooterBottom />
+            <Footer />
         </div>
 
     </div>
