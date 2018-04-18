@@ -66,6 +66,8 @@ const MapSearch = dynamic(import("../src/components/Map"), {
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
 
+const logo = require("!!url-loader?limit=0!../static/images/logo_emjpm.png");
+
 // postCode => [lat, lon]
 const getPostCodeCoordinates = postCode => {
   // return null if no input
@@ -79,7 +81,7 @@ const getPostCodeCoordinates = postCode => {
 
   return fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
     .then(response => response.json())
-    .then(json => json);
+    .then(json => json.features[0].geometry.coordinates)
 
 };
 
@@ -260,7 +262,7 @@ class Mandataires extends React.Component {
     getPostCodeCoordinates(postCode).then(coordinates =>
 
         this.setState({
-        postcodeCoordinates: coordinates.features[0].geometry.coordinates[0]
+        postcodeCoordinates: coordinates
       })
     );
 
@@ -293,11 +295,10 @@ console.log("coordinates" , this.state.postcodeCoordinates)
     const currentMandataireModal = this.state.currentMandataire;
     return (
       <div>
-          <div style={{textAlign: "right", paddingRight: "20px"}}>
-              <button type="submit" className="btn btn-linkt" onClick={this.onlogout}>Logout</button>
+          <div className="container" style={{verticalAlign: "center", marginTop: "5px", marginBottom: "5px"}}>
+              <img src={logo} style={{ width: "30%"}} alt="Accueil de eMJPM.beta.gouv.fr" />
+              <button type="submit" style={{position: "absolute",right: "100px"}} className="btn btn-linkt" onClick={this.onlogout}>Se déconnecter</button>
           </div>
-        <Navigation/>
-
           <PanelGris
           findPostcode={this.findPostcode}
           updateFilters={this.updateFilters}

@@ -152,9 +152,11 @@ class LoginIndex extends React.Component {
                                   {this.state.error}
                               </div>
                           )}
+                          <div style={{paddingLeft: "20px"}}>
                           <button type="submit" className="btn btn-success">
                               Me connecter
                           </button>
+                          </div>
                       </FormContent>
                   </Form>
               </div>

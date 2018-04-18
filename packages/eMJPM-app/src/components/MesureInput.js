@@ -5,7 +5,7 @@ import Modal from "react-modal";
 
 
 const schema = {
-  title: "",
+  title: "Ouverture de mesure",
   type: "object",
   required: ["codePostal", "commune", "civilite", "annee", "residence","ouverture"],
   properties: {
@@ -41,7 +41,10 @@ const uiSchema = {
   ouverture: {
       "ui:autofocus": true,
      "ui:placeholder": "Code Postal",
-    "ui:widget": "date"
+    "ui:widget": "date",
+      "ui:options": {
+      label: false
+}
   },
     codePostal: {
 
