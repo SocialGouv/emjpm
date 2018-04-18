@@ -120,8 +120,8 @@ class MandatairesIndex extends React.Component {
     const filteredMesures = this.state.datamesure;
     return (
       <div>
-          <div className="container" style={{verticalAlign: "center", marginTop: "5px", marginBottom: "5px"}}>
-                  <img src={logo} style={{ width: "30%"}} alt="Accueil de eMJPM.beta.gouv.fr" />
+          <div className="" style={{verticalAlign: "center", paddingTop: "10px", paddingBottom: "10px", backgroundColor: "white"}}>
+                  <img src={logo} style={{ width: "20%"}} alt="Accueil de eMJPM.beta.gouv.fr" />
                   <button type="submit" style={{position: "absolute",right: "100px"}} className="btn btn-linkt" onClick={this.onlogout}>Se déconnecter</button>
               </div>
           <Tabs>
@@ -138,7 +138,7 @@ class MandatairesIndex extends React.Component {
               <div className="panel__container" style={{ paddingBottom: "0px" }}>
                 <div className="container" style={{ paddingRight: "0px", paddingLeft: "0px" }}>
                   <h2 style={{ color: "black" }}> {this.state.currentMandataire.nom} {this.state.currentMandataire.prenom} </h2>
-                  <div style={{backgroundColor: "#ebeff2" }}>
+                  <div style={{backgroundColor: "#ebeff2", lineHeight: "40px",paddingBottom: "5px" }}>
                     <Tab>Mesures en cours</Tab>
                   <Tab>Vos informations</Tab>
                   </div>
@@ -151,7 +151,7 @@ class MandatairesIndex extends React.Component {
               <TableMesure rows={filteredMesures} updateMesure={ this.updateMesure }/>
             </TabPanel>
             <TabPanel>
-                <div style={{minHeight: "70vh"}}>
+                <div style={{minHeight: "70vh", paddingTop: "10px"}}>
               <FormulaireMandataire currentMandataireModal={this.state.currentMandataire} updateMadataire={this.updateMadataire} />
                 </div>
             </TabPanel>
@@ -178,49 +178,3 @@ const Apprender = () => (
 
 export default Apprender;
 
-
-// const PrivateRoute = ({ component: Component, ...rest }) => (
-//     <Route
-//         {...rest}
-//         render={props =>
-//             fakeAuth.isAuthenticated === true ? (
-//                 <Component {...props} />
-//             ) : (
-//                 <Redirect
-//                     to={{
-//                         pathname: "/login",
-//                         state: { from: props.location }
-//                     }}
-//                 />
-//             )
-//         }
-//     />
-// );
-
-// const AuthButton = withRouter(({ history }) => (
-//     fakeAuth.isAuthenticated ? (
-//         <p>
-//             Welcome! <button onClick={() => {
-//             fakeAuth.signout(() => history.push('/'))
-//         }}>Sign out</button>
-//         </p>
-//     ) : (
-//         <p>You are not logged in.</p>
-//     )
-// ))
-
-// export default function AuthExample() {
-//     return (
-//         {/*<Router>*/}
-//             {/*<div>*/}
-//                 {/*/!*<AuthButton/>*!/*/}
-//                 {/*/!*<ul>*!/*/}
-//                 {/*/!*<li><Link to="/public">Public Page</Link></li>*!/*/}
-//                 {/*/!*<li><Link to="/protected">Protected Page</Link></li>*!/*/}
-//                 {/*/!*</ul>*!/*/}
-//                 {/*<Route path="/login" component={AppLogin} />*/}
-//                 {/*<PrivateRoute path="/manataire_index" component={MandatairesIndex} />*/}
-//             {/*</div>*/}
-//         {/*</Router>*/}
-//     );
-// }
