@@ -61,4 +61,15 @@ Les users et noms des dbs sont définis dans les `docker-compose` et sont initia
 
 ### Restaurer un dump Postgres:
 
-`cat dump.sql | docker exec -i emjpm-postgres psql -U postgres`
+Depuis le host docker : `cat dump.sql | docker exec -i emjpm-postgres psql -U postgres`
+
+### Tunnel SSH pour accéder à Postgres à distance:
+
+Ouvre le port 1111 en local vers le Postgres distant
+
+`ssh -L 1111:localhost:5434 mitech@xxxxxxxxxx` (utiliser l'IP externe de la machine)
+
+Restaurer un dump :
+
+`cat /path/to/dump_16-04-2018_11_51_55.sql | psql -U postgres -p 1111 -h 127.0.0.1`
+
