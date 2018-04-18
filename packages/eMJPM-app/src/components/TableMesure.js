@@ -47,7 +47,7 @@ class TableMesure extends React.Component {
               <td
                 style={{ width: "20%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
               >
-                <b> Date d'ouverture </b>
+                <b> date d'ordonnance </b>
               </td>
 
               <td
@@ -73,12 +73,11 @@ class TableMesure extends React.Component {
               <td
                 style={{ width: "10%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
               >
-                <b> Age </b>
+                <b> Naissance </b>
               </td>
               <td
                 style={{ width: "10%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
               >
-                <b> Statut </b>
               </td>
             </tr>
           </thead>

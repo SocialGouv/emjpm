@@ -7,7 +7,10 @@ const CodePostalMandataire = ({ findPostcode }) => {
       submit();
     }
   };
-  const submit = () => findPostcode(input.value);
+  const submit = () => {
+      console.log(input.value)
+      findPostcode(input.value);
+  }
   return (
     <div>
       <input
