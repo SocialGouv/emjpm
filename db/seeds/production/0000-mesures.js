@@ -19,7 +19,9 @@ const parseMesures = csvPath => {
       ville,
       adresse,
       etablissement,
-      mandataire_id
+      mandataire_id,
+      latitude,
+      longitude
     ] = row.split(";");
     return {
       code_postal,
@@ -32,8 +34,8 @@ const parseMesures = csvPath => {
       residence: lieu_de_vie.replace(/é/, "e"),
       civilite,
       status: "Mesure en cours",
-      latitude: cps[code_postal].latitude,
-      longitude: cps[code_postal].longitude
+      latitude, //: cps[code_postal].latitude,
+      longitude //: cps[code_postal].longitude
     };
   });
 };
@@ -67,7 +69,7 @@ const cps = fs
 
 exports.seed = async (knex, Promise) => {
   // mesures
-  const mesures = parseMesures(path.join(__dirname, "mesures1.csv"));
+  const mesures = parseMesures(path.join(__dirname, "mesures-belgique.csv"));
 
   return knex
     .batchInsert("mesures", mesures)
