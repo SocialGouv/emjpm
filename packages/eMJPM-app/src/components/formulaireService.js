@@ -33,7 +33,17 @@ const schema = {
             default: ""
         },
         secretariat: { type: "string", title: "Secretariat", default: "" },
-        nb_secretariat: { type: "string", title: "", default: "" }
+        nb_secretariat: { type: "string", title: "Secrétariat : nombre d'ETP", default: "" }
+    }
+};
+const customStyles = {
+    content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
     }
 };
 
@@ -145,7 +155,7 @@ class FormulaireService extends React.Component {
                                     {this.props.currentMandataireModal.disponibilite}
                                     <br />
                                     <button className={"btn btn-dark"} onClick={this.openModal} >
-                                        Modifier mes information
+                                        Modifier mes informations
                                     </button>
 
                                     </div>
@@ -159,8 +169,9 @@ class FormulaireService extends React.Component {
                     onRequestClose={this.closeModal}
                     contentLabel="mandataire"
                     background="#e9ecef"
+                    style={customStyles}
                     className="ModalInformation"
-                    overlayClassName="Overlay"
+                    overlayClassName="OverlayInput"
                 >
                     <Form schema={schema} formData={formData} onSubmit={this.onSubmit}>
                         <div style={{ textAlign: "left", paddingBottom: "10px" }}>
