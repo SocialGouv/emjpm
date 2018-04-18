@@ -1,6 +1,6 @@
 const Footer = () => (
 
-  <footer className="footer" style={{ backgroundColor: "#26353fff", width: "100%", bottom: "0",textAlign: "center" }}>
+  <footer className="footer" style={{ backgroundColor: "#26353fff", width: "100%", minHeight: "90%",textAlign: "center" }}>
     <div className="footer_container">
       <div className="footer__logo" />
       <ul className="footer__links">

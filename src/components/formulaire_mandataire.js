@@ -13,7 +13,7 @@ import apiFetch from "./Api";
 const schema = {
     title: "Modifier vos informations",
     type: "object",
-    required: ['nom','prenom','telephone','adresse','code_postal','ville','secretariat','nb_secretariat'],
+    required: [],
     properties: {
         nom: { type: "string", title: "Nom", default: "" },
         prenom: { type: "string", title: "Prénom", default: "" },
@@ -32,19 +32,69 @@ const schema = {
             title: "Nombre de mesures souhaitées",
             default: ""
         },
-        secretariat: { type: "string", title: "Secretariat", default: "" },
-        nb_secretariat: { type: "string", title: "", default: "" }
-        // secretariat: { type: "boolean", title: "Secretariat", default: "" },
-        // nb_secretariat: { type: "integer", title: "", default: "" }
+        secretariat: { type: "boolean", title: "Secretariat", enumNames: ["Oui","Non"] },
+        nb_secretariat: { type: "string", title: "Secrétariat : nombre d'ETP", default: "" }
     }
 };
 
-
+const customStyles = {
+    content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+    }
+};
 
 const uiSchema =  {
-    // secretariat: {
-    //     "ui:widget": "select" // could also be "select"
-    // },
+     secretariat: {
+         "ui:widget": "select" // could also be "select"
+     },
+    nom: {
+        "ui:placeholder": "Nom",
+
+    },
+    prenom: {
+        "ui:placeholder": "Prénom",
+
+    },
+    telephone: {
+        "ui:placeholder": "Téléphone",
+
+    },
+    telephone_portable: {
+        "ui:placeholder": "Téléphone Portable",
+
+    },
+    email: {
+        "ui:placeholder": "Adresse email",
+
+    },
+    adresse: {
+        "ui:placeholder": "Rue",
+
+    },
+    code_postal: {
+        "ui:placeholder": "Code Postal",
+        //"ui:options": {
+          //  label: false
+        //}
+    },
+    ville: {
+        "ui:placeholder": "Commune",
+        //"ui:options": {
+        //    label: false
+       // }
+    },
+    dispo_max: {
+        "ui:placeholder": "Nombre de mesures souhaitées",
+
+    },
+    nb_secretariat: {
+        "ui:placeholder": "Secrétariat : nombre d'ETP",
+    },
     // nb_secretariat: {
     //     "ui:widget": "updown"
     // }
@@ -108,7 +158,7 @@ class FormulaireMandataire extends React.Component {
             dispo_max: `${this.props.currentMandataireModal.dispo_max}`
         };
         return (
-            <div>
+            <div className="container">
                 {this.props.currentMandataireModal && (
                     <div className="container" style={{ marginTop: "30px" }}>
                         <div className="row">
@@ -151,7 +201,7 @@ class FormulaireMandataire extends React.Component {
                                 } <br />
                                     <br />
                                     <button className={"btn btn-dark"} onClick={this.openModal} >
-                                        Modifier mes information
+                                        Modifier mes informations
                                     </button>
 
                                     </div>
@@ -165,8 +215,9 @@ class FormulaireMandataire extends React.Component {
                     onRequestClose={this.closeModal}
                     contentLabel="mandataire"
                     background="#e9ecef"
+                    style={customStyles}
                     className="ModalInformation"
-                    overlayClassName="Overlay"
+                    overlayClassName="OverlayInput"
                 >
                     <button onClick={this.closeModal}>X</button>
                     <Form schema={schema} formData={formData} uiSchema={uiSchema} onSubmit={this.onSubmit}>

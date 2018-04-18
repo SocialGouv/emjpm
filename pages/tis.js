@@ -71,10 +71,16 @@ const getPostCodeCoordinates = postCode => {
   // return null if no input
   if (!postCode || !postCode.trim()) {
     return Promise.resolve(null);
-  }
+    }
+    // console.log(fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
+    //     .then(response => response.json())
+    //     .then(json => console.log(json.features[0].geometry.coordinates[0][0]
+    //     )))
+
   return fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
     .then(response => response.json())
     .then(json => json);
+
 };
 
 // filter and sort list of mandataires
@@ -252,8 +258,9 @@ class Mandataires extends React.Component {
   };
   findPostcode = postCode =>
     getPostCodeCoordinates(postCode).then(coordinates =>
-      this.setState({
-        postcodeCoordinates: coordinates
+
+        this.setState({
+        postcodeCoordinates: coordinates.features[0].geometry.coordinates[0]
       })
     );
 
@@ -272,7 +279,7 @@ class Mandataires extends React.Component {
       },
       this.state.specialite
     );
-
+console.log("coordinates" , this.state.postcodeCoordinates)
     const filteredMesures = filterMesures(this.state.datamesure, {
       searchType: this.state.searchType,
       searchTypeIn: this.state.searchTypeIn,
@@ -283,10 +290,7 @@ class Mandataires extends React.Component {
     });
 
     const mandatairesCount = filteredMandataires.length;
-
     const currentMandataireModal = this.state.currentMandataire;
-console.log(this.state.postcodeCoordinates)
-      console.log(1112)
     return (
       <div>
           <div style={{textAlign: "right", paddingRight: "20px"}}>

@@ -11,26 +11,85 @@ const schema = {
   properties: {
     ouverture: {
       type: "string",
-      title: "Ouverture de la mesure"
+      title: "Date d'ordonnance"
     },
     type: {
       type: "string",
-      enum: ["Curatelle", "Curatelle renforcée", "Tutelle", "Mesure ad hoc", "Sauvegarde de justice"]
+        title: "Type de mesure",
+      enum: ["Tutelle", "Curatelle","Sauvegarde de justice", "Mesure ad hoc", "MAJ"]
     },
     codePostal: { type: "string", title: "Code Postal" },
       etablissement: { type: "string", title: "Etablissement" },
     commune: { type: "string", title: "Commune" },
-    civilite: { type: "string", enum: ["F", "H"] },
-    annee: { type: "integer" },
-    residence: { type: "string", enum: ["A domicile", "En établissement"] }
+    civilite: { type: "string",title: "Genre", enum: ["F", "H"] },
+    annee: { type: "integer",title: "Année de naissance" },
+    residence: { type: "string",title: "Lieu de vie", enum: ["A domicile", "En établissement"] }
   }
+};
+const customStyles = {
+    content : {
+        top                   : '50%',
+        left                  : '50%',
+        right                 : 'auto',
+        bottom                : 'auto',
+        marginRight           : '-50%',
+        transform             : 'translate(-50%, -50%)'
+    }
 };
 
 const uiSchema = {
   ouverture: {
-    "ui:widget": "date" // could also be "select"
-  }
+      "ui:autofocus": true,
+     "ui:placeholder": "Code Postal",
+    "ui:widget": "date"
+  },
+    codePostal: {
+
+        "ui:placeholder": "Code Postal",
+        "ui:options": {
+            label: false
+        }
+    },
+    etablissement: {
+        "ui:placeholder": "Etablissement",
+        "ui:options": {
+            label: false
+        }
+    },
+    annee: {
+        "ui:placeholder": "Année de naissance",
+        "ui:options": {
+            label: false
+        }
+    },
+    civilite: {
+        "ui:placeholder": "Genre",
+        "ui:options": {
+            label: false
+        }
+    },
+    commune: {
+        "ui:placeholder": "Commune",
+        "ui:options": {
+            label: false
+        }
+    },
+    residence:{
+        "ui:placeholder": "Lieu de vie",
+        "ui:options": {
+            label: false
+        }
+    },
+    type:{
+        "ui:placeholder": "Type de mesure",
+        "ui:options": {
+            label: false
+        }
+    },
+
 };
+
+
 
 const getPostCodeCoordinates = postCode => {
   console.log(postCode);
@@ -122,7 +181,7 @@ console.log(json)
                       onClick={this.openModal}
                       style={{ align: "left" }}
                   >
-                      Ouvrir une nouvelle mesure
+                      Ouvrir une mesure
                   </button>
 
           <Modal
@@ -130,12 +189,14 @@ console.log(json)
               onRequestClose={this.closeModal}
               contentLabel="mandataire"
               background="#e9ecef"
+              style={customStyles}
               className="ModalInputMesure"
-              overlayClassName="Overlay"
+              overlayClassName="OverlayInput"
           >
               <button onClick={this.closeModal}>X</button>
               <div style={{ textAlign: "center" }}>
-                  <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={this.onSubmit} >
+                  <Form schema={schema} uiSchema={uiSchema} formData={formData}
+                        onSubmit={this.onSubmit} >
                       <button type="submit" className="btn btn-success">
                           Valider
                       </button>

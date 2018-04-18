@@ -6,7 +6,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "../../static/css/hero.css";
 import "../../static/css/panel.css";
 import "../../static/css/footer.css";
-import "../../static/css/custom.css";
 import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
 import apiFetch from "./Api";
@@ -27,6 +26,7 @@ const Phone = ({ num }) => {
     </a>
   );
 };
+
 
 const Cell = ({ style, title, children, value }) => (
   <td
@@ -213,7 +213,7 @@ class TableRowMesure extends React.Component {
           <Cell>{annee} </Cell>
           <td>
               <button className={"btn btn-dark"} onClick={() => this.openModal(this.props.mesure.id)} >
-                  Eteindre la mesure
+                  Mettre fin au mandat
               </button>
               {/*<DropdownMenu userName="Chris Smith">*/}
                   {/*<MenuItem text="Home" location="/home" />*/}
@@ -233,15 +233,15 @@ class TableRowMesure extends React.Component {
                 onRequestClose={this.closeModal}
                 contentLabel="mandataire"
                 background="#e9ecef"
+                style={customStyles}
                 className="ModalMesure"
-                overlayClassName="Overlay"
+                overlayClassName="OverlayInput"
             >
                 <button onClick={this.closeModal}>X</button>
                 <div style={{ textAlign: "center" }}>
                     <b>
                 Eteindre la mesure? <br />
-
-              Etes vous sur de vouloir éteindre cette mesure
+              Etes vous sur de vouloir mettre fin au mandat
                     </b>
                     <br />
                 <button type="submit" onClick={this.closeModalAnnuler} className="btn btn-success">
