@@ -40,6 +40,9 @@ const styles = {
   textAlign: "center"
 };
 
+const logo = require("!!url-loader?limit=0!../static/images/logo_emjpm.png");
+
+
 const MapSearchMesures = dynamic(import("../src/components/MapMesures"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
@@ -117,10 +120,10 @@ class MandatairesIndex extends React.Component {
     const filteredMesures = this.state.datamesure;
     return (
       <div>
-          <Navigation  />
-          <div style={{textAlign: "right", paddingRight: "20px"}}>
-              <button type="submit" className="btn btn-linkt" onClick={this.onlogout}>Logout</button>
-          </div>
+          <div className="container" style={{verticalAlign: "center", marginTop: "5px", marginBottom: "5px"}}>
+                  <img src={logo} style={{ width: "30%"}} alt="Accueil de eMJPM.beta.gouv.fr" />
+                  <button type="submit" style={{position: "absolute",right: "100px"}} className="btn btn-linkt" onClick={this.onlogout}>Se déconnecter</button>
+              </div>
           <Tabs>
           <TabList>
             <div
@@ -129,24 +132,28 @@ class MandatairesIndex extends React.Component {
                 textAlign: "left",
                 backgroundSize: "cover",
                 heigth: "100px !important",
-                backgroundColor: "#cccccc"
+                backgroundColor: "#cad4de"
               }}
             >
               <div className="panel__container" style={{ paddingBottom: "0px" }}>
-                <div className="container" style={{ paddingRight: "27px", paddingLeft: "27px" }}>
+                <div className="container" style={{ paddingRight: "0px", paddingLeft: "0px" }}>
                   <h2 style={{ color: "black" }}> {this.state.currentMandataire.nom} {this.state.currentMandataire.prenom} </h2>
-                  <Tab>Mesures en cours</Tab>
+                  <div style={{backgroundColor: "#ebeff2" }}>
+                    <Tab>Mesures en cours</Tab>
                   <Tab>Vos informations</Tab>
+                  </div>
                 </div>
               </div>
             </div>
           </TabList>
-          <div className="container">
+          <div className="container" style={{ backgroundColor: "white",minHeight: "70vh"}}>
             <TabPanel>
               <TableMesure rows={filteredMesures} updateMesure={ this.updateMesure }/>
             </TabPanel>
             <TabPanel>
+                <div style={{minHeight: "70vh"}}>
               <FormulaireMandataire currentMandataireModal={this.state.currentMandataire} updateMadataire={this.updateMadataire} />
+                </div>
             </TabPanel>
           </div>
         </Tabs>
@@ -159,11 +166,11 @@ const Apprender = () => (
     <div style={styles}>
 
 
-        <div style={{ overflowY: "auto", maxHeight: "80vh" }}>
+        <div style={{ overflowY: "auto", minHeight: "80vh",backgroundColor: "#cad4de"}}>
             <MandatairesIndex />
         </div>
-        <div style={{ overflowY: "auto", maxHeight: "20vh" }}>
-            <FooterBottom />
+        <div style={{ overflowY: "auto",maxHeight:"20vh" }}>
+            <Footer />
         </div>
 
     </div>

@@ -104,6 +104,7 @@
     bottom: 60px;
     background-color: #f2f2f2;
     overflow: scroll;
+    opacity: 2
 }
 .ModalMesure{
     position: absolute;
@@ -115,18 +116,20 @@
     bottom: 60px;
     background-color: #f2f2f2;
     overflow: scroll;
+    opacity: 2;
 }
 .ModalInputMesure{
 
     position: absolute;
     width: 450px !important;
-    height: 900px !important;
+    height: 700px !important;
     top: 60px;
     left: 60px;
     right: 60px;
     bottom: 60px;
     background-color: #f2f2f2;
     overflow: scroll;
+    opacity: 2;
 }
 
 .Overlay {
@@ -138,6 +141,17 @@
     background-color: grey;
     z-index: 9000;
 }
+.OverlayInput {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: grey;
+    opacity: 0.96;
+    z-index: 9000;
+}
+
 
 .hello .leaflet-container {
     height: 600px !important;
@@ -168,4 +182,28 @@
 
 #root_co_comment{
     height: 70px;
+}
+
+#root_nom {
+    width: 150px;
+}
+#root_prenom {
+    display: flex;
+    width: 150px;
+}
+
+.react-tabs__tab {
+    text-align: center;
+    height: 50px;
+    color: #cad4de !important;
+    background-color: #ebeff2 !important;
+    border-radius: 0px !important;
+}
+.react-tabs__tab-list{
+    margin-bottom: 0px !important;
+    background-color: #cad4de !important;
+border: 0px !important;
+}
+.react-tabs__tab--selected {
+color: black !important;
 }
