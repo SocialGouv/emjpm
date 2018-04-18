@@ -34,7 +34,13 @@ module.exports = {
   },
   production: {
     client: "pg",
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DATABASE_URL || {
+      host: "localhost",
+      user: "postgres",
+      password: "test",
+      port: "5434",
+      database: "emjpm_prod"
+    },
     migrations: {
       directory: __dirname + "/db/migrations"
     },
