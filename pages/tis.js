@@ -148,14 +148,12 @@ export const FicheMandataire = ({ style, mandataire }) => (
         <div
           style={{
             verticalAlign: "middle",
-            textAlign: "center",
+            paddingLeft: 10,
             borderBottom: "20px",
             lineHeight: "40px"
           }}
         >
-          <div>
-            Mesures en cours : {mandataire.disponibilite} / {mandataire.dispo_max}
-          </div>
+          Mesures en cours : {mandataire.disponibilite} / {mandataire.dispo_max}
         </div>
         <br />
         <Commentaire currentMandataire={mandataire} />

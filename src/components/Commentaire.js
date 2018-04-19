@@ -105,16 +105,22 @@ class Commentaire extends React.Component {
         </label>
         {/*<textarea className="form-control" id="exampleFormControlTextarea1" placeholder={"Ecrivez votre note"} rows="3" style={{boxShadow: "3px 3px"}}> </textarea>*/}
         <br />
-        <Form schema={schema} formData={formData} uiSchema={uiSchema} onSubmit={this.onSubmit}>
+        <Form
+          className="form__commentaire"
+          schema={schema}
+          formData={formData}
+          uiSchema={uiSchema}
+          onSubmit={this.onSubmit}
+        >
           <div style={{ textAlign: "left", paddingBottom: "10px" }}>
             <button
               type="submit"
               style={{
                 color: "white",
-                backgroundColor: "#e69a0e",
+                backgroundColor: "#43b04a",
                 boxShadow: "3px 3px grey"
               }}
-              className="btn btn-warning"
+              className="btn"
             >
               Enregistrer
             </button>
