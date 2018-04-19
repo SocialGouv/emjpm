@@ -12,6 +12,12 @@ injectGlobal`
   html {
     font-size: 14px;
   }
+  html,
+  body,
+  div#__next {
+    background:white;
+    height: 100%;
+  }
 `;
 
 export default class MyDocument extends Document {

@@ -145,9 +145,6 @@
     z-index: 9000;
 }
 
-.hello .leaflet-container {
-    height: 600px !important;
-}
 .leaflet-container {
     height: 400px !important;
 }
