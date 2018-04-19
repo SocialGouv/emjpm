@@ -140,6 +140,7 @@
     bottom: 0;
     background-color: grey;
     z-index: 9000;
+    opacity: 0.96;
 }
 .OverlayInput {
     position: fixed;
