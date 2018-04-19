@@ -32,6 +32,11 @@ const schema = {
             title: "Nombre de mesures souhaitées",
             default: ""
         },
+        disponibilite: {
+            type: "string",
+            title: "Nombre de mesures",
+            default: ""
+        },
         secretariat: { type: "string", title: "Secretariat", default: "" },
         nb_secretariat: { type: "string", title: "Secrétariat : nombre d'ETP", default: "" }
     }
@@ -149,7 +154,7 @@ class FormulaireService extends React.Component {
                                     this.props.currentMandataireModal.nb_secretariat
                                 } <br />
                                     <br />
-                                    <b> Mesure disponible </b>
+                                    <b> Mesures en cours </b>
                                     <br />
 
                                     {this.props.currentMandataireModal.disponibilite}
