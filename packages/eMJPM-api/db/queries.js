@@ -35,10 +35,10 @@ function getAllMesures(mandataireID) {
 }
 
 function getAllMesuresByMandataires(ti_id) {
-    return knex.from("mesures")
+    return knex.from("mesures").debug()
         .where("status" , "Mesure en cours")
         .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
-        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id));
+        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id)).select('mesures.id','mesures.latitude', 'mesures.longitude', 'mandataires.nom','mandataires.prenom','mandataires.type','mesures.date_ouverture','mesures.ville');
 }
 
 function getMandataireByUserId(userId) {
