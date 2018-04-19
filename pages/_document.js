@@ -2,7 +2,6 @@ import Document, { Head, Main, NextScript } from "next/document";
 import { injectGlobal, ServerStyleSheet } from "styled-components";
 
 import "bootstrap/dist/css/bootstrap.css";
-import "leaflet/dist/leaflet.css";
 import "react-tabs/style/react-tabs.css";
 
 import "../static/css/hero.css";
@@ -12,12 +11,6 @@ import "../static/css/custom.css";
 injectGlobal`
   html {
     font-size: 14px;
-  }
-  html,
-  body,
-  div#__next {
-    background:white;
-    height: 100%;
   }
 `;
 
@@ -37,6 +30,7 @@ export default class MyDocument extends Document {
           <meta name="description" content="" />
           <meta name="author" content="" />
           <link rel="stylesheet" href="/_next/static/style.css" />
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
           {this.props.styleTags}
         </Head>
         <body>
