@@ -53,7 +53,7 @@ import CodePostalMandataire from "./CodePostalMandataire";
 
 class Mapstry extends React.Component {
   state = {
-    zoom: 13
+    zoom: 9
   };
 
   render() {
@@ -69,8 +69,8 @@ class Mapstry extends React.Component {
       <div>
         <Map
           center={[
-            this.props.postcodeMandataire[1] || 50.633,
-            this.props.postcodeMandataire[0] || 3.066
+            this.props.postcodeMandataire[1] || 50.459441,
+            this.props.postcodeMandataire[0] || 2.693963
           ]}
           zoom={this.state.zoom}
         >
