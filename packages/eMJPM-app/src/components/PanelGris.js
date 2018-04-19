@@ -97,7 +97,7 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                   style={{ color: "black", paddingRight: "5px" }}
                   htmlFor="inlineCheckbox2"
                 >
-                  Préposés d'établissements
+                  Préposés
                 </label>
               </div>
 
@@ -123,7 +123,7 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                   style={{ color: "black", paddingRight: "5px" }}
                   htmlFor="inlineCheckbox3"
                 >
-                  Mandataire de Service
+                  Services
                 </label>
               </div>
             </div>
