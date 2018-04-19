@@ -1,6 +1,14 @@
-const Footer = () => (
-
-  <footer className="footer" style={{ backgroundColor: "#26353fff", width: "100%", minHeight: "90%",textAlign: "center" }}>
+const Footer = ({ fixed }) => (
+  <footer
+    className="footer"
+    style={{
+      marginTop: 50,
+      backgroundColor: "#26353fff",
+      width: "100%",
+      textAlign: "center",
+      ...((fixed && { position: "fixed", bottom: 0 }) || {})
+    }}
+  >
     <div className="footer_container">
       <div className="footer__logo" />
       <ul className="footer__links">

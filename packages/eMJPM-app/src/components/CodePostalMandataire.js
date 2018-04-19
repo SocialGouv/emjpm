@@ -1,6 +1,4 @@
-const locate = require("../../static/images/locate.svg");
-
-const CodePostalMandataire = ({ findPostcode }) => {
+const CodePostalMandataire = ({ findPostcode, className = "", style }) => {
   let input;
   const onKeyDown = e => {
     if (e.keyCode === 13) {
@@ -8,23 +6,17 @@ const CodePostalMandataire = ({ findPostcode }) => {
     }
   };
   const submit = () => {
-      console.log(input.value)
-      findPostcode(input.value);
-  }
+    findPostcode(input.value);
+  };
   return (
-    <div>
-      <input
-        style={{
-          border: "1px solid",
-          borderColor: "black"
-        }}
-        ref={node => (input = node)}
-        type="text"
-        className="form-control"
-        placeholder="Code Postal du MJPM"
-        onKeyDown={onKeyDown}
-      />
-    </div>
+    <input
+      style={style}
+      ref={node => (input = node)}
+      type="text"
+      className={"form-control " + className}
+      placeholder="Code Postal du MJPM"
+      onKeyDown={onKeyDown}
+    />
   );
 };
 
