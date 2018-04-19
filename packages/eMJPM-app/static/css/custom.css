@@ -1,8 +1,8 @@
 /*.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {*/
-    /*background-color: #eaeced;*/
+/*background-color: #eaeced;*/
 /*}*/
 
-.red{
+.red {
     background-color: #f05659;
     height: 40px;
     width: 40px;
@@ -11,7 +11,7 @@
     color: white;
     text-align: center;
 }
-.green{
+.green {
     background-color: #43b04a;
     height: 40px;
     width: 40px;
@@ -20,7 +20,7 @@
     display: inline-block;
     text-align: center;
 }
-.orange{
+.orange {
     background-color: #eb9123;
     height: 40px;
     width: 40px;
@@ -28,9 +28,8 @@
     border-radius: 50%;
     display: inline-block;
     text-align: center;
-
 }
-.gris{
+.gris {
     background-color: grey;
     height: 40px;
     width: 40px;
@@ -38,27 +37,23 @@
     border-radius: 50%;
     display: inline-block;
     text-align: center;
-
 }
 
-.redrectangle{
-
+.redrectangle {
     background-color: #f05659;
     width: 100px;
     color: white;
     height: 40px;
     display: inline-block;
 }
-.greenrectangle{
-
+.greenrectangle {
     background-color: #43b04a;
     width: 100px;
     color: white;
     height: 40px;
     display: inline-block;
 }
-.orangerectangle{
-
+.orangerectangle {
     background-color: #eb9123;
     width: 100px;
     color: white;
@@ -66,8 +61,7 @@
     display: inline-block;
 }
 
-.grisrectangle{
-
+.grisrectangle {
     background-color: grey;
     margin-bottom: 2px;
     width: 300px;
@@ -75,8 +69,7 @@
     height: 33%;
     display: inline-block;
 }
-.greenrectangleModal{
-
+.greenrectangleModal {
     background-color: #6ba650;
     width: 200px;
     color: white;
@@ -104,9 +97,9 @@
     bottom: 60px;
     background-color: #f2f2f2;
     overflow: scroll;
-    opacity: 2
+    opacity: 2;
 }
-.ModalMesure{
+.ModalMesure {
     position: absolute;
     width: 20% !important;
     height: 20% !important;
@@ -118,8 +111,7 @@
     overflow: scroll;
     opacity: 2;
 }
-.ModalInputMesure{
-
+.ModalInputMesure {
     position: absolute;
     width: 450px !important;
     height: 400px !important;
@@ -153,7 +145,6 @@
     z-index: 9000;
 }
 
-
 .hello .leaflet-container {
     height: 600px !important;
 }
@@ -161,7 +152,7 @@
     height: 400px !important;
 }
 
-.leaflet-marker-icon{
+.leaflet-marker-icon {
     background-image: url("../images/icone-lieu.jpg");
     background-repeat: no-repeat;
     background-position: center center;
@@ -173,17 +164,16 @@
 .react-tabs__tab {
     color: blue !important;
 }
-#root__title{
+#root__title {
     text-align: left;
     padding-left: 10px;
     font-size: 1.3em;
 }
 
-.mesure_button{
-
+.mesure_button {
 }
 
-#root_co_comment{
+#root_co_comment {
     height: 70px;
 }
 
@@ -249,13 +239,13 @@
     border-radius: 0px !important;
     border: 0px !important;
 }
-.react-tabs__tab-list{
+.react-tabs__tab-list {
     margin-bottom: 0px !important;
     background-color: #cad4de !important;
-border: 0px !important;
+    border: 0px !important;
 }
 .react-tabs__tab--selected {
-color: black !important;
+    color: black !important;
 }
 
 .form-group {
@@ -263,4 +253,13 @@ color: black !important;
     text-align: left;
     display: inline-block;
     margin-right: 10px;
+}
+
+.form__commentaire .form-group {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.form__commentaire textarea {
+    width: 400px;
 }
