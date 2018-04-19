@@ -60,7 +60,6 @@ const customStyles = {
 //         })
 //         .then(res => res.json());
 
-
 const MapSearch = dynamic(import("../src/components/Map"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
@@ -73,16 +72,15 @@ const getPostCodeCoordinates = postCode => {
   // return null if no input
   if (!postCode || !postCode.trim()) {
     return Promise.resolve(null);
-    }
-    // console.log(fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
-    //     .then(response => response.json())
-    //     .then(json => console.log(json.features[0].geometry.coordinates[0][0]
-    //     )))
+  }
+  // console.log(fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
+  //     .then(response => response.json())
+  //     .then(json => console.log(json.features[0].geometry.coordinates[0][0]
+  //     )))
 
   return fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
     .then(response => response.json())
-    .then(json => json.features[0].geometry.coordinates)
-
+    .then(json => json.features[0].geometry.coordinates);
 };
 
 // filter and sort list of mandataires
@@ -95,7 +93,7 @@ const filterMandataires = (mandataires, filters) => {
           mandataire.type.toLowerCase().indexOf(filters.searchTypePr.toLowerCase()) !== -1 &&
           mandataire.type.toLowerCase().indexOf(filters.searchTypeSe.toLowerCase()) !== -1) &&
         // (mandataire.referent.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 ||
-          mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
+        mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
         mandataire.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1
       );
     } else {
@@ -105,7 +103,7 @@ const filterMandataires = (mandataires, filters) => {
           mandataire.type.toLowerCase().indexOf(filters.searchTypePr.toLowerCase()) !== -1 ||
           mandataire.type.toLowerCase().indexOf(filters.searchTypeSe.toLowerCase()) !== -1) &&
         // (mandataire.referent.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 ||
-          mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
+        mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
         mandataire.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1
         // mandataire.specialites.indexOf(filters.specialite) !== -1
       );
@@ -135,7 +133,7 @@ const filterMandataires = (mandataires, filters) => {
 };
 
 const filterMesures = (mesures, filters) => {
-    // let filteredMesures = mesures
+  // let filteredMesures = mesures
   let filteredMesures = mesures.filter(mesure => {
     return (
       mesure.type.toLowerCase().indexOf(filters.searchType.toLowerCase()) !== -1 &&
@@ -194,22 +192,18 @@ class Mandataires extends React.Component {
   // }
 
   componentDidMount() {
+    apiFetch("/mandataires").then(json => {
+      this.setState({
+        data: json
+      });
+    });
 
-      apiFetch("/mandataires",)
-          .then(json => {
-              this.setState({
-                  data: json
-              });
-          });
-
-
-      apiFetch("/mesures",)
-          .then(json => {
-              this.setState({
-                  datamesure: json
-              });
-          })
-      console.log(this.state.datamesure);
+    apiFetch("/mesures").then(json => {
+      this.setState({
+        datamesure: json
+      });
+    });
+    console.log(this.state.datamesure);
     // const url = `${API_URL}/api/v1/mandataires`;
     // fetch(url, {
     //   method: "GET",
@@ -219,11 +213,11 @@ class Mandataires extends React.Component {
     //     Accept: "application/json",
     //     "Content-Type": "application/json"
     //   }
-      // body: JSON.stringify({
-      //   ti_id: 1
-      // })
+    // body: JSON.stringify({
+    //   ti_id: 1
     // })
-      // .then(response => response.json())
+    // })
+    // .then(response => response.json())
 
     // const urlmesure = "/static/mesures.json";
     // fetch(urlmesure)
@@ -235,19 +229,20 @@ class Mandataires extends React.Component {
     //     });
   }
 
-    onlogout = () => {
-        console.log("098765")
-        fetch(`${API_URL}/auth/logout`, {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json"
-            }})
-            .then(response => response.json())
-            .then(json => {
-                Router.push("/login");
-            });
-    };
+  onlogout = () => {
+    console.log("098765");
+    fetch(`${API_URL}/auth/logout`, {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(json => {
+        Router.push("/login");
+      });
+  };
 
   openModal = mandataire => {
     this.setState({ modalIsOpen: true, currentMandataire: mandataire });
@@ -260,8 +255,7 @@ class Mandataires extends React.Component {
   };
   findPostcode = postCode =>
     getPostCodeCoordinates(postCode).then(coordinates =>
-
-        this.setState({
+      this.setState({
         postcodeCoordinates: coordinates
       })
     );
@@ -281,7 +275,7 @@ class Mandataires extends React.Component {
       },
       this.state.specialite
     );
-console.log("coordinates" , this.state.postcodeCoordinates)
+    console.log("coordinates", this.state.postcodeCoordinates);
     const filteredMesures = filterMesures(this.state.datamesure, {
       searchType: this.state.searchType,
       searchTypeIn: this.state.searchTypeIn,
@@ -295,11 +289,21 @@ console.log("coordinates" , this.state.postcodeCoordinates)
     const currentMandataireModal = this.state.currentMandataire;
     return (
       <div>
-          <div className="container" style={{verticalAlign: "center", marginTop: "5px", marginBottom: "5px"}}>
-              <img src={logo} style={{ width: "30%"}} alt="Accueil de eMJPM.beta.gouv.fr" />
-              <button type="submit" style={{position: "absolute",right: "100px"}} className="btn btn-linkt" onClick={this.onlogout}>Se déconnecter</button>
-          </div>
-          <PanelGris
+        <div
+          className="container"
+          style={{ verticalAlign: "center", marginTop: "5px", marginBottom: "5px" }}
+        >
+          <img src={logo} style={{ width: "30%" }} alt="Accueil de eMJPM.beta.gouv.fr" />
+          <button
+            type="submit"
+            style={{ position: "absolute", right: "100px" }}
+            className="btn btn-linkt"
+            onClick={this.onlogout}
+          >
+            Se déconnecter
+          </button>
+        </div>
+        <PanelGris
           findPostcode={this.findPostcode}
           updateFilters={this.updateFilters}
           type={this.state.type}
@@ -327,7 +331,7 @@ console.log("coordinates" , this.state.postcodeCoordinates)
               className="Modal"
               overlayClassName="Overlay"
             >
-                <button onClick={this.closeModal}>X</button>
+              <button onClick={this.closeModal}>X</button>
               {this.state.currentMandataire && (
                 <div className="container" style={{ marginTop: "30px" }}>
                   <div className="row">
