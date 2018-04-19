@@ -23,11 +23,8 @@
 //
 //         {props.isMarkerShown && <Marker position={{ lat: -34.397, lng: 150.644 }} />}
 //     </GoogleMap>
-// )
 
-import { Map, Marker, Popup,CircleMarker, TileLayer, PropTypes as MapPropTypes } from "react-leaflet";
-import "../../static/css/custom.css";
-import CodePostalMandataire from "./CodePostalMandataire";
+import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
 // const MyPopupMarker = ({ children, position }) => (
 //     <Marker position={position}>
@@ -57,7 +54,6 @@ class Mapstry extends React.Component {
   };
 
   render() {
-      console.log(this.props.postcodeMandataire)
     //
     // const markers = [
     //     { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
@@ -82,13 +78,13 @@ class Mapstry extends React.Component {
             this.props.mesure.map(manda => (
               <Marker
                 key={manda.id}
-                position={[manda.latitude,manda.longitude]}
+                position={[manda.latitude, manda.longitude]}
                 style={{ backgroundColor: "black" }}
               >
                 <Popup>
                   <span>
                     {manda.nom} <br />
-                      {manda.prenom} <br />
+                    {manda.prenom} <br />
                     {manda.type} <br />
                     {/*{manda.date_ouverture} <br />*/}
                   </span>
