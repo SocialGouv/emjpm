@@ -63,8 +63,8 @@ const filterMandataires = (mandataires, filters) => {
   if (filters.postcodeCoordinates) {
     filteredMandataires = geolib.orderByDistance(
       {
-        latitude: filters.postcodeCoordinates[0],
-        longitude: filters.postcodeCoordinates[1]
+        latitude: filters.postcodeCoordinates[1],
+        longitude: filters.postcodeCoordinates[0]
       },
       // add lat/lng properties to mandataires data so they can be sorted and returned as is
       filteredMandataires.map(mandataire => ({
