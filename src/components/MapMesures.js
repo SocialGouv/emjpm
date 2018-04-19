@@ -26,8 +26,6 @@
 // )
 
 import { Map, Marker, Popup, TileLayer, PropTypes as MapPropTypes } from "react-leaflet";
-import "../../static/css/custom.css";
-import CodePostalMandataire from "./CodePostalMandataire";
 
 // const MyPopupMarker = ({ children, position }) => (
 //     <Marker position={position}>
@@ -65,7 +63,7 @@ class MapMesures extends React.Component {
     // ]
 
     return (
-      <div className="hello">
+      <div>
         <Map center={[50.633, 3.066]} zoom={this.state.zoom}>
           <TileLayer
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
