@@ -1,36 +1,18 @@
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
+import styled from "styled-components";
 import geolib from "geolib";
+import dynamic from "next/dynamic";
+
+import PanelFilterMandataires from "../src/components/PanelFilterMandataires";
 import TableMandataire from "../src/components/TableMandataire";
 import Navigation from "../src/components/Navigation";
 import RowModal from "../src/components/RowModal";
-import ImageBandeau from "../src/components/ImageBandeau";
-import PanelGris from "../src/components/PanelGris";
 import Footer from "../src/components/Footer";
 import Commentaire from "../src/components/Commentaire";
 import apiFetch from "../src/components/Api";
 
-import dynamic from "next/dynamic";
-// import { Map, Marker, Popup, TileLayer } from "react-leaflet-universal";
-// import { Map, Marker, Popup, TileLayer } from 'react-leaflet';
-require("leaflet/dist/leaflet.css");
-import "bootstrap/dist/css/bootstrap.css";
-import "../static/css/hero.css";
-import "../static/css/panel.css";
-import "../static/css/footer.css";
-import "../static/css/custom.css";
-// import { redirectIfNotAuthenticated, getJwt } from "../lib/auth";
-// import { getUser, getCurrentUser } from "../services/userApi";
-import Router from "next/router";
-
-const styles = {
-  fontFamily: "sans-serif",
-  textAlign: "center"
-};
-
-const API_URL = process.env.API_URL;
-
-const customStyles = {
+const modalStyles = {
   content: {
     top: "50%",
     left: "50%",
@@ -41,31 +23,10 @@ const customStyles = {
   }
 };
 
-// const apiFetch = (route, params) =>
-//     fetch(`${API_URL}/api/v1${route}`, {
-//         method: "GET",
-//         credentials: "include",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         ...params
-//     })
-//         .then(res => {
-//             // intercept
-//             if (res.status === 401) {
-//                 Router.push("/login");
-//                 return;
-//             }
-//             return res;
-//         })
-//         .then(res => res.json());
-
 const MapSearch = dynamic(import("../src/components/Map"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
-
-const logo = require("!!url-loader?limit=0!../static/images/logo_emjpm.png");
 
 // postCode => [lat, lon]
 const getPostCodeCoordinates = postCode => {
@@ -73,47 +34,32 @@ const getPostCodeCoordinates = postCode => {
   if (!postCode || !postCode.trim()) {
     return Promise.resolve(null);
   }
-  // console.log(fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
-  //     .then(response => response.json())
-  //     .then(json => console.log(json.features[0].geometry.coordinates[0][0]
-  //     )))
 
   return fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
     .then(response => response.json())
     .then(json => json.features[0].geometry.coordinates);
 };
 
+const stringMatch = (str, needle) => str.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
+
 // filter and sort list of mandataires
 const filterMandataires = (mandataires, filters) => {
   let filteredMandataires = mandataires.filter(mandataire => {
-    if (filters.specialite === "") {
-      return (
-        mandataire.type.toLowerCase().indexOf(filters.searchType.toLowerCase()) !== -1 &&
-        (mandataire.type.toLowerCase().indexOf(filters.searchTypeIn.toLowerCase()) !== -1 &&
-          mandataire.type.toLowerCase().indexOf(filters.searchTypePr.toLowerCase()) !== -1 &&
-          mandataire.type.toLowerCase().indexOf(filters.searchTypeSe.toLowerCase()) !== -1) &&
-        // (mandataire.referent.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 ||
-        mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
-        mandataire.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1
-      );
-    } else {
-      return (
-        mandataire.type.toLowerCase().indexOf(filters.searchType.toLowerCase()) !== -1 &&
-        (mandataire.type.toLowerCase().indexOf(filters.searchTypeIn.toLowerCase()) !== -1 ||
-          mandataire.type.toLowerCase().indexOf(filters.searchTypePr.toLowerCase()) !== -1 ||
-          mandataire.type.toLowerCase().indexOf(filters.searchTypeSe.toLowerCase()) !== -1) &&
-        // (mandataire.referent.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 ||
-        mandataire.etablissement.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
-        mandataire.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1
-        // mandataire.specialites.indexOf(filters.specialite) !== -1
-      );
-    }
+    return (
+      stringMatch(mandataire.type, filters.searchType) &&
+      (stringMatch(mandataire.type, filters.searchTypeIn) &&
+        stringMatch(mandataire.type, filters.searchTypePr) &&
+        stringMatch(mandataire.type, filters.searchTypeSe)) &&
+      stringMatch(mandataire.etablissement, filters.searchNom) &&
+      stringMatch(mandataire.ville, filters.searchVille)
+    );
   });
 
   filteredMandataires.sort((a, b) =>
     sortByDispo(a.dispo_max - a.disponibilite, b.dispo_max - b.disponibilite)
   );
 
+  // add lat/lon
   if (filters.postcodeCoordinates) {
     filteredMandataires = geolib.orderByDistance(
       {
@@ -132,20 +78,15 @@ const filterMandataires = (mandataires, filters) => {
   return filteredMandataires;
 };
 
-const filterMesures = (mesures, filters) => {
-  // let filteredMesures = mesures
-  let filteredMesures = mesures.filter(mesure => {
-    return (
-      mesure.type.toLowerCase().indexOf(filters.searchType.toLowerCase()) !== -1 &&
-      (mesure.type.toLowerCase().indexOf(filters.searchTypeIn.toLowerCase()) !== -1 &&
-        mesure.type.toLowerCase().indexOf(filters.searchTypePr.toLowerCase()) !== -1 &&
-        mesure.type.toLowerCase().indexOf(filters.searchTypeSe.toLowerCase()) !== -1) &&
-      // mesure.nom.toLowerCase().indexOf(filters.searchNom.toLowerCase()) !== -1 &&
-      mesure.ville.toLowerCase().indexOf(filters.searchVille.toLowerCase()) !== -1
-    );
-  });
-  return filteredMesures;
-};
+const filterMesures = (mesures, filters) =>
+  mesures.filter(
+    mesure =>
+      stringMatch(mesure.type, filters.searchType) &&
+      stringMatch(mesure.type, filters.searchTypeIn) &&
+      stringMatch(mesure.type, filters.searchTypePr) &&
+      stringMatch(mesure.type, filters.searchTypeSe) &&
+      stringMatch(mesure.type, filters.searchVille)
+  );
 
 const sortByDispo = (a, b) => {
   const dispoA = parseInt(a, 10) || -Infinity;
@@ -159,7 +100,71 @@ const sortByDispo = (a, b) => {
   return 0;
 };
 
-class Mandataires extends React.Component {
+const Title = styled.div`
+  text-align: left;
+  font-size: 2em;
+  padding: 15px;
+`;
+
+const ModalMandataire = ({ isOpen, closeModal, children }) => (
+  <Modal
+    isOpen={isOpen}
+    onRequestClose={closeModal}
+    style={modalStyles}
+    contentLabel="mandataire"
+    background="#e9ecef"
+    className="Modal"
+    overlayClassName="Overlay"
+  >
+    <button onClick={closeModal}>X</button>
+    {children}
+  </Modal>
+);
+
+const TitleMandataire = styled.div`
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: bold;
+`;
+
+const FicheMandataire = ({ style, mandataire }) => (
+  <div className="container" style={style}>
+    <div className="row">
+      <div className="col-6">
+        <TitleMandataire>{mandataire.etablissement}</TitleMandataire>
+        <div>{mandataire.type.toUpperCase()}</div>
+        <RowModal value={mandataire.adresse} />
+        <div>
+          {mandataire.code_postal} {mandataire.ville.toUpperCase()}
+        </div>
+        <br />
+        <RowModal label="Contact" value={mandataire.referent} />
+        <div>{mandataire.telephone}</div>
+        <div>{mandataire.email}</div>
+        <br />
+        {<RowModal label="Tribunal Instance" value={mandataire.ti} />}
+      </div>
+      <div className="col-6">
+        <div
+          style={{
+            verticalAlign: "middle",
+            textAlign: "center",
+            borderBottom: "20px",
+            lineHeight: "40px"
+          }}
+        >
+          <div>
+            Mesures en cours : {mandataire.disponibilite} / {mandataire.dispo_max}
+          </div>
+        </div>
+        <br />
+        <Commentaire currentMandataire={mandataire} />
+      </div>
+    </div>
+  </div>
+);
+
+class Ti extends React.Component {
   state = {
     data: [],
     datamesure: [],
@@ -175,74 +180,16 @@ class Mandataires extends React.Component {
     specialite: ""
   };
 
-  // static async getInitialProps(ctx) {
-  //     // If it does not exist session, it gets redirected
-  //     if (redirectIfNotAuthenticated(ctx)) {
-  //         return {};
-  //     }
-  //
-  //     const id = ctx.query && ctx.query.id;
-  //     const jwt = getJwt(ctx);
-  //     const res = await (id ? getUser(jwt, id) : getCurrentUser(jwt));
-  //     return {
-  //         user: res.data,
-  //         authenticated: !!jwt,
-  //         query: !!id
-  //     };
-  // }
-
   componentDidMount() {
-    apiFetch("/mandataires").then(json => {
-      this.setState({
-        data: json
-      });
-    });
-
-    apiFetch("/mesures").then(json => {
-      this.setState({
-        datamesure: json
-      });
-    });
-    console.log(this.state.datamesure);
-    // const url = `${API_URL}/api/v1/mandataires`;
-    // fetch(url, {
-    //   method: "GET",
-    //   credentials: "include",
-    //   headers: {
-    //     "Access-Control-Allow-Credentials": "true",
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json"
-    //   }
-    // body: JSON.stringify({
-    //   ti_id: 1
-    // })
-    // })
-    // .then(response => response.json())
-
-    // const urlmesure = "/static/mesures.json";
-    // fetch(urlmesure)
-    //     .then(response => response.json())
-    //     .then(json => {
-    //         this.setState({
-    //             datamesure: json
-    //         });
-    //     });
+    apiFetch("/mandataires").then(mandataires =>
+      apiFetch("/mesures").then(mesures => {
+        this.setState({
+          data: mandataires,
+          datamesure: mesures
+        });
+      })
+    );
   }
-
-  onlogout = () => {
-    console.log("098765");
-    fetch(`${API_URL}/auth/logout`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(json => {
-        Router.push("/login");
-      });
-  };
 
   openModal = mandataire => {
     this.setState({ modalIsOpen: true, currentMandataire: mandataire });
@@ -275,7 +222,6 @@ class Mandataires extends React.Component {
       },
       this.state.specialite
     );
-    console.log("coordinates", this.state.postcodeCoordinates);
     const filteredMesures = filterMesures(this.state.datamesure, {
       searchType: this.state.searchType,
       searchTypeIn: this.state.searchTypeIn,
@@ -286,125 +232,43 @@ class Mandataires extends React.Component {
     });
 
     const mandatairesCount = filteredMandataires.length;
-    const currentMandataireModal = this.state.currentMandataire;
+
     return (
       <div>
-        <div
-          className="container"
-          style={{ verticalAlign: "center", marginTop: "5px", marginBottom: "5px" }}
-        >
-          <img src={logo} style={{ width: "30%" }} alt="Accueil de eMJPM.beta.gouv.fr" />
-          <button
-            type="submit"
-            style={{ position: "absolute", right: "100px" }}
-            className="btn btn-linkt"
-            onClick={this.onlogout}
-          >
-            Se déconnecter
-          </button>
-        </div>
-        <PanelGris
+        <PanelFilterMandataires
           findPostcode={this.findPostcode}
           updateFilters={this.updateFilters}
-          type={this.state.type}
         />
         <MapSearch mesure={filteredMesures} postcodeMandataire={this.state.postcodeCoordinates} />
-        <br />
         <div className="container">
-          <div style={{ textAlign: "left", fontSize: "2em", padding: "15px" }}>
-            <b> {mandatairesCount} Professionels référencés </b>
-          </div>
-          <br />
+          <Title>
+            {mandatairesCount} Professionel{(mandatairesCount > 1 && "s") || null} référencé{(mandatairesCount > 1 && "s") || null}{" "}
+          </Title>
           <TableMandataire
             rows={filteredMandataires}
             updateFilters={this.updateFilters}
             openModal={this.openModal}
           />
-
-          <div>
-            <Modal
-              isOpen={this.state.modalIsOpen}
-              onRequestClose={this.closeModal}
-              style={customStyles}
-              contentLabel="mandataire"
-              background="#e9ecef"
-              className="Modal"
-              overlayClassName="Overlay"
-            >
-              <button onClick={this.closeModal}>X</button>
-              {this.state.currentMandataire && (
-                <div className="container" style={{ marginTop: "30px" }}>
-                  <div className="row">
-                    <div className="col-6">
-                      <b style={{ textAlign: "left", fontSize: "1.5em" }}>
-                        {this.state.currentMandataire.etablissement}
-                      </b>
-                      <div style={{ textAlign: "left" }}>
-                        {currentMandataireModal.type.toUpperCase()}
-                      </div>
-                      <RowModal value={currentMandataireModal.adresse} />
-                      <div style={{ textAlign: "left" }}>
-                        {currentMandataireModal.code_postal}{" "}
-                        {currentMandataireModal.ville.toUpperCase()}
-                      </div>
-                      <br />
-                      <RowModal label="Contact" value={currentMandataireModal.referent} />
-                      <div style={{ textAlign: "left" }}>{currentMandataireModal.telephone}</div>
-                      <div style={{ textAlign: "left" }}>{currentMandataireModal.email}</div>
-                      <br />
-
-                      {/*<RowModal label="Tribunal Instance" value={currentMandataireModal.ti} />*/}
-                      <br />
-                      <div style={{ align: "center" }}>
-                        {/*<button*/}
-                        {/*className={"btn btn-dark"}*/}
-                        {/*onClick={this.closeModal}*/}
-                        {/*>*/}
-                        {/*close*/}
-                        {/*</button>*/}
-                      </div>
-                    </div>
-                    <div className="col-6">
-                      <div
-                        className=""
-                        style={{
-                          verticalAlign: "middle",
-                          textAlign: "center",
-                          borderBottom: "20px",
-                          lineHeight: "40px"
-                        }}
-                      >
-                        <div>
-                          Mesures en cours : {currentMandataireModal.disponibilite} /{" "}
-                          {currentMandataireModal.dispo_max}
-                        </div>
-                      </div>
-                      <br />
-                      <Commentaire currentMandataire={this.state.currentMandataire} />
-                    </div>
-                  </div>
-                </div>
-              )}
-            </Modal>
-          </div>
-        </div>
-
-        <div>
-          <Footer />
-          <br />
-          <br />
+          <ModalMandataire isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>
+            {this.state.currentMandataire && (
+              <FicheMandataire
+                mandataire={this.state.currentMandataire}
+                style={{ textAlign: "left" }}
+              />
+            )}
+          </ModalMandataire>
         </div>
       </div>
     );
   }
 }
 
-const App = () => (
-  <div style={styles}>
-    <div style={{ overflowY: "auto", maxHeight: "100vh" }}>
-      <Mandataires />
-    </div>
+const TiPage = () => (
+  <div style={{ backgroundColor: "#cad4de", minHeight: "100%" }}>
+    <Navigation />
+    <Ti style={{ marginTop: 100 }} />
+    <Footer />
   </div>
 );
 
-export default App;
+export default TiPage;
