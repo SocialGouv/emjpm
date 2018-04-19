@@ -194,12 +194,15 @@ class Ti extends React.Component {
   openModal = mandataire => {
     this.setState({ modalIsOpen: true, currentMandataire: mandataire });
   };
+
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
+
   updateFilters = filters => {
     this.setState(filters);
   };
+
   findPostcode = postCode =>
     getPostCodeCoordinates(postCode).then(coordinates =>
       this.setState({
