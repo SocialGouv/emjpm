@@ -1,11 +1,6 @@
 import RowModal from "./RowModal";
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
-import "bootstrap/dist/css/bootstrap.css";
-import "../../static/css/hero.css";
-import "../../static/css/panel.css";
-import "../../static/css/footer.css";
-import "../../static/css/custom.css";
 import Form from "react-jsonschema-form";
 
 const schema = {
@@ -16,17 +11,15 @@ const schema = {
   }
 };
 
-
-
 const API_URL = process.env.API_URL;
 
 const formData = {};
 
 const uiSchema = {
-    co_comment: {
-            "ui:widget": "textarea"
-        }
-}
+  co_comment: {
+    "ui:widget": "textarea"
+  }
+};
 
 class Commentaire extends React.Component {
   state = {
@@ -36,10 +29,11 @@ class Commentaire extends React.Component {
   };
 
   componentDidMount() {
-      console.log(this.props.currentMandataire.mandataire_id)
-    const url = `${API_URL}/api/v1/mandataires/${ this.props.currentMandataire.mandataire_id }/commentaires`;
+    console.log(this.props.currentMandataire.mandataire_id);
+    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire
+      .mandataire_id}/commentaires`;
     fetch(url, {
-        credentials: "include",
+      credentials: "include",
       method: "GET",
       headers: {
         "Access-Control-Allow-Credentials": "true",
@@ -59,14 +53,15 @@ class Commentaire extends React.Component {
   }
 
   onSubmit = ({ formData }) => {
-    const url = `${API_URL}/api/v1/mandataires/${ this.props.currentMandataire.mandataire_id }/commentaires`;
-      fetch(url, {
+    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire
+      .mandataire_id}/commentaires`;
+    fetch(url, {
       credentials: "include",
       method: "POST",
       headers: {
-          "Access-Control-Allow-Credentials": "true",
-          Accept: "application/json",
-          "Content-Type": "application/json"
+        "Access-Control-Allow-Credentials": "true",
+        Accept: "application/json",
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         co_comment: formData.co_comment
@@ -78,12 +73,12 @@ class Commentaire extends React.Component {
           data: json
         });
       })
-    .catch(function(error) {
-  });
+      .catch(function(error) {});
   };
 
   onDelete = comments => {
-      const url = `${API_URL}/api/v1/mandataires/${ this.props.currentMandataire.mandataire_id }/commentaires/${ comments.co_id }`;
+    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire
+      .mandataire_id}/commentaires/${comments.co_id}`;
     fetch(url, {
       credentials: "include",
       method: "DELETE",
@@ -102,8 +97,8 @@ class Commentaire extends React.Component {
   };
 
   render() {
-      console.log(111)
-console.log(this.state.data)
+    console.log(111);
+    console.log(this.state.data);
 
     return (
       <div className="form-group">
@@ -129,19 +124,22 @@ console.log(this.state.data)
         </Form>
 
         <hr />
-         < div style={{overflow: "scroll", height: "250px"}}>
-        {this.state.data.map(comments => (
-          <div id={comments.id}>
-            <div style={{ backgroundColor: "#b5b5b5", fontSize: "0.8em" }}>
-              {" "}
-              {comments.co_comment} <br />
-            </div>
-Ajouté le : {comments.postDate.slice(0,10)} {" "}
-              <a type="submit" onClick={() => this.onDelete(comments)}> supprimer</a>
+        <div style={{ overflow: "scroll", height: "250px" }}>
+          {this.state.data.map(comments => (
+            <div id={comments.id}>
+              <div style={{ backgroundColor: "#b5b5b5", fontSize: "0.8em" }}>
+                {" "}
+                {comments.co_comment} <br />
+              </div>
+              Ajouté le : {comments.postDate.slice(0, 10)} {" "}
+              <a type="submit" onClick={() => this.onDelete(comments)}>
+                {" "}
+                supprimer
+              </a>
               <br />
-          </div>
-        ))}
-      </div>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

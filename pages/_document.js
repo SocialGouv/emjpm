@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.css";
 import "leaflet/dist/leaflet.css";
 
 import "../static/css/hero.css";
-import "../static/css/panel.css";
 import "../static/css/footer.css";
 import "../static/css/custom.css";
 
