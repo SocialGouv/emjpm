@@ -23,7 +23,7 @@ const modalStyles = {
   }
 };
 
-const MapSearch = dynamic(import("../src/components/Map"), {
+const OpenStreeMap = dynamic(import("../src/components/Map"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
@@ -127,7 +127,7 @@ const TitleMandataire = styled.div`
   font-weight: bold;
 `;
 
-const FicheMandataire = ({ style, mandataire }) => (
+export const FicheMandataire = ({ style, mandataire }) => (
   <div className="container" style={style}>
     <div className="row">
       <div className="col-6">
@@ -242,16 +242,15 @@ class Ti extends React.Component {
           findPostcode={this.findPostcode}
           updateFilters={this.updateFilters}
         />
-        <MapSearch mesure={filteredMesures} postcodeMandataire={this.state.postcodeCoordinates} />
+        <OpenStreeMap
+          mesure={filteredMesures}
+          postcodeMandataire={this.state.postcodeCoordinates}
+        />
         <div className="container">
           <Title>
             {mandatairesCount} Professionel{(mandatairesCount > 1 && "s") || null} référencé{(mandatairesCount > 1 && "s") || null}{" "}
           </Title>
-          <TableMandataire
-            rows={filteredMandataires}
-            updateFilters={this.updateFilters}
-            openModal={this.openModal}
-          />
+          <TableMandataire rows={filteredMandataires} openModal={this.openModal} />
           <ModalMandataire isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>
             {this.state.currentMandataire && (
               <FicheMandataire

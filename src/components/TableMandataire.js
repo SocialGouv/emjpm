@@ -1,6 +1,6 @@
 import TableRowMandataire from "./TableRowMandataire";
 
-const TableMandataire = ({ rows, updateFilters, openModal }) => {
+const TableMandataire = ({ rows, openModal }) => {
   return (
     <div className="col-lg-12" style={{ padding: "0px" }}>
       <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
@@ -44,7 +44,6 @@ const TableMandataire = ({ rows, updateFilters, openModal }) => {
             <TableRowMandataire
               key={mandataire.telephone}
               mandataire={mandataire}
-              updateFilters={this.updateFilters}
               onClick={() => openModal(mandataire)}
             />
           ))}
