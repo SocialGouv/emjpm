@@ -366,7 +366,7 @@ class Mandataires extends React.Component {
                     </div>
                     <div className="col-6">
                       <div
-                        className="greenrectangleModal"
+                        className=""
                         style={{
                           verticalAlign: "middle",
                           textAlign: "center",

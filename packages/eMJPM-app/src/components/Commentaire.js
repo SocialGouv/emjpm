@@ -10,7 +10,7 @@ import Form from "react-jsonschema-form";
 
 const schema = {
   type: "object",
-  required: [],
+  required: ['co_comment'],
   properties: {
     co_comment: { type: "string", title: "message", default: "" }
   }
