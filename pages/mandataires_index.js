@@ -76,7 +76,10 @@ class MandatairesIndex extends React.Component {
 
   componentDidMount() {
 
-
+      apiFetch(`/mandataires/1/capacite`, {
+          method: "PUT"
+      }).then(() => {
+      })
 
       apiFetch(`/mandataires/1/mesures`,)
           .then(json => {
