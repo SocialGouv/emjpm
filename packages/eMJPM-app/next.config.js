@@ -7,9 +7,11 @@ require("dotenv").config({
 });
 
 const exportPathMap = () => ({
-  "/index.html": { page: "/" },
-  "/login.html": { page: "/login" },
-  "/tis.html": { page: "/tis" }
+  "/": { page: "/" },
+  "/login": { page: "/login" },
+  "/tis": { page: "/tis" },
+  "/services": { page: "/services" },
+  "/mandataires_index": { page: "/mandataires_index" }
 });
 
 module.exports = withCSS(
