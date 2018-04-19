@@ -50,26 +50,14 @@ import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
 class Mapstry extends React.Component {
   state = {
-    zoom: 9
+    zoom: 10
   };
 
   render() {
-    //
-    // const markers = [
-    //     { key: 'marker1', position: [51.5, -0.1], children: 'My first popup' },
-    //     { key: 'marker2', position: [51.51, -0.1], children: 'My second popup' },
-    //     { key: 'marker3', position: [51.49, -0.05], children: 'My third popup' },
-    // ]
-
+    const center = this.props.postcodeMandataire || [50.459441, 2.693963];
     return (
       <div>
-        <Map
-          center={[
-            this.props.postcodeMandataire[1] || 50.459441,
-            this.props.postcodeMandataire[0] || 2.693963
-          ]}
-          zoom={this.state.zoom}
-        >
+        <Map center={center} zoom={this.state.zoom}>
           <TileLayer
             attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
