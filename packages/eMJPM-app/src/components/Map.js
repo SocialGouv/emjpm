@@ -81,8 +81,8 @@ class Mapstry extends React.Component {
           {this.props.mesure &&
             this.props.mesure.map(manda => (
               <Marker
-                key={manda.latitude}
-                position={[manda.latitude, manda.longitude]}
+                key={manda.id}
+                position={[manda.latitude,manda.longitude]}
                 style={{ backgroundColor: "black" }}
               >
                 <Popup>
@@ -90,7 +90,7 @@ class Mapstry extends React.Component {
                     {manda.nom} <br />
                       {manda.prenom} <br />
                     {manda.type} <br />
-                    {manda.date_ouverture} <br />
+                    {/*{manda.date_ouverture} <br />*/}
                   </span>
                 </Popup>
               </Marker>
