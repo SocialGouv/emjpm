@@ -2,7 +2,7 @@ import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 
-import FooterBottom from "../src/components/FooterBottom";
+import Footer from "../src/components/Footer";
 import Navigation from "../src/components/Navigation";
 import LoginForm from "../src/components/LoginForm";
 
@@ -26,7 +26,7 @@ const LoginPage = () => (
   <div style={{ backgroundColor: "#cad4de", minHeight: "100%" }}>
     <Navigation />
     <LoginContainer style={{ marginTop: 100 }} />
-    <FooterBottom />
+    <Footer fixed />
   </div>
 );
 

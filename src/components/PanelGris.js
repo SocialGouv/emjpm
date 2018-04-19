@@ -3,12 +3,9 @@ import CodePostalMandataire from "./CodePostalMandataire";
 const PanelGris = ({ findPostcode, updateFilters, type }) => {
   return (
     <div
-      className="panel"
       style={{
         textAlign: "left",
-        backgroundSize: "cover",
-        heigth: "100px !important",
-        backgroundColor: "#cccccc"
+        heigth: "100px !important"
       }}
     >
       <div className="panel__container">
@@ -58,8 +55,7 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                   onClick={e =>
                     updateFilters({
                       searchTypeIn: (e.target.checked && e.target.value) || ""
-                    })
-                  }
+                    })}
                   type="checkbox"
                   value="Individuel"
                   className="form-check-input"
@@ -85,8 +81,7 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                   onChange={e =>
                     updateFilters({
                       searchTypePr: (e.target.checked && e.target.value) || ""
-                    })
-                  }
+                    })}
                   type="checkbox"
                   value="Prepose"
                   className="form-check-input"
@@ -111,8 +106,7 @@ const PanelGris = ({ findPostcode, updateFilters, type }) => {
                   onChange={e =>
                     updateFilters({
                       searchTypeSe: (e.target.checked && e.target.value) || ""
-                    })
-                  }
+                    })}
                   type="checkbox"
                   value="Service"
                   className="form-check-input"
