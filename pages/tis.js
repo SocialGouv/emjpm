@@ -266,7 +266,7 @@ class Ti extends React.Component {
 }
 
 const TiPage = () => (
-  <div style={{ backgroundColor: "#cad4de", minHeight: "100%" }}>
+  <div style={{ minHeight: "100%" }}>
     <Navigation logout />
     <Ti style={{ marginTop: 100 }} />
     <Footer />

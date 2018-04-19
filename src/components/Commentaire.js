@@ -1,11 +1,9 @@
-import RowModal from "./RowModal";
 import fetch from "isomorphic-fetch";
-import Modal from "react-modal";
 import Form from "react-jsonschema-form";
 
 const schema = {
   type: "object",
-  required: ['co_comment'],
+  required: ["co_comment"],
   properties: {
     co_comment: { type: "string", title: "message", default: "" }
   }
@@ -125,20 +123,22 @@ class Commentaire extends React.Component {
 
         <hr />
         <div style={{ overflow: "scroll", height: "250px" }}>
-          {this.state.data.map(comments => (
-            <div id={comments.id}>
-              <div style={{ backgroundColor: "#b5b5b5", fontSize: "0.8em" }}>
-                {" "}
-                {comments.co_comment} <br />
+          {this.state.data &&
+            this.state.data.map &&
+            this.state.data.map(comments => (
+              <div id={comments.id}>
+                <div style={{ backgroundColor: "#b5b5b5", fontSize: "0.8em" }}>
+                  {" "}
+                  {comments.co_comment} <br />
+                </div>
+                Ajouté le : {comments.postDate.slice(0, 10)} {" "}
+                <a type="submit" onClick={() => this.onDelete(comments)}>
+                  {" "}
+                  supprimer
+                </a>
+                <br />
               </div>
-              Ajouté le : {comments.postDate.slice(0, 10)} {" "}
-              <a type="submit" onClick={() => this.onDelete(comments)}>
-                {" "}
-                supprimer
-              </a>
-              <br />
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     );

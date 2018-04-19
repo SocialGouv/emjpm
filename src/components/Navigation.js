@@ -1,23 +1,15 @@
 import Router from "next/router";
 
+import apiCall from "./Api";
+
 // todo: hack: force embedding the SVG due to some webpack+next+static issues in a gh-pages env
 const logo = require("!!url-loader?limit=0!../../static/images/logo_emjpm.png");
 
-const API_URL = process.env.API_URL;
-
 const doLogout = () =>
-  fetch(`${API_URL}/auth/logout`, {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-    .then(response => response.json())
-    .then(json => {
-      Router.push("/login");
-      return json;
-    });
+  apiCall("/auth/logout").then(json => {
+    Router.push("/login");
+    return json;
+  });
 
 const Navigation = ({ logout }) => (
   <div style={{ background: "white", padding: "15px 0", textAlign: "center" }}>

@@ -30,7 +30,6 @@ const Container = styled.div`
 
 const PanelContent = styled.div`
   min-height: 100px;
-  max-width: 900px;
   margin: 0 auto;
   padding: 1em;
   padding-top: 1.5em;
@@ -46,19 +45,19 @@ const BootstrapInput = props => <StyledInput className="form-control mb-2" {...p
 
 const PanelFilterMandataires = ({ findPostcode, updateFilters, type }) => (
   <Container>
-    <PanelContent>
+    <PanelContent className="container">
       <div className="row">
-        <div className="col-12 col-sm-4 offset-md-1 col-md-3">
+        <div className="col-12 col-sm-4">
           <CodePostalMandataire findPostcode={findPostcode} className="form-control mb-2" />
         </div>
-        <div className="col-12 col-sm-4 col-md-3">
+        <div className="col-12 col-sm-4">
           <BootstrapInput
             type={"text"}
             placeholder={"Ville"}
             onChange={e => updateFilters({ searchVille: e.target.value })}
           />
         </div>
-        <div className="col-12 col-sm-4 col-md-3">
+        <div className="col-12 col-sm-4">
           <BootstrapInput
             type={"text"}
             placeholder={"Nom d'établissement ou Nom"}
@@ -68,7 +67,7 @@ const PanelFilterMandataires = ({ findPostcode, updateFilters, type }) => (
       </div>
       <br />
       <div className="row">
-        <div className="col-9 offset-1">
+        <div className="col-12">
           <CheckBox label="Individuels" value="Individuel" updateFilters={updateFilters} />
           <CheckBox label="Préposés" value="Prepose" updateFilters={updateFilters} />
           <CheckBox label="Services" value="Service" updateFilters={updateFilters} />

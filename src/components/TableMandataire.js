@@ -2,7 +2,7 @@ import TableRowMandataire from "./TableRowMandataire";
 
 const TableMandataire = ({ rows, openModal }) => {
   return (
-    <div className="col-lg-12" style={{ padding: "0px" }}>
+    <div className="col-12" style={{ padding: "0px" }}>
       <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
         <thead>
           {/*<style jsx>{`*/}
@@ -28,7 +28,7 @@ const TableMandataire = ({ rows, openModal }) => {
             </td>
             <td
               style={{
-                textAlign: "left",
+                textAlign: "center",
                 verticalAlign: "middle",
                 width: 120,
                 color: "#696969",
