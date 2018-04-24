@@ -37,7 +37,7 @@ export default class MyDocument extends Document {
           <meta name="author" content="" />
           <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
           <link rel="stylesheet" href="/_next/static/style.css" />
-          {/*<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />*/}
+          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
           {this.props.styleTags}
         </Head>
         <body>
