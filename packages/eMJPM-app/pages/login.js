@@ -1,5 +1,3 @@
-import fetch from "isomorphic-fetch";
-import Form from "react-jsonschema-form";
 import styled from "styled-components";
 
 import Footer from "../src/components/Footer";
