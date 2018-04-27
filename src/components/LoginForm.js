@@ -4,6 +4,8 @@ import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
 
+import piwik from "../piwik";
+
 const API_URL = process.env.API_URL;
 
 const doLogin = formData => {
@@ -55,8 +57,6 @@ const uiSchema = {
     }
   }
 };
-
-const FormContent = styled.div`text-align: left;`;
 
 const StyledForm = styled(Form)`
   .form-group,
@@ -122,6 +122,8 @@ class LoginForm extends React.Component {
     formData: {}
   };
   componentDidMount() {
+    piwik.push(["trackEvent", "navigation", "login"]);
+
     // focus login on load
     const node = findDOMNode(this);
     if (node) {
@@ -141,6 +143,7 @@ class LoginForm extends React.Component {
       () => {
         doLogin(formData)
           .catch(e => {
+            piwik.push(["trackEvent", "login", "error"]);
             this.setState({
               status: "error",
               error: "Impossible de se connecter"
@@ -148,6 +151,7 @@ class LoginForm extends React.Component {
             throw e;
           })
           .then(json => {
+            piwik.push(["trackEvent", "login", "success"]);
             Router.push(json.url);
             this.setState({
               status: "success",
