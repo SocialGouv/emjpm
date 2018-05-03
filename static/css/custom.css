@@ -174,47 +174,43 @@
     height: 70px;
 }
 
-#root_nom {
-    width: 150px;
-    display: inline-block;
-}
-#root_prenom {
-    width: 150px;
-    display: inline-block;
-}
-#root_adresse {
-    width: 300px;
-    display: inline-block;
-}
-#root_email {
-    width: 300px;
-    display: inline-block;
-}
+/*#root_nom {*/
+    /*width: 150px;*/
+    /*display: inline-block;*/
+/*}*/
+/*#root_prenom {*/
+    /*width: 150px;*/
+    /*display: inline-block;*/
+/*}*/
+/*#root_adresse {*/
+    /*width: 300px;*/
+    /*display: inline-block;*/
+/*}*/
+/*#root_email {*/
+    /*width: 300px;*/
+    /*display: inline-block;*/
+/*}*/
 
-#root_commune {
-    width: 123px;
-    display: inline-block;
-}
-#root_etablissement {
-    width: 123px;
-    display: inline-block;
-}
-#root_ouverture {
-    width: 410px;
-    display: inline-block;
-}
-#root_codePostal {
-    width: 195px;
-    display: inline-block;
-}
-#root_annee {
-    width: 195px;
-    display: inline-block;
-}
-#root_residence {
-    width: 195px;
-    display: inline-block;
-}
+/*#root_commune {*/
+    /*width: 123px;*/
+    /*display: inline-block;*/
+/*}*/
+/*#root_etablissement {*/
+    /*width: 123px;*/
+    /*display: inline-block;*/
+/*}*/
+/*#root_codePostal {*/
+    /*width: 195px;*/
+    /*display: inline-block;*/
+/*}*/
+/*#root_annee {*/
+    /*width: 195px;*/
+    /*display: inline-block;*/
+/*}*/
+/*#root_residence {*/
+    /*width: 195px;*/
+    /*display: inline-block;*/
+/*}*/
 #root_username {
     width: 195px;
     padding-left: 3px;
@@ -225,9 +221,9 @@
     margin-left: 0px;
     padding-left: 3px;
 }
-#root_civilite {
-    width: 123px;
-}
+/*#root_civilite {*/
+    /*width: 123px;*/
+/*}*/
 .react-tabs__tab {
     text-align: center;
     height: 60px;
@@ -260,3 +256,34 @@
 .form__commentaire textarea {
     width: 400px;
 }
+
+.input_mesure_ouverture{
+    width: 200px;
+    display: inline-block;
+}
+
+.input_mesure_type{
+    width: 310px;
+    display: inline-block;
+}
+
+.input_mesure_residence{
+    width: 230px;
+    display: inline-block;
+}
+
+.input_mesure_commune{
+    width: 135px;
+    display: inline-block;
+}
+
+.input_mesure_civilite{
+    width: 230px;
+    display: inline-block;
+}
+
+.input_mesure_annee{
+    width: 280px;
+    display: inline-block;
+}
+
