@@ -1,12 +1,60 @@
 import TableRowMesure from "./TableRowMesure";
 import MandatairesIndex from "../../pages/mandataires_index";
 import MesureInput from "./MesureInput";
+import styled from "styled-components";
+import CreationMesure from "./CreationMesure";
+
+const Container = ({ children }) => <div className="container">{children}</div>;
+
+const TdStyle = styled.td`
+  width: 20%;
+  text-align: left;
+  color: #696969;
+  border-top-width: 0px;
+`;
+
+const Td = ({ children }) => <TdStyle>{children}</TdStyle>;
+
+const ColStyle = styled.b`
+  color: ${props => props.color || "black"};
+`;
+
+export const TableMesureView = ({ updateMesure, rows }) => (
+  <Container>
+    <CreationMesure className="row" updateMesure={updateMesure} />
+    <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
+      <thead>
+        <tr>
+          <Td>
+            <ColStyle> Date d'ordonnance </ColStyle>
+          </Td>
+          <Td>
+            <ColStyle> Résidence du majeur </ColStyle>
+          </Td>
+          <Td>
+            <ColStyle> Type de mesure </ColStyle>
+          </Td>
+          <Td>
+            <ColStyle> Genre </ColStyle>
+          </Td>
+          <Td>
+            <ColStyle> Naissance </ColStyle>
+          </Td>
+          <Td />
+        </tr>
+      </thead>
+      <tbody>
+        {rows &&
+          rows.map(mesure => (
+            <TableRowMesure key={mesure.id} mesure={mesure} updateMesure={updateMesure} />
+          ))}
+      </tbody>
+    </table>
+  </Container>
+);
 
 class TableMesure extends React.Component {
   state = {
-    data: [],
-    datamesure: [],
-    currentMandataire: "",
     showResults: false
   };
 
@@ -21,74 +69,7 @@ class TableMesure extends React.Component {
   };
 
   render() {
-    return (
-      <div className="container">
-        <div className="col-lg-12">
-          <br />
-          <div className="row">
-            <div>
-              <br />
-              <MesureInput updateMesure={this.props.updateMesure} />
-            </div>
-          </div>
-        </div>
-        <br />
-        <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
-          <thead>
-            {/*<style jsx>{`*/}
-            {/*input {*/}
-            {/*margin-bottom: 0 !important;*/}
-            {/*}*/}
-            {/*td {*/}
-            {/*border: 1px solid #ade8ff !important;*/}
-            {/*}*/}
-            {/*`}</style>*/}
-            <tr>
-              <td
-                style={{ width: "20%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
-              >
-                <b> date d'ordonnance </b>
-              </td>
-
-              <td
-                style={{ width: "22%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
-              >
-                <b>Résidence du majeur </b>
-              </td>
-              <td
-                style={{ width: "20%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
-              >
-                <b> Type de mesure </b>
-              </td>
-              <td
-                style={{
-                  textAlign: "left",
-                  width: "10%",
-                  color: "#696969",
-                  borderTopWidth: "0px"
-                }}
-              >
-                <b> Genre </b>
-              </td>
-              <td
-                style={{ width: "10%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
-              >
-                <b> Naissance </b>
-              </td>
-              <td
-                style={{ width: "10%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
-              >
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.rows && (this.props.rows.map(mesure => (
-              <TableRowMesure  key={mesure.id} mesure={mesure} updateMesure={this.props.updateMesure}/>
-            )))}
-          </tbody>
-        </table>
-      </div>
-    );
+    return <TableMesureView updateMesure={this.props.updateMesure} rows={this.props.rows} />;
   }
 }
 
