@@ -7,6 +7,6 @@ import { linkTo } from "@storybook/addon-links";
 import { default as MesureInput, FormMesure } from "../src/components/CreationMesure";
 
 
-storiesOf("MesuresCreation", module).add("PanelFilters", () => (
+storiesOf("MesuresCreation", module).add("PanelCreation", () => (
   <MesureInput updateFilters={() => {}} findPostcode={() => {}} />
 ));

@@ -101,8 +101,8 @@
 }
 .ModalMesure {
     position: absolute;
-    width: 20% !important;
-    height: 20% !important;
+    width: 30% !important;
+    height: 30% !important;
     top: 40%;
     left: 40%;
     right: 60px;

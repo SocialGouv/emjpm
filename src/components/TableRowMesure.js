@@ -9,79 +9,8 @@ import "../../static/css/footer.css";
 import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
 import apiFetch from "./Api";
-// todo: improve tel parsing
-const cleanTels = tel => {
-  const tel2 = tel.replace(/[.-\s]/g, "");
-  if (tel2.length > 10) {
-    return [tel2.substring(0, 10), tel2.substring(10, 20), tel2.substring(20)].filter(Boolean);
-  }
-  return [tel2];
-};
-
-const Phone = ({ num }) => {
-  return (
-    <a href={`tel://${num}`} style={{ display: "block" }} title={`Téléphoner au ${num}`}>
-      {num.substring(0, 2)} {num.substring(2, 4)} {num.substring(4, 6)} {num.substring(6, 8)}{" "}
-      {num.substring(8, 10)}
-    </a>
-  );
-};
-
-
-const Cell = ({ style, title, children, value }) => (
-  <td
-    className={`pagination-centered ${colorMandatairesRetangle(value)}`}
-    style={{ fontSize: "0.8em", textAlign: "left", ...style }}
-    title={title}
-  >
-    <style jsx>{`
-      td {
-        vertical-align: middle !important;
-        textalign: "left";
-      }
-    `}</style>
-    {children}
-  </td>
-);
-
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
-  }
-};
-// const colorMatch =(disponibilite) => {
-// if (isponibilite > 5 && disponibilite < 600)
-//     if (disponibilite > 5 && disponibilite < 600)
-//     '0-19'     : 'red',
-//     '20-59'    : 'orange',
-//     '60-100'   : 'green'
-// };
-const colorMandataires = value => {
-  if (value && value < 1) {
-    return "red";
-  } else if (value && value > 5) {
-    return "green";
-  } else if (value && value < 6 && value > 0) {
-    return "orange";
-  } else {
-    return "gris";
-  }
-};
-
-const colorMandatairesRetangle = value => {
-  if (value && value < 1) {
-    return "redrectangle";
-  } else if (value && value > 5) {
-    return "greenrectangle";
-  } else if (value && value < 6 && value > 0) {
-    return "orangerectangle";
-  }
-};
+import ModalCloseMesure from "./ModalCloseMesure";
+import Cell from "./Cell"
 
 const schema = {
   title: "Se connecter",
@@ -92,78 +21,117 @@ const schema = {
     code_postal: { type: "string", title: "code_postal", default: "" },
     genre: { type: "string", title: "genre", default: "" },
     age: { type: "string", title: "age", default: "" },
+    ville: { type: "string", title: "ville", default: "" },
     status: { type: "string", title: "status", default: "" }
   }
 };
 const formData = {};
 
+export const TableRowMesureView = ({
+  date_ouverture,
+  type,
+  code_postal,
+  ville,
+  civilite,
+  annee,
+  openModal,
+  isOpen,
+  onRequestClose,
+  onClick,
+  onClickSubmit,
+  onClickClose
+}) => (
+  <tr>
+    <td
+      className={`pagination-centered`}
+      style={{
+        fontSize: "0.8em",
+        color: "rgb(204, 204, 204)",
+        textAlign: "left",
+        lineHeight: "40px"
+      }}
+    >
+      {date_ouverture.slice(0, 10)}
+    </td>
+    <Cell>
+      <b>
+        {code_postal} -{ville}{" "}
+      </b>
+    </Cell>
+    <Cell>{type}</Cell>
+    <Cell>{civilite} </Cell>
+    <Cell>{annee} </Cell>
+    <td>
+      <button className={"btn btn-dark"} onClick={openModal}>
+        Mettre fin au mandat
+      </button>
+      <ModalCloseMesure
+        isOpen={isOpen}
+        onRequestClose={onRequestClose}
+        onClick={onClick}
+        onClickSubmit={onClickSubmit}
+        onClickClose={onClickClose}
+      />
+    </td>
+  </tr>
+);
+
 class TableRowMesure extends React.Component {
   state = {
-    data: [],
-    datamesure: [],
-    currentMesure: "",
-    mesureId: ""
+    mesureId: "",
+    modalIsOpen: false
   };
 
-  onSubmit = ({ formData }) => {
-    const url = `http://localhost:3005/api/v1/mesures/${this.props.currentMesures.id}`;
-    fetch(url, {
+      onSubmit = ({ formData }) => {
+          apiFetch(`/mandataires/1/mesures/${this.props.currentMesures.id}`, {
+              method: "PUT",
+              body: JSON.stringify({
+                  date_ouverture: formData.date_ouverture,
+                  code_postal: formData.code_postal,
+                  type_mesure: formData.type_mesure,
+                  genre: formData.genre,
+                  age: formData.age,
+                  status: formData.status
+              })
+          }).then(json => {
+              this.props.updateMadataire(json);
+          });
+  };
+
+  onClick = e => {
+    apiFetch(`/mandataires/1/mesures/${e}`, {
       method: "PUT",
-      headers: {
-        "Access-Control-Allow-Credentials": "true",
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify({
-        date_ouverture: formData.date_ouverture,
-        code_postal: formData.code_postal,
-        type_mesure: formData.type_mesure,
-        genre: formData.genre,
-        age: formData.age,
-        status: formData.status
+        status: "Eteindre mesure"
+        // longitude: this.state.postcodeCoordinates[0],
+        // latitude: this.state.postcodeCoordinates[1],
       })
     })
-      .then(response => response.json())
       .then(json => {
-        this.setState({
-          datamesure: json
+        return apiFetch(`/mandataires/1/capacite`, {
+          method: "PUT"
+        }).then(() => {
+          return json;
         });
+      })
+      .then(json2 => {
+        this.props.updateMesure(json2); // callback parent with data
+      })
+      .catch(e => {
+        console.log(e);
+        throw e;
       });
   };
-
-
-
-    onClick = (e) => {
-    apiFetch(`/mandataires/1/mesures/${e}`, {
-        method: "PUT",
-        body: JSON.stringify({
-           status: "Eteindre mesure"
-            // longitude: this.state.postcodeCoordinates[0],
-            // latitude: this.state.postcodeCoordinates[1],
-        })
-    }).then(json => {
-            return apiFetch(`/mandataires/1/capacite`, {
-                method: "PUT"
-            }).then(() => {
-                return json
-            })
-        }).then(json2 => {
-        this.props.updateMesure(json2);  // callback parent with data
-        }).catch(e => {
-            console.log(e)
-            throw e
-        })
-    };
   openModal = mandataire => {
     this.setState({ modalIsOpen: true, mesureId: mandataire });
   };
   closeModalAnnuler = () => {
-      this.onClick(this.state.mesureId);
-      this.closeModal()
+    this.onClick(this.state.mesureId);
+    this.closeModal();
   };
-    closeModal = () => {
-        this.setState({ modalIsOpen: false });
-    };
+  closeModal = () => {
+    this.setState({ modalIsOpen: false });
+  };
 
   render() {
     const {
@@ -187,79 +155,27 @@ class TableRowMesure extends React.Component {
       code_postal: `${code_postal}`,
       genre: `${genre}`,
       age: `${age}`,
+      ville: `${ville}`,
       status: `${status}`
     };
 
     return (
-        <tr >
-          <td
-            className={`pagination-centered`}
-            style={{
-              fontSize: "0.8em",
-              color: "rgb(204, 204, 204)",
-              textAlign: "left",
-                lineHeight: "40px"
-            }}
-          >
-            {date_ouverture.slice(0,10)}
-          </td>
-          <Cell>
-            <b>
-              {code_postal} - {ville}{" "}
-            </b>
-          </Cell>
-          <Cell>{type}</Cell>
-          <Cell>{civilite} </Cell>
-          <Cell>{annee} </Cell>
-          <td>
-              <button className={"btn btn-dark"} onClick={() => this.openModal(this.props.mesure.id)} >
-                  Mettre fin au mandat
-              </button>
-              {/*<DropdownMenu userName="Chris Smith">*/}
-                  {/*<MenuItem text="Home" location="/home" />*/}
-                  {/*<MenuItem text="Edit Profile" location="/profile" />*/}
-                  {/*<MenuItem text="Change Password" location="/change-password" />*/}
-                  {/*<MenuItem text="Privacy Settings" location="/privacy-settings" />*/}
-                  {/*<MenuItem text="Delete Account" onClick={this.deleteAccount} />*/}
-                  {/*<MenuItem text="Logout" onClick={this.logout} />*/}
-              {/*</DropdownMenu>*/}
-          </td>
-          {/*<Cell>{cleanTels(tel).map(t => <Phone key={t} num={t} />)}</Cell>*/}
-          {/*<Cell style={{ width: "10% !important" }} title="Voir les détails du mandataire">*/}
-          {/*<FaSearch onClick={onClick} style={{ cursor: "pointer" }} />*/}
-          {/*</Cell>*/}
-            <Modal
-                isOpen={this.state.modalIsOpen}
-                onRequestClose={this.closeModal}
-                contentLabel="mandataire"
-                background="#e9ecef"
-                style={customStyles}
-                className="ModalMesure"
-                overlayClassName="OverlayInput"
-            >
-                <button onClick={this.closeModal}>X</button>
-                <div style={{ textAlign: "center" }}>
-                    <b>
-                Eteindre la mesure? <br />
-              Etes vous sur de vouloir mettre fin au mandat
-                    </b>
-                    <br />
-                <button type="submit" onClick={this.closeModalAnnuler} className="btn btn-success">
-                    Valider
-                </button>{" "}
-                    <button onClick={this.closeModal} className="btn btn-success">
-                        Annuler
-                    </button>
-                </div>
-            </Modal>
-          </tr>
-
-
-
-
-
-
-    ) }
+      <TableRowMesureView
+        openModal={() => this.openModal(this.props.mesure.id)}
+        date_ouverture={date_ouverture}
+        code_postal={code_postal}
+        ville={ville}
+        civilite={civilite}
+        annee={annee}
+        type={type}
+        isOpen={this.state.modalIsOpen}
+        onRequestClose={this.closeModal}
+        onClick={this.closeModal}
+        onClickSubmit={this.closeModalAnnuler}
+        onClickClose={this.closeModal}
+      />
+    );
+  }
 }
 
 export default TableRowMesure;
