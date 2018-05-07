@@ -27,33 +27,12 @@
 
 import { Map, Marker, Popup, TileLayer, PropTypes as MapPropTypes } from "react-leaflet";
 
-// const MyPopupMarker = ({ children, position }) => (
-//     <Marker position={position}>
-//         <Popup>
-//             <span>{children}</span>
-//         </Popup>
-//     </Marker>
-// );
-// MyPopupMarker.propTypes = {
-//     children: MapPropTypes.children,
-//     position: MapPropTypes.latlng
-// };
-//
-// const MyMarkersList = ({ markers }) => {
-//     const items = markers.map(({ key, ...props }) => (
-//         <MyPopupMarker key={key} {...props} />
-//     ));
-//     return <div style={{ display: "none" }}>{items}</div>;
-// };
-// MyMarkersList.propTypes = {
-//     markers: PropTypes.array.isRequired
-// };
+
 
 class MapMesures extends React.Component {
   state = {
     zoom: 13
   };
-
   render() {
     //
     // const markers = [
@@ -81,28 +60,4 @@ class MapMesures extends React.Component {
       </div>
     );
   }
-}
-
-export default MapMesures;
-
-{
-  /*<Map center={center} zoom={this.state.zoom}>*/
-}
-{
-  /*<TileLayer*/
-}
-{
-  /*attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"*/
-}
-{
-  /*url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/
-}
-{
-  /*/>*/
-}
-{
-  /*<MyMarkersList markers={markers} />*/
-}
-{
-  /*</Map>*/
 }

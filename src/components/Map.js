@@ -26,27 +26,32 @@
 
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-// const MyPopupMarker = ({ children, position }) => (
-//     <Marker position={position}>
-//         <Popup>
-//             <span>{children}</span>
-//         </Popup>
-//     </Marker>
-// );
-// MyPopupMarker.propTypes = {
-//     children: MapPropTypes.children,
-//     position: MapPropTypes.latlng
-// };
-//
-// const MyMarkersList = ({ markers }) => {
-//     const items = markers.map(({ key, ...props }) => (
-//         <MyPopupMarker key={key} {...props} />
-//     ));
-//     return <div style={{ display: "none" }}>{items}</div>;
-// };
-// MyMarkersList.propTypes = {
-//     markers: PropTypes.array.isRequired
-// };
+export const MapsView = (mesures, zoom, center) => (
+    <Map center={center} zoom={zoom}>
+      <TileLayer
+        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+        url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+      />
+      {mesures &&
+        mesures.map(manda => (
+          <Marker
+            key={manda.id}
+            position={[manda.latitude, manda.longitude]}
+            style={{ backgroundColor: "black" }}
+          >
+            <Popup>
+              <span>
+                {manda.nom} <br />
+                {manda.prenom} <br />
+                {manda.type} <br />
+                {/*{manda.date_ouverture} <br />*/}
+              </span>
+            </Popup>
+          </Marker>
+        ))};
+    </Map>
+);
+
 
 class Mapstry extends React.Component {
   state = {
@@ -57,56 +62,8 @@ class Mapstry extends React.Component {
     const center = this.props.postcodeMandataire
       ? [this.props.postcodeMandataire[1], this.props.postcodeMandataire[0]]
       : [50.459441, 2.693963];
-    return (
-      <div>
-        <Map center={center} zoom={this.state.zoom}>
-          <TileLayer
-            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-          />
-          {this.props.mesure &&
-            this.props.mesure.map(manda => (
-              <Marker
-                key={manda.id}
-                position={[manda.latitude, manda.longitude]}
-                style={{ backgroundColor: "black" }}
-              >
-                <Popup>
-                  <span>
-                    {manda.nom} <br />
-                    {manda.prenom} <br />
-                    {manda.type} <br />
-                    {/*{manda.date_ouverture} <br />*/}
-                  </span>
-                </Popup>
-              </Marker>
-            ))};
-        </Map>
-      </div>
-    );
+    return <MapsView zoom={this.state.zoom} center={center} mesures={this.props.mesure} />;
   }
 }
 
 export default Mapstry;
-
-{
-  /*<Map center={center} zoom={this.state.zoom}>*/
-}
-{
-  /*<TileLayer*/
-}
-{
-  /*attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"*/
-}
-{
-  /*url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"*/
-}
-{
-  /*/>*/
-}
-{
-  /*<MyMarkersList markers={markers} />*/
-}
-{
-  /*</Map>*/
-}
