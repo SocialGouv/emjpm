@@ -43,7 +43,6 @@ export const TableRowMesureView = ({
 }) => (
   <tr>
     <td
-      className={`pagination-centered`}
       style={{
         fontSize: "0.8em",
         color: "rgb(204, 204, 204)",

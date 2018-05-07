@@ -1,18 +1,13 @@
-const Cell = ({ style, title, children, value }) => (
-    <td
-        className={`pagination-centered`}
-        style={{ fontSize: "0.8em", textAlign: "left", ...style }}
-        title={title}
-    >
-        <style jsx>{`
-      td {
-        vertical-align: middle !important;
-        textalign: "left";
-      }
-    `}</style>
-        {children}
-    </td>
-);
+import styled from "styled-components";
 
+const TdCell = styled.td`
+  font-size: 0.8em;
+  text-align: left;
+  vertical-align: middle !important;
+`;
+
+const Cell = ({children}) => (
+  <TdCell className="pagination-centered">{children}</TdCell>
+);
 
 export default Cell;
