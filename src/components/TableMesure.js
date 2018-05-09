@@ -10,8 +10,24 @@ const TdStyle = styled.td`
   width: 20%;
   text-align: left;
   color: #696969;
-  border-top-width: 0px;
+  border-top: 0px solid white !important;
+  display: "none";
 `;
+
+const DisplayCreationMesure = styled.div`
+  display: ${props => props.display};
+  padding-top: 20px;
+   padding-bottom: 20px;
+   padding-left: 25px;
+`;
+
+const LineContainer = styled.div` 
+padding-left: 0px;
+paddin-right: 0px;
+`;
+const Tr = styled.tr`
+ border-top: 0px solid white;
+`
 
 const Td = ({ children }) => <TdStyle>{children}</TdStyle>;
 
@@ -19,12 +35,14 @@ const ColStyle = styled.b`
   color: ${props => props.color || "black"};
 `;
 
-export const TableMesureView = ({ updateMesure, rows }) => (
-  <Container>
-    <CreationMesure className="row" updateMesure={updateMesure} />
+export const TableMesureView = ({ updateMesure, rows, display, display_ext }) => (
+  <LineContainer>
+    <DisplayCreationMesure display={display}>
+      <CreationMesure className="row" updateMesure={updateMesure} />
+    </DisplayCreationMesure>
     <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
       <thead>
-        <tr>
+        <Tr>
           <Td>
             <ColStyle> Date d'ordonnance </ColStyle>
           </Td>
@@ -40,17 +58,29 @@ export const TableMesureView = ({ updateMesure, rows }) => (
           <Td>
             <ColStyle> Naissance </ColStyle>
           </Td>
-          <Td />
-        </tr>
+          <td  style={{width: "20%",
+            textAlign: "left",
+            color: "#696969",
+            borderTopWidth: "0px",
+            display: display}} />
+
+          <td style={{width: "20%",
+              textAlign: "left",
+              color: "#696969",
+              borderTopWidth: "0px",
+              display: display_ext}}>
+       Date d'extinction
+          </td>
+        </Tr>
       </thead>
       <tbody>
         {rows &&
           rows.map(mesure => (
-            <TableRowMesure key={mesure.id} mesure={mesure} updateMesure={updateMesure} />
+            <TableRowMesure display={display} display_ext={display_ext} key={mesure.id} mesure={mesure} updateMesure={updateMesure} />
           ))}
       </tbody>
     </table>
-  </Container>
+  </LineContainer>
 );
 
 class TableMesure extends React.Component {
@@ -69,7 +99,14 @@ class TableMesure extends React.Component {
   };
 
   render() {
-    return <TableMesureView updateMesure={this.props.updateMesure} rows={this.props.rows} />;
+    return (
+      <TableMesureView
+        display={this.props.display}
+        display_ext={this.props.display_ext}
+        updateMesure={this.props.updateMesure}
+        rows={this.props.rows}
+      />
+    );
   }
 }
 

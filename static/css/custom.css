@@ -145,9 +145,9 @@
     z-index: 9000;
 }
 
-.leaflet-container {
-    height: 400px !important;
-}
+/*.leaflet-container {*/
+    /*height: 400px !important;*/
+/*}*/
 
 .leaflet-marker-icon {
     background-image: url("../images/icone-lieu.jpg");
@@ -239,6 +239,7 @@
 }
 .react-tabs__tab--selected {
     color: black !important;
+    background-color: #ffffff !important;
 }
 
 .form-group {

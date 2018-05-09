@@ -119,41 +119,40 @@ class MandatairesIndex extends React.Component {
                 backgroundColor: "#cad4de"
               }}
             >
-              <div className="panel__container" style={{ paddingBottom: "0px" }}>
+                  <div
+                      className="container"
+                      style={{ paddingRight: "0px",paddingBottom: "10px",paddingTop: "10px", paddingLeft: "0px",fontSize: "1.2em" ,marginTop: "0px"}}
+                  >
+                  <Title>
+                      {this.state.currentMandataire.nom} {this.state.currentMandataire.prenom}
+                  </Title>
+                  </div>
                 <div
                   className="container"
-                  style={{ paddingRight: "0px", paddingLeft: "0px", backgroundColor: "#ebeff2" }}
+                  style={{ paddingRight: "0px", paddingLeft: "0px", backgroundColor: "#ebeff2",height: "60px" }}
                 >
-                  <Title>
-                    {this.state.currentMandataire.nom} {this.state.currentMandataire.prenom}
-                  </Title>
-                  {/*<Tab style={tabStyle}>Mesures en cours</Tab>*/}
-                  {/*<Tab style={tabStyle}>Vue Carte</Tab>*/}
-                  {/*<Tab style={tabStyle}>Mesure éteinte</Tab>*/}
-                  {/*<Tab style={tabStyle}>Vos informations</Tab>*/}
-                    <Tab style={{ tabStyle, verticalAlign: "middle", width: getSize(nbCol) }}>
-                        <PillDispo dispo={this.state.currentMandataire.disponibilite} dispo_max={30} />
+                    <Tab style={{ tabStyle, verticalAlign: "middle",lineHeight: "40px", width: getSize(nbCol) }}>
+                        <PillDispo dispo={this.state.currentMandataire.disponibilite} dispo_max={this.state.currentMandataire.dispo_max} />
                         <b>Mesures en cours</b>
                     </Tab>
-                    <Tab style={{ tabStyle, verticalAlign: "middle", width: getSize(nbCol) }}>
+                    <Tab style={{ tabStyle, verticalAlign: "middle",lineHeight: "40px", width: getSize(nbCol) }}>
                         <img src={map} style={{ padding: "5px", width: "35px ", height: "35px " }} />
                         <b>Vue Carte</b>
                     </Tab>
-                    <Tab style={{ tabStyle, verticalAlign: "middle", width: getSize(nbCol) }}>
+                    <Tab style={{ tabStyle, verticalAlign: "middle",lineHeight: "40px", width: getSize(nbCol) }}>
                         <PillDispo dispo={this.state.currentMandataire.disponibilite} dispo_max={30} />
                         <b>Mesures éteintes</b>
                     </Tab>
-                    <Tab style={{ tabStyle, verticalAlign: "middle", width: getSize(nbCol) }}>
+                    <Tab style={{ tabStyle, verticalAlign: "middle",lineHeight: "40px", width: getSize(nbCol) }}>
                         <img src={antenne} style={{ padding: "5px", width: "35px ", height: "35px " }} />
                         <b>Vos informations</b>
                     </Tab>
                 </div>
               </div>
-            </div>
           </TabList>
           <div
             className="container"
-            style={{ backgroundColor: "white", minHeight: "70vh", padding: "10px" }}
+            style={{ backgroundColor: "white", minHeight: "70vh", padding: "0px" }}
           >
             <TabPanel>
               <TableMesure
@@ -163,12 +162,15 @@ class MandatairesIndex extends React.Component {
               />
             </TabPanel>
             <TabPanel>
-              <OpenStreeMap
+                <div className="container" style={{paddingTop: "10px",paddingBottom: "10px"}}>
+
+                <OpenStreeMap
                 width={"100%"}
                 height={"70vh"}
-                postcodeMandataire={[1, 1]}
+                postcodeMandataire={[this.state.currentMandataire.latitude, this.state.currentMandataire.longitude]}
                 mesures={filteredMesures}
               />
+                </div>
             </TabPanel>
             <TabPanel>
               <TableMesure
