@@ -45,7 +45,7 @@ const ModalCloseMesure = ({isOpen, onRequestClose, onClick, onClickSubmit, onCli
       <button type="submit" onClick={onClickSubmit} className="btn btn-success">
         Eteindre la Mesure
       </button>{" "}
-      <button onClick={onClickClose} className="btn btn-success">
+      <button onClick={onClickClose} className="btn btn-link  ">
         Annuler
       </button>
     </div>
