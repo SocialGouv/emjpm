@@ -10,7 +10,7 @@ import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
 import apiFetch from "./Api";
 import ModalCloseMesure from "./ModalCloseMesure";
-import Cell from "./Cell"
+import Cell from "./Cell";
 
 const schema = {
   title: "Se connecter",
@@ -39,7 +39,9 @@ export const TableRowMesureView = ({
   onRequestClose,
   onClick,
   onClickSubmit,
-  onClickClose
+  onClickClose,
+  display_ext,
+  display
 }) => (
   <tr>
     <td
@@ -60,8 +62,16 @@ export const TableRowMesureView = ({
     <Cell>{type}</Cell>
     <Cell>{civilite} </Cell>
     <Cell>{annee} </Cell>
-    <td>
-      <button className={"btn btn-dark"} onClick={openModal}>
+    <td
+      style={{
+        fontSize: "0.8em",
+        color: "rgb(204, 204, 204)",
+        textAlign: "left",
+        lineHeight: "40px",
+        display: display
+      }}
+    >
+      <button className={"btn btn-outline-secondary"} onClick={openModal}>
         Mettre fin au mandat
       </button>
       <ModalCloseMesure
@@ -72,6 +82,17 @@ export const TableRowMesureView = ({
         onClickClose={onClickClose}
       />
     </td>
+    <td
+      style={{
+        fontSize: "0.8em",
+        color: "rgb(204, 204, 204)",
+        textAlign: "left",
+        lineHeight: "40px",
+        display: display_ext
+      }}
+    >
+      a
+    </td>
   </tr>
 );
 
@@ -81,20 +102,20 @@ class TableRowMesure extends React.Component {
     modalIsOpen: false
   };
 
-      onSubmit = ({ formData }) => {
-          apiFetch(`/mandataires/1/mesures/${this.props.currentMesures.id}`, {
-              method: "PUT",
-              body: JSON.stringify({
-                  date_ouverture: formData.date_ouverture,
-                  code_postal: formData.code_postal,
-                  type_mesure: formData.type_mesure,
-                  genre: formData.genre,
-                  age: formData.age,
-                  status: formData.status
-              })
-          }).then(json => {
-              this.props.updateMadataire(json);
-          });
+  onSubmit = ({ formData }) => {
+    apiFetch(`/mandataires/1/mesures/${this.props.currentMesures.id}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        date_ouverture: formData.date_ouverture,
+        code_postal: formData.code_postal,
+        type_mesure: formData.type_mesure,
+        genre: formData.genre,
+        age: formData.age,
+        status: formData.status
+      })
+    }).then(json => {
+      this.props.updateMadataire(json);
+    });
   };
 
   onClick = e => {
@@ -167,6 +188,8 @@ class TableRowMesure extends React.Component {
         civilite={civilite}
         annee={annee}
         type={type}
+        display_ext={this.props.display_ext}
+        display={this.props.display}
         isOpen={this.state.modalIsOpen}
         onRequestClose={this.closeModal}
         onClick={this.closeModal}
