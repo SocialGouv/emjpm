@@ -1,7 +1,8 @@
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-export const MapsView = (mesures, zoom, center) => (
-    <Map center={center} zoom={zoom}>
+
+export const MapsView = ({mesures, zoom, center, width , height}) => (
+    <Map center={center} zoom={zoom} style={{width: width, height: `${height}`}}>
       <TileLayer
         attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
         url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
@@ -36,7 +37,7 @@ class Mapstry extends React.Component {
     const center = this.props.postcodeMandataire
       ? [this.props.postcodeMandataire[1], this.props.postcodeMandataire[0]]
       : [50.459441, 2.693963];
-    return <MapsView zoom={this.state.zoom} center={center} mesures={this.props.mesure} />;
+    return <MapsView zoom={this.state.zoom} width={this.props.width} height={this.props.height} center={center} mesures={this.props.mesures} />;
   }
 }
 
