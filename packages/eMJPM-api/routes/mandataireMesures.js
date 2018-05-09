@@ -12,8 +12,8 @@ router.put("/:mandataireId/mesures/:mesureId", async (req, res, next) => {
         .then(function() {
             return queries.getAllMesures(ti.id);
         })
-        .then(function(commentaire) {
-            res.status(200).json(commentaire);
+        .then(function(mesures) {
+            res.status(200).json(mesures);
         })
         .catch(function(error) {
             next(error);
@@ -39,9 +39,8 @@ router.post("/:mandataireId/mesures", async (req, res, next) => {
         });
 });
 
-router.get("/:mandataireId/mesures",loginRequired, async (req, res, next) => {
+router.get("/:mandataireId/mesures", async (req, res, next) => {
     const ti = await queries.getMandataireByUserId(req.user.id);
-    console.log(ti.id);
     queries
         .getAllMesures(ti.id)
         .then(function(mesures) {

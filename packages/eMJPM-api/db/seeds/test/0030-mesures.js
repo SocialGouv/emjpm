@@ -15,7 +15,8 @@ exports.seed = function(knex, Promise) {
                 type: "preposes",
                 date_ouverture:"2010-10-05",
                 residence: "oui",
-                civilite: "madame"
+                civilite: "madame",
+                status: 'Mesure en cours'
             });
         })
         .then(function() {
@@ -32,7 +33,8 @@ exports.seed = function(knex, Promise) {
                 type: "preposes",
                 date_ouverture:"2010-10-05",
                 residence: "oui",
-                civilite: "madame"
+                civilite: "madame",
+                status: 'Mesure en cours'
         });
     });
 };
