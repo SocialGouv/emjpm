@@ -20,7 +20,6 @@ const passport = require("../auth/local");
 // });
 
 router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
-  console.log(req.body)
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);
@@ -33,7 +32,6 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         if (err) {
           return next(err);
         }
-        console.log(user.mandataire)
         if (user.mandataire === true){
           if (user.service === true){
               return handleResponse(res, 200,"success" ,"/services");
