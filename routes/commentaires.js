@@ -3,9 +3,7 @@ var router = express.Router();
 var queries = require("../db/queries");
 
 router.get("/:mandataireId/commentaires", async (req, res, next) => {
-    console.log(req.user)
     const ti = await queries.getTiByUserId(req.user.id);
-    console.log(ti.id)
     queries
         .getAllCommentaires(req.params.mandataireId, ti.id)
         .then(function(commentaires) {
@@ -19,7 +17,6 @@ router.get("/:mandataireId/commentaires", async (req, res, next) => {
 router.post("/:mandataireId/commentaires", async (req, res, next) => {
     // secu : ensure TI can write on this mandataire + add related test
     const ti = await queries.getTiByUserId(req.user.id);
-    console.log(req.params.mandataireID)
     queries
         .addCommentaire({
             co_comment: req.body.co_comment,
@@ -27,11 +24,9 @@ router.post("/:mandataireId/commentaires", async (req, res, next) => {
             ti_id: ti.id
         })
         .then(function(commentaireID) {
-            console.log(commentaireID)
             return queries.getAllCommentaires(req.params.mandataireId, ti.id);
         })
         .then(function(commentaires) {
-            console.log(res)
             res.status(200).json(commentaires);
         })
         .catch(function(error) {
