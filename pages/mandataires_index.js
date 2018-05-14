@@ -41,8 +41,7 @@ const nbCol = 4;
 const antenne = require("../static/images/home.svg");
 const map = require("../static/images/map.svg");
 const person = require("../static/images/user.svg");
-const minus= require("../static/images/user-minus.svg");
-
+const minus = require("../static/images/user-minus.svg");
 
 const getColorFromDisponibilite = dispo => {
   if (dispo <= 0) {
@@ -70,6 +69,129 @@ const PillDispo = ({ dispo, dispo_max }) => (
   </Pill>
 );
 
+const MandataireIndexView = ({
+  currentMandataire,
+  filteredMesures,
+  updateMesure,
+  updateMadataire
+}) => (
+  <Tabs>
+    <TabList>
+      <div
+        className="panel"
+        style={{
+          textAlign: "left",
+          backgroundSize: "cover",
+          heigth: "100px !important",
+          backgroundColor: "#cad4de"
+        }}
+      >
+        <div
+          className="container"
+          style={{
+            paddingRight: "0px",
+            paddingBottom: "10px",
+            paddingTop: "10px",
+            paddingLeft: "0px",
+            fontSize: "1.2em",
+            marginTop: "0px"
+          }}
+        >
+          <Title>
+            {currentMandataire.nom} {currentMandataire.prenom}
+          </Title>
+        </div>
+        <div
+          className="container"
+          style={{
+            paddingRight: "0px",
+            paddingLeft: "0px",
+            backgroundColor: "#ebeff2",
+            height: "60px"
+          }}
+        >
+          <Tab
+            style={{
+              tabStyle,
+              verticalAlign: "middle",
+              lineHeight: "40px",
+              width: getSize(nbCol)
+            }}
+          >
+            <PillDispo
+              dispo={currentMandataire.disponibilite}
+              dispo_max={currentMandataire.dispo_max}
+            />
+            <b>Mesures en cours</b>
+          </Tab>
+          <Tab
+            style={{
+              tabStyle,
+              verticalAlign: "middle",
+              lineHeight: "40px",
+              width: getSize(nbCol)
+            }}
+          >
+            <img src={map} style={{ padding: "5px", width: "35px ", height: "35px " }} />
+            <b>Vue Carte</b>
+          </Tab>
+          <Tab
+            style={{
+              tabStyle,
+              verticalAlign: "middle",
+              lineHeight: "40px",
+              width: getSize(nbCol)
+            }}
+          >
+            <img src={minus} style={{ padding: "5px", width: "35px ", height: "35px " }} />
+            <b>Mesures éteintes</b>
+          </Tab>
+          <Tab
+            style={{
+              tabStyle,
+              verticalAlign: "middle",
+              lineHeight: "40px",
+              width: getSize(nbCol)
+            }}
+          >
+            <img src={antenne} style={{ padding: "5px", width: "35px ", height: "35px " }} />
+            <b>Vos informations</b>
+          </Tab>
+        </div>
+      </div>
+    </TabList>
+    <div
+      className="container"
+      style={{ backgroundColor: "white", minHeight: "70vh", padding: "0px" }}
+    >
+      <TabPanel>
+        <TableMesure display_ext={"none"} rows={filteredMesures} updateMesure={updateMesure} />
+      </TabPanel>
+      <TabPanel>
+        <div className="container" style={{ paddingTop: "10px", paddingBottom: "10px" }}>
+          <OpenStreeMap
+            width={"100%"}
+            height={"70vh"}
+            postcodeMandataire={[currentMandataire.latitude, currentMandataire.longitude]}
+            mesures={filteredMesures}
+          />
+        </div>
+      </TabPanel>
+      <TabPanel>
+        <TableMesure display={"none"} rows={filteredMesures} updateMesure={updateMesure} />
+      </TabPanel>
+      <TabPanel>
+        <div style={{ minHeight: "70vh", paddingTop: "10px" }}>
+          <FormulaireMandataire
+            currentMandataireModal={currentMandataire}
+            updateMadataire={updateMadataire}
+          />
+        </div>
+      </TabPanel>
+    </div>
+  </Tabs>
+);
+
 class MandatairesIndex extends React.Component {
   state = {
     data: [],
@@ -85,14 +207,11 @@ class MandatairesIndex extends React.Component {
 
     apiFetch(`/mandataires/1/mesures`).then(mesures =>
       apiFetch(`/mandataires/1`).then(mandataire =>
-        // apiFetch(`/mandataires/capaciteEteinte`).then(mesureEteintes =>
-          this.setState({
-            datamesure: mesures,
-            currentMandataire: mandataire,
-            // mesureEteintes: mesureEteintes
-          })
-        )
-      // )
+        this.setState({
+          datamesure: mesures,
+          currentMandataire: mandataire
+        })
+      )
     );
   }
 
@@ -106,141 +225,13 @@ class MandatairesIndex extends React.Component {
 
   render() {
     const filteredMesures = this.state.datamesure;
-    const tabStyle = {
-      backgroundColor: "#ebeff2",
-      lineHeight: "50px",
-      paddingBottom: 5,
-      bottom: 0
-    };
     return (
-      <div>
-        <Tabs>
-          <TabList>
-            <div
-              className="panel"
-              style={{
-                textAlign: "left",
-                backgroundSize: "cover",
-                heigth: "100px !important",
-                backgroundColor: "#cad4de"
-              }}
-            >
-              <div
-                className="container"
-                style={{
-                  paddingRight: "0px",
-                  paddingBottom: "10px",
-                  paddingTop: "10px",
-                  paddingLeft: "0px",
-                  fontSize: "1.2em",
-                  marginTop: "0px"
-                }}
-              >
-                <Title>
-                  {this.state.currentMandataire.nom} {this.state.currentMandataire.prenom}
-                </Title>
-              </div>
-              <div
-                className="container"
-                style={{
-                  paddingRight: "0px",
-                  paddingLeft: "0px",
-                  backgroundColor: "#ebeff2",
-                  height: "60px"
-                }}
-              >
-                <Tab
-                  style={{
-                    tabStyle,
-                    verticalAlign: "middle",
-                    lineHeight: "40px",
-                    width: getSize(nbCol)
-                  }}
-                >
-                  <PillDispo
-                    dispo={this.state.currentMandataire.disponibilite}
-                    dispo_max={this.state.currentMandataire.dispo_max}
-                  />
-                  <b>Mesures en cours</b>
-                </Tab>
-                <Tab
-                  style={{
-                    tabStyle,
-                    verticalAlign: "middle",
-                    lineHeight: "40px",
-                    width: getSize(nbCol)
-                  }}
-                >
-                  <img src={map} style={{ padding: "5px", width: "35px ", height: "35px " }} />
-                  <b>Vue Carte</b>
-                </Tab>
-                <Tab
-                  style={{
-                    tabStyle,
-                    verticalAlign: "middle",
-                    lineHeight: "40px",
-                    width: getSize(nbCol)
-                  }}
-                >
-                    <img src={minus} style={{ padding: "5px", width: "35px ", height: "35px " }} />
-                  <b>Mesures éteintes</b>
-                </Tab>
-                <Tab
-                  style={{
-                    tabStyle,
-                    verticalAlign: "middle",
-                    lineHeight: "40px",
-                    width: getSize(nbCol)
-                  }}
-                >
-                  <img src={antenne} style={{ padding: "5px", width: "35px ", height: "35px " }} />
-                  <b>Vos informations</b>
-                </Tab>
-              </div>
-            </div>
-          </TabList>
-          <div
-            className="container"
-            style={{ backgroundColor: "white", minHeight: "70vh", padding: "0px" }}
-          >
-            <TabPanel>
-              <TableMesure
-                display_ext={"none"}
-                rows={filteredMesures}
-                updateMesure={this.updateMesure}
-              />
-            </TabPanel>
-            <TabPanel>
-              <div className="container" style={{ paddingTop: "10px", paddingBottom: "10px" }}>
-                <OpenStreeMap
-                  width={"100%"}
-                  height={"70vh"}
-                  postcodeMandataire={[
-                    this.state.currentMandataire.latitude,
-                    this.state.currentMandataire.longitude
-                  ]}
-                  mesures={filteredMesures}
-                />
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <TableMesure
-                display={"none"}
-                rows={filteredMesures}
-                updateMesure={this.updateMesure}
-              />
-            </TabPanel>
-            <TabPanel>
-              <div style={{ minHeight: "70vh", paddingTop: "10px" }}>
-                <FormulaireMandataire
-                  currentMandataireModal={this.state.currentMandataire}
-                  updateMadataire={this.updateMadataire}
-                />
-              </div>
-            </TabPanel>
-          </div>
-        </Tabs>
-      </div>
+      <MandataireIndexView
+        currentMandataire={this.state.currentMandataire}
+        filteredMesures={filteredMesures}
+        updateMesure={this.updateMesure}
+        updateMadataire={this.updateMadataire}
+      />
     );
   }
 }
