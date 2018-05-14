@@ -1,4 +1,5 @@
 import Modal from "react-modal";
+import Form from "react-jsonschema-form";
 
 const customStyles = {
   content: {
@@ -24,7 +25,23 @@ const ModalMesure = {
   opacity: 2
 };
 
-const ModalCloseMesure = ({isOpen, onRequestClose, onClick, onClickSubmit, onClickClose}) => (
+const schema = {
+  type: "object",
+  required: ["extinction"],
+  properties: {
+    extinction: { type: "string", title: "", default: "" }
+  }
+};
+const uiSchema = {
+  extinction: {
+    "ui:widget": "date",
+    "ui:options": {
+      label: false
+    } // could also be "select"
+  }
+};
+
+const ModalCloseMesure = ({ isOpen, onRequestClose, onClick, onClickSubmit, onClickClose }) => (
   <Modal
     isOpen={isOpen}
     onRequestClose={onRequestClose}
@@ -42,12 +59,16 @@ const ModalCloseMesure = ({isOpen, onRequestClose, onClick, onClickSubmit, onCli
         corresponant, mais vous ne pourrez plus la modifier.
       </b>
       <br />
-      <button type="submit" onClick={onClickSubmit} className="btn btn-success">
-        Eteindre la Mesure
-      </button>{" "}
-      <button onClick={onClickClose} className="btn btn-link  ">
-        Annuler
-      </button>
+      <br />
+      <Form schema={schema} uiSchema={uiSchema} onSubmit={onClickSubmit}>
+        <br />
+        <button type="submit" className="btn btn-success">
+          Eteindre la Mesure
+        </button>{" "}
+        <button onClick={onClickClose} className="btn btn-link  ">
+          Annuler
+        </button>
+      </Form>
     </div>
   </Modal>
 );
