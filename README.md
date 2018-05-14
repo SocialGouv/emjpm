@@ -32,6 +32,8 @@ Les users et noms des dbs sont définis dans les `docker-compose` et sont initia
 ./node_modules/.bin/knex seed:run --env development
 ```
 
+Les comptes de dev sont définis dans les [seeds](https://github.com/SocialGouv/eMJPM-api/blob/master/db/seeds/development/0000-users.js)
+
 ### Tests
 
 ```sh
