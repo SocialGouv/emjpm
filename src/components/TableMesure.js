@@ -17,17 +17,17 @@ const TdStyle = styled.td`
 const DisplayCreationMesure = styled.div`
   display: ${props => props.display};
   padding-top: 20px;
-   padding-bottom: 20px;
-   padding-left: 25px;
+  padding-bottom: 20px;
+  padding-left: 25px;
 `;
 
-const LineContainer = styled.div` 
-padding-left: 0px;
-paddin-right: 0px;
+const LineContainer = styled.div`
+  padding-left: 0px;
+  paddin-right: 0px;
 `;
 const Tr = styled.tr`
- border-top: 0px solid white;
-`
+  border-top: 0px solid white;
+`;
 
 const Td = ({ children }) => <TdStyle>{children}</TdStyle>;
 
@@ -35,7 +35,7 @@ const ColStyle = styled.b`
   color: ${props => props.color || "black"};
 `;
 
-export const TableMesureView = ({ updateMesure, rows, display, display_ext }) => (
+export const TableMesureView = ({ updateMesure, rows, display, display_ext}) => (
   <LineContainer>
     <DisplayCreationMesure display={display}>
       <CreationMesure className="row" updateMesure={updateMesure} />
@@ -58,25 +58,47 @@ export const TableMesureView = ({ updateMesure, rows, display, display_ext }) =>
           <Td>
             <ColStyle> Naissance </ColStyle>
           </Td>
-          <td  style={{width: "20%",
-            textAlign: "left",
-            color: "#696969",
-            borderTopWidth: "0px",
-            display: display}} />
-
-          <td style={{width: "20%",
+          <td
+            style={{
+              width: "20%",
               textAlign: "left",
               color: "#696969",
               borderTopWidth: "0px",
-              display: display_ext}}>
-       Date d'extinction
+              display: display
+            }}
+          />
+            <td
+                style={{
+                    width: "20%",
+                    textAlign: "left",
+                    color: "#696969",
+                    borderTopWidth: "0px",
+                    display: display
+                }}
+            />
+          <td
+            style={{
+              width: "20%",
+              textAlign: "left",
+              color: "#696969",
+              borderTopWidth: "0px",
+              display: display_ext
+            }}
+          >
+            Date d'extinction
           </td>
         </Tr>
       </thead>
       <tbody>
         {rows &&
           rows.map(mesure => (
-            <TableRowMesure display={display} display_ext={display_ext} key={mesure.id} mesure={mesure} updateMesure={updateMesure} />
+            <TableRowMesure
+              display={display}
+              display_ext={display_ext}
+              key={mesure.id}
+              mesure={mesure}
+              updateMesure={updateMesure}
+            />
           ))}
       </tbody>
     </table>
@@ -85,7 +107,8 @@ export const TableMesureView = ({ updateMesure, rows, display, display_ext }) =>
 
 class TableMesure extends React.Component {
   state = {
-    showResults: false
+    showResults: false,
+    modalIsOpen: false
   };
 
   onClick = () => {
@@ -97,6 +120,21 @@ class TableMesure extends React.Component {
       this.setState({ showResults: false });
     }
   };
+
+  // closeModalAnnulerMesure = ({ formData }) => {
+  //     this.onClickMesure(this.state.mesureId, formData);
+  //     this.closeModal();
+  // };
+  //
+  // closeModal = () => {
+  //     this.setState({ modalIsOpen: false, modalIsOpenMesure: false });
+  // };
+  // updateedit = () => {
+  //     this.setState({ updateedit: "inline-block" });
+  // };
+  // outEdit = () => {
+  //     this.setState({ updateedit: "none" });
+  // };
 
   render() {
     return (
