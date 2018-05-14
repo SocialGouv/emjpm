@@ -111,6 +111,20 @@
     overflow: scroll;
     opacity: 2;
 }
+
+.ModalMesureUpdate {
+    position: absolute;
+    width: 600px !important;
+    height: 400px !important;
+    top: 30%;
+    left: 30%;
+    right: 60px;
+    bottom: 60px;
+    background-color: #f2f2f2;
+    overflow: scroll;
+    opacity: 2;
+}
+
 .ModalInputMesure {
     position: absolute;
     width: 450px !important;
