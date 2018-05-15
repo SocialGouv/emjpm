@@ -18,11 +18,11 @@ const schema = {
             title: "Type de mesure",
             enum: ["Tutelle", "Curatelle", "Sauvegarde de justice", "Mesure ad hoc", "MAJ"]
         },
-        residence: { type: "string", title: "Lieu de vie", enum: ["A domicile", "En établissement"] },
+        residence: { type: "string", title: "Lieu de vie", enum: ["A domicile", "En Etablissement"] },
         codePostal: { type: "string", title: "Code Postal" },
         commune: { type: "string", title: "Commune" },
         civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
-        annee: { type: "integer", title: "Année de naissance", default: "" }
+        annee: { type: "integer", title: "Année de naissance" }
     }
 };
 

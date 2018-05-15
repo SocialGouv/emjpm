@@ -179,13 +179,18 @@ class TableRowMesure extends React.Component {
   };
 
   onClickMesure = (e, formData) => {
-    console.log("formData ", formData);
+    console.log("formDataonClickMesure ", formData);
     apiFetch(`/mandataires/1/mesures/${e}`, {
       method: "PUT",
       body: JSON.stringify({
-        status: "Eteindre mesure",
-        extinction: formData.extinction
-        // longitude: this.state.postcodeCoordinates[0],
+          date_ouverture: formData.ouverture,
+          code_postal: formData.codePostal,
+          type: formData.type,
+          civilite: formData.civilite,
+          annee: formData.annee,
+          residence: formData.residence,
+          ville: formData.commune
+          // longitude: this.state.postcodeCoordinates[0],
         // latitude: this.state.postcodeCoordinates[1],
       })
     })
