@@ -20,6 +20,14 @@ const TdCursor = styled.tr`
 const formData = {};
 const edit = require("../../static/images/edit.svg");
 
+const TdStyle = styled.td`
+  font-size: 0.8em;
+  color: rgb(204, 204, 204);
+  text-align: left;
+  line-height: 40px;
+  display: ${props => props.display};
+`;
+
 export const TableRowMesureView = ({
   date_ouverture,
   type,
@@ -46,16 +54,7 @@ export const TableRowMesureView = ({
   display_row
 }) => (
   <tr style={{ display: display_row }}>
-    <td
-      style={{
-        fontSize: "0.8em",
-        color: "rgb(204, 204, 204)",
-        textAlign: "left",
-        lineHeight: "40px"
-      }}
-    >
-      {date_ouverture.slice(0, 10)}
-    </td>
+    <TdStyle>{date_ouverture.slice(0, 10)}</TdStyle>
     <Cell>
       <b>
         {code_postal} -{ville}{" "}
@@ -64,15 +63,7 @@ export const TableRowMesureView = ({
     <Cell>{type}</Cell>
     <Cell>{civilite} </Cell>
     <Cell>{annee} </Cell>
-    <td
-      style={{
-        fontSize: "0.8em",
-        color: "rgb(204, 204, 204)",
-        textAlign: "left",
-        lineHeight: "40px",
-        display: display
-      }}
-    >
+    <TdStyle display={display}>
       {/*btn btn-outline-secondary*/}
       <button className={"btn btn-success"} onClick={openModalMesure}>
         Modifier
@@ -85,17 +76,8 @@ export const TableRowMesureView = ({
         onClickClose={onClickClose}
         formData={formData}
       />
-    </td>
-    <td
-      style={{
-        fontSize: "0.8em",
-        color: "rgb(204, 204, 204)",
-        textAlign: "left",
-        lineHeight: "40px",
-        display: display
-      }}
-    >
-      {/*btn btn-outline-secondary*/}
+    </TdStyle>
+    <TdStyle display={display}>
       <button className={"btn btn-success"} onClick={openModal}>
         Mettre fin au mandat
       </button>
@@ -106,32 +88,14 @@ export const TableRowMesureView = ({
         onClickSubmit={onClickSubmit}
         onClickClose={onClickClose}
       />
-    </td>
-    <td
-      style={{
-        fontSize: "0.8em",
-        color: "rgb(204, 204, 204)",
-        textAlign: "left",
-        lineHeight: "40px",
-        display: display_ext
-      }}
-    >
+    </TdStyle>
+    <TdStyle display={display_ext}>
       {/*btn btn-outline-secondary*/}
       <button className={"btn btn-success"} onClick={onClickSubmitEteinte}>
         Mesure en cours
       </button>
-    </td>
-    <td
-      style={{
-        fontSize: "0.8em",
-        color: "rgb(204, 204, 204)",
-        textAlign: "left",
-        lineHeight: "40px",
-        display: display_ext
-      }}
-    >
-      {extinction}
-    </td>
+    </TdStyle>
+    <TdStyle display={display_ext}>{extinction}</TdStyle>
   </tr>
 );
 
