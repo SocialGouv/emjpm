@@ -114,7 +114,9 @@ const MandataireIndexView = ({
   currentMandataire,
   filteredMesures,
   updateMesure,
-  updateMadataire
+  updateMadataire,
+  updateMesureEteinte,
+  mesureEteinte
 }) => (
   <Tabs>
     <TabList>
@@ -149,7 +151,7 @@ const MandataireIndexView = ({
     </TabList>
     <TabsPanelMandataire className="container">
       <TabPanel>
-        <TableMesure display_ext={"none"} rows={filteredMesures} updateMesure={updateMesure} />
+        <TableMesure display_ext={"none"} rows={filteredMesures} updateMesureEteinte={updateMesureEteinte} />
       </TabPanel>
       <TabPanel>
         <OpenStreeMapMandataire className="container">
@@ -162,7 +164,11 @@ const MandataireIndexView = ({
         </OpenStreeMapMandataire>
       </TabPanel>
       <TabPanel>
-        <TableMesure display={"none"} rows={filteredMesures} updateMesure={updateMesure} />
+        <TableMesure
+          display={"none"}
+          rows={mesureEteinte}
+          updateMesureEteinte={updateMesureEteinte}
+        />
       </TabPanel>
       <TabPanel>
         <FormuaireMandataire>
@@ -180,6 +186,7 @@ class MandatairesIndex extends React.Component {
   state = {
     data: [],
     datamesure: [],
+    mesureEteinte: [],
     currentMandataire: "",
     mesureEteintes: ""
   };
@@ -191,17 +198,31 @@ class MandatairesIndex extends React.Component {
 
     apiFetch(`/mandataires/1/mesures`).then(mesures =>
       apiFetch(`/mandataires/1`).then(mandataire =>
-        this.setState({
-          datamesure: mesures,
-          currentMandataire: mandataire
-        })
+        apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
+          this.setState({
+            datamesure: mesures,
+            mesureEteinte: mesureEteinte,
+            currentMandataire: mandataire
+          })
+        )
       )
     );
   }
 
-  updateMesure = mesures => {
-    this.setState({ datamesure: mesures });
-  };
+  onUpdate = () => {
+      apiFetch(`/mandataires/1/mesures`).then(mesures =>
+              apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
+                  this.setState({
+                      datamesure: mesures,
+                      mesureEteinte: mesureEteinte,
+                  })
+              )
+      );
+  }
+  
+    updateMesureEteinte = () => {
+        this.onUpdate();
+    };
 
   updateMadataire = mesures => {
     this.setState({ currentMandataire: mesures });
@@ -215,6 +236,8 @@ class MandatairesIndex extends React.Component {
         filteredMesures={filteredMesures}
         updateMesure={this.updateMesure}
         updateMadataire={this.updateMadataire}
+        mesureEteinte={this.state.mesureEteinte}
+        updateMesureEteinte={this.updateMesureEteinte}
       />
     );
   }

@@ -41,9 +41,11 @@ export const TableRowMesureView = ({
   isOpenMesure,
   openModalMesure,
   onClickSubmitMesure,
-  formData
+  formData,
+  onClickSubmitEteinte,
+  display_row
 }) => (
-  <tr onMouseOver={updateedit} onMouseOutCapture={outEdit} onMouseOut={outEdit}>
+  <tr style={{ display: display_row }}>
     <td
       style={{
         fontSize: "0.8em",
@@ -114,6 +116,20 @@ export const TableRowMesureView = ({
         display: display_ext
       }}
     >
+      {/*btn btn-outline-secondary*/}
+      <button className={"btn btn-success"} onClick={onClickSubmitEteinte}>
+        Mesure en cours
+      </button>
+    </td>
+    <td
+      style={{
+        fontSize: "0.8em",
+        color: "rgb(204, 204, 204)",
+        textAlign: "left",
+        lineHeight: "40px",
+        display: display_ext
+      }}
+    >
       {extinction}
     </td>
   </tr>
@@ -124,7 +140,8 @@ class TableRowMesure extends React.Component {
     mesureId: "",
     modalIsOpen: false,
     modalIsOpenMesure: false,
-    showModal: false
+    showModal: false,
+    showTD: false
   };
 
   onSubmit = ({ formData }) => {
@@ -162,7 +179,34 @@ class TableRowMesure extends React.Component {
         });
       })
       .then(json2 => {
-        this.props.updateMesure(json2); // callback parent with data
+        this.closeModal();
+        this.props.updateMesureEteinte(); // callback parent with data
+      })
+      .catch(e => {
+        console.log(e);
+        throw e;
+      });
+  };
+
+  onClickEteinte = e => {
+    apiFetch(`/mandataires/1/mesures/${e}`, {
+      method: "PUT",
+      body: JSON.stringify({
+        status: "Mesure en cours",
+        extinction: null
+        // longitude: this.state.postcodeCoordinates[0],
+        // latitude: this.state.postcodeCoordinates[1],
+      })
+    })
+      .then(json => {
+        return apiFetch(`/mandataires/1/capacite`, {
+          method: "PUT"
+        }).then(() => {
+          return json;
+        });
+      })
+      .then(json2 => {
+        this.props.updateMesureEteinte(); // callback parent with data
       })
       .catch(e => {
         console.log(e);
@@ -189,7 +233,8 @@ class TableRowMesure extends React.Component {
         });
       })
       .then(json2 => {
-        this.props.updateMesure(json2); // callback parent with data
+        this.closeModal();
+        this.props.updateMesureEteinte(); // callback parent with data
       })
       .catch(e => {
         console.log(e);
@@ -205,17 +250,22 @@ class TableRowMesure extends React.Component {
     this.setState({ modalIsOpenMesure: true, mesureId: mandataire });
   };
   closeModalAnnuler = ({ formData }) => {
-    this.onClick(this.state.mesureId, formData);
-    this.closeModal();
+    this.onClick(this.props.mesure.id, formData);
   };
-
   closeModalAnnulerMesure = ({ formData }) => {
-    this.onClickMesure(this.state.mesureId, formData);
-    this.closeModal();
+    this.onClickMesure(this.props.mesure.id, formData);
   };
 
   closeModal = () => {
     this.setState({ modalIsOpen: false, modalIsOpenMesure: false });
+  };
+
+  showTr = mesure => {
+    if (mesure.status === "Mesure en cours") {
+      this.setState({ showTD: true });
+    } else {
+      this.setState({ showTD: false });
+    }
   };
 
   render() {
@@ -224,7 +274,7 @@ class TableRowMesure extends React.Component {
       type,
       nom,
       contact,
-        residence,
+      residence,
       code_postal,
       dispo_max,
       date_ouverture,
@@ -240,12 +290,13 @@ class TableRowMesure extends React.Component {
     const formData = {
       ouverture: `${date_ouverture}`,
       codePostal: `${code_postal}`,
-        civilite: `${civilite}`,
-        annee: `${annee}`,
-        commune: `${ville}`,
-        residence: `${residence}`,
-        type: `${type}`,
+      civilite: `${civilite}`,
+      annee: `${annee}`,
+      commune: `${ville}`,
+      residence: `${residence}`,
+      type: `${type}`
     };
+
     return (
       <TableRowMesureView
         openModal={() => this.openModal(this.props.mesure.id)}
@@ -266,6 +317,8 @@ class TableRowMesure extends React.Component {
         onClickClose={this.closeModal}
         isOpenMesure={this.state.modalIsOpenMesure}
         onClickSubmitMesure={this.closeModalAnnulerMesure}
+        onClickSubmitEteinte={() => this.onClickEteinte(this.props.mesure.id)}
+        display_row={this.state.showTD}
       />
     );
   }

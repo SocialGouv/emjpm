@@ -35,7 +35,13 @@ const ColStyle = styled.b`
   color: ${props => props.color || "black"};
 `;
 
-export const TableMesureView = ({ updateMesure, rows, display, display_ext}) => (
+export const TableMesureView = ({
+  updateMesure,
+  rows,
+  display,
+  display_ext,
+  updateMesureEteinte
+}) => (
   <LineContainer>
     <DisplayCreationMesure display={display}>
       <CreationMesure className="row" updateMesure={updateMesure} />
@@ -67,15 +73,15 @@ export const TableMesureView = ({ updateMesure, rows, display, display_ext}) => 
               display: display
             }}
           />
-            <td
-                style={{
-                    width: "20%",
-                    textAlign: "left",
-                    color: "#696969",
-                    borderTopWidth: "0px",
-                    display: display
-                }}
-            />
+          <td
+            style={{
+              width: "20%",
+              textAlign: "left",
+              color: "#696969",
+              borderTopWidth: "0px",
+              display: display
+            }}
+          />
           <td
             style={{
               width: "20%",
@@ -92,14 +98,16 @@ export const TableMesureView = ({ updateMesure, rows, display, display_ext}) => 
       <tbody>
         {rows &&
           rows.map(mesure => (
-            <TableRowMesure
-              display={display}
-              display_ext={display_ext}
-              key={mesure.id}
-              mesure={mesure}
-              updateMesure={updateMesure}
-            />
-          ))}
+              <TableRowMesure
+                display={display}
+                display_ext={display_ext}
+                key={mesure.id}
+                mesure={mesure}
+                updateMesure={updateMesure}
+                updateMesureEteinte={updateMesureEteinte}
+              />
+                )
+          )}
       </tbody>
     </table>
   </LineContainer>
@@ -121,21 +129,6 @@ class TableMesure extends React.Component {
     }
   };
 
-  // closeModalAnnulerMesure = ({ formData }) => {
-  //     this.onClickMesure(this.state.mesureId, formData);
-  //     this.closeModal();
-  // };
-  //
-  // closeModal = () => {
-  //     this.setState({ modalIsOpen: false, modalIsOpenMesure: false });
-  // };
-  // updateedit = () => {
-  //     this.setState({ updateedit: "inline-block" });
-  // };
-  // outEdit = () => {
-  //     this.setState({ updateedit: "none" });
-  // };
-
   render() {
     return (
       <TableMesureView
@@ -143,6 +136,7 @@ class TableMesure extends React.Component {
         display_ext={this.props.display_ext}
         updateMesure={this.props.updateMesure}
         rows={this.props.rows}
+        updateMesureEteinte={this.props.updateMesureEteinte}
       />
     );
   }
