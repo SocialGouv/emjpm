@@ -113,7 +113,6 @@ const PillDispo = ({ dispo, dispo_max }) => (
 const MandataireIndexView = ({
   currentMandataire,
   filteredMesures,
-  updateMesure,
   updateMadataire,
   updateMesureEteinte,
   mesureEteinte
@@ -219,7 +218,7 @@ class MandatairesIndex extends React.Component {
               )
       );
   }
-  
+
     updateMesureEteinte = () => {
         this.onUpdate();
     };
