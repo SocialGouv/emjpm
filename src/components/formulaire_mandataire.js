@@ -79,8 +79,6 @@ const uiSchema = {
   }
 };
 
-const formData = {};
-
 const Container = ({ children }) => <div className="container">{children}</div>;
 const Row = ({ children }) => <div className="row">{children}</div>;
 const Col6 = ({ children }) => <div className="col-6">{children}</div>;
@@ -227,8 +225,7 @@ class FormulaireMandataire extends React.Component {
       email,
       code_postal,
       dispo_max,
-      type,
-        id
+      type
     } = this.props.currentMandataireModal;
 
     const formData = {
