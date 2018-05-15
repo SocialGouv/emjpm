@@ -1,7 +1,7 @@
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
-
+import styled from "styled-components";
 import apiFetch from "./Api";
 import RowModal from "./RowModal";
 
@@ -45,7 +45,7 @@ const customStyles = {
 
 const uiSchema = {
   secretariat: {
-    "ui:widget": "select" // could also be "select"
+    "ui:widget": "select"
   },
   nom: {
     "ui:placeholder": "Nom"
@@ -67,15 +67,9 @@ const uiSchema = {
   },
   code_postal: {
     "ui:placeholder": "Code Postal"
-    //"ui:options": {
-    //  label: false
-    //}
   },
   ville: {
     "ui:placeholder": "Commune"
-    //"ui:options": {
-    //    label: false
-    // }
   },
   dispo_max: {
     "ui:placeholder": "Nombre de mesures souhaitées"
@@ -83,12 +77,105 @@ const uiSchema = {
   nb_secretariat: {
     "ui:placeholder": "Secrétariat : nombre d'ETP"
   }
-  // nb_secretariat: {
-  //     "ui:widget": "updown"
-  // }
 };
 
 const formData = {};
+
+const Container = ({ children }) => <div className="container">{children}</div>;
+const Row = ({ children }) => <div className="row">{children}</div>;
+const Col6 = ({ children }) => <div className="col-6">{children}</div>;
+const Stylediv = styled.div`
+  text-align: left;
+`;
+
+const FormulaireMandataireView = ({
+  nom,
+  prenom,
+  telephone,
+  telephone_portable,
+  ville,
+  adresse,
+  secretariat,
+  nb_secretariat,
+  email,
+  code_postal,
+  type,
+  dispo_max,
+  onClick,
+  onSubmit,
+  currentMandataireModalTry,
+  isOpen,
+  onRequestClose,
+  closebuttonmodal,
+  formData}
+) => (
+  <Container>
+    {currentMandataireModalTry && (
+      <Container>
+        <Row>
+          <Col6>
+            <Stylediv>
+              <b>
+                {prenom} {nom}
+              </b>
+              <br />
+              {type.toUpperCase()}
+              <br />
+              <br />
+              <b>Contact</b>
+              <br />
+              {prenom} {nom}
+              <br />
+              {telephone}
+              <br />
+              {telephone_portable}
+              <br />
+              <br />
+              <b> Adresse</b>
+              <br />
+              {adresse}
+              <br />
+              {code_postal} <br />
+              {ville}
+              <br />
+              <br />
+              <b> Nombre de mesures souhaitées</b>
+              <br />
+              {dispo_max}
+              <br />
+              <br />
+              <b> Secrétariat</b>
+              <br />
+              {secretariat} - {nb_secretariat} <br />
+              <br />
+              <button className={"btn btn-dark"} onClick={onClick}>
+                Modifier mes informations
+              </button>
+            </Stylediv>
+          </Col6>
+        </Row>
+      </Container>
+    )}
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      contentLabel="mandataire"
+      background="#e9ecef"
+      style={customStyles}
+      className="ModalInformation"
+      overlayClassName="OverlayInput"
+    >
+      <button onClick={closebuttonmodal}>X</button>
+      <Form schema={schema} formData={formData} uiSchema={uiSchema} onSubmit={onSubmit}>
+        <div style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}>
+          <button type="submit" className="btn btn-success">
+            Enregistrer
+          </button>
+        </div>
+      </Form>
+    </Modal>
+  </Container>
+);
 
 class FormulaireMandataire extends React.Component {
   state = {
@@ -128,89 +215,59 @@ class FormulaireMandataire extends React.Component {
   };
 
   render() {
-    const formData = {
-      nom: `${this.props.currentMandataireModal.nom}`,
-      prenom: `${this.props.currentMandataireModal.prenom}`,
-      telephone: `${this.props.currentMandataireModal.telephone}`,
-      telephone_portable: `${this.props.currentMandataireModal.telephone_portable}`,
-      ville: `${this.props.currentMandataireModal.ville}`,
-      adresse: `${this.props.currentMandataireModal.adresse}`,
-      secretariat: `${this.props.currentMandataireModal.secretariat}`,
-      nb_secretariat: `${this.props.currentMandataireModal.nb_secretariat}`,
-      email: `${this.props.currentMandataireModal.email}`,
-      code_postal: `${this.props.currentMandataireModal.code_postal}`,
-      dispo_max: `${this.props.currentMandataireModal.dispo_max}`
-    };
-    return (
-      <div className="container">
-        {this.props.currentMandataireModal && (
-          <div className="container">
-            <div className="row">
-              <div className="col-6">
-                <div style={{ textAlign: "left" }}>
-                  <b>
-                    {this.props.currentMandataireModal.prenom}{" "}
-                    {this.props.currentMandataireModal.nom}
-                  </b>
-                  <br />
-                  {this.props.currentMandataireModal.type.toUpperCase()}
-                  <br />
-                  <br />
-                  <b>Contact</b>
-                  <br />
-                  {this.props.currentMandataireModal.prenom} {this.props.currentMandataireModal.nom}
-                  <br />
-                  {this.props.currentMandataireModal.telephone}
-                  <br />
-                  {this.props.currentMandataireModal.telephone_portable}
-                  <br />
-                  <br />
-                  <b> Adresse</b>
-                  <br />
-                  {this.props.currentMandataireModal.adresse}
-                  <br />
-                  {this.props.currentMandataireModal.code_postal} <br />
-                  {this.props.currentMandataireModal.ville}
-                  <br />
-                  <br />
-                  <b> Nombre de mesures souhaitées</b>
-                  <br />
-                  {this.props.currentMandataireModal.dispo_max}
-                  <br />
-                  <br />
-                  <b> Secrétariat</b>
-                  <br />
-                  {this.props.currentMandataireModal.secretariat} -{" "}
-                  {this.props.currentMandataireModal.nb_secretariat} <br />
-                  <br />
-                  <button className={"btn btn-dark"} onClick={this.openModal}>
-                    Modifier mes informations
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+    const {
+      nom,
+      prenom,
+      telephone,
+      telephone_portable,
+      ville,
+      adresse,
+      secretariat,
+      nb_secretariat,
+      email,
+      code_postal,
+      dispo_max,
+      type,
+        id
+    } = this.props.currentMandataireModal;
 
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
-          contentLabel="mandataire"
-          background="#e9ecef"
-          style={customStyles}
-          className="ModalInformation"
-          overlayClassName="OverlayInput"
-        >
-          <button onClick={this.closeModal}>X</button>
-          <Form schema={schema} formData={formData} uiSchema={uiSchema} onSubmit={this.onSubmit}>
-            <div style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}>
-              <button type="submit" className="btn btn-success">
-                Enregistrer
-              </button>
-            </div>
-          </Form>
-        </Modal>
-      </div>
+    const formData = {
+      nom: `${nom}`,
+      prenom: `${prenom}`,
+      telephone: `${telephone}`,
+      telephone_portable: `${telephone_portable}`,
+      ville: `${ville}`,
+      adresse: `${adresse}`,
+      secretariat: `${secretariat}`,
+      nb_secretariat: `${nb_secretariat}`,
+      email: `${email}`,
+      code_postal: `${code_postal}`,
+      dispo_max: `${dispo_max}`
+    };
+
+    return (
+
+      <FormulaireMandataireView
+        currentMandataireModalTry={this.props.currentMandataireModal}
+        nom={nom}
+        prenom={prenom}
+        telephone={telephone}
+        telephone_portable={telephone_portable}
+        ville={ville}
+        adresse={adresse}
+        secretariat={secretariat}
+        nb_secretariat={nb_secretariat}
+        email={email}
+        code_postal={code_postal}
+        dispo_max={dispo_max}
+        type={type}
+        onClick={this.openModal}
+        onSubmit={this.onSubmit}
+        isOpen={this.state.modalIsOpen}
+        onRequestClose={this.closeModal}
+        closebuttonmodal={this.closeModal}
+        formData={formData}
+      />
     );
   }
 }
