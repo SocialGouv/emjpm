@@ -25,7 +25,7 @@ const CancelButtonX = styled.div`
 const formData = {};
 
 export const FormMesure = ({
-  showReplyForm,
+  OpenCreationMesure,
   CustomFieldTemplate,
   onSubmit,
   formData,
@@ -36,7 +36,7 @@ export const FormMesure = ({
     <button
       type="button"
       className="btn btn-success mesure_button"
-      onClick={showReplyForm}
+      onClick={OpenCreationMesure}
       style={hideShow}
     >
       Ouvrir une mesure
@@ -44,7 +44,7 @@ export const FormMesure = ({
 
     <div style={showHide}>
       <CancelButtonX>
-        <CancelX onClick={showReplyForm} className="btn btn-link">
+        <CancelX onClick={OpenCreationMesure} className="btn btn-link">
           X
         </CancelX>
       </CancelButtonX>
@@ -53,7 +53,7 @@ export const FormMesure = ({
           CustomFieldTemplate={CustomFieldTemplate}
           formData={formData}
           onSubmit={onSubmit}
-          showReplyForm={showReplyForm}
+          showReplyForm={OpenCreationMesure}
         />
       </div>
     </div>
@@ -126,7 +126,7 @@ class MesureInput extends React.Component {
     );
   };
 
-  showReplyForm = () => {
+  OpenCreationMesure = () => {
     if (this.state.showStatus === false) {
       this.setState({ showStatus: true });
     } else {
@@ -147,7 +147,7 @@ class MesureInput extends React.Component {
     };
     return (
       <FormMesure
-        showReplyForm={this.showReplyForm}
+        OpenCreationMesure={this.OpenCreationMesure}
         CustomFieldTemplate={this.CustomFieldTemplate}
         onSubmit={this.onSubmit}
         formData={formData}
