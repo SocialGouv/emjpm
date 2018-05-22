@@ -198,17 +198,21 @@ class MandatairesIndex extends React.Component {
     //   method: "PUT"
     // }).then(() => {});
 
-    apiFetch(`/mandataires/1/mesures`).then(mesures =>
-      apiFetch(`/mandataires/1`).then(mandataire =>
-        apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
-          this.setState({
-            datamesure: mesures,
-            mesureEteinte: mesureEteinte,
-            currentMandataire: mandataire
-          })
+    apiFetch(`/mandataires/1/mesures`)
+      .then(mesures =>
+        apiFetch(`/mandataires/1`).then(mandataire =>
+          apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
+            this.setState({
+              datamesure: mesures,
+              mesureEteinte: mesureEteinte,
+              currentMandataire: mandataire
+            })
+          )
         )
       )
-    );
+      .catch(e => {
+        throw e;
+      });
   }
 
   onUpdate = () => {
