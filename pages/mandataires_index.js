@@ -6,6 +6,8 @@ import Footer from "../src/components/Footer";
 import FormulaireMandataire from "../src/components/formulaire_mandataire";
 import apiFetch from "../src/components/Api";
 import dynamic from "next/dynamic";
+import { Home,Map, User ,UserMinus } from 'react-feather';
+
 
 const antenne = require("../static/images/home.svg");
 const map = require("../static/images/map.svg");
@@ -18,12 +20,16 @@ const tabStyle = {
   bottom: 0,
   verticalAlign: "middle",
   lineHeight: "40px",
-  width: "25%"
+  width: "25%",
+    display: "inline-flex"
+
 };
 const imageStyle = {
-  padding: "5px",
-  width: "35px ",
-  height: "35px "
+  lineHeight: "50px",
+  width: "35px",
+  height: "35px",
+    color: "black",
+    display: "inline-block"
 };
 
 const Pill = styled.p`
@@ -134,15 +140,15 @@ const MandataireIndexView = ({
             <b>Mesures en cours</b>
           </Tab>
           <Tab style={tabStyle}>
-            <img src={map} style={imageStyle} />
+            <Map style={imageStyle} />
             <b>Vue Carte</b>
           </Tab>
           <Tab style={tabStyle}>
-            <img src={minus} style={imageStyle} />
+            <UserMinus style={imageStyle} />
             <b>Mesures éteintes</b>
           </Tab>
           <Tab style={tabStyle}>
-            <img src={antenne} style={imageStyle} />
+            <Home style={imageStyle} />
             <b>Vos informations</b>
           </Tab>
         </TabsShowMandataire>
