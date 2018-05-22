@@ -8,12 +8,6 @@ import apiFetch from "../src/components/Api";
 import dynamic from "next/dynamic";
 import { Home,Map, User ,UserMinus } from 'react-feather';
 
-
-const antenne = require("../static/images/home.svg");
-const map = require("../static/images/map.svg");
-const person = require("../static/images/user.svg");
-const minus = require("../static/images/user-minus.svg");
-
 const tabStyle = {
   backgroundColor: "#ebeff2",
   paddingBottom: 5,
