@@ -62,7 +62,7 @@ export const FormMesure = ({
 
 class MesureInput extends React.Component {
   state = {
-    showStatus: false
+      showForm: false
   };
 
   onSubmit = ({ formData }) => {
@@ -127,10 +127,10 @@ class MesureInput extends React.Component {
   };
 
   OpenCreationMesure = () => {
-    if (this.state.showStatus === false) {
-      this.setState({ showStatus: true });
+    if (this.state.showForm === false) {
+      this.setState({ showForm: true });
     } else {
-      this.setState({ showStatus: false });
+      this.setState({ showForm: false });
     }
   };
 
@@ -138,11 +138,11 @@ class MesureInput extends React.Component {
     const formData = {};
 
     const showHide = {
-      display: this.state.showStatus === true ? "block" : "none"
+      display: this.state.showForm === true ? "block" : "none"
     };
 
     const hideShow = {
-      display: this.state.showStatus === false ? "block" : "none",
+      display: this.state.showForm === false ? "block" : "none",
       align: "left"
     };
     return (
