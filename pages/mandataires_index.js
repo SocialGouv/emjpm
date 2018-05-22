@@ -212,14 +212,18 @@ class MandatairesIndex extends React.Component {
   }
 
   onUpdate = () => {
-    apiFetch(`/mandataires/1/mesures`).then(mesures =>
-      apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
-        this.setState({
-          datamesure: mesures,
-          mesureEteinte: mesureEteinte
-        })
+    apiFetch(`/mandataires/1/mesures`)
+      .then(mesures =>
+        apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
+          this.setState({
+            datamesure: mesures,
+            mesureEteinte: mesureEteinte
+          })
+        )
       )
-    );
+      .catch(e => {
+        throw e;
+      });
   };
 
   updateMesureEteinte = () => {
