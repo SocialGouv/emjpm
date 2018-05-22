@@ -6,7 +6,7 @@ import Footer from "../src/components/Footer";
 import FormulaireMandataire from "../src/components/formulaire_mandataire";
 import apiFetch from "../src/components/Api";
 import dynamic from "next/dynamic";
-import { Home,Map, User ,UserMinus } from 'react-feather';
+import { Home, Map, User, UserMinus } from "react-feather";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
@@ -15,15 +15,14 @@ const tabStyle = {
   verticalAlign: "middle",
   lineHeight: "40px",
   width: "25%",
-    display: "inline-flex"
-
+  display: "inline-flex"
 };
 const imageStyle = {
   lineHeight: "50px",
   width: "35px",
   height: "35px",
-    color: "black",
-    display: "inline-block"
+  color: "black",
+  display: "inline-block"
 };
 
 const Pill = styled.p`
@@ -150,7 +149,11 @@ const MandataireIndexView = ({
     </TabList>
     <TabsPanelMandataire className="container">
       <TabPanel>
-        <TableMesure display_ext={"none"} rows={filteredMesures} updateMesureEteinte={updateMesureEteinte} />
+        <TableMesure
+          display_ext={"none"}
+          rows={filteredMesures}
+          updateMesureEteinte={updateMesureEteinte}
+        />
       </TabPanel>
       <TabPanel>
         <OpenStreeMapMandataire className="container">
@@ -209,19 +212,19 @@ class MandatairesIndex extends React.Component {
   }
 
   onUpdate = () => {
-      apiFetch(`/mandataires/1/mesures`).then(mesures =>
-              apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
-                  this.setState({
-                      datamesure: mesures,
-                      mesureEteinte: mesureEteinte,
-                  })
-              )
-      );
-  }
+    apiFetch(`/mandataires/1/mesures`).then(mesures =>
+      apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
+        this.setState({
+          datamesure: mesures,
+          mesureEteinte: mesureEteinte
+        })
+      )
+    );
+  };
 
-    updateMesureEteinte = () => {
-        this.onUpdate();
-    };
+  updateMesureEteinte = () => {
+    this.onUpdate();
+  };
 
   updateMadataire = mesures => {
     this.setState({ currentMandataire: mesures });
