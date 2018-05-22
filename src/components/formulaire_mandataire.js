@@ -105,8 +105,8 @@ const FormulaireMandataireView = ({
   isOpen,
   onRequestClose,
   closebuttonmodal,
-  formData}
-) => (
+  formData
+}) => (
   <Container>
     {currentMandataireModalTry && (
       <Container>
@@ -229,21 +229,20 @@ class FormulaireMandataire extends React.Component {
     } = this.props.currentMandataireModal;
 
     const formData = {
-      nom: `${nom}`,
-      prenom: `${prenom}`,
-      telephone: `${telephone}`,
-      telephone_portable: `${telephone_portable}`,
-      ville: `${ville}`,
-      adresse: `${adresse}`,
-      secretariat: `${secretariat}`,
-      nb_secretariat: `${nb_secretariat}`,
-      email: `${email}`,
-      code_postal: `${code_postal}`,
-      dispo_max: `${dispo_max}`
+      nom,
+      prenom,
+      telephone,
+      telephone_portable,
+      ville,
+      adresse,
+      secretariat,
+      nb_secretariat,
+      email,
+      code_postal,
+      dispo_max
     };
 
     return (
-
       <FormulaireMandataireView
         currentMandataireModalTry={this.props.currentMandataireModal}
         nom={nom}
