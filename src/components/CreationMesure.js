@@ -62,7 +62,7 @@ export const FormMesure = ({
 
 class MesureInput extends React.Component {
   state = {
-      showForm: false
+    showForm: false
   };
 
   onSubmit = ({ formData }) => {

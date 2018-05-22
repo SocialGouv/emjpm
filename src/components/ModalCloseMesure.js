@@ -12,7 +12,7 @@ const customStyles = {
   }
 };
 
-const ModalMesure = {
+const modalMesure = {
   position: "absolute",
   width: "30% !important",
   height: "30% !important",
