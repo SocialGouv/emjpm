@@ -22,7 +22,7 @@ export const MapsView = ({ mesures, zoom, center, width, height }) => (
             </span>
           </Popup>
         </Marker>
-      ))};
+      ))}
   </Map>
 );
 
