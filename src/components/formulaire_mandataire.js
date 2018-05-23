@@ -4,6 +4,7 @@ import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import apiFetch from "./Api";
 import RowModal from "./RowModal";
+import piwik from "../piwik";
 
 const schema = {
   title: "Modifier vos informations",
@@ -23,12 +24,12 @@ const schema = {
     code_postal: { type: "string", title: "Code Postal", default: "" },
     ville: { type: "string", title: "Commune", default: "" },
     dispo_max: {
-      type: "string",
+      type: "integer",
       title: "Nombre de mesures souhaitées",
       default: ""
     },
     secretariat: { type: "boolean", title: "Secretariat", enumNames: ["Oui", "Non"] },
-    nb_secretariat: { type: "string", title: "Secrétariat : nombre d'ETP", default: "" }
+    nb_secretariat: { type: "integer", title: "Secrétariat : nombre d'ETP", default: "" }
   }
 };
 
@@ -175,19 +176,26 @@ class FormulaireMandataire extends React.Component {
     apiFetch(`/mandataires/1`, {
       method: "PUT",
       body: JSON.stringify({
-        nom: formData.nom,
-        prenom: formData.prenom,
-        telephone: formData.telephone,
-        telephone_portable: formData.telephone_portable,
-        email: formData.email,
-        adresse: formData.adresse,
-        code_postal: formData.code_postal,
-        ville: formData.ville,
-        dispo_max: formData.dispo_max,
+        nom: formData.nom || "",
+        prenom: formData.prenom || "",
+        telephone: formData.telephone || "",
+        telephone_portable: formData.telephone_portable || "",
+        email: formData.email || "",
+        adresse: formData.adresse || "",
+        code_postal: formData.code_postal || "",
+        ville: formData.ville || "",
+        dispo_max: formData.dispo_max || 0,
         secretariat: formData.secretariat,
-        nb_secretariat: formData.nb_secretariat
+        nb_secretariat: formData.nb_secretariat || 0
       })
     }).then(json => {
+      if (formData.dispo_max !== this.props.currentMandataireModal.dispo_max) {
+        piwik.push([
+          "trackEvent",
+          "mesures",
+          "Modification du nombre de mesures souhaitées par un mandataire"
+        ]);
+      }
       this.props.updateMadataire(json);
     });
     this.closeModal();
@@ -201,7 +209,7 @@ class FormulaireMandataire extends React.Component {
   };
 
   render() {
-    const formData = this.props.currentMandataireModal
+    const formData = this.props.currentMandataireModal;
 
     return (
       <FormulaireMandataireView
