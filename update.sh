@@ -2,6 +2,7 @@
 
 git pull
 
+npm install
 npm run build
 
 sudo docker build . -t emjpm-app
