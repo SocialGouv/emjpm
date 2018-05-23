@@ -122,14 +122,12 @@ const FormInputMesure = ({
       className="btn btn-success"
       disabled={status === "loading" || status === "success"}
     >
-      {(status === "loading" && "Création...") ||
-        (status === "success" && "Valider") ||
-        "Valider"}
+      {(status === "loading" && "Création...") || (status === "success" && "Valider") || "Valider"}
     </button>
     <CancelButton onClick={showReplyForm} className="btn btn-link">
       Annuler
     </CancelButton>
-      <ErrorBox message={error} />
+    <ErrorBox message={error} />
   </Form>
 );
 
