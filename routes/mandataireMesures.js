@@ -51,4 +51,16 @@ router.get("/:mandataireId/mesures", async (req, res, next) => {
         });
 });
 
+
+router.get("/:mandataireId/mesures/Eteinte", async (req, res, next) => {
+    const ti = await queries.getMandataireByUserId(req.user.id);
+    queries
+        .getAllMesuresEteinte(ti.id)
+        .then(function(mesures) {
+            res.status(200).json(mesures);
+        })
+        .catch(function(error) {
+            next(error);
+        });
+});
 module.exports = router;
