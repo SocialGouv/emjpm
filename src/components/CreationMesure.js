@@ -30,7 +30,9 @@ export const FormMesure = ({
   onSubmit,
   formData,
   showHide,
-  hideShow
+  hideShow,
+  error,
+  status
 }) => (
   <div>
     <button
@@ -54,6 +56,8 @@ export const FormMesure = ({
           formData={formData}
           onSubmit={onSubmit}
           showReplyForm={OpenCreationMesure}
+          error={error}
+          status={status}
         />
       </div>
     </div>
@@ -62,42 +66,60 @@ export const FormMesure = ({
 
 class MesureInput extends React.Component {
   state = {
-    showForm: false
+    showForm: false,
+    error: null,
+    status: null
   };
 
   onSubmit = ({ formData }) => {
-    getPostCodeCoordinates(formData.codePostal)
-      .then(coordinates => {
-        return apiFetch(`/mandataires/1/mesures`, {
-          method: "POST",
-          body: JSON.stringify({
-            code_postal: formData.codePostal,
-            ville: formData.commune,
-            etablissement: formData.etablissement,
-            latitude: coordinates.features[0].geometry.coordinates[1],
-            longitude: coordinates.features[0].geometry.coordinates[0],
-            annee: formData.annee,
-            type: formData.type,
-            date_ouverture: formData.ouverture,
-            residence: formData.residence,
-            civilite: formData.civilite,
-            status: "Mesure en cours"
+    this.setState(
+      {
+        error: null,
+        status: "loading"
+      },
+      () => {
+        getPostCodeCoordinates(formData.codePostal)
+          .then(coordinates => {
+            return apiFetch(`/mandataires/1/mesures`, {
+              method: "POST",
+              body: JSON.stringify({
+                code_postal: formData.codePostal,
+                ville: formData.commune,
+                etablissement: formData.etablissement,
+                latitude: coordinates.features[0].geometry.coordinates[1],
+                longitude: coordinates.features[0].geometry.coordinates[0],
+                annee: formData.annee,
+                type: formData.type,
+                date_ouverture: formData.ouverture,
+                residence: formData.residence,
+                civilite: formData.civilite,
+                status: "Mesure en cours"
+              })
+            })
+              .then(json => {
+                return apiFetch(`/mandataires/1/capacite`, {
+                  method: "PUT"
+                }).then(() => {
+                  return json;
+                });
+              })
+              .then(json2 => {
+                this.props.updateMesure(json2);
+                this.setState({
+                  status: "success",
+                  error: " La mesure a été crée"
+                });
+              });
           })
-        })
-          .then(json => {
-            return apiFetch(`/mandataires/1/capacite`, {
-              method: "PUT"
-            }).then(() => {
-              return json;
+          .catch(e => {
+            this.setState({
+              status: "error",
+              error: "Impossible de créer la mesure"
             });
-          })
-          .then(json2 => {
-            this.props.updateMesure(json2);
+            throw e;
           });
-      })
-      .catch(e => {
-        throw e;
-      });
+      }
+    );
   };
 
   CustomFieldTemplate = props => {
@@ -153,6 +175,8 @@ class MesureInput extends React.Component {
         formData={formData}
         showHide={showHide}
         hideShow={hideShow}
+        error={this.state.error}
+        status={this.state.status}
       />
     );
   }
