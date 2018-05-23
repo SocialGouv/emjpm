@@ -87,18 +87,6 @@ const Stylediv = styled.div`
 `;
 
 const FormulaireMandataireView = ({
-  nom,
-  prenom,
-  telephone,
-  telephone_portable,
-  ville,
-  adresse,
-  secretariat,
-  nb_secretariat,
-  email,
-  code_postal,
-  type,
-  dispo_max,
   onClick,
   onSubmit,
   currentMandataireModalTry,
@@ -114,37 +102,37 @@ const FormulaireMandataireView = ({
           <Col6>
             <Stylediv>
               <b>
-                {prenom} {nom}
+                {formData.prenom} {formData.nom}
               </b>
               <br />
-              {type.toUpperCase()}
+              {formData.type.toUpperCase()}
               <br />
               <br />
               <b>Contact</b>
               <br />
-              {prenom} {nom}
+              {formData.prenom} {formData.nom}
               <br />
-              {telephone}
+              {formData.telephone}
               <br />
-              {telephone_portable}
+              {formData.telephone_portable}
               <br />
               <br />
               <b> Adresse</b>
               <br />
-              {adresse}
+              {formData.adresse}
               <br />
-              {code_postal} <br />
-              {ville}
+              {formData.code_postal} <br />
+              {formData.ville}
               <br />
               <br />
               <b> Nombre de mesures souhaitées</b>
               <br />
-              {dispo_max}
+              {formData.dispo_max}
               <br />
               <br />
               <b> Secrétariat</b>
               <br />
-              {secretariat} - {nb_secretariat} <br />
+              {formData.secretariat} - {formData.nb_secretariat} <br />
               <br />
               <button className={"btn btn-dark"} onClick={onClick}>
                 Modifier mes informations
@@ -213,50 +201,11 @@ class FormulaireMandataire extends React.Component {
   };
 
   render() {
-    const {
-      nom,
-      prenom,
-      telephone,
-      telephone_portable,
-      ville,
-      adresse,
-      secretariat,
-      nb_secretariat,
-      email,
-      code_postal,
-      dispo_max,
-      type
-    } = this.props.currentMandataireModal;
-
-    const formData = {
-      nom,
-      prenom,
-      telephone,
-      telephone_portable,
-      ville,
-      adresse,
-      secretariat,
-      nb_secretariat,
-      email,
-      code_postal,
-      dispo_max
-    };
+    const formData = this.props.currentMandataireModal
 
     return (
       <FormulaireMandataireView
         currentMandataireModalTry={this.props.currentMandataireModal}
-        nom={nom}
-        prenom={prenom}
-        telephone={telephone}
-        telephone_portable={telephone_portable}
-        ville={ville}
-        adresse={adresse}
-        secretariat={secretariat}
-        nb_secretariat={nb_secretariat}
-        email={email}
-        code_postal={code_postal}
-        dispo_max={dispo_max}
-        type={type}
         onClick={this.openModal}
         onSubmit={this.onSubmit}
         isOpen={this.state.modalIsOpen}
