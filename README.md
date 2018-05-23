@@ -59,11 +59,17 @@ Les comptes de dev sont définis dans les [seeds](https://github.com/SocialGouv/
 
 ### Récupérer un dump Postgres:
 
+#### Complet
+
 ```docker exec -t -u postgres emjpm-postgres pg_dumpall -c > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql```
+
+#### Données uniquement
+
+```ssh xxxx@yyyyy -t sudo docker exec -t -u postgres emjpm-postgres pg_dump -a --inserts emjpm_prod > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql```
 
 ### Restaurer un dump Postgres:
 
-Depuis le host docker : `cat dump.sql | docker exec -i emjpm-postgres psql -U postgres`
+Depuis le host docker : `cat dump.sql | sudo docker exec -i emjpm-postgres psql -U postgres` [db]
 
 ### Tunnel SSH pour accéder à Postgres à distance:
 
