@@ -67,6 +67,22 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
         });
 });
 
+
+router.put("/:mandataireId/capaciteEteinte", async (req, res, next) => {
+    const ti = await queries.getMandataireByUserId(req.user.id);
+    const capaciteMandataire = queries.CapaciteEteinteMandataire(ti.id)
+    queries.CapaciteMandataire(ti.id)
+        .then(function() {
+            return  queries.CapaciteMandataire(ti.id);
+        })
+        .then(function(mandataire) {
+            res.status(200).json(queries.CapaciteMandataire(ti.id));
+        })
+        .catch(function(error) {
+            next(error);
+        });
+});
+
 // router.post("/", function(req, res, next) {
 //   queries
 //     .add(req.body)
