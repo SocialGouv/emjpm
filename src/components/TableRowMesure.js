@@ -13,6 +13,7 @@ import ModalCloseMesure from "./ModalCloseMesure";
 import Cell from "./Cell";
 import styled from "styled-components";
 import ModalMesure from "./ModalMesure";
+import piwik from "../piwik";
 
 const TdCursor = styled.tr`
   cursor: url("../../static/images/edit.svg"), auto;
@@ -183,14 +184,14 @@ class TableRowMesure extends React.Component {
     apiFetch(`/mandataires/1/mesures/${e}`, {
       method: "PUT",
       body: JSON.stringify({
-          date_ouverture: formData.ouverture,
-          code_postal: formData.codePostal,
-          type: formData.type,
-          civilite: formData.civilite,
-          annee: formData.annee,
-          residence: formData.residence,
-          ville: formData.commune
-          // longitude: this.state.postcodeCoordinates[0],
+        date_ouverture: formData.ouverture,
+        code_postal: formData.codePostal,
+        type: formData.type,
+        civilite: formData.civilite,
+        annee: formData.annee,
+        residence: formData.residence,
+        ville: formData.commune
+        // longitude: this.state.postcodeCoordinates[0],
         // latitude: this.state.postcodeCoordinates[1],
       })
     })
@@ -218,9 +219,12 @@ class TableRowMesure extends React.Component {
   handleOpenModal = mandataire => {
     this.setState({ modalIsOpenMesure: true, mesureId: mandataire });
   };
+
   closeModalAnnuler = ({ formData }) => {
+    piwik.push(["trackEvent", "mesures", "Suppression d'une mesure"]);
     this.onClick(this.props.mesure.id, formData);
   };
+
   closeModalAnnulerMesure = ({ formData }) => {
     this.onClickMesure(this.props.mesure.id, formData);
   };

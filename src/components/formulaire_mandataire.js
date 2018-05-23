@@ -4,6 +4,7 @@ import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import apiFetch from "./Api";
 import RowModal from "./RowModal";
+import piwik from "../piwik";
 
 const schema = {
   title: "Modifier vos informations",
