@@ -41,6 +41,11 @@ function getAllMesures(mandataireID) {
         .where({"mandataire_id": parseInt(mandataireID),status: 'Mesure en cours'});
 }
 
+function getAllMesuresEteinte(mandataireID) {
+    return knex("mesures")
+        .where({"mandataire_id": parseInt(mandataireID),status: 'Eteindre mesure'});
+}
+
 function getAllMesuresByMandataires(ti_id) {
     return knex.from("mesures")
         .where("status" , "Mesure en cours")
@@ -49,7 +54,7 @@ function getAllMesuresByMandataires(ti_id) {
 }
 
 function getAllMesuresByPopUp(ti_id) {
-    return knex.from("mesures").select(knex.raw('COUNT(mesures.code_postal)','mesures.code_postal','codePostalLatLngs.latitude','codePostalLatLngs.longitude'))
+    return knex.from("mesures").debug().select(knex.raw('COUNT(mesures.code_postal)','mesures.code_postal','codePostalLatLngs.latitude','codePostalLatLngs.longitude'))
         .innerJoin("codePostalLatLngs","mesures.code_postal","codePostalLatLngs.code_postal")
         .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
         .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id)).where({status: "Mesure en cours"}).groupByRaw('mesures.code_postal,codePostalLatLngs.longitude,codePostalLatLngs.latitude,codePostalLatLngs.code_postal');
@@ -141,6 +146,9 @@ function CapaciteMandataire(mandataireID) {
     return knex("mesures").count('*').where({"mandataire_id": parseInt(mandataireID),status: 'Mesure en cours'});
 }
 
+function CapaciteEteinteMandataire(mandataireID) {
+    return knex("mesures").count('*').where({"mandataire_id": parseInt(mandataireID),status: 'Eteindre mesure'});
+}
 
 function addMesure(mesureID) {
   return knex("mesures").insert(mesureID);
@@ -242,6 +250,8 @@ module.exports = {
   getAllAntennes,
   addAntenne,
   updateAntenne,
-  deleteAntenne
+  deleteAntenne,
+  CapaciteEteinteMandataire,
+    getAllMesuresEteinte
 
 };
