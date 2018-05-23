@@ -3,7 +3,6 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import geolib from "geolib";
 import dynamic from "next/dynamic";
-
 import PanelFilterMandataires from "../src/components/PanelFilterMandataires";
 import TableMandataire from "../src/components/TableMandataire";
 import Navigation from "../src/components/Navigation";
@@ -241,8 +240,10 @@ class Ti extends React.Component {
           updateFilters={this.updateFilters}
         />
         <OpenStreeMap
-          mesure={filteredMesures}
+          mesures={filteredMesures}
           postcodeMandataire={this.state.postcodeCoordinates}
+          width={"100%"}
+          height={"400px"}
         />
         <div className="container">
           <Title>
