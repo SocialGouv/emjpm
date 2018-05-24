@@ -37,6 +37,10 @@ Les comptes de dev sont définis dans les [seeds](https://github.com/SocialGouv/
 ### Tests
 
 ```sh
+
+# setup la base de test
+docker exec emjpm-postgres createdb emjpm_test -U postgres
+
 ./node_modules/.bin/knex migrate:latest --env test
 
 ./node_modules/.bin/knex seed:run --env test
