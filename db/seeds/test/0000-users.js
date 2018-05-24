@@ -24,26 +24,26 @@ exports.seed = (knex, Promise) => {
         })
       );
     })
-.then(() => {
-        const salt = bcrypt.genSaltSync();
-        const hash = bcrypt.hashSync("aaaaaa", salt);
-        return Promise.join(
-            knex("users").insert({
-                username: "adrien1",
-                password: hash,
-                admin: true
-            })
-        );
+    .then(() => {
+      const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync("aaaaaa", salt);
+      return Promise.join(
+        knex("users").insert({
+          username: "adrien1",
+          password: hash,
+          admin: true
+        })
+      );
     })
-.then(() => {
-        const salt = bcrypt.genSaltSync();
-        const hash = bcrypt.hashSync("bbbbbb", salt);
-        return Promise.join(
-            knex("users").insert({
-                username: "adrien2",
-                password: hash,
-                admin: true
-            })
-        );
+    .then(() => {
+      const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync("bbbbbb", salt);
+      return Promise.join(
+        knex("users").insert({
+          username: "adrien2",
+          password: hash,
+          admin: true
+        })
+      );
     });
 };
