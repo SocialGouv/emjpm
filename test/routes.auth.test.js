@@ -1,11 +1,12 @@
 process.env.NODE_ENV = "test";
-//process.env.PORT = 3010;
+
+const { shouldBeProtected, logUser } = require("./utils");
 
 const chai = require("chai");
-const should = chai.should();
+chai.should();
+
 const chaiHttp = require("chai-http");
 const passportStub = require("passport-stub");
-//const logger = require("morgan");
 
 const server = require("../app");
 const knex = require("../db/knex");
@@ -30,62 +31,8 @@ describe("routes : auth", () => {
     return knex.migrate.rollback();
   });
 
-  // describe("POST /auth/register", () => {
-  //   it("should register a new user", done => {
-  //     chai
-  //       .request(server)
-  //       .post("/auth/register")
-  //       .send({
-  //         username: "michael",
-  //         password: "herman"
-  //       })
-  //       .end((err, res) => {
-  //         should.not.exist(err);
-  //         res.redirects.length.should.eql(0);
-  //         res.status.should.eql(200);
-  //         res.type.should.eql("application/json");
-  //         res.body.status.should.eql("success");
-  //         done();
-  //       });
-  //   });
-  //   it("should throw an error if the username is < 6 characters", done => {
-  //     chai
-  //       .request(server)
-  //       .post("/auth/register")
-  //       .send({
-  //         username: "six",
-  //         password: "herman"
-  //       })
-  //       .end((err, res) => {
-  //         should.exist(err);
-  //         res.redirects.length.should.eql(0);
-  //         res.status.should.eql(400);
-  //         res.type.should.eql("application/json");
-  //         res.body.status.should.eql("Username must be longer than 6 characters");
-  //         done();
-  //       });
-  //   });
-  //   it("should throw an error if the password is < 6 characters", done => {
-  //     chai
-  //       .request(server)
-  //       .post("/auth/register")
-  //       .send({
-  //         username: "michael",
-  //         password: "six"
-  //       })
-  //       .end((err, res) => {
-  //         should.exist(err);
-  //         res.redirects.length.should.eql(0);
-  //         res.status.should.eql(400);
-  //         res.type.should.eql("application/json");
-  //         res.body.status.should.eql("Password must be longer than 6 characters");
-  //         done();
-  //       });
-  //   });
-  // });
-
   describe("POST /auth/login", () => {
-    it("should login a user", done => {
+    it("should login a user", () =>
       chai
         .request(server)
         .post("/auth/login")
@@ -93,16 +40,13 @@ describe("routes : auth", () => {
           username: "jeremy",
           password: "johnson123"
         })
-        .end((err, res) => {
-          should.not.exist(err);
-          res.redirects.length.should.eql(0);
+        .then(res => {
           res.status.should.eql(200);
+          res.redirects.length.should.eql(0);
           res.type.should.eql("application/json");
           res.body.status.should.eql("success");
-          done();
-        });
-    });
-    it("should not login an unregistered user", done => {
+        }));
+    it("should not login an unregistered user", () =>
       chai
         .request(server)
         .post("/auth/login")
@@ -110,16 +54,15 @@ describe("routes : auth", () => {
           username: "michael",
           password: "johnson123"
         })
-        .end((err, res) => {
-          should.exist(err);
-          res.redirects.length.should.eql(0);
+        .then(() => {
+          throw new Error("should not succeed");
+        })
+        .catch(res => {
           res.status.should.eql(401);
-          res.type.should.eql("application/json");
-          res.body.status.should.eql("User not found");
-          done();
-        });
-    });
-    it("should not login a registered user with wrong password", done => {
+          res.response.type.should.eql("application/json");
+          res.response.body.status.should.eql("User not found");
+        }));
+    it("should not login a registered user with wrong password", () =>
       chai
         .request(server)
         .post("/auth/login")
@@ -127,59 +70,46 @@ describe("routes : auth", () => {
           username: "jeremy",
           password: "johnson1234"
         })
-        .end((err, res) => {
-          should.exist(err);
-          res.redirects.length.should.eql(0);
+        .then(() => {
+          throw new Error("should not succeed");
+        })
+        .catch(res => {
           res.status.should.eql(401);
-          res.type.should.eql("application/json");
-          res.body.status.should.eql("User not found");
-          done();
-        });
-    });
+          res.response.type.should.eql("application/json");
+          res.response.body.status.should.eql("User not found");
+        }));
   });
 
   describe("GET /auth/logout", () => {
-    it("should logout a user", done => {
-      var agent = chai.request.agent(server);
-      agent
-        .post("/auth/login")
-        .send({
-          username: "jeremy",
-          password: "johnson123"
-        })
-        .then(function(res) {
-          // expect(res).to.have.cookie('sessionid');
-          // The `agent` now has the sessionid cookie saved, and will send it
-          // back to the server in the next request:
-          return agent
-            .get("/auth/logout")
-            .then(function(res) {
-              res.redirects.length.should.eql(0);
-              res.status.should.eql(200);
-              res.type.should.eql("application/json");
-              res.body.status.should.eql("success");
-              done();
-            })
-            .catch(err => {
-              throw new Error("should not fail");
-            });
+    it("should logout a user", () =>
+      logUser(server).then(agent =>
+        agent
+          .get("/auth/logout")
+          .then(res => {
+            res.status.should.eql(200);
+            res.redirects.length.should.eql(0);
+            res.type.should.eql("application/json");
+            res.body.status.should.eql("success");
+          })
+          .catch(e => {
+            console.log("e", e);
+            throw new Error("should not fail");
+          })
+      ));
 
-          // todo: ensure session is destroyed and cookie removed
-        });
-    });
+    // todo: ensure session is destroyed and cookie removed
 
-    it("should throw an error if a user is not logged in", done => {
+    it("should throw an error if a user is not logged in", () =>
       chai
         .request(server)
         .get("/auth/logout")
-        .end((err, res) => {
-          should.exist(err);
-          res.redirects.length.should.eql(0);
+        .then(() => {
+          throw new Error("should not succeed");
+        })
+        .catch(res => {
           res.status.should.eql(401);
-          res.type.should.eql("application/json");
-          res.body.status.should.eql("Please log in");
-          done();
-        });
-    });
+          res.response.type.should.eql("application/json");
+          res.response.body.status.should.eql("Please log in");
+        }));
   });
 });

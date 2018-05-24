@@ -6,11 +6,10 @@ const queries = require("../db/queries");
 const { loginRequired } = require("../auth/_helpers");
 
 /*
- - modifier la table user avec type
+ - modifier la table user avec un type
  - quid indexes
- - qui a le droit de modifier/lire un mandataire ?
- lui-meme uniquement == user connecté ?
- - quid disponibilite/capacité
+ - droits
+ - quid disponibilite/capacité : rename ?
 */
 
 // récupère les données d'un mandataire
