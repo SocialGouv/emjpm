@@ -32,14 +32,14 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         if (err) {
           return next(err);
         }
-        if (user.mandataire === true){
-          if (user.service === true){
-              return handleResponse(res, 200,"success" ,"/services");
-          } else {
-        return handleResponse(res, 200,"success" ,"/mandataires_index");
-          }
-        } else {
-        return handleResponse(res, 200, "success" , "/tis" );
+        if (user.type === "individuel" || user.type === "prepose") {
+          return handleResponse(res, 200, "success", "/mandataires_index");
+        } else if (user.type === "service") {
+          return handleResponse(res, 200, "success", "/services");
+        } else if (user.type === "ti") {
+          return handleResponse(res, 200, "success", "/tis");
+        } else if (user.type === "admin") {
+          return handleResponse(res, 200, "success", "/admin");
         }
       });
     }
@@ -48,12 +48,12 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
 
 router.get("/logout", authHelpers.loginRequired, (req, res, next) => {
   req.logout();
-  console.log(handleResponse(res, 200, "success"))
+  console.log(handleResponse(res, 200, "success"));
   handleResponse(res, 200, "success");
 });
 
-function handleResponse(res, code, statusMsg ,url) {
-  res.status(code).json({ status: statusMsg ,url: url });
+function handleResponse(res, code, statusMsg, url) {
+  res.status(code).json({ status: statusMsg, url: url });
 }
 
 module.exports = router;
