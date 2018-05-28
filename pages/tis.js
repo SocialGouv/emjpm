@@ -80,11 +80,12 @@ const filterMandataires = (mandataires, filters) => {
 const filterMesures = (mesures, filters) =>
   mesures.filter(
     mesure =>
-      stringMatch(mesure.type, filters.searchType) &&
-      stringMatch(mesure.type, filters.searchTypeIn) &&
-      stringMatch(mesure.type, filters.searchTypePr) &&
-      stringMatch(mesure.type, filters.searchTypeSe) &&
-      stringMatch(mesure.type, filters.searchVille)
+        mesure
+      // stringMatch(mesure.type, filters.searchType) &&
+      // stringMatch(mesure.type, filters.searchTypeIn) &&
+      // stringMatch(mesure.type, filters.searchTypePr) &&
+      // stringMatch(mesure.type, filters.searchTypeSe) &&
+      // stringMatch(mesure.type, filters.searchVille)
   );
 
 const sortByDispo = (a, b) => {
@@ -182,12 +183,16 @@ class Ti extends React.Component {
 
   componentDidMount() {
     apiFetch("/mandataires").then(mandataires =>
-      apiFetch("/mesures").then(mesures => {
-        this.setState({
-          data: mandataires,
-          datamesure: mesures
-        });
-      })
+      apiFetch("/mesures/popup")
+        .then(mesures => {
+          this.setState({
+            data: mandataires,
+            datamesure: mesures
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        })
     );
   }
 

@@ -1,4 +1,4 @@
-import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import { Map, Marker, Popup, CircleMarker, Circle, TileLayer } from "react-leaflet";
 
 export const MapsView = ({ mesures, zoom, center, width, height }) => (
   <Map center={center} zoom={zoom} style={{ width, height }}>
@@ -8,21 +8,15 @@ export const MapsView = ({ mesures, zoom, center, width, height }) => (
     />
     {mesures &&
       mesures.map(manda => (
-        <Marker
-          key={manda.id}
-          position={[manda.latitude, manda.longitude]}
-          style={{ backgroundColor: "black" }}
-        >
-          <Popup>
-            <span>
-              {manda.nom} <br />
-              {manda.prenom} <br />
-              {manda.type} <br />
-              {/*{manda.date_ouverture} <br />*/}
-            </span>
-          </Popup>
-        </Marker>
-      ))}
+        <CircleMarker
+          center={[manda.latitude, manda.longitude]}
+          color="red"
+          radius={20}
+          fill={manda.count}
+          key={manda.latitude}
+          placeholder={manda.count}
+        />
+      ))};
   </Map>
 );
 
