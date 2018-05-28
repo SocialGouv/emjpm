@@ -79,13 +79,12 @@ const filterMandataires = (mandataires, filters) => {
 
 const filterMesures = (mesures, filters) =>
   mesures.filter(
-    mesure =>
-        mesure
-      // stringMatch(mesure.type, filters.searchType) &&
-      // stringMatch(mesure.type, filters.searchTypeIn) &&
-      // stringMatch(mesure.type, filters.searchTypePr) &&
-      // stringMatch(mesure.type, filters.searchTypeSe) &&
-      // stringMatch(mesure.type, filters.searchVille)
+    mesure => mesure
+    // stringMatch(mesure.type, filters.searchType) &&
+    // stringMatch(mesure.type, filters.searchTypeIn) &&
+    // stringMatch(mesure.type, filters.searchTypePr) &&
+    // stringMatch(mesure.type, filters.searchTypeSe) &&
+    // stringMatch(mesure.type, filters.searchVille)
   );
 
 const sortByDispo = (a, b) => {
@@ -204,6 +203,10 @@ class Ti extends React.Component {
     this.setState({ modalIsOpen: false });
   };
 
+  updateMesures = mesures => {
+    this.setState({ datamesure: mesures });
+  };
+
   updateFilters = filters => {
     this.setState(filters);
   };
@@ -230,6 +233,7 @@ class Ti extends React.Component {
       },
       this.state.specialite
     );
+
     const filteredMesures = filterMesures(this.state.datamesure, {
       searchType: this.state.searchType,
       searchTypeIn: this.state.searchTypeIn,
@@ -238,7 +242,7 @@ class Ti extends React.Component {
       searchNom: this.state.searchNom,
       searchVille: this.state.searchVille
     });
-
+      console.log("mesures",filteredMesures)
     const mandatairesCount = filteredMandataires.length;
 
     return (
@@ -252,6 +256,7 @@ class Ti extends React.Component {
           postcodeMandataire={this.state.postcodeCoordinates}
           width={"100%"}
           height={"400px"}
+          updateMesures={this.updateMesures}
         />
         <div className="container">
           <Title>
