@@ -54,10 +54,10 @@ function getAllMesuresByMandataires(ti_id) {
 }
 
 function getAllMesuresByPopUp(ti_id) {
-    return knex.from("mesures").debug().select(knex.raw('COUNT(mesures.code_postal)','mesures.code_postal','codePostalLatLngs.latitude','codePostalLatLngs.longitude'))
-        .innerJoin("codePostalLatLngs","mesures.code_postal","codePostalLatLngs.code_postal")
+    return knex.from("mesures").debug().select(knex.raw('COUNT(mesures.code_postal)'),'mesures.code_postal','v1.latitude','v1.longitude')
+        .innerJoin("codePostalLatLngs as v1","mesures.code_postal","v1.code_postal")
         .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
-        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id)).where({status: "Mesure en cours"}).groupByRaw('mesures.code_postal,codePostalLatLngs.longitude,codePostalLatLngs.latitude,codePostalLatLngs.code_postal');
+        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where({"mandatairetis.ti_id": parseInt(ti_id) ,status: "Mesure en cours"}).groupByRaw('mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal');
 }
 
 

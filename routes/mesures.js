@@ -22,16 +22,6 @@ router.get("/popup", async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
     console.log("hello")
     console.log("ti",ti.id)
-    console.log( queries
-        .getAllMesuresByPopUp(ti.id)
-        .then(function(mesures) {
-
-            res.status(200).json(mesures);
-        })
-        .catch(function(error) {
-            throw error;
-            next(error);
-        }))
     queries
         .getAllMesuresByPopUp(ti.id)
         .then(function(mesures) {
@@ -39,6 +29,7 @@ router.get("/popup", async (req, res, next) => {
             res.status(200).json(mesures);
         })
         .catch(function(error) {
+            console.log(error)
             throw error;
             next(error);
         });
