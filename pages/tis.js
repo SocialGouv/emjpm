@@ -1,3 +1,4 @@
+// @flow
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import styled from "styled-components";
@@ -10,6 +11,7 @@ import RowModal from "../src/components/RowModal";
 import Footer from "../src/components/Footer";
 import Commentaire from "../src/components/Commentaire";
 import apiFetch from "../src/components/Api";
+import * as React from "react";
 
 const modalStyles = {
   content: {
@@ -164,7 +166,14 @@ export const FicheMandataire = ({ style, mandataire }) => (
   </div>
 );
 
-class Ti extends React.Component {
+type Props = {};
+
+type State = {
+  searchType: string,
+  modalIsOpen: boolean
+};
+
+class Ti extends React.Component<Props, State> {
   state = {
     data: [],
     datamesure: [],
@@ -242,7 +251,7 @@ class Ti extends React.Component {
       searchNom: this.state.searchNom,
       searchVille: this.state.searchVille
     });
-      console.log("mesures",filteredMesures)
+    console.log("mesures", filteredMesures);
     const mandatairesCount = filteredMandataires.length;
 
     return (
