@@ -1,6 +1,7 @@
 import React, { createRef, Component } from "react";
 import { Map, Marker, Popup, CircleMarker, Circle, TileLayer, Tooltip } from "react-leaflet";
 import apiFetch from "./Api";
+import TableMandataire from "./TableMandataire";
 
 var Hellomap = (center, zoom, style) => {
   Map.map("map", {
@@ -10,7 +11,18 @@ var Hellomap = (center, zoom, style) => {
   });
 };
 
-export const MapsView = ({ mesures, zoom, center, width, height, onMoveend, innerRef }) => (
+export const MapsView = ({
+  mesures,
+  zoom,
+  center,
+  width,
+  height,
+  onMoveend,
+  innerRef,
+  filteredMesures,
+  openModal
+}) => (
+    <div>
   <Map center={center} zoom={zoom} style={{ width, height }} onMoveend={onMoveend} ref={innerRef}>
     <TileLayer
       attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -28,18 +40,46 @@ export const MapsView = ({ mesures, zoom, center, width, height, onMoveend, inne
         >
           <Tooltip> {manda.count}</Tooltip>
         </CircleMarker>
-      ))};
+      ))}
+    ;
+
   </Map>
+    <TableMandataire rows={filteredMesures} openModal={openModal} />
+    </div>
 );
 
 class Mapstry extends React.Component {
   state = {
-    zoom: 10
+    zoom: 10,
+    datamesure: ""
   };
-  mapRef = createRef();
+
+
+    mapRef = createRef();
+
+  componentDidMount() {
+    apiFetch("/mesures/filters", {
+      method: "POST",
+      body: JSON.stringify({
+        latNorthEast: this.mapRef.current.leafletElement.getBounds()._northEast.lat,
+        latSouthWest: this.mapRef.current.leafletElement.getBounds()._southWest.lat,
+        longNorthEast: this.mapRef.current.leafletElement.getBounds()._northEast.lng,
+        longSouthWest: this.mapRef.current.leafletElement.getBounds()._southWest.lng
+      })
+    })
+      .then(mesures => {
+        console.log("API", mesures);
+        this.setState({ modalIsOpen: false });
+        this.props.updateMandataireMesures(mesures);
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
 
   handleMoveend = mapRef => {
-    console.log(1234)
+    console.log(1234);
     apiFetch("/mesures/filters", {
       method: "POST",
       body: JSON.stringify({
@@ -51,7 +91,8 @@ class Mapstry extends React.Component {
     })
       .then(mesures => {
         console.log("APImesures", mesures);
-        this.props.updateMesures(mesures);
+        this.setState({ modalIsOpen: false });
+        this.props.updateMandataireMesures(mesures);
       })
       .catch(e => {
         console.log(e);
@@ -59,6 +100,7 @@ class Mapstry extends React.Component {
   };
 
   render() {
+    console.log(this.props.filteredMesures);
     const center = this.props.postcodeMandataire
       ? [this.props.postcodeMandataire[0], this.props.postcodeMandataire[1]]
       : [50.459441, 2.693963];
@@ -71,6 +113,8 @@ class Mapstry extends React.Component {
         onMoveend={() => this.handleMoveend(this.mapRef)}
         center={center}
         mesures={this.props.mesures}
+        openModal={this.props.openModal}
+        filteredMesures={this.props.filteredMesures}
       />
     );
   }
