@@ -127,8 +127,11 @@ const TitleMandataire = styled.div`
   font-size: 1.5em;
   font-weight: bold;
 `;
-
-export const FicheMandataire = ({ style, mandataire }) => (
+type FicheMandataireProps = {
+    style: Object,
+    mandataire: Object,
+}
+export const FicheMandataire = ({ style, mandataire }: FicheMandataireProps) => (
   <div className="container" style={style}>
     <div className="row">
       <div className="col-6">
@@ -166,11 +169,23 @@ export const FicheMandataire = ({ style, mandataire }) => (
   </div>
 );
 
-type Props = {};
+type Props = {
+  mandataires: Array<mixed>
+};
 
 type State = {
   searchType: string,
-  modalIsOpen: boolean
+  modalIsOpen: boolean,
+  postcodeCoordinates: string,
+  data: Array<mixed>,
+  searchTypeIn: string,
+  searchTypePr: string,
+  searchTypeSe: string,
+  searchNom: string,
+  searchVille: string,
+  currentMandataire: string,
+  postcodeCoordinates: string,
+  specialite: string
 };
 
 class Ti extends React.Component<Props, State> {
@@ -239,8 +254,8 @@ class Ti extends React.Component<Props, State> {
         searchVille: this.state.searchVille,
         postcodeCoordinates: this.state.postcodeCoordinates,
         specialite: this.state.specialite
-      },
-      this.state.specialite
+      }
+      // this.state.specialite
     );
 
     const filteredMesures = filterMesures(this.state.datamesure, {
