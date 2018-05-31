@@ -282,11 +282,11 @@ class Ti extends React.Component<Props, State> {
           findPostcode={this.findPostcode}
           updateFilters={this.updateFilters}
         />
-        <OpenStreeMap
+          <OpenStreeMap
           mesures={filteredMesures}
           postcodeMandataire={this.state.postcodeCoordinates}
           width={"100%"}
-          height={"400px"}
+          height={"60vh"}
           updateMesures={this.updateMesures}
           updateMandataireMesures={this.updateMandataireMesures}
           filteredMesures={this.state.mandaMesures}
@@ -296,7 +296,7 @@ class Ti extends React.Component<Props, State> {
           <Title>
             {mandatairesCount} Professionnel{(mandatairesCount > 1 && "s") || null}
           </Title>
-          <TableMandataire rows={filteredMandataires} openModal={this.openModal} />
+          {/*<TableMandataire rows={filteredMandataires} openModal={this.openModal} />*/}
           <ModalMandataire isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>
             {this.state.currentMandataire && (
               <FicheMandataire
@@ -306,7 +306,7 @@ class Ti extends React.Component<Props, State> {
             )}
           </ModalMandataire>
         </div>
-      </div>
+        </div>
     );
   }
 }

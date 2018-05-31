@@ -22,7 +22,9 @@ export const MapsView = ({
   filteredMesures,
   openModal
 }) => (
-    <div>
+    <div>        < div className="row">
+        <div className="col-8">
+
   <Map center={center} zoom={zoom} style={{ width, height }} onMoveend={onMoveend} ref={innerRef}>
     <TileLayer
       attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -44,9 +46,13 @@ export const MapsView = ({
     ;
 
   </Map>
+        </div>
+            <div className="col-3">
     <TableMandataire rows={filteredMesures} openModal={openModal} />
     </div>
-);
+    </div>
+    </div>
+        );
 
 class Mapstry extends React.Component {
   state = {
