@@ -18,6 +18,22 @@ router.get("/", async (req, res, next) => {
 });
 
 
+
+router.post("/filters", async (req, res, next) => {
+    const ti = await queries.getTiByUserId(req.user.id);
+    queries
+        .getAllMesuresByMandatairesFilter(ti.id,req.body.latNorthEast,req.body.latSouthWest,req.body.longNorthEast,req.body.longSouthWest)
+        .then(function(mesures) {
+            res.status(200).json(mesures);
+        })
+        .catch(function(error) {
+            throw error;
+            next(error);
+        });
+});
+
+
+
 router.get("/popup", async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
     console.log("hello")
