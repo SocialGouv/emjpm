@@ -53,8 +53,19 @@ function getAllMesuresByMandataires(ti_id) {
         .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id)).select('mesures.id','mesures.code_postal','mesures.latitude', 'mesures.longitude', 'mandataires.nom','mandataires.prenom','mandataires.type','mesures.date_ouverture','mesures.ville');
 }
 
+function getAllMesuresByMandatairesFilter(ti_id,latnorthEast,latsouthWest,longNorthEast,longSouthWest) {
+    return knex.from("mesures")
+        .debug()
+        .where("status" , "Mesure en cours").whereBetween('mesures.latitude', [latsouthWest, latnorthEast]).whereBetween('mesures.longitude', [longSouthWest, longNorthEast])
+        .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
+        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").groupByRaw('mandataires.id').where("mandatairetis.ti_id", parseInt(ti_id)).select('mandataires.id','mandataires.*');
+}
+
+
+
+
 function getAllMesuresByPopUp(ti_id) {
-    return knex.from("mesures").debug().select(knex.raw('COUNT(mesures.code_postal)'),'mesures.code_postal','v1.latitude','v1.longitude')
+    return knex.from("mesures").select(knex.raw('COUNT(mesures.code_postal)'),'mesures.code_postal','v1.latitude','v1.longitude')
         .innerJoin("codePostalLatLngs as v1","mesures.code_postal","v1.code_postal")
         .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
         .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where({"mandatairetis.ti_id": parseInt(ti_id) ,status: "Mesure en cours"}).groupByRaw('mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal');
@@ -252,6 +263,7 @@ module.exports = {
   updateAntenne,
   deleteAntenne,
   CapaciteEteinteMandataire,
-    getAllMesuresEteinte
+    getAllMesuresEteinte,
+    getAllMesuresByMandatairesFilter
 
 };
