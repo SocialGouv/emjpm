@@ -273,6 +273,7 @@ class Ti extends React.Component<Props, State> {
     });
     console.log("mesures", filteredMesures);
     const mandatairesCount = filteredMandataires.length;
+      const mesureCount = this.state.mandaMesures.length;
 
     return (
       <div>
