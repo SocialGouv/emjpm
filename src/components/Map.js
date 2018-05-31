@@ -22,37 +22,43 @@ export const MapsView = ({
   filteredMesures,
   openModal
 }) => (
-    <div>        < div className="row">
-        <div className="col-8">
-
-  <Map center={center} zoom={zoom} style={{ width, height }} onMoveend={onMoveend} ref={innerRef}>
-    <TileLayer
-      attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-      url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-    />
-    {mesures &&
-      mesures.map(manda => (
-        <CircleMarker
-          center={[manda.latitude, manda.longitude]}
-          color="red"
-          radius={20}
-          fill={manda.count}
-          key={manda.latitude}
-          placeholder={manda.count}
+  <div>
+    {" "}
+    <div className="row">
+      <div className="col-8">
+        <Map
+          center={center}
+          zoom={zoom}
+          style={{ width, height }}
+          onMoveend={onMoveend}
+          ref={innerRef}
         >
-          <Tooltip> {manda.count}</Tooltip>
-        </CircleMarker>
-      ))}
-    ;
-
-  </Map>
-        </div>
-            <div className="col-3">
-    <TableMandataire rows={filteredMesures} openModal={openModal} />
+          <TileLayer
+            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+          />
+          {mesures &&
+            mesures.map(manda => (
+              <CircleMarker
+                center={[manda.latitude, manda.longitude]}
+                color="red"
+                radius={20}
+                fill={manda.count}
+                key={manda.latitude}
+                placeholder={manda.count}
+              >
+                <Tooltip> {manda.count}</Tooltip>
+              </CircleMarker>
+            ))}
+          ;
+        </Map>
+      </div>
+      <div className="col-3">
+        <TableMandataire rows={filteredMesures} openModal={openModal} />
+      </div>
     </div>
-    </div>
-    </div>
-        );
+  </div>
+);
 
 class Mapstry extends React.Component {
   state = {
@@ -60,8 +66,7 @@ class Mapstry extends React.Component {
     datamesure: ""
   };
 
-
-    mapRef = createRef();
+  mapRef = createRef();
 
   componentDidMount() {
     apiFetch("/mesures/filters", {
@@ -82,7 +87,6 @@ class Mapstry extends React.Component {
         console.log(e);
       });
   }
-
 
   handleMoveend = mapRef => {
     console.log(1234);

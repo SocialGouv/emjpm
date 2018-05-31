@@ -128,9 +128,9 @@ const TitleMandataire = styled.div`
   font-weight: bold;
 `;
 type FicheMandataireProps = {
-    style: Object,
-    mandataire: Object,
-}
+  style: Object,
+  mandataire: Object
+};
 export const FicheMandataire = ({ style, mandataire }: FicheMandataireProps) => (
   <div className="container" style={style}>
     <div className="row">
@@ -192,7 +192,7 @@ class Ti extends React.Component<Props, State> {
   state = {
     data: [],
     datamesure: [],
-      mandaMesures: [],
+    mandaMesures: [],
     searchType: "",
     searchTypeIn: "",
     searchTypePr: "",
@@ -232,13 +232,11 @@ class Ti extends React.Component<Props, State> {
     this.setState({ datamesure: mesures });
   };
 
-    updateMandataireMesures = mesures => {
-        this.setState({ mandaMesures: mesures });
-    };
+  updateMandataireMesures = mesures => {
+    this.setState({ mandaMesures: mesures });
+  };
 
-
-
-    updateFilters = filters => {
+  updateFilters = filters => {
     this.setState(filters);
   };
 
@@ -282,7 +280,7 @@ class Ti extends React.Component<Props, State> {
           findPostcode={this.findPostcode}
           updateFilters={this.updateFilters}
         />
-          <OpenStreeMap
+        <OpenStreeMap
           mesures={filteredMesures}
           postcodeMandataire={this.state.postcodeCoordinates}
           width={"100%"}
@@ -306,7 +304,7 @@ class Ti extends React.Component<Props, State> {
             )}
           </ModalMandataire>
         </div>
-        </div>
+      </div>
     );
   }
 }
