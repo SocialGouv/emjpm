@@ -1,0 +1,142 @@
+import fetch from "isomorphic-fetch";
+import Form, { validateJsonSchema, mergeErrorSchema } from "react-jsonschema-form";
+import styled from "styled-components";
+import apiFetch from "../Api";
+import RowModal from "../RowModal";
+import SearchButton from "../SearchButton";
+import piwik from "../../piwik";
+
+function validate(formData, errors) {
+	if (formData.pass1 !== formData.pass2) {
+		errors.pass2.addError("Passwords don't match");
+	}
+	return errors;
+}
+const schema = {
+	type: "object",
+	required: [
+		"Iusername",
+		"pass1",
+		"pass2",
+		"nom",
+		"prenom",
+		"telephone",
+		"email",
+		"adresse",
+		"ville",
+		"code_postal"
+	],
+	properties: {
+		Iusername: { type: "string", title: "Nom d'utilisateur (identifiant)", default: "" },
+		pass1: {
+			type: "string",
+			title: "Mot de passe ( 10 caractères minimum )",
+			minLength: 10
+		},
+		pass2: { type: "string", title: "Répeter mot de passe", minLength: 10 },
+		nom: { type: "string", title: "Nom du contact", default: "" },
+		prenom: { type: "string", title: "Prénom du contact", default: "" },
+		telephone: { type: "string", title: "Téléphone du contact", default: "" },
+		email: { type: "string", title: "Adresse email du contact", default: "" },
+		adresse: { type: "string", title: "Rue", default: "" },
+		ville: { type: "string", title: "Commune", default: "" },
+		code_postal: { type: "string", title: "Code Postal", default: "" }
+	}
+};
+
+const uiSchema = {
+	pass1: {
+		"ui:widget": "password"
+	},
+	pass2: {
+		"ui:widget": "password"
+	},
+	secretariat: {
+		"ui:widget": "select"
+	},
+	Iusername: {
+		"ui:placeholder": "Nom d'utilisateur (identifiant)"
+	},
+	nom: {
+		"ui:placeholder": "Nom"
+	},
+	prenom: {
+		"ui:placeholder": "Prénom"
+	},
+	telephone: {
+		"ui:placeholder": "Téléphone"
+	},
+	telephone_portable: {
+		"ui:placeholder": "Téléphone Portable"
+	},
+	email: {
+		"ui:placeholder": "Adresse email"
+	},
+	adresse: {
+		"ui:placeholder": "Rue"
+	},
+	code_postal: {
+		"ui:placeholder": "Code Postal"
+	},
+	ville: {
+		"ui:placeholder": "Commune"
+	},
+	genre: {
+		className: "",
+		"ui:widget": "radio"
+	}
+};
+
+const formData = {};
+
+class InscriptionService extends React.Component {
+	/*onSubmit = ({ formData }) => {
+
+		 apiFetch(`/mandataires/1`, {
+      method: "PUT",
+      body: JSON.stringify({
+    	Iusername:
+    	pass1:
+    	pass2:
+       	nom:
+        prenom:
+        telephone:
+        telephone_portable:
+        email:
+        adresse:
+        code_postal:
+        ville:
+        
+      })
+    }).then(json => {
+     //piwik
+     // this.props.updateMadataire(json);
+    });
+	};*/
+
+	render() {
+		return (
+			<div>
+				<br />
+				<h4>Veuillez renseigner ci-dessous vos informations personnelles :</h4>
+				<br />
+				<b>
+					<Form
+						schema={schema}
+						formData={formData}
+						uiSchema={uiSchema}
+						validate={validate}
+					>
+						<div
+							style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}
+						>
+							<SearchButton type="submit">Enregistrer</SearchButton>
+						</div>
+					</Form>
+				</b>
+			</div>
+		);
+	}
+}
+
+export default InscriptionService;
