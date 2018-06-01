@@ -2,6 +2,7 @@ import React, { createRef, Component } from "react";
 import { Map, Marker, Popup, CircleMarker, Circle, TileLayer, Tooltip } from "react-leaflet";
 import apiFetch from "./Api";
 import TableMandataire from "./TableMandataire";
+import styled from "styled-components";
 
 var Hellomap = (center, zoom, style) => {
   Map.map("map", {
@@ -10,6 +11,13 @@ var Hellomap = (center, zoom, style) => {
     style
   });
 };
+
+const Title = styled.div`
+  text-align: left;
+  font-size: 2em;
+  padding: 15px;
+`;
+
 
 export const MapsView = ({
   mesures,
@@ -20,7 +28,7 @@ export const MapsView = ({
   onMoveend,
   innerRef,
   filteredMesures,
-  openModal
+  openModal,mesureCount
 }) => (
   <div>
     {" "}
@@ -53,7 +61,11 @@ export const MapsView = ({
           ;
         </Map>
       </div>
-      <div className="col-3">
+      <div className="col-4" style={{backgroundColor: "white"}}>
+          <Title>
+              {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+          </Title>
+
         <TableMandataire rows={filteredMesures} openModal={openModal} />
       </div>
     </div>
@@ -125,6 +137,7 @@ class Mapstry extends React.Component {
         mesures={this.props.mesures}
         openModal={this.props.openModal}
         filteredMesures={this.props.filteredMesures}
+        mesureCount={this.props.mesureCount}
       />
     );
   }

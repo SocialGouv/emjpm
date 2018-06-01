@@ -24,6 +24,11 @@ const modalStyles = {
   }
 };
 
+const TIPageStlye = styled.div`
+  background-color: #cad4de;
+  min-height: 100%;
+`;
+
 const OpenStreeMap = dynamic(import("../src/components/Map"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
@@ -273,47 +278,55 @@ class Ti extends React.Component<Props, State> {
     });
     console.log("mesures", filteredMesures);
     const mandatairesCount = filteredMandataires.length;
-      const mesureCount = this.state.mandaMesures.length;
+    const mesureCount = this.state.mandaMesures.length;
 
     return (
-      <div>
-        <PanelFilterMandataires
-          findPostcode={this.findPostcode}
-          updateFilters={this.updateFilters}
-        />
+      <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
+        {/*<PanelFilterMandataires*/}
+        {/*findPostcode={this.findPostcode}*/}
+        {/*updateFilters={this.updateFilters}*/}
+        {/*/>*/}
         <OpenStreeMap
           mesures={filteredMesures}
           postcodeMandataire={this.state.postcodeCoordinates}
           width={"100%"}
-          height={"60vh"}
+          height={"65vh"}
           updateMesures={this.updateMesures}
           updateMandataireMesures={this.updateMandataireMesures}
           filteredMesures={this.state.mandaMesures}
           openModal={this.openModal}
+          mesureCount={mesureCount}
         />
-        <div className="container">
-          <Title>
-            {mandatairesCount} Professionnel{(mandatairesCount > 1 && "s") || null}
-          </Title>
-          {/*<TableMandataire rows={filteredMandataires} openModal={this.openModal} />*/}
-          <ModalMandataire isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>
-            {this.state.currentMandataire && (
-              <FicheMandataire
-                mandataire={this.state.currentMandataire}
-                style={{ textAlign: "left" }}
-              />
-            )}
-          </ModalMandataire>
-        </div>
+        {/*<div className="container">*/}
+          {/*/!*<Title>*!/*/}
+          {/*/!*{mandatairesCount} Professionel{(mandatairesCount > 1 && "s") || null} référencé{(mandatairesCount >*!/*/}
+          {/*/!*1 &&*!/*/}
+          {/*/!*"s") ||*!/*/}
+          {/*/!*null}{" "}*!/*/}
+          {/*/!*</Title>*!/*/}
+          {/*/!*<TableMandataire rows={filteredMandataires} openModal={this.openModal} />*!/*/}
+          {/*<ModalMandataire isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>*/}
+            {/*{this.state.currentMandataire && (*/}
+              {/*<FicheMandataire*/}
+                {/*mandataire={this.state.currentMandataire}*/}
+                {/*style={{ textAlign: "left" }}*/}
+              {/*/>*/}
+            {/*)}*/}
+          {/*</ModalMandataire>*/}
+        {/*</div>*/}
       </div>
     );
   }
 }
 
 const TiPage = () => (
-  <div style={{ minHeight: "100%" }}>
+  <div style={{ minHeight: "100%", backgroundColor: "#cad4de" }}>
     <Navigation logout />
-    <Ti style={{ marginTop: 100 }} />
+    <div className="container">
+      <h1>Chercher au plus proche du majeur à protéger</h1>
+      <br />
+    </div>
+      <Ti style={{ marginTop: "100%" }} />
     <Footer />
   </div>
 );

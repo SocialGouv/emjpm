@@ -71,11 +71,11 @@ const TableRowMandataire = ({ mandataire, onClick }) => {
         <b>{etablissement || referent}</b>
         <br /> <div style={{ color: "#cccccc" }}>{type.toUpperCase()} </div>
       </Cell>
-      <Cell>
-        <b>
-          {code_postal} - {ville.toUpperCase()}{" "}
-        </b>
-      </Cell>
+      {/*<Cell>*/}
+        {/*<b>*/}
+          {/*{code_postal} - {ville}{" "}*/}
+        {/*</b>*/}
+      {/*</Cell>*/}
       <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
         <PillDispo dispo={disponibilite} dispo_max={dispo_max} />
       </td>

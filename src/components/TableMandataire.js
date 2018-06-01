@@ -21,11 +21,11 @@ const TableMandataire = ({ rows, openModal }) => {
               Identité{" "}
             </td>
 
-            <td
-              style={{ width: "30%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
-            >
-              Code Postal et Ville
-            </td>
+            {/*<td*/}
+              {/*style={{ width: "30%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}*/}
+            {/*>*/}
+              {/*Code Postal et Ville*/}
+            {/*</td>*/}
             <td
               style={{
                 textAlign: "center",
