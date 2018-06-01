@@ -9,19 +9,19 @@ const FilterMesuresMap = ({ props }) => (
             <td>
                 <FormInput
                     padd="10"
-                    size="120"
+                    size="90"
                     id="code_postal"
                     name="code_postal"
                     placeholder="Code postal"
                 />
             </td>
             <td>
-                <FormInput padd="10" size="260" id="commune" name="commune" placeholder="Commune" />
+                <FormInput padd="10" size="160" id="commune" name="commune" placeholder="Commune" />
             </td>
             <td>
                 <FormInput
                     padd="10"
-                    size="260"
+                    size="160"
                     id="nom_etablissement"
                     name="nom_etablissement"
                     placeholder="Nom d'établissement"
@@ -39,7 +39,7 @@ const FilterMesuresMap = ({ props }) => (
 const Presentation = styled.div`
     background: white;
     padding: 5px;
-    width: 812px;
+    width: 100%;
 `;
 
 export default FilterMesuresMap;

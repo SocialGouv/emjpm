@@ -3,7 +3,7 @@ import { Map, Marker, Popup, CircleMarker, Circle, TileLayer, Tooltip } from "re
 import apiFetch from "./Api";
 import TableMandataire from "./TableMandataire";
 import styled from "styled-components";
-
+import FilterMesuresMap from "./FilterMesuresMap"
 var Hellomap = (center, zoom, style) => {
   Map.map("map", {
     center,
@@ -30,10 +30,12 @@ export const MapsView = ({
   filteredMesures,
   openModal,mesureCount
 }) => (
-  <div>
+  <div >
     {" "}
     <div className="row">
-      <div className="col-8">
+      <div className="col-8" style={{marginTop: "10px"}}>
+          <FilterMesuresMap  style={{zIndex: "1000",width: "100%" }}/>
+
         <Map
           center={center}
           zoom={zoom}
@@ -61,13 +63,14 @@ export const MapsView = ({
           ;
         </Map>
       </div>
-      <div className="col-4" style={{backgroundColor: "white"}}>
+      <div className="col-4" style={{backgroundColor: "white",marginTop: "10px"}}>
           <Title>
               {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
           </Title>
 
         <TableMandataire rows={filteredMesures} openModal={openModal} />
       </div>
+      Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
     </div>
   </div>
 );
