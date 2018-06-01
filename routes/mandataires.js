@@ -14,14 +14,18 @@ const { loginRequired } = require("../auth/_helpers");
 
 // récupère les données d'un mandataire
 // droits : ?
-router.get("/:mandataireId", loginRequired, async (req, res, next) => {
+router.get("/1", loginRequired, async (req, res, next) => {
+  //console.log(req.user);
   const mandataire = await queries.getMandataireByUserId(req.user.id);
+  /*
+  console.log(mandataire);
   if (
     !mandataire ||
     parseInt(req.params.mandataireId) !== parseInt(mandataire.id)
   ) {
     return next(new Error(401));
   }
+  */
   queries
     .getSingle(mandataire.id)
     .then(mandataire => res.status(200).json(mandataire))
@@ -30,14 +34,14 @@ router.get("/:mandataireId", loginRequired, async (req, res, next) => {
 
 // met à jour les données d'un mandataire
 // droits : ?
-router.put("/:mandataireId", loginRequired, async (req, res, next) => {
+router.put("/1", loginRequired, async (req, res, next) => {
   const mandataire = await queries.getMandataireByUserId(req.user.id);
-  if (
+  /* if (
     !mandataire ||
     parseInt(req.params.mandataireId) !== parseInt(mandataire.id)
   ) {
     return next(new Error(401));
-  }
+  }*/
   queries
     .update(mandataire.id, req.body)
     .then(() => queries.getSingle(mandataire.id))
