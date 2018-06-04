@@ -9,7 +9,8 @@ exports.seed = (knex, Promise) => {
       return Promise.join(
         knex("users").insert({
           username: "jeremy",
-          password: hash
+          password: hash,
+          type: "individuel"
         })
       );
     })
@@ -20,7 +21,7 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "kelly",
           password: hash,
-          admin: true
+          type: "admin"
         })
       );
     })
@@ -31,7 +32,7 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "adrien1",
           password: hash,
-          admin: true
+          type: "admin"
         })
       );
     })
@@ -42,7 +43,7 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "adrien2",
           password: hash,
-          admin: true
+          type: "admin"
         })
       );
     });
