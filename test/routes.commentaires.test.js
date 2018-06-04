@@ -99,13 +99,15 @@ describe("routes : commentaires", () => {
         password: "johnson123"
       })
       .then(function(res) {
-        return agent.delete("/api/v1/mandataires/1/commentaires/1").then(function(res) {
-          res.redirects.length.should.eql(0);
-          res.status.should.eql(200);
-          res.type.should.eql("application/json");
-          res.body.length.should.eql(0);
-          done();
-        });
+        return agent
+          .delete("/api/v1/mandataires/1/commentaires/1")
+          .then(function(res) {
+            res.redirects.length.should.eql(0);
+            res.status.should.eql(200);
+            res.type.should.eql("application/json");
+            res.body.length.should.eql(0);
+            done();
+          });
       })
       .catch(err => {
         throw err;
