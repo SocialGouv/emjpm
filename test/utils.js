@@ -16,7 +16,7 @@ const logUser = (
 };
 
 const shouldBeProtected = (server, method, url) =>
-  it(`${url} should be protected`, () =>
+  it(`${method} ${url} should be protected`, () =>
     chai.request
       .agent(server)
       [method.toLowerCase()](url)
