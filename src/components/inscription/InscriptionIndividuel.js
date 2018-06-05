@@ -1,5 +1,5 @@
 import fetch from "isomorphic-fetch";
-import Form, { validateJsonSchema, mergeErrorSchema } from "react-jsonschema-form";
+import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import apiFetch from "../Api";
 import RowModal from "../RowModal";
@@ -15,75 +15,81 @@ function validate(formData, errors) {
 const schema = {
 	type: "object",
 	required: [
-		"Susername",
-		"Spass1",
-		"Spass2",
-		"Snom",
-		"Sprenom",
-		"Stelephone",
-		"Semail",
-		"Sadresse",
-		"Sville",
-		"Scode_postal"
+		"Iusername",
+		"Ipass1",
+		"Ipass2",
+		"Inom",
+		"Iprenom",
+		"Itelephone",
+		"Iemail",
+		"Iadresse",
+		"Iville",
+		"Icode_postal",
+		"Igenre"
 	],
 	properties: {
-		Susername: {
+		Iusername: {
 			type: "string",
 			title: "Identifiant (vous servira pour vous connecter sur E-MJPM)",
 			default: ""
 		},
-		Spass1: { type: "string", title: "Mot de passe", minLength: 10 },
-		Spass2: { type: "string", title: "Répéter mot de passe", minLength: 10 },
-		Snom: { type: "string", title: "Nom du contact dans le service", default: "" },
-		Sprenom: { type: "string", title: "Prénom du contact dans le service", default: "" },
-		Stelephone: { type: "string", title: "Téléphone du contact dans le service", default: "" },
-		Semail: { type: "string", title: "Adresse email du contact dans le service", default: "" },
-		Sadresse: { type: "string", title: "Rue", default: "" },
-		Sville: { type: "string", title: "Commune", default: "" },
-		Scode_postal: { type: "string", title: "Code Postal", default: "" }
+		Ipass1: { type: "string", title: "Mot de passe", minLength: 10 },
+		Ipass2: { type: "string", title: "Répéter mot de passe", minLength: 10 },
+		Inom: { type: "string", title: "Nom", default: "" },
+		Iprenom: { type: "string", title: "Prénom", default: "" },
+		Itelephone: { type: "string", title: "Téléphone", default: "" },
+		Itelephone_portable: { type: "string", title: "Téléphone Portable", default: "" },
+		Iemail: { type: "string", title: "Adresse email", default: "" },
+		Iadresse: { type: "string", title: "Rue", default: "" },
+		Iville: { type: "string", title: "Ville", default: "" },
+		Icode_postal: { type: "string", title: "Code Postal", default: "" }
 	}
 };
 
 const uiSchema = {
-	Spass1: {
+	Ipass1: {
 		classNames: "input_form_inscription",
 		"ui:placeholder": "10 caratères minimum",
 		"ui:widget": "password"
 	},
-	Spass2: {
+	Ipass2: {
 		classNames: "input_form_inscription",
 		"ui:placeholder": "10 caratères minimum",
 		"ui:widget": "password"
 	},
-	Susername: {
+	Iusername: {
 		classNames: "input_form_inscription",
-		"ui:placeholder": "Identifiant"
+		"ui:placeholder": "Nom d'utilisateur"
 	},
-	Snom: {
+	Inom: {
 		classNames: "input_form_inscription",
 		"ui:placeholder": "Nom"
 	},
-	Sprenom: {
+	Iprenom: {
 		classNames: "input_form_inscription",
 		"ui:placeholder": "Prénom"
 	},
-	Stelephone: {
+	Itelephone: {
 		classNames: "input_form_inscription",
 		"ui:placeholder": "Téléphone"
 	},
-	Semail: {
+	Itelephone_portable: {
+		classNames: "input_form_inscription",
+		"ui:placeholder": "Téléphone Portable"
+	},
+	Iemail: {
 		classNames: "input_form_inscription",
 		"ui:placeholder": "Adresse email"
 	},
-	Sadresse: {
+	Iadresse: {
 		classNames: "input_form_inscription",
 		"ui:placeholder": "Rue"
 	},
-	Scode_postal: {
+	Icode_postal: {
 		classNames: "input_form_inscription",
 		"ui:placeholder": "Code Postal"
 	},
-	Sville: {
+	Iville: {
 		classNames: "input_form_inscription",
 		"ui:placeholder": "Commune"
 	}
@@ -91,23 +97,24 @@ const uiSchema = {
 
 const formData = {};
 
-class InscriptionService extends React.Component {
+class InscriptionIndividuel extends React.Component {
 	/*onSubmit = ({ formData }) => {
+		
 
 		 apiFetch(`/mandataires/1`, {
       method: "PUT",
       body: JSON.stringify({
-    	SusernameS:
-    	Spass1:
-    	Spass2:
-       	SnomS:
-        SprenomS:
-        StelephoneS:
-        Stelephone_portableS:
-        SemailS:
-        SadresseS:
-        Scode_postalS:
-        SvilleS:
+    	Iusername:
+    	Ipass1:
+    	Ipass2:
+       	Inom:
+        Iprenom:
+        Itelephone:
+        Itelephone_portable:
+        Iemail:
+        Iadresse:
+        Icode_postal:
+        Iville:
         
       })
     }).then(json => {
@@ -135,7 +142,9 @@ class InscriptionService extends React.Component {
 						<div
 							style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}
 						>
-							<SearchButton type="submit">Enregistrer</SearchButton>
+							<SearchButton style={{ textAlign: "center" }} type="submit">
+								Enregistrer
+							</SearchButton>
 						</div>
 					</Form>
 				</b>
@@ -144,4 +153,4 @@ class InscriptionService extends React.Component {
 	}
 }
 
-export default InscriptionService;
+export default InscriptionIndividuel;

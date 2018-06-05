@@ -97,7 +97,7 @@ class InscriptionTis extends React.Component {
 		return (
 			<div>
 				<br />
-				<h4>Ouvrir un nouveau tribunal d'instance :</h4>
+				<h2 style={{ margin: 20 }}>Ouvrir un nouveau tribunal d'instance :</h2>
 				<br />
 				<b>
 					<Form

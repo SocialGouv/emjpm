@@ -1,9 +1,9 @@
 import Navigation from "../src/components/Navigation";
 import Footer from "../src/components/Footer";
 import { Home, Map, User, UserMinus } from "react-feather";
-import InscriptionMandataire from "../src/components/inscription/InscriptionMandataire";
+import InscriptionIndividuel from "../src/components/inscription/InscriptionIndividuel";
+import InscriptionPrepose from "../src/components/inscription/InscriptionPrepose";
 import InscriptionService from "../src/components/inscription/InscriptionService";
-import InscriptionTi from "../src/components/inscription/InscriptionTi";
 
 class InscriptionForm extends React.Component {
 	state = {
@@ -11,12 +11,12 @@ class InscriptionForm extends React.Component {
 	};
 
 	getForm = () => {
-		if (this.state.form === "Mandataire") {
-			return <InscriptionMandataire />;
+		if (this.state.form === "Individuel") {
+			return <InscriptionIndividuel style={{ width: "80%" }} />;
+		} else if (this.state.form === "Prepose") {
+			return <InscriptionPrepose style={{ width: "80%" }} />;
 		} else if (this.state.form === "Service") {
-			return <InscriptionService />;
-		} else if (this.state.form === "ti") {
-			return <InscriptionTi />;
+			return <InscriptionService style={{ width: "80%" }} />;
 		}
 	};
 
@@ -30,41 +30,56 @@ class InscriptionForm extends React.Component {
 		return (
 			<div className="container">
 				<div className="col-12 offset-sm-2 col-sm-8 offset-md-2 col-md-8">
-					<h1>Inscription</h1>
+					<h1 style={{ margin: 20 }}>Inscription</h1>
 					<div style={{ backgroundColor: "white", padding: 5 }}>
 						<form>
 							<div>
-								<h2>De quelle secteur d'activité faites vous partie ?</h2>
-								<label>
-									<input
-										type="radio"
-										name="form_selector"
-										value="Mandataire"
-										style={{ fontSize: 16, fontWeight: "bold" }}
-										onChange={this.setForm}
-									/>
-									Mandataire
-								</label>
-								<label className=" offset-sm-2 col-sm-8 offset-md-2 ">
-									<input
-										type="radio"
-										name="form_selector"
-										value="Service"
-										style={{ fontSize: 16, fontWeight: "bold" }}
-										onChange={this.setForm}
-									/>
-									Service
-								</label>
-								<label className=" offset-sm-2 col-sm-8 offset-md-2 ">
-									<input
-										type="radio"
-										name="form_selector"
-										value="ti"
-										style={{ fontSize: 16, fontWeight: "bold" }}
-										onChange={this.setForm}
-									/>
-									Tribunal d'instance
-								</label>
+								<h2 style={{ margin: 15 }}>Vous êtes un mandataire :</h2>
+								<table
+									style={{
+										margin: 20,
+										width: "100%",
+										marginTop: "20px",
+										marginBottom: "20px",
+										fontSize: 14
+									}}
+								>
+									<tr>
+										<td>
+											<label>
+												<input
+													type="radio"
+													name="form_selector"
+													value="Individuel"
+													onChange={this.setForm}
+												/>
+												Individuel
+											</label>
+										</td>
+										<td>
+											<label>
+												<input
+													type="radio"
+													name="form_selector"
+													value="Prepose"
+													onChange={this.setForm}
+												/>
+												Préposé
+											</label>
+										</td>
+										<td>
+											<label>
+												<input
+													type="radio"
+													name="form_selector"
+													value="Service"
+													onChange={this.setForm}
+												/>
+												Service
+											</label>
+										</td>
+									</tr>
+								</table>
 								{form}
 							</div>
 						</form>
