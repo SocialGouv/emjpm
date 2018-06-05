@@ -230,8 +230,7 @@ function updateAntenne(mesureID, updates) {
         .update(updates);
 }
 function deleteAntenne(showID) {
-    return knex("serviceAntennes").debug()
-        .where("id", parseInt(showID))
+    return knex("serviceAntennes").where("id", parseInt(showID))
         .del();
 }
 
