@@ -36,17 +36,12 @@ const ColStyle = styled.b`
   color: ${props => props.color || "black"};
 `;
 
-export const TableMesureView = ({
-  rows,
-  display,
-  display_ext,
-  updateMesureEteinte
-}) => (
+export const TableMesureView = ({ rows, display, display_ext, updateMesureEteinte }) => (
   <LineContainer>
     <DisplayCreationMesure display={display}>
-      <CreationMesure className="row" updateMesure={updateMesureEteinte} />
+      <CreationMesure updateMesure={updateMesureEteinte} />
     </DisplayCreationMesure>
-    <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
+    <table className="table " style={{ boderTop: "0px" }}>
       <thead>
         <Tr>
           <Td>

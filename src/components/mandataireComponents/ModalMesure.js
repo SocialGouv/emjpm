@@ -1,7 +1,7 @@
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Modal from "react-modal";
-
+import ExitButton from "./ExitButton";
 
 const schema = {
     title: "Ouvrir une nouvelle mesure",
@@ -9,8 +9,8 @@ const schema = {
     required: ["codePostal", "commune", "civilite", "annee", "residence", "ouverture"],
     properties: {
         ouverture: {
-            "type": "string",
-            "format": "date-time",
+            type: "string",
+            format: "date-time",
             title: "Date d'ordonnance"
         },
         type: {
@@ -18,7 +18,11 @@ const schema = {
             title: "Type de mesure",
             enum: ["Tutelle", "Curatelle", "Sauvegarde de justice", "Mesure ad hoc", "MAJ"]
         },
-        residence: { type: "string", title: "Lieu de vie", enum: ["A domicile", "En Etablissement"] },
+        residence: {
+            type: "string",
+            title: "Lieu de vie",
+            enum: ["A domicile", "En Etablissement"]
+        },
         codePostal: { type: "string", title: "Code Postal" },
         commune: { type: "string", title: "Commune" },
         civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
@@ -91,39 +95,48 @@ const uiSchema = {
 };
 
 const CancelButton = styled.button`
-  cursor: pointer;
-  margin-left: 10px;
+    cursor: pointer;
+    margin-left: 10px;
 `;
 
-const ModalMesure = ({ CustomFieldTemplate,onClick,customStyles, formData,isOpenMesure,onRequestClose, onClickSubmitMesure, onClickClose}) =>
-{
-        return (
-            <Modal
-                isOpen={isOpenMesure}
-                onRequestClose={onRequestClose}
-                contentLabel="mandataire"
-                background="#e9ecef"
-                style={customStyles}
-                className="ModalMesureUpdate"
-                overlayClassName="OverlayInput"
+const ModalMesure = ({
+    CustomFieldTemplate,
+    onClick,
+    customStyles,
+    formData,
+    isOpenMesure,
+    onRequestClose,
+    onClickSubmitMesure,
+    onClickClose
+}) => {
+    return (
+        <Modal
+            isOpen={isOpenMesure}
+            onRequestClose={onRequestClose}
+            contentLabel="mandataire"
+            background="#e9ecef"
+            style={customStyles}
+            style={{ border: "1px solid black" }}
+            className="ModalMesureUpdate"
+            overlayClassName="OverlayInput"
+        >
+            <ExitButton onClick={onClick}>X</ExitButton>
+            <Form
+                schema={schema}
+                uiSchema={uiSchema}
+                FieldTemplate={CustomFieldTemplate}
+                formData={formData}
+                onSubmit={onClickSubmitMesure}
             >
-                <button onClick={onClick}>X</button>
-                <Form
-                    schema={schema}
-                    uiSchema={uiSchema}
-                    FieldTemplate={CustomFieldTemplate}
-                    formData={formData}
-                    onSubmit={onClickSubmitMesure}
-                >
-                    <button type="submit" className="btn btn-success">
-                        Valider
-                    </button>
-                    <button onClick={onClickClose} className="btn btn-link  ">
-                        Annuler
-                    </button>
-                </Form>
-            </Modal>
-        );
-    }
+                <button type="submit" className="btn btn-success">
+                    Valider
+                </button>
+                <button onClick={onClickClose} className="btn btn-link  ">
+                    Annuler
+                </button>
+            </Form>
+        </Modal>
+    );
+};
 
 export default ModalMesure;

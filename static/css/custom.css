@@ -299,3 +299,8 @@
   width: 280px;
   display: inline-block;
 }
+.input_form_inscription {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}

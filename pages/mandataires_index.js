@@ -19,10 +19,11 @@ const tabStyle = {
 };
 const imageStyle = {
   lineHeight: "50px",
-  width: "35px",
-  height: "35px",
+  width: "20px",
+  height: "20px",
   color: "black",
-  display: "inline-block"
+  display: "inline-block",
+  margin: 10
 };
 
 const Pill = styled.p`
@@ -83,6 +84,7 @@ const MandatairesPageStlye = styled.div`
 const Title = styled.div`
   color: black;
   font-size: 1.5em;
+  margin: 10px;
 `;
 
 const OpenStreeMap = dynamic(import("../src/components/mandataireComponents/MapsPartieMandataire"), {
@@ -142,7 +144,7 @@ const MandataireIndexView = ({
           </Tab>
           <Tab style={tabStyle}>
             <Home style={imageStyle} />
-            <b>Vos informations</b>
+            <b>Mes informations</b>
           </Tab>
         </TabsShowMandataire>
       </PanelMandataire>

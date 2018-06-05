@@ -106,12 +106,14 @@ const FormulaireMandataireView = ({
                 {formData.prenom} {formData.nom}
               </b>
               <br />
-              {formData.type.toUpperCase()}
+              {/*{formData.type.toUpperCase()}*/}
               <br />
               <br />
               <b>Contact</b>
               <br />
               {formData.prenom} {formData.nom}
+              <br />
+              {formData.email}
               <br />
               {formData.telephone}
               <br />
