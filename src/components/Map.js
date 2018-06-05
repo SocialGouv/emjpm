@@ -28,13 +28,26 @@ export const MapsView = ({
   onMoveend,
   innerRef,
   filteredMesures,
-  openModal,mesureCount
+  openModal,
+  mesureCount,
+  updateFilters,
+  zoomCodePostal,
+  getPostCodeCoordinates,
+  updateValue,
+  value
 }) => (
-  <div >
+  <div className="container">
     {" "}
     <div className="row">
-      <div className="col-8" style={{marginTop: "10px"}}>
-          <FilterMesuresMap  style={{zIndex: "1000",width: "100%" }}/>
+      <div style={{ width: "60%", marginTop: "10px", marginRight: "3%" }}>
+        <FilterMesuresMap
+          updateFilters={updateFilters}
+          zoomCodePostal={zoomCodePostal}
+          getPostCodeCoordinates={getPostCodeCoordinates}
+          updateValue={updateValue}
+          value={value}
+          style={{ zIndex: "1000", width: "100%" }}
+        />
 
         <Map
           center={center}
@@ -63,12 +76,16 @@ export const MapsView = ({
           ;
         </Map>
       </div>
-      <div className="col-4" style={{backgroundColor: "white",marginTop: "10px"}}>
-          <Title>
-              {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
-          </Title>
+      <div style={{ backgroundColor: "white", marginTop: "10px", width: "37%" }}>
+        <Title>
+          {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+        </Title>
 
-        <TableMandataire rows={filteredMesures} openModal={openModal} />
+        <TableMandataire
+          rows={filteredMesures}
+          openModal={openModal}
+          updateFilters={updateFilters}
+        />
       </div>
       Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
     </div>
@@ -78,7 +95,8 @@ export const MapsView = ({
 class Mapstry extends React.Component {
   state = {
     zoom: 10,
-    datamesure: ""
+    datamesure: "",
+    value: ""
   };
 
   mapRef = createRef();
@@ -104,7 +122,7 @@ class Mapstry extends React.Component {
   }
 
   handleMoveend = mapRef => {
-    console.log(1234);
+    console.log(2);
     apiFetch("/mesures/filters", {
       method: "POST",
       body: JSON.stringify({
@@ -124,6 +142,42 @@ class Mapstry extends React.Component {
       });
   };
 
+  zoomCodePostal = codePostal => {
+    if (!codePostal || !codePostal.trim()) {
+      return Promise.resolve(null);
+    }
+    apiFetch("/mandataires/PosteCode", {
+      method: "POST",
+      body: JSON.stringify({
+        codePoste: codePostal
+      })
+    })
+      .then(mesures => {
+        console.log("heelo", mesures);
+        this.props.updatePostCodeMandataires(mesures);
+        this.setState({ zoom: 13 });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
+
+  getPostCodeCoordinates = commune => {
+    // return null if no input
+      console.log("input", commune)
+
+    if (!commune || !commune.trim()) {
+      return Promise.resolve(null);
+    }
+    return fetch(`https://api-adresse.data.gouv.fr/search/?q=${commune}`)
+      .then(response => response.json())
+      .then(json =>
+        this.props.updatePostCodeMandatairesByCommune(json.features[0].geometry.coordinates)
+      );
+    // .then(json => json);
+  };
+
   render() {
     console.log(this.props.filteredMesures);
     const center = this.props.postcodeMandataire
@@ -141,6 +195,11 @@ class Mapstry extends React.Component {
         openModal={this.props.openModal}
         filteredMesures={this.props.filteredMesures}
         mesureCount={this.props.mesureCount}
+        updateFilters={this.props.updateFilters}
+        zoomCodePostal={this.zoomCodePostal}
+        getPostCodeCoordinates={this.getPostCodeCoordinates}
+        updateValue={this.props.updateValue}
+        value={this.props.value}
       />
     );
   }
