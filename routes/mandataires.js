@@ -35,6 +35,20 @@ router.get("/:mandataireId", async (req, res, next) => {
 });
 
 
+router.post("/filters", async (req, res, next) => {
+    const ti = await queries.getTiByUserId(req.user.id);
+    queries
+        .getAllByMandatairesFilter(ti.id,req.body.latNorthEast,req.body.latSouthWest,req.body.longNorthEast,req.body.longSouthWest)
+        .then(function(mesures) {
+            res.status(200).json(mesures);
+        })
+        .catch(function(error) {
+            throw error;
+            next(error);
+        });
+});
+
+
 router.get("/",loginRequired, async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
     queries
@@ -47,6 +61,20 @@ router.get("/",loginRequired, async (req, res, next) => {
             next(error);
         });
 });
+
+router.post("/PosteCode",loginRequired, async (req, res, next) => {
+    console.log("Salut",req.body.codePoste)
+    queries
+        .getCoordonneByPosteCode(req.body.codePoste)
+        .then(function(mandataires) {
+            res.status(200).json(mandataires);
+        })
+        .catch(function(error) {
+            throw error;
+            next(error);
+        });
+});
+
 
 
 
