@@ -55,13 +55,22 @@ function getAllMesuresByMandataires(ti_id) {
 
 function getAllMesuresByMandatairesFilter(ti_id,latnorthEast,latsouthWest,longNorthEast,longSouthWest) {
     return knex.from("mesures")
-        .debug()
         .where("status" , "Mesure en cours").whereBetween('mesures.latitude', [latsouthWest, latnorthEast]).whereBetween('mesures.longitude', [longSouthWest, longNorthEast])
         .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
         .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").groupByRaw('mandataires.id').where("mandatairetis.ti_id", parseInt(ti_id)).select('mandataires.id','mandataires.*');
 }
 
+function getAllByMandatairesFilter(ti_id,latnorthEast,latsouthWest,longNorthEast,longSouthWest) {
+    return knex.from("mandataires")
+        .whereBetween('mandataires.latitude', [latsouthWest, latnorthEast]).whereBetween('mandataires.longitude', [longSouthWest, longNorthEast])
+        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").groupByRaw('mandataires.id').where("mandatairetis.ti_id", parseInt(ti_id)).select('mandataires.id','mandataires.*');
+}
 
+function getCoordonneByPosteCode(userId) {
+    return knex
+        .from("codePostalLatLngs").debug()
+        .where("code_postal", userId).first();
+}
 
 
 function getAllMesuresByPopUp(ti_id) {
@@ -264,6 +273,8 @@ module.exports = {
   deleteAntenne,
   CapaciteEteinteMandataire,
     getAllMesuresEteinte,
-    getAllMesuresByMandatairesFilter
+    getAllMesuresByMandatairesFilter,
+    getCoordonneByPosteCode,
+    getAllByMandatairesFilter
 
 };
