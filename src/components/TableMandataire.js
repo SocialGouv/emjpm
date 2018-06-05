@@ -85,7 +85,7 @@ const TableMandataire = ({ rows, openModal,updateFilters }) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map(mandataire => (
+          {rows && rows.map(mandataire => (
             <TableRowMandataire
               key={mandataire.telephone}
               mandataire={mandataire}
