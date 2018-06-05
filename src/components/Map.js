@@ -3,7 +3,7 @@ import { Map, Marker, Popup, CircleMarker, Circle, TileLayer, Tooltip } from "re
 import apiFetch from "./Api";
 import TableMandataire from "./TableMandataire";
 import styled from "styled-components";
-import FilterMesuresMap from "./FilterMesuresMap"
+import FilterMesuresMap from "./FilterMesuresMap";
 var Hellomap = (center, zoom, style) => {
   Map.map("map", {
     center,
@@ -17,7 +17,6 @@ const Title = styled.div`
   font-size: 2em;
   padding: 15px;
 `;
-
 
 export const MapsView = ({
   mesures,
