@@ -8,14 +8,14 @@ import piwik from "../../piwik";
 
 function validate(formData, errors) {
 	if (formData.pass1 !== formData.pass2) {
-		errors.pass2.addError("Passwords don't match");
+		errors.pass2.addError("Mot de passe incorrect");
 	}
 	return errors;
 }
 const schema = {
 	type: "object",
 	required: [
-		"Iusername",
+		"username",
 		"pass1",
 		"pass2",
 		"nom",
@@ -27,13 +27,9 @@ const schema = {
 		"code_postal"
 	],
 	properties: {
-		Iusername: { type: "string", title: "Nom d'utilisateur (identifiant)", default: "" },
-		pass1: {
-			type: "string",
-			title: "Mot de passe ( 10 caractères minimum )",
-			minLength: 10
-		},
-		pass2: { type: "string", title: "Répeter mot de passe", minLength: 10 },
+		username: { type: "string", title: "Identifiant", default: "" },
+		pass1: { type: "string", title: "Mot de passe", minLength: 10 },
+		pass2: { type: "string", title: "Répéter mot de passe", minLength: 10 },
 		nom: { type: "string", title: "Nom du contact", default: "" },
 		prenom: { type: "string", title: "Prénom du contact", default: "" },
 		telephone: { type: "string", title: "Téléphone du contact", default: "" },
@@ -46,16 +42,15 @@ const schema = {
 
 const uiSchema = {
 	pass1: {
+		"ui:placeholder": "10 caratères minimum",
 		"ui:widget": "password"
 	},
 	pass2: {
+		"ui:placeholder": "10 caratères minimum",
 		"ui:widget": "password"
 	},
-	secretariat: {
-		"ui:widget": "select"
-	},
-	Iusername: {
-		"ui:placeholder": "Nom d'utilisateur (identifiant)"
+	username: {
+		"ui:placeholder": "Identifiant"
 	},
 	nom: {
 		"ui:placeholder": "Nom"
@@ -65,9 +60,6 @@ const uiSchema = {
 	},
 	telephone: {
 		"ui:placeholder": "Téléphone"
-	},
-	telephone_portable: {
-		"ui:placeholder": "Téléphone Portable"
 	},
 	email: {
 		"ui:placeholder": "Adresse email"
@@ -80,10 +72,6 @@ const uiSchema = {
 	},
 	ville: {
 		"ui:placeholder": "Commune"
-	},
-	genre: {
-		className: "",
-		"ui:widget": "radio"
 	}
 };
 
@@ -95,7 +83,7 @@ class InscriptionService extends React.Component {
 		 apiFetch(`/mandataires/1`, {
       method: "PUT",
       body: JSON.stringify({
-    	Iusername:
+    	username:
     	pass1:
     	pass2:
        	nom:
@@ -126,6 +114,7 @@ class InscriptionService extends React.Component {
 						formData={formData}
 						uiSchema={uiSchema}
 						validate={validate}
+						showErrorList={false}
 					>
 						<div
 							style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}

@@ -3,6 +3,7 @@ import Footer from "../src/components/Footer";
 import { Home, Map, User, UserMinus } from "react-feather";
 import InscriptionMandataire from "../src/components/inscription/InscriptionMandataire";
 import InscriptionService from "../src/components/inscription/InscriptionService";
+import InscriptionTi from "../src/components/inscription/InscriptionTi";
 
 class InscriptionForm extends React.Component {
 	state = {
@@ -10,11 +11,12 @@ class InscriptionForm extends React.Component {
 	};
 
 	getForm = () => {
-		// return null if no input
 		if (this.state.form === "Mandataire") {
 			return <InscriptionMandataire />;
 		} else if (this.state.form === "Service") {
 			return <InscriptionService />;
+		} else if (this.state.form === "ti") {
+			return <InscriptionTi />;
 		}
 	};
 
@@ -38,6 +40,7 @@ class InscriptionForm extends React.Component {
 										type="radio"
 										name="form_selector"
 										value="Mandataire"
+										style={{ fontSize: 16, fontWeight: "bold" }}
 										onChange={this.setForm}
 									/>
 									Mandataire
@@ -47,9 +50,20 @@ class InscriptionForm extends React.Component {
 										type="radio"
 										name="form_selector"
 										value="Service"
+										style={{ fontSize: 16, fontWeight: "bold" }}
 										onChange={this.setForm}
 									/>
 									Service
+								</label>
+								<label className=" offset-sm-2 col-sm-8 offset-md-2 ">
+									<input
+										type="radio"
+										name="form_selector"
+										value="ti"
+										style={{ fontSize: 16, fontWeight: "bold" }}
+										onChange={this.setForm}
+									/>
+									Tribunal d'instance
 								</label>
 								{form}
 							</div>
