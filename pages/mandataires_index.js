@@ -1,10 +1,10 @@
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import styled from "styled-components";
-import Navigation from "../src/components/Navigation";
-import TableMesure from "../src/components/TableMesure";
-import Footer from "../src/components/Footer";
-import FormulaireMandataire from "../src/components/formulaire_mandataire";
-import apiFetch from "../src/components/Api";
+import Navigation from "../src/components/communComponents/Navigation";
+import TableMesure from "../src/components/mandataireComponents/TableMesure";
+import Footer from "../src/components/communComponents/Footer";
+import FormulaireMandataire from "../src/components/mandataireComponents/formulaire_mandataire";
+import apiFetch from "../src/components/communComponents/Api";
 import dynamic from "next/dynamic";
 import { Home, Map, User, UserMinus } from "react-feather";
 
@@ -85,7 +85,7 @@ const Title = styled.div`
   font-size: 1.5em;
 `;
 
-const OpenStreeMap = dynamic(import("../src/components/MapsPartieMandataire"), {
+const OpenStreeMap = dynamic(import("../src/components/mandataireComponents/MapsPartieMandataire"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });

@@ -1,9 +1,9 @@
 import React, { createRef, Component } from "react";
 import { Map, Marker, Popup, CircleMarker, Circle, TileLayer, Tooltip } from "react-leaflet";
-import apiFetch from "./Api";
-import TableMandataire from "./tiComponents/TableMandataire";
+import apiFetch from "../communComponents/Api";
+import TableMandataire from "../tiComponents/TableMandataire";
 import styled from "styled-components";
-import FilterMesuresMap from "./tiComponents/FilterMesuresMap";
+import FilterMesuresMap from "../tiComponents/FilterMesuresMap";
 var Hellomap = (center, zoom, style) => {
     Map.map("map", {
         center,

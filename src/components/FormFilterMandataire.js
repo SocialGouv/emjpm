@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import FormInput from "./FormInput";
-import SearchButton from "./SearchButton";
+import SearchButton from "./communComponents/SearchButton";
 
 const FormFilterMandataire = ({ props }) => {
 	return (

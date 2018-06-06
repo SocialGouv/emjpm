@@ -5,11 +5,11 @@ import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
-import Navigation from "../src/components/Navigation";
-import RowModal from "../src/components/RowModal";
-import Footer from "../src/components/Footer";
-import Commentaire from "../src/components/Commentaire";
-import apiFetch from "../src/components/Api";
+import Navigation from "../src/components/communComponents/Navigation";
+import RowModal from "../src/components/communComponents/RowModal";
+import Footer from "../src/components/communComponents/Footer";
+import Commentaire from "../src/components/tiComponents/Commentaire";
+import apiFetch from "../src/components/communComponents/Api";
 
 const modalStyles = {
   content: {

@@ -1,6 +1,6 @@
 import React, { createRef, Component } from "react";
 import { Map, Marker, Popup, CircleMarker, Circle, TileLayer, Tooltip } from "react-leaflet";
-import apiFetch from "../Api";
+import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
 import styled from "styled-components";
 import FilterMesuresMap from "./FilterMesuresMap";

@@ -1,4 +1,4 @@
-import RowModal from "./RowModal";
+import RowModal from "./communComponents/RowModal";
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import "bootstrap/dist/css/bootstrap.css";
@@ -8,7 +8,7 @@ import "../../static/css/footer.css";
 import "../../static/css/custom.css";
 import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
-import apiFetch from "./Api";
+import apiFetch from "./communComponents/Api";
 
 const schema = {
   title: "Modifier vos informations",

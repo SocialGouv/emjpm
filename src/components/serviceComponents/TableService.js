@@ -1,4 +1,4 @@
-import TableRowMesure from "./TableRowMesure";
+import TableRowMesure from "../mandataireComponents/TableRowMesure";
 
 const TableMesure = ({ rows, openModal }) => {
   return (

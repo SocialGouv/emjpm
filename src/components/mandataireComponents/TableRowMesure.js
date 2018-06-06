@@ -1,25 +1,25 @@
 import FaSearch from "react-icons/lib/fa/search";
-import "../../static/css/custom.css";
+import "../../../static/css/custom.css";
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import "bootstrap/dist/css/bootstrap.css";
-import "../../static/css/hero.css";
-import "../../static/css/panel.css";
-import "../../static/css/footer.css";
-import "../../node_modules/react-tabs/style/react-tabs.css";
+import "../../../static/css/hero.css";
+import "../../../static/css/panel.css";
+import "../../../static/css/footer.css";
+import "../../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
-import apiFetch from "./Api";
+import apiFetch from "../communComponents/Api";
 import ModalCloseMesure from "./ModalCloseMesure";
-import Cell from "./Cell";
+import Cell from "../communComponents/Cell";
 import styled from "styled-components";
 import ModalMesure from "./ModalMesure";
-import piwik from "../piwik";
+import piwik from "../../piwik";
 
 const TdCursor = styled.tr`
-  cursor: url("../../static/images/edit.svg"), auto;
+  cursor: url("../../../static/images/edit.svg"), auto;
 `;
 const formData = {};
-const edit = require("../../static/images/edit.svg");
+const edit = require("../../../static/images/edit.svg");
 
 const TdStyle = styled.td`
   font-size: 0.8em;
