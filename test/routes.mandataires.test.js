@@ -28,9 +28,18 @@ describe("routes : mandataires", () => {
 
   describe("GET /api/v1/mandataires", () => {
     shouldBeProtected(server, "GET", "/api/v1/mandataires");
-
-    it("should get a list of 2 mandataires", () =>
+    // TODO: TI only ?
+    it("should be accessible to ti ONLY", () =>
       logUser(server).then(agent =>
+        agent
+          .get("/api/v1/mandataires")
+          .then(res => {
+            res.status.should.eql(401);
+          })
+          .catch(() => true)
+      ));
+    it("ti should get a list of 2 mandataires", () =>
+      logUser(server, { username: "ti1", password: "ti1" }).then(agent =>
         agent.get("/api/v1/mandataires").then(function(res) {
           res.redirects.length.should.eql(0);
           res.status.should.eql(200);
@@ -38,6 +47,15 @@ describe("routes : mandataires", () => {
           res.body.length.should.eql(2);
         })
       ));
+    // it("should get a list of 2 mandataires", () =>
+    //   logUser(server).then(agent =>
+    //     agent.get("/api/v1/mandataires").then(function(res) {
+    //       res.redirects.length.should.eql(0);
+    //       res.status.should.eql(200);
+    //       res.type.should.eql("application/json");
+    //       res.body.length.should.eql(2);
+    //     })
+    //   ));
   });
 
   describe("GET /api/v1/mandataires/1", () => {
