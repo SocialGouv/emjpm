@@ -10,7 +10,8 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "jeremy",
           password: hash,
-          type: "individuel"
+          type: "individuel",
+          active: true
         })
       );
     })
@@ -21,7 +22,8 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "kelly",
           password: hash,
-          type: "prepose"
+          type: "prepose",
+          active: true
         })
       );
     })
@@ -32,7 +34,8 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "service1",
           password: hash,
-          type: "service"
+          type: "service",
+          active: true
         })
       );
     })
@@ -43,7 +46,8 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "admin",
           password: hash,
-          type: "admin"
+          type: "admin",
+          active: true
         })
       );
     })
@@ -54,7 +58,20 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "ti1",
           password: hash,
-          type: "ti"
+          type: "ti",
+          active: true
+        })
+      );
+    })
+    .then(() => {
+      const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync("inactive", salt);
+      return Promise.join(
+        knex("users").insert({
+          username: "inactive",
+          password: hash,
+          type: "prepose",
+          active: false
         })
       );
     });

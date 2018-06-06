@@ -101,7 +101,23 @@ describe("routes : auth", () => {
           res.body.status.should.eql("success");
           res.body.url.should.eql("/mandataires_index");
         }));
-    it("should not login an unregistered user", () =>
+    it("should not login an inactive user", () =>
+      chai
+        .request(server)
+        .post("/auth/login")
+        .send({
+          username: "inactive",
+          password: "inactive"
+        })
+        .then(() => {
+          throw new Error("should not succeed");
+        })
+        .catch(res => {
+          res.status.should.eql(401);
+          res.response.type.should.eql("application/json");
+          res.response.body.status.should.eql("User not found");
+        }));
+    it("should NOT login an unregistered user", () =>
       chai
         .request(server)
         .post("/auth/login")
@@ -117,7 +133,7 @@ describe("routes : auth", () => {
           res.response.type.should.eql("application/json");
           res.response.body.status.should.eql("User not found");
         }));
-    it("should not login a registered user with wrong password", () =>
+    it("should NOT login a registered user with wrong password", () =>
       chai
         .request(server)
         .post("/auth/login")
