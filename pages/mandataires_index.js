@@ -85,7 +85,7 @@ const Title = styled.div`
   font-size: 1.5em;
 `;
 
-const OpenStreeMap = dynamic(import("../src/components/Map"), {
+const OpenStreeMap = dynamic(import("../src/components/MapsPartieMandataire"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
