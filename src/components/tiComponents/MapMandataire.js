@@ -1,21 +1,26 @@
-import React, { createRef, Component } from "react";
-import { Map, Marker, Popup, CircleMarker, Circle, TileLayer, Tooltip } from "react-leaflet";
+import React, { createRef } from "react";
+import { Map, CircleMarker, TileLayer } from "react-leaflet";
 import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
 import styled from "styled-components";
 import FilterMesuresMap from "./FilterMesuresMap";
-var Hellomap = (center, zoom, style) => {
-  Map.map("map", {
-    center,
-    zoom,
-    style
-  });
-};
 
 const Title = styled.div`
   text-align: left;
   font-size: 2em;
   padding: 15px;
+`;
+
+const MapsWidth = styled.div`
+  width: 60%;
+  margin-top: 10px;
+  margin-right: 3%;
+`;
+
+const MandatairesWidth = styled.div`
+  background-color: white;
+  margin-top: 10px;
+  width: 37%;
 `;
 
 export const MapsView = ({
@@ -36,9 +41,8 @@ export const MapsView = ({
   value
 }) => (
   <div className="container">
-    {" "}
     <div className="row">
-      <div style={{ width: "60%", marginTop: "10px", marginRight: "3%" }}>
+      <MapsWidth>
         <FilterMesuresMap
           updateFilters={updateFilters}
           zoomCodePostal={zoomCodePostal}
@@ -70,19 +74,19 @@ export const MapsView = ({
             ))}
           ;
         </Map>
-      </div>
-      <div style={{ backgroundColor: "white", marginTop: "10px", width: "37%" }}>
+      </MapsWidth>
+      <MandatairesWidth>
         <Title>
           {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
         </Title>
-        <div style={{ maxHeight: "60vh",overflow: "auto" }}>
+        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
           <TableMandataire
             rows={filteredMesures}
             openModal={openModal}
             updateFilters={updateFilters}
           />
         </div>
-      </div>
+      </MandatairesWidth>
     </div>
   </div>
 );
@@ -127,7 +131,6 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        console.log("APImesures", mesures);
         this.setState({ modalIsOpen: false });
         this.props.updateMandataireFilters(mesures);
       })
@@ -147,7 +150,6 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        console.log("heelo", mesures);
         this.props.updatePostCodeMandataires(mesures);
         this.setState({ zoom: 13 });
       })
@@ -157,7 +159,6 @@ class Mapstry extends React.Component {
   };
 
   getPostCodeCoordinates = commune => {
-    console.log("input", commune);
     // return null if no input
     if (!commune || !commune.trim()) {
       return Promise.resolve(null);
@@ -171,7 +172,6 @@ class Mapstry extends React.Component {
   };
 
   render() {
-    console.log("value", this.state.value);
     const center = this.props.postcodeMandataire
       ? [this.props.postcodeMandataire[1], this.props.postcodeMandataire[0]]
       : [50.459441, 2.693963];

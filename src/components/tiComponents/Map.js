@@ -1,4 +1,4 @@
-import React, { createRef} from "react";
+import React, { createRef } from "react";
 import { Map, CircleMarker, TileLayer, Tooltip } from "react-leaflet";
 import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
@@ -41,7 +41,7 @@ export const MapsView = ({
   value
 }) => (
   <div className="container">
-      <div className="row">
+    <div className="row">
       <MapsWidth>
         <FilterMesuresMap
           updateFilters={updateFilters}
