@@ -40,7 +40,6 @@ const TabsShowMandataire = styled.div`
   height: 60px;
 `;
 
-
 const OpenStreeMap = dynamic(import("../src/components/tiComponents/Map"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
@@ -310,6 +309,7 @@ class Ti extends React.Component<Props, State> {
         mandataires={this.state.data}
         updateMandataireFilters={this.updateMandataireFilters}
         mandataireCount={mandataireCount}
+        filteredMandataires={filteredMandataires}
       />
     );
   }
@@ -333,7 +333,8 @@ const TiView = ({
   updateValue,
   mandataires,
   updateMandataireFilters,
-  mandataireCount
+  mandataireCount,
+  filteredMandataires
 }) => (
   <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
     <Tabs>
@@ -374,7 +375,7 @@ const TiView = ({
           height={height}
           updateMandataireFilters={updateMandataireFilters}
           updateMandataireMesures={updateMandataireMesures}
-          filteredMesures={filteredMesures}
+          filteredMesures={filteredMandataires}
           openModal={openModal}
           mandataireCount={mandataireCount}
           updateFilters={updateFilters}
