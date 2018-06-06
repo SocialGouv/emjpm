@@ -1,18 +1,15 @@
 // @flow
+import * as React from "react";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import styled from "styled-components";
-import geolib from "geolib";
 import dynamic from "next/dynamic";
-import PanelFilterMandataires from "../src/components/PanelFilterMandataires";
-import TableMandataire from "../src/components/TableMandataire";
 import Navigation from "../src/components/Navigation";
 import RowModal from "../src/components/RowModal";
 import Footer from "../src/components/Footer";
 import Commentaire from "../src/components/Commentaire";
 import apiFetch from "../src/components/Api";
-import * as React from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 const modalStyles = {
   content: {
@@ -31,21 +28,21 @@ const TIPageStlye = styled.div`
 `;
 
 const tabStyle = {
-    backgroundColor: "#ebeff2",
-    paddingBottom: 5,
-    bottom: 0,
-    textAlign: "middle",
-    verticalAlign: "middle",
-    lineHeight: "40px",
-    width: "50%",
-    display: "inline-flex"
+  backgroundColor: "#ebeff2",
+  paddingBottom: 5,
+  bottom: 0,
+  textAlign: "middle",
+  verticalAlign: "middle",
+  lineHeight: "40px",
+  width: "50%",
+  display: "inline-flex"
 };
 const imageStyle = {
-    lineHeight: "50px",
-    width: "35px",
-    height: "35px",
-    color: "black",
-    display: "inline-block"
+  lineHeight: "50px",
+  width: "35px",
+  height: "35px",
+  color: "black",
+  display: "inline-block"
 };
 
 const Pill = styled.p`
@@ -109,8 +106,8 @@ const OpenStreeMap = dynamic(import("../src/components/Map"), {
 });
 
 const OpenStreeMapMandataires = dynamic(import("../src/components/MapMandataire"), {
-    ssr: false,
-    loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
+  ssr: false,
+  loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
 
 // postCode => [lat, lon]
@@ -119,7 +116,6 @@ const getPostCodeCoordinates = postCode => {
   if (!postCode || !postCode.trim()) {
     return Promise.resolve(null);
   }
-
   return fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
     .then(response => response.json())
     .then(json => json.features[0].geometry.coordinates);
@@ -143,39 +139,19 @@ const filterMandataires = (mandataires, filters) => {
   filteredMandataires.sort((a, b) =>
     sortByDispo(a.dispo_max - a.disponibilite, b.dispo_max - b.disponibilite)
   );
-
-  // add lat/lon
-  // if (filters.postcodeCoordinates) {
-  //   filteredMandataires = geolib.orderByDistance(
-  //     {
-  //       latitude: filters.postcodeCoordinates[1],
-  //       longitude: filters.postcodeCoordinates[0]
-  //     },
-  //     // add lat/lng properties to mandataires data so they can be sorted and returned as is
-  //     filteredMandataires.map(mandataire => ({
-  //       latitude: mandataire.latitude,
-  //       longitude: mandataire.longitude,
-  //       ...mandataire
-  //     }))
-  //   );
-  // }
-
   return filteredMandataires;
 };
 
 const filterMesures = (mesures, filters) => {
   return mesures.filter(mesure => {
-  return (
+    return (
       stringMatch(mesure.type, filters.searchType) &&
       (stringMatch(mesure.etablissement, filters.searchNom) ||
-          stringMatch(mesure.prenom, filters.searchNom) ||
-      stringMatch(mesure.nom, filters.searchNom)) &&
+        stringMatch(mesure.prenom, filters.searchNom) ||
+        stringMatch(mesure.nom, filters.searchNom)) &&
       stringMatch(mesure.ville, filters.searchVille)
-      // stringMatch(mesure.type, filters.searchTypeIn) &&
-    // stringMatch(mesure.      type, filters.searchTypePr) &&
-    // stringMatch(mesure.type, filters.searchTypeSe)
-    // stringMatch(mesure.type, filters.searchVille)
-  )});
+    );
+  });
 };
 
 const sortByDispo = (a, b) => {
@@ -216,10 +192,12 @@ const TitleMandataire = styled.div`
   font-size: 1.5em;
   font-weight: bold;
 `;
+
 type FicheMandataireProps = {
   style: Object,
   mandataire: Object
 };
+
 export const FicheMandataire = ({ style, mandataire }: FicheMandataireProps) => (
   <div className="container" style={style}>
     <div className="row">
@@ -283,7 +261,7 @@ class Ti extends React.Component<Props, State> {
     data: [],
     datamesure: [],
     mandaMesures: [],
-      manda: [],
+    manda: [],
     searchType: "",
     searchTypeIn: "",
     searchTypePr: "",
@@ -294,7 +272,7 @@ class Ti extends React.Component<Props, State> {
     modalIsOpen: false,
     postcodeCoordinates: "",
     specialite: "",
-      value:""
+    value: ""
   };
 
   componentDidMount() {
@@ -328,26 +306,24 @@ class Ti extends React.Component<Props, State> {
     this.setState({ mandaMesures: mesures });
   };
 
-    updateMandataireFilters = mandataires => {
-        this.setState({ manda: mandataires });
-    };
+  updateMandataireFilters = mandataires => {
+    this.setState({ manda: mandataires });
+  };
 
   updateFilters = filters => {
-    console.log("filter", filters);
     this.setState(filters);
   };
-    updateValue = value => {
-        this.setState({ value: value });
-    };
+  updateValue = value => {
+    this.setState({ value: value });
+  };
 
-    updatePostCodeMandataires= mesures => {
-      console.log("ouioui", mesures)
-        this.setState({ postcodeCoordinates: [mesures.longitude, mesures.latitude] });
-    };
+  updatePostCodeMandataires = mesures => {
+    this.setState({ postcodeCoordinates: [mesures.longitude, mesures.latitude] });
+  };
 
-    updatePostCodeMandatairesByCommune= mesures => {
-        this.setState({ postcodeCoordinates: mesures });
-    };
+  updatePostCodeMandatairesByCommune = mesures => {
+    this.setState({ postcodeCoordinates: mesures });
+  };
 
   findPostcode = postCode =>
     getPostCodeCoordinates(postCode).then(coordinates =>
@@ -373,85 +349,110 @@ class Ti extends React.Component<Props, State> {
     );
     const filteredMesures = filterMesures(this.state.mandaMesures, {
       searchType: this.state.searchType,
-        searchNom: this.state.searchNom,
-        searchVille: this.state.searchVille
+      searchNom: this.state.searchNom,
+      searchVille: this.state.searchVille
     });
 
     const mesureCount = this.state.mandaMesures.length;
     const mandataireCount = filteredMandataires.length;
     return (
-      <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
-          <Tabs>
-              <TabList>
-                      <TabsShowMandataire className="container">
-                          <Tab style={tabStyle}>
-                              <b> Majeurs Protégés</b>
-                          </Tab>
-                          <Tab style={tabStyle}>
-                              <b>Mandataires</b>
-                          </Tab>
-                      </TabsShowMandataire>
-              </TabList>
-                  <TabPanel>
-                      <OpenStreeMap
-                          mesures={this.state.datamesure}
-                          postcodeMandataire={this.state.postcodeCoordinates}
-                          width={"100%"}
-                          height={"65vh"}
-                          updateMesures={this.updateMesures}
-                          updateMandataireMesures={this.updateMandataireMesures}
-                          filteredMesures={filteredMesures}
-                          openModal={this.openModal}
-                          mesureCount={mesureCount}
-                          updateFilters={this.updateFilters}
-                          findPostcode={this.findPostcode}
-                          updatePostCodeMandataires={this.updatePostCodeMandataires}
-                          updatePostCodeMandatairesByCommune={this.updatePostCodeMandatairesByCommune}
-                          value={this.state.value}
-                          updateValue={this.updateValue}
-                      />
-                  </TabPanel>
-                  <TabPanel>
-                      <OpenStreeMapMandataires
-                          mandataires={this.state.data}
-                          postcodeMandataire={this.state.postcodeCoordinates}
-                          width={"100%"}
-                          height={"65vh"}
-                          updateMandataireFilters={this.updateMandataireFilters}
-                          updateMandataireMesures={this.updateMandataireMesures}
-                          filteredMesures={filteredMandataires}
-                          openModal={this.openModal}
-                          mandataireCount={mandataireCount}
-                          updateFilters={this.updateFilters}
-                          findPostcode={this.findPostcode}
-                          updatePostCodeMandataires={this.updatePostCodeMandataires}
-                          updatePostCodeMandatairesByCommune={this.updatePostCodeMandatairesByCommune}
-                          value={this.state.value}
-                          updateValue={this.updateValue}
-                      />
-                  </TabPanel>
-          </Tabs>
-        {/*<div className="container">*/}
-        {/*/!*<Title>*!/*/}
-        {/*/!*{mandatairesCount} Professionel{(mandatairesCount > 1 && "s") || null} référencé{(mandatairesCount >*!/*/}
-        {/*/!*1 &&*!/*/}
-        {/*/!*"s") ||*!/*/}
-        {/*/!*null}{" "}*!/*/}
-        {/*/!*</Title>*!/*/}
-        {/*/!*<TableMandataire rows={filteredMandataires} openModal={this.openModal} />*!/*/}
-        {/*<ModalMandataire isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>*/}
-        {/*{this.state.currentMandataire && (*/}
-        {/*<FicheMandataire*/}
-        {/*mandataire={this.state.currentMandataire}*/}
-        {/*style={{ textAlign: "left" }}*/}
-        {/*/>*/}
-        {/*)}*/}
-        {/*</ModalMandataire>*/}
-        {/*</div>*/}
-      </div>
+      <TiView
+        mesures={this.state.datamesure}
+        postcodeMandataire={this.state.postcodeCoordinates}
+        width={"100%"}
+        height={"65vh"}
+        updateMesures={this.updateMesures}
+        updateMandataireMesures={this.updateMandataireMesures}
+        filteredMesures={filteredMesures}
+        openModal={this.openModal}
+        mesureCount={mesureCount}
+        updateFilters={this.updateFilters}
+        findPostcode={this.findPostcode}
+        updatePostCodeMandataires={this.updatePostCodeMandataires}
+        updatePostCodeMandatairesByCommune={this.updatePostCodeMandatairesByCommune}
+        value={this.state.value}
+        updateValue={this.updateValue}
+        mandataires={this.state.data}
+        updateMandataireFilters={this.updateMandataireFilters}
+        mandataireCount={mandataireCount}
+      />
     );
   }
 }
+
+const TiView = ({
+  mesures,
+  postcodeMandataire,
+  width,
+  height,
+  updateMesures,
+  updateMandataireMesures,
+  filteredMesures,
+  openModal,
+  mesureCount,
+  updateFilters,
+  findPostcode,
+  updatePostCodeMandataires,
+  updatePostCodeMandatairesByCommune,
+  value,
+  updateValue,
+  mandataires,
+  updateMandataireFilters,
+  mandataireCount
+}) => (
+  <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
+    <Tabs>
+      <TabList>
+        <TabsShowMandataire className="container">
+          <Tab style={tabStyle}>
+            <b> Majeurs Protégés</b>
+          </Tab>
+          <Tab style={tabStyle}>
+            <b>Mandataires</b>
+          </Tab>
+        </TabsShowMandataire>
+      </TabList>
+      <TabPanel>
+        <OpenStreeMap
+          mesures={mesures}
+          postcodeMandataire={postcodeMandataire}
+          width={width}
+          height={height}
+          updateMesures={updateMesures}
+          updateMandataireMesures={updateMandataireMesures}
+          filteredMesures={filteredMesures}
+          openModal={openModal}
+          mesureCount={mesureCount}
+          updateFilters={updateFilters}
+          findPostcode={findPostcode}
+          updatePostCodeMandataires={updatePostCodeMandataires}
+          updatePostCodeMandatairesByCommune={updatePostCodeMandatairesByCommune}
+          value={value}
+          updateValue={updateValue}
+        />
+      </TabPanel>
+      <TabPanel>
+        <OpenStreeMapMandataires
+          mandataires={mandataires}
+          postcodeMandataire={postcodeMandataire}
+          width={width}
+          height={height}
+          updateMandataireFilters={updateMandataireFilters}
+          updateMandataireMesures={updateMandataireMesures}
+          filteredMesures={filteredMesures}
+          openModal={openModal}
+          mandataireCount={mandataireCount}
+          updateFilters={updateFilters}
+          findPostcode={findPostcode}
+          updatePostCodeMandataires={updatePostCodeMandataires}
+          updatePostCodeMandatairesByCommune={updatePostCodeMandatairesByCommune}
+          value={value}
+          updateValue={updateValue}
+        />
+      </TabPanel>
+    </Tabs>
+  </div>
+);
 
 const TiPage = () => (
   <div style={{ minHeight: "100%", backgroundColor: "#cad4de" }}>
