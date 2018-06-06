@@ -22,11 +22,6 @@ const modalStyles = {
   }
 };
 
-const TIPageStlye = styled.div`
-  background-color: #cad4de;
-  min-height: 100%;
-`;
-
 const tabStyle = {
   backgroundColor: "#ebeff2",
   paddingBottom: 5,
@@ -37,41 +32,6 @@ const tabStyle = {
   width: "50%",
   display: "inline-flex"
 };
-const imageStyle = {
-  lineHeight: "50px",
-  width: "35px",
-  height: "35px",
-  color: "black",
-  display: "inline-block"
-};
-
-const Pill = styled.p`
-  font-size: 18px;
-  width: 100px;
-  height: 28px;
-  line-height: 28px;
-  border-radius: 2px;
-  text-align: center;
-  color: white;
-  display: inline-block;
-  margin-right: 10px;
-`;
-
-const PanelMandataire = styled.div`
-  text-align: "left",
-  background-size: cover;
-  heigth: 100px !important;
-  background-color: #cad4de;
-`;
-
-const ContainerMandataire = styled.div`
-  padding-right: 0px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  padding-left: 0px;
-  font-size: 1.2em;
-  margin-top: 0px;
-`;
 
 const TabsShowMandataire = styled.div`
   padding-right: 0px;
@@ -79,33 +39,14 @@ const TabsShowMandataire = styled.div`
   background-color: #ebeff2;
   height: 60px;
 `;
-const TabsPanelMandataire = styled.div`
-  background-color: white;
-  min-height: 70vh;
-  padding: 0px;
-`;
 
-const FormuaireMandataire = styled.div`
-  min-height: 70vh;
-  padding-top: 10px;
-`;
 
-const OpenStreeMapMandataire = styled.div`
-  padding-top: 10px;
-  padding-bottom: 10px;
-`;
-
-const MandatairesPageStlye = styled.div`
-  background-color: #cad4de;
-  min-height: 100%;
-`;
-
-const OpenStreeMap = dynamic(import("../src/components/Map"), {
+const OpenStreeMap = dynamic(import("../src/components/tiComponents/Map"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
 
-const OpenStreeMapMandataires = dynamic(import("../src/components/MapMandataire"), {
+const OpenStreeMapMandataires = dynamic(import("../src/components/tiComponents/MapMandataire"), {
   ssr: false,
   loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
@@ -165,12 +106,6 @@ const sortByDispo = (a, b) => {
   }
   return 0;
 };
-
-const Title = styled.div`
-  text-align: left;
-  font-size: 2em;
-  padding: 15px;
-`;
 
 const ModalMandataire = ({ isOpen, closeModal, children }) => (
   <Modal

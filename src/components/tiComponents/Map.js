@@ -1,9 +1,9 @@
 import React, { createRef, Component } from "react";
 import { Map, Marker, Popup, CircleMarker, Circle, TileLayer, Tooltip } from "react-leaflet";
-import apiFetch from "./Api";
-import TableMandataire from "./TableMandataire";
+import apiFetch from "../Api";
+import TableMandataire from "../TableMandataire";
 import styled from "styled-components";
-import FilterMesuresMap from "./FilterMesuresMap";
+import FilterMesuresMap from "../FilterMesuresMap";
 var Hellomap = (center, zoom, style) => {
   Map.map("map", {
     center,
@@ -111,7 +111,6 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        console.log("API", mesures);
         this.setState({ modalIsOpen: false });
         this.props.updateMandataireMesures(mesures);
       })
@@ -121,7 +120,6 @@ class Mapstry extends React.Component {
   }
 
   handleMoveend = mapRef => {
-    console.log(2);
     apiFetch("/mesures/filters", {
       method: "POST",
       body: JSON.stringify({
@@ -132,7 +130,6 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        console.log("APImesures", mesures);
         this.setState({ modalIsOpen: false });
         this.props.updateMandataireMesures(mesures);
       })
@@ -152,7 +149,6 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        console.log("heelo", mesures);
         this.props.updatePostCodeMandataires(mesures);
         this.setState({ zoom: 13 });
       })
@@ -164,8 +160,6 @@ class Mapstry extends React.Component {
 
   getPostCodeCoordinates = commune => {
     // return null if no input
-      console.log("input", commune)
-
     if (!commune || !commune.trim()) {
       return Promise.resolve(null);
     }
@@ -178,7 +172,7 @@ class Mapstry extends React.Component {
   };
 
   render() {
-    console.log(this.props.filteredMesures);
+    console.log(this.props.mesures)
     const center = this.props.postcodeMandataire
       ? [this.props.postcodeMandataire[0], this.props.postcodeMandataire[1]]
       : [50.459441, 2.693963];
