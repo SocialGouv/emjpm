@@ -22,7 +22,7 @@ describe("routes : mandataireMesures", () => {
 
   afterEach(() => {
     passportStub.logout();
-    return knex.migrate.rollback();
+    //return knex.migrate.rollback();
   });
 
   describe("GET /api/v1/mandataires/1/mesures", () => {
@@ -32,7 +32,7 @@ describe("routes : mandataireMesures", () => {
         agent.get("/api/v1/mandataires/1/mesures").then(res => {
           res.status.should.eql(200);
           res.type.should.eql("application/json");
-          res.body.length.should.eql(1);
+          res.body.length.should.eql(2);
           res.body[0].code_postal.should.eql("62000");
           // todo : check que les mandataires soient bien filtés
         })
@@ -61,11 +61,10 @@ describe("routes : mandataireMesures", () => {
             res.redirects.length.should.eql(0);
             res.status.should.eql(200);
             res.type.should.eql("application/json");
-            res.body.length.should.eql(2);
-            //res.body[0].co_comment.should.eql("Hello, world");
-            // todo : check que les commentaires soient bien filtés
+            res.body.length.should.eql(3);
           })
       ));
+
     // it("should throw when posting commentaire on invalid mandataire", done => {
     //   // TODO
     //   "1".should.eql(2);
@@ -84,9 +83,27 @@ describe("routes : mandataireMesures", () => {
             res.redirects.length.should.eql(0);
             res.status.should.eql(200);
             res.type.should.eql("application/json");
-            res.body.length.should.eql(1);
-            res.body[0].code_postal.should.eql("10000");
+            res.body.length.should.eql(2);
+            res.body.find(i => i.id === 1).code_postal.should.eql("10000");
           })
       ));
   });
+
+  it("should NOT update a mesure for another mandataire", () =>
+    logUser(server).then(agent =>
+      agent
+        .put("/api/v1/mandataires/1/mesures/2")
+        .send({
+          code_postal: "10000"
+        })
+        .then(res =>
+          knex
+            .table("mesures")
+            .where("id", 2)
+            .first()
+            .then(data => {
+              data.code_postal.should.not.eql("10000");
+            })
+        )
+    ));
 });

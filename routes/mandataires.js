@@ -11,15 +11,6 @@ router.get("/1", loginRequired, async (req, res, next) => {
   if (!mandataire) {
     return next(new Error(401));
   }
-  /*
-  console.log(mandataire);
-  if (
-    !mandataire ||
-    parseInt(req.params.mandataireId) !== parseInt(mandataire.id)
-  ) {
-    return next(new Error(401));
-  }
-  */
   queries
     .getSingle(mandataire.id)
     .then(mandataire => res.status(200).json(mandataire))
@@ -32,12 +23,6 @@ router.put("/1", loginRequired, async (req, res, next) => {
   if (!mandataire) {
     return next(new Error(401));
   }
-  /* if (
-    !mandataire ||
-    parseInt(req.params.mandataireId) !== parseInt(mandataire.id)
-  ) {
-    return next(new Error(401));
-  }*/
   queries
     .update(mandataire.id, req.body)
     .then(() => queries.getSingle(mandataire.id))
@@ -68,6 +53,7 @@ router.post("/filters", loginRequired, async (req, res, next) => {
 // récupère une liste de mandataires pour le user en question
 // TODO : le user doit être un TI
 // droits : ti lui-même
+// récupère une liste de mandataires pour le user (ti) en question
 router.get("/", loginRequired, async (req, res, next) => {
   if (req.user.type !== "ti") {
     return next(new Error(401));
@@ -108,6 +94,9 @@ router.post("/PosteCode", loginRequired, async (req, res, next) => {
 
 router.put("/:mandataireId/capacite", async (req, res, next) => {
   const mandataire = await queries.getMandataireByUserId(req.user.id);
+  if (!mandataire) {
+    return next(new Error(401));
+  }
   // récupères le nb de mesure attribuées pour ce mandataire
   const capaciteMandataire = queries.CapaciteMandataire(mandataire.id);
   queries
@@ -121,4 +110,5 @@ router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));
 router.use("/", require("./serviceAntennes"));
 router.use("/", require("./etablissementPreposes"));
+
 module.exports = router;
