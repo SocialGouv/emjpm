@@ -13,13 +13,8 @@ router.get("/", loginRequired, async (req, res, next) => {
   const ti = await queries.getTiByUserId(req.user.id);
   queries
     .getAllMesuresByMandataires(ti.id)
-    .then(function(mesures) {
-      res.status(200).json(mesures);
-    })
-    .catch(function(error) {
-      throw error;
-      next(error);
-    });
+    .then(mesures => res.status(200).json(mesures))
+    .catch(error => next(error));
 });
 
 router.post("/filters", loginRequired, async (req, res, next) => {

@@ -38,7 +38,7 @@ describe("routes : mesures", () => {
           .then(function(res) {
             res.status.should.eql(200);
             res.type.should.eql("application/json");
-            res.body.length.should.eql(2);
+            res.body.length.should.eql(3);
           })
           .catch(err => {
             throw err;
