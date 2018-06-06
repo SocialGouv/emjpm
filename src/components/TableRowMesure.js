@@ -58,7 +58,7 @@ export const TableRowMesureView = ({
     <TdStyle>{date_ouverture.slice(0, 10)}</TdStyle>
     <Cell>
       <b>
-        {code_postal} -{ville}{" "}
+        {code_postal} -{ville.toUpperCase()}{" "}
       </b>
     </Cell>
     <Cell>{type}</Cell>
