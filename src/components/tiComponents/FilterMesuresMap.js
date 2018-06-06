@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import SearchButton from "./SearchButton";
-import FormInput from "./FormInput";
+import SearchButton from "../SearchButton";
+import FormInput from "../FormInput";
 
 const FilterMesuresMap = ({
   props,
