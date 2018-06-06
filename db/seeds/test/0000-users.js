@@ -46,5 +46,16 @@ exports.seed = (knex, Promise) => {
           type: "admin"
         })
       );
+    })
+    .then(() => {
+      const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync("ti1", salt);
+      return Promise.join(
+        knex("users").insert({
+          username: "ti1",
+          password: hash,
+          type: "ti"
+        })
+      );
     });
 };
