@@ -48,12 +48,10 @@ export const Circle = styled.div`
 
 const TableRowMandataire = ({ mandataire, onClick }) => {
   const {
-    ville,
     type,
     etablissement,
     disponibilite,
     referent,
-    code_postal,
     dispo_max
   } = mandataire;
   return (
@@ -71,11 +69,6 @@ const TableRowMandataire = ({ mandataire, onClick }) => {
         <b>{etablissement || referent}</b>
         <br /> <div style={{ color: "#cccccc" }}>{type.toUpperCase()} </div>
       </Cell>
-      {/*<Cell>*/}
-        {/*<b>*/}
-          {/*{code_postal} - {ville}{" "}*/}
-        {/*</b>*/}
-      {/*</Cell>*/}
       <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
         <PillDispo dispo={disponibilite} dispo_max={dispo_max} />
       </td>
