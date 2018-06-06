@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Footer from "../src/components/communComponents/Footer";
 import Navigation from "../src/components/communComponents/Navigation";
-import LoginForm from "../src/components/LoginComponents/LoginForm";
+import LoginForm from "../src/components/loginComponents/LoginForm";
 
 const Title = styled.div`
   text-align: left;

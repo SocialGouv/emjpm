@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
-import { default as LoginForm, LoginFormView } from "../src/components/LoginComponents/LoginForm";
+import { default as LoginForm, LoginFormView } from "../src/components/loginComponents/LoginForm";
 
 storiesOf("Login", module)
   .add("interactif", () => <LoginForm />)
