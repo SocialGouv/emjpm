@@ -15,20 +15,74 @@ chai.use(chaiHttp);
 passportStub.install(server);
 
 describe("routes : auth", () => {
-  beforeEach(() => {
-    return knex.migrate
+  before(() =>
+    knex.migrate
       .rollback()
-      .then(() => {
-        return knex.migrate.latest();
-      })
-      .then(() => {
-        return knex.seed.run();
-      });
-  });
+      .then(() => knex.migrate.latest())
+      .then(() => knex.seed.run())
+  );
 
-  afterEach(() => {
+  after(() => {
     passportStub.logout();
     return knex.migrate.rollback();
+  });
+
+  describe("Login redirection", () => {
+    it("should redirect individuel to /mandataires_index", () =>
+      chai
+        .request(server)
+        .post("/auth/login")
+        .send({
+          username: "jeremy",
+          password: "johnson123"
+        })
+        .then(res => {
+          res.body.url.should.eql("/mandataires_index");
+        }));
+    it("should redirect prepose to /mandataires_index", () =>
+      chai
+        .request(server)
+        .post("/auth/login")
+        .send({
+          username: "kelly",
+          password: "bryant123"
+        })
+        .then(res => {
+          res.body.url.should.eql("/mandataires_index");
+        }));
+    it("should redirect ti to /tis", () =>
+      chai
+        .request(server)
+        .post("/auth/login")
+        .send({
+          username: "ti1",
+          password: "ti1"
+        })
+        .then(res => {
+          res.body.url.should.eql("/tis");
+        }));
+    it("should redirect service to /services", () =>
+      chai
+        .request(server)
+        .post("/auth/login")
+        .send({
+          username: "service1",
+          password: "service1"
+        })
+        .then(res => {
+          res.body.url.should.eql("/services");
+        }));
+    it("should redirect admin to /admin", () =>
+      chai
+        .request(server)
+        .post("/auth/login")
+        .send({
+          username: "admin",
+          password: "admin"
+        })
+        .then(res => {
+          res.body.url.should.eql("/admin");
+        }));
   });
 
   describe("POST /auth/login", () => {
@@ -45,6 +99,7 @@ describe("routes : auth", () => {
           res.redirects.length.should.eql(0);
           res.type.should.eql("application/json");
           res.body.status.should.eql("success");
+          res.body.url.should.eql("/mandataires_index");
         }));
     it("should not login an unregistered user", () =>
       chai

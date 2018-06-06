@@ -16,12 +16,8 @@ describe("routes : PreposeEtablissement", () => {
   beforeEach(() => {
     return knex.migrate
       .rollback()
-      .then(() => {
-        return knex.migrate.latest();
-      })
-      .then(() => {
-        return knex.seed.run();
-      });
+      .then(() => knex.migrate.latest())
+      .then(() => knex.seed.run());
   });
 
   afterEach(() => {
@@ -40,10 +36,7 @@ describe("routes : PreposeEtablissement", () => {
     );
 
     it("should get list of etablissements of a mandataire", () =>
-      logUser(server, {
-        username: "adrien1",
-        password: "aaaaaa"
-      }).then(agent =>
+      logUser(server).then(agent =>
         agent
           .get("/api/v1/mandataires/1/etablissements")
           .then(res => {
@@ -58,10 +51,7 @@ describe("routes : PreposeEtablissement", () => {
           })
       ));
     it("should post etablissements for given mandataire", () =>
-      logUser(server, {
-        username: "adrien1",
-        password: "aaaaaa"
-      })
+      logUser(server)
         .then(agent =>
           agent
             .post("/api/v1/mandataires/1/etablissements")
@@ -85,10 +75,7 @@ describe("routes : PreposeEtablissement", () => {
         }));
 
     it("should update a etablissements for a given mandataire", () =>
-      logUser(server, {
-        username: "adrien1",
-        password: "aaaaaa"
-      })
+      logUser(server)
         .then(agent =>
           agent
             .put("/api/v1/mandataires/1/etablissements/1")
@@ -107,10 +94,7 @@ describe("routes : PreposeEtablissement", () => {
         }));
 
     it("should delete etablissement for given mandataire", () =>
-      logUser(server, {
-        username: "adrien1",
-        password: "aaaaaa"
-      })
+      logUser(server)
         .then(agent =>
           agent.delete("/api/v1/mandataires/1/etablissements/1").then(res => {
             res.redirects.length.should.eql(0);
