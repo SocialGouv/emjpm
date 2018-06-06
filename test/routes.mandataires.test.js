@@ -52,7 +52,7 @@ describe("routes : mandataires", () => {
     shouldBeProtected(server, "GET", "/api/v1/mandataires/1");
 
     it("should get a single mandataire", () =>
-      logUser(server, { username: "adrien1", password: "aaaaaa" }).then(agent =>
+      logUser(server).then(agent =>
         agent.get("/api/v1/mandataires/1").then(function(res) {
           res.status.should.eql(200);
           res.type.should.eql("application/json");
@@ -61,7 +61,7 @@ describe("routes : mandataires", () => {
       ));
 
     it("should not read another mandataire", () =>
-      logUser(server, { username: "adrien1", password: "aaaaaa" }).then(agent =>
+      logUser(server).then(agent =>
         agent
           .get("/api/v1/mandataires/2")
           .then(res => {
@@ -74,7 +74,7 @@ describe("routes : mandataires", () => {
   describe("PUT /api/v1/mandataires/1", () => {
     shouldBeProtected(server, "PUT", "/api/v1/mandataires/1");
     it("should update mandataire", () =>
-      logUser(server, { username: "adrien1", password: "aaaaaa" }).then(agent =>
+      logUser(server).then(agent =>
         agent
           .put("/api/v1/mandataires/1")
           .send({
@@ -87,7 +87,7 @@ describe("routes : mandataires", () => {
           })
       ));
     it("should not update another mandataire", () =>
-      logUser(server, { username: "adrien1", password: "aaaaaa" }).then(agent =>
+      logUser(server).then(agent =>
         agent
           .put("/api/v1/mandataires/2")
           .send({

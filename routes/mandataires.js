@@ -8,6 +8,9 @@ const { loginRequired } = require("../auth/_helpers");
 // récupère les données d'un mandataire
 router.get("/1", loginRequired, async (req, res, next) => {
   const mandataire = await queries.getMandataireByUserId(req.user.id);
+  if (!mandataire) {
+    return next(new Error(401));
+  }
   /*
   console.log(mandataire);
   if (
@@ -26,6 +29,9 @@ router.get("/1", loginRequired, async (req, res, next) => {
 // met à jour les données d'un mandataire
 router.put("/1", loginRequired, async (req, res, next) => {
   const mandataire = await queries.getMandataireByUserId(req.user.id);
+  if (!mandataire) {
+    return next(new Error(401));
+  }
   /* if (
     !mandataire ||
     parseInt(req.params.mandataireId) !== parseInt(mandataire.id)

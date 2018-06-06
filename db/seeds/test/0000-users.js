@@ -21,27 +21,27 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "kelly",
           password: hash,
-          type: "admin"
+          type: "prepose"
         })
       );
     })
     .then(() => {
       const salt = bcrypt.genSaltSync();
-      const hash = bcrypt.hashSync("aaaaaa", salt);
+      const hash = bcrypt.hashSync("service1", salt);
       return Promise.join(
         knex("users").insert({
-          username: "adrien1",
+          username: "service1",
           password: hash,
-          type: "admin"
+          type: "service"
         })
       );
     })
     .then(() => {
       const salt = bcrypt.genSaltSync();
-      const hash = bcrypt.hashSync("bbbbbb", salt);
+      const hash = bcrypt.hashSync("admin", salt);
       return Promise.join(
         knex("users").insert({
-          username: "adrien2",
+          username: "admin",
           password: hash,
           type: "admin"
         })

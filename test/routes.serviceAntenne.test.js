@@ -28,10 +28,7 @@ describe("routes : serviceAntenne", () => {
   describe("GET /api/v1/mandataires/1/antennes", () => {
     shouldBeProtected(server, "GET", "/api/v1/mandataires/1/antennes");
     it("should get list of antennes of a mandataire", () =>
-      logUser(server, {
-        username: "adrien1",
-        password: "aaaaaa"
-      }).then(agent =>
+      logUser(server).then(agent =>
         agent.get("/api/v1/mandataires/1/antennes").then(function(res) {
           res.status.should.eql(200);
           res.type.should.eql("application/json");
@@ -45,10 +42,7 @@ describe("routes : serviceAntenne", () => {
     shouldBeProtected(server, "POST", "/api/v1/mandataires/1/antennes");
 
     it("should post antennes for given mandataire", () =>
-      logUser(server, {
-        username: "adrien1",
-        password: "aaaaaa"
-      }).then(agent =>
+      logUser(server).then(agent =>
         agent
           .post("/api/v1/mandataires/1/antennes")
           .send({
@@ -78,10 +72,7 @@ describe("routes : serviceAntenne", () => {
     shouldBeProtected(server, "PUT", "/api/v1/mandataires/1/antennes/1");
 
     it("should update a mesure for a given antennes", () =>
-      logUser(server, {
-        username: "adrien1",
-        password: "aaaaaa"
-      }).then(agent =>
+      logUser(server).then(agent =>
         agent
           .put("/api/v1/mandataires/1/antennes/1")
           .send({
@@ -99,10 +90,7 @@ describe("routes : serviceAntenne", () => {
     shouldBeProtected(server, "DELETE", "/api/v1/mandataires/1/antennes/1");
 
     it("should delete antenne for given mandataire", () =>
-      logUser(server, {
-        username: "adrien1",
-        password: "aaaaaa"
-      }).then(agent =>
+      logUser(server).then(agent =>
         agent.delete("/api/v1/mandataires/1/antennes/1").then(res => {
           res.redirects.length.should.eql(0);
           res.status.should.eql(200);
