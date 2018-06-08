@@ -29,7 +29,7 @@ const schema = {
       default: ""
     },
     secretariat: { type: "boolean", title: "Secretariat", enumNames: ["Oui", "Non"] },
-    nb_secretariat: { type: "integer", title: "Secrétariat : nombre d'ETP", default: "" }
+    nb_secretariat: { type: "number", title: "Secrétariat : nombre d'ETP", default: "" }
   }
 };
 
