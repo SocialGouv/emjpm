@@ -73,7 +73,7 @@ export const MapsView = ({
                 key={manda.latitude}
                 placeholder={manda.count}
               >
-                <Tooltip> {manda.count}</Tooltip>
+
               </CircleMarker>
             ))}
           ;
