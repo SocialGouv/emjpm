@@ -12,7 +12,22 @@ npm install
 npm start
 ```
 
-## Run
+## Dev
+
+### Workflow GIT
+
+ - branche `master` : PROD
+ - branche `recette` : RECETTE
+ - branche `develop` : DEV
+
+⚠️ Les PRs doivent être faites sur la branche DEV
+
+⚠️ Les branches master, recette et dev, ne doivent recevoir **que des pulls requests**
+
+Plus de détails : https://nvie.com/posts/a-successful-git-branching-model/
+
+
+### Run
 
 Pour lancer un PostgreSQL sur le port 5434 : `docker-compose up`
 
