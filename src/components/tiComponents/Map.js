@@ -105,13 +105,14 @@ class Mapstry extends React.Component {
   mapRef = createRef();
 
   componentDidMount() {
-    apiFetch("/mesures/filters", {
+      const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
+      apiFetch("/mesures/filters", {
       method: "POST",
       body: JSON.stringify({
-        latNorthEast: this.mapRef.current.leafletElement.getBounds()._northEast.lat,
-        latSouthWest: this.mapRef.current.leafletElement.getBounds()._southWest.lat,
-        longNorthEast: this.mapRef.current.leafletElement.getBounds()._northEast.lng,
-        longSouthWest: this.mapRef.current.leafletElement.getBounds()._southWest.lng
+        latNorthEast: mapRefGetBound._northEast.lat,
+        latSouthWest: mapRefGetBound._southWest.lat,
+        longNorthEast: mapRefGetBound._northEast.lng,
+        longSouthWest: mapRefGetBound._southWest.lng
       })
     })
       .then(mesures => {
@@ -124,13 +125,14 @@ class Mapstry extends React.Component {
   }
 
   handleMoveend = mapRef => {
-    apiFetch("/mesures/filters", {
+      const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
+      apiFetch("/mesures/filters", {
       method: "POST",
       body: JSON.stringify({
-        latNorthEast: mapRef.current.leafletElement.getBounds()._northEast.lat,
-        latSouthWest: mapRef.current.leafletElement.getBounds()._southWest.lat,
-        longNorthEast: mapRef.current.leafletElement.getBounds()._northEast.lng,
-        longSouthWest: mapRef.current.leafletElement.getBounds()._southWest.lng
+        latNorthEast: mapRefGetBound._northEast.lat,
+        latSouthWest: mapRefGetBound._southWest.lat,
+        longNorthEast: mapRefGetBound._northEast.lng,
+        longSouthWest: mapRefGetBound._southWest.lng
       })
     })
       .then(mesures => {
