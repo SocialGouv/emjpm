@@ -73,7 +73,7 @@ const TableRowMandataire = ({ mandataire, onClick }) => {
       </Cell>
       <Cell>
         <b>
-          {code_postal} - {ville}{" "}
+          {code_postal} - {ville.toUpperCase()}{" "}
         </b>
       </Cell>
       <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>

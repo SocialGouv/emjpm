@@ -77,14 +77,14 @@
   display: inline-block;
 }
 .Modal {
-  position: absolute;
-  width: 900px !important;
-  height: 700px !important;
-  top: 60px;
-  left: 60px;
-  right: 60px;
-  bottom: 60px;
-  background-color: #f2f2f2;
+    position: absolute;
+    width: 900px !important;
+    height: 500px !important;
+    top: 60px;
+    left: 60px;
+    right: 60px;
+    bottom: 60px;
+    background-color: #f2f2f2;
 }
 
 .ModalInformation {

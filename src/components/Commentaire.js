@@ -101,7 +101,7 @@ class Commentaire extends React.Component {
     return (
       <div className="form-group">
         <label htmlFor="exampleFormControlTextarea1">
-          <b>Ajoutez vos notes </b>
+          <b>Ajoutez vos notes (ces dernières seront uniquement accessibles aux utilisateurs de votre TI) </b>
         </label>
         {/*<textarea className="form-control" id="exampleFormControlTextarea1" placeholder={"Ecrivez votre note"} rows="3" style={{boxShadow: "3px 3px"}}> </textarea>*/}
         <br />
