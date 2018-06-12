@@ -48,7 +48,7 @@ const ModalCloseMesure = ({ isOpen, onRequestClose, onClick, onClickSubmit, onCl
     contentLabel="mandataire"
     background="#e9ecef"
     style={customStyles}
-    className="modalMesure"
+    className="ModalMesure"
     overlayClassName="OverlayInput"
   >
     <button onClick={onClick}>X</button>
