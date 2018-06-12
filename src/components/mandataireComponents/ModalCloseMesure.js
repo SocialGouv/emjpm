@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
-import "../../static/css/custom.css";
-import ExitButton from "./ExitButton";
+import "../../../static/css/custom.css";
+import ExitButton from "../ExitButton";
 
 const customStyles = {
   content: {

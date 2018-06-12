@@ -1,7 +1,7 @@
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
-import apiFetch from "./Api";
+import apiFetch from "./communComponents/Api";
 import piwik from "../piwik";
 
 const schema = {

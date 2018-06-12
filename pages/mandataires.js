@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { Home, Map, User, UserMinus } from "react-feather";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
-import apiFetch from "../src/components/Api";
-import Footer from "../src/components/Footer";
+import apiFetch from "../src/components/communComponents/Api";
+import Footer from "../src/components/communComponents/Footer";
 import FormulaireMandataire from "../src/components/FormulaireMandataire";
-import Navigation from "../src/components/Navigation";
-import TableMesure from "../src/components/TableMesure";
+import Navigation from "../src/components/communComponents/Navigation";
+import TableMesure from "../src/components/mandataireComponents/TableMesure";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",

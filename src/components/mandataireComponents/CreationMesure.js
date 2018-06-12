@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import FormInputMesure from "./FormInputMesures";
-import getPostCodeCoordinates from "./GetPostCodeCoordinates";
+import FormInputMesure from "../FormInputMesures";
+import getPostCodeCoordinates from "../communComponents/GetPostCodeCoordinates";
 import apiFetch from "../communComponents/Api";
 
 const ModalPres = styled.div`
