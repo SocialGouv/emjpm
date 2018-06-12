@@ -53,11 +53,31 @@ function getAllMesuresByMandataires(ti_id) {
         .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id)).select('mesures.id','mesures.code_postal','mesures.latitude', 'mesures.longitude', 'mandataires.nom','mandataires.prenom','mandataires.type','mesures.date_ouverture','mesures.ville');
 }
 
-function getAllMesuresByPopUp(ti_id) {
-    return knex.from("mesures").debug().select(knex.raw('COUNT(mesures.code_postal)','mesures.code_postal','codePostalLatLngs.latitude','codePostalLatLngs.longitude'))
-        .innerJoin("codePostalLatLngs","mesures.code_postal","codePostalLatLngs.code_postal")
+function getAllMesuresByMandatairesFilter(ti_id,latnorthEast,latsouthWest,longNorthEast,longSouthWest) {
+    return knex.from("mesures")
+        .where("status" , "Mesure en cours").whereBetween('mesures.latitude', [latsouthWest, latnorthEast]).whereBetween('mesures.longitude', [longSouthWest, longNorthEast])
         .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
-        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where("mandatairetis.ti_id", parseInt(ti_id)).where({status: "Mesure en cours"}).groupByRaw('mesures.code_postal,codePostalLatLngs.longitude,codePostalLatLngs.latitude,codePostalLatLngs.code_postal');
+        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").groupByRaw('mandataires.id').where("mandatairetis.ti_id", parseInt(ti_id)).select('mandataires.id','mandataires.*');
+}
+
+function getAllByMandatairesFilter(ti_id,latnorthEast,latsouthWest,longNorthEast,longSouthWest) {
+    return knex.from("mandataires")
+        .whereBetween('mandataires.latitude', [latsouthWest, latnorthEast]).whereBetween('mandataires.longitude', [longSouthWest, longNorthEast])
+        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").groupByRaw('mandataires.id').where("mandatairetis.ti_id", parseInt(ti_id)).select('mandataires.id','mandataires.*');
+}
+
+function getCoordonneByPosteCode(userId) {
+    return knex
+        .from("codePostalLatLngs").debug()
+        .where("code_postal", userId).first();
+}
+
+
+function getAllMesuresByPopUp(ti_id) {
+    return knex.from("mesures").select(knex.raw('COUNT(mesures.code_postal)'),'mesures.code_postal','v1.latitude','v1.longitude')
+        .innerJoin("codePostalLatLngs as v1","mesures.code_postal","v1.code_postal")
+        .innerJoin("mandataires","mandataires.id","mesures.mandataire_id")
+        .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id").where({"mandatairetis.ti_id": parseInt(ti_id) ,status: "Mesure en cours"}).groupByRaw('mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal');
 }
 
 
@@ -210,8 +230,7 @@ function updateAntenne(mesureID, updates) {
         .update(updates);
 }
 function deleteAntenne(showID) {
-    return knex("serviceAntennes").debug()
-        .where("id", parseInt(showID))
+    return knex("serviceAntennes").where("id", parseInt(showID))
         .del();
 }
 
@@ -252,6 +271,9 @@ module.exports = {
   updateAntenne,
   deleteAntenne,
   CapaciteEteinteMandataire,
-    getAllMesuresEteinte
+    getAllMesuresEteinte,
+    getAllMesuresByMandatairesFilter,
+    getCoordonneByPosteCode,
+    getAllByMandatairesFilter
 
 };
