@@ -3,302 +3,301 @@
 /*}*/
 
 .red {
-    background-color: #f05659;
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    display: inline-block;
-    color: white;
-    text-align: center;
+  background-color: #f05659;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  color: white;
+  text-align: center;
 }
 .green {
-    background-color: #43b04a;
-    height: 40px;
-    width: 40px;
-    color: white;
-    border-radius: 50%;
-    display: inline-block;
-    text-align: center;
+  background-color: #43b04a;
+  height: 40px;
+  width: 40px;
+  color: white;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
 }
 .orange {
-    background-color: #eb9123;
-    height: 40px;
-    width: 40px;
-    color: white;
-    border-radius: 50%;
-    display: inline-block;
-    text-align: center;
+  background-color: #eb9123;
+  height: 40px;
+  width: 40px;
+  color: white;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
 }
 .gris {
-    background-color: grey;
-    height: 40px;
-    width: 40px;
-    color: white;
-    border-radius: 50%;
-    display: inline-block;
-    text-align: center;
+  background-color: grey;
+  height: 40px;
+  width: 40px;
+  color: white;
+  border-radius: 50%;
+  display: inline-block;
+  text-align: center;
 }
 
 .redrectangle {
-    background-color: #f05659;
-    width: 100px;
-    color: white;
-    height: 40px;
-    display: inline-block;
+  background-color: #f05659;
+  width: 100px;
+  color: white;
+  height: 40px;
+  display: inline-block;
 }
 .greenrectangle {
-    background-color: #43b04a;
-    width: 100px;
-    color: white;
-    height: 40px;
-    display: inline-block;
+  background-color: #43b04a;
+  width: 100px;
+  color: white;
+  height: 40px;
+  display: inline-block;
 }
 .orangerectangle {
-    background-color: #eb9123;
-    width: 100px;
-    color: white;
-    height: 40px;
-    display: inline-block;
+  background-color: #eb9123;
+  width: 100px;
+  color: white;
+  height: 40px;
+  display: inline-block;
 }
 
 .grisrectangle {
-    background-color: grey;
-    margin-bottom: 2px;
-    width: 300px;
-    color: white;
-    height: 33%;
-    display: inline-block;
+  background-color: grey;
+  margin-bottom: 2px;
+  width: 300px;
+  color: white;
+  height: 33%;
+  display: inline-block;
 }
 .greenrectangleModal {
-    background-color: #6ba650;
-    width: 200px;
-    color: white;
-    height: 40px;
-    display: inline-block;
+  background-color: #6ba650;
+  width: 200px;
+  color: white;
+  height: 40px;
+  display: inline-block;
 }
 .Modal {
-    position: absolute;
-    width: 900px !important;
-    height: 700px !important;
-    top: 60px;
-    left: 60px;
-    right: 60px;
-    bottom: 60px;
-    background-color: #f2f2f2;
+  position: absolute;
+  width: 900px !important;
+  height: 700px !important;
+  top: 60px;
+  left: 60px;
+  right: 60px;
+  bottom: 60px;
+  background-color: #f2f2f2;
 }
 
 .ModalInformation {
-    position: absolute;
-    width: 900px !important;
-    height: 450px !important;
-    top: 60px;
-    left: 60px;
-    right: 60px;
-    bottom: 60px;
-    background-color: #f2f2f2;
-    overflow: scroll;
-    opacity: 2;
+  position: absolute;
+  width: 900px !important;
+  height: 450px !important;
+  top: 60px;
+  left: 60px;
+  right: 60px;
+  bottom: 60px;
+  background-color: #f2f2f2;
+  overflow: scroll;
+  opacity: 2;
 }
 .ModalMesure {
-    position: absolute;
-    width: 30% !important;
-    height: 30% !important;
-    top: 40%;
-    left: 40%;
-    right: 60px;
-    bottom: 60px;
-    background-color: #f2f2f2;
-    overflow: scroll;
-    opacity: 2;
+  position: absolute;
+  width: 30% !important;
+  height: 30% !important;
+  top: 40%;
+  left: 40%;
+  right: 60px;
+  bottom: 60px;
+  background-color: #f2f2f2;
+  overflow: scroll;
+  opacity: 2;
 }
 
 .ModalMesureUpdate {
-    position: absolute;
-    width: 600px !important;
-    height: 400px !important;
-    top: 30%;
-    left: 30%;
-    right: 60px;
-    bottom: 60px;
-    background-color: #f2f2f2;
-    overflow: scroll;
-    opacity: 2;
+  position: absolute;
+  width: 600px !important;
+  height: 400px !important;
+  top: 30%;
+  left: 30%;
+  right: 60px;
+  bottom: 60px;
+  background-color: #f2f2f2;
+  overflow: scroll;
+  opacity: 2;
 }
 
 .ModalInputMesure {
-    position: absolute;
-    width: 450px !important;
-    height: 400px !important;
-    top: 60px;
-    left: 60px;
-    right: 60px;
-    bottom: 60px;
-    background-color: #f2f2f2;
-    overflow: scroll;
-    opacity: 2;
+  position: absolute;
+  width: 450px !important;
+  height: 400px !important;
+  top: 60px;
+  left: 60px;
+  right: 60px;
+  bottom: 60px;
+  background-color: #f2f2f2;
+  overflow: scroll;
+  opacity: 2;
 }
 
 .Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: grey;
-    z-index: 9000;
-    opacity: 0.96;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: grey;
+  z-index: 9000;
+  opacity: 0.96;
 }
 .OverlayInput {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: grey;
-    opacity: 0.96;
-    z-index: 9000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: grey;
+  opacity: 0.96;
+  z-index: 9000;
 }
 
 /*.leaflet-container {*/
-    /*height: 400px !important;*/
+/*height: 400px !important;*/
 /*}*/
 
 .leaflet-marker-icon {
-    background-image: url("../images/icone-lieu.jpg");
-    background-repeat: no-repeat;
-    background-position: center center;
+  background-image: url("../images/icone-lieu.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 .react-tabs__tab--selected {
-    border-color: white !important;
-    color: black !important;
+  border-color: white !important;
+  color: black !important;
 }
 .react-tabs__tab {
-    color: blue !important;
+  color: blue !important;
 }
 #root__title {
-    text-align: left;
-    padding-left: 10px;
-    font-size: 1.3em;
+  text-align: left;
+  padding-left: 10px;
+  font-size: 1.3em;
 }
 
 .mesure_button {
 }
 
 #root_co_comment {
-    height: 70px;
+  height: 70px;
 }
 
 /*#root_nom {*/
-    /*width: 150px;*/
-    /*display: inline-block;*/
+/*width: 150px;*/
+/*display: inline-block;*/
 /*}*/
 /*#root_prenom {*/
-    /*width: 150px;*/
-    /*display: inline-block;*/
+/*width: 150px;*/
+/*display: inline-block;*/
 /*}*/
 /*#root_adresse {*/
-    /*width: 300px;*/
-    /*display: inline-block;*/
+/*width: 300px;*/
+/*display: inline-block;*/
 /*}*/
 /*#root_email {*/
-    /*width: 300px;*/
-    /*display: inline-block;*/
+/*width: 300px;*/
+/*display: inline-block;*/
 /*}*/
 
 /*#root_commune {*/
-    /*width: 123px;*/
-    /*display: inline-block;*/
+/*width: 123px;*/
+/*display: inline-block;*/
 /*}*/
 /*#root_etablissement {*/
-    /*width: 123px;*/
-    /*display: inline-block;*/
+/*width: 123px;*/
+/*display: inline-block;*/
 /*}*/
 /*#root_codePostal {*/
-    /*width: 195px;*/
-    /*display: inline-block;*/
+/*width: 195px;*/
+/*display: inline-block;*/
 /*}*/
 /*#root_annee {*/
-    /*width: 195px;*/
-    /*display: inline-block;*/
+/*width: 195px;*/
+/*display: inline-block;*/
 /*}*/
 /*#root_residence {*/
-    /*width: 195px;*/
-    /*display: inline-block;*/
+/*width: 195px;*/
+/*display: inline-block;*/
 /*}*/
 #root_username {
-    width: 195px;
-    padding-left: 3px;
-    margin-left: 0px;
+  width: 195px;
+  padding-left: 3px;
+  margin-left: 0px;
 }
 #root_password {
-    width: 195px;
-    margin-left: 0px;
-    padding-left: 3px;
+  width: 195px;
+  margin-left: 0px;
+  padding-left: 3px;
 }
 /*#root_civilite {*/
-    /*width: 123px;*/
+/*width: 123px;*/
 /*}*/
 .react-tabs__tab {
-    text-align: center;
-    height: 60px;
-    color: #cad4de !important;
-    background-color: #ebeff2 !important;
-    border-radius: 0px !important;
-    border: 0px !important;
+  text-align: center;
+  height: 60px;
+  color: #cad4de !important;
+  background-color: #ebeff2 !important;
+  border-radius: 0px !important;
+  border: 0px !important;
 }
 .react-tabs__tab-list {
-    margin-bottom: 0px !important;
-    background-color: #cad4de !important;
-    border: 0px !important;
+  margin-bottom: 0px !important;
+  background-color: #cad4de !important;
+  border: 0px !important;
 }
 .react-tabs__tab--selected {
-    color: black !important;
-    background-color: #ffffff !important;
+  color: black !important;
+  background-color: #ffffff !important;
 }
 
 .form-group {
-    padding-left: 10px;
-    text-align: left;
-    display: inline-block;
-    margin-right: 10px;
+  padding-left: 10px;
+  text-align: left;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 .form__commentaire .form-group {
-    margin-left: 0;
-    padding-left: 0;
+  margin-left: 0;
+  padding-left: 0;
 }
 
 .form__commentaire textarea {
-    width: 400px;
+  width: 400px;
 }
 
-.input_mesure_ouverture{
-    width: 200px;
-    display: inline-block;
+.input_mesure_ouverture {
+  width: 200px;
+  display: inline-block;
 }
 
-.input_mesure_type{
-    width: 310px;
-    display: inline-block;
+.input_mesure_type {
+  width: 310px;
+  display: inline-block;
 }
 
-.input_mesure_residence{
-    width: 230px;
-    display: inline-block;
+.input_mesure_residence {
+  width: 230px;
+  display: inline-block;
 }
 
-.input_mesure_commune{
-    width: 135px;
-    display: inline-block;
+.input_mesure_commune {
+  width: 135px;
+  display: inline-block;
 }
 
-.input_mesure_civilite{
-    width: 230px;
-    display: inline-block;
+.input_mesure_civilite {
+  width: 230px;
+  display: inline-block;
 }
 
-.input_mesure_annee{
-    width: 280px;
-    display: inline-block;
+.input_mesure_annee {
+  width: 280px;
+  display: inline-block;
 }
-
