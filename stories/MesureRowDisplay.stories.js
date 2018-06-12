@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
-import { default as TableRowMesure, TableRowMesureView } from "../src/components/TableRowMesure";
+import { default as TableRowMesure, TableRowMesureView } from "../src/components/mandataireComponents/TableRowMesure";
 
 storiesOf("MesuresCreation", module)
   .add("ShowMesure", () => (

@@ -1,5 +1,5 @@
 import FaSearch from "react-icons/lib/fa/search";
-import "../../static/css/custom.css";
+import "../../../static/css/custom.css";
 
 // todo: improve tel parsing
 const cleanTels = tel => {
