@@ -101,8 +101,8 @@ class Mapstry extends React.Component {
   mapRef = createRef();
 
   componentDidMount() {
-      const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
-      apiFetch("/mandataires/filters", {
+    const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
+    apiFetch("/mandataires/filters", {
       method: "POST",
       body: JSON.stringify({
         latNorthEast: mapRefGetBound._northEast.lat,
@@ -112,8 +112,9 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        this.setState({ modalIsOpen: false });
-        this.props.updateMandataireFilters(mesures);
+        this.setState({ modalIsOpen: false }, () => {
+          this.props.updateMandataireFilters(mesures);
+        });
       })
       .catch(e => {
         console.log(e);
@@ -121,8 +122,8 @@ class Mapstry extends React.Component {
   }
 
   handleMoveend = mapRef => {
-      const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
-      apiFetch("/mandataires/filters", {
+    const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
+    apiFetch("/mandataires/filters", {
       method: "POST",
       body: JSON.stringify({
         latNorthEast: mapRefGetBound._northEast.lat,
@@ -132,8 +133,9 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        this.setState({ modalIsOpen: false });
-        this.props.updateMandataireFilters(mesures);
+        this.setState({ modalIsOpen: false }, () => {
+          this.props.updateMandataireFilters(mesures);
+        });
       })
       .catch(e => {
         console.log(e);

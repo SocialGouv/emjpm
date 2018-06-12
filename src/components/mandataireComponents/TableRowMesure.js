@@ -1,17 +1,17 @@
 import FaSearch from "react-icons/lib/fa/search";
-import "../../../static/css/custom.css";
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
+import styled from "styled-components";
+import Form from "react-jsonschema-form";
 import "bootstrap/dist/css/bootstrap.css";
+import "../../../static/css/custom.css";
 import "../../../static/css/hero.css";
 import "../../../static/css/panel.css";
 import "../../../static/css/footer.css";
 import "../../../node_modules/react-tabs/style/react-tabs.css";
-import Form from "react-jsonschema-form";
 import apiFetch from "../communComponents/Api";
 import ModalCloseMesure from "./ModalCloseMesure";
 import Cell from "../communComponents/Cell";
-import styled from "styled-components";
 import ModalMesure from "./ModalMesure";
 import piwik from "../../piwik";
 
