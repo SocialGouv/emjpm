@@ -5,7 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import apiFetch from "../src/components/Api";
 import Footer from "../src/components/Footer";
-import FormulaireMandataire from "../src/components/formulaire_mandataire";
+import FormulaireMandataire from "../src/components/FormulaireMandataire";
 import Navigation from "../src/components/Navigation";
 import TableMesure from "../src/components/TableMesure";
 

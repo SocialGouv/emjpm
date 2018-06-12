@@ -1,10 +1,8 @@
-import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
-import apiFetch from "../communComponents/Api";
-import RowModal from "../communComponents/RowModal";
-import piwik from "../../piwik";
+import apiFetch from "./Api";
+import piwik from "../piwik";
 
 const schema = {
   title: "Modifier vos informations",
@@ -83,9 +81,7 @@ const uiSchema = {
 const Container = ({ children }) => <div className="container">{children}</div>;
 const Row = ({ children }) => <div className="row">{children}</div>;
 const Col6 = ({ children }) => <div className="col-6">{children}</div>;
-const Stylediv = styled.div`
-  text-align: left;
-`;
+const Stylediv = styled.div`text-align: left;`;
 
 const FormulaireMandataireView = ({
   onClick,
