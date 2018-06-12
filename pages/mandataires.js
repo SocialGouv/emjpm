@@ -1,12 +1,13 @@
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import styled from "styled-components";
-import Navigation from "../src/components/communComponents/Navigation";
-import TableMesure from "../src/components/mandataireComponents/TableMesure";
-import Footer from "../src/components/communComponents/Footer";
-import FormulaireMandataire from "../src/components/mandataireComponents/formulaire_mandataire";
-import apiFetch from "../src/components/communComponents/Api";
 import dynamic from "next/dynamic";
+import styled from "styled-components";
 import { Home, Map, User, UserMinus } from "react-feather";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
+import apiFetch from "../src/components/Api";
+import Footer from "../src/components/Footer";
+import FormulaireMandataire from "../src/components/formulaire_mandataire";
+import Navigation from "../src/components/Navigation";
+import TableMesure from "../src/components/TableMesure";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
@@ -17,6 +18,7 @@ const tabStyle = {
   width: "25%",
   display: "inline-flex"
 };
+
 const imageStyle = {
   lineHeight: "50px",
   width: "20px",
@@ -60,6 +62,7 @@ const TabsShowMandataire = styled.div`
   background-color: #ebeff2;
   height: 60px;
 `;
+
 const TabsPanelMandataire = styled.div`
   background-color: white;
   min-height: 70vh;
@@ -87,10 +90,13 @@ const Title = styled.div`
   margin: 10px;
 `;
 
-const OpenStreeMap = dynamic(import("../src/components/mandataireComponents/MapsPartieMandataire"), {
-  ssr: false,
-  loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
-});
+const OpenStreeMap = dynamic(
+  import("../src/components/mandataireComponents/MapsPartieMandataire"),
+  {
+    ssr: false,
+    loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
+  }
+);
 
 const getColorFromDisponibilite = dispo => {
   if (dispo <= 0) {
