@@ -141,7 +141,10 @@ export const FicheMandataire = ({ style, mandataire }) => (
         <div>{mandataire.telephone}</div>
         <div>{mandataire.email}</div>
         <br />
-        {<RowModal label="Tribunal Instance" value={mandataire.ti} />}
+        <br />
+          {<RowModal label="Secrétariat" value={mandataire.secretariat === false ? "Pas de secrétariat": mandataire.secretariat } />}
+          {<RowModal value={mandataire.nb_secretariat} />}
+
       </div>
       <div className="col-6">
         <div
@@ -247,7 +250,7 @@ class Ti extends React.Component {
         />
         <div className="container">
           <Title>
-            {mandatairesCount} Professionel{(mandatairesCount > 1 && "s") || null} référencé{(mandatairesCount > 1 && "s") || null}{" "}
+            {mandatairesCount} Professionnel{(mandatairesCount > 1 && "s") || null}
           </Title>
           <TableMandataire rows={filteredMandataires} openModal={this.openModal} />
           <ModalMandataire isOpen={this.state.modalIsOpen} closeModal={this.closeModal}>

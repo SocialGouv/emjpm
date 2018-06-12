@@ -83,7 +83,7 @@ const TableRowMesure = ({ mesure }) => {
       </td>
       <Cell>
         <b>
-          {codepostal} - {ville}{" "}
+          {codepostal} - {ville.toUpperCase()}{" "}
         </b>
       </Cell>
 
