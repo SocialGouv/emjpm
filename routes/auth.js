@@ -5,8 +5,8 @@ const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
 
 const redirs = {
-  individuel: "/mandataires_index",
-  prepose: "/mandataires_index",
+  individuel: "/mandataires",
+  prepose: "/mandataires",
   service: "/services",
   ti: "/tis",
   admin: "/admin",

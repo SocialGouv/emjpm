@@ -28,7 +28,7 @@ describe("routes : auth", () => {
   });
 
   describe("Login redirection", () => {
-    it("should redirect individuel to /mandataires_index", () =>
+    it("should redirect individuel to /mandataires", () =>
       chai
         .request(server)
         .post("/auth/login")
@@ -37,9 +37,9 @@ describe("routes : auth", () => {
           password: "johnson123"
         })
         .then(res => {
-          res.body.url.should.eql("/mandataires_index");
+          res.body.url.should.eql("/mandataires");
         }));
-    it("should redirect prepose to /mandataires_index", () =>
+    it("should redirect prepose to /mandataires", () =>
       chai
         .request(server)
         .post("/auth/login")
@@ -48,7 +48,7 @@ describe("routes : auth", () => {
           password: "bryant123"
         })
         .then(res => {
-          res.body.url.should.eql("/mandataires_index");
+          res.body.url.should.eql("/mandataires");
         }));
     it("should redirect ti to /tis", () =>
       chai
@@ -99,7 +99,7 @@ describe("routes : auth", () => {
           res.redirects.length.should.eql(0);
           res.type.should.eql("application/json");
           res.body.status.should.eql("success");
-          res.body.url.should.eql("/mandataires_index");
+          res.body.url.should.eql("/mandataires");
         }));
     it("should not login an inactive user", () =>
       chai
