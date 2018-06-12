@@ -1,8 +1,8 @@
 import Form from "react-jsonschema-form";
-import apiFetch from "./Api";
+import apiFetch from "../communComponents/Api";
 import styled from "styled-components";
-import FormInputMesure from "./FormInputMesures";
-import getPostCodeCoordinates from "./GetPostCodeCoordinates";
+import FormInputMesure from "../FormInputMesures";
+import getPostCodeCoordinates from "../communComponents/GetPostCodeCoordinates";
 
 const CancelButton = styled.button`
   cursor: pointer;

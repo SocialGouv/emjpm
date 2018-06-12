@@ -1,10 +1,10 @@
 import fetch from "isomorphic-fetch";
-import Navigation from "../src/components/Navigation";
-import Footer from "../src/components/Footer";
+import Navigation from "../src/components/communComponents/Navigation";
+import Footer from "../src/components/communComponents/Footer";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import FormulaireService from "../src/components/formulaireService";
-import apiFetch from "../src/components/Api";
+import apiFetch from "../src/components/communComponents/Api";
 import Router from "next/router";
 
 const logo = require("!!url-loader?limit=0!../static/images/logo_emjpm.png");

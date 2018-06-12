@@ -1,8 +1,8 @@
-import TableRowMandataire from "./TableRowMandataire";
+import TableRowMesure from "../mandataireComponents/TableRowMesure";
 
-const TableMandataire = ({ rows, openModal }) => {
+const TableMesure = ({ rows, openModal }) => {
   return (
-    <div className="col-12" style={{ padding: "0px" }}>
+    <div className="col-lg-12" style={{ padding: "0px" }}>
       <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
         <thead>
           {/*<style jsx>{`*/}
@@ -18,38 +18,47 @@ const TableMandataire = ({ rows, openModal }) => {
               style={{ width: "40%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
               colSpan="2"
             >
-              Identité{" "}
+              Date d'ouverture
             </td>
 
             <td
               style={{ width: "30%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
             >
-              Code Postal et Ville
+              Résidence du majeur
+            </td>
+            <td
+              style={{ width: "30%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
+            >
+              Type de mesure
             </td>
             <td
               style={{
-                textAlign: "center",
+                textAlign: "left",
                 verticalAlign: "middle",
                 width: 120,
                 color: "#696969",
                 borderTopWidth: "0px"
               }}
             >
-              Mesures en cours
+              Genre
+            </td>
+            <td
+              style={{ width: "30%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
+            >
+              Age
+            </td>
+            <td
+              style={{ width: "30%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
+            >
+              Statut
             </td>
           </tr>
         </thead>
         <tbody>
-          {rows.map(mandataire => (
-            <TableRowMandataire
-              key={mandataire.telephone}
-              mandataire={mandataire}
-              onClick={() => openModal(mandataire)}
-            />
-          ))}
+          {rows.map(mesure => <TableRowMesure key={mesure.properties.tel} mesure={mesure} />)}
         </tbody>
       </table>
     </div>
   );
 };
-export default TableMandataire;
+export default TableMesure;
