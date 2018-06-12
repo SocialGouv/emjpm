@@ -293,14 +293,16 @@ function getAllAntennes(mandataireId) {
 function addAntenne(mandataireId) {
   return knex("serviceAntennes").insert(mandataireId);
 }
+
 function updateAntenne(mesureID, updates) {
   return knex("serviceAntennes")
     .where("id", parseInt(mesureID))
     .update(updates);
 }
-function deleteAntenne(showID) {
+
+function deleteAntenne(where) {
   return knex("serviceAntennes")
-    .where("id", parseInt(showID))
+    .where(where)
     .del();
 }
 

@@ -98,5 +98,15 @@ describe("routes : serviceAntenne", () => {
           res.body.length.should.eql(0);
         })
       ));
+
+    it("should NOT delete antenne for another mandataire", () =>
+      logUser(server).then(agent =>
+        agent.delete("/api/v1/mandataires/1/antennes/2").then(res => {
+          res.redirects.length.should.eql(0);
+          res.status.should.eql(200);
+          res.type.should.eql("application/json");
+          res.body.length.should.eql(1);
+        })
+      ));
   });
 });

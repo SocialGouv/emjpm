@@ -63,11 +63,14 @@ router.delete(
   "/:mandataireId/antennes/:antenneId",
   loginRequired,
   async (req, res, next) => {
-    const ti = await queries.getMandataireByUserId(req.user.id);
+    const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
-      .deleteAntenne(req.params.antenneId)
+      .deleteAntenne({
+        id: req.params.antenneId,
+        service_id: mandataire.id
+      })
       .then(function(commentaireID) {
-        return queries.getAllAntennes(ti.id);
+        return queries.getAllAntennes(mandataire.id);
       })
       .then(function(commentaires) {
         res.status(200).json(commentaires);
