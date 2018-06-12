@@ -27,8 +27,6 @@
 
 import { Map, Marker, Popup, TileLayer, PropTypes as MapPropTypes } from "react-leaflet";
 
-
-
 class MapMesures extends React.Component {
   state = {
     zoom: 13
