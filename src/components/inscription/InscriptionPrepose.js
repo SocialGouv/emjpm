@@ -7,103 +7,103 @@ import SearchButton from "../SearchButton";
 import piwik from "../../piwik";
 
 function validate(formData, errors) {
-	if (formData.pass1 !== formData.pass2) {
-		errors.pass2.addError("Mot de passe incorrect");
-	}
-	return errors;
+  if (formData.pass1 !== formData.pass2) {
+    errors.pass2.addError("Mot de passe incorrect");
+  }
+  return errors;
 }
 const schema = {
-	type: "object",
-	required: [
-		"Pusername",
-		"Ppass1",
-		"Ppass2",
-		"Pnom",
-		"Pprenom",
-		"Ptelephone",
-		"Pemail",
-		"Padresse",
-		"Pville",
-		"Pcode_postal",
-		"Pgenre"
-	],
-	properties: {
-		Pusername: {
-			type: "string",
-			title: "Identifiant (vous servira pour vous connecter sur E-MJPM)",
-			default: ""
-		},
-		Ppass1: { type: "string", title: "Mot de passe", minLength: 10 },
-		Ppass2: { type: "string", title: "Répéter mot de passe", minLength: 10 },
-		Pnom: { type: "string", title: "Nom", default: "" },
-		Pprenom: { type: "string", title: "Prénom", default: "" },
-		Ptelephone: { type: "string", title: "Téléphone", default: "" },
-		Ptelephone_portable: { type: "string", title: "Téléphone Portable", default: "" },
-		Pemail: { type: "string", title: "Adresse email", default: "" },
-		Padresse: { type: "string", title: "Rue", default: "" },
-		Pville: { type: "string", title: "Ville", default: "" },
-		Pcode_postal: { type: "string", title: "Code Postal", default: "" },
-		Petablissement: { type: "string", title: "Nom d'Etablissements", default: "" }
-	}
+  type: "object",
+  required: [
+    "username",
+    "pass1",
+    "pass2",
+    "nom",
+    "prenom",
+    "telephone",
+    "email",
+    "adresse",
+    "ville",
+    "code_postal",
+    "genre"
+  ],
+  properties: {
+    username: {
+      type: "string",
+      title: "Identifiant (vous servira pour vous connecter sur E-MJPM)",
+      default: ""
+    },
+    pass1: { type: "string", title: "Mot de passe", minLength: 10 },
+    pass2: { type: "string", title: "Répéter mot de passe", minLength: 10 },
+    nom: { type: "string", title: "Nom", default: "" },
+    prenom: { type: "string", title: "Prénom", default: "" },
+    telephone: { type: "string", title: "Téléphone", default: "" },
+    telephone_portable: { type: "string", title: "Téléphone Portable", default: "" },
+    email: { type: "string", title: "Adresse email", default: "" },
+    adresse: { type: "string", title: "Rue", default: "" },
+    ville: { type: "string", title: "Ville", default: "" },
+    code_postal: { type: "string", title: "Code Postal", default: "" },
+    etablissement: { type: "string", title: "Nom d'Etablissements", default: "" }
+  }
 };
 
 const uiSchema = {
-	Ppass1: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "10 caratères minimum",
-		"ui:widget": "password"
-	},
-	Ppass2: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "10 caratères minimum",
-		"ui:widget": "password"
-	},
-	Pusername: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Nom d'utilisateur"
-	},
-	Pnom: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Nom"
-	},
-	Pprenom: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Prénom"
-	},
-	Ptelephone: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Téléphone"
-	},
-	Ptelephone_portable: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Téléphone Portable"
-	},
-	Pemail: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Adresse email"
-	},
-	Padresse: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Rue"
-	},
-	Pcode_postal: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Code Postal"
-	},
-	Pville: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Commune"
-	},
-	Petablissement: {
-		classNames: "input_form_inscription",
-		"ui:placeholder": "Nom d'Etablissements"
-	}
+  pass1: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "10 caractères minimum",
+    "ui:widget": "password"
+  },
+  pass2: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "10 caractères minimum",
+    "ui:widget": "password"
+  },
+  username: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Nom d'utilisateur"
+  },
+  nom: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Nom"
+  },
+  prenom: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Prénom"
+  },
+  telephone: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Téléphone"
+  },
+  telephone_portable: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Téléphone Portable"
+  },
+  email: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Adresse email"
+  },
+  adresse: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Rue"
+  },
+  code_postal: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Code Postal"
+  },
+  ville: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Commune"
+  },
+  etablissement: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Nom d'Etablissements"
+  }
 };
 
 const formData = {};
 
 class InscriptionPrepose extends React.Component {
-	/*onSubmit = ({ formData }) => {
+  /*onSubmit = ({ formData }) => {
 		
 
 		 apiFetch(`/mandataires/1`, {
@@ -128,32 +128,30 @@ class InscriptionPrepose extends React.Component {
     });
 	};*/
 
-	render() {
-		return (
-			<div>
-				<br />
-				<h2 style={{ margin: 20 }}>
-					Veuillez renseigner ci-dessous vos informations professionelles:
-				</h2>
-				<br />
-				<b>
-					<Form
-						schema={schema}
-						formData={formData}
-						uiSchema={uiSchema}
-						validate={validate}
-						showErrorList={false}
-					>
-						<div
-							style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}
-						>
-							<SearchButton type="submit">Enregistrer</SearchButton>
-						</div>
-					</Form>
-				</b>
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        <br />
+        <h2 style={{ margin: 20 }}>
+          Veuillez renseigner ci-dessous vos informations professionelles:
+        </h2>
+        <br />
+        <b>
+          <Form
+            schema={schema}
+            formData={formData}
+            uiSchema={uiSchema}
+            validate={validate}
+            showErrorList={false}
+          >
+            <div style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}>
+              <SearchButton type="submit">Enregistrer</SearchButton>
+            </div>
+          </Form>
+        </b>
+      </div>
+    );
+  }
 }
 
 export default InscriptionPrepose;

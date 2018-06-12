@@ -1,9 +1,10 @@
+import { Home, Map, User, UserMinus } from "react-feather";
 import Navigation from "../src/components/Navigation";
 import Footer from "../src/components/Footer";
-import { Home, Map, User, UserMinus } from "react-feather";
 import InscriptionIndividuel from "../src/components/inscription/InscriptionIndividuel";
 import InscriptionPrepose from "../src/components/inscription/InscriptionPrepose";
 import InscriptionService from "../src/components/inscription/InscriptionService";
+import InscriptionChoixTiRegion from "../src/components/inscription/InscriptionChoixTiRegion";
 
 class InscriptionForm extends React.Component {
 	state = {
@@ -32,6 +33,8 @@ class InscriptionForm extends React.Component {
 				<div className="col-12 offset-sm-2 col-sm-8 offset-md-2 col-md-8">
 					<h1 style={{ margin: 20 }}>Inscription</h1>
 					<div style={{ backgroundColor: "white", padding: 5 }}>
+						<InscriptionChoixTiRegion />
+
 						<form>
 							<div>
 								<h2 style={{ margin: 15 }}>Vous êtes un mandataire :</h2>
