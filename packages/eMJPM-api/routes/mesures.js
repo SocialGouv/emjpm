@@ -18,20 +18,26 @@ router.get("/", async (req, res, next) => {
 });
 
 
-router.get("/popup", async (req, res, next) => {
-    const ti = await queries.getTiByUserId(req.user.id);
-    console.log("hello")
-    console.log("ti",ti.id)
-    console.log( queries
-        .getAllMesuresByPopUp(ti.id)
-        .then(function(mesures) {
 
+router.post("/filters",loginRequired, async (req, res, next) => {
+    const ti = await queries.getTiByUserId(req.user.id);
+    queries
+        .getAllMesuresByMandatairesFilter(ti.id,req.body.latNorthEast,req.body.latSouthWest,req.body.longNorthEast,req.body.longSouthWest)
+        .then(function(mesures) {
             res.status(200).json(mesures);
         })
         .catch(function(error) {
             throw error;
             next(error);
-        }))
+        });
+});
+
+
+
+router.get("/popup",loginRequired, async (req, res, next) => {
+    const ti = await queries.getTiByUserId(req.user.id);
+    console.log("hello")
+    console.log("ti",ti.id)
     queries
         .getAllMesuresByPopUp(ti.id)
         .then(function(mesures) {
@@ -39,6 +45,7 @@ router.get("/popup", async (req, res, next) => {
             res.status(200).json(mesures);
         })
         .catch(function(error) {
+            console.log(error)
             throw error;
             next(error);
         });
