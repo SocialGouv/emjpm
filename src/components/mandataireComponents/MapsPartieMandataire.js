@@ -4,13 +4,6 @@ import apiFetch from "../communComponents/Api";
 import TableMandataire from "../tiComponents/TableMandataire";
 import styled from "styled-components";
 import FilterMesuresMap from "../tiComponents/FilterMesuresMap";
-var Hellomap = (center, zoom, style) => {
-    Map.map("map", {
-        center,
-        zoom,
-        style
-    });
-};
 
 const Title = styled.div`
   text-align: left;
