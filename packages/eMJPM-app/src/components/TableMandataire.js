@@ -18,7 +18,7 @@ const TableMandataire = ({ rows, openModal }) => {
               style={{ width: "40%", textAlign: "left", color: "#696969", borderTopWidth: "0px" }}
               colSpan="2"
             >
-              Nom ou établissement
+              Identité{" "}
             </td>
 
             <td
