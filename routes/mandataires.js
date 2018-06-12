@@ -35,7 +35,7 @@ router.get("/:mandataireId", async (req, res, next) => {
 });
 
 
-router.post("/filters", async (req, res, next) => {
+router.post("/filters",loginRequired, async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
     queries
         .getAllByMandatairesFilter(ti.id,req.body.latNorthEast,req.body.latSouthWest,req.body.longNorthEast,req.body.longSouthWest)

@@ -19,7 +19,7 @@ router.get("/", async (req, res, next) => {
 
 
 
-router.post("/filters", async (req, res, next) => {
+router.post("/filters",loginRequired, async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
     queries
         .getAllMesuresByMandatairesFilter(ti.id,req.body.latNorthEast,req.body.latSouthWest,req.body.longNorthEast,req.body.longSouthWest)
@@ -34,7 +34,7 @@ router.post("/filters", async (req, res, next) => {
 
 
 
-router.get("/popup", async (req, res, next) => {
+router.get("/popup",loginRequired, async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
     console.log("hello")
     console.log("ti",ti.id)
