@@ -1,6 +1,6 @@
 import TableRowMesure from "./TableRowMesure";
-import MandatairesIndex from "../../pages/mandataires_index";
-import MesureInput from "./MesureInput";
+import MandatairesIndex from "../../../pages/mandataires_index";
+import MesureInput from "../MesureInput";
 import styled from "styled-components";
 import CreationMesure from "./CreationMesure";
 
