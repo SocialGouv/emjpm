@@ -1,5 +1,7 @@
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
+import "../../static/css/custom.css";
+import ExitButton from "./ExitButton";
 
 const customStyles = {
   content: {
@@ -48,10 +50,9 @@ const ModalCloseMesure = ({ isOpen, onRequestClose, onClick, onClickSubmit, onCl
     contentLabel="mandataire"
     background="#e9ecef"
     style={customStyles}
-    className="ModalMesure"
-    overlayClassName="OverlayInput"
+    overlayClassName="Overlay"
   >
-    <button onClick={onClick}>X</button>
+    <ExitButton onClick={onClick}>X</ExitButton>
     <div style={{ textAlign: "center" }}>
       <b>
         Eteindre la mesure? <br />
