@@ -134,10 +134,12 @@ const MandataireIndexView = ({
         </ContainerMandataire>
         <TabsShowMandataire className="container">
           <Tab style={tabStyle}>
-            <PillDispo
-              dispo={currentMandataire.disponibilite}
-              dispo_max={currentMandataire.dispo_max}
-            />
+            {currentMandataire.dispo_max && (
+              <PillDispo
+                dispo={currentMandataire.disponibilite}
+                dispo_max={currentMandataire.dispo_max}
+              />
+            )}
             <b>Mesures en cours</b>
           </Tab>
           <Tab style={tabStyle}>
