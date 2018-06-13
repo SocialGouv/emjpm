@@ -11,7 +11,6 @@ class RegionModule extends React.Component {
 							type="checkBox"
 							name="region_selector"
 							value={this.props.region.id_region}
-							onChange={}
 						/>
 						{this.props.region.nom_region}
 					</label>
