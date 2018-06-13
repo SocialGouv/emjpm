@@ -3,12 +3,11 @@ import Router from "next/router";
 
 const logo = require("!!url-loader?limit=0!../../static/images/logo_emjpm.png");
 
-
 const Navigation = () => (
-  <div className="container" style={{ marginTop: "5px", marginBottom: "5px"}}>
-      <div style={{textAlign: "center" }}>
+  <div className="container" style={{ marginTop: "5px", marginBottom: "5px" }}>
+    <div style={{ textAlign: "center" }}>
       <img src={logo} style={{ width: "30%" }} alt="Accueil de eMJPM.beta.gouv.fr" />
-      </div>
+    </div>
   </div>
 );
 

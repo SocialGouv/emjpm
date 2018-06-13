@@ -6,8 +6,6 @@ const TdCell = styled.td`
   vertical-align: middle !important;
 `;
 
-const Cell = ({children}) => (
-  <TdCell className="pagination-centered">{children}</TdCell>
-);
+const Cell = ({ children }) => <TdCell className="pagination-centered">{children}</TdCell>;
 
 export default Cell;
