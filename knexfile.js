@@ -7,8 +7,7 @@ module.exports = {
       user: "postgres",
       password: "test",
       port: "5434",
-        database: "backendlebontuteur_db_1_test"
-      // database: "emjpm_test"
+      database: "emjpm_test"
     },
     migrations: {
       directory: __dirname + "/db/migrations"

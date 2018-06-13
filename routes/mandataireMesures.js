@@ -2,65 +2,65 @@ const express = require("express");
 
 const router = express.Router();
 const queries = require("../db/queries");
-const {loginRequired} = require("../auth/_helpers");
+const { loginRequired, typeRequired } = require("../auth/_helpers");
 
-
-router.put("/:mandataireId/mesures/:mesureId", async (req, res, next) => {
-    const ti = await queries.getMandataireByUserId(req.user.id);
+router.put(
+  "/:mandataireId/mesures/:mesureId",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
-        .updateMesure(req.params.mesureId, req.body)
-        .then(function() {
-            return queries.getAllMesures(ti.id);
-        })
-        .then(function(mesures) {
-            res.status(200).json(mesures);
-        })
-        .catch(function(error) {
-            next(error);
-        });
-});
+      .updateMesure(
+        {
+          id: req.params.mesureId,
+          // ⚠️ ensure to override a mandataire only
+          mandataire_id: mandataire.id
+        },
+        req.body
+      )
+      .then(() => queries.getAllMesures(mandataire.id))
+      .then(mesures => res.status(200).json(mesures))
+      .catch(error => next(error));
+  }
+);
 
-router.post("/:mandataireId/mesures", async (req, res, next) => {
-    // secu : ensure TI can write on this mandataire + add related test
-    const ti = await queries.getMandataireByUserId(req.user.id);
+router.post(
+  "/:mandataireId/mesures",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
-        .addMesure({
-            ...req.body,
-            mandataire_id: ti.id
-        })
-        .then(function() {
-            return queries.getAllMesures(ti.id);
-        })
-        .then(function(mesures) {
-            res.status(200).json(mesures);
-        })
-        .catch(function(error) {
-            next(error);
-        });
-});
+      .addMesure({
+        ...req.body,
+        mandataire_id: mandataire.id
+      })
+      .then(() => queries.getAllMesures(mandataire.id))
+      .then(mesures => res.status(200).json(mesures))
+      .catch(error => next(error));
+  }
+);
 
-router.get("/:mandataireId/mesures", async (req, res, next) => {
-    const ti = await queries.getMandataireByUserId(req.user.id);
+router.get(
+  "/:mandataireId/mesures",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
-        .getAllMesures(ti.id)
-        .then(function(mesures) {
-            res.status(200).json(mesures);
-        })
-        .catch(function(error) {
-            next(error);
-        });
-});
+      .getAllMesures(mandataire.id)
+      .then(mesures => res.status(200).json(mesures))
+      .catch(error => next(error));
+  }
+);
 
-
-router.get("/:mandataireId/mesures/Eteinte", async (req, res, next) => {
-    const ti = await queries.getMandataireByUserId(req.user.id);
+router.get(
+  "/:mandataireId/mesures/Eteinte",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
-        .getAllMesuresEteinte(ti.id)
-        .then(function(mesures) {
-            res.status(200).json(mesures);
-        })
-        .catch(function(error) {
-            next(error);
-        });
-});
+      .getAllMesuresEteinte(mandataire.id)
+      .then(mesures => res.status(200).json(mesures))
+      .catch(error => next(error));
+  }
+);
 module.exports = router;
