@@ -14,7 +14,8 @@ const CheckBox = ({ value, label, updateFilters }) => (
       onClick={e =>
         updateFilters({
           searchTypeIn: (e.target.checked && value) || ""
-        })}
+        })
+      }
       type="checkbox"
       value={value}
       className="form-check-input"

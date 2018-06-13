@@ -13,7 +13,9 @@ const doLogout = () =>
 
 const Navigation = ({ logout }) => (
   <div style={{ background: "white", padding: "15px 0", textAlign: "center" }}>
-    <img src={logo} style={{ width: "60%", maxWidth: 400 }} alt="Accueil de eMJPM.beta.gouv.fr" />
+    <a href="https://emjpm.beta.gouv.fr/">
+      <img src={logo} style={{ width: "60%", maxWidth: 400 }} alt="Accueil de eMJPM.beta.gouv.fr" />
+    </a>
     {logout && (
       <div
         onClick={doLogout}
