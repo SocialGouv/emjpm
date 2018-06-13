@@ -22,8 +22,8 @@ const formData = {};
 const edit = require("../../../static/images/edit.svg");
 
 const TdStyle = styled.td`
-  font-size: 0.8em;
-  color: rgb(204, 204, 204);
+  font-size: 1em;
+  color: black;
   text-align: left;
   line-height: 40px;
   display: ${props => props.display};
@@ -66,7 +66,7 @@ export const TableRowMesureView = ({
     <Cell>{annee} </Cell>
     <TdStyle display={display}>
       {/*btn btn-outline-secondary*/}
-      <button className={"btn btn-success"} onClick={openModalMesure}>
+      <button className={"btn btn-secondary"} onClick={openModalMesure}>
         Modifier
       </button>
       <ModalMesure
@@ -79,7 +79,7 @@ export const TableRowMesureView = ({
       />
     </TdStyle>
     <TdStyle display={display}>
-      <button className={"btn btn-success"} onClick={openModal}>
+      <button className={"btn btn-dark"} onClick={openModal}>
         Mettre fin au mandat
       </button>
       <ModalCloseMesure
@@ -93,7 +93,7 @@ export const TableRowMesureView = ({
     <TdStyle display={display_ext}>
       {/*btn btn-outline-secondary*/}
       <button className={"btn btn-success"} onClick={onClickSubmitEteinte}>
-        Mesure en cours
+        Réactiver la mesure
       </button>
     </TdStyle>
     <TdStyle display={display_ext}>{extinction}</TdStyle>

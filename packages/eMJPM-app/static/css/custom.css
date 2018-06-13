@@ -77,14 +77,14 @@
   display: inline-block;
 }
 .Modal {
-    position: absolute;
-    width: 900px !important;
-    height: 500px !important;
-    top: 60px;
-    left: 60px;
-    right: 60px;
-    bottom: 60px;
-    background-color: #f2f2f2;
+  position: absolute;
+  width: 900px !important;
+  height: 500px !important;
+  top: 60px;
+  left: 60px;
+  right: 60px;
+  bottom: 60px;
+  background-color: #f2f2f2;
 }
 
 .ModalInformation {
@@ -139,22 +139,22 @@
 }
 
 .Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 9000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9000;
 }
 .OverlayInput {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 9000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9000;
 }
 
 /*.leaflet-container {*/
@@ -254,12 +254,12 @@
   background-color: #ffffff !important;
 }
 
-.form-group {
-  padding-left: 10px;
-  text-align: left;
-  display: inline-block;
-  margin-right: 10px;
-}
+/*.form-group {
+    padding-left: 10px;
+    text-align: left;
+    display: inline-block;
+    margin-right: 10px;
+}*/
 
 .form__commentaire .form-group {
   margin-left: 0;
@@ -271,31 +271,36 @@
 }
 
 .input_mesure_ouverture {
-    width: 200px;
-    display: inline-block;
+  width: 200px;
+  display: inline-block;
 }
 
 .input_mesure_type {
-    width: 310px;
-    display: inline-block;
+  width: 310px;
+  display: inline-block;
 }
 
 .input_mesure_residence {
-    width: 230px;
-    display: inline-block;
+  width: 230px;
+  display: inline-block;
 }
 
 .input_mesure_commune {
-    width: 135px;
-    display: inline-block;
+  width: 135px;
+  display: inline-block;
 }
 
 .input_mesure_civilite {
-    width: 230px;
-    display: inline-block;
+  width: 230px;
+  display: inline-block;
 }
 
 .input_mesure_annee {
-    width: 280px;
-    display: inline-block;
+  width: 280px;
+  display: inline-block;
+}
+.input_form_inscription {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
