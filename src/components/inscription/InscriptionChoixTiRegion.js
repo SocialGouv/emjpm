@@ -1,9 +1,9 @@
 import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
-import apiFetch from "../Api";
-import RowModal from "../RowModal";
-import SearchButton from "../SearchButton";
+import apiFetch from "../communComponents/Api";
+import RowModal from "../communComponents/RowModal";
+import SearchButton from "../communComponents/SearchButton";
 import RegionModel from "./RegionModel";
 
 const regions = [
