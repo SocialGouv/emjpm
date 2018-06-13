@@ -15,11 +15,6 @@ const app = express();
 
 process.on("unhandledRejection", r => console.log(r));
 
-const corsWhitelist = ["http://localhost:3000", "http://127.0.0.1:3000"];
-if (process.env.CORS_WHITELIST) {
-  corsWhitelist.push(process.env.CORS_WHITELIST);
-}
-
 const SECRET_KEY =
   process.env.SECRET_KEY ||
   "\xa9\x93v\x8b\x0cJ\xc1\x94l\x83MY\xa4\xb1\xb2\xb1\xe5\x0e\x98m\x9ee\x1a\x16";
@@ -87,8 +82,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get("env") === "development") {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.json({
+    res.status(err.status || 500).json({
       message: err.message,
       error: err
     });
@@ -98,8 +92,7 @@ if (app.get("env") === "development") {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.json({
+  res.status(err.status || 500).json({
     //message: err.message,
     error: {}
   });
@@ -109,7 +102,10 @@ const port = process.env.PORT || 4000;
 
 if (require.main === module) {
   app.listen(port, "0.0.0.0", () => {
-    console.log(`Listening on http://127.0.0.1:${port} [${process.env.NODE_ENV || "development"}]`);
+    console.log(
+      `Listening on http://127.0.0.1:${port} [${process.env.NODE_ENV ||
+        "development"}]`
+    );
   });
 }
 
