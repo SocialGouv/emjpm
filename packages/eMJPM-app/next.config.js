@@ -11,7 +11,8 @@ const exportPathMap = () => ({
   "/login": { page: "/login" },
   "/tis": { page: "/tis" },
   "/services": { page: "/services" },
-  "/mandataires_index": { page: "/mandataires_index" }
+  "/inscription": { page: "/inscription" },
+  "/mandataires": { page: "/mandataires" }
 });
 
 module.exports = withCSS(

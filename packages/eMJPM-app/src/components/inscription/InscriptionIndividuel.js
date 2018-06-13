@@ -1,9 +1,9 @@
 import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
-import apiFetch from "../Api";
-import RowModal from "../RowModal";
-import SearchButton from "../SearchButton";
+import apiFetch from "../communComponents/Api";
+import RowModal from "../communComponents/RowModal";
+import SearchButton from "../communComponents/SearchButton";
 import piwik from "../../piwik";
 
 function validate(formData, errors) {
@@ -99,7 +99,7 @@ const formData = {};
 
 class InscriptionIndividuel extends React.Component {
   /*onSubmit = ({ formData }) => {
-		
+
 
 		 apiFetch(`/mandataires/1`, {
       method: "PUT",
@@ -115,7 +115,7 @@ class InscriptionIndividuel extends React.Component {
         Iadresse:
         Icode_postal:
         Iville:
-        
+
       })
     }).then(json => {
      //piwik
