@@ -27,7 +27,7 @@ const Tr = styled.tr`border-top: 0px solid white;`;
 
 const Td = ({ children }) => <TdStyle>{children}</TdStyle>;
 
-const ColStyle = styled.b`color: ${props => props.color || "black"};`;
+const ColStyle = styled.b`color: "black"};`;
 
 export const TableMesureView = ({ rows, display, display_ext, updateMesureEteinte }) => (
   <LineContainer>

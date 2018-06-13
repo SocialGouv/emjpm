@@ -14,6 +14,7 @@ import ModalCloseMesure from "./ModalCloseMesure";
 import Cell from "../communComponents/Cell";
 import ModalMesure from "./ModalMesure";
 import piwik from "../../piwik";
+import DislayDate from "../communComponents/showDate";
 
 const TdCursor = styled.tr`
   cursor: url("../../../static/images/edit.svg"), auto;
@@ -26,6 +27,15 @@ const TdStyle = styled.td`
   color: black;
   text-align: left;
   line-height: 40px;
+  display: ${props => props.display};
+`;
+
+const TdStyleDate = styled.td`
+  font-size: 1em;
+  color: black;
+  text-align: left;
+  line-height: 40px;
+  font-weight: bold;
   display: ${props => props.display};
 `;
 
@@ -55,7 +65,10 @@ export const TableRowMesureView = ({
   display_row
 }) => (
   <tr style={{ display: display_row }}>
-    <TdStyle>{date_ouverture.slice(0, 10)}</TdStyle>
+      <TdStyleDate>
+      <DislayDate date={date_ouverture} />
+      </TdStyleDate>
+    {/*<TdStyle>{date_ouverture.slice(0, 10)}</TdStyle>*/}
     <Cell>
       <b>
         {code_postal} -{ville.toUpperCase()}{" "}
