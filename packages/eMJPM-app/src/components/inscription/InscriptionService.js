@@ -1,9 +1,9 @@
 import fetch from "isomorphic-fetch";
 import Form, { validateJsonSchema, mergeErrorSchema } from "react-jsonschema-form";
 import styled from "styled-components";
-import apiFetch from "../Api";
-import RowModal from "../RowModal";
-import SearchButton from "../SearchButton";
+import apiFetch from "../communComponents/Api";
+import RowModal from "../communComponents/RowModal";
+import SearchButton from "../communComponents/SearchButton";
 import piwik from "../../piwik";
 
 function validate(formData, errors) {
@@ -108,7 +108,7 @@ class InscriptionService extends React.Component {
         SadresseS:
         Scode_postalS:
         SvilleS:
-        
+
       })
     }).then(json => {
      //piwik
