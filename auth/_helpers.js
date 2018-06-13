@@ -27,13 +27,25 @@ function loginRequired(req, res, next) {
   return next();
 }
 
+const typeRequired = (...userTypes) => (req, res, next) => {
+  //console.log(req.user);
+  if (!req.user) {
+    return res.status(401).json({ status: "Please log in" });
+  }
+  if (userTypes.find(userType => req.user.type === userType)) {
+    return next();
+  }
+  return res.status(401).json({ status: "Please log in" });
+};
+
 function adminRequired(req, res, next) {
   if (!req.user) res.status(401).json({ status: "Please log in" });
   return knex("users")
     .where({ username: req.user.username })
     .first()
     .then(user => {
-      if (!user.admin) res.status(401).json({ status: "You are not authorized" });
+      if (!user.admin)
+        res.status(401).json({ status: "You are not authorized" });
       return next();
     })
     .catch(err => {
@@ -47,7 +59,8 @@ function mandataireRequired(req, res, next) {
     .where({ username: req.user.username })
     .first()
     .then(user => {
-      if (!user.mandataire) res.status(401).json({ status: "You are not authorized" });
+      if (!user.mandataire)
+        res.status(401).json({ status: "You are not authorized" });
       return next();
     })
     .catch(err => {
@@ -79,6 +92,7 @@ function handleErrors(req) {
 module.exports = {
   comparePass,
   createUser,
+  typeRequired,
   mandataireRequired,
   loginRequired,
   adminRequired,
