@@ -1,5 +1,7 @@
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
+import Modal from "react-modal";
+import ExitButton from "../ExitButton";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -8,6 +10,7 @@ const schema = {
   properties: {
     ouverture: {
       type: "string",
+      format: "date-time",
       title: "Date d'ordonnance"
     },
     type: {
@@ -15,11 +18,15 @@ const schema = {
       title: "Type de mesure",
       enum: ["Tutelle", "Curatelle", "Sauvegarde de justice", "Mesure ad hoc", "MAJ"]
     },
-    residence: { type: "string", title: "Lieu de vie", enum: ["A domicile", "En établissement"] },
+    residence: {
+      type: "string",
+      title: "Lieu de vie",
+      enum: ["A domicile", "En Etablissement"]
+    },
     codePostal: { type: "string", title: "Code Postal" },
     commune: { type: "string", title: "Commune" },
     civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
-    annee: { type: "integer", title: "Année de naissance", default: "" }
+    annee: { type: "integer", title: "Année de naissance" }
   }
 };
 
@@ -27,7 +34,6 @@ const uiSchema = {
   ouverture: {
     "ui:autofocus": true,
     "ui:title": "Ouverture de la mesure",
-    "ui:widget": "date",
     classNames: "input_mesure_ouverture",
     "ui:options": {
       label: true
@@ -90,46 +96,47 @@ const uiSchema = {
 
 const CancelButton = styled.button`
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 10px;
 `;
 
-const ErrorBox = ({ message }) =>
-  (message && (
-    <div className="alert alert-danger" role="alert">
-      {message}
-    </div>
-  )) ||
-  null;
-
-const FormInputMesure = ({
+const ModalMesure = ({
   CustomFieldTemplate,
+  onClick,
+  customStyles,
   formData,
-  onSubmit,
-  showReplyForm,
-  error,
-  status
-}) => (
-  <Form
-    schema={schema}
-    uiSchema={uiSchema}
-    FieldTemplate={CustomFieldTemplate}
-    formData={formData}
-    onSubmit={onSubmit}
-  >
-    <br />
-    <button
-      type="submit"
-      className="btn btn-success"
-      style={{ marginLeft: "20px" }}
-      disabled={status === "loading" || status === "success"}
+  isOpenMesure,
+  onRequestClose,
+  onClickSubmitMesure,
+  onClickClose
+}) => {
+  return (
+    <Modal
+      isOpen={isOpenMesure}
+      onRequestClose={onRequestClose}
+      contentLabel="mandataire"
+      background="#e9ecef"
+      style={customStyles}
+      style={{ border: "1px solid black" }}
+      className="ModalMesureUpdate"
+      overlayClassName="OverlayInput"
     >
-      {(status === "loading" && "Création...") || (status === "success" && "Valider") || "Valider"}
-    </button>
-    <CancelButton onClick={showReplyForm} className="btn btn-dark">
-      Replier ▲
-    </CancelButton>
-    <ErrorBox message={error} />
-  </Form>
-);
+      <ExitButton onClick={onClick}>X</ExitButton>
+      <Form
+        schema={schema}
+        uiSchema={uiSchema}
+        FieldTemplate={CustomFieldTemplate}
+        formData={formData}
+        onSubmit={onClickSubmitMesure}
+      >
+        <button type="submit" className="btn btn-success">
+          Valider
+        </button>
+        <button onClick={onClickClose} className="btn btn-link  ">
+          Annuler
+        </button>
+      </Form>
+    </Modal>
+  );
+};
 
-export default FormInputMesure;
+export default ModalMesure;

@@ -13,7 +13,8 @@
     "predeploy": "npm run build && npm run export",
     "deploy": "gh-pages -d out -t",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "flow": "flow"
   },
   "keywords": [],
   "license": "ISC",
@@ -47,7 +48,9 @@
     "@storybook/addons": "^3.4.2",
     "@storybook/cli": "^3.4.2",
     "@storybook/react": "^3.4.2",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
+    "babel-preset-flow": "^6.23.0",
     "babel-runtime": "^6.26.0",
     "css-loader": "^0.28.9",
     "dotenv": "^5.0.1",
@@ -55,6 +58,7 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
+    "flow-bin": "^0.73.0",
     "gh-pages": "^1.1.0",
     "json-loader": "^0.5.7",
     "postcss-loader": "^2.1.0",

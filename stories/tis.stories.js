@@ -5,9 +5,9 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
 import PanelFilterMandataires from "../src/components/PanelFilterMandataires";
-import TableMandataire from "../src/components/TableMandataire";
+import TableMandataire from "../src/components/tiComponents/TableMandataire";
 import { FicheMandataire } from "../pages/tis";
-import OpenStreeMap from "../src/components/Map";
+import OpenStreeMap from "../src/components/tiComponents/Map";
 
 const mandataires = [
   {

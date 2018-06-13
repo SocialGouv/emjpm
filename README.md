@@ -9,13 +9,27 @@ WebApp en ReactJS pour [emjpm.beta.gouv.fr](http://emjpm.beta.gouv.Fr)
  - npm start --production
  - npm run build
 
-# Env
+## Dev
+
+### Workflow GIT
+
+ - branche `master` : PROD
+ - branche `recette` : RECETTE
+ - branche `develop` : DEV
+
+⚠️ Les PRs doivent être faites sur la branche DEV
+
+⚠️ Les branches master, recette et dev, ne doivent recevoir **que des pulls requests**
+
+Plus de détails : https://nvie.com/posts/a-successful-git-branching-model/
+
+## Env
 
 Editer les fichiers [.env](./.env) et [.env.production](./.env.production)
 
 Ces valeurs sont utilisées au moment du build
 
-# Docker
+## Docker
 
 Container avec nginx-alpine et [nginx.conf](./nginx.conf).
 

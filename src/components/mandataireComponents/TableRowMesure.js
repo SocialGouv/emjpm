@@ -1,29 +1,29 @@
 import FaSearch from "react-icons/lib/fa/search";
-import "../../static/css/custom.css";
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
-import "bootstrap/dist/css/bootstrap.css";
-import "../../static/css/hero.css";
-import "../../static/css/panel.css";
-import "../../static/css/footer.css";
-import "../../node_modules/react-tabs/style/react-tabs.css";
-import Form from "react-jsonschema-form";
-import apiFetch from "./Api";
-import ModalCloseMesure from "./ModalCloseMesure";
-import Cell from "./Cell";
 import styled from "styled-components";
+import Form from "react-jsonschema-form";
+import "bootstrap/dist/css/bootstrap.css";
+import "../../../static/css/custom.css";
+import "../../../static/css/hero.css";
+import "../../../static/css/panel.css";
+import "../../../static/css/footer.css";
+import "../../../node_modules/react-tabs/style/react-tabs.css";
+import apiFetch from "../communComponents/Api";
+import ModalCloseMesure from "./ModalCloseMesure";
+import Cell from "../communComponents/Cell";
 import ModalMesure from "./ModalMesure";
-import piwik from "../piwik";
+import piwik from "../../piwik";
 
 const TdCursor = styled.tr`
-  cursor: url("../../static/images/edit.svg"), auto;
+  cursor: url("../../../static/images/edit.svg"), auto;
 `;
 const formData = {};
-const edit = require("../../static/images/edit.svg");
+const edit = require("../../../static/images/edit.svg");
 
 const TdStyle = styled.td`
-  font-size: 0.8em;
-  color: rgb(204, 204, 204);
+  font-size: 1em;
+  color: black;
   text-align: left;
   line-height: 40px;
   display: ${props => props.display};
@@ -66,7 +66,7 @@ export const TableRowMesureView = ({
     <Cell>{annee} </Cell>
     <TdStyle display={display}>
       {/*btn btn-outline-secondary*/}
-      <button className={"btn btn-success"} onClick={openModalMesure}>
+      <button className={"btn btn-secondary"} onClick={openModalMesure}>
         Modifier
       </button>
       <ModalMesure
@@ -79,7 +79,7 @@ export const TableRowMesureView = ({
       />
     </TdStyle>
     <TdStyle display={display}>
-      <button className={"btn btn-success"} onClick={openModal}>
+      <button className={"btn btn-dark"} onClick={openModal}>
         Mettre fin au mandat
       </button>
       <ModalCloseMesure
@@ -93,7 +93,7 @@ export const TableRowMesureView = ({
     <TdStyle display={display_ext}>
       {/*btn btn-outline-secondary*/}
       <button className={"btn btn-success"} onClick={onClickSubmitEteinte}>
-        Mesure en cours
+        Réactiver la mesure
       </button>
     </TdStyle>
     <TdStyle display={display_ext}>{extinction}</TdStyle>

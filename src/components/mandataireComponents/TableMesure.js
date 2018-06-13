@@ -1,10 +1,7 @@
 import TableRowMesure from "./TableRowMesure";
-import MandatairesIndex from "../../pages/mandataires_index";
-import MesureInput from "./MesureInput";
 import styled from "styled-components";
-import CreationMesure from "./CreationMesure";
 
-const Container = ({ children }) => <div className="container">{children}</div>;
+import CreationMesure from "./CreationMesure";
 
 const TdStyle = styled.td`
   width: 20%;
@@ -26,27 +23,18 @@ const LineContainer = styled.div`
   padding-left: 0px;
   paddin-right: 0px;
 `;
-const Tr = styled.tr`
-  border-top: 0px solid white;
-`;
+const Tr = styled.tr`border-top: 0px solid white;`;
 
 const Td = ({ children }) => <TdStyle>{children}</TdStyle>;
 
-const ColStyle = styled.b`
-  color: ${props => props.color || "black"};
-`;
+const ColStyle = styled.b`color: ${props => props.color || "black"};`;
 
-export const TableMesureView = ({
-  rows,
-  display,
-  display_ext,
-  updateMesureEteinte
-}) => (
+export const TableMesureView = ({ rows, display, display_ext, updateMesureEteinte }) => (
   <LineContainer>
     <DisplayCreationMesure display={display}>
-      <CreationMesure className="row" updateMesure={updateMesureEteinte} />
+      <CreationMesure updateMesure={updateMesureEteinte} />
     </DisplayCreationMesure>
-    <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
+    <table className="table " style={{ boderTop: "0px" }}>
       <thead>
         <Tr>
           <Td>

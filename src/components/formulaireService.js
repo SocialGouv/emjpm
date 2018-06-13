@@ -1,4 +1,4 @@
-import RowModal from "./RowModal";
+import RowModal from "./communComponents/RowModal";
 import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import "bootstrap/dist/css/bootstrap.css";
@@ -8,7 +8,7 @@ import "../../static/css/footer.css";
 import "../../static/css/custom.css";
 import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
-import apiFetch from "./Api";
+import apiFetch from "./communComponents/Api";
 
 const schema = {
   title: "Modifier vos informations",
@@ -36,7 +36,7 @@ const schema = {
       type: "string",
       title: "Nombre de mesures",
       default: ""
-    },
+    }
   }
 };
 const customStyles = {
@@ -130,7 +130,7 @@ class FormulaireService extends React.Component {
                   <br />
                   {this.props.currentMandataireModal.adresse}
                   <br />
-                  {this.props.currentMandataireModal.code_postal}{" "}
+                  {this.props.currentMandataireModal.code_postal} <br />
                   {this.props.currentMandataireModal.ville}
                   <br />
                   <br />
@@ -143,7 +143,6 @@ class FormulaireService extends React.Component {
                   <br />
                   {this.props.currentMandataireModal.disponibilite}
                   <br />
-                    <br />
                   <button className={"btn btn-dark"} onClick={this.openModal}>
                     Modifier mes informations
                   </button>
