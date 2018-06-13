@@ -4,20 +4,14 @@ const router = express.Router();
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
 
-// router.post("/register", authHelpers.loginRedirect, (req, res, next) => {
-//   return authHelpers
-//     .createUser(req, res)
-//     .then(response => {
-//       passport.authenticate("local", (err, user, info) => {
-//         if (user) {
-//           return handleResponse(res, 200, "success");
-//         }
-//       })(req, res, next);
-//     })
-//     .catch(err => {
-//       return handleResponse(res, 500, "error");
-//     });
-// });
+const redirs = {
+  individuel: "/mandataires",
+  prepose: "/mandataires",
+  service: "/services",
+  ti: "/tis",
+  admin: "/admin",
+  default: "/"
+};
 
 router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
@@ -32,15 +26,12 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         if (err) {
           return next(err);
         }
-        if (user.mandataire === true){
-          if (user.service === true){
-              return handleResponse(res, 200,"success" ,"/services");
-          } else {
-        return handleResponse(res, 200,"success" ,"/mandataires_index");
-          }
-        } else {
-        return handleResponse(res, 200, "success" , "/tis" );
-        }
+        return handleResponse(
+          res,
+          200,
+          "success",
+          redirs[user.type] || redirs.default
+        );
       });
     }
   })(req, res, next);
@@ -48,12 +39,11 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
 
 router.get("/logout", authHelpers.loginRequired, (req, res, next) => {
   req.logout();
-  console.log(handleResponse(res, 200, "success"))
   handleResponse(res, 200, "success");
 });
 
-function handleResponse(res, code, statusMsg ,url) {
-  res.status(code).json({ status: statusMsg ,url: url });
+function handleResponse(res, code, statusMsg, url) {
+  res.status(code).json({ status: statusMsg, url: url });
 }
 
 module.exports = router;
