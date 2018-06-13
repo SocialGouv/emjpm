@@ -1,12 +1,13 @@
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import dynamic from "next/dynamic";
 import styled from "styled-components";
+import { Home, Map, User, UserMinus } from "react-feather";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
+import apiFetch from "../src/components/communComponents/Api";
+import Footer from "../src/components/communComponents/Footer";
+import FormulaireMandataire from "../src/components/FormulaireMandataire";
 import Navigation from "../src/components/communComponents/Navigation";
 import TableMesure from "../src/components/mandataireComponents/TableMesure";
-import Footer from "../src/components/communComponents/Footer";
-import FormulaireMandataire from "../src/components/mandataireComponents/formulaire_mandataire";
-import apiFetch from "../src/components/communComponents/Api";
-import dynamic from "next/dynamic";
-import { Home, Map, User, UserMinus } from "react-feather";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
@@ -17,12 +18,14 @@ const tabStyle = {
   width: "25%",
   display: "inline-flex"
 };
+
 const imageStyle = {
   lineHeight: "50px",
-  width: "35px",
-  height: "35px",
+  width: "20px",
+  height: "20px",
   color: "black",
-  display: "inline-block"
+  display: "inline-block",
+  margin: 10
 };
 
 const Pill = styled.p`
@@ -59,6 +62,7 @@ const TabsShowMandataire = styled.div`
   background-color: #ebeff2;
   height: 60px;
 `;
+
 const TabsPanelMandataire = styled.div`
   background-color: white;
   min-height: 70vh;
@@ -83,12 +87,16 @@ const MandatairesPageStlye = styled.div`
 const Title = styled.div`
   color: black;
   font-size: 1.5em;
+  margin: 10px;
 `;
 
-const OpenStreeMap = dynamic(import("../src/components/mandataireComponents/MapsPartieMandataire"), {
-  ssr: false,
-  loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
-});
+const OpenStreeMap = dynamic(
+  import("../src/components/mandataireComponents/MapsPartieMandataire"),
+  {
+    ssr: false,
+    loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
+  }
+);
 
 const getColorFromDisponibilite = dispo => {
   if (dispo <= 0) {
@@ -126,10 +134,12 @@ const MandataireIndexView = ({
         </ContainerMandataire>
         <TabsShowMandataire className="container">
           <Tab style={tabStyle}>
-            <PillDispo
-              dispo={currentMandataire.disponibilite}
-              dispo_max={currentMandataire.dispo_max}
-            />
+            {currentMandataire.dispo_max && (
+              <PillDispo
+                dispo={currentMandataire.disponibilite}
+                dispo_max={currentMandataire.dispo_max}
+              />
+            )}
             <b>Mesures en cours</b>
           </Tab>
           <Tab style={tabStyle}>
@@ -142,7 +152,7 @@ const MandataireIndexView = ({
           </Tab>
           <Tab style={tabStyle}>
             <Home style={imageStyle} />
-            <b>Vos informations</b>
+            <b>Mes informations</b>
           </Tab>
         </TabsShowMandataire>
       </PanelMandataire>
