@@ -64,16 +64,16 @@ class FormulaireService extends React.Component {
     apiFetch(`/mandataires/1`, {
       method: "PUT",
       body: JSON.stringify({
-        nom: formData.nom,
-        prenom: formData.prenom,
-        telephone: formData.telephone,
-        telephone_portable: formData.telephone_portable,
-        email: formData.email,
-        adresse: formData.adresse,
-        code_postal: formData.code_postal,
-        ville: formData.ville,
-        dispo_max: formData.dispo_max,
-        disponibilite: formData.disponibilite
+        nom: formData.nom || "",
+        prenom: formData.prenom || "",
+        telephone: formData.telephone || "",
+        telephone_portable: formData.telephone_portable || "",
+        email: formData.email || "",
+        adresse: formData.adresse || "",
+        code_postal: formData.code_postal || "",
+        ville: formData.ville || "",
+        dispo_max: formData.dispo_max || 0,
+        disponibilite: formData.disponibilite || 0
       })
     }).then(json => {
       this.props.updateMadataire(json);
