@@ -101,6 +101,16 @@ class MesureInput extends React.Component {
                   return json;
                 });
               })
+              .then(json => {
+                return apiFetch(`/mandataires/1`, {
+                  method: "PUT",
+                    body: JSON.stringify({
+                       updateMesure: new Date()
+                    })
+                }).then(() => {
+                  return json;
+                });
+              })
               .then(json2 => {
                 this.setState(
                   {
