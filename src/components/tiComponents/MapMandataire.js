@@ -37,9 +37,9 @@ export const MapsView = ({
   zoomCodePostal,
   getPostCodeCoordinates,
   updateValue,
+  mandataireCount,
   value,
-  updateTimer,
-  mandataireCount
+  updateTimer
 }) => (
   <div className="container">
     <div className="row">
