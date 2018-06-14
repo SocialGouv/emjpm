@@ -2,6 +2,8 @@ import fetch from "isomorphic-fetch";
 import Navigation from "../src/components/communComponents/Navigation";
 import Footer from "../src/components/communComponents/Footer";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import DislayDate from "../communComponents/showDate";
+
 
 import FormulaireService from "../src/components/formulaireService";
 import apiFetch from "../src/components/communComponents/Api";
