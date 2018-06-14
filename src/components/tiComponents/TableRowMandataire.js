@@ -1,4 +1,16 @@
 import styled from "styled-components";
+import DislayDate from "../communComponents/showDate";
+import { Clock } from "react-feather";
+import * as React from "react";
+import checkDate from "../communComponents/checkDate";
+const imageStyle = {
+  lineHeight: "50px",
+  width: "20px",
+  height: "20px",
+  color: "black",
+  display: "inline-block",
+  margin: 10
+};
 
 const getColorFromDisponibilite = dispo => {
   if (dispo <= 0) {
@@ -45,35 +57,45 @@ export const Circle = styled.div`
   border-radius: 50%;
   display: inline-block;
 `;
+class TableRowMandataire extends React.Component {
+  state = {
+    timer: "inline-block"
+  };
 
-const TableRowMandataire = ({ mandataire, onClick }) => {
-  const {
-    type,
-    etablissement,
-    disponibilite,
-    referent,
-    dispo_max
-  } = mandataire;
-  return (
-    <tr onClick={onClick} style={{ cursor: "pointer" }}>
-      <Cell style={{ width: "100px" }}>
-        <Circle
-          style={{
-            backgroundColor: getColorFromDisponibilite(dispo_max - disponibilite)
-          }}
-        >
-          {type.toUpperCase().substr(0, 1)}
-        </Circle>
-      </Cell>
-      <Cell style={{ verticalAlign: "middle" }}>
-        <b>{etablissement || referent}</b>
-        <br /> <div style={{ color: "#cccccc" }}>{type.toUpperCase()} </div>
-      </Cell>
-      <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
-        <PillDispo dispo={disponibilite} dispo_max={dispo_max} />
-      </td>
-    </tr>
-  );
-};
+  updateTimer = time => {
+    this.setState({ timer: time });
+  };
+
+  render() {
+      //date-fns
+      console.log(1)
+      console.log("a",this.props.mandataire.updateMesure)
+      const isLate = checkDate(this.props.mandataire.updateMesure);
+    const { type, etablissement, disponibilite, referent, dispo_max } = this.props.mandataire;
+    return (
+      <tr onClick={this.props.onClick} style={{ cursor: "pointer" }}>
+        <Cell style={{ width: "100px" }}>
+          <Circle
+            style={{
+              backgroundColor: getColorFromDisponibilite(dispo_max - disponibilite)
+            }}
+          >
+            {type.toUpperCase().substr(0, 1)}
+          </Circle>
+        </Cell>
+        <Cell style={{ verticalAlign: "middle" }}>
+          <b>{etablissement || referent}</b>
+          <br /> <div style={{ color: "#cccccc" }}>{type.toUpperCase()} </div>
+        </Cell>
+        <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
+          <PillDispo dispo={disponibilite} dispo_max={dispo_max} />
+        </td>
+        <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
+            { isLate &&  <Clock style={{ display: this.state.updateTimer }} />}
+        </td>
+      </tr>
+    );
+  }
+}
 
 export default TableRowMandataire;
