@@ -38,7 +38,8 @@ export const MapsView = ({
   zoomCodePostal,
   getPostCodeCoordinates,
   updateValue,
-  value
+  value,
+                             updateTimer
 }) => (
   <div className="container">
     <div className="row">
@@ -84,6 +85,7 @@ export const MapsView = ({
             rows={filteredMesures}
             openModal={openModal}
             updateFilters={updateFilters}
+            updateTimer={updateTimer}
           />
         </div>
       </MandatairesWidth>
@@ -195,6 +197,7 @@ class Mapstry extends React.Component {
         getPostCodeCoordinates={this.getPostCodeCoordinates}
         updateValue={this.props.updateValue}
         value={this.props.value}
+        updateTimer={this.props.updateTimer}
       />
     );
   }

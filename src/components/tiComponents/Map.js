@@ -38,7 +38,8 @@ export const MapsView = ({
   zoomCodePostal,
   getPostCodeCoordinates,
   updateValue,
-  value
+  value,
+                             updateTimer
 }) => (
   <div className="container">
     <div className="row">
@@ -86,6 +87,7 @@ export const MapsView = ({
           rows={filteredMesures}
           openModal={openModal}
           updateFilters={updateFilters}
+          updateTimer={updateTimer}
         />
       </MandatairesWidth>
       Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
@@ -186,6 +188,7 @@ class Mapstry extends React.Component {
         zoom={this.state.zoom}
         width={this.props.width}
         height={this.props.height}
+        updateTimer={this.props.updateTimer}
         onMoveend={() => this.handleMoveend(this.mapRef)}
         center={center}
         mesures={this.props.mesures}

@@ -8,6 +8,7 @@ import Footer from "../src/components/communComponents/Footer";
 import FormulaireMandataire from "../src/components/FormulaireMandataire";
 import Navigation from "../src/components/communComponents/Navigation";
 import TableMesure from "../src/components/mandataireComponents/TableMesure";
+import DislayDate from "../src/components/communComponents/showDate";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
@@ -130,6 +131,8 @@ const MandataireIndexView = ({
         <ContainerMandataire className="container">
           <Title>
             {currentMandataire.nom} {currentMandataire.prenom}
+            <br />
+            {currentMandataire && <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />}
           </Title>
         </ContainerMandataire>
         <TabsShowMandataire className="container">
@@ -235,6 +238,16 @@ class MandatairesIndex extends React.Component {
           })
         )
       )
+      .then(json => {
+        return apiFetch(`/mandataires/1`, {
+          method: "PUT",
+          body: JSON.stringify({
+            updateMesure: new Date()
+          })
+        }).then(() => {
+          return json;
+        });
+      })
       .catch(e => {
         throw e;
       });
@@ -249,6 +262,7 @@ class MandatairesIndex extends React.Component {
   };
 
   render() {
+    console.log("dhowDate", this.state.currentMandataire.updateMesure);
     const filteredMesures = this.state.datamesure;
     return (
       <MandataireIndexView
