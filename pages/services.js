@@ -1,13 +1,9 @@
-import fetch from "isomorphic-fetch";
 import Navigation from "../src/components/communComponents/Navigation";
 import Footer from "../src/components/communComponents/Footer";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import FormulaireService from "../src/components/formulaireService";
 import apiFetch from "../src/components/communComponents/Api";
-import Router from "next/router";
-
-const logo = require("!!url-loader?limit=0!../static/images/logo_emjpm.png");
 
 class MandatairesIndex extends React.Component {
   state = {
@@ -17,38 +13,17 @@ class MandatairesIndex extends React.Component {
   };
 
   componentDidMount() {
-    apiFetch(`/mandataires/1/mesures`).then(json => {
-      this.setState({
-        datamesure: json
-      });
-    });
-
     apiFetch(`/mandataires/1`).then(json => {
       this.setState({
         currentMandataire: json
       });
     });
   }
-
-  onlogout = () => {
-    fetch(`${API_URL}/auth/logout`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(json => {
-        Router.push("/login");
-      });
-  };
   updateMadataire = mesures => {
     this.setState({ currentMandataire: mesures });
   };
 
   render() {
-    const filteredMesures = this.state.datamesure;
     return (
       <Tabs>
         <TabList>
