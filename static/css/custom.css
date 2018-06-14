@@ -254,12 +254,12 @@
   background-color: #ffffff !important;
 }
 
-/*.form-group {
-    padding-left: 10px;
-    text-align: left;
-    display: inline-block;
-    margin-right: 10px;
-}*/
+.form-group {
+  padding-left: 10px;
+  text-align: left;
+  display: inline-block;
+  margin-right: 10px;
+}
 
 .form__commentaire .form-group {
   margin-left: 0;
@@ -299,7 +299,7 @@
   width: 280px;
   display: inline-block;
 }
-.input_form_inscription {
+.I_input_form_inscription {
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
