@@ -3,6 +3,10 @@ import DislayDate from "../communComponents/showDate";
 import { Clock } from "react-feather";
 import * as React from "react";
 import checkDate from "../communComponents/checkDate";
+import { format,addMonths, formatDistance, formatRelative, subDays } from 'date-fns'
+
+
+
 const imageStyle = {
   lineHeight: "50px",
   width: "20px",
@@ -68,9 +72,8 @@ class TableRowMandataire extends React.Component {
 
   render() {
       //date-fns
-      console.log(1)
-      console.log("a",this.props.mandataire.updateMesure)
-      const isLate = checkDate(this.props.mandataire.updateMesure);
+      console.log(this.props.mandataire)
+      let isLate = checkDate(this.props.mandataire);
     const { type, etablissement, disponibilite, referent, dispo_max } = this.props.mandataire;
     return (
       <tr onClick={this.props.onClick} style={{ cursor: "pointer" }}>
@@ -91,7 +94,7 @@ class TableRowMandataire extends React.Component {
           <PillDispo dispo={disponibilite} dispo_max={dispo_max} />
         </td>
         <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
-            { isLate &&  <Clock style={{ display: this.state.updateTimer }} />}
+            { isLate &&  <Clock/>}
         </td>
       </tr>
     );
