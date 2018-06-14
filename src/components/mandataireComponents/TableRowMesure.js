@@ -65,9 +65,9 @@ export const TableRowMesureView = ({
   display_row
 }) => (
   <tr style={{ display: display_row }}>
-      <TdStyleDate>
+    <TdStyleDate>
       <DislayDate date={date_ouverture} />
-      </TdStyleDate>
+    </TdStyleDate>
     {/*<TdStyle>{date_ouverture.slice(0, 10)}</TdStyle>*/}
     <Cell>
       <b>
@@ -133,9 +133,20 @@ class TableRowMesure extends React.Component {
         age: formData.age,
         status: formData.status
       })
-    }).then(json => {
-      this.props.updateMadataire(json);
-    });
+    })
+      .then(json => {
+        return apiFetch(`/mandataires/1`, {
+          method: "PUT",
+          body: JSON.stringify({
+            updateMesure: new Date()
+          })
+        }).then(() => {
+          return json;
+        });
+      })
+      .then(json => {
+        this.props.updateMadataire(json);
+      });
   };
 
   onClick = (e, formData) => {
