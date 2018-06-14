@@ -52,6 +52,7 @@ const TableMandataire = ({ rows, openModal, updateFilters,updateTimer }) => {
             style={{ margin: "5px" }}
             label="All   "
             value="All"
+            defaultChecked={true}
             onClick={e => updateFilters({ searchType: "" })}
           />All
         </label>

@@ -72,8 +72,7 @@ class TableRowMandataire extends React.Component {
 
   render() {
       //date-fns
-      console.log(this.props.mandataire)
-      let isLate = checkDate(this.props.mandataire);
+      let isLate = checkDate(this.props.mandataire.updateMesure);
     const { type, etablissement, disponibilite, referent, dispo_max } = this.props.mandataire;
     return (
       <tr onClick={this.props.onClick} style={{ cursor: "pointer" }}>
@@ -94,7 +93,7 @@ class TableRowMandataire extends React.Component {
           <PillDispo dispo={disponibilite} dispo_max={dispo_max} />
         </td>
         <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
-            { isLate &&  <Clock/>}
+            { isLate &&  <Clock />}
         </td>
       </tr>
     );
