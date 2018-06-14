@@ -210,7 +210,8 @@ class Ti extends React.Component<Props, State> {
     modalIsOpen: false,
     postcodeCoordinates: "",
     specialite: "",
-    value: ""
+    value: "",
+      timer: "inline-block"
   };
 
   componentDidMount() {
@@ -262,6 +263,10 @@ class Ti extends React.Component<Props, State> {
   updatePostCodeMandatairesByCommune = mesures => {
     this.setState({ postcodeCoordinates: mesures });
   };
+
+    updateTimer = time => {
+        this.setState({ timer: time });
+    };
 
   findPostcode = postCode =>
     getPostCodeCoordinates(postCode).then(coordinates =>
@@ -317,6 +322,7 @@ class Ti extends React.Component<Props, State> {
         isOpen={this.state.modalIsOpen}
         closeModal={this.closeModal}
         mandataire={this.state.currentMandataire}
+        updateTimer={this.updateTimer}
       />
     );
   }
@@ -344,7 +350,8 @@ const TiView = ({
   filteredMandataires,
   isOpen,
   closeModal,
-  mandataire
+  mandataire,
+                    updateTimer
 }) => (
   <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
     <Tabs>
@@ -375,6 +382,7 @@ const TiView = ({
           updatePostCodeMandatairesByCommune={updatePostCodeMandatairesByCommune}
           value={value}
           updateValue={updateValue}
+          updateTimer={updateTimer}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire mandataire={mandataire} />
@@ -397,6 +405,7 @@ const TiView = ({
           updatePostCodeMandatairesByCommune={updatePostCodeMandatairesByCommune}
           value={value}
           updateValue={updateValue}
+          updateTimer={updateTimer}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire mandataire={mandataire} />
