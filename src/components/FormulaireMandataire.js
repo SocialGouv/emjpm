@@ -27,7 +27,11 @@ const schema = {
       default: ""
     },
     secretariat: { type: "boolean", title: "Secretariat", enumNames: ["Oui", "Non"] },
-    nb_secretariat: { type: "number", title: "Secrétariat : nombre d'ETP", default: "" }
+    nb_secretariat: {
+      type: "number",
+      title: "Secrétariat : nombre d'ETP( Si temps partiel à 80% mettre 0.8)",
+      default: ""
+    }
   }
 };
 
@@ -81,7 +85,9 @@ const uiSchema = {
 const Container = ({ children }) => <div className="container">{children}</div>;
 const Row = ({ children }) => <div className="row">{children}</div>;
 const Col6 = ({ children }) => <div className="col-6">{children}</div>;
-const Stylediv = styled.div`text-align: left;`;
+const Stylediv = styled.div`
+  text-align: left;
+`;
 
 const FormulaireMandataireView = ({
   onClick,
@@ -131,7 +137,8 @@ const FormulaireMandataireView = ({
               <br />
               <b> Secrétariat</b>
               <br />
-              {formData.secretariat} - {formData.nb_secretariat} <br />
+              {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat}{" "}
+              <br />
               <br />
               <button className={"btn btn-dark"} onClick={onClick}>
                 Modifier mes informations
@@ -208,7 +215,6 @@ class FormulaireMandataire extends React.Component {
 
   render() {
     const formData = this.props.currentMandataireModal;
-
     return (
       <FormulaireMandataireView
         currentMandataireModalTry={this.props.currentMandataireModal}

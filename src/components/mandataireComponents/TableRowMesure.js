@@ -1,8 +1,4 @@
-import FaSearch from "react-icons/lib/fa/search";
-import fetch from "isomorphic-fetch";
-import Modal from "react-modal";
 import styled from "styled-components";
-import Form from "react-jsonschema-form";
 import "bootstrap/dist/css/bootstrap.css";
 import "../../../static/css/custom.css";
 import "../../../static/css/hero.css";
@@ -14,12 +10,6 @@ import ModalCloseMesure from "./ModalCloseMesure";
 import Cell from "../communComponents/Cell";
 import ModalMesure from "./ModalMesure";
 import piwik from "../../piwik";
-
-const TdCursor = styled.tr`
-  cursor: url("../../../static/images/edit.svg"), auto;
-`;
-const formData = {};
-const edit = require("../../../static/images/edit.svg");
 
 const TdStyle = styled.td`
   font-size: 1em;
@@ -45,8 +35,6 @@ export const TableRowMesureView = ({
   onClickClose,
   display_ext,
   display,
-  updateedit,
-  outEdit,
   isOpenMesure,
   openModalMesure,
   onClickSubmitMesure,
@@ -90,13 +78,13 @@ export const TableRowMesureView = ({
         onClickClose={onClickClose}
       />
     </TdStyle>
+    <TdStyle display={display_ext}>{extinction && extinction.slice(0, 10)}</TdStyle>
     <TdStyle display={display_ext}>
       {/*btn btn-outline-secondary*/}
       <button className={"btn btn-success"} onClick={onClickSubmitEteinte}>
         Réactiver la mesure
       </button>
     </TdStyle>
-    <TdStyle display={display_ext}>{extinction}</TdStyle>
   </tr>
 );
 
@@ -117,7 +105,7 @@ class TableRowMesure extends React.Component {
         code_postal: formData.code_postal,
         type_mesure: formData.type_mesure,
         genre: formData.genre,
-        age: formData.age,
+        age: parseInt(formData.age),
         status: formData.status
       })
     }).then(json => {
@@ -180,7 +168,6 @@ class TableRowMesure extends React.Component {
   };
 
   onClickMesure = (e, formData) => {
-    console.log("formDataonClickMesure ", formData);
     apiFetch(`/mandataires/1/mesures/${e}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -188,7 +175,7 @@ class TableRowMesure extends React.Component {
         code_postal: formData.codePostal,
         type: formData.type,
         civilite: formData.civilite,
-        annee: formData.annee,
+        annee: parseInt(formData.annee),
         residence: formData.residence,
         ville: formData.commune
         // longitude: this.state.postcodeCoordinates[0],
@@ -245,16 +232,9 @@ class TableRowMesure extends React.Component {
     const {
       ville,
       type,
-      nom,
-      contact,
       residence,
       code_postal,
-      dispo_max,
       date_ouverture,
-      type_mesure,
-      genre,
-      age,
-      status,
       annee,
       civilite,
       extinction
@@ -264,7 +244,7 @@ class TableRowMesure extends React.Component {
       ouverture: `${date_ouverture}`,
       codePostal: `${code_postal}`,
       civilite: `${civilite}`,
-      annee: `${annee}`,
+      annee: `${parseInt(annee)}`,
       commune: `${ville}`,
       residence: `${residence}`,
       type: `${type}`
@@ -279,8 +259,10 @@ class TableRowMesure extends React.Component {
         ville={ville}
         formData={formData}
         civilite={civilite}
-        annee={annee}
+        annee={parseInt(annee)}
         type={type}
+        residence={residence}
+        extinction={extinction}
         display_ext={this.props.display_ext}
         display={this.props.display}
         isOpen={this.state.modalIsOpen}

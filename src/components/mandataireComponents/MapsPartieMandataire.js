@@ -150,7 +150,7 @@ class Mapstry extends React.Component {
   render() {
     console.log(this.props.filteredMesures);
     const center = this.props.postcodeMandataire
-      ? [this.props.postcodeMandataire[1], this.props.postcodeMandataire[0]]
+      ? [this.props.postcodeMandataire[0], this.props.postcodeMandataire[1]]
       : [50.459441, 2.693963];
     return (
       <MapsView

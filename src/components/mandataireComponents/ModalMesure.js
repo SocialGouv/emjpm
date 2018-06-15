@@ -26,7 +26,7 @@ const schema = {
     codePostal: { type: "string", title: "Code Postal" },
     commune: { type: "string", title: "Commune" },
     civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
-    annee: { type: "integer", title: "Année de naissance" }
+    annee: { type: "string", title: "Année de naissance" }
   }
 };
 
@@ -56,7 +56,6 @@ const uiSchema = {
     "ui:placeholder": "Année de naissance",
 
     classNames: "input_mesure_annee",
-    "ui:widget": "updown",
     "ui:options": {
       label: false
     }

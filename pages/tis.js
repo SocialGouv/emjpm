@@ -10,6 +10,7 @@ import RowModal from "../src/components/communComponents/RowModal";
 import Footer from "../src/components/communComponents/Footer";
 import Commentaire from "../src/components/tiComponents/Commentaire";
 import apiFetch from "../src/components/communComponents/Api";
+import Router from "next/router";
 
 const modalStyles = {
   content: {
@@ -42,7 +43,12 @@ const TabsShowMandataire = styled.div`
 
 const OpenStreeMap = dynamic(import("../src/components/tiComponents/Map"), {
   ssr: false,
-  loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
+  loading: () => (
+    <div style={{ textAlign: "center", paddingTop: 20 }}>
+      Chargement… si aucune carte: appuyer ici
+      <button onClick={<Ti/>}>Carte</button>
+    </div>
+  )
 });
 
 const OpenStreeMapMandataires = dynamic(import("../src/components/tiComponents/MapMandataire"), {
@@ -132,8 +138,8 @@ type FicheMandataireProps = {
   mandataire: Object
 };
 
-export const FicheMandataire = ({ style, mandataire }: FicheMandataireProps) => (
-  <div className="container" style={style}>
+export const FicheMandataire = ({ mandataire }: FicheMandataireProps) => (
+  <div className="container">
     <div className="row">
       <div className="col-6">
         <TitleMandataire>{mandataire.etablissement}</TitleMandataire>
@@ -147,14 +153,11 @@ export const FicheMandataire = ({ style, mandataire }: FicheMandataireProps) => 
         <div>{mandataire.telephone}</div>
         <div>{mandataire.email}</div>
         <br />
-        <br />
-        {
-          <RowModal
-            label="Secrétariat"
-            value={mandataire.secretariat === false ? "Pas de secrétariat" : mandataire.secretariat}
-          />
-        }
-        {<RowModal value={mandataire.nb_secretariat} />}
+        <div style={{ textAlign: "left" }}>
+          <b>Secrétariat </b>
+          <br />
+          {mandataire.secretariat === true ? "Oui" : "Non"} - {mandataire.nb_secretariat}
+        </div>
       </div>
       <div className="col-6">
         <div
@@ -270,6 +273,10 @@ class Ti extends React.Component<Props, State> {
       })
     );
 
+  reloadMaps = () => {
+    Router.push("/tis");
+  };
+
   render() {
     const filteredMandataires = filterMandataires(
       this.state.manda,
@@ -373,6 +380,7 @@ const TiView = ({
           findPostcode={findPostcode}
           updatePostCodeMandataires={updatePostCodeMandataires}
           updatePostCodeMandatairesByCommune={updatePostCodeMandatairesByCommune}
+          reloadMaps={this.reloadMaps}
           value={value}
           updateValue={updateValue}
         />
