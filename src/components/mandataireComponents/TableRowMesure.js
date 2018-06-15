@@ -91,13 +91,13 @@ export const TableRowMesureView = ({
         onClickClose={onClickClose}
       />
     </TdStyle>
+    <TdStyle display={display_ext}>{extinction && extinction.slice(0, 10)}</TdStyle>
     <TdStyle display={display_ext}>
       {/*btn btn-outline-secondary*/}
       <button className={"btn btn-success"} onClick={onClickSubmitEteinte}>
         Réactiver la mesure
       </button>
     </TdStyle>
-    <TdStyle display={display_ext}>{extinction}</TdStyle>
   </tr>
 );
 
@@ -262,6 +262,7 @@ class TableRowMesure extends React.Component {
       date_ouverture,
       annee,
       civilite,
+      extinction
     } = this.props.mesure;
 
     const formData = {
@@ -286,6 +287,7 @@ class TableRowMesure extends React.Component {
         annee={annee}
         type={type}
         residence={residence}
+        extinction={extinction}
         display_ext={this.props.display_ext}
         display={this.props.display}
         isOpen={this.state.modalIsOpen}
