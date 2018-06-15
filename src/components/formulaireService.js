@@ -124,8 +124,6 @@ class FormulaireService extends React.Component {
                   <br />
                   {this.props.currentMandataireModal.telephone_portable}
                   <br />
-                  <br />
-                  <br />
                   <b> Nombre de mesures souhaitées</b>
                   <br />
                   {this.props.currentMandataireModal.dispo_max}
