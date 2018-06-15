@@ -92,11 +92,15 @@ class MesureInput extends React.Component {
                 });
               })
               .then(json2 => {
-                this.props.updateMesure(json2);
-                this.setState({
-                  status: "success",
-                  success: " La mesure a été crée"
-                });
+                this.setState(
+                  {
+                    status: "success",
+                    success: " La mesure a été crée"
+                  },
+                  () => {
+                    this.props.updateMesure(json2);
+                  }
+                );
               });
           })
           .catch(e => {
@@ -138,9 +142,9 @@ class MesureInput extends React.Component {
 
   OpenCreationMesure = () => {
     if (this.state.showForm === false) {
-      this.setState({ showForm: true });
+      this.setState({ showForm: true, error: null, success: null , status: null });
     } else {
-      this.setState({ showForm: false });
+      this.setState({ showForm: false ,error: null, success: null , status: null });
     }
   };
 
