@@ -132,8 +132,8 @@ type FicheMandataireProps = {
   mandataire: Object
 };
 
-export const FicheMandataire = ({ style, mandataire }: FicheMandataireProps) => (
-  <div className="container" style={style}>
+export const FicheMandataire = ({ mandataire }: FicheMandataireProps) => (
+  <div className="container">
     <div className="row">
       <div className="col-6">
         <TitleMandataire>{mandataire.etablissement}</TitleMandataire>
