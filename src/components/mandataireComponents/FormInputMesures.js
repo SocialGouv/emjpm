@@ -101,14 +101,13 @@ const ErrorBox = ({ message }) =>
   )) ||
   null;
 
-
 const SucessBox = ({ message }) =>
-    (message && (
-        <div className="alert alert-success" role="alert">
-            {message}
-        </div>
-    )) ||
-    null;
+  (message && (
+    <div className="alert alert-success" role="alert">
+      {message}
+    </div>
+  )) ||
+  null;
 
 const FormInputMesure = ({
   CustomFieldTemplate,
@@ -138,9 +137,8 @@ const FormInputMesure = ({
     <CancelButton onClick={showReplyForm} className="btn btn-dark">
       Replier ▲
     </CancelButton>
-      { error &&
-    <ErrorBox message={error} />}
-      {success && <SucessBox message={success} />}
+    {error && <ErrorBox message={error} />}
+    {success && <SucessBox message={success} />}
   </Form>
 );
 
