@@ -114,7 +114,7 @@ const PillDispo = ({ dispo, dispo_max }) => (
       background: getColorFromDisponibilite(dispo_max - dispo)
     }}
   >
-    {dispo} / {dispo_max}
+    {dispo || 0} / {dispo_max || 0}
   </Pill>
 );
 
@@ -137,7 +137,7 @@ const MandataireIndexView = ({
         </ContainerMandataire>
         <TabsShowMandataire className="container">
           <Tab style={tabStyle}>
-            {currentMandataire.dispo_max && (
+            {currentMandataire && (
               <PillDispo
                 dispo={currentMandataire.disponibilite}
                 dispo_max={currentMandataire.dispo_max}
