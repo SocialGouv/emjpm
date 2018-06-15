@@ -147,14 +147,11 @@ export const FicheMandataire = ({ style, mandataire }: FicheMandataireProps) => 
         <div>{mandataire.telephone}</div>
         <div>{mandataire.email}</div>
         <br />
-        <br />
-        {
-          <RowModal
-            label="Secrétariat"
-            value={mandataire.secretariat === false ? "Pas de secrétariat" : mandataire.secretariat}
-          />
-        }
-        {<RowModal value={mandataire.nb_secretariat} />}
+        <div style={{ textAlign: "left" }}>
+          <b>Secrétariat </b>
+          <br />
+          {mandataire.secretariat === true ? "Oui" : "Non"} - {mandataire.nb_secretariat}
+        </div>
       </div>
       <div className="col-6">
         <div
