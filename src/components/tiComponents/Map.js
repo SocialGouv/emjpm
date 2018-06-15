@@ -69,9 +69,9 @@ export const MapsView = ({
               <CircleMarker
                 center={[manda.latitude, manda.longitude]}
                 color="red"
-                radius={20}
+                radius={10}
                 fill={manda.count}
-                key={manda.latitude}
+                key={manda.id}
                 placeholder={manda.count}
               />
             ))}
@@ -82,13 +82,14 @@ export const MapsView = ({
         <Title>
           {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
         </Title>
-
+          <div style={{ maxHeight: "60vh", overflow: "auto" }}>
         <TableMandataire
           rows={filteredMesures}
           openModal={openModal}
           updateFilters={updateFilters}
           updateTimer={updateTimer}
         />
+          </div>
       </MandatairesWidth>
       Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
     </div>

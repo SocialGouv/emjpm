@@ -33,13 +33,13 @@ export const MapsView = ({
   innerRef,
   filteredMesures,
   openModal,
-  mesureCount,
   updateFilters,
   zoomCodePostal,
   getPostCodeCoordinates,
   updateValue,
   value,
-                             updateTimer
+  updateTimer,
+  mandataireCount
 }) => (
   <div className="container">
     <div className="row">
@@ -70,7 +70,9 @@ export const MapsView = ({
                 center={[manda.latitude, manda.longitude]}
                 color="red"
                 radius={10}
-                key={manda.latitude}
+                fill={manda.count}
+                key={manda.id}
+                placeholder={manda.count}
               />
             ))}
           ;
@@ -78,7 +80,7 @@ export const MapsView = ({
       </MapsWidth>
       <MandatairesWidth>
         <Title>
-          {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+          {mandataireCount} Professionnel{(mandataireCount > 1 && "s") || null}
         </Title>
         <div style={{ maxHeight: "60vh", overflow: "auto" }}>
           <TableMandataire
@@ -123,7 +125,7 @@ class Mapstry extends React.Component {
       });
   }
 
-  handleMoveend = mapRef => {
+  handleMoveend = () => {
     const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
     apiFetch("/mandataires/filters", {
       method: "POST",
@@ -196,6 +198,7 @@ class Mapstry extends React.Component {
         zoomCodePostal={this.zoomCodePostal}
         getPostCodeCoordinates={this.getPostCodeCoordinates}
         updateValue={this.props.updateValue}
+        mandataireCount={this.props.mandataireCount}
         value={this.props.value}
         updateTimer={this.props.updateTimer}
       />
