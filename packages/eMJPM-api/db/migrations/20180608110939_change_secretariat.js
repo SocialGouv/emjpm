@@ -6,6 +6,6 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
 	return knex.schema.alterTable("mandataires", function(table) {
-		table.interger("nb_secretariat").alter();
+		table.integer("nb_secretariat").alter();
 	});
 };
