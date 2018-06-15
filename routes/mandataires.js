@@ -23,6 +23,16 @@ router.put("/1", loginRequired, async (req, res, next) => {
   if (!mandataire) {
     return next(new Error(401));
   }
+
+    const dispoMandataire = await queries
+        .getSingleDisponibilite(mandataire.id);
+
+  console.log("dispo",dispoMandataire)
+    if (req.body.disponibilite !== dispoMandataire)
+    {queries
+        .update(mandataire.id, {updateMesure: new Date(Date.now())})
+        .catch(error => next(error));
+    }
   queries
     .update(mandataire.id, req.body)
     .then(() => queries.getSingle(mandataire.id))

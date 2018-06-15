@@ -162,6 +162,12 @@ function getSingle(mandataireID) {
     .first();
 }
 
+function getSingleDisponibilite(mandataireID) {
+  return Mandataires().select('disponibilite')
+    .where("id", parseInt(mandataireID))
+    .first();
+}
+
 function getTiByUserId(userId) {
   return knex
     .from("tis")
@@ -356,5 +362,6 @@ module.exports = {
   getAllMesuresByMandatairesFilter,
   getCoordonneByPosteCode,
   getAllByMandatairesFilter,
-  isMandataireInTi
+  isMandataireInTi,
+  getSingleDisponibilite
 };
