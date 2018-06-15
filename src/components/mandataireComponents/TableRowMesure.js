@@ -265,13 +265,13 @@ class TableRowMesure extends React.Component {
     } = this.props.mesure;
 
     const formData = {
-      ouverture: date_ouverture,
-      codePostal: code_postal,
-      civilite: civilite,
-      annee: parseInt(annee),
-      commune: ville,
-      residence: residence,
-      type: type
+      ouverture: `${date_ouverture}`,
+      codePostal: `${code_postal}`,
+      civilite: `${civilite}`,
+      annee: `${parseInt(annee)}`,
+      commune: `${ville}`,
+      residence: `${residence}`,
+      type: `${type}`
     };
 
     return (
