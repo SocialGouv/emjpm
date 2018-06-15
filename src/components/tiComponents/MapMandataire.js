@@ -67,12 +67,10 @@ export const MapsView = ({
           {mandataires &&
             mandataires.map(manda => (
               <CircleMarker
-                  center={[manda.latitude, manda.longitude]}
-                  color="red"
-                  radius={10}
-                  fill={manda.count}
-                  key={manda.id}
-                  placeholder={manda.count}
+                center={[manda.latitude, manda.longitude]}
+                color="red"
+                radius={10}
+                key={manda.id}
               />
             ))}
           ;
