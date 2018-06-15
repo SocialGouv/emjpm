@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import FormInputMesure from "../FormInputMesures";
+import FormInputMesure from "./FormInputMesures";
 import getPostCodeCoordinates from "../communComponents/GetPostCodeCoordinates";
 import apiFetch from "../communComponents/Api";
 
@@ -20,6 +20,7 @@ export const FormMesure = ({
   showHide,
   hideShow,
   error,
+  success,
   status
 }) => (
   <div>
@@ -42,6 +43,7 @@ export const FormMesure = ({
             showReplyForm={OpenCreationMesure}
             error={error}
             status={status}
+            success={success}
           />
         </div>
       </ModalPres>
@@ -93,7 +95,7 @@ class MesureInput extends React.Component {
                 this.props.updateMesure(json2);
                 this.setState({
                   status: "success",
-                  error: " La mesure a été crée"
+                  success: " La mesure a été crée"
                 });
               });
           })
@@ -162,6 +164,7 @@ class MesureInput extends React.Component {
         showHide={showHide}
         hideShow={hideShow}
         error={this.state.error}
+        success={this.state.success}
         status={this.state.status}
       />
     );
