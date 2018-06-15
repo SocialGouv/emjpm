@@ -131,7 +131,7 @@ const FormInputMesure = ({
       type="submit"
       className="btn btn-success"
       style={{ marginLeft: "20px" }}
-      disabled={status === "loading" || status === "success"}
+      disabled={status === "loading"}
     >
       {(status === "loading" && "Création...") || (status === "success" && "Valider") || "Valider"}
     </button>
