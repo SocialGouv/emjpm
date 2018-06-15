@@ -29,7 +29,7 @@ class Commentaire extends React.Component {
   componentDidMount() {
     console.log(this.props.currentMandataire.mandataire_id);
     const url = `${API_URL}/api/v1/mandataires/${
-      this.props.currentMandataire.mandataire_id
+      this.props.currentMandataire.id
     }/commentaires`;
     fetch(url, {
       credentials: "include",
@@ -52,8 +52,9 @@ class Commentaire extends React.Component {
   }
 
   onSubmit = ({ formData }) => {
+    console.log("Com",this.props.currentMandataire)
     const url = `${API_URL}/api/v1/mandataires/${
-      this.props.currentMandataire.mandataire_id
+      this.props.currentMandataire.id
     }/commentaires`;
     fetch(url, {
       credentials: "include",
@@ -78,7 +79,7 @@ class Commentaire extends React.Component {
 
   onDelete = comments => {
     const url = `${API_URL}/api/v1/mandataires/${
-      this.props.currentMandataire.mandataire_id
+      this.props.currentMandataire.id
     }/commentaires/${comments.co_id}`;
     fetch(url, {
       credentials: "include",
@@ -98,9 +99,6 @@ class Commentaire extends React.Component {
   };
 
   render() {
-    console.log(111);
-    console.log(this.state.data);
-
     return (
       <div className="form-group">
         <label htmlFor="exampleFormControlTextarea1">
