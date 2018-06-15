@@ -118,7 +118,7 @@ class TableRowMesure extends React.Component {
         code_postal: formData.code_postal,
         type_mesure: formData.type_mesure,
         genre: formData.genre,
-        age: formData.age,
+        age: parseInt(formData.age),
         status: formData.status
       })
     })
@@ -192,7 +192,6 @@ class TableRowMesure extends React.Component {
   };
 
   onClickMesure = (e, formData) => {
-    console.log("formDataonClickMesure ", formData);
     apiFetch(`/mandataires/1/mesures/${e}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -200,7 +199,7 @@ class TableRowMesure extends React.Component {
         code_postal: formData.codePostal,
         type: formData.type,
         civilite: formData.civilite,
-        annee: formData.annee,
+        annee: parseInt(formData.annee),
         residence: formData.residence,
         ville: formData.commune
         // longitude: this.state.postcodeCoordinates[0],
@@ -269,7 +268,7 @@ class TableRowMesure extends React.Component {
       ouverture: `${date_ouverture}`,
       codePostal: `${code_postal}`,
       civilite: `${civilite}`,
-      annee: `${annee}`,
+      annee: `${parseInt(annee)}`,
       commune: `${ville}`,
       residence: `${residence}`,
       type: `${type}`
@@ -284,7 +283,7 @@ class TableRowMesure extends React.Component {
         ville={ville}
         formData={formData}
         civilite={civilite}
-        annee={annee}
+        annee={parseInt(annee)}
         type={type}
         residence={residence}
         extinction={extinction}
