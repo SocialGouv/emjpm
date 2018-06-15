@@ -33,7 +33,7 @@ const TableMandataire = ({ rows, openModal, updateFilters,updateTimer }) => {
         </label>
       </div>
       <div className="custom-control custom-radio custom-control-inline">
-        <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline3">
+        <label style={{ cursor: "pointer", width: "70px" }} htmlFor="customRadioInline3">
           <input
             type="radio"
             id="customRadioInline3"
@@ -54,7 +54,7 @@ const TableMandataire = ({ rows, openModal, updateFilters,updateTimer }) => {
             value="All"
             defaultChecked={true}
             onClick={e => updateFilters({ searchType: "" })}
-          />All
+          />Tous
         </label>
       </div>
       <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
