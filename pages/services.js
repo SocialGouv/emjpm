@@ -3,6 +3,7 @@ import Footer from "../src/components/communComponents/Footer";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import FormulaireService from "../src/components/formulaireService";
 import apiFetch from "../src/components/communComponents/Api";
+import DislayDate from "../src/components/communComponents/showDate";
 
 class MandatairesIndex extends React.Component {
   state = {
@@ -23,31 +24,22 @@ class MandatairesIndex extends React.Component {
   };
 
   render() {
-    return (
-      <Tabs>
+    return <Tabs>
         <TabList>
-          <div
-            className="panel"
-            style={{
-              textAlign: "left",
-              backgroundSize: "cover",
-              heigth: "100px !important",
-              backgroundColor: "#cad4de"
-            }}
-          >
+          <div className="panel" style={{ textAlign: "left", backgroundSize: "cover", heigth: "100px !important", backgroundColor: "#cad4de" }}>
             <div className="panel__container" style={{ paddingBottom: "0px" }}>
               <div className="container" style={{ paddingRight: "0px", paddingLeft: "0px" }}>
                 <h2 style={{ color: "black" }}>
                   {" "}
-                  {this.state.currentMandataire.nom} {this.state.currentMandataire.prenom}{" "}
+                  {this.state.currentMandataire.etablissement} <br />
                 </h2>
-                <div
-                  style={{
-                    backgroundColor: "#ebeff2",
-                    lineHeight: "40px",
-                    paddingBottom: "5px"
-                  }}
-                >
+                <div style={{ textAlign: "right" }}>
+                  mis à jour:{" "}
+                  {this.state.currentMandataire.updateMesure && (
+                    <DislayDate date={this.state.currentMandataire.updateMesure.slice(0, 10)} />
+                  )}
+                </div>
+                <div style={{ backgroundColor: "#ebeff2", lineHeight: "40px", paddingBottom: "5px" }}>
                   <Tab>Vos informations</Tab>
                 </div>
               </div>
@@ -57,15 +49,11 @@ class MandatairesIndex extends React.Component {
         <div className="container" style={{ backgroundColor: "white", minHeight: "70vh" }}>
           <TabPanel>
             <div style={{ minHeight: "70vh", paddingTop: "10px" }}>
-              <FormulaireService
-                currentMandataireModal={this.state.currentMandataire}
-                updateMadataire={this.updateMadataire}
-              />
+              <FormulaireService currentMandataireModal={this.state.currentMandataire} updateMadataire={this.updateMadataire} />
             </div>
           </TabPanel>
         </div>
-      </Tabs>
-    );
+      </Tabs>;
   }
 }
 

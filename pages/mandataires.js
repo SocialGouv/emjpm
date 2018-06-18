@@ -134,6 +134,9 @@ const MandataireIndexView = ({
             <br />
             {currentMandataire && <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />}
           </Title>
+          <div style={{ textAlign: "right" }}>
+            {currentMandataire && <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />}
+          </div>
         </ContainerMandataire>
         <TabsShowMandataire className="container">
           <Tab style={tabStyle}>
