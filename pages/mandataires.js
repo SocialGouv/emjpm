@@ -131,11 +131,13 @@ const MandataireIndexView = ({
         <ContainerMandataire className="container">
           <Title>
             {currentMandataire.nom} {currentMandataire.prenom}
-            <br />
-            {currentMandataire && <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />}
           </Title>
           <div style={{ textAlign: "right" }}>
-            {currentMandataire && <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />}
+            {currentMandataire.updateMesure && (
+              <div>
+                mis à jour : <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />
+              </div>
+            )}
           </div>
         </ContainerMandataire>
         <TabsShowMandataire className="container">

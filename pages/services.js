@@ -34,9 +34,12 @@ class MandatairesIndex extends React.Component {
                   {this.state.currentMandataire.etablissement} <br />
                 </h2>
                 <div style={{ textAlign: "right" }}>
-                  mis à jour:{" "}
+                 {" "}
                   {this.state.currentMandataire.updateMesure && (
+                      <div>
+                      mis à jour:
                     <DislayDate date={this.state.currentMandataire.updateMesure.slice(0, 10)} />
+                      </div>
                   )}
                 </div>
                 <div style={{ backgroundColor: "#ebeff2", lineHeight: "40px", paddingBottom: "5px" }}>

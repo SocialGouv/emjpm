@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import DislayDate from "../communComponents/showDate";
-import { Clock } from "react-feather";
+import { AlertCircle } from "react-feather";
 import * as React from "react";
 import checkDate from "../communComponents/checkDate";
 
@@ -68,8 +68,8 @@ class TableRowMandataire extends React.Component {
   };
 
   render() {
-      //date-fns
-      let isLate = checkDate(this.props.mandataire.updateMesure);
+    //date-fns
+    let isLate = checkDate(this.props.mandataire.updateMesure);
     const { type, etablissement, disponibilite, referent, dispo_max } = this.props.mandataire;
     return (
       <tr onClick={this.props.onClick} style={{ cursor: "pointer" }}>
@@ -89,8 +89,14 @@ class TableRowMandataire extends React.Component {
         <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
           <PillDispo dispo={disponibilite} dispo_max={dispo_max} />
         </td>
-        <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
-            { isLate &&  <Clock />}
+        <td
+          style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
+        >
+          {!isLate && (
+              <span className="d-inline-block" tabIndex="0" data-toggle="tooltip" title="Dernière mise à jour des données datant de plus de 30 jours.">
+            <AlertCircle />
+              </span>
+          )}
         </td>
       </tr>
     );
