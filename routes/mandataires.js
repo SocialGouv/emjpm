@@ -120,5 +120,6 @@ router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));
 router.use("/", require("./serviceAntennes"));
 router.use("/", require("./etablissementPreposes"));
+router.use("/", require("./mandatairesEtablissements"));
 
 module.exports = router;
