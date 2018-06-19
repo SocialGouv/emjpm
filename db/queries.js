@@ -163,7 +163,8 @@ function getSingle(mandataireID) {
 }
 
 function getSingleDisponibilite(mandataireID) {
-  return Mandataires().select('disponibilite')
+  return Mandataires()
+    .select("disponibilite")
     .where("id", parseInt(mandataireID))
     .first();
 }
@@ -275,8 +276,29 @@ function getAllEtablissement(mandataireId) {
   });
 }
 
+function getAllMandataireEtablissement(mandataireId) {
+  return knex("mandatairesEtablissements")
+    .innerJoin(
+      "mandataires",
+      "mandataires.id",
+      "mandatairesEtablissements.mandataire_id"
+    )
+    .innerJoin(
+      "etablissements",
+      "mandatairesEtablissements.etablissment_id",
+      "etablissements.id"
+    )
+    .where({
+      mandataire_id: parseInt(mandataireId)
+    });
+}
+
 function addEtablissement(mandataireId) {
   return knex("EtablissementPreposes").insert(mandataireId);
+}
+
+function addMandataireEtablissement(mandataireId) {
+  return knex("mandatairesEtablissements").insert(mandataireId);
 }
 
 function updateEtablissement(mesureID, updates) {
@@ -285,6 +307,11 @@ function updateEtablissement(mesureID, updates) {
     .update(updates);
 }
 function deleteEtablissement(showID) {
+  return knex("EtablissementPreposes")
+    .where("id", parseInt(showID))
+    .del();
+}
+function deleteMandataireEtablissement(showID) {
   return knex("EtablissementPreposes")
     .where("id", parseInt(showID))
     .del();
@@ -363,5 +390,8 @@ module.exports = {
   getCoordonneByPosteCode,
   getAllByMandatairesFilter,
   isMandataireInTi,
-  getSingleDisponibilite
+  getSingleDisponibilite,
+  addMandataireEtablissement,
+  getAllMandataireEtablissement,
+  deleteMandataireEtablissement
 };
