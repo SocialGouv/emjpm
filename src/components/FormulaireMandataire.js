@@ -3,6 +3,7 @@ import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import apiFetch from "./communComponents/Api";
 import piwik from "../piwik";
+import CreationEtablissement from "./mandataireComponents/CreationEtablissement";
 
 const schema = {
   title: "Modifier vos informations",
@@ -96,7 +97,10 @@ const FormulaireMandataireView = ({
   isOpen,
   onRequestClose,
   closebuttonmodal,
-  formData
+  formData,
+  updateEtablissement,
+  etablissement,
+  mandataireEtablissement
 }) => (
   <Container>
     {currentMandataireModalTry && (
@@ -110,6 +114,10 @@ const FormulaireMandataireView = ({
               <br />
               {/*{formData.type.toUpperCase()}*/}
               <br />
+              <CreationEtablissement
+                updateEtablissement={updateEtablissement}
+                etablissements={etablissement}
+              />
               <br />
               <b>Contact</b>
               <br />
@@ -137,9 +145,13 @@ const FormulaireMandataireView = ({
               <br />
               <b> Secrétariat</b>
               <br />
-              {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat}{" "}
+              {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat} <br />
+              <br />
+              Etablissement
               <br />
               <br />
+              {mandataireEtablissement &&
+                mandataireEtablissement.map(etablissement => <div>{/*{etablissement.nom}*/}</div>)}
               <button className={"btn btn-dark"} onClick={onClick}>
                 Modifier mes informations
               </button>
@@ -174,8 +186,22 @@ class FormulaireMandataire extends React.Component {
     data: [],
     datamesure: [],
     currentMandataire: "",
-    modalIsOpen: false
+    modalIsOpen: false,
+    etablissement: "",
+    mandataireEtablissement: ""
   };
+
+  componentDidMount() {
+    apiFetch("/mandataires/1/etablissements")
+      .then(mesures => {
+        this.setState({
+          etablissement: mesures
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 
   onSubmit = ({ formData }) => {
     apiFetch(`/mandataires/1`, {
@@ -212,8 +238,12 @@ class FormulaireMandataire extends React.Component {
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
+  updateEtablissement = etablissement => {
+    this.setState({ mandataireEtablissement: etablissement });
+  };
 
   render() {
+    console.log(this.state.etablissement);
     const formData = this.props.currentMandataireModal;
     return (
       <FormulaireMandataireView
@@ -224,6 +254,9 @@ class FormulaireMandataire extends React.Component {
         onRequestClose={this.closeModal}
         closebuttonmodal={this.closeModal}
         formData={formData}
+        updateEtablissement={this.updateEtablissement}
+        etablissement={this.state.etablissement}
+        mandataireEtablissement={this.state.mandataireEtablissement}
       />
     );
   }
