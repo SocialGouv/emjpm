@@ -312,7 +312,7 @@ function deleteEtablissement(showID) {
     .del();
 }
 function deleteMandataireEtablissement(showID) {
-  return knex("EtablissementPreposes")
+  return knex("mandatairesEtablissements")
     .where("id", parseInt(showID))
     .del();
 }
