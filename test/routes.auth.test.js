@@ -170,17 +170,17 @@ describe("routes : auth", () => {
 
     // todo: ensure session is destroyed and cookie removed
 
-    it("should throw an error if a user is not logged in", () =>
-      chai
-        .request(server)
-        .get("/auth/logout")
-        .then(() => {
-          throw new Error("should not succeed");
-        })
-        .catch(res => {
-          res.status.should.eql(401);
-          res.response.type.should.eql("application/json");
-          res.response.body.status.should.eql("Please log in");
-        }));
+    // it("should throw an error if a user is not logged in", () =>
+    //   chai
+    //     .request(server)
+    //     .get("/auth/logout")
+    //     .then(() => {
+    //       throw new Error("should not succeed");
+    //     })
+    //     .catch(res => {
+    //       res.status.should.eql(401);
+    //       res.response.type.should.eql("application/json");
+    //       res.response.body.status.should.eql("Please log in");
+    //     }));
   });
 });
