@@ -78,17 +78,23 @@ export const MapsView = ({
         </Map>
       </MapsWidth>
       <MandatairesWidth>
-        <Title>
-          {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
-        </Title>
-        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-          <TableMandataire
-            rows={filteredMesures}
-            openModal={openModal}
-            updateFilters={updateFilters}
-            updateTimer={updateTimer}
-          />
-        </div>
+        {(mesureCount && (
+          <React.Fragment>
+            <Title>
+              {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+            </Title>
+
+            <TableMandataire
+              rows={filteredMesures}
+              openModal={openModal}
+              updateFilters={updateFilters}
+            />
+          </React.Fragment>
+        )) || (
+            <div style={{ textAlign: "center", marginTop: 20 }}>
+              Aucune mesure actuellement dans cette région
+            </div>
+          )}
       </MandatairesWidth>
       Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
     </div>

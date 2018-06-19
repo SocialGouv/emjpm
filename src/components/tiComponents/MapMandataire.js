@@ -80,17 +80,24 @@ export const MapsView = ({
         </Map>
       </MapsWidth>
       <MandatairesWidth>
-        <Title>
-          {mandataireCount} Professionnel{(mandataireCount > 1 && "s") || null}
-        </Title>
-        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-          <TableMandataire
-            rows={filteredMesures}
-            openModal={openModal}
-            updateFilters={updateFilters}
-            updateTimer={updateTimer}
-          />
-        </div>
+        {(mesureCount > 0 && (
+          <React.Fragment>
+            <Title>
+              {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+            </Title>
+            <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+              <TableMandataire
+                rows={filteredMesures}
+                openModal={openModal}
+                updateFilters={updateFilters}
+              />
+            </div>
+          </React.Fragment>
+        )) || (
+            <div style={{ textAlign: "center", marginTop: 20 }}>
+              Aucun mandataire actuellement dans cette région
+            </div>
+          )}
       </MandatairesWidth>
     </div>
   </div>
