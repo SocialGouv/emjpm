@@ -20,7 +20,8 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
     .catch(error => next(error));
 });
 
-router.post("/filters", typeRequired("ti"), async (req, res, next) => {
+// todo : make it work for real
+router.post("/filters", loginRequired, async (req, res, next) => {
   const ti = await queries.getTiByUserId(req.user.id);
   if (!ti) {
     return next(new Error(401));
