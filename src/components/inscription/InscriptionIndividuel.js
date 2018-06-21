@@ -101,13 +101,13 @@ class InscriptionIndividuel extends React.Component {
   /*onSubmit = ({ formData }) => {
 
 
-		 apiFetch(`/mandataires/1`, {
+     apiFetch(`/mandataires/1`, {
       method: "PUT",
       body: JSON.stringify({
-    	Iusername:
-    	Ipass1:
-    	Ipass2:
-       	Inom:
+      Iusername:
+      Ipass1:
+      Ipass2:
+        Inom:
         Iprenom:
         Itelephone:
         Itelephone_portable:
@@ -121,13 +121,12 @@ class InscriptionIndividuel extends React.Component {
      //piwik
      // this.props.updateMadataire(json);
     });
-	};*/
+  };*/
 
   render() {
     return (
       <div>
-        <br />
-        <h2 style={{ margin: 20 }}>
+        <h2 style={{ margin: "0px 20px 20px 20px" }}>
           Veuillez renseigner ci-dessous vos informations professionelles:
         </h2>
         <br />
