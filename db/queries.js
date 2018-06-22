@@ -295,6 +295,7 @@ function getEtablissements() {
 
 function getAllMandataireEtablissement(mandataireId) {
   return knex("mandatairesEtablissements")
+      .select('mandatairesEtablissements.id', 'etablissements.nom')
     .innerJoin(
       "mandataires",
       "mandataires.id",
@@ -302,7 +303,7 @@ function getAllMandataireEtablissement(mandataireId) {
     )
     .innerJoin(
       "etablissements",
-      "mandatairesEtablissements.etablissment_id",
+      "mandatairesEtablissements.etablissement_id",
       "etablissements.id"
     )
     .where({
