@@ -16,7 +16,7 @@ router.post("/1/etablissements", loginRequired, async (req, res, next) => {
     // secu : ensure TI can write on this mandataire + add related test
     const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
-        .addEtablissement({
+        .addMandataireEtablissement({
             etablissement_id: req.body.etablissement_id,
             mandataire_id: mandataire.id
         })

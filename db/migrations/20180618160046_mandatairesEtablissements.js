@@ -1,4 +1,4 @@
-exports.up = (knex, Promise) => {
+    exports.up = (knex, Promise) => {
     return knex.schema.createTable("mandatairesEtablissements", table => {
         table.increments();
         table
