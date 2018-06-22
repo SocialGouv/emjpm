@@ -135,7 +135,7 @@ const MandataireIndexView = ({
           <div style={{ textAlign: "right" }}>
             {currentMandataire.updateMesure && (
               <div>
-                mis à jour : <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />
+                Dernière mise à jour : <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />
               </div>
             )}
           </div>
@@ -249,8 +249,9 @@ class MandatairesIndex extends React.Component {
           body: JSON.stringify({
             updateMesure: new Date()
           })
-        }).then(() => {
-          return json;
+        }).then(json2 => {
+          console.log("json", json2);
+          this.updateMadataire(json2);
         });
       })
       .catch(e => {

@@ -100,7 +100,8 @@ const FormulaireMandataireView = ({
   formData,
   updateEtablissement,
   etablissement,
-  mandataireEtablissement
+  mandataireEtablissement,
+  deleteEtablissement
 }) => (
   <Container>
     {currentMandataireModalTry && (
@@ -112,12 +113,11 @@ const FormulaireMandataireView = ({
                 {formData.prenom} {formData.nom}
               </b>
               <br />
-              {/*{formData.type.toUpperCase()}*/}
-              <br />
+                {currentMandataireModalTry.type === "Prepose" &&
               <CreationEtablissement
                 updateEtablissement={updateEtablissement}
                 etablissements={etablissement}
-              />
+              /> }
               <br />
               <b>Contact</b>
               <br />
@@ -147,11 +147,24 @@ const FormulaireMandataireView = ({
               <br />
               {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat} <br />
               <br />
-              Etablissement
+              {mandataireEtablissement && currentMandataireModalTry.type === "Prepose" && (
+                <div>
+                  <b>Etablissement(s) </b>
+                  <br />
+                </div>
+              )}
+              {mandataireEtablissement && currentMandataireModalTry.type === "Prepose"
+              &&
+                mandataireEtablissement.map(etablissement => (
+                  <div>
+                    {etablissement.nom}
+                    <br />
+                    <a href="#" onClick={() => deleteEtablissement(etablissement.id)}>
+                      Supprimer
+                    </a>
+                  </div>
+                ))}
               <br />
-              <br />
-              {mandataireEtablissement &&
-                mandataireEtablissement.map(etablissement => <div>{/*{etablissement.nom}*/}</div>)}
               <button className={"btn btn-dark"} onClick={onClick}>
                 Modifier mes informations
               </button>
@@ -192,15 +205,18 @@ class FormulaireMandataire extends React.Component {
   };
 
   componentDidMount() {
-    apiFetch("/mandataires/1/etablissements")
-      .then(mesures => {
-        this.setState({
-          etablissement: mesures
+    apiFetch("/mandataires/1/etablissements").then(finess => {
+      apiFetch("/mandataires/1/etablissement")
+        .then(mandataireEtablissement => {
+          this.setState({
+            etablissement: finess,
+            mandataireEtablissement: mandataireEtablissement
+          });
+        })
+        .catch(e => {
+          console.log(e);
         });
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    });
   }
 
   onSubmit = ({ formData }) => {
@@ -232,6 +248,18 @@ class FormulaireMandataire extends React.Component {
     this.closeModal();
   };
 
+  deleteEtablissement = etablissement_id => {
+    console.log("sure", etablissement_id);
+    apiFetch(`/mandataires/1/etablissements/${etablissement_id}`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        id: etablissement_id
+      })
+    }).then(json => {
+      this.updateEtablissement(json);
+    });
+  };
+
   openModal = mandataire => {
     this.setState({ modalIsOpen: true });
   };
@@ -243,7 +271,7 @@ class FormulaireMandataire extends React.Component {
   };
 
   render() {
-    console.log(this.state.etablissement);
+    console.log("aa", this.props.currentMandataireModal);
     const formData = this.props.currentMandataireModal;
     return (
       <FormulaireMandataireView
@@ -257,6 +285,7 @@ class FormulaireMandataire extends React.Component {
         updateEtablissement={this.updateEtablissement}
         etablissement={this.state.etablissement}
         mandataireEtablissement={this.state.mandataireEtablissement}
+        deleteEtablissement={this.deleteEtablissement}
       />
     );
   }
