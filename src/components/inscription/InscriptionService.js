@@ -18,6 +18,7 @@ const schema = {
     "username",
     "pass1",
     "pass2",
+    "etablissement",
     "nom",
     "prenom",
     "telephone",
@@ -34,6 +35,7 @@ const schema = {
     },
     pass1: { type: "string", title: "Mot de passe", minLength: 10 },
     pass2: { type: "string", title: "Répéter mot de passe", minLength: 10 },
+    etablissement: { type: "string", title: "Nom du service", default: "" },
     nom: { type: "string", title: "Nom du contact dans le service", default: "" },
     prenom: { type: "string", title: "Prénom du contact dans le service", default: "" },
     telephone: { type: "string", title: "Téléphone du contact dans le service", default: "" },
@@ -83,6 +85,10 @@ const uiSchema = {
     classNames: "I_input_form_inscription",
     "ui:placeholder": "Code Postal"
   },
+  etablissement: {
+    classNames: "I_input_form_inscription",
+    "ui:placeholder": "Nom du service"
+  },
   ville: {
     classNames: "I_input_form_inscription",
     "ui:placeholder": "Commune"
@@ -94,27 +100,28 @@ const formData = {};
 class InscriptionService extends React.Component {
   /*onSubmit = ({ formData }) => {
 
-		 apiFetch(`/mandataires/1`, {
+     apiFetch(`/mandataires/1`, {
       method: "PUT",
       body: JSON.stringify({
-    	usernameS:
-    	pass1:
-    	pass2:
-      nomS:
-      prenomS:
-      telephoneS:
-      telephone_portableS:
-      emailS:
-      adresseS:
-      code_postalS:
-      villeS:
+      username:
+      pass1:
+      pass2:
+      etablissement:
+      nom:
+      prenom:
+      telephone:
+      telephone_portable:
+      email:
+      adresse:
+      code_postal:
+      ville:
 
       })
     }).then(json => {
      //piwik
      // this.props.updateMadataire(json);
     });
-	};*/
+  };*/
 
   render() {
     return (
