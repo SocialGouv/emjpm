@@ -5,12 +5,13 @@ import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
+import Router from "next/router";
+
 import Navigation from "../src/components/communComponents/Navigation";
 import RowModal from "../src/components/communComponents/RowModal";
 import Footer from "../src/components/communComponents/Footer";
 import Commentaire from "../src/components/tiComponents/Commentaire";
 import apiFetch from "../src/components/communComponents/Api";
-import Router from "next/router";
 
 const modalStyles = {
   content: {

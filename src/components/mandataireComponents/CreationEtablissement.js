@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import apiFetch from "../communComponents/Api";
 import ReactAutocomplete from "react-autocomplete";
 import * as React from "react";
+
+import apiFetch from "../communComponents/Api";
 
 const ModalPres = styled.div`
   padding: 15px;

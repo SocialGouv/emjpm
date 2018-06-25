@@ -1,8 +1,9 @@
 import React, { createRef } from "react";
+import styled from "styled-components";
 import { Map, CircleMarker, TileLayer } from "react-leaflet";
+
 import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
-import styled from "styled-components";
 import FilterMesuresMap from "./FilterMesuresMap";
 
 const Title = styled.div`

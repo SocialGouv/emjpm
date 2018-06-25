@@ -1,6 +1,6 @@
 import Form from "react-jsonschema-form";
-import styled from "styled-components";
 import Modal from "react-modal";
+
 import ExitButton from "../ExitButton";
 
 const schema = {

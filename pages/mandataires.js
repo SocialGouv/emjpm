@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-import { Home, Map, User, UserMinus } from "react-feather";
+import { Home, Map, UserMinus } from "react-feather";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import apiFetch from "../src/components/communComponents/Api";
@@ -244,14 +244,13 @@ class MandatairesIndex extends React.Component {
           })
         )
       )
-      .then(json => {
+      .then(() => {
         return apiFetch(`/mandataires/1`, {
           method: "PUT",
           body: JSON.stringify({
             updateMesure: new Date()
           })
         }).then(json2 => {
-          console.log("json", json2);
           this.updateMadataire(json2);
         });
       })
@@ -269,7 +268,6 @@ class MandatairesIndex extends React.Component {
   };
 
   render() {
-    console.log("dhowDate", this.state.currentMandataire.updateMesure);
     const filteredMesures = this.state.datamesure;
     return (
       <MandataireIndexView

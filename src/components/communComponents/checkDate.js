@@ -11,4 +11,3 @@ const checkDate = date => {
 };
 
 export default checkDate;
-

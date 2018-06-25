@@ -104,9 +104,9 @@ class MesureInput extends React.Component {
               .then(json => {
                 return apiFetch(`/mandataires/1`, {
                   method: "PUT",
-                    body: JSON.stringify({
-                       updateMesure: new Date()
-                    })
+                  body: JSON.stringify({
+                    updateMesure: new Date()
+                  })
                 }).then(() => {
                   return json;
                 });

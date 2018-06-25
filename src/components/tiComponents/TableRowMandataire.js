@@ -1,17 +1,8 @@
 import styled from "styled-components";
-import DislayDate from "../communComponents/showDate";
 import { AlertCircle } from "react-feather";
 import * as React from "react";
-import checkDate from "../communComponents/checkDate";
 
-const imageStyle = {
-  lineHeight: "50px",
-  width: "20px",
-  height: "20px",
-  color: "black",
-  display: "inline-block",
-  margin: 10
-};
+import checkDate from "../communComponents/checkDate";
 
 const getColorFromDisponibilite = dispo => {
   if (dispo <= 0) {

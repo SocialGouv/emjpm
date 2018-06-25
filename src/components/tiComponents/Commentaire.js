@@ -27,7 +27,6 @@ class Commentaire extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.currentMandataire.mandataire_id);
     const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire.id}/commentaires`;
     fetch(url, {
       credentials: "include",
@@ -50,7 +49,6 @@ class Commentaire extends React.Component {
   }
 
   onSubmit = ({ formData }) => {
-    console.log("Com", this.props.currentMandataire);
     const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire.id}/commentaires`;
     fetch(url, {
       credentials: "include",

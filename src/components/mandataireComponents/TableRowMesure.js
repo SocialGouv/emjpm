@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.css";
+
 import "../../../static/css/custom.css";
 import "../../../static/css/hero.css";
 import "../../../static/css/panel.css";
@@ -138,7 +139,6 @@ class TableRowMesure extends React.Component {
   };
 
   onClick = (e, formData) => {
-    console.log("formData ", formData);
     apiFetch(`/mandataires/1/mesures/${e}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -155,7 +155,7 @@ class TableRowMesure extends React.Component {
           return json;
         });
       })
-      .then(json2 => {
+      .then(() => {
         this.closeModal();
         this.props.updateMesureEteinte(); // callback parent with data
       })
@@ -182,7 +182,7 @@ class TableRowMesure extends React.Component {
           return json;
         });
       })
-      .then(json2 => {
+      .then(() => {
         this.props.updateMesureEteinte(); // callback parent with data
       })
       .catch(e => {
@@ -213,7 +213,7 @@ class TableRowMesure extends React.Component {
           return json;
         });
       })
-      .then(json2 => {
+      .then(() => {
         this.closeModal();
         this.props.updateMesureEteinte(); // callback parent with data
       })

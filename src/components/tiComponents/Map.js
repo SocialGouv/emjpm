@@ -1,8 +1,9 @@
 import React, { createRef } from "react";
-import { Map, CircleMarker, TileLayer, Tooltip } from "react-leaflet";
+import styled from "styled-components";
+import { Map, CircleMarker, TileLayer } from "react-leaflet";
+
 import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
-import styled from "styled-components";
 import FilterMesuresMap from "./FilterMesuresMap";
 
 const Title = styled.div`
@@ -124,7 +125,7 @@ class Mapstry extends React.Component {
       });
   }
 
-  handleMoveend = mapRef => {
+  handleMoveend = () => {
     const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
     apiFetch("/mesures/filters", {
       method: "POST",
