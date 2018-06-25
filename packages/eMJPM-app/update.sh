@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# stop on any error
+set -e
+
 git pull
 
 npm install
