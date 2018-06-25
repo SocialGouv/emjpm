@@ -1,5 +1,3 @@
-import CodePostalMandataire from "./CodePostalMandataire";
-
 const PanelGrisMndataire = () => {
   return (
     <div

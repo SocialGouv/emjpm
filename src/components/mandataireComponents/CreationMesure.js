@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import FormInputMesure from "../FormInputMesures";
+import FormInputMesure from "./FormInputMesures";
 import getPostCodeCoordinates from "../communComponents/GetPostCodeCoordinates";
 import apiFetch from "../communComponents/Api";
 
@@ -20,6 +20,7 @@ export const FormMesure = ({
   showHide,
   hideShow,
   error,
+  success,
   status
 }) => (
   <div>
@@ -42,6 +43,7 @@ export const FormMesure = ({
             showReplyForm={OpenCreationMesure}
             error={error}
             status={status}
+            success={success}
           />
         </div>
       </ModalPres>
@@ -89,12 +91,26 @@ class MesureInput extends React.Component {
                   return json;
                 });
               })
-              .then(json2 => {
-                this.props.updateMesure(json2);
-                this.setState({
-                  status: "success",
-                  error: " La mesure a été crée"
+              .then(json => {
+                return apiFetch(`/mandataires/1`, {
+                  method: "PUT",
+                  body: JSON.stringify({
+                    updateMesure: new Date()
+                  })
+                }).then(() => {
+                  return json;
                 });
+              })
+              .then(json2 => {
+                this.setState(
+                  {
+                    status: "success",
+                    success: " La mesure a été crée"
+                  },
+                  () => {
+                    this.props.updateMesure(json2);
+                  }
+                );
               });
           })
           .catch(e => {
@@ -136,9 +152,9 @@ class MesureInput extends React.Component {
 
   OpenCreationMesure = () => {
     if (this.state.showForm === false) {
-      this.setState({ showForm: true });
+      this.setState({ showForm: true, error: null, success: null, status: null });
     } else {
-      this.setState({ showForm: false });
+      this.setState({ showForm: false, error: null, success: null, status: null });
     }
   };
 
@@ -162,6 +178,7 @@ class MesureInput extends React.Component {
         showHide={showHide}
         hideShow={hideShow}
         error={this.state.error}
+        success={this.state.success}
         status={this.state.status}
       />
     );

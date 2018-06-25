@@ -101,13 +101,22 @@ const ErrorBox = ({ message }) =>
   )) ||
   null;
 
+const SucessBox = ({ message }) =>
+  (message && (
+    <div className="alert alert-success" role="alert">
+      {message}
+    </div>
+  )) ||
+  null;
+
 const FormInputMesure = ({
   CustomFieldTemplate,
   formData,
   onSubmit,
   showReplyForm,
   error,
-  status
+  status,
+  success
 }) => (
   <Form
     schema={schema}
@@ -121,14 +130,15 @@ const FormInputMesure = ({
       type="submit"
       className="btn btn-success"
       style={{ marginLeft: "20px" }}
-      disabled={status === "loading" || status === "success"}
+      disabled={status === "loading"}
     >
       {(status === "loading" && "Création...") || (status === "success" && "Valider") || "Valider"}
     </button>
     <CancelButton onClick={showReplyForm} className="btn btn-dark">
       Replier ▲
     </CancelButton>
-    <ErrorBox message={error} />
+    {error && <ErrorBox message={error} />}
+    {success && <SucessBox message={success} />}
   </Form>
 );
 
