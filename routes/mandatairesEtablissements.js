@@ -7,7 +7,7 @@ const { loginRequired } = require("../auth/_helpers");
 router.get("/1/etablissement", loginRequired, async (req, res, next) => {
     const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
-        .getAllMandataireEtablissement(mandataire.id)
+        .getAllEtablissementsByMandataire(mandataire.id)
         .then(commentaires => res.status(200).json(commentaires))
         .catch(error => next(error));
 });
@@ -16,11 +16,11 @@ router.post("/1/etablissements", loginRequired, async (req, res, next) => {
     // secu : ensure TI can write on this mandataire + add related test
     const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
-        .addMandataireEtablissement({
+        .addMandataireToEtablissement({
             etablissement_id: req.body.etablissement_id,
             mandataire_id: mandataire.id
         })
-        .then(commentaireID => queries.getAllMandataireEtablissement(mandataire.id))
+        .then(commentaireID => queries.getAllEtablissementsByMandataire(mandataire.id))
         .then(commentaires => res.status(200).json(commentaires))
         .catch(error => next(error));
 });
@@ -33,7 +33,7 @@ router.delete(
         const mandataire = await queries.getMandataireByUserId(req.user.id);
         queries
             .deleteMandataireEtablissement(req.params.mandatairesEtablissementId)
-            .then(() => queries.getAllMandataireEtablissement(mandataire.id))
+            .then(() => queries.getAllEtablissementsByMandataire(mandataire.id))
             .then(commentaires => res.status(200).json(commentaires))
             .catch(error => {
                 console.log(error);

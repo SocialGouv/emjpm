@@ -293,7 +293,7 @@ function getEtablissements() {
   // );
 }
 
-function getAllMandataireEtablissement(mandataireId) {
+function getAllEtablissementsByMandataire(mandataireId) {
   return knex("mandatairesEtablissements")
     .select("mandatairesEtablissements.id", "etablissements.nom")
     .innerJoin(
@@ -315,7 +315,7 @@ function addEtablissement(mandataireId) {
   return knex("EtablissementPreposes").insert(mandataireId);
 }
 
-function addMandataireEtablissement(mandataireId) {
+function addMandataireToEtablissement(mandataireId) {
   return knex("mandatairesEtablissements").insert(mandataireId);
 }
 
@@ -409,8 +409,8 @@ module.exports = {
   getAllByMandatairesFilter,
   isMandataireInTi,
   getSingleDisponibilite,
-  addMandataireEtablissement,
-  getAllMandataireEtablissement,
+  addMandataireToEtablissement,
+  getAllEtablissementsByMandataire,
   deleteMandataireEtablissement,
   getEtablissements
 };
