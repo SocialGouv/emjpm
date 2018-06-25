@@ -283,14 +283,7 @@ function getEtablissements() {
     .orWhereBetween("code_postal", [62000, 62999])
     .orWhereBetween("code_postal", [80000, 80999])
     .orWhereBetween("code_postal", [2000, 2999]);
-  //
-  //   where(
-  //   'code_postal',
-  //   'like',
-  //     '59%'
-  // 28591
-  // |60|62|80|02)\d{3}/%'
-  // );
+  //TODO refactor with Likes '%...'
 }
 
 function getAllEtablissementsByMandataire(mandataireId) {
