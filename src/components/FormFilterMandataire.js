@@ -3,7 +3,7 @@ import styled from "styled-components";
 import FormInput from "./FormInput";
 import SearchButton from "./communComponents/SearchButton";
 
-const FormFilterMandataire = ({ props }) => {
+const FormFilterMandataire = () => {
   return (
     <Presentation>
       <div style={{ marginLeft: "5px" }}>

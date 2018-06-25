@@ -93,11 +93,6 @@ const uiSchema = {
   }
 };
 
-const CancelButton = styled.button`
-  cursor: pointer;
-  margin-left: 10px;
-`;
-
 const ModalMesure = ({
   CustomFieldTemplate,
   onClick,
@@ -115,7 +110,7 @@ const ModalMesure = ({
       contentLabel="mandataire"
       background="#e9ecef"
       style={customStyles}
-      style={{ border: "1px solid black" }}
+      // style={{ border: "1px solid black" }}
       className="ModalMesureUpdate"
       overlayClassName="OverlayInput"
     >

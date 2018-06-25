@@ -251,7 +251,6 @@ class FormulaireMandataire extends React.Component {
   };
 
   deleteEtablissement = etablissement_id => {
-    console.log("sure", etablissement_id);
     apiFetch(`/mandataires/1/etablissements/${etablissement_id}`, {
       method: "DELETE",
       body: JSON.stringify({
@@ -262,7 +261,7 @@ class FormulaireMandataire extends React.Component {
     });
   };
 
-  openModal = mandataire => {
+  openModal = () => {
     this.setState({ modalIsOpen: true });
   };
   closeModal = () => {
@@ -273,7 +272,6 @@ class FormulaireMandataire extends React.Component {
   };
 
   render() {
-    console.log("aa", this.props.currentMandataireModal);
     const formData = this.props.currentMandataireModal;
     return (
       <FormulaireMandataireView
