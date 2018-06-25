@@ -19,7 +19,7 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       return knex("commentaires").insert({
         co_comment: "Hello, world 3",
-        mandataire_id: 3,
+        mandataire_id: 2,
         ti_id: 1
       });
     });
