@@ -1,5 +1,5 @@
 {
-  "presets": ["next/babel"],
+  "presets": ["env", "stage-0", "react"],
   "plugins": [
     "react-require"
   ]

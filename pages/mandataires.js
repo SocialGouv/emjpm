@@ -91,13 +91,12 @@ const Title = styled.div`
   margin: 10px;
 `;
 
-const OpenStreeMap = dynamic(
-  import("../src/components/mandataireComponents/MapsPartieMandataire"),
-  {
-    ssr: false,
-    loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
-  }
-);
+const OpenStreeMap = dynamic({
+  modules: props => ({
+    MapsPartieMandataire: import("../src/components/mandataireComponents/MapsPartieMandataire")
+  }),
+  render: (props, { MapsPartieMandataire }) => <MapsPartieMandataire {...props} />
+});
 
 const getColorFromDisponibilite = dispo => {
   if (dispo <= 0) {
