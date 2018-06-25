@@ -31,6 +31,7 @@
     "passport-local": "^1.0.0",
     "passport-stub": "^1.1.1",
     "pg": "^4.5.3",
+    "pg-native": "^3.0.0",
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
