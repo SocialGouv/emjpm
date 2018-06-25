@@ -11,7 +11,7 @@ import ModalCloseMesure from "./ModalCloseMesure";
 import Cell from "../communComponents/Cell";
 import ModalMesure from "./ModalMesure";
 import piwik from "../../piwik";
-import DislayDate from "../communComponents/showDate";
+import DislayDate from "../communComponents/formatFrenchDate";
 
 const TdStyle = styled.td`
   font-size: 1em;

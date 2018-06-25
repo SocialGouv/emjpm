@@ -8,7 +8,7 @@ import Footer from "../src/components/communComponents/Footer";
 import FormulaireMandataire from "../src/components/FormulaireMandataire";
 import Navigation from "../src/components/communComponents/Navigation";
 import TableMesure from "../src/components/mandataireComponents/TableMesure";
-import DislayDate from "../src/components/communComponents/showDate";
+import DislayDate from "../src/components/communComponents/formatFrenchDate";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",

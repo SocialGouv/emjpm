@@ -4,7 +4,7 @@ import Navigation from "../src/components/communComponents/Navigation";
 import Footer from "../src/components/communComponents/Footer";
 import FormulaireService from "../src/components/formulaireService";
 import apiFetch from "../src/components/communComponents/Api";
-import DislayDate from "../src/components/communComponents/showDate";
+import DislayDate from "../src/components/communComponents/formatFrenchDate";
 
 class MandatairesIndex extends React.Component {
   state = {
