@@ -40,7 +40,7 @@ exports.up = function(knex, Promise) {
                 if (user.admin) {
                   // type=admin
                   return knex
-                    .table("userers")
+                    .table("users")
                     .where({ id: user.id })
                     .update({
                       type: "admin",

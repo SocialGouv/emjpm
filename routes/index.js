@@ -39,6 +39,7 @@ router.post("/upload", function(req, res, next) {
 
 router.use("/mandataires", require("./mandataires"));
 router.use("/mesures", require("./mesures"));
+router.use("/inscription", require("./inscription"));
 
 // router.post("/services", function(req, res, next) {
 //   queries
