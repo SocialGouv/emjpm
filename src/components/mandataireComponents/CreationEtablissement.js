@@ -45,17 +45,17 @@ class CreationEtablissement extends React.Component {
   };
 
   render() {
-    const showHide = {
+    const hideForm = {
       display: this.state.showForm === true ? "block" : "none"
     };
-    const hideShow = {
+    const showForm = {
       display: this.state.showForm === false ? "block" : "none",
       align: "left"
     };
     return (
       <div>
         <button
-          style={{ display: "inline", ...hideShow }}
+          style={{ display: "inline", ...showForm }}
           type="button"
           className="btn btn-success mesure_button"
           onClick={this.OpenCreationMesure}
@@ -63,7 +63,7 @@ class CreationEtablissement extends React.Component {
           Ajouter un nouvel Etablissement
         </button>
 
-        <div style={showHide}>
+        <div style={hideForm}>
           <ModalPres>
             <div style={{ width: "600px" }}>
               <ReactAutocomplete
