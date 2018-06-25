@@ -1,6 +1,6 @@
 import TableRowMesure from "../mandataireComponents/TableRowMesure";
 
-const TableMesure = ({ rows, openModal }) => {
+const TableMesure = ({ rows }) => {
   return (
     <div className="col-lg-12" style={{ padding: "0px" }}>
       <table className="table responsive table-hover" style={{ boderTop: "0px" }}>

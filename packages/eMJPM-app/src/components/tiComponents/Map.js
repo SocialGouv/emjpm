@@ -1,8 +1,9 @@
 import React, { createRef } from "react";
-import { Map, CircleMarker, TileLayer, Tooltip } from "react-leaflet";
+import styled from "styled-components";
+import { Map, CircleMarker, TileLayer } from "react-leaflet";
+
 import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
-import styled from "styled-components";
 import FilterMesuresMap from "./FilterMesuresMap";
 
 const Title = styled.div`
@@ -38,7 +39,8 @@ export const MapsView = ({
   zoomCodePostal,
   getPostCodeCoordinates,
   updateValue,
-  value
+  value,
+  updateTimer
 }) => (
   <div className="container">
     <div className="row">
@@ -68,10 +70,8 @@ export const MapsView = ({
               <CircleMarker
                 center={[manda.latitude, manda.longitude]}
                 color="red"
-                radius={20}
-                fill={manda.count}
-                key={manda.latitude}
-                placeholder={manda.count}
+                radius={10}
+                key={manda.id}
               />
             ))}
           ;
@@ -81,12 +81,14 @@ export const MapsView = ({
         <Title>
           {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
         </Title>
-
-        <TableMandataire
-          rows={filteredMesures}
-          openModal={openModal}
-          updateFilters={updateFilters}
-        />
+        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+          <TableMandataire
+            rows={filteredMesures}
+            openModal={openModal}
+            updateFilters={updateFilters}
+            updateTimer={updateTimer}
+          />
+        </div>
       </MandatairesWidth>
       Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
     </div>
@@ -123,7 +125,7 @@ class Mapstry extends React.Component {
       });
   }
 
-  handleMoveend = mapRef => {
+  handleMoveend = () => {
     const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
     apiFetch("/mesures/filters", {
       method: "POST",
@@ -186,6 +188,7 @@ class Mapstry extends React.Component {
         zoom={this.state.zoom}
         width={this.props.width}
         height={this.props.height}
+        updateTimer={this.props.updateTimer}
         onMoveend={() => this.handleMoveend(this.mapRef)}
         center={center}
         mesures={this.props.mesures}

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import SearchButton from "../communComponents/SearchButton";
 import FormInput from "../FormInput";
 
