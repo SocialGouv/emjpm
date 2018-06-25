@@ -27,7 +27,6 @@ router.put("/1", loginRequired, async (req, res, next) => {
     const dispoMandataire = await queries
         .getSingleDisponibilite(mandataire.id);
 
-  console.log("dispo",dispoMandataire)
     if (req.body.disponibilite !== dispoMandataire)
     {queries
         .update(mandataire.id, {updateMesure: new Date(Date.now())})
@@ -80,7 +79,6 @@ router.get("/", loginRequired, async (req, res, next) => {
 
 // todo: test
 router.post("/PosteCode", loginRequired, async (req, res, next) => {
-  console.log("Salut", req.body.codePoste);
   queries
     .getCoordonneByPosteCode(req.body.codePoste)
     .then(function(mandataires) {
