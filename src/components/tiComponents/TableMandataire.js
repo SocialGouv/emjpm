@@ -1,6 +1,6 @@
 import TableRowMandataire from "./TableRowMandataire";
 
-const TableMandataire = ({ rows, openModal, updateFilters,updateTimer }) => {
+const TableMandataire = ({ rows, openModal, updateFilters, updateTimer }) => {
   return (
     <div className="col-12" style={{ padding: "0px" }}>
       <div

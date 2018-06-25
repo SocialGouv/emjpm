@@ -46,7 +46,7 @@ const OpenStreeMap = dynamic(import("../src/components/tiComponents/Map"), {
   loading: () => (
     <div style={{ textAlign: "center", paddingTop: 20 }}>
       Chargement… si aucune carte: appuyer ici
-      <button onClick={<Ti/>}>Carte</button>
+      <button onClick={<Ti />}>Carte</button>
     </div>
   )
 });
@@ -214,7 +214,7 @@ class Ti extends React.Component<Props, State> {
     postcodeCoordinates: "",
     specialite: "",
     value: "",
-      timer: "inline-block"
+    timer: "inline-block"
   };
 
   componentDidMount() {
@@ -267,9 +267,9 @@ class Ti extends React.Component<Props, State> {
     this.setState({ postcodeCoordinates: mesures });
   };
 
-    updateTimer = time => {
-        this.setState({ timer: time });
-    };
+  updateTimer = time => {
+    this.setState({ timer: time });
+  };
 
   findPostcode = postCode =>
     getPostCodeCoordinates(postCode).then(coordinates =>
@@ -358,7 +358,7 @@ const TiView = ({
   isOpen,
   closeModal,
   mandataire,
-                    updateTimer
+  updateTimer
 }) => (
   <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
     <Tabs>

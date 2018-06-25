@@ -39,7 +39,7 @@ export const MapsView = ({
   getPostCodeCoordinates,
   updateValue,
   value,
-                             updateTimer
+  updateTimer
 }) => (
   <div className="container">
     <div className="row">
@@ -67,10 +67,10 @@ export const MapsView = ({
           {mesures &&
             mesures.map(manda => (
               <CircleMarker
-                  center={[manda.latitude, manda.longitude]}
-                  color="red"
-                  radius={10}
-                  key={manda.id}
+                center={[manda.latitude, manda.longitude]}
+                color="red"
+                radius={10}
+                key={manda.id}
               />
             ))}
           ;
@@ -80,14 +80,14 @@ export const MapsView = ({
         <Title>
           {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
         </Title>
-          <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-        <TableMandataire
-          rows={filteredMesures}
-          openModal={openModal}
-          updateFilters={updateFilters}
-          updateTimer={updateTimer}
-        />
-          </div>
+        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+          <TableMandataire
+            rows={filteredMesures}
+            openModal={openModal}
+            updateFilters={updateFilters}
+            updateTimer={updateTimer}
+          />
+        </div>
       </MandatairesWidth>
       Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
     </div>

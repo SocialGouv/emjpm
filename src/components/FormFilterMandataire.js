@@ -39,7 +39,7 @@ const FormFilterMandataire = ({ props }) => {
             className="custom-control custom-radio custom-control-inline"
             style={{ marginLeft: "20px" }}
           >
-            <label style={{ cursor: "pointer" }} for="customRadioInline1">
+            <label style={{ cursor: "pointer" }} htmlFor="customRadioInline1">
               <input
                 type="radio"
                 id="customRadioInline1"
@@ -49,7 +49,7 @@ const FormFilterMandataire = ({ props }) => {
             </label>
           </div>
           <div className="custom-control custom-radio custom-control-inline">
-            <label style={{ cursor: "pointer" }} for="customRadioInline2">
+            <label style={{ cursor: "pointer" }} htmlFor="customRadioInline2">
               <input
                 type="radio"
                 id="customRadioInline2"
@@ -59,7 +59,7 @@ const FormFilterMandataire = ({ props }) => {
             </label>
           </div>
           <div className="custom-control custom-radio custom-control-inline">
-            <label style={{ cursor: "pointer" }} for="customRadioInline3">
+            <label style={{ cursor: "pointer" }} htmlFor="customRadioInline3">
               <input
                 type="radio"
                 id="customRadioInline3"

@@ -23,7 +23,9 @@ const LineContainer = styled.div`
   padding-left: 0px;
   paddin-right: 0px;
 `;
-const Tr = styled.tr`border-top: 0px solid white;`;
+const Tr = styled.tr`
+  border-top: 0px solid white;
+`;
 
 const Td = ({ children }) => <TdStyle>{children}</TdStyle>;
 
@@ -54,7 +56,10 @@ export const TableMesureView = ({ rows, display, display_ext, updateMesureEteint
           </Td>
           <TdStyle display={display} />
           <TdStyle display={display} />
-            <TdStyle display={display_ext}> <ColStyle>Date d'extinction </ColStyle></TdStyle>
+          <TdStyle display={display_ext}>
+            {" "}
+            <ColStyle>Date d'extinction </ColStyle>
+          </TdStyle>
           <TdStyle display={display_ext} />
         </Tr>
       </thead>

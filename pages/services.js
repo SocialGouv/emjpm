@@ -24,9 +24,18 @@ class MandatairesIndex extends React.Component {
   };
 
   render() {
-    return <Tabs>
+    return (
+      <Tabs>
         <TabList>
-          <div className="panel" style={{ textAlign: "left", backgroundSize: "cover", heigth: "100px !important", backgroundColor: "#cad4de" }}>
+          <div
+            className="panel"
+            style={{
+              textAlign: "left",
+              backgroundSize: "cover",
+              heigth: "100px !important",
+              backgroundColor: "#cad4de"
+            }}
+          >
             <div className="panel__container" style={{ paddingBottom: "0px" }}>
               <div className="container" style={{ paddingRight: "0px", paddingLeft: "0px" }}>
                 <h2 style={{ color: "black" }}>
@@ -34,15 +43,17 @@ class MandatairesIndex extends React.Component {
                   {this.state.currentMandataire.etablissement} <br />
                 </h2>
                 <div style={{ textAlign: "right" }}>
-                 {" "}
+                  {" "}
                   {this.state.currentMandataire.updateMesure && (
-                      <div>
+                    <div>
                       Dernière mise à jour:
-                    <DislayDate date={this.state.currentMandataire.updateMesure.slice(0, 10)} />
-                      </div>
+                      <DislayDate date={this.state.currentMandataire.updateMesure.slice(0, 10)} />
+                    </div>
                   )}
                 </div>
-                <div style={{ backgroundColor: "#ebeff2", lineHeight: "40px", paddingBottom: "5px" }}>
+                <div
+                  style={{ backgroundColor: "#ebeff2", lineHeight: "40px", paddingBottom: "5px" }}
+                >
                   <Tab>Vos informations</Tab>
                 </div>
               </div>
@@ -52,11 +63,15 @@ class MandatairesIndex extends React.Component {
         <div className="container" style={{ backgroundColor: "white", minHeight: "70vh" }}>
           <TabPanel>
             <div style={{ minHeight: "70vh", paddingTop: "10px" }}>
-              <FormulaireService currentMandataireModal={this.state.currentMandataire} updateMadataire={this.updateMadataire} />
+              <FormulaireService
+                currentMandataireModal={this.state.currentMandataire}
+                updateMadataire={this.updateMadataire}
+              />
             </div>
           </TabPanel>
         </div>
-      </Tabs>;
+      </Tabs>
+    );
   }
 }
 

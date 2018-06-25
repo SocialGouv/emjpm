@@ -89,13 +89,16 @@ class TableRowMandataire extends React.Component {
         <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
           <PillDispo dispo={disponibilite} dispo_max={dispo_max} />
         </td>
-        <td
-          style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
-        >
+        <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
           {!isLate && (
-              <span className="d-inline-block" tabIndex="0" data-toggle="tooltip" title="Dernière mise à jour des données datant de plus de 30 jours.">
-            <AlertCircle />
-              </span>
+            <span
+              className="d-inline-block"
+              tabIndex="0"
+              data-toggle="tooltip"
+              title="Dernière mise à jour des données datant de plus de 30 jours."
+            >
+              <AlertCircle />
+            </span>
           )}
         </td>
       </tr>

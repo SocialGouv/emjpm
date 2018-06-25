@@ -92,8 +92,8 @@ class Mapstry extends React.Component {
   }
 
   handleMoveend = mapRef => {
-      const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
-      apiFetch("/mesures/filters", {
+    const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
+    apiFetch("/mesures/filters", {
       method: "POST",
       body: JSON.stringify({
         latNorthEast: mapRefGetBound._northEast.lat,

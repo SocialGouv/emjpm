@@ -113,11 +113,12 @@ const FormulaireMandataireView = ({
                 {formData.prenom} {formData.nom}
               </b>
               <br />
-                {currentMandataireModalTry.type === "Prepose" &&
-              <CreationEtablissement
-                updateEtablissement={updateEtablissement}
-                etablissements={etablissement}
-              /> }
+              {currentMandataireModalTry.type === "Prepose" && (
+                <CreationEtablissement
+                  updateEtablissement={updateEtablissement}
+                  etablissements={etablissement}
+                />
+              )}
               <br />
               <b>Contact</b>
               <br />
@@ -147,14 +148,15 @@ const FormulaireMandataireView = ({
               <br />
               {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat} <br />
               <br />
-              {mandataireEtablissement && currentMandataireModalTry.type === "Prepose" && (
-                <div>
-                  <b>Etablissement(s) </b>
-                  <br />
-                </div>
-              )}
-              {mandataireEtablissement && currentMandataireModalTry.type === "Prepose"
-              &&
+              {mandataireEtablissement &&
+                currentMandataireModalTry.type === "Prepose" && (
+                  <div>
+                    <b>Etablissement(s) </b>
+                    <br />
+                  </div>
+                )}
+              {mandataireEtablissement &&
+                currentMandataireModalTry.type === "Prepose" &&
                 mandataireEtablissement.map(etablissement => (
                   <div>
                     {etablissement.nom}

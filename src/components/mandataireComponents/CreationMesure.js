@@ -94,9 +94,9 @@ class MesureInput extends React.Component {
               .then(json => {
                 return apiFetch(`/mandataires/1`, {
                   method: "PUT",
-                    body: JSON.stringify({
-                       updateMesure: new Date()
-                    })
+                  body: JSON.stringify({
+                    updateMesure: new Date()
+                  })
                 }).then(() => {
                   return json;
                 });
@@ -162,9 +162,9 @@ class MesureInput extends React.Component {
 
   OpenCreationMesure = () => {
     if (this.state.showForm === false) {
-      this.setState({ showForm: true, error: null, success: null , status: null });
+      this.setState({ showForm: true, error: null, success: null, status: null });
     } else {
-      this.setState({ showForm: false ,error: null, success: null , status: null });
+      this.setState({ showForm: false, error: null, success: null, status: null });
     }
   };
 

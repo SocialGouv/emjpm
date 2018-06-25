@@ -135,7 +135,8 @@ const MandataireIndexView = ({
           <div style={{ textAlign: "right" }}>
             {currentMandataire.updateMesure && (
               <div>
-                Dernière mise à jour : <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />
+                Dernière mise à jour :{" "}
+                <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />
               </div>
             )}
           </div>
