@@ -253,10 +253,7 @@ class FormulaireMandataire extends React.Component {
 
   deleteEtablissement = etablissement_id => {
     apiFetch(`/mandataires/1/etablissements/${etablissement_id}`, {
-      method: "DELETE",
-      body: JSON.stringify({
-        id: etablissement_id
-      })
+      method: "DELETE"
     }).then(json => {
       this.updateEtablissement(json);
     });
