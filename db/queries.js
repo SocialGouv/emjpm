@@ -278,24 +278,24 @@ function getAllEtablissement(mandataireId) {
 
 function getEtablissements() {
   return knex("etablissements")
-      .whereBetween('code_postal', [59000, 59999])
-      .orWhereBetween('code_postal', [60000, 60999])
-      .orWhereBetween('code_postal', [62000, 62999])
-      .orWhereBetween('code_postal', [80000, 80999])
-      .orWhereBetween('code_postal', [2000, 2999])
+    .whereBetween("code_postal", [59000, 59999])
+    .orWhereBetween("code_postal", [60000, 60999])
+    .orWhereBetween("code_postal", [62000, 62999])
+    .orWhereBetween("code_postal", [80000, 80999])
+    .orWhereBetween("code_postal", [2000, 2999]);
   //
   //   where(
   //   'code_postal',
   //   'like',
   //     '59%'
-    // 28591
-    // |60|62|80|02)\d{3}/%'
+  // 28591
+  // |60|62|80|02)\d{3}/%'
   // );
 }
 
 function getAllMandataireEtablissement(mandataireId) {
   return knex("mandatairesEtablissements")
-      .select('mandatairesEtablissements.id', 'etablissements.nom')
+    .select("mandatairesEtablissements.id", "etablissements.nom")
     .innerJoin(
       "mandataires",
       "mandataires.id",
