@@ -24,19 +24,24 @@ router.put("/1", loginRequired, async (req, res, next) => {
     return next(new Error(401));
   }
 
-    const dispoMandataire = await queries
-        .getSingleDisponibilite(mandataire.id);
+  const dispoMandataire = await queries.getSingleDisponibilite(mandataire.id);
 
-    if (req.body.disponibilite !== dispoMandataire)
-    {queries
-        .update(mandataire.id, {updateMesure: new Date(Date.now())})
-        .catch(error => next(error));
-    }
+  // todo: replace with trigger
+  if (req.body.disponibilite !== dispoMandataire) {
+    queries
+      .update(mandataire.id, { updateMesure: new Date(Date.now()) })
+      .catch(error => {
+        next(error);
+      });
+  }
+
   queries
     .update(mandataire.id, req.body)
     .then(() => queries.getSingle(mandataire.id))
     .then(mandataire => res.status(200).json(mandataire))
-    .catch(error => next(error));
+    .catch(error => {
+      next(error);
+    });
 });
 
 // todo: test
