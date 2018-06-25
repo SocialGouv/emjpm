@@ -12,6 +12,7 @@ import RowModal from "../src/components/communComponents/RowModal";
 import Footer from "../src/components/communComponents/Footer";
 import Commentaire from "../src/components/tiComponents/Commentaire";
 import apiFetch from "../src/components/communComponents/Api";
+import Router from "next/router";
 
 const modalStyles = {
   content: {
@@ -44,7 +45,12 @@ const TabsShowMandataire = styled.div`
 
 const OpenStreeMap = dynamic(import("../src/components/tiComponents/Map"), {
   ssr: false,
-  loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
+  loading: () => (
+    <div style={{ textAlign: "center", paddingTop: 20 }}>
+      Chargement… si aucune carte: appuyer ici
+      <button onClick={<Ti/>}>Carte</button>
+    </div>
+  )
 });
 
 const OpenStreeMapMandataires = dynamic(import("../src/components/tiComponents/MapMandataire"), {

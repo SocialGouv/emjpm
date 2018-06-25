@@ -50,9 +50,9 @@ const TableMandataire = ({ rows, openModal, updateFilters, updateTimer }) => {
             id="customRadioInline4"
             name="customRadioInline"
             style={{ margin: "5px" }}
-            label="All   "
-            value="All"
+            label="Tous"
             defaultChecked={true}
+            value="Tous"
             onClick={e => updateFilters({ searchType: "" })}
           />Tous
         </label>
