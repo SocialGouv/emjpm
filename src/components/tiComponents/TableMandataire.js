@@ -1,6 +1,6 @@
 import TableRowMandataire from "./TableRowMandataire";
 
-const TableMandataire = ({ rows, openModal, updateFilters }) => {
+const TableMandataire = ({ rows, openModal, updateFilters, updateTimer }) => {
   return (
     <div className="col-12" style={{ padding: "0px" }}>
       <div
@@ -86,6 +86,7 @@ const TableMandataire = ({ rows, openModal, updateFilters }) => {
                 key={mandataire.telephone}
                 mandataire={mandataire}
                 onClick={() => openModal(mandataire)}
+                updateTimer={updateTimer}
               />
             ))}
         </tbody>

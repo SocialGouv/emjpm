@@ -131,8 +131,7 @@ class InscriptionPrepose extends React.Component {
   render() {
     return (
       <div>
-        <br />
-        <h2 style={{ margin: 20 }}>
+        <h2 style={{ margin: "0px 20px 20px 20px" }}>
           Veuillez renseigner ci-dessous vos informations professionelles:
         </h2>
         <br />

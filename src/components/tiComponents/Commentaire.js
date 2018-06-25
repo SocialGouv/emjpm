@@ -27,10 +27,7 @@ class Commentaire extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.currentMandataire.mandataire_id);
-    const url = `${API_URL}/api/v1/mandataires/${
-      this.props.currentMandataire.id
-    }/commentaires`;
+    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire.id}/commentaires`;
     fetch(url, {
       credentials: "include",
       method: "GET",
@@ -52,10 +49,7 @@ class Commentaire extends React.Component {
   }
 
   onSubmit = ({ formData }) => {
-    console.log("Com",this.props.currentMandataire)
-    const url = `${API_URL}/api/v1/mandataires/${
-      this.props.currentMandataire.id
-    }/commentaires`;
+    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire.id}/commentaires`;
     fetch(url, {
       credentials: "include",
       method: "POST",
@@ -78,9 +72,9 @@ class Commentaire extends React.Component {
   };
 
   onDelete = comments => {
-    const url = `${API_URL}/api/v1/mandataires/${
-      this.props.currentMandataire.id
-    }/commentaires/${comments.co_id}`;
+    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire.id}/commentaires/${
+      comments.co_id
+    }`;
     fetch(url, {
       credentials: "include",
       method: "DELETE",
@@ -102,7 +96,10 @@ class Commentaire extends React.Component {
     return (
       <div className="form-group">
         <label htmlFor="exampleFormControlTextarea1">
-          <b>Ajoutez vos notes (ces dernières seront uniquement accessibles aux utilisateurs de votre TI) </b>
+          <b>
+            Ajoutez vos notes (ces dernières seront uniquement accessibles aux utilisateurs de votre
+            TI){" "}
+          </b>
         </label>
         {/*<textarea className="form-control" id="exampleFormControlTextarea1" placeholder={"Ecrivez votre note"} rows="3" style={{boxShadow: "3px 3px"}}> </textarea>*/}
         <br />

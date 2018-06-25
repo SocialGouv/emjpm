@@ -1,33 +1,9 @@
-import React, { createRef, Component } from "react";
-import { Map, Marker, Popup, CircleMarker, Circle, TileLayer, Tooltip } from "react-leaflet";
+import React, { createRef } from "react";
+import { Map, CircleMarker, TileLayer, Tooltip } from "react-leaflet";
+
 import apiFetch from "../communComponents/Api";
-import TableMandataire from "../tiComponents/TableMandataire";
-import styled from "styled-components";
-import FilterMesuresMap from "../tiComponents/FilterMesuresMap";
 
-const Title = styled.div`
-  text-align: left;
-  font-size: 2em;
-  padding: 15px;
-`;
-
-export const MapsView = ({
-  mesures,
-  zoom,
-  center,
-  width,
-  height,
-  onMoveend,
-  innerRef,
-  filteredMesures,
-  openModal,
-  mesureCount,
-  updateFilters,
-  zoomCodePostal,
-  getPostCodeCoordinates,
-  updateValue,
-  value
-}) => (
+export const MapsView = ({ mesures, zoom, center, width, height, onMoveend, innerRef }) => (
   <div className="container">
     {" "}
     <div className="row">
@@ -82,7 +58,6 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        console.log("API", mesures);
         this.setState({ modalIsOpen: false });
         this.props.updateMandataireMesures(mesures);
       })
@@ -91,9 +66,9 @@ class Mapstry extends React.Component {
       });
   }
 
-  handleMoveend = mapRef => {
-      const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
-      apiFetch("/mesures/filters", {
+  handleMoveend = () => {
+    const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
+    apiFetch("/mesures/filters", {
       method: "POST",
       body: JSON.stringify({
         latNorthEast: mapRefGetBound._northEast.lat,
@@ -103,7 +78,6 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        console.log("APImesures", mesures);
         this.setState({ modalIsOpen: false });
         this.props.updateMandataireMesures(mesures);
       })
@@ -123,7 +97,6 @@ class Mapstry extends React.Component {
       })
     })
       .then(mesures => {
-        console.log("heelo", mesures);
         this.props.updatePostCodeMandataires(mesures);
         this.setState({ zoom: 13 });
       })
@@ -134,8 +107,6 @@ class Mapstry extends React.Component {
 
   getPostCodeCoordinates = commune => {
     // return null if no input
-    console.log("input", commune);
-
     if (!commune || !commune.trim()) {
       return Promise.resolve(null);
     }
@@ -148,7 +119,6 @@ class Mapstry extends React.Component {
   };
 
   render() {
-    console.log(this.props.filteredMesures);
     const center = this.props.postcodeMandataire
       ? [this.props.postcodeMandataire[0], this.props.postcodeMandataire[1]]
       : [50.459441, 2.693963];

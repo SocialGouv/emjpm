@@ -1,8 +1,9 @@
 import React, { createRef } from "react";
+import styled from "styled-components";
 import { Map, CircleMarker, TileLayer } from "react-leaflet";
+
 import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
-import styled from "styled-components";
 import FilterMesuresMap from "./FilterMesuresMap";
 
 const Title = styled.div`
@@ -33,13 +34,13 @@ export const MapsView = ({
   innerRef,
   filteredMesures,
   openModal,
-  mesureCount,
   updateFilters,
   zoomCodePostal,
   getPostCodeCoordinates,
   updateValue,
   mandataireCount,
-  value
+  value,
+  updateTimer
 }) => (
   <div className="container">
     <div className="row">
@@ -70,23 +71,33 @@ export const MapsView = ({
                 center={[manda.latitude, manda.longitude]}
                 color="red"
                 radius={10}
+                fill={manda.count}
                 key={manda.id}
+                placeholder={manda.count}
               />
             ))}
           ;
         </Map>
       </MapsWidth>
       <MandatairesWidth>
-        <Title>
-          {mandataireCount} Professionnel{(mandataireCount > 1 && "s") || null}
-        </Title>
-        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-          <TableMandataire
-            rows={filteredMesures}
-            openModal={openModal}
-            updateFilters={updateFilters}
-          />
-        </div>
+        {(mesureCount > 0 && (
+          <React.Fragment>
+            <Title>
+              {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+            </Title>
+            <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+              <TableMandataire
+                rows={filteredMesures}
+                openModal={openModal}
+                updateFilters={updateFilters}
+              />
+            </div>
+          </React.Fragment>
+        )) || (
+            <div style={{ textAlign: "center", marginTop: 20 }}>
+              Aucun mandataire actuellement dans cette région
+            </div>
+          )}
       </MandatairesWidth>
     </div>
   </div>
@@ -122,7 +133,7 @@ class Mapstry extends React.Component {
       });
   }
 
-  handleMoveend = mapRef => {
+  handleMoveend = () => {
     const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
     apiFetch("/mandataires/filters", {
       method: "POST",
@@ -197,6 +208,7 @@ class Mapstry extends React.Component {
         updateValue={this.props.updateValue}
         mandataireCount={this.props.mandataireCount}
         value={this.props.value}
+        updateTimer={this.props.updateTimer}
       />
     );
   }

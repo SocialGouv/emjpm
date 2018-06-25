@@ -1,5 +1,3 @@
-import RowModal from "./communComponents/RowModal";
-import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import "bootstrap/dist/css/bootstrap.css";
 import "../../static/css/hero.css";
@@ -49,8 +47,6 @@ const customStyles = {
   }
 };
 
-const formData = {};
-
 class FormulaireService extends React.Component {
   state = {
     data: [],
@@ -79,7 +75,7 @@ class FormulaireService extends React.Component {
     this.closeModal();
   };
 
-  openModal = mandataire => {
+  openModal = () => {
     this.setState({
       modalIsOpen: true
     });
@@ -89,15 +85,15 @@ class FormulaireService extends React.Component {
   };
   render() {
     const formData = {
-      etablissement: `${this.props.currentMandataireModal.etablissement}`,
-      telephone: `${this.props.currentMandataireModal.telephone}`,
-      telephone_portable: `${this.props.currentMandataireModal.telephone_portable}`,
-      ville: `${this.props.currentMandataireModal.ville}`,
-      adresse: `${this.props.currentMandataireModal.adresse}`,
-      email: `${this.props.currentMandataireModal.email}`,
-      code_postal: `${this.props.currentMandataireModal.code_postal}`,
-      dispo_max: `${this.props.currentMandataireModal.dispo_max}`,
-      disponibilite: `${this.props.currentMandataireModal.disponibilite}`
+      etablissement: this.props.currentMandataireModal.etablissement,
+      telephone: this.props.currentMandataireModal.telephone,
+      telephone_portable: this.props.currentMandataireModal.telephone_portable,
+      ville: this.props.currentMandataireModal.ville,
+      adresse: this.props.currentMandataireModal.adresse,
+      email: this.props.currentMandataireModal.email,
+      code_postal: this.props.currentMandataireModal.code_postal,
+      dispo_max: this.props.currentMandataireModal.dispo_max,
+      disponibilite: this.props.currentMandataireModal.disponibilite
     };
     return (
       <div>

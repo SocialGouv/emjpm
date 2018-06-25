@@ -1,8 +1,10 @@
+import * as React from "react";
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import apiFetch from "./communComponents/Api";
 import piwik from "../piwik";
+import CreationEtablissement from "./mandataireComponents/CreationEtablissement";
 
 const schema = {
   title: "Modifier vos informations",
@@ -96,7 +98,11 @@ const FormulaireMandataireView = ({
   isOpen,
   onRequestClose,
   closebuttonmodal,
-  formData
+  formData,
+  updateEtablissement,
+  etablissement,
+  mandataireEtablissement,
+  deleteEtablissement
 }) => (
   <Container>
     {currentMandataireModalTry && (
@@ -108,8 +114,12 @@ const FormulaireMandataireView = ({
                 {formData.prenom} {formData.nom}
               </b>
               <br />
-              {/*{formData.type.toUpperCase()}*/}
-              <br />
+              {currentMandataireModalTry.type === "Prepose" && (
+                <CreationEtablissement
+                  updateEtablissement={updateEtablissement}
+                  etablissements={etablissement}
+                />
+              )}
               <br />
               <b>Contact</b>
               <br />
@@ -137,8 +147,26 @@ const FormulaireMandataireView = ({
               <br />
               <b> Secrétariat</b>
               <br />
-              {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat}{" "}
+              {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat} <br />
               <br />
+              {mandataireEtablissement &&
+                currentMandataireModalTry.type === "Prepose" && (
+                  <React.Fragment>
+                    <div>
+                      <b>Etablissement(s) </b>
+                      <br />
+                    </div>
+                    {mandataireEtablissement.map(etablissement => (
+                      <div>
+                        {etablissement.nom}
+                        <br />
+                        <a href="#" onClick={() => deleteEtablissement(etablissement.id)}>
+                          Supprimer
+                        </a>
+                      </div>
+                    ))}
+                  </React.Fragment>
+                )}
               <br />
               <button className={"btn btn-dark"} onClick={onClick}>
                 Modifier mes informations
@@ -174,8 +202,25 @@ class FormulaireMandataire extends React.Component {
     data: [],
     datamesure: [],
     currentMandataire: "",
-    modalIsOpen: false
+    modalIsOpen: false,
+    etablissement: "",
+    mandataireEtablissement: ""
   };
+
+  componentDidMount() {
+    apiFetch("/mandataires/1/etablissements").then(finess => {
+      apiFetch("/mandataires/1/etablissement")
+        .then(mandataireEtablissement => {
+          this.setState({
+            etablissement: finess,
+            mandataireEtablissement: mandataireEtablissement
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    });
+  }
 
   onSubmit = ({ formData }) => {
     apiFetch(`/mandataires/1`, {
@@ -206,11 +251,22 @@ class FormulaireMandataire extends React.Component {
     this.closeModal();
   };
 
-  openModal = mandataire => {
+  deleteEtablissement = etablissement_id => {
+    apiFetch(`/mandataires/1/etablissements/${etablissement_id}`, {
+      method: "DELETE"
+    }).then(json => {
+      this.updateEtablissement(json);
+    });
+  };
+
+  openModal = () => {
     this.setState({ modalIsOpen: true });
   };
   closeModal = () => {
     this.setState({ modalIsOpen: false });
+  };
+  updateEtablissement = etablissement => {
+    this.setState({ mandataireEtablissement: etablissement });
   };
 
   render() {
@@ -224,6 +280,10 @@ class FormulaireMandataire extends React.Component {
         onRequestClose={this.closeModal}
         closebuttonmodal={this.closeModal}
         formData={formData}
+        updateEtablissement={this.updateEtablissement}
+        etablissement={this.state.etablissement}
+        mandataireEtablissement={this.state.mandataireEtablissement}
+        deleteEtablissement={this.deleteEtablissement}
       />
     );
   }

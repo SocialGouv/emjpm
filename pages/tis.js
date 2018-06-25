@@ -5,6 +5,8 @@ import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
+import Router from "next/router";
+
 import Navigation from "../src/components/communComponents/Navigation";
 import RowModal from "../src/components/communComponents/RowModal";
 import Footer from "../src/components/communComponents/Footer";
@@ -213,7 +215,8 @@ class Ti extends React.Component<Props, State> {
     modalIsOpen: false,
     postcodeCoordinates: "",
     specialite: "",
-    value: ""
+    value: "",
+    timer: "inline-block"
   };
 
   componentDidMount() {
@@ -264,6 +267,10 @@ class Ti extends React.Component<Props, State> {
 
   updatePostCodeMandatairesByCommune = mesures => {
     this.setState({ postcodeCoordinates: mesures });
+  };
+
+  updateTimer = time => {
+    this.setState({ timer: time });
   };
 
   findPostcode = postCode =>
@@ -324,6 +331,7 @@ class Ti extends React.Component<Props, State> {
         isOpen={this.state.modalIsOpen}
         closeModal={this.closeModal}
         mandataire={this.state.currentMandataire}
+        updateTimer={this.updateTimer}
       />
     );
   }
@@ -351,7 +359,8 @@ const TiView = ({
   filteredMandataires,
   isOpen,
   closeModal,
-  mandataire
+  mandataire,
+  updateTimer
 }) => (
   <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
     <Tabs>
@@ -383,6 +392,7 @@ const TiView = ({
           reloadMaps={this.reloadMaps}
           value={value}
           updateValue={updateValue}
+          updateTimer={updateTimer}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire mandataire={mandataire} />
@@ -405,6 +415,7 @@ const TiView = ({
           updatePostCodeMandatairesByCommune={updatePostCodeMandatairesByCommune}
           value={value}
           updateValue={updateValue}
+          updateTimer={updateTimer}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire mandataire={mandataire} />

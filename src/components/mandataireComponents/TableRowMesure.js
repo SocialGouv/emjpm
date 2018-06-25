@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.css";
+
 import "../../../static/css/custom.css";
 import "../../../static/css/hero.css";
 import "../../../static/css/panel.css";
@@ -10,12 +11,22 @@ import ModalCloseMesure from "./ModalCloseMesure";
 import Cell from "../communComponents/Cell";
 import ModalMesure from "./ModalMesure";
 import piwik from "../../piwik";
+import DislayDate from "../communComponents/formatFrenchDate";
 
 const TdStyle = styled.td`
   font-size: 1em;
   color: black;
   text-align: left;
   line-height: 40px;
+  display: ${props => props.display};
+`;
+
+const TdStyleDate = styled.td`
+  font-size: 1em;
+  color: black;
+  text-align: left;
+  line-height: 40px;
+  font-weight: bold;
   display: ${props => props.display};
 `;
 
@@ -43,7 +54,10 @@ export const TableRowMesureView = ({
   display_row
 }) => (
   <tr style={{ display: display_row }}>
-    <TdStyle>{date_ouverture.slice(0, 10)}</TdStyle>
+    <TdStyleDate>
+      <DislayDate date={date_ouverture} />
+    </TdStyleDate>
+    {/*<TdStyle>{date_ouverture.slice(0, 10)}</TdStyle>*/}
     <Cell>
       <b>
         {code_postal} -{ville.toUpperCase()}{" "}
@@ -108,13 +122,23 @@ class TableRowMesure extends React.Component {
         age: parseInt(formData.age),
         status: formData.status
       })
-    }).then(json => {
-      this.props.updateMadataire(json);
-    });
+    })
+      .then(json => {
+        return apiFetch(`/mandataires/1`, {
+          method: "PUT",
+          body: JSON.stringify({
+            updateMesure: new Date()
+          })
+        }).then(() => {
+          return json;
+        });
+      })
+      .then(json => {
+        this.props.updateMadataire(json);
+      });
   };
 
   onClick = (e, formData) => {
-    console.log("formData ", formData);
     apiFetch(`/mandataires/1/mesures/${e}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -131,7 +155,7 @@ class TableRowMesure extends React.Component {
           return json;
         });
       })
-      .then(json2 => {
+      .then(() => {
         this.closeModal();
         this.props.updateMesureEteinte(); // callback parent with data
       })
@@ -158,7 +182,7 @@ class TableRowMesure extends React.Component {
           return json;
         });
       })
-      .then(json2 => {
+      .then(() => {
         this.props.updateMesureEteinte(); // callback parent with data
       })
       .catch(e => {
@@ -189,7 +213,7 @@ class TableRowMesure extends React.Component {
           return json;
         });
       })
-      .then(json2 => {
+      .then(() => {
         this.closeModal();
         this.props.updateMesureEteinte(); // callback parent with data
       })
@@ -241,13 +265,13 @@ class TableRowMesure extends React.Component {
     } = this.props.mesure;
 
     const formData = {
-      ouverture: `${date_ouverture}`,
-      codePostal: `${code_postal}`,
-      civilite: `${civilite}`,
-      annee: `${parseInt(annee)}`,
-      commune: `${ville}`,
-      residence: `${residence}`,
-      type: `${type}`
+      ouverture: date_ouverture,
+      codePostal: code_postal,
+      civilite: civilite,
+      annee: parseInt(annee),
+      commune: ville,
+      residence: residence,
+      type: type
     };
 
     return (

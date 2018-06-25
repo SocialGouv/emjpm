@@ -1,9 +1,10 @@
-import Navigation from "../src/components/communComponents/Navigation";
-import Footer from "../src/components/communComponents/Footer";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
+import Navigation from "../src/components/communComponents/Navigation";
+import Footer from "../src/components/communComponents/Footer";
 import FormulaireService from "../src/components/formulaireService";
 import apiFetch from "../src/components/communComponents/Api";
+import DislayDate from "../src/components/communComponents/formatFrenchDate";
 
 class MandatairesIndex extends React.Component {
   state = {
@@ -40,14 +41,19 @@ class MandatairesIndex extends React.Component {
               <div className="container" style={{ paddingRight: "0px", paddingLeft: "0px" }}>
                 <h2 style={{ color: "black" }}>
                   {" "}
-                  {this.state.currentMandataire.nom} {this.state.currentMandataire.prenom}{" "}
+                  {this.state.currentMandataire.etablissement} <br />
                 </h2>
+                <div style={{ textAlign: "right" }}>
+                  {" "}
+                  {this.state.currentMandataire.updateMesure && (
+                    <div>
+                      Dernière mise à jour:
+                      <DislayDate date={this.state.currentMandataire.updateMesure.slice(0, 10)} />
+                    </div>
+                  )}
+                </div>
                 <div
-                  style={{
-                    backgroundColor: "#ebeff2",
-                    lineHeight: "40px",
-                    paddingBottom: "5px"
-                  }}
+                  style={{ backgroundColor: "#ebeff2", lineHeight: "40px", paddingBottom: "5px" }}
                 >
                   <Tab>Vos informations</Tab>
                 </div>
