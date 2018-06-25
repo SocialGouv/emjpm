@@ -9,7 +9,9 @@ exports.seed = (knex, Promise) => {
       return Promise.join(
         knex("users").insert({
           username: "jeremy",
-          password: hash
+          password: hash,
+          type: "individuel",
+          active: true
         })
       );
     })
@@ -20,30 +22,57 @@ exports.seed = (knex, Promise) => {
         knex("users").insert({
           username: "kelly",
           password: hash,
-          admin: true
+          type: "prepose",
+          active: true
         })
       );
     })
-.then(() => {
-        const salt = bcrypt.genSaltSync();
-        const hash = bcrypt.hashSync("aaaaaa", salt);
-        return Promise.join(
-            knex("users").insert({
-                username: "adrien1",
-                password: hash,
-                admin: true
-            })
-        );
+    .then(() => {
+      const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync("service1", salt);
+      return Promise.join(
+        knex("users").insert({
+          username: "service1",
+          password: hash,
+          type: "service",
+          active: true
+        })
+      );
     })
-.then(() => {
-        const salt = bcrypt.genSaltSync();
-        const hash = bcrypt.hashSync("bbbbbb", salt);
-        return Promise.join(
-            knex("users").insert({
-                username: "adrien2",
-                password: hash,
-                admin: true
-            })
-        );
+    .then(() => {
+      const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync("admin", salt);
+      return Promise.join(
+        knex("users").insert({
+          username: "admin",
+          password: hash,
+          type: "admin",
+          active: true
+        })
+      );
+    })
+    .then(() => {
+      const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync("ti1", salt);
+      return Promise.join(
+        knex("users").insert({
+          username: "ti1",
+          password: hash,
+          type: "ti",
+          active: true
+        })
+      );
+    })
+    .then(() => {
+      const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync("inactive", salt);
+      return Promise.join(
+        knex("users").insert({
+          username: "inactive",
+          password: hash,
+          type: "prepose",
+          active: false
+        })
+      );
     });
 };

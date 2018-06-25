@@ -2,56 +2,74 @@ var express = require("express");
 var router = express.Router();
 var queries = require("../db/queries");
 
-router.get("/:mandataireId/commentaires", async (req, res, next) => {
+const { typeRequired } = require("../auth/_helpers");
+
+router.get(
+  "/:mandataireId/commentaires",
+  typeRequired("ti"),
+  async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
     queries
-        .getAllCommentaires(req.params.mandataireId, ti.id)
-        .then(function(commentaires) {
-            res.status(200).json(commentaires);
-        })
-        .catch(function(error) {
-            next(error);
-        });
-});
+      .getAllCommentaires(req.params.mandataireId, ti.id)
+      .then(function(commentaires) {
+        res.status(200).json(commentaires);
+      })
+      .catch(function(error) {
+        next(error);
+      });
+  }
+);
 
-router.post("/:mandataireId/commentaires", async (req, res, next) => {
+router.post(
+  "/:mandataireId/commentaires",
+  typeRequired("ti"),
+  async (req, res, next) => {
+    // ensure TI can write on this mandataire + add related test
+    const ti = await queries.getTiByUserId(req.user.id);
+    const isMandataireInTi = await queries.isMandataireInTi(
+      req.params.mandataireId,
+      ti.id
+    );
+    if (!isMandataireInTi) {
+      return next(new Error(401));
+    }
+    queries
+      .addCommentaire({
+        co_comment: req.body.co_comment,
+        mandataire_id: req.params.mandataireId,
+        ti_id: ti.id
+      })
+      .then(function(commentaireID) {
+        return queries.getAllCommentaires(req.params.mandataireId, ti.id);
+      })
+      .then(function(commentaires) {
+        res.status(200).json(commentaires);
+      })
+      .catch(function(error) {
+        console.log(error);
+        next(error);
+      });
+  }
+);
+
+router.delete(
+  "/:mandataireId/commentaires/:commentaireId",
+  typeRequired("ti"),
+  async (req, res, next) => {
     // secu : ensure TI can write on this mandataire + add related test
     const ti = await queries.getTiByUserId(req.user.id);
     queries
-        .addCommentaire({
-            co_comment: req.body.co_comment,
-            mandataire_id: req.params.mandataireId,
-            ti_id: ti.id
-        })
-        .then(function(commentaireID) {
-            return queries.getAllCommentaires(req.params.mandataireId, ti.id);
-        })
-        .then(function(commentaires) {
-            res.status(200).json(commentaires);
-        })
-        .catch(function(error) {
-            console.log(error)
-            next(error);
-        });
-});
-
-router.delete(
-    "/:mandataireId/commentaires/:commentaireId",
-    async (req, res, next) => {
-        // secu : ensure TI can write on this mandataire + add related test
-        const ti = await queries.getTiByUserId(req.user.id);
-        queries
-            .deleteCommentaire(req.params.commentaireId)
-            .then(function(commentaireID) {
-                return queries.getAllCommentaires(req.params.mandataireId, ti.id);
-            })
-            .then(function(commentaires) {
-                res.status(200).json(commentaires);
-            })
-            .catch(function(error) {
-                next(error);
-            });
-    }
+      .deleteCommentaire(req.params.commentaireId)
+      .then(function(commentaireID) {
+        return queries.getAllCommentaires(req.params.mandataireId, ti.id);
+      })
+      .then(function(commentaires) {
+        res.status(200).json(commentaires);
+      })
+      .catch(function(error) {
+        next(error);
+      });
+  }
 );
 
 // router.delete("/", function(req, res, next) {
