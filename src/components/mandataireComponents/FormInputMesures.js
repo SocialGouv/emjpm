@@ -90,12 +90,20 @@ const uiSchema = {
 
 const CancelButton = styled.button`
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: 20px;
 `;
 
 const ErrorBox = ({ message }) =>
   (message && (
     <div className="alert alert-danger" role="alert">
+      {message}
+    </div>
+  )) ||
+  null;
+
+const SucessBox = ({ message }) =>
+  (message && (
+    <div className="alert alert-success" role="alert">
       {message}
     </div>
   )) ||
@@ -107,7 +115,8 @@ const FormInputMesure = ({
   onSubmit,
   showReplyForm,
   error,
-  status
+  status,
+  success
 }) => (
   <Form
     schema={schema}
@@ -120,14 +129,16 @@ const FormInputMesure = ({
     <button
       type="submit"
       className="btn btn-success"
-      disabled={status === "loading" || status === "success"}
+      style={{ marginLeft: "20px" }}
+      disabled={status === "loading"}
     >
       {(status === "loading" && "Création...") || (status === "success" && "Valider") || "Valider"}
     </button>
-    <CancelButton onClick={showReplyForm} className="btn btn-link">
-      Annuler
+    <CancelButton onClick={showReplyForm} className="btn btn-dark">
+      Replier ▲
     </CancelButton>
-    <ErrorBox message={error} />
+    {error && <ErrorBox message={error} />}
+    {success && <SucessBox message={success} />}
   </Form>
 );
 

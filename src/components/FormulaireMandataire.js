@@ -1,9 +1,7 @@
-import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
-import apiFetch from "./Api";
-import RowModal from "./RowModal";
+import apiFetch from "./communComponents/Api";
 import piwik from "../piwik";
 
 const schema = {
@@ -29,7 +27,11 @@ const schema = {
       default: ""
     },
     secretariat: { type: "boolean", title: "Secretariat", enumNames: ["Oui", "Non"] },
-    nb_secretariat: { type: "integer", title: "Secrétariat : nombre d'ETP", default: "" }
+    nb_secretariat: {
+      type: "number",
+      title: "Secrétariat : nombre d'ETP( Si temps partiel à 80% mettre 0.8)",
+      default: ""
+    }
   }
 };
 
@@ -106,12 +108,14 @@ const FormulaireMandataireView = ({
                 {formData.prenom} {formData.nom}
               </b>
               <br />
-              {formData.type.toUpperCase()}
+              {/*{formData.type.toUpperCase()}*/}
               <br />
               <br />
               <b>Contact</b>
               <br />
               {formData.prenom} {formData.nom}
+              <br />
+              {formData.email}
               <br />
               {formData.telephone}
               <br />
@@ -133,7 +137,8 @@ const FormulaireMandataireView = ({
               <br />
               <b> Secrétariat</b>
               <br />
-              {formData.secretariat} - {formData.nb_secretariat} <br />
+              {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat}{" "}
+              <br />
               <br />
               <button className={"btn btn-dark"} onClick={onClick}>
                 Modifier mes informations
@@ -210,7 +215,6 @@ class FormulaireMandataire extends React.Component {
 
   render() {
     const formData = this.props.currentMandataireModal;
-
     return (
       <FormulaireMandataireView
         currentMandataireModalTry={this.props.currentMandataireModal}

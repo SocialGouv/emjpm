@@ -28,8 +28,9 @@ class Commentaire extends React.Component {
 
   componentDidMount() {
     console.log(this.props.currentMandataire.mandataire_id);
-    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire
-      .mandataire_id}/commentaires`;
+    const url = `${API_URL}/api/v1/mandataires/${
+      this.props.currentMandataire.id
+    }/commentaires`;
     fetch(url, {
       credentials: "include",
       method: "GET",
@@ -51,8 +52,10 @@ class Commentaire extends React.Component {
   }
 
   onSubmit = ({ formData }) => {
-    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire
-      .mandataire_id}/commentaires`;
+    console.log("Com",this.props.currentMandataire)
+    const url = `${API_URL}/api/v1/mandataires/${
+      this.props.currentMandataire.id
+    }/commentaires`;
     fetch(url, {
       credentials: "include",
       method: "POST",
@@ -75,8 +78,9 @@ class Commentaire extends React.Component {
   };
 
   onDelete = comments => {
-    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire
-      .mandataire_id}/commentaires/${comments.co_id}`;
+    const url = `${API_URL}/api/v1/mandataires/${
+      this.props.currentMandataire.id
+    }/commentaires/${comments.co_id}`;
     fetch(url, {
       credentials: "include",
       method: "DELETE",
@@ -95,9 +99,6 @@ class Commentaire extends React.Component {
   };
 
   render() {
-    console.log(111);
-    console.log(this.state.data);
-
     return (
       <div className="form-group">
         <label htmlFor="exampleFormControlTextarea1">
@@ -137,7 +138,7 @@ class Commentaire extends React.Component {
                   {" "}
                   {comments.co_comment} <br />
                 </div>
-                Ajouté le : {comments.postDate.slice(0, 10)} {" "}
+                Ajouté le : {comments.postDate.slice(0, 10)}{" "}
                 <a type="submit" onClick={() => this.onDelete(comments)}>
                   {" "}
                   supprimer

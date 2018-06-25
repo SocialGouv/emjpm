@@ -1,6 +1,6 @@
 import Form from "react-jsonschema-form";
-import TableMesure from "./TableMesure";
-import apiFetch from "./Api";
+import TableMesure from "./mandataireComponents/TableMesure";
+import apiFetch from "./communComponents/Api";
 import Modal from "react-modal";
 
 const schema = {
@@ -194,7 +194,7 @@ class MesureInput extends React.Component {
           <button onClick={this.closeModal}>X</button>
           <div style={{ textAlign: "center" }}>
             <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={this.onSubmit}>
-              <button type="submit" className="btn btn-success">
+              <button type="submit" className="btn btn-success" style={{ marginLeft: "20px" }}>
                 Valider
               </button>
             </Form>
