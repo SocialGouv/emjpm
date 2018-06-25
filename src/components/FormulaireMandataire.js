@@ -1,3 +1,4 @@
+import * as React from "react";
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
@@ -150,22 +151,22 @@ const FormulaireMandataireView = ({
               <br />
               {mandataireEtablissement &&
                 currentMandataireModalTry.type === "Prepose" && (
-                  <div>
-                    <b>Etablissement(s) </b>
-                    <br />
-                  </div>
+                  <React.Fragment>
+                    <div>
+                      <b>Etablissement(s) </b>
+                      <br />
+                    </div>
+                    {mandataireEtablissement.map(etablissement => (
+                      <div>
+                        {etablissement.nom}
+                        <br />
+                        <a href="#" onClick={() => deleteEtablissement(etablissement.id)}>
+                          Supprimer
+                        </a>
+                      </div>
+                    ))}
+                  </React.Fragment>
                 )}
-              {mandataireEtablissement &&
-                currentMandataireModalTry.type === "Prepose" &&
-                mandataireEtablissement.map(etablissement => (
-                  <div>
-                    {etablissement.nom}
-                    <br />
-                    <a href="#" onClick={() => deleteEtablissement(etablissement.id)}>
-                      Supprimer
-                    </a>
-                  </div>
-                ))}
               <br />
               <button className={"btn btn-dark"} onClick={onClick}>
                 Modifier mes informations
