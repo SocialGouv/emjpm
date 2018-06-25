@@ -5,6 +5,8 @@ import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
+import Router from "next/router";
+
 import Navigation from "../src/components/communComponents/Navigation";
 import RowModal from "../src/components/communComponents/RowModal";
 import Footer from "../src/components/communComponents/Footer";
@@ -132,8 +134,8 @@ type FicheMandataireProps = {
   mandataire: Object
 };
 
-export const FicheMandataire = ({ style, mandataire }: FicheMandataireProps) => (
-  <div className="container" style={style}>
+export const FicheMandataire = ({ mandataire }: FicheMandataireProps) => (
+  <div className="container">
     <div className="row">
       <div className="col-6">
         <TitleMandataire>{mandataire.etablissement}</TitleMandataire>
@@ -147,14 +149,11 @@ export const FicheMandataire = ({ style, mandataire }: FicheMandataireProps) => 
         <div>{mandataire.telephone}</div>
         <div>{mandataire.email}</div>
         <br />
-        <br />
-        {
-          <RowModal
-            label="Secrétariat"
-            value={mandataire.secretariat === false ? "Pas de secrétariat" : mandataire.secretariat}
-          />
-        }
-        {<RowModal value={mandataire.nb_secretariat} />}
+        <div style={{ textAlign: "left" }}>
+          <b>Secrétariat </b>
+          <br />
+          {mandataire.secretariat === true ? "Oui" : "Non"} - {mandataire.nb_secretariat}
+        </div>
       </div>
       <div className="col-6">
         <div
@@ -210,7 +209,8 @@ class Ti extends React.Component<Props, State> {
     modalIsOpen: false,
     postcodeCoordinates: "",
     specialite: "",
-    value: ""
+    value: "",
+    timer: "inline-block"
   };
 
   componentDidMount() {
@@ -263,12 +263,20 @@ class Ti extends React.Component<Props, State> {
     this.setState({ postcodeCoordinates: mesures });
   };
 
+  updateTimer = time => {
+    this.setState({ timer: time });
+  };
+
   findPostcode = postCode =>
     getPostCodeCoordinates(postCode).then(coordinates =>
       this.setState({
         postcodeCoordinates: coordinates
       })
     );
+
+  reloadMaps = () => {
+    Router.push("/tis");
+  };
 
   render() {
     const filteredMandataires = filterMandataires(
@@ -317,6 +325,7 @@ class Ti extends React.Component<Props, State> {
         isOpen={this.state.modalIsOpen}
         closeModal={this.closeModal}
         mandataire={this.state.currentMandataire}
+        updateTimer={this.updateTimer}
       />
     );
   }
@@ -344,7 +353,8 @@ const TiView = ({
   filteredMandataires,
   isOpen,
   closeModal,
-  mandataire
+  mandataire,
+  updateTimer
 }) => (
   <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
     <Tabs>
@@ -373,8 +383,10 @@ const TiView = ({
           findPostcode={findPostcode}
           updatePostCodeMandataires={updatePostCodeMandataires}
           updatePostCodeMandatairesByCommune={updatePostCodeMandatairesByCommune}
+          reloadMaps={this.reloadMaps}
           value={value}
           updateValue={updateValue}
+          updateTimer={updateTimer}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire mandataire={mandataire} />
@@ -397,6 +409,7 @@ const TiView = ({
           updatePostCodeMandatairesByCommune={updatePostCodeMandatairesByCommune}
           value={value}
           updateValue={updateValue}
+          updateTimer={updateTimer}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire mandataire={mandataire} />

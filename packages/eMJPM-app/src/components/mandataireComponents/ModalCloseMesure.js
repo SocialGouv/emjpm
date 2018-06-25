@@ -1,5 +1,6 @@
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
+
 import "../../../static/css/custom.css";
 import ExitButton from "../ExitButton";
 
@@ -12,19 +13,6 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)"
   }
-};
-
-const modalMesure = {
-  position: "absolute",
-  width: "30% !important",
-  height: "30% !important",
-  top: "40%",
-  left: "40%",
-  right: "60px",
-  bottom: "60px",
-  backgroundColor: "#f2f2f2",
-  overflow: "scroll",
-  opacity: 2
 };
 
 const schema = {
