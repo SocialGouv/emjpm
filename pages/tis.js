@@ -44,12 +44,7 @@ const TabsShowMandataire = styled.div`
 
 const OpenStreeMap = dynamic(import("../src/components/tiComponents/Map"), {
   ssr: false,
-  loading: () => (
-    <div style={{ textAlign: "center", paddingTop: 20 }}>
-      Chargement… si aucune carte: appuyer ici
-      <button onClick={<Ti />}>Carte</button>
-    </div>
-  )
+  loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
 });
 
 const OpenStreeMapMandataires = dynamic(import("../src/components/tiComponents/MapMandataire"), {
