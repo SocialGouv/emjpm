@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { AlertCircle } from "react-feather";
 import * as React from "react";
 
-import checkDate from "../communComponents/checkDate";
+import isOlderThanOneMonth from "../communComponents/checkDate";
 
 const getColorFromDisponibilite = dispo => {
   if (dispo <= 0) {
@@ -60,7 +60,7 @@ class TableRowMandataire extends React.Component {
 
   render() {
     //date-fns
-    let isLate = checkDate(this.props.mandataire.updateMesure);
+    let isLate = isOlderThanOneMonth(this.props.mandataire.updateMesure);
     const { type, etablissement, disponibilite, referent, dispo_max } = this.props.mandataire;
     return (
       <tr onClick={this.props.onClick} style={{ cursor: "pointer" }}>
