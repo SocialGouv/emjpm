@@ -9,7 +9,6 @@ var fs = require("fs");
 router.post("/upload", function(req, res, next) {
   const file = fs.readFileSync("./test1.csv", "utf8");
   const dataObj = csv.toObject(file);
-  console.log(dataObj)
   queries
     .uploadAll(dataObj)
     .then(() => {
@@ -40,6 +39,7 @@ router.post("/upload", function(req, res, next) {
 
 router.use("/mandataires", require("./mandataires"));
 router.use("/mesures", require("./mesures"));
+router.use("/inscription", require("./inscription"));
 
 // router.post("/services", function(req, res, next) {
 //   queries

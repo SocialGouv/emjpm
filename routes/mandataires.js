@@ -23,6 +23,15 @@ router.put("/1", loginRequired, async (req, res, next) => {
   if (!mandataire) {
     return next(new Error(401));
   }
+
+    const dispoMandataire = await queries
+        .getSingleDisponibilite(mandataire.id);
+
+    if (req.body.disponibilite !== dispoMandataire)
+    {queries
+        .update(mandataire.id, {updateMesure: new Date(Date.now())})
+        .catch(error => next(error));
+    }
   queries
     .update(mandataire.id, req.body)
     .then(() => queries.getSingle(mandataire.id))
@@ -70,7 +79,6 @@ router.get("/", loginRequired, async (req, res, next) => {
 
 // todo: test
 router.post("/PosteCode", loginRequired, async (req, res, next) => {
-  console.log("Salut", req.body.codePoste);
   queries
     .getCoordonneByPosteCode(req.body.codePoste)
     .then(function(mandataires) {
@@ -109,6 +117,6 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));
 router.use("/", require("./serviceAntennes"));
-router.use("/", require("./etablissementPreposes"));
+router.use("/", require("./mandatairesEtablissements"));
 
 module.exports = router;

@@ -162,6 +162,13 @@ function getSingle(mandataireID) {
     .first();
 }
 
+function getSingleDisponibilite(mandataireID) {
+  return Mandataires()
+    .select("disponibilite")
+    .where("id", parseInt(mandataireID))
+    .first();
+}
+
 function getTiByUserId(userId) {
   return knex
     .from("tis")
@@ -269,8 +276,40 @@ function getAllEtablissement(mandataireId) {
   });
 }
 
+function getEtablissements() {
+  return knex("etablissements")
+    .whereBetween("code_postal", [59000, 59999])
+    .orWhereBetween("code_postal", [60000, 60999])
+    .orWhereBetween("code_postal", [62000, 62999])
+    .orWhereBetween("code_postal", [80000, 80999])
+    .orWhereBetween("code_postal", [2000, 2999]);
+  //TODO refactor with Likes '%...'
+}
+
+function getAllEtablissementsByMandataire(mandataireId) {
+  return knex("mandatairesEtablissements")
+    .select("mandatairesEtablissements.id", "etablissements.nom")
+    .innerJoin(
+      "mandataires",
+      "mandataires.id",
+      "mandatairesEtablissements.mandataire_id"
+    )
+    .innerJoin(
+      "etablissements",
+      "mandatairesEtablissements.etablissement_id",
+      "etablissements.id"
+    )
+    .where({
+      mandataire_id: parseInt(mandataireId)
+    });
+}
+
 function addEtablissement(mandataireId) {
   return knex("EtablissementPreposes").insert(mandataireId);
+}
+
+function addMandataireToEtablissement(mandataireId) {
+  return knex("mandatairesEtablissements").insert(mandataireId);
 }
 
 function updateEtablissement(mesureID, updates) {
@@ -280,6 +319,11 @@ function updateEtablissement(mesureID, updates) {
 }
 function deleteEtablissement(showID) {
   return knex("EtablissementPreposes")
+    .where("id", parseInt(showID))
+    .del();
+}
+function deleteMandataireEtablissement(showID) {
+  return knex("mandatairesEtablissements")
     .where("id", parseInt(showID))
     .del();
 }
@@ -356,5 +400,10 @@ module.exports = {
   getAllMesuresByMandatairesFilter,
   getCoordonneByPosteCode,
   getAllByMandatairesFilter,
-  isMandataireInTi
+  isMandataireInTi,
+  getSingleDisponibilite,
+  addMandataireToEtablissement,
+  getAllEtablissementsByMandataire,
+  deleteMandataireEtablissement,
+  getEtablissements
 };
