@@ -17,6 +17,7 @@ passport.use(
       .first()
       .then(user => {
         if (!user) return done(null, false);
+        if (!user.active) return done(null, false);
         if (!authHelpers.comparePass(password, user.password)) {
           return done(null, false);
         } else {
