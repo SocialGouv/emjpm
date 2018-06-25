@@ -1,6 +1,6 @@
 import TableRowMandataire from "./TableRowMandataire";
 
-const TableMandataire = ({ rows, openModal, updateFilters }) => {
+const TableMandataire = ({ rows, openModal, updateFilters, updateTimer }) => {
   return (
     <div className="col-12" style={{ padding: "0px" }}>
       <div
@@ -33,7 +33,7 @@ const TableMandataire = ({ rows, openModal, updateFilters }) => {
         </label>
       </div>
       <div className="custom-control custom-radio custom-control-inline">
-        <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline3">
+        <label style={{ cursor: "pointer", width: "70px" }} htmlFor="customRadioInline3">
           <input
             type="radio"
             id="customRadioInline3"
@@ -52,8 +52,9 @@ const TableMandataire = ({ rows, openModal, updateFilters }) => {
             style={{ margin: "5px" }}
             label="All   "
             value="All"
+            defaultChecked={true}
             onClick={e => updateFilters({ searchType: "" })}
-          />All
+          />Tous
         </label>
       </div>
       <table className="table responsive table-hover" style={{ boderTop: "0px" }}>
@@ -85,6 +86,7 @@ const TableMandataire = ({ rows, openModal, updateFilters }) => {
                 key={mandataire.telephone}
                 mandataire={mandataire}
                 onClick={() => openModal(mandataire)}
+                updateTimer={updateTimer}
               />
             ))}
         </tbody>

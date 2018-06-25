@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-import { Home, Map, User, UserMinus } from "react-feather";
+import { Home, Map, UserMinus } from "react-feather";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import apiFetch from "../src/components/communComponents/Api";
@@ -8,6 +8,7 @@ import Footer from "../src/components/communComponents/Footer";
 import FormulaireMandataire from "../src/components/FormulaireMandataire";
 import Navigation from "../src/components/communComponents/Navigation";
 import TableMesure from "../src/components/mandataireComponents/TableMesure";
+import DislayDate from "../src/components/communComponents/formatFrenchDate";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
@@ -113,7 +114,7 @@ const PillDispo = ({ dispo, dispo_max }) => (
       background: getColorFromDisponibilite(dispo_max - dispo)
     }}
   >
-    {dispo} / {dispo_max}
+    {dispo || 0} / {dispo_max || 0}
   </Pill>
 );
 
@@ -131,10 +132,18 @@ const MandataireIndexView = ({
           <Title>
             {currentMandataire.nom} {currentMandataire.prenom}
           </Title>
+          <div style={{ textAlign: "right" }}>
+            {currentMandataire.updateMesure && (
+              <div>
+                Dernière mise à jour :{" "}
+                <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />
+              </div>
+            )}
+          </div>
         </ContainerMandataire>
         <TabsShowMandataire className="container">
           <Tab style={tabStyle}>
-            {currentMandataire.dispo_max && (
+            {currentMandataire && (
               <PillDispo
                 dispo={currentMandataire.disponibilite}
                 dispo_max={currentMandataire.dispo_max}
@@ -235,6 +244,16 @@ class MandatairesIndex extends React.Component {
           })
         )
       )
+      .then(() => {
+        return apiFetch(`/mandataires/1`, {
+          method: "PUT",
+          body: JSON.stringify({
+            updateMesure: new Date()
+          })
+        }).then(json2 => {
+          this.updateMadataire(json2);
+        });
+      })
       .catch(e => {
         throw e;
       });

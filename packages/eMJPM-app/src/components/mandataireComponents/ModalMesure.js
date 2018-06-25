@@ -1,6 +1,6 @@
 import Form from "react-jsonschema-form";
-import styled from "styled-components";
 import Modal from "react-modal";
+
 import ExitButton from "../ExitButton";
 
 const schema = {
@@ -26,7 +26,7 @@ const schema = {
     codePostal: { type: "string", title: "Code Postal" },
     commune: { type: "string", title: "Commune" },
     civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
-    annee: { type: "integer", title: "Année de naissance" }
+    annee: { type: "string", title: "Année de naissance" }
   }
 };
 
@@ -56,7 +56,6 @@ const uiSchema = {
     "ui:placeholder": "Année de naissance",
 
     classNames: "input_mesure_annee",
-    "ui:widget": "updown",
     "ui:options": {
       label: false
     }
@@ -94,11 +93,6 @@ const uiSchema = {
   }
 };
 
-const CancelButton = styled.button`
-  cursor: pointer;
-  margin-left: 10px;
-`;
-
 const ModalMesure = ({
   CustomFieldTemplate,
   onClick,
@@ -116,7 +110,7 @@ const ModalMesure = ({
       contentLabel="mandataire"
       background="#e9ecef"
       style={customStyles}
-      style={{ border: "1px solid black" }}
+      // style={{ border: "1px solid black" }}
       className="ModalMesureUpdate"
       overlayClassName="OverlayInput"
     >

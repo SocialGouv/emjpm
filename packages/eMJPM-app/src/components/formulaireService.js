@@ -1,5 +1,3 @@
-import RowModal from "./communComponents/RowModal";
-import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import "bootstrap/dist/css/bootstrap.css";
 import "../../static/css/hero.css";
@@ -15,8 +13,10 @@ const schema = {
   type: "object",
   required: [],
   properties: {
-    nom: { type: "string", title: "Nom", default: "" },
-    prenom: { type: "string", title: "Prénom", default: "" },
+    etablissement: { type: "string", title: "Etablissement", default: "" },
+    adresse: { type: "string", title: "Rue", default: "" },
+    code_postal: { type: "string", title: "Code Postal", default: "" },
+    ville: { type: "string", title: "Commune", default: "" },
     telephone: { type: "string", title: "Téléphone", default: "" },
     telephone_portable: {
       type: "string",
@@ -24,9 +24,6 @@ const schema = {
       default: ""
     },
     email: { type: "string", title: "Adresse email", default: "" },
-    adresse: { type: "string", title: "Rue", default: "" },
-    code_postal: { type: "string", title: "Code Postal", default: "" },
-    ville: { type: "string", title: "Commune", default: "" },
     dispo_max: {
       type: "string",
       title: "Nombre de mesures souhaitées",
@@ -50,8 +47,6 @@ const customStyles = {
   }
 };
 
-const formData = {};
-
 class FormulaireService extends React.Component {
   state = {
     data: [],
@@ -64,16 +59,15 @@ class FormulaireService extends React.Component {
     apiFetch(`/mandataires/1`, {
       method: "PUT",
       body: JSON.stringify({
-        nom: formData.nom,
-        prenom: formData.prenom,
-        telephone: formData.telephone,
-        telephone_portable: formData.telephone_portable,
-        email: formData.email,
-        adresse: formData.adresse,
-        code_postal: formData.code_postal,
-        ville: formData.ville,
-        dispo_max: formData.dispo_max,
-        disponibilite: formData.disponibilite
+        etablissement: formData.etablissement || "",
+        telephone: formData.telephone || "",
+        telephone_portable: formData.telephone_portable || "",
+        email: formData.email || "",
+        adresse: formData.adresse || "",
+        code_postal: formData.code_postal || "",
+        ville: formData.ville || "",
+        dispo_max: formData.dispo_max || 0,
+        disponibilite: formData.disponibilite || 0
       })
     }).then(json => {
       this.props.updateMadataire(json);
@@ -81,7 +75,7 @@ class FormulaireService extends React.Component {
     this.closeModal();
   };
 
-  openModal = mandataire => {
+  openModal = () => {
     this.setState({
       modalIsOpen: true
     });
@@ -91,16 +85,15 @@ class FormulaireService extends React.Component {
   };
   render() {
     const formData = {
-      nom: `${this.props.currentMandataireModal.nom}`,
-      prenom: `${this.props.currentMandataireModal.prenom}`,
-      telephone: `${this.props.currentMandataireModal.telephone}`,
-      telephone_portable: `${this.props.currentMandataireModal.telephone_portable}`,
-      ville: `${this.props.currentMandataireModal.ville}`,
-      adresse: `${this.props.currentMandataireModal.adresse}`,
-      email: `${this.props.currentMandataireModal.email}`,
-      code_postal: `${this.props.currentMandataireModal.code_postal}`,
-      dispo_max: `${this.props.currentMandataireModal.dispo_max}`,
-      disponibilite: `${this.props.currentMandataireModal.disponibilite}`
+      etablissement: this.props.currentMandataireModal.etablissement,
+      telephone: this.props.currentMandataireModal.telephone,
+      telephone_portable: this.props.currentMandataireModal.telephone_portable,
+      ville: this.props.currentMandataireModal.ville,
+      adresse: this.props.currentMandataireModal.adresse,
+      email: this.props.currentMandataireModal.email,
+      code_postal: this.props.currentMandataireModal.code_postal,
+      dispo_max: this.props.currentMandataireModal.dispo_max,
+      disponibilite: this.props.currentMandataireModal.disponibilite
     };
     return (
       <div>
@@ -109,12 +102,14 @@ class FormulaireService extends React.Component {
             <div className="row">
               <div className="col-6">
                 <div style={{ textAlign: "left" }}>
-                  <b>
-                    {this.props.currentMandataireModal.prenom}{" "}
-                    {this.props.currentMandataireModal.nom}
-                  </b>
+                  <b>{this.props.currentMandataireModal.etablissement} </b>
                   <br />
-                  {this.props.currentMandataireModal.type.toUpperCase()}
+                  <b> Adresse</b>
+                  <br />
+                  {this.props.currentMandataireModal.adresse}
+                  <br />
+                  {this.props.currentMandataireModal.code_postal} <br />
+                  {this.props.currentMandataireModal.ville}
                   <br />
                   <br />
                   <b>Contact</b>
@@ -124,15 +119,6 @@ class FormulaireService extends React.Component {
                   {this.props.currentMandataireModal.telephone}
                   <br />
                   {this.props.currentMandataireModal.telephone_portable}
-                  <br />
-                  <br />
-                  <b> Adresse</b>
-                  <br />
-                  {this.props.currentMandataireModal.adresse}
-                  <br />
-                  {this.props.currentMandataireModal.code_postal} <br />
-                  {this.props.currentMandataireModal.ville}
-                  <br />
                   <br />
                   <b> Nombre de mesures souhaitées</b>
                   <br />
