@@ -1,19 +1,44 @@
 import React from "react";
 import styled from "styled-components";
 
-class RegionModule extends React.Component {
+class RegionModel extends React.Component {
+  state = {
+    toggled: false
+  };
+
+  changeState = e => {
+    this.setState(curState => ({
+      toggled: !curState.toggled
+    }));
+  };
+
   render() {
     return (
-      <li>
+      <div>
         <div>
           <label>
-            <input type="checkBox" name="region_selector" value={this.props.region.id_region} />
-            {this.props.region.nom_region}
+            <input
+              type="checkBox"
+              style={{ marginRight: 5 }}
+              onChange={this.changeState}
+              value=""
+            />
+            {this.props.nom}
           </label>
-          <div style={{ display: "none" }}> Tribunals d'instances</div>
         </div>
-      </li>
+
+        {this.state.toggled &&
+          this.props.tis &&
+          this.props.tis.map(ti => (
+            <div style={{ marginLeft: 40 }}>
+              <label key={ti.id}>
+                <input style={{ marginRight: 5 }} type="checkBox" />
+                {ti.nom} - id: {ti.id}
+              </label>
+            </div>
+          ))}
+      </div>
     );
   }
 }
-export default RegionModule;
+export default RegionModel;
