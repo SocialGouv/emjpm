@@ -1,5 +1,6 @@
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
+import { CheckCircle, XCircle } from "react-feather";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -7,8 +8,7 @@ const schema = {
   required: ["codePostal", "commune", "civilite", "annee", "residence", "ouverture"],
   properties: {
     ouverture: {
-      type: "string",
-      title: "Date d'ordonnance"
+      type: "string"
     },
     type: {
       type: "string",
@@ -93,21 +93,31 @@ const CancelButton = styled.button`
   margin-left: 20px;
 `;
 
-const ErrorBox = ({ message }) =>
+const Alert = ({ className, Icon, message }) =>
   (message && (
-    <div className="alert alert-danger" role="alert">
+    <div
+      className={`alert ${className || ""}`}
+      role="alert"
+      style={{ marginTop: 20, marginLeft: 20, fontSize: "1.2em" }}
+    >
+      <Icon
+        style={{
+          verticalAlign: "middle",
+          marginRight: 10
+        }}
+      />{" "}
       {message}
     </div>
   )) ||
   null;
 
-const SucessBox = ({ message }) =>
-  (message && (
-    <div className="alert alert-success" role="alert">
-      {message}
-    </div>
-  )) ||
-  null;
+const ErrorBox = ({ message }) => (
+  <Alert className="alert-danger" Icon={XCircle} message={message} />
+);
+
+const SucessBox = ({ message }) => (
+  <Alert className="alert-success" Icon={CheckCircle} message={message} />
+);
 
 const FormInputMesure = ({
   CustomFieldTemplate,
