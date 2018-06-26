@@ -80,10 +80,10 @@ export const MapsView = ({
         </Map>
       </MapsWidth>
       <MandatairesWidth>
-        {(mesureCount > 0 && (
+        {(mandataireCount > 0 && (
           <React.Fragment>
             <Title>
-              {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+              {mandataireCount} Professionnel{(mandataireCount > 1 && "s") || null}
             </Title>
             <div style={{ maxHeight: "60vh", overflow: "auto" }}>
               <TableMandataire
