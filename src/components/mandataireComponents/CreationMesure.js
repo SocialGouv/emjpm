@@ -66,6 +66,7 @@ class MesureInput extends React.Component {
         status: "loading"
       },
       () => {
+        // TODO: use server-side data
         getPostCodeCoordinates(formData.codePostal)
           .then(coordinates => {
             return apiFetch(`/mandataires/1/mesures`, {
@@ -92,6 +93,7 @@ class MesureInput extends React.Component {
                 });
               })
               .then(json => {
+                // TODO: use trigger
                 return apiFetch(`/mandataires/1`, {
                   method: "PUT",
                   body: JSON.stringify({
@@ -105,7 +107,8 @@ class MesureInput extends React.Component {
                 this.setState(
                   {
                     status: "success",
-                    success: " La mesure a été crée"
+                    error: null,
+                    success: " La mesure a été créée"
                   },
                   () => {
                     this.props.updateMesure(json2);

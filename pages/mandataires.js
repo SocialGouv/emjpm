@@ -16,7 +16,7 @@ const tabStyle = {
   bottom: 0,
   verticalAlign: "middle",
   lineHeight: "40px",
-  width: "25%",
+  flex: "1 0 auto",
   display: "inline-flex"
 };
 
@@ -117,6 +117,10 @@ const PillDispo = ({ dispo, dispo_max }) => (
   </Pill>
 );
 
+const TabListItemTitle = ({ children }) => (
+  <div style={{ whiteSpace: "nowrap", fontWeight: "bold" }}>{children}</div>
+);
+
 const MandataireIndexView = ({
   currentMandataire,
   filteredMesures,
@@ -148,19 +152,19 @@ const MandataireIndexView = ({
                 dispo_max={currentMandataire.dispo_max}
               />
             )}
-            <b>Mesures en cours</b>
+            <TabListItemTitle>Mesures en cours</TabListItemTitle>
           </Tab>
           <Tab style={tabStyle}>
             <Map style={imageStyle} />
-            <b>Vue Carte</b>
+            <TabListItemTitle>Vue Carte</TabListItemTitle>
           </Tab>
           <Tab style={tabStyle}>
             <UserMinus style={imageStyle} />
-            <b>Mesures éteintes</b>
+            <TabListItemTitle>Mesures éteintes</TabListItemTitle>
           </Tab>
           <Tab style={tabStyle}>
             <Home style={imageStyle} />
-            <b>Mes informations</b>
+            <TabListItemTitle>Mes informations</TabListItemTitle>
           </Tab>
         </TabsShowMandataire>
       </PanelMandataire>
