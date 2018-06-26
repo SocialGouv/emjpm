@@ -16,7 +16,7 @@ const tabStyle = {
   bottom: 0,
   verticalAlign: "middle",
   lineHeight: "40px",
-  width: "25%",
+  flex: "1 0 auto",
   display: "inline-flex"
 };
 
@@ -91,13 +91,12 @@ const Title = styled.div`
   margin: 10px;
 `;
 
-const OpenStreeMap = dynamic(
-  import("../src/components/mandataireComponents/MapsPartieMandataire"),
-  {
-    ssr: false,
-    loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
-  }
-);
+const OpenStreeMap = dynamic({
+  modules: props => ({
+    MapsPartieMandataire: import("../src/components/mandataireComponents/MapsPartieMandataire")
+  }),
+  render: (props, { MapsPartieMandataire }) => <MapsPartieMandataire {...props} />
+});
 
 const getColorFromDisponibilite = dispo => {
   if (dispo <= 0) {
@@ -116,6 +115,10 @@ const PillDispo = ({ dispo, dispo_max }) => (
   >
     {dispo || 0} / {dispo_max || 0}
   </Pill>
+);
+
+const TabListItemTitle = ({ children }) => (
+  <div style={{ whiteSpace: "nowrap", fontWeight: "bold" }}>{children}</div>
 );
 
 const MandataireIndexView = ({
@@ -149,19 +152,19 @@ const MandataireIndexView = ({
                 dispo_max={currentMandataire.dispo_max}
               />
             )}
-            <b>Mesures en cours</b>
+            <TabListItemTitle>Mesures en cours</TabListItemTitle>
           </Tab>
           <Tab style={tabStyle}>
             <Map style={imageStyle} />
-            <b>Vue Carte</b>
+            <TabListItemTitle>Vue Carte</TabListItemTitle>
           </Tab>
           <Tab style={tabStyle}>
             <UserMinus style={imageStyle} />
-            <b>Mesures éteintes</b>
+            <TabListItemTitle>Mesures éteintes</TabListItemTitle>
           </Tab>
           <Tab style={tabStyle}>
             <Home style={imageStyle} />
-            <b>Mes informations</b>
+            <TabListItemTitle>Mes informations</TabListItemTitle>
           </Tab>
         </TabsShowMandataire>
       </PanelMandataire>

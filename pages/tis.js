@@ -42,19 +42,18 @@ const TabsShowMandataire = styled.div`
   height: 60px;
 `;
 
-const OpenStreeMap = dynamic(import("../src/components/tiComponents/Map"), {
-  ssr: false,
-  loading: () => (
-    <div style={{ textAlign: "center", paddingTop: 20 }}>
-      Chargement… si aucune carte: appuyer ici
-      <button onClick={<Ti/>}>Carte</button>
-    </div>
-  )
+const OpenStreeMap = dynamic({
+  modules: props => ({
+    Map: import("../src/components/tiComponents/Map")
+  }),
+  render: (props, { Map }) => <Map {...props} />
 });
 
-const OpenStreeMapMandataires = dynamic(import("../src/components/tiComponents/MapMandataire"), {
-  ssr: false,
-  loading: () => <div style={{ textAlign: "center", paddingTop: 20 }}>Chargement…</div>
+const OpenStreeMapMandataires = dynamic({
+  modules: props => ({
+    MapMandataire: import("../src/components/tiComponents/MapMandataire")
+  }),
+  render: (props, { MapMandataire }) => <MapMandataire {...props} />
 });
 
 // postCode => [lat, lon]
