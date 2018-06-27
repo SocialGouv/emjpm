@@ -15,7 +15,7 @@ exports.seed = function(knex, Promise) {
         type: "preposes",
         date_ouverture: "2010-10-05",
         residence: "oui",
-        civilite: "madame",
+        civilite: "F",
         status: "Mesure en cours"
       });
     })
@@ -33,7 +33,7 @@ exports.seed = function(knex, Promise) {
         type: "preposes",
         date_ouverture: "2010-10-05",
         residence: "oui",
-        civilite: "madame",
+        civilite: "F",
         status: "Mesure en cours"
       });
     })
@@ -51,7 +51,7 @@ exports.seed = function(knex, Promise) {
         type: "preposes",
         date_ouverture: "2010-10-05",
         residence: "oui",
-        civilite: "madame",
+        civilite: "H",
         status: "Mesure en cours"
       });
     });
