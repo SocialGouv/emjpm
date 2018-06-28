@@ -26,7 +26,7 @@ const schema = {
     codePostal: { type: "string", title: "Code Postal" },
     commune: { type: "string", title: "Commune" },
     civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
-    annee: { type: "string", title: "Année de naissance" }
+    annee: { type: "integer", title: "Année de naissance" }
   }
 };
 
