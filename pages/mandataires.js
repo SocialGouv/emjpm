@@ -162,7 +162,7 @@ const MandataireIndexView = ({
             <UserMinus style={imageStyle} />
             <TabListItemTitle>Mesures éteintes</TabListItemTitle>
           </Tab>
-          <Tab style={tabStyle}>
+          <Tab style={tabStyle} data-cy="tab-manda-information">
             <Home style={imageStyle} />
             <TabListItemTitle>Mes informations</TabListItemTitle>
           </Tab>

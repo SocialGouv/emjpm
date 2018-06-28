@@ -71,5 +71,107 @@ describe("Mandataires", function() {
         });
       });
     });
+      context("session mandataire individuel Information", () => {
+          describe("/mandataires information", () => {
+              it("information should show a nom and prenom", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-nom-prenom]").contains('UDAHF')
+              });
+              it("information should show a email", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-email]").contains('ud@ud.com')
+              });
+              it("information should show a telehone", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-telephone]").contains('0237100000')
+              });
+              it("information should show a telephone portable", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-telephone-portable]").contains('0101010101')
+              });
+              it("information should show a adress", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-adresse]").contains('21 rue de houx')
+              });
+              it("information should show a code Postal", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-code-postal]").contains('62000')
+              });
+              it("information should show a Ville", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-ville]").contains('Arras')
+              });
+              it("information should show a dispo Max", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-dispo-max]").contains('3')
+              });
+              it("information should show a secretariat", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-secretariat]").contains('Non -')
+              });
+          });
+      });
+
+      context("session mandataire individuel Information", () => {
+          describe("/mandataires information", () => {
+              it("information should show a nom and prenom", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-button-modifier]").click();
+                  cy.get(".form-group #root_nom").type("UDA");
+                  cy.get("button[type='submit'].btn-success").click();
+                  cy.get("[data-cy=fiche-manda-nom-prenom]").contains('UDA')
+              });
+              it("information should show a email", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-email]").contains('ud@ud.com')
+              });
+              it("information should show a telehone", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-telephone]").contains('0237100000')
+              });
+              it("information should show a telephone portable", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-telephone-portable]").contains('0101010101')
+              });
+              it("information should show a adress", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-adresse]").contains('21 rue de houx')
+              });
+              it("information should show a code Postal", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-code-postal]").contains('62000')
+              });
+              it("information should show a Ville", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-ville]").contains('Arras')
+              });
+              it("information should show a dispo Max", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-dispo-max]").contains('3')
+              });
+              it("information should show a secretariat", () => {
+                  cy.visit("/mandataires");
+                  cy.get("[data-cy=tab-manda-information]").click();
+                  cy.get("[data-cy=fiche-manda-secretariat]").contains('Non -')
+              });
+          });
+      });
   });
 });

@@ -123,31 +123,36 @@ const FormulaireMandataireView = ({
               <br />
               <b>Contact</b>
               <br />
-              {formData.prenom} {formData.nom}
+              <div data-cy="fiche-manda-nom-prenom">
+                {formData.prenom} {formData.nom}
+              </div>
               <br />
-              {formData.email}
+              <div data-cy="fiche-manda-email">{formData.email}</div>
               <br />
-              {formData.telephone}
+              <div data-cy="fiche-manda-telephone">{formData.telephone}</div>
               <br />
-              {formData.telephone_portable}
+              <div data-cy="fiche-manda-telephone-portable">{formData.telephone_portable}</div>
               <br />
               <br />
               <b> Adresse</b>
               <br />
-              {formData.adresse}
+              <div data-cy="fiche-manda-adresse">{formData.adresse}</div>
               <br />
-              {formData.code_postal} <br />
-              {formData.ville}
+              <div data-cy="fiche-manda-code-postal">{formData.code_postal} </div>
+              <br />
+              <div data-cy="fiche-manda-ville">{formData.ville}</div>
               <br />
               <br />
               <b> Nombre de mesures souhaitées</b>
               <br />
-              {formData.dispo_max}
+              <div data-cy="fiche-manda-dispo-max">{formData.dispo_max}</div>
               <br />
               <br />
               <b> Secrétariat</b>
               <br />
+                <div data-cy="fiche-manda-secretariat">
               {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat} <br />
+                </div>
               <br />
               {mandataireEtablissement &&
                 currentMandataireModalTry.type === "Prepose" && (
@@ -168,7 +173,7 @@ const FormulaireMandataireView = ({
                   </React.Fragment>
                 )}
               <br />
-              <button className={"btn btn-dark"} onClick={onClick}>
+              <button className={"btn btn-dark"} onClick={onClick} data-cy="fiche-manda-button-modifier">
                 Modifier mes informations
               </button>
             </Stylediv>
