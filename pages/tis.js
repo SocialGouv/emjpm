@@ -150,7 +150,7 @@ export const FicheMandataire = ({ mandataire }: FicheMandataireProps) => (
         </div>
         <br />
         <RowModal label="Contact" value={mandataire.referent} />
-        <div>{mandataire.telephone}</div>
+          <div data-cy="tab-telephone">{mandataire.telephone}</div>
         <div>{mandataire.email}</div>
         <br />
         <div style={{ textAlign: "left" }}>
@@ -367,7 +367,7 @@ const TiView = ({
           <Tab style={tabStyle}>
             <b> Majeurs Protégés</b>
           </Tab>
-          <Tab style={tabStyle}>
+          <Tab style={tabStyle} data-cy="tab-mandataire">
             <b>Mandataires</b>
           </Tab>
         </TabsShowMandataire>

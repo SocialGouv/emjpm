@@ -1,75 +1,73 @@
 require("./utils");
 
 describe("Tis", function() {
-    describe("Session Tis", () => {
-        before(function() {
-            cy.loginByForm("jeremy", "johnson123");
-        });
-
-        beforeEach(function() {
-            Cypress.Cookies.preserveOnce("connect.sid");
-        });
-
-        context("session Tis", () => {
-            describe("/tis", () => {
-                it("table should show 2 mesures", () => {
-                    cy.visit("/tis");
-                    cy.get(".react-tabs div.container table tbody tr").should("have.length", 2);
-                });
-                it("counter should show 2/3", () => {
-                    cy.visit("/mandataires");
-                    cy.get(".react-tabs .react-tabs__tab-list li p").should("contain", "2 / 3");
-                });
-                it("can add new mesure", () => {
-                    cy.visit("/mandataires");
-                    cy.get("button.mesure_button").click();
-                    cy.dateInput(".form-group #root_ouverture", "2019-06-22");
-
-                    cy.get(".form-group #root_type").select("Sauvegarde de justice");
-                    cy.get(".form-group #root_residence").select("A domicile");
-                    cy.get(".form-group #root_codePostal").type("93200");
-                    cy.get(".form-group #root_commune").type("Saint-Denis");
-                    cy.get(".form-group #root_civilite").select("F");
-                    cy.get(".form-group #root_annee").type("1977");
-
-                    cy.get("button[type='submit'].btn-success").click();
-
-                    cy.get("div.alert-success").should("contain", "La mesure a été créée");
-
-                    cy.get(".react-tabs div.container table tbody tr").should("have.length", 3);
-                });
-                it("should have new added mesure", () => {
-                    cy.visit("/mandataires");
-                    cy.get(".react-tabs div.container table tbody tr").should("have.length", 3);
-                    cy
-                        .get(".react-tabs div.container table tbody tr:last-child td:nth-child(3)")
-                        .should("contain", "Sauvegarde de justice");
-                    cy
-                        .get(".react-tabs div.container table tbody tr:last-child td:nth-child(4)")
-                        .should("contain", "F");
-                    cy
-                        .get(".react-tabs div.container table tbody tr:last-child td:nth-child(5)")
-                        .should("contain", "1977");
-                });
-                it("counter should now show 3/3", () => {
-                    cy.visit("/mandataires");
-                    cy.get(".react-tabs .react-tabs__tab-list li p").should("contain", "3 / 3");
-                    cy.get(".react-tabs div.container table tbody tr").should("have.length", 3);
-                });
-                it("can close mandat", () => {
-                    cy.visit("/mandataires");
-                    cy.get(".react-tabs div.container table tbody tr:nth-child(2) button.btn-dark").click();
-                    cy.dateInput(".ReactModal__Content #root_extinction", "2019-07-22");
-                    cy.get(".ReactModal__Content button.btn-success").click();
-                    cy.get(".react-tabs .react-tabs__tab-list li p").should("contain", "2 / 3");
-                    cy.get(".react-tabs div.container table tbody tr").should("have.length", 2);
-                });
-                it("counter should now show 2/3", () => {
-                    cy.visit("/mandataires");
-                    cy.get(".react-tabs .react-tabs__tab-list li p").should("contain", "2 / 3");
-                    cy.get(".react-tabs div.container table tbody tr").should("have.length", 2);
-                });
-            });
-        });
+  describe("Session Tis", () => {
+    before(function() {
+      cy.loginByForm("ti1", "ti1");
     });
+
+    beforeEach(function() {
+      Cypress.Cookies.preserveOnce("connect.sid");
+    });
+
+    context("session Tis", () => {
+      describe("/tis", () => {
+        it("table should show 2 mandataires", () => {
+          cy.visit("/tis");
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 2);
+        });
+        it("counter should show 2 professionnels", () => {
+          cy.visit("/tis");
+          cy.get("[data-cy=tab-mandataire]").click();
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 2);
+        });
+        it("can add a comments for a specific Mandataire", () => {
+          cy.visit("/tis");
+          cy.get("[data-cy=tab-mesure] tr:nth-child(1)").click();
+          cy.get(".form-group #root_co_comment").type("Hello i send you a comments");
+          cy.get("button[type='submit'].btn").click();
+          cy
+            .get("[data-cy=tab-comment] div:nth-child(2) div")
+            .contains("Hello i send you a comments");
+        });
+
+        it("check display of the mandataire Identity", () => {
+          cy.visit("/tis");
+          cy.get("[data-cy=tab-mesure] tr:nth-child(1)").click();
+          cy.get("[data-cy=tab-telephone]").contains("0237100000");
+        });
+
+        it("table should show 0 mandataires on individuel filter", () => {
+          cy.visit("/tis");
+          cy.get("[data-cy=tab-individuel]").click();
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 0);
+        });
+
+        it("table should show 2 mandataires on prepose filter", () => {
+          cy.visit("/tis");
+          cy.get("[data-cy=tab-prepose]").click();
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 2);
+        });
+
+        it("table should show 2 mandataires on service filter", () => {
+          cy.visit("/tis");
+          cy.get("[data-cy=tab-service]").click();
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 0);
+        });
+        it("table should show 0 mandataires on Lille Geolocalisation ", () => {
+          cy.visit("/tis");
+          cy.get("[data-cy=tab-code-postal]").type("Lille");
+          cy.get("[data-cy=tab-recherche]").click();
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 0);
+        });
+
+        it("table should show 2 mandataires on Bethune Geolocalisation", () => {
+          cy.visit("/tis");
+          cy.get("[data-cy=tab-code-postal]").type("bethune");
+          cy.get("[data-cy=tab-recherche]").click();
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 2);
+        });
+      });
+    });
+  });
 });

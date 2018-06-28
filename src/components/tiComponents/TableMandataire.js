@@ -9,7 +9,8 @@ const TableMandataire = ({ rows, openModal, updateFilters, updateTimer }) => {
       >
         <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline1">
           <input
-            type="radio"
+              data-cy="tab-individuel"
+              type="radio"
             id="customRadioInline1"
             name="customRadioInline"
             style={{ margin: "5px" }}
@@ -22,7 +23,8 @@ const TableMandataire = ({ rows, openModal, updateFilters, updateTimer }) => {
       <div className="custom-control custom-radio custom-control-inline">
         <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline2">
           <input
-            type="radio"
+              data-cy="tab-prepose"
+              type="radio"
             id="customRadioInline2"
             name="customRadioInline"
             style={{ margin: "5px" }}
@@ -35,7 +37,8 @@ const TableMandataire = ({ rows, openModal, updateFilters, updateTimer }) => {
       <div className="custom-control custom-radio custom-control-inline">
         <label style={{ cursor: "pointer", width: "70px" }} htmlFor="customRadioInline3">
           <input
-            type="radio"
+              data-cy="tab-service"
+              type="radio"
             id="customRadioInline3"
             name="customRadioInline"
             style={{ margin: "5px" }}
@@ -79,7 +82,7 @@ const TableMandataire = ({ rows, openModal, updateFilters, updateTimer }) => {
             </td>
           </tr>
         </thead>
-        <tbody>
+        <tbody data-cy="tab-mesure">
           {rows &&
             rows.map(mandataire => (
               <TableRowMandataire

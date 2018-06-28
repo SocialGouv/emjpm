@@ -10,7 +10,8 @@ const FilterMesuresMap = ({ getPostCodeCoordinates, updateValue, value }) => {
       <tr className="form-inline">
         <td>
           <FormInput
-            innerRef={node => (input = node)}
+              data-cy="tab-code-postal"
+              innerRef={node => (input = node)}
             padd="10"
             size="200"
             id="commune"
@@ -21,7 +22,8 @@ const FilterMesuresMap = ({ getPostCodeCoordinates, updateValue, value }) => {
         </td>
         <td>
           <SearchButton
-            align="center"
+              data-cy="tab-recherche"
+              align="center"
             type="submit"
             onClick={() => getPostCodeCoordinates(input.value)}
           >

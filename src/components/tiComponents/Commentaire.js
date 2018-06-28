@@ -126,13 +126,12 @@ class Commentaire extends React.Component {
         </Form>
 
         <hr />
-        <div style={{ overflow: "scroll", height: "250px" }}>
+        <div style={{ overflow: "scroll", height: "250px" }} data-cy="tab-comment">
           {this.state.data &&
             this.state.data.map &&
             this.state.data.map(comments => (
               <div id={comments.id}>
                 <div style={{ backgroundColor: "#b5b5b5", fontSize: "0.8em" }}>
-                  {" "}
                   {comments.co_comment} <br />
                 </div>
                 Ajouté le : {comments.postDate.slice(0, 10)}{" "}
