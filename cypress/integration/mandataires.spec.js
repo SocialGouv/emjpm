@@ -130,6 +130,7 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_nom").clear();
           cy.get(".form-group #root_nom").type("UDA");
           cy.get("button[type='submit'].btn-success").click();
           cy.get("[data-cy=fiche-manda-nom-prenom]").contains("UDA");
@@ -138,6 +139,7 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_email").clear();
           cy.get(".form-group #root_email").type("u@u.com");
           cy.get("button[type='submit'].btn-success").click();
           cy.get("[data-cy=fiche-manda-email]").contains("u@u.com");
@@ -146,6 +148,7 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_telephone").clear();
           cy.get(".form-group #root_telephone").type("0237100009");
           cy.get("button[type='submit'].btn-success").click();
           cy.get("[data-cy=fiche-manda-telephone]").contains("0237100009");
@@ -154,6 +157,7 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_telephone_portable").clear();
           cy.get(".form-group #root_telephone_portable").type("0101010108");
           cy.get("button[type='submit'].btn-success").click();
           cy.get("[data-cy=fiche-manda-telephone-portable]").contains("0101010108");
@@ -162,6 +166,7 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_adresse").clear();
           cy.get(".form-group #root_adresse").type("21 rue de oui");
           cy.get("button[type='submit'].btn-success").click();
           cy.get("[data-cy=fiche-manda-adresse]").contains("21 rue de oui");
@@ -170,6 +175,7 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_code_postal").clear();
           cy.get(".form-group #root_code_postal").type("62009");
           cy.get("button[type='submit'].btn-success").click();
           cy.get("[data-cy=fiche-manda-code-postal]").contains("62009");
@@ -178,6 +184,7 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_ville").clear();
           cy.get(".form-group #root_ville").type("Avesnes");
           cy.get("button[type='submit'].btn-success").click();
           cy.get("[data-cy=fiche-manda-ville]").contains("Avesnes");
@@ -186,6 +193,7 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_dispo_max").clear();
           cy.get(".form-group #root_dispo_max").type("10");
           cy.get("button[type='submit'].btn-success").click();
           cy.get("[data-cy=fiche-manda-dispo-max]").contains("10");
@@ -194,6 +202,7 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_secretariat").clear();
           cy.get(".form-group #root_secretariat").select("Oui");
           cy.get("button[type='submit'].btn-success").click();
           cy.get("[data-cy=fiche-manda-secretariat]").contains("Oui -");
