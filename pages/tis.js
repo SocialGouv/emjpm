@@ -82,14 +82,14 @@ const filterMandataires = (mandataires, filters) => {
     );
   });
 
-  filteredMandataires.sort((a, b) =>
-    sortByDispo(a.dispo_max - a.disponibilite, b.dispo_max - b.disponibilite)
-  );
+  filteredMandataires.sort((a, b) => {
+   return sortByDispo(a.disponibilite / a.dispo_max, b.disponibilite / b.dispo_max);
+  });
   return filteredMandataires;
 };
 
 const filterMesures = (mesures, filters) => {
-  return mesures.filter(mesure => {
+  let filteredMesures = mesures.filter(mesure => {
     return (
       stringMatch(mesure.type, filters.searchType) &&
       (stringMatch(mesure.etablissement, filters.searchNom) ||
@@ -98,16 +98,20 @@ const filterMesures = (mesures, filters) => {
       stringMatch(mesure.ville, filters.searchVille)
     );
   });
+    filteredMesures.sort((a, b) => {
+        return sortByDispo(a.disponibilite / a.dispo_max, b.disponibilite / b.dispo_max);
+    });
+    return filteredMesures
 };
 
 const sortByDispo = (a, b) => {
-  const dispoA = parseInt(a, 10) || -Infinity;
-  const dispoB = parseInt(b, 10) || -Infinity;
+  const dispoA = parseFloat(a) || -Infinity;
+  const dispoB = parseFloat(b) || -Infinity;
   if (dispoA < dispoB) {
-    return 1;
+    return -1;
   }
   if (dispoA > dispoB) {
-    return -1;
+    return 1;
   }
   return 0;
 };
