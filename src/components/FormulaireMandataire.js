@@ -5,6 +5,7 @@ import styled from "styled-components";
 import apiFetch from "./communComponents/Api";
 import piwik from "../piwik";
 import CreationEtablissement from "./mandataireComponents/CreationEtablissement";
+import AddTisToFormulaireMandataire from "./mandataireComponents/AddTisToFormulaireMandataire";
 
 const schema = {
   title: "Modifier vos informations",
@@ -102,7 +103,11 @@ const FormulaireMandataireView = ({
   updateEtablissement,
   etablissement,
   mandataireEtablissement,
-  deleteEtablissement
+  deleteEtablissement,
+  tis,
+  updateTi,
+  ti,
+  deleteTi
 }) => (
   <Container>
     {currentMandataireModalTry && (
@@ -120,6 +125,7 @@ const FormulaireMandataireView = ({
                   etablissements={etablissement}
                 />
               )}
+              <AddTisToFormulaireMandataire tis={tis} updateTi={updateTi} />
               <br />
               <b>Contact</b>
               <br />
@@ -150,9 +156,9 @@ const FormulaireMandataireView = ({
               <br />
               <b> Secrétariat</b>
               <br />
-                <div data-cy="fiche-manda-secretariat">
-              {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat} <br />
-                </div>
+              <div data-cy="fiche-manda-secretariat">
+                {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat} <br />
+              </div>
               <br />
               {mandataireEtablissement &&
                 currentMandataireModalTry.type === "Prepose" && (
@@ -172,8 +178,30 @@ const FormulaireMandataireView = ({
                     ))}
                   </React.Fragment>
                 )}
+              {ti && (
+                <React.Fragment>
+                  <div>
+                    <b>Tis </b>
+                    <br />
+                  </div>
+                  {ti.map(tia => (
+                    <div>
+                      {tia.etablissement}
+                      <br />
+                      <a href="#" onClick={() => deleteTi(tia.id)}>
+                        Supprimer
+                      </a>
+                    </div>
+                  ))}
+                </React.Fragment>
+              )}
+
               <br />
-              <button className={"btn btn-dark"} onClick={onClick} data-cy="fiche-manda-button-modifier">
+              <button
+                className={"btn btn-dark"}
+                onClick={onClick}
+                data-cy="fiche-manda-button-modifier"
+              >
                 Modifier mes informations
               </button>
             </Stylediv>
@@ -209,21 +237,29 @@ class FormulaireMandataire extends React.Component {
     currentMandataire: "",
     modalIsOpen: false,
     etablissement: "",
-    mandataireEtablissement: ""
+    mandataireEtablissement: "",
+    tis: "",
+    ti: ""
   };
 
   componentDidMount() {
     apiFetch("/mandataires/1/etablissements").then(finess => {
-      apiFetch("/mandataires/1/etablissement")
-        .then(mandataireEtablissement => {
-          this.setState({
-            etablissement: finess,
-            mandataireEtablissement: mandataireEtablissement
-          });
-        })
-        .catch(e => {
-          console.log(e);
+      apiFetch("/mandataires/1/etablissement").then(mandataireEtablissement => {
+        apiFetch("/mandataires/1/tis").then(tis => {
+          apiFetch("/mandataires/1/ti")
+            .then(ti => {
+              this.setState({
+                etablissement: finess,
+                mandataireEtablissement: mandataireEtablissement,
+                tis: tis,
+                ti: ti
+              });
+            })
+            .catch(e => {
+              console.log(e);
+            });
         });
+      });
     });
   }
 
@@ -264,6 +300,14 @@ class FormulaireMandataire extends React.Component {
     });
   };
 
+  deleteTi = ti_id => {
+    apiFetch(`/mandataires/1/tis/${ti_id}`, {
+      method: "DELETE"
+    }).then(json => {
+      this.updateTi(json);
+    });
+  };
+
   openModal = () => {
     this.setState({ modalIsOpen: true });
   };
@@ -273,9 +317,13 @@ class FormulaireMandataire extends React.Component {
   updateEtablissement = etablissement => {
     this.setState({ mandataireEtablissement: etablissement });
   };
+  updateTi = ti => {
+    this.setState({ ti: ti });
+  };
 
   render() {
     const formData = this.props.currentMandataireModal;
+    console.log("ti", this.state.ti)
     return (
       <FormulaireMandataireView
         currentMandataireModalTry={this.props.currentMandataireModal}
@@ -289,6 +337,10 @@ class FormulaireMandataire extends React.Component {
         etablissement={this.state.etablissement}
         mandataireEtablissement={this.state.mandataireEtablissement}
         deleteEtablissement={this.deleteEtablissement}
+        tis={this.state.tis}
+        updateTi={this.updateTi}
+        ti={this.state.ti}
+        deleteTi={this.deleteTi}
       />
     );
   }
