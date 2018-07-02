@@ -142,7 +142,10 @@ type FicheMandataireProps = {
   mandataire: Object
 };
 
-export const FicheMandataire = ({ mandataire }: FicheMandataireProps) => (
+export const FicheMandataire = ({
+  mandataire,
+  currentMandataireEtablissement
+}: FicheMandataireProps) => (
   <div className="container">
     <div className="row">
       <div className="col-6">
@@ -154,13 +157,16 @@ export const FicheMandataire = ({ mandataire }: FicheMandataireProps) => (
         </div>
         <br />
         <RowModal label="Contact" value={mandataire.referent} />
-          <div data-cy="tab-telephone">{mandataire.telephone}</div>
+        <div data-cy="tab-telephone">{mandataire.telephone}</div>
         <div>{mandataire.email}</div>
         <br />
         <div style={{ textAlign: "left" }}>
           <b>Secrétariat </b>
           <br />
           {mandataire.secretariat === true ? "Oui" : "Non"} - {mandataire.nb_secretariat}
+          <br /> <b>Etablissement </b> <br />
+          {currentMandataireEtablissement &&
+            currentMandataireEtablissement.map(etablissement => <div>{etablissement.nom}</div>)}
         </div>
       </div>
       <div className="col-6">
@@ -214,6 +220,7 @@ class Ti extends React.Component<Props, State> {
     searchNom: "",
     searchVille: "",
     currentMandataire: "",
+    currentMandataireEtablissement: "",
     modalIsOpen: false,
     postcodeCoordinates: "",
     specialite: "",
@@ -237,7 +244,17 @@ class Ti extends React.Component<Props, State> {
   }
 
   openModal = mandataire => {
-    this.setState({ modalIsOpen: true, currentMandataire: mandataire });
+    return apiFetch(`/mandataires/${mandataire.id}/tisEtablissement`)
+      .then(mandataireEtablissement => {
+        this.setState({
+          currentMandataireEtablissement: mandataireEtablissement,
+          modalIsOpen: true,
+          currentMandataire: mandataire
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
   };
 
   closeModal = () => {
@@ -309,6 +326,7 @@ class Ti extends React.Component<Props, State> {
 
     const mesureCount = this.state.mandaMesures.length;
     const mandataireCount = filteredMandataires.length;
+
     return (
       <TiView
         mesures={this.state.datamesure}
@@ -334,6 +352,7 @@ class Ti extends React.Component<Props, State> {
         closeModal={this.closeModal}
         mandataire={this.state.currentMandataire}
         updateTimer={this.updateTimer}
+        currentMandataireEtablissement={this.state.currentMandataireEtablissement}
       />
     );
   }
@@ -341,6 +360,7 @@ class Ti extends React.Component<Props, State> {
 
 const TiView = ({
   mesures,
+  currentMandataireEtablissement,
   postcodeMandataire,
   width,
   height,
@@ -397,7 +417,10 @@ const TiView = ({
           updateTimer={updateTimer}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
-          <FicheMandataire mandataire={mandataire} />
+          <FicheMandataire
+            mandataire={mandataire}
+            currentMandataireEtablissement={currentMandataireEtablissement}
+          />
         </ModalMandataire>
       </TabPanel>
       <TabPanel>

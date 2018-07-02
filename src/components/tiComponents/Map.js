@@ -40,7 +40,8 @@ export const MapsView = ({
   getPostCodeCoordinates,
   updateValue,
   value,
-  updateTimer
+  updateTimer,
+  services
 }) => (
   <div className="container">
     <div className="row">
@@ -91,11 +92,17 @@ export const MapsView = ({
             />
           </React.Fragment>
         )) || (
-            <div style={{ textAlign: "center", marginTop: 20 }}>
-              Aucune mesure actuellement dans cette région
-            </div>
-          )}
+          <div style={{ textAlign: "center", marginTop: 20 }}>
+            Aucune mesure actuellement dans cette région
+          </div>
+        )}
       </MandatairesWidth>
+      <React.Fragment>
+        <Title>Services</Title>
+        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+          <TableMandataire rows={services} openModal={openModal} updateFilters={updateFilters} />
+        </div>
+      </React.Fragment>
       Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
     </div>
   </div>
@@ -105,7 +112,8 @@ class Mapstry extends React.Component {
   state = {
     zoom: 10,
     datamesure: "",
-    value: ""
+    value: "",
+    services: ""
   };
 
   mapRef = createRef();
@@ -120,15 +128,17 @@ class Mapstry extends React.Component {
         longNorthEast: mapRefGetBound._northEast.lng,
         longSouthWest: mapRefGetBound._southWest.lng
       })
-    })
-      .then(mesures => {
-        this.setState({ modalIsOpen: false }, () => {
-          this.props.updateMandataireMesures(mesures);
-        });
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    }).then(mesures =>
+      apiFetch("/mandataires/services")
+        .then(services => {
+          this.setState({ modalIsOpen: false, services: services }, () => {
+            this.props.updateMandataireMesures(mesures);
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    );
   }
 
   handleMoveend = () => {
@@ -206,6 +216,7 @@ class Mapstry extends React.Component {
         getPostCodeCoordinates={this.getPostCodeCoordinates}
         updateValue={this.props.updateValue}
         value={this.props.value}
+        services={this.state.services}
       />
     );
   }
