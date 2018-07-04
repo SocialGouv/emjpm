@@ -76,7 +76,7 @@ describe("Mandataires", function() {
         it("information should show a nom and prenom", () => {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-nom-prenom]").contains("UDAHF");
+          cy.get("[data-cy=fiche-manda-nom-prenom]").contains("Adrien");
         });
         it("information should show a email", () => {
           cy.visit("/mandataires");
@@ -202,10 +202,24 @@ describe("Mandataires", function() {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-button-modifier]").click();
-          cy.get(".form-group #root_secretariat").clear();
           cy.get(".form-group #root_secretariat").select("Oui");
           cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-secretariat]").contains("Oui -");
+          cy.get("[data-cy=fiche-manda-secretariat]").contains("Oui");
+        });
+      });
+    });
+    context("session mandataire individuel Mesure Eteinte", () => {
+      describe("/mandataires Mesure Eteinte", () => {
+        it("table should have 1 mesure", () => {
+          cy.visit("/mandataires");
+          cy.get("[data-cy=tab-manda-eteinte]").click();
+          cy.get(".react-tabs div.container table tbody tr").should("have.length", 1);
+        });
+        it("table should have 0 mesure", () => {
+          cy.visit("/mandataires");
+          cy.get("[data-cy=tab-manda-eteinte]").click();
+          cy.get("[data-cy=tab-manda-reactiver]").click();
+          cy.get(".react-tabs div.container table tbody tr").should("have.length", 0);
         });
       });
     });

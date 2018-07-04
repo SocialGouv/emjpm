@@ -12,9 +12,9 @@ describe("Tis", function() {
 
     context("session Tis", () => {
       describe("/tis", () => {
-        it("table should show 2 mandataires", () => {
+        it("table should show 1 mandataires", () => {
           cy.visit("/tis");
-          cy.get("[data-cy=tab-mesure] tr").should("have.length", 2);
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 1);
         });
         it("counter should show 2 professionnels", () => {
           cy.visit("/tis");
@@ -27,7 +27,7 @@ describe("Tis", function() {
           cy.get(".form-group #root_co_comment").type("Hello i send you a comments");
           cy.get("button[type='submit'].btn").click();
           cy
-            .get("[data-cy=tab-comment] div:nth-child(2) div")
+            .get("[data-cy=tab-comment] div:nth-child(1) div")
             .contains("Hello i send you a comments");
         });
 
@@ -43,10 +43,10 @@ describe("Tis", function() {
           cy.get("[data-cy=tab-mesure] tr").should("have.length", 0);
         });
 
-        it("table should show 2 mandataires on prepose filter", () => {
+        it("table should show 1 mandataires on prepose filter", () => {
           cy.visit("/tis");
           cy.get("[data-cy=tab-prepose]").click();
-          cy.get("[data-cy=tab-mesure] tr").should("have.length", 2);
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 1);
         });
 
         it("table should show 2 mandataires on service filter", () => {
@@ -61,11 +61,11 @@ describe("Tis", function() {
           cy.get("[data-cy=tab-mesure] tr").should("have.length", 0);
         });
 
-        it("table should show 2 mandataires on Bethune Geolocalisation", () => {
+        it("table should show 1 mandataires on Bethune Geolocalisation", () => {
           cy.visit("/tis");
           cy.get("[data-cy=tab-code-postal]").type("bethune");
           cy.get("[data-cy=tab-recherche]").click();
-          cy.get("[data-cy=tab-mesure] tr").should("have.length", 2);
+          cy.get("[data-cy=tab-mesure] tr").should("have.length", 1);
         });
       });
     });
