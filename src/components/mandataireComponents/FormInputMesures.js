@@ -1,6 +1,8 @@
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import { CheckCircle, XCircle } from "react-feather";
+import ReactAutocomplete from "react-autocomplete";
+import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -15,11 +17,39 @@ const schema = {
       title: "Type de mesure",
       enum: ["Tutelle", "Curatelle", "Sauvegarde de justice", "Mesure ad hoc", "MAJ"]
     },
-    residence: { type: "string", title: "Lieu de vie", enum: ["A domicile", "En établissement"] },
+    // residence: { type: "string", title: "Lieu de vie", enum: ["A domicile", "En établissement"] },
     codePostal: { type: "string", title: "Code Postal" },
     commune: { type: "string", title: "Commune" },
     civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
-    annee: { type: "integer", title: "Année de naissance", default: "" }
+    annee: { type: "integer", title: "Année de naissance", default: "" },
+    residence: {
+      type: "string",
+      enum: ["A domicile", "En établissement"],
+      default: "Lieu de vie"
+    }
+  },
+  dependencies: {
+    residence: {
+      oneOf: [
+        {
+          properties: {
+            residence: {
+              enum: ["A domicile"]
+            }
+          }
+        },
+        {
+          properties: {
+            residence: {
+              enum: ["En établissement"]
+            },
+            Etablissement: {
+              type: "number"
+            }
+          }
+        }
+      ]
+    }
   }
 };
 
@@ -79,6 +109,7 @@ const uiSchema = {
       label: true
     }
   },
+  "ui:field": "Etablissement",
   type: {
     "ui:placeholder": "Type de mesure",
     classNames: "input_mesure_type",
@@ -121,12 +152,17 @@ const SucessBox = ({ message }) => (
 
 const FormInputMesure = ({
   CustomFieldTemplate,
-  formData,
   onSubmit,
   showReplyForm,
   error,
+  formData,
   status,
-  success
+  success,
+  value,
+  lieuxDeVie,
+  updateValue,
+  updateLieuxDeVie,
+                             etablissement
 }) => (
   <Form
     schema={schema}
@@ -135,6 +171,60 @@ const FormInputMesure = ({
     formData={formData}
     onSubmit={onSubmit}
   >
+    <h6>Résidence </h6>
+
+    <div
+      className="custom-control custom-radio custom-control-inline"
+      style={{ marginLeft: "20px" }}
+    >
+      <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline1">
+        <input
+          data-cy="tab-individuel"
+          type="radio"
+          id="customRadioInline1"
+          name="customRadioInline"
+          style={{ margin: "5px" }}
+          label="A Domicile"
+          value="A Domicile"
+          onClick={e => updateLieuxDeVie({ lieuxDeVie: e.target.value })}
+        />A Domicile
+      </label>
+    </div>
+    <div className="custom-control custom-radio custom-control-inline">
+      <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline2">
+        <input
+          data-cy="tab-prepose"
+          type="radio"
+          id="customRadioInline2"
+          name="customRadioInline"
+          style={{ margin: "5px" }}
+          label="En Etablissement"
+          value="En Etablissement"
+          onClick={e => updateLieuxDeVie({ lieuxDeVie: e.target.value })}
+        />En Etablissement
+      </label>
+    </div>
+
+      { lieuxDeVie === "En Etablissement" &&
+      <ReactAutocomplete
+          items={etablissement}
+          shouldItemRender={(item, value) =>
+              item.nom.toLowerCase().indexOf(value.toLowerCase()) > -1
+          }
+          getItemValue={item => item.nom}
+          renderItem={(item, highlighted) => (
+              <div
+                  key={item.id}
+                  style={{ backgroundColor: highlighted ? "#eee" : "transparent" }}
+              >
+                  {item.nom}
+              </div>
+          )}
+          value={ value}
+          onChange={e => updateValue({ value: e.target.value })}
+          onSelect={(a, b) => updateValue({ value: a, valueId: b.id })}
+      />
+      }
     <br />
     <button
       type="submit"

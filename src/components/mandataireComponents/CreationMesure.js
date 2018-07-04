@@ -21,7 +21,12 @@ export const FormMesure = ({
   hideShow,
   error,
   success,
-  status
+  status,
+  value,
+  updateValue,
+  updateLieuxDeVie,
+  lieuxDeVie,
+  etablissement
 }) => (
   <div>
     <button
@@ -44,6 +49,11 @@ export const FormMesure = ({
             error={error}
             status={status}
             success={success}
+            value={value}
+            lieuxDeVie={lieuxDeVie}
+            updateLieuxDeVie={updateLieuxDeVie}
+            updateValue={updateValue}
+            etablissement={etablissement}
           />
         </div>
       </ModalPres>
@@ -56,8 +66,24 @@ class MesureInput extends React.Component {
     showForm: false,
     error: null,
     status: null,
-    success: null
+    success: null,
+    value: "",
+    valueId: "",
+    lieuxDeVie: "",
+    etablissement: ""
   };
+
+  componentDidMount() {
+    apiFetch("/mandataires/1/etablissements")
+      .then(finess => {
+        this.setState({
+          etablissement: finess
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 
   onSubmit = ({ formData }) => {
     this.setState(
@@ -161,6 +187,14 @@ class MesureInput extends React.Component {
     }
   };
 
+  updateValue = ({ value, valueId }) => {
+    this.setState({ value: value, valueId: valueId });
+  };
+
+  updateLieuxDeVie = ({ lieuxDeVie }) => {
+    this.setState({ lieuxDeVie: lieuxDeVie });
+  };
+
   render() {
     const formData = {};
 
@@ -183,6 +217,11 @@ class MesureInput extends React.Component {
         error={this.state.error}
         success={this.state.success}
         status={this.state.status}
+        value={this.state.value}
+        lieuxDeVie={this.state.lieuxDeVie}
+        updateLieuxDeVie={this.updateLieuxDeVie}
+        updateValue={this.updateValue}
+        etablissement={this.state.etablissement}
       />
     );
   }

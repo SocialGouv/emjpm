@@ -52,8 +52,6 @@ class AddTisToFormulaireMandataire extends React.Component {
             display: this.state.showForm === false ? "block" : "none",
             align: "left"
         };
-
-        console.log("Tis", this.props.tis)
         return (
             <div>
                 <button
