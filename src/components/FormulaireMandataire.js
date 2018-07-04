@@ -323,7 +323,6 @@ class FormulaireMandataire extends React.Component {
 
   render() {
     const formData = this.props.currentMandataireModal;
-    console.log("ti", this.state.ti)
     return (
       <FormulaireMandataireView
         currentMandataireModalTry={this.props.currentMandataireModal}
