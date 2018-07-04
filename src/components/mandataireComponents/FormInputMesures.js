@@ -1,8 +1,8 @@
+import * as React from "react";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import { CheckCircle, XCircle } from "react-feather";
 import ReactAutocomplete from "react-autocomplete";
-import SchemaField from "react-jsonschema-form/lib/components/fields/SchemaField";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -22,35 +22,35 @@ const schema = {
     commune: { type: "string", title: "Commune" },
     civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
     annee: { type: "integer", title: "Année de naissance", default: "" },
-    residence: {
-      type: "string",
-      enum: ["A domicile", "En établissement"],
-      default: "Lieu de vie"
-    }
-  },
-  dependencies: {
-    residence: {
-      oneOf: [
-        {
-          properties: {
-            residence: {
-              enum: ["A domicile"]
-            }
-          }
-        },
-        {
-          properties: {
-            residence: {
-              enum: ["En établissement"]
-            },
-            Etablissement: {
-              type: "number"
-            }
-          }
-        }
-      ]
-    }
+    // residence: {
+    //   type: "string",
+    //   enum: ["A domicile", "En établissement"],
+    //   default: "Lieu de vie"
+    // }
   }
+  // dependencies: {
+  //   residence: {
+  //     oneOf: [
+  //       {
+  //         properties: {
+  //           residence: {
+  //             enum: ["A domicile"]
+  //           }
+  //         }
+  //       },
+  //       {
+  //         properties: {
+  //           residence: {
+  //             enum: ["En établissement"]
+  //           },
+  //           Etablissement: {
+  //             type: "number"
+  //           }
+  //         }
+  //       }
+  //     ]
+  //   }
+  // }
 };
 
 const uiSchema = {
@@ -101,14 +101,14 @@ const uiSchema = {
       label: false
     }
   },
-  residence: {
-    "ui:placeholder": "Lieu de vie",
-    "ui:title": "Résidence du majeur à protéger",
-    classNames: "input_mesure_residence",
-    "ui:options": {
-      label: true
-    }
-  },
+  // residence: {
+  //   "ui:placeholder": "Lieu de vie",
+  //   "ui:title": "Résidence du majeur à protéger",
+  //   classNames: "input_mesure_residence",
+  //   "ui:options": {
+  //     label: true
+  //   }
+  // },
   "ui:field": "Etablissement",
   type: {
     "ui:placeholder": "Type de mesure",
@@ -203,10 +203,13 @@ const FormInputMesure = ({
           onClick={e => updateLieuxDeVie({ lieuxDeVie: e.target.value })}
         />En Etablissement
       </label>
-    </div>
 
-      { lieuxDeVie === "En Etablissement" &&
-      <ReactAutocomplete
+    </div>
+      <br />
+      { lieuxDeVie === "En Etablissement" &&(
+      <React.Fragment>
+          <h6> Choisisser votre établissement</h6>
+          <ReactAutocomplete
           items={etablissement}
           shouldItemRender={(item, value) =>
               item.nom.toLowerCase().indexOf(value.toLowerCase()) > -1
@@ -224,7 +227,11 @@ const FormInputMesure = ({
           onChange={e => updateValue({ value: e.target.value })}
           onSelect={(a, b) => updateValue({ value: a, valueId: b.id })}
       />
+      </React.Fragment>)
       }
+      <br />
+      <br />
+
     <br />
     <button
       type="submit"

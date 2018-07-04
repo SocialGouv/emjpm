@@ -22,7 +22,9 @@ const MandatairesWidth = styled.div`
   background-color: white;
   margin-top: 10px;
   width: 37%;
-`;
+  max-height: 72vh;
+  overflow-y: scroll;`
+;
 
 export const MapsView = ({
   mesures,
@@ -41,7 +43,8 @@ export const MapsView = ({
   updateValue,
   value,
   updateTimer,
-  services
+  services,
+  display
 }) => (
   <div className="container">
     <div className="row">
@@ -90,22 +93,25 @@ export const MapsView = ({
               openModal={openModal}
               updateFilters={updateFilters}
             />
+            <Title>Services</Title>
+            <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+              <TableMandataire
+                rows={services}
+                openModal={openModal}
+                updateFilters={updateFilters}
+                display={display}
+              />
+            </div>
           </React.Fragment>
         )) || (
           <div style={{ textAlign: "center", marginTop: 20 }}>
             Aucune mesure actuellement dans cette région
           </div>
         )}
-      </MandatairesWidth>
-      <React.Fragment>
-        <Title>Services</Title>
-        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-          <TableMandataire rows={services} openModal={openModal} updateFilters={updateFilters} />
-        </div>
-      </React.Fragment>
+      </MandatairesWidth>`
+      </div>
       Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
     </div>
-  </div>
 );
 
 class Mapstry extends React.Component {
@@ -113,7 +119,8 @@ class Mapstry extends React.Component {
     zoom: 10,
     datamesure: "",
     value: "",
-    services: ""
+    services: "",
+    display: "none"
   };
 
   mapRef = createRef();
@@ -217,6 +224,7 @@ class Mapstry extends React.Component {
         updateValue={this.props.updateValue}
         value={this.props.value}
         services={this.state.services}
+        display={this.state.display}
       />
     );
   }

@@ -144,7 +144,7 @@ type FicheMandataireProps = {
 
 export const FicheMandataire = ({
   mandataire,
-  currentMandataireEtablissement,
+  currentEtablissementsForSelectedMandataire,
   allTisForOneMandataire
 }: FicheMandataireProps) => (
   <div className="container">
@@ -166,10 +166,12 @@ export const FicheMandataire = ({
           <br />
           {mandataire.secretariat === true ? "Oui" : "Non"} - {mandataire.nb_secretariat}
           <br />
-          {currentMandataireEtablissement && (
+          {currentEtablissementsForSelectedMandataire && (
             <React.Fragment>
               <b>Etablissement </b> <br />
-              {currentMandataireEtablissement.map(etablissement => <div>{etablissement.nom}</div>)}
+              {currentEtablissementsForSelectedMandataire.map(etablissement => (
+                <div>{etablissement.nom}</div>
+              ))}
               <br />
             </React.Fragment>
           )}
@@ -236,7 +238,7 @@ class Ti extends React.Component<Props, State> {
     searchNom: "",
     searchVille: "",
     currentMandataire: "",
-    currentMandataireEtablissement: "",
+    currentEtablissementsForSelectedMandataire: "",
     modalIsOpen: false,
     postcodeCoordinates: "",
     specialite: "",
@@ -262,11 +264,11 @@ class Ti extends React.Component<Props, State> {
 
   openModal = mandataire => {
     return apiFetch(`/mandataires/${mandataire.id}/tisEtablissement`).then(
-      mandataireEtablissement =>
+        currentEtablissementsForSelectedMandataire =>
         apiFetch(`/mandataires/${mandataire.id}/tis-by-mandataire`)
           .then(allTisForOneMandataire => {
             this.setState({
-              currentMandataireEtablissement: mandataireEtablissement,
+              currentEtablissementsForSelectedMandataire: currentEtablissementsForSelectedMandataire,
               modalIsOpen: true,
               currentMandataire: mandataire,
               allTisForOneMandataire: allTisForOneMandataire
@@ -348,8 +350,6 @@ class Ti extends React.Component<Props, State> {
     const mesureCount = this.state.mandaMesures.length;
     const mandataireCount = filteredMandataires.length;
 
-    console.log("tis", this.state.tis);
-
     return (
       <TiView
         mesures={this.state.datamesure}
@@ -375,7 +375,9 @@ class Ti extends React.Component<Props, State> {
         closeModal={this.closeModal}
         mandataire={this.state.currentMandataire}
         updateTimer={this.updateTimer}
-        currentMandataireEtablissement={this.state.currentMandataireEtablissement}
+        currentEtablissementsForSelectedMandataire={
+          this.state.currentEtablissementsForSelectedMandataire
+        }
         allTisForOneMandataire={this.state.allTisForOneMandataire}
       />
     );
@@ -384,7 +386,7 @@ class Ti extends React.Component<Props, State> {
 
 const TiView = ({
   mesures,
-  currentMandataireEtablissement,
+  currentEtablissementsForSelectedMandataire,
   postcodeMandataire,
   width,
   height,
@@ -444,7 +446,7 @@ const TiView = ({
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire
             mandataire={mandataire}
-            currentMandataireEtablissement={currentMandataireEtablissement}
+            currentEtablissementsForSelectedMandataire={currentEtablissementsForSelectedMandataire}
             allTisForOneMandataire={allTisForOneMandataire}
           />
         </ModalMandataire>
@@ -471,7 +473,7 @@ const TiView = ({
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire
             mandataire={mandataire}
-            currentMandataireEtablissement={currentMandataireEtablissement}
+            currentEtablissementsForSelectedMandataire={currentEtablissementsForSelectedMandataire}
             allTisForOneMandataire={allTisForOneMandataire}
           />
         </ModalMandataire>
