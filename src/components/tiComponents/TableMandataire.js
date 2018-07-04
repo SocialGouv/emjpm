@@ -47,7 +47,7 @@ const TableMandataire = ({ rows, openModal, updateFilters, updateTimer }) => {
             onClick={e => updateFilters({ searchType: e.target.value })}
           />Services
         </label>
-        <label style={{ cursor: "pointer", width: "30px" }} htmlFor="customRadioInline2">
+        <label style={{ cursor: "pointer", width: "30px" }} htmlFor="customRadioInline4">
           <input
             type="radio"
             id="customRadioInline4"
