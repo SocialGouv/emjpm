@@ -19,51 +19,48 @@ const CancelButton = styled.button`
 
 class AddTisToFormulaireMandataire extends React.Component {
     state = {
-        value: "",
-        valueid: "",
-        showFiness: false,
+        etablissement: "",
+        etablissementId: "",
         showForm: false,
-        error: null,
-        status: null
     };
 
-    OpenCreationMesure = () => {
+    changeValueOfStateShowForm = () => {
         if (this.state.showForm === false) {
-            this.setState({ showForm: true, error: null, success: null, status: null });
+            this.setState({ showForm: true });
         } else {
-            this.setState({ showForm: false, error: null, success: null, status: null });
+            this.setState({ showForm: false });
         }
     };
 
-    onSubmit = ti_id => {
+    onSubmit = tiId => {
         apiFetch(`/mandataires/1/tis`, {
             method: "POST",
             body: JSON.stringify({
-                ti_id: ti_id
+                ti_id: tiId
             })
-        }).then(ti => this.props.updateTi(ti));
+        }).then(tis => this.props.updateTi(tis));
     };
 
     render() {
-        const hideForm = {
+        const displayModal = {
             display: this.state.showForm === true ? "block" : "none"
         };
-        const showForm = {
+        const displayButton = {
             display: this.state.showForm === false ? "block" : "none",
             align: "left"
         };
         return (
             <div>
                 <button
-                    style={{ display: "inline", ...showForm }}
+                    style={{ display: "inline", ...displayButton }}
                     type="button"
                     className="btn btn-success mesure_button"
-                    onClick={this.OpenCreationMesure}
+                    onClick={this.changeValueOfStateShowForm}
                 >
-                    Ajouter un nouvel Etablissement
+                    Ajouter un nouveau Ti
                 </button>
 
-                <div style={hideForm}>
+                <div style={displayModal}>
                     <ModalPres>
                         <div style={{ width: "600px" }}>
                             <ReactAutocomplete
@@ -80,12 +77,12 @@ class AddTisToFormulaireMandataire extends React.Component {
                                         {item.etablissement}
                                     </div>
                                 )}
-                                value={this.state.value}
-                                onChange={e => this.setState({ value: e.target.value })}
-                                onSelect={(a, b) => this.setState({ value: a, valueid: b.id })}
+                                value={this.state.etablissement}
+                                onChange={e => this.setState({ etablissement: e.target.value })}
+                                onSelect={(etablissement, ti) => this.setState({ etablissement: etablissement, etablissementId: ti.id })}
                             />
                             <button
-                                onClick={() => this.onSubmit(this.state.valueid)}
+                                onClick={() => this.onSubmit(this.state.etablissementId)}
                                 className="btn btn-success"
                                 style={{ marginLeft: "20px" }}
                                 disabled={status === "loading"}
@@ -94,7 +91,7 @@ class AddTisToFormulaireMandataire extends React.Component {
                                 (status === "success" && "Valider") ||
                                 "Valider"}
                             </button>
-                            <CancelButton onClick={this.OpenCreationMesure} className="btn btn-dark">
+                            <CancelButton onClick={this.changeValueOfStateShowForm} className="btn btn-dark">
                                 Annuler
                             </CancelButton>
                         </div>
