@@ -8,7 +8,15 @@ router.get("/1/etablissement", loginRequired, async (req, res, next) => {
     const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
         .getAllEtablissementsByMandataire(mandataire.id)
-        .then(commentaires => res.status(200).json(commentaires))
+        .then(etablissements => res.status(200).json(etablissements))
+        .catch(error => next(error));
+});
+
+
+router.get("/:mandataireID/tisEtablissement", loginRequired, async (req, res, next) => {
+    queries
+        .getAllEtablissementsByMandataire(req.params.mandataireID)
+        .then(etablissements => res.status(200).json(etablissements))
         .catch(error => next(error));
 });
 
@@ -21,7 +29,7 @@ router.post("/1/etablissements", loginRequired, async (req, res, next) => {
             mandataire_id: mandataire.id
         })
         .then(commentaireID => queries.getAllEtablissementsByMandataire(mandataire.id))
-        .then(commentaires => res.status(200).json(commentaires))
+        .then(etablissements => res.status(200).json(etablissements))
         .catch(error => next(error));
 });
 
@@ -34,7 +42,7 @@ router.delete(
         queries
             .deleteMandataireEtablissement(req.params.mandatairesEtablissementId)
             .then(() => queries.getAllEtablissementsByMandataire(mandataire.id))
-            .then(commentaires => res.status(200).json(commentaires))
+            .then(etablissements => res.status(200).json(etablissements))
             .catch(error => {
                 console.log(error);
                 next(error);
@@ -46,9 +54,10 @@ router.get("/1/etablissements", loginRequired, async (req, res, next) => {
     const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
         .getEtablissements(mandataire.id)
-        .then(commentaires => res.status(200).json(commentaires))
+        .then(etablissements => res.status(200).json(etablissements))
         .catch(error => next(error));
 });
+
 
 
 
