@@ -29,6 +29,12 @@ function getAllMandataires(ti_id) {
     .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
 }
 
+function getAllServicesByTis(ti_id) {
+  return knex
+    .from("mandatairetis")
+    .where({ti_id: parseInt(ti_id),type: "Service"})
+    .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id")
+}
 // function getAllMesuresByPopUp(code_postal) {
 //     return knex
 //         .from("mesures")
@@ -286,6 +292,10 @@ function getEtablissements() {
   //TODO refactor with Likes '%...'
 }
 
+function getTis() {
+  return knex("tis");
+}
+
 function getAllEtablissementsByMandataire(mandataireId) {
   return knex("mandatairesEtablissements")
     .select("mandatairesEtablissements.id", "etablissements.nom")
@@ -304,12 +314,25 @@ function getAllEtablissementsByMandataire(mandataireId) {
     });
 }
 
+function getAllTisByMandataire(mandataireId) {
+  return knex("mandatairetis")
+    .select("tis.id", "tis.etablissement")
+    .where({
+      mandataire_id: parseInt(mandataireId)
+    })
+    .innerJoin("tis", "mandatairetis.ti_id", "tis.id");
+}
+
 function addEtablissement(mandataireId) {
   return knex("EtablissementPreposes").insert(mandataireId);
 }
 
 function addMandataireToEtablissement(mandataireId) {
   return knex("mandatairesEtablissements").insert(mandataireId);
+}
+
+function addMandataireTis(mandataireId) {
+  return knex("mandatairetis").insert(mandataireId);
 }
 
 function updateEtablissement(mesureID, updates) {
@@ -324,6 +347,12 @@ function deleteEtablissement(showID) {
 }
 function deleteMandataireEtablissement(showID) {
   return knex("mandatairesEtablissements")
+    .where("id", parseInt(showID))
+    .del();
+}
+
+function deleteMandataireTis(showID) {
+  return knex("mandatairetis")
     .where("id", parseInt(showID))
     .del();
 }
@@ -405,5 +434,10 @@ module.exports = {
   addMandataireToEtablissement,
   getAllEtablissementsByMandataire,
   deleteMandataireEtablissement,
-  getEtablissements
+  getEtablissements,
+  getAllTisByMandataire,
+  getTis,
+  addMandataireTis,
+  deleteMandataireTis,
+  getAllServicesByTis
 };
