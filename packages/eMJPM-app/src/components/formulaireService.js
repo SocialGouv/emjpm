@@ -1,4 +1,6 @@
 import Modal from "react-modal";
+import * as React from "react";
+
 import "bootstrap/dist/css/bootstrap.css";
 import "../../static/css/hero.css";
 import "../../static/css/panel.css";
@@ -7,6 +9,7 @@ import "../../static/css/custom.css";
 import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
 import apiFetch from "./communComponents/Api";
+import AddTisToFormulaireMandataire from "./mandataireComponents/AddTisToFormulaireMandataire";
 
 const schema = {
   title: "Modifier vos informations",
@@ -52,7 +55,32 @@ class FormulaireService extends React.Component {
     data: [],
     datamesure: [],
     currentMandataire: "",
-    modalIsOpen: false
+    modalIsOpen: false,
+    tis: "",
+    tisByMandataire: ""
+  };
+
+  componentDidMount() {
+    apiFetch("/mandataires/tis").then(tis => {
+      apiFetch("/mandataires/1/tis")
+        .then(tisByMandataire => {
+          this.setState({
+            tis: tis,
+            tisByMandataire: tisByMandataire
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    });
+  }
+
+  deleteTi = ti_id => {
+    apiFetch(`/mandataires/1/tis/${ti_id}`, {
+      method: "DELETE"
+    }).then(json => {
+      this.updateTi(json);
+    });
   };
 
   onSubmit = ({ formData }) => {
@@ -82,6 +110,9 @@ class FormulaireService extends React.Component {
   };
   closeModal = () => {
     this.setState({ modalIsOpen: false });
+  };
+  updateTi = tisByMandataire => {
+    this.setState({ tisByMandataire: tisByMandataire });
   };
   render() {
     const formData = {
@@ -129,6 +160,24 @@ class FormulaireService extends React.Component {
                   <br />
                   {this.props.currentMandataireModal.disponibilite}
                   <br />
+                  <AddTisToFormulaireMandataire tis={this.state.tis} updateTi={this.updateTi} />
+                  {this.state.tisByMandataire && (
+                    <React.Fragment>
+                      <div>
+                        <b>Tis </b>
+                        <br />
+                      </div>
+                      {this.state.tisByMandataire.map(tiByMandataire => (
+                        <div>
+                          {tiByMandataire.etablissement}
+                          <br />
+                          <a href="#" onClick={() => this.deleteTi(tiByMandataire.id)}>
+                            Supprimer
+                          </a>
+                        </div>
+                      ))}
+                    </React.Fragment>
+                  )}
                   <button className={"btn btn-dark"} onClick={this.openModal}>
                     Modifier mes informations
                   </button>
@@ -137,7 +186,6 @@ class FormulaireService extends React.Component {
             </div>
           </div>
         )}
-
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}

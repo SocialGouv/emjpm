@@ -67,6 +67,7 @@ const getPostCodeCoordinates = postCode => {
     .then(json => json.features[0].geometry.coordinates);
 };
 
+
 const stringMatch = (str, needle) => str.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
 
 // filter and sort list of mandataires
@@ -82,14 +83,14 @@ const filterMandataires = (mandataires, filters) => {
     );
   });
 
-  filteredMandataires.sort((a, b) =>
-    sortByDispo(a.dispo_max - a.disponibilite, b.dispo_max - b.disponibilite)
-  );
+  filteredMandataires.sort((a, b) => {
+    return sortByDispo(sortMandataires);
+  });
   return filteredMandataires;
 };
 
 const filterMesures = (mesures, filters) => {
-  return mesures.filter(mesure => {
+  let filteredMesures = mesures.filter(mesure => {
     return (
       stringMatch(mesure.type, filters.searchType) &&
       (stringMatch(mesure.etablissement, filters.searchNom) ||
@@ -98,19 +99,26 @@ const filterMesures = (mesures, filters) => {
       stringMatch(mesure.ville, filters.searchVille)
     );
   });
+  filteredMesures.sort((a, b) => {
+    return sortByDispo(sortMandataires);
+  });
+  return filteredMesures;
 };
 
 const sortByDispo = (a, b) => {
-  const dispoA = parseInt(a, 10) || -Infinity;
-  const dispoB = parseInt(b, 10) || -Infinity;
+  const dispoA = parseFloat(a) || -Infinity;
+  const dispoB = parseFloat(b) || -Infinity;
   if (dispoA < dispoB) {
-    return 1;
+    return -1;
   }
   if (dispoA > dispoB) {
-    return -1;
+    return 1;
   }
   return 0;
 };
+
+const sortMandataires = (a, b) => sortByDispo(a.disponibilite / a.dispo_max, b.disponibilite / b.dispo_max)
+
 
 const ModalMandataire = ({ isOpen, closeModal, children }) => (
   <Modal
@@ -138,7 +146,11 @@ type FicheMandataireProps = {
   mandataire: Object
 };
 
-export const FicheMandataire = ({ mandataire }: FicheMandataireProps) => (
+export const FicheMandataire = ({
+  mandataire,
+  currentEtablissementsForSelectedMandataire,
+  allTisForOneMandataire
+}: FicheMandataireProps) => (
   <div className="container">
     <div className="row">
       <div className="col-6">
@@ -150,13 +162,33 @@ export const FicheMandataire = ({ mandataire }: FicheMandataireProps) => (
         </div>
         <br />
         <RowModal label="Contact" value={mandataire.referent} />
-        <div>{mandataire.telephone}</div>
+        <div data-cy="tab-telephone">{mandataire.telephone}</div>
         <div>{mandataire.email}</div>
         <br />
         <div style={{ textAlign: "left" }}>
           <b>Secrétariat </b>
           <br />
           {mandataire.secretariat === true ? "Oui" : "Non"} - {mandataire.nb_secretariat}
+          <br />
+          {currentEtablissementsForSelectedMandataire && (
+            <React.Fragment>
+              <b>Etablissement </b> <br />
+              {currentEtablissementsForSelectedMandataire.map(etablissement => (
+                <div>{etablissement.nom}</div>
+              ))}
+              <br />
+            </React.Fragment>
+          )}
+          {allTisForOneMandataire && (
+            <React.Fragment>
+              <b>Tis </b> <br />
+              {allTisForOneMandataire.map(ti => (
+                <div>
+                  {ti.etablissement} <br />
+                </div>
+              ))}
+            </React.Fragment>
+          )}
         </div>
       </div>
       <div className="col-6">
@@ -210,10 +242,12 @@ class Ti extends React.Component<Props, State> {
     searchNom: "",
     searchVille: "",
     currentMandataire: "",
+    currentEtablissementsForSelectedMandataire: [],
     modalIsOpen: false,
     postcodeCoordinates: "",
     specialite: "",
     value: "",
+    allTisForOneMandataire: [],
     timer: "inline-block"
   };
 
@@ -233,7 +267,21 @@ class Ti extends React.Component<Props, State> {
   }
 
   openModal = mandataire => {
-    this.setState({ modalIsOpen: true, currentMandataire: mandataire });
+    return apiFetch(`/mandataires/${mandataire.id}/tisEtablissement`).then(
+      currentEtablissementsForSelectedMandataire =>
+        apiFetch(`/mandataires/${mandataire.id}/tis-by-mandataire`)
+          .then(allTisForOneMandataire => {
+            this.setState({
+              currentEtablissementsForSelectedMandataire,
+              allTisForOneMandataire,
+              modalIsOpen: true,
+              currentMandataire: mandataire
+            });
+          })
+          .catch(e => {
+            console.log(e);
+          })
+    );
   };
 
   closeModal = () => {
@@ -305,6 +353,7 @@ class Ti extends React.Component<Props, State> {
 
     const mesureCount = this.state.mandaMesures.length;
     const mandataireCount = filteredMandataires.length;
+
     return (
       <TiView
         mesures={this.state.datamesure}
@@ -330,6 +379,10 @@ class Ti extends React.Component<Props, State> {
         closeModal={this.closeModal}
         mandataire={this.state.currentMandataire}
         updateTimer={this.updateTimer}
+        currentEtablissementsForSelectedMandataire={
+          this.state.currentEtablissementsForSelectedMandataire
+        }
+        allTisForOneMandataire={this.state.allTisForOneMandataire}
       />
     );
   }
@@ -337,6 +390,7 @@ class Ti extends React.Component<Props, State> {
 
 const TiView = ({
   mesures,
+  currentEtablissementsForSelectedMandataire,
   postcodeMandataire,
   width,
   height,
@@ -358,7 +412,8 @@ const TiView = ({
   isOpen,
   closeModal,
   mandataire,
-  updateTimer
+  updateTimer,
+  allTisForOneMandataire
 }) => (
   <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
     <Tabs>
@@ -367,7 +422,7 @@ const TiView = ({
           <Tab style={tabStyle}>
             <b> Majeurs Protégés</b>
           </Tab>
-          <Tab style={tabStyle}>
+          <Tab style={tabStyle} data-cy="tab-mandataire">
             <b>Mandataires</b>
           </Tab>
         </TabsShowMandataire>
@@ -393,7 +448,11 @@ const TiView = ({
           updateTimer={updateTimer}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
-          <FicheMandataire mandataire={mandataire} />
+          <FicheMandataire
+            mandataire={mandataire}
+            currentEtablissementsForSelectedMandataire={currentEtablissementsForSelectedMandataire}
+            allTisForOneMandataire={allTisForOneMandataire}
+          />
         </ModalMandataire>
       </TabPanel>
       <TabPanel>
@@ -416,7 +475,11 @@ const TiView = ({
           updateTimer={updateTimer}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
-          <FicheMandataire mandataire={mandataire} />
+          <FicheMandataire
+            mandataire={mandataire}
+            currentEtablissementsForSelectedMandataire={currentEtablissementsForSelectedMandataire}
+            allTisForOneMandataire={allTisForOneMandataire}
+          />
         </ModalMandataire>
       </TabPanel>
     </Tabs>

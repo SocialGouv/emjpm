@@ -95,7 +95,11 @@ export const TableRowMesureView = ({
     <TdStyle display={display_ext}>{extinction && extinction.slice(0, 10)}</TdStyle>
     <TdStyle display={display_ext}>
       {/*btn btn-outline-secondary*/}
-      <button className={"btn btn-success"} onClick={onClickSubmitEteinte}>
+      <button
+        className={"btn btn-success"}
+        data-cy="tab-manda-reactiver"
+        onClick={onClickSubmitEteinte}
+      >
         Réactiver la mesure
       </button>
     </TdStyle>
