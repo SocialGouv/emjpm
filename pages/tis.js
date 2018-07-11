@@ -238,12 +238,12 @@ class Ti extends React.Component<Props, State> {
     searchNom: "",
     searchVille: "",
     currentMandataire: "",
-    currentEtablissementsForSelectedMandataire: "",
+    currentEtablissementsForSelectedMandataire: [],
     modalIsOpen: false,
     postcodeCoordinates: "",
     specialite: "",
     value: "",
-    allTisForOneMandataire: "",
+    allTisForOneMandataire: [],
     timer: "inline-block"
   };
 
