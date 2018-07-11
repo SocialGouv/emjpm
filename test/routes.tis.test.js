@@ -77,10 +77,6 @@ describe("routes : tis", () => {
       ));
   });
 
-  // it("should throw when posting commentaire on invalid mandataire", done => {
-  //   // TODO
-  //   "1".should.eql(2);
-  // });
   describe("DELETE /api/v1/mandataires/1/tis/2", () => {
     shouldBeProtected(server, "DELETE", "/api/v1/mandataires/1/tis/2");
     it("should delete ti for given mandataire", () =>
