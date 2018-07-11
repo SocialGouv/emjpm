@@ -57,16 +57,16 @@ class FormulaireService extends React.Component {
     currentMandataire: "",
     modalIsOpen: false,
     tis: "",
-    ti: ""
+    tisByMandataire: ""
   };
 
   componentDidMount() {
-    apiFetch("/mandataires/1/tis").then(tis => {
-      apiFetch("/mandataires/1/ti")
-        .then(ti => {
+    apiFetch("/mandataires/tis").then(tis => {
+      apiFetch("/mandataires/1/tis")
+        .then(tisByMandataire => {
           this.setState({
             tis: tis,
-            ti: ti
+            tisByMandataire: tisByMandataire
           });
         })
         .catch(e => {
@@ -111,11 +111,10 @@ class FormulaireService extends React.Component {
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
-  updateTi = ti => {
-    this.setState({ ti: ti });
+  updateTi = tisByMandataire => {
+    this.setState({ tisByMandataire: tisByMandataire });
   };
   render() {
-    console.log(this.state.ti);
     const formData = {
       etablissement: this.props.currentMandataireModal.etablissement,
       telephone: this.props.currentMandataireModal.telephone,
@@ -162,17 +161,17 @@ class FormulaireService extends React.Component {
                   {this.props.currentMandataireModal.disponibilite}
                   <br />
                   <AddTisToFormulaireMandataire tis={this.state.tis} updateTi={this.updateTi} />
-                  {this.state.ti && (
+                  {this.state.tisByMandataire && (
                     <React.Fragment>
                       <div>
                         <b>Tis </b>
                         <br />
                       </div>
-                      {this.state.ti.map(tia => (
+                      {this.state.tisByMandataire.map(tiByMandataire => (
                         <div>
-                          {tia.etablissement}
+                          {tiByMandataire.etablissement}
                           <br />
-                          <a href="#" onClick={() => this.deleteTi(tia.id)}>
+                          <a href="#" onClick={() => this.deleteTi(tiByMandataire.id)}>
                             Supprimer
                           </a>
                         </div>
