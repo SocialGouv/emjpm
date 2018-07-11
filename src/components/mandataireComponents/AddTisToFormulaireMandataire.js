@@ -24,13 +24,19 @@ class AddTisToFormulaireMandataire extends React.Component {
     showForm: false
   };
 
-  changeValueOfStateShowForm = () => {
-    if (this.state.showForm === false) {
-      this.setState({ showForm: true });
-    } else {
-      this.setState({ showForm: false });
-    }
+  toggleFormVisibility = () => {
+    this.setState(curState => ({
+      showForm: !curState.showForm
+    }));
   };
+
+  // changeValueOfStateShowForm = () => {
+  //   if (this.state.showForm === false) {
+  //     this.setState({ showForm: true });
+  //   } else {
+  //     this.setState({ showForm: false });
+  //   }
+  // };
 
   onSubmit = tiId => {
     apiFetch(`/mandataires/1/tis`, {
@@ -55,7 +61,7 @@ class AddTisToFormulaireMandataire extends React.Component {
           style={{ display: "inline", ...displayButton }}
           type="button"
           className="btn btn-success mesure_button"
-          onClick={this.changeValueOfStateShowForm}
+          onClick={this.toggleFormVisibility}
         >
           Ajouter un nouveau Ti
         </button>
@@ -93,7 +99,7 @@ class AddTisToFormulaireMandataire extends React.Component {
                   (status === "success" && "Valider") ||
                   "Valider"}
               </button>
-              <CancelButton onClick={this.changeValueOfStateShowForm} className="btn btn-dark">
+              <CancelButton onClick={this.toggleFormVisibility} className="btn btn-dark">
                 Annuler
               </CancelButton>
             </div>
