@@ -38,7 +38,7 @@ export const TableMesureView = ({ rows, display, display_ext, updateMesureEteint
       <CreationMesure updateMesure={updateMesureEteinte} />
     </DisplayCreationMesure>
     {rows && rows.length ? (
-      <table className="table " style={{ boderTop: 0 }}>
+      <table className="table">
         <thead>
           <Tr>
             <Td>
