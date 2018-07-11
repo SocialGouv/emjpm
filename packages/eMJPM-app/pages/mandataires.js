@@ -158,11 +158,11 @@ const MandataireIndexView = ({
             <Map style={imageStyle} />
             <TabListItemTitle>Vue Carte</TabListItemTitle>
           </Tab>
-          <Tab style={tabStyle}>
+          <Tab style={tabStyle} data-cy="tab-manda-eteinte">
             <UserMinus style={imageStyle} />
             <TabListItemTitle>Mesures éteintes</TabListItemTitle>
           </Tab>
-          <Tab style={tabStyle}>
+          <Tab style={tabStyle} data-cy="tab-manda-information">
             <Home style={imageStyle} />
             <TabListItemTitle>Mes informations</TabListItemTitle>
           </Tab>
