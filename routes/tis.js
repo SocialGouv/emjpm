@@ -21,7 +21,7 @@ router.post("/1/tis", async (req, res, next) => {
             ti_id: req.body.ti_id,
             mandataire_id: mandataire.id
         })
-        .then(commentaireID => queries.getAllTisByMandataire(mandataire.id))
+        .then(() => queries.getAllTisByMandataire(mandataire.id))
         .then(etablissements => res.status(200).json(etablissements))
         .catch(error => next(error));
 });
