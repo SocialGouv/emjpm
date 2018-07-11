@@ -2,7 +2,6 @@ import * as React from "react";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import { CheckCircle, XCircle } from "react-feather";
-import LieuxDeVie from "./LieuxDeVie";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -158,12 +157,7 @@ const FormInputMesure = ({
   formData,
   status,
   success,
-  render,
-  value,
-  lieuxDeVie,
-  updateValue,
-  updateLieuxDeVie,
-  etablissement
+  render
 }) => (
   <Form
     schema={schema}
