@@ -23,8 +23,8 @@ const MandatairesWidth = styled.div`
   margin-top: 10px;
   width: 37%;
   max-height: 72vh;
-  overflow-y: scroll;`
-;
+  overflow-y: scroll;
+`;
 
 export const MapsView = ({
   mesures,
@@ -109,9 +109,9 @@ export const MapsView = ({
           </div>
         )}
       </MandatairesWidth>`
-      </div>
-      Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
     </div>
+    Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
+  </div>
 );
 
 class Mapstry extends React.Component {

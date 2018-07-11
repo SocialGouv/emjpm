@@ -115,8 +115,7 @@ class FormulaireService extends React.Component {
     this.setState({ ti: ti });
   };
   render() {
-
-    console.log(this.state.ti)
+    console.log(this.state.ti);
     const formData = {
       etablissement: this.props.currentMandataireModal.etablissement,
       telephone: this.props.currentMandataireModal.telephone,

@@ -95,7 +95,11 @@ export const TableRowMesureView = ({
     <TdStyle display={display_ext}>{extinction && extinction.slice(0, 10)}</TdStyle>
     <TdStyle display={display_ext}>
       {/*btn btn-outline-secondary*/}
-      <button className={"btn btn-success"} data-cy="tab-manda-reactiver" onClick={onClickSubmitEteinte}>
+      <button
+        className={"btn btn-success"}
+        data-cy="tab-manda-reactiver"
+        onClick={onClickSubmitEteinte}
+      >
         Réactiver la mesure
       </button>
     </TdStyle>
@@ -274,10 +278,9 @@ class TableRowMesure extends React.Component {
       type: type
     };
 
-      console.log("trey")
+    console.log("trey");
 
-
-      return (
+    return (
       <TableRowMesureView
         openModal={() => this.openModal(this.props.mesure.id)}
         openModalMesure={() => this.handleOpenModal(this.props.mesure.id)}

@@ -32,7 +32,7 @@ export const PillDispo = ({ dispo, dispo_max }) => (
       borderRadius: "5px",
       textAlign: "center",
       color: "white",
-      background: getColorFromDisponibilite( dispo / dispo_max )
+      background: getColorFromDisponibilite(dispo / dispo_max)
     }}
   >
     {dispo} / {dispo_max}
@@ -67,7 +67,7 @@ class TableRowMandataire extends React.Component {
         <Cell style={{ width: "100px" }}>
           <Circle
             style={{
-              backgroundColor: getColorFromDisponibilite( disponibilite / dispo_max)
+              backgroundColor: getColorFromDisponibilite(disponibilite / dispo_max)
             }}
           >
             {type.toUpperCase().substr(0, 1)}

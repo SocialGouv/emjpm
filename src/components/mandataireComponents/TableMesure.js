@@ -66,22 +66,20 @@ export const TableMesureView = ({ rows, display, display_ext, updateMesureEteint
           </Tr>
         </thead>
         <tbody>
-        {rows && rows.map(mesure => (
-          <TableRowMesure
-            display={display}
-            display_ext={display_ext}
-            key={mesure.id}
-            mesure={mesure}
-            updateMesureEteinte={updateMesureEteinte}
-          />
-          ))}
+          {rows &&
+            rows.map(mesure => (
+              <TableRowMesure
+                display={display}
+                display_ext={display_ext}
+                key={mesure.id}
+                mesure={mesure}
+                updateMesureEteinte={updateMesureEteinte}
+              />
+            ))}
         </tbody>
       </table>
     ) : (
-      <div style={{ textAlign: "center", paddingTop: "35vh"  }}>
-        {" "}
-        vous n'avez pas de mesures{" "}
-      </div>
+      <div style={{ textAlign: "center", paddingTop: "35vh" }}> vous n'avez pas de mesures </div>
     )}
   </LineContainer>
 );

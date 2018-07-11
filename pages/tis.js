@@ -264,7 +264,7 @@ class Ti extends React.Component<Props, State> {
 
   openModal = mandataire => {
     return apiFetch(`/mandataires/${mandataire.id}/tisEtablissement`).then(
-        currentEtablissementsForSelectedMandataire =>
+      currentEtablissementsForSelectedMandataire =>
         apiFetch(`/mandataires/${mandataire.id}/tis-by-mandataire`)
           .then(allTisForOneMandataire => {
             this.setState({
