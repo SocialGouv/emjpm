@@ -67,6 +67,7 @@ const getPostCodeCoordinates = postCode => {
     .then(json => json.features[0].geometry.coordinates);
 };
 
+
 const stringMatch = (str, needle) => str.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
 
 // filter and sort list of mandataires
@@ -83,7 +84,7 @@ const filterMandataires = (mandataires, filters) => {
   });
 
   filteredMandataires.sort((a, b) => {
-    return sortByDispo(a.disponibilite / a.dispo_max, b.disponibilite / b.dispo_max);
+    return sortByDispo(sortMandataires);
   });
   return filteredMandataires;
 };
@@ -99,7 +100,7 @@ const filterMesures = (mesures, filters) => {
     );
   });
   filteredMesures.sort((a, b) => {
-    return sortByDispo(a.disponibilite / a.dispo_max, b.disponibilite / b.dispo_max);
+    return sortByDispo(sortMandataires);
   });
   return filteredMesures;
 };
@@ -115,6 +116,9 @@ const sortByDispo = (a, b) => {
   }
   return 0;
 };
+
+const sortMandataires = (a, b) => sortByDispo(a.disponibilite / a.dispo_max, b.disponibilite / b.dispo_max)
+
 
 const ModalMandataire = ({ isOpen, closeModal, children }) => (
   <Modal
