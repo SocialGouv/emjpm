@@ -90,8 +90,6 @@ const uiSchema = {
 };
 
 const getPostCodeCoordinates = postCode => {
-  console.log(postCode);
-  console.log(111);
   // return null if no input
   if (!postCode || !postCode.trim()) {
     return Promise.resolve(null);
@@ -101,7 +99,6 @@ const getPostCodeCoordinates = postCode => {
   );
   // .then(json => json);
 };
-const formData = {};
 
 class MesureInput extends React.Component {
   state = {
@@ -115,8 +112,7 @@ class MesureInput extends React.Component {
   };
 
   findPostcode = postCode =>
-    getPostCodeCoordinates(postCode).then(
-      coordinates => console.log("coordinates", coordinates, postCode),
+    getPostCodeCoordinates(postCode).then(coordinates =>
       this.setState({
         postcodeCoordinates: coordinates
       })
@@ -144,7 +140,6 @@ class MesureInput extends React.Component {
           })
         })
           .then(json => {
-            console.log(json);
             return apiFetch(`/mandataires/1/capacite`, {
               method: "PUT"
             }).then(() => {
@@ -161,7 +156,7 @@ class MesureInput extends React.Component {
     this.closeModal();
   };
 
-  openModal = mandataire => {
+  openModal = () => {
     this.setState({ modalIsOpen: true });
   };
   closeModal = () => {

@@ -24,4 +24,15 @@ describe("Login", () => {
 
     cy.location("pathname", { timeout: 10000 }).should("eq", "/mandataires");
   });
+
+  it("Login with valid account should redirect to /tis", function() {
+    cy.visit("/");
+
+    cy.get("#root_username").type("ti1");
+    cy.get("#root_password").type("ti1");
+
+    cy.get("button.btn-success").click();
+
+    cy.location("pathname", { timeout: 10000 }).should("eq", "/tis");
+  });
 });
