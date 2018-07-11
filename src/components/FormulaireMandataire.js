@@ -180,7 +180,6 @@ const FormulaireMandataireView = ({
                 )}
               {tisByMandataire && (
                 <React.Fragment>
-                  {console.log("tisByMandataire", tisByMandataire)}
                   <div>
                     <b>Tis </b>
                     <br />
