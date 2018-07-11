@@ -106,7 +106,7 @@ const FormulaireMandataireView = ({
   deleteEtablissement,
   tis,
   updateTi,
-  ti,
+  tisByMandataire,
   deleteTi
 }) => (
   <Container>
@@ -178,17 +178,18 @@ const FormulaireMandataireView = ({
                     ))}
                   </React.Fragment>
                 )}
-              {ti && (
+              {tisByMandataire && (
                 <React.Fragment>
+                  {console.log("tisByMandataire", tisByMandataire)}
                   <div>
                     <b>Tis </b>
                     <br />
                   </div>
-                  {ti.map(tia => (
-                    <div>
-                      {tia.etablissement}
+                  {tisByMandataire.map(tiByMandataire => (
+                    <div key={tiByMandataire.id}>
+                      {tiByMandataire.etablissement}
                       <br />
-                      <a href="#" onClick={() => deleteTi(tia.id)}>
+                      <a href="#" onClick={() => deleteTi(tiByMandataire.id)}>
                         Supprimer
                       </a>
                     </div>
@@ -239,20 +240,20 @@ class FormulaireMandataire extends React.Component {
     etablissement: "",
     mandataireEtablissement: "",
     tis: "",
-    ti: ""
+    tisByMandataire: ""
   };
 
   componentDidMount() {
     apiFetch("/mandataires/1/etablissements").then(finess => {
       apiFetch("/mandataires/1/etablissement").then(mandataireEtablissement => {
-        apiFetch("/mandataires/1/tis").then(tis => {
-          apiFetch("/mandataires/1/ti")
-            .then(ti => {
+        apiFetch("/mandataires/tis").then(tis => {
+          apiFetch("/mandataires/1/tis")
+            .then(tisByMandataire => {
               this.setState({
                 etablissement: finess,
                 mandataireEtablissement: mandataireEtablissement,
                 tis: tis,
-                ti: ti
+                tisByMandataire: tisByMandataire
               });
             })
             .catch(e => {
@@ -318,7 +319,7 @@ class FormulaireMandataire extends React.Component {
     this.setState({ mandataireEtablissement: etablissement });
   };
   updateTi = ti => {
-    this.setState({ ti: ti });
+    this.setState({ tisByMandataire: ti });
   };
 
   render() {
@@ -338,7 +339,7 @@ class FormulaireMandataire extends React.Component {
         deleteEtablissement={this.deleteEtablissement}
         tis={this.state.tis}
         updateTi={this.updateTi}
-        ti={this.state.ti}
+        tisByMandataire={this.state.tisByMandataire}
         deleteTi={this.deleteTi}
       />
     );
