@@ -32,8 +32,8 @@ function getAllMandataires(ti_id) {
 function getAllServicesByTis(ti_id) {
   return knex
     .from("mandatairetis")
-    .where({ti_id: parseInt(ti_id),type: "Service"})
-    .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id")
+    .where({ ti_id: parseInt(ti_id), type: "Service" })
+    .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
 }
 // function getAllMesuresByPopUp(code_postal) {
 //     return knex
