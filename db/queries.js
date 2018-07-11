@@ -29,6 +29,12 @@ function getAllMandataires(ti_id) {
     .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
 }
 
+function getAllServicesByTis(ti_id) {
+  return knex
+    .from("mandatairetis")
+    .where({ ti_id: parseInt(ti_id), type: "Service" })
+    .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
+}
 // function getAllMesuresByPopUp(code_postal) {
 //     return knex
 //         .from("mesures")
@@ -286,6 +292,10 @@ function getEtablissements() {
   //TODO refactor with Likes '%...'
 }
 
+function getTis() {
+  return knex("tis");
+}
+
 function getAllEtablissementsByMandataire(mandataireId) {
   return knex("mandatairesEtablissements")
     .select("mandatairesEtablissements.id", "etablissements.nom")
@@ -304,12 +314,25 @@ function getAllEtablissementsByMandataire(mandataireId) {
     });
 }
 
+function getAllTisByMandataire(mandataireId) {
+  return knex("mandatairetis")
+    .select("tis.id", "tis.etablissement")
+    .where({
+      mandataire_id: parseInt(mandataireId)
+    })
+    .innerJoin("tis", "mandatairetis.ti_id", "tis.id");
+}
+
 function addEtablissement(mandataireId) {
   return knex("EtablissementPreposes").insert(mandataireId);
 }
 
 function addMandataireToEtablissement(mandataireId) {
   return knex("mandatairesEtablissements").insert(mandataireId);
+}
+
+function addMandataireTis(data) {
+  return knex("mandatairetis").insert(data);
 }
 
 function updateEtablissement(mesureID, updates) {
@@ -325,6 +348,12 @@ function deleteEtablissement(showID) {
 function deleteMandataireEtablissement(showID) {
   return knex("mandatairesEtablissements")
     .where("id", parseInt(showID))
+    .del();
+}
+
+function deleteMandataireTis(tiId,mandataireId) {
+  return knex("mandatairetis")
+    .where({ti_id: parseInt(tiId),mandataire_id: parseInt(mandataireId) }).first()
     .del();
 }
 
@@ -405,5 +434,10 @@ module.exports = {
   addMandataireToEtablissement,
   getAllEtablissementsByMandataire,
   deleteMandataireEtablissement,
-  getEtablissements
+  getEtablissements,
+  getAllTisByMandataire,
+  getTis,
+  addMandataireTis,
+  deleteMandataireTis,
+  getAllServicesByTis
 };
