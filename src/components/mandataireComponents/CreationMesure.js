@@ -3,6 +3,7 @@ import styled from "styled-components";
 import FormInputMesure from "./FormInputMesures";
 import getPostCodeCoordinates from "../communComponents/GetPostCodeCoordinates";
 import apiFetch from "../communComponents/Api";
+import LieuxDeVie from "./LieuxDeVie";
 
 const ModalPres = styled.div`
   padding: 15px;
@@ -54,6 +55,16 @@ export const FormMesure = ({
             updateLieuxDeVie={updateLieuxDeVie}
             updateValue={updateValue}
             etablissement={etablissement}
+            render={() => (
+              <LieuxDeVie
+                {...this.props}
+                value={value}
+                lieuxDeVie={lieuxDeVie}
+                updateLieuxDeVie={updateLieuxDeVie}
+                updateValue={updateValue}
+                etablissement={etablissement}
+              />
+            )}
           />
         </div>
       </ModalPres>
@@ -100,13 +111,13 @@ class MesureInput extends React.Component {
               body: JSON.stringify({
                 code_postal: formData.codePostal,
                 ville: formData.commune,
-                etablissement: formData.etablissement,
+                etablissement_id: this.state.valueId,
                 latitude: coordinates.features[0].geometry.coordinates[1],
                 longitude: coordinates.features[0].geometry.coordinates[0],
                 annee: formData.annee,
                 type: formData.type,
                 date_ouverture: formData.ouverture,
-                residence: formData.residence,
+                residence: this.state.lieuxDeVie,
                 civilite: formData.civilite,
                 status: "Mesure en cours"
               })
