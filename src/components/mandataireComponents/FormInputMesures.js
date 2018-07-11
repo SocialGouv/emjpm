@@ -2,12 +2,12 @@ import * as React from "react";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import { CheckCircle, XCircle } from "react-feather";
-import ReactAutocomplete from "react-autocomplete";
+import LieuxDeVie from "./LieuxDeVie";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
   type: "object",
-  required: ["codePostal", "commune", "civilite", "annee", "residence", "ouverture"],
+  required: ["codePostal", "commune", "civilite", "annee", "ouverture"],
   properties: {
     ouverture: {
       type: "string"
@@ -21,7 +21,7 @@ const schema = {
     codePostal: { type: "string", title: "Code Postal" },
     commune: { type: "string", title: "Commune" },
     civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
-    annee: { type: "integer", title: "Année de naissance", default: "" },
+    annee: { type: "integer", title: "Année de naissance", default: "" }
     // residence: {
     //   type: "string",
     //   enum: ["A domicile", "En établissement"],
@@ -158,11 +158,12 @@ const FormInputMesure = ({
   formData,
   status,
   success,
+  render,
   value,
   lieuxDeVie,
   updateValue,
   updateLieuxDeVie,
-                             etablissement
+  etablissement
 }) => (
   <Form
     schema={schema}
@@ -171,67 +172,8 @@ const FormInputMesure = ({
     formData={formData}
     onSubmit={onSubmit}
   >
-    <h6>Résidence </h6>
-
-    <div
-      className="custom-control custom-radio custom-control-inline"
-      style={{ marginLeft: "20px" }}
-    >
-      <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline1">
-        <input
-          data-cy="tab-individuel"
-          type="radio"
-          id="customRadioInline1"
-          name="customRadioInline"
-          style={{ margin: "5px" }}
-          label="A Domicile"
-          value="A Domicile"
-          onClick={e => updateLieuxDeVie({ lieuxDeVie: e.target.value })}
-        />A Domicile
-      </label>
-    </div>
-    <div className="custom-control custom-radio custom-control-inline">
-      <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline2">
-        <input
-          data-cy="tab-prepose"
-          type="radio"
-          id="customRadioInline2"
-          name="customRadioInline"
-          style={{ margin: "5px" }}
-          label="En Etablissement"
-          value="En Etablissement"
-          onClick={e => updateLieuxDeVie({ lieuxDeVie: e.target.value })}
-        />En Etablissement
-      </label>
-
-    </div>
-      <br />
-      { lieuxDeVie === "En Etablissement" &&(
-      <React.Fragment>
-          <h6> Choisisser votre établissement</h6>
-          <ReactAutocomplete
-          items={etablissement}
-          shouldItemRender={(item, value) =>
-              item.nom.toLowerCase().indexOf(value.toLowerCase()) > -1
-          }
-          getItemValue={item => item.nom}
-          renderItem={(item, highlighted) => (
-              <div
-                  key={item.id}
-                  style={{ backgroundColor: highlighted ? "#eee" : "transparent" }}
-              >
-                  {item.nom}
-              </div>
-          )}
-          value={ value}
-          onChange={e => updateValue({ value: e.target.value })}
-          onSelect={(a, b) => updateValue({ value: a, valueId: b.id })}
-      />
-      </React.Fragment>)
-      }
-      <br />
-      <br />
-
+    {render(this.state)}
+    {/*<LieuxDeVie value={value} updateValue={updateValue} updateLieuxDeVie={updateLieuxDeVie} etablissement={etablissement}/>*/}
     <br />
     <button
       type="submit"
