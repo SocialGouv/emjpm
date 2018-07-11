@@ -26,7 +26,7 @@ describe("Mandataires", function() {
           cy.dateInput(".form-group #root_ouverture", "2019-06-22");
 
           cy.get(".form-group #root_type").select("Sauvegarde de justice");
-          cy.get(".form-group #root_residence").select("A domicile");
+          // cy.get(".form-group #root_residence").select("A domicile");
           cy.get(".form-group #root_codePostal").type("93200");
           cy.get(".form-group #root_commune").type("Saint-Denis");
           cy.get(".form-group #root_civilite").select("F");
