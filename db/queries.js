@@ -351,9 +351,9 @@ function deleteMandataireEtablissement(showID) {
     .del();
 }
 
-function deleteMandataireTis(showID) {
+function deleteMandataireTis(tiId,mandataireId) {
   return knex("mandatairetis")
-    .where("id", parseInt(showID))
+    .where({ti_id: parseInt(tiId),mandataire_id: parseInt(mandataireId) }).first()
     .del();
 }
 
