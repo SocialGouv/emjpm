@@ -27,7 +27,9 @@ export const FormMesure = ({
   updateValue,
   updateLieuxDeVie,
   lieuxDeVie,
-  etablissement
+  etablissement,
+  onChange,
+  formDataState
 }) => (
   <div>
     <button
@@ -55,6 +57,8 @@ export const FormMesure = ({
             updateLieuxDeVie={updateLieuxDeVie}
             updateValue={updateValue}
             etablissement={etablissement}
+            onChange={onChange}
+            formDataState={formDataState}
             render={() => (
               <LieuxDeVie
                 {...this.props}
@@ -81,7 +85,8 @@ class MesureInput extends React.Component {
     value: "",
     valueId: "",
     lieuxDeVie: "",
-    etablissement: ""
+    etablissement: "",
+    formData: ""
   };
 
   componentDidMount() {
@@ -206,6 +211,10 @@ class MesureInput extends React.Component {
     this.setState({ lieuxDeVie: lieuxDeVie });
   };
 
+  onChange = ({ formData }) => {
+    this.setState({ formData: formData });
+  };
+
   render() {
     const formData = {};
 
@@ -233,6 +242,8 @@ class MesureInput extends React.Component {
         updateLieuxDeVie={this.updateLieuxDeVie}
         updateValue={this.updateValue}
         etablissement={this.state.etablissement}
+        onChange={this.onChange}
+        formDataState={this.state.formData}
       />
     );
   }

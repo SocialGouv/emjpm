@@ -149,40 +149,47 @@ const SucessBox = ({ message }) => (
   <Alert className="alert-success" Icon={CheckCircle} message={message} />
 );
 
-const FormInputMesure = ({
-  CustomFieldTemplate,
-  onSubmit,
-  showReplyForm,
-  error,
-  formData,
-  status,
-  success,
-  render
-}) => (
-  <Form
-    schema={schema}
-    uiSchema={uiSchema}
-    FieldTemplate={CustomFieldTemplate}
-    formData={formData}
-    onSubmit={onSubmit}
-  >
-    {render(this.state)}
-    {/*<LieuxDeVie value={value} updateValue={updateValue} updateLieuxDeVie={updateLieuxDeVie} etablissement={etablissement}/>*/}
-    <br />
-    <button
-      type="submit"
-      className="btn btn-success"
-      style={{ marginLeft: "20px" }}
-      disabled={status === "loading"}
-    >
-      {(status === "loading" && "Création...") || (status === "success" && "Valider") || "Valider"}
-    </button>
-    <CancelButton onClick={showReplyForm} className="btn btn-dark">
-      Replier ▲
-    </CancelButton>
-    {error && <ErrorBox message={error} />}
-    {success && <SucessBox message={success} />}
-  </Form>
-);
+class FormInputMesure extends React.Component {
+  render() {
+    const formData = {
+      ouverture: this.props.formDataState.ouverture,
+      codePostal: this.props.formDataState.codePostal,
+      civilite: this.props.formDataState.civilite,
+      annee: this.props.formDataState.annee,
+      commune: this.props.formDataState.commune,
+      type: this.props.formDataState.type
+    };
+
+    return (
+      <Form
+        schema={schema}
+        uiSchema={uiSchema}
+        FieldTemplate={this.props.CustomFieldTemplate}
+        formData={formData}
+        onSubmit={this.props.onSubmit}
+        onChange={this.props.onChange}
+      >
+        {this.props.render(this.state)}
+        {/*<LieuxDeVie value={value} updateValue={updateValue} updateLieuxDeVie={updateLieuxDeVie} etablissement={etablissement}/>*/}
+        <br />
+        <button
+          type="submit"
+          className="btn btn-success"
+          style={{ marginLeft: "20px" }}
+          disabled={this.props.status === "loading"}
+        >
+          {(this.props.status === "loading" && "Création...") ||
+            (this.props.status === "success" && "Valider") ||
+            "Valider"}
+        </button>
+        <CancelButton onClick={this.props.showReplyForm} className="btn btn-dark">
+          Replier ▲
+        </CancelButton>
+        {this.props.error && <ErrorBox message={this.props.error} />}
+        {this.props.success && <SucessBox message={this.props.success} />}
+      </Form>
+    );
+  }
+}
 
 export default FormInputMesure;
