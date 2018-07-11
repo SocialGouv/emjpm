@@ -331,8 +331,8 @@ function addMandataireToEtablissement(mandataireId) {
   return knex("mandatairesEtablissements").insert(mandataireId);
 }
 
-function addMandataireTis(mandataireId) {
-  return knex("mandatairetis").insert(mandataireId);
+function addMandataireTis(data) {
+  return knex("mandatairetis").insert(data);
 }
 
 function updateEtablissement(mesureID, updates) {
