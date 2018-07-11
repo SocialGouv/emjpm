@@ -22,6 +22,7 @@ const DisplayCreationMesure = styled.div`
 const LineContainer = styled.div`
   padding-left: 0px;
   paddin-right: 0px;
+  vertical-align: "middle";
 `;
 const Tr = styled.tr`
   border-top: 0px solid white;
@@ -36,46 +37,52 @@ export const TableMesureView = ({ rows, display, display_ext, updateMesureEteint
     <DisplayCreationMesure display={display}>
       <CreationMesure updateMesure={updateMesureEteinte} />
     </DisplayCreationMesure>
-    <table className="table " style={{ boderTop: "0px" }}>
-      <thead>
-        <Tr>
-          <Td>
-            <ColStyle> Date d'ordonnance </ColStyle>
-          </Td>
-          <Td>
-            <ColStyle> Résidence du majeur </ColStyle>
-          </Td>
-          <Td>
-            <ColStyle> Type de mesure </ColStyle>
-          </Td>
-          <Td>
-            <ColStyle> Genre </ColStyle>
-          </Td>
-          <Td>
-            <ColStyle> Naissance </ColStyle>
-          </Td>
-          <TdStyle display={display} />
-          <TdStyle display={display} />
-          <TdStyle display={display_ext}>
-            {" "}
-            <ColStyle>Date d'extinction </ColStyle>
-          </TdStyle>
-          <TdStyle display={display_ext} />
-        </Tr>
-      </thead>
-      <tbody>
-        {rows &&
-          rows.map(mesure => (
-            <TableRowMesure
-              display={display}
-              display_ext={display_ext}
-              key={mesure.id}
-              mesure={mesure}
-              updateMesureEteinte={updateMesureEteinte}
-            />
+    {rows && rows.length ? (
+      <table className="table " style={{ boderTop: "0px" }}>
+        <thead>
+          <Tr>
+            <Td>
+              <ColStyle> Date d'ordonnance </ColStyle>
+            </Td>
+            <Td>
+              <ColStyle> Résidence du majeur </ColStyle>
+            </Td>
+            <Td>
+              <ColStyle> Type de mesure </ColStyle>
+            </Td>
+            <Td>
+              <ColStyle> Genre </ColStyle>
+            </Td>
+            <Td>
+              <ColStyle> Naissance </ColStyle>
+            </Td>
+            <TdStyle display={display} />
+            <TdStyle display={display} />
+            <TdStyle display={display_ext}>
+              {" "}
+              <ColStyle>Date d'extinction </ColStyle>
+            </TdStyle>
+            <TdStyle display={display_ext} />
+          </Tr>
+        </thead>
+        <tbody>
+        {rows && rows.map(mesure => (
+          <TableRowMesure
+            display={display}
+            display_ext={display_ext}
+            key={mesure.id}
+            mesure={mesure}
+            updateMesureEteinte={updateMesureEteinte}
+          />
           ))}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    ) : (
+      <div style={{ textAlign: "center", paddingTop: "35vh"  }}>
+        {" "}
+        vous n'avez pas de mesures{" "}
+      </div>
+    )}
   </LineContainer>
 );
 

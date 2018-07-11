@@ -94,10 +94,10 @@ export const MapsView = ({
             </div>
           </React.Fragment>
         )) || (
-            <div style={{ textAlign: "center", marginTop: 20 }}>
-              Aucun mandataire actuellement dans cette région
-            </div>
-          )}
+          <div style={{ textAlign: "center", marginTop: 20 }}>
+            Aucun mandataire actuellement dans cette région
+          </div>
+        )}
       </MandatairesWidth>
     </div>
   </div>

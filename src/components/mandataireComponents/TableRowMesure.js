@@ -274,7 +274,10 @@ class TableRowMesure extends React.Component {
       type: type
     };
 
-    return (
+      console.log("trey")
+
+
+      return (
       <TableRowMesureView
         openModal={() => this.openModal(this.props.mesure.id)}
         openModalMesure={() => this.handleOpenModal(this.props.mesure.id)}
