@@ -268,10 +268,10 @@ class Ti extends React.Component<Props, State> {
         apiFetch(`/mandataires/${mandataire.id}/tis-by-mandataire`)
           .then(allTisForOneMandataire => {
             this.setState({
-              currentEtablissementsForSelectedMandataire: currentEtablissementsForSelectedMandataire,
+              currentEtablissementsForSelectedMandataire,
+              allTisForOneMandataire,
               modalIsOpen: true,
-              currentMandataire: mandataire,
-              allTisForOneMandataire: allTisForOneMandataire
+              currentMandataire: mandataire
             });
           })
           .catch(e => {
