@@ -59,17 +59,16 @@ export const FormMesure = ({
             etablissement={etablissement}
             onChange={onChange}
             formDataState={formDataState}
-            render={() => (
-              <LieuxDeVie
-                {...this.props}
-                value={value}
-                lieuxDeVie={lieuxDeVie}
-                updateLieuxDeVie={updateLieuxDeVie}
-                updateValue={updateValue}
-                etablissement={etablissement}
-              />
-            )}
-          />
+          >
+            <LieuxDeVie
+              {...this.props}
+              value={value}
+              lieuxDeVie={lieuxDeVie}
+              updateLieuxDeVie={updateLieuxDeVie}
+              updateValue={updateValue}
+              etablissement={etablissement}
+            />
+          </FormInputMesure>
         </div>
       </ModalPres>
     </div>
