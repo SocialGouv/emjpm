@@ -5,6 +5,7 @@ import styled from "styled-components";
 import apiFetch from "./communComponents/Api";
 import piwik from "../piwik";
 import CreationEtablissement from "./mandataireComponents/CreationEtablissement";
+import AddTisToFormulaireMandataire from "./mandataireComponents/AddTisToFormulaireMandataire";
 
 const schema = {
   title: "Modifier vos informations",
@@ -102,7 +103,11 @@ const FormulaireMandataireView = ({
   updateEtablissement,
   etablissement,
   mandataireEtablissement,
-  deleteEtablissement
+  deleteEtablissement,
+  tis,
+  updateTi,
+  tisByMandataire,
+  deleteTi
 }) => (
   <Container>
     {currentMandataireModalTry && (
@@ -120,34 +125,40 @@ const FormulaireMandataireView = ({
                   etablissements={etablissement}
                 />
               )}
+              <AddTisToFormulaireMandataire tis={tis} updateTi={updateTi} />
               <br />
               <b>Contact</b>
               <br />
-              {formData.prenom} {formData.nom}
+              <div data-cy="fiche-manda-nom-prenom">
+                {formData.prenom} {formData.nom}
+              </div>
               <br />
-              {formData.email}
+              <div data-cy="fiche-manda-email">{formData.email}</div>
               <br />
-              {formData.telephone}
+              <div data-cy="fiche-manda-telephone">{formData.telephone}</div>
               <br />
-              {formData.telephone_portable}
+              <div data-cy="fiche-manda-telephone-portable">{formData.telephone_portable}</div>
               <br />
               <br />
               <b> Adresse</b>
               <br />
-              {formData.adresse}
+              <div data-cy="fiche-manda-adresse">{formData.adresse}</div>
               <br />
-              {formData.code_postal} <br />
-              {formData.ville}
+              <div data-cy="fiche-manda-code-postal">{formData.code_postal} </div>
+              <br />
+              <div data-cy="fiche-manda-ville">{formData.ville}</div>
               <br />
               <br />
               <b> Nombre de mesures souhaitées</b>
               <br />
-              {formData.dispo_max}
+              <div data-cy="fiche-manda-dispo-max">{formData.dispo_max}</div>
               <br />
               <br />
               <b> Secrétariat</b>
               <br />
-              {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat} <br />
+              <div data-cy="fiche-manda-secretariat">
+                {formData.secretariat === true ? "Oui" : "Non"} - {formData.nb_secretariat} <br />
+              </div>
               <br />
               {mandataireEtablissement &&
                 currentMandataireModalTry.type === "Prepose" && (
@@ -167,8 +178,30 @@ const FormulaireMandataireView = ({
                     ))}
                   </React.Fragment>
                 )}
+              {tisByMandataire && (
+                <React.Fragment>
+                  <div>
+                    <b>Tis </b>
+                    <br />
+                  </div>
+                  {tisByMandataire.map(tiByMandataire => (
+                    <div key={tiByMandataire.id}>
+                      {tiByMandataire.etablissement}
+                      <br />
+                      <a href="#" onClick={() => deleteTi(tiByMandataire.id)}>
+                        Supprimer
+                      </a>
+                    </div>
+                  ))}
+                </React.Fragment>
+              )}
+
               <br />
-              <button className={"btn btn-dark"} onClick={onClick}>
+              <button
+                className={"btn btn-dark"}
+                onClick={onClick}
+                data-cy="fiche-manda-button-modifier"
+              >
                 Modifier mes informations
               </button>
             </Stylediv>
@@ -204,21 +237,29 @@ class FormulaireMandataire extends React.Component {
     currentMandataire: "",
     modalIsOpen: false,
     etablissement: "",
-    mandataireEtablissement: ""
+    mandataireEtablissement: "",
+    tis: "",
+    tisByMandataire: ""
   };
 
   componentDidMount() {
     apiFetch("/mandataires/1/etablissements").then(finess => {
-      apiFetch("/mandataires/1/etablissement")
-        .then(mandataireEtablissement => {
-          this.setState({
-            etablissement: finess,
-            mandataireEtablissement: mandataireEtablissement
-          });
-        })
-        .catch(e => {
-          console.log(e);
+      apiFetch("/mandataires/1/etablissement").then(mandataireEtablissement => {
+        apiFetch("/mandataires/tis").then(tis => {
+          apiFetch("/mandataires/1/tis")
+            .then(tisByMandataire => {
+              this.setState({
+                etablissement: finess,
+                mandataireEtablissement: mandataireEtablissement,
+                tis: tis,
+                tisByMandataire: tisByMandataire
+              });
+            })
+            .catch(e => {
+              console.log(e);
+            });
         });
+      });
     });
   }
 
@@ -259,6 +300,14 @@ class FormulaireMandataire extends React.Component {
     });
   };
 
+  deleteTi = ti_id => {
+    apiFetch(`/mandataires/1/tis/${ti_id}`, {
+      method: "DELETE"
+    }).then(json => {
+      this.updateTi(json);
+    });
+  };
+
   openModal = () => {
     this.setState({ modalIsOpen: true });
   };
@@ -267,6 +316,9 @@ class FormulaireMandataire extends React.Component {
   };
   updateEtablissement = etablissement => {
     this.setState({ mandataireEtablissement: etablissement });
+  };
+  updateTi = ti => {
+    this.setState({ tisByMandataire: ti });
   };
 
   render() {
@@ -284,6 +336,10 @@ class FormulaireMandataire extends React.Component {
         etablissement={this.state.etablissement}
         mandataireEtablissement={this.state.mandataireEtablissement}
         deleteEtablissement={this.deleteEtablissement}
+        tis={this.state.tis}
+        updateTi={this.updateTi}
+        tisByMandataire={this.state.tisByMandataire}
+        deleteTi={this.deleteTi}
       />
     );
   }

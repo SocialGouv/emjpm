@@ -22,6 +22,8 @@ const MandatairesWidth = styled.div`
   background-color: white;
   margin-top: 10px;
   width: 37%;
+  max-height: 72vh;
+  overflow-y: scroll;
 `;
 
 export const MapsView = ({
@@ -40,7 +42,9 @@ export const MapsView = ({
   getPostCodeCoordinates,
   updateValue,
   value,
-  updateTimer
+  updateTimer,
+  services,
+  display
 }) => (
   <div className="container">
     <div className="row">
@@ -89,15 +93,24 @@ export const MapsView = ({
               openModal={openModal}
               updateFilters={updateFilters}
             />
+            <Title>Services</Title>
+            <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+              <TableMandataire
+                rows={services}
+                openModal={openModal}
+                updateFilters={updateFilters}
+                display={display}
+              />
+            </div>
           </React.Fragment>
         )) || (
-            <div style={{ textAlign: "center", marginTop: 20 }}>
-              Aucune mesure actuellement dans cette région
-            </div>
-          )}
-      </MandatairesWidth>
-      Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
+          <div style={{ textAlign: "center", marginTop: 20 }}>
+            Aucune mesure actuellement dans cette région
+          </div>
+        )}
+      </MandatairesWidth>`
     </div>
+    Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
   </div>
 );
 
@@ -105,7 +118,9 @@ class Mapstry extends React.Component {
   state = {
     zoom: 10,
     datamesure: "",
-    value: ""
+    value: "",
+    services: "",
+    display: "none"
   };
 
   mapRef = createRef();
@@ -120,15 +135,17 @@ class Mapstry extends React.Component {
         longNorthEast: mapRefGetBound._northEast.lng,
         longSouthWest: mapRefGetBound._southWest.lng
       })
-    })
-      .then(mesures => {
-        this.setState({ modalIsOpen: false }, () => {
-          this.props.updateMandataireMesures(mesures);
-        });
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    }).then(mesures =>
+      apiFetch("/mandataires/services")
+        .then(services => {
+          this.setState({ modalIsOpen: false, services: services }, () => {
+            this.props.updateMandataireMesures(mesures);
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    );
   }
 
   handleMoveend = () => {
@@ -206,6 +223,8 @@ class Mapstry extends React.Component {
         getPostCodeCoordinates={this.getPostCodeCoordinates}
         updateValue={this.props.updateValue}
         value={this.props.value}
+        services={this.state.services}
+        display={this.state.display}
       />
     );
   }

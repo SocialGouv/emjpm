@@ -1,6 +1,6 @@
 import React, { createRef } from "react";
 import styled from "styled-components";
-import { Map, CircleMarker, TileLayer } from "react-leaflet";
+import { Map, CircleMarker, Marker, TileLayer, Popup } from "react-leaflet";
 
 import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
@@ -71,10 +71,10 @@ export const MapsView = ({
                 center={[manda.latitude, manda.longitude]}
                 color="red"
                 radius={10}
-                fill={manda.count}
                 key={manda.id}
-                placeholder={manda.count}
-              />
+              >
+                <Popup onPopupOpen={() => console.log(123456)}> </Popup>
+              </CircleMarker>
             ))}
           ;
         </Map>
@@ -94,10 +94,10 @@ export const MapsView = ({
             </div>
           </React.Fragment>
         )) || (
-            <div style={{ textAlign: "center", marginTop: 20 }}>
-              Aucun mandataire actuellement dans cette région
-            </div>
-          )}
+          <div style={{ textAlign: "center", marginTop: 20 }}>
+            Aucun mandataire actuellement dans cette région
+          </div>
+        )}
       </MandatairesWidth>
     </div>
   </div>

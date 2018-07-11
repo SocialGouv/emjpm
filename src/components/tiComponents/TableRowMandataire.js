@@ -5,9 +5,9 @@ import * as React from "react";
 import isOlderThanOneMonth from "../communComponents/checkDate";
 
 const getColorFromDisponibilite = dispo => {
-  if (dispo <= 0) {
+  if (dispo >= 1) {
     return "#f05659";
-  } else if (dispo <= 5) {
+  } else if (dispo >= 0.85) {
     return "#eb9123";
   }
   return "#43b04a";
@@ -32,7 +32,7 @@ export const PillDispo = ({ dispo, dispo_max }) => (
       borderRadius: "5px",
       textAlign: "center",
       color: "white",
-      background: getColorFromDisponibilite(dispo_max - dispo)
+      background: getColorFromDisponibilite(dispo / dispo_max)
     }}
   >
     {dispo} / {dispo_max}
@@ -67,7 +67,7 @@ class TableRowMandataire extends React.Component {
         <Cell style={{ width: "100px" }}>
           <Circle
             style={{
-              backgroundColor: getColorFromDisponibilite(dispo_max - disponibilite)
+              backgroundColor: getColorFromDisponibilite(disponibilite / dispo_max)
             }}
           >
             {type.toUpperCase().substr(0, 1)}

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import FormInputMesure from "./FormInputMesures";
 import getPostCodeCoordinates from "../communComponents/GetPostCodeCoordinates";
 import apiFetch from "../communComponents/Api";
+import LieuxDeVie from "./LieuxDeVie";
 
 const ModalPres = styled.div`
   padding: 15px;
@@ -21,7 +22,14 @@ export const FormMesure = ({
   hideShow,
   error,
   success,
-  status
+  status,
+  value,
+  updateValue,
+  updateLieuxDeVie,
+  lieuxDeVie,
+  etablissement,
+  onChange,
+  formDataState
 }) => (
   <div>
     <button
@@ -44,7 +52,23 @@ export const FormMesure = ({
             error={error}
             status={status}
             success={success}
-          />
+            value={value}
+            lieuxDeVie={lieuxDeVie}
+            updateLieuxDeVie={updateLieuxDeVie}
+            updateValue={updateValue}
+            etablissement={etablissement}
+            onChange={onChange}
+            formDataState={formDataState}
+          >
+            <LieuxDeVie
+              {...this.props}
+              value={value}
+              lieuxDeVie={lieuxDeVie}
+              updateLieuxDeVie={updateLieuxDeVie}
+              updateValue={updateValue}
+              etablissement={etablissement}
+            />
+          </FormInputMesure>
         </div>
       </ModalPres>
     </div>
@@ -56,8 +80,25 @@ class MesureInput extends React.Component {
     showForm: false,
     error: null,
     status: null,
-    success: null
+    success: null,
+    value: "",
+    valueId: "",
+    lieuxDeVie: "",
+    etablissement: "",
+    formData: ""
   };
+
+  componentDidMount() {
+    apiFetch("/mandataires/1/etablissements")
+      .then(finess => {
+        this.setState({
+          etablissement: finess
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 
   onSubmit = ({ formData }) => {
     this.setState(
@@ -74,13 +115,13 @@ class MesureInput extends React.Component {
               body: JSON.stringify({
                 code_postal: formData.codePostal,
                 ville: formData.commune,
-                etablissement: formData.etablissement,
+                etablissement_id: this.state.valueId,
                 latitude: coordinates.features[0].geometry.coordinates[1],
                 longitude: coordinates.features[0].geometry.coordinates[0],
                 annee: formData.annee,
                 type: formData.type,
                 date_ouverture: formData.ouverture,
-                residence: formData.residence,
+                residence: this.state.lieuxDeVie,
                 civilite: formData.civilite,
                 status: "Mesure en cours"
               })
@@ -161,6 +202,18 @@ class MesureInput extends React.Component {
     }
   };
 
+  updateValue = ({ value, valueId }) => {
+    this.setState({ value: value, valueId: valueId });
+  };
+
+  updateLieuxDeVie = ({ lieuxDeVie }) => {
+    this.setState({ lieuxDeVie: lieuxDeVie });
+  };
+
+  onChange = ({ formData }) => {
+    this.setState({ formData: formData });
+  };
+
   render() {
     const formData = {};
 
@@ -183,6 +236,13 @@ class MesureInput extends React.Component {
         error={this.state.error}
         success={this.state.success}
         status={this.state.status}
+        value={this.state.value}
+        lieuxDeVie={this.state.lieuxDeVie}
+        updateLieuxDeVie={this.updateLieuxDeVie}
+        updateValue={this.updateValue}
+        etablissement={this.state.etablissement}
+        onChange={this.onChange}
+        formDataState={this.state.formData}
       />
     );
   }

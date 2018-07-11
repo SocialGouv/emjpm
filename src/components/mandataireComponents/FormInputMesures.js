@@ -1,11 +1,13 @@
+import * as React from "react";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import { CheckCircle, XCircle } from "react-feather";
+import LieuxDeVie from "./LieuxDeVie";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
   type: "object",
-  required: ["codePostal", "commune", "civilite", "annee", "residence", "ouverture"],
+  required: ["codePostal", "commune", "civilite", "annee", "ouverture"],
   properties: {
     ouverture: {
       type: "string"
@@ -15,12 +17,40 @@ const schema = {
       title: "Type de mesure",
       enum: ["Tutelle", "Curatelle", "Sauvegarde de justice", "Mesure ad hoc", "MAJ"]
     },
-    residence: { type: "string", title: "Lieu de vie", enum: ["A domicile", "En établissement"] },
+    // residence: { type: "string", title: "Lieu de vie", enum: ["A domicile", "En établissement"] },
     codePostal: { type: "string", title: "Code Postal" },
     commune: { type: "string", title: "Commune" },
     civilite: { type: "string", title: "Genre", enum: ["F", "H"] },
     annee: { type: "integer", title: "Année de naissance", default: "" }
+    // residence: {
+    //   type: "string",
+    //   enum: ["A domicile", "En établissement"],
+    //   default: "Lieu de vie"
+    // }
   }
+  // dependencies: {
+  //   residence: {
+  //     oneOf: [
+  //       {
+  //         properties: {
+  //           residence: {
+  //             enum: ["A domicile"]
+  //           }
+  //         }
+  //       },
+  //       {
+  //         properties: {
+  //           residence: {
+  //             enum: ["En établissement"]
+  //           },
+  //           Etablissement: {
+  //             type: "number"
+  //           }
+  //         }
+  //       }
+  //     ]
+  //   }
+  // }
 };
 
 const uiSchema = {
@@ -71,14 +101,15 @@ const uiSchema = {
       label: false
     }
   },
-  residence: {
-    "ui:placeholder": "Lieu de vie",
-    "ui:title": "Résidence du majeur à protéger",
-    classNames: "input_mesure_residence",
-    "ui:options": {
-      label: true
-    }
-  },
+  // residence: {
+  //   "ui:placeholder": "Lieu de vie",
+  //   "ui:title": "Résidence du majeur à protéger",
+  //   classNames: "input_mesure_residence",
+  //   "ui:options": {
+  //     label: true
+  //   }
+  // },
+  "ui:field": "Etablissement",
   type: {
     "ui:placeholder": "Type de mesure",
     classNames: "input_mesure_type",
@@ -119,37 +150,46 @@ const SucessBox = ({ message }) => (
   <Alert className="alert-success" Icon={CheckCircle} message={message} />
 );
 
-const FormInputMesure = ({
-  CustomFieldTemplate,
-  formData,
-  onSubmit,
-  showReplyForm,
-  error,
-  status,
-  success
-}) => (
-  <Form
-    schema={schema}
-    uiSchema={uiSchema}
-    FieldTemplate={CustomFieldTemplate}
-    formData={formData}
-    onSubmit={onSubmit}
-  >
-    <br />
-    <button
-      type="submit"
-      className="btn btn-success"
-      style={{ marginLeft: "20px" }}
-      disabled={status === "loading"}
-    >
-      {(status === "loading" && "Création...") || (status === "success" && "Valider") || "Valider"}
-    </button>
-    <CancelButton onClick={showReplyForm} className="btn btn-dark">
-      Replier ▲
-    </CancelButton>
-    {error && <ErrorBox message={error} />}
-    {success && <SucessBox message={success} />}
-  </Form>
-);
+class FormInputMesure extends React.Component {
+  render() {
+    const formData = {
+      ouverture: this.props.formDataState.ouverture,
+      codePostal: this.props.formDataState.codePostal,
+      civilite: this.props.formDataState.civilite,
+      annee: this.props.formDataState.annee,
+      commune: this.props.formDataState.commune,
+      type: this.props.formDataState.type
+    };
+
+    return (
+      <Form
+        schema={schema}
+        uiSchema={uiSchema}
+        FieldTemplate={this.props.CustomFieldTemplate}
+        formData={formData}
+        onSubmit={this.props.onSubmit}
+        onChange={this.props.onChange}
+      >
+        {this.props.children}
+        <br />
+        <button
+          type="submit"
+          className="btn btn-success"
+          style={{ marginLeft: "20px" }}
+          disabled={this.props.status === "loading"}
+        >
+          {(this.props.status === "loading" && "Création...") ||
+            (this.props.status === "success" && "Valider") ||
+            "Valider"}
+        </button>
+        <CancelButton onClick={this.props.showReplyForm} className="btn btn-dark">
+          Replier ▲
+        </CancelButton>
+        {this.props.error && <ErrorBox message={this.props.error} />}
+        {this.props.success && <SucessBox message={this.props.success} />}
+      </Form>
+    );
+  }
+}
 
 export default FormInputMesure;
