@@ -124,7 +124,43 @@ function getAllMesuresByPopUp(ti_id) {
   return knex
     .from("mesures")
     .select(
-      knex.raw("COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id)"),
+      knex.raw("COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id')"),
+      "mesures.code_postal",
+      "v1.latitude",
+      "v1.longitude"
+    )
+    .innerJoin(
+      "codePostalLatLngs as v1",
+      "mesures.code_postal",
+      "v1.code_postal"
+    )
+    .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
+    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
+    .where({
+      "mandatairetis.ti_id": parseInt(ti_id),
+      status: "Mesure en cours"
+    })
+    .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
+}
+
+function getAllMesuresByMandatairesForMaps(mandataireID) {
+    return knex("mesures").select(
+        knex.raw("COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"),
+        "mesures.code_postal",
+        "mesures.latitude",
+        "mesures.longitude"
+    ).where({
+        mandataire_id: parseInt(mandataireID),
+        status: "Mesure en cours"
+    }) .groupByRaw("mesures.code_postal,mesures.longitude,mesures.latitude");;
+}
+
+
+function getAllMesuresByPopUpForMandataire(ti_id) {
+  return knex
+    .from("mesures")
+    .select(
+      knex.raw("COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"),
       "mesures.code_postal",
       "v1.latitude",
       "v1.longitude"
@@ -351,9 +387,10 @@ function deleteMandataireEtablissement(showID) {
     .del();
 }
 
-function deleteMandataireTis(tiId,mandataireId) {
+function deleteMandataireTis(tiId, mandataireId) {
   return knex("mandatairetis")
-    .where({ti_id: parseInt(tiId),mandataire_id: parseInt(mandataireId) }).first()
+    .where({ ti_id: parseInt(tiId), mandataire_id: parseInt(mandataireId) })
+    .first()
     .del();
 }
 
@@ -439,5 +476,7 @@ module.exports = {
   getTis,
   addMandataireTis,
   deleteMandataireTis,
-  getAllServicesByTis
+  getAllServicesByTis,
+  getAllMesuresByPopUpForMandataire,
+    getAllMesuresByMandatairesForMaps
 };
