@@ -10,8 +10,10 @@ const users = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const Knex = require("knex");
 const KnexSessionStore = require("connect-session-knex")(session);
-
+const mailer = require("express-mailer");
 const app = express();
+
+const nodemailer = require("nodemailer");
 
 process.on("unhandledRejection", r => console.log(r));
 
@@ -62,9 +64,35 @@ if (process.env.NODE_ENV === "production") {
   );
 }
 
+mailer.extend(app, {
+  from: "gonzalez_ad@hotmail.fr",
+  host: "in-v3.mailjet.com", // hostname
+  secureConnection: true, // use SSL
+  port: 587, // port for secure SMTP
+  transportMethod: "SMTP", // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: "6632cabd2873712b0bafdf60d0693003",
+    pass: "5e65d90fbf59644d075ccf48e2b0ad30"
+  }
+});
+
+// Generate test SMTP service account from ethereal.email
+// Only needed if you don't have a real mail account for testing
+nodemailer.createTestAccount((err, account) => {
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "in-v3.mailjet.com",
+    port: 587,
+    secure: false,
+    auth: {
+      user: "6632cabd2873712b0bafdf60d0693003",
+      pass: "5e65d90fbf59644d075ccf48e2b0ad30"
+    }
+  });
+});
+
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use("/api/v1", routes);
 app.use("/auth", authRoutes);
 app.use("/", users);
@@ -80,6 +108,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
+/*
 if (app.get("env") === "development") {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500).json({
@@ -87,11 +116,12 @@ if (app.get("env") === "development") {
       error: err
     });
   });
-}
+}*/
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+  console.log(err);
   res.status(err.status || 500).json({
     //message: err.message,
     error: {}
