@@ -124,7 +124,7 @@ function getAllMesuresByPopUp(ti_id) {
   return knex
     .from("mesures")
     .select(
-      knex.raw("COUNT(mesures.code_postal)"),
+      knex.raw("COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id)"),
       "mesures.code_postal",
       "v1.latitude",
       "v1.longitude"
