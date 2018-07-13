@@ -403,7 +403,7 @@ function deleteMandataireTis(tiId,mandataireId) {
 
 function getAllAntennes(mandataireId) {
   return knex("serviceAntennes").where({
-    service_id: parseInt(mandataireId)
+      mandataire_id: parseInt(mandataireId)
   });
 }
 
