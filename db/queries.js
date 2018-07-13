@@ -29,6 +29,10 @@ function getAllMandataires(ti_id) {
     .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
 }
 
+function getMandataires(ti_id) {
+  return knex.from("mandataires");
+}
+
 function getAllServicesByTis(ti_id) {
   return knex
     .from("mandatairetis")
@@ -124,7 +128,9 @@ function getAllMesuresByPopUp(ti_id) {
   return knex
     .from("mesures")
     .select(
-      knex.raw("COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id')"),
+      knex.raw(
+        "COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id)"
+      ),
       "mesures.code_postal",
       "v1.latitude",
       "v1.longitude"
@@ -144,23 +150,29 @@ function getAllMesuresByPopUp(ti_id) {
 }
 
 function getAllMesuresByMandatairesForMaps(mandataireID) {
-    return knex("mesures").select(
-        knex.raw("COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"),
-        "mesures.code_postal",
-        "mesures.latitude",
-        "mesures.longitude"
-    ).where({
-        mandataire_id: parseInt(mandataireID),
-        status: "Mesure en cours"
-    }) .groupByRaw("mesures.code_postal,mesures.longitude,mesures.latitude");;
+  return knex("mesures")
+    .select(
+      knex.raw(
+        "COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"
+      ),
+      "mesures.code_postal",
+      "mesures.latitude",
+      "mesures.longitude"
+    )
+    .where({
+      mandataire_id: parseInt(mandataireID),
+      status: "Mesure en cours"
+    })
+    .groupByRaw("mesures.code_postal,mesures.longitude,mesures.latitude");
 }
-
 
 function getAllMesuresByPopUpForMandataire(ti_id) {
   return knex
     .from("mesures")
     .select(
-      knex.raw("COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"),
+      knex.raw(
+        "COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"
+      ),
       "mesures.code_postal",
       "v1.latitude",
       "v1.longitude"
@@ -302,10 +314,6 @@ function updateMesure(where, updates) {
   return knex("mesures")
     .where(where)
     .update(updates);
-}
-
-function getAllServices(service_id) {
-  return knex("mandataires").where("service_id", parseInt(service_id));
 }
 
 function getsingleUsers(email) {
@@ -478,5 +486,6 @@ module.exports = {
   deleteMandataireTis,
   getAllServicesByTis,
   getAllMesuresByPopUpForMandataire,
-    getAllMesuresByMandatairesForMaps
+  getAllMesuresByMandatairesForMaps,
+  getMandataires
 };
