@@ -263,18 +263,18 @@ function addCommentaire(data) {
 }
 function deleteCommentaire(showID) {
   return Commentaires()
-    .where("co_id", parseInt(showID))
+    .where("id", parseInt(showID))
     .del();
 }
 
 function getSingleCommentaire(commentaireID) {
   return Commentaires()
-    .where("co_id", parseInt(commentaireID))
+    .where("id", parseInt(commentaireID))
     .first();
 }
 function updateCommentaire(commentaireID, updates) {
   return Commentaires()
-    .where("co_id", parseInt(commentaireID))
+    .where("id", parseInt(commentaireID))
     .update(updates);
 }
 
