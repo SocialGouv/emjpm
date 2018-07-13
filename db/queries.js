@@ -218,7 +218,7 @@ function getSingle(mandataireID) {
 
 function getSingleDisponibilite(mandataireID) {
   return Mandataires()
-    .select("disponibilite")
+    .select("mesures_en_cours")
     .where("id", parseInt(mandataireID))
     .first();
 }
@@ -483,12 +483,8 @@ module.exports = {
   getTis,
   addMandataireTis,
   deleteMandataireTis,
-<<<<<<< Updated upstream
-  getAllServicesByTis
-=======
   getAllServicesByTis,
   getAllMesuresByPopUpForMandataire,
   getAllMesuresByMandatairesForMaps,
   getMandataires
->>>>>>> Stashed changes
 };

@@ -27,7 +27,7 @@ router.put("/1", loginRequired, async (req, res, next) => {
   const dispoMandataire = await queries.getSingleDisponibilite(mandataire.id);
 
   // todo: replace with trigger
-  if (req.body.disponibilite !== dispoMandataire) {
+  if (req.body.mesures_en_cours !== dispoMandataire) {
     queries
       .update(mandataire.id, { updateMesure: new Date(Date.now()) })
       .catch(error => {
@@ -129,7 +129,7 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
   // récupères le nb de mesure attribuées pour ce mandataire
   const capaciteMandataire = queries.CapaciteMandataire(mandataire.id);
   queries
-    .update(mandataire.id, { disponibilite: capaciteMandataire })
+    .update(mandataire.id, { mesures_en_cours: capaciteMandataire })
     .then(() => queries.getSingle(mandataire.id))
     .then(mandataire => res.status(200).json(mandataire))
     .catch(error => next(error));
