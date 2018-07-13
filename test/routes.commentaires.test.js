@@ -38,7 +38,7 @@ describe("routes : commentaires", () => {
           res.status.should.eql(200);
           res.type.should.eql("application/json");
           res.body.length.should.eql(1);
-          res.body[0].co_comment.should.eql("Hello, world 2");
+          res.body[0].comment.should.eql("Hello, world 2");
         })
       ));
     it("should NOT get list of commentaires for a mandataire not in my TI", () =>
@@ -65,21 +65,21 @@ describe("routes : commentaires", () => {
       agent
         .post("/api/v1/mandataires/1/commentaires")
         .send({
-          co_comment: "this is a super comment"
+          comment: "this is a super comment"
         })
         .then(function(res) {
           res.redirects.length.should.eql(0);
           res.status.should.eql(200);
           res.type.should.eql("application/json");
           res.body.length.should.eql(2);
-          res.body[1].co_comment.should.eql("this is a super comment");
+          res.body[1].comment.should.eql("this is a super comment");
 
           return knex
             .from("commentaires")
             .where({
               ti_id: 2,
               mandataire_id: 1,
-              co_comment: "this is a super comment"
+              comment: "this is a super comment"
             })
             .then(res => {
               res.length.should.eql(1);
@@ -94,7 +94,7 @@ describe("routes : commentaires", () => {
       agent
         .post("/api/v1/mandataires/3/commentaires")
         .send({
-          co_comment: "this is a super comment"
+          comment: "this is a super comment"
         })
         .catch(res => {
           return true;
@@ -103,7 +103,7 @@ describe("routes : commentaires", () => {
           knex
             .from("commentaires")
             .where({
-              co_comment: "this is a super comment"
+              comment: "this is a super comment"
             })
             .then(res => {
               res.length.should.eql(0);
