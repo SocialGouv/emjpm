@@ -24,9 +24,9 @@ function uploadAll(data) {
 
 function getAllMandataires(ti_id) {
   return knex
-    .from("mandatairetis")
+    .from("mandataire_tis")
     .where("ti_id", parseInt(ti_id))
-    .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
+    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id");
 }
 
 function getMandataires(ti_id) {
@@ -35,9 +35,9 @@ function getMandataires(ti_id) {
 
 function getAllServicesByTis(ti_id) {
   return knex
-    .from("mandatairetis")
+    .from("mandataire_tis")
     .where({ ti_id: parseInt(ti_id), type: "Service" })
-    .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
+    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id");
 }
 // function getAllMesuresByPopUp(code_postal) {
 //     return knex
@@ -65,8 +65,8 @@ function getAllMesuresByMandataires(ti_id) {
     .from("mesures")
     .where("status", "Mesure en cours")
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
-    .where("mandatairetis.ti_id", parseInt(ti_id))
+    .innerJoin("mandataire_tis", "mandataire_tis.mandataire_id", "mandataires.id")
+    .where("mandataire_tis.ti_id", parseInt(ti_id))
     .select(
       "mesures.id",
       "mesures.code_postal",
@@ -93,9 +93,9 @@ function getAllMesuresByMandatairesFilter(
     .whereBetween("mesures.latitude", [latsouthWest, latnorthEast])
     .whereBetween("mesures.longitude", [longSouthWest, longNorthEast])
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
+    .innerJoin("mandataire_tis", "mandataire_tis.mandataire_id", "mandataires.id")
     .groupByRaw("mandataires.id")
-    .where("mandatairetis.ti_id", parseInt(ti_id))
+    .where("mandataire_tis.ti_id", parseInt(ti_id))
     .select("mandataires.id", "mandataires.*");
 }
 
@@ -110,15 +110,15 @@ function getAllByMandatairesFilter(
     .from("mandataires")
     .whereBetween("mandataires.latitude", [latsouthWest, latnorthEast])
     .whereBetween("mandataires.longitude", [longSouthWest, longNorthEast])
-    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
+    .innerJoin("mandataire_tis", "mandataire_tis.mandataire_id", "mandataires.id")
     .groupByRaw("mandataires.id")
-    .where("mandatairetis.ti_id", parseInt(ti_id))
+    .where("mandataire_tis.ti_id", parseInt(ti_id))
     .select("mandataires.id", "mandataires.*");
 }
 
 function getCoordonneByPosteCode(userId) {
   return knex
-    .from("codePostalLatLngs")
+    .from("geolocalisation_code_postal")
     .debug()
     .where("code_postal", userId)
     .first();
@@ -136,14 +136,14 @@ function getAllMesuresByPopUp(ti_id) {
       "v1.longitude"
     )
     .innerJoin(
-      "codePostalLatLngs as v1",
+      "geolocalisation_code_postal as v1",
       "mesures.code_postal",
       "v1.code_postal"
     )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
+    .innerJoin("mandataire_tis", "mandataire_tis.mandataire_id", "mandataires.id")
     .where({
-      "mandatairetis.ti_id": parseInt(ti_id),
+      "mandataire_tis.ti_id": parseInt(ti_id),
       status: "Mesure en cours"
     })
     .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
@@ -178,21 +178,21 @@ function getAllMesuresByPopUpForMandataire(ti_id) {
       "v1.longitude"
     )
     .innerJoin(
-      "codePostalLatLngs as v1",
+      "geolocalisation_code_postal as v1",
       "mesures.code_postal",
       "v1.code_postal"
     )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
+    .innerJoin("mandataire_tis", "mandataire_tis.mandataire_id", "mandataires.id")
     .where({
-      "mandatairetis.ti_id": parseInt(ti_id),
+      "mandataire_tis.ti_id": parseInt(ti_id),
       status: "Mesure en cours"
     })
     .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
 }
 
 function getPostecode(codePostal, lat, lng) {
-  return knex("codePostalLatLngs").insert({
+  return knex("geolocalisation_code_postal").insert({
     code_postal: codePostal,
     latitude: lat,
     longitude: lng
@@ -341,16 +341,16 @@ function getTis() {
 }
 
 function getAllEtablissementsByMandataire(mandataireId) {
-  return knex("mandatairesEtablissements")
-    .select("mandatairesEtablissements.id", "etablissements.nom")
+  return knex("mandataire_etablissements")
+    .select("mandataire_etablissements.id", "etablissements.nom")
     .innerJoin(
       "mandataires",
       "mandataires.id",
-      "mandatairesEtablissements.mandataire_id"
+      "mandataire_etablissements.mandataire_id"
     )
     .innerJoin(
       "etablissements",
-      "mandatairesEtablissements.etablissement_id",
+      "mandataire_etablissements.etablissement_id",
       "etablissements.id"
     )
     .where({
@@ -359,12 +359,12 @@ function getAllEtablissementsByMandataire(mandataireId) {
 }
 
 function getAllTisByMandataire(mandataireId) {
-  return knex("mandatairetis")
+  return knex("mandataire_tis")
     .select("tis.id", "tis.etablissement")
     .where({
       mandataire_id: parseInt(mandataireId)
     })
-    .innerJoin("tis", "mandatairetis.ti_id", "tis.id");
+    .innerJoin("tis", "mandataire_tis.ti_id", "tis.id");
 }
 
 function addEtablissement(mandataireId) {
@@ -372,11 +372,11 @@ function addEtablissement(mandataireId) {
 }
 
 function addMandataireToEtablissement(mandataireId) {
-  return knex("mandatairesEtablissements").insert(mandataireId);
+  return knex("mandataire_etablissements").insert(mandataireId);
 }
 
 function addMandataireTis(data) {
-  return knex("mandatairetis").insert(data);
+  return knex("mandataire_tis").insert(data);
 }
 
 function updateEtablissement(mesureID, updates) {
@@ -390,42 +390,42 @@ function deleteEtablissement(showID) {
     .del();
 }
 function deleteMandataireEtablissement(showID) {
-  return knex("mandatairesEtablissements")
+  return knex("mandataire_etablissements")
     .where("id", parseInt(showID))
     .del();
 }
 
 function deleteMandataireTis(tiId,mandataireId) {
-  return knex("mandatairetis")
+  return knex("mandataire_tis")
     .where({ti_id: parseInt(tiId),mandataire_id: parseInt(mandataireId) }).first()
     .del();
 }
 
 function getAllAntennes(mandataireId) {
-  return knex("serviceAntennes").where({
+  return knex("service-antennes").where({
       mandataire_id: parseInt(mandataireId)
   });
 }
 
 function addAntenne(mandataireId) {
-  return knex("serviceAntennes").insert(mandataireId);
+  return knex("service-antennes").insert(mandataireId);
 }
 
 function updateAntenne(mesureID, updates) {
-  return knex("serviceAntennes")
+  return knex("service-antennes")
     .where("id", parseInt(mesureID))
     .update(updates);
 }
 
 function deleteAntenne(where) {
-  return knex("serviceAntennes")
+  return knex("service-antennes")
     .where(where)
     .del();
 }
 
 const isMandataireInTi = (mandataire_id, ti_id) =>
   knex
-    .from("mandatairetis")
+    .from("mandataire_tis")
     .where({
       mandataire_id,
       ti_id
