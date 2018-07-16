@@ -199,11 +199,7 @@ function getAllMesuresByPopUpForMandataire(ti_id) {
       "v1.code_postal"
     )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin(
-      "mandataire_tis",
-      "mandataire_tis.mandataire_id",
-      "mandataires.id"
-    )
+    .innerJoin("mandataire_tis", "mandataire_tis.mandataire_id", "mandataires.id")
     .where({
       "mandataire_tis.ti_id": parseInt(ti_id),
       status: "Mesure en cours"
