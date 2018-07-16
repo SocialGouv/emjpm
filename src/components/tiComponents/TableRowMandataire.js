@@ -60,8 +60,10 @@ class TableRowMandataire extends React.Component {
 
   render() {
     //date-fns
-    let isLate = this.props.mandataire.date_mesure_update && isOlderThanOneMonth(this.props.mandataire.date_mesure_update.slice(0,10));
-    console.log(this.props.mandataire.date_mesure_update)
+    let isLate =
+      this.props.mandataire.date_mesure_update &&
+      isOlderThanOneMonth(this.props.mandataire.date_mesure_update.slice(0, 10));
+    console.log(this.props.mandataire.date_mesure_update);
     const { type, etablissement, mesures_en_cours, dispo_max } = this.props.mandataire;
     return (
       <tr onClick={this.props.onClick} style={{ cursor: "pointer" }}>

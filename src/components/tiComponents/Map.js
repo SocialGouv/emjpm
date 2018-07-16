@@ -244,12 +244,11 @@ class Mapstry extends React.Component {
       });
   };
 
-    updateIsMesureClick= () => {
-      this.setState(currentState => ({
-          isMesureClick: !currentState.isMesureClick
-      }))
-
-    }
+  updateIsMesureClick = () => {
+    this.setState(currentState => ({
+      isMesureClick: !currentState.isMesureClick
+    }));
+  };
 
   updateFilterMandataire = mesure => {
     const selectedMandataires = mesure.array_agg

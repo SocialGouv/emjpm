@@ -23,7 +23,11 @@ export const MapsView = ({ mesures, zoom, center, width, height, onMoveend, inne
             <Marker position={[manda.latitude, manda.longitude]}>
               <Popup>
                 <div>
-                  {manda.array_agg.map(arrayMaps => <div>{arrayMaps} <br /></div>)}
+                  {manda.array_agg.map(arrayMaps => (
+                    <div>
+                      {arrayMaps} <br />
+                    </div>
+                  ))}
                   <br />
                 </div>
               </Popup>
