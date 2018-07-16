@@ -5,7 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import apiFetch from "../src/components/communComponents/Api";
 import Footer from "../src/components/communComponents/Footer";
-import FormulaireMandataire from "../src/components/FormulaireMandataire";
+import FormulaireMandataire from "../src/components/mandataireComponents/FormulaireMandataire";
 import Navigation from "../src/components/communComponents/Navigation";
 import TableMesure from "../src/components/mandataireComponents/TableMesure";
 import DislayDate from "../src/components/communComponents/formatFrenchDate";
@@ -137,10 +137,10 @@ const MandataireIndexView = ({
             {currentMandataire.nom} {currentMandataire.prenom}
           </Title>
           <div style={{ textAlign: "right" }}>
-            {currentMandataire.updateMesure && (
+            {currentMandataire.date_mesure_update && (
               <div>
                 Dernière mise à jour :{" "}
-                <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />
+                <DislayDate date={currentMandataire.date_mesure_update.slice(0, 10)} />
               </div>
             )}
           </div>
@@ -149,7 +149,7 @@ const MandataireIndexView = ({
           <Tab style={tabStyle}>
             {currentMandataire && (
               <PillDispo
-                dispo={currentMandataire.disponibilite}
+                dispo={currentMandataire.mesures_en_cours}
                 dispo_max={currentMandataire.dispo_max}
               />
             )}
@@ -256,7 +256,7 @@ class MandatairesIndex extends React.Component {
         return apiFetch(`/mandataires/1`, {
           method: "PUT",
           body: JSON.stringify({
-            updateMesure: new Date()
+              date_mesure_update: new Date()
           })
         }).then(json2 => {
           this.updateMadataire(json2);
@@ -271,8 +271,8 @@ class MandatairesIndex extends React.Component {
     this.onUpdate();
   };
 
-  updateMadataire = mesures => {
-    this.setState({ currentMandataire: mesures });
+  updateMadataire = mandataire => {
+    this.setState({ currentMandataire: mandataire });
   };
 
   render() {
@@ -282,7 +282,7 @@ class MandatairesIndex extends React.Component {
       <MandataireIndexView
         currentMandataire={this.state.currentMandataire}
         filteredMesures={filteredMesures}
-        updateMesure={this.updateMesure}
+        updateMesure={this.update_mesure}
         updateMadataire={this.updateMadataire}
         mesureEteinte={this.state.mesureEteinte}
         updateMesureEteinte={this.updateMesureEteinte}

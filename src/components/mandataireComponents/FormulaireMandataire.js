@@ -2,10 +2,10 @@ import * as React from "react";
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
-import apiFetch from "./communComponents/Api";
-import piwik from "../piwik";
-import CreationEtablissement from "./mandataireComponents/CreationEtablissement";
-import AddTisToFormulaireMandataire from "./mandataireComponents/AddTisToFormulaireMandataire";
+import apiFetch from "../communComponents/Api";
+import piwik from "../../piwik";
+import CreationEtablissement from "./CreationEtablissement";
+import AddTisToFormulaireMandataire from "./AddTisToFormulaireMandataire";
 
 const schema = {
   title: "Modifier vos informations",

@@ -83,10 +83,9 @@ const filterMandataires = (mandataires, filters) => {
     );
   });
 
-  filteredMandataires.sort((a, b) => {
-    return sortByDispo(sortMandataires);
+    return  filteredMandataires.sort((a, b) => {
+    return sortMandataires(a, b);
   });
-  return filteredMandataires;
 };
 
 const filterMesures = (mesures, filters) => {
@@ -99,10 +98,9 @@ const filterMesures = (mesures, filters) => {
       stringMatch(mesure.ville, filters.searchVille)
     );
   });
-  filteredMesures.sort((a, b) => {
-    return sortByDispo(sortMandataires);
+   return filteredMesures.sort((a, b) => {
+    return sortMandataires(a, b);
   });
-  return filteredMesures;
 };
 
 const sortByDispo = (a, b) => {
@@ -117,7 +115,7 @@ const sortByDispo = (a, b) => {
   return 0;
 };
 
-const sortMandataires = (a, b) => sortByDispo(a.disponibilite / a.dispo_max, b.disponibilite / b.dispo_max)
+const sortMandataires = (a, b) => sortByDispo(a.mesures_en_cours / a.dispo_max, b.mesures_en_cours / b.dispo_max)
 
 
 const ModalMandataire = ({ isOpen, closeModal, children }) => (
@@ -161,7 +159,6 @@ export const FicheMandataire = ({
           {mandataire.code_postal} {mandataire.ville.toUpperCase()}
         </div>
         <br />
-        <RowModal label="Contact" value={mandataire.referent} />
         <div data-cy="tab-telephone">{mandataire.telephone}</div>
         <div>{mandataire.email}</div>
         <br />
@@ -200,7 +197,7 @@ export const FicheMandataire = ({
             lineHeight: "40px"
           }}
         >
-          Mesures en cours : {mandataire.disponibilite} / {mandataire.dispo_max}
+          Mesures en cours : {mandataire.mesures_en_cours} / {mandataire.dispo_max}
         </div>
         <br />
         <Commentaire currentMandataire={mandataire} />
@@ -446,6 +443,7 @@ const TiView = ({
           value={value}
           updateValue={updateValue}
           updateTimer={updateTimer}
+          mandataires={mandataires}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire
@@ -485,7 +483,6 @@ const TiView = ({
     </Tabs>
   </div>
 );
-
 const TiPage = () => (
   <div style={{ minHeight: "100%", backgroundColor: "#cad4de" }}>
     <Navigation logout />

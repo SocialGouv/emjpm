@@ -60,25 +60,26 @@ class TableRowMandataire extends React.Component {
 
   render() {
     //date-fns
-    let isLate = isOlderThanOneMonth(this.props.mandataire.updateMesure);
-    const { type, etablissement, disponibilite, referent, dispo_max } = this.props.mandataire;
+    let isLate = isOlderThanOneMonth(this.props.mandataire.date_mesure_update);
+    console.log(this.props.mandataire.date_mesure_update)
+    const { type, etablissement, mesures_en_cours, dispo_max } = this.props.mandataire;
     return (
       <tr onClick={this.props.onClick} style={{ cursor: "pointer" }}>
         <Cell style={{ width: "100px" }}>
           <Circle
             style={{
-              backgroundColor: getColorFromDisponibilite(disponibilite / dispo_max)
+              backgroundColor: getColorFromDisponibilite(mesures_en_cours / dispo_max)
             }}
           >
             {type.toUpperCase().substr(0, 1)}
           </Circle>
         </Cell>
         <Cell style={{ verticalAlign: "middle" }}>
-          <b>{etablissement || referent}</b>
+          <b>{etablissement}</b>
           <br /> <div style={{ color: "#cccccc" }}>{type.toUpperCase()} </div>
         </Cell>
         <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
-          <PillDispo dispo={disponibilite} dispo_max={dispo_max} />
+          <PillDispo dispo={mesures_en_cours} dispo_max={dispo_max} />
         </td>
         <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
           {!isLate && (
