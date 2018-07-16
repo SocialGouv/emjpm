@@ -60,7 +60,7 @@ class TableRowMandataire extends React.Component {
 
   render() {
     //date-fns
-    let isLate = isOlderThanOneMonth(this.props.mandataire.date_mesure_update);
+    let isLate = this.props.mandataire.date_mesure_update && isOlderThanOneMonth(this.props.mandataire.date_mesure_update.slice(0,10));
     console.log(this.props.mandataire.date_mesure_update)
     const { type, etablissement, mesures_en_cours, dispo_max } = this.props.mandataire;
     return (
@@ -82,7 +82,7 @@ class TableRowMandataire extends React.Component {
           <PillDispo dispo={mesures_en_cours} dispo_max={dispo_max} />
         </td>
         <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
-          {!isLate && (
+          {isLate && (
             <span
               className="d-inline-block"
               tabIndex="0"
