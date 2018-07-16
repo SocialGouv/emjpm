@@ -452,7 +452,6 @@ module.exports = {
   deleteCommentaire: deleteCommentaire,
   uploadAll: uploadAll,
   getSingleUser: getSingleUser,
-  getAllServices: getAllServices,
   getTiByUserId,
   getAllMesuresByMandataires,
   getAllMesures,

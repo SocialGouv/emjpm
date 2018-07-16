@@ -29,7 +29,7 @@ router.put("/1", loginRequired, async (req, res, next) => {
   // todo: replace with trigger
   if (req.body.mesures_en_cours !== dispoMandataire) {
     queries
-      .update(mandataire.id, { updateMesure: new Date(Date.now()) })
+      .update(mandataire.id, { date_mesure_update: new Date(Date.now()) })
       .catch(error => {
         next(error);
       });
