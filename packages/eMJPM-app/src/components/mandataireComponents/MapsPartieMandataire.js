@@ -1,5 +1,5 @@
 import React, { createRef } from "react";
-import { Map, CircleMarker, TileLayer, Tooltip } from "react-leaflet";
+import { Map, Marker, Popup, TileLayer, Tooltip } from "react-leaflet";
 
 import apiFetch from "../communComponents/Api";
 
@@ -20,16 +20,18 @@ export const MapsView = ({ mesures, zoom, center, width, height, onMoveend, inne
         />
         {mesures &&
           mesures.map(manda => (
-            <CircleMarker
-              center={[manda.latitude, manda.longitude]}
-              color="red"
-              radius={20}
-              fill={manda.count}
-              key={manda.latitude}
-              placeholder={manda.count}
-            >
-              <Tooltip> {manda.count}</Tooltip>
-            </CircleMarker>
+            <Marker position={[manda.latitude, manda.longitude]}>
+              <Popup>
+                <div>
+                  {manda.array_agg.map(arrayMaps => (
+                    <div>
+                      {arrayMaps} <br />
+                    </div>
+                  ))}
+                  <br />
+                </div>
+              </Popup>
+            </Marker>
           ))}
         ;
       </Map>

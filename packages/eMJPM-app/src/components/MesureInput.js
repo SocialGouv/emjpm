@@ -147,7 +147,7 @@ class MesureInput extends React.Component {
             });
           })
           .then(json2 => {
-            this.props.updateMesure(json2);
+            this.props.update_mesure(json2);
           });
       })
       .catch(e => {

@@ -44,71 +44,137 @@ export const MapsView = ({
   value,
   updateTimer,
   services,
-  display
+  display,
+  updateFilterMandataire,
+  isMesureClick,
+  currentMesureSelected,
+  showMandataireOfOneMesure,
+  updateIsMesureClick
 }) => (
   <div className="container">
     <div className="row">
-      <MapsWidth>
-        <FilterMesuresMap
-          updateFilters={updateFilters}
-          zoomCodePostal={zoomCodePostal}
-          getPostCodeCoordinates={getPostCodeCoordinates}
-          updateValue={updateValue}
-          value={value}
-          style={{ zIndex: "1000", width: "100%" }}
-        />
-
-        <Map
-          center={center}
-          zoom={zoom}
-          style={{ width, height }}
-          onMoveend={onMoveend}
-          ref={innerRef}
-        >
-          <TileLayer
-            attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-          />
-          {mesures &&
-            mesures.map(manda => (
-              <CircleMarker
-                center={[manda.latitude, manda.longitude]}
-                color="red"
-                radius={10}
-                key={manda.id}
-              />
-            ))}
-          ;
-        </Map>
-      </MapsWidth>
-      <MandatairesWidth>
-        {(mesureCount && (
-          <React.Fragment>
-            <Title>
-              {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
-            </Title>
-
-            <TableMandataire
-              rows={filteredMesures}
-              openModal={openModal}
+      {!isMesureClick && (
+        <React.Fragment>
+          {" "}
+          <MapsWidth>
+            <FilterMesuresMap
               updateFilters={updateFilters}
+              zoomCodePostal={zoomCodePostal}
+              getPostCodeCoordinates={getPostCodeCoordinates}
+              updateValue={updateValue}
+              value={value}
+              style={{ zIndex: "1000", width: "100%" }}
             />
-            <Title>Services</Title>
-            <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-              <TableMandataire
-                rows={services}
-                openModal={openModal}
-                updateFilters={updateFilters}
-                display={display}
+            <Map
+              center={center}
+              zoom={zoom}
+              style={{ width, height }}
+              onMoveend={onMoveend}
+              ref={innerRef}
+            >
+              <TileLayer
+                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
               />
-            </div>
-          </React.Fragment>
-        )) || (
-          <div style={{ textAlign: "center", marginTop: 20 }}>
-            Aucune mesure actuellement dans cette région
-          </div>
-        )}
-      </MandatairesWidth>`
+              {mesures &&
+                mesures.map(manda => (
+                  <CircleMarker
+                    center={[manda.latitude, manda.longitude]}
+                    color="red"
+                    radius={10}
+                    key={manda.id}
+                    onClick={() => updateFilterMandataire(manda)}
+                  />
+                ))}
+              ;
+            </Map>
+          </MapsWidth>
+          <MandatairesWidth>
+            {(mesureCount && (
+              <React.Fragment>
+                <Title>
+                  {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+                </Title>
+
+                <TableMandataire
+                  rows={filteredMesures}
+                  openModal={openModal}
+                  updateFilters={updateFilters}
+                />
+                <Title>Services</Title>
+                <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+                  <TableMandataire
+                    rows={services}
+                    openModal={openModal}
+                    updateFilters={updateFilters}
+                    display={display}
+                  />
+                </div>
+              </React.Fragment>
+            )) || (
+              <div style={{ textAlign: "center", marginTop: 20 }}>
+                Aucune mesure actuellement dans cette région
+              </div>
+            )}
+          </MandatairesWidth>`
+        </React.Fragment>
+      )}
+      {isMesureClick && (
+        <React.Fragment>
+          {" "}
+          <MapsWidth>
+            <FilterMesuresMap
+              updateFilters={updateFilters}
+              zoomCodePostal={zoomCodePostal}
+              getPostCodeCoordinates={getPostCodeCoordinates}
+              updateValue={updateValue}
+              value={value}
+              style={{ zIndex: "1000", width: "100%" }}
+            />
+            <Map
+              center={[currentMesureSelected.latitude, currentMesureSelected.longitude]}
+              zoom={zoom}
+              style={{ width, height }}
+              onMoveend={onMoveend}
+              ref={innerRef}
+            >
+              <TileLayer
+                attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+              />
+              {currentMesureSelected && (
+                <CircleMarker
+                  center={[currentMesureSelected.latitude, currentMesureSelected.longitude]}
+                  color="red"
+                  radius={10}
+                  key={currentMesureSelected.id}
+                  onClick={() => updateIsMesureClick()}
+                />
+              )}
+              ;
+            </Map>
+          </MapsWidth>
+          <MandatairesWidth>
+            {(mesureCount && (
+              <React.Fragment>
+                <Title>
+                  {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+                </Title>
+
+                <TableMandataire
+                  rows={showMandataireOfOneMesure}
+                  openModal={openModal}
+                  updateFilters={updateFilters}
+                />
+              </React.Fragment>
+            )) || (
+              <div style={{ textAlign: "center", marginTop: 20 }}>
+                Aucune mesure actuellement dans cette région
+              </div>
+            )}
+          </MandatairesWidth>`
+        </React.Fragment>
+      )}
     </div>
     Le nombre de mesures indiqué n'inclut pas les mesures attribuées aux services
   </div>
@@ -120,7 +186,10 @@ class Mapstry extends React.Component {
     datamesure: "",
     value: "",
     services: "",
-    display: "none"
+    display: "none",
+    showMandataireOfOneMesure: "",
+    currentMesureSelected: "",
+    isMesureClick: false
   };
 
   mapRef = createRef();
@@ -138,9 +207,15 @@ class Mapstry extends React.Component {
     }).then(mesures =>
       apiFetch("/mandataires/services")
         .then(services => {
-          this.setState({ modalIsOpen: false, services: services }, () => {
-            this.props.updateMandataireMesures(mesures);
-          });
+          this.setState(
+            {
+              modalIsOpen: false,
+              services: services
+            },
+            () => {
+              this.props.updateMandataireMesures(mesures);
+            }
+          );
         })
         .catch(e => {
           console.log(e);
@@ -167,6 +242,42 @@ class Mapstry extends React.Component {
       .catch(e => {
         console.log(e);
       });
+  };
+
+  updateIsMesureClick = () => {
+    this.setState(currentState => ({
+      isMesureClick: !currentState.isMesureClick
+    }));
+  };
+
+  updateFilterMandataire = mesure => {
+    const selectedMandataires = mesure.array_agg
+      .map(mandataireId =>
+        this.props.mandataires.find(mandataire => mandataire.id === mandataireId)
+      )
+      .filter(Boolean);
+    this.setState(currentState => ({
+      showMandataireOfOneMesure: selectedMandataires,
+      currentMesureSelected: mesure,
+      isMesureClick: !currentState.isMesureClick
+    }));
+    /*
+    mesure.array_agg.map(mandataireId => {
+      this.props.mandataires.map(mandataire => {
+        if (mandataireId === mandataire.id) {
+          this.setState(currentState => ({
+            showMandataireOfOneMesure: [...currentState.showMandataireOfOneMesure, mandataire]
+          }));
+        }
+      });
+    }),
+      () => {
+        this.setState(currentState => ({
+          currentMesureSelected: currentState.mesure,
+          isMesureClick: !currentState.isMesureClick
+        }));
+      },
+      () => console.log(this.state.isMesureClick);*/
   };
 
   zoomCodePostal = codePostal => {
@@ -225,6 +336,11 @@ class Mapstry extends React.Component {
         value={this.props.value}
         services={this.state.services}
         display={this.state.display}
+        updateFilterMandataire={this.updateFilterMandataire}
+        isMesureClick={this.state.isMesureClick}
+        currentMesureSelected={this.state.currentMesureSelected}
+        showMandataireOfOneMesure={this.state.showMandataireOfOneMesure}
+        updateIsMesureClick={this.updateIsMesureClick}
       />
     );
   }
