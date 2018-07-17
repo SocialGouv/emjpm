@@ -17,8 +17,7 @@
     "flow": "flow",
     "cypress:open": "cypress open",
     "cypress:api-reset": "cd ../eMJPM-api && NODE_ENV=test npm run seeds",
-    "cypress:start-api":
-      "cd ../eMJPM-api && NODE_ENV=test PORT=4003 npm run migrate-seeds-and-start",
+    "cypress:start-api": "cd ../eMJPM-api && NODE_ENV=test PORT=4003 npm run migrate-seeds-and-start",
     "cypress:start-app": "API_URL=http://127.0.0.1:4003 NODE_ENV=test npm run start -- --port 3003",
     "cypress:start": "concurrently \"npm run cypress:start-api\" \"npm run cypress:start-app\"",
     "cypress": "start-server-and-test cypress:start http://localhost:3003 cypress:open"

@@ -3,9 +3,9 @@ import Form from "react-jsonschema-form";
 
 const schema = {
   type: "object",
-  required: ["co_comment"],
+  required: ["comment"],
   properties: {
-    co_comment: { type: "string", title: "message", default: "" }
+    comment: { type: "string", title: "message", default: "" }
   }
 };
 
@@ -14,7 +14,7 @@ const API_URL = process.env.API_URL;
 const formData = {};
 
 const uiSchema = {
-  co_comment: {
+  comment: {
     "ui:widget": "textarea"
   }
 };
@@ -59,7 +59,7 @@ class Commentaire extends React.Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        co_comment: formData.co_comment
+        comment: formData.comment
       })
     })
       .then(response => response.json())
@@ -71,9 +71,9 @@ class Commentaire extends React.Component {
       .catch(function(error) {});
   };
 
-  onDelete = comments => {
+  onDelete = comment => {
     const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire.id}/commentaires/${
-      comments.co_id
+      comment.id
     }`;
     fetch(url, {
       credentials: "include",
@@ -129,13 +129,13 @@ class Commentaire extends React.Component {
         <div style={{ overflow: "scroll", height: "250px" }} data-cy="tab-comment">
           {this.state.data &&
             this.state.data.map &&
-            this.state.data.map(comments => (
-              <div id={comments.id}>
+            this.state.data.map(comment => (
+              <div id={comment.id}>
                 <div style={{ backgroundColor: "#b5b5b5", fontSize: "0.8em" }}>
-                  {comments.co_comment} <br />
+                  {comment.comment} <br />
                 </div>
-                Ajouté le : {comments.postDate.slice(0, 10)}{" "}
-                <a type="submit" onClick={() => this.onDelete(comments)}>
+                Ajouté le : {comment.created_at.slice(0, 10)}{" "}
+                <a type="submit" onClick={() => this.onDelete(comment)}>
                   {" "}
                   supprimer
                 </a>

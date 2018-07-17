@@ -5,10 +5,10 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import apiFetch from "../src/components/communComponents/Api";
 import Footer from "../src/components/communComponents/Footer";
-import FormulaireMandataire from "../src/components/FormulaireMandataire";
+import FormulaireMandataire from "../src/components/mandataireComponents/FormulaireMandataire";
 import Navigation from "../src/components/communComponents/Navigation";
 import TableMesure from "../src/components/mandataireComponents/TableMesure";
-import DislayDate from "../src/components/communComponents/formatFrenchDate";
+import DisplayDate from "../src/components/communComponents/formatFrenchDate";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
@@ -126,7 +126,8 @@ const MandataireIndexView = ({
   filteredMesures,
   updateMadataire,
   updateMesureEteinte,
-  mesureEteinte
+  mesureEteinte,
+  mesuresForMapsMandataire
 }) => (
   <Tabs>
     <TabList>
@@ -136,10 +137,10 @@ const MandataireIndexView = ({
             {currentMandataire.nom} {currentMandataire.prenom}
           </Title>
           <div style={{ textAlign: "right" }}>
-            {currentMandataire.updateMesure && (
+            {currentMandataire.date_mesure_update && (
               <div>
                 Dernière mise à jour :{" "}
-                <DislayDate date={currentMandataire.updateMesure.slice(0, 10)} />
+                <DisplayDate date={currentMandataire.date_mesure_update.slice(0, 10)} />
               </div>
             )}
           </div>
@@ -148,7 +149,7 @@ const MandataireIndexView = ({
           <Tab style={tabStyle}>
             {currentMandataire && (
               <PillDispo
-                dispo={currentMandataire.disponibilite}
+                dispo={currentMandataire.mesures_en_cours}
                 dispo_max={currentMandataire.dispo_max}
               />
             )}
@@ -183,7 +184,7 @@ const MandataireIndexView = ({
             width={"100%"}
             height={"70vh"}
             postcodeMandataire={[currentMandataire.latitude, currentMandataire.longitude]}
-            mesures={filteredMesures}
+            mesures={mesuresForMapsMandataire}
           />
         </OpenStreeMapMandataire>
       </TabPanel>
@@ -210,6 +211,7 @@ class MandatairesIndex extends React.Component {
   state = {
     data: [],
     datamesure: [],
+    mesuresForMaps: [],
     mesureEteinte: [],
     currentMandataire: "",
     mesureEteintes: ""
@@ -224,11 +226,14 @@ class MandatairesIndex extends React.Component {
       .then(mesures =>
         apiFetch(`/mandataires/1`).then(mandataire =>
           apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
-            this.setState({
-              datamesure: mesures,
-              mesureEteinte: mesureEteinte,
-              currentMandataire: mandataire
-            })
+            apiFetch(`/mandataires/1/mesuresForMaps`).then(mesuresForMaps =>
+              this.setState({
+                datamesure: mesures,
+                mesureEteinte,
+                currentMandataire: mandataire,
+                mesuresForMaps
+              })
+            )
           )
         )
       )
@@ -251,7 +256,7 @@ class MandatairesIndex extends React.Component {
         return apiFetch(`/mandataires/1`, {
           method: "PUT",
           body: JSON.stringify({
-            updateMesure: new Date()
+            date_mesure_update: new Date()
           })
         }).then(json2 => {
           this.updateMadataire(json2);
@@ -266,20 +271,22 @@ class MandatairesIndex extends React.Component {
     this.onUpdate();
   };
 
-  updateMadataire = mesures => {
-    this.setState({ currentMandataire: mesures });
+  updateMadataire = mandataire => {
+    this.setState({ currentMandataire: mandataire });
   };
 
   render() {
     const filteredMesures = this.state.datamesure;
+    const mesuresForMapsMandataire = this.state.mesuresForMaps;
     return (
       <MandataireIndexView
         currentMandataire={this.state.currentMandataire}
         filteredMesures={filteredMesures}
-        updateMesure={this.updateMesure}
+        updateMesure={this.update_mesure}
         updateMadataire={this.updateMadataire}
         mesureEteinte={this.state.mesureEteinte}
         updateMesureEteinte={this.updateMesureEteinte}
+        mesuresForMapsMandataire={mesuresForMapsMandataire}
       />
     );
   }
