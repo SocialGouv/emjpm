@@ -131,7 +131,7 @@ class TableRowMesure extends React.Component {
         return apiFetch(`/mandataires/1`, {
           method: "PUT",
           body: JSON.stringify({
-            updateMesure: new Date()
+            update_mesure: new Date()
           })
         }).then(() => {
           return json;

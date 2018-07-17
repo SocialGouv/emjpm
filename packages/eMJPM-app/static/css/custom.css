@@ -161,11 +161,11 @@
 /*height: 400px !important;*/
 /*}*/
 
-.leaflet-marker-icon {
-  background-image: url("../images/icone-lieu.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-}
+/*.leaflet-marker-icon {*/
+  /*background-image: url("../images/icone-lieu.jpg");*/
+  /*background-repeat: no-repeat;*/
+  /*background-position: center center;*/
+/*}*/
 .react-tabs__tab--selected {
   border-color: white !important;
   color: black !important;
