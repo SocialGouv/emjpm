@@ -1,10 +1,14 @@
-import fetch from "isomorphic-fetch";
-import Form from "react-jsonschema-form";
-import styled from "styled-components";
-import apiFetch from "../communComponents/Api";
-import RowModal from "../communComponents/RowModal";
-import SearchButton from "../communComponents/SearchButton";
 import RegionModel from "./RegionModel";
+
+const groupByRegion = arr =>
+  arr.reduce(function(acc, obj) {
+    const cle = obj.region;
+    if (!acc[cle]) {
+      acc[cle] = [];
+    }
+    acc[cle].push(obj);
+    return acc;
+  }, {});
 
 class TiSelector extends React.Component {
   state = {
@@ -12,8 +16,6 @@ class TiSelector extends React.Component {
   };
 
   onTiSelected = (tiId, checked) => {
-    console.log(tiId, checked);
-
     this.setState(state => {
       if (checked && state.tiSelected.indexOf(tiId) === -1) {
         //  state.tiSelected.push(tiId);
@@ -27,13 +29,12 @@ class TiSelector extends React.Component {
         return {
           tiSelected: ids
         };
-        //  state.tiSelected.splice(state.tiSelected.indexOf(tiId), 1);
       }
     });
   };
 
   render() {
-    console.log(this.state.tiSelected);
+    const tisByRegion = groupByRegion(this.props.tis);
     return (
       <div>
         <h2 style={{ margin: 20 }}>
@@ -45,15 +46,13 @@ class TiSelector extends React.Component {
             listStyleType: "none",
             margin: 20,
             width: "100%",
-            marginTop: "20px",
-            marginBottom: "20px",
-            fontSize: 14
+            fontSize: "1.1em"
           }}
         >
           {this.props.tis &&
-            Object.keys(this.props.tis).map(region => (
+            Object.keys(tisByRegion).map(region => (
               <RegionModel
-                tis={this.props.tis[region]}
+                tis={tisByRegion[region]}
                 nom={region}
                 key={region}
                 onTiSelected={this.onTiSelected}
