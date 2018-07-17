@@ -42,7 +42,9 @@ const schema = {
     email: { type: "string", title: "Adresse email du contact dans le service", default: "" },
     adresse: { type: "string", title: "Rue", default: "" },
     ville: { type: "string", title: "Commune", default: "" },
-    code_postal: { type: "string", title: "Code Postal", default: "" }
+    code_postal: { type: "string", title: "Code Postal", default: "" },
+    type: { type: "string", default: "service" },
+    tis: { type: "array", default: "" }
   }
 };
 
@@ -92,6 +94,12 @@ const uiSchema = {
   ville: {
     classNames: "I_input_form_inscription",
     "ui:placeholder": "Commune"
+  },
+  tis: {
+    classNames: "hidden_input_form_inscription"
+  },
+  type: {
+    classNames: "hidden_input_form_inscription"
   }
 };
 
@@ -101,7 +109,7 @@ class InscriptionService extends React.Component {
   /*onSubmit = ({ formData }) => {
 
      apiFetch(`/mandataires/1`, {
-      method: "PUT",
+      method: "POST",
       body: JSON.stringify({
       username:
       pass1:
@@ -118,7 +126,7 @@ class InscriptionService extends React.Component {
 
       })
     }).then(json => {
-     //piwik
+     piwik.push(["trackEvent", "Inscription", "Services"]);
      // this.props.updateMadataire(json);
     });
   };*/

@@ -33,7 +33,8 @@ const schema = {
     email: { type: "string", title: "Adresse email", default: "" },
     adresse: { type: "string", title: "Rue", default: "" },
     ville: { type: "string", title: "Commune", default: "" },
-    code_postal: { type: "string", title: "Code Postal", default: "" }
+    code_postal: { type: "string", title: "Code Postal", default: "" },
+    type: { type: "string", default: "ti" }
   }
 };
 
@@ -62,6 +63,9 @@ const uiSchema = {
   },
   ville: {
     "ui:placeholder": "Commune"
+  },
+  type: {
+    classNames: "hidden_input_form_inscription"
   }
 };
 
@@ -69,26 +73,19 @@ const formData = {};
 
 class InscriptionTis extends React.Component {
   /*onSubmit = ({ formData }) => {
-
-
-		 apiFetch(`/mandataires/1`, {
-      method: "PUT",
+     apiFetch(`/mandataires/1`, {
+      method: "POST",
       body: JSON.stringify({
-    	username:
-    	pass1:
-    	pass2:
-
-
-        telephone:
-
-        email:
-        adresse:
-        code_postal:
-        ville:
-
+      username:
+      pass1:
+      pass2:
+      telephone:
+      email:
+      adresse:
+      code_postal:
+      ville:
       })
     }).then(json => {
-     //piwik
      // this.props.updateMadataire(json);
     });
 	};*/

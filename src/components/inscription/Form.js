@@ -80,6 +80,7 @@ class Form extends React.Component {
               </table>
               {form}
             </form>
+            {form}
           </div>
         </div>
       </div>

@@ -43,7 +43,9 @@ const schema = {
     adresse: { type: "string", title: "Rue", default: "" },
     ville: { type: "string", title: "Ville", default: "" },
     code_postal: { type: "string", title: "Code Postal", default: "" },
-    etablissement: { type: "string", title: "Nom d'Etablissements", default: "" }
+    etablissement: { type: "string", title: "Nom d'Etablissements", default: "" },
+    type: { type: "string", default: "prepose" },
+    tis: { type: "string", default: "1" }
   }
 };
 
@@ -97,6 +99,12 @@ const uiSchema = {
   etablissement: {
     classNames: "I_input_form_inscription",
     "ui:placeholder": "Nom d'Etablissements"
+  },
+  tis: {
+    classNames: "hidden_input_form_inscription"
+  },
+  type: {
+    classNames: "hidden_input_form_inscription"
   }
 };
 
@@ -105,25 +113,23 @@ const formData = {};
 class InscriptionPrepose extends React.Component {
   /*onSubmit = ({ formData }) => {
 
-
-		 apiFetch(`/mandataires/1`, {
-      method: "PUT",
+     apiFetch(`/mandataires/1`, {
+      method: "POST",
       body: JSON.stringify({
-    	Pusername:
-    	Ppass1:
-    	Ppass2:
-       	Pnom:
-        Pprenom:
-        Ptelephone:
-        Ptelephone_portable:
-        Pemail:
-        Padresse:
-        Pcode_postal:
-        Pville:
-
+      username:
+      pass1:
+      pass2:
+      nom:
+      prenom:
+      telephone:
+      telephone_portable:
+      email:
+      adresse:
+      code_postal:
+      ville:
       })
     }).then(json => {
-     //piwik
+    piwik.push(["trackEvent", "Inscription", "Préposé"]);
      // this.props.updateMadataire(json);
     });
 	};*/

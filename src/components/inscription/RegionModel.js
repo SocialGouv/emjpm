@@ -30,10 +30,14 @@ class RegionModel extends React.Component {
         {this.state.toggled &&
           this.props.tis &&
           this.props.tis.map(ti => (
-            <div style={{ marginLeft: 40 }}>
-              <label key={ti.id}>
-                <input style={{ marginRight: 5 }} type="checkBox" />
-                {ti.nom} - id: {ti.id}
+            <div style={{ marginLeft: 40 }} key={ti.id}>
+              <label>
+                <input
+                  style={{ marginRight: 5 }}
+                  type="checkBox"
+                  onChange={e => this.props.onTiSelected(ti.id, e.target.checked)}
+                />
+                {ti.nom}
               </label>
             </div>
           ))}

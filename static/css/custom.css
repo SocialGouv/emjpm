@@ -304,3 +304,6 @@
   margin-left: 10%;
   margin-right: 10%;
 }
+.hidden_input_form_inscription {
+  display: none;
+}

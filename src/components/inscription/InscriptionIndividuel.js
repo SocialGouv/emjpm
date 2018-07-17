@@ -24,8 +24,7 @@ const schema = {
     "email",
     "adresse",
     "ville",
-    "code_postal",
-    "genre"
+    "code_postal"
   ],
   properties: {
     username: {
@@ -42,7 +41,9 @@ const schema = {
     email: { type: "string", title: "Adresse email", default: "" },
     adresse: { type: "string", title: "Rue", default: "" },
     ville: { type: "string", title: "Ville", default: "" },
-    code_postal: { type: "string", title: "Code Postal", default: "" }
+    code_postal: { type: "string", title: "Code Postal", default: "" },
+    type: { type: "string", default: "individuel" },
+    tis: { type: "string", default: "1" }
   }
 };
 
@@ -92,36 +93,53 @@ const uiSchema = {
   ville: {
     classNames: "I_input_form_inscription",
     "ui:placeholder": "Commune"
+  },
+  tis: {
+    classNames: "hidden_input_form_inscription"
+  },
+  type: {
+    classNames: "hidden_input_form_inscription"
   }
 };
 
 const formData = {};
 
 class InscriptionIndividuel extends React.Component {
-  /*onSubmit = ({ formData }) => {
-
-
-     apiFetch(`/mandataires/1`, {
-      method: "PUT",
+  onSubmit = ({ formData, props }) => {
+    console.log("username : ", formData.username);
+    console.log("pass1 : ", formData.pass1);
+    console.log("pass2 : ", formData.pass2);
+    console.log("nom : ", formData.nom);
+    console.log("prenom : ", formData.prenom);
+    console.log("telephone : ", formData.telephone);
+    console.log("telephone_portable : ", formData.telephone_portable);
+    console.log("email : ", formData.email);
+    console.log("ville : ", formData.ville);
+    console.log("adresse : ", formData.adresse);
+    console.log("code_postal", formData.code_postal);
+    console.log("type : ", formData.type);
+    console.log("tis : ");
+    /*apiFetch(`/mandataires/1`, {
+      method: "POST",
       body: JSON.stringify({
-      Iusername:
-      Ipass1:
-      Ipass2:
-        Inom:
-        Iprenom:
-        Itelephone:
-        Itelephone_portable:
-        Iemail:
-        Iadresse:
-        Icode_postal:
-        Iville:
+      username:
+      pass1:
+      pass2:
+      nom:
+      prenom:
+      telephone:
+      telephone_portable:
+      email:
+      adresse:
+      code_postal:
+      ville:
 
       })
     }).then(json => {
-     //piwik
+     piwik.push(["trackEvent", "Inscription", "Individuel"]);
      // this.props.updateMadataire(json);
-    });
-  };*/
+    });*/
+  };
 
   render() {
     return (
@@ -130,21 +148,20 @@ class InscriptionIndividuel extends React.Component {
           Veuillez renseigner ci-dessous vos informations professionelles:
         </h2>
         <br />
-        <b>
-          <Form
-            schema={schema}
-            formData={formData}
-            uiSchema={uiSchema}
-            validate={validate}
-            showErrorList={false}
-          >
-            <div style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}>
-              <SearchButton style={{ textAlign: "center" }} type="submit">
-                Enregistrer
-              </SearchButton>
-            </div>
-          </Form>
-        </b>
+        <Form
+          schema={schema}
+          formData={formData}
+          uiSchema={uiSchema}
+          validate={validate}
+          showErrorList={false}
+          onSubmit={this.onSubmit}
+        >
+          <div style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}>
+            <SearchButton style={{ textAlign: "center" }} type="submit">
+              Enregistrer
+            </SearchButton>
+          </div>
+        </Form>
       </div>
     );
   }
