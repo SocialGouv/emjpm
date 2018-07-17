@@ -64,32 +64,6 @@ if (process.env.NODE_ENV === "production") {
   );
 }
 
-mailer.extend(app, {
-  from: "gonzalez_ad@hotmail.fr",
-  host: "in-v3.mailjet.com", // hostname
-  secureConnection: true, // use SSL
-  port: 587, // port for secure SMTP
-  transportMethod: "SMTP", // default is SMTP. Accepts anything that nodemailer accepts
-  auth: {
-    user: "6632cabd2873712b0bafdf60d0693003",
-    pass: "5e65d90fbf59644d075ccf48e2b0ad30"
-  }
-});
-
-// Generate test SMTP service account from ethereal.email
-// Only needed if you don't have a real mail account for testing
-nodemailer.createTestAccount((err, account) => {
-  // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
-    host: "in-v3.mailjet.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: "6632cabd2873712b0bafdf60d0693003",
-      pass: "5e65d90fbf59644d075ccf48e2b0ad30"
-    }
-  });
-});
 
 app.use(passport.initialize());
 app.use(passport.session());

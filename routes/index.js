@@ -3,11 +3,8 @@ const pkg = require("../package.json");
 const router = express.Router();
 const queries = require("../db/queries");
 var csv = require("csvjson");
-// var fs = require("fs");
-const mailer = require("express-mailer");
 const { format, addMonths, addDays } = require("date-fns");
 const app = express();
-
 const nodemailer = require("nodemailer");
 
 // router.post("/upload", function(req, res, next) {
