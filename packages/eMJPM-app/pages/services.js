@@ -45,10 +45,10 @@ class MandatairesIndex extends React.Component {
                 </h2>
                 <div style={{ textAlign: "right" }}>
                   {" "}
-                  {this.state.currentMandataire.updateMesure && (
+                  {this.state.currentMandataire.update_mesure && (
                     <div>
                       Dernière mise à jour:
-                      <DislayDate date={this.state.currentMandataire.updateMesure.slice(0, 10)} />
+                      <DislayDate date={this.state.currentMandataire.update_mesure.slice(0, 10)} />
                     </div>
                   )}
                 </div>

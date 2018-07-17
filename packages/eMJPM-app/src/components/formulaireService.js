@@ -32,7 +32,7 @@ const schema = {
       title: "Nombre de mesures souhaitées",
       default: ""
     },
-    disponibilite: {
+    mesures_en_cours: {
       type: "string",
       title: "Nombre de mesures",
       default: ""
@@ -95,7 +95,7 @@ class FormulaireService extends React.Component {
         code_postal: formData.code_postal || "",
         ville: formData.ville || "",
         dispo_max: formData.dispo_max || 0,
-        disponibilite: formData.disponibilite || 0
+        mesures_en_cours: formData.mesures_en_cours || 0
       })
     }).then(json => {
       this.props.updateMadataire(json);
@@ -124,7 +124,7 @@ class FormulaireService extends React.Component {
       email: this.props.currentMandataireModal.email,
       code_postal: this.props.currentMandataireModal.code_postal,
       dispo_max: this.props.currentMandataireModal.dispo_max,
-      disponibilite: this.props.currentMandataireModal.disponibilite
+      mesures_en_cours: this.props.currentMandataireModal.mesures_en_cours
     };
     return (
       <div>
@@ -158,7 +158,7 @@ class FormulaireService extends React.Component {
                   <br />
                   <b> Mesures en cours </b>
                   <br />
-                  {this.props.currentMandataireModal.disponibilite}
+                  {this.props.currentMandataireModal.mesures_en_cours}
                   <br />
                   <AddTisToFormulaireMandataire tis={this.state.tis} updateTi={this.updateTi} />
                   {this.state.tisByMandataire && (
