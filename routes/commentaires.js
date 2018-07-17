@@ -35,7 +35,7 @@ router.post(
     }
     queries
       .addCommentaire({
-        co_comment: req.body.co_comment,
+        comment: req.body.comment,
         mandataire_id: req.params.mandataireId,
         ti_id: ti.id
       })
