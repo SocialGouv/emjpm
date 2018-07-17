@@ -1,4 +1,3 @@
-import { Home, Map, User, UserMinus } from "react-feather";
 import InscriptionIndividuel from "./InscriptionIndividuel";
 import InscriptionPrepose from "./InscriptionPrepose";
 import InscriptionService from "./InscriptionService";
@@ -21,19 +20,30 @@ const tis_exemple = [
   { id: 8, nom: "ti 8", id_region: 3 }
 ];
 
+const forms = {
+  Individuel: <InscriptionIndividuel style={{ width: "80%" }} />,
+  Prepose: <InscriptionPrepose style={{ width: "80%" }} />,
+  Service: <InscriptionService style={{ width: "80%" }} />
+};
+
+const FormSelector = ({ label, value, onChange }) => (
+  <td>
+    <label>
+      <input
+        style={{ marginRight: 5 }}
+        type="radio"
+        name="form_selector"
+        value={value}
+        onChange={onChange}
+      />
+      {label || value}
+    </label>
+  </td>
+);
+
 class Form extends React.Component {
   state = {
     form: null
-  };
-
-  getForm = () => {
-    if (this.state.form === "Individuel") {
-      return <InscriptionIndividuel style={{ width: "80%" }} />;
-    } else if (this.state.form === "Prepose") {
-      return <InscriptionPrepose style={{ width: "80%" }} />;
-    } else if (this.state.form === "Service") {
-      return <InscriptionService style={{ width: "80%" }} />;
-    }
   };
 
   setForm = e => {
@@ -41,7 +51,7 @@ class Form extends React.Component {
   };
 
   render() {
-    const form = this.getForm();
+    const form = forms[this.state.form];
 
     return (
       <div className="container">
@@ -49,60 +59,26 @@ class Form extends React.Component {
           <h1 style={{ margin: 20 }}>Inscription</h1>
           <div style={{ backgroundColor: "white", padding: 5 }}>
             <TiSelector tis={tis_exemple} regions={regions} />
-
             <form>
-              <div>
-                <h2 style={{ margin: 15 }}>Vous êtes un mandataire :</h2>
-                <table
-                  style={{
-                    margin: 20,
-                    width: "100%",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                    fontSize: 14
-                  }}
-                >
+              <h2 style={{ margin: 15 }}>Vous êtes un mandataire :</h2>
+              <table
+                style={{
+                  margin: 20,
+                  width: "100%",
+                  marginTop: 20,
+                  marginBottom: 20,
+                  fontSize: "1.1em"
+                }}
+              >
+                <tbody>
                   <tr>
-                    <td>
-                      <label>
-                        <input
-                          style={{ marginRight: 5 }}
-                          type="radio"
-                          name="form_selector"
-                          value="Individuel"
-                          onChange={this.setForm}
-                        />
-                        Individuel
-                      </label>
-                    </td>
-                    <td>
-                      <label>
-                        <input
-                          style={{ marginRight: 5 }}
-                          type="radio"
-                          name="form_selector"
-                          value="Prepose"
-                          onChange={this.setForm}
-                        />
-                        Préposé
-                      </label>
-                    </td>
-                    <td>
-                      <label>
-                        <input
-                          style={{ marginRight: 5 }}
-                          type="radio"
-                          name="form_selector"
-                          value="Service"
-                          onChange={this.setForm}
-                        />
-                        Service
-                      </label>
-                    </td>
+                    <FormSelector value="Individuel" onChange={this.setForm} />
+                    <FormSelector value="Prepose" label="Préposé" onChange={this.setForm} />
+                    <FormSelector value="Service" onChange={this.setForm} />
                   </tr>
-                </table>
-                {form}
-              </div>
+                </tbody>
+              </table>
+              {form}
             </form>
           </div>
         </div>
