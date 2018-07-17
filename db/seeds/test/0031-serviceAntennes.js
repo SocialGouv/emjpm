@@ -11,9 +11,9 @@ exports.seed = function(knex, Promise) {
         ville: "Arras",
         telephone: "0237100000",
         adresse: "21 rue de houx",
-        disponibilite: 2,
+        mesures_en_cours: 2,
         dispo_max: 3,
-        service_id: 1
+        mandataire_id: 1
       });
     })
     .then(function() {
@@ -26,9 +26,9 @@ exports.seed = function(knex, Promise) {
         ville: "Arras",
         telephone: "0237100000",
         adresse: "21 rue de houx",
-        disponibilite: 2,
+        mesures_en_cours: 2,
         dispo_max: 3,
-        service_id: 2
+        mandataire_id: 2
       });
     });
 };
