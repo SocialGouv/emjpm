@@ -1,4 +1,4 @@
-import RegionModel from "./RegionModel";
+import TiByRegion from "./TiByRegion";
 
 const groupByRegion = arr =>
   arr.reduce(function(acc, obj) {
@@ -12,35 +12,38 @@ const groupByRegion = arr =>
 
 class TiSelector extends React.Component {
   state = {
-    tiSelected: []
+    selected: []
   };
 
   onTiSelected = (tiId, checked) => {
-    this.setState(state => {
-      if (checked && state.tiSelected.indexOf(tiId) === -1) {
-        //  state.tiSelected.push(tiId);
-        return {
-          tiSelected: [...state.tiSelected, tiId]
-        };
+    this.setState(
+      state => {
+        if (checked && state.selected.indexOf(tiId) === -1) {
+          return {
+            selected: [...state.selected, tiId]
+          };
+        }
+        if (!checked && state.selected.indexOf(tiId) > -1) {
+          const ids = [...state.selected];
+          ids.splice(ids.indexOf(tiId), 1);
+          return {
+            selected: ids
+          };
+        }
+      },
+      () => {
+        this.props.onChange(this.state.selected);
       }
-      if (!checked && state.tiSelected.indexOf(tiId) > -1) {
-        const ids = [...state.tiSelected];
-        ids.splice(ids.indexOf(tiId), 1);
-        return {
-          tiSelected: ids
-        };
-      }
-    });
+    );
   };
 
   render() {
     const tisByRegion = groupByRegion(this.props.tis);
     return (
       <div>
-        <h2 style={{ margin: 20 }}>
-          Choisissez les tribunaux d&apos;instances de votre activité profesionelle dans vos régions
-          :
-        </h2>
+        <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: 20 }}>
+          Choisissez les tribunaux d&apos;instances dans vos régions :
+        </div>
         <div
           style={{
             listStyleType: "none",
@@ -51,7 +54,7 @@ class TiSelector extends React.Component {
         >
           {this.props.tis &&
             Object.keys(tisByRegion).map(region => (
-              <RegionModel
+              <TiByRegion
                 tis={tisByRegion[region]}
                 nom={region}
                 key={region}

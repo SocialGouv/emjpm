@@ -1,15 +1,19 @@
 import React from "react";
-import styled from "styled-components";
 
-class RegionModel extends React.Component {
+class TiByRegion extends React.Component {
   state = {
     toggled: false
   };
 
-  changeState = e => {
-    this.setState(curState => ({
-      toggled: !curState.toggled
-    }));
+  changeState = () => {
+    this.setState(curState => {
+      if (curState.toggled) {
+        this.props.tis.map(ti => this.props.onTiSelected(ti.id, false));
+      }
+      return {
+        toggled: !curState.toggled
+      };
+    });
   };
 
   render() {
@@ -45,4 +49,4 @@ class RegionModel extends React.Component {
     );
   }
 }
-export default RegionModel;
+export default TiByRegion;
