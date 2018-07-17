@@ -8,7 +8,7 @@ import Footer from "../src/components/communComponents/Footer";
 import FormulaireMandataire from "../src/components/mandataireComponents/FormulaireMandataire";
 import Navigation from "../src/components/communComponents/Navigation";
 import TableMesure from "../src/components/mandataireComponents/TableMesure";
-import DislayDate from "../src/components/communComponents/formatFrenchDate";
+import DisplayDate from "../src/components/communComponents/formatFrenchDate";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
@@ -140,7 +140,7 @@ const MandataireIndexView = ({
             {currentMandataire.date_mesure_update && (
               <div>
                 Dernière mise à jour :{" "}
-                <DislayDate date={currentMandataire.date_mesure_update.slice(0, 10)} />
+                <DisplayDate date={currentMandataire.date_mesure_update.slice(0, 10)} />
               </div>
             )}
           </div>

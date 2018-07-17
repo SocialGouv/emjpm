@@ -82,9 +82,7 @@ const filterMandataires = (mandataires, filters) => {
     );
   });
 
-  return filteredMandataires.sort((a, b) => {
-    return sortMandataires(a, b);
-  });
+  return filteredMandataires.sort(sortMandataires);
 };
 
 const filterMesures = (mesures, filters) => {
@@ -97,9 +95,7 @@ const filterMesures = (mesures, filters) => {
       stringMatch(mesure.ville, filters.searchVille)
     );
   });
-  return filteredMesures.sort((a, b) => {
-    return sortMandataires(a, b);
-  });
+  return filteredMesures.sort(sortMandataires);
 };
 
 const sortByDispo = (a, b) => {
