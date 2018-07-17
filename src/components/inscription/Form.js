@@ -4,6 +4,7 @@ import InscriptionService from "./InscriptionService";
 import TiSelector from "./TiSelector";
 import Resolve from "../Resolve";
 import apiFetch from "../communComponents/Api";
+import Router from "next/router";
 
 const formsMandataires = {
   individuel: props => <InscriptionIndividuel style={{ width: "80%" }} {...props} />,
@@ -26,31 +27,6 @@ const FormSelector = ({ label, value, onChange }) => (
   </td>
 );
 
-const onSubmit = formData => {
-  console.log({ formData });
-  return Promise.resolve();
-  /*apiFetch(`/mandataires/1`, {
-      method: "POST",
-      body: JSON.stringify({
-      username:
-      pass1:
-      pass2:
-      nom:
-      prenom:
-      telephone:
-      telephone_portable:
-      email:
-      adresse:
-      code_postal:
-      ville:
-
-      })
-    }).then(json => {
-     piwik.push(["trackEvent", "Inscription", "Individuel"]);
-     // this.props.updateMadataire(json);
-    });*/
-};
-
 const getTis = () =>
   apiFetch("/inscription/tis", null, {
     forceLogin: false
@@ -72,15 +48,20 @@ class Form extends React.Component {
   };
   onSubmit = ({ formData }) => {
     this.setState({ status: "loading", formData }, () => {
-      onSubmit({
-        ...formData,
-        tis: this.state.tis.join(","),
-        type: this.state.typeMandataire
+      apiFetch(`/inscription/mandataires`, {
+        method: "POST",
+        body: JSON.stringify({
+          ...formData,
+          tis: this.state.tis,
+          type: this.state.typeMandataire
+        })
       })
         .then(() => {
-          this.setState({ status: "success" });
+          // piwik.push(["trackEvent", "Inscription success", formData.type]);
+          Router.push("/inscription-done");
         })
         .catch(() => {
+          // piwik.push(["trackEvent", "Inscription error", formData.type]);
           this.setState({ status: "error" });
         });
     });
@@ -126,10 +107,14 @@ class Form extends React.Component {
                 </tr>
               </tbody>
             </table>
-            {(FormMandataire && (
+            {FormMandataire && (
               <FormMandataire onSubmit={this.onSubmit} formData={this.state.formData} />
-            )) ||
-              null}
+            )}
+            {this.state.status === "error" && (
+              <div style={{ textAlign: "center", color: "red", fontSize: "1.1em" }}>
+                Erreur; Votre compte n&apos;a pas pû être crée :/
+              </div>
+            )}
           </div>
         </div>
       </div>
