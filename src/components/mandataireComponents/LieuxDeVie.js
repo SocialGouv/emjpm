@@ -20,17 +20,13 @@ class LieuxDeVie extends React.Component {
   render() {
     return (
       <div>
-        <br />
         <div style={{ marginLeft: "20px" }}>
-          <h6>Résidence </h6>
+          <h6>Résidence</h6>
         </div>
-        <div
-          className="custom-control custom-radio custom-control-inline"
-          style={{ marginLeft: "20px" }}
-        >
-          <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline1">
+        <div className="custom-control custom-radio custom-control-inline" style={{ width: 140 }}>
+          <label style={{ cursor: "pointer" }} htmlFor="customRadioInline1">
             <input
-              data-cy="tab-individuel"
+              data-cy="radio-domicile"
               type="radio"
               id="customRadioInline1"
               name="customRadioInline"
@@ -38,32 +34,35 @@ class LieuxDeVie extends React.Component {
               label="A Domicile"
               value="A Domicile"
               onClick={e => this.props.updateLieuxDeVie({ lieuxDeVie: e.target.value })}
-            />A Domicile
+            />{" "}
+            A Domicile
           </label>
         </div>
-        <div className="custom-control custom-radio custom-control-inline">
-          <label style={{ cursor: "pointer", width: "60px" }} htmlFor="customRadioInline2">
+        <div className="custom-control custom-radio custom-control-inline" style={{ width: 200 }}>
+          <label style={{ cursor: "pointer" }} htmlFor="customRadioInline2">
             <input
-              data-cy="tab-prepose"
+              data-cy="radio-etablissement"
               type="radio"
               id="customRadioInline2"
               name="customRadioInline"
               style={{ margin: "5px" }}
-              label="En etablissement"
-              value="En etablissement"
+              label="En établissement"
+              value="En établissement"
               onClick={e => this.props.updateLieuxDeVie({ lieuxDeVie: e.target.value })}
-            />En Etablissement
+            />{" "}
+            En Etablissement
           </label>
         </div>
-        <br />
-        {this.props.lieuxDeVie === "En etablissement" && (
-          <React.Fragment>
-            <h6> Choisisser votre établissement</h6>
+        {this.props.lieuxDeVie === "En établissement" && (
+          <div style={{ marginLeft: 20, marginTop: 20 }}>
+            <h6>Choisissez votre établissement</h6>
             <ReactAutocomplete
               items={this.props.etablissement}
+              inputProps={{
+                style: { width: 250 }
+              }}
               shouldItemRender={(item, value) =>
-                item.nom.toLowerCase().indexOf(value.toLowerCase()) > -1
-              }
+                item.nom.toLowerCase().indexOf(value.toLowerCase()) > -1}
               getItemValue={item => item.nom}
               renderItem={(item, highlighted) => (
                 <div
@@ -77,7 +76,7 @@ class LieuxDeVie extends React.Component {
               onChange={e => this.props.updateValue({ value: e.target.value })}
               onSelect={(a, b) => this.props.updateValue({ value: a, valueId: b.id })}
             />
-          </React.Fragment>
+          </div>
         )}
       </div>
     );
