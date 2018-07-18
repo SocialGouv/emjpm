@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const session = require("express-session");
 const routes = require("./routes/index");
+const email = require("./email/index");
 const users = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const Knex = require("knex");
@@ -68,6 +69,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/api/v1", routes);
+app.use("/api/v1/email", email);
 app.use("/auth", authRoutes);
 app.use("/", users);
 
