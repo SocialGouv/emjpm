@@ -98,11 +98,7 @@ class Form extends React.Component {
               <tbody>
                 <tr>
                   <FormSelector value="individuel" onChange={this.setTypeMandataire} />
-                  <FormSelector
-                    value="preposes"
-                    label="Préposé"
-                    onChange={this.setTypeMandataire}
-                  />
+                  <FormSelector value="prepose" label="Préposé" onChange={this.setTypeMandataire} />
                   <FormSelector value="service" onChange={this.setTypeMandataire} />
                 </tr>
               </tbody>
