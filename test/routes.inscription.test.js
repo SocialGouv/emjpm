@@ -157,5 +157,39 @@ describe("routes : inscription", () => {
           console.log(res);
           throw new Error("should not fail");
         }));
+
+    it("created user should NOT be active", () =>
+      chai
+        .request(server)
+        .post("/api/v1/inscription/mandataires")
+        .send({
+          username: "testeur2",
+          etablissement: "",
+          email: "",
+          type: "sss",
+          pass1: "kikoo",
+          pass2: "kikoo",
+          tis: [1, 2],
+          adresse: "rue du test",
+          code_postal: "",
+          ville: "",
+          telephone: "",
+          latitude: 2,
+          longitude: 2
+        })
+        .then((res, req) => {
+          res.status.should.eql(200);
+        })
+        .then(async (res, req) => {
+          const user = await knex
+            .table("users")
+            .orderBy("id", "desc")
+            .first();
+          user.active.should.equal(false);
+        })
+        .catch(res => {
+          console.log(res);
+          throw new Error("should not fail");
+        }));
   });
 });
