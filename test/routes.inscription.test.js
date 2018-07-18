@@ -41,7 +41,7 @@ describe("routes : inscription", () => {
         }));
   });
 
-  describe.only("create user", () => {
+  describe("create user", () => {
     it("should fail when pass1!==pass2", () =>
       chai
         .request(server)
@@ -60,10 +60,7 @@ describe("routes : inscription", () => {
           latitude: 2,
           longitude: 2
         })
-        .then((res, req) => {
-          throw new Error("should not succeed");
-        })
-        .catch(res => {
+        .then(res => {
           res.status.should.eql(500);
         }));
 
@@ -85,10 +82,7 @@ describe("routes : inscription", () => {
           latitude: 2,
           longitude: 2
         })
-        .then((res, req) => {
-          throw new Error("should not succeed");
-        })
-        .catch(res => {
+        .then(res => {
           res.status.should.eql(500);
         }));
 
