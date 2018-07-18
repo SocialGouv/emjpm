@@ -478,5 +478,5 @@ module.exports = {
   deleteMandataireTis,
   getAllServicesByTis,
   getAllMesuresByPopUpForMandataire,
-    getAllMesuresByMandatairesForMaps
+    getAllMesuresByMandatairesForMaps,
 };
