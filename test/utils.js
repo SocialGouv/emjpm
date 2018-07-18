@@ -20,11 +20,7 @@ const shouldBeProtected = (server, method, url) =>
     chai.request
       .agent(server)
       [method.toLowerCase()](url)
-      .then(() => {
-        throw Error("should not succeed");
-      })
-      .catch(res => {
-        //console.log("res", res);
+      .then(res => {
         res.status.should.eql(401);
       }));
 
