@@ -115,13 +115,13 @@ class MesureInput extends React.Component {
               body: JSON.stringify({
                 code_postal: formData.code_postal,
                 ville: formData.commune,
-                etablissement_id: this.state.valueId || null,
+                etablissement_id: this.state.valueId || 1,
                 latitude: coordinates.features[0].geometry.coordinates[1],
                 longitude: coordinates.features[0].geometry.coordinates[0],
                 annee: formData.annee,
                 type: formData.type,
                 date_ouverture: formData.ouverture,
-                residence: this.state.lieuxDeVie,
+                residence: this.state.lieuxDeVie || "",
                 civilite: formData.civilite,
                 status: "Mesure en cours"
               })
@@ -152,7 +152,7 @@ class MesureInput extends React.Component {
                     success: " La mesure a été créée"
                   },
                   () => {
-                    this.props.updateMesure(json2);
+                    this.props.updateMesureEteinte(json2);
                   }
                 );
               });

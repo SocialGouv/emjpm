@@ -35,7 +35,7 @@ const ColStyle = styled.b`color: "black"};`;
 export const TableMesureView = ({ rows, display, display_ext, updateMesureEteinte }) => (
   <LineContainer>
     <DisplayCreationMesure display={display}>
-      <CreationMesure updateMesure={updateMesureEteinte} />
+      <CreationMesure updateMesureEteinte={updateMesureEteinte} />
     </DisplayCreationMesure>
     {rows && rows.length ? (
       <table className="table">
