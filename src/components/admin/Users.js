@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { User, UserCheck, UserX } from "react-feather";
+import { User, UserCheck } from "react-feather";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import TableUser from "./TableUser";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
@@ -43,7 +44,7 @@ const Title = styled.div`
   margin: 10px;
 `;
 
-const UserManagement = () => (
+const Users = () => (
   <Tabs className="container">
     <TabList>
       <PanelUser className="panel">
@@ -58,21 +59,14 @@ const UserManagement = () => (
           <User style={imageStyle} />
           <b>En attente de validation</b>
         </Tab>
-        <Tab style={tabStyle}>
-          <UserX style={imageStyle} />
-          <b>Désactivés</b>
-        </Tab>
       </PanelUser>
     </TabList>
     <TabPanel>
-      <div>users actifs</div>
+      <TableUser filters={{ "users.active": true }} />
     </TabPanel>
     <TabPanel>
-      <div>users en attente</div>
-    </TabPanel>
-    <TabPanel>
-      <div>users inactifs</div>
+      <TableUser filters={{ "users.active": false }} />
     </TabPanel>
   </Tabs>
 );
-export default UserManagement;
+export default Users;

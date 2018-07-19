@@ -4,7 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import Navigation from "../src/components/communComponents/Navigation";
 import Footer from "../src/components/communComponents/Footer";
-import UserManagement from "../src/components/admin/UserManagement";
+import Users from "../src/components/admin/Users";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
@@ -65,7 +65,7 @@ const AdminPart = () => (
       </PanelAdmin>
     </TabList>
     <TabPanel>
-      <UserManagement />
+      <Users />
     </TabPanel>
     <TabPanel>
       <div>Gestion des TI</div>

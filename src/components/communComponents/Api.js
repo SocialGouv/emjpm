@@ -25,4 +25,17 @@ const apiFetch = (route, params, options = { forceLogin: true }) =>
     })
     .then(res => res.json());
 
+// admin toggle
+// destructuration as a whitelist
+export const updateUser = ({ id, active }) =>
+  apiFetch(`/admin/user/${id}`, {
+    method: "PUT",
+    body: {
+      active
+    }
+  }).catch(e => {
+    console.log(e);
+    throw e;
+  });
+
 export default apiFetch;
