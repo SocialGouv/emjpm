@@ -206,7 +206,7 @@ function getSingle(mandataireID) {
 
 function getSingleDisponibilite(mandataireID) {
   return Mandataires()
-    .select("disponibilite")
+    .select("mesures_en_cours")
     .where("id", parseInt(mandataireID))
     .first();
 }
@@ -351,12 +351,12 @@ function getAllEtablissementsByMandataire(mandataireId) {
 }
 
 function getAllTisByMandataire(mandataireId) {
-  return knex("mandatairetis")
+  return knex("mandataire_tis")
     .select("tis.id", "tis.etablissement")
     .where({
       mandataire_id: parseInt(mandataireId)
     })
-    .innerJoin("tis", "mandatairetis.ti_id", "tis.id");
+    .innerJoin("tis", "mandataire_tis.ti_id", "tis.id");
 }
 
 function addEtablissement(mandataireId) {
@@ -368,7 +368,7 @@ function addMandataireToEtablissement(mandataireId) {
 }
 
 function addMandataireTis(data) {
-  return knex("mandatairetis").insert(data);
+  return knex("mandataire_tis").insert(data);
 }
 
 function updateEtablissement(mesureID, updates) {
@@ -388,7 +388,7 @@ function deleteMandataireEtablissement(showID) {
 }
 
 function deleteMandataireTis(tiId, mandataireId) {
-  return knex("mandatairetis")
+  return knex("mandataire_tis")
     .where({ ti_id: parseInt(tiId), mandataire_id: parseInt(mandataireId) })
     .first()
     .del();
@@ -418,7 +418,7 @@ function deleteAntenne(where) {
 
 const isMandataireInTi = (mandataire_id, ti_id) =>
   knex
-    .from("mandatairetis")
+    .from("mandataire_tis")
     .where({
       mandataire_id,
       ti_id
