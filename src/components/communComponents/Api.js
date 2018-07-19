@@ -30,9 +30,9 @@ const apiFetch = (route, params, options = { forceLogin: true }) =>
 export const updateUser = ({ id, active }) =>
   apiFetch(`/admin/user/${id}`, {
     method: "PUT",
-    body: {
-      active
-    }
+    body: JSON.stringify({
+      active: active
+    })
   }).catch(e => {
     console.log(e);
     throw e;

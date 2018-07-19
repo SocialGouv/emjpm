@@ -17,7 +17,14 @@ class ToggleState extends React.Component {
   toggle = () => {
     // optimistic rendering
     this.toggleState(() =>
-      this.props.onToggle(this.state.active).catch(/* rollback */ () => this.toggleState())
+      this.props
+        .onToggle(this.state.active)
+        .then(res => {
+          if (res.success !== true) {
+            throw new Error(500);
+          }
+        })
+        .catch(/* rollback */ () => this.toggleState())
     );
   };
   render() {

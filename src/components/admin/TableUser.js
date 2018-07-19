@@ -20,7 +20,7 @@ const RowActive = ({ active }) => (
 
 const RowAction = ({ row: { id, active } }) => (
   <ToggleState
-    onToggle={() =>
+    onToggle={active =>
       updateUser({
         id,
         active
