@@ -15,15 +15,30 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.alterTable("mesures", function(table) {
-    table
-      .float("latitude")
-      .notNullable()
-      .alter();
-    table
-      .float("longitude")
-      .notNullable()
-      .alter();
-    table.dateTime("postDate").alter();
-  });
+  const alterTable = () =>
+    knex.schema.alterTable("mesures", function(table) {
+      table
+        .float("latitude")
+        .notNullable()
+        .alter();
+      table
+        .float("longitude")
+        .notNullable()
+        .alter();
+      table.dateTime("postDate").alter();
+    });
+
+  return knex
+    .table("mesures")
+    .where("latitude", null)
+    .update({ latitude: 0 })
+    .then(() =>
+      knex
+        .table("mesures")
+        .where("longitude", null)
+        .update({ longitude: 0 })
+        .then(() => {
+          alterTable();
+        })
+    );
 };
