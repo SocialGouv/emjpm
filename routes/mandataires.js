@@ -27,7 +27,7 @@ router.put("/1", loginRequired, async (req, res, next) => {
   const dispoMandataire = await queries.getSingleDisponibilite(mandataire.id);
 
   // todo: replace with trigger
-  if (req.body.mesures_en_cours !== dispoMandataire) {
+  if (req.body.date_mesure_update !== dispoMandataire) {
     queries
       .update(mandataire.id, { date_mesure_update: new Date(Date.now()) })
       .catch(error => {

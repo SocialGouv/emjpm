@@ -416,7 +416,7 @@ function deleteMandataireEtablissement(showID) {
 }
 
 function deleteMandataireTis(tiId, mandataireId) {
-  return knex("mandatairetis")
+  return knex("mandataire_tis")
     .where({ ti_id: parseInt(tiId), mandataire_id: parseInt(mandataireId) })
     .first()
     .del();
