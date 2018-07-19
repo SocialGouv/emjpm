@@ -125,7 +125,6 @@ const FormulaireMandataireView = ({
                   etablissements={etablissement}
                 />
               )}
-              <AddTisToFormulaireMandataire tis={tis} updateTi={updateTi} />
               <br />
               <b>Contact</b>
               <br />
@@ -181,8 +180,9 @@ const FormulaireMandataireView = ({
               {tisByMandataire && (
                 <React.Fragment>
                   <div>
-                    <b>Tis </b>
+                    <b>Tribunaux d'instance où je suis agréé </b>
                     <br />
+                      <AddTisToFormulaireMandataire tis={tis} updateTi={updateTi} />
                   </div>
                   {tisByMandataire.map(tiByMandataire => (
                     <div key={tiByMandataire.id}>

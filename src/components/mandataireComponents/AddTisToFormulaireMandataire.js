@@ -63,7 +63,7 @@ class AddTisToFormulaireMandataire extends React.Component {
           className="btn btn-success mesure_button"
           onClick={this.toggleFormVisibility}
         >
-          Ajouter un nouveau Ti
+          Ajouter un nouveau TI
         </button>
 
         <div style={displayModal}>
