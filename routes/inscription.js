@@ -47,9 +47,9 @@ router.post("/mandataires", (req, res, next) => {
           },
           trx
         )
-        .then(([user_id]) =>
+        .then(([user_id]) => {
           // create mandataire
-          queries
+          return queries
             .createMandataire(
               {
                 user_id,
@@ -70,11 +70,11 @@ router.post("/mandataires", (req, res, next) => {
             )
             .then(([mandataire_id]) => {
               // create tis
-              if (!req.body.tis || req.body.tis.length === 0) {
+              if (!tis || tis.length === 0) {
                 return true;
               }
               return Promise.all(
-                req.body.tis.map(ti_id =>
+                tis.map(ti_id =>
                   queries.createMandataireTi(
                     {
                       mandataire_id,
@@ -84,14 +84,15 @@ router.post("/mandataires", (req, res, next) => {
                   )
                 )
               );
-            })
-        )
+            });
+        })
     )
     .then(() => {
       // todo: send email admins ?
       return res.json({ success: true });
     })
-    .catch(() => {
+    .catch(e => {
+      console.log(e);
       return res.status(500).json({ success: false });
     });
 });

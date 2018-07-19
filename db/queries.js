@@ -281,9 +281,13 @@ function getAllCommentaires(mandataire_id, ti_id) {
 function addCommentaire(data) {
   return Commentaires().insert(data);
 }
-function deleteCommentaire(showID) {
+
+function deleteCommentaire({ id, ti_id }) {
   return Commentaires()
-    .where("id", parseInt(showID))
+    .where({
+      id: parseInt(id),
+      ti_id
+    })
     .del();
 }
 
