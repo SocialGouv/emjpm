@@ -91,7 +91,7 @@ describe("routes : inscription", () => {
         .request(server)
         .post("/api/v1/inscription/mandataires")
         .send({
-          username: "toto",
+          username: "toto423",
           etablissement: "",
           email: "",
           type: "sss",
@@ -106,10 +106,6 @@ describe("routes : inscription", () => {
         })
         .then((res, req) => {
           res.status.should.eql(200);
-        })
-        .catch(res => {
-          console.log(res);
-          throw new Error("should not fail");
         }));
 
     it("should add mandataire tis", () =>
@@ -117,7 +113,7 @@ describe("routes : inscription", () => {
         .request(server)
         .post("/api/v1/inscription/mandataires")
         .send({
-          username: "testeur",
+          username: "testeur42",
           etablissement: "",
           email: "",
           type: "sss",
@@ -137,9 +133,9 @@ describe("routes : inscription", () => {
         .then(async (res, req) => {
           const user = await knex
             .table("users")
-            .orderBy("id", "desc")
+            .where("username", "testeur42")
             .first();
-          user.username.should.equal("testeur");
+          user.username.should.equal("testeur42");
           const mandataire = await knex
             .table("mandataires")
             .orderBy("id", "desc")
@@ -152,10 +148,6 @@ describe("routes : inscription", () => {
           const ti_ids = tis.map(t => t.ti_id);
           ti_ids.sort();
           ti_ids.should.deep.equal([1, 2]);
-        })
-        .catch(res => {
-          console.log(res);
-          throw new Error("should not fail");
         }));
 
     it("created user should NOT be active", () =>
@@ -163,7 +155,7 @@ describe("routes : inscription", () => {
         .request(server)
         .post("/api/v1/inscription/mandataires")
         .send({
-          username: "testeur2",
+          username: "testeur43",
           etablissement: "",
           email: "",
           type: "sss",
@@ -186,10 +178,6 @@ describe("routes : inscription", () => {
             .orderBy("id", "desc")
             .first();
           user.active.should.equal(false);
-        })
-        .catch(res => {
-          console.log(res);
-          throw new Error("should not fail");
         }));
   });
 });
