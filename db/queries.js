@@ -104,7 +104,17 @@ function getAllMesuresByMandatairesFilter(
     )
     .groupByRaw("mandataires.id")
     .where("mandataire_tis.ti_id", parseInt(ti_id))
-    .select("mandataires.id", "mandataires.*");
+    .select("mandataires.id", "mandataires.*")
+    .union(function() {
+      this.select("mandataires.id", "mandataires.*")
+        .from("mandataires")
+        .where("type", "Service")
+        .innerJoin(
+          "mandataire_tis",
+          "mandataire_tis.mandataire_id",
+          "mandataires.id"
+        );
+    });
 }
 
 function getAllByMandatairesFilter(
