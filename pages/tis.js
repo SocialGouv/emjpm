@@ -70,19 +70,15 @@ const getPostCodeCoordinates = postCode => {
 const stringMatch = (str, needle) => str.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
 
 // filter and sort list of mandataires
-const filterMandataires = (mandataires, filters) => {
-  let filteredMandataires = mandataires.filter(mandataire => {
-    return (
-      stringMatch(mandataire.type, filters.searchType) &&
-      (stringMatch(mandataire.type, filters.searchTypeIn) &&
-        stringMatch(mandataire.type, filters.searchTypePr) &&
-        stringMatch(mandataire.type, filters.searchTypeSe)) &&
-      stringMatch(mandataire.etablissement, filters.searchNom) &&
-      stringMatch(mandataire.ville, filters.searchVille)
-    );
-  });
 
-  return filteredMandataires.sort(sortMandataires);
+const filterMandataires = (mandataires, filters) => {
+  if (!mandataires.length) {
+      mandataires = [].concat(mandataires)
+  }
+    let filteredMandataires = mandataires.filter(mandataire => {
+      return stringMatch(mandataire.type, filters.searchType);
+    });
+    return filteredMandataires.sort(sortMandataires);
 };
 
 const filterMesures = (mesures, filters) => {
@@ -149,6 +145,7 @@ export const FicheMandataire = ({
       <div className="col-6">
         <TitleMandataire>{mandataire.etablissement}</TitleMandataire>
         <div>{mandataire.type.toUpperCase()}</div>
+          <div>{mandataire.genre}</div>
         <RowModal value={mandataire.adresse} />
         <div>
           {mandataire.code_postal} {mandataire.ville.toUpperCase()}
@@ -289,6 +286,7 @@ class Ti extends React.Component<Props, State> {
   };
 
   updateMandataireFilters = mandataires => {
+    console.log("manda", mandataires);
     this.setState({ manda: mandataires });
   };
 
@@ -326,14 +324,7 @@ class Ti extends React.Component<Props, State> {
     const filteredMandataires = filterMandataires(
       this.state.manda,
       {
-        searchType: this.state.searchType,
-        searchTypeIn: this.state.searchTypeIn,
-        searchTypePr: this.state.searchTypePr,
-        searchTypeSe: this.state.searchTypeSe,
-        searchNom: this.state.searchNom,
-        searchVille: this.state.searchVille,
-        postcodeCoordinates: this.state.postcodeCoordinates,
-        specialite: this.state.specialite
+        searchType: this.state.searchType
       }
       // this.state.specialite
     );
@@ -343,8 +334,7 @@ class Ti extends React.Component<Props, State> {
       searchVille: this.state.searchVille
     });
     const mesureCount = this.state.mandaMesures.length;
-    const mandataireCount = filteredMandataires.length;
-
+    const mandataireCount = filteredMandataires.length ? filteredMandataires.length : 1;
     return (
       <TiView
         mesures={this.state.datamesure}
@@ -455,7 +445,7 @@ const TiView = ({
           height={height}
           updateMandataireFilters={updateMandataireFilters}
           updateMandataireMesures={updateMandataireMesures}
-          filteredMesures={filteredMandataires}
+          filteredMandataires={filteredMandataires}
           openModal={openModal}
           mandataireCount={mandataireCount}
           updateFilters={updateFilters}

@@ -27,12 +27,11 @@ const MandatairesWidth = styled.div`
 export const MapsView = ({
   mandataires,
   zoom,
-  center,
   width,
   height,
   onMoveend,
   innerRef,
-  filteredMesures,
+  filteredMandataires,
   openModal,
   updateFilters,
   zoomCodePostal,
@@ -40,7 +39,10 @@ export const MapsView = ({
   updateValue,
   mandataireCount,
   value,
-  updateTimer
+  updateFilterMandataire,
+  currentMandataireSelected,
+  updateIsMandataireClick,
+  onCenter
 }) => (
   <div className="container">
     <div className="row">
@@ -55,7 +57,7 @@ export const MapsView = ({
         />
 
         <Map
-          center={center}
+          center={onCenter}
           zoom={zoom}
           style={{ width, height }}
           onMoveend={onMoveend}
@@ -66,16 +68,21 @@ export const MapsView = ({
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
           {mandataires &&
-            mandataires.map(manda => (
-              <CircleMarker
-                center={[manda.latitude, manda.longitude]}
-                color="red"
-                radius={10}
-                key={manda.id}
-              >
-                <Popup onPopupOpen={() => console.log(123456)}> </Popup>
-              </CircleMarker>
-            ))}
+            mandataires.map(manda => {
+              const isSelected = currentMandataireSelected.id === manda.id;
+              const onClick = () =>
+                isSelected ? updateIsMandataireClick() : updateFilterMandataire(manda);
+              const markerColor = isSelected ? "blue" : "red";
+              return (
+                <CircleMarker
+                  center={[manda.latitude, manda.longitude]}
+                  color={markerColor}
+                  radius={10}
+                  key={manda.id}
+                  onClick={onClick}
+                />
+              );
+            })}
           ;
         </Map>
       </MapsWidth>
@@ -87,7 +94,7 @@ export const MapsView = ({
             </Title>
             <div style={{ maxHeight: "60vh", overflow: "auto" }}>
               <TableMandataire
-                rows={filteredMesures}
+                rows={filteredMandataires}
                 openModal={openModal}
                 updateFilters={updateFilters}
               />
@@ -107,7 +114,10 @@ class Mapstry extends React.Component {
   state = {
     zoom: 10,
     datamesure: "",
-    value: ""
+    value: "",
+    showMandataireOfOneMesure: "",
+    currentMandataireSelected: "",
+    center: ""
   };
 
   mapRef = createRef();
@@ -173,6 +183,26 @@ class Mapstry extends React.Component {
       });
   };
 
+  updateIsMandataireClick = () => {
+    this.setState(
+      () => ({
+        currentMandataireSelected: ""
+      }),
+      () => this.handleMoveend()
+    );
+  };
+
+  updateFilterMandataire = mandataire => {
+    this.setState(
+      () => ({
+        currentMandataireSelected: mandataire
+      }),
+      () => {
+        this.props.updateMandataireFilters(mandataire);
+      }
+    );
+  };
+
   getPostCodeCoordinates = commune => {
     // return null if no input
     if (!commune || !commune.trim()) {
@@ -187,20 +217,23 @@ class Mapstry extends React.Component {
   };
 
   render() {
-    const center = this.props.postcodeMandataire
-      ? [this.props.postcodeMandataire[1], this.props.postcodeMandataire[0]]
-      : [50.459441, 2.693963];
+    const onCenter = this.state.center.lat
+      ? [this.state.center.lat, this.state.center.lng]
+      : this.props.postcodeMandataire[1]
+        ? [this.props.postcodeMandataire[1], this.props.postcodeMandataire[0]]
+        : [50.459441, 2.693963];
+
     return (
       <MapsView
         innerRef={this.mapRef}
         zoom={this.state.zoom}
         width={this.props.width}
         height={this.props.height}
+        onCenter={onCenter}
         onMoveend={() => this.handleMoveend(this.mapRef)}
-        center={center}
         mandataires={this.props.mandataires}
         openModal={this.props.openModal}
-        filteredMesures={this.props.filteredMesures}
+        filteredMandataires={this.props.filteredMandataires}
         mesureCount={this.props.mesureCount}
         updateFilters={this.props.updateFilters}
         zoomCodePostal={this.zoomCodePostal}
@@ -208,7 +241,9 @@ class Mapstry extends React.Component {
         updateValue={this.props.updateValue}
         mandataireCount={this.props.mandataireCount}
         value={this.props.value}
-        updateTimer={this.props.updateTimer}
+        updateFilterMandataire={this.updateFilterMandataire}
+        currentMandataireSelected={this.state.currentMandataireSelected}
+        updateIsMandataireClick={this.updateIsMandataireClick}
       />
     );
   }
