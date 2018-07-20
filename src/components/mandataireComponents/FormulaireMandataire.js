@@ -14,6 +14,7 @@ const schema = {
   properties: {
     nom: { type: "string", title: "Nom", default: "" },
     prenom: { type: "string", title: "Prénom", default: "" },
+    genre: { type: "string", title: "Genre", enum: ["Femme", "Homme"] },
     telephone: { type: "string", title: "Téléphone", default: "" },
     telephone_portable: {
       type: "string",
@@ -56,8 +57,12 @@ const uiSchema = {
   nom: {
     "ui:placeholder": "Nom"
   },
+
   prenom: {
     "ui:placeholder": "Prénom"
+  },
+  genre: {
+    "ui:placeholder": "Genre"
   },
   telephone: {
     "ui:placeholder": "Téléphone"
@@ -130,6 +135,8 @@ const FormulaireMandataireView = ({
               <br />
               <div data-cy="fiche-manda-nom-prenom">
                 {formData.prenom} {formData.nom}
+                <br />
+                {formData.genre}
               </div>
               <br />
               <div data-cy="fiche-manda-email">{formData.email}</div>
@@ -182,7 +189,7 @@ const FormulaireMandataireView = ({
                   <div>
                     <b>Tribunaux d'instance où je suis agréé </b>
                     <br />
-                      <AddTisToFormulaireMandataire tis={tis} updateTi={updateTi} />
+                    <AddTisToFormulaireMandataire tis={tis} updateTi={updateTi} />
                   </div>
                   {tisByMandataire.map(tiByMandataire => (
                     <div key={tiByMandataire.id}>
@@ -269,6 +276,7 @@ class FormulaireMandataire extends React.Component {
       body: JSON.stringify({
         nom: formData.nom || "",
         prenom: formData.prenom || "",
+        genre: formData.genre || "",
         telephone: formData.telephone || "",
         telephone_portable: formData.telephone_portable || "",
         email: formData.email || "",
