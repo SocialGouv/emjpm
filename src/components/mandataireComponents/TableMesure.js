@@ -42,7 +42,7 @@ export const TableMesureView = ({ rows, display, display_ext, updateMesureEteint
         <thead>
           <Tr>
             <Td>
-              <ColStyle> Date d'ordonnance </ColStyle>
+              <ColStyle> Date de décision </ColStyle>
             </Td>
             <Td>
               <ColStyle> Résidence du majeur </ColStyle>

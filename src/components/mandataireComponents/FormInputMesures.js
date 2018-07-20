@@ -72,7 +72,7 @@ const schema = {
 const uiSchema = {
   ouverture: {
     "ui:autofocus": true,
-    "ui:title": "Ouverture de la mesure",
+    "ui:title": "Date de décision",
     "ui:widget": "date",
     classNames: "input_mesure_ouverture",
     "ui:options": {
