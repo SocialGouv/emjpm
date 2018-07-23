@@ -95,7 +95,6 @@ router.get("/", function(req, res, next) {
 //   });
 // });
 
-
 // router.get("/email", function(req, res, next) {
 //   res.mailer.send(
 //     "email",
