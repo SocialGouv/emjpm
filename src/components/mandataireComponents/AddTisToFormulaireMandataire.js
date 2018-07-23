@@ -3,6 +3,7 @@ import ReactAutocomplete from "react-autocomplete";
 import * as React from "react";
 
 import apiFetch from "../communComponents/Api";
+import { CheckCircle, XCircle } from "react-feather";
 
 const ModalPres = styled.div`
   padding: 15px;
@@ -17,11 +18,39 @@ const CancelButton = styled.button`
   margin-left: 20px;
 `;
 
+const Alert = ({ className, Icon, message }) =>
+  (message && (
+    <div
+      className={`alert ${className || ""}`}
+      role="alert"
+      style={{ marginTop: 20, marginLeft: 20, fontSize: "1.2em" }}
+    >
+      <Icon
+        style={{
+          verticalAlign: "middle",
+          marginRight: 10
+        }}
+      />{" "}
+      {message}
+    </div>
+  )) ||
+  null;
+
+const ErrorBox = ({ message }) => (
+  <Alert className="alert-danger" Icon={XCircle} message={message} />
+);
+
+const SucessBox = ({ message }) => (
+  <Alert className="alert-success" Icon={CheckCircle} message={message} />
+);
+
 class AddTisToFormulaireMandataire extends React.Component {
   state = {
     etablissement: "",
     etablissementId: "",
-    showForm: false
+    showForm: false,
+    error: null,
+    success: null
   };
 
   toggleFormVisibility = () => {
@@ -44,7 +73,18 @@ class AddTisToFormulaireMandataire extends React.Component {
       body: JSON.stringify({
         ti_id: tiId
       })
-    }).then(tis => this.props.updateTi(tis));
+    }).then(tis => {
+      this.setState(
+        {
+          status: "success",
+          error: null,
+          success: " Le TI a été rajouté"
+        },
+        () => {
+          this.props.updateTi(tis);
+        }
+      );
+    });
   };
 
   render() {
@@ -99,10 +139,13 @@ class AddTisToFormulaireMandataire extends React.Component {
                   (status === "success" && "Valider") ||
                   "Valider"}
               </button>
+
               <CancelButton onClick={this.toggleFormVisibility} className="btn btn-dark">
                 Annuler
               </CancelButton>
             </div>
+            {this.state.error && <ErrorBox message={this.state.error} />}
+            {this.state.success && <SucessBox message={this.state.success} />}
           </ModalPres>
         </div>
       </div>
