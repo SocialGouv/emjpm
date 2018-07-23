@@ -17,6 +17,7 @@ router.get("/1", loginRequired, async (req, res, next) => {
     .catch(error => next(error));
 });
 
+
 // met à jour les données d'un mandataire
 router.put("/1", loginRequired, async (req, res, next) => {
   const mandataire = await queries.getMandataireByUserId(req.user.id);

@@ -175,6 +175,36 @@ function getAllMesuresByPopUp(ti_id) {
     .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
 }
 
+function getAllMesuresByPopUpForFilters(ti_id, type) {
+  return knex
+    .from("mesures")
+    .select(
+      knex.raw(
+        "COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id)"
+      ),
+      "mesures.code_postal",
+      "v1.latitude",
+      "v1.longitude"
+    )
+    .innerJoin(
+      "geolocalisation_code_postal as v1",
+      "mesures.code_postal",
+      "v1.code_postal"
+    )
+    .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
+    .innerJoin(
+      "mandataire_tis",
+      "mandataire_tis.mandataire_id",
+      "mandataires.id"
+    )
+    .where({
+      "mandataire_tis.ti_id": parseInt(ti_id),
+      status: "Mesure en cours",
+      "mandataires.type": type
+    })
+    .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
+}
+
 function getAllMesuresByMandatairesForMaps(mandataireID) {
   return knex("mesures")
     .select(
@@ -516,5 +546,6 @@ module.exports = {
   getAllServicesByTis,
   getAllMesuresByPopUpForMandataire,
   getAllMesuresByMandatairesForMaps,
+  getAllMesuresByPopUpForFilters,
   getMandataires
 };
