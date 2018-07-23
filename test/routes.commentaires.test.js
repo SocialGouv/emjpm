@@ -67,7 +67,7 @@ describe("routes : commentaires", () => {
         .send({
           comment: "this is a super comment"
         })
-        .then(function(res) {
+        .then(res => {
           res.redirects.length.should.eql(0);
           res.status.should.eql(200);
           res.type.should.eql("application/json");

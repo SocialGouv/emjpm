@@ -416,30 +416,30 @@ function deleteMandataireEtablissement(showID) {
 }
 
 function deleteMandataireTis(tiId, mandataireId) {
-  return knex("mandatairetis")
+  return knex("mandataire_tis")
     .where({ ti_id: parseInt(tiId), mandataire_id: parseInt(mandataireId) })
     .first()
     .del();
 }
 
 function getAllAntennes(mandataireId) {
-  return knex("service-antennes").where({
+  return knex("service_antennes").where({
     mandataire_id: parseInt(mandataireId)
   });
 }
 
 function addAntenne(mandataireId) {
-  return knex("service-antennes").insert(mandataireId);
+  return knex("service_antennes").insert(mandataireId);
 }
 
 function updateAntenne(mesureID, updates) {
-  return knex("service-antennes")
+  return knex("service_antennes")
     .where("id", parseInt(mesureID))
     .update(updates);
 }
 
 function deleteAntenne(where) {
-  return knex("service-antennes")
+  return knex("service_antennes")
     .where(where)
     .del();
 }
