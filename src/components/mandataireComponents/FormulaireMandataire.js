@@ -124,13 +124,6 @@ const FormulaireMandataireView = ({
                 {formData.prenom} {formData.nom}
               </b>
               <br />
-              {currentMandataireModalTry.type === "Prepose" && (
-                <CreationEtablissement
-                  updateEtablissement={updateEtablissement}
-                  etablissements={etablissement}
-                />
-              )}
-              <br />
               <b>Contact</b>
               <br />
               <div data-cy="fiche-manda-nom-prenom">
@@ -138,27 +131,19 @@ const FormulaireMandataireView = ({
                 <br />
                 {formData.genre}
               </div>
-              <br />
               <div data-cy="fiche-manda-email">{formData.email}</div>
-              <br />
               <div data-cy="fiche-manda-telephone">{formData.telephone}</div>
-              <br />
               <div data-cy="fiche-manda-telephone-portable">{formData.telephone_portable}</div>
-              <br />
               <br />
               <b> Adresse</b>
               <br />
               <div data-cy="fiche-manda-adresse">{formData.adresse}</div>
-              <br />
               <div data-cy="fiche-manda-code-postal">{formData.code_postal} </div>
-              <br />
               <div data-cy="fiche-manda-ville">{formData.ville}</div>
-              <br />
               <br />
               <b> Nombre de mesures souhaitées</b>
               <br />
               <div data-cy="fiche-manda-dispo-max">{formData.dispo_max}</div>
-              <br />
               <br />
               <b> Secrétariat</b>
               <br />
@@ -172,6 +157,13 @@ const FormulaireMandataireView = ({
                     <div>
                       <b>Etablissement(s) </b>
                       <br />
+                      {currentMandataireModalTry.type === "Prepose" && (
+                        <CreationEtablissement
+                          updateEtablissement={updateEtablissement}
+                          etablissements={etablissement}
+                        />
+                      )}
+                      <br />
                     </div>
                     {mandataireEtablissement.map(etablissement => (
                       <div>
@@ -184,6 +176,7 @@ const FormulaireMandataireView = ({
                     ))}
                   </React.Fragment>
                 )}
+              <br />
               {tisByMandataire && (
                 <React.Fragment>
                   <div>
