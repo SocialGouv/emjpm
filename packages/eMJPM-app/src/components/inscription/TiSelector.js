@@ -1,35 +1,64 @@
-import fetch from "isomorphic-fetch";
-import Form from "react-jsonschema-form";
-import styled from "styled-components";
-import apiFetch from "../communComponents/Api";
-import RowModal from "../communComponents/RowModal";
-import SearchButton from "../communComponents/SearchButton";
-import RegionModel from "./RegionModel";
+import TiByRegion from "./TiByRegion";
+
+const groupByRegion = arr =>
+  arr.reduce(function(acc, obj) {
+    const cle = obj.region;
+    if (!acc[cle]) {
+      acc[cle] = [];
+    }
+    acc[cle].push(obj);
+    return acc;
+  }, {});
 
 class TiSelector extends React.Component {
   state = {
-    tiSelected: []
+    selected: []
+  };
+
+  onTiSelected = (tiId, checked) => {
+    this.setState(
+      state => {
+        if (checked && state.selected.indexOf(tiId) === -1) {
+          return {
+            selected: [...state.selected, tiId]
+          };
+        }
+        if (!checked && state.selected.indexOf(tiId) > -1) {
+          const ids = [...state.selected];
+          ids.splice(ids.indexOf(tiId), 1);
+          return {
+            selected: ids
+          };
+        }
+      },
+      () => {
+        this.props.onChange(this.state.selected);
+      }
+    );
   };
 
   render() {
+    const tisByRegion = groupByRegion(this.props.tis);
     return (
       <div>
-        <h2 style={{ margin: 20 }}>Choisissez la / les région(s) de votre activité :</h2>
+        <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: 20 }}>
+          Choisissez les tribunaux d&apos;instances dans vos régions :
+        </div>
         <div
           style={{
             listStyleType: "none",
             margin: 20,
             width: "100%",
-            marginTop: "20px",
-            marginBottom: "20px",
-            fontSize: 14
+            fontSize: "1.1em"
           }}
         >
-          {this.props.regions &&
-            this.props.regions.map(region => (
-              <RegionModel
-                tis={this.props.tis.filter(tis => region.id === tis.id_region)}
-                nom={region.nom}
+          {this.props.tis &&
+            Object.keys(tisByRegion).map(region => (
+              <TiByRegion
+                tis={tisByRegion[region]}
+                nom={region}
+                key={region}
+                onTiSelected={this.onTiSelected}
               />
             ))}
         </div>
