@@ -73,7 +73,7 @@ class CreationEtablissement extends React.Component {
                   item.ville.toLowerCase().indexOf(value.toLowerCase()) > -1 &&
                   item.id_finess.toLowerCase().indexOf(value.toLowerCase()) > -1
                 }
-                getItemValue={item => item.nom || item.id_finess || item.ville}
+                getItemValue={item => item.nom || item.ville || item.id_finess}
                 renderItem={(item, highlighted) => (
                   <div
                     key={item.id}
