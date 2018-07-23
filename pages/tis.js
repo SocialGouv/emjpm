@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import Router from "next/router";
+import queryString from "query-string";
 
 import Navigation from "../src/components/communComponents/Navigation";
 import RowModal from "../src/components/communComponents/RowModal";
@@ -73,12 +74,12 @@ const stringMatch = (str, needle) => str.toLowerCase().indexOf(needle.toLowerCas
 
 const filterMandataires = (mandataires, filters) => {
   if (!mandataires.length) {
-      mandataires = [].concat(mandataires)
+    mandataires = [].concat(mandataires);
   }
-    let filteredMandataires = mandataires.filter(mandataire => {
-      return stringMatch(mandataire.type, filters.searchType);
-    });
-    return filteredMandataires.sort(sortMandataires);
+  let filteredMandataires = mandataires.filter(mandataire => {
+    return stringMatch(mandataire.type, filters.searchType);
+  });
+  return filteredMandataires.sort(sortMandataires);
 };
 
 const filterMesures = (mesures, filters) => {
@@ -145,7 +146,7 @@ export const FicheMandataire = ({
       <div className="col-6">
         <TitleMandataire>{mandataire.etablissement}</TitleMandataire>
         <div>{mandataire.type.toUpperCase()}</div>
-          <div>{mandataire.genre}</div>
+        <div>{mandataire.genre}</div>
         <RowModal value={mandataire.adresse} />
         <div>
           {mandataire.code_postal} {mandataire.ville.toUpperCase()}
@@ -273,6 +274,21 @@ class Ti extends React.Component<Props, State> {
     );
   };
 
+  changeTypeOfMandatairesFilters = (filters) => {
+    const stringified = queryString.stringify(filters);
+    console.log(stringified)
+
+      apiFetch(`/mesures/popupWithFilters?${stringified}`)
+      .then(mesures => {
+        this.setState({
+          datamesure: mesures
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
@@ -286,12 +302,11 @@ class Ti extends React.Component<Props, State> {
   };
 
   updateMandataireFilters = mandataires => {
-    console.log("manda", mandataires);
     this.setState({ manda: mandataires });
   };
 
   updateFilters = filters => {
-    this.setState(filters);
+      this.setState(filters, () => this.changeTypeOfMandatairesFilters(filters));
   };
   updateValue = value => {
     this.setState({ value: value });
