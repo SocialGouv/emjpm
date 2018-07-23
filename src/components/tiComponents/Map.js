@@ -182,9 +182,9 @@ class Mapstry extends React.Component {
 
   updateIsMesureClick = () => {
     this.setState(
-      () => ({
+      {
         currentMesureSelected: ""
-      }),
+      },
       () => this.handleMoveend()
     );
   };
@@ -195,14 +195,16 @@ class Mapstry extends React.Component {
         .map(mandataireId =>
           this.props.mandataires.find(mandataire => mandataire.id === mandataireId)
         )
-        .filter(Boolean);
+        .filter(Boolean)
+        .concat(services);
+
       this.setState(
-        () => ({
-          showMandataireOfOneMesure: selectedMandataires.concat(services),
+        {
+          showMandataireOfOneMesure: selectedMandataires,
           currentMesureSelected: mesure
-        }),
+        },
         () => {
-          this.props.updateMandataireMesures(selectedMandataires.concat(services));
+          this.props.updateMandataireMesures(selectedMandataires);
         }
       );
     });
