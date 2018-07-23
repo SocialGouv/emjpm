@@ -276,8 +276,6 @@ class Ti extends React.Component<Props, State> {
 
   changeTypeOfMandatairesFilters = filters => {
     const stringified = queryString.stringify(filters);
-    console.log(stringified);
-
     apiFetch(`/mesures/popupWithFilters?${stringified}`)
       .then(mesures => {
         this.setState({
