@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { CheckCircle, XCircle } from "react-feather";
 
 const schema = {
-  title: "Ouvrir une nouvelle mesure",
   type: "object",
   required: ["code_postal", "commune", "civilite", "annee", "ouverture"],
   properties: {
