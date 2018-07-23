@@ -73,9 +73,6 @@ const stringMatch = (str, needle) => str.toLowerCase().indexOf(needle.toLowerCas
 // filter and sort list of mandataires
 
 const filterMandataires = (mandataires, filters) => {
-  if (!mandataires.length) {
-    mandataires = [].concat(mandataires);
-  }
   let filteredMandataires = mandataires.filter(mandataire => {
     return stringMatch(mandataire.type, filters.searchType);
   });
@@ -347,7 +344,7 @@ class Ti extends React.Component<Props, State> {
       searchVille: this.state.searchVille
     });
     const mesureCount = this.state.mandaMesures.length;
-    const mandataireCount = filteredMandataires.length ? filteredMandataires.length : 1;
+    const mandataireCount = filteredMandataires.length;
     return (
       <TiView
         mesures={this.state.datamesure}

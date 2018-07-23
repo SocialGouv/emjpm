@@ -198,7 +198,7 @@ class Mapstry extends React.Component {
         currentMandataireSelected: mandataire
       }),
       () => {
-        this.props.updateMandataireFilters(mandataire);
+        this.props.updateMandataireFilters([mandataire]);
       }
     );
   };
