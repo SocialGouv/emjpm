@@ -1,17 +1,6 @@
-import fetch from "isomorphic-fetch";
-import Form, { validateJsonSchema, mergeErrorSchema } from "react-jsonschema-form";
-import styled from "styled-components";
-import apiFetch from "../communComponents/Api";
-import RowModal from "../communComponents/RowModal";
-import SearchButton from "../communComponents/SearchButton";
-import piwik from "../../piwik";
+import FormMandataire from "./FormMandataire";
+import uiSchema from "./uiSchema.json";
 
-function validate(formData, errors) {
-  if (formData.pass1 !== formData.pass2) {
-    errors.pass2.addError("Mot de passe incorrect");
-  }
-  return errors;
-}
 const schema = {
   type: "object",
   required: [
@@ -24,8 +13,8 @@ const schema = {
     "telephone",
     "email",
     "adresse",
-    "ville",
-    "code_postal"
+    "code_postal",
+    "ville"
   ],
   properties: {
     username: {
@@ -41,111 +30,21 @@ const schema = {
     telephone: { type: "string", title: "Téléphone du contact dans le service", default: "" },
     email: { type: "string", title: "Adresse email du contact dans le service", default: "" },
     adresse: { type: "string", title: "Rue", default: "" },
-    ville: { type: "string", title: "Commune", default: "" },
-    code_postal: { type: "string", title: "Code Postal", default: "" }
+    code_postal: { type: "string", title: "Code Postal", default: "" },
+    ville: { type: "string", title: "Commune", default: "" }
   }
 };
 
-const uiSchema = {
-  pass1: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "10 caratères minimum",
-    "ui:widget": "password"
-  },
-  pass2: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "10 caratères minimum",
-    "ui:widget": "password"
-  },
-  username: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "Identifiant"
-  },
-  nom: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "Nom"
-  },
-  prenom: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "Prénom"
-  },
-  telephone: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "Téléphone"
-  },
-  email: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "Adresse email"
-  },
-  adresse: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "Rue"
-  },
-  code_postal: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "Code Postal"
-  },
+const serviceUiSchema = {
+  ...uiSchema,
   etablissement: {
     classNames: "I_input_form_inscription",
     "ui:placeholder": "Nom du service"
-  },
-  ville: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "Commune"
   }
 };
 
-const formData = {};
-
-class InscriptionService extends React.Component {
-  /*onSubmit = ({ formData }) => {
-
-     apiFetch(`/mandataires/1`, {
-      method: "PUT",
-      body: JSON.stringify({
-      username:
-      pass1:
-      pass2:
-      etablissement:
-      nom:
-      prenom:
-      telephone:
-      telephone_portable:
-      email:
-      adresse:
-      code_postal:
-      ville:
-
-      })
-    }).then(json => {
-     //piwik
-     // this.props.updateMadataire(json);
-    });
-  };*/
-
-  render() {
-    return (
-      <div>
-        <h2 style={{ margin: "0px 20px 20px 20px" }}>
-          Veuillez renseigner ci-dessous vos informations professionelles:
-        </h2>
-        <br />
-        <b>
-          <Form
-            schema={schema}
-            formData={formData}
-            uiSchema={uiSchema}
-            validate={validate}
-            showErrorList={false}
-          >
-            <div style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}>
-              <SearchButton type="submit">Enregistrer</SearchButton>
-            </div>
-          </Form>
-        </b>
-      </div>
-    );
-  }
-}
+const InscriptionService = props => (
+  <FormMandataire schema={schema} uiSchema={serviceUiSchema} {...props} />
+);
 
 export default InscriptionService;

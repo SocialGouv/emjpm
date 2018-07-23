@@ -1,109 +1,116 @@
-import { Home, Map, User, UserMinus } from "react-feather";
 import InscriptionIndividuel from "./InscriptionIndividuel";
 import InscriptionPrepose from "./InscriptionPrepose";
 import InscriptionService from "./InscriptionService";
 import TiSelector from "./TiSelector";
+import Resolve from "../Resolve";
+import apiFetch from "../communComponents/Api";
+import Router from "next/router";
 
-const regions = [
-  { id: 1, nom: "Auvergne-Rhône-Alpes" },
-  { id: 2, nom: "Bourgogne-Franche-Comté" },
-  { id: 3, nom: "Bretagne" }
-];
+const formsMandataires = {
+  individuel: props => <InscriptionIndividuel style={{ width: "80%" }} {...props} />,
+  preposes: props => <InscriptionPrepose style={{ width: "80%" }} {...props} />,
+  service: props => <InscriptionService style={{ width: "80%" }} {...props} />
+};
 
-const tis_exemple = [
-  { id: 1, nom: "ti 1", id_region: 1 },
-  { id: 2, nom: "ti 2", id_region: 1 },
-  { id: 3, nom: "ti 3", id_region: 1 },
-  { id: 4, nom: "ti 4", id_region: 2 },
-  { id: 5, nom: "ti 5", id_region: 2 },
-  { id: 6, nom: "ti 6", id_region: 3 },
-  { id: 7, nom: "ti 7", id_region: 3 },
-  { id: 8, nom: "ti 8", id_region: 3 }
-];
+const FormSelector = ({ label, value, onChange }) => (
+  <td>
+    <label>
+      <input
+        style={{ marginRight: 5 }}
+        type="radio"
+        name="form_selector"
+        value={value}
+        onChange={onChange}
+      />
+      {label || value}
+    </label>
+  </td>
+);
+
+const getTis = () =>
+  apiFetch("/inscription/tis", null, {
+    forceLogin: false
+  });
 
 class Form extends React.Component {
   state = {
-    form: null
+    typeMandataire: null,
+    tis: [],
+    formData: {},
+    status: "idle"
   };
 
-  getForm = () => {
-    if (this.state.form === "Individuel") {
-      return <InscriptionIndividuel style={{ width: "80%" }} />;
-    } else if (this.state.form === "Prepose") {
-      return <InscriptionPrepose style={{ width: "80%" }} />;
-    } else if (this.state.form === "Service") {
-      return <InscriptionService style={{ width: "80%" }} />;
-    }
+  setTypeMandataire = e => {
+    this.setState({ typeMandataire: e.target.value });
   };
-
-  setForm = e => {
-    this.setState({ form: e.target.value });
+  setTis = tis => {
+    this.setState({ tis });
+  };
+  onSubmit = ({ formData }) => {
+    this.setState({ status: "loading", formData }, () => {
+      apiFetch(`/inscription/mandataires`, {
+        method: "POST",
+        body: JSON.stringify({
+          ...formData,
+          tis: this.state.tis,
+          type: this.state.typeMandataire
+        })
+      })
+        .then(() => {
+          // piwik.push(["trackEvent", "Inscription success", formData.type]);
+          Router.push("/inscription-done");
+        })
+        .catch(() => {
+          // piwik.push(["trackEvent", "Inscription error", formData.type]);
+          this.setState({ status: "error" });
+        });
+    });
   };
 
   render() {
-    const form = this.getForm();
-
+    const FormMandataire = formsMandataires[this.state.typeMandataire];
     return (
       <div className="container">
         <div className="col-12 offset-sm-2 col-sm-8 offset-md-2 col-md-8">
           <h1 style={{ margin: 20 }}>Inscription</h1>
           <div style={{ backgroundColor: "white", padding: 5 }}>
-            <TiSelector tis={tis_exemple} regions={regions} />
-
-            <form>
-              <div>
-                <h2 style={{ margin: 15 }}>Vous êtes un mandataire :</h2>
-                <table
-                  style={{
-                    margin: 20,
-                    width: "100%",
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                    fontSize: 14
-                  }}
-                >
-                  <tr>
-                    <td>
-                      <label>
-                        <input
-                          style={{ marginRight: 5 }}
-                          type="radio"
-                          name="form_selector"
-                          value="Individuel"
-                          onChange={this.setForm}
-                        />
-                        Individuel
-                      </label>
-                    </td>
-                    <td>
-                      <label>
-                        <input
-                          style={{ marginRight: 5 }}
-                          type="radio"
-                          name="form_selector"
-                          value="Prepose"
-                          onChange={this.setForm}
-                        />
-                        Préposé
-                      </label>
-                    </td>
-                    <td>
-                      <label>
-                        <input
-                          style={{ marginRight: 5 }}
-                          type="radio"
-                          name="form_selector"
-                          value="Service"
-                          onChange={this.setForm}
-                        />
-                        Service
-                      </label>
-                    </td>
-                  </tr>
-                </table>
-                {form}
+            <Resolve
+              promises={[getTis()]}
+              render={({ status, result }) => (
+                <div>
+                  {status === "success" && <TiSelector onChange={this.setTis} tis={result[0]} />}
+                  {status === "error" && <div>Impossible de charger la liste des Tribunaux</div>}
+                </div>
+              )}
+            />
+            <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: 20 }}>
+              Vous êtes un mandataire :
+            </div>
+            <table
+              style={{
+                margin: 20,
+                width: "100%",
+                marginTop: 20,
+                marginBottom: 20,
+                fontSize: "1.1em"
+              }}
+            >
+              <tbody>
+                <tr>
+                  <FormSelector value="individuel" onChange={this.setTypeMandataire} />
+                  <FormSelector value="prepose" label="Préposé" onChange={this.setTypeMandataire} />
+                  <FormSelector value="service" onChange={this.setTypeMandataire} />
+                </tr>
+              </tbody>
+            </table>
+            {FormMandataire && (
+              <FormMandataire onSubmit={this.onSubmit} formData={this.state.formData} />
+            )}
+            {this.state.status === "error" && (
+              <div style={{ textAlign: "center", color: "red", fontSize: "1.1em" }}>
+                Erreur; Votre compte n&apos;a pas pû être crée :/
               </div>
-            </form>
+            )}
           </div>
         </div>
       </div>

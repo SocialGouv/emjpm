@@ -3,7 +3,7 @@ import fetch from "isomorphic-fetch";
 
 const API_URL = process.env.API_URL;
 
-const apiFetch = (route, params) =>
+const apiFetch = (route, params, options = { forceLogin: true }) =>
   fetch(`${API_URL}/api/v1${route}`, {
     method: "GET",
     credentials: "include",
@@ -14,9 +14,12 @@ const apiFetch = (route, params) =>
   })
     .then(res => {
       // intercept
-      if (res.status === 401) {
+      if (options.forceLogin && res.status === 401) {
         Router.push("/login");
         return;
+      }
+      if (res.status === 404) {
+        throw new Error(404);
       }
       return res;
     })
