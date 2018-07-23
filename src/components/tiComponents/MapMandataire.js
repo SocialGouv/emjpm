@@ -185,21 +185,19 @@ class Mapstry extends React.Component {
 
   updateIsMandataireClick = () => {
     this.setState(
-      () => ({
+      {
         currentMandataireSelected: ""
-      }),
+      },
       () => this.handleMoveend()
     );
   };
 
   updateFilterMandataire = mandataire => {
     this.setState(
-      () => ({
+      {
         currentMandataireSelected: mandataire
-      }),
-      () => {
-        this.props.updateMandataireFilters([mandataire]);
-      }
+      },
+      () => this.props.updateMandataireFilters([mandataire])
     );
   };
 
