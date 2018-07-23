@@ -108,14 +108,14 @@ class MesureInput extends React.Component {
       },
       () => {
         // TODO: use server-side data
-        getPostCodeCoordinates(formData.codePostal)
+        getPostCodeCoordinates(formData.code_postal)
           .then(coordinates => {
             return apiFetch(`/mandataires/1/mesures`, {
               method: "POST",
               body: JSON.stringify({
-                code_postal: formData.codePostal,
+                code_postal: formData.code_postal,
                 ville: formData.commune,
-                etablissement_id: this.state.valueId,
+                etablissement_id: this.state.valueId || null,
                 latitude: coordinates.features[0].geometry.coordinates[1],
                 longitude: coordinates.features[0].geometry.coordinates[0],
                 annee: formData.annee,
