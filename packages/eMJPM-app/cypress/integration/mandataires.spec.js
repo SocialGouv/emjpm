@@ -27,10 +27,11 @@ describe("Mandataires", function() {
 
           cy.get(".form-group #root_type").select("Sauvegarde de justice");
           // cy.get(".form-group #root_residence").select("A domicile");
-          cy.get(".form-group #root_codePostal").type("93200");
+          cy.get(".form-group #root_code_postal").type("93200");
           cy.get(".form-group #root_commune").type("Saint-Denis");
           cy.get(".form-group #root_civilite").select("F");
           cy.get(".form-group #root_annee").type("1977");
+          cy.get("[data-cy=radio-domicile]").click();
 
           cy.get("button[type='submit'].btn-success").click();
 
