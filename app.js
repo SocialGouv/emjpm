@@ -65,7 +65,6 @@ if (process.env.NODE_ENV === "production") {
   );
 }
 
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/api/v1", routes);
