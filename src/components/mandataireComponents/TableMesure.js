@@ -79,7 +79,10 @@ export const TableMesureView = ({ rows, display, display_ext, updateMesureEteint
         </tbody>
       </table>
     ) : (
-      <div style={{ textAlign: "center", paddingTop: "35vh",display: display_ext }}> vous n'avez pas de mesures éteintes </div>
+      <div style={{ textAlign: "center", paddingTop: "35vh", display: display_ext }}>
+        {" "}
+        vous n'avez pas de mesures éteintes{" "}
+      </div>
     )}
   </LineContainer>
 );

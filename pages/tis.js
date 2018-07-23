@@ -274,11 +274,11 @@ class Ti extends React.Component<Props, State> {
     );
   };
 
-  changeTypeOfMandatairesFilters = (filters) => {
+  changeTypeOfMandatairesFilters = filters => {
     const stringified = queryString.stringify(filters);
-    console.log(stringified)
+    console.log(stringified);
 
-      apiFetch(`/mesures/popupWithFilters?${stringified}`)
+    apiFetch(`/mesures/popupWithFilters?${stringified}`)
       .then(mesures => {
         this.setState({
           datamesure: mesures
@@ -306,7 +306,7 @@ class Ti extends React.Component<Props, State> {
   };
 
   updateFilters = filters => {
-      this.setState(filters, () => this.changeTypeOfMandatairesFilters(filters));
+    this.setState(filters, () => this.changeTypeOfMandatairesFilters(filters));
   };
   updateValue = value => {
     this.setState({ value: value });
