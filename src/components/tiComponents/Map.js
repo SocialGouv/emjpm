@@ -5,6 +5,7 @@ import { Map, CircleMarker, TileLayer } from "react-leaflet";
 import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
 import FilterMesuresMap from "./FilterMesuresMap";
+import getCenter from "../communComponents/getCenter";
 
 const Title = styled.div`
   text-align: left;
@@ -243,11 +244,8 @@ class Mapstry extends React.Component {
   };
 
   render() {
-    const onCenter = this.state.center.lat
-      ? [this.state.center.lat, this.state.center.lng]
-      : this.props.postcodeMandataire[1]
-        ? [this.props.postcodeMandataire[1], this.props.postcodeMandataire[0]]
-        : [50.459441, 2.693963];
+    const center = getCenter(this.state.center, this.props.postcodeMandataire);
+
     return (
       <MapsView
         innerRef={this.mapRef}
@@ -255,7 +253,7 @@ class Mapstry extends React.Component {
         width={this.props.width}
         height={this.props.height}
         onMoveend={() => this.handleMoveend(this.mapRef)}
-        onCenter={onCenter}
+        onCenter={center}
         mesures={this.props.mesures}
         openModal={this.props.openModal}
         filteredMesures={this.props.filteredMesures}
