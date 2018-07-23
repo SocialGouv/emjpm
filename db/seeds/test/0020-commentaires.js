@@ -18,6 +18,13 @@ exports.seed = function(knex, Promise) {
     })
     .then(function() {
       return knex("commentaires").insert({
+        comment: "Hello, mandataire_id=2,ti_id=2",
+        mandataire_id: 2,
+        ti_id: 2
+      });
+    })
+    .then(function() {
+      return knex("commentaires").insert({
         comment: "Hello, world 3",
         mandataire_id: 2,
         ti_id: 1

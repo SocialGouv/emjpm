@@ -281,9 +281,13 @@ function getAllCommentaires(mandataire_id, ti_id) {
 function addCommentaire(data) {
   return Commentaires().insert(data);
 }
-function deleteCommentaire(showID) {
+
+function deleteCommentaire({ id, ti_id }) {
   return Commentaires()
-    .where("id", parseInt(showID))
+    .where({
+      id: parseInt(id),
+      ti_id
+    })
     .del();
 }
 
@@ -416,7 +420,7 @@ function deleteMandataireEtablissement(showID) {
 }
 
 function deleteMandataireTis(tiId, mandataireId) {
-  return knex("mandatairetis")
+  return knex("mandataire_tis")
     .where({ ti_id: parseInt(tiId), mandataire_id: parseInt(mandataireId) })
     .first()
     .del();

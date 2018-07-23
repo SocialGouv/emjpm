@@ -94,13 +94,15 @@ if (app.get("env") === "development") {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  console.log(err);
-  res.status(err.status || 500).json({
-    //message: err.message,
-    error: {}
+if (process.env.NODE_ENV !== "test") {
+  app.use(function(err, req, res, next) {
+    console.log(err);
+    res.status(err.status || 500).json({
+      //    message: err.message,
+      error: {}
+    });
   });
-});
+}
 
 const port = process.env.PORT || 4000;
 

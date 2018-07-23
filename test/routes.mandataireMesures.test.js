@@ -49,7 +49,7 @@ describe("routes : mandataireMesures", () => {
             etablissement: "peu pas",
             latitude: 1,
             longitude: 1,
-            postDate: "2010-10-05",
+            created_at: "2010-10-05",
             annee: "2010-10-05",
             type: "preposes",
             date_ouverture: "2010-10-05",
