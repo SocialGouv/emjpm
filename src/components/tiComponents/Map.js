@@ -192,7 +192,7 @@ class Mapstry extends React.Component {
 
   updateFilterMandataire = mesure => {
     apiFetch("/mandataires/services").then(services => {
-      const selectedMandataires = mesure.array_agg
+      const selectedMandataires = mesure.mandataire_ids
         .map(mandataireId =>
           this.props.mandataires.find(mandataire => mandataire.id === mandataireId)
         )
