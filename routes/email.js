@@ -41,4 +41,19 @@ router.get("/relance-mandataires-inactifs", function(req, res, next) {
     });
 });
 
+router.get("/test", function(req, res, next) {
+  sendEmail(
+    "contact@emjpm.beta.gouv.fr",
+    "e-MJPM : test",
+    "Bonjour !",
+    "Bonjour !"
+  )
+    .then(() => {
+      res.json({ success: true });
+    })
+    .catch(e => {
+      res.json({ success: false, error: e });
+    });
+});
+
 module.exports = router;
