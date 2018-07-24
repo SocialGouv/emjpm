@@ -152,7 +152,7 @@ function getAllMesuresByPopUp(ti_id, type) {
     .from("mesures")
     .select(
       knex.raw(
-        "COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id),array_agg(distinct mandataires.type) as type"
+        "COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id) as mandataire_ids,array_agg(distinct mandataires.type) as types"
       ),
       "mesures.code_postal",
       "v1.latitude",
