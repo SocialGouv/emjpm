@@ -125,7 +125,7 @@ const MandataireIndexView = ({
   currentMandataire,
   filteredMesures,
   updateMadataire,
-  updateMesureEteinte,
+  updateMesure,
   mesureEteinte,
   mesuresForMapsMandataire
 }) => (
@@ -175,7 +175,7 @@ const MandataireIndexView = ({
         <TableMesure
           display_ext={"none"}
           rows={filteredMesures}
-          updateMesureEteinte={updateMesureEteinte}
+          updateMesure={updateMesure}
         />
       </TabPanel>
       <TabPanel>
@@ -192,7 +192,7 @@ const MandataireIndexView = ({
         <TableMesure
           display={"none"}
           rows={mesureEteinte}
-          updateMesureEteinte={updateMesureEteinte}
+          updateMesure={updateMesure}
         />
       </TabPanel>
       <TabPanel>
@@ -267,7 +267,7 @@ class MandatairesIndex extends React.Component {
       });
   };
 
-  updateMesureEteinte = () => {
+  updateMesure = () => {
     this.onUpdate();
   };
 
@@ -282,10 +282,9 @@ class MandatairesIndex extends React.Component {
       <MandataireIndexView
         currentMandataire={this.state.currentMandataire}
         filteredMesures={filteredMesures}
-        updateMesure={this.update_mesure}
         updateMadataire={this.updateMadataire}
         mesureEteinte={this.state.mesureEteinte}
-        updateMesureEteinte={this.updateMesureEteinte}
+        updateMesure={this.updateMesure}
         mesuresForMapsMandataire={mesuresForMapsMandataire}
       />
     );

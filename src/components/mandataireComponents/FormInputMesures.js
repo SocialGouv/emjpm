@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { CheckCircle, XCircle } from "react-feather";
 
 const schema = {
-  title: "Ouvrir une nouvelle mesure",
   type: "object",
   required: ["code_postal", "commune", "civilite", "annee", "ouverture"],
   properties: {
@@ -14,7 +13,24 @@ const schema = {
     type: {
       type: "string",
       title: "Type de mesure",
-      enum: ["Tutelle", "Curatelle", "Sauvegarde de justice", "Mesure ad hoc", "MAJ"]
+      enum: [
+        "Tutelle",
+        "Curatelle",
+        "Sauvegarde de justice",
+        "Mesure ad hoc",
+        "MAJ",
+        "tutelle aux biens",
+        "tutelle à la personne",
+        "tutelle aux biens et à la personne",
+        "curatelle simple aux biens",
+        "curatelle simple à la personne",
+        "curatelle simple aux biens et à la personne",
+        "curatelle renforcée aux biens",
+        "curatelle renforcée à la personne",
+        "curatelle renforcée aux biens et à la personne",
+        "sauvegarde de justice",
+        "sauvegarde de justice avec mandat spécial"
+      ]
     },
     // residence: { type: "string", title: "Lieu de vie", enum: ["A domicile", "En établissement"] },
     code_postal: { type: "string", title: "Code Postal" },
@@ -55,7 +71,7 @@ const schema = {
 const uiSchema = {
   ouverture: {
     "ui:autofocus": true,
-    "ui:title": "Ouverture de la mesure",
+    "ui:title": "Date de décision",
     "ui:widget": "date",
     classNames: "input_mesure_ouverture",
     "ui:options": {

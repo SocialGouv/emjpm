@@ -32,17 +32,17 @@ const Td = ({ children }) => <TdStyle>{children}</TdStyle>;
 
 const ColStyle = styled.b`color: "black"};`;
 
-export const TableMesureView = ({ rows, display, display_ext, updateMesureEteinte }) => (
+export const TableMesureView = ({ rows, display, display_ext, updateMesure }) => (
   <LineContainer>
     <DisplayCreationMesure display={display}>
-      <CreationMesure updateMesure={updateMesureEteinte} />
+      <CreationMesure updateMesure={updateMesure} />
     </DisplayCreationMesure>
     {rows && rows.length ? (
       <table className="table">
         <thead>
           <Tr>
             <Td>
-              <ColStyle> Date d'ordonnance </ColStyle>
+              <ColStyle> Date de décision </ColStyle>
             </Td>
             <Td>
               <ColStyle> Résidence du majeur </ColStyle>
@@ -73,13 +73,16 @@ export const TableMesureView = ({ rows, display, display_ext, updateMesureEteint
                 display_ext={display_ext}
                 key={mesure.id}
                 mesure={mesure}
-                updateMesureEteinte={updateMesureEteinte}
+                updateMesure={updateMesure}
               />
             ))}
         </tbody>
       </table>
     ) : (
-      <div style={{ textAlign: "center", paddingTop: "35vh" }}> vous n'avez pas de mesures </div>
+      <div style={{ textAlign: "center", paddingTop: "35vh", display: display_ext }}>
+        {" "}
+        vous n'avez pas de mesures éteintes{" "}
+      </div>
     )}
   </LineContainer>
 );
@@ -106,7 +109,7 @@ class TableMesure extends React.Component {
         display={this.props.display}
         display_ext={this.props.display_ext}
         rows={this.props.rows}
-        updateMesureEteinte={this.props.updateMesureEteinte}
+        updateMesure={this.props.updateMesure}
       />
     );
   }
