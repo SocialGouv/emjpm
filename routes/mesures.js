@@ -51,7 +51,7 @@ router.get("/popup", loginRequired, async (req, res, next) => {
 });
 
 router.get(
-  "/popupWithFilters?:searchType",
+  "/popupWithFilters",
   loginRequired,
   async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);

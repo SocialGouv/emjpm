@@ -6,15 +6,12 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const session = require("express-session");
 const routes = require("./routes/index");
-const email = require("./email/index");
 const users = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const Knex = require("knex");
 const KnexSessionStore = require("connect-session-knex")(session);
 const mailer = require("express-mailer");
 const app = express();
-
-const nodemailer = require("nodemailer");
 
 process.on("unhandledRejection", r => console.log(r));
 
@@ -68,7 +65,6 @@ if (process.env.NODE_ENV === "production") {
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/api/v1", routes);
-app.use("/api/v1/email", email);
 app.use("/auth", authRoutes);
 app.use("/", users);
 
