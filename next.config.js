@@ -9,6 +9,7 @@ require("dotenv").config({
 const exportPathMap = () => ({
   "/": { page: "/" },
   "/login": { page: "/login" },
+  "/admin": { page: "/admin" },
   "/tis": { page: "/tis" },
   "/services": { page: "/services" },
   "/inscription": { page: "/inscription" },
