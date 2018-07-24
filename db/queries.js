@@ -39,12 +39,6 @@ function getAllServicesByTis(ti_id) {
     .where({ ti_id: parseInt(ti_id), type: "Service" })
     .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id");
 }
-// function getAllMesuresByPopUp(code_postal) {
-//     return knex
-//         .from("mesures")
-//         .where("code_postal", parseInt(code_postal))
-//         .innerJoin("mandataires", "mesures.mandataire_id", "mandataires.id");
-// }
 
 function getAllMesures(mandataireID) {
   return knex("mesures").where({
@@ -146,12 +140,19 @@ function getCoordonneByPosteCode(userId) {
     .first();
 }
 
-function getAllMesuresByPopUp(ti_id) {
+function getAllMesuresByPopUp(ti_id, type) {
+  const where = {
+    "mandataire_tis.ti_id": parseInt(ti_id),
+    status: "Mesure en cours"
+  };
+  if (type) {
+    where["mandataires.type"] = type;
+  }
   return knex
     .from("mesures")
     .select(
       knex.raw(
-        "COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id)"
+        "COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id),array_agg(distinct mandataires.type) as type"
       ),
       "mesures.code_postal",
       "v1.latitude",
@@ -168,40 +169,7 @@ function getAllMesuresByPopUp(ti_id) {
       "mandataire_tis.mandataire_id",
       "mandataires.id"
     )
-    .where({
-      "mandataire_tis.ti_id": parseInt(ti_id),
-      status: "Mesure en cours"
-    })
-    .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
-}
-
-function getAllMesuresByPopUpForFilters(ti_id, type) {
-  return knex
-    .from("mesures")
-    .select(
-      knex.raw(
-        "COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id)"
-      ),
-      "mesures.code_postal",
-      "v1.latitude",
-      "v1.longitude"
-    )
-    .innerJoin(
-      "geolocalisation_code_postal as v1",
-      "mesures.code_postal",
-      "v1.code_postal"
-    )
-    .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin(
-      "mandataire_tis",
-      "mandataire_tis.mandataire_id",
-      "mandataires.id"
-    )
-    .where({
-      "mandataire_tis.ti_id": parseInt(ti_id),
-      status: "Mesure en cours",
-      "mandataires.type": type
-    })
+    .where(where)
     .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
 }
 
@@ -546,6 +514,5 @@ module.exports = {
   getAllServicesByTis,
   getAllMesuresByPopUpForMandataire,
   getAllMesuresByMandatairesForMaps,
-  getAllMesuresByPopUpForFilters,
   getMandataires
 };

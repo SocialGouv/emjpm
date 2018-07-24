@@ -11,7 +11,7 @@ const isLate = mandataire =>
   format(addDays(new Date(mandataire.email_send), 15), "MM/DD/YYYY") <
     format(new Date(Date.now()), "MM/DD/YYYY");
 
-router.get("/emailMiseAJourMesures", function(req, res, next) {
+router.get("/relance-mandataires-inactifs", function(req, res, next) {
   queries
     .getAll()
     .then(mandataires =>
