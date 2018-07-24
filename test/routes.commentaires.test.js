@@ -22,10 +22,12 @@ describe("routes : commentaires", () => {
 
   afterEach(() => {
     passportStub.logout();
-    // return knex.migrate.rollback();
+    return knex.migrate.rollback();
   });
 
-  shouldBeProtected(server, "GET", "/api/v1/mandataires/1/commentaires");
+  shouldBeProtected(server, "GET", "/api/v1/mandataires/2/commentaires", {
+    type: "ti"
+  });
 
   describe("GET /api/v1/mandataires/1/commentaires", () => {
     it("should get list of commentaires for given mandataire", () =>
@@ -38,7 +40,7 @@ describe("routes : commentaires", () => {
           res.status.should.eql(200);
           res.type.should.eql("application/json");
           res.body.length.should.eql(1);
-          res.body[0].co_comment.should.eql("Hello, world 2");
+          res.body[0].comment.should.eql("Hello, world 2");
         })
       ));
     it("should NOT get list of commentaires for a mandataire not in my TI", () =>
@@ -46,43 +48,52 @@ describe("routes : commentaires", () => {
         username: "ti1",
         password: "ti1"
       }).then(agent =>
-        agent.get("/api/v1/mandataires/3/commentaires").then(res => {
+        agent.get("/api/v1/mandataires/1/commentaires").then(res => {
           res.redirects.length.should.eql(0);
           res.status.should.eql(200);
           res.type.should.eql("application/json");
-          res.body.length.should.eql(0);
+          res.body.length.should.eql(1);
         })
       ));
   });
 
   shouldBeProtected(server, "POST", "/api/v1/mandataires/1/commentaires");
 
-  it("should post commentaire for given mandataire", () =>
+  it("should post commentaire for given mandataire and return response", () =>
     logUser(server, {
       username: "ti1",
       password: "ti1"
     }).then(agent =>
-      agent
-        .post("/api/v1/mandataires/1/commentaires")
-        .send({
-          co_comment: "this is a super comment"
+      knex
+        .from("commentaires")
+        .where({
+          ti_id: 2,
+          mandataire_id: 2
         })
-        .then(function(res) {
-          res.redirects.length.should.eql(0);
-          res.status.should.eql(200);
-          res.type.should.eql("application/json");
-          res.body.length.should.eql(2);
-          res.body[1].co_comment.should.eql("this is a super comment");
-
-          return knex
-            .from("commentaires")
-            .where({
-              ti_id: 2,
-              mandataire_id: 1,
-              co_comment: "this is a super comment"
+        .then(commentaires => {
+          //console.log("commentaires.length", commentaires.length);
+          return agent
+            .post("/api/v1/mandataires/2/commentaires")
+            .send({
+              comment: "this is a super comment"
             })
             .then(res => {
-              res.length.should.eql(1);
+              res.status.should.eql(200);
+              res.type.should.eql("application/json");
+              res.body.length.should.eql(commentaires.length + 1);
+              res.body[commentaires.length - 1].comment.should.eql(
+                "Hello, mandataire_id=2,ti_id=2"
+              );
+
+              return knex
+                .from("commentaires")
+                .where({
+                  ti_id: 2,
+                  mandataire_id: 2
+                })
+                .then(res => {
+                  return res.length.should.eql(commentaires.length + 1);
+                });
             });
         })
     ));
@@ -91,24 +102,34 @@ describe("routes : commentaires", () => {
       username: "ti1",
       password: "ti1"
     }).then(agent =>
-      agent
-        .post("/api/v1/mandataires/3/commentaires")
-        .send({
-          co_comment: "this is a super comment"
+      knex
+        .from("commentaires")
+        .where({
+          mandataire_id: 3,
+          ti_id: 2
         })
-        .catch(res => {
-          return true;
+        .then(res => {
+          const initialCount = res.length;
+          return agent
+            .post("/api/v1/mandataires/3/commentaires")
+            .send({
+              comment: "this is a super comment"
+            })
+            .catch(res => {
+              return true;
+            })
+            .then(res =>
+              knex
+                .from("commentaires")
+                .where({
+                  mandataire_id: 3,
+                  ti_id: 2
+                })
+                .then(res => {
+                  res.length.should.eql(initialCount);
+                })
+            );
         })
-        .then(res =>
-          knex
-            .from("commentaires")
-            .where({
-              co_comment: "this is a super comment"
-            })
-            .then(res => {
-              res.length.should.eql(0);
-            })
-        )
     ));
 
   //});
@@ -117,43 +138,83 @@ describe("routes : commentaires", () => {
   //   "1".should.eql(2);
   // });
 
-  shouldBeProtected(server, "DELETE", "/api/v1/mandataires/1/commentaires/1");
+  shouldBeProtected(server, "DELETE", "/api/v1/mandataires/1/commentaires/1", {
+    type: "ti"
+  });
 
   it("should delete commentaire for given mandataire", () =>
     logUser(server, {
       username: "ti1",
       password: "ti1"
     }).then(agent =>
-      agent.delete("/api/v1/mandataires/1/commentaires/1").then(res => {
-        // test response
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(200);
-        res.type.should.eql("application/json");
-        res.body.length.should.eql(1);
-        // test DB
-        return knex
-          .select()
-          .from("commentaires")
-          .then(res => res.length.should.eql(2));
-      })
+      knex
+        .select()
+        .from("commentaires")
+        .where({
+          ti_id: 2,
+          mandataire_id: 2
+        })
+        .then(commentaires => {
+          if (commentaires.length) {
+            return agent
+              .delete(
+                `/api/v1/mandataires/2/commentaires/${commentaires[
+                  commentaires.length - 1
+                ].id}`
+              )
+              .then(res => {
+                // test response
+                res.redirects.length.should.eql(0);
+                res.status.should.eql(200);
+                res.type.should.eql("application/json");
+                res.body.length.should.eql(commentaires.length - 1);
+                // test DB
+                return knex
+                  .select()
+                  .from("commentaires")
+                  .where({
+                    ti_id: 2,
+                    mandataire_id: 2
+                  })
+                  .then(res =>
+                    res.length.should.eql(Math.max(0, commentaires.length - 1))
+                  );
+              });
+          }
+        })
     ));
 
-  it("should NOT delete commentaire for another mandataire", () =>
+  it("should NOT delete commentaire for a mandataire not in my TI", () =>
     logUser(server, {
       username: "ti1",
       password: "ti1"
     }).then(agent =>
-      agent.delete("/api/v1/mandataires/3/commentaires/3").then(res => {
-        // test response
-        res.redirects.length.should.eql(0);
-        res.status.should.eql(200);
-        res.type.should.eql("application/json");
-        res.body.length.should.eql(0);
-        // test DB
-        return knex
-          .select()
-          .from("commentaires")
-          .then(res => res.length.should.eql(2));
-      })
+      knex
+        .select()
+        .from("commentaires")
+        .where({
+          id: 4
+        })
+        .then(commentaires => {
+          if (commentaires.length) {
+            return agent
+              .delete("/api/v1/mandataires/1/commentaires/4")
+              .then(res => {
+                // test response
+                res.redirects.length.should.eql(0);
+                res.status.should.eql(200);
+                res.type.should.eql("application/json");
+                res.body.length.should.eql(1);
+                // test DB
+                return knex
+                  .select()
+                  .from("commentaires")
+                  .where({
+                    id: 4
+                  })
+                  .then(res => res.length.should.eql(1));
+              });
+          }
+        })
     ));
 });

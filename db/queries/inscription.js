@@ -1,4 +1,4 @@
-var knex = require("../knex.js");
+const knex = require("../knex.js");
 
 const getTiByRegion = () =>
   knex
@@ -17,6 +17,18 @@ const getTiByRegion = () =>
     .orderBy("regions.nom", "asc")
     .orderBy("tis.etablissement", "asc");
 
+const createUser = (data, trx) =>
+  (trx || knex).table("users").insert(data, "id");
+
+const createMandataire = (data, trx) =>
+  (trx || knex).table("mandataires").insert(data, "id");
+
+const createMandataireTi = (data, trx) =>
+  (trx || knex).table("mandataire_tis").insert(data, "id");
+
 module.exports = {
-  getTiByRegion
+  getTiByRegion,
+  createUser,
+  createMandataire,
+  createMandataireTi
 };
