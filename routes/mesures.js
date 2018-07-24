@@ -39,7 +39,7 @@ router.post("/filters", loginRequired, async (req, res, next) => {
 router.get("/popup", loginRequired, async (req, res, next) => {
   const ti = await queries.getTiByUserId(req.user.id);
   queries
-    .getAllMesuresByPopUp(ti.id)
+    .getAllMesuresByPopUp(ti.id, req.query.searchType)
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
@@ -50,36 +50,6 @@ router.get("/popup", loginRequired, async (req, res, next) => {
     });
 });
 
-router.get(
-  "/popupWithFilters",
-  loginRequired,
-  async (req, res, next) => {
-    const ti = await queries.getTiByUserId(req.user.id);
-    if (req.query.searchType === "") {
-      queries
-        .getAllMesuresByPopUp(ti.id)
-        .then(function(mesures) {
-          res.status(200).json(mesures);
-        })
-        .catch(function(error) {
-          console.log(error);
-          throw error;
-          next(error);
-        });
-    } else {
-      queries
-        .getAllMesuresByPopUpForFilters(ti.id, req.query.searchType)
-        .then(function(mesures) {
-          res.status(200).json(mesures);
-        })
-        .catch(function(error) {
-          console.log(error);
-          throw error;
-          next(error);
-        });
-    }
-  }
-);
 
 router.get("/popupMandataire", loginRequired, async (req, res, next) => {
   const ti = await queries.getTiByUserId(req.user.id);
