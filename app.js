@@ -10,7 +10,6 @@ const users = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const Knex = require("knex");
 const KnexSessionStore = require("connect-session-knex")(session);
-const mailer = require("express-mailer");
 const app = express();
 
 process.on("unhandledRejection", r => console.log(r));
