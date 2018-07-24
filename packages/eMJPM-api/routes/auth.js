@@ -37,9 +37,10 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
   })(req, res, next);
 });
 
-router.get("/logout", authHelpers.loginRequired, (req, res, next) => {
+router.get("/logout", (req, res, next) => {
   req.logout();
   handleResponse(res, 200, "success");
+  next();
 });
 
 function handleResponse(res, code, statusMsg, url) {
