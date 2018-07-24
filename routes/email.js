@@ -11,29 +11,58 @@ const isLate = mandataire =>
   format(addDays(new Date(mandataire.email_send), 15), "MM/DD/YYYY") <
     format(new Date(Date.now()), "MM/DD/YYYY");
 
+const EMAIL_RELANCE_TEXT = `
+Bonjour,
+
+L'équipe "e-mjpm" constate que vous n'avez pas actualisé vos informations durant ces 30 derniers jours.
+
+Afin que les magistrats puissent connaître en temps réel votre activité et bénéficier d'un outil d'aide à la décision performant, nous vous prions de mettre à jour vos données.
+
+Vous pouvez directement vous connecter via ce lien : https://emjpm.num.social.gouv.fr/
+
+Pour toute difficulté, n'hésitez pas à nous contacter : contact@emjpm.beta.gouv.fr
+
+En vous remerciant de votre précieuse collaboration.
+
+
+Bien à vous.
+`;
+
+const EMAIL_RELANCE_HTML = `
+Bonjour,<br>
+<br>
+L'équipe "e-mjpm" constate que vous n'avez pas actualisé vos informations durant ces 30 derniers jours.
+<br><br>
+Afin que les magistrats puissent connaître en temps réel votre activité et bénéficier d'un outil d'aide à la décision performant, nous vous prions de mettre à jour vos données.
+<br><br>
+Vous pouvez directement vous connecter via ce lien : <a href="https://emjpm.num.social.gouv.fr/">emjpm.num.social.gouv.fr</a>
+<br><br>
+Pour toute difficulté, n'hésitez pas à nous contacter : <a href="mailto:contact@emjpm.beta.gouv.fr">contact@emjpm.beta.gouv.fr</a>
+<br><br><br>
+En vous remerciant de votre précieuse collaboration.
+<br><br><br>
+Bien à vous.
+`;
+
 router.get("/relance-mandataires-inactifs", function(req, res, next) {
   queries
     .getAll()
     .then(mandataires =>
-      mandataires.map(
-        mandataire =>
-          isLate(mandataire) &&
-          sendEmail(
-            mandataire.email,
-            "e-MJPM : actualisez vos données",
-            "e-MJPM : actualisez vos données",
-            "Bonjour,\n" +
-              "\n" +
-              "L'équipe \"e-mjpm\" constate que vous n'avez pas actualisé vos informations durant ces 30 derniers jours. Afin que les magistrats puissent connaître en temps réel votre activité et bénéficier d'un outil d'aide à la décision performant, nous vous prions de mettre à jour vos données. Vous pouvez directement vous connecter via ce lien : https://emjpm.num.social.gouv.fr/ \n" +
-              "\n" +
-              "Pour toute difficulté, n'hésitez pas à nous contacter :\n" +
-              "\n" +
-              "contact@emjpm.beta.gouv.fr\n" +
-              "\n" +
-              "En vous remerciant de votre précieuse collaboration.\n" +
-              "\n" +
-              "Bien à vous"
-          )
+      mandataires.filter(isLate).map(mandataire =>
+        sendEmail(
+          mandataire.email,
+          "e-MJPM : actualisez vos données",
+          EMAIL_RELANCE_TEXT,
+          EMAIL_RELANCE_HTML
+        )
+          .then(() => {
+            // MAJ mandataire.email_send
+            queries.updateMandataireMailSent(mandataire.id);
+          })
+          .catch(e => {
+            // todo: sentry
+            console.log(e);
+          })
       )
     )
     .then(() => {
@@ -47,13 +76,7 @@ router.get("/test", function(req, res, next) {
     "e-MJPM : test",
     "Bonjour !",
     "Bonjour !"
-  )
-    .then(() => {
-      res.json({ success: true });
-    })
-    .catch(e => {
-      res.json({ success: false, error: e });
-    });
+  );
 });
 
 module.exports = router;
