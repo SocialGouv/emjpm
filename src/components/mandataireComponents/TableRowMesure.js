@@ -131,7 +131,7 @@ class TableRowMesure extends React.Component {
         return apiFetch(`/mandataires/1`, {
           method: "PUT",
           body: JSON.stringify({
-            updateMesure: new Date()
+            update_mesure: new Date()
           })
         }).then(() => {
           return json;
@@ -161,7 +161,7 @@ class TableRowMesure extends React.Component {
       })
       .then(() => {
         this.closeModal();
-        this.props.updateMesureEteinte(); // callback parent with data
+        this.props.updateMesure(); // callback parent with data
       })
       .catch(e => {
         console.log(e);
@@ -187,7 +187,7 @@ class TableRowMesure extends React.Component {
         });
       })
       .then(() => {
-        this.props.updateMesureEteinte(); // callback parent with data
+        this.props.updateMesure(); // callback parent with data
       })
       .catch(e => {
         console.log(e);
@@ -219,7 +219,7 @@ class TableRowMesure extends React.Component {
       })
       .then(() => {
         this.closeModal();
-        this.props.updateMesureEteinte(); // callback parent with data
+        this.props.updateMesure(); // callback parent with data
       })
       .catch(e => {
         console.log(e);

@@ -17,8 +17,7 @@
     "flow": "flow",
     "cypress:open": "cypress open",
     "cypress:api-reset": "cd ../eMJPM-api && NODE_ENV=test npm run seeds",
-    "cypress:start-api":
-      "cd ../eMJPM-api && NODE_ENV=test PORT=4003 npm run migrate-seeds-and-start",
+    "cypress:start-api": "cd ../eMJPM-api && NODE_ENV=test PORT=4003 npm run migrate-seeds-and-start",
     "cypress:start-app": "API_URL=http://127.0.0.1:4003 NODE_ENV=test npm run start -- --port 3003",
     "cypress:start": "concurrently \"npm run cypress:start-api\" \"npm run cypress:start-app\"",
     "cypress": "start-server-and-test cypress:start http://localhost:3003 cypress:open"
@@ -37,6 +36,7 @@
     "next-images": "^0.9.2",
     "next-routes": "^1.4.1",
     "prop-types": "^15.6.1",
+    "query-string": "^6.1.0",
     "react": "^16.3.2",
     "react-autocomplete": "^1.8.1",
     "react-cookie": "^2.1.4",
@@ -47,6 +47,7 @@
     "react-leaflet": "^1.9.0",
     "react-modal": "^3.3.1",
     "react-piwik": "^1.4.0",
+    "react-table": "^6.8.6",
     "react-tabs": "^2.2.1",
     "styled-components": "^3.2.5",
     "styled-jsx": "^2.2.6"
@@ -63,7 +64,7 @@
     "babel-runtime": "^6.26.0",
     "concurrently": "^3.6.0",
     "css-loader": "^0.28.9",
-    "cypress": "^3.0.1",
+    "cypress": "^3.0.2",
     "dotenv": "^5.0.1",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",

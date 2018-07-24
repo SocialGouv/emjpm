@@ -161,11 +161,11 @@
 /*height: 400px !important;*/
 /*}*/
 
-.leaflet-marker-icon {
-  background-image: url("../images/icone-lieu.jpg");
-  background-repeat: no-repeat;
-  background-position: center center;
-}
+/*.leaflet-marker-icon {*/
+  /*background-image: url("../images/icone-lieu.jpg");*/
+  /*background-repeat: no-repeat;*/
+  /*background-position: center center;*/
+/*}*/
 .react-tabs__tab--selected {
   border-color: white !important;
   color: black !important;
@@ -303,4 +303,7 @@
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
+}
+.hidden_input_form_inscription {
+  display: none;
 }

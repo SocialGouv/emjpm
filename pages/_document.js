@@ -3,6 +3,7 @@ import { injectGlobal, ServerStyleSheet } from "styled-components";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-tabs/style/react-tabs.css";
+import "react-table/react-table.css";
 
 import "../static/css/hero.css";
 import "../static/css/footer.css";

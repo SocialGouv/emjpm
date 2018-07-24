@@ -1,0 +1,58 @@
+{
+  "pass1": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "10 caractères minimum",
+    "ui:widget": "password"
+  },
+  "pass2": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "10 caractères minimum",
+    "ui:widget": "password"
+  },
+  "username": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Nom d'utilisateur"
+  },
+  "nom": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Nom"
+  },
+  "prenom": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Prénom"
+  },
+  "telephone": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Téléphone"
+  },
+  "telephone_portable": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Téléphone Portable"
+  },
+  "email": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Adresse email"
+  },
+  "adresse": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Rue"
+  },
+  "code_postal": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Code Postal"
+  },
+  "ville": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Commune"
+  },
+  "etablissement": {
+    "classNames": "I_input_form_inscription",
+    "ui:placeholder": "Nom d'Etablissements"
+  },
+  "tis": {
+    "classNames": "hidden_input_form_inscription"
+  },
+  "type": {
+    "classNames": "hidden_input_form_inscription"
+  }
+}

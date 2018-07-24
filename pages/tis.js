@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import Router from "next/router";
+import queryString from "query-string";
 
 import Navigation from "../src/components/communComponents/Navigation";
 import RowModal from "../src/components/communComponents/RowModal";
@@ -67,26 +68,15 @@ const getPostCodeCoordinates = postCode => {
     .then(json => json.features[0].geometry.coordinates);
 };
 
-
 const stringMatch = (str, needle) => str.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
 
 // filter and sort list of mandataires
+
 const filterMandataires = (mandataires, filters) => {
   let filteredMandataires = mandataires.filter(mandataire => {
-    return (
-      stringMatch(mandataire.type, filters.searchType) &&
-      (stringMatch(mandataire.type, filters.searchTypeIn) &&
-        stringMatch(mandataire.type, filters.searchTypePr) &&
-        stringMatch(mandataire.type, filters.searchTypeSe)) &&
-      stringMatch(mandataire.etablissement, filters.searchNom) &&
-      stringMatch(mandataire.ville, filters.searchVille)
-    );
+    return stringMatch(mandataire.type, filters.searchType);
   });
-
-  filteredMandataires.sort((a, b) => {
-    return sortByDispo(sortMandataires);
-  });
-  return filteredMandataires;
+  return filteredMandataires.sort(sortMandataires);
 };
 
 const filterMesures = (mesures, filters) => {
@@ -99,10 +89,7 @@ const filterMesures = (mesures, filters) => {
       stringMatch(mesure.ville, filters.searchVille)
     );
   });
-  filteredMesures.sort((a, b) => {
-    return sortByDispo(sortMandataires);
-  });
-  return filteredMesures;
+  return filteredMesures.sort(sortMandataires);
 };
 
 const sortByDispo = (a, b) => {
@@ -117,8 +104,8 @@ const sortByDispo = (a, b) => {
   return 0;
 };
 
-const sortMandataires = (a, b) => sortByDispo(a.disponibilite / a.dispo_max, b.disponibilite / b.dispo_max)
-
+const sortMandataires = (a, b) =>
+  sortByDispo(a.mesures_en_cours / a.dispo_max, b.mesures_en_cours / b.dispo_max);
 
 const ModalMandataire = ({ isOpen, closeModal, children }) => (
   <Modal
@@ -156,12 +143,12 @@ export const FicheMandataire = ({
       <div className="col-6">
         <TitleMandataire>{mandataire.etablissement}</TitleMandataire>
         <div>{mandataire.type.toUpperCase()}</div>
+        <div>{mandataire.genre}</div>
         <RowModal value={mandataire.adresse} />
         <div>
           {mandataire.code_postal} {mandataire.ville.toUpperCase()}
         </div>
         <br />
-        <RowModal label="Contact" value={mandataire.referent} />
         <div data-cy="tab-telephone">{mandataire.telephone}</div>
         <div>{mandataire.email}</div>
         <br />
@@ -200,7 +187,7 @@ export const FicheMandataire = ({
             lineHeight: "40px"
           }}
         >
-          Mesures en cours : {mandataire.disponibilite} / {mandataire.dispo_max}
+          Mesures en cours : {mandataire.mesures_en_cours} / {mandataire.dispo_max}
         </div>
         <br />
         <Commentaire currentMandataire={mandataire} />
@@ -284,6 +271,19 @@ class Ti extends React.Component<Props, State> {
     );
   };
 
+  changeTypeOfMandatairesFilters = filters => {
+    const stringified = queryString.stringify(filters);
+    apiFetch(`/mesures/popup?${stringified}`)
+      .then(mesures => {
+        this.setState({
+          datamesure: mesures
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
@@ -301,7 +301,7 @@ class Ti extends React.Component<Props, State> {
   };
 
   updateFilters = filters => {
-    this.setState(filters);
+    this.setState(filters, () => this.changeTypeOfMandatairesFilters(filters));
   };
   updateValue = value => {
     this.setState({ value: value });
@@ -334,14 +334,7 @@ class Ti extends React.Component<Props, State> {
     const filteredMandataires = filterMandataires(
       this.state.manda,
       {
-        searchType: this.state.searchType,
-        searchTypeIn: this.state.searchTypeIn,
-        searchTypePr: this.state.searchTypePr,
-        searchTypeSe: this.state.searchTypeSe,
-        searchNom: this.state.searchNom,
-        searchVille: this.state.searchVille,
-        postcodeCoordinates: this.state.postcodeCoordinates,
-        specialite: this.state.specialite
+        searchType: this.state.searchType
       }
       // this.state.specialite
     );
@@ -350,10 +343,8 @@ class Ti extends React.Component<Props, State> {
       searchNom: this.state.searchNom,
       searchVille: this.state.searchVille
     });
-
     const mesureCount = this.state.mandaMesures.length;
     const mandataireCount = filteredMandataires.length;
-
     return (
       <TiView
         mesures={this.state.datamesure}
@@ -446,6 +437,7 @@ const TiView = ({
           value={value}
           updateValue={updateValue}
           updateTimer={updateTimer}
+          mandataires={mandataires}
         />
         <ModalMandataire isOpen={isOpen} closeModal={closeModal}>
           <FicheMandataire
@@ -463,7 +455,7 @@ const TiView = ({
           height={height}
           updateMandataireFilters={updateMandataireFilters}
           updateMandataireMesures={updateMandataireMesures}
-          filteredMesures={filteredMandataires}
+          filteredMandataires={filteredMandataires}
           openModal={openModal}
           mandataireCount={mandataireCount}
           updateFilters={updateFilters}
@@ -485,7 +477,6 @@ const TiView = ({
     </Tabs>
   </div>
 );
-
 const TiPage = () => (
   <div style={{ minHeight: "100%", backgroundColor: "#cad4de" }}>
     <Navigation logout />
