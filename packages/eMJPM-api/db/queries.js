@@ -465,6 +465,12 @@ const isMandataireInTi = (mandataire_id, ti_id) =>
     })
     .then(res => res.length > 0);
 
+const updateMandataireMailSent = id =>
+  knex
+    .table("mandataires")
+    .where({ id })
+    .update({ email_send: new Date() });
+
 module.exports = {
   getAllUsers,
   getAllMandataires,
@@ -518,5 +524,6 @@ module.exports = {
   getAllServicesByTis,
   getAllMesuresByPopUpForMandataire,
   getAllMesuresByMandatairesForMaps,
-  getMandataires
+  getMandataires,
+  updateMandataireMailSent
 };
