@@ -1,22 +1,23 @@
 exports.seed = (knex, Promise) => {
   // TRUNCATE AND RESET ALL DATA TABLES
-  return knex("pg_catalog.pg_tables")
-    .select("tablename")
-    .where({ schemaname: "public" })
-    .then(tables =>
-      tables
-        .filter(t => t.tablename.substring(0, 5) !== "knex_")
-        .map(t => t.tablename)
-    )
-    .then(tables =>
-      tables.map(
-        table => `TRUNCATE TABLE public."${table}" RESTART IDENTITY CASCADE;`
+  return (
+    knex("pg_catalog.pg_tables")
+      .select("tablename")
+      .where({ schemaname: "public" })
+      .then(tables =>
+        tables
+          .filter(t => t.tablename.substring(0, 5) !== "knex_")
+          .map(t => t.tablename)
       )
-    )
-    .then(sqls => knex.raw(sqls.join("\n")))
-    .then(() => {
-      console.log("Truncated all data tables");
-    })
-    .catch(console.log);
+      .then(tables =>
+        tables.map(
+          table => `TRUNCATE TABLE public."${table}" RESTART IDENTITY CASCADE;`
+        )
+      )
+      .then(sqls => knex.raw(sqls.join("\n")))
+      //.then(() => {
+      //  console.log("Truncated all data tables");
+      //})
+      .catch(console.log)
+  );
 };
-

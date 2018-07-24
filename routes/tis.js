@@ -29,6 +29,7 @@ router.post("/1/tis", loginRequired, async (req, res, next) => {
     .catch(error => next(error));
 });
 
+// TODO: ensure we can delete this
 router.delete("/1/tis/:tiId", loginRequired, async (req, res, next) => {
   const mandataire = await queries.getMandataireByUserId(req.user.id);
   queries

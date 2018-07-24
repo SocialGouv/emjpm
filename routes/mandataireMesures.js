@@ -36,7 +36,10 @@ router.post(
       })
       .then(() => queries.getAllMesures(mandataire.id))
       .then(mesures => res.status(200).json(mesures))
-      .catch(error => next(error));
+      .catch(error => {
+        console.log(error);
+        next(error);
+      });
   }
 );
 
@@ -47,6 +50,18 @@ router.get(
     const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
       .getAllMesures(mandataire.id)
+      .then(mesures => res.status(200).json(mesures))
+      .catch(error => next(error));
+  }
+);
+
+router.get(
+  "/:mandataireId/mesuresForMaps",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    const mandataire = await queries.getMandataireByUserId(req.user.id);
+    queries
+      .getAllMesuresByMandatairesForMaps(mandataire.id)
       .then(mesures => res.status(200).json(mesures))
       .catch(error => next(error));
   }

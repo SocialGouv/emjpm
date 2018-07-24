@@ -52,7 +52,7 @@ describe("routes : serviceAntenne", () => {
             email: "ad@ad.com",
             adresse: "1 rue de test",
             telephone: "00 00 00 00 00",
-            disponibilite: 236,
+            mesures_en_cours: 236,
             dispo_max: 250
           })
           .then(res => {

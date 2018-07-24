@@ -9,6 +9,9 @@ router.get(
   typeRequired("ti"),
   async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
+    if (!ti) {
+      next(new Error("500"));
+    }
     queries
       .getAllCommentaires(req.params.mandataireId, ti.id)
       .then(function(commentaires) {
@@ -23,32 +26,37 @@ router.get(
 router.post(
   "/:mandataireId/commentaires",
   typeRequired("ti"),
-  async (req, res, next) => {
+  (req, res, next) => {
     // ensure TI can write on this mandataire + add related test
-    const ti = await queries.getTiByUserId(req.user.id);
-    const isMandataireInTi = await queries.isMandataireInTi(
-      req.params.mandataireId,
-      ti.id
-    );
-    if (!isMandataireInTi) {
-      return next(new Error(401));
-    }
-    queries
-      .addCommentaire({
-        co_comment: req.body.co_comment,
-        mandataire_id: req.params.mandataireId,
-        ti_id: ti.id
-      })
-      .then(function(commentaireID) {
-        return queries.getAllCommentaires(req.params.mandataireId, ti.id);
-      })
-      .then(function(commentaires) {
-        res.status(200).json(commentaires);
-      })
-      .catch(function(error) {
-        console.log(error);
-        next(error);
-      });
+    queries.getTiByUserId(req.user.id).then(ti => {
+      if (!ti) {
+        next(new Error("500"));
+        return;
+      }
+      return queries
+        .isMandataireInTi(req.params.mandataireId, ti.id)
+        .then(isMandataireInTi => {
+          if (!isMandataireInTi) {
+            return next(new Error(401));
+          }
+          queries
+            .addCommentaire({
+              comment: req.body.comment,
+              mandataire_id: req.params.mandataireId,
+              ti_id: ti.id
+            })
+            .then(function(commentaireID) {
+              return queries.getAllCommentaires(req.params.mandataireId, ti.id);
+            })
+            .then(function(commentaires) {
+              res.status(200).json(commentaires);
+            })
+            .catch(function(error) {
+              console.log(error);
+              next(error);
+            });
+        });
+    });
   }
 );
 
@@ -59,7 +67,10 @@ router.delete(
     // secu : ensure TI can write on this mandataire + add related test
     const ti = await queries.getTiByUserId(req.user.id);
     queries
-      .deleteCommentaire(req.params.commentaireId)
+      .deleteCommentaire({
+        id: req.params.commentaireId,
+        ti_id: ti.id
+      })
       .then(function(commentaireID) {
         return queries.getAllCommentaires(req.params.mandataireId, ti.id);
       })

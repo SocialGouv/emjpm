@@ -4,24 +4,25 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "mocha",
     "knex": "knex",
     "eslint": "eslint *.js **/*.js --fix",
     "migrate-and-start": "knex migrate:latest && npm start",
     "seeds": "knex seed:run",
-    "migrate-seeds-and-start":
-      "knex migrate:latest && npm run seeds && npm start",
+    "migrate-seeds-and-start": "knex migrate:latest && npm run seeds && npm start",
     "wait-migrate-and-start": "sleep 10 && knex migrate:latest && npm start"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
-    "chai-http": "^3.0.0",
+    "chai-http": "^4.0.0",
     "connect-session-knex": "^1.4.0",
     "cookie-parser": "~1.3.5",
     "cors": "^2.8.4",
     "csvjson": "^5.0.0",
+    "date-fns": "^1.29.0",
     "debug": "^2.6.9",
     "es6-promise": "^4.2.4",
     "express": "^4.16.3",
@@ -31,6 +32,7 @@
     "knex-csv-seeder": "^0.4.1",
     "mocha": "^5.0.4",
     "morgan": "^1.9.0",
+    "nodemailer": "^4.6.7",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "passport-stub": "^1.1.1",
@@ -42,6 +44,7 @@
     "eslint": "^4.18.2",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
+    "nodemon": "^1.18.3",
     "prettier": "1.11.1",
     "randomatic": "^3.0.0"
   }
