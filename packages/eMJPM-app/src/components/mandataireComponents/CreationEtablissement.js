@@ -69,15 +69,17 @@ class CreationEtablissement extends React.Component {
               <ReactAutocomplete
                 items={this.props.etablissements}
                 shouldItemRender={(item, value) =>
-                  item.nom.toLowerCase().indexOf(value.toLowerCase()) > -1
+                  item.nom.toLowerCase().indexOf(value.toLowerCase()) > -1 &&
+                  item.ville.toLowerCase().indexOf(value.toLowerCase()) > -1 &&
+                  item.id_finess.toLowerCase().indexOf(value.toLowerCase()) > -1
                 }
-                getItemValue={item => item.nom}
+                getItemValue={item => item.nom || item.ville || item.id_finess}
                 renderItem={(item, highlighted) => (
                   <div
                     key={item.id}
                     style={{ backgroundColor: highlighted ? "#eee" : "transparent" }}
                   >
-                    {item.nom}
+                    {item.nom} | {item.ville} | {item.id_finess}
                   </div>
                 )}
                 value={this.state.value}

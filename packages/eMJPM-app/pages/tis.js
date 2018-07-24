@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import Router from "next/router";
+import queryString from "query-string";
 
 import Navigation from "../src/components/communComponents/Navigation";
 import RowModal from "../src/components/communComponents/RowModal";
@@ -70,18 +71,11 @@ const getPostCodeCoordinates = postCode => {
 const stringMatch = (str, needle) => str.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
 
 // filter and sort list of mandataires
+
 const filterMandataires = (mandataires, filters) => {
   let filteredMandataires = mandataires.filter(mandataire => {
-    return (
-      stringMatch(mandataire.type, filters.searchType) &&
-      (stringMatch(mandataire.type, filters.searchTypeIn) &&
-        stringMatch(mandataire.type, filters.searchTypePr) &&
-        stringMatch(mandataire.type, filters.searchTypeSe)) &&
-      stringMatch(mandataire.etablissement, filters.searchNom) &&
-      stringMatch(mandataire.ville, filters.searchVille)
-    );
+    return stringMatch(mandataire.type, filters.searchType);
   });
-
   return filteredMandataires.sort(sortMandataires);
 };
 
@@ -149,6 +143,7 @@ export const FicheMandataire = ({
       <div className="col-6">
         <TitleMandataire>{mandataire.etablissement}</TitleMandataire>
         <div>{mandataire.type.toUpperCase()}</div>
+        <div>{mandataire.genre}</div>
         <RowModal value={mandataire.adresse} />
         <div>
           {mandataire.code_postal} {mandataire.ville.toUpperCase()}
@@ -276,6 +271,19 @@ class Ti extends React.Component<Props, State> {
     );
   };
 
+  changeTypeOfMandatairesFilters = filters => {
+    const stringified = queryString.stringify(filters);
+    apiFetch(`/mesures/popup?${stringified}`)
+      .then(mesures => {
+        this.setState({
+          datamesure: mesures
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
@@ -293,7 +301,7 @@ class Ti extends React.Component<Props, State> {
   };
 
   updateFilters = filters => {
-    this.setState(filters);
+    this.setState(filters, () => this.changeTypeOfMandatairesFilters(filters));
   };
   updateValue = value => {
     this.setState({ value: value });
@@ -326,14 +334,7 @@ class Ti extends React.Component<Props, State> {
     const filteredMandataires = filterMandataires(
       this.state.manda,
       {
-        searchType: this.state.searchType,
-        searchTypeIn: this.state.searchTypeIn,
-        searchTypePr: this.state.searchTypePr,
-        searchTypeSe: this.state.searchTypeSe,
-        searchNom: this.state.searchNom,
-        searchVille: this.state.searchVille,
-        postcodeCoordinates: this.state.postcodeCoordinates,
-        specialite: this.state.specialite
+        searchType: this.state.searchType
       }
       // this.state.specialite
     );
@@ -342,10 +343,8 @@ class Ti extends React.Component<Props, State> {
       searchNom: this.state.searchNom,
       searchVille: this.state.searchVille
     });
-
     const mesureCount = this.state.mandaMesures.length;
     const mandataireCount = filteredMandataires.length;
-
     return (
       <TiView
         mesures={this.state.datamesure}
@@ -456,7 +455,7 @@ const TiView = ({
           height={height}
           updateMandataireFilters={updateMandataireFilters}
           updateMandataireMesures={updateMandataireMesures}
-          filteredMesures={filteredMandataires}
+          filteredMandataires={filteredMandataires}
           openModal={openModal}
           mandataireCount={mandataireCount}
           updateFilters={updateFilters}

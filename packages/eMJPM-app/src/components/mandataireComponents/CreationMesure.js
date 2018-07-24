@@ -121,7 +121,7 @@ class MesureInput extends React.Component {
                 annee: formData.annee,
                 type: formData.type,
                 date_ouverture: formData.ouverture,
-                residence: this.state.lieuxDeVie,
+                residence: this.state.lieuxDeVie || "",
                 civilite: formData.civilite,
                 status: "Mesure en cours"
               })
