@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
-    return knex.schema.dropTable('services_sieges')
+  return knex.schema.dropTableIfExists("services_sieges");
 };
 
 exports.down = function(knex, Promise) {
-    return Promise.resolve();
+  return Promise.resolve();
 };

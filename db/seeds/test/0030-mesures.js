@@ -10,13 +10,13 @@ exports.seed = function(knex, Promise) {
         latitude: 2.6333,
         longitude: 50.5333,
         mandataire_id: 1,
-        postDate: "2010-10-05",
+        created_at: "2010-10-05",
         annee: "2010-10-05",
         type: "preposes",
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "F",
-        status: "Mesure en cours",
+        status: "Mesure en cours"
       });
     })
     .then(function() {
@@ -28,13 +28,13 @@ exports.seed = function(knex, Promise) {
         latitude: 50.5333,
         longitude: 2.6333,
         mandataire_id: 2,
-        postDate: "2010-10-05",
+        created_at: "2010-10-05",
         annee: "2010-10-05",
         type: "preposes",
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "F",
-        status: "Mesure en cours",
+        status: "Mesure en cours"
       });
     })
     .then(function() {
@@ -46,13 +46,13 @@ exports.seed = function(knex, Promise) {
         latitude: 50.5333,
         longitude: 2.6333,
         mandataire_id: 1,
-        postDate: "2010-10-05",
+        created_at: "2010-10-05",
         annee: "2010-10-05",
         type: "preposes",
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "H",
-        status: "Mesure en cours",
+        status: "Mesure en cours"
       });
     });
 };
