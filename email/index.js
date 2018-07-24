@@ -18,6 +18,7 @@ const smtpConfig = {
   ignoreTLS: true,
   secure: false
 };
+
 if (SMTP_USER) {
   smtpConfig.auth = {
     user: SMTP_USER,
@@ -25,15 +26,24 @@ if (SMTP_USER) {
   };
 }
 
-const sendEmail = (sendTo, subject, text, html) => {
-  let transporter = nodemailer.createTransport(smtpConfig);
-  let mailOptions = { from: SMTP_FROM, to: sendTo, subject: subject, text: text, html: html };
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error);
-    }
+const sendEmail = (sendTo, subject, text, html) =>
+  new Promise((resolve, reject) => {
+    let transporter = nodemailer.createTransport(smtpConfig);
+    let mailOptions = {
+      from: SMTP_FROM,
+      to: sendTo,
+      subject: subject,
+      text: text,
+      html: html
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(info);
+    });
   });
-};
 
 module.exports = {
   sendEmail
