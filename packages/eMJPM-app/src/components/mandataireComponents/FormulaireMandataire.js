@@ -14,6 +14,7 @@ const schema = {
   properties: {
     nom: { type: "string", title: "Nom", default: "" },
     prenom: { type: "string", title: "Prénom", default: "" },
+    genre: { type: "string", title: "Genre", enum: ["Femme", "Homme"] },
     telephone: { type: "string", title: "Téléphone", default: "" },
     telephone_portable: {
       type: "string",
@@ -56,8 +57,12 @@ const uiSchema = {
   nom: {
     "ui:placeholder": "Nom"
   },
+
   prenom: {
     "ui:placeholder": "Prénom"
+  },
+  genre: {
+    "ui:placeholder": "Genre"
   },
   telephone: {
     "ui:placeholder": "Téléphone"
@@ -119,40 +124,26 @@ const FormulaireMandataireView = ({
                 {formData.prenom} {formData.nom}
               </b>
               <br />
-              {currentMandataireModalTry.type === "Prepose" && (
-                <CreationEtablissement
-                  updateEtablissement={updateEtablissement}
-                  etablissements={etablissement}
-                />
-              )}
-              <AddTisToFormulaireMandataire tis={tis} updateTi={updateTi} />
-              <br />
               <b>Contact</b>
               <br />
               <div data-cy="fiche-manda-nom-prenom">
                 {formData.prenom} {formData.nom}
+                <br />
+                {formData.genre}
               </div>
-              <br />
               <div data-cy="fiche-manda-email">{formData.email}</div>
-              <br />
               <div data-cy="fiche-manda-telephone">{formData.telephone}</div>
-              <br />
               <div data-cy="fiche-manda-telephone-portable">{formData.telephone_portable}</div>
-              <br />
               <br />
               <b> Adresse</b>
               <br />
               <div data-cy="fiche-manda-adresse">{formData.adresse}</div>
-              <br />
               <div data-cy="fiche-manda-code-postal">{formData.code_postal} </div>
-              <br />
               <div data-cy="fiche-manda-ville">{formData.ville}</div>
-              <br />
               <br />
               <b> Nombre de mesures souhaitées</b>
               <br />
               <div data-cy="fiche-manda-dispo-max">{formData.dispo_max}</div>
-              <br />
               <br />
               <b> Secrétariat</b>
               <br />
@@ -166,6 +157,13 @@ const FormulaireMandataireView = ({
                     <div>
                       <b>Etablissement(s) </b>
                       <br />
+                      {currentMandataireModalTry.type === "Prepose" && (
+                        <CreationEtablissement
+                          updateEtablissement={updateEtablissement}
+                          etablissements={etablissement}
+                        />
+                      )}
+                      <br />
                     </div>
                     {mandataireEtablissement.map(etablissement => (
                       <div>
@@ -178,11 +176,13 @@ const FormulaireMandataireView = ({
                     ))}
                   </React.Fragment>
                 )}
+              <br />
               {tisByMandataire && (
                 <React.Fragment>
                   <div>
-                    <b>Tis </b>
+                    <b>Tribunaux d'instance où je suis agréé </b>
                     <br />
+                    <AddTisToFormulaireMandataire tis={tis} updateTi={updateTi} />
                   </div>
                   {tisByMandataire.map(tiByMandataire => (
                     <div key={tiByMandataire.id}>
@@ -269,6 +269,7 @@ class FormulaireMandataire extends React.Component {
       body: JSON.stringify({
         nom: formData.nom || "",
         prenom: formData.prenom || "",
+        genre: formData.genre || "",
         telephone: formData.telephone || "",
         telephone_portable: formData.telephone_portable || "",
         email: formData.email || "",
