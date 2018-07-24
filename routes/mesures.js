@@ -4,21 +4,28 @@ const router = express.Router();
 const queries = require("../db/queries");
 const fetch = require("isomorphic-fetch");
 
-const { loginRequired } = require("../auth/_helpers");
+const { loginRequired, typeRequired } = require("../auth/_helpers");
 
-router.get("/", loginRequired, async (req, res, next) => {
+router.get("/", typeRequired("ti"), async (req, res, next) => {
   if (req.user.type !== "ti") {
     return next(new Error(401));
   }
   const ti = await queries.getTiByUserId(req.user.id);
+  if (!ti) {
+    return next(new Error(401));
+  }
   queries
     .getAllMesuresByMandataires(ti.id)
     .then(mesures => res.status(200).json(mesures))
     .catch(error => next(error));
 });
 
+// todo : make it work for real
 router.post("/filters", loginRequired, async (req, res, next) => {
   const ti = await queries.getTiByUserId(req.user.id);
+  if (!ti) {
+    return next(new Error(401));
+  }
   queries
     .getAllMesuresByMandatairesFilter(
       ti.id,
@@ -36,8 +43,11 @@ router.post("/filters", loginRequired, async (req, res, next) => {
     });
 });
 
-router.get("/popup", loginRequired, async (req, res, next) => {
+router.get("/popup", typeRequired("ti"), async (req, res, next) => {
   const ti = await queries.getTiByUserId(req.user.id);
+  if (!ti) {
+    return next(new Error(401));
+  }
   queries
     .getAllMesuresByPopUp(ti.id, req.query.searchType)
     .then(function(mesures) {
