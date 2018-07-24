@@ -103,3 +103,6 @@ Ouvre le port 1111 en local vers le Postgres distant
 ### Executer un script local sur machine distante :
 
 `ssh xxx@88.191.188.xxx "cd /path/to/projext && NODE_ENV=production node" < node.js`
+
+### CRON :
+`0 0 * * *  https://api.emjpm-preprod.num.social.gouv.fr/api/v1/email/relance-mandataires-inactifs`

@@ -17,6 +17,7 @@ router.get("/1", loginRequired, async (req, res, next) => {
     .catch(error => next(error));
 });
 
+
 // met à jour les données d'un mandataire
 router.put("/1", loginRequired, async (req, res, next) => {
   const mandataire = await queries.getMandataireByUserId(req.user.id);
@@ -27,13 +28,13 @@ router.put("/1", loginRequired, async (req, res, next) => {
   const dispoMandataire = await queries.getSingleDisponibilite(mandataire.id);
 
   // todo: replace with trigger
-  if (req.body.mesures_en_cours !== dispoMandataire) {
-    queries
-      .update(mandataire.id, { date_mesure_update: new Date(Date.now()) })
-      .catch(error => {
-        next(error);
-      });
-  }
+  // if (req.body.date_mesure_update !== dispoMandataire) {
+  //   queries
+  //     .update(mandataire.id, { date_mesure_update: new Date(Date.now()) })
+  //     .catch(error => {
+  //       next(error);
+  //     });
+  // }
 
   queries
     .update(mandataire.id, req.body)

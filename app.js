@@ -13,8 +13,6 @@ const KnexSessionStore = require("connect-session-knex")(session);
 const mailer = require("express-mailer");
 const app = express();
 
-const nodemailer = require("nodemailer");
-
 process.on("unhandledRejection", r => console.log(r));
 
 const SECRET_KEY =
@@ -63,7 +61,6 @@ if (process.env.NODE_ENV === "production") {
     })
   );
 }
-
 
 app.use(passport.initialize());
 app.use(passport.session());
