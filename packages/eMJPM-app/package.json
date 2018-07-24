@@ -47,6 +47,7 @@
     "react-leaflet": "^1.9.0",
     "react-modal": "^3.3.1",
     "react-piwik": "^1.4.0",
+    "react-table": "^6.8.6",
     "react-tabs": "^2.2.1",
     "styled-components": "^3.2.5",
     "styled-jsx": "^2.2.6"
