@@ -3,7 +3,6 @@ import { injectGlobal, ServerStyleSheet } from "styled-components";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "react-tabs/style/react-tabs.css";
-import "react-table/react-table.css";
 
 import "../static/css/hero.css";
 import "../static/css/footer.css";
@@ -39,6 +38,7 @@ export default class MyDocument extends Document {
           <meta name="author" content="" />
           <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
           <link rel="stylesheet" href="/_next/static/style.css" />
+          <link rel="stylesheet" href="/static/css/react-table.css" />
           <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
           {this.props.styleTags}
         </Head>

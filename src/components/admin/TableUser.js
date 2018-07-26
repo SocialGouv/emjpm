@@ -6,7 +6,7 @@ import ToggleState from "./ToggleState";
 import SearchButton from "../communComponents/SearchButton";
 import { default as apiFetch, updateUser } from "../communComponents/Api";
 
-const RowActive = ({ active }) => (
+const CellActive = ({ active }) => (
   <span>
     <span
       style={{
@@ -18,7 +18,7 @@ const RowActive = ({ active }) => (
   </span>
 );
 
-const RowAction = ({ row: { id, active } }) => (
+const CellAction = ({ row: { id, active } }) => (
   <ToggleState
     onToggle={active =>
       updateUser({
@@ -51,7 +51,7 @@ const COLUMNS = [
   {
     Header: "Actif",
     accessor: "active",
-    Cell: row => <RowActive active={row.value} />,
+    Cell: row => <CellActive active={row.value} />,
     width: 70,
     show: false, // the button show more accurate status
     style: { textAlign: "center" }
@@ -91,7 +91,7 @@ const COLUMNS = [
   },
   {
     Header: "Activer",
-    Cell: row => <RowAction row={row.row} />,
+    Cell: row => <CellAction row={row.row} />,
     width: 120,
     style: { textAlign: "center", alignSelf: "center" }
   }
