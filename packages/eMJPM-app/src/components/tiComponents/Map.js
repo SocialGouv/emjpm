@@ -89,27 +89,23 @@ export const MapsView = ({
         </Map>
       </MapsWidth>
       <MandatairesWidth>
-        {(
+        {(mesureCount && (
           <React.Fragment>
-            {mesureCount && (
-              <React.Fragment>
-                <Title>
-                  {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
-                </Title>
+            <Title>
+              {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+            </Title>
 
-                <TableMandataire
-                  rows={filteredMesures}
-                  openModal={openModal}
-                  updateFilters={updateFilters}
-                />
-              </React.Fragment>
-            )}
+            <TableMandataire
+              rows={filteredMesures}
+              openModal={openModal}
+              updateFilters={updateFilters}
+            />
           </React.Fragment>
-        ) || (
-          <div style={{ textAlign: "center", marginTop: 20 }}>
-            Aucune mesure actuellement dans cette région
-          </div>
-        )}
+        )) || (
+            <div style={{ textAlign: "center", marginTop: 20 }}>
+              Aucune mesure actuellement dans cette région
+            </div>
+          )}
       </MandatairesWidth>`
     </div>
   </div>
