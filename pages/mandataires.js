@@ -12,7 +12,7 @@ import DisplayDate from "../src/components/communComponents/formatFrenchDate";
 
 const tabStyle = {
   backgroundColor: "#ebeff2",
-  paddingBottom: 5,
+  padding: "10px 10px 5px 10px",
   bottom: 0,
   verticalAlign: "middle",
   lineHeight: "40px",
@@ -29,9 +29,10 @@ const imageStyle = {
   margin: 10
 };
 
-const Pill = styled.p`
+const Pill = styled.div`
   font-size: 18px;
-  width: 100px;
+  min-width: 80px;
+  padding: 0 10px;
   height: 28px;
   line-height: 28px;
   border-radius: 2px;
@@ -39,6 +40,7 @@ const Pill = styled.p`
   color: white;
   display: inline-block;
   margin-right: 10px;
+  margin-top: 5px;
 `;
 
 const PanelMandataire = styled.div`
@@ -58,10 +60,8 @@ const ContainerMandataire = styled.div`
 `;
 
 const TabsShowMandataire = styled.div`
-  padding-right: 0px;
-  padding-left: 0px;
+  padding: 0;
   background-color: #ebeff2;
-  height: 60px;
 `;
 
 const TabsPanelMandataire = styled.div`
@@ -117,9 +117,10 @@ const PillDispo = ({ dispo, dispo_max }) => (
   </Pill>
 );
 
-const TabListItemTitle = ({ children }) => (
-  <div style={{ whiteSpace: "nowrap", fontWeight: "bold" }}>{children}</div>
-);
+const TabListItemTitle = styled.div`
+  white-space: nowrap;
+  font-weight: bold;
+`;
 
 const MandataireIndexView = ({
   currentMandataire,
@@ -172,11 +173,7 @@ const MandataireIndexView = ({
     </TabList>
     <TabsPanelMandataire className="container">
       <TabPanel>
-        <TableMesure
-          display_ext={"none"}
-          rows={filteredMesures}
-          updateMesure={updateMesure}
-        />
+        <TableMesure display_ext={"none"} rows={filteredMesures} updateMesure={updateMesure} />
       </TabPanel>
       <TabPanel>
         <OpenStreeMapMandataire className="container">
@@ -189,11 +186,7 @@ const MandataireIndexView = ({
         </OpenStreeMapMandataire>
       </TabPanel>
       <TabPanel>
-        <TableMesure
-          display={"none"}
-          rows={mesureEteinte}
-          updateMesure={updateMesure}
-        />
+        <TableMesure display={"none"} rows={mesureEteinte} updateMesure={updateMesure} />
       </TabPanel>
       <TabPanel>
         <FormuaireMandataire>
