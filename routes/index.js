@@ -40,7 +40,7 @@ const nodemailer = require("nodemailer");
 router.use("/mandataires", require("./mandataires"));
 router.use("/mesures", require("./mesures"));
 router.use("/inscription", require("./inscription"));
-router.use("/email", require("./email"));
+router.use("/email", require("./email").router);
 router.use("/admin", require("./admin"));
 
 // router.post("/services", function(req, res, next) {
