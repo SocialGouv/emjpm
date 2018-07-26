@@ -30,6 +30,7 @@ const CellAction = ({ row: { id, active } }) => (
       return (
         <SearchButton
           error={active}
+          data-cy="UserCellAction"
           style={{ textAlign: "center", fontSize: "0.8em" }}
           type="submit"
         >
@@ -59,7 +60,7 @@ const COLUMNS = [
   {
     Header: "Nom",
     id: "nom",
-    accessor: d => d.nom + " " + d.prenom,
+    accessor: d => ((d.nom || "") + " " + (d.prenom || "")).trim(),
     style: { alignSelf: "center" }
   },
   {
