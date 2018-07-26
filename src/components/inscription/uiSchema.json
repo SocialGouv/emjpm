@@ -1,58 +1,67 @@
 {
   "pass1": {
-    "classNames": "I_input_form_inscription",
+    "ui:title": "Mot de passe",
     "ui:placeholder": "10 caractères minimum",
     "ui:widget": "password"
   },
   "pass2": {
-    "classNames": "I_input_form_inscription",
+    "ui:title": "Répéter le mot de passe",
     "ui:placeholder": "10 caractères minimum",
     "ui:widget": "password"
   },
   "username": {
-    "classNames": "I_input_form_inscription",
-    "ui:placeholder": "Nom d'utilisateur"
+    "ui:title": "Identifiant (vous servira pour vous connecter sur E-MJPM)",
+    "ui:placeholder": "Nom d'utilisateur",
+    "classNames": "input__long"
   },
   "nom": {
-    "classNames": "I_input_form_inscription",
+    "ui:title": "Nom",
     "ui:placeholder": "Nom"
   },
   "prenom": {
-    "classNames": "I_input_form_inscription",
+    "ui:title": "Prénom",
     "ui:placeholder": "Prénom"
   },
   "telephone": {
-    "classNames": "I_input_form_inscription",
-    "ui:placeholder": "Téléphone"
+    "ui:title": "Téléphone",
+    "ui:placeholder": "ex: 0342734887",
+    "ui:options": {
+      "inputType": "tel"
+    }
   },
   "telephone_portable": {
-    "classNames": "I_input_form_inscription",
-    "ui:placeholder": "Téléphone Portable"
+    "ui:title": "Téléphone Portable",
+    "ui:placeholder": "ex: 0642734887",
+    "ui:options": {
+      "inputType": "tel"
+    }
   },
   "email": {
-    "classNames": "I_input_form_inscription",
-    "ui:placeholder": "Adresse email"
+    "ui:title": "Adresse email",
+    "ui:placeholder": "ex: nom.prenom@orange.fr",
+    "ui:options": {
+      "inputType": "email"
+    },
+    "classNames": "input__long"
   },
   "adresse": {
-    "classNames": "I_input_form_inscription",
-    "ui:placeholder": "Rue"
+    "ui:title": "Adresse (rue)",
+    "ui:placeholder": "ex: 37 avenue de la république",
+    "classNames": "input__long"
   },
   "code_postal": {
-    "classNames": "I_input_form_inscription",
-    "ui:placeholder": "Code Postal"
+    "ui:title": "Code Postal",
+    "ui:placeholder": "ex: 89100",
+    "classNames": "input__code_postal"
   },
   "ville": {
-    "classNames": "I_input_form_inscription",
-    "ui:placeholder": "Commune"
+    "ui:title": "Commune",
+    "ui:placeholder": "Commune",
+    "classNames": "input__ville"
   },
   "etablissement": {
-    "classNames": "I_input_form_inscription",
-    "ui:placeholder": "Nom d'Etablissements"
-  },
-  "tis": {
-    "classNames": "hidden_input_form_inscription"
-  },
-  "type": {
-    "classNames": "hidden_input_form_inscription"
+    "ui:title": "Nom d'Etablissements",
+    "ui:placeholder": "Nom d'Etablissements",
+    "classNames": "input__long"
   }
 }

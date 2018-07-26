@@ -10,8 +10,8 @@ function validate(formData, errors) {
 
 const FormMandataire = ({ schema, formData, uiSchema = {}, onSubmit }) => (
   <div>
-    <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: 20 }}>
-      Veuillez renseigner ci-dessous vos informations professionnelles:
+    <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
+      Renseignez ci-dessous vos informations professionnelles:
     </div>
     <Form
       schema={schema}
@@ -21,7 +21,7 @@ const FormMandataire = ({ schema, formData, uiSchema = {}, onSubmit }) => (
       showErrorList={false}
       onSubmit={onSubmit}
     >
-      <div style={{ textAlign: "center", paddingBottom: "10px", marginLeft: "20px" }}>
+      <div style={{ textAlign: "center", paddingBottom: "10px" }}>
         <SearchButton style={{ textAlign: "center" }} type="submit">
           Créer mon compte
         </SearchButton>
