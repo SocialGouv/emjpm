@@ -51,11 +51,11 @@ const Users = () => (
         <ContainerUser className="container">
           <Title>Gestion des Utilisateurs</Title>
         </ContainerUser>
-        <Tab style={tabStyle}>
+        <Tab data-cy="TabUsers" style={tabStyle}>
           <UserCheck style={imageStyle} />
           <b>Actifs</b>
         </Tab>
-        <Tab style={tabStyle}>
+        <Tab data-cy="TabIdleUsers" style={tabStyle}>
           <User style={imageStyle} />
           <b>En attente de validation</b>
         </Tab>

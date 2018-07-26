@@ -6,7 +6,7 @@ import ToggleState from "./ToggleState";
 import SearchButton from "../communComponents/SearchButton";
 import { default as apiFetch, updateUser } from "../communComponents/Api";
 
-const RowActive = ({ active }) => (
+const CellActive = ({ active }) => (
   <span>
     <span
       style={{
@@ -18,7 +18,7 @@ const RowActive = ({ active }) => (
   </span>
 );
 
-const RowAction = ({ row: { id, active } }) => (
+const CellAction = ({ row: { id, active } }) => (
   <ToggleState
     onToggle={active =>
       updateUser({
@@ -30,6 +30,7 @@ const RowAction = ({ row: { id, active } }) => (
       return (
         <SearchButton
           error={active}
+          data-cy="UserCellAction"
           style={{ textAlign: "center", fontSize: "0.8em" }}
           type="submit"
         >
@@ -51,7 +52,7 @@ const COLUMNS = [
   {
     Header: "Actif",
     accessor: "active",
-    Cell: row => <RowActive active={row.value} />,
+    Cell: row => <CellActive active={row.value} />,
     width: 70,
     show: false, // the button show more accurate status
     style: { textAlign: "center" }
@@ -59,7 +60,7 @@ const COLUMNS = [
   {
     Header: "Nom",
     id: "nom",
-    accessor: d => d.nom + " " + d.prenom,
+    accessor: d => ((d.nom || "") + " " + (d.prenom || "")).trim(),
     style: { alignSelf: "center" }
   },
   {
@@ -91,7 +92,7 @@ const COLUMNS = [
   },
   {
     Header: "Activer",
-    Cell: row => <RowAction row={row.row} />,
+    Cell: row => <CellAction row={row.row} />,
     width: 120,
     style: { textAlign: "center", alignSelf: "center" }
   }

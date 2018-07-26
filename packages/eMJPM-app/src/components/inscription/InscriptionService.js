@@ -19,27 +19,43 @@ const schema = {
   properties: {
     username: {
       type: "string",
-      title: "Identifiant (vous servira pour vous connecter sur E-MJPM)",
+      minLength: 10,
       default: ""
     },
-    pass1: { type: "string", title: "Mot de passe", minLength: 10 },
-    pass2: { type: "string", title: "Répéter mot de passe", minLength: 10 },
-    etablissement: { type: "string", title: "Nom du service", default: "" },
-    nom: { type: "string", title: "Nom du contact dans le service", default: "" },
-    prenom: { type: "string", title: "Prénom du contact dans le service", default: "" },
-    telephone: { type: "string", title: "Téléphone du contact dans le service", default: "" },
-    email: { type: "string", title: "Adresse email du contact dans le service", default: "" },
-    adresse: { type: "string", title: "Rue", default: "" },
-    code_postal: { type: "string", title: "Code Postal", default: "" },
-    ville: { type: "string", title: "Commune", default: "" }
+    pass1: { type: "string", minLength: 10 },
+    pass2: { type: "string", minLength: 10 },
+    etablissement: { type: "string", default: "" },
+    nom: { type: "string", default: "" },
+    prenom: { type: "string", default: "" },
+    telephone: { type: "string", default: "" },
+    email: { type: "string", default: "" },
+    adresse: { type: "string", default: "" },
+    code_postal: { type: "string", default: "" },
+    ville: { type: "string", default: "" }
   }
 };
 
+// utiliy to add labels to some fields
+const serviceFields = ["nom", "prenom", "telephone", "email"];
+const serviceFieldsUiSchema = serviceFields.reduce(
+  (schema, field) => ({
+    ...schema,
+    [field]: {
+      ...uiSchema[field],
+      "ui:title": uiSchema[field]["ui:title"] + " du contact dans le service"
+    }
+  }),
+  {}
+);
+
+// build custom ui schema
 const serviceUiSchema = {
   ...uiSchema,
+  ...serviceFieldsUiSchema,
   etablissement: {
-    classNames: "I_input_form_inscription",
-    "ui:placeholder": "Nom du service"
+    ...uiSchema.etablissement,
+    "ui:title": "Nom du service",
+    "ui:placeholder": "ex: CHU de Nanterre"
   }
 };
 

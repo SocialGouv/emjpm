@@ -40,28 +40,23 @@ class TiSelector extends React.Component {
   render() {
     const tisByRegion = groupByRegion(this.props.tis);
     return (
-      <div>
-        <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: 20 }}>
-          Choisissez les tribunaux d&apos;instances dans vos régions :
-        </div>
-        <div
-          style={{
-            listStyleType: "none",
-            margin: 20,
-            width: "100%",
-            fontSize: "1.1em"
-          }}
-        >
-          {this.props.tis &&
-            Object.keys(tisByRegion).map(region => (
-              <TiByRegion
-                tis={tisByRegion[region]}
-                nom={region}
-                key={region}
-                onTiSelected={this.onTiSelected}
-              />
-            ))}
-        </div>
+      <div
+        style={{
+          listStyleType: "none",
+          margin: 20,
+          width: "100%",
+          fontSize: "1.1em"
+        }}
+      >
+        {this.props.tis &&
+          Object.keys(tisByRegion).map(region => (
+            <TiByRegion
+              tis={tisByRegion[region]}
+              nom={region}
+              key={region}
+              onTiSelected={this.onTiSelected}
+            />
+          ))}
       </div>
     );
   }
