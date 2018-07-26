@@ -5,11 +5,22 @@ const queries = require("../db/queries");
 const { sendEmail } = require("../email");
 const router = express.Router();
 
-const isLate = mandataire =>
-  format(addMonths(new Date(mandataire.date_mesure_update), 1), "MM/DD/YYYY") <
-    format(new Date(Date.now()), "MM/DD/YYYY") &&
-  format(addDays(new Date(mandataire.email_send), 15), "MM/DD/YYYY") <
-    format(new Date(Date.now()), "MM/DD/YYYY");
+const isBefore = require("date-fns/is_before");
+const isAfter = require("date-fns/is_after");
+
+const isLate = mandataire => {
+  const hasUpdatedLastMonth = isAfter(
+    new Date(mandataire.date_mesure_update),
+    new addMonths(Date.now(), -1)
+  );
+
+  const hasBeenMailedRecently = isAfter(
+    new Date(mandataire.email_send),
+    new addDays(Date.now(), -15)
+  );
+
+  return !hasUpdatedLastMonth && !hasBeenMailedRecently;
+};
 
 const EMAIL_RELANCE_TEXT = `
 Bonjour,
@@ -77,6 +88,10 @@ router.get("/test", function(req, res, next) {
     "Bonjour !",
     "Bonjour !"
   );
+  res.json({ success: true });
 });
 
-module.exports = router;
+module.exports = {
+  router,
+  isLate
+};
