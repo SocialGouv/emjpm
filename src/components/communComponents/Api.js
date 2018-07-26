@@ -1,7 +1,7 @@
 import Router from "next/router";
 import fetch from "isomorphic-fetch";
 
-const API_URL = process.env.API_URL;
+const API_URL = process.env.API_URL || "http://127.0.0.1:4000";
 
 const apiFetch = (route, params, options = { forceLogin: true }) =>
   fetch(`${API_URL}/api/v1${route}`, {
@@ -16,14 +16,14 @@ const apiFetch = (route, params, options = { forceLogin: true }) =>
       // intercept
       if (options.forceLogin && res.status === 401) {
         Router.push("/login");
-        return;
       }
       if (res.status === 404) {
+        console.log(`404 on ${route}`);
         throw new Error(404);
       }
       return res;
     })
-    .then(res => res.json());
+    .then(res => res && res.json());
 
 // admin toggle
 // destructuration as a whitelist
