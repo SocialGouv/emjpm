@@ -6,10 +6,16 @@ import apiCall from "./Api";
 const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm.png");
 
 const doLogout = () =>
-  apiCall("/auth/logout").then(json => {
-    Router.push("/login");
-    return json;
-  });
+  apiCall("/auth/logout")
+    .then(json => {
+      Router.push("/login");
+      return json;
+    })
+    .catch(e => {
+      Router.push("/login");
+      console.log(e);
+      throw e;
+    });
 
 const Navigation = ({ logout }) => (
   <div style={{ background: "white", padding: "15px 0", textAlign: "center" }}>

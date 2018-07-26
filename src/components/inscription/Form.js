@@ -7,16 +7,16 @@ import apiFetch from "../communComponents/Api";
 import Router from "next/router";
 
 const formsMandataires = {
-  individuel: props => <InscriptionIndividuel style={{ width: "80%" }} {...props} />,
-  preposes: props => <InscriptionPrepose style={{ width: "80%" }} {...props} />,
-  service: props => <InscriptionService style={{ width: "80%" }} {...props} />
+  individuel: props => <InscriptionIndividuel {...props} />,
+  prepose: props => <InscriptionPrepose {...props} />,
+  service: props => <InscriptionService {...props} />
 };
 
 const FormSelector = ({ label, value, onChange }) => (
   <td>
     <label>
       <input
-        style={{ marginRight: 5 }}
+        style={{ marginRight: 10 }}
         type="radio"
         name="form_selector"
         value={value}
@@ -28,9 +28,12 @@ const FormSelector = ({ label, value, onChange }) => (
 );
 
 const getTis = () =>
-  apiFetch("/inscription/tis", null, {
-    forceLogin: false
-  });
+  // only fetch client-side
+  (typeof window !== "undefined" &&
+    apiFetch("/inscription/tis", null, {
+      forceLogin: false
+    })) ||
+  Promise.resolve();
 
 class Form extends React.Component {
   state = {
@@ -52,11 +55,15 @@ class Form extends React.Component {
         method: "POST",
         body: JSON.stringify({
           ...formData,
+          etablissement: formData.etablissement || "",
           tis: this.state.tis,
           type: this.state.typeMandataire
         })
       })
-        .then(() => {
+        .then(json => {
+          if (json.success === false) {
+            throw new Error();
+          }
           // piwik.push(["trackEvent", "Inscription success", formData.type]);
           Router.push("/inscription-done");
         })
@@ -70,36 +77,40 @@ class Form extends React.Component {
   render() {
     const FormMandataire = formsMandataires[this.state.typeMandataire];
     return (
-      <div className="container">
+      <div className="container Inscription">
         <div className="col-12 offset-sm-2 col-sm-8 offset-md-2 col-md-8">
           <h1 style={{ margin: 20 }}>Inscription</h1>
-          <div style={{ backgroundColor: "white", padding: 5 }}>
+          <div style={{ backgroundColor: "white", padding: 25 }}>
             <Resolve
               promises={[getTis()]}
               render={({ status, result }) => (
-                <div>
+                <div style={{ margin: "20px 0" }}>
+                  <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
+                    Choisissez les tribunaux d&apos;instances dans vos régions :
+                  </div>
                   {status === "success" && <TiSelector onChange={this.setTis} tis={result[0]} />}
                   {status === "error" && <div>Impossible de charger la liste des Tribunaux</div>}
+                  {status === "loading" && <div>Chargement de la liste des Tribunaux...</div>}
                 </div>
               )}
             />
-            <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: 20 }}>
-              Vous êtes un mandataire :
-            </div>
+            <div style={{ fontSize: "1.2em", fontWeight: "bold" }}>Vous êtes un mandataire :</div>
             <table
               style={{
-                margin: 20,
+                margin: "20px 0",
                 width: "100%",
-                marginTop: 20,
-                marginBottom: 20,
                 fontSize: "1.1em"
               }}
             >
               <tbody>
                 <tr>
-                  <FormSelector value="individuel" onChange={this.setTypeMandataire} />
+                  <FormSelector
+                    value="individuel"
+                    label="Individuel"
+                    onChange={this.setTypeMandataire}
+                  />
                   <FormSelector value="prepose" label="Préposé" onChange={this.setTypeMandataire} />
-                  <FormSelector value="service" onChange={this.setTypeMandataire} />
+                  <FormSelector value="service" label="Service" onChange={this.setTypeMandataire} />
                 </tr>
               </tbody>
             </table>

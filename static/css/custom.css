@@ -299,11 +299,16 @@
   width: 280px;
   display: inline-block;
 }
-.I_input_form_inscription {
+
+/*. INSCRIPTION */
+
+.Inscription .input__long {
   width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
 }
-.hidden_input_form_inscription {
-  display: none;
+.Inscription .input__code_postal {
+  width: 10%;
+  min-width: 100px;
+}
+.Inscription .input__ville {
+  width: 60%;
 }
