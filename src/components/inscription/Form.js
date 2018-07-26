@@ -55,11 +55,15 @@ class Form extends React.Component {
         method: "POST",
         body: JSON.stringify({
           ...formData,
+          etablissement: formData.etablissement || "",
           tis: this.state.tis,
           type: this.state.typeMandataire
         })
       })
-        .then(() => {
+        .then(json => {
+          if (json.success === false) {
+            throw new Error();
+          }
           // piwik.push(["trackEvent", "Inscription success", formData.type]);
           Router.push("/inscription-done");
         })
