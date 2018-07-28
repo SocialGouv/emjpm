@@ -48,44 +48,35 @@ class Mapstry extends React.Component {
 
   mapRef = createRef();
 
-  componentDidMount() {
+  updateFromBounds = () => {
     const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
-    apiFetch("/mesures/filters", {
-      method: "POST",
-      body: JSON.stringify({
-        latNorthEast: mapRefGetBound._northEast.lat,
-        latSouthWest: mapRefGetBound._southWest.lat,
-        longNorthEast: mapRefGetBound._northEast.lng,
-        longSouthWest: mapRefGetBound._southWest.lng
+    if (mapRefGetBound && mapRefGetBound._northEast && mapRefGetBound._northEast.lat) {
+      return apiFetch("/mesures/filters", {
+        method: "POST",
+        body: JSON.stringify({
+          latNorthEast: mapRefGetBound._northEast.lat,
+          latSouthWest: mapRefGetBound._southWest.lat,
+          longNorthEast: mapRefGetBound._northEast.lng,
+          longSouthWest: mapRefGetBound._southWest.lng
+        })
       })
-    })
-      .then(mesures => {
-        this.setState({ modalIsOpen: false });
-        this.props.updateMandataireMesures(mesures);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+        .then(mesures => {
+          this.setState({ modalIsOpen: false });
+          this.props.updateMandataireMesures(mesures);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    }
+    return Promise.reject();
+  };
+
+  componentDidMount() {
+    this.updateFromBounds();
   }
 
   handleMoveend = () => {
-    const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
-    apiFetch("/mesures/filters", {
-      method: "POST",
-      body: JSON.stringify({
-        latNorthEast: mapRefGetBound._northEast.lat,
-        latSouthWest: mapRefGetBound._southWest.lat,
-        longNorthEast: mapRefGetBound._northEast.lng,
-        longSouthWest: mapRefGetBound._southWest.lng
-      })
-    })
-      .then(mesures => {
-        this.setState({ modalIsOpen: false });
-        this.props.updateMandataireMesures(mesures);
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    this.updateFromBounds();
   };
 
   zoomCodePostal = codePostal => {
@@ -121,9 +112,10 @@ class Mapstry extends React.Component {
   };
 
   render() {
-    const center = this.props.postcodeMandataire
-      ? [this.props.postcodeMandataire[0], this.props.postcodeMandataire[1]]
-      : [50.459441, 2.693963];
+    const center =
+      this.props.postcodeMandataire && this.props.postcodeMandataire[0]
+        ? [this.props.postcodeMandataire[0], this.props.postcodeMandataire[1]]
+        : [50.459441, 2.693963];
     return (
       <MapsView
         innerRef={this.mapRef}
