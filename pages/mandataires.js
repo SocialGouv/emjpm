@@ -1,88 +1,18 @@
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import { Home, Map, UserMinus } from "react-feather";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
+import { PillDispo, DummyTabs, Layout } from "../src/components";
 
 import apiFetch from "../src/components/communComponents/Api";
-import Footer from "../src/components/communComponents/Footer";
 import FormulaireMandataire from "../src/components/mandataireComponents/FormulaireMandataire";
-import Navigation from "../src/components/communComponents/Navigation";
 import TableMesure from "../src/components/mandataireComponents/TableMesure";
 import DisplayDate from "../src/components/communComponents/formatFrenchDate";
 
-const tabStyle = {
-  backgroundColor: "#ebeff2",
-  padding: "10px 10px 5px 10px",
-  bottom: 0,
-  verticalAlign: "middle",
-  lineHeight: "40px",
-  flex: "1 0 auto",
-  display: "inline-flex"
-};
-
-const imageStyle = {
-  lineHeight: "50px",
-  width: "20px",
-  height: "20px",
-  color: "black",
-  display: "inline-block",
-  margin: 10
-};
-
-const Pill = styled.div`
-  font-size: 18px;
-  min-width: 80px;
-  padding: 0 10px;
-  height: 28px;
-  line-height: 28px;
-  border-radius: 2px;
-  text-align: center;
-  color: white;
-  display: inline-block;
-  margin-right: 10px;
-  margin-top: 5px;
-`;
-
-const PanelMandataire = styled.div`
-  text-align: "left",
-  background-size: cover;
-  heigth: 100px !important;
-  background-color: #cad4de;
-`;
-
 const ContainerMandataire = styled.div`
-  padding-right: 0px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  padding-left: 0px;
+  padding: 10px 0;
   font-size: 1.2em;
   margin-top: 0px;
-`;
-
-const TabsShowMandataire = styled.div`
-  padding: 0;
-  background-color: #ebeff2;
-`;
-
-const TabsPanelMandataire = styled.div`
-  background-color: white;
-  min-height: 70vh;
-  padding: 0px;
-`;
-
-const FormuaireMandataire = styled.div`
-  min-height: 70vh;
-  padding-top: 10px;
-`;
-
-const OpenStreeMapMandataire = styled.div`
-  padding-top: 10px;
-  padding-bottom: 10px;
-`;
-
-const MandatairesPageStlye = styled.div`
-  background-color: #cad4de;
-  min-height: 100%;
 `;
 
 const Title = styled.div`
@@ -98,109 +28,23 @@ const OpenStreeMap = dynamic({
   render: (props, { MapsPartieMandataire }) => <MapsPartieMandataire {...props} />
 });
 
-const getColorFromDisponibilite = dispo => {
-  if (dispo <= 0) {
-    return "#f05659";
-  } else if (dispo <= 5) {
-    return "#eb9123";
-  }
-  return "#43b04a";
-};
-
-const PillDispo = ({ dispo, dispo_max }) => (
-  <Pill
-    style={{
-      background: getColorFromDisponibilite(dispo_max - dispo)
-    }}
-  >
-    {dispo || 0} / {dispo_max || 0}
-  </Pill>
+// dummy header
+const HeaderMandataire = ({ nom, prenom, date_mesure_update }) => (
+  <ContainerMandataire className="container">
+    <Title>
+      {nom} {prenom}
+    </Title>
+    <div style={{ textAlign: "right", fontSize: "0.8em", color: "#555" }}>
+      {date_mesure_update && (
+        <div>
+          Dernière mise à jour : <DisplayDate date={date_mesure_update.slice(0, 10)} />
+        </div>
+      )}
+    </div>
+  </ContainerMandataire>
 );
 
-const TabListItemTitle = styled.div`
-  white-space: nowrap;
-  font-weight: bold;
-`;
-
-const MandataireIndexView = ({
-  currentMandataire,
-  filteredMesures,
-  updateMadataire,
-  updateMesure,
-  mesureEteinte,
-  mesuresForMapsMandataire
-}) => (
-  <Tabs>
-    <TabList>
-      <PanelMandataire className="panel">
-        <ContainerMandataire className="container">
-          <Title>
-            {currentMandataire.nom} {currentMandataire.prenom}
-          </Title>
-          <div style={{ textAlign: "right" }}>
-            {currentMandataire.date_mesure_update && (
-              <div>
-                Dernière mise à jour :{" "}
-                <DisplayDate date={currentMandataire.date_mesure_update.slice(0, 10)} />
-              </div>
-            )}
-          </div>
-        </ContainerMandataire>
-        <TabsShowMandataire className="container">
-          <Tab style={tabStyle}>
-            {currentMandataire && (
-              <PillDispo
-                dispo={currentMandataire.mesures_en_cours}
-                dispo_max={currentMandataire.dispo_max}
-              />
-            )}
-            <TabListItemTitle>Mesures en cours</TabListItemTitle>
-          </Tab>
-          <Tab style={tabStyle}>
-            <Map style={imageStyle} />
-            <TabListItemTitle>Vue Carte</TabListItemTitle>
-          </Tab>
-          <Tab style={tabStyle} data-cy="tab-manda-eteinte">
-            <UserMinus style={imageStyle} />
-            <TabListItemTitle>Mesures éteintes</TabListItemTitle>
-          </Tab>
-          <Tab style={tabStyle} data-cy="tab-manda-information">
-            <Home style={imageStyle} />
-            <TabListItemTitle>Mes informations</TabListItemTitle>
-          </Tab>
-        </TabsShowMandataire>
-      </PanelMandataire>
-    </TabList>
-    <TabsPanelMandataire className="container">
-      <TabPanel>
-        <TableMesure display_ext={"none"} rows={filteredMesures} updateMesure={updateMesure} />
-      </TabPanel>
-      <TabPanel>
-        <OpenStreeMapMandataire className="container">
-          <OpenStreeMap
-            width={"100%"}
-            height={"70vh"}
-            postcodeMandataire={[currentMandataire.latitude, currentMandataire.longitude]}
-            mesures={mesuresForMapsMandataire}
-          />
-        </OpenStreeMapMandataire>
-      </TabPanel>
-      <TabPanel>
-        <TableMesure display={"none"} rows={mesureEteinte} updateMesure={updateMesure} />
-      </TabPanel>
-      <TabPanel>
-        <FormuaireMandataire>
-          <FormulaireMandataire
-            currentMandataireModal={currentMandataire}
-            updateMadataire={updateMadataire}
-          />
-        </FormuaireMandataire>
-      </TabPanel>
-    </TabsPanelMandataire>
-  </Tabs>
-);
-
-class MandatairesIndex extends React.Component {
+class MandatairesTabs extends React.Component {
   state = {
     data: [],
     datamesure: [],
@@ -211,10 +55,7 @@ class MandatairesIndex extends React.Component {
   };
 
   componentDidMount() {
-    // apiFetch(`/mandataires/1/capacite`, {
-    //   method: "PUT"
-    // }).then(() => {});
-
+    // todo
     apiFetch(`/mandataires/1/mesures`)
       .then(mesures =>
         apiFetch(`/mandataires/1`).then(mandataire =>
@@ -236,6 +77,7 @@ class MandatairesIndex extends React.Component {
   }
 
   onUpdate = () => {
+    // todo
     apiFetch(`/mandataires/1/mesures`)
       .then(mesures =>
         apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
@@ -245,51 +87,89 @@ class MandatairesIndex extends React.Component {
           })
         )
       )
-      .then(() => {
-        return apiFetch(`/mandataires/1`, {
+      .then(() =>
+        apiFetch(`/mandataires/1`, {
           method: "PUT",
           body: JSON.stringify({
             date_mesure_update: new Date()
           })
         }).then(json2 => {
-          this.updateMadataire(json2);
-        });
-      })
-      .catch(e => {
-        throw e;
-      });
+          this.updateMandataire(json2);
+        })
+      );
   };
 
   updateMesure = () => {
     this.onUpdate();
   };
 
-  updateMadataire = mandataire => {
+  updateMandataire = mandataire => {
     this.setState({ currentMandataire: mandataire });
   };
 
   render() {
-    const filteredMesures = this.state.datamesure;
-    const mesuresForMapsMandataire = this.state.mesuresForMaps;
+    const { currentMandataire, mesureEteinte, datamesure, mesuresForMaps } = this.state;
+
+    const tabs = [
+      {
+        text: "Mesures en cours",
+        icon: (
+          <PillDispo
+            dispo={currentMandataire.mesures_en_cours}
+            dispo_max={currentMandataire.dispo_max}
+          />
+        ),
+        content: (
+          <TableMesure display_ext={"none"} rows={datamesure} updateMesure={this.updateMesure} />
+        )
+      },
+      {
+        text: "Vue Carte",
+        icon: <Map />,
+        content: (
+          <OpenStreeMap
+            width={"100%"}
+            style={{ padding: 0 }}
+            height={"70vh"}
+            postcodeMandataire={[currentMandataire.latitude, currentMandataire.longitude]}
+            mesures={mesuresForMaps}
+          />
+        )
+      },
+      {
+        text: "Mesures éteintes",
+        icon: <UserMinus />,
+        content: (
+          <TableMesure display={"none"} rows={mesureEteinte} updateMesure={this.updateMesure} />
+        )
+      },
+      {
+        text: "Mes informations",
+        icon: <Home />,
+        content: (
+          <FormulaireMandataire
+            currentMandataireModal={currentMandataire}
+            updateMandataire={this.updateMandataire}
+          />
+        )
+      }
+    ];
     return (
-      <MandataireIndexView
-        currentMandataire={this.state.currentMandataire}
-        filteredMesures={filteredMesures}
-        updateMadataire={this.updateMadataire}
-        mesureEteinte={this.state.mesureEteinte}
-        updateMesure={this.updateMesure}
-        mesuresForMapsMandataire={mesuresForMapsMandataire}
-      />
+      (currentMandataire && (
+        <React.Fragment>
+          <HeaderMandataire {...currentMandataire} />
+          <DummyTabs tabs={tabs} />{" "}
+        </React.Fragment>
+      )) ||
+      null
     );
   }
 }
 
 const MandatairesPage = () => (
-  <MandatairesPageStlye>
-    <Navigation logout />
-    <MandatairesIndex style={{ marginTop: 100 }} />
-    <Footer />
-  </MandatairesPageStlye>
+  <Layout>
+    <MandatairesTabs style={{ marginTop: 100 }} />
+  </Layout>
 );
 
 export default MandatairesPage;
