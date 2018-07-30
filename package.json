@@ -62,6 +62,7 @@
     "@storybook/addons": "^3.4.8",
     "@storybook/cli": "^3.4.8",
     "@storybook/react": "^3.4.8",
+    "babel-eslint": "^8.2.6",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "concurrently": "^3.6.0",
     "css-loader": "^0.28.9",
