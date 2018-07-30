@@ -93,9 +93,7 @@ const uiSchema = {
 const Container = ({ children }) => <div className="container">{children}</div>;
 const Row = ({ children }) => <div className="row">{children}</div>;
 const Col6 = ({ children }) => <div className="col-6">{children}</div>;
-const Stylediv = styled.div`
-  text-align: left;
-`;
+const Stylediv = styled.div`text-align: left;`;
 
 const FormulaireMandataireView = ({
   onClick,

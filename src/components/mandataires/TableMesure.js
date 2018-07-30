@@ -24,13 +24,11 @@ const LineContainer = styled.div`
   paddin-right: 0px;
   vertical-align: "middle";
 `;
-const Tr = styled.tr`
-  border-top: 0px solid white;
-`;
+const Tr = styled.tr`border-top: 0px solid white;`;
 
 const Td = ({ children }) => <TdStyle>{children}</TdStyle>;
 
-const ColStyle = styled.b`color: "black"};`;
+const ColStyle = styled.b`color: black;`;
 
 export const TableMesureView = ({ rows, display, display_ext, updateMesure }) => (
   <LineContainer>

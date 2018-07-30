@@ -1,5 +1,4 @@
 import Form from "react-jsonschema-form";
-import TableMesure from "./mandataireComponents/TableMesure";
 import apiFetch from "./communComponents/Api";
 import Modal from "react-modal";
 

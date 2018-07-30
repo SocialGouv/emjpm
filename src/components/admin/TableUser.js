@@ -2,7 +2,7 @@ import ReactTable from "react-table";
 import format from "date-fns/format";
 import queryString from "query-string";
 
-import ToggleState from "./ToggleState";
+import ToggleState from "../common/ToggleState";
 import SearchButton from "../communComponents/SearchButton";
 import { default as apiFetch, updateUser } from "../communComponents/Api";
 
