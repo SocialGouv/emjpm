@@ -22,6 +22,8 @@ const isLate = mandataire => {
   return !hasUpdatedLastMonth && !hasBeenMailedRecently;
 };
 
+const hasEmail = mandataire => !!mandataire.email;
+
 const EMAIL_RELANCE_TEXT = `
 Bonjour,
 
@@ -59,22 +61,25 @@ router.get("/relance-mandataires-inactifs", function(req, res, next) {
   queries
     .getAll()
     .then(mandataires =>
-      mandataires.filter(isLate).map(mandataire =>
-        sendEmail(
-          mandataire.email,
-          "e-MJPM : actualisez vos données",
-          EMAIL_RELANCE_TEXT,
-          EMAIL_RELANCE_HTML
+      mandataires
+        .filter(hasEmail)
+        .filter(isLate)
+        .map(mandataire =>
+          sendEmail(
+            mandataire.email,
+            "e-MJPM : actualisez vos données",
+            EMAIL_RELANCE_TEXT,
+            EMAIL_RELANCE_HTML
+          )
+            .then(() => {
+              // MAJ mandataire.email_send
+              return queries.updateMandataireMailSent(mandataire.id);
+            })
+            .catch(e => {
+              // todo: sentry
+              console.log(e);
+            })
         )
-          .then(() => {
-            // MAJ mandataire.email_send
-            queries.updateMandataireMailSent(mandataire.id);
-          })
-          .catch(e => {
-            // todo: sentry
-            console.log(e);
-          })
-      )
     )
     .then(() => {
       res.json({ success: true });
