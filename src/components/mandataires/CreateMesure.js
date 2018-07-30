@@ -169,6 +169,7 @@ class EtablissementAutoComplete extends React.Component {
     return (
       <EtablissementAutoCompleteDumb
         {...this.props}
+        items={this.props.items}
         value={this.state.value}
         onChange={e => this.setState({ value: e.target.value })}
         onSelect={this.onSelect}
@@ -177,12 +178,7 @@ class EtablissementAutoComplete extends React.Component {
   }
 }
 
-const EtablissementAutoCompleteDumb = ({
-  items = [{ nom: "abcde", id: 1 }, { nom: "abcdefghijkl", id: 2 }, { nom: "dpaoiefozeh", id: 3 }],
-  onChange,
-  onSelect,
-  value = ""
-}) => (
+const EtablissementAutoCompleteDumb = ({ items = [], onChange, onSelect, value = "" }) => (
   <ReactAutocomplete
     items={items}
     inputProps={{
@@ -203,8 +199,13 @@ const EtablissementAutoCompleteDumb = ({
   />
 );
 
+// connect autocomplete to redux store finess data
+const EtablissementAutoCompleteRedux = connect(state => ({
+  items: state.mandataire.finess
+}))(EtablissementAutoComplete);
+
 const widgets = {
-  EtablissementAutoComplete
+  EtablissementAutoComplete: EtablissementAutoCompleteRedux
 };
 
 const CustomFieldTemplate = props => {

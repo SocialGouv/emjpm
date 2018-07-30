@@ -156,7 +156,7 @@ class TableMesures extends React.Component {
     return (
       <React.Fragment>
         <ReactTable
-          style={{ backgroundColor: "white" }}
+          style={{ backgroundColor: "white", minHeight: 500 }}
           columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
           noDataText="Aucune mesure ici..."
           showPagination={false}

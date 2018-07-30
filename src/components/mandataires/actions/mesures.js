@@ -35,6 +35,7 @@ const closeMesureApi = data =>
       extinction: data.date
     })
   }).then(json =>
+    // todo: move to trigger
     apiFetch(`/mandataires/1/capacite`, {
       method: "PUT"
     })
@@ -49,10 +50,39 @@ const reactivateMesureApi = data =>
       extinction: null
     })
   }).then(json =>
+    // todo: move to trigger
     apiFetch(`/mandataires/1/capacite`, {
       method: "PUT"
     })
   );
+
+// todo : better API
+const createMesureApi = data => {
+  const payload = {
+    ...data,
+    latitude: 0,
+    longitude: 0,
+    status: "Mesure en cours"
+  };
+  return apiFetch(`/mandataires/1/mesures`, {
+    method: "POST",
+    body: JSON.stringify(payload)
+  }).then(json =>
+    // todo: move to trigger/view
+    apiFetch(`/mandataires/1/capacite`, {
+      method: "PUT"
+    })
+      .then(() =>
+        apiFetch(`/mandataires/1`, {
+          method: "PUT",
+          body: JSON.stringify({
+            date_mesure_update: new Date()
+          })
+        })
+      )
+      .then(() => json)
+  );
+};
 
 // -------- ACTIONS CREATORS
 
@@ -96,36 +126,7 @@ export const reactivateMesure = data => dispatch => {
 };
 
 export const createMesureSave = data => dispatch => {
-  // TODO
-  const payload = {
-    ...data,
-    latitude: 0,
-    longitude: 0,
-    status: "Mesure en cours"
-  };
-  return apiFetch(`/mandataires/1/mesures`, {
-    method: "POST",
-    body: JSON.stringify(payload)
-  })
-    .then(json =>
-      // todo: move to trigger/view
-      apiFetch(`/mandataires/1/capacite`, {
-        method: "PUT"
-      }).then(() => {
-        return json;
-      })
-    )
-    .then(json => {
-      // TODO: use trigger
-      return apiFetch(`/mandataires/1`, {
-        method: "PUT",
-        body: JSON.stringify({
-          date_mesure_update: new Date()
-        })
-      }).then(() => {
-        return json;
-      });
-    })
+  createMesureApi(data)
     .then(json => {
       dispatch(mesureCreated(json));
     })

@@ -3,13 +3,20 @@ import apiFetch from "../../communComponents/Api";
 export const MANDATAIRE_MOUNT = "MANDATAIRE_MOUNT";
 export const MANDATAIRE_PROFILE_UPDATED = "MANDATAIRE_PROFILE_UPDATED";
 export const PROFILE_UPDATED = "PROFILE_UPDATED";
+export const FINESS_UPDATED = "FINESS_UPDATED";
 
 const fetchProfile = () => apiFetch(`/mandataires/1`);
 
 /* ACTIONS CREATORS */
 
 export const mandataireMount = () => dispatch =>
-  fetchProfile().then(json => dispatch(updateMandataireProfile(json)));
+  fetchProfile()
+    .then(json => dispatch(updateMandataireProfile(json)))
+    .then(() => {
+      apiFetch("/mandataires/1/etablissements").then(etablissements =>
+        dispatch(finessUpdated(etablissements))
+      );
+    });
 
 export const updateProfile = data => dispatch => {
   //todo
@@ -36,5 +43,10 @@ export const updateMandataireProfile = data => ({
 
 export const profileUpdated = data => ({
   type: PROFILE_UPDATED,
+  data
+});
+
+export const finessUpdated = data => ({
+  type: FINESS_UPDATED,
   data
 });
