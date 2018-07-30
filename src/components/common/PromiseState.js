@@ -1,17 +1,20 @@
-// render prop that trigger promise onClick and notifies promise resolution
+import React from "react";
+
+// render prop that trigger promise on mount and notifies promise resolution
+// useful for dynamic loading components
 class PromiseState extends React.Component {
   state = {
-    status: "idle"
+    status: "idle",
+    data: null
   };
-
-  onClick = () => {
+  load = () => {
     this.setState(
       {
         status: "loading"
       },
       () => {
         this.props
-          .onClick()
+          .getPromise()
           .then(data => {
             this.setState({
               status: "success",
@@ -27,8 +30,12 @@ class PromiseState extends React.Component {
       }
     );
   };
+  componentDidMount() {
+    this.load();
+  }
   render() {
-    return <div onClick={this.onClick}>{this.props.render(this.state)}</div>;
+    console.log("PromiseState", this.state);
+    return this.props.render(this.state);
   }
 }
 

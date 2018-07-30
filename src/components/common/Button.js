@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { lighten } from "@wessberg/color";
 
 const variants = {
   default: {
@@ -8,29 +9,32 @@ const variants = {
   error: {
     background: "#da4747",
     backgroundHover: "#ff2e00"
+  },
+  black: {
+    background: "#444444",
+    backgroundHover: "#222222"
   }
 };
 
 const getColor = property => props =>
-  (variants[props.error && "error"] || variants.default)[property];
+  (variants[(props.error && "error") || (props.black && "black")] || variants.default)[property];
 
 export const Button = styled.button`
-  background: ${getColor("background")};
+  background: ${props => getColor("background")(props)};
+  border: 1px solid ${props => lighten(getColor("background")(props), 20)};
   height: 40px;
   width: auto;
   text-align: center;
   color: white;
   padding: 0 15px;
-  border: 1px solid;
-  border-color: ${getColor("background")};
   border-radius: 3px;
   box-shadow: 2px 2px 1px #c0c0c0;
   font-size: 1.1em;
   margin: 5px;
   cursor: pointer;
   &:hover {
-    border-color: ${getColor("backgroundHover")};
-    background: ${getColor("backgroundHover")};
+    border-color: ${props => lighten(getColor("background")(props), 30)};
+    background: ${props => lighten(getColor("background")(props), 10)};
   }
 `;
 

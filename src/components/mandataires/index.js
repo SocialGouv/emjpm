@@ -1,144 +1,65 @@
 import dynamic from "next/dynamic";
-import styled from "styled-components";
 import { Home, Map, UserMinus } from "react-feather";
+import Modal from "react-modal";
 
-import { PillDispo, DummyTabs } from "..";
+import { DummyTabs } from "..";
+import apiFetch from "../communComponents/Api";
 
+import PillDispo from "./PillDispo";
 import Profile from "./Profile";
 import TableMesures from "./TableMesures";
+import Header from "./Header";
+import CreateMesure from "./CreateMesure";
 
-import apiFetch from "../communComponents/Api";
-import DisplayDate from "../communComponents/formatFrenchDate";
+/* TEMP */
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { reducer as modal } from "redux-modal";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-const ContainerMandataire = styled.div`
-  padding: 10px 0;
-  font-size: 1.2em;
-  margin-top: 0px;
-`;
+import { mandataireMount } from "./actions/mandataire";
+import mesuresReducer from "./reducers/mesures";
+import mandataireReducer from "./reducers/mandataire";
 
-const Title = styled.div`
-  color: black;
-  font-size: 1.5em;
-  margin: 10px;
-`;
+Modal.setAppElement("#__next");
 
+// due to leaflet + SSR
 const OpenStreeMap = dynamic({
   modules: props => ({
-    Map: import("./Map")
+    MapMesures: import("./MapMesures")
   }),
-  render: (props, { Map }) => <Map {...props} />
+  render: (props, { MapMesures }) => <MapMesures {...props} />
 });
 
-// dummy header
-const HeaderMandataire = ({ nom, prenom, date_mesure_update }) => (
-  <ContainerMandataire className="container">
-    <Title>
-      {nom} {prenom}
-    </Title>
-    <div style={{ textAlign: "right", fontSize: "0.8em", color: "#555" }}>
-      {date_mesure_update && (
-        <div>
-          Dernière mise à jour : <DisplayDate date={date_mesure_update.slice(0, 10)} />
-        </div>
-      )}
-    </div>
-  </ContainerMandataire>
-);
-
-class MandatairesTabs extends React.Component {
-  state = {
-    data: [],
-    datamesure: [],
-    mesuresForMaps: [],
-    mesureEteinte: [],
-    currentMandataire: "",
-    mesureEteintes: ""
-  };
-
+class MandataireTabs extends React.Component {
   componentDidMount() {
-    // todo
-    apiFetch(`/mandataires/1/mesures`)
-      .then(mesures =>
-        apiFetch(`/mandataires/1`).then(mandataire =>
-          apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
-            apiFetch(`/mandataires/1/mesuresForMaps`).then(mesuresForMaps =>
-              this.setState({
-                datamesure: mesures,
-                mesureEteinte,
-                currentMandataire: mandataire,
-                mesuresForMaps
-              })
-            )
-          )
-        )
-      )
-      .catch(e => {
-        throw e;
-      });
+    // TODO: temp hack to trigger profile load
+    if (this.props.onMount) {
+      this.props.onMount();
+    }
   }
 
-  onUpdate = () => {
-    // todo
-    apiFetch(`/mandataires/1/mesures`)
-      .then(mesures =>
-        apiFetch(`/mandataires/1/mesures/Eteinte`).then(mesureEteinte =>
-          this.setState({
-            datamesure: mesures,
-            mesureEteinte: mesureEteinte
-          })
-        )
-      )
-      .then(() =>
-        apiFetch(`/mandataires/1`, {
-          method: "PUT",
-          body: JSON.stringify({
-            date_mesure_update: new Date()
-          })
-        }).then(json2 => {
-          this.updateMandataire(json2);
-        })
-      );
-  };
-
-  updateMesure = () => {
-    this.onUpdate();
-  };
-
-  updateMandataire = mandataire => {
-    this.setState({ currentMandataire: mandataire });
-  };
-
   render() {
-    const { currentMandataire, mesuresForMaps } = this.state;
-
     const tabs = [
       {
         text: "Mesures en cours",
-        icon: (
-          <PillDispo
-            dispo={currentMandataire.mesures_en_cours}
-            dispo_max={currentMandataire.dispo_max}
-          />
-        ),
+        icon: <PillDispo />,
         content: (
-          <TableMesures
-            fetch={() => apiFetch(`/mandataires/1/mesures`)}
-            hideColumns={["reactiver", "extinction"]}
-          />
+          <div>
+            <CreateMesure />
+            <TableMesures
+              fetch={() => apiFetch(`/mandataires/1/mesures`)}
+              hideColumns={["reactiver", "extinction"]}
+            />
+          </div>
         )
       },
       {
         text: "Vue Carte",
         icon: <Map />,
-        content: (
-          <OpenStreeMap
-            width={"100%"}
-            style={{ padding: 0 }}
-            height={"70vh"}
-            postcodeMandataire={[currentMandataire.latitude, currentMandataire.longitude]}
-            mesures={mesuresForMaps}
-          />
-        )
+        content: <OpenStreeMap getPromise={() => apiFetch(`/mandataires/1/mesuresForMaps`)} />
       },
       {
         text: "Mesures éteintes",
@@ -153,24 +74,46 @@ class MandatairesTabs extends React.Component {
       {
         text: "Mes informations",
         icon: <Home />,
-        content: (
-          <Profile
-            currentMandataireModal={currentMandataire}
-            updateMandataire={this.updateMandataire}
-          />
-        )
+        content: <Profile />
       }
     ];
     return (
-      (currentMandataire && (
-        <React.Fragment>
-          <HeaderMandataire {...currentMandataire} />
-          <DummyTabs tabs={tabs} />{" "}
-        </React.Fragment>
-      )) ||
-      null
+      <React.Fragment>
+        <Header />
+        <DummyTabs tabs={tabs} />
+      </React.Fragment>
     );
   }
 }
 
-export default MandatairesTabs;
+const rootReducer = combineReducers({
+  mesures: mesuresReducer,
+  mandataire: mandataireReducer,
+  modal
+});
+
+const store = createStore(
+  rootReducer,
+  typeof window !== "undefined" &&
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(thunk)
+);
+
+const mapDispatchToProps = (dispatch, ownProps) =>
+  bindActionCreators({ onMount: mandataireMount }, dispatch);
+
+// connect to redux store actions
+// connect to redux-modal
+const MandataireTabsRedux = connect(
+  null,
+  mapDispatchToProps
+)(MandataireTabs);
+
+const Mandataires = () => (
+  <Provider store={store}>
+    <MandataireTabsRedux />
+  </Provider>
+);
+
+export default Mandataires;

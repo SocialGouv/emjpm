@@ -1,11 +1,17 @@
 import * as React from "react";
 import Modal from "react-modal";
 import Form from "react-jsonschema-form";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import styled from "styled-components";
+
 import apiFetch from "../communComponents/Api";
 import piwik from "../../piwik";
+
 import CreationEtablissement from "./CreationEtablissement";
 import AddTisToFormulaireMandataire from "./AddTisToFormulaireMandataire";
+
+import { updateProfile } from "./actions/mandataire";
 
 const schema = {
   title: "Modifier vos informations",
@@ -93,12 +99,14 @@ const uiSchema = {
 const Container = ({ children }) => <div className="container">{children}</div>;
 const Row = ({ children }) => <div className="row">{children}</div>;
 const Col6 = ({ children }) => <div className="col-6">{children}</div>;
-const Stylediv = styled.div`text-align: left;`;
+const Stylediv = styled.div`
+  text-align: left;
+`;
 
 const FormulaireMandataireView = ({
   onClick,
   onSubmit,
-  currentMandataireModalTry,
+  currentMandataire,
   isOpen,
   onRequestClose,
   closebuttonmodal,
@@ -113,7 +121,7 @@ const FormulaireMandataireView = ({
   deleteTi
 }) => (
   <Container>
-    {currentMandataireModalTry && (
+    {currentMandataire && (
       <Container>
         <Row>
           <Col6>
@@ -150,12 +158,12 @@ const FormulaireMandataireView = ({
               </div>
               <br />
               {mandataireEtablissement &&
-                currentMandataireModalTry.type === "Prepose" && (
+                currentMandataire.type === "Prepose" && (
                   <React.Fragment>
                     <div>
                       <b>Etablissement(s) </b>
                       <br />
-                      {currentMandataireModalTry.type === "Prepose" && (
+                      {currentMandataire.type === "Prepose" && (
                         <CreationEtablissement
                           updateEtablissement={updateEtablissement}
                           etablissements={etablissement}
@@ -286,7 +294,7 @@ class FormulaireMandataire extends React.Component {
           "Modification du nombre de mesures souhaitées par un mandataire"
         ]);
       }
-      this.props.updateMadataire(json);
+      this.props.updateMandataire(json);
     });
     this.closeModal();
   };
@@ -321,27 +329,39 @@ class FormulaireMandataire extends React.Component {
   };
 
   render() {
-    const formData = this.props.currentMandataireModal;
+    const formData = this.props.currentMandataire;
     return (
-      <FormulaireMandataireView
-        currentMandataireModalTry={this.props.currentMandataireModal}
-        onClick={this.openModal}
-        onSubmit={this.onSubmit}
-        isOpen={this.state.modalIsOpen}
-        onRequestClose={this.closeModal}
-        closebuttonmodal={this.closeModal}
-        formData={formData}
-        updateEtablissement={this.updateEtablissement}
-        etablissement={this.state.etablissement}
-        mandataireEtablissement={this.state.mandataireEtablissement}
-        deleteEtablissement={this.deleteEtablissement}
-        tis={this.state.tis}
-        updateTi={this.updateTi}
-        tisByMandataire={this.state.tisByMandataire}
-        deleteTi={this.deleteTi}
-      />
+      <div>
+        <FormulaireMandataireView
+          currentMandataire={this.props.currentMandataire}
+          onClick={this.openModal}
+          onSubmit={this.onSubmit}
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          closebuttonmodal={this.closeModal}
+          formData={formData}
+          updateEtablissement={this.updateEtablissement}
+          etablissement={this.state.etablissement}
+          mandataireEtablissement={this.state.mandataireEtablissement}
+          deleteEtablissement={this.deleteEtablissement}
+          tis={this.state.tis}
+          updateTi={this.updateTi}
+          tisByMandataire={this.state.tisByMandataire}
+          deleteTi={this.deleteTi}
+        />
+      </div>
     );
   }
 }
 
-export default FormulaireMandataire;
+const mapDispatchToProps = (dispatch, ownProps) =>
+  bindActionCreators({ updateMandataire: data => updateProfile(data) }, dispatch);
+
+const FormulaireMandataireRedux = connect(
+  state => ({
+    currentMandataire: state.mandataire.profile
+  }),
+  mapDispatchToProps
+)(FormulaireMandataire);
+
+export default FormulaireMandataireRedux;

@@ -20,15 +20,16 @@ const CellActive = ({ active }) => (
 
 const CellAction = ({ row: { id, active } }) => (
   <ToggleState
-    onToggle={active =>
+    getPromise={active =>
       updateUser({
         id,
         active
       })}
     active={active}
-    render={({ active }) => {
+    render={({ active, toggle }) => {
       return (
         <SearchButton
+          onClick={toggle}
           error={active}
           data-cy="UserCellAction"
           style={{ textAlign: "center", fontSize: "0.8em" }}

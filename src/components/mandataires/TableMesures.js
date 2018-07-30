@@ -1,45 +1,43 @@
+import { show } from "redux-modal";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
-
 import ReactTable from "react-table";
 import format from "date-fns/format";
 
-import { Button, PromiseState } from "..";
+import { Button } from "..";
 
-const CellEditMesure = ({ row }) => {
-  const getPromise = () => new Promise(resolve => setTimeout(resolve, 400));
-  return <PromiseButton onClick={() => getPromise()}>Modifier</PromiseButton>;
-};
+import EditMesure from "./modals/EditMesure";
+import CloseMesure from "./modals/CloseMesure";
+import ReactivateMesure from "./modals/ReactivateMesure";
 
-const CellEndMesure = ({ row }) => {
-  const getPromise = () => new Promise(resolve => setTimeout(resolve, 400));
-  return <PromiseButton onClick={() => getPromise()}>Mettre fin au mandat</PromiseButton>;
-};
+// bouton connecté à redux-modal.show pour EditMesure
+const CellEditMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button onClick={() => show("EditMesure", { formData: row.original })}>Modifier</Button>
+));
 
-const CellReactivateMesure = ({ row }) => {
-  const getPromise = () => new Promise(resolve => setTimeout(resolve, 400));
-  return <PromiseButton onClick={() => getPromise()}>Réactiver la mesure</PromiseButton>;
-};
+// bouton connecté à redux-modal.show pour CloseMesure
+const CellCloseMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button error onClick={() => show("CloseMesure", { id: row.original.id })}>
+    Mettre fin au mandat
+  </Button>
+));
 
-const PromiseButton = ({ onClick, className, style, error, children }) => {
-  const MyButton = ({ children, disabled }) => (
-    <Button className={className} style={style} disabled={disabled} error={error}>
-      {children}
-    </Button>
-  );
-  return (
-    <PromiseState
-      onClick={onClick}
-      render={({ status }) => {
-        return (
-          (status === "idle" && <MyButton>{children}</MyButton>) ||
-          (status === "loading" && <MyButton disabled>{children}</MyButton>) ||
-          (status === "success" && <MyButton>{children}</MyButton>) ||
-          (status === "error" && <MyButton error>⚠️ Erreur</MyButton>)
-        );
-      }}
-    />
-  );
-};
+// bouton connecté à redux-modal.show pour ReactivateMesure
+const CellReactivateMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button onClick={() => show("ReactivateMesure", { id: row.original.id })}>
+    Réactiver la mesure
+  </Button>
+));
 
 const concat = (...strings) =>
   strings
@@ -59,35 +57,41 @@ const COLUMNS = [
   {
     Header: "Date de décision",
     id: "date_ouverture",
-    width: 120,
-    accessor: d => format(d.date_ouverture, "DD/MM/YYYY"),
+    width: 160,
+    accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
+    Cell: row => (
+      <div>
+        {format(row.row.date_ouverture, "DD MMMM YYYY", { locale: require("date-fns/locale/fr") })}
+      </div>
+    ),
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Résidence du majeur",
     id: "residence",
-    width: 200,
     accessor: d => concat(d.code_postal, d.ville.toUpperCase()),
     style: { alignSelf: "center" }
   },
   {
     Header: "Type de mesure",
     id: "type",
+    width: 200,
     accessor: d => d.type,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Genre",
     id: "civilite",
-    width: 80,
+    width: 70,
     accessor: d => d.civilite,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Naissance",
     id: "annee",
-    width: 100,
-    accessor: d => d.annee.substring(0, 4),
+    width: 80,
+    accessor: "annee",
+    Cell: row => <div>{format(row.row.annee, "YYYY")}</div>,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -100,27 +104,26 @@ const COLUMNS = [
   {
     Header: "Modifier",
     id: "modifier",
-    Cell: row => <CellEditMesure row={row.row} />,
+    Cell: row => <CellEditMesureRedux row={row} />,
     width: 150,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Fin de mandat",
     id: "fin-mandat",
-    Cell: row => <CellEndMesure row={row.row} />,
+    Cell: row => <CellCloseMesureRedux row={row} />,
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Réactiver",
     id: "reactiver",
-    Cell: row => <CellReactivateMesure row={row.row} />,
+    Cell: row => <CellReactivateMesureRedux row={row} />,
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   }
 ];
 
-// client side pagination
 class TableMesures extends React.Component {
   state = {
     data: [],
@@ -141,21 +144,42 @@ class TableMesures extends React.Component {
       );
     }
   };
+  componentDidUpdate(prevProps, prevState) {
+    // hack to force reload when some redux state change
+    if (prevProps.lastUpdate !== this.props.lastUpdate) {
+      this.fetchData();
+    }
+  }
   render() {
     const { data, loading } = this.state;
     const { hideColumns } = this.props;
     return (
-      <ReactTable
-        style={{ backgroundColor: "white" }}
-        columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
-        noDataText="Aucune mesure ici..."
-        showPagination={false}
-        data={data}
-        loading={loading}
-        loadingText="Chargement des mesures..."
-        onFetchData={this.fetchData}
-        className="-striped -highlight"
-      />
+      <React.Fragment>
+        <ReactTable
+          style={{ backgroundColor: "white" }}
+          columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
+          noDataText="Aucune mesure ici..."
+          showPagination={false}
+          pageSize={-1}
+          data={data}
+          sortable={true}
+          multiSort={false}
+          defaultSorted={[
+            {
+              id: "date_ouverture",
+              desc: true
+            }
+          ]}
+          //defaultSortDesc={true}
+          loading={loading}
+          loadingText="Chargement des mesures..."
+          onFetchData={this.fetchData}
+          className="-striped -highlight"
+        />
+        <EditMesure />
+        <CloseMesure />
+        <ReactivateMesure />
+      </React.Fragment>
     );
   }
 }
@@ -167,4 +191,10 @@ TableMesures.propTypes = {
 TableMesures.defaultProps = {
   hideColumns: []
 };
-export default TableMesures;
+
+const mapStateToProps = state => ({
+  // /!\ todo : hack
+  // lastUpdate is updated when some mesure is modified so we can refresh the table
+  lastUpdate: state.mesures.lastUpdate
+});
+export default connect(mapStateToProps)(TableMesures);
