@@ -11,7 +11,7 @@ import TableMesures from "./TableMesures";
 import Header from "./Header";
 import CreateMesure from "./CreateMesure";
 
-/* TEMP */
+/* TEMP : the redux store will be moved at root level */
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { reducer as modal } from "redux-modal";
 import { Provider } from "react-redux";
@@ -22,6 +22,8 @@ import { bindActionCreators } from "redux";
 import { mandataireMount } from "./actions/mandataire";
 import mesuresReducer from "./reducers/mesures";
 import mandataireReducer from "./reducers/mandataire";
+
+import { EditMesure, CloseMesure, ReactivateMesure, EditMandataire } from "./modals";
 
 Modal.setAppElement("#__next");
 
@@ -42,18 +44,19 @@ class MandataireTabs extends React.Component {
   }
 
   render() {
+    // define the content of the tabs
     const tabs = [
       {
         text: "Mesures en cours",
         icon: <PillDispo />,
         content: (
-          <div>
+          <React.Fragment>
             <CreateMesure />
             <TableMesures
               fetch={() => apiFetch(`/mandataires/1/mesures`)}
               hideColumns={["reactiver", "extinction"]}
             />
-          </div>
+          </React.Fragment>
         )
       },
       {
@@ -81,10 +84,16 @@ class MandataireTabs extends React.Component {
       <React.Fragment>
         <Header />
         <DummyTabs tabs={tabs} />
+        <EditMesure />
+        <CloseMesure />
+        <ReactivateMesure />
+        <EditMandataire />
       </React.Fragment>
     );
   }
 }
+
+// plug redux stuff
 
 const rootReducer = combineReducers({
   mesures: mesuresReducer,

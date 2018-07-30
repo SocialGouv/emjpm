@@ -112,6 +112,16 @@
   opacity: 2;
 }
 
+.ModalEditMandataire {
+  width: 700px !important;
+  height: 500px !important;
+  margin: 0 auto;
+  margin-top: 100px;
+  background-color: #f2f2f2;
+  overflow: scroll;
+  opacity: 2;
+}
+
 .ModalMesureUpdate {
   position: absolute;
   width: 600px !important;

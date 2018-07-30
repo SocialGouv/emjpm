@@ -1,8 +1,12 @@
 const MANDATAIRE_INITIAL_STATE = {
+  // store some user mandataire data
   profile: {
     mesures_en_cours: 0
   },
-  finess: []
+  // store etablissement for autompletes and getDisplayValue
+  finess: [],
+  // store tis for autompletes and getDisplayValue
+  tis: []
 };
 
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
@@ -16,6 +20,11 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       return {
         ...state,
         finess: action.data
+      };
+    case "TIS_UPDATED":
+      return {
+        ...state,
+        tis: action.data
       };
     case "MESURE_REACTIVATED":
     case "MESURE_CREATED":

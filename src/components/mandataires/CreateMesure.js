@@ -1,11 +1,10 @@
 import Form from "react-jsonschema-form";
-import ReactAutocomplete from "react-autocomplete";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { X, Save, PlusSquare, XCircle, CheckCircle } from "react-feather";
 import { format } from "date-fns";
 
-import { Button, ToggleState } from "..";
+import { Button, ToggleState, AutocompleteState } from "..";
 import { createMesure, createMesureSave } from "./actions/mesures";
 
 const Alert = ({ className, Icon, message }) =>
@@ -156,46 +155,16 @@ const uiSchema = {
   }
 };
 
-class EtablissementAutoComplete extends React.Component {
-  state = {
-    value: ""
-  };
-  onSelect = (value, obj) => {
-    this.setState({ value }, () => {
-      this.props.onChange(obj.id);
-    });
-  };
-  render() {
-    return (
-      <EtablissementAutoCompleteDumb
-        {...this.props}
-        items={this.props.items}
-        value={this.state.value}
-        onChange={e => this.setState({ value: e.target.value })}
-        onSelect={this.onSelect}
-      />
-    );
-  }
-}
-
-const EtablissementAutoCompleteDumb = ({ items = [], onChange, onSelect, value = "" }) => (
-  <ReactAutocomplete
+const EtablissementAutoComplete = ({ items, value, onChange }) => (
+  <AutocompleteState
     items={items}
     inputProps={{
-      style: { width: 250 }
+      style: { width: 500 },
+      placeHolder: "Choisissez un établissement"
     }}
-    shouldItemRender={(item, value) =>
-      item.nom.toLowerCase().indexOf(value.toLowerCase && value.toLowerCase()) > -1
-    }
-    getItemValue={item => item.nom}
-    renderItem={(item, highlighted) => (
-      <div key={item.id} style={{ backgroundColor: highlighted ? "#eee" : "transparent" }}>
-        {item.nom}
-      </div>
-    )}
+    resetOnSelect={false}
     value={value}
-    onChange={onChange}
-    onSelect={onSelect}
+    onSelect={onChange}
   />
 );
 
@@ -247,7 +216,6 @@ const CreateMesure = ({
   children,
   ...props
 }) => {
-  console.log("MESURE_CREATED_ERROR", mesureCreatedStatus, mesureCreatedMessage);
   return (
     <ToggleState
       getPromise={() => Promise.resolve()}

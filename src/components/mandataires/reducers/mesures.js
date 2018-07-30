@@ -1,8 +1,9 @@
 const MESURES_INITIAL_STATE = {
+  // store last udpate of the data. hack to be able to force update views when this change
   lastUpdate: null,
+  // hold mesure created form API return status+message
   mesureCreatedStatus: null,
-  mesureCreatedMessage: null,
-  mapMarkers: []
+  mesureCreatedMessage: null
 };
 
 const mesuresReducer = (state = MESURES_INITIAL_STATE, action) => {

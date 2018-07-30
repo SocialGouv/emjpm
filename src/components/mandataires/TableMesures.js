@@ -7,10 +7,6 @@ import format from "date-fns/format";
 
 import { Button } from "..";
 
-import EditMesure from "./modals/EditMesure";
-import CloseMesure from "./modals/CloseMesure";
-import ReactivateMesure from "./modals/ReactivateMesure";
-
 // bouton connecté à redux-modal.show pour EditMesure
 const CellEditMesureRedux = connect(
   null,
@@ -61,7 +57,7 @@ const COLUMNS = [
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
     Cell: row => (
       <div>
-        {format(row.row.date_ouverture, "DD MMMM YYYY", { locale: require("date-fns/locale/fr") })}
+        {format(row.row.date_ouverture, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
       </div>
     ),
     style: { textAlign: "center", alignSelf: "center" }
@@ -98,7 +94,12 @@ const COLUMNS = [
     Header: "Extinction",
     id: "extinction",
     width: 100,
-    accessor: d => d.extinction && d.extinction.slice(0, 10),
+    accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
+    Cell: row => (
+      <div>
+        {format(row.row.date_ouverture, "DD/MM/YYYY", { locale: require("date-fns/locale/fr") })}
+      </div>
+    ),
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -154,32 +155,27 @@ class TableMesures extends React.Component {
     const { data, loading } = this.state;
     const { hideColumns } = this.props;
     return (
-      <React.Fragment>
-        <ReactTable
-          style={{ backgroundColor: "white", minHeight: 500 }}
-          columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
-          noDataText="Aucune mesure ici..."
-          showPagination={false}
-          pageSize={-1}
-          data={data}
-          sortable={true}
-          multiSort={false}
-          defaultSorted={[
-            {
-              id: "date_ouverture",
-              desc: true
-            }
-          ]}
-          //defaultSortDesc={true}
-          loading={loading}
-          loadingText="Chargement des mesures..."
-          onFetchData={this.fetchData}
-          className="-striped -highlight"
-        />
-        <EditMesure />
-        <CloseMesure />
-        <ReactivateMesure />
-      </React.Fragment>
+      <ReactTable
+        style={{ backgroundColor: "white", minHeight: 500 }}
+        columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
+        noDataText="Aucune mesure ici..."
+        showPagination={false}
+        pageSize={-1}
+        data={data}
+        sortable={true}
+        multiSort={false}
+        defaultSorted={[
+          {
+            id: "date_ouverture",
+            desc: true
+          }
+        ]}
+        //defaultSortDesc={true}
+        loading={loading}
+        loadingText="Chargement des mesures..."
+        onFetchData={this.fetchData}
+        className="-striped -highlight"
+      />
     );
   }
 }

@@ -32,8 +32,7 @@ const MapMesures = ({ getPromise, center = [48.866667, 2.333333] }) => (
     render={({ data }) => (
       <Map center={center} zoom={9} style={{ width: "100%", height: "70vh", padding: 0 }}>
         <Attribution />
-        {data && data.map(marker => <MesureMarker key={marker.id} {...marker} />)}
-        ;
+        {data && data.map((marker, i) => <MesureMarker key={marker.id + "" + i} {...marker} />)}
       </Map>
     )}
   />

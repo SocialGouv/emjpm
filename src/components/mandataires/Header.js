@@ -14,6 +14,7 @@ const Title = styled.div`
   color: black;
   font-size: 1.5em;
   margin: 10px;
+  text-transform: uppercase;
 `;
 
 const HeaderMandataire = ({ nom, prenom, date_mesure_update }) => (
