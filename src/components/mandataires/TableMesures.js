@@ -1,9 +1,9 @@
+import PropTypes from "prop-types";
+
 import ReactTable from "react-table";
 import format from "date-fns/format";
 
 import { Button, PromiseState } from "..";
-
-import apiFetch from "../communComponents/Api";
 
 const CellEditMesure = ({ row }) => {
   const getPromise = () => new Promise(resolve => setTimeout(resolve, 400));
@@ -13,6 +13,11 @@ const CellEditMesure = ({ row }) => {
 const CellEndMesure = ({ row }) => {
   const getPromise = () => new Promise(resolve => setTimeout(resolve, 400));
   return <PromiseButton onClick={() => getPromise()}>Mettre fin au mandat</PromiseButton>;
+};
+
+const CellReactivateMesure = ({ row }) => {
+  const getPromise = () => new Promise(resolve => setTimeout(resolve, 400));
+  return <PromiseButton onClick={() => getPromise()}>Réactiver la mesure</PromiseButton>;
 };
 
 const PromiseButton = ({ onClick, className, style, error, children }) => {
@@ -45,6 +50,7 @@ const concat = (...strings) =>
 const COLUMNS = [
   {
     Header: "ID",
+    id: "id",
     accessor: "id",
     width: 50,
     show: false,
@@ -85,20 +91,34 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Extinction",
+    id: "extinction",
+    width: 100,
+    accessor: d => d.extinction && d.extinction.slice(0, 10),
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
     Header: "Modifier",
+    id: "modifier",
     Cell: row => <CellEditMesure row={row.row} />,
     width: 150,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Fin de mandat",
+    id: "fin-mandat",
     Cell: row => <CellEndMesure row={row.row} />,
+    width: 200,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
+    Header: "Réactiver",
+    id: "reactiver",
+    Cell: row => <CellReactivateMesure row={row.row} />,
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   }
 ];
-
-const getMesures = () => apiFetch(`/mandataires/1/mesures`);
 
 // client side pagination
 class TableMesures extends React.Component {
@@ -107,12 +127,11 @@ class TableMesures extends React.Component {
     loading: false
   };
   fetchData = (state, instance) => {
-    console.log("fetchData");
     if (!this.state.loading) {
       this.setState({ loading: true }, () =>
-        getMesures()
+        this.props
+          .fetch()
           .then(data => {
-            console.log("data", data);
             this.setState({
               data,
               loading: false
@@ -124,10 +143,11 @@ class TableMesures extends React.Component {
   };
   render() {
     const { data, loading } = this.state;
+    const { hideColumns } = this.props;
     return (
       <ReactTable
         style={{ backgroundColor: "white" }}
-        columns={COLUMNS}
+        columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
         noDataText="Aucune mesure ici..."
         showPagination={false}
         data={data}
@@ -140,4 +160,11 @@ class TableMesures extends React.Component {
   }
 }
 
+TableMesures.propTypes = {
+  fetch: PropTypes.func.isRequired,
+  hideColumns: PropTypes.array
+};
+TableMesures.defaultProps = {
+  hideColumns: []
+};
 export default TableMesures;

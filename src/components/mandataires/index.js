@@ -5,7 +5,6 @@ import { Home, Map, UserMinus } from "react-feather";
 import { PillDispo, DummyTabs } from "..";
 
 import Profile from "./Profile";
-import TableMesure from "./TableMesure";
 import TableMesures from "./TableMesures";
 
 import apiFetch from "../communComponents/Api";
@@ -110,7 +109,7 @@ class MandatairesTabs extends React.Component {
   };
 
   render() {
-    const { currentMandataire, mesureEteinte, datamesure, mesuresForMaps } = this.state;
+    const { currentMandataire, mesuresForMaps } = this.state;
 
     const tabs = [
       {
@@ -121,8 +120,12 @@ class MandatairesTabs extends React.Component {
             dispo_max={currentMandataire.dispo_max}
           />
         ),
-        //<TableMesure display_ext={"none"} rows={datamesure} updateMesure={this.updateMesure} />
-        content: <TableMesures />
+        content: (
+          <TableMesures
+            fetch={() => apiFetch(`/mandataires/1/mesures`)}
+            hideColumns={["reactiver", "extinction"]}
+          />
+        )
       },
       {
         text: "Vue Carte",
@@ -141,7 +144,10 @@ class MandatairesTabs extends React.Component {
         text: "Mesures éteintes",
         icon: <UserMinus />,
         content: (
-          <TableMesure display={"none"} rows={mesureEteinte} updateMesure={this.updateMesure} />
+          <TableMesures
+            fetch={() => apiFetch(`/mandataires/1/mesures/Eteinte`)}
+            hideColumns={["modifier", "fin-mandat"]}
+          />
         )
       },
       {
