@@ -1,45 +1,10 @@
 import styled from "styled-components";
 import { Home, User } from "react-feather";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
+import { Layout, DummyTabs } from "../src/components";
 import Navigation from "../src/components/communComponents/Navigation";
 import Footer from "../src/components/communComponents/Footer";
 import Users from "../src/components/admin/Users";
-
-const tabStyle = {
-  backgroundColor: "#ebeff2",
-  paddingBottom: 5,
-  bottom: 0,
-  verticalAlign: "middle",
-  lineHeight: "40px",
-  width: "50%",
-  display: "inline-flex"
-};
-
-const imageStyle = {
-  lineHeight: "50px",
-  width: "20px",
-  height: "20px",
-  color: "black",
-  display: "inline-block",
-  margin: 10
-};
-
-const PanelAdmin = styled.div`
-  text-align: "left",
-  background-size: cover;
-  heigth: 100px !important;
-  background-color: #cad4de;
-`;
-
-const ContainerAdmin = styled.div`
-  padding-right: 0px;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  padding-left: 0px;
-  font-size: 1.2em;
-  margin-top: 0px;
-`;
 
 const Title = styled.div`
   color: black;
@@ -47,37 +12,35 @@ const Title = styled.div`
   margin: 10px;
 `;
 
+const tabs = [
+  {
+    text: "Utilisateurs",
+    icon: <User />,
+    content: (
+      <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
+        <h2 style={{ padding: "10px" }}>Gestion des utilisateurs</h2>
+        <Users />
+      </div>
+    )
+  },
+  {
+    text: "TI",
+    icon: <Home />,
+    content: <div style={{ padding: 50, textAlign: "center" }}>Gestion des TI [todo]</div>
+  }
+];
+
 const AdminPart = () => (
-  <Tabs className="container">
-    <TabList>
-      <PanelAdmin className="panel">
-        <ContainerAdmin className="container">
-          <Title> Administration e-MJPM </Title>
-        </ContainerAdmin>
-        <Tab style={tabStyle}>
-          <User style={imageStyle} />
-          <b>Utilisateurs</b>
-        </Tab>
-        <Tab style={tabStyle}>
-          <Home style={imageStyle} />
-          <b>TI</b>
-        </Tab>
-      </PanelAdmin>
-    </TabList>
-    <TabPanel>
-      <Users />
-    </TabPanel>
-    <TabPanel>
-      <div>Gestion des TI</div>
-    </TabPanel>
-  </Tabs>
+  <div>
+    <h2>Administration e-MJPM</h2>
+    <DummyTabs tabs={tabs} />
+  </div>
 );
 
 const AdminPage = () => (
-  <div style={{ display: "block", backgroundColor: "#cad4de", minHeight: "100%" }}>
-    <Navigation />
-    <AdminPart />
-    <Footer />
-  </div>
+  <Layout>
+    <h2 style={{ margin: "30px 0" }}>Administration e-MJPM</h2>
+    <DummyTabs tabs={tabs} />
+  </Layout>
 );
 export default AdminPage;
