@@ -374,7 +374,11 @@ function getTis() {
 
 function getAllEtablissementsByMandataire(mandataireId) {
   return knex("mandataire_etablissements")
-    .select("mandataire_etablissements.id", "etablissements.nom")
+    .select(
+      "mandataire_etablissements.id",
+      "mandataire_etablissements.etablissement_id",
+      "etablissements.nom"
+    )
     .innerJoin(
       "mandataires",
       "mandataires.id",
@@ -392,11 +396,11 @@ function getAllEtablissementsByMandataire(mandataireId) {
 
 function getAllTisByMandataire(mandataireId) {
   return knex("mandataire_tis")
-    .select("tis.id", "tis.etablissement")
+    .select("tis.id", "tis.etablissement", "mandataire_tis.ti_id")
+    .innerJoin("tis", "mandataire_tis.ti_id", "tis.id")
     .where({
       mandataire_id: parseInt(mandataireId)
-    })
-    .innerJoin("tis", "mandataire_tis.ti_id", "tis.id");
+    });
 }
 
 function addEtablissement(mandataireId) {

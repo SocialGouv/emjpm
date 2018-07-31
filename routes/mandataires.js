@@ -84,20 +84,18 @@ router.get("/", loginRequired, async (req, res, next) => {
 });
 
 router.get("/services", loginRequired, async (req, res, next) => {
-    if (req.user.type !== "ti") {
-        return next(new Error(401));
-    }
-    const ti = await queries.getTiByUserId(req.user.id);
-    if (!ti) {
-        return next(new Error(401));
-    }
-    queries
-        .getAllServicesByTis(ti.id)
-        .then(mandataires => res.status(200).json(mandataires))
-        .catch(error => next(error));
+  if (req.user.type !== "ti") {
+    return next(new Error(401));
+  }
+  const ti = await queries.getTiByUserId(req.user.id);
+  if (!ti) {
+    return next(new Error(401));
+  }
+  queries
+    .getAllServicesByTis(ti.id)
+    .then(mandataires => res.status(200).json(mandataires))
+    .catch(error => next(error));
 });
-
-
 
 // todo: test
 router.post("/PosteCode", loginRequired, async (req, res, next) => {
@@ -140,8 +138,6 @@ router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));
 router.use("/", require("./serviceAntennes"));
 router.use("/", require("./mandatairesEtablissements"));
-router.use("/", require("./mandatairesEtablissements"));
 router.use("/", require("./tis"));
-
 
 module.exports = router;
