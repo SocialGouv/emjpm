@@ -160,11 +160,11 @@ const EtablissementAutoComplete = ({ items, value, onChange }) => (
     items={items}
     inputProps={{
       style: { width: 500 },
-      placeHolder: "Choisissez un établissement"
+      placeholder: "Choisissez un établissement"
     }}
     resetOnSelect={false}
     value={value}
-    onSelect={onChange}
+    onSelect={obj => onChange(obj.id)}
   />
 );
 

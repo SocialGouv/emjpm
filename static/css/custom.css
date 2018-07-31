@@ -334,3 +334,7 @@
 .input_mesure_lieuDeVie {
   display: block;
 }
+
+.rt-table .rt-tr-group {
+  max-height: 50px;
+}
