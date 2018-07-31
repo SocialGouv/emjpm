@@ -29,7 +29,7 @@ function getAllMandataires(ti_id) {
     .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id");
 }
 
-function getMandataires(ti_id) {
+function getMandataires() {
   return knex.from("mandataires");
 }
 
@@ -60,6 +60,11 @@ function getAllMesuresByMandataires(ti_id) {
     .where("status", "Mesure en cours")
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
     .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mesures.code_postal"
+    )
+    .innerJoin(
       "mandataire_tis",
       "mandataire_tis.mandataire_id",
       "mandataires.id"
@@ -68,8 +73,8 @@ function getAllMesuresByMandataires(ti_id) {
     .select(
       "mesures.id",
       "mesures.code_postal",
-      "mesures.latitude",
-      "mesures.longitude",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude",
       "mandataires.nom",
       "mandataires.prenom",
       "mandataires.type",
@@ -87,18 +92,34 @@ function getAllMesuresByMandatairesFilter(
 ) {
   return knex
     .from("mesures")
+    .select(
+      "mandataires.id",
+      "mandataires.*",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
+    )
     .where("status", "Mesure en cours")
-    .whereBetween("mesures.latitude", [latsouthWest, latnorthEast])
-    .whereBetween("mesures.longitude", [longSouthWest, longNorthEast])
+    .whereBetween("geolocalisation_code_postal.latitude", [
+      latsouthWest,
+      latnorthEast
+    ])
+    .whereBetween("geolocalisation_code_postal.longitude", [
+      longSouthWest,
+      longNorthEast
+    ])
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
     .innerJoin(
       "mandataire_tis",
       "mandataire_tis.mandataire_id",
       "mandataires.id"
     )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mesures.code_postal"
+    )
     .groupByRaw("mandataires.id")
     .where("mandataire_tis.ti_id", parseInt(ti_id))
-    .select("mandataires.id", "mandataires.*")
     .union(function() {
       this.select("mandataires.id", "mandataires.*")
         .from("mandataires")
@@ -120,16 +141,32 @@ function getAllByMandatairesFilter(
 ) {
   return knex
     .from("mandataires")
-    .whereBetween("mandataires.latitude", [latsouthWest, latnorthEast])
-    .whereBetween("mandataires.longitude", [longSouthWest, longNorthEast])
+    .whereBetween("geolocalisation_code_postal.latitude", [
+      latsouthWest,
+      latnorthEast
+    ])
+    .whereBetween("geolocalisation_code_postal.longitude", [
+      longSouthWest,
+      longNorthEast
+    ])
     .innerJoin(
       "mandataire_tis",
       "mandataire_tis.mandataire_id",
       "mandataires.id"
     )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mandataires.code_postal"
+    )
     .groupByRaw("mandataires.id")
     .where("mandataire_tis.ti_id", parseInt(ti_id))
-    .select("mandataires.id", "mandataires.*");
+    .select(
+      "mandataires.id",
+      "mandataires.*",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
+    );
 }
 
 function getCoordonneByPosteCode(userId) {
@@ -155,13 +192,13 @@ function getAllMesuresByPopUp(ti_id, type) {
         "COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id) as mandataire_ids,array_agg(distinct mandataires.type) as types"
       ),
       "mesures.code_postal",
-      "v1.latitude",
-      "v1.longitude"
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
     )
     .innerJoin(
-      "geolocalisation_code_postal as v1",
+      "geolocalisation_code_postal",
       "mesures.code_postal",
-      "v1.code_postal"
+      "geolocalisation_code_postal.code_postal"
     )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
     .innerJoin(
@@ -170,7 +207,9 @@ function getAllMesuresByPopUp(ti_id, type) {
       "mandataires.id"
     )
     .where(where)
-    .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
+    .groupByRaw(
+      "mesures.code_postal,geolocalisation_code_postal.longitude,geolocalisation_code_postal.latitude"
+    );
 }
 
 function getAllMesuresByMandatairesForMaps(mandataireID) {
@@ -180,14 +219,21 @@ function getAllMesuresByMandatairesForMaps(mandataireID) {
         "COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"
       ),
       "mesures.code_postal",
-      "mesures.latitude",
-      "mesures.longitude"
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "mesures.code_postal",
+      "geolocalisation_code_postal.code_postal"
     )
     .where({
       mandataire_id: parseInt(mandataireID),
       status: "Mesure en cours"
     })
-    .groupByRaw("mesures.code_postal,mesures.longitude,mesures.latitude");
+    .groupByRaw(
+      "mesures.code_postal,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
+    );
 }
 
 function getAllMesuresByPopUpForMandataire(ti_id) {
@@ -198,13 +244,13 @@ function getAllMesuresByPopUpForMandataire(ti_id) {
         "COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"
       ),
       "mesures.code_postal",
-      "v1.latitude",
-      "v1.longitude"
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
     )
     .innerJoin(
-      "geolocalisation_code_postal as v1",
+      "geolocalisation_code_postal",
       "mesures.code_postal",
-      "v1.code_postal"
+      "geolocalisation_code_postal.code_postal"
     )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
     .innerJoin(
@@ -216,7 +262,9 @@ function getAllMesuresByPopUpForMandataire(ti_id) {
       "mandataire_tis.ti_id": parseInt(ti_id),
       status: "Mesure en cours"
     })
-    .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
+    .groupByRaw(
+      "mesures.code_postal,geolocalisation_code_postal.longitude,geolocalisation_code_postal.latitude,geolocalisation_code_postal.code_postal"
+    );
 }
 
 function getPostecode(codePostal, lat, lng) {
@@ -235,12 +283,22 @@ function getMandataireByUserId(userId) {
 }
 
 function add(mandataire) {
-  return Mandataires().insert(madataire);
+  return Mandataires().insert(mandataire);
 }
 
 function getSingle(mandataireID) {
   return Mandataires()
-    .where("id", parseInt(mandataireID))
+    .select(
+      "mandataires.*",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mandataires.code_postal"
+    )
+    .where("mandataires.id", parseInt(mandataireID))
     .first();
 }
 
