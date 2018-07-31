@@ -9,7 +9,7 @@ import "../../static/css/custom.css";
 import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
 import apiFetch from "./communComponents/Api";
-import AddTisToFormulaireMandataire from "./mandataires/AddTisToFormulaireMandataire";
+import AddTisToFormulaireMandataire from "./AddTisToFormulaireMandataire";
 
 const schema = {
   title: "Modifier vos informations",
