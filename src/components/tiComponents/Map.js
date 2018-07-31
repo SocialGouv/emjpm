@@ -92,7 +92,8 @@ export const MapsView = ({
         {(mesureCount && (
           <React.Fragment>
             <Title>
-              {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+              {mesureCount} Professionnel
+              {(mesureCount > 1 && "s") || null}
             </Title>
 
             <TableMandataire
@@ -102,11 +103,12 @@ export const MapsView = ({
             />
           </React.Fragment>
         )) || (
-            <div style={{ textAlign: "center", marginTop: 20 }}>
-              Aucune mesure actuellement dans cette région
-            </div>
-          )}
-      </MandatairesWidth>`
+          <div style={{ textAlign: "center", marginTop: 20 }}>
+            Aucune mesure actuellement dans cette région
+          </div>
+        )}
+      </MandatairesWidth>
+      `
     </div>
   </div>
 );

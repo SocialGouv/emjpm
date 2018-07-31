@@ -60,8 +60,6 @@ const reactivateMesureApi = data =>
 const createMesureApi = data => {
   const payload = {
     ...data,
-    latitude: 0,
-    longitude: 0,
     status: "Mesure en cours"
   };
   return apiFetch(`/mandataires/1/mesures`, {
