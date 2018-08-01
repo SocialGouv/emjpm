@@ -15,7 +15,9 @@ const ReactivateMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
         <br />
         <br />
         <div style={{ margin: "20px 0", textAlign: "center" }}>
-          <Button onClick={() => onSubmit(id)}>Réactiver la Mesure</Button>
+          <Button data-cy="button-modal-reactivate-mesure" onClick={() => onSubmit(id)}>
+            Réactiver la Mesure
+          </Button>
         </div>
       </div>
     </Layout>

@@ -11,22 +11,12 @@ export const MESURE_REACTIVATED = "MESURE_REACTIVATED";
 
 // ------------ API STUFF
 
-// todo : better API
 const updateMesureApi = data =>
   apiFetch(`/mandataires/1/mesures/${data.id}`, {
     method: "PUT",
     body: JSON.stringify(data)
-  }).then(json =>
-    // todo: move to trigger
-    apiFetch(`/mandataires/1`, {
-      method: "PUT",
-      body: JSON.stringify({
-        date_mesure_update: new Date()
-      })
-    }).then(() => json)
-  );
+  });
 
-// todo : better API
 const closeMesureApi = data =>
   apiFetch(`/mandataires/1/mesures/${data.id}`, {
     method: "PUT",
@@ -34,14 +24,8 @@ const closeMesureApi = data =>
       status: "Eteindre mesure",
       extinction: data.date
     })
-  }).then(json =>
-    // todo: move to trigger
-    apiFetch(`/mandataires/1/capacite`, {
-      method: "PUT"
-    })
-  );
+  });
 
-// todo : better API
 const reactivateMesureApi = data =>
   apiFetch(`/mandataires/1/mesures/${data.id}`, {
     method: "PUT",
@@ -57,34 +41,18 @@ const reactivateMesureApi = data =>
   );
 
 // todo : better API
-const createMesureApi = data => {
-  const payload = {
-    ...data,
-    status: "Mesure en cours"
-  };
-  return apiFetch(`/mandataires/1/mesures`, {
+const createMesureApi = data =>
+  apiFetch(`/mandataires/1/mesures`, {
     method: "POST",
-    body: JSON.stringify(payload)
-  }).then(json =>
-    // todo: move to trigger/view
-    apiFetch(`/mandataires/1/capacite`, {
-      method: "PUT"
+    body: JSON.stringify({
+      ...data,
+      status: "Mesure en cours"
     })
-      .then(() =>
-        apiFetch(`/mandataires/1`, {
-          method: "PUT",
-          body: JSON.stringify({
-            date_mesure_update: new Date()
-          })
-        })
-      )
-      .then(() => json)
-  );
-};
+  });
 
 // -------- ACTIONS CREATORS
 
-export const updateMesure = data => dispatch => {
+export const updateMesure = data => dispatch =>
   updateMesureApi(data)
     .then(json => {
       dispatch(hide("EditMesure"));
@@ -95,9 +63,8 @@ export const updateMesure = data => dispatch => {
       alert("Impossible de soumettre les données");
       throw e;
     });
-};
 
-export const closeMesure = data => dispatch => {
+export const closeMesure = data => dispatch =>
   closeMesureApi(data)
     .then(json => {
       dispatch(hide("CloseMesure"));
@@ -108,9 +75,8 @@ export const closeMesure = data => dispatch => {
       alert("Impossible de soumettre les données");
       throw e;
     });
-};
 
-export const reactivateMesure = data => dispatch => {
+export const reactivateMesure = data => dispatch =>
   reactivateMesureApi(data)
     .then(json => {
       dispatch(hide("ReactivateMesure"));
@@ -121,9 +87,8 @@ export const reactivateMesure = data => dispatch => {
       alert("Impossible de soumettre les données");
       throw e;
     });
-};
 
-export const createMesureSave = data => dispatch => {
+export const createMesureSave = data => dispatch =>
   createMesureApi(data)
     .then(json => {
       dispatch(mesureCreated(json));
@@ -133,7 +98,6 @@ export const createMesureSave = data => dispatch => {
       dispatch(mesureCreatedError(e.message));
       throw e;
     });
-};
 
 // ------------ PLAIN ACTIONS
 

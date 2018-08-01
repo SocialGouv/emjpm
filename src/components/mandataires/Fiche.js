@@ -46,13 +46,18 @@ const FicheMandataire = ({
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
               <b>Nombre de mesures souhaitées</b>
             </td>
-            <td style={{ textAlign: "center", borderBottom: "1px solid silver" }}>{dispo_max}</td>
+            <td
+              data-cy="fiche-manda-dispo-max"
+              style={{ textAlign: "center", borderBottom: "1px solid silver" }}
+            >
+              {dispo_max}
+            </td>
           </tr>
           <tr>
             <td style={{ borderRight: "1px solid silver" }}>
               <b>Secrétariat</b>
             </td>
-            <td style={{ textAlign: "center" }}>
+            <td style={{ textAlign: "center" }} data-cy="fiche-manda-secretariat">
               {secretariat === true ? `Oui ${nb_secretariat && `(${nb_secretariat} ETP)`}` : "Non"}
             </td>
           </tr>

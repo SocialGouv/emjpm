@@ -114,6 +114,21 @@ describe("Admins", () => {
       cy.get("[data-cy='En attente de validation']").click();
       cy.getCellAction().should("have.length", 3);
       cy.getCellAction("Activer").should("have.length", 3);
+
+      cy.getCellAction("Activer")
+        .first()
+        .click();
+      cy.getCellAction("Activer").should("have.length", 2);
+
+      cy.getCellAction("Activer")
+        .first()
+        .click();
+      cy.getCellAction("Activer").should("have.length", 1);
+
+      cy.getCellAction("Activer")
+        .first()
+        .click();
+      cy.getCellAction("Activer").should("have.length", 0);
     });
   });
 });

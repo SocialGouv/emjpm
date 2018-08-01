@@ -77,154 +77,116 @@ describe("Mandataires", function() {
       });
     });
     context("session mandataire individuel Information", () => {
-      describe.only("/mandataires information", () => {
+      describe("/mandataires information", () => {
         it("information should show a nom and prenom", () => {
           cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-nom-prenom]").contains("Adrien");
-        });
-        it("information should show a email", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
+          cy.get("[data-cy='Mes informations']").click();
           cy.get("[data-cy=fiche-manda-email]").contains("ud@ud.com");
-        });
-        it("information should show a telehone", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-telephone]").contains("0237100000");
-        });
-        it("information should show a telephone portable", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
           cy.get("[data-cy=fiche-manda-telephone-portable]").contains("0101010101");
-        });
-        it("information should show a adress", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-adresse]").contains("21 rue de houx");
-        });
-        it("information should show a code Postal", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-code-postal]").contains("62000");
-        });
-        it("information should show a Ville", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-ville]").contains("Arras");
-        });
-        it("information should show a dispo Max", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
+          cy.get("[data-cy=fiche-manda-adresse]").contains("21 rue de houx 62000 Arras");
           cy.get("[data-cy=fiche-manda-dispo-max]").contains("3");
-        });
-        it("information should show a secretariat", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-secretariat]").contains("Non -");
+          cy.get("[data-cy=fiche-manda-secretariat]").contains("Non");
         });
       });
       describe("/mandataires Update information", () => {
-        //ToDo: La confirmation ne marche pas...
-        // Errors
-        // .prenom should be string
-        // .secretariat should be boolean
-        // .nb_secretariat should be number
+        it("information should update Fiche", () => {
+          cy.visit("/mandataires");
+          cy.get("[data-cy='Mes informations']").click();
+          cy.get("[data-cy=button-edit-profile]").click();
+          cy.get(".form-group #root_nom")
+            .clear()
+            .type("test-nom");
+          cy.get(".form-group #root_prenom")
+            .clear()
+            .type("test-prenom");
 
-        it("information should show a nom and prenom", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-button-modifier]").click();
-          cy.get(".form-group #root_nom").clear();
-          cy.get(".form-group #root_nom").type("UDA");
-          cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-nom-prenom]").contains("UDA");
-        });
-        it("information should show a email", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-button-modifier]").click();
-          cy.get(".form-group #root_email").clear();
-          cy.get(".form-group #root_email").type("u@u.com");
-          cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-email]").contains("u@u.com");
-        });
-        it("information should show a telehone", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-button-modifier]").click();
-          cy.get(".form-group #root_telephone").clear();
-          cy.get(".form-group #root_telephone").type("0237100009");
-          cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-telephone]").contains("0237100009");
-        });
-        it("information should show a telephone portable", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-button-modifier]").click();
-          cy.get(".form-group #root_telephone_portable").clear();
-          cy.get(".form-group #root_telephone_portable").type("0101010108");
-          cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-telephone-portable]").contains("0101010108");
-        });
-        it("information should show a adress", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-button-modifier]").click();
-          cy.get(".form-group #root_adresse").clear();
-          cy.get(".form-group #root_adresse").type("21 rue de oui");
-          cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-adresse]").contains("21 rue de oui");
-        });
-        it("information should show a code Postal", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-button-modifier]").click();
-          cy.get(".form-group #root_code_postal").clear();
-          cy.get(".form-group #root_code_postal").type("62009");
-          cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-code-postal]").contains("62009");
-        });
-        it("information should show a Ville", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-button-modifier]").click();
-          cy.get(".form-group #root_ville").clear();
-          cy.get(".form-group #root_ville").type("Avesnes");
-          cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-ville]").contains("Avesnes");
-        });
-        it("information should show a dispo Max", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-button-modifier]").click();
-          cy.get(".form-group #root_dispo_max").clear();
-          cy.get(".form-group #root_dispo_max").type("10");
-          cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-dispo-max]").contains("10");
-        });
-        it("information should show a secretariat", () => {
-          cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-information]").click();
-          cy.get("[data-cy=fiche-manda-button-modifier]").click();
+          cy.get(".form-group #root_genre").select("H");
+          cy.get(".form-group #root_telephone")
+            .clear()
+            .type("0101010108");
+          cy.get(".form-group #root_telephone_portable")
+            .clear()
+            .type("0607080910");
+          cy.get(".form-group #root_email")
+            .clear()
+            .type("u@u.com");
+          cy.get(".form-group #root_adresse")
+            .clear()
+            .type("21 rue de oui");
+          cy.get(".form-group #root_code_postal")
+            .clear()
+            .type("62009");
+          cy.get(".form-group #root_ville")
+            .clear()
+            .type("Avesnes");
+          cy.get(".form-group #root_dispo_max")
+            .clear()
+            .type("10");
           cy.get(".form-group #root_secretariat").select("Oui");
+          cy.get(".form-group #root_nb_secretariat")
+            .clear()
+            .type(4);
+
           cy.get("button[type='submit'].btn-success").click();
-          cy.get("[data-cy=fiche-manda-secretariat]").contains("Oui");
+
+          cy.get("[data-cy=fiche-manda-email]").contains("u@u.com");
+          cy.get("[data-cy=fiche-manda-telephone]").contains("0101010108");
+          cy.get("[data-cy=fiche-manda-telephone-portable]").contains("0607080910");
+          cy.get("[data-cy=fiche-manda-adresse]").contains("21 rue de oui 62009 Avesnes");
+          cy.get("[data-cy=fiche-manda-dispo-max]").contains("10");
+          cy.get("[data-cy=fiche-manda-secretariat]").contains("Oui (4 ETP)");
         });
       });
     });
     context("session mandataire individuel Mesure Eteinte", () => {
-      describe("/mandataires Mesure Eteinte", () => {
-        it("table should have 1 mesure", () => {
+      describe("/mandataires eteindre mesure", () => {
+        it("table en cours should have 2 mesures", () => {
           cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-eteinte]").click();
-          cy.get(".react-tabs div.container table tbody tr").should("have.length", 1);
+
+          cy.get("[data-cy='Mesures éteintes']").click();
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
+          cy.get("button[data-cy=button-reactivate-mesure]").should("have.length", 1);
+
+          cy.get("[data-cy='Mesures en cours']").click();
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
+          cy.get("button[data-cy=button-close-mesure]").should("have.length", 2);
+          cy.get("[data-cy=button-close-mesure]")
+            .first()
+            .click();
+          cy.get(".ReactModal__Content button.btn-success").click();
+
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
+          cy.get("button[data-cy=button-close-mesure]").should("have.length", 1);
+
+          cy.get("[data-cy='Mesures éteintes']").click();
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
+          cy.get("button[data-cy=button-reactivate-mesure]").should("have.length", 2);
         });
-        it("table should have 0 mesure", () => {
+        it("table eteintes should have 1 mesure", () => {
           cy.visit("/mandataires");
-          cy.get("[data-cy=tab-manda-eteinte]").click();
-          cy.get("[data-cy=tab-manda-reactiver]").click();
-          cy.get(".react-tabs div.container table tbody tr").should("have.length", 0);
+          cy.get("[data-cy='Mesures éteintes']").click();
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
+          cy.get("button[data-cy=button-reactivate-mesure]").should("have.length", 2);
+        });
+      });
+      describe("/mandataires réactiver mesure", () => {
+        it("table eteintes should have 1 mesure", () => {
+          cy.visit("/mandataires");
+          cy.get("[data-cy='Mesures en cours']").click();
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
+          cy.get("[data-cy='Mesures éteintes']").click();
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
+          cy.get("button[data-cy=button-reactivate-mesure]").should("have.length", 2);
+          cy.get("button[data-cy=button-reactivate-mesure]")
+            .first()
+            .click();
+          cy.get("[data-cy=button-modal-reactivate-mesure]")
+            .first()
+            .click();
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
+          cy.get("[data-cy='Mesures en cours']").click();
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
       });
     });

@@ -22,7 +22,7 @@ const Selector = ({
   onRemove,
   placeholder = "Ajouter"
 }) => (
-  <div style={{ margin: "20px 0", ...style }}>
+  <div style={{ margin: "20px 0", ...style }} data-cy={`selector-${title}`}>
     <h3>{title}</h3>
     <table style={{ width: 400 }}>
       <thead>
@@ -66,7 +66,11 @@ const ButtonEditMandataire = connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ formData, show }) => (
-  <Button style={{ marginLeft: 0 }} onClick={() => show("EditMandataire", { formData })}>
+  <Button
+    data-cy="button-edit-profile"
+    style={{ marginLeft: 0 }}
+    onClick={() => show("EditMandataire", { formData })}
+  >
     Modifier mon profil
   </Button>
 ));
