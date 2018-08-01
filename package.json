@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "NODE_ENV=test mocha",
+    "test": "NODE_ENV=test mocha --timeout 5000",
     "knex": "knex",
     "eslint": "eslint *.js **/*.js --fix",
     "migrate-and-start": "knex migrate:latest && npm start",
