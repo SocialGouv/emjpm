@@ -3,6 +3,7 @@ require("./utils");
 describe("Mandataires", function() {
   describe("Session mandataire", () => {
     before(function() {
+      cy.exec("npm run cypress:api-reset");
       cy.loginByForm("jeremy", "johnson123");
     });
 
@@ -14,66 +15,69 @@ describe("Mandataires", function() {
       describe("/mandataires", () => {
         it("table should show 2 mesures", () => {
           cy.visit("/mandataires");
-          cy.get(".react-tabs div.container table tbody tr").should("have.length", 2);
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
         it("counter should show 2/3", () => {
           cy.visit("/mandataires");
-          cy.get(".react-tabs .react-tabs__tab-list li p").should("contain", "2 / 3");
+          cy.get(".react-tabs .react-tabs__tab-list").should("contain", "2 / 3");
         });
         it("can add new mesure", () => {
           cy.visit("/mandataires");
-          cy.get("button.mesure_button").click();
-          cy.dateInput(".form-group #root_ouverture", "2019-06-22");
+          cy.get("[data-cy=button-create-mesure]").click();
+          cy.dateInput(".form-group #root_date_ouverture", "2019-06-22");
 
           cy.get(".form-group #root_type").select("Sauvegarde de justice");
           // cy.get(".form-group #root_residence").select("A domicile");
           cy.get(".form-group #root_code_postal").type("93200");
-          cy.get(".form-group #root_commune").type("Saint-Denis");
+          cy.get(".form-group #root_ville").type("Saint-Denis");
           cy.get(".form-group #root_civilite").select("F");
           cy.get(".form-group #root_annee").type("1977");
-          cy.get("[data-cy=radio-domicile]").click();
+          cy.get(".form-group input[type=radio][value='A Domicile']").click();
+          //root_date_ouverture
+          cy.get("[data-cy=button-submit-mesure]").click();
 
-          cy.get("button[type='submit'].btn-success").click();
+          cy.get("div.alert-success").should("contain", "La mesure a bien été enregistrée");
 
-          cy.get("div.alert-success").should("contain", "La mesure a été créée");
-
-          cy.get(".react-tabs div.container table tbody tr").should("have.length", 3);
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
         });
         it("should have new added mesure", () => {
           cy.visit("/mandataires");
-          cy.get(".react-tabs div.container table tbody tr").should("have.length", 3);
-          cy
-            .get(".react-tabs div.container table tbody tr:last-child td:nth-child(3)")
-            .should("contain", "Sauvegarde de justice");
-          cy
-            .get(".react-tabs div.container table tbody tr:last-child td:nth-child(4)")
-            .should("contain", "F");
-          cy
-            .get(".react-tabs div.container table tbody tr:last-child td:nth-child(5)")
-            .should("contain", "1977");
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
+          cy.get(".ReactTable .rt-tr-group:last-child .rt-td:nth-child(3)").should(
+            "contain",
+            "Sauvegarde de justice"
+          );
+          cy.get(".ReactTable .rt-tr-group:last-child .rt-td:nth-child(4)").should("contain", "F");
+          cy.get(".ReactTable .rt-tr-group:last-child .rt-td:nth-child(5)").should(
+            "contain",
+            "1977"
+          );
         });
         it("counter should now show 3/3", () => {
           cy.visit("/mandataires");
-          cy.get(".react-tabs .react-tabs__tab-list li p").should("contain", "3 / 3");
-          cy.get(".react-tabs div.container table tbody tr").should("have.length", 3);
+          cy.get(".react-tabs .react-tabs__tab-list").should("contain", "3 / 3");
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
         });
         it("can close mandat", () => {
           cy.visit("/mandataires");
-          cy.get(".react-tabs div.container table tbody tr:nth-child(2) button.btn-dark").click();
-          cy.dateInput(".ReactModal__Content #root_extinction", "2019-07-22");
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
+          cy.get("[data-cy=button-close-mesure]")
+            .first()
+            .click();
+          cy.dateInput(".ReactModal__Content #root", "2019-07-22");
           cy.get(".ReactModal__Content button.btn-success").click();
-          cy.get(".react-tabs .react-tabs__tab-list li p").should("contain", "2 / 3");
-          cy.get(".react-tabs div.container table tbody tr").should("have.length", 2);
+          cy.get(".react-tabs .react-tabs__tab-list").should("contain", "2 / 3");
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
         it("counter should now show 2/3", () => {
           cy.visit("/mandataires");
-          cy.get(".react-tabs .react-tabs__tab-list li p").should("contain", "2 / 3");
-          cy.get(".react-tabs div.container table tbody tr").should("have.length", 2);
+          cy.get(".react-tabs .react-tabs__tab-list").should("contain", "2 / 3");
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
       });
     });
     context("session mandataire individuel Information", () => {
-      describe("/mandataires information", () => {
+      describe.only("/mandataires information", () => {
         it("information should show a nom and prenom", () => {
           cy.visit("/mandataires");
           cy.get("[data-cy=tab-manda-information]").click();

@@ -24,7 +24,8 @@ const CellAction = ({ row: { id, active } }) => (
       updateUser({
         id,
         active
-      })}
+      })
+    }
     active={active}
     render={({ active, toggle }) => {
       return (
@@ -123,7 +124,7 @@ class TableUser extends React.Component {
         style={{ backgroundColor: "white" }}
         columns={COLUMNS}
         noDataText="Aucun mandataire ici..."
-        // manual
+        manual
         showPagination={false}
         data={data}
         loading={loading}

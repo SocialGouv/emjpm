@@ -254,11 +254,16 @@ const CreateMesure = ({
                     />
                   )}
                   <div>
-                    <Button type="submit" style={{ width: 260, marginLeft: 20 }}>
+                    <Button
+                      data-cy="button-submit-mesure"
+                      type="submit"
+                      style={{ width: 260, marginLeft: 20 }}
+                    >
                       <Save style={buttonIconStyle} /> Enregistrer la mesure
                     </Button>
                     <Button
                       error
+                      data-cy="button-cancel-submit-mesure"
                       type="button"
                       onClick={toggle}
                       disabled={status === "loading"}
@@ -271,6 +276,7 @@ const CreateMesure = ({
               </React.Fragment>
             )) || (
               <Button
+                data-cy="button-create-mesure"
                 onClick={() => {
                   createMesure();
                   toggle();

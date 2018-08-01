@@ -12,7 +12,12 @@ const CellEditMesureRedux = connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ row, show }) => (
-  <Button onClick={() => show("EditMesure", { formData: row.original })}>Modifier</Button>
+  <Button
+    data-cy="button-edit-mesure"
+    onClick={() => show("EditMesure", { formData: row.original })}
+  >
+    Modifier
+  </Button>
 ));
 
 // bouton connecté à redux-modal.show pour CloseMesure
@@ -20,7 +25,11 @@ const CellCloseMesureRedux = connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ row, show }) => (
-  <Button error onClick={() => show("CloseMesure", { id: row.original.id })}>
+  <Button
+    data-cy="button-close-mesure"
+    error
+    onClick={() => show("CloseMesure", { id: row.original.id })}
+  >
     Mettre fin au mandat
   </Button>
 ));
@@ -30,7 +39,10 @@ const CellReactivateMesureRedux = connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ row, show }) => (
-  <Button onClick={() => show("ReactivateMesure", { id: row.original.id })}>
+  <Button
+    data-cy="button-reactivate-mesure"
+    onClick={() => show("ReactivateMesure", { id: row.original.id })}
+  >
     Réactiver la mesure
   </Button>
 ));
@@ -160,6 +172,7 @@ class TableMesures extends React.Component {
         columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
         noDataText="Aucune mesure ici..."
         showPagination={false}
+        manual
         pageSize={-1}
         data={data}
         sortable={true}
