@@ -71,7 +71,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "concurrently": "^3.6.0",
     "css-loader": "^0.28.9",
-    "cypress": "^3.0.2",
+    "cypress": "^3.0.3",
     "dotenv": "^5.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
