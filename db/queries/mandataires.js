@@ -24,7 +24,7 @@ const updateCountMesures = id =>
     knex("mandataires")
       .where({ id })
       .update({
-        mesures_en_cours: getCountMesures(id)
+        mesures_en_cours: count
       })
   );
 
