@@ -112,6 +112,16 @@
   opacity: 2;
 }
 
+.ModalEditMandataire {
+  width: 700px !important;
+  height: 500px !important;
+  margin: 0 auto;
+  margin-top: 100px;
+  background-color: #f2f2f2;
+  overflow: scroll;
+  opacity: 2;
+}
+
 .ModalMesureUpdate {
   position: absolute;
   width: 600px !important;
@@ -162,9 +172,9 @@
 /*}*/
 
 /*.leaflet-marker-icon {*/
-  /*background-image: url("../images/icone-lieu.jpg");*/
-  /*background-repeat: no-repeat;*/
-  /*background-position: center center;*/
+/*background-image: url("../images/icone-lieu.jpg");*/
+/*background-repeat: no-repeat;*/
+/*background-position: center center;*/
 /*}*/
 .react-tabs__tab--selected {
   border-color: white !important;
@@ -240,18 +250,18 @@
   text-align: center;
   height: 60px;
   color: black !important;
-  background-color: #ebeff2 !important;
+  background-color: #ebeff2;
   border-radius: 0px !important;
-  border: 0px !important;
+  border: 0px;
 }
 .react-tabs__tab-list {
   margin-bottom: 0px !important;
-  background-color: #cad4de !important;
+  background-color: #cad4de;
   border: 0px !important;
 }
 .react-tabs__tab--selected {
   color: black !important;
-  background-color: #ffffff !important;
+  background-color: #ffffff;
 }
 
 .form-group {
@@ -280,6 +290,11 @@
   display: inline-block;
 }
 
+.input_mesure_annee input {
+  width: 80px;
+  display: inline-block;
+}
+
 .input_mesure_residence {
   width: 230px;
   display: inline-block;
@@ -289,14 +304,13 @@
   width: 135px;
   display: inline-block;
 }
-
-.input_mesure_civilite {
+.input_mesure_ville {
   width: 230px;
   display: inline-block;
 }
 
-.input_mesure_annee {
-  width: 280px;
+.input_mesure_civilite {
+  width: 230px;
   display: inline-block;
 }
 
@@ -311,4 +325,16 @@
 }
 .Inscription .input__ville {
   width: 60%;
+}
+
+.field-radio-group .radio label span span {
+  margin-left: 10px;
+}
+
+.input_mesure_lieuDeVie {
+  display: block;
+}
+
+.rt-table .rt-tr-group {
+  max-height: 65px;
 }
