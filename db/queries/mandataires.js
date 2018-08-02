@@ -10,7 +10,9 @@ const getCountMesures = (id, filters = { status: "Mesure en cours" }) =>
     .where({
       mandataire_id: parseInt(id),
       ...filters
-    });
+    })
+    .first()
+    .then(r => r.count);
 
 // update mandataire data
 const updateMandataire = (id, data) =>
