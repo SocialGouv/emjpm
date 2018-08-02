@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "mocha",
+    "test": "NODE_ENV=test mocha --timeout 5000",
     "knex": "knex",
     "eslint": "eslint *.js **/*.js --fix",
     "migrate-and-start": "knex migrate:latest && npm start",
@@ -38,7 +38,9 @@
     "passport-stub": "^1.1.1",
     "pg": "^4.5.3",
     "pg-native": "^3.0.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "swagger-jsdoc": "^3.0.2",
+    "swagger-ui-dist": "^3.17.6"
   },
   "devDependencies": {
     "eslint": "^4.18.2",
