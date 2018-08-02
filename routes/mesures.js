@@ -49,7 +49,21 @@ router.get("/popup", typeRequired("ti"), async (req, res, next) => {
     return next(new Error(401));
   }
   queries
-    .getAllMesuresByPopUp(ti.id)
+    .getAllMesuresByPopUp(ti.id, req.query.searchType)
+    .then(function(mesures) {
+      res.status(200).json(mesures);
+    })
+    .catch(function(error) {
+      console.log(error);
+      throw error;
+      next(error);
+    });
+});
+
+router.get("/popupMandataire", loginRequired, async (req, res, next) => {
+  const ti = await queries.getTiByUserId(req.user.id);
+  queries
+    .getAllMesuresByPopUpForMandataire(ti.id)
     .then(function(mesures) {
       res.status(200).json(mesures);
     })

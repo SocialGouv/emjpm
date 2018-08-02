@@ -25,7 +25,7 @@ router.post(
     queries
       .addAntenne({
         ...req.body,
-        service_id: ti.id
+        mandataire_id: ti.id
       })
       .then(function(commentaireID) {
         return queries.getAllAntennes(ti.id);
@@ -67,7 +67,7 @@ router.delete(
     queries
       .deleteAntenne({
         id: req.params.antenneId,
-        service_id: mandataire.id
+        mandataire_id: mandataire.id
       })
       .then(function(commentaireID) {
         return queries.getAllAntennes(mandataire.id);

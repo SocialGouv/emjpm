@@ -5,29 +5,65 @@ const queries = require("../db/queries");
 
 const { loginRequired } = require("../auth/_helpers");
 
+const {
+  getMandataireById,
+  getMandataireByUserId,
+  updateMandataire,
+  updateCountMesures
+} = require("../db/queries/mandataires");
+
 // récupère les données d'un mandataire
 router.get("/1", loginRequired, async (req, res, next) => {
-  const mandataire = await queries.getMandataireByUserId(req.user.id);
+  const mandataire = await getMandataireByUserId(req.user.id);
   if (!mandataire) {
     return next(new Error(401));
   }
-  queries
-    .getSingle(mandataire.id)
-    .then(mandataire => res.status(200).json(mandataire))
-    .catch(error => next(error));
+  res.status(200).json(mandataire);
 });
+
+const WHITELIST = [
+  "nom",
+  "prenom",
+  "genre",
+  "telephone",
+  "telephone_portable",
+  "email",
+  "adresse",
+  "code_postal",
+  "ville",
+  "dispo_max",
+  "secretariat",
+  "nb_secretariat"
+];
+
+const whiteList = obj =>
+  Object.keys(obj)
+    .filter(key => WHITELIST.indexOf(key) > -1)
+    .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
 // met à jour les données d'un mandataire
 router.put("/1", loginRequired, async (req, res, next) => {
-  const mandataire = await queries.getMandataireByUserId(req.user.id);
+  const mandataire = await getMandataireByUserId(req.user.id);
   if (!mandataire) {
     return next(new Error(401));
   }
-  queries
-    .update(mandataire.id, req.body)
-    .then(() => queries.getSingle(mandataire.id))
-    .then(mandataire => res.status(200).json(mandataire))
-    .catch(error => next(error));
+  const body = whiteList(req.body);
+
+  if (Object.keys(body).length === 0) {
+    res.status(200).json(mandataire);
+    return next();
+  }
+
+  updateMandataire(mandataire.id, body)
+    .then(() => getMandataireById(mandataire.id))
+    .then(mandataire => {
+      res.status(200).json(mandataire);
+    })
+    .catch(error => {
+      console.log(error);
+      throw error;
+      next(error);
+    });
 });
 
 // todo: test
@@ -68,9 +104,22 @@ router.get("/", loginRequired, async (req, res, next) => {
     .catch(error => next(error));
 });
 
+router.get("/services", loginRequired, async (req, res, next) => {
+  if (req.user.type !== "ti") {
+    return next(new Error(401));
+  }
+  const ti = await queries.getTiByUserId(req.user.id);
+  if (!ti) {
+    return next(new Error(401));
+  }
+  queries
+    .getAllServicesByTis(ti.id)
+    .then(mandataires => res.status(200).json(mandataires))
+    .catch(error => next(error));
+});
+
 // todo: test
 router.post("/PosteCode", loginRequired, async (req, res, next) => {
-  console.log("Salut", req.body.codePoste);
   queries
     .getCoordonneByPosteCode(req.body.codePoste)
     .then(function(mandataires) {
@@ -93,22 +142,22 @@ router.post("/PosteCode", loginRequired, async (req, res, next) => {
 // droits : user en cours
 
 router.put("/:mandataireId/capacite", async (req, res, next) => {
-  const mandataire = await queries.getMandataireByUserId(req.user.id);
+  const mandataire = await getMandataireByUserId(req.user.id);
   if (!mandataire) {
     return next(new Error(401));
   }
-  // récupères le nb de mesure attribuées pour ce mandataire
-  const capaciteMandataire = queries.CapaciteMandataire(mandataire.id);
-  queries
-    .update(mandataire.id, { disponibilite: capaciteMandataire })
-    .then(() => queries.getSingle(mandataire.id))
-    .then(mandataire => res.status(200).json(mandataire))
-    .catch(error => next(error));
+  updateCountMesures(mandataire.id).then(() => {
+    res
+      .status(200)
+      .json(mandataire)
+      .catch(error => next(error));
+  });
 });
 
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));
 router.use("/", require("./serviceAntennes"));
-router.use("/", require("./etablissementPreposes"));
+router.use("/", require("./mandatairesEtablissements"));
+router.use("/", require("./tis"));
 
 module.exports = router;

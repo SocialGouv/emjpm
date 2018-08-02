@@ -24,17 +24,21 @@ function uploadAll(data) {
 
 function getAllMandataires(ti_id) {
   return knex
-    .from("mandatairetis")
+    .from("mandataire_tis")
     .where("ti_id", parseInt(ti_id))
-    .innerJoin("mandataires", "mandatairetis.mandataire_id", "mandataires.id");
+    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id");
 }
 
-// function getAllMesuresByPopUp(code_postal) {
-//     return knex
-//         .from("mesures")
-//         .where("code_postal", parseInt(code_postal))
-//         .innerJoin("mandataires", "mesures.mandataire_id", "mandataires.id");
-// }
+function getMandataires() {
+  return knex.from("mandataires");
+}
+
+function getAllServicesByTis(ti_id) {
+  return knex
+    .from("mandataire_tis")
+    .where({ ti_id: parseInt(ti_id), type: "Service" })
+    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id");
+}
 
 function getAllMesures(mandataireID) {
   return knex("mesures").where({
@@ -55,13 +59,22 @@ function getAllMesuresByMandataires(ti_id) {
     .from("mesures")
     .where("status", "Mesure en cours")
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
-    .where("mandatairetis.ti_id", parseInt(ti_id))
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mesures.code_postal"
+    )
+    .innerJoin(
+      "mandataire_tis",
+      "mandataire_tis.mandataire_id",
+      "mandataires.id"
+    )
+    .where("mandataire_tis.ti_id", parseInt(ti_id))
     .select(
       "mesures.id",
       "mesures.code_postal",
-      "mesures.latitude",
-      "mesures.longitude",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude",
       "mandataires.nom",
       "mandataires.prenom",
       "mandataires.type",
@@ -79,14 +92,55 @@ function getAllMesuresByMandatairesFilter(
 ) {
   return knex
     .from("mesures")
+    .select(
+      knex.raw(
+        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
+      )
+    )
     .where("status", "Mesure en cours")
-    .whereBetween("mesures.latitude", [latsouthWest, latnorthEast])
-    .whereBetween("mesures.longitude", [longSouthWest, longNorthEast])
+    .whereBetween("geolocalisation_code_postal.latitude", [
+      latsouthWest,
+      latnorthEast
+    ])
+    .whereBetween("geolocalisation_code_postal.longitude", [
+      longSouthWest,
+      longNorthEast
+    ])
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
-    .groupByRaw("mandataires.id")
-    .where("mandatairetis.ti_id", parseInt(ti_id))
-    .select("mandataires.id", "mandataires.*");
+    .innerJoin(
+      "mandataire_tis",
+      "mandataire_tis.mandataire_id",
+      "mandataires.id"
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mesures.code_postal"
+    )
+    .groupByRaw(
+      "geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,mandataires.id"
+    )
+    .where("mandataire_tis.ti_id", parseInt(ti_id))
+    .union(function() {
+      this.select(
+        "mandataires.id",
+        "mandataires.*",
+        "geolocalisation_code_postal.latitude",
+        "geolocalisation_code_postal.longitude"
+      )
+        .from("mandataires")
+        .where("type", "Service")
+        .innerJoin(
+          "mandataire_tis",
+          "mandataire_tis.mandataire_id",
+          "mandataires.id"
+        )
+        .innerJoin(
+          "geolocalisation_code_postal",
+          "geolocalisation_code_postal.code_postal",
+          "mandataires.code_postal"
+        );
+    });
 }
 
 function getAllByMandatairesFilter(
@@ -98,47 +152,133 @@ function getAllByMandatairesFilter(
 ) {
   return knex
     .from("mandataires")
-    .whereBetween("mandataires.latitude", [latsouthWest, latnorthEast])
-    .whereBetween("mandataires.longitude", [longSouthWest, longNorthEast])
-    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
-    .groupByRaw("mandataires.id")
-    .where("mandatairetis.ti_id", parseInt(ti_id))
-    .select("mandataires.id", "mandataires.*");
+    .whereBetween("geolocalisation_code_postal.latitude", [
+      latsouthWest,
+      latnorthEast
+    ])
+    .whereBetween("geolocalisation_code_postal.longitude", [
+      longSouthWest,
+      longNorthEast
+    ])
+    .innerJoin(
+      "mandataire_tis",
+      "mandataire_tis.mandataire_id",
+      "mandataires.id"
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mandataires.code_postal"
+    )
+    .groupByRaw("mandataires.id,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude")
+    .where("mandataire_tis.ti_id", parseInt(ti_id))
+    .select(
+      knex.raw(
+        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
+      )
+    );
 }
 
 function getCoordonneByPosteCode(userId) {
   return knex
-    .from("codePostalLatLngs")
+    .from("geolocalisation_code_postal")
     .debug()
     .where("code_postal", userId)
     .first();
 }
 
-function getAllMesuresByPopUp(ti_id) {
+function getAllMesuresByPopUp(ti_id, type) {
+  const where = {
+    "mandataire_tis.ti_id": parseInt(ti_id),
+    status: "Mesure en cours"
+  };
+  if (type) {
+    where["mandataires.type"] = type;
+  }
   return knex
     .from("mesures")
     .select(
-      knex.raw("COUNT(mesures.code_postal)"),
+      knex.raw(
+        "COUNT(mesures.code_postal),array_agg(distinct mesures.mandataire_id) as mandataire_ids,array_agg(distinct mandataires.type) as types"
+      ),
       "mesures.code_postal",
-      "v1.latitude",
-      "v1.longitude"
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
     )
     .innerJoin(
-      "codePostalLatLngs as v1",
+      "geolocalisation_code_postal",
       "mesures.code_postal",
-      "v1.code_postal"
+      "geolocalisation_code_postal.code_postal"
     )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin("mandatairetis", "mandatairetis.mandataire_id", "mandataires.id")
+    .innerJoin(
+      "mandataire_tis",
+      "mandataire_tis.mandataire_id",
+      "mandataires.id"
+    )
+    .where(where)
+    .groupByRaw(
+      "mesures.code_postal,geolocalisation_code_postal.longitude,geolocalisation_code_postal.latitude"
+    );
+}
+
+function getAllMesuresByMandatairesForMaps(mandataireID) {
+  return knex("mesures")
+    .select(
+      knex.raw(
+        "COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"
+      ),
+      "mesures.code_postal",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "mesures.code_postal",
+      "geolocalisation_code_postal.code_postal"
+    )
     .where({
-      "mandatairetis.ti_id": parseInt(ti_id),
+      mandataire_id: parseInt(mandataireID),
       status: "Mesure en cours"
     })
-    .groupByRaw("mesures.code_postal,v1.longitude,v1.latitude,v1.code_postal");
+    .groupByRaw(
+      "mesures.code_postal,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
+    );
+}
+
+function getAllMesuresByPopUpForMandataire(ti_id) {
+  return knex
+    .from("mesures")
+    .select(
+      knex.raw(
+        "COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"
+      ),
+      "mesures.code_postal",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "mesures.code_postal",
+      "geolocalisation_code_postal.code_postal"
+    )
+    .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
+    .innerJoin(
+      "mandataire_tis",
+      "mandataire_tis.mandataire_id",
+      "mandataires.id"
+    )
+    .where({
+      "mandataire_tis.ti_id": parseInt(ti_id),
+      status: "Mesure en cours"
+    })
+    .groupByRaw(
+      "mesures.code_postal,geolocalisation_code_postal.longitude,geolocalisation_code_postal.latitude,geolocalisation_code_postal.code_postal"
+    );
 }
 
 function getPostecode(codePostal, lat, lng) {
-  return knex("codePostalLatLngs").insert({
+  return knex("geolocalisation_code_postal").insert({
     code_postal: codePostal,
     latitude: lat,
     longitude: lng
@@ -153,11 +293,28 @@ function getMandataireByUserId(userId) {
 }
 
 function add(mandataire) {
-  return Mandataires().insert(madataire);
+  return Mandataires().insert(mandataire);
 }
 
 function getSingle(mandataireID) {
   return Mandataires()
+    .select(
+      "mandataires.*",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude"
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mandataires.code_postal"
+    )
+    .where("mandataires.id", parseInt(mandataireID))
+    .first();
+}
+
+function getSingleDisponibilite(mandataireID) {
+  return Mandataires()
+    .select("mesures_en_cours")
     .where("id", parseInt(mandataireID))
     .first();
 }
@@ -200,20 +357,24 @@ function getAllCommentaires(mandataire_id, ti_id) {
 function addCommentaire(data) {
   return Commentaires().insert(data);
 }
-function deleteCommentaire(showID) {
+
+function deleteCommentaire({ id, ti_id }) {
   return Commentaires()
-    .where("co_id", parseInt(showID))
+    .where({
+      id: parseInt(id),
+      ti_id
+    })
     .del();
 }
 
 function getSingleCommentaire(commentaireID) {
   return Commentaires()
-    .where("co_id", parseInt(commentaireID))
+    .where("id", parseInt(commentaireID))
     .first();
 }
 function updateCommentaire(commentaireID, updates) {
   return Commentaires()
-    .where("co_id", parseInt(commentaireID))
+    .where("id", parseInt(commentaireID))
     .update(updates);
 }
 
@@ -255,10 +416,6 @@ function updateMesure(where, updates) {
     .update(updates);
 }
 
-function getAllServices(service_id) {
-  return knex("mandataires").where("service_id", parseInt(service_id));
-}
-
 function getsingleUsers(email) {
   return knex("users").where("email", email);
 }
@@ -269,8 +426,61 @@ function getAllEtablissement(mandataireId) {
   });
 }
 
+function getEtablissements() {
+  return knex("etablissements")
+    .whereBetween("code_postal", [59000, 59999])
+    .orWhereBetween("code_postal", [60000, 60999])
+    .orWhereBetween("code_postal", [62000, 62999])
+    .orWhereBetween("code_postal", [80000, 80999])
+    .orWhereBetween("code_postal", [2000, 2999]);
+  //TODO refactor with Likes '%...'
+}
+
+function getTis() {
+  return knex("tis");
+}
+
+function getAllEtablissementsByMandataire(mandataireId) {
+  return knex("mandataire_etablissements")
+    .select(
+      "mandataire_etablissements.id",
+      "mandataire_etablissements.etablissement_id",
+      "etablissements.nom"
+    )
+    .innerJoin(
+      "mandataires",
+      "mandataires.id",
+      "mandataire_etablissements.mandataire_id"
+    )
+    .innerJoin(
+      "etablissements",
+      "mandataire_etablissements.etablissement_id",
+      "etablissements.id"
+    )
+    .where({
+      mandataire_id: parseInt(mandataireId)
+    });
+}
+
+function getAllTisByMandataire(mandataireId) {
+  return knex("mandataire_tis")
+    .select("tis.id", "tis.etablissement", "mandataire_tis.ti_id")
+    .innerJoin("tis", "mandataire_tis.ti_id", "tis.id")
+    .where({
+      mandataire_id: parseInt(mandataireId)
+    });
+}
+
 function addEtablissement(mandataireId) {
   return knex("EtablissementPreposes").insert(mandataireId);
+}
+
+function addMandataireToEtablissement(mandataireId) {
+  return knex("mandataire_etablissements").insert(mandataireId);
+}
+
+function addMandataireTis(data) {
+  return knex("mandataire_tis").insert(data);
 }
 
 function updateEtablissement(mesureID, updates) {
@@ -283,37 +493,55 @@ function deleteEtablissement(showID) {
     .where("id", parseInt(showID))
     .del();
 }
+function deleteMandataireEtablissement(showID) {
+  return knex("mandataire_etablissements")
+    .where("id", parseInt(showID))
+    .del();
+}
+
+function deleteMandataireTis(tiId, mandataireId) {
+  return knex("mandataire_tis")
+    .where({ ti_id: parseInt(tiId), mandataire_id: parseInt(mandataireId) })
+    .first()
+    .del();
+}
 
 function getAllAntennes(mandataireId) {
-  return knex("serviceAntennes").where({
-    service_id: parseInt(mandataireId)
+  return knex("service_antennes").where({
+    mandataire_id: parseInt(mandataireId)
   });
 }
 
 function addAntenne(mandataireId) {
-  return knex("serviceAntennes").insert(mandataireId);
+  return knex("service_antennes").insert(mandataireId);
 }
 
 function updateAntenne(mesureID, updates) {
-  return knex("serviceAntennes")
+  return knex("service_antennes")
     .where("id", parseInt(mesureID))
     .update(updates);
 }
 
 function deleteAntenne(where) {
-  return knex("serviceAntennes")
+  return knex("service_antennes")
     .where(where)
     .del();
 }
 
 const isMandataireInTi = (mandataire_id, ti_id) =>
   knex
-    .from("mandatairetis")
+    .from("mandataire_tis")
     .where({
       mandataire_id,
       ti_id
     })
     .then(res => res.length > 0);
+
+const updateMandataireMailSent = id =>
+  knex
+    .table("mandataires")
+    .where({ id })
+    .update({ email_send: new Date() });
 
 module.exports = {
   getAllUsers,
@@ -334,7 +562,6 @@ module.exports = {
   deleteCommentaire: deleteCommentaire,
   uploadAll: uploadAll,
   getSingleUser: getSingleUser,
-  getAllServices: getAllServices,
   getTiByUserId,
   getAllMesuresByMandataires,
   getAllMesures,
@@ -356,5 +583,19 @@ module.exports = {
   getAllMesuresByMandatairesFilter,
   getCoordonneByPosteCode,
   getAllByMandatairesFilter,
-  isMandataireInTi
+  isMandataireInTi,
+  getSingleDisponibilite,
+  addMandataireToEtablissement,
+  getAllEtablissementsByMandataire,
+  deleteMandataireEtablissement,
+  getEtablissements,
+  getAllTisByMandataire,
+  getTis,
+  addMandataireTis,
+  deleteMandataireTis,
+  getAllServicesByTis,
+  getAllMesuresByPopUpForMandataire,
+  getAllMesuresByMandatairesForMaps,
+  getMandataires,
+  updateMandataireMailSent
 };

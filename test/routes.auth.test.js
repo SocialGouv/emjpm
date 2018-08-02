@@ -109,13 +109,10 @@ describe("routes : auth", () => {
           username: "inactive",
           password: "inactive"
         })
-        .then(() => {
-          throw new Error("should not succeed");
-        })
-        .catch(res => {
+        .then(res => {
           res.status.should.eql(401);
-          res.response.type.should.eql("application/json");
-          res.response.body.status.should.eql("User not found");
+          res.type.should.eql("application/json");
+          res.body.status.should.eql("User not found");
         }));
     it("should NOT login an unregistered user", () =>
       chai
@@ -125,13 +122,10 @@ describe("routes : auth", () => {
           username: "michael",
           password: "johnson123"
         })
-        .then(() => {
-          throw new Error("should not succeed");
-        })
-        .catch(res => {
+        .then(res => {
           res.status.should.eql(401);
-          res.response.type.should.eql("application/json");
-          res.response.body.status.should.eql("User not found");
+          res.type.should.eql("application/json");
+          res.body.status.should.eql("User not found");
         }));
     it("should NOT login a registered user with wrong password", () =>
       chai
@@ -141,13 +135,10 @@ describe("routes : auth", () => {
           username: "jeremy",
           password: "johnson1234"
         })
-        .then(() => {
-          throw new Error("should not succeed");
-        })
-        .catch(res => {
+        .then(res => {
           res.status.should.eql(401);
-          res.response.type.should.eql("application/json");
-          res.response.body.status.should.eql("User not found");
+          res.type.should.eql("application/json");
+          res.body.status.should.eql("User not found");
         }));
   });
 
@@ -170,17 +161,13 @@ describe("routes : auth", () => {
 
     // todo: ensure session is destroyed and cookie removed
 
-    // it("should throw an error if a user is not logged in", () =>
-    //   chai
-    //     .request(server)
-    //     .get("/auth/logout")
-    //     .then(() => {
-    //       throw new Error("should not succeed");
-    //     })
-    //     .catch(res => {
-    //       res.status.should.eql(401);
-    //       res.response.type.should.eql("application/json");
-    //       res.response.body.status.should.eql("Please log in");
-    //     }));
+    it("should return 200 if a user is not logged in", () =>
+      chai
+        .request(server)
+        .get("/auth/logout")
+        .then(res => {
+          res.status.should.eql(200);
+          res.type.should.eql("application/json");
+        }));
   });
 });

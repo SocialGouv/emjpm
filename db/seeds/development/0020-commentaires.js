@@ -4,7 +4,7 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       // Inserts seed entries one by one in series
       return knex("commentaires").insert({
-        co_comment: "Hello, world",
+        comment: "Hello, world",
         mandataire_id: 1,
         ti_id: 1
       });
@@ -12,9 +12,9 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       // Inserts seed entries one by one in series
       return knex("commentaires").insert({
-        co_comment: "Hello, world 2",
-        mandataire_id: 1,
-        ti_id: 2
+        comment: "Hello, world 2",
+        mandataire_id: 2,
+        ti_id: 1
       });
     });
 };
