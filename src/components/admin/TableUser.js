@@ -2,7 +2,7 @@ import ReactTable from "react-table";
 import format from "date-fns/format";
 import queryString from "query-string";
 
-import ToggleState from "./ToggleState";
+import ToggleState from "../common/ToggleState";
 import SearchButton from "../communComponents/SearchButton";
 import { default as apiFetch, updateUser } from "../communComponents/Api";
 
@@ -20,15 +20,17 @@ const CellActive = ({ active }) => (
 
 const CellAction = ({ row: { id, active } }) => (
   <ToggleState
-    onToggle={active =>
+    getPromise={active =>
       updateUser({
         id,
         active
-      })}
+      })
+    }
     active={active}
-    render={({ active }) => {
+    render={({ active, toggle }) => {
       return (
         <SearchButton
+          onClick={toggle}
           error={active}
           data-cy="UserCellAction"
           style={{ textAlign: "center", fontSize: "0.8em" }}
@@ -122,7 +124,7 @@ class TableUser extends React.Component {
         style={{ backgroundColor: "white" }}
         columns={COLUMNS}
         noDataText="Aucun mandataire ici..."
-        // manual
+        manual
         showPagination={false}
         data={data}
         loading={loading}
