@@ -17,8 +17,7 @@ describe("routes : mesures", () => {
     knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())
-      .then(() => knex.seed.run())
-  );
+      .then(() => knex.seed.run()));
 
   afterEach(() => {
     passportStub.logout();
