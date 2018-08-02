@@ -20,12 +20,13 @@ const options = {
     info: {
       title: "eMJPM-api",
       version: "1.0.0",
-      description: ""
+      description: "Documentation de l'API e-MJPM",
+      contact: "contact@emjpm.beta.gouv.fr"
     },
     host: "https://emjpm-api.num.social.gouv.fr",
     basePath: "/"
   },
-  apis: ["./routes/admin.js"] // Path to the API docs
+  apis: ["./routes/*.js"] // Path to the API docs
 };
 
 router.get("/api-docs.json", function(req, res) {
