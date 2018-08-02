@@ -163,17 +163,19 @@ class TableMesures extends React.Component {
       this.fetchData();
     }
   }
+  componentDidMount() {
+    this.fetchData();
+  }
   render() {
     const { data, loading } = this.state;
     const { hideColumns } = this.props;
     return (
       <ReactTable
-        style={{ backgroundColor: "white", minHeight: 500 }}
+        style={{ backgroundColor: "white", height: 500 }}
         columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
         noDataText="Aucune mesure ici..."
         showPagination={false}
-        manual
-        pageSize={-1}
+        pageSize={500}
         data={data}
         sortable={true}
         multiSort={false}
@@ -183,10 +185,8 @@ class TableMesures extends React.Component {
             desc: true
           }
         ]}
-        //defaultSortDesc={true}
         loading={loading}
         loadingText="Chargement des mesures..."
-        onFetchData={this.fetchData}
         className="-striped -highlight"
       />
     );
