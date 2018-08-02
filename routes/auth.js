@@ -4,6 +4,8 @@ const router = express.Router();
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
 
+const { updateLastLogin } = require("../db/queries/users");
+
 const redirs = {
   individuel: "/mandataires",
   prepose: "/mandataires",
@@ -13,33 +15,85 @@ const redirs = {
   default: "/"
 };
 
+/**
+ * @swagger
+ *
+ * components:
+ *   requestBodies:
+ *     Login:
+ *       description: A JSON object containing user credentials
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 required: true
+ *               password:
+ *                 type: string
+ *                 required: true
+ */
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     description: logout from the API
+ *     produces:
+ *       - application/json
+ *     requestBody:
+ *       $ref: '#/components/requestBodies/Login'
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SuccessResponse'
+ */
 router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);
     }
     if (!user) {
-      return handleResponse(res, 401, "User not found");
+      return res
+        .status(401)
+        .json({ success: false, message: "User not found" });
     }
     if (user) {
       req.logIn(user, function(err) {
         if (err) {
           return next(err);
         }
-        return handleResponse(
-          res,
-          200,
-          "success",
-          redirs[user.type] || redirs.default
-        );
+        updateLastLogin(user.id).then(() => {
+          res
+            .status(200)
+            .json({ success: true, url: redirs[user.type] || redirs.default });
+        });
       });
     }
   })(req, res, next);
 });
 
+/**
+ * @swagger
+ * /auth/logout:
+ *   get:
+ *     description: logout from the API
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SuccessResponse'
+ */
 router.get("/logout", (req, res, next) => {
   req.logout();
-  handleResponse(res, 200, "success");
+  res.status(200).json({ success: true });
   next();
 });
 

@@ -10,7 +10,6 @@ const users = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const Knex = require("knex");
 const KnexSessionStore = require("connect-session-knex")(session);
-
 const app = express();
 
 process.on("unhandledRejection", r => console.log(r));
@@ -64,9 +63,9 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use("/api/v1", routes);
 app.use("/auth", authRoutes);
+app.use("/doc", require("./routes/doc"));
 app.use("/", users);
 
 // catch 404 and forward to error handler
@@ -80,6 +79,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
+/*
 if (app.get("env") === "development") {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500).json({
@@ -87,16 +87,19 @@ if (app.get("env") === "development") {
       error: err
     });
   });
-}
+}*/
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500).json({
-    //message: err.message,
-    error: {}
+if (process.env.NODE_ENV !== "test") {
+  app.use(function(err, req, res, next) {
+    console.log(err);
+    res.status(err.status || 500).json({
+      //    message: err.message,
+      error: {}
+    });
   });
-});
+}
 
 const port = process.env.PORT || 4000;
 
