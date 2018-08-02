@@ -60,7 +60,6 @@ router.get("/popup", typeRequired("ti"), async (req, res, next) => {
     });
 });
 
-
 router.get("/popupMandataire", loginRequired, async (req, res, next) => {
   const ti = await queries.getTiByUserId(req.user.id);
   queries

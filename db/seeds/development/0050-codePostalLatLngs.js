@@ -17,10 +17,12 @@ exports.seed = (knex, Promise) => {
     });
   return knex.transaction(tr => {
     return knex
-      .table("codePostalLatLngs")
+      .table("geolocalisation_code_postal")
       .del()
       .then(() => {
-        return knex.batchInsert("codePostalLatLngs", rows).transacting(tr);
+        return knex
+          .batchInsert("geolocalisation_code_postal", rows)
+          .transacting(tr);
       });
   });
 };
