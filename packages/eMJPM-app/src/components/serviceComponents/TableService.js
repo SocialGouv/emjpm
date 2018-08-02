@@ -1,4 +1,4 @@
-import TableRowMesure from "../mandataireComponents/TableRowMesure";
+import TableRowMesure from "../mandataires/TableRowMesure";
 
 const TableMesure = ({ rows }) => {
   return (
