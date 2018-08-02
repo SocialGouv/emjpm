@@ -4,6 +4,8 @@ const router = express.Router();
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
 
+const { updateLastLogin } = require("../db/queries/users");
+
 const redirs = {
   individuel: "/mandataires",
   prepose: "/mandataires",
@@ -26,12 +28,14 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         if (err) {
           return next(err);
         }
-        return handleResponse(
-          res,
-          200,
-          "success",
-          redirs[user.type] || redirs.default
-        );
+        updateLastLogin(user.id).then(() => {
+          return handleResponse(
+            res,
+            200,
+            "success",
+            redirs[user.type] || redirs.default
+          );
+        });
       });
     }
   })(req, res, next);
