@@ -27,6 +27,10 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
         console.log(`404 on ${route}`);
         throw new Error(404);
       }
+      if (res.status >= 500) {
+        console.log(`${res.status} on ${route}`);
+        throw new Error(res.status);
+      }
       return res;
     })
     .then(res => res && res.json());

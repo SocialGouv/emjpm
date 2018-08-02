@@ -1,8 +1,8 @@
-const getCenter = (state, postcodeMandataire) => {
+const getCenter = (state, coordonneesMandataire) => {
   return state.lat
     ? [state.lat, state.lng]
-    : postcodeMandataire[1]
-      ? [postcodeMandataire[1], postcodeMandataire[0]]
+    : coordonneesMandataire[1]
+      ? [coordonneesMandataire[1], coordonneesMandataire[0]]
       : [50.459441, 2.693963];
 };
 
