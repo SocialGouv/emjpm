@@ -9,7 +9,14 @@ const whitelist = require("../db/queries/whitelist");
 
 /**
  * @swagger
+ * security:
+ *   - cookieAuth: []
  * components:
+ *   securitySchemes:
+ *     cookieAuth:
+ *       type: apiKey
+ *       in: cookie
+ *       name: connect.sid
  *   requestBodies:
  *     ActiveMandataireBody:
  *       description: A JSON object containing user active status
@@ -21,7 +28,7 @@ const whitelist = require("../db/queries/whitelist");
  *             properties:
  *               active:
  *                 type: boolean
- *
+ *                 required: true
  *   schemas:
  *     Mandataire:
  *       type: object
