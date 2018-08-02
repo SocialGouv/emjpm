@@ -1,145 +1,66 @@
-import fetch from "isomorphic-fetch";
-import Form, { validateJsonSchema, mergeErrorSchema } from "react-jsonschema-form";
-import styled from "styled-components";
-import apiFetch from "../communComponents/Api";
-import RowModal from "../communComponents/RowModal";
-import SearchButton from "../communComponents/SearchButton";
-import piwik from "../../piwik";
+import FormMandataire from "./FormMandataire";
+import uiSchema from "./uiSchema.json";
 
-function validate(formData, errors) {
-  if (formData.pass1 !== formData.pass2) {
-    errors.pass2.addError("Mot de passe incorrect");
-  }
-  return errors;
-}
 const schema = {
   type: "object",
   required: [
-    "Susername",
-    "Spass1",
-    "Spass2",
-    "Snom",
-    "Sprenom",
-    "Stelephone",
-    "Semail",
-    "Sadresse",
-    "Sville",
-    "Scode_postal"
+    "username",
+    "pass1",
+    "pass2",
+    "etablissement",
+    "nom",
+    "prenom",
+    "telephone",
+    "email",
+    "adresse",
+    "code_postal",
+    "ville"
   ],
   properties: {
-    Susername: {
+    username: {
       type: "string",
-      title: "Identifiant (vous servira pour vous connecter sur E-MJPM)",
+      minLength: 10,
       default: ""
     },
-    Spass1: { type: "string", title: "Mot de passe", minLength: 10 },
-    Spass2: { type: "string", title: "Répéter mot de passe", minLength: 10 },
-    Snom: { type: "string", title: "Nom du contact dans le service", default: "" },
-    Sprenom: { type: "string", title: "Prénom du contact dans le service", default: "" },
-    Stelephone: { type: "string", title: "Téléphone du contact dans le service", default: "" },
-    Semail: { type: "string", title: "Adresse email du contact dans le service", default: "" },
-    Sadresse: { type: "string", title: "Rue", default: "" },
-    Sville: { type: "string", title: "Commune", default: "" },
-    Scode_postal: { type: "string", title: "Code Postal", default: "" }
+    pass1: { type: "string", minLength: 10 },
+    pass2: { type: "string", minLength: 10 },
+    etablissement: { type: "string", default: "" },
+    nom: { type: "string", default: "" },
+    prenom: { type: "string", default: "" },
+    telephone: { type: "string", default: "" },
+    email: { type: "string", default: "" },
+    adresse: { type: "string", default: "" },
+    code_postal: { type: "string", default: "" },
+    ville: { type: "string", default: "" }
   }
 };
 
-const uiSchema = {
-  Spass1: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "10 caratères minimum",
-    "ui:widget": "password"
-  },
-  Spass2: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "10 caratères minimum",
-    "ui:widget": "password"
-  },
-  Susername: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "Identifiant"
-  },
-  Snom: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "Nom"
-  },
-  Sprenom: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "Prénom"
-  },
-  Stelephone: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "Téléphone"
-  },
-  Semail: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "Adresse email"
-  },
-  Sadresse: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "Rue"
-  },
-  Scode_postal: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "Code Postal"
-  },
-  Sville: {
-    classNames: "input_form_inscription",
-    "ui:placeholder": "Commune"
+// utiliy to add labels to some fields
+const serviceFields = ["nom", "prenom", "telephone", "email"];
+const serviceFieldsUiSchema = serviceFields.reduce(
+  (schema, field) => ({
+    ...schema,
+    [field]: {
+      ...uiSchema[field],
+      "ui:title": uiSchema[field]["ui:title"] + " du contact dans le service"
+    }
+  }),
+  {}
+);
+
+// build custom ui schema
+const serviceUiSchema = {
+  ...uiSchema,
+  ...serviceFieldsUiSchema,
+  etablissement: {
+    ...uiSchema.etablissement,
+    "ui:title": "Nom du service",
+    "ui:placeholder": "ex: CHU de Nanterre"
   }
 };
 
-const formData = {};
-
-class InscriptionService extends React.Component {
-  /*onSubmit = ({ formData }) => {
-
-		 apiFetch(`/mandataires/1`, {
-      method: "PUT",
-      body: JSON.stringify({
-    	SusernameS:
-    	Spass1:
-    	Spass2:
-       	SnomS:
-        SprenomS:
-        StelephoneS:
-        Stelephone_portableS:
-        SemailS:
-        SadresseS:
-        Scode_postalS:
-        SvilleS:
-
-      })
-    }).then(json => {
-     //piwik
-     // this.props.updateMadataire(json);
-    });
-	};*/
-
-  render() {
-    return (
-      <div>
-        <br />
-        <h2 style={{ margin: 20 }}>
-          Veuillez renseigner ci-dessous vos informations professionelles:
-        </h2>
-        <br />
-        <b>
-          <Form
-            schema={schema}
-            formData={formData}
-            uiSchema={uiSchema}
-            validate={validate}
-            showErrorList={false}
-          >
-            <div style={{ textAlign: "left", paddingBottom: "10px", marginLeft: "20px" }}>
-              <SearchButton type="submit">Enregistrer</SearchButton>
-            </div>
-          </Form>
-        </b>
-      </div>
-    );
-  }
-}
+const InscriptionService = props => (
+  <FormMandataire schema={schema} uiSchema={serviceUiSchema} {...props} />
+);
 
 export default InscriptionService;

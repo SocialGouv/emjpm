@@ -44,7 +44,7 @@ const StyledInput = styled.input`
 
 const BootstrapInput = props => <StyledInput className="form-control mb-2" {...props} />;
 
-const PanelFilterMandataires = ({ findPostcode, updateFilters, type }) => (
+const PanelFilterMandataires = ({ findPostcode, updateFilters }) => (
   <Container>
     <PanelContent className="container">
       <div className="row">

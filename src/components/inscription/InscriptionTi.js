@@ -33,7 +33,8 @@ const schema = {
     email: { type: "string", title: "Adresse email", default: "" },
     adresse: { type: "string", title: "Rue", default: "" },
     ville: { type: "string", title: "Commune", default: "" },
-    code_postal: { type: "string", title: "Code Postal", default: "" }
+    code_postal: { type: "string", title: "Code Postal", default: "" },
+    type: { type: "string", default: "ti" }
   }
 };
 
@@ -62,6 +63,9 @@ const uiSchema = {
   },
   ville: {
     "ui:placeholder": "Commune"
+  },
+  type: {
+    classNames: "hidden_input_form_inscription"
   }
 };
 
@@ -69,26 +73,19 @@ const formData = {};
 
 class InscriptionTis extends React.Component {
   /*onSubmit = ({ formData }) => {
-
-
-		 apiFetch(`/mandataires/1`, {
-      method: "PUT",
+     apiFetch(`/mandataires/1`, {
+      method: "POST",
       body: JSON.stringify({
-    	username:
-    	pass1:
-    	pass2:
-
-
-        telephone:
-
-        email:
-        adresse:
-        code_postal:
-        ville:
-
+      username:
+      pass1:
+      pass2:
+      telephone:
+      email:
+      adresse:
+      code_postal:
+      ville:
       })
     }).then(json => {
-     //piwik
      // this.props.updateMadataire(json);
     });
 	};*/
@@ -97,7 +94,10 @@ class InscriptionTis extends React.Component {
     return (
       <div>
         <br />
-        <h2 style={{ margin: 20 }}>Ouvrir un nouveau tribunal d'instance :</h2>
+        <h2 style={{ margin: "0px 20px 20px 20px" }}>
+          Veuillez renseigner ci-dessous les informations pour enregistrer un tribunal
+          d&apos;instance :
+        </h2>
         <br />
         <b>
           <Form

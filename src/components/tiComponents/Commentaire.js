@@ -3,9 +3,9 @@ import Form from "react-jsonschema-form";
 
 const schema = {
   type: "object",
-  required: ["co_comment"],
+  required: ["comment"],
   properties: {
-    co_comment: { type: "string", title: "message", default: "" }
+    comment: { type: "string", title: "message", default: "" }
   }
 };
 
@@ -14,7 +14,7 @@ const API_URL = process.env.API_URL;
 const formData = {};
 
 const uiSchema = {
-  co_comment: {
+  comment: {
     "ui:widget": "textarea"
   }
 };
@@ -27,10 +27,7 @@ class Commentaire extends React.Component {
   };
 
   componentDidMount() {
-    console.log(this.props.currentMandataire.mandataire_id);
-    const url = `${API_URL}/api/v1/mandataires/${
-      this.props.currentMandataire.id
-    }/commentaires`;
+    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire.id}/commentaires`;
     fetch(url, {
       credentials: "include",
       method: "GET",
@@ -52,10 +49,7 @@ class Commentaire extends React.Component {
   }
 
   onSubmit = ({ formData }) => {
-    console.log("Com",this.props.currentMandataire)
-    const url = `${API_URL}/api/v1/mandataires/${
-      this.props.currentMandataire.id
-    }/commentaires`;
+    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire.id}/commentaires`;
     fetch(url, {
       credentials: "include",
       method: "POST",
@@ -65,7 +59,7 @@ class Commentaire extends React.Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        co_comment: formData.co_comment
+        comment: formData.comment
       })
     })
       .then(response => response.json())
@@ -77,10 +71,10 @@ class Commentaire extends React.Component {
       .catch(function(error) {});
   };
 
-  onDelete = comments => {
-    const url = `${API_URL}/api/v1/mandataires/${
-      this.props.currentMandataire.id
-    }/commentaires/${comments.co_id}`;
+  onDelete = comment => {
+    const url = `${API_URL}/api/v1/mandataires/${this.props.currentMandataire.id}/commentaires/${
+      comment.id
+    }`;
     fetch(url, {
       credentials: "include",
       method: "DELETE",
@@ -102,7 +96,10 @@ class Commentaire extends React.Component {
     return (
       <div className="form-group">
         <label htmlFor="exampleFormControlTextarea1">
-          <b>Ajoutez vos notes (ces dernières seront uniquement accessibles aux utilisateurs de votre TI) </b>
+          <b>
+            Ajoutez vos notes (ces dernières seront uniquement accessibles aux utilisateurs de votre
+            TI){" "}
+          </b>
         </label>
         {/*<textarea className="form-control" id="exampleFormControlTextarea1" placeholder={"Ecrivez votre note"} rows="3" style={{boxShadow: "3px 3px"}}> </textarea>*/}
         <br />
@@ -129,17 +126,16 @@ class Commentaire extends React.Component {
         </Form>
 
         <hr />
-        <div style={{ overflow: "scroll", height: "250px" }}>
+        <div style={{ overflow: "scroll", height: "250px" }} data-cy="tab-comment">
           {this.state.data &&
             this.state.data.map &&
-            this.state.data.map(comments => (
-              <div id={comments.id}>
+            this.state.data.map(comment => (
+              <div id={comment.id}>
                 <div style={{ backgroundColor: "#b5b5b5", fontSize: "0.8em" }}>
-                  {" "}
-                  {comments.co_comment} <br />
+                  {comment.comment} <br />
                 </div>
-                Ajouté le : {comments.postDate.slice(0, 10)}{" "}
-                <a type="submit" onClick={() => this.onDelete(comments)}>
+                Ajouté le : {comment.created_at.slice(0, 10)}{" "}
+                <a type="submit" onClick={() => this.onDelete(comment)}>
                   {" "}
                   supprimer
                 </a>

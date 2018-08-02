@@ -1,9 +1,11 @@
 import React, { createRef } from "react";
+import styled from "styled-components";
 import { Map, CircleMarker, TileLayer } from "react-leaflet";
+
 import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
-import styled from "styled-components";
 import FilterMesuresMap from "./FilterMesuresMap";
+import getCenter from "../communComponents/getCenter";
 
 const Title = styled.div`
   text-align: left;
@@ -26,20 +28,22 @@ const MandatairesWidth = styled.div`
 export const MapsView = ({
   mandataires,
   zoom,
-  center,
   width,
   height,
   onMoveend,
   innerRef,
-  filteredMesures,
+  filteredMandataires,
   openModal,
-  mesureCount,
   updateFilters,
   zoomCodePostal,
   getPostCodeCoordinates,
   updateValue,
   mandataireCount,
-  value
+  value,
+  updateFilterMandataire,
+  currentMandataireSelected,
+  updateIsMandataireClick,
+  onCenter
 }) => (
   <div className="container">
     <div className="row">
@@ -54,7 +58,7 @@ export const MapsView = ({
         />
 
         <Map
-          center={center}
+          center={onCenter}
           zoom={zoom}
           style={{ width, height }}
           onMoveend={onMoveend}
@@ -65,28 +69,43 @@ export const MapsView = ({
             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
           />
           {mandataires &&
-            mandataires.map(manda => (
-              <CircleMarker
-                center={[manda.latitude, manda.longitude]}
-                color="red"
-                radius={10}
-                key={manda.id}
-              />
-            ))}
+            mandataires.map(manda => {
+              const isSelected = currentMandataireSelected.id === manda.id;
+              const onClick = () =>
+                isSelected ? updateIsMandataireClick() : updateFilterMandataire(manda);
+              const markerColor = isSelected ? "blue" : "red";
+              return (
+                <CircleMarker
+                  center={[manda.latitude, manda.longitude]}
+                  color={markerColor}
+                  radius={10}
+                  key={manda.id}
+                  onClick={onClick}
+                />
+              );
+            })}
           ;
         </Map>
       </MapsWidth>
       <MandatairesWidth>
-        <Title>
-          {mandataireCount} Professionnel{(mandataireCount > 1 && "s") || null}
-        </Title>
-        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-          <TableMandataire
-            rows={filteredMesures}
-            openModal={openModal}
-            updateFilters={updateFilters}
-          />
-        </div>
+        {(mandataireCount > 0 && (
+          <React.Fragment>
+            <Title>
+              {mandataireCount} Professionnel{(mandataireCount > 1 && "s") || null}
+            </Title>
+            <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+              <TableMandataire
+                rows={filteredMandataires}
+                openModal={openModal}
+                updateFilters={updateFilters}
+              />
+            </div>
+          </React.Fragment>
+        )) || (
+          <div style={{ textAlign: "center", marginTop: 20 }}>
+            Aucun mandataire actuellement dans cette région
+          </div>
+        )}
       </MandatairesWidth>
     </div>
   </div>
@@ -96,7 +115,10 @@ class Mapstry extends React.Component {
   state = {
     zoom: 8,
     datamesure: "",
-    value: ""
+    value: "",
+    showMandataireOfOneMesure: "",
+    currentMandataireSelected: "",
+    center: ""
   };
 
   mapRef = createRef();
@@ -122,7 +144,7 @@ class Mapstry extends React.Component {
       });
   }
 
-  handleMoveend = mapRef => {
+  handleMoveend = () => {
     const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
     apiFetch("/mandataires/filters", {
       method: "POST",
@@ -162,6 +184,24 @@ class Mapstry extends React.Component {
       });
   };
 
+  updateIsMandataireClick = () => {
+    this.setState(
+      {
+        currentMandataireSelected: ""
+      },
+      () => this.handleMoveend()
+    );
+  };
+
+  updateFilterMandataire = mandataire => {
+    this.setState(
+      {
+        currentMandataireSelected: mandataire
+      },
+      () => this.props.updateMandataireFilters([mandataire])
+    );
+  };
+
   getPostCodeCoordinates = commune => {
     // return null if no input
     if (!commune || !commune.trim()) {
@@ -176,20 +216,19 @@ class Mapstry extends React.Component {
   };
 
   render() {
-    const center = this.props.postcodeMandataire
-      ? [this.props.postcodeMandataire[1], this.props.postcodeMandataire[0]]
-      : [50.459441, 2.693963];
+    const center = getCenter(this.state.center, this.props.postcodeMandataire);
+
     return (
       <MapsView
         innerRef={this.mapRef}
         zoom={this.state.zoom}
         width={this.props.width}
         height={this.props.height}
+        onCenter={center}
         onMoveend={() => this.handleMoveend(this.mapRef)}
-        center={center}
         mandataires={this.props.mandataires}
         openModal={this.props.openModal}
-        filteredMesures={this.props.filteredMesures}
+        filteredMandataires={this.props.filteredMandataires}
         mesureCount={this.props.mesureCount}
         updateFilters={this.props.updateFilters}
         zoomCodePostal={this.zoomCodePostal}
@@ -197,6 +236,9 @@ class Mapstry extends React.Component {
         updateValue={this.props.updateValue}
         mandataireCount={this.props.mandataireCount}
         value={this.props.value}
+        updateFilterMandataire={this.updateFilterMandataire}
+        currentMandataireSelected={this.state.currentMandataireSelected}
+        updateIsMandataireClick={this.updateIsMandataireClick}
       />
     );
   }

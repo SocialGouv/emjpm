@@ -32,13 +32,14 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <title>e-MJPM</title>
-          <meta charset="utf-8" />
+          <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
           <meta name="description" content="" />
           <meta name="author" content="" />
           <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
           <link rel="stylesheet" href="/_next/static/style.css" />
-          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+          <link rel="stylesheet" href="/static/css/react-table.css" />
+          <link rel="stylesheet" href="/static/css/leaflet/leaflet.css" />
           {this.props.styleTags}
         </Head>
         <body>

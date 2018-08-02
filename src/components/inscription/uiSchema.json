@@ -1,0 +1,67 @@
+{
+  "pass1": {
+    "ui:title": "Mot de passe",
+    "ui:placeholder": "10 caractères minimum",
+    "ui:widget": "password"
+  },
+  "pass2": {
+    "ui:title": "Répéter le mot de passe",
+    "ui:placeholder": "10 caractères minimum",
+    "ui:widget": "password"
+  },
+  "username": {
+    "ui:title": "Identifiant (vous servira pour vous connecter sur E-MJPM)",
+    "ui:placeholder": "Nom d'utilisateur",
+    "classNames": "input__long"
+  },
+  "nom": {
+    "ui:title": "Nom",
+    "ui:placeholder": "Nom"
+  },
+  "prenom": {
+    "ui:title": "Prénom",
+    "ui:placeholder": "Prénom"
+  },
+  "telephone": {
+    "ui:title": "Téléphone",
+    "ui:placeholder": "ex: 0342734887",
+    "ui:options": {
+      "inputType": "tel"
+    }
+  },
+  "telephone_portable": {
+    "ui:title": "Téléphone Portable",
+    "ui:placeholder": "ex: 0642734887",
+    "ui:options": {
+      "inputType": "tel"
+    }
+  },
+  "email": {
+    "ui:title": "Adresse email",
+    "ui:placeholder": "ex: nom.prenom@orange.fr",
+    "ui:options": {
+      "inputType": "email"
+    },
+    "classNames": "input__long"
+  },
+  "adresse": {
+    "ui:title": "Adresse (rue)",
+    "ui:placeholder": "ex: 37 avenue de la république",
+    "classNames": "input__long"
+  },
+  "code_postal": {
+    "ui:title": "Code Postal",
+    "ui:placeholder": "ex: 89100",
+    "classNames": "input__code_postal"
+  },
+  "ville": {
+    "ui:title": "Commune",
+    "ui:placeholder": "Commune",
+    "classNames": "input__ville"
+  },
+  "etablissement": {
+    "ui:title": "Nom d'Etablissements",
+    "ui:placeholder": "Nom d'Etablissements",
+    "classNames": "input__long"
+  }
+}

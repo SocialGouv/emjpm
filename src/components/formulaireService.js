@@ -1,6 +1,6 @@
-import RowModal from "./communComponents/RowModal";
-import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
+import * as React from "react";
+
 import "bootstrap/dist/css/bootstrap.css";
 import "../../static/css/hero.css";
 import "../../static/css/panel.css";
@@ -9,6 +9,7 @@ import "../../static/css/custom.css";
 import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
 import apiFetch from "./communComponents/Api";
+import AddTisToFormulaireMandataire from "./AddTisToFormulaireMandataire";
 
 const schema = {
   title: "Modifier vos informations",
@@ -31,7 +32,7 @@ const schema = {
       title: "Nombre de mesures souhaitées",
       default: ""
     },
-    disponibilite: {
+    mesures_en_cours: {
       type: "string",
       title: "Nombre de mesures",
       default: ""
@@ -49,14 +50,37 @@ const customStyles = {
   }
 };
 
-const formData = {};
-
 class FormulaireService extends React.Component {
   state = {
     data: [],
     datamesure: [],
     currentMandataire: "",
-    modalIsOpen: false
+    modalIsOpen: false,
+    tis: "",
+    tisByMandataire: ""
+  };
+
+  componentDidMount() {
+    apiFetch("/mandataires/tis").then(tis => {
+      apiFetch("/mandataires/1/tis")
+        .then(tisByMandataire => {
+          this.setState({
+            tis: tis,
+            tisByMandataire: tisByMandataire
+          });
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    });
+  }
+
+  deleteTi = ti_id => {
+    apiFetch(`/mandataires/1/tis/${ti_id}`, {
+      method: "DELETE"
+    }).then(json => {
+      this.updateTi(json);
+    });
   };
 
   onSubmit = ({ formData }) => {
@@ -71,7 +95,7 @@ class FormulaireService extends React.Component {
         code_postal: formData.code_postal || "",
         ville: formData.ville || "",
         dispo_max: formData.dispo_max || 0,
-        disponibilite: formData.disponibilite || 0
+        mesures_en_cours: formData.mesures_en_cours || 0
       })
     }).then(json => {
       this.props.updateMadataire(json);
@@ -79,7 +103,7 @@ class FormulaireService extends React.Component {
     this.closeModal();
   };
 
-  openModal = mandataire => {
+  openModal = () => {
     this.setState({
       modalIsOpen: true
     });
@@ -87,17 +111,20 @@ class FormulaireService extends React.Component {
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };
+  updateTi = tisByMandataire => {
+    this.setState({ tisByMandataire: tisByMandataire });
+  };
   render() {
     const formData = {
-      etablissement: `${this.props.currentMandataireModal.etablissement}`,
-      telephone: `${this.props.currentMandataireModal.telephone}`,
-      telephone_portable: `${this.props.currentMandataireModal.telephone_portable}`,
-      ville: `${this.props.currentMandataireModal.ville}`,
-      adresse: `${this.props.currentMandataireModal.adresse}`,
-      email: `${this.props.currentMandataireModal.email}`,
-      code_postal: `${this.props.currentMandataireModal.code_postal}`,
-      dispo_max: `${this.props.currentMandataireModal.dispo_max}`,
-      disponibilite: `${this.props.currentMandataireModal.disponibilite}`
+      etablissement: this.props.currentMandataireModal.etablissement,
+      telephone: this.props.currentMandataireModal.telephone,
+      telephone_portable: this.props.currentMandataireModal.telephone_portable,
+      ville: this.props.currentMandataireModal.ville,
+      adresse: this.props.currentMandataireModal.adresse,
+      email: this.props.currentMandataireModal.email,
+      code_postal: this.props.currentMandataireModal.code_postal,
+      dispo_max: this.props.currentMandataireModal.dispo_max,
+      mesures_en_cours: this.props.currentMandataireModal.mesures_en_cours
     };
     return (
       <div>
@@ -131,8 +158,26 @@ class FormulaireService extends React.Component {
                   <br />
                   <b> Mesures en cours </b>
                   <br />
-                  {this.props.currentMandataireModal.disponibilite}
+                  {this.props.currentMandataireModal.mesures_en_cours}
                   <br />
+                  <AddTisToFormulaireMandataire tis={this.state.tis} updateTi={this.updateTi} />
+                  {this.state.tisByMandataire && (
+                    <React.Fragment>
+                      <div>
+                        <b>Tis </b>
+                        <br />
+                      </div>
+                      {this.state.tisByMandataire.map(tiByMandataire => (
+                        <div>
+                          {tiByMandataire.etablissement}
+                          <br />
+                          <a href="#" onClick={() => this.deleteTi(tiByMandataire.id)}>
+                            Supprimer
+                          </a>
+                        </div>
+                      ))}
+                    </React.Fragment>
+                  )}
                   <button className={"btn btn-dark"} onClick={this.openModal}>
                     Modifier mes informations
                   </button>
@@ -141,7 +186,6 @@ class FormulaireService extends React.Component {
             </div>
           </div>
         )}
-
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
