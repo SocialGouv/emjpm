@@ -171,11 +171,12 @@ class TableMesures extends React.Component {
     const { hideColumns } = this.props;
     return (
       <ReactTable
-        style={{ backgroundColor: "white", height: 500 }}
+        style={{ backgroundColor: "white", minHeight: 500 }}
         columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
         noDataText="Aucune mesure ici..."
         showPagination={false}
-        pageSize={500}
+        minRows={0}
+        pageSize={1000}
         data={data}
         sortable={true}
         multiSort={false}
