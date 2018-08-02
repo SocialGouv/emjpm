@@ -93,10 +93,9 @@ function getAllMesuresByMandatairesFilter(
   return knex
     .from("mesures")
     .select(
-      "mandataires.id",
-      "mandataires.*",
-      "geolocalisation_code_postal.latitude",
-      "geolocalisation_code_postal.longitude"
+      knex.raw(
+        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
+      )
     )
     .where("status", "Mesure en cours")
     .whereBetween("geolocalisation_code_postal.latitude", [
@@ -118,16 +117,28 @@ function getAllMesuresByMandatairesFilter(
       "geolocalisation_code_postal.code_postal",
       "mesures.code_postal"
     )
-    .groupByRaw("mandataires.id")
+    .groupByRaw(
+      "geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,mandataires.id"
+    )
     .where("mandataire_tis.ti_id", parseInt(ti_id))
     .union(function() {
-      this.select("mandataires.id", "mandataires.*")
+      this.select(
+        "mandataires.id",
+        "mandataires.*",
+        "geolocalisation_code_postal.latitude",
+        "geolocalisation_code_postal.longitude"
+      )
         .from("mandataires")
         .where("type", "Service")
         .innerJoin(
           "mandataire_tis",
           "mandataire_tis.mandataire_id",
           "mandataires.id"
+        )
+        .innerJoin(
+          "geolocalisation_code_postal",
+          "geolocalisation_code_postal.code_postal",
+          "mandataires.code_postal"
         );
     });
 }
@@ -159,13 +170,12 @@ function getAllByMandatairesFilter(
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
     )
-    .groupByRaw("mandataires.id")
+    .groupByRaw("mandataires.id,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude")
     .where("mandataire_tis.ti_id", parseInt(ti_id))
     .select(
-      "mandataires.id",
-      "mandataires.*",
-      "geolocalisation_code_postal.latitude",
-      "geolocalisation_code_postal.longitude"
+      knex.raw(
+        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
+      )
     );
 }
 
