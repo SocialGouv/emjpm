@@ -139,7 +139,8 @@ function getAllMesuresByMandatairesFilter(
           "geolocalisation_code_postal",
           "geolocalisation_code_postal.code_postal",
           "mandataires.code_postal"
-        );
+        )
+        .where("mandataire_tis.ti_id", parseInt(ti_id));
     });
 }
 
@@ -170,7 +171,9 @@ function getAllByMandatairesFilter(
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
     )
-    .groupByRaw("mandataires.id,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude")
+    .groupByRaw(
+      "mandataires.id,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
+    )
     .where("mandataire_tis.ti_id", parseInt(ti_id))
     .select(
       knex.raw(
