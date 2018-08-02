@@ -97,8 +97,4 @@ router.get("/logout", (req, res, next) => {
   next();
 });
 
-function handleResponse(res, code, statusMsg, url) {
-  res.status(code).json({ status: statusMsg, url: url });
-}
-
 module.exports = router;
