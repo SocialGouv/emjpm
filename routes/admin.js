@@ -30,14 +30,14 @@ const whitelist = require("../db/queries/whitelist");
  *                 type: boolean
  *                 required: true
  *   schemas:
- *     Mandataire:
+ *     MandataireAdmin:
  *       type: object
  *       properties:
  *         id:
- *           description: ID du mandataire
+ *           description: ID du user
  *           type: integer
  *         type:
- *           description: Type de mandataire
+ *           description: Type de user
  *           deprecated: true
  *           type: string
  *           enum:
@@ -54,10 +54,10 @@ const whitelist = require("../db/queries/whitelist");
  *           description: Code postal du mandataire
  *           type: string
  *         created_at:
- *           description: Date de création du mandataire
+ *           description: Date de création du user
  *           type: datetime
  *         last_login:
- *           description: Date de dernière connextion du mandataire
+ *           description: Date de dernière connextion du user
  *           type: datetime
  *
  *     SuccessResponse:
@@ -96,7 +96,7 @@ const whitelist = require("../db/queries/whitelist");
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Mandataire'
+ *                 $ref: '#/components/schemas/MandataireAdmin'
  */
 router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
   const mandataires = await queries.getMandataires({ filters: req.query });
