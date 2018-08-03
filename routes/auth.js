@@ -40,13 +40,20 @@ const redirs = {
  * @swagger
  * /auth/login:
  *   post:
- *     description: logout from the API
- *     produces:
- *       - application/json
+ *     tags:
+ *       - login
+ *     description: login to the API
  *     requestBody:
+ *       required: true
  *       $ref: '#/components/requestBodies/Login'
  *     responses:
  *       200:
+ *         headers:
+ *           Set-Cookie:
+ *             description: API server cookie
+ *             schema:
+ *               type: string
+ *               example: connect.sid=abcde12345; Path=/; HttpOnly
  *         content:
  *           application/json:
  *             schema:
@@ -81,6 +88,8 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
  * @swagger
  * /auth/logout:
  *   get:
+ *     tags:
+ *       - login
  *     description: logout from the API
  *     produces:
  *       - application/json
