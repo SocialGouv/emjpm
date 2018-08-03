@@ -113,7 +113,7 @@ export const MapsView = ({
 
 class Mapstry extends React.Component {
   state = {
-    zoom: 10,
+    zoom: 8,
     datamesure: "",
     value: "",
     showMandataireOfOneMesure: "",
