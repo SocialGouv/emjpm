@@ -84,7 +84,7 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
       <ButtonEditMandataire formData={currentMandataire} />
     </div>
     <div style={{ flex: "0 0 50%" }}>
-      {(currentMandataire.type !== "Preposes" && (
+      {(currentMandataire.type === "Preposes" && (
         <SelectionManager
           onAdd={etablissement_id =>
             apiFetch(`/mandataires/1/etablissements`, {
