@@ -33,7 +33,8 @@ const WHITELIST = [
   "ville",
   "dispo_max",
   "secretariat",
-  "nb_secretariat"
+  "nb_secretariat",
+  "mesures_en_cours"
 ];
 
 const whiteList = obj =>
