@@ -9,6 +9,7 @@ const whitelist = require("../db/queries/whitelist");
 
 /**
  * @swagger
+
  * security:
  *   - cookieAuth: []
  * components:
@@ -67,6 +68,9 @@ const whitelist = require("../db/queries/whitelist");
  *         success:
  *           type: boolean
  *           value: true
+ *         message:
+ *           type: string
+ *           value: true
  *
  *     ActiveMandataireBody:
  *       description: changement etat du mandataire
@@ -79,6 +83,8 @@ const whitelist = require("../db/queries/whitelist");
  * @swagger
  * /admin/mandataires:
  *   get:
+ *     tags:
+ *       - admin
  *     description: get list of mandataires for admin
  *     produces:
  *       - application/json
@@ -103,10 +109,14 @@ router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
   res.json(mandataires);
 });
 
+const USER_WRITE_PROPERTIES = ["active"];
+
 /**
  * @swagger
  * /admin/user/:id:
  *   put:
+ *     tags:
+ *       - admin
  *     description: update some user data
  *     produces:
  *       - application/json
@@ -126,8 +136,6 @@ router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
  *             schema:
  *               $ref: '#/components/schemas/SuccessResponse'
  */
-const USER_WRITE_PROPERTIES = ["active"];
-
 router.put("/user/:userId", typeRequired("admin"), (req, res, next) => {
   // whitelist input data
   const cleanedBody = whitelist(req.body, USER_WRITE_PROPERTIES);
