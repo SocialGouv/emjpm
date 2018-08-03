@@ -103,6 +103,8 @@ const queries = require("../db/queries/inscription");
  * @swagger
  * /inscription/tis:
  *   get:
+ *     tags:
+ *       - register
  *     description: Retourne la liste des TIs disponibles pour l'inscription
  *     produces:
  *       - application/json
@@ -123,6 +125,8 @@ router.get("/tis", (req, res, next) =>
  * @swagger
  * /inscription/mandataires:
  *   post:
+ *     tags:
+ *       - register
  *     description: Créé un nouveau mandataire inactif
  *     produces:
  *       - application/json

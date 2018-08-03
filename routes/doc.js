@@ -17,14 +17,28 @@ const indexContent = fs
 const options = {
   definition: {
     openapi: "3.0.0",
+    servers: [
+      { url: "http://api-preprod.emjpm.num.social.gouv.fr" },
+      { url: "http://api.emjpm.num.social.gouv.fr" }
+    ],
+    externalDocs: {
+      url: "https://emjpm-doc.num.social.gouv.fr",
+      description: "Documentation utilisateur"
+    },
     info: {
       title: "eMJPM-api",
       version: "1.0.0",
-      description: "Documentation de l'API e-MJPM",
+      description: `Documentation de l\'API e-MJPM.
+         <br/><br>
+         Serveur de test : https://api.emjpm-preprod.num.social.gouv.fr
+         <br/><br>
+         CORS est disponible sur cette API.
+         <br/><br>
+         Contactez-nous : <a href="mailto:contact@emjpm.beta.gouv.fr">contact@emjpm.beta.gouv.fr</a>`,
       contact: "contact@emjpm.beta.gouv.fr"
     },
-    host: "https://emjpm-api.num.social.gouv.fr",
-    basePath: "/"
+    host: "https://api.emjpm-preprod.num.social.gouv.fr",
+    basePath: "/api/v1"
   },
   apis: ["./routes/*.js"] // Path to the API docs
 };
