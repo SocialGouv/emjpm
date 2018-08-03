@@ -155,6 +155,21 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
   });
 });
 
+
+router.put("/:mandataireId/mesure-en-attente", async (req, res, next) => {
+    const mandataire = await queries.getMandataireByUserId(req.user.id);
+    if (!mandataire) {
+        return next(new Error(401));
+    }
+    // récupères le nb de mesure attribuées pour ce mandataire
+    const MesureEnAttente = queries.mesureEnAttente(mandataire.id);
+    queries
+        .update(mandataire.id, { mesures_en_attente: MesureEnAttente })
+        .then(() => queries.getSingle(mandataire.id))
+        .then(mandataire => res.status(200).json(mandataire))
+        .catch(error => next(error));
+});
+
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));
 router.use("/", require("./serviceAntennes"));
