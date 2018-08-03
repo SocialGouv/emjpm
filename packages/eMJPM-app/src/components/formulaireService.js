@@ -28,12 +28,12 @@ const schema = {
     },
     email: { type: "string", title: "Adresse email", default: "" },
     dispo_max: {
-      type: "string",
+      type: "integer",
       title: "Nombre de mesures souhaitées",
       default: ""
     },
     mesures_en_cours: {
-      type: "string",
+      type: "integer",
       title: "Nombre de mesures",
       default: ""
     }
