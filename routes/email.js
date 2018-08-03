@@ -86,6 +86,56 @@ router.get("/relance-mandataires-inactifs", function(req, res, next) {
     });
 });
 
+const EMAIL_RESERVATION_TEXT = (nom, prenom, etablissement, ti) => {
+  `
+Bonjour ${nom + prenom || etablissement},
+
+Une nouvelle mesure vous a été attribuée par le ${ti.etablissement}
+
+Rendez vous sur e-mjpm pour activer cette mesure.
+
+A bientôt,
+L'équipe e-mjpm
+`;
+};
+
+const EMAIL_RESERVATION_HTML = (nom, prenom, etablissement, ti) => {
+  `
+Bonjour ${nom + prenom || etablissement},<br>
+<br>
+Une nouvelle mesure vous a été attribuée par le ${ti.etablissement}
+<br><br>
+Rendez vous sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a> pour activer cette mesure.
+<br><br>
+A bientôt,<br>
+L'équipe e-mjpm
+`;
+};
+
+router.get("/reservation-mesures", function async(req, res, next) {
+  queries.getTiByUserId(req.user.id).then(ti => {
+    sendEmail(
+      req.query.email,
+      "e-MJPM : une nouvelle mesure vous a été attribué",
+      EMAIL_RESERVATION_TEXT(
+        req.query.nom,
+        req.query.prenom,
+        req.query.etablissement,
+        ti
+      ),
+      EMAIL_RESERVATION_HTML(
+        req.query.nom,
+        req.query.prenom,
+        req.query.etablissement,
+        ti
+      )
+    ).catch(e => {
+      // todo: sentry
+      console.log(e);
+    });
+  });
+});
+
 router.get("/test", function(req, res, next) {
   sendEmail(
     "contact@emjpm.beta.gouv.fr",

@@ -54,6 +54,13 @@ function getAllMesuresEteinte(mandataireID) {
   });
 }
 
+function getAllMesuresAttente(mandataireID) {
+  return knex("mesures").where({
+    mandataire_id: parseInt(mandataireID),
+    status: "Mesure en attente"
+  });
+}
+
 function getAllMesuresByMandataires(ti_id) {
   return knex
     .from("mesures")
@@ -280,6 +287,21 @@ function getAllMesuresByPopUpForMandataire(ti_id) {
     );
 }
 
+function getAllMesuresByTis(ti_id) {
+  return knex
+    .from("mesures")
+    .select("mesures.*")
+    .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
+    .innerJoin(
+      "mandataire_tis",
+      "mandataire_tis.mandataire_id",
+      "mandataires.id"
+    )
+    .where({
+      "mandataire_tis.ti_id": parseInt(ti_id)
+    });
+}
+
 function getPostecode(codePostal, lat, lng) {
   return knex("geolocalisation_code_postal").insert({
     code_postal: codePostal,
@@ -395,6 +417,14 @@ function CapaciteMandataire(mandataireID) {
     });
 }
 
+function mesureEnAttente(mandataireID) {
+  return knex("mesures")
+    .count("*")
+    .where({
+      mandataire_id: parseInt(mandataireID),
+      status: "Mesure en attente"
+    });
+}
 function CapaciteEteinteMandataire(mandataireID) {
   return knex("mesures")
     .count("*")
@@ -600,5 +630,8 @@ module.exports = {
   getAllMesuresByPopUpForMandataire,
   getAllMesuresByMandatairesForMaps,
   getMandataires,
-  updateMandataireMailSent
+  updateMandataireMailSent,
+  getAllMesuresByTis,
+  mesureEnAttente,
+  getAllMesuresAttente
 };
