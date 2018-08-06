@@ -55,7 +55,7 @@ function getAllMesuresEteinte(mandataireID) {
 }
 
 function getAllMesuresAttente(mandataireID) {
-  return knex("mesures").where({
+  return knex("mesures").leftOuterJoin('tis', 'mesures.ti_id', 'tis.id').where({
     mandataire_id: parseInt(mandataireID),
     status: "Mesure en attente"
   });

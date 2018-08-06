@@ -43,11 +43,13 @@ router.post(
     const mandataire = await queries.getMandataireByUserId(req.user.id);
     const ti = await queries.getMandataireByUserId(req.user.id);
     const body = {
-      ...req.body,
-      mandataire_id: mandataire.id
+      ...req.body
     };
-    if (ti) {
-      where[ti_id] = ti.id;
+    if (req.user.type === "individuel" || req.user.type === "prepose") {
+      body["mandataire_id"] = mandataire.id;
+    }
+    if (req.user.type === ti) {
+      body["ti_id"] = ti.id;
     }
     queries
       .addMesure(body)
