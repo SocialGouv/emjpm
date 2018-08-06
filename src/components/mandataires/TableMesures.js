@@ -47,6 +47,18 @@ const CellReactivateMesureRedux = connect(
   </Button>
 ));
 
+const CellReactivateMesureRedux = connect(
+    null,
+    dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+    <Button
+        data-cy="button-reactivate-mesure"
+        onClick={() => show("ValiderMesureEnAttente", { id: row.original.id })}
+    >
+        Valider
+    </Button>
+));
+
 const concat = (...strings) =>
   strings
     .map(s => ("" + s).trim())
