@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { Home, Map, UserMinus } from "react-feather";
+import { Home, Map, UserMinus, UserPlus } from "react-feather";
 import Modal from "react-modal";
 
 import { DummyTabs } from "..";
@@ -74,6 +74,16 @@ class MandataireTabs extends React.Component {
           />
         )
       },
+        {
+            text: "Mesures en attente",
+            icon: <UserPlus />,
+            content: (
+                <TableMesures
+                    fetch={() => apiFetch(`/mandataires/1/mesures/Attente`)}
+                    hideColumns={["modifier", "fin-mandat"]}
+                />
+            )
+        },
       {
         text: "Mes informations",
         icon: <Home />,
