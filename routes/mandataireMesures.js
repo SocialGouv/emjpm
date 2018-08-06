@@ -38,14 +38,19 @@ router.put(
 // create mesure
 router.post(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose","ti"),
+  typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
     const mandataire = await queries.getMandataireByUserId(req.user.id);
+    const ti = await queries.getMandataireByUserId(req.user.id);
+    const body = {
+      ...req.body,
+      mandataire_id: mandataire.id
+    };
+    if (ti) {
+      where[ti_id] = ti.id;
+    }
     queries
-      .addMesure({
-        ...req.body,
-        mandataire_id: mandataire.id
-      })
+      .addMesure(body)
       .then(() => queries.getAllMesures(mandataire.id))
       .then(mesures => res.status(200).json(mesures))
       // todo : trigger/view
@@ -59,21 +64,20 @@ router.post(
   }
 );
 
-
 router.post(
-    "/:mandataireId/mesure-reservation",
-    typeRequired("individuel", "prepose","ti"),
-    async (req, res, next) => {
-        queries
-            .addMesure({
-                ...req.body,
-            })
-            .then(mesures => res.status(200).json(mesures))
-            .catch(error => {
-                console.log(error);
-                next(error);
-            });
-    }
+  "/:mandataireId/mesure-reservation",
+  typeRequired("individuel", "prepose", "ti"),
+  async (req, res, next) => {
+    queries
+      .addMesure({
+        ...req.body
+      })
+      .then(mesures => res.status(200).json(mesures))
+      .catch(error => {
+        console.log(error);
+        next(error);
+      });
+  }
 );
 
 router.get(
@@ -100,17 +104,16 @@ router.get(
   }
 );
 
-
 router.get(
-    "/:mandataireId/mesures/Attente",
-    typeRequired("individuel", "prepose"),
-    async (req, res, next) => {
-        const mandataire = await queries.getMandataireByUserId(req.user.id);
-        queries
-            .getAllMesuresAttente(mandataire.id)
-            .then(mesures => res.status(200).json(mesures))
-            .catch(error => next(error));
-    }
+  "/:mandataireId/mesures/Attente",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    const mandataire = await queries.getMandataireByUserId(req.user.id);
+    queries
+      .getAllMesuresAttente(mandataire.id)
+      .then(mesures => res.status(200).json(mesures))
+      .catch(error => next(error));
+  }
 );
 
 router.get(
