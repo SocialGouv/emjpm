@@ -8,6 +8,7 @@ export const MESURE_CREATED_ERROR = "MESURE_CREATED_ERROR";
 export const MESURE_UPDATED = "MESURE_UPDATED";
 export const MESURE_CLOSED = "MESURE_CLOSED";
 export const MESURE_REACTIVATED = "MESURE_REACTIVATED";
+export const MESURE_ATTENTE = "MESURE_ATTENTE";
 
 // ------------ API STUFF
 
@@ -25,7 +26,14 @@ const closeMesureApi = data =>
       extinction: data.date
     })
   });
-
+const attenteMesureApi = data =>
+  apiFetch(`/mandataires/1/mesures/${data.id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      ...data,
+      status: "Mesure en cours"
+    })
+  });
 const reactivateMesureApi = data =>
   apiFetch(`/mandataires/1/mesures/${data.id}`, {
     method: "PUT",
@@ -64,6 +72,19 @@ export const updateMesure = data => dispatch =>
       throw e;
     });
 
+export const updateMesureAttente = data => dispatch =>{
+    console.log(data)
+    attenteMesureApi(data)
+    .then(json => {
+      dispatch(hide("ValiderMesureEnAttente"));
+      dispatch(mesureAttente(json));
+    })
+    .catch(e => {
+      console.log(e);
+      alert("Impossible de soumettre les données");
+      throw e;
+    });}
+
 export const closeMesure = data => dispatch =>
   closeMesureApi(data)
     .then(json => {
@@ -76,8 +97,8 @@ export const closeMesure = data => dispatch =>
       throw e;
     });
 
-export const reactivateMesure = data => dispatch =>
-  reactivateMesureApi(data)
+export const reactivateMesure = (data, id) => dispatch =>
+  reactivateMesureApi(data, id)
     .then(json => {
       dispatch(hide("ReactivateMesure"));
       dispatch(mesureReactivated(json));
@@ -117,6 +138,10 @@ export const mesureCreatedError = message => ({
 
 export const mesureUpdated = data => ({
   type: MESURE_UPDATED,
+  data
+});
+export const mesureAttente = data => ({
+  type: MESURE_ATTENTE,
   data
 });
 

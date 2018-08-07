@@ -23,7 +23,13 @@ import { mandataireMount } from "./actions/mandataire";
 import mesuresReducer from "./reducers/mesures";
 import mandataireReducer from "./reducers/mandataire";
 
-import { EditMesure, CloseMesure, ReactivateMesure, EditMandataire } from "./modals";
+import {
+  EditMesure,
+  CloseMesure,
+  ReactivateMesure,
+  EditMandataire,
+  ValiderMesureEnAttente
+} from "./modals";
 
 Modal.setAppElement("#__next");
 
@@ -54,7 +60,7 @@ class MandataireTabs extends React.Component {
             <CreateMesure />
             <TableMesures
               fetch={() => apiFetch(`/mandataires/1/mesures`)}
-              hideColumns={["reactiver", "extinction"]}
+              hideColumns={["reactiver", "extinction", "valider", "date_demande", "ti"]}
             />
           </React.Fragment>
         )
@@ -70,20 +76,27 @@ class MandataireTabs extends React.Component {
         content: (
           <TableMesures
             fetch={() => apiFetch(`/mandataires/1/mesures/Eteinte`)}
-            hideColumns={["modifier", "fin-mandat"]}
+            hideColumns={["modifier", "fin-mandat", "valider", "date_demande", "ti"]}
           />
         )
       },
-        {
-            text: "Mesures en attente",
-            icon: <UserPlus />,
-            content: (
-                <TableMesures
-                    fetch={() => apiFetch(`/mandataires/1/mesures/Attente`)}
-                    hideColumns={["modifier", "fin-mandat"]}
-                />
-            )
-        },
+      {
+        text: "Mesures en attente",
+        icon: <UserPlus />,
+        content: (
+          <TableMesures
+            fetch={() => apiFetch(`/mandataires/1/mesures/Attente`)}
+            hideColumns={[
+              "date_ouverture",
+              "modifier",
+              "reactiver",
+              "fin-mandat",
+              "extinction",
+              "residence"
+            ]}
+          />
+        )
+      },
       {
         text: "Mes informations",
         icon: <Home />,
@@ -98,6 +111,7 @@ class MandataireTabs extends React.Component {
         <CloseMesure />
         <ReactivateMesure />
         <EditMandataire />
+        <ValiderMesureEnAttente />
       </React.Fragment>
     );
   }
