@@ -11,15 +11,15 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
         ...state,
         data: action.data
       };
-    case "MESURES_SHOW ":
+    case "MESURES_SHOW":
       return {
         ...state,
-        datamesure: action.data
+        datamesure: action.datamesure
       };
     case "SERVICES_SHOW":
       return {
         ...state,
-        services: action.data
+        services: action.services
       };
     default:
       return state;
