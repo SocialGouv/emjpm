@@ -9,3 +9,4 @@ export { default as SearchButton } from "./communComponents/SearchButton";
 export { default as SelectionManager } from "./common/SelectionManager";
 export { default as ToggleState } from "./common/ToggleState";
 export { Pill, PillDispo } from "./common/Pill";
+export {default as filterData} from "./common/filterData"
