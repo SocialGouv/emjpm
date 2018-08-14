@@ -6,6 +6,8 @@ import apiFetch from "../communComponents/Api";
 import TableMandataire from "./TableMandataire";
 import FilterMesuresMap from "./FilterMesuresMap";
 import getCenter from "../communComponents/getCenter";
+import { filterData } from "../index";
+import queryString from "query-string";
 
 const Title = styled.div`
   text-align: left;
@@ -241,9 +243,35 @@ class Mapstry extends React.Component {
     // .then(json => json);
   };
 
+  changeTypeOfMandatairesFilters = filters => {
+    const stringified = queryString.stringify(filters);
+    apiFetch(`/mesures/popup?${stringified}`)
+      .then(mesures => {
+        this.setState({
+          datamesure: mesures
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  };
+
   render() {
     const center = getCenter(this.state.center, this.props.postcodeMandataire);
 
+    const filterMesure = [
+      {
+        content: "type",
+        filter: this.state.searchType,
+        connector: ""
+      }
+    ];
+
+    const filteredMandataires = filterData(this.state.manda, filterMesure);
+    const filteredMesures = filterData(this.state.mandaMesures, filterMesure);
+    const mesureCount = this.state.mandaMesures.length;
+    const mandataireCount = filteredMandataires.length;
+console.log("MapsMesure",this.mapRef )
     return (
       <MapsView
         innerRef={this.mapRef}

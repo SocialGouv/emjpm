@@ -145,6 +145,7 @@ class Mapstry extends React.Component {
   }
 
   handleMoveend = () => {
+
     const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
     apiFetch("/mandataires/filters", {
       method: "POST",
