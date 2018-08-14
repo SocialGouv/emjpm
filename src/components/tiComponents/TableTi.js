@@ -5,6 +5,10 @@ import styled from "styled-components";
 import { AlertCircle } from "react-feather";
 import * as React from "react";
 import isOlderThanOneMonth from "../communComponents/checkDate";
+import { show } from "redux-modal";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { openFichMandataireModal } from "./actions/mandataire";
 
 const getColorFromDisponibilite = dispo => {
   if (dispo >= 1) {
@@ -15,15 +19,6 @@ const getColorFromDisponibilite = dispo => {
   return "#43b04a";
 };
 
-const Cell = ({ style, title, children }) => (
-  <td
-    className="pagination-centered"
-    style={{ fontSize: "0.8em", textAlign: "left", verticalAlign: "middle", ...style }}
-    title={title}
-  >
-    {children}
-  </td>
-);
 
 export const PillDispo = ({ dispo, dispo_max }) => (
   <div
@@ -39,6 +34,32 @@ export const PillDispo = ({ dispo, dispo_max }) => (
   >
     {dispo} / {dispo_max}
   </div>
+);
+
+const CellMandataireRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show, openFichMandataireModal }, dispatch)
+)(({ row, show, children, openFichMandataireModal }) => (
+  <td
+    data-cy="button-attente-mesure"
+    onClick={() => {
+      openFichMandataireModal(row.original);
+      show("FicheMandataireModal", { currentMandataire: row.original });
+    }}
+  >
+    {children}
+  </td>
+));
+
+const Cell = ({ style, title, children, row }) => (
+    <CellMandataireRedux
+        row={row}
+        className="pagination-centered"
+        style={{ fontSize: "0.8em", textAlign: "left", verticalAlign: "middle", ...style }}
+        title={title}
+    >
+        {children}
+    </CellMandataireRedux>
 );
 
 export const Circle = styled.div`
@@ -83,7 +104,7 @@ const COLUMNS = [
     width: 60,
     accessor: d => d.type,
     Cell: row => (
-      <Cell style={{ width: "100px" }}>
+      <Cell  row={row} style={{ width: "100px" }}>
         <Circle
           style={{
             backgroundColor: getColorFromDisponibilite(row.row.mesures_en_cours / row.row.dispo_max)
@@ -101,8 +122,7 @@ const COLUMNS = [
     width: 120,
     accessor: d => d.etablissement,
     Cell: row => (
-      <Cell style={{ verticalAlign: "middle" }}>
-        {console.log(row.row)}
+      <Cell  row={row} style={{ verticalAlign: "middle" }}>
         <b>{row.row.etablissement}</b>
         <br /> <div style={{ color: "#cccccc" }}>{row.row.identity.toUpperCase()} </div>
       </Cell>
@@ -114,9 +134,12 @@ const COLUMNS = [
     id: "en_cours",
     accessor: d => d.mesures_en_cours / d.dispo_max,
     Cell: row => (
-      <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
+      <CellMandataireRedux
+        row={row}
+        style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
+      >
         <PillDispo dispo={row.row.mesures_en_cours} dispo_max={row.row.dispo_max} />
-      </td>
+      </CellMandataireRedux>
     ),
     style: { textAlign: "center", alignSelf: "center" }
   },
@@ -125,7 +148,7 @@ const COLUMNS = [
     id: "residence",
     accessor: d => d.date_mesure_update,
     Cell: row => (
-      <td style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
+      <CellMandataireRedux  row={row} style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
         {isOlderThanOneMonth(row.row.residence.slice(0, 10)) && (
           <span
             className="d-inline-block"
@@ -136,7 +159,7 @@ const COLUMNS = [
             <AlertCircle />
           </span>
         )}
-      </td>
+      </CellMandataireRedux>
     ),
     style: { alignSelf: "center" }
   }
@@ -147,7 +170,7 @@ class TableTi extends React.Component {
     const { hideColumns, rows } = this.props;
     return (
       <ReactTable
-        style={{ backgroundColor: "white", minHeight: "70vh" }}
+        style={{ backgroundColor: "white", minHeight: 900 }}
         columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
         noDataText="Aucune mesure ici..."
         showPagination={false}
@@ -176,4 +199,13 @@ TableTi.defaultProps = {
   hideColumns: []
 };
 
-export default TableTi;
+const mapDispatchToProps = (dispatch, ownProps) =>
+  bindActionCreators(
+    { onClick: ({ currentMandataire }) => openFichMandataireModal(currentMandataire) },
+    dispatch
+  );
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TableTi);
