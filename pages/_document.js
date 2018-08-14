@@ -37,6 +37,7 @@ export default class MyDocument extends Document {
           <meta name="description" content="" />
           <meta name="author" content="" />
           <script src="https://cdn.polyfill.io/v2/polyfill.min.js" />
+          <script src="js/leaflet-providers.js" />
           <link rel="stylesheet" href="/_next/static/style.css" />
           <link rel="stylesheet" href="/static/css/react-table.css" />
           <link rel="stylesheet" href="/static/css/leaflet/leaflet.css" />
