@@ -1,15 +1,9 @@
 // @flow
 import dynamic from "next/dynamic";
 import * as React from "react";
-import fetch from "isomorphic-fetch";
 import Modal from "react-modal";
 import styled from "styled-components";
 import Router from "next/router";
-
-import RowModal from "../communComponents/RowModal";
-import Commentaire from "../tiComponents/Commentaire";
-import apiFetch from "../communComponents/Api";
-import { DummyTabs } from "..";
 
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { reducer as modal } from "redux-modal";
@@ -18,8 +12,11 @@ import thunk from "redux-thunk";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { DummyTabs } from "..";
+import apiFetch from "../communComponents/Api";
 import { tiMount } from "./actions/mandataire";
 import mandataireReducer from "./reducers/mandataire";
+import { FicheMandataireModal } from "./modals";
 
 const modalStyles = {
   content: {
@@ -58,17 +55,6 @@ const OpenStreeMap = dynamic({
   render: (props, { MapTi }) => <MapTi {...props} />
 });
 
-// postCode => [lat, lon]
-const getPostCodeCoordinates = postCode => {
-  // return null if no input
-  if (!postCode || !postCode.trim()) {
-    return Promise.resolve(null);
-  }
-  return fetch(`https://api-adresse.data.gouv.fr/search/?q=postcode=${postCode}`)
-    .then(response => response.json())
-    .then(json => json.features[0].geometry.coordinates);
-};
-
 const ModalMandataire = ({ isOpen, closeModal, children }) => (
   <Modal
     isOpen={isOpen}
@@ -90,114 +76,7 @@ const TitleMandataire = styled.div`
   font-weight: bold;
 `;
 
-type FicheMandataireProps = {
-  style: Object,
-  mandataire: Object
-};
-
-export const FicheMandataire = ({
-  mandataire,
-  currentEtablissementsForSelectedMandataire,
-  allTisForOneMandataire
-}: FicheMandataireProps) => (
-  <div className="container">
-    <div className="row">
-      <div className="col-6">
-        <TitleMandataire>{mandataire.etablissement}</TitleMandataire>
-        <div>{mandataire.type.toUpperCase()}</div>
-        <div>{mandataire.genre}</div>
-        <RowModal value={mandataire.adresse} />
-        <div>
-          {mandataire.code_postal} {mandataire.ville.toUpperCase()}
-        </div>
-        <br />
-        <div data-cy="tab-telephone">{mandataire.telephone}</div>
-        <div>{mandataire.email}</div>
-        <br />
-        <div style={{ textAlign: "left" }}>
-          <b>Secrétariat </b>
-          <br />
-          {mandataire.secretariat === true ? "Oui" : "Non"} - {mandataire.nb_secretariat}
-          <br />
-          {currentEtablissementsForSelectedMandataire && (
-            <React.Fragment>
-              <b>Etablissement </b> <br />
-              {currentEtablissementsForSelectedMandataire.map(etablissement => (
-                <div>{etablissement.nom}</div>
-              ))}
-              <br />
-            </React.Fragment>
-          )}
-          {allTisForOneMandataire && (
-            <React.Fragment>
-              <b>Tis </b> <br />
-              {allTisForOneMandataire.map(ti => (
-                <div>
-                  {ti.etablissement} <br />
-                </div>
-              ))}
-            </React.Fragment>
-          )}
-        </div>
-      </div>
-      <div className="col-6">
-        <div
-          style={{
-            verticalAlign: "middle",
-            paddingLeft: 10,
-            borderBottom: "20px",
-            lineHeight: "40px"
-          }}
-        >
-          Mesures en cours : {mandataire.mesures_en_cours} / {mandataire.dispo_max}
-        </div>
-        <br />
-        <Commentaire currentMandataire={mandataire} />
-      </div>
-    </div>
-  </div>
-);
-//
-// type Props = {
-//   mandataires: Array<mixed>
-// };
-//
-// type State = {
-//   searchType: string,
-//   modalIsOpen: boolean,
-//   postcodeCoordinates: string,
-//   data: Array<mixed>,
-//   searchTypeIn: string,
-//   searchTypePr: string,
-//   searchTypeSe: string,
-//   searchNom: string,
-//   searchVille: string,
-//   currentMandataire: string,
-//   postcodeCoordinates: string,
-//   specialite: string,
-//   mandaMesures: Array<mixed>
-// };
-
-class Ti extends React.Component<Props, State> {
-  // state = {
-  //   data: [],
-  //   datamesure: [],
-  //   mandaMesures: [],
-  //   manda: [],
-  //   searchType: "",
-  //   searchTypeIn: "",
-  //   searchTypePr: "",
-  //   searchTypeSe: "",
-  //   searchNom: "",
-  //   searchVille: "",
-  //   currentMandataire: "",
-  //   currentEtablissementsForSelectedMandataire: [],
-  //   modalIsOpen: false,
-  //   postcodeCoordinates: "",
-  //   value: "",
-  //   allTisForOneMandataire: []
-  // };
-
+class Ti extends React.Component {
   componentDidMount() {
     if (this.props.onMount) {
       this.props.onMount();
@@ -278,6 +157,7 @@ class Ti extends React.Component<Props, State> {
     return (
       <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
         <DummyTabs tabs={tabs} />
+        <FicheMandataireModal />
       </div>
     );
   }

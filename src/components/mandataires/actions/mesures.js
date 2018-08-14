@@ -73,7 +73,6 @@ export const updateMesure = data => dispatch =>
     });
 
 export const updateMesureAttente = data => dispatch =>{
-    console.log(data)
     attenteMesureApi(data)
     .then(json => {
       dispatch(hide("ValiderMesureEnAttente"));
