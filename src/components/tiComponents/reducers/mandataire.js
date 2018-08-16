@@ -47,6 +47,10 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
         ...state,
         currentEtablissementsForSelectedMandataire: action.etablissement
       };
+    case "MESURE_CREATE":
+      return {
+        ...state
+      };
     case "UPDATE_FILTERS":
       return { ...state, filters: action.filters, datamesureFilters: action.dataMesure };
     default:
