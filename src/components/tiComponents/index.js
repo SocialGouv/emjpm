@@ -3,20 +3,20 @@ import dynamic from "next/dynamic";
 import * as React from "react";
 import Modal from "react-modal";
 import Router from "next/router";
+import { Users } from "react-feather";
 
 //redux
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, bindActionCreators } from "redux";
 import { reducer as modal } from "redux-modal";
-import { Provider } from "react-redux";
+import { Provider, connect } from "react-redux";
 import thunk from "redux-thunk";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
 import { DummyTabs } from "..";
 import { tiMount } from "./actions/mandataire";
 import mandataireReducer from "./reducers/mandataire";
-import { FicheMandataireModal } from "./modals";
-import { Users } from "react-feather";
+import { FicheMandataireModal, ModalMesureValidation, ModalMesureReservation } from "./modals";
+import TableMesures from "../mandataires/TableMesures";
+import apiFetch from "../communComponents/Api";
 
 Modal.setAppElement("#__next");
 
@@ -49,12 +49,32 @@ class Ti extends React.Component {
         text: "Mandataires",
         icon: <Users />,
         content: <OpenStreeMap fetch={`/mandataires/filters`} isMandataire={true} />
+      },
+      {
+        text: "Mesures attribuées",
+        content: (
+          <TableMesures
+            fetch={() => apiFetch(`/mesures/getAllMesuresByTis`)}
+            hideColumns={[
+              "modifier",
+              "reactiver",
+              "fin-mandat",
+              "extinction",
+              "residence",
+              "valider",
+              "date_demande",
+              "ti"
+            ]}
+          />
+        )
       }
     ];
     return (
       <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
         <DummyTabs tabs={tabs} />
         <FicheMandataireModal />
+        <ModalMesureValidation />
+        <ModalMesureReservation />
       </div>
     );
   }

@@ -60,7 +60,15 @@ class MandataireTabs extends React.Component {
             <CreateMesure />
             <TableMesures
               fetch={() => apiFetch(`/mandataires/1/mesures`)}
-              hideColumns={["reactiver", "extinction", "valider", "date_demande", "ti"]}
+              hideColumns={[
+                "reactiver",
+                "extinction",
+                "valider",
+                "date_demande",
+                "ti",
+                "status",
+                "professionnel"
+              ]}
             />
           </React.Fragment>
         )
@@ -76,7 +84,15 @@ class MandataireTabs extends React.Component {
         content: (
           <TableMesures
             fetch={() => apiFetch(`/mandataires/1/mesures/Eteinte`)}
-            hideColumns={["modifier", "fin-mandat", "valider", "date_demande", "ti"]}
+            hideColumns={[
+              "modifier",
+              "fin-mandat",
+              "valider",
+              "date_demande",
+              "ti",
+              "status",
+              "professionnel"
+            ]}
           />
         )
       },
@@ -92,7 +108,9 @@ class MandataireTabs extends React.Component {
               "reactiver",
               "fin-mandat",
               "extinction",
-              "residence"
+              "residence",
+              "status",
+              "professionnel"
             ]}
           />
         )
