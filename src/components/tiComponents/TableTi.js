@@ -2,14 +2,14 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import ReactTable from "react-table";
 import styled from "styled-components";
-import { AlertCircle } from "react-feather";
+import { AlertCircle, PlusSquare } from "react-feather";
 
 //Redux
 import { show } from "redux-modal";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { openFichMandataireModal } from "./actions/mandataire";
 
+import { openFichMandataireModal } from "./actions/mandataire";
 import isOlderThanOneMonth from "../communComponents/checkDate";
 
 const getColorFromDisponibilite = dispo => {
@@ -46,6 +46,20 @@ const CellMandataireRedux = connect(
     onClick={() => {
       openFichMandataireModal(row.original);
       show("FicheMandataireModal", { currentMandataire: row.original });
+    }}
+  >
+    {children}
+  </td>
+));
+
+const CellMesureReservationRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show, children }) => (
+  <td
+    data-cy="button-attente-mesure"
+    onClick={() => {
+      show("ModalMesureReservation", { reservationMandataire: row.original });
     }}
   >
     {children}
@@ -111,6 +125,7 @@ const COLUMNS = [
             backgroundColor: getColorFromDisponibilite(row.row.mesures_en_cours / row.row.dispo_max)
           }}
         >
+          {console.log(row)}
           {row.row.identity.toUpperCase().substr(0, 1)}
         </Circle>
       </Cell>
@@ -145,6 +160,20 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Attente",
+    id: "mesures_en_attente",
+    accessor: d => d.mesures_en_attente,
+    Cell: row => (
+      <CellMandataireRedux
+        row={row}
+        style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
+      >
+        {row.row.mesures_en_attente}
+      </CellMandataireRedux>
+    ),
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
     Header: "",
     id: "residence",
     accessor: d => d.date_mesure_update,
@@ -164,6 +193,20 @@ const COLUMNS = [
           </span>
         )}
       </CellMandataireRedux>
+    ),
+    style: { alignSelf: "center" }
+  },
+  {
+    Header: "Reservation",
+    id: "reservation",
+    accessor: d => d.mesures_en_attente,
+    Cell: row => (
+      <CellMesureReservationRedux
+        row={row}
+        style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
+      >
+        <PlusSquare />
+      </CellMesureReservationRedux>
     ),
     style: { alignSelf: "center" }
   }

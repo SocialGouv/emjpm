@@ -1,10 +1,12 @@
 import * as React from "react";
 import styled from "styled-components";
 import Form from "react-jsonschema-form";
+import { PlusSquare } from "react-feather";
 
 //Redux
 import { connect } from "react-redux";
-import { connectModal } from "redux-modal";
+import { connectModal, show, hide } from "redux-modal";
+import { bindActionCreators } from "redux";
 
 import Commentaire from "../Commentaire";
 import Layout from "./Layout";
@@ -16,6 +18,20 @@ const TitleMandataire = styled.div`
   font-size: 1.5em;
   font-weight: bold;
 `;
+const CellMesureReservationRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show, children, mandataire }) => (
+  <td
+    data-cy="button-attente-mesure"
+    onClick={() => {
+      hide("FicheMandataireModal");
+      show("ModalMesureReservation", { reservationMandataire: mandataire });
+    }}
+  >
+    <PlusSquare />
+  </td>
+));
 
 // Commentaire View display
 const uiSchema = {
@@ -143,6 +159,7 @@ export const FicheMandataire = ({
             <br />
           </React.Fragment>
         )}
+        <CellMesureReservationRedux mandataire={mandataire} />
       </div>
       <br />
       <div>

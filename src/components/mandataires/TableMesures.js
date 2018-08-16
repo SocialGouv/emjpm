@@ -99,6 +99,12 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Professionnel",
+    id: "professionnel",
+    accessor: d => d.manda,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
     Header: "Tribunal d'instance",
     id: "ti",
     accessor: d => d.etablissement,
@@ -171,6 +177,12 @@ const COLUMNS = [
     Cell: row => <CellValidationMesureRedux row={row} />,
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
+    Header: "Status",
+    id: "status",
+    accessor: d => d.status,
+    style: { textAlign: "center", alignSelf: "center" }
   }
 ];
 
@@ -242,6 +254,6 @@ TableMesures.defaultProps = {
 const mapStateToProps = state => ({
   // /!\ todo : hack
   // lastUpdate is updated when some mesure is modified so we can refresh the table
-  lastUpdate: state.mesures.lastUpdate
+  lastUpdate: state.mesures ? state.mesures.lastUpdate : state.mandataire.lastUpdate
 });
 export default connect(mapStateToProps)(TableMesures);

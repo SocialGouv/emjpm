@@ -1,4 +1,5 @@
 import apiFetch from "../../communComponents/Api";
+import { hide, show } from "redux-modal";
 
 export const MANDATAIRES_UPDATED = "MANDATAIRES_UPDATED";
 export const MESURES_SHOW = "MESURES_SHOW";
@@ -16,6 +17,15 @@ const fetchMandataires = () => apiFetch(`/mandataires`);
 const fetchMesures = () => apiFetch("/mesures/popup");
 const fetchServices = () => apiFetch("/mandataires/services");
 
+const createMesureApi = data => {
+  apiFetch(`/mandataires/1/mesures`, {
+    method: "POST",
+    body: JSON.stringify({
+      ...data,
+      status: "Mesure en attente"
+    })
+  });
+};
 /* ---------- ACTIONS CREATORS */
 
 export const tiMount = () => dispatch =>
@@ -53,6 +63,19 @@ export const openFichMandataireModal = mandataire => {
           dispatch(tis(tisByMandataire))
         )
       )
+      .catch(e => {
+        console.log(e);
+      });
+  };
+};
+
+export const openValidationModal = ({ formData }) => {
+  return dispatch => {
+    return createMesureApi(formData)
+      .then(() => {
+        dispatch(hide("ModalMesureReservation"));
+        dispatch(show("ModalMesureValidation"));
+      })
       .catch(e => {
         console.log(e);
       });
