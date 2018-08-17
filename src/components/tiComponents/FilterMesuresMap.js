@@ -23,7 +23,7 @@ const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {
             id="commune"
             name="commune"
             onChange={e => updateValue(e.target.value)}
-            placeholder={value || "Commune ou Code Postal"}
+            placeholder={value || "Code Postal"}
           />
         </td>
         <td>

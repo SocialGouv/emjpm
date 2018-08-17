@@ -1,12 +1,14 @@
 import React, { createRef } from "react";
-import { connect } from "react-redux";
+import styled from "styled-components";
 import { Map, TileLayer, CircleMarker } from "react-leaflet";
 
-import styled from "styled-components";
+//Redux
+import { connect } from "react-redux";
+
 import apiFetch from "../communComponents/Api";
 import getCenter from "../communComponents/getCenter";
 import FilterMesuresMap from "./FilterMesuresMap";
-import { filterData } from "../index";
+import { filterDataForMandataires } from "../index";
 import TableTi from "./TableTi";
 import FiltersMandataireTableMap from "./FilterMandataires";
 
@@ -17,47 +19,11 @@ const Title = styled.div`
 `;
 
 const MapsWidth = styled.div`
-width: 60%
+width: 50%
   margin-top: 10px;
   margin-right: 3%;
   margin-bottom: 3%;
 `;
-
-
-const tabStyle = {
-    backgroundColor: "#ebeff2",
-    paddingBottom: 5,
-    bottom: 0,
-    textAlign: "middle",
-    verticalAlign: "middle",
-    lineHeight: "40px",
-    width: "50%",
-    display: "inline-flex"
-};
-
-const TabsShowMandataire = styled.div`
-  padding-right: 0px;
-  padding-left: 0px;
-  background-color: #ebeff2;
-  height: 60px;
-`;
-
-const TitleMandataire = styled.div`
-  text-align: left;
-  font-size: 1.5em;
-  font-weight: bold;
-`;
-
-const modalStyles = {
-    content: {
-        top: "50%",
-        left: "50%",
-        right: "auto",
-        bottom: "auto",
-        marginRight: "-50%",
-        transform: "translate(-50%, -50%)"
-    }
-};
 
 const MandatairesWidth = styled.div`
 width: 35%
@@ -82,6 +48,7 @@ const MesureMarker = ({
   const isSelected = isMandataire
     ? circleSelected.id === marker.id
     : circleSelected.code_postal === marker.code_postal;
+
   const onClick = () => (isSelected ? updateIsMandataireClick() : updateFilterMandataire(marker));
   const markerColor = isSelected ? "blue" : "red";
   return (
@@ -125,6 +92,7 @@ class MapTi extends React.Component {
           })
         })
           .then(data => {
+            console.log("data", data);
             this.setState({
               filterData: data,
               loading: false
@@ -142,20 +110,6 @@ class MapTi extends React.Component {
   handleMoveend = () => {
     this.fetchData();
   };
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("nextProps", nextProps);
-  //   // You don't have to do this check first, but it can help prevent an unneeded render
-  //   if (nextProps.filterData !== this.state.filterData) {
-  //     this.setState({ filterData: nextProps.filterData });
-  //   }
-  // }
-  //
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log("nextProps", nextProps);
-  //   console.log(this.props.datamesure);
-  //   return nextProps.datamesure !== this.props.datamesure;
-  // }
 
   zoomCodePostal = codePostal => {
     if (!codePostal || !codePostal.trim()) {
@@ -185,13 +139,13 @@ class MapTi extends React.Component {
   };
 
   updateFilterMandataire = data => {
+    console.log("isMandataire", this.props.isMandataire);
     const selectedMandataires = this.props.isMandataire
-      ? data
+      ? [data]
       : data.mandataire_ids
           .map(mandataireId => this.props.data.find(mandataire => mandataire.id === mandataireId))
           .filter(Boolean)
           .concat(this.props.services);
-
     this.setState({
       filterData: selectedMandataires,
       circleSelected: data
@@ -204,20 +158,9 @@ class MapTi extends React.Component {
     });
   };
 
-  sortByDispo = (a, b) => {
-    const dispoA = parseFloat(a) || -Infinity;
-    const dispoB = parseFloat(b) || -Infinity;
-    if (dispoA < dispoB) {
-      return -1;
-    }
-    if (dispoA > dispoB) {
-      return 1;
-    }
-    return 0;
-  };
-
   render() {
     const { data, datamesure, isMandataire, services, filters } = this.props;
+    console.log("propsFilter", filters);
     const dataShow = isMandataire ? data : datamesure;
     const center = getCenter(this.state, this.state.postcodeCoordinates);
     const filterMesure = [
@@ -227,8 +170,7 @@ class MapTi extends React.Component {
         connector: ""
       }
     ];
-    const filteredData = filterData(this.state.filterData, filterMesure);
-
+    const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
     const mesureCount = filteredData.length;
     return (
       <div
@@ -237,12 +179,15 @@ class MapTi extends React.Component {
         }}
       >
         <MapsWidth>
-          <FilterMesuresMap
-            zoomCodePostal={this.zoomCodePostal}
-            updateValue={this.updateValue}
-            value={this.state.value}
-            style={{ zIndex: "1000", width: "100%" }}
-          />
+          <div style={{ display: "flex" }}>
+            <FilterMesuresMap
+              zoomCodePostal={this.zoomCodePostal}
+              updateValue={this.updateValue}
+              value={this.state.value}
+              style={{ zIndex: "1000", width: "50%", flex: "1" }}
+            />
+            <FiltersMandataireTableMap style={{ zIndex: "9999", flex: "1" }} />
+          </div>
           <Map
             center={center}
             zoom={this.state.zoom}
@@ -256,6 +201,7 @@ class MapTi extends React.Component {
                 <MesureMarker
                   key={marker.id + "" + i}
                   marker={marker}
+                  isMandataire={isMandataire}
                   circleSelected={this.state.circleSelected}
                   updateIsMandataireClick={this.updateIsMandataireClick}
                   updateFilterMandataire={this.updateFilterMandataire}
@@ -270,7 +216,6 @@ class MapTi extends React.Component {
                 {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
               </Title>
               <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-                <FiltersMandataireTableMap style={{ zIndex: "9999" }} />
                 <TableTi rows={filteredData} />
               </div>
             </React.Fragment>
@@ -280,7 +225,6 @@ class MapTi extends React.Component {
                 {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
               </Title>
               <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-                <FiltersMandataireTableMap style={{ zIndex: "9999" }} />
                 <TableTi rows={filteredData} />
               </div>
             </React.Fragment>
@@ -298,8 +242,7 @@ const mapStateToProps = state => ({
   data: state.mandataire.data,
   datamesure: state.mandataire.datamesure,
   services: state.mandataire.services,
-  filters: state.mandataire.filters,
-  filterData: state.mandataire.filterData
+  filters: state.mandataire.filters
 });
 
 export default connect(mapStateToProps)(MapTi);
@@ -316,3 +259,28 @@ export default connect(mapStateToProps)(MapTi);
 {
   /*/>*/
 }
+
+//
+// const tabStyle = {
+//     backgroundColor: "#ebeff2",
+//     paddingBottom: 5,
+//     bottom: 0,
+//     textAlign: "middle",
+//     verticalAlign: "middle",
+//     lineHeight: "40px",
+//     width: "50%",
+//     display: "inline-flex"
+// };
+//
+// const TabsShowMandataire = styled.div`
+//   padding-right: 0px;
+//   padding-left: 0px;
+//   background-color: #ebeff2;
+//   height: 60px;
+// `;
+//
+// const TitleMandataire = styled.div`
+//   text-align: left;
+//   font-size: 1.5em;
+//   font-weight: bold;
+// `;
