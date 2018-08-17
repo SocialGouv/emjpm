@@ -290,7 +290,10 @@ function getAllMesuresByPopUpForMandataire(ti_id) {
 function getAllMesuresByTis(ti_id) {
   return knex
     .from("mesures")
-    .select("mesures.*")
+    .select("mesures.*",
+        knex.raw(
+            "mandataires.etablissement as manda"
+        ))
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
     .innerJoin(
       "mandataire_tis",
