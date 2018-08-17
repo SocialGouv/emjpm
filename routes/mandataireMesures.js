@@ -41,28 +41,37 @@ router.post(
   typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
     const mandataire = await queries.getMandataireByUserId(req.user.id);
-    const ti = await queries.getMandataireByUserId(req.user.id);
+    const ti = await queries.getTiByUserId(req.user.id);
+    console.log(mandataire, ti, req.user);
     const body = {
       ...req.body
     };
     if (req.user.type === "individuel" || req.user.type === "prepose") {
       body["mandataire_id"] = mandataire.id;
     }
-    if (req.user.type === ti) {
+    if (req.user.type === "ti") {
       body["ti_id"] = ti.id;
+      queries
+        .addMesure(body)
+        .then(mesures => res.status(200).json(mesures))
+        .catch(error => {
+          console.log(error);
+          next(error);
+        });
+    } else {
+      queries
+        .addMesure(body)
+        .then(() => queries.getAllMesures(mandataire.id))
+        .then(mesures => res.status(200).json(mesures))
+        // todo : trigger/view
+        .then(() => updateCountMesures(mandataire.id))
+        // todo : trigger/view
+        .then(() => updateDateMesureUpdate(mandataire.id))
+        .catch(error => {
+          console.log(error);
+          next(error);
+        });
     }
-    queries
-      .addMesure(body)
-      .then(() => queries.getAllMesures(mandataire.id))
-      .then(mesures => res.status(200).json(mesures))
-      // todo : trigger/view
-      .then(() => updateCountMesures(mandataire.id))
-      // todo : trigger/view
-      .then(() => updateDateMesureUpdate(mandataire.id))
-      .catch(error => {
-        console.log(error);
-        next(error);
-      });
   }
 );
 
