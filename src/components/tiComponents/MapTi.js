@@ -23,6 +23,42 @@ width: 60%
   margin-bottom: 3%;
 `;
 
+
+const tabStyle = {
+    backgroundColor: "#ebeff2",
+    paddingBottom: 5,
+    bottom: 0,
+    textAlign: "middle",
+    verticalAlign: "middle",
+    lineHeight: "40px",
+    width: "50%",
+    display: "inline-flex"
+};
+
+const TabsShowMandataire = styled.div`
+  padding-right: 0px;
+  padding-left: 0px;
+  background-color: #ebeff2;
+  height: 60px;
+`;
+
+const TitleMandataire = styled.div`
+  text-align: left;
+  font-size: 1.5em;
+  font-weight: bold;
+`;
+
+const modalStyles = {
+    content: {
+        top: "50%",
+        left: "50%",
+        right: "auto",
+        bottom: "auto",
+        marginRight: "-50%",
+        transform: "translate(-50%, -50%)"
+    }
+};
+
 const MandatairesWidth = styled.div`
 width: 35%
   background-color: white;

@@ -179,7 +179,7 @@ class TableTi extends React.Component {
         data={rows}
         sortable={true}
         multiSort={false}
-        filterable={true}
+        filterable={false}
         defaultSorted={[
           {
             id: "en_cours",
@@ -200,7 +200,7 @@ TableTi.defaultProps = {
   hideColumns: []
 };
 
-const mapDispatchToProps = (dispatch, ownProps) =>
+const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     { onClick: ({ currentMandataire }) => openFichMandataireModal(currentMandataire) },
     dispatch

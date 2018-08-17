@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { AlertCircle } from "react-feather";
 import * as React from "react";
 
-import isOlderThanOneMonth from "../communComponents/checkDate";
+import isOlderThanOneMonth from "./communComponents/checkDate";
 
 const getColorFromDisponibilite = dispo => {
   if (dispo >= 1) {
