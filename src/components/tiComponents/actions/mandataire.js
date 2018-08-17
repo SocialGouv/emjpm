@@ -77,10 +77,10 @@ export const servicesShow = services => ({
   services
 });
 
-export const updateFilters = (filters, filterData) => ({
+export const updateFilters = (filters, dataMesure) => ({
   type: UPDATE_FILTERS,
   filters,
-  filterData
+  dataMesure
 });
 
 export const ficheClose = (filters, filterData) => ({

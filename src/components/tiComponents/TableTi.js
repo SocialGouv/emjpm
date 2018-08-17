@@ -179,6 +179,7 @@ class TableTi extends React.Component {
         data={rows}
         sortable={true}
         multiSort={false}
+        filterable={true}
         defaultSorted={[
           {
             id: "en_cours",

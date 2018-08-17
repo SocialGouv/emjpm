@@ -36,7 +36,7 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
         currentEtablissementsForSelectedMandataire: action.etablissement
       };
     case "UPDATE_FILTERS":
-      return { filters: action.filters, filterData: action.filterData };
+      return { filters: action.filters, datamesure: action.dataMesure };
     default:
       return state;
   }

@@ -83,24 +83,6 @@ class Ti extends React.Component {
     }
   }
 
-  openModal = mandataire => {
-    return apiFetch(`/mandataires/${mandataire.id}/tisEtablissement`).then(
-      currentEtablissementsForSelectedMandataire =>
-        apiFetch(`/mandataires/${mandataire.id}/tis-by-mandataire`)
-          .then(allTisForOneMandataire => {
-            this.setState({
-              currentEtablissementsForSelectedMandataire,
-              allTisForOneMandataire,
-              modalIsOpen: true,
-              currentMandataire: mandataire
-            });
-          })
-          .catch(e => {
-            console.log(e);
-          })
-    );
-  };
-
   closeModal = () => {
     this.setState({ modalIsOpen: false });
   };

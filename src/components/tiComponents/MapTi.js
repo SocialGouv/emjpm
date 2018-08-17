@@ -62,16 +62,15 @@ const MesureMarker = ({
 class MapTi extends React.Component {
   state = {
     filterData: [],
-    zoom: 8,
+    zoom: 6,
     center: "",
     loading: false,
-    postcodeCoordinates: [51.2, 2.1],
+    postcodeCoordinates: [2, 51.2],
     showMandataireOfOneMesure: "",
     circleSelected: "",
     searchType: "",
     currentMandataire: "",
-    value: "",
-    filters: ""
+    value: ""
   };
 
   mapRef = createRef();
@@ -111,12 +110,15 @@ class MapTi extends React.Component {
   // componentWillReceiveProps(nextProps) {
   //   console.log("nextProps", nextProps);
   //   // You don't have to do this check first, but it can help prevent an unneeded render
-  //   if (
-  //     nextProps.filters.searchType !== this.state.searchType ||
-  //     nextProps.mesures !== this.state.datamesure
-  //   ) {
-  //     this.setState({ filters: nextProps.filters.searchType, filterData: nextProps.mesures });
+  //   if (nextProps.filterData !== this.state.filterData) {
+  //     this.setState({ filterData: nextProps.filterData });
   //   }
+  // }
+  //
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("nextProps", nextProps);
+  //   console.log(this.props.datamesure);
+  //   return nextProps.datamesure !== this.props.datamesure;
   // }
 
   zoomCodePostal = codePostal => {
@@ -148,13 +150,11 @@ class MapTi extends React.Component {
 
   updateFilterMandataire = data => {
     const selectedMandataires = this.props.isMandataire
-      ? data.mandataire_ids
-          .map(mandataireId =>
-            this.props.mandataires.find(mandataire => mandataire.id === mandataireId)
-          )
+      ? data
+      : data.mandataire_ids
+          .map(mandataireId => this.props.data.find(mandataire => mandataire.id === mandataireId))
           .filter(Boolean)
-          .concat(this.props.services)
-      : data;
+          .concat(this.props.services);
 
     this.setState({
       filterData: selectedMandataires,
@@ -168,11 +168,22 @@ class MapTi extends React.Component {
     });
   };
 
+  sortByDispo = (a, b) => {
+    const dispoA = parseFloat(a) || -Infinity;
+    const dispoB = parseFloat(b) || -Infinity;
+    if (dispoA < dispoB) {
+      return -1;
+    }
+    if (dispoA > dispoB) {
+      return 1;
+    }
+    return 0;
+  };
+
   render() {
     const { data, datamesure, isMandataire, services, filters } = this.props;
     const dataShow = isMandataire ? data : datamesure;
     const center = getCenter(this.state, this.state.postcodeCoordinates);
-
     const filterMesure = [
       {
         content: "type",
@@ -181,9 +192,8 @@ class MapTi extends React.Component {
       }
     ];
     const filteredData = filterData(this.state.filterData, filterMesure);
-    const mesureCount = filteredData.length;
-    console.log("1", this.state.filterData, filters );
 
+    const mesureCount = filteredData.length;
     return (
       <div
         style={{
@@ -199,7 +209,7 @@ class MapTi extends React.Component {
           />
           <Map
             center={center}
-            zoom={9}
+            zoom={this.state.zoom}
             style={{ width: "100%", height: "70vh", padding: 0 }}
             ref={this.mapRef}
             onMoveend={() => this.handleMoveend(this.mapRef)}
@@ -229,9 +239,18 @@ class MapTi extends React.Component {
               </div>
             </React.Fragment>
           )) || (
-            <div style={{ textAlign: "center", marginTop: 20 }}>
-              Aucun mandataire actuellement dans cette région
-            </div>
+            <React.Fragment>
+              <Title>
+                {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+              </Title>
+              <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+                <FiltersMandataireTableMap style={{ zIndex: "9999" }} />
+                <TableTi rows={filteredData} />
+              </div>
+            </React.Fragment>
+            // <div style={{ textAlign: "center", marginTop: 20 }}>
+            //   Aucun mandataire actuellement dans cette région
+            // </div>
           )}
         </MandatairesWidth>;
       </div>

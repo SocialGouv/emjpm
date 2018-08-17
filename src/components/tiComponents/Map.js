@@ -271,7 +271,6 @@ class Mapstry extends React.Component {
     const filteredMesures = filterData(this.state.mandaMesures, filterMesure);
     const mesureCount = this.state.mandaMesures.length;
     const mandataireCount = filteredMandataires.length;
-console.log("MapsMesure",this.mapRef )
     return (
       <MapsView
         innerRef={this.mapRef}

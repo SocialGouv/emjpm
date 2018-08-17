@@ -22,7 +22,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 const FiltersMandataireTableMap = ({
-  display,
   changeTypeOfMandatairesFilters
 }: FiltersMandataireTableMapType) => {
   return (
