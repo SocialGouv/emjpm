@@ -6,7 +6,7 @@ import FormInput from "../FormInput";
 const Presentation = styled.div`
   background: white;
   padding: 5px;
-  width: 100%;
+  width: 350px;
 `;
 
 const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {

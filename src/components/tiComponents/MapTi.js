@@ -9,26 +9,15 @@ import apiFetch from "../communComponents/Api";
 import getCenter from "../communComponents/getCenter";
 import FilterMesuresMap from "./FilterMesuresMap";
 import { filterDataForMandataires } from "../index";
-import TableTi from "./TableTi";
 import FiltersMandataireTableMap from "./FilterMandataires";
-
-const Title = styled.div`
-  text-align: left;
-  font-size: 2em;
-  padding: 15px;
-`;
+import DisplayMandataire from "./DisplayMandataire";
 
 const MapsWidth = styled.div`
-width: 50%
+  width: 49%;
+  margin-left: 1%;
   margin-top: 10px;
-  margin-right: 3%;
-  margin-bottom: 3%;
-`;
-
-const MandatairesWidth = styled.div`
-width: 35%
-  background-color: white;
-  margin-top: 10px;
+  margin-right: 1%;
+  margin-bottom: 1%;
 `;
 
 const Attribution = () => (
@@ -65,20 +54,18 @@ const MesureMarker = ({
 class MapTi extends React.Component {
   state = {
     filterData: [],
-    zoom: 6,
+    zoom: 7,
     center: "",
     loading: false,
     postcodeCoordinates: [2, 51.2],
     showMandataireOfOneMesure: "",
     circleSelected: "",
-    searchType: "",
-    currentMandataire: "",
     value: ""
   };
 
   mapRef = createRef();
 
-  fetchData = (state, instance) => {
+  fetchData = state => {
     const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
     if (!this.state.loading) {
       this.setState({ loading: true }, () =>
@@ -92,7 +79,6 @@ class MapTi extends React.Component {
           })
         })
           .then(data => {
-            console.log("data", data);
             this.setState({
               filterData: data,
               loading: false
@@ -139,7 +125,6 @@ class MapTi extends React.Component {
   };
 
   updateFilterMandataire = data => {
-    console.log("isMandataire", this.props.isMandataire);
     const selectedMandataires = this.props.isMandataire
       ? [data]
       : data.mandataire_ids
@@ -160,7 +145,6 @@ class MapTi extends React.Component {
 
   render() {
     const { data, datamesure, isMandataire, services, filters } = this.props;
-    console.log("propsFilter", filters);
     const dataShow = isMandataire ? data : datamesure;
     const center = getCenter(this.state, this.state.postcodeCoordinates);
     const filterMesure = [
@@ -173,67 +157,46 @@ class MapTi extends React.Component {
     const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
     const mesureCount = filteredData.length;
     return (
-      <div
-        style={{
-          display: "flex"
-        }}
-      >
-        <MapsWidth>
-          <div style={{ display: "flex" }}>
-            <FilterMesuresMap
-              zoomCodePostal={this.zoomCodePostal}
-              updateValue={this.updateValue}
-              value={this.state.value}
-              style={{ zIndex: "1000", width: "50%", flex: "1" }}
-            />
-            <FiltersMandataireTableMap style={{ zIndex: "9999", flex: "1" }} />
-          </div>
-          <Map
-            center={center}
-            zoom={this.state.zoom}
-            style={{ width: "100%", height: "70vh", padding: 0 }}
-            ref={this.mapRef}
-            onMoveend={() => this.handleMoveend(this.mapRef)}
-          >
-            <Attribution />
-            {dataShow &&
-              dataShow.map((marker, i) => (
-                <MesureMarker
-                  key={marker.id + "" + i}
-                  marker={marker}
-                  isMandataire={isMandataire}
-                  circleSelected={this.state.circleSelected}
-                  updateIsMandataireClick={this.updateIsMandataireClick}
-                  updateFilterMandataire={this.updateFilterMandataire}
-                />
-              ))}
-          </Map>
-        </MapsWidth>
-        <MandatairesWidth>
-          {(mesureCount > 0 && (
-            <React.Fragment>
-              <Title>
-                {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
-              </Title>
-              <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-                <TableTi rows={filteredData} />
-              </div>
-            </React.Fragment>
-          )) || (
-            <React.Fragment>
-              <Title>
-                {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
-              </Title>
-              <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-                <TableTi rows={filteredData} />
-              </div>
-            </React.Fragment>
-            // <div style={{ textAlign: "center", marginTop: 20 }}>
-            //   Aucun mandataire actuellement dans cette région
-            // </div>
-          )}
-        </MandatairesWidth>;
-      </div>
+      <>
+        <div style={{ display: "flex" }}>
+          <FilterMesuresMap
+            zoomCodePostal={this.zoomCodePostal}
+            updateValue={this.updateValue}
+            value={this.state.value}
+            style={{ zIndex: "1000", flex: "1" }}
+          />
+          <FiltersMandataireTableMap style={{ zIndex: "9999", flex: "1" }} />
+        </div>
+        <div
+          style={{
+            display: "flex"
+          }}
+        >
+          <MapsWidth>
+            <Map
+              center={center}
+              zoom={this.state.zoom}
+              style={{ width: "100%", height: "68vh", padding: 0 }}
+              ref={this.mapRef}
+              onMoveend={() => this.handleMoveend(this.mapRef)}
+            >
+              <Attribution />
+              {dataShow &&
+                dataShow.map((marker, i) => (
+                  <MesureMarker
+                    key={marker.id + "" + i}
+                    marker={marker}
+                    isMandataire={isMandataire}
+                    circleSelected={this.state.circleSelected}
+                    updateIsMandataireClick={this.updateIsMandataireClick}
+                    updateFilterMandataire={this.updateFilterMandataire}
+                  />
+                ))}
+            </Map>
+          </MapsWidth>
+          <DisplayMandataire mesureCount={mesureCount} filteredData={filteredData} />
+        </div>
+      </>
     );
   }
 }
@@ -246,41 +209,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(MapTi);
-
-{
-  /*<TileLayer*/
-}
-{
-  /*attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"*/
-}
-{
-  /*url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"*/
-}
-{
-  /*/>*/
-}
-
-//
-// const tabStyle = {
-//     backgroundColor: "#ebeff2",
-//     paddingBottom: 5,
-//     bottom: 0,
-//     textAlign: "middle",
-//     verticalAlign: "middle",
-//     lineHeight: "40px",
-//     width: "50%",
-//     display: "inline-flex"
-// };
-//
-// const TabsShowMandataire = styled.div`
-//   padding-right: 0px;
-//   padding-left: 0px;
-//   background-color: #ebeff2;
-//   height: 60px;
-// `;
-//
-// const TitleMandataire = styled.div`
-//   text-align: left;
-//   font-size: 1.5em;
-//   font-weight: bold;
-// `;

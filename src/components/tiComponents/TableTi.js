@@ -1,14 +1,16 @@
+import * as React from "react";
 import PropTypes from "prop-types";
 import ReactTable from "react-table";
-
 import styled from "styled-components";
 import { AlertCircle } from "react-feather";
-import * as React from "react";
-import isOlderThanOneMonth from "../communComponents/checkDate";
+
+//Redux
 import { show } from "redux-modal";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { openFichMandataireModal } from "./actions/mandataire";
+
+import isOlderThanOneMonth from "../communComponents/checkDate";
 
 const getColorFromDisponibilite = dispo => {
   if (dispo >= 1) {
@@ -18,7 +20,6 @@ const getColorFromDisponibilite = dispo => {
   }
   return "#43b04a";
 };
-
 
 export const PillDispo = ({ dispo, dispo_max }) => (
   <div

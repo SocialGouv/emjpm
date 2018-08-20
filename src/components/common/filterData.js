@@ -14,13 +14,10 @@ const sortMandataires = (a, b) =>
   sortByDispo(a.mesures_en_cours / a.dispo_max, b.mesures_en_cours / b.dispo_max);
 
 const stringMatch = (str, needle) => {
-  console.log("str",str)
-  console.log("needle",needle)
   return str.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
 }
 
 const filterData = (data, filters) => {
-  console.log("filters",filters)
   let filteredMesures =
     data &&
     data.filter(datum => {

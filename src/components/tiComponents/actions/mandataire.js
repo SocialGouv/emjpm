@@ -33,7 +33,7 @@ export const tiMount = () => dispatch =>
 
 export const changeTypeOfMandatairesFilters = filters => {
   return dispatch => {
-    const stringified = queryString.stringify(filters);
+    const stringified = queryString.stringify({searchType: filters});
     return apiFetch(`/mesures/popup?${stringified}`)
       .then(mesures => {
         dispatch(updateFilters(filters, mesures));

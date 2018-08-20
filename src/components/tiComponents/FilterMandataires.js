@@ -6,22 +6,13 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { changeTypeOfMandatairesFilters } from "./actions/mandataire";
-import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
 
 const RadioStyle = styled.label`
   cursor: pointer;
   width: 40px;
+  padding: 5px;
   margin-right: 40px;
 `;
-
-const options = [
-  { value: "Tous", label: "Tous" },
-  { value: "Individuel", label: "Individuels" },
-  { value: "Prepose", label: "Préposés" },
-  { value: "Service", label: "Services" }
-];
-const defaultOption = options[0];
 
 type FiltersMandataireTableMapType = {
   updateFilters: SyntheticMouseEvent<HTMLButtonElement>,
@@ -40,7 +31,7 @@ const FiltersMandataireTableMap = ({
   return (
     <div
       className="custom-control custom-radio custom-control-inline"
-      style={{ marginLeft: "20px" }}
+      style={{ marginLeft: "5px" }}
     >
       <Radio htmlFor="customRadioInline4">
         <input
@@ -82,11 +73,6 @@ const FiltersMandataireTableMap = ({
           onClick={e => changeTypeOfMandatairesFilters(e.target.value)}
         />Services
       </Radio>
-      <Dropdown
-        options={options}
-        onChange={() => changeTypeOfMandatairesFilters}
-        placeholder="Filtres"
-      />
     </div>
   );
 };
