@@ -5,7 +5,7 @@ import React from "react";
 //Redux
 import { connect } from "react-redux";
 
-import { changeTypeOfMandatairesFilters } from "./actions/mandataire";
+import { filtersMesure, updateFiltersMandataire, updateFilters } from "./actions/mandataire";
 
 const RadioStyle = styled.label`
   cursor: pointer;
@@ -22,11 +22,25 @@ const Radio = ({ children }) => <RadioStyle> {children} </RadioStyle>;
 
 function mapDispatchToProps(dispatch) {
   return {
-    changeTypeOfMandatairesFilters: filters => dispatch(changeTypeOfMandatairesFilters(filters))
+    filtersMesure: (filters, data, isManatiare) =>
+      dispatch(filtersMesure(filters, data, isManatiare)),
+    updateFiltersMandataire: (filters, data) => dispatch(updateFiltersMandataire(filters, data)),
+    updateFilters: (filters, data) => dispatch(updateFilters(filters, data))
+    // changeTypeOfMandatairesFilters: filters => dispatch(changeTypeOfMandatairesFilters(filters))
   };
 }
+const mapStateToProps = state => ({
+  data: state.mandataire.data,
+  datamesure: state.mandataire.datamesure
+});
+
 const FiltersMandataireTableMap = ({
-  changeTypeOfMandatairesFilters
+  filtersMesure,
+  isMandataire,
+  data,
+  datamesure,
+  updateFiltersMandataire,
+  updateFilters
 }: FiltersMandataireTableMapType) => {
   return (
     <div
@@ -40,7 +54,9 @@ const FiltersMandataireTableMap = ({
           name="customRadioInline"
           defaultChecked={true}
           value="Tous"
-          onClick={e => changeTypeOfMandatairesFilters("")}
+          onClick={e =>
+            isMandataire ? updateFiltersMandataire("", data) : updateFilters("", datamesure)
+          }
         />Tous
       </Radio>
       <Radio htmlFor="customRadioInline1">
@@ -50,7 +66,11 @@ const FiltersMandataireTableMap = ({
           id="customRadioInline1"
           name="customRadioInline"
           value="Individuel"
-          onClick={e => changeTypeOfMandatairesFilters(e.target.value)}
+          onClick={e =>
+            isMandataire
+              ? filtersMesure(e.target.value, data, isMandataire)
+              : filtersMesure(e.target.value, datamesure, isMandataire)
+          }
         />Individuels
       </Radio>
       <Radio htmlFor="customRadioInline2">
@@ -60,7 +80,11 @@ const FiltersMandataireTableMap = ({
           id="customRadioInline2"
           name="customRadioInline"
           value="Prepose"
-          onClick={e => changeTypeOfMandatairesFilters(e.target.value)}
+          onClick={e =>
+            isMandataire
+              ? filtersMesure(e.target.value, data, isMandataire)
+              : filtersMesure(e.target.value, datamesure, isMandataire)
+          }
         />Préposés
       </Radio>
       <Radio htmlFor="customRadioInline3">
@@ -70,13 +94,17 @@ const FiltersMandataireTableMap = ({
           id="customRadioInline3"
           name="customRadioInline"
           value="Service"
-          onClick={e => changeTypeOfMandatairesFilters(e.target.value)}
+          onClick={e =>
+            isMandataire
+              ? filtersMesure(e.target.value, data, isMandataire)
+              : filtersMesure(e.target.value, datamesure, isMandataire)
+          }
         />Services
       </Radio>
     </div>
   );
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(FiltersMandataireTableMap);

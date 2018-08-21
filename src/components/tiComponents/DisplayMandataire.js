@@ -1,6 +1,6 @@
+import * as React from "react";
 import styled from "styled-components";
 import TableTi from "./TableTi";
-
 
 const MandatairesWidth = styled.div`
 width: 35%
@@ -13,28 +13,28 @@ const Title = styled.div`
   padding: 15px;
 `;
 
-const DisplayMandataire = ({mesureCount,filteredData}) => (
-
-<MandatairesWidth>
+const DisplayMandataire = ({ mesureCount, filteredData }) => (
+  <MandatairesWidth>
     {(mesureCount > 0 && (
-        <React.Fragment>
-            <Title>
-                {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
-            </Title>
-            <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-                <TableTi rows={filteredData} />
-            </div>
-        </React.Fragment>
+      <React.Fragment>
+        <Title>
+          {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+        </Title>
+        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+          <TableTi rows={filteredData} />
+        </div>
+      </React.Fragment>
     )) || (
-        <React.Fragment>
-            <Title>
-                {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
-            </Title>
-            <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-                <TableTi rows={filteredData} />
-            </div>
-        </React.Fragment>
+      <React.Fragment>
+        <Title>
+          {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+        </Title>
+        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
+          <TableTi rows={filteredData} />
+        </div>
+      </React.Fragment>
     )}
-</MandatairesWidth>)
+  </MandatairesWidth>
+);
 
 export default DisplayMandataire;

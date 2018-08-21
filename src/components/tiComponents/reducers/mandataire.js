@@ -1,6 +1,8 @@
 const MANDATAIRE_INITIAL_STATE = {
   data: [],
+  dataFilters: [],
   datamesure: [],
+  datamesureFilters: [],
   services: [],
   filters: "",
   filterData: [],
@@ -13,17 +15,27 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
     case "MANDATAIRES_UPDATED":
       return {
         ...state,
-        data: action.data
+        filters: "",
+        data: action.data,
+        dataFilters: action.data
       };
     case "MESURES_SHOW":
       return {
         ...state,
-        datamesure: action.datamesure
+        filters: "",
+        datamesure: action.datamesure,
+        datamesureFilters: action.datamesure
       };
     case "SERVICES_SHOW":
       return {
         ...state,
         services: action.services
+      };
+    case "UPDATE_FILTERS_MANDATAIRES":
+      return {
+        ...state,
+        filters: action.filters,
+        dataFilters: action.data
       };
     case "MANDATAIRE_TIS":
       return {
@@ -36,7 +48,7 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
         currentEtablissementsForSelectedMandataire: action.etablissement
       };
     case "UPDATE_FILTERS":
-      return { filters: action.filters, datamesure: action.dataMesure };
+      return { filters: action.filters, datamesureFilters: action.dataMesure };
     default:
       return state;
   }

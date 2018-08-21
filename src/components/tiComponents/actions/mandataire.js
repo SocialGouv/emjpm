@@ -11,6 +11,8 @@ export const FICHE_CLOSED = "FICHE_CLOSED";
 
 export const MANDATAIRE_ETABLISSEMENT = "MANDATAIRE_ETABLISSEMENT";
 export const MANDATAIRE_TIS = "MANDATAIRE_TIS";
+export const UPDATE_FILTERS_MANDATAIRES = "UPDATE_FILTERS_MANDATAIRES";
+
 /* ---------- API */
 
 const fetchMandataires = () => apiFetch(`/mandataires`);
@@ -31,21 +33,19 @@ export const tiMount = () => dispatch =>
       fetchServices().then(mesures => dispatch(servicesShow(mesures)));
     });
 
-export const changeTypeOfMandatairesFilters = filters => {
+export const filtersMesure = (filters, data, isMandataire) => {
   return dispatch => {
-    const stringified = queryString.stringify({searchType: filters});
-    return apiFetch(`/mesures/popup?${stringified}`)
-      .then(mesures => {
-        dispatch(updateFilters(filters, mesures));
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    if (isMandataire) {
+      const dataFilter = data.filter(datum => datum.type === filters);
+      return dispatch(updateFiltersMandataire(filters, dataFilter));
+    } else {
+      const dataFilter = data.filter(datum => datum.types.find(typedata => typedata === filters));
+      return dispatch(updateFilters(filters, dataFilter));
+    }
   };
 };
 
 export const openFichMandataireModal = mandataire => {
-  console.log("Mandataire", mandataire);
   return dispatch => {
     return apiFetch(`/mandataires/${mandataire.id}/tisEtablissement`)
       .then(json => dispatch(etablissement(json)))
@@ -81,6 +81,12 @@ export const updateFilters = (filters, dataMesure) => ({
   type: UPDATE_FILTERS,
   filters,
   dataMesure
+});
+
+export const updateFiltersMandataire = (filters, data) => ({
+  type: UPDATE_FILTERS_MANDATAIRES,
+  filters,
+  data
 });
 
 export const ficheClose = (filters, filterData) => ({

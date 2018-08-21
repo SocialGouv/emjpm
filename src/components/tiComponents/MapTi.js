@@ -144,17 +144,16 @@ class MapTi extends React.Component {
   };
 
   render() {
-    const { data, datamesure, isMandataire, services, filters } = this.props;
-    const dataShow = isMandataire ? data : datamesure;
+    const { dataFilters, datamesureFilters, isMandataire, services, filters } = this.props;
+    const dataShow = isMandataire ? dataFilters : datamesureFilters;
     const center = getCenter(this.state, this.state.postcodeCoordinates);
-    const filterMesure = [
-      {
-        content: "type",
-        filter: filters,
-        connector: ""
-      }
-    ];
+    const filterMesure = {
+      content: "type",
+      filter: filters,
+      connector: ""
+    };
     const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
+    console.log("filteredData", filters);
     const mesureCount = filteredData.length;
     return (
       <>
@@ -165,7 +164,7 @@ class MapTi extends React.Component {
             value={this.state.value}
             style={{ zIndex: "1000", flex: "1" }}
           />
-          <FiltersMandataireTableMap style={{ zIndex: "9999", flex: "1" }} />
+          <FiltersMandataireTableMap isMandataire={isMandataire} style={{ zIndex: "9999", flex: "1" }} />
         </div>
         <div
           style={{
@@ -202,8 +201,8 @@ class MapTi extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.mandataire.data,
-  datamesure: state.mandataire.datamesure,
+    dataFilters: state.mandataire.dataFilters,
+  datamesureFilters: state.mandataire.datamesureFilters,
   services: state.mandataire.services,
   filters: state.mandataire.filters
 });

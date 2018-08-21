@@ -15,15 +15,13 @@ const sortMandataires = (a, b) =>
 
 const stringMatch = (str, needle) => {
   return str.toLowerCase().indexOf(needle.toLowerCase()) !== -1;
-}
+};
 
 const filterData = (data, filters) => {
   let filteredMesures =
     data &&
     data.filter(datum => {
-      return filters.map(
-        filter => stringMatch(datum[filter.content], filter.filter) + filter.connector
-      );
+      return stringMatch(datum[filters.content], filters.filter);
     });
   return filteredMesures.sort(sortMandataires);
 };
