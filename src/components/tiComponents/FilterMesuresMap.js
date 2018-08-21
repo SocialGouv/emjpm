@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import SearchButton from "../communComponents/SearchButton";
-import FormInput from "../FormInput";
+import FormInput from "../serviceComponents/FormInput";
 
 const Presentation = styled.div`
   background: white;

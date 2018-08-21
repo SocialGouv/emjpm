@@ -72,8 +72,8 @@ export const updateMesure = data => dispatch =>
       throw e;
     });
 
-export const updateMesureAttente = data => dispatch =>{
-    attenteMesureApi(data)
+export const updateMesureAttente = data => dispatch => {
+  attenteMesureApi(data)
     .then(json => {
       dispatch(hide("ValiderMesureEnAttente"));
       dispatch(mesureAttente(json));
@@ -82,7 +82,8 @@ export const updateMesureAttente = data => dispatch =>{
       console.log(e);
       alert("Impossible de soumettre les données");
       throw e;
-    });}
+    });
+};
 
 export const closeMesure = data => dispatch =>
   closeMesureApi(data)

@@ -37,7 +37,6 @@ const MesureMarker = ({
   const isSelected = isMandataire
     ? circleSelected.id === marker.id
     : circleSelected.code_postal === marker.code_postal;
-
   const onClick = () => (isSelected ? updateIsMandataireClick() : updateFilterMandataire(marker));
   const markerColor = isSelected ? "blue" : "red";
   return (
@@ -65,7 +64,7 @@ class MapTi extends React.Component {
 
   mapRef = createRef();
 
-  fetchData = state => {
+  fetchData = () => {
     const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
     if (!this.state.loading) {
       this.setState({ loading: true }, () =>
@@ -144,7 +143,7 @@ class MapTi extends React.Component {
   };
 
   render() {
-    const { dataFilters, datamesureFilters, isMandataire, services, filters } = this.props;
+    const { dataFilters, datamesureFilters, isMandataire, filters } = this.props;
     const dataShow = isMandataire ? dataFilters : datamesureFilters;
     const center = getCenter(this.state, this.state.postcodeCoordinates);
     const filterMesure = {
@@ -153,7 +152,6 @@ class MapTi extends React.Component {
       connector: ""
     };
     const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
-    console.log("filteredData", filters);
     const mesureCount = filteredData.length;
     return (
       <>
@@ -164,7 +162,10 @@ class MapTi extends React.Component {
             value={this.state.value}
             style={{ zIndex: "1000", flex: "1" }}
           />
-          <FiltersMandataireTableMap isMandataire={isMandataire} style={{ zIndex: "9999", flex: "1" }} />
+          <FiltersMandataireTableMap
+            isMandataire={isMandataire}
+            style={{ zIndex: "9999", flex: "1" }}
+          />
         </div>
         <div
           style={{
@@ -201,7 +202,7 @@ class MapTi extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    dataFilters: state.mandataire.dataFilters,
+  dataFilters: state.mandataire.dataFilters,
   datamesureFilters: state.mandataire.datamesureFilters,
   services: state.mandataire.services,
   filters: state.mandataire.filters

@@ -26,7 +26,6 @@ function mapDispatchToProps(dispatch) {
       dispatch(filtersMesure(filters, data, isManatiare)),
     updateFiltersMandataire: (filters, data) => dispatch(updateFiltersMandataire(filters, data)),
     updateFilters: (filters, data) => dispatch(updateFilters(filters, data))
-    // changeTypeOfMandatairesFilters: filters => dispatch(changeTypeOfMandatairesFilters(filters))
   };
 }
 const mapStateToProps = state => ({

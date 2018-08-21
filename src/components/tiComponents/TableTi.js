@@ -53,14 +53,14 @@ const CellMandataireRedux = connect(
 ));
 
 const Cell = ({ style, title, children, row }) => (
-    <CellMandataireRedux
-        row={row}
-        className="pagination-centered"
-        style={{ fontSize: "0.8em", textAlign: "left", verticalAlign: "middle", ...style }}
-        title={title}
-    >
-        {children}
-    </CellMandataireRedux>
+  <CellMandataireRedux
+    row={row}
+    className="pagination-centered"
+    style={{ fontSize: "0.8em", textAlign: "left", verticalAlign: "middle", ...style }}
+    title={title}
+  >
+    {children}
+  </CellMandataireRedux>
 );
 
 export const Circle = styled.div`
@@ -105,7 +105,7 @@ const COLUMNS = [
     width: 60,
     accessor: d => d.type,
     Cell: row => (
-      <Cell  row={row} style={{ width: "100px" }}>
+      <Cell row={row} style={{ width: "100px" }}>
         <Circle
           style={{
             backgroundColor: getColorFromDisponibilite(row.row.mesures_en_cours / row.row.dispo_max)
@@ -123,7 +123,7 @@ const COLUMNS = [
     width: 120,
     accessor: d => d.etablissement,
     Cell: row => (
-      <Cell  row={row} style={{ verticalAlign: "middle" }}>
+      <Cell row={row} style={{ verticalAlign: "middle" }}>
         <b>{row.row.etablissement}</b>
         <br /> <div style={{ color: "#cccccc" }}>{row.row.identity.toUpperCase()} </div>
       </Cell>
@@ -149,7 +149,10 @@ const COLUMNS = [
     id: "residence",
     accessor: d => d.date_mesure_update,
     Cell: row => (
-      <CellMandataireRedux  row={row} style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}>
+      <CellMandataireRedux
+        row={row}
+        style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
+      >
         {isOlderThanOneMonth(row.row.residence.slice(0, 10)) && (
           <span
             className="d-inline-block"
@@ -201,7 +204,7 @@ TableTi.defaultProps = {
   hideColumns: []
 };
 
-const mapDispatchToProps = (dispatch) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators(
     { onClick: ({ currentMandataire }) => openFichMandataireModal(currentMandataire) },
     dispatch

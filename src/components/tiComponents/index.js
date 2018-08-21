@@ -16,6 +16,7 @@ import { DummyTabs } from "..";
 import { tiMount } from "./actions/mandataire";
 import mandataireReducer from "./reducers/mandataire";
 import { FicheMandataireModal } from "./modals";
+import { Users } from "react-feather";
 
 Modal.setAppElement("#__next");
 
@@ -41,10 +42,12 @@ class Ti extends React.Component {
     const tabs = [
       {
         text: "Majeurs Protégés",
+        icon: <Users />,
         content: <OpenStreeMap fetch={`/mesures/filters`} />
       },
       {
         text: "Mandataires",
+        icon: <Users />,
         content: <OpenStreeMap fetch={`/mandataires/filters`} isMandataire={true} />
       }
     ];

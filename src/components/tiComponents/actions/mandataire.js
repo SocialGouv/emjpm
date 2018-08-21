@@ -1,7 +1,4 @@
 import apiFetch from "../../communComponents/Api";
-import queryString from "query-string";
-import { hide } from "redux-modal/lib/index";
-import { mesureClosed } from "../../mandataires/actions/mesures";
 
 export const MANDATAIRES_UPDATED = "MANDATAIRES_UPDATED";
 export const MESURES_SHOW = "MESURES_SHOW";

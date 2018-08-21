@@ -12,12 +12,13 @@ const FicheMandataire = ({
   ville = "",
   dispo_max = 0,
   secretariat = false,
-  nb_secretariat = 0
+  nb_secretariat = 0,
+  displayTitle
 }) => {
   const hasAdresse = adresse || code_postal || ville;
   return (
     <div>
-      <h3>Mes coordonnées</h3>
+      <h3 style={{ display: displayTitle }}>Mes coordonnées</h3>
       {(email && (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
           <Mail style={iconStyle} />
