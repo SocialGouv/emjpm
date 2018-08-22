@@ -22,8 +22,8 @@ const MapsWidth = styled.div`
 
 const Attribution = () => (
   <TileLayer
-    attribution="&copy; <a href=&quot;http://www.openstreetmap.org/copyright&quot;>OpenStreetMap</a> contributors"
-    url="https://cartodb-basemaps-{s}.global.ssl.fastly.net/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+    url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
   />
 );
 
@@ -144,7 +144,6 @@ class MapTi extends React.Component {
 
   render() {
     const { dataFilters, datamesureFilters, isMandataire, filters } = this.props;
-    const dataShow = isMandataire ? dataFilters : datamesureFilters;
     const center = getCenter(this.state, this.state.postcodeCoordinates);
     const filterMesure = {
       content: "type",
@@ -152,6 +151,7 @@ class MapTi extends React.Component {
       connector: ""
     };
     const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
+    const dataShow = isMandataire ? dataFilters : datamesureFilters;
     const mesureCount = filteredData.length;
     return (
       <>
@@ -182,6 +182,7 @@ class MapTi extends React.Component {
             >
               <Attribution />
               {dataShow &&
+                dataShow !== "" &&
                 dataShow.map((marker, i) => (
                   <MesureMarker
                     key={marker.id + "" + i}
@@ -205,7 +206,8 @@ const mapStateToProps = state => ({
   dataFilters: state.mandataire.dataFilters,
   datamesureFilters: state.mandataire.datamesureFilters,
   services: state.mandataire.services,
-  filters: state.mandataire.filters
+  filters: state.mandataire.filters,
+  data: state.mandataire.data
 });
 
 export default connect(mapStateToProps)(MapTi);

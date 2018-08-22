@@ -36,7 +36,9 @@ export const filtersMesure = (filters, data, isMandataire) => {
       const dataFilter = data.filter(datum => datum.type === filters);
       return dispatch(updateFiltersMandataire(filters, dataFilter));
     } else {
-      const dataFilter = data.filter(datum => datum.types.find(typedata => typedata === filters));
+      const dataFilter = data
+        .map(datum => (datum.types.includes(filters) ? datum : false))
+        .filter(Boolean);
       return dispatch(updateFilters(filters, dataFilter));
     }
   };

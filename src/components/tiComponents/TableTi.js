@@ -105,7 +105,7 @@ const COLUMNS = [
     width: 60,
     accessor: d => d.type,
     Cell: row => (
-      <Cell row={row} style={{ width: "100px" }}>
+      <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
         <Circle
           style={{
             backgroundColor: getColorFromDisponibilite(row.row.mesures_en_cours / row.row.dispo_max)
