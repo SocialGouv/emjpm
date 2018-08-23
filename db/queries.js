@@ -36,8 +36,8 @@ function getMandataires() {
 function getAllServicesByTis(ti_id) {
   return knex
     .from("mandataire_tis")
-    .where({ ti_id: parseInt(ti_id), type: "Service" })
-    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id");
+    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id")
+    .where({ ti_id: parseInt(ti_id), type: "Service" });
 }
 
 function getAllMesures(mandataireID) {
@@ -55,10 +55,13 @@ function getAllMesuresEteinte(mandataireID) {
 }
 
 function getAllMesuresAttente(mandataireID) {
-  return knex("mesures").leftOuterJoin('tis', 'mesures.ti_id', 'tis.id').where({
-    mandataire_id: parseInt(mandataireID),
-    status: "Mesure en attente"
-  });
+  return knex("mesures")
+      .select("mesures.*","tis.etablissement")
+    .leftOuterJoin("tis", "mesures.ti_id", "tis.id")
+    .where({
+      mandataire_id: parseInt(mandataireID),
+      status: "Mesure en attente"
+    });
 }
 
 function getAllMesuresByMandataires(ti_id) {
@@ -290,10 +293,7 @@ function getAllMesuresByPopUpForMandataire(ti_id) {
 function getAllMesuresByTis(ti_id) {
   return knex
     .from("mesures")
-    .select("mesures.*",
-        knex.raw(
-            "mandataires.etablissement as manda"
-        ))
+    .select("mesures.*", knex.raw("mandataires.etablissement as manda"))
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
     .innerJoin(
       "mandataire_tis",
