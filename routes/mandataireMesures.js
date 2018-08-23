@@ -53,7 +53,7 @@ router.post(
       body["ti_id"] = ti.id;
       queries
         .addMesure(body)
-        .then(mesures => res.status(200).json(mesures))
+        .then(mesures => res.status(200).json({ success: true}))
         .catch(error => {
           console.log(error);
           next(error);
