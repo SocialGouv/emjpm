@@ -67,7 +67,6 @@ const uiSchema = {
 };
 
 const ValiderMesureEnAttente = ({ show, handleHide, formData, onSubmit, ...props }) => {
-  const attenteData = formData;
   return (
     <Layout show={show} handleHide={handleHide}>
       <H3>Valider une nouvelle mesure</H3>
@@ -77,7 +76,7 @@ const ValiderMesureEnAttente = ({ show, handleHide, formData, onSubmit, ...props
         Une nouvelle mesure a été attribué par le {formData.etablissement}. <br />
         Pour activer cette mesure, veuillez saisir les informations suivantes.
       </Paragraphe>
-      <Form schema={schema} uiSchema={uiSchema} formData={attenteData} onSubmit={onSubmit}>
+      <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>
         <div style={{ margin: "20px 0", textAlign: "center" }}>
           <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
             Valider

@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import * as React from "react";
 import Modal from "react-modal";
 import Router from "next/router";
-import { Users } from "react-feather";
+import { Users,Archive } from "react-feather";
 
 //redux
 import { createStore, combineReducers, applyMiddleware, bindActionCreators } from "redux";
@@ -52,6 +52,7 @@ class Ti extends React.Component {
       },
       {
         text: "Mesures attribuées",
+          icon: <Archive />,
         content: (
           <TableMesures
             fetch={() => apiFetch(`/mesures/getAllMesuresByTis`)}

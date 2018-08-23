@@ -92,6 +92,13 @@ class MapTi extends React.Component {
     this.fetchData();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    // hack to force reload when some redux state change
+    if (prevProps.data !== this.props.data) {
+      this.fetchData();
+    }
+  }
+
   handleMoveend = () => {
     this.fetchData();
   };

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import TableTi from "./TableTi";
 
 const MandatairesWidth = styled.div`
-width: 35%
+width: 45%
   background-color: white;
 `;
 

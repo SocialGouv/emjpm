@@ -53,7 +53,7 @@ const CellValidationMesureRedux = connect(
 )(({ row, show }) => (
   <Button
     data-cy="button-attente-mesure"
-    onClick={() => show("ValiderMesureEnAttente", { formData: row.original })}
+    onClick={() => show("ValiderMesureEnAttente", { formData: row.original})}
   >
     Valider
   </Button>

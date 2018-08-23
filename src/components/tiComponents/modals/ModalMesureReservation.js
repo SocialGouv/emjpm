@@ -48,7 +48,7 @@ const uiSchema = {
 class ModalMesureReservation extends React.Component {
   render() {
     const formData = {
-      mandataire_id: this.props.reservationMandataire.id
+      mandataire_id: this.props.reservationMandataire.id,
     };
     return (
       <Layout show={this.props.show} handleHide={this.props.handleHide}>

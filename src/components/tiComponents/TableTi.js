@@ -114,9 +114,9 @@ const COLUMNS = [
     style: { textAlign: "center", verticalAlign: "middle" }
   },
   {
-    Header: "Identité",
+    Header: "",
     id: "identity",
-    width: 60,
+    width: 50,
     accessor: d => d.type,
     Cell: row => (
       <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
@@ -133,9 +133,9 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
-    Header: "",
+    Header: "Identité",
     id: "etablissement",
-    width: 120,
+    width: 130,
     accessor: d => d.etablissement,
     Cell: row => (
       <Cell row={row} style={{ verticalAlign: "middle" }}>
@@ -149,6 +149,7 @@ const COLUMNS = [
     Header: "En cours",
     id: "en_cours",
     accessor: d => d.mesures_en_cours / d.dispo_max,
+      width: 110,
     Cell: row => (
       <CellMandataireRedux
         row={row}
@@ -163,6 +164,7 @@ const COLUMNS = [
     Header: "Attente",
     id: "mesures_en_attente",
     accessor: d => d.mesures_en_attente,
+    width: 70,
     Cell: row => (
       <CellMandataireRedux
         row={row}
@@ -177,6 +179,7 @@ const COLUMNS = [
     Header: "",
     id: "residence",
     accessor: d => d.date_mesure_update,
+    width: 40,
     Cell: row => (
       <CellMandataireRedux
         row={row}
@@ -200,6 +203,7 @@ const COLUMNS = [
     Header: "Reservation",
     id: "reservation",
     accessor: d => d.mesures_en_attente,
+    width: 40,
     Cell: row => (
       <CellMesureReservationRedux
         row={row}
@@ -217,7 +221,7 @@ class TableTi extends React.Component {
     const { hideColumns, rows } = this.props;
     return (
       <ReactTable
-        style={{ backgroundColor: "white", minHeight: 900 }}
+        style={{ backgroundColor: "white", minHeight: 900, width: "100%" }}
         columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
         noDataText="Aucune mesure ici..."
         showPagination={false}

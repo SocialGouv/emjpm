@@ -16,9 +16,16 @@ export const UPDATE_FILTERS_MANDATAIRES = "UPDATE_FILTERS_MANDATAIRES";
 const fetchMandataires = () => apiFetch(`/mandataires`);
 const fetchMesures = () => apiFetch("/mesures/popup");
 const fetchServices = () => apiFetch("/mandataires/services");
+const fetchUpdateMesureAttente = data =>
+  apiFetch("/mandataires/1/mesure-en-attente", {
+    method: "PUT",
+    body: JSON.stringify({
+      ...data
+    })
+  });
 
 const createMesureApi = data => {
-  apiFetch(`/mandataires/1/mesures`, {
+  return apiFetch(`/mandataires/1/mesures`, {
     method: "POST",
     body: JSON.stringify({
       ...data,
@@ -76,6 +83,11 @@ export const openValidationModal = ({ formData }) => {
         dispatch(hide("ModalMesureReservation"));
         dispatch(show("ModalMesureValidation"));
       })
+      .then(() =>
+        fetchUpdateMesureAttente(formData).then(() =>
+          fetchMandataires().then(json => dispatch(mandatairesUpdated(json)))
+        )
+      )
       .catch(e => {
         console.log(e);
       });
