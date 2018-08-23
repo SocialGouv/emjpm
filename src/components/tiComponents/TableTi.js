@@ -143,7 +143,7 @@ const COLUMNS = [
         <br /> <div style={{ color: "#cccccc" }}>{row.row.identity.toUpperCase()} </div>
       </Cell>
     ),
-    style: { textAlign: "center", alignSelf: "center" }
+    style: { textAlign: "left", alignSelf: "center" }
   },
   {
     Header: "En cours",
@@ -168,12 +168,11 @@ const COLUMNS = [
     Cell: row => (
       <CellMandataireRedux
         row={row}
-        style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
-      >
-        {row.row.mesures_en_attente}
+        style={{ fontSize: "1em"}}
+      ><div style={{ color: "black" }}> <b>{row.row.mesures_en_attente} </b></div>
       </CellMandataireRedux>
     ),
-    style: { textAlign: "center", alignSelf: "center" }
+    style: { textAlign: "center", alignSelf: "center"}
   },
   {
     Header: "",

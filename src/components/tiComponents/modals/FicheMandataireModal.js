@@ -29,7 +29,7 @@ const CellMesureReservationRedux = connect(
       show("ModalMesureReservation", { reservationMandataire: mandataire });
     }}
   >
-    <PlusSquare />
+    <PlusSquare /> Attribuer une mesure
   </td>
 ));
 
@@ -159,7 +159,6 @@ export const FicheMandataire = ({
             <br />
           </React.Fragment>
         )}
-        <CellMesureReservationRedux mandataire={mandataire} />
       </div>
       <br />
       <div>
@@ -173,6 +172,11 @@ export const FicheMandataire = ({
             ))}
           </React.Fragment>
         )}
+          <br />
+          <div>
+              <CellMesureReservationRedux mandataire={mandataire} />
+          </div>
+
       </div>
       <br />
       <br />
