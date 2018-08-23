@@ -21,7 +21,7 @@ const TitleMandataire = styled.div`
 const CellMesureReservationRedux = connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
-)(({ row, show, children, mandataire }) => (
+)(({ show, mandataire }) => (
   <td
     data-cy="button-attente-mesure"
     onClick={() => {

@@ -1,11 +1,13 @@
 import Form from "react-jsonschema-form";
+import styled from "styled-components";
+
+//Redux
 import { connectModal } from "redux-modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { updateMesureAttente } from "../actions/mesures";
 import Layout from "./Layout";
-import styled from "styled-components";
+import { updateMesureAttente } from "../actions/mesures";
 
 const H3 = styled.h3`
   text-align: center;

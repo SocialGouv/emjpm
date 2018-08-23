@@ -28,7 +28,6 @@ const closeMesureApi = data =>
     })
   });
 const attenteMesureApi = data => {
-  console.log("data", data);
   return apiFetch(`/mandataires/1/mesures/${data.id}`, {
     method: "PUT",
     body: JSON.stringify({
@@ -84,7 +83,6 @@ export const updateMesure = data => dispatch =>
     });
 
 export const updateMesureAttente = data => dispatch => {
-  console.log("data", data);
   attenteMesureApi(data)
     .then(json => {
       dispatch(hide("ValiderMesureEnAttente"));

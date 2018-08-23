@@ -149,7 +149,7 @@ const COLUMNS = [
     Header: "En cours",
     id: "en_cours",
     accessor: d => d.mesures_en_cours / d.dispo_max,
-      width: 110,
+    width: 110,
     Cell: row => (
       <CellMandataireRedux
         row={row}
@@ -223,7 +223,7 @@ class TableTi extends React.Component {
       <ReactTable
         style={{ backgroundColor: "white", minHeight: 900, width: "100%" }}
         columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
-        noDataText="Aucune mesure ici..."
+        noDataText="Aucun mandataire ici..."
         showPagination={false}
         minRows={0}
         pageSize={1000}

@@ -8,7 +8,7 @@ const MANDATAIRE_INITIAL_STATE = {
   filterData: [],
   currentEtablissementsForSelectedMandataire: "",
   allTisForOneMandataire: "",
-    lastUpdate: ""
+  lastUpdate: ""
 };
 
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
