@@ -1,9 +1,7 @@
 import Modal from "react-modal";
 import * as React from "react";
-import "bootstrap/dist/css/bootstrap.css";
 import Form from "react-jsonschema-form";
 
-import "../../../node_modules/react-tabs/style/react-tabs.css";
 import apiFetch from "../communComponents/Api";
 import AddTisToFormulaireMandataire from "./AddTisToFormulaireMandataire";
 

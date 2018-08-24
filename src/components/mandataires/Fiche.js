@@ -1,11 +1,7 @@
 import { Phone, Smartphone, Mail, Home } from "react-feather";
-import styled from "styled-components";
 
 const iconStyle = { width: 22, height: 22, marginRight: 10 };
 
-const H3 = styled.h3`
-  display: ${props => props.display};
-`;
 // fiche recap
 const FicheMandataire = ({
   email = "",
@@ -16,13 +12,11 @@ const FicheMandataire = ({
   ville = "",
   dispo_max = 0,
   secretariat = false,
-  nb_secretariat = 0,
-  displayTitle
+  nb_secretariat = 0
 }) => {
   const hasAdresse = adresse || code_postal || ville;
   return (
     <div>
-      <H3 display={displayTitle}>Mes coordonnées</H3>
       {(email && (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
           <Mail style={iconStyle} />
