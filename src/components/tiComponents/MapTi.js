@@ -19,29 +19,6 @@ const Attribution = () => (
   />
 );
 
-const MesureMarker = ({
-  marker,
-  updateFilterMandataire,
-  updateIsMandataireClick,
-  isMandataire,
-  circleSelected
-}) => {
-  const isSelected = isMandataire
-    ? circleSelected.id === marker.id
-    : circleSelected.code_postal === marker.code_postal;
-  const onClick = () => (isSelected ? updateIsMandataireClick() : updateFilterMandataire(marker));
-  const markerColor = isSelected ? "blue" : "red";
-  return (
-    <CircleMarker
-      center={[marker.latitude, marker.longitude]}
-      color={markerColor}
-      radius={10}
-      key={marker.id}
-      onClick={onClick}
-    />
-  );
-};
-
 class MapTi extends React.Component {
   state = {
     filterData: [],
@@ -113,7 +90,7 @@ class MapTi extends React.Component {
       });
   };
 
-  updateIsMandataireClick = () => {
+  unselectMarker = () => {
     this.setState(
       {
         circleSelected: ""
@@ -122,7 +99,7 @@ class MapTi extends React.Component {
     );
   };
 
-  updateFilterMandataire = data => {
+  selectMarker = data => {
     const selectedMandataires = this.props.isMandataire
       ? [data]
       : data.mandataire_ids
@@ -181,17 +158,23 @@ class MapTi extends React.Component {
             >
               <Attribution />
               {dataShow &&
-                dataShow !== "" &&
-                dataShow.map((marker, i) => (
-                  <MesureMarker
-                    key={marker.id + "" + i}
-                    marker={marker}
-                    isMandataire={isMandataire}
-                    circleSelected={this.state.circleSelected}
-                    updateIsMandataireClick={this.updateIsMandataireClick}
-                    updateFilterMandataire={this.updateFilterMandataire}
-                  />
-                ))}
+                dataShow.map &&
+                dataShow.map((marker, i) => {
+                  const isSelected = isMandataire
+                    ? this.state.circleSelected.id === marker.id
+                    : this.state.circleSelected.code_postal === marker.code_postal;
+                  const onClick = isSelected ? this.unselectMarker : this.selectMarker;
+                  const markerColor = isSelected ? "blue" : "red";
+                  return (
+                    <CircleMarker
+                      key={marker.id + "-" + i}
+                      center={[marker.latitude, marker.longitude]}
+                      color={markerColor}
+                      radius={10}
+                      onClick={() => onClick(marker)}
+                    />
+                  );
+                })}
             </Map>
           </div>
           <div style={{ flex: "1" }}>
