@@ -22,8 +22,8 @@ const Radio = ({ children }) => <RadioStyle> {children} </RadioStyle>;
 
 function mapDispatchToProps(dispatch) {
   return {
-    filtersMesure: (filters, data, isManatiare) =>
-      dispatch(filtersMesure(filters, data, isManatiare)),
+    filtersMesure: (filters, data, isMandataire) =>
+      dispatch(filtersMesure(filters, data, isMandataire)),
     updateFiltersMandataire: (filters, data) => dispatch(updateFiltersMandataire(filters, data)),
     updateFilters: (filters, data) => dispatch(updateFilters(filters, data))
   };

@@ -61,7 +61,7 @@ export const filtersMesure = (filters, data, isMandataire) => {
   };
 };
 
-export const openFichMandataireModal = mandataire => {
+export const openFicheMandataireModal = mandataire => {
   return dispatch => {
     return apiFetch(`/mandataires/${mandataire.id}/tisEtablissement`)
       .then(json => dispatch(etablissement(json)))

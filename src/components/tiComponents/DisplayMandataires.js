@@ -13,18 +13,9 @@ const Title = styled.div`
   padding: 15px;
 `;
 
-const DisplayMandataire = ({ mesureCount, filteredData }) => (
+const DisplayMandataires = ({ mesureCount, filteredData }) => (
   <MandatairesWidth>
-    {(mesureCount > 0 && (
-      <React.Fragment>
-        <Title>
-          {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
-        </Title>
-        <div style={{ maxHeight: "60vh", overflow: "auto" }}>
-          <TableTi rows={filteredData} />
-        </div>
-      </React.Fragment>
-    )) || (
+    {mesureCount > 0 && (
       <React.Fragment>
         <Title>
           {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
@@ -37,4 +28,4 @@ const DisplayMandataire = ({ mesureCount, filteredData }) => (
   </MandatairesWidth>
 );
 
-export default DisplayMandataire;
+export default DisplayMandataires;

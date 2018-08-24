@@ -9,7 +9,7 @@ import { show } from "redux-modal";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { openFichMandataireModal } from "./actions/mandataire";
+import { openFicheMandataireModal } from "./actions/mandataire";
 import isOlderThanOneMonth from "../communComponents/checkDate";
 
 const getColorFromDisponibilite = dispo => {
@@ -39,31 +39,31 @@ export const PillDispo = ({ dispo, dispo_max }) => (
 
 const CellMandataireRedux = connect(
   null,
-  dispatch => bindActionCreators({ show, openFichMandataireModal }, dispatch)
-)(({ row, show, children, openFichMandataireModal }) => (
-  <td
+  dispatch => bindActionCreators({ show, openFicheMandataireModal }, dispatch)
+)(({ row, show, children, openFicheMandataireModal }) => (
+  <div
     data-cy="button-attente-mesure"
     onClick={() => {
-      openFichMandataireModal(row.original);
+      openFicheMandataireModal(row.original);
       show("FicheMandataireModal", { currentMandataire: row.original });
     }}
   >
     {children}
-  </td>
+  </div>
 ));
 
 const CellMesureReservationRedux = connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ row, show, children }) => (
-  <td
+  <div
     data-cy="button-attente-mesure"
     onClick={() => {
       show("ModalMesureReservation", { reservationMandataire: row.original });
     }}
   >
     {children}
-  </td>
+  </div>
 ));
 
 const Cell = ({ style, title, children, row }) => (
@@ -125,7 +125,6 @@ const COLUMNS = [
             backgroundColor: getColorFromDisponibilite(row.row.mesures_en_cours / row.row.dispo_max)
           }}
         >
-          {console.log(row)}
           {row.row.identity.toUpperCase().substr(0, 1)}
         </Circle>
       </Cell>
@@ -166,17 +165,18 @@ const COLUMNS = [
     accessor: d => d.mesures_en_attente,
     width: 70,
     Cell: row => (
-      <CellMandataireRedux
-        row={row}
-        style={{ fontSize: "1em"}}
-      ><div style={{ color: "black" }}> <b>{row.row.mesures_en_attente} </b></div>
+      <CellMandataireRedux row={row} style={{ fontSize: "1em" }}>
+        <div style={{ color: "black" }}>
+          {" "}
+          <b>{row.row.mesures_en_attente} </b>
+        </div>
       </CellMandataireRedux>
     ),
-    style: { textAlign: "center", alignSelf: "center"}
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "",
-    id: "residence",
+    id: "updateMandataire",
     accessor: d => d.date_mesure_update,
     width: 40,
     Cell: row => (
@@ -184,7 +184,7 @@ const COLUMNS = [
         row={row}
         style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
       >
-        {isOlderThanOneMonth(row.row.residence.slice(0, 10)) && (
+        {isOlderThanOneMonth(row.row.updateMandataire.slice(0, 10)) && (
           <span
             className="d-inline-block"
             tabIndex="0"
@@ -208,7 +208,7 @@ const COLUMNS = [
         row={row}
         style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
       >
-        <PlusSquare />
+        <PlusSquare title="Reservez une mesure" style={{ cursor: "pointer" }} />
       </CellMesureReservationRedux>
     ),
     style: { alignSelf: "center" }
@@ -252,7 +252,7 @@ TableTi.defaultProps = {
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { onClick: ({ currentMandataire }) => openFichMandataireModal(currentMandataire) },
+    { onClick: ({ currentMandataire }) => openFicheMandataireModal(currentMandataire) },
     dispatch
   );
 

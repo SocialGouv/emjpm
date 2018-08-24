@@ -75,7 +75,7 @@ const ValiderMesureEnAttente = ({ show, handleHide, formData, onSubmit, ...props
       <br />
       <Paragraphe>
         {" "}
-        Une nouvelle mesure a été attribué par le {formData.etablissement}. <br />
+        Une nouvelle mesure a été attribuée par "{formData.etablissement}". <br />
         Pour activer cette mesure, veuillez saisir les informations suivantes.
       </Paragraphe>
       <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>

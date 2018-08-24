@@ -8,8 +8,9 @@ import { connect } from "react-redux";
 import { connectModal, show, hide } from "redux-modal";
 import { bindActionCreators } from "redux";
 
+import { Button } from "../..";
 import Commentaire from "../Commentaire";
-import Layout from "./Layout";
+import Layout from "../../mandataires/modals/Layout";
 import apiFetch from "../../communComponents/Api";
 import FicheMandataireManda from "../../mandataires/Fiche";
 
@@ -67,17 +68,9 @@ const CommentairesView = ({ onSubmit, commentaires, onDelete }) => (
       <div style={{ textAlign: "left", paddingBottom: "10px" }}>
         <label htmlFor="exampleFormControlTextarea1">Attention à la sensibilité des données.</label>
         <br />
-        <button
-          type="submit"
-          style={{
-            color: "white",
-            backgroundColor: "#43b04a",
-            boxShadow: "3px 3px grey"
-          }}
-          className="btn"
-        >
+        <Button>
           Enregistrer
-        </button>
+        </Button>
       </div>
     </Form>
 

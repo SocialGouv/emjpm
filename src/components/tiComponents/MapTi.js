@@ -10,7 +10,7 @@ import getCenter from "../communComponents/getCenter";
 import FilterMesuresMap from "./FilterMesuresMap";
 import { filterDataForMandataires } from "../index";
 import FiltersMandataireTableMap from "./FilterMandataires";
-import DisplayMandataire from "./DisplayMandataire";
+import DisplayMandataires from "./DisplayMandataires";
 
 const MapsWidth = styled.div`
   width: 49%;
@@ -56,7 +56,7 @@ class MapTi extends React.Component {
     zoom: 7,
     center: "",
     loading: false,
-    postcodeCoordinates: [2, 51.2],
+    coordinates: [2, 51.2],
     showMandataireOfOneMesure: "",
     circleSelected: "",
     value: ""
@@ -114,7 +114,7 @@ class MapTi extends React.Component {
       })
     })
       .then(mesures => {
-        this.setState({ postcodeCoordinates: [mesures.longitude, mesures.latitude] });
+        this.setState({ coordinates: [mesures.longitude, mesures.latitude] });
       })
       .catch(e => {
         console.log(e);
@@ -151,7 +151,7 @@ class MapTi extends React.Component {
 
   render() {
     const { dataFilters, datamesureFilters, isMandataire, filters } = this.props;
-    const center = getCenter(this.state, this.state.postcodeCoordinates);
+    const center = getCenter(this.state, this.state.coordinates);
     const filterMesure = {
       content: "type",
       filter: filters,
@@ -202,7 +202,7 @@ class MapTi extends React.Component {
                 ))}
             </Map>
           </MapsWidth>
-          <DisplayMandataire mesureCount={mesureCount} filteredData={filteredData} />
+          <DisplayMandataires mesureCount={mesureCount} filteredData={filteredData} />
         </div>
       </>
     );

@@ -25,7 +25,10 @@ class Commentaire extends React.Component {
             data: json
           });
         })
-        .catch(function(error) {});
+        .catch(function(error) {
+          alert("Impossible de soumettre le commentaire");
+          throw e;
+        });
     }
   };
 

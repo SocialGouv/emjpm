@@ -7,7 +7,7 @@ import "react-tabs/style/react-tabs.css";
 import "../static/css/hero.css";
 import "../static/css/footer.css";
 import "../static/css/custom.css";
-
+import "../static/css/panel.css";
 injectGlobal`
   html {
     font-size: 14px;

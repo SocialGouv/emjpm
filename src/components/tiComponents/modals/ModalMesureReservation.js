@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { show, connectModal } from "redux-modal";
 import { bindActionCreators } from "redux";
 
-import Layout from "./Layout";
+import Layout from "../../mandataires/modals/Layout";
 import { openValidationModal } from "../actions/mandataire";
 
 const schema = {
@@ -45,44 +45,44 @@ const uiSchema = {
   }
 };
 
-class ModalMesureReservation extends React.Component {
-  render() {
-    const formData = {
-      mandataire_id: this.props.reservationMandataire.id
-    };
-    return (
-      <Layout show={this.props.show} handleHide={this.props.handleHide}>
-        <div style={{ padding: "30px" }}>
-          <h2>Attribution d'une nouvelle mesure</h2>
-          <b>{this.props.reservationMandataire.etablissement}</b>
-          <br />
-          {this.props.reservationMandataire.type}
-          <br />
-          <br />
-          {this.props.reservationMandataire.etablissement} recevra une notification par email.Une
-          fois le mandat reçu le mandataire pourra valider cette attribution de mesure.
-          <br />
-          <Form
-            schema={schema}
-            uiSchema={uiSchema}
-            formData={formData}
-            onSubmit={this.props.openValidationModal}
-          >
-            <button type="submit" className="btn btn-success">
-              Valider
-            </button>
-            <button onClick={this.props.handleHide} className="btn btn-link  ">
-              Annuler
-            </button>
-          </Form>
-        </div>
-      </Layout>
-    );
-  }
-}
+const ModalMesureReservation = ({reservationMandataire, show, openValidationModal, handleHide }) => {
+  const formData = {
+    mandataire_id: reservationMandataire.id
+  };
+
+  return (
+    <Layout show={show} handleHide={handleHide}>
+      <div style={{ padding: "30px" }}>
+        <h2>Attribution d'une nouvelle mesure</h2>
+        <b>{reservationMandataire.etablissement}</b>
+        <br />
+        {reservationMandataire.type}
+        <br />
+        <br />
+        {reservationMandataire.etablissement} recevra une notification par email.Une fois le mandat
+        reçu le mandataire pourra valider cette attribution de mesure.
+        <br />
+        <Form
+          schema={schema}
+          uiSchema={uiSchema}
+          formData={formData}
+          onSubmit={openValidationModal}
+        >
+          <button type="submit" className="btn btn-success">
+            Valider
+          </button>
+          <button onClick={handleHide} className="btn btn-link  ">
+            Annuler
+          </button>
+        </Form>
+      </div>
+    </Layout>
+  );
+};
+
 const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ show, openValidationModal }, dispatch);
 export default connect(
   null,
   mapDispatchToProps
-)(connectModal({ name: "ModalMesureReservation", destroyOnHide: true })(ModalMesureReservation));
+)(connectModal({ name: "ModalMesureReservation" })(ModalMesureReservation));
