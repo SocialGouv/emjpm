@@ -156,7 +156,7 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
   });
 });
 
-router.put("/:mandataireId/mesure-en-attente", async (req, res, next) => {
+router.put("/:mandataireId/mesures-en-attente", loginRequired, async (req, res, next) => {
   // const mandataire = await queries.getMandataireByUserId(req.user.id);
   // if (!mandataire) {
   //   return next(new Error(401));

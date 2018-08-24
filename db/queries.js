@@ -56,7 +56,7 @@ function getAllMesuresEteinte(mandataireID) {
 
 function getAllMesuresAttente(mandataireID) {
   return knex("mesures")
-      .select("mesures.*","tis.etablissement")
+    .select("mesures.*", "tis.etablissement")
     .leftOuterJoin("tis", "mesures.ti_id", "tis.id")
     .where({
       mandataire_id: parseInt(mandataireID),
