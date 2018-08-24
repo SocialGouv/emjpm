@@ -17,7 +17,7 @@ const fetchMandataires = () => apiFetch(`/mandataires`);
 const fetchMesures = () => apiFetch("/mesures/popup");
 const fetchServices = () => apiFetch("/mandataires/services");
 const fetchUpdateMesureAttente = data =>
-  apiFetch("/mandataires/1/mesure-en-attente", {
+  apiFetch("/mandataires/1/mesures-en-attente", {
     method: "PUT",
     body: JSON.stringify({
       ...data

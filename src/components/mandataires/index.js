@@ -101,7 +101,7 @@ class MandataireTabs extends React.Component {
         icon: <UserPlus />,
         content: (
           <TableMesures
-            fetch={() => apiFetch(`/mandataires/1/mesures/Attente`)}
+            fetch={() => apiFetch(`/mandataires/1/mesures/attente`)}
             hideColumns={[
               "date_ouverture",
               "modifier",
