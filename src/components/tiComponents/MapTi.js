@@ -12,14 +12,6 @@ import { filterDataForMandataires } from "../index";
 import FiltersMandataireTableMap from "./FilterMandataires";
 import DisplayMandataires from "./DisplayMandataires";
 
-const MapsWidth = styled.div`
-  width: 49%;
-  margin-left: 1%;
-  margin-top: 10px;
-  margin-right: 1%;
-  margin-bottom: 1%;
-`;
-
 const Attribution = () => (
   <TileLayer
     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -161,7 +153,7 @@ class MapTi extends React.Component {
     const dataShow = isMandataire ? dataFilters : datamesureFilters;
     const mesureCount = filteredData.length;
     return (
-      <>
+      <React.Fragment>
         <div style={{ display: "flex" }}>
           <FilterMesuresMap
             zoomCodePostal={this.zoomCodePostal}
@@ -179,7 +171,7 @@ class MapTi extends React.Component {
             display: "flex"
           }}
         >
-          <MapsWidth>
+          <div style={{ flex: "1" }}>
             <Map
               center={center}
               zoom={this.state.zoom}
@@ -201,10 +193,12 @@ class MapTi extends React.Component {
                   />
                 ))}
             </Map>
-          </MapsWidth>
-          <DisplayMandataires mesureCount={mesureCount} filteredData={filteredData} />
+          </div>
+          <div style={{ flex: "1" }}>
+            <DisplayMandataires mesureCount={mesureCount} filteredData={filteredData} />
+          </div>
         </div>
-      </>
+      </React.Fragment>
     );
   }
 }

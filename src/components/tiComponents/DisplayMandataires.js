@@ -2,8 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import TableTi from "./TableTi";
 
-const MandatairesWidth = styled.div`
-width: 45%
+const MandatairesContainer = styled.div`
   background-color: white;
 `;
 
@@ -14,18 +13,21 @@ const Title = styled.div`
 `;
 
 const DisplayMandataires = ({ mesureCount, filteredData }) => (
-  <MandatairesWidth>
-    {mesureCount > 0 && (
+  <MandatairesContainer>
+    {(mesureCount > 0 && (
       <React.Fragment>
         <Title>
-          {mesureCount} Professionnel{(mesureCount > 1 && "s") || null}
+          {mesureCount} Professionnel
+          {(mesureCount > 1 && "s") || null}
         </Title>
         <div style={{ maxHeight: "60vh", overflow: "auto" }}>
           <TableTi rows={filteredData} />
         </div>
       </React.Fragment>
+    )) || (
+      <div style={{ textAlign: "center", marginTop: 20 }}>Aucun mandataire dans cette zone</div>
     )}
-  </MandatairesWidth>
+  </MandatairesContainer>
 );
 
 export default DisplayMandataires;

@@ -71,7 +71,7 @@ class Ti extends React.Component {
       }
     ];
     return (
-      <div className="container" style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
+      <div style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
         <DummyTabs tabs={tabs} />
         <FicheMandataireModal />
         <ModalMesureValidation />
