@@ -14,28 +14,24 @@ const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {
   return (
     <Presentation>
       <div className="form-inline">
-        <div>
-          <FormInput
-            data-cy="tab-code-postal"
-            innerRef={node => (input = node)}
-            padd="10"
-            size="200"
-            id="commune"
-            name="commune"
-            onChange={e => updateValue(e.target.value)}
-            placeholder={value || "Code Postal"}
-          />
-        </div>
-        <div>
-          <SearchButton
-            data-cy="tab-recherche"
-            align="center"
-            type="submit"
-            onClick={() => zoomCodePostal(input.value)}
-          >
-            Rechercher
-          </SearchButton>
-        </div>
+        <FormInput
+          data-cy="tab-code-postal"
+          innerRef={node => (input = node)}
+          padd="10"
+          size="200"
+          id="commune"
+          name="commune"
+          onChange={e => updateValue(e.target.value)}
+          placeholder={value || "Code Postal"}
+        />
+        <SearchButton
+          data-cy="tab-recherche"
+          align="center"
+          type="submit"
+          onClick={() => zoomCodePostal(input.value)}
+        >
+          Rechercher
+        </SearchButton>
       </div>
     </Presentation>
   );
