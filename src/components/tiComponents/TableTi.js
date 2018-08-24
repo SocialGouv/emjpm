@@ -184,16 +184,17 @@ const COLUMNS = [
         row={row}
         style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
       >
-        {isOlderThanOneMonth(row.row.updateMandataire.slice(0, 10)) && (
-          <span
-            className="d-inline-block"
-            tabIndex="0"
-            data-toggle="tooltip"
-            title="Dernière mise à jour des données datant de plus de 30 jours."
-          >
-            <AlertCircle />
-          </span>
-        )}
+        {row.row.updateMandataire &&
+          isOlderThanOneMonth(row.row.updateMandataire.slice(0, 10)) && (
+            <span
+              className="d-inline-block"
+              tabIndex="0"
+              data-toggle="tooltip"
+              title="Dernière mise à jour des données datant de plus de 30 jours."
+            >
+              <AlertCircle />
+            </span>
+          )}
       </CellMandataireRedux>
     ),
     style: { alignSelf: "center" }
