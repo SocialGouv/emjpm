@@ -13,8 +13,8 @@ const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {
   let input;
   return (
     <Presentation>
-      <tr className="form-inline">
-        <td>
+      <div className="form-inline">
+        <div>
           <FormInput
             data-cy="tab-code-postal"
             innerRef={node => (input = node)}
@@ -25,8 +25,8 @@ const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {
             onChange={e => updateValue(e.target.value)}
             placeholder={value || "Code Postal"}
           />
-        </td>
-        <td>
+        </div>
+        <div>
           <SearchButton
             data-cy="tab-recherche"
             align="center"
@@ -35,8 +35,8 @@ const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {
           >
             Rechercher
           </SearchButton>
-        </td>
-      </tr>
+        </div>
+      </div>
     </Presentation>
   );
 };
