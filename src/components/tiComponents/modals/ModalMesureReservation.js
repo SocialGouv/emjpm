@@ -45,7 +45,12 @@ const uiSchema = {
   }
 };
 
-const ModalMesureReservation = ({reservationMandataire, show, openValidationModal, handleHide }) => {
+const ModalMesureReservation = ({
+  reservationMandataire,
+  show,
+  openValidationModal,
+  handleHide
+}) => {
   const formData = {
     mandataire_id: reservationMandataire.id
   };

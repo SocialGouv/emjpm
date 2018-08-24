@@ -108,7 +108,7 @@ export const closeMesure = data => dispatch =>
       throw e;
     });
 
-export const reactivateMesure = (data) => dispatch =>
+export const reactivateMesure = data => dispatch =>
   reactivateMesureApi(data)
     .then(json => {
       dispatch(hide("ReactivateMesure"));
