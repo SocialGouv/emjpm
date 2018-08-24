@@ -42,7 +42,6 @@ router.post(
   async (req, res, next) => {
     const mandataire = await queries.getMandataireByUserId(req.user.id);
     const ti = await queries.getTiByUserId(req.user.id);
-    console.log(mandataire, ti, req.user);
     const body = {
       ...req.body
     };
@@ -77,7 +76,7 @@ router.post(
 
 router.post(
   "/:mandataireId/mesure-reservation",
-  typeRequired("individuel", "prepose", "ti"),
+  typeRequired("ti"),
   async (req, res, next) => {
     queries
       .addMesure({
@@ -116,7 +115,7 @@ router.get(
 );
 
 router.get(
-  "/:mandataireId/mesures/Attente",
+  "/:mandataireId/mesures/attente",
   typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     const mandataire = await queries.getMandataireByUserId(req.user.id);
