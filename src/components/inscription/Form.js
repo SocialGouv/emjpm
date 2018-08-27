@@ -82,7 +82,7 @@ class Form extends React.Component {
           <h1 style={{ margin: 20 }}>Inscription</h1>
           <div style={{ backgroundColor: "white", padding: 25 }}>
             <Resolve
-              promises={[getTis()]}
+              promises={[() => getTis()]}
               render={({ status, result }) => (
                 <div style={{ margin: "20px 0" }}>
                   <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
