@@ -43,12 +43,12 @@ describe("Mandataires", function() {
         it("should have new added mesure", () => {
           cy.visit("/mandataires");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
-          cy.get(".ReactTable .rt-tr-group:last-child .rt-td:nth-child(3)").should(
+          cy.get(".ReactTable .rt-tr-group:first-child .rt-td:nth-child(3)").should(
             "contain",
             "Sauvegarde de justice"
           );
-          cy.get(".ReactTable .rt-tr-group:last-child .rt-td:nth-child(4)").should("contain", "F");
-          cy.get(".ReactTable .rt-tr-group:last-child .rt-td:nth-child(5)").should(
+          cy.get(".ReactTable .rt-tr-group:first-child .rt-td:nth-child(4)").should("contain", "F");
+          cy.get(".ReactTable .rt-tr-group:first-child .rt-td:nth-child(5)").should(
             "contain",
             "1977"
           );
@@ -136,6 +136,11 @@ describe("Mandataires", function() {
           cy.get("[data-cy=fiche-manda-adresse]").contains("21 rue de oui 62009 Avesnes");
           cy.get("[data-cy=fiche-manda-dispo-max]").contains("10");
           cy.get("[data-cy=fiche-manda-secretariat]").contains("Oui (4 ETP)");
+        });
+        it("counter should now show 2/10", () => {
+          cy.visit("/mandataires");
+          cy.get(".react-tabs .react-tabs__tab-list").should("contain", "2 / 10");
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
       });
     });
