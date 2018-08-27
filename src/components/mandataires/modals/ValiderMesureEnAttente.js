@@ -80,7 +80,12 @@ const ValiderMesureEnAttente = ({ show, handleHide, formData, onSubmit, ...props
       </Paragraphe>
       <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>
         <div style={{ margin: "20px 0", textAlign: "center" }}>
-          <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
+          <button
+            type="submit"
+            className="btn btn-success"
+            data-cy="validation-button"
+            style={{ padding: "10px 30px" }}
+          >
             Valider
           </button>
         </div>

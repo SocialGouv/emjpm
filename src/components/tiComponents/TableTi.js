@@ -57,7 +57,7 @@ const CellMesureReservationRedux = connect(
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ row, show, children }) => (
   <div
-    data-cy="button-attente-mesure"
+    data-cy="button-reservation-mesure"
     onClick={() => {
       show("ModalMesureReservation", { reservationMandataire: row.original });
     }}
@@ -166,7 +166,7 @@ const COLUMNS = [
     width: 70,
     Cell: row => (
       <CellMandataireRedux row={row} style={{ fontSize: "1em" }}>
-        <div style={{ color: "black" }}>
+        <div style={{ color: "black" }} data-cy="attente">
           {" "}
           <b>{row.row.mesures_en_attente} </b>
         </div>

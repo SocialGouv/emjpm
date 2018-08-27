@@ -73,7 +73,7 @@ const ModalMesureReservation = ({
           formData={formData}
           onSubmit={openValidationModal}
         >
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" data-cy="button-submit-mesure">
             Valider
           </button>
           <button onClick={handleHide} className="btn btn-link  ">

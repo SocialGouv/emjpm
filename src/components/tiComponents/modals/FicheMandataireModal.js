@@ -68,7 +68,7 @@ const CommentairesView = ({ onSubmit, commentaires, onDelete }) => (
       <div style={{ textAlign: "left", paddingBottom: "10px" }}>
         <label htmlFor="exampleFormControlTextarea1">Attention à la sensibilité des données.</label>
         <br />
-        <Button>Enregistrer</Button>
+        <Button data-cy="button-enregistrer-comment">Enregistrer</Button>
       </div>
     </Form>
 

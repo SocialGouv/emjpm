@@ -9,7 +9,7 @@ const ModalMesureValidation = ({ show, handleHide }) => {
       <h2>Attribution d'une nouvelle mesure</h2>
       <br />
       L'attribution de mesure à bien été envoyée.
-      <button onClick={handleHide} className="btn btn-link  ">
+      <button onClick={handleHide} className="btn btn-link" data-cy="button-validation">
         Continuer
       </button>
     </Layout>
