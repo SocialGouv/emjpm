@@ -36,8 +36,8 @@ function getMandataires() {
 function getAllServicesByTis(ti_id) {
   return knex
     .from("mandataire_tis")
-    .where({ ti_id: parseInt(ti_id), type: "Service" })
-    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id");
+    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id")
+    .where({ ti_id: parseInt(ti_id), type: "Service" });
 }
 
 function getAllMesures(mandataireID) {
@@ -52,6 +52,16 @@ function getAllMesuresEteinte(mandataireID) {
     mandataire_id: parseInt(mandataireID),
     status: "Eteindre mesure"
   });
+}
+
+function getAllMesuresAttente(mandataireID) {
+  return knex("mesures")
+    .select("mesures.*", "tis.etablissement")
+    .leftOuterJoin("tis", "mesures.ti_id", "tis.id")
+    .where({
+      mandataire_id: parseInt(mandataireID),
+      status: "Mesure en attente"
+    });
 }
 
 function getAllMesuresByMandataires(ti_id) {
@@ -280,6 +290,21 @@ function getAllMesuresByPopUpForMandataire(ti_id) {
     );
 }
 
+function getAllMesuresByTis(ti_id) {
+  return knex
+    .from("mesures")
+    .select("mesures.*", knex.raw("mandataires.etablissement as manda"))
+    .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
+    .innerJoin(
+      "mandataire_tis",
+      "mandataire_tis.mandataire_id",
+      "mandataires.id"
+    )
+    .where({
+      "mandataire_tis.ti_id": parseInt(ti_id)
+    });
+}
+
 function getPostecode(codePostal, lat, lng) {
   return knex("geolocalisation_code_postal").insert({
     code_postal: codePostal,
@@ -395,6 +420,14 @@ function CapaciteMandataire(mandataireID) {
     });
 }
 
+function mesureEnAttente(mandataireID) {
+  return knex("mesures")
+    .count("*")
+    .where({
+      mandataire_id: parseInt(mandataireID),
+      status: "Mesure en attente"
+    });
+}
 function CapaciteEteinteMandataire(mandataireID) {
   return knex("mesures")
     .count("*")
@@ -600,5 +633,8 @@ module.exports = {
   getAllMesuresByPopUpForMandataire,
   getAllMesuresByMandatairesForMaps,
   getMandataires,
-  updateMandataireMailSent
+  updateMandataireMailSent,
+  getAllMesuresByTis,
+  mesureEnAttente,
+  getAllMesuresAttente
 };
