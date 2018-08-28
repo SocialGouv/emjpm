@@ -38,20 +38,51 @@ router.put(
 // create mesure
 router.post(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
     const mandataire = await queries.getMandataireByUserId(req.user.id);
+    const ti = await queries.getTiByUserId(req.user.id);
+    const body = {
+      ...req.body
+    };
+    if (req.user.type === "individuel" || req.user.type === "prepose") {
+      body["mandataire_id"] = mandataire.id;
+    }
+    if (req.user.type === "ti") {
+      body["ti_id"] = ti.id;
+      queries
+        .addMesure(body)
+        .then(mesures => res.status(200).json({ success: true}))
+        .catch(error => {
+          console.log(error);
+          next(error);
+        });
+    } else {
+      queries
+        .addMesure(body)
+        .then(() => queries.getAllMesures(mandataire.id))
+        .then(mesures => res.status(200).json(mesures))
+        // todo : trigger/view
+        .then(() => updateCountMesures(mandataire.id))
+        // todo : trigger/view
+        .then(() => updateDateMesureUpdate(mandataire.id))
+        .catch(error => {
+          console.log(error);
+          next(error);
+        });
+    }
+  }
+);
+
+router.post(
+  "/:mandataireId/mesure-reservation",
+  typeRequired("ti"),
+  async (req, res, next) => {
     queries
       .addMesure({
-        ...req.body,
-        mandataire_id: mandataire.id
+        ...req.body
       })
-      .then(() => queries.getAllMesures(mandataire.id))
       .then(mesures => res.status(200).json(mesures))
-      // todo : trigger/view
-      .then(() => updateCountMesures(mandataire.id))
-      // todo : trigger/view
-      .then(() => updateDateMesureUpdate(mandataire.id))
       .catch(error => {
         console.log(error);
         next(error);
@@ -78,6 +109,18 @@ router.get(
     const mandataire = await queries.getMandataireByUserId(req.user.id);
     queries
       .getAllMesuresByMandatairesForMaps(mandataire.id)
+      .then(mesures => res.status(200).json(mesures))
+      .catch(error => next(error));
+  }
+);
+
+router.get(
+  "/:mandataireId/mesures/attente",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    const mandataire = await queries.getMandataireByUserId(req.user.id);
+    queries
+      .getAllMesuresAttente(mandataire.id)
       .then(mesures => res.status(200).json(mesures))
       .catch(error => next(error));
   }
