@@ -1,4 +1,4 @@
-import TableRowMesure from "../mandataires/TableRowMesure";
+import TableRowService from "./TableRowService";
 
 const TableMesure = ({ rows }) => {
   return (
@@ -55,7 +55,7 @@ const TableMesure = ({ rows }) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map(mesure => <TableRowMesure key={mesure.properties.tel} mesure={mesure} />)}
+          {rows.map(mesure => <TableRowService key={mesure.properties.tel} mesure={mesure} />)}
         </tbody>
       </table>
     </div>

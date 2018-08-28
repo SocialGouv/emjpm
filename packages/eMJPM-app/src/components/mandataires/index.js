@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { Home, Map, UserMinus } from "react-feather";
+import { Home, Map, UserMinus, UserPlus } from "react-feather";
 import Modal from "react-modal";
 
 import { DummyTabs } from "..";
@@ -23,7 +23,13 @@ import { mandataireMount } from "./actions/mandataire";
 import mesuresReducer from "./reducers/mesures";
 import mandataireReducer from "./reducers/mandataire";
 
-import { EditMesure, CloseMesure, ReactivateMesure, EditMandataire } from "./modals";
+import {
+  EditMesure,
+  CloseMesure,
+  ReactivateMesure,
+  EditMandataire,
+  ValiderMesureEnAttente
+} from "./modals";
 
 Modal.setAppElement("#__next");
 
@@ -54,7 +60,15 @@ class MandataireTabs extends React.Component {
             <CreateMesure />
             <TableMesures
               fetch={() => apiFetch(`/mandataires/1/mesures`)}
-              hideColumns={["reactiver", "extinction"]}
+              hideColumns={[
+                "reactiver",
+                "extinction",
+                "valider",
+                "date_demande",
+                "ti",
+                "status",
+                "professionnel"
+              ]}
             />
           </React.Fragment>
         )
@@ -70,7 +84,34 @@ class MandataireTabs extends React.Component {
         content: (
           <TableMesures
             fetch={() => apiFetch(`/mandataires/1/mesures/Eteinte`)}
-            hideColumns={["modifier", "fin-mandat"]}
+            hideColumns={[
+              "modifier",
+              "fin-mandat",
+              "valider",
+              "date_demande",
+              "ti",
+              "status",
+              "professionnel"
+            ]}
+          />
+        )
+      },
+      {
+        text: "Mesures en attente",
+        icon: <UserPlus />,
+        content: (
+          <TableMesures
+            fetch={() => apiFetch(`/mandataires/1/mesures/attente`)}
+            hideColumns={[
+              "date_ouverture",
+              "modifier",
+              "reactiver",
+              "fin-mandat",
+              "extinction",
+              "residence",
+              "status",
+              "professionnel"
+            ]}
           />
         )
       },
@@ -88,6 +129,7 @@ class MandataireTabs extends React.Component {
         <CloseMesure />
         <ReactivateMesure />
         <EditMandataire />
+        <ValiderMesureEnAttente />
       </React.Fragment>
     );
   }
