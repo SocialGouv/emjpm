@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ReactAutocomplete from "react-autocomplete";
 import * as React from "react";
 
-import apiFetch from "./communComponents/Api";
+import apiFetch from "../communComponents/Api";
 import { CheckCircle, XCircle } from "react-feather";
 
 const ModalPres = styled.div`

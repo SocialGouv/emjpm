@@ -47,6 +47,18 @@ const CellReactivateMesureRedux = connect(
   </Button>
 ));
 
+const CellValidationMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-attente-mesure"
+    onClick={() => show("ValiderMesureEnAttente", { formData: row.original })}
+  >
+    Valider
+  </Button>
+));
+
 const concat = (...strings) =>
   strings
     .map(s => ("" + s).trim())
@@ -72,6 +84,30 @@ const COLUMNS = [
         {format(row.row.date_ouverture, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
       </div>
     ),
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
+    Header: "Date de demande",
+    id: "date_demande",
+    width: 300,
+    accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
+    Cell: row => (
+      <div>
+        {format(row.row.date_demande, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
+      </div>
+    ),
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
+    Header: "Professionnel",
+    id: "professionnel",
+    accessor: d => d.manda,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
+    Header: "Tribunal d'instance",
+    id: "ti",
+    accessor: d => d.etablissement,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -133,6 +169,19 @@ const COLUMNS = [
     id: "reactiver",
     Cell: row => <CellReactivateMesureRedux row={row} />,
     width: 200,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
+    Header: "Valider",
+    id: "valider",
+    Cell: row => <CellValidationMesureRedux row={row} />,
+    width: 200,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
+    Header: "Status",
+    id: "status",
+    accessor: d => d.status,
     style: { textAlign: "center", alignSelf: "center" }
   }
 ];
@@ -205,6 +254,6 @@ TableMesures.defaultProps = {
 const mapStateToProps = state => ({
   // /!\ todo : hack
   // lastUpdate is updated when some mesure is modified so we can refresh the table
-  lastUpdate: state.mesures.lastUpdate
+  lastUpdate: state.mesures ? state.mesures.lastUpdate : state.mandataire.lastUpdate
 });
 export default connect(mapStateToProps)(TableMesures);
