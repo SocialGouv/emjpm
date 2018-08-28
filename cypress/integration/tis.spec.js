@@ -45,13 +45,13 @@ describe("Tis", function() {
           cy.get(".form-group #root_annee").type("1987");
           cy.get("[data-cy=button-submit-mesure]").click();
           cy.get("[data-cy=button-validation]").click();
-          cy.get(".react-tabs .rt-tr-group:nth-child(1) [data-cy=attente]").contains(2);
+          cy.get(".react-tabs .rt-tr-group:nth-child(1) [data-cy=attente]").contains(1);
         });
 
         it("check display of the mandataire Identity", () => {
           cy.visit("/tis");
           cy.get(".react-tabs .rt-tr-group:nth-child(1)").click();
-          cy.get("[data-cy=fiche-manda-telephone]").contains("0237100000");
+          cy.get("[data-cy=fiche-manda-telephone]").contains("0101010108");
         });
 
         it("table should show 0 mandataires on individuel filter", () => {
