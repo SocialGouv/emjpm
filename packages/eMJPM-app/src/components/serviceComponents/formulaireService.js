@@ -1,14 +1,8 @@
 import Modal from "react-modal";
 import * as React from "react";
-
-import "bootstrap/dist/css/bootstrap.css";
-import "../../static/css/hero.css";
-import "../../static/css/panel.css";
-import "../../static/css/footer.css";
-import "../../static/css/custom.css";
-import "../../node_modules/react-tabs/style/react-tabs.css";
 import Form from "react-jsonschema-form";
-import apiFetch from "./communComponents/Api";
+
+import apiFetch from "../communComponents/Api";
 import AddTisToFormulaireMandataire from "./AddTisToFormulaireMandataire";
 
 const schema = {

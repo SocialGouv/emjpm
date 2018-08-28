@@ -15,6 +15,7 @@ const mesuresReducer = (state = MESURES_INITIAL_STATE, action) => {
         mesureCreatedMessage: null
       };
     case "MESURE_UPDATED":
+    case "MESURE_ATTENTE":
     case "MESURE_REACTIVATED":
     case "MESURE_CLOSED":
       return {

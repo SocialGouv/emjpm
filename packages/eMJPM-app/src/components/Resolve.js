@@ -15,7 +15,7 @@ class Resolve extends React.Component {
   componentDidMount() {
     const { promises } = this.props;
     this.setState({ status: "loading", result: null, error: null }, () => {
-      Promise.all(promises)
+      Promise.all(promises.map(p => p()))
         .then(result => {
           this.setState({ result, status: "success", error: null });
         })
