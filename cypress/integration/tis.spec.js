@@ -34,12 +34,10 @@ describe("Tis", function() {
           cy.visit("/tis");
           // hack to prevent weird initial scroll
             //$$('.ReactTable')[0].parentNode.scrollTop=0
-
           cy.get(
             ".react-tabs .rt-tr-group:nth-child(1) [data-cy=button-reservation-mesure]"
           ).click();
            // cy.get('.ReactTable:first-child').parent().scrollTo('top')
-
           cy.get(".form-group #root_type").select("Tutelle");
           cy.get(".form-group #root_civilite").select("F");
           cy.get(".form-group #root_annee").type("1987");
