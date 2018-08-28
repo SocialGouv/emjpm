@@ -2,7 +2,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 import Navigation from "../src/components/communComponents/Navigation";
 import Footer from "../src/components/communComponents/Footer";
-import FormulaireService from "../src/components/formulaireService";
+import FormulaireService from "../src/components/serviceComponents/formulaireService";
 import apiFetch from "../src/components/communComponents/Api";
 import DislayDate from "../src/components/communComponents/formatFrenchDate";
 

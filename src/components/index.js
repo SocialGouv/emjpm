@@ -8,4 +8,5 @@ export { default as PromiseState } from "./common/PromiseState";
 export { default as SearchButton } from "./communComponents/SearchButton";
 export { default as SelectionManager } from "./common/SelectionManager";
 export { default as ToggleState } from "./common/ToggleState";
-export { Pill, PillDispo } from "./common/Pill";
+export { default as Pill } from "./common/Pill";
+export { default as filterDataForMandataires } from "./common/filterData";

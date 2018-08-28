@@ -78,6 +78,7 @@ const ButtonEditMandataire = connect(
 const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] }) => (
   <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
     <div style={{ flex: "0 0 50%" }}>
+      <h3>Mes coordonnées</h3>
       <Fiche {...currentMandataire} />
       <br />
       <br />

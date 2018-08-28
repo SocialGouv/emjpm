@@ -1,6 +1,7 @@
 import { hide } from "redux-modal";
 
 import apiFetch from "../../communComponents/Api";
+import { mandatairesUpdated } from "../../tiComponents/actions/mandataire";
 
 export const MESURE_CREATE = "MESURE_CREATE";
 export const MESURE_CREATED = "MESURE_CREATED";
@@ -8,6 +9,7 @@ export const MESURE_CREATED_ERROR = "MESURE_CREATED_ERROR";
 export const MESURE_UPDATED = "MESURE_UPDATED";
 export const MESURE_CLOSED = "MESURE_CLOSED";
 export const MESURE_REACTIVATED = "MESURE_REACTIVATED";
+export const MESURE_ATTENTE = "MESURE_ATTENTE";
 
 // ------------ API STUFF
 
@@ -25,7 +27,15 @@ const closeMesureApi = data =>
       extinction: data.date
     })
   });
-
+const attenteMesureApi = data => {
+  return apiFetch(`/mandataires/1/mesures/${data.id}`, {
+    method: "PUT",
+    body: JSON.stringify({
+      ...data,
+      status: "Mesure en cours"
+    })
+  });
+};
 const reactivateMesureApi = data =>
   apiFetch(`/mandataires/1/mesures/${data.id}`, {
     method: "PUT",
@@ -50,6 +60,14 @@ const createMesureApi = data =>
     })
   });
 
+const fetchUpdateMesureAttente = data =>
+  apiFetch("/mandataires/1/mesure-en-attente", {
+    method: "PUT",
+    body: JSON.stringify({
+      ...data
+    })
+  });
+
 // -------- ACTIONS CREATORS
 
 export const updateMesure = data => dispatch =>
@@ -63,6 +81,20 @@ export const updateMesure = data => dispatch =>
       alert("Impossible de soumettre les données");
       throw e;
     });
+
+export const updateMesureAttente = data => dispatch => {
+  attenteMesureApi(data)
+    .then(json => {
+      dispatch(hide("ValiderMesureEnAttente"));
+      dispatch(mesureAttente(json));
+    })
+    .then(() => fetchUpdateMesureAttente(data))
+    .catch(e => {
+      console.log(e);
+      alert("Impossible de soumettre les données");
+      throw e;
+    });
+};
 
 export const closeMesure = data => dispatch =>
   closeMesureApi(data)
@@ -117,6 +149,10 @@ export const mesureCreatedError = message => ({
 
 export const mesureUpdated = data => ({
   type: MESURE_UPDATED,
+  data
+});
+export const mesureAttente = data => ({
+  type: MESURE_ATTENTE,
   data
 });
 
