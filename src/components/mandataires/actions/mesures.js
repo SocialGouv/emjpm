@@ -9,7 +9,6 @@ export const MESURE_CREATED_ERROR = "MESURE_CREATED_ERROR";
 export const MESURE_UPDATED = "MESURE_UPDATED";
 export const MESURE_CLOSED = "MESURE_CLOSED";
 export const MESURE_REACTIVATED = "MESURE_REACTIVATED";
-export const MESURE_ATTENTE = "MESURE_ATTENTE";
 
 // ------------ API STUFF
 
@@ -86,7 +85,7 @@ export const updateMesureAttente = data => dispatch => {
   attenteMesureApi(data)
     .then(json => {
       dispatch(hide("ValiderMesureEnAttente"));
-      dispatch(mesureAttente(json));
+      dispatch(mesureUpdated(json));
     })
     .then(() => fetchUpdateMesureAttente(data))
     .catch(e => {
@@ -149,10 +148,6 @@ export const mesureCreatedError = message => ({
 
 export const mesureUpdated = data => ({
   type: MESURE_UPDATED,
-  data
-});
-export const mesureAttente = data => ({
-  type: MESURE_ATTENTE,
   data
 });
 

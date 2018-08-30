@@ -1,13 +1,23 @@
 import styled from "styled-components";
 
+//Redux
+import { connect } from "react-redux";
+
 import SearchButton from "../communComponents/SearchButton";
 import FormInput from "../serviceComponents/FormInput";
+import { zoomCodePostal } from "./actions/map";
 
 const Presentation = styled.div`
   background: white;
   padding: 5px;
   width: 350px;
 `;
+
+function mapDispatchToProps(dispatch) {
+  return {
+    zoomCodePostal: codePostal => dispatch(zoomCodePostal(codePostal))
+  };
+}
 
 const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {
   let input;
@@ -37,4 +47,7 @@ const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {
   );
 };
 
-export default FilterMesuresMap;
+export default connect(
+  null,
+  mapDispatchToProps
+)(FilterMesuresMap);

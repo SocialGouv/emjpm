@@ -35,6 +35,7 @@ const mapStateToProps = state => ({
 
 const FiltersMandataireTableMap = ({
   filtersMesure,
+  input,
   isMandataire,
   data,
   datamesure,
@@ -58,48 +59,25 @@ const FiltersMandataireTableMap = ({
           }
         />Tous
       </Radio>
-      <Radio htmlFor="customRadioInline1">
-        <input
-          data-cy="tab-individuel"
-          type="radio"
-          id="customRadioInline1"
-          name="customRadioInline"
-          value="Individuel"
-          onClick={e =>
-            isMandataire
-              ? filtersMesure(e.target.value, data, isMandataire)
-              : filtersMesure(e.target.value, datamesure, isMandataire)
-          }
-        />Individuels
-      </Radio>
-      <Radio htmlFor="customRadioInline2">
-        <input
-          data-cy="tab-prepose"
-          type="radio"
-          id="customRadioInline2"
-          name="customRadioInline"
-          value="Prepose"
-          onClick={e =>
-            isMandataire
-              ? filtersMesure(e.target.value, data, isMandataire)
-              : filtersMesure(e.target.value, datamesure, isMandataire)
-          }
-        />Préposés
-      </Radio>
-      <Radio htmlFor="customRadioInline3">
-        <input
-          data-cy="tab-service"
-          type="radio"
-          id="customRadioInline3"
-          name="customRadioInline"
-          value="Service"
-          onClick={e =>
-            isMandataire
-              ? filtersMesure(e.target.value, data, isMandataire)
-              : filtersMesure(e.target.value, datamesure, isMandataire)
-          }
-        />Services
-      </Radio>
+
+      {input &&
+        input.map &&
+        input.map(value => (
+          <Radio htmlFor={`customRadioInline1_${value}`}>
+            <input
+              data-cy="tab-individuel"
+              type="radio"
+              id={`customRadioInline1_${value}`}
+              name="customRadioInline"
+              value={value}
+              onClick={e =>
+                isMandataire
+                  ? filtersMesure(e.target.value, data, isMandataire)
+                  : filtersMesure(e.target.value, datamesure, isMandataire)
+              }
+            />Individuels
+          </Radio>
+        ))}
     </div>
   );
 };
