@@ -18,14 +18,29 @@ import mapReducer from "./reducers/map";
 import { FicheMandataireModal, ModalMesureValidation, ModalMesureReservation } from "./modals";
 import TableMesures from "../mandataires/TableMesures";
 import apiFetch from "../communComponents/Api";
+// import TiMap from "./TiMap";
 
 Modal.setAppElement("#__next");
 
-const OpenStreeMap = dynamic({
+// const OpenStreeMap = dynamic({
+//   modules: props => ({
+//     MapTi: import("./MapTi")
+//   }),
+//   render: (props, { MapTi }) => <TiMap {...props} />
+// });
+
+const OpenStreeMapProps = dynamic({
   modules: props => ({
-    MapTi: import("./MapTi")
+    DisplayMap: import("./DisplayMap")
   }),
-  render: (props, { MapTi }) => <MapTi {...props} />
+  render: (props, { DisplayMap }) => <DisplayMap {...props} />
+});
+
+const OpenStreeMapTry = dynamic({
+  modules: props => ({
+    withMapTi: import("./withMapTi")
+  }),
+  render: (props, { withMapTi }) => withMapTi(MapTi, `/mandataires/filters`)
 });
 
 class Ti extends React.Component {
@@ -44,13 +59,18 @@ class Ti extends React.Component {
       {
         text: "Majeurs Protégés",
         icon: <Users />,
-        content: <OpenStreeMap fetch={`/mesures/filters`} />
+        content: <OpenStreeMapProps fetch={`/mesures/filters`} />
       },
       {
         text: "Mandataires",
         icon: <Users />,
-        content: <OpenStreeMap fetch={`/mandataires/filters`} isMandataire={true} />
+        content: <OpenStreeMapProps fetch={`/mandataires/filters`} isMandataire={true} />
       },
+      // {
+      //   text: "TryTI",
+      //   icon: <Users />,
+      //   content: <OpenStreeMapTry isMandataire={true} />
+      // },
       {
         text: "Mesures attribuées",
         icon: <Archive />,
