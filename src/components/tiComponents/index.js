@@ -18,30 +18,61 @@ import mapReducer from "./reducers/map";
 import { FicheMandataireModal, ModalMesureValidation, ModalMesureReservation } from "./modals";
 import TableMesures from "../mandataires/TableMesures";
 import apiFetch from "../communComponents/Api";
-// import TiMap from "./TiMap";
 
 Modal.setAppElement("#__next");
 
-// const OpenStreeMap = dynamic({
+const OpenStreeMap = dynamic({
+  modules: props => ({
+    MapTi: import("./MapTi")
+  }),
+  render: (props, { MapTi }) => <MapTi {...props} />
+});
+
+// const OpenStreeMapProps = dynamic({
 //   modules: props => ({
-//     MapTi: import("./MapTi")
+//     DisplayMap: import("./DisplayMap")
 //   }),
-//   render: (props, { MapTi }) => <TiMap {...props} />
+//   render: (props, { DisplayMap }) => (
+//     <DisplayMap
+//       {...props}
+//       render={({
+//         handleMoveend,
+//         center,
+//         zoom,
+//         isMandataire,
+//         dataShow,
+//         circleSelected,
+//         mesureCount,
+//         filteredData,
+//         unselectMarker,
+//         selectMarker,
+//         innerRef
+//       }) => (
+//         <MapTi
+//           {...props}
+//           handleMoveend={handleMoveend}
+//           center={center}
+//           zoom={zoom}
+//           isMandataire={isMandataire}
+//           dataShow={dataShow}
+//           circleSelected={circleSelected}
+//           mesureCount={mesureCount}
+//           filteredData={filteredData}
+//           unselectMarker={unselectMarker}
+//           selectMarker={selectMarker}
+//           innerRef={innerRef}
+//         />
+//       )}
+//     />
+//   )
 // });
-
-const OpenStreeMapProps = dynamic({
-  modules: props => ({
-    DisplayMap: import("./DisplayMap")
-  }),
-  render: (props, { DisplayMap }) => <DisplayMap {...props} />
-});
-
-const OpenStreeMapTry = dynamic({
-  modules: props => ({
-    withMapTi: import("./withMapTi")
-  }),
-  render: (props, { withMapTi }) => withMapTi(MapTi, `/mandataires/filters`)
-});
+//
+// const OpenStreeMapTry = dynamic({
+//   modules: props => ({
+//     withMapTi: import("./withMapTi")
+//   }),
+//   render: (props, { withMapTi }) => withMapTi(MapTi, `/mandataires/filters`)
+// });
 
 class Ti extends React.Component {
   componentDidMount() {
@@ -59,12 +90,12 @@ class Ti extends React.Component {
       {
         text: "Majeurs Protégés",
         icon: <Users />,
-        content: <OpenStreeMapProps fetch={`/mesures/filters`} />
+        content: <OpenStreeMap fetch={`/mesures/filters`} />
       },
       {
         text: "Mandataires",
         icon: <Users />,
-        content: <OpenStreeMapProps fetch={`/mandataires/filters`} isMandataire={true} />
+        content: <OpenStreeMap fetch={`/mandataires/filters`} isMandataire={true} />
       },
       // {
       //   text: "TryTI",

@@ -16,6 +16,7 @@ const Attribution = () => (
 
 class TiMap extends React.Component {
   render() {
+      console.log(1234)
     return (
       <React.Fragment>
         <div style={{ display: "flex" }}>
@@ -40,8 +41,8 @@ class TiMap extends React.Component {
               center={this.props.center}
               zoom={this.props.zoom}
               style={{ width: "100%", height: "68vh", padding: 0 }}
-              ref={this.props.mapRef}
-              onMoveend={() => this.props.handleMoveend(this.props.mapRef)}
+              ref={this.props.forwardedRef}
+              onMoveend={() => this.props.handleMoveend(this.props.forwardedRef)}
             >
               <Attribution />
               {this.props.dataShow &&

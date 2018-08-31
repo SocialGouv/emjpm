@@ -1,26 +1,14 @@
 import React, { createRef } from "react";
-import styled from "styled-components";
-import { Map, TileLayer, CircleMarker } from "react-leaflet";
 
 //Redux
 import { connect } from "react-redux";
 
 import apiFetch from "../communComponents/Api";
 import getCenter from "../communComponents/getCenter";
-import FilterMesuresMap from "./FilterMesuresMap";
 import { filterDataForMandataires } from "../index";
-import FiltersMandataireTableMap from "./FilterMandataires";
-import DisplayMandataires from "./DisplayMandataires";
-import FilterByCodePostal from "./FilterByCodePostal";
 
-const Attribution = () => (
-  <TileLayer
-    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-    url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-  />
-);
 
-class MapTi extends React.Component {
+class DisplayMap extends React.Component {
   state = {
     filterData: [],
     zoom: 7,
@@ -28,10 +16,10 @@ class MapTi extends React.Component {
     circleSelected: ""
   };
 
-  mapRef = createRef();
+    mapRef = createRef();
 
   fetchData = () => {
-    const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
+    const mapRefGetBound = mapRef.current.leafletElement.getBounds();
     if (!this.state.loading) {
       this.setState({ loading: true }, () =>
         apiFetch(`${this.props.fetch}`, {
@@ -102,60 +90,19 @@ class MapTi extends React.Component {
     const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
     const dataShow = isMandataire ? dataFilters : datamesureFilters;
     const mesureCount = filteredData.length;
-    return (
-      <React.Fragment>
-        <div style={{ display: "flex" }}>
-          <FilterByCodePostal
-            render={({ value, updateValue }) => {
-              return <FilterMesuresMap value={value} updateValue={updateValue} />;
-            }}
-            style={{ zIndex: "1000", flex: "1" }}
-          />
-          <FiltersMandataireTableMap
-            isMandataire={isMandataire}
-            style={{ zIndex: "9999", flex: "1" }}
-          />
-        </div>
-        <div
-          style={{
-            display: "flex"
-          }}
-        >
-          <div style={{ flex: "1" }}>
-            <Map
-              center={center}
-              zoom={this.state.zoom}
-              style={{ width: "100%", height: "68vh", padding: 0 }}
-              ref={this.mapRef}
-              onMoveend={() => this.handleMoveend(this.mapRef)}
-            >
-              <Attribution />
-              {dataShow &&
-                dataShow.map &&
-                dataShow.map((marker, i) => {
-                  const isSelected = isMandataire
-                    ? this.state.circleSelected.id === marker.id
-                    : this.state.circleSelected.code_postal === marker.code_postal;
-                  const onClick = isSelected ? this.unselectMarker : this.selectMarker;
-                  const markerColor = isSelected ? "blue" : "red";
-                  return (
-                    <CircleMarker
-                      key={marker.id + "-" + i}
-                      center={[marker.latitude, marker.longitude]}
-                      color={markerColor}
-                      radius={10}
-                      onClick={() => onClick(marker)}
-                    />
-                  );
-                })}
-            </Map>
-          </div>
-          <div style={{ flex: "1" }}>
-            <DisplayMandataires mesureCount={mesureCount} filteredData={filteredData} />
-          </div>
-        </div>
-      </React.Fragment>
-    );
+
+    return this.props.render({
+      handleMoveend: this.handleMoveend,
+      center: center,
+      zoom: this.state.zoom,
+      isMandataire: isMandataire,
+      dataShow: dataShow,
+      circleSelected: this.state.circleSelected,
+      mesureCount: mesureCount,
+      filteredData: filteredData,
+      unselectMarker: this.unselectMarker,
+      selectMarker: this.selectMarker,
+    });
   }
 }
 
@@ -168,4 +115,4 @@ const mapStateToProps = state => ({
   coordinates: state.map.coordinates
 });
 
-export default connect(mapStateToProps)(MapTi);
+export default connect(mapStateToProps)(DisplayMap);

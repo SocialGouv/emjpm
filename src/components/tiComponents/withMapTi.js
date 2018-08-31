@@ -5,7 +5,7 @@ import getCenter from "../communComponents/getCenter";
 import { filterDataForMandataires } from "../index";
 
 function withMapTi(WrappedComponent, fetch) {
-  return class extends React.Component {
+  class TryTi extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -129,11 +129,15 @@ function withMapTi(WrappedComponent, fetch) {
           coordinates={this.state.coordinates}
           circleSelected={this.state.circleSelected}
           value={this.state.value}
+          ref={this.mapRef}
           {...this.props}
         />
       );
     }
-  };
+  }
+  return React.forwardRef((props, ref) => {
+    return <TryTi {...props} forwardedRef={ref} />;
+  });
 }
 
 const mapStateToProps = state => ({

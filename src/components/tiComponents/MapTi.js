@@ -12,7 +12,6 @@ import getCenter from "../communComponents/getCenter";
 import { filterDataForMandataires } from "../index";
 import FiltersMandataireTableMap from "./FilterMandataires";
 
-
 const Attribution = () => (
   <TileLayer
     attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
@@ -20,72 +19,154 @@ const Attribution = () => (
   />
 );
 
-const MapTi = (
-  innerRef,
-  center,
-  zoom,
-  isMandataire,
-  dataShow,
-  circleSelected,
-  mesureCount,
-  filteredData,
-  unselectMarker,
-  selectMarker
-) => (
-  <React.Fragment>
-    <div style={{ display: "flex" }}>
-      <FilterMesuresMap
-        zoomCodePostal={this.zoomCodePostal}
-        updateValue={this.updateValue}
-        value={this.state.value}
-        style={{ zIndex: "1000", flex: "1" }}
-      />
-      <FilterByCodePostal
-        render={({ value, updateValue }) => {
-          return <FilterMesuresMap value={value} updateValue={updateValue} />;
-        }}
-        style={{ zIndex: "1000", flex: "1" }}
-      />
-    </div>
-    <div
-      style={{
-        display: "flex"
-      }}
-    >
-      <div style={{ flex: "1" }}>
-        <Map
-          center={center}
-          zoom={zoom}
-          style={{ width: "100%", height: "68vh", padding: 0 }}
-          ref={innerRef}
-          onMoveend={() => this.handleMoveend(this.mapRef)}
-        >
-          <Attribution />
-          {dataShow &&
-            dataShow.map &&
-            dataShow.map((marker, i) => {
-              const isSelected = isMandataire
-                ? circleSelected.id === marker.id
-                : circleSelected.code_postal === marker.code_postal;
-              const onClick = isSelected ? unselectMarker : selectMarker;
-              const markerColor = isSelected ? "blue" : "red";
-              return (
-                <CircleMarker
-                  key={marker.id + "-" + i}
-                  center={[marker.latitude, marker.longitude]}
-                  color={markerColor}
-                  radius={10}
-                  onClick={() => onClick(marker)}
-                />
-              );
-            })}
-        </Map>
-      </div>
-      <div style={{ flex: "1" }}>
-        <DisplayMandataires mesureCount={mesureCount} filteredData={filteredData} />
-      </div>
-    </div>
-  </React.Fragment>
-);
+class MapTi extends React.Component {
+  state = {
+    filterData: [],
+    zoom: 7,
+    loading: false,
+    circleSelected: ""
+  };
 
-export default MapTi;
+  mapRef = createRef();
+
+  fetchData = () => {
+    const mapRefGetBound = this.mapRef.current.leafletElement.getBounds();
+    if (!this.state.loading) {
+      this.setState({ loading: true }, () =>
+        apiFetch(`${this.props.fetch}`, {
+          method: "POST",
+          body: JSON.stringify({
+            latNorthEast: mapRefGetBound._northEast.lat,
+            latSouthWest: mapRefGetBound._southWest.lat,
+            longNorthEast: mapRefGetBound._northEast.lng,
+            longSouthWest: mapRefGetBound._southWest.lng
+          })
+        })
+          .then(data => {
+            this.setState({
+              filterData: data,
+              loading: false
+            });
+          })
+          .catch(console.log)
+      );
+    }
+  };
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // hack to force reload when some redux state change
+    if (prevProps.data !== this.props.data) {
+      this.fetchData();
+    }
+  }
+
+  handleMoveend = () => {
+    this.fetchData();
+  };
+
+  unselectMarker = () => {
+    this.setState(
+      {
+        circleSelected: ""
+      },
+      () => this.handleMoveend()
+    );
+  };
+
+  selectMarker = data => {
+    const selectedMandataires = this.props.isMandataire
+      ? [data]
+      : data.mandataire_ids
+          .map(mandataireId => this.props.data.find(mandataire => mandataire.id === mandataireId))
+          .filter(Boolean)
+          .concat(this.props.services);
+    this.setState({
+      filterData: selectedMandataires,
+      circleSelected: data
+    });
+  };
+
+  render() {
+    const { dataFilters, datamesureFilters, isMandataire, filters, coordinates } = this.props;
+    const center = getCenter(this.state, coordinates);
+    const filterMesure = {
+      content: "type",
+      filter: filters,
+      connector: ""
+    };
+    const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
+    const dataShow = isMandataire ? dataFilters : datamesureFilters;
+    const mesureCount = filteredData.length;
+
+    return (
+      <React.Fragment>
+        <div style={{ display: "flex" }}>
+          <FilterByCodePostal
+            render={({ value, updateValue }) => {
+              return <FilterMesuresMap value={value} updateValue={updateValue} />;
+            }}
+            style={{ zIndex: "1000", flex: "1" }}
+          />
+          <FiltersMandataireTableMap
+            isMandataire={isMandataire}
+            style={{ zIndex: "9999", flex: "1" }}
+          />
+        </div>
+        <div
+          style={{
+            display: "flex"
+          }}
+        >
+          <div style={{ flex: "1" }}>
+            <Map
+              center={center}
+              zoom={this.state.zoom}
+              style={{ width: "100%", height: "68vh", padding: 0 }}
+              ref={this.mapRef}
+              onMoveend={() => this.handleMoveend(this.mapRef)}
+              onZoomend={() => this.handleMoveend(this.mapRef)}
+            >
+              <Attribution />
+              {dataShow &&
+                dataShow.map &&
+                dataShow.map((marker, i) => {
+                  const isSelected = isMandataire
+                    ? this.state.circleSelected.id === marker.id
+                    : this.state.circleSelected.code_postal === marker.code_postal;
+                  const onClick = isSelected ? this.unselectMarker : this.selectMarker;
+                  const markerColor = isSelected ? "blue" : "red";
+                  return (
+                    <CircleMarker
+                      key={marker.id + "-" + i}
+                      center={[marker.latitude, marker.longitude]}
+                      color={markerColor}
+                      radius={10}
+                      onClick={() => onClick(marker)}
+                    />
+                  );
+                })}
+            </Map>
+          </div>
+          <div style={{ flex: "1" }}>
+            <DisplayMandataires mesureCount={mesureCount} filteredData={filteredData} />
+          </div>
+        </div>
+      </React.Fragment>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  dataFilters: state.mandataire.dataFilters,
+  datamesureFilters: state.mandataire.datamesureFilters,
+  services: state.mandataire.services,
+  filters: state.mandataire.filters,
+  data: state.mandataire.data,
+  coordinates: state.map.coordinates
+});
+
+export default connect(mapStateToProps)(MapTi);
