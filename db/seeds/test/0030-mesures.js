@@ -40,6 +40,21 @@ exports.seed = function(knex, Promise) {
     .then(function() {
       // Inserts seed entries one by one in series
       return knex("mesures").insert({
+        etablissement: "UDAHF",
+        latitude: 50.5333,
+        longitude: 2.6333,
+        mandataire_id: 1,
+        created_at: "2010-10-05",
+        annee: "2010-10-05",
+        type: "preposes",
+        date_ouverture: "2010-10-05",
+        civilite: "F",
+        status: "Mesure en attente"
+      });
+    })
+    .then(function() {
+      // Inserts seed entries one by one in series
+      return knex("mesures").insert({
         code_postal: "93000",
         ville: "St Denis",
         etablissement: "CAROUF",
