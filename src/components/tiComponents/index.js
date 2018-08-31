@@ -28,52 +28,6 @@ const OpenStreeMap = dynamic({
   render: (props, { MapTi }) => <MapTi {...props} />
 });
 
-// const OpenStreeMapProps = dynamic({
-//   modules: props => ({
-//     DisplayMap: import("./DisplayMap")
-//   }),
-//   render: (props, { DisplayMap }) => (
-//     <DisplayMap
-//       {...props}
-//       render={({
-//         handleMoveend,
-//         center,
-//         zoom,
-//         isMandataire,
-//         dataShow,
-//         circleSelected,
-//         mesureCount,
-//         filteredData,
-//         unselectMarker,
-//         selectMarker,
-//         innerRef
-//       }) => (
-//         <MapTi
-//           {...props}
-//           handleMoveend={handleMoveend}
-//           center={center}
-//           zoom={zoom}
-//           isMandataire={isMandataire}
-//           dataShow={dataShow}
-//           circleSelected={circleSelected}
-//           mesureCount={mesureCount}
-//           filteredData={filteredData}
-//           unselectMarker={unselectMarker}
-//           selectMarker={selectMarker}
-//           innerRef={innerRef}
-//         />
-//       )}
-//     />
-//   )
-// });
-//
-// const OpenStreeMapTry = dynamic({
-//   modules: props => ({
-//     withMapTi: import("./withMapTi")
-//   }),
-//   render: (props, { withMapTi }) => withMapTi(MapTi, `/mandataires/filters`)
-// });
-
 class Ti extends React.Component {
   componentDidMount() {
     if (this.props.onMount) {
@@ -97,11 +51,6 @@ class Ti extends React.Component {
         icon: <Users />,
         content: <OpenStreeMap fetch={`/mandataires/filters`} isMandataire={true} />
       },
-      // {
-      //   text: "TryTI",
-      //   icon: <Users />,
-      //   content: <OpenStreeMapTry isMandataire={true} />
-      // },
       {
         text: "Mesures attribuées",
         icon: <Archive />,

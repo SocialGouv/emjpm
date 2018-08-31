@@ -102,6 +102,7 @@ class MapTi extends React.Component {
     const dataShow = isMandataire ? dataFilters : datamesureFilters;
     const mesureCount = filteredData.length;
 
+    const input = ["Individuel", "Prepose", "Service"];
     return (
       <React.Fragment>
         <div style={{ display: "flex" }}>
@@ -112,6 +113,7 @@ class MapTi extends React.Component {
             style={{ zIndex: "1000", flex: "1" }}
           />
           <FiltersMandataireTableMap
+            input={input}
             isMandataire={isMandataire}
             style={{ zIndex: "9999", flex: "1" }}
           />
