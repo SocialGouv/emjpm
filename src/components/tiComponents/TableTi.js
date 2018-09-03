@@ -42,7 +42,9 @@ const CellMandataireRedux = connect(
   dispatch => bindActionCreators({ show, openFicheMandataireModal }, dispatch)
 )(({ row, show, children, openFicheMandataireModal }) => (
   <div
+    title="Ouvrir la fiche du mandataire"
     data-cy="button-attente-mesure"
+    style={{ cursor: "pointer" }}
     onClick={() => {
       openFicheMandataireModal(row.original);
       show("FicheMandataireModal", { currentMandataire: row.original });
@@ -57,6 +59,7 @@ const CellMesureReservationRedux = connect(
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ row, show, children }) => (
   <div
+    title="Attribuer une nouvelle mesure"
     data-cy="button-reservation-mesure"
     onClick={() => {
       show("ModalMesureReservation", { reservationMandataire: row.original });
@@ -134,7 +137,6 @@ const COLUMNS = [
   {
     Header: "Identité",
     id: "etablissement",
-    width: 130,
     accessor: d => d.etablissement,
     Cell: row => (
       <Cell row={row} style={{ verticalAlign: "middle" }}>

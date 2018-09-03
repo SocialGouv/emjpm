@@ -67,12 +67,16 @@ const ModalMesureReservation = ({
         {reservationMandataire.etablissement} recevra une notification par email.Une fois le mandat
         reçu le mandataire pourra valider cette attribution de mesure.
         <br />
+        <br />
         <Form
+          style={{ margin: 0, padding: 0 }}
           schema={schema}
           uiSchema={uiSchema}
           formData={formData}
           onSubmit={openValidationModal}
         >
+          <br />
+          <br />
           <button type="submit" className="btn btn-success" data-cy="button-submit-mesure">
             Valider
           </button>
