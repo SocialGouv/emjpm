@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 
 import SearchButton from "../communComponents/SearchButton";
-import FormInput from "../serviceComponents/FormInput";
+import FormInput from "../common/FormInput";
 import { zoomCodePostal } from "./actions/map";
 
 const Presentation = styled.div`
@@ -19,8 +19,13 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {
+const FilterMesuresMap = ({ zoomCodePostal }) => {
   let input;
+  const onKeyDown = e => {
+    if (e.keyCode === 13) {
+      zoomCodePostal(input.value);
+    }
+  };
   return (
     <Presentation>
       <div className="form-inline">
@@ -31,8 +36,8 @@ const FilterMesuresMap = ({ zoomCodePostal, updateValue, value }) => {
           size="200"
           id="commune"
           name="commune"
-          onChange={e => updateValue(e.target.value)}
-          placeholder={value || "Code Postal"}
+          onKeyDown={onKeyDown}
+          placeholder={"Code Postal"}
         />
         <SearchButton
           data-cy="tab-recherche"
