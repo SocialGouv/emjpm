@@ -22,7 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "@wessberg/color": "0.0.2",
-    "@zeit/next-css": "^0.1.4",
+    "@zeit/next-css": "^0.2.0",
     "bootstrap": "^4.0.0",
     "cors": "^2.8.4",
     "date-fns": "^1.29.0",
