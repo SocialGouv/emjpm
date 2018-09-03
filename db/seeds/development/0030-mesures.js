@@ -93,7 +93,7 @@ exports.seed = function(knex, Promise) {
         etablissement: "UDAHF",
         latitude: 48.862725,
         longitude: 2.287592,
-        mandataire_id: 2,
+        mandataire_id: 3,
         created_at: "2010-10-05",
         annee: "2010-10-05",
         type: "Tutelle",
