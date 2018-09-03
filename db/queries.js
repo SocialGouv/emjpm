@@ -235,30 +235,6 @@ function getAllMesuresByPopUp(ti_id, type) {
     );
 }
 
-function getAllMesuresByMandatairesForMaps(mandataireID) {
-  return knex("mesures")
-    .select(
-      knex.raw(
-        "COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee ||'')"
-      ),
-      "mesures.code_postal",
-      "geolocalisation_code_postal.latitude",
-      "geolocalisation_code_postal.longitude"
-    )
-    .innerJoin(
-      "geolocalisation_code_postal",
-      "mesures.code_postal",
-      "geolocalisation_code_postal.code_postal"
-    )
-    .where({
-      mandataire_id: parseInt(mandataireID),
-      status: "Mesure en cours"
-    })
-    .groupByRaw(
-      "mesures.code_postal,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
-    );
-}
-
 function getAllMesuresByPopUpForMandataire(ti_id) {
   return knex
     .from("mesures")
@@ -631,7 +607,6 @@ module.exports = {
   deleteMandataireTis,
   getAllServicesByTis,
   getAllMesuresByPopUpForMandataire,
-  getAllMesuresByMandatairesForMaps,
   getMandataires,
   updateMandataireMailSent,
   getAllMesuresByTis,
