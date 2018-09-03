@@ -1,6 +1,6 @@
 import Modal from "react-modal";
 
-import ExitButton from "../../communComponents/ExitButton";
+import ExitButton from "./ExitButton";
 
 const ModalLayout = ({ handleHide, show, children, className = "ModalMesureUpdate" }) => (
   <Modal

@@ -11,6 +11,7 @@ const Attribution = () => (
   />
 );
 
+// todo: better display
 const MesureMarker = ({ id, latitude, longitude, array_agg }) => (
   <Marker key={id} position={[latitude, longitude]}>
     <Popup>

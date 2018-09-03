@@ -1,16 +1,15 @@
 import React, { createRef } from "react";
-import styled from "styled-components";
 import { Map, TileLayer, CircleMarker } from "react-leaflet";
 
 //Redux
 import { connect } from "react-redux";
 
+import FilterMesuresMap from "./FilterMesuresMap";
+import DisplayMandataires from "./DisplayMandataires";
 import apiFetch from "../communComponents/Api";
 import getCenter from "../communComponents/getCenter";
-import FilterMesuresMap from "./FilterMesuresMap";
 import { filterDataForMandataires } from "../index";
-import FiltersMandataireTableMap from "./FilterMandataires";
-import DisplayMandataires from "./DisplayMandataires";
+import FilterMandataires from "./FilterMandataires";
 
 const Attribution = () => (
   <TileLayer
@@ -23,12 +22,8 @@ class MapTi extends React.Component {
   state = {
     filterData: [],
     zoom: 7,
-    center: "",
     loading: false,
-    coordinates: [2, 51.2],
-    showMandataireOfOneMesure: "",
-    circleSelected: "",
-    value: ""
+    circleSelected: ""
   };
 
   mapRef = createRef();
@@ -72,24 +67,6 @@ class MapTi extends React.Component {
     this.fetchData();
   };
 
-  zoomCodePostal = codePostal => {
-    if (!codePostal || !codePostal.trim()) {
-      return Promise.resolve(null);
-    }
-    apiFetch("/mandataires/PosteCode", {
-      method: "POST",
-      body: JSON.stringify({
-        codePoste: codePostal
-      })
-    })
-      .then(mesures => {
-        this.setState({ coordinates: [mesures.longitude, mesures.latitude] });
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  };
-
   unselectMarker = () => {
     this.setState(
       {
@@ -112,36 +89,22 @@ class MapTi extends React.Component {
     });
   };
 
-  updateValue = value => {
-    this.setState({
-      value
-    });
-  };
-
   render() {
-    const { dataFilters, datamesureFilters, isMandataire, filters } = this.props;
-    const center = getCenter(this.state, this.state.coordinates);
+    const { dataFilters, datamesureFilters, isMandataire, filters, coordinates } = this.props;
+    const center = getCenter(this.state, coordinates);
     const filterMesure = {
       content: "type",
       filter: filters,
       connector: ""
     };
     const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
-    const dataShow = isMandataire ? dataFilters : datamesureFilters;
+    const markers = isMandataire ? dataFilters : datamesureFilters;
     const mesureCount = filteredData.length;
     return (
       <React.Fragment>
         <div style={{ display: "flex" }}>
-          <FilterMesuresMap
-            zoomCodePostal={this.zoomCodePostal}
-            updateValue={this.updateValue}
-            value={this.state.value}
-            style={{ zIndex: "1000", flex: "1" }}
-          />
-          <FiltersMandataireTableMap
-            isMandataire={isMandataire}
-            style={{ zIndex: "9999", flex: "1" }}
-          />
+          <FilterMesuresMap />
+          <FilterMandataires isMandataire={isMandataire} />
         </div>
         <div
           style={{
@@ -155,11 +118,12 @@ class MapTi extends React.Component {
               style={{ width: "100%", height: "68vh", padding: 0 }}
               ref={this.mapRef}
               onMoveend={() => this.handleMoveend(this.mapRef)}
+              onZoomend={() => this.handleMoveend(this.mapRef)}
             >
               <Attribution />
-              {dataShow &&
-                dataShow.map &&
-                dataShow.map((marker, i) => {
+              {markers &&
+                markers.map &&
+                markers.map((marker, i) => {
                   const isSelected = isMandataire
                     ? this.state.circleSelected.id === marker.id
                     : this.state.circleSelected.code_postal === marker.code_postal;
@@ -191,7 +155,8 @@ const mapStateToProps = state => ({
   datamesureFilters: state.mandataire.datamesureFilters,
   services: state.mandataire.services,
   filters: state.mandataire.filters,
-  data: state.mandataire.data
+  data: state.mandataire.data,
+  coordinates: state.map.coordinates
 });
 
 export default connect(mapStateToProps)(MapTi);

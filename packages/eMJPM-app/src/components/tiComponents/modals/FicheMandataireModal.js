@@ -1,7 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import Form from "react-jsonschema-form";
-import { PlusSquare } from "react-feather";
+import { PlusSquare, Trash } from "react-feather";
+import { format } from "date-fns";
 
 //Redux
 import { connect } from "react-redux";
@@ -9,10 +10,10 @@ import { connectModal, show, hide } from "redux-modal";
 import { bindActionCreators } from "redux";
 
 import { Button } from "../..";
-import Commentaire from "../Commentaire";
+import FetchCommentaires from "../FetchCommentaires";
 import Layout from "../../mandataires/modals/Layout";
 import apiFetch from "../../communComponents/Api";
-import FicheMandataireManda from "../../mandataires/Fiche";
+import FicheMandataire from "../../mandataires/Fiche";
 
 const TitleMandataire = styled.div`
   text-align: left;
@@ -23,15 +24,18 @@ const CellMesureReservationRedux = connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ show, mandataire }) => (
-  <td
+  <div
     data-cy="button-attente-mesure"
+    style={{ cursor: "pointer" }}
+    title="Attribuer une mesure"
     onClick={() => {
+      // TODO: move to actions
       hide("FicheMandataireModal");
       show("ModalMesureReservation", { reservationMandataire: mandataire });
     }}
   >
     <PlusSquare /> Attribuer une mesure
-  </td>
+  </div>
 ));
 
 // Commentaire View display
@@ -50,12 +54,17 @@ const schema = {
 };
 const formData = {};
 
+const Comment = styled.div`
+  border-bottom: 1px solid #c9d3df;
+  box-shadow: 0 10px 10px -10px #b7bcdf;
+  margin-bottom: 5px;
+  display: block;
+`;
+
 const CommentairesView = ({ onSubmit, commentaires, onDelete }) => (
   <div className="form-group" style={{ marginTop: "8px" }}>
     <label htmlFor="exampleFormControlTextarea1" style={{ marginLeft: "0px" }}>
-      <b>
-        Ajoutez vos notes (ces dernières seront uniquement accessibles aux utilisateurs de votre TI){" "}
-      </b>
+      <b>Ajoutez vos notes.</b>
     </label>
     <br />
     <Form
@@ -66,7 +75,11 @@ const CommentairesView = ({ onSubmit, commentaires, onDelete }) => (
       onSubmit={onSubmit}
     >
       <div style={{ textAlign: "left", paddingBottom: "10px" }}>
-        <label htmlFor="exampleFormControlTextarea1">Attention à la sensibilité des données.</label>
+        <label htmlFor="exampleFormControlTextarea1">
+          Attention à la sensibilité des données.
+          <br />
+          (ces dernières seront uniquement accessibles aux utilisateurs de votre TI){" "}
+        </label>
         <br />
         <Button data-cy="button-enregistrer-comment">Enregistrer</Button>
       </div>
@@ -77,17 +90,24 @@ const CommentairesView = ({ onSubmit, commentaires, onDelete }) => (
       {commentaires &&
         commentaires.map &&
         commentaires.map(comment => (
-          <div id={comment.id}>
-            <div style={{ backgroundColor: "#b5b5b5", fontSize: "0.8em" }}>
+          <Comment id={comment.id} key={comment.id}>
+            <div style={{ backgroundColor: "#eee", fontSize: "0.8em" }}>
+              Ajouté le :{" "}
+              {format(comment.created_at, "D MMMM YYYY à HH:mm", {
+                locale: require("date-fns/locale/fr")
+              })}
+              <Trash
+                size={16}
+                onClick={() => onDelete(comment)}
+                style={{ float: "right", cursor: "pointer" }}
+                title="supprimer le commentaire"
+              />
+            </div>
+            <div style={{ backgroundColor: "#eee", fontSize: "1em" }}>
               {comment.comment} <br />
             </div>
-            Ajouté le : {comment.created_at.slice(0, 10)}{" "}
-            <a type="submit" onClick={() => onDelete(comment)}>
-              {" "}
-              supprimer
-            </a>
             <br />
-          </div>
+          </Comment>
         ))}
     </div>
   </div>
@@ -103,95 +123,85 @@ class FicheMandataireModal extends React.Component {
       handleHide
     } = this.props;
     return (
-      <Layout show={show} handleHide={handleHide}>
-        <FicheMandataire
-          mandataire={currentMandataire}
-          currentEtablissementsForSelectedMandataire={currentEtablissementsForSelectedMandataire}
-          allTisForOneMandataire={allTisForOneMandataire}
-        />
+      <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
+        <div style={{ display: "flex", padding: "20px", boxSizing: "border-box" }}>
+          <div style={{ flex: "1 0 50%" }}>
+            <TitleMandataire>
+              {currentMandataire.etablissement} <br /> {currentMandataire.type.toUpperCase()} <br />{" "}
+              {currentMandataire.genre}
+            </TitleMandataire>
+
+            <FicheMandataire
+              email={currentMandataire.email}
+              telephone={currentMandataire.telephone}
+              telephone_portable={currentMandataire.telephone_portable}
+              adresse={currentMandataire.adresse}
+              code_postal={currentMandataire.code_postal}
+              ville={currentMandataire.ville}
+              dispo_max={currentMandataire.dispo_max}
+              secretariat={currentMandataire.secretariat}
+              nb_secretariat={currentMandataire.nb_secretariat}
+              displayTitle={"none"}
+            />
+
+            <div>
+              {currentEtablissementsForSelectedMandataire && (
+                <React.Fragment>
+                  {currentEtablissementsForSelectedMandataire.map(etablissement => (
+                    <div key={etablissement.nom}>
+                      {" "}
+                      <b>Etablissement </b> <br />
+                      {etablissement.nom}
+                    </div>
+                  ))}
+                  <br />
+                </React.Fragment>
+              )}
+            </div>
+
+            <div>
+              {allTisForOneMandataire && (
+                <React.Fragment>
+                  <b>Tribunaux d'instance </b> <br />
+                  {allTisForOneMandataire.map(ti => (
+                    <div key={ti.etablissement}>
+                      {ti.etablissement} <br />
+                    </div>
+                  ))}
+                </React.Fragment>
+              )}
+              <br />
+              <div>
+                <CellMesureReservationRedux mandataire={currentMandataire} />
+              </div>
+            </div>
+          </div>
+          <div style={{ flex: "1 0 50%" }}>
+            <FetchCommentaires
+              getCommentaires={() => apiFetch(`/mandataires/${currentMandataire.id}/commentaires`)}
+              onDelete={id =>
+                apiFetch(`/mandataires/${currentMandataire.id}/commentaires/${id}`, {
+                  method: "DELETE"
+                })
+              }
+              onSubmit={formData =>
+                apiFetch(`/mandataires/${currentMandataire.id}/commentaires`, {
+                  method: "POST",
+                  body: JSON.stringify({
+                    comment: formData.comment
+                  })
+                })
+              }
+              render={({ onSubmit, onDelete, data }) => (
+                <CommentairesView onSubmit={onSubmit} commentaires={data} onDelete={onDelete} />
+              )}
+            />
+          </div>
+        </div>
       </Layout>
     );
   }
 }
-export const FicheMandataire = ({
-  mandataire,
-  currentEtablissementsForSelectedMandataire,
-  allTisForOneMandataire
-}) => (
-  <div className="container">
-    <div className="row" style={{ marginLeft: "5px" }}>
-      <TitleMandataire>
-        {mandataire.etablissement} <br /> {mandataire.type.toUpperCase()} <br /> {mandataire.genre}
-      </TitleMandataire>
-      <br />
-      <FicheMandataireManda
-        email={mandataire.email}
-        telephone={mandataire.telephone}
-        telephone_portable={mandataire.telephone_portable}
-        adresse={mandataire.adresse}
-        code_postal={mandataire.code_postal}
-        ville={mandataire.ville}
-        dispo_max={mandataire.dispo_max}
-        secretariat={mandataire.secretariat}
-        nb_secretariat={mandataire.nb_secretariat}
-        displayTitle={"none"}
-      />
-      <br />
-      <div>
-        {currentEtablissementsForSelectedMandataire && (
-          <React.Fragment>
-            {currentEtablissementsForSelectedMandataire.map(etablissement => (
-              <div>
-                {" "}
-                <b>Etablissement </b> <br />
-                {etablissement.nom}
-              </div>
-            ))}
-            <br />
-          </React.Fragment>
-        )}
-      </div>
-      <br />
-      <div>
-        {allTisForOneMandataire && (
-          <React.Fragment>
-            <b>Tis </b> <br />
-            {allTisForOneMandataire.map(ti => (
-              <div>
-                {ti.etablissement} <br />
-              </div>
-            ))}
-          </React.Fragment>
-        )}
-        <br />
-        <div>
-          <CellMesureReservationRedux mandataire={mandataire} />
-        </div>
-      </div>
-      <br />
-      <br />
-      <Commentaire
-        getCommentaires={() => apiFetch(`/mandataires/${mandataire.id}/commentaires)`)}
-        onDelete={id =>
-          apiFetch(`/mandataires/${mandataire.id}/commentaires/${id})`, {
-            method: "DELETE"
-          })
-        }
-        onSubmit={formData =>
-          apiFetch(`/mandataires/${mandataire.id}/commentaires`, {
-            method: "POST",
-            body: JSON.stringify({
-              comment: formData.comment
-            })
-          })
-        }
-        render={({ onSubmit, onDelete, data }) => (
-          <CommentairesView onSubmit={onSubmit} commentaires={data} onDelete={onDelete} />
-        )}
-      />
-    </div>
-  </div>
-);
 
 const mapStateToProps = state => ({
   allTisForOneMandataire: state.mandataire.allTisForOneMandataire,
