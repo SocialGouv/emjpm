@@ -1,6 +1,6 @@
 import * as React from "react";
 
-class Commentaire extends React.Component {
+class FetchCommentaires extends React.Component {
   state = {
     data: []
   };
@@ -51,4 +51,4 @@ class Commentaire extends React.Component {
   }
 }
 
-export default Commentaire;
+export default FetchCommentaires;

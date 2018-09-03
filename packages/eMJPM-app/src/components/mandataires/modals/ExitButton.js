@@ -3,7 +3,9 @@ import styled from "styled-components";
 const ExitButton = styled.button`
   cursor: pointer;
   display: block;
-  margin: 5px;
+  position:absolute;
+  right:5px;
+  top:5px
   background-color: grey;
   color: white;
   font-weight: bold;

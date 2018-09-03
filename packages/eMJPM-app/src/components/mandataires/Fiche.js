@@ -28,10 +28,12 @@ const FicheMandataire = ({
         <Phone style={iconStyle} />
         {telephone}
       </div>
-      <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
-        <Smartphone style={iconStyle} />
-        {telephone_portable}
-      </div>
+      {telephone_portable && (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+          <Smartphone style={iconStyle} />
+          {telephone_portable}
+        </div>
+      )}
       {hasAdresse && (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
           <Home style={iconStyle} />
@@ -39,11 +41,11 @@ const FicheMandataire = ({
         </div>
       )}
       <br />
-      <table style={{ width: 400 }} cellPadding={5}>
+      <table style={{ width: 300 }} cellPadding={5}>
         <tbody style={{ fontSize: "1.1em" }}>
           <tr>
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
-              <b>Nombre de mesures souhaitées</b>
+              <b>Mesures souhaitées</b>
             </td>
             <td
               data-cy="fiche-manda-dispo-max"

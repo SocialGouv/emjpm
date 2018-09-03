@@ -33,10 +33,18 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
         services: action.services
       };
     case "UPDATE_FILTERS_MANDATAIRES":
+    case "UPDATE_FILTERS":
       return {
         ...state,
         filters: action.filters,
-        dataFilters: action.data
+        datamesureFilters: state.datamesure.filter(
+          datum =>
+            !action.filters ||
+            datum.types.map(t => t.toLowerCase()).includes(action.filters.toLowerCase())
+        ),
+        dataFilters: state.data.filter(
+          datum => !action.filters || datum.type.toLowerCase() === action.filters.toLowerCase()
+        )
       };
     case "MANDATAIRE_TIS":
       return {
@@ -52,8 +60,6 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       return {
         ...state
       };
-    case "UPDATE_FILTERS":
-      return { ...state, filters: action.filters, datamesureFilters: action.dataMesure };
     default:
       return state;
   }

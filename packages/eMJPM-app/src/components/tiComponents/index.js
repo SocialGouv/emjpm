@@ -14,6 +14,7 @@ import thunk from "redux-thunk";
 import { DummyTabs } from "..";
 import { tiMount } from "./actions/mandataire";
 import mandataireReducer from "./reducers/mandataire";
+import mapReducer from "./reducers/map";
 import { FicheMandataireModal, ModalMesureValidation, ModalMesureReservation } from "./modals";
 import TableMesures from "../mandataires/TableMesures";
 import apiFetch from "../communComponents/Api";
@@ -83,7 +84,8 @@ class Ti extends React.Component {
 
 const rootReducer = combineReducers({
   mandataire: mandataireReducer,
-  modal
+  modal,
+  map: mapReducer
 });
 
 const store = createStore(
