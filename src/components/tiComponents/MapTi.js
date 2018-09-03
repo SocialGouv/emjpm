@@ -10,7 +10,7 @@ import FilterByCodePostal from "./FilterByCodePostal";
 import apiFetch from "../communComponents/Api";
 import getCenter from "../communComponents/getCenter";
 import { filterDataForMandataires } from "../index";
-import FiltersMandataireTableMap from "./FilterMandataires";
+import FilterMandataires from "./FilterMandataires";
 
 const Attribution = () => (
   <TileLayer
@@ -99,10 +99,9 @@ class MapTi extends React.Component {
       connector: ""
     };
     const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
-    const dataShow = isMandataire ? dataFilters : datamesureFilters;
+    const markers = isMandataire ? dataFilters : datamesureFilters;
     const mesureCount = filteredData.length;
-
-    const input = ["Individuel", "Prepose", "Service"];
+    console.log("markers", isMandataire, markers);
     return (
       <React.Fragment>
         <div style={{ display: "flex" }}>
@@ -112,11 +111,7 @@ class MapTi extends React.Component {
             }}
             style={{ zIndex: "1000", flex: "1" }}
           />
-          <FiltersMandataireTableMap
-            input={input}
-            isMandataire={isMandataire}
-            style={{ zIndex: "9999", flex: "1" }}
-          />
+          <FilterMandataires isMandataire={isMandataire} />
         </div>
         <div
           style={{
@@ -133,9 +128,9 @@ class MapTi extends React.Component {
               onZoomend={() => this.handleMoveend(this.mapRef)}
             >
               <Attribution />
-              {dataShow &&
-                dataShow.map &&
-                dataShow.map((marker, i) => {
+              {markers &&
+                markers.map &&
+                markers.map((marker, i) => {
                   const isSelected = isMandataire
                     ? this.state.circleSelected.id === marker.id
                     : this.state.circleSelected.code_postal === marker.code_postal;

@@ -48,20 +48,6 @@ export const tiMount = () => dispatch =>
       fetchServices().then(mesures => dispatch(servicesShow(mesures)));
     });
 
-export const filtersMesure = (filters, data, isMandataire) => {
-  return dispatch => {
-    if (isMandataire) {
-      const dataFilter = data.filter(datum => datum.type === filters);
-      return dispatch(updateFiltersMandataire(filters, dataFilter));
-    } else {
-      const dataFilter = data
-        .map(datum => (datum.types.includes(filters) ? datum : false))
-        .filter(Boolean);
-      return dispatch(updateFilters(filters, dataFilter));
-    }
-  };
-};
-
 export const openFicheMandataireModal = mandataire => {
   return dispatch => {
     return apiFetch(`/mandataires/${mandataire.id}/tisEtablissement`)
@@ -112,16 +98,14 @@ export const servicesShow = services => ({
   services
 });
 
-export const updateFilters = (filters, dataMesure) => ({
+export const updateFilters = filters => ({
   type: UPDATE_FILTERS,
-  filters,
-  dataMesure
+  filters
 });
 
-export const updateFiltersMandataire = (filters, data) => ({
+export const updateFiltersMandataire = filters => ({
   type: UPDATE_FILTERS_MANDATAIRES,
-  filters,
-  data
+  filters
 });
 
 export const ficheClose = (filters, filterData) => ({
