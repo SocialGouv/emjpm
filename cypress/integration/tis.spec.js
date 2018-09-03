@@ -54,19 +54,19 @@ describe("Tis", function() {
 
         it("table should show 0 mandataires on individuel filter", () => {
           cy.visit("/tis");
-          cy.get("[data-cy=tab-individuel]").click();
+          cy.get("[data-cy=tab-Individuel]").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 0);
         });
 
         it("table should show 1 mandataires on prepose filter", () => {
           cy.visit("/tis");
-          cy.get("[data-cy=tab-prepose]").click();
+          cy.get("[data-cy=tab-Prepose]").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
         });
 
         it("table should show 0 mandataires on service filter", () => {
           cy.visit("/tis");
-          cy.get("[data-cy=tab-service]").click();
+          cy.get("[data-cy=tab-Service]").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 0);
         });
         it("table should show 1 mandataires on Lille Geolocalisation ", () => {
