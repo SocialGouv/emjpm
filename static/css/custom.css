@@ -167,6 +167,17 @@
   z-index: 9000;
 }
 
+.FicheMandataireModal {
+  position: relative;
+  width: 800px !important;
+  max-width: 90% !important;
+  height: 600px !important;
+  max-height: 90% !important;
+  margin: 0 auto;
+  margin-top: calc(10vh);
+  background-color: #f2f2f2;
+  overflow: scroll;
+}
 /*.leaflet-container {*/
 /*height: 400px !important;*/
 /*}*/
@@ -277,7 +288,8 @@
 }
 
 .form__commentaire textarea {
-  width: 400px;
+  width: 350px;
+  max-width: 100%;
 }
 
 .input_mesure_ouverture {
