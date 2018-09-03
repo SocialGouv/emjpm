@@ -29,6 +29,7 @@ const createMesureApi = data => {
     method: "POST",
     body: JSON.stringify({
       ...data,
+      date_ouverture: new Date(),
       status: "Mesure en attente"
     })
   });

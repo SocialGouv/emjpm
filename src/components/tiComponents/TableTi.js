@@ -200,10 +200,10 @@ const COLUMNS = [
     style: { alignSelf: "center" }
   },
   {
-    Header: "Reservation",
+    Header: "Réservation",
     id: "reservation",
     accessor: d => d.mesures_en_attente,
-    width: 40,
+    width: 100,
     Cell: row => (
       <CellMesureReservationRedux
         row={row}

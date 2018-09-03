@@ -11,7 +11,7 @@ import { openValidationModal } from "../actions/mandataire";
 
 const schema = {
   type: "object",
-  required: ["type", "annee"],
+  required: ["type", "annee", "civilite"],
   properties: {
     type: {
       type: "string",
