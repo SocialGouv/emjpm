@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 
 import FilterMesuresMap from "./FilterMesuresMap";
 import DisplayMandataires from "./DisplayMandataires";
-import FilterByCodePostal from "./FilterByCodePostal";
 import apiFetch from "../communComponents/Api";
 import getCenter from "../communComponents/getCenter";
 import { filterDataForMandataires } from "../index";
@@ -101,16 +100,10 @@ class MapTi extends React.Component {
     const filteredData = filterDataForMandataires(this.state.filterData, filterMesure);
     const markers = isMandataire ? dataFilters : datamesureFilters;
     const mesureCount = filteredData.length;
-    console.log("markers", isMandataire, markers);
     return (
       <React.Fragment>
         <div style={{ display: "flex" }}>
-          <FilterByCodePostal
-            render={({ value, updateValue }) => {
-              return <FilterMesuresMap value={value} updateValue={updateValue} />;
-            }}
-            style={{ zIndex: "1000", flex: "1" }}
-          />
+          <FilterMesuresMap />
           <FilterMandataires isMandataire={isMandataire} />
         </div>
         <div
