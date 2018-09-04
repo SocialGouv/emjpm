@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { Home, Map, UserMinus, UserPlus } from "react-feather";
 import Modal from "react-modal";
 
-import { DummyTabs } from "..";
+import { DummyTabs, LoadingMessage } from "..";
 import apiFetch from "../communComponents/Api";
 
 import PillDispo from "./PillDispo";
@@ -38,6 +38,7 @@ const OpenStreeMap = dynamic({
   modules: props => ({
     MapMesures: import("./MapMesures")
   }),
+  loading: () => <LoadingMessage />,
   render: (props, { MapMesures }) => <MapMesures {...props} />
 });
 

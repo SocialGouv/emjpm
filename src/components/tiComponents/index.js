@@ -11,7 +11,7 @@ import { reducer as modal } from "redux-modal";
 import { Provider, connect } from "react-redux";
 import thunk from "redux-thunk";
 
-import { DummyTabs } from "..";
+import { DummyTabs, LoadingMessage } from "..";
 import { tiMount } from "./actions/mandataire";
 import mandataireReducer from "./reducers/mandataire";
 import mapReducer from "./reducers/map";
@@ -25,6 +25,7 @@ const OpenStreeMap = dynamic({
   modules: props => ({
     MapTi: import("./MapTi")
   }),
+  loading: () => <LoadingMessage />,
   render: (props, { MapTi }) => <MapTi {...props} />
 });
 

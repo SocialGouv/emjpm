@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import LoadingMessage from "../common/LoadingMessage";
 
 import Resolve from "../common/Resolve";
 
@@ -40,7 +41,7 @@ const MapMesures = ({ getPromise, center = [48.866667, 2.333333] }) => (
           </Map>
         )}
         {status === "error" && <div>Impossible de charger la carte des mesures</div>}
-        {status === "loading" && <div>Chargement de la carte des mesures...</div>}
+        {status === "loading" && <LoadingMessage />}
       </React.Fragment>
     )}
   />
