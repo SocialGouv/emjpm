@@ -8,8 +8,11 @@ const StyledTab = styled(Tab)`
   line-height: 42px;
   border: 0;
   border-radius: 0;
-  border-left: ${props => (props.isFirst ? "none" : "1px solid #ddd")};
   transition: background 0.1s ease-out;
+  border-left: 1px solid #ddd;
+  &:first-child() {
+    border-left: none;
+  }
   &.react-tabs__tab--selected {
     background: white;
   }
@@ -30,13 +33,15 @@ const DummyTabs = ({ tabs }) => (
   <Tabs style={{ background: "white" }}>
     <TabList style={{ background: "#d7dfe8", borderBottom: 0, marginBottom: 0 }}>
       {tabs.map((tab, i) => (
-        <StyledTab isFirst={i === 0} className="react-tabs__tab" data-cy={tab.text} key={tab.text}>
+        <StyledTab className="react-tabs__tab" data-cy={tab.text} key={tab.text}>
           <IconWrapper>{tab.icon}</IconWrapper>
           {tab.text}
         </StyledTab>
       ))}
     </TabList>
-    {tabs.map(tab => <TabPanel key={tab.text}>{tab.content}</TabPanel>)}
+    {tabs.map(tab => (
+      <TabPanel key={tab.text}>{tab.content}</TabPanel>
+    ))}
   </Tabs>
 );
 
