@@ -60,24 +60,26 @@ router.get("/popup", typeRequired("ti"), async (req, res, next) => {
     });
 });
 
-router.get("/getAllMesuresByTis", typeRequired("ti"), async (req, res, next) => {
+router.get(
+  "/getAllMesuresByTis",
+  typeRequired("ti"),
+  async (req, res, next) => {
     const ti = await queries.getTiByUserId(req.user.id);
     if (!ti) {
-        return next(new Error(401));
+      return next(new Error(401));
     }
     queries
-        .getAllMesuresByTis(ti.id)
-        .then(function(mesures) {
-            res.status(200).json(mesures);
-        })
-        .catch(function(error) {
-            console.log(error);
-            throw error;
-            next(error);
-        });
-});
-
-
+      .getAllMesuresByTis(ti.id)
+      .then(function(mesures) {
+        res.status(200).json(mesures);
+      })
+      .catch(function(error) {
+        console.log(error);
+        throw error;
+        next(error);
+      });
+  }
+);
 
 router.get("/popupMandataire", loginRequired, async (req, res, next) => {
   const ti = await queries.getTiByUserId(req.user.id);

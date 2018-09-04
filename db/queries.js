@@ -26,7 +26,19 @@ function getAllMandataires(ti_id) {
   return knex
     .from("mandataire_tis")
     .where("ti_id", parseInt(ti_id))
-    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id");
+    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id")
+    .select(
+      knex.raw("distinct mandataires.*"),
+      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
+      knex.raw(
+        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
+      )
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mandataires.code_postal"
+    );
 }
 
 function getMandataires() {
@@ -93,29 +105,23 @@ function getAllMesuresByMandataires(ti_id) {
     );
 }
 
-function getAllMesuresByMandatairesFilter(
+// tis
+async function getAllMesuresByMandatairesFilter(
   ti_id,
   latnorthEast,
   latsouthWest,
   longNorthEast,
   longSouthWest
 ) {
-  return knex
+  const mesuresTiQuery = knex
     .from("mesures")
     .select(
+      knex.raw("distinct ON(mandataires.id) mandataires.id, mandataires.*"),
+      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
       knex.raw(
-        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
+        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
       )
     )
-    .where("status", "Mesure en cours")
-    .whereBetween("geolocalisation_code_postal.latitude", [
-      latsouthWest,
-      latnorthEast
-    ])
-    .whereBetween("geolocalisation_code_postal.longitude", [
-      longSouthWest,
-      longNorthEast
-    ])
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
     .innerJoin(
       "mandataire_tis",
@@ -127,31 +133,30 @@ function getAllMesuresByMandatairesFilter(
       "geolocalisation_code_postal.code_postal",
       "mesures.code_postal"
     )
+    .innerJoin("users", "users.id", "mandataires.user_id")
+    .where({ "mandataire_tis.ti_id": parseInt(ti_id) })
     .groupByRaw(
       "geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,mandataires.id"
+    );
+
+  const allMesures = await mesuresTiQuery
+    .clone()
+    .where(builder =>
+      builder
+        .whereBetween("geolocalisation_code_postal.latitude", [
+          latsouthWest,
+          latnorthEast
+        ])
+        .whereBetween("geolocalisation_code_postal.longitude", [
+          longSouthWest,
+          longNorthEast
+        ])
+        .whereNot({ "users.type": "service" })
     )
-    .where("mandataire_tis.ti_id", parseInt(ti_id))
-    .union(function() {
-      this.select(
-        "mandataires.id",
-        "mandataires.*",
-        "geolocalisation_code_postal.latitude",
-        "geolocalisation_code_postal.longitude"
-      )
-        .from("mandataires")
-        .where("type", "Service")
-        .innerJoin(
-          "mandataire_tis",
-          "mandataire_tis.mandataire_id",
-          "mandataires.id"
-        )
-        .innerJoin(
-          "geolocalisation_code_postal",
-          "geolocalisation_code_postal.code_postal",
-          "mandataires.code_postal"
-        )
-        .where("mandataire_tis.ti_id", parseInt(ti_id));
+    .orWhere({
+      "users.type": "service"
     });
+  return allMesures;
 }
 
 function getAllByMandatairesFilter(
@@ -163,14 +168,29 @@ function getAllByMandatairesFilter(
 ) {
   return knex
     .from("mandataires")
-    .whereBetween("geolocalisation_code_postal.latitude", [
-      latsouthWest,
-      latnorthEast
-    ])
-    .whereBetween("geolocalisation_code_postal.longitude", [
-      longSouthWest,
-      longNorthEast
-    ])
+    .select(
+      knex.raw("distinct ON(mandataires.id) mandataires.id,mandataires.*"),
+      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
+      knex.raw(
+        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
+      )
+    )
+    .where("mandataire_tis.ti_id", parseInt(ti_id))
+    .where(builder =>
+      builder
+        .whereBetween("geolocalisation_code_postal.latitude", [
+          latsouthWest,
+          latnorthEast
+        ])
+        .whereBetween("geolocalisation_code_postal.longitude", [
+          longSouthWest,
+          longNorthEast
+        ])
+    )
+    .orWhere({
+      "users.type": "service"
+    })
+    .innerJoin("users", "users.id", "mandataires.user_id")
     .innerJoin(
       "mandataire_tis",
       "mandataire_tis.mandataire_id",
@@ -183,12 +203,6 @@ function getAllByMandatairesFilter(
     )
     .groupByRaw(
       "mandataires.id,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
-    )
-    .where("mandataire_tis.ti_id", parseInt(ti_id))
-    .select(
-      knex.raw(
-        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
-      )
     );
 }
 

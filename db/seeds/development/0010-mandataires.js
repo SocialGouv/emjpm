@@ -12,8 +12,8 @@ exports.seed = function(knex, Promise) {
         prenom: "prenom individuel",
         ville: "ville",
         telephone: "0600000000",
-        latitude: 48.862725,
-        longitude: 2.287592,
+        latitude: 0,
+        longitude: 0,
         adresse: "adresse",
         mesures_en_cours: 2,
         dispo_max: 5,
@@ -33,8 +33,8 @@ exports.seed = function(knex, Promise) {
         prenom: "prenom prepose",
         ville: "ville",
         telephone: "0600000000",
-        latitude: 48.262725,
-        longitude: 2.187592,
+        latitude: 0,
+        longitude: 0,
         adresse: "adresse",
         mesures_en_cours: 2,
         dispo_max: 10,
@@ -60,6 +60,27 @@ exports.seed = function(knex, Promise) {
         mesures_en_cours: 1,
         dispo_max: 25,
         user_id: null,
+        secretariat: true,
+        nb_secretariat: 0.8
+      });
+    })
+    .then(function() {
+      // Inserts seed entries one by one in series
+      return knex("mandataires").insert({
+        etablissement: "test service 1",
+        email: "service1@individuel.com",
+        type: "service",
+        code_postal: "75010",
+        nom: "nom service 1",
+        prenom: "prenom service 1",
+        ville: "ville",
+        telephone: "0403003933",
+        latitude: 0,
+        longitude: 0,
+        adresse: "adresse",
+        mesures_en_cours: 0,
+        dispo_max: 100,
+        user_id: 3,
         secretariat: true,
         nb_secretariat: 0.8
       });
