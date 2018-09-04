@@ -42,10 +42,12 @@ const getMandataire = filters =>
   knex("mandataires")
     .select(
       "mandataires.*",
-      "geolocalisation_code_postal.latitude",
-      "geolocalisation_code_postal.longitude"
+      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
+      knex.raw(
+        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
+      )
     )
-    .innerJoin(
+    .leftOuterJoin(
       "geolocalisation_code_postal",
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
@@ -56,7 +58,7 @@ const getMandataire = filters =>
 const getMandataireById = id => getMandataire({ "mandataires.id": id });
 
 const getMandataireByUserId = user_id =>
-  getMandataire({ "mandataires.user_id": user_id });
+  getMandataire({ "mandataires.user_id": parseInt(user_id) });
 
 const getMesuresMap = mandataireId =>
   knex("mesures")
