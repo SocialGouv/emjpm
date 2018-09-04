@@ -207,7 +207,7 @@ describe("Mandataires", function() {
           cy.get(".form-group #root_ville").type("Rouen");
           cy.get("[data-cy=validation-button]").click();
         });
-        it("counter should now show 3/3", () => {
+        it("counter should now show 3/10", () => {
           cy.visit("/mandataires");
           cy.get(".react-tabs .react-tabs__tab-list").should("contain", "3 / 10");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);

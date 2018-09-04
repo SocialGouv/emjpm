@@ -77,7 +77,7 @@ class Form extends React.Component {
   render() {
     const FormMandataire = formsMandataires[this.state.typeMandataire];
     return (
-      <div className="container Inscription">
+      <div className="container Inscription" data-cy="form-inscription">
         <div className="col-12 offset-sm-2 col-sm-8 offset-md-2 col-md-8">
           <h1 style={{ margin: 20 }}>Inscription</h1>
           <div style={{ backgroundColor: "white", padding: 25 }}>
