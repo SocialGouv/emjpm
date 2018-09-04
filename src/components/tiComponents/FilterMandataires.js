@@ -9,9 +9,8 @@ import { updateFiltersMandataire, updateFilters } from "./actions/mandataire";
 
 const RadioStyle = styled.label`
   cursor: pointer;
-  width: 40px;
+  flex: 1 0 auto;
   padding: 5px;
-  margin-right: 40px;
 `;
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -28,6 +27,7 @@ const Choice = ({ label, value, onClick, ...props }) => (
     <input
       data-cy={`tab-${value}`}
       type="radio"
+      style={{ marginRight: 5 }}
       id={`customRadioInline1_${value}`}
       name="customRadioInline"
       value={value}
@@ -50,7 +50,7 @@ const choices = {
 const FilterMandataires = ({ onClick }) => (
   <div
     className="custom-control custom-radio custom-control-inline"
-    style={{ marginLeft: "5px", flex: "1" }}
+    style={{ marginLeft: "5px", flex: "1", maxWidth: 500, alignItems: "center" }}
   >
     {choices &&
       Object.keys &&
