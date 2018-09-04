@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 
-import Resolve from "../Resolve";
+import Resolve from "../common/Resolve";
 
 const Attribution = () => (
   <TileLayer

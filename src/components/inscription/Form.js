@@ -2,7 +2,7 @@ import InscriptionIndividuel from "./InscriptionIndividuel";
 import InscriptionPrepose from "./InscriptionPrepose";
 import InscriptionService from "./InscriptionService";
 import TiSelector from "./TiSelector";
-import Resolve from "../Resolve";
+import Resolve from "../common/Resolve";
 import apiFetch from "../communComponents/Api";
 import Router from "next/router";
 
