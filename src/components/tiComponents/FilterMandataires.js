@@ -21,6 +21,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       : dispatch(updateFilters(value))
 });
 
+const mapStateToProps = (state, ownProps) => ({
+  currentFilter: state.mandataire.filters || ""
+});
+
 // dumber
 const Choice = ({ label, value, onClick, ...props }) => (
   <RadioStyle htmlFor={`customRadioInline1_${value}`}>
@@ -47,7 +51,7 @@ const choices = {
 };
 
 // dumb
-const FilterMandataires = ({ onClick }) => (
+const FilterMandataires = ({ onClick, currentFilter }) => (
   <div
     className="custom-control custom-radio custom-control-inline"
     style={{ marginLeft: "5px", flex: "1", maxWidth: 500, alignItems: "center" }}
@@ -59,15 +63,15 @@ const FilterMandataires = ({ onClick }) => (
         <Choice
           key={choice}
           label={choices[choice]}
+          defaultChecked={choice === currentFilter}
           value={choice}
           onClick={e => onClick(choice)}
-          defaultChecked={idx === 0}
         />
       ))}
   </div>
 );
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(FilterMandataires);

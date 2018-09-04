@@ -21,7 +21,7 @@ import apiFetch from "../communComponents/Api";
 
 Modal.setAppElement("#__next");
 
-const OpenStreeMap = dynamic({
+const MapTable = dynamic({
   modules: props => ({
     MapTi: import("./MapTi")
   }),
@@ -45,12 +45,12 @@ class Ti extends React.Component {
       {
         text: "Majeurs Protégés",
         icon: <Users />,
-        content: <OpenStreeMap fetch={`/mesures/filters`} />
+        content: <MapTable fetch={`/mesures/filters`} />
       },
       {
         text: "Mandataires",
         icon: <Users />,
-        content: <OpenStreeMap fetch={`/mandataires/filters`} isMandataire={true} />
+        content: <MapTable fetch={`/mandataires/filters`} isMandataire={true} />
       },
       {
         text: "Mesures attribuées",
