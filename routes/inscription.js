@@ -183,15 +183,12 @@ router.post("/mandataires", (req, res, next) => {
                 etablissement,
                 nom,
                 prenom,
-                type, // TODO
                 telephone,
                 telephone_portable,
                 email,
                 adresse,
                 code_postal,
-                ville,
-                latitude: 0, // TODO
-                longitude: 0 // TODO
+                ville
               },
               trx
             )

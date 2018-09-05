@@ -1,7 +1,6 @@
 const express = require("express");
 
 const router = express.Router();
-const queries = require("../db/queries");
 
 const { loginRequired } = require("../auth/_helpers");
 
@@ -9,8 +8,16 @@ const {
   getMandataireById,
   getMandataireByUserId,
   updateMandataire,
-  updateCountMesures
+  updateCountMesures,
+  mesureEnAttente,
+  update,
+  getAllServicesByTis,
+  getAllMandataires,
+  getAllByMandatairesFilter,
+  getCoordonneByPosteCode
 } = require("../db/queries/mandataires");
+
+const {getTiByUserId} = require("../db/queries/tis")
 
 // récupère les données d'un mandataire
 router.get("/1", loginRequired, async (req, res, next) => {
@@ -70,15 +77,14 @@ router.put("/1", loginRequired, async (req, res, next) => {
 
 // todo: test
 router.post("/filters", loginRequired, async (req, res, next) => {
-  const ti = await queries.getTiByUserId(req.user.id);
-  queries
-    .getAllByMandatairesFilter(
-      ti.id,
-      req.body.latNorthEast,
-      req.body.latSouthWest,
-      req.body.longNorthEast,
-      req.body.longSouthWest
-    )
+  const ti = await getTiByUserId(req.user.id);
+  getAllByMandatairesFilter(
+    ti.id,
+    req.body.latNorthEast,
+    req.body.latSouthWest,
+    req.body.longNorthEast,
+    req.body.longSouthWest
+  )
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
@@ -96,12 +102,11 @@ router.get("/", loginRequired, async (req, res, next) => {
   if (req.user.type !== "ti") {
     return next(new Error(401));
   }
-  const ti = await queries.getTiByUserId(req.user.id);
+  const ti = await getTiByUserId(req.user.id);
   if (!ti) {
     return next(new Error(401));
   }
-  queries
-    .getAllMandataires(ti.id)
+  getAllMandataires(ti.id)
     .then(mandataires => res.status(200).json(mandataires))
     .catch(error => next(error));
 });
@@ -110,20 +115,18 @@ router.get("/services", loginRequired, async (req, res, next) => {
   if (req.user.type !== "ti") {
     return next(new Error(401));
   }
-  const ti = await queries.getTiByUserId(req.user.id);
+  const ti = await getTiByUserId(req.user.id);
   if (!ti) {
     return next(new Error(401));
   }
-  queries
-    .getAllServicesByTis(ti.id)
+  getAllServicesByTis(ti.id)
     .then(mandataires => res.status(200).json(mandataires))
     .catch(error => next(error));
 });
 
 // todo: test
 router.post("/PosteCode", loginRequired, async (req, res, next) => {
-  queries
-    .getCoordonneByPosteCode(req.body.codePoste)
+ getCoordonneByPosteCode(req.body.codePoste)
     .then(function(mandataires) {
       res.status(200).json(mandataires);
     })
@@ -156,20 +159,21 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
   });
 });
 
-router.put("/:mandataireId/mesures-en-attente", loginRequired, async (req, res, next) => {
-  // const mandataire = await queries.getMandataireByUserId(req.user.id);
-  // if (!mandataire) {
-  //   return next(new Error(401));
-  // }
-  // récupères le nb de mesure attribuées pour ce mandataire
-
-    console.log(req.body)
-  const MesureEnAttente = queries.mesureEnAttente(req.body.mandataire_id);
-  queries
-    .update(req.body.mandataire_id, { mesures_en_attente: MesureEnAttente })
-    .then(mandataire => res.status(200).json(mandataire))
-    .catch(error => next(error));
-});
+router.put(
+  "/:mandataireId/mesures-en-attente",
+  loginRequired,
+  async (req, res, next) => {
+    // const mandataire = await queries.getMandataireByUserId(req.user.id);
+    // if (!mandataire) {
+    //   return next(new Error(401));
+    // }
+    // récupères le nb de mesure attribuées pour ce mandataire
+    const MesureEnAttente = mesureEnAttente(req.body.mandataire_id);
+    update(req.body.mandataire_id, { mesures_en_attente: MesureEnAttente })
+      .then(mandataire => res.status(200).json(mandataire))
+      .catch(error => next(error));
+  }
+);
 
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));

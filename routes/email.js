@@ -1,7 +1,6 @@
 const express = require("express");
 const { format, addMonths, addDays } = require("date-fns");
 
-const queries = require("../db/queries");
 const { sendEmail } = require("../email");
 const router = express.Router();
 
@@ -21,6 +20,13 @@ const isLate = mandataire => {
 
   return !hasUpdatedLastMonth && !hasBeenMailedRecently;
 };
+
+const {getTiByUserId} = require("../db/queries/tis")
+
+const {
+    getAll,
+    updateMandataireMailSent
+} = require("../db/queries/email");
 
 const hasEmail = mandataire => !!mandataire.email;
 
@@ -58,8 +64,7 @@ Bien à vous.
 `;
 
 router.get("/relance-mandataires-inactifs", function(req, res, next) {
-  queries
-    .getAll()
+getAll()
     .then(mandataires =>
       mandataires
         .filter(hasEmail)
@@ -73,7 +78,7 @@ router.get("/relance-mandataires-inactifs", function(req, res, next) {
           )
             .then(() => {
               // MAJ mandataire.email_send
-              return queries.updateMandataireMailSent(mandataire.id);
+              return updateMandataireMailSent(mandataire.id);
             })
             .catch(e => {
               // todo: sentry
@@ -113,7 +118,7 @@ L'équipe e-mjpm
 };
 
 router.get("/reservation-mesures", function async(req, res, next) {
-  queries.getTiByUserId(req.user.id).then(ti => {
+  getTiByUserId(req.user.id).then(ti => {
     sendEmail(
       req.query.email,
       "e-MJPM : une nouvelle mesure vous a été attribué",
