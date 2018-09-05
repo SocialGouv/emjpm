@@ -1,13 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const queries = require("../db/queries");
 
 const { loginRequired } = require("../auth/_helpers");
 
+const {
+  getAllAntennes,
+  addAntenne,
+  updateAntenne,
+  deleteAntenne
+} = require("../db/queries/serviceAntennes");
+
+const { getMandataireByUserId } = require("../db/queries/mandataires");
+
+
 router.get("/:mandataireId/antennes", loginRequired, async (req, res, next) => {
-  const ti = await queries.getMandataireByUserId(req.user.id);
-  queries
-    .getAllAntennes(ti.id)
+  const ti = await getMandataireByUserId(req.user.id);
+  getAllAntennes(ti.id)
     .then(function(commentaires) {
       res.status(200).json(commentaires);
     })
@@ -21,14 +29,13 @@ router.post(
   loginRequired,
   async (req, res, next) => {
     // secu : ensure TI can write on this mandataire + add related test
-    const ti = await queries.getMandataireByUserId(req.user.id);
-    queries
-      .addAntenne({
-        ...req.body,
-        mandataire_id: ti.id
-      })
+    const ti = await getMandataireByUserId(req.user.id);
+    addAntenne({
+      ...req.body,
+      mandataire_id: ti.id
+    })
       .then(function(commentaireID) {
-        return queries.getAllAntennes(ti.id);
+        return getAllAntennes(ti.id);
       })
       .then(function(commentaires) {
         res.status(200).json(commentaires);
@@ -44,11 +51,10 @@ router.put(
   "/:mandataireId/antennes/:antenneId",
   loginRequired,
   async (req, res, next) => {
-    const ti = await queries.getMandataireByUserId(req.user.id);
-    queries
-      .updateAntenne(req.params.antenneId, req.body)
+    const ti = await getMandataireByUserId(req.user.id);
+    updateAntenne(req.params.antenneId, req.body)
       .then(function() {
-        return queries.getAllAntennes(ti.id);
+        return getAllAntennes(ti.id);
       })
       .then(function(commentaire) {
         res.status(200).json(commentaire);
@@ -63,14 +69,13 @@ router.delete(
   "/:mandataireId/antennes/:antenneId",
   loginRequired,
   async (req, res, next) => {
-    const mandataire = await queries.getMandataireByUserId(req.user.id);
-    queries
-      .deleteAntenne({
-        id: req.params.antenneId,
-        mandataire_id: mandataire.id
-      })
+    const mandataire = await getMandataireByUserId(req.user.id);
+    deleteAntenne({
+      id: req.params.antenneId,
+      mandataire_id: mandataire.id
+    })
       .then(function(commentaireID) {
-        return queries.getAllAntennes(mandataire.id);
+        return getAllAntennes(mandataire.id);
       })
       .then(function(commentaires) {
         res.status(200).json(commentaires);

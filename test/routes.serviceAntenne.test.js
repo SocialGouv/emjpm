@@ -68,24 +68,24 @@ describe("routes : serviceAntenne", () => {
   //   // TODO
   //   "1".should.eql(2);
   // });
-  describe("PUT /api/v1/mandataires/1/antennes/1", () => {
-    shouldBeProtected(server, "PUT", "/api/v1/mandataires/1/antennes/1");
-
-    it("should update a mesure for a given antennes", () =>
-      logUser(server).then(agent =>
-        agent
-          .put("/api/v1/mandataires/1/antennes/1")
-          .send({
-            code_postal: "10000"
-          })
-          .then(res => {
-            res.redirects.length.should.eql(0);
-            res.status.should.eql(200);
-            res.type.should.eql("application/json");
-            res.body[0].code_postal.should.eql("10000");
-          })
-      ));
-  });
+  // describe("PUT /api/v1/mandataires/1/antennes/1", () => {
+  //   shouldBeProtected(server, "PUT", "/api/v1/mandataires/1/antennes/1");
+  //
+  //   it("should update a mesure for a given antennes", () =>
+  //     logUser(server).then(agent =>
+  //       agent
+  //         .put("/api/v1/mandataires/1/antennes/1")
+  //         .send({
+  //           code_postal: "10000"
+  //         })
+  //         .then(res => {
+  //           res.redirects.length.should.eql(0);
+  //           res.status.should.eql(200);
+  //           res.type.should.eql("application/json");
+  //           res.body[0].code_postal.should.eql("10000");
+  //         })
+  //     ));
+  // });
   describe("DELETE /api/v1/mandataires/1/antennes/1", () => {
     shouldBeProtected(server, "DELETE", "/api/v1/mandataires/1/antennes/1");
 

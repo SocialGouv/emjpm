@@ -4,6 +4,8 @@ const knex = require("../knex.js");
 //const ALLOWED_FILTERS = ["users.active", "users.type"];
 
 // nombre de mesures pour le mandataire
+const Mandataires = () => knex("mandataires");
+
 const getCountMesures = (id, filters = { status: "Mesure en cours" }) =>
   knex("mesures")
     .count("*")
@@ -23,11 +25,9 @@ const updateMandataire = (id, data) =>
 // todo move to trigger/view
 const updateCountMesures = id =>
   getCountMesures(id).then(count =>
-    knex("mandataires")
-      .where({ id })
-      .update({
-        mesures_en_cours: count
-      })
+    knex.raw(`UPDATE mandataires
+      SET mesures_en_cours = ${count}
+      WHERE ID = ${id};`)
   );
 
 // todo move to trigger/view
@@ -85,12 +85,108 @@ const getMesuresMap = mandataireId =>
       "mesures.code_postal,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
     );
 
+function getAllByMandatairesFilter(
+  ti_id,
+  latnorthEast,
+  latsouthWest,
+  longNorthEast,
+  longSouthWest
+) {
+  return knex
+    .from("mandataires")
+    .select(
+      knex.raw(
+        "distinct ON(mandataires.id) mandataires.id,mandataires.*,users.type"
+      ),
+      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
+      knex.raw(
+        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
+      )
+    )
+    .where("mandataire_tis.ti_id", parseInt(ti_id))
+    .where(builder =>
+      builder
+        .whereBetween("geolocalisation_code_postal.latitude", [
+          latsouthWest,
+          latnorthEast
+        ])
+        .whereBetween("geolocalisation_code_postal.longitude", [
+          longSouthWest,
+          longNorthEast
+        ])
+    )
+    .innerJoin("users", "users.id", "mandataires.user_id")
+    .innerJoin(
+      "mandataire_tis",
+      "mandataire_tis.mandataire_id",
+      "mandataires.id"
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mandataires.code_postal"
+    )
+    .groupByRaw(
+      "mandataires.id,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,users.type"
+    );
+}
+
+const getAllMandataires = ti_id =>
+  knex
+    .from("mandataire_tis")
+    .where("ti_id", parseInt(ti_id))
+    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id")
+    .innerJoin("users", "mandataires.user_id", "users.id")
+    .select(
+      knex.raw("distinct mandataires.*,users.type"),
+      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
+      knex.raw(
+        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
+      )
+    )
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mandataires.code_postal"
+    );
+
+const getAllServicesByTis = ti_id =>
+  knex
+    .from("mandataire_tis")
+    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id")
+    .innerJoin("users", "mandataires.user_id", "users.id")
+    .where({ ti_id: parseInt(ti_id), "users.type": "service" });
+
+const mesureEnAttente = mandataireID =>
+  knex("mesures")
+    .count("*")
+    .where({
+      mandataire_id: parseInt(mandataireID),
+      status: "Mesure en attente"
+    });
+
+const update = (mandataireID, updates) =>
+  Mandataires()
+    .where("id", parseInt(mandataireID))
+    .update(updates);
+
+const getCoordonneByPosteCode = userId =>
+  knex
+    .from("geolocalisation_code_postal")
+    .where("code_postal", userId)
+    .first();
+
 module.exports = {
-  getCountMesures,
   updateCountMesures,
   updateDateMesureUpdate,
   getMandataireById,
   getMandataireByUserId,
   updateMandataire,
-  getMesuresMap
+  getMesuresMap,
+  mesureEnAttente,
+  getAllServicesByTis,
+  getAllMandataires,
+  getAllByMandatairesFilter,
+  update,
+  getCoordonneByPosteCode
 };

@@ -1,39 +1,47 @@
 const express = require("express");
 
 const router = express.Router();
-const queries = require("../db/queries");
 const fetch = require("isomorphic-fetch");
 
 const { loginRequired, typeRequired } = require("../auth/_helpers");
+
+const {
+  getAllMesuresByMandataires,
+  getAllMesuresByMandatairesFilter,
+  getAllMesuresByPopUp,
+  getAllMesuresByTis,
+  getAllMesuresByPopUpForMandataire,
+  getPostecode
+} = require("../db/queries/mesures");
+
+const {getTiByUserId} = require("../db/queries/tis")
 
 router.get("/", typeRequired("ti"), async (req, res, next) => {
   if (req.user.type !== "ti") {
     return next(new Error(401));
   }
-  const ti = await queries.getTiByUserId(req.user.id);
+  const ti = await getTiByUserId(req.user.id);
   if (!ti) {
     return next(new Error(401));
   }
-  queries
-    .getAllMesuresByMandataires(ti.id)
+  getAllMesuresByMandataires(ti.id)
     .then(mesures => res.status(200).json(mesures))
     .catch(error => next(error));
 });
 
 // todo : make it work for real
 router.post("/filters", loginRequired, async (req, res, next) => {
-  const ti = await queries.getTiByUserId(req.user.id);
+  const ti = await getTiByUserId(req.user.id);
   if (!ti) {
     return next(new Error(401));
   }
-  queries
-    .getAllMesuresByMandatairesFilter(
-      ti.id,
-      req.body.latNorthEast,
-      req.body.latSouthWest,
-      req.body.longNorthEast,
-      req.body.longSouthWest
-    )
+  getAllMesuresByMandatairesFilter(
+    ti.id,
+    req.body.latNorthEast,
+    req.body.latSouthWest,
+    req.body.longNorthEast,
+    req.body.longSouthWest
+  )
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
@@ -44,12 +52,11 @@ router.post("/filters", loginRequired, async (req, res, next) => {
 });
 
 router.get("/popup", typeRequired("ti"), async (req, res, next) => {
-  const ti = await queries.getTiByUserId(req.user.id);
+  const ti = await getTiByUserId(req.user.id);
   if (!ti) {
     return next(new Error(401));
   }
-  queries
-    .getAllMesuresByPopUp(ti.id, req.query.searchType)
+  getAllMesuresByPopUp(ti.id, req.query.searchType)
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
@@ -64,12 +71,11 @@ router.get(
   "/getAllMesuresByTis",
   typeRequired("ti"),
   async (req, res, next) => {
-    const ti = await queries.getTiByUserId(req.user.id);
+    const ti = await getTiByUserId(req.user.id);
     if (!ti) {
       return next(new Error(401));
     }
-    queries
-      .getAllMesuresByTis(ti.id)
+    getAllMesuresByTis(ti.id)
       .then(function(mesures) {
         res.status(200).json(mesures);
       })
@@ -82,9 +88,8 @@ router.get(
 );
 
 router.get("/popupMandataire", loginRequired, async (req, res, next) => {
-  const ti = await queries.getTiByUserId(req.user.id);
-  queries
-    .getAllMesuresByPopUpForMandataire(ti.id)
+  const ti = await getTiByUserId(req.user.id);
+  getAllMesuresByPopUpForMandataire(ti.id)
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
@@ -103,12 +108,11 @@ router.get("/codePostal", async (req, res, next) => {
     .then(json => {
       json.map(code =>
         code.codesPostaux.map(codePos =>
-          queries
-            .getPostecode(
-              codePos,
-              code.centre.coordinates[1],
-              code.centre.coordinates[0]
-            )
+          getPostecode(
+            codePos,
+            code.centre.coordinates[1],
+            code.centre.coordinates[0]
+          )
             .then(function(mesures) {
               res.status(200).json(mesures);
             })
