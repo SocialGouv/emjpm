@@ -6,6 +6,6 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
     return knex.schema.alterTable("tis", function(table) {
-        table.boolean("admin").alter();
+        table.boolean("admin");
     });
 };

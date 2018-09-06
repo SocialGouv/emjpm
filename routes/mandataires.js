@@ -17,9 +17,92 @@ const {
   getCoordonneByPosteCode
 } = require("../db/queries/mandataires");
 
-const {getTiByUserId} = require("../db/queries/tis")
+const { getTiByUserId } = require("../db/queries/tis");
 
 // récupère les données d'un mandataire
+
+/**
+ * @swagger
+ * security:
+ *   - cookieAuth: []
+ * components:
+ *   securitySchemes:
+ *     cookieAuth:
+ *       type: apiKey
+ *       in: cookie
+ *       name: connect.sid
+ *   requestBodies:
+ *     ActiveMandataireBody:
+ *       description: A JSON object containing user active status
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               active:
+ *                 type: boolean
+ *                 required: true
+ *   schemas:
+ *     Mandataire:
+ *       type: object
+ *       properties:
+ *         id:
+ *           description: ID du mandataire
+ *           type: integer
+ *         type:
+ *           description: Type de mandataire
+ *           deprecated: true
+ *           type: string
+ *           enum:
+ *             - preposes
+ *             - individuels
+ *             - services
+ *         nom:
+ *           description: Nom du mandataire
+ *           type: string
+ *         prenom:
+ *           description: Prénom du mandataire
+ *           type: string
+ *         code_postal:
+ *           description: Code postal du mandataire
+ *           type: string
+ *         created_at:
+ *           description: Date de création du mandataire
+ *           type: datetime
+ *         last_login:
+ *           description: Date de dernière connextion du mandataire
+ *           type: datetime
+ *
+ *     SuccessResponse:
+ *       description: conformation de succes
+ *       type: object
+ *       properties:
+ *         success:
+ *           type: boolean
+ *           value: true
+ *
+ *     ActiveMandataireBody:
+ *       description: changement etat du mandataire
+ *       type: object
+ *       properties:
+ *         active:
+ *           type: boolean
+ *           value: true
+ *
+ * @swagger
+ * /mandataires/1:
+ *   get:
+ *     description: get a mandataire
+ *     produces:
+ *       - application/json
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: hash
+ */
 router.get("/1", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
   if (!mandataire) {
@@ -51,6 +134,23 @@ const whiteList = obj =>
     .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
 // met à jour les données d'un mandataire
+
+/**
+ * @swagger
+ * /mandataire/1:
+ *   put:
+ *     description: update some user's data
+ *     produces:
+ *       - application/json
+ *     requestBody:
+ *       $ref: '#/components/requestBodies/ActiveMandataireBody'
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SuccessResponse'
+ */
 router.put("/1", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
   if (!mandataire) {
@@ -76,6 +176,40 @@ router.put("/1", loginRequired, async (req, res, next) => {
 });
 
 // todo: test
+
+/** @swagger
+ * /mandataires/filters:
+ *   post:
+ *     description: post a new filters
+ *     produces:
+ *       - application/json
+ *     requestBodies:
+ *       description: A JSON object containing commentaire
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               latNorthEast:
+ *                 type: float
+ *                 required: true
+ *               latSouthWest:
+ *                 type: float
+ *                 required: true
+ *               longNorthEast:
+ *                 type: float
+ *                 required: true
+ *               longSouthWest:
+ *                 type: float
+ *                 required: true
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.post("/filters", loginRequired, async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
   getAllByMandatairesFilter(
@@ -98,6 +232,20 @@ router.post("/filters", loginRequired, async (req, res, next) => {
 // TODO : le user doit être un TI
 // droits : ti lui-même
 // récupère une liste de mandataires pour le user (ti) en question
+
+/** @swagger
+ * /mandataires :
+ *   get:
+ *     description: get all mandataires
+ *     produces:
+ *       - application/json
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get("/", loginRequired, async (req, res, next) => {
   if (req.user.type !== "ti") {
     return next(new Error(401));
@@ -111,6 +259,19 @@ router.get("/", loginRequired, async (req, res, next) => {
     .catch(error => next(error));
 });
 
+/** @swagger
+ * /mandataires/services:
+ *   get:
+ *     description: get all services for a specific Ti
+ *     produces:
+ *       - application/json
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get("/services", loginRequired, async (req, res, next) => {
   if (req.user.type !== "ti") {
     return next(new Error(401));
@@ -125,8 +286,9 @@ router.get("/services", loginRequired, async (req, res, next) => {
 });
 
 // todo: test
+
 router.post("/PosteCode", loginRequired, async (req, res, next) => {
- getCoordonneByPosteCode(req.body.codePoste)
+  getCoordonneByPosteCode(req.body.codePoste)
     .then(function(mandataires) {
       res.status(200).json(mandataires);
     })
@@ -146,6 +308,19 @@ router.post("/PosteCode", loginRequired, async (req, res, next) => {
 // selon le nb de mesures en cours
 // droits : user en cours
 
+/** @swagger
+ * /mandataires/1/capacite:
+ *   put:
+ *     description: update capacite of specific mandataire
+ *     produces:
+ *       - application/json
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: Hash
+ */
 router.put("/:mandataireId/capacite", async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
   if (!mandataire) {
@@ -159,6 +334,30 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
   });
 });
 
+/** @swagger
+ * /mandataires/1/mesures-en-attente:
+ *   put:
+ *     description: update 'mesure en attente' from a mandataire
+ *     produces:
+ *       - application/json
+ *     requestBodies:
+ *       description: A JSON object containing mandataireId
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               mandataire_id:
+ *                 type: integer
+ *                 required: true
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: Hash
+ */
 router.put(
   "/:mandataireId/mesures-en-attente",
   loginRequired,

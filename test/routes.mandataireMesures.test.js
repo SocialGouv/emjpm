@@ -47,8 +47,6 @@ describe("routes : mandataireMesures", () => {
             code_postal: "28000",
             ville: "Chartres",
             etablissement: "peu pas",
-            latitude: 1,
-            longitude: 1,
             created_at: "2010-10-05",
             annee: "2010-10-05",
             type: "preposes",

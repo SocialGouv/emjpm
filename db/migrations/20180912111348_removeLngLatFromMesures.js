@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
     return knex.schema.alterTable("mesures", function(table) {
-        table.float("latitude").alter();
-        table.float("longitude").alter();
+        table.float("latitude");
+        table.float("longitude");
     });
 };

@@ -27,7 +27,7 @@ const queries = require("../db/queries/inscription");
  *           type: string
  *   requestBodies:
  *     InscriptionMandataire:
- *       description: A JSON object containing mandataier parameters
+ *       description: A JSON object containing mandataire parameters
  *       required: true
  *       content:
  *         application/json:
