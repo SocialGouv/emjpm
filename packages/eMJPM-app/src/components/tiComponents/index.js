@@ -11,7 +11,7 @@ import { reducer as modal } from "redux-modal";
 import { Provider, connect } from "react-redux";
 import thunk from "redux-thunk";
 
-import { DummyTabs } from "..";
+import { DummyTabs, LoadingMessage } from "..";
 import { tiMount } from "./actions/mandataire";
 import mandataireReducer from "./reducers/mandataire";
 import mapReducer from "./reducers/map";
@@ -21,10 +21,11 @@ import apiFetch from "../communComponents/Api";
 
 Modal.setAppElement("#__next");
 
-const OpenStreeMap = dynamic({
+const MapTable = dynamic({
   modules: props => ({
     MapTi: import("./MapTi")
   }),
+  loading: () => <LoadingMessage />,
   render: (props, { MapTi }) => <MapTi {...props} />
 });
 
@@ -44,12 +45,12 @@ class Ti extends React.Component {
       {
         text: "Majeurs Protégés",
         icon: <Users />,
-        content: <OpenStreeMap fetch={`/mesures/filters`} />
+        content: <MapTable fetch={`/mesures/filters`} />
       },
       {
         text: "Mandataires",
         icon: <Users />,
-        content: <OpenStreeMap fetch={`/mandataires/filters`} isMandataire={true} />
+        content: <MapTable fetch={`/mandataires/filters`} isMandataire={true} />
       },
       {
         text: "Mesures attribuées",

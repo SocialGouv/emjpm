@@ -107,10 +107,14 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
               title="Mes établissements"
               placeholder="Ajouter un établissement"
               emptyText="Aucun établissement séléctionné"
-              autocompleteItems={etablissements.map(f => ({
-                id: f.id,
-                nom: f.nom || f.ville || f.finess_id
-              }))}
+              autocompleteItems={
+                (etablissements &&
+                  etablissements.map(f => ({
+                    id: f.id,
+                    nom: f.nom || f.ville || f.finess_id
+                  }))) ||
+                []
+              }
               selected={selection}
               onAdd={onAdd}
               onRemove={onRemove}
@@ -134,11 +138,14 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
           })
         }
         getSelection={() =>
-          apiFetch("/mandataires/1/tis").then(data =>
-            data.map(ti => ({
-              id: ti.id,
-              nom: ti.etablissement
-            }))
+          apiFetch("/mandataires/1/tis").then(
+            data =>
+              (data &&
+                data.map(ti => ({
+                  id: ti.id,
+                  nom: ti.etablissement
+                }))) ||
+              []
           )
         }
         render={({ onAdd, onRemove, selection }) => (
@@ -146,7 +153,9 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
             title="Tribunaux d'instance où je suis agréé"
             emptyText="Aucun tribunal séléctionné"
             placeholder="Ajouter un tribunal d'instance"
-            autocompleteItems={tis.map(t => ({ id: t.id, nom: t.etablissement }))}
+            autocompleteItems={
+              (tis && tis.map && tis.map(t => ({ id: t.id, nom: t.etablissement }))) || []
+            }
             selected={selection}
             onAdd={onAdd}
             onRemove={onRemove}
