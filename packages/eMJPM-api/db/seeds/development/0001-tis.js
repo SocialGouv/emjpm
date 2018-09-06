@@ -9,8 +9,8 @@ exports.seed = function(knex, Promise) {
         code_postal: "64000",
         ville: "Test",
         telephone: "0102030405",
-        latitude: 48.862725,
-        longitude: 2.287592,
+        latitude: 45.862725,
+        longitude: 2.187592,
         admin: false,
         user_id: 1
       });
@@ -23,36 +23,36 @@ exports.seed = function(knex, Promise) {
         code_postal: "62000",
         ville: "Test",
         telephone: "0102030405",
-        latitude: 48.462725,
+        latitude: 46.462725,
         longitude: 2.253592,
         admin: false,
-        user_id: 4
+        user_id: 2
       });
     })
     .then(function() {
       // Inserts seed entries one by one in series
       return knex("tis").insert({
-        etablissement: "ti xxx",
+        etablissement: "ti test 3",
         email: "tixxx@test.beta.data.gouv.org.fr.com",
-        code_postal: "62000",
+        code_postal: "56200",
         ville: "Test",
         telephone: "0102030405",
-        latitude: 48.862725,
-        longitude: 2.753592,
+        latitude: 43.862725,
+        longitude: 2.153592,
         admin: false,
-        user_id: 4
+        user_id: 3
       });
     })
     .then(function() {
       // Inserts seed entries one by one in series
       return knex("tis").insert({
-        etablissement: "ti aaa",
+        etablissement: "ti test 4",
         email: "tiaaaa@test.beta.data.gouv.org.fr.com",
-        code_postal: "62000",
+        code_postal: "95200",
         ville: "Test",
         telephone: "0102030405",
-        latitude: 48.262725,
-        longitude: 2.2453592,
+        latitude: 47.262725,
+        longitude: 2.4453592,
         admin: false,
         user_id: 4
       });

@@ -2,6 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const queries = require("../db/queries");
+const { getMesuresMap } = require("../db/queries/mandataires");
 const { loginRequired, typeRequired } = require("../auth/_helpers");
 
 const {
@@ -52,7 +53,7 @@ router.post(
       body["ti_id"] = ti.id;
       queries
         .addMesure(body)
-        .then(mesures => res.status(200).json({ success: true}))
+        .then(mesures => res.status(200).json({ success: true }))
         .catch(error => {
           console.log(error);
           next(error);
@@ -107,10 +108,9 @@ router.get(
   typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     const mandataire = await queries.getMandataireByUserId(req.user.id);
-    queries
-      .getAllMesuresByMandatairesForMaps(mandataire.id)
-      .then(mesures => res.status(200).json(mesures))
-      .catch(error => next(error));
+    const mesures = await getMesuresMap(mandataire.id);
+    res.status(200).json(mesures);
+    next();
   }
 );
 
