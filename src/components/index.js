@@ -3,6 +3,7 @@ export { default as Button } from "./common/Button";
 export { default as DummyTabs } from "./common/DummyTabs";
 export { default as Footer } from "./communComponents/Footer";
 export { default as Layout } from "./common/Layout";
+export { default as LoadingMessage } from "./common/LoadingMessage";
 export { default as Navigation } from "./communComponents/Navigation";
 export { default as PromiseState } from "./common/PromiseState";
 export { default as SearchButton } from "./communComponents/SearchButton";
