@@ -6,6 +6,6 @@ exports.up = function(knex, Promise) {
 
 exports.down = function(knex, Promise) {
   return knex.schema.alterTable("mesures", function(table) {
-    table.date("annee").alter();
+    table.string("annee").alter();
   });
 };

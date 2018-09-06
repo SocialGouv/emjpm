@@ -98,7 +98,7 @@ describe("routes : auth", () => {
           res.status.should.eql(200);
           res.redirects.length.should.eql(0);
           res.type.should.eql("application/json");
-          res.body.status.should.eql("success");
+          res.body.success.should.eql(true);
           res.body.url.should.eql("/mandataires");
         }));
     it("should not login an inactive user", () =>
@@ -112,7 +112,7 @@ describe("routes : auth", () => {
         .then(res => {
           res.status.should.eql(401);
           res.type.should.eql("application/json");
-          res.body.status.should.eql("User not found");
+          res.body.success.should.eql(false);
         }));
     it("should NOT login an unregistered user", () =>
       chai
@@ -125,7 +125,7 @@ describe("routes : auth", () => {
         .then(res => {
           res.status.should.eql(401);
           res.type.should.eql("application/json");
-          res.body.status.should.eql("User not found");
+          res.body.success.should.eql(false);
         }));
     it("should NOT login a registered user with wrong password", () =>
       chai
@@ -138,7 +138,8 @@ describe("routes : auth", () => {
         .then(res => {
           res.status.should.eql(401);
           res.type.should.eql("application/json");
-          res.body.status.should.eql("User not found");
+          res.body.message.should.eql("User not found");
+          res.body.success.should.eql(false);
         }));
   });
 
@@ -151,7 +152,7 @@ describe("routes : auth", () => {
             res.status.should.eql(200);
             res.redirects.length.should.eql(0);
             res.type.should.eql("application/json");
-            res.body.status.should.eql("success");
+            res.body.success.should.eql(true);
           })
           .catch(e => {
             console.log("e", e);
