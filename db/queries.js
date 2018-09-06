@@ -187,9 +187,6 @@ function getAllByMandatairesFilter(
           longNorthEast
         ])
     )
-    .orWhere({
-      "users.type": "service"
-    })
     .innerJoin("users", "users.id", "mandataires.user_id")
     .innerJoin(
       "mandataire_tis",
