@@ -24,6 +24,7 @@ router.get("/1", loginRequired, async (req, res, next) => {
 const WHITELIST = [
   "nom",
   "prenom",
+  "etablissement",
   "genre",
   "telephone",
   "telephone_portable",
@@ -153,6 +154,21 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
       .json(mandataire)
       .catch(error => next(error));
   });
+});
+
+router.put("/:mandataireId/mesures-en-attente", loginRequired, async (req, res, next) => {
+  // const mandataire = await queries.getMandataireByUserId(req.user.id);
+  // if (!mandataire) {
+  //   return next(new Error(401));
+  // }
+  // récupères le nb de mesure attribuées pour ce mandataire
+
+    console.log(req.body)
+  const MesureEnAttente = queries.mesureEnAttente(req.body.mandataire_id);
+  queries
+    .update(req.body.mandataire_id, { mesures_en_attente: MesureEnAttente })
+    .then(mandataire => res.status(200).json(mandataire))
+    .catch(error => next(error));
 });
 
 router.use("/", require("./commentaires"));

@@ -2,6 +2,7 @@ version: "3"
 services:
   db:
     image: postgres
+    restart: always
     container_name: emjpm-postgres
     environment:
       # master password
