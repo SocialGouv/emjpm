@@ -2,8 +2,6 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const { format, addMonths, addDays } = require("date-fns");
 
-const queries = require("../db/queries");
-
 const router = express.Router();
 
 const SMTP_HOST = process.env.SMTP_HOST || "127.0.0.1";

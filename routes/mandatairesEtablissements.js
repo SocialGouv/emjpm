@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-var queries = require("../db/queries");
 
 const { loginRequired } = require("../auth/_helpers");
 const {
@@ -13,96 +12,20 @@ const {
 const { getMandataireByUserId } = require("../db/queries/mandataires");
 
 
-/**
+/*
  * @swagger
- * security:
- *   - cookieAuth: []
- * components:
- *   securitySchemes:
- *     cookieAuth:
- *       type: apiKey
- *       in: cookie
- *       name: connect.sid
- *   requestBodies:
- *     ActiveMandataireBody:
- *       description: A JSON object containing user active status
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               active:
- *                 type: boolean
- *                 required: true
- *   schemas:
- *     Mandataire:
- *       type: object
- *       properties:
- *         id:
- *           description: ID du mandataire
- *           type: integer
- *         type:
- *           description: Type de mandataire
- *           deprecated: true
- *           type: string
- *           enum:
- *             - preposes
- *             - individuels
- *             - services
- *         nom:
- *           description: Nom du mandataire
- *           type: string
- *         prenom:
- *           description: Prénom du mandataire
- *           type: string
- *         code_postal:
- *           description: Code postal du mandataire
- *           type: string
- *         created_at:
- *           description: Date de création du mandataire
- *           type: datetime
- *         last_login:
- *           description: Date de dernière connextion du mandataire
- *           type: datetime
- *
- *     SuccessResponse:
- *       description: conformation de succes
- *       type: object
- *       properties:
- *         success:
- *           type: boolean
- *           value: true
- *
- *     ActiveMandataireBody:
- *       description: changement etat du mandataire
- *       type: object
- *       properties:
- *         active:
- *           type: boolean
- *           value: true
- *
- * @swagger
- * /:mandataireId/etablissement:
+ * mandataires/1/etablissement:
  *   get:
  *     description: get list of etablissements for a specified mandataire
  *     produces:
  *       - application/json
- *     parameters:
- *       - in: query
- *         name: query
- *         description: filters to apply to the list. ex `?users.active=true`
- *         required: false
- *         schema:
- *           type: object
  *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Mandataire'
+ *
  */
 router.get("/1/etablissement", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
@@ -112,16 +35,16 @@ router.get("/1/etablissement", loginRequired, async (req, res, next) => {
 });
 
 /** @swagger
- * /:mandataireId/etablissement:
+ * mandataires/:mandataireID/tisEtablissement:
  *   get:
  *     description: get list of etablissements for a specified mandataire
  *     produces:
  *       - application/json
  *     parameters:
- *       - in: query
- *         name: query
- *         description: filters to apply to the list. ex `?users.active=true`
- *         required: false
+ *       - in: path
+ *         name: mandataireID
+ *         description: get mandataire id
+ *         required: true
  *         schema:
  *           type: object
  *     responses:
@@ -130,8 +53,6 @@ router.get("/1/etablissement", loginRequired, async (req, res, next) => {
  *           application/json:
  *             schema:
  *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Mandataire'
  */
 //todo: secu
 router.get(
@@ -145,9 +66,9 @@ router.get(
 );
 
 /** @swagger
- * /:mandataireId/etablissements:
+ * mandataires/1/etablissements:
  *   post:
- *     description: get list of etablissements for a specified mandataire
+ *     description: post an etablissement for a specified mandataire
  *     produces:
  *       - application/json
  *     parameters:
@@ -157,14 +78,24 @@ router.get(
  *         required: false
  *         schema:
  *           type: object
+ *     requestBodies:
+ *     ActiveMandataireBody:
+ *       description: A JSON object containing etablissement
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               etablissement_id:
+ *                 type: integer
+ *                 required: true
  *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Mandataire'
  */
 router.post("/1/etablissements", loginRequired, async (req, res, next) => {
   // secu : ensure TI can write on this mandataire + add related test
@@ -179,16 +110,16 @@ router.post("/1/etablissements", loginRequired, async (req, res, next) => {
 });
 
 /** @swagger
- * /:mandataireId/etablissements/:mandatairesEtablissementId:
+ * mandataires/1/etablissements/:mandatairesEtablissementId:
  *   delete:
  *     description: get list of etablissements for a specified mandataire
  *     produces:
  *       - application/json
  *     parameters:
- *       - in: query
- *         name: query
- *         description: filters to apply to the list. ex `?users.active=true`
- *         required: false
+ *       - in: paths
+ *         name: mandatairesEtablissementId
+ *         description: find the etablissement_id of one mandataire
+ *         required: true
  *         schema:
  *           type: object
  *     responses:
@@ -197,8 +128,6 @@ router.post("/1/etablissements", loginRequired, async (req, res, next) => {
  *           application/json:
  *             schema:
  *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Mandataire'
  */
 // todo : ensure user can delete this entry
 router.delete(
@@ -216,27 +145,20 @@ router.delete(
   }
 );
 
+
+// Change location of this routes
 /** @swagger
- * /:mandataireId/etablissements:
+ * mandataires/1/etablissements:
  *   get:
- *     description: get list of etablissements for a specified mandataire
+ *     description: get list of etablissements.
  *     produces:
  *       - application/json
- *     parameters:
- *       - in: query
- *         name: query
- *         description: filters to apply to the list. ex `?users.active=true`
- *         required: false
- *         schema:
- *           type: object
  *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Mandataire'
  */
 router.get("/1/etablissements", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);

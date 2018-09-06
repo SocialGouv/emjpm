@@ -12,6 +12,19 @@ const {
 
 const {getTiByUserId} = require("../db/queries/tis")
 
+/** @swagger
+ * /mandataires/1/commentaires:
+ *   get:
+ *     description: get all commentaires for a specific mandataire
+ *     produces:
+ *       - application/json
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get(
   "/:mandataireId/commentaires",
   typeRequired("ti"),
@@ -30,6 +43,38 @@ router.get(
   }
 );
 
+/** @swagger
+ * /mandataires/:mandataireId/commentaires:
+ *   post:
+ *     description: post a commentaire for a specific mandataire
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: path
+ *         name: mandataireId
+ *         description: find a specific mandataire
+ *         required: true
+ *         schema:
+ *           type: object
+ *     requestBodies:
+ *     ActiveMandataireBody:
+ *       description: A JSON object containing commentaire
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               comment:
+ *                 type: varchar
+ *                 required: true
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.post(
   "/:mandataireId/commentaires",
   typeRequired("ti"),
@@ -65,6 +110,32 @@ router.post(
   }
 );
 
+/** @swagger
+ * /mandataires/:mandataireId/commentaires/:commentaireId:
+ *   delete:
+ *     description: delete a commentaire for specific mandataire
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: path
+ *         name: mandataireId
+ *         description: find a specific mandataire by id
+ *         required: true
+ *         schema:
+ *           type: object
+ *       - in: path
+ *         name: commentaireId
+ *         description: find a specific commentaire by id
+ *         required: true
+ *         schema:
+ *           type: object
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.delete(
   "/:mandataireId/commentaires/:commentaireId",
   typeRequired("ti"),

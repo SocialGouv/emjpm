@@ -21,12 +21,9 @@ const isLate = mandataire => {
   return !hasUpdatedLastMonth && !hasBeenMailedRecently;
 };
 
-const {getTiByUserId} = require("../db/queries/tis")
+const { getTiByUserId } = require("../db/queries/tis");
 
-const {
-    getAll,
-    updateMandataireMailSent
-} = require("../db/queries/email");
+const { getAll, updateMandataireMailSent } = require("../db/queries/email");
 
 const hasEmail = mandataire => !!mandataire.email;
 
@@ -63,8 +60,21 @@ En vous remerciant de votre précieuse collaboration.
 Bien à vous.
 `;
 
+/** @swagger
+ * /email/relance-mandataires-inactifs:
+ *   get:
+ *     description: send email to not active mandataire
+ *     produces:
+ *       - application/json
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: "success: true"
+ */
 router.get("/relance-mandataires-inactifs", function(req, res, next) {
-getAll()
+  getAll()
     .then(mandataires =>
       mandataires
         .filter(hasEmail)
@@ -117,6 +127,34 @@ L'équipe e-mjpm
 `;
 };
 
+/** @swagger
+ * /email/reservation-mesures:
+ *   get:
+ *     description: send email for a specific mandataire
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: query
+ *         name: nom
+ *         description: name of a mandataire
+ *         required: true
+ *         schema:
+ *           type: object
+ *       - in: query
+ *         name: prenom
+ *         description: prenom of a mandataire
+ *         required: true
+ *         schema:
+ *           type: object
+ *       - in: query
+ *         name: etablissement
+ *         description: etablissement of a mandataire
+ *         required: true
+ *         schema:
+ *           type: object
+ *   responses:
+ *       200
+ */
 router.get("/reservation-mesures", function async(req, res, next) {
   getTiByUserId(req.user.id).then(ti => {
     sendEmail(

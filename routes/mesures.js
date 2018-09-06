@@ -14,8 +14,21 @@ const {
   getPostecode
 } = require("../db/queries/mesures");
 
-const {getTiByUserId} = require("../db/queries/tis")
+const { getTiByUserId } = require("../db/queries/tis");
 
+/** @swagger
+ * /mesures:
+ *   get:
+ *     description: get all mesures in a specific Ti
+ *     produces:
+ *       - application/json
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get("/", typeRequired("ti"), async (req, res, next) => {
   if (req.user.type !== "ti") {
     return next(new Error(401));
@@ -30,6 +43,39 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
 });
 
 // todo : make it work for real
+/** @swagger
+ * /mesures/filters:
+ *   post:
+ *     description: post to filters mesures by Ti map
+ *     produces:
+ *       - application/json
+ *     requestBodies:
+ *       description: A JSON object containing latitude and longitude
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               latNorthEast:
+ *                 type: float
+ *                 required: true
+ *               latSouthWest:
+ *                 type: float
+ *                 required: true
+ *               longNorthEast:
+ *                 type: float
+ *                 required: true
+ *               longSouthWest:
+ *                 type: float
+ *                 required: true
+ *      responses:
+ *         200:
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: array
+ */
 router.post("/filters", loginRequired, async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
   if (!ti) {
@@ -51,6 +97,28 @@ router.post("/filters", loginRequired, async (req, res, next) => {
     });
 });
 
+
+//ToDo: merge with get "mesures/"
+/** @swagger
+ * /mesures/popup:
+ *   *   get:
+ *     description: get all mesures in a specific Ti group by Post code
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: query
+ *         name: searchType
+ *         description: filters mesures to apply to the list of mesures
+ *         required: false
+ *         schema:
+ *           type: object
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get("/popup", typeRequired("ti"), async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
   if (!ti) {
@@ -67,6 +135,19 @@ router.get("/popup", typeRequired("ti"), async (req, res, next) => {
     });
 });
 
+/** @swagger
+ * /mandataires/getAllMesuresByTis:
+ *   get:
+ *     description: get mesures for a specific Tis
+ *     produces:
+ *       - application/json
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get(
   "/getAllMesuresByTis",
   typeRequired("ti"),
@@ -87,6 +168,19 @@ router.get(
   }
 );
 
+/** @swagger
+ * /mesurespopupMandataire:
+ *   get:
+ *     description: get mesures for mandataire map for a specific Tis
+ *     produces:
+ *       - application/json
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get("/popupMandataire", loginRequired, async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
   getAllMesuresByPopUpForMandataire(ti.id)
@@ -100,6 +194,17 @@ router.get("/popupMandataire", loginRequired, async (req, res, next) => {
     });
 });
 
+/** @swagger
+ * /mesures/codePostal:
+ *   get:
+ *     description: get all postcode from geo.api.gouv.fr
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get("/codePostal", async (req, res, next) => {
   url =
     "https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,centre,population&boost=population";

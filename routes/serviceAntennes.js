@@ -6,13 +6,24 @@ const { loginRequired } = require("../auth/_helpers");
 const {
   getAllAntennes,
   addAntenne,
-  updateAntenne,
   deleteAntenne
 } = require("../db/queries/serviceAntennes");
 
 const { getMandataireByUserId } = require("../db/queries/mandataires");
 
-
+/** @swagger
+ * /mandataires/1/antennes:
+ *   get:
+ *     description: get list of antennes for a specific mandataire
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.get("/:mandataireId/antennes", loginRequired, async (req, res, next) => {
   const ti = await getMandataireByUserId(req.user.id);
   getAllAntennes(ti.id)
@@ -24,6 +35,31 @@ router.get("/:mandataireId/antennes", loginRequired, async (req, res, next) => {
     });
 });
 
+/** @swagger
+ * /mandataires/1/antennes:
+ *   post:
+ *     description: post a new antenne for specific mandataire
+ *     produces:
+ *       - application/json
+ *     requestBodies:
+ *     ActiveMandataireBody:
+ *       description: A JSON object containing etablissement id
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               etablissement_id:
+ *                 type: integer
+ *                 required: true
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.post(
   "/:mandataireId/antennes",
   loginRequired,
@@ -47,24 +83,26 @@ router.post(
   }
 );
 
-router.put(
-  "/:mandataireId/antennes/:antenneId",
-  loginRequired,
-  async (req, res, next) => {
-    const ti = await getMandataireByUserId(req.user.id);
-    updateAntenne(req.params.antenneId, req.body)
-      .then(function() {
-        return getAllAntennes(ti.id);
-      })
-      .then(function(commentaire) {
-        res.status(200).json(commentaire);
-      })
-      .catch(function(error) {
-        next(error);
-      });
-  }
-);
-
+/** @swagger
+ * /mandataires/1/antennes:
+ *   delete:
+ *     description: delete an antenne for specific mandataire
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: paths
+ *         name: antenneId
+ *         description: id of the antenne
+ *         required: true
+ *         schema:
+ *           type: object
+ *   responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
 router.delete(
   "/:mandataireId/antennes/:antenneId",
   loginRequired,
