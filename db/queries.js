@@ -49,7 +49,7 @@ function getAllServicesByTis(ti_id) {
   return knex
     .from("mandataire_tis")
     .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id")
-    .where({ ti_id: parseInt(ti_id), type: "Service" });
+    .where({ ti_id: parseInt(ti_id), type: "service" });
 }
 
 function getAllMesures(mandataireID) {
