@@ -92,7 +92,7 @@ const EditMandataire = ({ show, handleHide, formData, onSubmit, ...props }) => {
   //   annee: parseInt(formData.annee)
   // };
   return (
-    <Layout show={show} handleHide={handleHide} className="ModalEditMandataire">
+    <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
       <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>
         <div style={{ margin: "20px 0", textAlign: "center" }}>
           <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>

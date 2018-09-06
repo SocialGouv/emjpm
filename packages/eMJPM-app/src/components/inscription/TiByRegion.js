@@ -18,11 +18,12 @@ class TiByRegion extends React.Component {
 
   render() {
     return (
-      <div>
+      <div data-cy={`TiByRegion-${this.props.nom}`}>
         <div>
           <label>
             <input
-              type="checkBox"
+              data-cy="region"
+              type="checkbox"
               style={{ marginRight: 5 }}
               onChange={this.changeState}
               value=""
@@ -37,8 +38,9 @@ class TiByRegion extends React.Component {
             <div style={{ marginLeft: 40 }} key={ti.id}>
               <label>
                 <input
+                  data-cy="ti"
                   style={{ marginRight: 5 }}
-                  type="checkBox"
+                  type="checkbox"
                   onChange={e => this.props.onTiSelected(ti.id, e.target.checked)}
                 />
                 {ti.nom}
