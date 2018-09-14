@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === "production") {
     session({
       secret: SECRET_KEY,
       cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 10 // ten days
+        maxAge: 1000 * 60 * 60 * 4 // 4 hours
       },
       store: store
     })
