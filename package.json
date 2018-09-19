@@ -1,11 +1,11 @@
 {
-  "name": "backend_LebonTuteur",
+  "name": "eMJPM-api",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "NODE_ENV=test mocha --timeout 5000",
+    "test": "NODE_ENV=test mocha --timeout 5000 --exit",
     "knex": "knex",
     "eslint": "eslint *.js **/*.js --fix",
     "migrate-and-start": "knex migrate:latest && npm start",
