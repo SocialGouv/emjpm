@@ -16,16 +16,20 @@ const { getMandataireByUserId } = require("../db/queries/mandataires");
  * @swagger
  * mandataires/1/etablissement:
  *   get:
+ *   tags:
+ *       - etablissement
  *     description: get list of etablissements for a specified mandataire
  *     produces:
  *       - application/json
  *     responses:
  *       200:
+ *         description: return list of etablissements
  *         content:
  *           application/json:
  *             schema:
  *               type: array
- *
+ *               items:
+ *                 type: object
  */
 router.get("/1/etablissement", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
@@ -34,16 +38,21 @@ router.get("/1/etablissement", loginRequired, async (req, res, next) => {
     .catch(error => next(error));
 });
 
+
+//ToDo rm
+
 /** @swagger
  * mandataires/:mandataireID/tisEtablissement:
  *   get:
- *     description: get list of etablissements for a specified mandataire
+ *     tags:
+ *         - etablissement
+ *     description: get list of etablissements for a specified mandataire for specific tis
  *     produces:
  *       - application/json
  *     parameters:
  *       - in: path
  *         name: mandataireID
- *         description: get mandataire id
+ *         description:  mandataire id
  *         required: true
  *         schema:
  *           type: object
@@ -53,6 +62,8 @@ router.get("/1/etablissement", loginRequired, async (req, res, next) => {
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 //todo: secu
 router.get(
@@ -68,18 +79,18 @@ router.get(
 /** @swagger
  * mandataires/1/etablissements:
  *   post:
- *     description: post an etablissement for a specified mandataire
+ *     tags:
+ *       - etablissement
+ *     description: add an etablissement to a mandataire
  *     produces:
  *       - application/json
  *     parameters:
  *       - in: query
  *         name: query
- *         description: filters to apply to the list. ex `?users.active=true`
  *         required: false
  *         schema:
  *           type: object
- *     requestBodies:
- *     ActiveMandataireBody:
+ *     requestBody:
  *       description: A JSON object containing etablissement
  *       required: true
  *       content:
@@ -92,10 +103,13 @@ router.get(
  *                 required: true
  *     responses:
  *       200:
+ *         description: Return all etablissements for specific mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.post("/1/etablissements", loginRequired, async (req, res, next) => {
   // secu : ensure TI can write on this mandataire + add related test
@@ -112,13 +126,15 @@ router.post("/1/etablissements", loginRequired, async (req, res, next) => {
 /** @swagger
  * mandataires/1/etablissements/:mandatairesEtablissementId:
  *   delete:
- *     description: get list of etablissements for a specified mandataire
+ *     tags:
+ *       - etablissement
+ *     description: delete etablissement
  *     produces:
  *       - application/json
  *     parameters:
  *       - in: paths
  *         name: mandatairesEtablissementId
- *         description: find the etablissement_id of one mandataire
+ *         description: etablissement id
  *         required: true
  *         schema:
  *           type: object
@@ -128,6 +144,8 @@ router.post("/1/etablissements", loginRequired, async (req, res, next) => {
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 // todo : ensure user can delete this entry
 router.delete(
@@ -150,6 +168,8 @@ router.delete(
 /** @swagger
  * mandataires/1/etablissements:
  *   get:
+ *     tags:
+ *       - etablissement
  *     description: get list of etablissements.
  *     produces:
  *       - application/json
@@ -159,6 +179,8 @@ router.delete(
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get("/1/etablissements", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);

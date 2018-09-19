@@ -15,15 +15,20 @@ const {getTiByUserId} = require("../db/queries/tis")
 /** @swagger
  * /mandataires/1/commentaires:
  *   get:
+ *     tags:
+ *       - commentaire
  *     description: get all commentaires for a specific mandataire
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all commentaires of one mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get(
   "/:mandataireId/commentaires",
@@ -46,18 +51,19 @@ router.get(
 /** @swagger
  * /mandataires/:mandataireId/commentaires:
  *   post:
- *     description: post a commentaire for a specific mandataire
+ *     tags:
+ *       - commentaire
+ *     description: add a commentaire for a specific mandataire
  *     produces:
  *       - application/json
  *     parameters:
  *       - in: path
  *         name: mandataireId
- *         description: find a specific mandataire
+ *         description: mandataire id
  *         required: true
  *         schema:
  *           type: object
- *     requestBodies:
- *     ActiveMandataireBody:
+ *     requestBody:
  *       description: A JSON object containing commentaire
  *       required: true
  *       content:
@@ -66,14 +72,17 @@ router.get(
  *             type: object
  *             properties:
  *               comment:
- *                 type: varchar
+ *                 type: string
  *                 required: true
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all commentaires of one mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.post(
   "/:mandataireId/commentaires",
@@ -113,28 +122,33 @@ router.post(
 /** @swagger
  * /mandataires/:mandataireId/commentaires/:commentaireId:
  *   delete:
+ *     tags:
+ *       - commentaire
  *     description: delete a commentaire for specific mandataire
  *     produces:
  *       - application/json
  *     parameters:
  *       - in: path
  *         name: mandataireId
- *         description: find a specific mandataire by id
+ *         description: mandataire id
  *         required: true
  *         schema:
  *           type: object
  *       - in: path
  *         name: commentaireId
- *         description: find a specific commentaire by id
+ *         description: commentaire id
  *         required: true
  *         schema:
  *           type: object
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all commentaires of one mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.delete(
   "/:mandataireId/commentaires/:commentaireId",

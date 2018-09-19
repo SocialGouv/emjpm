@@ -17,22 +17,26 @@ const { getMandataireByUserId } = require("../db/queries/mandataires");
 /** @swagger
  * /mandataires/:mandataireId/tis-by-mandataire:
  *   get:
+ *     tags:
+ *       - tis
  *     description: get Tis by mandataire
  *     produces:
  *       - application/json
  *     parameters:
  *       - in: paths
  *         name: mandataireId
- *         description: take a Ti by id.
+ *         description: mandataire id.
  *         required: true
  *         schema:
  *           type: object
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 
 router.get(
@@ -40,7 +44,7 @@ router.get(
   loginRequired,
   async (req, res, next) => {
     getAllTisByMandataire(req.params.mandataireId)
-      .then(etablissements => res.status(200).json(etablissements))
+      .then(tis => res.status(200).json(tis))
       .catch(error => next(error));
   }
 );
@@ -48,12 +52,12 @@ router.get(
 /** @swagger
  * /mandataires/1/tis:
  *   post:
- *     description: post a new Ti for specific mandataire
+ *     tags:
+ *       - tis
+ *     description: add a Ti to mandataire
  *     produces:
  *       - application/json
- *     requestBodies:
- *     ActiveMandataireBody:
- *       description: A JSON object containing commentaire
+ *     requestBody:
  *       required: true
  *       content:
  *         application/json:
@@ -63,12 +67,14 @@ router.get(
  *               ti_id:
  *                 type: integer
  *                 required: true
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.post("/1/tis", loginRequired, async (req, res, next) => {
   // secu : ensure TI can write on this mandataire + add related test
@@ -78,7 +84,7 @@ router.post("/1/tis", loginRequired, async (req, res, next) => {
     mandataire_id: mandataire.id
   })
     .then(() => getAllTisByMandataire(mandataire.id))
-    .then(etablissements => res.status(200).json(etablissements))
+    .then(tis => res.status(200).json(tis))
     .catch(error => next(error));
 });
 
@@ -87,6 +93,8 @@ router.post("/1/tis", loginRequired, async (req, res, next) => {
 /** @swagger
  * /mandataires/1/tis/:tiId:
  *   delete:
+ *     tags:
+ *       - tis
  *     description: delete a Ti for specific mandataire
  *     produces:
  *       - application/json
@@ -97,60 +105,72 @@ router.post("/1/tis", loginRequired, async (req, res, next) => {
  *         required: true
  *         schema:
  *           type: object
- *    responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.delete("/1/tis/:tiId", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
   deleteMandataireTis(req.params.tiId, mandataire.id)
     .then(() => getAllTisByMandataire(mandataire.id))
-    .then(etablissements => res.status(200).json(etablissements))
+    .then(tis => res.status(200).json(tis))
     .catch(error => {
       console.log(error);
       next(error);
     });
 });
 
+
+// ToDo : merge with /:mandataireId/tis-by-mandataire
 /** @swagger
  * /mandataires/1/tis:
  *   get:
+ *     tags:
+ *       - tis
  *     description: get Tis for specific mandataire
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get("/1/tis", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
   getAllTisByMandataire(mandataire.id)
-    .then(etablissements => res.status(200).json(etablissements))
+    .then(tis => res.status(200).json(tis))
     .catch(error => next(error));
 });
 
 /** @swagger
  * /mandataires/tis:
  *   get:
- *     description: get Tis
+ *     tags:
+ *       - tis
+ *     description: get all Tis
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get("/tis", loginRequired, async (req, res, next) => {
   getTis()
-    .then(etablissements => res.status(200).json(etablissements))
+    .then(tis => res.status(200).json(tis))
     .catch(error => next(error));
 });
 

@@ -46,13 +46,13 @@ const {
  *                 type: integer
  *                 required: true
  *               annee:
- *                 type: date
+ *                 type: string
  *                 required: false
  *               type:
  *                 type: string
  *                 required: true
  *               date_ouverture:
- *                 type: date
+ *                 type: string
  *                 required: true
  *               residence:
  *                 type: string
@@ -64,7 +64,7 @@ const {
  *                 type: string
  *                 required: false
  *               extinction:
- *                 type: date
+ *                 type: string
  *                 required: true
  *               etablissement_id:
  *                 type: integer
@@ -78,24 +78,29 @@ const {
 /** @swagger
  * /mandataires/1/mesures/:mesureId:
  *   put:
+ *     tags:
+ *       - mandataireMesure
  *     description: update a mesure for a specific mandataire
  *     produces:
  *       - application/json
  *     parameters:
  *       - in: path
  *         name: mesureId
- *         description: get id of specific mesure.
+ *         description: mesure id.
  *         required: true
  *         schema:
  *           type: object
- *     requestBodies:
+ *     requestBody:
  *       $ref: '#/components/requestBodies/mandataireMesures'
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all mesures of a mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.put(
   "/:mandataireId/mesures/:mesureId",
@@ -126,17 +131,22 @@ router.put(
 /** @swagger
  * /mandataires/1/mesures:
  *   post:
+ *     tags:
+ *       - mandataireMesure
  *     description: post a new mesures for specific mandataire
  *     produces:
  *       - application/json
- *     requestBodies:
+ *     requestBody:
  *       $ref: '#/components/requestBodies/mandataireMesures'
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all mesures of a mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.post(
   "/:mandataireId/mesures",
@@ -175,17 +185,22 @@ router.post(
 /** @swagger
  * /mandataires/1/mesure-reservation:
  *   post:
- *     description: post a new reservation mesure
+ *     tags:
+ *       - mandataireMesure
+ *     description: post a new "reservation" mesure
  *     produces:
  *       - application/json
- *     requestBodies:
+ *     requestBody:
  *       $ref: '#/components/requestBodies/mandataireMesures'
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all mesures of a mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.post(
   "/:mandataireId/mesure-reservation",
@@ -205,15 +220,20 @@ router.post(
 /** @swagger
  * /mandataires/1/mesures:
  *   get:
- *     description: get all mesures en cours for a specific mandataires
+ *     tags:
+ *       - mandataireMesure
+ *     description: get all active "mesures" for a mandataires
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all active "mesures" of a mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get(
   "/:mandataireId/mesures",
@@ -226,24 +246,31 @@ router.get(
   }
 );
 
+
+//ToDo doublon
 /** @swagger
  * /mandataires/1/mesuresForMaps:
  *   get:
- *     description: get all mesures for a specific mandataire to display inside a map
+ *     tags:
+ *       - mandataireMesure
+ *     description: get all mesures for a mandataire to display inside a map
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all mesures of a mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get(
   "/:mandataireId/mesuresForMaps",
   typeRequired("individuel", "prepose"),
   async (req, res, next) => {
-    const mandataire = await queries.getMandataireByUserId(req.user.id);
+    const mandataire = await getMandataireByUserId(req.user.id);
     const mesures = await getMesuresMap(mandataire.id);
     res.status(200).json(mesures);
     next();
@@ -253,15 +280,20 @@ router.get(
 /** @swagger
  * /mandataires/1/mesures/attente:
  *   get:
- *     description: get all mesures en attente for a specific mandataire
+ *     tags:
+ *       - mandataireMesure
+ *     description: get all "mesures en attente" for a specific mandataire
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all "mesures en attente" of a mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get(
   "/:mandataireId/mesures/attente",
@@ -277,15 +309,20 @@ router.get(
 /** @swagger
  * /mandataires/1/mesures/Eteinte:
  *   get:
- *     description: get all mesures eteintes for a specific mandataire
+ *     tags:
+ *       - mandataireMesure
+ *     description: get all "mesures eteintes" for a specific mandataire
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all "mesures eteintes" of a mandataire
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get(
   "/:mandataireId/mesures/Eteinte",

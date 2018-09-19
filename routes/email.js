@@ -63,15 +63,17 @@ Bien à vous.
 /** @swagger
  * /email/relance-mandataires-inactifs:
  *   get:
+ *     tags:
+ *       - email
  *     description: send email to not active mandataire
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
- *               type: "success: true"
+ *               $ref: '#/components/schemas/SuccessResponse'
  */
 router.get("/relance-mandataires-inactifs", function(req, res, next) {
   getAll()
@@ -130,30 +132,36 @@ L'équipe e-mjpm
 /** @swagger
  * /email/reservation-mesures:
  *   get:
- *     description: send email for a specific mandataire
+ *     tags:
+ *       - email
+ *     description: send email to mandataire when Ti book a "mesure" for this mandataire.
  *     produces:
  *       - application/json
  *     parameters:
  *       - in: query
  *         name: nom
- *         description: name of a mandataire
+ *         description: mandataire name
  *         required: true
  *         schema:
  *           type: object
  *       - in: query
  *         name: prenom
- *         description: prenom of a mandataire
+ *         description: mandataire nickname
  *         required: true
  *         schema:
  *           type: object
  *       - in: query
  *         name: etablissement
- *         description: etablissement of a mandataire
+ *         description: mandataire establishment
  *         required: true
  *         schema:
  *           type: object
- *   responses:
- *       200
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SuccessResponse'
  */
 router.get("/reservation-mesures", function async(req, res, next) {
   getTiByUserId(req.user.id).then(ti => {
