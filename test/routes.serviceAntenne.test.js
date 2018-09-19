@@ -13,12 +13,13 @@ chai.use(chaiHttp);
 passportStub.install(server);
 
 describe("routes : serviceAntenne", () => {
-  beforeEach(() =>
-    knex.migrate
+  beforeEach(() => {
+    knex.raw("DELETE FROM 'knex_migrations_lock';");
+    return knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())
-      .then(() => knex.seed.run())
-  );
+      .then(() => knex.seed.run());
+  });
 
   afterEach(() => {
     passportStub.logout();
