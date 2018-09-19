@@ -32,76 +32,77 @@ const { getTiByUserId } = require("../db/queries/tis");
  *       in: cookie
  *       name: connect.sid
  *   requestBodies:
- *     ActiveMandataireBody:
- *       description: A JSON object containing user active status
+ *     ActiveMandataire:
+ *       description: A JSON object containing mandataire
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *             type: object
  *             properties:
- *               active:
- *                 type: boolean
- *                 required: true
- *   schemas:
- *     Mandataire:
- *       type: object
- *       properties:
- *         id:
- *           description: ID du mandataire
- *           type: integer
- *         type:
- *           description: Type de mandataire
- *           deprecated: true
- *           type: string
- *           enum:
- *             - preposes
- *             - individuels
- *             - services
- *         nom:
- *           description: Nom du mandataire
- *           type: string
- *         prenom:
- *           description: Prénom du mandataire
- *           type: string
- *         code_postal:
- *           description: Code postal du mandataire
- *           type: string
- *         created_at:
- *           description: Date de création du mandataire
- *           type: datetime
- *         last_login:
- *           description: Date de dernière connextion du mandataire
- *           type: datetime
- *
- *     SuccessResponse:
- *       description: conformation de succes
- *       type: object
- *       properties:
- *         success:
- *           type: boolean
- *           value: true
- *
- *     ActiveMandataireBody:
- *       description: changement etat du mandataire
- *       type: object
- *       properties:
- *         active:
- *           type: boolean
- *           value: true
+ *               id:
+ *                 description: ID mandataire
+ *                 type: integer
+ *               etablissement:
+ *                 description: Etablissement du mandataire
+ *                 type: string
+ *               email:
+ *                 description: Email du mandataire
+ *                 type: string
+ *               nom:
+ *                 description: Nom du mandataire
+ *                 type: string
+ *               prenom:
+ *                 description: Prénom of mandataire
+ *                 type: string
+ *               code_postal:
+ *                 description: Code postal du mandataire
+ *                 type: string
+ *               ville:
+ *                 description: Ville du mandataire
+ *                 type: string
+ *               telephone:
+ *                 description: Telephone du mandaaire
+ *                 type: string
+ *               adresse:
+ *                 description: Adresse du mandataire
+ *                 type: string
+ *               mesures_en_cours:
+ *                 description: nombre de mesures en cours du mandataire
+ *                 type: integer
+ *               dispo_max:
+ *                 description: nombre de mesure maximum souhaité
+ *                 type: integer
+ *               telephone_portable:
+ *                 description: telephone portable du mandataire
+ *                 type: integer
+ *               secretariat:
+ *                 description: présence d'un secretariat
+ *                 type: bool
+ *               nb_secretariat:
+ *                 description: nombre de secrétaire
+ *                 type: float
+ *               genre:
+ *                 description: genre du mandataire
+ *                 type: string
  *
  * @swagger
  * /mandataires/1:
  *   get:
- *     description: get a mandataire
+ *     tags:
+ *       - mandataire
+ *     description: get specific mandataire
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return information for mandataire
  *         content:
  *           application/json:
  *             schema:
- *               type: hash
+ *               type: object
+ *               items:
+ *                 type: object
  */
 router.get("/1", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
@@ -139,17 +140,22 @@ const whiteList = obj =>
  * @swagger
  * /mandataire/1:
  *   put:
- *     description: update some user's data
+ *     tags:
+ *       - mandataire
+ *     description: update mandataire
  *     produces:
  *       - application/json
  *     requestBody:
- *       $ref: '#/components/requestBodies/ActiveMandataireBody'
+ *       $ref: '#/components/requestBodies/ActiveMandataire'
  *     responses:
  *       200:
+ *         description: Return information for mandataire
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/SuccessResponse'
+ *               type: object
+ *               items:
+ *                 type: object
  */
 router.put("/1", loginRequired, async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
@@ -180,11 +186,13 @@ router.put("/1", loginRequired, async (req, res, next) => {
 /** @swagger
  * /mandataires/filters:
  *   post:
- *     description: post a new filters
+ *     tags:
+ *       - mandataire
+ *     description: Filters mandataire by geolocalisation
  *     produces:
  *       - application/json
- *     requestBodies:
- *       description: A JSON object containing commentaire
+ *     requestBody:
+ *       description: A JSON object containing localisation
  *       required: true
  *       content:
  *         application/json:
@@ -203,12 +211,15 @@ router.put("/1", loginRequired, async (req, res, next) => {
  *               longSouthWest:
  *                 type: float
  *                 required: true
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return mandataires by geolocalisation
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.post("/filters", loginRequired, async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
@@ -236,15 +247,20 @@ router.post("/filters", loginRequired, async (req, res, next) => {
 /** @swagger
  * /mandataires :
  *   get:
- *     description: get all mandataires
+ *     tags:
+ *       - mandataire
+ *     description: get mandataires for a specific Ti
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return mandataires for specific Ti
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get("/", loginRequired, async (req, res, next) => {
   if (req.user.type !== "ti") {
@@ -262,15 +278,20 @@ router.get("/", loginRequired, async (req, res, next) => {
 /** @swagger
  * /mandataires/services:
  *   get:
+ *     tags:
+ *       - mandataire
  *     description: get all services for a specific Ti
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return services for a specific Ti
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get("/services", loginRequired, async (req, res, next) => {
   if (req.user.type !== "ti") {
@@ -311,15 +332,19 @@ router.post("/PosteCode", loginRequired, async (req, res, next) => {
 /** @swagger
  * /mandataires/1/capacite:
  *   put:
+ *     tags:
+ *       - mandataire
  *     description: update capacite of specific mandataire
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
- *               type: Hash
+ *               type: object
+ *               items:
+ *                 type: object
  */
 router.put("/:mandataireId/capacite", async (req, res, next) => {
   const mandataire = await getMandataireByUserId(req.user.id);
@@ -337,10 +362,12 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
 /** @swagger
  * /mandataires/1/mesures-en-attente:
  *   put:
- *     description: update 'mesure en attente' from a mandataire
+ *     tags:
+ *       - mandataire
+ *     description: update number of 'mesure en attente' from a mandataire
  *     produces:
  *       - application/json
- *     requestBodies:
+ *     requestBody:
  *       description: A JSON object containing mandataireId
  *       required: true
  *       content:
@@ -351,12 +378,15 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
  *               mandataire_id:
  *                 type: integer
  *                 required: true
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return information for mandataire
  *         content:
  *           application/json:
  *             schema:
- *               type: Hash
+ *               type: object
+ *               items:
+ *                 type: object
  */
 router.put(
   "/:mandataireId/mesures-en-attente",

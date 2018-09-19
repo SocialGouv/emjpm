@@ -19,15 +19,20 @@ const { getTiByUserId } = require("../db/queries/tis");
 /** @swagger
  * /mesures:
  *   get:
- *     description: get all mesures in a specific Ti
+ *     tags:
+ *       - mesure
+ *     description: get all mesures for a specific Ti
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return all mesures for a specific Ti
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get("/", typeRequired("ti"), async (req, res, next) => {
   if (req.user.type !== "ti") {
@@ -42,15 +47,16 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
     .catch(error => next(error));
 });
 
-// todo : make it work for real
+// todo : transform into get
 /** @swagger
  * /mesures/filters:
  *   post:
- *     description: post to filters mesures by Ti map
+ *     tags:
+ *       - mesure
+ *     description: Filters mesures by geolocalisation
  *     produces:
  *       - application/json
- *     requestBodies:
- *       description: A JSON object containing latitude and longitude
+ *     requestBody:
  *       required: true
  *       content:
  *         application/json:
@@ -69,12 +75,15 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
  *               longSouthWest:
  *                 type: float
  *                 required: true
- *      responses:
- *         200:
- *           content:
- *             application/json:
- *               schema:
- *                 type: array
+ *     responses:
+ *       200:
+ *         description: Return mesures filtered by localisation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
  */
 router.post("/filters", loginRequired, async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
@@ -97,27 +106,30 @@ router.post("/filters", loginRequired, async (req, res, next) => {
     });
 });
 
-
-//ToDo: merge with get "mesures/"
+//ToDo: merge with get "mesures/" and rename
 /** @swagger
  * /mesures/popup:
- *   *   get:
- *     description: get all mesures in a specific Ti group by Post code
- *     produces:
- *       - application/json
- *     parameters:
- *       - in: query
- *         name: searchType
- *         description: filters mesures to apply to the list of mesures
- *         required: false
- *         schema:
- *           type: object
- *   responses:
- *       200:
- *         content:
- *           application/json:
- *             schema:
- *               type: array
+ *  get:
+ *    tags:
+ *       - mesure
+ *    description: get all mesures for a specific Ti
+ *    produces:
+ *      - application/json
+ *    parameters:
+ *      - in: query
+ *        name: searchType
+ *        required: false
+ *        schema:
+ *          type: object
+ *    responses:
+ *      200:
+ *        description: Return all mesures
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: array
+ *              items:
+ *                type: object
  */
 router.get("/popup", typeRequired("ti"), async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
@@ -138,15 +150,20 @@ router.get("/popup", typeRequired("ti"), async (req, res, next) => {
 /** @swagger
  * /mandataires/getAllMesuresByTis:
  *   get:
- *     description: get mesures for a specific Tis
+ *     tags:
+ *       - mesure
+ *     description: get mesures for a specific Ti
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
+ *         description: Return mesures
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get(
   "/getAllMesuresByTis",
@@ -168,18 +185,23 @@ router.get(
   }
 );
 
+// Todo : rename and merge
 /** @swagger
  * /mesurespopupMandataire:
  *   get:
- *     description: get mesures for mandataire map for a specific Tis
+ *     tags:
+ *       - mesure
+ *     description: get markers for mandataire for a specific Ti
  *     produces:
  *       - application/json
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get("/popupMandataire", loginRequired, async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
@@ -194,16 +216,21 @@ router.get("/popupMandataire", loginRequired, async (req, res, next) => {
     });
 });
 
+// toDo: rm
 /** @swagger
  * /mesures/codePostal:
  *   get:
+ *     tags:
+ *       - mesure
  *     description: get all postcode from geo.api.gouv.fr
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get("/codePostal", async (req, res, next) => {
   url =

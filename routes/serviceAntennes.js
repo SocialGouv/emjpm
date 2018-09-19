@@ -14,6 +14,8 @@ const { getMandataireByUserId } = require("../db/queries/mandataires");
 /** @swagger
  * /mandataires/1/antennes:
  *   get:
+ *     tags:
+ *       - serviceAntenne
  *     description: get list of antennes for a specific mandataire
  *     produces:
  *       - application/json
@@ -23,6 +25,8 @@ const { getMandataireByUserId } = require("../db/queries/mandataires");
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.get("/:mandataireId/antennes", loginRequired, async (req, res, next) => {
   const ti = await getMandataireByUserId(req.user.id);
@@ -38,12 +42,13 @@ router.get("/:mandataireId/antennes", loginRequired, async (req, res, next) => {
 /** @swagger
  * /mandataires/1/antennes:
  *   post:
+ *     tags:
+ *       - serviceAntenne
  *     description: post a new antenne for specific mandataire
  *     produces:
  *       - application/json
- *     requestBodies:
- *     ActiveMandataireBody:
- *       description: A JSON object containing etablissement id
+ *     requestBody:
+ *       description: A JSON object containing antenne
  *       required: true
  *       content:
  *         application/json:
@@ -53,12 +58,14 @@ router.get("/:mandataireId/antennes", loginRequired, async (req, res, next) => {
  *               etablissement_id:
  *                 type: integer
  *                 required: true
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.post(
   "/:mandataireId/antennes",
@@ -86,6 +93,8 @@ router.post(
 /** @swagger
  * /mandataires/1/antennes:
  *   delete:
+ *     tags:
+ *       - serviceAntenne
  *     description: delete an antenne for specific mandataire
  *     produces:
  *       - application/json
@@ -96,12 +105,14 @@ router.post(
  *         required: true
  *         schema:
  *           type: object
- *   responses:
+ *     responses:
  *       200:
  *         content:
  *           application/json:
  *             schema:
  *               type: array
+ *               items:
+ *                 type: object
  */
 router.delete(
   "/:mandataireId/antennes/:antenneId",
