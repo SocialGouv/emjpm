@@ -21,8 +21,8 @@ const getAllEtablissementsByMandataire = mandataireId =>
       mandataire_id: parseInt(mandataireId)
     });
 
-const addMandataireToEtablissement = mandataireId =>
-  knex("mandataire_etablissements").insert(mandataireId);
+const addMandataireToEtablissement = data =>
+  knex("mandataire_etablissements").insert(data);
 
 const deleteMandataireEtablissement = showID =>
   knex("mandataire_etablissements")

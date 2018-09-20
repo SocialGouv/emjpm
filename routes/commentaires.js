@@ -10,7 +10,7 @@ const {
   isMandataireInTi
 } = require("../db/queries/commentaires");
 
-const {getTiByUserId} = require("../db/queries/tis")
+const { getTiByUserId } = require("../db/queries/tis");
 
 /** @swagger
  * /mandataires/1/commentaires:
@@ -99,21 +99,21 @@ router.post(
           if (!isMandataireInTi) {
             return next(new Error(401));
           }
-          addCommentaire({
+          return addCommentaire({
             comment: req.body.comment,
             mandataire_id: req.params.mandataireId,
             ti_id: ti.id
           })
-            .then(function(commentaireID) {
+            .then(function() {
               return getAllCommentaires(req.params.mandataireId, ti.id);
             })
             .then(function(commentaires) {
               res.status(200).json(commentaires);
-            })
-            .catch(function(error) {
-              console.log(error);
-              next(error);
             });
+        })
+        .catch(function(error) {
+          console.log(error);
+          next(error);
         });
     });
   }

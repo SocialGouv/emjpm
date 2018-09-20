@@ -4,7 +4,7 @@ const router = express.Router();
 const { loginRequired } = require("../auth/_helpers");
 
 const {
-  getAllAntennes,
+  getAllAntennesByMandataireId,
   addAntenne,
   deleteAntenne
 } = require("../db/queries/serviceAntennes");
@@ -29,8 +29,8 @@ const { getMandataireByUserId } = require("../db/queries/mandataires");
  *                 type: object
  */
 router.get("/:mandataireId/antennes", loginRequired, async (req, res, next) => {
-  const ti = await getMandataireByUserId(req.user.id);
-  getAllAntennes(ti.id)
+  const mandataire = await getMandataireByUserId(req.user.id);
+  getAllAntennesByMandataireId(mandataire.id)
     .then(function(commentaires) {
       res.status(200).json(commentaires);
     })
@@ -72,13 +72,13 @@ router.post(
   loginRequired,
   async (req, res, next) => {
     // secu : ensure TI can write on this mandataire + add related test
-    const ti = await getMandataireByUserId(req.user.id);
+    const mandataire = await getMandataireByUserId(req.user.id);
     addAntenne({
       ...req.body,
-      mandataire_id: ti.id
+      mandataire_id: mandataire.id
     })
-      .then(function(commentaireID) {
-        return getAllAntennes(ti.id);
+      .then(function() {
+        return getAllAntennesByMandataireId(ti.id);
       })
       .then(function(commentaires) {
         res.status(200).json(commentaires);
@@ -123,8 +123,8 @@ router.delete(
       id: req.params.antenneId,
       mandataire_id: mandataire.id
     })
-      .then(function(commentaireID) {
-        return getAllAntennes(mandataire.id);
+      .then(function() {
+        return getAllAntennesByMandataireId(mandataire.id);
       })
       .then(function(commentaires) {
         res.status(200).json(commentaires);

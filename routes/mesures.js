@@ -8,10 +8,9 @@ const { loginRequired, typeRequired } = require("../auth/_helpers");
 const {
   getAllMesuresByMandataires,
   getAllMesuresByMandatairesFilter,
-  getAllMesuresByPopUp,
+  getMesuresByGeolocalisation,
   getAllMesuresByTis,
-  getAllMesuresByPopUpForMandataire,
-  getPostecode
+  getAllMesuresByPopUpForMandataire
 } = require("../db/queries/mesures");
 
 const { getTiByUserId } = require("../db/queries/tis");
@@ -136,7 +135,7 @@ router.get("/popup", typeRequired("ti"), async (req, res, next) => {
   if (!ti) {
     return next(new Error(401));
   }
-  getAllMesuresByPopUp(ti.id, req.query.searchType)
+  getMesuresByGeolocalisation(ti.id, req.query.searchType)
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
@@ -213,47 +212,6 @@ router.get("/popupMandataire", loginRequired, async (req, res, next) => {
       console.log(error);
       throw error;
       next(error);
-    });
-});
-
-// toDo: rm
-/** @swagger
- * /mesures/codePostal:
- *   get:
- *     tags:
- *       - mesure
- *     description: get all postcode from geo.api.gouv.fr
- *     responses:
- *       200:
- *         content:
- *           application/json:
- *             schema:
- *               type: array
- *               items:
- *                 type: object
- */
-router.get("/codePostal", async (req, res, next) => {
-  url =
-    "https://geo.api.gouv.fr/communes?fields=nom,code,codesPostaux,centre,population&boost=population";
-  fetch(url)
-    .then(response => response.json())
-    .then(json => {
-      json.map(code =>
-        code.codesPostaux.map(codePos =>
-          getPostecode(
-            codePos,
-            code.centre.coordinates[1],
-            code.centre.coordinates[0]
-          )
-            .then(function(mesures) {
-              res.status(200).json(mesures);
-            })
-            .catch(function(error) {
-              throw error;
-              next(error);
-            })
-        )
-      );
     });
 });
 
