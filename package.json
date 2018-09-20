@@ -10,8 +10,10 @@
     "eslint": "eslint *.js **/*.js --fix",
     "migrate-and-start": "knex migrate:latest && npm start",
     "seeds": "knex seed:run",
-    "migrate-seeds-and-start": "knex migrate:latest && npm run seeds && npm start",
-    "wait-migrate-and-start": "sleep 10 && knex migrate:latest && npm start"
+    "migrate-seeds-and-start":
+      "knex migrate:latest && npm run seeds && npm start",
+    "wait-migrate-and-start": "sleep 10 && knex migrate:latest && npm start",
+    "email-relance": "node ./scripts/relance-mandataires-inactifs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

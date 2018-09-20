@@ -14,7 +14,7 @@ const {
   getAllServicesByTis,
   getAllMandataires,
   getAllByMandatairesFilter,
-  getCoordonneByPosteCode
+  getCoordonneesByPostCode
 } = require("../db/queries/mandataires");
 
 const { getTiByUserId } = require("../db/queries/tis");
@@ -309,7 +309,7 @@ router.get("/services", loginRequired, async (req, res, next) => {
 // todo: test
 
 router.post("/PosteCode", loginRequired, async (req, res, next) => {
-  getCoordonneByPosteCode(req.body.codePoste)
+  getCoordonneesByPostCode(req.body.codePoste)
     .then(function(mandataires) {
       res.status(200).json(mandataires);
     })
@@ -397,8 +397,8 @@ router.put(
     //   return next(new Error(401));
     // }
     // récupères le nb de mesure attribuées pour ce mandataire
-    const MesureEnAttente = mesureEnAttente(req.body.mandataire_id);
-    update(req.body.mandataire_id, { mesures_en_attente: MesureEnAttente })
+    const mesureEnAttente = mesureEnAttente(req.body.mandataire_id);
+    update(req.body.mandataire_id, { mesures_en_attente: mesureEnAttente })
       .then(mandataire => res.status(200).json(mandataire))
       .catch(error => next(error));
   }

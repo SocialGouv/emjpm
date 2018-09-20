@@ -118,7 +118,7 @@ router.post("/1/etablissements", loginRequired, async (req, res, next) => {
     etablissement_id: req.body.etablissement_id,
     mandataire_id: mandataire.id
   })
-    .then(commentaireID => getAllEtablissementsByMandataire(mandataire.id))
+    .then(() => getAllEtablissementsByMandataire(mandataire.id))
     .then(etablissements => res.status(200).json(etablissements))
     .catch(error => next(error));
 });

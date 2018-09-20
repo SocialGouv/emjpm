@@ -15,7 +15,7 @@ const {
   updateMesure,
   getAllMesuresEteinte,
   getAllMesuresAttente,
-  getAllMesures,
+  getMesuresEnCoursMandataire,
   addMesure
 } = require("../db/queries/mesures");
 
@@ -74,7 +74,6 @@ const {
  *                 required: true
  */
 
-
 /** @swagger
  * /mandataires/1/mesures/:mesureId:
  *   put:
@@ -115,12 +114,12 @@ router.put(
       },
       req.body
     )
-      //.then(() => queries.getAllMesures(mandataire.id))
+      //.then(() => queries.getMesuresEnCoursMandataire(mandataire.id))
       // todo : trigger/view
       //.then(() => updateDateMesureUpdate(mandataire.id))
       // todo : trigger/view
       .then(() => updateCountMesures(mandataire.id))
-      .then(() => getAllMesures(mandataire.id))
+      .then(() => getMesuresEnCoursMandataire(mandataire.id))
       .then(mesures => res.status(200).json(mesures))
       .catch(error => next(error));
   }
@@ -170,7 +169,7 @@ router.post(
         });
     } else {
       addMesure(body)
-        .then(() => getAllMesures(mandataire.id))
+        .then(() => getMesuresEnCoursMandataire(mandataire.id))
         .then(mesures => res.status(200).json(mesures))
         .then(() => updateCountMesures(mandataire.id))
         // todo : trigger/view
@@ -240,12 +239,11 @@ router.get(
   typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     const mandataire = await getMandataireByUserId(req.user.id);
-    getAllMesures(mandataire.id)
+    getMesuresEnCoursMandataire(mandataire.id)
       .then(mesures => res.status(200).json(mesures))
       .catch(error => next(error));
   }
 );
-
 
 //ToDo doublon
 /** @swagger

@@ -144,7 +144,7 @@ const getAllMesuresByMandatairesFilter = (
 //         });
 //     return allMesures;
 // }
-const getAllMesuresByPopUp = (ti_id, type) => {
+const getMesuresByGeolocalisation = (ti_id, type) => {
   const where = {
     "mandataire_tis.ti_id": parseInt(ti_id),
     status: "Mesure en cours"
@@ -237,7 +237,7 @@ const updateMesure = (where, updates) =>
 
 const addMesure = data => knex("mesures").insert(data);
 
-const getAllMesures = mandataireID =>
+const getMesuresEnCoursMandataire = mandataireID =>
   knex("mesures").where({
     mandataire_id: parseInt(mandataireID),
     status: "Mesure en cours"
@@ -258,23 +258,15 @@ const getAllMesuresEteinte = mandataireID =>
     status: "Eteindre mesure"
   });
 
-const getPostecode = (codePostal, lat, lng) =>
-  knex("geolocalisation_code_postal").insert({
-    code_postal: codePostal,
-    latitude: lat,
-    longitude: lng
-  });
-
 module.exports = {
   getAllMesuresByMandataires,
   getAllMesuresByMandatairesFilter,
-  getAllMesuresByPopUp,
+  getMesuresByGeolocalisation,
   getAllMesuresByTis,
   getAllMesuresByPopUpForMandataire,
   updateMesure,
   getAllMesuresEteinte,
   getAllMesuresAttente,
-  getAllMesures,
-  addMesure,
-  getPostecode
+  getMesuresEnCoursMandataire,
+  addMesure
 };
