@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
@@ -60,7 +61,7 @@ const redirs = {
  *               $ref: '#/components/schemas/SuccessResponse'
  */
 router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
+  passport.authenticate("local", { session: false }, (err, user, info) => {
     if (err) {
       return next(err);
     }
@@ -70,15 +71,26 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         .json({ success: false, message: "User not found" });
     }
     if (user) {
-      req.logIn(user, function(err) {
+      req.logIn(user, { session: false }, function(err) {
         if (err) {
           return next(err);
         }
-        updateLastLogin(user.id).then(() => {
-          res
-            .status(200)
-            .json({ success: true, url: redirs[user.type] || redirs.default });
+        // return updateLastLogin(user.id).then(() => {
+        const token = jwt.sign(
+          JSON.parse(JSON.stringify(user)),
+          "your_local_key"
+        );
+        return res.status(200).json({
+          success: true,
+          url: redirs[user.type] || redirs.default,
+          token
         });
+        // });
+        // updateLastLogin(user.id).then(() => {
+        //   res
+        //     .status(200)
+        //     .json({ success: true, url: redirs[user.type] || redirs.default });
+        // });
       });
     }
   })(req, res, next);
