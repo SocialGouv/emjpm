@@ -63,7 +63,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/api/v1", routes);
+app.use("/api/v1", passport.authenticate('jwt', {session: false}), routes);
 app.use("/auth", authRoutes);
 app.use("/doc", require("./routes/doc"));
 app.use("/", users);

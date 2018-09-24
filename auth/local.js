@@ -5,6 +5,10 @@ const init = require("./passport");
 const knex = require("../db/knex");
 const authHelpers = require("./_helpers");
 
+const passportJWT = require("passport-jwt");
+const JWTStrategy = passportJWT.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
+
 const options = {};
 
 init();
@@ -28,6 +32,31 @@ passport.use(
         return done(err);
       });
   })
+);
+
+passport.use(
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: "your_local_key"
+    },
+    function(jwtPayload, cb) {
+      console.log(
+        "jwtPayload",
+        knex("users").where("id", parseInt(jwtPayload.id))
+      );
+      //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
+      return knex("users")
+        .where("id", parseInt(jwtPayload.id)).select()
+        .then(user => {
+          return cb(null, JSON.parse(JSON.stringify(user[0])));
+        })
+        .catch(err => {
+            console.log("err")
+          return cb(err);
+        });
+    }
+  )
 );
 
 module.exports = passport;
