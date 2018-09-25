@@ -52,16 +52,16 @@ describe("Tis", function() {
           cy.get("[data-cy=fiche-manda-telephone]").contains("0101010108");
         });
 
-        it("table should show 0 mandataires on individuel filter", () => {
+        it("table should show 1 mandataires on individuel filter", () => {
           cy.visit("/tis");
           cy.get("[data-cy=tab-Individuel]").click();
-          cy.get(".react-tabs .rt-tr-group").should("have.length", 0);
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
         });
 
-        it("table should show 1 mandataires on prepose filter", () => {
+        it("table should show 0 mandataires on prepose filter", () => {
           cy.visit("/tis");
           cy.get("[data-cy=tab-Prepose]").click();
-          cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 0);
         });
 
         it("table should show 0 mandataires on service filter", () => {

@@ -5,11 +5,30 @@ const API_URL = process.env.API_URL || "http://127.0.0.1:4000";
 
 // forceLogin: redirect user to /login when receiving a 401
 const apiFetch = (route, params, options = { forceLogin: true }) => {
+  const getToken = () => {
+    // Retrieves the user token from localStorage
+    return localStorage.getItem("id_token");
+  };
+
+  const loggedIn = () => {
+    // Checks if there is a saved token and it's still valid
+    const token = getToken(); // GEtting token from localstorage
+    return !!token; // handwaiving here
+  };
+
   const fetchParams = {
     method: "GET",
     credentials: "include",
     ...params
   };
+
+  if (loggedIn()) {
+    fetchParams.headers = {
+      Authorization: "Bearer " + getToken(),
+      "Content-Type": "application/json"
+    };
+  }
+
   // force content-type application/json for non GET-requests
   if (fetchParams.method && fetchParams.method !== "GET" && !fetchParams.headers) {
     fetchParams.headers = {

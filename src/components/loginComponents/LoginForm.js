@@ -133,6 +133,12 @@ class LoginForm extends React.Component {
       }
     }
   }
+
+  setToken = idToken => {
+    // Saves user token to localStorage
+    localStorage.setItem("id_token", idToken);
+  };
+
   onSubmit = ({ formData }) => {
     this.setState(
       {
@@ -151,6 +157,7 @@ class LoginForm extends React.Component {
             throw e;
           })
           .then(json => {
+            this.setToken(json.token);
             piwik.push(["trackEvent", "login", "success"]);
             Router.push(json.url);
             this.setState({
