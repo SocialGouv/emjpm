@@ -1,11 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const queryString = require("query-string");
+const bcrypt = require("bcryptjs");
+const uid = require("rand-token").uid;
 
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
 
-const { updateLastLogin } = require("../db/queries/users");
+const { updateLastLogin, updateUsers } = require("../db/queries/users");
+const {
+  getSpecificMandataire,
+  updateMandataire,getMandataireById
+} = require("../db/queries/mandataires");
+
+const { resetPasswordEmail } = require("../scripts/password-reset");
+const {
+  confirmationPasswordEmail
+} = require("../scripts/password-confirmation");
 
 const redirs = {
   individuel: "/mandataires",
@@ -78,7 +90,7 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         // return updateLastLogin(user.id).then(() => {
         const token = jwt.sign(
           JSON.parse(JSON.stringify(user)),
-          "your_local_key"
+          "132453647586970asddhdhdhadydydyshshs2dhdhshHDssj"
         );
         return res.status(200).json({
           success: true,
@@ -116,6 +128,81 @@ router.get("/logout", (req, res, next) => {
   req.logout();
   res.status(200).json({ success: true });
   next();
+});
+
+/**
+ * @swagger
+ * /auth/forgot_password:
+ *   get:
+ *     tags:
+ *       - login
+ *     description: Mot de passe oublié
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200
+ */
+router.post("/forgot_password", (req, res, next) => {
+  const email = req.body.email;
+  const token = uid(16);
+
+  getSpecificMandataire({ email: email }).then(user => {
+    updateUsers(JSON.parse(JSON.stringify(user))[0].user_id, {
+      reset_password_token: token,
+      reset_password_expires: Date.now() + 86400000
+    }).then(result => {
+      console.log("r", queryString.stringify(token));
+      resetPasswordEmail(
+        email,
+        `http://localhost:3000/reset-password?token=${token}`
+      );
+    });
+  });
+});
+
+/**
+ * @swagger
+ * /auth/reset_password:
+ *   post:
+ *     tags:
+ *       - login
+ *     description: Reset password and create new one
+ *     requestBody:
+ *       required: true
+ *       $ref: '#/components/requestBodies/Login'
+ *     responses:
+ *       200:
+ *         headers:
+ *           Set-Cookie:
+ *             description: API server cookie
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/SuccessResponse'
+ */
+router.post("/reset_password", (req, res, next) => {
+  console.log(req.body);
+  getSpecificMandataire({ reset_password_token: req.body.token })
+    .catch(res =>
+      res.status(400).send({
+        message: "Votre lien à expiré."
+      })
+    )
+    .then(user => {
+      if (req.body.newPassword === req.body.verifyPassword) {
+        updateUsers(JSON.parse(JSON.stringify(user))[0].user_id, {
+          password: bcrypt.hashSync(req.body.newPassword, 10),
+          reset_password_token: undefined,
+          reset_password_expires: undefined
+        }).then(id => getMandataireById(id)).then(user => {
+          console.log(user);
+          confirmationPasswordEmail(user);
+        });
+      } else {
+        return next(new Error(401));
+      }
+      return user;
+    });
 });
 
 module.exports = router;

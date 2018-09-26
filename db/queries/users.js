@@ -8,6 +8,12 @@ const updateLastLogin = id =>
       last_login: new Date().toISOString()
     });
 
+const updateUsers = (id, data) =>
+  knex("users")
+    .where({ id })
+    .update(data);
+
 module.exports = {
-  updateLastLogin
+  updateLastLogin,
+  updateUsers
 };
