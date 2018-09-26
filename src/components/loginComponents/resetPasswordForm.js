@@ -1,60 +1,54 @@
 import { findDOMNode } from "react-dom";
-import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
-
-import piwik from "../../piwik";
+const queryString = require("query-string");
 
 const API_URL = process.env.API_URL;
 
-const doLogin = formData => {
-  const url = `${API_URL}/auth/login`;
+const doForgotPassword = formData => {
+  const url = `${API_URL}/auth/reset_password`;
   return fetch(url, {
     credentials: "include",
     method: "POST",
     headers: {
-      //  Accept: "application/json",
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(formData)
+    body: JSON.stringify({
+      ...formData,
+      token: queryString.parse(location.search).token
+    })
   }).then(res => {
-    //  console.log(res);
-    if (res.status > 400) {
-      // unauthorized
+    if (res.status >= 400) {
       throw new Error(res.status);
     }
-    return res.json();
+    return res;
   });
 };
 
 const schema = {
   type: "object",
-  required: ["username", "password"],
+  required: ["newPassword", "verifyPassword"],
   properties: {
-    username: { type: "string", title: "", default: "" },
-    password: { type: "string", title: "", default: "" }
-    // done: {
-    //   type: "boolean",
-    //   title: " se souvenir de mes informations ",
-    //   default: false
-    // }
+    newPassword: { type: "string", title: "", default: "" },
+    verifyPassword: { type: "string", title: "", default: "" }
   }
 };
 
 const uiSchema = {
-  password: {
-    "ui:placeholder": "Mot de passe",
+  newPassword: {
+    "ui:placeholder": "Nouveau mot de passe",
     "ui:widget": "password",
     "ui:options": {
       label: false
     } // could also be "select"
   },
-  username: {
-    "ui:placeholder": "Identifiant",
+  verifyPassword: {
+    "ui:placeholder": "Vérification mot de passe",
+    "ui:widget": "password",
     "ui:options": {
       label: false
-    }
+    } // could also be "select"
   }
 };
 
@@ -90,9 +84,9 @@ const Title = styled.div`
 `;
 
 // handle the view only
-export const LoginFormView = ({ formData, onSubmit, error, status }) => (
+export const ResetPasswordView = ({ formData, onSubmit, error, status }) => (
   <Jumbo>
-    <Title>Se connecter</Title>
+    <Title>Mot de passe oublié</Title>
     <StyledForm schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>
       <button
         disabled={status === "loading" || status === "success"}
@@ -105,7 +99,6 @@ export const LoginFormView = ({ formData, onSubmit, error, status }) => (
           "Me connecter"}
       </button>
       <br />
-        <a href="forgot-password">link text</a>
       <ErrorBox message={error} />
       <hr style={{ marginTop: 20 }} />
       <a href="mailto:contact@emjpm.beta.gouv.fr?subject=eMJPM&body=Bonjour,">
@@ -116,16 +109,13 @@ export const LoginFormView = ({ formData, onSubmit, error, status }) => (
 );
 
 // handle the state only
-class LoginForm extends React.Component {
+class ResetPassword extends React.Component {
   state = {
     error: null,
     status: null,
     formData: {}
   };
   componentDidMount() {
-    piwik.push(["trackEvent", "navigation", "login"]);
-
-    // focus login on load
     const node = findDOMNode(this);
     if (node) {
       const input = node.querySelector("input");
@@ -135,11 +125,6 @@ class LoginForm extends React.Component {
     }
   }
 
-  setToken = idToken => {
-    // Saves user token to localStorage
-    localStorage.setItem("id_token", idToken);
-  };
-
   onSubmit = ({ formData }) => {
     this.setState(
       {
@@ -148,19 +133,17 @@ class LoginForm extends React.Component {
         formData
       },
       () => {
-        doLogin(formData)
+        doForgotPassword(formData)
           .catch(e => {
-            piwik.push(["trackEvent", "login", "error"]);
             this.setState({
               status: "error",
-              error: "Impossible de se connecter"
+              error: "Vos mots de passe ne sont pas identiques"
             });
             throw e;
           })
-          .then(json => {
-            this.setToken(json.token);
-            piwik.push(["trackEvent", "login", "success"]);
-            Router.push(json.url);
+          .then(() => {
+            alert("Un email de confirmation vient de vous être envoyé");
+            Router.push("/login");
             this.setState({
               status: "success",
               error: null
@@ -172,7 +155,7 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <LoginFormView
+      <ResetPasswordView
         formData={this.state.formData}
         onSubmit={this.onSubmit}
         error={this.state.error}
@@ -182,4 +165,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default LoginForm;
+export default ResetPassword;

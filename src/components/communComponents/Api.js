@@ -1,5 +1,6 @@
 import Router from "next/router";
 import fetch from "isomorphic-fetch";
+//import decode from "jwt-decode";
 
 const API_URL = process.env.API_URL || "http://127.0.0.1:4000";
 
@@ -10,10 +11,23 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
     return localStorage.getItem("id_token");
   };
 
+  // const isTokenExpired = token => {
+  //   try {
+  //     const decoded = decode(token);
+  //     if (decoded.exp < Date.now() / 1000) {
+  //       // Checking if token is expired. N
+  //       return true;
+  //     } else return false;
+  //   } catch (err) {
+  //     return false;
+  //   }
+  // };
+
   const loggedIn = () => {
     // Checks if there is a saved token and it's still valid
     const token = getToken(); // GEtting token from localstorage
-    return !!token; // handwaiving here
+    return !!token;
+    //&& !isTokenExpired(token); // handwaiving here
   };
 
   const fetchParams = {
