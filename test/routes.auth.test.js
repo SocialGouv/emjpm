@@ -171,4 +171,54 @@ describe("routes : auth", () => {
           res.type.should.eql("application/json");
         }));
   });
+
+  describe("POST /auth/forgot-password", () => {
+    it("should take a email of a user", () =>
+      chai
+        .request(server)
+        .post("/auth/forgot-password")
+        .send({
+          email: "ud@ud.com"
+        })
+        .then(res => {
+          res.status.should.eql(200);
+        })
+        .catch(e => {
+          console.log("e", e);
+          throw new Error("should not fail");
+        }));
+  });
+
+  describe("POST /auth/reset-password", () => {
+    it("shouldn't reset a password", () =>
+      chai
+        .request(server)
+        .post("/auth/forgot-password")
+        .send({
+          newPassword: "adad",
+          verifyPassword: "tataadad"
+        })
+        .then(res => {
+          res.status.should.eql(400);
+        })
+        .catch(e => {
+          console.log("e", e);
+          throw new Error("should not fail");
+        }));
+    it("should reset a password", () =>
+      chai
+        .request(server)
+        .post("/auth/forgot-password")
+        .send({
+          newPassword: "adad",
+          verifyPassword: "adad"
+        })
+        .then(res => {
+          res.status.should.eql(200);
+        })
+        .catch(e => {
+          console.log("e", e);
+          throw new Error("should not fail");
+        }));
+  });
 });

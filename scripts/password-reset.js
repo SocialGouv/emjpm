@@ -13,17 +13,15 @@ Bonjour,<br>
 <br>
 Vous avez demandé le changement de mot de passe.
 <br><br>
-Veuillez cliquer sur le liens suivant <a href=${url}>liens</a>.
+Veuillez cliquer sur le liens suivant: <a href=${url}>liens</a>.
 <br><br><br>
 Bien à vous.
 `;
 
-//id , url: 'http://localhost:3000/auth/reset_password?token=' + token,
-
 const resetPasswordEmail = (email, url) => {
   return sendEmail(
     email,
-    "Password help has arrived!",
+    "Nouvau mot de passe pour e-MJPM",
     EMAIL_RELANCE_TEXT,
     EMAIL_RELANCE_HTML(url)
   ).catch(e => {

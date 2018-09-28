@@ -88,6 +88,24 @@ describe("routes : mandataireMesures", () => {
       ));
   });
 
+  it("should update a date mesure update when updating mesure en cours for a given mandataire (Trigger)", () =>
+    logUser(server).then(agent =>
+      agent
+        .put("/api/v1/mandataires/1/mesures/1")
+        .send({
+          mesures_en_cours: 4
+        })
+        .then(function(res) {
+          res.redirects.length.should.eql(0);
+          res.status.should.eql(200);
+          res.type.should.eql("application/json");
+          res.body.length.should.eql(2);
+          res.body
+            .find(i => i.id === 1)
+            .date_mesure_update.should.eql(Date.now());
+        })
+    ));
+
   it("should NOT update a mesure for another mandataire", () =>
     logUser(server).then(agent =>
       agent
