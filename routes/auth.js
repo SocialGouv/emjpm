@@ -11,7 +11,9 @@ const passport = require("../auth/local");
 const { updateLastLogin, updateUsers } = require("../db/queries/users");
 const {
   getSpecificMandataire,
-  updateMandataire,getMandataireById
+  updateMandataire,
+  getMandataireById,
+  getSpecificMandataireByToken
 } = require("../db/queries/mandataires");
 
 const { resetPasswordEmail } = require("../scripts/password-reset");
@@ -133,33 +135,48 @@ router.get("/logout", (req, res, next) => {
 /**
  * @swagger
  * /auth/forgot_password:
- *   get:
+ *   post:
  *     tags:
  *       - login
- *     description: Mot de passe oublié
+ *     description: Create token for user's password forgotten
+ *     requestBody:
+ *       description: A JSON object containing email
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 required: true
  *     produces:
  *       - application/json
  *     responses:
- *       200
+ *       200:
+ *         description: send email to he user with url for reset password
  */
 router.post("/forgot_password", (req, res, next) => {
   const email = req.body.email;
   const token = uid(16);
 
-  getSpecificMandataire({ email: email }).then(user => {
-    updateUsers(JSON.parse(JSON.stringify(user))[0].user_id, {
-      reset_password_token: token,
-      reset_password_expires: Date.now() + 86400000
-    }).then(result => {
-      console.log("r", queryString.stringify(token));
-      resetPasswordEmail(
-        email,
-        `http://localhost:3000/reset-password?token=${token}`
-      );
+  getSpecificMandataire({ email: email })
+    .then(user => {
+      updateUsers(user.user_id, {
+        reset_password_token: token,
+        reset_password_expires: Date.now() + 7200000
+      }).then(() => {
+        resetPasswordEmail(
+          email,
+          `http://localhost:3000/reset-password?token=${token}`
+        );
+      });
+    })
+    .then(function() {
+      res.status(200).json();
     });
-  });
 });
-
+//7200000
 /**
  * @swagger
  * /auth/reset_password:
@@ -168,21 +185,31 @@ router.post("/forgot_password", (req, res, next) => {
  *       - login
  *     description: Reset password and create new one
  *     requestBody:
+ *       description: A JSON object containing reset password
  *       required: true
- *       $ref: '#/components/requestBodies/Login'
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               token:
+ *                 type: string
+ *                 required: true
+ *               newPassword:
+ *                 type: string
+ *                 required: true
+ *               verifyPassword:
+ *                 type: string
+ *                 required: true
  *     responses:
  *       200:
+ *         description: send email to the user with confirmation of reset password
  *         headers:
  *           Set-Cookie:
  *             description: API server cookie
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/SuccessResponse'
  */
 router.post("/reset_password", (req, res, next) => {
-  console.log(req.body);
-  getSpecificMandataire({ reset_password_token: req.body.token })
+  getSpecificMandataireByToken({ reset_password_token: req.body.token })
     .catch(res =>
       res.status(400).send({
         message: "Votre lien à expiré."
@@ -190,18 +217,21 @@ router.post("/reset_password", (req, res, next) => {
     )
     .then(user => {
       if (req.body.newPassword === req.body.verifyPassword) {
-        updateUsers(JSON.parse(JSON.stringify(user))[0].user_id, {
+        updateUsers(user.user_id, {
           password: bcrypt.hashSync(req.body.newPassword, 10),
           reset_password_token: undefined,
           reset_password_expires: undefined
-        }).then(id => getMandataireById(id)).then(user => {
-          console.log(user);
-          confirmationPasswordEmail(user);
-        });
+        })
+          .then(id => getMandataireById(id))
+          .then(user => {
+            confirmationPasswordEmail(user);
+          });
       } else {
-        return next(new Error(401));
+        return next(new Error(400));
       }
-      return user;
+    })
+    .then(function() {
+      res.status(200).json();
     });
 });
 

@@ -56,6 +56,14 @@ const USERS = [
     password: "inactive2",
     type: "individuel",
     active: false
+  },
+  {
+    id: 52,
+    username: "ad",
+    password: "ad123",
+    type: "individuel",
+    reset_password_token: "LpWpzK4Jla9I87Aq",
+    active: true
   }
 ];
 

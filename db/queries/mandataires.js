@@ -180,7 +180,15 @@ const getSpecificMandataire = data =>
   knex
     .from("mandataires")
     .where(data)
-    .innerJoin("users", "mandataires.user_id", "users.id");
+    .innerJoin("users", "mandataires.user_id", "users.id")
+    .first();
+
+const getSpecificMandataireByToken = data =>
+  knex
+    .from("mandataires")
+    .where(data, knex.raw("mandataires.reset_password_expires < now()"))
+    .innerJoin("users", "mandataires.user_id", "users.id")
+    .first();
 
 module.exports = {
   updateCountMesures,
@@ -195,5 +203,6 @@ module.exports = {
   getAllByMandatairesFilter,
   update,
   getCoordonneesByPostCode,
-  getSpecificMandataire
+  getSpecificMandataire,
+  getSpecificMandataireByToken
 };

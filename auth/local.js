@@ -47,12 +47,13 @@ passport.use(
       );
       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
       return knex("users")
-        .where("id", parseInt(jwtPayload.id)).select()
+        .where("id", parseInt(jwtPayload.id))
+        .select()
         .then(user => {
           return cb(null, JSON.parse(JSON.stringify(user[0])));
         })
         .catch(err => {
-            console.log("err")
+          console.log("err");
           return cb(err);
         });
     }
