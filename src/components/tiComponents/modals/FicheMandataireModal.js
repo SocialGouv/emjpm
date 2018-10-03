@@ -127,8 +127,14 @@ class FicheMandataireModal extends React.Component {
         <div style={{ display: "flex", padding: "20px", boxSizing: "border-box" }}>
           <div style={{ flex: "1 0 50%" }}>
             <TitleMandataire>
-              {currentMandataire.etablissement} <br /> {currentMandataire.type.toUpperCase()} <br />{" "}
-              {currentMandataire.genre}
+              {currentMandataire.type === "service" ? (
+                <b>{currentMandataire.etablissement}</b>
+              ) : (
+                <b>
+                  {currentMandataire.nom} {currentMandataire.prenom}
+                </b>
+              )}
+              <br /> {currentMandataire.type.toUpperCase()} <br /> {currentMandataire.genre}
             </TitleMandataire>
 
             <FicheMandataire
