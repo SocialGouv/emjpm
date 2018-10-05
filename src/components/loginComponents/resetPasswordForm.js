@@ -41,14 +41,14 @@ const uiSchema = {
     "ui:widget": "password",
     "ui:options": {
       label: false
-    } // could also be "select"
+    }
   },
   verifyPassword: {
     "ui:placeholder": "Vérification mot de passe",
     "ui:widget": "password",
     "ui:options": {
       label: false
-    } // could also be "select"
+    }
   }
 };
 
@@ -83,7 +83,6 @@ const Title = styled.div`
   margin-bottom: 1em;
 `;
 
-// handle the view only
 export const ResetPasswordView = ({ formData, onSubmit, error, status }) => (
   <Jumbo>
     <Title>Mot de passe oublié</Title>
@@ -108,7 +107,6 @@ export const ResetPasswordView = ({ formData, onSubmit, error, status }) => (
   </Jumbo>
 );
 
-// handle the state only
 class ResetPassword extends React.Component {
   state = {
     error: null,

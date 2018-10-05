@@ -1,13 +1,11 @@
 import Router from "next/router";
 import fetch from "isomorphic-fetch";
-//import decode from "jwt-decode";
 
 const API_URL = process.env.API_URL || "http://127.0.0.1:4000";
 
 // forceLogin: redirect user to /login when receiving a 401
 const apiFetch = (route, params, options = { forceLogin: true }) => {
   const getToken = () => {
-    // Retrieves the user token from localStorage
     return localStorage.getItem("id_token");
   };
 
@@ -24,10 +22,8 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
   // };
 
   const loggedIn = () => {
-    // Checks if there is a saved token and it's still valid
-    const token = getToken(); // GEtting token from localstorage
+    const token = getToken();
     return !!token;
-    //&& !isTokenExpired(token); // handwaiving here
   };
 
   const fetchParams = {

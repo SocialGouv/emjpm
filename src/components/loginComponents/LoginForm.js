@@ -105,7 +105,7 @@ export const LoginFormView = ({ formData, onSubmit, error, status }) => (
           "Me connecter"}
       </button>
       <br />
-        <a href="forgot-password">link text</a>
+      <a href="forgot-password">J'ai oublié mon mot de passe</a>
       <ErrorBox message={error} />
       <hr style={{ marginTop: 20 }} />
       <a href="mailto:contact@emjpm.beta.gouv.fr?subject=eMJPM&body=Bonjour,">

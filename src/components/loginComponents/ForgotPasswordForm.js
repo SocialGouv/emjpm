@@ -35,7 +35,7 @@ const uiSchema = {
     "ui:placeholder": "email",
     "ui:options": {
       label: false
-    } // could also be "select"
+    }
   }
 };
 
@@ -73,7 +73,7 @@ const Title = styled.div`
 // handle the view only
 export const ForgotPasswordView = ({ formData, onSubmit, error, status }) => (
   <Jumbo>
-    <Title>Mot de passe oublié</Title>
+    <Title>Récupérer votre compte</Title>
     <StyledForm schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>
       <button
         disabled={status === "loading" || status === "success"}
@@ -95,7 +95,6 @@ export const ForgotPasswordView = ({ formData, onSubmit, error, status }) => (
   </Jumbo>
 );
 
-// handle the state only
 class ForgotPassword extends React.Component {
   state = {
     error: null,
