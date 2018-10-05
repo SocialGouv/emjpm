@@ -11,7 +11,6 @@ exports.seed = function(knex, Promise) {
         telephone: "0102030405",
         latitude: 45.862725,
         longitude: 2.187592,
-        admin: false,
         user_id: 1
       });
     })
@@ -25,7 +24,6 @@ exports.seed = function(knex, Promise) {
         telephone: "0102030405",
         latitude: 46.462725,
         longitude: 2.253592,
-        admin: false,
         user_id: 2
       });
     })
@@ -39,7 +37,6 @@ exports.seed = function(knex, Promise) {
         telephone: "0102030405",
         latitude: 43.862725,
         longitude: 2.153592,
-        admin: false,
         user_id: 3
       });
     })
@@ -53,7 +50,6 @@ exports.seed = function(knex, Promise) {
         telephone: "0102030405",
         latitude: 47.262725,
         longitude: 2.4453592,
-        admin: false,
         user_id: 4
       });
     });
