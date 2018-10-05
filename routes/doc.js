@@ -18,8 +18,8 @@ const options = {
   definition: {
     openapi: "3.0.0",
     servers: [
-      { url: "http://api-preprod.emjpm.num.social.gouv.fr" },
-      { url: "http://api.emjpm.num.social.gouv.fr" }
+      { url: "https://api-preprod.emjpm.num.social.gouv.fr" },
+      { url: "https://api.emjpm.num.social.gouv.fr" }
     ],
     externalDocs: {
       url: "https://emjpm-doc.num.social.gouv.fr",

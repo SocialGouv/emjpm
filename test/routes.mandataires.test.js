@@ -15,6 +15,7 @@ passportStub.install(server);
 
 describe("routes : mandataires", () => {
   beforeEach(() => {
+    knex.raw("DELETE FROM 'knex_migrations_lock';");
     return knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())
