@@ -159,20 +159,21 @@ router.post("/forgot_password", (req, res, next) => {
   const token = uid(16);
 
   getSpecificMandataire({ email: email })
-    .then(user =>
-      updateUser(user.user_id, {
+    .then(user => {
+      return updateUsers(user.user_id, {
         reset_password_token: token,
         reset_password_expires: Date.now() + 7200000
       }).then(() => {
-        resetPasswordEmail(
+        return resetPasswordEmail(
           email,
           `${process.env.API_URL}/reset-password?token=${token}`
         );
-      })
-    )
+      });
+    })
     .then(function() {
       res.status(200).json();
-    });
+    })
+    .catch(console.log);
 });
 //7200000
 /**
