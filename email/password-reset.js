@@ -21,7 +21,7 @@ Bien à vous.
 const resetPasswordEmail = (email, url) => {
   return sendEmail(
     email,
-    "Nouvau mot de passe pour e-MJPM",
+    "Nouveau mot de passe pour e-MJPM",
     EMAIL_RELANCE_TEXT,
     EMAIL_RELANCE_HTML(url)
   ).catch(e => {

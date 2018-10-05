@@ -1,5 +1,15 @@
 process.env.NODE_ENV = "test";
 
+const mockery = require("mockery");
+
+const nodemailerMock = require("nodemailer-mock");
+
+mockery.enable({
+  warnOnUnregistered: false
+});
+
+mockery.registerMock("nodemailer", nodemailerMock);
+
 const { shouldBeProtected, logUser } = require("./utils");
 
 const chai = require("chai");
@@ -15,16 +25,23 @@ chai.use(chaiHttp);
 passportStub.install(server);
 
 describe("routes : auth", () => {
-  before(() =>
-    knex.migrate
+  beforeEach(() => {
+    knex.raw("DELETE FROM 'knex_migrations_lock';");
+    return knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())
-      .then(() => knex.seed.run())
-  );
+      .then(() => knex.seed.run());
+  });
 
   after(() => {
+    mockery.deregisterAll();
+    mockery.disable();
     passportStub.logout();
     return knex.migrate.rollback();
+  });
+
+  afterEach(() => {
+    nodemailerMock.mock.reset();
   });
 
   describe("Login redirection", () => {
@@ -175,16 +192,30 @@ describe("routes : auth", () => {
         }));
   });
 
-  describe("POST /auth/forgot-password", () => {
-    it("should take a email of a user", () =>
+  describe("POST /auth/forgot_password", () => {
+    it("should send a forgot password email with correct token on request", () =>
       chai
         .request(server)
-        .post("/auth/forgot-password")
+        .post("/auth/forgot_password")
         .send({
           email: "ud@ud.com"
         })
-        .then(res => {
+        .then(async res => {
+          // verify we send an email to "ud@ud.com" with token
           res.status.should.eql(200);
+          const sentMail = nodemailerMock.mock.sentMail();
+          sentMail.length.should.eql(1);
+          sentMail[0].to.should.eql("ud@ud.com");
+          sentMail[0].subject.should.eql("Nouveau mot de passe pour e-MJPM");
+          const token = await knex
+            .select("reset_password_token")
+            .from("users")
+            .innerJoin("mandataires", "users.id", "mandataires.user_id")
+            .where("email", "ud@ud.com")
+            .first();
+          sentMail[0].html.should.contain(
+            `reset-password?token=${token.reset_password_token}`
+          );
         })
         .catch(e => {
           console.log("e", e);
