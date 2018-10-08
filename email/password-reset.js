@@ -1,4 +1,4 @@
-const { sendEmail } = require("../email");
+const { sendEmail } = require(".");
 
 const EMAIL_RELANCE_TEXT = `
 Bonjour,
