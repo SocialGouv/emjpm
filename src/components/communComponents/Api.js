@@ -21,7 +21,7 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
   //   }
   // };
 
-  const loggedIn = () => {
+  const hasToken = () => {
     const token = getToken();
     return !!token;
   };
@@ -32,7 +32,7 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
     ...params
   };
 
-  if (loggedIn()) {
+  if (hasToken()) {
     fetchParams.headers = {
       Authorization: "Bearer " + getToken(),
       "Content-Type": "application/json"

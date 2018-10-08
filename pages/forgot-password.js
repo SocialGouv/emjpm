@@ -1,8 +1,5 @@
-import styled from "styled-components";
-
-import Navigation from "../src/components/communComponents/Navigation";
-import Footer from "../src/components/communComponents/Footer";
 import Form from "../src/components/loginComponents/ForgotPasswordForm";
+import { Layout } from "../src/components";
 
 const ForgotPasswordContainer = ({ style }) => (
   <div className="container" style={style}>
@@ -13,10 +10,8 @@ const ForgotPasswordContainer = ({ style }) => (
 );
 
 const ForgotPassword = () => (
-  <div style={{ display: "block", backgroundColor: "#cad4de", minHeight: "100%" }}>
-    <Navigation />
+  <Layout>
     <ForgotPasswordContainer style={{ marginTop: 100 }} />
-    <Footer fixed />
-  </div>
+  </Layout>
 );
 export default ForgotPassword;
