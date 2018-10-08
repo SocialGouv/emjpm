@@ -1,4 +1,4 @@
-const { sendEmail } = require("../email");
+const { sendEmail } = require(".");
 
 const EMAIL_RELANCE_TEXT = `
 Bonjour,
@@ -16,9 +16,9 @@ Votre nouveau mot de passe a bien été enregistré.
 Bien à vous.
 `;
 
-const confirmationPasswordEmail = mandataire => {
+const confirmationPasswordEmail = email => {
   sendEmail(
-    mandataire.email,
+    email,
     "Confirmation du mot de passe",
     EMAIL_RELANCE_TEXT,
     EMAIL_RELANCE_HTML

@@ -8,7 +8,7 @@ const uid = require("rand-token").uid;
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
 
-const { updateLastLogin, updateUsers } = require("../db/queries/users");
+const { updateLastLogin, updateUser } = require("../db/queries/users");
 const {
   getSpecificMandataire,
   updateMandataire,
@@ -16,10 +16,8 @@ const {
   getSpecificMandataireByToken
 } = require("../db/queries/mandataires");
 
-const { resetPasswordEmail } = require("../scripts/password-reset");
-const {
-  confirmationPasswordEmail
-} = require("../scripts/password-confirmation");
+const { resetPasswordEmail } = require("../email/password-reset");
+const { confirmationPasswordEmail } = require("../email/password-confirmation");
 
 const redirs = {
   individuel: "/mandataires",
@@ -92,7 +90,7 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         // return updateLastLogin(user.id).then(() => {
         const token = jwt.sign(
           JSON.parse(JSON.stringify(user)),
-          "132453647586970asddhdhdhadydydyshshs2dhdhshHDssj"
+          process.env.JWTKEY
         );
         return res.status(200).json({
           success: true,
@@ -161,17 +159,17 @@ router.post("/forgot_password", (req, res, next) => {
   const token = uid(16);
 
   getSpecificMandataire({ email: email })
-    .then(user => {
-      updateUsers(user.user_id, {
+    .then(user =>
+      updateUser(user.user_id, {
         reset_password_token: token,
         reset_password_expires: Date.now() + 7200000
       }).then(() => {
         resetPasswordEmail(
           email,
-          `http://localhost:3000/reset-password?token=${token}`
+          `${process.env.API_URL}/reset-password?token=${token}`
         );
-      });
-    })
+      })
+    )
     .then(function() {
       res.status(200).json();
     });
@@ -217,14 +215,14 @@ router.post("/reset_password", (req, res, next) => {
     )
     .then(user => {
       if (req.body.newPassword === req.body.verifyPassword) {
-        updateUsers(user.user_id, {
+        updateUser(user.user_id, {
           password: bcrypt.hashSync(req.body.newPassword, 10),
           reset_password_token: undefined,
           reset_password_expires: undefined
         })
           .then(id => getMandataireById(id))
-          .then(user => {
-            confirmationPasswordEmail(user);
+          .then(mandataire => {
+            confirmationPasswordEmail(mandataire.email);
           });
       } else {
         return next(new Error(400));
