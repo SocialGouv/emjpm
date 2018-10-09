@@ -143,11 +143,14 @@ describe("routes : auth", () => {
         }));
   });
 
-  describe("GET /auth/logout", () => {
+    const agent = chai.request.agent(server);
+
+    describe("GET /auth/logout", () => {
     it("should logout a user", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .get("/auth/logout")
+          .set("Authorization", "Bearer " + token)
           .then(res => {
             res.status.should.eql(200);
             res.redirects.length.should.eql(0);

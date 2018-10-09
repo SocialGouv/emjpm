@@ -11,6 +11,8 @@ const ExtractJWT = passportJWT.ExtractJwt;
 
 const options = {};
 
+require('dotenv').config();
+
 init();
 
 passport.use(
@@ -41,10 +43,6 @@ passport.use(
       secretOrKey: process.env.JWTKEY
     },
     function(jwtPayload, cb) {
-      console.log(
-        "jwtPayload",
-        knex("users").where("id", parseInt(jwtPayload.id))
-      );
       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
       return knex("users")
         .where("id", parseInt(jwtPayload.id))

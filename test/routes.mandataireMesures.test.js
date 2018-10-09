@@ -9,6 +9,8 @@ const passportStub = require("passport-stub");
 const server = require("../app");
 const knex = require("../db/knex");
 
+const agent = chai.request.agent(server);
+
 chai.use(chaiHttp);
 passportStub.install(server);
 
@@ -29,21 +31,25 @@ describe("routes : mandataireMesures", () => {
   describe("GET /api/v1/mandataires/1/mesures", () => {
     shouldBeProtected(server, "GET", "/api/v1/mandataires/1/mesures");
     it("should get list of mesures of a mandataire", () =>
-      logUser(server).then(agent =>
-        agent.get("/api/v1/mandataires/1/mesures").then(res => {
-          res.status.should.eql(200);
-          res.type.should.eql("application/json");
-          res.body.length.should.eql(2);
-          res.body[0].code_postal.should.eql("62000");
-          // todo : check que les mandataires soient bien filtés
-        })
+      logUser(server).then(token =>
+        agent
+          .get("/api/v1/mandataires/1/mesures")
+          .set("Authorization", "Bearer " + token)
+          .then(res => {
+            res.status.should.eql(200);
+            res.type.should.eql("application/json");
+            res.body.length.should.eql(2);
+            res.body[0].code_postal.should.eql("62000");
+            // todo : check que les mandataires soient bien filtés
+          })
       ));
 
     shouldBeProtected(server, "POST", "/api/v1/mandataires/1/mesures");
     it("should post mesure for given mandataire", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .post("/api/v1/mandataires/1/mesures")
+          .set("Authorization", "Bearer " + token)
           .send({
             code_postal: "28000",
             ville: "Chartres",
@@ -72,9 +78,10 @@ describe("routes : mandataireMesures", () => {
     shouldBeProtected(server, "PUT", "/api/v1/mandataires/1/mesures/1");
 
     it("should update a mesure for a given mandataire", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .put("/api/v1/mandataires/1/mesures/1")
+          .set("Authorization", "Bearer " + token)
           .send({
             code_postal: "10000"
           })
@@ -89,9 +96,10 @@ describe("routes : mandataireMesures", () => {
   });
 
   it("should update a date mesure update when updating mesure en cours for a given mandataire (Trigger)", () =>
-    logUser(server).then(agent =>
+    logUser(server).then(token =>
       agent
         .put("/api/v1/mandataires/1/mesures/1")
+        .set("Authorization", "Bearer " + token)
         .send({
           mesures_en_cours: 4
         })
@@ -107,9 +115,10 @@ describe("routes : mandataireMesures", () => {
     ));
 
   it("should NOT update a mesure for another mandataire", () =>
-    logUser(server).then(agent =>
+    logUser(server).then(token =>
       agent
         .put("/api/v1/mandataires/1/mesures/2")
+        .set("Authorization", "Bearer " + token)
         .send({
           code_postal: "10000"
         })

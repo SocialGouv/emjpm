@@ -13,6 +13,8 @@ const knex = require("../db/knex");
 chai.use(chaiHttp);
 passportStub.install(server);
 
+const agent = chai.request.agent(server);
+
 describe("routes : mandataires", () => {
   beforeEach(() => {
     knex.raw("DELETE FROM 'knex_migrations_lock';");
@@ -30,22 +32,26 @@ describe("routes : mandataires", () => {
   describe("GET /api/v1/mandataires", () => {
     shouldBeProtected(server, "GET", "/api/v1/mandataires");
     it("should be accessible to ti ONLY", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .get("/api/v1/mandataires")
+          .set("Authorization", "Bearer " + token)
           .then(res => {
             res.status.should.eql(401);
           })
           .catch(() => true)
       ));
     it("ti should get a list of 2 mandataires", () =>
-      logUser(server, { username: "ti1", password: "ti1" }).then(agent =>
-        agent.get("/api/v1/mandataires").then(function(res) {
-          res.redirects.length.should.eql(0);
-          res.status.should.eql(200);
-          res.type.should.eql("application/json");
-          res.body.length.should.eql(2);
-        })
+      logUser(server, { username: "ti1", password: "ti1" }).then(token =>
+        agent
+          .get("/api/v1/mandataires")
+          .set("Authorization", "Bearer " + token)
+          .then(function(res) {
+            res.redirects.length.should.eql(0);
+            res.status.should.eql(200);
+            res.type.should.eql("application/json");
+            res.body.length.should.eql(2);
+          })
       ));
   });
 
@@ -53,18 +59,22 @@ describe("routes : mandataires", () => {
     shouldBeProtected(server, "GET", "/api/v1/mandataires/1");
 
     it("should get a single mandataire", () =>
-      logUser(server).then(agent =>
-        agent.get("/api/v1/mandataires/1").then(function(res) {
-          res.status.should.eql(200);
-          res.type.should.eql("application/json");
-          res.body.code_postal.should.eql("62000");
-        })
+      logUser(server).then(token =>
+        agent
+          .get("/api/v1/mandataires/1")
+          .set("Authorization", "Bearer " + token)
+          .then(function(res) {
+            res.status.should.eql(200);
+            res.type.should.eql("application/json");
+            res.body.code_postal.should.eql("62000");
+          })
       ));
 
     it("should not read another mandataire", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .get("/api/v1/mandataires/2")
+          .set("Authorization", "Bearer " + token)
           .then(res => {
             res.status.should.eql(401);
           })
@@ -75,9 +85,10 @@ describe("routes : mandataires", () => {
   describe("PUT /api/v1/mandataires/1", () => {
     shouldBeProtected(server, "PUT", "/api/v1/mandataires/1");
     it("should update mandataire", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .put("/api/v1/mandataires/1")
+          .set("Authorization", "Bearer " + token)
           .send({
             code_postal: "10000"
           })
@@ -88,9 +99,10 @@ describe("routes : mandataires", () => {
           })
       ));
     it("should not update another mandataire", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .put("/api/v1/mandataires/2")
+          .set("Authorization", "Bearer " + token)
           .send({
             code_postal: "10000"
           })

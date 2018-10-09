@@ -11,6 +11,7 @@ const knex = require("../db/knex");
 
 chai.use(chaiHttp);
 passportStub.install(server);
+const agent = chai.request.agent(server);
 
 describe("routes : commentaires", () => {
   beforeEach(() => {
@@ -35,26 +36,32 @@ describe("routes : commentaires", () => {
       logUser(server, {
         username: "ti1",
         password: "ti1"
-      }).then(agent =>
-        agent.get("/api/v1/mandataires/1/commentaires").then(res => {
-          res.redirects.length.should.eql(0);
-          res.status.should.eql(200);
-          res.type.should.eql("application/json");
-          res.body.length.should.eql(1);
-          res.body[0].comment.should.eql("Hello, world 2");
-        })
-      ));
+      }).then(token => {
+        return agent
+          .get("/api/v1/mandataires/1/commentaires")
+          .set("Authorization", "Bearer " + token)
+          .then(res => {
+            res.redirects.length.should.eql(0);
+            res.status.should.eql(200);
+            res.type.should.eql("application/json");
+            res.body.length.should.eql(1);
+            res.body[0].comment.should.eql("Hello, world 2");
+          });
+      }));
     it("should NOT get list of commentaires for a mandataire not in my TI", () =>
       logUser(server, {
         username: "ti1",
         password: "ti1"
-      }).then(agent =>
-        agent.get("/api/v1/mandataires/1/commentaires").then(res => {
-          res.redirects.length.should.eql(0);
-          res.status.should.eql(200);
-          res.type.should.eql("application/json");
-          res.body.length.should.eql(1);
-        })
+      }).then(token =>
+        agent
+          .get("/api/v1/mandataires/1/commentaires")
+          .set("Authorization", "Bearer " + token)
+          .then(res => {
+            res.redirects.length.should.eql(0);
+            res.status.should.eql(200);
+            res.type.should.eql("application/json");
+            res.body.length.should.eql(1);
+          })
       ));
   });
 
@@ -64,7 +71,7 @@ describe("routes : commentaires", () => {
     logUser(server, {
       username: "ti1",
       password: "ti1"
-    }).then(agent =>
+    }).then(token =>
       knex
         .from("commentaires")
         .where({
@@ -75,6 +82,7 @@ describe("routes : commentaires", () => {
           //console.log("commentaires.length", commentaires.length);
           return agent
             .post("/api/v1/mandataires/2/commentaires")
+            .set("Authorization", "Bearer " + token)
             .send({
               comment: "this is a super comment"
             })
@@ -102,7 +110,7 @@ describe("routes : commentaires", () => {
     logUser(server, {
       username: "ti1",
       password: "ti1"
-    }).then(agent =>
+    }).then(token =>
       knex
         .from("commentaires")
         .where({
@@ -113,6 +121,7 @@ describe("routes : commentaires", () => {
           const initialCount = res.length;
           return agent
             .post("/api/v1/mandataires/3/commentaires")
+            .set("Authorization", "Bearer " + token)
             .send({
               comment: "this is a super comment"
             })
@@ -147,7 +156,7 @@ describe("routes : commentaires", () => {
     logUser(server, {
       username: "ti1",
       password: "ti1"
-    }).then(agent =>
+    }).then(token =>
       knex
         .select()
         .from("commentaires")
@@ -163,6 +172,7 @@ describe("routes : commentaires", () => {
                   commentaires[commentaires.length - 1].id
                 }`
               )
+              .set("Authorization", "Bearer " + token)
               .then(res => {
                 // test response
                 res.redirects.length.should.eql(0);
@@ -189,7 +199,7 @@ describe("routes : commentaires", () => {
     logUser(server, {
       username: "ti1",
       password: "ti1"
-    }).then(agent =>
+    }).then(token =>
       knex
         .select()
         .from("commentaires")
@@ -200,6 +210,7 @@ describe("routes : commentaires", () => {
           if (commentaires.length) {
             return agent
               .delete("/api/v1/mandataires/1/commentaires/4")
+              .set("Authorization", "Bearer " + token)
               .then(res => {
                 // test response
                 res.redirects.length.should.eql(0);

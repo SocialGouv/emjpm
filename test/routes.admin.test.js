@@ -14,6 +14,8 @@ const knex = require("../db/knex");
 chai.use(chaiHttp);
 passportStub.install(server);
 
+const agent = chai.request.agent(server);
+
 describe("routes : /admin", () => {
   before(() =>
     knex.migrate
@@ -40,33 +42,42 @@ describe("routes : /admin", () => {
       logUser(server, {
         username: "admin",
         password: "admin"
-      }).then(agent =>
-        agent.get("/api/v1/admin/mandataires").then(res => {
-          res.status.should.equal(200);
-          res.body.length.should.equal(3);
-        })
+      }).then(token =>
+        agent
+          .get("/api/v1/admin/mandataires")
+          .set("Authorization", "Bearer " + token)
+          .then(res => {
+            res.status.should.equal(200);
+            res.body.length.should.equal(3);
+          })
       ));
 
     it("should filter list of mandataires", () =>
       logUser(server, {
         username: "admin",
         password: "admin"
-      }).then(agent =>
-        agent.get("/api/v1/admin/mandataires?users.active=false").then(res => {
-          res.status.should.equal(200);
-          res.body.length.should.equal(1);
-        })
+      }).then(token =>
+        agent
+          .get("/api/v1/admin/mandataires?users.active=false")
+          .set("Authorization", "Bearer " + token)
+          .then(res => {
+            res.status.should.equal(200);
+            res.body.length.should.equal(1);
+          })
       ));
 
     it("should NOT filter list of mandataires by password", () =>
       logUser(server, {
         username: "admin",
         password: "admin"
-      }).then(agent =>
-        agent.get("/api/v1/admin/mandataires?users.password=abc").then(res => {
-          res.status.should.equal(200);
-          res.body.length.should.equal(3);
-        })
+      }).then(token =>
+        agent
+          .get("/api/v1/admin/mandataires?users.password=abc")
+          .set("Authorization", "Bearer " + token)
+          .then(res => {
+            res.status.should.equal(200);
+            res.body.length.should.equal(3);
+          })
       ));
   });
   describe("PUT /user", () => {
@@ -74,9 +85,10 @@ describe("routes : /admin", () => {
       logUser(server, {
         username: "admin",
         password: "admin"
-      }).then(agent =>
+      }).then(token =>
         agent
           .put("/api/v1/admin/user/1")
+          .set("Authorization", "Bearer " + token)
           .send({
             active: false
           })
@@ -98,9 +110,10 @@ describe("routes : /admin", () => {
       logUser(server, {
         username: "admin",
         password: "admin"
-      }).then(agent =>
+      }).then(token =>
         agent
           .put("/api/v1/admin/user/1")
+          .set("Authorization", "Bearer " + token)
           .send({
             active: false,
             username: "BIM",
