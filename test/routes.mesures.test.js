@@ -9,6 +9,8 @@ const passportStub = require("passport-stub");
 const server = require("../app");
 const knex = require("../db/knex");
 
+const agent = chai.request.agent(server);
+
 chai.use(chaiHttp);
 passportStub.install(server);
 
@@ -33,9 +35,10 @@ describe("routes : mesures", () => {
       logUser(server, {
         username: "ti1",
         password: "ti1"
-      }).then(agent =>
+      }).then(token =>
         agent
           .get("/api/v1/mesures")
+            .set("Authorization", "Bearer " + token)
           .then(function(res) {
             res.status.should.eql(200);
             res.type.should.eql("application/json");
@@ -50,9 +53,10 @@ describe("routes : mesures", () => {
       logUser(server, {
         username: "jeremy",
         password: "johnson123"
-      }).then(agent =>
+      }).then(token =>
         agent
           .get("/api/v1/mesures")
+            .set("Authorization", "Bearer " + token)
           .then(function(res) {
             res.status.should.eql(401);
           })
