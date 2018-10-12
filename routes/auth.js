@@ -160,7 +160,7 @@ router.post("/forgot_password", (req, res, next) => {
 
   getSpecificMandataire({ email: email })
     .then(user => {
-      return updateUsers(user.user_id, {
+      return updateUser(user.user_id, {
         reset_password_token: token,
         reset_password_expires: Date.now() + 7200000
       }).then(() => {
@@ -209,11 +209,11 @@ router.post("/forgot_password", (req, res, next) => {
  */
 router.post("/reset_password", (req, res, next) => {
   getSpecificMandataireByToken({ reset_password_token: req.body.token })
-    .catch(res =>
+    .catch(res => {
       res.status(400).send({
         message: "Votre lien à expiré."
-      })
-    )
+      });
+    })
     .then(user => {
       if (req.body.newPassword === req.body.verifyPassword) {
         updateUser(user.user_id, {
@@ -226,7 +226,9 @@ router.post("/reset_password", (req, res, next) => {
             confirmationPasswordEmail(mandataire.email);
           });
       } else {
-        return next(new Error(400));
+        return res.status(400).send({
+            message: "Vos mots de passe ne sont pas équivalent."
+        });;
       }
     })
     .then(function() {
