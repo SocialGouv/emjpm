@@ -33,15 +33,15 @@ describe("routes : auth", () => {
       .then(() => knex.seed.run());
   });
 
+  afterEach(() => {
+    nodemailerMock.mock.reset();
+  });
+
   after(() => {
     mockery.deregisterAll();
     mockery.disable();
     passportStub.logout();
     return knex.migrate.rollback();
-  });
-
-  afterEach(() => {
-    nodemailerMock.mock.reset();
   });
 
   describe("Login redirection", () => {
@@ -160,9 +160,9 @@ describe("routes : auth", () => {
         }));
   });
 
-    const agent = chai.request.agent(server);
+  const agent = chai.request.agent(server);
 
-    describe("GET /auth/logout", () => {
+  describe("GET /auth/logout", () => {
     it("should logout a user", () =>
       logUser(server).then(token =>
         agent
@@ -222,13 +222,13 @@ describe("routes : auth", () => {
           throw new Error("should not fail");
         }));
   });
-
   describe("POST /auth/reset-password", () => {
     it("shouldn't reset a password", () =>
       chai
         .request(server)
-        .post("/auth/forgot-password")
+        .post("/auth/reset_password")
         .send({
+          token: "LpWpzK4Jla9I87Aq",
           newPassword: "adad",
           verifyPassword: "tataadad"
         })
@@ -242,8 +242,9 @@ describe("routes : auth", () => {
     it("should reset a password", () =>
       chai
         .request(server)
-        .post("/auth/forgot-password")
+        .post("/auth/reset_password")
         .send({
+          token: "LpWpzK4Jla9I87Aq",
           newPassword: "adad",
           verifyPassword: "adad"
         })

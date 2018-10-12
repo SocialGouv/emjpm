@@ -48,7 +48,7 @@ describe("routes : /admin", () => {
           .set("Authorization", "Bearer " + token)
           .then(res => {
             res.status.should.equal(200);
-            res.body.length.should.equal(3);
+            res.body.length.should.equal(4);
           })
       ));
 
@@ -76,7 +76,7 @@ describe("routes : /admin", () => {
           .set("Authorization", "Bearer " + token)
           .then(res => {
             res.status.should.equal(200);
-            res.body.length.should.equal(3);
+            res.body.length.should.equal(4);
           })
       ));
   });
