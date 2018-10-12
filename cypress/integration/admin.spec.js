@@ -9,8 +9,8 @@ describe("Admins", () => {
     cy.loginByForm("admin", "admin");
   });
 
-  it("should show 2 active users", function() {
-    cy.getCellAction().should("have.length", 2);
+  it("should show 3 active users", function() {
+    cy.getCellAction().should("have.length", 3);
     cy.get(".ReactTable .rt-tr-group:nth-child(1)")
       .find(".rt-td")
       .first()
@@ -36,7 +36,7 @@ describe("Admins", () => {
     cy.getCellAction().should("contain", "Activer");
   });
   it("user should be deativated", function() {
-    cy.getCellAction().should("have.length", 1);
+    cy.getCellAction().should("have.length", 2);
     cy.get("[data-cy='En attente de validation']").click();
     cy.getCellAction().should("have.length", 2);
     cy.get(".ReactTable .rt-tr-group:nth-child(2)")
@@ -45,7 +45,7 @@ describe("Admins", () => {
       .should("contain", "Adrien");
   });
   it("should show 1 active users", function() {
-    cy.getCellAction().should("have.length", 1);
+    cy.getCellAction().should("have.length", 2);
     cy.get(".ReactTable .rt-tr-group:nth-child(1)")
       .find(".rt-td")
       .first()
@@ -62,8 +62,8 @@ describe("Admins", () => {
       .click();
     cy.getCellAction().should("contain", "Désactiver");
   });
-  it("should show 2 active users", function() {
-    cy.getCellAction().should("have.length", 2);
+  it("should show 3 active users", function() {
+    cy.getCellAction().should("have.length", 3);
     cy.get(".ReactTable .rt-tr-group:nth-child(1)")
       .find(".rt-td")
       .first()
@@ -79,7 +79,7 @@ describe("Admins", () => {
       cy.exec("npm run cypress:api-reset");
     });
     it("should navigate properly", function() {
-      cy.getCellAction().should("have.length", 2);
+      cy.getCellAction().should("have.length", 3);
 
       cy.get(".ReactTable .rt-tr-group:nth-child(1) .rt-td")
         .first()
@@ -95,20 +95,20 @@ describe("Admins", () => {
         .should("contain", "Doug");
 
       cy.get("[data-cy='Actifs']").click();
-      cy.getCellAction().should("have.length", 2);
-      cy.getCellAction("Désactiver").should("have.length", 2);
+      cy.getCellAction().should("have.length", 3);
+      cy.getCellAction("Désactiver").should("have.length", 3);
       cy.getCellAction("Activer").should("have.length", 0);
 
       cy.getCellAction("Désactiver")
         .first()
         .click();
-      cy.getCellAction("Désactiver").should("have.length", 1);
+      cy.getCellAction("Désactiver").should("have.length", 2);
       cy.getCellAction("Activer").should("have.length", 1);
 
       cy.getCellAction("Désactiver")
         .first()
         .click();
-      cy.getCellAction("Désactiver").should("have.length", 0);
+      cy.getCellAction("Désactiver").should("have.length", 1);
       cy.getCellAction("Activer").should("have.length", 2);
 
       cy.get("[data-cy='En attente de validation']").click();
