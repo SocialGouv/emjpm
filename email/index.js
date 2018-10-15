@@ -1,8 +1,4 @@
-const express = require("express");
 const nodemailer = require("nodemailer");
-const { format, addMonths, addDays } = require("date-fns");
-
-const router = express.Router();
 
 const SMTP_HOST = process.env.SMTP_HOST || "127.0.0.1";
 const SMTP_PORT = process.env.SMTP_PORT || "25";
@@ -24,24 +20,17 @@ if (SMTP_USER) {
   };
 }
 
-const sendEmail = (sendTo, subject, text, html) =>
-  new Promise((resolve, reject) => {
-    let transporter = nodemailer.createTransport(smtpConfig);
-    let mailOptions = {
-      from: SMTP_FROM,
-      to: sendTo,
-      subject: subject,
-      text: text,
-      html: html
-    };
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(info);
-    });
-  });
+const sendEmail = (sendTo, subject, text, html) => {
+  let transporter = nodemailer.createTransport(smtpConfig);
+  let mailOptions = {
+    from: SMTP_FROM,
+    to: sendTo,
+    subject: subject,
+    text: text,
+    html: html
+  };
+  return transporter.sendMail(mailOptions);
+};
 
 module.exports = {
   sendEmail
