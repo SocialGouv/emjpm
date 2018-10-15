@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const queryString = require("query-string");
 const bcrypt = require("bcryptjs");
 const uid = require("rand-token").uid;
 
@@ -11,7 +10,6 @@ const passport = require("../auth/local");
 const { updateLastLogin, updateUser } = require("../db/queries/users");
 const {
   getSpecificMandataire,
-  updateMandataire,
   getMandataireById,
   getSpecificMandataireByToken
 } = require("../db/queries/mandataires");
@@ -87,22 +85,20 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         if (err) {
           return next(err);
         }
-        // return updateLastLogin(user.id).then(() => {
-        const token = jwt.sign(
-          JSON.parse(JSON.stringify(user)),
-          process.env.JWTKEY
-        );
-        return res.status(200).json({
-          success: true,
-          url: redirs[user.type] || redirs.default,
-          token
-        });
-        // });
-        // updateLastLogin(user.id).then(() => {
-        //   res
-        //     .status(200)
-        //     .json({ success: true, url: redirs[user.type] || redirs.default });
-        // });
+
+        updateLastLogin(user.id)
+          .then(() => {
+            const token = jwt.sign(
+              JSON.parse(JSON.stringify(user)),
+              process.env.JWTKEY
+            );
+            return res.status(200).json({
+              success: true,
+              url: redirs[user.type] || redirs.default,
+              token
+            });
+          })
+          .catch(console.log);
       });
     }
   })(req, res, next);
@@ -159,17 +155,18 @@ router.post("/forgot_password", (req, res, next) => {
   const token = uid(16);
 
   getSpecificMandataire({ email: email })
-    .then(user => {
-      return updateUser(user.user_id, {
+    .then(user =>
+      updateUser(user.user_id, {
         reset_password_token: token,
         reset_password_expires: Date.now() + 7200000
-      }).then(() => {
-        return resetPasswordEmail(
-          email,
-          `${process.env.API_URL}/reset-password?token=${token}`
-        );
-      });
-    })
+      })
+    )
+    .then(() =>
+      resetPasswordEmail(
+        email,
+        `${process.env.API_URL}/reset-password?token=${token}`
+      )
+    )
     .then(function() {
       res.status(200).json();
     })
@@ -211,10 +208,16 @@ router.post("/reset_password", (req, res, next) => {
   getSpecificMandataireByToken({ reset_password_token: req.body.token })
     .catch(res => {
       res.status(400).send({
-        message: "Votre lien à expiré."
+        message: "Votre lien a expiré."
       });
+      throw new Error();
     })
     .then(user => {
+      if (!user) {
+        return res.status(401).send({
+          message: "Erreur."
+        });
+      }
       if (req.body.newPassword === req.body.verifyPassword) {
         updateUser(user.user_id, {
           password: bcrypt.hashSync(req.body.newPassword, 10),
@@ -227,8 +230,8 @@ router.post("/reset_password", (req, res, next) => {
           });
       } else {
         return res.status(400).send({
-            message: "Vos mots de passe ne sont pas équivalent."
-        });;
+          message: "Vos mots de passe ne sont pas équivalents."
+        });
       }
     })
     .then(function() {
