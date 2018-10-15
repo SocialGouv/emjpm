@@ -1,30 +1,26 @@
 process.env.NODE_ENV = "test";
 
-const mockery = require("mockery");
-
+const chai = require("chai");
+const rewiremock = require("rewiremock").default;
+const chaiHttp = require("chai-http");
 const nodemailerMock = require("nodemailer-mock");
 
-mockery.enable({
-  warnOnUnregistered: false
-});
+const { logUser } = require("./utils");
 
-mockery.registerMock("nodemailer", nodemailerMock);
-
-const { shouldBeProtected, logUser } = require("./utils");
-
-const chai = require("chai");
 chai.should();
+chai.use(chaiHttp);
 
-const chaiHttp = require("chai-http");
-const passportStub = require("passport-stub");
-
-const server = require("../app");
 const knex = require("../db/knex");
 
-chai.use(chaiHttp);
-passportStub.install(server);
-
 describe("routes : auth", () => {
+  let server;
+
+  before(() => {
+    rewiremock("nodemailer").with(nodemailerMock);
+    rewiremock.enable();
+    server = require("../app");
+  });
+
   beforeEach(() => {
     knex.raw("DELETE FROM 'knex_migrations_lock';");
     return knex.migrate
@@ -38,9 +34,7 @@ describe("routes : auth", () => {
   });
 
   after(() => {
-    mockery.deregisterAll();
-    mockery.disable();
-    passportStub.logout();
+    rewiremock.disable();
     return knex.migrate.rollback();
   });
 
@@ -160,9 +154,12 @@ describe("routes : auth", () => {
         }));
   });
 
-  const agent = chai.request.agent(server);
-
   describe("GET /auth/logout", () => {
+    let agent;
+    before(() => {
+      agent = chai.request.agent(server);
+    });
+
     it("should logout a user", () =>
       logUser(server).then(token =>
         agent
@@ -223,7 +220,7 @@ describe("routes : auth", () => {
         }));
   });
   describe("POST /auth/reset-password", () => {
-    it("shouldn't reset a password", () =>
+    it("shouldn't reset a password when inputs do not match", () =>
       chai
         .request(server)
         .post("/auth/reset_password")
@@ -239,7 +236,23 @@ describe("routes : auth", () => {
           console.log("e", e);
           throw new Error("should not fail");
         }));
-    it("should reset a password", () =>
+    it("should not reset a password when invalid token", () =>
+      chai
+        .request(server)
+        .post("/auth/reset_password")
+        .send({
+          token: "aaaaa",
+          newPassword: "adad",
+          verifyPassword: "adad"
+        })
+        .then(res => {
+          res.status.should.eql(401);
+        })
+        .catch(e => {
+          console.log("e", e);
+          //throw new Error("should not fail");
+        }));
+    it("should reset a password when input match", () =>
       chai
         .request(server)
         .post("/auth/reset_password")
