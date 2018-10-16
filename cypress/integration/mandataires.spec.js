@@ -29,7 +29,6 @@ describe("Mandataires", function() {
           cy.get(".react-tabs .react-tabs__tab-list").should("contain", "2 / 3");
         });
         it("can add new mesure", () => {
-          console.log("lo2", localStorage);
           cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy=button-create-mesure]").click();
           cy.dateInput(".form-group #root_date_ouverture", "2019-06-22");

@@ -12,15 +12,6 @@ describe("Login", () => {
 
   it("Forgot password process", function() {
     cy.visit("/reset-password?token=LpWpzK4Jla9I87Aq");
-    cy.get("#root_newPassword").type("udud");
-    cy.get("#root_verifyPassword").type("ud");
-    cy.get("button.btn-success").click();
-
-    //cy.location("pathname", { timeout: 10000 }).should("eq", "/login");
-  });
-
-  it("Forgot password process", function() {
-    cy.visit("/reset-password?token=LpWpzK4Jla9I87Aq");
     cy.get("#root_newPassword").type("adad");
     cy.get("#root_verifyPassword").type("adad");
     cy.get("button.btn-success").click();

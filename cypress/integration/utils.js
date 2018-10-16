@@ -11,9 +11,6 @@ Cypress.Commands.add("loginByForm", (username, password) => {
 
   cy.get("button.btn-success").click();
 });
-//     .then(resp => {
-//   window.localStorage.setItem("jwt", resp.body.user.token);
-// });
 
 Cypress.Commands.add("login", () => {
   cy.request({
