@@ -15,8 +15,9 @@ const fetchpostCode = codePostal =>
 export const zoomCodePostal = codePostal => dispatch => {
   if (!codePostal || !codePostal.trim()) {
     return Promise.resolve(null);
+  } else if (!codePostal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/)) {
+    return alert("Code postal non valide");
   }
-
   fetchpostCode(codePostal)
     .then(mesure => {
       dispatch(coordinates(mesure));

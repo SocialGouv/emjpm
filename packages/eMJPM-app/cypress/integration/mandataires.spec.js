@@ -6,23 +6,30 @@ describe("Mandataires", function() {
       cy.exec("npm run cypress:api-reset");
       cy.loginByForm("jeremy", "johnson123");
     });
+    beforeEach(() => {
+      cy.login();
+    });
 
     beforeEach(function() {
-      Cypress.Cookies.preserveOnce("connect.sid");
+      Cypress.Cookies.preserveOnce("connect.sid", "id_token");
     });
 
     context("session mandataire individuel", () => {
       describe("/mandataires", () => {
         it("table should show 2 mesures", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", {
+            Authorization: "Bearer " + localStorage.key("id_token")
+          });
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
         it("counter should show 2/3", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", {
+            Authorization: "Bearer " + localStorage.getItem("id_token")
+          });
           cy.get(".react-tabs .react-tabs__tab-list").should("contain", "2 / 3");
         });
         it("can add new mesure", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy=button-create-mesure]").click();
           cy.dateInput(".form-group #root_date_ouverture", "2019-06-22");
 
@@ -41,7 +48,7 @@ describe("Mandataires", function() {
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
         });
         it("should have new added mesure", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
           cy.get(".ReactTable .rt-tr-group:first-child .rt-td:nth-child(3)").should(
             "contain",
@@ -54,12 +61,12 @@ describe("Mandataires", function() {
           );
         });
         it("counter should now show 3/3", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .react-tabs__tab-list").should("contain", "3 / 3");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
         });
         it("can close mandat", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
           cy.get("[data-cy=button-close-mesure]")
             .first()
@@ -70,7 +77,7 @@ describe("Mandataires", function() {
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
         it("counter should now show 2/3", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .react-tabs__tab-list").should("contain", "2 / 3");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
@@ -79,7 +86,7 @@ describe("Mandataires", function() {
     context("session mandataire individuel Information", () => {
       describe("/mandataires information", () => {
         it("information should show a nom and prenom", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy='Mes informations']").click();
           cy.get("[data-cy=fiche-manda-email]").contains("ud@ud.com");
           cy.get("[data-cy=fiche-manda-telephone]").contains("0237100000");
@@ -91,7 +98,7 @@ describe("Mandataires", function() {
       });
       describe("/mandataires Update information", () => {
         it("information should update Fiche", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy='Mes informations']").click();
           cy.get("[data-cy=button-edit-profile]").click();
           cy.get(".form-group #root_nom")
@@ -138,7 +145,7 @@ describe("Mandataires", function() {
           cy.get("[data-cy=fiche-manda-secretariat]").contains("Oui (4 ETP)");
         });
         it("counter should now show 2/10", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .react-tabs__tab-list").should("contain", "2 / 10");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
@@ -147,8 +154,7 @@ describe("Mandataires", function() {
     context("session mandataire individuel Mesure Eteinte", () => {
       describe("/mandataires eteindre mesure", () => {
         it("table en cours should have 2 mesures", () => {
-          cy.visit("/mandataires");
-
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy='Mesures éteintes']").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
           cy.get("button[data-cy=button-reactivate-mesure]").should("have.length", 1);
@@ -169,7 +175,7 @@ describe("Mandataires", function() {
           cy.get("button[data-cy=button-reactivate-mesure]").should("have.length", 2);
         });
         it("table eteintes should have 1 mesure", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy='Mesures éteintes']").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
           cy.get("button[data-cy=button-reactivate-mesure]").should("have.length", 2);
@@ -177,7 +183,7 @@ describe("Mandataires", function() {
       });
       describe("/mandataires réactiver mesure", () => {
         it("table eteintes should have 1 mesure", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy='Mesures en cours']").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
           cy.get("[data-cy='Mesures éteintes']").click();
@@ -198,7 +204,7 @@ describe("Mandataires", function() {
     context("session mandataire individuel Mesure Eteinte", () => {
       describe("/mandataires eteindre mesure", () => {
         it("can attente mesure", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy='Mesures en attente']").click();
           cy.get(".react-tabs .rt-tr-group:nth-child(1) [data-cy=button-attente-mesure] ").click();
           cy.get(".form-group #root_date_ouverture").type("2012-12-12");
@@ -208,7 +214,7 @@ describe("Mandataires", function() {
           cy.get("[data-cy=validation-button]").click();
         });
         it("counter should now show 3/10", () => {
-          cy.visit("/mandataires");
+          cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .react-tabs__tab-list").should("contain", "3 / 10");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
         });
