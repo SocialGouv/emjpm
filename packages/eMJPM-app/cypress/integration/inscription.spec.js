@@ -193,7 +193,7 @@ describe("Inscription", () => {
     });
     it("admin should be able to activate account", function() {
       cy.loginByForm("admin", "admin");
-      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 3);
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='UserCellAction']")
@@ -201,7 +201,7 @@ describe("Inscription", () => {
         .click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='Actifs']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 3);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 4);
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 1);
     });

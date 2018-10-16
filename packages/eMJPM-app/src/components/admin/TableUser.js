@@ -130,10 +130,10 @@ class TableUser extends React.Component {
         loading={loading}
         loadingText="Chargement des mandataires..."
         defaultSorted={[
-            {
-                id: "created_at",
-                desc: false
-            }
+          {
+            id: "created_at",
+            desc: false
+          }
         ]}
         //defaultPageSize={PAGE_SIZE}
         onFetchData={this.fetchData}

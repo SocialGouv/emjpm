@@ -90,6 +90,7 @@ class MapTi extends React.Component {
   };
 
   render() {
+    this.mapRef.current && this.mapRef.current.leafletElement.setMaxZoom(10);
     const { dataFilters, datamesureFilters, isMandataire, filters, coordinates } = this.props;
     const center = getCenter(this.state, coordinates);
     const filterMesure = {

@@ -39,9 +39,7 @@ const DummyTabs = ({ tabs }) => (
         </StyledTab>
       ))}
     </TabList>
-    {tabs.map(tab => (
-      <TabPanel key={tab.text}>{tab.content}</TabPanel>
-    ))}
+    {tabs.map(tab => <TabPanel key={tab.text}>{tab.content}</TabPanel>)}
   </Tabs>
 );
 

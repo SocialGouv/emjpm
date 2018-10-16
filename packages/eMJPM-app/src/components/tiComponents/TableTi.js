@@ -117,6 +117,22 @@ const COLUMNS = [
     style: { textAlign: "center", verticalAlign: "middle" }
   },
   {
+    Header: "nom",
+    id: "nom",
+    accessor: "nom",
+    width: 20,
+    show: false,
+    style: { textAlign: "center", verticalAlign: "middle" }
+  },
+  {
+    Header: "prenom",
+    id: "prenom",
+    accessor: "prenom",
+    width: 20,
+    show: false,
+    style: { textAlign: "center", verticalAlign: "middle" }
+  },
+  {
     Header: "",
     id: "identity",
     width: 50,
@@ -140,7 +156,13 @@ const COLUMNS = [
     accessor: d => d.etablissement,
     Cell: row => (
       <Cell row={row} style={{ verticalAlign: "middle" }}>
-        <b>{row.row.etablissement}</b>
+        {row.row.identity === "service" ? (
+          <b>{row.row.etablissement}</b>
+        ) : (
+          <b>
+            {row.row.nom} {row.row.prenom}
+          </b>
+        )}
         <br /> <div style={{ color: "#cccccc" }}>{row.row.identity.toUpperCase()} </div>
       </Cell>
     ),
