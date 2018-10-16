@@ -1,29 +1,40 @@
 process.env.NODE_ENV = "test";
 
-const { shouldBeProtected, logUser } = require("./utils");
-
 const chai = require("chai");
-chai.should();
-
+const rewiremock = require("rewiremock").default;
 const chaiHttp = require("chai-http");
-const passportStub = require("passport-stub");
+const nodemailerMock = require("nodemailer-mock");
 
-const server = require("../app");
+const { logUser } = require("./utils");
+
+chai.should();
+chai.use(chaiHttp);
+
 const knex = require("../db/knex");
 
-chai.use(chaiHttp);
-passportStub.install(server);
-
 describe("routes : auth", () => {
-  before(() =>
-    knex.migrate
+  let server;
+
+  before(() => {
+    rewiremock("nodemailer").with(nodemailerMock);
+    rewiremock.enable();
+    server = require("../app");
+  });
+
+  beforeEach(() => {
+    knex.raw("DELETE FROM 'knex_migrations_lock';");
+    return knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())
-      .then(() => knex.seed.run())
-  );
+      .then(() => knex.seed.run());
+  });
+
+  afterEach(() => {
+    nodemailerMock.mock.reset();
+  });
 
   after(() => {
-    passportStub.logout();
+    rewiremock.disable();
     return knex.migrate.rollback();
   });
 
@@ -144,10 +155,16 @@ describe("routes : auth", () => {
   });
 
   describe("GET /auth/logout", () => {
+    let agent;
+    before(() => {
+      agent = chai.request.agent(server);
+    });
+
     it("should logout a user", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .get("/auth/logout")
+          .set("Authorization", "Bearer " + token)
           .then(res => {
             res.status.should.eql(200);
             res.redirects.length.should.eql(0);
@@ -169,6 +186,87 @@ describe("routes : auth", () => {
         .then(res => {
           res.status.should.eql(200);
           res.type.should.eql("application/json");
+        }));
+  });
+
+  describe("POST /auth/forgot_password", () => {
+    it("should send a forgot password email with correct token on request", () =>
+      chai
+        .request(server)
+        .post("/auth/forgot_password")
+        .send({
+          email: "ud@ud.com"
+        })
+        .then(async res => {
+          // verify we send an email to "ud@ud.com" with token
+          res.status.should.eql(200);
+          const sentMail = nodemailerMock.mock.sentMail();
+          sentMail.length.should.eql(1);
+          sentMail[0].to.should.eql("ud@ud.com");
+          sentMail[0].subject.should.eql("Nouveau mot de passe pour e-MJPM");
+          const token = await knex
+            .select("reset_password_token")
+            .from("users")
+            .innerJoin("mandataires", "users.id", "mandataires.user_id")
+            .where("email", "ud@ud.com")
+            .first();
+          sentMail[0].html.should.contain(
+            `reset-password?token=${token.reset_password_token}`
+          );
+        })
+        .catch(e => {
+          console.log("e", e);
+          throw new Error("should not fail");
+        }));
+  });
+  describe("POST /auth/reset-password", () => {
+    it("shouldn't reset a password when inputs do not match", () =>
+      chai
+        .request(server)
+        .post("/auth/reset_password")
+        .send({
+          token: "LpWpzK4Jla9I87Aq",
+          newPassword: "adad",
+          verifyPassword: "tataadad"
+        })
+        .then(res => {
+          res.status.should.eql(400);
+        })
+        .catch(e => {
+          console.log("e", e);
+          throw new Error("should not fail");
+        }));
+    it("should not reset a password when invalid token", () =>
+      chai
+        .request(server)
+        .post("/auth/reset_password")
+        .send({
+          token: "aaaaa",
+          newPassword: "adad",
+          verifyPassword: "adad"
+        })
+        .then(res => {
+          res.status.should.eql(401);
+        })
+        .catch(e => {
+          console.log("e", e);
+          //throw new Error("should not fail");
+        }));
+    it("should reset a password when input match", () =>
+      chai
+        .request(server)
+        .post("/auth/reset_password")
+        .send({
+          token: "LpWpzK4Jla9I87Aq",
+          newPassword: "adad",
+          verifyPassword: "adad"
+        })
+        .then(res => {
+          res.status.should.eql(200);
+        })
+        .catch(e => {
+          console.log("e", e);
+          throw new Error("should not fail");
         }));
   });
 });

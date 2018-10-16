@@ -176,7 +176,7 @@ describe("routes : inscription", () => {
         .then(async (res, req) => {
           const user = await knex
             .table("users")
-            .orderBy("id", "desc")
+            .where("id", 42)
             .first();
           user.active.should.equal(false);
         }));
