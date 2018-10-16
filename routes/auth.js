@@ -219,14 +219,14 @@ router.post("/reset_password", (req, res, next) => {
         });
       }
       if (req.body.newPassword === req.body.verifyPassword) {
-        updateUser(user.user_id, {
+        return updateUser(user.user_id, {
           password: bcrypt.hashSync(req.body.newPassword, 10),
           reset_password_token: undefined,
           reset_password_expires: undefined
         })
           .then(id => getMandataireById(id))
           .then(mandataire => {
-            confirmationPasswordEmail(mandataire.email);
+            return confirmationPasswordEmail(mandataire.email);
           });
       } else {
         return res.status(400).send({

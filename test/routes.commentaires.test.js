@@ -61,6 +61,7 @@ describe("routes : commentaires", () => {
             res.status.should.eql(200);
             res.type.should.eql("application/json");
             res.body.length.should.eql(1);
+            res.body[0].comment.should.eql("Hello, world 2");
           })
       ));
   });

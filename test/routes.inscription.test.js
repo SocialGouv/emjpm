@@ -174,12 +174,11 @@ describe("routes : inscription", () => {
           res.status.should.eql(200);
         })
         .then(async (res, req) => {
-
           const user = await knex
             .table("users")
-            .orderBy("id", "desc")
+            .where("id", 42)
             .first();
-          user.active.should.equal(true);
+          user.active.should.equal(false);
         }));
   });
 });
