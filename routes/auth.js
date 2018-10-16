@@ -1,10 +1,21 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const uid = require("rand-token").uid;
 
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
 
-const { updateLastLogin } = require("../db/queries/users");
+const { updateLastLogin, updateUser } = require("../db/queries/users");
+const {
+  getSpecificMandataire,
+  getMandataireById,
+  getSpecificMandataireByToken
+} = require("../db/queries/mandataires");
+
+const { resetPasswordEmail } = require("../email/password-reset");
+const { confirmationPasswordEmail } = require("../email/password-confirmation");
 
 const redirs = {
   individuel: "/mandataires",
@@ -60,7 +71,7 @@ const redirs = {
  *               $ref: '#/components/schemas/SuccessResponse'
  */
 router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
-  passport.authenticate("local", (err, user, info) => {
+  passport.authenticate("local", { session: false }, (err, user, info) => {
     if (err) {
       return next(err);
     }
@@ -70,15 +81,24 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
         .json({ success: false, message: "User not found" });
     }
     if (user) {
-      req.logIn(user, function(err) {
+      req.logIn(user, { session: false }, function(err) {
         if (err) {
           return next(err);
         }
-        updateLastLogin(user.id).then(() => {
-          res
-            .status(200)
-            .json({ success: true, url: redirs[user.type] || redirs.default });
-        });
+
+        updateLastLogin(user.id)
+          .then(() => {
+            const token = jwt.sign(
+              JSON.parse(JSON.stringify(user)),
+              process.env.JWTKEY
+            );
+            return res.status(200).json({
+              success: true,
+              url: redirs[user.type] || redirs.default,
+              token
+            });
+          })
+          .catch(console.log);
       });
     }
   })(req, res, next);
@@ -104,6 +124,119 @@ router.get("/logout", (req, res, next) => {
   req.logout();
   res.status(200).json({ success: true });
   next();
+});
+
+/**
+ * @swagger
+ * /auth/forgot_password:
+ *   post:
+ *     tags:
+ *       - login
+ *     description: Create token for user's password forgotten
+ *     requestBody:
+ *       description: A JSON object containing email
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 required: true
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: send email to he user with url for reset password
+ */
+router.post("/forgot_password", (req, res, next) => {
+  const email = req.body.email;
+  const token = uid(16);
+
+  getSpecificMandataire({ email: email })
+    .then(user =>
+      updateUser(user.user_id, {
+        reset_password_token: token,
+        reset_password_expires: Date.now() + 7200000
+      })
+    )
+    .then(() =>
+      resetPasswordEmail(
+        email,
+        `${process.env.API_URL}/reset-password?token=${token}`
+      )
+    )
+    .then(function() {
+      res.status(200).json();
+    })
+    .catch(console.log);
+});
+//7200000
+/**
+ * @swagger
+ * /auth/reset_password:
+ *   post:
+ *     tags:
+ *       - login
+ *     description: Reset password and create new one
+ *     requestBody:
+ *       description: A JSON object containing reset password
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               token:
+ *                 type: string
+ *                 required: true
+ *               newPassword:
+ *                 type: string
+ *                 required: true
+ *               verifyPassword:
+ *                 type: string
+ *                 required: true
+ *     responses:
+ *       200:
+ *         description: send email to the user with confirmation of reset password
+ *         headers:
+ *           Set-Cookie:
+ *             description: API server cookie
+ */
+router.post("/reset_password", (req, res, next) => {
+  getSpecificMandataireByToken({ reset_password_token: req.body.token })
+    .catch(res => {
+      res.status(400).send({
+        message: "Votre lien a expiré."
+      });
+      throw new Error();
+    })
+    .then(user => {
+      if (!user) {
+        return res.status(401).send({
+          message: "Erreur."
+        });
+      }
+      if (req.body.newPassword === req.body.verifyPassword) {
+        return updateUser(user.user_id, {
+          password: bcrypt.hashSync(req.body.newPassword, 10),
+          reset_password_token: undefined,
+          reset_password_expires: undefined
+        })
+          .then(id => getMandataireById(id))
+          .then(mandataire => {
+            return confirmationPasswordEmail(mandataire.email);
+          });
+      } else {
+        return res.status(400).send({
+          message: "Vos mots de passe ne sont pas équivalents."
+        });
+      }
+    })
+    .then(function() {
+      res.status(200).json();
+    });
 });
 
 module.exports = router;

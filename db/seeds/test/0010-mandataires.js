@@ -57,5 +57,23 @@ exports.seed = function(knex, Promise) {
           user_id: 42
         });
       })
+      .then(function() {
+        // Inserts seed entries one by one in series
+        return knex("mandataires").insert({
+          etablissement: "test43",
+          email: "panam2@paris.com",
+          prenom: "Doug",
+          code_postal: "10000",
+          ville: "Paris",
+          telephone: "0237100000",
+          telephone_portable: "0101010101",
+          adresse: "67 rue saint martin",
+          mesures_en_cours: 22,
+          dispo_max: 38,
+          secretariat: false,
+          nb_secretariat: 0,
+          user_id: 52
+        });
+      })
   );
 };

@@ -397,8 +397,8 @@ router.put(
     //   return next(new Error(401));
     // }
     // récupères le nb de mesure attribuées pour ce mandataire
-    const mesureEnAttente = mesureEnAttente(req.body.mandataire_id);
-    update(req.body.mandataire_id, { mesures_en_attente: mesureEnAttente })
+    const nbMesureAttente = mesureEnAttente(req.body.mandataire_id);
+    update(req.body.mandataire_id, { mesures_en_attente: nbMesureAttente })
       .then(mandataire => res.status(200).json(mandataire))
       .catch(error => next(error));
   }
