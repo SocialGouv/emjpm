@@ -21,6 +21,15 @@ const Footer = ({ fixed }) => (
         <li>
           <a href="https://www.data.gouv.fr/terms">Conditions générales d'utilisation</a>
         </li>
+        <li>
+          <a
+            className="button button_transparent"
+            style={{ fontSize: "1em" }}
+            href="mailto:contact@emjpm.beta.gouv.fr"
+          >
+            Nous contacter{" "}
+          </a>
+        </li>
       </ul>
       <ul className="footer__links"> </ul>
     </div>

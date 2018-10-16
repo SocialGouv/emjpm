@@ -1,21 +1,13 @@
 import Router from "next/router";
 
-import apiCall from "./Api";
-
 // todo: hack: force embedding the SVG due to some webpack+next+static issues in a gh-pages env
 const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm.png");
 
-const doLogout = () =>
-  apiCall("/auth/logout")
-    .then(json => {
-      Router.push("/login");
-      return json;
-    })
-    .catch(e => {
-      Router.push("/login");
-      console.log(e);
-      throw e;
-    });
+const doLogout = () => {
+  // Clear user token and profile data from localStorage
+  localStorage.removeItem("id_token");
+  Router.push("/login");
+};
 
 const Navigation = ({ logout }) => (
   <div
