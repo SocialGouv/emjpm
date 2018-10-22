@@ -30,8 +30,7 @@ const schema = {
     email: { type: "string", default: "" },
     adresse: { type: "string", default: "" },
     code_postal: { type: "string", default: "" },
-    ville: { type: "string", default: "" },
-    etablissement: { type: "string", default: "" }
+    ville: { type: "string", default: "" }
   }
 };
 
