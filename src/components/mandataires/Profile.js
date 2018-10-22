@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { MinusSquare } from "react-feather";
 import { show } from "redux-modal";
 
-import { Button, AutocompleteState, SelectionManager } from "..";
+import { Button, Autocomplete, SelectionManager } from "..";
 import apiFetch from "../communComponents/Api";
 import piwik from "../../piwik";
 
@@ -28,7 +28,7 @@ const Selector = ({
       <thead>
         <tr>
           <th colSpan={2}>
-            <AutocompleteState
+            <Autocomplete
               inputProps={{ placeholder, style: { width: 400, padding: 5 } }}
               items={autocompleteItems}
               onSelect={onAdd}

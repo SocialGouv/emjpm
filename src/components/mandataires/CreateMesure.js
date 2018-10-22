@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { X, Save, PlusSquare, XCircle, CheckCircle } from "react-feather";
 import { format } from "date-fns";
 
-import { Button, ToggleState, AutocompleteState } from "..";
+import { Button, ToggleState, Autocomplete } from "..";
 import { createMesure, createMesureSave } from "./actions/mesures";
 
 const Alert = ({ className, Icon, message }) =>
@@ -155,7 +155,7 @@ const uiSchema = {
 };
 
 const EtablissementAutoComplete = ({ items, value, onChange }) => (
-  <AutocompleteState
+  <Autocomplete
     items={items}
     inputProps={{
       style: { width: 500 },
