@@ -61,7 +61,7 @@ docker exec emjpm-postgres createdb emjpm_test -U postgres
 
 ## Prod
 
-- Créer le fichier `docker-compose.override.yaml` avec les valeurs de production
+- Créer les fichiers `docker-compose.override.yaml` et `.env` avec les valeurs de production
 - Builder l'image :
 - `docker-compose build`
 - Lancer PostgreSQL + l'API : `docker-compose restart`

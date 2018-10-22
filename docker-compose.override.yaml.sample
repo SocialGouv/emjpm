@@ -12,11 +12,7 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-    environment:
-      - DATABASE_URL=psql://api:apiPassword@db/emjpm_prod
-      - NODE_ENV=production
-      - PORT=4000
-      - SECRET_KEY=xyz
+    env_file: .env
     ports:
       - 4000:4000
     depends_on:
