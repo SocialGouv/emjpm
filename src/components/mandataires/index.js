@@ -1,6 +1,13 @@
 import dynamic from "next/dynamic";
 import { Home, Map, UserMinus, UserPlus } from "react-feather";
 
+/* TEMP : the redux store will be moved at root level */
+import { createStore, combineReducers, applyMiddleware, bindActionCreators } from "redux";
+import { reducer as modal } from "redux-modal";
+import { Provider, connect } from "react-redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+
 import { DummyTabs, LoadingMessage } from "..";
 import apiFetch from "../communComponents/Api";
 
@@ -9,14 +16,6 @@ import Profile from "./Profile";
 import TableMesures from "./TableMesures";
 import Header from "./Header";
 import CreateMesure from "./CreateMesure";
-
-/* TEMP : the redux store will be moved at root level */
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { reducer as modal } from "redux-modal";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 
 import { mandataireMount } from "./actions/mandataire";
 import mesuresReducer from "./reducers/mesures";
@@ -36,19 +35,10 @@ const OpenStreeMap = dynamic({
     MapMesures: import("./MapMesures")
   }),
   loading: () => <LoadingMessage />,
-  render: (props, { Modal }) => {
-    Modal.setAppElement("#__next");
-    return <Modal {...props} />;
+  render: (props, { MapMesures }) => {
+    console.log("render", props, MapMesures);
+    return <MapMesures {...props} />;
   }
-});
-
-// due to react-modal + SSR
-const Modal = dynamic({
-  modules: props => ({
-    Modal: import("react-modal")
-  }),
-  loading: () => <LoadingMessage />,
-  render: (props, { Modal }) => <Modal {...props} />
 });
 
 class MandataireTabs extends React.Component {
@@ -153,13 +143,7 @@ const rootReducer = combineReducers({
   modal
 });
 
-const store = createStore(
-  rootReducer,
-  typeof window !== "undefined" &&
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(thunk)
-);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ onMount: mandataireMount }, dispatch);

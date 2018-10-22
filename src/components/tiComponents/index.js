@@ -1,6 +1,6 @@
 // @flow
 import dynamic from "next/dynamic";
-import * as React from "react";
+import React from "react";
 import Router from "next/router";
 import { Users, Archive } from "react-feather";
 
@@ -9,6 +9,7 @@ import { createStore, combineReducers, applyMiddleware, bindActionCreators } fro
 import { reducer as modal } from "redux-modal";
 import { Provider, connect } from "react-redux";
 import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import { DummyTabs, LoadingMessage } from "..";
 import { tiMount } from "./actions/mandataire";
@@ -24,18 +25,6 @@ const MapTable = dynamic({
   }),
   loading: () => <LoadingMessage />,
   render: (props, { MapTi }) => <MapTi {...props} />
-});
-
-// due to react-modal + SSR
-const Modal = dynamic({
-  modules: props => ({
-    Modal: import("react-modal")
-  }),
-  loading: () => <LoadingMessage />,
-  render: (props, { Modal }) => {
-    Modal.setAppElement("#__next");
-    return <Modal {...props} />;
-  }
 });
 
 class Ti extends React.Component {
@@ -98,13 +87,7 @@ const rootReducer = combineReducers({
   map: mapReducer
 });
 
-const store = createStore(
-  rootReducer,
-  typeof window !== "undefined" &&
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(thunk)
-);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 const mapDispatchToProps = dispatch => bindActionCreators({ onMount: tiMount }, dispatch);
 
