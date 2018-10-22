@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import { Home, Map, UserMinus, UserPlus } from "react-feather";
-import Modal from "react-modal";
 
 import { DummyTabs, LoadingMessage } from "..";
 import apiFetch from "../communComponents/Api";
@@ -31,15 +30,25 @@ import {
   ValiderMesureEnAttente
 } from "./modals";
 
-Modal.setAppElement("#__next");
-
 // due to leaflet + SSR
 const OpenStreeMap = dynamic({
   modules: props => ({
     MapMesures: import("./MapMesures")
   }),
   loading: () => <LoadingMessage />,
-  render: (props, { MapMesures }) => <MapMesures {...props} />
+  render: (props, { Modal }) => {
+    Modal.setAppElement("#__next");
+    return <Modal {...props} />;
+  }
+});
+
+// due to react-modal + SSR
+const Modal = dynamic({
+  modules: props => ({
+    Modal: import("react-modal")
+  }),
+  loading: () => <LoadingMessage />,
+  render: (props, { Modal }) => <Modal {...props} />
 });
 
 class MandataireTabs extends React.Component {

@@ -1,7 +1,6 @@
 // @flow
 import dynamic from "next/dynamic";
 import * as React from "react";
-import Modal from "react-modal";
 import Router from "next/router";
 import { Users, Archive } from "react-feather";
 
@@ -19,14 +18,24 @@ import { FicheMandataireModal, ModalMesureValidation, ModalMesureReservation } f
 import TableMesures from "../mandataires/TableMesures";
 import apiFetch from "../communComponents/Api";
 
-Modal.setAppElement("#__next");
-
 const MapTable = dynamic({
   modules: props => ({
     MapTi: import("./MapTi")
   }),
   loading: () => <LoadingMessage />,
   render: (props, { MapTi }) => <MapTi {...props} />
+});
+
+// due to react-modal + SSR
+const Modal = dynamic({
+  modules: props => ({
+    Modal: import("react-modal")
+  }),
+  loading: () => <LoadingMessage />,
+  render: (props, { Modal }) => {
+    Modal.setAppElement("#__next");
+    return <Modal {...props} />;
+  }
 });
 
 class Ti extends React.Component {
