@@ -75,6 +75,13 @@ const schema = {
         {
           properties: {
             residence: {
+              enum: ["A Domicile"]
+            }
+          }
+        },
+        {
+          properties: {
+            residence: {
               enum: ["En établissement"]
             },
             etablissement_id: {
