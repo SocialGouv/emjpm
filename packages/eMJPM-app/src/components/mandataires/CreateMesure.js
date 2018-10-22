@@ -80,8 +80,7 @@ const schema = {
             etablissement_id: {
               type: "number"
             }
-          },
-          required: ["etablissement_id"]
+          }
         }
       ]
     }
