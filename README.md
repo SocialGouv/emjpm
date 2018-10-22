@@ -1,4 +1,4 @@
-# e-mjpm API
+# e-mjpm API [![CircleCI](https://circleci.com/gh/SocialGouv/eMJPM-api.svg?style=svg)](https://circleci.com/gh/SocialGouv/eMJPM-api)
 
 ## Get Started
 
@@ -16,9 +16,9 @@ npm start
 
 ### Workflow GIT
 
- - branche `master` : PROD
- - branche `recette` : RECETTE
- - branche `develop` : DEV
+- branche `master` : PROD
+- branche `recette` : RECETTE
+- branche `develop` : DEV
 
 ⚠️ Les PRs doivent être faites sur la branche DEV
 
@@ -26,16 +26,15 @@ npm start
 
 Plus de détails : https://nvie.com/posts/a-successful-git-branching-model/
 
-
 ### Run
 
 Pour lancer un PostgreSQL sur le port 5434 : `docker-compose up`
 
 Les users et noms des dbs sont définis dans les `docker-compose` et sont initialisés par le script [db/postgres-init.sh](./db/postgres-init.sh) :
 
- - le super user Postgres est `postgres`
- - le user pour l'api est `api`
- - 3 bases sont créées initialement : `emjpm_prod, emjpm_dev, emjpm_test` et l'user api a accès à toutes ces bases.
+- le super user Postgres est `postgres`
+- le user pour l'api est `api`
+- 3 bases sont créées initialement : `emjpm_prod, emjpm_dev, emjpm_test` et l'user api a accès à toutes ces bases.
 
 ## Seeds
 
@@ -52,7 +51,6 @@ Les comptes de dev sont définis dans les [seeds](https://github.com/SocialGouv/
 ### Tests
 
 ```sh
-
 # setup la base de test
 docker exec emjpm-postgres createdb emjpm_test -U postgres
 
@@ -63,10 +61,10 @@ docker exec emjpm-postgres createdb emjpm_test -U postgres
 
 ## Prod
 
- - Créer le fichier `docker-compose.override.yaml` avec les valeurs de production
- - Builder l'image :
- - `docker-compose build`
- - Lancer PostgreSQL + l'API : `docker-compose restart`
+- Créer le fichier `docker-compose.override.yaml` avec les valeurs de production
+- Builder l'image :
+- `docker-compose build`
+- Lancer PostgreSQL + l'API : `docker-compose restart`
 
 ### Executer une commande sur le container de l'API:
 
@@ -80,11 +78,11 @@ docker exec emjpm-postgres createdb emjpm_test -U postgres
 
 #### Complet
 
-```docker exec -t -u postgres emjpm-postgres pg_dumpall -c > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql```
+`` docker exec -t -u postgres emjpm-postgres pg_dumpall -c > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql ``
 
 #### Données uniquement
 
-```ssh xxxx@yyyyy -t sudo docker exec -t -u postgres emjpm-postgres pg_dump -a --inserts emjpm_prod > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql```
+`` ssh xxxx@yyyyy -t sudo docker exec -t -u postgres emjpm-postgres pg_dump -a --inserts emjpm_prod > dump_`date +%d-%m-%Y"_"%H_%M_%S`.sql ``
 
 ### Restaurer un dump Postgres:
 
@@ -105,4 +103,5 @@ Ouvre le port 1111 en local vers le Postgres distant
 `ssh xxx@88.191.188.xxx "cd /path/to/projext && NODE_ENV=production node" < node.js`
 
 ### CRON :
-`0 0 * * *  https://api.emjpm-preprod.num.social.gouv.fr/api/v1/email/relance-mandataires-inactifs`
+
+`0 0 * * * https://api.emjpm-preprod.num.social.gouv.fr/api/v1/email/relance-mandataires-inactifs`

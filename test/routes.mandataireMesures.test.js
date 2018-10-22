@@ -9,11 +9,14 @@ const passportStub = require("passport-stub");
 const server = require("../app");
 const knex = require("../db/knex");
 
+const agent = chai.request.agent(server);
+
 chai.use(chaiHttp);
 passportStub.install(server);
 
 describe("routes : mandataireMesures", () => {
   beforeEach(() => {
+    knex.raw("DELETE FROM 'knex_migrations_lock';");
     return knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())
@@ -28,27 +31,29 @@ describe("routes : mandataireMesures", () => {
   describe("GET /api/v1/mandataires/1/mesures", () => {
     shouldBeProtected(server, "GET", "/api/v1/mandataires/1/mesures");
     it("should get list of mesures of a mandataire", () =>
-      logUser(server).then(agent =>
-        agent.get("/api/v1/mandataires/1/mesures").then(res => {
-          res.status.should.eql(200);
-          res.type.should.eql("application/json");
-          res.body.length.should.eql(2);
-          res.body[0].code_postal.should.eql("62000");
-          // todo : check que les mandataires soient bien filtés
-        })
+      logUser(server).then(token =>
+        agent
+          .get("/api/v1/mandataires/1/mesures")
+          .set("Authorization", "Bearer " + token)
+          .then(res => {
+            res.status.should.eql(200);
+            res.type.should.eql("application/json");
+            res.body.length.should.eql(2);
+            res.body[0].code_postal.should.eql("62000");
+            // todo : check que les mandataires soient bien filtés
+          })
       ));
 
     shouldBeProtected(server, "POST", "/api/v1/mandataires/1/mesures");
     it("should post mesure for given mandataire", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .post("/api/v1/mandataires/1/mesures")
+          .set("Authorization", "Bearer " + token)
           .send({
             code_postal: "28000",
             ville: "Chartres",
             etablissement: "peu pas",
-            latitude: 1,
-            longitude: 1,
             created_at: "2010-10-05",
             annee: "2010-10-05",
             type: "preposes",
@@ -73,9 +78,10 @@ describe("routes : mandataireMesures", () => {
     shouldBeProtected(server, "PUT", "/api/v1/mandataires/1/mesures/1");
 
     it("should update a mesure for a given mandataire", () =>
-      logUser(server).then(agent =>
+      logUser(server).then(token =>
         agent
           .put("/api/v1/mandataires/1/mesures/1")
+          .set("Authorization", "Bearer " + token)
           .send({
             code_postal: "10000"
           })
@@ -89,10 +95,31 @@ describe("routes : mandataireMesures", () => {
       ));
   });
 
+  // Change login for a specific user
+  // it("should update a date mesure update when updating mesure en cours for a given mandataire (Trigger)", () =>
+  //   logUser(server).then(token =>
+  //     agent
+  //       .put("/api/v1/mandataires/1/mesures/1")
+  //       .set("Authorization", "Bearer " + token)
+  //       .send({
+  //         mesures_en_cours: 4
+  //       })
+  //       .then(function(res) {
+  //         res.redirects.length.should.eql(0);
+  //         res.status.should.eql(200);
+  //         res.type.should.eql("application/json");
+  //         res.body.length.should.eql(2);
+  //         res.body
+  //           .find(i => i.id === 1)
+  //           .date_mesure_update.should.eql(Date.now());
+  //       })
+  //   ));
+
   it("should NOT update a mesure for another mandataire", () =>
-    logUser(server).then(agent =>
+    logUser(server).then(token =>
       agent
         .put("/api/v1/mandataires/1/mesures/2")
+        .set("Authorization", "Bearer " + token)
         .send({
           code_postal: "10000"
         })

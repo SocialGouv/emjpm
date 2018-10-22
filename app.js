@@ -8,6 +8,7 @@ const session = require("express-session");
 const routes = require("./routes/index");
 const users = require("./routes/users");
 const authRoutes = require("./routes/auth");
+const inscriptionRoutes = require("./routes/inscription")
 const Knex = require("knex");
 const KnexSessionStore = require("connect-session-knex")(session);
 const app = express();
@@ -46,7 +47,7 @@ if (process.env.NODE_ENV === "production") {
     session({
       secret: SECRET_KEY,
       cookie: {
-        maxAge: 1000 * 60 * 60 * 24 * 10 // ten days
+        maxAge: 1000 * 60 * 60 * 4 // 4 hours
       },
       store: store
     })
@@ -63,7 +64,8 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/api/v1", routes);
+app.use("/api/v1/inscription", inscriptionRoutes);
+app.use("/api/v1", passport.authenticate("jwt", { session: false }), routes);
 app.use("/auth", authRoutes);
 app.use("/doc", require("./routes/doc"));
 app.use("/", users);
