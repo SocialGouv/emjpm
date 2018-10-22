@@ -35,7 +35,8 @@ const getEtablissements = () =>
     .orWhereBetween("code_postal", [60000, 60999])
     .orWhereBetween("code_postal", [62000, 62999])
     .orWhereBetween("code_postal", [80000, 80999])
-    .orWhereBetween("code_postal", [2000, 2999]);
+    .orWhereBetween("code_postal", [2000, 2999])
+    .orWhereBetween("code_postal", [75000, 75999]);
 //TODO refactor with Likes '%...'
 
 module.exports = {
