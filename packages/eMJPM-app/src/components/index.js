@@ -1,4 +1,4 @@
-export { default as AutocompleteState } from "./common/AutocompleteState";
+export { default as Autocomplete } from "./common/Autocomplete";
 export { default as Button } from "./common/Button";
 export { default as DummyTabs } from "./common/DummyTabs";
 export { default as Footer } from "./communComponents/Footer";
