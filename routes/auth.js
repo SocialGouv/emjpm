@@ -164,7 +164,7 @@ router.post("/forgot_password", (req, res, next) => {
     .then(() =>
       resetPasswordEmail(
         email,
-        `${process.env.API_URL}/reset-password?token=${token}`
+        `${process.env.APP_URL}/reset-password?token=${token}`
       )
     )
     .then(function() {
