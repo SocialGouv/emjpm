@@ -67,6 +67,10 @@ class Autocomplete extends React.Component {
       this.setState({
         value: ""
       });
+    } else {
+      this.setState({
+        value
+      });
     }
   };
   onChange = e => {
