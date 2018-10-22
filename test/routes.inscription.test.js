@@ -13,6 +13,7 @@ passportStub.install(server);
 
 describe("routes : inscription", () => {
   beforeEach(() => {
+    knex.raw("DELETE FROM 'knex_migrations_lock';");
     return knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())
@@ -175,7 +176,7 @@ describe("routes : inscription", () => {
         .then(async (res, req) => {
           const user = await knex
             .table("users")
-            .orderBy("id", "desc")
+            .where("id", 42)
             .first();
           user.active.should.equal(false);
         }));
