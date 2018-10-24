@@ -139,6 +139,13 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Numero Dossier",
+    id: "numero_dossier",
+    width: 80,
+    accessor: "numero_dossier",
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
     Header: "Extinction",
     id: "extinction",
     width: 100,
