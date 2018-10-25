@@ -149,10 +149,10 @@ const COLUMNS = [
     Header: "Extinction",
     id: "extinction",
     width: 100,
-    accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
+    accessor: d => format(d.extinction, "YYYY-MM-DD"),
     Cell: row => (
       <div>
-        {format(row.row.date_ouverture, "DD/MM/YYYY", { locale: require("date-fns/locale/fr") })}
+        {format(row.row.extinction, "DD/MM/YYYY", { locale: require("date-fns/locale/fr") })}
       </div>
     ),
     style: { textAlign: "center", alignSelf: "center" }
