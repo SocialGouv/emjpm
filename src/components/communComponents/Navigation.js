@@ -9,7 +9,12 @@ const doLogout = () => {
   Router.push("/login");
 };
 
-const Navigation = ({ logout }) => (
+const doInscription = () => {
+  // Clear user token and profile data from localStorage
+  Router.push("/inscription");
+};
+
+const Navigation = ({ logout, inscription }) => (
   <div
     style={{
       background: "white",
@@ -34,8 +39,22 @@ const Navigation = ({ logout }) => (
         href="https://emjpm-doc.num.social.gouv.Fr"
         style={{ cursor: "pointer", marginTop: 10, marginRight: 10 }}
       >
-        Assistance
+        Guide d'utilisation
       </a>
+      {inscription && (
+        <a
+          href="#"
+          onClick={doInscription}
+          style={{
+            color: "#007bff",
+            cursor: "pointer",
+            marginTop: 10,
+            display: "inline-block"
+          }}
+        >
+          Inscription
+        </a>
+      )}
       {logout && (
         <a
           href="#"
