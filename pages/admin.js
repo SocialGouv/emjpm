@@ -38,7 +38,7 @@ const AdminPart = () => (
 );
 
 const AdminPage = () => (
-  <Layout>
+  <Layout logout>
     <h2 style={{ margin: "30px 0" }}>Administration e-MJPM</h2>
     <DummyTabs tabs={tabs} />
   </Layout>

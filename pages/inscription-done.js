@@ -3,7 +3,6 @@ import Footer from "../src/components/communComponents/Footer";
 import Router from "next/router";
 
 const doInscription = () => {
-  // Clear user token and profile data from localStorage
   Router.push("/");
 };
 
