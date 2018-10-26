@@ -7,6 +7,8 @@ const router = express.Router();
 const queries = require("../db/queries/admin");
 const whitelist = require("../db/queries/whitelist");
 
+const user = require("../db/queries/users");
+
 /**
  * @swagger
 
@@ -139,6 +141,7 @@ const USER_WRITE_PROPERTIES = ["active"];
 router.put("/user/:userId", typeRequired("admin"), (req, res, next) => {
   // whitelist input data
   const cleanedBody = whitelist(req.body, USER_WRITE_PROPERTIES);
+  const findUserEmail = user(req.params.userId).email;
   queries
     .updateUser({
       id: req.params.userId,
@@ -148,7 +151,8 @@ router.put("/user/:userId", typeRequired("admin"), (req, res, next) => {
       res.json({
         success: !!updated
       });
-    });
+    })
+    .then(() => validationEmail(findUserEmail));
 });
 
 module.exports = router;
