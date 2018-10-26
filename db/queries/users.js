@@ -17,7 +17,6 @@ const user = id =>
   knex("users")
     .innerJoin("mandataires", "mandataires.user_id", "users.id")
     .where({ "users.id": id })
-    .select("mandataires.email")
     .first();
 
 module.exports = {
