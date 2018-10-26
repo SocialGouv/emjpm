@@ -212,7 +212,7 @@ router.post("/mandataires", (req, res, next) => {
         })
     )
     .then(() => {
-      return inscriptionEmail();
+      return inscriptionEmail(`${process.env.APP_URL}/admin`);
     })
     .then(() => {
       // todo: send email admins ?
