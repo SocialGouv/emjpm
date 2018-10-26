@@ -148,12 +148,12 @@ router.put("/user/:userId", typeRequired("admin"), async (req, res, next) => {
       id: req.params.userId,
       ...cleanedBody
     })
-    .then(() => validationEmail(findUserEmail.email, `${process.env.APP_URL}`))
-    .then(updated => {
-      res.json({
-        success: !!updated
-      });
-    });
+    .then(() => validationEmail(findUserEmail.email, `${process.env.APP_URL}`));
+  // .then(updated => {
+  //   res.json({
+  //     success: !!updated
+  //   });
+  // })
 });
 
 module.exports = router;
