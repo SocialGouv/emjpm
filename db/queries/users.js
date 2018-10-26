@@ -13,7 +13,13 @@ const updateUser = (id, data) =>
     .where({ id })
     .update(data);
 
+const user = id =>
+  knex("users")
+    .where({ id })
+    .first();
+
 module.exports = {
   updateLastLogin,
-  updateUser
+  updateUser,
+  user
 };
