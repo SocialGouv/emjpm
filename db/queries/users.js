@@ -15,7 +15,9 @@ const updateUser = (id, data) =>
 
 const user = id =>
   knex("users")
-    .where({ id })
+    .innerJoin("mandataires", "mandataires.user_id", "users.id")
+    .where({ "users.id": id })
+    .select("mandataires.email")
     .first();
 
 module.exports = {
