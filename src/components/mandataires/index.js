@@ -16,6 +16,7 @@ import Profile from "./Profile";
 import TableMesures from "./TableMesures";
 import Header from "./Header";
 import CreateMesure from "./CreateMesure";
+import InputFiles from "./inputFiles";
 
 import { mandataireMount } from "./actions/mandataire";
 import mesuresReducer from "./reducers/mesures";
@@ -119,6 +120,10 @@ class MandataireTabs extends React.Component {
         text: "Mes informations",
         icon: <Home />,
         content: <Profile />
+      },
+      {
+        text: "Mes importations",
+        content: <InputFiles />
       }
     ];
     return (
