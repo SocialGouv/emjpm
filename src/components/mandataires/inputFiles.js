@@ -101,7 +101,7 @@ class InputFiles extends React.Component {
           "Mesure ad hoc", "MAJ"
           <br />-"code_postal": Code postal doit etre valide : par exmple 75000 n'est pas un code
           postal valide => 75001
-          <br />- "ville" : Ville de la mesure
+          <br />- "ville" : Commune de la mesure
           <br />-"civilite": Genre de MP: "F","H"
           <br />- "annee": Soit date de naissance du type DD/MM/YYYY => 10/08/1980 ou alors juste
           1980
