@@ -39,7 +39,7 @@ const Navigation = ({ logout, inscription }) => (
         href="https://emjpm-doc.num.social.gouv.Fr"
         style={{ cursor: "pointer", marginTop: 10, marginRight: 10 }}
       >
-        Guide d'utilisation
+        Guide d&apos;utilisation
       </a>
       {inscription && (
         <a
