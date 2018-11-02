@@ -1,6 +1,7 @@
 import { CheckCircle, XCircle } from "react-feather";
 import * as XLSX from "xlsx";
 import apiFetch from "../communComponents/Api";
+import Router from "next/router";
 
 const rABS = true;
 
@@ -24,10 +25,6 @@ const Alert = ({ className, Icon, message }) =>
 
 const ErrorBox = ({ message }) => (
   <Alert className="alert-danger" Icon={XCircle} message={message} />
-);
-
-const SucessBox = ({ message }) => (
-  <Alert className="alert-success" Icon={CheckCircle} message={message} />
 );
 
 const defaultColumns = [
@@ -82,9 +79,8 @@ class InputFiles extends React.Component {
         method: "POST",
         body: JSON.stringify(splitRow.slice(1))
       }).then(result => {
-        this.setState({
-          status: result.success
-        });
+        alert(`Importation reussit`);
+        window.location.reload();
       });
     };
     if (rABS) reader.readAsBinaryString(f);
@@ -94,12 +90,36 @@ class InputFiles extends React.Component {
   render() {
     return (
       <div>
+        <h1>Importation d'un fichier excel (format XLSX)</h1>
+        <p>
+          <br /><br />
+          - Changer les entêtes de colonnes avec les entêtes obligatoire: "date_ouverture", "type",
+          "code_postal", "ville", "civilite", "annee", "numero_dossier", "residence"
+          <br />- "date_ouverture" : est la date de décision. Elle doit etre mise sous forme
+          DD/MM/YYYY => 8/11/2010
+          <br />- "type": Le type de mesure: "Tutelle", "Curatelle", "Sauvegarde de justice",
+          "Mesure ad hoc", "MAJ"
+          <br />-"code_postal": Code postal doit etre valide : par exmple 75000 n'est pas un code
+          postal valide => 75001
+          <br />- "ville" : Ville de la mesure
+          <br />-"civilite": Genre de MP: "F","H"
+          <br />- "annee": Soit date de naissance du type DD/MM/YYYY => 10/08/1980 ou alors juste
+          1980
+          <br />-"numero_dossier": Un numéro pour vous retrouver rapidement
+          <br />-"residence" : "A domicile" ou "En établissement"
+          <br />
+          <br />
+          Vous pouvez laisser les autres entêtes de colonnes ...
+          <br />
+          <br />
+          Appuyez sur le boutton importer.
+        </p>
         <input type="file" onChange={e => this.uploadDocumentRequest(e.target.files)} />
         {this.state.status &&
           (this.state.status === "noSuccess" ? (
             <ErrorBox message={`Erreur : Importation non réussit`} />
           ) : (
-            <SucessBox message={`Importation reussit`} />
+            ""
           ))}
       </div>
     );
