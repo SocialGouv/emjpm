@@ -1,7 +1,7 @@
 import { CheckCircle, XCircle } from "react-feather";
 import * as XLSX from "xlsx";
 import apiFetch from "../communComponents/Api";
-import Router from "next/router";
+import analyseExel from "../common/AnalyseExcel";
 
 const rABS = true;
 
@@ -75,13 +75,18 @@ class InputFiles extends React.Component {
 
       console.log("splitRow", splitRow);
 
-      apiFetch(`/mandataires/1/files`, {
-        method: "POST",
-        body: JSON.stringify(splitRow.slice(1))
-      }).then(result => {
-        alert(`Importation reussit`);
-        window.location.reload();
-      });
+      const Analyse = analyseExel(splitRow, defaultColumns, cols);
+
+      console.log("Analyse", Analyse.length);
+      Analyse.length === 0
+        ? apiFetch(`/mandataires/1/files`, {
+            method: "POST",
+            body: JSON.stringify(splitRow.slice(1))
+          }).then(result => {
+            alert(`Importation reussit`);
+            window.location.reload();
+          })
+        : alert(`${Analyse.map(message => message)}`);
     };
     if (rABS) reader.readAsBinaryString(f);
     else reader.readAsArrayBuffer(f);
@@ -92,7 +97,8 @@ class InputFiles extends React.Component {
       <div>
         <h1>Importation d'un fichier excel (format XLSX)</h1>
         <p>
-          <br /><br />
+          <br />
+          <br />
           - Changer les entêtes de colonnes avec les entêtes obligatoire: "date_ouverture", "type",
           "code_postal", "ville", "civilite", "annee", "numero_dossier", "residence"
           <br />- "date_ouverture" : est la date de décision. Elle doit etre mise sous forme
