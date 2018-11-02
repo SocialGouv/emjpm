@@ -94,7 +94,7 @@ describe("routes : /admin", () => {
           })
           .then(res => {
             res.status.should.equal(200);
-           // res.body.success.should.equal(true);
+            res.body.success.should.equal(true);
             return knex
               .table("users")
               .where("id", 1)
@@ -122,7 +122,7 @@ describe("routes : /admin", () => {
           })
           .then(res => {
             res.status.should.equal(200);
-            // res.body.success.should.equal(true);
+            res.body.success.should.equal(true);
             return knex
               .table("users")
               .where("id", 1)

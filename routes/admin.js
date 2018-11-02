@@ -141,19 +141,22 @@ const USER_WRITE_PROPERTIES = ["active"];
 router.put("/user/:userId", typeRequired("admin"), async (req, res, next) => {
   // whitelist input data
   const cleanedBody = whitelist(req.body, USER_WRITE_PROPERTIES);
-  const findUserEmail = await user(req.params.userId);
-  res.json(findUserEmail);
   queries
     .updateUser({
       id: req.params.userId,
       ...cleanedBody
     })
-    .then(() => validationEmail(findUserEmail.email, `${process.env.APP_URL}`));
-  // .then(updated => {
-  //   res.json({
-  //     success: !!updated
-  //   });
-  // })
+    .then(updated => {
+      user(req.params.userId).then(json =>
+        validationEmail(json.email, `${process.env.APP_URL}`)
+      );
+      return updated;
+    })
+    .then(updated => {
+      res.json({
+        success: !!updated
+      });
+    });
 });
 
 module.exports = router;
