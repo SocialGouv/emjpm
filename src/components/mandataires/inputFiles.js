@@ -80,9 +80,7 @@ const readAndPostExcel = target =>
       // convert workbook into Arrays of arrays: Use of xlsx React library
       const firstWorksheet = workbook.Sheets[workbook.SheetNames[0]];
       const dataInput = XLSX.utils.sheet_to_json(firstWorksheet, { header: 1 });
-      console.log("dataInput", dataInput);
       const sheetData = cleanInputData(dataInput);
-      console.log("sheetData", sheetData);
       const validate = validateData(sheetData);
 
       if (validate.errors) {

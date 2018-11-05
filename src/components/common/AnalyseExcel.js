@@ -55,8 +55,6 @@ const findBestMatch = (data, input) => {
   }
 };
 
-//const getMatchType = input => findBestMatch(VALID_TYPES, input);
-
 const REGEXP_CODE_POSTAL = /^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/;
 
 export const isValidCodePostal = code_postal =>
@@ -136,6 +134,7 @@ const isValidCivilite = civilite => isValidValue(civilite, "civilite");
 const isValidDateOuverture = date => date.toString().match(/^\d\d?\/\d\d?\/\d\d\d\d/);
 const isValidAnnee = annee => annee && annee.toString().match(/^([12][0-9]{3})$/);
 
+// strictly valide data
 export const validateData = data => {
   let errors;
   const colums = Object.keys(data[0]);

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`cleanInputData 1`] = `
+exports[`cleanInputData normalize input 1`] = `
 Array [
   Object {
     "annee": 4150,

@@ -1,4 +1,8 @@
-import { cleanInputData, isValidCodePostal } from "../src/components/common/AnalyseExcel";
+import {
+  cleanInputData,
+  isValidCodePostal,
+  validateData
+} from "../src/components/common/AnalyseExcel";
 
 const VALID_CPS = ["13000", "89100", /*"97121", "97216",*/ "20000"];
 
@@ -77,6 +81,92 @@ const jsonSheet = [
   ]
 ];
 
-test("cleanInputData", () => {
+test("cleanInputData normalize input", () => {
   expect(cleanInputData(jsonSheet)).toMatchSnapshot();
+});
+
+const firstRow = {
+  annee: null,
+  civilite: null,
+  code_postal: null,
+  date_ouverture: null,
+  numero_dossier: null,
+  residence: null,
+  type: null,
+  ville: null
+};
+
+const tests = [
+  {
+    title: "should accept perfect valid data",
+    success: true,
+    data: [
+      firstRow,
+      {
+        annee: 1992,
+        civilite: "H",
+        code_postal: 57100,
+        date_ouverture: "02/11/2017",
+        numero_dossier: "RG20136Q",
+        residence: "A Domicile",
+        type: "Tutelle",
+        ville: "thionville"
+      }
+    ]
+  },
+  {
+    title: "should not accept missing columns",
+    success: false,
+    data: [
+      {
+        annee: 1992,
+        civilite: "H",
+        code_postal: 57100,
+        date_ouverture: "02/11/2017",
+        numero_dossier: "RG20136Q",
+        type: "Tutelle",
+        ville: "thionville"
+      },
+      {
+        annee: 1992,
+        civilite: "H",
+        code_postal: 57100,
+        date_ouverture: "02/11/2017",
+        residence: "A Domicile",
+        numero_dossier: "RG20136Q",
+        type: "Tutelle",
+        ville: "thionville"
+      }
+    ]
+  },
+  {
+    title: "should not accept invalid reference data",
+    success: false,
+    data: [
+      firstRow,
+      {
+        annee: 1992,
+        civilite: "H",
+        code_postal: 57100,
+        date_ouverture: "02/11/2017",
+        numero_dossier: "RG20136Q",
+        residence: "domicile",
+        type: "Tutelle",
+        ville: "thionville"
+      }
+    ]
+  }
+];
+
+describe("validateData", () => {
+  tests.forEach(t => {
+    test(t.title, () => {
+      const result = validateData(t.data);
+      if (t.success) {
+        expect(result.errors).toBeUndefined();
+      } else {
+        expect(result.errors).not.toBeUndefined();
+      }
+    });
+  });
 });
