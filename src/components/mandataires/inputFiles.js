@@ -57,9 +57,6 @@ const Errors = ({ errors }) =>
 // read the input file, clean input and post to API
 const readAndPostExcel = target =>
   new Promise((resolve, reject) => {
-    // ???????
-    const rABS = true;
-
     const f = target.files[0];
     const reader = new FileReader();
 
@@ -72,14 +69,14 @@ const readAndPostExcel = target =>
     //convert the imported files into workbook: Use of xlsx React library
     reader.onload = e => {
       let data = e.target.result;
-      if (!rABS) data = new Uint8Array(data);
       const workbook = XLSX.read(data, {
-        type: rABS ? "binary" : "array"
+        type: "binary"
       });
 
       // convert workbook into Arrays of arrays: Use of xlsx React library
       const firstWorksheet = workbook.Sheets[workbook.SheetNames[0]];
       const dataInput = XLSX.utils.sheet_to_json(firstWorksheet, { header: 1 });
+
       const sheetData = cleanInputData(dataInput);
       const validate = validateData(sheetData);
 
@@ -100,8 +97,7 @@ const readAndPostExcel = target =>
           );
       }
     };
-    if (rABS) reader.readAsBinaryString(f);
-    else reader.readAsArrayBuffer(f);
+    reader.readAsBinaryString(f);
   });
 
 const _ExcelRequirements = ({ className }) => (
@@ -118,7 +114,7 @@ const _ExcelRequirements = ({ className }) => (
       <tr>
         <td>code_postal</td>
         <td>
-          Code postal doit etre valide : par exmple 75000 n'est pas un code postal valide => 75001
+          Code postal doit etre valide : par exemple 75000 n'est pas un code postal valide => 75001
         </td>
       </tr>
       <tr>
@@ -127,7 +123,7 @@ const _ExcelRequirements = ({ className }) => (
       </tr>
       <tr>
         <td>civilite</td>
-        <td>Genre de MP: "F","H"</td>
+        <td>Genre de MP: "F", "H", "Femme", "Homme"</td>
       </tr>
       <tr>
         <td>annee</td>

@@ -23,7 +23,7 @@ export const references = {
     "curatelle renforcée aux biens et à la personne",
     "sauvegarde de justice avec mandat spécial"
   ],
-  civilite: ["F", "H"],
+  civilite: ["F", "H", "Homme", "Femme"],
   mandatoryColumns: [
     "date_ouverture",
     "type",
@@ -38,7 +38,7 @@ export const references = {
 
 const FUSE_OPTIONS = {
   shouldSort: true,
-  threshold: 0.8,
+  threshold: 0.7,
   tokenize: true,
   keys: ["value"]
 };
@@ -78,6 +78,17 @@ const hasValues = obj => Object.values(obj).length > 0;
 
 // excel leap year bug https://gist.github.com/christopherscott/2782634
 const excelToEpoch = excelDate => new Date((excelDate - (25567 + 2)) * 86400 * 1000);
+
+const cleanCivilite = civilite => {
+  switch (civilite) {
+    case "Femme":
+      return "F";
+    case "Homme":
+      return "H";
+    default:
+      return civilite;
+  }
+};
 
 // convert XLSX.utils.sheet_to_json data
 // only include relevant columns and normalize the input
@@ -119,7 +130,8 @@ export const cleanInputData = dataInput => {
       // some post processing
       .map(row => ({
         ...row,
-        date_ouverture: format(excelToEpoch(row.date_ouverture), "DD/MM/YYYY")
+        date_ouverture: format(excelToEpoch(row.date_ouverture), "DD/MM/YYYY"),
+        civilite: cleanCivilite(row.civilite)
       }))
   );
 };
@@ -147,7 +159,7 @@ export const validateData = data => {
     errors["En-têtes"] = [`Les colonnes suivants sont introuvables : ${absentColumns.join(", ")}`];
   }
 
-  const rows = data.slice(1);
+  const rows = data;
 
   // group errors by row
   rows.map((datum, i) => {
@@ -174,7 +186,7 @@ export const validateData = data => {
       if (!errors) {
         errors = {};
       }
-      errors[`Ligne ${i + 1}`] = rowMessages;
+      errors[`Ligne ${i + 2}`] = rowMessages;
     }
   });
   return {
