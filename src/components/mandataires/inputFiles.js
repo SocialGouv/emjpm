@@ -1,12 +1,14 @@
 import * as XLSX from "xlsx";
+import styled from "styled-components";
+
 import apiFetch from "../communComponents/Api";
 import { cleanInputData, validateData } from "../common/AnalyseExcel";
 
 // ???????
 const rABS = true;
 
-const Alert = ({ className, Icon, message }) =>
-  (message && (
+const Alert = ({ className, Icon, children }) =>
+  (children && (
     <div
       className={`alert ${className || ""}`}
       role="alert"
@@ -20,7 +22,7 @@ const Alert = ({ className, Icon, message }) =>
           }}
         />
       )}
-      {message}
+      {children}
     </div>
   )) ||
   null;
@@ -31,7 +33,7 @@ const postSheetData = sheetData =>
     body: JSON.stringify(sheetData.slice(1))
   });
 
-const errorsToHtml = (title, errors) => (
+const ErrorsGroup = ({ title, errors }) => (
   <div>
     <b>{title}</b>
     <br />
@@ -42,9 +44,20 @@ const errorsToHtml = (title, errors) => (
 );
 
 const Errors = ({ errors }) =>
-  Object.keys(errors).map(key => (
-    <Alert key={key} className="alert-danger" message={errorsToHtml(key, errors[key])} />
-  ));
+  (errors &&
+    Object.keys(errors).length && (
+      <Alert className="alert-danger">
+        Des erreurs ont été détectées dans votre fichier. Aucun ligne n'a été importée.
+        <br />
+        <br />
+        <div style={{ fontSize: "0.8em" }}>
+          {Object.keys(errors).map(key => (
+            <ErrorsGroup key={key} title={key} errors={errors[key]} />
+          ))}
+        </div>
+      </Alert>
+    )) ||
+  null;
 
 const readExcel = target =>
   new Promise((resolve, reject) => {
@@ -91,6 +104,66 @@ const readExcel = target =>
     else reader.readAsArrayBuffer(f);
   });
 
+const _ExcelDoc = ({ className }) => (
+  <table className={className}>
+    <tbody>
+      <tr>
+        <td>date_ouverture</td>
+        <td>Date de décision. Elle doit etre mise au format DD/MM/YYYY => 8/11/2010</td>
+      </tr>
+      <tr>
+        <td>type</td>
+        <td>
+          Le type de mesure: "Tutelle", "Curatelle", "Sauvegarde de justice", "Mesure ad hoc", "MAJ"
+        </td>
+      </tr>
+      <tr>
+        <td>code_postal</td>
+        <td>
+          Code postal doit etre valide : par exmple 75000 n'est pas un code postal valide => 75001
+        </td>
+      </tr>
+      <tr>
+        <td>ville</td>
+        <td> Commune de la mesure</td>
+      </tr>
+      <tr>
+        <td>civilite</td>
+        <td>Genre de MP: "F","H"</td>
+      </tr>
+      <tr>
+        <td>annee</td>
+        <td>Soit date de naissance du type DD/MM/YYYY => 10/08/1980 ou alors juste 1980</td>
+      </tr>
+      <tr>
+        <td>numero_dossier</td>
+        <td>Un numéro pour vous retrouver rapidement</td>
+      </tr>
+      <tr>
+        <td>residence</td>
+        <td>"A domicile" ou "En établissement"</td>
+      </tr>
+    </tbody>
+  </table>
+);
+
+const ExcelDoc = styled(_ExcelDoc)`
+  border: 1px solid silver;
+  td {
+    padding: 10px;
+  }
+  tr td:first-child {
+    font-weight: bold;
+    background: #eee;
+  }
+  tr:not(:last-child) td:first-child {
+    border-bottom: 1px solid #fff;
+  }
+  tr:not(:last-child) td:last-child {
+    border-bottom: 1px solid #eee;
+  }
+`;
+
 class InputFiles extends React.Component {
   state = {
     status: null,
@@ -111,7 +184,6 @@ class InputFiles extends React.Component {
               status: "success",
               errors: []
             });
-            //window.location.reload();
           })
           .catch(errors => {
             this.setState({
@@ -126,35 +198,23 @@ class InputFiles extends React.Component {
   render() {
     return (
       <div style={{ padding: 10 }}>
-        <h1>Importation d'un fichier excel (format XLSX)</h1>
+        <h1>Importation d'un fichier excel (mesures)</h1>
+        <p>
+          <b>En-têtes de colonnes obligatoires dans la première feuille de votre fichier XSLX</b>
+        </p>
+        <ExcelDoc />
         <p>
           <br />
-          <br />- Changer les entêtes de colonnes avec les entêtes obligatoire: "date_ouverture",
-          "type", "code_postal", "ville", "civilite", "annee", "numero_dossier", "residence"
-          <br />- "date_ouverture" : est la date de décision. Elle doit etre mise sous forme
-          DD/MM/YYYY => 8/11/2010
-          <br />- "type": Le type de mesure: "Tutelle", "Curatelle", "Sauvegarde de justice",
-          "Mesure ad hoc", "MAJ"
-          <br />
-          -"code_postal": Code postal doit etre valide : par exmple 75000 n'est pas un code postal
-          valide => 75001
-          <br />- "ville" : Commune de la mesure
-          <br />
-          -"civilite": Genre de MP: "F","H"
-          <br />- "annee": Soit date de naissance du type DD/MM/YYYY => 10/08/1980 ou alors juste
-          1980
-          <br />
-          -"numero_dossier": Un numéro pour vous retrouver rapidement
-          <br />
-          -"residence" : "A domicile" ou "En établissement"
+          <b>Cliquez ci-dessous pour importer vos mesures.</b>
           <br />
           <br />
-          Vous pouvez laisser les autres entêtes de colonnes ...
-          <br />
-          <br />
-          Appuyez sur le boutton importer.
+          <input
+            type="file"
+            style={{ padding: 5 }}
+            data-cy="button-upload-excel"
+            onChange={this.readInputFile}
+          />
         </p>
-        <input type="file" onChange={this.readInputFile} />
         {this.state.status === "success" && <div>Le fichier a bien été importé</div>}
         {this.state.status === "error" && <Errors errors={this.state.errors} />}
       </div>
