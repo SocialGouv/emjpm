@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { Home, Map, UserMinus, UserPlus } from "react-feather";
+import { Home, Map, UserMinus, Clock, FilePlus } from "react-feather";
 
 /* TEMP : the redux store will be moved at root level */
 import { createStore, combineReducers, applyMiddleware, bindActionCreators } from "redux";
@@ -99,7 +99,7 @@ class MandataireTabs extends React.Component {
       },
       {
         text: "Mesures en attente",
-        icon: <UserPlus />,
+        icon: <Clock />,
         content: (
           <TableMesures
             fetch={() => apiFetch(`/mandataires/1/mesures/attente`)}
@@ -123,6 +123,7 @@ class MandataireTabs extends React.Component {
       },
       {
         text: "Importer",
+        icon: <FilePlus />,
         content: <InputFiles />
       }
     ];

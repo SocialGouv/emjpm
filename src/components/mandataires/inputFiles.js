@@ -4,9 +4,6 @@ import styled from "styled-components";
 import apiFetch from "../communComponents/Api";
 import { cleanInputData, validateData } from "../common/AnalyseExcel";
 
-// ???????
-const rABS = true;
-
 const Alert = ({ className, Icon, children }) =>
   (children && (
     <div
@@ -30,16 +27,14 @@ const Alert = ({ className, Icon, children }) =>
 const postSheetData = sheetData =>
   apiFetch(`/mandataires/1/bulk`, {
     method: "POST",
-    body: JSON.stringify(sheetData.slice(1))
+    body: JSON.stringify(sheetData)
   });
 
 const ErrorsGroup = ({ title, errors }) => (
   <div>
     <b>{title}</b>
     <br />
-    {errors.map(e => (
-      <li key={e}>{e}</li>
-    ))}
+    {errors && errors.map && errors.map(e => <li key={e}>{e}</li>)}
   </div>
 );
 
@@ -59,14 +54,18 @@ const Errors = ({ errors }) =>
     )) ||
   null;
 
-const readExcel = target =>
+// read the input file, clean input and post to API
+const readAndPostExcel = target =>
   new Promise((resolve, reject) => {
+    // ???????
+    const rABS = true;
+
     const f = target.files[0];
     const reader = new FileReader();
 
     reader.onerror = error => {
       reject({
-        fichier: "Impossible de lire le fichier excel"
+        fichier: ["Impossible de lire le fichier excel"]
       });
     };
 
@@ -81,21 +80,24 @@ const readExcel = target =>
       // convert workbook into Arrays of arrays: Use of xlsx React library
       const firstWorksheet = workbook.Sheets[workbook.SheetNames[0]];
       const dataInput = XLSX.utils.sheet_to_json(firstWorksheet, { header: 1 });
-
+      console.log("dataInput", dataInput);
       const sheetData = cleanInputData(dataInput);
+      console.log("sheetData", sheetData);
+      const validate = validateData(sheetData);
 
-      const errors = validateData(sheetData);
-
-      if (Object.keys(errors).length) {
-        reject(errors);
+      if (validate.errors) {
+        reject(validate.errors);
       } else {
         postSheetData(sheetData)
           .then(result => {
+            if (result.success === false) {
+              throw new Error();
+            }
             resolve(result);
           })
-          .catch(_ =>
+          .catch(() =>
             reject({
-              api: "Impossible de charger le fichier excel"
+              api: ["Impossible de charger le fichier excel"]
             })
           );
       }
@@ -104,7 +106,7 @@ const readExcel = target =>
     else reader.readAsArrayBuffer(f);
   });
 
-const _ExcelDoc = ({ className }) => (
+const _ExcelRequirements = ({ className }) => (
   <table className={className}>
     <tbody>
       <tr>
@@ -147,7 +149,7 @@ const _ExcelDoc = ({ className }) => (
   </table>
 );
 
-const ExcelDoc = styled(_ExcelDoc)`
+const ExcelRequirements = styled(_ExcelRequirements)`
   border: 1px solid silver;
   td {
     padding: 10px;
@@ -167,6 +169,7 @@ const ExcelDoc = styled(_ExcelDoc)`
 class InputFiles extends React.Component {
   state = {
     status: null,
+    message: null,
     errors: []
   };
 
@@ -174,14 +177,15 @@ class InputFiles extends React.Component {
     const target = e.target;
     this.setState(
       {
-        status: null,
+        status: "loading",
         errors: []
       },
       () => {
-        readExcel(target)
-          .then(() => {
+        readAndPostExcel(target)
+          .then(result => {
             this.setState({
               status: "success",
+              message: result.message,
               errors: []
             });
           })
@@ -202,20 +206,25 @@ class InputFiles extends React.Component {
         <p>
           <b>En-têtes de colonnes obligatoires dans la première feuille de votre fichier XSLX</b>
         </p>
-        <ExcelDoc />
+        <ExcelRequirements />
         <p>
           <br />
           <b>Cliquez ci-dessous pour importer vos mesures.</b>
           <br />
           <br />
           <input
+            disabled={this.state.status === "loading"}
             type="file"
             style={{ padding: 5 }}
             data-cy="button-upload-excel"
             onChange={this.readInputFile}
           />
         </p>
-        {this.state.status === "success" && <div>Le fichier a bien été importé</div>}
+        {this.state.status === "success" && (
+          <Alert className="alert-success">
+            Le fichier a bien été importé : {this.state.message}
+          </Alert>
+        )}
         {this.state.status === "error" && <Errors errors={this.state.errors} />}
       </div>
     );
