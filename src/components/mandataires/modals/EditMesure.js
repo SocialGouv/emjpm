@@ -27,7 +27,8 @@ const schema = {
     code_postal: { type: "string" },
     ville: { type: "string" },
     civilite: { type: "string", enum: ["F", "H"] },
-    annee: { type: "integer", maxLength: 4 }
+    annee: { type: "integer", maxLength: 4 },
+    numero_dossier: { type: "string", default: " " }
   }
 };
 
