@@ -67,6 +67,7 @@ const schema = {
     civilite: { type: "string", enum: ["F", "H"] },
 
     annee: { type: "integer", default: "" },
+    numero_dossier: { type: "string", default: "" },
     residence: { type: "string", enum: ["A Domicile", "En établissement"] }
   },
   dependencies: {
