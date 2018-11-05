@@ -2,7 +2,7 @@ import Tis from "../src/components/tiComponents";
 import { Layout } from "../src/components";
 
 const TiPage = () => (
-  <Layout>
+  <Layout logout>
     <div>
       <br />
       <h1>Chercher au plus proche du majeur à protéger</h1>

@@ -9,9 +9,9 @@ const LayoutContainer = styled.div`
   background-color: #cad4de;
 `;
 
-const Layout = ({ children }) => (
+const Layout = ({ children, inscription, logout }) => (
   <LayoutContainer>
-    <Navigation logout />
+    <Navigation logout={logout} inscription={inscription} />
     <div className="container" style={{ flex: "1 0 auto" }}>
       {children}
     </div>
