@@ -5,7 +5,7 @@ import { format } from "date-fns";
 
 export const references = {
   invalidCodePostal: ["75000"],
-  residence: ["A Domicile", "En établissement"],
+  residence: ["A domicile", "En établissement"],
   type: [
     "Tutelle",
     "Curatelle",
@@ -59,11 +59,12 @@ const REGEXP_CODE_POSTAL = /^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/;
 
 export const isValidCodePostal = code_postal =>
   // force boolean
-  !!(
-    code_postal &&
-    code_postal.toString().match(REGEXP_CODE_POSTAL) &&
-    !references.invalidCodePostal.includes(code_postal.toString())
-  );
+  code_postal
+    ? !!(
+        code_postal.toString().match(REGEXP_CODE_POSTAL) &&
+        !references.invalidCodePostal.includes(code_postal.toString())
+      )
+    : true;
 
 // convert flat array to object for fuse.js
 const getColumnFuseValues = columnName => {
@@ -139,18 +140,21 @@ export const cleanInputData = dataInput => {
 // check if value defined in references
 const isValidValue = (value, key) => value && references[key].includes(value.toString());
 
-const isValidResidence = residence => isValidValue(residence, "residence");
-const isValidType = type => isValidValue(type, "type");
-const isValidCivilite = civilite => isValidValue(civilite, "civilite");
+const isValidResidence = residence => (residence ? isValidValue(residence, "residence") : true);
+const isValidType = type => (type ? isValidValue(type, "type") : true);
+const isValidCivilite = civilite => (civilite ? isValidValue(civilite, "civilite") : true);
 
-const isValidDateOuverture = date => date.toString().match(/^\d\d?\/\d\d?\/\d\d\d\d/);
-const isValidAnnee = annee => annee && annee.toString().match(/^([12][0-9]{3})$/);
+const isValidDateOuverture = date =>
+  date ? date.toString().match(/^\d\d?\/\d\d?\/\d\d\d\d/) : true;
+const isValidAnnee = annee => (annee ? annee.toString().match(/^([12][0-9]{3})$/) : true);
 
 // strictly valide data
 export const validateData = data => {
   let errors;
   const colums = Object.keys(data[0]);
 
+  //adrien: rm check columns because all mandataires don't have all columns in excel
+  /*
   const absentColumns = references.mandatoryColumns.filter(col => !colums.includes(col));
   if (absentColumns.length) {
     if (!errors) {
@@ -158,6 +162,7 @@ export const validateData = data => {
     }
     errors["En-têtes"] = [`Les colonnes suivants sont introuvables : ${absentColumns.join(", ")}`];
   }
+  */
 
   const rows = data;
 
