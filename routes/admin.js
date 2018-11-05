@@ -7,6 +7,8 @@ const router = express.Router();
 const queries = require("../db/queries/admin");
 const whitelist = require("../db/queries/whitelist");
 
+const { user } = require("../db/queries/users");
+const { validationEmail } = require("../email/validation");
 /**
  * @swagger
 
@@ -136,13 +138,19 @@ const USER_WRITE_PROPERTIES = ["active"];
  *             schema:
  *               $ref: '#/components/schemas/SuccessResponse'
  */
-router.put("/user/:userId", typeRequired("admin"), (req, res, next) => {
+router.put("/user/:userId", typeRequired("admin"), async (req, res, next) => {
   // whitelist input data
   const cleanedBody = whitelist(req.body, USER_WRITE_PROPERTIES);
   queries
     .updateUser({
       id: req.params.userId,
       ...cleanedBody
+    })
+    .then(updated => {
+      user(req.params.userId).then(json =>
+        validationEmail(json.email, `${process.env.APP_URL}`)
+      );
+      return updated;
     })
     .then(updated => {
       res.json({
