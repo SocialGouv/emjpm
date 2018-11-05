@@ -113,7 +113,7 @@ const COLUMNS = [
   {
     Header: "Résidence du majeur",
     id: "residence",
-    accessor: d => concat(d.code_postal, d.ville && d.ville.toUpperCase()),
+    accessor: d => concat(d.code_postal ? d.code_postal : "", d.ville ? d.ville.toUpperCase() : ""),
     style: { alignSelf: "center" }
   },
   {
