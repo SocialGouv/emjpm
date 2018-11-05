@@ -32,6 +32,9 @@ export const Button = styled.button`
   font-size: 1.1em;
   margin: 5px;
   cursor: pointer;
+  svg {
+    vertical-align: middle;
+  }
   &:hover {
     border-color: ${props => lighten(getColor("background")(props), 30)};
     background: ${props => lighten(getColor("background")(props), 10)};

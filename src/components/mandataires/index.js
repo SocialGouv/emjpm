@@ -1,6 +1,12 @@
 import dynamic from "next/dynamic";
-import { Home, Map, UserMinus, UserPlus } from "react-feather";
-import Modal from "react-modal";
+import { Home, Map, UserMinus, Clock, FilePlus } from "react-feather";
+
+/* TEMP : the redux store will be moved at root level */
+import { createStore, combineReducers, applyMiddleware, bindActionCreators } from "redux";
+import { reducer as modal } from "redux-modal";
+import { Provider, connect } from "react-redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
 
 import { DummyTabs, LoadingMessage } from "..";
 import apiFetch from "../communComponents/Api";
@@ -10,14 +16,7 @@ import Profile from "./Profile";
 import TableMesures from "./TableMesures";
 import Header from "./Header";
 import CreateMesure from "./CreateMesure";
-
-/* TEMP : the redux store will be moved at root level */
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { reducer as modal } from "redux-modal";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+import InputFiles from "./inputFiles";
 
 import { mandataireMount } from "./actions/mandataire";
 import mesuresReducer from "./reducers/mesures";
@@ -31,15 +30,16 @@ import {
   ValiderMesureEnAttente
 } from "./modals";
 
-Modal.setAppElement("#__next");
-
 // due to leaflet + SSR
 const OpenStreeMap = dynamic({
   modules: props => ({
     MapMesures: import("./MapMesures")
   }),
   loading: () => <LoadingMessage />,
-  render: (props, { MapMesures }) => <MapMesures {...props} />
+  render: (props, { MapMesures }) => {
+    console.log("render", props, MapMesures);
+    return <MapMesures {...props} />;
+  }
 });
 
 class MandataireTabs extends React.Component {
@@ -99,7 +99,7 @@ class MandataireTabs extends React.Component {
       },
       {
         text: "Mesures en attente",
-        icon: <UserPlus />,
+        icon: <Clock />,
         content: (
           <TableMesures
             fetch={() => apiFetch(`/mandataires/1/mesures/attente`)}
@@ -120,6 +120,11 @@ class MandataireTabs extends React.Component {
         text: "Mes informations",
         icon: <Home />,
         content: <Profile />
+      },
+      {
+        text: "Importer",
+        icon: <FilePlus />,
+        content: <InputFiles />
       }
     ];
     return (
@@ -144,13 +149,7 @@ const rootReducer = combineReducers({
   modal
 });
 
-const store = createStore(
-  rootReducer,
-  typeof window !== "undefined" &&
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(thunk)
-);
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ onMount: mandataireMount }, dispatch);
