@@ -78,7 +78,12 @@ const getColumnFuseValues = columnName => {
 const hasValues = obj => Object.values(obj).length > 0;
 
 // excel leap year bug https://gist.github.com/christopherscott/2782634
-const excelToEpoch = excelDate => new Date((excelDate - (25567 + 2)) * 86400 * 1000);
+const excelToEpoch = excelDate => {
+  if (isNaN(excelDate)) {
+    return excelDate;
+  }
+  return new Date((excelDate - (25567 + 2)) * 86400 * 1000);
+};
 
 const cleanCivilite = civilite => {
   switch (civilite) {
@@ -131,7 +136,7 @@ export const cleanInputData = dataInput => {
       // some post processing
       .map(row => ({
         ...row,
-        date_ouverture: format(excelToEpoch(row.date_ouverture), "DD/MM/YYYY"),
+        date_ouverture: format(excelToEpoch(row.date_ouverture), "YYYY-MM-DD"),
         civilite: cleanCivilite(row.civilite)
       }))
   );
@@ -144,8 +149,7 @@ const isValidResidence = residence => (residence ? isValidValue(residence, "resi
 const isValidType = type => (type ? isValidValue(type, "type") : true);
 const isValidCivilite = civilite => (civilite ? isValidValue(civilite, "civilite") : true);
 
-const isValidDateOuverture = date =>
-  date ? date.toString().match(/^\d\d?\/\d\d?\/\d\d\d\d/) : true;
+const isValidDateOuverture = date => (date ? date.toString().match(/^\d\d\d\d-\d\d-\d\d/) : true);
 const isValidAnnee = annee => (annee ? annee.toString().match(/^([12][0-9]{3})$/) : true);
 
 // strictly valide data
