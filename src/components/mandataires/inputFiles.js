@@ -200,7 +200,14 @@ class InputFiles extends React.Component {
       <div style={{ padding: 20 }}>
         <h1>Importation d'un fichier excel (mesures)</h1>
         <p>
-          <b>En-têtes de colonnes obligatoires dans la première feuille de votre fichier XSLX</b>
+          <b style={{ color: "red" }}>
+            !!!Merci de lire et de bien respecter les instructions suivantes!!!
+          </b>
+          <br />
+          Vous trouverez ci-après le libellé des entêtes de colonnes qui doivent être présentes
+          dans votre fichier excel. Aucune n'est obligatoire. Attention à bien respecter la casse :
+          tout en minuscule, pas d'espace notamment à la fin des libellés. Les espaces sont
+          remplacés par des _ (touche 8 du clavier)
         </p>
         <ExcelRequirements />
         <p>
