@@ -109,13 +109,11 @@ const _ExcelRequirements = ({ className }) => (
     <tbody>
       <tr>
         <td>date_ouverture</td>
-        <td>Date de décision. Elle doit etre mise au format DD/MM/YYYY => 8/11/2010</td>
+        <td>Date de décision au format DD/MM/YYYY => 25/11/2010</td>
       </tr>
       <tr>
         <td>type</td>
-        <td>
-          Le type de mesure: "Tutelle", "Curatelle", "Sauvegarde de justice", "Mesure ad hoc", "MAJ"
-        </td>
+        <td>Le type de mesure: Tutelle, Curatelle, Sauvegarde de justice, Mesure ad hoc, MAJ</td>
       </tr>
       <tr>
         <td>code_postal</td>
@@ -125,7 +123,7 @@ const _ExcelRequirements = ({ className }) => (
       </tr>
       <tr>
         <td>ville</td>
-        <td> Commune de la mesure</td>
+        <td>Commune de la mesure</td>
       </tr>
       <tr>
         <td>civilite</td>
@@ -133,7 +131,7 @@ const _ExcelRequirements = ({ className }) => (
       </tr>
       <tr>
         <td>annee</td>
-        <td>Soit date de naissance du type DD/MM/YYYY => 10/08/1980 ou alors juste 1980</td>
+        <td>Date de naissance au format DD/MM/YYYY => 22/08/1980</td>
       </tr>
       <tr>
         <td>numero_dossier</td>
@@ -181,6 +179,7 @@ class InputFiles extends React.Component {
       () => {
         readAndPostExcel(target)
           .then(result => {
+            // todo: update counter UI
             this.setState({
               status: "success",
               message: result.message,
@@ -199,7 +198,7 @@ class InputFiles extends React.Component {
 
   render() {
     return (
-      <div style={{ padding: 10 }}>
+      <div style={{ padding: 20 }}>
         <h1>Importation d'un fichier excel (mesures)</h1>
         <p>
           <b>En-têtes de colonnes obligatoires dans la première feuille de votre fichier XSLX</b>
