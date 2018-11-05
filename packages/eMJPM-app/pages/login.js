@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-import Footer from "../src/components/communComponents/Footer";
-import Navigation from "../src/components/communComponents/Navigation";
 import LoginForm from "../src/components/loginComponents/LoginForm";
+import { Layout } from "../src/components";
 
 const Title = styled.div`
   text-align: left;
@@ -21,11 +20,9 @@ const LoginContainer = ({ style }) => (
 );
 
 const LoginPage = () => (
-  <div style={{ backgroundColor: "#cad4de", minHeight: "100%" }}>
-    <Navigation />
-    <LoginContainer style={{ marginTop: 100 }} />
-    <Footer fixed />
-  </div>
+  <Layout inscription>
+    <LoginContainer style={{ marginTop: 100 }} />{" "}
+  </Layout>
 );
 
 export default LoginPage;
