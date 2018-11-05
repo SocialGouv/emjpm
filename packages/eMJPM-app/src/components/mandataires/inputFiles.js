@@ -131,7 +131,10 @@ const _ExcelRequirements = ({ className }) => (
       </tr>
       <tr>
         <td>numero_dossier</td>
-        <td>Le numéro de dossier tel que vous avez l'habitude de le connaitre. Ce champ est libre et peu contenir tous types de caractères</td>
+        <td>
+          Le numéro de dossier tel que vous avez l'habitude de le connaitre. Ce champ est libre et
+          peu contenir tous types de caractères
+        </td>
       </tr>
       <tr>
         <td>residence</td>
