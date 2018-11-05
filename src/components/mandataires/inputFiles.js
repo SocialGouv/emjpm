@@ -1,8 +1,8 @@
-import { CheckCircle, XCircle } from "react-feather";
 import * as XLSX from "xlsx";
 import apiFetch from "../communComponents/Api";
-import analyseExel from "../common/AnalyseExcel";
+import { cleanInputData, validateData } from "../common/AnalyseExcel";
 
+// ???????
 const rABS = true;
 
 const Alert = ({ className, Icon, message }) =>
@@ -12,107 +12,141 @@ const Alert = ({ className, Icon, message }) =>
       role="alert"
       style={{ marginTop: 20, marginLeft: 20, fontSize: "1.2em" }}
     >
-      <Icon
-        style={{
-          verticalAlign: "middle",
-          marginRight: 10
-        }}
-      />{" "}
+      {Icon && (
+        <Icon
+          style={{
+            verticalAlign: "middle",
+            marginRight: 10
+          }}
+        />
+      )}
       {message}
     </div>
   )) ||
   null;
 
-const ErrorBox = ({ message }) => (
-  <Alert className="alert-danger" Icon={XCircle} message={message} />
+const postSheetData = sheetData =>
+  apiFetch(`/mandataires/1/bulk`, {
+    method: "POST",
+    body: JSON.stringify(sheetData.slice(1))
+  });
+
+const errorsToHtml = (title, errors) => (
+  <div>
+    <b>{title}</b>
+    <br />
+    {errors.map(e => (
+      <li key={e}>{e}</li>
+    ))}
+  </div>
 );
 
-const defaultColumns = [
-  "date_ouverture",
-  "type",
-  "code_postal",
-  "ville",
-  "civilite",
-  "annee",
-  "numero_dossier",
-  "residence"
-];
+const Errors = ({ errors }) =>
+  Object.keys(errors).map(key => (
+    <Alert key={key} className="alert-danger" message={errorsToHtml(key, errors[key])} />
+  ));
 
-class InputFiles extends React.Component {
-  state = {
-    status: null
-  };
-
-  uploadDocumentRequest = files => {
-    const f = files[0];
+const readExcel = target =>
+  new Promise((resolve, reject) => {
+    const f = target.files[0];
     const reader = new FileReader();
 
+    reader.onerror = error => {
+      reject({
+        fichier: "Impossible de lire le fichier excel"
+      });
+    };
+
     //convert the imported files into workbook: Use of xlsx React library
-    reader.onload = function(e) {
-      const data = e.target.result;
+    reader.onload = e => {
+      let data = e.target.result;
       if (!rABS) data = new Uint8Array(data);
       const workbook = XLSX.read(data, {
         type: rABS ? "binary" : "array"
       });
 
       // convert workbook into Arrays of arrays: Use of xlsx React library
-      const first_worksheet = workbook.Sheets[workbook.SheetNames[0]];
-      const dataInput = XLSX.utils.sheet_to_json(first_worksheet, { header: 1 });
+      const firstWorksheet = workbook.Sheets[workbook.SheetNames[0]];
+      const dataInput = XLSX.utils.sheet_to_json(firstWorksheet, { header: 1 });
 
-      //convert Arrays of arrays into Object and filters only needed importation keys
-      const cols = dataInput[0];
-      const splitRow = dataInput.map(datum => datum.reduce((a, c, i) => ({ ...a, [cols[i]]: c })));
-      splitRow.map(mesure => {
-        const Objet1 = Object.keys(mesure).filter(key => !defaultColumns.includes(key));
-        Objet1.map(objet => delete mesure[objet]);
-      });
+      const sheetData = cleanInputData(dataInput);
 
-      // convert values before sending by HTTP request
-      splitRow.map(
-        datum =>
-          (datum["date_ouverture"] = new Date((datum.date_ouverture - (25567 + 2)) * 86400 * 1000))
-      );
+      const errors = validateData(sheetData);
 
-      console.log("splitRow", splitRow);
-
-      const Analyse = analyseExel(splitRow, defaultColumns, cols);
-
-      console.log("Analyse", Analyse.length);
-      Analyse.length === 0
-        ? apiFetch(`/mandataires/1/files`, {
-            method: "POST",
-            body: JSON.stringify(splitRow.slice(1))
-          }).then(result => {
-            alert(`Importation reussit`);
-            window.location.reload();
+      if (Object.keys(errors).length) {
+        reject(errors);
+      } else {
+        postSheetData(sheetData)
+          .then(result => {
+            resolve(result);
           })
-        : alert(`${Analyse.map(message => message)}`);
+          .catch(_ =>
+            reject({
+              api: "Impossible de charger le fichier excel"
+            })
+          );
+      }
     };
     if (rABS) reader.readAsBinaryString(f);
     else reader.readAsArrayBuffer(f);
+  });
+
+class InputFiles extends React.Component {
+  state = {
+    status: null,
+    errors: []
+  };
+
+  readInputFile = e => {
+    const target = e.target;
+    this.setState(
+      {
+        status: null,
+        errors: []
+      },
+      () => {
+        readExcel(target)
+          .then(() => {
+            this.setState({
+              status: "success",
+              errors: []
+            });
+            //window.location.reload();
+          })
+          .catch(errors => {
+            this.setState({
+              status: "error",
+              errors
+            });
+          });
+      }
+    );
   };
 
   render() {
     return (
-      <div>
+      <div style={{ padding: 10 }}>
         <h1>Importation d'un fichier excel (format XLSX)</h1>
         <p>
           <br />
-          <br />
-          - Changer les entêtes de colonnes avec les entêtes obligatoire: "date_ouverture", "type",
-          "code_postal", "ville", "civilite", "annee", "numero_dossier", "residence"
+          <br />- Changer les entêtes de colonnes avec les entêtes obligatoire: "date_ouverture",
+          "type", "code_postal", "ville", "civilite", "annee", "numero_dossier", "residence"
           <br />- "date_ouverture" : est la date de décision. Elle doit etre mise sous forme
           DD/MM/YYYY => 8/11/2010
           <br />- "type": Le type de mesure: "Tutelle", "Curatelle", "Sauvegarde de justice",
           "Mesure ad hoc", "MAJ"
-          <br />-"code_postal": Code postal doit etre valide : par exmple 75000 n'est pas un code
-          postal valide => 75001
+          <br />
+          -"code_postal": Code postal doit etre valide : par exmple 75000 n'est pas un code postal
+          valide => 75001
           <br />- "ville" : Commune de la mesure
-          <br />-"civilite": Genre de MP: "F","H"
+          <br />
+          -"civilite": Genre de MP: "F","H"
           <br />- "annee": Soit date de naissance du type DD/MM/YYYY => 10/08/1980 ou alors juste
           1980
-          <br />-"numero_dossier": Un numéro pour vous retrouver rapidement
-          <br />-"residence" : "A domicile" ou "En établissement"
+          <br />
+          -"numero_dossier": Un numéro pour vous retrouver rapidement
+          <br />
+          -"residence" : "A domicile" ou "En établissement"
           <br />
           <br />
           Vous pouvez laisser les autres entêtes de colonnes ...
@@ -120,13 +154,9 @@ class InputFiles extends React.Component {
           <br />
           Appuyez sur le boutton importer.
         </p>
-        <input type="file" onChange={e => this.uploadDocumentRequest(e.target.files)} />
-        {this.state.status &&
-          (this.state.status === "noSuccess" ? (
-            <ErrorBox message={`Erreur : Importation non réussit`} />
-          ) : (
-            ""
-          ))}
+        <input type="file" onChange={this.readInputFile} />
+        {this.state.status === "success" && <div>Le fichier a bien été importé</div>}
+        {this.state.status === "error" && <Errors errors={this.state.errors} />}
       </div>
     );
   }

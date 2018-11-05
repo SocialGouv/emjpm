@@ -1,8 +1,8 @@
 // Begining of analyse Excel: Not use for now
 
-const unvalidCodePostal = ["75000"];
-const validResidence = ["A Domicile", "En établissement"];
-const validType = [
+export const INVALID_CODE_POSTAL = ["75000"];
+export const VALID_RESIDENCES = ["A Domicile", "En établissement"];
+export const VALID_TYPES = [
   "Tutelle",
   "Curatelle",
   "Sauvegarde de justice",
@@ -20,47 +20,83 @@ const validType = [
   "sauvegarde de justice",
   "sauvegarde de justice avec mandat spécial"
 ];
-const validCivilite = ["F", "H"];
 
-const analyseExel = (data, defaultColumns = [], colums) => {
-  const message = [];
-  console.log("data", data);
-  const allColumnsPresent = defaultColumns.filter(col => colums.indexOf(col) === -1);
-  console.log("data1", data);
-  const CodePostal = data.slice(1).map((datum, i) => {
-    if (
-      (datum.code_postal &&
-        !datum.code_postal.toString().match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/)) ||
-      !datum.code_postal.toString().includes(unvalidCodePostal)
-    ) {
-      message.push(`Code Postal non valide ligne ${i + 1}`);
-    }
-  });
+export const VALID_CIVILITES = ["F", "H"];
 
-  console.log("data2", data);
-  const Residence = data.slice(1).map((datum, i) => {
-    if (datum.residence && !datum.residence.toString().includes(validResidence)) {
-      return message.push(`Résidence non valide ligne ${i + 1}`);
-    }
-  });
-  const Annee = data.slice(1).map((datum, i) => {
-    if (datum.annee && !datum.annee.toString().match(/^([0-9]){4}$/)) {
-      return message.push(`Année non valide ligne ${i + 1}`);
-    }
-  });
-  const Type = data.slice(1).map((datum, i) => {
-    if (datum.type && !datum.type.toString().includes(validType)) {
-      return message.push(`Type mesure non valide ligne ${i + 1}`);
-    }
-  });
-  const Civilite = data.slice(1).map((datum, i) => {
-    if (datum.civilite && !datum.civilite.toString().includes(validCivilite)) {
-      return message.push(`Genre non valide ligne ${i + 1}`);
-    }
-  });
+const MANDATORY_COLUMNS = [
+  "date_ouverture",
+  "type",
+  "code_postal",
+  "ville",
+  "civilite",
+  "annee",
+  "numero_dossier",
+  "residence"
+];
 
-  console.log("me", message)
-  return message;
+const REGEXP_CODE_POSTAL = /^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/;
+
+export const isValidCodePostal = code_postal =>
+  // force boolean
+  !!(
+    code_postal &&
+    code_postal.toString().match(REGEXP_CODE_POSTAL) &&
+    !INVALID_CODE_POSTAL.includes(code_postal.toString())
+  );
+
+// convert XLSX.utils.sheet_to_json data
+export const cleanInputData = dataInput => {
+  const cols = dataInput[0];
+  const isValidColumn = col => MANDATORY_COLUMNS.includes(col);
+  // convert Array of arrays into Array of Objects and filters only needed importable keys
+  return dataInput
+    .map(row =>
+      row.reduce((a, c, i) => ({ ...a, ...(isValidColumn(cols[i]) ? { [cols[i]]: c } : {}) }), {})
+    )
+    .map(row => ({
+      ...row,
+      date_ouverture: new Date((row.date_ouverture - (25567 + 2)) * 86400 * 1000)
+    }));
 };
 
-export default analyseExel;
+export const isValidResidence = residence =>
+  residence && residence.toString().includes(VALID_RESIDENCES);
+
+export const isValidAnnee = annee => annee && annee.toString().match(/^([12][0-9]){3}$/);
+export const isValidType = type => type && type.toString().includes(VALID_TYPES);
+export const isValidCivilite = civilite =>
+  civilite && civilite.toString().includes(VALID_CIVILITES);
+
+export const validateData = data => {
+  const messages = {};
+  const colums = Object.keys(data[0]);
+
+  const absentColumns = MANDATORY_COLUMNS.filter(col => colums.indexOf(col) === -1);
+  if (absentColumns.length) {
+    messages.push(`Les colonnes suivants sont introuvables : ${absentColumns.join(", ")}`);
+  }
+  // group messages by row
+  const rows = data.slice(1);
+  rows.map((datum, i) => {
+    const rowMessages = [];
+    if (!isValidCodePostal(datum.code_postal)) {
+      rowMessages.push(`Code Postal non valide : "${datum.code_postal}"`);
+    }
+    if (!isValidResidence(datum.residence)) {
+      rowMessages.push(`Résidence non valide : "${datum.residence}"`);
+    }
+    if (!isValidAnnee(datum.annee)) {
+      rowMessages.push(`Année non valide : "${datum.annee}"`);
+    }
+    if (!isValidType(datum.type)) {
+      rowMessages.push(`Type de mesure non valide : "${datum.type}"`);
+    }
+    if (!isValidCivilite(datum.civilite)) {
+      rowMessages.push(`Genre non valide : "${datum.civilite}"`);
+    }
+    if (rowMessages.length) messages[`Ligne ${i + 1}`] = rowMessages;
+  });
+  return messages;
+};
+
+export default validateData;

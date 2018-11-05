@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cleanInputData 1`] = `
+Array [
+  Object {
+    "annee": "annee",
+    "civilite": "civilite",
+    "code_postal": "code_postal",
+    "date_ouverture": Date { NaN },
+    "numero_dossier": "numero_dossier",
+    "residence": "residence",
+    "type": "type",
+    "ville": "ville",
+  },
+  Object {
+    "annee": 4150,
+    "civilite": "n",
+    "code_postal": 57100,
+    "date_ouverture": 2017-11-02T00:00:00.000Z,
+    "numero_dossier": "RG20136Q",
+    "residence": "à domicile",
+    "type": "tutelle",
+    "ville": "thionville",
+  },
+  Object {
+    "annee": 4000,
+    "civilite": "n",
+    "code_postal": 75005,
+    "date_ouverture": 2016-12-03T00:00:00.000Z,
+    "numero_dossier": "1236HPLY",
+    "residence": "en établissement",
+    "type": "curatelle",
+    "ville": "paris",
+  },
+  Object {
+    "annee": 4500,
+    "civilite": "n",
+    "code_postal": 85000,
+    "date_ouverture": 2010-08-05T00:00:00.000Z,
+    "numero_dossier": "meourg120",
+    "residence": "à domicile",
+    "type": "sauvegarde de justice ",
+    "ville": "marseille",
+  },
+]
+`;

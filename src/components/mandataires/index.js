@@ -122,7 +122,7 @@ class MandataireTabs extends React.Component {
         content: <Profile />
       },
       {
-        text: "Mes importations",
+        text: "Importer",
         content: <InputFiles />
       }
     ];
