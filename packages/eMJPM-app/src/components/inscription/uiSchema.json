@@ -11,7 +11,7 @@
   },
   "username": {
     "ui:title": "Identifiant (vous servira pour vous connecter sur E-MJPM)",
-    "ui:placeholder": "Nom d'utilisateur",
+    "ui:placeholder": "Nom d'utilisateur (10 caractères minimum)",
     "classNames": "input__long"
   },
   "nom": {

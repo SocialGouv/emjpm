@@ -23,10 +23,11 @@
   "dependencies": {
     "@wessberg/color": "0.0.2",
     "@zeit/next-css": "^0.2.0",
+    "babel-preset-env": "^1.7.0",
     "bootstrap": "^4.0.0",
     "cors": "^2.8.4",
     "date-fns": "^1.29.0",
-    "fuse.js": "^3.2.1",
+    "fuse.js": "^3.3.0",
     "geolib": "^2.0.24",
     "js-cookie": "^2.2.0",
     "leaflet": "^1.3.1",
@@ -53,7 +54,8 @@
     "redux-modal": "^2.0.3",
     "redux-thunk": "^2.3.0",
     "styled-components": "^3.4.5",
-    "styled-jsx": "^2.2.6"
+    "styled-jsx": "^2.2.6",
+    "xlsx": "^0.14.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.49",
@@ -61,8 +63,10 @@
     "@babel/node": "^7.0.0-beta.49",
     "@babel/preset-es2015": "^7.0.0-beta.49",
     "babel-eslint": "^8.2.6",
+    "babel-jest": "^23.6.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-react": "^6.24.1",
     "concurrently": "^3.6.0",
     "css-loader": "^0.28.9",
     "cypress": "^3.1.0",
@@ -75,10 +79,11 @@
     "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.73.0",
     "gh-pages": "^1.2.0",
-    "jest-cli": "^23.2.0",
+    "jest-cli": "^23.6.0",
     "json-loader": "^0.5.7",
     "postcss-loader": "^2.1.0",
     "prettier": "^1.11.1",
+    "redux-devtools-extension": "^2.13.5",
     "start-server-and-test": "^1.5.0",
     "style-loader": "^0.20.3"
   }

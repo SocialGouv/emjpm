@@ -21,6 +21,8 @@ module.exports = {
     cy: true,
     describe: true,
     it: true,
+    test: true,
+    expect: true,
     before: true,
     beforeEach: true,
     Cypress: true
