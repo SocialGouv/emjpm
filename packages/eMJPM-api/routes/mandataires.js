@@ -409,5 +409,7 @@ router.use("/", require("./mandataireMesures"));
 router.use("/", require("./serviceAntennes"));
 router.use("/", require("./mandatairesEtablissements"));
 router.use("/", require("./tis"));
+router.use("/", require("./importation-excel"));
+
 
 module.exports = router;
