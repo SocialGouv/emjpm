@@ -18,7 +18,24 @@ const schema = {
     },
     type: {
       type: "string",
-      enum: ["Tutelle", "Curatelle", "Sauvegarde de justice", "Mesure ad hoc", "MAJ"]
+      enum: [
+        "Tutelle",
+        "Curatelle",
+        "Sauvegarde de justice",
+        "Mesure ad hoc",
+        "MAJ",
+        "tutelle aux biens",
+        "tutelle à la personne",
+        "tutelle aux biens et à la personne",
+        "curatelle simple aux biens",
+        "curatelle simple à la personne",
+        "curatelle simple aux biens et à la personne",
+        "curatelle renforcée aux biens",
+        "curatelle renforcée à la personne",
+        "curatelle renforcée aux biens et à la personne",
+        "sauvegarde de justice",
+        "sauvegarde de justice avec mandat spécial"
+      ]
     },
     residence: {
       type: "string",
