@@ -1,8 +1,5 @@
-import {
-  cleanInputData,
-  isValidCodePostal,
-  validateData
-} from "../src/components/common/AnalyseExcel";
+import { clean } from "../src/excel/parse";
+import { isValidCodePostal, validate } from "../src/excel/validate";
 
 const VALID_CPS = ["13000", "89100", /*"97121", "97216",*/ "20000"];
 
@@ -81,8 +78,8 @@ const jsonSheet = [
   ]
 ];
 
-test("cleanInputData normalize input", () => {
-  expect(cleanInputData(jsonSheet)).toMatchSnapshot();
+test("clean normalize input", () => {
+  expect(clean(jsonSheet)).toMatchSnapshot();
 });
 
 const firstRow = {
@@ -106,9 +103,9 @@ const tests = [
         annee: 1992,
         civilite: "H",
         code_postal: 57100,
-        date_ouverture: "02/11/2017",
+        date_ouverture: "2017-11-02",
         numero_dossier: "RG20136Q",
-        residence: "A Domicile",
+        residence: "A domicile",
         type: "Tutelle",
         ville: "thionville"
       }
@@ -122,7 +119,7 @@ const tests = [
         annee: 1992,
         civilite: "H",
         code_postal: 57100,
-        date_ouverture: "02/11/2017",
+        date_ouverture: "2017-11-02",
         numero_dossier: "RG20136Q",
         type: "Tutelle",
         ville: "thionville"
@@ -131,7 +128,7 @@ const tests = [
         annee: 1992,
         civilite: "H",
         code_postal: 57100,
-        date_ouverture: "02/11/2017",
+        date_ouverture: "2017-11-02",
         residence: "A Domicile",
         numero_dossier: "RG20136Q",
         type: "Tutelle",
@@ -148,7 +145,7 @@ const tests = [
         annee: 1992,
         civilite: "H",
         code_postal: 57100,
-        date_ouverture: "02/11/2017",
+        date_ouverture: "2017-11-02",
         numero_dossier: "RG20136Q",
         residence: "domicile",
         type: "Tutelle",
@@ -158,10 +155,10 @@ const tests = [
   }
 ];
 
-describe("validateData", () => {
+describe("validate", () => {
   tests.forEach(t => {
     test(t.title, () => {
-      const result = validateData(t.data);
+      const result = validate(t.data);
       if (t.success) {
         expect(result.errors).toBeUndefined();
       } else {
