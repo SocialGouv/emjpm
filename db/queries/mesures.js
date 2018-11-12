@@ -94,7 +94,7 @@ const getAllMesuresByMandatairesFilter = (
 
 // bulk insert some data and prevent mesure.numero_dossier duplicates
 const bulk = ({ mesures, mandataire_id }) => {
-  knex.transaction(trx => {
+  return knex.transaction(trx => {
     const mesureExist = async numero_dossier =>
       (await knex("mesures")
         .where({ mandataire_id, numero_dossier: numero_dossier })
@@ -102,7 +102,7 @@ const bulk = ({ mesures, mandataire_id }) => {
     const loadMesure = async (mesure, i) => {
       if (mesure.numero_dossier && mesure.numero_dossier.trim().length) {
         // skip duplicates numero_dossier
-        if (mesureExist(mesure.numero_dossier)) {
+        if (await mesureExist(mesure.numero_dossier)) {
           return Promise.resolve(`Ligne ${i + 2} : SKIP`);
         }
       }
