@@ -8,7 +8,7 @@ const session = require("express-session");
 const routes = require("./routes/index");
 const users = require("./routes/users");
 const authRoutes = require("./routes/auth");
-const inscriptionRoutes = require("./routes/inscription")
+const inscriptionRoutes = require("./routes/inscription");
 const Knex = require("knex");
 const KnexSessionStore = require("connect-session-knex")(session);
 const app = express();
@@ -95,6 +95,7 @@ if (app.get("env") === "development") {
 // no stacktraces leaked to user
 if (process.env.NODE_ENV !== "test") {
   app.use(function(err, req, res, next) {
+    console.log(req.url);
     console.log(err);
     res.status(err.status || 500).json({
       //    message: err.message,

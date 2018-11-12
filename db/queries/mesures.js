@@ -92,6 +92,28 @@ const getAllMesuresByMandatairesFilter = (
         .where("mandataire_tis.ti_id", parseInt(ti_id));
     });
 
+// bulk insert some data and prevent mesure.numero_dossier duplicates
+const bulk = ({ mesures, mandataire_id }) => {
+  return knex.transaction(trx => {
+    const mesureExist = async numero_dossier =>
+      (await knex("mesures")
+        .where({ mandataire_id, numero_dossier: numero_dossier })
+        .count())[0].count > 0;
+    const loadMesure = async (mesure, i) => {
+      if (mesure.numero_dossier && mesure.numero_dossier.trim().length) {
+        // skip duplicates numero_dossier
+        if (await mesureExist(mesure.numero_dossier)) {
+          return Promise.resolve(`Ligne ${i + 2} : SKIP`);
+        }
+      }
+      return trx("mesures")
+        .insert(mesure)
+        .then(() => `Ligne ${i + 2} : OK`);
+    };
+    return Promise.all(mesures.map(loadMesure));
+  });
+};
+
 // async function getAllMesuresByMandatairesFilter(
 //     ti_id,
 //     latnorthEast,
@@ -268,5 +290,6 @@ module.exports = {
   getAllMesuresEteinte,
   getAllMesuresAttente,
   getMesuresEnCoursMandataire,
-  addMesure
+  addMesure,
+  bulk
 };
