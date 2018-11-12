@@ -236,7 +236,7 @@ router.post(
  */
 router.get(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose","service"),
   async (req, res, next) => {
     const mandataire = await getMandataireByUserId(req.user.id);
     getMesuresEnCoursMandataire(mandataire.id)
