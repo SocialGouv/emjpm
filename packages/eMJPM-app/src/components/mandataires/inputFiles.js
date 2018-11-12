@@ -1,8 +1,12 @@
-import * as XLSX from "xlsx";
 import styled from "styled-components";
+import * as XLSX from "xlsx";
+import { connect } from "react-redux";
 
 import apiFetch from "../communComponents/Api";
-import { cleanInputData, validateData } from "../common/AnalyseExcel";
+import { read } from "../../excel/parse";
+import { validate } from "../../excel/validate";
+
+import { mesureCreated } from "./actions/mesures";
 
 const Alert = ({ className, Icon, children }) =>
   (children && (
@@ -25,7 +29,7 @@ const Alert = ({ className, Icon, children }) =>
   null;
 
 const postSheetData = sheetData =>
-  apiFetch(`/mandataires/1/bulk`, {
+  apiFetch(`/mandataires/mesures/bulk`, {
     method: "POST",
     body: JSON.stringify(sheetData)
   });
@@ -55,9 +59,8 @@ const Errors = ({ errors }) =>
   null;
 
 // read the input file, clean input and post to API
-const readAndPostExcel = target =>
+const readAndPostExcel = inputFile =>
   new Promise((resolve, reject) => {
-    const f = target.files[0];
     const reader = new FileReader();
 
     reader.onerror = error => {
@@ -68,20 +71,14 @@ const readAndPostExcel = target =>
 
     //convert the imported files into workbook: Use of xlsx React library
     reader.onload = e => {
-      let data = e.target.result;
-      const workbook = XLSX.read(data, {
+      const workbook = XLSX.read(e.target.result, {
         type: "binary"
       });
+      const sheetData = read(workbook);
+      const validation = validate(sheetData);
 
-      // convert workbook into Arrays of arrays: Use of xlsx React library
-      const firstWorksheet = workbook.Sheets[workbook.SheetNames[0]];
-      const dataInput = XLSX.utils.sheet_to_json(firstWorksheet, { header: 1 });
-
-      const sheetData = cleanInputData(dataInput);
-      const validate = validateData(sheetData);
-
-      if (validate.errors) {
-        reject(validate.errors);
+      if (validation.errors) {
+        reject(validation.errors);
       } else {
         postSheetData(sheetData)
           .then(result => {
@@ -97,7 +94,7 @@ const readAndPostExcel = target =>
           );
       }
     };
-    reader.readAsBinaryString(f);
+    reader.readAsBinaryString(inputFile);
   });
 
 const _ExcelRequirements = ({ className }) => (
@@ -165,29 +162,39 @@ class InputFiles extends React.Component {
   state = {
     status: null,
     message: null,
-    errors: []
+    errors: [],
+    value: ""
   };
 
   readInputFile = e => {
-    const target = e.target;
+    const file = e.target.files[0];
     this.setState(
       {
         status: "loading",
         errors: []
       },
       () => {
-        readAndPostExcel(target)
+        readAndPostExcel(file)
           .then(result => {
             // todo: update counter UI
-            this.setState({
-              status: "success",
-              message: result.message,
-              errors: []
-            });
+            this.setState(
+              {
+                status: "success",
+                value: "",
+                message: result.message,
+                errors: []
+              },
+              () => {
+                if (result.added && this.props.onCreateMesure) {
+                  Array.from({ length: result.added }).map(() => this.props.onCreateMesure({}));
+                }
+              }
+            );
           })
           .catch(errors => {
             this.setState({
               status: "error",
+              value: "",
               errors
             });
           });
@@ -204,10 +211,10 @@ class InputFiles extends React.Component {
             !!!Merci de lire et de bien respecter les instructions suivantes!!!
           </b>
           <br />
-          Vous trouverez ci-après le libellé des entêtes de colonnes qui doivent être présentes
-          dans votre fichier excel. Aucune n'est obligatoire. Attention à bien respecter la casse :
-          tout en minuscule, pas d'espace notamment à la fin des libellés. Les espaces sont
-          remplacés par des _ (touche 8 du clavier)
+          Vous trouverez ci-après le libellé des entêtes de colonnes qui doivent être présentes dans
+          votre fichier excel. Aucune n'est obligatoire. Attention à bien respecter la casse : tout
+          en minuscule, pas d'espace notamment à la fin des libellés. Les espaces sont remplacés par
+          des _ (touche 8 du clavier)
         </p>
         <ExcelRequirements />
         <p>
@@ -216,6 +223,7 @@ class InputFiles extends React.Component {
           <br />
           <br />
           <input
+            value={this.state.value}
             disabled={this.state.status === "loading"}
             type="file"
             style={{ padding: 5 }}
@@ -234,4 +242,12 @@ class InputFiles extends React.Component {
   }
 }
 
-export default InputFiles;
+// use redux to update mesures count
+const mapDispatchToProps = dispatch => ({
+  onCreateMesure: data => dispatch(mesureCreated(data))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(InputFiles);
