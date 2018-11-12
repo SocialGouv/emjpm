@@ -75,6 +75,9 @@ const uiSchema = {
   },
   dispo_max: {
     "ui:placeholder": "Nombre de mesures souhaitées"
+  },
+  mesures_en_cours: {
+    "ui:placeholder": "Nombre de mesures en cours"
   }
 };
 
