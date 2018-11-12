@@ -42,6 +42,7 @@ const getMandataire = filters =>
   knex("mandataires")
     .select(
       "mandataires.*",
+      "users.type",
       knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
       knex.raw(
         "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
@@ -52,6 +53,7 @@ const getMandataire = filters =>
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
     )
+    .innerJoin("users", "mandataires.user_id", "users.id")
     .where(filters)
     .first();
 

@@ -67,6 +67,7 @@ describe("routes : mandataires", () => {
             res.status.should.eql(200);
             res.type.should.eql("application/json");
             res.body.code_postal.should.eql("62000");
+            res.body.type.should.eql("individuel");
           })
       ));
 
