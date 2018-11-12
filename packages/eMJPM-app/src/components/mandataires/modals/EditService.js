@@ -48,6 +48,9 @@ const uiSchema = {
   secretariat: {
     "ui:widget": "select"
   },
+  etablissement: {
+    "ui:placeholder": "Nom"
+  },
   nom: {
     "ui:placeholder": "Nom"
   },
