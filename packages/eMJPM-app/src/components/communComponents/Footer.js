@@ -24,6 +24,9 @@ const Footer = ({ fixed }) => (
             Nous contacter{" "}
           </a>
         </li>
+        <li>
+          <p>Site optimisé pour Mozilla Firefox et Google Chrome</p>
+        </li>
       </ul>
       <ul className="footer__links"> </ul>
     </div>

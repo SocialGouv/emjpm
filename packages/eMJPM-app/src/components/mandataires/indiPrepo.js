@@ -1,0 +1,112 @@
+import dynamic from "next/dynamic";
+import { Home, Map, UserMinus, Clock, FilePlus } from "react-feather";
+
+import { DummyTabs, LoadingMessage } from "..";
+import apiFetch from "../communComponents/Api";
+
+import PillDispo from "./PillDispo";
+import Profile from "./Profile";
+import TableMesures from "./TableMesures";
+import Header from "./Header";
+import CreateMesure from "./CreateMesure";
+import InputFiles from "./inputFiles";
+
+// due to leaflet + SSR
+const OpenStreeMap = dynamic({
+  modules: props => ({
+    MapMesures: import("./MapMesures")
+  }),
+  loading: () => <LoadingMessage />,
+  render: (props, { MapMesures }) => {
+    return <MapMesures {...props} />;
+  }
+});
+
+class MandataireTabs extends React.Component {
+  render() {
+    // define the content of the tabs
+    const tabs = [
+      {
+        text: "Mesures en cours",
+        icon: <PillDispo />,
+        content: (
+          <React.Fragment>
+            <CreateMesure />
+            <TableMesures
+              fetch={() => apiFetch(`/mandataires/1/mesures`)}
+              hideColumns={[
+                "reactiver",
+                "extinction",
+                "valider",
+                "date_demande",
+                "ti",
+                "status",
+                "professionnel"
+              ]}
+            />
+          </React.Fragment>
+        )
+      },
+      {
+        text: "Vue Carte",
+        icon: <Map />,
+        content: <OpenStreeMap getPromise={() => apiFetch(`/mandataires/1/mesuresForMaps`)} />
+      },
+      {
+        text: "Mesures éteintes",
+        icon: <UserMinus />,
+        content: (
+          <TableMesures
+            fetch={() => apiFetch(`/mandataires/1/mesures/Eteinte`)}
+            hideColumns={[
+              "modifier",
+              "fin-mandat",
+              "valider",
+              "date_demande",
+              "ti",
+              "status",
+              "professionnel"
+            ]}
+          />
+        )
+      },
+      {
+        text: "Mesures en attente",
+        icon: <Clock />,
+        content: (
+          <TableMesures
+            fetch={() => apiFetch(`/mandataires/1/mesures/attente`)}
+            hideColumns={[
+              "date_ouverture",
+              "modifier",
+              "reactiver",
+              "fin-mandat",
+              "extinction",
+              "residence",
+              "status",
+              "professionnel"
+            ]}
+          />
+        )
+      },
+      {
+        text: "Mes informations",
+        icon: <Home />,
+        content: <Profile />
+      },
+      {
+        text: "Importer",
+        icon: <FilePlus />,
+        content: <InputFiles />
+      }
+    ];
+    return (
+      <React.Fragment>
+        <Header />
+        <DummyTabs tabs={tabs} />
+      </React.Fragment>
+    );
+  }
+}
+
+export default MandataireTabs;
