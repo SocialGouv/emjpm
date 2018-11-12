@@ -45,9 +45,9 @@ export const validate = data => {
     if (!isValidDateOuverture(datum.date_ouverture)) {
       rowMessages.push(`Date d'ouverture non valide : "${datum.date_ouverture}"`);
     }
-    if (!isValidCodePostal(datum.code_postal)) {
-      rowMessages.push(`Code Postal non valide : "${datum.code_postal}"`);
-    }
+    // if (!isValidCodePostal(datum.code_postal)) {
+    //   rowMessages.push(`Code Postal non valide : "${datum.code_postal}"`);
+    // }
     if (!isValidResidence(datum.residence)) {
       rowMessages.push(`Résidence non valide : "${datum.residence}"`);
     }
