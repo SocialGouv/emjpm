@@ -27,11 +27,11 @@ describe("routes : import", () => {
       .then(() => knex.seed.run());
   });
 
-  afterEach(() => {});
-
-  after(() => {
+  afterEach(() => {
     return knex.migrate.rollback();
   });
+
+  after(() => {});
 
   describe("Should import correctly", () => {
     it("should POST to /mandataires/mesures/bulk and add 2 mesures", () =>
