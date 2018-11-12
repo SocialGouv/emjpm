@@ -13,24 +13,19 @@ const schema = {
   required: [
     "nom",
     "prenom",
-    "genre",
     "telephone",
     "email",
     "adresse",
     "code_postal",
     "ville",
     "dispo_max",
-    "mesures_en_cours"
+    "mesures_en_cours",
+    "etablissement"
   ],
   properties: {
-    nom: { type: "string", title: "Nom", default: "" },
-    prenom: { type: "string", title: "Prénom", default: "" },
-    genre: {
-      type: "string",
-      title: "Genre",
-      enum: ["F", "H"],
-      enumNames: ["Femme", "Homme"]
-    },
+    etablissement: { type: "string", title: "Nom du service", default: "" },
+    nom: { type: "string", title: "Nom du contact dans le service", default: "" },
+    prenom: { type: "string", title: "Prénom du contact dans le service", default: "" },
     telephone: { type: "string", title: "Téléphone", default: "" },
     email: { type: "string", title: "Adresse email", default: "" },
     adresse: { type: "string", title: "Rue", default: "" },
