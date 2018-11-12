@@ -38,7 +38,7 @@ export const mandataireMount = () => dispatch =>
 export const updateMandataire = data => dispatch => {
   return updateMandataireApi(data)
     .then(json => {
-      dispatch(hide("EditMandataire"));
+      dispatch(hide(data.type === "service" ? "EditService" : "EditMandataire"));
       dispatch(mandataireProfileUpdated(json));
     })
     .catch(e => {

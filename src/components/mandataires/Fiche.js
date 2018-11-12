@@ -12,7 +12,9 @@ const FicheMandataire = ({
   ville = "",
   dispo_max = 0,
   secretariat = false,
-  nb_secretariat = 0
+  nb_secretariat = 0,
+  type = "",
+  mesures_en_cours = 0
 }) => {
   const hasAdresse = adresse || code_postal || ville;
   return (
@@ -28,12 +30,13 @@ const FicheMandataire = ({
         <Phone style={iconStyle} />
         {telephone}
       </div>
-      {telephone_portable && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
-          <Smartphone style={iconStyle} />
-          {telephone_portable}
-        </div>
-      )}
+      {type !== "service" &&
+        telephone_portable && (
+          <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+            <Smartphone style={iconStyle} />
+            {telephone_portable}
+          </div>
+        )}
       {hasAdresse && (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
           <Home style={iconStyle} />
@@ -45,23 +48,30 @@ const FicheMandataire = ({
         <tbody style={{ fontSize: "1.1em" }}>
           <tr>
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
-              <b>Mesures souhaitées</b>
+              <b>
+                Mesures en cours/<br /> Mesures souhaitées
+              </b>
             </td>
             <td
               data-cy="fiche-manda-dispo-max"
               style={{ textAlign: "center", borderBottom: "1px solid silver" }}
             >
+              {type === "service" ? `${mesures_en_cours}/` : ""}
               {dispo_max}
             </td>
           </tr>
-          <tr>
-            <td style={{ borderRight: "1px solid silver" }}>
-              <b>Secrétariat</b>
-            </td>
-            <td style={{ textAlign: "center" }} data-cy="fiche-manda-secretariat">
-              {secretariat === true ? `Oui ${nb_secretariat && `(${nb_secretariat} ETP)`}` : "Non"}
-            </td>
-          </tr>
+          {type !== "service" && (
+            <tr>
+              <td style={{ borderRight: "1px solid silver" }}>
+                <b>Secrétariat</b>
+              </td>
+              <td style={{ textAlign: "center" }} data-cy="fiche-manda-secretariat">
+                {secretariat === true
+                  ? `Oui ${nb_secretariat && `(${nb_secretariat} ETP)`}`
+                  : "Non"}
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       <br />
