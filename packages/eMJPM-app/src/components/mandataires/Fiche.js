@@ -49,7 +49,13 @@ const FicheMandataire = ({
           <tr>
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
               <b>
-                Mesures en cours/<br /> Mesures souhaitées
+                {type === "service" ? (
+                  <div>
+                    Mesures en cours/<br /> Mesures souhaitées{" "}
+                  </div>
+                ) : (
+                  "Mesures souhaitées"
+                )}
               </b>
             </td>
             <td

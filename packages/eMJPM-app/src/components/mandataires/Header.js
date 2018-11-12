@@ -17,10 +17,18 @@ const Title = styled.div`
   text-transform: uppercase;
 `;
 
-const HeaderMandataire = ({ nom, prenom, date_mesure_update }) => (
+const HeaderMandataire = ({ nom, prenom, date_mesure_update, type, etablissement }) => (
   <ContainerMandataire className="container">
     <Title>
-      {nom} {prenom}
+      {type === "service" ? (
+        <div>
+          {" "}
+          {etablissement} <br />
+          {nom} {prenom}{" "}
+        </div>
+      ) : (
+        `${nom} ${prenom}`
+      )}
     </Title>
     <div style={{ textAlign: "right", fontSize: "0.8em", color: "#555" }}>
       {date_mesure_update && (
