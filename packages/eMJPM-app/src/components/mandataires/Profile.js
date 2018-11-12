@@ -63,16 +63,24 @@ const Selector = ({
 
 // bouton connecté à redux-modal.show pour EditMandataire
 const ButtonEditMandataire = connect(
-  null,
+  state => ({
+    currentMandataire: state.mandataire.profile
+  }),
   dispatch => bindActionCreators({ show }, dispatch)
-)(({ formData, show }) => (
-  <Button
-    data-cy="button-edit-profile"
-    style={{ marginLeft: 0 }}
-    onClick={() => show("EditMandataire", { formData })}
-  >
-    Modifier mon profil
-  </Button>
+)(({ formData, show, currentMandataire }) => (
+  <>
+    <Button
+      data-cy="button-edit-profile"
+      style={{ marginLeft: 0 }}
+      onClick={() =>
+        show(currentMandataire.type === "service" ? "EditService" : "EditMandataire", {
+          formData
+        })
+      }
+    >
+      Modifier mon profil
+    </Button>
+  </>
 ));
 
 const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] }) => (

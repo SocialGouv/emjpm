@@ -27,6 +27,7 @@
     "bootstrap": "^4.0.0",
     "cors": "^2.8.4",
     "date-fns": "^1.29.0",
+    "detect-browser": "^3.0.1",
     "fuse.js": "^3.3.0",
     "geolib": "^2.0.24",
     "js-cookie": "^2.2.0",
