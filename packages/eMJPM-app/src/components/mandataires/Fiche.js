@@ -62,8 +62,8 @@ const FicheMandataire = ({
               data-cy="fiche-manda-dispo-max"
               style={{ textAlign: "center", borderBottom: "1px solid silver" }}
             >
-              {type === "service" ? `${mesures_en_cours}/` : ""}
-              {dispo_max}
+              {type === "service" ? `${mesures_en_cours || "-"}/` : ""}
+              {dispo_max || "-"}
             </td>
           </tr>
           {type !== "service" && (
