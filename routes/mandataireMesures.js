@@ -1,12 +1,12 @@
 const express = require("express");
 
 const router = express.Router();
-const { loginRequired, typeRequired } = require("../auth/_helpers");
+const { typeRequired } = require("../auth/_helpers");
 
 const {
   updateCountMesures,
-  updateDateMesureUpdate,
-  getMandataireByUserId
+  getMandataireByUserId,
+  getMesuresMap
 } = require("../db/queries/mandataires");
 
 const { getTiByUserId } = require("../db/queries/tis");
@@ -236,7 +236,7 @@ router.post(
  */
 router.get(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose","service"),
   async (req, res, next) => {
     const mandataire = await getMandataireByUserId(req.user.id);
     getMesuresEnCoursMandataire(mandataire.id)
@@ -271,7 +271,6 @@ router.get(
     const mandataire = await getMandataireByUserId(req.user.id);
     const mesures = await getMesuresMap(mandataire.id);
     res.status(200).json(mesures);
-    next();
   }
 );
 

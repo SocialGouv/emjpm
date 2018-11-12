@@ -7,7 +7,7 @@ const router = express.Router();
 const knex = require("../db/knex");
 
 const queries = require("../db/queries/inscription");
-
+const { inscriptionEmail } = require("../email/inscription");
 /**
  * @swagger
  *
@@ -211,6 +211,9 @@ router.post("/mandataires", (req, res, next) => {
             });
         })
     )
+    .then(() => {
+      return inscriptionEmail(`${process.env.APP_URL}/admin`);
+    })
     .then(() => {
       // todo: send email admins ?
       return res.json({ success: true });
