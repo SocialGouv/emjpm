@@ -207,7 +207,7 @@ class InputFiles extends React.Component {
       <div style={{ padding: 20 }}>
         <h1>Importation d'un fichier excel (mesures)</h1>
         <p>
-          <b style={{ color: "red" }}>
+          <b style={{ color: "red", fontSize: "1.5em" }}>
             !!!Merci de lire et de bien respecter les instructions suivantes!!!
           </b>
           <br />
@@ -230,6 +230,12 @@ class InputFiles extends React.Component {
             data-cy="button-upload-excel"
             onChange={this.readInputFile}
           />
+          <br />
+          <b style={{ color: "red", fontSize: "1.5em" }}>
+            Vous n'arrivez pas à importer votre tableau excel? Envoyez-le nous par email à
+            contact@emjpm.beta.gouv.fr. Nous le vérifierons, le mettrons en page et vous le
+            renverrons pour que vous puissiez l'importer.{" "}
+          </b>
         </p>
         {this.state.status === "success" && (
           <Alert className="alert-success">
