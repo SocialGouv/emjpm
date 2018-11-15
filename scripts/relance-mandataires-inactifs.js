@@ -46,6 +46,7 @@ const relanceMandataireProfilNotUpdated = () => {
       mandataires &&
       mandataires.map &&
       mandataires.map(mandataire => {
+        console.log(`send email-relance to ${mandataire.email}`);
         return sendEmail(
           mandataire.email,
           "e-MJPM : actualisez vos données",
@@ -53,6 +54,7 @@ const relanceMandataireProfilNotUpdated = () => {
           EMAIL_RELANCE_HTML
         )
           .then(() => {
+            console.log(`ERROR sending email-relance to ${mandataire.email}`);
             // MAJ mandataire.email_send
             return updateMandataireMailSent(mandataire.id);
           })
