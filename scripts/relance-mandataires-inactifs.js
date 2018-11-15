@@ -5,6 +5,8 @@ const {
   updateMandataireMailSent
 } = require("../db/queries/email");
 
+const knex = require("../db/knex");
+
 const EMAIL_RELANCE_TEXT = `
 Bonjour,
 
@@ -64,7 +66,9 @@ const relanceMandataireProfilNotUpdated = () => {
 };
 
 if (require.main === module) {
-  relanceMandataireProfilNotUpdated();
+  relanceMandataireProfilNotUpdated().then(() => {
+    knex.destroy();
+  });
 }
 
 // module.exports = {
