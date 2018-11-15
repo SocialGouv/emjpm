@@ -6,10 +6,14 @@ const mandataireProfilNotUpdateEmail = () =>
     .select()
     .where(
       knex.raw(
+        // avec un email
+        // ET
         // pas de MAJ mesure depuis au moins un mois
         // ET
         // pas d'email envoyé depuis au moins 15 jours
-        `(date_mesure_update < current_date - interval '1 months' or date_mesure_update is null)
+        `(email is NOT null)
+        and
+        (date_mesure_update < current_date - interval '1 months' or date_mesure_update is null)
         and
         (email_send < current_date - interval '15 days' or email_send is null)`
       )
