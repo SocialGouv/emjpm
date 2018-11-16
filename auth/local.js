@@ -20,7 +20,7 @@ passport.use(
     // check to see if the username exists
 
     knex("users")
-      .where({ username: username.toLowerCase().trim() })
+      .where("username", "like", username.toLowerCase().trim())
       .first()
       .then(user => {
         if (!user) return done(null, false);
