@@ -18,19 +18,25 @@ const schema = {
   properties: {
     username: {
       type: "string",
-      minLength: 10,
       default: ""
     },
     pass1: { type: "string", minLength: 10 },
     pass2: { type: "string", minLength: 10 },
     nom: { type: "string", default: "" },
     prenom: { type: "string", default: "" },
+    genre: {
+      type: "string",
+      title: "Genre",
+      enum: ["F", "H"],
+      enumNames: ["Femme", "Homme"]
+    },
     telephone: { type: "string", default: "" },
     telephone_portable: { type: "string", default: "" },
     email: { type: "string", default: "" },
     adresse: { type: "string", default: "" },
     code_postal: { type: "string", default: "" },
-    ville: { type: "string", default: "" }
+    ville: { type: "string", default: "" },
+    dispo_max: { type: "integer", default: 0 }
   }
 };
 

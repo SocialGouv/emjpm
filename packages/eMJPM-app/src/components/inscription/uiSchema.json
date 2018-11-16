@@ -11,12 +11,23 @@
   },
   "username": {
     "ui:title": "Identifiant (vous servira pour vous connecter sur E-MJPM)",
-    "ui:placeholder": "Nom d'utilisateur (10 caractères minimum)",
     "classNames": "input__long"
   },
   "nom": {
     "ui:title": "Nom",
     "ui:placeholder": "Nom"
+  },
+  "genre": {
+    "ui:title": "Genre ",
+    "ui:placeholder": "Genre"
+  },
+  "dispo_max": {
+    "ui:title": "Mesures souhaitées",
+    "ui:placeholder": "Mesures souhaitées"
+  },
+  "mesures_en_cours": {
+    "ui:title": "Mesures en cours",
+    "ui:placeholder": "Mesures en cours"
   },
   "prenom": {
     "ui:title": "Prénom",

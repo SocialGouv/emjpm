@@ -57,7 +57,8 @@ class Form extends React.Component {
           ...formData,
           etablissement: formData.etablissement || "",
           tis: this.state.tis,
-          type: this.state.typeMandataire
+          type: this.state.typeMandataire,
+          username: formData.username.toLowerCase().trim()
         })
       })
         .then(json => {
