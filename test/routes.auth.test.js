@@ -112,6 +112,21 @@ describe("routes : auth", () => {
           res.body.success.should.eql(true);
           res.body.url.should.eql("/mandataires");
         }));
+    it("should login a user when username have UpperCase and space", () =>
+      chai
+        .request(server)
+        .post("/auth/login")
+        .send({
+          username: " jeRemY  ",
+          password: "johnson123"
+        })
+        .then(res => {
+          res.status.should.eql(200);
+          res.redirects.length.should.eql(0);
+          res.type.should.eql("application/json");
+          res.body.success.should.eql(true);
+          res.body.url.should.eql("/mandataires");
+        }));
     it("should not login an inactive user", () =>
       chai
         .request(server)
