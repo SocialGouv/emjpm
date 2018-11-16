@@ -100,7 +100,10 @@ const bulk = ({ mesures, mandataire_id }) => {
         .where({ mandataire_id, numero_dossier: numero_dossier })
         .count())[0].count > 0;
     const loadMesure = async (mesure, i) => {
-      if (mesure.numero_dossier && mesure.numero_dossier.trim().length) {
+      if (
+        mesure.numero_dossier &&
+        mesure.numero_dossier.toString().trim().length
+      ) {
         // skip duplicates numero_dossier
         if (await mesureExist(mesure.numero_dossier)) {
           return Promise.resolve(`Ligne ${i + 2} : SKIP`);
