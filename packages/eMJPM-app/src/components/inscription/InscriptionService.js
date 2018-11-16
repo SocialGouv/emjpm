@@ -19,7 +19,6 @@ const schema = {
   properties: {
     username: {
       type: "string",
-      minLength: 10,
       default: ""
     },
     pass1: { type: "string", minLength: 10 },
@@ -31,7 +30,9 @@ const schema = {
     email: { type: "string", default: "" },
     adresse: { type: "string", default: "" },
     code_postal: { type: "string", default: "" },
-    ville: { type: "string", default: "" }
+    ville: { type: "string", default: "" },
+    mesures_en_cours: { type: "integer", default: 0 },
+    dispo_max: { type: "integer", default: 0 }
   }
 };
 
