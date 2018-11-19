@@ -6,8 +6,17 @@ services:
       - POSTGRES_PASSWORD=masterPassword
       # API dedicated password
       - POSTGRES_API_USER_PASSWORD=apiPassword
+      - POSTGRES_READONLY_USER_PASSWORD=readonlyPassword
+  metabase:
+    image: metabase/metabase
+    volumes:
+      # persist config
+      - metabase:/data
+    environment:
+      -  MB_DB_FILE=/data/metabase.db
+    ports:
+      - 3003:3000
   api:
-    container_name: emjpm-api
     build:
       context: .
       dockerfile: Dockerfile
@@ -19,3 +28,6 @@ services:
       - db
     links:
       - db
+
+volumes:
+  metabase:
