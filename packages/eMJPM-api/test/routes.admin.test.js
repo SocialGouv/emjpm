@@ -80,6 +80,39 @@ describe("routes : /admin", () => {
           })
       ));
   });
+
+  describe("/tis", () => {
+    it("should return list of mandataires", () =>
+      logUser(server, {
+        username: "admin",
+        password: "admin"
+      }).then(token =>
+        agent
+          .get("/api/v1/admin/tis")
+          .set("Authorization", "Bearer " + token)
+          .then(res => {
+            res.status.should.equal(200);
+            res.body.length.should.equal(2);
+            res.body[0].id.should.equal(5);
+            res.body[1].id.should.equal(32);
+          })
+      ));
+    it("should filter list of user Ti", () =>
+      logUser(server, {
+        username: "admin",
+        password: "admin"
+      }).then(token =>
+        agent
+          .get("/api/v1/admin/tis?users.active=false")
+          .set("Authorization", "Bearer " + token)
+          .then(res => {
+            res.status.should.equal(200);
+            res.body.length.should.equal(1);
+            res.body[0].id.should.equal(32);
+          })
+      ));
+  });
+
   describe("PUT /user", () => {
     it("should update user active state", () =>
       logUser(server, {

@@ -22,7 +22,9 @@ const EMAIL_RESERVATION_HTML = (nom, prenom, etablissement, ti) => {
   `
 Bonjour ${nom + prenom || etablissement},<br>
 <br>
-Une nouvelle mesure vous a été attribuée par le ${ti.etablissement}
+Une nouvelle mesure vous a été attribuée par le ${ti.etablissement} - ${
+    ti.cabinet
+  }
 <br><br>
 Rendez vous sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a> pour activer cette mesure.
 <br><br>

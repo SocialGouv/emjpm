@@ -83,6 +83,42 @@ const { inscriptionEmail } = require("../email/inscription");
  *                 required: true
  *                 items:
  *                   type: integer
+ *     InscriptionTi:
+ *       description: A JSON object containing ti parameters
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: true
+ *             properties:
+ *               username:
+ *                 description: sera utilisé pour le login du ti
+ *                 type: string
+ *                 required: true
+ *               email:
+ *                 type: string
+ *                 required: true
+ *               cabinet:
+ *                 type: string
+ *                 required: false
+ *               pass1:
+ *                 type: string
+ *                 required: true
+ *               pass2:
+ *                 type: string
+ *                 required: true
+ *               type:
+ *                 description: Type de l'utilisateur
+ *                 type: string
+ *                 required: true
+ *                 enum: ["ti"]
+ *               tis:
+ *                 description: ID des tribunaux d'instance ou inscrire le user
+ *                 type: array
+ *                 required: true
+ *                 items:
+ *                   type: integer
  *     Login:
  *       description: A JSON object containing user credentials
  *       required: true
@@ -212,10 +248,9 @@ router.post("/mandataires", (req, res, next) => {
         })
     )
     .then(() => {
-      return inscriptionEmail(`${process.env.APP_URL}/admin`);
+      return inscriptionEmail(`${process.env.APP_URL}`);
     })
     .then(() => {
-      // todo: send email admins ?
       return res.json({ success: true });
     })
     .catch(e => {
@@ -224,4 +259,73 @@ router.post("/mandataires", (req, res, next) => {
     });
 });
 
+/**
+ * @swagger
+ * /inscription/tis:
+ *   post:
+ *     tags:
+ *       - register
+ *     description: Créé un nouveau user pour un ti
+ *     produces:
+ *       - application/json
+ *     requestBody:
+ *       $ref: '#/components/requestBodies/InscriptionTi'
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             $ref: "#/components/schemas/SuccessResponse"
+ *
+ */
+router.post("/tis", (req, res, next) => {
+  const { username, pass1, pass2, type, email, tis, cabinet } = req.body;
+
+  if (pass1 !== pass2 || username.trim() === "") {
+    return res.status(500).json({ success: false });
+  }
+
+  knex
+    .transaction(trx =>
+      // create user
+      queries
+        .createUser(
+          {
+            username,
+            type,
+            password: bcrypt.hashSync(pass1, salt),
+            active: false
+          },
+          trx
+        )
+        .then(([user_id]) => {
+          // create mandataire
+          if (!tis || tis.length === 0) {
+            return true;
+          }
+          return Promise.all(
+            tis.map(ti_id =>
+              queries.createUserTi(
+                {
+                  user_id,
+                  ti_id,
+                  cabinet,
+                  email
+                },
+                trx
+              )
+            )
+          );
+        })
+    )
+    .then(() => {
+      return inscriptionEmail(`${process.env.APP_URL}`);
+    })
+    .then(() => {
+      return res.json({ success: true });
+    })
+    .catch(e => {
+      console.log(e);
+      return res.status(500).json({ success: false });
+    });
+});
 module.exports = router;

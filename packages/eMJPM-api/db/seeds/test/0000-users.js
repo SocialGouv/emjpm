@@ -51,10 +51,24 @@ const USERS = [
     active: false
   },
   {
+    username: "ti2",
+    password: "ti2",
+    type: "ti",
+    active: false
+  },
+  {
     id: 42,
     username: "inactive2",
     password: "inactive2",
     type: "individuel",
+    active: false
+  },
+  {
+    id: 32,
+    username: "titest",
+    password: "titest",
+    type: "ti",
+    reset_password_token: "LpWpzK4Jla9I87Aq",
     active: false
   },
   {
