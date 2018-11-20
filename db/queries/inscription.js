@@ -26,9 +26,13 @@ const createMandataire = (data, trx) =>
 const createMandataireTi = (data, trx) =>
   (trx || knex).table("mandataire_tis").insert(data, "id");
 
+const createUserTi = (data, trx) =>
+  (trx || knex).table("users_tis").insert(data, "id");
+
 module.exports = {
   getTiByRegion,
   createUser,
   createMandataire,
-  createMandataireTi
+  createMandataireTi,
+  createUserTi
 };

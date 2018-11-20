@@ -111,6 +111,35 @@ router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
   res.json(mandataires);
 });
 
+/**
+ * @swagger
+ * /admin/tis:
+ *   get:
+ *     tags:
+ *       - admin
+ *     description: get list of users of Ti for admin
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: query
+ *         name: users.active
+ *         description: filters to apply to the list. ex `?users.active=true`
+ *         required: false
+ *         schema:
+ *           type: object
+ *     responses:
+ *       200:
+ *         description: return list of users of Ti for admin
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ */
+router.get("/tis", typeRequired("admin"), async (req, res, next) => {
+  const users = await queries.getTis({ filters: req.query });
+  res.json(users);
+});
+
 const USER_WRITE_PROPERTIES = ["active"];
 
 /**
