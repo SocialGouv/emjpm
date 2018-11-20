@@ -40,7 +40,8 @@ const schema = {
       type: "number",
       title: "Secrétariat : nombre d'ETP( Si temps partiel à 80% mettre 0.8)",
       default: ""
-    }
+    },
+    zip: { type: "string", title: "Zones d'interventions privilégiées " }
   }
 };
 

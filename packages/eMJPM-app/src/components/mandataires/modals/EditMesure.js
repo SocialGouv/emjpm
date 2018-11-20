@@ -6,6 +6,8 @@ import { bindActionCreators } from "redux";
 import { format } from "date-fns";
 import { updateMesure } from "../actions/mesures";
 import Layout from "./Layout";
+import Cabinet from "../../common/Cabinet";
+import { AutocompleteState } from "../..";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -37,6 +39,8 @@ const schema = {
         "sauvegarde de justice avec mandat spécial"
       ]
     },
+    ti_id: { type: "number" },
+    cabinet: { type: "string", enum: Cabinet },
     residence: {
       type: "string",
       enum: ["A domicile", "En établissement"]
@@ -101,6 +105,14 @@ const uiSchema = {
       label: true
     }
   },
+  ti_id: {
+    "ui:widget": "TisOfMandataireAutoComplete",
+    "ui:title": "Tribunal instance",
+    "ui:placeholder": "Ti",
+    "ui:options": {
+      label: true
+    }
+  },
   type: {
     "ui:placeholder": "Type de mesure",
     "ui:title": "Type de mesure",
@@ -112,6 +124,28 @@ const uiSchema = {
   }
 };
 
+const TisOfMandataireAutoComplete = ({ items, value, onChange }) => (
+  <AutocompleteState
+    items={items}
+    inputProps={{
+      style: { width: 300 },
+      placeholder: "Choisissez un tis ou vous êtes agrée"
+    }}
+    resetOnSelect={false}
+    value={value}
+    onSelect={obj => onChange(obj.id)}
+    labelKey={"etablissement"}
+  />
+);
+
+const TisOfMandataireAutoCompleteRedux = connect(state => ({
+  items: state.mandataire.tis
+}))(TisOfMandataireAutoComplete);
+
+const widgets = {
+  TisOfMandataireAutoComplete: TisOfMandataireAutoCompleteRedux
+};
+
 const EditMesure = ({ show, handleHide, formData, onSubmit, ...props }) => {
   // todo: we should have perfect mapping api<->data<->form
   const cleanData = {
@@ -121,7 +155,13 @@ const EditMesure = ({ show, handleHide, formData, onSubmit, ...props }) => {
   };
   return (
     <Layout show={show} handleHide={handleHide}>
-      <Form schema={schema} uiSchema={uiSchema} formData={cleanData} onSubmit={onSubmit}>
+      <Form
+        schema={schema}
+        uiSchema={uiSchema}
+        formData={cleanData}
+        widgets={widgets}
+        onSubmit={onSubmit}
+      >
         <div style={{ margin: "20px 0", textAlign: "center" }}>
           <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
             Valider
