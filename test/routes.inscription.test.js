@@ -151,6 +151,35 @@ describe("routes : inscription", () => {
           ti_ids.should.deep.equal([1, 2]);
         }));
 
+    it("should add user tis", () =>
+      chai
+        .request(server)
+        .post("/api/v1/inscription/tis")
+        .send({
+          username: "user_ti",
+          email: "test@test.com",
+          type: "ti",
+          pass1: "kikoo",
+          pass2: "kikoo",
+          cabinet: "2A",
+          tis: [1]
+        })
+        .then((res, req) => {
+          res.status.should.eql(200);
+        })
+        .then(async (res, req) => {
+          const user = await knex
+            .table("users")
+            .where("username", "user_ti")
+            .first();
+          user.username.should.equal("user_ti");
+          const users_tis = await knex
+            .table("users_tis")
+            .where("user_id", user.id)
+            .first();
+          users_tis.cabinet.should.equal("2A");
+          users_tis.ti_id.should.equal(1);
+        }));
     it("created user should NOT be active", () =>
       chai
         .request(server)

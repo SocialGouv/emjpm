@@ -161,6 +161,7 @@ router.post(
     }
     if (req.user.type === "ti") {
       body["ti_id"] = ti.id;
+      body["cabinet"] = ti.cabinet;
       addMesure(body)
         .then(mesures => res.status(200).json({ success: true }))
         .catch(error => {

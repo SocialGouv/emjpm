@@ -38,7 +38,7 @@ describe("routes : mesures", () => {
       }).then(token =>
         agent
           .get("/api/v1/mesures")
-            .set("Authorization", "Bearer " + token)
+          .set("Authorization", "Bearer " + token)
           .then(function(res) {
             res.status.should.eql(200);
             res.type.should.eql("application/json");
@@ -56,7 +56,7 @@ describe("routes : mesures", () => {
       }).then(token =>
         agent
           .get("/api/v1/mesures")
-            .set("Authorization", "Bearer " + token)
+          .set("Authorization", "Bearer " + token)
           .then(function(res) {
             res.status.should.eql(401);
           })

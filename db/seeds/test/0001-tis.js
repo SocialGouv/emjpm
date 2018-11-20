@@ -11,7 +11,6 @@ exports.seed = function(knex, Promise) {
         telephone: "0237100000",
         latitude: 1,
         longitude: 1,
-        user_id: 99
       });
     })
     .then(function() {
@@ -23,7 +22,6 @@ exports.seed = function(knex, Promise) {
         telephone: "0102030405",
         latitude: 1,
         longitude: 1,
-        user_id: 5
       });
     });
 };

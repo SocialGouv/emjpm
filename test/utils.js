@@ -43,8 +43,8 @@ const getOtherTypes = type =>
 
 const shouldBeProtected = (server, method, url, options = {}) => {
   // test typeRequired tests
-    const agent = chai.request.agent(server);
-    if (options.type) {
+  const agent = chai.request.agent(server);
+  if (options.type) {
     it(`${method} ${url} should be accessible to ${options.type}`, () =>
       logUser(server, getCreds(options.type)).then(token =>
         agent[method.toLowerCase()](url)
