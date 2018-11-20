@@ -1,6 +1,7 @@
 import InscriptionIndividuel from "./InscriptionIndividuel";
 import InscriptionPrepose from "./InscriptionPrepose";
 import InscriptionService from "./InscriptionService";
+import InscriptionTi from "./InscriptionTi";
 import TiSelector from "./TiSelector";
 import Resolve from "../common/Resolve";
 import apiFetch from "../communComponents/Api";
@@ -9,7 +10,8 @@ import Router from "next/router";
 const formsMandataires = {
   individuel: props => <InscriptionIndividuel {...props} />,
   prepose: props => <InscriptionPrepose {...props} />,
-  service: props => <InscriptionService {...props} />
+  service: props => <InscriptionService {...props} />,
+  ti: props => <InscriptionTi {...props} />
 };
 
 const FormSelector = ({ label, value, onChange }) => (
@@ -50,8 +52,10 @@ class Form extends React.Component {
     this.setState({ tis });
   };
   onSubmit = ({ formData }) => {
+    const url =
+      this.state.typeMandataire === "ti" ? "/inscription/tis" : "/inscription/mandataires";
     this.setState({ status: "loading", formData }, () => {
-      apiFetch(`/inscription/mandataires`, {
+      apiFetch(url, {
         method: "POST",
         body: JSON.stringify({
           ...formData,
@@ -95,7 +99,7 @@ class Form extends React.Component {
                 </div>
               )}
             />
-            <div style={{ fontSize: "1.2em", fontWeight: "bold" }}>Vous êtes un mandataire :</div>
+            <div style={{ fontSize: "1.2em", fontWeight: "bold" }}>Vous êtes :</div>
             <table
               style={{
                 margin: "20px 0",
@@ -112,6 +116,11 @@ class Form extends React.Component {
                   />
                   <FormSelector value="prepose" label="Préposé" onChange={this.setTypeMandataire} />
                   <FormSelector value="service" label="Service" onChange={this.setTypeMandataire} />
+                  <FormSelector
+                    value="ti"
+                    label="Tribunal Instance"
+                    onChange={this.setTypeMandataire}
+                  />
                 </tr>
               </tbody>
             </table>
