@@ -211,4 +211,82 @@ describe("Inscription", () => {
       cy.location("pathname", { timeout: 10000 }).should("eq", "/mandataires");
     });
   });
+
+  describe("registration tis", () => {
+    before(function() {
+      cy.exec("npm run cypress:api-reset");
+    });
+    it("should register tis", function() {
+      cy.loginByForm("admin", "admin");
+      cy.get("[data-cy='En attente de validation']").click();
+      cy.get("[data-cy='UserCellAction']").should("have.length", 0);
+
+      cy.visit("/inscription");
+
+      cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+        .get("[data-cy='region']")
+        .first()
+        .click();
+
+      cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+        .get("[data-cy='ti']")
+        .first()
+        .click();
+
+      cy.get("input[type='radio'][value='ti']")
+        .first()
+        .click();
+
+      const data = {
+        root_username: "username-ti",
+        root_pass1: "password100",
+        root_pass2: "password100",
+        root_email: "email1@email.com"
+      };
+      const dataSelect = {
+        root_cabinet: "2A"
+      };
+
+      Object.keys(data).forEach(key => {
+        cy.get(`input[id='${key}']`).type(data[key]);
+      });
+
+      Object.keys(dataSelect).forEach(key => {
+        cy.get(`input[id='${key}']`).select(dataSelect[key]);
+      });
+
+      cy.get("[data-cy='form-inscription'] button[type='submit']").click();
+
+      cy.get("li.text-danger").should("have.length", 0);
+
+      cy.location("pathname", { timeout: 10000 }).should("eq", "/inscription-done");
+
+      cy.loginByForm("admin", "admin");
+      cy.get("[data-cy='En attente de validation']").click();
+      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
+    });
+    it("account should not login before activation", function() {
+      cy.loginByForm("username-ti", "password100");
+      cy.get(".alert-danger").should("have.length", 0);
+    });
+    it("admin should be able to activate account", function() {
+      cy.loginByForm("admin", "admin");
+      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
+      cy.get("[data-cy='En attente de validation']").click();
+      cy.get("[data-cy='UserCellAction']").should("have.length", 0);
+      cy.get("[data-cy='UserCellAction']")
+        .last()
+        .click();
+      cy.get("[data-cy='UserCellAction']").should("have.length", 0);
+      cy.get("[data-cy='Actifs']").click();
+      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
+      cy.get("[data-cy='En attente de validation']").click();
+      cy.get("[data-cy='UserCellAction']").should("have.length", 0);
+    });
+    it("account should login after activation", function() {
+      cy.loginByForm("username-ti", "password100");
+      cy.get(".alert-danger").should("have.length", 0);
+      cy.location("pathname", { timeout: 10000 }).should("eq", "/tis");
+    });
+  });
 });
