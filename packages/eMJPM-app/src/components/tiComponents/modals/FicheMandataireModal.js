@@ -147,6 +147,7 @@ class FicheMandataireModal extends React.Component {
               dispo_max={currentMandataire.dispo_max}
               secretariat={currentMandataire.secretariat}
               nb_secretariat={currentMandataire.nb_secretariat}
+              zip={currentMandataire.zip}
               displayTitle={"none"}
             />
 

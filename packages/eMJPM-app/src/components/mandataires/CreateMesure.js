@@ -6,7 +6,7 @@ import { format } from "date-fns";
 
 import { Button, ToggleState, Autocomplete } from "..";
 import { createMesure, createMesureSave } from "./actions/mesures";
-
+import Cabinet from "../common/Cabinet";
 const Alert = ({ className, Icon, message }) =>
   (message && (
     <div
@@ -35,7 +35,16 @@ const SucessBox = ({ message }) => (
 
 const schema = {
   type: "object",
-  required: ["code_postal", "ville", "civilite", "annee", "date_ouverture", "type", "residence"],
+  required: [
+    "code_postal",
+    "ville",
+    "civilite",
+    "annee",
+    "date_ouverture",
+    "type",
+    "residence",
+    "ti_id"
+  ],
   properties: {
     date_ouverture: {
       type: "string",
@@ -62,6 +71,8 @@ const schema = {
         "sauvegarde de justice avec mandat spécial"
       ]
     },
+    ti_id: { type: "number" },
+    cabinet: { type: "string", enum: Cabinet },
     code_postal: { type: "string" },
     ville: { type: "string" },
     civilite: { type: "string", enum: ["F", "H"] },
@@ -152,6 +163,14 @@ const uiSchema = {
       label: true
     }
   },
+  ti_id: {
+    "ui:widget": "TisOfMandataireAutoComplete",
+    "ui:title": "Tribunal instance",
+    "ui:placeholder": "Ti",
+    "ui:options": {
+      label: true
+    }
+  },
   etablissement_id: {
     "ui:widget": "EtablissementAutoComplete",
     "ui:title": "Etablissement",
@@ -161,6 +180,20 @@ const uiSchema = {
     }
   }
 };
+
+const TisOfMandataireAutoComplete = ({ items, value, onChange }) => (
+  <AutocompleteState
+    items={items}
+    inputProps={{
+      style: { width: 300 },
+      placeholder: "Choisissez un tis ou vous êtes agrée"
+    }}
+    resetOnSelect={false}
+    value={value}
+    onSelect={obj => onChange(obj.id)}
+    labelKey={"etablissement"}
+  />
+);
 
 const EtablissementAutoComplete = ({ items, value, onChange }) => (
   <Autocomplete
@@ -180,8 +213,13 @@ const EtablissementAutoCompleteRedux = connect(state => ({
   items: state.mandataire.finess
 }))(EtablissementAutoComplete);
 
+const TisOfMandataireAutoCompleteRedux = connect(state => ({
+  items: state.mandataire.tis
+}))(TisOfMandataireAutoComplete);
+
 const widgets = {
-  EtablissementAutoComplete: EtablissementAutoCompleteRedux
+  EtablissementAutoComplete: EtablissementAutoCompleteRedux,
+  TisOfMandataireAutoComplete: TisOfMandataireAutoCompleteRedux
 };
 
 const CustomFieldTemplate = props => {
