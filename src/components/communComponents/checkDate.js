@@ -1,9 +1,6 @@
-import { format, addMonths } from "date-fns";
+import { isBefore, addMonths } from "date-fns";
 
-const isOlderThanOneMonth = date => {
-  return (
-    format(addMonths(new Date(date), 1), "MM/DD/YYYY") < format(new Date(Date.now()), "MM/DD/YYYY")
-  );
-};
+// is given date more than 1 month before now
+const isOlderThanOneMonth = date => isBefore(addMonths(new Date(date), 1), new Date());
 
 export default isOlderThanOneMonth;
