@@ -115,7 +115,6 @@ class MapTi extends React.Component {
     return (
       <React.Fragment>
         <div style={{ display: "flex" }}>
-          <FilterMesuresMap />
           <FilterMandataires isMandataire={isMandataire} />
         </div>
         <div
