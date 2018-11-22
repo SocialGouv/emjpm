@@ -3,6 +3,7 @@ const pkg = require("../package.json");
 const router = express.Router();
 
 router.use("/mandataires", require("./mandataires"));
+router.use("/usersTi", require("./usersTi"));
 router.use("/auth", require("./auth"));
 router.use("/mesures", require("./mesures"));
 router.use("/email", require("./email").router);
