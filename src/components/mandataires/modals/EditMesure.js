@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { updateMesure } from "../actions/mesures";
 import Layout from "./Layout";
 import Cabinet from "../../common/Cabinet";
-import { AutocompleteState } from "../..";
+import { Autocomplete } from "../..";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -39,8 +39,9 @@ const schema = {
         "sauvegarde de justice avec mandat spécial"
       ]
     },
-    ti_id: { type: "number" },
-    cabinet: { type: "string", enum: Cabinet },
+    //TODO(Adrien): discus with PO
+    // ti_id: { type: "number" },
+    // cabinet: { type: "string", enum: Cabinet },
     residence: {
       type: "string",
       enum: ["A domicile", "En établissement"]
@@ -105,14 +106,15 @@ const uiSchema = {
       label: true
     }
   },
-  ti_id: {
-    "ui:widget": "TisOfMandataireAutoComplete",
-    "ui:title": "Tribunal instance",
-    "ui:placeholder": "Ti",
-    "ui:options": {
-      label: true
-    }
-  },
+  //TODO(Adrien): discus with PO
+  // ti_id: {
+  //   "ui:widget": "TisOfMandataireAutoComplete",
+  //   "ui:title": "Tribunal instance",
+  //   "ui:placeholder": "Ti",
+  //   "ui:options": {
+  //     label: true
+  //   }
+  // },
   type: {
     "ui:placeholder": "Type de mesure",
     "ui:title": "Type de mesure",
@@ -125,7 +127,7 @@ const uiSchema = {
 };
 
 const TisOfMandataireAutoComplete = ({ items, value, onChange }) => (
-  <AutocompleteState
+  <Autocomplete
     items={items}
     inputProps={{
       style: { width: 300 },
