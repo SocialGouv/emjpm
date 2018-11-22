@@ -71,8 +71,9 @@ const schema = {
         "sauvegarde de justice avec mandat spécial"
       ]
     },
-    ti_id: { type: "number" },
-    cabinet: { type: "string", enum: Cabinet },
+    //TODO(Adrien): discus with PO
+    // ti_id: { type: "number" },
+    //cabinet: { type: "string", enum: Cabinet },
     code_postal: { type: "string" },
     ville: { type: "string" },
     civilite: { type: "string", enum: ["F", "H"] },
@@ -163,14 +164,15 @@ const uiSchema = {
       label: true
     }
   },
-  ti_id: {
-    "ui:widget": "TisOfMandataireAutoComplete",
-    "ui:title": "Tribunal instance",
-    "ui:placeholder": "Ti",
-    "ui:options": {
-      label: true
-    }
-  },
+  //TODO(Adrien): discus with PO
+  // ti_id: {
+  //   "ui:widget": "TisOfMandataireAutoComplete",
+  //   "ui:title": "Tribunal instance",
+  //   "ui:placeholder": "Ti",
+  //   "ui:options": {
+  //     label: true
+  //   }
+  // },
   etablissement_id: {
     "ui:widget": "EtablissementAutoComplete",
     "ui:title": "Etablissement",
@@ -182,7 +184,7 @@ const uiSchema = {
 };
 
 const TisOfMandataireAutoComplete = ({ items, value, onChange }) => (
-  <AutocompleteState
+  <Autocomplete
     items={items}
     inputProps={{
       style: { width: 300 },
