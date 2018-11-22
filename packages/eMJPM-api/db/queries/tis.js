@@ -35,10 +35,31 @@ const getTiByUserId = userId =>
     .where("users_tis.user_id", parseInt(userId))
     .first();
 
+const getTiByUserIdWithCodePostal = userId =>
+  knex("tis")
+    .select(
+      "tis.id",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude",
+      //for test
+      "tis.code_postal",
+      "tis.telephone"
+    )
+    .innerJoin("users_tis", "users_tis.ti_id", "tis.id")
+    .innerJoin("users", "users_tis.user_id", "users.id")
+    .innerJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "tis.code_postal"
+    )
+    .where("users_tis.user_id", parseInt(userId))
+    .first();
+
 module.exports = {
   getAllTisByMandataire,
   addMandataireTis,
   deleteMandataireTis,
   getTis,
-  getTiByUserId
+  getTiByUserId,
+  getTiByUserIdWithCodePostal
 };
