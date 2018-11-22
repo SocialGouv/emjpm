@@ -13,7 +13,7 @@ import FilterMandataires from "./FilterMandataires";
 
 const Attribution = () => (
   <TileLayer
-    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
   />
 );
@@ -23,7 +23,9 @@ class MapTi extends React.Component {
     filterData: [],
     zoom: 7,
     loading: false,
-    circleSelected: ""
+    circleSelected: "",
+    lat: null,
+    lng: null
   };
 
   mapRef = createRef();
@@ -54,6 +56,15 @@ class MapTi extends React.Component {
 
   componentDidMount() {
     this.fetchData();
+    apiFetch(`/usersTi`)
+      .then(data => {
+        this.setState({
+          lat: data.latitude,
+          lng: data.longitude,
+          zoom: 10
+        });
+      })
+      .catch(console.log);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -90,7 +101,7 @@ class MapTi extends React.Component {
   };
 
   render() {
-    this.mapRef.current && this.mapRef.current.leafletElement.setMaxZoom(10);
+    this.mapRef.current && this.mapRef.current.leafletElement.setMaxZoom(13);
     const { dataFilters, datamesureFilters, isMandataire, filters, coordinates } = this.props;
     const center = getCenter(this.state, coordinates);
     const filterMesure = {
