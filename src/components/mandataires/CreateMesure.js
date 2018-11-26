@@ -35,16 +35,7 @@ const SucessBox = ({ message }) => (
 
 const schema = {
   type: "object",
-  required: [
-    "code_postal",
-    "ville",
-    "civilite",
-    "annee",
-    "date_ouverture",
-    "type",
-    "residence",
-    "ti_id"
-  ],
+  required: ["code_postal", "ville", "civilite", "annee", "date_ouverture", "type", "residence"],
   properties: {
     date_ouverture: {
       type: "string",
