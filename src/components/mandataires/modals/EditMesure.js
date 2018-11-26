@@ -153,7 +153,8 @@ const EditMesure = ({ show, handleHide, formData, onSubmit, ...props }) => {
   const cleanData = {
     ...formData,
     date_ouverture: format(formData.date_ouverture, "YYYY-MM-DD"),
-    annee: parseInt(formData.annee)
+    annee: parseInt(formData.annee),
+    numero_dossier: formData.numero_dossier || ""
   };
   return (
     <Layout show={show} handleHide={handleHide}>
