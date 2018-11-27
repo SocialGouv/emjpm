@@ -1,6 +1,6 @@
 const { sendEmail } = require(".");
 
-const { getMandataireByUserId } = require("../db/queries/mandataires");
+const { getMandataireById } = require("../db/queries/mandataires");
 const EMAIL_RESERVATION_TEXT = (ti, mandataire) =>
   `
 Bonjour ${mandataire.nom + mandataire.prenom || mandataire.etablissement},
@@ -30,7 +30,7 @@ L'équipe e-mjpm
 `;
 
 const reservationEmail = async (ti, mandataire_id) => {
-  const mandataire = await getMandataireByUserId(mandataire_id);
+  const mandataire = await getMandataireById(mandataire_id);
   sendEmail(
     mandataire.email,
     "e-MJPM : une nouvelle mesure vous a été attribué",
