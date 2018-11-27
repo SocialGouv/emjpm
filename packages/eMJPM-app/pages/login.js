@@ -9,11 +9,12 @@ const Title = styled.div`
   padding-bottom: 15px;
   font-weight: bold;
 `;
-
+/*TODO (adrien) : check for ie < 11
 const { detect } = require("detect-browser");
 const browser = detect();
 
-// handle the case where we don't detect the browser
+//handle the case where we don't detect the browser
+
 switch (browser && browser.name) {
   case "ie":
     alert(
@@ -23,6 +24,7 @@ switch (browser && browser.name) {
   default:
     console.log("not supported");
 }
+*/
 
 const LoginContainer = ({ style }) => (
   <div className="container" style={style}>
