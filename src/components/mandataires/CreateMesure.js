@@ -71,7 +71,10 @@ const schema = {
 
     annee: { type: "integer", default: "" },
     numero_dossier: { type: "string", default: "" },
-    residence: { type: "string", enum: ["A Domicile", "En établissement"] }
+    residence: {
+      type: "string",
+      enum: ["A Domicile", "En établissement", "En établissement avec conservation du domicile"]
+    }
   },
   dependencies: {
     residence: {
@@ -80,6 +83,13 @@ const schema = {
           properties: {
             residence: {
               enum: ["A Domicile"]
+            }
+          }
+        },
+        {
+          properties: {
+            residence: {
+              enum: ["En établissement avec conservation du domicile"]
             }
           }
         },
