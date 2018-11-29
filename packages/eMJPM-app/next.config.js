@@ -11,7 +11,7 @@ require("dotenv").config({
 
 module.exports = withTM(withCSS(
   withImages({
-    transpileModules: ["color"],
+    transpileModules: ["color","strict-uri-encode","decode-uri-component","query-string"],
     webpack: config => {
       config.plugins.push(new webpack.EnvironmentPlugin(process.env));
       return config;
