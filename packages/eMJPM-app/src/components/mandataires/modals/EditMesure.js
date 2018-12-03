@@ -44,7 +44,7 @@ const schema = {
     // cabinet: { type: "string", enum: Cabinet },
     residence: {
       type: "string",
-      enum: ["A domicile", "En établissement"]
+      enum: ["A domicile", "En établissement", "En établissement avec conservation du domicile"]
     },
     code_postal: { type: "string" },
     ville: { type: "string" },

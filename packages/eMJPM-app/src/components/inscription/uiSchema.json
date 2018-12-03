@@ -1,13 +1,11 @@
 {
   "pass1": {
     "ui:title": "Mot de passe",
-    "ui:placeholder": "10 caractères minimum",
-    "ui:widget": "password"
+    "ui:placeholder": "10 caractères minimum"
   },
   "pass2": {
     "ui:title": "Répéter le mot de passe",
-    "ui:placeholder": "10 caractères minimum",
-    "ui:widget": "password"
+    "ui:placeholder": "10 caractères minimum"
   },
   "username": {
     "ui:title": "Identifiant (vous servira pour vous connecter sur E-MJPM)",
