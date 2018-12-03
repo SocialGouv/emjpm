@@ -3,30 +3,30 @@ const { sendEmail } = require(".");
 const { getMandataireById } = require("../db/queries/mandataires");
 const EMAIL_RESERVATION_TEXT = (ti, mandataire) =>
   `
-Bonjour ${mandataire.nom + mandataire.prenom || mandataire.etablissement},
+Madame, Monsieur,
 
-Une nouvelle mesure vous a été attribuée par le ${ti.etablissement} - ${
-    ti.cabinet
-  }
+Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet ||
+    ""}, a décidé de vous confier une nouvelle mesure. Les détails de cette dernière sont d’ores et déjà disponibles sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a>, onglet « mesures en attente ».
 
-Rendez vous sur e-mjpm pour activer cette mesure.
+Quand celle-ci vous sera officiellement notifiée par courrier, vous pourrez l’ajouter dans vos mesures en cours.
 
-A bientôt,
-L'équipe e-mjpm
+À bientôt
+
+L’équipe e-mjpm
 `;
 
 const EMAIL_RESERVATION_HTML = (ti, mandataire) =>
   `
-Bonjour ${mandataire.nom + mandataire.prenom || mandataire.etablissement},<br>
-<br>
-Une nouvelle mesure vous a été attribuée par le ${
-    ti.etablissement
-  } ${ti.cabinet || ""}
+Madame, Monsieur,
 <br><br>
-Rendez vous sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a> pour activer cette mesure.
+Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet ||
+    ""}, a décidé de vous confier une nouvelle mesure. Les détails de cette dernière sont d’ores et déjà disponibles sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a>, onglet « mesures en attente ».
 <br><br>
-A bientôt,<br>
-L'équipe e-mjpm
+Quand celle-ci vous sera officiellement notifiée par courrier, vous pourrez l’ajouter dans vos mesures en cours.
+<br><br>
+À bientôt
+<br><br>
+L’équipe e-mjpm
 `;
 
 const reservationEmail = async (ti, mandataire_id) => {
