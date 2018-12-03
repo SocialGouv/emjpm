@@ -53,7 +53,7 @@ router.post(
         addDataLogs({
           user_id: req.user.id,
           action: "connexion",
-          result: "no success"
+          result: "fail"
         });
         console.log(e);
         return res.status(500).json({ success: false });

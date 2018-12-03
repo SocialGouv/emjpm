@@ -110,7 +110,7 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
             addDataLogs({
               user_id: user.id,
               action: "connexion",
-              result: "no success"
+              result: "fail"
             });
             return console.log(e);
           });
