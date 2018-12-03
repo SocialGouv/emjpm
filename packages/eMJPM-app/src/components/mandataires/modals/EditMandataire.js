@@ -82,6 +82,9 @@ const uiSchema = {
   },
   nb_secretariat: {
     "ui:placeholder": "Secrétariat : nombre d'ETP"
+  },
+  zip: {
+    "ui:widget": "textarea"
   }
 };
 
