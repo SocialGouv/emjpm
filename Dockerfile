@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:9.1
 
 RUN mkdir -p /app
 
