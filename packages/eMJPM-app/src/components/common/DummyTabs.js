@@ -1,5 +1,7 @@
 import styled from "styled-components";
+import Head from "next/head";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { PageTracker } from "./PageTracker";
 
 const IconWrapper = styled.div`
   min-width: 20px;
@@ -51,7 +53,13 @@ const DummyTabs = ({ tabs }) => (
       ))}
     </TabList>
     {tabs.map(tab => (
-      <TabPanel key={tab.text}>{tab.content}</TabPanel>
+      <TabPanel key={tab.text}>
+        <PageTracker url={tab.url} />
+        <Head>
+          <title>{tab.text}</title>
+        </Head>
+        {tab.content}
+      </TabPanel>
     ))}
   </Tabs>
 );
