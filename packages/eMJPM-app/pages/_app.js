@@ -1,6 +1,8 @@
 import App, { Container } from "next/app";
 import React from "react";
 
+import piwik from "../src/piwik";
+
 // all global css
 import "bootstrap/dist/css/bootstrap.css";
 import "react-tabs/style/react-tabs.css";
@@ -28,4 +30,22 @@ export default class MyApp extends App {
       </Container>
     );
   }
+  componentDidMount() {
+    piwikSetup();
+  }
+
+}
+
+//
+
+function piwikSetup() {
+  const isBrowser = typeof document !== undefined;
+  if (!isBrowser) {
+    return;
+  }
+
+  piwik.push(["setCustomUrl", document.location.href]);
+  piwik.push(["setDocumentTitle", document.title]);
+  piwik.push(["trackPageView"]);
+  piwik.push(["enableLinkTracking"]);
 }
