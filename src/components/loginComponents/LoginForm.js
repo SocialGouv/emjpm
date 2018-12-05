@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Router from "next/router";
 
 import piwik from "../../piwik";
+import { getJWTPayloadFormLocalStorageIdToken } from "../../token";
 
 const API_URL = process.env.API_URL;
 
@@ -105,7 +106,7 @@ export const LoginFormView = ({ formData, onSubmit, error, status }) => (
           "Me connecter"}
       </button>
       <br />
-      <a href="/forgot-password">J'ai oublié mon mot de passe</a>
+      <a href="/forgot-password">J&apos;ai oublié mon mot de passe</a>
       <ErrorBox message={error} />
       <hr style={{ marginTop: 20 }} />
       <a href="mailto:contact@emjpm.beta.gouv.fr?subject=eMJPM&body=Bonjour,">
@@ -160,6 +161,11 @@ class LoginForm extends React.Component {
           .then(json => {
             this.setToken(json.token);
             piwik.push(["trackEvent", "login", "success"]);
+
+            const { username, type } = getJWTPayloadFormLocalStorageIdToken();
+            piwik.push(["setUserId", username]);
+            piwik.push(["setCustomVariable", 1, "type", type, "visit"]);
+
             Router.push(json.url);
             this.setState({
               status: "success",
