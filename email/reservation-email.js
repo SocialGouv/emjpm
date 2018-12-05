@@ -5,8 +5,9 @@ const EMAIL_RESERVATION_TEXT = (ti, mandataire) =>
   `
 Madame, Monsieur,
 
-Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet ||
-    ""}, a décidé de vous confier une nouvelle mesure. Les détails de cette dernière sont d’ores et déjà disponibles sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a>, onglet « mesures en attente ».
+Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet || ""}, a décidé de vous confier une nouvelle mesure.
+Les détails de cette dernière sont d’ores et déjà disponibles sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a>,
+onglet « mesures en attente ».
 
 Quand celle-ci vous sera officiellement notifiée par courrier, vous pourrez l’ajouter dans vos mesures en cours.
 
@@ -19,8 +20,9 @@ const EMAIL_RESERVATION_HTML = (ti, mandataire) =>
   `
 Madame, Monsieur,
 <br><br>
-Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet ||
-    ""}, a décidé de vous confier une nouvelle mesure. Les détails de cette dernière sont d’ores et déjà disponibles sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a>, onglet « mesures en attente ».
+Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet || ""}, a décidé de vous confier une nouvelle mesure.
+Les détails de cette dernière sont d’ores et déjà disponibles sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a>,
+onglet « mesures en attente ».
 <br><br>
 Quand celle-ci vous sera officiellement notifiée par courrier, vous pourrez l’ajouter dans vos mesures en cours.
 <br><br>
