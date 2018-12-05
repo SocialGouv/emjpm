@@ -6,7 +6,6 @@ import { show } from "redux-modal";
 
 import { Button, Autocomplete, SelectionManager } from "..";
 import apiFetch from "../communComponents/Api";
-import piwik from "../../piwik";
 
 import { updateMandataire } from "./actions/mandataire";
 import Fiche from "./Fiche";
