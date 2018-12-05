@@ -1,4 +1,5 @@
 import Router from "next/router";
+import piwik from "../../piwik";
 
 // todo: hack: force embedding the SVG due to some webpack+next+static issues in a gh-pages env
 const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm.png");
@@ -6,6 +7,7 @@ const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm.png
 const doLogout = () => {
   // Clear user token and profile data from localStorage
   localStorage.removeItem("id_token");
+  piwik.push(["resetUserId"]);
   Router.push("/login");
 };
 
