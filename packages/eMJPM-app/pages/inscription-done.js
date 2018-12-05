@@ -1,8 +1,10 @@
 import Router from "next/router";
 import styled from "styled-components";
+import Head from "next/head";
 
 import Navigation from "../src/components/communComponents/Navigation";
 import Footer from "../src/components/communComponents/Footer";
+import { PageTracker } from "../src/components/common/PageTracker";
 
 const backLogin = () => {
   Router.push("/");
@@ -16,6 +18,12 @@ const Connection = styled.a`
 `;
 const Inscription = () => (
   <div style={{ display: "block", backgroundColor: "#cad4de" }}>
+    <Head>
+      <title>Inscription faite</title>
+    </Head>
+
+    <PageTracker url="/inscription-done" />
+
     <Navigation />
 
     <div style={{ textAlign: "center", fontSize: "1.3em", marginTop: 100 }}>

@@ -43,16 +43,19 @@ class Ti extends React.Component {
       {
         text: "Majeurs Protégés",
         icon: <Users />,
+        url: "/tis/majeurs",
         content: <MapTable fetch={`/mesures/filters`} />
       },
       {
         text: "Mandataires",
         icon: <Users />,
+        url: "/tis/mandataires",
         content: <MapTable fetch={`/mandataires/filters`} isMandataire={true} />
       },
       {
         text: "Mesures attribuées",
         icon: <Archive />,
+        url: "/tis/mesures",
         content: (
           <TableMesures
             fetch={() => apiFetch(`/mesures/getAllMesuresByTis`)}

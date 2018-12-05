@@ -4,8 +4,7 @@ import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
 
-import piwik from "../../piwik";
-import { getJWTPayloadFormLocalStorageIdToken } from "../../token";
+import piwik, { trackUser } from "../../piwik";
 
 const API_URL = process.env.API_URL;
 
@@ -162,9 +161,7 @@ class LoginForm extends React.Component {
             this.setToken(json.token);
             piwik.push(["trackEvent", "login", "success"]);
 
-            const { username, type } = getJWTPayloadFormLocalStorageIdToken();
-            piwik.push(["setUserId", username]);
-            piwik.push(["setCustomVariable", 1, "type", type, "visit"]);
+            trackUser();
 
             Router.push(json.url);
             this.setState({

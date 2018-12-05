@@ -1,7 +1,6 @@
 import { User, UserCheck } from "react-feather";
 import TableUser from "./TableUser";
 import { DummyTabs } from "..";
-import TableMesures from "../mandataires/TableMesures";
 
 const tabs = type =>
   [
@@ -9,6 +8,7 @@ const tabs = type =>
       text: "Actifs",
       type: "mandataire",
       icon: <UserCheck />,
+      url: "/admin/users/actifs",
       content: (
         <TableUser
           type={type}
@@ -21,6 +21,7 @@ const tabs = type =>
       text: "En attente de validation",
       icon: <User />,
       type: "mandataire",
+      url: "/admin/users/en-attente",
       content: (
         <TableUser
           type={type}
@@ -33,6 +34,7 @@ const tabs = type =>
       text: "Actifs",
       icon: <UserCheck />,
       type: "ti",
+      url: "/admin/users/actifs/ti",
       content: (
         <TableUser
           type={type}
@@ -45,6 +47,7 @@ const tabs = type =>
       text: "En attente de validation",
       icon: <User />,
       type: "ti",
+      url: "/admin/users/en-attente/ti",
       content: (
         <TableUser
           type={type}
