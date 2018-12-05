@@ -2,6 +2,7 @@ const express = require("express");
 const { typeRequired } = require("../auth/_helpers");
 
 const queries = require("../db/queries/mesures");
+const { addDataLogs } = require("../db/queries/logsData");
 
 const router = express.Router();
 
@@ -41,7 +42,19 @@ router.post(
         });
       })
       .then(() => updateCountMesures(mandataire.id))
+      .then(() =>
+        addDataLogs({
+          user_id: req.user.id,
+          action: "import excel",
+          result: "success"
+        })
+      )
       .catch(e => {
+        addDataLogs({
+          user_id: req.user.id,
+          action: "connexion",
+          result: "fail"
+        });
         console.log(e);
         return res.status(500).json({ success: false });
       });
