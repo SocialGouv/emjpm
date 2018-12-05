@@ -28,6 +28,7 @@ class MandataireTabs extends React.Component {
     const tabs = [
       {
         text: "Mesures en cours",
+        url: "/mandataires/mesures/en-cours",
         icon: <PillDispo />,
         content: (
           <React.Fragment>
@@ -49,11 +50,13 @@ class MandataireTabs extends React.Component {
       },
       {
         text: "Vue Carte",
+        url: "/mandataires/vue-carte",
         icon: <Map />,
         content: <OpenStreeMap getPromise={() => apiFetch(`/mandataires/1/mesuresForMaps`)} />
       },
       {
         text: "Mesures éteintes",
+        url: "/mandataires/mesures/eteintes",
         icon: <UserMinus />,
         content: (
           <TableMesures
@@ -72,6 +75,7 @@ class MandataireTabs extends React.Component {
       },
       {
         text: "Mesures en attente",
+        url: "/mandataires/mesures/en-attente",
         icon: <Clock />,
         content: (
           <TableMesures
@@ -91,11 +95,13 @@ class MandataireTabs extends React.Component {
       },
       {
         text: "Mes informations",
+        url: "/mandataires/mes-informations",
         icon: <Home />,
         content: <Profile />
       },
       {
         text: "Importer",
+        url: "/mandataires/importer",
         icon: <FilePlus />,
         content: <InputFiles />
       }
