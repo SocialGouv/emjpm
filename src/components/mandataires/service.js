@@ -9,6 +9,7 @@ class ServiceTabs extends React.Component {
     const tabs = [
       {
         text: "Mes informations",
+        url: "/mandataires/mes-infos",
         icon: <Home />,
         content: <Profile />
       }

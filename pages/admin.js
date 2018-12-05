@@ -6,6 +6,7 @@ import Users from "../src/components/admin/Users";
 const tabs = [
   {
     text: "Utilisateurs",
+    url: "/admin/users",
     icon: <User />,
     content: (
       <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
@@ -16,6 +17,7 @@ const tabs = [
   },
   {
     text: "TI",
+    url: "/admin/ti",
     icon: <Home />,
     content: (
       <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>

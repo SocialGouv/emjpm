@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import Head from "next/head";
 
 import LoginForm from "../src/components/loginComponents/LoginForm";
 import { Layout } from "../src/components";
+import { PageTracker } from "../src/components/common/PageTracker";
 
 const Title = styled.div`
   text-align: left;
@@ -35,10 +37,18 @@ const LoginContainer = ({ style }) => (
   </div>
 );
 
-const LoginPage = () => (
-  <Layout inscription>
-    <LoginContainer style={{ marginTop: 100 }} />{" "}
-  </Layout>
-);
+class LoginPage extends React.Component {
+  render() {
+    return (
+      <Layout inscription>
+        <Head>
+          <title>Login</title>
+        </Head>
+        <PageTracker url="/login" />
+        <LoginContainer style={{ marginTop: 100 }} />{" "}
+      </Layout>
+    );
+  }
+}
 
 export default LoginPage;

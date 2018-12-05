@@ -1,8 +1,10 @@
 import styled from "styled-components";
+import Head from "next/head";
 
 import Navigation from "../src/components/communComponents/Navigation";
 import Footer from "../src/components/communComponents/Footer";
 import Form from "../src/components/loginComponents/resetPasswordForm";
+import { PageTracker } from "../src/components/common/PageTracker";
 
 const ResetPasswordContainer = ({ style }) => (
   <div className="container" style={style}>
@@ -14,6 +16,12 @@ const ResetPasswordContainer = ({ style }) => (
 
 const ResetPassword = () => (
   <div style={{ display: "block", backgroundColor: "#cad4de", minHeight: "100%" }}>
+    <Head>
+      <title>Récupérer votre compte</title>
+    </Head>
+
+    <PageTracker url="/reset-password" />
+
     <Navigation />
     <ResetPasswordContainer style={{ marginTop: 100 }} />
     <Footer fixed />
