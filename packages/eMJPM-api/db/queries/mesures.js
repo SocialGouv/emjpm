@@ -223,7 +223,8 @@ const getAllMesuresByTis = ti_id =>
     .innerJoin("users", "mandataires.user_id", "users.id")
     .where({
       "mandataire_tis.ti_id": parseInt(ti_id),
-      "users.active": true
+      "users.active": true,
+      "mesures.status": "Mesure en attente"
     });
 
 const getAllMesuresByPopUpForMandataire = ti_id =>
