@@ -91,7 +91,7 @@ class Form extends React.Component {
               render={({ status, result }) => (
                 <div style={{ margin: "20px 0" }}>
                   <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
-                    Choisissez les tribunaux ou vous êtes agréé :
+                    Choisissez les tribunaux où vous êtes agréés :
                   </div>
                   {status === "success" && <TiSelector onChange={this.setTis} tis={result[0]} />}
                   {status === "error" && <div>Impossible de charger la liste des Tribunaux</div>}
