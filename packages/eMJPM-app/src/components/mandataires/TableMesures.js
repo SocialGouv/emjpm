@@ -192,7 +192,7 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
-    Header: "Status",
+    Header: "Statut",
     id: "status",
     accessor: d => d.status,
     style: { textAlign: "center", alignSelf: "center" }

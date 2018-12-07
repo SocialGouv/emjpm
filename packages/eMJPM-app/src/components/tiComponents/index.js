@@ -53,7 +53,7 @@ class Ti extends React.Component {
         content: <MapTable fetch={`/mandataires/filters`} isMandataire={true} />
       },
       {
-        text: "Mesures attribuées",
+        text: "Mesures réservées",
         icon: <Archive />,
         url: "/tis/mesures",
         content: (
