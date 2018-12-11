@@ -93,9 +93,9 @@ export const ResetPasswordView = ({ formData, onSubmit, error, status }) => (
         type="submit"
         className="btn btn-success"
       >
-        {(status === "loading" && "Authentification...") ||
-          (status === "success" && "Redirection...") ||
-          "Me connecter"}
+        {(status === "loading" && "Recherche...") ||
+          (status === "success" && "Succès...") ||
+          "Réinitialiser mon mot de passe"}
       </button>
       <br />
       <ErrorBox message={error} />
