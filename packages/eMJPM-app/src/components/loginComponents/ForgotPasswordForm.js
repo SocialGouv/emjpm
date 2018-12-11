@@ -46,6 +46,9 @@ const StyledForm = styled(Form)`
   legend {
     padding-left: 0;
   }
+  input {
+    width: 300px;
+  }
   .field-string {
     display: block !important;
   }
@@ -83,9 +86,9 @@ export const ForgotPasswordView = ({ formData, onSubmit, error, status }) => (
         type="submit"
         className="btn btn-success"
       >
-        {(status === "loading" && "Authentification...") ||
-          (status === "success" && "Redirection...") ||
-          "Me connecter"}
+        {(status === "loading" && "Recherche...") ||
+          (status === "success" && "Succès...") ||
+          "Demander mon mot de passe"}
       </button>
       <br />
       <ErrorBox message={error} />
@@ -124,19 +127,18 @@ class ForgotPassword extends React.Component {
         piwik.push(["trackEvent", "has forgot his/her password", formData.email]);
 
         doForgotPassword(formData)
-          .catch(e => {
-            this.setState({
-              status: "error",
-              error: "Impossible de trouver l'email"
-            });
-            throw e;
-          })
           .then(() => {
             alert("Un email vient de vous être envoyé");
             Router.push("/login");
             this.setState({
               status: "success",
               error: null
+            });
+          })
+          .catch(e => {
+            this.setState({
+              status: "error",
+              error: "Impossible de trouver l'email"
             });
           });
       }
