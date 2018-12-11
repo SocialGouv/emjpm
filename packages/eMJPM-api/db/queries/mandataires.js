@@ -83,6 +83,8 @@ const getMesuresMap = mandataireId =>
       "mesures.code_postal",
       "geolocalisation_code_postal.code_postal"
     )
+    .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
+    .innerJoin("users", "mandataires.user_id", "users.id")
     .where({
       mandataire_id: parseInt(mandataireId),
       status: "Mesure en cours",
