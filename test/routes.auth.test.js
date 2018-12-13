@@ -233,6 +233,16 @@ describe("routes : auth", () => {
           console.log("e", e);
           throw new Error("should not fail");
         }));
+    it("should fail when invalid user email", () =>
+      chai
+        .request(server)
+        .post("/auth/forgot_password")
+        .send({
+          email: "udxxxx@ud.com"
+        })
+        .then(async res => {
+          res.status.should.eql(500);
+        }));
   });
   describe("POST /auth/reset-password", () => {
     it("shouldn't reset a password when inputs do not match", () =>

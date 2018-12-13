@@ -61,8 +61,8 @@ exports.seed = function(knex, Promise) {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
           etablissement: "test43",
-          email: "panam2@paris.com",
-          prenom: "Doug",
+          email: "marcel@paris.com",
+          prenom: "Marcel",
           code_postal: "10000",
           ville: "Paris",
           telephone: "0237100000",
