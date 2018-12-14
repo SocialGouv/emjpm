@@ -14,7 +14,6 @@ const doLogin = formData => {
     credentials: "include",
     method: "POST",
     headers: {
-      //  Accept: "application/json",
       "Content-Type": "application/json"
     },
     body: JSON.stringify(formData)
@@ -149,14 +148,6 @@ class LoginForm extends React.Component {
       },
       () => {
         doLogin(formData)
-          .catch(e => {
-            piwik.push(["trackEvent", "login", "error"]);
-            this.setState({
-              status: "error",
-              error: "Impossible de se connecter"
-            });
-            throw e;
-          })
           .then(json => {
             this.setToken(json.token);
             piwik.push(["trackEvent", "login", "success"]);
@@ -168,6 +159,14 @@ class LoginForm extends React.Component {
               status: "success",
               error: null
             });
+          })
+          .catch(e => {
+            piwik.push(["trackEvent", "login", "error"]);
+            this.setState({
+              status: "error",
+              error: "Impossible de se connecter"
+            });
+            //throw e;
           });
       }
     );

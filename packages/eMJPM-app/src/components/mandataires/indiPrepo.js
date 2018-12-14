@@ -11,16 +11,7 @@ import Header from "./Header";
 import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
 
-// due to leaflet + SSR
-const OpenStreeMap = dynamic({
-  modules: props => ({
-    MapMesures: import("./MapMesures")
-  }),
-  loading: () => <LoadingMessage />,
-  render: (props, { MapMesures }) => {
-    return <MapMesures {...props} />;
-  }
-});
+const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 
 class MandataireTabs extends React.Component {
   render() {

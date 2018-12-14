@@ -19,13 +19,7 @@ import { FicheMandataireModal, ModalMesureValidation, ModalMesureReservation } f
 import TableMesures from "../mandataires/TableMesures";
 import apiFetch from "../communComponents/Api";
 
-const MapTable = dynamic({
-  modules: props => ({
-    MapTi: import("./MapTi")
-  }),
-  loading: () => <LoadingMessage />,
-  render: (props, { MapTi }) => <MapTi {...props} />
-});
+const MapTable = dynamic(() => import("./MapTi"), { ssr: false });
 
 class Ti extends React.Component {
   componentDidMount() {
