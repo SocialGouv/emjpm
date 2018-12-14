@@ -28,13 +28,6 @@ const tabs = [
   }
 ];
 
-const AdminPart = () => (
-  <div>
-    <h2>Administration e-MJPM</h2>
-    <DummyTabs tabs={tabs} />
-  </div>
-);
-
 const AdminPage = () => (
   <Layout logout>
     <h2 style={{ margin: "30px 0" }}>Administration e-MJPM</h2>

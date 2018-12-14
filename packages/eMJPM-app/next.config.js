@@ -9,12 +9,14 @@ require("dotenv").config({
   path: process.env.NODE_ENV === "production" ? "./.env.production" : "./.env"
 });
 
-module.exports = withTM(withCSS(
-  withImages({
-    transpileModules: ["color","strict-uri-encode","decode-uri-component","query-string"],
-    webpack: config => {
-      config.plugins.push(new webpack.EnvironmentPlugin(process.env));
-      return config;
-    }
-  })
-));
+module.exports = withTM(
+  withCSS(
+    withImages({
+      transpileModules: ["color", "strict-uri-encode", "decode-uri-component", "query-string"],
+      webpack: config => {
+        config.plugins.push(new webpack.EnvironmentPlugin(process.env));
+        return config;
+      }
+    })
+  )
+);

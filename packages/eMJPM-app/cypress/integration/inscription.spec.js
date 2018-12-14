@@ -22,10 +22,6 @@ describe("Inscription", () => {
       .get("input[id='root_username']")
       .should("have.length", 1);
 
-    cy.get("[data-cy='form-inscription']")
-      .get("input[id='root_etablissement']")
-      .should("have.length", 0);
-
     cy.get("input[type='radio'][value='prepose']")
       .first()
       .click();
@@ -34,20 +30,12 @@ describe("Inscription", () => {
       .get("input[id='root_username']")
       .should("have.length", 1);
 
-    cy.get("[data-cy='form-inscription']")
-      .get("input[id='root_etablissement']")
-      .should("have.length", 1);
-
     cy.get("input[type='radio'][value='service']")
       .first()
       .click();
 
     cy.get("[data-cy='form-inscription']")
       .get("input[id='root_username']")
-      .should("have.length", 1);
-
-    cy.get("[data-cy='form-inscription']")
-      .get("input[id='root_etablissement']")
       .should("have.length", 1);
   });
 
@@ -219,7 +207,7 @@ describe("Inscription", () => {
     it("should register tis", function() {
       cy.loginByForm("admin", "admin");
       cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 0);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
 
       cy.visit("/inscription");
 
@@ -252,7 +240,7 @@ describe("Inscription", () => {
       });
 
       Object.keys(dataSelect).forEach(key => {
-        cy.get(`input[id='${key}']`).select(dataSelect[key]);
+        cy.get(`select[id='${key}']`).select(dataSelect[key]);
       });
 
       cy.get("[data-cy='form-inscription'] button[type='submit']").click();
@@ -262,26 +250,28 @@ describe("Inscription", () => {
       cy.location("pathname", { timeout: 10000 }).should("eq", "/inscription-done");
 
       cy.loginByForm("admin", "admin");
+      cy.get("[data-cy='TI']").click();
       cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
     });
     it("account should not login before activation", function() {
       cy.loginByForm("username-ti", "password100");
-      cy.get(".alert-danger").should("have.length", 0);
+      cy.get(".alert-danger").should("have.length", 1);
     });
     it("admin should be able to activate account", function() {
       cy.loginByForm("admin", "admin");
+      cy.get("[data-cy='TI']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 1);
       cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 0);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='UserCellAction']")
         .last()
         .click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 0);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='Actifs']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 0);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
     });
     it("account should login after activation", function() {
       cy.loginByForm("username-ti", "password100");
