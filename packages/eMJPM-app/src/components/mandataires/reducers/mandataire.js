@@ -1,3 +1,7 @@
+//
+
+import piwik from "react-piwik";
+
 const MANDATAIRE_INITIAL_STATE = {
   // store some user mandataire data
   profile: {
@@ -12,6 +16,17 @@ const MANDATAIRE_INITIAL_STATE = {
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
   switch (action.type) {
     case "MANDATAIRE_PROFILE_UPDATED":
+      // Track when mandataires are changing them maximum desired measures
+      if (state.profile.dispo_max !== action.data.dispo_max) {
+        piwik.push([
+          "trackEvent",
+          "Mandataire",
+          "Updated profile",
+          "Max desired measures",
+          action.data.dispo_max
+        ]);
+      }
+
       return {
         ...state,
         profile: action.data
