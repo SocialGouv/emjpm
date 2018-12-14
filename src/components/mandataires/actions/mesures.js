@@ -1,4 +1,5 @@
 import { hide } from "redux-modal";
+import piwik from "react-piwik";
 
 import apiFetch from "../../communComponents/Api";
 import { mandatairesUpdated } from "../../tiComponents/actions/mandataire";
@@ -73,6 +74,7 @@ export const updateMesure = data => dispatch =>
     .then(json => {
       dispatch(hide("EditMesure"));
       dispatch(mesureUpdated(json));
+      piwik.push(["trackEvent", "Mesures", "Updated", data.id]);
     })
     .catch(e => {
       console.log(e);
@@ -86,6 +88,7 @@ export const updateMesureAttente = data => dispatch => {
     .then(json => {
       dispatch(hide("ValiderMesureEnAttente"));
       dispatch(mesureUpdated(json));
+      piwik.push(["trackEvent", "Mesures", "Validated", data.id]);
     })
     .catch(e => {
       console.log(e);
@@ -99,6 +102,7 @@ export const closeMesure = data => dispatch =>
     .then(json => {
       dispatch(hide("CloseMesure"));
       dispatch(mesureClosed(json));
+      piwik.push(["trackEvent", "Mesures", "Closed", data.id]);
     })
     .catch(e => {
       console.log(e);
@@ -111,6 +115,7 @@ export const reactivateMesure = data => dispatch =>
     .then(json => {
       dispatch(hide("ReactivateMesure"));
       dispatch(mesureReactivated(json));
+      piwik.push(["trackEvent", "Mesures", "Reactivated", data.id]);
     })
     .catch(e => {
       console.log(e);
@@ -122,6 +127,7 @@ export const createMesureSave = data => dispatch =>
   createMesureApi(data)
     .then(json => {
       dispatch(mesureCreated(json));
+      piwik.push(["trackEvent", "Mesures", "Created"]);
     })
     .catch(e => {
       console.log("ERROR", e);
