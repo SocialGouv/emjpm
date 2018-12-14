@@ -5,6 +5,7 @@ const ALLOWED_FILTERS = ["users.active", "users.type"];
 
 const getMandataires = ({ filters = {}, offset = 0, limit = 50 } = {}) =>
   knex("mandataires")
+    //.debug()
     .select(
       "users.id",
       "nom",
