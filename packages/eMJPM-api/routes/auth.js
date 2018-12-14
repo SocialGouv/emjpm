@@ -174,7 +174,7 @@ router.post("/forgot_password", (req, res, next) => {
       if (!user) {
         throw new Error("user not found");
       }
-      updateUser(user.user_id, {
+      return updateUser(user.user_id, {
         reset_password_token: token,
         reset_password_expires: Date.now() + 7200000
       });
@@ -186,7 +186,10 @@ router.post("/forgot_password", (req, res, next) => {
       )
     )
     .then(() => res.status(200).json())
-    .catch(() => res.status(500).json());
+    .catch(e => {
+      console.log(e);
+      res.status(500).json();
+    });
 });
 //7200000
 /**
