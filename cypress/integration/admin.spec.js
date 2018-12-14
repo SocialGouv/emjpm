@@ -19,6 +19,10 @@ describe("Admins", () => {
       .find(".rt-td")
       .first()
       .should("contain", "Julien");
+    cy.get(".ReactTable .rt-tr-group:nth-child(3)")
+      .find(".rt-td")
+      .first()
+      .should("contain", "Marcel");
   });
   it("should show 1 inactive users", function() {
     cy.get("[data-cy='En attente de validation']").click();
@@ -35,16 +39,16 @@ describe("Admins", () => {
       .click();
     cy.getCellAction().should("contain", "Activer");
   });
-  it("user should be deativated", function() {
+  it("user should be deactivated", function() {
     cy.getCellAction().should("have.length", 2);
     cy.get("[data-cy='En attente de validation']").click();
     cy.getCellAction().should("have.length", 2);
-    cy.get(".ReactTable .rt-tr-group:nth-child(2)")
+    cy.get(".ReactTable .rt-tr-group:nth-child(1)")
       .find(".rt-td")
       .first()
       .should("contain", "Adrien");
   });
-  it("should show 1 active users", function() {
+  it("should show 2 active users", function() {
     cy.getCellAction().should("have.length", 2);
     cy.get(".ReactTable .rt-tr-group:nth-child(1)")
       .find(".rt-td")
@@ -55,10 +59,10 @@ describe("Admins", () => {
     cy.get("[data-cy='En attente de validation']").click();
     cy.getCellAction().should("have.length", 2);
     cy.getCellAction()
-      .first()
+      .last()
       .should("contain", "Activer");
     cy.getCellAction()
-      .first()
+      .last()
       .click();
     cy.getCellAction().should("contain", "Désactiver");
   });

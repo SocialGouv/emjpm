@@ -11,16 +11,5 @@
       }
     ]
   ],
-  "env": {
-    "production": {
-      "plugins": ["@babel/plugin-transform-flow-strip-types"]
-    },
-    "development": {
-      "plugins": ["@babel/plugin-transform-flow-strip-types"]
-    },
-    "test": {
-      "presets": ["env", "react"],
-      "plugins": ["@babel/plugin-transform-flow-strip-types"]
-    }
-  }
+  "plugins": ["@babel/plugin-transform-flow-strip-types"]
 }
