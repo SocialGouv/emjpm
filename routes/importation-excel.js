@@ -52,7 +52,7 @@ router.post(
       .catch(e => {
         addDataLogs({
           user_id: req.user.id,
-          action: "connexion",
+          action: "import excel",
           result: "fail"
         });
         console.log(e);
