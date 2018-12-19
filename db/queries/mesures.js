@@ -212,7 +212,7 @@ const getAllMesuresByTis = ti_id =>
     .from("mesures")
     .select(
       "mesures.*",
-      knex.raw("mandataires.etablissement as manda,users.type")
+      knex.raw("mandataires.etablissement as manda")
     )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
     .innerJoin(
