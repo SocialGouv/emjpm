@@ -6,8 +6,8 @@ import { bindActionCreators } from "redux";
 import { format } from "date-fns";
 import { updateMesure } from "../actions/mesures";
 import Layout from "./Layout";
-import Cabinet from "../../common/Cabinet";
 import { Autocomplete } from "../..";
+import { typeMesure, residence, civilite, Cabinet } from "../../common/nomination";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -20,35 +20,18 @@ const schema = {
     },
     type: {
       type: "string",
-      enum: [
-        "Tutelle",
-        "Curatelle",
-        "Sauvegarde de justice",
-        "Mesure ad hoc",
-        "MAJ",
-        "tutelle aux biens",
-        "tutelle à la personne",
-        "tutelle aux biens et à la personne",
-        "curatelle simple aux biens",
-        "curatelle simple à la personne",
-        "curatelle simple aux biens et à la personne",
-        "curatelle renforcée aux biens",
-        "curatelle renforcée à la personne",
-        "curatelle renforcée aux biens et à la personne",
-        "sauvegarde de justice",
-        "sauvegarde de justice avec mandat spécial"
-      ]
+      enum: typeMesure
     },
     //TODO(Adrien): discus with PO
     // ti_id: { type: "number" },
     // cabinet: { type: "string", enum: Cabinet },
     residence: {
       type: "string",
-      enum: ["A domicile", "En établissement", "En établissement avec conservation du domicile"]
+      enum: residence
     },
     code_postal: { type: "string" },
     ville: { type: "string" },
-    civilite: { type: "string", enum: ["F", "H"] },
+    civilite: { type: "string", enum: civilite },
     annee: { type: "integer", maxLength: 4 },
     numero_dossier: { type: "string", default: " " }
   }
@@ -122,6 +105,13 @@ const uiSchema = {
     classNames: "input_mesure_type",
     "ui:options": {
       label: false
+    }
+  },
+  numero_dossier: {
+    "ui:autofocus": true,
+    "ui:title": "Numéro de dossier",
+    "ui:options": {
+      label: true
     }
   }
 };
