@@ -75,7 +75,7 @@ const ModalMesureReservation = ({
   return (
     <Layout show={show} handleHide={handleHide}>
       <div style={{ padding: "30px" }}>
-        <h2>Attribution d'une nouvelle mesure</h2>
+        <h2>Attribution d&apos;une nouvelle mesure</h2>
         <b>{reservationMandataire.etablissement}</b>
         <br />
         {reservationMandataire.type}
