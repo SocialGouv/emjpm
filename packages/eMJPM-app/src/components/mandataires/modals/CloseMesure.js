@@ -32,8 +32,8 @@ const CloseMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
         <h3>Eteindre la mesure? </h3>
         <br />
         <p style={{ padding: 20 }}>
-          Une fois cette opération effectuée, vous retrouverez cette mesure éteinte dans l'onglet
-          corresponant, mais vous ne pourrez plus la modifier.
+          Une fois cette opération effectuée, vous retrouverez cette mesure éteinte dans
+          l&apos;onglet correspondant, mais vous ne pourrez plus la modifier.
         </p>
         <Form
           schema={schema}

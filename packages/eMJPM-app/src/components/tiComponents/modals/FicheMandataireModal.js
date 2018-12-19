@@ -169,7 +169,7 @@ class FicheMandataireModal extends React.Component {
             <div>
               {allTisForOneMandataire && (
                 <React.Fragment>
-                  <b>Tribunaux d'instance </b> <br />
+                  <b>Tribunaux d&apos;instance </b> <br />
                   {allTisForOneMandataire.map(ti => (
                     <div key={ti.etablissement}>
                       {ti.etablissement} <br />
