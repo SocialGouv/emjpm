@@ -28,6 +28,8 @@ const getTis = ({ filters = {}, offset = 0, limit = 50 } = {}) =>
       "users.type",
       "users_tis.cabinet",
       "users_tis.email",
+      "users_tis.nom",
+      "users_tis.prenom",
       "users.active",
       "users.created_at",
       "users.last_login"

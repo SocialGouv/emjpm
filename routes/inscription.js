@@ -278,7 +278,17 @@ router.post("/mandataires", (req, res, next) => {
  *
  */
 router.post("/tis", (req, res, next) => {
-  const { username, pass1, pass2, type, email, tis, cabinet } = req.body;
+  const {
+    username,
+    pass1,
+    pass2,
+    type,
+    email,
+    tis,
+    cabinet,
+    nom,
+    prenom
+  } = req.body;
 
   if (pass1 !== pass2 || username.trim() === "") {
     return res.status(500).json({ success: false });
@@ -309,6 +319,8 @@ router.post("/tis", (req, res, next) => {
                   user_id,
                   ti_id,
                   cabinet,
+                  nom,
+                  prenom,
                   email
                 },
                 trx
