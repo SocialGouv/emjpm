@@ -1,43 +1,54 @@
 const { sendEmail } = require(".");
 
 const { getMandataireById } = require("../db/queries/mandataires");
-const EMAIL_RESERVATION_TEXT = (ti, mandataire) =>
-  `
-Madame, Monsieur,
+const EMAIL_RESERVATION_TEXT = (ti, mandataire, mesure) =>
+  `Madame, Monsieur,
 
-Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet || ""}, a décidé de vous confier une nouvelle mesure.
-Les détails de cette dernière sont d’ores et déjà disponibles sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a>,
-onglet « mesures en attente ».
+  Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet ||
+    ""}, a décidé de vous confier une nouvelle mesure :
+  - "type de mesure": ${mesure.type}
+  - "genre": ${mesure.civilite}
+  - "année de naissance": ${mesure.annee}.
+   
+  Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
+  
+  Pour rappel, à ce jour, vous avez déclaré "${
+    mandataire.mesures_en_cours
+  }" pour une capacité souhaitée de "${mandataire.dispo_max}".
+  
+  À bientôt
 
-Quand celle-ci vous sera officiellement notifiée par courrier, vous pourrez l’ajouter dans vos mesures en cours.
+  L’équipe e-mjpm.`;
 
-À bientôt
-
-L’équipe e-mjpm
-`;
-
-const EMAIL_RESERVATION_HTML = (ti, mandataire) =>
-  `
-Madame, Monsieur,
+const EMAIL_RESERVATION_HTML = (ti, mandataire, mesure) =>
+  `Madame, Monsieur,
 <br><br>
-Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet || ""}, a décidé de vous confier une nouvelle mesure.
-Les détails de cette dernière sont d’ores et déjà disponibles sur <a href="https://emjpm.num.social.gouv.fr/">e-mjpm</a>,
-onglet « mesures en attente ».
+  Pour information, le ${ti.etablissement}, cabinet ${ti.cabinet ||
+    ""}, a décidé de vous confier une nouvelle mesure :
+  <br>
+  - "type de mesure": ${mesure.type}
+  <br>
+  - "genre": ${mesure.civilite}
+  <br>
+  - "année de naissance": ${mesure.annee}.
 <br><br>
-Quand celle-ci vous sera officiellement notifiée par courrier, vous pourrez l’ajouter dans vos mesures en cours.
+    Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
 <br><br>
-À bientôt
+  Pour rappel, à ce jour, vous avez déclaré "${
+    mandataire.mesures_en_cours
+  }" pour une capacité souhaitée de "${mandataire.dispo_max}".
 <br><br>
-L’équipe e-mjpm
-`;
+  À bientôt
+<br><br>
+L’équipe e-mjpm.`;
 
-const reservationEmail = async (ti, mandataire_id) => {
+const reservationEmail = async (ti, mandataire_id, mesure) => {
   const mandataire = await getMandataireById(mandataire_id);
   sendEmail(
     mandataire.email,
     "e-MJPM : une nouvelle mesure vous a été attribué",
-    EMAIL_RESERVATION_TEXT(ti, mandataire),
-    EMAIL_RESERVATION_HTML(ti, mandataire)
+    EMAIL_RESERVATION_TEXT(ti, mandataire, mesure),
+    EMAIL_RESERVATION_HTML(ti, mandataire, mesure)
   ).catch(e => {
     console.log(e);
   });
