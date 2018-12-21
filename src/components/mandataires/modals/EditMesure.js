@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { updateMesure } from "../actions/mesures";
 import Layout from "./Layout";
 import { Autocomplete } from "../..";
-import { typeMesure, residence, civilite, Cabinet } from "../../common/nomination";
+import { typeMesure, residence, civilite, cabinet } from "../../common/nomination";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -24,7 +24,7 @@ const schema = {
     },
     //TODO(Adrien): discus with PO
     // ti_id: { type: "number" },
-    // cabinet: { type: "string", enum: Cabinet },
+    // cabinet: { type: "string", enum: cabinet },
     residence: {
       type: "string",
       enum: residence

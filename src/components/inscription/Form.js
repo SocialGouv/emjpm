@@ -52,6 +52,7 @@ class Form extends React.Component {
     this.setState({ tis });
   };
   onSubmit = ({ formData }) => {
+    const usernameData = formData.username.toLowerCase().trim()
     const url =
       this.state.typeMandataire === "ti" ? "/inscription/tis" : "/inscription/mandataires";
     if (formData.code_postal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/)) {
@@ -63,7 +64,7 @@ class Form extends React.Component {
             etablissement: formData.etablissement || "",
             tis: this.state.tis,
             type: this.state.typeMandataire,
-            username: formData.username.toLowerCase().trim()
+            username: usernameData
           })
         })
           .then(json => {

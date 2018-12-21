@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { X, Save, PlusSquare, XCircle, CheckCircle } from "react-feather";
 import { format } from "date-fns";
-import { typeMesure, residence, civilite, Cabinet } from "../common/nomination";
+import { typeMesure, residence, civilite, cabinet } from "../common/nomination";
 
 import { Button, ToggleState, Autocomplete } from "..";
 import { createMesure, createMesureSave } from "./actions/mesures";
@@ -48,7 +48,7 @@ const schema = {
     },
     //TODO(Adrien): discus with PO
     // ti_id: { type: "number" },
-    //cabinet: { type: "string", enum: Cabinet },
+    //cabinet: { type: "string", enum: cabinet },
     code_postal: { type: "string" },
     ville: { type: "string" },
     civilite: { type: "string", enum: civilite },

@@ -1,6 +1,6 @@
 import FormMandataire from "./FormMandataire";
 import uiSchema from "./uiSchema.json";
-import { Cabinet } from "../common/nomination";
+import { cabinet } from "../common/nomination";
 
 const schema = {
   type: "object",
@@ -12,7 +12,7 @@ const schema = {
     nom: { type: "string", title: "Nom", default: "" },
     prenom: { type: "string", title: "Prenom", default: "" },
     email: { type: "string", title: "Adresse email", default: "" },
-    cabinet: { type: "string", title: "Cabinet (pour Paris)", default: "", enum: Cabinet }
+    cabinet: { type: "string", title: "Cabinet (pour Paris)", default: "", enum: cabinet }
   }
 };
 
