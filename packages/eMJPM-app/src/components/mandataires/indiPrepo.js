@@ -65,7 +65,7 @@ class MandataireTabs extends React.Component {
         )
       },
       {
-        text: "Mesures en attente",
+        text: "Mesures réservées",
         url: "/mandataires/mesures/en-attente",
         icon: <Clock />,
         content: (
@@ -91,7 +91,7 @@ class MandataireTabs extends React.Component {
         content: <Profile />
       },
       {
-        text: "Importer",
+        text: `Importer`,
         url: "/mandataires/importer",
         icon: <FilePlus />,
         content: <InputFiles />

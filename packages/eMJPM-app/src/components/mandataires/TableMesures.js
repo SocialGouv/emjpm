@@ -87,7 +87,7 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
-    Header: "Date de demande",
+    Header: "Date de réservation",
     id: "date_demande",
     width: 300,
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
@@ -131,7 +131,7 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
-    Header: "Naissance",
+    Header: "Année de naissance",
     id: "annee",
     width: 80,
     accessor: "annee",
@@ -139,7 +139,7 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
-    Header: "Numero Dossier",
+    Header: "Référence de la mesure",
     id: "numero_dossier",
     width: 80,
     accessor: "numero_dossier",

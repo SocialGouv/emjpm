@@ -39,7 +39,7 @@ const tabs = type =>
         <TableUser
           type={type}
           filters={{ "users.active": true, "users.type": "ti" }}
-          hideColumns={["nom", "code_postal"]}
+          hideColumns={["code_postal"]}
         />
       )
     },
@@ -52,7 +52,7 @@ const tabs = type =>
         <TableUser
           type={type}
           filters={{ "users.active": false, "users.type": "ti" }}
-          hideColumns={["nom", "code_postal"]}
+          hideColumns={["code_postal"]}
         />
       )
     }

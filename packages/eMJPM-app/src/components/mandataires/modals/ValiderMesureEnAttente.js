@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 
 import Layout from "./Layout";
 import { updateMesureAttente } from "../actions/mesures";
+import { residence } from "../../common/nomination";
 
 const H3 = styled.h3`
   text-align: center;
@@ -26,7 +27,7 @@ const schema = {
     },
     residence: {
       type: "string",
-      enum: ["A domicile", "En établissement"]
+      enum: residence
     },
     code_postal: { type: "string" },
     ville: { type: "string" }
@@ -36,7 +37,7 @@ const schema = {
 const uiSchema = {
   date_ouverture: {
     "ui:autofocus": true,
-    "ui:title": "Ouverture de la mesure",
+    "ui:title": "Date de décision",
     classNames: "input_mesure_ouverture",
     "ui:options": {
       label: true
@@ -59,8 +60,7 @@ const uiSchema = {
     }
   },
   residence: {
-    "ui:placeholder": "Lieu de vie",
-    "ui:title": "Résidence du majeur à protéger",
+    "ui:title": "Lieu de vie du majeur à protéger",
     classNames: "input_mesure_residence",
     "ui:options": {
       label: true

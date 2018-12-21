@@ -15,7 +15,12 @@ const fetchProfile = () => apiFetch(`/mandataires/1`);
 const updateMandataireApi = data =>
   apiFetch(`/mandataires/1`, {
     method: "PUT",
-    body: JSON.stringify(data)
+    body: JSON.stringify({
+      ...data,
+      zip: data.zip || "",
+      secretariat: data.secretariat || false,
+      nb_secretariat: data.nb_secretariat || 0
+    })
   });
 
 const fetchAllTis = () => apiFetch("/mandataires/tis");
