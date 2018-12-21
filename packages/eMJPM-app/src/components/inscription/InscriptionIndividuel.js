@@ -20,8 +20,8 @@ const schema = {
       type: "string",
       default: ""
     },
-    pass1: { type: "string", minLength: 10 },
-    pass2: { type: "string", minLength: 10 },
+    pass1: { type: "string" },
+    pass2: { type: "string" },
     nom: { type: "string", default: "" },
     prenom: { type: "string", default: "" },
     genre: {

@@ -3,10 +3,11 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { X, Save, PlusSquare, XCircle, CheckCircle } from "react-feather";
 import { format } from "date-fns";
+import { typeMesure, residence, civilite, cabinet } from "../common/nomination";
 
 import { Button, ToggleState, Autocomplete } from "..";
 import { createMesure, createMesureSave } from "./actions/mesures";
-import Cabinet from "../common/Cabinet";
+
 const Alert = ({ className, Icon, message }) =>
   (message && (
     <div
@@ -43,37 +44,20 @@ const schema = {
     },
     type: {
       type: "string",
-      enum: [
-        "Tutelle",
-        "Curatelle",
-        "Sauvegarde de justice",
-        "Mesure ad hoc",
-        "MAJ",
-        "tutelle aux biens",
-        "tutelle à la personne",
-        "tutelle aux biens et à la personne",
-        "curatelle simple aux biens",
-        "curatelle simple à la personne",
-        "curatelle simple aux biens et à la personne",
-        "curatelle renforcée aux biens",
-        "curatelle renforcée à la personne",
-        "curatelle renforcée aux biens et à la personne",
-        "sauvegarde de justice",
-        "sauvegarde de justice avec mandat spécial"
-      ]
+      enum: typeMesure
     },
     //TODO(Adrien): discus with PO
     // ti_id: { type: "number" },
-    //cabinet: { type: "string", enum: Cabinet },
+    //cabinet: { type: "string", enum: cabinet },
     code_postal: { type: "string" },
     ville: { type: "string" },
-    civilite: { type: "string", enum: ["F", "H"] },
+    civilite: { type: "string", enum: civilite },
 
     annee: { type: "integer", default: "" },
     numero_dossier: { type: "string", default: "" },
     residence: {
       type: "string",
-      enum: ["A Domicile", "En établissement", "En établissement avec conservation du domicile"]
+      enum: residence
     }
   },
   dependencies: {
@@ -178,6 +162,13 @@ const uiSchema = {
     "ui:widget": "EtablissementAutoComplete",
     "ui:title": "Etablissement",
     "ui:placeholder": "Etablissement",
+    "ui:options": {
+      label: true
+    }
+  },
+  numero_dossier: {
+    "ui:autofocus": true,
+    "ui:title": "Numéro de dossier",
     "ui:options": {
       label: true
     }

@@ -41,7 +41,10 @@ const CellMesureReservationRedux = connect(
 // Commentaire View display
 const uiSchema = {
   comment: {
-    "ui:widget": "textarea"
+    "ui:widget": "textarea",
+    "ui:options": {
+      label: false
+    }
   }
 };
 
@@ -49,7 +52,7 @@ const schema = {
   type: "object",
   required: ["comment"],
   properties: {
-    comment: { type: "string", title: "message", default: "" }
+    comment: { type: "string", default: "" }
   }
 };
 const formData = {};
@@ -64,7 +67,7 @@ const Comment = styled.div`
 const CommentairesView = ({ onSubmit, commentaires, onDelete }) => (
   <div className="form-group" style={{ marginTop: "8px" }}>
     <label htmlFor="exampleFormControlTextarea1" style={{ marginLeft: "0px" }}>
-      <b>Ajoutez vos notes.</b>
+      <b>Ajoutez vos notes :</b>
     </label>
     <br />
     <Form
@@ -78,7 +81,7 @@ const CommentairesView = ({ onSubmit, commentaires, onDelete }) => (
         <label htmlFor="exampleFormControlTextarea1">
           Attention à la sensibilité des données.
           <br />
-          (ces dernières seront uniquement accessibles aux utilisateurs de votre TI){" "}
+          Ces dernières seront uniquement accessibles en interne, aux utilisateurs de votre TI.{" "}
         </label>
         <br />
         <Button data-cy="button-enregistrer-comment">Enregistrer</Button>
@@ -147,6 +150,7 @@ class FicheMandataireModal extends React.Component {
               dispo_max={currentMandataire.dispo_max}
               secretariat={currentMandataire.secretariat}
               nb_secretariat={currentMandataire.nb_secretariat}
+              type={currentMandataire.type}
               zip={currentMandataire.zip}
               displayTitle={"none"}
             />
