@@ -52,31 +52,36 @@ class Form extends React.Component {
     this.setState({ tis });
   };
   onSubmit = ({ formData }) => {
+    const usernameData = formData.username.toLowerCase().trim()
     const url =
       this.state.typeMandataire === "ti" ? "/inscription/tis" : "/inscription/mandataires";
-    this.setState({ status: "loading", formData }, () => {
-      apiFetch(url, {
-        method: "POST",
-        body: JSON.stringify({
-          ...formData,
-          etablissement: formData.etablissement || "",
-          tis: this.state.tis,
-          type: this.state.typeMandataire,
-          username: formData.username.toLowerCase().trim()
+    if (formData.code_postal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/)) {
+      this.setState({ status: "loading", formData }, () => {
+        apiFetch(url, {
+          method: "POST",
+          body: JSON.stringify({
+            ...formData,
+            etablissement: formData.etablissement || "",
+            tis: this.state.tis,
+            type: this.state.typeMandataire,
+            username: usernameData
+          })
         })
-      })
-        .then(json => {
-          if (json.success === false) {
-            throw new Error();
-          }
-          // piwik.push(["trackEvent", "Inscription success", formData.type]);
-          Router.push("/inscription-done");
-        })
-        .catch(() => {
-          // piwik.push(["trackEvent", "Inscription error", formData.type]);
-          this.setState({ status: "error" });
-        });
-    });
+          .then(json => {
+            if (json.success === false) {
+              throw new Error();
+            }
+            // piwik.push(["trackEvent", "Inscription success", formData.type]);
+            Router.push("/inscription-done");
+          })
+          .catch(() => {
+            // piwik.push(["trackEvent", "Inscription error", formData.type]);
+            this.setState({ status: "error" });
+          });
+      });
+    } else {
+      return alert("Code postal non valide");
+    }
   };
 
   render() {
@@ -91,7 +96,7 @@ class Form extends React.Component {
               render={({ status, result }) => (
                 <div style={{ margin: "20px 0" }}>
                   <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
-                    Choisissez les tribunaux où vous êtes agréés :
+                    Choisissez les tribunaux sur lesquels vous exercez :
                   </div>
                   {status === "success" && <TiSelector onChange={this.setTis} tis={result[0]} />}
                   {status === "error" && <div>Impossible de charger la liste des Tribunaux</div>}
