@@ -165,7 +165,7 @@ router.post(
       body["ti_id"] = ti.id;
       body["cabinet"] = ti.cabinet;
       addMesure(body)
-        .then(() => reservationEmail(ti, req.body.mandataire_id))
+        .then(() => reservationEmail(ti, req.body.mandataire_id, req.body))
         .then(() => res.status(200).json({ success: true }))
         .catch(error => {
           console.log(error);
@@ -298,7 +298,7 @@ router.get(
  */
 router.get(
   "/:mandataireId/mesures/attente",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     const mandataire = await getMandataireByUserId(req.user.id);
     getAllMesuresAttente(mandataire.id)
