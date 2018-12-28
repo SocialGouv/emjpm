@@ -82,12 +82,6 @@ const FicheMandataire = ({
         </tbody>
       </table>
       <br />
-      {zip && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-zip">
-          <Info style={iconStyle} />
-          {zip}
-        </div>
-      )}
     </div>
   );
 };
