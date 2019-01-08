@@ -51,10 +51,36 @@ class Form extends React.Component {
   setTis = tis => {
     this.setState({ tis });
   };
-  onSubmit = ({ formData }) => {
+
+  inscriptionFetchUser = formData => {
     const usernameData = formData.username.toLowerCase().trim();
     const url =
       this.state.typeMandataire === "ti" ? "/inscription/tis" : "/inscription/mandataires";
+    apiFetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        ...formData,
+        etablissement: formData.etablissement || "",
+        tis: this.state.tis,
+        type: this.state.typeMandataire,
+        username: usernameData,
+        cabinet: formData.cabinet || null
+      })
+    })
+      .then(json => {
+        if (json.success === false) {
+          throw new Error();
+        }
+        // piwik.push(["trackEvent", "Inscription success", formData.type]);
+        Router.push("/inscription-done");
+      })
+      .catch(() => {
+        // piwik.push(["trackEvent", "Inscription error", formData.type]);
+        this.setState({ status: "error" });
+      });
+  };
+
+  onSubmit = ({ formData }) => {
     if (
       (this.state.typeMandataire === "ti" && this.state.tis.length !== 0) ||
       (formData.code_postal &&
@@ -62,34 +88,10 @@ class Form extends React.Component {
         this.state.tis.length !== 0)
     ) {
       this.setState({ status: "loading", formData }, () => {
-        apiFetch(url, {
-          method: "POST",
-          body: JSON.stringify({
-            ...formData,
-            etablissement: formData.etablissement || "",
-            tis: this.state.tis,
-            type: this.state.typeMandataire,
-            username: usernameData
-          })
-        })
-          .then(json => {
-            if (json.success === false) {
-              throw new Error();
-            }
-            // piwik.push(["trackEvent", "Inscription success", formData.type]);
-            Router.push("/inscription-done");
-          })
-          .catch(() => {
-            // piwik.push(["trackEvent", "Inscription error", formData.type]);
-            this.setState({ status: "error" });
-          });
+        this.inscriptionFetchUser(formData);
       });
     } else {
-      if (
-        this.state.typeMandataire !== "ti" &&
-        formData.code_postal &&
-        formData.code_postal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/)
-      ) {
+      if (this.state.typeMandataire !== "ti" && formData.code_postal) {
         return alert("Code postal non valide");
       } else {
         return alert("Saisisser un TI de référence");
@@ -98,7 +100,6 @@ class Form extends React.Component {
   };
 
   render() {
-    console.log("tis", this.state.tis)
     const FormMandataire = formsMandataires[this.state.typeMandataire];
     return (
       <div className="container Inscription" data-cy="form-inscription">
