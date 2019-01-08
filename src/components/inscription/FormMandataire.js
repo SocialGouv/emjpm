@@ -8,26 +8,33 @@ function validate(formData, errors) {
   return errors;
 }
 
-const FormMandataire = ({ schema, formData, uiSchema = {}, onSubmit }) => (
-  <div>
-    <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
-      Renseignez ci-dessous vos informations professionnelles:
-    </div>
-    <Form
-      schema={schema}
-      formData={formData}
-      uiSchema={uiSchema}
-      validate={validate}
-      showErrorList={false}
-      onSubmit={onSubmit}
-    >
-      <div style={{ textAlign: "center", paddingBottom: "10px" }}>
-        <SearchButton style={{ textAlign: "center" }} type="submit">
-          Créer mon compte
-        </SearchButton>
+class FormMandataire extends React.Component {
+
+  render(){
+    { schema, formData,onSubmit } = this.props
+    const uiSchema = {}
+    return(
+      <div>
+        <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
+          Renseignez ci-dessous vos informations professionnelles:
+        </div>
+        <Form
+          schema={schema}
+          formData={formData}
+          uiSchema={uiSchema}
+          validate={validate}
+          showErrorList={false}
+          onSubmit={onSubmit}
+        >
+          <div style={{ textAlign: "center", paddingBottom: "10px" }}>
+            <SearchButton style={{ textAlign: "center" }} type="submit">
+              Créer mon compte
+            </SearchButton>
+          </div>
+        </Form>
       </div>
-    </Form>
-  </div>
-);
+    )
+  }
+}
 
 export default FormMandataire;

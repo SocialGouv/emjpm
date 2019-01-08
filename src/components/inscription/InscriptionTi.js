@@ -12,7 +12,7 @@ const schema = {
     nom: { type: "string", title: "Nom", default: "" },
     prenom: { type: "string", title: "Prenom", default: "" },
     email: { type: "string", title: "Adresse email", default: "" },
-    cabinet: { type: "string", title: "Cabinet (pour Paris)", default: "", enum: cabinet }
+    cabinet: { type: "string", title: "Cabinet", default: "", enum: cabinet }
   }
 };
 
