@@ -47,7 +47,7 @@ const uiSchema = {
     "ui:widget": "password",
     "ui:options": {
       label: false
-    } // could also be "select"
+    }
   },
   username: {
     "ui:placeholder": "Identifiant",
@@ -132,6 +132,18 @@ class LoginForm extends React.Component {
         input.focus();
       }
     }
+
+    // workaround autofill bugs with react-jsonschema-form
+    // https://github.com/mozilla-services/react-jsonschema-form/issues/184
+    // use the DOM to fill initial formData
+    const autofillValues = {
+      username: node.querySelector("#root_username") && node.querySelector("#root_username").value,
+      password: node.querySelector("#root_password") && node.querySelector("#root_password").value
+    };
+
+    this.setState({
+      formData: autofillValues
+    });
   }
 
   setToken = idToken => {
