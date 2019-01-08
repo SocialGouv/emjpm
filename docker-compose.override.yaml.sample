@@ -9,6 +9,7 @@ services:
       - POSTGRES_READONLY_USER_PASSWORD=readonlyPassword
   metabase:
     image: metabase/metabase
+    restart: always
     volumes:
       # persist config
       - metabase:/data
