@@ -74,11 +74,9 @@ class Form extends React.Component {
         if (json.success === false) {
           throw new Error();
         }
-        // piwik.push(["trackEvent", "Inscription success", formData.type]);
         Router.push("/inscription-done");
       })
       .catch(() => {
-        // piwik.push(["trackEvent", "Inscription error", formData.type]);
         this.setState({ status: "error" });
       });
   };
@@ -94,10 +92,10 @@ class Form extends React.Component {
         this.inscriptionFetchUser(formData);
       });
     } else {
-      if (this.state.typeMandataire !== "ti" && formData.code_postal) {
-        return alert("Code postal non valide");
-      } else {
+      if (this.state.tis.length === 0) {
         return alert("Saisisser un TI de référence");
+      } else if (this.state.typeMandataire !== "ti" && formData.code_postal) {
+        return alert("Code postal non valide");
       }
     }
   };
