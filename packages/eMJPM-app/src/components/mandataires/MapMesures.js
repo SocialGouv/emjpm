@@ -8,7 +8,7 @@ import Resolve from "../common/Resolve";
 const Attribution = () => (
   <TileLayer
     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+    url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
   />
 );
 
