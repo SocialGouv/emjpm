@@ -19,7 +19,7 @@ class FormMandataire extends React.Component {
   }
 
   render() {
-    const { schema, formData, onSubmit ,uiSchema} = this.props;
+    const { schema, formData, onSubmit, uiSchema } = this.props;
     return (
       <div>
         <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
