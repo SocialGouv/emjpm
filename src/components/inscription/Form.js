@@ -51,6 +51,9 @@ class Form extends React.Component {
   setTis = tis => {
     this.setState({ tis });
   };
+  setFormData = formData => {
+    this.setState({ formData });
+  }
 
   inscriptionFetchUser = formData => {
     const usernameData = formData.username.toLowerCase().trim();
@@ -145,7 +148,7 @@ class Form extends React.Component {
               </tbody>
             </table>
             {FormMandataire && (
-              <FormMandataire onSubmit={this.onSubmit} formData={this.state.formData} />
+              <FormMandataire typeMandataire={this.state.typeMandataire} onSubmit={this.onSubmit} formData={this.state.formData} />
             )}
             {this.state.status === "error" && (
               <div style={{ textAlign: "center", color: "red", fontSize: "1.1em" }}>
