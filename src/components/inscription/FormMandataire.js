@@ -9,11 +9,18 @@ function validate(formData, errors) {
 }
 
 class FormMandataire extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { typeMandataire: this.props.typeMandataire };
+  }
 
-  render(){
-    { schema, formData,onSubmit } = this.props
-    const uiSchema = {}
-    return(
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.typeMandataire != nextState.typeMandataire;
+  }
+
+  render() {
+    const { schema, formData, onSubmit ,uiSchema} = this.props;
+    return (
       <div>
         <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
           Renseignez ci-dessous vos informations professionnelles:
@@ -33,7 +40,7 @@ class FormMandataire extends React.Component {
           </div>
         </Form>
       </div>
-    )
+    );
   }
 }
 
