@@ -71,5 +71,9 @@
     "ui:title": "Nom d'Etablissements",
     "ui:placeholder": "Nom d'Etablissements",
     "classNames": "input__long"
+  },
+  "cabinet": {
+    "ui:title": "Cabinet",
+    "ui:placeholder": "cabinet"
   }
 }

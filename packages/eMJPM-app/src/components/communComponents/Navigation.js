@@ -2,7 +2,7 @@ import Router from "next/router";
 import piwik from "../../piwik";
 
 // todo: hack: force embedding the SVG due to some webpack+next+static issues in a gh-pages env
-const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm.png");
+const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm_num.png");
 
 const doLogout = () => {
   // Clear user token and profile data from localStorage
@@ -20,18 +20,18 @@ const Navigation = ({ logout, inscription }) => (
   <div
     style={{
       background: "white",
-      padding: "15px 0",
-      textAlign: "center",
+      padding: "7px 0",
+      textAlign: "left",
       display: "flex",
       flexDirection: "row"
     }}
   >
-    <div style={{ flex: "0 0 300px" }} />
+    <div style={{ flex: "0 0 50px" }} />
     <div style={{ flex: "1 0 auto" }}>
       <a href="https://emjpm.beta.gouv.fr/">
         <img
           src={logo}
-          style={{ width: "60%", maxWidth: 400 }}
+          style={{ width: "60%", maxWidth: 350 }}
           alt="Accueil de eMJPM.beta.gouv.fr"
         />
       </a>
