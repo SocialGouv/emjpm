@@ -83,27 +83,21 @@ class Form extends React.Component {
 
   onSubmit = ({ formData }) => {
     const TisLengthEqualZero = this.state.tis.length === 0;
-    const TisLengthNotEqualZero = this.state.tis.length !== 0;
     const TisLengthEqualOne = this.state.tis.length === 1;
     const TisLengthMoreThanOne = this.state.tis.length > 1;
-    const isNotTiType = this.state.typeMandataire !== "ti";
     const isTiType = this.state.typeMandataire === "ti";
-    const isCodePostalFill = formData.code_postal;
-    const isCodePotalValid = formData.code_postal && formData.code_postal.match(
-      /^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/
-    );
+    const isCodePotalValid =
+      formData.code_postal &&
+      formData.code_postal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/);
 
     if (TisLengthEqualZero) {
       return alert("Saisissez au moins un TI de référence");
-    } else if (isNotTiType && !isCodePotalValid) {
+    } else if (!isTiType && !isCodePotalValid) {
       return alert("Code postal non valide");
     } else if (isTiType && TisLengthMoreThanOne) {
       return alert("Saisissez un seul TI de référence");
     } else {
-      if (
-        (isTiType && TisLengthEqualOne) ||
-        (isCodePostalFill && isCodePotalValid && TisLengthNotEqualZero)
-      ) {
+      if ((isTiType && TisLengthEqualOne) || (isCodePotalValid && !TisLengthEqualZero)) {
         this.setState({ status: "loading", formData }, () => {
           this.submitUser(formData);
         });
