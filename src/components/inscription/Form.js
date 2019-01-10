@@ -53,9 +53,9 @@ class Form extends React.Component {
   };
   setFormData = formData => {
     this.setState({ formData });
-  }
+  };
 
-  inscriptionFetchUser = formData => {
+  submitUser = formData => {
     const usernameData = formData.username.toLowerCase().trim();
     const url =
       this.state.typeMandataire === "ti" ? "/inscription/tis" : "/inscription/mandataires";
@@ -82,20 +82,31 @@ class Form extends React.Component {
   };
 
   onSubmit = ({ formData }) => {
-    if (
-      (this.state.typeMandataire === "ti" && this.state.tis.length !== 0) ||
-      (formData.code_postal &&
-        formData.code_postal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/) &&
-        this.state.tis.length !== 0)
-    ) {
-      this.setState({ status: "loading", formData }, () => {
-        this.inscriptionFetchUser(formData);
-      });
+    const TisLengthEqualZero = this.state.tis.length === 0;
+    const TisLengthNotEqualZero = this.state.tis.length !== 0;
+    const TisLengthEqualOne = this.state.tis.length === 1;
+    const TisLengthMoreThanOne = this.state.tis.length > 1;
+    const isNotTiType = this.state.typeMandataire !== "ti";
+    const isTiType = this.state.typeMandataire === "ti";
+    const isCodePostalFill = formData.code_postal;
+    const isCodePotalValid = formData.code_postal && formData.code_postal.match(
+      /^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/
+    );
+
+    if (TisLengthEqualZero) {
+      return alert("Saisissez au moins un TI de référence");
+    } else if (isNotTiType && !isCodePotalValid) {
+      return alert("Code postal non valide");
+    } else if (isTiType && TisLengthMoreThanOne) {
+      return alert("Saisissez un seul TI de référence");
     } else {
-      if (this.state.tis.length === 0) {
-        return alert("Saisisser un TI de référence");
-      } else if (this.state.typeMandataire !== "ti" && formData.code_postal) {
-        return alert("Code postal non valide");
+      if (
+        (isTiType && TisLengthEqualOne) ||
+        (isCodePostalFill && isCodePotalValid && TisLengthNotEqualZero)
+      ) {
+        this.setState({ status: "loading", formData }, () => {
+          this.submitUser(formData);
+        });
       }
     }
   };
@@ -146,7 +157,11 @@ class Form extends React.Component {
               </tbody>
             </table>
             {FormMandataire && (
-              <FormMandataire typeMandataire={this.state.typeMandataire} onSubmit={this.onSubmit} formData={this.state.formData} />
+              <FormMandataire
+                typeMandataire={this.state.typeMandataire}
+                onSubmit={this.onSubmit}
+                formData={this.state.formData}
+              />
             )}
             {this.state.status === "error" && (
               <div style={{ textAlign: "center", color: "red", fontSize: "1.1em" }}>

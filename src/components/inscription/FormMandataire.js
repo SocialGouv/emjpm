@@ -9,10 +9,9 @@ function validate(formData, errors) {
 }
 
 class FormMandataire extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { typeMandataire: this.props.typeMandataire };
-  }
+  state = {
+    typeMandataire: this.props.typeMandataire
+  };
 
   shouldComponentUpdate(nextProps, nextState) {
     return this.state.typeMandataire != nextState.typeMandataire;
