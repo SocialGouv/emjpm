@@ -19,10 +19,10 @@ describe("Tis", function() {
           cy.visit("/tis", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
         });
-        it("counter should show 2 professionnels", () => {
+        it("counter should show 1 professionnel", () => {
           cy.visit("/tis", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy=Mandataires]").click();
-          cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
         });
         it("can add a comments for a specific Mandataire", () => {
           cy.visit("/tis", { Authorization: "Bearer " + localStorage.getItem("id_token") });
@@ -46,13 +46,14 @@ describe("Tis", function() {
           cy.get(".form-group #root_annee").type("1987");
           cy.get("[data-cy=button-submit-mesure]").click();
           cy.get("[data-cy=button-validation]").click();
-          cy.get(".react-tabs .rt-tr-group:nth-child(1) [data-cy=attente]").contains(2);
+          cy.visit("/tis", { Authorization: "Bearer " + localStorage.getItem("id_token") });
+          cy.get(".react-tabs .rt-tr-group:nth-child(1) [data-cy=attente]").contains(1);
         });
 
         it("check display of the mandataire Identity", () => {
           cy.visit("/tis", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .rt-tr-group:nth-child(1)").click();
-          cy.get("[data-cy=fiche-manda-telephone]").contains("0237100000");
+          cy.get("[data-cy=fiche-manda-telephone]").contains("0101010108");
         });
 
         it("table should show 1 mandataires on individuel filter", () => {
