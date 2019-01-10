@@ -169,6 +169,12 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
           />
         )}
       />
+      {currentMandataire.zip && (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-zip">
+          <h3>Informations à destination des magistrats </h3>
+          {currentMandataire.zip}
+        </div>
+      )}
     </div>
   </div>
 );
