@@ -51,36 +51,57 @@ class Form extends React.Component {
   setTis = tis => {
     this.setState({ tis });
   };
-  onSubmit = ({ formData }) => {
-    const usernameData = formData.username.toLowerCase().trim()
+  setFormData = formData => {
+    this.setState({ formData });
+  };
+
+  submitUser = formData => {
+    const usernameData = formData.username.toLowerCase().trim();
     const url =
       this.state.typeMandataire === "ti" ? "/inscription/tis" : "/inscription/mandataires";
-    if (formData.code_postal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/)) {
-      this.setState({ status: "loading", formData }, () => {
-        apiFetch(url, {
-          method: "POST",
-          body: JSON.stringify({
-            ...formData,
-            etablissement: formData.etablissement || "",
-            tis: this.state.tis,
-            type: this.state.typeMandataire,
-            username: usernameData
-          })
-        })
-          .then(json => {
-            if (json.success === false) {
-              throw new Error();
-            }
-            // piwik.push(["trackEvent", "Inscription success", formData.type]);
-            Router.push("/inscription-done");
-          })
-          .catch(() => {
-            // piwik.push(["trackEvent", "Inscription error", formData.type]);
-            this.setState({ status: "error" });
-          });
+    apiFetch(url, {
+      method: "POST",
+      body: JSON.stringify({
+        ...formData,
+        etablissement: formData.etablissement || "",
+        tis: this.state.tis,
+        type: this.state.typeMandataire,
+        username: usernameData,
+        cabinet: formData.cabinet || null
+      })
+    })
+      .then(json => {
+        if (json.success === false) {
+          throw new Error();
+        }
+        Router.push("/inscription-done");
+      })
+      .catch(() => {
+        this.setState({ status: "error" });
       });
-    } else {
+  };
+
+  onSubmit = ({ formData }) => {
+    const hasNoTi = this.state.tis.length === 0;
+    const hasSingleTi = this.state.tis.length === 1;
+    const hasMultipleTi = this.state.tis.length > 1;
+    const isTi = this.state.typeMandataire === "ti";
+    const isValidCodePostal =
+      formData.code_postal &&
+      formData.code_postal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/);
+
+    if (hasNoTi) {
+      return alert("Saisissez au moins un TI de référence");
+    } else if (!isTi && !isValidCodePostal) {
       return alert("Code postal non valide");
+    } else if (isTi && hasMultipleTi) {
+      return alert("Saisissez un seul TI de référence");
+    } else {
+      if ((isTi && hasSingleTi) || (isValidCodePostal && !hasNoTi)) {
+        this.setState({ status: "loading", formData }, () => {
+          this.submitUser(formData);
+        });
+      }
     }
   };
 
@@ -130,7 +151,11 @@ class Form extends React.Component {
               </tbody>
             </table>
             {FormMandataire && (
-              <FormMandataire onSubmit={this.onSubmit} formData={this.state.formData} />
+              <FormMandataire
+                typeMandataire={this.state.typeMandataire}
+                onSubmit={this.onSubmit}
+                formData={this.state.formData}
+              />
             )}
             {this.state.status === "error" && (
               <div style={{ textAlign: "center", color: "red", fontSize: "1.1em" }}>

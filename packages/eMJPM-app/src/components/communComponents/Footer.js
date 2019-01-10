@@ -13,9 +13,6 @@ const Footer = ({ fixed }) => (
       <div className="footer__logo" />
       <ul className="footer__links">
         <li>
-          <h2>emjpm.beta.gouv.fr</h2>
-        </li>
-        <li>
           <a
             className="button button_transparent"
             style={{ fontSize: "1em" }}
