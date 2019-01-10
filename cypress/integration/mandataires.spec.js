@@ -70,9 +70,9 @@ describe("Mandataires", function() {
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
           cy.get("[data-cy=button-close-mesure]")
             .first()
-            .click();
+            .click({ force: true });
           cy.dateInput(".ReactModal__Content #root", "2019-07-22");
-          cy.get(".ReactModal__Content button.btn-success").click();
+          cy.get(".ReactModal__Content button.btn-success").click({ force: true });
           cy.get(".react-tabs .react-tabs__tab-list").should("contain", "2 / 3");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
@@ -127,6 +127,9 @@ describe("Mandataires", function() {
           cy.get(".form-group #root_ville")
             .clear()
             .type("Avesnes");
+          cy.get(".form-group #root_zip")
+            .clear()
+            .type("2ème arrondissement");
           cy.get(".form-group #root_dispo_max")
             .clear()
             .type("10");
@@ -164,7 +167,7 @@ describe("Mandataires", function() {
           cy.get("button[data-cy=button-close-mesure]").should("have.length", 2);
           cy.get("[data-cy=button-close-mesure]")
             .first()
-            .click();
+            .click({ force: true });
           cy.get(".ReactModal__Content button.btn-success").click();
 
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
@@ -176,7 +179,7 @@ describe("Mandataires", function() {
         });
         it("table eteintes should have 1 mesure", () => {
           cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
-          cy.get("[data-cy='Mesures éteintes']").click();
+          cy.get("[data-cy='Mesures éteintes']").click({ force: true });
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
           cy.get("button[data-cy=button-reactivate-mesure]").should("have.length", 2);
         });
@@ -205,10 +208,10 @@ describe("Mandataires", function() {
       describe("/mandataires eteindre mesure", () => {
         it("can attente mesure", () => {
           cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
-          cy.get("[data-cy='Mesures en attente']").click();
+          cy.get("[data-cy='Mesures réservées']").click();
           cy.get(".react-tabs .rt-tr-group:nth-child(1) [data-cy=button-attente-mesure] ").click();
           cy.get(".form-group #root_date_ouverture").type("2012-12-12");
-          cy.get(".form-group #root_residence").select("A domicile");
+          cy.get(".form-group #root_residence").select("A Domicile");
           cy.get(".form-group #root_code_postal").type("76000");
           cy.get(".form-group #root_ville").type("Rouen");
           cy.get("[data-cy=validation-button]").click();
