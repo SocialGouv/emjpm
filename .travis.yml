@@ -15,12 +15,12 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 before_script:
   - docker-compose up -d db
-  - docker-compose exec db createdb emjpm_test -U postgres
-  - yarn workspace @socialgouv/api knex migrate:latest --env test
-  - yarn workspace @socialgouv/api knex seed:run --env test
 
 script:
   - yarn build --stream
+  - docker-compose exec db createdb emjpm_test -U postgres
+  - yarn workspace @socialgouv/api knex migrate:latest --env test
+  - yarn workspace @socialgouv/api knex seed:run --env test
   - yarn lint --stream
   - yarn workspace @socialgouv/app test --coverage
   - JWTKEY=lol yarn workspace @socialgouv/api test
