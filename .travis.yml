@@ -11,17 +11,23 @@ git:
 #
 
 before_install:
+  # Start the database first so it has the time to boot before we interact with it.
+  - docker-compose up -d db
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
-before_script:
-  - docker-compose up -d db
 
-script:
-  - yarn build --stream
+before_script:
   - docker-compose exec db createdb emjpm_test -U postgres
   - yarn workspace @socialgouv/api knex migrate:latest --env test
   - yarn workspace @socialgouv/api knex seed:run --env test
+
+script:
+  - yarn build --stream
   - yarn lint --stream
   - yarn workspace @socialgouv/app test --coverage
   - JWTKEY=lol yarn workspace @socialgouv/api test
+
 after_success: npx codecov
+
+after_script:
+  - docker-compose down
