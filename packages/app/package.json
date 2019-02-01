@@ -1,5 +1,5 @@
 {
-  "name": "emjpm.beta.gouv.fr",
+  "name": "@socialgouv/app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,7 +19,7 @@
     "cypress": "start-server-and-test cypress:start http://localhost:3003 cypress:open"
   },
   "keywords": [],
-  "license": "ISC",
+  "license": "APACHE-2",
   "dependencies": {
     "@wessberg/color": "0.0.2",
     "@zeit/next-css": "^1.0.1",
