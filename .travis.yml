@@ -26,7 +26,6 @@ script:
   - yarn workspace @socialgouv/app test --coverage
   - JWTKEY=lol yarn workspace @socialgouv/api test
 
-after_success: npx codecov
-
 after_script:
+  - npx codecov
   - docker-compose down
