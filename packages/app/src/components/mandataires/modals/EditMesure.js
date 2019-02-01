@@ -170,7 +170,6 @@ const mapDispatchToProps = dispatch =>
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(
-  null,
-  mapDispatchToProps
-)(connectModal({ name: "EditMesure", destroyOnHide: true })(EditMesure));
+export default connect(null, mapDispatchToProps)(
+  connectModal({ name: "EditMesure", destroyOnHide: true })(EditMesure)
+);

@@ -13,7 +13,7 @@ import FilterMandataires from "./FilterMandataires";
 
 const Attribution = () => (
   <TileLayer
-    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
     url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
   />
 );

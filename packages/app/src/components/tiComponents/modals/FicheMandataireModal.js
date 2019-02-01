@@ -20,9 +20,8 @@ const TitleMandataire = styled.div`
   font-size: 1.5em;
   font-weight: bold;
 `;
-const CellMesureReservationRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
+const CellMesureReservationRedux = connect(null, dispatch =>
+  bindActionCreators({ show }, dispatch)
 )(({ show, mandataire }) => (
   <div
     data-cy="button-attente-mesure"
@@ -220,7 +219,6 @@ const mapStateToProps = state => ({
     state.mandataire.currentEtablissementsForSelectedMandataire
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(connectModal({ name: "FicheMandataireModal", destroyOnHide: true })(FicheMandataireModal));
+export default connect(mapStateToProps, null)(
+  connectModal({ name: "FicheMandataireModal", destroyOnHide: true })(FicheMandataireModal)
+);

@@ -31,12 +31,13 @@ const FicheMandataire = ({
         <Phone style={iconStyle} />
         {telephone}
       </div>
-      {type !== "service" && telephone_portable && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
-          <Smartphone style={iconStyle} />
-          {telephone_portable}
-        </div>
-      )}
+      {type !== "service" &&
+        telephone_portable && (
+          <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+            <Smartphone style={iconStyle} />
+            {telephone_portable}
+          </div>
+        )}
       {hasAdresse && (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
           <Home style={iconStyle} />
