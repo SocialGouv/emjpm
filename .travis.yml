@@ -22,6 +22,6 @@ before_script:
 script:
   - yarn build --stream
   - yarn lint --stream
-  - yarn workspace @socialgouv/app test
-  - yarn workspace @socialgouv/api test
+  - yarn workspace @socialgouv/app test --coverage
+  - JWTKEY=lol yarn workspace @socialgouv/api test
 after_success: npx codecov
