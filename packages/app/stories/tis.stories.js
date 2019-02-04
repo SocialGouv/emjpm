@@ -6,7 +6,7 @@ import { linkTo } from "@storybook/addon-links";
 
 import PanelFilterMandataires from "../src/components/PanelFilterMandataires";
 import TableMandataire from "../src/components/TableMandataire";
-import { FicheMandataire } from "../pages/tis";
+import TiPage from "../pages/tis";
 import OpenStreeMap from "../src/components/Map";
 
 const mandataires = [
@@ -68,6 +68,6 @@ storiesOf("Tis", module)
   .add("PanelFilters", () => (
     <PanelFilterMandataires updateFilters={() => {}} findPostcode={() => {}} />
   ))
-  .add("FicheMandataire", () => <FicheMandataire mandataire={mandataires[0]} />)
+  .add("TiPage", () => <TiPage mandataire={mandataires[0]} />)
   .add("TableMandataire", () => <TableMandataire rows={mandataires} openModal={() => {}} />)
   .add("OpenStreeMap", () => <OpenStreeMap mesure={[]} postcodeMandataire="75010" />);
