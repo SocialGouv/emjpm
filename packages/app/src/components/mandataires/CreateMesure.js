@@ -343,4 +343,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 // connect to redux store actions
-export default connect(mapStateToProps, mapDispatchToProps)(CreateMesure);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateMesure);

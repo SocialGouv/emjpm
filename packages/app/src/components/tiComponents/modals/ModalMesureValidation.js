@@ -22,6 +22,7 @@ const mapStateToProps = state => ({
   allTisForOneMandataire: state.mandataire.allTisForOneMandataire
 });
 
-export default connect(mapStateToProps, null)(
-  connectModal({ name: "ModalMesureValidation", destroyOnHide: true })(ModalMesureValidation)
-);
+export default connect(
+  mapStateToProps,
+  null
+)(connectModal({ name: "ModalMesureValidation", destroyOnHide: true })(ModalMesureValidation));

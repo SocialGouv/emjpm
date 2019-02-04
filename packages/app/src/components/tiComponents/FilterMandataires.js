@@ -71,4 +71,7 @@ const FilterMandataires = ({ onClick, currentFilter }) => (
   </div>
 );
 
-export default connect(mapStateToProps, mapDispatchToProps)(FilterMandataires);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(FilterMandataires);

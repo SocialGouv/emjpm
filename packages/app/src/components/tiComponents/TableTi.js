@@ -37,8 +37,9 @@ export const PillDispo = ({ dispo, dispo_max }) => (
   </div>
 );
 
-const CellMandataireRedux = connect(null, dispatch =>
-  bindActionCreators({ show, openFicheMandataireModal }, dispatch)
+const CellMandataireRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show, openFicheMandataireModal }, dispatch)
 )(({ row, show, children, openFicheMandataireModal }) => (
   <div
     title="Ouvrir la fiche du mandataire"
@@ -53,8 +54,9 @@ const CellMandataireRedux = connect(null, dispatch =>
   </div>
 ));
 
-const CellMesureReservationRedux = connect(null, dispatch =>
-  bindActionCreators({ show }, dispatch)
+const CellMesureReservationRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
 )(({ row, show, children }) => (
   <div
     title="Attribuer une nouvelle mesure"
@@ -289,4 +291,7 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(null, mapDispatchToProps)(TableTi);
+export default connect(
+  null,
+  mapDispatchToProps
+)(TableTi);

@@ -50,13 +50,15 @@ describe("Mandataires", function() {
         it("should have new added mesure", () => {
           cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
-          cy
-            .get(".ReactTable .rt-tr-group:first-child .rt-td:nth-child(3)")
-            .should("contain", "Sauvegarde de justice");
+          cy.get(".ReactTable .rt-tr-group:first-child .rt-td:nth-child(3)").should(
+            "contain",
+            "Sauvegarde de justice"
+          );
           cy.get(".ReactTable .rt-tr-group:first-child .rt-td:nth-child(4)").should("contain", "F");
-          cy
-            .get(".ReactTable .rt-tr-group:first-child .rt-td:nth-child(5)")
-            .should("contain", "1977");
+          cy.get(".ReactTable .rt-tr-group:first-child .rt-td:nth-child(5)").should(
+            "contain",
+            "1977"
+          );
         });
         it("counter should now show 3/3", () => {
           cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
@@ -66,8 +68,7 @@ describe("Mandataires", function() {
         it("can close mandat", () => {
           cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
-          cy
-            .get("[data-cy=button-close-mesure]")
+          cy.get("[data-cy=button-close-mesure]")
             .first()
             .click({ force: true });
           cy.dateInput(".ReactModal__Content #root", "2019-07-22");
@@ -100,51 +101,40 @@ describe("Mandataires", function() {
           cy.visit("/mandataires", { Authorization: "Bearer " + localStorage.getItem("id_token") });
           cy.get("[data-cy='Mes informations']").click();
           cy.get("[data-cy=button-edit-profile]").click();
-          cy
-            .get(".form-group #root_nom")
+          cy.get(".form-group #root_nom")
             .clear()
             .type("test-nom");
-          cy
-            .get(".form-group #root_prenom")
+          cy.get(".form-group #root_prenom")
             .clear()
             .type("test-prenom");
 
           cy.get(".form-group #root_genre").select("H");
-          cy
-            .get(".form-group #root_telephone")
+          cy.get(".form-group #root_telephone")
             .clear()
             .type("0101010108");
-          cy
-            .get(".form-group #root_telephone_portable")
+          cy.get(".form-group #root_telephone_portable")
             .clear()
             .type("0607080910");
-          cy
-            .get(".form-group #root_email")
+          cy.get(".form-group #root_email")
             .clear()
             .type("u@u.com");
-          cy
-            .get(".form-group #root_adresse")
+          cy.get(".form-group #root_adresse")
             .clear()
             .type("21 rue de oui");
-          cy
-            .get(".form-group #root_code_postal")
+          cy.get(".form-group #root_code_postal")
             .clear()
             .type("62009");
-          cy
-            .get(".form-group #root_ville")
+          cy.get(".form-group #root_ville")
             .clear()
             .type("Avesnes");
-          cy
-            .get(".form-group #root_zip")
+          cy.get(".form-group #root_zip")
             .clear()
             .type("2ème arrondissement");
-          cy
-            .get(".form-group #root_dispo_max")
+          cy.get(".form-group #root_dispo_max")
             .clear()
             .type("10");
           cy.get(".form-group #root_secretariat").select("Oui");
-          cy
-            .get(".form-group #root_nb_secretariat")
+          cy.get(".form-group #root_nb_secretariat")
             .clear()
             .type(4);
 
@@ -175,8 +165,7 @@ describe("Mandataires", function() {
           cy.get("[data-cy='Mesures en cours']").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
           cy.get("button[data-cy=button-close-mesure]").should("have.length", 2);
-          cy
-            .get("[data-cy=button-close-mesure]")
+          cy.get("[data-cy=button-close-mesure]")
             .first()
             .click({ force: true });
           cy.get(".ReactModal__Content button.btn-success").click();
@@ -203,12 +192,10 @@ describe("Mandataires", function() {
           cy.get("[data-cy='Mesures éteintes']").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
           cy.get("button[data-cy=button-reactivate-mesure]").should("have.length", 2);
-          cy
-            .get("button[data-cy=button-reactivate-mesure]")
+          cy.get("button[data-cy=button-reactivate-mesure]")
             .first()
             .click();
-          cy
-            .get("[data-cy=button-modal-reactivate-mesure]")
+          cy.get("[data-cy=button-modal-reactivate-mesure]")
             .first()
             .click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);

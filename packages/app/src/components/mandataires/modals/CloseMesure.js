@@ -57,6 +57,7 @@ const mapDispatchToProps = (dispatch, ownProps) =>
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "CloseMesure", destroyOnHide: true })(CloseMesure)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectModal({ name: "CloseMesure", destroyOnHide: true })(CloseMesure));
