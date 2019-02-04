@@ -40,7 +40,8 @@ const parseMesures = csvPath => {
   });
 };
 
-const range = (start, end) => Array.from({ length: end - start }, (k, v) => start + v);
+const range = (start, end) =>
+  Array.from({ length: end - start }, (k, v) => start + v);
 
 const getCpData = row => {
   const [cp, latitude, longitude] = row.split(";");

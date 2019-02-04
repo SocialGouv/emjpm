@@ -7,11 +7,10 @@
     "dev": "nodemon app.js",
     "test": "NODE_ENV=test mocha --timeout 10000 --exit",
     "knex": "knex",
-    "eslint": "eslint *.js **/*.js --fix",
+    "lint": "eslint *.js **/*.js --fix",
     "migrate-and-start": "knex migrate:latest && npm start",
     "seeds": "knex seed:run",
-    "migrate-seeds-and-start":
-      "knex migrate:latest && npm run seeds && npm start",
+    "migrate-seeds-and-start": "knex migrate:latest && npm run seeds && npm start",
     "wait-migrate-and-start": "sleep 10 && knex migrate:latest && npm start",
     "email-relance": "node ./scripts/relance-mandataires-inactifs"
   },
@@ -52,8 +51,10 @@
     "swagger-ui-dist": "^3.17.6"
   },
   "devDependencies": {
+    "@socialgouv/eslint-config-recommended": "^0.5.0",
     "eslint": "^4.18.2",
     "eslint-config-prettier": "^2.9.0",
+    "eslint-nibble": "^5.1.0",
     "eslint-plugin-prettier": "^2.6.0",
     "nodemailer-mock": "^1.3.14",
     "nodemon": "^1.18.3",

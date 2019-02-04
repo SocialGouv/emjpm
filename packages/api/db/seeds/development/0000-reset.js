@@ -19,4 +19,3 @@ exports.seed = (knex, Promise) => {
     })
     .catch(console.log);
 };
-
