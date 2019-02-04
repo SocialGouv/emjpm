@@ -169,6 +169,24 @@ const COLUMNS = [
     style: { textAlign: "left", alignSelf: "center" }
   },
   {
+    Header: "Dispo",
+    id: "dispo",
+    accessor: d => d.dispo_max - d.mesures_en_cours - d.mesures_en_attente,
+    width: 50,
+    Cell: row => (
+      <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
+        <Circle
+          style={{
+            backgroundColor: getColorFromDisponibilite(row.row.mesures_en_cours / row.row.dispo_max)
+          }}
+        >
+          {row.row.dispo}
+        </Circle>
+      </Cell>
+    ),
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
     Header: "En cours",
     id: "en_cours",
     accessor: d => d.mesures_en_cours / d.dispo_max,
