@@ -41,9 +41,11 @@ Les users et noms des dbs sont définis dans les `docker-compose` et sont initia
 ### Developement
 
 ```sh
-./node_modules/.bin/knex migrate:latest --env development
+docker exec emjpm-postgres createdb backendlebontuteur_db_1 -U postgres
 
-./node_modules/.bin/knex seed:run --env development
+yarn workspace @socialgouv/api knex migrate:latest --env development
+
+yarn workspace @socialgouv/api knex seed:run --env development
 ```
 
 Les comptes de dev sont définis dans les [seeds](https://github.com/SocialGouv/eMJPM-api/blob/master/db/seeds/development/0000-users.js)
@@ -54,9 +56,9 @@ Les comptes de dev sont définis dans les [seeds](https://github.com/SocialGouv/
 # setup la base de test
 docker exec emjpm-postgres createdb emjpm_test -U postgres
 
-./node_modules/.bin/knex migrate:latest --env test
+yarn workspace @socialgouv/api knex migrate:latest --env test
 
-./node_modules/.bin/knex seed:run --env test
+yarn workspace @socialgouv/api knex seed:run --env test
 ```
 
 ## Prod
