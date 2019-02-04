@@ -4,37 +4,45 @@ describe("Inscription", () => {
   it("should switch forms correctly", function() {
     cy.visit("/inscription");
 
-    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+    cy
+      .get("[data-cy='TiByRegion-Hauts-de-France']")
       .get("[data-cy='region']")
       .first()
       .click();
 
-    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+    cy
+      .get("[data-cy='TiByRegion-Hauts-de-France']")
       .get("[data-cy='ti']")
       .first()
       .click();
 
-    cy.get("input[type='radio'][value='individuel']")
+    cy
+      .get("input[type='radio'][value='individuel']")
       .first()
       .click();
 
-    cy.get("[data-cy='form-inscription']")
+    cy
+      .get("[data-cy='form-inscription']")
       .get("input[id='root_username']")
       .should("have.length", 1);
 
-    cy.get("input[type='radio'][value='prepose']")
+    cy
+      .get("input[type='radio'][value='prepose']")
       .first()
       .click();
 
-    cy.get("[data-cy='form-inscription']")
+    cy
+      .get("[data-cy='form-inscription']")
       .get("input[id='root_username']")
       .should("have.length", 1);
 
-    cy.get("input[type='radio'][value='service']")
+    cy
+      .get("input[type='radio'][value='service']")
       .first()
       .click();
 
-    cy.get("[data-cy='form-inscription']")
+    cy
+      .get("[data-cy='form-inscription']")
       .get("input[id='root_username']")
       .should("have.length", 1);
   });
@@ -42,17 +50,20 @@ describe("Inscription", () => {
   it("should NOT register individuel when short password", function() {
     cy.visit("/inscription");
 
-    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+    cy
+      .get("[data-cy='TiByRegion-Hauts-de-France']")
       .get("[data-cy='region']")
       .first()
       .click();
 
-    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+    cy
+      .get("[data-cy='TiByRegion-Hauts-de-France']")
       .get("[data-cy='ti']")
       .first()
       .click();
 
-    cy.get("input[type='radio'][value='individuel']")
+    cy
+      .get("input[type='radio'][value='individuel']")
       .first()
       .click();
 
@@ -84,17 +95,20 @@ describe("Inscription", () => {
   it("should NOT register individuel when not matching password", function() {
     cy.visit("/inscription");
 
-    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+    cy
+      .get("[data-cy='TiByRegion-Hauts-de-France']")
       .get("[data-cy='region']")
       .first()
       .click();
 
-    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+    cy
+      .get("[data-cy='TiByRegion-Hauts-de-France']")
       .get("[data-cy='ti']")
       .first()
       .click();
 
-    cy.get("input[type='radio'][value='individuel']")
+    cy
+      .get("input[type='radio'][value='individuel']")
       .first()
       .click();
 
@@ -133,17 +147,20 @@ describe("Inscription", () => {
 
       cy.visit("/inscription");
 
-      cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+      cy
+        .get("[data-cy='TiByRegion-Hauts-de-France']")
         .get("[data-cy='region']")
         .first()
         .click();
 
-      cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+      cy
+        .get("[data-cy='TiByRegion-Hauts-de-France']")
         .get("[data-cy='ti']")
         .first()
         .click();
 
-      cy.get("input[type='radio'][value='individuel']")
+      cy
+        .get("input[type='radio'][value='individuel']")
         .first()
         .click();
 
@@ -184,7 +201,8 @@ describe("Inscription", () => {
       cy.get("[data-cy='UserCellAction']").should("have.length", 3);
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
-      cy.get("[data-cy='UserCellAction']")
+      cy
+        .get("[data-cy='UserCellAction']")
         .last()
         .click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
@@ -211,17 +229,20 @@ describe("Inscription", () => {
 
       cy.visit("/inscription");
 
-      cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+      cy
+        .get("[data-cy='TiByRegion-Hauts-de-France']")
         .get("[data-cy='region']")
         .first()
         .click();
 
-      cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+      cy
+        .get("[data-cy='TiByRegion-Hauts-de-France']")
         .get("[data-cy='ti']")
         .first()
         .click();
 
-      cy.get("input[type='radio'][value='ti']")
+      cy
+        .get("input[type='radio'][value='ti']")
         .first()
         .click();
 
@@ -264,7 +285,8 @@ describe("Inscription", () => {
       cy.get("[data-cy='UserCellAction']").should("have.length", 1);
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
-      cy.get("[data-cy='UserCellAction']")
+      cy
+        .get("[data-cy='UserCellAction']")
         .last()
         .click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
