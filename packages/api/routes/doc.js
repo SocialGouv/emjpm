@@ -28,13 +28,13 @@ const options = {
     info: {
       title: "eMJPM-api",
       version: "1.0.0",
-      description: `Documentation de l\'API e-MJPM.
-         <br/><br>
-         Serveur de test : https://api.emjpm-preprod.num.social.gouv.fr
-         <br/><br>
-         CORS est disponible sur cette API.
-         <br/><br>
-         Contactez-nous : <a href="mailto:contact@emjpm.beta.gouv.fr">contact@emjpm.beta.gouv.fr</a>`,
+      description: `Documentation de l'API e-MJPM.
+        <br/><br>
+        Serveur de test : https://api.emjpm-preprod.num.social.gouv.fr
+        <br/><br>
+        CORS est disponible sur cette API.
+        <br/><br>
+        Contactez-nous : <a href="mailto:contact@emjpm.beta.gouv.fr">contact@emjpm.beta.gouv.fr</a>`,
       contact: "contact@emjpm.beta.gouv.fr"
     },
     host: "https://api.emjpm-preprod.num.social.gouv.fr",
