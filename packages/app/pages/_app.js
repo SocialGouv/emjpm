@@ -1,7 +1,8 @@
 import App, { Container } from "next/app";
 import React from "react";
+import piwik from "react-piwik";
 
-import piwik, { trackUser } from "../src/piwik";
+import { trackUser } from "../src/piwik";
 
 // all global css
 import "bootstrap/dist/css/bootstrap.css";

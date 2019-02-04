@@ -2,8 +2,7 @@ import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
-
-import piwik from "../../piwik";
+import piwik from "react-piwik";
 
 const API_URL = process.env.API_URL;
 

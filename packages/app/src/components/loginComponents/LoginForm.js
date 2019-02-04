@@ -3,8 +3,9 @@ import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
+import piwik from "react-piwik";
 
-import piwik, { trackUser } from "../../piwik";
+import { trackUser } from "../../piwik";
 
 const API_URL = process.env.API_URL;
 

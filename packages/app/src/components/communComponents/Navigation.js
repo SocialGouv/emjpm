@@ -1,5 +1,5 @@
 import Router from "next/router";
-import piwik from "../../piwik";
+import piwik from "react-piwik";
 
 // todo: hack: force embedding the SVG due to some webpack+next+static issues in a gh-pages env
 const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm_num.png");
