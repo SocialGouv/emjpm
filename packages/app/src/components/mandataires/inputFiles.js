@@ -63,7 +63,7 @@ const readAndPostExcel = inputFile =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
 
-    reader.onerror = error => {
+    reader.onerror = () => {
       reject({
         fichier: ["Impossible de lire le fichier excel"]
       });

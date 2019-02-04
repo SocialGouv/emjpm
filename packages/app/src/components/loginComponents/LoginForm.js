@@ -174,13 +174,12 @@ class LoginForm extends React.Component {
               error: null
             });
           })
-          .catch(e => {
+          .catch(() => {
             piwik.push(["trackEvent", "login", "error"]);
             this.setState({
               status: "error",
               error: "Impossible de se connecter"
             });
-            //throw e;
           });
       }
     );

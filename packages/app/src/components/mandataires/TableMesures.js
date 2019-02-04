@@ -205,7 +205,7 @@ class TableMesures extends React.Component {
     data: [],
     loading: false
   };
-  fetchData = (state, instance) => {
+  fetchData = () => {
     if (!this.state.loading) {
       this.setState({ loading: true }, () =>
         this.props
@@ -220,7 +220,7 @@ class TableMesures extends React.Component {
       );
     }
   };
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     // hack to force reload when some redux state change
     if (prevProps.lastUpdate !== this.props.lastUpdate) {
       this.fetchData();

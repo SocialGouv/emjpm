@@ -179,7 +179,7 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
   </div>
 );
 
-const mapDispatchToProps = (dispatch, ownProps) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators({ updateMandataire: data => updateMandataire(data) }, dispatch);
 
 const ProfileRedux = connect(

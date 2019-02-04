@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { X, Save, PlusSquare, XCircle, CheckCircle } from "react-feather";
 import { format } from "date-fns";
-import { typeMesure, residence, civilite, cabinet } from "../common/nomination";
+import { typeMesure, residence, civilite } from "../common/nomination";
 
 import { Button, ToggleState, Autocomplete } from "..";
 import { createMesure, createMesureSave } from "./actions/mesures";
@@ -251,9 +251,7 @@ const CreateMesure = ({
   onSubmit,
   createMesure,
   mesureCreatedStatus,
-  mesureCreatedMessage,
-  children,
-  ...props
+  mesureCreatedMessage
 }) => {
   return (
     <ToggleState

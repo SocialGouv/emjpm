@@ -2,7 +2,6 @@ import { hide } from "redux-modal";
 import piwik from "react-piwik";
 
 import apiFetch from "../../communComponents/Api";
-import { mandatairesUpdated } from "../../tiComponents/actions/mandataire";
 
 export const MESURE_CREATE = "MESURE_CREATE";
 export const MESURE_CREATED = "MESURE_CREATED";
@@ -43,7 +42,7 @@ const reactivateMesureApi = data =>
       status: "Mesure en cours",
       extinction: null
     })
-  }).then(json =>
+  }).then(() =>
     // todo: move to trigger
     apiFetch(`/mandataires/1/capacite`, {
       method: "PUT"

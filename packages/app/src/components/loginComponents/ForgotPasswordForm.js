@@ -135,7 +135,7 @@ class ForgotPassword extends React.Component {
               error: null
             });
           })
-          .catch(e => {
+          .catch(() => {
             this.setState({
               status: "error",
               error: "Impossible de trouver l'email"

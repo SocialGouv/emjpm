@@ -13,7 +13,7 @@ import "../static/css/custom.css";
 import "../static/css/panel.css";
 
 export default class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
+  static async getInitialProps({ Component, ctx }) {
     let pageProps = {};
 
     if (Component.getInitialProps) {

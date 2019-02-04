@@ -81,7 +81,7 @@ const uiSchema = {
   }
 };
 
-const EditService = ({ show, handleHide, formData, onSubmit, ...props }) => {
+const EditService = ({ show, handleHide, formData, onSubmit }) => {
   return (
     <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
       <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>

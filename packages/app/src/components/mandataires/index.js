@@ -53,8 +53,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-const mapDispatchToProps = (dispatch, ownProps) =>
-  bindActionCreators({ onMount: mandataireMount }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ onMount: mandataireMount }, dispatch);
 
 // connect to redux store actions
 // connect to redux-modal

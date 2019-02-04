@@ -112,7 +112,7 @@ const uiSchema = {
   }
 };
 
-const EditMandataire = ({ show, handleHide, formData, onSubmit, ...props }) => {
+const EditMandataire = ({ show, handleHide, formData, onSubmit }) => {
   // todo: we should have perfect mapping api<->data<->form
   // const cleanData = {
   //   ...formData,

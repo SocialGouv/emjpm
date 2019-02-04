@@ -19,7 +19,7 @@ const uiSchema = {
   }
 };
 
-const CloseMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
+const CloseMesure = ({ show, handleHide, onSubmit, id }) => {
   const onSubmitted = ({ formData }) => {
     onSubmit({
       date: formData,
@@ -52,8 +52,7 @@ const CloseMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) =>
-  bindActionCreators({ onSubmit: closeMesure }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ onSubmit: closeMesure }, dispatch);
 
 // connect to redux store actions
 // connect to redux-modal

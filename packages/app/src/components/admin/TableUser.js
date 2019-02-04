@@ -122,7 +122,7 @@ class TableUser extends React.Component {
     data: [],
     loading: true
   };
-  fetchData = (state, instance) => {
+  fetchData = () => {
     const url =
       this.props.type === "mandataire"
         ? `/admin/mandataires?${queryString.stringify(this.props.filters)}`

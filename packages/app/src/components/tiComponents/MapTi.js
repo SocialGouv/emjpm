@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import FilterMesuresMap from "./FilterMesuresMap";
 import DisplayMandataires from "./DisplayMandataires";
 import apiFetch from "../communComponents/Api";
-import getCenter from "../communComponents/getCenter";
 import { filterDataForMandataires } from "../index";
 import FilterMandataires from "./FilterMandataires";
 
@@ -67,7 +66,7 @@ class MapTi extends React.Component {
       .catch(console.log);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     // hack to force reload when some redux state change
     if (prevProps.data !== this.props.data) {
       this.fetchData();
@@ -128,8 +127,7 @@ class MapTi extends React.Component {
 
   render() {
     this.mapRef.current && this.mapRef.current.leafletElement.setMaxZoom(13);
-    const { dataFilters, datamesureFilters, isMandataire, filters, coordinates } = this.props;
-    //const center = getCenter(this.state, coordinates);
+    const { dataFilters, datamesureFilters, isMandataire, filters } = this.props;
     const center = [this.state.lat, this.state.lng];
     const filterMesure = {
       content: "type",
