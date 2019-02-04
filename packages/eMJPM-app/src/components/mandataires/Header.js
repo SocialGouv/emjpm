@@ -7,7 +7,7 @@ const ContainerMandataire = styled.div`
   padding: 10px 0;
   font-size: 1.2em;
   margin-top: 0px;
-  height: 100px;
+  height: 150px;
 `;
 
 const Title = styled.div`
@@ -17,7 +17,16 @@ const Title = styled.div`
   text-transform: uppercase;
 `;
 
-const HeaderMandataire = ({ nom, prenom, date_mesure_update, type, etablissement }) => (
+const HeaderMandataire = ({
+  nom,
+  prenom,
+  date_mesure_update,
+  type,
+  etablissement,
+  dispo_max,
+  mesures_en_cours,
+  mesures_en_attente
+}) => (
   <ContainerMandataire className="container">
     <Title>
       {type === "service" ? (
@@ -30,6 +39,12 @@ const HeaderMandataire = ({ nom, prenom, date_mesure_update, type, etablissement
         `${nom} ${prenom}`
       )}
     </Title>
+    <div>
+      Je déclare actuellement aux juges pouvoir prendre{" "}
+      {dispo_max - mesures_en_cours - mesures_en_attente} mesures supplémentaires
+      (le chiffre correspond au nb mesures souhaitées - mesures en cours - mesures réservées)
+      rendez-vous dans "Mes informations" pour modifier la capacité souhaitée
+    </div>
     <div style={{ textAlign: "right", fontSize: "0.8em", color: "#555" }}>
       {date_mesure_update && (
         <div>
