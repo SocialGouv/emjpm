@@ -1,3 +1,4 @@
+import React from "react";
 import { Home, User } from "react-feather";
 
 import { Layout, DummyTabs } from "../src/components";

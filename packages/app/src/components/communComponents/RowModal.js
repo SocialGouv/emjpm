@@ -1,3 +1,4 @@
+import React from "react";
 const RowModal = ({ label, value }) => (
   <div style={{ textAlign: "left" }}>
     <b>{label}</b>

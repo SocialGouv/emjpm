@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import styled from "styled-components";
 import Form from "react-jsonschema-form";
 import { PlusSquare, Trash } from "react-feather";
