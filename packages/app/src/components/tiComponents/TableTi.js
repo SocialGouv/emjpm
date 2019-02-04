@@ -37,28 +37,28 @@ export const PillDispo = ({ dispo, dispo_max }) => (
   </div>
 );
 
-const CellMandataireRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show, openFicheMandataireModal }, dispatch)
+const CellMandataireRedux = connect(null, dispatch =>
+  bindActionCreators({ show, openFicheMandataireModal }, dispatch)
 )(({ row, show, children, openFicheMandataireModal }) => (
-  <div
+  <button
+    className="btn"
     title="Ouvrir la fiche du mandataire"
     data-cy="button-attente-mesure"
-    style={{ cursor: "pointer" }}
     onClick={() => {
       openFicheMandataireModal(row.original);
       show("FicheMandataireModal", { currentMandataire: row.original });
     }}
   >
     {children}
-  </div>
+  </button>
 ));
 
 const CellMesureReservationRedux = connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ row, show, children }) => (
-  <div
+  <button
+    className="btn"
     title="Attribuer une nouvelle mesure"
     data-cy="button-reservation-mesure"
     onClick={() => {
@@ -66,7 +66,7 @@ const CellMesureReservationRedux = connect(
     }}
   >
     {children}
-  </div>
+  </button>
 ));
 
 const Cell = ({ style, title, children, row }) => (

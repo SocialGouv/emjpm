@@ -24,9 +24,9 @@ const CellMesureReservationRedux = connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ show, mandataire }) => (
-  <div
+  <button
+    className="btn"
     data-cy="button-attente-mesure"
-    style={{ cursor: "pointer" }}
     title="Attribuer une mesure"
     onClick={() => {
       // TODO: move to actions
@@ -35,7 +35,7 @@ const CellMesureReservationRedux = connect(
     }}
   >
     <PlusSquare /> Attribuer une mesure
-  </div>
+  </button>
 ));
 
 // Commentaire View display

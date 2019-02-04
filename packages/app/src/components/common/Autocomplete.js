@@ -42,9 +42,10 @@ class FuseHighLighter extends React.Component {
       });
     });
     return (
-      <div
+      <button
+        className="btn"
         onClick={onClick}
-        style={{ cursor: "pointer", background: isHighlighted ? "lightgray" : "white" }}
+        style={{ background: isHighlighted ? "lightgray" : "white" }}
         key={html}
         dangerouslySetInnerHTML={{
           __html: newHtml || html
