@@ -80,11 +80,13 @@ const COLUMNS = [
     id: "date_ouverture",
     width: 160,
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
-    Cell: row => (
-      <div>
-        {format(row.row.date_ouverture, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
-      </div>
-    ),
+    Cell(row) {
+      return (
+        <div>
+          {format(row.row.date_ouverture, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
+        </div>
+      );
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -92,11 +94,13 @@ const COLUMNS = [
     id: "date_demande",
     width: 300,
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
-    Cell: row => (
-      <div>
-        {format(row.row.date_demande, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
-      </div>
-    ),
+    Cell(row) {
+      return (
+        <div>
+          {format(row.row.date_demande, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
+        </div>
+      );
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -136,7 +140,9 @@ const COLUMNS = [
     id: "annee",
     width: 80,
     accessor: "annee",
-    Cell: row => <div>{format(row.row.annee, "YYYY")}</div>,
+    Cell(row) {
+      return <div>{format(row.row.annee, "YYYY")}</div>;
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -151,24 +157,30 @@ const COLUMNS = [
     id: "extinction",
     width: 100,
     accessor: d => format(d.extinction, "YYYY-MM-DD"),
-    Cell: row => (
-      <div>
-        {format(row.row.extinction, "DD/MM/YYYY", { locale: require("date-fns/locale/fr") })}
-      </div>
-    ),
+    Cell(row) {
+      return (
+        <div>
+          {format(row.row.extinction, "DD/MM/YYYY", { locale: require("date-fns/locale/fr") })}
+        </div>
+      );
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Modifier",
     id: "modifier",
-    Cell: row => <CellEditMesureRedux row={row} />,
+    Cell(row) {
+      return <CellEditMesureRedux row={row} />;
+    },
     width: 150,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Fin de mandat",
     id: "fin-mandat",
-    Cell: row => <CellCloseMesureRedux row={row} />,
+    Cell(row) {
+      return <CellCloseMesureRedux row={row} />;
+    },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
@@ -181,14 +193,18 @@ const COLUMNS = [
   {
     Header: "Réactiver",
     id: "reactiver",
-    Cell: row => <CellReactivateMesureRedux row={row} />,
+    Cell(row) {
+      return <CellReactivateMesureRedux row={row} />;
+    },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Valider",
     id: "valider",
-    Cell: row => <CellValidationMesureRedux row={row} />,
+    Cell(row) {
+      return <CellValidationMesureRedux row={row} />;
+    },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },

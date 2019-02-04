@@ -55,7 +55,9 @@ const COLUMNS = [
   {
     Header: "Actif",
     accessor: "active",
-    Cell: row => <CellActive active={row.value} />,
+    Cell(row) {
+      <CellActive active={row.value} />;
+    },
     width: 70,
     show: false, // the button show more accurate status
     style: { textAlign: "center" }
@@ -110,7 +112,10 @@ const COLUMNS = [
   },
   {
     Header: "Activer",
-    Cell: row => <CellAction row={row.row} />,
+    // eslint-disable-next-line react/display-name
+    Cell(row) {
+      return <CellAction row={row.row} />;
+    },
     width: 120,
     style: { textAlign: "center", alignSelf: "center" }
   }

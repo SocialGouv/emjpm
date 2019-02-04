@@ -138,7 +138,7 @@ const COLUMNS = [
     id: "identity",
     width: 50,
     accessor: d => d.type,
-    Cell: row => (
+    Cell(row) {
       <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
         <Circle
           style={{
@@ -147,15 +147,15 @@ const COLUMNS = [
         >
           {row.row.identity.toUpperCase().substr(0, 1)}
         </Circle>
-      </Cell>
-    ),
+      </Cell>;
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Identité",
     id: "etablissement",
     accessor: d => d.etablissement,
-    Cell: row => (
+    Cell(row) {
       <Cell row={row} style={{ verticalAlign: "middle" }}>
         {row.row.identity === "service" ? (
           <b>{row.row.etablissement}</b>
@@ -165,8 +165,8 @@ const COLUMNS = [
           </b>
         )}
         <br /> <div style={{ color: "#cccccc" }}>{row.row.identity.toUpperCase()} </div>
-      </Cell>
-    ),
+      </Cell>;
+    },
     style: { textAlign: "left", alignSelf: "center" }
   },
   {
@@ -174,14 +174,14 @@ const COLUMNS = [
     id: "en_cours",
     accessor: d => d.mesures_en_cours / d.dispo_max,
     width: 110,
-    Cell: row => (
+    Cell(row) {
       <CellMandataireRedux
         row={row}
         style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
       >
         <PillDispo dispo={row.row.mesures_en_cours} dispo_max={row.row.dispo_max} />
-      </CellMandataireRedux>
-    ),
+      </CellMandataireRedux>;
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -189,14 +189,14 @@ const COLUMNS = [
     id: "mesures_en_attente",
     accessor: d => d.mesures_en_attente,
     width: 70,
-    Cell: row => (
+    Cell(row) {
       <CellMandataireRedux row={row} style={{ fontSize: "1em" }}>
         <div style={{ color: "black" }} data-cy="attente">
           {" "}
           <b>{row.row.mesures_en_attente} </b>
         </div>
-      </CellMandataireRedux>
-    ),
+      </CellMandataireRedux>;
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -204,7 +204,7 @@ const COLUMNS = [
     id: "updateMandataire",
     accessor: d => d.date_mesure_update,
     width: 40,
-    Cell: row => (
+    Cell(row) {
       <CellMandataireRedux
         row={row}
         style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
@@ -228,8 +228,8 @@ const COLUMNS = [
             </span>
           )
         )}
-      </CellMandataireRedux>
-    ),
+      </CellMandataireRedux>;
+    },
     style: { alignSelf: "center" }
   },
   {
@@ -237,14 +237,16 @@ const COLUMNS = [
     id: "reservation",
     accessor: d => d.mesures_en_attente,
     width: 100,
-    Cell: row => (
-      <CellMesureReservationRedux
-        row={row}
-        style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
-      >
-        <PlusSquare title="Reservez une mesure" style={{ cursor: "pointer" }} />
-      </CellMesureReservationRedux>
-    ),
+    Cell(row) {
+      return (
+        <CellMesureReservationRedux
+          row={row}
+          style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
+        >
+          <PlusSquare title="Reservez une mesure" style={{ cursor: "pointer" }} />
+        </CellMesureReservationRedux>
+      );
+    },
     style: { alignSelf: "center" }
   }
 ];
