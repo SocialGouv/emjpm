@@ -1,3 +1,4 @@
+import React from "react";
 import { createStore, combineReducers, applyMiddleware, bindActionCreators } from "redux";
 import { reducer as modal } from "redux-modal";
 import { Provider, connect } from "react-redux";

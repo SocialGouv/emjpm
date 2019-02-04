@@ -1,3 +1,4 @@
+import React from "react";
 import { findDOMNode } from "react-dom";
 import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";

@@ -1,3 +1,4 @@
+import React from "react";
 import { Clock, Home } from "react-feather";
 import Profile from "./Profile";
 import Header from "./Header";

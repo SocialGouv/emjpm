@@ -1,3 +1,4 @@
+import React from "react";
 import ReactAutocomplete from "react-autocomplete";
 import PropTypes from "prop-types";
 

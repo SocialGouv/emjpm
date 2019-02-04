@@ -1,3 +1,4 @@
+import React from "react";
 import dynamic from "next/dynamic";
 import { Home, Map, UserMinus, Clock, FilePlus } from "react-feather";
 

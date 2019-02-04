@@ -27,7 +27,7 @@ class FetchCommentaires extends React.Component {
         })
         .catch(function(error) {
           alert("Impossible de soumettre le commentaire");
-          throw e;
+          throw error;
         });
     }
   };
