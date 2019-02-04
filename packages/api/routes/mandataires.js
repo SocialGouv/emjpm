@@ -220,7 +220,13 @@ router.put("/1", loginRequired, async (req, res, next) => {
  */
 router.post("/filters", loginRequired, async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
-  getAllByMandatairesFilter(ti.id, req.body.latNorthEast, req.body.latSouthWest, req.body.longNorthEast, req.body.longSouthWest)
+  getAllByMandatairesFilter(
+    ti.id,
+    req.body.latNorthEast,
+    req.body.latSouthWest,
+    req.body.longNorthEast,
+    req.body.longSouthWest
+  )
     .then(function(mesures) {
       res.status(200).json(mesures);
     })

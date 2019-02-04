@@ -154,7 +154,8 @@ const { inscriptionEmail } = require("../email/inscription");
  *                 $ref: '#/components/schemas/InscriptionTi'
  */
 router.get("/tis", async (req, res, next) => {
-  const [err, data] = await queries.getTiByRegion()
+  const [err, data] = await queries
+    .getTiByRegion()
     .then(data => [null, data], err => [err]);
 
   return err ? next(err) : res.json(data);

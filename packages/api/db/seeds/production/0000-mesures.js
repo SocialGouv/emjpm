@@ -16,8 +16,8 @@ const parseMesures = csvPath => {
       type,
       lieu_de_vie,
       code_postal,
-      ville,
-      , // adresse
+      ville, // adresse
+      ,
       etablissement,
       mandataire_id,
       latitude,

@@ -1,4 +1,3 @@
-
 exports.seed = function(knex) {
   // Inserts seed entries
   return knex("geolocalisation_code_postal").insert([

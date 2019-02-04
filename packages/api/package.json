@@ -7,7 +7,7 @@
     "dev": "nodemon app.js",
     "test": "NODE_ENV=test mocha --timeout 10000 --exit",
     "knex": "knex",
-    "lint": "eslint *.js **/*.js --fix",
+    "lint": "eslint auth db email routes scripts test app.js knexfile.js",
     "migrate-and-start": "knex migrate:latest && npm start",
     "seeds": "knex seed:run",
     "migrate-seeds-and-start": "knex migrate:latest && npm run seeds && npm start",
