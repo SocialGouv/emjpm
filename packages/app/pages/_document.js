@@ -22,7 +22,7 @@ export default class MyDocument extends Document {
   }
   render() {
     return (
-      <html>
+      <html lang="fr">
         <Head>
           <title>e-MJPM</title>
           <meta charSet="utf-8" />
