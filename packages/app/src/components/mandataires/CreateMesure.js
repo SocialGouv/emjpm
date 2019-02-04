@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
