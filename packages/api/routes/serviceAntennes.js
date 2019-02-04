@@ -78,7 +78,7 @@ router.post(
       mandataire_id: mandataire.id
     })
       .then(function() {
-        return getAllAntennesByMandataireId(ti.id);
+        return getAllAntennesByMandataireId(mandataire.id);
       })
       .then(function(commentaires) {
         res.status(200).json(commentaires);
