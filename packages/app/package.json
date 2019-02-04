@@ -8,7 +8,7 @@
     "start": "next dev",
     "dev": "next",
     "test": "jest ./test",
-    "lint": "eslint cypress pages src stories test",
+    "lint": "eslint cypress pages src test",
     "build": "next build && next export",
     "flow": "flow",
     "cypress:open": "cypress open",
