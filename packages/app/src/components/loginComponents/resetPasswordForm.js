@@ -1,5 +1,4 @@
 import React from "react";
-import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
@@ -115,12 +114,9 @@ class ResetPassword extends React.Component {
     formData: {}
   };
   componentDidMount() {
-    const node = findDOMNode(this);
-    if (node) {
-      const input = node.querySelector("input");
-      if (input) {
-        input.focus();
-      }
+    const input = this.node.querySelector("input");
+    if (input) {
+      input.focus();
     }
   }
 
@@ -155,6 +151,7 @@ class ResetPassword extends React.Component {
   render() {
     return (
       <ResetPasswordView
+        ref={node => (this.node = node)}
         formData={this.state.formData}
         onSubmit={this.onSubmit}
         error={this.state.error}
