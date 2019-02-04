@@ -59,4 +59,6 @@ const NavLink = styled.a.attrs({
 
 const NavLinks = styled.div.attrs({
   className: "align-items-center d-flex"
-})`flex: 0 0 300px;`;
+})`
+  flex: 0 0 300px;
+`;

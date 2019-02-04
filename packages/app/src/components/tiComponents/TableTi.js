@@ -37,8 +37,9 @@ export const PillDispo = ({ dispo, dispo_max }) => (
   </div>
 );
 
-const CellMandataireRedux = connect(null, dispatch =>
-  bindActionCreators({ show, openFicheMandataireModal }, dispatch)
+const CellMandataireRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show, openFicheMandataireModal }, dispatch)
 )(({ row, show, children, openFicheMandataireModal }) => (
   <button
     className="btn"
