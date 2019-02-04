@@ -89,7 +89,13 @@ router.post("/filters", loginRequired, async (req, res, next) => {
   if (!ti) {
     return next(new Error(401));
   }
-  getAllMesuresByMandatairesFilter(ti.id, req.body.latNorthEast, req.body.latSouthWest, req.body.longNorthEast, req.body.longSouthWest)
+  getAllMesuresByMandatairesFilter(
+    ti.id,
+    req.body.latNorthEast,
+    req.body.latSouthWest,
+    req.body.longNorthEast,
+    req.body.longSouthWest
+  )
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
