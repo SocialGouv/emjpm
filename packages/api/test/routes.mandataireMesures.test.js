@@ -123,7 +123,7 @@ describe("routes : mandataireMesures", () => {
         .send({
           code_postal: "10000"
         })
-        .then(res =>
+        .then(() =>
           knex
             .table("mesures")
             .where("id", 2)

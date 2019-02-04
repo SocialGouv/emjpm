@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return knex.schema.alterTable("mesures", function(table) {
     table.integer("etablissement_id");
   });

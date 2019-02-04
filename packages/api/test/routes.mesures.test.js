@@ -60,7 +60,7 @@ describe("routes : mesures", () => {
           .then(function(res) {
             res.status.should.eql(401);
           })
-          .catch(err => true)
+          .catch(() => true)
       ));
   });
 });

@@ -1,4 +1,5 @@
-exports.seed = function(knex, Promise) {
+
+exports.seed = function(knex) {
   // Inserts seed entries
   return knex("geolocalisation_code_postal").insert([
     { id: 1, code_postal: "62000", latitude: 50.5333, longitude: 2.6333 },

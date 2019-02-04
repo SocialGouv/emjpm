@@ -271,7 +271,7 @@ router.get(
 router.get(
   "/:mandataireId/mesuresForMaps",
   typeRequired("individuel", "prepose"),
-  async (req, res, next) => {
+  async (req, res) => {
     const mandataire = await getMandataireByUserId(req.user.id);
     const mesures = await getMesuresMap(mandataire.id);
     res.status(200).json(mesures);

@@ -48,7 +48,7 @@ function adminRequired(req, res, next) {
         res.status(401).json({ status: "You are not authorized" });
       return next();
     })
-    .catch(err => {
+    .catch(() => {
       res.status(500).json({ status: "Something bad happened" });
     });
 }
@@ -63,7 +63,7 @@ function mandataireRequired(req, res, next) {
         res.status(401).json({ status: "You are not authorized" });
       return next();
     })
-    .catch(err => {
+    .catch(() => {
       res.status(500).json({ status: "Something bad happened" });
     });
 }

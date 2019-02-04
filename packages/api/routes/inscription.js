@@ -178,7 +178,7 @@ router.get("/tis", async (req, res, next) => {
  *             $ref: "#/components/schemas/SuccessResponse"
  *
  */
-router.post("/mandataires", (req, res, next) => {
+router.post("/mandataires", (req, res) => {
   const {
     username,
     etablissement,
@@ -280,7 +280,7 @@ router.post("/mandataires", (req, res, next) => {
  *             $ref: "#/components/schemas/SuccessResponse"
  *
  */
-router.post("/tis", (req, res, next) => {
+router.post("/tis", (req, res) => {
   const {
     username,
     pass1,

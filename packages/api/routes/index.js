@@ -9,7 +9,7 @@ router.use("/mesures", require("./mesures"));
 router.use("/email", require("./email").router);
 router.use("/admin", require("./admin"));
 
-router.get("/ping", function(req, res, next) {
+router.get("/ping", function(req, res) {
   if (!req.user) {
     res.status(401).json({ success: false });
   } else {
@@ -17,7 +17,7 @@ router.get("/ping", function(req, res, next) {
   }
 });
 
-router.get("/", function(req, res, next) {
+router.get("/", function(req, res) {
   res.json({
     title: "API eMJPM",
     version: pkg.version,

@@ -126,10 +126,8 @@ describe("routes : commentaires", () => {
             .send({
               comment: "this is a super comment"
             })
-            .catch(res => {
-              return true;
-            })
-            .then(res =>
+            .catch(() => true)
+            .then(() =>
               knex
                 .from("commentaires")
                 .where({

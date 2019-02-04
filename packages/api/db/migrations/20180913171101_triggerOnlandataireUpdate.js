@@ -1,6 +1,6 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return knex.schema
-    .alterTable("mandataires", function(table) {})
+    .alterTable("mandataires", () => undefined)
     .then(() => knex.raw(onUpdateTrigger("mandataires")));
 };
 

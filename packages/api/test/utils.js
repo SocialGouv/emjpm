@@ -72,7 +72,7 @@ const shouldBeProtected = (server, method, url, options = {}) => {
           .then(res => {
             res.status.should.eql(401);
           })
-          .catch(err => true)
+          .catch(() => true)
       ));
   }
 };

@@ -72,7 +72,7 @@ const redirs = {
  *               $ref: '#/components/schemas/SuccessResponse'
  */
 router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
-  passport.authenticate("local", { session: false }, (err, user, info) => {
+  passport.authenticate("local", { session: false }, (err, user) => {
     if (err) {
       return next(err);
     }
@@ -165,7 +165,7 @@ router.get("/logout", (req, res, next) => {
  *       200:
  *         description: send email to he user with url for reset password
  */
-router.post("/forgot_password", (req, res, next) => {
+router.post("/forgot_password", (req, res) => {
   const email = req.body.email;
   const token = uid(16);
 
@@ -223,7 +223,7 @@ router.post("/forgot_password", (req, res, next) => {
  *           Set-Cookie:
  *             description: API server cookie
  */
-router.post("/reset_password", (req, res, next) => {
+router.post("/reset_password", (req, res) => {
   getSpecificMandataireByToken({ reset_password_token: req.body.token })
     .catch(res => {
       res.status(400).send({
