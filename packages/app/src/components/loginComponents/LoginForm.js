@@ -1,4 +1,5 @@
 import React from "react";
+import { findDOMNode } from "react-dom";
 import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
@@ -126,20 +127,20 @@ class LoginForm extends React.Component {
     piwik.push(["trackEvent", "navigation", "login"]);
 
     // focus login on load
-    const input = this.node.querySelector("input");
-    if (input) {
-      input.focus();
+    const node = findDOMNode(this);
+    if (node) {
+      const input = node.querySelector("input");
+      if (input) {
+        input.focus();
+      }
     }
 
     // workaround autofill bugs with react-jsonschema-form
     // https://github.com/mozilla-services/react-jsonschema-form/issues/184
     // use the DOM to fill initial formData
     const autofillValues = {
-      username:
-        this.node.querySelector("#root_username") &&
-        this.node.querySelector("#root_username").value,
-      password:
-        this.node.querySelector("#root_password") && this.node.querySelector("#root_password").value
+      username: node.querySelector("#root_username") && node.querySelector("#root_username").value,
+      password: node.querySelector("#root_password") && node.querySelector("#root_password").value
     };
 
     this.setState({
@@ -187,7 +188,6 @@ class LoginForm extends React.Component {
   render() {
     return (
       <LoginFormView
-        ref={node => (this.node = node)}
         formData={this.state.formData}
         onSubmit={this.onSubmit}
         error={this.state.error}
