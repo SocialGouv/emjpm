@@ -127,6 +127,8 @@ class LoginForm extends React.Component {
     piwik.push(["trackEvent", "navigation", "login"]);
 
     // focus login on load
+    // ! TODO(douglasduteil): find a work around to replace "findDOMNode"
+    // eslint-disable-next-line react/no-find-dom-node
     const node = findDOMNode(this);
     if (node) {
       const input = node.querySelector("input");
