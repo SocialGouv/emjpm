@@ -19,8 +19,15 @@ const user = id =>
     .where({ "users.id": id })
     .first();
 
+const updateResetPassword = (id, token, interval) =>
+  updateUser(id, {
+    reset_password_token: token,
+    reset_password_expires: knex.raw(`now() + interval '${interval}'`)
+  });
+
 module.exports = {
   updateLastLogin,
+  updateResetPassword,
   updateUser,
   user
 };

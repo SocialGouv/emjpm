@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`' jeRemY  ' should login as individuel 1`] = `
+Object {
+  "success": true,
+  "token": Any<String>,
+  "url": "/mandataires",
+}
+`;
+
+exports[`'admin' should login as admin 1`] = `
+Object {
+  "success": true,
+  "token": Any<String>,
+  "url": "/admin",
+}
+`;
+
+exports[`'inactive' not login an inactive user 1`] = `
+Object {
+  "message": "User not found",
+  "success": false,
+}
+`;
+
+exports[`'jeremy' not login a registered user with wrong password 1`] = `
+Object {
+  "message": "User not found",
+  "success": false,
+}
+`;
+
+exports[`'jeremy' should login as individuel 1`] = `
+Object {
+  "success": true,
+  "token": Any<String>,
+  "url": "/mandataires",
+}
+`;
+
+exports[`'kelly' should login as prepose 1`] = `
+Object {
+  "success": true,
+  "token": Any<String>,
+  "url": "/mandataires",
+}
+`;
+
+exports[`'michael' not login an unregistered user 1`] = `
+Object {
+  "message": "User not found",
+  "success": false,
+}
+`;
+
+exports[`'service1' should login as service 1`] = `
+Object {
+  "success": true,
+  "token": Any<String>,
+  "url": "/services",
+}
+`;
+
+exports[`'ti1' should login as ti 1`] = `
+Object {
+  "success": true,
+  "token": Any<String>,
+  "url": "/tis",
+}
+`;

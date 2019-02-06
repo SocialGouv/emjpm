@@ -1,13 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 const uid = require("rand-token").uid;
 
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
 
-const { updateLastLogin, updateUser } = require("../db/queries/users");
+const {
+  updateLastLogin,
+  updateResetPassword,
+  updateUser
+} = require("../db/queries/users");
 const {
   getSpecificMandataire,
   getMandataireById,
@@ -165,19 +170,16 @@ router.get("/logout", (req, res, next) => {
  *       200:
  *         description: send email to he user with url for reset password
  */
-router.post("/forgot_password", (req, res) => {
+router.post("/forgot_password", (req, res, next) => {
   const email = req.body.email;
   const token = uid(16);
 
   getSpecificMandataire({ email: email })
     .then(user => {
       if (!user) {
-        throw new Error("user not found");
+        throw createError.NotFound(`User "${email}" not Found`);
       }
-      return updateUser(user.user_id, {
-        reset_password_token: token,
-        reset_password_expires: Date.now() + 7200000
-      });
+      return updateResetPassword(user.user_id, token, "2 hours");
     })
     .then(() =>
       resetPasswordEmail(
@@ -186,12 +188,9 @@ router.post("/forgot_password", (req, res) => {
       )
     )
     .then(() => res.status(200).json())
-    .catch(e => {
-      console.log(e);
-      res.status(500).json();
-    });
+    .catch(next);
 });
-//7200000
+
 /**
  * @swagger
  * /auth/reset_password:
@@ -223,39 +222,36 @@ router.post("/forgot_password", (req, res) => {
  *           Set-Cookie:
  *             description: API server cookie
  */
-router.post("/reset_password", (req, res) => {
+router.post("/reset_password", (req, res, next) => {
   getSpecificMandataireByToken({ reset_password_token: req.body.token })
-    .catch(res => {
-      res.status(400).send({
-        message: "Votre lien a expiré."
-      });
-      throw new Error();
+    .catch(err => {
+      // 419 Authentication Timeout see http://getstatuscode.com/419
+      // message: "Votre lien a expiré."
+      throw createError(419, err);
     })
     .then(user => {
       if (!user) {
-        return res.status(401).send({
-          message: "Erreur."
-        });
+        throw createError.Unauthorized("Invalid token");
       }
+
       if (req.body.newPassword === req.body.verifyPassword) {
         return updateUser(user.user_id, {
           password: bcrypt.hashSync(req.body.newPassword, 10),
-          reset_password_token: undefined,
-          reset_password_expires: undefined
+          reset_password_token: null,
+          reset_password_expires: null
         })
           .then(id => getMandataireById(id))
           .then(mandataire => {
             return confirmationPasswordEmail(mandataire.email);
           });
       } else {
-        return res.status(400).send({
-          message: "Vos mots de passe ne sont pas équivalents."
-        });
+        throw createError.UnprocessableEntity( "Not equal passwords." );
       }
     })
     .then(function() {
       res.status(200).json();
-    });
+    })
+    .catch(next);
 });
 
 module.exports = router;

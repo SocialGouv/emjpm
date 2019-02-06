@@ -21,17 +21,12 @@ Veuillez cliquer sur le lien suivant: <a href=${url}>réinitialiser mon mot de p
 Bien à vous.
 `;
 
-const resetPasswordEmail = (email, url) => {
-  return sendEmail(
-    email,
-    "Nouveau mot de passe pour e-MJPM",
-    EMAIL_RELANCE_TEXT(url),
-    EMAIL_RELANCE_HTML(url)
-  ).catch(e => {
-    // todo: sentry
-    console.log(e);
-  });
-};
+const resetPasswordEmail = (email, url) => sendEmail(
+  email,
+  "Nouveau mot de passe pour e-MJPM",
+  EMAIL_RELANCE_TEXT(url),
+  EMAIL_RELANCE_HTML(url)
+)
 
 module.exports = {
   resetPasswordEmail

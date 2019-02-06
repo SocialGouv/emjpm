@@ -195,8 +195,9 @@ const getSpecificMandataire = data =>
 const getSpecificMandataireByToken = data =>
   knex
     .from("mandataires")
-    .where(data, knex.raw("mandataires.reset_password_expires < now()"))
+    .where(data)
     .innerJoin("users", "mandataires.user_id", "users.id")
+    .andWhere("users.reset_password_expires", ">", "now()")
     .first();
 
 module.exports = {

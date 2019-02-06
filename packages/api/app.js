@@ -79,17 +79,21 @@ app.use(function(req, res, next) {
 
 // error handlers
 
-// development error handler
-// will print stacktrace
-/*
-if (app.get("env") === "development") {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500).json({
-      message: err.message,
-      error: err
-    });
-  });
-}*/
+app.use(function (err, req, res, next) {
+  if (res.headersSent) {
+    return next(err)
+  }
+  // console.error(err);
+  const body = {
+    code: err.code,
+    message: err.message,
+    name: err.name,
+    status: err.status,
+    type: err.type
+  };
+  if (process.env.NODE_ENV !== "production") body.stack = err.stack;
+  res.status(err.status || 500).json(body);
+});
 
 // production error handler
 // no stacktraces leaked to user
