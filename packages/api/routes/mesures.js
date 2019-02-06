@@ -1,7 +1,6 @@
 const express = require("express");
 
 const router = express.Router();
-const fetch = require("isomorphic-fetch");
 
 const { loginRequired, typeRequired } = require("../auth/_helpers");
 
@@ -43,7 +42,7 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
   }
   getAllMesuresByMandataires(ti.id)
     .then(mesures => res.status(200).json(mesures))
-    .catch(error => next(error));
+    .catch(next);
 });
 
 // todo : transform into get
@@ -99,10 +98,7 @@ router.post("/filters", loginRequired, async (req, res, next) => {
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
-    .catch(function(error) {
-      throw error;
-      next(error);
-    });
+    .catch(next);
 });
 
 //ToDo: merge with get "mesures/" and rename
@@ -139,11 +135,7 @@ router.get("/popup", typeRequired("ti"), async (req, res, next) => {
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
-    .catch(function(error) {
-      console.log(error);
-      throw error;
-      next(error);
-    });
+    .catch(next);
 });
 
 /** @swagger
@@ -176,11 +168,7 @@ router.get(
       .then(function(mesures) {
         res.status(200).json(mesures);
       })
-      .catch(function(error) {
-        console.log(error);
-        throw error;
-        next(error);
-      });
+      .catch(next);
   }
 );
 
@@ -208,11 +196,7 @@ router.get("/popupMandataire", loginRequired, async (req, res, next) => {
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
-    .catch(function(error) {
-      console.log(error);
-      throw error;
-      next(error);
-    });
+    .catch(next);
 });
 
 module.exports = router;

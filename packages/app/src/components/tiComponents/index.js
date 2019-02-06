@@ -11,7 +11,7 @@ import { Provider, connect } from "react-redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { DummyTabs, LoadingMessage } from "..";
+import { DummyTabs } from "..";
 import { tiMount } from "./actions/mandataire";
 import mandataireReducer from "./reducers/mandataire";
 import mapReducer from "./reducers/map";
@@ -90,7 +90,10 @@ const mapDispatchToProps = dispatch => bindActionCreators({ onMount: tiMount }, 
 
 // connect to redux store actions
 // connect to redux-modal
-const TiRedux = connect(null, mapDispatchToProps)(Ti);
+const TiRedux = connect(
+  null,
+  mapDispatchToProps
+)(Ti);
 
 const Tis = () => (
   <Provider store={store}>

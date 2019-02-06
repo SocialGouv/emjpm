@@ -1,5 +1,7 @@
+import React from "react";
 import Router from "next/router";
-import piwik from "../../piwik";
+import piwik from "react-piwik";
+import styled from "styled-components";
 
 // todo: hack: force embedding the SVG due to some webpack+next+static issues in a gh-pages env
 const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm_num.png");
@@ -36,43 +38,28 @@ const Navigation = ({ logout, inscription }) => (
         />
       </a>
     </div>
-    <div style={{ flex: "0 0 300px", textAlign: "right", paddingRight: 10 }}>
-      <a
-        href="https://emjpm-doc.num.social.gouv.Fr"
-        style={{ cursor: "pointer", marginTop: 10, marginRight: 10 }}
-      >
-        Guide d&apos;utilisation
-      </a>
-      {inscription && (
-        <a
-          href="#"
-          onClick={doInscription}
-          style={{
-            color: "#007bff",
-            cursor: "pointer",
-            marginTop: 10,
-            display: "inline-block"
-          }}
-        >
-          Inscription
-        </a>
-      )}
-      {logout && (
-        <a
-          href="#"
-          onClick={doLogout}
-          style={{
-            color: "#007bff",
-            cursor: "pointer",
-            marginTop: 10,
-            display: "inline-block"
-          }}
-        >
-          Se déconnecter
-        </a>
-      )}
-    </div>
+    <NavLinks>
+      <NavLink href="https://emjpm-doc.num.social.gouv.fr">Guide d&apos;utilisation</NavLink>
+      {inscription && <NavButton onClick={doInscription}>Inscription</NavButton>}
+      {logout && <NavButton onClick={doLogout}>Se déconnecter</NavButton>}
+    </NavLinks>
   </div>
 );
 
 export default Navigation;
+
+//
+
+const NavButton = styled.button.attrs({
+  className: "btn btn-link"
+})``;
+
+const NavLink = styled.a.attrs({
+  className: "btn btn-link"
+})``;
+
+const NavLinks = styled.div.attrs({
+  className: "align-items-center d-flex"
+})`
+  flex: 0 0 300px;
+`;

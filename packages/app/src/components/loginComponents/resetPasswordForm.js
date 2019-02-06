@@ -1,3 +1,4 @@
+import React from "react";
 import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
@@ -114,6 +115,8 @@ class ResetPassword extends React.Component {
     formData: {}
   };
   componentDidMount() {
+    // ! TODO(douglasduteil): find a work around to replace "findDOMNode"
+    // eslint-disable-next-line react/no-find-dom-node
     const node = findDOMNode(this);
     if (node) {
       const input = node.querySelector("input");

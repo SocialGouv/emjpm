@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Form from "react-jsonschema-form";
 import { typeMesure, civilite } from "../../common/nomination";
 //Redux
@@ -91,8 +91,8 @@ const ModalMesureReservation = ({
   );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) =>
-  bindActionCreators({ show, openValidationModal }, dispatch);
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "ModalMesureReservation" })(ModalMesureReservation)
-);
+const mapDispatchToProps = dispatch => bindActionCreators({ show, openValidationModal }, dispatch);
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectModal({ name: "ModalMesureReservation" })(ModalMesureReservation));

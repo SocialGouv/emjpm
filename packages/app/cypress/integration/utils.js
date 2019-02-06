@@ -46,7 +46,7 @@ Cypress.Commands.add("dateInput", (selector, dateString) => {
 });
 
 Cypress.Commands.add("getCellAction", text => {
-  cy.get("[data-cy=UserCellAction]").filter(
-    (i, el) => (text ? (el.textContent ? el.textContent.indexOf(text) > -1 : true) : true)
+  cy.get("[data-cy=UserCellAction]").filter((i, el) =>
+    text ? (el.textContent ? el.textContent.indexOf(text) > -1 : true) : true
   );
 });

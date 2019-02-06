@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return knex.schema.alterTable("mesures", function(table) {
     table.date("annee");
     table.string("type");
@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
   });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   const alterTable = () =>
     knex.schema.alterTable("mesures", function(table) {
       table

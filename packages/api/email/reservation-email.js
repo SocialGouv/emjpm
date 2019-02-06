@@ -4,7 +4,9 @@ const { getMandataireById } = require("../db/queries/mandataires");
 const EMAIL_RESERVATION_TEXT = (ti, mandataire, mesure) =>
   `Madame, Monsieur,
 
-  Pour information, le ${ti.etablissement} ${ti.cabinet && `cabinet ${ti.cabinet},` || ''} a décidé de vous confier une nouvelle mesure :
+  Pour information, le ${ti.etablissement} ${(ti.cabinet &&
+    `cabinet ${ti.cabinet},`) ||
+    ""} a décidé de vous confier une nouvelle mesure :
   - "type de mesure": ${mesure.type}
   - "genre": ${mesure.civilite}
   - "année de naissance": ${mesure.annee}.
@@ -22,7 +24,9 @@ const EMAIL_RESERVATION_TEXT = (ti, mandataire, mesure) =>
 const EMAIL_RESERVATION_HTML = (ti, mandataire, mesure) =>
   `Madame, Monsieur,
 <br><br>
-  Pour information, le ${ti.etablissement} ${ti.cabinet && `cabinet ${ti.cabinet},` || ''} a décidé de vous confier une nouvelle mesure :
+  Pour information, le ${ti.etablissement} ${(ti.cabinet &&
+    `cabinet ${ti.cabinet},`) ||
+    ""} a décidé de vous confier une nouvelle mesure :
   <br>
   - "type de mesure": ${mesure.type}
   <br>

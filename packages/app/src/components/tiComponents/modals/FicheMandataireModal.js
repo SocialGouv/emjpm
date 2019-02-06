@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import styled from "styled-components";
 import Form from "react-jsonschema-form";
 import { PlusSquare, Trash } from "react-feather";
@@ -20,12 +20,13 @@ const TitleMandataire = styled.div`
   font-size: 1.5em;
   font-weight: bold;
 `;
-const CellMesureReservationRedux = connect(null, dispatch =>
-  bindActionCreators({ show }, dispatch)
+const CellMesureReservationRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
 )(({ show, mandataire }) => (
-  <div
+  <button
+    className="btn"
     data-cy="button-attente-mesure"
-    style={{ cursor: "pointer" }}
     title="Attribuer une mesure"
     onClick={() => {
       // TODO: move to actions
@@ -34,7 +35,7 @@ const CellMesureReservationRedux = connect(null, dispatch =>
     }}
   >
     <PlusSquare /> Attribuer une mesure
-  </div>
+  </button>
 ));
 
 // Commentaire View display
@@ -219,6 +220,7 @@ const mapStateToProps = state => ({
     state.mandataire.currentEtablissementsForSelectedMandataire
 });
 
-export default connect(mapStateToProps, null)(
-  connectModal({ name: "FicheMandataireModal", destroyOnHide: true })(FicheMandataireModal)
-);
+export default connect(
+  mapStateToProps,
+  null
+)(connectModal({ name: "FicheMandataireModal", destroyOnHide: true })(FicheMandataireModal));

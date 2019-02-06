@@ -175,11 +175,7 @@ router.put("/1", loginRequired, async (req, res, next) => {
     .then(mandataire => {
       res.status(200).json(mandataire);
     })
-    .catch(error => {
-      console.log(error);
-      throw error;
-      next(error);
-    });
+    .catch(next);
 });
 
 // todo: test
@@ -234,10 +230,7 @@ router.post("/filters", loginRequired, async (req, res, next) => {
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
-    .catch(function(error) {
-      throw error;
-      next(error);
-    });
+    .catch(next);
 });
 
 // récupère une liste de mandataires pour le user en question
@@ -273,7 +266,7 @@ router.get("/", loginRequired, async (req, res, next) => {
   }
   getAllMandataires(ti.id)
     .then(mandataires => res.status(200).json(mandataires))
-    .catch(error => next(error));
+    .catch(next);
 });
 
 /** @swagger
@@ -304,7 +297,7 @@ router.get("/services", loginRequired, async (req, res, next) => {
   }
   getAllServicesByTis(ti.id)
     .then(mandataires => res.status(200).json(mandataires))
-    .catch(error => next(error));
+    .catch(next);
 });
 
 // todo: test
@@ -314,10 +307,7 @@ router.post("/PosteCode", loginRequired, async (req, res, next) => {
     .then(function(mandataires) {
       res.status(200).json(mandataires);
     })
-    .catch(function(error) {
-      throw error;
-      next(error);
-    });
+    .catch(next);
 });
 
 // ?
@@ -356,7 +346,7 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
     res
       .status(200)
       .json(mandataire)
-      .catch(error => next(error));
+      .catch(next);
   });
 });
 
@@ -401,7 +391,7 @@ router.put(
     const nbMesureAttente = mesureEnAttente(req.body.mandataire_id);
     update(req.body.mandataire_id, { mesures_en_attente: nbMesureAttente })
       .then(mandataire => res.status(200).json(mandataire))
-      .catch(error => next(error));
+      .catch(next);
   }
 );
 
@@ -411,6 +401,5 @@ router.use("/", require("./serviceAntennes"));
 router.use("/", require("./mandatairesEtablissements"));
 router.use("/", require("./tis"));
 router.use("/", require("./importation-excel"));
-
 
 module.exports = router;

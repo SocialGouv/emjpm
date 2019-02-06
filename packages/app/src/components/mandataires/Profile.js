@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MinusSquare } from "react-feather";
@@ -179,7 +179,7 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
   </div>
 );
 
-const mapDispatchToProps = (dispatch, ownProps) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators({ updateMandataire: data => updateMandataire(data) }, dispatch);
 
 const ProfileRedux = connect(

@@ -106,7 +106,7 @@ const { validationEmail } = require("../email/validation");
  *               items:
  *                 $ref: '#/components/schemas/MandataireAdmin'
  */
-router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
+router.get("/mandataires", typeRequired("admin"), async (req, res) => {
   const mandataires = await queries.getMandataires({ filters: req.query });
   res.json(mandataires);
 });
@@ -135,7 +135,7 @@ router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
  *             schema:
  *               type: array
  */
-router.get("/tis", typeRequired("admin"), async (req, res, next) => {
+router.get("/tis", typeRequired("admin"), async (req, res) => {
   const users = await queries.getTis({ filters: req.query });
   res.json(users);
 });
@@ -167,7 +167,7 @@ const USER_WRITE_PROPERTIES = ["active"];
  *             schema:
  *               $ref: '#/components/schemas/SuccessResponse'
  */
-router.put("/user/:userId", typeRequired("admin"), async (req, res, next) => {
+router.put("/user/:userId", typeRequired("admin"), async (req, res) => {
   // whitelist input data
   const cleanedBody = whitelist(req.body, USER_WRITE_PROPERTIES);
   queries

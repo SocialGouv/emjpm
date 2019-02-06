@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 
@@ -68,7 +69,7 @@ const uiSchema = {
   }
 };
 
-const ValiderMesureEnAttente = ({ show, handleHide, formData, onSubmit, ...props }) => {
+const ValiderMesureEnAttente = ({ show, handleHide, formData, onSubmit }) => {
   return (
     <Layout show={show} handleHide={handleHide}>
       <H3>Valider une nouvelle mesure</H3>
@@ -99,6 +100,7 @@ const mapDispatchToProps = dispatch =>
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "ValiderMesureEnAttente", destroyOnHide: true })(ValiderMesureEnAttente)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectModal({ name: "ValiderMesureEnAttente", destroyOnHide: true })(ValiderMesureEnAttente));

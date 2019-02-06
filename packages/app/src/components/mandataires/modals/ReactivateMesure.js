@@ -1,3 +1,4 @@
+import React from "react";
 import { connectModal } from "redux-modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -7,7 +8,7 @@ import { Button } from "../..";
 import { reactivateMesure } from "../actions/mesures";
 import Layout from "./Layout";
 
-const ReactivateMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
+const ReactivateMesure = ({ show, handleHide, onSubmit, id }) => {
   return (
     <Layout show={show} handleHide={handleHide}>
       <div style={{ textAlign: "center", marginTop: 50 }}>
@@ -24,11 +25,12 @@ const ReactivateMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
   );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators({ onSubmit: data => reactivateMesure({ id: data }) }, dispatch);
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "ReactivateMesure", destroyOnHide: true })(ReactivateMesure)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectModal({ name: "ReactivateMesure", destroyOnHide: true })(ReactivateMesure));

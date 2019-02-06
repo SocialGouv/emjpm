@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function(knex) {
   return knex("users_tis")
     .del() // Deletes ALL existing entries
     .then(function() {

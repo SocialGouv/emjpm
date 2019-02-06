@@ -1,4 +1,5 @@
-import { Phone, Smartphone, Mail, Home, Info } from "react-feather";
+import React from "react";
+import { Phone, Smartphone, Mail, Home } from "react-feather";
 
 const iconStyle = { width: 22, height: 22, marginRight: 10 };
 
@@ -10,7 +11,6 @@ const FicheMandataire = ({
   adresse = "",
   code_postal = "",
   ville = "",
-  zip = "",
   dispo_max = 0,
   secretariat = false,
   nb_secretariat = 0,
@@ -31,13 +31,12 @@ const FicheMandataire = ({
         <Phone style={iconStyle} />
         {telephone}
       </div>
-      {type !== "service" &&
-        telephone_portable && (
-          <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
-            <Smartphone style={iconStyle} />
-            {telephone_portable}
-          </div>
-        )}
+      {type !== "service" && telephone_portable && (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+          <Smartphone style={iconStyle} />
+          {telephone_portable}
+        </div>
+      )}
       {hasAdresse && (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
           <Home style={iconStyle} />

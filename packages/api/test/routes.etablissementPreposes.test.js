@@ -1,6 +1,6 @@
 process.env.NODE_ENV = "test";
 
-const { shouldBeProtected, logUser } = require("./utils");
+const { shouldBeProtected } = require("./utils");
 
 const chai = require("chai");
 const chaiHttp = require("chai-http");

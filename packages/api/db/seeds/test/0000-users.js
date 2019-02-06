@@ -81,7 +81,7 @@ const USERS = [
   }
 ];
 
-exports.seed = (knex, Promise) =>
+exports.seed = knex =>
   knex("users")
     .del()
     .insert(USERS.map(getInsertData));

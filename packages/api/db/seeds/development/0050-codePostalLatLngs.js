@@ -1,14 +1,14 @@
 const fs = require("fs");
 const path = require("path");
 
-exports.seed = (knex, Promise) => {
+exports.seed = knex => {
   const rows = fs
     .readFileSync(path.join(__dirname, "../codePostalLatLngs.csv"))
     .toString()
     .split("\n")
     .slice(1)
     .map(row => {
-      const [id, code_postal, latitude, longitude] = row.split(";");
+      const [, code_postal, latitude, longitude] = row.split(";");
       return {
         code_postal,
         latitude,

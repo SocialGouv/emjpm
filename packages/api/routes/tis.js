@@ -125,7 +125,6 @@ router.delete("/1/tis/:tiId", loginRequired, async (req, res, next) => {
     });
 });
 
-
 // ToDo : merge with /:mandataireId/tis-by-mandataire
 /** @swagger
  * /mandataires/1/tis:

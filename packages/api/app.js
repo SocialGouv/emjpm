@@ -94,7 +94,7 @@ if (app.get("env") === "development") {
 // production error handler
 // no stacktraces leaked to user
 if (process.env.NODE_ENV !== "test") {
-  app.use(function(err, req, res, next) {
+  app.use(function(err, req, res) {
     console.log(req.url);
     console.log(err);
     res.status(err.status || 500).json({

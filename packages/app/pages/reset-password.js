@@ -1,6 +1,5 @@
-import styled from "styled-components";
+import React from "react";
 import Head from "next/head";
-
 import Navigation from "../src/components/communComponents/Navigation";
 import Footer from "../src/components/communComponents/Footer";
 import Form from "../src/components/loginComponents/resetPasswordForm";

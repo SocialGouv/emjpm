@@ -160,9 +160,7 @@ router.delete(
       id: req.params.commentaireId,
       ti_id: ti.id
     })
-      .then(function(commentaireID) {
-        return getAllCommentaires(req.params.mandataireId, ti.id);
-      })
+      .then(() => getAllCommentaires(req.params.mandataireId, ti.id))
       .then(function(commentaires) {
         res.status(200).json(commentaires);
       })

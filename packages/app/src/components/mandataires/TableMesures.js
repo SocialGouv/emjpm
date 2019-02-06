@@ -1,3 +1,4 @@
+import React from "react";
 import { show } from "redux-modal";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -8,52 +9,56 @@ import format from "date-fns/format";
 import { Button } from "..";
 
 // bouton connecté à redux-modal.show pour EditMesure
-const CellEditMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
-  ({ row, show }) => (
-    <Button
-      data-cy="button-edit-mesure"
-      onClick={() => show("EditMesure", { formData: row.original })}
-    >
-      Modifier
-    </Button>
-  )
-);
+const CellEditMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-edit-mesure"
+    onClick={() => show("EditMesure", { formData: row.original })}
+  >
+    Modifier
+  </Button>
+));
 
 // bouton connecté à redux-modal.show pour CloseMesure
-const CellCloseMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
-  ({ row, show }) => (
-    <Button
-      data-cy="button-close-mesure"
-      error
-      onClick={() => show("CloseMesure", { id: row.original.id })}
-    >
-      Mettre fin au mandat
-    </Button>
-  )
-);
+const CellCloseMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-close-mesure"
+    error
+    onClick={() => show("CloseMesure", { id: row.original.id })}
+  >
+    Mettre fin au mandat
+  </Button>
+));
 
 // bouton connecté à redux-modal.show pour ReactivateMesure
-const CellReactivateMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
-  ({ row, show }) => (
-    <Button
-      data-cy="button-reactivate-mesure"
-      onClick={() => show("ReactivateMesure", { id: row.original.id })}
-    >
-      Réactiver la mesure
-    </Button>
-  )
-);
+const CellReactivateMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-reactivate-mesure"
+    onClick={() => show("ReactivateMesure", { id: row.original.id })}
+  >
+    Réactiver la mesure
+  </Button>
+));
 
-const CellValidationMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
-  ({ row, show }) => (
-    <Button
-      data-cy="button-attente-mesure"
-      onClick={() => show("ValiderMesureEnAttente", { formData: row.original })}
-    >
-      Valider
-    </Button>
-  )
-);
+const CellValidationMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-attente-mesure"
+    onClick={() => show("ValiderMesureEnAttente", { formData: row.original })}
+  >
+    Valider
+  </Button>
+));
 
 const concat = (...strings) =>
   strings
@@ -75,11 +80,13 @@ const COLUMNS = [
     id: "date_ouverture",
     width: 160,
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
-    Cell: row => (
-      <div>
-        {format(row.row.date_ouverture, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
-      </div>
-    ),
+    Cell(row) {
+      return (
+        <div>
+          {format(row.row.date_ouverture, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
+        </div>
+      );
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -87,11 +94,13 @@ const COLUMNS = [
     id: "date_demande",
     width: 300,
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
-    Cell: row => (
-      <div>
-        {format(row.row.date_demande, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
-      </div>
-    ),
+    Cell(row) {
+      return (
+        <div>
+          {format(row.row.date_demande, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
+        </div>
+      );
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -131,7 +140,9 @@ const COLUMNS = [
     id: "annee",
     width: 80,
     accessor: "annee",
-    Cell: row => <div>{format(row.row.annee, "YYYY")}</div>,
+    Cell(row) {
+      return <div>{format(row.row.annee, "YYYY")}</div>;
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -146,24 +157,30 @@ const COLUMNS = [
     id: "extinction",
     width: 100,
     accessor: d => format(d.extinction, "YYYY-MM-DD"),
-    Cell: row => (
-      <div>
-        {format(row.row.extinction, "DD/MM/YYYY", { locale: require("date-fns/locale/fr") })}
-      </div>
-    ),
+    Cell(row) {
+      return (
+        <div>
+          {format(row.row.extinction, "DD/MM/YYYY", { locale: require("date-fns/locale/fr") })}
+        </div>
+      );
+    },
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Modifier",
     id: "modifier",
-    Cell: row => <CellEditMesureRedux row={row} />,
+    Cell(row) {
+      return <CellEditMesureRedux row={row} />;
+    },
     width: 150,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Fin de mandat",
     id: "fin-mandat",
-    Cell: row => <CellCloseMesureRedux row={row} />,
+    Cell(row) {
+      return <CellCloseMesureRedux row={row} />;
+    },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
@@ -176,14 +193,18 @@ const COLUMNS = [
   {
     Header: "Réactiver",
     id: "reactiver",
-    Cell: row => <CellReactivateMesureRedux row={row} />,
+    Cell(row) {
+      return <CellReactivateMesureRedux row={row} />;
+    },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Valider",
     id: "valider",
-    Cell: row => <CellValidationMesureRedux row={row} />,
+    Cell(row) {
+      return <CellValidationMesureRedux row={row} />;
+    },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
@@ -200,7 +221,7 @@ class TableMesures extends React.Component {
     data: [],
     loading: false
   };
-  fetchData = (state, instance) => {
+  fetchData = () => {
     if (!this.state.loading) {
       this.setState({ loading: true }, () =>
         this.props
@@ -215,7 +236,7 @@ class TableMesures extends React.Component {
       );
     }
   };
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     // hack to force reload when some redux state change
     if (prevProps.lastUpdate !== this.props.lastUpdate) {
       this.fetchData();

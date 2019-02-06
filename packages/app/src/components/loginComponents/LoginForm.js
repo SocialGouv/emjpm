@@ -1,10 +1,12 @@
+import React from "react";
 import { findDOMNode } from "react-dom";
 import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
+import piwik from "react-piwik";
 
-import piwik, { trackUser } from "../../piwik";
+import { trackUser } from "../../piwik";
 
 const API_URL = process.env.API_URL;
 
@@ -125,6 +127,8 @@ class LoginForm extends React.Component {
     piwik.push(["trackEvent", "navigation", "login"]);
 
     // focus login on load
+    // ! TODO(douglasduteil): find a work around to replace "findDOMNode"
+    // eslint-disable-next-line react/no-find-dom-node
     const node = findDOMNode(this);
     if (node) {
       const input = node.querySelector("input");
@@ -172,13 +176,12 @@ class LoginForm extends React.Component {
               error: null
             });
           })
-          .catch(e => {
+          .catch(() => {
             piwik.push(["trackEvent", "login", "error"]);
             this.setState({
               status: "error",
               error: "Impossible de se connecter"
             });
-            //throw e;
           });
       }
     );

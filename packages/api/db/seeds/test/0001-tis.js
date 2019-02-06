@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function(knex) {
   return knex("tis")
     .del() // Deletes ALL existing entries
     .then(function() {
@@ -10,7 +10,7 @@ exports.seed = function(knex, Promise) {
         ville: "Arras",
         telephone: "0237100000",
         latitude: 1,
-        longitude: 1,
+        longitude: 1
       });
     })
     .then(function() {
@@ -21,7 +21,7 @@ exports.seed = function(knex, Promise) {
         ville: "Paris",
         telephone: "0102030405",
         latitude: 1,
-        longitude: 1,
+        longitude: 1
       });
     });
 };

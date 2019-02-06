@@ -1,0 +1,6 @@
+extends:
+  - "@socialgouv/eslint-config-react"
+
+rules:
+  no-console: off
+  react/prop-types: off

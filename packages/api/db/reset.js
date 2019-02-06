@@ -47,20 +47,19 @@ const reset = () =>
         .then(tables =>
           Promise.all(
             tables.map(table =>
-              getPrimaryKey(trx, table.table_name).then(
-                pk =>
-                  pk
-                    ? trx.raw(
-                        `SELECT
+              getPrimaryKey(trx, table.table_name).then(pk =>
+                pk
+                  ? trx.raw(
+                      `SELECT
                           setval(pg_get_serial_sequence(':table_name:', :pk),
                           coalesce(max(:pk:), 0) + 1, false)
                          FROM :table_name:;`,
-                        {
-                          table_name: table.table_name,
-                          pk
-                        }
-                      )
-                    : Promise.resolve(/* when no primary key, just succeed */)
+                      {
+                        table_name: table.table_name,
+                        pk
+                      }
+                    )
+                  : Promise.resolve(/* when no primary key, just succeed */)
               )
             )
           )

@@ -18,30 +18,23 @@ const data2 = rows
   .map(row => {
     const [
       x,
-      y,
+      ,
       id,
       nom1,
       nom,
-      xx,
-      xxx,
+      ,
+      ,
       num,
       voie,
       rue,
-      zz,
-      zzz,
-      zzzz,
-      zzzzz,
-      zzzzzz,
+      ,
+      ,
+      ,
+      ,
+      ,
       cpVille,
       tel,
-      fax,
-      mft,
-      libellemft,
-      sph,
-      libelleSph,
-      siret,
-      ape,
-      ...blabla
+      fax
     ] = row.split(";");
     if (x === "geolocalisation") {
       return;

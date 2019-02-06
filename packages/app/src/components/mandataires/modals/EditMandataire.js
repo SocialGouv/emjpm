@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 
 import { connectModal } from "redux-modal";
@@ -112,7 +113,7 @@ const uiSchema = {
   }
 };
 
-const EditMandataire = ({ show, handleHide, formData, onSubmit, ...props }) => {
+const EditMandataire = ({ show, handleHide, formData, onSubmit }) => {
   // todo: we should have perfect mapping api<->data<->form
   // const cleanData = {
   //   ...formData,
@@ -137,6 +138,7 @@ const mapDispatchToProps = dispatch =>
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "EditMandataire", destroyOnHide: true })(EditMandataire)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectModal({ name: "EditMandataire", destroyOnHide: true })(EditMandataire));

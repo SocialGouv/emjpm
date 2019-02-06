@@ -1,3 +1,4 @@
+import React from "react";
 import { connect } from "react-redux";
 import { connectModal } from "redux-modal";
 
@@ -22,6 +23,7 @@ const mapStateToProps = state => ({
   allTisForOneMandataire: state.mandataire.allTisForOneMandataire
 });
 
-export default connect(mapStateToProps, null)(
-  connectModal({ name: "ModalMesureValidation", destroyOnHide: true })(ModalMesureValidation)
-);
+export default connect(
+  mapStateToProps,
+  null
+)(connectModal({ name: "ModalMesureValidation", destroyOnHide: true })(ModalMesureValidation));

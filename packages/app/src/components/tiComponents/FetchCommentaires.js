@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 class FetchCommentaires extends React.Component {
   state = {
@@ -27,7 +27,7 @@ class FetchCommentaires extends React.Component {
         })
         .catch(function(error) {
           alert("Impossible de soumettre le commentaire");
-          throw e;
+          throw error;
         });
     }
   };

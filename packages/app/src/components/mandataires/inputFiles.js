@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import * as XLSX from "xlsx";
 import { connect } from "react-redux";
@@ -43,19 +44,18 @@ const ErrorsGroup = ({ title, errors }) => (
 );
 
 const Errors = ({ errors }) =>
-  (errors &&
-    Object.keys(errors).length && (
-      <Alert className="alert-danger">
-        Des erreurs ont été détectées dans votre fichier. Aucun ligne n&apos;a été importée.
-        <br />
-        <br />
-        <div style={{ fontSize: "0.8em" }}>
-          {Object.keys(errors).map(key => (
-            <ErrorsGroup key={key} title={key} errors={errors[key]} />
-          ))}
-        </div>
-      </Alert>
-    )) ||
+  (errors && Object.keys(errors).length && (
+    <Alert className="alert-danger">
+      Des erreurs ont été détectées dans votre fichier. Aucun ligne n&apos;a été importée.
+      <br />
+      <br />
+      <div style={{ fontSize: "0.8em" }}>
+        {Object.keys(errors).map(key => (
+          <ErrorsGroup key={key} title={key} errors={errors[key]} />
+        ))}
+      </div>
+    </Alert>
+  )) ||
   null;
 
 // read the input file, clean input and post to API
@@ -63,7 +63,7 @@ const readAndPostExcel = inputFile =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
 
-    reader.onerror = error => {
+    reader.onerror = () => {
       reject({
         fichier: ["Impossible de lire le fichier excel"]
       });
@@ -254,4 +254,7 @@ const mapDispatchToProps = dispatch => ({
   onCreateMesure: data => dispatch(mesureCreated(data))
 });
 
-export default connect(null, mapDispatchToProps)(InputFiles);
+export default connect(
+  null,
+  mapDispatchToProps
+)(InputFiles);
