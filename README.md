@@ -6,10 +6,18 @@
 git clone git@github.com:SocialGouv/eMJPM-api.git
 
 cd eMJPM-api
+```
 
-npm install
+## Installation
 
-npm start
+**This project requires `pq_config`**  
+
+You can find it in
+- `pacman -S postgresql-libs` for Arch
+
+```sh
+$ yarn
+$ yarn start
 ```
 
 ## Dev

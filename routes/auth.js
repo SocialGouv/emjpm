@@ -3,6 +3,7 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const uid = require("rand-token").uid;
+const Sentry = require("@sentry/node");
 
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
@@ -76,6 +77,9 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
       return next(err);
     }
     if (!user) {
+      if (process.env.NODE_ENV !== "test") {
+        Sentry.captureMessage(`Unauthorized user : ${req.body.username}`);
+      }
       return res
         .status(401)
         .json({ success: false, message: "User not found" });
