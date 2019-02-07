@@ -177,7 +177,7 @@ router.post("/forgot_password", (req, res, next) => {
       if (!user) {
         throw new Error("user not found");
       }
-      return updateUser(user.id, {
+      updateUser(user.id, {
         reset_password_token: token,
         reset_password_expires: Date.now() + 7200000
       });
