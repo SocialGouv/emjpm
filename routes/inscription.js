@@ -8,6 +8,7 @@ const knex = require("../db/knex");
 
 const queries = require("../db/queries/inscription");
 const { inscriptionEmail } = require("../email/inscription");
+const { getCountByEmail } = require("../db/queries/users");
 /**
  * @swagger
  *
@@ -175,7 +176,7 @@ router.get("/tis", (req, res, next) =>
  *             $ref: "#/components/schemas/SuccessResponse"
  *
  */
-router.post("/mandataires", (req, res, next) => {
+router.post("/mandataires", async (req, res, next) => {
   const {
     username,
     etablissement,
@@ -194,7 +195,19 @@ router.post("/mandataires", (req, res, next) => {
   } = req.body;
 
   if (pass1 !== pass2 || username.trim() === "") {
-    return res.status(500).json({ success: false });
+    return res.status(500).json({
+      success: false,
+      message: "Les mots de passe ne sont pas conformes"
+    });
+  }
+
+  const userExists = (await getCountByEmail(email)).count > 0;
+
+  if (userExists) {
+    return res.status(409).json({
+      success: false,
+      message: "Un compte avec cet email existe déjà"
+    });
   }
 
   knex
@@ -335,8 +348,9 @@ router.post("/tis", (req, res, next) => {
       return res.json({ success: true });
     })
     .catch(e => {
-      console.log(e);
-      return res.status(500).json({ success: false });
+      return res.status(500).json({
+        success: false
+      });
     });
 });
 module.exports = router;

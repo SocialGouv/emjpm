@@ -177,7 +177,7 @@ router.put("/1", loginRequired, async (req, res, next) => {
     etablissement,
     mesures_en_cours,
     nb_secretariat,
-    type,
+    type
   } = req.body;
 
   const mandataire = await getMandataireByUserId(req.user.id);
@@ -203,7 +203,8 @@ router.put("/1", loginRequired, async (req, res, next) => {
     zip,
     etablissement,
     mesures_en_cours,
-    nb_secretariat})
+    nb_secretariat
+  })
     .then(() =>
       updateUser(req.user.id, {
         nom,

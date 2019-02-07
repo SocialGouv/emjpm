@@ -2,6 +2,26 @@ const express = require("express");
 
 const router = express.Router();
 const { typeRequired } = require("../auth/_helpers");
+const whitelist = require("../db/queries/whitelist");
+
+const { getAllMesuresByTis } = require("../db/queries/mesures");
+
+const ALLOWED_FILTERS = [
+  "code_postal",
+  "ville",
+  "etablissement",
+  "mandataire_id",
+  "annee",
+  "type",
+  "date_ouverture",
+  "residence",
+  "civilite",
+  "status",
+  "ti_id",
+  "cabinet",
+  "id",
+  "numero_dossier"
+];
 
 const {
   updateCountMesures,
@@ -105,25 +125,36 @@ const { reservationEmail } = require("../email/reservation-email");
  */
 router.put(
   "/:mandataireId/mesures/:mesureId",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
-    const mandataire = await getMandataireByUserId(req.user.id);
-    updateMesure(
-      {
-        id: req.params.mesureId,
-        // ⚠️ ensure to override a mandataire only
-        mandataire_id: mandataire.id
-      },
-      req.body
-    )
-      //.then(() => queries.getMesuresEnCoursMandataire(mandataire.id))
-      // todo : trigger/view
-      //.then(() => updateDateMesureUpdate(mandataire.id))
-      // todo : trigger/view
-      .then(() => updateCountMesures(mandataire.id))
-      .then(() => getMesuresEnCoursMandataire(mandataire.id))
-      .then(mesures => res.status(200).json(mesures))
-      .catch(error => next(error));
+    if (req.user.type === "individuel" || req.user.type === "prepose") {
+      const mandataireForIndPre = await getMandataireByUserId(req.user.id);
+      updateMesure(
+        {
+          id: req.params.mesureId,
+          // ⚠️ ensure to override a mandataire only
+          mandataire_id: mandataireForIndPre.id
+        },
+        whitelist(req.body, ALLOWED_FILTERS)
+      )
+        .then(() => updateCountMesures(mandataireForIndPre.id))
+        .then(() => getMesuresEnCoursMandataire(mandataireForIndPre.id))
+        .then(mesures => res.status(200).json(mesures))
+        .catch(error => next(error));
+    } else if (req.user.type === "ti") {
+      const tiId = await getTiByUserId(req.user.id);
+      updateMesure(
+        {
+          id: req.body.id,
+          // ⚠️ ensure to override a tI only
+          ti_id: tiId.id
+        },
+        whitelist(req.body, ALLOWED_FILTERS)
+      )
+        .then(() => getAllMesuresByTis(req.body.ti_id))
+        .then(mesures => res.status(200).json(mesures))
+        .catch(error => next(error));
+    }
   }
 );
 
