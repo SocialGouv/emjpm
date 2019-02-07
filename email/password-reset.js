@@ -1,10 +1,11 @@
 const { sendEmail } = require(".");
 
-const EMAIL_RELANCE_TEXT = url => `
+const EMAIL_RELANCE_TEXT = (url, user) => `
 Bonjour,
 
 Vous avez demandé le changement de mot de passe.
 
+Votre identifiant est: ${user.email}
 
 Veuillez cliquer sur le lien suivant: ${url}
 
