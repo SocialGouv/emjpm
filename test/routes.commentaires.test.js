@@ -80,7 +80,6 @@ describe("routes : commentaires", () => {
           mandataire_id: 2
         })
         .then(commentaires => {
-          //console.log("commentaires.length", commentaires.length);
           return agent
             .post("/api/v1/mandataires/2/commentaires")
             .set("Authorization", "Bearer " + token)
@@ -94,7 +93,6 @@ describe("routes : commentaires", () => {
               res.body[commentaires.length - 1].comment.should.eql(
                 "Hello, mandataire_id=2,ti_id=2"
               );
-
               return knex
                 .from("commentaires")
                 .where({

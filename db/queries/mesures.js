@@ -10,20 +10,16 @@ const getAllMesuresByMandataires = ti_id =>
       "geolocalisation_code_postal.code_postal",
       "mesures.code_postal"
     )
-    .innerJoin(
-      "mandataire_tis",
-      "mandataire_tis.mandataire_id",
-      "mandataires.id"
-    )
     .innerJoin("users", "mandataires.user_id", "users.id")
-    .where({ "mandataire_tis.ti_id": parseInt(ti_id), "users.active": true })
+    .innerJoin("user_tis", "user_tis.user_id", "users.id")
+    .where({ "user_tis.ti_id": parseInt(ti_id), "users.active": true })
     .select(
       "mesures.id",
       "mesures.code_postal",
       "geolocalisation_code_postal.latitude",
       "geolocalisation_code_postal.longitude",
-      "mandataires.nom",
-      "mandataires.prenom",
+      "users.nom",
+      "users.prenom",
       "users.type",
       "mesures.date_ouverture",
       "mesures.ville"
@@ -40,7 +36,7 @@ const getAllMesuresByMandatairesFilter = (
     .from("mesures")
     .select(
       knex.raw(
-        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,users.type"
+        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,users.type,users.email,users.nom,users.prenom,users.cabinet"
       )
     )
     .where("status", "Mesure en cours")
@@ -53,43 +49,39 @@ const getAllMesuresByMandatairesFilter = (
       longNorthEast
     ])
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin(
-      "mandataire_tis",
-      "mandataire_tis.mandataire_id",
-      "mandataires.id"
-    )
     .innerJoin("users", "mandataires.user_id", "users.id")
+    .innerJoin("user_tis", "user_tis.user_id", "users.id")
     .innerJoin(
       "geolocalisation_code_postal",
       "geolocalisation_code_postal.code_postal",
       "mesures.code_postal"
     )
     .groupByRaw(
-      "geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,mandataires.id,users.type"
+      "geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,mandataires.id,users.type,users.email,users.nom,users.prenom,users.cabinet"
     )
-    .where({ "mandataire_tis.ti_id": parseInt(ti_id), "users.active": true })
+    .where({ "user_tis.ti_id": parseInt(ti_id), "users.active": true })
     .union(function() {
       this.select(
         "mandataires.id",
         "mandataires.*",
         "geolocalisation_code_postal.latitude",
         "geolocalisation_code_postal.longitude",
-        "users.type"
+        "users.type",
+        "users.email",
+        "users.nom",
+        "users.prenom",
+        "users.cabinet"
       )
         .from("mandataires")
-        .innerJoin(
-          "mandataire_tis",
-          "mandataire_tis.mandataire_id",
-          "mandataires.id"
-        )
         .innerJoin("users", "mandataires.user_id", "users.id")
+        .innerJoin("user_tis", "user_tis.user_id", "users.id")
         .innerJoin(
           "geolocalisation_code_postal",
           "geolocalisation_code_postal.code_postal",
           "mandataires.code_postal"
         )
         .where("users.type", "service")
-        .where("mandataire_tis.ti_id", parseInt(ti_id));
+        .where("user_tis.ti_id", parseInt(ti_id));
     });
 
 // bulk insert some data and prevent mesure.numero_dossier duplicates
@@ -170,9 +162,10 @@ const bulk = ({ mesures, mandataire_id }) => {
 //         });
 //     return allMesures;
 // }
+
 const getMesuresByGeolocalisation = (ti_id, type) => {
   const where = {
-    "mandataire_tis.ti_id": parseInt(ti_id),
+    "user_tis.ti_id": parseInt(ti_id),
     "users.active": true,
     status: "Mesure en cours"
   };
@@ -195,12 +188,8 @@ const getMesuresByGeolocalisation = (ti_id, type) => {
       "geolocalisation_code_postal.code_postal"
     )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin(
-      "mandataire_tis",
-      "mandataire_tis.mandataire_id",
-      "mandataires.id"
-    )
     .innerJoin("users", "mandataires.user_id", "users.id")
+    .innerJoin("user_tis", "user_tis.user_id", "users.id")
     .where(where)
     .groupByRaw(
       "mesures.code_postal,geolocalisation_code_postal.longitude,geolocalisation_code_postal.latitude,users.type"
@@ -210,19 +199,12 @@ const getMesuresByGeolocalisation = (ti_id, type) => {
 const getAllMesuresByTis = ti_id =>
   knex
     .from("mesures")
-    .select(
-      "mesures.*",
-      knex.raw("mandataires.etablissement as manda")
-    )
+    .select("mesures.*", knex.raw("mandataires.etablissement as manda"))
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin(
-      "mandataire_tis",
-      "mandataire_tis.mandataire_id",
-      "mandataires.id"
-    )
     .innerJoin("users", "mandataires.user_id", "users.id")
+    .innerJoin("user_tis", "user_tis.user_id", "users.id")
     .where({
-      "mandataire_tis.ti_id": parseInt(ti_id),
+      "user_tis.ti_id": parseInt(ti_id),
       "users.active": true,
       "mesures.status": "Mesure en attente"
     });
@@ -245,14 +227,10 @@ const getAllMesuresByPopUpForMandataire = ti_id =>
       "geolocalisation_code_postal.code_postal"
     )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
-    .innerJoin(
-      "mandataire_tis",
-      "mandataire_tis.mandataire_id",
-      "mandataires.id"
-    )
     .innerJoin("users", "mandataires.user_id", "users.id")
+    .innerJoin("user_tis", "user_tis.user_id", "users.id")
     .where({
-      "mandataire_tis.ti_id": parseInt(ti_id),
+      "user_tis.ti_id": parseInt(ti_id),
       status: "Mesure en cours",
       "users.active": true
     })

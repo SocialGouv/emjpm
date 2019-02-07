@@ -43,6 +43,9 @@ const getMandataire = filters =>
     .select(
       "mandataires.*",
       "users.type",
+      "users.nom",
+      "users.prenom",
+      "users.email",
       knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
       knex.raw(
         "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
@@ -105,14 +108,14 @@ function getAllByMandatairesFilter(
     .from("mandataires")
     .select(
       knex.raw(
-        "distinct ON(mandataires.id) mandataires.id,mandataires.*,users.type"
+        "distinct ON(mandataires.id) mandataires.id,mandataires.*,users.type,users.nom,users.prenom,users.email"
       ),
       knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
       knex.raw(
         "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
       )
     )
-    .where({ "mandataire_tis.ti_id": parseInt(ti_id), "users.active": true })
+    .where({ "user_tis.ti_id": parseInt(ti_id), "users.active": true })
     .where(builder =>
       builder
         .whereBetween("geolocalisation_code_postal.latitude", [
@@ -125,29 +128,27 @@ function getAllByMandatairesFilter(
         ])
     )
     .innerJoin("users", "users.id", "mandataires.user_id")
-    .innerJoin(
-      "mandataire_tis",
-      "mandataire_tis.mandataire_id",
-      "mandataires.id"
-    )
+    .innerJoin("user_tis", "users.id", "mandataires.user_id")
     .innerJoin(
       "geolocalisation_code_postal",
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
     )
     .groupByRaw(
-      "mandataires.id,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,users.type"
+      "mandataires.id,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,users.type,users.nom,users.prenom,users.email"
     );
 }
 
 const getAllMandataires = ti_id =>
   knex
-    .from("mandataire_tis")
+    .from("user_tis")
     .where("ti_id", parseInt(ti_id))
-    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id")
+    .innerJoin("mandataires", "user_tis.user_id", "mandataires.user_id")
     .innerJoin("users", "mandataires.user_id", "users.id")
     .select(
-      knex.raw("distinct mandataires.*,users.type"),
+      knex.raw(
+        "distinct mandataires.*,users.type,users.nom,users.prenom,users.email"
+      ),
       knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
       knex.raw(
         "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
@@ -161,8 +162,8 @@ const getAllMandataires = ti_id =>
 
 const getAllServicesByTis = ti_id =>
   knex
-    .from("mandataire_tis")
-    .innerJoin("mandataires", "mandataire_tis.mandataire_id", "mandataires.id")
+    .from("user_tis")
+    .innerJoin("mandataires", "user_tis.user_id", "mandataires.user_id")
     .innerJoin("users", "mandataires.user_id", "users.id")
     .where({ ti_id: parseInt(ti_id), "users.type": "service" });
 
@@ -179,24 +180,10 @@ const update = (mandataireID, updates) =>
     .where("id", parseInt(mandataireID))
     .update(updates);
 
-const getCoordonneesByPostCode = userId =>
+const getCoordonneesByPostCode = codePostal =>
   knex
     .from("geolocalisation_code_postal")
-    .where("code_postal", userId)
-    .first();
-
-const getSpecificMandataire = data =>
-  knex
-    .from("mandataires")
-    .where(data)
-    .innerJoin("users", "mandataires.user_id", "users.id")
-    .first();
-
-const getSpecificMandataireByToken = data =>
-  knex
-    .from("mandataires")
-    .where(data, knex.raw("mandataires.reset_password_expires < now()"))
-    .innerJoin("users", "mandataires.user_id", "users.id")
+    .where("code_postal", codePostal)
     .first();
 
 module.exports = {
@@ -211,7 +198,5 @@ module.exports = {
   getAllMandataires,
   getAllByMandatairesFilter,
   update,
-  getCoordonneesByPostCode,
-  getSpecificMandataire,
-  getSpecificMandataireByToken
+  getCoordonneesByPostCode
 };

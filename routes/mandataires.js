@@ -17,6 +17,8 @@ const {
   getCoordonneesByPostCode
 } = require("../db/queries/mandataires");
 
+const { updateUser } = require("../db/queries/users");
+
 const { getTiByUserId } = require("../db/queries/tis");
 
 // récupère les données d'un mandataire
@@ -159,6 +161,25 @@ const whiteList = obj =>
  *                 type: object
  */
 router.put("/1", loginRequired, async (req, res, next) => {
+  const {
+    nom,
+    prenom,
+    genre,
+    telephone,
+    telephone_portable,
+    email,
+    adresse,
+    code_postal,
+    ville,
+    dispo_max,
+    secretariat,
+    zip,
+    etablissement,
+    mesures_en_cours,
+    nb_secretariat,
+    type,
+  } = req.body;
+
   const mandataire = await getMandataireByUserId(req.user.id);
   if (!mandataire) {
     return next(new Error(401));
@@ -170,7 +191,27 @@ router.put("/1", loginRequired, async (req, res, next) => {
     return next();
   }
 
-  updateMandataire(mandataire.id, body)
+  updateMandataire(mandataire.id, {
+    genre,
+    telephone,
+    telephone_portable,
+    adresse,
+    code_postal,
+    ville,
+    dispo_max,
+    secretariat,
+    zip,
+    etablissement,
+    mesures_en_cours,
+    nb_secretariat})
+    .then(() =>
+      updateUser(req.user.id, {
+        nom,
+        prenom,
+        email,
+        type
+      })
+    )
     .then(() => getMandataireById(mandataire.id))
     .then(mandataire => {
       res.status(200).json(mandataire);
@@ -411,6 +452,5 @@ router.use("/", require("./serviceAntennes"));
 router.use("/", require("./mandatairesEtablissements"));
 router.use("/", require("./tis"));
 router.use("/", require("./importation-excel"));
-
 
 module.exports = router;

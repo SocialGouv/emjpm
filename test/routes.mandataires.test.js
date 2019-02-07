@@ -91,7 +91,8 @@ describe("routes : mandataires", () => {
           .put("/api/v1/mandataires/1")
           .set("Authorization", "Bearer " + token)
           .send({
-            code_postal: "10000"
+            code_postal: "10000",
+            nom: "testtest"
           })
           .then(res => {
             res.status.should.eql(200);

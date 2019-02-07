@@ -21,6 +21,7 @@ passport.use(
 
     knex("users")
       .where("username", "ilike", username.trim())
+      .orWhere("email", "ilike", username.trim())
       .first()
       .then(user => {
         if (!user) return done(null, false);

@@ -79,10 +79,7 @@ router.get(
 router.post("/1/tis", loginRequired, async (req, res, next) => {
   // secu : ensure TI can write on this mandataire + add related test
   const mandataire = await getMandataireByUserId(req.user.id);
-  addMandataireTis({
-    ti_id: req.body.ti_id,
-    mandataire_id: mandataire.id
-  })
+  addMandataireTis(req.body.ti_id, mandataire.id)
     .then(() => getAllTisByMandataire(mandataire.id))
     .then(tis => res.status(200).json(tis))
     .catch(error => next(error));
@@ -124,7 +121,6 @@ router.delete("/1/tis/:tiId", loginRequired, async (req, res, next) => {
       next(error);
     });
 });
-
 
 // ToDo : merge with /:mandataireId/tis-by-mandataire
 /** @swagger

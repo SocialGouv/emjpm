@@ -8,6 +8,8 @@ const passportStub = require("passport-stub");
 const server = require("../app");
 const knex = require("../db/knex");
 
+const { getAllTisByMandataire } = require("../db/queries/tis");
+
 chai.use(chaiHttp);
 passportStub.install(server);
 
@@ -142,9 +144,7 @@ describe("routes : inscription", () => {
             .orderBy("id", "desc")
             .first();
           mandataire.adresse.should.equal("rue du test");
-          const tis = await knex
-            .table("mandataire_tis")
-            .where("mandataire_id", mandataire.id);
+          const tis = await getAllTisByMandataire(mandataire.id);
           tis.length.should.equal(2);
           const ti_ids = tis.map(t => t.ti_id);
           ti_ids.sort();
@@ -173,12 +173,13 @@ describe("routes : inscription", () => {
             .where("username", "user_ti")
             .first();
           user.username.should.equal("user_ti");
-          const users_tis = await knex
-            .table("users_tis")
+          const user_tis = await knex
+            .table("user_tis")
+            .innerJoin("users", "users.id","user_tis.user_id")
             .where("user_id", user.id)
             .first();
-          users_tis.cabinet.should.equal("2A");
-          users_tis.ti_id.should.equal(1);
+          user_tis.cabinet.should.equal("2A");
+          user_tis.ti_id.should.equal(1);
         }));
     it("created user should NOT be active", () =>
       chai

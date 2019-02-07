@@ -205,6 +205,9 @@ router.post("/mandataires", (req, res, next) => {
           {
             username,
             type,
+            nom,
+            prenom,
+            email,
             password: bcrypt.hashSync(pass1, salt),
             active: false
           },
@@ -217,27 +220,24 @@ router.post("/mandataires", (req, res, next) => {
               {
                 user_id,
                 etablissement,
-                nom,
-                prenom,
                 telephone,
                 telephone_portable,
-                email,
                 adresse,
                 code_postal,
                 ville
               },
               trx
             )
-            .then(([mandataire_id]) => {
+            .then(() => {
               // create tis
               if (!tis || tis.length === 0) {
                 return true;
               }
               return Promise.all(
                 tis.map(ti_id =>
-                  queries.createMandataireTi(
+                  queries.createUserTi(
                     {
-                      mandataire_id,
+                      user_id,
                       ti_id
                     },
                     trx
@@ -302,13 +302,16 @@ router.post("/tis", (req, res, next) => {
           {
             username,
             type,
+            cabinet,
+            nom,
+            prenom,
+            email,
             password: bcrypt.hashSync(pass1, salt),
             active: false
           },
           trx
         )
         .then(([user_id]) => {
-          // create mandataire
           if (!tis || tis.length === 0) {
             return true;
           }
@@ -317,11 +320,7 @@ router.post("/tis", (req, res, next) => {
               queries.createUserTi(
                 {
                   user_id,
-                  ti_id,
-                  cabinet,
-                  nom,
-                  prenom,
-                  email
+                  ti_id
                 },
                 trx
               )

@@ -11,7 +11,10 @@ exports.seed = (knex, Promise) => {
           username: "individuel",
           password: hash,
           type: "individuel",
-          active: true
+          active: true,
+          email: "individuel@individuel.com",
+          nom: "nom individuel",
+          prenom: "prenom individuel"
         })
       );
     })
@@ -23,7 +26,10 @@ exports.seed = (knex, Promise) => {
           username: "prepose",
           password: hash,
           type: "prepose",
-          active: true
+          active: true,
+          email: "prepose@prepose.com",
+          nom: "nom prepose",
+          prenom: "prenom prepose"
         })
       );
     })
@@ -35,7 +41,10 @@ exports.seed = (knex, Promise) => {
           username: "service",
           password: hash,
           type: "service",
-          active: true
+          active: true,
+          email: "individuel2@individuel.com",
+          nom: "nom individuel2",
+          prenom: "prenom individuel2"
         })
       );
     })
@@ -47,7 +56,9 @@ exports.seed = (knex, Promise) => {
           username: "ti",
           password: hash,
           type: "ti",
-          active: true
+          active: true,
+          cabinet: "6D",
+          email: "test@ti.com"
         })
       );
     })
