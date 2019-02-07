@@ -8,8 +8,8 @@ const getMandataires = ({ filters = {}, offset = 0, limit = 50 } = {}) =>
     //.debug()
     .select(
       "users.id",
-      "nom",
-      "prenom",
+      "users.nom",
+      "users.prenom",
       "code_postal",
       "users.type",
       "users.active",
@@ -26,16 +26,18 @@ const getTis = ({ filters = {}, offset = 0, limit = 50 } = {}) =>
     .select(
       "users.id",
       "users.type",
-      "users_tis.cabinet",
-      "users_tis.email",
-      "users_tis.nom",
-      "users_tis.prenom",
+      "users.cabinet",
+      "users.email",
+      "users.nom",
+      "users.prenom",
       "users.active",
       "users.created_at",
       "users.last_login"
     )
-    .join("users_tis", { "users_tis.user_id": "users.id" })
+    .join("user_tis", { "user_tis.user_id": "users.id" })
+    .where({ "users.type": "ti" })
     .where(whitelist(filters, ALLOWED_FILTERS))
+    .orderBy("id")
     .offset(offset)
     .limit(limit);
 

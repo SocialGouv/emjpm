@@ -22,9 +22,16 @@ const deleteCommentaire = ({ id, ti_id }) =>
 
 const isMandataireInTi = (mandataire_id, ti_id) =>
   knex
-    .from("mandataire_tis")
+    .from("user_tis")
+    .select(
+      "mandataires.id",
+      "mandataires.user_id",
+      "user_tis.user_id",
+      "user_tis.ti_id"
+    )
+    .innerJoin("mandataires", "mandataires.user_id", "user_tis.user_id")
     .where({
-      mandataire_id,
+      "mandataires.id": mandataire_id,
       ti_id
     })
     .then(res => res.length > 0);

@@ -42,7 +42,9 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
     return next(new Error(401));
   }
   getAllMesuresByMandataires(ti.id)
-    .then(mesures => res.status(200).json(mesures))
+    .then(mesures => {
+      res.status(200).json(mesures)
+    })
     .catch(error => next(error));
 });
 

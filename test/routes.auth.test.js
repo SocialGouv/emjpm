@@ -293,28 +293,37 @@ describe("routes : auth", () => {
           console.log("e", e);
           throw new Error("should not fail");
         }));
-    it("should empty user token+expiration on password restore", () =>
+    it("should empty user token+expiration on password restore", () => {
+      const token = knex
+        .select("reset_password_token")
+        .from("users")
+        .where("email", "test3@ti.com")
+        .first();
+      chai.should().not.exist(token.reset_password_token);
+    });
+    it("should reset a password when input and token match for user tis", () =>
       chai
         .request(server)
         .post("/auth/reset_password")
         .send({
-          token: "LpWpzK4Jla9I87Aq",
-          newPassword: "adad",
-          verifyPassword: "adad"
+          token: "LpWpzK4Jla9I87Aqtry",
+          newPassword: "adadre",
+          verifyPassword: "adadre"
         })
-        .then(async res => {
+        .then(res => {
           res.status.should.eql(200);
-          const token = await knex
-            .select("reset_password_token")
-            .from("users")
-            .innerJoin("mandataires", "users.id", "mandataires.user_id")
-            .where("email", "ud@ud.com")
-            .first();
-          chai.should().not.exist(token.reset_password_token);
         })
         .catch(e => {
           console.log("e", e);
           throw new Error("should not fail");
         }));
+    it("should empty user token+expiration on password restore for user ti", () => {
+      const token = knex
+        .select("reset_password_token")
+        .from("users")
+        .where("email", "test3@ti.com")
+        .first();
+      chai.should().not.exist(token.reset_password_token);
+    });
   });
 });

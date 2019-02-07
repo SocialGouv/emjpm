@@ -7,7 +7,7 @@ const router = express.Router();
 const queries = require("../db/queries/admin");
 const whitelist = require("../db/queries/whitelist");
 
-const { user } = require("../db/queries/users");
+const { getSpecificUser } = require("../db/queries/users");
 const { validationEmail } = require("../email/validation");
 /**
  * @swagger
@@ -176,7 +176,7 @@ router.put("/user/:userId", typeRequired("admin"), async (req, res, next) => {
       ...cleanedBody
     })
     .then(updated => {
-      user(req.params.userId).then(json =>
+      getSpecificUser({ id: req.params.userId }).then(json =>
         validationEmail(json.email, `${process.env.APP_URL}`)
       );
       return updated;

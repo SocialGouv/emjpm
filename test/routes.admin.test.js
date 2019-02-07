@@ -82,7 +82,7 @@ describe("routes : /admin", () => {
   });
 
   describe("/tis", () => {
-    it("should return list of mandataires", () =>
+    it("should return list of users by tis", () =>
       logUser(server, {
         username: "admin",
         password: "admin"
