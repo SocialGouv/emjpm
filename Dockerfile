@@ -8,6 +8,7 @@ COPY ./yarn.lock /app/yarn.lock
 RUN yarn --frozen-lockfile && yarn cache clean
 
 COPY ./knexfile.js /app/knexfile.js
+COPY ./app.js /app/app.js
 
 COPY ./auth /app/auth
 COPY ./config /app/config
