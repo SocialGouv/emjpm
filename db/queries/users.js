@@ -19,13 +19,11 @@ const getSpecificUser = data =>
     .where(data)
     .first();
 
-
 const getCountByEmail = email =>
   knex("users")
     .count("id")
     .where("email", email)
     .first();
-
 
 module.exports = {
   updateLastLogin,
