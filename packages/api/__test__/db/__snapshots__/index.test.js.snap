@@ -1,0 +1,846 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`commentaires table schema 1`] = `
+Object {
+  "comment": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "text",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('commentaires_co_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "ti_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
+exports[`departements table schema 1`] = `
+Object {
+  "code": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('departements_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "id_region": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`etablissements table schema 1`] = `
+Object {
+  "adresse": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "code_postal": Object {
+    "defaultValue": null,
+    "maxLength": 10,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "fax": Object {
+    "defaultValue": null,
+    "maxLength": 15,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('etablissements_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "id_finess": Object {
+    "defaultValue": null,
+    "maxLength": 20,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "latitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "longitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 100,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "tel": Object {
+    "defaultValue": null,
+    "maxLength": 15,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "ville": Object {
+    "defaultValue": null,
+    "maxLength": 100,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`geolocalisation_code_postal table schema 1`] = `
+Object {
+  "code_postal": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('\\"codePostalLatLngs_id_seq\\"'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "latitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "longitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+}
+`;
+
+exports[`knex_migrations table schema 1`] = `
+Object {
+  "batch": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "id": Object {
+    "defaultValue": "nextval('knex_migrations_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "migration_time": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "name": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`knex_migrations_lock table schema 1`] = `
+Object {
+  "is_locked": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
+exports[`logs_data table schema 1`] = `
+Object {
+  "action": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('logs_data_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "result": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
+exports[`mandataire_etablissements table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": false,
+    "type": "timestamp with time zone",
+  },
+  "etablissement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "id": Object {
+    "defaultValue": "nextval('\\"mandatairesEtablissements_id_seq\\"'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
+exports[`mandataire_tis table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('mandatairetis_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "ti_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
+exports[`mandataires table schema 1`] = `
+Object {
+  "adresse": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "code_postal": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "date_mesure_update": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "dispo_max": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "email": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "email_send": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "etablissement": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "genre": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('mandataires_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mesures_en_attente": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "mesures_en_cours": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "nb_secretariat": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "prenom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "secretariat": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "telephone": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "telephone_portable": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "ville": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "zip": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "text",
+  },
+}
+`;
+
+exports[`mesures table schema 1`] = `
+Object {
+  "annee": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "cabinet": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "civilite": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "code_postal": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "date_ouverture": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "date",
+  },
+  "etablissement": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "etablissement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "extinction": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "date",
+  },
+  "id": Object {
+    "defaultValue": "nextval('mesures_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "numero_dossier": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "residence": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "status": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "ti_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "ville": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`regions table schema 1`] = `
+Object {
+  "id": Object {
+    "defaultValue": "nextval('regions_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`service_antennes table schema 1`] = `
+Object {
+  "adresse": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "code_postal": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "dispo_max": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "email": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "etablissement": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('\\"serviceAntennes_id_seq\\"'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "mesures_en_cours": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "poste": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "prenom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "telephone": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "telephone_portable": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "ville": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`should list all tables 1`] = `
+Array [
+  "commentaires",
+  "departements",
+  "etablissements",
+  "geolocalisation_code_postal",
+  "knex_migrations",
+  "knex_migrations_lock",
+  "logs_data",
+  "mandataire_etablissements",
+  "mandataire_tis",
+  "mandataires",
+  "mesures",
+  "regions",
+  "service_antennes",
+  "tis",
+  "users",
+  "users_tis",
+]
+`;
+
+exports[`tis table schema 1`] = `
+Object {
+  "code_postal": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": false,
+    "type": "timestamp with time zone",
+  },
+  "email": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "etablissement": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('tis_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "latitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "real",
+  },
+  "longitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "real",
+  },
+  "telephone": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "ville": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`users table schema 1`] = `
+Object {
+  "active": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": false,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('users_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "last_login": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "password": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "reset_password_expires": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "reset_password_token": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": 20,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "username": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`users_tis table schema 1`] = `
+Object {
+  "cabinet": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "creates_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "email": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('users_tis_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "prenom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "ti_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
