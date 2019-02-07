@@ -18,8 +18,15 @@ const updateMandataireApi = data =>
     body: JSON.stringify({
       ...data,
       zip: data.zip || "",
+      genre: data.genre || "",
       secretariat: data.secretariat || false,
-      nb_secretariat: data.nb_secretariat || 0
+      nb_secretariat: data.nb_secretariat || 0,
+      telephone: data.telephone || "",
+      telephone_portable: data.telephone_portable || "",
+      adresse: data.adresse || "",
+      code_postal: data.code_postal || "",
+      dispo_max: data.dispo_max || 0,
+      ville: data.ville || ""
     })
   });
 
