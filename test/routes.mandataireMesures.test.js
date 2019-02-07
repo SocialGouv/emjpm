@@ -95,6 +95,71 @@ describe("routes : mandataireMesures", () => {
       ));
   });
 
+  it("should NOT update a mesure for another mandataire", () =>
+    logUser(server).then(token =>
+      agent
+        .put("/api/v1/mandataires/1/mesures/2")
+        .set("Authorization", "Bearer " + token)
+        .send({
+          code_postal: "10000"
+        })
+        .then(res =>
+          knex
+            .table("mesures")
+            .where("id", 2)
+            .first()
+            .then(data => {
+              data.code_postal.should.not.eql("10000");
+            })
+        )
+    ));
+
+  it("should post mesure en attente for given mandataire and can update it ", () =>
+    logUser(server, {
+      username: "ti1",
+      password: "ti1"
+    }).then(token =>
+      agent
+        .post("/api/v1/mandataires/1/mesures")
+        .set("Authorization", "Bearer " + token)
+        .send({
+          code_postal: "28000",
+          created_at: "2010-10-05",
+          annee: "2010",
+          type: "preposes",
+          date_ouverture: "2010-10-05",
+          civilite: "madame",
+          status: "Mesure en attente"
+        })
+        .then(function(res) {
+          res.redirects.length.should.eql(0);
+          res.status.should.eql(200);
+          res.type.should.eql("application/json");
+          res.body.length.should.eql(3);
+        })
+    ));
+
+  it("should update a mesure for a given mandataire", () =>
+    logUser(server, {
+      username: "ti1",
+      password: "ti1"
+    }).then(token =>
+      agent
+        .put("/api/v1/mandataires/1/mesures/4")
+        .set("Authorization", "Bearer " + token)
+        .send({
+          code_postal: "10000"
+        })
+        .then(function(res) {
+          res.redirects.length.should.eql(0);
+          res.status.should.eql(200);
+          res.type.should.eql("application/json");
+          res.body.length.should.eql(2);
+          res.body.find(i => i.id === 4).code_postal.should.eql("10000");
+        })
+    ));
+
+  //ToDO(Adrien): Update or rm
   // Change login for a specific user
   // it("should update a date mesure update when updating mesure en cours for a given mandataire (Trigger)", () =>
   //   logUser(server).then(token =>
@@ -114,23 +179,4 @@ describe("routes : mandataireMesures", () => {
   //           .date_mesure_update.should.eql(Date.now());
   //       })
   //   ));
-
-  it("should NOT update a mesure for another mandataire", () =>
-    logUser(server).then(token =>
-      agent
-        .put("/api/v1/mandataires/1/mesures/2")
-        .set("Authorization", "Bearer " + token)
-        .send({
-          code_postal: "10000"
-        })
-        .then(res =>
-          knex
-            .table("mesures")
-            .where("id", 2)
-            .first()
-            .then(data => {
-              data.code_postal.should.not.eql("10000");
-            })
-        )
-    ));
 });

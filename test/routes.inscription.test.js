@@ -67,6 +67,28 @@ describe("routes : inscription", () => {
           res.status.should.eql(500);
         }));
 
+    it("should fail when email already exist", () =>
+      chai
+        .request(server)
+        .post("/api/v1/inscription/mandataires")
+        .send({
+          username: "toto",
+          etablissement: "",
+          email: "marcel@paris.com",
+          type: "sss",
+          pass1: "kikoo",
+          pass2: "kikoo",
+          adresse: "",
+          code_postal: "",
+          ville: "",
+          telephone: "",
+          latitude: 2,
+          longitude: 2
+        })
+        .then(res => {
+          res.status.should.eql(500);
+        }));
+
     it("should fail when empty username", () =>
       chai
         .request(server)

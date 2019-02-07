@@ -177,9 +177,11 @@ router.post("/forgot_password", (req, res, next) => {
         reset_password_token: token,
         reset_password_expires: Date.now() + 7200000
       });
+      return user;
     })
-    .then(() =>
+    .then(user =>
       resetPasswordEmail(
+        user,
         email,
         `${process.env.APP_URL}/reset-password?token=${token}`
       )
