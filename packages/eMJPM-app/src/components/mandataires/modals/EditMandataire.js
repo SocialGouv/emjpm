@@ -10,7 +10,7 @@ import Layout from "./Layout";
 const schema = {
   title: "Modifier mes informations",
   type: "object",
-  required: ["nom", "prenom", "genre"],
+  required: ["nom", "prenom","email"],
   properties: {
     nom: { type: "string", title: "Nom", default: "" },
     prenom: { type: "string", title: "Prénom", default: "" },
