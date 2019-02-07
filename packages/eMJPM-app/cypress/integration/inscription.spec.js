@@ -264,9 +264,14 @@ describe("Inscription", () => {
       cy.get("[data-cy='UserCellAction']").should("have.length", 1);
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
-      cy.get("[data-cy='UserCellAction']")
-        .last()
-        .click();
+      cy.get(".rt-tr ")
+        .contains("email-ti@email.com")
+        .parent(".rt-tr")
+        .within(row => {
+          cy.get(".rt-td [data-cy='UserCellAction']")
+            .last()
+            .click();
+        });
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='Actifs']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
