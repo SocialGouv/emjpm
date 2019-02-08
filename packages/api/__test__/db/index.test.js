@@ -1,5 +1,7 @@
 //
 
+const { knex } = this.global;
+
 beforeAll(async () => {
   await knex.migrate.latest();
 });

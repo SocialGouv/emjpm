@@ -1,5 +1,9 @@
 //
 
+const request = require("supertest");
+const server = require("@socialgouv/api/app");
+
+//
 
 exports.userTypes = {
   mandataire: {
@@ -21,7 +25,7 @@ exports.userTypes = {
 };
 
 exports.logMeIn = async (userType = exports.userTypes.mandataire) => {
-  return await request(server)
+  return request(server)
     .post("/auth/login")
     .send(userType);
-}
+};
