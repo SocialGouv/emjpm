@@ -1,5 +1,7 @@
 module.exports = {
-  testEnvironment: "./test/db/jest-environment-knex.js",
+  testEnvironment: "./__test__/db/jest-environment-knex.js",
   testEnvironmentOptions: require("@socialgouv/api/knexfile.js").test,
+  roots: ["<rootDir>/__test__/"],
+  globalSetup: "./__test__/globalSetup.js",
   collectCoverageFrom: ["auth/**/*.js", "email/**/*.js", "routes/**/*.js"]
 };

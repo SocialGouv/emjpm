@@ -245,7 +245,7 @@ router.post("/reset_password", (req, res, next) => {
             return confirmationPasswordEmail(mandataire.email);
           });
       } else {
-        throw createError.UnprocessableEntity( "Not equal passwords." );
+        throw createError.UnprocessableEntity("Not equal passwords.");
       }
     })
     .then(function() {

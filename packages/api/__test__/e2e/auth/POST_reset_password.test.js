@@ -29,6 +29,10 @@ beforeEach(async () => {
     });
 });
 
+afterAll(async () => {
+  await knex.destroy();
+});
+
 test("reset a password", async () => {
   const user = await knex("users")
     .where({ id: 52 })

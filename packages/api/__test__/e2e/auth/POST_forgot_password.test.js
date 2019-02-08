@@ -3,18 +3,23 @@
 const request = require("supertest");
 
 // Mock nodemailer before importing the server !
-const nodemailerMock = require("nodemailer-mock")
+const nodemailerMock = require("nodemailer-mock");
 jest.setMock("nodemailer", nodemailerMock);
-jest.setMock("rand-token", { uid: jest.fn(() => 'kikoulol')});
+jest.setMock("rand-token", { uid: jest.fn(() => "kikoulol") });
 
 // Fake env
 process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 process.env.APP_URL = "https://emjpm.gouv.fr";
 
 const server = require("@socialgouv/api/app");
+const knex = require("@socialgouv/api/db/knex");
 
 beforeEach(() => {
   nodemailerMock.mock.reset();
+});
+
+afterAll(async () => {
+  await knex.destroy();
 });
 
 test("send a forgot password email to ud@ud.com with correct token on request", async () => {
