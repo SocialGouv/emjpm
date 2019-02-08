@@ -28,7 +28,7 @@ script:
   - yarn build --stream
   - yarn lint --stream
   - yarn workspace @socialgouv/app test --coverage
-  - JWTKEY=lol yarn workspace @socialgouv/api test
+  - JWTKEY=lol yarn workspace @socialgouv/api test --coverage
 
 after_script:
   - npx codecov
