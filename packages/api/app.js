@@ -1,12 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-//const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const session = require("express-session");
 const routes = require("./routes/index");
-const users = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const inscriptionRoutes = require("./routes/inscription");
 const Knex = require("knex");
@@ -68,7 +66,6 @@ app.use("/api/v1/inscription", inscriptionRoutes);
 app.use("/api/v1", passport.authenticate("jwt", { session: false }), routes);
 app.use("/auth", authRoutes);
 app.use("/doc", require("./routes/doc"));
-app.use("/", users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
