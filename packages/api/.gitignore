@@ -2,6 +2,7 @@ node_modules
 .idea
 .next
 .vscode
+coverage
 docker-compose.override.yaml
 db/seeds/developement_test/0000-users.js
 db/seeds/developement_test/ne_pas_prendre.js
