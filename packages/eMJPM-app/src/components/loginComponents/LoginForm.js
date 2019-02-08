@@ -76,7 +76,7 @@ const Jumbo = ({ children }) => <JumboContent className="jumbotron">{children}</
 
 const ErrorBox = ({ message }) =>
   (message && (
-    <div className="alert alert-danger" role="alert">
+    <div className="alert alert-danger" role="alert" style={{ marginTop: 20 }}>
       {message}
     </div>
   )) ||
@@ -178,7 +178,7 @@ class LoginForm extends React.Component {
               status: "error",
               error: "Impossible de se connecter"
             });
-            //throw e;
+            throw e;
           });
       }
     );
