@@ -76,9 +76,9 @@ app.use(function(req, res, next) {
 
 // error handlers
 
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   if (res.headersSent) {
-    return next(err)
+    return next(err);
   }
   // console.error(err);
   const body = {
