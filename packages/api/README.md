@@ -59,6 +59,11 @@ docker exec emjpm-postgres createdb emjpm_test -U postgres
 yarn workspace @socialgouv/api knex migrate:latest --env test
 
 yarn workspace @socialgouv/api knex seed:run --env test
+
+
+# In case the migration lock is still there :)
+docker-compose exec db psql -U postgres -d emjpm_test -c 'UPDATE knex_migrations_lock set is_locked=0;'
+
 ```
 
 ## Prod
