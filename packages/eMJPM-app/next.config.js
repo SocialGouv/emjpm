@@ -16,6 +16,9 @@ module.exports = withTM(
       webpack: config => {
         config.plugins.push(new webpack.EnvironmentPlugin(process.env));
         return config;
+      },
+      publicRuntimeConfig: {
+        SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN
       }
     })
   )
