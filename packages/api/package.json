@@ -5,8 +5,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "NODE_ENV=test mocha --timeout 10000 --exit",
-    "test:jest": "NODE_ENV=test jest --verbose",
+    "test:mocha": "NODE_ENV=test mocha --timeout 10000 --exit",
+    "test": "NODE_ENV=test jest --verbose",
     "knex": "knex",
     "lint": "eslint auth db email routes scripts test app.js knexfile.js",
     "migrate-and-start": "knex migrate:latest && npm start",
