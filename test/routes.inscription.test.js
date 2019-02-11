@@ -86,7 +86,7 @@ describe("routes : inscription", () => {
           longitude: 2
         })
         .then(res => {
-          res.status.should.eql(500);
+          res.status.should.eql(409);
         }));
 
     it("should fail when empty username", () =>
@@ -197,7 +197,7 @@ describe("routes : inscription", () => {
           user.username.should.equal("user_ti");
           const user_tis = await knex
             .table("user_tis")
-            .innerJoin("users", "users.id","user_tis.user_id")
+            .innerJoin("users", "users.id", "user_tis.user_id")
             .where("user_id", user.id)
             .first();
           user_tis.cabinet.should.equal("2A");
