@@ -7,7 +7,7 @@ const ContainerMandataire = styled.div`
   padding: 10px 0;
   font-size: 1.2em;
   margin-top: 0px;
-  height: 150px;
+  height: 180px;
 `;
 
 const Title = styled.div`
