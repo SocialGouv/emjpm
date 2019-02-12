@@ -6,7 +6,7 @@ import { connectModal } from "redux-modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import Layout from "./Layout";
+import Layout from "../../communComponents/ModalLayout";
 import { updateMesureAttente } from "../actions/mesures";
 import { residence } from "../../common/nomination";
 
