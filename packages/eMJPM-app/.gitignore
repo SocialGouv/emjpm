@@ -3,3 +3,4 @@ node_module2
 .idea
 .next
 .vscode
+.env
