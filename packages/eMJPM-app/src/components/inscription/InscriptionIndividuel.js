@@ -4,7 +4,6 @@ import uiSchema from "./uiSchema.json";
 const schema = {
   type: "object",
   required: [
-    "username",
     "pass1",
     "pass2",
     "nom",
@@ -16,10 +15,7 @@ const schema = {
     "ville"
   ],
   properties: {
-    username: {
-      type: "string",
-      default: ""
-    },
+    email: { type: "string",format: "email",  default: "" },
     pass1: { type: "string", minLength: 8 },
     pass2: { type: "string", minLength: 8 },
     nom: { type: "string", default: "" },
@@ -32,7 +28,7 @@ const schema = {
     },
     telephone: { type: "string", default: "" },
     telephone_portable: { type: "string", default: "" },
-    email: { type: "string", default: "" },
+
     adresse: { type: "string", default: "" },
     code_postal: { type: "string", default: "" },
     ville: { type: "string", default: "" },

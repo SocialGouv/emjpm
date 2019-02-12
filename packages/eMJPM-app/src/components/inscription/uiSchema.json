@@ -49,9 +49,6 @@
   "email": {
     "ui:title": "Adresse email",
     "ui:placeholder": "ex: nom.prenom@orange.fr",
-    "ui:options": {
-      "inputType": "email"
-    },
     "classNames": "input__long"
   },
   "adresse": {

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { connectModal } from "redux-modal";
 
-import Layout from "../../mandataires/modals/Layout";
+import Layout from "../../communComponents/ModalLayout";
 
 const ModalMesureValidation = ({ show, handleHide }) => {
   return (

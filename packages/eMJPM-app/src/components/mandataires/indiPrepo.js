@@ -33,7 +33,8 @@ class MandataireTabs extends React.Component {
                 "date_demande",
                 "ti",
                 "status",
-                "professionnel"
+                "professionnel",
+                "mandataire_id"
               ]}
             />
           </React.Fragment>
@@ -59,7 +60,8 @@ class MandataireTabs extends React.Component {
               "date_demande",
               "ti",
               "status",
-              "professionnel"
+              "professionnel",
+              "mandataire_id"
             ]}
           />
         )
@@ -79,7 +81,8 @@ class MandataireTabs extends React.Component {
               "extinction",
               "residence",
               "status",
-              "professionnel"
+              "professionnel",
+              "mandataire_id"
             ]}
           />
         )
