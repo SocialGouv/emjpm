@@ -30,14 +30,6 @@ export default class MyDocument extends Document {
           <meta name="description" content="" />
           <meta name="author" content="" />
           <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,fetch,Array.prototype.find,Array.prototype.findIndex,Array.prototype.includes" />
-          <script type="text/javascript" src="https://app.getweloop.io/client/snippet/weloop.js" />
-          <script
-            type="text/javascript"
-            dangerouslySetInnerHTML={{
-              __html: `
-              weloop_init({projectGuid: "d45d7d33-442a-4585-9c00-dcbd5d0e9967"});`
-            }}
-          />
           <link rel="stylesheet" href="/static/css/react-table.css" />
           <link rel="stylesheet" href="/static/css/leaflet/leaflet.css" />
           {this.props.styleTags}
