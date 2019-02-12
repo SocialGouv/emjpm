@@ -105,6 +105,12 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Mandataire",
+    id: "mandataire_id",
+    accessor: d => d.mandataire_id,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
     Header: "Tribunal d'instance",
     id: "ti",
     accessor: d => d.etablissement,
@@ -165,18 +171,25 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Cabinet",
+    id: "cabinet",
+    accessor: d => d.cabinet,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
+    Header: "Statut",
+    id: "status",
+    accessor: d => d.status,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
     Header: "Fin de mandat",
     id: "fin-mandat",
     Cell: row => <CellCloseMesureRedux row={row} />,
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
-  {
-    Header: "Cabinet",
-    id: "cabinet",
-    accessor: d => d.cabinet,
-    style: { textAlign: "center", alignSelf: "center" }
-  },
+
   {
     Header: "Réactiver",
     id: "reactiver",
@@ -189,12 +202,6 @@ const COLUMNS = [
     id: "valider",
     Cell: row => <CellValidationMesureRedux row={row} />,
     width: 200,
-    style: { textAlign: "center", alignSelf: "center" }
-  },
-  {
-    Header: "Statut",
-    id: "status",
-    accessor: d => d.status,
     style: { textAlign: "center", alignSelf: "center" }
   }
 ];

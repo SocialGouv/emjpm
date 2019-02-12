@@ -14,9 +14,16 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { DummyTabs, LoadingMessage } from "..";
 import { tiMount } from "./actions/mandataire";
 import mandataireReducer from "./reducers/mandataire";
+import mesuresReducer from "./reducers/mesures";
 import mapReducer from "./reducers/map";
-import { FicheMandataireModal, ModalMesureValidation, ModalMesureReservation } from "./modals";
+import {
+  FicheMandataireModal,
+  ModalMesureValidation,
+  ModalMesureReservation,
+  EditMesure
+} from "./modals";
 import TableMesures from "../mandataires/TableMesures";
+//import TableMesures from "./TableMesures";
 import apiFetch from "../communComponents/Api";
 
 const MapTable = dynamic(() => import("./MapTi"), { ssr: false });
@@ -54,14 +61,14 @@ class Ti extends React.Component {
           <TableMesures
             fetch={() => apiFetch(`/mesures/getAllMesuresByTis`)}
             hideColumns={[
-              "modifier",
               "reactiver",
-              "fin-mandat",
               "extinction",
               "residence",
               "valider",
               "date_demande",
-              "ti"
+              "ti",
+              "mandataire_id",
+              "fin-mandat"
             ]}
           />
         )
@@ -73,6 +80,7 @@ class Ti extends React.Component {
         <FicheMandataireModal />
         <ModalMesureValidation />
         <ModalMesureReservation />
+        <EditMesure />
       </div>
     );
   }
@@ -81,6 +89,7 @@ class Ti extends React.Component {
 const rootReducer = combineReducers({
   mandataire: mandataireReducer,
   modal,
+  mesures: mesuresReducer,
   map: mapReducer
 });
 

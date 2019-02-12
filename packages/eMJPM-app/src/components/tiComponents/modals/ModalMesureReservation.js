@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { show, connectModal } from "redux-modal";
 import { bindActionCreators } from "redux";
 
-import Layout from "../../mandataires/modals/Layout";
+import Layout from "../../communComponents/ModalLayout";
 import { openValidationModal } from "../actions/mandataire";
 
 const schema = {

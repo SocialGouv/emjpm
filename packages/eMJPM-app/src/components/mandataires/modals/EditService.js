@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { updateMandataire } from "../actions/mandataire";
-import Layout from "./Layout";
+import Layout from "../../communComponents/ModalLayout";
 
 const schema = {
   title: "Modifier vos informations",
