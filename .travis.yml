@@ -16,7 +16,7 @@ _steps:
     stage: Build
     language: node_js
     node_js: 10
-    before_cache:
+    before_install: &install_latest_yarn
       - curl -o- -L https://yarnpkg.com/install.sh | bash
       - export PATH="$HOME/.yarn/bin:$PATH"
     cache:
@@ -45,6 +45,7 @@ jobs:
     - <<: *build_stage
 
       before_install:
+        - *install_latest_yarn
         # Start the database first so it has the time to boot before we interact with it.
         # - docker-compose up -d db
 
