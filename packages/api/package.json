@@ -1,5 +1,5 @@
 {
-  "name": "eMJPM-api",
+  "name": "@emjpm/api",
   "version": "0.0.0",
   "private": true,
   "scripts": {
