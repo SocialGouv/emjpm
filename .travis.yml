@@ -7,9 +7,6 @@ git:
 #
 
 _environments:
-  - &install_latest_yarn
-    - curl -o- -L https://yarnpkg.com/install.sh | bash
-    - export PATH="$HOME/.yarn/bin:$PATH"
   - &docker_keys
     - secure: "LPAABCYpzyVfvCWC8iAEEqhugW9oJKWDQ+cV9R/sZRDAqas3UKUjcKSThMBU/jV7w9Agkb26mvmcdbyEN849Si6MCewH+q4v9HziaNhSxCPjAFmeFXTVwCKzf1SQWqjAnmdfdUezLfp/AAj4rO6Lff/1ceu5YGW/3baJ8bFcdzWdTZBX5ctlu9n+7lv1c/oinePerijmXWywOnuvdJdxNN0jfogyYpCB6JtVdiAliPSEgJ/JV4HTkpHPLlgb25GFqt47CpuSD94e2Zy/CI7l6fxCWPvWuA1yFXrUPgsu+ibC8cJA7DnWsxhNJUh4IyTnqLbaWucm6ySW4o+Bo9msQcVNsZj4+Sm/mwu+SRAjCe5BS4rzovhkDKBjZnNhfLbDfftEubyvIRRr8hnFZiYXNo9FyC08hdFVhU+fWFsgYYsMbCGPSNQZDfaUW6gwuPJ1wL9vMvRbOrQb/hT2Zr04cBuF/3ARBDx4AWf73AmANvsDdUTh86o+B5jc/52JZBcTFtlRoWMYwxXbX17AHqoGswlHuNya/m+zgTmReuzei1mtlHKQtP31ZI8nBpxEuVWyVA9qa7y4Y7oYpwjJ549euy5c8WNwIZVXQh/x7iDFsr+aeVjWoB6aViiG9rjuo+qqm+CBwWhVTcV3ako3rQbNpMW6x0cSRrr0U1SG1CE5Mxs="
     - secure: "fsQoYjKdeMqzd9CnQTSITL53AytIeiMda854RxX5qx+YDL6RR8DGnTbNxUrIMhFCBMu11TeV84/v2O473LZFgtLKuTfD78rMQ0lc4y6QnkwInZaYBdg3CGhCENyP90itPgQ2f68vDTsNoOuDL+Ymp3J94E6QrQ9YlZ7ZdpRSZb84/sPsnzpabw2HVhkoxuMwP8VHiAXBq1MuK5S/9w4d1oFRJ/kVk+mltOsRUoDb7kzm0+BBtVujFnLPfaJF2xbQnCth3lTjTpmqK/h63nBTXli6N4GFzcnKV39jXBHbLbn4Le/WRl+QuGwwt/TL6sZbrBT/Vr4xAbqBfON0i+Go39ok6CN+BGBR2griMLKSsq1xfxP2lQ2W7stqWH4J596cHh33uMkZOEUibC2G6lBg4jvgpRcHdbO3OgvOmG2mD+u5gRKVCvI1WN4Lg5QbX5BUjuL68/G5rDxVFp5/pgde78QOVJXnMEyDUWStU3ApvankkM7lKlxv5RkJMFsqdawx1gU53dlAYP984myR9+B4CLrdccWP2m4Hm/eE5VCOxeFH0Yi6pCwQNGkUJj0xijcW+6H1XRLB1KYhHsBHNkmUD20cHUjjpVzyJrqHlD4E6XlGT1KFYv0QHjF+hrlYyQS1QaVyxSD16nIYWiC1Q2Fh/yDOwvcJhpouUhxENNIfEIY="
@@ -20,7 +17,8 @@ _steps:
     language: node_js
     node_js: 10
     before_install:
-      - *install_latest_yarn
+      - curl -o- -L https://yarnpkg.com/install.sh | bash
+      - export PATH="$HOME/.yarn/bin:$PATH"
     cache:
       yarn: true
       directories:
@@ -47,7 +45,8 @@ jobs:
     - <<: *build_stage
 
       before_install:
-        - *install_latest_yarn
+        - curl -o- -L https://yarnpkg.com/install.sh | bash
+        - export PATH="$HOME/.yarn/bin:$PATH"
         # Start the database first so it has the time to boot before we interact with it.
         # - docker-compose up -d db
 
