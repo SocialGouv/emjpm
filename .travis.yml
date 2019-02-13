@@ -45,7 +45,7 @@ jobs:
     - <<: *build_stage
 
       before_install:
-        - *install_latest_yarn
+        - <<: *install_latest_yarn
         # Start the database first so it has the time to boot before we interact with it.
         # - docker-compose up -d db
 
