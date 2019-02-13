@@ -19,7 +19,8 @@ _steps:
     stage: Build
     language: node_js
     node_js: 10
-    before_install: *install_latest_yarn
+    before_install:
+      - *install_latest_yarn
     cache:
       yarn: true
       directories:
