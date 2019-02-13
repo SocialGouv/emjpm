@@ -1,0 +1,75 @@
+---
+dist: xenial
+language: minimal
+git:
+  depth: 5
+
+#
+
+_steps:
+  - &build_stage
+    stage: Build
+    language: node_js
+    node_js: 10
+    before_cache:
+      - curl -o- -L https://yarnpkg.com/install.sh | bash
+      - export PATH="$HOME/.yarn/bin:$PATH"
+    cache:
+      yarn: true
+      directories:
+        # Cypress downloader cache folder
+        - ~/.cache/Cypress
+
+  - &deploy_stage
+    stage: Deploy
+    if: type = push AND tag IS present
+    script:
+      - docker pull $DOCKER_IMAGE
+      #
+      - docker build -t $DOCKER_IMAGE:$TRAVIS_BRANCH $CONTEXT
+      - docker build -t $DOCKER_IMAGE:latest $CONTEXT
+      #
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - docker push $DOCKER_IMAGE:$TRAVIS_BRANCH
+      - docker push $DOCKER_IMAGE:latest
+
+#
+
+jobs:
+  include:
+    - <<: *build_stage
+
+      before_install:
+        # Start the database first so it has the time to boot before we interact with it.
+        - docker-compose up -d db
+
+      before_script:
+        - yarn workspace @emjpm/api knex migrate:latest --env test
+        - yarn workspace @emjpm/api knex seed:run --env test
+
+      script:
+        - yarn build --stream
+        - yarn lint --stream
+        - yarn workspace @emjpm/app test --coverage
+        - JWTKEY=lol yarn workspace @emjpm/api test
+
+      after_script:
+        - npx codecov
+        - docker-compose down
+
+    #
+    #
+    #
+
+    - <<: *deploy_stage
+      name: Deploy latest app image to Docker Hub
+      env:
+        - *docker_keys
+        - DOCKER_IMAGE="socialgouv/emjpm-app"
+        - CONTEXT=./packages/app
+    - <<: *deploy_stage
+      name: Deploy latest api image to Docker Hub
+      env:
+        - *docker_keys
+        - DOCKER_IMAGE="socialgouv/emjpm-api"
+        - CONTEXT=./packages/api
