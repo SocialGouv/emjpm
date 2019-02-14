@@ -15,7 +15,7 @@ module.exports = withTM(
       },
       publicRuntimeConfig: {
         SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN || "https://sentry.dev",
-        API_URL: process.env.API_URL || "https://api.dev"
+        API_URL: process.env.API_URL || "http://127.0.0.1:4000"
       }
     })
   )
