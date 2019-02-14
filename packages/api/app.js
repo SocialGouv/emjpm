@@ -2,11 +2,13 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const routes = require("./routes/index");
-const users = require("./routes/users");
-const authRoutes = require("./routes/auth");
-const inscriptionRoutes = require("./routes/inscription");
 const Sentry = require("@sentry/node");
+
+const pkg = require("./package.json");
+const routes = require("./routes/index");
+const authRoutes = require("./routes/auth");
+const userRoutes = require("./routes/users");
+const inscriptionRoutes = require("./routes/inscription");
 
 const app = express();
 
@@ -33,14 +35,32 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
+
 app.use("/api/v1/inscription", inscriptionRoutes);
 app.use("/api/v1", passport.authenticate("jwt", { session: false }), routes);
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 app.use("/doc", require("./routes/doc"));
-app.use("/", users);
+
+app.get("/ping", function(req, res, next) {
+  if (!req.user) {
+    res.status(401).json({ success: false });
+  } else {
+    res.json({ success: true });
+  }
+});
+
+app.get("/", function(req, res, next) {
+  res.json({
+    title: "API eMJPM",
+    version: pkg.version,
+    NODE_ENV: process.env.NODE_ENV || "development"
+  });
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.log(`404 Not Found : ${req.url}`);
   var err = new Error(`404 Not Found : ${req.url}`);
   err.status = 404;
   Sentry.captureException(err);
@@ -65,6 +85,7 @@ if (app.get("env") === "development") {
 // no stacktraces leaked to user
 if (process.env.NODE_ENV !== "test") {
   app.use(function(err, req, res, next) {
+    console.log("error", err);
     Sentry.captureException(err);
     res.status(err.status || 500).json({
       error: {}

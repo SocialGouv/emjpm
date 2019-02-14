@@ -78,6 +78,7 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
     }
     if (!user) {
       if (process.env.NODE_ENV !== "test") {
+        console.log(`Unauthorized user : ${req.body.username}`);
         Sentry.captureMessage(`Unauthorized user : ${req.body.username}`);
       }
       return res
