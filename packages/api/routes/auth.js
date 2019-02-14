@@ -101,7 +101,7 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
           .then(() => {
             const token = jwt.sign(
               JSON.parse(JSON.stringify(user)),
-              process.env.JWTKEY
+              process.env.JWT_KEY || "emjpm-jwtkey"
             );
             return res.status(200).json({
               success: true,
