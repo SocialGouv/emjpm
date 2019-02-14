@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
+    "build": "ncc build app.js -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
     "dev": "nodemon app.js",
     "test": "NODE_ENV=test mocha --timeout 10000 --exit",
     "knex": "knex",
@@ -48,6 +49,7 @@
     "swagger-ui-dist": "^3.17.6"
   },
   "devDependencies": {
+    "@zeit/ncc": "^0.15.0",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "eslint": "^4.18.2",
