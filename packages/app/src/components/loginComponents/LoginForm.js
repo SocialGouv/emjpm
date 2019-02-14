@@ -3,10 +3,13 @@ import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
+import getConfig from "next/config";
+
+const {
+  publicRuntimeConfig: { API_URL }
+} = getConfig();
 
 import piwik, { trackUser } from "../../piwik";
-
-const API_URL = process.env.API_URL;
 
 const doLogin = formData => {
   const url = `${API_URL}/auth/login`;
