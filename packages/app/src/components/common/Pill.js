@@ -10,7 +10,6 @@ export const Pill = styled.div`
   text-align: center;
   color: white;
   display: inline-block;
-  margin-right: 10px;
   margin-top: 5px;
 `;
 
