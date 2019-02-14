@@ -28,7 +28,7 @@ export default class MyApp extends App {
       }
     } catch (e) {
       Sentry.captureException(e, ctx);
-      throw e; // you can also skip re-throwing and set property on pageProps
+      //throw e; // you can also skip re-throwing and set property on pageProps
     }
 
     return {
@@ -37,16 +37,8 @@ export default class MyApp extends App {
   }
 
   componentDidMount() {
-    piwikSetup();
-    Sentry.init({
-      dsn: SENTRY_PUBLIC_DSN,
-      attachStacktrace: true,
-      integrations: integrations => {
-        // remove dedupe plugin
-        return integrations.filter(integration => integration.name !== "Dedupe");
-      }
-      //tags: { git_commit: "c0deb10c4" }
-    });
+    // piwikSetup();
+    sentrySetup();
   }
 
   render() {
@@ -60,6 +52,28 @@ export default class MyApp extends App {
 }
 
 //
+
+function sentrySetup() {
+  const isBrowser = typeof document !== undefined;
+  if (!isBrowser) {
+    return;
+  }
+  if (SENTRY_PUBLIC_DSN) {
+    try {
+      Sentry.init({
+        dsn: SENTRY_PUBLIC_DSN,
+        attachStacktrace: true,
+        integrations: integrations => {
+          // remove dedupe plugin
+          return integrations.filter(integration => integration.name !== "Dedupe");
+        }
+        //tags: { git_commit: "c0deb10c4" }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
 
 function piwikSetup() {
   const isBrowser = typeof document !== undefined;
