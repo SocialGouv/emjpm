@@ -1,9 +1,9 @@
-FROM node:10
+FROM node:10-alpine as builder
 
 WORKDIR /app
 
 COPY ./package.json /app/package.json
-COPY ./yarn.lock /app/yarn.lock
+#COPY ./yarn.lock /app/yarn.lock
 
 RUN yarn --frozen-lockfile && yarn cache clean
 
