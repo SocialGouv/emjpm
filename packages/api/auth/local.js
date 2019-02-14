@@ -11,14 +11,11 @@ const ExtractJWT = passportJWT.ExtractJwt;
 
 const options = {};
 
-require("dotenv").config();
-
 init();
 
 passport.use(
   new LocalStrategy(options, (username, password, done) => {
     // check to see if the username exists
-
     knex("users")
       .where("username", "ilike", username.trim())
       .orWhere("email", "ilike", username.trim())
