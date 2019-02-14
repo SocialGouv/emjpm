@@ -19,6 +19,7 @@ services:
       # API dedicated password
       - POSTGRES_API_USER_PASSWORD=apiPassword
       - POSTGRES_READONLY_USER_PASSWORD=readonlyPassword
+  # For production only
   metabase:
     restart: always
     image: metabase/metabase
@@ -29,6 +30,12 @@ services:
       - MB_DB_FILE=/data/metabase.db
     ports:
       - 3003:3000
+  # For development only, fake SMTP
+  maildev:
+    image: djfarrelly/maildev
+    restart: always
+    ports:
+      - 1080:80
   api:
     restart: always
     build:
