@@ -1,6 +1,6 @@
 module.exports = {
   test: {
-    //debug: true,
+    // debug: true,
     client: "pg",
     connection: {
       host: "localhost",
