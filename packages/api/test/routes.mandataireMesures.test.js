@@ -114,50 +114,47 @@ describe("routes : mandataireMesures", () => {
         )
     ));
 
-  it("should post mesure en attente for given mandataire and can update it ", () =>
+  it("should post mesure en attente for given mandataire", () =>
     logUser(server, {
       username: "ti1",
       password: "ti1"
-    }).then(token =>
+    }).then(async token => {
+      const getNbMesures = async () =>
+        parseInt(
+          (await knex
+            .table("mesures")
+            .where("mandataire_id", 1)
+            .count())[0].count
+        );
+
+      const nbMesures = await getNbMesures();
+
+      nbMesures.should.eql(3);
+
       agent
         .post("/api/v1/mandataires/1/mesures")
         .set("Authorization", "Bearer " + token)
         .send({
           code_postal: "28000",
           created_at: "2010-10-05",
+          mandataire_id: 1,
           annee: "2010",
           type: "preposes",
           date_ouverture: "2010-10-05",
           civilite: "madame",
           status: "Mesure en attente"
         })
-        .then(function(res) {
+        .then(async res => {
           res.redirects.length.should.eql(0);
           res.status.should.eql(200);
           res.type.should.eql("application/json");
-          res.body.length.should.eql(3);
-        })
-    ));
+          res.body.length.should.eql(4);
 
-  it("should update a mesure for a given mandataire", () =>
-    logUser(server, {
-      username: "ti1",
-      password: "ti1"
-    }).then(token =>
-      agent
-        .put("/api/v1/mandataires/1/mesures/4")
-        .set("Authorization", "Bearer " + token)
-        .send({
-          code_postal: "10000"
-        })
-        .then(function(res) {
-          res.redirects.length.should.eql(0);
-          res.status.should.eql(200);
-          res.type.should.eql("application/json");
-          res.body.length.should.eql(2);
-          res.body.find(i => i.id === 4).code_postal.should.eql("10000");
-        })
-    ));
+          const nbMesures2 = await getNbMesures();
+
+          nbMesures2.should.eql(4);
+        });
+    }));
 
   //ToDO(Adrien): Update or rm
   // Change login for a specific user
