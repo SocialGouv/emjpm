@@ -8,7 +8,7 @@
 
 ### Auto
 
-Trigger a custom build on [Travis](https://travis-ci.com/SocialGouv/code-du-travail-numerique) (in the "More options" right menu) on the `master` branch with a custom config:
+Trigger a custom build on [Travis](https://travis-ci.com/SocialGouv/emjpm) (in the "More options" right menu) on the `master` branch with a custom config:
 
 ```yml
 env:
