@@ -5,10 +5,6 @@ const withTM = require("next-plugin-transpile-modules");
 
 process.on("unhandledRejection", r => console.log(r));
 
-require("dotenv").config({
-  path: process.env.NODE_ENV === "production" ? "./.env.production" : "./.env"
-});
-
 module.exports = withTM(
   withCSS(
     withImages({
@@ -18,7 +14,8 @@ module.exports = withTM(
         return config;
       },
       publicRuntimeConfig: {
-        SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN
+        SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN || "https://sentry.dev",
+        API_URL: process.env.API_URL || "http://127.0.0.1:4000"
       }
     })
   )

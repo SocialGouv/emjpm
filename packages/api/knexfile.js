@@ -20,10 +20,10 @@ module.exports = {
     client: "pg",
     connection: {
       host: "localhost",
-      user: "postgres",
+      user: "api",
       password: "test",
       port: "5434",
-      database: "backendlebontuteur_db_1"
+      database: "emjpm_dev"
     },
     migrations: {
       directory: __dirname + "/db/migrations"

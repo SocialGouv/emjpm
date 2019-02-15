@@ -78,6 +78,7 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
     }
     if (!user) {
       if (process.env.NODE_ENV !== "test") {
+        console.log(`Unauthorized user : ${req.body.username}`);
         Sentry.captureMessage(`Unauthorized user : ${req.body.username}`);
       }
       return res
@@ -101,7 +102,7 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
           .then(() => {
             const token = jwt.sign(
               JSON.parse(JSON.stringify(user)),
-              process.env.JWTKEY
+              process.env.JWT_KEY || "emjpm-jwtkey"
             );
             return res.status(200).json({
               success: true,

@@ -231,18 +231,22 @@ class InputFiles extends React.Component {
             onChange={this.readInputFile}
           />
           <br />
-          <b style={{ color: "red", fontSize: "1.5em" }}>
-            Vous n&apos;arrivez pas à importer votre tableau excel? Envoyez-le nous par email à
-            contact@emjpm.beta.gouv.fr. Nous le vérifierons, le mettrons en page et vous le
-            renverrons pour que vous puissiez l&apos;importer.{" "}
-          </b>
+          {this.state.status === "success" && (
+            <Alert className="alert-success">
+              Le fichier a bien été importé : {this.state.message}
+            </Alert>
+          )}
+          {this.state.status === "error" && <Errors errors={this.state.errors} />}
+
+          <div style={{ color: "red", fontSize: "1.5em", marginTop: 10 }}>
+            Vous n&apos;arrivez pas à importer votre tableau excel? Envoyez-le nous par email à{" "}
+            <a href="mailto:contact@emjpm.beta.gouv.fr">contact@emjpm.beta.gouv.fr</a>.
+            <br />
+            <br />
+            Nous le vérifierons, le mettrons en page et vous le renverrons pour que vous puissiez
+            l&apos;importer.{" "}
+          </div>
         </p>
-        {this.state.status === "success" && (
-          <Alert className="alert-success">
-            Le fichier a bien été importé : {this.state.message}
-          </Alert>
-        )}
-        {this.state.status === "error" && <Errors errors={this.state.errors} />}
       </div>
     );
   }
