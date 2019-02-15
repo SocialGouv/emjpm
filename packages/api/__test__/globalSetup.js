@@ -1,6 +1,6 @@
 //
 
-const knex = require("@socialgouv/api/db/knex");
+const knex = require("@emjpm/api/db/knex");
 
 //
 

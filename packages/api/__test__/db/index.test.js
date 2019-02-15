@@ -1,6 +1,6 @@
 //
 
-const { knex } = this.global;
+const { knex } = global;
 
 beforeAll(async () => {
   await knex.migrate.latest();

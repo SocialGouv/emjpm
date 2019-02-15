@@ -11,8 +11,8 @@ jest.setMock("rand-token", { uid: jest.fn(() => "kikoulol") });
 process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 process.env.APP_URL = "https://emjpm.gouv.fr";
 
-const server = require("@socialgouv/api/app");
-const knex = require("@socialgouv/api/db/knex");
+const server = require("@emjpm/api/app");
+const knex = require("@emjpm/api/db/knex");
 
 beforeEach(() => {
   nodemailerMock.mock.reset();
