@@ -15,7 +15,7 @@ const authHelpers = require("../auth/_helpers");
 //     });
 // });
 
-router.get("/user", authHelpers.loginRequired, (req, res, next) => {
+router.get("/", authHelpers.loginRequired, (req, res, next) => {
   return handleResponse(res, 200, "success");
 });
 

@@ -1,9 +1,16 @@
 version: "3"
+
+#
+# In development we only start postgres server
+#
+# Listening ports :
+#  - 5434 : postgres
+#
+
 services:
   db:
     image: postgres:10.3
     restart: always
-    container_name: emjpm-postgres
     environment:
       # master password
       - POSTGRES_USER=postgres
@@ -17,6 +24,6 @@ services:
       - "5434:5432"
     volumes:
       - emjpm-pgdata:/var/lib/postgresql/data
-      - ./db/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
+      - ./packages/api/db/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
 volumes:
   emjpm-pgdata:

@@ -4,20 +4,20 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { PageTracker } from "./PageTracker";
 
 const IconWrapper = styled.div`
-  min-width: 20px;
+  min-width: 15px;
   color: black;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 8px;
   svg {
     margin-top: -4px;
-    width: 20px;
+    width: 15px;
     vertical-align: middle;
   }
 `;
 
 const StyledTab = styled(Tab)`
   background-color: #ebeff2;
-  padding: 10px 20px;
+  padding: 10px 15px;
   top: 0;
   line-height: 42px;
   border: 0;
