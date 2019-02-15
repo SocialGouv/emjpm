@@ -1,7 +1,7 @@
 //
 
 const request = require("supertest");
-const server = require("@socialgouv/api/app");
+const server = require("@emjpm/api/app");
 
 //
 

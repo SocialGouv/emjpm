@@ -25,9 +25,16 @@ const getCountByEmail = email =>
     .where("email", email)
     .first();
 
+const updateResetPassword = (id, token, interval) =>
+  updateUser(id, {
+    reset_password_token: token,
+    reset_password_expires: knex.raw(`now() + interval '${interval}'`)
+  });
+
 module.exports = {
   updateLastLogin,
   updateUser,
   getSpecificUser,
-  getCountByEmail
+  getCountByEmail,
+  updateResetPassword
 };
