@@ -19,10 +19,7 @@ describe("routes : auth", () => {
     rewiremock("nodemailer").with(nodemailerMock);
     rewiremock.enable();
     server = require("../app");
-  });
 
-  beforeEach(() => {
-    knex.raw("DELETE FROM 'knex_migrations_lock';");
     return knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())
@@ -222,7 +219,6 @@ describe("routes : auth", () => {
           const token = await knex
             .select("reset_password_token")
             .from("users")
-            .innerJoin("mandataires", "users.id", "mandataires.user_id")
             .where("email", "ud@ud.com")
             .first();
           sentMail[0].html.should.contain(
@@ -245,6 +241,13 @@ describe("routes : auth", () => {
         }));
   });
   describe("POST /auth/reset-password", () => {
+    beforeEach(() => {
+      return knex.migrate
+        .rollback()
+        .then(() => knex.migrate.latest())
+        .then(() => knex.seed.run());
+    });
+
     it("should not reset a password when inputs do not match", () =>
       chai
         .request(server)
