@@ -2,9 +2,12 @@ import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
-const queryString = require("query-string");
+import queryString from "query-string";
+import getConfig from "next/config";
 
-const API_URL = process.env.API_URL;
+const {
+  publicRuntimeConfig: { API_URL }
+} = getConfig();
 
 const doForgotPassword = formData => {
   const url = `${API_URL}/auth/reset_password`;

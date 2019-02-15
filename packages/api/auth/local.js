@@ -11,14 +11,11 @@ const ExtractJWT = passportJWT.ExtractJwt;
 
 const options = {};
 
-require("dotenv").config();
-
 init();
 
 passport.use(
   new LocalStrategy(options, (username, password, done) => {
     // check to see if the username exists
-
     knex("users")
       .where("username", "ilike", username.trim())
       .orWhere("email", "ilike", username.trim())
@@ -42,7 +39,10 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey: process.env.JWTKEY
+      secretOrKey:
+        process.env.JWT_KEY ||
+        console.log("WARN: no process.env.JWT_KEY defined") ||
+        "emjpm-jwtkey"
     },
     function(jwtPayload, cb) {
       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
