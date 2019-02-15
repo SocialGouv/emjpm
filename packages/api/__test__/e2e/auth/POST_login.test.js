@@ -1,8 +1,8 @@
 //
 
 const request = require("supertest");
-const server = require("@socialgouv/api/app");
-const knex = require("@socialgouv/api/db/knex");
+const server = require("@emjpm/api/app");
+const knex = require("@emjpm/api/db/knex");
 
 //
 
