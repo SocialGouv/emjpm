@@ -57,7 +57,7 @@ jobs:
       script:
         - yarn build --stream
         # - yarn lint --stream
-        - yarn workspace @emjpm/app test --coverage
+        - TZ="Europe/Amsterdam" yarn workspace @emjpm/app test --coverage
         # - JWTKEY=lol yarn workspace @emjpm/api test
 
       after_script:
