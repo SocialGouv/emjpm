@@ -11,21 +11,21 @@ afterAll(async () => {
 });
 
 test.each`
-  username       | password        | type
-  ${"jeremy"}    | ${"johnson123"} | ${"individuel"}
-  ${" jeRemY  "} | ${"johnson123"} | ${"individuel"}
-  ${"kelly"}     | ${"bryant123"}  | ${"prepose"}
-  ${"service1"}  | ${"service1"}   | ${"service"}
-  ${"admin"}     | ${"admin"}      | ${"admin"}
-  ${"ti1"}       | ${"ti1"}        | ${"ti"}
-`("'$username' should login as $type", async ({ username, password }) => {
+  username       | password        | type            | url
+  ${"jeremy"}    | ${"johnson123"} | ${"individuel"} | ${"/mandataires"}
+  ${" jeRemY  "} | ${"johnson123"} | ${"individuel"} | ${"/mandataires"}
+  ${"kelly"}     | ${"bryant123"}  | ${"prepose"}    | ${"/mandataires"}
+  ${"service1"}  | ${"service1"}   | ${"service"}    | ${"/services"}
+  ${"admin"}     | ${"admin"}      | ${"admin"}      | ${"/admin"}
+  ${"ti1"}       | ${"ti1"}        | ${"ti"}         | ${"/tis"}
+`("'$username' should login as $type", async ({ username, password, url }) => {
   const response = await request(server)
     .post("/auth/login")
     .send({
       username,
       password
     });
-  expect(response.body).toMatchSnapshot({ token: expect.any(String) });
+  expect(response.body).toMatchSnapshot({ token: expect.any(String), url });
   expect(response.status).toBe(200);
 });
 
