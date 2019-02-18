@@ -1,5 +1,6 @@
-var express = require("express");
-var router = express.Router();
+const express = require("express");
+const createError = require("http-errors");
+const router = express.Router();
 
 const { typeRequired } = require("../auth/_helpers");
 
@@ -89,26 +90,28 @@ router.post(
   typeRequired("ti"),
   async (req, res, next) => {
     // ensure TI can write on this mandataire + add related test
-    const ti = await getTiByUserId(req.user.id);
-    if (!ti) {
-      res.status(401).json();
-      return;
+    try {
+      const ti = await getTiByUserId(req.user.id);
+      if (!ti) {
+        throw createError.Unauthorized(`TI not found`);
+      }
+      const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
+      if (!isAllowed) {
+        throw createError.Unauthorized(`Mandataire not found in current TI`);
+      }
+      // skip when empty call
+      if (req.body.comment) {
+        await addCommentaire({
+          comment: req.body.comment,
+          mandataire_id: req.params.mandataireId,
+          ti_id: ti.id
+        });
+      }
+      const comments = await getAllCommentaires(req.params.mandataireId, ti.id);
+      res.status(200).json(comments);
+    } catch (err) {
+      next(err);
     }
-    const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
-    if (!isAllowed) {
-      res.status(401).json();
-      return;
-    }
-    // skip when empty call
-    if (req.body.comment) {
-      await addCommentaire({
-        comment: req.body.comment,
-        mandataire_id: req.params.mandataireId,
-        ti_id: ti.id
-      });
-    }
-    const comments = await getAllCommentaires(req.params.mandataireId, ti.id);
-    res.status(200).json(comments);
   }
 );
 
@@ -148,29 +151,26 @@ router.delete(
   typeRequired("ti"),
   async (req, res, next) => {
     // secu : ensure TI can write on this mandataire + add related test
-    const ti = await getTiByUserId(req.user.id);
-    if (!ti) {
-      res.status(401).json();
-      return;
-    }
-    const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
-    if (!isAllowed) {
-      res.status(401).json();
-      return;
-    }
-    deleteCommentaire({
-      id: req.params.commentaireId,
-      ti_id: ti.id
-    })
-      .then(function(commentaireID) {
-        return getAllCommentaires(req.params.mandataireId, ti.id);
+    try {
+      const ti = await getTiByUserId(req.user.id);
+      if (!ti) {
+        throw createError.Unauthorized(`TI not found`);
+      }
+      const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
+      if (!isAllowed) {
+        throw createError.Unauthorized(`Mandataire not found in current TI`);
+      }
+      deleteCommentaire({
+        id: req.params.commentaireId,
+        ti_id: ti.id
       })
-      .then(function(commentaires) {
-        res.status(200).json(commentaires);
-      })
-      .catch(function(error) {
-        next(error);
-      });
+        .then(() => {
+          return getAllCommentaires(req.params.mandataireId, ti.id);
+        })
+        .then(commentaires => res.status(200).json(commentaires));
+    } catch (err) {
+      next(err);
+    }
   }
 );
 
