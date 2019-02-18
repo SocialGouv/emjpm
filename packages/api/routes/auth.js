@@ -13,7 +13,8 @@ const {
   updateLastLogin,
   updateResetPassword,
   updateUser,
-  getSpecificUser
+  getSpecificUser,
+  getUserWithValidToken
 } = require("../db/queries/users");
 
 const { addDataLogs } = require("../db/queries/logsData");
@@ -225,7 +226,7 @@ router.post("/forgot_password", (req, res, next) => {
  *             description: API server cookie
  */
 router.post("/reset_password", (req, res, next) => {
-  getSpecificUser({ reset_password_token: req.body.token })
+  getUserWithValidToken({ reset_password_token: req.body.token })
     .catch(err => {
       // 419 Authentication Timeout see http://getstatuscode.com/419
       // message: "Votre lien a expiré."
