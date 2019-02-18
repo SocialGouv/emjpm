@@ -35,17 +35,25 @@ router.get(
   "/:mandataireId/commentaires",
   typeRequired("ti"),
   async (req, res, next) => {
-    const ti = await getTiByUserId(req.user.id);
-    if (!ti) {
-      next(new Error("500"));
+    try {
+      const ti = await getTiByUserId(req.user.id);
+      if (!ti) {
+        throw createError.Unauthorized(`TI not found`);
+      }
+      const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
+      if (!isAllowed) {
+        throw createError.Unauthorized(`Mandataire not found in current TI`);
+      }
+      getAllCommentaires(req.params.mandataireId, ti.id)
+        .then(function(commentaires) {
+          res.status(200).json(commentaires);
+        })
+        .catch(function(error) {
+          next(error);
+        });
+    } catch (err) {
+      next(err);
     }
-    getAllCommentaires(req.params.mandataireId, ti.id)
-      .then(function(commentaires) {
-        res.status(200).json(commentaires);
-      })
-      .catch(function(error) {
-        next(error);
-      });
   }
 );
 

@@ -44,6 +44,5 @@ test("user cannot read other mandataires commentaires", async () => {
     .get("/api/v1/mandataires/3/commentaires")
     .set("Authorization", "Bearer " + token);
 
-  expect(response.body.length).toEqual(0);
-  expect(response.status).toBe(200);
+  expect(response.status).toBe(401);
 });
