@@ -50,18 +50,18 @@ jobs:
         - curl -o- -L https://yarnpkg.com/install.sh | bash
         - export PATH="$HOME/.yarn/bin:$PATH"
         # Start the database first so it has the time to boot before we interact with it.
-        # - docker-compose up -d db
+        - docker-compose up -d db
       before_script:
-        # - yarn workspace @emjpm/api knex migrate:latest --env test
-        # - yarn workspace @emjpm/api knex seed:run --env test
+        - yarn workspace @emjpm/api knex migrate:latest --env test
+        - yarn workspace @emjpm/api knex seed:run --env test
       script:
         - yarn build --stream
         # - yarn lint --stream
         - TZ="Europe/Amsterdam" yarn workspace @emjpm/app test --coverage
-        # - JWTKEY=lol yarn workspace @emjpm/api test
+        - JWTKEY=lol yarn workspace @emjpm/api test --coverage
       after_script:
         - npx codecov
-        # - docker-compose down
+        - docker-compose down
 
     #
     #
