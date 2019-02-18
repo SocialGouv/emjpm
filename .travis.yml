@@ -58,7 +58,7 @@ jobs:
         - yarn build --stream
         # - yarn lint --stream
         - TZ="Europe/Amsterdam" yarn workspace @emjpm/app test --coverage
-        - JWTKEY=lol yarn workspace @emjpm/api test --coverage
+        - JWT_KEY=lol yarn workspace @emjpm/api test --coverage
       after_script:
         - npx codecov
         - docker-compose down
