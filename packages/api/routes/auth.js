@@ -180,9 +180,7 @@ router.post("/forgot_password", (req, res, next) => {
       if (!user) {
         throw createError.NotFound(`User "${email}" not Found`);
       }
-      return updateResetPassword(user.user_id, token, "2 hours").then(
-        () => user
-      );
+      return updateResetPassword(user.id, token, "2 hours").then(() => user);
     })
     .then(user =>
       resetPasswordEmail(
@@ -191,7 +189,8 @@ router.post("/forgot_password", (req, res, next) => {
         `${process.env.APP_URL}/reset-password?token=${token}`
       )
     )
-    .then(() => res.status(200).json());
+    .then(() => res.status(200).json())
+    .catch(next);
 });
 
 /**
