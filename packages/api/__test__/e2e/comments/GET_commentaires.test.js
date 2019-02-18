@@ -4,7 +4,7 @@ const request = require("supertest");
 const server = require("@emjpm/api/app");
 const knex = require("@emjpm/api/db/knex");
 
-const { getTokenByUserType } = require("../utils");
+const { getTokenByUserType, shouldBeProtected } = require("../utils");
 
 afterAll(async () => {
   await knex.destroy();
@@ -15,6 +15,10 @@ test("anonymous cannot read commentaires", async () => {
     "/api/v1/mandataires/1/commentaires"
   );
   expect(response.status).toBe(401);
+});
+
+shouldBeProtected("GET", "/api/v1/mandataires/1/commentaires", {
+  type: "ti"
 });
 
 const simplerComment = ({ created_at, ...props }) => props;
