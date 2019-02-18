@@ -29,3 +29,8 @@ exports.logMeIn = async (userType = exports.userTypes.mandataire) => {
     .post("/auth/login")
     .send(userType);
 };
+
+exports.getTokenByUserType = async userType => {
+  const login = await exports.logMeIn(exports.userTypes[userType]);
+  return login.body.token;
+};
