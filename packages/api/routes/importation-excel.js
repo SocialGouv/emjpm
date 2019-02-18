@@ -16,12 +16,26 @@ router.post(
   typeRequired("individuel", "prepose"),
   async (req, res) => {
     const mandataire = await getMandataireByUserId(req.user.id);
-    const mesures = req.body.map(datum => ({
-      ...datum,
-      mandataire_id: mandataire.id,
-      status: "Mesure en cours"
-    }));
-
+    if (!mandataire) {
+      res.status(401).json();
+      return;
+    }
+    const mesures =
+      (req.body.map &&
+        req.body.map(datum => ({
+          ...datum,
+          mandataire_id: mandataire.id,
+          status: "Mesure en cours"
+        }))) ||
+      [];
+    if (!req.body.length) {
+      res.json({
+        success: false,
+        added: 0,
+        message: "Aucune mesure importée"
+      });
+      return;
+    }
     return queries
       .bulk({ mesures, mandataire_id: mandataire.id })
       .then(result => {
@@ -55,8 +69,9 @@ router.post(
           action: "import excel",
           result: "fail"
         });
-        console.log(e);
-        return res.status(500).json({ success: false });
+        if (!res._headerSent) {
+          return res.status(500).json({ success: false });
+        }
       });
   }
 );
