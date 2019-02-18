@@ -87,35 +87,28 @@ router.get(
 router.post(
   "/:mandataireId/commentaires",
   typeRequired("ti"),
-  (req, res, next) => {
+  async (req, res, next) => {
     // ensure TI can write on this mandataire + add related test
-    getTiByUserId(req.user.id).then(ti => {
-      if (!ti) {
-        next(new Error("500"));
-        return;
-      }
-      return isMandataireInTi(req.params.mandataireId, ti.id)
-        .then(isMandataireInTi => {
-          if (!isMandataireInTi) {
-            return next(new Error(401));
-          }
-          return addCommentaire({
-            comment: req.body.comment,
-            mandataire_id: req.params.mandataireId,
-            ti_id: ti.id
-          })
-            .then(function() {
-              return getAllCommentaires(req.params.mandataireId, ti.id);
-            })
-            .then(function(commentaires) {
-              res.status(200).json(commentaires);
-            });
-        })
-        .catch(function(error) {
-          console.log(error);
-          next(error);
-        });
-    });
+    const ti = await getTiByUserId(req.user.id);
+    if (!ti) {
+      res.status(401).json();
+      return;
+    }
+    const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
+    if (!isAllowed) {
+      res.status(401).json();
+      return;
+    }
+    // skip when empty call
+    if (req.body.comment) {
+      await addCommentaire({
+        comment: req.body.comment,
+        mandataire_id: req.params.mandataireId,
+        ti_id: ti.id
+      });
+    }
+    const comments = await getAllCommentaires(req.params.mandataireId, ti.id);
+    res.status(200).json(comments);
   }
 );
 
@@ -156,6 +149,15 @@ router.delete(
   async (req, res, next) => {
     // secu : ensure TI can write on this mandataire + add related test
     const ti = await getTiByUserId(req.user.id);
+    if (!ti) {
+      res.status(401).json();
+      return;
+    }
+    const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
+    if (!isAllowed) {
+      res.status(401).json();
+      return;
+    }
     deleteCommentaire({
       id: req.params.commentaireId,
       ti_id: ti.id
