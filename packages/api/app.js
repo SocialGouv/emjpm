@@ -19,7 +19,6 @@ if (process.env.SENTRY_PUBLIC_DSN) {
 }
 
 process.on("unhandledRejection", r => {
-  // not sure this is ever reached
   Sentry.captureException(r);
   console.log("unhandledRejection", r);
 });
