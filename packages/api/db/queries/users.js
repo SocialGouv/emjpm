@@ -31,10 +31,18 @@ const updateResetPassword = (id, token, interval) =>
     reset_password_expires: knex.raw(`now() + interval '${interval}'`)
   });
 
+const getUserWithValidToken = data =>
+  knex
+    .from("users")
+    .where(data)
+    .andWhere("reset_password_expires", ">", "now()")
+    .first();
+
 module.exports = {
   updateLastLogin,
   updateUser,
   getSpecificUser,
+  getUserWithValidToken,
   getCountByEmail,
   updateResetPassword
 };

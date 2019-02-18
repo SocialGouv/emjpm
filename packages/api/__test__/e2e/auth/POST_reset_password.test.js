@@ -34,10 +34,6 @@ afterAll(async () => {
 });
 
 test("reset a password", async () => {
-  const user = await knex("users")
-    .where({ id: 52 })
-    .first();
-
   const response = await request(server)
     .post("/auth/reset_password")
     .send({
@@ -48,13 +44,6 @@ test("reset a password", async () => {
   expect(response.body).toMatchSnapshot();
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
   expect(response.status).toBe(200);
-
-  expect(user).toMatchSnapshot({
-    created_at: expect.any(Object),
-    last_login: expect.any(Object),
-    password: expect.any(String),
-    reset_password_expires: expect.any(Object)
-  });
 });
 
 test("fail because the inputs don't match", async () => {
