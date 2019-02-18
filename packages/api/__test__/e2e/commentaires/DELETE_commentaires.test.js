@@ -28,10 +28,6 @@ test("should delete commentaire for given mandataire and return response", async
     .get("/api/v1/mandataires/1/commentaires")
     .set("Authorization", "Bearer " + token);
   const curComments = response.body;
-  console.log(
-    "curComments[curComments.length - 1].id",
-    curComments[curComments.length - 1].id
-  );
   const del = await request(server)
     .delete(
       `/api/v1/mandataires/1/commentaires/${
