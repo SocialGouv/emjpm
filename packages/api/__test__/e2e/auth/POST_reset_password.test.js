@@ -121,4 +121,31 @@ Object {
   expect(response.status).toBe(401);
 });
 
+test("should empty user token+expiration on password reset", async () => {
+  await knex("users")
+    .where({ id: 52 })
+    .update({
+      reset_password_expires: knex.raw(`now() + interval '1 second'`),
+      reset_password_token: "abcdef"
+    });
+
+  const response = await request(server)
+    .post("/auth/reset_password")
+    .send({
+      token: "abcdef",
+      newPassword: "adad",
+      verifyPassword: "adad"
+    });
+
+  const userData = await knex("users")
+    .where({ id: 52 })
+    .first();
+
+  expect(userData.reset_password_expires).toBeNull();
+  expect(userData.reset_password_token).toBeNull();
+  expect(response.body).toMatchSnapshot();
+  expect(nodemailerMock.mock.sentMail().length).toEqual(1);
+  expect(response.status).toBe(200);
+});
+
 //
