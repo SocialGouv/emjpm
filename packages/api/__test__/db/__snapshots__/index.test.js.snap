@@ -262,35 +262,6 @@ Object {
 }
 `;
 
-exports[`mandataire_tis table schema 1`] = `
-Object {
-  "created_at": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
-  "id": Object {
-    "defaultValue": "nextval('mandatairetis_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "mandataire_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "ti_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-}
-`;
-
 exports[`mandataires table schema 1`] = `
 Object {
   "adresse": Object {
@@ -322,12 +293,6 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "integer",
-  },
-  "email": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": false,
-    "type": "character varying",
   },
   "email_send": Object {
     "defaultValue": null,
@@ -370,18 +335,6 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "real",
-  },
-  "nom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "prenom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
   },
   "secretariat": Object {
     "defaultValue": null,
@@ -657,14 +610,13 @@ Array [
   "knex_migrations_lock",
   "logs_data",
   "mandataire_etablissements",
-  "mandataire_tis",
   "mandataires",
   "mesures",
   "regions",
   "service_antennes",
   "tis",
+  "user_tis",
   "users",
-  "users_tis",
 ]
 `;
 
@@ -733,6 +685,35 @@ Object {
 }
 `;
 
+exports[`user_tis table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('users_tis_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "ti_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`users table schema 1`] = `
 Object {
   "active": Object {
@@ -741,11 +722,23 @@ Object {
     "nullable": true,
     "type": "boolean",
   },
+  "cabinet": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
     "maxLength": null,
     "nullable": false,
     "type": "timestamp with time zone",
+  },
+  "email": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
   },
   "id": Object {
     "defaultValue": "nextval('users_id_seq'::regclass)",
@@ -759,10 +752,22 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "password": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": false,
+    "type": "character varying",
+  },
+  "prenom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
     "type": "character varying",
   },
   "reset_password_expires": Object {
@@ -788,59 +793,6 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
-  },
-}
-`;
-
-exports[`users_tis table schema 1`] = `
-Object {
-  "cabinet": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "creates_at": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
-  "email": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "id": Object {
-    "defaultValue": "nextval('users_tis_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "nom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "prenom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "ti_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "user_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
   },
 }
 `;
