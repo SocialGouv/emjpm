@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const busboyBodyParser = require("busboy-body-parser");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const Sentry = require("@sentry/node");
-
 const pkg = require("./package.json");
 const routes = require("./routes/index");
 const authRoutes = require("./routes/auth");
@@ -30,9 +30,9 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(busboyBodyParser());
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(passport.initialize());
 
