@@ -2,7 +2,8 @@ const express = require("express");
 
 const router = express.Router();
 
-const { loginRequired } = require("../auth/_helpers");
+const { loginRequired, typeRequired } = require("../auth/_helpers");
+const multer = require("multer");
 
 const {
   getMandataireById,
@@ -446,6 +447,46 @@ router.put(
       .catch(error => next(error));
   }
 );
+
+var storage = multer.diskStorage({
+  destination: function(req, file, callback) {
+    callback(null, "./uploads");
+  },
+  filename: function(req, file, callback) {
+    callback(
+      null,
+      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
+    );
+  }
+});
+
+router.post("/upload", typeRequired("individuel, preprose,service"), function(
+  req,
+  res
+) {
+  var upload = multer({
+    storage: storage,
+    limits: { fileSize: 1000000 },
+    fileFilter: function(req, file, callback) {
+      var ext = path.extname(file.originalname);
+      if (
+        ext !== ".png" &&
+        ext !== ".jpg" &&
+        ext !== ".gif" &&
+        ext !== ".pdf" &&
+        ext !== ".docx" &&
+        ext !== ".rtf" &&
+        ext !== ".jpeg"
+      ) {
+        return callback(res.end("Only images are allowed"), null);
+      }
+      callback(null, true);
+    }
+  }).single("userFile");
+  upload(req, res, function(err) {
+    res.end("File is uploaded");
+  });
+});
 
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));
