@@ -223,11 +223,22 @@ class LoginForm extends React.Component {
           })
           .catch(e => {
             piwik.push(["trackEvent", "login", "error"]);
-            this.setState({
-              status: "error",
-              error: "Impossible de se connecter"
-            });
-            throw e;
+            const url = `${API_URL}/auth/checkUser`;
+            return fetch(url, {
+              credentials: "include",
+              method: "POST",
+              body: JSON.stringify(formData),
+              headers: {
+                "Content-Type": "application/json"
+              }
+            })
+              .then(res => res && res.json())
+              .then(res => {
+                this.setState({
+                  status: "error",
+                  error: res.message
+                });
+              });
           });
       }
     );
