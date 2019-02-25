@@ -221,10 +221,9 @@ router.post(
           if (!isAllowed) {
             throw createError.Unauthorized(`Mandataire not found`);
           }
-          addMesure({ ...body, ti_id: ti.id, cabinet: ti.cabinet })
-            .then(() => reservationEmail(ti, body))
-            .then(() => res.status(200).json({ success: true }))
-            .catch(next);
+          await addMesure({ ...body, ti_id: ti.id, cabinet: ti.cabinet });
+          await reservationEmail(ti, body);
+          res.status(200).json({ success: true });
         }
       }
     } catch (err) {
@@ -269,13 +268,10 @@ router.post(
           throw createError.Unauthorized(`Mandataire not found`);
         }
       }
-      addMesure({
+      const mesures = await addMesure({
         ...req.body
-      })
-        .then(mesures => res.status(200).json(mesures))
-        .catch(error => {
-          next(error);
-        });
+      });
+      res.status(200).json(mesures);
     } catch (err) {
       next(err);
     }
@@ -309,9 +305,8 @@ router.get(
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
-      getMesuresEnCoursMandataire(mandataire.id)
-        .then(mesures => res.status(200).json(mesures))
-        .catch(error => next(error));
+      const mesures = await getMesuresEnCoursMandataire(mandataire.id);
+      res.status(200).json(mesures);
     } catch (err) {
       next(err);
     }
@@ -376,10 +371,13 @@ router.get(
   "/:mandataireId/mesures/attente",
   typeRequired("individuel", "prepose"),
   async (req, res, next) => {
-    const mandataire = await getMandataireByUserId(req.user.id);
-    getAllMesuresAttente(mandataire.id)
-      .then(mesures => res.status(200).json(mesures))
-      .catch(error => next(error));
+    try {
+      const mandataire = await getMandataireByUserId(req.user.id);
+      const mesures = await getAllMesuresAttente(mandataire.id);
+      res.status(200).json(mesures);
+    } catch (err) {
+      next(err);
+    }
   }
 );
 
@@ -405,10 +403,13 @@ router.get(
   "/:mandataireId/mesures/Eteinte",
   typeRequired("individuel", "prepose"),
   async (req, res, next) => {
-    const mandataire = await getMandataireByUserId(req.user.id);
-    getAllMesuresEteinte(mandataire.id)
-      .then(mesures => res.status(200).json(mesures))
-      .catch(error => next(error));
+    try {
+      const mandataire = await getMandataireByUserId(req.user.id);
+      const mesures = await getAllMesuresEteinte(mandataire.id);
+      res.status(200).json(mesures);
+    } catch (err) {
+      next(err);
+    }
   }
 );
 module.exports = router;
