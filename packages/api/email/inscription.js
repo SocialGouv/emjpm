@@ -18,7 +18,7 @@ Merci de vérifier cette nouvelle demande et de la valider.
 Bonne journée :)
 `;
 
-const inscriptionEmail = ({ nom, prenom, email }) =>
+const inscriptionEmail = (nom, prenom, email) =>
   sendEmail(
     "contact@emjpm.beta.gouv.fr",
     "Nouvelle inscription",
