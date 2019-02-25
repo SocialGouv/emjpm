@@ -1,4 +1,5 @@
 import * as React from "react";
+import Router from "next/router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MinusSquare } from "react-feather";
@@ -47,8 +48,7 @@ const Selector = ({
         {selected.map(({ id, nom }, i) => (
           <tr key={id} style={{ background: i % 2 ? "#fff" : "rgba(0, 0, 0, 0.03)" }}>
             <td style={{ padding: 5 }}>▪ {nom}</td>
-            <td style={{ width: 20, textAlign: "center" }}>
-            </td>
+            <td style={{ width: 20, textAlign: "center" }} />
           </tr>
         ))}
       </tbody>
@@ -82,6 +82,7 @@ const ChangePassword = email => {
   doForgotPassword(email)
     .then(() => {
       alert("Un email vient de vous être envoyé");
+      Router.push("/mandataires");
     })
     .catch(e => console.log(e));
 };
@@ -94,7 +95,7 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
       <br />
       <br />
       <ButtonEditMandataire formData={currentMandataire} />
-      <a href="/mandataires" onClick={() => ChangePassword({ email: currentMandataire.email })}>
+      <a href="#" onClick={() => ChangePassword({ email: currentMandataire.email })}>
         {" "}
         Modifier mon mot de passe{" "}
       </a>

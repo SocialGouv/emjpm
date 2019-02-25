@@ -9,8 +9,6 @@ const SMTP_FROM = process.env.SMTP_FROM;
 const smtpConfig = {
   host: "smtp.ethereal.email",
   port: 587,
-  ignoreTLS: true,
-  secure: false,
   auth: {
     user: "hilton5@ethereal.email",
     pass: "bKqAV1sWrFQbV9PegR"
