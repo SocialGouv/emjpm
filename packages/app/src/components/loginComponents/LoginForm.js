@@ -5,9 +5,7 @@ import styled from "styled-components";
 import Router from "next/router";
 import getConfig from "next/config";
 
-const {
-  publicRuntimeConfig: { API_URL }
-} = getConfig();
+const { publicRuntimeConfig: { API_URL } } = getConfig();
 
 import piwik, { trackUser } from "../../piwik";
 
@@ -147,6 +145,54 @@ class LoginForm extends React.Component {
     this.setState({
       formData: autofillValues
     });
+
+    const getToken = () => {
+      return localStorage.getItem("id_token");
+    };
+
+    // const checkLogin = () => {
+    //   console.log("token", getToken());
+    //   const url = `${API_URL}/auth/checkToken`;
+    //   return fetch(url, {
+    //     method: "GET",
+    //     credentials: "include",
+    //     headers: {
+    //       Authorization: "Bearer " + getToken(),
+    //       "Content-Type": "application/json"
+    //     }
+    //   }).then(res => {
+    //     console.log("res", res.status);
+    //     if (res.status === 401) {
+    //       this.setState({
+    //         status: "continue"
+    //       });
+    //     }
+    //     return res.json();
+    //   });
+    // };
+    //
+    // checkLogin()
+    //   .then(json => {
+    //     if (this.state.status !== "continue") {
+    //       console.log("hson", json);
+    //       piwik.push(["trackEvent", "login", "success"]);
+    //       trackUser();
+    //       console.log("yesyesyeysyesy");
+    //       Router.push(json.url);
+    //       this.setState({
+    //         status: "success",
+    //         error: null
+    //       });
+    //     }
+    //   })
+    //   .catch(e => {
+    //     piwik.push(["trackEvent", "login", "error"]);
+    //     this.setState({
+    //       status: "error",
+    //       error: "Impossible de se connecter"
+    //     });
+    //     throw e;
+    //   });
   }
 
   setToken = idToken => {

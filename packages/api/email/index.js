@@ -7,23 +7,20 @@ const SMTP_PASS = process.env.SMTP_PASS;
 const SMTP_FROM = process.env.SMTP_FROM;
 
 const smtpConfig = {
-  host: SMTP_HOST,
-  port: SMTP_PORT,
+  host: "smtp.ethereal.email",
+  port: 587,
   ignoreTLS: true,
-  secure: false
+  secure: false,
+  auth: {
+    user: "hilton5@ethereal.email",
+    pass: "bKqAV1sWrFQbV9PegR"
+  }
 };
-
-if (SMTP_USER) {
-  smtpConfig.auth = {
-    user: SMTP_USER,
-    pass: SMTP_PASS
-  };
-}
 
 const sendEmail = (sendTo, subject, text, html) => {
   let transporter = nodemailer.createTransport(smtpConfig);
   let mailOptions = {
-    from: SMTP_FROM,
+    from: "gonzalez_ad@hotmail.fr",
     to: sendTo,
     subject: subject,
     text: text,
