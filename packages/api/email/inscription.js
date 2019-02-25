@@ -1,32 +1,33 @@
 const { sendEmail } = require(".");
 
-const EMAIL_RELANCE_TEXT = url => `
+const EMAIL_RELANCE_TEXT = (nom, prenom, email) => `
 Bonjour la super team emjpm :) ,
 
-Nous avons reçu une nouvelle inscription.
+Nous avons reçu une nouvelle inscription de ${prenom} / ${nom}  ${email}.
 
-Veuillez cliquer sur le lien suivant: ${url}
+Merci de vérifier cette nouvelle demande et de la valider.
 
 Bonne journée :)
 `;
 
-const EMAIL_RELANCE_HTML = url => `
-Bonjour la super team eMJPM :),<br>
-<br>
-Nous avons reçu une nouvelle inscription.
-<br>
-Veuillez cliquer sur le lien suivant: <a href=${url}>Se connecter</a>
-<br><br>
+const EMAIL_RELANCE_HTML = (nom, prenom, email) => `
+Bonjour la super team eMJPM :),<br />
+Nous avons reçu une nouvelle inscription de ${prenom} / ${nom}  ${email} <br />
+Merci de vérifier cette nouvelle demande et de la valider.
+<br /><br />
 Bonne journée :)
 `;
 
-const inscriptionEmail = url =>
+const inscriptionEmail = ({ nom, prenom, email }) =>
   sendEmail(
     "contact@emjpm.beta.gouv.fr",
     "Nouvelle inscription",
-    EMAIL_RELANCE_TEXT(url),
-    EMAIL_RELANCE_HTML(url)
-  );
+    EMAIL_RELANCE_TEXT(nom, prenom, email),
+    EMAIL_RELANCE_HTML(nom, prenom, email)
+  ).catch(e => {
+    // todo: sentry
+    console.log(e);
+  });
 
 module.exports = {
   inscriptionEmail
