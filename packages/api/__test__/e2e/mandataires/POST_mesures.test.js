@@ -51,16 +51,11 @@ const getMesuresCount = async mandataire_id =>
 
 test("mandataire should POST mesure", async () => {
   const token = await getTokenByUserType("mandataire");
-  const currentMesures = await knex("mesures").where({
-    mandataire_id: 1,
-    status: "Mesure en cours"
-  });
   const response = await request(server)
     .post("/api/v1/mandataires/1/mesures")
     .set("Authorization", "Bearer " + token)
     .send(sampleMesure);
 
-  expect(response.body.length).toBe(currentMesures.length + 1);
   expect(response.body).toMatchSnapshot();
   expect(response.status).toBe(200);
 
