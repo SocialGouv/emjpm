@@ -129,36 +129,38 @@ router.put(
   "/:mandataireId/mesures/:mesureId",
   typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
-    if (Object.keys(req.body).length === 0) {
-      return res.status(200).json();
-    }
-    if (req.user.type === "individuel" || req.user.type === "prepose") {
-      const mandataire = await getMandataireByUserId(req.user.id);
-      updateMesure(
-        {
-          id: req.params.mesureId,
-          // ⚠️ ensure to override a mandataire only
-          mandataire_id: mandataire.id
-        },
-        whitelist(req.body, ALLOWED_FILTERS)
-      )
-        .then(() => updateCountMesures(mandataire.id))
-        .then(() => getMesuresEnCoursMandataire(mandataire.id))
-        .then(mesures => res.status(200).json(mesures))
-        .catch(error => next(error));
-    } else if (req.user.type === "ti") {
-      const ti = await getTiByUserId(req.user.id);
-      updateMesure(
-        {
-          id: req.body.id, //todo : WHY req.body.id VS req.params.mesureId ???
-          // ⚠️ ensure to override a tI only
-          ti_id: ti.id
-        },
-        whitelist(req.body, ALLOWED_FILTERS)
-      )
-        .then(() => getAllMesuresByTis(ti.id))
-        .then(mesures => res.status(200).json(mesures))
-        .catch(error => next(error));
+    try {
+      if (Object.keys(req.body).length === 0) {
+        return res.status(200).json();
+      }
+      if (req.user.type === "individuel" || req.user.type === "prepose") {
+        const mandataire = await getMandataireByUserId(req.user.id);
+        await updateMesure(
+          {
+            id: req.params.mesureId,
+            // ⚠️ ensure to override a mandataire only
+            mandataire_id: mandataire.id
+          },
+          whitelist(req.body, ALLOWED_FILTERS)
+        );
+        await updateCountMesures(mandataire.id);
+        const mesures = await getMesuresEnCoursMandataire(mandataire.id);
+        res.status(200).json(mesures);
+      } else if (req.user.type === "ti") {
+        const ti = await getTiByUserId(req.user.id);
+        await updateMesure(
+          {
+            id: req.body.id, //todo : WHY req.body.id VS req.params.mesureId ???
+            // ⚠️ ensure to override a tI only
+            ti_id: ti.id
+          },
+          whitelist(req.body, ALLOWED_FILTERS)
+        );
+        const mesures = await getAllMesuresByTis(ti.id);
+        res.status(200).json(mesures);
+      }
+    } catch (err) {
+      next(err);
     }
   }
 );
@@ -205,11 +207,10 @@ router.post(
         throw createError.UnprocessableEntity("Mandataire not found");
       }
       if (req.user.type === "individuel" || req.user.type === "prepose") {
-        addMesure(body)
-          .then(() => updateCountMesures(body.mandataire_id))
-          .then(() => getMesuresEnCoursMandataire(body.mandataire_id))
-          .then(mesures => res.status(200).json(mesures))
-          .catch(next);
+        await addMesure(body);
+        await updateCountMesures(body.mandataire_id);
+        const mesures = await getMesuresEnCoursMandataire(body.mandataire_id);
+        res.status(200).json(mesures);
       } else if (req.user.type === "ti") {
         const ti = await getTiByUserId(req.user.id);
         if (ti && req.body.mandataire_id) {
