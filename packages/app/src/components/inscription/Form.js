@@ -96,7 +96,7 @@ class Form extends React.Component {
 
     if (hasNoTi) {
       return alert("Saisissez au moins un TI de référence");
-    } else if (!isValidTelephone) {
+    } else if (!isTi && !isValidTelephone) {
       return alert("Saisissez un numéro de téléphone valide");
     } else if (!isTi && !isValidCodePostal) {
       return alert("Code postal non valide");

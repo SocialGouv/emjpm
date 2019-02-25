@@ -7,6 +7,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { show } from "redux-modal";
+import Router from "next/router";
 
 import { Button } from "..";
 
@@ -16,7 +17,9 @@ import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";
 const ChangePassword = email => {
   doForgotPassword(email)
     .then(() => {
+      console.log("eaeazea");
       alert("Un email vient de vous être envoyé");
+      Router.push("/tis");
     })
     .catch(e => console.log(e));
 };
@@ -76,7 +79,7 @@ const UserProfile = ({ currentUser }) => (
       <br />
       <br />
       <ButtonEditUser formData={currentUser} />
-      <a href="/tis" onClick={() => ChangePassword({ email: currentMandataire.email })}>
+      <a href="#" onClick={() => ChangePassword({ email: currentUser.email })}>
         {" "}
         Modifier mon mot de passe{" "}
       </a>
