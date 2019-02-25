@@ -341,7 +341,7 @@ router.post("/tis", (req, res, next) => {
         })
     )
     .then(() => {
-      return inscriptionEmail(`${process.env.APP_URL}`);
+      return inscriptionEmail(nom, prenom, email);
     })
     .then(() => {
       return res.json({ success: true });
