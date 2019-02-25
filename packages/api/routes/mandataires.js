@@ -1,4 +1,5 @@
 const express = require("express");
+const createError = require("http-errors");
 
 const router = express.Router();
 
@@ -113,7 +114,7 @@ router.get(
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
       if (!mandataire) {
-        return next(new Error(401));
+        throw createError.Unauthorized(`Mandataire not found`);
       }
       res.status(200).json(mandataire);
     } catch (err) {
@@ -172,63 +173,61 @@ router.put(
   "/1",
   typeRequired("individuel", "prepose"),
   async (req, res, next) => {
-    const {
-      nom,
-      prenom,
-      genre,
-      telephone,
-      telephone_portable,
-      email,
-      adresse,
-      code_postal,
-      ville,
-      dispo_max,
-      secretariat,
-      zip,
-      etablissement,
-      mesures_en_cours,
-      nb_secretariat,
-      type
-    } = req.body;
+    try {
+      const {
+        nom,
+        prenom,
+        genre,
+        telephone,
+        telephone_portable,
+        email,
+        adresse,
+        code_postal,
+        ville,
+        dispo_max,
+        secretariat,
+        zip,
+        etablissement,
+        mesures_en_cours,
+        nb_secretariat,
+        type
+      } = req.body;
 
-    const mandataire = await getMandataireByUserId(req.user.id);
-    if (!mandataire) {
-      return next(new Error(401));
-    }
-    const body = whiteList(req.body);
+      const mandataire = await getMandataireByUserId(req.user.id);
+      if (!mandataire) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
+      const body = whiteList(req.body);
 
-    if (Object.keys(body).length === 0) {
-      res.status(200).json(mandataire);
-      return next();
-    }
-
-    updateMandataire(mandataire.id, {
-      genre,
-      telephone,
-      telephone_portable,
-      adresse,
-      code_postal,
-      ville,
-      dispo_max,
-      secretariat,
-      zip,
-      etablissement,
-      mesures_en_cours,
-      nb_secretariat
-    })
-      .then(() =>
-        updateUser(req.user.id, {
-          nom,
-          prenom,
-          email,
-          type
-        })
-      )
-      .then(() => getMandataireById(mandataire.id))
-      .then(mandataire => {
+      if (Object.keys(body).length === 0) {
         res.status(200).json(mandataire);
-      })
-      .catch(next);
+        return next();
+      }
+
+      await updateMandataire(mandataire.id, {
+        genre,
+        telephone,
+        telephone_portable,
+        adresse,
+        code_postal,
+        ville,
+        dispo_max,
+        secretariat,
+        zip,
+        etablissement,
+        mesures_en_cours,
+        nb_secretariat
+      });
+      await updateUser(req.user.id, {
+        nom,
+        prenom,
+        email,
+        type
+      });
+      res.status(200).json(mandataire);
+    } catch (err) {
+      next(err);
+    }
   }
 );
 
@@ -381,15 +380,16 @@ router.put(
   "/:mandataireId/capacite",
   typeRequired("individuel", "prepose"),
   async (req, res, next) => {
-    const mandataire = await getMandataireByUserId(req.user.id);
-    if (!mandataire) {
-      return next(new Error(401));
+    try {
+      const mandataire = await getMandataireByUserId(req.user.id);
+      if (!mandataire) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
+      await updateCountMesures(mandataire.id);
+      res.status(200).json(mandataire);
+    } catch (err) {
+      next(err);
     }
-    updateCountMesures(mandataire.id)
-      .then(() => {
-        res.status(200).json(mandataire);
-      })
-      .catch(next);
   }
 );
 
@@ -426,19 +426,24 @@ router.put(
   "/:mandataireId/mesures-en-attente",
   typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
-    // const mandataire = await queries.getMandataireByUserId(req.user.id);
-    // if (!mandataire) {
-    //   return next(new Error(401));
-    // }
-    // récupères le nb de mesure attribuées pour ce mandataire
-    if (!req.body.mandataire_id) {
-      res.status(200).json();
-      return;
+    try {
+      // const mandataire = await queries.getMandataireByUserId(req.user.id);
+      // if (!mandataire) {
+      //   return next(new Error(401));
+      // }
+      // récupères le nb de mesure attribuées pour ce mandataire
+      if (!req.body.mandataire_id) {
+        res.status(200).json();
+        return;
+      }
+      const nbMesureAttente = await mesureEnAttente(req.body.mandataire_id);
+      const mandataire = await update(req.body.mandataire_id, {
+        mesures_en_attente: nbMesureAttente
+      });
+      res.status(200).json(mandataire);
+    } catch (err) {
+      next(err);
     }
-    const nbMesureAttente = mesureEnAttente(req.body.mandataire_id);
-    update(req.body.mandataire_id, { mesures_en_attente: nbMesureAttente })
-      .then(mandataire => res.status(200).json(mandataire))
-      .catch(next);
   }
 );
 
