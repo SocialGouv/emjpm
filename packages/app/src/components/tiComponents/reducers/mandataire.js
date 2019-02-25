@@ -1,4 +1,4 @@
-const MANDATAIRE_INITIAL_STATE = {
+export const MANDATAIRE_INITIAL_STATE = {
   data: [],
   dataFilters: [],
   datamesure: [],
@@ -8,7 +8,8 @@ const MANDATAIRE_INITIAL_STATE = {
   filterData: [],
   currentEtablissementsForSelectedMandataire: "",
   allTisForOneMandataire: "",
-  lastUpdate: ""
+  lastUpdate: "",
+  profile: {}
 };
 
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
@@ -19,6 +20,11 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
         filters: "",
         data: action.data,
         dataFilters: action.data
+      };
+    case "USER_PROFILE":
+      return {
+        ...state,
+        profile: action.data
       };
     case "MESURES_SHOW":
       return {

@@ -51,7 +51,7 @@ const serviceUiSchema = {
   etablissement: {
     ...uiSchema.etablissement,
     "ui:title": "Nom du service",
-    "ui:placeholder": "ex: CHU de Nanterre"
+    "ui:placeholder": "ex: service MJPM du Nord"
   }
 };
 
