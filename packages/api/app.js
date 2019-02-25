@@ -59,8 +59,8 @@ app.get("/", function(req, res, next) {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log(`404 Not Found : ${req.url}`);
-  var err = new Error(`404 Not Found : ${req.url}`);
+  console.log(`404 Not Found : ${req.method} ${req.url}`);
+  var err = new Error(`404 Not Found : ${req.method} ${req.url}`);
   err.status = 404;
   next(err);
 });
