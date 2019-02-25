@@ -4,7 +4,7 @@
     "ui:placeholder": "8 caractères minimum"
   },
   "pass2": {
-    "ui:title": "Répéter le mot de passe",
+    "ui:title": "Répétez le mot de passe",
     "ui:placeholder": "8 caractères minimum"
   },
   "username": {
