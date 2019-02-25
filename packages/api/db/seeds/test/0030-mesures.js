@@ -62,5 +62,21 @@ exports.seed = function(knex, Promise) {
         civilite: "H",
         status: "Mesure en cours"
       });
+    })
+    .then(function() {
+      // Inserts seed entries one by one in series
+      return knex("mesures").insert({
+        code_postal: "92000",
+        ville: "St ambroise",
+        etablissement: "CRF1",
+        mandataire_id: 1,
+        created_at: "2012-10-05",
+        annee: "2012-10-05",
+        type: "preposes",
+        date_ouverture: "2012-10-05",
+        residence: "oui",
+        civilite: "F",
+        status: "Eteindre mesure"
+      });
     });
 };
