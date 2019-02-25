@@ -45,13 +45,11 @@ router.get(
       if (!isAllowed) {
         throw createError.Unauthorized(`Mandataire not found in current TI`);
       }
-      getAllCommentaires(req.params.mandataireId, ti.id)
-        .then(function(commentaires) {
-          res.status(200).json(commentaires);
-        })
-        .catch(function(error) {
-          next(error);
-        });
+      const commentaires = await getAllCommentaires(
+        req.params.mandataireId,
+        ti.id
+      );
+      res.status(200).json(commentaires);
     } catch (err) {
       next(err);
     }
@@ -169,14 +167,15 @@ router.delete(
       if (!isAllowed) {
         throw createError.Unauthorized(`Mandataire not found in current TI`);
       }
-      deleteCommentaire({
+      await deleteCommentaire({
         id: req.params.commentaireId,
         ti_id: ti.id
-      })
-        .then(() => {
-          return getAllCommentaires(req.params.mandataireId, ti.id);
-        })
-        .then(commentaires => res.status(200).json(commentaires));
+      });
+      const commentaires = await getAllCommentaires(
+        req.params.mandataireId,
+        ti.id
+      );
+      res.status(200).json(commentaires);
     } catch (err) {
       next(err);
     }
