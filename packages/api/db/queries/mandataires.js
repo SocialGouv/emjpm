@@ -40,7 +40,6 @@ const updateDateMesureUpdate = id =>
 
 const getMandataire = filters =>
   knex("mandataires")
-    //.debug()
     .select(
       "mandataires.*",
       "users.type",
