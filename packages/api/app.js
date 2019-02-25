@@ -1,16 +1,14 @@
 const express = require("express");
 const cors = require("cors");
-const busboyBodyParser = require("busboy-body-parser");
-const bodyParser = require("body-parser");
 const passport = require("passport");
 const Sentry = require("@sentry/node");
+const bodyParser = require("body-parser");
+
 const pkg = require("./package.json");
 const routes = require("./routes/index");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const inscriptionRoutes = require("./routes/inscription");
-
-const app = express();
 
 if (process.env.SENTRY_PUBLIC_DSN) {
   Sentry.init({
@@ -29,14 +27,16 @@ const corsOptions = {
   origin: true
 };
 
+const app = express();
+
 app.use(cors(corsOptions));
-app.use(busboyBodyParser());
-app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(passport.initialize());
 
-app.use("/api/v1/inscription", inscriptionRoutes);
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
+
+app.use("/api/v1/inscription", inscriptionRoutes); // this route is anonymous
 app.use("/api/v1", passport.authenticate("jwt", { session: false }), routes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
@@ -60,8 +60,8 @@ app.get("/", function(req, res, next) {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  console.log(`404 Not Found : ${req.url}`);
-  var err = new Error(`404 Not Found : ${req.url}`);
+  console.log(`404 Not Found : ${req.method} ${req.url}`);
+  const err = new Error(`404 Not Found : ${req.url}`);
   err.status = 404;
   Sentry.captureException(err);
   next(err);

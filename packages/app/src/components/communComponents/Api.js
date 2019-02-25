@@ -12,18 +12,6 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
     return localStorage.getItem("id_token");
   };
 
-  // const isTokenExpired = token => {
-  //   try {
-  //     const decoded = decode(token);
-  //     if (decoded.exp < Date.now() / 1000) {
-  //       // Checking if token is expired. N
-  //       return true;
-  //     } else return false;
-  //   } catch (err) {
-  //     return false;
-  //   }
-  // };
-
   const hasToken = () => {
     const token = getToken();
     return !!token;
@@ -35,19 +23,18 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
     ...params
   };
 
+  const isUpload = route === "/mandataires/upload";
+
   if (hasToken()) {
     fetchParams.headers = {
       Authorization: "Bearer " + getToken(),
-      "Content-Type": "application/json"
+      ...(fetchParams.headers || {})
     };
+    if (!isUpload) {
+      fetchParams.headers["Content-Type"] = "application/json";
+    }
   }
 
-  // force content-type application/json for non GET-requests
-  if (fetchParams.method && fetchParams.method !== "GET" && !fetchParams.headers) {
-    fetchParams.headers = {
-      "Content-Type": "application/json"
-    };
-  }
   return fetch(`${API_URL}/api/v1${route}`, fetchParams)
     .then(res => {
       // intercept

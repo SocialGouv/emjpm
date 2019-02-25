@@ -1,10 +1,11 @@
 const express = require("express");
+const path = require("path");
+const multer = require("multer");
 
 const router = express.Router();
 
 const { loginRequired, typeRequired } = require("../auth/_helpers");
-const multer = require("multer");
-var upload = multer({ dest: "uploads/" });
+
 const {
   getMandataireById,
   getMandataireByUserId,
@@ -448,59 +449,25 @@ router.put(
   }
 );
 
-// var storage = multer.diskStorage({
-//   destination: function(req, file, callback) {
-//     callback(null, "./uploads");
-//   },
-//   filename: function(req, file, callback) {
-//     callback(
-//       null,
-//       file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-//     );
-//   }
-// });
-//
-//var upload = multer({ dest: "uploads/" });
-
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, "/tmp/my-uploads");
+    // store in `emjpm/uploads`
+    cb(null, path.join(__dirname, "../../../uploads"));
   },
   filename: function(req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now());
+    cb(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
   }
 });
 
 router.post(
   "/upload",
-  upload.single("avatar"),
-  loginRequired,
-  typeRequired("individuel", "preprose", "service"),
-  function(req, res) {
-    console.log("14876384736483463463843764364387 ");
-    console.log("res", req.file);
-    // var upload = multer({
-    //   storage: storage,
-    //   limits: { fileSize: 1000000 },
-    //   fileFilter: function(req, file, callback) {
-    //     var ext = path.extname(file.originalname);
-    //     if (
-    //       ext !== ".png" &&
-    //       ext !== ".jpg" &&
-    //       ext !== ".gif" &&
-    //       ext !== ".pdf" &&
-    //       ext !== ".docx" &&
-    //       ext !== ".rtf" &&
-    //       ext !== ".jpeg"
-    //     ) {
-    //       return callback(res.end("Only images are allowed"), null);
-    //     }
-    //     callback(null, true);
-    //   }
-    // }).single("userFile");
-    // upload(req, res, function(err) {
-    //   res.end("File is uploaded");
-    // });
+  typeRequired("individuel", "prepose", "service"),
+  multer({ storage }).single("file"),
+  (req, res) => {
+    res
+      .status(200)
+      .json({ success: true })
+      .end();
   }
 );
 
