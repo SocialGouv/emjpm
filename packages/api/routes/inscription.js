@@ -260,8 +260,12 @@ router.post("/mandataires", async (req, res, next) => {
             });
         })
     )
-    .then(() => inscriptionEmail(`${process.env.APP_URL}`))
-    .then(() => res.json({ success: true }))
+    .then(() => {
+      return inscriptionEmail(nom, prenom, email);
+    })
+    .then(() => {
+      return res.json({ success: true });
+    })
     .catch(e => {
       next(e);
     });

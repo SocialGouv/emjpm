@@ -103,9 +103,13 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
             })
           )
           .then(() => {
+            const signOptions = {
+              expiresIn: "31d"
+            };
             const token = jwt.sign(
               JSON.parse(JSON.stringify(user)),
-              process.env.JWT_KEY || "emjpm-jwtkey"
+              process.env.JWT_KEY || "emjpm-jwtkey",
+              signOptions
             );
             return res.status(200).json({
               success: true,
@@ -124,6 +128,10 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
       });
     }
   })(req, res, next);
+});
+
+router.get("/checkToken", authHelpers.loginRequired, (req, res, next) => {
+  return res.sendStatus(200);
 });
 
 /**
@@ -148,7 +156,7 @@ router.get("/logout", (req, res, next) => {
   next();
 });
 
-/**
+/**x
  * @swagger
  * /auth/forgot_password:
  *   post:
