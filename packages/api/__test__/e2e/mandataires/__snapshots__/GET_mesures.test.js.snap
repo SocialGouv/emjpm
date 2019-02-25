@@ -67,7 +67,29 @@ Array [
 ]
 `;
 
-exports[`should get list of mesures eteintes 1`] = `Array []`;
+exports[`should get list of mesures eteintes 1`] = `
+Array [
+  Object {
+    "annee": "2012-10-05",
+    "cabinet": null,
+    "civilite": "F",
+    "code_postal": "92000",
+    "created_at": "2012-10-05T00:00:00.000Z",
+    "date_ouverture": "2012-10-04T22:00:00.000Z",
+    "etablissement": "CRF1",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 5,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Eteindre mesure",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "St ambroise",
+  },
+]
+`;
 
 exports[`should get list of mesures for maps 1`] = `
 Array [

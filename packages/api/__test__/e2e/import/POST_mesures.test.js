@@ -40,7 +40,7 @@ test("should import mesures correctly", async () => {
 test("should skip existing references", async () => {
   const token = await getTokenByUserType("mandataire");
   const curMesures = await knex.from("mesures").where({ mandataire_id: 1 });
-  expect(curMesures.length).toBe(3);
+  expect(curMesures.length).toBe(4);
   const response = await request(server)
     .post("/api/v1/mandataires/mesures/bulk")
     .set("Authorization", "Bearer " + token)
@@ -48,7 +48,7 @@ test("should skip existing references", async () => {
   expect(response.status).toBe(200);
   //expect(response.body.length).toBe(4);
   const newMesures = await knex.from("mesures").where({ mandataire_id: 1 });
-  expect(newMesures.length).toBe(4);
+  expect(newMesures.length).toBe(5);
   const response2 = await request(server)
     .post("/api/v1/mandataires/mesures/bulk")
     .set("Authorization", "Bearer " + token)
@@ -60,7 +60,7 @@ test("should skip existing references", async () => {
     success: true
   });
   const newMesures2 = await knex.from("mesures").where({ mandataire_id: 1 });
-  expect(newMesures2.length).toBe(5);
+  expect(newMesures2.length).toBe(6);
 });
 
 //
