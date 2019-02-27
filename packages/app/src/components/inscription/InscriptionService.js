@@ -13,10 +13,11 @@ const schema = {
     "email",
     "adresse",
     "code_postal",
-    "ville"
+    "ville",
+    "dispo_max"
   ],
   properties: {
-    email: { type: "string",format: "email",  default: "" },
+    email: { type: "string", format: "email", default: "" },
     pass1: { type: "string", minLength: 8 },
     pass2: { type: "string", minLength: 8 },
     etablissement: { type: "string", default: "" },
