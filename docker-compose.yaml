@@ -9,7 +9,12 @@ version: "3"
 
 services:
   db:
-    image: postgres:10.3
+    image: postgres:11
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     restart: always
     environment:
       # master password
@@ -21,7 +26,7 @@ services:
       - POSTGRES_READONLY_USER_NAME=readonly
       - POSTGRES_READONLY_USER_PASSWORD=readonlyPassword
     ports:
-      - "5434:5432"
+      - 5434:5432
     volumes:
       - emjpm-pgdata:/var/lib/postgresql/data
       - ./packages/api/db/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh

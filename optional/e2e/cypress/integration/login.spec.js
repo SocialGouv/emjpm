@@ -16,7 +16,7 @@ describe("Login", () => {
     cy.get("#root_verifyPassword").type("adad");
     cy.get("button.btn-success").click();
 
-    cy.location("pathname", { timeout: 10000 }).should("eq", "/login");
+    cy.location("pathname").should("eq", "/login/");
   });
   it("Login with invalid account should show error message", function() {
     cy.visit("/");
@@ -27,34 +27,34 @@ describe("Login", () => {
     cy.location("pathname").should("equal", "/");
   });
 
-  it("Login with valid account should redirect to /mandataires", function() {
+  it("Login with valid account should redirect to /mandataires/", function() {
     cy.visit("/");
     cy.get("#root_username").type("ad");
     cy.get("#root_password").type("adad");
     cy.get("button.btn-success").click();
-    cy.location("pathname", { timeout: 10000 }).should("eq", "/mandataires");
+    cy.location("pathname").should("eq", "/mandataires/");
   });
 
   it("Forgot password process", function() {
     cy.visit("/forgot-password");
     cy.get("#root_email").type("ud@ud.com");
     cy.get("button.btn-success").click();
-    cy.location("pathname", { timeout: 10000 }).should("eq", "/login");
+    cy.location("pathname").should("eq", "/login/");
   });
 
-  it("Login with valid account should redirect to /mandataires", function() {
+  it("'jeremy' should redirect to /mandataires/", function() {
     cy.visit("/");
     cy.get("#root_username").type("jeremy");
     cy.get("#root_password").type("johnson123");
     cy.get("button.btn-success").click();
-    cy.location("pathname", { timeout: 10000 }).should("eq", "/mandataires");
+    cy.location("pathname").should("eq", "/mandataires/");
   });
 
-  it("Login with valid account should redirect to /tis", function() {
+  it("'ti1' should redirect to /tis/", function() {
     cy.visit("/");
     cy.get("#root_username").type("ti1");
     cy.get("#root_password").type("ti1");
     cy.get("button.btn-success").click();
-    cy.location("pathname", { timeout: 10000 }).should("eq", "/tis");
+    cy.location("pathname").should("eq", "/tis/");
   });
 });

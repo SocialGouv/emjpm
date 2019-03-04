@@ -3,7 +3,7 @@ FROM node:10 as builder
 WORKDIR /app
 
 COPY ./package.json /app/package.json
-#COPY ./yarn.lock /app/yarn.lock
+COPY ./yarn.lock /app/yarn.lock
 
 RUN yarn --frozen-lockfile && yarn cache clean
 
@@ -13,6 +13,8 @@ COPY ./app.js /app/app.js
 COPY ./auth /app/auth
 COPY ./config /app/config
 COPY ./db /app/db
+COPY ./db/migrations /app/migrations
+COPY ./db/seeds /app/seeds
 COPY ./email /app/email
 COPY ./routes /app/routes
 

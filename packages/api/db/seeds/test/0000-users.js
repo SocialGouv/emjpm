@@ -18,7 +18,6 @@ const USERS = [
     username: "jeremy",
     password: "johnson123",
     type: "individuel",
-    active: true,
     prenom: "Adrien",
     email: "ud@ud.com"
   },
@@ -26,27 +25,23 @@ const USERS = [
     username: "kelly",
     password: "bryant123",
     type: "prepose",
-    active: true,
     email: "panam@paris.com",
     prenom: "Julien"
   },
   {
     username: "service1",
     password: "service1",
-    type: "service",
-    active: true
+    type: "service"
   },
   {
     username: "admin",
     password: "admin",
-    type: "admin",
-    active: true
+    type: "admin"
   },
   {
     username: "ti1",
     password: "ti1",
     type: "ti",
-    active: true,
     cabinet: "6D",
     email: "test2@ti.com"
   },
@@ -86,7 +81,6 @@ const USERS = [
     username: "tiToken",
     password: "tiToken",
     type: "ti",
-    active: true,
     cabinet: "6D",
     reset_password_token: "LpWpzK4Jla9I87Aqtry",
     email: "test3@ti.com"
@@ -97,7 +91,6 @@ const USERS = [
     password: "ad123",
     type: "individuel",
     reset_password_token: "LpWpzK4Jla9I87Aq",
-    active: true,
     email: "marcel@paris.com",
     prenom: "Marcel"
   }

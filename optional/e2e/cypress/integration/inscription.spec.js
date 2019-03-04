@@ -1,7 +1,7 @@
 require("./utils");
 
 describe("Inscription", () => {
-  it("should switch forms correctly", function() {
+  it.only("should switch forms correctly", function() {
     cy.visit("/inscription");
 
     cy.get("[data-cy='TiByRegion-Hauts-de-France']")
@@ -19,7 +19,7 @@ describe("Inscription", () => {
       .click();
 
     cy.get("[data-cy='form-inscription']")
-      .get("input[id='root_username']")
+      .get("input[id='root_email']")
       .should("have.length", 1);
 
     cy.get("input[type='radio'][value='prepose']")
@@ -27,7 +27,7 @@ describe("Inscription", () => {
       .click();
 
     cy.get("[data-cy='form-inscription']")
-      .get("input[id='root_username']")
+      .get("input[id='root_email']")
       .should("have.length", 1);
 
     cy.get("input[type='radio'][value='service']")
@@ -35,7 +35,15 @@ describe("Inscription", () => {
       .click();
 
     cy.get("[data-cy='form-inscription']")
-      .get("input[id='root_username']")
+      .get("input[id='root_email']")
+      .should("have.length", 1);
+
+    cy.get("input[type='radio'][value='ti']")
+      .first()
+      .click();
+
+    cy.get("[data-cy='form-inscription']")
+      .get("input[id='root_email']")
       .should("have.length", 1);
   });
 
@@ -57,7 +65,7 @@ describe("Inscription", () => {
       .click();
 
     const data = {
-      root_username: "username-individuel",
+      root_email: "username-individuel",
       root_pass1: "pass1",
       root_pass2: "pass1",
       root_nom: "nom 1",
@@ -99,7 +107,7 @@ describe("Inscription", () => {
       .click();
 
     const data = {
-      root_username: "username-individuel",
+      root_email: "username-individuel",
       root_pass1: "password100",
       root_pass2: "password101  ",
       root_nom: "nom 1",
@@ -148,7 +156,7 @@ describe("Inscription", () => {
         .click();
 
       const data = {
-        root_username: "username-individuel",
+        root_email: "username-individuel",
         root_pass1: "password100",
         root_pass2: "password100",
         root_nom: "nom 1",
@@ -226,7 +234,7 @@ describe("Inscription", () => {
         .click();
 
       const data = {
-        root_username: "username-ti",
+        root_email: "username-ti",
         root_pass1: "password100",
         root_pass2: "password100",
         root_email: "email1@email.com"

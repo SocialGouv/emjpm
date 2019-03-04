@@ -1,8 +1,10 @@
+const path = require('path')
+
 module.exports = {
   test: {
     // debug: true,
     client: "pg",
-    connection: {
+    connection: process.env.DATABASE_URL ||  {
       host: "localhost",
       user: "postgres",
       password: "test",
@@ -10,15 +12,15 @@ module.exports = {
       database: "emjpm_test"
     },
     migrations: {
-      directory: __dirname + "/db/migrations"
+      directory: path.join(__dirname, "/db/migrations")
     },
     seeds: {
-      directory: __dirname + "/db/seeds/test"
+      directory: path.join(__dirname, "/db/seeds/test")
     }
   },
   development: {
     client: "pg",
-    connection: {
+    connection: process.env.DATABASE_URL || {
       host: "localhost",
       user: "api",
       password: "test",
@@ -26,10 +28,10 @@ module.exports = {
       database: "emjpm_dev"
     },
     migrations: {
-      directory: __dirname + "/db/migrations"
+      directory: path.join(__dirname, "/db/migrations")
     },
     seeds: {
-      directory: __dirname + "/db/seeds/development"
+      directory: path.join(__dirname, "/db/seeds/development")
     }
   },
   production: {
@@ -42,10 +44,10 @@ module.exports = {
       database: "emjpm_prod"
     },
     migrations: {
-      directory: __dirname + "/db/migrations"
+      directory: path.join(__dirname, "/db/migrations")
     },
     seeds: {
-      directory: __dirname + "/db/seeds/production"
+      directory: path.join(__dirname, "/db/seeds/production")
     }
   }
 };

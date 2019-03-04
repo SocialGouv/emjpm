@@ -1,0 +1,18 @@
+{
+  "scripts": {
+    "test": "cypress run",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:api-reset": "docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml exec api yarn seeds || exit 0",
+    "cypress:start-api": "exit 0",
+    "cypress:start-app": "exit 0",
+    "cypress:start": "exit 0"
+  },
+  "keywords": [],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cypress": "^3.1.5"
+  },
+  "devDependencies": {
+  }
+}

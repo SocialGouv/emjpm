@@ -1,0 +1,49 @@
+version: "3"
+
+#
+# In development we can start more services
+#
+# Listening ports :
+#
+#  - 5434 : postgres
+#  - 5000 : frontend
+#  - 4000 : api
+#
+
+services:
+  maildev:
+    image: djfarrelly/maildev
+    restart: always
+    ports:
+      - 1080:80
+  api:
+    restart: always
+    build:
+      context: packages/api
+      dockerfile: Dockerfile
+    env_file: .env.dev
+    ports:
+      - 4000:4000
+    depends_on:
+      - db
+    links:
+      - db
+  frontend:
+    restart: always
+    env_file: .env.dev
+    build:
+      context: ./packages/app
+      dockerfile: Dockerfile
+      #
+      # this app is built statically so we cannot inject env vars at runtime
+      # we use args to expose them as env var *during the build phase, inside the container*
+      #
+      args:
+        API_URL: "/api"
+        SENTRY_PUBLIC_DSN: $SENTRY_PUBLIC_DSN
+    depends_on:
+      - api
+    ports:
+      - 5000:80
+    volumes:
+      - ./nginx-logs:/var/log/nginx

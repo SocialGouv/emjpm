@@ -1,36 +1,16 @@
 version: "3"
 
 #
-# In production we can start more services
+# In development we can start more services
 #
 # Listening ports :
 #
 #  - 5434 : postgres
 #  - 5000 : frontend
 #  - 4000 : api
-#  - 3003 : metabase
 #
 
 services:
-  db:
-    environment:
-      # master password
-      - POSTGRES_PASSWORD=masterPassword
-      # API dedicated password
-      - POSTGRES_API_USER_PASSWORD=apiPassword
-      - POSTGRES_READONLY_USER_PASSWORD=readonlyPassword
-  # For production only
-  metabase:
-    restart: always
-    image: metabase/metabase
-    volumes:
-      # persist config
-      - metabase:/data
-    environment:
-      - MB_DB_FILE=/data/metabase.db
-    ports:
-      - 3003:3000
-  # For development only, fake SMTP
   maildev:
     image: djfarrelly/maildev
     restart: always
@@ -41,7 +21,7 @@ services:
     build:
       context: packages/api
       dockerfile: Dockerfile
-    env_file: .env
+    env_file: .env.test
     ports:
       - 4000:4000
     depends_on:
@@ -50,7 +30,7 @@ services:
       - db
   frontend:
     restart: always
-    env_file: .env
+    env_file: .env.test
     build:
       context: ./packages/app
       dockerfile: Dockerfile
@@ -67,6 +47,3 @@ services:
       - 5000:80
     volumes:
       - ./nginx-logs:/var/log/nginx
-
-volumes:
-  metabase:
