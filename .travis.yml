@@ -75,6 +75,7 @@ jobs:
         - cd optional/e2e
         - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml up -d
       before_script:
+        - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml exec api yarn knex migrate:latest
         - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml exec api yarn seeds
       after_script:
         - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml down
