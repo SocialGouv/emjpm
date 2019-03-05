@@ -62,7 +62,6 @@ jobs:
       after_script:
         - npx codecov
         - docker-compose down
-        - docker stop emjpm_app
     - <<: *node_stage
       stage: Build
       name: Run end to end tests
