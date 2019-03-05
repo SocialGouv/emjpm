@@ -73,13 +73,11 @@ jobs:
           - ~/.cache/Cypress
       before_install:
         - cd optional/e2e
-        - alias _test-docker-compose='docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml'
-        - _test-docker-compose up -d
+        - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml up -d
       before_script:
-        - _test-docker-compose exec api yarn seeds
+        - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml exec api yarn seeds
       after_script:
-        - _test-docker-compose down
-
+        - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml down
 
     #
     #
