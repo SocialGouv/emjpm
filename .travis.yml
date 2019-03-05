@@ -15,7 +15,6 @@ _environments:
 
 _steps:
   - &node_stage
-    stage: Build
     language: node_js
     node_js: 10
     before_install:
@@ -24,9 +23,6 @@ _steps:
       - export PATH="$HOME/.yarn/bin:$PATH"
     cache:
       yarn: true
-      directories:
-        # Cypress downloader cache folder
-        - ~/.cache/Cypress
 
   - &deploy_stage
     stage: Deploy
@@ -46,6 +42,8 @@ _steps:
 jobs:
   include:
     - <<: *node_stage
+      stage: Build
+      name: Build and test
       if: NOT env(RELEASE)
       before_install:
         - export TZ=Europe/Paris
@@ -64,6 +62,25 @@ jobs:
       after_script:
         - npx codecov
         - docker-compose down
+        - docker stop emjpm_app
+    - <<: *node_stage
+      stage: Build
+      name: Run end to end tests
+      if: NOT env(RELEASE)
+      cache:
+        yarn: true
+        directories:
+          # Cypress downloader cache folder
+          - ~/.cache/Cypress
+      before_install:
+        - cd optional/e2e
+        - alias _test-docker-compose='docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml'
+        - _test-docker-compose up -d
+      before_script:
+        - _test-docker-compose exec api yarn seeds
+      after_script:
+        - _test-docker-compose down
+
 
     #
     #

@@ -15,7 +15,6 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
-    restart: always
     environment:
       # master password
       - POSTGRES_USER=postgres
