@@ -66,6 +66,10 @@ jobs:
       stage: Build
       name: Run end to end tests
       if: NOT env(RELEASE)
+      addons:
+        apt:
+          packages:
+            - libgconf-2-4 # Require by Cypress/Electron
       cache:
         yarn: true
         directories:
