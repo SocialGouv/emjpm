@@ -224,7 +224,8 @@ router.put(
         email,
         type
       });
-      res.status(200).json(mandataire);
+      const mandataireResult = await getMandataireByUserId(req.user.id);
+      res.status(200).json(mandataireResult);
     } catch (err) {
       next(err);
     }
