@@ -199,7 +199,12 @@ const getMesuresByGeolocalisation = (ti_id, type) => {
 const getAllMesuresByTis = ti_id =>
   knex
     .from("mesures")
-    .select("mesures.*", knex.raw("mandataires.etablissement as manda"))
+    .select(
+      "mesures.*",
+      "users.nom",
+      "users.prenom",
+      knex.raw("mandataires.etablissement as manda")
+    )
     .innerJoin("mandataires", "mandataires.id", "mesures.mandataire_id")
     .innerJoin("users", "mandataires.user_id", "users.id")
     .innerJoin("user_tis", "user_tis.user_id", "users.id")
