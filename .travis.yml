@@ -76,13 +76,16 @@ jobs:
           # Cypress downloader cache folder
           - ~/.cache/Cypress
       before_install:
-        - cd optional/e2e
-        - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml up -d
+        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up -d
+      install:
+        - yarn lerna exec --scope @emjpm/e2e --scope @emjpm/knex yarn
       before_script:
-        - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml exec api yarn knex migrate:latest
-        - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml exec api yarn seeds
+        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml exec api yarn knex migrate:latest
+        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml exec api yarn seeds
+      script:
+        - yarn lerna run --scope @emjpm/e2e --stream test
       after_script:
-        - docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml down
+        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml down
 
     #
     #

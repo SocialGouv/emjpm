@@ -8,8 +8,8 @@
   },
   "npmClient": "yarn",
   "packages": [
-    "packages/*"
+    "packages/*",
+    "optional/*"
   ],
-  "useWorkspaces": true,
   "version": "0.0.2"
 }

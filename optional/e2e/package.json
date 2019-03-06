@@ -1,12 +1,11 @@
 {
+  "name": "@emjpm/e2e",
+  "private": true,
   "scripts": {
     "test": "cypress run",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:api-reset": "docker-compose -f ../../docker-compose.yaml -f ../../docker-compose.test.yaml exec api yarn seeds || exit 0",
-    "cypress:start-api": "exit 0",
-    "cypress:start-app": "exit 0",
-    "cypress:start": "exit 0"
+    "cypress:api-reset": "cd ../.. && NODE_ENV=test yarn lerna run --scope @emjpm/knex --stream seeds"
   },
   "keywords": [],
   "license": "Apache-2.0",
