@@ -13,11 +13,9 @@ version: "3"
 services:
   maildev:
     image: djfarrelly/maildev
-    restart: always
     ports:
       - 1080:80
   api:
-    restart: always
     build:
       context: packages/api
       dockerfile: Dockerfile
@@ -29,7 +27,6 @@ services:
     links:
       - db
   frontend:
-    restart: always
     env_file: .env.test
     build:
       context: ./packages/app
