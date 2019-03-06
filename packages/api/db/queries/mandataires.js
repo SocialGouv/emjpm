@@ -163,6 +163,15 @@ const getAllMandataires = ti_id =>
 const getAllServicesByTis = ti_id =>
   knex
     .from("user_tis")
+    .select(
+      "mandataires.id",
+      "mandataires.*",
+      "users.type",
+      "users.email",
+      "users.nom",
+      "users.prenom",
+      "users.cabinet"
+    )
     .innerJoin("mandataires", "user_tis.user_id", "mandataires.user_id")
     .innerJoin("users", "mandataires.user_id", "users.id")
     .where({ ti_id: parseInt(ti_id), "users.type": "service" });
