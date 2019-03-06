@@ -189,7 +189,7 @@ router.put(
  */
 router.post(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose", "ti"),
+  typeRequired("individuel", "prepose", "service", "ti"),
   async (req, res, next) => {
     try {
       if (Object.keys(req.body).length === 0) {
@@ -299,7 +299,7 @@ router.post(
  */
 router.get(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
@@ -335,7 +335,7 @@ router.get(
  */
 router.get(
   "/:mandataireId/mesuresForMaps",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
@@ -370,10 +370,13 @@ router.get(
  */
 router.get(
   "/:mandataireId/mesures/attente",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
+      if (!mandataire) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
       const mesures = await getAllMesuresAttente(mandataire.id);
       res.status(200).json(mesures);
     } catch (err) {
@@ -402,7 +405,7 @@ router.get(
  */
 router.get(
   "/:mandataireId/mesures/Eteinte",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
