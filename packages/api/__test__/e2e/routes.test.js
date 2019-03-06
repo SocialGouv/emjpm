@@ -20,7 +20,7 @@ const accessChecks = [
   {
     method: "POST",
     url: "/api/v1/mandataires/1/mesures",
-    type: ["mandataire", "ti"]
+    type: ["mandataire", "ti", "service"]
   },
   { method: "DELETE", url: "/api/v1/mandataires/1/commentaires/1", type: "ti" },
   { method: "GET", url: "/api/v1/mandataires/1/commentaires", type: "ti" },
@@ -30,21 +30,25 @@ const accessChecks = [
     url: "/api/v1/mandataires/mesures/bulk",
     type: "mandataire"
   },
-  { method: "GET", url: "/api/v1/mandataires/1/mesures", type: "mandataire" },
+  {
+    method: "GET",
+    url: "/api/v1/mandataires/1/mesures",
+    type: ["mandataire", "service"]
+  },
   {
     method: "GET",
     url: "/api/v1/mandataires/1/mesuresForMaps",
-    type: "mandataire"
+    type: ["mandataire", "service"]
   },
   {
     method: "GET",
     url: "/api/v1/mandataires/1/mesures/attente",
-    type: "mandataire"
+    type: ["mandataire", "service"]
   },
   {
     method: "GET",
     url: "/api/v1/mandataires/1/mesures/Eteinte",
-    type: "mandataire"
+    type: ["mandataire", "service"]
   },
   {
     method: "GET",
@@ -54,12 +58,12 @@ const accessChecks = [
   {
     method: "GET",
     url: "/api/v1/mandataires/1",
-    type: "mandataire"
+    type: ["mandataire", "service"]
   },
   {
     method: "PUT",
     url: "/api/v1/mandataires/1",
-    type: "mandataire"
+    type: ["mandataire", "service"]
   },
   {
     method: "POST",
@@ -79,7 +83,7 @@ const accessChecks = [
   {
     method: "PUT",
     url: "/api/v1/mandataires/1/capacite",
-    type: "mandataire"
+    type: ["mandataire", "service"]
   },
   {
     method: "PUT",
