@@ -14,6 +14,10 @@ process.env.APP_URL = "https://emjpm.gouv.fr";
 const server = require("@emjpm/api/app");
 const knex = require("@emjpm/api/db/knex");
 
+beforeAll(async () => {
+  await knex.seed.run();
+});
+
 beforeEach(() => {
   nodemailerMock.mock.reset();
 });
