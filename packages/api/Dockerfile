@@ -1,4 +1,7 @@
-FROM node:10 as builder
+FROM node:10-alpine as builder
+
+RUN apk add -U tzdata
+RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
 WORKDIR /app
 
