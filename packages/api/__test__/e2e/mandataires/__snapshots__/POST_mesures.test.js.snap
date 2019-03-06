@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TI should POST mesure and send email 1`] = `
+Array [
+  Object {
+    "from": "ne-pas-repondre@emjpm.gouv.fr",
+    "html": "Madame, Monsieur,
+<br><br>
+  Pour information, le ti paris cabinet 6D, a décidé de vous confier une nouvelle mesure :
+  <br>
+  - \\"type de mesure\\": preposes
+  <br>
+  - \\"genre\\": madame
+  <br>
+  - \\"année de naissance\\": 2010-10-05.
+<br><br>
+    Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
+<br><br>
+  Pour rappel, à ce jour, vous avez déclaré \\"2\\" mesures pour une capacité souhaitée de \\"3\\" mesures.
+<br><br>
+  À bientôt
+<br><br>
+L’équipe e-mjpm.",
+    "subject": "e-MJPM : une nouvelle mesure vous a été attribuée",
+    "text": "Madame, Monsieur,
+
+  Pour information, le ti paris cabinet 6D, a décidé de vous confier une nouvelle mesure :
+  - \\"type de mesure\\": preposes
+  - \\"genre\\": madame
+  - \\"année de naissance\\": 2010-10-05.
+
+  Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
+
+  Pour rappel, à ce jour, vous avez déclaré \\"2\\" mesures pour une capacité souhaitée de \\"3\\" mesures .
+
+  À bientôt
+
+  L’équipe e-mjpm.",
+    "to": "ud@ud.com",
+  },
+]
+`;
+
+exports[`mandataire should NOT POST mesure for another one [REST url abuse] 1`] = `
+Array [
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "F",
+    "code_postal": "62000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "UDAHF",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 1,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "Arras",
+  },
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "H",
+    "code_postal": "93000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "CAROUF",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 4,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "St Denis",
+  },
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "madame",
+    "code_postal": "28000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "peu pas",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 6,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "Chartres",
+  },
+]
+`;
+
+exports[`mandataire should NOT POST mesure for another one [body forge] 1`] = `
+Array [
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "F",
+    "code_postal": "62000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "UDAHF",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 1,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "Arras",
+  },
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "H",
+    "code_postal": "93000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "CAROUF",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 4,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "St Denis",
+  },
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "madame",
+    "code_postal": "28000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "peu pas",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 6,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "Chartres",
+  },
+]
+`;
+
+exports[`mandataire should POST mesure 1`] = `
+Array [
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "F",
+    "code_postal": "62000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "UDAHF",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 1,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "Arras",
+  },
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "H",
+    "code_postal": "93000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "CAROUF",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 4,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "St Denis",
+  },
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "madame",
+    "code_postal": "28000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "peu pas",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 6,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "Chartres",
+  },
+]
+`;
