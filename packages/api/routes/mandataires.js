@@ -109,7 +109,7 @@ const { getTiByUserId } = require("../db/queries/tis");
  */
 router.get(
   "/1",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
@@ -171,7 +171,7 @@ const whiteList = obj =>
  */
 router.put(
   "/1",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
       const {
@@ -378,7 +378,7 @@ router.post("/PosteCode", loginRequired, async (req, res, next) => {
  */
 router.put(
   "/:mandataireId/capacite",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
