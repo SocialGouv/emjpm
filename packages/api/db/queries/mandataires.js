@@ -184,7 +184,8 @@ const mesureEnAttente = mandataireID =>
     .where({
       mandataire_id: parseInt(mandataireID),
       status: "Mesure en attente"
-    });
+    })
+    .first();
 
 const update = (mandataireID, updates) =>
   Mandataires()
