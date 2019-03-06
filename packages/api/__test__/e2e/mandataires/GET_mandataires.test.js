@@ -34,7 +34,9 @@ test("TI should NOT GET mandataire profile", async () => {
     .get("/api/v1/mandataires/1")
     .set("Authorization", "Bearer " + token);
 
-  expect(simpler(response.body)).toMatchSnapshot();
+  expect(simpler(response.body)).toMatchSnapshot({
+    stack: expect.any(String)
+  });
 
   expect(response.status).toBe(401);
 });
