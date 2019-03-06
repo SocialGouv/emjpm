@@ -6,9 +6,10 @@
     "start": "node app.js",
     "build": "ncc build app.js -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
     "dev": "nodemon app.js",
-    "test": "NODE_ENV=test mocha --timeout 10000 --exit",
+    "test:mocha": "NODE_ENV=test mocha --timeout 10000 --exit",
+    "test": "NODE_ENV=test jest --verbose",
     "knex": "knex",
-    "eslint": "eslint *.js **/*.js --fix",
+    "lint": "eslint __test__ auth db email routes scripts test app.js knexfile.js",
     "migrate-and-start": "knex migrate:latest && npm start",
     "seeds": "knex seed:run",
     "migrate-seeds-and-start": "knex migrate:latest && npm run seeds && npm start",
@@ -30,6 +31,7 @@
     "es6-promise": "^4.2.4",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "http-errors": "^1.7.1",
     "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^8.3.0",
     "knex": "^0.14.4",
@@ -50,16 +52,20 @@
   },
   "devDependencies": {
     "@zeit/ncc": "^0.15.0",
+    "@babel/core": "^7.2.2",
+    "babel-core": "7.0.0-bridge.0",
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
     "eslint": "^4.18.2",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
+    "jest-cli": "^24.1.0",
     "mocha": "^5.0.4",
     "nodemailer-mock": "^1.3.14",
     "nodemon": "^1.18.3",
     "prettier": "1.11.1",
     "randomatic": "^3.0.0",
-    "rewiremock": "^3.8.0"
+    "rewiremock": "^3.8.0",
+    "supertest": "^3.4.2"
   }
 }

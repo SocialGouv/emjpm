@@ -200,7 +200,7 @@ describe("routes : inscription", () => {
             .innerJoin("users", "users.id", "user_tis.user_id")
             .where("user_id", user.id)
             .first();
-          user_tis.cabinet.should.equal("2A");
+          user.cabinet.should.equal("2A");
           user_tis.ti_id.should.equal(1);
         }));
     it("created user should NOT be active", () =>
