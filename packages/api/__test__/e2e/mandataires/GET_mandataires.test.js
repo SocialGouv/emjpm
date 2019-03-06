@@ -6,6 +6,10 @@ const knex = require("@emjpm/api/db/knex");
 
 const { getTokenByUserType } = require("../utils");
 
+beforeAll(async () => {
+  await knex.seed.run();
+});
+
 afterAll(async () => {
   await knex.destroy();
 });
@@ -13,7 +17,7 @@ afterAll(async () => {
 // strip the created_at date in the response
 const simpler = ({ created_at, ...props }) => props;
 
-test("should get mandataire profile", async () => {
+test("should GET mandataire profile", async () => {
   const token = await getTokenByUserType("mandataire");
   const response = await request(server)
     .get("/api/v1/mandataires/1")
@@ -24,7 +28,18 @@ test("should get mandataire profile", async () => {
   expect(response.status).toBe(200);
 });
 
-test("TI should get list of mandataires", async () => {
+test("TI should NOT GET mandataire profile", async () => {
+  const token = await getTokenByUserType("ti");
+  const response = await request(server)
+    .get("/api/v1/mandataires/1")
+    .set("Authorization", "Bearer " + token);
+
+  expect(simpler(response.body)).toMatchSnapshot();
+
+  expect(response.status).toBe(401);
+});
+
+test("TI should GET list of mandataires", async () => {
   const token = await getTokenByUserType("ti");
   const response = await request(server)
     .get("/api/v1/mandataires")
