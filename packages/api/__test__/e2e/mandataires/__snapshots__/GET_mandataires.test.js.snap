@@ -57,7 +57,10 @@ Array [
 
 exports[`TI should NOT GET mandataire profile 1`] = `
 Object {
-  "status": "Please log in",
+  "message": "Please log in",
+  "name": "UnauthorizedError",
+  "stack": Any<String>,
+  "status": 401,
 }
 `;
 
