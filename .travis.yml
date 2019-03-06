@@ -19,6 +19,7 @@ _steps:
     language: node_js
     node_js: 10
     before_install:
+      - export TZ=Europe/Paris
       - curl -o- -L https://yarnpkg.com/install.sh | bash
       - export PATH="$HOME/.yarn/bin:$PATH"
     cache:
@@ -47,6 +48,7 @@ jobs:
     - <<: *node_stage
       if: NOT env(RELEASE)
       before_install:
+        - export TZ=Europe/Paris
         - curl -o- -L https://yarnpkg.com/install.sh | bash
         - export PATH="$HOME/.yarn/bin:$PATH"
         # Start the database first so it has the time to boot before we interact with it.
@@ -57,7 +59,7 @@ jobs:
       script:
         - yarn build --stream
         # - yarn lint --stream
-        - TZ="Europe/Amsterdam" yarn workspace @emjpm/app test --coverage
+        - yarn workspace @emjpm/app test --coverage
         - JWT_KEY=lol yarn workspace @emjpm/api test --coverage
       after_script:
         - npx codecov
