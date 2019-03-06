@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should import mesures correctly 1`] = `
+Object {
+  "added": 2,
+  "message": "2 Mesures importées.",
+  "success": true,
+}
+`;
+
+exports[`should skip existing references 1`] = `
+Object {
+  "added": 1,
+  "message": Any<String>,
+  "success": true,
+}
+`;

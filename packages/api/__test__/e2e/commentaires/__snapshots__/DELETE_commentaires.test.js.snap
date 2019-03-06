@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should delete commentaire for given mandataire and return response 1`] = `
+Array [
+  Object {
+    "comment": "Hello, world 2",
+    "id": 2,
+    "mandataire_id": 1,
+    "ti_id": 2,
+  },
+]
+`;

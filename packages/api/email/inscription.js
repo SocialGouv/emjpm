@@ -26,10 +26,7 @@ const inscriptionEmail = url =>
     "Nouvelle inscription",
     EMAIL_RELANCE_TEXT(url),
     EMAIL_RELANCE_HTML(url)
-  ).catch(e => {
-    // todo: sentry
-    console.log(e);
-  });
+  );
 
 module.exports = {
   inscriptionEmail

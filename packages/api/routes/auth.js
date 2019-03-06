@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
+const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 const uid = require("rand-token").uid;
 const Sentry = require("@sentry/node");
@@ -10,8 +11,10 @@ const passport = require("../auth/local");
 
 const {
   updateLastLogin,
+  updateResetPassword,
   updateUser,
-  getSpecificUser
+  getSpecificUser,
+  getUserWithValidToken
 } = require("../db/queries/users");
 
 const { addDataLogs } = require("../db/queries/logsData");
@@ -176,12 +179,9 @@ router.post("/forgot_password", (req, res, next) => {
   getSpecificUser({ email: email })
     .then(user => {
       if (!user) {
-        throw new Error("user not found");
+        throw createError.NotFound(`User "${email}" not Found`);
       }
-      return updateUser(user.id, {
-        reset_password_token: token,
-        reset_password_expires: Date.now() + 7200000
-      }).then(() => user);
+      return updateResetPassword(user.id, token, "2 hours").then(() => user);
     })
     .then(user =>
       resetPasswordEmail(
@@ -191,12 +191,9 @@ router.post("/forgot_password", (req, res, next) => {
       )
     )
     .then(() => res.status(200).json())
-    .catch(e => {
-      console.log(e);
-      res.status(500).json();
-    });
+    .catch(next);
 });
-//7200000
+
 /**
  * @swagger
  * /auth/reset_password:
@@ -229,36 +226,32 @@ router.post("/forgot_password", (req, res, next) => {
  *             description: API server cookie
  */
 router.post("/reset_password", (req, res, next) => {
-  getSpecificUser({ reset_password_token: req.body.token })
-    .catch(res => {
-      res.status(400).send({
-        message: "Votre lien a expiré."
-      });
-      throw new Error();
+  getUserWithValidToken({ reset_password_token: req.body.token })
+    .catch(err => {
+      // 419 Authentication Timeout see http://getstatuscode.com/419
+      // message: "Votre lien a expiré."
+      throw createError(419, err);
     })
     .then(user => {
       if (!user) {
-        return res.status(401).send({
-          message: "Erreur."
-        });
+        throw createError.Unauthorized("Invalid token");
       }
       if (req.body.newPassword === req.body.verifyPassword) {
         return updateUser(user.id, {
           password: bcrypt.hashSync(req.body.newPassword, 10),
-          reset_password_token: undefined,
-          reset_password_expires: undefined
+          reset_password_token: null,
+          reset_password_expires: null
         }).then(() => {
           return confirmationPasswordEmail(user.email);
         });
       } else {
-        return res.status(400).send({
-          message: "Vos mots de passe ne sont pas équivalents."
-        });
+        throw createError.UnprocessableEntity("Not equal passwords.");
       }
     })
     .then(function() {
       res.status(200).json();
-    });
+    })
+    .catch(next);
 });
 
 module.exports = router;

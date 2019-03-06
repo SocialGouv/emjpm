@@ -25,9 +25,9 @@ const updateMandataire = (id, data) =>
 // todo move to trigger/view
 const updateCountMesures = id =>
   getCountMesures(id).then(count =>
-    knex.raw(`UPDATE mandataires
-      SET mesures_en_cours = ${count}
-      WHERE ID = ${id};`)
+    knex.raw(
+      `UPDATE mandataires SET mesures_en_cours=${count} WHERE ID = ${id};`
+    )
   );
 
 // todo move to trigger/view
@@ -95,7 +95,8 @@ const getMesuresMap = mandataireId =>
     })
     .groupByRaw(
       "mesures.code_postal,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
-    );
+    )
+    .orderBy("latitude", "asc");
 
 function getAllByMandatairesFilter(
   ti_id,
@@ -158,7 +159,8 @@ const getAllMandataires = ti_id =>
       "geolocalisation_code_postal",
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
-    );
+    )
+    .orderBy("mandataires.id");
 
 const getAllServicesByTis = ti_id =>
   knex
@@ -195,9 +197,27 @@ const getCoordonneesByPostCode = codePostal =>
     .where("code_postal", codePostal)
     .first();
 
+const isMandataireInTi = (mandataire_id, ti_id) =>
+  knex
+    .from("user_tis")
+    .select(
+      "mandataires.id",
+      "mandataires.user_id",
+      "user_tis.user_id",
+      "user_tis.ti_id"
+    )
+    .innerJoin("mandataires", "mandataires.user_id", "user_tis.user_id")
+    .where({
+      "mandataires.id": mandataire_id,
+      ti_id
+    })
+    .then(res => res.length > 0);
+
 module.exports = {
+  isMandataireInTi,
   updateCountMesures,
   updateDateMesureUpdate,
+  getMandataire,
   getMandataireById,
   getMandataireByUserId,
   updateMandataire,

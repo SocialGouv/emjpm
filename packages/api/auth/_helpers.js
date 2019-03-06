@@ -1,4 +1,6 @@
 const bcrypt = require("bcryptjs");
+const createError = require("http-errors");
+
 const knex = require("../db/knex");
 
 function comparePass(userPassword, databasePassword) {
@@ -29,43 +31,55 @@ function loginRequired(req, res, next) {
 
 const typeRequired = (...userTypes) => (req, res, next) => {
   //console.log(req.user);
-  if (!req.user) {
-    return res.status(401).json({ status: "Please log in" });
+  try {
+    if (!req.user) {
+      throw createError.Unauthorized(`Please log in`);
+    }
+    if (userTypes.find(userType => req.user.type === userType)) {
+      return next();
+    }
+    throw createError.Unauthorized(`Please log in`);
+  } catch (err) {
+    next(err);
   }
-  if (userTypes.find(userType => req.user.type === userType)) {
-    return next();
-  }
-  return res.status(401).json({ status: "Please log in" });
 };
 
 function adminRequired(req, res, next) {
-  if (!req.user) res.status(401).json({ status: "Please log in" });
-  return knex("users")
-    .where({ username: req.user.username })
-    .first()
-    .then(user => {
-      if (!user.admin)
-        res.status(401).json({ status: "You are not authorized" });
-      return next();
-    })
-    .catch(err => {
-      res.status(500).json({ status: "Something bad happened" });
-    });
+  try {
+    if (!req.user) {
+      throw createError.Unauthorized(`Please log in`);
+    }
+    return knex("users")
+      .where({ username: req.user.username })
+      .first()
+      .then(user => {
+        if (!user.admin) {
+          throw createError.Unauthorized(`Please log in`);
+        }
+        return next();
+      });
+  } catch (err) {
+    next(err);
+  }
 }
 
 function mandataireRequired(req, res, next) {
-  if (!req.user) res.status(401).json({ status: "Please log in" });
-  return knex("users")
-    .where({ username: req.user.username })
-    .first()
-    .then(user => {
-      if (!user.mandataire)
-        res.status(401).json({ status: "You are not authorized" });
-      return next();
-    })
-    .catch(err => {
-      res.status(500).json({ status: "Something bad happened" });
-    });
+  try {
+    if (!req.user) {
+      throw createError.Unauthorized(`Please log in`);
+    }
+    return knex("users")
+      .where({ username: req.user.username })
+      .first()
+      .then(user => {
+        if (!user.mandataire) {
+          throw createError.Unauthorized(`You are not authorized`);
+        }
+        return next();
+      });
+  } catch (err) {
+    next(err);
+  }
 }
 
 function loginRedirect(req, res, next) {

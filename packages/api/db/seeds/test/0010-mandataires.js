@@ -67,5 +67,22 @@ exports.seed = function(knex, Promise) {
           user_id: 52
         });
       })
+
+      .then(function() {
+        // Inserts seed entries one by one in series
+        return knex("mandataires").insert({
+          etablissement: "service-1",
+          code_postal: "13000",
+          ville: "Marseille",
+          telephone: "0237100000",
+          telephone_portable: "0101010101",
+          adresse: "67 rue saint louis",
+          mesures_en_cours: 12,
+          dispo_max: 55,
+          secretariat: true,
+          nb_secretariat: 1,
+          user_id: 3
+        });
+      })
   );
 };
