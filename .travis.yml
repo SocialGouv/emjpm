@@ -19,6 +19,7 @@ _steps:
     language: node_js
     node_js: 10
     before_install:
+      - export TZ=Europe/Paris
       - curl -o- -L https://yarnpkg.com/install.sh | bash
       - export PATH="$HOME/.yarn/bin:$PATH"
     cache:
