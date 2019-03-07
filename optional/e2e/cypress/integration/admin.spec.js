@@ -9,7 +9,7 @@ describe("Admins", () => {
     cy.loginByForm("admin", "admin");
   });
 
-  it("should show 3 active users", async function() {
+  it("should show 3 active users", function() {
     cy.getCellAction().should("have.length", 3);
     cy.get(".ReactTable .rt-tr-group:nth-child(1)")
       .find(".rt-td")
@@ -46,7 +46,7 @@ describe("Admins", () => {
     cy.get(".ReactTable .rt-tr-group:nth-child(1)")
       .find(".rt-td")
       .first()
-      .should("contain", "Doug");
+      .should("contain", "Adrien");
   });
   it("should show 2 active users", function() {
     cy.getCellAction().should("have.length", 2);
@@ -75,7 +75,7 @@ describe("Admins", () => {
     cy.get(".ReactTable .rt-tr-group:nth-child(2)")
       .find(".rt-td")
       .first()
-      .should("contain", "Marcel");
+      .should("contain", "Doug");
   });
 
   describe("full scenario", () => {
@@ -87,15 +87,15 @@ describe("Admins", () => {
 
       cy.get(".ReactTable .rt-tr-group:nth-child(1) .rt-td")
         .first()
-        .should("contain", "Julien");
+        .should("contain", "Adrien");
       cy.get(".ReactTable .rt-tr-group:nth-child(2) .rt-td")
         .first()
-        .should("contain", "Marcel");
+        .should("contain", "Julien");
 
       cy.get("[data-cy='En attente de validation']").click();
-      cy.wait(100) // wait for the DOM to be populated
 
-      cy.get(".ReactTable .rt-tr-group:nth-child(1) .rt-td")
+      cy.get(".ReactTable .rt-tr-group:nth-child(1)")
+        .find(".rt-td")
         .first()
         .should("contain", "Doug");
 

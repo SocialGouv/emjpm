@@ -1,7 +1,7 @@
 require("./utils");
 
 describe("Inscription", () => {
-  it.only("should switch forms correctly", function() {
+  it("should switch forms correctly", function() {
     cy.visit("/inscription");
 
     cy.get("[data-cy='TiByRegion-Hauts-de-France']")
