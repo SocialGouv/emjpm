@@ -1,8 +1,5 @@
 FROM node:10 as builder
 
-RUN apk add -U tzdata
-RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime
-
 WORKDIR /app
 
 COPY ./package.json /app/package.json
