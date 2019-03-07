@@ -154,9 +154,14 @@ const { getCountByEmail } = require("../db/queries/users");
  *               items:
  *                 $ref: '#/components/schemas/InscriptionTi'
  */
-router.get("/tis", (req, res, next) =>
-  queries.getTiByRegion().then(data => res.json(data))
-);
+router.get("/tis", async (req, res, next) => {
+  try {
+    const data = await queries.getTiByRegion();
+    res.json(data)
+  } catch (e) {
+    next(e);
+  }
+});
 
 /**
  * @swagger
