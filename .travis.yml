@@ -81,6 +81,7 @@ jobs:
       before_install:
         - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up -d
       install:
+        - yarn
         - yarn lerna exec --scope @emjpm/e2e --scope @emjpm/knex yarn
       before_script:
         - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml exec api yarn knex migrate:latest
