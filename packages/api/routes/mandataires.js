@@ -224,7 +224,8 @@ router.put(
         email,
         type
       });
-      res.status(200).json(mandataire);
+      const mandataireResult = await getMandataireByUserId(req.user.id);
+      res.status(200).json(mandataireResult);
     } catch (err) {
       next(err);
     }
@@ -438,7 +439,7 @@ router.put(
       }
       const nbMesureAttente = await mesureEnAttente(req.body.mandataire_id);
       const mandataire = await update(req.body.mandataire_id, {
-        mesures_en_attente: nbMesureAttente
+        mesures_en_attente: nbMesureAttente.count
       });
       res.status(200).json(mandataire);
     } catch (err) {
