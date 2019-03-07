@@ -140,8 +140,12 @@ router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
  *               type: array
  */
 router.get("/tis", typeRequired("admin"), async (req, res, next) => {
-  const users = await queries.getTis({ filters: req.query });
-  res.json(users);
+  try {
+    const users = await queries.getTis({ filters: req.query });
+    res.json(users);
+  } catch (e) {
+    next(e);
+  }
 });
 
 const USER_WRITE_PROPERTIES = ["active"];
