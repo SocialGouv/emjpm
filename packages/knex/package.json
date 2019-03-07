@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "migrate": "knex migrate:latest",
+    "rollback": "knex migrate:rollback",
     "seeds": "knex seed:run"
   },
   "keywords": [],
