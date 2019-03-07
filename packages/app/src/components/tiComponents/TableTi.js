@@ -13,10 +13,8 @@ import { openFicheMandataireModal } from "./actions/mandataire";
 import isOlderThanOneMonth from "../communComponents/checkDate";
 
 const getColorFromDisponibilite = dispo => {
-  if (dispo >= 1) {
+  if (dispo <= 1) {
     return "#f05659";
-  } else if (dispo >= 0.85) {
-    return "#eb9123";
   }
   return "#43b04a";
 };
@@ -30,7 +28,7 @@ export const PillDispo = ({ dispo, attente, dispo_max }) => (
       borderRadius: "5px",
       textAlign: "center",
       color: "white",
-      background: getColorFromDisponibilite((dispo + attente) / dispo_max)
+      background: getColorFromDisponibilite(dispo_max - (dispo + attente))
     }}
   >
     {dispo} / {dispo_max}
@@ -140,7 +138,7 @@ const COLUMNS = [
         <Circle
           style={{
             backgroundColor: getColorFromDisponibilite(
-              (row.row.mesures_en_cours + row.row.mesures_en_attente) / row.row.dispo_max
+              row.row.dispo_max - (row.row.mesures_en_cours + row.row.mesures_en_attente)
             )
           }}
         >
@@ -178,7 +176,7 @@ const COLUMNS = [
         <Circle
           style={{
             backgroundColor: getColorFromDisponibilite(
-              (row.row.mesures_en_cours + row.row.mesures_en_attente) / row.row.dispo_max
+              row.row.dispo_max - (row.row.mesures_en_cours + row.row.mesures_en_attente)
             )
           }}
         >
