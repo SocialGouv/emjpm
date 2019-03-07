@@ -1,4 +1,4 @@
-const path = require('path')
+//
 
 module.exports = {
   test: {
@@ -12,10 +12,10 @@ module.exports = {
       database: "emjpm_test"
     },
     migrations: {
-      directory: path.join(__dirname, "/db/migrations")
+      directory: "./migrations"
     },
     seeds: {
-      directory: path.join(__dirname, "/db/seeds/test")
+      directory: "./seeds/test"
     }
   },
   development: {
@@ -28,10 +28,10 @@ module.exports = {
       database: "emjpm_dev"
     },
     migrations: {
-      directory: path.join(__dirname, "/db/migrations")
+      directory: "./migrations"
     },
     seeds: {
-      directory: path.join(__dirname, "/db/seeds/development")
+      directory: "./seeds/development"
     }
   },
   production: {
@@ -44,10 +44,10 @@ module.exports = {
       database: "emjpm_prod"
     },
     migrations: {
-      directory: path.join(__dirname, "/db/migrations")
+      directory: "./migrations"
     },
     seeds: {
-      directory: path.join(__dirname, "/db/seeds/production")
+      directory: "./seeds/production"
     }
   }
 };
