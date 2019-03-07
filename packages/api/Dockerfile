@@ -13,8 +13,6 @@ COPY ./app.js /app/app.js
 COPY ./auth /app/auth
 COPY ./config /app/config
 COPY ./db /app/db
-COPY ./db/migrations /app/migrations
-COPY ./db/seeds /app/seeds
 COPY ./email /app/email
 COPY ./routes /app/routes
 
