@@ -13,8 +13,6 @@ version: "3"
 services:
   maildev:
     image: djfarrelly/maildev
-    ports:
-      - 1080:80
   api:
     build:
       context: packages/api
@@ -24,8 +22,10 @@ services:
       - 4000:4000
     depends_on:
       - db
+      - maildev
     links:
       - db
+      - maildev
   frontend:
     env_file: .env.test
     build:
