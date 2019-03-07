@@ -107,8 +107,12 @@ const { validationEmail } = require("../email/validation");
  *                 $ref: '#/components/schemas/MandataireAdmin'
  */
 router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
-  const mandataires = await queries.getMandataires({ filters: req.query });
-  res.json(mandataires);
+  try {
+    const mandataires = await queries.getMandataires({ filters: req.query });
+    res.json(mandataires);
+  } catch (e) {
+    next(e);
+  }
 });
 
 /**
