@@ -30,7 +30,14 @@ export const trackUser = () => {
 function getJWTPayloadFormLocalStorageIdToken() {
   const token = localStorage.getItem("id_token") || "";
   const [, payloadPart = ""] = token.split(".");
-  return JSON.parse(atob(payloadPart) || "{}");
+  // prevent some token decoding exceptions
+  // "Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded."
+  try {
+    return JSON.parse(atob(payloadPart) || "{}");
+  } catch (e) {
+    console.log("Error decoding JWT", e);
+    return {};
+  }
 }
 
 export default ReactPiwik;
