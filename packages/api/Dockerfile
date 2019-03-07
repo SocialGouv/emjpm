@@ -16,6 +16,4 @@ COPY ./db /app/db
 COPY ./email /app/email
 COPY ./routes /app/routes
 
-ENV NODE_ENV production
-
-ENTRYPOINT ["yarn", "wait-migrate-and-start"]
+ENTRYPOINT ["yarn", "start"]
