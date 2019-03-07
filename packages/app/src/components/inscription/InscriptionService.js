@@ -16,6 +16,22 @@ const schema = {
     "ville",
     "dispo_max"
   ],
+  definitions: {
+    Thing: {
+      type: "object",
+      properties: {
+        etablissement: { type: "string", default: "" },
+        email: { type: "string", format: "email", default: "" },
+        nom: { type: "string", default: "" },
+        prenom: { type: "string", default: "" },
+        telephone: { type: "string", default: "" },
+        adresse: { type: "string", default: "" },
+        code_postal: { type: "string", default: "" },
+        ville: { type: "string", default: "" },
+        dispo_max: { type: "integer", default: 0 }
+      }
+    }
+  },
   properties: {
     email: { type: "string", format: "email", default: "" },
     pass1: { type: "string", minLength: 8 },
@@ -27,8 +43,14 @@ const schema = {
     adresse: { type: "string", default: "" },
     code_postal: { type: "string", default: "" },
     ville: { type: "string", default: "" },
-    mesures_en_cours: { type: "integer", default: 0 },
-    dispo_max: { type: "integer", default: 0 }
+    dispo_max: { type: "integer", default: 0 },
+    antennes: {
+      type: "array",
+      title: "Antennes",
+      items: {
+        $ref: "#/definitions/Thing"
+      }
+    }
   }
 };
 
