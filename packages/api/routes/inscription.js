@@ -191,7 +191,8 @@ router.post("/mandataires", async (req, res, next) => {
     adresse,
     code_postal,
     ville,
-    tis
+    tis,
+    dispo_max
   } = req.body;
 
   if (pass1 !== pass2 || username.trim() === "") {
@@ -210,56 +211,101 @@ router.post("/mandataires", async (req, res, next) => {
     });
   }
 
-  return knex
-    .transaction(trx =>
+  return await knex
+    .transaction(async function(trx) {
       // create user
-      queries
-        .createUser(
+      const userId = await queries.createUser(
+        {
+          username,
+          type,
+          nom,
+          prenom,
+          email,
+          password: bcrypt.hashSync(pass1, salt),
+          active: false
+        },
+        trx
+      );
+      if (type === "service") {
+        const serviceId = await queries.createService(
           {
-            username,
-            type,
+            etablissement,
             nom,
             prenom,
             email,
-            password: bcrypt.hashSync(pass1, salt),
-            active: false
+            telephone,
+            adresse,
+            code_postal,
+            ville,
+            dispo_max
           },
           trx
-        )
-        .then(([user_id]) => {
-          // create mandataire
-          return queries
-            .createMandataire(
+        );
+
+        await queries.createMandataire(
+          {
+            user_id: userId[0],
+            service_id: serviceId[0],
+            etablissement,
+            telephone,
+            telephone_portable,
+            adresse,
+            code_postal,
+            ville,
+            dispo_max
+          },
+          trx
+        );
+
+        await Promise.all(
+          req.body.antennes.map(antenne => {
+            return queries.createMandataire(
               {
-                user_id,
-                etablissement,
-                telephone,
-                telephone_portable,
-                adresse,
-                code_postal,
-                ville
+                user_id: userId[0],
+                service_id: serviceId[0],
+                etablissement: antenne.etablissement,
+                contact_nom: antenne.nom,
+                contact_prenom: antenne.prenom,
+                contact_email: antenne.email,
+                telephone: antenne.telephone,
+                adresse: antenne.adresse,
+                code_postal: antenne.code_postal,
+                ville: antenne.ville,
+                dispo_max: antenne.dispo_max
               },
               trx
-            )
-            .then(() => {
-              // create tis
-              if (!tis || tis.length === 0) {
-                return true;
-              }
-              return Promise.all(
-                tis.map(ti_id =>
-                  queries.createUserTi(
-                    {
-                      user_id,
-                      ti_id
-                    },
-                    trx
-                  )
-                )
-              );
-            });
-        })
-    )
+            );
+          })
+        );
+      } else {
+        await queries.createMandataire(
+          {
+            user_id: userId[0],
+            etablissement,
+            telephone,
+            telephone_portable,
+            adresse,
+            code_postal,
+            ville
+          },
+          trx
+        );
+      }
+      if (!tis || tis.length === 0) {
+        return true;
+      }
+      await Promise.all(
+        tis.map(ti_id =>
+          queries.createUserTi(
+            {
+              user_id: userId[0],
+              ti_id
+            },
+            trx
+          )
+        )
+      );
+    })
     .then(() => {
       return inscriptionEmail(nom, prenom, email);
     })
@@ -270,7 +316,6 @@ router.post("/mandataires", async (req, res, next) => {
       next(e);
     });
 });
-
 /**
  * @swagger
  * /inscription/tis:
