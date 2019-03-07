@@ -231,7 +231,6 @@ describe("Inscription", () => {
         .click();
 
       const data = {
-        root_email: "username-ti",
         root_pass1: "password100",
         root_pass2: "password100",
         root_email: "email1@email.com"
@@ -260,7 +259,7 @@ describe("Inscription", () => {
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
     });
     it("account should not login before activation", function() {
-      cy.loginByForm("username-ti", "password100");
+      cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 1);
     });
     it("admin should be able to activate account", function() {
@@ -269,14 +268,11 @@ describe("Inscription", () => {
       cy.get("[data-cy='UserCellAction']").should("have.length", 1);
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
-      cy.get(".rt-tr ")
-        .contains("email-ti@email.com")
-        .parent(".rt-tr")
-        .within(row => {
-          cy.get(".rt-td [data-cy='UserCellAction']")
-            .last()
-            .click();
-        });
+
+      cy.get("[data-cy='UserCellAction']")
+        .first()
+        .click();
+
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='Actifs']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
@@ -284,7 +280,7 @@ describe("Inscription", () => {
       cy.get("[data-cy='UserCellAction']").should("have.length", 1);
     });
     it("account should login after activation", function() {
-      cy.loginByForm("username-ti", "password100");
+      cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 0);
       cy.location("pathname").should("eq", "/tis/");
     });
