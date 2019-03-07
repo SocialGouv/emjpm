@@ -21,7 +21,7 @@ const getColorFromDisponibilite = dispo => {
   return "#43b04a";
 };
 
-export const PillDispo = ({ dispo, dispo_max }) => (
+export const PillDispo = ({ dispo, attente, dispo_max }) => (
   <div
     style={{
       margin: "0 auto",
@@ -30,16 +30,15 @@ export const PillDispo = ({ dispo, dispo_max }) => (
       borderRadius: "5px",
       textAlign: "center",
       color: "white",
-      background: getColorFromDisponibilite(dispo / dispo_max)
+      background: getColorFromDisponibilite((dispo + attente) / dispo_max)
     }}
   >
     {dispo} / {dispo_max}
   </div>
 );
 
-const CellMandataireRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show, openFicheMandataireModal }, dispatch)
+const CellMandataireRedux = connect(null, dispatch =>
+  bindActionCreators({ show, openFicheMandataireModal }, dispatch)
 )(({ row, show, children, openFicheMandataireModal }) => (
   <div
     title="Ouvrir la fiche du mandataire"
@@ -54,9 +53,8 @@ const CellMandataireRedux = connect(
   </div>
 ));
 
-const CellMesureReservationRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
+const CellMesureReservationRedux = connect(null, dispatch =>
+  bindActionCreators({ show }, dispatch)
 )(({ row, show, children }) => (
   <div
     title="Attribuer une nouvelle mesure"
@@ -141,7 +139,9 @@ const COLUMNS = [
       <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
         <Circle
           style={{
-            backgroundColor: getColorFromDisponibilite(row.row.mesures_en_cours / row.row.dispo_max)
+            backgroundColor: getColorFromDisponibilite(
+              (row.row.mesures_en_cours + row.row.mesures_en_attente) / row.row.dispo_max
+            )
           }}
         >
           {row.row.identity.toUpperCase().substr(0, 1)}
@@ -177,7 +177,9 @@ const COLUMNS = [
       <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
         <Circle
           style={{
-            backgroundColor: getColorFromDisponibilite(row.row.mesures_en_cours / row.row.dispo_max)
+            backgroundColor: getColorFromDisponibilite(
+              (row.row.mesures_en_cours + row.row.mesures_en_attente) / row.row.dispo_max
+            )
           }}
         >
           {row.row.dispo}
@@ -196,7 +198,11 @@ const COLUMNS = [
         row={row}
         style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
       >
-        <PillDispo dispo={row.row.mesures_en_cours} dispo_max={row.row.dispo_max} />
+        <PillDispo
+          dispo={row.row.mesures_en_cours}
+          attente={row.row.mesures_en_attente}
+          dispo_max={row.row.dispo_max}
+        />
       </CellMandataireRedux>
     ),
     style: { textAlign: "center", alignSelf: "center" }
@@ -285,8 +291,8 @@ class TableTi extends React.Component {
         filterable={false}
         defaultSorted={[
           {
-            id: "en_cours",
-            desc: false
+            id: "dispo",
+            desc: true
           }
         ]}
         loadingText="Chargement des mandataires..."
@@ -309,7 +315,4 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(TableTi);
+export default connect(null, mapDispatchToProps)(TableTi);
