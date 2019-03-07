@@ -51,6 +51,9 @@ jobs:
         - export PATH="$HOME/.yarn/bin:$PATH"
         # Start the database first so it has the time to boot before we interact with it.
         - docker-compose up -d db
+      install:
+        - yarn
+        - yarn lerna exec --scope @emjpm/knex yarn
       before_script:
         - NODE_ENV=test yarn lerna run --scope @emjpm/knex --stream migrate
         - NODE_ENV=test yarn lerna run --scope @emjpm/knex --stream seeds
