@@ -8,7 +8,13 @@ process.on("unhandledRejection", r => console.log(r));
 module.exports = withTM(
   withCSS(
     withImages({
-      transpileModules: ["color", "strict-uri-encode", "decode-uri-component", "query-string"],
+      transpileModules: [
+        "color",
+        "strict-uri-encode",
+        "decode-uri-component",
+        "query-string",
+        "fuse.js"
+      ],
       webpack: config => {
         config.plugins.push(new webpack.EnvironmentPlugin(process.env));
         return config;
