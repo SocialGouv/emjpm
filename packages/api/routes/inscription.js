@@ -271,6 +271,135 @@ router.post("/mandataires", async (req, res, next) => {
     });
 });
 
+router.post("/services", async (req, res, next) => {
+  const {
+    username,
+    etablissement,
+    pass1,
+    pass2,
+    type, // TODO
+    nom,
+    prenom,
+    telephone,
+    telephone_portable,
+    email,
+    adresse,
+    code_postal,
+    ville,
+    tis
+  } = req.body;
+
+  if (pass1 !== pass2 || username.trim() === "") {
+    return res.status(500).json({
+      success: false,
+      message: "Les mots de passe ne sont pas conformes"
+    });
+  }
+
+  const userExists = (await getCountByEmail(email)).count > 0;
+
+  if (userExists) {
+    return res.status(409).json({
+      success: false,
+      message: "Un compte avec cet email existe déjà"
+    });
+  }
+
+  knex.transaction(trx =>
+    // create user
+    queries
+      .createUser(
+        {
+          username,
+          type,
+          nom,
+          prenom,
+          email,
+          password: bcrypt.hashSync(pass1, salt),
+          active: false
+        },
+        trx
+      )
+      .then(([user_id]) => {
+        // create mandataire
+        return queries
+          .createMandataire(
+            {
+              user_id,
+              etablissement,
+              telephone,
+              telephone_portable,
+              adresse,
+              code_postal,
+              ville
+            },
+            trx
+          )
+          .then(([mandataire_id]) => {
+            // create tis
+            if (!tis || tis.length === 0) {
+              return true;
+            }
+            return Promise.all(
+              tis.map(ti_id =>
+                queries.createServiceTi(
+                  {
+                    mandataire_id,
+                    ti_id
+                  },
+                  trx
+                )
+              )
+            );
+          })
+          .then(() => {
+            return queries.createService(
+              {
+                etablissement,
+                nom,
+                prenom,
+                email,
+                telephone,
+                adresse,
+                code_postal,
+                ville
+              },
+              trx
+            );
+          })
+          .then(([service_id]) => {
+            return Promise.all(
+              req.body.antennes.map(antenne => {
+                console.log("service_id", service_id);
+                console.log("antenne.etablissement", antenne.etablissement);
+                console.log("req", antenne);
+
+                return queries.createMandataire(
+                  {
+                    user_id,
+                    service_id,
+                    etablissement: antenne.etablissement,
+                    nom: antenne.nom,
+                    prenom: antenne.prenom,
+                    email: antenne.email,
+                    telephone: antenne.telephone,
+                    adresse: antenne.adresse,
+                    code_postal: antenne.code_postal,
+                    ville: antenne.ville
+                  },
+                  trx
+                );
+              })
+            );
+          });
+      })
+      .then(() => inscriptionEmail(`${process.env.APP_URL}`))
+      .then(() => res.json({ success: true }))
+      .catch(e => {
+        next(e);
+      })
+  );
+});
 /**
  * @swagger
  * /inscription/tis:
