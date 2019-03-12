@@ -6,6 +6,7 @@ const router = express.Router();
 const { typeRequired } = require("../auth/_helpers");
 const whitelist = require("../db/queries/whitelist");
 const { getAllMesuresByTis } = require("../db/queries/mesures");
+const { getMandataireById } = require("../db/queries/mandataires");
 
 const ALLOWED_FILTERS = [
   "code_postal",
@@ -202,7 +203,19 @@ router.post(
         return;
       }
 
-      const mandataire = await getMandataireByUserId(req.user.id);
+      console.log("req.user", req.user);
+
+      if (req.user.type === "service") {
+        console.log("1");
+        const mandataire = await getMandataireById(req.params.mandataireId);
+        return mandataire;
+      } else {
+        console.log("2");
+        const mandataire = await getMandataireByUserId(req.user.id);
+        return mandataire;
+      }
+      console.log("mandataire", mandataire);
+
       const body = {
         ...req.body,
         mandataire_id: mandataire ? mandataire.id : req.body.mandataire_id
