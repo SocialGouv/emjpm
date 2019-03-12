@@ -127,13 +127,13 @@ const { reservationEmail } = require("../email/reservation-email");
  */
 router.put(
   "/:mandataireId/mesures/:mesureId",
-  typeRequired("individuel", "prepose", "ti"),
+  typeRequired("individuel", "prepose", "ti","service"),
   async (req, res, next) => {
     try {
       if (Object.keys(req.body).length === 0) {
         return res.status(200).json();
       }
-      if (req.user.type === "individuel" || req.user.type === "prepose") {
+      if (req.user.type === "individuel" || req.user.type === "prepose" || req.user.type === "service") {
         const mandataire = await getMandataireByUserId(req.user.id);
         await updateMesure(
           {
@@ -189,7 +189,7 @@ router.put(
  */
 router.post(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose", "service", "ti"),
+  typeRequired("individuel", "prepose", "service", "ti","service"),
   async (req, res, next) => {
     try {
       if (Object.keys(req.body).length === 0) {
@@ -206,7 +206,7 @@ router.post(
       if (!body.mandataire_id) {
         throw createError.UnprocessableEntity("Mandataire not found");
       }
-      if (req.user.type === "individuel" || req.user.type === "prepose") {
+      if (req.user.type === "individuel" || req.user.type === "prepose" || req.user.type === "service") {
         await addMesure(body);
         await updateCountMesures(body.mandataire_id);
         const mesures = await getMesuresEnCoursMandataire(body.mandataire_id);
