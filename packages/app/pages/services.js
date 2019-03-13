@@ -6,5 +6,4 @@ const ServicePage = () => (
     <Services style={{ marginTop: 100 }} />
   </Layout>
 );
-
 export default ServicePage;

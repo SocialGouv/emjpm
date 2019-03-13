@@ -139,7 +139,10 @@ router.put(
         req.user.type === "prepose" ||
         req.user.type === "service"
       ) {
-        const mandataire = await getMandataireByUserId(req.user.id);
+        const mandataire = await (req.user.type === "service"
+          ? getMandataireById(req.params.mandataireId)
+          : getMandataireByUserId(req.user.id));
+
         await updateMesure(
           {
             id: req.params.mesureId,
@@ -203,18 +206,9 @@ router.post(
         return;
       }
 
-      console.log("req.user", req.user);
-
-      if (req.user.type === "service") {
-        console.log("1");
-        const mandataire = await getMandataireById(req.params.mandataireId);
-        return mandataire;
-      } else {
-        console.log("2");
-        const mandataire = await getMandataireByUserId(req.user.id);
-        return mandataire;
-      }
-      console.log("mandataire", mandataire);
+      const mandataire = await (req.user.type === "service"
+        ? getMandataireById(req.params.mandataireId)
+        : getMandataireByUserId(req.user.id));
 
       const body = {
         ...req.body,
@@ -323,7 +317,9 @@ router.get(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      const mandataire = await getMandataireByUserId(req.user.id);
+      const mandataire = await (req.user.type === "service"
+        ? getMandataireById(req.params.mandataireId)
+        : getMandataireByUserId(req.user.id));
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
@@ -359,7 +355,10 @@ router.get(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      const mandataire = await getMandataireByUserId(req.user.id);
+      const mandataire = await (req.user.type === "service"
+        ? getMandataireById(req.params.mandataireId)
+        : getMandataireByUserId(req.user.id));
+
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
@@ -394,7 +393,10 @@ router.get(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      const mandataire = await getMandataireByUserId(req.user.id);
+      const mandataire = await (req.user.type === "service"
+        ? getMandataireById(req.params.mandataireId)
+        : getMandataireByUserId(req.user.id));
+
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
@@ -429,7 +431,10 @@ router.get(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      const mandataire = await getMandataireByUserId(req.user.id);
+      const mandataire = await (req.user.type === "service"
+        ? getMandataireById(req.params.mandataireId)
+        : getMandataireByUserId(req.user.id));
+
       const mesures = await getAllMesuresEteinte(mandataire.id);
       res.status(200).json(mesures);
     } catch (err) {

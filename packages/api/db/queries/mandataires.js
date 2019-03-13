@@ -60,6 +60,30 @@ const getMandataire = filters =>
     .where(filters)
     .first();
 
+const getAllmandataireByUserId = user_id =>
+  knex("mandataires")
+    .select(
+      "mandataires.*",
+      "users.type",
+      "users.nom",
+      "users.prenom",
+      "users.email",
+      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
+      knex.raw(
+        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
+      )
+    )
+    .leftOuterJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mandataires.code_postal"
+    )
+    .innerJoin("users", "mandataires.user_id", "users.id")
+    .where({
+      "mandataires.user_id": parseInt(user_id),
+      "users.active": true
+    });
+
 const getMandataireById = id =>
   getMandataire({ "mandataires.id": id, "users.active": true });
 
@@ -228,5 +252,6 @@ module.exports = {
   getAllMandataires,
   getAllByMandatairesFilter,
   update,
-  getCoordonneesByPostCode
+  getCoordonneesByPostCode,
+  getAllmandataireByUserId
 };

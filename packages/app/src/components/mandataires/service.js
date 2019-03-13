@@ -1,20 +1,52 @@
 import dynamic from "next/dynamic";
-import { Home, Map, UserMinus, Clock, FilePlus } from "react-feather";
 
 import apiFetch from "../communComponents/Api";
 import { DummyTabs } from "../index";
+import { Button, DummyTabs, Layout } from "..";
+
 import Profile from "./Profile";
 import Header from "./Header";
 import TableMesures from "./TableMesures";
 import PillDispo from "./PillDispo";
 import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
+import { connect } from "react-redux";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 
 class ServiceTabs extends React.Component {
   render() {
-    // define the content of the tabs
+    const tabsrigth = this.props.antennesMandas.map(antenne => ({
+      text: antenne.etablissement,
+      url: "/admin/users",
+      icon: <User />,
+      content: (
+        <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
+          <ServiceTabsTry mandataireID={antenne.id} />
+        </div>
+      )
+    }));
+
+    return (
+      <Layout logout>
+        <DummyTabs tabs={tabsrigth} />
+      </Layout>
+    );
+  }
+}
+
+class ServiceTabsTry extends React.Component {
+  state = {
+    mandataireId: null
+  };
+
+  onChange = ({ formData }) => {
+    this.setState({
+      mandataireId: formData
+    });
+  };
+
+  render() {
     const tabs = [
       {
         text: "Mesures en cours",
@@ -24,7 +56,7 @@ class ServiceTabs extends React.Component {
           <React.Fragment>
             <CreateMesure />
             <TableMesures
-              fetch={() => apiFetch(`/mandataires/1/mesures`)}
+              fetch={() => apiFetch(`/mandataires/${this.props.mandataireID}/mesures`)}
               hideColumns={[
                 "reactiver",
                 "extinction",
@@ -43,7 +75,11 @@ class ServiceTabs extends React.Component {
         text: "Vue Carte",
         url: "/mandataires/vue-carte",
         icon: <Map />,
-        content: <OpenStreeMap getPromise={() => apiFetch(`/mandataires/1/mesuresForMaps`)} />
+        content: (
+          <OpenStreeMap
+            getPromise={() => apiFetch(`/mandataires/${this.props.mandataireID}/mesuresForMaps`)}
+          />
+        )
       },
       {
         text: "Mesures éteintes",
@@ -51,7 +87,7 @@ class ServiceTabs extends React.Component {
         icon: <UserMinus />,
         content: (
           <TableMesures
-            fetch={() => apiFetch(`/mandataires/1/mesures/Eteinte`)}
+            fetch={() => apiFetch(`/mandataires/${this.props.mandataireID}/mesures/Eteinte`)}
             hideColumns={[
               "modifier",
               "fin-mandat",
@@ -71,7 +107,7 @@ class ServiceTabs extends React.Component {
         icon: <Clock />,
         content: (
           <TableMesures
-            fetch={() => apiFetch(`/mandataires/1/mesures/attente`)}
+            fetch={() => apiFetch(`/mandataires/${this.props.mandataireID}/mesures/attente`)}
             hideColumns={[
               "date_ouverture",
               "modifier",
@@ -107,4 +143,9 @@ class ServiceTabs extends React.Component {
   }
 }
 
-export default ServiceTabs;
+export default connect(
+  state => ({
+    antennesMandas: state.mandataire.antennes
+  }),
+  null
+)(ServiceTabs);

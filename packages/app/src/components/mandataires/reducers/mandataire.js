@@ -10,7 +10,8 @@ const MANDATAIRE_INITIAL_STATE = {
   // store etablissement for autompletes and getDisplayValue
   finess: [],
   // store tis for autompletes and getDisplayValue
-  tis: []
+  tis: [],
+  antennes: []
 };
 
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
@@ -40,6 +41,12 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       return {
         ...state,
         tis: action.data
+      };
+
+    case "ANTENNES_UPDATED":
+      return {
+        ...state,
+        antennes: action.data
       };
     case "MESURE_REACTIVATED":
     case "MESURE_CREATED":

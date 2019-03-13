@@ -15,7 +15,8 @@ const {
   getAllServicesByTis,
   getAllMandataires,
   getAllByMandatairesFilter,
-  getCoordonneesByPostCode
+  getCoordonneesByPostCode,
+  getAllmandataireByUserId
 } = require("../db/queries/mandataires");
 
 const { updateUser } = require("../db/queries/users");
@@ -313,6 +314,12 @@ router.post("/filters", typeRequired("ti"), async (req, res, next) => {
 router.get("/", typeRequired("ti"), async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
   getAllMandataires(ti.id)
+    .then(mandataires => res.status(200).json(mandataires))
+    .catch(error => next(error));
+});
+
+router.get("/antennes", typeRequired("service"), async (req, res, next) => {
+  getAllmandataireByUserId(req.user.id)
     .then(mandataires => res.status(200).json(mandataires))
     .catch(error => next(error));
 });
