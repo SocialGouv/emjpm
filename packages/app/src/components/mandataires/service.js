@@ -1,12 +1,11 @@
-import Profile from "./Profile";
-import Header from "./Header";
-import { DummyTabs } from "../index";
-import TableMesures from "./TableMesures";
-import apiFetch from "../communComponents/Api";
-
 import dynamic from "next/dynamic";
 import { Home, Map, UserMinus, Clock, FilePlus } from "react-feather";
 
+import apiFetch from "../communComponents/Api";
+import { DummyTabs } from "../index";
+import Profile from "./Profile";
+import Header from "./Header";
+import TableMesures from "./TableMesures";
 import PillDispo from "./PillDispo";
 import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
@@ -81,9 +80,7 @@ class ServiceTabs extends React.Component {
               "extinction",
               "residence",
               "status",
-              "professionnel",
-              "valider"
-            ]}
+              "professionnel"]}
           />
         )
       },
