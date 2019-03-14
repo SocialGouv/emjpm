@@ -16,26 +16,24 @@ const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 
 class ServiceTabs extends React.Component {
   render() {
-    const tabsrigth = this.props.antennesMandas.map(antenne => ({
+    const tabsService = this.props.antennesMandas.map(antenne => ({
       text: antenne.etablissement,
       url: "/admin/users",
       icon: <User />,
       content: (
         <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
-          <ServiceTabsTry mandataireID={antenne.id} />
+          <ServiceTabsAntennes mandataireID={antenne.id} />
         </div>
       )
     }));
 
     return (
-      <Layout logout>
-        <DummyTabs tabs={tabsrigth} />
-      </Layout>
+        <DummyTabs tabs={tabsService} />
     );
   }
 }
 
-class ServiceTabsTry extends React.Component {
+class ServiceTabsAntennes extends React.Component {
   state = {
     mandataireId: null
   };
