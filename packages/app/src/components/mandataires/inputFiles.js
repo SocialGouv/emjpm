@@ -124,7 +124,7 @@ const _ExcelRequirements = ({ className }) => (
       </tr>
       <tr>
         <td>annee</td>
-        <td>Date de naissance au format DD/MM/YYYY =&gt; 22/08/1980</td>
+        <td>Date de naissance au format YYYY =&gt; 1980</td>
       </tr>
       <tr>
         <td>numero_dossier</td>

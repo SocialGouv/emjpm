@@ -15,7 +15,7 @@ const ForgotPasswordContainer = ({ style }) => (
 const ForgotPassword = () => (
   <Layout>
     <Head>
-      <title>Mot de passe oublié</title>
+      <title>Nouveau mot de passe</title>
     </Head>
 
     <PageTracker url="/forgot-password" />

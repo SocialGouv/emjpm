@@ -24,6 +24,8 @@ afterAll(async () => {
 
 const defaultRegister = {
   username: "toto",
+  nom: "testAd",
+  prenom: "testPrenom",
   etablissement: "",
   email: "toto@toto.com",
   type: "individuel",
