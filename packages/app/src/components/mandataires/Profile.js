@@ -78,7 +78,7 @@ const ButtonEditMandataire = connect(
   </>
 ));
 
-const ChangePassword = email => {
+const changePassword = email => {
   doForgotPassword(email)
     .then(() => {
       alert("Un email vient de vous être envoyé");
@@ -95,7 +95,7 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
       <br />
       <br />
       <ButtonEditMandataire formData={currentMandataire} />
-      <a href="#" onClick={() => ChangePassword({ email: currentMandataire.email })}>
+      <a href="#" onClick={() => changePassword({ email: currentMandataire.email })}>
         {" "}
         Modifier mon mot de passe{" "}
       </a>

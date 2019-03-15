@@ -135,23 +135,27 @@ router.get("/checkToken", authHelpers.loginRequired, (req, res, next) => {
 });
 
 router.post("/checkUser", async (req, res, next) => {
-  const user = await getSpecificUser({ username: req.body.username });
+  try {
+    const user = await getSpecificUser({ username: req.body.username });
 
-  if (user && user.active === false) {
-    return res.status(200).json({
-      sucess: true,
-      message:
-        "Votre compte n'est pas encore actif, il sera validé très bientôt par l'équipe e-mjpm."
-    });
-  } else if (!!user === true) {
-    return res.status(200).json({
-      sucess: true,
-      message: "votre adresse email ou votre mot de passe sont invalides."
-    });
-  } else {
-    return res
-      .status(200)
-      .json({ sucess: true, message: "Impossible de se connecter" });
+    if (user && user.active === false) {
+      return res.status(200).json({
+        sucess: true,
+        message:
+          "Votre compte n'est pas encore actif, il sera validé très bientôt par l'équipe e-mjpm."
+      });
+    } else if (user) {
+      return res.status(200).json({
+        sucess: true,
+        message: "votre adresse email ou votre mot de passe sont invalides."
+      });
+    } else {
+      return res
+        .status(200)
+        .json({ sucess: true, message: "Impossible de se connecter" });
+    }
+  } catch (err) {
+    next(err);
   }
 });
 
