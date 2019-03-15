@@ -1,4 +1,4 @@
-export const MANDATAIRE_INITIAL_STATE = {
+export const TI_INITIAL_STATE = {
   data: [],
   dataFilters: [],
   datamesure: [],
