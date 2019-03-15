@@ -12,7 +12,8 @@ const schema = {
     "email",
     "adresse",
     "code_postal",
-    "ville"
+    "ville",
+    "dispo_max"
   ],
   properties: {
     email: { type: "string",format: "email",  default: "" },

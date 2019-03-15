@@ -103,9 +103,13 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
             })
           )
           .then(() => {
+            const signOptions = {
+              expiresIn: "31d"
+            };
             const token = jwt.sign(
               JSON.parse(JSON.stringify(user)),
-              process.env.JWT_KEY || "emjpm-jwtkey"
+              process.env.JWT_KEY || "emjpm-jwtkey",
+              signOptions
             );
             return res.status(200).json({
               success: true,
@@ -124,6 +128,35 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
       });
     }
   })(req, res, next);
+});
+
+router.get("/checkToken", authHelpers.loginRequired, (req, res, next) => {
+  return res.sendStatus(200);
+});
+
+router.post("/checkUser", async (req, res, next) => {
+  try {
+    const user = await getSpecificUser({ username: req.body.username });
+
+    if (user && user.active === false) {
+      return res.status(200).json({
+        sucess: true,
+        message:
+          "Votre compte n'est pas encore actif, il sera validé très bientôt par l'équipe e-mjpm."
+      });
+    } else if (user) {
+      return res.status(200).json({
+        sucess: true,
+        message: "votre adresse email ou votre mot de passe sont invalides."
+      });
+    } else {
+      return res
+        .status(200)
+        .json({ sucess: true, message: "Impossible de se connecter" });
+    }
+  } catch (err) {
+    next(err);
+  }
 });
 
 /**
