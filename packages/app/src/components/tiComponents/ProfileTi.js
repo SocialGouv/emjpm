@@ -17,7 +17,6 @@ import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";
 const ChangePassword = email => {
   doForgotPassword(email)
     .then(() => {
-      console.log("eaeazea");
       alert("Un email vient de vous être envoyé");
       Router.push("/tis");
     })
