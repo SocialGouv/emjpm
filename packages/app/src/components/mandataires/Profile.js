@@ -1,9 +1,11 @@
 import * as React from "react";
+import Router from "next/router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MinusSquare } from "react-feather";
 import { show } from "redux-modal";
 
+import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";
 import { Button, Autocomplete, SelectionManager } from "..";
 import apiFetch from "../communComponents/Api";
 
@@ -46,13 +48,7 @@ const Selector = ({
         {selected.map(({ id, nom }, i) => (
           <tr key={id} style={{ background: i % 2 ? "#fff" : "rgba(0, 0, 0, 0.03)" }}>
             <td style={{ padding: 5 }}>▪ {nom}</td>
-            <td style={{ width: 20, textAlign: "center" }}>
-              <MinusSquare
-                title="Supprimer"
-                style={{ cursor: "pointer", width: 22, height: 22 }}
-                onClick={() => onRemove({ id, nom })}
-              />
-            </td>
+            <td style={{ width: 20, textAlign: "center" }} />
           </tr>
         ))}
       </tbody>
@@ -82,6 +78,15 @@ const ButtonEditMandataire = connect(
   </>
 ));
 
+const changePassword = email => {
+  doForgotPassword(email)
+    .then(() => {
+      alert("Un email vient de vous être envoyé");
+      Router.push("/mandataires");
+    })
+    .catch(e => console.log(e));
+};
+
 const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] }) => (
   <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
     <div style={{ flex: "0 0 50%" }}>
@@ -90,6 +95,10 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
       <br />
       <br />
       <ButtonEditMandataire formData={currentMandataire} />
+      <a href="#" onClick={() => changePassword({ email: currentMandataire.email })}>
+        {" "}
+        Modifier mon mot de passe{" "}
+      </a>
     </div>
     <div style={{ flex: "0 0 50%" }}>
       {(currentMandataire.type === "prepose" && (
@@ -100,11 +109,6 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
               body: JSON.stringify({
                 etablissement_id
               })
-            })
-          }
-          onRemove={id =>
-            apiFetch(`/mandataires/1/etablissements/${id}`, {
-              method: "DELETE"
             })
           }
           getSelection={() => apiFetch("/mandataires/1/etablissement")}
@@ -124,7 +128,6 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
               }
               selected={selection}
               onAdd={onAdd}
-              onRemove={onRemove}
             />
           )}
         />

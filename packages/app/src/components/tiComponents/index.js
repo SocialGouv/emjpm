@@ -2,7 +2,7 @@
 import dynamic from "next/dynamic";
 import React from "react";
 import Router from "next/router";
-import { Users, Archive } from "react-feather";
+import { Users, Archive, Home } from "react-feather";
 
 //redux
 import { createStore, combineReducers, applyMiddleware, bindActionCreators } from "redux";
@@ -13,18 +13,22 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import { DummyTabs, LoadingMessage } from "..";
 import { tiMount } from "./actions/mandataire";
+import { profileTi } from "./actions/user";
 import mandataireReducer from "./reducers/mandataire";
 import mesuresReducer from "./reducers/mesures";
 import mapReducer from "./reducers/map";
+import userReducer from "./reducers/user";
 import {
   FicheMandataireModal,
   ModalMesureValidation,
   ModalMesureReservation,
-  EditMesure
+  EditMesure,
+  EditUser
 } from "./modals";
 import TableMesures from "../mandataires/TableMesures";
 //import TableMesures from "./TableMesures";
 import apiFetch from "../communComponents/Api";
+import Profile from "./ProfileTi";
 
 const MapTable = dynamic(() => import("./MapTi"), { ssr: false });
 
@@ -32,6 +36,9 @@ class Ti extends React.Component {
   componentDidMount() {
     if (this.props.onMount) {
       this.props.onMount();
+    }
+    if (this.props.profileTi) {
+      this.props.profileTi();
     }
   }
 
@@ -72,6 +79,12 @@ class Ti extends React.Component {
             ]}
           />
         )
+      },
+      {
+        text: "Mes informations",
+        url: "/mandataires/mes-informations",
+        icon: <Home />,
+        content: <Profile />
       }
     ];
     return (
@@ -81,6 +94,7 @@ class Ti extends React.Component {
         <ModalMesureValidation />
         <ModalMesureReservation />
         <EditMesure />
+        <EditUser />
       </div>
     );
   }
@@ -90,19 +104,18 @@ const rootReducer = combineReducers({
   mandataire: mandataireReducer,
   modal,
   mesures: mesuresReducer,
-  map: mapReducer
+  map: mapReducer,
+  user: userReducer
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-const mapDispatchToProps = dispatch => bindActionCreators({ onMount: tiMount }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ onMount: tiMount, profileTi: profileTi }, dispatch);
 
 // connect to redux store actions
 // connect to redux-modal
-const TiRedux = connect(
-  null,
-  mapDispatchToProps
-)(Ti);
+const TiRedux = connect(null, mapDispatchToProps)(Ti);
 
 const Tis = () => (
   <Provider store={store}>

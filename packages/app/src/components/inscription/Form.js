@@ -68,6 +68,7 @@ class Form extends React.Component {
         tis: this.state.tis,
         type: this.state.typeMandataire,
         username: usernameData,
+        mesures_en_cours: formData.mesures_en_cours || 0,
         cabinet: formData.cabinet || null
       })
     })
@@ -91,9 +92,12 @@ class Form extends React.Component {
     const isValidCodePostal =
       formData.code_postal &&
       formData.code_postal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/);
+    const isValidTelephone = formData.telephone && formData.telephone.match(/^\d{10}$/);
 
     if (hasNoTi) {
       return alert("Saisissez au moins un TI de référence");
+    } else if (!isTi && !isValidTelephone) {
+      return alert("Saisissez un numéro de téléphone valide");
     } else if (!isTi && !isValidCodePostal) {
       return alert("Code postal non valide");
     } else if (isTi && hasMultipleTi) {
