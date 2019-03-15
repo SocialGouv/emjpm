@@ -80,7 +80,8 @@ class ServiceTabs extends React.Component {
               "extinction",
               "residence",
               "status",
-              "professionnel"]}
+              "professionnel"
+            ]}
           />
         )
       },
