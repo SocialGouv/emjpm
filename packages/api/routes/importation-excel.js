@@ -14,7 +14,7 @@ const {
 
 router.post(
   "/mesures/bulk",
-  typeRequired("individuel", "prepose"),
+  typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
