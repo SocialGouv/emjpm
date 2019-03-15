@@ -253,6 +253,7 @@ const CreateMesure = ({
   mesureCreatedStatus,
   mesureCreatedMessage,
   children,
+  mandataireId,
   ...props
 }) => {
   return (
@@ -284,7 +285,7 @@ const CreateMesure = ({
                   FieldTemplate={CustomFieldTemplate}
                   uiSchema={uiSchema}
                   formData={formData}
-                  onSubmit={onSubmit}
+                  onSubmit={mandataireId => onSubmit(mandataireId)}
                   widgets={widgets}
                 >
                   {mesureCreatedStatus === "error" && (
@@ -338,12 +339,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { createMesure, onSubmit: ({ formData }) => createMesureSave(formData) },
+    {
+      createMesure,
+      onSubmit: ({ formData, mandataireId }) =>
+        createMesureSave({ formData: formData, mandataireId: mandataireId })
+    },
     dispatch
   );
 
 // connect to redux store actions
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateMesure);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateMesure);

@@ -207,7 +207,7 @@ router.post(
       }
 
       const mandataire = await (req.user.type === "service"
-        ? getMandataireById(req.params.mandataireId)
+        ? getMandataireById(req.body.mandataire_id)
         : getMandataireByUserId(req.user.id));
 
       const body = {

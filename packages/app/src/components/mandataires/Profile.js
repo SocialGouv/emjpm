@@ -133,9 +133,10 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
         />
       )) ||
         null}
+
       <SelectionManager
         onAdd={ti_id =>
-          apiFetch(`/mandataires/1/tis`, {
+          apiFetch(`/mandataires/${this.props.mandataireId}/tis`, {
             method: "POST",
             body: JSON.stringify({
               ti_id
@@ -143,12 +144,12 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
           })
         }
         onRemove={id =>
-          apiFetch(`/mandataires/1/tis/${id}`, {
+          apiFetch(`/mandataires/${this.props.mandataireId}/tis/${id}`, {
             method: "DELETE"
           })
         }
         getSelection={() =>
-          apiFetch("/mandataires/1/tis").then(
+          apiFetch(`/mandataires/${this.props.mandataireId}/tis`).then(
             data =>
               (data &&
                 data.map(ti => ({
@@ -172,10 +173,10 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
           />
         )}
       />
-      {currentMandataire.zip && (
+      {newMandataire.zip && (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-zip">
           <h3>Informations à destination des magistrats </h3>
-          {currentMandataire.zip}
+          {newMandataire.zip}
         </div>
       )}
     </div>
@@ -187,7 +188,7 @@ const mapDispatchToProps = (dispatch, ownProps) =>
 
 const ProfileRedux = connect(
   state => ({
-    currentMandataire: state.mandataire.profile,
+    currentMandataire: state.mandataire.profiles,
     etablissements: state.mandataire.finess,
     tis: state.mandataire.tis
   }),

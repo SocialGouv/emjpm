@@ -8,10 +8,12 @@ export const PROFILE_UPDATED = "PROFILE_UPDATED";
 export const FINESS_UPDATED = "FINESS_UPDATED";
 export const TIS_UPDATED = "TIS_UPDATED";
 export const ANTENNES_UPDATED = "ANTENNES_UPDATED";
+export const MANDATAIRE_PROFILES_UPDATED = "MANDATAIRE_PROFILES_UPDATED";
 
 /* ---------- API */
 
 const fetchProfile = () => apiFetch(`/mandataires/1`);
+const fetchProfiles = () => apiFetch(`/mandataires/all`);
 
 const fetchAntennes = () => apiFetch(`/mandataires/antennes`);
 
@@ -51,6 +53,9 @@ export const mandataireMount = () => dispatch =>
     })
     .then(() => {
       fetchAntennes().then(antennes => dispatch(AntennesUpdated(antennes)));
+    })
+    .then(() => {
+      fetchProfiles().then(json => dispatch(mandataireProfilesUpdated(json)));
     });
 
 export const updateMandataire = data => dispatch => {
@@ -69,6 +74,11 @@ export const updateMandataire = data => dispatch => {
 
 export const mandataireProfileUpdated = data => ({
   type: MANDATAIRE_PROFILE_UPDATED,
+  data
+});
+
+export const mandataireProfilesUpdated = data => ({
+  type: MANDATAIRE_PROFILES_UPDATED,
   data
 });
 

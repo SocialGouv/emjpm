@@ -7,6 +7,8 @@ const MANDATAIRE_INITIAL_STATE = {
   profile: {
     mesures_en_cours: 0
   },
+  profiles: [],
+
   // store etablissement for autompletes and getDisplayValue
   finess: [],
   // store tis for autompletes and getDisplayValue
@@ -31,6 +33,11 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       return {
         ...state,
         profile: action.data
+      };
+    case "MANDATAIRE_PROFILES_UPDATED":
+      return {
+        ...state,
+        profiles: action.data
       };
     case "FINESS_UPDATED":
       return {

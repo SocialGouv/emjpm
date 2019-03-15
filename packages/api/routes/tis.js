@@ -7,10 +7,15 @@ const {
   getAllTisByMandataire,
   addMandataireTis,
   deleteMandataireTis,
-  getTis
+  getTis,
+  getAllTisByMandataireService,
+  addMandataireTisService
 } = require("../db/queries/tis");
 
-const { getMandataireByUserId } = require("../db/queries/mandataires");
+const {
+  getMandataireByUserId,
+  getMandataireById
+} = require("../db/queries/mandataires");
 
 // TODO:  Security for mandataire
 
@@ -76,13 +81,20 @@ router.get(
  *               items:
  *                 type: object
  */
-router.post("/1/tis", loginRequired, async (req, res, next) => {
-  // secu : ensure TI can write on this mandataire + add related test
-  const mandataire = await getMandataireByUserId(req.user.id);
-  addMandataireTis(req.body.ti_id, mandataire.id)
-    .then(() => getAllTisByMandataire(mandataire.id))
-    .then(tis => res.status(200).json(tis))
-    .catch(error => next(error));
+router.post("/:mandataireId/tis", loginRequired, async (req, res, next) => {
+  const mandataire = await (req.user.type === "service"
+    ? getMandataireById(req.params.mandataireId)
+    : getMandataireByUserId(req.user.id));
+
+  req.user.type === "service"
+    ? addMandataireTisService(req.body.ti_id, mandataire.id)
+        .then(() => getAllTisByMandataire(mandataire.id))
+        .then(tis => res.status(200).json(tis))
+        .catch(error => next(error))
+    : addMandataireTis(req.body.ti_id, mandataire.id)
+        .then(() => getAllTisByMandataire(mandataire.id))
+        .then(tis => res.status(200).json(tis))
+        .catch(error => next(error));
 });
 
 // TODO: ensure we can delete this
@@ -140,11 +152,18 @@ router.delete("/1/tis/:tiId", loginRequired, async (req, res, next) => {
  *               items:
  *                 type: object
  */
-router.get("/1/tis", loginRequired, async (req, res, next) => {
-  const mandataire = await getMandataireByUserId(req.user.id);
-  getAllTisByMandataire(mandataire.id)
-    .then(tis => res.status(200).json(tis))
-    .catch(error => next(error));
+router.get("/:mandataireId/tis", loginRequired, async (req, res, next) => {
+  const mandataire = await (req.user.type === "service"
+    ? getMandataireById(req.params.mandataireId)
+    : getMandataireByUserId(req.user.id));
+
+  req.user.type === "service"
+    ? getAllTisByMandataireService(mandataire.id)
+        .then(tis => res.status(200).json(tis))
+        .catch(error => next(error))
+    : getAllTisByMandataire(mandataire.id)
+        .then(tis => res.status(200).json(tis))
+        .catch(error => next(error));
 });
 
 /** @swagger

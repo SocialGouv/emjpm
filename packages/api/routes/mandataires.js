@@ -114,6 +114,26 @@ router.get(
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
+
+      if (!mandataire) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
+      res.status(200).json(mandataire);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.get(
+  "/all",
+  typeRequired("individuel", "prepose", "service"),
+  async (req, res, next) => {
+    try {
+      const mandataire = await (req.user.type === "service"
+        ? getAllmandataireByUserId(req.user.id)
+        : getMandataireByUserId(req.user.id));
+
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
@@ -318,10 +338,15 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
     .catch(error => next(error));
 });
 
-router.get("/antennes", typeRequired("service","prepose","individuel"),  async (req, res, next) => {
-  getAllmandataireByUserId(req.user.id)
-    .catch(error => next(error));
-});
+router.get(
+  "/antennes",
+  typeRequired("service", "prepose", "individuel"),
+  async (req, res, next) => {
+    getAllmandataireByUserId(req.user.id)
+      .then(mandataires => res.status(200).json(mandataires))
+      .catch(error => next(error));
+  }
+);
 
 /** @swagger
  * /mandataires/services:

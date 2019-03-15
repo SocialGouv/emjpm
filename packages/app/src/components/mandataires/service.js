@@ -26,24 +26,11 @@ class ServiceTabs extends React.Component {
         </div>
       )
     }));
-
-    return (
-        <DummyTabs tabs={tabsService} />
-    );
+    return <DummyTabs tabs={tabsService} />;
   }
 }
 
 class ServiceTabsAntennes extends React.Component {
-  state = {
-    mandataireId: null
-  };
-
-  onChange = ({ formData }) => {
-    this.setState({
-      mandataireId: formData
-    });
-  };
-
   render() {
     const tabs = [
       {
@@ -52,7 +39,7 @@ class ServiceTabsAntennes extends React.Component {
         icon: <PillDispo />,
         content: (
           <React.Fragment>
-            <CreateMesure />
+            <CreateMesure mandataireId={this.props.mandataireID} />
             <TableMesures
               fetch={() => apiFetch(`/mandataires/${this.props.mandataireID}/mesures`)}
               hideColumns={[
@@ -123,13 +110,15 @@ class ServiceTabsAntennes extends React.Component {
         text: "Mes informations",
         url: "/mandataires/mes-informations",
         icon: <Home />,
-        content: <Profile />
+        content: <Profile mandataireId={this.props.mandataireID} />,
+        mandataireId: this.props.mandataireID
       },
       {
         text: `Importer`,
         url: "/mandataires/importer",
         icon: <FilePlus />,
-        content: <InputFiles />
+        content: <InputFiles mandataireId={this.props.mandataireID} />,
+        mandataireId: this.props.mandataireID
       }
     ];
     return (
