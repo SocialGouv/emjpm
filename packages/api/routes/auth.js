@@ -137,8 +137,6 @@ router.get("/checkToken", authHelpers.loginRequired, (req, res, next) => {
 router.post("/checkUser", async (req, res, next) => {
   const user = await getSpecificUser({ username: req.body.username });
 
-  console.log("useruser", user);
-
   if (user && user.active === false) {
     return res.status(200).json({
       sucess: true,
@@ -179,7 +177,7 @@ router.get("/logout", (req, res, next) => {
   next();
 });
 
-/**x
+/**
  * @swagger
  * /auth/forgot_password:
  *   post:
