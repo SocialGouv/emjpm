@@ -10,7 +10,7 @@ const accessChecks = [
   {
     method: "PUT",
     url: "/api/v1/mandataires/1/mesures/1",
-    type: ["mandataire", "ti"]
+    type: ["mandataire", "ti", "service"]
   },
   {
     method: "POST",
@@ -28,7 +28,7 @@ const accessChecks = [
   {
     method: "POST",
     url: "/api/v1/mandataires/mesures/bulk",
-    type: "mandataire"
+    type: ["mandataire", "service"]
   },
   {
     method: "GET",
@@ -88,7 +88,7 @@ const accessChecks = [
   {
     method: "PUT",
     url: "/api/v1/mandataires/1/mesures-en-attente",
-    type: ["mandataire", "ti"]
+    type: ["mandataire", "ti", "service"]
   }
 ];
 
