@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const createError = require("http-errors");
+
 //const queries = require("../db/queries");
 
 const authHelpers = require("../auth/_helpers");
@@ -34,16 +36,13 @@ const whiteList = obj =>
     .filter(key => WHITELIST.indexOf(key) > -1)
     .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
-router.put(
-  "/1",
-  authHelpers.typeRequired("ti"),
-  authHelpers.loginRequired,
-  async (req, res, next) => {
+router.put("/1", authHelpers.typeRequired("ti"), async (req, res, next) => {
+  try {
     const { nom, prenom, email, cabinet, type } = req.body;
 
     const user = await getSpecificUser({ id: req.user.id });
     if (!user) {
-      return next(new Error(401));
+      throw createError.Unauthorized(`User not found`);
     }
     const body = whiteList(req.body);
 
@@ -51,25 +50,19 @@ router.put(
       res.status(200).json(user);
       return next();
     }
-
-    updateUser(req.user.id, {
+    await updateUser(req.user.id, {
       nom,
       prenom,
       email,
       type,
       cabinet
-    })
-      .then(() => getSpecificUser({ id: req.user.id }))
-      .then(user => {
-        res.status(200).json(user);
-      })
-      .catch(error => {
-        console.log(error);
-        throw error;
-        next(error);
-      });
+    });
+    const userModified = await getSpecificUser({ id: req.user.id });
+    res.status(200).json(userModified);
+  } catch (err) {
+    next(err);
   }
-);
+});
 
 router.get(
   "/1",
@@ -78,7 +71,7 @@ router.get(
   async (req, res, next) => {
     const user = await getSpecificUser({ id: req.user.id });
     if (!user) {
-      return next(new Error(401));
+      throw createError.Unauthorized(`User not found`);
     }
     res.status(200).json(user);
   }
