@@ -425,7 +425,7 @@ router.put(
  */
 router.put(
   "/:mandataireId/mesures-en-attente",
-  typeRequired("individuel", "prepose", "ti"),
+  typeRequired("individuel", "prepose", "ti", "service"),
   async (req, res, next) => {
     try {
       // const mandataire = await queries.getMandataireByUserId(req.user.id);
