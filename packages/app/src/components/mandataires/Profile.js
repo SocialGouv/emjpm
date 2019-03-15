@@ -59,7 +59,7 @@ const Selector = ({
 // bouton connecté à redux-modal.show pour EditMandataire
 const ButtonEditMandataire = connect(
   state => ({
-    currentMandataire: state.mandataire.profile
+    currentMandataire: state.mandataire.profiles
   }),
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ formData, show, currentMandataire }) => (
@@ -68,7 +68,7 @@ const ButtonEditMandataire = connect(
       data-cy="button-edit-profile"
       style={{ marginLeft: 0 }}
       onClick={() =>
-        show(currentMandataire.type === "service" ? "EditService" : "EditMandataire", {
+        show(formData.type === "service" ? "EditService" : "EditMandataire", {
           formData
         })
       }

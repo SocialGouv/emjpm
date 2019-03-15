@@ -245,15 +245,16 @@ const CustomFieldTemplate = props => {
 const buttonIconStyle = { width: 22, height: 22, marginRight: 5, marginTop: -2 };
 
 const CreateMesure = ({
-  formData = {
-    date_ouverture: format(new Date(), "YYYY-MM-DD")
-  },
   onSubmit,
   createMesure,
   mesureCreatedStatus,
   mesureCreatedMessage,
   children,
   mandataireId,
+  formData = {
+    date_ouverture: format(new Date(), "YYYY-MM-DD"),
+    mandataire_id: mandataireId
+  },
   ...props
 }) => {
   return (
@@ -285,7 +286,7 @@ const CreateMesure = ({
                   FieldTemplate={CustomFieldTemplate}
                   uiSchema={uiSchema}
                   formData={formData}
-                  onSubmit={mandataireId => onSubmit(mandataireId)}
+                  onSubmit={onSubmit}
                   widgets={widgets}
                 >
                   {mesureCreatedStatus === "error" && (
@@ -341,8 +342,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       createMesure,
-      onSubmit: ({ formData, mandataireId }) =>
-        createMesureSave({ formData: formData, mandataireId: mandataireId })
+      onSubmit: ({ formData }) => createMesureSave(formData)
     },
     dispatch
   );

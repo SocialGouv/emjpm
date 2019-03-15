@@ -214,7 +214,10 @@ router.put(
         type
       } = req.body;
 
-      const mandataire = await getMandataireByUserId(req.user.id);
+      const mandataire = await (req.user.type === "service"
+        ? getMandataireById(req.body.id)
+        : getMandataireByUserId(req.user.id));
+
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }

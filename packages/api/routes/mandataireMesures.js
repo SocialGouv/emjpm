@@ -205,6 +205,7 @@ router.post(
         res.status(200).json();
         return;
       }
+      console.log("res", req.body);
 
       const mandataire = await (req.user.type === "service"
         ? getMandataireById(req.body.mandataire_id)
@@ -212,7 +213,7 @@ router.post(
 
       const body = {
         ...req.body,
-        mandataire_id: mandataire ? mandataire.id : req.body.mandataire_id
+        mandataire_id: mandataire.id
       };
       if (!body.mandataire_id) {
         throw createError.UnprocessableEntity("Mandataire not found");
