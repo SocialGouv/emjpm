@@ -12,7 +12,7 @@ export const TI_INITIAL_STATE = {
   profile: {}
 };
 
-const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
+const mandataireReducer = (state = TI_INITIAL_STATE, action) => {
   switch (action.type) {
     case "MANDATAIRES_UPDATED":
       return {
