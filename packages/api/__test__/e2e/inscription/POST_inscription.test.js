@@ -14,7 +14,6 @@ const { getAllTisByMandataire } = require("@emjpm/api/db/queries/tis");
 const knex = require("@emjpm/api/db/knex");
 
 beforeEach(async () => {
-  await knex.migrate.latest();
   await knex.seed.run();
   nodemailerMock.mock.reset();
 });
