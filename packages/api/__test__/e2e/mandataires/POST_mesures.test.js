@@ -14,7 +14,6 @@ const knex = require("@emjpm/api/db/knex");
 const { getTokenByUserType } = require("../utils");
 
 beforeEach(async () => {
-  await knex.migrate.latest();
   await knex.seed.run();
   nodemailerMock.mock.reset();
 });
