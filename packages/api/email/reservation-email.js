@@ -4,17 +4,19 @@ const { getMandataireById } = require("../db/queries/mandataires");
 const EMAIL_RESERVATION_TEXT = (ti, mandataire, mesure) =>
   `Madame, Monsieur,
 
-  Pour information, le ${ti.etablissement} ${ti.cabinet && `cabinet ${ti.cabinet},` || ''} a décidé de vous confier une nouvelle mesure :
+  Pour information, le ${ti.etablissement} ${(ti.cabinet &&
+    `cabinet ${ti.cabinet},`) ||
+    ""} a décidé de vous confier une nouvelle mesure :
   - "type de mesure": ${mesure.type}
   - "genre": ${mesure.civilite}
   - "année de naissance": ${mesure.annee}.
-   
+
   Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
-  
+
   Pour rappel, à ce jour, vous avez déclaré "${
     mandataire.mesures_en_cours
-  }" pour une capacité souhaitée de "${mandataire.dispo_max}".
-  
+  }" mesures pour une capacité souhaitée de "${mandataire.dispo_max}" mesures .
+
   À bientôt
 
   L’équipe e-mjpm.`;
@@ -22,7 +24,9 @@ const EMAIL_RESERVATION_TEXT = (ti, mandataire, mesure) =>
 const EMAIL_RESERVATION_HTML = (ti, mandataire, mesure) =>
   `Madame, Monsieur,
 <br><br>
-  Pour information, le ${ti.etablissement} ${ti.cabinet && `cabinet ${ti.cabinet},` || ''} a décidé de vous confier une nouvelle mesure :
+  Pour information, le ${ti.etablissement} ${(ti.cabinet &&
+    `cabinet ${ti.cabinet},`) ||
+    ""} a décidé de vous confier une nouvelle mesure :
   <br>
   - "type de mesure": ${mesure.type}
   <br>
@@ -34,14 +38,14 @@ const EMAIL_RESERVATION_HTML = (ti, mandataire, mesure) =>
 <br><br>
   Pour rappel, à ce jour, vous avez déclaré "${
     mandataire.mesures_en_cours
-  }" pour une capacité souhaitée de "${mandataire.dispo_max}".
+  }" mesures pour une capacité souhaitée de "${mandataire.dispo_max}" mesures.
 <br><br>
   À bientôt
 <br><br>
 L’équipe e-mjpm.`;
 
-const reservationEmail = async (ti, mandataire_id, mesure) => {
-  const mandataire = await getMandataireById(mandataire_id);
+const reservationEmail = async (ti, mesure) => {
+  const mandataire = await getMandataireById(mesure.mandataire_id);
   sendEmail(
     mandataire.email,
     "e-MJPM : une nouvelle mesure vous a été attribuée",
