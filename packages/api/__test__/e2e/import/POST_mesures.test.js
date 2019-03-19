@@ -4,7 +4,7 @@ const request = require("supertest");
 const server = require("@emjpm/api/app");
 const knex = require("@emjpm/api/db/knex");
 
-const { getTokenByUserType, shouldBeProtected } = require("../utils");
+const { getTokenByUserType } = require("../utils");
 
 beforeEach(async () => {
   await knex.migrate.latest();
@@ -13,10 +13,6 @@ beforeEach(async () => {
 
 afterAll(async () => {
   await knex.destroy();
-});
-
-shouldBeProtected("POST", "/api/v1/mandataires/mesures/bulk", {
-  type: "mandataire"
 });
 
 test("should import mesures correctly", async () => {
