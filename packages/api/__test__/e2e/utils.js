@@ -24,10 +24,8 @@ exports.userTypes = {
   }
 };
 
-const getOtherTypes = type =>
-  Object.keys(exports.userTypes).filter(
-    key => ["default", type].indexOf(key) == -1
-  );
+const getOtherTypes = types =>
+  Object.keys(exports.userTypes).filter(key => types.indexOf(key) == -1);
 
 // ensure some method/url is only available to some kind of user
 exports.shouldBeProtected = (method, url, options = {}) => {
@@ -36,16 +34,17 @@ exports.shouldBeProtected = (method, url, options = {}) => {
     expect(response.status).toBe(401);
   });
   if (options.type) {
-    test(`${method} ${url} should be accessible to ${
-      options.type
-    }`, async () => {
-      const token = await exports.getTokenByUserType(options.type);
-      const response = await request(server)
-        [method.toLowerCase()](url)
-        .set("Authorization", "Bearer " + token);
-      expect(response.status).toBe(200);
+    const types = Array.isArray(options.type) ? options.type : [options.type];
+    types.forEach(type => {
+      test(`${method} ${url} should be accessible to ${type}`, async () => {
+        const token = await exports.getTokenByUserType(type);
+        const response = await request(server)
+          [method.toLowerCase()](url)
+          .set("Authorization", "Bearer " + token);
+        expect(response.status).toBe(200);
+      });
     });
-    getOtherTypes(options.type).forEach(other => {
+    getOtherTypes(types).forEach(other => {
       test(`${method} ${url} should NOT be accessible to ${other}`, async () => {
         const token = await exports.getTokenByUserType(other);
         const response = await request(server)

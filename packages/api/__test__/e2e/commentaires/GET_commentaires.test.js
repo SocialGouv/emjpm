@@ -4,14 +4,15 @@ const request = require("supertest");
 const server = require("@emjpm/api/app");
 const knex = require("@emjpm/api/db/knex");
 
-const { getTokenByUserType, shouldBeProtected } = require("../utils");
+const { getTokenByUserType } = require("../utils");
+
+beforeAll(async () => {
+  await knex.migrate.latest();
+  await knex.seed.run();
+});
 
 afterAll(async () => {
   await knex.destroy();
-});
-
-shouldBeProtected("GET", "/api/v1/mandataires/1/commentaires", {
-  type: "ti"
 });
 
 // strip the created_at date in the response
