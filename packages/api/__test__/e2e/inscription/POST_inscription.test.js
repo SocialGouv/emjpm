@@ -16,13 +16,12 @@ const knex = require("@emjpm/api/db/knex");
 beforeEach(async () => {
   await knex.migrate.latest();
   await knex.seed.run();
+  nodemailerMock.mock.reset();
 });
 
 afterAll(async () => {
   await knex.destroy();
 });
-
-beforeEach(async () => nodemailerMock.mock.reset());
 
 const defaultRegister = {
   username: "toto",
@@ -113,9 +112,6 @@ test("should NOT register when username already exist", async () => {
       username: "jeremy"
     });
 
-  expect(response.body).toMatchSnapshot({
-    success: false
-  });
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
   expect(response.status).toBe(500);
 });
