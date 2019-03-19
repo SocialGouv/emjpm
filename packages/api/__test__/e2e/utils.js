@@ -42,6 +42,7 @@ exports.shouldBeProtected = (method, url, options = {}) => {
           [method.toLowerCase()](url)
           .set("Authorization", "Bearer " + token);
         expect(response.status).toBe(200);
+        // ?? expect(response.status).toMatchSnapshot();
       });
     });
     getOtherTypes(types).forEach(other => {

@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const { loginRequired } = require("../auth/_helpers");
+const { typeRequired, loginRequired } = require("../auth/_helpers");
 
 const {
   getMandataireById,
@@ -106,13 +106,21 @@ const { getTiByUserId } = require("../db/queries/tis");
  *               items:
  *                 type: object
  */
-router.get("/1", loginRequired, async (req, res, next) => {
-  const mandataire = await getMandataireByUserId(req.user.id);
-  if (!mandataire) {
-    return next(new Error(401));
+router.get(
+  "/1",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    try {
+      const mandataire = await getMandataireByUserId(req.user.id);
+      if (!mandataire) {
+        return next(new Error(401));
+      }
+      res.status(200).json(mandataire);
+    } catch (err) {
+      next(err);
+    }
   }
-  res.status(200).json(mandataire);
-});
+);
 
 const WHITELIST = [
   "nom",
@@ -160,69 +168,69 @@ const whiteList = obj =>
  *               items:
  *                 type: object
  */
-router.put("/1", loginRequired, async (req, res, next) => {
-  const {
-    nom,
-    prenom,
-    genre,
-    telephone,
-    telephone_portable,
-    email,
-    adresse,
-    code_postal,
-    ville,
-    dispo_max,
-    secretariat,
-    zip,
-    etablissement,
-    mesures_en_cours,
-    nb_secretariat,
-    type
-  } = req.body;
+router.put(
+  "/1",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    const {
+      nom,
+      prenom,
+      genre,
+      telephone,
+      telephone_portable,
+      email,
+      adresse,
+      code_postal,
+      ville,
+      dispo_max,
+      secretariat,
+      zip,
+      etablissement,
+      mesures_en_cours,
+      nb_secretariat,
+      type
+    } = req.body;
 
-  const mandataire = await getMandataireByUserId(req.user.id);
-  if (!mandataire) {
-    return next(new Error(401));
-  }
-  const body = whiteList(req.body);
+    const mandataire = await getMandataireByUserId(req.user.id);
+    if (!mandataire) {
+      return next(new Error(401));
+    }
+    const body = whiteList(req.body);
 
-  if (Object.keys(body).length === 0) {
-    res.status(200).json(mandataire);
-    return next();
-  }
-
-  updateMandataire(mandataire.id, {
-    genre,
-    telephone,
-    telephone_portable,
-    adresse,
-    code_postal,
-    ville,
-    dispo_max,
-    secretariat,
-    zip,
-    etablissement,
-    mesures_en_cours,
-    nb_secretariat
-  })
-    .then(() =>
-      updateUser(req.user.id, {
-        nom,
-        prenom,
-        email,
-        type
-      })
-    )
-    .then(() => getMandataireById(mandataire.id))
-    .then(mandataire => {
+    if (Object.keys(body).length === 0) {
       res.status(200).json(mandataire);
+      return next();
+    }
+
+    updateMandataire(mandataire.id, {
+      genre,
+      telephone,
+      telephone_portable,
+      adresse,
+      code_postal,
+      ville,
+      dispo_max,
+      secretariat,
+      zip,
+      etablissement,
+      mesures_en_cours,
+      nb_secretariat
     })
-    .catch(error => {
-      console.log(error);
-      throw error;
-      next(error);
-    });
-});
+      .then(() =>
+        updateUser(req.user.id, {
+          nom,
+          prenom,
+          email,
+          type
+        })
+      )
+      .then(() => getMandataireById(mandataire.id))
+      .then(mandataire => {
+        res.status(200).json(mandataire);
+      })
+      .catch(next);
+  }
+);
 
 // todo: test
 
@@ -264,22 +272,19 @@ router.put("/1", loginRequired, async (req, res, next) => {
  *               items:
  *                 type: object
  */
-router.post("/filters", loginRequired, async (req, res, next) => {
+router.post("/filters", typeRequired("ti"), async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
-  getAllByMandatairesFilter(
-    ti.id,
-    req.body.latNorthEast,
-    req.body.latSouthWest,
-    req.body.longNorthEast,
-    req.body.longSouthWest
-  )
+  const coords = [
+    req.body.latNorthEast || 1,
+    req.body.latSouthWest || 2,
+    req.body.longNorthEast || 30,
+    req.body.longSouthWest || 40
+  ];
+  getAllByMandatairesFilter(ti.id, ...coords)
     .then(function(mesures) {
       res.status(200).json(mesures);
     })
-    .catch(function(error) {
-      throw error;
-      next(error);
-    });
+    .catch(next);
 });
 
 // récupère une liste de mandataires pour le user en question
@@ -305,14 +310,8 @@ router.post("/filters", loginRequired, async (req, res, next) => {
  *               items:
  *                 type: object
  */
-router.get("/", loginRequired, async (req, res, next) => {
-  if (req.user.type !== "ti") {
-    return next(new Error(401));
-  }
+router.get("/", typeRequired("ti"), async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
-  if (!ti) {
-    return next(new Error(401));
-  }
   getAllMandataires(ti.id)
     .then(mandataires => res.status(200).json(mandataires))
     .catch(error => next(error));
@@ -336,30 +335,19 @@ router.get("/", loginRequired, async (req, res, next) => {
  *               items:
  *                 type: object
  */
-router.get("/services", loginRequired, async (req, res, next) => {
-  if (req.user.type !== "ti") {
-    return next(new Error(401));
-  }
+router.get("/services", typeRequired("ti"), async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
-  if (!ti) {
-    return next(new Error(401));
-  }
   getAllServicesByTis(ti.id)
     .then(mandataires => res.status(200).json(mandataires))
-    .catch(error => next(error));
+    .catch(next);
 });
 
 // todo: test
 
 router.post("/PosteCode", loginRequired, async (req, res, next) => {
   getCoordonneesByPostCode(req.body.codePoste)
-    .then(function(mandataires) {
-      res.status(200).json(mandataires);
-    })
-    .catch(function(error) {
-      throw error;
-      next(error);
-    });
+    .then(mandataires => res.status(200).json(mandataires))
+    .catch(next);
 });
 
 // ?
@@ -389,18 +377,21 @@ router.post("/PosteCode", loginRequired, async (req, res, next) => {
  *               items:
  *                 type: object
  */
-router.put("/:mandataireId/capacite", async (req, res, next) => {
-  const mandataire = await getMandataireByUserId(req.user.id);
-  if (!mandataire) {
-    return next(new Error(401));
+router.put(
+  "/:mandataireId/capacite",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    const mandataire = await getMandataireByUserId(req.user.id);
+    if (!mandataire) {
+      return next(new Error(401));
+    }
+    updateCountMesures(mandataire.id)
+      .then(() => {
+        res.status(200).json(mandataire);
+      })
+      .catch(next);
   }
-  updateCountMesures(mandataire.id).then(() => {
-    res
-      .status(200)
-      .json(mandataire)
-      .catch(error => next(error));
-  });
-});
+);
 
 /** @swagger
  * /mandataires/1/mesures-en-attente:
@@ -433,17 +424,21 @@ router.put("/:mandataireId/capacite", async (req, res, next) => {
  */
 router.put(
   "/:mandataireId/mesures-en-attente",
-  loginRequired,
+  typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
     // const mandataire = await queries.getMandataireByUserId(req.user.id);
     // if (!mandataire) {
     //   return next(new Error(401));
     // }
     // récupères le nb de mesure attribuées pour ce mandataire
+    if (!req.body.mandataire_id) {
+      res.status(200).json();
+      return;
+    }
     const nbMesureAttente = mesureEnAttente(req.body.mandataire_id);
     update(req.body.mandataire_id, { mesures_en_attente: nbMesureAttente })
       .then(mandataire => res.status(200).json(mandataire))
-      .catch(error => next(error));
+      .catch(next);
   }
 );
 
