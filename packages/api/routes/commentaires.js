@@ -7,9 +7,10 @@ const { typeRequired } = require("../auth/_helpers");
 const {
   getAllCommentaires,
   addCommentaire,
-  deleteCommentaire,
-  isMandataireInTi
+  deleteCommentaire
 } = require("../db/queries/commentaires");
+
+const { isMandataireInTi } = require("../db/queries/mandataires");
 
 const { getTiByUserId } = require("../db/queries/tis");
 
