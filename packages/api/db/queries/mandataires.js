@@ -160,7 +160,8 @@ const getAllMandataires = ti_id =>
       "geolocalisation_code_postal",
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
-    );
+    )
+    .orderBy("mandataires.id");
 
 const getAllServicesByTis = ti_id =>
   knex
