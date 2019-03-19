@@ -4,8 +4,6 @@ const request = require("supertest");
 const server = require("@emjpm/api/app");
 const knex = require("@emjpm/api/db/knex");
 
-const { getTokenByUserType, shouldBeProtected } = require("../utils");
-
 afterAll(async () => {
   await knex.destroy();
 });

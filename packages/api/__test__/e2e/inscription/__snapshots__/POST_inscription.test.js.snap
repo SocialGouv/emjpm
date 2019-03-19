@@ -7,12 +7,6 @@ Object {
 }
 `;
 
-exports[`should NOT register when username already exist 1`] = `
-Object {
-  "success": false,
-}
-`;
-
 exports[`should send an email with good values 1`] = `
 Array [
   Object {
