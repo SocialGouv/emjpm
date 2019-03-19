@@ -95,7 +95,8 @@ const getMesuresMap = mandataireId =>
     })
     .groupByRaw(
       "mesures.code_postal,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
-    );
+    )
+    .orderBy("latitude", "asc");
 
 function getAllByMandatairesFilter(
   ti_id,
