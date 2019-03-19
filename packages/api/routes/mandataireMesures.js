@@ -1,9 +1,10 @@
 const express = require("express");
+const createError = require("http-errors");
 
 const router = express.Router();
+
 const { typeRequired } = require("../auth/_helpers");
 const whitelist = require("../db/queries/whitelist");
-
 const { getAllMesuresByTis } = require("../db/queries/mesures");
 
 const ALLOWED_FILTERS = [
@@ -26,7 +27,8 @@ const ALLOWED_FILTERS = [
 const {
   updateCountMesures,
   getMandataireByUserId,
-  getMesuresMap
+  getMesuresMap,
+  isMandataireInTi
 } = require("../db/queries/mandataires");
 
 const { getTiByUserId } = require("../db/queries/tis");
@@ -127,31 +129,34 @@ router.put(
   "/:mandataireId/mesures/:mesureId",
   typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
+    if (Object.keys(req.body).length === 0) {
+      return res.status(200).json();
+    }
     if (req.user.type === "individuel" || req.user.type === "prepose") {
-      const mandataireForIndPre = await getMandataireByUserId(req.user.id);
+      const mandataire = await getMandataireByUserId(req.user.id);
       updateMesure(
         {
           id: req.params.mesureId,
           // ⚠️ ensure to override a mandataire only
-          mandataire_id: mandataireForIndPre.id
+          mandataire_id: mandataire.id
         },
         whitelist(req.body, ALLOWED_FILTERS)
       )
-        .then(() => updateCountMesures(mandataireForIndPre.id))
-        .then(() => getMesuresEnCoursMandataire(mandataireForIndPre.id))
+        .then(() => updateCountMesures(mandataire.id))
+        .then(() => getMesuresEnCoursMandataire(mandataire.id))
         .then(mesures => res.status(200).json(mesures))
         .catch(error => next(error));
     } else if (req.user.type === "ti") {
-      const tiId = await getTiByUserId(req.user.id);
+      const ti = await getTiByUserId(req.user.id);
       updateMesure(
         {
-          id: req.body.id,
+          id: req.body.id, //todo : WHY req.body.id VS req.params.mesureId ???
           // ⚠️ ensure to override a tI only
-          ti_id: tiId.id
+          ti_id: ti.id
         },
         whitelist(req.body, ALLOWED_FILTERS)
       )
-        .then(() => getAllMesuresByTis(req.body.ti_id))
+        .then(() => getAllMesuresByTis(ti.id))
         .then(mesures => res.status(200).json(mesures))
         .catch(error => next(error));
     }
@@ -184,34 +189,46 @@ router.post(
   "/:mandataireId/mesures",
   typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
-    const mandataire = await getMandataireByUserId(req.user.id);
-    const ti = await getTiByUserId(req.user.id);
-    const body = {
-      ...req.body
-    };
-    if (req.user.type === "individuel" || req.user.type === "prepose") {
-      body["mandataire_id"] = mandataire.id;
-    }
-    if (req.user.type === "ti") {
-      body["ti_id"] = ti.id;
-      body["cabinet"] = ti.cabinet;
-      addMesure(body)
-        .then(() => reservationEmail(ti, req.body.mandataire_id, req.body))
-        .then(() => res.status(200).json({ success: true }))
-        .catch(error => {
-          console.log(error);
-          next(error);
-        });
-    } else {
-      addMesure(body)
-        .then(() => getMesuresEnCoursMandataire(mandataire.id))
-        .then(mesures => res.status(200).json(mesures))
-        .then(() => updateCountMesures(mandataire.id))
-        // todo : trigger/view
-        .catch(error => {
-          console.log(error);
-          next(error);
-        });
+    try {
+      if (Object.keys(req.body).length === 0) {
+        // return empty response when no data passed
+        res.status(200).json();
+        return;
+      }
+
+      const mandataire = await getMandataireByUserId(req.user.id);
+      const body = {
+        ...req.body,
+        mandataire_id: mandataire ? mandataire.id : req.body.mandataire_id
+      };
+      if (!body.mandataire_id) {
+        throw createError.UnprocessableEntity("Mandataire not found");
+      }
+      if (req.user.type === "individuel" || req.user.type === "prepose") {
+        addMesure(body)
+          .then(() => updateCountMesures(body.mandataire_id))
+          .then(() => getMesuresEnCoursMandataire(body.mandataire_id))
+          .then(mesures => res.status(200).json(mesures))
+          .catch(next);
+      } else if (req.user.type === "ti") {
+        const ti = await getTiByUserId(req.user.id);
+        if (ti && req.body.mandataire_id) {
+          const isAllowed = await isMandataireInTi(
+            req.body.mandataire_id,
+            ti.id
+          );
+          // TI cannot post for some other TI mandataire
+          if (!isAllowed) {
+            throw createError.Unauthorized(`Mandataire not found`);
+          }
+          addMesure({ ...body, ti_id: ti.id, cabinet: ti.cabinet })
+            .then(() => reservationEmail(ti, body))
+            .then(() => res.status(200).json({ success: true }))
+            .catch(next);
+        }
+      }
+    } catch (err) {
+      next(err);
     }
   }
 );
@@ -240,14 +257,28 @@ router.post(
   "/:mandataireId/mesure-reservation",
   typeRequired("ti"),
   async (req, res, next) => {
-    addMesure({
-      ...req.body
-    })
-      .then(mesures => res.status(200).json(mesures))
-      .catch(error => {
-        console.log(error);
-        next(error);
-      });
+    try {
+      const ti = await getTiByUserId(req.user.id);
+      if (ti) {
+        const isAllowed = await isMandataireInTi(
+          req.params.mandataireId,
+          ti.id
+        );
+        // TI cannot post for some other TI mandataire
+        if (!isAllowed) {
+          throw createError.Unauthorized(`Mandataire not found`);
+        }
+      }
+      addMesure({
+        ...req.body
+      })
+        .then(mesures => res.status(200).json(mesures))
+        .catch(error => {
+          next(error);
+        });
+    } catch (err) {
+      next(err);
+    }
   }
 );
 
@@ -271,12 +302,19 @@ router.post(
  */
 router.get(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
-    const mandataire = await getMandataireByUserId(req.user.id);
-    getMesuresEnCoursMandataire(mandataire.id)
-      .then(mesures => res.status(200).json(mesures))
-      .catch(error => next(error));
+    try {
+      const mandataire = await getMandataireByUserId(req.user.id);
+      if (!mandataire) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
+      getMesuresEnCoursMandataire(mandataire.id)
+        .then(mesures => res.status(200).json(mesures))
+        .catch(error => next(error));
+    } catch (err) {
+      next(err);
+    }
   }
 );
 
@@ -303,9 +341,16 @@ router.get(
   "/:mandataireId/mesuresForMaps",
   typeRequired("individuel", "prepose"),
   async (req, res, next) => {
-    const mandataire = await getMandataireByUserId(req.user.id);
-    const mesures = await getMesuresMap(mandataire.id);
-    res.status(200).json(mesures);
+    try {
+      const mandataire = await getMandataireByUserId(req.user.id);
+      if (!mandataire) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
+      const mesures = await getMesuresMap(mandataire.id);
+      res.status(200).json(mesures);
+    } catch (err) {
+      next(err);
+    }
   }
 );
 
@@ -329,7 +374,7 @@ router.get(
  */
 router.get(
   "/:mandataireId/mesures/attente",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     const mandataire = await getMandataireByUserId(req.user.id);
     getAllMesuresAttente(mandataire.id)
