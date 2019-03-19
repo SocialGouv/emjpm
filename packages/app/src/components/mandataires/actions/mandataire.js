@@ -59,15 +59,28 @@ export const mandataireMount = () => dispatch =>
     });
 
 export const updateMandataire = data => dispatch => {
-  return updateMandataireApi(data)
-    .then(json => {
-      dispatch(hide(data.type === "service" ? "EditService" : "EditMandataire"));
-      dispatch(mandataireProfileUpdated(json));
-    })
-    .catch(e => {
-      alert("Impossible de soumettre les données");
-      throw e;
-    });
+  if (data.type === "service") {
+    return updateMandataireApi(data)
+      .then(() => fetchProfiles())
+      .then(json => {
+        dispatch(hide("EditService"));
+        dispatch(mandataireProfilesUpdated(json));
+      })
+      .catch(e => {
+        alert("Impossible de soumettre les données");
+        throw e;
+      });
+  } else {
+    return updateMandataireApi(data)
+      .then(json => {
+        dispatch(hide("EditMandataire"));
+        dispatch(mandataireProfileUpdated(json));
+      })
+      .catch(e => {
+        alert("Impossible de soumettre les données");
+        throw e;
+      });
+  }
 };
 
 /* ----------- PLAIN ACTIONS  */

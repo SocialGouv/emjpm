@@ -4,6 +4,7 @@ import apiFetch from "../communComponents/Api";
 import { DummyTabs } from "../index";
 import { Button, DummyTabs, Layout } from "..";
 
+import { CheckCircle, Clock, FilePlus, Home, Map, User, UserMinus, XCircle } from "react-feather";
 import Profile from "./Profile";
 import Header from "./Header";
 import TableMesures from "./TableMesures";
@@ -22,7 +23,7 @@ class ServiceTabs extends React.Component {
       icon: <User />,
       content: (
         <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
-          <ServiceTabsAntennes mandataireID={antenne.id} />
+          <ServiceTabsAntennes handleClick={this.props.handleClick} mandataireID={antenne.id} antenne={antenne} />
         </div>
       )
     }));
@@ -32,14 +33,58 @@ class ServiceTabs extends React.Component {
 
 class ServiceTabsAntennes extends React.Component {
   render() {
+    const Alert = ({ className, Icon, message }) =>
+      (message && (
+        <div
+          className={`alert ${className || ""}`}
+          role="alert"
+          style={{ marginTop: 20, marginLeft: 20, fontSize: "1.2em" }}
+        >
+          <Icon
+            style={{
+              verticalAlign: "middle",
+              marginRight: 10
+            }}
+          />{" "}
+          {message}
+        </div>
+      )) ||
+      null;
+
+    const ErrorBox = ({ message }) => (
+      <Alert className="alert-danger" Icon={XCircle} message={message} />
+    );
+
+    const SucessBox = ({ message }) => (
+      <Alert className="alert-success" Icon={CheckCircle} message={message} />
+    );
+
+    const currentDispos = this.props.antenne.dispo_max - this.props.antenne.mesures_en_cours - this.props.antenne.mesures_en_attente || null;
+
     const tabs = [
       {
         text: "Mesures en cours",
         url: "/mandataires/mesures/en-cours",
-        icon: <PillDispo />,
+        icon: <PillDispo mandataireId={this.props.mandataireID} />,
         content: (
           <React.Fragment>
             <CreateMesure mandataireId={this.props.mandataireID} />
+            {currentDispos > 0 ? (
+              <div>
+                <SucessBox
+                  message={`Les magistrats voient que ${currentDispos} peuvent vous être attribuées.`}
+                />
+              </div>
+            ) : currentDispos ? (
+              <div>
+                <ErrorBox
+                  message={`Les magistrats voient que le nombre de mesures dépasse
+          le nombre souhaité de ${currentDispos} mesures.`}
+                />
+              </div>
+            ) : (
+              ""
+            )}
             <TableMesures
               fetch={() => apiFetch(`/mandataires/${this.props.mandataireID}/mesures`)}
               hideColumns={[
@@ -123,7 +168,7 @@ class ServiceTabsAntennes extends React.Component {
     ];
     return (
       <React.Fragment>
-        <Header />
+        <Header handleClick={this.props.handleClick} />
         <DummyTabs tabs={tabs} />
       </React.Fragment>
     );

@@ -87,52 +87,44 @@ const changePassword = email => {
     .catch(e => console.log(e));
 };
 
-const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] }) => (
-  <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
-    <div style={{ flex: "0 0 50%" }}>
-      <h3>Mes coordonnées</h3>
-      <Fiche {...currentMandataire} />
-      <br />
-      <br />
-      <ButtonEditMandataire formData={currentMandataire} />
-      <a href="#" onClick={() => changePassword({ email: currentMandataire.email })}>
-        {" "}
-        Modifier mon mot de passe{" "}
-      </a>
-    </div>
-    <div style={{ flex: "0 0 50%" }}>
-      {(currentMandataire.type === "prepose" && (
-        <SelectionManager
-          onAdd={etablissement_id =>
-            apiFetch(`/mandataires/1/etablissements`, {
-              method: "POST",
-              body: JSON.stringify({
-                etablissement_id
+const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] }) => {
+  const newMandataire =
+    this.props.currentMandataire && this.props.currentMandataire.length !== 0
+      ? this.props.currentMandataire &&
+        this.props.currentMandataire.filter(manda => manda.id === this.props.mandataireId)[0]
+      : this.props.currentMandataire && this.props.currentMandataire;
+
+  return (
+    <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
+      <div style={{ flex: "0 0 50%" }}>
+        <h3>Mes coordonnées</h3>
+        <Fiche {...newMandataire} />
+        <br />
+        <br />
+        <ButtonEditMandataire formData={newMandataire} />
+      </div>
+      <div style={{ flex: "0 0 50%" }}>
+        {(newMandataire.type === "prepose" && (
+          <SelectionManager
+            onAdd={etablissement_id =>
+              apiFetch(`/mandataires/${this.props.mandataireId}/etablissements`, {
+                method: "POST",
+                body: JSON.stringify({
+                  etablissement_id
+                })
               })
-            })
-          }
-          getSelection={() => apiFetch("/mandataires/1/etablissement")}
-          render={({ onAdd, onRemove, selection }) => (
-            <Selector
-              style={{ marginTop: 0 }}
-              title="Mes établissements"
-              placeholder="Ajouter un établissement"
-              emptyText="Aucun établissement séléctionné"
-              autocompleteItems={
-                (etablissements &&
-                  etablissements.map(f => ({
-                    id: f.id,
-                    nom: f.nom || f.ville || f.finess_id
-                  }))) ||
-                []
-              }
-              selected={selection}
-              onAdd={onAdd}
-            />
-          )}
-        />
-      )) ||
-        null}
+            }
+            onRemove={id =>
+              apiFetch(`/mandataires/${this.props.mandataireId}/etablissements/${id}`, {
+                method: "DELETE"
+              })
+            }
+            selected={selection}
+            onAdd={onAdd}
+          />
+        )) ||
+          null}
+      </div>
 
       <SelectionManager
         onAdd={ti_id =>
@@ -180,8 +172,8 @@ const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] })
         </div>
       )}
     </div>
-  </div>
-);
+  );
+};
 
 const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ updateMandataire: data => updateMandataire(data) }, dispatch);

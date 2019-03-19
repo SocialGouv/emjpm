@@ -159,7 +159,10 @@ const WHITELIST = [
   "secretariat",
   "nb_secretariat",
   "mesures_en_cours",
-  "zip"
+  "zip",
+  "contact_nom",
+  "contact_prenom",
+  "contact_email"
 ];
 
 const whiteList = obj =>
@@ -211,7 +214,10 @@ router.put(
         etablissement,
         mesures_en_cours,
         nb_secretariat,
-        type
+        type,
+        contact_nom,
+        contact_prenom,
+        contact_email
       } = req.body;
 
       const mandataire = await (req.user.type === "service"
@@ -240,7 +246,10 @@ router.put(
         zip,
         etablissement,
         mesures_en_cours,
-        nb_secretariat
+        nb_secretariat,
+        contact_nom,
+        contact_prenom,
+        contact_email
       });
       await updateUser(req.user.id, {
         nom,

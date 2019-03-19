@@ -9,6 +9,8 @@ import mesuresReducer from "./reducers/mesures";
 import mandataireReducer from "./reducers/mandataire";
 import MandataireTabs from "./indiPrepo";
 import ServiceTabs from "./service";
+import serviceSiegeSocial from "./serviceSiegeSocial";
+
 import {
   EditMesure,
   CloseMesure,
@@ -19,6 +21,9 @@ import {
 } from "./modals";
 
 class MandataireIndex extends React.Component {
+  state = {
+    isToggleOn: false
+  };
   componentDidMount() {
     // TODO: temp hack to trigger profile load
     if (this.props.onMount) {
@@ -26,11 +31,25 @@ class MandataireIndex extends React.Component {
     }
   }
 
+  handleClick = () => {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
+  };
+
   render() {
     // define the content of the tabs
     return (
       <React.Fragment>
-        {this.props.currentMandataire.type === "service" ? <ServiceTabs /> : <MandataireTabs />}
+        {this.state.isToggleOn === false ? (
+          this.props.currentMandataire.type === "service" ? (
+            <ServiceTabs handleClick={this.handleClick} />
+          ) : (
+            <MandataireTabs />
+          )
+        ) : (
+          <serviceSiegeSocial />
+        )}
         <EditMesure />
         <CloseMesure />
         <ReactivateMesure />

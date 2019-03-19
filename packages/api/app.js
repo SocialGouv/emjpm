@@ -72,6 +72,7 @@ app.use(function(req, res, next) {
 
 app.use(function(err, req, res, next) {
   Sentry.captureException(err);
+  console.log("Err",err)
   if (res.headersSent) {
     return next(err);
   }

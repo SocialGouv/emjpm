@@ -57,7 +57,7 @@ const createMesureApi = data =>
     method: "POST",
     body: JSON.stringify({
       ...data,
-      status: "Mesure en cours`"
+      status: "Mesure en cours"
     })
   });
 
