@@ -20,9 +20,8 @@ const TitleMandataire = styled.div`
   font-size: 1.5em;
   font-weight: bold;
 `;
-const CellMesureReservationRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
+const CellMesureReservationRedux = connect(null, dispatch =>
+  bindActionCreators({ show }, dispatch)
 )(({ show, mandataire }) => (
   <div
     data-cy="button-attente-mesure"
@@ -125,6 +124,8 @@ class FicheMandataireModal extends React.Component {
       show,
       handleHide
     } = this.props;
+
+    console.log("currentMandataire",currentMandataire)
     return (
       <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
         <div style={{ display: "flex", padding: "20px", boxSizing: "border-box" }}>
@@ -139,6 +140,20 @@ class FicheMandataireModal extends React.Component {
               )}
               <br /> {currentMandataire.type.toUpperCase()} <br /> {currentMandataire.genre}
             </TitleMandataire>
+
+            {currentMandataire.type === "service" && (
+              <React.Fragment>
+                <b>{currentMandataire.service_etablissement}</b>
+                <FicheMandataire
+                  email={currentMandataire.service_email}
+                  telephone={currentMandataire.telephone}
+                  adresse={currentMandataire.service_telephone}
+                  dispo_max={currentMandataire.service_dispo_max}
+                  type={currentMandataire.type}
+                  displayTitle={"none"}
+                />
+              </React.Fragment>
+            )}
 
             <FicheMandataire
               email={currentMandataire.email}
@@ -220,7 +235,6 @@ const mapStateToProps = state => ({
     state.mandataire.currentEtablissementsForSelectedMandataire
 });
 
-export default connect(
-  mapStateToProps,
-  null
-)(connectModal({ name: "FicheMandataireModal", destroyOnHide: true })(FicheMandataireModal));
+export default connect(mapStateToProps, null)(
+  connectModal({ name: "FicheMandataireModal", destroyOnHide: true })(FicheMandataireModal)
+);

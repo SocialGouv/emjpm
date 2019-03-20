@@ -18,7 +18,8 @@ const {
   getCoordonneesByPostCode,
   getAllmandataireByUserId,
   getServiceByMandataire,
-  updateService
+  updateService,
+  getAllServicesMandatairesByTis
 } = require("../db/queries/mandataires");
 
 const { updateUser } = require("../db/queries/users");
@@ -40,7 +41,7 @@ const WHITELIST = [
   //"secretariat",
   //"nb_secretariat",
   "mesures_en_cours",
-//  "zip",
+  //  "zip",
   "contact_nom",
   "contact_prenom",
   "contact_email"
@@ -416,10 +417,19 @@ router.get(
  *               items:
  *                 type: object
  */
-router.get("/services", typeRequired("ti"), async (req, res, next) => {
+/*router.get("/services", typeRequired("ti"), async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
   getAllServicesByTis(ti.id)
     .then(mandataires => res.status(200).json(mandataires))
+    .catch(next);
+});*/
+
+router.get("/services", typeRequired("ti"), async (req, res, next) => {
+  const ti = await getTiByUserId(req.user.id);
+  getAllServicesMandatairesByTis(ti.id)
+    .then(mandataires => {
+      res.status(200).json(mandataires);
+    })
     .catch(next);
 });
 

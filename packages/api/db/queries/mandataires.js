@@ -216,6 +216,29 @@ const getAllServicesByTis = ti_id =>
     .innerJoin("users", "mandataires.user_id", "users.id")
     .where({ ti_id: parseInt(ti_id), "users.type": "service" });
 
+const getAllServicesMandatairesByTis = ti_id =>
+  knex
+    .from("service_tis")
+    .select(
+      "mandataires.id",
+      "mandataires.*",
+      "users.type",
+      "users.email",
+      "users.nom",
+      "users.prenom",
+      "users.cabinet",
+      " services.etablissement as service_etablissement",
+      " services.nom as service_nom",
+      " services.telephone as service_telephone",
+      " services.prenom as service_prenom",
+      " services.email as service_email",
+      " services.dispo_max as service_dispo_max"
+    )
+    .innerJoin("mandataires", "service_tis.mandataire_id", "mandataires.id")
+    .innerJoin("users", "mandataires.user_id", "users.id")
+    .innerJoin("services", "mandataires.service_id", "services.id")
+    .where({ ti_id: parseInt(ti_id), "users.type": "service" });
+
 const mesureEnAttente = mandataireID =>
   knex("mesures")
     .count("*")
@@ -269,5 +292,6 @@ module.exports = {
   getCoordonneesByPostCode,
   getAllmandataireByUserId,
   getServiceByMandataire,
-  updateService
+  updateService,
+  getAllServicesMandatairesByTis
 };
