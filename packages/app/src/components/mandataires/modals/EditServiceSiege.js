@@ -4,37 +4,31 @@ import { connectModal } from "redux-modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { updateMandataire } from "../actions/mandataire";
+import { updateService } from "../actions/mandataire";
 import Layout from "../../communComponents/ModalLayout";
 
 const schema = {
   title: "Modifier vos informations",
   type: "object",
-  required: [
-    "contact_nom",
-    "contact_prenom",
-    "telephone",
-    "contact_email",
-    "adresse",
-    "code_postal",
-    "ville",
-    "dispo_max",
-    "etablissement"
-  ],
+  required: ["etablissement"],
   properties: {
-    etablissement: { type: "string", title: "Nom du service ou antenne", default: "" },
-    contact_nom: {
+    etablissement: { type: "string", title: "Nom du siège", default: "" },
+    nom: {
       type: "string",
-      title: "Nom du contact dans le service ou antenne",
+      title: "Nom du contact dans le siège",
       default: ""
     },
-    contact_prenom: {
+    prenom: {
       type: "string",
-      title: "Prénom du contact dans le service ou antenne",
+      title: "Prénom du contact dans le siège",
       default: ""
     },
     telephone: { type: "string", title: "Téléphone", default: "" },
-    contact_email: { type: "string", title: "Adresse email du service ou de l'antenne", default: "" },
+    email: {
+      type: "string",
+      title: "Adresse email du siège",
+      default: ""
+    },
     adresse: { type: "string", title: "Rue", default: "" },
     code_postal: { type: "string", title: "Code Postal", default: "" },
     ville: { type: "string", title: "Commune", default: "" },
@@ -50,10 +44,10 @@ const uiSchema = {
   secretariat: {
     "ui:widget": "select"
   },
-  contact_nom: {
+  nom: {
     "ui:placeholder": "Nom"
   },
-  contact_prenom: {
+  prenom: {
     "ui:placeholder": "Prénom"
   },
   genre: {
@@ -62,7 +56,7 @@ const uiSchema = {
   telephone: {
     "ui:placeholder": "Téléphone"
   },
-  contact_email: {
+  email: {
     "ui:placeholder": "Adresse email"
   },
   adresse: {
@@ -79,10 +73,13 @@ const uiSchema = {
   }
 };
 
-const EditService = ({ show, handleHide, formData, onSubmit, ...props }) => {
+const EditServiceSiege = ({ show, handleHide, formData, onSubmit, ...props }) => {
+  const cleanData = {
+    ...formData
+  };
   return (
     <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
-      <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>
+      <Form schema={schema} uiSchema={uiSchema} formData={cleanData} onSubmit={onSubmit}>
         <div style={{ margin: "20px 0", textAlign: "center" }}>
           <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
             Valider
@@ -94,10 +91,10 @@ const EditService = ({ show, handleHide, formData, onSubmit, ...props }) => {
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ onSubmit: ({ formData }) => updateMandataire(formData) }, dispatch);
+  bindActionCreators({ onSubmit: ({ formData }) => updateService(formData) }, dispatch);
 
 // connect to redux store actions
 // connect to redux-modal
 export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "EditService", destroyOnHide: true })(EditService)
+  connectModal({ name: "EditServiceSiege", destroyOnHide: true })(EditServiceSiege)
 );

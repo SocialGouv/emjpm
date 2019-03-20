@@ -9,16 +9,35 @@ export const FINESS_UPDATED = "FINESS_UPDATED";
 export const TIS_UPDATED = "TIS_UPDATED";
 export const ANTENNES_UPDATED = "ANTENNES_UPDATED";
 export const MANDATAIRE_PROFILES_UPDATED = "MANDATAIRE_PROFILES_UPDATED";
-
+export const SERVICE_PROFILE_UPDATED = "SERVICE_PROFILE_UPDATED";
 /* ---------- API */
 
 const fetchProfile = () => apiFetch(`/mandataires/1`);
 const fetchProfiles = () => apiFetch(`/mandataires/all`);
 
 const fetchAntennes = () => apiFetch(`/mandataires/antennes`);
+const fetchService = () => apiFetch(`/mandataires/service`);
 
 const updateMandataireApi = data =>
   apiFetch(`/mandataires/1`, {
+    method: "PUT",
+    body: JSON.stringify({
+      ...data,
+      zip: data.zip || "",
+      genre: data.genre || "",
+      secretariat: data.secretariat || false,
+      nb_secretariat: data.nb_secretariat || 0,
+      telephone: data.telephone || "",
+      telephone_portable: data.telephone_portable || "",
+      adresse: data.adresse || "",
+      code_postal: data.code_postal || "",
+      dispo_max: data.dispo_max || 0,
+      ville: data.ville || ""
+    })
+  });
+
+const updateServiceApi = data =>
+  apiFetch(`/mandataires/service/1`, {
     method: "PUT",
     body: JSON.stringify({
       ...data,
@@ -56,6 +75,9 @@ export const mandataireMount = () => dispatch =>
     })
     .then(() => {
       fetchProfiles().then(json => dispatch(mandataireProfilesUpdated(json)));
+    })
+    .then(() => {
+      fetchService().then(json => dispatch(serviceProfileUpdated(json)));
     });
 
 export const updateMandataire = data => dispatch => {
@@ -83,10 +105,28 @@ export const updateMandataire = data => dispatch => {
   }
 };
 
+export const updateService = data => dispatch => {
+  return updateServiceApi(data)
+    .then(() => fetchService())
+    .then(json => {
+      dispatch(hide("EditServiceSiege"));
+      dispatch(serviceProfileUpdated(json));
+    })
+    .catch(e => {
+      alert("Impossible de soumettre les données");
+      throw e;
+    });
+};
+
 /* ----------- PLAIN ACTIONS  */
 
 export const mandataireProfileUpdated = data => ({
   type: MANDATAIRE_PROFILE_UPDATED,
+  data
+});
+
+export const serviceProfileUpdated = data => ({
+  type: SERVICE_PROFILE_UPDATED,
   data
 });
 

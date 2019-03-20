@@ -3,24 +3,23 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { show } from "redux-modal";
 
-import { Button, Autocomplete, SelectionManager } from "..";
-import apiFetch from "../communComponents/Api";
+import { Button } from "..";
 
 import { updateMandataire } from "./actions/mandataire";
 import Fiche from "./Fiche";
 
 const ButtonEditMandataire = connect(
   state => ({
-    currentMandataire: state.mandataire.profiles
+    service: state.mandataire.service
   }),
   dispatch => bindActionCreators({ show }, dispatch)
-)(({ formData, show, currentMandataire }) => (
+)(({ formData, show, service }) => (
   <>
     <Button
       data-cy="button-edit-profile"
       style={{ marginLeft: 0 }}
       onClick={() =>
-        show(formData.type === "service" ? "EditService" : "EditMandataire", {
+        show("EditServiceSiege", {
           formData
         })
       }
@@ -32,25 +31,23 @@ const ButtonEditMandataire = connect(
 
 class ServiceSiegeSocial extends React.Component {
   render() {
-    const newMandataire =
-      this.props.currentMandataire && this.props.currentMandataire.length !== 1
-        ? this.props.currentMandataire.filter(manda => manda.id === this.props.mandataireId)[0]
-        : this.props.currentMandataire;
+    const service = this.props.service;
 
     return (
       <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
         <div style={{ flex: "0 0 50%" }}>
           <h3>Mes coordonnées</h3>
-          <Fiche {...newMandataire} />
+          <Fiche {...service} />
           <br />
           <br />
-          <ButtonEditMandataire formData={newMandataire} />
+          <ButtonEditMandataire formData={service} />
+          <a href="#" onClick={this.props.handleClick}> Retour au service</a>
         </div>
         <div style={{ flex: "0 0 50%" }}>
-          {newMandataire.zip && (
+          {service.zip && (
             <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-zip">
               <h3>Informations à destination des magistrats </h3>
-              {newMandataire.zip}
+              {service.zip}
             </div>
           )}
         </div>
@@ -64,9 +61,7 @@ const mapDispatchToProps = (dispatch, ownProps) =>
 
 const ServiceSiegeSocialRedux = connect(
   state => ({
-    currentMandataire: state.mandataire.profiles,
-    etablissements: state.mandataire.finess,
-    tis: state.mandataire.tis
+    service: state.mandataire.service
   }),
   mapDispatchToProps
 )(ServiceSiegeSocial);

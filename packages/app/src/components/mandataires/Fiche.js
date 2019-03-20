@@ -58,22 +58,12 @@ const FicheMandataire = ({
         <tbody style={{ fontSize: "1.1em" }}>
           <tr>
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
-              <b>
-                {type === "service" ? (
-                  <div>
-                    Mesures en cours/
-                    <br /> Mesures souhaitées{" "}
-                  </div>
-                ) : (
-                  "Mesures souhaitées"
-                )}
-              </b>
+              <b>"Mesures souhaitées"</b>
             </td>
             <td
               data-cy="fiche-manda-dispo-max"
               style={{ textAlign: "center", borderBottom: "1px solid silver" }}
             >
-              {type === "service" ? `${mesures_en_cours || "-"}/` : ""}
               {dispo_max || "-"}
             </td>
           </tr>

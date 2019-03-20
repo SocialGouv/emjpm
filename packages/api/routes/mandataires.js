@@ -16,12 +16,40 @@ const {
   getAllMandataires,
   getAllByMandatairesFilter,
   getCoordonneesByPostCode,
-  getAllmandataireByUserId
+  getAllmandataireByUserId,
+  getServiceByMandataire,
+  updateService
 } = require("../db/queries/mandataires");
 
 const { updateUser } = require("../db/queries/users");
 
 const { getTiByUserId } = require("../db/queries/tis");
+
+const WHITELIST = [
+  "nom",
+  "prenom",
+  "etablissement",
+  // "genre",
+  "telephone",
+  //"telephone_portable",
+  "email",
+  "adresse",
+  "code_postal",
+  "ville",
+  "dispo_max",
+  //"secretariat",
+  //"nb_secretariat",
+  "mesures_en_cours",
+//  "zip",
+  "contact_nom",
+  "contact_prenom",
+  "contact_email"
+];
+
+const whiteList = obj =>
+  Object.keys(obj)
+    .filter(key => WHITELIST.indexOf(key) > -1)
+    .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
 // récupère les données d'un mandataire
 
@@ -126,6 +154,42 @@ router.get(
 );
 
 router.get(
+  "/service",
+  typeRequired("individuel", "prepose", "service"),
+  async (req, res, next) => {
+    try {
+      const mandataire = await getMandataireByUserId(req.user.id);
+
+      console.log("azertyuiop", mandataire);
+
+      if (!mandataire) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
+      const service = await getServiceByMandataire(mandataire.service_id);
+      res.status(200).json(service);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.put(
+  "/service/:serviceId",
+  typeRequired("individuel", "prepose", "service"),
+  async (req, res, next) => {
+    try {
+      console.log("req.body", req.body);
+      await updateService(req.body.id, whiteList(req.body));
+      console.log("trytry");
+      const service = await getServiceByMandataire(req.body.id);
+      res.status(200).json(service);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.get(
   "/all",
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
@@ -143,32 +207,6 @@ router.get(
     }
   }
 );
-
-const WHITELIST = [
-  "nom",
-  "prenom",
-  "etablissement",
-  "genre",
-  "telephone",
-  "telephone_portable",
-  "email",
-  "adresse",
-  "code_postal",
-  "ville",
-  "dispo_max",
-  "secretariat",
-  "nb_secretariat",
-  "mesures_en_cours",
-  "zip",
-  "contact_nom",
-  "contact_prenom",
-  "contact_email"
-];
-
-const whiteList = obj =>
-  Object.keys(obj)
-    .filter(key => WHITELIST.indexOf(key) > -1)
-    .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
 // met à jour les données d'un mandataire
 

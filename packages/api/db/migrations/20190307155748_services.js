@@ -10,6 +10,7 @@ exports.up = function(knex, Promise) {
     table.string("telephone");
     table.string("adresse");
     table.integer("dispo_max");
+    table.string("zip");
     table.dateTime("created_at").defaultTo(knex.fn.now());
   });
 };
