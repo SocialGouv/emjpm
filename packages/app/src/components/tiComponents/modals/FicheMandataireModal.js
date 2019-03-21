@@ -125,7 +125,7 @@ class FicheMandataireModal extends React.Component {
       handleHide
     } = this.props;
 
-    console.log("currentMandataire",currentMandataire)
+    console.log("currentMandataire", currentMandataire);
     return (
       <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
         <div style={{ display: "flex", padding: "20px", boxSizing: "border-box" }}>
@@ -143,6 +143,9 @@ class FicheMandataireModal extends React.Component {
 
             {currentMandataire.type === "service" && (
               <React.Fragment>
+                <br />
+                <b>Siège social</b>
+                <br />
                 <b>{currentMandataire.service_etablissement}</b>
                 <FicheMandataire
                   email={currentMandataire.service_email}
@@ -152,6 +155,8 @@ class FicheMandataireModal extends React.Component {
                   type={currentMandataire.type}
                   displayTitle={"none"}
                 />
+                <br />
+                <b>Antennes</b>
               </React.Fragment>
             )}
 

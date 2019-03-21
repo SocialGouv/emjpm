@@ -322,75 +322,74 @@ router.post("/services", async (req, res, next) => {
       )
       .then(([user_id]) => {
         // create mandataire
+
         return queries
-          .createMandataire(
+          .createService(
             {
-              user_id,
               etablissement,
+              nom,
+              prenom,
+              email,
               telephone,
-              telephone_portable,
               adresse,
               code_postal,
               ville
             },
             trx
           )
-          .then(([mandataire_id]) => {
-            // create tis
-            if (!tis || tis.length === 0) {
-              return true;
-            }
-            return Promise.all(
-              tis.map(ti_id =>
-                queries.createServiceTi(
-                  {
-                    mandataire_id,
-                    ti_id
-                  },
-                  trx
-                )
-              )
-            );
-          })
-          .then(() => {
-            return queries.createService(
-              {
-                etablissement,
-                nom,
-                prenom,
-                email,
-                telephone,
-                adresse,
-                code_postal,
-                ville
-              },
-              trx
-            );
-          })
           .then(([service_id]) => {
-            return Promise.all(
-              req.body.antennes.map(antenne => {
-                console.log("service_id", service_id);
-                console.log("antenne.etablissement", antenne.etablissement);
-                console.log("req", antenne);
-
-                return queries.createMandataire(
-                  {
-                    user_id,
-                    service_id,
-                    etablissement: antenne.etablissement,
-                    nom: antenne.nom,
-                    prenom: antenne.prenom,
-                    email: antenne.email,
-                    telephone: antenne.telephone,
-                    adresse: antenne.adresse,
-                    code_postal: antenne.code_postal,
-                    ville: antenne.ville
-                  },
-                  trx
+            return queries
+              .createMandataire(
+                {
+                  user_id,
+                  service_id,
+                  etablissement,
+                  telephone,
+                  telephone_portable,
+                  adresse,
+                  code_postal,
+                  ville
+                },
+                trx
+              )
+              .then(([mandataire_id]) => {
+                // create tis
+                if (!tis || tis.length === 0) {
+                  return true;
+                }
+                return Promise.all(
+                  tis.map(ti_id =>
+                    queries.createServiceTi(
+                      {
+                        mandataire_id,
+                        ti_id
+                      },
+                      trx
+                    )
+                  )
                 );
               })
-            );
+              .then(() => {
+                return Promise.all(
+                  req.body.antennes.map(antenne => {
+                    return queries.createMandataire(
+                      {
+                        user_id,
+                        service_id,
+                        etablissement: antenne.etablissement,
+                        nom: antenne.nom,
+                        prenom: antenne.prenom,
+                        email: antenne.email,
+                        telephone: antenne.telephone,
+                        adresse: antenne.adresse,
+                        code_postal: antenne.code_postal,
+                        ville: antenne.ville
+                      },
+                      trx
+                    );
+                  })
+                );
+              });
           });
       })
       .then(() => inscriptionEmail(`${process.env.APP_URL}`))

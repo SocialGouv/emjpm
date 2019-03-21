@@ -65,7 +65,12 @@ class HeaderMandataire extends React.Component {
         <Title>
           {type === "service" ? (
             <div>
-              {etablissement} <br />
+              {etablissement}
+              {" "}
+              <a href="#" onClick={this.props.handleClick} style={{ fontSize: "0.6em" }}>
+                {" "}
+                Informations du service
+              </a>
             </div>
           ) : (
             fullName
@@ -94,7 +99,6 @@ class HeaderMandataire extends React.Component {
             </div>
           )}
         </div>
-        <a href="#" onClick={this.props.handleClick}> Informations du service</a>
       </ContainerMandataire>
     );
   }
