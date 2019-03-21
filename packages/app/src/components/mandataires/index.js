@@ -18,7 +18,8 @@ import {
   EditMandataire,
   ValiderMesureEnAttente,
   EditService,
-  EditServiceSiege
+  EditServiceSiege,
+  AddAntennes
 } from "./modals";
 
 class MandataireIndex extends React.Component {
@@ -49,7 +50,7 @@ class MandataireIndex extends React.Component {
             <MandataireTabs />
           )
         ) : (
-          <ServiceSiegeSocial handleClick={this.handleClick}/>
+          <ServiceSiegeSocial handleClick={this.handleClick} />
         )}
         <EditMesure />
         <CloseMesure />
@@ -58,6 +59,7 @@ class MandataireIndex extends React.Component {
         <ValiderMesureEnAttente />
         <EditService />
         <EditServiceSiege />
+        <AddAntennes />
       </React.Fragment>
     );
   }
@@ -81,7 +83,7 @@ const mapDispatchToProps = (dispatch, ownProps) =>
 const MandataireTabsRedux = connect(
   state => ({
     currentMandataire: state.mandataire.profile,
-    service:  state.mandataire.service
+    service: state.mandataire.service
   }),
   mapDispatchToProps
 )(MandataireIndex);

@@ -36,6 +36,14 @@ const updateMandataireApi = data =>
     })
   });
 
+const createMandataireApi = data =>
+  apiFetch(`/mandataires/1`, {
+    method: "PUT",
+    body: JSON.stringify({
+      ...data
+    })
+  });
+
 const updateServiceApi = data =>
   apiFetch(`/mandataires/service/1`, {
     method: "PUT",
@@ -111,6 +119,19 @@ export const updateService = data => dispatch => {
     .then(json => {
       dispatch(hide("EditServiceSiege"));
       dispatch(serviceProfileUpdated(json));
+    })
+    .catch(e => {
+      alert("Impossible de soumettre les données");
+      throw e;
+    });
+};
+
+export const addAntennesToMAndataires = data => dispatch => {
+  return createMandataireApi(data)
+    .then(() => fetchProfiles())
+    .then(json => {
+      dispatch(hide("AddAntennes"));
+      dispatch(mandataireProfilesUpdated(json));
     })
     .catch(e => {
       alert("Impossible de soumettre les données");

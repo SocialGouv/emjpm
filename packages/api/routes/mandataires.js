@@ -154,6 +154,42 @@ router.get(
   }
 );
 
+router.post("/mandataires", async (req, res, next) => {
+  const {
+    etablissement,
+    nom,
+    prenom,
+    telephone,
+    telephone_portable,
+    email,
+    adresse,
+    code_postal,
+    ville,
+    servce_id
+  } = req.body;
+
+  return queries
+    .createMandataire(
+      {
+        user_id: req.user.id,
+        etablissement,
+        telephone,
+        telephone_portable,
+        adresse,
+        code_postal,
+        ville,
+        nom,
+        prenom,
+        email,
+        servce_id
+      }
+    )
+    .then(() => res.json({ success: true }))
+    .catch(e => {
+      next(e);
+    });
+});
+
 router.get(
   "/service",
   typeRequired("individuel", "prepose", "service"),
