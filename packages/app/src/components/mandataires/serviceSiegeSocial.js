@@ -39,9 +39,17 @@ class ServiceSiegeSocial extends React.Component {
           <h3>Mes coordonnées</h3>
           <Fiche {...service} />
           <br />
+          <a href="#" onClick={() => show("AddAntennes")} style={{ fontSize: "1em" }}>
+            {" "}
+            Ajout d'une antenne
+          </a>
+          <br />
           <br />
           <ButtonEditMandataire formData={service} />
-          <a href="#" onClick={this.props.handleClick}> Retour au service</a>
+          <a href="#" onClick={this.props.handleClick}>
+            {" "}
+            Retour au service
+          </a>
         </div>
         <div style={{ flex: "0 0 50%" }}>
           {service.zip && (
