@@ -107,6 +107,7 @@ function getAllByMandatairesFilter(
 ) {
   return knex
     .from("mandataires")
+    .debug()
     .select(
       knex.raw(
         "distinct ON(mandataires.id) mandataires.id,mandataires.*,users.type,users.nom,users.prenom,users.email"
@@ -116,7 +117,7 @@ function getAllByMandatairesFilter(
         "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
       )
     )
-    .where({ "user_tis.ti_id": parseInt(ti_id), "users.active": true })
+    .where({ "user_tis.ti_id": ti_id, "users.active": true })
     .where(builder =>
       builder
         .whereBetween("geolocalisation_code_postal.latitude", [
@@ -129,7 +130,7 @@ function getAllByMandatairesFilter(
         ])
     )
     .innerJoin("users", "users.id", "mandataires.user_id")
-    .innerJoin("user_tis", "users.id", "mandataires.user_id")
+    .innerJoin("user_tis", "user_tis.user_id", "mandataires.user_id")
     .innerJoin(
       "geolocalisation_code_postal",
       "geolocalisation_code_postal.code_postal",
