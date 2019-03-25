@@ -14,7 +14,8 @@ const MANDATAIRE_INITIAL_STATE = {
   // store tis for autompletes and getDisplayValue
   tis: [],
   antennes: [],
-  service: {}
+  service: {},
+  enum: 0
 };
 
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
@@ -33,7 +34,13 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
 
       return {
         ...state,
-        profile: action.data
+        profile: action.data,
+        enum: action.data.id
+      };
+    case "CHANGE_ENUM":
+      return {
+        ...state,
+        enum: action.data
       };
     case "SERVICE_PROFILE_UPDATED":
       return {

@@ -1,11 +1,9 @@
 import * as React from "react";
-import Router from "next/router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { MinusSquare } from "react-feather";
 import { show } from "redux-modal";
 
-import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";
 import { Button, Autocomplete, SelectionManager } from "..";
 import apiFetch from "../communComponents/Api";
 
@@ -48,7 +46,13 @@ const Selector = ({
         {selected.map(({ id, nom }, i) => (
           <tr key={id} style={{ background: i % 2 ? "#fff" : "rgba(0, 0, 0, 0.03)" }}>
             <td style={{ padding: 5 }}>▪ {nom}</td>
-            <td style={{ width: 20, textAlign: "center" }} />
+            <td style={{ width: 20, textAlign: "center" }}>
+              <MinusSquare
+                title="Supprimer"
+                style={{ cursor: "pointer", width: 22, height: 22 }}
+                onClick={() => onRemove({ id, nom })}
+              />
+            </td>
           </tr>
         ))}
       </tbody>
@@ -78,102 +82,119 @@ const ButtonEditMandataire = connect(
   </>
 ));
 
-const changePassword = email => {
-  doForgotPassword(email)
-    .then(() => {
-      alert("Un email vient de vous être envoyé");
-      Router.push("/mandataires");
-    })
-    .catch(e => console.log(e));
-};
+class MandataireProfile extends React.Component {
+  render() {
+    const { etablissements, tis } = this.props;
 
-const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] }) => {
-  const newMandataire =
-    this.props.currentMandataire && this.props.currentMandataire.length !== 0
-      ? this.props.currentMandataire &&
-        this.props.currentMandataire.filter(manda => manda.id === this.props.mandataireId)[0]
-      : this.props.currentMandataire && this.props.currentMandataire;
+    const newMandataire =
+      this.props.currentMandataire && this.props.currentMandataire.length !== 0
+        ? this.props.currentMandataire &&
+          this.props.currentMandataire.filter(manda => manda.id === this.props.mandataireId)[0]
+        : this.props.currentMandataire && this.props.currentMandataire;
 
-  return (
-    <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
-      <div style={{ flex: "0 0 50%" }}>
-        <h3>Mes coordonnées</h3>
-        <Fiche {...newMandataire} />
-        <br />
-        <br />
-        <ButtonEditMandataire formData={newMandataire} />
-      </div>
-      <div style={{ flex: "0 0 50%" }}>
-        {(newMandataire.type === "prepose" && (
+    return (
+      <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
+        <div style={{ flex: "0 0 50%" }}>
+          <h3>Mes coordonnées</h3>
+          <Fiche {...newMandataire} />
+          <br />
+          <br />
+          <ButtonEditMandataire formData={newMandataire} />
+        </div>
+        <div style={{ flex: "0 0 50%" }}>
+          {(newMandataire &&
+            newMandataire.length === 1 &&
+            newMandataire.type === "prepose" && (
+              <SelectionManager
+                onAdd={etablissement_id =>
+                  apiFetch(`/mandataires/${this.props.mandataireId}/etablissements`, {
+                    method: "POST",
+                    body: JSON.stringify({
+                      etablissement_id
+                    })
+                  })
+                }
+                onRemove={id =>
+                  apiFetch(`/mandataires/${this.props.mandataireId}/etablissements/${id}`, {
+                    method: "DELETE"
+                  })
+                }
+                getSelection={() =>
+                  apiFetch(`/mandataires/${this.props.mandataireId}/etablissement`)
+                }
+                render={({ onAdd, onRemove, selection }) => (
+                  <Selector
+                    style={{ marginTop: 0 }}
+                    title="Mes établissements"
+                    placeholder="Ajouter un établissement"
+                    emptyText="Aucun établissement séléctionné"
+                    autocompleteItems={
+                      (etablissements &&
+                        etablissements.map(f => ({
+                          id: f.id,
+                          nom: f.nom || f.ville || f.finess_id
+                        }))) ||
+                      []
+                    }
+                    selected={selection}
+                    onAdd={onAdd}
+                    onRemove={onRemove}
+                  />
+                )}
+              />
+            )) ||
+            null}
           <SelectionManager
-            onAdd={etablissement_id =>
-              apiFetch(`/mandataires/${this.props.mandataireId}/etablissements`, {
+            onAdd={ti_id =>
+              apiFetch(`/mandataires/${this.props.mandataireId}/tis`, {
                 method: "POST",
                 body: JSON.stringify({
-                  etablissement_id
+                  ti_id
                 })
               })
             }
             onRemove={id =>
-              apiFetch(`/mandataires/${this.props.mandataireId}/etablissements/${id}`, {
+              apiFetch(`/mandataires/${this.props.mandataireId}/tis/${id}`, {
                 method: "DELETE"
               })
             }
-            selected={selection}
-            onAdd={onAdd}
-          />
-        )) ||
-          null}
-      </div>
-
-      <SelectionManager
-        onAdd={ti_id =>
-          apiFetch(`/mandataires/${this.props.mandataireId}/tis`, {
-            method: "POST",
-            body: JSON.stringify({
-              ti_id
-            })
-          })
-        }
-        onRemove={id =>
-          apiFetch(`/mandataires/${this.props.mandataireId}/tis/${id}`, {
-            method: "DELETE"
-          })
-        }
-        getSelection={() =>
-          apiFetch(`/mandataires/${this.props.mandataireId}/tis`).then(
-            data =>
-              (data &&
-                data.map(ti => ({
-                  id: ti.id,
-                  nom: ti.etablissement
-                }))) ||
-              []
-          )
-        }
-        render={({ onAdd, onRemove, selection }) => (
-          <Selector
-            title="Tribunaux d'instance où je suis agréé"
-            emptyText="Aucun tribunal séléctionné"
-            placeholder="Ajouter un tribunal d'instance"
-            autocompleteItems={
-              (tis && tis.map && tis.map(t => ({ id: t.id, nom: t.etablissement }))) || []
+            getSelection={() =>
+              apiFetch(`/mandataires/${this.props.mandataireId}/tis`).then(
+                data =>
+                  (data &&
+                    data.map(ti => ({
+                      id: ti.id,
+                      nom: ti.etablissement
+                    }))) ||
+                  []
+              )
             }
-            selected={selection}
-            onAdd={onAdd}
-            onRemove={onRemove}
+            render={({ onAdd, onRemove, selection }) => (
+              <Selector
+                title="Tribunaux d'instance où je suis agréé"
+                emptyText="Aucun tribunal séléctionné"
+                placeholder="Ajouter un tribunal d'instance"
+                autocompleteItems={
+                  (tis && tis.map && tis.map(t => ({ id: t.id, nom: t.etablissement }))) || []
+                }
+                selected={selection}
+                onAdd={onAdd}
+                onRemove={onRemove}
+              />
+            )}
           />
-        )}
-      />
-      {newMandataire.zip && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-zip">
-          <h3>Informations à destination des magistrats </h3>
-          {newMandataire.zip}
+          {newMandataire &&
+            newMandataire.zip && (
+              <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-zip">
+                <h3>Informations à destination des magistrats </h3>
+                {newMandataire.zip}
+              </div>
+            )}
         </div>
-      )}
-    </div>
-  );
-};
+      </div>
+    );
+  }
+}
 
 const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ updateMandataire: data => updateMandataire(data) }, dispatch);

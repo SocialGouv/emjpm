@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import apiFetch from "../communComponents/Api";
 import { DummyTabs } from "../index";
 import { Button, DummyTabs, Layout } from "..";
+import Router from "next/router";
 
 import { CheckCircle, Clock, FilePlus, Home, Map, User, UserMinus, XCircle } from "react-feather";
 import Profile from "./Profile";
@@ -12,10 +13,18 @@ import PillDispo from "./PillDispo";
 import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
 import { connect } from "react-redux";
+import Form from "react-jsonschema-form";
+import { format } from "date-fns";
+import { bindActionCreators } from "redux";
+import { changeEnum } from "./actions/mandataire";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 
-class ServiceTabs extends React.Component {
+/*class ServiceTabs extends React.Component {
+state= {
+  enum
+}
+
   render() {
     const tabsService = this.props.antennesMandas.map(antenne => ({
       text: antenne.etablissement,
@@ -28,6 +37,47 @@ class ServiceTabs extends React.Component {
       )
     }));
     return <DummyTabs tabs={tabsService} />;
+  }
+}*/
+
+class ServiceTabs extends React.Component {
+  render() {
+    const onSubmitted = ({ formData }) => {
+      this.props.onChange(formData);
+    };
+
+    const schema = {
+      type: "number",
+      enum: this.props.antennesMandas.map(antenne => antenne.id),
+      enumNames: this.props.antennesMandas.map(antenne => antenne.etablissement)
+    };
+
+    const uiSchema = {
+      "ui:options": {
+        label: false
+      }
+    };
+    console.log(
+      "antenne.id ",
+      this.props.antennesMandas.filter(antenne => antenne.id === this.props.enum)[0]
+    );
+
+    return (
+      <>
+        <Header handleClick={this.props.handleClick} />
+        <Form schema={schema} formData={this.props.enum} uiSchema={uiSchema} onChange={onSubmitted}>
+          {" "}
+          <button style={{ display: "none" }} type="submit" />{" "}
+        </Form>
+        <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
+          <ServiceTabsAntennes
+            handleClick={this.props.handleClick}
+            mandataireID={this.props.enum}
+            antenne={this.props.antennesMandas.filter(antenne => antenne.id === this.props.enum)[0]}
+          />
+        </div>
+      </>
+    );
   }
 }
 
@@ -59,7 +109,10 @@ class ServiceTabsAntennes extends React.Component {
       <Alert className="alert-success" Icon={CheckCircle} message={message} />
     );
 
-    const currentDispos = this.props.antenne.dispo_max - this.props.antenne.mesures_en_cours - this.props.antenne.mesures_en_attente || null;
+    const currentDispos =
+      this.props.antenne && this.props.antenne.dispo_max -
+        this.props.antenne.mesures_en_cours -
+        this.props.antenne.mesures_en_attente || null;
 
     const tabs = [
       {
@@ -168,16 +221,19 @@ class ServiceTabsAntennes extends React.Component {
     ];
     return (
       <React.Fragment>
-        <Header handleClick={this.props.handleClick} />
         <DummyTabs tabs={tabs} />
       </React.Fragment>
     );
   }
 }
 
+const mapDispatchToProps = (dispatch, ownProps) =>
+  bindActionCreators({ onChange: changeEnum }, dispatch);
+
 export default connect(
   state => ({
-    antennesMandas: state.mandataire.antennes
+    antennesMandas: state.mandataire.antennes,
+    enum: state.mandataire.enum
   }),
-  null
+  mapDispatchToProps
 )(ServiceTabs);

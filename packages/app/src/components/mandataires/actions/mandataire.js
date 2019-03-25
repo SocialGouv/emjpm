@@ -11,6 +11,7 @@ export const TIS_UPDATED = "TIS_UPDATED";
 export const ANTENNES_UPDATED = "ANTENNES_UPDATED";
 export const MANDATAIRE_PROFILES_UPDATED = "MANDATAIRE_PROFILES_UPDATED";
 export const SERVICE_PROFILE_UPDATED = "SERVICE_PROFILE_UPDATED";
+export const CHANGE_ENUM = "CHANGE_ENUM";
 /* ---------- API */
 
 const fetchProfile = () => apiFetch(`/mandataires/1`);
@@ -141,8 +142,16 @@ export const addAntennesToMAndataires = data => dispatch => {
     });
 };
 
+export const changeEnum = data => dispatch => {
+  return dispatch(changeEnumDisplay(data));
+};
+
 /* ----------- PLAIN ACTIONS  */
 
+export const changeEnumDisplay = data => ({
+  type: CHANGE_ENUM,
+  data
+});
 export const mandataireProfileUpdated = data => ({
   type: MANDATAIRE_PROFILE_UPDATED,
   data
