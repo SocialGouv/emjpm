@@ -10,12 +10,13 @@ The e2e tests are using the latest deployed `socialgouv/emjpm-*` images by defau
 To run the tests with
 
 ```sh
+$ yarn lerna --scope @optional/e2e exec yarn
 $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up --build
 
-$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml exec api yarn seeds
+$ NODE_ENV=test yarn workspace @emjpm/knex run migrate
+$ NODE_ENV=test yarn workspace @emjpm/knex run seeds
 
-$ cd optional/e2e
-$ yarn cypress:run --headed
+$ yarn lerna exec --scope @optional/e2e run cypress:run --headed
 ```
 
 ## FAQ

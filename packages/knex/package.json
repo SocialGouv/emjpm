@@ -1,5 +1,6 @@
 {
   "name": "@emjpm/knex",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "migrate": "knex migrate:latest",

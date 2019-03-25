@@ -28,5 +28,6 @@ services:
       - 5434:5432
     volumes:
       - contrib-pgdata:/var/lib/postgresql/data
+      - ./packages/api/db/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
 volumes:
   contrib-pgdata:

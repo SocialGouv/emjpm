@@ -1,11 +1,10 @@
 const webpack = require("webpack");
 const withCSS = require("@zeit/next-css");
 const withImages = require("next-images");
-const withTM = require("next-plugin-transpile-modules");
 
 process.on("unhandledRejection", r => console.log(r));
 
-module.exports = withTM(
+module.exports =
   withCSS(
     withImages({
       transpileModules: [
@@ -25,4 +24,4 @@ module.exports = withTM(
       }
     })
   )
-);
+;

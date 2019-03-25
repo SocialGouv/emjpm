@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:10-stretch
 
 COPY ./package.json /app/package.json
 COPY ./packages/api/package.json /app/packages/api/package.json
