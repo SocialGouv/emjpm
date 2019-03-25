@@ -1,6 +1,7 @@
 import { hide } from "redux-modal";
 
 import apiFetch from "../../communComponents/Api";
+import Router from "next/router";
 
 export const MANDATAIRE_MOUNT = "MANDATAIRE_MOUNT";
 export const MANDATAIRE_PROFILE_UPDATED = "MANDATAIRE_PROFILE_UPDATED";
@@ -37,8 +38,8 @@ const updateMandataireApi = data =>
   });
 
 const createMandataireApi = data =>
-  apiFetch(`/mandataires/1`, {
-    method: "PUT",
+  apiFetch(`/mandataires`, {
+    method: "POST",
     body: JSON.stringify({
       ...data
     })
@@ -133,6 +134,7 @@ export const addAntennesToMAndataires = data => dispatch => {
       dispatch(hide("AddAntennes"));
       dispatch(mandataireProfilesUpdated(json));
     })
+    .then(() => Router.push("/mandataires"))
     .catch(e => {
       alert("Impossible de soumettre les données");
       throw e;

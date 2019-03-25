@@ -333,7 +333,8 @@ router.post("/services", async (req, res, next) => {
               telephone,
               adresse,
               code_postal,
-              ville
+              ville,
+              dispo_max
             },
             trx
           )
@@ -348,7 +349,8 @@ router.post("/services", async (req, res, next) => {
                   telephone_portable,
                   adresse,
                   code_postal,
-                  ville
+                  ville,
+                  dispo_max
                 },
                 trx
               )
@@ -377,13 +379,14 @@ router.post("/services", async (req, res, next) => {
                         user_id,
                         service_id,
                         etablissement: antenne.etablissement,
-                        nom: antenne.nom,
-                        prenom: antenne.prenom,
-                        email: antenne.email,
+                        contact_nom: antenne.nom,
+                        contact_prenom: antenne.prenom,
+                        contact_email: antenne.email,
                         telephone: antenne.telephone,
                         adresse: antenne.adresse,
                         code_postal: antenne.code_postal,
-                        ville: antenne.ville
+                        ville: antenne.ville,
+                        dispo_max: antenne.dispo_max
                       },
                       trx
                     );

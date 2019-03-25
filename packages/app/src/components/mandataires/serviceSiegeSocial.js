@@ -29,6 +29,24 @@ const ButtonEditMandataire = connect(
   </>
 ));
 
+const AjoutAntenne = connect(
+  state => ({
+    service: state.mandataire.service
+  }),
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ formData, show, service }) => (
+  <>
+    <a
+      href="#"
+      data-cy="button-edit-profile"
+      style={{ marginLeft: 0, fontSize: "1em" }}
+      onClick={() => show("AddAntennes")}
+    >
+      Ajout d'une antenne
+    </a>
+  </>
+));
+
 class ServiceSiegeSocial extends React.Component {
   render() {
     const service = this.props.service;
@@ -39,10 +57,7 @@ class ServiceSiegeSocial extends React.Component {
           <h3>Mes coordonnées</h3>
           <Fiche {...service} />
           <br />
-          <a href="#" onClick={() => show("AddAntennes")} style={{ fontSize: "1em" }}>
-            {" "}
-            Ajout d'une antenne
-          </a>
+          <AjoutAntenne />
           <br />
           <br />
           <ButtonEditMandataire formData={service} />

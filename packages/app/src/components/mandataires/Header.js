@@ -65,8 +65,7 @@ class HeaderMandataire extends React.Component {
         <Title>
           {type === "service" ? (
             <div>
-              {etablissement}
-              {" "}
+              {etablissement}{" "}
               <a href="#" onClick={this.props.handleClick} style={{ fontSize: "0.6em" }}>
                 {" "}
                 Informations du service
@@ -104,6 +103,11 @@ class HeaderMandataire extends React.Component {
   }
 }
 
-const HeaderMandataireRedux = connect(state => state.mandataire.profile)(HeaderMandataire);
+const HeaderMandataireRedux = connect(
+  state =>
+    state.mandataire.profile.type === "service"
+      ? state.mandataire.service
+      : state.mandataire.profile
+)(HeaderMandataire);
 
 export default HeaderMandataireRedux;

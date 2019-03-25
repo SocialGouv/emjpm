@@ -22,6 +22,8 @@ const {
   getAllServicesMandatairesByTis
 } = require("../db/queries/mandataires");
 
+const { createMandataireAntenne } = require("../db/queries/inscription");
+
 const { updateUser } = require("../db/queries/users");
 
 const { getTiByUserId } = require("../db/queries/tis");
@@ -30,18 +32,34 @@ const WHITELIST = [
   "nom",
   "prenom",
   "etablissement",
-  // "genre",
+  "genre",
   "telephone",
-  //"telephone_portable",
+  "telephone_portable",
   "email",
   "adresse",
   "code_postal",
   "ville",
   "dispo_max",
-  //"secretariat",
-  //"nb_secretariat",
+  "secretariat",
+  "nb_secretariat",
   "mesures_en_cours",
-  //  "zip",
+  "zip",
+  "contact_nom",
+  "contact_prenom",
+  "contact_email"
+];
+
+const WHITELISTANTENNE = [
+  "nom",
+  "prenom",
+  "etablissement",
+  "telephone",
+  "email",
+  "adresse",
+  "code_postal",
+  "ville",
+  "dispo_max",
+  "mesures_en_cours",
   "contact_nom",
   "contact_prenom",
   "contact_email"
@@ -50,6 +68,11 @@ const WHITELIST = [
 const whiteList = obj =>
   Object.keys(obj)
     .filter(key => WHITELIST.indexOf(key) > -1)
+    .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
+
+const whiteListAntenne = obj =>
+  Object.keys(obj)
+    .filter(key => WHITELISTANTENNE.indexOf(key) > -1)
     .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
 // récupère les données d'un mandataire
@@ -154,36 +177,35 @@ router.get(
   }
 );
 
-router.post("/mandataires", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   const {
     etablissement,
-    nom,
-    prenom,
+    contact_nom,
+    contact_prenom,
     telephone,
     telephone_portable,
-    email,
+    contact_email,
     adresse,
     code_postal,
     ville,
-    servce_id
+    service_id,
+    dispo_max
   } = req.body;
 
-  return queries
-    .createMandataire(
-      {
-        user_id: req.user.id,
-        etablissement,
-        telephone,
-        telephone_portable,
-        adresse,
-        code_postal,
-        ville,
-        nom,
-        prenom,
-        email,
-        servce_id
-      }
-    )
+  return createMandataireAntenne({
+    user_id: req.user.id,
+    etablissement,
+    telephone,
+    telephone_portable,
+    adresse,
+    code_postal,
+    ville,
+    contact_nom,
+    contact_prenom,
+    contact_email,
+    service_id,
+    dispo_max
+  })
     .then(() => res.json({ success: true }))
     .catch(e => {
       next(e);
@@ -216,7 +238,7 @@ router.put(
   async (req, res, next) => {
     try {
       console.log("req.body", req.body);
-      await updateService(req.body.id, whiteList(req.body));
+      await updateService(req.body.id, whiteListAntenne(req.body));
       console.log("trytry");
       const service = await getServiceByMandataire(req.body.id);
       res.status(200).json(service);
