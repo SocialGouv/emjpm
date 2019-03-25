@@ -129,7 +129,7 @@ function getAllByMandatairesFilter(
         ])
     )
     .innerJoin("users", "users.id", "mandataires.user_id")
-    .innerJoin("user_tis", "users.id", "mandataires.user_id")
+    .innerJoin("user_tis", "user_tis.user_id", "mandataires.user_id")
     .innerJoin(
       "geolocalisation_code_postal",
       "geolocalisation_code_postal.code_postal",
