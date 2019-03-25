@@ -16,7 +16,7 @@ $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up --bui
 $ NODE_ENV=test yarn workspace @emjpm/knex run migrate
 $ NODE_ENV=test yarn workspace @emjpm/knex run seeds
 
-$ yarn lerna exec --scope @optional/e2e run cypress:run --headed
+$ yarn run -- lerna --scope @optional/e2e run cypress:run -- --headed
 ```
 
 ## FAQ

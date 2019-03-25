@@ -84,8 +84,8 @@ jobs:
         - yarn
         - yarn lerna exec --scope @emjpm/e2e --scope @emjpm/knex yarn
       before_script:
-        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml exec api yarn knex migrate:latest
-        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml exec api yarn seeds
+        - NODE_ENV=test yarn workspace @emjpm/knex run migrate
+        - NODE_ENV=test yarn workspace @emjpm/knex run seeds
       script:
         - yarn lerna run --scope @emjpm/e2e --stream test
       after_script:

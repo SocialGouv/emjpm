@@ -69,8 +69,8 @@ describe("Inscription", () => {
       root_pass2: "pass1",
       root_nom: "nom 1",
       root_prenom: "prenom 1",
-      root_telephone: "telephone 1",
-      root_telephone_portable: "telephone_portable 1",
+      root_telephone: "0123456789",
+      root_telephone_portable: "9876543210",
       root_email: "email1@email.com",
       root_adresse: "39 rue du user 1",
       root_code_postal: 89100,
@@ -110,8 +110,8 @@ describe("Inscription", () => {
       root_pass2: "password101  ",
       root_nom: "nom 1",
       root_prenom: "prenom 1",
-      root_telephone: "telephone 1",
-      root_telephone_portable: "telephone_portable 1",
+      root_telephone: "0123456789",
+      root_telephone_portable: "9876543210",
       root_email: "email1@email.com",
       root_adresse: "39 rue du user 1",
       root_code_postal: 89100,
@@ -128,6 +128,48 @@ describe("Inscription", () => {
 
     cy.get("li.text-danger").should("have.length", 1);
   });
+
+  it("should NOT register individuel when phone number is invalid", function() {
+    cy.visit("/inscription");
+
+    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+      .get("[data-cy='region']")
+      .first()
+      .click();
+
+    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+      .get("[data-cy='ti']")
+      .first()
+      .click();
+
+    cy.get("input[type='radio'][value='individuel']")
+      .first()
+      .click();
+
+    const data = {
+      root_pass1: "password100",
+      root_pass2: "password100",
+      root_nom: "nom 1",
+      root_prenom: "prenom 1",
+      root_telephone: "telephone 1",
+      root_telephone_portable: "0123",
+      root_email: "email1@email.com",
+      root_adresse: "39 rue du user 1",
+      root_code_postal: 89100,
+      root_ville: "Ville user 1"
+    };
+
+    Object.keys(data).forEach(key => {
+      cy.get(`input[id='${key}']`).type(data[key]);
+    });
+
+    cy.get("li.text-danger").should("have.length", 0);
+
+    cy.get("[data-cy='form-inscription'] button[type='submit']").click();
+
+    cy.get("li.text-danger").should("have.length", 2);
+  });
+
   describe("registration individuel", () => {
     before(function() {
       cy.exec("npm run cypress:api-reset");
@@ -158,8 +200,8 @@ describe("Inscription", () => {
         root_pass2: "password100",
         root_nom: "nom 1",
         root_prenom: "prenom 1",
-        root_telephone: "telephone 1",
-        root_telephone_portable: "telephone_portable 1",
+        root_telephone: "0123456789",
+        root_telephone_portable: "9876543210",
         root_email: "email1@email.com",
         root_adresse: "39 rue du user 1",
         root_code_postal: 89100,

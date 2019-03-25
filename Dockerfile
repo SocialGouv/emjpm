@@ -14,6 +14,8 @@ RUN yarn --frozen-lockfile && yarn cache clean
 #
 
 COPY ./lerna.json /app/lerna.json
-COPY ./packages /app/packages
+COPY ./packages/knex /app/packages/knex
+COPY ./packages/api /app/packages/api
+COPY ./packages/app /app/packages/app
 
 RUN yarn build

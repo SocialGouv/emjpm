@@ -89,21 +89,13 @@ class Form extends React.Component {
     const hasSingleTi = this.state.tis.length === 1;
     const hasMultipleTi = this.state.tis.length > 1;
     const isTi = this.state.typeMandataire === "ti";
-    const isValidCodePostal =
-      formData.code_postal &&
-      formData.code_postal.match(/^(([0-8][0-9])|(9[0-5])|(2[AB]))[0-9]{3}$/);
-    const isValidTelephone = formData.telephone && formData.telephone.match(/^\d{10}$/);
 
     if (hasNoTi) {
       return alert("Saisissez au moins un TI de référence");
-    } else if (!isTi && !isValidTelephone) {
-      return alert("Saisissez un numéro de téléphone valide");
-    } else if (!isTi && !isValidCodePostal) {
-      return alert("Code postal non valide");
     } else if (isTi && hasMultipleTi) {
       return alert("Saisissez un seul TI de référence");
     } else {
-      if ((isTi && hasSingleTi) || (isValidCodePostal && !hasNoTi)) {
+      if ((isTi && hasSingleTi) || (!hasNoTi)) {
         this.setState({ status: "loading", formData }, () => {
           this.submitUser(formData);
         });
