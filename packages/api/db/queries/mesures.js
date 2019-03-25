@@ -56,6 +56,7 @@ const getAllMesuresByMandatairesFilter = (
       "geolocalisation_code_postal.code_postal",
       "mesures.code_postal"
     )
+    .whereIn("users.type", ["individuel", "prepose"])
     .groupByRaw(
       "geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,mandataires.id,users.type,users.email,users.nom,users.prenom,users.cabinet"
     )
