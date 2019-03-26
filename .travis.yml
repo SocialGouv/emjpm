@@ -76,6 +76,7 @@ jobs:
       cache:
         yarn: true
         directories:
+          - ./optional/e2e/node_modules
           # Cypress downloader cache folder
           - ~/.cache/Cypress
       before_install:
