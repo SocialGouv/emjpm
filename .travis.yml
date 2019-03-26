@@ -83,12 +83,12 @@ jobs:
         - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up -d --build
       install:
         - yarn
-        - yarn lerna exec --scope @emjpm/e2e --scope @emjpm/knex yarn
+        - yarn lerna exec --scope @optional/e2e yarn
       before_script:
         - NODE_ENV=test yarn workspace @emjpm/knex run migrate
         - NODE_ENV=test yarn workspace @emjpm/knex run seeds
       script:
-        - yarn lerna run --scope @emjpm/e2e --stream test
+        - yarn lerna run --scope @optional/e2e --stream test
       after_script:
         - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml down
 
