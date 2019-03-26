@@ -1,6 +1,9 @@
 require("./utils");
 
 describe("Login", () => {
+  before(function() {
+    cy.exec("npm run cypress:api-reset");
+  });
   it("Login with invalid account should show error message", function() {
     cy.visit("/");
     cy.get("#root_username").type("individuel");
@@ -23,7 +26,10 @@ describe("Login", () => {
     cy.get("#root_username").type("ad");
     cy.get("#root_password").type("ad123");
     cy.get("button.btn-success").click();
-    cy.get("div.alert-danger").should("contain", "Impossible de se connecter");
+    cy.get("div.alert-danger").should(
+      "contain",
+      "votre adresse email ou votre mot de passe sont invalides."
+    );
     cy.location("pathname").should("equal", "/");
   });
 
