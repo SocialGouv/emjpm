@@ -79,7 +79,8 @@ jobs:
           # Cypress downloader cache folder
           - ~/.cache/Cypress
       before_install:
-        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up -d
+        - docker build . -t socialgouv/emjpm:master
+        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up -d --build
       install:
         - yarn
         - yarn lerna exec --scope @emjpm/e2e --scope @emjpm/knex yarn
