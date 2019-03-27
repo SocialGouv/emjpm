@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should NOT register when email already exist 1`] = `
-Object {
-  "message": "Un compte avec cet email existe déjà",
-  "success": false,
-}
-`;
-
 exports[`should send an email with good values 1`] = `
 Array [
   Object {

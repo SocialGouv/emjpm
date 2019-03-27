@@ -65,7 +65,15 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
       }
       return res;
     })
-    .then(res => res && res.json());
+    .then(async (res) => {
+      if (res.status > 404 && res.status < 500) {
+        const body = await res.json();
+        const error = new Error(body.message);
+        Object.assign(error, body);
+        throw error;
+      }
+    })
+    .then(res => res.json());
 };
 
 // admin toggle
