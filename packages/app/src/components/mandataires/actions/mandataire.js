@@ -71,24 +71,40 @@ const fetchAllFiness = () =>
 /* ---------- ACTIONS CREATORS */
 
 //todo: bofbof
-export const mandataireMount = () => dispatch =>
-  fetchProfile()
-    .then(json => dispatch(mandataireProfileUpdated(json)))
-    .then(() => {
-      fetchAllFiness().then(etablissements => dispatch(finessUpdated(etablissements)));
-    })
-    .then(() => {
-      fetchAllTis().then(tis => dispatch(tisUpdated(tis)));
-    })
-    .then(() => {
-      fetchAntennes().then(antennes => dispatch(AntennesUpdated(antennes)));
-    })
-    .then(() => {
-      fetchProfiles().then(json => dispatch(mandataireProfilesUpdated(json)));
-    })
-    .then(() => {
-      fetchService().then(json => dispatch(serviceProfileUpdated(json)));
-    });
+export const mandataireMount = () => dispatch => {
+  fetchProfile().then(json => {
+    if (json.type === "service") {
+      fetchAllFiness()
+        .then(etablissements => dispatch(finessUpdated(etablissements)))
+        .then(() => {
+          fetchAllTis().then(tis => dispatch(tisUpdated(tis)));
+        })
+        .then(() => {
+          fetchAntennes().then(antennes => dispatch(AntennesUpdated(antennes)));
+        })
+        .then(() => {
+          fetchProfiles().then(json => {
+            dispatch(mandataireProfilesUpdated(json));
+          });
+        })
+        .then(() => {
+          fetchService().then(json => dispatch(serviceProfileUpdated(json)));
+        });
+    } else {
+      fetchAllFiness()
+        .then(etablissements => dispatch(finessUpdated(etablissements)))
+        .then(() => {
+          fetchAllTis().then(tis => dispatch(tisUpdated(tis)));
+        })
+        .then(() => {
+          fetchAntennes().then(antennes => dispatch(AntennesUpdated(antennes)));
+        })
+        .then(() => {
+          fetchProfiles().then(json => dispatch(mandataireProfilesUpdated(json)));
+        });
+    }
+  });
+};
 
 export const updateMandataire = data => dispatch => {
   if (data.type === "service") {
@@ -104,9 +120,10 @@ export const updateMandataire = data => dispatch => {
       });
   } else {
     return updateMandataireApi(data)
+      .then(() => fetchProfiles())
       .then(json => {
         dispatch(hide("EditMandataire"));
-        dispatch(mandataireProfileUpdated(json));
+        dispatch(mandataireProfilesUpdated(json));
       })
       .catch(e => {
         alert("Impossible de soumettre les données");

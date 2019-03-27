@@ -13,10 +13,7 @@ export const getColorFromDisponibilite = dispo => {
 
 export const PillDispo = ({ mandataireId, profiles }) => {
   const newMandataire =
-    profiles && profiles.length === 0 ? profiles : profiles && profiles.filter(manda => manda.id === mandataireId)[0];
-
-  console.log("profiles", profiles)
-  console.log("newMandataire", newMandataire)
+    profiles && profiles.length? profiles && profiles.filter(manda => manda.id === mandataireId)[0] : profiles ;
 
   const mesures_en_cours = newMandataire && newMandataire.mesures_en_cours;
   const dispo_max = newMandataire && newMandataire.dispo_max;

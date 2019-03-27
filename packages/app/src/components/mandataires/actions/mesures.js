@@ -99,7 +99,6 @@ export const updateMesureAttente = data => dispatch => {
 };
 
 export const closeMesure = data => dispatch =>{
-  console.log("dataClose", data)
   closeMesureApi(data)
     .then(json => {
       dispatch(hide("CloseMesure"));

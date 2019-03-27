@@ -87,7 +87,7 @@ class MandataireProfile extends React.Component {
     const { etablissements, tis } = this.props;
 
     const newMandataire =
-      this.props.currentMandataire && this.props.currentMandataire.length !== 0
+      this.props.currentMandataire && this.props.currentMandataire.length
         ? this.props.currentMandataire &&
           this.props.currentMandataire.filter(manda => manda.id === this.props.mandataireId)[0]
         : this.props.currentMandataire && this.props.currentMandataire;

@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 
 import apiFetch from "../communComponents/Api";
 import { DummyTabs } from "../index";
-import { Button, Layout } from "..";
 import Router from "next/router";
 
 import { CheckCircle, Clock, FilePlus, Home, Map, User, UserMinus, XCircle } from "react-feather";
@@ -14,33 +13,17 @@ import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
 import { connect } from "react-redux";
 import Form from "react-jsonschema-form";
-import { format } from "date-fns";
 import { bindActionCreators } from "redux";
 import { changeEnum } from "./actions/mandataire";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 
-/*class ServiceTabs extends React.Component {
-state= {
-  enum
-}
-
-  render() {
-    const tabsService = this.props.antennesMandas.map(antenne => ({
-      text: antenne.etablissement,
-      url: "/admin/users",
-      icon: <User />,
-      content: (
-        <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
-          <ServiceTabsAntennes handleClick={this.props.handleClick} mandataireID={antenne.id} antenne={antenne} />
-        </div>
-      )
-    }));
-    return <DummyTabs tabs={tabsService} />;
-  }
-}*/
-
 class ServiceTabs extends React.Component {
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.enum !== this.props.enum) {
+      this.forceUpdate()
+    }
+  }
   render() {
     const onSubmitted = ({ formData }) => {
       this.props.onChange(formData);
@@ -57,10 +40,6 @@ class ServiceTabs extends React.Component {
         label: false
       }
     };
-    console.log(
-      "antenne.id ",
-      this.props.antennesMandas.filter(antenne => antenne.id === this.props.enum)[0]
-    );
 
     return (
       <>
@@ -115,6 +94,7 @@ class ServiceTabsAntennes extends React.Component {
           this.props.antenne.mesures_en_cours -
           this.props.antenne.mesures_en_attente) ||
       null;
+    console.log("this.props.mandataireID", this.props.mandataireID);
 
     const tabs = [
       {

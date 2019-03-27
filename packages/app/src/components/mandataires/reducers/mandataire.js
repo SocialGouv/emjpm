@@ -34,9 +34,7 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
 
       return {
         ...state,
-        profile: action.data,
-        enum: action.data.id
-      };
+        profile: action.data};
     case "CHANGE_ENUM":
       return {
         ...state,
@@ -50,7 +48,8 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
     case "MANDATAIRE_PROFILES_UPDATED":
       return {
         ...state,
-        profiles: action.data
+        profiles: action.data,
+        enum: action.data[0].id
       };
     case "FINESS_UPDATED":
       return {
