@@ -1,4 +1,4 @@
-require("./utils");
+require("./.utils");
 
 describe("Mandataires", function() {
   describe("Session mandataire", () => {

@@ -1,4 +1,4 @@
-require("./utils");
+require("./.utils");
 
 describe("Inscription", () => {
   it("should switch forms correctly", function() {

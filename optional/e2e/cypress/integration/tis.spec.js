@@ -1,4 +1,4 @@
-require("./utils");
+require("./.utils");
 
 describe("Tis", function() {
   describe("Session Tis", () => {
