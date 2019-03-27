@@ -342,12 +342,13 @@ router.get("/services", typeRequired("ti"), async (req, res, next) => {
     .catch(next);
 });
 
-// todo: test
-
-router.post("/PosteCode", loginRequired, async (req, res, next) => {
-  getCoordonneesByPostCode(req.body.codePoste)
-    .then(mandataires => res.status(200).json(mandataires))
-    .catch(next);
+router.get("/postcode/:postcode", loginRequired, async (req, res, next) => {
+  try {
+    const mandataires = await getCoordonneesByPostCode(req.params.postcode);
+    res.status(200).json(mandataires);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // ?
