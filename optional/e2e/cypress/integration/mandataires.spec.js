@@ -29,10 +29,10 @@ describe("Mandataires", function() {
         it("table should show 2 mesures", () => {
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
-        it("counter should show 2/3", () => {
+        it("counter should show 2/5", () => {
           cy.get(".react-tabs .react-tabs__tab-list").should(
             "contain",
-            "2 / 3"
+            "2 / 5"
           );
         });
         it("can add new mesure", () => {
@@ -68,10 +68,10 @@ describe("Mandataires", function() {
             ".ReactTable .rt-tr-group:first-child .rt-td:nth-child(5)"
           ).should("contain", "1977");
         });
-        it("counter should now show 3/3", () => {
+        it("counter should now show 3/5", () => {
           cy.get(".react-tabs .react-tabs__tab-list").should(
             "contain",
-            "3 / 3"
+            "3 / 5"
           );
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
         });
@@ -86,14 +86,14 @@ describe("Mandataires", function() {
           });
           cy.get(".react-tabs .react-tabs__tab-list").should(
             "contain",
-            "2 / 3"
+            "2 / 5"
           );
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
-        it("counter should now show 2/3", () => {
+        it("counter should now show 2/5", () => {
           cy.get(".react-tabs .react-tabs__tab-list").should(
             "contain",
-            "2 / 3"
+            "2 / 5"
           );
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
@@ -111,7 +111,7 @@ describe("Mandataires", function() {
           cy.get("[data-cy=fiche-manda-adresse]").contains(
             "21 rue de houx 62000 Arras"
           );
-          cy.get("[data-cy=fiche-manda-dispo-max]").contains("3");
+          cy.get("[data-cy=fiche-manda-dispo-max]").contains("5");
           cy.get("[data-cy=fiche-manda-secretariat]").contains("Non");
         });
       });
