@@ -218,9 +218,6 @@ router.get(
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
-
-      console.log("azertyuiop", mandataire);
-
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
@@ -237,9 +234,7 @@ router.put(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      console.log("req.body", req.body);
       await updateService(req.body.id, whiteListAntenne(req.body));
-      console.log("trytry");
       const service = await getServiceByMandataire(req.body.id);
       res.status(200).json(service);
     } catch (err) {

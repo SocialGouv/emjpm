@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 
 import apiFetch from "../communComponents/Api";
 import { DummyTabs } from "../index";
-import { Button, DummyTabs, Layout } from "..";
+import { Button, Layout } from "..";
 import Router from "next/router";
 
 import { CheckCircle, Clock, FilePlus, Home, Map, User, UserMinus, XCircle } from "react-feather";
@@ -110,9 +110,11 @@ class ServiceTabsAntennes extends React.Component {
     );
 
     const currentDispos =
-      this.props.antenne && this.props.antenne.dispo_max -
-        this.props.antenne.mesures_en_cours -
-        this.props.antenne.mesures_en_attente || null;
+      (this.props.antenne &&
+        this.props.antenne.dispo_max -
+          this.props.antenne.mesures_en_cours -
+          this.props.antenne.mesures_en_attente) ||
+      null;
 
     const tabs = [
       {

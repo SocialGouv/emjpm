@@ -205,7 +205,6 @@ router.post(
         res.status(200).json();
         return;
       }
-      console.log("res", req.body);
 
       const mandataire = await (req.user.type === "service"
         ? getMandataireById(req.body.mandataire_id)

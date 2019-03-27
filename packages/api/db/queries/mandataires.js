@@ -147,11 +147,7 @@ function getAllByMandatairesFilter(
     .from("mandataires")
     .select(
       knex.raw(
-        "distinct ON(mandataires.id) mandataires.id,mandataires.*,users.type,users.nom,users.prenom,users.email"
-      ),
-      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
-      knex.raw(
-        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
+        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,users.type,users.email,users.nom,users.prenom,users.cabinet ,services.etablissement as service_etablissement, services.nom as service_nom, services.telephone as service_telephone, services.prenom as service_prenom, services.email as service_email, services.dispo_max as service_dispo_max"
       )
     )
     .where({ "user_tis.ti_id": parseInt(ti_id), "users.active": true })
@@ -173,9 +169,40 @@ function getAllByMandatairesFilter(
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
     )
+    .leftOuterJoin("services", "mandataires.service_id", "services.id")
     .groupByRaw(
-      "mandataires.id,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,users.type,users.nom,users.prenom,users.email"
-    );
+      "geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,mandataires.id,users.type,users.email,users.nom,users.prenom,users.cabinet,service_etablissement, service_nom, service_telephone,  service_prenom,  service_email, service_dispo_max"
+    )
+    .union(function() {
+      this.select(
+        "mandataires.id",
+        "mandataires.*",
+        "geolocalisation_code_postal.latitude",
+        "geolocalisation_code_postal.longitude",
+        "users.type",
+        "users.email",
+        "users.nom",
+        "users.prenom",
+        "users.cabinet",
+        "services.etablissement as service_etablissement",
+        "services.nom as service_nom",
+        "services.telephone as service_telephone",
+        "services.prenom as service_prenom",
+        "services.email as service_email",
+        "services.dispo_max as service_dispo_max"
+      )
+        .from("mandataires")
+        .innerJoin("users", "mandataires.user_id", "users.id")
+        .innerJoin("service_tis", "service_tis.mandataire_id", "mandataires.id")
+        .innerJoin(
+          "geolocalisation_code_postal",
+          "geolocalisation_code_postal.code_postal",
+          "mandataires.code_postal"
+        )
+        .leftOuterJoin("services", "mandataires.service_id", "services.id")
+        .where("users.type", "service")
+        .where("service_tis.ti_id", parseInt(ti_id));
+    });
 }
 
 const getAllMandataires = ti_id =>
@@ -202,7 +229,7 @@ const getAllMandataires = ti_id =>
 
 const getAllServicesByTis = ti_id =>
   knex
-    .from("user_tis")
+    .from("service_tis")
     .select(
       "mandataires.id",
       "mandataires.*",
@@ -212,7 +239,7 @@ const getAllServicesByTis = ti_id =>
       "users.prenom",
       "users.cabinet"
     )
-    .innerJoin("mandataires", "user_tis.user_id", "mandataires.user_id")
+    .innerJoin("mandataires", "service_tis.mandataire_id", "mandataires.id")
     .innerJoin("users", "mandataires.user_id", "users.id")
     .where({ ti_id: parseInt(ti_id), "users.type": "service" });
 
@@ -234,6 +261,7 @@ const getAllServicesMandatairesByTis = ti_id =>
       " services.email as service_email",
       " services.dispo_max as service_dispo_max"
     )
+    .debug()
     .innerJoin("mandataires", "service_tis.mandataire_id", "mandataires.id")
     .innerJoin("users", "mandataires.user_id", "users.id")
     .innerJoin("services", "mandataires.service_id", "services.id")
@@ -275,6 +303,22 @@ const isMandataireInTi = (mandataire_id, ti_id) =>
     })
     .then(res => res.length > 0);
 
+const isServiceInTi = (mandataire_id, ti_id) =>
+  knex
+    .from("service_tis")
+    .select(
+      "mandataires.id",
+      "mandataires.user_id",
+      "service_tis.mandataire_id",
+      "service_tis.ti_id"
+    )
+    .innerJoin("mandataires", "mandataires.id", "service_tis.mandataire_id")
+    .where({
+      "mandataires.id": mandataire_id,
+      ti_id
+    })
+    .then(res => res.length > 0);
+
 module.exports = {
   isMandataireInTi,
   updateCountMesures,
@@ -293,5 +337,6 @@ module.exports = {
   getAllmandataireByUserId,
   getServiceByMandataire,
   updateService,
-  getAllServicesMandatairesByTis
+  getAllServicesMandatairesByTis,
+  isServiceInTi
 };

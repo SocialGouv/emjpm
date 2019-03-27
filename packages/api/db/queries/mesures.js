@@ -73,16 +73,16 @@ const getAllMesuresByMandatairesFilter = (
         "users.nom",
         "users.prenom",
         "users.cabinet",
-        " services.etablissement as service_etablissement",
-        " services.nom as service_nom",
-        " services.telephone as service_telephone",
-        " services.prenom as service_prenom",
-        " services.email as service_email",
-        " services.dispo_max as service_dispo_max"
+        "services.etablissement as service_etablissement",
+        "services.nom as service_nom",
+        "services.telephone as service_telephone",
+        "services.prenom as service_prenom",
+        "services.email as service_email",
+        "services.dispo_max as service_dispo_max"
       )
         .from("mandataires")
         .innerJoin("users", "mandataires.user_id", "users.id")
-        .innerJoin("user_tis", "user_tis.user_id", "users.id")
+        .innerJoin("service_tis", "service_tis.mandataire_id", "mandataires.id")
         .innerJoin(
           "geolocalisation_code_postal",
           "geolocalisation_code_postal.code_postal",
@@ -90,7 +90,7 @@ const getAllMesuresByMandatairesFilter = (
         )
         .leftOuterJoin("services", "mandataires.service_id", "services.id")
         .where("users.type", "service")
-        .where("user_tis.ti_id", parseInt(ti_id));
+        .where("service_tis.ti_id", parseInt(ti_id));
     });
 
 // bulk insert some data and prevent mesure.numero_dossier duplicates

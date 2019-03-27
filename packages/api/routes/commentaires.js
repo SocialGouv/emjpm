@@ -10,7 +10,11 @@ const {
   deleteCommentaire
 } = require("../db/queries/commentaires");
 
-const { isMandataireInTi } = require("../db/queries/mandataires");
+const {
+  isMandataireInTi,
+  isServiceInTi,
+  getMandataireById
+} = require("../db/queries/mandataires");
 
 const { getTiByUserId } = require("../db/queries/tis");
 
@@ -41,7 +45,10 @@ router.get(
       if (!ti) {
         throw createError.Unauthorized(`TI not found`);
       }
-      const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
+      const mandataire = await getMandataireById(req.params.mandataireId);
+      const isAllowed = await (mandataire.type === "service"
+        ? isServiceInTi(req.params.mandataireId, ti.id)
+        : isMandataireInTi(req.params.mandataireId, ti.id));
       if (!isAllowed) {
         throw createError.Unauthorized(`Mandataire not found in current TI`);
       }
@@ -102,7 +109,10 @@ router.post(
       if (!ti) {
         throw createError.Unauthorized(`TI not found`);
       }
-      const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
+      const mandataire = await getMandataireById(req.params.mandataireId);
+      const isAllowed = await (mandataire.type === "service"
+        ? isServiceInTi(req.params.mandataireId, ti.id)
+        : isMandataireInTi(req.params.mandataireId, ti.id));
       if (!isAllowed) {
         throw createError.Unauthorized(`Mandataire not found in current TI`);
       }
@@ -163,7 +173,12 @@ router.delete(
       if (!ti) {
         throw createError.Unauthorized(`TI not found`);
       }
-      const isAllowed = await isMandataireInTi(req.params.mandataireId, ti.id);
+
+      const mandataire = await getMandataireById(req.params.mandataireId);
+
+      const isAllowed = await (mandataire.type === "service"
+        ? isServiceInTi(req.params.mandataireId, ti.id)
+        : isMandataireInTi(req.params.mandataireId, ti.id));
       if (!isAllowed) {
         throw createError.Unauthorized(`Mandataire not found in current TI`);
       }

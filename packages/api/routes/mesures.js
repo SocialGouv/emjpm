@@ -88,6 +88,7 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
  */
 router.post("/filters", loginRequired, async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
+  console.log("azertyuiwcfgh")
   if (!ti) {
     return next(new Error(401));
   }
