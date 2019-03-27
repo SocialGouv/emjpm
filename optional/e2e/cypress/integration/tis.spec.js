@@ -88,7 +88,7 @@ describe("Tis", function() {
           cy.get(".react-tabs .rt-tr-group").should("have.length", 0);
         });
         it("table should show 1 mandataires on Lille Geolocalisation ", () => {
-          cy.get("[data-cy=tab-code-postal]").type("59000");
+          cy.get("[data-cy=tab-code-postal]").type("62000");
           cy.get("[data-cy=tab-recherche]").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
         });
