@@ -54,8 +54,8 @@ jobs:
         # Start the database first so it has the time to boot before we interact with it.
         - docker-compose up -d db
       before_script:
-        - yarn workspace @emjpm/api knex migrate:latest --env test
-        - yarn workspace @emjpm/api knex seed:run --env test
+        - yarn workspace @emjpm/knex knex migrate:latest --env test
+        - yarn workspace @emjpm/knex knex seed:run --env test
       script:
         - yarn build --stream
         # - yarn lint --stream
