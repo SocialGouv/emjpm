@@ -113,8 +113,19 @@ test("should NOT register when username already exist", async () => {
       username: "jeremy"
     });
 
+  expect(response.body).toMatchInlineSnapshot(
+    { stack: expect.any(String) },
+    `
+Object {
+  "message": "Key (username)=(jeremy) already exists.",
+  "name": "ConflictError",
+  "stack": Any<String>,
+  "status": 409,
+}
+`
+  );
+  expect(response.status).toBe(409);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
-  expect(response.status).toBe(500);
 });
 
 test("should NOT register when empty username", async () => {
