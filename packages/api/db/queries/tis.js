@@ -35,7 +35,7 @@ const addMandataireTis = (ti_id, mandataire_id) =>
     user_id: findUserbymandataire(mandataire_id)
   });
 
-const addMandataireTisService = (ti_id, mandataire_id) =>
+const addServiceTis = (ti_id, mandataire_id) =>
   knex("service_tis").insert({
     ti_id: ti_id,
     mandataire_id: mandataire_id
@@ -98,5 +98,5 @@ module.exports = {
   getTiByUserId,
   getTiByUserIdWithCodePostal,
   getAllTisByMandataireService,
-  addMandataireTisService
+  addServiceTis
 };

@@ -61,7 +61,7 @@ const getMandataire = filters =>
     .where(filters)
     .first();
 
-const getAllmandataireByUserId = user_id =>
+const getAllMandatairesByUserId = user_id =>
   knex("mandataires")
     .select(
       "mandataires.*",
@@ -261,7 +261,6 @@ const getAllServicesMandatairesByTis = ti_id =>
       " services.email as service_email",
       " services.dispo_max as service_dispo_max"
     )
-    .debug()
     .innerJoin("mandataires", "service_tis.mandataire_id", "mandataires.id")
     .innerJoin("users", "mandataires.user_id", "users.id")
     .innerJoin("services", "mandataires.service_id", "services.id")
@@ -334,7 +333,7 @@ module.exports = {
   getAllByMandatairesFilter,
   update,
   getCoordonneesByPostCode,
-  getAllmandataireByUserId,
+  getAllMandatairesByUserId,
   getServiceByMandataire,
   updateService,
   getAllServicesMandatairesByTis,

@@ -125,7 +125,6 @@ class FicheMandataireModal extends React.Component {
       handleHide
     } = this.props;
 
-    console.log("currentMandataire", currentMandataire);
     return (
       <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
         <div style={{ display: "flex", padding: "20px", boxSizing: "border-box" }}>

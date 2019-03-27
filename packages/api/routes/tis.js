@@ -9,7 +9,7 @@ const {
   deleteMandataireTis,
   getTis,
   getAllTisByMandataireService,
-  addMandataireTisService
+  addServiceTis
 } = require("../db/queries/tis");
 
 const {
@@ -87,7 +87,7 @@ router.post("/:mandataireId/tis", loginRequired, async (req, res, next) => {
     : getMandataireByUserId(req.user.id));
 
   req.user.type === "service"
-    ? addMandataireTisService(req.body.ti_id, mandataire.id)
+    ? addServiceTis(req.body.ti_id, mandataire.id)
         .then(() => getAllTisByMandataire(mandataire.id))
         .then(tis => res.status(200).json(tis))
         .catch(error => next(error))

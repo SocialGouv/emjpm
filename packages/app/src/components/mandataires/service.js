@@ -94,7 +94,6 @@ class ServiceTabsAntennes extends React.Component {
           this.props.antenne.mesures_en_cours -
           this.props.antenne.mesures_en_attente) ||
       null;
-    console.log("this.props.mandataireID", this.props.mandataireID);
 
     const tabs = [
       {

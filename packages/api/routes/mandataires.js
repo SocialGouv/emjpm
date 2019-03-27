@@ -16,7 +16,7 @@ const {
   getAllMandataires,
   getAllByMandatairesFilter,
   getCoordonneesByPostCode,
-  getAllmandataireByUserId,
+  getAllMandatairesByUserId,
   getServiceByMandataire,
   updateService,
   getAllServicesMandatairesByTis
@@ -214,7 +214,7 @@ router.post("/", async (req, res, next) => {
 
 router.get(
   "/service",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("service"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
@@ -249,7 +249,7 @@ router.get(
   async (req, res, next) => {
     try {
       const mandataire = await (req.user.type === "service"
-        ? getAllmandataireByUserId(req.user.id)
+        ? getAllMandatairesByUserId(req.user.id)
         : getMandataireByUserId(req.user.id));
 
       if (!mandataire) {
@@ -442,11 +442,12 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
     .catch(error => next(error));
 });
 
+//ToDO(adrien): if ok
 router.get(
   "/antennes",
-  typeRequired("service", "prepose", "individuel"),
+  typeRequired( "individuel"),
   async (req, res, next) => {
-    getAllmandataireByUserId(req.user.id)
+    getAllMandatairesByUserId(req.user.id)
       .then(mandataires => res.status(200).json(mandataires))
       .catch(error => next(error));
   }
@@ -521,9 +522,11 @@ router.post("/PosteCode", loginRequired, async (req, res, next) => {
  *               items:
  *                 type: object
  */
+
+//ToDO(adrien): check IF ok
 router.put(
   "/:mandataireId/capacite",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("service"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
