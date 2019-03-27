@@ -6,10 +6,6 @@ beforeAll(async () => {
   await knex.migrate.latest();
 });
 
-afterAll(async () => {
-  await knex.destroy();
-});
-
 test("should list all tables", async () => {
   const query = `
     SELECT table_name FROM information_schema.tables
