@@ -1,4 +1,5 @@
 const express = require("express");
+const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 
 const salt = bcrypt.genSaltSync();
@@ -267,6 +268,11 @@ router.post("/mandataires", async (req, res, next) => {
       return res.json({ success: true });
     })
     .catch(e => {
+      // see https://www.postgresql.org/docs/9.2/errcodes-appendix.html
+      const PQ_UNIQUE_VIOLATION_ERROR_CODE = String(23505);
+      if (e.code === PQ_UNIQUE_VIOLATION_ERROR_CODE) {
+        return next(createError.Conflict(e.detail));
+      }
       next(e);
     });
 });
