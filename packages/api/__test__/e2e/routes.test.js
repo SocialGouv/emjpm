@@ -1,9 +1,14 @@
+
+const { knex } = global;
+jest.setMock("@emjpm/api/db/knex", knex);
+
 const { shouldBeProtected } = require("./utils");
 
-const knex = require("@emjpm/api/db/knex");
+//
 
-afterAll(async () => {
-  await knex.destroy();
+beforeAll(async () => {
+  await knex.migrate.latest();
+  await knex.seed.run();
 });
 
 const accessChecks = [

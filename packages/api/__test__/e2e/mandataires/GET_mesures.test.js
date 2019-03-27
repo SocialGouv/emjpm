@@ -1,17 +1,19 @@
 //
 
 const request = require("supertest");
+
+const { knex } = global;
+jest.setMock("@emjpm/api/db/knex", knex);
+
 const server = require("@emjpm/api/app");
-const knex = require("@emjpm/api/db/knex");
 
 const { getTokenByUserType } = require("../utils");
 
-beforeAll(async () => {
-  await knex.seed.run();
-});
+//
 
-afterAll(async () => {
-  await knex.destroy();
+beforeAll(async () => {
+  await knex.migrate.latest();
+  await knex.seed.run();
 });
 
 test("should get list of mesures", async () => {

@@ -9,17 +9,21 @@ jest.setMock("nodemailer", nodemailerMock);
 process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 process.env.APP_URL = "https://emjpm.gouv.fr";
 
+const { knex } = global;
+jest.setMock("@emjpm/api/db/knex", knex);
+
 const server = require("@emjpm/api/app");
 const { getAllTisByMandataire } = require("@emjpm/api/db/queries/tis");
-const knex = require("@emjpm/api/db/knex");
 
-beforeEach(async () => {
+//
+
+beforeAll(async () => {
+  await knex.migrate.latest();
   await knex.seed.run();
-  nodemailerMock.mock.reset();
 });
 
-afterAll(async () => {
-  await knex.destroy();
+beforeEach(async () => {
+  nodemailerMock.mock.reset();
 });
 
 const defaultRegister = {
@@ -39,41 +43,56 @@ const defaultRegister = {
   longitude: 2
 };
 
+afterEach(async () => {
+  // Remove created user
+  const user = await knex("users")
+    .where({ email: defaultRegister.email })
+    .first();
+
+  if (!user) {
+    return;
+  }
+
+  try {
+    await knex("user_tis")
+      .where({ user_id: user.id })
+      .delete();
+  } catch (e) {
+    // NOTE(douglasduteil): We ignore the error here.
+    // Not all users have a `user_tis` relation.
+  }
+
+  await knex("mandataires")
+    .where({ user_id: user.id })
+    .delete();
+
+  await knex("users")
+    .where({ id: user.id })
+    .delete();
+});
+
 test("should register with good values", async () => {
   const response = await request(server)
     .post("/api/v1/inscription/mandataires")
     .send(defaultRegister);
-  expect(response.body.success).toBe(true);
+
+  expect(response.body).toMatchInlineSnapshot(`
+Object {
+  "success": true,
+}
+`);
   expect(response.status).toBe(200);
 
-  const lastInsert = await knex
-    .table("users")
-    .orderBy("created_at", "desc")
-    .first();
-  expect(lastInsert.username).toEqual("toto");
-});
-
-test("should send an email with good values", async () => {
-  await request(server)
-    .post("/api/v1/inscription/mandataires")
-    .send(defaultRegister);
-
-  expect(nodemailerMock.mock.sentMail().length).toBe(1);
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
-});
-
-test("created user should NOT be active", async () => {
-  const response = await request(server)
-    .post("/api/v1/inscription/mandataires")
-    .send(defaultRegister);
-  expect(response.body.success).toBe(true);
-  expect(response.status).toBe(200);
 
   const lastInsert = await knex
     .table("users")
     .orderBy("created_at", "desc")
     .first();
-  expect(lastInsert.active).toBe(false);
+  expect(lastInsert).toMatchSnapshot({
+    created_at: expect.any(Object),
+    password: expect.any(String)
+  });
 });
 
 test("should NOT register when pass1!==pass2", async () => {
@@ -103,12 +122,14 @@ test("should NOT register when email already exist", async () => {
       email: "marcel@paris.com"
     });
 
-  expect(response.body).toMatchSnapshot({
-    success: false,
-    message: "Un compte avec cet email existe déjà"
-  });
-  expect(nodemailerMock.mock.sentMail().length).toBe(0);
+  expect(response.body).toMatchInlineSnapshot(`
+Object {
+  "message": "Un compte avec cet email existe déjà",
+  "success": false,
+}
+`);
   expect(response.status).toBe(409);
+  expect(nodemailerMock.mock.sentMail().length).toBe(0);
 });
 
 test("should NOT register when username already exist", async () => {
@@ -141,20 +162,30 @@ test("should NOT register when empty username", async () => {
       ...defaultRegister,
       username: ""
     });
+
+  expect(response.body).toMatchInlineSnapshot(`
+Object {
+  "message": "Les mots de passe ne sont pas conformes",
+  "success": false,
+}
+`);
+  expect(response.status).toBe(422);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
-  expect(response.status).toBe(500);
 });
 
 test("should add mandataire tis", async () => {
-  await request(server)
+  const response = await request(server)
     .post("/api/v1/inscription/mandataires")
     .send({
       ...defaultRegister,
       tis: [1, 2]
     });
 
-  const mandataire = await knex
-    .table("mandataires")
+  expect(response.body).toMatchSnapshot();
+  expect(response.status).toBe(200);
+  expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
+
+  const mandataire = await knex("mandataires")
     .orderBy("created_at", "desc")
     .first();
   const tis = await getAllTisByMandataire(mandataire.id);
@@ -162,7 +193,7 @@ test("should add mandataire tis", async () => {
 });
 
 test("should add user tis", async () => {
-  await request(server)
+  const response = await request(server)
     .post("/api/v1/inscription/tis")
     .send({
       ...defaultRegister,
@@ -171,6 +202,14 @@ test("should add user tis", async () => {
       cabinet: "2A",
       tis: [1]
     });
+
+  expect(response.body).toMatchInlineSnapshot(`
+Object {
+  "success": true,
+}
+`);
+  expect(response.status).toBe(200);
+  expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
 
   const user = await knex
     .table("users")
