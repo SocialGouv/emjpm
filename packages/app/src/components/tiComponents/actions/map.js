@@ -3,13 +3,7 @@ import apiFetch from "../../communComponents/Api";
 export const COORDINATES_UPDATED = "COORDINATES_UPDATED";
 /* ---------- API */
 
-const fetchpostCode = codePostal =>
-  apiFetch("/mandataires/PosteCode", {
-    method: "POST",
-    body: JSON.stringify({
-      codePoste: codePostal
-    })
-  });
+const fetchpostCode = codePostal => apiFetch(`/mandataires/postcode/${codePostal}`);
 /* ---------- ACTIONS CREATORS */
 
 export const zoomCodePostal = codePostal => dispatch => {
