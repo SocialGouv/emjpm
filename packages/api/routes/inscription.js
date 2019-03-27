@@ -195,7 +195,10 @@ router.post("/mandataires", async (req, res, next) => {
   } = req.body;
 
   if (pass1 !== pass2 || username.trim() === "") {
-    return res.status(500).json({
+    // ! FIXME(douglasduteil): prefer using standard `createError`
+    // ! like : throw createError.UnprocessableEntity("...");
+    // ! We might want to separate empty username error too here...
+    return res.status(422).json({
       success: false,
       message: "Les mots de passe ne sont pas conformes"
     });

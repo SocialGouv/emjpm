@@ -85,8 +85,14 @@ test("should NOT register when pass1!==pass2", async () => {
       pass2: "world"
     });
 
+  expect(response.body).toMatchInlineSnapshot(`
+Object {
+  "message": "Les mots de passe ne sont pas conformes",
+  "success": false,
+}
+`);
+  expect(response.status).toBe(422);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
-  expect(response.status).toBe(500);
 });
 
 test("should NOT register when email already exist", async () => {
