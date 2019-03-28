@@ -56,10 +56,10 @@ class HeaderMandataire extends React.Component {
       dispo_max,
       mesures_en_cours,
       mesures_en_attente
-    } = this.props;
+    } = this.props.profiles;
     const currentDispos = dispo_max - mesures_en_cours - mesures_en_attente || null;
     const fullName = `${nom || ""} ${prenom || ""}`;
-
+    
     return (
       <ContainerMandataire className="container">
         <Title>
@@ -103,11 +103,11 @@ class HeaderMandataire extends React.Component {
   }
 }
 
-const HeaderMandataireRedux = connect(
-  state =>
-    state.mandataire.profile.type === "service"
+const HeaderMandataireRedux = connect(state => ({
+  profiles:
+  state.mandataire.profiles && state.mandataire.profiles[0] &&  state.mandataire.profiles[0].type === "service"
       ? state.mandataire.service
-      : state.mandataire.profile
-)(HeaderMandataire);
+      : state.mandataire.profiles
+}))(HeaderMandataire);
 
 export default HeaderMandataireRedux;
