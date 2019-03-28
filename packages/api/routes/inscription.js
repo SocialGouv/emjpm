@@ -210,7 +210,7 @@ router.post("/mandataires", async (req, res, next) => {
     });
   }
 
-  knex
+  return knex
     .transaction(trx =>
       // create user
       queries
