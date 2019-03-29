@@ -276,10 +276,23 @@ describe("valid civilites", () => {
 });
 
 describe("fix various invalid data", () => {
-  test(`should normalize civilites`, () => {
+  test(`should fix column names`, () => {
     expect.assertions(3);
     const workbook = XLSX.readFile(path.join(__dirname, "excel", "invalid-various.xlsx"));
     const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
+
+describe("fix various invalid data 2", () => {
+  test(`should import correctly`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test.xls"));
+    const cleaned = read(workbook);
+    console.log("cleaned", cleaned);
     expect(cleaned).toMatchSnapshot();
     const validations = validate(cleaned);
     expect(validations.errors).toBeUndefined();
