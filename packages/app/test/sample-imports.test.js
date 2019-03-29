@@ -274,3 +274,15 @@ describe("valid civilites", () => {
     expect(validations).toMatchSnapshot();
   });
 });
+
+describe("fix various invalid data", () => {
+  test(`should normalize civilites`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "invalid-various.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});

@@ -13,6 +13,7 @@ const references = {
     "curatelle simple aux biens",
     "curatelle simple à la personne",
     "curatelle simple aux biens et à la personne",
+    "curatelle renforcée",
     "curatelle renforcée aux biens",
     "curatelle renforcée à la personne",
     "curatelle renforcée aux biens et à la personne",

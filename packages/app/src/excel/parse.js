@@ -26,19 +26,22 @@ const cleanCivilite = civilite => {
 
 const FUSE_OPTIONS = {
   shouldSort: true,
-  threshold: 0.8,
+  threshold: 0.9,
   tokenize: true,
   keys: ["value"]
 };
 
 // 20/12/2005, 5/6/15, 20-12-2005, 5-6-15
-const DATE_FR_LONG = /^(\d\d*)[-/](\d\d*)[-/]((?:\d\d)?\d\d)$/;
+const DATE_FR_LONG = /^\s*(\d\d*)[-/](\d\d*)[-/]((?:\d\d)?\d\d)\s*$/;
 
 const toJsMonth = month => (parseInt(month) === 0 ? 12 : parseInt(month) - 1);
 const toJsYear = year => (parseInt(year) < 30 ? 2000 + parseInt(year) : parseInt(year));
 
 // try to convert input date
 export const readExcelDate = date => {
+  if (!date) {
+    return;
+  }
   if (!isNaN(date)) {
     // excel leap year bug https://gist.github.com/christopherscott/2782634
     return new Date((date - (25567 + 2)) * 86400 * 1000);
@@ -83,6 +86,8 @@ export const cleanColNames = cols =>
       c
         .toLowerCase()
         .replace(/\s\s+/gi, " ")
+        .replace(/[éèê]/gi, "e")
+        .replace(/d?['"]/gi, "")
         .trim()
         .replace(/[\s-]/gi, "_")
   );
