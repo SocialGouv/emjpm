@@ -85,7 +85,9 @@ export const cleanColNames = cols =>
       c &&
       c
         .toLowerCase()
+        .replace(/_+/gi, " ")
         .replace(/\s\s+/gi, " ")
+        .replace(/[-_]/gi, " ")
         .replace(/[éèê]/gi, "e")
         .replace(/d?['"]/gi, "")
         .trim()

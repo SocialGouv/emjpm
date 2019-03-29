@@ -287,15 +287,28 @@ describe("fix various invalid data", () => {
   });
 });
 
-describe("fix various invalid data 2", () => {
+describe("fix various invalid data 1", () => {
   test(`should import correctly`, () => {
     expect.assertions(3);
     const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test.xls"));
     const cleaned = read(workbook);
-    console.log("cleaned", cleaned);
     expect(cleaned).toMatchSnapshot();
     const validations = validate(cleaned);
     expect(validations.errors).toBeUndefined();
     expect(validations).toMatchSnapshot();
   });
 });
+
+describe("fix various invalid data 1.2", () => {
+  test(`should import correctly`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test2.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
+
+
