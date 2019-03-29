@@ -335,4 +335,14 @@ describe("fix various invalid data 1.4", () => {
   });
 });
 
-
+describe("fix various invalid data 1.5", () => {
+  test(`should import correctly`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test5.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
