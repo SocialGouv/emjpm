@@ -66,7 +66,7 @@ const findBestMatch = (data, input) => {
   const fuse = memoFuse(data);
   const result = fuse.search(input);
   if (result.length) {
-    return result[0].value;
+    return trim(result[0].value);
   }
 };
 
@@ -94,6 +94,8 @@ export const cleanColNames = cols =>
         .replace(/[\s-]/gi, "_")
   );
 
+const trim = str => (isNaN(str) && ("" + str).trim()) || str;
+
 // convert XLSX.utils.sheet_to_json data
 // only include relevant columns and normalize the input
 export const clean = inputData => {
@@ -112,9 +114,9 @@ export const clean = inputData => {
     // Note: `return value` here to disable fusing
     const columnValues = getColumnFuseValues(columnName);
     if (columnValues) {
-      return findBestMatch(columnValues, value) || value;
+      return findBestMatch(columnValues, value) || trim(value);
     }
-    return value;
+    return trim(value);
   };
 
   // convert Array of arrays into Array of Objects and filters only needed importable keys
