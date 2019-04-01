@@ -236,6 +236,18 @@ const getAllMandatairesByUserId = user_id =>
     .where({
       "mandataires.user_id": parseInt(user_id)
     });
+const getServiceByMandataire = id =>
+  knex("services")
+    .select("services.*", "users.type","users.id as userId")
+    .innerJoin("mandataires", "mandataires.service_id", "services.id")
+    .innerJoin("users", "users.id", "mandataires.user_id")
+    .where({ "services.id": id })
+    .first();
+
+const updateService = (serviceId, updates) =>
+  knex("services")
+    .where("id", parseInt(serviceId))
+    .update(updates);
 
 module.exports = {
   isMandataireInTi,
@@ -252,5 +264,7 @@ module.exports = {
   getAllByMandatairesFilter,
   update,
   getCoordonneesByPostCode,
-  getAllMandatairesByUserId
+  getAllMandatairesByUserId,
+  getServiceByMandataire,
+  updateService
 };
