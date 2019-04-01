@@ -195,24 +195,24 @@ router.post("/mandataires", async (req, res, next) => {
     dispo_max
   } = req.body;
 
-  if (pass1 !== pass2 || username.trim() === "") {
-    return res.status(500).json({
-      success: false,
-      message: "Les mots de passe ne sont pas conformes"
-    });
-  }
+  try {
+    if (pass1 !== pass2 || username.trim() === "") {
+      return res.status(500).json({
+        success: false,
+        message: "Les mots de passe ne sont pas conformes"
+      });
+    }
 
-  const userExists = (await getCountByEmail(email)).count > 0;
+    const userExists = (await getCountByEmail(email)).count > 0;
 
-  if (userExists) {
-    return res.status(409).json({
-      success: false,
-      message: "Un compte avec cet email existe déjà"
-    });
-  }
+    if (userExists) {
+      return res.status(409).json({
+        success: false,
+        message: "Un compte avec cet email existe déjà"
+      });
+    }
 
-  return await knex
-    .transaction(async function(trx) {
+    await knex.transaction(async function(trx) {
       // create user
       const userId = await queries.createUser(
         {
@@ -241,7 +241,6 @@ router.post("/mandataires", async (req, res, next) => {
           },
           trx
         );
-
         await queries.createMandataire(
           {
             user_id: userId[0],
@@ -252,6 +251,9 @@ router.post("/mandataires", async (req, res, next) => {
             adresse,
             code_postal,
             ville,
+            contact_prenom: prenom,
+            contact_email: email,
+            contact_nom: nom,
             dispo_max
           },
           trx
@@ -290,31 +292,28 @@ router.post("/mandataires", async (req, res, next) => {
           },
           trx
         );
-      }
-      if (!tis || tis.length === 0) {
-        return true;
-      }
-      await Promise.all(
-        tis.map(ti_id =>
-          queries.createUserTi(
-            {
-              user_id: userId[0],
-              ti_id
-            },
-            trx
+        if (!tis || tis.length === 0) {
+          return true;
+        }
+        await Promise.all(
+          tis.map(ti_id =>
+            queries.createUserTi(
+              {
+                user_id: userId[0],
+                ti_id
+              },
+              trx
+            )
           )
-        )
-      );
-    })
-    .then(() => {
-      return inscriptionEmail(nom, prenom, email);
-    })
-    .then(() => {
-      return res.json({ success: true });
-    })
-    .catch(e => {
-      next(e);
+        );
+      }
     });
+    await inscriptionEmail(nom, prenom, email);
+
+    res.json({ success: true });
+  } catch (err) {
+    next(err);
+  }
 });
 /**
  * @swagger
