@@ -217,7 +217,7 @@ test("should add mandataire service tis", async () => {
     "servicetestAntenne@toto.com",
     "servicetestAntenne1@toto.com"
   ]);
-  expect(service.id).toEqual(1);
+  expect(service.id).toEqual(2);
 });
 
 test("should add user tis", async () => {
