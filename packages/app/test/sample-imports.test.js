@@ -290,7 +290,7 @@ describe("fix various invalid data", () => {
 describe("fix various invalid data 1", () => {
   test(`should import correctly`, () => {
     expect.assertions(3);
-    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test.xls"));
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test.xlsx"));
     const cleaned = read(workbook);
     expect(cleaned).toMatchSnapshot();
     const validations = validate(cleaned);
@@ -314,7 +314,7 @@ describe("fix various invalid data 1.2", () => {
 describe("fix various invalid data 1.3", () => {
   test(`should import correctly`, () => {
     expect.assertions(3);
-    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test3.xls"));
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test3.xlsx"));
     const cleaned = read(workbook);
     expect(cleaned).toMatchSnapshot();
     const validations = validate(cleaned);
@@ -326,7 +326,7 @@ describe("fix various invalid data 1.3", () => {
 describe("fix various invalid data 1.4", () => {
   test(`should import correctly`, () => {
     expect.assertions(3);
-    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test4.xls"));
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test4.xlsx"));
     const cleaned = read(workbook);
     expect(cleaned).toMatchSnapshot();
     const validations = validate(cleaned);
