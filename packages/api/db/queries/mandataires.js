@@ -238,7 +238,7 @@ const getAllMandatairesByUserId = user_id =>
     });
 const getServiceByMandataire = id =>
   knex("services")
-    .select("services.*", "users.type","users.id as userId")
+    .select("services.*", "users.type", "users.id as userId")
     .innerJoin("mandataires", "mandataires.service_id", "services.id")
     .innerJoin("users", "users.id", "mandataires.user_id")
     .where({ "services.id": id })
