@@ -91,6 +91,7 @@ Object {
 
 exports[`User should GET all mandataires 1`] = `
 Object {
+<<<<<<< HEAD
   "adresse": "67 rue saint louis",
   "code_postal": "13000",
   "contact_email": null,
@@ -118,7 +119,7 @@ Object {
   "type": "service",
   "user_id": 3,
   "ville": "Marseille",
-  "zip": null,
+  "zip": null
 }
 `;
 
