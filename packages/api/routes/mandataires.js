@@ -492,7 +492,6 @@ router.put(
   async (req, res, next) => {
     try {
       const service = await getServiceByMandataire(req.body.id);
-
       if (req.user.id !== service.userId) {
         throw createError.Unauthorized(`Service not found`);
       }

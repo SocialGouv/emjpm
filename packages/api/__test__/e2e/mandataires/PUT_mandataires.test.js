@@ -47,3 +47,27 @@ test("mandataire should update his profile", async () => {
   });
   expect(response.status).toBe(200);
 });
+
+test("service should update his siege profile", async () => {
+  const token = await getTokenByUserType("service");
+  const newProfile = {
+    id: 1,
+    email: "testSiege@email.com"
+  };
+
+  const response = await request(server)
+    .put(`/api/v1/mandataires/service/1`)
+    .set("Authorization", "Bearer " + token)
+    .send(newProfile);
+
+  const newProfileRow = await knex("services")
+    .where({ id: 1 })
+    .first();
+
+  expect(newProfileRow.email).toBe(newProfile.email);
+
+  expect(response.body).toMatchSnapshot({
+    created_at: expect.any(String)
+  });
+  expect(response.status).toBe(200);
+});
