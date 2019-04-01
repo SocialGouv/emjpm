@@ -10,7 +10,9 @@ const MANDATAIRE_INITIAL_STATE = {
   // store etablissement for autompletes and getDisplayValue
   finess: [],
   // store tis for autompletes and getDisplayValue
-  tis: []
+  tis: [],
+  antennes: [],
+  service: {}
 };
 
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
@@ -30,6 +32,11 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       return {
         ...state,
         profile: action.data
+      };
+    case "SERVICE_PROFILE_UPDATED":
+      return {
+        ...state,
+        service: action.data
       };
     case "FINESS_UPDATED":
       return {
