@@ -7,10 +7,15 @@ const {
   getAllTisByMandataire,
   addMandataireTis,
   deleteMandataireTis,
-  getTis
+  getTis,
+  getAllTisByMandataireService,
+  addServiceTis
 } = require("../db/queries/tis");
 
-const { getMandataireByUserId } = require("../db/queries/mandataires");
+const {
+  getMandataireByUserId,
+  getMandataireById
+} = require("../db/queries/mandataires");
 
 // TODO:  Security for mandataire
 
@@ -76,13 +81,21 @@ router.get(
  *               items:
  *                 type: object
  */
-router.post("/1/tis", loginRequired, async (req, res, next) => {
-  // secu : ensure TI can write on this mandataire + add related test
-  const mandataire = await getMandataireByUserId(req.user.id);
-  addMandataireTis(req.body.ti_id, mandataire.id)
-    .then(() => getAllTisByMandataire(mandataire.id))
-    .then(tis => res.status(200).json(tis))
-    .catch(error => next(error));
+
+router.post("/:mandataireId/tis", loginRequired, async (req, res, next) => {
+  try {
+    const mandataire = await (req.user.type === "service"
+      ? getMandataireById(req.params.mandataireId)
+      : getMandataireByUserId(req.user.id));
+
+    const updaterMethod =
+      req.user.type === "service" ? addServiceTis : addMandataireTis;
+    await updaterMethod(req.body.ti_id, mandataire.id);
+    const tis = await getAllTisByMandataire(mandataire.id);
+    res.status(200).json(tis);
+  } catch (err) {
+    next(err);
+  }
 });
 
 // TODO: ensure we can delete this
@@ -147,6 +160,22 @@ router.get("/1/tis", loginRequired, async (req, res, next) => {
     .catch(error => next(error));
 });
 
+router.get("/:mandataireId/tis", loginRequired, async (req, res, next) => {
+  try {
+    const mandataire = await (req.user.type === "service"
+      ? getMandataireById(req.params.mandataireId)
+      : getMandataireByUserId(req.user.id));
+
+    const updaterMethod =
+      req.user.type === "service"
+        ? getAllTisByMandataireService
+        : getAllTisByMandataire;
+    await updaterMethod(mandataire.id);
+    res.status(200).json(tis);
+  } catch (err) {
+    next(err);
+  }
+});
 /** @swagger
  * /mandataires/tis:
  *   get:
