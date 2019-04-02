@@ -26,19 +26,22 @@ const cleanCivilite = civilite => {
 
 const FUSE_OPTIONS = {
   shouldSort: true,
-  threshold: 0.8,
+  threshold: 0.9,
   tokenize: true,
   keys: ["value"]
 };
 
 // 20/12/2005, 5/6/15, 20-12-2005, 5-6-15
-const DATE_FR_LONG = /^(\d\d*)[-/](\d\d*)[-/]((?:\d\d)?\d\d)$/;
+const DATE_FR_LONG = /^\s*(\d\d*)[-/](\d\d*)[-/]((?:\d\d)?\d\d)\s*$/;
 
 const toJsMonth = month => (parseInt(month) === 0 ? 12 : parseInt(month) - 1);
 const toJsYear = year => (parseInt(year) < 30 ? 2000 + parseInt(year) : parseInt(year));
 
 // try to convert input date
 export const readExcelDate = date => {
+  if (!date) {
+    return;
+  }
   if (!isNaN(date)) {
     // excel leap year bug https://gist.github.com/christopherscott/2782634
     return new Date((date - (25567 + 2)) * 86400 * 1000);
@@ -63,7 +66,7 @@ const findBestMatch = (data, input) => {
   const fuse = memoFuse(data);
   const result = fuse.search(input);
   if (result.length) {
-    return result[0].value;
+    return trim(result[0].value);
   }
 };
 
@@ -82,10 +85,16 @@ export const cleanColNames = cols =>
       c &&
       c
         .toLowerCase()
+        .replace(/_+/gi, " ")
         .replace(/\s\s+/gi, " ")
+        .replace(/[-_]/gi, " ")
+        .replace(/[éèê]/gi, "e")
+        .replace(/d?['"]/gi, "")
         .trim()
         .replace(/[\s-]/gi, "_")
   );
+
+const trim = str => (isNaN(str) && ("" + str).trim()) || str;
 
 // convert XLSX.utils.sheet_to_json data
 // only include relevant columns and normalize the input
@@ -105,9 +114,9 @@ export const clean = inputData => {
     // Note: `return value` here to disable fusing
     const columnValues = getColumnFuseValues(columnName);
     if (columnValues) {
-      return findBestMatch(columnValues, value) || value;
+      return findBestMatch(columnValues, value) || trim(value);
     }
-    return value;
+    return trim(value);
   };
 
   // convert Array of arrays into Array of Objects and filters only needed importable keys

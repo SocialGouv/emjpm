@@ -274,3 +274,75 @@ describe("valid civilites", () => {
     expect(validations).toMatchSnapshot();
   });
 });
+
+describe("fix various invalid data", () => {
+  test(`should fix column names`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "invalid-various.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
+
+describe("fix various invalid data 1", () => {
+  test(`should import correctly`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
+
+describe("fix various invalid data 1.2", () => {
+  test(`should import correctly`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test2.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
+
+describe("fix various invalid data 1.3", () => {
+  test(`should import correctly`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test3.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
+
+describe("fix various invalid data 1.4", () => {
+  test(`should import correctly`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test4.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
+
+describe("fix various invalid data 1.5", () => {
+  test(`should import correctly`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test5.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
