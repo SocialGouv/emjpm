@@ -68,7 +68,6 @@ export const openFicheMandataireModal = mandataire => {
 };
 
 export const openValidationModal = ({ formData }) => {
-  console.log("manda", formData);
   return dispatch => {
     return createMesureApi(formData)
       .then(() => {
