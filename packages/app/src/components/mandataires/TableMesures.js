@@ -12,7 +12,9 @@ const CellEditMesureRedux = connect(null, dispatch => bindActionCreators({ show 
   ({ row, show }) => (
     <Button
       data-cy="button-edit-mesure"
-      onClick={() => show("EditMesure", { formData: row.original })}
+      onClick={() =>
+        show("EditMesure", { formData: row.original, mandataire_id: row.original.mandataire_id })
+      }
     >
       Modifier
     </Button>
@@ -25,7 +27,9 @@ const CellCloseMesureRedux = connect(null, dispatch => bindActionCreators({ show
     <Button
       data-cy="button-close-mesure"
       error
-      onClick={() => show("CloseMesure", { id: row.original.id })}
+      onClick={() =>
+        show("CloseMesure", { id: row.original.id, mandataire_id: row.original.mandataire_id })
+      }
     >
       Mettre fin au mandat
     </Button>
@@ -37,7 +41,9 @@ const CellReactivateMesureRedux = connect(null, dispatch => bindActionCreators({
   ({ row, show }) => (
     <Button
       data-cy="button-reactivate-mesure"
-      onClick={() => show("ReactivateMesure", { id: row.original.id })}
+      onClick={() =>
+        show("ReactivateMesure", { id: row.original.id, mandataire_id: row.original.mandataire_id })
+      }
     >
       Réactiver la mesure
     </Button>
@@ -48,7 +54,12 @@ const CellValidationMesureRedux = connect(null, dispatch => bindActionCreators({
   ({ row, show }) => (
     <Button
       data-cy="button-attente-mesure"
-      onClick={() => show("ValiderMesureEnAttente", { formData: row.original })}
+      onClick={() =>
+        show("ValiderMesureEnAttente", {
+          formData: row.original,
+          mandataire_id: row.original.mandataire_id
+        })
+      }
     >
       Valider
     </Button>
@@ -270,6 +281,6 @@ TableMesures.defaultProps = {
 const mapStateToProps = state => ({
   // /!\ todo : hack
   // lastUpdate is updated when some mesure is modified so we can refresh the table
-  lastUpdate: state.mesures ? state.mesures.lastUpdate : state.mandataire.lastUpdate
+  lastUpdate: state.mandataire.lastUpdate
 });
 export default connect(mapStateToProps)(TableMesures);

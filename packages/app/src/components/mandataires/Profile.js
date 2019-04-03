@@ -59,7 +59,7 @@ const Selector = ({
 // bouton connecté à redux-modal.show pour EditMandataire
 const ButtonEditMandataire = connect(
   state => ({
-    currentMandataire: state.mandataire.profile
+    currentMandataire: state.mandataire.profiles
   }),
   dispatch => bindActionCreators({ show }, dispatch)
 )(({ formData, show, currentMandataire }) => (
@@ -68,7 +68,7 @@ const ButtonEditMandataire = connect(
       data-cy="button-edit-profile"
       style={{ marginLeft: 0 }}
       onClick={() =>
-        show(currentMandataire.type === "service" ? "EditService" : "EditMandataire", {
+        show(formData.type === "service" ? "EditService" : "EditMandataire", {
           formData
         })
       }
@@ -87,107 +87,118 @@ const changePassword = email => {
     .catch(e => console.log(e));
 };
 
-const MandataireProfile = ({ currentMandataire, etablissements = [], tis = [] }) => (
-  <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
-    <div style={{ flex: "0 0 50%" }}>
-      <h3>Mes coordonnées</h3>
-      <Fiche {...currentMandataire} />
-      <br />
-      <br />
-      <ButtonEditMandataire formData={currentMandataire} />
-      <a href="#" onClick={() => changePassword({ email: currentMandataire.email })}>
-        {" "}
-        Modifier mon mot de passe{" "}
-      </a>
-    </div>
-    <div style={{ flex: "0 0 50%" }}>
-      {(currentMandataire.type === "prepose" && (
-        <SelectionManager
-          onAdd={etablissement_id =>
-            apiFetch(`/mandataires/1/etablissements`, {
-              method: "POST",
-              body: JSON.stringify({
-                etablissement_id
-              })
-            })
-          }
-          getSelection={() => apiFetch("/mandataires/1/etablissement")}
-          render={({ onAdd, onRemove, selection }) => (
-            <Selector
-              style={{ marginTop: 0 }}
-              title="Mes établissements"
-              placeholder="Ajouter un établissement"
-              emptyText="Aucun établissement séléctionné"
-              autocompleteItems={
-                (etablissements &&
-                  etablissements.map(f => ({
-                    id: f.id,
-                    nom: f.nom || f.ville || f.finess_id
-                  }))) ||
-                []
-              }
-              selected={selection}
-              onAdd={onAdd}
-            />
-          )}
-        />
-      )) ||
-        null}
-      <SelectionManager
-        onAdd={ti_id =>
-          apiFetch(`/mandataires/1/tis`, {
-            method: "POST",
-            body: JSON.stringify({
-              ti_id
-            })
-          })
-        }
-        onRemove={id =>
-          apiFetch(`/mandataires/1/tis/${id}`, {
-            method: "DELETE"
-          })
-        }
-        getSelection={() =>
-          apiFetch("/mandataires/1/tis").then(
-            data =>
-              (data &&
-                data.map(ti => ({
-                  id: ti.id,
-                  nom: ti.etablissement
-                }))) ||
-              []
-          )
-        }
-        render={({ onAdd, onRemove, selection }) => (
-          <Selector
-            title="Tribunaux d'instance où je suis agréé"
-            emptyText="Aucun tribunal séléctionné"
-            placeholder="Ajouter un tribunal d'instance"
-            autocompleteItems={
-              (tis && tis.map && tis.map(t => ({ id: t.id, nom: t.etablissement }))) || []
-            }
-            selected={selection}
-            onAdd={onAdd}
-            onRemove={onRemove}
-          />
-        )}
-      />
-      {currentMandataire.zip && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-zip">
-          <h3>Informations à destination des magistrats </h3>
-          {currentMandataire.zip}
+class MandataireProfile extends React.Component {
+  render() {
+    const { etablissements, tis } = this.props;
+
+    const newMandataire =
+      this.props.currentMandataire && this.props.currentMandataire.length !== 1
+        ? this.props.currentMandataire.filter(manda => manda.id === this.props.mandataireId)[0]
+        : this.props.currentMandataire && this.props.currentMandataire[0];
+
+    return (
+      <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
+        <div style={{ flex: "0 0 50%" }}>
+          <h3>Mes coordonnées</h3>
+          <Fiche {...newMandataire} />
+          <br />
+          <br />
+          <ButtonEditMandataire formData={newMandataire} />
+          <a href="#" onClick={() => changePassword({ email: newMandataire.email })}>
+            {" "}
+            Modifier mon mot de passe{" "}
+          </a>
         </div>
-      )}
-    </div>
-  </div>
-);
+        <div style={{ flex: "0 0 50%" }}>
+          {(newMandataire.type === "prepose" && (
+            <SelectionManager
+              onAdd={etablissement_id =>
+                apiFetch(`/mandataires/1/etablissements`, {
+                  method: "POST",
+                  body: JSON.stringify({
+                    etablissement_id
+                  })
+                })
+              }
+              getSelection={() => apiFetch("/mandataires/1/etablissement")}
+              render={({ onAdd, onRemove, selection }) => (
+                <Selector
+                  style={{ marginTop: 0 }}
+                  title="Mes établissements"
+                  placeholder="Ajouter un établissement"
+                  emptyText="Aucun établissement séléctionné"
+                  autocompleteItems={
+                    (etablissements &&
+                      etablissements.map(f => ({
+                        id: f.id,
+                        nom: f.nom || f.ville || f.finess_id
+                      }))) ||
+                    []
+                  }
+                  selected={selection}
+                  onAdd={onAdd}
+                />
+              )}
+            />
+          )) ||
+            null}
+          <SelectionManager
+            onAdd={ti_id =>
+              apiFetch(`/mandataires/1/tis`, {
+                method: "POST",
+                body: JSON.stringify({
+                  ti_id
+                })
+              })
+            }
+            onRemove={id =>
+              apiFetch(`/mandataires/1/tis/${id}`, {
+                method: "DELETE"
+              })
+            }
+            getSelection={() =>
+              apiFetch("/mandataires/1/tis").then(
+                data =>
+                  (data &&
+                    data.map(ti => ({
+                      id: ti.id,
+                      nom: ti.etablissement
+                    }))) ||
+                  []
+              )
+            }
+            render={({ onAdd, onRemove, selection }) => (
+              <Selector
+                title="Tribunaux d'instance où je suis agréé"
+                emptyText="Aucun tribunal séléctionné"
+                placeholder="Ajouter un tribunal d'instance"
+                autocompleteItems={
+                  (tis && tis.map && tis.map(t => ({ id: t.id, nom: t.etablissement }))) || []
+                }
+                selected={selection}
+                onAdd={onAdd}
+                onRemove={onRemove}
+              />
+            )}
+          />
+          {newMandataire.zip && (
+            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-zip">
+              <h3>Informations à destination des magistrats </h3>
+              {newMandataire.zip}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+}
 
 const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ updateMandataire: data => updateMandataire(data) }, dispatch);
 
 const ProfileRedux = connect(
   state => ({
-    currentMandataire: state.mandataire.profile,
+    currentMandataire: state.mandataire.profiles,
     etablissements: state.mandataire.finess,
     tis: state.mandataire.tis
   }),
