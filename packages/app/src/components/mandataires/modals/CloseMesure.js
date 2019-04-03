@@ -19,11 +19,12 @@ const uiSchema = {
   }
 };
 
-const CloseMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
+const CloseMesure = ({ show, handleHide, onSubmit, id, mandataire_id, ...props }) => {
   const onSubmitted = ({ formData }) => {
     onSubmit({
       date: formData,
-      id
+      id,
+      mandataire_id
     });
   };
   return (
@@ -57,7 +58,6 @@ const mapDispatchToProps = (dispatch, ownProps) =>
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(
-  null,
-  mapDispatchToProps
-)(connectModal({ name: "CloseMesure", destroyOnHide: true })(CloseMesure));
+export default connect(null, mapDispatchToProps)(
+  connectModal({ name: "CloseMesure", destroyOnHide: true })(CloseMesure)
+);

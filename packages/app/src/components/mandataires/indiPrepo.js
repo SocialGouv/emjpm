@@ -3,6 +3,7 @@ import { Home, Map, UserMinus, Clock, FilePlus } from "react-feather";
 
 import { DummyTabs, LoadingMessage } from "..";
 import apiFetch from "../communComponents/Api";
+import { connect } from "react-redux";
 
 import PillDispo from "./PillDispo";
 import Profile from "./Profile";
@@ -10,20 +11,41 @@ import TableMesures from "./TableMesures";
 import Header from "./Header";
 import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
+import { DispoMagistrat } from "../common/ShowBox";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 
 class MandataireTabs extends React.Component {
   render() {
+    const currentDispos =
+      (this.props.profiles &&
+        this.props.profiles[0] &&
+        this.props.profiles[0].dispo_max -
+          this.props.profiles[0].mesures_en_cours -
+          this.props.profiles[0].mesures_en_attente) ||
+      null;
+
     // define the content of the tabs
     const tabs = [
       {
         text: "Mesures en cours",
         url: "/mandataires/mesures/en-cours",
-        icon: <PillDispo />,
+        icon: (
+          <PillDispo
+            mesures_en_cours={
+              this.props.profiles &&
+              this.props.profiles[0] &&
+              this.props.profiles[0].mesures_en_cours
+            }
+            dispo_max={
+              this.props.profiles && this.props.profiles[0] && this.props.profiles[0].dispo_max
+            }
+          />
+        ),
         content: (
           <React.Fragment>
             <CreateMesure />
+            <DispoMagistrat currentDispos={currentDispos} />
             <TableMesures
               fetch={() => apiFetch(`/mandataires/1/mesures`)}
               hideColumns={[
@@ -109,4 +131,10 @@ class MandataireTabs extends React.Component {
   }
 }
 
-export default MandataireTabs;
+export default connect(
+  state => ({
+    profiles: state.mandataire.profiles,
+    enum: state.mandataire.enum
+  }),
+  null
+)(MandataireTabs);
