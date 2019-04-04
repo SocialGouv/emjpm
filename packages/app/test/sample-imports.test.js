@@ -108,32 +108,7 @@ const tests = [
         code_postal: 57100,
         date_ouverture: "2017-11-02",
         numero_dossier: "RG20136Q",
-        residence: "A domicile",
-        type: "Tutelle",
-        ville: "thionville"
-      }
-    ]
-  },
-  {
-    title: "should not accept missing columns",
-    success: false,
-    data: [
-      {
-        annee: 1992,
-        civilite: "H",
-        code_postal: 57100,
-        date_ouverture: "2017-11-02",
-        numero_dossier: "RG20136Q",
-        type: "Tutelle",
-        ville: "thionville"
-      },
-      {
-        annee: 1992,
-        civilite: "H",
-        code_postal: 57100,
-        date_ouverture: "2017-11-02",
         residence: "A Domicile",
-        numero_dossier: "RG20136Q",
         type: "Tutelle",
         ville: "thionville"
       }
