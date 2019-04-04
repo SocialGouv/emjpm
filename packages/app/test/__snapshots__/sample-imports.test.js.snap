@@ -35,6 +35,127 @@ Array [
 ]
 `;
 
+exports[`empty dates naissance should set empty dates naissance to null 1`] = `
+Array [
+  Object {
+    "annee": 1936,
+    "civilite": "H",
+    "code_postal": 59280,
+    "date_ouverture": "1972-12-19",
+    "numero_dossier": "AAAA1",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": null,
+    "civilite": "H",
+    "code_postal": 59280,
+    "date_ouverture": "1972-11-16",
+    "numero_dossier": "AAAA2",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": 1932,
+    "civilite": "F",
+    "code_postal": 59280,
+    "date_ouverture": "2018-07-12",
+    "numero_dossier": "AAAA3",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": 1950,
+    "civilite": "H",
+    "code_postal": 59280,
+    "date_ouverture": "2000-06-14",
+    "numero_dossier": "AAAA4",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": null,
+    "civilite": "H",
+    "code_postal": 59280,
+    "date_ouverture": "2007-09-12",
+    "numero_dossier": "AAAA5",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": 1936,
+    "civilite": "H",
+    "code_postal": 59280,
+    "date_ouverture": "1981-11-19",
+    "numero_dossier": "AAAA6",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": 1948,
+    "civilite": "F",
+    "code_postal": 59280,
+    "date_ouverture": "2008-06-20",
+    "numero_dossier": "AAAA7",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": 1935,
+    "civilite": "H",
+    "code_postal": 59280,
+    "date_ouverture": "1973-01-25",
+    "numero_dossier": "AAAA8",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": 1952,
+    "civilite": "F",
+    "code_postal": 59280,
+    "date_ouverture": "1987-06-10",
+    "numero_dossier": "AAAA9",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": null,
+    "civilite": "H",
+    "code_postal": 59280,
+    "date_ouverture": "1976-02-10",
+    "numero_dossier": "AAAA10",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+  Object {
+    "annee": 1947,
+    "civilite": "H",
+    "code_postal": 59280,
+    "date_ouverture": "1978-04-27",
+    "numero_dossier": "AAAA11",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Armentieres",
+  },
+]
+`;
+
+exports[`empty dates naissance should set empty dates naissance to null 2`] = `
+Object {
+  "errors": undefined,
+}
+`;
+
 exports[`fix various invalid data 1 should import correctly 1`] = `
 Array [
   Object {

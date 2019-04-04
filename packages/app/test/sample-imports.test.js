@@ -346,3 +346,15 @@ describe("fix various invalid data 1.5", () => {
     expect(validations).toMatchSnapshot();
   });
 });
+
+describe("empty dates naissance", () => {
+  test(`should set empty dates naissance to null`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-empty-ddn.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
