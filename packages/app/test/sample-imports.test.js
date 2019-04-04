@@ -108,32 +108,7 @@ const tests = [
         code_postal: 57100,
         date_ouverture: "2017-11-02",
         numero_dossier: "RG20136Q",
-        residence: "A domicile",
-        type: "Tutelle",
-        ville: "thionville"
-      }
-    ]
-  },
-  {
-    title: "should not accept missing columns",
-    success: false,
-    data: [
-      {
-        annee: 1992,
-        civilite: "H",
-        code_postal: 57100,
-        date_ouverture: "2017-11-02",
-        numero_dossier: "RG20136Q",
-        type: "Tutelle",
-        ville: "thionville"
-      },
-      {
-        annee: 1992,
-        civilite: "H",
-        code_postal: 57100,
-        date_ouverture: "2017-11-02",
         residence: "A Domicile",
-        numero_dossier: "RG20136Q",
         type: "Tutelle",
         ville: "thionville"
       }
@@ -339,6 +314,18 @@ describe("fix various invalid data 1.5", () => {
   test(`should import correctly`, () => {
     expect.assertions(3);
     const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-test5.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
+
+describe("empty dates naissance", () => {
+  test(`should set empty dates naissance to null`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "mesures-empty-ddn.xlsx"));
     const cleaned = read(workbook);
     expect(cleaned).toMatchSnapshot();
     const validations = validate(cleaned);
