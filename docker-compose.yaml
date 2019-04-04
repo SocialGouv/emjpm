@@ -10,6 +10,7 @@ version: "3"
 services:
   db:
     image: postgres:10.3
+    container_name: emjpm-postgres
     restart: always
     environment:
       # master password
