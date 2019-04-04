@@ -136,6 +136,7 @@ export const clean = inputData => {
       // some post processing
       .map(row => ({
         ...row,
+        annee: row.annee || null,
         date_ouverture: format(readExcelDate(row.date_ouverture), "YYYY-MM-DD"),
         civilite: cleanCivilite(row.civilite)
       }))
