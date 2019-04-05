@@ -47,7 +47,7 @@ router.get(
       }
 
       const mandataire = await getMandataireById(req.params.mandataireId);
-      const isAllowed = await (mandataire.type === "service"
+      const isAllowed = await (mandataire && mandataire.type === "service"
         ? isServiceInTi(req.params.mandataireId, ti.id)
         : isMandataireInTi(req.params.mandataireId, ti.id));
 
@@ -112,7 +112,7 @@ router.post(
         throw createError.Unauthorized(`TI not found`);
       }
       const mandataire = await getMandataireById(req.params.mandataireId);
-      const isAllowed = await (mandataire.type === "service"
+      const isAllowed = await (mandataire && mandataire.type === "service"
         ? isServiceInTi(req.params.mandataireId, ti.id)
         : isMandataireInTi(req.params.mandataireId, ti.id));
 
@@ -178,7 +178,7 @@ router.delete(
       }
       const mandataire = await getMandataireById(req.params.mandataireId);
 
-      const isAllowed = await (mandataire.type === "service"
+      const isAllowed = await (mandataire && mandataire.type === "service"
         ? isServiceInTi(req.params.mandataireId, ti.id)
         : isMandataireInTi(req.params.mandataireId, ti.id));
 

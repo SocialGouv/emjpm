@@ -32,9 +32,10 @@ const sampleMesure = {
   date_ouverture: "2010-10-05",
   residence: "oui",
   civilite: "madame",
-  status: "Mesure en cours"
-  // mandataire_id: 1
+  status: "Mesure en cours",
+  mandataire_id: 1
 };
+
 
 const getMesuresCounter = async id =>
   (await knex("mandataires")
@@ -101,7 +102,7 @@ test("mandataire should NOT POST mesure for another one [body forge]", async () 
     .set("Authorization", "Bearer " + token)
     .send({
       ...sampleMesure,
-      mandataire_id: 2
+      mandataire_id: 1
     });
 
   expect(response.status).toBe(200);

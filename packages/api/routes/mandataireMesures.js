@@ -229,7 +229,7 @@ router.post(
       } else if (req.user.type === "ti") {
         const ti = await getTiByUserId(req.user.id);
         if (ti && req.body.mandataire_id) {
-          const isAllowed = await (mandataire.type === "service"
+          const isAllowed = await (mandataire && mandataire.type === "service"
             ? isServiceInTi(req.body.mandataire_id, ti.id)
             : isMandataireInTi(req.body.mandataire_id, ti.id));
 
