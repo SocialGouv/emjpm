@@ -26,6 +26,8 @@ const defaultRegister = {
   telephone: ""
 };
 
+const simpler = ({ created_at, ...props }) => props;
+
 test("should register with good values", async () => {
   const token = await getTokenByUserType("service");
   const response = await request(server)
@@ -39,5 +41,5 @@ test("should register with good values", async () => {
     .table("mandataires")
     .orderBy("created_at", "desc")
     .first();
-  expect(lastInsert).toMatchSnapshot();
+  expect(simpler(lastInsert)).toMatchSnapshot();
 });
