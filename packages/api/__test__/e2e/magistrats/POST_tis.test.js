@@ -20,7 +20,7 @@ const defaultRegister = {
 
 const simpler = ({ created_at, ...props }) => props;
 
-test("should register with good values", async () => {
+test("should add ti for a  mandataire", async () => {
   const token = await getTokenByUserType("mandataire");
   const response = await request(server)
     .post("/api/v1/mandataires/1/tis")
@@ -35,7 +35,7 @@ test("should register with good values", async () => {
   expect(simpler(lastInsert)).toMatchSnapshot();
 });
 
-test("should register with good values", async () => {
+test("should add ti for a service", async () => {
   const token = await getTokenByUserType("service");
   const response = await request(server)
     .post("/api/v1/mandataires/1/tis")

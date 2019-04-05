@@ -170,7 +170,7 @@ router.get("/:mandataireId/tis", loginRequired, async (req, res, next) => {
       req.user.type === "service"
         ? getAllTisByMandataireService
         : getAllTisByMandataire;
-    await updaterMethod(mandataire.id);
+    const tis = await updaterMethod(mandataire.id);
     res.status(200).json(tis);
   } catch (err) {
     next(err);
