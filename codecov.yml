@@ -1,0 +1,17 @@
+coverage:
+  status:
+    project:
+      default: off
+      app:
+        flags: app
+      api:
+        target: 89%
+        flags: api
+
+flags:
+  api:
+    paths:
+      - packages/api
+  app:
+    paths:
+      - packages/app
