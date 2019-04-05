@@ -145,7 +145,7 @@ const WHITELIST = [
   "mesures_en_cours",
   "zip"
 ];
-const WHITELISTANTENNE = [
+const WHITELISTSIEGESOCIAL = [
   "nom",
   "prenom",
   "etablissement",
@@ -161,9 +161,9 @@ const WHITELISTANTENNE = [
   "contact_email"
 ];
 
-const whiteListAntenne = obj =>
+const whiteListSiegeSocial = obj =>
   Object.keys(obj)
-    .filter(key => WHITELISTANTENNE.indexOf(key) > -1)
+    .filter(key => WHITELISTSIEGESOCIAL.indexOf(key) > -1)
     .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
 const whiteList = obj =>
@@ -495,7 +495,7 @@ router.put(
       if (req.user.id !== service.userId) {
         throw createError.Unauthorized(`Service not found`);
       }
-      await updateService(req.body.id, whiteListAntenne(req.body));
+      await updateService(req.body.id, whiteListSiegeSocial(req.body));
       const serviceUpdated = await getServiceByMandataire(req.body.id);
       res.status(200).json(serviceUpdated);
     } catch (err) {

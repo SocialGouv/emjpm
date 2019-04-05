@@ -4,7 +4,7 @@ import { connectModal } from "redux-modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Layout from "../../communComponents/ModalLayout";
-import { addAntennesToMAndataires } from "../actions/mandataire";
+import { addAntennesToMandataires } from "../actions/mandataire";
 
 const schema = {
   title: "Ajouter une antenne",
@@ -78,7 +78,7 @@ const AddAntennes = ({ show, handleHide, formData, onSubmit, service, ...props }
 };
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ onSubmit: ({ formData }) => addAntennesToMAndataires(formData) }, dispatch);
+  bindActionCreators({ onSubmit: ({ formData }) => addAntennesToMandataires(formData) }, dispatch);
 
 // connect to redux store actions
 // connect to redux-modal

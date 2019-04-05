@@ -39,5 +39,5 @@ test("should register with good values", async () => {
     .table("mandataires")
     .orderBy("created_at", "desc")
     .first();
-  expect(lastInsert.contact_nom).toEqual("testMandaAd");
+  expect(lastInsert).toMatchSnapshot();
 });

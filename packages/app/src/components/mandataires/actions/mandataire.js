@@ -67,26 +67,20 @@ const fetchAllFiness = () =>
 /* ---------- ACTIONS CREATORS */
 
 //todo: bofbof
-export const mandataireMount = () => dispatch => {
-  fetchProfile().then(json => {
-    dispatch(mandataireProfileUpdated(json));
-    if (json.type === "service") {
-      fetchAllFiness()
-        .then(etablissements => dispatch(finessUpdated(etablissements)))
-        .then(() => {
-          fetchAllTis().then(tis => dispatch(tisUpdated(tis)));
-        })
-        .then(() => {
-          fetchService().then(json => dispatch(serviceProfileUpdated(json)));
-        });
-    } else {
-      fetchAllFiness()
-        .then(etablissements => dispatch(finessUpdated(etablissements)))
-        .then(() => {
-          fetchAllTis().then(tis => dispatch(tisUpdated(tis)));
-        });
-    }
-  });
+export const mandataireMount = () => async dispatch => {
+  const profile = await fetchProfile();
+  await dispatch(mandataireProfileUpdated(profile));
+
+  const finess = await fetchAllFiness();
+  await dispatch(finessUpdated(finess));
+
+  const tis = await fetchAllTis();
+  await dispatch(tisUpdated(tis));
+
+  if (profile.type === "service") {
+    const service = await fetchService();
+    await dispatch(serviceProfileUpdated(service));
+  }
 };
 
 export const updateMandataire = data => dispatch => {
@@ -114,7 +108,7 @@ export const updateService = data => dispatch => {
     });
 };
 
-export const addAntennesToMAndataires = data => dispatch => {
+export const addAntennesToMandataires = data => dispatch => {
   return createMandataireApi(data)
     .then(() => fetchProfile())
     .then(json => {
