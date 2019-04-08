@@ -7,6 +7,21 @@ Object {
 }
 `;
 
+exports[`should add mandataire service tis 1`] = `
+Object {
+  "adresse": "",
+  "code_postal": "75010",
+  "dispo_max": null,
+  "email": "servicetest@toto.com",
+  "etablissement": "",
+  "id": 2,
+  "nom": "servicetestAd",
+  "prenom": "servicetestPrenom",
+  "telephone": "",
+  "ville": "",
+}
+`;
+
 exports[`should send an email with good values 1`] = `
 Array [
   Object {
