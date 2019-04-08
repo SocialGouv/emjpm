@@ -15,12 +15,17 @@ const {
   getAllServicesByTis,
   getAllMandataires,
   getAllByMandatairesFilter,
-  getCoordonneesByPostCode
+  getCoordonneesByPostCode,
+  getServiceByMandataire,
+  updateService,
+  getAllMandatairesByUserId
 } = require("../db/queries/mandataires");
 
 const { updateUser } = require("../db/queries/users");
 
 const { getTiByUserId } = require("../db/queries/tis");
+
+const { createMandataire } = require("../db/queries/inscription");
 
 // récupère les données d'un mandataire
 
@@ -140,6 +145,26 @@ const WHITELIST = [
   "mesures_en_cours",
   "zip"
 ];
+const WHITELISTSIEGESOCIAL = [
+  "nom",
+  "prenom",
+  "etablissement",
+  "telephone",
+  "email",
+  "adresse",
+  "code_postal",
+  "ville",
+  "dispo_max",
+  "mesures_en_cours",
+  "contact_nom",
+  "contact_prenom",
+  "contact_email"
+];
+
+const whiteListSiegeSocial = obj =>
+  Object.keys(obj)
+    .filter(key => WHITELISTSIEGESOCIAL.indexOf(key) > -1)
+    .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
 const whiteList = obj =>
   Object.keys(obj)
@@ -447,6 +472,91 @@ router.put(
     }
   }
 );
+
+router.get("/service", typeRequired("service"), async (req, res, next) => {
+  try {
+    const mandataire = await getMandataireByUserId(req.user.id);
+    if (!mandataire) {
+      throw createError.Unauthorized(`Mandataire not found`);
+    }
+    const service = await getServiceByMandataire(mandataire.service_id);
+    res.status(200).json(service);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put(
+  "/service/:serviceId",
+  typeRequired("service"),
+  async (req, res, next) => {
+    try {
+      const service = await getServiceByMandataire(req.body.id);
+      if (req.user.id !== service.userId) {
+        throw createError.Unauthorized(`Service not found`);
+      }
+      await updateService(req.body.id, whiteListSiegeSocial(req.body));
+      const serviceUpdated = await getServiceByMandataire(req.body.id);
+      res.status(200).json(serviceUpdated);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.get(
+  "/all",
+  typeRequired("individuel", "prepose", "service"),
+  async (req, res, next) => {
+    try {
+      const mandataire = await (req.user.type === "service"
+        ? getAllMandatairesByUserId(req.user.id)
+        : getMandataireByUserId(req.user.id));
+
+      if (!mandataire) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
+      res.status(200).json(mandataire);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.post("/", typeRequired("service"), async (req, res, next) => {
+  const {
+    etablissement,
+    contact_nom,
+    contact_prenom,
+    telephone,
+    telephone_portable,
+    contact_email,
+    adresse,
+    code_postal,
+    ville,
+    service_id,
+    dispo_max
+  } = req.body;
+
+  return createMandataire({
+    user_id: req.user.id,
+    etablissement,
+    telephone,
+    telephone_portable,
+    adresse,
+    code_postal,
+    ville,
+    contact_nom,
+    contact_prenom,
+    contact_email,
+    service_id,
+    dispo_max
+  })
+    .then(() => res.json({ success: true }))
+    .catch(e => {
+      next(e);
+    });
+});
 
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));

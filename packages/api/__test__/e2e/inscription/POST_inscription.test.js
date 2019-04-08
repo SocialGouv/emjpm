@@ -89,6 +89,8 @@ const serviceRegister = {
   ]
 };
 
+const simpler = ({ created_at, ...props }) => props;
+
 test("should register with good values", async () => {
   const response = await request(server)
     .post("/api/v1/inscription/mandataires")
@@ -217,7 +219,7 @@ test("should add mandataire service tis", async () => {
     "servicetestAntenne@toto.com",
     "servicetestAntenne1@toto.com"
   ]);
-  expect(service.id).toEqual(1);
+  expect(simpler(service)).toMatchSnapshot();
 });
 
 test("should add user tis", async () => {
