@@ -333,3 +333,15 @@ describe("empty dates naissance", () => {
     expect(validations).toMatchSnapshot();
   });
 });
+
+describe("no column headers", () => {
+  test(`should reject when no header`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "no-headers.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).not.toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
