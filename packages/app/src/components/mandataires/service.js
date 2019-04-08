@@ -100,7 +100,7 @@ class ServiceTabs extends React.Component {
     ];
     return (
       <React.Fragment>
-        <Header />
+        <Header handleClick={this.props.handleClick} />
         <DummyTabs tabs={tabs} />
       </React.Fragment>
     );

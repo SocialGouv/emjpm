@@ -62,6 +62,11 @@ const accessChecks = [
     type: "ti"
   },
   {
+    method: "GET",
+    url: "/api/v1/mandataires/service",
+    type: ["service"]
+  },
+  {
     method: "POST",
     url: "/api/v1/mandataires/1/mesure-reservation",
     type: ["ti"]

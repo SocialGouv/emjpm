@@ -24,7 +24,8 @@ const HeaderMandataire = ({
   etablissement,
   dispo_max,
   mesures_en_cours,
-  mesures_en_attente
+  mesures_en_attente,
+  handleClick
 }) => {
   const currentDispos = dispo_max - mesures_en_cours - mesures_en_attente || null;
   const fullName = `${nom || ""} ${prenom || ""}`;
@@ -33,8 +34,11 @@ const HeaderMandataire = ({
       <Title>
         {type === "service" ? (
           <div>
-            {etablissement} <br />
-            {fullName}
+            {etablissement}{" "}
+            <a href="#" onClick={handleClick} style={{ fontSize: "0.6em" }}>
+              {" "}
+              Informations du service
+            </a>
           </div>
         ) : (
           fullName
