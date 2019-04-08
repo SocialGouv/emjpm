@@ -137,7 +137,7 @@ const COLUMNS = [
     id: "annee",
     width: 80,
     accessor: "annee",
-    Cell: row => <div>{format(row.row.annee, "YYYY")}</div>,
+    Cell: row => <div>{row.row.annee && format(row.row.annee, "YYYY") || null}</div>,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
