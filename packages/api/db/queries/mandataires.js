@@ -208,6 +208,29 @@ const isMandataireInTi = (mandataire_id, ti_id) =>
     })
     .then(res => res.length > 0);
 
+const getAllMandatairesByUserId = user_id =>
+  knex("mandataires")
+    .select(
+      "mandataires.*",
+      "users.type",
+      "users.nom",
+      "users.prenom",
+      "users.email",
+      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
+      knex.raw(
+        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
+      )
+    )
+    .leftOuterJoin(
+      "geolocalisation_code_postal",
+      "geolocalisation_code_postal.code_postal",
+      "mandataires.code_postal"
+    )
+    .innerJoin("users", "mandataires.user_id", "users.id")
+    .where({
+      "mandataires.user_id": parseInt(user_id)
+    });
+
 module.exports = {
   isMandataireInTi,
   updateCountMesures,
@@ -221,5 +244,7 @@ module.exports = {
   getAllServicesByTis,
   getAllMandataires,
   getAllByMandatairesFilter,
-  update
+  update,
+  getCoordonneesByPostCode,
+  getAllMandatairesByUserId
 };

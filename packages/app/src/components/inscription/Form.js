@@ -57,9 +57,13 @@ class Form extends React.Component {
   };
 
   submitUser = formData => {
+    const urls = {
+      ti: "/inscription/tis",
+      default: "/inscription/mandataires"
+    };
+
+    const url = urls[this.state.typeMandataire] || urls.default;
     const usernameData = formData.email.toLowerCase().trim();
-    const url =
-      this.state.typeMandataire === "ti" ? "/inscription/tis" : "/inscription/mandataires";
     apiFetch(url, {
       method: "POST",
       body: JSON.stringify({

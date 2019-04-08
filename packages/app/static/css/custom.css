@@ -354,3 +354,24 @@
 .fuse-highlighter {
   background: yellow;
 }
+
+.btn-add {
+  margin: 15px ;
+}
+
+.btn-add::after {
+  content: "Ajouter";
+  width: 15px;
+}
+.array-item-move-up::after {
+  display: none;
+  content: "Move Up";
+}
+.array-item-move-down::after {
+  display: none;
+  content: "Move Down";
+}
+
+.array-item-remove::after {
+  content: "Supprimer";
+}
