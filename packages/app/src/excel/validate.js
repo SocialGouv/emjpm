@@ -30,7 +30,7 @@ export const validate = data => {
   if (rows.length === 0) {
     return {
       errors: {
-        error: "Aucune ligne importée"
+        erreur: ["Aucune ligne importée"]
       }
     };
   }
