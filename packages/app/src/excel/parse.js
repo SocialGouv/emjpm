@@ -83,6 +83,7 @@ export const cleanColNames = cols =>
   cols.map(
     c =>
       c &&
+      c.toLowerCase &&
       c
         .toLowerCase()
         .replace(/_+/gi, " ")

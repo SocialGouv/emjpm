@@ -25,19 +25,15 @@ const isValidAnnee = annee => (annee ? annee.toString().match(/^([12][0-9]{3})$/
 export const validate = data => {
   let errors;
 
-  //adrien: rm check columns because all mandataires don't have all columns in excel
-  /*
-  const colums = Object.keys(data[0]);
-  const absentColumns = references.mandatoryColumns.filter(col => !colums.includes(col));
-  if (absentColumns.length) {
-    if (!errors) {
-      errors = {};
-    }
-    errors["En-têtes"] = [`Les colonnes suivants sont introuvables : ${absentColumns.join(", ")}`];
-  }
-  */
-
   const rows = data;
+
+  if (rows.length === 0) {
+    return {
+      errors: {
+        error: "Aucune ligne importée"
+      }
+    };
+  }
 
   // group errors by row
   rows.map((datum, i) => {

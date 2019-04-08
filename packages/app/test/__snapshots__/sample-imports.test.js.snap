@@ -2582,6 +2582,16 @@ Object {
 }
 `;
 
+exports[`no column headers should reject when no header 1`] = `Array []`;
+
+exports[`no column headers should reject when no header 2`] = `
+Object {
+  "errors": Object {
+    "error": "Aucune ligne importée",
+  },
+}
+`;
+
 exports[`read: rename columns should rename approximative columns 1`] = `
 Array [
   Object {
