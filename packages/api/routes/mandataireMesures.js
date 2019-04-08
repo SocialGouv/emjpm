@@ -207,7 +207,6 @@ router.post(
         res.status(200).json();
         return;
       }
-      console.log("req.body.mandataire_id", req.body.mandataire_id);
       const mandataire = await findMandataire(req, req.body.mandataire_id);
 
       const body = {
