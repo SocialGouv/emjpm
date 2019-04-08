@@ -6,6 +6,10 @@ const router = express.Router();
 const { typeRequired } = require("../auth/_helpers");
 const whitelist = require("../db/queries/whitelist");
 const { getAllMesuresByTis } = require("../db/queries/mesures");
+const {
+  getMandataireById,
+  isServiceInTi
+} = require("../db/queries/mandataires");
 
 const ALLOWED_FILTERS = [
   "code_postal",
@@ -138,7 +142,10 @@ router.put(
         req.user.type === "prepose" ||
         req.user.type === "service"
       ) {
-        const mandataire = await getMandataireByUserId(req.user.id);
+        const mandataire = await (req.user.type === "service"
+          ? getMandataireById(req.params.mandataireId)
+          : getMandataireByUserId(req.user.id));
+
         await updateMesure(
           {
             id: req.params.mesureId,
@@ -201,8 +208,8 @@ router.post(
         res.status(200).json();
         return;
       }
+      const mandataire = await getMandataireById(req.body.mandataire_id);
 
-      const mandataire = await getMandataireByUserId(req.user.id);
       const body = {
         ...req.body,
         mandataire_id: mandataire ? mandataire.id : req.body.mandataire_id
@@ -222,10 +229,10 @@ router.post(
       } else if (req.user.type === "ti") {
         const ti = await getTiByUserId(req.user.id);
         if (ti && req.body.mandataire_id) {
-          const isAllowed = await isMandataireInTi(
-            req.body.mandataire_id,
-            ti.id
-          );
+          const isAllowed = await (mandataire && mandataire.type === "service"
+            ? isServiceInTi(req.body.mandataire_id, ti.id)
+            : isMandataireInTi(req.body.mandataire_id, ti.id));
+
           // TI cannot post for some other TI mandataire
           if (!isAllowed) {
             throw createError.Unauthorized(`Mandataire not found`);
