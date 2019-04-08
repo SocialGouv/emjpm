@@ -35,9 +35,22 @@ const getAllMesuresByMandatairesFilter = (
   knex
     .from("mesures")
     .select(
-      knex.raw(
-        "distinct ON(mandataires.id) mandataires.id,mandataires.*,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,users.type,users.email,users.nom,users.prenom,users.cabinet"
-      )
+      knex.raw("distinct ON(mandataires.id) mandataires.id"),
+      "mandataires.id",
+      "mandataires.*",
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude",
+      "users.type",
+      "mandataires.contact_email",
+      "users.nom",
+      "users.prenom",
+      "users.cabinet",
+      "services.etablissement as service_etablissement",
+      "services.nom as service_nom",
+      "services.telephone as service_telephone",
+      "services.prenom as service_prenom",
+      "services.email as service_email",
+      "services.dispo_max as service_dispo_max"
     )
     .where("status", "Mesure en cours")
     .whereBetween("geolocalisation_code_postal.latitude", [
@@ -57,32 +70,54 @@ const getAllMesuresByMandatairesFilter = (
       "mesures.code_postal"
     )
     .whereIn("users.type", ["individuel", "prepose"])
-    .groupByRaw(
-      "geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude,mandataires.id,users.type,users.email,users.nom,users.prenom,users.cabinet"
+    .leftOuterJoin("services", "mandataires.service_id", "services.id")
+    .groupBy(
+      "geolocalisation_code_postal.latitude",
+      "geolocalisation_code_postal.longitude",
+      "mandataires.id",
+      "users.type",
+      "mandataires.contact_email",
+      "users.nom",
+      "users.prenom",
+      "users.cabinet",
+      "service_etablissement",
+      "service_nom",
+      "service_telephone",
+      "service_prenom",
+      "service_email",
+      "service_dispo_max"
     )
     .where({ "user_tis.ti_id": parseInt(ti_id), "users.active": true })
     .union(function() {
       this.select(
+        knex.raw("distinct ON(mandataires.id) mandataires.id"),
         "mandataires.id",
         "mandataires.*",
         "geolocalisation_code_postal.latitude",
         "geolocalisation_code_postal.longitude",
         "users.type",
-        "users.email",
+        "mandataires.contact_email",
         "users.nom",
         "users.prenom",
-        "users.cabinet"
+        "users.cabinet",
+        "services.etablissement as service_etablissement",
+        "services.nom as service_nom",
+        "services.telephone as service_telephone",
+        "services.prenom as service_prenom",
+        "services.email as service_email",
+        "services.dispo_max as service_dispo_max"
       )
         .from("mandataires")
         .innerJoin("users", "mandataires.user_id", "users.id")
-        .innerJoin("user_tis", "user_tis.user_id", "users.id")
+        .innerJoin("service_tis", "service_tis.mandataire_id", "mandataires.id")
         .innerJoin(
           "geolocalisation_code_postal",
           "geolocalisation_code_postal.code_postal",
           "mandataires.code_postal"
         )
+        .leftOuterJoin("services", "mandataires.service_id", "services.id")
         .where("users.type", "service")
-        .where("user_tis.ti_id", parseInt(ti_id));
+        .where("service_tis.ti_id", parseInt(ti_id));
     });
 
 // bulk insert some data and prevent mesure.numero_dossier duplicates
