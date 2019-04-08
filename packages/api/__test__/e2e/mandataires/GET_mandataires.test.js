@@ -70,10 +70,6 @@ test("User should GET all mandataires", async () => {
     .set("Authorization", "Bearer " + token);
 
   expect(response.body[0]).toMatchSnapshot({ created_at: expect.any(String) });
-  // expect(simpler(response.body)).toMatchSnapshot({
-  //   ...reponse.body,
-  //   created_at: expect.any(String)
-  // });
-
+  
   expect(response.status).toBe(200);
 });
