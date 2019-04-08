@@ -11,6 +11,11 @@ process.env.APP_URL = "https://emjpm.gouv.fr";
 
 const server = require("@emjpm/api/app");
 const { getAllTisByMandataire } = require("@emjpm/api/db/queries/tis");
+const {
+  getAllMandatairesByUserId,
+  getServiceByMandataire
+} = require("@emjpm/api/db/queries/mandataires");
+
 const knex = require("@emjpm/api/db/knex");
 
 beforeEach(async () => {
@@ -37,6 +42,51 @@ const defaultRegister = {
   telephone: "",
   latitude: 2,
   longitude: 2
+};
+
+const serviceRegister = {
+  username: "servicetest",
+  nom: "servicetestAd",
+  prenom: "servicetestPrenom",
+  etablissement: "",
+  email: "servicetest@toto.com",
+  type: "service",
+  pass1: "secret1",
+  pass2: "secret1",
+  adresse: "",
+  code_postal: "75010",
+  ville: "",
+  telephone: "",
+  latitude: 2,
+  longitude: 2,
+  antennes: [
+    {
+      nom: "servicetestAntenneAd",
+      prenom: "servicetestAntennePrenom",
+      etablissement: "",
+      email: "servicetestAntenne@toto.com",
+      adresse: "",
+      code_postal: "75010",
+      ville: "",
+      telephone: "",
+      latitude: 2,
+      longitude: 2,
+      dispo_max: 34
+    },
+    {
+      nom: "servicetestAntenne1Ad",
+      prenom: "servicetestAntenne1Prenom",
+      etablissement: "",
+      email: "servicetestAntenne1@toto.com",
+      adresse: "",
+      code_postal: "75010",
+      ville: "",
+      telephone: "",
+      latitude: 2,
+      longitude: 2,
+      dispo_max: 56
+    }
+  ]
 };
 
 test("should register with good values", async () => {
@@ -144,6 +194,32 @@ test("should add mandataire tis", async () => {
   expect(tis.map(ti => ti.id)).toEqual([1, 2]);
 });
 
+test("should add mandataire service tis", async () => {
+  await request(server)
+    .post("/api/v1/inscription/mandataires")
+    .send({
+      ...serviceRegister,
+      tis: [1, 2]
+    });
+
+  const user = await knex
+    .table("users")
+    .where("email", "servicetest@toto.com")
+    .first();
+
+  const mandataires = await getAllMandatairesByUserId(user.id);
+  const service = await knex
+    .table("services")
+    .orderBy("created_at", "desc")
+    .first();
+  expect(mandataires.map(mandataire => mandataire.contact_email)).toEqual([
+    "servicetest@toto.com",
+    "servicetestAntenne@toto.com",
+    "servicetestAntenne1@toto.com"
+  ]);
+  expect(service.id).toEqual(1);
+});
+
 test("should add user tis", async () => {
   await request(server)
     .post("/api/v1/inscription/tis")
@@ -159,6 +235,7 @@ test("should add user tis", async () => {
     .table("users")
     .orderBy("created_at", "desc")
     .first();
+
   expect(user.username).toEqual("user_ti");
   const user_tis = await knex
     .table("user_tis")
