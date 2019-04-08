@@ -33,8 +33,8 @@ router.post(
       }
 
       const mesures =
-        (req.body &&
-          req.body.sheetData.map(datum => ({
+        (req.body && req.body.sheetData.map &&
+           req.body.sheetData.map(datum => ({
             ...datum,
             mandataire_id: mandataire.id,
             status: "Mesure en cours"

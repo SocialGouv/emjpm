@@ -207,15 +207,17 @@ router.post(
         res.status(200).json();
         return;
       }
+      console.log("req.body.mandataire_id", req.body.mandataire_id);
       const mandataire = await findMandataire(req, req.body.mandataire_id);
 
       const body = {
         ...req.body,
-        mandataire_id: mandataire.id
+        mandataire_id: mandataire && mandataire.id
       };
       if (!body.mandataire_id) {
         throw createError.UnprocessableEntity("Mandataire not found");
       }
+
       if (
         req.user.type === "individuel" ||
         req.user.type === "prepose" ||
@@ -228,7 +230,8 @@ router.post(
       } else if (req.user.type === "ti") {
         const ti = await getTiByUserId(req.user.id);
         if (ti && req.body.mandataire_id) {
-          const isAllowed = await (mandataire && mandataire.type === "service"
+          const manda = getMandataireById(req.body.mandataire_id);
+          const isAllowed = await (manda && manda.type === "service"
             ? isServiceInTi(req.body.mandataire_id, ti.id)
             : isMandataireInTi(req.body.mandataire_id, ti.id));
 
@@ -236,7 +239,12 @@ router.post(
           if (!isAllowed) {
             throw createError.Unauthorized(`Mandataire not found`);
           }
-          await addMesure({ ...body, ti_id: ti.id, cabinet: ti.cabinet });
+          await addMesure({
+            ...body,
+            ti_id: ti.id,
+            cabinet: ti.cabinet,
+            mandataire_id: req.body.mandataire_id
+          });
           await reservationEmail(ti, body);
           res.status(200).json({ success: true });
         }

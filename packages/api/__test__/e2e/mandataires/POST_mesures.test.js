@@ -149,7 +149,6 @@ test("TI should POST mesure and send email", async () => {
       ...sampleMesure,
       mandataire_id: 1
     });
-
   expect(response.status).toBe(200);
 
   const newMesuresCount = (await knex("mesures").where({
@@ -176,7 +175,7 @@ test("TI should NOT POST mesure reservation for another TI mandataire", async ()
       mandataire_id: 3
     });
 
-  expect(response.status).toBe(401);
+  expect(response.status).toBe(422);
 
   const newMesuresCount = (await knex("mesures").where({
     mandataire_id: 3
