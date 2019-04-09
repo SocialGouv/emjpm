@@ -15,7 +15,6 @@ _environments:
 
 _steps:
   - &node_stage
-    stage: Build
     language: node_js
     node_js: 10
     before_install:
@@ -24,9 +23,6 @@ _steps:
       - export PATH="$HOME/.yarn/bin:$PATH"
     cache:
       yarn: true
-      directories:
-        # Cypress downloader cache folder
-        - ~/.cache/Cypress
 
   - &deploy_stage
     stage: Deploy
@@ -46,6 +42,8 @@ _steps:
 jobs:
   include:
     - <<: *node_stage
+      stage: Build
+      name: Build and test
       if: NOT env(RELEASE)
       before_install:
         - export TZ=Europe/Paris
@@ -53,6 +51,9 @@ jobs:
         - export PATH="$HOME/.yarn/bin:$PATH"
         # Start the database first so it has the time to boot before we interact with it.
         - docker-compose up -d db
+      install:
+        - yarn
+        - yarn lerna exec --scope @emjpm/knex yarn
       before_script:
         - yarn workspace @emjpm/knex knex migrate:latest --env test
         - yarn workspace @emjpm/knex knex seed:run --env test
@@ -64,6 +65,33 @@ jobs:
       after_script:
         - npx codecov
         - docker-compose down
+    - <<: *node_stage
+      stage: Build
+      name: Run end to end tests
+      if: NOT env(RELEASE)
+      addons:
+        apt:
+          packages:
+            - libgconf-2-4 # Require by Cypress/Electron
+      cache:
+        yarn: true
+        directories:
+          - ./optional/e2e/node_modules
+          # Cypress downloader cache folder
+          - ~/.cache/Cypress
+      before_install:
+        - docker build . -t socialgouv/emjpm:master
+        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up -d --build
+      install:
+        - yarn
+        - yarn lerna exec --scope @optional/e2e yarn
+      before_script:
+        - NODE_ENV=test yarn workspace @emjpm/knex run migrate
+        - NODE_ENV=test yarn workspace @emjpm/knex run seeds
+      script:
+        - yarn lerna run --scope @optional/e2e --stream test
+      after_script:
+        - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml down
 
     #
     #
