@@ -14,9 +14,12 @@ const {
   update,
   getAllServicesByTis,
   getAllMandataires,
-  getAllByMandatairesFilter,
-  getCoordonneesByPostCode
+  getAllByMandatairesFilter
 } = require("../db/queries/mandataires");
+
+const {
+  getCoordonneesByPostCode
+} = require("../db/queries/geolocalisation_code_postal");
 
 const { updateUser } = require("../db/queries/users");
 
