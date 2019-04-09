@@ -340,6 +340,12 @@ const isServiceInTi = (mandataire_id, ti_id) =>
     })
     .then(res => res.length > 0);
 
+const findMandataire = (req, params) => {
+  return (req.user.type === "service" || req.user.type === "ti")
+    ? getMandataireById(params)
+    : getMandataireByUserId(req.user.id);
+};
+
 module.exports = {
   isMandataireInTi,
   updateCountMesures,
@@ -359,5 +365,6 @@ module.exports = {
   getServiceByMandataire,
   updateService,
   getAllServicesMandatairesByTis,
-  isServiceInTi
+  isServiceInTi,
+  findMandataire
 };

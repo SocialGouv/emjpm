@@ -19,7 +19,7 @@ test("should import mesures correctly", async () => {
   const response = await request(server)
     .post("/api/v1/mandataires/mesures/bulk")
     .set("Authorization", "Bearer " + token)
-    .send([1, 2]);
+    .send({ sheetData: [1, 2] });
   expect(response.body).toMatchSnapshot({
     added: 2,
     message: "2 Mesures importées.",
@@ -44,7 +44,7 @@ test("should skip existing references", async () => {
   const response = await request(server)
     .post("/api/v1/mandataires/mesures/bulk")
     .set("Authorization", "Bearer " + token)
-    .send([{ numero_dossier: "abc" }]);
+    .send({ sheetData: [{ numero_dossier: "abc" }] });
   expect(response.status).toBe(200);
   //expect(response.body.length).toBe(4);
   const newMesures = await knex.from("mesures").where({ mandataire_id: 1 });
@@ -52,7 +52,9 @@ test("should skip existing references", async () => {
   const response2 = await request(server)
     .post("/api/v1/mandataires/mesures/bulk")
     .set("Authorization", "Bearer " + token)
-    .send([{ numero_dossier: "abc" }, { numero_dossier: "xyz" }]);
+    .send({
+      sheetData: [{ numero_dossier: "abc" }, { numero_dossier: "xyz" }]
+    });
   expect(response2.status).toBe(200);
   expect(response2.body).toMatchSnapshot({
     added: 1,

@@ -149,7 +149,6 @@ test("TI should POST mesure and send email", async () => {
       ...sampleMesure,
       mandataire_id: 1
     });
-
   expect(response.status).toBe(200);
 
   const newMesuresCount = (await knex("mesures").where({

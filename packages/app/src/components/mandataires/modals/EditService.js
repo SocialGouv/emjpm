@@ -11,10 +11,10 @@ const schema = {
   title: "Modifier vos informations",
   type: "object",
   required: [
-    "nom",
-    "prenom",
+    "contact_nom",
+    "contact_prenom",
     "telephone",
-    "email",
+    "contact_email",
     "adresse",
     "code_postal",
     "ville",
@@ -23,22 +23,25 @@ const schema = {
     "etablissement"
   ],
   properties: {
-    etablissement: { type: "string", title: "Nom du service", default: "" },
-    nom: { type: "string", title: "Nom du contact dans le service", default: "" },
-    prenom: { type: "string", title: "Prénom du contact dans le service", default: "" },
+    etablissement: { type: "string", title: "Nom de l'antenne", default: "" },
+    contact_nom: {
+      type: "string",
+      title: "Nom du contact dans l'antenne",
+      default: ""
+    },
+    contact_prenom: {
+      type: "string",
+      title: "Prénom du contact dans l'antenne",
+      default: ""
+    },
     telephone: { type: "string", title: "Téléphone", default: "" },
-    email: { type: "string", title: "Adresse email", default: "" },
+    contact_email: { type: "string", title: "Adresse email de l'antenne", default: "" },
     adresse: { type: "string", title: "Rue", default: "" },
     code_postal: { type: "string", title: "Code Postal", default: "" },
     ville: { type: "string", title: "Commune", default: "" },
     dispo_max: {
       type: "integer",
       title: "Nombre de mesures souhaitées",
-      default: ""
-    },
-    mesures_en_cours: {
-      type: "integer",
-      title: "Nombre de mesures en cours",
       default: ""
     }
   }
@@ -48,11 +51,11 @@ const uiSchema = {
   secretariat: {
     "ui:widget": "select"
   },
-  nom: {
+  contact_nom: {
     "ui:placeholder": "Nom"
   },
 
-  prenom: {
+  contact_prenom: {
     "ui:placeholder": "Prénom"
   },
   genre: {
@@ -61,7 +64,7 @@ const uiSchema = {
   telephone: {
     "ui:placeholder": "Téléphone"
   },
-  email: {
+  contact_email: {
     "ui:placeholder": "Adresse email"
   },
   adresse: {
@@ -75,9 +78,6 @@ const uiSchema = {
   },
   dispo_max: {
     "ui:placeholder": "Nombre de mesures souhaitées"
-  },
-  mesures_en_cours: {
-    "ui:placeholder": "Nombre de mesures en cours"
   }
 };
 
@@ -100,7 +100,6 @@ const mapDispatchToProps = dispatch =>
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(
-  null,
-  mapDispatchToProps
-)(connectModal({ name: "EditService", destroyOnHide: true })(EditService));
+export default connect(null, mapDispatchToProps)(
+  connectModal({ name: "EditService", destroyOnHide: true })(EditService)
+);

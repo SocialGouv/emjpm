@@ -2,7 +2,7 @@ import { hide } from "redux-modal";
 import piwik from "react-piwik";
 
 import apiFetch from "../../communComponents/Api";
-import { mandatairesUpdated } from "../../tiComponents/actions/mandataire";
+import { fetchProfiles, mandataireProfilesUpdated } from "./mandataire";
 
 export const MESURE_CREATE = "MESURE_CREATE";
 export const MESURE_CREATED = "MESURE_CREATED";
@@ -14,13 +14,13 @@ export const MESURE_REACTIVATED = "MESURE_REACTIVATED";
 // ------------ API STUFF
 
 const updateMesureApi = data =>
-  apiFetch(`/mandataires/1/mesures/${data.id}`, {
+  apiFetch(`/mandataires/${data.mandataire_id}/mesures/${data.id}`, {
     method: "PUT",
     body: JSON.stringify(data)
   });
 
 const closeMesureApi = data =>
-  apiFetch(`/mandataires/1/mesures/${data.id}`, {
+  apiFetch(`/mandataires/${data.mandataire_id}/mesures/${data.id}`, {
     method: "PUT",
     body: JSON.stringify({
       status: "Eteindre mesure",
@@ -28,7 +28,7 @@ const closeMesureApi = data =>
     })
   });
 const attenteMesureApi = data =>
-  apiFetch(`/mandataires/1/mesures/${data.id}`, {
+  apiFetch(`/mandataires/${data.mandataire_id}/mesures/${data.id}`, {
     method: "PUT",
     body: JSON.stringify({
       ...data,
@@ -37,7 +37,7 @@ const attenteMesureApi = data =>
   });
 
 const reactivateMesureApi = data =>
-  apiFetch(`/mandataires/1/mesures/${data.id}`, {
+  apiFetch(`/mandataires/${data.mandataire_id}/mesures/${data.id}`, {
     method: "PUT",
     body: JSON.stringify({
       status: "Mesure en cours",
@@ -61,7 +61,7 @@ const createMesureApi = data =>
   });
 
 const fetchUpdateMesureAttente = data =>
-  apiFetch("/mandataires/1/mesures-en-attente", {
+  apiFetch(`/mandataires/${data.mandataire_id}/mesures-en-attente`, {
     method: "PUT",
     body: JSON.stringify({
       ...data
@@ -85,8 +85,10 @@ export const updateMesure = data => dispatch =>
 export const updateMesureAttente = data => dispatch => {
   attenteMesureApi(data)
     .then(() => fetchUpdateMesureAttente(data))
+    .then(() => fetchProfiles())
     .then(json => {
       dispatch(hide("ValiderMesureEnAttente"));
+      dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureUpdated(json));
       piwik.push(["trackEvent", "Mesures", "Validated", data.id]);
     })
@@ -99,8 +101,10 @@ export const updateMesureAttente = data => dispatch => {
 
 export const closeMesure = data => dispatch =>
   closeMesureApi(data)
+    .then(() => fetchProfiles())
     .then(json => {
       dispatch(hide("CloseMesure"));
+      dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureClosed(json));
       piwik.push(["trackEvent", "Mesures", "Closed", data.id]);
     })
@@ -112,8 +116,10 @@ export const closeMesure = data => dispatch =>
 
 export const reactivateMesure = data => dispatch =>
   reactivateMesureApi(data)
+    .then(() => fetchProfiles())
     .then(json => {
       dispatch(hide("ReactivateMesure"));
+      dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureReactivated(json));
       piwik.push(["trackEvent", "Mesures", "Reactivated", data.id]);
     })
@@ -125,7 +131,9 @@ export const reactivateMesure = data => dispatch =>
 
 export const createMesureSave = data => dispatch =>
   createMesureApi(data)
+    .then(() => fetchProfiles())
     .then(json => {
+      dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureCreated(json));
       piwik.push(["trackEvent", "Mesures", "Created"]);
     })
