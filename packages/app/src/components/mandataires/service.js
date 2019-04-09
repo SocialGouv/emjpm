@@ -17,6 +17,11 @@ import { DispoMagistrat } from "../common/ShowBox";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 
+const getCurrentDispos = props =>
+  (props.antenne &&
+    props.antenne.dispo_max - props.antenne.mesures_en_cours - props.antenne.mesures_en_attente) ||
+  null;
+
 class ServiceTabs extends React.Component {
   render() {
     const onSubmitted = ({ formData }) => {
@@ -59,12 +64,7 @@ class ServiceTabs extends React.Component {
 
 class ServiceTabsAntennes extends React.Component {
   render() {
-    const currentDispos =
-      (this.props.antenne &&
-        this.props.antenne.dispo_max -
-          this.props.antenne.mesures_en_cours -
-          this.props.antenne.mesures_en_attente) ||
-      null;
+    const currentDispos = getCurrentDispos(this.props);
 
     const tabs = [
       {

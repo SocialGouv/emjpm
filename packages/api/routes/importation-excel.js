@@ -9,8 +9,7 @@ const router = express.Router();
 
 const {
   updateCountMesures,
-  getMandataireByUserId,
-  getMandataireById
+  findMandataire
 } = require("../db/queries/mandataires");
 
 router.post(
@@ -18,9 +17,7 @@ router.post(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      const mandataire = await (req.user.type === "service"
-        ? getMandataireById(req.body.mandataireId)
-        : getMandataireByUserId(req.user.id));
+      const mandataire = await findMandataire(req, req.body.mandataireId);
 
       if (
         req.user.type === "service" &&
@@ -43,7 +40,10 @@ router.post(
           }))) ||
         [];
 
-      if (req.body.sheetData && req.body.sheetData.length && !req.body.sheetData.length) {
+      if (
+        req.body.sheetData &&
+        !req.body.sheetData.length
+      ) {
         res.json({
           success: false,
           added: 0,

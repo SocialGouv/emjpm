@@ -87,14 +87,16 @@ const changePassword = email => {
     .catch(e => console.log(e));
 };
 
+const getNewMandataire = props =>
+  props.currentMandataire && props.currentMandataire.length !== 1
+    ? props.currentMandataire.filter(manda => manda.id === props.mandataireId)[0]
+    : props.currentMandataire && props.currentMandataire[0];
+
 class MandataireProfile extends React.Component {
   render() {
     const { etablissements, tis } = this.props;
 
-    const newMandataire =
-      this.props.currentMandataire && this.props.currentMandataire.length !== 1
-        ? this.props.currentMandataire.filter(manda => manda.id === this.props.mandataireId)[0]
-        : this.props.currentMandataire && this.props.currentMandataire[0];
+    const newMandataire = getNewMandataire(this.props);
 
     return (
       <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>

@@ -7,7 +7,7 @@ import Resolve from "../common/Resolve";
 
 const Attribution = () => (
   <TileLayer
-    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
     url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
   />
 );
@@ -50,9 +50,10 @@ const MapMesures = ({ getPromise, center = [48.866667, 2.333333] }) => (
 const mapStateToProps = state => ({
   center: (state.mandataire &&
     state.mandataire.profiles &&
-    state.mandataire.profiles.latitude && [
-      state.mandataire.profiles.latitude,
-      state.mandataire.profiles.longitude
+    state.mandataire.profiles[0] &&
+    state.mandataire.profiles[0].latitude && [
+      state.mandataire.profiles[0].latitude,
+      state.mandataire.profiles[0].longitude
     ]) || [0, 0]
 });
 
