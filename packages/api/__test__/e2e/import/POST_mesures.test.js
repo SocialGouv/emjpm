@@ -14,11 +14,13 @@ const { getTokenByUserType } = require("../utils");
 beforeAll(async () => {
   await knex.migrate.latest();
   await knex.seed.run();
-})
+});
 
 afterEach(async () => {
-  // Remove all created mesures 
-  await knex("mesures").whereNotBetween("id", [1, 5]).delete();
+  // Remove all created mesures
+  await knex("mesures")
+    .whereNotBetween("id", [1, 5])
+    .delete();
 });
 
 // strip the created_at date in the response
@@ -29,8 +31,7 @@ test("should import mesures correctly", async () => {
   const response = await request(server)
     .post("/api/v1/mandataires/mesures/bulk")
     .set("Authorization", "Bearer " + token)
-    .send([1, 2]);
-
+    .send({ sheetData: [1, 2] });
   expect(response.body).toMatchSnapshot({
     message: "2 Mesures importées."
   });
@@ -40,13 +41,13 @@ test("should import mesures correctly", async () => {
     .from("mesures")
     .orderBy("id", "desc")
     .limit(2);
-    
+
   expect(mesures.map(simpler)).toMatchSnapshot();
 });
 
 test("should skip existing references", async () => {
   const token = await getTokenByUserType("mandataire");
-  
+
   const curMesures = await knex.from("mesures").where({ mandataire_id: 1 });
   expect(curMesures.length).toBe(4);
 

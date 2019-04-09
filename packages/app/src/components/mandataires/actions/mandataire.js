@@ -4,16 +4,16 @@ import Router from "next/router";
 import apiFetch from "../../communComponents/Api";
 
 export const MANDATAIRE_MOUNT = "MANDATAIRE_MOUNT";
-export const MANDATAIRE_PROFILE_UPDATED = "MANDATAIRE_PROFILE_UPDATED";
-export const PROFILE_UPDATED = "PROFILE_UPDATED";
 export const FINESS_UPDATED = "FINESS_UPDATED";
 export const TIS_UPDATED = "TIS_UPDATED";
 export const SERVICE_PROFILE_UPDATED = "SERVICE_PROFILE_UPDATED";
 export const MANDATAIRE_PROFILES_UPDATED = "MANDATAIRE_PROFILES_UPDATED";
+export const CHANGE_ENUM = "CHANGE_ENUM";
+export const ANTENNES_UPDATED = "ANTENNES_UPDATED";
+export const CHANGE_ENUM_INIT = "CHANGE_ENUM_INIT";
 
 /* ---------- API */
-
-const fetchProfile = () => apiFetch(`/mandataires/1`);
+export const fetchProfiles = () => apiFetch(`/mandataires/all`);
 const fetchService = () => apiFetch(`/mandataires/service`);
 
 const createMandataireApi = data =>
@@ -56,7 +56,10 @@ const updateMandataireApi = data =>
       adresse: data.adresse || "",
       code_postal: data.code_postal || "",
       dispo_max: data.dispo_max || 0,
-      ville: data.ville || ""
+      ville: data.ville || "",
+      contact_nom: data.contact_nom || "",
+      contact_prenom: data.contact_prenom || "",
+      contact_email: data.contact_email || ""
     })
   });
 
@@ -68,31 +71,30 @@ const fetchAllFiness = () =>
 
 //todo: bofbof
 export const mandataireMount = () => async dispatch => {
-  const profile = await fetchProfile();
-  await dispatch(mandataireProfileUpdated(profile));
+  const profiles = await fetchProfiles();
+  await dispatch(mandataireProfilesUpdated(profiles));
 
   const finess = await fetchAllFiness();
   await dispatch(finessUpdated(finess));
 
   const tis = await fetchAllTis();
   await dispatch(tisUpdated(tis));
-
-  if (profile.type === "service") {
+  if (profiles[0].type === "service") {
     const service = await fetchService();
     await dispatch(serviceProfileUpdated(service));
   }
 };
 
-export const updateMandataire = data => dispatch => {
-  return updateMandataireApi(data)
-    .then(json => {
-      dispatch(hide(data.type === "service" ? "EditService" : "EditMandataire"));
-      dispatch(mandataireProfileUpdated(json));
-    })
-    .catch(e => {
-      alert("Impossible de soumettre les données");
-      throw e;
-    });
+export const updateMandataire = data => async dispatch => {
+  try {
+    await updateMandataireApi(data);
+    const profile = await fetchProfiles();
+    await dispatch(hide(data.type === "service" ? "EditService" : "EditMandataire"));
+    await dispatch(mandataireProfilesUpdated(profile));
+  } catch (err) {
+    alert("Impossible de soumettre les données");
+    next(err);
+  }
 };
 
 export const updateService = data => dispatch => {
@@ -117,7 +119,17 @@ export const addAntennesToMandataires = data => dispatch => {
     })
     .then(() => Router.push("/mandataires"));
 };
+
+export const changeEnum = data => dispatch => {
+  return dispatch(changeEnumDisplay(data));
+};
+
 /* ----------- PLAIN ACTIONS  */
+
+export const changeEnumDisplay = data => ({
+  type: CHANGE_ENUM,
+  data
+});
 
 export const mandataireProfileUpdated = data => ({
   type: MANDATAIRE_PROFILE_UPDATED,
@@ -136,5 +148,10 @@ export const tisUpdated = data => ({
 
 export const serviceProfileUpdated = data => ({
   type: SERVICE_PROFILE_UPDATED,
+  data
+});
+
+export const mandataireProfilesUpdated = data => ({
+  type: MANDATAIRE_PROFILES_UPDATED,
   data
 });

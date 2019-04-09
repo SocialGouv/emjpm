@@ -245,14 +245,16 @@ const CustomFieldTemplate = props => {
 const buttonIconStyle = { width: 22, height: 22, marginRight: 5, marginTop: -2 };
 
 const CreateMesure = ({
-  formData = {
-    date_ouverture: format(new Date(), "YYYY-MM-DD")
-  },
   onSubmit,
   createMesure,
   mesureCreatedStatus,
   mesureCreatedMessage,
   children,
+  mandataireId,
+  formData = {
+    date_ouverture: format(new Date(), "YYYY-MM-DD"),
+    mandataire_id: mandataireId
+  },
   ...props
 }) => {
   return (
@@ -343,7 +345,4 @@ const mapDispatchToProps = dispatch =>
   );
 
 // connect to redux store actions
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CreateMesure);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateMesure);

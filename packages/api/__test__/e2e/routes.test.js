@@ -102,11 +102,6 @@ const accessChecks = [
     type: ["mandataire", "service"]
   },
   {
-    method: "GET",
-    url: "/api/v1/mandataires/1/mesuresForMaps",
-    type: ["mandataire", "service"]
-  },
-  {
     method: "POST",
     url: "/api/v1/mandataires/filters",
     type: "ti"
