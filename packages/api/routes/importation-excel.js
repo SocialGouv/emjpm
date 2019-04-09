@@ -33,15 +33,17 @@ router.post(
       }
 
       const mesures =
-        (req.body && req.body.sheetData.map &&
-           req.body.sheetData.map(datum => ({
+        (req.body &&
+          req.body.sheetData &&
+          req.body.sheetData.map &&
+          req.body.sheetData.map(datum => ({
             ...datum,
             mandataire_id: mandataire.id,
             status: "Mesure en cours"
           }))) ||
         [];
 
-      if (!req.body.sheetData.length) {
+      if (req.body.sheetData && req.body.sheetData.length && !req.body.sheetData.length) {
         res.json({
           success: false,
           added: 0,
