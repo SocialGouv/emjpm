@@ -3,16 +3,12 @@
 import piwik from "react-piwik";
 
 const MANDATAIRE_INITIAL_STATE = {
-  // store some user mandataire data
-  profile: {
-    mesures_en_cours: 0
-  },
-  // store etablissement for autompletes and getDisplayValue
   finess: [],
-  // store tis for autompletes and getDisplayValue
+  profiles: [],
   tis: [],
-  antennes: [],
-  service: {}
+  service: {},
+  enum: 0,
+  lastUpdate: null
 };
 
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
@@ -30,8 +26,20 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       }
 
       return {
+        ...state
+      };
+    case "CHANGE_ENUM":
+      return {
         ...state,
-        profile: action.data
+        enum: action.data,
+        lastUpdate: new Date()
+      };
+    case "MANDATAIRE_PROFILES_UPDATED":
+      return {
+        ...state,
+        profiles: action.data,
+        enum: action.data[0].id,
+        lastUpdate: new Date()
       };
     case "SERVICE_PROFILE_UPDATED":
       return {
@@ -43,27 +51,23 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
         ...state,
         finess: action.data
       };
+
     case "TIS_UPDATED":
       return {
         ...state,
         tis: action.data
       };
     case "MESURE_REACTIVATED":
+    case "MESURE_UPDATED":
     case "MESURE_CREATED":
       return {
         ...state,
-        profile: {
-          ...state.profile,
-          mesures_en_cours: state.profile.mesures_en_cours + 1
-        }
+        lastUpdate: new Date()
       };
     case "MESURE_CLOSED":
       return {
         ...state,
-        profile: {
-          ...state.profile,
-          mesures_en_cours: state.profile.mesures_en_cours - 1
-        }
+        lastUpdate: new Date()
       };
     default:
       return state;

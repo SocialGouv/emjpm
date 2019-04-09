@@ -5,6 +5,7 @@ const iconStyle = { width: 22, height: 22, marginRight: 10 };
 // fiche recap
 const FicheMandataire = ({
   email = "",
+  contact_email = "",
   telephone = "",
   telephone_portable = "",
   adresse = "",
@@ -20,23 +21,32 @@ const FicheMandataire = ({
   const hasAdresse = adresse || code_postal || ville;
   return (
     <div>
-      {(email && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
-          <Mail style={iconStyle} />
-          <a href={`mailto:${email}`}>{email}</a>
-        </div>
-      )) ||
-        null}
+      {type === "service"
+        ? (contact_email && (
+            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
+              <Mail style={iconStyle} />
+              <a href={`mailto:${contact_email}`}>{contact_email}</a>
+            </div>
+          )) ||
+          null
+        : (email && (
+            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
+              <Mail style={iconStyle} />
+              <a href={`mailto:${email}`}>{email}</a>
+            </div>
+          )) ||
+          null}
       <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone">
         <Phone style={iconStyle} />
         {telephone}
       </div>
-      {type !== "service" && telephone_portable && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
-          <Smartphone style={iconStyle} />
-          {telephone_portable}
-        </div>
-      )}
+      {type !== "service" &&
+        telephone_portable && (
+          <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+            <Smartphone style={iconStyle} />
+            {telephone_portable}
+          </div>
+        )}
       {hasAdresse && (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
           <Home style={iconStyle} />
@@ -48,22 +58,12 @@ const FicheMandataire = ({
         <tbody style={{ fontSize: "1.1em" }}>
           <tr>
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
-              <b>
-                {type === "service" ? (
-                  <div>
-                    Mesures en cours/
-                    <br /> Mesures souhaitées{" "}
-                  </div>
-                ) : (
-                  "Mesures souhaitées"
-                )}
-              </b>
+              <b>"Mesures souhaitées"</b>
             </td>
             <td
               data-cy="fiche-manda-dispo-max"
               style={{ textAlign: "center", borderBottom: "1px solid silver" }}
             >
-              {type === "service" ? `${mesures_en_cours || "-"}/` : ""}
               {dispo_max || "-"}
             </td>
           </tr>

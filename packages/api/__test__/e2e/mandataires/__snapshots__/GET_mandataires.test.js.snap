@@ -118,7 +118,7 @@ Object {
   "type": "service",
   "user_id": 3,
   "ville": "Marseille",
-  "zip": null
+  "zip": null,
 }
 `;
 

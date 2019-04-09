@@ -18,7 +18,8 @@ const {
   getCoordonneesByPostCode,
   getServiceByMandataire,
   updateService,
-  getAllMandatairesByUserId
+  getAllMandatairesByUserId,
+  findMandataire
 } = require("../db/queries/mandataires");
 
 const {
@@ -147,7 +148,10 @@ const WHITELIST = [
   "secretariat",
   "nb_secretariat",
   "mesures_en_cours",
-  "zip"
+  "zip",
+  "contact_nom",
+  "contact_prenom",
+  "contact_email"
 ];
 const WHITELISTSIEGESOCIAL = [
   "nom",
@@ -219,13 +223,21 @@ router.put(
         etablissement,
         mesures_en_cours,
         nb_secretariat,
-        type
+        type,
+        contact_nom,
+        contact_prenom,
+        contact_email
       } = req.body;
 
-      const mandataire = await getMandataireByUserId(req.user.id);
+      const mandataire = await findMandataire(req, req.body.id);
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
+
+      if (req.user.type === "service" && mandataire.user_id !== req.user.id) {
+        throw createError.Unauthorized(`Update not authorize`);
+      }
+
       const body = whiteList(req.body);
 
       if (Object.keys(body).length === 0) {
@@ -245,7 +257,10 @@ router.put(
         zip,
         etablissement,
         mesures_en_cours,
-        nb_secretariat
+        nb_secretariat,
+        contact_nom,
+        contact_prenom,
+        contact_email
       });
       await updateUser(req.user.id, {
         nom,
@@ -364,6 +379,7 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
  *               items:
  *                 type: object
  */
+//Todo(Adrien): getAllServicesByTis or getAllServicesByTis
 router.get("/services", typeRequired("ti"), async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
   getAllServicesByTis(ti.id)
@@ -514,14 +530,11 @@ router.get(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      const mandataire = await (req.user.type === "service"
-        ? getAllMandatairesByUserId(req.user.id)
-        : getMandataireByUserId(req.user.id));
-
-      if (!mandataire) {
+      const mandataires = await getAllMandatairesByUserId(req.user.id);
+      if (!mandataires) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
-      res.status(200).json(mandataire);
+      res.status(200).json(mandataires);
     } catch (err) {
       next(err);
     }

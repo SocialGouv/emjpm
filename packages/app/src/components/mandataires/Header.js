@@ -16,25 +16,14 @@ const Title = styled.div`
   text-transform: uppercase;
 `;
 
-const HeaderMandataire = ({
-  nom = "",
-  prenom = "",
-  date_mesure_update,
-  type,
-  etablissement,
-  dispo_max,
-  mesures_en_cours,
-  mesures_en_attente,
-  handleClick
-}) => {
-  const currentDispos = dispo_max - mesures_en_cours - mesures_en_attente || null;
-  const fullName = `${nom || ""} ${prenom || ""}`;
+const HeaderMandataire = ({ profiles, handleClick }) => {
+  const fullName = `${(profiles && profiles.nom) || ""} ${(profiles && profiles.prenom) || ""}`;
   return (
     <ContainerMandataire className="container">
       <Title>
-        {type === "service" ? (
+        {profiles && profiles.type === "service" ? (
           <div>
-            {etablissement}{" "}
+            {profiles.etablissement}{" "}
             <a href="#" onClick={handleClick} style={{ fontSize: "0.6em" }}>
               {" "}
               Informations du service
@@ -44,35 +33,26 @@ const HeaderMandataire = ({
           fullName
         )}
       </Title>
-      {currentDispos > 0 ? (
-        <div>
-          Je déclare actuellement aux juges pouvoir prendre {currentDispos} mesures supplémentaires.
-          <br />
-          (le chiffre correspond au nb mesures souhaitées - mesures en cours - mesures réservées)
-          <br />
-          <div style={{ fontSize: "0.8em", fontStyle: "italic" }}>
-            rendez-vous dans "Mes informations" pour modifier la capacité souhaitée
-          </div>
-        </div>
-      ) : currentDispos ? (
-        <div>
-          Je déclare actuellement aux juges que le nombre de mesures (en cours + réservées) dépasse
-          le nombre souhaité de {currentDispos} mesures.
-        </div>
-      ) : (
-        ""
-      )}
       <div style={{ textAlign: "right", fontSize: "0.8em", color: "#555" }}>
-        {date_mesure_update && (
-          <div>
-            Dernière mise à jour : <DisplayDate date={date_mesure_update.slice(0, 10)} />
-          </div>
-        )}
+        {profiles &&
+          profiles.date_mesure_update && (
+            <div>
+              Dernière mise à jour :{" "}
+              <DisplayDate date={profiles && profiles.date_mesure_update.slice(0, 10)} />
+            </div>
+          )}
       </div>
     </ContainerMandataire>
   );
 };
 
-const HeaderMandataireRedux = connect(state => state.mandataire.profile)(HeaderMandataire);
+const HeaderMandataireRedux = connect(state => ({
+  profiles:
+    state.mandataire.profiles &&
+    state.mandataire.profiles[0] &&
+    state.mandataire.profiles[0].type === "service"
+      ? state.mandataire.service
+      : state.mandataire.profiles[0]
+}))(HeaderMandataire);
 
 export default HeaderMandataireRedux;
