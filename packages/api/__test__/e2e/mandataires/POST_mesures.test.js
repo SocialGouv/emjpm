@@ -175,7 +175,7 @@ test("TI should NOT POST mesure reservation for another TI mandataire", async ()
       mandataire_id: 3
     });
 
-  expect(response.status).toBe(422);
+  expect(response.status).toBe(401);
 
   const newMesuresCount = (await knex("mesures").where({
     mandataire_id: 3

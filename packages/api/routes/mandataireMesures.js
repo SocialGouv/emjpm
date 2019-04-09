@@ -199,7 +199,7 @@ router.put(
  */
 router.post(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose", "service", "ti", "service"),
+  typeRequired("individuel", "prepose", "service", "ti"),
   async (req, res, next) => {
     try {
       if (Object.keys(req.body).length === 0) {
@@ -207,21 +207,20 @@ router.post(
         res.status(200).json();
         return;
       }
-      const mandataire = await findMandataire(req, req.body.mandataire_id);
-
-      const body = {
-        ...req.body,
-        mandataire_id: mandataire && mandataire.id
-      };
-      if (!body.mandataire_id) {
-        throw createError.UnprocessableEntity("Mandataire not found");
-      }
-
       if (
         req.user.type === "individuel" ||
         req.user.type === "prepose" ||
         req.user.type === "service"
       ) {
+        const mandataire = await findMandataire(req, req.body.mandataire_id);
+
+        const body = {
+          ...req.body,
+          mandataire_id: mandataire && mandataire.id
+        };
+        if (!body.mandataire_id) {
+          throw createError.UnprocessableEntity("Mandataire not found");
+        }
         await addMesure(body);
         await updateCountMesures(body.mandataire_id);
         const mesures = await getMesuresEnCoursMandataire(body.mandataire_id);
@@ -229,7 +228,13 @@ router.post(
       } else if (req.user.type === "ti") {
         const ti = await getTiByUserId(req.user.id);
         if (ti && req.body.mandataire_id) {
-          const manda = getMandataireById(req.body.mandataire_id);
+          const manda = await getMandataireById(req.body.mandataire_id);
+
+          const bodyTi = {
+            ...req.body,
+            mandataire_id: manda && manda.id
+          };
+
           const isAllowed = await (manda && manda.type === "service"
             ? isServiceInTi(req.body.mandataire_id, ti.id)
             : isMandataireInTi(req.body.mandataire_id, ti.id));
@@ -239,12 +244,11 @@ router.post(
             throw createError.Unauthorized(`Mandataire not found`);
           }
           await addMesure({
-            ...body,
+            ...bodyTi,
             ti_id: ti.id,
-            cabinet: ti.cabinet,
-            mandataire_id: req.body.mandataire_id
+            cabinet: ti.cabinet
           });
-          await reservationEmail(ti, body);
+          await reservationEmail(ti, bodyTi);
           res.status(200).json({ success: true });
         }
       }
