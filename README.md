@@ -4,6 +4,36 @@
 [![codecov](https://codecov.io/gh/SocialGouv/emjpm/branch/master/graph/badge.svg)](https://codecov.io/gh/SocialGouv/emjpm)
 
 
+## E2E tests
+
+The e2e tests are using the latest deployed `socialgouv/emjpm-*` images by default.
+To run the tests with
+
+```sh
+$ yarn lerna --scope @optional/e2e exec yarn
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up --build
+
+$ NODE_ENV=test yarn workspace @emjpm/knex run migrate
+$ NODE_ENV=test yarn workspace @emjpm/knex run seeds
+
+$ yarn run -- lerna --scope @optional/e2e run cypress:run -- --headed
+```
+
+## FAQ
+
+- *If you have the `Can't take lock to run migrations: Migration table is already locked` error*
+
+```sh
+$ docker-compose exec db psql -U postgres -d emjpm_test -c 'UPDATE knex_migrations_lock set is_locked=0;'
+UPDATE 1
+```
+
+- *If you have migration error*
+
+```sh
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.dev.yaml exec api yarn knex migrate:rollback
+```
+
 ## Release policy
 
 ### Auto

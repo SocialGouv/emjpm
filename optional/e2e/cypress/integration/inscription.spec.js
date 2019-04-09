@@ -1,4 +1,4 @@
-require("./utils");
+require("./.utils");
 
 describe("Inscription", () => {
   it("should switch forms correctly", function() {
@@ -19,7 +19,7 @@ describe("Inscription", () => {
       .click();
 
     cy.get("[data-cy='form-inscription']")
-      .get("input[id='root_username']")
+      .get("input[id='root_email']")
       .should("have.length", 1);
 
     cy.get("input[type='radio'][value='prepose']")
@@ -27,7 +27,7 @@ describe("Inscription", () => {
       .click();
 
     cy.get("[data-cy='form-inscription']")
-      .get("input[id='root_username']")
+      .get("input[id='root_email']")
       .should("have.length", 1);
 
     cy.get("input[type='radio'][value='service']")
@@ -35,7 +35,15 @@ describe("Inscription", () => {
       .click();
 
     cy.get("[data-cy='form-inscription']")
-      .get("input[id='root_username']")
+      .get("input[id='root_email']")
+      .should("have.length", 1);
+
+    cy.get("input[type='radio'][value='ti']")
+      .first()
+      .click();
+
+    cy.get("[data-cy='form-inscription']")
+      .get("input[id='root_email']")
       .should("have.length", 1);
   });
 
@@ -57,13 +65,12 @@ describe("Inscription", () => {
       .click();
 
     const data = {
-      root_username: "username-individuel",
       root_pass1: "pass1",
       root_pass2: "pass1",
       root_nom: "nom 1",
       root_prenom: "prenom 1",
-      root_telephone: "telephone 1",
-      root_telephone_portable: "telephone_portable 1",
+      root_telephone: "0123456789",
+      root_telephone_portable: "9876543210",
       root_email: "email1@email.com",
       root_adresse: "39 rue du user 1",
       root_code_postal: 89100,
@@ -99,13 +106,12 @@ describe("Inscription", () => {
       .click();
 
     const data = {
-      root_username: "username-individuel",
       root_pass1: "password100",
       root_pass2: "password101  ",
       root_nom: "nom 1",
       root_prenom: "prenom 1",
-      root_telephone: "telephone 1",
-      root_telephone_portable: "telephone_portable 1",
+      root_telephone: "0123456789",
+      root_telephone_portable: "9876543210",
       root_email: "email1@email.com",
       root_adresse: "39 rue du user 1",
       root_code_postal: 89100,
@@ -122,6 +128,48 @@ describe("Inscription", () => {
 
     cy.get("li.text-danger").should("have.length", 1);
   });
+
+  it("should NOT register individuel when phone number is invalid", function() {
+    cy.visit("/inscription");
+
+    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+      .get("[data-cy='region']")
+      .first()
+      .click();
+
+    cy.get("[data-cy='TiByRegion-Hauts-de-France']")
+      .get("[data-cy='ti']")
+      .first()
+      .click();
+
+    cy.get("input[type='radio'][value='individuel']")
+      .first()
+      .click();
+
+    const data = {
+      root_pass1: "password100",
+      root_pass2: "password100",
+      root_nom: "nom 1",
+      root_prenom: "prenom 1",
+      root_telephone: "telephone 1",
+      root_telephone_portable: "0123",
+      root_email: "email1@email.com",
+      root_adresse: "39 rue du user 1",
+      root_code_postal: 89100,
+      root_ville: "Ville user 1"
+    };
+
+    Object.keys(data).forEach(key => {
+      cy.get(`input[id='${key}']`).type(data[key]);
+    });
+
+    cy.get("li.text-danger").should("have.length", 0);
+
+    cy.get("[data-cy='form-inscription'] button[type='submit']").click();
+
+    cy.get("li.text-danger").should("have.length", 2);
+  });
+
   describe("registration individuel", () => {
     before(function() {
       cy.exec("npm run cypress:api-reset");
@@ -148,13 +196,12 @@ describe("Inscription", () => {
         .click();
 
       const data = {
-        root_username: "username-individuel",
         root_pass1: "password100",
         root_pass2: "password100",
         root_nom: "nom 1",
         root_prenom: "prenom 1",
-        root_telephone: "telephone 1",
-        root_telephone_portable: "telephone_portable 1",
+        root_telephone: "0123456789",
+        root_telephone_portable: "9876543210",
         root_email: "email1@email.com",
         root_adresse: "39 rue du user 1",
         root_code_postal: 89100,
@@ -169,34 +216,34 @@ describe("Inscription", () => {
 
       cy.get("li.text-danger").should("have.length", 0);
 
-      cy.location("pathname", { timeout: 10000 }).should("eq", "/inscription-done");
+      cy.location("pathname").should("eq", "/inscription-done/");
 
       cy.loginByForm("admin", "admin");
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
     });
     it("account should not login before activation", function() {
-      cy.loginByForm("username-individuel", "password100");
+      cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 1);
     });
     it("admin should be able to activate account", function() {
       cy.loginByForm("admin", "admin");
-      cy.get("[data-cy='UserCellAction']").should("have.length", 3);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 4);
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='UserCellAction']")
-        .last()
+        .first()
         .click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='Actifs']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 4);
+      cy.get("[data-cy='UserCellAction']").should("have.length", 5);
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 1);
     });
     it("account should login after activation", function() {
-      cy.loginByForm("username-individuel", "password100");
+      cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 0);
-      cy.location("pathname", { timeout: 10000 }).should("eq", "/mandataires");
+      cy.location("pathname").should("eq", "/mandataires/");
     });
   });
 
@@ -226,7 +273,6 @@ describe("Inscription", () => {
         .click();
 
       const data = {
-        root_username: "username-ti",
         root_pass1: "password100",
         root_pass2: "password100",
         root_email: "email1@email.com"
@@ -247,7 +293,7 @@ describe("Inscription", () => {
 
       cy.get("li.text-danger").should("have.length", 0);
 
-      cy.location("pathname", { timeout: 10000 }).should("eq", "/inscription-done");
+      cy.location("pathname").should("eq", "/inscription-done/");
 
       cy.loginByForm("admin", "admin");
       cy.get("[data-cy='TI']").click();
@@ -255,7 +301,7 @@ describe("Inscription", () => {
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
     });
     it("account should not login before activation", function() {
-      cy.loginByForm("username-ti", "password100");
+      cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 1);
     });
     it("admin should be able to activate account", function() {
@@ -264,14 +310,11 @@ describe("Inscription", () => {
       cy.get("[data-cy='UserCellAction']").should("have.length", 1);
       cy.get("[data-cy='En attente de validation']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
-      cy.get(".rt-tr ")
-        .contains("email-ti@email.com")
-        .parent(".rt-tr")
-        .within(row => {
-          cy.get(".rt-td [data-cy='UserCellAction']")
-            .last()
-            .click();
-        });
+
+      cy.get("[data-cy='UserCellAction']")
+        .first()
+        .click();
+
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
       cy.get("[data-cy='Actifs']").click();
       cy.get("[data-cy='UserCellAction']").should("have.length", 2);
@@ -279,9 +322,9 @@ describe("Inscription", () => {
       cy.get("[data-cy='UserCellAction']").should("have.length", 1);
     });
     it("account should login after activation", function() {
-      cy.loginByForm("username-ti", "password100");
+      cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 0);
-      cy.location("pathname", { timeout: 10000 }).should("eq", "/tis");
+      cy.location("pathname").should("eq", "/tis/");
     });
   });
 });
