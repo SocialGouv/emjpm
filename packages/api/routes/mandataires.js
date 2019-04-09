@@ -344,8 +344,8 @@ router.get("/services", typeRequired("ti"), async (req, res, next) => {
 
 router.get("/postcode/:postcode", loginRequired, async (req, res, next) => {
   try {
-    const mandataires = await getCoordonneesByPostCode(req.params.postcode);
-    res.status(200).json(mandataires);
+    const coordonnees = await getCoordonneesByPostCode(req.params.postcode);
+    res.status(200).json(coordonnees);
   } catch (err) {
     next(err);
   }
