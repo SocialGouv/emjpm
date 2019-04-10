@@ -67,7 +67,8 @@ const ButtonEditMandataire = connect(
       style={{ marginLeft: 0 }}
       onClick={() =>
         show(formData.type === "service" ? "EditService" : "EditMandataire", {
-          formData
+          formData,
+          currentMandataire
         })
       }
     >
@@ -105,6 +106,13 @@ class MandataireProfile extends React.Component {
         <div style={{ flex: "0 0 50%" }}>
           <h3>Mes coordonnées</h3>
           <Fiche {...newMandataire} />
+          <div>
+            Cv:{" "}
+            <a href={`${process.env.PATH_FILE_NAME}/${newMandataire.cv}`}>
+              {" "}
+              {newMandataire.cv || " "}{" "}
+            </a>
+          </div>
           <br />
           <br />
           <ButtonEditMandataire formData={newMandataire} />

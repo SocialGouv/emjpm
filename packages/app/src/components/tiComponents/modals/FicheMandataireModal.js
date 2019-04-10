@@ -178,8 +178,14 @@ class FicheMandataireModal extends React.Component {
               type={currentMandataire.type}
               zip={currentMandataire.zip}
               displayTitle={"none"}
+              cv={currentMandataire.cv}
             />
-
+            <br />
+            Cv:{" "}
+            <a href={`${process.env.PATH_FILE_NAME}/${currentMandataire.cv}`}>
+              {" "}
+              {currentMandataire.cv}{" "}
+            </a>
             <div>
               {currentEtablissementsForSelectedMandataire && (
                 <React.Fragment>
@@ -194,7 +200,6 @@ class FicheMandataireModal extends React.Component {
                 </React.Fragment>
               )}
             </div>
-
             <div>
               {allTisForOneMandataire && (
                 <React.Fragment>

@@ -36,6 +36,8 @@
     "react-dom": "^16.8.6",
     "react-feather": "^2.0.3",
     "react-jsonschema-form": "^1.6.1",
+    "react-dropzone": "^10.1.5",
+    "react-icons": "^3.6.1",
     "react-leaflet": "^2.2.1",
     "react-modal": "^3.9.1",
     "react-piwik": "^1.6.0",

@@ -6,6 +6,8 @@ const router = express.Router();
 const { typeRequired, loginRequired } = require("../auth/_helpers");
 
 const { ServiceAntenneModel } = require("../model/ServiceAntenneModel");
+const path = require("path");
+const multer = require("multer");
 
 const {
   getMandataireByUserId,
@@ -607,6 +609,34 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
     next(err);
   }
 });
+
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    // store in `emjpm/uploads`
+    cb(null, path.join(__dirname, "../../../uploads"));
+  },
+  filename: function(req, file, cb) {
+    cb(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
+  }
+});
+
+router.post(
+  "/upload",
+  typeRequired("individuel", "prepose", "service"),
+  multer({ storage }).single("file"),
+  async (req, res) => {
+    try {
+      const mandataire = await findMandataire(req, req.body.mandataireId);
+      await updateMandataire(mandataire.id, { cv: req.file.filename });
+      res
+        .status(200)
+        .json({ success: true })
+        .end();
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));

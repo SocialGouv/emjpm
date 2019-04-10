@@ -7,6 +7,8 @@ import { bindActionCreators } from "redux";
 //import { format } from "date-fns";
 import { updateMandataire } from "../actions/mandataire";
 import Layout from "../../communComponents/ModalLayout";
+import ImportCV from "../../common/ImportCv";
+import * as React from "react";
 
 const schema = {
   title: "Modifier mes informations",
@@ -112,7 +114,7 @@ const uiSchema = {
   }
 };
 
-const EditMandataire = ({ show, handleHide, formData, onSubmit }) => {
+const EditMandataire = ({ show, handleHide, formData, onSubmit, currentMandataire, ...props }) => {
   const cleanData = {
     nom: formData.nom || "",
     prenom: formData.prenom || "",
@@ -133,6 +135,10 @@ const EditMandataire = ({ show, handleHide, formData, onSubmit }) => {
     <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
       <Form schema={schema} uiSchema={uiSchema} formData={cleanData} onSubmit={onSubmit}>
         <div style={{ margin: "20px 0", textAlign: "center" }}>
+          <div style={{ margin: "5px", textAlign: "center" }}>
+            Importer votre CV:
+            <ImportCV mandataire_id={currentMandataire.id} />
+          </div>
           <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
             Valider
           </button>
