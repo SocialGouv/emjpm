@@ -1,6 +1,7 @@
 //
 
-const knex = require("@emjpm/api/db/knex");
+const config = require("@emjpm/knex/knexfile.js").test;
+const knex = require("knex")(config);
 
 //
 
