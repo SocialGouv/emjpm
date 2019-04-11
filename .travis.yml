@@ -82,9 +82,9 @@ jobs:
         #
         - docker pull socialgouv/emjpm:master || true
         - docker build --cache-from socialgouv/emjpm:master -t socialgouv/emjpm:master .
-        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-        - docker push socialgouv/emjpm:master
-        - docker logout
+        - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin || true
+        - docker push socialgouv/emjpm:master || true
+        - docker logout || true
         #
         - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up -d --build
       install:
