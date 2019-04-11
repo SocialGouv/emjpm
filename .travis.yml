@@ -45,13 +45,9 @@ jobs:
       stage: Build
       name: Build and test
       if: NOT env(RELEASE)
-      before_install:
-        - export TZ=Europe/Paris
-        - curl -o- -L https://yarnpkg.com/install.sh | bash
-        - export PATH="$HOME/.yarn/bin:$PATH"
+      install:
         # Start the database first so it has the time to boot before we interact with it.
         - docker-compose up -d db
-      install:
         - yarn
         - yarn lerna exec --scope @emjpm/knex yarn
       before_script:
