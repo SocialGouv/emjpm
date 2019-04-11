@@ -72,6 +72,7 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
         Object.assign(error, body);
         throw error;
       }
+      return res;
     })
     .then(res => res.json());
 };
