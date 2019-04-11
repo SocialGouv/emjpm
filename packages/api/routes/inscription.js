@@ -1,5 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
+const createError = require("http-errors");
 
 const salt = bcrypt.genSaltSync();
 
@@ -182,98 +183,110 @@ router.get("/tis", async (req, res, next) => {
  *
  */
 router.post("/mandataires", async (req, res, next) => {
-  const {
-    username,
-    etablissement,
-    pass1,
-    pass2,
-    type, // TODO
-    nom,
-    prenom,
-    telephone,
-    telephone_portable,
-    email,
-    adresse,
-    code_postal,
-    ville,
-    tis
-  } = req.body;
+  try {
+    const {
+      username,
+      etablissement,
+      pass1,
+      pass2,
+      type, // TODO
+      nom,
+      prenom,
+      telephone,
+      telephone_portable,
+      email,
+      adresse,
+      code_postal,
+      ville,
+      tis
+    } = req.body;
 
-  if (pass1 !== pass2 || username.trim() === "") {
-    return res.status(500).json({
-      success: false,
-      message: "Les mots de passe ne sont pas conformes"
-    });
-  }
+    if (pass1 !== pass2 || username.trim() === "") {
+      throw createError.UnprocessableEntity(
+        "Les mots de passe ne sont pas conformes"
+      );
+    }
 
-  const userExists = (await getCountByEmail(email)).count > 0;
+    const userExists = (await getCountByEmail(email)).count > 0;
 
-  if (userExists) {
-    return res.status(409).json({
-      success: false,
-      message: "Un compte avec cet email existe déjà"
-    });
-  }
+    if (userExists) {
+      throw createError.Conflict("Un compte avec cet email existe déjà");
+    }
 
-  return knex
-    .transaction(trx =>
-      // create user
-      queries
-        .createUser(
-          {
-            username,
-            type,
-            nom,
-            prenom,
-            email,
-            password: bcrypt.hashSync(pass1, salt),
-            active: false
-          },
-          trx
-        )
-        .then(([user_id]) => {
-          // create mandataire
-          return queries
-            .createMandataire(
+    const createUser = async trx =>
+      await queries.createUser(
+        {
+          username,
+          type,
+          nom,
+          prenom,
+          email,
+          password: bcrypt.hashSync(pass1, salt),
+          active: false
+        },
+        trx
+      );
+
+    const createMandataire = async (trx, { user_id }) =>
+      await queries.createMandataire(
+        {
+          user_id,
+          etablissement,
+          telephone,
+          telephone_portable,
+          adresse,
+          code_postal,
+          ville
+        },
+        trx
+      );
+
+    await knex.transaction(async trx => {
+      try {
+        const [user_id] = await createUser(trx);
+
+        await createMandataire(trx, { user_id });
+
+        if (!tis || tis.length === 0) {
+          return Promise.resolve();
+        }
+
+        await Promise.all(
+          tis.map(ti_id =>
+            queries.createUserTi(
               {
                 user_id,
-                etablissement,
-                telephone,
-                telephone_portable,
-                adresse,
-                code_postal,
-                ville
+                ti_id
               },
               trx
             )
-            .then(() => {
-              // create tis
-              if (!tis || tis.length === 0) {
-                return true;
-              }
-              return Promise.all(
-                tis.map(ti_id =>
-                  queries.createUserTi(
-                    {
-                      user_id,
-                      ti_id
-                    },
-                    trx
-                  )
-                )
-              );
-            });
-        })
-    )
-    .then(() => {
-      return inscriptionEmail(nom, prenom, email);
-    })
-    .then(() => {
-      return res.json({ success: true });
-    })
-    .catch(e => {
-      next(e);
+          )
+        );
+
+        await trx.commit();
+      } catch (e) {
+        await trx.rollback(e);
+        throw e;
+      }
     });
+
+    await inscriptionEmail(nom, prenom, email);
+
+    return res.json({ success: true });
+  } catch (e) {
+    // see https://www.postgresql.org/docs/9.2/errcodes-appendix.html
+    const PQ_UNIQUE_VIOLATION_ERROR_CODE = String(23505);
+
+    switch (e.code) {
+      case PQ_UNIQUE_VIOLATION_ERROR_CODE:
+        next(createError.Conflict(e.detail));
+        break;
+
+      default:
+        next(e);
+        break;
+    }
+  }
 });
 
 /**
