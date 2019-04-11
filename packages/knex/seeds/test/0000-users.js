@@ -7,8 +7,11 @@ const USER_DEFAULTS = {
 
 const getPasswordHash = clear => bcrypt.hashSync(clear, bcrypt.genSaltSync());
 
-const getInsertData = ({ password, ...others }) => ({
+const getInsertData = (knex, { password, ...others }) => ({
   password: getPasswordHash(password),
+  ...(others.reset_password_token
+    ? { reset_password_expires: knex.raw(`now() + interval '5 minute'`) }
+    : {}),
   ...USER_DEFAULTS,
   ...others
 });
@@ -98,13 +101,12 @@ const USERS = [
     password: "ad123",
     type: "individuel",
     reset_password_token: "LpWpzK4Jla9I87Aq",
-    active: true,
     email: "marcel@paris.com",
     prenom: "Marcel"
   }
 ];
 
-exports.seed = (knex, Promise) =>
+exports.seed = knex =>
   knex("users")
     .del()
-    .insert(USERS.map(getInsertData));
+    .insert(USERS.map(user => getInsertData(knex, user)));
