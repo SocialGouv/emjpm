@@ -12,7 +12,7 @@ exports.seed = function(knex, Promise) {
           telephone_portable: "0101010101",
           adresse: "21 rue de houx",
           mesures_en_cours: 2,
-          dispo_max: 3,
+          dispo_max: 5,
           secretariat: false,
           nb_secretariat: 2,
           user_id: 1
