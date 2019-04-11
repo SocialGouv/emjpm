@@ -34,7 +34,8 @@ const USERS = [
     username: "service1",
     password: "service1",
     type: "service",
-    active: true
+    email: "melanie@paris.com",
+    prenom: "Mélanie"
   },
   {
     username: "admin",
