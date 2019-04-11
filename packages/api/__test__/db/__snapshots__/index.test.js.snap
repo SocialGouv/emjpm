@@ -189,6 +189,12 @@ Object {
 
 exports[`knex_migrations_lock table schema 1`] = `
 Object {
+  "index": Object {
+    "defaultValue": "nextval('knex_migrations_lock_index_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
   "is_locked": Object {
     "defaultValue": null,
     "maxLength": null,
