@@ -115,14 +115,14 @@ class MandataireProfile extends React.Component {
           {(newMandataire.type === "prepose" && (
             <SelectionManager
               onAdd={etablissement_id =>
-                apiFetch(`/mandataires/1/etablissements`, {
+                apiFetch(`/mandataires/${newMandataire.id}/etablissements`, {
                   method: "POST",
                   body: JSON.stringify({
                     etablissement_id
                   })
                 })
               }
-              getSelection={() => apiFetch("/mandataires/1/etablissement")}
+              getSelection={() => apiFetch(`/mandataires/${newMandataire.id}/etablissement`)}
               render={({ onAdd, onRemove, selection }) => (
                 <Selector
                   style={{ marginTop: 0 }}
@@ -146,7 +146,7 @@ class MandataireProfile extends React.Component {
             null}
           <SelectionManager
             onAdd={ti_id =>
-              apiFetch(`/mandataires/1/tis`, {
+              apiFetch(`/mandataires/${newMandataire.id}/tis`, {
                 method: "POST",
                 body: JSON.stringify({
                   ti_id
@@ -154,12 +154,12 @@ class MandataireProfile extends React.Component {
               })
             }
             onRemove={id =>
-              apiFetch(`/mandataires/1/tis/${id}`, {
+              apiFetch(`/mandataires/${newMandataire.id}/tis/${id}`, {
                 method: "DELETE"
               })
             }
             getSelection={() =>
-              apiFetch("/mandataires/1/tis").then(
+              apiFetch(`/mandataires/${newMandataire.id}/tis`).then(
                 data =>
                   (data &&
                     data.map(ti => ({
