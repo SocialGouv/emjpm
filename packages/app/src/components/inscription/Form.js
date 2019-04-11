@@ -75,12 +75,12 @@ class Form extends React.Component {
       .then(json => {
         if (json.success === false) {
           this.setState({ status: "error", message: json.message });
-          throw new Error();
+          throw new Error("Deprecated success === false response !");
         }
         Router.push("/inscription-done");
       })
-      .catch(() => {
-        this.setState({ status: "error" });
+      .catch(e => {
+        this.setState({ status: "error", message: e && e.message });
       });
   };
 
