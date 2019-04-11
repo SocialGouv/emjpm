@@ -1,4 +1,4 @@
-var environment = process.env.NODE_ENV || "development";
-var config = require("../knexfile.js")[environment];
+const environment = process.env.NODE_ENV || "development";
+const config = require("@emjpm/knex/knexfile.js")[environment];
 
 module.exports = require("knex")(config);
