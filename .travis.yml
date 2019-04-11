@@ -66,6 +66,7 @@ jobs:
         - npx codecov
         - docker-compose down
     - <<: *node_stage
+      allow_failure: true
       stage: Build
       name: Run end to end tests
       if: NOT env(RELEASE)
