@@ -43,7 +43,11 @@ test("should register with good values", async () => {
   const response = await request(server)
     .post("/api/v1/inscription/mandataires")
     .send(defaultRegister);
-  expect(response.body.success).toBe(true);
+  expect(response.body).toMatchInlineSnapshot(`
+Object {
+  "success": true,
+}
+`);
   expect(response.status).toBe(200);
 
   const lastInsert = await knex
@@ -85,8 +89,19 @@ test("should NOT register when pass1!==pass2", async () => {
       pass2: "world"
     });
 
+  expect(response.body).toMatchInlineSnapshot(
+    { stack: expect.any(String) },
+    `
+Object {
+  "message": "Les mots de passe ne sont pas conformes",
+  "name": "UnprocessableEntityError",
+  "stack": Any<String>,
+  "status": 422,
+}
+`
+  );
+  expect(response.status).toBe(422);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
-  expect(response.status).toBe(500);
 });
 
 test("should NOT register when email already exist", async () => {
@@ -97,12 +112,19 @@ test("should NOT register when email already exist", async () => {
       email: "marcel@paris.com"
     });
 
-  expect(response.body).toMatchSnapshot({
-    success: false,
-    message: "Un compte avec cet email existe déjà"
-  });
-  expect(nodemailerMock.mock.sentMail().length).toBe(0);
+  expect(response.body).toMatchInlineSnapshot(
+    { stack: expect.any(String) },
+    `
+Object {
+  "message": "Un compte avec cet email existe déjà",
+  "name": "ConflictError",
+  "stack": Any<String>,
+  "status": 409,
+}
+`
+  );
   expect(response.status).toBe(409);
+  expect(nodemailerMock.mock.sentMail().length).toBe(0);
 });
 
 test("should NOT register when username already exist", async () => {
@@ -113,8 +135,19 @@ test("should NOT register when username already exist", async () => {
       username: "jeremy"
     });
 
+  expect(response.body).toMatchInlineSnapshot(
+    { stack: expect.any(String) },
+    `
+Object {
+  "message": "Key (username)=(jeremy) already exists.",
+  "name": "ConflictError",
+  "stack": Any<String>,
+  "status": 409,
+}
+`
+  );
+  expect(response.status).toBe(409);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
-  expect(response.status).toBe(500);
 });
 
 test("should NOT register when empty username", async () => {
@@ -125,7 +158,18 @@ test("should NOT register when empty username", async () => {
       username: ""
     });
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
-  expect(response.status).toBe(500);
+  expect(response.body).toMatchInlineSnapshot(
+    { stack: expect.any(String) },
+    `
+Object {
+  "message": "Les mots de passe ne sont pas conformes",
+  "name": "UnprocessableEntityError",
+  "stack": Any<String>,
+  "status": 422,
+}
+`
+  );
+  expect(response.status).toBe(422);
 });
 
 test("should add mandataire tis", async () => {
