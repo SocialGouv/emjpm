@@ -18,6 +18,7 @@ const getMandataires = ({ filters = {}, offset = 0, limit = 50 } = {}) =>
     )
     .join("users", { "mandataires.user_id": "users.id" })
     .where(whitelist(filters, ALLOWED_FILTERS))
+    .orderBy("users.id")
     .offset(offset)
     .limit(limit);
 
