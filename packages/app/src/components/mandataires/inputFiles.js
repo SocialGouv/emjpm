@@ -6,7 +6,7 @@ import apiFetch from "../communComponents/Api";
 import { read } from "../../excel/parse";
 import { validate } from "../../excel/validate";
 
-import { mesureCreated } from "./actions/mesures";
+import { mesureCreated, mesureImportCreated } from "./actions/mesures";
 
 // IE11 polyfill
 import "../../readAsBinaryString";
@@ -257,7 +257,7 @@ class InputFiles extends React.Component {
 
 // use redux to update mesures count
 const mapDispatchToProps = dispatch => ({
-  onCreateMesure: data => dispatch(mesureCreated(data))
+  onCreateMesure: data => dispatch(mesureImportCreated(data))
 });
 
 export default connect(null, mapDispatchToProps)(InputFiles);

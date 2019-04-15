@@ -114,15 +114,16 @@ class MandataireProfile extends React.Component {
         <div style={{ flex: "0 0 50%" }}>
           {(newMandataire.type === "prepose" && (
             <SelectionManager
+              mandataireId = {newMandataire.id}
               onAdd={etablissement_id =>
-                apiFetch(`/mandataires/1/etablissements`, {
+                apiFetch(`/mandataires/${newMandataire.id}/etablissements`, {
                   method: "POST",
                   body: JSON.stringify({
                     etablissement_id
                   })
                 })
               }
-              getSelection={() => apiFetch("/mandataires/1/etablissement")}
+              getSelection={() => apiFetch(`/mandataires/${newMandataire.id}/etablissement`)}
               render={({ onAdd, onRemove, selection }) => (
                 <Selector
                   style={{ marginTop: 0 }}
@@ -145,8 +146,9 @@ class MandataireProfile extends React.Component {
           )) ||
             null}
           <SelectionManager
+            mandataireId = {newMandataire.id}
             onAdd={ti_id =>
-              apiFetch(`/mandataires/1/tis`, {
+              apiFetch(`/mandataires/${newMandataire.id}/tis`, {
                 method: "POST",
                 body: JSON.stringify({
                   ti_id
@@ -154,12 +156,12 @@ class MandataireProfile extends React.Component {
               })
             }
             onRemove={id =>
-              apiFetch(`/mandataires/1/tis/${id}`, {
+              apiFetch(`/mandataires/${newMandataire.id}/tis/${id}`, {
                 method: "DELETE"
               })
             }
             getSelection={() =>
-              apiFetch("/mandataires/1/tis").then(
+              apiFetch(`/mandataires/${newMandataire.id}/tis`).then(
                 data =>
                   (data &&
                     data.map(ti => ({
