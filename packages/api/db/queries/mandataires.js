@@ -192,12 +192,6 @@ const update = (mandataireID, updates) =>
     .where("id", parseInt(mandataireID))
     .update(updates);
 
-const getCoordonneesByPostCode = codePostal =>
-  knex
-    .from("geolocalisation_code_postal")
-    .where("code_postal", codePostal)
-    .first();
-
 const isMandataireInTi = (mandataire_id, ti_id) =>
   knex
     .from("user_tis")
@@ -227,6 +221,5 @@ module.exports = {
   getAllServicesByTis,
   getAllMandataires,
   getAllByMandatairesFilter,
-  update,
-  getCoordonneesByPostCode
+  update
 };
