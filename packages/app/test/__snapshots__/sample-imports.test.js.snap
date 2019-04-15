@@ -1,5 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`annee as full date should import annee correctly 1`] = `
+Array [
+  Object {
+    "annee": 1937,
+    "civilite": "F",
+    "code_postal": 62130,
+    "date_ouverture": "2011-11-03",
+    "numero_dossier": "A/0000001",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "Gouy_servins",
+  },
+  Object {
+    "annee": 1975,
+    "civilite": "H",
+    "code_postal": 62000,
+    "date_ouverture": "2012-12-09",
+    "numero_dossier": "A/0000002",
+    "residence": "En établissement",
+    "type": "Tutelle",
+    "ville": "fouquieres_les_lens",
+  },
+  Object {
+    "annee": 1986,
+    "civilite": "F",
+    "code_postal": 69876,
+    "date_ouverture": "2011-03-30",
+    "numero_dossier": "A/0000003",
+    "residence": "A Domicile",
+    "type": "Curatelle",
+    "ville": "Montigny",
+  },
+]
+`;
+
+exports[`annee as full date should import annee correctly 2`] = `
+Object {
+  "errors": undefined,
+}
+`;
+
 exports[`clean normalize input 1`] = `
 Array [
   Object {
