@@ -8,6 +8,9 @@ import { validate } from "../../excel/validate";
 
 import { mesureCreated } from "./actions/mesures";
 
+// IE11 polyfill
+import "../../readAsBinaryString";
+
 const Alert = ({ className, Icon, children }) =>
   (children && (
     <div
@@ -217,36 +220,35 @@ class InputFiles extends React.Component {
           remplacés par des _ (touche 8 du clavier)
         </p>
         <ExcelRequirements />
-        <p>
-          <br />
-          <b>Cliquez ci-dessous pour importer vos mesures.</b>
-          <br />
-          <br />
-          <input
-            value={this.state.value}
-            disabled={this.state.status === "loading"}
-            type="file"
-            style={{ padding: 5 }}
-            data-cy="button-upload-excel"
-            onChange={this.readInputFile}
-          />
-          <br />
-          {this.state.status === "success" && (
-            <Alert className="alert-success">
-              Le fichier a bien été importé : {this.state.message}
-            </Alert>
-          )}
-          {this.state.status === "error" && <Errors errors={this.state.errors} />}
+        <br />
+        <br />
+        <b>Cliquez ci-dessous pour importer vos mesures.</b>
+        <br />
+        <br />
+        <input
+          value={this.state.value}
+          disabled={this.state.status === "loading"}
+          type="file"
+          style={{ padding: 5 }}
+          data-cy="button-upload-excel"
+          onChange={this.readInputFile}
+        />
+        <br />
+        {this.state.status === "success" && (
+          <Alert className="alert-success">
+            Le fichier a bien été importé : {this.state.message}
+          </Alert>
+        )}
+        {this.state.status === "error" && <Errors errors={this.state.errors} />}
 
-          <div style={{ color: "red", fontSize: "1.5em", marginTop: 10 }}>
-            Vous n&apos;arrivez pas à importer votre tableau excel? Envoyez-le nous par email à{" "}
-            <a href="mailto:contact@emjpm.beta.gouv.fr">contact@emjpm.beta.gouv.fr</a>.
-            <br />
-            <br />
-            Nous le vérifierons, le mettrons en page et vous le renverrons pour que vous puissiez
-            l&apos;importer.{" "}
-          </div>
-        </p>
+        <div style={{ color: "red", fontSize: "1.5em", marginTop: 10 }}>
+          Vous n&apos;arrivez pas à importer votre tableau excel? Envoyez-le nous par email à{" "}
+          <a href="mailto:contact@emjpm.beta.gouv.fr">contact@emjpm.beta.gouv.fr</a>.
+          <br />
+          <br />
+          Nous le vérifierons, le mettrons en page et vous le renverrons pour que vous puissiez
+          l&apos;importer.{" "}
+        </div>
       </div>
     );
   }
