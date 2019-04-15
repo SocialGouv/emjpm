@@ -12,7 +12,7 @@ import TableMesures from "./TableMesures";
 import PillDispo from "./PillDispo";
 import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
-import { changeEnum } from "./actions/mandataire";
+import { changeMandataireId } from "./actions/mandataire";
 import { DispoMagistrat } from "../common/ShowBox";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
@@ -43,17 +43,17 @@ class ServiceTabs extends React.Component {
     return (
       <>
         <Header handleClick={this.props.handleClick} />
-        <Form schema={schema} formData={this.props.enum} uiSchema={uiSchema} onChange={onSubmitted}>
+        <Form schema={schema} formData={this.props.mandataireId} uiSchema={uiSchema} onChange={onSubmitted}>
           {" "}
           <button style={{ display: "none" }} type="submit" />{" "}
         </Form>
         <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
           <ServiceTabsAntennes
             handleClick={this.props.handleClick}
-            mandataireID={this.props.enum}
+            mandataireID={this.props.mandataireId}
             antenne={
               this.props.profiles.filter &&
-              this.props.profiles.filter(profile => profile.id === this.props.enum)[0]
+              this.props.profiles.filter(profile => profile.id === this.props.mandataireId)[0]
             }
           />
         </div>
@@ -171,12 +171,13 @@ class ServiceTabsAntennes extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) =>
-  bindActionCreators({ onChange: changeEnum }, dispatch);
+  bindActionCreators({ onChange: changeMandataireId }, dispatch);
 
 export default connect(
   state => ({
     profiles: state.mandataire.profiles,
-    enum: state.mandataire.enum
+    mandataireId: state.mandataire.mandataireId,
+    lastUpdate: state.mandataire.lastUpdate
   }),
   mapDispatchToProps
 )(ServiceTabs);
