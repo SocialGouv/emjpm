@@ -43,7 +43,12 @@ class ServiceTabs extends React.Component {
     return (
       <>
         <Header handleClick={this.props.handleClick} />
-        <Form schema={schema} formData={this.props.mandataireId} uiSchema={uiSchema} onChange={onSubmitted}>
+        <Form
+          schema={schema}
+          formData={this.props.mandataireId}
+          uiSchema={uiSchema}
+          onChange={onSubmitted}
+        >
           {" "}
           <button style={{ display: "none" }} type="submit" />{" "}
         </Form>
