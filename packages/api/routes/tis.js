@@ -92,7 +92,6 @@ router.post("/:mandataireId/tis", loginRequired, async (req, res, next) => {
       req.user.type === "service" ? addServiceTis : addMandataireTis;
     await updaterMethod(req.body.ti_id, mandataire.id);
     const tis = await getAllTisByMandataire(mandataire.id);
-    console.log("tis", tis);
     res.status(200).json(tis);
   } catch (err) {
     next(err);

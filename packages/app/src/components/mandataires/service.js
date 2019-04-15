@@ -176,7 +176,8 @@ const mapDispatchToProps = (dispatch, ownProps) =>
 export default connect(
   state => ({
     profiles: state.mandataire.profiles,
-    enum: state.mandataire.enum
+    enum: state.mandataire.enum,
+    lastUpdate: state.mandataire.lastUpdate
   }),
   mapDispatchToProps
 )(ServiceTabs);

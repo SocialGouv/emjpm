@@ -10,6 +10,14 @@ class SelectionManager extends React.Component {
   state = {
     selection: []
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    // hack to force reload when some redux state change
+    if (this.state.selection !== this.props.getSelection()) {
+      this.updateSelection();
+    }
+  }
+
   componentDidMount() {
     this.updateSelection();
   }

@@ -34,11 +34,16 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
         enum: action.data,
         lastUpdate: new Date()
       };
+    case "CHANGE_ENUM_INIT":
+      return {
+        ...state,
+        enum: action.data[0].id,
+        lastUpdate: new Date()
+      };
     case "MANDATAIRE_PROFILES_UPDATED":
       return {
         ...state,
         profiles: action.data,
-        enum: action.data[0].id,
         lastUpdate: new Date()
       };
     case "SERVICE_PROFILE_UPDATED":

@@ -73,6 +73,7 @@ const fetchAllFiness = () =>
 export const mandataireMount = () => async dispatch => {
   const profiles = await fetchProfiles();
   await dispatch(mandataireProfilesUpdated(profiles));
+  await dispatch(changeEnumDisplayInit(profiles));
 
   const finess = await fetchAllFiness();
   await dispatch(finessUpdated(finess));
@@ -126,8 +127,10 @@ export const changeEnum = data => dispatch => {
 
 /* ----------- PLAIN ACTIONS  */
 
-export const changeEnumDisplay = data => ({
-  type: CHANGE_ENUM,
+export const changeEnumDisplay = data => ({ type: CHANGE_ENUM, data });
+
+export const changeEnumDisplayInit = data => ({
+  type: CHANGE_ENUM_INIT,
   data
 });
 
