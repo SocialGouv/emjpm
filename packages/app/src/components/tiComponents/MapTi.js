@@ -100,13 +100,7 @@ class MapTi extends React.Component {
     });
   };
 
-  fetchpostCode = codePostal =>
-    apiFetch("/mandataires/PosteCode", {
-      method: "POST",
-      body: JSON.stringify({
-        codePoste: codePostal
-      })
-    });
+  fetchpostCode = codePostal => apiFetch(`/mandataires/postcode/${codePostal}`);
 
   zoomCodePostal = codePostal => {
     if (!codePostal || !codePostal.trim()) {
