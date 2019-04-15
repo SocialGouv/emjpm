@@ -7,7 +7,7 @@ const MANDATAIRE_INITIAL_STATE = {
   profiles: [],
   tis: [],
   service: {},
-  enum: 0,
+  mandataireId: 0,
   lastUpdate: null
 };
 
@@ -28,17 +28,22 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       return {
         ...state
       };
-    case "CHANGE_ENUM":
+    case "CHANGE_MANDATAIRE_ID":
       return {
         ...state,
-        enum: action.data,
+        mandataireId: action.data,
+        lastUpdate: new Date()
+      };
+    case "CHANGE_MANDATAIRE_ID_INIT":
+      return {
+        ...state,
+        mandataireId: action.data[0].id,
         lastUpdate: new Date()
       };
     case "MANDATAIRE_PROFILES_UPDATED":
       return {
         ...state,
         profiles: action.data,
-        enum: action.data[0].id,
         lastUpdate: new Date()
       };
     case "SERVICE_PROFILE_UPDATED":

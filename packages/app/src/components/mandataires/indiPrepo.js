@@ -137,7 +137,7 @@ class MandataireTabs extends React.Component {
 export default connect(
   state => ({
     profiles: state.mandataire.profiles,
-    enum: state.mandataire.enum
+    mandataireId: state.mandataire.mandataireId
   }),
   null
 )(MandataireTabs);

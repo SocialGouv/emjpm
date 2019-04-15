@@ -8,9 +8,9 @@ export const FINESS_UPDATED = "FINESS_UPDATED";
 export const TIS_UPDATED = "TIS_UPDATED";
 export const SERVICE_PROFILE_UPDATED = "SERVICE_PROFILE_UPDATED";
 export const MANDATAIRE_PROFILES_UPDATED = "MANDATAIRE_PROFILES_UPDATED";
-export const CHANGE_ENUM = "CHANGE_ENUM";
+export const CHANGE_MANDATAIRE_ID = "CHANGE_MANDATAIRE_ID";
 export const ANTENNES_UPDATED = "ANTENNES_UPDATED";
-export const CHANGE_ENUM_INIT = "CHANGE_ENUM_INIT";
+export const CHANGE_MANDATAIRE_ID_INIT = "CHANGE_MANDATAIRE_ID_INIT";
 
 /* ---------- API */
 export const fetchProfiles = () => apiFetch(`/mandataires/all`);
@@ -73,6 +73,7 @@ const fetchAllFiness = () =>
 export const mandataireMount = () => async dispatch => {
   const profiles = await fetchProfiles();
   await dispatch(mandataireProfilesUpdated(profiles));
+  await dispatch(changeMandataireIdDisplayInit(profiles));
 
   const finess = await fetchAllFiness();
   await dispatch(finessUpdated(finess));
@@ -120,14 +121,16 @@ export const addAntennesToMandataires = data => dispatch => {
     .then(() => Router.push("/mandataires"));
 };
 
-export const changeEnum = data => dispatch => {
-  return dispatch(changeEnumDisplay(data));
+export const changeMandataireId = data => dispatch => {
+  return dispatch(changeMandataireIdDisplay(data));
 };
 
 /* ----------- PLAIN ACTIONS  */
 
-export const changeEnumDisplay = data => ({
-  type: CHANGE_ENUM,
+export const changeMandataireIdDisplay = data => ({ type: CHANGE_MANDATAIRE_ID, data });
+
+export const changeMandataireIdDisplayInit = data => ({
+  type: CHANGE_MANDATAIRE_ID_INIT,
   data
 });
 

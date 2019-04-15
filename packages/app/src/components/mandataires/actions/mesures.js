@@ -143,6 +143,18 @@ export const createMesureSave = data => dispatch =>
       throw e;
     });
 
+export const mesureImportCreated = data => dispatch => {
+  return fetchProfiles()
+    .then(json => {
+      dispatch(mandataireProfilesUpdated(json));
+      dispatch(mesureCreated(data));
+    })
+    .catch(e => {
+      console.log("ERROR", e);
+      dispatch(mesureCreatedError(e.message));
+      throw e;
+    });
+};
 // ------------ PLAIN ACTIONS
 
 export const createMesure = () => ({
