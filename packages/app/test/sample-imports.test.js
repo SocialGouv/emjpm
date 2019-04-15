@@ -345,3 +345,16 @@ describe("no column headers", () => {
     expect(validations).toMatchSnapshot();
   });
 });
+
+describe("annee as full date", () => {
+  test(`should import annee correctly`, () => {
+    expect.assertions(3);
+    const workbook = XLSX.readFile(path.join(__dirname, "excel", "dates_naissance.xlsx"));
+    const cleaned = read(workbook);
+    expect(cleaned).toMatchSnapshot();
+    const validations = validate(cleaned);
+    expect(validations.errors).toBeUndefined();
+    expect(validations).toMatchSnapshot();
+  });
+});
+
