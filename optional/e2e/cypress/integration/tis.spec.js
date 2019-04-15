@@ -90,6 +90,15 @@ describe("Tis", function() {
         it("table should show 1 mandataires on Lille Geolocalisation ", () => {
           cy.get("[data-cy=tab-code-postal]").type("62000");
           cy.get("[data-cy=tab-recherche]").click();
+
+          // ! HACK(douglasduteil): force resize to ensure to trigger new data request
+          // ! Seems like changing the screen size change the data in the list as
+          // ! it changes the size of the map...
+          cy.viewport("macbook-13");
+          // ! HACK(douglasduteil): wait for react to render...
+          // ! This is making the test less fuzzy
+          cy.wait(250);
+
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
         });
       });
