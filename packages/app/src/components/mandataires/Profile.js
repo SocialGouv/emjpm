@@ -114,6 +114,7 @@ class MandataireProfile extends React.Component {
         <div style={{ flex: "0 0 50%" }}>
           {(newMandataire.type === "prepose" && (
             <SelectionManager
+              mandataireId = {newMandataire.id}
               onAdd={etablissement_id =>
                 apiFetch(`/mandataires/${newMandataire.id}/etablissements`, {
                   method: "POST",
@@ -145,6 +146,7 @@ class MandataireProfile extends React.Component {
           )) ||
             null}
           <SelectionManager
+            mandataireId = {newMandataire.id}
             onAdd={ti_id =>
               apiFetch(`/mandataires/${newMandataire.id}/tis`, {
                 method: "POST",
