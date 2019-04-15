@@ -97,6 +97,17 @@ export const cleanColNames = cols =>
 
 const trim = str => (isNaN(str) && ("" + str).trim()) || str;
 
+const cleanAnnee = str => {
+  if (!isNaN(str)) {
+    // if like an excel formatted date
+    if (parseInt(str) > 10000) {
+      return readExcelDate(str).getFullYear();
+    }
+  }
+
+  return str || null;
+};
+
 // convert XLSX.utils.sheet_to_json data
 // only include relevant columns and normalize the input
 export const clean = inputData => {
@@ -137,7 +148,7 @@ export const clean = inputData => {
       // some post processing
       .map(row => ({
         ...row,
-        annee: row.annee || null,
+        annee: cleanAnnee(row.annee),
         date_ouverture: format(readExcelDate(row.date_ouverture), "YYYY-MM-DD"),
         civilite: cleanCivilite(row.civilite)
       }))
