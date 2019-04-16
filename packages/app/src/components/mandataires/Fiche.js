@@ -31,16 +31,23 @@ const FicheMandataire = ({
         <Phone style={iconStyle} />
         {telephone}
       </div>
-      {type !== "service" && telephone_portable && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
-          <Smartphone style={iconStyle} />
-          {telephone_portable}
-        </div>
-      )}
+      {type !== "service" &&
+        telephone_portable && (
+          <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+            <Smartphone style={iconStyle} />
+            {telephone_portable}
+          </div>
+        )}
       {hasAdresse && (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
           <Home style={iconStyle} />
           {adresse} {code_postal} {ville}
+        </div>
+      )}
+      {zip && (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+          <Info style={iconStyle} />
+          {zip}
         </div>
       )}
       <br />
@@ -48,16 +55,7 @@ const FicheMandataire = ({
         <tbody style={{ fontSize: "1.1em" }}>
           <tr>
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
-              <b>
-                {type === "service" ? (
-                  <div>
-                    Mesures en cours/
-                    <br /> Mesures souhaitées{" "}
-                  </div>
-                ) : (
-                  "Mesures souhaitées"
-                )}
-              </b>
+              <b>Nombre total de mesures souhaitées</b>
             </td>
             <td
               data-cy="fiche-manda-dispo-max"
