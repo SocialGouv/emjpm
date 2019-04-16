@@ -84,7 +84,7 @@ const COLUMNS = [
   {
     Header: "Date de décision",
     id: "date_ouverture",
-    width: 160,
+    width: 140,
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
     Cell: row => (
       <div>
@@ -132,7 +132,7 @@ const COLUMNS = [
   {
     Header: "Type de mesure",
     id: "type",
-    width: 200,
+    width: 150,
     accessor: d => d.type,
     style: { textAlign: "center", alignSelf: "center" }
   },
@@ -180,6 +180,7 @@ const COLUMNS = [
   {
     Header: "Cabinet",
     id: "cabinet",
+    width: 60,
     accessor: d => d.cabinet,
     style: { textAlign: "center", alignSelf: "center" }
   },
