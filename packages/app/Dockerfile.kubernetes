@@ -4,13 +4,12 @@ ARG BASE_IMAGE=${REGISTRY}:${TAG_BASE_IMAGE}
 
 FROM ${BASE_IMAGE} as emjpm-base-image
 
-FROM nginx:1.16-alpine
+FROM nginx:1.13-alpine
 
-COPY --from=emjpm-base-image /app/packages/app/out /www
-
-COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY --from=emjpm-base-image /app/packages/app/out /usr/share/nginx/html
 COPY ./scripts /
 
 EXPOSE 80
 
-ENTRYPOINT ["/entrypoint.sh"]
+RUN ["chmod", "+x", "/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]

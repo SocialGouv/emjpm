@@ -1,19 +1,40 @@
 ---
+include:
+- '/k8s/app/.deploy-emjpm-app.yml'
+- '/k8s/api/.deploy-emjpm-api.yml'
+- '/k8s/postgres/.deploy-emjpm-postgres.yml'
+
 variables:
-  DOCKER_COMPOSE_VERSION: "1.23.2"
   DOCKER_DRIVER: overlay2
   DOCKER_HOST: tcp://localhost:2375
-  DOCKER_VERSION: 18
+  DOCKER_VERSION: "18.06"
+  IMAGE_INFRA_BASE_NAME: "infra/images-docker"
+  APP_PORT: 80
+  API_PORT: 4000
   GIT_STRATEGY: fetch
+  DEV_ENVIRONMENT_NAME: "dev.factory"
+  PROD_ENVIRONMENT_NAME: "incubateur"
 
 #
 
 .base-docker-image-stage:
   image: docker:$DOCKER_VERSION
   services:
-    - docker:$DOCKER_VERSION-dind
+  - docker:$DOCKER_VERSION-dind
 
 #
+
+.get_github_id_stage: &get_github_id_stage
+  image:
+    name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
+    entrypoint: [""]
+  before_script:
+  - envsubst < k8s/scripts/get-deploy-id.sh > k8s/scripts/get-github-deploy-id.sh
+  script:
+  - sh k8s/scripts/get-github-deploy-id.sh
+  artifacts:
+    paths:
+    - github_deploy_id
 
 .quality_stage: &quality_stage
   stage: "Code Quality"
@@ -40,23 +61,63 @@ variables:
   stage: "Registration"
   dependencies: []
   before_script:
-    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
-    # NOTE(douglasduteil): do not fail if no previous sha image exist
-    - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA || true
+  - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+  # NOTE(douglasduteil): do not fail if no previous sha image exist
+  - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA || true
   script:
-    - echo "Build $IMAGE_NAME:$CI_COMMIT_SHA from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA"
-    - docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA -t $IMAGE_NAME:$CI_COMMIT_SHA $CONTEXT
-    - docker push $IMAGE_NAME
+  - echo "Build $IMAGE_NAME:$CI_COMMIT_SHA from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA"
+  - docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA -t $IMAGE_NAME:$CI_COMMIT_SHA $CONTEXT
+  - docker push $IMAGE_NAME
+
+.deploy_stage: &deploy_stage
+  stage: "Deploy EMJPM"
+  dependencies: []
+  variables: &deploy_stage_variables
+    EMJPM_REGISTRY: $CI_REGISTRY_IMAGE
+    IMAGE_TAG: $CI_COMMIT_SHA
+
+.send_url_to_github_stage: &send_url_to_github_stage
+  stage: "Send Url"
+  image:
+    name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
+    entrypoint: [""]
+  script:
+  - export DEPLOY_ID=$(cat github_deploy_id)
+  - envsubst < k8s/scripts/send-url.sh > k8s/scripts/send-url-to-github.sh
+  - sh k8s/scripts/send-url-to-github.sh $CI_COMMIT_REF_NAME
 
 #
 
 stages:
-  - "Prepare"
-  - "Code Quality"
-  - "Registration"
-  - "End to End Tests"
+- "Prepare"
+- "Code Quality"
+- "Registration"
+- "Deploy EMJPM"
+- "End to End Tests"
+- "Send Url"
+- "Delete k8s objects"
 
-#
+
+###########################################
+###               PREPARE               ###
+###########################################
+
+
+Get Github Id (dev):
+  <<: *get_github_id_stage
+  stage: "Prepare"
+  environment:
+    name: $DEV_ENVIRONMENT_NAME
+  except:
+  - master
+
+Get Github Id (prod):
+  <<: *get_github_id_stage
+  stage: "Prepare"
+  environment:
+    name: $PROD_ENVIRONMENT_NAME
+  only:
+  - master
 
 Register socialgouv/emjpm base image:
   <<: *register_stage
@@ -74,25 +135,29 @@ Register postgres image:
     DOCKER_BUILD_ARGS: ""
     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
 
-#
+
+###########################################
+###                LINT                 ###
+###########################################
+
 
 Lint @emjpm/api:
   <<: *quality_stage
   <<: *master_based_stage
   script:
-    - yarn workspace @emjpm/api lint
+  - yarn workspace @emjpm/api lint
 
 Lint @emjpm/app:
   <<: *quality_stage
   <<: *master_based_stage
   script:
-    - yarn workspace @emjpm/app lint
+  - yarn workspace @emjpm/app lint
 
 Lint @emjpm/knex:
   <<: *quality_stage
   <<: *master_based_stage
   script:
-    - yarn workspace @emjpm/knex lint
+  - yarn workspace @emjpm/knex lint
 
 Lint @optional/e2e:
   <<: *quality_stage
@@ -111,9 +176,13 @@ Lint jest-environment-knex:
   <<: *quality_stage
   <<: *master_based_stage
   script:
-    - yarn workspace jest-environment-knex lint
+  - yarn workspace jest-environment-knex lint
 
-#
+
+###########################################
+###                TESTS                ###
+###########################################
+
 
 Test @emjpm/api:
   <<: *quality_stage
@@ -154,22 +223,28 @@ Test @emjpm/app:
     GIT_STRATEGY: none
     JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/app/coverage
   script:
-    - yarn workspace @emjpm/app test --coverage
+  - yarn workspace @emjpm/app test --coverage
+  after_script:
+  - CI_PROJECT_DIR=/app npx codecov -F app
 
 Test @emjpm/knex:
   <<: *quality_stage
   <<: *master_based_stage
   services:
-    - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
-      command: ["-p", "5434"]
+  - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
+    command: ["-p", "5434"]
   variables:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
   script:
-    - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
-    - yarn workspace @emjpm/knex test
+  - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
+  - yarn workspace @emjpm/knex test
 
-#
+
+###########################################
+###       REGISTER DOCKER IMAGES        ###
+###########################################
+
 
 Send coverage result:
   stage: "Registration"
@@ -196,9 +271,92 @@ Register app image:
     CONTEXT: packages/app
     DOCKER_BUILD_ARGS: >-
       --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+      --file ./packages/app/Dockerfile.kubernetes
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
-#
+Register e2e image:
+  <<: *register_stage
+  variables:
+    CONTEXT: optional/e2e
+    DOCKER_BUILD_ARGS: >-
+      --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/e2e
+
+
+###########################################
+###            DEPLOY TO K8S            ###
+###########################################
+
+
+Deploy @emjpm/app (dev):
+  <<: *deploy_stage
+  extends: .deploy-emjpm-app-k8s-dev
+  variables:
+    <<: *deploy_stage_variables
+    PORT: $APP_PORT
+  environment:
+    name: $DEV_ENVIRONMENT_NAME
+  except:
+  - master
+
+Deploy @emjpm/api (dev):
+  <<: *deploy_stage
+  extends: .deploy-emjpm-api-k8s-dev
+  variables:
+    <<: *deploy_stage_variables
+    PORT: $API_PORT
+  environment:
+    name: $DEV_ENVIRONMENT_NAME
+  except:
+  - master
+
+Deploy postgreSQL (dev):
+  <<: *deploy_stage
+  extends: .deploy-emjpm-postgres-k8s-dev
+  variables:
+    <<: *deploy_stage_variables
+  environment:
+    name: $DEV_ENVIRONMENT_NAME
+  except:
+  - master
+
+Deploy @emjpm/app (prod):
+  <<: *deploy_stage
+  extends: .deploy-emjpm-app-k8s-prod
+  variables:
+    <<: *deploy_stage_variables
+    PORT: $APP_PORT
+  environment:
+    name: $PROD_ENVIRONMENT_NAME
+  only:
+  - master
+
+Deploy @emjpm/api (prod):
+  <<: *deploy_stage
+  extends: .deploy-emjpm-api-k8s-prod
+  variables:
+    <<: *deploy_stage_variables
+    PORT: $API_PORT
+  environment:
+    name: $PROD_ENVIRONMENT_NAME
+  only:
+  - master
+
+Deploy postgreSQL (prod):
+  <<: *deploy_stage
+  extends: .deploy-emjpm-postgres-k8s-prod
+  variables:
+    <<: *deploy_stage_variables
+  environment:
+    name: $PROD_ENVIRONMENT_NAME
+  only:
+  - master
+
+
+###########################################
+###           END TO END TESTS          ###
+###########################################
+
 
 E2E Test @optional/e2e:
   <<: *end_to_end_stage
@@ -255,3 +413,44 @@ E2E Test @optional/e2e:
     - yarn workspace @emjpm/knex run seeds --env test
     #
     - yarn run -- lerna exec --scope=@optional/e2e yarn -- cypress run
+
+
+Send deployment url to Github (dev):
+  <<: *send_url_to_github_stage
+  before_script:
+  - HASH_BRANCH_NAME=$(printf "$CI_COMMIT_REF_NAME" | sha1sum | cut -c1-5)
+  - export HASH_BRANCH_NAME=$HASH_BRANCH_NAME
+  - export URL=http://$HASH_BRANCH_NAME-emjpm.${CI_ENVIRONMENT_NAME}.social.gouv.fr/
+  environment:
+    name: $DEV_ENVIRONMENT_NAME
+  except:
+  - master
+
+Send deployment url to Github (prod):
+  <<: *send_url_to_github_stage
+  variables:
+    URL: https://emjpm.$CI_ENVIRONMENT_NAME.social.gouv.fr/
+  environment:
+    name: $PROD_ENVIRONMENT_NAME
+  only:
+  - master
+
+
+###########################################
+###     DELETE USELESS K8S OBJECTS      ###
+###########################################
+
+
+Delete useless k8s objects:
+  stage: "Delete k8s objects"
+  image:
+    name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
+    entrypoint: [""]
+  before_script:
+  - /apps/create-kubeconfig.sh
+  script:
+  - python3 k8s/scripts/delete-k8s-objects.py
+  environment:
+    name: $DEV_ENVIRONMENT_NAME
+  only:
+  - master

@@ -1,0 +1,38 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: emjpm-api${HASH_BRANCH_NAME}
+  labels:
+    app: emjpm-api${HASH_BRANCH_NAME}
+    branch: emjpm${HASH_BRANCH_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emjpm-api${HASH_BRANCH_NAME}
+  template:
+    metadata:
+      labels:
+        app: emjpm-api${HASH_BRANCH_NAME}
+    spec:
+      containers:
+      - image: ${EMJPM_REGISTRY}/api:${IMAGE_TAG}
+        name: emjpm-api
+        ports:
+        - containerPort: ${PORT}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: ${PORT}
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: ${PORT}
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        env:
+        - name: DATABASE_URL
+          value: "psql://${POSTGRES_API_USER}:${POSTGRES_API_USER_PASSWORD}@postgres${HASH_BRANCH_NAME}/emjpm_dev"

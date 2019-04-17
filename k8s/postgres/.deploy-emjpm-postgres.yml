@@ -1,0 +1,31 @@
+.deploy-emjpm-postgres-k8s-dev:
+  image:
+    name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
+    entrypoint: [""]
+  before_script:
+  - /apps/create-kubeconfig.sh
+  - HASH_BRANCH_NAME=$(printf "$CI_COMMIT_REF_NAME" | sha1sum | cut -c1-5)
+  - export HASH_BRANCH_NAME=-$HASH_BRANCH_NAME
+  - envsubst < k8s/postgres/deployment.yml > k8s/postgres/deployment-emjpm.yml
+  - envsubst < k8s/postgres/service.yml > k8s/postgres/service-emjpm.yml
+  - envsubst < k8s/postgres/pod-inject-dataset.yml > k8s/postgres/pod-inject-dataset-emjpm.yml
+  script:
+  - kubectl apply -f k8s/postgres/configmap.yml
+  - kubectl apply -f k8s/postgres/deployment-emjpm.yml
+  - kubectl apply -f k8s/postgres/service-emjpm.yml
+  - k8s/scripts/inject_data_postgres.sh $HASH_BRANCH_NAME
+  allow_failure: false
+
+.deploy-emjpm-postgres-k8s-prod:
+  image:
+    name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
+    entrypoint: [""]
+  before_script:
+  - /apps/create-kubeconfig.sh
+  - envsubst < k8s/postgres/pod-inject-dataset-prod.yml > k8s/postgres/pod-inject-dataset-emjpm.yml
+  - envsubst < k8s/postgres/pod-init-postgres-prod.yml > k8s/postgres/pod-init-postgres-emjpm-prod.yml
+  script:
+  - kubectl apply -f k8s/postgres/configmap.yml
+  - kubectl apply -f k8s/postgres/pod-init-postgres-emjpm-prod.yml
+  - k8s/scripts/inject_data_postgres.sh
+  allow_failure: false
