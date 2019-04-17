@@ -1,5 +1,6 @@
 node_modules
 .env
+.idea
 coverage
 dist
 docker-compose.override.yaml
