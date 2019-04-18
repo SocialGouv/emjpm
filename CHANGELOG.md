@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.4](https://github.com/SocialGouv/emjpm/compare/v0.0.3...v0.0.4) (2019-04-18)
+
+**Note:** Version bump only for package emjpm
+
+
+
+
+
 ## 0.0.3 (2019-04-17)
 
 
