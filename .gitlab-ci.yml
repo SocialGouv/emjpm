@@ -1,0 +1,61 @@
+---
+variables:
+  DOCKER_COMPOSE_VERSION: "1.23.2"
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://localhost:2375
+  DOCKER_VERSION: 18
+  GIT_STRATEGY: fetch
+
+#
+
+.base-docker-image-stage:
+  image: docker:$DOCKER_VERSION
+  services:
+    - docker:$DOCKER_VERSION-dind
+
+.register_stage: &register_stage
+  extends: .base-docker-image-stage
+  stage: "Registration"
+  dependencies: []
+  before_script:
+    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+    # NOTE(douglasduteil): do not fail if no previous sha image exist
+    - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA || true
+  script:
+    - echo "Build $IMAGE_NAME:$CI_COMMIT_SHA from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA"
+    - docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA -t $IMAGE_NAME:$CI_COMMIT_SHA $CONTEXT
+    - docker push $IMAGE_NAME
+
+#
+
+stages:
+  - "Prepare"
+  - "Registration"
+
+#
+
+Register socialgouv/emjpm base image:
+  <<: *register_stage
+  stage: "Prepare"
+  variables:
+    CONTEXT: .
+    DOCKER_BUILD_ARGS: ""
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
+
+#
+
+Register api image:
+  <<: *register_stage
+  variables:
+    CONTEXT: packages/api
+    DOCKER_BUILD_ARGS: >-
+      --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+
+Register app image:
+  <<: *register_stage
+  variables:
+    CONTEXT: packages/app
+    DOCKER_BUILD_ARGS: >-
+      --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
