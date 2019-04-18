@@ -16,6 +16,15 @@ env:
     - RELEASE=true
 ```
 
+You can change the lerna arguments though the `LERNA_ARGS` variable.
+
+```yml
+env:
+  global:
+    - LERNA_ARGS="--force-publish --yes"
+    - RELEASE=true
+```
+
 ### Manual
 
 You need an [Github token](https://github.com/settings/tokens/new) to release.
