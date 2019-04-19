@@ -47,11 +47,11 @@ jobs:
     - <<: *node_stage
       stage: Build
       name: Build and test
-      if: NOT env(RELEASE)
+      if: type = pull_request AND NOT env(RELEASE)
       install:
         # Start the database first so it has the time to boot before we interact with it.
         - docker-compose up -d db
-        - yarn
+        - yarn --frozen-lockfile
       before_script:
         - yarn workspace @emjpm/knex knex migrate:latest --env test
         - yarn workspace @emjpm/knex knex seed:run --env test
