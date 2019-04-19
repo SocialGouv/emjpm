@@ -9,6 +9,8 @@ const server = require("@emjpm/api/app");
 
 const { getTokenByUserType } = require("../utils");
 
+//
+
 beforeAll(async () => {
   await knex.migrate.latest();
   await knex.seed.run();
