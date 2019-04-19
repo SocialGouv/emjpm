@@ -13,6 +13,19 @@ variables:
   services:
     - docker:$DOCKER_VERSION-dind
 
+#
+
+.quality_stage: &quality_stage
+  stage: "Code Quality"
+  dependencies: []
+
+.master_based_stage: &master_based_stage
+  variables:
+    GIT_STRATEGY: none
+  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  before_script:
+    - cd /app
+
 .register_stage: &register_stage
   extends: .base-docker-image-stage
   stage: "Registration"
@@ -30,6 +43,7 @@ variables:
 
 stages:
   - "Prepare"
+  - "Code Quality"
   - "Registration"
 
 #
@@ -41,6 +55,39 @@ Register socialgouv/emjpm base image:
     CONTEXT: .
     DOCKER_BUILD_ARGS: ""
     IMAGE_NAME: $CI_REGISTRY_IMAGE
+
+#
+
+Lint @emjpm/api:
+  <<: *quality_stage
+  <<: *master_based_stage
+  script:
+    - yarn workspace @emjpm/api lint
+
+Lint @emjpm/app:
+  <<: *quality_stage
+  <<: *master_based_stage
+  script:
+    - yarn workspace @emjpm/app lint
+
+
+Test @emjpm/api:
+  <<: *quality_stage
+  <<: *master_based_stage
+  services:
+    - postgres:11
+  script:
+    - yarn workspace @emjpm/api test --coverage
+  after_script:
+    - CI_PROJECT_DIR=/app npx codecov -F api
+
+Test @emjpm/app:
+  <<: *quality_stage
+  <<: *master_based_stage
+  script:
+    - yarn workspace @emjpm/app test --coverage
+  after_script:
+    - CI_PROJECT_DIR=/app npx codecov -F app
 
 #
 
