@@ -61,12 +61,14 @@ Register socialgouv/emjpm base image:
 Lint @emjpm/api:
   <<: *quality_stage
   <<: *master_based_stage
+  allow_failure: true
   script:
     - yarn workspace @emjpm/api lint
 
 Lint @emjpm/app:
   <<: *quality_stage
   <<: *master_based_stage
+  allow_failure: true
   script:
     - yarn workspace @emjpm/app lint
 
