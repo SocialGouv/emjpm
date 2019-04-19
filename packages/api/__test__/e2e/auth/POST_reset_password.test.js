@@ -9,10 +9,18 @@ jest.setMock("nodemailer", nodemailerMock);
 // Fake env
 process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 
+
+const { knex } = global;
+jest.setMock("@emjpm/api/db/knex", knex);
+
 const server = require("@emjpm/api/app");
-const knex = require("@emjpm/api/db/knex");
 
 //
+
+beforeAll(async () => {
+  await knex.migrate.latest();
+  await knex.seed.run();
+});
 
 beforeEach(async () => {
   nodemailerMock.mock.reset();
@@ -27,10 +35,6 @@ beforeEach(async () => {
       reset_password_expires: knex.raw(`now() + interval '1 second'`),
       username: "ad"
     });
-});
-
-afterAll(async () => {
-  await knex.destroy();
 });
 
 test("reset a password", async () => {
