@@ -1,5 +1,7 @@
 FROM node:10-stretch
 
+RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
 COPY ./package.json /app/package.json
 COPY ./packages/jest-environment-knex/package.json /app/packages/jest-environment-knex/package.json
 COPY ./packages/api/package.json /app/packages/api/package.json
