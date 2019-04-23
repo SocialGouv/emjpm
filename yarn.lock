@@ -1837,10 +1837,10 @@
   resolved "https://registry.npmjs.org/@xtuc/long/-/long-4.2.1.tgz#5c85d662f76fa1d34575766c5dcd6615abcd30d8"
   integrity sha512-FZdkNBDqBRHKQ2MEbSC17xnPFOhZxeJ2YGSfr2BKf3sujG49Qe3bB+rGCwQfIaA7WHnGeGkSijX4FuBCdrzW/g==
 
-"@zeit/ncc@^0.16.1":
-  version "0.16.1"
-  resolved "https://registry.yarnpkg.com/@zeit/ncc/-/ncc-0.16.1.tgz#c12257d2d919fc47447944f5021b33e5997a84fb"
-  integrity sha512-lHScAn2rl2OjBzpzFZlv9YCq9ESvcBz51NWxXV7D1nA02jceUoIqlK8YDQSmA5wa5IqL+UzFyxSpq6ZSyVSAHw==
+"@zeit/ncc@^0.18.1":
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/@zeit/ncc/-/ncc-0.18.1.tgz#1723884210c792ba702ec6dccb390f387f0a3ba6"
+  integrity sha512-Tq13BzK+hAWBZY+VvncRZzpE5PHGks3kn2XJ+bcWSXgTZb4rTR/CTV1YYXilNNkX//jC1sziuM167FhLzFu2XA==
 
 "@zeit/next-css@^1.0.1":
   version "1.0.1"
@@ -1943,6 +1943,22 @@ agentkeepalive@^3.4.1:
   integrity sha512-e0L/HNe6qkQ7H19kTlRRqUibEAwDK5AFk6y3PtMsuut2VAH6+Q4xZml1tNDJD7kSAyqmbG/K08K5WEJYtUrSlQ==
   dependencies:
     humanize-ms "^1.2.1"
+
+airbnb-prop-types@^2.12.0:
+  version "2.13.2"
+  resolved "https://registry.yarnpkg.com/airbnb-prop-types/-/airbnb-prop-types-2.13.2.tgz#43147a5062dd2a4a5600e748a47b64004cc5f7fc"
+  integrity sha512-2FN6DlHr6JCSxPPi25EnqGaXC4OC3/B3k1lCd6MMYrZ51/Gf/1qDfaR+JElzWa+Tl7cY2aYOlsYJGFeQyVHIeQ==
+  dependencies:
+    array.prototype.find "^2.0.4"
+    function.prototype.name "^1.1.0"
+    has "^1.0.3"
+    is-regex "^1.0.4"
+    object-is "^1.0.1"
+    object.assign "^4.1.0"
+    object.entries "^1.1.0"
+    prop-types "^15.7.2"
+    prop-types-exact "^1.2.0"
+    react-is "^16.8.6"
 
 ajv-errors@^1.0.0:
   version "1.0.1"
@@ -2189,6 +2205,14 @@ array-unique@^0.3.2:
   version "0.3.2"
   resolved "https://registry.npmjs.org/array-unique/-/array-unique-0.3.2.tgz#a894b75d4bc4f6cd679ef3244a9fd8f46ae2d428"
   integrity sha1-qJS3XUvE9s1nnvMkSp/Y9Gri1Cg=
+
+array.prototype.find@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/array.prototype.find/-/array.prototype.find-2.0.4.tgz#556a5c5362c08648323ddaeb9de9d14bc1864c90"
+  integrity sha1-VWpcU2LAhkgyPdrrnenRS8GGTJA=
+  dependencies:
+    define-properties "^1.1.2"
+    es-abstract "^1.7.0"
 
 array.prototype.flat@^1.2.1:
   version "1.2.1"
@@ -2959,9 +2983,9 @@ cfb@^1.1.0:
     crc-32 "~1.2.0"
     printj "~1.1.2"
 
-chai-http@^4.0.0:
+chai-http@^4.2.1:
   version "4.2.1"
-  resolved "https://registry.npmjs.org/chai-http/-/chai-http-4.2.1.tgz#d4db6ae491e46b7d5029b2c103b6af45cd5ae290"
+  resolved "https://registry.yarnpkg.com/chai-http/-/chai-http-4.2.1.tgz#d4db6ae491e46b7d5029b2c103b6af45cd5ae290"
   integrity sha512-S2Ezy5uSVuOYleeXppfUKtTU/xbHCZyKkwjheNJ/76SGFTUPDpDkkpVdPNgC3sAO1Ap5J5LJ+/rXdLG8EGhCDA==
   dependencies:
     "@types/chai" "4"
@@ -4431,28 +4455,29 @@ entities@^1.1.1, entities@~1.1.1:
   resolved "https://registry.npmjs.org/entities/-/entities-1.1.2.tgz#bdfa735299664dfafd34529ed4f8522a275fea56"
   integrity sha512-f2LZMYl1Fzu7YSBKg+RoROelpOaNrcGmE9AZubeDfrCEia483oW4MI4VyFd5VNHIgQ/7qm1I0wUHK1eJnn2y2w==
 
-enzyme-adapter-react-16@^1.1.1:
-  version "1.9.1"
-  resolved "https://registry.npmjs.org/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.9.1.tgz#6d49a3a31c3a0fccf527610f31b837e0f307128a"
-  integrity sha512-Egzogv1y77DUxdnq/CyHxLHaNxmSSKDDSDNNB/EiAXCZVFXdFibaNy2uUuRQ1n24T2m6KH/1Rw16XDRq+1yVEg==
+enzyme-adapter-react-16@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/enzyme-adapter-react-16/-/enzyme-adapter-react-16-1.12.1.tgz#6a2d74c80559d35ac0a91ca162fa45f4186290cf"
+  integrity sha512-GB61gvY97XvrA6qljExGY+lgI6BBwz+ASLaRKct9VQ3ozu0EraqcNn3CcrUckSGIqFGa1+CxO5gj5is5t3lwrw==
   dependencies:
-    enzyme-adapter-utils "^1.10.0"
-    function.prototype.name "^1.1.0"
+    enzyme-adapter-utils "^1.11.0"
     object.assign "^4.1.0"
     object.values "^1.1.0"
-    prop-types "^15.6.2"
-    react-is "^16.7.0"
+    prop-types "^15.7.2"
+    react-is "^16.8.6"
     react-test-renderer "^16.0.0-0"
+    semver "^5.6.0"
 
-enzyme-adapter-utils@^1.10.0:
-  version "1.10.0"
-  resolved "https://registry.npmjs.org/enzyme-adapter-utils/-/enzyme-adapter-utils-1.10.0.tgz#5836169f68b9e8733cb5b69cad5da2a49e34f550"
-  integrity sha512-VnIXJDYVTzKGbdW+lgK8MQmYHJquTQZiGzu/AseCZ7eHtOMAj4Rtvk8ZRopodkfPves0EXaHkXBDkVhPa3t0jA==
+enzyme-adapter-utils@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/enzyme-adapter-utils/-/enzyme-adapter-utils-1.11.0.tgz#6ffff782b1b57dd46c72a845a91fc4103956a117"
+  integrity sha512-0VZeoE9MNx+QjTfsjmO1Mo+lMfunucYB4wt5ficU85WB/LoetTJrbuujmHP3PJx6pSoaAuLA+Mq877x4LoxdNg==
   dependencies:
+    airbnb-prop-types "^2.12.0"
     function.prototype.name "^1.1.0"
     object.assign "^4.1.0"
     object.fromentries "^2.0.0"
-    prop-types "^15.6.2"
+    prop-types "^15.7.2"
     semver "^5.6.0"
 
 enzyme@^3.9.0:
@@ -9063,7 +9088,7 @@ object.defaults@^1.1.0:
     for-own "^1.0.0"
     isobject "^3.0.0"
 
-object.entries@^1.0.4:
+object.entries@^1.0.4, object.entries@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/object.entries/-/object.entries-1.1.0.tgz#2024fc6d6ba246aee38bdb0ffd5cfbcf371b7519"
   integrity sha512-l+H6EQ8qzGRxbkHOd5I/aHRhHDKoQXQ8g0BYt4uSweQU1/J6dZUOyWh9a2Vky35YCKjzmgxOzta2hH6kf9HuXA==
@@ -10257,7 +10282,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types-exact@1.2.0:
+prop-types-exact@1.2.0, prop-types-exact@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/prop-types-exact/-/prop-types-exact-1.2.0.tgz#825d6be46094663848237e3925a98c6e944e9869"
   integrity sha512-K+Tk3Kd9V0odiXFP9fwDHUYRyvK3Nun3GVyPapSIs5OBkITAm15W0CPFD/YKTkMUAbc0b9CUwRQp2ybiBIq+eA==
@@ -10279,6 +10304,15 @@ prop-types@^15.0.0, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4,
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.7.1.tgz#2fa61e0a699d428b40320127733ee2931f05d9d1"
   integrity sha512-f8Lku2z9kERjOCcnDOPm68EBJAO2K00Q5mSgPAUE/gJuBgsYLbVy6owSrtcHj90zt8PvW+z0qaIIgsIhHOa1Qw==
   dependencies:
+    object-assign "^4.1.1"
+    react-is "^16.8.1"
+
+prop-types@^15.7.2:
+  version "15.7.2"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
+  integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
+  dependencies:
+    loose-envify "^1.4.0"
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
@@ -10569,6 +10603,11 @@ react-is@^16.3.1, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.8.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.8.1.tgz#a80141e246eb894824fb4f2901c0c50ef31d4cdb"
   integrity sha512-ioMCzVDWvCvKD8eeT+iukyWrBGrA3DiFYkXfBsVYIRdaREZuBjENG+KjrikavCLasozqRWTwFUagU/O4vPpRMA==
+
+react-is@^16.8.6:
+  version "16.8.6"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
+  integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
 react-jsonschema-form@^1.0.2:
   version "1.2.1"
