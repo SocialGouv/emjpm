@@ -169,9 +169,7 @@ class ServiceTabsAntennes extends React.Component {
       }
     ];
     return (
-      <React.Fragment>
-        <DummyTabs tabs={tabs} />
-      </React.Fragment>
+      <React.Fragment>{this.props.mandataireId !== 0 && <DummyTabs tabs={tabs} />}</React.Fragment>
     );
   }
 }

@@ -241,44 +241,6 @@ router.post("/mandataires", async (req, res, next) => {
           },
           trx
         );
-        await queries.createMandataire(
-          {
-            user_id: userId[0],
-            service_id: serviceId[0],
-            etablissement,
-            telephone,
-            telephone_portable,
-            adresse,
-            code_postal,
-            ville,
-            contact_prenom: prenom,
-            contact_email: email,
-            contact_nom: nom,
-            dispo_max
-          },
-          trx
-        );
-
-        await Promise.all(
-          req.body.antennes.map(antenne => {
-            return queries.createMandataire(
-              {
-                user_id: userId[0],
-                service_id: serviceId[0],
-                etablissement: antenne.etablissement,
-                contact_nom: antenne.nom,
-                contact_prenom: antenne.prenom,
-                contact_email: antenne.email,
-                telephone: antenne.telephone,
-                adresse: antenne.adresse,
-                code_postal: antenne.code_postal,
-                ville: antenne.ville,
-                dispo_max: antenne.dispo_max
-              },
-              trx
-            );
-          })
-        );
       } else {
         await queries.createMandataire(
           {
