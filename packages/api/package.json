@@ -51,7 +51,7 @@
     "@zeit/ncc": "^0.16.1",
     "babel-core": "7.0.0-bridge.0",
     "chai": "^4.2.0",
-    "chai-http": "^4.0.0",
+    "chai-http": "^4.2.1",
     "eslint": "^4.18.2",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-prettier": "^2.6.0",
