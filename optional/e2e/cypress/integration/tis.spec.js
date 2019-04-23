@@ -1,6 +1,6 @@
 require("./.utils");
 
-describe("Tis", function() {
+describe.skip("Tis", function() {
   describe("Session Tis", () => {
     let token;
 
@@ -68,9 +68,7 @@ describe("Tis", function() {
 
         it("check display of the mandataire Identity", () => {
           cy.get(".react-tabs .rt-tr-group:nth-child(2)").click();
-          cy.get("[data-cy=fiche-manda-telephone]").contains(
-            "0237100000"
-          );
+          cy.get("[data-cy=fiche-manda-telephone]").contains("0237100000");
         });
 
         it("table should show 1 mandataires on individuel filter", () => {
@@ -87,7 +85,7 @@ describe("Tis", function() {
           cy.get("[data-cy=tab-Service]").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 0);
         });
-        it.skip("table should show 1 mandataires on Lille Geolocalisation ", () => {
+        it("table should show 1 mandataires on Lille Geolocalisation ", () => {
           cy.get("[data-cy=tab-code-postal]").type("62000");
           cy.get("[data-cy=tab-recherche]").click();
 
