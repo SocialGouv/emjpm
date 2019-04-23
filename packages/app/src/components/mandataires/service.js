@@ -43,7 +43,12 @@ class ServiceTabs extends React.Component {
     return (
       <>
         <Header handleClick={this.props.handleClick} />
-        <Form schema={schema} formData={this.props.mandataireId} uiSchema={uiSchema} onChange={onSubmitted}>
+        <Form
+          schema={schema}
+          formData={this.props.mandataireId}
+          uiSchema={uiSchema}
+          onChange={onSubmitted}
+        >
           {" "}
           <button style={{ display: "none" }} type="submit" />{" "}
         </Form>
@@ -163,9 +168,7 @@ class ServiceTabsAntennes extends React.Component {
       }
     ];
     return (
-      <React.Fragment>
-        <DummyTabs tabs={tabs} />
-      </React.Fragment>
+      <React.Fragment>{this.props.mandataireId !== 0 && <DummyTabs tabs={tabs} />}</React.Fragment>
     );
   }
 }
