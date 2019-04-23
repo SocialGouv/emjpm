@@ -47,7 +47,7 @@
     "swagger-ui-dist": "^3.17.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.0",
+    "@babel/core": "^7.4.3",
     "@zeit/ncc": "^0.16.1",
     "babel-core": "7.0.0-bridge.0",
     "chai": "^4.1.2",
