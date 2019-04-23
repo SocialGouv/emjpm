@@ -1,0 +1,17 @@
+{
+  "name": "@optional/e2e",
+  "private": true,
+  "scripts": {
+    "test": "cypress run",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:api-reset": "cd ../.. && NODE_ENV=test yarn lerna run --scope @emjpm/knex --stream seeds"
+  },
+  "keywords": [],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cypress": "^3.2.0"
+  },
+  "devDependencies": {
+  }
+}
