@@ -6,10 +6,10 @@
       "message": "chore(release): version %v"
     }
   },
-  "npmClient": "yarn",
   "packages": [
+    "optional/*",
     "packages/*"
   ],
-  "useWorkspaces": true,
+  "npmClient": "yarn",
   "version": "0.0.2"
 }
