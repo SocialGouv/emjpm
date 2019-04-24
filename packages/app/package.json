@@ -63,7 +63,7 @@
     "@babel/plugin-transform-flow-strip-types": "^7.4.0",
     "babel-core": "7.0.0-bridge.0",
     "@sentry/browser": "^4.4.2",
-    "concurrently": "^3.6.0",
+    "concurrently": "^4.1.0",
     "css-loader": "^0.28.9",
     "cypress": "^3.2.0",
     "dotenv": "^5.0.1",
