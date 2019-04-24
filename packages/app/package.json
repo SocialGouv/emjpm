@@ -24,7 +24,7 @@
   "dependencies": {
     "@wessberg/color": "0.0.2",
     "@zeit/next-css": "^1.0.1",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.3.1",
     "cors": "^2.8.4",
     "date-fns": "^1.29.0",
     "detect-browser": "^3.0.1",
