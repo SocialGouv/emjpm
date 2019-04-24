@@ -29,28 +29,41 @@ const FicheMandataire = ({
             </div>
           )) ||
           null
-        : (email && (
+        : (email ? (
             <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
               <Mail style={iconStyle} />
               <a href={`mailto:${email}`}>{email}</a>
             </div>
-          )) ||
-          null}
+          ) : (
+            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
+              <Mail style={iconStyle} />
+              Non renseigné
+            </div>
+          )) || null}
       <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone">
         <Phone style={iconStyle} />
         {telephone}
       </div>
-      {type !== "service" &&
-        telephone_portable && (
-          <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
-            <Smartphone style={iconStyle} />
-            {telephone_portable}
-          </div>
-        )}
-      {hasAdresse && (
+      {type !== "service" && telephone_portable ? (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+          <Smartphone style={iconStyle} />
+          {telephone_portable}
+        </div>
+      ) : (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
+          <Smartphone style={iconStyle} />
+          Non renseigné
+        </div>
+      )}
+      {hasAdresse ? (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
           <Home style={iconStyle} />
           {adresse} {code_postal} {ville}
+        </div>
+      ) : (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
+          <Home style={iconStyle} />
+          Non renseigné
         </div>
       )}
       {zip && (
