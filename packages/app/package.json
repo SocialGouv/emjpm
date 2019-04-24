@@ -37,7 +37,7 @@
     "next-images": "^1.0.3",
     "next-plugin-transpile-modules": "^1.0.0",
     "prop-types": "^15.6.1",
-    "query-string": "^6.1.0",
+    "query-string": "^6.4.2",
     "react": "^16.3.2",
     "react-autocomplete": "^1.8.1",
     "react-cookie": "^2.1.4",
