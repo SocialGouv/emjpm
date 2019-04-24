@@ -51,7 +51,7 @@
     "react-redux": "^5.0.7",
     "react-table": "^6.8.6",
     "react-tabs": "^2.2.1",
-    "redux": "^4.0.0",
+    "redux": "^4.0.1",
     "redux-modal": "^2.0.3",
     "redux-thunk": "^2.3.0",
     "styled-components": "^3.4.5",
