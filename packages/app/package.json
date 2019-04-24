@@ -56,7 +56,7 @@
     "redux-thunk": "^2.3.0",
     "styled-components": "^3.4.5",
     "styled-jsx": "^2.2.6",
-    "xlsx": "^0.14.0"
+    "xlsx": "^0.14.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
