@@ -2020,12 +2020,10 @@
     "@webassemblyjs/wast-parser" "1.7.8"
     "@xtuc/long" "4.2.1"
 
-"@wessberg/color@0.0.2":
-  version "0.0.2"
-  resolved "https://registry.npmjs.org/@wessberg/color/-/color-0.0.2.tgz#a356b4b546363d15357d5fd1fb3e073776529649"
-  integrity sha512-+muGJ0wB6hAsHss490qIFXJGSUcUl3PQNcvn7lofnMYTvQnmcwQrFnoRdSs2kapOGmRVqjSS1iur2VwCcpU29w==
-  dependencies:
-    tslib "^1.9.2"
+"@wessberg/color@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@wessberg/color/-/color-1.0.5.tgz#24db14c940b15fd93a2f7dccf20f71ea016fccf5"
+  integrity sha512-Df6kHsgbPn+9waCMlFM9yn1kk5CJCw6rQxFsBPzH5UWHL/MLMGG3sj3dvBDojpP2nX1OhJto5oXWsvTesSonmg==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -12895,7 +12893,7 @@ trim-right@^1.0.1:
   resolved "https://registry.npmjs.org/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
 
-tslib@^1.9.0, tslib@^1.9.2, tslib@^1.9.3:
+tslib@^1.9.0, tslib@^1.9.3:
   version "1.9.3"
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
   integrity sha512-4krF8scpejhaOgqzBEcGM7yDIEfi0/8+8zDRZhNZZ2kjmHJ4hv3zCbQWxoJGz1iw5U0Jl0nma13xzHXcncMavQ==
