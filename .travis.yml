@@ -49,7 +49,6 @@ jobs:
         # Start the database first so it has the time to boot before we interact with it.
         - docker-compose up -d db
         - yarn
-        - yarn lerna exec --scope @emjpm/knex yarn
       before_script:
         - yarn workspace @emjpm/knex knex migrate:latest --env test
         - yarn workspace @emjpm/knex knex seed:run --env test
@@ -122,7 +121,7 @@ jobs:
     #
 
     - <<: *deploy_stage
-      if: type = push AND branch IS master
+      if: type = push AND branch = master
       name: Deploy latest master iamge
       env:
         - *docker_keys
