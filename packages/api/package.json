@@ -56,7 +56,7 @@
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-prettier": "^3.0.1",
     "jest-cli": "^24.7.1",
-    "mocha": "^5.0.4",
+    "mocha": "^6.1.4",
     "nodemailer-mock": "^1.4.1",
     "nodemon": "^1.18.11",
     "prettier": "1.17.0",
