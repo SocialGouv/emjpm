@@ -122,7 +122,7 @@ jobs:
 
     - <<: *deploy_stage
       if: type = push AND branch = master
-      name: Deploy latest master iamge
+      name: Deploy latest master image
       env:
         - *docker_keys
         - DOCKER_IMAGE="socialgouv/emjpm"
