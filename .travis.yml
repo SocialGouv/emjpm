@@ -121,20 +121,26 @@ jobs:
     #
     #
 
-    - <<: *node_stage
-      <<: *deploy_stage
+    - <<: *deploy_stage
+      if: type = push AND branch IS master
+      name: Deploy latest master iamge
+      env:
+        - *docker_keys
+        - DOCKER_IMAGE="socialgouv/emjpm"
+        - CONTEXT=.
+
+    #
+
+    - <<: *deploy_stage
       name: Deploy latest app image to Docker Hub
       env:
         - *docker_keys
         - DOCKER_IMAGE="socialgouv/emjpm-app"
         - CONTEXT=./packages/app
-      before_script: yarn workspace @emjpm/app build
 
-    - <<: *node_stage
-      <<: *deploy_stage
+    - <<: *deploy_stage
       name: Deploy latest api image to Docker Hub
       env:
         - *docker_keys
         - DOCKER_IMAGE="socialgouv/emjpm-api"
         - CONTEXT=./packages/api
-      before_script: yarn workspace @emjpm/api build
