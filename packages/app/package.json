@@ -40,7 +40,7 @@
     "query-string": "^6.4.2",
     "react": "^16.8.6",
     "react-autocomplete": "^1.8.1",
-    "react-cookie": "^2.1.4",
+    "react-cookie": "^3.1.2",
     "react-dom": "^16.8.6",
     "react-feather": "^1.1.6",
     "react-icons": "^2.2.7",
