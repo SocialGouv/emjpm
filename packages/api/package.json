@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@emjpm/knex": "^0.0.2",
-    "@sentry/node": "4.5.3",
+    "@sentry/node": "5.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "connect-session-knex": "^1.4.0",
