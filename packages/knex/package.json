@@ -5,7 +5,8 @@
   "scripts": {
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
-    "seeds": "knex seed:run"
+    "seeds": "knex seed:run",
+    "test": "jest"
   },
   "keywords": [],
   "license": "Apache-2.0",
@@ -14,5 +15,7 @@
     "knex": "^0.16.3",
     "pg": "^7.8.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^24.7.1"
+  }
 }
