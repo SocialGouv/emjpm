@@ -1,4 +1,5 @@
-// @flow
+//
+
 import dynamic from "next/dynamic";
 import React from "react";
 import Router from "next/router";
