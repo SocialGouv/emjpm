@@ -11,13 +11,7 @@
     "test": "jest ./test",
     "lint": "eslint pages src --fix",
     "build": "next build && next export",
-    "flow": "flow",
-    "cypress:open": "cypress open",
-    "cypress:api-reset": "cd ../eMJPM-api && NODE_ENV=test npm run seeds",
-    "cypress:start-api": "cd ../eMJPM-api && NODE_ENV=test PORT=4003 npm run migrate-seeds-and-start",
-    "cypress:start-app": "API_URL=http://127.0.0.1:4003 NODE_ENV=test npm run start -- --port 3003",
-    "cypress:start": "concurrently \"npm run cypress:start-api\" \"npm run cypress:start-app\"",
-    "cypress": "start-server-and-test cypress:start http://localhost:3003 cypress:open"
+    "flow": "flow"
   },
   "keywords": [],
   "license": "ISC",
@@ -63,9 +57,7 @@
     "@babel/plugin-transform-flow-strip-types": "^7.4.0",
     "babel-core": "7.0.0-bridge.0",
     "@sentry/browser": "^5.1.1",
-    "concurrently": "^4.1.0",
     "css-loader": "^0.28.9",
-    "cypress": "^3.2.0",
     "dotenv": "^7.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
@@ -80,7 +72,6 @@
     "postcss-loader": "^3.0.0",
     "prettier": "^1.17.0",
     "redux-devtools-extension": "^2.13.8",
-    "start-server-and-test": "^1.9.0",
     "style-loader": "^0.23.1"
   }
 }
