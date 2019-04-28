@@ -10,8 +10,7 @@
     "dev": "next",
     "test": "jest ./test",
     "lint": "eslint pages src --fix",
-    "build": "next build && next export",
-    "flow": "flow"
+    "build": "next build && next export"
   },
   "keywords": [],
   "license": "ISC",
@@ -54,7 +53,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@babel/plugin-transform-flow-strip-types": "^7.4.0",
     "babel-core": "7.0.0-bridge.0",
     "@sentry/browser": "^5.1.1",
     "css-loader": "^0.28.9",
@@ -65,7 +63,6 @@
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "flow-bin": "^0.73.0",
     "gh-pages": "^2.0.1",
     "jest-cli": "^24.7.1",
     "json-loader": "^0.5.7",
