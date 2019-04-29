@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 import DisplayDate from "../communComponents/formatFrenchDate";
+import { Mail } from "react-feather";
 
 const ContainerMandataire = styled.div`
   padding: 10px 0;
@@ -16,18 +17,51 @@ const Title = styled.div`
   text-transform: uppercase;
 `;
 
-const HeaderMandataire = ({ profiles, handleClick }) => {
-  const fullName = `${(profiles && profiles.nom) || ""} ${(profiles && profiles.prenom) || ""}`;
+const HeaderMandataire = ({
+  nom = "",
+  prenom = "",
+  date_mesure_update,
+  type,
+  etablissement,
+  dispo_max,
+  mesures_en_cours,
+  mesures_en_attente
+}) => {
+  const currentDispos = dispo_max - mesures_en_cours - mesures_en_attente || null;
+  const fullName = `${nom || ""} ${prenom || ""}`;
+  const SiegeSocial = styled.div`
+    background-color: white;
+    text-transform: none;
+    font-size: 0.6em;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+  `;
+
+  const iconStyle = { width: 22, height: 22, marginRight: 10 };
+
   return (
     <ContainerMandataire className="container">
       <Title>
         {profiles && profiles.type === "service" ? (
           <div>
-            {profiles.etablissement}{" "}
-            <a href="#" onClick={handleClick} style={{ fontSize: "0.6em" }}>
-              {" "}
-              Informations du service
-            </a>
+            {profiles.etablissement} <br />
+            <SiegeSocial>
+              <div style={{ flex: "1 0 auto" }}>
+                Nombres totales de mesures souhaités: {profiles.dispo_max} mesures &nbsp; &nbsp;
+                <Mail style={iconStyle} />
+                {profiles.email}
+              </div>
+
+              <a
+                href="#"
+                onClick={handleClick}
+                style={{ flex: "1 0 90px", textAlign: "right", paddingRight: 10 }}
+              >
+                {" "}
+                Toutes les informations
+              </a>
+            </SiegeSocial>
           </div>
         ) : (
           fullName
