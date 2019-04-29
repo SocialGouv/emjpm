@@ -5,7 +5,9 @@ import styled from "styled-components";
 import Router from "next/router";
 import getConfig from "next/config";
 
-const { publicRuntimeConfig: { API_URL } } = getConfig();
+const {
+  publicRuntimeConfig: { API_URL }
+} = getConfig();
 
 import piwik, { trackUser } from "../../piwik";
 
@@ -105,7 +107,7 @@ export const LoginFormView = ({ formData, onSubmit, error, status }) => (
           "Me connecter"}
       </button>
       <br />
-      <a href="/forgot-password">j&apos;ai oublié mon mot de passe et / ou mon identifiant</a>
+      <a href="/forgot-password">J&apos;ai oublié mon mot de passe et / ou mon identifiant</a>
       <ErrorBox message={error} />
       <hr style={{ marginTop: 20 }} />
       <a href="mailto:contact@emjpm.beta.gouv.fr?subject=eMJPM&body=Bonjour,">
@@ -126,29 +128,39 @@ class LoginForm extends React.Component {
     piwik.push(["trackEvent", "navigation", "login"]);
 
     // focus login on load
-    const node = findDOMNode(this);
+    const node = findDOMNode(this); // eslint-disable-line react/no-find-dom-node
     if (node) {
-      const input = node.querySelector("input");
-      if (input) {
-        input.focus();
+      const username = node.querySelector("#root_username");
+      const password = node.querySelector("#root_password");
+
+      // workaround autofill bugs with react-jsonschema-form
+      // https://github.com/mozilla-services/react-jsonschema-form/issues/184
+      // use the DOM to fill initial formData
+      const autofillValues = {
+        username: (username && username.value) || localStorage.getItem("login") || "",
+        password: password && password.value
+      };
+
+      if (username && !autofillValues.username) {
+        username.focus();
+      } else if (password) {
+        password.focus();
       }
+
+      this.setState({
+        formData: autofillValues
+      });
     }
-
-    // workaround autofill bugs with react-jsonschema-form
-    // https://github.com/mozilla-services/react-jsonschema-form/issues/184
-    // use the DOM to fill initial formData
-    const autofillValues = {
-      username: node.querySelector("#root_username") && node.querySelector("#root_username").value,
-      password: node.querySelector("#root_password") && node.querySelector("#root_password").value
-    };
-
-    this.setState({
-      formData: autofillValues
-    });
   }
+
+  setLogin = login => {
+    // Saves login to localStorage
+    localStorage.setItem("login", login);
+  };
 
   setToken = idToken => {
     // Saves user token to localStorage
+    // todo: move to more secure location
     localStorage.setItem("id_token", idToken);
   };
 
@@ -162,6 +174,7 @@ class LoginForm extends React.Component {
       () => {
         doLogin(formData)
           .then(json => {
+            this.setLogin(formData.username);
             this.setToken(json.token);
             piwik.push(["trackEvent", "login", "success"]);
 
