@@ -41,7 +41,7 @@
     "react-leaflet": "^2.2.1",
     "react-modal": "^3.8.1",
     "react-piwik": "^1.6.0",
-    "react-redux": "^5.0.7",
+    "react-redux": "^7.0.3",
     "react-table": "^6.10.0",
     "react-tabs": "^2.2.1",
     "redux": "^4.0.1",
