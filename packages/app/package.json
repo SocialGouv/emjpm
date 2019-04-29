@@ -45,7 +45,7 @@
     "react-table": "^6.10.0",
     "react-tabs": "^2.2.1",
     "redux": "^4.0.1",
-    "redux-modal": "^2.0.3",
+    "redux-modal": "^3.0.1",
     "redux-thunk": "^2.3.0",
     "styled-components": "^3.4.5",
     "styled-jsx": "^2.2.6",
