@@ -11,8 +11,10 @@ export const MANDATAIRE_PROFILES_UPDATED = "MANDATAIRE_PROFILES_UPDATED";
 export const CHANGE_MANDATAIRE_ID = "CHANGE_MANDATAIRE_ID";
 export const ANTENNES_UPDATED = "ANTENNES_UPDATED";
 export const CHANGE_MANDATAIRE_ID_INIT = "CHANGE_MANDATAIRE_ID_INIT";
+export const USER_PROFILE_UPDATED = "USER_PROFILE_UPDATED";
 
 /* ---------- API */
+export const fetchUserProfiles = () => apiFetch(`/users/1`);
 export const fetchProfiles = () => apiFetch(`/mandataires/all`);
 const fetchService = () => apiFetch(`/mandataires/service`);
 
@@ -71,19 +73,23 @@ const fetchAllFiness = () =>
 
 //todo: bofbof
 export const mandataireMount = () => async dispatch => {
-  const profiles = await fetchProfiles();
-  await dispatch(mandataireProfilesUpdated(profiles));
-  await dispatch(changeMandataireIdDisplayInit(profiles));
+  const userProfiles = await fetchUserProfiles();
+  await dispatch(userProfileUpdated(userProfiles))
+
+  if (userProfiles.type === "service") {
+    const service = await fetchService();
+    await dispatch(serviceProfileUpdated(service));
+  }
 
   const finess = await fetchAllFiness();
   await dispatch(finessUpdated(finess));
 
   const tis = await fetchAllTis();
   await dispatch(tisUpdated(tis));
-  if (profiles[0].type === "service") {
-    const service = await fetchService();
-    await dispatch(serviceProfileUpdated(service));
-  }
+
+  const profiles = await fetchProfiles();
+  await dispatch(mandataireProfilesUpdated(profiles));
+  await dispatch(changeMandataireIdDisplayInit(profiles));
 };
 
 export const updateMandataire = data => async dispatch => {
@@ -113,10 +119,10 @@ export const updateService = data => dispatch => {
 
 export const addAntennesToMandataires = data => dispatch => {
   return createMandataireApi(data)
-    .then(() => fetchProfile())
+    .then(() => fetchProfiles())
     .then(json => {
       dispatch(hide("AddAntennes"));
-      dispatch(mandataireProfileUpdated(json));
+      dispatch(mandataireProfilesUpdated(json));
     })
     .then(() => Router.push("/mandataires"));
 };
@@ -128,6 +134,11 @@ export const changeMandataireId = data => dispatch => {
 /* ----------- PLAIN ACTIONS  */
 
 export const changeMandataireIdDisplay = data => ({ type: CHANGE_MANDATAIRE_ID, data });
+
+export const userProfileUpdated = data => ({
+  type: USER_PROFILE_UPDATED,
+  data
+});
 
 export const changeMandataireIdDisplayInit = data => ({
   type: CHANGE_MANDATAIRE_ID_INIT,

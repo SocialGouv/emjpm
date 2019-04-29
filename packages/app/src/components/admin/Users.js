@@ -13,7 +13,7 @@ const tabs = type =>
         <TableUser
           type={type}
           filters={{ "users.active": true }}
-          hideColumns={["cabinet", "email"]}
+          hideColumns={["cabinet"]}
         />
       )
     },
@@ -26,7 +26,7 @@ const tabs = type =>
         <TableUser
           type={type}
           filters={{ "users.active": false }}
-          hideColumns={["cabinet", "email"]}
+          hideColumns={["cabinet"]}
         />
       )
     },

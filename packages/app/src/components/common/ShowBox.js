@@ -28,7 +28,7 @@ export const Alert = ({ className, Icon, message }) =>
     <div
       className={`alert ${className || ""}`}
       role="alert"
-      style={{ marginTop: 20, fontSize: "1.2em" }}
+      style={{ marginTop: 10, fontSize: "1.2em", borderRadius: "0px" }}
     >
       <Icon
         style={{

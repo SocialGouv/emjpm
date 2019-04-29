@@ -7,8 +7,9 @@ const MANDATAIRE_INITIAL_STATE = {
   profiles: [],
   tis: [],
   service: {},
-  mandataireId: 0,
-  lastUpdate: null
+  mandataireId: null,
+  lastUpdate: null,
+  user: {}
 };
 
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
@@ -44,6 +45,12 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       return {
         ...state,
         profiles: action.data,
+        lastUpdate: new Date()
+      };
+    case "USER_PROFILE_UPDATED":
+      return {
+        ...state,
+        user: action.data,
         lastUpdate: new Date()
       };
     case "SERVICE_PROFILE_UPDATED":

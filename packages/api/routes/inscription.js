@@ -214,18 +214,6 @@ router.post("/mandataires", async (req, res, next) => {
 
     await knex.transaction(async function(trx) {
       // create user
-      const userId = await queries.createUser(
-        {
-          username,
-          type,
-          nom,
-          prenom,
-          email,
-          password: bcrypt.hashSync(pass1, salt),
-          active: false
-        },
-        trx
-      );
       if (type === "service") {
         const serviceId = await queries.createService(
           {
@@ -241,7 +229,34 @@ router.post("/mandataires", async (req, res, next) => {
           },
           trx
         );
+        await queries.createUser(
+          {
+            username,
+            type,
+            nom,
+            prenom,
+            email,
+            service_id: serviceId,
+            password: bcrypt.hashSync(pass1, salt),
+            active: false
+          },
+          trx
+        );
       } else {
+
+        const userId = await queries.createUser(
+          {
+            username,
+            type,
+            nom,
+            prenom,
+            email,
+            password: bcrypt.hashSync(pass1, salt),
+            active: false
+          },
+          trx
+        );
+
         await queries.createMandataire(
           {
             user_id: userId[0],

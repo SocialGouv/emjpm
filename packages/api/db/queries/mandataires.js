@@ -291,8 +291,7 @@ const getAllMandatairesByUserId = user_id =>
 const getServiceByMandataire = id =>
   knex("services")
     .select("services.*", "users.type", "users.id as userId")
-    .innerJoin("mandataires", "mandataires.service_id", "services.id")
-    .innerJoin("users", "users.id", "mandataires.user_id")
+    .innerJoin("users", "users.service_id", "services.id")
     .where({ "services.id": id })
     .first();
 
@@ -341,7 +340,7 @@ const isServiceInTi = (mandataire_id, ti_id) =>
     .then(res => res.length > 0);
 
 const findMandataire = (req, params) => {
-  return (req.user.type === "service" || req.user.type === "ti")
+  return req.user.type === "service" || req.user.type === "ti"
     ? getMandataireById(params)
     : getMandataireByUserId(req.user.id);
 };

@@ -41,10 +41,11 @@ class MandataireIndex extends React.Component {
   };
 
   render() {
+    console.log("this.props.currentMandataire", this.props.currentMandataire);
     return (
       <React.Fragment>
         {this.state.isToggleOn === false ? (
-          this.props.currentMandataire[0] && this.props.currentMandataire[0].type === "service" ? (
+          this.props.currentMandataire && this.props.currentMandataire.type === "service" ? (
             <ServiceTabs handleClick={this.handleClick} />
           ) : (
             <MandataireTabs />
@@ -82,7 +83,8 @@ const mapDispatchToProps = (dispatch, ownProps) =>
 // connect to redux-modal
 const MandataireTabsRedux = connect(
   state => ({
-    currentMandataire: state.mandataire.profiles,
+    currentMandataire:
+      (state.mandataire.profiles && state.mandataire.profiles[0]) || state.mandataire.user,
     service: state.mandataire.service
   }),
   mapDispatchToProps
