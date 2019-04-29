@@ -6,7 +6,9 @@ Cypress.Commands.add("loginByForm", (username, password) => {
 
   cy.visit("/");
 
-  cy.get("#root_username").type(username);
+  cy.get("#root_username")
+    .clear()
+    .type(username);
   cy.get("#root_password").type(password);
 
   cy.get("button.btn-success").click();
