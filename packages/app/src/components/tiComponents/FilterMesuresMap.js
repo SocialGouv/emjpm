@@ -16,11 +16,12 @@ const FilterMesuresMap = ({ zoomCodePostal }) => {
     if (!inputRef.current) {
       return;
     }
+
     zoomCodePostal(inputRef.current.value);
-  }
+  };
 
   const onKeyDown = e => {
-    if (e.key == 'Enter' || e.keyCode === 13) {
+    if (e.key == "Enter" || e.keyCode === 13) {
       handleZoomCodePostalInput();
     }
   };
@@ -30,7 +31,7 @@ const FilterMesuresMap = ({ zoomCodePostal }) => {
       <div className="form-inline">
         <FormInput
           data-cy="tab-code-postal"
-          ref={inputRef}
+          innerRef={inputRef}
           padd="10"
           size="200"
           id="commune"
