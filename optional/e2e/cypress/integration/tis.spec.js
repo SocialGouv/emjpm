@@ -1,6 +1,6 @@
 require("./.utils");
 
-describe.skip("Tis", function() {
+describe("Tis", function() {
   describe("Session Tis", () => {
     let token;
 
