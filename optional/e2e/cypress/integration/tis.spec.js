@@ -43,6 +43,12 @@ describe("Tis", function() {
         });
         it("can add a comments for a specific Mandataire", () => {
           cy.get(".react-tabs .rt-tr-group:nth-child(2)").click();
+
+          // ! HACK(douglasduteil): wait for react to render...
+          // ! The modal seems to take some time to be so we wait...
+          // ! This is making the test less fuzzy
+          cy.wait(250);
+
           cy.get(".form-group #root_comment").type(
             "Hello i send you a comments"
           );
