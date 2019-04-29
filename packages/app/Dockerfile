@@ -2,7 +2,7 @@ ARG BASE_IMAGE=socialgouv/emjpm:master
 
 FROM ${BASE_IMAGE} as emjpm-base-image
 
-FROM nginx:1.13-alpine
+FROM nginx:1.16-alpine
 
 WORKDIR /app
 
