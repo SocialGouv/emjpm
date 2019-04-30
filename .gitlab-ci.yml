@@ -85,7 +85,7 @@ Test @emjpm/api:
   <<: *quality_stage
   <<: *master_based_stage
   services:
-    - $CI_REGISTRY_IMAGE/postgres
+    - $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
   variables:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
