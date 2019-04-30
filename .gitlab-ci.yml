@@ -56,6 +56,14 @@ Register socialgouv/emjpm base image:
     DOCKER_BUILD_ARGS: ""
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
+Register postgres image:
+  <<: *register_stage
+  stage: "Prepare"
+  variables:
+    CONTEXT: ./docker/postgres
+    DOCKER_BUILD_ARGS: ""
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
+
 #
 
 Lint @emjpm/api:
@@ -77,7 +85,10 @@ Test @emjpm/api:
   <<: *quality_stage
   <<: *master_based_stage
   services:
-    - postgres:11
+    - $CI_REGISTRY_IMAGE/postgres
+  variables:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: test
   script:
     - yarn workspace @emjpm/api test --coverage
   after_script:
