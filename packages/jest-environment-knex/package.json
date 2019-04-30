@@ -1,0 +1,27 @@
+{
+  "name": "jest-environment-knex",
+  "version": "1.0.0",
+  "main": "build/jest-environment-knex.js",
+  "types": "build/jest-environment-knex.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "jest-environment-node": "^24.7.1",
+    "knex": "^0.16.5",
+    "rand-token": "^0.4.0"
+  },
+  "devDependencies": {
+    "@jest/types": "^24.7.0",
+    "typescript": "^3.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SocialGouv/emjpm.git",
+    "directory": "packages/jest-environment-knex"
+  },
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  }
+}

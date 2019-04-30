@@ -1,20 +1,44 @@
-const NodeEnvironment = require("jest-environment-node");
+//
+
+import { Script, runInContext } from "vm";
+import NodeEnvironment from "jest-environment-node";
+import { Global, Config } from "@jest/types";
+import Knex from "knex";
+const parseConnection = require("knex/lib/util/parse-connection");
 const debug = require("debug")("jest-environment-knex");
-const Knex = require("knex");
 const { uid } = require("rand-token");
 
+//
+
 class KnexEnvironment extends NodeEnvironment {
-  constructor(config) {
-    debug("constructor");
+  destroyPromises: Promise<void>[] = [];
+
+  global: Global.Global & { databaseName: string; knex: Knex };
+  options: Knex.Config;
+
+  constructor(config: Config.ProjectConfig) {
     super(config);
     debug("super(config)");
+
+    //
+
+    const global = (this.global = runInContext(
+      "this",
+      Object.assign(this.context, config.testEnvironmentOptions)
+    ));
+    global.databaseName = `emjpm_test_${uid(16).toLowerCase()}`;
+
+    //
+
     this.options = config.testEnvironmentOptions;
-    this.destroyPromises = [];
   }
 
-  lazyDestroy(knex) {
+  lazyDestroy(knex: Knex) {
     this.destroyPromises.push(
-      knex.destroy().then(debug.bind(null, "knex.destroyed"), console.error)
+      ((knex.destroy() as any) as Promise<void>).then(
+        debug.bind(null, "knex.destroyed"),
+        console.error
+      )
     );
   }
 
@@ -22,8 +46,6 @@ class KnexEnvironment extends NodeEnvironment {
     debug("setup");
     await super.setup();
     debug("super.setup()");
-
-    this.global.databaseName = `emjpm_test_${uid(16).toLowerCase()}`;
 
     //
 
@@ -36,10 +58,14 @@ class KnexEnvironment extends NodeEnvironment {
 
     //
 
+    const connection: Object = typeof this.options.connection === 'string' ?
+      parseConnection(this.options.connection) :
+      this.options.connection;
+
     this.global.knex = Knex({
       ...this.options,
       connection: {
-        ...this.options.connection,
+        ...connection,
         database: this.global.databaseName
       }
     });
@@ -61,7 +87,7 @@ class KnexEnvironment extends NodeEnvironment {
 
     //
 
-    await Promise.all(this.destroyPromises)
+    await Promise.all(this.destroyPromises);
 
     //
 
@@ -70,7 +96,7 @@ class KnexEnvironment extends NodeEnvironment {
     debug("teardown");
   }
 
-  runScript(script) {
+  runScript(script: Script) {
     return super.runScript(script);
   }
 }
