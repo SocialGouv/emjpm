@@ -151,8 +151,9 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
-    Header: "Identité",
+    Header: "MJPM",
     id: "etablissement",
+    width: 250,
     accessor: d => d.etablissement,
     Cell: row => (
       <Cell row={row} style={{ verticalAlign: "middle" }}>
@@ -208,10 +209,10 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
-    Header: "Attente",
+    Header: "Mesures en attente",
     id: "mesures_en_attente",
     accessor: d => d.mesures_en_attente,
-    width: 70,
+    width: 140,
     Cell: row => (
       <CellMandataireRedux row={row} style={{ fontSize: "1em" }}>
         <div style={{ color: "black" }} data-cy="attente">
