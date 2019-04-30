@@ -85,7 +85,8 @@ Test @emjpm/api:
   <<: *quality_stage
   <<: *master_based_stage
   services:
-    - $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
+    - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
+      command: ["-p", "5434"]
   variables:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
