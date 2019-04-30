@@ -26,7 +26,8 @@ const ALLOWED_FILTERS = [
   "ti_id",
   "cabinet",
   "id",
-  "numero_dossier"
+  "numero_dossier",
+  "extinction"
 ];
 
 const {

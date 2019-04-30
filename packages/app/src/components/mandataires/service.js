@@ -43,7 +43,12 @@ class ServiceTabs extends React.Component {
     return (
       <>
         <Header handleClick={this.props.handleClick} />
-        <Form schema={schema} formData={this.props.mandataireId} uiSchema={uiSchema} onChange={onSubmitted}>
+        <Form
+          schema={schema}
+          formData={this.props.mandataireId}
+          uiSchema={uiSchema}
+          onChange={onSubmitted}
+        >
           {" "}
           <button style={{ display: "none" }} type="submit" />{" "}
         </Form>
@@ -108,7 +113,7 @@ class ServiceTabsAntennes extends React.Component {
         )
       },
       {
-        text: "Mesures éteintes",
+        text: "Fins de mandats",
         url: "/mandataires/mesures/eteintes",
         icon: <UserMinus />,
         content: (
@@ -128,7 +133,7 @@ class ServiceTabsAntennes extends React.Component {
         )
       },
       {
-        text: "Mesures réservées",
+        text: "Mesures en attente",
         url: "/mandataires/mesures/en-attente",
         icon: <Clock />,
         content: (
