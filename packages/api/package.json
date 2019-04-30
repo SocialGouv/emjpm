@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
-    "@zeit/ncc": "^0.18.1",
+    "@zeit/ncc": "^0.18.2",
     "babel-core": "7.0.0-bridge.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
