@@ -40,6 +40,12 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
         mandataireId: action.data[0].id,
         lastUpdate: new Date()
       };
+    case "CHANGE_MANDATAIRE_ID_INIT":
+      return {
+        ...state,
+        mandataireId: action.data[0].id,
+        lastUpdate: new Date()
+      };
     case "MANDATAIRE_PROFILES_UPDATED":
       return {
         ...state,
