@@ -94,6 +94,7 @@ export const mandataireMount = () => async dispatch => {
 
 export const updateMandataire = data => async dispatch => {
   try {
+
     await updateMandataireApi(data);
     const profile = await fetchProfiles();
     await dispatch(hide(data.type === "service" ? "EditService" : "EditMandataire"));
