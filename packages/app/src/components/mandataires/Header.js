@@ -31,7 +31,9 @@ const HeaderMandataire = ({
   service
 }) => {
   const currentDispos = dispo_max - mesures_en_cours - mesures_en_attente || null;
+
   const fullName = `${nom || ""} ${prenom || ""}`;
+
   const SiegeSocial = styled.div`
     border-bottom: 1px solid #53657d;
     padding-top: 5px
@@ -45,7 +47,6 @@ const HeaderMandataire = ({
   `;
 
   const iconStyle = { width: 22, height: 22, marginRight: 10 };
-  console.log("profiles", profiles);
   return (
     <ContainerMandataire className="container">
       <Title>
@@ -66,7 +67,6 @@ const HeaderMandataire = ({
                 </a>
               </div>
 
-
               <div style={{ textAlign: "right", fontSize: "1em", color: "#53657d" }}>
                 {profiles &&
                   profiles.date_mesure_update && (
@@ -79,7 +79,7 @@ const HeaderMandataire = ({
             </SiegeSocial>
           </div>
         ) : (
-          fullName
+          <div>{fullName}</div>
         )}
       </Title>
     </ContainerMandataire>

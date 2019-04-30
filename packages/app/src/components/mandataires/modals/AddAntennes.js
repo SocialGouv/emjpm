@@ -8,6 +8,7 @@ import { addAntennesToMandataires } from "../actions/mandataire";
 import Resolve from "../../common/Resolve";
 import TiSelector from "../../inscription/TiSelector";
 import apiFetch from "../../communComponents/Api";
+import { ErrorBox } from "../../common/ShowBox";
 
 const schema = {
   title: "Ajouter une antenne",
@@ -74,11 +75,41 @@ class AddAntennes extends React.Component {
     tis: [],
     formData: {},
     status: "idle",
-    message: ""
+    message: "",
+    count: 0
   };
+
+  incrementCount(dispo_max) {
+    this.setState(
+      state => ({
+        count: state.count + dispo_max
+      }),
+      () => {
+        if (this.state.count > this.props.service.dispo_max) {
+          this.setState({
+            status: "error",
+            count: 0
+          });
+        }
+      }
+    );
+  }
 
   setTis = tis => {
     this.setState({ tis });
+  };
+
+  onSubmitted = async ({ formData }) => {
+    await this.props.profiles.map(profile => {
+      const dispo_max = profile.dispo_max;
+      this.incrementCount(dispo_max);
+    });
+    await this.incrementCount(formData.dispo_max);
+    if (this.state.status !== "error") {
+      this.props.onSubmit({
+        formData
+      });
+    }
   };
 
   render() {
@@ -89,7 +120,11 @@ class AddAntennes extends React.Component {
     };
 
     return (
-      <Layout show={this.props.show} handleHide={this.props.handleHide} className="FicheMandataireModal">
+      <Layout
+        show={this.props.show}
+        handleHide={this.props.handleHide}
+        className="FicheMandataireModal"
+      >
         <div style={{ backgroundColor: "white", padding: 25 }}>
           <Resolve
             promises={[() => getTis()]}
@@ -105,7 +140,10 @@ class AddAntennes extends React.Component {
             )}
           />
         </div>
-        <Form schema={schema} uiSchema={uiSchema} formData={cleanData} onSubmit={this.props.onSubmit}>
+        {this.state.status === "error" && (
+          <ErrorBox message="Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service" />
+        )}
+        <Form schema={schema} uiSchema={uiSchema} formData={cleanData} onSubmit={this.onSubmitted}>
           <div style={{ margin: "20px 0", textAlign: "center" }}>
             <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
               Valider
@@ -124,7 +162,8 @@ const mapDispatchToProps = dispatch =>
 // connect to redux-modal
 export default connect(
   state => ({
-    service: state.mandataire.service
+    service: state.mandataire.service,
+    profiles: state.mandataire.profiles
   }),
   mapDispatchToProps
 )(connectModal({ name: "AddAntennes", destroyOnHide: true })(AddAntennes));

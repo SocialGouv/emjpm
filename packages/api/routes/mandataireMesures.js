@@ -327,10 +327,7 @@ router.get(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      console.log("12")
-      console.log("req.params.mandataireId",req.params.mandataireId)
       if (req.params.mandataireId) {
-        console.log("12345")
         res.status(200);
       }
       const mandataire = await findMandataire(req, req.params.mandataireId);

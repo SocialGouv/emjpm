@@ -41,7 +41,6 @@ class MandataireIndex extends React.Component {
   };
 
   render() {
-    console.log("this.props.currentMandataire", this.props.currentMandataire);
     return (
       <React.Fragment>
         {this.state.isToggleOn === false ? (

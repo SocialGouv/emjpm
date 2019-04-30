@@ -79,7 +79,6 @@ class ServiceTabs extends React.Component {
     const onSubmitted = formData => {
       this.props.onChange(formData);
     };
-    console.log("props",this.props.profiles )
     return (
       <>
         <Header handleClick={this.props.handleClick} />

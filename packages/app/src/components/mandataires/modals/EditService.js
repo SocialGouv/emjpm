@@ -137,7 +137,7 @@ class EditService extends React.Component {
           </div>
         </Form>
         {this.state.status === "error" && (
-          <ErrorBox message="Votre nombre de mesure total pour le service est inférieur" />
+          <ErrorBox message="Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service" />
         )}
       </Layout>
     );

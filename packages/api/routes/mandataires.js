@@ -491,9 +491,7 @@ router.put(
 
 router.get("/service", typeRequired("service"), async (req, res, next) => {
   try {
-    console.log("req.user.service_id", req.user.service_id);
     const service = await getServiceByMandataire(req.user.service_id);
-    console.log("service", service);
     if (!service) {
       throw createError.Unauthorized(`Service not found`);
     }
@@ -508,7 +506,6 @@ router.put(
   typeRequired("service"),
   async (req, res, next) => {
     try {
-      console.log("req.body.id",req.body.id)
       const service = await getServiceByMandataire(req.body.id);
       if (req.user.id !== service.userId) {
         throw createError.Unauthorized(`Service not found`);
