@@ -1994,10 +1994,10 @@
   resolved "https://registry.npmjs.org/@xtuc/long/-/long-4.2.1.tgz#5c85d662f76fa1d34575766c5dcd6615abcd30d8"
   integrity sha512-FZdkNBDqBRHKQ2MEbSC17xnPFOhZxeJ2YGSfr2BKf3sujG49Qe3bB+rGCwQfIaA7WHnGeGkSijX4FuBCdrzW/g==
 
-"@zeit/ncc@^0.18.1":
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/@zeit/ncc/-/ncc-0.18.1.tgz#1723884210c792ba702ec6dccb390f387f0a3ba6"
-  integrity sha512-Tq13BzK+hAWBZY+VvncRZzpE5PHGks3kn2XJ+bcWSXgTZb4rTR/CTV1YYXilNNkX//jC1sziuM167FhLzFu2XA==
+"@zeit/ncc@^0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@zeit/ncc/-/ncc-0.18.2.tgz#b5f721ec1d23bfe531f3568633689ddab7c05638"
+  integrity sha512-liiuVTcxLaOIGQDftpZ2qhSS/vdEbuvmi2tkBWMfIwIyeKd/sh/jw+l8yONT3/unx/sSmfMTDnwfwUlY+saKiw==
 
 "@zeit/next-css@^1.0.1":
   version "1.0.1"
@@ -4391,10 +4391,10 @@ dot-prop@^4.1.0, dot-prop@^4.2.0:
   dependencies:
     is-obj "^1.0.0"
 
-dotenv@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-7.0.0.tgz#a2be3cd52736673206e8a85fb5210eea29628e7c"
-  integrity sha512-M3NhsLbV1i6HuGzBUH8vXrtxOk+tWmzWKDMbAVSUp3Zsjm7ywFeuwrUXhmhQyRK1q5B5GGy7hcXPbj3bnfZg2g==
+dotenv@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.0.0.tgz#ed310c165b4e8a97bb745b0a9d99c31bda566440"
+  integrity sha512-30xVGqjLjiUOArT4+M5q9sYdvuR4riM6yK9wMcas9Vbp6zZa+ocC9dp6QoftuhTPhFAiLK/0C5Ni2nou/Bk8lg==
 
 double-ended-queue@^2.1.0-0:
   version "2.1.0-0"
