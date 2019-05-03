@@ -59,7 +59,7 @@
     "jest-environment-knex": "^1.0.0",
     "mocha": "^6.1.4",
     "nodemailer-mock": "^1.4.1",
-    "nodemon": "^1.18.11",
+    "nodemon": "^1.19.0",
     "prettier": "1.17.0",
     "randomatic": "^3.1.1",
     "rewiremock": "^3.13.6",
