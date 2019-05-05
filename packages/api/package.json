@@ -55,7 +55,7 @@
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "jest-cli": "^24.7.1",
+    "jest-cli": "^24.8.0",
     "jest-environment-knex": "^1.0.0",
     "mocha": "^6.1.4",
     "nodemailer-mock": "^1.4.1",
