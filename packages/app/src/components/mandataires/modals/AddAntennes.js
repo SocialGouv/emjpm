@@ -63,12 +63,9 @@ const uiSchema = {
   }
 };
 const getTis = () =>
-  // only fetch client-side
-  (typeof window !== "undefined" &&
-    apiFetch("/inscription/tis", null, {
-      forceLogin: false
-    })) ||
-  Promise.resolve();
+  apiFetch("/inscription/tis", null, {
+    forceLogin: false
+  }) || Promise.resolve();
 
 class AddAntennes extends React.Component {
   state = {

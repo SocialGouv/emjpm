@@ -288,7 +288,7 @@ const getAllMandatairesByUserId = user_id =>
     .where({
       "mandataires.user_id": parseInt(user_id)
     });
-const getServiceByMandataire = id =>
+const getParentService = id =>
   knex("services")
     .select("services.*", "users.type", "users.id as userId")
     .innerJoin("users", "users.service_id", "services.id")
@@ -361,7 +361,7 @@ module.exports = {
   update,
   getCoordonneesByPostCode,
   getAllMandatairesByUserId,
-  getServiceByMandataire,
+  getParentService,
   updateService,
   getAllServicesMandatairesByTis,
   isServiceInTi,

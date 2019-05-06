@@ -16,7 +16,7 @@ const {
   getAllMandataires,
   getAllByMandatairesFilter,
   getCoordonneesByPostCode,
-  getServiceByMandataire,
+  getParentService,
   updateService,
   getAllMandatairesByUserId,
   findMandataire
@@ -26,7 +26,10 @@ const { updateUser } = require("../db/queries/users");
 
 const { getTiByUserId } = require("../db/queries/tis");
 
-const { createMandataire,createMandataireTi } = require("../db/queries/inscription");
+const {
+  createMandataire,
+  createMandataireTi
+} = require("../db/queries/inscription");
 
 // récupère les données d'un mandataire
 
@@ -491,9 +494,11 @@ router.put(
 
 router.get("/service", typeRequired("service"), async (req, res, next) => {
   try {
-    const service = await getServiceByMandataire(req.user.service_id);
+    const service = await getParentService(req.user.service_id);
     if (!service) {
-      throw createError.Unauthorized(`Service not found`);
+      throw createError.Unauthorized(
+        `Service not found: ${req.user.service_id}`
+      );
     }
     res.status(200).json(service);
   } catch (err) {
@@ -506,12 +511,12 @@ router.put(
   typeRequired("service"),
   async (req, res, next) => {
     try {
-      const service = await getServiceByMandataire(req.body.id);
+      const service = await getParentService(req.body.id);
       if (req.user.id !== service.userId) {
         throw createError.Unauthorized(`Service not found`);
       }
       await updateService(req.body.id, whiteListSiegeSocial(req.body));
-      const serviceUpdated = await getServiceByMandataire(req.body.id);
+      const serviceUpdated = await getParentService(req.body.id);
       res.status(200).json(serviceUpdated);
     } catch (err) {
       next(err);
@@ -552,7 +557,6 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
       tis
     } = req.body;
 
-    console.log("tis", tis);
     const mandataire = await createMandataire({
       user_id: req.user.id,
       etablissement,
@@ -572,12 +576,10 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
     }
     await Promise.all(
       tis.map(ti_id =>
-       createMandataireTi(
-          {
-            mandataire_id: mandataire[0],
-            ti_id
-          }
-        )
+        createMandataireTi({
+          mandataire_id: mandataire[0],
+          ti_id
+        })
       )
     );
 

@@ -66,7 +66,7 @@ router.put("/1", authHelpers.typeRequired("ti"), async (req, res, next) => {
 
 router.get(
   "/1",
-  authHelpers.typeRequired("ti","service","individuel","prepose"),
+  authHelpers.typeRequired("ti", "service", "individuel", "prepose"),
   async (req, res, next) => {
     const user = await getSpecificUser({ id: req.user.id });
     if (!user) {
