@@ -93,10 +93,10 @@ class ServiceTabs extends React.Component {
                 mandataireId={this.props.mandataireId}
                 onClick={() => onSubmitted(profile.id)}
               >
-                {profile.etablissement} <br/>
-                <div style={{lineHeight: "20px"}}>
-                {profile.mesures_en_cours} / {profile.dispo_max} <br/>
-                Mesures en cours
+                {profile.etablissement} <br />
+                <div style={{ lineHeight: "20px" }}>
+                  {profile.mesures_en_cours} / {profile.dispo_max} <br />
+                  Mesures en cours
                 </div>
               </SiegeSocial>
             ))}
@@ -140,19 +140,21 @@ class ServiceTabsAntennes extends React.Component {
             <CreateMesure mandataireId={this.props.mandataireID} />
             <DispoMagistrat currentDispos={currentDispos} />
 
-            <TableMesures
-              fetch={() => apiFetch(`/mandataires/${this.props.mandataireID}/mesures`)}
-              hideColumns={[
-                "reactiver",
-                "extinction",
-                "valider",
-                "date_demande",
-                "ti",
-                "status",
-                "professionnel",
-                "mandataire_id"
-              ]}
-            />
+            {this.props.mandataireID !== null && (
+              <TableMesures
+                fetch={() => apiFetch(`/mandataires/${this.props.mandataireID}/mesures`)}
+                hideColumns={[
+                  "reactiver",
+                  "extinction",
+                  "valider",
+                  "date_demande",
+                  "ti",
+                  "status",
+                  "professionnel",
+                  "mandataire_id"
+                ]}
+              />
+            )}
           </React.Fragment>
         )
       },

@@ -327,9 +327,6 @@ router.get(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      if (req.params.mandataireId) {
-        res.status(200);
-      }
       const mandataire = await findMandataire(req, req.params.mandataireId);
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
