@@ -58,15 +58,16 @@ const CloseMesure = ({ show, handleHide, onSubmit, id, mandataire_id, ...props }
   return (
     <Layout show={show} handleHide={handleHide}>
       <div style={{ textAlign: "center", marginTop: 50 }}>
-        <h3>Mettre fin au mandat </h3>
+        <h3>Eteindre la mesure? </h3>
         <br />
         <p style={{ padding: 20 }}>
-          Une fois cette opération effectuée, vous retrouverez cette fin de mandat dans l'onglet correspondant.
+          Une fois cette opération effectuée, vous retrouverez cette mesure éteinte dans
+          l&apos;onglet correspondant, mais vous ne pourrez plus la modifier.
         </p>
         <Form schema={schema} uiSchema={uiSchema} onSubmit={onSubmitted}>
           <div style={{ margin: "20px 0", textAlign: "center" }}>
             <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
-              Mettre fin au mandat
+              Eteindre la mesure
             </button>
           </div>
         </Form>
