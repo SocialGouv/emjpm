@@ -1,7 +1,7 @@
 {
   "command": {
-    "publish": {
-      "skip-npm": true,
+    "version": {
+      "githubRelease": true,
       "conventionalCommits": true,
       "message": "chore(release): version %v"
     }
