@@ -72,7 +72,7 @@ class MandataireTabs extends React.Component {
         content: <OpenStreeMap getPromise={() => apiFetch(`/mandataires/1/mesuresForMaps`)} />
       },
       {
-        text: "Fins de mandats",
+        text: "Mesures éteintes",
         url: "/mandataires/mesures/eteintes",
         icon: <UserMinus />,
         content: (
@@ -92,7 +92,7 @@ class MandataireTabs extends React.Component {
         )
       },
       {
-        text: "Mesures en attente",
+        text: "Mesures réservées",
         url: "/mandataires/mesures/en-attente",
         icon: <Clock />,
         content: (
