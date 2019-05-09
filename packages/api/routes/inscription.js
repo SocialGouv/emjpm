@@ -236,14 +236,13 @@ router.post("/mandataires", async (req, res, next) => {
             nom,
             prenom,
             email,
-            service_id: serviceId,
+            service_id: serviceId[0],
             password: bcrypt.hashSync(pass1, salt),
             active: false
           },
           trx
         );
       } else {
-
         const userId = await queries.createUser(
           {
             username,

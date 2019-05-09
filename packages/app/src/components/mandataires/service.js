@@ -85,37 +85,41 @@ class ServiceTabs extends React.Component {
         <h4 style={{ fontWeight: "bold" }}>Vos antennes</h4>
         <div style={{ display: "flex", flexDirection: "row" }}>
           {this.props.profiles.length &&
-            this.props.profiles.length !== 0 &&
-            this.props.profiles.map &&
-            this.props.profiles.map(profile => (
-              <SiegeSocial
-                id={profile.id}
-                mandataireId={this.props.mandataireId}
-                onClick={() => onSubmitted(profile.id)}
-              >
-                {profile.etablissement} <br />
-                <div style={{ lineHeight: "20px" }}>
-                  {profile.mesures_en_cours} / {profile.dispo_max} <br />
-                  Mesures en cours
-                </div>
-              </SiegeSocial>
-            ))}
+          this.props.profiles.length !== 0 &&
+          this.props.profiles.map &&
+          this.props.profiles.map
+            ? profile => (
+                <SiegeSocial
+                  id={profile.id}
+                  mandataireId={this.props.mandataireId}
+                  onClick={() => onSubmitted(profile.id)}
+                >
+                  {profile.etablissement} <br />
+                  <div style={{ lineHeight: "20px" }}>
+                    {profile.mesures_en_cours} / {profile.dispo_max} <br />
+                    Mesures en cours
+                  </div>
+                </SiegeSocial>
+              )
+            : ""}
           <AjoutAntenne />
         </div>
-        <div style={{ background: "rgb(215, 223, 232)" }}>
-          {this.props.profiles.length &&
-            this.props.profiles.length !== 0 &&
-            this.props.profiles.map && (
-              <ServiceTabsAntennes
-                handleClick={this.props.handleClick}
-                mandataireID={this.props.mandataireId}
-                antenne={
-                  this.props.profiles.filter &&
-                  this.props.profiles.filter(profile => profile.id === this.props.mandataireId)[0]
-                }
-              />
-            )}
-        </div>
+        {this.props.profiles.length &&
+        this.props.profiles.length !== 0 &&
+        this.props.profiles.map ? (
+          <div style={{ background: "rgb(215, 223, 232)" }}>
+            <ServiceTabsAntennes
+              handleClick={this.props.handleClick}
+              mandataireID={this.props.mandataireId}
+              antenne={
+                this.props.profiles.filter &&
+                this.props.profiles.filter(profile => profile.id === this.props.mandataireId)[0]
+              }
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </>
     );
   }
@@ -140,7 +144,7 @@ class ServiceTabsAntennes extends React.Component {
             <CreateMesure mandataireId={this.props.mandataireID} />
             <DispoMagistrat currentDispos={currentDispos} />
 
-            {this.props.mandataireID !== null && (
+            {this.props.mandataireID !== null ? (
               <TableMesures
                 fetch={() => apiFetch(`/mandataires/${this.props.mandataireID}/mesures`)}
                 hideColumns={[
@@ -154,6 +158,8 @@ class ServiceTabsAntennes extends React.Component {
                   "mandataire_id"
                 ]}
               />
+            ) : (
+              ""
             )}
           </React.Fragment>
         )
@@ -224,7 +230,9 @@ class ServiceTabsAntennes extends React.Component {
       }
     ];
     return (
-      <React.Fragment>{this.props.mandataireId !== 0 && <DummyTabs tabs={tabs} />}</React.Fragment>
+      <React.Fragment>
+        {this.props.mandataireId !== 0 ? <DummyTabs tabs={tabs} /> : ""}{" "}
+      </React.Fragment>
     );
   }
 }
