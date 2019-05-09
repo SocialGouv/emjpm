@@ -84,11 +84,8 @@ class ServiceTabs extends React.Component {
         <Header handleClick={this.props.handleClick} />
         <h4 style={{ fontWeight: "bold" }}>Vos antennes</h4>
         <div style={{ display: "flex", flexDirection: "row" }}>
-          {this.props.profiles.length &&
-          this.props.profiles.length !== 0 &&
-          this.props.profiles.map &&
-          this.props.profiles.map
-            ? profile => (
+          {this.props.profiles.length && this.props.profiles.length !== 0 && this.props.profiles.map
+            ? this.props.profiles.map(profile => (
                 <SiegeSocial
                   id={profile.id}
                   mandataireId={this.props.mandataireId}
@@ -96,11 +93,11 @@ class ServiceTabs extends React.Component {
                 >
                   {profile.etablissement} <br />
                   <div style={{ lineHeight: "20px" }}>
-                    {profile.mesures_en_cours} / {profile.dispo_max} <br />
+                    {profile.mesures_en_cours || 0} / {profile.dispo_max} <br />
                     Mesures en cours
                   </div>
                 </SiegeSocial>
-              )
+              ))
             : ""}
           <AjoutAntenne />
         </div>
