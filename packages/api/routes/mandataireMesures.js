@@ -27,7 +27,8 @@ const ALLOWED_FILTERS = [
   "cabinet",
   "id",
   "numero_dossier",
-  "extinction"
+  "extinction",
+  "reason_extinction"
 ];
 
 const {
@@ -139,6 +140,7 @@ router.put(
       if (Object.keys(req.body).length === 0) {
         return res.status(200).json();
       }
+
       if (
         req.user.type === "individuel" ||
         req.user.type === "prepose" ||

@@ -23,8 +23,8 @@ const closeMesureApi = data =>
   apiFetch(`/mandataires/${data.mandataire_id}/mesures/${data.id}`, {
     method: "PUT",
     body: JSON.stringify({
-      status: "Eteindre mesure",
-      extinction: data.date
+      ...data,
+      status: "Eteindre mesure"
     })
   });
 const attenteMesureApi = data =>
