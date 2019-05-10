@@ -9,7 +9,8 @@ version: "3"
 
 services:
   db:
-    image: postgres:11
+    build:
+      context: ./docker/postgres
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
@@ -28,6 +29,5 @@ services:
       - "5434:5432"
     volumes:
       - emjpm-pgdata:/var/lib/postgresql/data
-      - ./packages/api/db/postgres-init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
 volumes:
   emjpm-pgdata:
