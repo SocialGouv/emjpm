@@ -15,6 +15,7 @@ _environments:
 
 _steps:
   - &node_stage
+    if: type = pull_request AND NOT env(RELEASE)
     language: node_js
     node_js: 10
     before_install:
@@ -46,7 +47,6 @@ jobs:
     - <<: *node_stage
       stage: Build
       name: Build and test
-      if: type = pull_request AND NOT env(RELEASE)
       install:
         # Start the database first so it has the time to boot before we interact with it.
         - docker-compose up -d db
@@ -67,7 +67,6 @@ jobs:
       allow_failure: true
       stage: Build
       name: Run end to end tests
-      if: NOT env(RELEASE)
       addons:
         apt:
           packages:
