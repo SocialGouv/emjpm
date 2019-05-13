@@ -107,7 +107,8 @@ class MandataireTabs extends React.Component {
               "residence",
               "status",
               "professionnel",
-              "mandataire_id"
+              "mandataire_id",
+              "numero_dossier"
             ]}
           />
         )

@@ -147,7 +147,8 @@ class ServiceTabsAntennes extends React.Component {
               "extinction",
               "residence",
               "status",
-              "professionnel"
+              "professionnel",
+              "numero_dossier"
             ]}
           />
         )
