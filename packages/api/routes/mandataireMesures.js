@@ -163,13 +163,15 @@ router.put(
         const ti = await getTiByUserId(req.user.id);
         await updateMesure(
           {
-            id: req.body.id, //todo : WHY req.body.id VS req.params.mesureId ???
+            id: req.body.id || req.params.mesureId, //todo : WHY req.body.id VS req.params.mesureId ???
             // ⚠️ ensure to override a tI only
             ti_id: ti.id
           },
           whitelist(req.body, ALLOWED_FILTERS)
         );
+
         const mesures = await getAllMesuresByTis(ti.id);
+
         res.status(200).json(mesures);
       }
     } catch (err) {

@@ -14,10 +14,10 @@ export const USER_PROFILE = "USER_PROFILE";
 
 /* ---------- API */
 const fetchProfile = () => apiFetch(`/users/1`);
-const fetchMandataires = () => apiFetch(`/mandataires`);
-const fetchMesures = () => apiFetch("/mesures/popup");
+export const fetchMandataires = () => apiFetch(`/mandataires`);
+export const fetchMesures = () => apiFetch("/mesures/popup");
 const fetchServices = () => apiFetch("/mandataires/services");
-const fetchUpdateMesureAttente = data =>
+export const fetchUpdateMesureAttente = data =>
   apiFetch("/mandataires/1/mesures-en-attente", {
     method: "PUT",
     body: JSON.stringify({

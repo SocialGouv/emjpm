@@ -36,6 +36,20 @@ const CellCloseMesureRedux = connect(null, dispatch => bindActionCreators({ show
   )
 );
 
+const CellCloseMesureAttenteRedux = connect(null, dispatch =>
+  bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-close-mesure"
+    error
+    onClick={() =>
+      show("CloseMesureAttente", { id: row.original.id, mandataire_id: row.original.mandataire_id })
+    }
+  >
+    Mettre fin au mandat
+  </Button>
+));
+
 // bouton connecté à redux-modal.show pour ReactivateMesure
 const CellReactivateMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
   ({ row, show }) => (
@@ -148,7 +162,7 @@ const COLUMNS = [
     id: "annee",
     width: 80,
     accessor: "annee",
-    Cell: row => <div>{row.row.annee && format(row.row.annee, "YYYY") || null}</div>,
+    Cell: row => <div>{(row.row.annee && format(row.row.annee, "YYYY")) || null}</div>,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -196,7 +210,13 @@ const COLUMNS = [
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
-
+  {
+    Header: "Fin de mandat",
+    id: "fin-mandat-attente",
+    Cell: row => <CellCloseMesureAttenteRedux row={row} />,
+    width: 200,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
   {
     Header: "Réactiver",
     id: "reactiver",

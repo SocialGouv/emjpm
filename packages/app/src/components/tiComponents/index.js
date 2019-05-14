@@ -23,8 +23,10 @@ import {
   ModalMesureValidation,
   ModalMesureReservation,
   EditMesure,
-  EditUser
+  EditUser,
+  CloseMesureAttente
 } from "./modals";
+
 import TableMesures from "../mandataires/TableMesures";
 //import TableMesures from "./TableMesures";
 import apiFetch from "../communComponents/Api";
@@ -95,6 +97,7 @@ class Ti extends React.Component {
         <ModalMesureReservation />
         <EditMesure />
         <EditUser />
+        <CloseMesureAttente />
       </div>
     );
   }
@@ -115,7 +118,13 @@ const mapDispatchToProps = dispatch =>
 
 // connect to redux store actions
 // connect to redux-modal
-const TiRedux = connect(null, mapDispatchToProps)(Ti);
+const mapStateToProps = state => ({
+  // /!\ todo : hack
+  // lastUpdate is updated when some mesure is modified so we can refresh the table
+  lastUpdate: state.mandataire.lastUpdate
+});
+
+const TiRedux = connect(mapStateToProps, mapDispatchToProps)(Ti);
 
 const Tis = () => (
   <Provider store={store}>
