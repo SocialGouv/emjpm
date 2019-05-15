@@ -116,7 +116,10 @@ const mapDispatchToProps = dispatch =>
 
 // connect to redux store actions
 // connect to redux-modal
-const TiRedux = connect(null, mapDispatchToProps)(Ti);
+const TiRedux = connect(
+  null,
+  mapDispatchToProps
+)(Ti);
 
 const Tis = () => (
   <Provider store={store}>

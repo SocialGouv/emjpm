@@ -8,52 +8,56 @@ import format from "date-fns/format";
 import { Button } from "..";
 
 // bouton connecté à redux-modal.show pour EditMesure
-const CellEditMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
-  ({ row, show }) => (
-    <Button
-      data-cy="button-edit-mesure"
-      onClick={() => show("EditMesure", { formData: row.original })}
-    >
-      Modifier
-    </Button>
-  )
-);
+const CellEditMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-edit-mesure"
+    onClick={() => show("EditMesure", { formData: row.original })}
+  >
+    Modifier
+  </Button>
+));
 
 // bouton connecté à redux-modal.show pour CloseMesure
-const CellCloseMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
-  ({ row, show }) => (
-    <Button
-      data-cy="button-close-mesure"
-      error
-      onClick={() => show("CloseMesure", { id: row.original.id })}
-    >
-      Mettre fin au mandat
-    </Button>
-  )
-);
+const CellCloseMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-close-mesure"
+    error
+    onClick={() => show("CloseMesure", { id: row.original.id })}
+  >
+    Mettre fin au mandat
+  </Button>
+));
 
 // bouton connecté à redux-modal.show pour ReactivateMesure
-const CellReactivateMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
-  ({ row, show }) => (
-    <Button
-      data-cy="button-reactivate-mesure"
-      onClick={() => show("ReactivateMesure", { id: row.original.id })}
-    >
-      Réactiver la mesure
-    </Button>
-  )
-);
+const CellReactivateMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-reactivate-mesure"
+    onClick={() => show("ReactivateMesure", { id: row.original.id })}
+  >
+    Réactiver la mesure
+  </Button>
+));
 
-const CellValidationMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
-  ({ row, show }) => (
-    <Button
-      data-cy="button-attente-mesure"
-      onClick={() => show("ValiderMesureEnAttente", { formData: row.original })}
-    >
-      Valider
-    </Button>
-  )
-);
+const CellValidationMesureRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
+)(({ row, show }) => (
+  <Button
+    data-cy="button-attente-mesure"
+    onClick={() => show("ValiderMesureEnAttente", { formData: row.original })}
+  >
+    Valider
+  </Button>
+));
 
 const concat = (...strings) =>
   strings
@@ -137,7 +141,7 @@ const COLUMNS = [
     id: "annee",
     width: 80,
     accessor: "annee",
-    Cell: row => <div>{row.row.annee && format(row.row.annee, "YYYY") || null}</div>,
+    Cell: row => <div>{(row.row.annee && format(row.row.annee, "YYYY")) || null}</div>,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {

@@ -27,7 +27,8 @@ const updateUserApi = data =>
   });
 /* ---------- ACTIONS CREATORS */
 
-export const profileTi = () => dispatch => fetchProfile().then(json => dispatch(userProfileUpdated(json)));
+export const profileTi = () => dispatch =>
+  fetchProfile().then(json => dispatch(userProfileUpdated(json)));
 
 export const updateUser = data => dispatch => {
   return updateUserApi(data)
@@ -47,4 +48,3 @@ export const userProfileUpdated = data => ({
   type: USER_PROFILE_UPDATED,
   data
 });
-

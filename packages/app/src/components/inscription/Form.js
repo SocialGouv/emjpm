@@ -95,7 +95,7 @@ class Form extends React.Component {
     } else if (isTi && hasMultipleTi) {
       return alert("Saisissez un seul TI de référence");
     } else {
-      if ((isTi && hasSingleTi) || (!hasNoTi)) {
+      if ((isTi && hasSingleTi) || !hasNoTi) {
         this.setState({ status: "loading", formData }, () => {
           this.submitUser(formData);
         });
