@@ -8,7 +8,7 @@
     "dev": "nodemon app.js",
     "test:mocha": "NODE_ENV=test mocha --timeout 10000 --exit",
     "test": "NODE_ENV=test jest --verbose",
-    "lint": "eslint __test__ auth db email routes scripts test app.js knexfile.js",
+    "lint": "eslint __test__ auth db email routes scripts app.js",
     "email-relance": "node ./scripts/relance-mandataires-inactifs"
   },
   "dependencies": {
@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@socialgouv/eslint-config-recommended": "^0.7.0",
     "@zeit/ncc": "^0.18.2",
     "babel-core": "7.0.0-bridge.0",
     "chai": "^4.2.0",
@@ -60,7 +61,7 @@
     "mocha": "^6.1.4",
     "nodemailer-mock": "^1.4.1",
     "nodemon": "^1.19.0",
-    "prettier": "1.17.0",
+    "prettier": "^1.17.0",
     "randomatic": "^3.1.1",
     "rewiremock": "^3.13.6",
     "supertest": "^4.0.2"
