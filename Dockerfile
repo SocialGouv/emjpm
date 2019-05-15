@@ -27,4 +27,4 @@ COPY ./packages/knex /app/packages/knex
 COPY ./packages/api /app/packages/api
 COPY ./packages/app /app/packages/app
 
-RUN yarn build
+RUN yarn build --stream
