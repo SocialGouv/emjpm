@@ -33,9 +33,9 @@ const schema = {
 
 const uiSchema = {
   extinction: {
-    "ui:placeholder": "date d'extinction",
+    "ui:title": "Date d'extinction",
     "ui:options": {
-      label: false
+      label: true
     }
   },
   reason_extinction: {
