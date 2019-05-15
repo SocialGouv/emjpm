@@ -77,31 +77,30 @@ class AddAntennes extends React.Component {
   };
 
   incrementCount(dispo_max) {
-    this.setState(
-      state => ({
-        count: state.count + dispo_max
-      }),
-      () => {
-        if (this.state.count > this.props.service.dispo_max) {
-          this.setState({
-            status: "error",
-            count: 0
-          });
-        }
-      }
-    );
+    this.setState(state => ({
+      count: state.count + dispo_max
+    }));
   }
+
+  validate = async ({ formData }, errors) => {
+    await this.props.profiles.map(profile => {
+      const dispo_max = profile.dispo_max;
+      this.incrementCount(dispo_max);
+    });
+    await this.incrementCount(formData.dispo_max);
+    if (this.state.count > this.props.service.dispo_max) {
+      errors.dispo_max.addError(
+        "Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service"
+      );
+    }
+    return errors;
+  };
 
   setTis = tis => {
     this.setState({ tis });
   };
 
   onSubmitted = async ({ formData }) => {
-    await this.props.profiles.map(profile => {
-      const dispo_max = profile.dispo_max;
-      this.incrementCount(dispo_max);
-    });
-    await this.incrementCount(formData.dispo_max);
     if (this.state.status !== "error") {
       this.props.onSubmit({
         formData
@@ -140,7 +139,13 @@ class AddAntennes extends React.Component {
         {this.state.status === "error" && (
           <ErrorBox message="Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service" />
         )}
-        <Form schema={schema} uiSchema={uiSchema} formData={cleanData} onSubmit={this.onSubmitted}>
+        <Form
+          schema={schema}
+          uiSchema={uiSchema}
+          formData={cleanData}
+          validate={this.validate}
+          onSubmit={this.onSubmitted}
+        >
           <div style={{ margin: "20px 0", textAlign: "center" }}>
             <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
               Valider
