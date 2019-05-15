@@ -127,7 +127,7 @@ Test @emjpm/knex:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
   script:
-    - npx wait-port --timeout 1200000 localhost:5434 # 1200000 = 1000 * 60 * 2
+    - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
     - yarn workspace @emjpm/knex test
 
 #
@@ -161,7 +161,7 @@ E2E Test @emjpm/api:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
   script:
-    - npx wait-port --timeout 1200000 localhost:5434 # 1200000 = 1000 * 60 * 2
+    - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
     - yarn workspace @emjpm/api test --coverage
   after_script:
     - CI_PROJECT_DIR=/app npx codecov -F api
@@ -183,9 +183,9 @@ E2E Test @optional/e2e:
     - cd optional/e2e
     - yarn
     # Database on localhost:5434
-    - npx wait-port --timeout 1200000 localhost:5434 # 1200000 = 1000 * 60 * 2
+    - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
     # API on localhost:4000
-    - npx wait-port --timeout 1200000 localhost:4000 # 1200000 = 1000 * 60 * 2
+    - npx wait-port --timeout 30000 localhost:4000 # 30_000 = 1000 * 30s
     # Front on localhost:80
-    - npx wait-port --timeout 1200000 localhost:80 # 1200000 = 1000 * 60 * 2
+    - npx wait-port --timeout 30000 localhost:80 # 30_000 = 1000 * 30s
     - yarn cypress run --browser chrome
