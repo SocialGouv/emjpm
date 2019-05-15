@@ -58,7 +58,7 @@ const FicheMandataire = ({
         <tbody style={{ fontSize: "1.1em" }}>
           <tr>
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
-              <b>"Mesures souhaitées"</b>
+              <b>Nombre total de mesures souhaitées</b>
             </td>
             <td
               data-cy="fiche-manda-dispo-max"
