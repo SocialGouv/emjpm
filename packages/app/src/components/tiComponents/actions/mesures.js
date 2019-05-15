@@ -34,4 +34,3 @@ export const mesureUpdated = data => ({
   type: MESURE_UPDATED,
   data
 });
-
