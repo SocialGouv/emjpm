@@ -4,7 +4,9 @@ import styled from "styled-components";
 import Router from "next/router";
 import getConfig from "next/config";
 
-const { publicRuntimeConfig: { API_URL } } = getConfig();
+const {
+  publicRuntimeConfig: { API_URL }
+} = getConfig();
 
 import piwik from "../../piwik";
 

@@ -16,7 +16,7 @@ const schema = {
     "dispo_max"
   ],
   properties: {
-    email: { type: "string",format: "email",  default: "" },
+    email: { type: "string", format: "email", default: "" },
     pass1: { type: "string", minLength: 8 },
     pass2: { type: "string", minLength: 8 },
     nom: { type: "string", default: "" },
