@@ -571,6 +571,7 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
       service_id,
       dispo_max
     });
+
     if (!tis || tis.length === 0) {
       return true;
     }
