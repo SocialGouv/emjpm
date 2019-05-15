@@ -74,7 +74,7 @@ const fetchAllFiness = () =>
 //todo: bofbof
 export const mandataireMount = () => async dispatch => {
   const userProfiles = await fetchUserProfiles();
-  await dispatch(userProfileUpdated(userProfiles))
+  await dispatch(userProfileUpdated(userProfiles));
 
   if (userProfiles.type === "service") {
     const service = await fetchService();
@@ -94,7 +94,6 @@ export const mandataireMount = () => async dispatch => {
 
 export const updateMandataire = data => async dispatch => {
   try {
-
     await updateMandataireApi(data);
     const profile = await fetchProfiles();
     await dispatch(hide(data.type === "service" ? "EditService" : "EditMandataire"));

@@ -72,28 +72,6 @@ class AddAntennes extends React.Component {
     tis: [],
     formData: {},
     status: "idle",
-    message: "",
-    count: 0
-  };
-
-  incrementCount(dispo_max) {
-    this.setState(state => ({
-      count: state.count + dispo_max
-    }));
-  }
-
-  validate = async ({ formData }, errors) => {
-    await this.props.profiles.map(profile => {
-      const dispo_max = profile.dispo_max;
-      this.incrementCount(dispo_max);
-    });
-    await this.incrementCount(formData.dispo_max);
-    if (this.state.count > this.props.service.dispo_max) {
-      errors.dispo_max.addError(
-        "Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service"
-      );
-    }
-    return errors;
   };
 
   setTis = tis => {
@@ -101,11 +79,9 @@ class AddAntennes extends React.Component {
   };
 
   onSubmitted = async ({ formData }) => {
-    if (this.state.status !== "error") {
-      this.props.onSubmit({
-        formData
-      });
-    }
+    this.props.onSubmit({
+      formData
+    });
   };
 
   render() {
@@ -113,6 +89,20 @@ class AddAntennes extends React.Component {
       ...this.props.formData,
       service_id: this.props.service.id,
       tis: this.state.tis
+    };
+
+    const validate = (formData, errors) => {
+      let number = 0;
+      this.props.profiles.map(profile => {
+        number = number + profile.dispo_max;
+      });
+      number = number + formData.dispo_max;
+      if (number > this.props.service.dispo_max) {
+        errors.dispo_max.addError(
+          "Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service"
+        );
+      }
+      return errors;
     };
 
     return (
@@ -136,15 +126,13 @@ class AddAntennes extends React.Component {
             )}
           />
         </div>
-        {this.state.status === "error" && (
-          <ErrorBox message="Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service" />
-        )}
         <Form
           schema={schema}
           uiSchema={uiSchema}
           formData={cleanData}
-          validate={this.validate}
+          validate={validate}
           onSubmit={this.onSubmitted}
+          showErrorList={false}
         >
           <div style={{ margin: "20px 0", textAlign: "center" }}>
             <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>

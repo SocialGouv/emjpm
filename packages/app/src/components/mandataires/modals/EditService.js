@@ -83,41 +83,28 @@ const uiSchema = {
 };
 
 class EditService extends React.Component {
-  state = {
-    count: 0,
-    status: null
-  };
-
-  incrementCount(dispo_max) {
-    this.setState(
-      state => ({
-        count: state.count + dispo_max
-      }),
-      () => {
-        if (this.state.count > this.props.service.dispo_max) {
-          this.setState({
-            status: "error",
-            count: 0
-          });
-        }
-      }
-    );
-  }
-
   onSubmitted = async ({ formData }) => {
-    await this.props.profiles.map(profile => {
-      const dispo_max =
-        this.props.mandataireId === profile.id ? formData.dispo_max : profile.dispo_max;
-      this.incrementCount(dispo_max);
+    this.props.onSubmit({
+      formData
     });
-    if (this.state.status !== "error") {
-      this.props.onSubmit({
-        formData
-      });
-    }
   };
 
   render() {
+    const validate = (formData, errors) => {
+      let number = 0;
+      this.props.profiles.map(profile => {
+        let dispo_max =
+          this.props.mandataireId === profile.id ? formData.dispo_max : profile.dispo_max;
+        number = number + dispo_max;
+      });
+      if (number > this.props.service.dispo_max) {
+        errors.dispo_max.addError(
+          "Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service"
+        );
+      }
+      return errors;
+    };
+
     return (
       <Layout
         show={this.props.show}
@@ -129,6 +116,8 @@ class EditService extends React.Component {
           uiSchema={uiSchema}
           formData={this.props.formData}
           onSubmit={this.onSubmitted}
+          validate={validate}
+          showErrorList={false}
         >
           <div style={{ margin: "20px 0", textAlign: "center" }}>
             <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
@@ -136,9 +125,6 @@ class EditService extends React.Component {
             </button>
           </div>
         </Form>
-        {this.state.status === "error" && (
-          <ErrorBox message="Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service" />
-        )}
       </Layout>
     );
   }
