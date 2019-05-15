@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
+    "lint": "eslint __test__ migrations seeds knexfile.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seeds": "knex seed:run",
@@ -16,7 +17,10 @@
     "pg": "^7.8.1"
   },
   "devDependencies": {
+    "@socialgouv/eslint-config-recommended": "^0.7.0",
+    "eslint": "^5.16.0",
     "jest": "^24.8.0",
-    "jest-environment-knex": "^1.0.0"
+    "jest-environment-knex": "^1.0.0",
+    "prettier": "^1.17.0"
   }
 }

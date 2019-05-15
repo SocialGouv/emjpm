@@ -19,6 +19,10 @@ variables:
   stage: "Code Quality"
   dependencies: []
 
+.end_to_end_stage: &end_to_end_stage
+  stage: "End to End Tests"
+  dependencies: []
+
 .master_based_stage: &master_based_stage
   variables:
     GIT_STRATEGY: none
@@ -45,6 +49,7 @@ stages:
   - "Prepare"
   - "Code Quality"
   - "Registration"
+  - "End to End Tests"
 
 #
 
@@ -80,8 +85,39 @@ Lint @emjpm/app:
   script:
     - yarn workspace @emjpm/app lint
 
+Lint @emjpm/knex:
+  <<: *quality_stage
+  <<: *master_based_stage
+  allow_failure: true
+  script:
+    - yarn workspace @emjpm/knex lint
 
-Test @emjpm/api:
+Lint @optional/e2e:
+  <<: *quality_stage
+  <<: *master_based_stage
+  allow_failure: true
+  script:
+    - yarn run -- lerna exec --scope=@optional/e2e yarn
+    - yarn run -- lerna run --scope=@optional/e2e lint
+
+Lint jest-environment-knex:
+  <<: *quality_stage
+  <<: *master_based_stage
+  allow_failure: true
+  script:
+    - yarn workspace jest-environment-knex lint
+
+#
+
+Test @emjpm/app:
+  <<: *quality_stage
+  <<: *master_based_stage
+  script:
+    - yarn workspace @emjpm/app test --coverage
+  after_script:
+    - CI_PROJECT_DIR=/app npx codecov -F app
+
+Test @emjpm/knex:
   <<: *quality_stage
   <<: *master_based_stage
   services:
@@ -91,17 +127,8 @@ Test @emjpm/api:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
   script:
-    - yarn workspace @emjpm/api test --coverage
-  after_script:
-    - CI_PROJECT_DIR=/app npx codecov -F api
-
-Test @emjpm/app:
-  <<: *quality_stage
-  <<: *master_based_stage
-  script:
-    - yarn workspace @emjpm/app test --coverage
-  after_script:
-    - CI_PROJECT_DIR=/app npx codecov -F app
+    - npx wait-port --timeout 1200000 localhost:5434 # 1200000 = 1000 * 60 * 2
+    - yarn workspace @emjpm/knex test
 
 #
 
@@ -120,3 +147,45 @@ Register app image:
     DOCKER_BUILD_ARGS: >-
       --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+
+#
+
+E2E Test @emjpm/api:
+  <<: *end_to_end_stage
+  <<: *master_based_stage
+  allow_failure: true
+  services:
+    - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
+      command: ["-p", "5434"]
+  variables:
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: test
+  script:
+    - npx wait-port --timeout 1200000 localhost:5434 # 1200000 = 1000 * 60 * 2
+    - yarn workspace @emjpm/api test --coverage
+  after_script:
+    - CI_PROJECT_DIR=/app npx codecov -F api
+
+E2E Test @optional/e2e:
+  <<: *end_to_end_stage
+  allow_failure: true
+  image: cypress/base:12.1.0
+  services:
+    - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
+    - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
+    - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
+      command: ["-p", "5434"]
+  variables:
+    CYPRESS_baseUrl: "http://localhost:80"
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: test
+  script:
+    - cd optional/e2e
+    - yarn
+    # Database on localhost:5434
+    - npx wait-port --timeout 1200000 localhost:5434 # 1200000 = 1000 * 60 * 2
+    # API on localhost:4000
+    - npx wait-port --timeout 1200000 localhost:4000 # 1200000 = 1000 * 60 * 2
+    # Front on localhost:80
+    - npx wait-port --timeout 1200000 localhost:80 # 1200000 = 1000 * 60 * 2
+    - yarn cypress run --browser chrome

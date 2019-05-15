@@ -65,7 +65,7 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
       }
       return res;
     })
-    .then(async (res) => {
+    .then(async res => {
       if (res.status > 404 && res.status < 500) {
         const body = await res.json();
         const error = new Error(body.message);
