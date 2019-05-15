@@ -153,6 +153,7 @@ Register app image:
 E2E Test @emjpm/api:
   <<: *end_to_end_stage
   <<: *master_based_stage
+  allow_failure: true
   services:
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
       command: ["-p", "5434"]
@@ -167,6 +168,7 @@ E2E Test @emjpm/api:
 
 E2E Test @optional/e2e:
   <<: *end_to_end_stage
+  allow_failure: true
   image: cypress/base:12.1.0
   services:
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
