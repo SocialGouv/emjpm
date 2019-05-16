@@ -148,6 +148,14 @@ Register app image:
       --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
+Register e2e image:
+  <<: *register_stage
+  variables:
+    CONTEXT: optional/e2e
+    DOCKER_BUILD_ARGS: >-
+      --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/e2e
+
 #
 
 E2E Test @emjpm/api:
@@ -169,7 +177,7 @@ E2E Test @emjpm/api:
 E2E Test @optional/e2e:
   <<: *end_to_end_stage
   allow_failure: true
-  image: cypress/base:12.1.0
+  image: $CI_REGISTRY_IMAGE/e2e:$CI_COMMIT_SHA
   services:
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
@@ -179,13 +187,23 @@ E2E Test @optional/e2e:
     CYPRESS_baseUrl: "http://localhost:80"
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
+  artifacts:
+    expire_in: 1 week
+    when: always
+    paths:
+    - /app/e2e/cypress/screenshots
+    - /app/e2e/cypress/videos
   script:
-    - cd optional/e2e
-    - yarn
     # Database on localhost:5434
     - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
     # API on localhost:4000
     - npx wait-port --timeout 30000 localhost:4000 # 30_000 = 1000 * 30s
     # Front on localhost:80
     - npx wait-port --timeout 30000 localhost:80 # 30_000 = 1000 * 30s
-    - yarn cypress run --browser chrome
+    #
+    - cd /
+    - yarn workspace @emjpm/knex run migrate --env test
+    - yarn workspace @emjpm/knex run seeds --env test
+    #
+    - cd /app/e2e
+    - yarn cypress run
