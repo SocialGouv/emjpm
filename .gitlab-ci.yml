@@ -195,5 +195,9 @@ E2E Test @optional/e2e:
     # Front on localhost:80
     - npx wait-port --timeout 30000 localhost:80 # 30_000 = 1000 * 30s
     #
+    - cd /
+    - yarn workspace @emjpm/knex run migrate --env test
+    - yarn workspace @emjpm/knex run seeds --env test
+    #
     - cd /app/e2e
     - yarn cypress run --headed
