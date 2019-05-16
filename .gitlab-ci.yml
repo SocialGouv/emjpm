@@ -168,8 +168,8 @@ E2E Test @emjpm/api:
 
 E2E Test @optional/e2e:
   <<: *end_to_end_stage
+  <<: *master_based_stage
   allow_failure: true
-  image: cypress/base:12.1.0
   services:
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
