@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE} as emjpm-base-image
 
 #
 
-FROM cypress/base:12.1.0
+FROM cypress/base:10
 
 COPY ./package.json /app/e2e/package.json
 COPY ./yarn.lock /app/e2e/yarn.lock
