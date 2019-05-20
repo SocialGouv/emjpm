@@ -6,6 +6,7 @@ import ReactTable from "react-table";
 import format from "date-fns/format";
 
 import { Button } from "..";
+import Form from "react-jsonschema-form";
 
 // bouton connecté à redux-modal.show pour EditMesure
 const CellEditMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
@@ -148,7 +149,7 @@ const COLUMNS = [
     id: "annee",
     width: 80,
     accessor: "annee",
-    Cell: row => <div>{row.row.annee && format(row.row.annee, "YYYY") || null}</div>,
+    Cell: row => <div>{(row.row.annee && format(row.row.annee, "YYYY")) || null}</div>,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -213,9 +214,28 @@ const COLUMNS = [
   }
 ];
 
+const schema = {
+  type: "object",
+  properties: {
+    search: {
+      type: "string"
+    }
+  }
+};
+
+const uiSchema = {
+  search: {
+    "ui:placeholder": "Numéro dossier",
+    "ui:options": {
+      label: false
+    }
+  }
+};
+
 class TableMesures extends React.Component {
   state = {
     data: [],
+    newData: [],
     loading: false
   };
   fetchData = (state, instance) => {
@@ -242,30 +262,63 @@ class TableMesures extends React.Component {
   componentDidMount() {
     this.fetchData();
   }
+
+  onChange = formData => {
+    const newData = this.state.data.filter(
+      datum => datum.numero_dossier && datum.numero_dossier.includes(formData.formData.search)
+    );
+    this.setState({
+      newData: newData
+    });
+  };
+
   render() {
-    const { data, loading } = this.state;
+    const { data, loading, newData } = this.state;
     const { hideColumns } = this.props;
     return (
-      <ReactTable
-        style={{ backgroundColor: "white", minHeight: 500 }}
-        columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
-        noDataText="Aucune mesure ici..."
-        showPagination={false}
-        minRows={0}
-        pageSize={1000}
-        data={data}
-        sortable={true}
-        multiSort={false}
-        defaultSorted={[
-          {
-            id: "date_ouverture",
-            desc: true
-          }
-        ]}
-        loading={loading}
-        loadingText="Chargement des mesures..."
-        className="-striped -highlight"
-      />
+      <>
+        <div style={{ textAlign: "right" }}>
+          <Form
+            schema={schema}
+            uiSchema={uiSchema}
+            onSubmit={this.onChange}
+            style={{
+              textAlign: "right",
+              display: "flex",
+              flexDirection: "row",
+              height: "30px"
+            }}
+          >
+            <Button
+              type="submit"
+              className="btn btn-success"
+              style={{ flex: "0 1 auto", height: "35px" }}
+            >
+              Filtrer
+            </Button>
+          </Form>
+        </div>
+        <ReactTable
+          style={{ backgroundColor: "white", minHeight: 500 }}
+          columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
+          noDataText="Aucune mesure ici..."
+          showPagination={false}
+          minRows={0}
+          pageSize={1000}
+          data={(newData && newData.length && newData) || data}
+          sortable={true}
+          multiSort={false}
+          defaultSorted={[
+            {
+              id: "date_ouverture",
+              desc: true
+            }
+          ]}
+          loading={loading}
+          loadingText="Chargement des mesures..."
+          className="-striped -highlight"
+        />
+      </>
     );
   }
 }
