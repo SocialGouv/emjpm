@@ -11,7 +11,7 @@ const ReactivateMesure = ({ show, handleHide, onSubmit, id, mandataire_id, ...pr
   return (
     <Layout show={show} handleHide={handleHide}>
       <div style={{ textAlign: "center", marginTop: 50 }}>
-        <h3>Réactiver la mesure? </h3>
+        <h3>Voulez-vous réactiver la mesure ? </h3>
         <br />
         <br />
         <div style={{ margin: "20px 0", textAlign: "center" }}>
@@ -19,7 +19,7 @@ const ReactivateMesure = ({ show, handleHide, onSubmit, id, mandataire_id, ...pr
             data-cy="button-modal-reactivate-mesure"
             onClick={() => onSubmit({ id: id, mandataire_id: mandataire_id })}
           >
-            Réactiver la Mesure
+            Cliquez ici
           </Button>
         </div>
       </div>
