@@ -2,7 +2,7 @@ import * as React from "react";
 import Router from "next/router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {Info, MinusSquare} from "react-feather";
+import { MinusSquare } from "react-feather";
 import { show } from "redux-modal";
 
 import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";

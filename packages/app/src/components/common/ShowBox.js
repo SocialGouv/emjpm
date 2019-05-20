@@ -4,16 +4,11 @@ export const DispoMagistrat = ({ currentDispos }) => (
   <>
     {currentDispos > 0 ? (
       <div>
-        <SucessBox
-          message={`Les magistrats voient que ${currentDispos} peuvent vous être attribuées.`}
-        />
+        <SucessBox message={`${currentDispos} mesures supplémentaires peuvent m'être confiées.`} />
       </div>
     ) : currentDispos ? (
       <div>
-        <ErrorBox
-          message={`Les magistrats voient que le nombre de mesures dépasse
-          le nombre souhaité de ${currentDispos} mesures.`}
-        />
+        <ErrorBox message={`${currentDispos} mesures supplémentaires peuvent m'être confiées.`} />
       </div>
     ) : (
       ""
@@ -33,7 +28,7 @@ export const Alert = ({ className, Icon, message }) =>
     <div
       className={`alert ${className || ""}`}
       role="alert"
-      style={{ marginTop: 20, marginLeft: 20, fontSize: "1.2em" }}
+      style={{ marginTop: 10, fontSize: "1.2em", borderRadius: "0px" }}
     >
       <Icon
         style={{

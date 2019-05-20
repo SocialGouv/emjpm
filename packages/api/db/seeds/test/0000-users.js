@@ -20,7 +20,7 @@ const USERS = [
     type: "individuel",
     active: true,
     prenom: "Adrien",
-    email: "ud@ud.com"
+    email: "ud@ud.com",
   },
   {
     username: "kelly",
@@ -34,7 +34,8 @@ const USERS = [
     username: "service1",
     password: "service1",
     type: "service",
-    active: true
+    active: true,
+    service_id: 1
   },
   {
     username: "admin",

@@ -44,51 +44,6 @@ const defaultRegister = {
   longitude: 2
 };
 
-const serviceRegister = {
-  username: "servicetest",
-  nom: "servicetestAd",
-  prenom: "servicetestPrenom",
-  etablissement: "",
-  email: "servicetest@toto.com",
-  type: "service",
-  pass1: "secret1",
-  pass2: "secret1",
-  adresse: "",
-  code_postal: "75010",
-  ville: "",
-  telephone: "",
-  latitude: 2,
-  longitude: 2,
-  antennes: [
-    {
-      nom: "servicetestAntenneAd",
-      prenom: "servicetestAntennePrenom",
-      etablissement: "",
-      email: "servicetestAntenne@toto.com",
-      adresse: "",
-      code_postal: "75010",
-      ville: "",
-      telephone: "",
-      latitude: 2,
-      longitude: 2,
-      dispo_max: 34
-    },
-    {
-      nom: "servicetestAntenne1Ad",
-      prenom: "servicetestAntenne1Prenom",
-      etablissement: "",
-      email: "servicetestAntenne1@toto.com",
-      adresse: "",
-      code_postal: "75010",
-      ville: "",
-      telephone: "",
-      latitude: 2,
-      longitude: 2,
-      dispo_max: 56
-    }
-  ]
-};
-
 const simpler = ({ created_at, ...props }) => props;
 
 test("should register with good values", async () => {
@@ -194,32 +149,6 @@ test("should add mandataire tis", async () => {
     .first();
   const tis = await getAllTisByMandataire(mandataire.id);
   expect(tis.map(ti => ti.id)).toEqual([1, 2]);
-});
-
-test("should add mandataire service tis", async () => {
-  await request(server)
-    .post("/api/v1/inscription/mandataires")
-    .send({
-      ...serviceRegister,
-      tis: [1, 2]
-    });
-
-  const user = await knex
-    .table("users")
-    .where("email", "servicetest@toto.com")
-    .first();
-
-  const mandataires = await getAllMandatairesByUserId(user.id);
-  const service = await knex
-    .table("services")
-    .orderBy("created_at", "desc")
-    .first();
-  expect(mandataires.map(mandataire => mandataire.contact_email)).toEqual([
-    "servicetest@toto.com",
-    "servicetestAntenne@toto.com",
-    "servicetestAntenne1@toto.com"
-  ]);
-  expect(simpler(service)).toMatchSnapshot();
 });
 
 test("should add user tis", async () => {

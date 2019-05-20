@@ -16,22 +16,6 @@ const schema = {
     "ville",
     "dispo_max"
   ],
-  definitions: {
-    Antenne: {
-      type: "object",
-      properties: {
-        etablissement: { type: "string", title: "Nom de l'antenne", default: "" },
-        email: { type: "string", format: "email", title: "email", default: "" },
-        nom: { type: "string", title: "Nom contact dans l'antenne", default: "" },
-        prenom: { type: "string", title: "Prenom contact dans l'antenne", default: "" },
-        telephone: { type: "string", title: "Telephone contact dans l'antenne", default: "" },
-        adresse: { type: "string", title: "Adresse dans l'antenne", default: "" },
-        code_postal: { type: "string", title: "Code postal contact dans l'antenne", default: "" },
-        ville: { type: "string", title: "Ville dans l'antenne", default: "" },
-        dispo_max: { type: "integer", title: "Nombre mesure maximum pour l'antenne", default: 0 }
-      }
-    }
-  },
   properties: {
     email: { type: "string", format: "email", default: "" },
     pass1: { type: "string", minLength: 8 },
@@ -43,14 +27,7 @@ const schema = {
     adresse: { type: "string", default: "" },
     code_postal: { type: "string", default: "" },
     ville: { type: "string", default: "" },
-    dispo_max: { type: "integer", default: 0 },
-    antennes: {
-      type: "array",
-      title: "Antennes",
-      items: {
-        $ref: "#/definitions/Antenne"
-      }
-    }
+    dispo_max: { type: "integer", default: 0 }
   }
 };
 
@@ -75,41 +52,6 @@ const serviceUiSchema = {
     ...uiSchema.etablissement,
     "ui:title": "Nom du service",
     "ui:placeholder": "ex: CHU de Nanterre"
-  },
-  antennes: {
-    // note the "items" for an array
-    items: {
-      nom: {
-        "ui:placeholder": "Nom"
-      },
-      dispo_max: {
-        "ui:placeholder": "Mesures souhaitées"
-      },
-      prenom: {
-        "ui:placeholder": "Prénom"
-      },
-      telephone: {
-        "ui:placeholder": "ex: 0342734887",
-        "ui:options": {
-          inputType: "tel"
-        }
-      },
-      email: {
-        "ui:placeholder": "ex: nom.prenom@orange.fr"
-      },
-      adresse: {
-        "ui:placeholder": "ex: 37 avenue de la république"
-      },
-      code_postal: {
-        "ui:placeholder": "ex: 89100"
-      },
-      ville: {
-        "ui:placeholder": "Commune"
-      },
-      etablissement: {
-        "ui:placeholder": "Nom de l'antenne"
-      }
-    }
   }
 };
 

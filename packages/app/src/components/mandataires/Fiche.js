@@ -53,12 +53,6 @@ const FicheMandataire = ({
           {adresse} {code_postal} {ville}
         </div>
       )}
-      {zip && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
-          <Info style={iconStyle} />
-          {zip}
-        </div>
-      )}
       <br />
       <table style={{ width: 300 }} cellPadding={5}>
         <tbody style={{ fontSize: "1.1em" }}>
