@@ -172,7 +172,7 @@ class ServiceTabsAntennes extends React.Component {
         )
       },
       {
-        text: "Mesures éteintes",
+        text: "Fins de mandats",
         url: "/mandataires/mesures/eteintes",
         icon: <UserMinus />,
         content: (
@@ -192,7 +192,7 @@ class ServiceTabsAntennes extends React.Component {
         )
       },
       {
-        text: "Mesures réservées",
+        text: "Mesures en attente",
         url: "/mandataires/mesures/en-attente",
         icon: <Clock />,
         content: (
