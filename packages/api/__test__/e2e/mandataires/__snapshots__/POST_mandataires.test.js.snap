@@ -7,6 +7,7 @@ Object {
   "contact_email": "totoManda@toto.com",
   "contact_nom": "testMandaAd",
   "contact_prenom": "testPrenom",
+  "cv": null,
   "date_mesure_update": null,
   "dispo_max": null,
   "email_send": null,

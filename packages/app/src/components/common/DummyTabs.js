@@ -18,6 +18,7 @@ const IconWrapper = styled.div`
 const StyledTab = styled(Tab)`
   background-color: #ebeff2;
   padding: 10px 15px;
+  margin-top: 20px
   top: 0;
   line-height: 42px;
   border: 0;
