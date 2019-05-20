@@ -46,8 +46,6 @@ const defaultRegister = {
 
 const simpler = ({ created_at, ...props }) => props;
 
-const simpler = ({ created_at, ...props }) => props;
-
 test("should register with good values", async () => {
   const response = await request(server)
     .post("/api/v1/inscription/mandataires")

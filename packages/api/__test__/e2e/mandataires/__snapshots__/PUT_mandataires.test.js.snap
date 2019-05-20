@@ -8,6 +8,7 @@ Object {
   "contact_nom": null,
   "contact_prenom": null,
   "created_at": Any<String>,
+  "cv": null,
   "date_mesure_update": null,
   "dispo_max": 5,
   "email": "test@email.com",

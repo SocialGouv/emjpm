@@ -44,7 +44,8 @@ exports.seed = (knex, Promise) => {
           active: true,
           email: "individuel2@individuel.com",
           nom: "nom individuel2",
-          prenom: "prenom individuel2"
+          prenom: "prenom individuel2",
+          service_id: 1
         })
       );
     })

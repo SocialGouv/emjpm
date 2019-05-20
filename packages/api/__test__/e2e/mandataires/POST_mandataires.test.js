@@ -23,7 +23,8 @@ const defaultRegister = {
   adresse: "",
   code_postal: "75010",
   ville: "",
-  telephone: ""
+  telephone: "",
+  tis:[1]
 };
 
 const simpler = ({ created_at, ...props }) => props;

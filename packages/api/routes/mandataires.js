@@ -16,7 +16,7 @@ const {
   getAllMandataires,
   getAllByMandatairesFilter,
   getCoordonneesByPostCode,
-  getServiceByMandataire,
+  getParentService,
   updateService,
   getAllMandatairesByUserId,
   findMandataire
@@ -30,7 +30,10 @@ const { updateUser } = require("../db/queries/users");
 
 const { getTiByUserId } = require("../db/queries/tis");
 
-const { createMandataire } = require("../db/queries/inscription");
+const {
+  createMandataire,
+  createMandataireTi
+} = require("../db/queries/inscription");
 
 // récupère les données d'un mandataire
 
@@ -496,11 +499,12 @@ router.put(
 
 router.get("/service", typeRequired("service"), async (req, res, next) => {
   try {
-    const mandataire = await getMandataireByUserId(req.user.id);
-    if (!mandataire) {
-      throw createError.Unauthorized(`Mandataire not found`);
+    const service = await getParentService(req.user.service_id);
+    if (!service) {
+      throw createError.Unauthorized(
+        `Service not found: ${req.user.service_id}`
+      );
     }
-    const service = await getServiceByMandataire(mandataire.service_id);
     res.status(200).json(service);
   } catch (err) {
     next(err);
@@ -512,12 +516,12 @@ router.put(
   typeRequired("service"),
   async (req, res, next) => {
     try {
-      const service = await getServiceByMandataire(req.body.id);
+      const service = await getParentService(req.body.id);
       if (req.user.id !== service.userId) {
         throw createError.Unauthorized(`Service not found`);
       }
       await updateService(req.body.id, whiteListSiegeSocial(req.body));
-      const serviceUpdated = await getServiceByMandataire(req.body.id);
+      const serviceUpdated = await getParentService(req.body.id);
       res.status(200).json(serviceUpdated);
     } catch (err) {
       next(err);
@@ -542,38 +546,53 @@ router.get(
 );
 
 router.post("/", typeRequired("service"), async (req, res, next) => {
-  const {
-    etablissement,
-    contact_nom,
-    contact_prenom,
-    telephone,
-    telephone_portable,
-    contact_email,
-    adresse,
-    code_postal,
-    ville,
-    service_id,
-    dispo_max
-  } = req.body;
+  try {
+    const {
+      etablissement,
+      contact_nom,
+      contact_prenom,
+      telephone,
+      telephone_portable,
+      contact_email,
+      adresse,
+      code_postal,
+      ville,
+      service_id,
+      dispo_max,
+      tis
+    } = req.body;
 
-  return createMandataire({
-    user_id: req.user.id,
-    etablissement,
-    telephone,
-    telephone_portable,
-    adresse,
-    code_postal,
-    ville,
-    contact_nom,
-    contact_prenom,
-    contact_email,
-    service_id,
-    dispo_max
-  })
-    .then(() => res.json({ success: true }))
-    .catch(e => {
-      next(e);
+    const mandataire = await createMandataire({
+      user_id: req.user.id,
+      etablissement,
+      telephone,
+      telephone_portable,
+      adresse,
+      code_postal,
+      ville,
+      contact_nom,
+      contact_prenom,
+      contact_email,
+      service_id,
+      dispo_max
     });
+
+    if (!tis || tis.length === 0) {
+      return true;
+    }
+    await Promise.all(
+      tis.map(ti_id =>
+        createMandataireTi({
+          mandataire_id: mandataire[0],
+          ti_id
+        })
+      )
+    );
+
+    res.json({ success: true });
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.use("/", require("./commentaires"));
