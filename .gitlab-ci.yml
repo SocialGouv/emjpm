@@ -191,9 +191,10 @@ E2E Test @optional/e2e:
     expire_in: 1 week
     when: always
     paths:
-    - /app/e2e/cypress/screenshots
-    - /app/e2e/cypress/videos
+    - ../../app/e2e/cypress/screenshots
+    - ../../app/e2e/cypress/videos
   script:
+    - pwd
     # Database on localhost:5434
     - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
     # API on localhost:4000
