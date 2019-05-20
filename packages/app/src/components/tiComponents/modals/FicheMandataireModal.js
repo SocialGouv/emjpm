@@ -154,6 +154,8 @@ class FicheMandataireModal extends React.Component {
                 />
                 <br />
                 <b>Antennes</b>
+                <br />
+                <b>{currentMandataire.etablissement}</b>
               </React.Fragment>
             )}
             <FicheMandataire

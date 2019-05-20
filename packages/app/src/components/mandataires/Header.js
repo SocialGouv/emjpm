@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 import DisplayDate from "../communComponents/formatFrenchDate";
+import { Mail } from "react-feather";
 
 const ContainerMandataire = styled.div`
   padding: 10px 0;
@@ -13,46 +14,83 @@ const Title = styled.div`
   color: black;
   font-size: 1.5em;
   margin: 10px 0;
-  text-transform: uppercase;
 `;
 
-const HeaderMandataire = ({ profiles, handleClick }) => {
-  const fullName = `${(profiles && profiles.nom) || ""} ${(profiles && profiles.prenom) || ""}`;
+const HeaderMandataire = ({
+  nom = "",
+  prenom = "",
+  date_mesure_update,
+  type,
+  etablissement,
+  dispo_max,
+  mesures_en_cours,
+  mesures_en_attente,
+  profiles,
+  handleClick,
+  user,
+  service
+}) => {
+  const currentDispos = dispo_max - mesures_en_cours - mesures_en_attente || null;
+
+  const fullName = `${nom || ""} ${prenom || ""}`;
+
+  const SiegeSocial = styled.div`
+    border-bottom: 1px solid #53657d;
+    padding-top: 5px
+    padding-bottom: 10px;
+    text-transform: none;
+    font-size: 0.5em;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    color: #53657d
+  `;
+
+  const iconStyle = { width: 22, height: 22, marginRight: 10 };
   return (
     <ContainerMandataire className="container">
       <Title>
-        {profiles && profiles.type === "service" ? (
+        {user && user.type === "service" ? (
           <div>
-            {profiles.etablissement}{" "}
-            <a href="#" onClick={handleClick} style={{ fontSize: "0.6em" }}>
-              {" "}
-              Informations du service
-            </a>
+            <b style={{ fontSize: "2em" }}>{service.etablissement} </b> <br />
+            <SiegeSocial>
+              <div style={{ flex: "1 0 auto" }}>
+                Nombre total de mesures souhaitées : {service.dispo_max} mesures &nbsp; &nbsp;
+                {service.email}
+                <a
+                  href="#"
+                  onClick={handleClick}
+                  style={{ flex: "1 0 auto", textAlign: "left", paddingLeft: "10px" }}
+                >
+                  {" "}
+                  Toutes les informations
+                </a>
+              </div>
+
+              <div style={{ textAlign: "right", fontSize: "1em", color: "#53657d" }}>
+                {profiles &&
+                  profiles.date_mesure_update && (
+                    <div>
+                      Dernière mise à jour :{" "}
+                      <DisplayDate date={profiles && profiles.date_mesure_update.slice(0, 10)} />
+                    </div>
+                  )}
+              </div>
+            </SiegeSocial>
           </div>
         ) : (
-          fullName
+          <div>{fullName}</div>
         )}
       </Title>
-      <div style={{ textAlign: "right", fontSize: "0.8em", color: "#555" }}>
-        {profiles &&
-          profiles.date_mesure_update && (
-            <div>
-              Dernière mise à jour :{" "}
-              <DisplayDate date={profiles && profiles.date_mesure_update.slice(0, 10)} />
-            </div>
-          )}
-      </div>
     </ContainerMandataire>
   );
 };
 
 const HeaderMandataireRedux = connect(state => ({
   profiles:
-    state.mandataire.profiles &&
-    state.mandataire.profiles[0] &&
-    state.mandataire.profiles[0].type === "service"
-      ? state.mandataire.service
-      : state.mandataire.profiles[0]
+    state.mandataire.profiles && state.mandataire.profiles[0] && state.mandataire.profiles[0],
+  service: state.mandataire.service,
+  user: state.mandataire.user
 }))(HeaderMandataire);
 
 export default HeaderMandataireRedux;

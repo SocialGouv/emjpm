@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 
 import { updateMandataire } from "../actions/mandataire";
 import Layout from "../../communComponents/ModalLayout";
+import { ErrorBox } from "../../common/ShowBox";
 
 const schema = {
   title: "Modifier vos informations",
@@ -81,25 +82,64 @@ const uiSchema = {
   }
 };
 
-const EditService = ({ show, handleHide, formData, onSubmit, ...props }) => {
-  return (
-    <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
-      <Form schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>
-        <div style={{ margin: "20px 0", textAlign: "center" }}>
-          <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
-            Valider
-          </button>
-        </div>
-      </Form>
-    </Layout>
-  );
-};
+class EditService extends React.Component {
+  onSubmitted = async ({ formData }) => {
+    this.props.onSubmit({
+      formData
+    });
+  };
+
+  render() {
+    const validate = (formData, errors) => {
+      let number = 0;
+      this.props.profiles.map(profile => {
+        let dispo_max =
+          this.props.mandataireId === profile.id ? formData.dispo_max : profile.dispo_max;
+        number = number + dispo_max;
+      });
+      if (number > this.props.service.dispo_max) {
+        errors.dispo_max.addError(
+          "Vous ne pouvez pas dépasser votre nombre total de mesures souhaitées de votre service"
+        );
+      }
+      return errors;
+    };
+
+    return (
+      <Layout
+        show={this.props.show}
+        handleHide={this.props.handleHide}
+        className="FicheMandataireModal"
+      >
+        <Form
+          schema={schema}
+          uiSchema={uiSchema}
+          formData={this.props.formData}
+          onSubmit={this.onSubmitted}
+          validate={validate}
+          showErrorList={false}
+        >
+          <div style={{ margin: "20px 0", textAlign: "center" }}>
+            <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
+              Valider
+            </button>
+          </div>
+        </Form>
+      </Layout>
+    );
+  }
+}
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ onSubmit: ({ formData }) => updateMandataire(formData) }, dispatch);
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "EditService", destroyOnHide: true })(EditService)
-);
+export default connect(
+  state => ({
+    profiles: state.mandataire.profiles,
+    mandataireId: state.mandataire.mandataireId,
+    service: state.mandataire.service
+  }),
+  mapDispatchToProps
+)(connectModal({ name: "EditService", destroyOnHide: true })(EditService));

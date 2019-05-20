@@ -127,6 +127,7 @@ const EditMandataire = ({ show, handleHide, formData, onSubmit, ...props }) => {
     dispo_max: formData.dispo_max || 0,
     ville: formData.ville || ""
   };
+
   return (
     <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
       <Form schema={schema} uiSchema={uiSchema} formData={cleanData} onSubmit={onSubmit}>

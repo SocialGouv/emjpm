@@ -5,7 +5,7 @@ import { show } from "redux-modal";
 
 import { Button } from "..";
 
-import { updateMandataire } from "./actions/mandataire";
+import { updateService } from "./actions/mandataire";
 import Fiche from "./Fiche";
 
 const ButtonEditMandataire = connect(
@@ -28,24 +28,6 @@ const ButtonEditMandataire = connect(
     </Button>
   </>
 ));
-
-const AjoutAntenne = connect(
-  state => ({
-    service: state.mandataire.service
-  }),
-  dispatch => bindActionCreators({ show }, dispatch)
-)(({ formData, show, service }) => (
-  <>
-    <a
-      href="#"
-      data-cy="button-edit-profile"
-      style={{ marginLeft: 0, fontSize: "1em" }}
-      onClick={() => show("AddAntennes")}
-    >
-      Ajout d'une antenne
-    </a>
-  </>
-));
 class ServiceSiegeSocial extends React.Component {
   render() {
     const service = this.props.service;
@@ -54,8 +36,6 @@ class ServiceSiegeSocial extends React.Component {
         <div style={{ flex: "0 0 50%" }}>
           <h3>Mes coordonnées</h3>
           <Fiche {...service} />
-          <br />
-          <AjoutAntenne />
           <br />
           <br />
           <ButtonEditMandataire formData={service} />
@@ -77,7 +57,7 @@ class ServiceSiegeSocial extends React.Component {
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) =>
-  bindActionCreators({ updateMandataire: data => updateMandataire(data) }, dispatch);
+  bindActionCreators({ updateService: data => updateService(data) }, dispatch);
 const ServiceSiegeSocialRedux = connect(
   state => ({
     service: state.mandataire.service
