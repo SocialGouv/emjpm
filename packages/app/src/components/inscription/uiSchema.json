@@ -21,8 +21,8 @@
     "ui:placeholder": "Genre"
   },
   "dispo_max": {
-    "ui:title": "Mesures souhaitées",
-    "ui:placeholder": "Mesures souhaitées"
+    "ui:title": "Nombre total de mesures souhaitées",
+    "ui:placeholder": "Nombre total de mesures souhaitées"
   },
   "mesures_en_cours": {
     "ui:title": "Mesures en cours",

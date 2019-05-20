@@ -32,7 +32,7 @@ const schema = {
     ville: { type: "string", title: "Commune", default: "" },
     dispo_max: {
       type: "integer",
-      title: "Nombre de mesures souhaitées"
+      title: "Nombre total de mesures souhaitées"
     },
     secretariat: {
       type: "boolean",
