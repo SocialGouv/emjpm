@@ -185,6 +185,13 @@ E2E Test @optional/e2e:
       command: ["-p", "5434"]
   variables:
     CYPRESS_baseUrl: "http://localhost:80"
+
+    # NOTE(douglasduteil): Move the screenshots and videos to an artifact friendly place <3
+    # As Gitlab artifacts paths seems to only support relative path, I copy the
+    # screenshots and videos folder to the relative project directory
+    CYPRESS_screenshotsFolder: $CI_PROJECT_DIR/optional/e2e/cypress/screenshots
+    CYPRESS_videosFolder: $CI_PROJECT_DIR/optional/e2e/cypress/videos
+
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
   artifacts:
@@ -194,7 +201,7 @@ E2E Test @optional/e2e:
     - optional/e2e/cypress/screenshots
     - optional/e2e/cypress/videos
   script:
-    - pwd
+    - mkdir -p $CI_PROJECT_DIR/optional/e2e/cypress
     # Database on localhost:5434
     - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
     # API on localhost:4000
@@ -208,11 +215,3 @@ E2E Test @optional/e2e:
     #
     - cd /app/e2e
     - yarn cypress run
-
-    # NOTE(douglasduteil): Move the screenshots and videos to an artifact friendly place <3
-    # As Gitlab artifacts paths seems to only support relative path, I copy the
-    # screenshots and videos folder to the relative project directory
-    - export CONTEXT=optional/e2e/cypress
-    - mkdir -p $CI_PROJECT_DIR/$CONTEXT
-    - cp -r /app/$CONTEXT/screenshots $CI_PROJECT_DIR/$CONTEXT/screenshots
-    - cp -r /app/$CONTEXT/videos $CI_PROJECT_DIR/$CONTEXT/videos
