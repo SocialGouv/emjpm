@@ -191,8 +191,8 @@ E2E Test @optional/e2e:
     expire_in: 1 week
     when: always
     paths:
-    - ../../app/e2e/cypress/screenshots
-    - ../../app/e2e/cypress/videos
+    - optional/e2e/cypress/screenshots
+    - optional/e2e/cypress/videos
   script:
     - pwd
     # Database on localhost:5434
@@ -208,3 +208,11 @@ E2E Test @optional/e2e:
     #
     - cd /app/e2e
     - yarn cypress run
+
+    # NOTE(douglasduteil): Move the screenshots and videos to an artifact friendly place <3
+    # As Gitlab artifacts paths seems to only support relative path, I copy the
+    # screenshots and videos folder to the relative project directory
+    - export CONTEXT=optional/e2e/cypress
+    - mkdir -p $CI_PROJECT_DIR/$CONTEXT
+    - cp -r /app/$CONTEXT/screenshots $CI_PROJECT_DIR/$CONTEXT/screenshots
+    - cp -r /app/$CONTEXT/videos $CI_PROJECT_DIR/$CONTEXT/videos
