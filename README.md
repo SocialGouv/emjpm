@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.com/SocialGouv/emjpm.svg?branch=master)](https://travis-ci.com/SocialGouv/emjpm)
 [![codecov](https://codecov.io/gh/SocialGouv/emjpm/branch/master/graph/badge.svg)](https://codecov.io/gh/SocialGouv/emjpm)
 
-
 ## E2E tests
 
 The e2e tests are using the latest deployed `socialgouv/emjpm-*` images by default.
@@ -21,14 +20,14 @@ $ yarn run -- lerna --scope @optional/e2e run cypress:run -- --headed
 
 ## FAQ
 
-- *If you have the `Can't take lock to run migrations: Migration table is already locked` error*
+- _If you have the `Can't take lock to run migrations: Migration table is already locked` error_
 
 ```sh
 $ docker-compose exec db psql -U postgres -d emjpm_test -c 'UPDATE knex_migrations_lock set is_locked=0;'
 UPDATE 1
 ```
 
-- *If you have migration error*
+- _If you have migration error_
 
 ```sh
 $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.dev.yaml exec api yarn knex migrate:rollback
@@ -71,3 +70,23 @@ $ CONVENTIONAL_GITHUB_RELEASER_TOKEN==************ npx conventional-github-relea
 #
 # You might want to add a Gif to your release to make it groovy ;)
 ```
+
+### Branch name
+
+You need to name your branch with the commit lint convention
+
+```
+***/***-***
+```
+
+- build
+- ci
+- chore
+- docs
+- feat
+- fix
+- perf
+- refactor
+- revert
+- style
+- test

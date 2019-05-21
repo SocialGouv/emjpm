@@ -1,5 +1,7 @@
 {
+  "name": "@socialgouv/empjm",
   "private": true,
+  "description": "Trouver rapidement le bon professionnel pour les majeurs à protéger",
   "scripts": {
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
