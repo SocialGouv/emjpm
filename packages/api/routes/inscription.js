@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
-
+const createError = require("http-errors");
 const salt = bcrypt.genSaltSync();
 
 const router = express.Router();
@@ -154,9 +154,15 @@ const { getCountByEmail } = require("../db/queries/users");
  *               items:
  *                 $ref: '#/components/schemas/InscriptionTi'
  */
-router.get("/tis", (req, res, next) =>
-  queries.getTiByRegion().then(data => res.json(data))
-);
+
+router.get("/tis", async (req, res, next) => {
+  try {
+    const data = await queries.getTiByRegion();
+    res.json(data);
+  } catch (e) {
+    next(e);
+  }
+});
 
 /**
  * @swagger
@@ -177,39 +183,35 @@ router.get("/tis", (req, res, next) =>
  *
  */
 router.post("/mandataires", async (req, res, next) => {
-  const {
-    username,
-    etablissement,
-    pass1,
-    pass2,
-    type, // TODO
-    nom,
-    prenom,
-    telephone,
-    telephone_portable,
-    email,
-    adresse,
-    code_postal,
-    ville,
-    tis,
-    dispo_max
-  } = req.body;
-
   try {
+    const {
+      username,
+      etablissement,
+      pass1,
+      pass2,
+      type, // TODO
+      nom,
+      prenom,
+      telephone,
+      telephone_portable,
+      email,
+      adresse,
+      code_postal,
+      ville,
+      tis,
+      dispo_max
+    } = req.body;
+
     if (pass1 !== pass2 || username.trim() === "") {
-      return res.status(500).json({
-        success: false,
-        message: "Les mots de passe ne sont pas conformes"
-      });
+      throw createError.UnprocessableEntity(
+        "Les mots de passe ne sont pas conformes"
+      );
     }
 
     const userExists = (await getCountByEmail(email)).count > 0;
 
     if (userExists) {
-      return res.status(409).json({
-        success: false,
-        message: "Un compte avec cet email existe déjà"
-      });
+      throw createError.Conflict("Un compte avec cet email existe déjà");
     }
 
     await knex.transaction(async function(trx) {
