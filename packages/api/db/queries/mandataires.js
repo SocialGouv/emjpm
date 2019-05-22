@@ -353,7 +353,6 @@ module.exports = {
   getAllMandataires,
   getAllByMandatairesFilter,
   update,
-  getCoordonneesByPostCode,
   getAllMandatairesByUserId,
   getParentService,
   updateService,

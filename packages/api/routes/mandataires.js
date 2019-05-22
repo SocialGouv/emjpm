@@ -15,7 +15,6 @@ const {
   getAllServicesByTis,
   getAllMandataires,
   getAllByMandatairesFilter,
-  getCoordonneesByPostCode,
   getParentService,
   updateService,
   getAllMandatairesByUserId,
