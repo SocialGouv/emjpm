@@ -11,7 +11,6 @@ const {
 
 const { getMandataireByUserId } = require("../db/queries/mandataires");
 
-
 /*
  * @swagger
  * mandataires/1/etablissement:
@@ -37,7 +36,6 @@ router.get("/1/etablissement", loginRequired, async (req, res, next) => {
     .then(etablissements => res.status(200).json(etablissements))
     .catch(error => next(error));
 });
-
 
 //ToDo rm
 
@@ -162,7 +160,6 @@ router.delete(
       });
   }
 );
-
 
 // Change location of this routes
 /** @swagger
