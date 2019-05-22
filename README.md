@@ -13,7 +13,6 @@ $ yarn
 # This will trigger some build on the `postinstall` script
 ```
 
-
 ## E2E tests
 
 The e2e tests are using the latest deployed `socialgouv/emjpm-*` images by default.
@@ -31,14 +30,14 @@ $ yarn run -- lerna --scope @optional/e2e run cypress:run -- --headed
 
 ## FAQ
 
-- *If you have the `Can't take lock to run migrations: Migration table is already locked` error*
+- _If you have the `Can't take lock to run migrations: Migration table is already locked` error_
 
 ```sh
 $ docker-compose exec db psql -U postgres -d emjpm_test -c 'UPDATE knex_migrations_lock set is_locked=0;'
 UPDATE 1
 ```
 
-- *If you have migration error*
+- _If you have migration error_
 
 ```sh
 $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.dev.yaml exec api yarn knex migrate:rollback
@@ -81,3 +80,29 @@ $ CONVENTIONAL_GITHUB_RELEASER_TOKEN==************ npx conventional-github-relea
 #
 # You might want to add a Gif to your release to make it groovy ;)
 ```
+
+## Branch name
+
+You need to name your branch with the commit lint convention
+
+branch name template:
+
+```
+type/***-***
+```
+
+### Type
+
+Must be one of the following:
+
+- **build**: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- **ci**: Changes to our CI configuration files and scripts (example scopes: Circle, BrowserStack, SauceLabs)
+- **docs**: Documentation only changes
+- **feat**: A new feature
+- **fix**: A bug fix
+- **perf**: A code change that improves performance
+- **refactor**: A code change that neither fixes a bug nor adds a feature
+- **style**: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
+- **test**: Adding missing tests or correcting existing tests
+
+as a reference see https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-angular
