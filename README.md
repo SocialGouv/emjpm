@@ -3,6 +3,16 @@
 [![Build Status](https://travis-ci.com/SocialGouv/emjpm.svg?branch=master)](https://travis-ci.com/SocialGouv/emjpm)
 [![codecov](https://codecov.io/gh/SocialGouv/emjpm/branch/master/graph/badge.svg)](https://codecov.io/gh/SocialGouv/emjpm)
 
+## Installation
+
+Make sure you're using NodeJS 10.15
+
+```sh
+# Install all the packages
+$ yarn
+# This will trigger some build on the `postinstall` script
+```
+
 
 ## E2E tests
 

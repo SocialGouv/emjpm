@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "postinstall": "yarn build --stream --ignore @{emjpm,optional}/*",
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
     "lint": "lerna run lint --parallel",
