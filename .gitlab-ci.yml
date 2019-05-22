@@ -195,6 +195,8 @@ E2E Test @optional/e2e:
 
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
+
+    NODE_ENV: test
   artifacts:
     expire_in: 1 week
     when: always
