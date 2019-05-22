@@ -289,8 +289,19 @@ router.post("/mandataires", async (req, res, next) => {
     await inscriptionEmail(nom, prenom, email);
 
     res.json({ success: true });
-  } catch (err) {
-    next(err);
+  } catch (e) {
+    // see https://www.postgresql.org/docs/9.2/errcodes-appendix.html
+    const PQ_UNIQUE_VIOLATION_ERROR_CODE = String(23505);
+
+    switch (e.code) {
+      case PQ_UNIQUE_VIOLATION_ERROR_CODE:
+        next(createError.Conflict(e.detail));
+        break;
+
+      default:
+        next(e);
+        break;
+    }
   }
 });
 /**

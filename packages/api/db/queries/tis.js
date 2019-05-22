@@ -6,6 +6,7 @@ const { getMandataireById } = require("./mandataires");
 
 const getAllTisByMandataire = mandataireId =>
   knex("user_tis")
+    .distinct("user_tis.ti_id")
     .select("tis.id", "tis.etablissement", "user_tis.ti_id")
     .innerJoin("tis", "user_tis.ti_id", "tis.id")
     .innerJoin("mandataires", "mandataires.user_id", "user_tis.user_id")
