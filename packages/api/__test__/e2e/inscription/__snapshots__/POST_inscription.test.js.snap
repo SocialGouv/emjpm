@@ -1,12 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`created user should NOT be active 1`] = `
+Object {
+  "active": false,
+  "cabinet": null,
+  "created_at": Any<Object>,
+  "email": "toto@toto.com",
+  "id": 10,
+  "last_login": null,
+  "nom": "testAd",
+  "password": Any<String>,
+  "prenom": "testPrenom",
+  "reset_password_expires": null,
+  "reset_password_token": null,
+  "service_id": null,
+  "type": "individuel",
+  "username": "toto",
+}
+`;
+
 exports[`should add mandataire tis 1`] = `
 Object {
   "success": true,
 }
 `;
 
-exports[`should send an email with good values 1`] = `
+exports[`should add mandataire tis 2`] = `
 Array [
   Object {
     "from": "ne-pas-repondre@emjpm.gouv.fr",
@@ -58,7 +77,7 @@ Bonne journée :)
 ]
 `;
 
-exports[`should register with good values 2`] = `
+exports[`should send an email with good values 1`] = `
 Array [
   Object {
     "from": "ne-pas-repondre@emjpm.gouv.fr",
@@ -82,22 +101,4 @@ Bonne journée :)
     "to": "contact@emjpm.beta.gouv.fr",
   },
 ]
-`;
-
-exports[`should register with good values 3`] = `
-Object {
-  "active": false,
-  "cabinet": null,
-  "created_at": Any<Object>,
-  "email": "toto@toto.com",
-  "id": 8,
-  "last_login": null,
-  "nom": "testAd",
-  "password": Any<String>,
-  "prenom": "testPrenom",
-  "reset_password_expires": null,
-  "reset_password_token": null,
-  "type": "individuel",
-  "username": "toto",
-}
 `;
