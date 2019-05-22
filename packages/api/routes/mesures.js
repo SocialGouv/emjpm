@@ -143,6 +143,17 @@ router.get("/popup", typeRequired("ti"), async (req, res, next) => {
   } catch (e) {
     next(e);
   }
+<<<<<<< 179fab51f5d0c29a18a45d38f7762fcebe1a084f
+=======
+  getMesuresByGeolocalisation(ti.id, req.query.searchType)
+    .then(function(mesures) {
+      res.status(200).json(mesures);
+    })
+    .catch(function(error) {
+      throw error;
+      next(error);
+    });
+>>>>>>> fix(lint): fix code formating error
 });
 
 /** @swagger
