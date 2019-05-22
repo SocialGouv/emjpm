@@ -1,17 +1,26 @@
 //
 const request = require("supertest");
+const nodemailerMock = require("nodemailer-mock");
+jest.setMock("nodemailer", nodemailerMock);
+
+process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
+process.env.APP_URL = "https://emjpm.gouv.fr";
+
+const { knex } = global;
+jest.setMock("@emjpm/api/db/knex", knex);
 
 const server = require("@emjpm/api/app");
 
-const knex = require("@emjpm/api/db/knex");
 const { getTokenByUserType } = require("../utils");
 
-beforeEach(async () => {
-  await knex.seed.run();
+beforeAll(async () => {
+  await knex.migrate.latest();
 });
 
-afterAll(async () => {
-  await knex.destroy();
+beforeEach(async () => {
+  nodemailerMock.mock.reset();
+  await knex.seed.run();
+
 });
 
 const defaultRegister = {
@@ -24,7 +33,7 @@ const defaultRegister = {
   code_postal: "75010",
   ville: "",
   telephone: "",
-  tis:[1]
+  tis: [1]
 };
 
 const simpler = ({ created_at, ...props }) => props;

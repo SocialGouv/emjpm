@@ -55,7 +55,7 @@ test("should skip existing references", async () => {
     const response = await request(server)
       .post("/api/v1/mandataires/mesures/bulk")
       .set("Authorization", "Bearer " + token)
-      .send([{ numero_dossier: "abc" }]);
+      .send({ sheetData: [{ numero_dossier: "abc" }] });
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot();
@@ -68,7 +68,7 @@ test("should skip existing references", async () => {
     const response = await request(server)
       .post("/api/v1/mandataires/mesures/bulk")
       .set("Authorization", "Bearer " + token)
-      .send([{ numero_dossier: "abc" }, { numero_dossier: "xyz" }]);
+      .send({ sheetData: [{ numero_dossier: "abc" }, { numero_dossier: "xyz" }]});
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot();

@@ -1,17 +1,21 @@
 //
 const request = require("supertest");
+const nodemailerMock = require("nodemailer-mock");
+
+const { knex } = global;
+jest.setMock("@emjpm/api/db/knex", knex);
 
 const server = require("@emjpm/api/app");
 
-const knex = require("@emjpm/api/db/knex");
 const { getTokenByUserType } = require("../utils");
 
-beforeEach(async () => {
+beforeAll(async () => {
+  await knex.migrate.latest();
   await knex.seed.run();
 });
 
-afterAll(async () => {
-  await knex.destroy();
+beforeEach(async () => {
+  nodemailerMock.mock.reset();
 });
 
 const defaultRegister = {
