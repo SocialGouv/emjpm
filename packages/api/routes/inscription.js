@@ -7,8 +7,17 @@ const router = express.Router();
 const knex = require("../db/knex");
 
 const queries = require("../db/queries/inscription");
+const { getTiById } = require("../db/queries/tis");
 const { inscriptionEmail } = require("../email/inscription");
 const { getCountByEmail } = require("../db/queries/users");
+
+const getTisNames = async tis => {
+  const getEtablissementByTi = id =>
+    getTiById(id).then(json => json.etablissement);
+  const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(", ");
+  return tiNames;
+};
+
 /**
  * @swagger
  *
@@ -286,7 +295,10 @@ router.post("/mandataires", async (req, res, next) => {
         );
       }
     });
-    await inscriptionEmail(nom, prenom, email);
+
+    const tiNames = await getTisNames(tis);
+
+    await inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
 
     res.json({ success: true });
   } catch (e) {
@@ -373,8 +385,9 @@ router.post("/tis", (req, res, next) => {
           );
         })
     )
-    .then(() => {
-      return inscriptionEmail(nom, prenom, email);
+    .then(() => getTisNames(tis))
+    .then(tis => {
+      return inscriptionEmail(nom, prenom, email, null, type, tis);
     })
     .then(() => {
       return res.json({ success: true });
