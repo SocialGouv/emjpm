@@ -120,6 +120,9 @@ Test @emjpm/api:
   services:
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
       command: ["-p", "5434"]
+  artifacts:
+    paths:
+      - packages/api/coverage
   variables:
     GIT_STRATEGY: none
     JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/api/coverage
@@ -132,6 +135,9 @@ Test @emjpm/api:
 Test @emjpm/app:
   <<: *quality_stage
   <<: *master_based_stage
+  artifacts:
+    paths:
+      - packages/app/coverage
   variables:
     GIT_STRATEGY: none
     JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/app/coverage
