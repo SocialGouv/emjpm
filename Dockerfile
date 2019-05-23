@@ -5,6 +5,7 @@ FROM node:10-stretch
 ENV TZ Europe/Paris
 RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
+COPY ./lerna.json /app/lerna.json
 COPY ./package.json /app/package.json
 COPY ./packages/jest-environment-knex/package.json /app/packages/jest-environment-knex/package.json
 COPY ./optional/e2e/package.json /app/optional/e2e/package.json
@@ -20,7 +21,6 @@ RUN yarn --frozen-lockfile && yarn cache clean
 
 #
 
-COPY ./lerna.json /app/lerna.json
 COPY ./packages/jest-environment-knex /app/packages/jest-environment-knex
 COPY ./optional/e2e /app/optional/e2e
 COPY ./packages/knex /app/packages/knex
