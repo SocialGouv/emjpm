@@ -17,7 +17,9 @@ _steps:
   - &node_stage
     if: type = pull_request AND NOT env(RELEASE)
     language: node_js
-    node_js: 10
+    node_js: "10"
+    env:
+      - JWT_KEY=JWT_KEY
     before_install:
       - export TZ=Europe/Paris
       - curl -o- -L https://yarnpkg.com/install.sh | bash
