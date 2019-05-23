@@ -7,19 +7,15 @@ const router = express.Router();
 const knex = require("../db/knex");
 
 const queries = require("../db/queries/inscription");
-const { getTisById } = require("../db/queries/tis");
+const { getTiById } = require("../db/queries/tis");
 const { inscriptionEmail } = require("../email/inscription");
 const { getCountByEmail } = require("../db/queries/users");
 
-const getTisNames = tis => {
-  let tiNames = "";
-  return Promise.all(
-    tis.map(ti_id =>
-      getTisById(ti_id).then(json => {
-        return tiNames + " " + json.etablissement;
-      })
-    )
-  );
+const getTisNames = async tis => {
+  const getEtablissementByTi = id =>
+    getTiById(id).then(json => json.etablissement);
+  const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(", ");
+  return tiNames;
 };
 
 /**

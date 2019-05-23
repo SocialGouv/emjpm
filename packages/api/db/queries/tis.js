@@ -40,7 +40,7 @@ const deleteMandataireTis = (tiId, mandataireId) =>
 
 const getTis = () => knex("tis");
 
-const getTisById = tiId =>
+const getTiById = tiId =>
   knex("tis")
     .where({
       id: parseInt(tiId)
@@ -108,5 +108,5 @@ module.exports = {
   getTiByUserIdWithCodePostal,
   getAllTisByMandataireService,
   addServiceTis,
-  getTisById
+  getTiById
 };
