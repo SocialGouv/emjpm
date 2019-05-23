@@ -5,6 +5,9 @@
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
     "lint": "lerna run lint --parallel",
+    "lint:fix": "lerna run lint:fix --parallel",
+    "prettier": "lerna run prettier --parallel",
+    "prettier:fix": "lerna run prettier:fix --parallel",
     "start": "lerna run start --parallel",
     "test": "lerna run test --parallel --ignore @optional/e2e"
   },
