@@ -5,7 +5,7 @@ coverage:
       app:
         flags: app
         paths: packages/app
-        target: 80%
+        # target: 80%
       api:
         flags: api
         paths: packages/api
