@@ -126,6 +126,7 @@ Test @emjpm/api:
   variables:
     GIT_STRATEGY: none
     JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/api/coverage
+    JWT_KEY: JWT_KEY
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
   script:
