@@ -115,7 +115,7 @@ Lint jest-environment-knex:
 #
 
 Test @emjpm/api:
-  <<: *end_to_end_stage
+  <<: *quality_stage
   <<: *master_based_stage
   services:
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
