@@ -161,7 +161,7 @@ Test @emjpm/knex:
 
 Send coverage result:
   stage: "Registration"
-  image: lts-alpine
+  image: node:lts-alpine
   dependencies:
     - Test @emjpm/api
     - Test @emjpm/app
