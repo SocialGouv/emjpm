@@ -13,6 +13,7 @@ version: "3"
 services:
   maildev:
     image: djfarrelly/maildev
+
   api:
     build:
       context: packages/api
@@ -26,6 +27,7 @@ services:
     links:
       - db
       - maildev
+
   frontend:
     env_file: .env.test
     build:
