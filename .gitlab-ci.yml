@@ -28,6 +28,11 @@ variables:
     GIT_STRATEGY: none
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   before_script:
+    # NOTE(douglasduteil): create artifact friendly path <3
+    # As Gitlab artifacts paths seems to only support relative path, I recreate
+    # part of the monorepo structure to be able to share coverage info (for ex.)
+    - mkdir -p $CI_PROJECT_DIR/packages/{api,app}
+    #
     - cd /app
 
 .register_stage: &register_stage
@@ -109,13 +114,29 @@ Lint jest-environment-knex:
 
 #
 
+Test @emjpm/api:
+  <<: *end_to_end_stage
+  <<: *master_based_stage
+  services:
+    - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
+      command: ["-p", "5434"]
+  variables:
+    GIT_STRATEGY: none
+    JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/api/coverage
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: test
+  script:
+    - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
+    - yarn workspace @emjpm/api test --coverage
+
 Test @emjpm/app:
   <<: *quality_stage
   <<: *master_based_stage
+  variables:
+    GIT_STRATEGY: none
+    JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/app/coverage
   script:
     - yarn workspace @emjpm/app test --coverage
-  after_script:
-    - CI_PROJECT_DIR=/app npx codecov -F app
 
 Test @emjpm/knex:
   <<: *quality_stage
@@ -129,6 +150,16 @@ Test @emjpm/knex:
   script:
     - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
     - yarn workspace @emjpm/knex test
+
+#
+
+Send coverage result:
+  stage: "Registration"
+  dependencies:
+    - Test @emjpm/api
+    - Test @emjpm/app
+  script:
+    - npx codecov
 
 #
 
@@ -157,22 +188,6 @@ Register e2e image:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/e2e
 
 #
-
-E2E Test @emjpm/api:
-  <<: *end_to_end_stage
-  <<: *master_based_stage
-  allow_failure: true
-  services:
-    - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
-      command: ["-p", "5434"]
-  variables:
-    POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: test
-  script:
-    - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
-    - yarn workspace @emjpm/api test --coverage
-  after_script:
-    - CI_PROJECT_DIR=/app npx codecov -F api
 
 E2E Test @optional/e2e:
   <<: *end_to_end_stage
