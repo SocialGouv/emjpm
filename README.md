@@ -13,6 +13,32 @@ $ yarn
 # This will trigger some build on the `postinstall` script
 ```
 
+### Build
+
+```sh
+# Build all the packages
+$ yarn build
+
+# Build the "<package-name>"
+$ yarn workspace <package-name> build
+
+# For example for "@emjpm/api"
+$ yarn workspace @emjpm/api build
+```
+
+### Test
+
+```sh
+# Build all the packages
+$ yarn test
+
+# Build the "<package-name>"
+$ yarn workspace <package-name> test
+
+# For example for "@emjpm/api"
+$ yarn workspace @emjpm/api test
+```
+
 ## E2E tests
 
 The e2e tests are using the latest deployed `socialgouv/emjpm-*` images by default.

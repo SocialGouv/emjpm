@@ -6,7 +6,7 @@
     "dev": "lerna run dev --parallel",
     "lint": "lerna run lint --parallel",
     "start": "lerna run start --parallel",
-    "test": "lerna run test --parallel"
+    "test": "lerna run test --parallel --ignore @optional/e2e"
   },
   "devDependencies": {
     "lerna": "^3.13.4"
