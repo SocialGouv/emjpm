@@ -2281,7 +2281,7 @@ Array [
     "date_ouverture": "2014-03-28",
     "numero_dossier": "13/00988",
     "residence": "En établissement",
-    "type": "curatelle renforcée",
+    "type": "Curatelle renforcée",
     "ville": "seclin",
   },
   Object {
@@ -2291,7 +2291,7 @@ Array [
     "date_ouverture": "2018-07-30",
     "numero_dossier": "18/00594",
     "residence": "En établissement",
-    "type": "curatelle renforcée",
+    "type": "Curatelle renforcée",
     "ville": "seclin",
   },
   Object {
@@ -2331,7 +2331,7 @@ Array [
     "date_ouverture": "2017-12-22",
     "numero_dossier": "12/00812",
     "residence": "En établissement",
-    "type": "curatelle renforcée",
+    "type": "Curatelle renforcée",
     "ville": "wattignies",
   },
   Object {
@@ -2471,7 +2471,7 @@ Array [
     "date_ouverture": "2017-03-13",
     "numero_dossier": "16/00789",
     "residence": "En établissement",
-    "type": "curatelle renforcée",
+    "type": "Curatelle renforcée",
     "ville": "seclin",
   },
   Object {
@@ -2481,7 +2481,7 @@ Array [
     "date_ouverture": "2018-12-17",
     "numero_dossier": "18/00670",
     "residence": "En établissement",
-    "type": "curatelle renforcée",
+    "type": "Curatelle renforcée",
     "ville": "loos",
   },
   Object {
@@ -2551,7 +2551,7 @@ Array [
     "date_ouverture": "2018-12-19",
     "numero_dossier": "18/01077",
     "residence": "En établissement",
-    "type": "curatelle renforcée",
+    "type": "Curatelle renforcée",
     "ville": "seclin",
   },
   Object {
@@ -2591,7 +2591,7 @@ Array [
     "date_ouverture": "2013-01-31",
     "numero_dossier": "12/00605",
     "residence": "En établissement",
-    "type": "curatelle renforcée",
+    "type": "Curatelle renforcée",
     "ville": "seclin",
   },
   Object {
@@ -2601,7 +2601,7 @@ Array [
     "date_ouverture": "2018-10-15",
     "numero_dossier": "97/06510",
     "residence": "En établissement",
-    "type": "curatelle renforcée",
+    "type": "Curatelle renforcée",
     "ville": "seclin",
   },
   Object {
