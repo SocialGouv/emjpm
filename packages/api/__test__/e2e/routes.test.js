@@ -1,5 +1,3 @@
-//
-
 const { knex } = global;
 jest.setMock("@emjpm/api/db/knex", knex);
 
@@ -13,6 +11,21 @@ beforeAll(async () => {
 });
 
 const accessChecks = [
+  {
+    method: "GET",
+    url: "/api/v1/admin/mandataires",
+    type: "admin"
+  },
+  {
+    method: "GET",
+    url: "/api/v1/admin/tis",
+    type: "admin"
+  },
+  {
+    method: "PUT",
+    url: "/api/v1/admin/user/1",
+    type: "admin"
+  },
   {
     method: "GET",
     url: "/api/v1/mandataires",
@@ -111,6 +124,16 @@ const accessChecks = [
   {
     method: "GET",
     url: "/api/v1/mesures",
+    type: "ti"
+  },
+  {
+    method: "GET",
+    url: "/api/v1/mesures/getAllMesuresByTis",
+    type: "ti"
+  },
+  {
+    method: "GET",
+    url: "/api/v1/mesures/popup",
     type: "ti"
   }
 ];
