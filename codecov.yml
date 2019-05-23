@@ -4,9 +4,12 @@ coverage:
       default: off
       app:
         flags: app
+        paths: packages/app
+        target: 80%
       api:
-        target: 89%
         flags: api
+        paths: packages/api
+        target: 80%
 
 flags:
   api:
