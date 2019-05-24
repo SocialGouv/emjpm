@@ -1,6 +1,7 @@
 const { typeRequired } = require("../auth/_helpers");
 
 const express = require("express");
+const createError = require("http-errors");
 
 const router = express.Router();
 
@@ -176,24 +177,37 @@ const USER_WRITE_PROPERTIES = ["active"];
  *               $ref: '#/components/schemas/SuccessResponse'
  */
 router.put("/user/:userId", typeRequired("admin"), async (req, res, next) => {
-  // whitelist input data
-  const cleanedBody = whitelist(req.body, USER_WRITE_PROPERTIES);
-  queries
-    .updateUser({
+  try {
+    // whitelist input data
+    const cleanedBody = whitelist(req.body, USER_WRITE_PROPERTIES);
+
+    const wasUpdated = await queries.updateUser({
       id: req.params.userId,
       ...cleanedBody
-    })
-    .then(updated => {
-      getSpecificUser({ id: req.params.userId }).then(json =>
-        validationEmail(json.email, `${process.env.APP_URL}`)
-      );
-      return updated;
-    })
-    .then(updated => {
-      res.json({
-        success: !!updated
-      });
     });
+
+    // FIXME(douglasduteil): the user we try to path might not exits...
+    // We might want to ensure that the user exist before trying to update it...
+    const user = await getSpecificUser({ id: req.params.userId });
+
+    if (!user) {
+      throw createError.NotFound(`User "${req.params.userId}" not Found`);
+    }
+
+    if (!wasUpdated) {
+      // FIXME(douglasduteil): testing if updated is undefined is an antipattern
+      // IMO we shouldn't test if updated is undefined as we should fail before.
+      // This PATCH on the use "active" state should be rethink...
+
+      throw createError.UnprocessableEntity("Not 'active' field to patch.");
+    }
+
+    await validationEmail(user.email, `${process.env.APP_URL}`);
+
+    res.json(user);
+  } catch (e) {
+    next(e);
+  }
 });
 
 module.exports = router;
