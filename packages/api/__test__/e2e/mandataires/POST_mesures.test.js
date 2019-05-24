@@ -28,22 +28,8 @@ beforeEach(async () => {
   // ! But one day we will have to do it...
   await knex.seed.run();
 });
-const sampleMesure = {
-  code_postal: "28000",
-  ville: "Chartres",
-  etablissement: "peu pas",
-  created_at: "2010-10-05",
-  annee: "2010-10-05",
-  type: "preposes",
-  date_ouverture: "2010-10-05",
-  residence: "oui",
-  civilite: "madame",
-  status: "Mesure en cours",
-  mandataire_id: 1
-};
 
 const simplerMesure = ({ id, ...props }) => props;
-
 
 const getMesuresCounter = async id =>
   (await knex("mandataires")
@@ -271,5 +257,19 @@ Object {
 
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
 });
+
+const sampleMesure = {
+  code_postal: "28000",
+  ville: "Chartres",
+  etablissement: "peu pas",
+  created_at: "2010-10-05",
+  annee: "2010-10-05",
+  type: "preposes",
+  date_ouverture: "2010-10-05",
+  residence: "oui",
+  civilite: "madame",
+  status: "Mesure en cours",
+  mandataire_id: 1
+};
 
 //

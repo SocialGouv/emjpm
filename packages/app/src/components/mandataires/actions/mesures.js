@@ -150,7 +150,6 @@ export const mesureImportCreated = data => dispatch => {
       dispatch(mesureCreated(data));
     })
     .catch(e => {
-      console.log("ERROR", e);
       dispatch(mesureCreatedError(e.message));
       throw e;
     });

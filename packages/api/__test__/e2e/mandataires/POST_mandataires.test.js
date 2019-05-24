@@ -15,12 +15,11 @@ const { getTokenByUserType } = require("../utils");
 
 beforeAll(async () => {
   await knex.migrate.latest();
+  await knex.seed.run();
 });
 
 beforeEach(async () => {
   nodemailerMock.mock.reset();
-  await knex.seed.run();
-
 });
 
 const defaultRegister = {

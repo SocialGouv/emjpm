@@ -381,7 +381,6 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
  *               items:
  *                 type: object
  */
-//Todo(Adrien): getAllServicesByTis or getAllServicesByTis
 router.get("/services", typeRequired("ti"), async (req, res, next) => {
   const ti = await getTiByUserId(req.user.id);
   getAllServicesByTis(ti.id)
@@ -528,6 +527,7 @@ router.put(
   }
 );
 
+//ToDo(Adrien):Move /all to users routes
 router.get(
   "/all",
   typeRequired("individuel", "prepose", "service"),

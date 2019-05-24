@@ -19,14 +19,11 @@ router.post(
     try {
       const mandataire = await findMandataire(req, req.body.mandataireId);
 
-      if (
-        req.user.type === "service" &&
-        mandataire.id !== req.body.mandataireId
-      ) {
-        throw createError.Unauthorized(`Mandataire not authorize`);
+      if (req.user.type === "service" && mandataire.user_id !== req.user.id) {
+        throw createError.Unauthorized(`Mandataire not authorized`);
       }
       if (!mandataire) {
-        throw createError.Unauthorized(`Mandataire not found`);
+        throw createError.NotFound(`Mandataire not found`);
       }
 
       const mesures =
@@ -40,10 +37,7 @@ router.post(
           }))) ||
         [];
 
-      if (
-        req.body.sheetData &&
-        !req.body.sheetData.length
-      ) {
+      if (req.body.sheetData && !req.body.sheetData.length) {
         res.json({
           success: false,
           added: 0,

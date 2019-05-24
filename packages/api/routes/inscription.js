@@ -14,8 +14,12 @@ const { getCountByEmail } = require("../db/queries/users");
 const getTisNames = async tis => {
   const getEtablissementByTi = id =>
     getTiById(id).then(json => json.etablissement);
-  const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(", ");
-  return tiNames;
+  if (tis) {
+    const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(
+      ", "
+    );
+    return tiNames;
+  }
 };
 
 /**
@@ -225,74 +229,79 @@ router.post("/mandataires", async (req, res, next) => {
 
     await knex.transaction(async function(trx) {
       // create user
-      if (type === "service") {
-        const serviceId = await queries.createService(
-          {
-            etablissement,
-            nom,
-            prenom,
-            email,
-            telephone,
-            adresse,
-            code_postal,
-            ville,
-            dispo_max
-          },
-          trx
-        );
-        await queries.createUser(
-          {
-            username,
-            type,
-            nom,
-            prenom,
-            email,
-            service_id: serviceId[0],
-            password: bcrypt.hashSync(pass1, salt),
-            active: false
-          },
-          trx
-        );
-      } else {
-        const userId = await queries.createUser(
-          {
-            username,
-            type,
-            nom,
-            prenom,
-            email,
-            password: bcrypt.hashSync(pass1, salt),
-            active: false
-          },
-          trx
-        );
+      try {
+        if (type === "service") {
+          const serviceId = await queries.createService(
+            {
+              etablissement,
+              nom,
+              prenom,
+              email,
+              telephone,
+              adresse,
+              code_postal,
+              ville,
+              dispo_max
+            },
+            trx
+          );
+          await queries.createUser(
+            {
+              username,
+              type,
+              nom,
+              prenom,
+              email,
+              service_id: serviceId[0],
+              password: bcrypt.hashSync(pass1, salt),
+              active: false
+            },
+            trx
+          );
+        } else {
+          const userId = await queries.createUser(
+            {
+              username,
+              type,
+              nom,
+              prenom,
+              email,
+              password: bcrypt.hashSync(pass1, salt),
+              active: false
+            },
+            trx
+          );
 
-        await queries.createMandataire(
-          {
-            user_id: userId[0],
-            etablissement,
-            telephone,
-            telephone_portable,
-            adresse,
-            code_postal,
-            ville
-          },
-          trx
-        );
-        if (!tis || tis.length === 0) {
-          return true;
-        }
-        await Promise.all(
-          tis.map(ti_id =>
-            queries.createUserTi(
-              {
-                user_id: userId[0],
-                ti_id
-              },
-              trx
+          await queries.createMandataire(
+            {
+              user_id: userId[0],
+              etablissement,
+              telephone,
+              telephone_portable,
+              adresse,
+              code_postal,
+              ville
+            },
+            trx
+          );
+          if (!tis || tis.length === 0) {
+            return true;
+          }
+          await Promise.all(
+            tis.map(ti_id =>
+              queries.createUserTi(
+                {
+                  user_id: userId[0],
+                  ti_id
+                },
+                trx
+              )
             )
-          )
-        );
+          );
+        }
+        await trx.commit();
+      } catch (e) {
+        await trx.rollback(e);
       }
     });
 
