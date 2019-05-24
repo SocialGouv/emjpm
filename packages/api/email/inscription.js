@@ -6,7 +6,11 @@ Bonjour la super team emjpm :) ,
 Nous avons reçu une nouvelle inscription de ${prenom} ${nom} , ${email} , ${codePostal},
 agrée sur TI: ${tis} / qui exerce sur TI: ${tis}.
 
-${type === "ti" ? `qui exerce sur le TI: ${tis}.` : `agrée sur TI(s): ${tis}.`}
+${
+  type === "ti"
+    ? `qui exerce sur le TI: ${tis || "Pas de Ti sélectionné"}.`
+    : `agrée sur TI(s): ${tis || "Pas de Ti sélectionné"}.`
+}
 
 Merci de vérifier cette nouvelle demande et de la valider.
 
@@ -18,7 +22,9 @@ Bonjour la super team eMJPM :),<br />
 Nous avons reçu une nouvelle inscription de ${prenom} ${nom} , ${email} , ${codePostal}, <br />
 
 ${
-  type === "ti" ? `qui exerce sur le TI: ${tis}.` : `agrée sur TI(s): ${tis}.`
+  type === "ti"
+    ? `qui exerce sur le TI: ${tis || "Pas de Ti sélectionné"}.`
+    : `agrée sur TI(s): ${tis || "Pas de Ti sélectionné"}.`
 } <br />
 
 Merci de vérifier cette nouvelle demande et de la valider.

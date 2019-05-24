@@ -22,22 +22,12 @@ const accessChecks = [
     type: "admin"
   },
   {
-    method: "PUT",
-    url: "/api/v1/admin/user/1",
-    type: "admin"
-  },
-  {
     method: "GET",
     url: "/api/v1/mandataires",
     type: "ti"
   },
   {
     method: "GET",
-    url: "/api/v1/mandataires/1",
-    type: ["mandataire", "service"]
-  },
-  {
-    method: "PUT",
     url: "/api/v1/mandataires/1",
     type: ["mandataire", "service"]
   },
@@ -76,6 +66,9 @@ const accessChecks = [
     url: "/api/v1/mandataires/1/mesures",
     type: ["mandataire", "ti", "service"]
   },
+  { method: "DELETE", url: "/api/v1/mandataires/1/commentaires/1", type: "ti" },
+  { method: "GET", url: "/api/v1/mandataires/1/commentaires", type: "ti" },
+  { method: "POST", url: "/api/v1/mandataires/1/commentaires", type: "ti" },
   {
     method: "GET",
     url: "/api/v1/mandataires/1/mesures",
@@ -105,11 +98,6 @@ const accessChecks = [
     method: "POST",
     url: "/api/v1/mandataires/filters",
     type: "ti"
-  },
-  {
-    method: "POST",
-    url: "/api/v1/mandataires/mesures/bulk",
-    type: ["mandataire", "service"]
   },
   {
     method: "GET",
