@@ -31,9 +31,11 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(bodyParser.json({
-  limit: '10mb'
-}));
+app.use(
+  bodyParser.json({
+    limit: "10mb"
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
@@ -72,6 +74,7 @@ app.use(function(req, res, next) {
 
 app.use(function(err, req, res, next) {
   Sentry.captureException(err);
+
   if (res.headersSent) {
     return next(err);
   }

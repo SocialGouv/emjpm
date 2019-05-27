@@ -2,8 +2,11 @@
 
 const knex = require("../knex.js");
 
+const { getMandataireById } = require("./mandataires");
+
 const getAllTisByMandataire = mandataireId =>
   knex("user_tis")
+    .distinct("user_tis.ti_id")
     .select("tis.id", "tis.etablissement", "user_tis.ti_id")
     .innerJoin("tis", "user_tis.ti_id", "tis.id")
     .innerJoin("mandataires", "mandataires.user_id", "user_tis.user_id")
@@ -36,6 +39,13 @@ const deleteMandataireTis = (tiId, mandataireId) =>
     .del();
 
 const getTis = () => knex("tis");
+
+const getTiById = tiId =>
+  knex("tis")
+    .where({
+      id: parseInt(tiId)
+    })
+    .first();
 
 const getTiByUserId = userId =>
   knex("tis")
@@ -74,11 +84,29 @@ const getTiByUserIdWithCodePostal = userId =>
     .where("user_tis.user_id", parseInt(userId))
     .first();
 
+const getAllTisByMandataireService = mandataireId =>
+  knex("service_tis")
+    .select("tis.id", "tis.etablissement", "service_tis.ti_id")
+    .innerJoin("tis", "service_tis.ti_id", "tis.id")
+    .innerJoin("mandataires", "mandataires.id", "service_tis.mandataire_id")
+    .where({
+      "mandataires.id": parseInt(mandataireId)
+    });
+
+const addServiceTis = (ti_id, mandataire_id) =>
+  knex("service_tis").insert({
+    ti_id: ti_id,
+    mandataire_id: mandataire_id
+  });
+
 module.exports = {
   getAllTisByMandataire,
   addMandataireTis,
   deleteMandataireTis,
   getTis,
   getTiByUserId,
-  getTiByUserIdWithCodePostal
+  getTiByUserIdWithCodePostal,
+  getAllTisByMandataireService,
+  addServiceTis,
+  getTiById
 };

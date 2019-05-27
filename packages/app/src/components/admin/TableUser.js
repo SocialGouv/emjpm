@@ -66,16 +66,10 @@ const COLUMNS = [
     style: { alignSelf: "center" }
   },
   {
-    Header: "Code postal",
-    id: "code_postal",
-    accessor: "code_postal",
-    width: 100,
-    style: { textAlign: "center", alignSelf: "center" }
-  },
-  {
     Header: "Email",
     id: "email",
     accessor: "email",
+    width: 100,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {

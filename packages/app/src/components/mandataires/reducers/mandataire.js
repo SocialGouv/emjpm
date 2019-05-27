@@ -3,14 +3,13 @@
 import piwik from "react-piwik";
 
 const MANDATAIRE_INITIAL_STATE = {
-  // store some user mandataire data
-  profile: {
-    mesures_en_cours: 0
-  },
-  // store etablissement for autompletes and getDisplayValue
   finess: [],
-  // store tis for autompletes and getDisplayValue
-  tis: []
+  profiles: [],
+  tis: [],
+  service: {},
+  mandataireId: null,
+  lastUpdate: null,
+  user: {}
 };
 
 const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
@@ -28,35 +27,65 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       }
 
       return {
+        ...state
+      };
+    case "CHANGE_MANDATAIRE_ID":
+      return {
         ...state,
-        profile: action.data
+        mandataireId: action.data,
+        lastUpdate: new Date()
+      };
+    case "CHANGE_MANDATAIRE_ID_INIT":
+      return {
+        ...state,
+        mandataireId: action.data && action.data.length && action.data[0] && action.data[0].id,
+        lastUpdate: new Date()
+      };
+    case "CHANGE_MANDATAIRE_ID_INIT":
+      return {
+        ...state,
+        mandataireId: action.data[0].id,
+        lastUpdate: new Date()
+      };
+    case "MANDATAIRE_PROFILES_UPDATED":
+      return {
+        ...state,
+        profiles: action.data,
+        lastUpdate: new Date()
+      };
+    case "USER_PROFILE_UPDATED":
+      return {
+        ...state,
+        user: action.data,
+        lastUpdate: new Date()
+      };
+    case "SERVICE_PROFILE_UPDATED":
+      return {
+        ...state,
+        service: action.data
       };
     case "FINESS_UPDATED":
       return {
         ...state,
         finess: action.data
       };
+
     case "TIS_UPDATED":
       return {
         ...state,
         tis: action.data
       };
     case "MESURE_REACTIVATED":
+    case "MESURE_UPDATED":
     case "MESURE_CREATED":
       return {
         ...state,
-        profile: {
-          ...state.profile,
-          mesures_en_cours: state.profile.mesures_en_cours + 1
-        }
+        lastUpdate: new Date()
       };
     case "MESURE_CLOSED":
       return {
         ...state,
-        profile: {
-          ...state.profile,
-          mesures_en_cours: state.profile.mesures_en_cours - 1
-        }
+        lastUpdate: new Date()
       };
     default:
       return state;

@@ -4,6 +4,9 @@ exports[`mandataire should update his profile 1`] = `
 Object {
   "adresse": "21 rue de houx",
   "code_postal": "62000",
+  "contact_email": null,
+  "contact_nom": null,
+  "contact_prenom": null,
   "created_at": Any<String>,
   "date_mesure_update": null,
   "dispo_max": 5,
@@ -20,11 +23,30 @@ Object {
   "nom": null,
   "prenom": "Adrien",
   "secretariat": false,
+  "service_id": null,
   "telephone": "phone-test",
   "telephone_portable": "0101010101",
   "type": "individuel",
   "user_id": 1,
   "ville": "Arras",
   "zip": null,
+}
+`;
+
+exports[`service should update his siege profile 1`] = `
+Object {
+  "adresse": "21 rue de houx",
+  "code_postal": "62000",
+  "created_at": Any<String>,
+  "dispo_max": 3,
+  "email": "testSiege@email.com",
+  "etablissement": "UDAHF Siege",
+  "id": 1,
+  "nom": null,
+  "prenom": null,
+  "telephone": "0237100000",
+  "type": "service",
+  "userId": 3,
+  "ville": "Arras",
 }
 `;

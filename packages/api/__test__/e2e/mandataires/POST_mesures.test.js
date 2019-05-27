@@ -22,12 +22,27 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-  nodemailerMock.mock.reset();  
+  nodemailerMock.mock.reset();
   // ! FUTURE(douglasduteil): only seed once and clean up mutations in afterEach !
   // ! It's too hard to clean up mutations now...
   // ! But one day we will have to do it...
   await knex.seed.run();
 });
+
+const simplerMesure = ({ id, ...props }) => props;
+
+const getMesuresCounter = async id =>
+  (await knex("mandataires")
+    .select("mesures_en_cours")
+    .where({
+      id
+    })
+    .first()).mesures_en_cours;
+
+const getMesuresCount = async mandataire_id =>
+  (await knex("mesures").where({
+    mandataire_id
+  })).length;
 
 test("mandataire should POST mesure", async () => {
   const token = await getTokenByUserType("mandataire");
@@ -81,7 +96,7 @@ test("mandataire should NOT POST mesure for another one [body forge]", async () 
     .set("Authorization", "Bearer " + token)
     .send({
       ...sampleMesure,
-      mandataire_id: 2
+      mandataire_id: 1
     });
 
   expect(response.body.map(simplerMesure)).toMatchSnapshot();
@@ -243,8 +258,6 @@ Object {
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
 });
 
-//
-
 const sampleMesure = {
   code_postal: "28000",
   ville: "Chartres",
@@ -255,21 +268,8 @@ const sampleMesure = {
   date_ouverture: "2010-10-05",
   residence: "oui",
   civilite: "madame",
-  status: "Mesure en cours"
-  // mandataire_id: 1
+  status: "Mesure en cours",
+  mandataire_id: 1
 };
 
-const getMesuresCounter = async id =>
-  (await knex("mandataires")
-    .select("mesures_en_cours")
-    .where({
-      id
-    })
-    .first()).mesures_en_cours;
-
-const getMesuresCount = async mandataire_id =>
-  (await knex("mesures").where({
-    mandataire_id
-  })).length;
-
-const simplerMesure = ({ id, ...props }) => props;
+//
