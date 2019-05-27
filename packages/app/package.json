@@ -15,7 +15,6 @@
   "keywords": [],
   "license": "ISC",
   "dependencies": {
-    "@wessberg/color": "1.0.5",
     "@zeit/next-css": "^1.0.1",
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
@@ -29,6 +28,7 @@
     "next": "^7.0.2",
     "next-images": "^1.1.1",
     "next-plugin-transpile-modules": "^2.0.0",
+    "polished": "^3.4.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.5.0",
     "react": "^16.8.6",

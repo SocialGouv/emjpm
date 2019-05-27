@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { lighten } from "@wessberg/color";
+import { lighten } from "polished";
 
 const variants = {
   default: {
@@ -21,7 +21,7 @@ const getColor = property => props =>
 
 export const Button = styled.button`
   background: ${props => getColor("background")(props)};
-  border: 1px solid ${props => lighten(getColor("background")(props), 20)};
+  border: 1px solid ${props => lighten(0.2, getColor("background")(props))};
   height: 40px;
   width: auto;
   text-align: center;
@@ -36,8 +36,8 @@ export const Button = styled.button`
     vertical-align: middle;
   }
   &:hover {
-    border-color: ${props => lighten(getColor("background")(props), 30)};
-    background: ${props => lighten(getColor("background")(props), 10)};
+    border-color: ${props => lighten(0.3, getColor("background")(props))};
+    background: ${props => lighten(0.1, getColor("background")(props))};
   }
 `;
 
