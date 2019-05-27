@@ -6,58 +6,67 @@ import ReactTable from "react-table";
 import format from "date-fns/format";
 
 import { Button } from "..";
+import Form from "react-jsonschema-form";
 
 // bouton connecté à redux-modal.show pour EditMesure
-const CellEditMesureRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
-)(({ row, show }) => (
-  <Button
-    data-cy="button-edit-mesure"
-    onClick={() => show("EditMesure", { formData: row.original })}
-  >
-    Modifier
-  </Button>
-));
+
+const CellEditMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
+  ({ row, show }) => (
+    <Button
+      data-cy="button-edit-mesure"
+      onClick={() =>
+        show("EditMesure", { formData: row.original, mandataire_id: row.original.mandataire_id })
+      }
+    >
+      Modifier
+    </Button>
+  )
+);
 
 // bouton connecté à redux-modal.show pour CloseMesure
-const CellCloseMesureRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
-)(({ row, show }) => (
-  <Button
-    data-cy="button-close-mesure"
-    error
-    onClick={() => show("CloseMesure", { id: row.original.id })}
-  >
-    Mettre fin au mandat
-  </Button>
-));
+const CellCloseMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
+  ({ row, show }) => (
+    <Button
+      data-cy="button-close-mesure"
+      error
+      onClick={() =>
+        show("CloseMesure", { id: row.original.id, mandataire_id: row.original.mandataire_id })
+      }
+    >
+      Mettre fin au mandat
+    </Button>
+  )
+);
 
 // bouton connecté à redux-modal.show pour ReactivateMesure
-const CellReactivateMesureRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
-)(({ row, show }) => (
-  <Button
-    data-cy="button-reactivate-mesure"
-    onClick={() => show("ReactivateMesure", { id: row.original.id })}
-  >
-    Réactiver la mesure
-  </Button>
-));
+const CellReactivateMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
+  ({ row, show }) => (
+    <Button
+      data-cy="button-reactivate-mesure"
+      onClick={() =>
+        show("ReactivateMesure", { id: row.original.id, mandataire_id: row.original.mandataire_id })
+      }
+    >
+      Réactiver la mesure
+    </Button>
+  )
+);
 
-const CellValidationMesureRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
-)(({ row, show }) => (
-  <Button
-    data-cy="button-attente-mesure"
-    onClick={() => show("ValiderMesureEnAttente", { formData: row.original })}
-  >
-    Valider
-  </Button>
-));
+const CellValidationMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
+  ({ row, show }) => (
+    <Button
+      data-cy="button-attente-mesure"
+      onClick={() =>
+        show("ValiderMesureEnAttente", {
+          formData: row.original,
+          mandataire_id: row.original.mandataire_id
+        })
+      }
+    >
+      Valider
+    </Button>
+  )
+);
 
 const concat = (...strings) =>
   strings
@@ -77,7 +86,7 @@ const COLUMNS = [
   {
     Header: "Date de décision",
     id: "date_ouverture",
-    width: 160,
+    width: 140,
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
     Cell: row => (
       <div>
@@ -125,7 +134,7 @@ const COLUMNS = [
   {
     Header: "Type de mesure",
     id: "type",
-    width: 200,
+    width: 150,
     accessor: d => d.type,
     style: { textAlign: "center", alignSelf: "center" }
   },
@@ -173,6 +182,7 @@ const COLUMNS = [
   {
     Header: "Cabinet",
     id: "cabinet",
+    width: 60,
     accessor: d => d.cabinet,
     style: { textAlign: "center", alignSelf: "center" }
   },
@@ -206,9 +216,28 @@ const COLUMNS = [
   }
 ];
 
+const schema = {
+  type: "object",
+  properties: {
+    search: {
+      type: "string"
+    }
+  }
+};
+
+const uiSchema = {
+  search: {
+    "ui:placeholder": "Numéro dossier",
+    "ui:options": {
+      label: false
+    }
+  }
+};
+
 class TableMesures extends React.Component {
   state = {
     data: [],
+    newData: [],
     loading: false
   };
   fetchData = (state, instance) => {
@@ -235,30 +264,63 @@ class TableMesures extends React.Component {
   componentDidMount() {
     this.fetchData();
   }
+
+  onChange = formData => {
+    const newData = this.state.data.filter(
+      datum => datum.numero_dossier && datum.numero_dossier.includes(formData.formData.search)
+    );
+    this.setState({
+      newData: newData
+    });
+  };
+
   render() {
-    const { data, loading } = this.state;
+    const { data, loading, newData } = this.state;
     const { hideColumns } = this.props;
     return (
-      <ReactTable
-        style={{ backgroundColor: "white", minHeight: 500 }}
-        columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
-        noDataText="Aucune mesure ici..."
-        showPagination={false}
-        minRows={0}
-        pageSize={1000}
-        data={data}
-        sortable={true}
-        multiSort={false}
-        defaultSorted={[
-          {
-            id: "date_ouverture",
-            desc: true
-          }
-        ]}
-        loading={loading}
-        loadingText="Chargement des mesures..."
-        className="-striped -highlight"
-      />
+      <>
+        <div style={{ textAlign: "right" }}>
+          <Form
+            schema={schema}
+            uiSchema={uiSchema}
+            onSubmit={this.onChange}
+            style={{
+              textAlign: "right",
+              display: "flex",
+              flexDirection: "row",
+              height: "30px"
+            }}
+          >
+            <Button
+              type="submit"
+              className="btn btn-success"
+              style={{ flex: "0 1 auto", height: "35px" }}
+            >
+              Filtrer
+            </Button>
+          </Form>
+        </div>
+        <ReactTable
+          style={{ backgroundColor: "white", minHeight: 500 }}
+          columns={COLUMNS.filter(col => hideColumns.indexOf(col.id) === -1)}
+          noDataText="Aucune mesure ici..."
+          showPagination={false}
+          minRows={0}
+          pageSize={1000}
+          data={(newData && newData.length && newData) || data}
+          sortable={true}
+          multiSort={false}
+          defaultSorted={[
+            {
+              id: "date_ouverture",
+              desc: true
+            }
+          ]}
+          loading={loading}
+          loadingText="Chargement des mesures..."
+          className="-striped -highlight"
+        />
+      </>
     );
   }
 }
@@ -274,6 +336,6 @@ TableMesures.defaultProps = {
 const mapStateToProps = state => ({
   // /!\ todo : hack
   // lastUpdate is updated when some mesure is modified so we can refresh the table
-  lastUpdate: state.mesures ? state.mesures.lastUpdate : state.mandataire.lastUpdate
+  lastUpdate: state.mandataire.lastUpdate
 });
 export default connect(mapStateToProps)(TableMesures);

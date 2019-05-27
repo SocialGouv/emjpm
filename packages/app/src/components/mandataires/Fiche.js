@@ -5,6 +5,7 @@ const iconStyle = { width: 22, height: 22, marginRight: 10 };
 // fiche recap
 const FicheMandataire = ({
   email = "",
+  contact_email = "",
   telephone = "",
   telephone_portable = "",
   adresse = "",
@@ -20,27 +21,55 @@ const FicheMandataire = ({
   const hasAdresse = adresse || code_postal || ville;
   return (
     <div>
-      {(email && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
-          <Mail style={iconStyle} />
-          <a href={`mailto:${email}`}>{email}</a>
-        </div>
-      )) ||
-        null}
+      {type === "service"
+        ? (contact_email && (
+            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
+              <Mail style={iconStyle} />
+              <a href={`mailto:${contact_email}`}>{contact_email}</a>
+            </div>
+          )) ||
+          null
+        : (email ? (
+            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
+              <Mail style={iconStyle} />
+              <a href={`mailto:${email}`}>{email}</a>
+            </div>
+          ) : (
+            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
+              <Mail style={iconStyle} />
+              Non renseigné
+            </div>
+          )) || null}
       <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone">
         <Phone style={iconStyle} />
         {telephone}
       </div>
-      {type !== "service" && telephone_portable && (
+      {type !== "service" && telephone_portable ? (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
           <Smartphone style={iconStyle} />
           {telephone_portable}
         </div>
+      ) : (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
+          <Smartphone style={iconStyle} />
+          Non renseigné
+        </div>
       )}
-      {hasAdresse && (
+      {hasAdresse ? (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
           <Home style={iconStyle} />
           {adresse} {code_postal} {ville}
+        </div>
+      ) : (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
+          <Home style={iconStyle} />
+          Non renseigné
+        </div>
+      )}
+      {zip && (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+          <Info style={iconStyle} />
+          {zip}
         </div>
       )}
       <br />
@@ -48,22 +77,12 @@ const FicheMandataire = ({
         <tbody style={{ fontSize: "1.1em" }}>
           <tr>
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
-              <b>
-                {type === "service" ? (
-                  <div>
-                    Mesures en cours/
-                    <br /> Mesures souhaitées{" "}
-                  </div>
-                ) : (
-                  "Mesures souhaitées"
-                )}
-              </b>
+              <b>Nombre total de mesures souhaitées</b>
             </td>
             <td
               data-cy="fiche-manda-dispo-max"
               style={{ textAlign: "center", borderBottom: "1px solid silver" }}
             >
-              {type === "service" ? `${mesures_en_cours || "-"}/` : ""}
               {dispo_max || "-"}
             </td>
           </tr>

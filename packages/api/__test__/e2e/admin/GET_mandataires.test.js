@@ -17,7 +17,7 @@ beforeAll(async () => {
 });
 
 // strip the created_at date in the response
-const simpler = ({ created_at, ...props }) => props;
+const simpler = ({ created_at, last_login, ...props }) => props;
 
 test("should GET mandataires", async () => {
   const token = await getTokenByUserType("admin");

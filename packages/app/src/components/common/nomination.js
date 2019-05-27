@@ -1,20 +1,21 @@
 export const typeMesure = [
-  "Tutelle",
   "Curatelle",
-  "Sauvegarde de justice",
-  "Mesure ad hoc",
+  "Curatelle renforcée",
+  "Curatelle renforcée à la personne",
+  "Curatelle renforcée aux biens",
+  "Curatelle renforcée aux biens et à la personne",
+  "Curatelle simple",
+  "Curatelle simple à la personne",
+  "Curatelle simple aux biens",
+  "Curatelle simple aux biens et à la personne",
   "MAJ",
-  "tutelle aux biens",
-  "tutelle à la personne",
-  "tutelle aux biens et à la personne",
-  "curatelle simple aux biens",
-  "curatelle simple à la personne",
-  "curatelle simple aux biens et à la personne",
-  "curatelle renforcée aux biens",
-  "curatelle renforcée à la personne",
-  "curatelle renforcée aux biens et à la personne",
-  "sauvegarde de justice",
-  "sauvegarde de justice avec mandat spécial"
+  "Mesure ad hoc",
+  "Sauvegarde de justice",
+  "Sauvegarde de justice avec mandat spécial",
+  "Tutelle",
+  "Tutelle à la personne",
+  "Tutelle aux biens",
+  "Tutelle aux biens et à la personne"
 ];
 
 export const residence = [
@@ -25,4 +26,21 @@ export const residence = [
 
 export const civilite = ["F", "H"];
 
-export const cabinet = ["1A", "1B", "2A", "2B", "3A", "3B", "4A", "4B", "5A", "5B", "6A", "6B"];
+export const cabinet = [
+  "1",
+  "1A",
+  "1B",
+  "2",
+  "2A",
+  "2B",
+  "3",
+  "3A",
+  "3B",
+  "4",
+  "4A",
+  "4B",
+  "5A",
+  "5B",
+  "6A",
+  "6B"
+];

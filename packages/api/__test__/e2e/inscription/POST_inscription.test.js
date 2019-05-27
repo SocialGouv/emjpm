@@ -14,8 +14,10 @@ jest.setMock("@emjpm/api/db/knex", knex);
 
 const server = require("@emjpm/api/app");
 const { getAllTisByMandataire } = require("@emjpm/api/db/queries/tis");
-
-//
+const {
+  getAllMandatairesByUserId,
+  getServiceByMandataire
+} = require("@emjpm/api/db/queries/mandataires");
 
 beforeAll(async () => {
   await knex.migrate.latest();
@@ -25,23 +27,6 @@ beforeAll(async () => {
 beforeEach(async () => {
   nodemailerMock.mock.reset();
 });
-
-const defaultRegister = {
-  username: "toto",
-  nom: "testAd",
-  prenom: "testPrenom",
-  etablissement: "",
-  email: "toto@toto.com",
-  type: "individuel",
-  pass1: "secret",
-  pass2: "secret",
-  adresse: "",
-  code_postal: "75010",
-  ville: "",
-  telephone: "",
-  latitude: 2,
-  longitude: 2
-};
 
 afterEach(async () => {
   // Remove created user
@@ -71,19 +56,56 @@ afterEach(async () => {
     .delete();
 });
 
+const defaultRegister = {
+  username: "toto",
+  nom: "testAd",
+  prenom: "testPrenom",
+  etablissement: "",
+  email: "toto@toto.com",
+  type: "individuel",
+  pass1: "secret",
+  pass2: "secret",
+  adresse: "",
+  code_postal: "75010",
+  ville: "",
+  telephone: "",
+  latitude: 2,
+  longitude: 2
+};
+
 test("should register with good values", async () => {
   const response = await request(server)
     .post("/api/v1/inscription/mandataires")
     .send(defaultRegister);
-
   expect(response.body).toMatchInlineSnapshot(`
-Object {
-  "success": true,
-}
-`);
+                    Object {
+                      "success": true,
+                    }
+          `);
   expect(response.status).toBe(200);
 
+  const lastInsert = await knex
+    .table("users")
+    .orderBy("created_at", "desc")
+    .first();
+  expect(lastInsert.username).toEqual("toto");
+});
+
+test("should send an email with good values", async () => {
+  await request(server)
+    .post("/api/v1/inscription/mandataires")
+    .send(defaultRegister);
+
+  expect(nodemailerMock.mock.sentMail().length).toBe(1);
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
+});
+
+test("created user should NOT be active", async () => {
+  const response = await request(server)
+    .post("/api/v1/inscription/mandataires")
+    .send(defaultRegister);
+  expect(response.body.success).toBe(true);
+  expect(response.status).toBe(200);
 
   const lastInsert = await knex
     .table("users")
@@ -107,13 +129,13 @@ test("should NOT register when pass1!==pass2", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-Object {
-  "message": "Les mots de passe ne sont pas conformes",
-  "name": "UnprocessableEntityError",
-  "stack": Any<String>,
-  "status": 422,
-}
-`
+    Object {
+      "message": "Les mots de passe ne sont pas conformes",
+      "name": "UnprocessableEntityError",
+      "stack": Any<String>,
+      "status": 422,
+    }
+  `
   );
   expect(response.status).toBe(422);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
@@ -130,16 +152,16 @@ test("should NOT register when email already exist", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-Object {
-  "message": "Un compte avec cet email existe déjà",
-  "name": "ConflictError",
-  "stack": Any<String>,
-  "status": 409,
-}
-`
+    Object {
+      "message": "Un compte avec cet email existe déjà",
+      "name": "ConflictError",
+      "stack": Any<String>,
+      "status": 409,
+    }
+  `
   );
-  expect(response.status).toBe(409);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
+  expect(response.status).toBe(409);
 });
 
 test("should NOT register when username already exist", async () => {
@@ -153,13 +175,13 @@ test("should NOT register when username already exist", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-Object {
-  "message": "Key (username)=(jeremy) already exists.",
-  "name": "ConflictError",
-  "stack": Any<String>,
-  "status": 409,
-}
-`
+    Object {
+      "message": "Key (username)=(jeremy) already exists.",
+      "name": "ConflictError",
+      "stack": Any<String>,
+      "status": 409,
+    }
+  `
   );
   expect(response.status).toBe(409);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
@@ -172,30 +194,30 @@ test("should NOT register when empty username", async () => {
       ...defaultRegister,
       username: ""
     });
-
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-Object {
-  "message": "Les mots de passe ne sont pas conformes",
-  "name": "UnprocessableEntityError",
-  "stack": Any<String>,
-  "status": 422,
-}
-`
+    Object {
+      "message": "Les mots de passe ne sont pas conformes",
+      "name": "UnprocessableEntityError",
+      "stack": Any<String>,
+      "status": 422,
+    }
+  `
   );
   expect(response.status).toBe(422);
+
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-Object {
-  "message": "Les mots de passe ne sont pas conformes",
-  "name": "UnprocessableEntityError",
-  "stack": Any<String>,
-  "status": 422,
-}
-`
+    Object {
+      "message": "Les mots de passe ne sont pas conformes",
+      "name": "UnprocessableEntityError",
+      "stack": Any<String>,
+      "status": 422,
+    }
+  `
   );
   expect(response.status).toBe(422);
 });
@@ -231,10 +253,10 @@ test("should add user tis", async () => {
     });
 
   expect(response.body).toMatchInlineSnapshot(`
-Object {
-  "success": true,
-}
-`);
+    Object {
+      "success": true,
+    }
+  `);
   expect(response.status).toBe(200);
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
 
@@ -242,6 +264,7 @@ Object {
     .table("users")
     .orderBy("created_at", "desc")
     .first();
+
   expect(user.username).toEqual("user_ti");
   const user_tis = await knex
     .table("user_tis")
