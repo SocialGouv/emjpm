@@ -1,4 +1,5 @@
 const express = require("express");
+const createError = require("http-errors");
 
 const router = express.Router();
 const fetch = require("isomorphic-fetch");
@@ -34,18 +35,16 @@ const { getTiByUserId } = require("../db/queries/tis");
  *                 type: object
  */
 router.get("/", typeRequired("ti"), async (req, res, next) => {
-  if (req.user.type !== "ti") {
-    return next(new Error(401));
+  try {
+    const ti = await getTiByUserId(req.user.id);
+    if (!ti) {
+      throw createError.NotFound(`Ti of user "${req.user.email}" not Found`);
+    }
+    const mesures = await getAllMesuresByMandataires(ti.id);
+    res.json(mesures);
+  } catch (e) {
+    next(e);
   }
-  const ti = await getTiByUserId(req.user.id);
-  if (!ti) {
-    return next(new Error(401));
-  }
-  getAllMesuresByMandataires(ti.id)
-    .then(mesures => {
-      res.status(200).json(mesures);
-    })
-    .catch(error => next(error));
 });
 
 // todo : transform into get
@@ -87,24 +86,22 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
  *                 type: object
  */
 router.post("/filters", loginRequired, async (req, res, next) => {
-  const ti = await getTiByUserId(req.user.id);
-  if (!ti) {
-    return next(new Error(401));
+  try {
+    const ti = await getTiByUserId(req.user.id);
+    if (!ti) {
+      throw createError.NotFound(`Ti of user "${req.user.email}" not Found`);
+    }
+    const mesures = await getAllMesuresByMandatairesFilter(
+      ti.id,
+      req.body.latNorthEast,
+      req.body.latSouthWest,
+      req.body.longNorthEast,
+      req.body.longSouthWest
+    );
+    res.json(mesures);
+  } catch (e) {
+    next(e);
   }
-  getAllMesuresByMandatairesFilter(
-    ti.id,
-    req.body.latNorthEast,
-    req.body.latSouthWest,
-    req.body.longNorthEast,
-    req.body.longSouthWest
-  )
-    .then(function(mesures) {
-      res.status(200).json(mesures);
-    })
-    .catch(function(error) {
-      throw error;
-      next(error);
-    });
 });
 
 //ToDo: merge with get "mesures/" and rename
@@ -133,23 +130,23 @@ router.post("/filters", loginRequired, async (req, res, next) => {
  *                type: object
  */
 router.get("/popup", typeRequired("ti"), async (req, res, next) => {
-  const ti = await getTiByUserId(req.user.id);
-  if (!ti) {
-    return next(new Error(401));
+  try {
+    const ti = await getTiByUserId(req.user.id);
+    if (!ti) {
+      throw createError.NotFound(`Ti of user "${req.user.email}" not Found`);
+    }
+    const mesures = await getMesuresByGeolocalisation(
+      ti.id,
+      req.query.searchType
+    );
+    res.json(mesures);
+  } catch (e) {
+    next(e);
   }
-  getMesuresByGeolocalisation(ti.id, req.query.searchType)
-    .then(function(mesures) {
-      res.status(200).json(mesures);
-    })
-    .catch(function(error) {
-      console.log(error);
-      throw error;
-      next(error);
-    });
 });
 
 /** @swagger
- * /mandataires/getAllMesuresByTis:
+ * /mesures/getAllMesuresByTis:
  *   get:
  *     tags:
  *       - mesure
@@ -170,19 +167,16 @@ router.get(
   "/getAllMesuresByTis",
   typeRequired("ti"),
   async (req, res, next) => {
-    const ti = await getTiByUserId(req.user.id);
-    if (!ti) {
-      return next(new Error(401));
+    try {
+      const ti = await getTiByUserId(req.user.id);
+      if (!ti) {
+        throw createError.NotFound(`Ti of user "${req.user.email}" not Found`);
+      }
+      const mesures = await getAllMesuresByTis(ti.id);
+      res.json(mesures);
+    } catch (e) {
+      next(e);
     }
-    getAllMesuresByTis(ti.id)
-      .then(function(mesures) {
-        res.status(200).json(mesures);
-      })
-      .catch(function(error) {
-        console.log(error);
-        throw error;
-        next(error);
-      });
   }
 );
 
@@ -205,16 +199,13 @@ router.get(
  *                 type: object
  */
 router.get("/popupMandataire", loginRequired, async (req, res, next) => {
-  const ti = await getTiByUserId(req.user.id);
-  getAllMesuresByPopUpForMandataire(ti.id)
-    .then(function(mesures) {
-      res.status(200).json(mesures);
-    })
-    .catch(function(error) {
-      console.log(error);
-      throw error;
-      next(error);
-    });
+  try {
+    const ti = await getTiByUserId(req.user.id);
+    const mesures = await getAllMesuresByPopUpForMandataire(ti.id);
+    res.json(mesures);
+  } catch (e) {
+    next(e);
+  }
 });
 
 module.exports = router;
