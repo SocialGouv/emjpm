@@ -275,9 +275,11 @@ const getAllMesuresByPopUpForMandataire = ti_id =>
       status: "Mesure en cours",
       "users.active": true
     })
-    .groupByRaw(
-      "mesures.code_postal,geolocalisation_code_postal.longitude,geolocalisation_code_postal.latitude,geolocalisation_code_postal.code_postal"
-    );
+    .groupBy("users.type")
+    .groupBy("mesures.code_postal")
+    .groupBy("geolocalisation_code_postal.longitude")
+    .groupBy("geolocalisation_code_postal.latitude")
+    .groupBy("geolocalisation_code_postal.code_postal");
 
 const updateMesure = (where, updates) =>
   knex("mesures")
