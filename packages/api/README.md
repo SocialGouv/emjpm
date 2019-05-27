@@ -1,4 +1,4 @@
-# e-mjpm API [![CircleCI](https://circleci.com/gh/SocialGouv/eMJPM-api.svg?style=svg)](https://circleci.com/gh/SocialGouv/eMJPM-api)
+# e-mjpm API
 
 ## Get Started
 
