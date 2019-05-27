@@ -4,6 +4,16 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1ca934db263e43d59cfd7be7fd78ae75)](https://www.codacy.com/app/SocialGouv/emjpm)
 [![codecov](https://codecov.io/gh/SocialGouv/emjpm/branch/master/graph/badge.svg)](https://codecov.io/gh/SocialGouv/emjpm)
 
+## Installation
+
+Make sure you're using NodeJS 10.15
+
+```sh
+# Install all the packages
+$ yarn
+# This will trigger some build on the `postinstall` script
+```
+
 ### Build
 
 ```sh
