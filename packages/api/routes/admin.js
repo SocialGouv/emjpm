@@ -109,7 +109,7 @@ const { validationEmail } = require("../email/validation");
  */
 router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
   try {
-    const mandataires = await queries.getMandataires({ filters: req.query });
+    const mandataires = await queries.getUsers({ filters: req.query });
     res.json(mandataires);
   } catch (e) {
     next(e);

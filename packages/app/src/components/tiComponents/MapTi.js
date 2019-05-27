@@ -61,7 +61,7 @@ class MapTi extends React.Component {
         this.setState({
           lat: data.latitude,
           lng: data.longitude,
-          zoom: 10
+          zoom: 9
         });
       })
       .catch(console.log);
@@ -174,7 +174,7 @@ class MapTi extends React.Component {
                 })}
             </Map>
           </div>
-          <div style={{ flex: "1" }}>
+          <div style={{ flex: "2" }}>
             <DisplayMandataires mesureCount={mesureCount} filteredData={filteredData} />
           </div>
         </div>

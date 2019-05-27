@@ -7,43 +7,66 @@ import { format } from "date-fns";
 
 import { closeMesure } from "../actions/mesures";
 import Layout from "../../communComponents/ModalLayout";
+import { residence } from "../../common/nomination";
 
 const schema = {
-  type: "string",
-  format: "date"
-};
-
-const uiSchema = {
-  "ui:options": {
-    label: false
+  type: "object",
+  required: ["extinction", "reason_extinction"],
+  properties: {
+    extinction: {
+      type: "string",
+      format: "date"
+    },
+    reason_extinction: {
+      type: "string",
+      enum: [
+        "Caducité",
+        "Changement de mandataire",
+        "Changement de tribunal d'instance",
+        "Décès",
+        "Main levée",
+        "Autre"
+      ]
+    }
   }
 };
 
-const CloseMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
+const uiSchema = {
+  extinction: {
+    "ui:title": "Date d'extinction",
+    "ui:options": {
+      label: true
+    }
+  },
+  reason_extinction: {
+    "ui:autofocus": true,
+    "ui:title": "Raison de l'extinction",
+    "ui:options": {
+      label: true
+    }
+  }
+};
+
+const CloseMesure = ({ show, handleHide, onSubmit, id, mandataire_id, ...props }) => {
   const onSubmitted = ({ formData }) => {
     onSubmit({
-      date: formData,
-      id
+      ...formData,
+      id,
+      mandataire_id
     });
   };
   return (
     <Layout show={show} handleHide={handleHide}>
       <div style={{ textAlign: "center", marginTop: 50 }}>
-        <h3>Eteindre la mesure? </h3>
+        <h3>Mettre fin au mandat </h3>
         <br />
         <p style={{ padding: 20 }}>
-          Une fois cette opération effectuée, vous retrouverez cette mesure éteinte dans
-          l&apos;onglet correspondant, mais vous ne pourrez plus la modifier.
+          Une fois cette opération effectuée, vous retrouverez cette fin de mandat dans l'onglet correspondant.
         </p>
-        <Form
-          schema={schema}
-          uiSchema={uiSchema}
-          onSubmit={onSubmitted}
-          formData={format(new Date(), "YYYY-MM-DD")}
-        >
+        <Form schema={schema} uiSchema={uiSchema} onSubmit={onSubmitted}>
           <div style={{ margin: "20px 0", textAlign: "center" }}>
             <button type="submit" className="btn btn-success" style={{ padding: "10px 30px" }}>
-              Eteindre la mesure
+              Mettre fin au mandat
             </button>
           </div>
         </Form>
@@ -57,7 +80,6 @@ const mapDispatchToProps = (dispatch, ownProps) =>
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(
-  null,
-  mapDispatchToProps
-)(connectModal({ name: "CloseMesure", destroyOnHide: true })(CloseMesure));
+export default connect(null, mapDispatchToProps)(
+  connectModal({ name: "CloseMesure", destroyOnHide: true })(CloseMesure)
+);

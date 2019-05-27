@@ -43,7 +43,7 @@ router.get("/", typeRequired("ti"), async (req, res, next) => {
   }
   getAllMesuresByMandataires(ti.id)
     .then(mesures => {
-      res.status(200).json(mesures)
+      res.status(200).json(mesures);
     })
     .catch(error => next(error));
 });
