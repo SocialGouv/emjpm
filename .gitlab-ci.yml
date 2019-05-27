@@ -203,7 +203,6 @@ E2E Test @optional/e2e:
   image: $CI_REGISTRY_IMAGE/e2e:$CI_COMMIT_SHA
   services:
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
-      alias: emjpm__api
     - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
       command: ["-p", "5434"]
