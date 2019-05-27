@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
+    "babel-plugin-polished": "^1.1.0",
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "date-fns": "^1.30.1",
