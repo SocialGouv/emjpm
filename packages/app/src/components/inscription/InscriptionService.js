@@ -27,7 +27,6 @@ const schema = {
     adresse: { type: "string", default: "" },
     code_postal: { type: "string", default: "" },
     ville: { type: "string", default: "" },
-    mesures_en_cours: { type: "integer", default: 0 },
     dispo_max: { type: "integer", default: 0 }
   }
 };
@@ -52,7 +51,7 @@ const serviceUiSchema = {
   etablissement: {
     ...uiSchema.etablissement,
     "ui:title": "Nom du service",
-    "ui:placeholder": "ex: service MJPM du Nord"
+    "ui:placeholder": "ex: CHU de Nanterre"
   }
 };
 

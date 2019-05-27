@@ -14,7 +14,11 @@ const {
   update,
   getAllServicesByTis,
   getAllMandataires,
-  getAllByMandatairesFilter
+  getAllByMandatairesFilter,
+  getParentService,
+  updateService,
+  getAllMandatairesByUserId,
+  findMandataire
 } = require("../db/queries/mandataires");
 
 const {
@@ -24,6 +28,11 @@ const {
 const { updateUser } = require("../db/queries/users");
 
 const { getTiByUserId } = require("../db/queries/tis");
+
+const {
+  createMandataire,
+  createMandataireTi
+} = require("../db/queries/inscription");
 
 // récupère les données d'un mandataire
 
@@ -141,8 +150,31 @@ const WHITELIST = [
   "secretariat",
   "nb_secretariat",
   "mesures_en_cours",
-  "zip"
+  "zip",
+  "contact_nom",
+  "contact_prenom",
+  "contact_email"
 ];
+const WHITELISTSIEGESOCIAL = [
+  "nom",
+  "prenom",
+  "etablissement",
+  "telephone",
+  "email",
+  "adresse",
+  "code_postal",
+  "ville",
+  "dispo_max",
+  "mesures_en_cours",
+  "contact_nom",
+  "contact_prenom",
+  "contact_email"
+];
+
+const whiteListSiegeSocial = obj =>
+  Object.keys(obj)
+    .filter(key => WHITELISTSIEGESOCIAL.indexOf(key) > -1)
+    .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
 const whiteList = obj =>
   Object.keys(obj)
@@ -193,13 +225,21 @@ router.put(
         etablissement,
         mesures_en_cours,
         nb_secretariat,
-        type
+        type,
+        contact_nom,
+        contact_prenom,
+        contact_email
       } = req.body;
 
-      const mandataire = await getMandataireByUserId(req.user.id);
+      const mandataire = await findMandataire(req, req.body.id);
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
+
+      if (req.user.type === "service" && mandataire.user_id !== req.user.id) {
+        throw createError.Unauthorized(`Update not authorize`);
+      }
+
       const body = whiteList(req.body);
 
       if (Object.keys(body).length === 0) {
@@ -219,7 +259,10 @@ router.put(
         zip,
         etablissement,
         mesures_en_cours,
-        nb_secretariat
+        nb_secretariat,
+        contact_nom,
+        contact_prenom,
+        contact_email
       });
       await updateUser(req.user.id, {
         nom,
@@ -451,6 +494,105 @@ router.put(
     }
   }
 );
+
+router.get("/service", typeRequired("service"), async (req, res, next) => {
+  try {
+    const service = await getParentService(req.user.service_id);
+    if (!service) {
+      throw createError.Unauthorized(
+        `Service not found: ${req.user.service_id}`
+      );
+    }
+    res.status(200).json(service);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put(
+  "/service/:serviceId",
+  typeRequired("service"),
+  async (req, res, next) => {
+    try {
+      const service = await getParentService(req.body.id);
+      if (req.user.id !== service.userId) {
+        throw createError.Unauthorized(`Service not found`);
+      }
+      await updateService(req.body.id, whiteListSiegeSocial(req.body));
+      const serviceUpdated = await getParentService(req.body.id);
+      res.status(200).json(serviceUpdated);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+//ToDo(Adrien):Move /all to users routes
+router.get(
+  "/all",
+  typeRequired("individuel", "prepose", "service"),
+  async (req, res, next) => {
+    try {
+      const mandataires = await getAllMandatairesByUserId(req.user.id);
+      if (!mandataires) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
+      res.status(200).json(mandataires);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+router.post("/", typeRequired("service"), async (req, res, next) => {
+  try {
+    const {
+      etablissement,
+      contact_nom,
+      contact_prenom,
+      telephone,
+      telephone_portable,
+      contact_email,
+      adresse,
+      code_postal,
+      ville,
+      service_id,
+      dispo_max,
+      tis
+    } = req.body;
+
+    const mandataire = await createMandataire({
+      user_id: req.user.id,
+      etablissement,
+      telephone,
+      telephone_portable,
+      adresse,
+      code_postal,
+      ville,
+      contact_nom,
+      contact_prenom,
+      contact_email,
+      service_id,
+      dispo_max
+    });
+
+    if (!tis || tis.length === 0) {
+      return true;
+    }
+    await Promise.all(
+      tis.map(ti_id =>
+        createMandataireTi({
+          mandataire_id: mandataire[0],
+          ti_id
+        })
+      )
+    );
+
+    res.json({ success: true });
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));

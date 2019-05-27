@@ -7,16 +7,19 @@ import { Button } from "../..";
 import { reactivateMesure } from "../actions/mesures";
 import Layout from "../../communComponents/ModalLayout";
 
-const ReactivateMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
+const ReactivateMesure = ({ show, handleHide, onSubmit, id, mandataire_id, ...props }) => {
   return (
     <Layout show={show} handleHide={handleHide}>
       <div style={{ textAlign: "center", marginTop: 50 }}>
-        <h3>Réactiver la mesure? </h3>
+        <h3>Voulez-vous réactiver la mesure ? </h3>
         <br />
         <br />
         <div style={{ margin: "20px 0", textAlign: "center" }}>
-          <Button data-cy="button-modal-reactivate-mesure" onClick={() => onSubmit(id)}>
-            Réactiver la Mesure
+          <Button
+            data-cy="button-modal-reactivate-mesure"
+            onClick={() => onSubmit({ id: id, mandataire_id: mandataire_id })}
+          >
+            Cliquez ici
           </Button>
         </div>
       </div>
@@ -25,11 +28,13 @@ const ReactivateMesure = ({ show, handleHide, onSubmit, id, ...props }) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) =>
-  bindActionCreators({ onSubmit: data => reactivateMesure({ id: data }) }, dispatch);
+  bindActionCreators(
+    { onSubmit: data => reactivateMesure({ id: data.id, mandataire_id: data.mandataire_id }) },
+    dispatch
+  );
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(
-  null,
-  mapDispatchToProps
-)(connectModal({ name: "ReactivateMesure", destroyOnHide: true })(ReactivateMesure));
+export default connect(null, mapDispatchToProps)(
+  connectModal({ name: "ReactivateMesure", destroyOnHide: true })(ReactivateMesure)
+);

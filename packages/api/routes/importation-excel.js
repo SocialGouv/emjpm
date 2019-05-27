@@ -9,7 +9,7 @@ const router = express.Router();
 
 const {
   updateCountMesures,
-  getMandataireByUserId
+  findMandataire
 } = require("../db/queries/mandataires");
 
 router.post(
@@ -17,19 +17,27 @@ router.post(
   typeRequired("individuel", "prepose", "service"),
   async (req, res, next) => {
     try {
-      const mandataire = await getMandataireByUserId(req.user.id);
-      if (!mandataire) {
-        throw createError.Unauthorized(`Mandataire not found`);
+      const mandataire = await findMandataire(req, req.body.mandataireId);
+
+      if (req.user.type === "service" && mandataire.user_id !== req.user.id) {
+        throw createError.Unauthorized(`Mandataire not authorized`);
       }
+      if (!mandataire) {
+        throw createError.NotFound(`Mandataire not found`);
+      }
+
       const mesures =
-        (req.body.map &&
-          req.body.map(datum => ({
+        (req.body &&
+          req.body.sheetData &&
+          req.body.sheetData.map &&
+          req.body.sheetData.map(datum => ({
             ...datum,
             mandataire_id: mandataire.id,
             status: "Mesure en cours"
           }))) ||
         [];
-      if (!req.body.length) {
+
+      if (req.body.sheetData && !req.body.sheetData.length) {
         res.json({
           success: false,
           added: 0,
@@ -37,6 +45,7 @@ router.post(
         });
         return;
       }
+
       return queries
         .bulk({ mesures, mandataire_id: mandataire.id })
         .then(result => {

@@ -1,15 +1,27 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const createError = require("http-errors");
-
 const salt = bcrypt.genSaltSync();
 
 const router = express.Router();
 const knex = require("../db/knex");
 
 const queries = require("../db/queries/inscription");
+const { getTiById } = require("../db/queries/tis");
 const { inscriptionEmail } = require("../email/inscription");
 const { getCountByEmail } = require("../db/queries/users");
+
+const getTisNames = async tis => {
+  const getEtablissementByTi = id =>
+    getTiById(id).then(json => json.etablissement);
+  if (tis) {
+    const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(
+      ", "
+    );
+    return tiNames;
+  }
+};
+
 /**
  * @swagger
  *
@@ -155,10 +167,11 @@ const { getCountByEmail } = require("../db/queries/users");
  *               items:
  *                 $ref: '#/components/schemas/InscriptionTi'
  */
+
 router.get("/tis", async (req, res, next) => {
   try {
     const data = await queries.getTiByRegion();
-    res.json(data)
+    res.json(data);
   } catch (e) {
     next(e);
   }
@@ -198,7 +211,8 @@ router.post("/mandataires", async (req, res, next) => {
       adresse,
       code_postal,
       ville,
-      tis
+      tis,
+      dispo_max
     } = req.body;
 
     if (pass1 !== pass2 || username.trim() === "") {
@@ -213,66 +227,89 @@ router.post("/mandataires", async (req, res, next) => {
       throw createError.Conflict("Un compte avec cet email existe déjà");
     }
 
-    const createUser = async trx =>
-      await queries.createUser(
-        {
-          username,
-          type,
-          nom,
-          prenom,
-          email,
-          password: bcrypt.hashSync(pass1, salt),
-          active: false
-        },
-        trx
-      );
-
-    const createMandataire = async (trx, { user_id }) =>
-      await queries.createMandataire(
-        {
-          user_id,
-          etablissement,
-          telephone,
-          telephone_portable,
-          adresse,
-          code_postal,
-          ville
-        },
-        trx
-      );
-
-    await knex.transaction(async trx => {
+    await knex.transaction(async function(trx) {
+      // create user
       try {
-        const [user_id] = await createUser(trx);
+        if (type === "service") {
+          const serviceId = await queries.createService(
+            {
+              etablissement,
+              nom,
+              prenom,
+              email,
+              telephone,
+              adresse,
+              code_postal,
+              ville,
+              dispo_max
+            },
+            trx
+          );
+          await queries.createUser(
+            {
+              username,
+              type,
+              nom,
+              prenom,
+              email,
+              service_id: serviceId[0],
+              password: bcrypt.hashSync(pass1, salt),
+              active: false
+            },
+            trx
+          );
+        } else {
+          const userId = await queries.createUser(
+            {
+              username,
+              type,
+              nom,
+              prenom,
+              email,
+              password: bcrypt.hashSync(pass1, salt),
+              active: false
+            },
+            trx
+          );
 
-        await createMandataire(trx, { user_id });
-
-        if (!tis || tis.length === 0) {
-          return Promise.resolve();
-        }
-
-        await Promise.all(
-          tis.map(ti_id =>
-            queries.createUserTi(
-              {
-                user_id,
-                ti_id
-              },
-              trx
+          await queries.createMandataire(
+            {
+              user_id: userId[0],
+              etablissement,
+              telephone,
+              telephone_portable,
+              adresse,
+              code_postal,
+              ville
+            },
+            trx
+          );
+          if (!tis || tis.length === 0) {
+            return true;
+          }
+          await Promise.all(
+            tis.map(ti_id =>
+              queries.createUserTi(
+                {
+                  user_id: userId[0],
+                  ti_id
+                },
+                trx
+              )
             )
-          )
-        );
-
+          );
+        }
         await trx.commit();
       } catch (e) {
         await trx.rollback(e);
-        throw e;
       }
     });
 
-    await inscriptionEmail(nom, prenom, email);
+    const tiNames = await getTisNames(tis);
 
-    return res.json({ success: true });
+    await inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
+
+    res.json({ success: true });
   } catch (e) {
     // see https://www.postgresql.org/docs/9.2/errcodes-appendix.html
     const PQ_UNIQUE_VIOLATION_ERROR_CODE = String(23505);
@@ -288,7 +325,6 @@ router.post("/mandataires", async (req, res, next) => {
     }
   }
 });
-
 /**
  * @swagger
  * /inscription/tis:
@@ -358,8 +394,9 @@ router.post("/tis", (req, res, next) => {
           );
         })
     )
-    .then(() => {
-      return inscriptionEmail(nom, prenom, email);
+    .then(() => getTisNames(tis))
+    .then(tis => {
+      return inscriptionEmail(nom, prenom, email, null, type, tis);
     })
     .then(() => {
       return res.json({ success: true });

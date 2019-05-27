@@ -22,9 +22,7 @@ export const PillDispo = ({ mesures_en_cours, dispo_max }) => (
 );
 
 const PillDispoRedux = connect(state => ({
-  lastUpdate: state.mesures.lastUpdate,
-  mesures_en_cours: state.mandataire.profile.mesures_en_cours,
-  dispo_max: state.mandataire.profile.dispo_max
+  lastUpdate: state.mesures.lastUpdate
 }))(PillDispo);
 
 export default PillDispoRedux;
