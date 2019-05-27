@@ -131,7 +131,7 @@ Test @emjpm/api:
     POSTGRES_PASSWORD: test
   script:
     - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
-    - yarn workspace @emjpm/api test --maxWorkers=2 --coverage
+    - yarn workspace @emjpm/api test --runInBand --coverage
 
 Test @emjpm/app:
   <<: *quality_stage
