@@ -224,7 +224,7 @@ const COLUMNS = [
     Header: "Fin de mandat",
     id: "fin-mandat",
     Cell(row) {
-      <CellCloseMesureRedux row={row} />;
+      return <CellCloseMesureRedux row={row} />;
     },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
@@ -234,7 +234,7 @@ const COLUMNS = [
     Header: "Réactiver",
     id: "reactiver",
     Cell(row) {
-      <CellReactivateMesureRedux row={row} />;
+      return <CellReactivateMesureRedux row={row} />;
     },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
@@ -243,7 +243,7 @@ const COLUMNS = [
     Header: "Valider",
     id: "valider",
     Cell(row) {
-      <CellValidationMesureRedux row={row} />;
+      return <CellValidationMesureRedux row={row} />;
     },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
