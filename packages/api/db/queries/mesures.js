@@ -70,7 +70,7 @@ const getAllMesuresByMandatairesFilter = (
       "mesures.code_postal"
     )
     .whereIn("users.type", ["individuel", "prepose"])
-    .leftOuterJoin("services", "users.service_id", "services.id")
+    .leftOuterJoin("services", "mandataires.service_id", "services.id")
     .groupBy(
       "geolocalisation_code_postal.latitude",
       "geolocalisation_code_postal.longitude",
@@ -115,7 +115,7 @@ const getAllMesuresByMandatairesFilter = (
           "geolocalisation_code_postal.code_postal",
           "mandataires.code_postal"
         )
-        .leftOuterJoin("services", "users.service_id", "services.id")
+        .leftOuterJoin("services", "mandataires.service_id", "services.id")
         .where("users.type", "service")
         .where("service_tis.ti_id", Number(ti_id));
     });
