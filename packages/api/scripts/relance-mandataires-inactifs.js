@@ -46,7 +46,9 @@ const relanceMandataireProfilNotUpdated = () => {
       mandataires &&
       mandataires.map &&
       mandataires.map(mandataire => {
+        /* eslint-disable no-console */
         console.log(`send email-relance to ${mandataire.email}`);
+        /* eslint-enable no-console */
         return sendEmail(
           mandataire.email,
           "e-MJPM : actualisez vos données",
@@ -54,13 +56,17 @@ const relanceMandataireProfilNotUpdated = () => {
           EMAIL_RELANCE_HTML
         )
           .then(() => {
+            /* eslint-disable no-console */
             console.log(`ERROR sending email-relance to ${mandataire.email}`);
+            /* eslint-enable no-console */
             // MAJ mandataire.email_send
             return updateMandataireMailSent(mandataire.id);
           })
           .catch(e => {
             // todo: sentry
+            /* eslint-disable no-console */
             console.log(e);
+            /* eslint-enable no-console */
           });
       })
     );

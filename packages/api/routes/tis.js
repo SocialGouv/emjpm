@@ -130,7 +130,9 @@ router.delete("/1/tis/:tiId", loginRequired, async (req, res, next) => {
     .then(() => getAllTisByMandataire(mandataire.id))
     .then(tis => res.status(200).json(tis))
     .catch(error => {
+      /* eslint-disable no-console */
       console.log(error);
+      /* eslint-enable no-console */
       next(error);
     });
 });

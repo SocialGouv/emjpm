@@ -34,7 +34,6 @@ const ALLOWED_FILTERS = [
 
 const {
   updateCountMesures,
-  getMandataireByUserId,
   getMesuresMap,
   isMandataireInTi
 } = require("../db/queries/mandataires");

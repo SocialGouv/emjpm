@@ -1,4 +1,5 @@
 //
+
 const request = require("supertest");
 const nodemailerMock = require("nodemailer-mock");
 jest.setMock("nodemailer", nodemailerMock);
@@ -35,7 +36,9 @@ const defaultRegister = {
   tis: [1]
 };
 
+/* eslint-disable no-unused-vars */
 const simpler = ({ created_at, ...props }) => props;
+/* eslint-enable no-unused-vars */
 
 test("should register with good values", async () => {
   const token = await getTokenByUserType("service");

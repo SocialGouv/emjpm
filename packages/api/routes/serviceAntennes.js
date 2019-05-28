@@ -9,6 +9,7 @@ const {
   deleteAntenne
 } = require("../db/queries/serviceAntennes");
 
+const { getTiByUserId } = require("../db/queries/tis");
 const { getMandataireByUserId } = require("../db/queries/mandataires");
 
 /** @swagger
@@ -73,6 +74,7 @@ router.post(
   async (req, res, next) => {
     // secu : ensure TI can write on this mandataire + add related test
     const mandataire = await getMandataireByUserId(req.user.id);
+    const ti = await getTiByUserId(req.user.id);
     addAntenne({
       ...req.body,
       mandataire_id: mandataire.id
@@ -84,7 +86,9 @@ router.post(
         res.status(200).json(commentaires);
       })
       .catch(function(error) {
+        /* eslint-disable no-console */
         console.log(error);
+        /* eslint-enable no-console */
         next(error);
       });
   }
