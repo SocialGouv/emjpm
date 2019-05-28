@@ -9,7 +9,7 @@ import Layout from "../../communComponents/ModalLayout";
 import { typeMesure, civilite } from "../../common/nomination";
 
 const schema = {
-  title: "Modifier la mesure",
+  title: "Ouvrir une nouvelle mesure",
   type: "object",
   required: ["civilite", "annee", "date_ouverture"],
   properties: {
