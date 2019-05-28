@@ -10,67 +10,63 @@ import Form from "react-jsonschema-form";
 
 // bouton connecté à redux-modal.show pour EditMesure
 
-const CellEditMesureRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
-)(({ row, show }) => (
-  <Button
-    data-cy="button-edit-mesure"
-    onClick={() =>
-      show("EditMesure", { formData: row.original, mandataire_id: row.original.mandataire_id })
-    }
-  >
-    Modifier
-  </Button>
-));
+const CellEditMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
+  ({ row, show }) => (
+    <Button
+      data-cy="button-edit-mesure"
+      onClick={() =>
+        show("EditMesure", { formData: row.original, mandataire_id: row.original.mandataire_id })
+      }
+    >
+      Modifier
+    </Button>
+  )
+);
 
 // bouton connecté à redux-modal.show pour CloseMesure
-const CellCloseMesureRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
-)(({ row, show }) => (
-  <Button
-    data-cy="button-close-mesure"
-    error
-    onClick={() =>
-      show("CloseMesure", { id: row.original.id, mandataire_id: row.original.mandataire_id })
-    }
-  >
-    Mettre fin au mandat
-  </Button>
-));
+const CellCloseMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
+  ({ row, show }) => (
+    <Button
+      data-cy="button-close-mesure"
+      error
+      onClick={() =>
+        show("CloseMesure", { id: row.original.id, mandataire_id: row.original.mandataire_id })
+      }
+    >
+      Mettre fin au mandat
+    </Button>
+  )
+);
 
 // bouton connecté à redux-modal.show pour ReactivateMesure
-const CellReactivateMesureRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
-)(({ row, show }) => (
-  <Button
-    data-cy="button-reactivate-mesure"
-    onClick={() =>
-      show("ReactivateMesure", { id: row.original.id, mandataire_id: row.original.mandataire_id })
-    }
-  >
-    Réactiver la mesure
-  </Button>
-));
+const CellReactivateMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
+  ({ row, show }) => (
+    <Button
+      data-cy="button-reactivate-mesure"
+      onClick={() =>
+        show("ReactivateMesure", { id: row.original.id, mandataire_id: row.original.mandataire_id })
+      }
+    >
+      Réactiver la mesure
+    </Button>
+  )
+);
 
-const CellValidationMesureRedux = connect(
-  null,
-  dispatch => bindActionCreators({ show }, dispatch)
-)(({ row, show }) => (
-  <Button
-    data-cy="button-attente-mesure"
-    onClick={() =>
-      show("ValiderMesureEnAttente", {
-        formData: row.original,
-        mandataire_id: row.original.mandataire_id
-      })
-    }
-  >
-    Valider
-  </Button>
-));
+const CellValidationMesureRedux = connect(null, dispatch => bindActionCreators({ show }, dispatch))(
+  ({ row, show }) => (
+    <Button
+      data-cy="button-attente-mesure"
+      onClick={() =>
+        show("ValiderMesureEnAttente", {
+          formData: row.original,
+          mandataire_id: row.original.mandataire_id
+        })
+      }
+    >
+      Valider
+    </Button>
+  )
+);
 
 const concat = (...strings) =>
   strings
