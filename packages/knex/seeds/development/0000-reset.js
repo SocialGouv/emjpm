@@ -1,4 +1,4 @@
-exports.seed = (knex, Promise) => {
+exports.seed = knex => {
   // TRUNCATE AND RESET ALL DATA TABLES
   return knex("pg_catalog.pg_tables")
     .select("tablename")
@@ -19,4 +19,3 @@ exports.seed = (knex, Promise) => {
     })
     .catch(console.log);
 };
-
