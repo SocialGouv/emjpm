@@ -2621,6 +2621,13 @@ babel-plugin-jest-hoist@^24.6.0:
   dependencies:
     "@types/babel__traverse" "^7.0.6"
 
+babel-plugin-polished@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-polished/-/babel-plugin-polished-1.1.0.tgz#7f6902ab8e9c20fc14cb53d596dd858880e357d3"
+  integrity sha1-f2kCq46cIPwUy1PVlt2FiIDjV9M=
+  dependencies:
+    polished "^1.0.0"
+
 babel-plugin-react-require@3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/babel-plugin-react-require/-/babel-plugin-react-require-3.0.0.tgz#2e4e7b4496b93a654a1c80042276de4e4eeb20e3"
@@ -9896,6 +9903,11 @@ pn@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/pn/-/pn-1.1.0.tgz#e2f4cef0e219f463c179ab37463e4e1ecdccbafb"
   integrity sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==
+
+polished@^1.0.0:
+  version "1.9.3"
+  resolved "https://registry.yarnpkg.com/polished/-/polished-1.9.3.tgz#d61b8a0c4624efe31e2583ff24a358932b6b75e1"
+  integrity sha512-4NmSD7fMFlM8roNxs7YXPv7UFRbYzb0gufR5zBxJLRzY54+zFsavxBo6zsQzP9ep6Hh3pC2pTyrpSTBEaB6IkQ==
 
 polished@^3.4.0:
   version "3.4.0"
