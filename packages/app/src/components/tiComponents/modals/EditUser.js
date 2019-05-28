@@ -37,7 +37,7 @@ const uiSchema = {
   }
 };
 
-const EditUser = ({ show, handleHide, formData, onSubmit, ...props }) => {
+const EditUser = ({ show, handleHide, formData, onSubmit }) => {
   const cleanData = {
     nom: formData.nom || "",
     prenom: formData.prenom || "",

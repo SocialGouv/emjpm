@@ -20,7 +20,11 @@ const ChangePassword = email => {
       alert("Un email vient de vous être envoyé");
       Router.push("/tis");
     })
-    .catch(e => console.log(e));
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.error(error);
+      /* eslint-enable no-console */
+    });
 };
 
 // bouton connecté à redux-modal.show pour EditMandataire
@@ -86,7 +90,7 @@ const UserProfile = ({ currentUser }) => (
   </div>
 );
 
-const mapDispatchToProps = (dispatch, ownProps) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators({ updateUser: data => updateUser(data) }, dispatch);
 
 const ProfileUserRedux = connect(

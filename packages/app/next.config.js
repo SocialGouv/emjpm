@@ -3,7 +3,9 @@ const withCSS = require("@zeit/next-css");
 const withImages = require("next-images");
 const withTM = require("next-plugin-transpile-modules");
 
+/* eslint-disable no-console */
 process.on("unhandledRejection", r => console.log(r));
+/* eslint-enable no-console */
 
 module.exports = withTM(
   withCSS(

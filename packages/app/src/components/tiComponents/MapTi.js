@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import FilterMesuresMap from "./FilterMesuresMap";
 import DisplayMandataires from "./DisplayMandataires";
 import apiFetch from "../communComponents/Api";
-import getCenter from "../communComponents/getCenter";
 import { filterDataForMandataires } from "../index";
 import FilterMandataires from "./FilterMandataires";
 
@@ -49,7 +48,11 @@ class MapTi extends React.Component {
               loading: false
             });
           })
-          .catch(console.log)
+          .catch(error => {
+            /* eslint-disable no-console */
+            console.log(error);
+            /* eslint-enable no-console */
+          })
       );
     }
   };
@@ -64,10 +67,14 @@ class MapTi extends React.Component {
           zoom: 9
         });
       })
-      .catch(console.log);
+      .catch(error => {
+        /* eslint-disable no-console */
+        console.log(error);
+        /* eslint-enable no-console */
+      });
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     // hack to force reload when some redux state change
     if (prevProps.data !== this.props.data) {
       this.fetchData();
@@ -115,14 +122,16 @@ class MapTi extends React.Component {
           lng: mesure.longitude
         });
       })
-      .catch(e => {
-        console.log(e);
+      .catch(error => {
+        /* eslint-disable no-console */
+        console.log(error);
+        /* eslint-enable no-console */
       });
   };
 
   render() {
     this.mapRef.current && this.mapRef.current.leafletElement.setMaxZoom(13);
-    const { dataFilters, datamesureFilters, isMandataire, filters, coordinates } = this.props;
+    const { dataFilters, datamesureFilters, isMandataire, filters } = this.props;
     //const center = getCenter(this.state, coordinates);
     const center = [this.state.lat, this.state.lng];
     const filterMesure = {

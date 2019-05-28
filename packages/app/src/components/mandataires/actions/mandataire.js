@@ -12,7 +12,7 @@ export const CHANGE_MANDATAIRE_ID = "CHANGE_MANDATAIRE_ID";
 export const ANTENNES_UPDATED = "ANTENNES_UPDATED";
 export const CHANGE_MANDATAIRE_ID_INIT = "CHANGE_MANDATAIRE_ID_INIT";
 export const USER_PROFILE_UPDATED = "USER_PROFILE_UPDATED";
-
+export const MANDATAIRE_PROFILE_UPDATED = "MANDATAIRE_PROFILE_UPDATED";
 /* ---------- API */
 export const fetchUserProfiles = () => apiFetch(`/users/1`);
 export const fetchProfiles = () => apiFetch(`/mandataires/all`);
@@ -98,9 +98,9 @@ export const updateMandataire = data => async dispatch => {
     const profile = await fetchProfiles();
     await dispatch(hide(data.type === "service" ? "EditService" : "EditMandataire"));
     await dispatch(mandataireProfilesUpdated(profile));
-  } catch (err) {
+  } catch (e) {
     alert("Impossible de soumettre les données");
-    next(err);
+    throw e;
   }
 };
 

@@ -2,46 +2,52 @@ import ReactTable from "react-table";
 import format from "date-fns/format";
 import queryString from "query-string";
 
-import ToggleState from "../common/ToggleState";
-import SearchButton from "../communComponents/SearchButton";
-import { default as apiFetch, updateUser } from "../communComponents/Api";
+// TODO: Should we remove that ?
+// import ToggleState from "../common/ToggleState";
+// import SearchButton from "../communComponents/SearchButton";
+import { default as apiFetch } from "../communComponents/Api";
 
-const CellActive = ({ active }) => (
-  <span>
-    <span
-      style={{
-        color: active ? "#57d500" : "#ff2e00"
-      }}
-    >
-      &#x25cf;
+const CellActive = ({ active }) => {
+  return (
+    <span>
+      <span
+        style={{
+          color: active ? "#57d500" : "#ff2e00"
+        }}
+      >
+        &#x25cf;
+      </span>
     </span>
-  </span>
-);
+  );
+};
 
-const CellAction = ({ row: { id, active } }) => (
-  <ToggleState
-    getPromise={active =>
-      updateUser({
-        id,
-        active
-      })
-    }
-    active={active}
-    render={({ active, toggle }) => {
-      return (
-        <SearchButton
-          onClick={toggle}
-          error={active}
-          data-cy="UserCellAction"
-          style={{ textAlign: "center", fontSize: "0.8em" }}
-          type="submit"
-        >
-          {(active && "Désactiver") || "Activer"}
-        </SearchButton>
-      );
-    }}
-  />
-);
+CellActive.displayName = "CellActive";
+
+// TODO: Should we remove that ?
+// const CellAction = ({ row: { id, active } }) => (
+//   <ToggleState
+//     getPromise={active =>
+//       updateUser({
+//         id,
+//         active
+//       })
+//     }
+//     active={active}
+//     render={({ active, toggle }) => {
+//       return (
+//         <SearchButton
+//           onClick={toggle}
+//           error={active}
+//           data-cy="UserCellAction"
+//           style={{ textAlign: "center", fontSize: "0.8em" }}
+//           type="submit"
+//         >
+//           {(active && "Désactiver") || "Activer"}
+//         </SearchButton>
+//       );
+//     }}
+//   />
+// );
 
 const COLUMNS = [
   {
@@ -54,7 +60,9 @@ const COLUMNS = [
   {
     Header: "Actif",
     accessor: "active",
-    Cell: row => <CellActive active={row.value} />,
+    Cell(row) {
+      <CellActive active={row.value} />;
+    },
     width: 70,
     show: false, // the button show more accurate status
     style: { textAlign: "center" }
@@ -103,7 +111,9 @@ const COLUMNS = [
   },
   {
     Header: "Activer",
-    Cell: row => <CellAction row={row.row} />,
+    Cell(row) {
+      <CellActive active={row.row} />;
+    },
     width: 120,
     style: { textAlign: "center", alignSelf: "center" }
   }
@@ -115,7 +125,7 @@ class TableUser extends React.Component {
     data: [],
     loading: true
   };
-  fetchData = (state, instance) => {
+  fetchData = () => {
     const url =
       this.props.type === "mandataire"
         ? `/admin/mandataires?${queryString.stringify(this.props.filters)}`
@@ -148,7 +158,6 @@ class TableUser extends React.Component {
             desc: false
           }
         ]}
-        //defaultPageSize={PAGE_SIZE}
         onFetchData={this.fetchData}
         className="-striped -highlight"
       />

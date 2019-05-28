@@ -1,9 +1,10 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { X, Save, PlusSquare, XCircle, CheckCircle } from "react-feather";
 import { format } from "date-fns";
-import { typeMesure, residence, civilite, cabinet } from "../common/nomination";
+import { typeMesure, residence, civilite } from "../common/nomination";
 
 import { Button, ToggleState, Autocomplete } from "..";
 import { createMesure, createMesureSave } from "./actions/mesures";
@@ -249,13 +250,11 @@ const CreateMesure = ({
   createMesure,
   mesureCreatedStatus,
   mesureCreatedMessage,
-  children,
   mandataireId,
   formData = {
     date_ouverture: format(new Date(), "YYYY-MM-DD"),
     mandataire_id: mandataireId
-  },
-  ...props
+  }
 }) => {
   return (
     <ToggleState
@@ -345,4 +344,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 // connect to redux store actions
-export default connect(mapStateToProps, mapDispatchToProps)(CreateMesure);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateMesure);

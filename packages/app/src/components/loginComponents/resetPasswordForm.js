@@ -117,6 +117,7 @@ class ResetPassword extends React.Component {
     formData: {}
   };
   componentDidMount() {
+    // eslint-disable-next-line react/no-find-dom-node
     const node = findDOMNode(this);
     if (node) {
       const input = node.querySelector("input");

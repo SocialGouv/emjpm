@@ -91,8 +91,8 @@ const ModalMesureReservation = ({
   );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) =>
-  bindActionCreators({ show, openValidationModal }, dispatch);
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "ModalMesureReservation" })(ModalMesureReservation)
-);
+const mapDispatchToProps = dispatch => bindActionCreators({ show, openValidationModal }, dispatch);
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectModal({ name: "ModalMesureReservation" })(ModalMesureReservation));

@@ -46,7 +46,7 @@ const StyledTab = styled(Tab)`
 const DummyTabs = ({ tabs }) => (
   <Tabs style={{ background: "white" }}>
     <TabList style={{ background: "#cad4de", borderBottom: 0, marginBottom: 0 }}>
-      {tabs.map((tab, i) => (
+      {tabs.map(tab => (
         <StyledTab className="react-tabs__tab" data-cy={tab.text} key={tab.text}>
           <IconWrapper>{tab.icon}</IconWrapper>
           {tab.text}
