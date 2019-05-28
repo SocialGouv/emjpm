@@ -1,10 +1,10 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return knex.schema
-    .alterTable("mandataires", function(table) {})
+    .alterTable("mandataires", function() {})
     .then(() => knex.raw(onUpdateTrigger("mandataires")));
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function() {
   return Promise.resolve();
 };
 

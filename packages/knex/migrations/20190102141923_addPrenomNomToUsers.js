@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   const userTisAll = knex("users_tis");
   const mandataires = knex("mandataires");
   const mandataireTis = knex("mandataire_tis").innerJoin(
@@ -77,7 +77,7 @@ exports.up = function(knex, Promise) {
     .then(() => knex.schema.dropTable("mandataire_tis"));
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return knex.schema
     .alterTable("users", function(table) {
       table.dropColumn("nom");

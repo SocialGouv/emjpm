@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   /*
     - ajouter une colonne users.type :
       - admin
@@ -97,7 +97,7 @@ exports.up = function(knex, Promise) {
   );
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return knex.schema
     .alterTable("users", function(table) {
       table.dropColumn("type");
