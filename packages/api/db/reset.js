@@ -66,12 +66,16 @@ const reset = () =>
         )
     )
     .then(inserts => {
+      /* eslint-disable no-console */
       console.log(
         inserts && `serial_sequence: ${inserts.length} sequences resetted`
       );
+      /* eslint-enable no-console */
     })
     .catch(error => {
+      /* eslint-disable no-console */
       console.error(error);
+      /* eslint-enable no-console */
     });
 
 module.exports = reset;

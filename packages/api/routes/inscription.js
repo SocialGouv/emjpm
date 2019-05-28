@@ -343,7 +343,7 @@ router.post("/mandataires", async (req, res, next) => {
  *             $ref: "#/components/schemas/SuccessResponse"
  *
  */
-router.post("/tis", (req, res, next) => {
+router.post("/tis", (req, res) => {
   const {
     username,
     pass1,
@@ -401,7 +401,7 @@ router.post("/tis", (req, res, next) => {
     .then(() => {
       return res.json({ success: true });
     })
-    .catch(e => {
+    .catch(() => {
       return res.status(500).json({
         success: false
       });

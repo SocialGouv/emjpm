@@ -17,7 +17,9 @@ beforeAll(async () => {
 });
 
 // strip the created_at date in the response
+/* eslint-disable no-unused-vars */
 const simpler = ({ created_at, ...props }) => props;
+/* eslint-enable no-unused-vars */
 
 test("should get mesures filtered by localisation", async () => {
   const token = await getTokenByUserType("ti");

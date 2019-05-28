@@ -40,7 +40,9 @@ const inscriptionEmail = (nom, prenom, email, codePostal, type, tis) =>
     EMAIL_RELANCE_HTML(nom, prenom, email, codePostal, type, tis)
   ).catch(e => {
     // todo: sentry
+    /* eslint-disable no-console */
     console.log(e);
+    /* eslint-enable no-console */
   });
 
 module.exports = {

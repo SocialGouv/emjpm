@@ -14,7 +14,9 @@ beforeAll(async () => {
   await knex.seed.run();
 });
 
+/* eslint-disable no-unused-vars */
 const simpler = ({ created_at, ...props }) => props;
+/* eslint-enable no-unused-vars */
 
 test("should GET tis for one mandataire ", async () => {
   const token = await getTokenByUserType("mandataire");

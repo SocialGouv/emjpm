@@ -24,7 +24,9 @@ afterEach(async () => {
 });
 
 // strip the created_at date in the response
+/* eslint-disable no-unused-vars */
 const simpler = ({ created_at, ...props }) => props;
+/* eslint-enable no-unused-vars */
 
 test("should import mesures correctly", async () => {
   const token = await getTokenByUserType("mandataire");
@@ -68,7 +70,9 @@ test("should skip existing references", async () => {
     const response = await request(server)
       .post("/api/v1/mandataires/mesures/bulk")
       .set("Authorization", "Bearer " + token)
-      .send({ sheetData: [{ numero_dossier: "abc" }, { numero_dossier: "xyz" }]});
+      .send({
+        sheetData: [{ numero_dossier: "abc" }, { numero_dossier: "xyz" }]
+      });
 
     expect(response.status).toBe(200);
     expect(response.body).toMatchSnapshot();

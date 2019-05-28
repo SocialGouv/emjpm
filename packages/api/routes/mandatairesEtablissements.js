@@ -155,7 +155,9 @@ router.delete(
       .then(() => getAllEtablissementsByMandataire(mandataire.id))
       .then(etablissements => res.status(200).json(etablissements))
       .catch(error => {
+        /* eslint-disable no-console */
         console.log(error);
+        /* eslint-enable no-console */
         next(error);
       });
   }
