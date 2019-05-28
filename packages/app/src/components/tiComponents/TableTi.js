@@ -131,6 +131,14 @@ const COLUMNS = [
     style: { textAlign: "center", verticalAlign: "middle" }
   },
   {
+    Header: "service_etablissement",
+    id: "service_etablissement",
+    accessor: "service_etablissement",
+    width: 20,
+    show: false,
+    style: { textAlign: "center", verticalAlign: "middle" }
+  },
+  {
     Header: "",
     id: "identity",
     width: 50,
@@ -158,7 +166,7 @@ const COLUMNS = [
     Cell: row => (
       <Cell row={row} style={{ verticalAlign: "middle" }}>
         {row.row.identity === "service" ? (
-          <b>{row.row.etablissement}</b>
+          <b>{`${row.row.service_etablissement} ${row.row.etablissement}`}</b>
         ) : (
           <b>
             {row.row.nom} {row.row.prenom}
