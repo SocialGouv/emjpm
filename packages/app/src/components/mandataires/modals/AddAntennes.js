@@ -8,7 +8,6 @@ import { addAntennesToMandataires } from "../actions/mandataire";
 import Resolve from "../../common/Resolve";
 import TiSelector from "../../inscription/TiSelector";
 import apiFetch from "../../communComponents/Api";
-import { ErrorBox } from "../../common/ShowBox";
 
 const schema = {
   title: "Ajouter une antenne",
@@ -71,7 +70,7 @@ class AddAntennes extends React.Component {
   state = {
     tis: [],
     formData: {},
-    status: "idle",
+    status: "idle"
   };
 
   setTis = tis => {

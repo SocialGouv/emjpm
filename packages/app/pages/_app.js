@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/browser";
 import App, { Container } from "next/app";
 import getConfig from "next/config";
 import React from "react";
-import piwik, { trackUser } from "../src/piwik";
+// import piwik, { trackUser } from "../src/piwik";
 
 const {
   publicRuntimeConfig: { SENTRY_PUBLIC_DSN }
@@ -69,25 +69,27 @@ function sentrySetup() {
         }
         //tags: { git_commit: "c0deb10c4" }
       });
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      /* eslint-disable no-console */
+      console.log(error);
+      /* eslint-enable no-console */
     }
   }
 }
 
-function piwikSetup() {
-  const isBrowser = typeof document !== undefined;
-  if (!isBrowser) {
-    return;
-  }
+// function piwikSetup() {
+//   const isBrowser = typeof document !== undefined;
+//   if (!isBrowser) {
+//     return;
+//   }
 
-  piwik.push(["trackContentImpressionsWithinNode", document.getElementById("__next")]);
+//   piwik.push(["trackContentImpressionsWithinNode", document.getElementById("__next")]);
 
-  piwik.push(["setCustomUrl", document.location.href]);
-  piwik.push(["setDocumentTitle", document.title]);
+//   piwik.push(["setCustomUrl", document.location.href]);
+//   piwik.push(["setDocumentTitle", document.title]);
 
-  trackUser();
+//   trackUser();
 
-  piwik.push(["trackPageView"]);
-  piwik.push(["enableLinkTracking"]);
-}
+//   piwik.push(["trackPageView"]);
+//   piwik.push(["enableLinkTracking"]);
+// }

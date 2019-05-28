@@ -48,7 +48,7 @@ export const readExcelDate = date => {
   } else {
     let matches = date.match(DATE_FR_LONG);
     if (matches) {
-      const [_all, day, month, year, ..._parts] = matches;
+      const [day, month, year] = matches;
       return new Date(toJsYear(year), toJsMonth(month), day);
     }
     return date;

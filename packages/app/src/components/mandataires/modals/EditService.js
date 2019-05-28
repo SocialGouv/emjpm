@@ -6,7 +6,6 @@ import { bindActionCreators } from "redux";
 
 import { updateMandataire } from "../actions/mandataire";
 import Layout from "../../communComponents/ModalLayout";
-import { ErrorBox } from "../../common/ShowBox";
 
 const schema = {
   title: "Modifier vos informations",
