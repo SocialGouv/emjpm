@@ -63,6 +63,9 @@ services:
         SENTRY_PUBLIC_DSN: $SENTRY_PUBLIC_DSN
     depends_on:
       - api
+    links:
+      - api
+      - api:emjpm__api
     ports:
       - 5000:80
     volumes:
