@@ -1,4 +1,4 @@
-const nomination = {
+const typesMesure = {
   "tutelle aux biens": "Tutelle aux biens",
   "tutelle à la personne": "Tutelle à la personne",
   "tutelle aux biens et à la personne": "Tutelle aux biens et à la personne",
@@ -16,23 +16,11 @@ const nomination = {
 };
 
 exports.up = function(knex, Promise) {
-  const mesures = knex("mesures");
-  return mesures.then(mesures =>
-    Promise.all(
-      mesures.map(mesure => {
-        let newNames = "";
-
-        if (mesure.type in nomination) {
-          newNames = nomination[mesure.type];
-        } else {
-          newNames = mesure.type;
-        }
-        return knex("mesures")
-          .where({ "mesures.id": mesure.id })
-          .update({
-            type: newNames
-          });
-      })
+  return Promise.all(
+    Object.keys(typesMesure).map(type =>
+      knex("mesures")
+        .where({ type })
+        .update({ type: typesMesure[type] })
     )
   );
 };
