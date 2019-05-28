@@ -9,7 +9,10 @@
     "start": "next dev",
     "dev": "next",
     "test": "jest ./test",
-    "lint": "eslint pages src --fix",
+    "lint": "eslint pages src",
+    "lint:fix": "eslint pages src --fix",
+    "prettier": "prettier --check '**/*.js'",
+    "prettier:fix": "prettier --write '**/*.js'",
     "build": "next build && next export"
   },
   "keywords": [],

@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 
 import DisplayDate from "../communComponents/formatFrenchDate";
-import { Mail } from "react-feather";
 
 const ContainerMandataire = styled.div`
   padding: 10px 0;
@@ -16,22 +15,7 @@ const Title = styled.div`
   margin: 10px 0;
 `;
 
-const HeaderMandataire = ({
-  nom = "",
-  prenom = "",
-  date_mesure_update,
-  type,
-  etablissement,
-  dispo_max,
-  mesures_en_cours,
-  mesures_en_attente,
-  profiles,
-  handleClick,
-  user,
-  service
-}) => {
-  const currentDispos = dispo_max - mesures_en_cours - mesures_en_attente || null;
-
+const HeaderMandataire = ({ nom = "", prenom = "", profiles, handleClick, user, service }) => {
   const fullName = `${nom || ""} ${prenom || ""}`;
 
   const SiegeSocial = styled.div`
@@ -46,7 +30,6 @@ const HeaderMandataire = ({
     color: #53657d
   `;
 
-  const iconStyle = { width: 22, height: 22, marginRight: 10 };
   return (
     <ContainerMandataire className="container">
       <Title>
@@ -68,13 +51,12 @@ const HeaderMandataire = ({
               </div>
 
               <div style={{ textAlign: "right", fontSize: "1em", color: "#53657d" }}>
-                {profiles &&
-                  profiles.date_mesure_update && (
-                    <div>
-                      Dernière mise à jour :{" "}
-                      <DisplayDate date={profiles && profiles.date_mesure_update.slice(0, 10)} />
-                    </div>
-                  )}
+                {profiles && profiles.date_mesure_update && (
+                  <div>
+                    Dernière mise à jour :{" "}
+                    <DisplayDate date={profiles && profiles.date_mesure_update.slice(0, 10)} />
+                  </div>
+                )}
               </div>
             </SiegeSocial>
           </div>

@@ -111,7 +111,7 @@ const uiSchema = {
   }
 };
 
-const EditMandataire = ({ show, handleHide, formData, onSubmit, ...props }) => {
+const EditMandataire = ({ show, handleHide, formData, onSubmit }) => {
   const cleanData = {
     nom: formData.nom || "",
     prenom: formData.prenom || "",

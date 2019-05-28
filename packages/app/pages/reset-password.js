@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import Head from "next/head";
 
 import Navigation from "../src/components/communComponents/Navigation";
