@@ -11,7 +11,7 @@ import Router from "next/router";
 
 import { Button } from "..";
 
-import { updateUser } from "./actions/mandataire";
+import { updateUser } from "../tiComponents/actions/user";
 import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";
 
 const ChangePassword = email => {

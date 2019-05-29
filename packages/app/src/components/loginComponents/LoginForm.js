@@ -10,7 +10,7 @@ const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
 
-import piwik, { trackUser } from "../../piwik";
+import { piwik, trackUser } from "../../piwik";
 
 const doLogin = formData => {
   const url = `${API_URL}/auth/login`;

@@ -9,7 +9,7 @@ import { Clock, FilePlus, Home, Map, UserMinus, Plus } from "react-feather";
 import Profile from "./Profile";
 import Header from "./Header";
 import TableMesures from "./TableMesures";
-import PillDispo from "./PillDispo";
+import { PillDispo } from "./PillDispo";
 import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
 import { changeMandataireId } from "./actions/mandataire";
