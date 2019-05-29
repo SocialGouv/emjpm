@@ -6,7 +6,7 @@ import { DummyTabs } from "..";
 import apiFetch from "../communComponents/Api";
 import { connect } from "react-redux";
 
-import PillDispo from "./PillDispo";
+import { PillDispo } from "./PillDispo";
 import Profile from "./Profile";
 import TableMesures from "./TableMesures";
 import Header from "./Header";
