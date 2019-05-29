@@ -14,7 +14,7 @@ import { uid } from 'rand-token';
 
 class KnexEnvironment extends NodeEnvironment {
   public global: Global.Global & { databaseName: string; knex: Knex };
-  private destroyPromises: Promise<void> = [];
+  private destroyPromises: Promise<void>[] = [];
   private options: Knex.Config;
 
   constructor(config: Config.ProjectConfig) {
