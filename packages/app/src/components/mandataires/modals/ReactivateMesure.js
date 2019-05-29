@@ -1,3 +1,4 @@
+import React from "react";
 import { connectModal } from "redux-modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";

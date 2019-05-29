@@ -1,3 +1,4 @@
+import React from "react";
 import { Phone, Smartphone, Mail, Home, Info } from "react-feather";
 
 const iconStyle = { width: 22, height: 22, marginRight: 10 };

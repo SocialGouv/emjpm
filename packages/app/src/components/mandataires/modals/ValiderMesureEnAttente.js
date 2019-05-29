@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 

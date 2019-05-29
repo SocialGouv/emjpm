@@ -1,3 +1,4 @@
+import React from "react";
 import ReactTable from "react-table";
 import format from "date-fns/format";
 import queryString from "query-string";
