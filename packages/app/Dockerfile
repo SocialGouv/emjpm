@@ -1,5 +1,3 @@
-ARG API_URL
-ARG SENTRY_PUBLIC_DSN
 ARG BASE_IMAGE=socialgouv/emjpm:master
 
 FROM ${BASE_IMAGE} as emjpm-base-image
