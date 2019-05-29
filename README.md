@@ -74,9 +74,8 @@ docker build . -t emjpm-base
 BASE_IMAGE=emjpm-base docker-compose up --build -d
 
 # run migrations and seeds
-
-docker-compose exec api migrate:latest
-docker-compose exec api seeds:run
+docker-compose run knex yarn workspace @emjpm/knex run migrate
+docker-compose run knex yarn workspace @emjpm/knex run seeds
 ```
 
 ## FAQ
