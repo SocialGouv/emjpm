@@ -19,7 +19,8 @@ const schema = {
       enum: typeMesure
     },
     civilite: { type: "string", enum: civilite },
-    annee: { type: "integer", title: "Année de naissance" }
+    annee: { type: "integer", title: "Année de naissance" },
+    numero_rg: { type: "string", title: "Numéro RG" }
   }
 };
 
@@ -41,6 +42,12 @@ const uiSchema = {
     "ui:placeholder": "Type de mesure",
     "ui:options": {
       label: true
+    }
+  },
+  numero_rg: {
+    "ui:placeholder": "Numéro RG",
+    "ui:options": {
+      label: false
     }
   }
 };
@@ -93,6 +100,7 @@ const ModalMesureReservation = ({
 
 const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ show, openValidationModal }, dispatch);
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "ModalMesureReservation" })(ModalMesureReservation)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectModal({ name: "ModalMesureReservation" })(ModalMesureReservation));
