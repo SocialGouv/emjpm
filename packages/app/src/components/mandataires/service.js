@@ -1,3 +1,4 @@
+import React from "react";
 import dynamic from "next/dynamic";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -15,7 +16,6 @@ import { changeMandataireId } from "./actions/mandataire";
 import { DispoMagistrat } from "../common/ShowBox";
 import styled from "styled-components";
 import { show } from "redux-modal";
-import * as React from "react";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 

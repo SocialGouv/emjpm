@@ -1,9 +1,9 @@
+import React from "react";
 import { Mail, User } from "react-feather";
 
 const iconStyle = { width: 22, height: 22, marginRight: 10 };
 
 // fiche recap
-import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { show } from "redux-modal";

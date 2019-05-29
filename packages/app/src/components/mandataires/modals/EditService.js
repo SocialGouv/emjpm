@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 
 import { connectModal } from "redux-modal";
@@ -92,7 +93,7 @@ class EditService extends React.Component {
     const validate = (formData, errors) => {
       let number = 0;
       this.props.profiles.map(profile => {
-        let dispo_max =
+        const dispo_max =
           this.props.mandataireId === profile.id ? formData.dispo_max : profile.dispo_max;
         number = number + dispo_max;
       });
