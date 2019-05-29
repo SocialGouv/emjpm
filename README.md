@@ -57,14 +57,13 @@ $ yarn run -- lerna --scope @optional/e2e run cypress:run -- --headed
 
 ## Manual deployment
 
-To deploy manually some version :
+To build and deploy manually some version :
 
 ```sh
-
 # checkout your target branch
 git pull
 
-# edit docker-compose.override.yml and .env
+# edit docker-compose.override.yaml and .env
 
 # build locally main docker image as emjpm-base
 # you can override API_URL and SENTRY_PUBLIC_DSN env vars here
@@ -74,8 +73,8 @@ docker build . -t emjpm-base
 BASE_IMAGE=emjpm-base docker-compose up --build -d
 
 # run migrations and seeds
-docker-compose run knex yarn workspace @emjpm/knex run migrate
-docker-compose run knex yarn workspace @emjpm/knex run seeds
+BASE_IMAGE=emjpm-base docker-compose run knex yarn workspace @emjpm/knex run migrate
+BASE_IMAGE=emjpm-base docker-compose run knex yarn workspace @emjpm/knex run seeds
 ```
 
 ## FAQ
