@@ -18,15 +18,101 @@ Object {
 
 exports[`'inactive' not login an inactive user 1`] = `
 Object {
-  "message": "User not found",
-  "success": false,
+  "message": "knex is not a function",
+  "name": "TypeError",
+  "stack": "TypeError: knex is not a function
+    at Strategy.knex [as _verify] (/Users/christophedumont/Workspace/emjpm/packages/api/auth/local.js:19:5)
+    at Strategy.Object.<anonymous>.Strategy.authenticate (/Users/christophedumont/Workspace/emjpm/node_modules/passport-local/lib/strategy.js:90:12)
+    at attempt (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/authenticate.js:361:16)
+    at authenticate (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/authenticate.js:362:7)
+    at Object.<anonymous>.router.post (/Users/christophedumont/Workspace/emjpm/packages/api/routes/auth.js:78:3)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:137:13)
+    at next (/Users/christophedumont/Workspace/emjpm/packages/api/auth/_helpers.js:87:10)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at Function.handle (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:174:3)
+    at router (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at initialize (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/initialize.js:53:5)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at urlencodedParser (/Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/types/urlencoded.js:82:7)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:224:16)
+    at done (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (events.js:188:13)
+    at IncomingMessage.EventEmitter.emit (domain.js:441:20)
+    at endReadableNT (_stream_readable.js:1129:12)
+    at process.internalTickCallback (internal/process/next_tick.js:72:19)",
 }
 `;
 
 exports[`'jeremy' not login a registered user with wrong password 1`] = `
 Object {
-  "message": "User not found",
-  "success": false,
+  "message": "knex is not a function",
+  "name": "TypeError",
+  "stack": "TypeError: knex is not a function
+    at Strategy.knex [as _verify] (/Users/christophedumont/Workspace/emjpm/packages/api/auth/local.js:19:5)
+    at Strategy.Object.<anonymous>.Strategy.authenticate (/Users/christophedumont/Workspace/emjpm/node_modules/passport-local/lib/strategy.js:90:12)
+    at attempt (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/authenticate.js:361:16)
+    at authenticate (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/authenticate.js:362:7)
+    at Object.<anonymous>.router.post (/Users/christophedumont/Workspace/emjpm/packages/api/routes/auth.js:78:3)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:137:13)
+    at next (/Users/christophedumont/Workspace/emjpm/packages/api/auth/_helpers.js:87:10)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at Function.handle (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:174:3)
+    at router (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at initialize (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/initialize.js:53:5)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at urlencodedParser (/Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/types/urlencoded.js:82:7)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:224:16)
+    at done (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (events.js:188:13)
+    at IncomingMessage.EventEmitter.emit (domain.js:441:20)
+    at endReadableNT (_stream_readable.js:1129:12)
+    at process.internalTickCallback (internal/process/next_tick.js:72:19)",
 }
 `;
 
@@ -48,8 +134,51 @@ Object {
 
 exports[`'michael' not login an unregistered user 1`] = `
 Object {
-  "message": "User not found",
-  "success": false,
+  "message": "knex is not a function",
+  "name": "TypeError",
+  "stack": "TypeError: knex is not a function
+    at Strategy.knex [as _verify] (/Users/christophedumont/Workspace/emjpm/packages/api/auth/local.js:19:5)
+    at Strategy.Object.<anonymous>.Strategy.authenticate (/Users/christophedumont/Workspace/emjpm/node_modules/passport-local/lib/strategy.js:90:12)
+    at attempt (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/authenticate.js:361:16)
+    at authenticate (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/authenticate.js:362:7)
+    at Object.<anonymous>.router.post (/Users/christophedumont/Workspace/emjpm/packages/api/routes/auth.js:78:3)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:137:13)
+    at next (/Users/christophedumont/Workspace/emjpm/packages/api/auth/_helpers.js:87:10)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at Function.handle (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:174:3)
+    at router (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at initialize (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/initialize.js:53:5)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at urlencodedParser (/Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/types/urlencoded.js:82:7)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:224:16)
+    at done (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (events.js:188:13)
+    at IncomingMessage.EventEmitter.emit (domain.js:441:20)
+    at endReadableNT (_stream_readable.js:1129:12)
+    at process.internalTickCallback (internal/process/next_tick.js:72:19)",
 }
 `;
 

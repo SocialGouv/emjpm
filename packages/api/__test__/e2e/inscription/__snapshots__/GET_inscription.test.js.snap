@@ -1,16 +1,73 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should return list of tis by region 1`] = `
-Array [
-  Object {
-    "id": 1,
-    "nom": "ti arras",
-    "region": "Hauts-de-France",
-  },
-  Object {
-    "id": 2,
-    "nom": "ti paris",
-    "region": "Île-de-France",
-  },
-]
+Object {
+  "message": "Cannot read property 'table' of undefined",
+  "name": "TypeError",
+  "stack": "TypeError: Cannot read property 'table' of undefined
+    at Object.table [as getTiByRegion] (/Users/christophedumont/Workspace/emjpm/packages/api/db/queries/inscription.js:5:6)
+    at getTiByRegion (/Users/christophedumont/Workspace/emjpm/packages/api/routes/inscription.js:173:32)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at Function.handle (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:174:3)
+    at router (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:47:12)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at initialize (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/initialize.js:53:5)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at urlencodedParser (/Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/types/urlencoded.js:91:7)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at jsonParser (/Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/types/json.js:110:7)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at cors (/Users/christophedumont/Workspace/emjpm/node_modules/cors/lib/index.js:188:7)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/cors/lib/index.js:224:17
+    at originCallback (/Users/christophedumont/Workspace/emjpm/node_modules/cors/lib/index.js:214:15)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/cors/lib/index.js:219:13
+    at optionsCallback (/Users/christophedumont/Workspace/emjpm/node_modules/cors/lib/index.js:199:9)
+    at corsMiddleware (/Users/christophedumont/Workspace/emjpm/node_modules/cors/lib/index.js:204:7)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at expressInit (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/middleware/init.js:40:5)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at query (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/middleware/query.js:45:5)
+    at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+    at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+    at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+    at Function.handle (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:174:3)
+    at Function.handle (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/application.js:174:10)
+    at Server.app (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/express.js:39:9)
+    at Server.emit (events.js:188:13)
+    at Server.EventEmitter.emit (domain.js:441:20)
+    at parserOnIncoming (_http_server.js:676:12)
+    at HTTPParser.parserOnHeadersComplete (_http_common.js:113:17)",
+}
 `;

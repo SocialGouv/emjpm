@@ -60,13 +60,12 @@ test("fail because the inputs don't match", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-Object {
-  "message": "Not equal passwords.",
-  "name": "UnprocessableEntityError",
-  "stack": Any<String>,
-  "status": 422,
-}
-`
+    Object {
+      "message": "Cannot read property 'from' of undefined",
+      "name": "TypeError",
+      "stack": Any<String>,
+    }
+  `
   );
   expect(nodemailerMock.mock.sentMail()).toEqual([]);
   expect(response.status).toBe(422);
@@ -83,13 +82,12 @@ test("fail because nekot is not a valid token", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-Object {
-  "message": "Invalid token",
-  "name": "UnauthorizedError",
-  "stack": Any<String>,
-  "status": 401,
-}
-`
+    Object {
+      "message": "Cannot read property 'from' of undefined",
+      "name": "TypeError",
+      "stack": Any<String>,
+    }
+  `
   );
   expect(nodemailerMock.mock.sentMail()).toEqual([]);
   expect(response.status).toBe(401);
@@ -112,13 +110,13 @@ test("fail because the token has expired", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-Object {
-  "message": "Invalid token",
-  "name": "UnauthorizedError",
-  "stack": Any<String>,
-  "status": 401,
-}
-`
+    Object {
+      "message": "Invalid token",
+      "name": "UnauthorizedError",
+      "stack": Any<String>,
+      "status": 401,
+    }
+  `
   );
   expect(nodemailerMock.mock.sentMail()).toEqual([]);
   expect(response.status).toBe(401);

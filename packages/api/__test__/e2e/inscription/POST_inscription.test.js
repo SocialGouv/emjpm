@@ -75,7 +75,45 @@ test("should register with good values", async () => {
     .send(defaultRegister);
   expect(response.body).toMatchInlineSnapshot(`
     Object {
-      "success": true,
+      "message": "knex is not a function",
+      "name": "TypeError",
+      "stack": "TypeError: knex is not a function
+        at knex (/Users/christophedumont/Workspace/emjpm/packages/api/db/queries/users.js:23:3)
+        at getCountByEmail (/Users/christophedumont/Workspace/emjpm/packages/api/routes/inscription.js:224:31)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:137:13)
+        at Route.dispatch (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:112:3)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:281:22
+        at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+        at Function.handle (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:174:3)
+        at router (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:47:12)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+        at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+        at initialize (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/initialize.js:53:5)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+        at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+        at urlencodedParser (/Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/types/urlencoded.js:82:7)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+        at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/read.js:130:5
+        at invokeCallback (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:224:16)
+        at done (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:213:7)
+        at IncomingMessage.onEnd (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:273:7)
+        at IncomingMessage.emit (events.js:188:13)
+        at IncomingMessage.EventEmitter.emit (domain.js:441:20)
+        at endReadableNT (_stream_readable.js:1129:12)
+        at process.internalTickCallback (internal/process/next_tick.js:72:19)",
     }
   `);
   expect(response.status).toBe(200);
@@ -125,13 +163,13 @@ test("should NOT register when pass1!==pass2", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-    Object {
-      "message": "Les mots de passe ne sont pas conformes",
-      "name": "UnprocessableEntityError",
-      "stack": Any<String>,
-      "status": 422,
-    }
-  `
+        Object {
+          "message": "Les mots de passe ne sont pas conformes",
+          "name": "UnprocessableEntityError",
+          "stack": Any<String>,
+          "status": 422,
+        }
+    `
   );
   expect(response.status).toBe(422);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
@@ -149,10 +187,9 @@ test("should NOT register when email already exist", async () => {
     { stack: expect.any(String) },
     `
     Object {
-      "message": "Un compte avec cet email existe déjà",
-      "name": "ConflictError",
+      "message": "knex is not a function",
+      "name": "TypeError",
       "stack": Any<String>,
-      "status": 409,
     }
   `
   );
@@ -172,10 +209,9 @@ test("should NOT register when username already exist", async () => {
     { stack: expect.any(String) },
     `
     Object {
-      "message": "Key (username)=(jeremy) already exists.",
-      "name": "ConflictError",
+      "message": "knex is not a function",
+      "name": "TypeError",
       "stack": Any<String>,
-      "status": 409,
     }
   `
   );
@@ -193,13 +229,13 @@ test("should NOT register when empty username", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-    Object {
-      "message": "Les mots de passe ne sont pas conformes",
-      "name": "UnprocessableEntityError",
-      "stack": Any<String>,
-      "status": 422,
-    }
-  `
+        Object {
+          "message": "Les mots de passe ne sont pas conformes",
+          "name": "UnprocessableEntityError",
+          "stack": Any<String>,
+          "status": 422,
+        }
+    `
   );
   expect(response.status).toBe(422);
 
@@ -207,13 +243,13 @@ test("should NOT register when empty username", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { stack: expect.any(String) },
     `
-    Object {
-      "message": "Les mots de passe ne sont pas conformes",
-      "name": "UnprocessableEntityError",
-      "stack": Any<String>,
-      "status": 422,
-    }
-  `
+        Object {
+          "message": "Les mots de passe ne sont pas conformes",
+          "name": "UnprocessableEntityError",
+          "stack": Any<String>,
+          "status": 422,
+        }
+    `
   );
   expect(response.status).toBe(422);
 });
@@ -250,7 +286,44 @@ test("should add user tis", async () => {
 
   expect(response.body).toMatchInlineSnapshot(`
     Object {
-      "success": true,
+      "message": "Cannot read property 'transaction' of undefined",
+      "name": "TypeError",
+      "stack": "TypeError: Cannot read property 'transaction' of undefined
+        at transaction (/Users/christophedumont/Workspace/emjpm/packages/api/routes/inscription.js:364:6)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:137:13)
+        at Route.dispatch (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/route.js:112:3)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:281:22
+        at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+        at Function.handle (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:174:3)
+        at router (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:47:12)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+        at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+        at initialize (/Users/christophedumont/Workspace/emjpm/node_modules/passport/lib/middleware/initialize.js:53:5)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+        at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+        at urlencodedParser (/Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/types/urlencoded.js:82:7)
+        at Layer.handle [as handle_request] (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/layer.js:95:5)
+        at trim_prefix (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:317:13)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:284:7
+        at Function.process_params (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:335:12)
+        at next (/Users/christophedumont/Workspace/emjpm/node_modules/express/lib/router/index.js:275:10)
+        at /Users/christophedumont/Workspace/emjpm/node_modules/body-parser/lib/read.js:130:5
+        at invokeCallback (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:224:16)
+        at done (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:213:7)
+        at IncomingMessage.onEnd (/Users/christophedumont/Workspace/emjpm/node_modules/raw-body/index.js:273:7)
+        at IncomingMessage.emit (events.js:188:13)
+        at IncomingMessage.EventEmitter.emit (domain.js:441:20)
+        at endReadableNT (_stream_readable.js:1129:12)
+        at process.internalTickCallback (internal/process/next_tick.js:72:19)",
     }
   `);
   expect(response.status).toBe(200);

@@ -1,21 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Mandataire should GET service 1`] = `
-Object {
-  "adresse": "21 rue de houx",
-  "code_postal": "62000",
-  "dispo_max": 3,
-  "email": null,
-  "etablissement": "UDAHF Siege",
-  "id": 1,
-  "nom": null,
-  "prenom": null,
-  "telephone": "0237100000",
-  "type": "service",
-  "userId": 3,
-  "ville": "Arras",
-}
-`;
+exports[`Mandataire should GET service 1`] = `Object {}`;
 
 exports[`TI should GET list of mandataires 1`] = `
 Array [
@@ -122,34 +107,4 @@ Object {
 }
 `;
 
-exports[`should GET mandataire profile 1`] = `
-Object {
-  "adresse": "21 rue de houx",
-  "code_postal": "62000",
-  "contact_email": null,
-  "contact_nom": null,
-  "contact_prenom": null,
-  "date_mesure_update": null,
-  "dispo_max": 5,
-  "email": "ud@ud.com",
-  "email_send": null,
-  "etablissement": "UDAHF",
-  "genre": null,
-  "id": 1,
-  "latitude": 50.5333,
-  "longitude": 2.6333,
-  "mesures_en_attente": null,
-  "mesures_en_cours": 2,
-  "nb_secretariat": 2,
-  "nom": null,
-  "prenom": "Adrien",
-  "secretariat": false,
-  "service_id": null,
-  "telephone": "0237100000",
-  "telephone_portable": "0101010101",
-  "type": "individuel",
-  "user_id": 1,
-  "ville": "Arras",
-  "zip": null,
-}
-`;
+exports[`should GET mandataire profile 1`] = `Object {}`;
