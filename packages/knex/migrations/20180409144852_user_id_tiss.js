@@ -4,6 +4,8 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(Promise) {
+/* eslint-disable no-unused-vars */
+exports.down = function(knex, Promise) {
   return Promise.resolve();
 };
+/* eslint-enable no-unused-vars */
