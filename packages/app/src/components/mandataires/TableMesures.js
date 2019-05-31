@@ -280,29 +280,31 @@ class TableMesures extends React.Component {
 
   render() {
     const { data, loading, newData } = this.state;
-    const { hideColumns } = this.props;
+    const { hideColumns, profile } = this.props;
     return (
       <>
         <div style={{ textAlign: "right" }}>
-          <Form
-            schema={schema}
-            uiSchema={uiSchema}
-            onSubmit={this.onChange}
-            style={{
-              textAlign: "right",
-              display: "flex",
-              flexDirection: "row",
-              height: "30px"
-            }}
-          >
-            <Button
-              type="submit"
-              className="btn btn-success"
-              style={{ flex: "0 1 auto", height: "35px" }}
+          {profile && profile[0] && profile[0].type !== "ti" && (
+            <Form
+              schema={schema}
+              uiSchema={uiSchema}
+              onSubmit={this.onChange}
+              style={{
+                textAlign: "right",
+                display: "flex",
+                flexDirection: "row",
+                height: "30px"
+              }}
             >
-              Filtrer
-            </Button>
-          </Form>
+              <Button
+                type="submit"
+                className="btn btn-success"
+                style={{ flex: "0 1 auto", height: "35px" }}
+              >
+                Filtrer
+              </Button>
+            </Form>
+          )}
         </div>
         <ReactTable
           style={{ backgroundColor: "white", minHeight: 500 }}
@@ -340,6 +342,7 @@ TableMesures.defaultProps = {
 const mapStateToProps = state => ({
   // /!\ todo : hack
   // lastUpdate is updated when some mesure is modified so we can refresh the table
-  lastUpdate: state.mandataire.lastUpdate
+  lastUpdate: state.mandataire.lastUpdate,
+  profile: state.mandataire.profile || state.mandataire.profiles
 });
 export default connect(mapStateToProps)(TableMesures);
