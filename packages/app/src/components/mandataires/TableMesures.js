@@ -165,6 +165,13 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Numéro RG",
+    id: "numero_rg",
+    width: 75,
+    accessor: d => d.numero_rg,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
     Header: "Extinction",
     id: "extinction",
     width: 100,
