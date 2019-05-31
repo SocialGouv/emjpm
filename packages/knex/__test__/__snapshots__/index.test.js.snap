@@ -479,6 +479,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "numero_rg": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "reason_extinction": Object {
     "defaultValue": null,
     "maxLength": 255,
