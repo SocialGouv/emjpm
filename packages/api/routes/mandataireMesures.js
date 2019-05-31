@@ -28,7 +28,8 @@ const ALLOWED_FILTERS = [
   "id",
   "numero_dossier",
   "extinction",
-  "reason_extinction"
+  "reason_extinction",
+  "numero_rg"
 ];
 
 const {
