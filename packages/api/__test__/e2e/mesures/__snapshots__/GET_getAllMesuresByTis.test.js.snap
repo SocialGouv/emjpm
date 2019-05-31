@@ -17,6 +17,7 @@ Array [
     "mandataire_id": 1,
     "nom": null,
     "numero_dossier": null,
+    "numero_rg": null,
     "prenom": "Adrien",
     "reason_extinction": null,
     "residence": null,
