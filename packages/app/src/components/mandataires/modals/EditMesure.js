@@ -33,7 +33,8 @@ const schema = {
     ville: { type: "string" },
     civilite: { type: "string", enum: civilite },
     annee: { type: "integer", maxLength: 4 },
-    numero_dossier: { type: "string", default: " " }
+    numero_dossier: { type: "string", default: " " },
+    numero_rg: { type: "string", title: "Numéro RG" }
   }
 };
 
@@ -112,6 +113,12 @@ const uiSchema = {
     "ui:title": "Numéro de dossier",
     "ui:options": {
       label: true
+    }
+  },
+  numero_rg: {
+    "ui:placeholder": "Numéro RG",
+    "ui:options": {
+      label: false
     }
   }
 };
