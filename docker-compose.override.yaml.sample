@@ -36,40 +36,38 @@ services:
     restart: always
     ports:
       - 1080:80
+  # Useful to run arbitrary knex commands
+  knex:
+    restart: "no"
+    image: ${BASE_IMAGE:-socialgouv/emjpm:master}
+    env_file: .env
+  # Production API (NodeJS)
   api:
     restart: always
     build:
       context: packages/api
       dockerfile: Dockerfile
+      args:
+        BASE_IMAGE: ${BASE_IMAGE:-socialgouv/emjpm:master}
     env_file: .env
     ports:
       - 4000:4000
     depends_on:
       - db
-    links:
-      - db
+  # Production frontend (nginx)
   frontend:
     restart: always
     env_file: .env
     build:
       context: ./packages/app
       dockerfile: Dockerfile
-      #
-      # this app is built statically so we cannot inject env vars at runtime
-      # we use args to expose them as env var *during the build phase, inside the container*
-      #
       args:
-        API_URL: "/api"
-        SENTRY_PUBLIC_DSN: $SENTRY_PUBLIC_DSN
-    depends_on:
-      - api
-    links:
-      - api
-      - api:emjpm__api
+        BASE_IMAGE: ${BASE_IMAGE:-socialgouv/emjpm:master}
     ports:
       - 5000:80
     volumes:
       - ./nginx-logs:/var/log/nginx
+
 
 volumes:
   metabase:
