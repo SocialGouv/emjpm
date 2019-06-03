@@ -55,6 +55,28 @@ $ NODE_ENV=test yarn workspace @emjpm/knex run seeds
 $ yarn run -- lerna --scope @optional/e2e run cypress:run -- --headed
 ```
 
+## Manual deployment
+
+To build and deploy manually some version :
+
+```sh
+# checkout your target branch
+git pull
+
+# edit docker-compose.override.yaml and .env
+
+# build locally main docker image as emjpm-base
+# you can override API_URL and SENTRY_PUBLIC_DSN env vars here
+docker build . -t emjpm-base
+
+# rebuild and launch instance using locally built image
+BASE_IMAGE=emjpm-base docker-compose up --build -d
+
+# run migrations and seeds
+BASE_IMAGE=emjpm-base docker-compose run knex yarn workspace @emjpm/knex run migrate
+BASE_IMAGE=emjpm-base docker-compose run knex yarn workspace @emjpm/knex run seeds
+```
+
 ## FAQ
 
 - _If you have the `Can't take lock to run migrations: Migration table is already locked` error_
