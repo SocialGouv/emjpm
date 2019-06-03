@@ -153,7 +153,8 @@ class ServiceTabsAntennes extends React.Component {
                   "status",
                   "professionnel",
                   "mandataire_id",
-                  "reason_fin_de_mandat"
+                  "reason_fin_de_mandat",
+                  "fin-mandat-attente"
                 ]}
               />
             ) : (
@@ -187,7 +188,8 @@ class ServiceTabsAntennes extends React.Component {
               "ti",
               "status",
               "professionnel",
-              "mandataire_id"
+              "mandataire_id",
+              "fin-mandat-attente"
             ]}
           />
         )
@@ -209,7 +211,8 @@ class ServiceTabsAntennes extends React.Component {
               "status",
               "professionnel",
               "numero_dossier",
-              "reason_fin_de_mandat"
+              "reason_fin_de_mandat",
+              "fin-mandat-attente"
             ]}
           />
         )
