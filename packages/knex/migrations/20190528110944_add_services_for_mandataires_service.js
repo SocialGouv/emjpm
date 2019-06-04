@@ -1,16 +1,15 @@
-const { createService } = require("../../api/db/queries/inscription");
-const { updateUser } = require("../../api/db/queries/users");
+//
 
 // Create service for existing mandataires
-exports.up = function(knex, Promise) {
-  const mandataires = knex("mandataires")
+exports.up = async knex => {
+  const mandataires = await knex("mandataires")
     .innerJoin("users", "mandataires.user_id", "users.id")
     .where("users.type", "service");
 
-  return mandataires.then(mandataires =>
-    Promise.all(
-      mandataires.map(mandataire =>
-        createService({
+  await Promise.all(
+    mandataires.map(async mandataire => {
+      const [service_id] = await knex.table("services").insert(
+        {
           etablissement: mandataire.etablissement,
           nom: mandataire.nom,
           prenom: mandataire.prenom,
@@ -20,16 +19,32 @@ exports.up = function(knex, Promise) {
           code_postal: mandataire.code_postal,
           ville: mandataire.ville,
           dispo_max: mandataire.dispo_max
-        }).then(([service_id]) =>
-          updateUser(mandataire.user_id, {
-            service_id
-          })
-        )
-      )
-    )
+        },
+        "id"
+      );
+
+      await knex("users")
+        .where({ id: mandataire.user_id })
+        .update({
+          service_id
+        });
+    })
   );
 };
 
-exports.down = function(knex, Promise) {
-  return Promise.resolve();
+exports.down = async knex => {
+  const services = await knex("services").select("id");
+  await Promise.all(
+    services.map(async ({id}) => {
+      await knex("users")
+        .where({ id })
+        .update({
+          service_id: null
+        });
+      await knex
+        .table("services")
+        .where({ id })
+        .delete();
+    })
+  );
 };
