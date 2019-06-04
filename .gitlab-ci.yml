@@ -231,7 +231,7 @@ E2E Test @optional/e2e:
     # Database on localhost:5434
     - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
     # API on localhost:4000
-    - npx wait-port --timeout 30000 localhost:4000 # 30_000 = 1000 * 30s
+    - npx wait-port --timeout 30000 api:4000 # 30_000 = 1000 * 30s
     # Front on localhost:80
     - npx wait-port --timeout 30000 localhost:80 # 30_000 = 1000 * 30s
     #
