@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/SocialGouv/emjpm/compare/v1.1.0...v1.2.0) (2019-06-04)
+
+
+### Bug Fixes
+
+* add a docker-compose host alias to match k8s ([#237](https://github.com/SocialGouv/emjpm/issues/237)) ([0ca4058](https://github.com/SocialGouv/emjpm/commit/0ca4058))
+* **docker:** make BASE_IMAGE configurable ([#247](https://github.com/SocialGouv/emjpm/issues/247)) ([274aae7](https://github.com/SocialGouv/emjpm/commit/274aae7))
+* **jest-environment-knex:** add private to package configuration ([#222](https://github.com/SocialGouv/emjpm/issues/222)) ([af6585b](https://github.com/SocialGouv/emjpm/commit/af6585b))
+* **postgres:** rollback in flavor of version 10 ([#224](https://github.com/SocialGouv/emjpm/issues/224)) ([a5f44d5](https://github.com/SocialGouv/emjpm/commit/a5f44d5))
+
+
+### Features
+
+* change mandataire services naming and implementation ([c59e43b](https://github.com/SocialGouv/emjpm/commit/c59e43b))
+* change mandataire services naming and implementation ([#245](https://github.com/SocialGouv/emjpm/issues/245)) ([6347d22](https://github.com/SocialGouv/emjpm/commit/6347d22))
+* **magistrats:** add numero RG to reservation mesure ([#248](https://github.com/SocialGouv/emjpm/issues/248)) ([964ae0c](https://github.com/SocialGouv/emjpm/commit/964ae0c))
+* **services:** add services antennes and inscription for mandataires ([#216](https://github.com/SocialGouv/emjpm/issues/216)) ([2d0157b](https://github.com/SocialGouv/emjpm/commit/2d0157b))
+* **services:** Migration files for updating services ([#244](https://github.com/SocialGouv/emjpm/issues/244)) ([8c975b7](https://github.com/SocialGouv/emjpm/commit/8c975b7))
+
+
+
+
+
 # [1.1.0](https://github.com/SocialGouv/emjpm/compare/v0.0.2...v1.1.0) (2019-05-21)
 
 
