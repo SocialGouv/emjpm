@@ -102,7 +102,7 @@ Lint @optional/e2e:
   <<: *master_based_stage
   allow_failure: true
   script:
-    - yarn run -- lerna exec --scope=@optional/e2e yarn
+    - yarn run -- lerna exec --scope=@optional/e2e yarn -- --ignore-scripts
     - yarn run -- lerna run --scope=@optional/e2e lint
 
 Lint jest-environment-knex:
