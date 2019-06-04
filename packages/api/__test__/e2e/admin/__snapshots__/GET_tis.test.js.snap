@@ -9,7 +9,7 @@ Array [
     "id": 5,
     "last_login": null,
     "nom": null,
-    "prenom": null,
+    "prenom": "Pierre",
     "type": "ti",
   },
   Object {
@@ -19,7 +19,7 @@ Array [
     "id": 32,
     "last_login": null,
     "nom": null,
-    "prenom": null,
+    "prenom": "Jean",
     "type": "ti",
   },
 ]

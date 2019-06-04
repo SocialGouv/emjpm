@@ -28,10 +28,10 @@ Array [
   },
   Object {
     "active": true,
-    "email": null,
+    "email": "admin@admin.com",
     "id": 4,
     "nom": null,
-    "prenom": null,
+    "prenom": "Dark Vador",
     "type": "admin",
   },
   Object {
@@ -39,7 +39,7 @@ Array [
     "email": "test2@ti.com",
     "id": 5,
     "nom": null,
-    "prenom": null,
+    "prenom": "Pierre",
     "type": "ti",
   },
   Object {
@@ -47,7 +47,7 @@ Array [
     "email": null,
     "id": 6,
     "nom": null,
-    "prenom": null,
+    "prenom": "Paul",
     "type": "prepose",
   },
   Object {
@@ -55,7 +55,7 @@ Array [
     "email": null,
     "id": 7,
     "nom": null,
-    "prenom": null,
+    "prenom": "Jack",
     "type": "ti",
   },
   Object {
@@ -63,7 +63,7 @@ Array [
     "email": "test@ti.com",
     "id": 32,
     "nom": null,
-    "prenom": null,
+    "prenom": "Jean",
     "type": "ti",
   },
   Object {
@@ -71,7 +71,7 @@ Array [
     "email": "test3@ti.com",
     "id": 33,
     "nom": null,
-    "prenom": null,
+    "prenom": "Momo",
     "type": "ti",
   },
   Object {
