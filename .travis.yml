@@ -124,6 +124,7 @@ jobs:
     #
 
     - <<: *deploy_stage
+      stage: Build
       if: type = push AND branch = master
       name: Deploy latest master image
       env:
