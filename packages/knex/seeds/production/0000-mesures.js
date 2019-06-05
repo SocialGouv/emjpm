@@ -17,7 +17,6 @@ const parseMesures = csvPath => {
       lieu_de_vie,
       code_postal,
       ville,
-      adresse,
       etablissement,
       mandataire_id,
       latitude,
@@ -40,39 +39,15 @@ const parseMesures = csvPath => {
   });
 };
 
-const range = (start, end) => Array.from({ length: end - start }, (k, v) => start + v);
-
-const getCpData = row => {
-  const [cp, latitude, longitude] = row.split(";");
-  return {
-    [cp]: {
-      latitude,
-      longitude
-    }
-  };
-};
-
-// utilise cp.geocoded.csv pour définir les lat/long par CP
-// fichier généré viahttps://adresse.data.gouv.fr/csv
-const cps = fs
-  .readFileSync(path.join(__dirname, "cp.geocoded.csv"))
-  .toString()
-  .split("\n")
-  .slice(1)
-  .reduce(
-    (cps, row) => ({
-      ...cps,
-      ...getCpData(row)
-    }),
-    {}
-  );
-
-exports.seed = async (knex, Promise) => {
+exports.seed = async knex => {
   // mesures
   const mesures = parseMesures(path.join(__dirname, "mesures-belgique.csv"));
 
-  return knex
-    .batchInsert("mesures", mesures)
-    .returning("id")
-    .then(ids => console.log("success: ", ids.length, "mesures ajoutées"));
+  return (
+    knex
+      .batchInsert("mesures", mesures)
+      .returning("id")
+      // eslint-disable-next-line no-console
+      .then(ids => console.log("success: ", ids.length, "mesures ajoutées"))
+  );
 };

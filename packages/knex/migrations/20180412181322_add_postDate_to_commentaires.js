@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return knex.schema.alterTable("commentaires", function(table) {
     table
       .dateTime("postDate")
@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
   });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return knex.schema.alterTable("commentaires", function(table) {
     table.dateTime("postDate").alter();
   });
