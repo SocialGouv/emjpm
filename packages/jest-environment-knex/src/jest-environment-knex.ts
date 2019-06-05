@@ -1,16 +1,16 @@
 //
 
 import { Config, Global } from "@jest/types";
+import Debug from "debug";
 import NodeEnvironment from "jest-environment-node";
+import Knex from "knex";
+import parseConnection from "knex/lib/util/parse-connection";
+import { uid } from "rand-token";
 import { runInContext, Script } from "vm";
 
-import Debug from "debug";
+//
+
 const debug = Debug("jest-environment-knex");
-import Knex from "knex";
-/* tslint:disable:no-var-requires */
-const parseConnection = require("knex/lib/util/parse-connection");
-const { uid } = require("rand-token");
-/* tslint:enable:no-var-requires */
 
 //
 
