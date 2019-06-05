@@ -5,9 +5,9 @@ describe("Login", () => {
     cy.exec("npm run cypress:api-reset");
   });
 
-  it("Login with invalid account should show error message", function() {
+  it("Login with zzz account should show error message", function() {
     cy.visit("/");
-    cy.get("#root_username").type("individuel");
+    cy.get("#root_username").type("zzz");
     cy.get("#root_password").type("xxx");
     cy.get("button.btn-success").click();
     cy.get("div.alert-danger").should("contain", "Impossible de se connecter");
