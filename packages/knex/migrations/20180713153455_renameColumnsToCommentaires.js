@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return knex.schema.alterTable("commentaires", function(table) {
     table.renameColumn("co_id", "id");
     table.renameColumn("co_comment", "comment");
@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
   });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return knex.schema.alterTable("commentaires", function(table) {
     table.renameColumn("id", "co_id");
     table.renameColumn("comment", "co_comment");
