@@ -1,15 +1,15 @@
 //
 
-import { Config, Global } from '@jest/types';
-import NodeEnvironment from 'jest-environment-node';
-import { runInContext, Script } from 'vm';
+import { Config, Global } from "@jest/types";
+import NodeEnvironment from "jest-environment-node";
+import { runInContext, Script } from "vm";
 
-import Debug from 'debug';
-const debug = Debug('jest-environment-knex');
-import Knex from 'knex';
+import Debug from "debug";
+const debug = Debug("jest-environment-knex");
+import Knex from "knex";
 /* tslint:disable:no-var-requires */
-const parseConnection = require('knex/lib/util/parse-connection');
-const { uid } = require('rand-token');
+const parseConnection = require("knex/lib/util/parse-connection");
+const { uid } = require("rand-token");
 /* tslint:enable:no-var-requires */
 
 //
@@ -21,13 +21,13 @@ class KnexEnvironment extends NodeEnvironment {
 
   constructor(config: Config.ProjectConfig) {
     super(config);
-    debug('super(config)');
+    debug("super(config)");
 
     //
 
-    const global = (this.global = runInContext('this', {
+    const global = (this.global = runInContext("this", {
       ...this.context,
-      ...config.testEnvironmentOptions,
+      ...config.testEnvironmentOptions
     }));
     global.databaseName = `emjpm_test_${uid(16).toLowerCase()}`;
 
@@ -37,23 +37,23 @@ class KnexEnvironment extends NodeEnvironment {
   }
 
   public async setup() {
-    debug('setup');
+    debug("setup");
     await super.setup();
-    debug('super.setup()');
+    debug("super.setup()");
 
     //
 
-    debug('new Knex');
+    debug("new Knex");
     const knex = Knex(this.options);
     debug(`await knex.raw(CREATE DATABASE ${this.global.databaseName});`);
     await knex.raw(`CREATE DATABASE ${this.global.databaseName};`);
-    debug('knex.destroy()');
+    debug("knex.destroy()");
     this.lazyDestroy(knex);
 
     //
 
     const connection: {} =
-      typeof this.options.connection === 'string'
+      typeof this.options.connection === "string"
         ? parseConnection(this.options.connection)
         : this.options.connection;
 
@@ -61,22 +61,22 @@ class KnexEnvironment extends NodeEnvironment {
       ...this.options,
       connection: {
         ...connection,
-        database: this.global.databaseName,
-      },
+        database: this.global.databaseName
+      }
     });
-    debug('setup');
+    debug("setup");
   }
   public async teardown() {
-    debug('teardown');
+    debug("teardown");
     this.lazyDestroy(this.global.knex);
 
     //
 
-    debug('new Knex');
+    debug("new Knex");
     const knex = Knex(this.options);
     debug(`await knex.raw(DROP DATABASE ${this.global.databaseName});`);
     await knex.raw(`DROP DATABASE ${this.global.databaseName};`);
-    debug('knex.destroy()');
+    debug("knex.destroy()");
     this.lazyDestroy(knex);
 
     //
@@ -85,9 +85,9 @@ class KnexEnvironment extends NodeEnvironment {
 
     //
 
-    debug('super.teardown()');
+    debug("super.teardown()");
     await super.teardown();
-    debug('teardown');
+    debug("teardown");
   }
 
   public runScript(script: Script) {
@@ -97,10 +97,10 @@ class KnexEnvironment extends NodeEnvironment {
   private lazyDestroy(knex: Knex) {
     this.destroyPromises.push(
       ((knex.destroy() as any) as Promise<void>).then(
-        debug.bind(null, 'knex.destroyed'),
+        debug.bind(null, "knex.destroyed"),
         /* tslint:disable:no-console */
-        console.error,
-      ),
+        console.error
+      )
     );
   }
 }
