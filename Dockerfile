@@ -18,7 +18,7 @@ COPY ./yarn.lock /app/yarn.lock
 WORKDIR /app
 
 # Fist run without postinstall
-RUN yarn --frozen-lockfile --ignore-scripts && yarn cache clean
+RUN yarn --frozen-lockfile --ignore-scripts
 
 COPY ./packages/jest-environment-knex /app/packages/jest-environment-knex
 COPY ./optional/e2e /app/optional/e2e
