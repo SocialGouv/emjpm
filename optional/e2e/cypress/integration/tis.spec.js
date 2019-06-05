@@ -29,9 +29,9 @@ describe("Tis", function() {
       cy.viewport("macbook-15");
       // ! HACK(douglasduteil): wait for react to render...
       // ! This is making the test less fuzzy
-      /* eslint-disable cypress/no-unnecessary-waiting */
+
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(250);
-      /* eslint-enable cypress/no-unnecessary-waiting */
     });
 
     context("session Tis", () => {
