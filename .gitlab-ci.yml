@@ -108,7 +108,6 @@ Lint @optional/e2e:
 Lint jest-environment-knex:
   <<: *quality_stage
   <<: *master_based_stage
-  allow_failure: true
   script:
     - yarn workspace jest-environment-knex lint
 
