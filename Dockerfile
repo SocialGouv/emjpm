@@ -21,7 +21,6 @@ WORKDIR /app
 RUN yarn --frozen-lockfile --ignore-scripts
 
 COPY ./packages/jest-environment-knex /app/packages/jest-environment-knex
-COPY ./optional/e2e /app/optional/e2e
 COPY ./packages/knex /app/packages/knex
 COPY ./packages/api /app/packages/api
 COPY ./packages/app /app/packages/app
@@ -33,3 +32,6 @@ ARG API_URL=${API_URL:-/api}
 ARG SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN:-https://path.to.sentry}
 
 RUN yarn build --stream
+
+# Optional packages not required
+COPY ./optional/e2e /app/optional/e2e
