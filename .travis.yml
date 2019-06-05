@@ -36,9 +36,12 @@ _steps:
       - docker pull socialgouv/emjpm:latest || true
       - docker pull $DOCKER_IMAGE:latest || true
       #
-      - docker build --cache-from $DOCKER_IMAGE:latest -t $DOCKER_IMAGE:$TRAVIS_BRANCH $CONTEXT
-      - docker build --cache-from $DOCKER_IMAGE:latest -t $DOCKER_IMAGE:latest $CONTEXT
+      - docker build --cache-from $DOCKER_IMAGE:latest -t $DOCKER_IMAGE:$TRAVIS_COMMIT $CONTEXT
       #
+      - docker build --cache-from $DOCKER_IMAGE:$TRAVIS_COMMIT -t $DOCKER_IMAGE:$TRAVIS_BRANCH $CONTEXT
+      - docker build --cache-from $DOCKER_IMAGE:$TRAVIS_COMMIT -t $DOCKER_IMAGE:latest $CONTEXT
+      #
+      - docker push $DOCKER_IMAGE:$TRAVIS_COMMIT
       - docker push $DOCKER_IMAGE:$TRAVIS_BRANCH
       - docker push $DOCKER_IMAGE:latest
 
