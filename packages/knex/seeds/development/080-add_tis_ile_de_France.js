@@ -18,4 +18,4 @@ const rows = data
   .filter(Boolean)
   .map(splitRow);
 
-exports.seed = (knex, Promise) => knex.batchInsert("tis", rows);
+exports.seed = knex => knex.batchInsert("tis", rows);

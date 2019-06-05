@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return knex.schema.alterTable("mandataires", function(table) {
     table.renameColumn("postDate", "created_at");
     table.dropColumn("service_id");
@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
   });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return knex.schema.alterTable("mandataires", function(table) {
     table.renameColumn("created_at", "postDate");
   });

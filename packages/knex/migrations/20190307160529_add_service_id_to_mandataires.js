@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return knex.schema.alterTable("mandataires", function(table) {
     table.integer("service_id");
     table.string("contact_email");
@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
   });
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function(knex) {
   return knex.schema.alterTable("mandataires", function(table) {
     table.dropColumn("service_id");
     table.dropColumn("contact_email");
