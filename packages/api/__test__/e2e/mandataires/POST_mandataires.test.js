@@ -36,9 +36,8 @@ const defaultRegister = {
   tis: [1]
 };
 
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 const simpler = ({ created_at, ...props }) => props;
-/* eslint-enable no-unused-vars */
 
 test("should register with good values", async () => {
   const token = await getTokenByUserType("service");

@@ -17,9 +17,8 @@ beforeAll(async () => {
 });
 
 // strip the created_at date in the response
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 const simplerComment = ({ created_at, ...props }) => props;
-/* eslint-enable no-unused-vars */
 
 test("should post commentaire for given mandataire and return response", async () => {
   const token = await getTokenByUserType("ti");

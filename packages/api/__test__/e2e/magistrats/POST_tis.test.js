@@ -22,9 +22,8 @@ const defaultRegister = {
   ti_id: 1
 };
 
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 const simpler = ({ created_at, ...props }) => props;
-/* eslint-enable no-unused-vars */
 
 test("should add ti for a  mandataire", async () => {
   const token = await getTokenByUserType("mandataire");

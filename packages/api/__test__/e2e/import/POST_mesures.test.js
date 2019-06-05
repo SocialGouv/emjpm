@@ -24,9 +24,8 @@ afterEach(async () => {
 });
 
 // strip the created_at date in the response
-/* eslint-disable no-unused-vars */
+// eslint-disable-next-line no-unused-vars
 const simpler = ({ created_at, ...props }) => props;
-/* eslint-enable no-unused-vars */
 
 test("should import mesures correctly", async () => {
   const token = await getTokenByUserType("mandataire");
