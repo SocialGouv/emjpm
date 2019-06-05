@@ -35,7 +35,7 @@ exports.up = async knex => {
 exports.down = async knex => {
   const services = await knex("services").select("id");
   await Promise.all(
-    services.map(async ({id}) => {
+    services.map(async ({ id }) => {
       await knex("users")
         .where({ id })
         .update({

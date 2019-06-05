@@ -1,4 +1,4 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function(knex) {
   // Inserts seed entries
   return knex("departements").insert([
     { id: 1, code: "01", id_region: "84", nom: "Ain" },
