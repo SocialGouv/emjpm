@@ -236,7 +236,7 @@ describe("Mandataires", function() {
       });
     });
     context("session mandataire individuel Mesure Eteinte", () => {
-      describe("/mandataires eteindre mesure", () => {
+      describe("/mandataires eteindre mesure (?)", () => {
         it("can attente mesure", () => {
           cy.get("[data-cy='Mesures réservées']").click();
           cy.get(
