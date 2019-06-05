@@ -13,9 +13,5 @@ exports.seed = knex => {
         table => `TRUNCATE TABLE public."${table}" RESTART IDENTITY CASCADE;`
       )
     )
-    .then(sqls => knex.raw(sqls.join("\n")))
-    .then(() => {
-      console.log("Truncated all data tables");
-    })
-    .catch(console.log);
+    .then(sqls => knex.raw(sqls.join("\n")));
 };

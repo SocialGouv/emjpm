@@ -4,9 +4,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint __test__ migrations seeds knexfile.js",
-    "lint:fix": "eslint --fix __test__ migrations seeds knexfile.js",
-    "prettier": "prettier --check '**/*.js'",
-    "prettier:fix": "prettier --write '**/*.js'",
+    "lint:fix": "yarn lint --fix",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seeds": "knex seed:run",

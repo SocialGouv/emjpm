@@ -43,8 +43,11 @@ exports.seed = async knex => {
   // mesures
   const mesures = parseMesures(path.join(__dirname, "mesures-belgique.csv"));
 
-  return knex
-    .batchInsert("mesures", mesures)
-    .returning("id")
-    .then(ids => console.log("success: ", ids.length, "mesures ajoutées"));
+  return (
+    knex
+      .batchInsert("mesures", mesures)
+      .returning("id")
+      // eslint-disable-next-line no-console
+      .then(ids => console.log("success: ", ids.length, "mesures ajoutées"))
+  );
 };
