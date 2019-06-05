@@ -25,10 +25,19 @@ class KnexEnvironment extends NodeEnvironment {
 
     //
 
-    const global = (this.global = runInContext("this", {
-      ...this.context,
-      ...config.testEnvironmentOptions
-    }));
+    const global = (this.global = runInContext(
+      "this",
+
+      // NOTE(douglasduteil): don't replace `Object.assign` by object spreading
+      //
+      // It's important to not spread the context so it keeps its object type
+      // and doesn't become an plain object.
+      // vm.runInContext requires the context to be of type vm.Context
+      // see https://nodejs.org/dist/latest-v10.x/docs/api/vm.html#vm_vm_runincontext_code_contextifiedsandbox_options
+      //
+      // tslint:disable-next-line: prefer-object-spread
+      Object.assign(this.context, config.testEnvironmentOptions)
+    ));
     global.databaseName = `emjpm_test_${uid(16).toLowerCase()}`;
 
     //
