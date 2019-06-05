@@ -4,6 +4,7 @@ describe("Login", () => {
   before(function() {
     cy.exec("npm run cypress:api-reset");
   });
+
   it("Login with invalid account should show error message", function() {
     cy.visit("/");
     cy.get("#root_username").type("individuel");
@@ -13,7 +14,7 @@ describe("Login", () => {
     cy.location("pathname").should("equal", "/");
   });
 
-  it("Forgot password process", function() {
+  it("Reset password process", function() {
     cy.visit("/reset-password?token=LpWpzK4Jla9I87Aq");
     cy.get("#root_newPassword").type("adad");
     cy.get("#root_verifyPassword").type("adad");
@@ -21,6 +22,7 @@ describe("Login", () => {
 
     cy.location("pathname").should("eq", "/login/");
   });
+
   it("Login with invalid account should show error message", function() {
     cy.visit("/");
     cy.get("#root_username").type("ad");
