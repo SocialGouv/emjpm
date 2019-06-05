@@ -29,6 +29,8 @@ describe("Tis", function() {
       cy.viewport("macbook-15");
       // ! HACK(douglasduteil): wait for react to render...
       // ! This is making the test less fuzzy
+
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(250);
     });
 
@@ -47,7 +49,9 @@ describe("Tis", function() {
           // ! HACK(douglasduteil): wait for react to render...
           // ! The modal seems to take some time to be so we wait...
           // ! This is making the test less fuzzy
+          /* eslint-disable cypress/no-unnecessary-waiting */
           cy.wait(250);
+          /* eslint-enable cypress/no-unnecessary-waiting */
 
           cy.get(".form-group #root_comment").type(
             "Hello i send you a comments"
@@ -101,7 +105,9 @@ describe("Tis", function() {
           cy.viewport("macbook-13");
           // ! HACK(douglasduteil): wait for react to render...
           // ! This is making the test less fuzzy
+          /* eslint-disable cypress/no-unnecessary-waiting */
           cy.wait(250);
+          /* eslint-enable cypress/no-unnecessary-waiting */
 
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
         });
