@@ -16,13 +16,13 @@ describe("Mandataires", function() {
       }
     });
 
-    afterEach(function () {
+    afterEach(function() {
       token = token || localStorage.getItem("id_token");
-    })
+    });
 
     beforeEach(function() {
       cy.visit("/mandataires");
-    })
+    });
 
     context("session mandataire individuel", () => {
       describe("/mandataires", () => {
