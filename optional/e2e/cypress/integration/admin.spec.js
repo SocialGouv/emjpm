@@ -113,6 +113,8 @@ describe("Admins", () => {
         .should("contain", "Julien");
 
       cy.get("[data-cy='En attente de validation']").click();
+
+      // eslint-disable-next-line cypress/no-unnecessary-waiting
       cy.wait(200); // wait for the list to appear
 
       cy.get(".ReactTable .rt-tr-group:nth-child(1)")

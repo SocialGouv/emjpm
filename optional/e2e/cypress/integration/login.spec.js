@@ -4,16 +4,17 @@ describe("Login", () => {
   before(function() {
     cy.exec("npm run cypress:api-reset");
   });
-  it("Login with invalid account should show error message", function() {
+
+  it("Login with zzz account should show error message", function() {
     cy.visit("/");
-    cy.get("#root_username").type("individuel");
+    cy.get("#root_username").type("zzz");
     cy.get("#root_password").type("xxx");
     cy.get("button.btn-success").click();
     cy.get("div.alert-danger").should("contain", "Impossible de se connecter");
     cy.location("pathname").should("equal", "/");
   });
 
-  it("Forgot password process", function() {
+  it("Reset password process", function() {
     cy.visit("/reset-password?token=LpWpzK4Jla9I87Aq");
     cy.get("#root_newPassword").type("adad");
     cy.get("#root_verifyPassword").type("adad");
@@ -21,6 +22,7 @@ describe("Login", () => {
 
     cy.location("pathname").should("eq", "/login/");
   });
+
   it("Login with invalid account should show error message", function() {
     cy.visit("/");
     cy.get("#root_username").type("ad");
