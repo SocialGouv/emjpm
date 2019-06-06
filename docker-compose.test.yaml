@@ -18,6 +18,8 @@ services:
     build:
       context: packages/api
       dockerfile: Dockerfile
+      args:
+        - BASE_IMAGE=${BASE_IMAGE:-socialgouv/emjpm:master}
     env_file: .env.test
     ports:
       - 4000:4000
@@ -27,7 +29,6 @@ services:
     links:
       - db
       - maildev
-
   frontend:
     env_file: .env.test
     build:
@@ -38,13 +39,12 @@ services:
       # we use args to expose them as env var *during the build phase, inside the container*
       #
       args:
-        API_URL: "/api"
-        SENTRY_PUBLIC_DSN: $SENTRY_PUBLIC_DSN
+        - BASE_IMAGE=${BASE_IMAGE:-socialgouv/emjpm:master}
     depends_on:
       - api
     links:
       - api:emjpm__api
     ports:
-      - 5000:80
+      - 80:80
     volumes:
       - ./nginx-logs:/var/log/nginx
