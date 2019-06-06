@@ -184,6 +184,13 @@ const COLUMNS = [
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Fin de mandat",
+    id: "reason_fin_de_mandat",
+    width: 75,
+    accessor: d => d.reason_extinction,
+    style: { textAlign: "center", alignSelf: "center" }
+  },
+  {
     Header: "Modifier",
     id: "modifier",
     Cell: row => <CellEditMesureRedux row={row} />,

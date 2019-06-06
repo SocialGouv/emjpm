@@ -77,7 +77,8 @@ class Ti extends React.Component {
               "ti",
               "mandataire_id",
               "fin-mandat",
-              "status"
+              "status",
+              "reason_fin_de_mandat"
             ]}
           />
         )
