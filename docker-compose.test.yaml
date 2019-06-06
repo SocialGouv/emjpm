@@ -33,13 +33,6 @@ services:
     build:
       context: ./packages/app
       dockerfile: Dockerfile
-      #
-      # this app is built statically so we cannot inject env vars at runtime
-      # we use args to expose them as env var *during the build phase, inside the container*
-      #
-      args:
-        API_URL: "/api"
-        SENTRY_PUBLIC_DSN: $SENTRY_PUBLIC_DSN
     depends_on:
       - api
     ports:

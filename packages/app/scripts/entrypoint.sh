@@ -16,8 +16,8 @@ do
     repl="$VALUE"
 
     # replace default environment variables value
-    sed -i -e "s|$match|$repl|" $ROOT_DIRECTORY/*.html
-    sed -i -e "s|$match|$repl|" $ROOT_DIRECTORY/**/index.html
+    sed -i -e "s|$match|$repl|g" $ROOT_DIRECTORY/*.html
+    sed -i -e "s|$match|$repl|g" $ROOT_DIRECTORY/**/index.html
 done <env-vars
 
 rm env-vars

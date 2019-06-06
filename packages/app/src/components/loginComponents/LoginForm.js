@@ -95,6 +95,7 @@ const Title = styled.div`
 export const LoginFormView = ({ formData, onSubmit, error, status }) => (
   <Jumbo>
     <Title>Se connecter</Title>
+    <p>API_URL {API_URL}</p>
     <StyledForm schema={schema} uiSchema={uiSchema} formData={formData} onSubmit={onSubmit}>
       <button
         disabled={status === "loading" || status === "success"}
