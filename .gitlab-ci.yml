@@ -206,6 +206,7 @@ E2E Test @optional/e2e:
       command: ["-p", "5434", "-c", "fsync=off", "-c", "synchronous_commit=off", "-c", "full_page_writes=off"]
   variables:
     CYPRESS_baseUrl: "http://localhost:80"
+    API_URL: http://localhost:4000
 
     # NOTE(douglasduteil): Move the screenshots and videos to an artifact friendly place <3
     # As Gitlab artifacts paths seems to only support relative path, I copy the
@@ -217,7 +218,6 @@ E2E Test @optional/e2e:
     POSTGRES_PASSWORD: test
 
     NODE_ENV: test
-    API_URL: http://emjpm__api:4000
   artifacts:
     expire_in: 1 week
     when: always
