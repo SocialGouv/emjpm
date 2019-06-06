@@ -214,7 +214,7 @@ router.post("/forgot_password", (req, res, next) => {
       if (!user) {
         throw createError.NotFound(`User "${email}" not Found`);
       }
-      return updateResetPassword(user.id, token, "2 hours").then(() => user);
+      return updateResetPassword(user.id, token, "24 hours").then(() => user);
     })
     .then(user =>
       resetPasswordEmail(
