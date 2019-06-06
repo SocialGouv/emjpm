@@ -339,6 +339,11 @@
   width: 60%;
 }
 
+.input__search {
+  width: 200px;
+  height: 33px;
+}
+
 .field-radio-group .radio label span span {
   margin-left: 10px;
 }

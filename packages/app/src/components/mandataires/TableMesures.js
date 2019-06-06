@@ -238,10 +238,11 @@ const schema = {
 
 const uiSchema = {
   search: {
-    "ui:placeholder": "Numéro dossier",
+    "ui:placeholder": "Référence de la mesure",
     "ui:options": {
       label: false
-    }
+    },
+    classNames: "input__search"
   }
 };
 
@@ -298,8 +299,7 @@ class TableMesures extends React.Component {
             style={{
               textAlign: "right",
               display: "flex",
-              flexDirection: "row",
-              height: "30px"
+              flexDirection: "row"
             }}
           >
             <Button
