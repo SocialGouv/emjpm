@@ -1,9 +1,10 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { X, Save, PlusSquare, XCircle, CheckCircle } from "react-feather";
 import { format } from "date-fns";
-import { typeMesure, residence, civilite, cabinet } from "../common/nomination";
+import { typeMesure, residence, civilite } from "../common/nomination";
 
 import { Button, ToggleState, Autocomplete } from "..";
 import { createMesure, createMesureSave } from "./actions/mesures";
@@ -211,9 +212,21 @@ const TisOfMandataireAutoCompleteRedux = connect(state => ({
   items: state.mandataire.tis
 }))(TisOfMandataireAutoComplete);
 
+/*
+TMPFIX : we need to wrap component due to a bug with react-jsonschema-form widgets and react.memo
+introduced in react-redux connect https://github.com/reduxjs/react-redux/releases/tag/v7.0.1
+reported here : https://github.com/mozilla-services/react-jsonschema-form/issues/1309
+*/
+const EtablissementAutoCompleteReduxWrapper = props => (
+  <EtablissementAutoCompleteRedux {...props} />
+);
+const TisOfMandataireAutoCompleteReduxWrapper = props => (
+  <TisOfMandataireAutoCompleteRedux {...props} />
+);
+
 const widgets = {
-  EtablissementAutoComplete: EtablissementAutoCompleteRedux,
-  TisOfMandataireAutoComplete: TisOfMandataireAutoCompleteRedux
+  EtablissementAutoComplete: EtablissementAutoCompleteReduxWrapper,
+  TisOfMandataireAutoComplete: TisOfMandataireAutoCompleteReduxWrapper
 };
 
 const CustomFieldTemplate = props => {
@@ -345,4 +358,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 // connect to redux store actions
-export default connect(mapStateToProps, mapDispatchToProps)(CreateMesure);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateMesure);
