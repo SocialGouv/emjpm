@@ -16,6 +16,7 @@ const getUsers = ({ filters = {}, offset = 0, limit = 50 } = {}) =>
       "users.last_login"
     )
     .where(whitelist(filters, ALLOWED_FILTERS))
+    .whereIn("users.type", ["individuel", "prepose", "service"])
     .orderBy("users.id")
     .offset(offset)
     .limit(limit);
