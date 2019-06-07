@@ -69,7 +69,7 @@ jobs:
         - npx codecov
         - docker-compose down
     - <<: *node_stage
-      allow_failure: true
+      if: (type = push AND branch = master) OR branch =~ ^renovate/
       stage: Build
       name: Run end to end tests
       addons:
