@@ -100,6 +100,10 @@ Lint @emjpm/knex:
 Lint @optional/e2e:
   <<: *quality_stage
   <<: *master_based_stage
+  cache:
+    paths:
+      - ./optional/e2e/node_modules/
+      - .yarn
   script:
     - yarn run -- lerna exec --scope=@optional/e2e yarn -- --ignore-scripts
     - yarn run -- lerna run --scope=@optional/e2e lint
@@ -117,7 +121,17 @@ Test @emjpm/api:
   <<: *master_based_stage
   services:
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
-      command: ["-p", "5434", "-c", "fsync=off", "-c", "synchronous_commit=off", "-c", "full_page_writes=off"]
+      command:
+        [
+          "-p",
+          "5434",
+          "-c",
+          "fsync=off",
+          "-c",
+          "synchronous_commit=off",
+          "-c",
+          "full_page_writes=off",
+        ]
   artifacts:
     paths:
       - packages/api/coverage
@@ -185,47 +199,49 @@ Register app image:
       --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
-Register e2e image:
-  <<: *register_stage
-  variables:
-    CONTEXT: optional/e2e
-    DOCKER_BUILD_ARGS: >-
-      --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/e2e
-
 #
 
 E2E Test @optional/e2e:
   <<: *end_to_end_stage
   allow_failure: true
-  image: $CI_REGISTRY_IMAGE/e2e:$CI_COMMIT_SHA
+  image: cypress/base:10.15.3
   services:
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
-      command: ["-p", "5434", "-c", "fsync=off", "-c", "synchronous_commit=off", "-c", "full_page_writes=off"]
+      command:
+        [
+          "-p",
+          "5434",
+          "-c",
+          "fsync=off",
+          "-c",
+          "synchronous_commit=off",
+          "-c",
+          "full_page_writes=off",
+        ]
   variables:
     CYPRESS_baseUrl: "http://localhost:80"
     API_URL: http://localhost:4000
-
-    # NOTE(douglasduteil): Move the screenshots and videos to an artifact friendly place <3
-    # As Gitlab artifacts paths seems to only support relative path, I copy the
-    # screenshots and videos folder to the relative project directory
-    CYPRESS_screenshotsFolder: $CI_PROJECT_DIR/optional/e2e/cypress/screenshots
-    CYPRESS_videosFolder: $CI_PROJECT_DIR/optional/e2e/cypress/videos
-
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
-
     NODE_ENV: test
+  cache:
+    paths:
+      - ./node_modules/
+      - ./optional/e2e/node_modules/
+      - .yarn
   artifacts:
     expire_in: 1 week
     when: always
     paths:
-    - optional/e2e/cypress/screenshots
-    - optional/e2e/cypress/videos
+      - optional/e2e/cypress/screenshots
+      - optional/e2e/cypress/videos
   script:
-    - mkdir -p $CI_PROJECT_DIR/optional/e2e/cypress
+    - rm -rf packages/{api,app,jest-environment-knex}
+    #
+    - yarn --production --ignore-scripts
+    - yarn run -- lerna exec --scope=@optional/e2e yarn -- --frozen-lockfile
     # Database on localhost:5434
     - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
     # API on localhost:4000
@@ -233,9 +249,7 @@ E2E Test @optional/e2e:
     # Front on localhost:80
     - npx wait-port --timeout 30000 localhost:80 # 30_000 = 1000 * 30s
     #
-    - cd /
     - yarn workspace @emjpm/knex run migrate --env test
     - yarn workspace @emjpm/knex run seeds --env test
     #
-    - cd /app/e2e
-    - yarn cypress run
+    - yarn run -- lerna run --scope=@optional/e2e cypress:run
