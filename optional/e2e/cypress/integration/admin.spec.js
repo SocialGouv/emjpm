@@ -33,10 +33,9 @@ describe("Admins", () => {
     cy.contains("Adrien")
       .parent()
       .contains("Désactiver")
-      .then(button => {
-        button.click();
-        button.should("contain", "Activer");
-      });
+      .as("button");
+    cy.get("@button").click();
+    cy.get("@button").should("contain", "Activer");
   });
 
   it("Adrien should be deactivated", function() {
@@ -60,10 +59,9 @@ describe("Admins", () => {
     cy.contains("Doug")
       .parent()
       .contains("Activer")
-      .then(button => {
-        button.click();
-        button.should("contain", "Désactiver");
-      });
+      .as("button");
+    cy.get("@button").click();
+    cy.get("@button").should("contain", "Désactiver");
   });
 
   it("should show 7 active users", function() {
