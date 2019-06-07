@@ -1,27 +1,20 @@
-const fs = require("fs");
-const path = require("path");
+var zipCodes = require("../postal.json");
 
 exports.seed = knex => {
-  const rows = fs
-    .readFileSync(path.join(__dirname, "../codePostalLatLngs.csv"))
-    .toString()
-    .split("\n")
-    .slice(1)
-    .map(row => {
-      const [code_postal, latitude, longitude] = row.split(";");
-      return {
-        code_postal,
-        latitude,
-        longitude
-      };
-    });
+  const newRows = zipCodes.map(row => {
+    return {
+      code_postal: row.fields.code_postal,
+      latitude: row.fields.coordonnees_gps[0],
+      longitude: row.fields.coordonnees_gps[1]
+    };
+  });
   return knex.transaction(tr => {
     return knex
       .table("geolocalisation_code_postal")
       .del()
       .then(() => {
         return knex
-          .batchInsert("geolocalisation_code_postal", rows)
+          .batchInsert("geolocalisation_code_postal", newRows)
           .transacting(tr);
       });
   });
