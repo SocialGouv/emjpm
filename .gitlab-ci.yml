@@ -101,6 +101,7 @@ Lint @optional/e2e:
   <<: *quality_stage
   <<: *master_based_stage
   cache:
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
       - ./optional/e2e/node_modules/
       - .yarn
@@ -227,6 +228,7 @@ E2E Test @optional/e2e:
     POSTGRES_PASSWORD: test
     NODE_ENV: test
   cache:
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
       - ./node_modules/
       - ./optional/e2e/node_modules/
