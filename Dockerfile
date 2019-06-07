@@ -31,3 +31,6 @@ ARG API_URL=${API_URL:-%%API_URL%%}
 ARG SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN:-%%SENTRY_PUBLIC_DSN%%}
 
 RUN yarn build --stream
+
+# Optional packages not required
+COPY ./optional/e2e /app/optional/e2e
