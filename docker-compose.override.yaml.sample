@@ -65,8 +65,6 @@ services:
         BASE_IMAGE: ${BASE_IMAGE:-socialgouv/emjpm:master}
     ports:
       - 5000:80
-    links:
-      - api:emjpm__api
     volumes:
       - ./nginx-logs:/var/log/nginx
 
