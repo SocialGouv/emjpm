@@ -1,6 +1,12 @@
 const references = {
   invalidCodePostal: ["75000"],
-  residence: ["A Domicile", "En établissement", "En établissement avec conservation du domicile"],
+  residence: [
+    "A Domicile",
+    "En établissement",
+    "En établissement avec conservation du domicile",
+    "SDF",
+    "Autres"
+  ],
   type: [
     "Curatelle",
     "Curatelle renforcée",

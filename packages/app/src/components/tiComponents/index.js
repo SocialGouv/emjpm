@@ -50,16 +50,16 @@ class Ti extends React.Component {
   render() {
     const tabs = [
       {
-        text: "Majeurs Protégés",
-        icon: <Users />,
-        url: "/tis/majeurs",
-        content: <MapTable fetch={`/mesures/filters`} />
-      },
-      {
         text: "Mandataires",
         icon: <Users />,
         url: "/tis/mandataires",
         content: <MapTable fetch={`/mandataires/filters`} isMandataire={true} />
+      },
+      {
+        text: "Majeurs Protégés",
+        icon: <Users />,
+        url: "/tis/majeurs",
+        content: <MapTable fetch={`/mesures/filters`} />
       },
       {
         text: "Mesures en attente",
@@ -77,7 +77,8 @@ class Ti extends React.Component {
               "ti",
               "mandataire_id",
               "fin-mandat",
-              "status"
+              "status",
+              "reason_fin_de_mandat"
             ]}
           />
         )

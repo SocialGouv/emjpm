@@ -21,7 +21,9 @@ export const typeMesure = [
 export const residence = [
   "A Domicile",
   "En établissement",
-  "En établissement avec conservation du domicile"
+  "En établissement avec conservation du domicile",
+  "SDF",
+  "Autres"
 ];
 
 export const civilite = ["F", "H"];

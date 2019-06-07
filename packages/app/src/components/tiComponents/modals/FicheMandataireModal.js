@@ -20,8 +20,9 @@ const TitleMandataire = styled.div`
   font-size: 1.5em;
   font-weight: bold;
 `;
-const CellMesureReservationRedux = connect(null, dispatch =>
-  bindActionCreators({ show }, dispatch)
+const CellMesureReservationRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
 )(({ show, mandataire }) => (
   <div
     data-cy="button-attente-mesure"
@@ -165,6 +166,7 @@ class FicheMandataireModal extends React.Component {
               adresse={currentMandataire.adresse}
               code_postal={currentMandataire.code_postal}
               ville={currentMandataire.ville}
+              mesures_en_cours={currentMandataire.mesures_en_cours}
               dispo_max={currentMandataire.dispo_max}
               secretariat={currentMandataire.secretariat}
               nb_secretariat={currentMandataire.nb_secretariat}
@@ -238,6 +240,7 @@ const mapStateToProps = state => ({
     state.mandataire.currentEtablissementsForSelectedMandataire
 });
 
-export default connect(mapStateToProps, null)(
-  connectModal({ name: "FicheMandataireModal", destroyOnHide: true })(FicheMandataireModal)
-);
+export default connect(
+  mapStateToProps,
+  null
+)(connectModal({ name: "FicheMandataireModal", destroyOnHide: true })(FicheMandataireModal));
