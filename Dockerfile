@@ -28,8 +28,8 @@ COPY ./packages/app /app/packages/app
 # Second run with postinstall
 RUN yarn --frozen-lockfile && yarn cache clean
 
-ARG API_URL=${API_URL:-/api}
-ARG SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN:-https://path.to.sentry}
+ARG API_URL=${API_URL:-%%API_URL%%}
+ARG SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN:-%%SENTRY_PUBLIC_DSN%%}
 
 RUN yarn build --stream
 
