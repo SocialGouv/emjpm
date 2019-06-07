@@ -30,11 +30,13 @@ describe("Admins", () => {
   });
 
   it("should deactivate Adrien", function() {
-    const button = cy.contains("Adrien")
+    cy.contains("Adrien")
       .parent()
-      .contains("Désactiver");
-    button.click();
-    button.should("contain", "Activer");
+      .contains("Désactiver")
+      .then(button => {
+        button.click();
+        button.should("contain", "Activer");
+      });
   });
 
   it("Adrien should be deactivated", function() {
@@ -55,13 +57,13 @@ describe("Admins", () => {
 
   it("should activate Doug", function() {
     cy.contains("En attente de validation").click();
-    const button = cy
-      .contains("Doug")
+    cy.contains("Doug")
       .parent()
-      .contains("Activer");
-
-    button.click();
-    button.should("contain", "Désactiver");
+      .contains("Activer")
+      .then(button => {
+        button.click();
+        button.should("contain", "Désactiver");
+      });
   });
 
   it("should show 7 active users", function() {
