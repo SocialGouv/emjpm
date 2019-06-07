@@ -238,4 +238,7 @@ E2E Test @optional/e2e:
       - optional/e2e/cypress/screenshots
       - optional/e2e/cypress/videos
   script:
-    - cd optional/e2e
+    - rm -rf packages/{api,app,jest-environment-knex}
+    #
+    - yarn --production --ignore-scripts
+    - yarn run -- lerna exec --scope=@optional/e2e yarn -- --frozen-lockfile
