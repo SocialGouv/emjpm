@@ -119,7 +119,7 @@ class Autocomplete extends React.Component {
 }
 Autocomplete.propTypes = {
   onSelect: PropTypes.func.isRequired,
-  component: PropTypes.element.isRequired,
+  component: PropTypes.func.isRequired,
   getLabel: PropTypes.func.isRequired,
   resetOnSelect: PropTypes.bool.isRequired
 };

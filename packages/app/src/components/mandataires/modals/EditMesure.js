@@ -134,8 +134,12 @@ const TisOfMandataireAutoCompleteRedux = connect(state => ({
   items: state.mandataire.tis
 }))(TisOfMandataireAutoComplete);
 
+const TisOfMandataireAutoCompleteReduxWrapper = props => (
+  <TisOfMandataireAutoCompleteRedux {...props} />
+);
+
 const widgets = {
-  TisOfMandataireAutoComplete: TisOfMandataireAutoCompleteRedux
+  TisOfMandataireAutoComplete: TisOfMandataireAutoCompleteReduxWrapper
 };
 
 const EditMesure = ({ show, handleHide, formData, onSubmit, ...props }) => {
