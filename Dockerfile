@@ -8,7 +8,6 @@ RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime
 COPY ./lerna.json /app/lerna.json
 COPY ./package.json /app/package.json
 COPY ./packages/jest-environment-knex/package.json /app/packages/jest-environment-knex/package.json
-COPY ./optional/e2e/package.json /app/optional/e2e/package.json
 COPY ./packages/api/package.json /app/packages/api/package.json
 COPY ./packages/app/package.json /app/packages/app/package.json
 COPY ./packages/knex/package.json /app/packages/knex/package.json
@@ -32,6 +31,3 @@ ARG API_URL=${API_URL:-%%API_URL%%}
 ARG SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN:-%%SENTRY_PUBLIC_DSN%%}
 
 RUN yarn build --stream
-
-# Optional packages not required
-COPY ./optional/e2e /app/optional/e2e
