@@ -18,48 +18,53 @@ const getInsertData = (knex, { password, ...others }) => ({
 
 const USERS = [
   {
-    username: "jeremy",
+    email: "ud@ud.com",
     password: "johnson123",
-    type: "individuel",
     prenom: "Adrien",
-    email: "ud@ud.com"
+    type: "individuel",
+    username: "jeremy"
   },
   {
-    username: "kelly",
-    password: "bryant123",
-    type: "prepose",
     email: "panam@paris.com",
-    prenom: "Julien"
+    password: "bryant123",
+    prenom: "Julien",
+    type: "prepose",
+    username: "kelly"
   },
   {
-    username: "service1",
-    password: "service1",
-    type: "service",
-    email: "melanie@paris.com",
-    prenom: "Mélanie",
     active: true,
-    service_id: 1
+    email: "melanie@paris.com",
+    password: "service1",
+    prenom: "Mélanie",
+    service_id: 1,
+    type: "service",
+    username: "service1"
   },
   {
-    username: "admin",
+    email: "admin@admin.com",
     password: "admin",
-    type: "admin"
+    prenom: "Dark Vador",
+    type: "admin",
+    username: "admin"
   },
   {
-    username: "ti1",
-    password: "ti1",
-    type: "ti",
     cabinet: "6D",
-    email: "test2@ti.com"
+    email: "test2@ti.com",
+    password: "ti1",
+    prenom: "Pierre",
+    type: "ti",
+    username: "ti1"
   },
   {
     username: "inactive",
     password: "inactive",
+    prenom: "Paul",
     type: "prepose",
     active: false
   },
   {
     username: "ti2",
+    prenom: "Jack",
     password: "ti2",
     type: "ti",
     active: false
@@ -81,7 +86,8 @@ const USERS = [
     //reset_password_token: "LpWpzK4Jla9I87Aq",
     active: false,
     cabinet: "6D",
-    email: "test@ti.com"
+    email: "test@ti.com",
+    prenom: "Jean"
   },
   {
     id: 33,
@@ -90,7 +96,8 @@ const USERS = [
     type: "ti",
     cabinet: "6D",
     reset_password_token: "LpWpzK4Jla9I87Aqtry",
-    email: "test3@ti.com"
+    email: "test3@ti.com",
+    prenom: "Momo"
   },
   {
     id: 52,
