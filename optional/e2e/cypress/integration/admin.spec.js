@@ -9,165 +9,69 @@ describe("Admins", () => {
     cy.loginByForm("admin", "admin");
   });
 
-  it("should show 4 users", function() {
+  it("should show 7 users", function() {
+    cy.getCellAction().should("have.length", 7);
+    cy.contains("Adrien");
+    cy.contains("Julien");
+    cy.contains("Mélanie");
+    cy.contains("Dark Vador");
+    cy.contains("Pierre");
+    cy.contains("Momo");
+    cy.contains("Marcel");
+  });
+
+  it("should show 4 inactive users", function() {
+    cy.contains("En attente de validation").click();
     cy.getCellAction().should("have.length", 4);
-    cy.get(".ReactTable .rt-tr-group:nth-child(1)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Adrien");
-    cy.get(".ReactTable .rt-tr-group:nth-child(2)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Julien");
-    cy.get(".ReactTable .rt-tr-group:nth-child(3)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Mélanie");
-    cy.get(".ReactTable .rt-tr-group:nth-child(4)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Marcel");
+    cy.contains("Paul");
+    cy.contains("Jack");
+    cy.contains("Jean");
+    cy.contains("Doug");
   });
-  it("should show 1 inactive users", function() {
-    cy.get("[data-cy='En attente de validation']").click();
-    cy.getCellAction().should("have.length", 1);
-    cy.get(".ReactTable .rt-tr-group:nth-child(1)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Doug");
-  });
+
   it("should deactivate Adrien", function() {
-    cy.getCellAction().should("contain", "Désactiver");
-    cy.getCellAction()
-      .first()
-      .click();
-    cy.getCellAction().should("contain", "Activer");
+    cy.contains("Adrien")
+      .parent()
+      .contains("Désactiver")
+      .as("button");
+    cy.get("@button").click();
+    cy.get("@button").should("contain", "Activer");
   });
+
   it("Adrien should be deactivated", function() {
-    cy.getCellAction().should("have.length", 3);
-    cy.get("[data-cy='En attente de validation']").click();
-    cy.getCellAction().should("have.length", 2);
-    cy.get(".ReactTable .rt-tr-group:nth-child(1)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Adrien");
+    cy.contains("Adrien").should("not.exist");
+    cy.contains("En attente de validation").click();
+    cy.contains("Adrien");
   });
-  it("should show 3 active users", function() {
-    cy.getCellAction().should("have.length", 3);
-    cy.get(".ReactTable .rt-tr-group:nth-child(1)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Julien");
-    cy.get(".ReactTable .rt-tr-group:nth-child(2)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Mélanie");
-    cy.get(".ReactTable .rt-tr-group:nth-child(3)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Marcel");
+
+  it("should show 6 active users", function() {
+    cy.getCellAction().should("have.length", 6);
+    cy.contains("Julien");
+    cy.contains("Mélanie");
+    cy.contains("Dark Vador");
+    cy.contains("Pierre");
+    cy.contains("Momo");
+    cy.contains("Marcel");
   });
+
   it("should activate Doug", function() {
-    cy.get("[data-cy='En attente de validation']").click();
-    cy.getCellAction().should("have.length", 2);
-    cy.getCellAction()
-      .last()
-      .should("contain", "Activer");
-    cy.getCellAction()
-      .last()
-      .click();
-    cy.getCellAction().should("contain", "Désactiver");
-  });
-  it("should show 4 active users", function() {
-    cy.getCellAction().should("have.length", 4);
-    cy.get(".ReactTable .rt-tr-group:nth-child(1)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Julien");
-    cy.get(".ReactTable .rt-tr-group:nth-child(2)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Mélanie");
-    cy.get(".ReactTable .rt-tr-group:nth-child(3)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Doug");
-    cy.get(".ReactTable .rt-tr-group:nth-child(4)")
-      .find(".rt-td")
-      .first()
-      .should("contain", "Marcel");
+    cy.contains("En attente de validation").click();
+    cy.contains("Doug")
+      .parent()
+      .contains("Activer")
+      .as("button");
+    cy.get("@button").click();
+    cy.get("@button").should("contain", "Désactiver");
   });
 
-  describe("full scenario", () => {
-    before(function() {
-      cy.exec("npm run cypress:api-reset");
-    });
-    it("should navigate properly", function() {
-      cy.getCellAction().should("have.length", 4);
-
-      cy.get(".ReactTable .rt-tr-group:nth-child(1) .rt-td")
-        .first()
-        .should("contain", "Adrien");
-      cy.get(".ReactTable .rt-tr-group:nth-child(2) .rt-td")
-        .first()
-        .should("contain", "Julien");
-
-      cy.get("[data-cy='En attente de validation']").click();
-
-      // eslint-disable-next-line cypress/no-unnecessary-waiting
-      cy.wait(200); // wait for the list to appear
-
-      cy.get(".ReactTable .rt-tr-group:nth-child(1)")
-        .find(".rt-td")
-        .first()
-        .should("contain", "Doug");
-
-      cy.get("[data-cy='Actifs']").click();
-      cy.getCellAction().should("have.length", 4);
-      cy.getCellAction("Désactiver").should("have.length", 4);
-      cy.getCellAction("Activer").should("have.length", 0);
-
-      cy.getCellAction("Désactiver")
-        .first()
-        .click();
-      cy.getCellAction("Désactiver").should("have.length", 3);
-      cy.getCellAction("Activer").should("have.length", 1);
-
-      cy.getCellAction("Désactiver")
-        .first()
-        .click();
-      cy.getCellAction("Désactiver").should("have.length", 2);
-      cy.getCellAction("Activer").should("have.length", 2);
-
-      cy.getCellAction("Désactiver")
-        .first()
-        .click();
-      cy.getCellAction("Désactiver").should("have.length", 1);
-      cy.getCellAction("Activer").should("have.length", 3);
-
-      cy.get("[data-cy='En attente de validation']").click();
-      cy.getCellAction().should("have.length", 4);
-      cy.getCellAction("Activer").should("have.length", 4);
-
-      cy.getCellAction("Activer")
-        .first()
-        .click();
-      cy.getCellAction("Activer").should("have.length", 3);
-
-      cy.getCellAction("Activer")
-        .first()
-        .click();
-      cy.getCellAction("Activer").should("have.length", 2);
-
-      cy.getCellAction("Activer")
-        .first()
-        .click();
-      cy.getCellAction("Activer").should("have.length", 1);
-
-      cy.getCellAction("Activer")
-        .first()
-        .click();
-      cy.getCellAction("Activer").should("have.length", 0);
-    });
+  it("should show 7 active users", function() {
+    cy.getCellAction().should("have.length", 7);
+    cy.contains("Julien");
+    cy.contains("Mélanie");
+    cy.contains("Dark Vador");
+    cy.contains("Pierre");
+    cy.contains("Momo");
+    cy.contains("Doug");
+    cy.contains("Marcel");
   });
 });
