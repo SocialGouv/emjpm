@@ -176,8 +176,9 @@ describe("Inscription", () => {
     });
     it("should register individuel", function() {
       cy.loginByForm("admin", "admin");
-      cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
+
+      cy.contains("En attente de validation").click();
+      cy.getCellAction().should("have.length", 4);
 
       cy.visit("/inscription");
 
@@ -219,8 +220,8 @@ describe("Inscription", () => {
       cy.location("pathname").should("eq", "/inscription-done/");
 
       cy.loginByForm("admin", "admin");
-      cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
+      cy.contains("En attente de validation").click();
+      cy.getCellAction().should("have.length", 5);
     });
     it("account should not login before activation", function() {
       cy.loginByForm("email1@email.com", "password100");
@@ -228,17 +229,18 @@ describe("Inscription", () => {
     });
     it("admin should be able to activate account", function() {
       cy.loginByForm("admin", "admin");
-      cy.get("[data-cy='UserCellAction']").should("have.length", 4);
-      cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
-      cy.get("[data-cy='UserCellAction']")
-        .first()
+      cy.getCellAction().should("have.length", 7);
+      cy.contains("En attente de validation").click();
+      cy.getCellAction().should("have.length", 5);
+      cy.contains("nom 1 prenom 1")
+        .parent()
+        .contains("Activer")
         .click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
-      cy.get("[data-cy='Actifs']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 5);
-      cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
+      cy.getCellAction().should("have.length", 5);
+      cy.contains("Actifs").click();
+      cy.getCellAction().should("have.length", 8);
+      cy.contains("En attente de validation").click();
+      cy.getCellAction().should("have.length", 4);
     });
     it("account should login after activation", function() {
       cy.loginByForm("email1@email.com", "password100");
@@ -253,8 +255,8 @@ describe("Inscription", () => {
     });
     it("should register tis", function() {
       cy.loginByForm("admin", "admin");
-      cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
+      cy.contains("En attente de validation").click();
+      cy.getCellAction().should("have.length", 4);
 
       cy.visit("/inscription");
 
@@ -273,6 +275,8 @@ describe("Inscription", () => {
         .click();
 
       const data = {
+        root_nom: "nom 1",
+        root_prenom: "prenom 1",
         root_pass1: "password100",
         root_pass2: "password100",
         root_email: "email1@email.com"
@@ -296,9 +300,9 @@ describe("Inscription", () => {
       cy.location("pathname").should("eq", "/inscription-done/");
 
       cy.loginByForm("admin", "admin");
-      cy.get("[data-cy='TI']").click();
-      cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
+      cy.contains("TI").click();
+      cy.contains("En attente de validation").click();
+      cy.getCellAction().should("have.length", 2);
     });
     it("account should not login before activation", function() {
       cy.loginByForm("email1@email.com", "password100");
@@ -306,20 +310,21 @@ describe("Inscription", () => {
     });
     it("admin should be able to activate account", function() {
       cy.loginByForm("admin", "admin");
-      cy.get("[data-cy='TI']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
-      cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
+      cy.contains("TI").click();
+      cy.getCellAction().should("have.length", 1);
+      cy.contains("En attente de validation").click();
+      cy.getCellAction().should("have.length", 2);
 
-      cy.get("[data-cy='UserCellAction']")
-        .first()
+      cy.contains("nom 1 prenom 1")
+        .parent()
+        .contains("Activer")
         .click();
 
-      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
-      cy.get("[data-cy='Actifs']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 2);
-      cy.get("[data-cy='En attente de validation']").click();
-      cy.get("[data-cy='UserCellAction']").should("have.length", 1);
+      cy.getCellAction().should("have.length", 2);
+      cy.contains("Actifs").click();
+      cy.getCellAction().should("have.length", 2);
+      cy.contains("En attente de validation").click();
+      cy.getCellAction().should("have.length", 1);
     });
     it("account should login after activation", function() {
       cy.loginByForm("email1@email.com", "password100");
