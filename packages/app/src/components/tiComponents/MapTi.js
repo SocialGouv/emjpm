@@ -61,7 +61,7 @@ class MapTi extends React.Component {
         this.setState({
           lat: data.latitude,
           lng: data.longitude,
-          zoom: 9
+          zoom: 6
         });
       })
       .catch(console.log);
