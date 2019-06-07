@@ -252,4 +252,6 @@ E2E Test @optional/e2e:
     - yarn workspace @emjpm/knex run migrate --env test
     - yarn workspace @emjpm/knex run seeds --env test
     #
-    - yarn run -- lerna run --scope=@optional/e2e cypress:run
+    - cd optional/e2e
+    - yarn cypress verify
+    - yarn cypress run
