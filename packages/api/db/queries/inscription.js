@@ -15,7 +15,7 @@ const getTiByRegion = () =>
     )
     .innerJoin("regions", "regions.id", "departements.id_region")
     .orderBy("regions.nom", "asc")
-    .orderBy("tis.etablissement", "asc");
+    .orderBy("tis.ville", "asc");
 
 const createUser = (data, trx) =>
   (trx || knex).table("users").insert(data, "id");

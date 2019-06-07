@@ -152,7 +152,8 @@ class ServiceTabsAntennes extends React.Component {
                   "ti",
                   "status",
                   "professionnel",
-                  "mandataire_id"
+                  "mandataire_id",
+                  "reason_fin_de_mandat"
                 ]}
               />
             ) : (
@@ -207,7 +208,8 @@ class ServiceTabsAntennes extends React.Component {
               "residence",
               "status",
               "professionnel",
-              "numero_dossier"
+              "numero_dossier",
+              "reason_fin_de_mandat"
             ]}
           />
         )
