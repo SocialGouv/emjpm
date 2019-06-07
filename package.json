@@ -8,7 +8,7 @@
     "start": "lerna run start --parallel",
     "test": "lerna run test --parallel --ignore @optional/e2e"
   },
-  "devDependencies": {
+  "dependencies": {
     "lerna": "^3.13.4"
   },
   "workspaces": [
