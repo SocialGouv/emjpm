@@ -1,10 +1,8 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.alterTable("codepostallatlngs", function(table) {
-    table
-      .integer("cities_id")
-      .references("id")
-      .inTable("cities");
-    table.dropUnique("code_postal");
+  return knex.schema.alterTable("geolocalisation_code_postal", function(table) {
+    table.dropUnique("code_postal", "codepostallatlngs_code_postal_unique");
+    table.specificType("cities", "text[]");
+    table.string("code_insee");
   });
 };
 
