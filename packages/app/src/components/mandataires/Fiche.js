@@ -73,17 +73,23 @@ const FicheMandataire = ({
         </div>
       )}
       <br />
-      <table style={{ width: 300 }} cellPadding={5}>
+      <table style={{ width: 350 }} cellPadding={5}>
         <tbody style={{ fontSize: "1.1em" }}>
           <tr>
             <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
-              <b>Nombre total de mesures souhaitées</b>
+              {type === "service" ? (
+                `Nombre de mesures en cours / Nombre total de mesures souhaitées`
+              ) : (
+                <b>Nombre total de mesures souhaitées</b>
+              )}
             </td>
             <td
               data-cy="fiche-manda-dispo-max"
-              style={{ textAlign: "center", borderBottom: "1px solid silver" }}
+              style={{ textAlign: "center", borderBottom: "1px solid silver", width: 80 }}
             >
-              {dispo_max || "-"}
+              {type === "service"
+                ? `${mesures_en_cours || `-`} / ${dispo_max || `-`}`
+                : dispo_max || "-"}
             </td>
           </tr>
           {type !== "service" && (
