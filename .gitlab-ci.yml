@@ -240,5 +240,6 @@ E2E Test @optional/e2e:
   script:
     - rm -rf packages/{api,app,jest-environment-knex}
     #
+    - yarn config set cache-folder .yarn
     - yarn --production --ignore-scripts
     - yarn run -- lerna exec --scope=@optional/e2e yarn -- --frozen-lockfile
