@@ -7,7 +7,7 @@ describe("Login", () => {
 
   it("Login with zzz account should show error message", function() {
     cy.visit("/");
-    cy.contains('Se connecter').should('be.visible');
+    cy.contains("Se connecter").should("be.visible");
 
     cy.get("#root_username").type("zzz");
     cy.get("#root_password").type("xxx");
