@@ -9,8 +9,8 @@ exports.seed = function(knex) {
         code_postal: "62000",
         ville: "Arras",
         telephone: "0237100000",
-        latitude: 1,
-        longitude: 1
+        latitude: 50.293,
+        longitude: 2.7819
       });
     })
     .then(function() {
@@ -20,8 +20,8 @@ exports.seed = function(knex) {
         code_postal: "75000",
         ville: "Paris",
         telephone: "0102030405",
-        latitude: 1,
-        longitude: 1
+        latitude: 48.8534,
+        longitude: 2.3488
       });
     });
 };
