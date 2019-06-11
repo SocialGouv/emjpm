@@ -246,9 +246,12 @@ E2E Test @optional/e2e:
     - yarn --production --ignore-scripts
     - yarn run -- lerna exec --scope=@optional/e2e yarn -- --frozen-lockfile
     #
-    - npx wait-port --timeout 30000 localhost:5434
-    - npx wait-port --timeout 30000 localhost:4000
-    - npx wait-port --timeout 30000 localhost:80
+    # Database on localhost:5434
+    - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
+    # API on localhost:4000
+    - npx wait-port --timeout 30000 localhost:4000 # 30_000 = 1000 * 30s
+    # Front on localhost:80
+    - npx wait-port --timeout 30000 localhost:80 # 30_000 = 1000 * 30s
     #
     - yarn workspace @emjpm/knex run migrate --env test
     - yarn workspace @emjpm/knex run seeds --env test
