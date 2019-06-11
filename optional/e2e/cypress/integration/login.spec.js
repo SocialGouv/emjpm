@@ -7,6 +7,8 @@ describe("Login", () => {
 
   it("Login with zzz account should show error message", function() {
     cy.visit("/");
+    cy.contains('Se connecter').should('be.visible');
+
     cy.get("#root_username").type("zzz");
     cy.get("#root_password").type("xxx");
     cy.get("button.btn-success").click();
@@ -16,6 +18,8 @@ describe("Login", () => {
 
   it("Reset password process", function() {
     cy.visit("/reset-password?token=LpWpzK4Jla9I87Aq");
+    cy.contains("Mot de passe oublié").should("be.visible");
+
     cy.get("#root_newPassword").type("adad");
     cy.get("#root_verifyPassword").type("adad");
     cy.get("button.btn-success").click();
@@ -25,6 +29,8 @@ describe("Login", () => {
 
   it("Login with invalid account should show error message", function() {
     cy.visit("/");
+    cy.contains("Se connecter").should("be.visible");
+
     cy.get("#root_username").type("ad");
     cy.get("#root_password").type("ad123");
     cy.get("button.btn-success").click();
@@ -37,6 +43,8 @@ describe("Login", () => {
 
   it("Login with valid account should redirect to /mandataires/", function() {
     cy.visit("/");
+    cy.contains("Se connecter").should("be.visible");
+
     cy.get("#root_username").type("ad");
     cy.get("#root_password").type("adad");
     cy.get("button.btn-success").click();
@@ -45,6 +53,8 @@ describe("Login", () => {
 
   it("Forgot password process", function() {
     cy.visit("/forgot-password");
+    cy.contains("Récupérer votre compte").should("be.visible");
+
     cy.get("#root_email").type("ud@ud.com");
     cy.get("button.btn-success").click();
     cy.location("pathname").should("eq", "/login/");
@@ -52,6 +62,8 @@ describe("Login", () => {
 
   it("'jeremy' should redirect to /mandataires/", function() {
     cy.visit("/");
+    cy.contains("Se connecter").should("be.visible");
+
     cy.get("#root_username").type("jeremy");
     cy.get("#root_password").type("johnson123");
     cy.get("button.btn-success").click();
@@ -60,6 +72,8 @@ describe("Login", () => {
 
   it("'ti1' should redirect to /tis/", function() {
     cy.visit("/");
+    cy.contains("Se connecter").should("be.visible");
+
     cy.get("#root_username").type("ti1");
     cy.get("#root_password").type("ti1");
     cy.get("button.btn-success").click();
