@@ -22,41 +22,31 @@ describe("Tis", function() {
 
     beforeEach(function() {
       cy.visit("/tis");
-
-      // ! HACK(douglasduteil): force resize to ensure to trigger new data request
-      // ! Seems like changing the screen size change the data in the list as
-      // ! it changes the size of the map...
-      cy.viewport("macbook-15");
-      // ! HACK(douglasduteil): wait for react to render...
-      // ! This is making the test less fuzzy
-
-      // eslint-disable-next-line cypress/no-unnecessary-waiting
-      cy.wait(250);
     });
 
     context("session Tis", () => {
       describe("/tis", () => {
         it("table should show 2 mandataires", () => {
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
+          cy.contains("Adrien");
+          cy.contains("Julien");
         });
         it("counter should show 2 professionnels", () => {
-          cy.get("[data-cy=Mandataires]").click();
+          cy.contains("Majeurs Protégés").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
+          cy.contains("Adrien");
+          cy.contains("Julien");
         });
         it("can add a comments for a specific Mandataire", () => {
-          cy.get(".react-tabs .rt-tr-group:nth-child(2)").click();
-
-          // ! HACK(douglasduteil): wait for react to render...
-          // ! The modal seems to take some time to be so we wait...
-          // ! This is making the test less fuzzy
-          /* eslint-disable cypress/no-unnecessary-waiting */
-          cy.wait(250);
-          /* eslint-enable cypress/no-unnecessary-waiting */
+          cy.contains("Julien")
+            .parentsUntil("[role=rowgroup]")
+            .last()
+            .click();
 
           cy.get(".form-group #root_comment").type(
             "Hello i send you a comments"
           );
-          cy.get("[data-cy=button-enregistrer-comment]").click();
+          cy.contains("Enregistrer").click();
           cy.get("[data-cy=tab-comment] div:nth-child(2) div").contains(
             "Hello i send you a comments"
           );
@@ -84,11 +74,13 @@ describe("Tis", function() {
         it("table should show 1 mandataires on individuel filter", () => {
           cy.get("[data-cy=tab-Individuel]").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
+          cy.contains("Adrien");
         });
 
         it("table should show 1 mandataires on prepose filter", () => {
           cy.get("[data-cy=tab-Prepose]").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
+          cy.contains("Julien");
         });
 
         it("table should show 0 mandataires on service filter", () => {
@@ -96,20 +88,25 @@ describe("Tis", function() {
           cy.get(".react-tabs .rt-tr-group").should("have.length", 0);
         });
         it("table should show 1 mandataires on Lille Geolocalisation ", () => {
-          cy.get("[data-cy=tab-code-postal]").type("62000");
-          cy.get("[data-cy=tab-recherche]").click();
+          cy.contains("Majeurs Protégés").click();
 
-          // ! HACK(douglasduteil): force resize to ensure to trigger new data request
-          // ! Seems like changing the screen size change the data in the list as
-          // ! it changes the size of the map...
-          cy.viewport("macbook-13");
-          // ! HACK(douglasduteil): wait for react to render...
+          cy.get("[data-cy=tab-code-postal]").type("62000");
+          cy.contains("Rechercher").click();
+
+          // ! HACK(douglasduteil): wait the map to move to the code post...
           // ! This is making the test less fuzzy
-          /* eslint-disable cypress/no-unnecessary-waiting */
-          cy.wait(250);
-          /* eslint-enable cypress/no-unnecessary-waiting */
+          // ! The map
+          // eslint-disable-next-line cypress/no-unnecessary-waiting
+          cy.wait(500);
+
+          // ! HACK(douglasduteil): zoom a little...
+          // ! Ensure that we only see the given code post on the map
+          cy.get("[aria-label='Zoom in']").click();
+          cy.get("[aria-label='Zoom in']").click();
+          cy.get("[aria-label='Zoom in']").click();
 
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
+          cy.contains("Adrien");
         });
       });
     });
