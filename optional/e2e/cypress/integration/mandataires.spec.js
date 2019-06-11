@@ -30,13 +30,12 @@ describe("Mandataires", function() {
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
         it("counter should show 2/5", () => {
-          cy.get(".react-tabs .react-tabs__tab-list").should(
-            "contain",
-            "2 / 5"
-          );
+          cy.contains("Mesures en cours")
+            .parent()
+            .contains("2 / 5");
         });
         it("can add new mesure", () => {
-          cy.get("[data-cy=button-create-mesure]").click();
+          cy.contains("Créer une nouvelle mesure").click();
           cy.dateInput(".form-group #root_date_ouverture", "2019-06-22");
 
           cy.get(".form-group #root_type").select("Sauvegarde de justice");
@@ -69,32 +68,38 @@ describe("Mandataires", function() {
           ).should("contain", "1977");
         });
         it("counter should now show 3/5", () => {
-          cy.get(".react-tabs .react-tabs__tab-list").should(
-            "contain",
-            "3 / 5"
-          );
+          cy.contains("Mesures en cours")
+            .parent()
+            .contains("3 / 5");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
         });
         it("can close mandat", () => {
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
-          cy.get("[data-cy=button-close-mesure]")
-            .first()
-            .click({ force: true });
-          cy.dateInput(".ReactModal__Content #root", "2019-07-22");
-          cy.get(".ReactModal__Content button.btn-success").click({
-            force: true
+          cy.contains("Sauvegarde de justice")
+            .parent()
+            .contains("Mettre fin au mandat")
+            .click();
+          cy.get(".ReactModal__Content").within(() => {
+            cy.contains("Mettre fin au mandat");
+            cy.contains("Date d'extinction")
+              .parent()
+              .find("input")
+              .type("2019-07-22");
+            cy.contains("Raison de l'extinction")
+              .parent()
+              .find("select")
+              .select("Autre");
+            cy.contains("button", "Mettre fin au mandat").click();
           });
-          cy.get(".react-tabs .react-tabs__tab-list").should(
-            "contain",
-            "2 / 5"
-          );
+          cy.contains("Mesures en cours")
+            .parent()
+            .contains("2 / 5");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
         it("counter should now show 2/5", () => {
-          cy.get(".react-tabs .react-tabs__tab-list").should(
-            "contain",
-            "2 / 5"
-          );
+          cy.contains("Mesures en cours")
+            .parent()
+            .contains("2 / 5");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
       });
@@ -102,7 +107,7 @@ describe("Mandataires", function() {
     context("session mandataire individuel Information", () => {
       describe("/mandataires information", () => {
         it("information should show a nom and prenom", () => {
-          cy.get("[data-cy='Mes informations']").click();
+          cy.contains("Mes informations").click();
           cy.get("[data-cy=fiche-manda-email]").contains("ud@ud.com");
           cy.get("[data-cy=fiche-manda-telephone]").contains("0237100000");
           cy.get("[data-cy=fiche-manda-telephone-portable]").contains(
@@ -117,7 +122,7 @@ describe("Mandataires", function() {
       });
       describe("/mandataires Update information", () => {
         it("information should update Fiche", () => {
-          cy.get("[data-cy='Mes informations']").click();
+          cy.contains("Mes informations").click();
           cy.get("[data-cy=button-edit-profile]").click();
           cy.get(".form-group #root_nom")
             .clear()
@@ -170,10 +175,9 @@ describe("Mandataires", function() {
           cy.get("[data-cy=fiche-manda-secretariat]").contains("Oui (4 ETP)");
         });
         it("counter should now show 2/10", () => {
-          cy.get(".react-tabs .react-tabs__tab-list").should(
-            "contain",
-            "2 / 10"
-          );
+          cy.contains("Mesures en cours")
+            .parent()
+            .contains("2 / 10");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
       });
@@ -181,78 +185,96 @@ describe("Mandataires", function() {
     context("session mandataire individuel Mesure Eteinte", () => {
       describe("/mandataires eteindre mesure", () => {
         it("table en cours should have 2 mesures", () => {
-          cy.get("[data-cy='Mesures éteintes']").click();
+          cy.contains("Fins de mandats").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
-          cy.get("button[data-cy=button-reactivate-mesure]").should(
-            "have.length",
-            2
-          );
 
-          cy.get("[data-cy='Mesures en cours']").click();
+          cy.contains("Mesures en cours").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
-          cy.get("button[data-cy=button-close-mesure]").should(
-            "have.length",
-            2
-          );
-          cy.get("[data-cy=button-close-mesure]")
-            .first()
-            .click({ force: true });
-          cy.get(".ReactModal__Content button.btn-success").click();
+
+          // TODO(dougalsduteil): find a better way to select the first row
+          cy.contains("93000 ST DENIS")
+            .parent()
+            .contains("Mettre fin au mandat")
+            .click();
+
+          cy.get(".ReactModal__Content").within(() => {
+            cy.contains("Mettre fin au mandat");
+            cy.contains("Date d'extinction")
+              .parent()
+              .find("input")
+              .type("2019-07-22");
+            cy.contains("Raison de l'extinction")
+              .parent()
+              .find("select")
+              .select("Autre");
+            cy.contains("button", "Mettre fin au mandat").click();
+          });
 
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
-          cy.get("button[data-cy=button-close-mesure]").should(
-            "have.length",
-            1
-          );
 
-          cy.get("[data-cy='Mesures éteintes']").click();
+          cy.contains("Fins de mandats").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
-          cy.get("button[data-cy=button-reactivate-mesure]").should(
-            "have.length",
-            3
-          );
         });
       });
       describe("/mandataires réactiver mesure", () => {
         it("table eteintes should have 1 mesure", () => {
-          cy.get("[data-cy='Mesures en cours']").click();
+          cy.contains("Mesures en cours").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
-          cy.get("[data-cy='Mesures éteintes']").click();
+
+          cy.contains("Fins de mandats").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
-          cy.get("button[data-cy=button-reactivate-mesure]").should(
-            "have.length",
-            3
-          );
-          cy.get("button[data-cy=button-reactivate-mesure]")
-            .first()
-            .click();
-          cy.get("[data-cy=button-modal-reactivate-mesure]")
-            .first()
-            .click();
+
+          cy.contains("Réactiver la mesure").click();
+          cy.contains("Cliquez ici").click();
+
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
-          cy.get("[data-cy='Mesures en cours']").click();
+
+          cy.contains("Mesures en cours").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
         });
       });
     });
     context("session mandataire individuel Mesure Eteinte", () => {
-      describe("/mandataires eteindre mesure (?)", () => {
+      describe("valider une mesures en attente", () => {
         it("can attente mesure", () => {
-          cy.get("[data-cy='Mesures réservées']").click();
-          cy.get(
-            ".react-tabs .rt-tr-group:nth-child(1) [data-cy=button-attente-mesure] "
-          ).click();
-          cy.get(".form-group #root_date_ouverture").type("2012-12-12");
-          cy.get(".form-group #root_residence").select("A Domicile");
-          cy.get(".form-group #root_code_postal").type("76000");
-          cy.get(".form-group #root_ville").type("Rouen");
-          cy.get("[data-cy=validation-button]").click();
+          cy.contains("Mesures en attente").click();
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
+
+          // TODO(dougalsduteil): find a better way to select the first row
+          cy.contains("preposes")
+            .parent()
+            .contains("Valider")
+            // NOTE(douglasduteil): the button might not be visible ...
+            .scrollIntoView()
+            .click();
+
+          cy.get(".ReactModal__Content").within(() => {
+            cy.contains("Valider une nouvelle mesure");
+            cy.contains("Date de décision")
+              .parent()
+              .find("input")
+              .type("2012-12-12");
+            cy.contains("Lieu de vie du majeur à protéger")
+              .parent()
+              .find("select")
+              .select("A Domicile");
+            cy.contains("Code Postal")
+              .parent()
+              .find("input")
+              .type("76000");
+            cy.contains("Commune")
+              .parent()
+              .find("input")
+              .type("Rouen");
+            cy.contains("button", "Valider").click();
+          });
+
+          cy.get(".react-tabs .rt-tr-group").should("have.length", 0);
         });
         it("counter should now show 3/10", () => {
-          cy.get(".react-tabs .react-tabs__tab-list").should(
-            "contain",
-            "3 / 10"
-          );
+          cy.contains("Mesures en cours")
+            .parent()
+            .contains("3 / 10");
           cy.get(".react-tabs .rt-tr-group").should("have.length", 3);
         });
       });
