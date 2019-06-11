@@ -8,7 +8,6 @@ RUN cp /usr/share/zoneinfo/Europe/Paris /etc/localtime
 COPY ./lerna.json /app/lerna.json
 COPY ./package.json /app/package.json
 COPY ./packages/jest-environment-knex/package.json /app/packages/jest-environment-knex/package.json
-COPY ./optional/e2e/package.json /app/optional/e2e/package.json
 COPY ./packages/api/package.json /app/packages/api/package.json
 COPY ./packages/app/package.json /app/packages/app/package.json
 COPY ./packages/knex/package.json /app/packages/knex/package.json
