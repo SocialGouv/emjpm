@@ -18,8 +18,8 @@ Array [
     ],
     "code_postal": "93000",
     "count": "1",
-    "latitude": 0.3,
-    "longitude": 0.3,
+    "latitude": 48.91,
+    "longitude": 2.41998,
     "type": "individuel",
   },
   Object {
@@ -28,8 +28,8 @@ Array [
     ],
     "code_postal": "75000",
     "count": "1",
-    "latitude": 0.2,
-    "longitude": 0.2,
+    "latitude": 48.8534,
+    "longitude": 2.3488,
     "type": "prepose",
   },
 ]

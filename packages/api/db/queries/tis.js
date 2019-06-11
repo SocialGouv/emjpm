@@ -61,7 +61,7 @@ const getTiByUserId = userId =>
     )
     .innerJoin("user_tis", "user_tis.ti_id", "tis.id")
     .innerJoin("users", "user_tis.user_id", "users.id")
-    .where("user_tis.user_id", parseInt(userId))
+    .where("user_tis.user_id", Number(userId))
     .first();
 
 const getTiByUserIdWithCodePostal = userId =>

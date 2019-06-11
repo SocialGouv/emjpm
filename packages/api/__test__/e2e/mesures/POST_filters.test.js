@@ -25,9 +25,9 @@ test("should get mesures filtered by localisation", async () => {
     .post("/api/v1/mesures/filters")
     .set("Authorization", "Bearer " + token)
     .send({
-      latNorthEast: 1,
+      latNorthEast: 50,
       latSouthWest: 0,
-      longNorthEast: 1,
+      longNorthEast: 5,
       longSouthWest: 0
     });
 
