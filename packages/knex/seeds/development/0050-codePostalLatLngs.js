@@ -11,15 +11,15 @@ const removeUnique = (arr, key) => {
 
 exports.seed = knex => {
   const newRows = zipCodes.map(row => {
+    console.log(row);
     return {
       code_postal: row.code_postal,
-      latitude: parseFloat(row.latitude),
-      longitude: parseFloat(row.longitude),
+      latitude: row.latitude,
+      longitude: row.longitude,
       cities: row.cities,
       code_insee: row.code_commune_INSEE
     };
   });
-
   return knex.transaction(tr => {
     return knex
       .table("geolocalisation_code_postal")
