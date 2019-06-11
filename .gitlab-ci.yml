@@ -232,7 +232,7 @@ E2E Test @optional/e2e:
     paths:
       - ./node_modules/
       - ./optional/e2e/node_modules/
-      - .yarn
+      - ./.yarn
   artifacts:
     expire_in: 1 week
     when: always
@@ -242,7 +242,7 @@ E2E Test @optional/e2e:
   script:
     - rm -rf packages/{api,app,jest-environment-knex}
     #
-    - yarn config set cache-folder .yarn
+    - yarn config set cache-folder ./.yarn
     - yarn --production --ignore-scripts
     - yarn run -- lerna exec --scope=@optional/e2e yarn -- --frozen-lockfile
     #
