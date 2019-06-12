@@ -29,5 +29,19 @@ services:
       - "5434:5432"
     volumes:
       - emjpm-pgdata:/var/lib/postgresql/data
+
+  graphql-engine:
+    image: hasura/graphql-engine:v1.0.0-beta.2
+    ports:
+      - 5000:8080
+    depends_on:
+      - db
+    restart: always
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm_dev
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      ## uncomment next line to set an admin secret
+      # HASURA_GRAPHQL_ADMIN_SECRET: myadminsecretkey
+
 volumes:
   emjpm-pgdata:
