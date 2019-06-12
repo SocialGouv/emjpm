@@ -22,7 +22,16 @@ const Footer = ({ fixed }) => (
           </a>
         </li>
         <li>
-          <p>Site optimisé pour Mozilla Firefox et Google Chrome</p>
+          Site optimisé pour Mozilla Firefox et Google Chrome
+        </li>
+        <li>
+          <a
+            className="button button_transparent"
+            style={{ fontSize: "1em" }}
+            href="mentions-legales-modalites-utilisation"
+          >
+            Mentions légales et conditions générales d'utilisation
+          </a>
         </li>
       </ul>
       <ul className="footer__links"> </ul>
