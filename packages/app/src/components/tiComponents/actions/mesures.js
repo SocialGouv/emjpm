@@ -22,12 +22,10 @@ export const updateMesure = data => dispatch =>
       dispatch(mesureUpdated(json));
       piwik.push(["trackEvent", "Mesures", "Updated", data.id]);
     })
-    .catch(error => {
-      /* eslint-disable no-console */
-      console.log(error);
-      /* eslint-enable no-console */
+    .catch(e => {
+      console.log(e);
       alert("Impossible de soumettre les données");
-      throw error;
+      throw e;
     });
 
 // ------------ PLAIN ACTIONS

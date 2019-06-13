@@ -1,5 +1,3 @@
-import React from "react";
-
 const LoadingMessage = () => (
   <div style={{ display: "flex", alignItems: "center" }}>
     <div

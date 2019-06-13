@@ -12,7 +12,7 @@ import { Provider, connect } from "react-redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
-import { DummyTabs } from "..";
+import { DummyTabs, LoadingMessage } from "..";
 import { tiMount } from "./actions/mandataire";
 import { profileTi } from "./actions/user";
 import mandataireReducer from "./reducers/mandataire";

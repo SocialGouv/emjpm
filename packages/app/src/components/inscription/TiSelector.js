@@ -1,4 +1,3 @@
-import React from "react";
 import TiByRegion from "./TiByRegion";
 
 const groupByRegion = arr =>

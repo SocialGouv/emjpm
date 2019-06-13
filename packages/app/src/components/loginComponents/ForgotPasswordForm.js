@@ -1,4 +1,3 @@
-import React from "react";
 import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
@@ -9,7 +8,7 @@ const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
 
-import { piwik } from "../../piwik";
+import piwik from "../../piwik";
 
 export const doForgotPassword = formData => {
   const url = `${API_URL}/auth/forgot_password`;
@@ -111,7 +110,6 @@ class ForgotPassword extends React.Component {
     formData: {}
   };
   componentDidMount() {
-    // eslint-disable-next-line react/no-find-dom-node
     const node = findDOMNode(this);
     if (node) {
       const input = node.querySelector("input");
@@ -140,7 +138,7 @@ class ForgotPassword extends React.Component {
               error: null
             });
           })
-          .catch(() => {
+          .catch(e => {
             this.setState({
               status: "error",
               error: "Impossible de trouver l'email"

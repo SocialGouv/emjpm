@@ -61,10 +61,8 @@ export const openFicheMandataireModal = mandataire => {
           dispatch(tis(tisByMandataire))
         )
       )
-      .catch(error => {
-        /* eslint-disable no-console */
-        console.log(error);
-        /* eslint-enable no-console */
+      .catch(e => {
+        console.log(e);
       });
   };
 };
@@ -81,10 +79,8 @@ export const openValidationModal = ({ formData }) => {
           fetchMandataires().then(json => dispatch(mandatairesUpdated(json)))
         )
       )
-      .catch(error => {
-        /* eslint-disable no-console */
-        console.log(error);
-        /* eslint-enable no-console */
+      .catch(e => {
+        console.log(e);
       });
   };
 };

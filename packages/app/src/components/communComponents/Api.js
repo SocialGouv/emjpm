@@ -52,21 +52,15 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
     .then(res => {
       // intercept
       if (options.forceLogin && res.status === 401) {
-        /* eslint-disable no-console */
         console.log(`401 on ${route}`);
-        /* eslint-enable no-console */
         Router.push("/login");
       }
       if (res.status === 404) {
-        /* eslint-disable no-console */
         console.log(`404 on ${route}`);
-        /* eslint-enable no-console */
         throw new Error(404);
       }
       if (res.status >= 500) {
-        /* eslint-disable no-console */
         console.log(`${res.status} on ${route}`);
-        /* eslint-enable no-console */
         throw new Error(res.status);
       }
       return res;
@@ -91,11 +85,9 @@ export const updateUser = ({ id, active }) =>
     body: JSON.stringify({
       active
     })
-  }).catch(error => {
-    /* eslint-disable no-console */
-    console.error(error);
-    /* eslint-enable no-console */
-    throw error;
+  }).catch(e => {
+    console.log(e);
+    throw e;
   });
 
 export default apiFetch;
