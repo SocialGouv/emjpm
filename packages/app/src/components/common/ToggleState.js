@@ -26,12 +26,12 @@ class ToggleState extends React.Component {
             throw new Error(500);
           }
         })
-        .catch(
-          /* rollback */ e => {
-            console.log(e);
-            this.toggleState();
-          }
-        )
+        .catch(error => {
+          /* eslint-disable no-console */
+          console.error(error);
+          /* eslint-enable no-console */
+          this.toggleState();
+        })
     );
   };
   render() {

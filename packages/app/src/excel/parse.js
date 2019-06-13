@@ -46,9 +46,11 @@ export const readExcelDate = date => {
     // excel leap year bug https://gist.github.com/christopherscott/2782634
     return new Date((date - (25567 + 2)) * 86400 * 1000);
   } else {
-    let matches = date.match(DATE_FR_LONG);
+    const matches = date.match(DATE_FR_LONG);
     if (matches) {
-      const [_all, day, month, year, ..._parts] = matches;
+      /* eslint-disable no-unused-vars */
+      const [_all, day, month, year] = matches;
+      /* eslint-enable no-unused-vars */
       return new Date(toJsYear(year), toJsMonth(month), day);
     }
     return date;
