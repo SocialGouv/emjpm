@@ -255,7 +255,6 @@ const COLUMNS = [
           {row.row.updateMandataire === null ? (
             <span
               className="d-inline-block"
-              tabIndex="0"
               data-toggle="tooltip"
               title="Dernière mise à jour des données datant de plus de 30 jours."
             >
@@ -265,7 +264,6 @@ const COLUMNS = [
             isOlderThanOneMonth(row.row.updateMandataire.slice(0, 10)) && (
               <span
                 className="d-inline-block"
-                tabIndex="0"
                 data-toggle="tooltip"
                 title="Dernière mise à jour des données datant de plus de 30 jours."
               >
