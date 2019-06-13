@@ -34,9 +34,11 @@ class Resolve extends React.Component {
         .then(result => {
           this.setState({ result, status: "success", error: null });
         })
-        .catch(e => {
-          console.log(e);
-          this.setState({ result: null, status: "error", error: e.message });
+        .catch(error => {
+          /* eslint-disable no-console */
+          console.error(error);
+          /* eslint-enable no-console */
+          this.setState({ result: null, status: "error", error: error.message });
         });
     });
   }

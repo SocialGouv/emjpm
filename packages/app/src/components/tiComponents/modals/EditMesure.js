@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 
 import { connectModal } from "redux-modal";
@@ -59,7 +60,7 @@ const uiSchema = {
   }
 };
 
-const EditMesure = ({ show, handleHide, formData, onSubmit, ...props }) => {
+const EditMesure = ({ show, handleHide, formData, onSubmit }) => {
   // todo: we should have perfect mapping api<->data<->form
   const cleanData = {
     ...formData,

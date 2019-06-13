@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 
 import { connectModal } from "redux-modal";
@@ -6,7 +7,6 @@ import { bindActionCreators } from "redux";
 
 import { updateMandataire } from "../actions/mandataire";
 import Layout from "../../communComponents/ModalLayout";
-import { ErrorBox } from "../../common/ShowBox";
 
 const schema = {
   title: "Modifier vos informations",
@@ -93,7 +93,7 @@ class EditService extends React.Component {
     const validate = (formData, errors) => {
       let number = 0;
       this.props.profiles.map(profile => {
-        let dispo_max =
+        const dispo_max =
           this.props.mandataireId === profile.id ? formData.dispo_max : profile.dispo_max;
         number = number + dispo_max;
       });
