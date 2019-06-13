@@ -13,7 +13,7 @@ const ButtonEditMandataire = connect(
     service: state.mandataire.service
   }),
   dispatch => bindActionCreators({ show }, dispatch)
-)(({ formData, show }) => (
+)(({ formData, show, service }) => (
   <>
     <Button
       data-cy="button-edit-profile"
@@ -56,7 +56,7 @@ class ServiceSiegeSocial extends React.Component {
     );
   }
 }
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ updateService: data => updateService(data) }, dispatch);
 const ServiceSiegeSocialRedux = connect(
   state => ({

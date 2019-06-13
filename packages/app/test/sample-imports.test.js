@@ -357,3 +357,4 @@ describe("annee as full date", () => {
     expect(validations).toMatchSnapshot();
   });
 });
+

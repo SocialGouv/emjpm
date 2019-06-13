@@ -1,9 +1,9 @@
-import React from "react";
 import { Mail, User } from "react-feather";
 
 const iconStyle = { width: 22, height: 22, marginRight: 10 };
 
 // fiche recap
+import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { show } from "redux-modal";
@@ -11,7 +11,7 @@ import Router from "next/router";
 
 import { Button } from "..";
 
-import { updateUser } from "../tiComponents/actions/user";
+import { updateUser } from "./actions/mandataire";
 import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";
 
 const ChangePassword = email => {
@@ -20,11 +20,7 @@ const ChangePassword = email => {
       alert("Un email vient de vous être envoyé");
       Router.push("/tis");
     })
-    .catch(error => {
-      /* eslint-disable no-console */
-      console.error(error);
-      /* eslint-enable no-console */
-    });
+    .catch(e => console.log(e));
 };
 
 // bouton connecté à redux-modal.show pour EditMandataire
@@ -90,7 +86,7 @@ const UserProfile = ({ currentUser }) => (
   </div>
 );
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ updateUser: data => updateUser(data) }, dispatch);
 
 const ProfileUserRedux = connect(

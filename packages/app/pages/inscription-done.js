@@ -1,4 +1,3 @@
-import React from "react";
 import Router from "next/router";
 import styled from "styled-components";
 import Head from "next/head";
