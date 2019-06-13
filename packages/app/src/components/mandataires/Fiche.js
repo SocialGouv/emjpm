@@ -15,6 +15,7 @@ const FicheMandataire = ({
   zip = "",
   dispo_max = 0,
   secretariat = false,
+  mesures_en_cours = 0,
   nb_secretariat = 0,
   type = ""
 }) => {
