@@ -9,7 +9,7 @@
     "test": "lerna run test --parallel --ignore @optional/e2e"
   },
   "dependencies": {
-    "lerna": "^3.13.4"
+    "lerna": "^3.15.0"
   },
   "workspaces": [
     "packages/*"
