@@ -120,7 +120,7 @@ describe("Mandataires", function() {
           cy.get("[data-cy=fiche-manda-secretariat]").contains("Non");
         });
       });
-      describe.only("/mandataires Update information", () => {
+      describe("/mandataires Update information", () => {
         it("information should update Fiche", () => {
           cy.contains("Mes informations").click();
           cy.contains("Modifier mon profil").click();
