@@ -60,7 +60,7 @@ test("admin should be able to change jeremy (user 1) profile", async () => {
     const user = await knex("users")
       .where({ id: 1 })
       .first();
-    expect(user.active).toBeFalsy;
+    expect(user.active).toBeFalsy();
   }
 });
 

@@ -9,7 +9,6 @@ jest.setMock("nodemailer", nodemailerMock);
 // Fake env
 process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 
-
 const { knex } = global;
 jest.setMock("@emjpm/api/db/knex", knex);
 

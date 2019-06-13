@@ -41,7 +41,9 @@ passport.use(
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey:
         process.env.JWT_KEY ||
+        /* eslint-disable no-console */
         console.log("WARN: no process.env.JWT_KEY defined") ||
+        /* eslint-enable no-console */
         "emjpm-jwtkey"
     },
     function(jwtPayload, cb) {
@@ -53,7 +55,9 @@ passport.use(
           return cb(null, JSON.parse(JSON.stringify(user[0])));
         })
         .catch(err => {
+          /* eslint-disable no-console */
           console.log("err");
+          /* eslint-enable no-console */
           return cb(err);
         });
     }
