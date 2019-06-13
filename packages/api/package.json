@@ -28,7 +28,7 @@
     "debug": "^4.1.1",
     "dotenv": "^8.0.0",
     "es6-promise": "^4.2.6",
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "express-session": "^1.16.1",
     "http-errors": "^1.7.2",
     "isomorphic-fetch": "^2.2.1",
