@@ -4,7 +4,7 @@ FROM ${BASE_IMAGE} as emjpm-base-image
 
 #
 
-FROM cypress/base:10.15.3
+FROM cypress/base:10.16.0
 
 # Installing cypress
 COPY ./package.json /app/e2e/package.json

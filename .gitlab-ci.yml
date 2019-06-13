@@ -206,7 +206,7 @@ Register app image:
 E2E Test @optional/e2e:
   <<: *end_to_end_stage
   allow_failure: true
-  image: cypress/base:10.15.3
+  image: cypress/base:10.16.0
   services:
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
