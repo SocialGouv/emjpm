@@ -75,13 +75,15 @@ const redirs = {
  *               $ref: '#/components/schemas/SuccessResponse'
  */
 router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
-  passport.authenticate("local", { session: false }, (err, user, info) => {
+  passport.authenticate("local", { session: false }, (err, user) => {
     if (err) {
       return next(err);
     }
     if (!user) {
       if (process.env.NODE_ENV !== "test") {
+        /* eslint-disable no-console */
         console.log(`Unauthorized user : ${req.body.username}`);
+        /* eslint-enable no-console */
         Sentry.captureMessage(`Unauthorized user : ${req.body.username}`);
       }
       return res
@@ -123,14 +125,16 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
               action: "connexion",
               result: "fail"
             });
+            /* eslint-disable no-console */
             return console.log(e);
+            /* eslint-enable no-console */
           });
       });
     }
   })(req, res, next);
 });
 
-router.get("/checkToken", authHelpers.loginRequired, (req, res, next) => {
+router.get("/checkToken", authHelpers.loginRequired, (req, res) => {
   return res.sendStatus(200);
 });
 

@@ -21,7 +21,9 @@ if (process.env.SENTRY_PUBLIC_DSN) {
 
 process.on("unhandledRejection", r => {
   Sentry.captureException(r);
+  /* eslint-disable no-console */
   console.log("unhandledRejection", r);
+  /* eslint-enable no-console */
 });
 
 const corsOptions = {
@@ -46,7 +48,7 @@ app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/doc", require("./routes/doc"));
 
-app.get("/ping", function(req, res, next) {
+app.get("/ping", function(req, res) {
   if (!req.user) {
     res.status(401).json({ success: false });
   } else {
@@ -54,7 +56,7 @@ app.get("/ping", function(req, res, next) {
   }
 });
 
-app.get("/", function(req, res, next) {
+app.get("/", function(req, res) {
   res.json({
     title: "API eMJPM",
     version: pkg.version,
@@ -64,7 +66,9 @@ app.get("/", function(req, res, next) {
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  /* eslint-disable no-console */
   console.log(`404 Not Found : ${req.method} ${req.url}`);
+  /* eslint-enable no-console */
   var err = new Error(`404 Not Found : ${req.method} ${req.url}`);
   err.status = 404;
   next(err);
@@ -94,10 +98,12 @@ const port = process.env.PORT || 4000;
 
 if (require.main === module) {
   app.listen(port, "0.0.0.0", () => {
+    /* eslint-disable no-console */
     console.log(
       `Listening on http://127.0.0.1:${port} [${process.env.NODE_ENV ||
         "development"}]`
     );
+    /* eslint-enable no-console */
   });
 }
 

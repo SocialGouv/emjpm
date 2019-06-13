@@ -36,7 +36,9 @@ const validationEmail = (email, url) => {
     EMAIL_RELANCE_HTML(url)
   ).catch(e => {
     // todo: sentry
+    /* eslint-disable no-console */
     console.log(e);
+    /* eslint-enable no-console */
   });
 };
 

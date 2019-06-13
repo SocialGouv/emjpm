@@ -18,7 +18,7 @@ const { getSpecificUser, updateUser } = require("../db/queries/users");
 //     });
 // });
 
-router.get("/", authHelpers.loginRequired, (req, res, next) => {
+router.get("/", authHelpers.loginRequired, (req, res) => {
   return handleResponse(res, 200, "success");
 });
 
@@ -67,7 +67,7 @@ router.put("/1", authHelpers.typeRequired("ti"), async (req, res, next) => {
 router.get(
   "/1",
   authHelpers.typeRequired("ti", "service", "individuel", "prepose"),
-  async (req, res, next) => {
+  async (req, res) => {
     const user = await getSpecificUser({ id: req.user.id });
     if (!user) {
       throw createError.Unauthorized(`User not found`);

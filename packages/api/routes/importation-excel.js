@@ -73,7 +73,7 @@ router.post(
             result: "success"
           })
         )
-        .catch(e => {
+        .catch(() => {
           addDataLogs({
             user_id: req.user.id,
             action: "import excel",

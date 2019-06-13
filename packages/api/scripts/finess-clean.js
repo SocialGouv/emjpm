@@ -16,33 +16,9 @@ const data = fs.readFileSync(process.argv[2], "latin1").toString();
 // map to simpler format
 const data2 = rows
   .map(row => {
-    const [
-      x,
-      y,
-      id,
-      nom1,
-      nom,
-      xx,
-      xxx,
-      num,
-      voie,
-      rue,
-      zz,
-      zzz,
-      zzzz,
-      zzzzz,
-      zzzzzz,
-      cpVille,
-      tel,
-      fax,
-      mft,
-      libellemft,
-      sph,
-      libelleSph,
-      siret,
-      ape,
-      ...blabla
-    ] = row.split(";");
+    const [x, id, nom1, nom, num, voie, rue, cpVille, tel, fax] = row.split(
+      ";"
+    );
     if (x === "geolocalisation") {
       return;
     }
@@ -60,5 +36,7 @@ const data2 = rows
   .filter(Boolean);
 
 const rows = data.split("\n").slice(1);
+/* eslint-disable no-console */
 console.log("id_finess;nom;adresse;code_postal;ville;tel;fax");
 console.log(data2.join("\n"));
+/* eslint-enable no-console */
