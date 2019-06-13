@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [23.3.333](https://github.com/SocialGouv/emjpm/compare/v1.2.0...v23.3.333) (2019-06-13)
+
+
+### Bug Fixes
+
+* **app:** prevent '_leaflet_pos' of undefined error ([#285](https://github.com/SocialGouv/emjpm/issues/285)) ([21fae07](https://github.com/SocialGouv/emjpm/commit/21fae07))
+* **app:** revert to TableTi lint to minimum changes ([b5183fd](https://github.com/SocialGouv/emjpm/commit/b5183fd))
+* **app:** wrong piwik import ([0d5caa7](https://github.com/SocialGouv/emjpm/commit/0d5caa7))
+* **mandataires:** handle singular in nb mesures ([#268](https://github.com/SocialGouv/emjpm/issues/268)) ([b183d99](https://github.com/SocialGouv/emjpm/commit/b183d99))
+
+
+### Reverts
+
+* **gitlab:** back to 274aae7 service config ([#263](https://github.com/SocialGouv/emjpm/issues/263)) ([6b6bf6c](https://github.com/SocialGouv/emjpm/commit/6b6bf6c))
+
+
+
+
+
 # [1.2.0](https://github.com/SocialGouv/emjpm/compare/v1.1.0...v1.2.0) (2019-06-04)
 
 

@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [23.3.333](https://github.com/SocialGouv/emjpm/compare/v1.2.0...v23.3.333) (2019-06-13)
+
+
+### Bug Fixes
+
+* **app:** prevent '_leaflet_pos' of undefined error ([#285](https://github.com/SocialGouv/emjpm/issues/285)) ([21fae07](https://github.com/SocialGouv/emjpm/commit/21fae07))
+* **app:** revert to TableTi lint to minimum changes ([b5183fd](https://github.com/SocialGouv/emjpm/commit/b5183fd))
+* **app:** wrong piwik import ([0d5caa7](https://github.com/SocialGouv/emjpm/commit/0d5caa7))
+* **deps:** update dependency cypress to ^3.3.1 ([#209](https://github.com/SocialGouv/emjpm/issues/209)) ([922c9d8](https://github.com/SocialGouv/emjpm/commit/922c9d8))
+* **deps:** update dependency lerna to ^3.15.0 ([#207](https://github.com/SocialGouv/emjpm/issues/207)) ([93ee291](https://github.com/SocialGouv/emjpm/commit/93ee291))
+* **docker:** use a fixed container name for DB ([#256](https://github.com/SocialGouv/emjpm/issues/256)) ([6b7f735](https://github.com/SocialGouv/emjpm/commit/6b7f735))
+* **knex:** remove dependence on api files ([#262](https://github.com/SocialGouv/emjpm/issues/262)) ([70fff92](https://github.com/SocialGouv/emjpm/commit/70fff92))
+* **mandataires:** handle singular in nb mesures ([#268](https://github.com/SocialGouv/emjpm/issues/268)) ([b183d99](https://github.com/SocialGouv/emjpm/commit/b183d99))
+
+
+### Reverts
+
+* **gitlab:** back to 274aae7 service config ([#263](https://github.com/SocialGouv/emjpm/issues/263)) ([6b6bf6c](https://github.com/SocialGouv/emjpm/commit/6b6bf6c))
+
+
+
+
+
 # [1.2.0](https://github.com/SocialGouv/emjpm/compare/v1.1.0...v1.2.0) (2019-06-04)
 
 
