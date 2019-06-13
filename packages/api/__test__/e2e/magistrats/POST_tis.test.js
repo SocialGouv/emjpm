@@ -22,6 +22,7 @@ const defaultRegister = {
   ti_id: 1
 };
 
+// eslint-disable-next-line no-unused-vars
 const simpler = ({ created_at, ...props }) => props;
 
 test("should add ti for a  mandataire", async () => {

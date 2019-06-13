@@ -29,6 +29,7 @@ beforeEach(async () => {
   await knex.seed.run();
 });
 
+// eslint-disable-next-line no-unused-vars
 const simplerMesure = ({ id, ...props }) => props;
 
 const getMesuresCounter = async id =>

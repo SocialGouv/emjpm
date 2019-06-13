@@ -2,8 +2,6 @@
 
 const knex = require("../knex.js");
 
-const { getMandataireById } = require("./mandataires");
-
 const getAllTisByMandataire = mandataireId =>
   knex("user_tis")
     .distinct("user_tis.ti_id")

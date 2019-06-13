@@ -1,4 +1,5 @@
 //
+
 const request = require("supertest");
 const nodemailerMock = require("nodemailer-mock");
 jest.setMock("nodemailer", nodemailerMock);
@@ -35,6 +36,7 @@ const defaultRegister = {
   tis: [1]
 };
 
+// eslint-disable-next-line no-unused-vars
 const simpler = ({ created_at, ...props }) => props;
 
 test("should register with good values", async () => {

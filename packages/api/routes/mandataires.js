@@ -6,7 +6,6 @@ const router = express.Router();
 const { typeRequired, loginRequired } = require("../auth/_helpers");
 
 const {
-  getMandataireById,
   getMandataireByUserId,
   updateMandataire,
   updateCountMesures,

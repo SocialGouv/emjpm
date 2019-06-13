@@ -14,6 +14,7 @@ beforeAll(async () => {
   await knex.seed.run();
 });
 
+// eslint-disable-next-line no-unused-vars
 const simpler = ({ created_at, ...props }) => props;
 
 test("should GET tis for one mandataire ", async () => {
