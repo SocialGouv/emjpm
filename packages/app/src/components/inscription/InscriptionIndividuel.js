@@ -1,4 +1,3 @@
-import React from "react";
 import FormMandataire from "./FormMandataire";
 import uiSchema from "./uiSchema.json";
 

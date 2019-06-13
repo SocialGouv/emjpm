@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import Head from "next/head";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -47,7 +46,7 @@ const StyledTab = styled(Tab)`
 const DummyTabs = ({ tabs }) => (
   <Tabs style={{ background: "white" }}>
     <TabList style={{ background: "#cad4de", borderBottom: 0, marginBottom: 0 }}>
-      {tabs.map(tab => (
+      {tabs.map((tab, i) => (
         <StyledTab className="react-tabs__tab" data-cy={tab.text} key={tab.text}>
           <IconWrapper>{tab.icon}</IconWrapper>
           {tab.text}

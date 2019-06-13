@@ -1,4 +1,3 @@
-import React from "react";
 import { Phone, Smartphone, Mail, Home, Info } from "react-feather";
 
 const iconStyle = { width: 22, height: 22, marginRight: 10 };
@@ -15,9 +14,9 @@ const FicheMandataire = ({
   zip = "",
   dispo_max = 0,
   secretariat = false,
-  mesures_en_cours = 0,
   nb_secretariat = 0,
-  type = ""
+  type = "",
+  mesures_en_cours = 0
 }) => {
   const hasAdresse = adresse || code_postal || ville;
   return (

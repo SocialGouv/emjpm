@@ -11,7 +11,7 @@ class SelectionManager extends React.Component {
     selection: []
   };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     // hack to force reload when some redux state change
     if (this.props.mandataireId !== prevProps.mandataireId) {
       this.updateSelection();
@@ -38,12 +38,10 @@ class SelectionManager extends React.Component {
       }),
       () => {
         if (this.props.onAdd) {
-          this.props.onAdd(obj.id).catch(error => {
+          this.props.onAdd(obj.id).catch(e => {
             alert("Impossible d'ajouter :/");
-            /* eslint-disable no-console */
-            console.error(error);
-            /* eslint-enable no-console */
-            throw error;
+            console.log(e);
+            throw e;
           });
         }
       }
@@ -59,12 +57,10 @@ class SelectionManager extends React.Component {
       }),
       () => {
         if (this.props.onRemove) {
-          this.props.onRemove(obj.id).catch(error => {
+          this.props.onRemove(obj.id).catch(e => {
             alert("Impossible de supprimer :/");
-            /* eslint-disable no-console */
-            console.error(error);
-            /* eslint-enable no-console */
-            throw error;
+            console.log(e);
+            throw e;
           });
         }
       }

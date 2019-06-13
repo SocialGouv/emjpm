@@ -1,4 +1,3 @@
-import React from "react";
 import Services from "../src/components/mandataires";
 import { Layout } from "../src/components";
 

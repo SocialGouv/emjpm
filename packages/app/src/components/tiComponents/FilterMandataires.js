@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       : dispatch(updateFilters(value))
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   currentFilter: state.mandataire.filters || ""
 });
 
@@ -60,13 +60,13 @@ const FilterMandataires = ({ onClick, currentFilter }) => (
     {choices &&
       Object.keys &&
       Object.keys(choices) &&
-      Object.keys(choices).map(choice => (
+      Object.keys(choices).map((choice, idx) => (
         <Choice
           key={choice}
           label={choices[choice]}
           defaultChecked={choice === currentFilter}
           value={choice}
-          onClick={() => onClick(choice)}
+          onClick={e => onClick(choice)}
         />
       ))}
   </div>

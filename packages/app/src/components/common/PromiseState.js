@@ -34,6 +34,7 @@ class PromiseState extends React.Component {
     this.load();
   }
   render() {
+    console.log("PromiseState", this.state);
     return this.props.render(this.state);
   }
 }
