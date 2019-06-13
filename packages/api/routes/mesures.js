@@ -2,7 +2,6 @@ const express = require("express");
 const createError = require("http-errors");
 
 const router = express.Router();
-const fetch = require("isomorphic-fetch");
 
 const { loginRequired, typeRequired } = require("../auth/_helpers");
 

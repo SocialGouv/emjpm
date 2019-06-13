@@ -28,7 +28,7 @@ const options = {
     info: {
       title: "eMJPM-api",
       version: "1.0.0",
-      description: `Documentation de l\'API e-MJPM.
+      description: `Documentation de l'API e-MJPM.
          <br/><br>
          Serveur de test : https://api.emjpm-preprod.num.social.gouv.fr
          <br/><br>

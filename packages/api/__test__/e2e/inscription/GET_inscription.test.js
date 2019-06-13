@@ -12,7 +12,6 @@ beforeAll(async () => {
   await knex.seed.run();
 });
 
-
 test("should return list of tis by region", async () => {
   const response = await request(server).get("/api/v1/inscription/tis");
   expect(response.body).toMatchSnapshot();

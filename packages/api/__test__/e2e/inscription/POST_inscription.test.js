@@ -14,10 +14,6 @@ jest.setMock("@emjpm/api/db/knex", knex);
 
 const server = require("@emjpm/api/app");
 const { getAllTisByMandataire } = require("@emjpm/api/db/queries/tis");
-const {
-  getAllMandatairesByUserId,
-  getServiceByMandataire
-} = require("@emjpm/api/db/queries/mandataires");
 
 beforeAll(async () => {
   await knex.migrate.latest();
@@ -78,10 +74,10 @@ test("should register with good values", async () => {
     .post("/api/v1/inscription/mandataires")
     .send(defaultRegister);
   expect(response.body).toMatchInlineSnapshot(`
-                    Object {
-                      "success": true,
-                    }
-          `);
+    Object {
+      "success": true,
+    }
+  `);
   expect(response.status).toBe(200);
 
   const lastInsert = await knex

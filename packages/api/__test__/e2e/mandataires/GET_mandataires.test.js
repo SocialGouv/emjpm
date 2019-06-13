@@ -17,6 +17,7 @@ beforeAll(async () => {
 });
 
 // strip the created_at date in the response
+// eslint-disable-next-line no-unused-vars
 const simpler = ({ created_at, ...props }) => props;
 
 test("should GET mandataire profile", async () => {
