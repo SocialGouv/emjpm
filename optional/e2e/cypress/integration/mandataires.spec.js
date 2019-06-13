@@ -120,48 +120,51 @@ describe("Mandataires", function() {
           cy.get("[data-cy=fiche-manda-secretariat]").contains("Non");
         });
       });
-      describe("/mandataires Update information", () => {
+      describe.only("/mandataires Update information", () => {
         it("information should update Fiche", () => {
           cy.contains("Mes informations").click();
-          cy.get("[data-cy=button-edit-profile]").click();
-          cy.get(".form-group #root_nom")
-            .clear()
-            .type("test-nom");
-          cy.get(".form-group #root_prenom")
-            .clear()
-            .type("test-prenom");
+          cy.contains("Modifier mon profil").click();
 
-          cy.get(".form-group #root_genre").select("H");
-          cy.get(".form-group #root_telephone")
-            .clear()
-            .type("0101010108");
-          cy.get(".form-group #root_telephone_portable")
-            .clear()
-            .type("0607080910");
-          cy.get(".form-group #root_email")
-            .clear()
-            .type("u@u.com");
-          cy.get(".form-group #root_adresse")
-            .clear()
-            .type("21 rue de oui");
-          cy.get(".form-group #root_code_postal")
-            .clear()
-            .type("62009");
-          cy.get(".form-group #root_ville")
-            .clear()
-            .type("Avesnes");
-          cy.get(".form-group #root_zip")
-            .clear()
-            .type("2ème arrondissement");
-          cy.get(".form-group #root_dispo_max")
-            .clear()
-            .type("10");
-          cy.get(".form-group #root_secretariat").select("Oui");
-          cy.get(".form-group #root_nb_secretariat")
-            .clear()
-            .type(4);
+          cy.get(".ReactModal__Content").within(() => {
+            cy.get(".form-group #root_nom")
+              .clear()
+              .type("test-nom");
+            cy.get(".form-group #root_prenom")
+              .clear()
+              .type("test-prenom");
 
-          cy.get("button[type='submit'].btn-success").click();
+            cy.get(".form-group #root_genre").select("H");
+            cy.get(".form-group #root_telephone")
+              .clear()
+              .type("0101010108");
+            cy.get(".form-group #root_telephone_portable")
+              .clear()
+              .type("0607080910");
+            cy.get(".form-group #root_email")
+              .clear()
+              .type("u@u.com");
+            cy.get(".form-group #root_adresse")
+              .clear()
+              .type("21 rue de oui");
+            cy.get(".form-group #root_code_postal")
+              .clear()
+              .type("62009");
+            cy.get(".form-group #root_ville")
+              .clear()
+              .type("Avesnes");
+            cy.get(".form-group #root_zip")
+              .clear()
+              .type("2ème arrondissement");
+            cy.get(".form-group #root_dispo_max")
+              .clear()
+              .type("10");
+            cy.get(".form-group #root_secretariat").select("Oui");
+            cy.get(".form-group #root_nb_secretariat")
+              .clear()
+              .type(4);
+
+            cy.contains("button", "Valider").click();
+          });
 
           cy.get("[data-cy=fiche-manda-email]").contains("u@u.com");
           cy.get("[data-cy=fiche-manda-telephone]").contains("0101010108");
