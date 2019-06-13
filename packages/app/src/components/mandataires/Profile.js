@@ -96,7 +96,7 @@ class MandataireProfile extends React.Component {
   render() {
     const { etablissements, tis } = this.props;
 
-    const newMandataire = getNewMandataire(this.props);
+    const newMandataire = getNewMandataire(this.props) || {};
 
     return (
       <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
