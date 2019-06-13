@@ -58,7 +58,7 @@
     "@socialgouv/eslint-config-react": "^0.7.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "css-loader": "^0.28.9",
+    "css-loader": "^0.28.11",
     "dotenv": "^8.0.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
