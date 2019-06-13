@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 import SearchButton from "../communComponents/SearchButton";
 
