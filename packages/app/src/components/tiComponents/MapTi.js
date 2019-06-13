@@ -120,6 +120,14 @@ class MapTi extends React.Component {
       });
   };
 
+  componentWillUnmount() {
+    // ! HACK(douglasduteil): manually disable map zoom animation
+    // ! In rare speed tab switching cases, the animation is triggered after
+    // ! the component unmount :(
+    // ! Prevent '_leaflet_pos' of undefined error
+    this.mapRef.current.leafletElement._animatingZoom = false;
+  }
+
   render() {
     this.mapRef.current && this.mapRef.current.leafletElement.setMaxZoom(13);
     const { dataFilters, datamesureFilters, isMandataire, filters, coordinates } = this.props;
