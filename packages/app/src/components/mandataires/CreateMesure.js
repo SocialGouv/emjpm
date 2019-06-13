@@ -262,11 +262,13 @@ const CreateMesure = ({
   createMesure,
   mesureCreatedStatus,
   mesureCreatedMessage,
+  children,
   mandataireId,
   formData = {
     date_ouverture: format(new Date(), "YYYY-MM-DD"),
     mandataire_id: mandataireId
-  }
+  },
+  ...props
 }) => {
   return (
     <ToggleState

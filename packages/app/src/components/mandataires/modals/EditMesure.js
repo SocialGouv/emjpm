@@ -1,4 +1,3 @@
-import React from "react";
 import Form from "react-jsonschema-form";
 
 import { connectModal } from "redux-modal";
@@ -8,7 +7,7 @@ import { format } from "date-fns";
 import { updateMesure } from "../actions/mesures";
 import Layout from "../../communComponents/ModalLayout";
 import { Autocomplete } from "../..";
-import { typeMesure, residence, civilite } from "../../common/nomination";
+import { typeMesure, residence, civilite, cabinet } from "../../common/nomination";
 
 const schema = {
   title: "Ouvrir une nouvelle mesure",
@@ -143,7 +142,7 @@ const widgets = {
   TisOfMandataireAutoComplete: TisOfMandataireAutoCompleteReduxWrapper
 };
 
-const EditMesure = ({ show, handleHide, formData, onSubmit }) => {
+const EditMesure = ({ show, handleHide, formData, onSubmit, ...props }) => {
   // todo: we should have perfect mapping api<->data<->form
   const cleanData = {
     ...formData,

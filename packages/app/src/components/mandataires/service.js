@@ -1,21 +1,34 @@
-import React from "react";
 import dynamic from "next/dynamic";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import Form from "react-jsonschema-form";
 
 import apiFetch from "../communComponents/Api";
 import { DummyTabs } from "../index";
-import { Clock, FilePlus, Home, Map, UserMinus, Plus } from "react-feather";
+import {
+  CheckCircle,
+  MinusSquare,
+  Clock,
+  FilePlus,
+  Home,
+  Map,
+  User,
+  UserMinus,
+  Plus,
+  XCircle
+} from "react-feather";
 import Profile from "./Profile";
 import Header from "./Header";
 import TableMesures from "./TableMesures";
-import { PillDispo } from "./PillDispo";
+import PillDispo from "./PillDispo";
 import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
 import { changeMandataireId } from "./actions/mandataire";
 import { DispoMagistrat } from "../common/ShowBox";
 import styled from "styled-components";
 import { show } from "redux-modal";
+import * as React from "react";
+import { AddAntennes } from "./modals";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 
@@ -51,7 +64,7 @@ const AjoutAntenne = connect(
     service: state.mandataire.service
   }),
   dispatch => bindActionCreators({ show }, dispatch)
-)(({ show }) => (
+)(({ formData, show, service }) => (
   <SiegeSocial
     onClick={() => show("AddAntennes")}
     style={{ lineHeight: "20px", backgroundColor: "transparent" }}
@@ -74,7 +87,6 @@ class ServiceTabs extends React.Component {
           {this.props.profiles.length && this.props.profiles.length !== 0 && this.props.profiles.map
             ? this.props.profiles.map(profile => (
                 <SiegeSocial
-                  key={profile.id}
                   id={profile.id}
                   mandataireId={this.props.mandataireId}
                   onClick={() => onSubmitted(profile.id)}
@@ -225,7 +237,7 @@ class ServiceTabsAntennes extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch =>
+const mapDispatchToProps = (dispatch, ownProps) =>
   bindActionCreators({ onChange: changeMandataireId }, dispatch);
 
 export default connect(

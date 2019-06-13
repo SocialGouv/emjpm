@@ -1,12 +1,11 @@
-import React from "react";
 import dynamic from "next/dynamic";
 import { Home, Map, UserMinus, Clock, FilePlus } from "react-feather";
 
-import { DummyTabs } from "..";
+import { DummyTabs, LoadingMessage } from "..";
 import apiFetch from "../communComponents/Api";
 import { connect } from "react-redux";
 
-import { PillDispo } from "./PillDispo";
+import PillDispo from "./PillDispo";
 import Profile from "./Profile";
 import TableMesures from "./TableMesures";
 import Header from "./Header";

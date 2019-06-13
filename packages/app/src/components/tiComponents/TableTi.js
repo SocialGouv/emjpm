@@ -143,21 +143,19 @@ const COLUMNS = [
     id: "identity",
     width: 50,
     accessor: d => d.type,
-    Cell(row) {
-      return (
-        <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
-          <Circle
-            style={{
-              backgroundColor: getColorFromDisponibilite(
-                row.row.dispo_max - (row.row.mesures_en_cours + row.row.mesures_en_attente)
-              )
-            }}
-          >
-            {row.row.identity.toUpperCase().substr(0, 1)}
-          </Circle>
-        </Cell>
-      );
-    },
+    Cell: row => (
+      <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
+        <Circle
+          style={{
+            backgroundColor: getColorFromDisponibilite(
+              row.row.dispo_max - (row.row.mesures_en_cours + row.row.mesures_en_attente)
+            )
+          }}
+        >
+          {row.row.identity.toUpperCase().substr(0, 1)}
+        </Circle>
+      </Cell>
+    ),
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -165,20 +163,18 @@ const COLUMNS = [
     id: "etablissement",
     width: 250,
     accessor: d => d.etablissement,
-    Cell(row) {
-      return (
-        <Cell row={row} style={{ verticalAlign: "middle" }}>
-          {row.row.identity === "service" ? (
-            <b>{`${row.row.service_etablissement} ${row.row.etablissement}`}</b>
-          ) : (
-            <b>
-              {row.row.nom} {row.row.prenom}
-            </b>
-          )}
-          <br /> <div style={{ color: "#cccccc" }}>{row.row.identity.toUpperCase()} </div>
-        </Cell>
-      );
-    },
+    Cell: row => (
+      <Cell row={row} style={{ verticalAlign: "middle" }}>
+        {row.row.identity === "service" ? (
+          <b>{`${row.row.service_etablissement} ${row.row.etablissement}`}</b>
+        ) : (
+          <b>
+            {row.row.nom} {row.row.prenom}
+          </b>
+        )}
+        <br /> <div style={{ color: "#cccccc" }}>{row.row.identity.toUpperCase()} </div>
+      </Cell>
+    ),
     style: { textAlign: "left", alignSelf: "center" }
   },
   {
@@ -186,21 +182,19 @@ const COLUMNS = [
     id: "dispo",
     accessor: d => d.dispo_max - d.mesures_en_cours - d.mesures_en_attente,
     width: 50,
-    Cell(row) {
-      return (
-        <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
-          <Circle
-            style={{
-              backgroundColor: getColorFromDisponibilite(
-                row.row.dispo_max - (row.row.mesures_en_cours + row.row.mesures_en_attente)
-              )
-            }}
-          >
-            {row.row.dispo}
-          </Circle>
-        </Cell>
-      );
-    },
+    Cell: row => (
+      <Cell row={row} style={{ width: "100px" }} data-cy="circle-mesure">
+        <Circle
+          style={{
+            backgroundColor: getColorFromDisponibilite(
+              row.row.dispo_max - (row.row.mesures_en_cours + row.row.mesures_en_attente)
+            )
+          }}
+        >
+          {row.row.dispo}
+        </Circle>
+      </Cell>
+    ),
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -208,20 +202,18 @@ const COLUMNS = [
     id: "en_cours",
     accessor: d => d.mesures_en_cours / d.dispo_max,
     width: 110,
-    Cell(row) {
-      return (
-        <CellMandataireRedux
-          row={row}
-          style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
-        >
-          <PillDispo
-            dispo={row.row.mesures_en_cours}
-            attente={row.row.mesures_en_attente}
-            dispo_max={row.row.dispo_max}
-          />
-        </CellMandataireRedux>
-      );
-    },
+    Cell: row => (
+      <CellMandataireRedux
+        row={row}
+        style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
+      >
+        <PillDispo
+          dispo={row.row.mesures_en_cours}
+          attente={row.row.mesures_en_attente}
+          dispo_max={row.row.dispo_max}
+        />
+      </CellMandataireRedux>
+    ),
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -229,16 +221,14 @@ const COLUMNS = [
     id: "mesures_en_attente",
     accessor: d => d.mesures_en_attente,
     width: 140,
-    Cell(row) {
-      return (
-        <CellMandataireRedux row={row} style={{ fontSize: "1em" }}>
-          <div style={{ color: "black" }} data-cy="attente">
-            {" "}
-            <b>{row.row.mesures_en_attente} </b>
-          </div>
-        </CellMandataireRedux>
-      );
-    },
+    Cell: row => (
+      <CellMandataireRedux row={row} style={{ fontSize: "1em" }}>
+        <div style={{ color: "black" }} data-cy="attente">
+          {" "}
+          <b>{row.row.mesures_en_attente} </b>
+        </div>
+      </CellMandataireRedux>
+    ),
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -246,13 +236,22 @@ const COLUMNS = [
     id: "updateMandataire",
     accessor: d => d.date_mesure_update,
     width: 40,
-    Cell(row) {
-      return (
-        <CellMandataireRedux
-          row={row}
-          style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
-        >
-          {row.row.updateMandataire === null ? (
+    Cell: row => (
+      <CellMandataireRedux
+        row={row}
+        style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
+      >
+        {row.row.updateMandataire === null ? (
+          <span
+            className="d-inline-block"
+            tabIndex="0"
+            data-toggle="tooltip"
+            title="Dernière mise à jour des données datant de plus de 30 jours."
+          >
+            <AlertCircle />
+          </span>
+        ) : (
+          isOlderThanOneMonth(row.row.updateMandataire.slice(0, 10)) && (
             <span
               className="d-inline-block"
               tabIndex="0"
@@ -261,21 +260,10 @@ const COLUMNS = [
             >
               <AlertCircle />
             </span>
-          ) : (
-            isOlderThanOneMonth(row.row.updateMandataire.slice(0, 10)) && (
-              <span
-                className="d-inline-block"
-                tabIndex="0"
-                data-toggle="tooltip"
-                title="Dernière mise à jour des données datant de plus de 30 jours."
-              >
-                <AlertCircle />
-              </span>
-            )
-          )}
-        </CellMandataireRedux>
-      );
-    },
+          )
+        )}
+      </CellMandataireRedux>
+    ),
     style: { alignSelf: "center" }
   },
   {
@@ -283,16 +271,14 @@ const COLUMNS = [
     id: "reservation",
     accessor: d => d.mesures_en_attente,
     width: 100,
-    Cell(row) {
-      return (
-        <CellMesureReservationRedux
-          row={row}
-          style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
-        >
-          <PlusSquare title="Reservez une mesure" style={{ cursor: "pointer" }} />
-        </CellMesureReservationRedux>
-      );
-    },
+    Cell: row => (
+      <CellMesureReservationRedux
+        row={row}
+        style={{ fontSize: "0.8em", verticalAlign: "middle", textAlign: "center" }}
+      >
+        <PlusSquare title="Reservez une mesure" style={{ cursor: "pointer" }} />
+      </CellMesureReservationRedux>
+    ),
     style: { alignSelf: "center" }
   }
 ];

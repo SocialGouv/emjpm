@@ -1,4 +1,3 @@
-import React from "react";
 import { show } from "redux-modal";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -93,13 +92,11 @@ const COLUMNS = [
     id: "date_ouverture",
     width: 140,
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
-    Cell(row) {
-      return (
-        <div>
-          {format(row.row.date_ouverture, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
-        </div>
-      );
-    },
+    Cell: row => (
+      <div>
+        {format(row.row.date_ouverture, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
+      </div>
+    ),
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -107,13 +104,11 @@ const COLUMNS = [
     id: "date_demande",
     width: 300,
     accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
-    Cell(row) {
-      return (
-        <div>
-          {format(row.row.date_demande, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
-        </div>
-      );
-    },
+    Cell: row => (
+      <div>
+        {format(row.row.date_demande, "D MMMM YYYY", { locale: require("date-fns/locale/fr") })}
+      </div>
+    ),
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -159,9 +154,7 @@ const COLUMNS = [
     id: "annee",
     width: 80,
     accessor: "annee",
-    Cell(row) {
-      return <div>{(row.row.annee && format(row.row.annee, "YYYY")) || null}</div>;
-    },
+    Cell: row => <div>{(row.row.annee && format(row.row.annee, "YYYY")) || null}</div>,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -183,13 +176,11 @@ const COLUMNS = [
     id: "extinction",
     width: 100,
     accessor: d => format(d.extinction, "YYYY-MM-DD"),
-    Cell(row) {
-      return (
-        <div>
-          {format(row.row.extinction, "DD/MM/YYYY", { locale: require("date-fns/locale/fr") })}
-        </div>
-      );
-    },
+    Cell: row => (
+      <div>
+        {format(row.row.extinction, "DD/MM/YYYY", { locale: require("date-fns/locale/fr") })}
+      </div>
+    ),
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
@@ -202,9 +193,7 @@ const COLUMNS = [
   {
     Header: "Modifier",
     id: "modifier",
-    Cell(row) {
-      return <CellEditMesureRedux row={row} />;
-    },
+    Cell: row => <CellEditMesureRedux row={row} />,
     width: 150,
     style: { textAlign: "center", alignSelf: "center" }
   },
@@ -224,9 +213,7 @@ const COLUMNS = [
   {
     Header: "Fin de mandat",
     id: "fin-mandat",
-    Cell(row) {
-      return <CellCloseMesureRedux row={row} />;
-    },
+    Cell: row => <CellCloseMesureRedux row={row} />,
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
@@ -234,18 +221,14 @@ const COLUMNS = [
   {
     Header: "Réactiver",
     id: "reactiver",
-    Cell(row) {
-      return <CellReactivateMesureRedux row={row} />;
-    },
+    Cell: row => <CellReactivateMesureRedux row={row} />,
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Valider",
     id: "valider",
-    Cell(row) {
-      return <CellValidationMesureRedux row={row} />;
-    },
+    Cell: row => <CellValidationMesureRedux row={row} />,
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   }
@@ -276,7 +259,7 @@ class TableMesures extends React.Component {
     newData: [],
     loading: false
   };
-  fetchData = () => {
+  fetchData = (state, instance) => {
     if (!this.state.loading) {
       this.setState({ loading: true }, () =>
         this.props
@@ -287,15 +270,11 @@ class TableMesures extends React.Component {
               loading: false
             });
           })
-          .catch(error => {
-            /* eslint-disable no-console */
-            console.error(error);
-            /* eslint-enable no-console */
-          })
+          .catch(console.log)
       );
     }
   };
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     // hack to force reload when some redux state change
     if (prevProps.lastUpdate !== this.props.lastUpdate) {
       this.fetchData();

@@ -1,4 +1,3 @@
-import React from "react";
 import InscriptionIndividuel from "./InscriptionIndividuel";
 import InscriptionPrepose from "./InscriptionPrepose";
 import InscriptionService from "./InscriptionService";
@@ -9,18 +8,10 @@ import apiFetch from "../communComponents/Api";
 import Router from "next/router";
 
 const formsMandataires = {
-  individuel(props) {
-    <InscriptionIndividuel {...props} />;
-  },
-  prepose(props) {
-    <InscriptionPrepose {...props} />;
-  },
-  service(props) {
-    <InscriptionService {...props} />;
-  },
-  ti(props) {
-    <InscriptionTi {...props} />;
-  }
+  individuel: props => <InscriptionIndividuel {...props} />,
+  prepose: props => <InscriptionPrepose {...props} />,
+  service: props => <InscriptionService {...props} />,
+  ti: props => <InscriptionTi {...props} />
 };
 
 const FormSelector = ({ label, value, onChange }) => (
