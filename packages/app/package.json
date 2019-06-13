@@ -24,7 +24,7 @@
     "fuse.js": "^3.4.4",
     "geolib": "^2.0.24",
     "js-cookie": "^2.2.0",
-    "leaflet": "^1.4.0",
+    "leaflet": "^1.5.1",
     "memoizee": "^0.4.14",
     "next": "^7.0.2",
     "next-images": "^1.1.1",
