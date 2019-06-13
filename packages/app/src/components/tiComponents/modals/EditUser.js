@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 
 import { connectModal } from "redux-modal";
@@ -37,7 +38,7 @@ const uiSchema = {
   }
 };
 
-const EditUser = ({ show, handleHide, formData, onSubmit, ...props }) => {
+const EditUser = ({ show, handleHide, formData, onSubmit }) => {
   const cleanData = {
     nom: formData.nom || "",
     prenom: formData.prenom || "",

@@ -1,3 +1,4 @@
+import React from "react";
 import { findDOMNode } from "react-dom";
 import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
@@ -9,7 +10,7 @@ const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
 
-import piwik, { trackUser } from "../../piwik";
+import { piwik, trackUser } from "../../piwik";
 
 const doLogin = formData => {
   const url = `${API_URL}/auth/login`;
@@ -21,7 +22,6 @@ const doLogin = formData => {
     },
     body: JSON.stringify(formData)
   }).then(res => {
-    //  console.log(res);
     if (res.status > 400) {
       // unauthorized
       throw new Error(res.status);
@@ -128,7 +128,8 @@ class LoginForm extends React.Component {
     piwik.push(["trackEvent", "navigation", "login"]);
 
     // focus login on load
-    const node = findDOMNode(this); // eslint-disable-line react/no-find-dom-node
+    // eslint-disable-next-line react/no-find-dom-node
+    const node = findDOMNode(this);
     if (node) {
       const username = node.querySelector("#root_username");
       const password = node.querySelector("#root_password");
@@ -186,7 +187,7 @@ class LoginForm extends React.Component {
               error: null
             });
           })
-          .catch(e => {
+          .catch(() => {
             piwik.push(["trackEvent", "login", "error"]);
             const url = `${API_URL}/auth/checkUser`;
             return fetch(url, {

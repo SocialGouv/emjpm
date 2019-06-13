@@ -1,3 +1,4 @@
+import React from "react";
 import ReactAutocomplete from "react-autocomplete";
 import PropTypes from "prop-types";
 
@@ -23,7 +24,7 @@ const getFuse = data => new Fuse(data, DEFAULT_FUSE_OPTIONS);
 
 class FuseHighLighter extends React.Component {
   render() {
-    const { suggestion, query, isHighlighted, onClick } = this.props;
+    const { suggestion, isHighlighted, onClick } = this.props;
 
     let html = suggestion.item.nom; // todo: handle different property
     let offset = 0;

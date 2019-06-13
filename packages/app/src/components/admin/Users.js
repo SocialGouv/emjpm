@@ -1,3 +1,4 @@
+import React from "react";
 import { User, UserCheck } from "react-feather";
 import TableUser from "./TableUser";
 import { DummyTabs } from "..";
@@ -10,11 +11,7 @@ const tabs = type =>
       icon: <UserCheck />,
       url: "/admin/users/actifs",
       content: (
-        <TableUser
-          type={type}
-          filters={{ "users.active": true }}
-          hideColumns={["cabinet"]}
-        />
+        <TableUser type={type} filters={{ "users.active": true }} hideColumns={["cabinet"]} />
       )
     },
     {
@@ -23,11 +20,7 @@ const tabs = type =>
       type: "mandataire",
       url: "/admin/users/en-attente",
       content: (
-        <TableUser
-          type={type}
-          filters={{ "users.active": false }}
-          hideColumns={["cabinet"]}
-        />
+        <TableUser type={type} filters={{ "users.active": false }} hideColumns={["cabinet"]} />
       )
     },
     {

@@ -1,13 +1,12 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 
 import { connectModal } from "redux-modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { format } from "date-fns";
 
 import { closeMesure } from "../actions/mesures";
 import Layout from "../../communComponents/ModalLayout";
-import { residence } from "../../common/nomination";
 
 const schema = {
   type: "object",
@@ -47,7 +46,7 @@ const uiSchema = {
   }
 };
 
-const CloseMesure = ({ show, handleHide, onSubmit, id, mandataire_id, ...props }) => {
+const CloseMesure = ({ show, handleHide, onSubmit, id, mandataire_id }) => {
   const onSubmitted = ({ formData }) => {
     onSubmit({
       ...formData,
@@ -61,7 +60,8 @@ const CloseMesure = ({ show, handleHide, onSubmit, id, mandataire_id, ...props }
         <h3>Mettre fin au mandat </h3>
         <br />
         <p style={{ padding: 20 }}>
-          Une fois cette opération effectuée, vous retrouverez cette fin de mandat dans l'onglet correspondant.
+          {`Une fois cette opération effectuée, vous retrouverez cette fin de mandat dans l'onglet
+          correspondant.`}
         </p>
         <Form schema={schema} uiSchema={uiSchema} onSubmit={onSubmitted}>
           <div style={{ margin: "20px 0", textAlign: "center" }}>
@@ -75,11 +75,11 @@ const CloseMesure = ({ show, handleHide, onSubmit, id, mandataire_id, ...props }
   );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) =>
-  bindActionCreators({ onSubmit: closeMesure }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ onSubmit: closeMesure }, dispatch);
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "CloseMesure", destroyOnHide: true })(CloseMesure)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectModal({ name: "CloseMesure", destroyOnHide: true })(CloseMesure));
