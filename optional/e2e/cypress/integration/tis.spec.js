@@ -50,6 +50,11 @@ describe("Tis", function() {
 
             cy.get(".form-group #root_comment")
               .should("be.visible")
+              // ! HACK(douglasduteil): wait for the input to be available
+              // ! This is making the test less fuzzy
+              // ! The map has an animation that transition from point to point
+              // eslint-disable-next-line cypress/no-unnecessary-waiting
+              .wait(500)
               .type("Hello i send you a comments");
             cy.contains("Enregistrer").click();
 
