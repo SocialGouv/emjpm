@@ -1,7 +1,7 @@
 {
   "command": {
     "version": {
-      "githubRelease": true,
+      "createRelease": "github",
       "conventionalCommits": true,
       "message": "chore(release): version %v"
     }
