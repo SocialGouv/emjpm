@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [23.3.333](https://github.com/SocialGouv/emjpm/compare/v1.2.0...v23.3.333) (2019-06-13)
+
+
+### Bug Fixes
+
+* **knex:** remove dependence on api files ([#262](https://github.com/SocialGouv/emjpm/issues/262)) ([70fff92](https://github.com/SocialGouv/emjpm/commit/70fff92))
+
+
+
+
+
 # [1.2.0](https://github.com/SocialGouv/emjpm/compare/v1.1.0...v1.2.0) (2019-06-04)
 
 
