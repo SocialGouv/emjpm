@@ -31,25 +31,31 @@ describe("Tis", function() {
           cy.contains("Adrien");
           cy.contains("Julien");
         });
+
         it("counter should show 2 professionnels", () => {
           cy.contains("Majeurs Protégés").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 2);
           cy.contains("Adrien");
           cy.contains("Julien");
         });
+
         it("can add a comments for a specific Mandataire", () => {
           cy.contains("Julien")
             .parentsUntil("[role=rowgroup]")
             .last()
             .click();
 
-          cy.get(".form-group #root_comment").type(
-            "Hello i send you a comments"
-          );
-          cy.contains("Enregistrer").click();
-          cy.get("[data-cy=tab-comment] div:nth-child(2) div").contains(
-            "Hello i send you a comments"
-          );
+          cy.get(".ReactModal__Content").within(() => {
+            cy.get("[data-cy=tab-comment] > div").should("have.length", 1);
+
+            cy.get(".form-group #root_comment")
+              .should("be.visible")
+              .type("Hello i send you a comments");
+            cy.contains("Enregistrer").click();
+
+            cy.get("[data-cy=tab-comment] > div").should("have.length", 2);
+            cy.contains("Hello i send you a comments");
+          });
         });
 
         it("add reservation mesure", () => {
@@ -95,7 +101,7 @@ describe("Tis", function() {
 
           // ! HACK(douglasduteil): wait the map to move to the code post...
           // ! This is making the test less fuzzy
-          // ! The map
+          // ! The map has an animation that transition from point to point
           // eslint-disable-next-line cypress/no-unnecessary-waiting
           cy.wait(500);
 
