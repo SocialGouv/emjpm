@@ -12,8 +12,10 @@ import { bindActionCreators } from "redux";
 import { Button } from "../..";
 import FetchCommentaires from "../FetchCommentaires";
 import Layout from "../../communComponents/ModalLayout";
+
 import apiFetch from "../../communComponents/Api";
 import FicheMandataire from "../../mandataires/Fiche";
+import exportCV from "../../common/exportCv";
 
 const TitleMandataire = styled.div`
   text-align: left;
@@ -117,6 +119,10 @@ const CommentairesView = ({ onSubmit, commentaires, onDelete }) => (
 );
 
 class FicheMandataireModal extends React.Component {
+  onClick = mandataire => {
+    exportCV(mandataire);
+  };
+
   render() {
     const genre = { F: "Femme", H: "Homme" };
 
@@ -181,11 +187,13 @@ class FicheMandataireModal extends React.Component {
               cv={currentMandataire.cv}
             />
             <br />
-            Cv:{" "}
-            <a href={`${process.env.PATH_FILE_NAME}/${currentMandataire.cv}`}>
-              {" "}
-              {currentMandataire.cv}{" "}
-            </a>
+            <div>
+              Cv:{" "}
+              <a href="#" onClick={() => this.onClick(currentMandataire)}>
+                {" "}
+                {`CV ${currentMandataire.nom} ${currentMandataire.prenom}` || " "}{" "}
+              </a>
+            </div>
             <div>
               {currentEtablissementsForSelectedMandataire && (
                 <React.Fragment>

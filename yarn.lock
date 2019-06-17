@@ -5284,6 +5284,11 @@ destroy@^1.0.4, destroy@~1.0.4:
   resolved "https://registry.yarnpkg.com/destroy/-/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
   integrity sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA=
 
+detect-browser@^4.5.0:
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/detect-browser/-/detect-browser-4.6.0.tgz#39e2118150e5b4e9ec9546e3f489b2108bb554ab"
+  integrity sha512-JUPne6M/4CJLCQUZRfR+3GNoDFcChgSnlw7AEn+WTVkdxl+2UjzrMKpzN3bXdSIwwQjs45sduKMqpXWB77wQpQ==
+
 detect-file@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/detect-file/-/detect-file-0.1.0.tgz#4935dedfd9488648e006b0129566e9386711ea63"
@@ -6348,6 +6353,11 @@ file-loader@^4.0.0:
   dependencies:
     loader-utils "^1.2.3"
     schema-utils "^2.0.0"
+
+file-saver@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/file-saver/-/file-saver-2.0.2.tgz#06d6e728a9ea2df2cce2f8d9e84dfcdc338ec17a"
+  integrity sha512-Wz3c3XQ5xroCxd1G8b7yL0Ehkf0TC9oYC6buPFkNnU9EnaPlifeAFCyCh+iewXTyFRcg0a6j3J7FmJsIhlhBdw==
 
 file-selector@^0.1.11:
   version "0.1.12"

@@ -2,14 +2,15 @@ import Router from "next/router";
 import fetch from "isomorphic-fetch";
 import getConfig from "next/config";
 
-const { publicRuntimeConfig: { API_URL } } = getConfig();
+const {
+  publicRuntimeConfig: { API_URL }
+} = getConfig();
 
 // forceLogin: redirect user to /login when receiving a 401
 const apiFetch = (route, params, options = { forceLogin: true }) => {
   const getToken = () => {
     return localStorage.getItem("id_token");
   };
-
 
   const isUpload = route === "/mandataires/upload";
 
@@ -18,14 +19,12 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
     return !!token;
   };
 
-
   const fetchParams = {
     method: "GET",
     credentials: "include",
+    responseType: options.blob ? "blob" : undefined,
     ...params
   };
-
-
 
   if (hasToken()) {
     fetchParams.headers = {
@@ -69,7 +68,12 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
       }
       return res;
     })
-    .then(res => res.json());
+    .then(res => {
+      if (options.blob) {
+        return res.blob();
+      }
+      return res.json();
+    });
 };
 
 // admin toggle

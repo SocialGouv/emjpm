@@ -33,7 +33,7 @@ const Container = styled.div`
   transition: border 0.24s ease-in-out;
 `;
 
-function MyDropzone(props) {
+function Dropzone() {
   const onDrop = useCallback(acceptedFiles => {
     const formData = new FormData();
     formData.append("file", acceptedFiles[0]);
@@ -42,7 +42,7 @@ function MyDropzone(props) {
       method: "POST",
       body: formData
     }).catch(e => {
-      alert("Impossible de uploader le Curriculum Vitae");
+      alert("Impossible d'envoyer le Curriculum Vitae");
       throw e;
     });
   }, []);
@@ -56,10 +56,10 @@ function MyDropzone(props) {
     isDragReject
   } = useDropzone({
     onDrop,
-    accept: ".jpeg,.png,.pdf,.jpg"
+    accept: ".jpeg,.png,.pdf,.jpg,.doc,.docx,.rtf"
   });
 
-  const file = acceptedFiles && acceptedFiles.map(file => <li>{file.name}</li>);
+  const file = acceptedFiles && acceptedFiles.map(file => <li key={file.name}>{file.name}</li>);
 
   return (
     <Container {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
@@ -71,4 +71,4 @@ function MyDropzone(props) {
     </Container>
   );
 }
-export default MyDropzone;
+export default Dropzone;

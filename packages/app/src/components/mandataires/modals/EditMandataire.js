@@ -8,7 +8,6 @@ import { bindActionCreators } from "redux";
 import { updateMandataire } from "../actions/mandataire";
 import Layout from "../../communComponents/ModalLayout";
 import ImportCV from "../../common/ImportCv";
-import * as React from "react";
 
 const schema = {
   title: "Modifier mes informations",
@@ -114,7 +113,7 @@ const uiSchema = {
   }
 };
 
-const EditMandataire = ({ show, handleHide, formData, onSubmit, currentMandataire, ...props }) => {
+const EditMandataire = ({ show, handleHide, formData, onSubmit, currentMandataire }) => {
   const cleanData = {
     nom: formData.nom || "",
     prenom: formData.prenom || "",

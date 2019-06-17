@@ -21,7 +21,9 @@ const {
   getParentService,
   updateService,
   getAllMandatairesByUserId,
-  findMandataire
+  findMandataire,
+  isMandataireInTi,
+  getMandataireById
 } = require("../db/queries/mandataires");
 
 const {
@@ -610,10 +612,10 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
   }
 });
 
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     // store in `emjpm/uploads`
-    cb(null, path.join(__dirname, "../../../uploads"));
+    cb(null, path.join(__dirname, "..", "uploads"));
   },
   filename: function(req, file, cb) {
     cb(null, `${file.fieldname}-${Date.now()}-${file.originalname}`);
@@ -622,16 +624,67 @@ var storage = multer.diskStorage({
 
 router.post(
   "/upload",
-  typeRequired("individuel", "prepose", "service"),
-  multer({ storage }).single("file"),
+  typeRequired("individuel", "prepose"),
+  multer({
+    storage,
+    fileFilter: function(req, file, cb) {
+      const filetypes = /jpeg|jpg|png|pdf|jpg|doc|docx|rtf/;
+      const mimetype = filetypes.test(file.mimetype);
+      const extname = filetypes.test(
+        path.extname(file.originalname).toLowerCase()
+      );
+
+      if (mimetype && extname) {
+        return cb(null, true);
+      }
+      cb(
+        "Erreur: Vous ne pouvez télécharger que des fichiers du type:" +
+          filetypes
+      );
+    }
+  }).single("file"),
   async (req, res) => {
     try {
-      const mandataire = await findMandataire(req, req.body.mandataireId);
+      const mandataire = await findMandataire(req, req.user.id);
       await updateMandataire(mandataire.id, { cv: req.file.filename });
       res
         .status(200)
-        .json({ success: true })
+        .json({ success: true, ext: req.file.mimetype.split("/").pop() })
         .end();
+    } catch (err) {
+      throw createError.Unauthorized(`Not Authorized to upload your CV`);
+    }
+  }
+);
+
+router.get(
+  "/:mandataireId/cv",
+  typeRequired("individuel", "prepose", "ti"),
+  async (req, res, next) => {
+    try {
+      if (req.user.type === "ti") {
+        const ti = await getTiByUserId(req.user.id);
+
+        const isAllowed = await isMandataireInTi(
+          req.params.mandataireId,
+          ti.id
+        );
+
+        // TI cannot post for some other TI mandataire
+        if (!isAllowed) {
+          throw createError.Unauthorized(`Ti not authorized to see CV`);
+        }
+      } else {
+        const mandataire = await findMandataire(req, req.user.id);
+        if (mandataire.id != req.params.mandataireId) {
+          throw createError.Unauthorized(`Mandataire not authorized to see CV`);
+        }
+      }
+
+      const getMandataire = await getMandataireById(req.params.mandataireId);
+      res.status(200).sendFile(getMandataire.cv, {
+        root: path.join(__dirname, "..", "uploads")
+      });
     } catch (err) {
       next(err);
     }
