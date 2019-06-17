@@ -118,6 +118,8 @@ const CommentairesView = ({ onSubmit, commentaires, onDelete }) => (
 
 class FicheMandataireModal extends React.Component {
   render() {
+    const genre = { F: "Femme", H: "Homme" };
+
     const {
       currentMandataire,
       allTisForOneMandataire,
@@ -125,6 +127,7 @@ class FicheMandataireModal extends React.Component {
       show,
       handleHide
     } = this.props;
+    const labelGenre = genre[currentMandataire.genre];
     return (
       <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
         <div style={{ display: "flex", padding: "20px", boxSizing: "border-box" }}>
@@ -137,7 +140,7 @@ class FicheMandataireModal extends React.Component {
                   {currentMandataire.nom} {currentMandataire.prenom}
                 </b>
               )}
-              <br /> {currentMandataire.type.toUpperCase()} <br /> {currentMandataire.genre}
+              <br /> {currentMandataire.type.toUpperCase()} <br /> {labelGenre}
             </TitleMandataire>
             {currentMandataire.type === "service" && (
               <React.Fragment>
