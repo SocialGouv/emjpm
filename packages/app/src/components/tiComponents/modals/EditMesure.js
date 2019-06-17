@@ -22,7 +22,8 @@ const schema = {
       enum: typeMesure
     },
     civilite: { type: "string", enum: civilite },
-    annee: { type: "integer", maxLength: 4 }
+    annee: { type: "integer", maxLength: 4 },
+    numero_rg: { type: "string", title: "Numéro RG" }
   }
 };
 
@@ -53,6 +54,12 @@ const uiSchema = {
     "ui:title": "Type de mesure",
 
     classNames: "input_mesure_type",
+    "ui:options": {
+      label: false
+    }
+  },
+  numero_rg: {
+    "ui:placeholder": "Numéro RG",
     "ui:options": {
       label: false
     }
