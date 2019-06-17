@@ -10,7 +10,7 @@ import Layout from "../../communComponents/ModalLayout";
 const schema = {
   title: "Modifier mes informations",
   type: "object",
-  required: ["nom", "prenom", "email", "genre", "dispo_max"],
+  required: ["nom", "prenom", "email", "dispo_max"],
   properties: {
     nom: { type: "string", title: "Nom", default: "" },
     prenom: { type: "string", title: "Prénom", default: "" },
