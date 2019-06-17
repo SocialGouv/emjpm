@@ -1,6 +1,5 @@
 import { Layout } from "../src/components";
 import styled from "styled-components";
-import GoogleFontLoader from "react-google-font-loader";
 
 const Container = styled.div`
   background-color: white;
