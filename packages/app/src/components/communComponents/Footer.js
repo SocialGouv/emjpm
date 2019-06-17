@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Footer = ({ fixed }) => (
   <footer
     className="footer"
@@ -21,8 +23,13 @@ const Footer = ({ fixed }) => (
             Nous contacter{" "}
           </a>
         </li>
+        <li>Site optimisé pour Mozilla Firefox et Google Chrome</li>
         <li>
-          <p>Site optimisé pour Mozilla Firefox et Google Chrome</p>
+          <Link href="/mentions-legales-modalites-utilisation">
+            <a className="button button_transparent" style={{ fontSize: "1em" }}>
+              Mentions légales et conditions générales d'utilisation
+            </a>
+          </Link>
         </li>
       </ul>
       <ul className="footer__links"> </ul>
