@@ -17,7 +17,7 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
     case "MANDATAIRE_PROFILE_UPDATED":
       // Track when mandataires are changing them maximum desired measures
       if (state.profile.dispo_max !== action.data.dispo_max) {
-        piwik.push([
+        ReactPiwik.push([
           "trackEvent",
           "Mandataire",
           "Updated profile",

@@ -20,7 +20,7 @@ export const updateMesure = data => dispatch =>
     .then(json => {
       dispatch(hide("EditMesure"));
       dispatch(mesureUpdated(json));
-      piwik.push(["trackEvent", "Mesures", "Updated", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Updated", data.id]);
     })
     .catch(error => {
       /* eslint-disable no-console */

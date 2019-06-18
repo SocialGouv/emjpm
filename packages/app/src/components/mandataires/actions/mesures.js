@@ -74,7 +74,7 @@ export const updateMesure = data => dispatch =>
     .then(json => {
       dispatch(hide("EditMesure"));
       dispatch(mesureUpdated(json));
-      piwik.push(["trackEvent", "Mesures", "Updated", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Updated", data.id]);
     })
     .catch(error => {
       /* eslint-disable no-console */
@@ -92,7 +92,7 @@ export const updateMesureAttente = data => dispatch => {
       dispatch(hide("ValiderMesureEnAttente"));
       dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureUpdated(json));
-      piwik.push(["trackEvent", "Mesures", "Validated", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Validated", data.id]);
     })
     .catch(error => {
       /* eslint-disable no-console */
@@ -110,7 +110,7 @@ export const closeMesure = data => dispatch =>
       dispatch(hide("CloseMesure"));
       dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureClosed(json));
-      piwik.push(["trackEvent", "Mesures", "Closed", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Closed", data.id]);
     })
     .catch(error => {
       /* eslint-disable no-console */
@@ -127,7 +127,7 @@ export const reactivateMesure = data => dispatch =>
       dispatch(hide("ReactivateMesure"));
       dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureReactivated(json));
-      piwik.push(["trackEvent", "Mesures", "Reactivated", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Reactivated", data.id]);
     })
     .catch(error => {
       /* eslint-disable no-console */
@@ -143,7 +143,7 @@ export const createMesureSave = data => dispatch =>
     .then(json => {
       dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureCreated(json));
-      piwik.push(["trackEvent", "Mesures", "Created"]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Created"]);
     })
     .catch(error => {
       /* eslint-disable no-console */

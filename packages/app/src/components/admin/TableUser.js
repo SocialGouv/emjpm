@@ -62,7 +62,7 @@ const COLUMNS = [
     Header: "Actif",
     accessor: "active",
     Cell(row) {
-      <CellActive active={row.value} />;
+      return <CellActive active={row.value} />;
     },
     width: 70,
     show: false, // the button show more accurate status
@@ -113,7 +113,7 @@ const COLUMNS = [
   {
     Header: "Activer",
     Cell(row) {
-      <CellActive active={row.row} />;
+      return <CellActive active={row.row} />;
     },
     width: 120,
     style: { textAlign: "center", alignSelf: "center" }

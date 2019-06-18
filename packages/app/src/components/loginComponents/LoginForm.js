@@ -10,7 +10,8 @@ const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
 
-import { piwik, trackUser } from "../../piwik";
+import ReactPiwik from "react-piwik";
+import { trackUser } from "../../piwik";
 
 const doLogin = formData => {
   const url = `${API_URL}/auth/login`;
@@ -125,7 +126,7 @@ class LoginForm extends React.Component {
     formData: {}
   };
   componentDidMount() {
-    piwik.push(["trackEvent", "navigation", "login"]);
+    ReactPiwik.push(["trackEvent", "navigation", "login"]);
 
     // focus login on load
     // eslint-disable-next-line react/no-find-dom-node
@@ -177,7 +178,7 @@ class LoginForm extends React.Component {
           .then(json => {
             this.setLogin(formData.username);
             this.setToken(json.token);
-            piwik.push(["trackEvent", "login", "success"]);
+            ReactPiwik.push(["trackEvent", "login", "success"]);
 
             trackUser();
 
@@ -188,7 +189,7 @@ class LoginForm extends React.Component {
             });
           })
           .catch(() => {
-            piwik.push(["trackEvent", "login", "error"]);
+            ReactPiwik.push(["trackEvent", "login", "error"]);
             const url = `${API_URL}/auth/checkUser`;
             return fetch(url, {
               credentials: "include",

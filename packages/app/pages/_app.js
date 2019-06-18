@@ -2,7 +2,13 @@ import * as Sentry from "@sentry/browser";
 import App, { Container } from "next/app";
 import getConfig from "next/config";
 import React from "react";
-// import piwik, { trackUser } from "../src/piwik";
+import ReactPiwik from "react-piwik";
+
+export const piwik = new ReactPiwik({
+  url: "stats.data.gouv.fr",
+  siteId: 52,
+  trackErrors: true
+});
 
 const {
   publicRuntimeConfig: { SENTRY_PUBLIC_DSN }
@@ -37,7 +43,6 @@ export default class MyApp extends App {
   }
 
   componentDidMount() {
-    // piwikSetup();
     sentrySetup();
   }
 
@@ -83,13 +88,13 @@ function sentrySetup() {
 //     return;
 //   }
 
-//   piwik.push(["trackContentImpressionsWithinNode", document.getElementById("__next")]);
+//   ReactPiwik.push(["trackContentImpressionsWithinNode", document.getElementById("__next")]);
 
-//   piwik.push(["setCustomUrl", document.location.href]);
-//   piwik.push(["setDocumentTitle", document.title]);
+//   ReactPiwik.push(["setCustomUrl", document.location.href]);
+//   ReactPiwik.push(["setDocumentTitle", document.title]);
 
 //   trackUser();
 
-//   piwik.push(["trackPageView"]);
-//   piwik.push(["enableLinkTracking"]);
+//   ReactPiwik.push(["trackPageView"]);
+//   ReactPiwik.push(["enableLinkTracking"]);
 // }

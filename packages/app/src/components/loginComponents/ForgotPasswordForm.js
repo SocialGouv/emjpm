@@ -4,12 +4,11 @@ import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
 import getConfig from "next/config";
+import ReactPiwik from "react-piwik";
 
 const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
-
-import { piwik } from "../../piwik";
 
 export const doForgotPassword = formData => {
   const url = `${API_URL}/auth/forgot_password`;
@@ -129,7 +128,7 @@ class ForgotPassword extends React.Component {
         formData
       },
       () => {
-        piwik.push(["trackEvent", "has forgot his/her password", formData.email]);
+        ReactPiwik.push(["trackEvent", "has forgot his/her password", formData.email]);
 
         doForgotPassword(formData)
           .then(() => {

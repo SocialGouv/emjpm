@@ -1,6 +1,6 @@
 import React from "react";
 import Router from "next/router";
-import { piwik } from "../../piwik";
+import ReactPiwik from "react-piwik";
 
 // todo: hack: force embedding the SVG due to some webpack+next+static issues in a gh-pages env
 const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm_num.png");
@@ -8,7 +8,7 @@ const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm_num
 const doLogout = () => {
   // Clear user token and profile data from localStorage
   localStorage.removeItem("id_token");
-  piwik.push(["resetUserId"]);
+  ReactPiwik.push(["resetUserId"]);
   Router.push("/login");
 };
 
