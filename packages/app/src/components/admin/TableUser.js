@@ -2,11 +2,9 @@ import React from "react";
 import ReactTable from "react-table";
 import format from "date-fns/format";
 import queryString from "query-string";
-
-// TODO: Should we remove that ?
-// import ToggleState from "../common/ToggleState";
-// import SearchButton from "../communComponents/SearchButton";
-import { default as apiFetch } from "../communComponents/Api";
+import ToggleState from "../common/ToggleState";
+import SearchButton from "../communComponents/SearchButton";
+import { default as apiFetch, updateUser } from "../communComponents/Api";
 
 const CellActive = ({ active }) => {
   return (
@@ -24,31 +22,30 @@ const CellActive = ({ active }) => {
 
 CellActive.displayName = "CellActive";
 
-// TODO: Should we remove that ?
-// const CellAction = ({ row: { id, active } }) => (
-//   <ToggleState
-//     getPromise={active =>
-//       updateUser({
-//         id,
-//         active
-//       })
-//     }
-//     active={active}
-//     render={({ active, toggle }) => {
-//       return (
-//         <SearchButton
-//           onClick={toggle}
-//           error={active}
-//           data-cy="UserCellAction"
-//           style={{ textAlign: "center", fontSize: "0.8em" }}
-//           type="submit"
-//         >
-//           {(active && "Désactiver") || "Activer"}
-//         </SearchButton>
-//       );
-//     }}
-//   />
-// );
+const CellAction = ({ row: { id, active } }) => (
+  <ToggleState
+    getPromise={active =>
+      updateUser({
+        id,
+        active
+      })
+    }
+    active={active}
+    render={({ active, toggle }) => {
+      return (
+        <SearchButton
+          onClick={toggle}
+          error={active}
+          data-cy="UserCellAction"
+          style={{ textAlign: "center", fontSize: "0.8em" }}
+          type="submit"
+        >
+          {(active && "Désactiver") || "Activer"}
+        </SearchButton>
+      );
+    }}
+  />
+);
 
 const COLUMNS = [
   {
@@ -113,7 +110,7 @@ const COLUMNS = [
   {
     Header: "Activer",
     Cell(row) {
-      return <CellActive active={row.row} />;
+      return <CellAction row={row.row} />;
     },
     width: 120,
     style: { textAlign: "center", alignSelf: "center" }
