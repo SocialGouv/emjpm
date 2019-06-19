@@ -166,7 +166,7 @@ const COLUMNS = [
     Cell: row => (
       <Cell row={row} style={{ verticalAlign: "middle" }}>
         {row.row.identity === "service" ? (
-          <b>{`${row.row.service_etablissement} ${row.row.etablissement}`}</b>
+          <b>{`${row.row.service_etablissement || ""} ${row.row.etablissement}`}</b>
         ) : (
           <b>
             {row.row.nom} {row.row.prenom}
