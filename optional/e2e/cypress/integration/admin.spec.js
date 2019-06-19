@@ -9,23 +9,17 @@ describe("Admins", () => {
     cy.loginByForm("admin", "admin");
   });
 
-  it("should show 7 users", function() {
-    cy.getCellAction().should("have.length", 7);
+  it("should show 4 users", function() {
+    cy.getCellAction().should("have.length", 4);
     cy.contains("Adrien");
     cy.contains("Julien");
     cy.contains("Mélanie");
-    cy.contains("Dark Vador");
-    cy.contains("Pierre");
-    cy.contains("Momo");
     cy.contains("Marcel");
   });
 
-  it("should show 4 inactive users", function() {
+  it("should show 1 inactive users", function() {
     cy.contains("En attente de validation").click();
-    cy.getCellAction().should("have.length", 4);
-    cy.contains("Paul");
-    cy.contains("Jack");
-    cy.contains("Jean");
+    cy.getCellAction().should("have.length", 1);
     cy.contains("Doug");
   });
 
@@ -44,13 +38,10 @@ describe("Admins", () => {
     cy.contains("Adrien");
   });
 
-  it("should show 6 active users", function() {
-    cy.getCellAction().should("have.length", 6);
+  it("should show 3 active users", function() {
+    cy.getCellAction().should("have.length", 3);
     cy.contains("Julien");
     cy.contains("Mélanie");
-    cy.contains("Dark Vador");
-    cy.contains("Pierre");
-    cy.contains("Momo");
     cy.contains("Marcel");
   });
 
@@ -64,13 +55,10 @@ describe("Admins", () => {
     cy.get("@button").should("contain", "Désactiver");
   });
 
-  it("should show 7 active users", function() {
-    cy.getCellAction().should("have.length", 7);
+  it("should show 4 active users", function() {
+    cy.getCellAction().should("have.length", 4);
     cy.contains("Julien");
     cy.contains("Mélanie");
-    cy.contains("Dark Vador");
-    cy.contains("Pierre");
-    cy.contains("Momo");
     cy.contains("Doug");
     cy.contains("Marcel");
   });
