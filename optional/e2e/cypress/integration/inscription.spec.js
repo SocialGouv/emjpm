@@ -178,7 +178,7 @@ describe("Inscription", () => {
       cy.loginByForm("admin", "admin");
 
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 4);
+      cy.getCellAction().should("have.length", 1);
 
       cy.visit("/inscription");
 
@@ -221,7 +221,7 @@ describe("Inscription", () => {
 
       cy.loginByForm("admin", "admin");
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 5);
+      cy.getCellAction().should("have.length", 2);
     });
     it("account should not login before activation", function() {
       cy.loginByForm("email1@email.com", "password100");
@@ -229,18 +229,18 @@ describe("Inscription", () => {
     });
     it("admin should be able to activate account", function() {
       cy.loginByForm("admin", "admin");
-      cy.getCellAction().should("have.length", 7);
+      cy.getCellAction().should("have.length", 4);
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 5);
+      cy.getCellAction().should("have.length", 2);
       cy.contains("nom 1 prenom 1")
         .parent()
         .contains("Activer")
         .click();
-      cy.getCellAction().should("have.length", 5);
+      cy.getCellAction().should("have.length", 2);
       cy.contains("Actifs").click();
-      cy.getCellAction().should("have.length", 8);
+      cy.getCellAction().should("have.length", 5);
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 4);
+      cy.getCellAction().should("have.length", 1);
     });
     it("account should login after activation", function() {
       cy.loginByForm("email1@email.com", "password100");
@@ -256,7 +256,7 @@ describe("Inscription", () => {
     it("should register tis", function() {
       cy.loginByForm("admin", "admin");
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 4);
+      cy.getCellAction().should("have.length", 1);
 
       cy.visit("/inscription");
 
