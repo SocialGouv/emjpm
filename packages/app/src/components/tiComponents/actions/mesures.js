@@ -1,5 +1,5 @@
 import { hide } from "redux-modal";
-import piwik from "react-piwik";
+import ReactPiwik from "react-piwik";
 
 import apiFetch from "../../communComponents/Api";
 

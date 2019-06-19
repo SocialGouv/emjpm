@@ -1,11 +1,5 @@
 import ReactPiwik from "react-piwik";
 
-export const piwik = new ReactPiwik({
-  url: "stats.data.gouv.fr",
-  siteId: 52,
-  trackErrors: true
-});
-
 export const doTrackPageChange = url => {
   ReactPiwik.push(["setDocumentTitle", document && document.title]);
   ReactPiwik.push(["setCustomUrl", url]);

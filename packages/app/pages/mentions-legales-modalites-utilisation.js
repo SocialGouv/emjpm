@@ -1,3 +1,4 @@
+import React from "react";
 import { Layout } from "../src/components";
 import styled from "styled-components";
 
@@ -16,8 +17,6 @@ const H2 = styled.h2`
   font-weight: 700;
 `;
 
-
-
 const MentionPage = () => (
   <Layout logout style={{}}>
     <Container id="doc" className="markdown-body container-fluid">
@@ -29,24 +28,24 @@ const MentionPage = () => (
       </h2>
       <p>
         Le site{" "}
-        <a href="https://emjpm.num.social.gouv.fr/" target="_blank">
+        <a href="https://emjpm.num.social.gouv.fr/" rel="noopener noreferrer" target="_blank">
           e-MJPM
         </a>{" "}
         vise à trouver rapidement le bon professionnel pour les majeurs à protéger.
       </p>
       <p>
         Le{" "}
-        <a href="https://github.com/SocialGouv/emjpm" target="_blank">
+        <a href="https://github.com/SocialGouv/emjpm" rel="noopener noreferrer" target="_blank">
           code du logiciel
         </a>{" "}
         est libre, et peut donc être vérifié et amélioré par tout·e·s.
       </p>
       <p>
-        <a href="https://emjpm.num.social.gouv.fr/" target="_blank">
+        <a href="https://emjpm.num.social.gouv.fr/" rel="noopener noreferrer" target="_blank">
           e-MJPM
         </a>{" "}
         est édité par{" "}
-        <a href="https://incubateur.social.gouv.fr/" target="_blank">
+        <a href="https://incubateur.social.gouv.fr/" rel="noopener noreferrer" target="_blank">
           l’Incubateur des ministères sociaux
         </a>{" "}
         situé :
@@ -264,7 +263,11 @@ const MentionPage = () => (
         stocke ces informations dans un profil utilisateur pseudonymisé. Ni Hotjar ni l’éditeur
         n’utiliseront ces informations pour identifier des utilisateurs individuels ou pour les
         associer à d’autres données. Vous pouvez consulter la politique de confidentialité de{" "}
-        <a href="https://www.hotjar.com/legal/policies/privacy" target="_blank">
+        <a
+          href="https://www.hotjar.com/legal/policies/privacy"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           Hotjar
         </a>
         . Ces données ne seront jamais cédées. La durée de conservation de ces informations ne
@@ -273,7 +276,11 @@ const MentionPage = () => (
       <p>
         Vous pouvez librement désactiver ce service, sur l’ensemble des sites internet susceptibles
         de l’utiliser en suivant la procédure présentée{" "}
-        <a href="https://www.hotjar.com/legal/compliance/opt-out" target="_blank">
+        <a
+          href="https://www.hotjar.com/legal/compliance/opt-out"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           ici
         </a>
         .
@@ -324,7 +331,11 @@ const MentionPage = () => (
       </h4>
       <p>
         Pour en savoir plus sur la politique d’accessibilité numérique de l’État :{" "}
-        <a href="http://references.modernisation.gouv.fr/accessibilite-numerique" target="_blank">
+        <a
+          href="http://references.modernisation.gouv.fr/accessibilite-numerique"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           http://references.modernisation.gouv.fr/accessibilite-numerique
         </a>
       </p>

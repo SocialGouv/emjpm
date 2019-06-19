@@ -1,6 +1,6 @@
 //
 
-import piwik from "react-piwik";
+import ReactPiwik from "react-piwik";
 
 const MANDATAIRE_INITIAL_STATE = {
   finess: [],
