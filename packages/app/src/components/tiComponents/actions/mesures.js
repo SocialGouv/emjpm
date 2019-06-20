@@ -1,5 +1,5 @@
 import { hide } from "redux-modal";
-import piwik from "react-piwik";
+import ReactPiwik from "react-piwik";
 
 import apiFetch from "../../communComponents/Api";
 
@@ -20,12 +20,14 @@ export const updateMesure = data => dispatch =>
     .then(json => {
       dispatch(hide("EditMesure"));
       dispatch(mesureUpdated(json));
-      piwik.push(["trackEvent", "Mesures", "Updated", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Updated", data.id]);
     })
-    .catch(e => {
-      console.log(e);
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.log(error);
+      /* eslint-enable no-console */
       alert("Impossible de soumettre les données");
-      throw e;
+      throw error;
     });
 
 // ------------ PLAIN ACTIONS

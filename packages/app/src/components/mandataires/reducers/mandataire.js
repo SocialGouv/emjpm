@@ -1,6 +1,6 @@
 //
 
-import piwik from "react-piwik";
+import ReactPiwik from "react-piwik";
 
 const MANDATAIRE_INITIAL_STATE = {
   finess: [],
@@ -17,7 +17,7 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
     case "MANDATAIRE_PROFILE_UPDATED":
       // Track when mandataires are changing them maximum desired measures
       if (state.profile.dispo_max !== action.data.dispo_max) {
-        piwik.push([
+        ReactPiwik.push([
           "trackEvent",
           "Mandataire",
           "Updated profile",
@@ -33,12 +33,6 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
       return {
         ...state,
         mandataireId: action.data,
-        lastUpdate: new Date()
-      };
-    case "CHANGE_MANDATAIRE_ID_INIT":
-      return {
-        ...state,
-        mandataireId: action.data && action.data.length && action.data[0] && action.data[0].id,
         lastUpdate: new Date()
       };
     case "CHANGE_MANDATAIRE_ID_INIT":

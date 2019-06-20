@@ -2,7 +2,6 @@ import * as React from "react";
 import Router from "next/router";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import {Info, MinusSquare} from "react-feather";
 import { show } from "redux-modal";
 
 import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";
@@ -20,7 +19,6 @@ const Selector = ({
   autocompleteItems = [],
   selected = [],
   onAdd,
-  onRemove,
   placeholder = "Ajouter"
 }) => (
   <div style={{ margin: "20px 0", ...style }} data-cy={`selector-${title}`}>
@@ -62,7 +60,7 @@ const ButtonEditMandataire = connect(
     currentMandataire: state.mandataire.profiles
   }),
   dispatch => bindActionCreators({ show }, dispatch)
-)(({ formData, show, currentMandataire }) => (
+)(({ formData, show }) => (
   <>
     <Button
       data-cy="button-edit-profile"
@@ -84,7 +82,11 @@ const changePassword = email => {
       alert("Un email vient de vous être envoyé");
       Router.push("/mandataires");
     })
-    .catch(e => console.log(e));
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.log(error);
+      /* eslint-enable no-console */
+    });
 };
 
 const getNewMandataire = props =>
@@ -114,7 +116,7 @@ class MandataireProfile extends React.Component {
         <div style={{ flex: "0 0 50%" }}>
           {(newMandataire.type === "prepose" && (
             <SelectionManager
-              mandataireId = {newMandataire.id}
+              mandataireId={newMandataire.id}
               onAdd={etablissement_id =>
                 apiFetch(`/mandataires/${newMandataire.id}/etablissements`, {
                   method: "POST",
@@ -124,7 +126,7 @@ class MandataireProfile extends React.Component {
                 })
               }
               getSelection={() => apiFetch(`/mandataires/${newMandataire.id}/etablissement`)}
-              render={({ onAdd, onRemove, selection }) => (
+              render={({ onAdd, selection }) => (
                 <Selector
                   style={{ marginTop: 0 }}
                   title="Mes établissements"
@@ -146,7 +148,7 @@ class MandataireProfile extends React.Component {
           )) ||
             null}
           <SelectionManager
-            mandataireId = {newMandataire.id}
+            mandataireId={newMandataire.id}
             onAdd={ti_id =>
               apiFetch(`/mandataires/${newMandataire.id}/tis`, {
                 method: "POST",
@@ -197,7 +199,7 @@ class MandataireProfile extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) =>
+const mapDispatchToProps = dispatch =>
   bindActionCreators({ updateMandataire: data => updateMandataire(data) }, dispatch);
 
 const ProfileRedux = connect(

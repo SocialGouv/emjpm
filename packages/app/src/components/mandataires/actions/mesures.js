@@ -1,5 +1,5 @@
 import { hide } from "redux-modal";
-import piwik from "react-piwik";
+import ReactPiwik from "react-piwik";
 
 import apiFetch from "../../communComponents/Api";
 import { fetchProfiles, mandataireProfilesUpdated } from "./mandataire";
@@ -43,7 +43,7 @@ const reactivateMesureApi = data =>
       status: "Mesure en cours",
       extinction: null
     })
-  }).then(json =>
+  }).then(() =>
     // todo: move to trigger
     apiFetch(`/mandataires/1/capacite`, {
       method: "PUT"
@@ -74,12 +74,14 @@ export const updateMesure = data => dispatch =>
     .then(json => {
       dispatch(hide("EditMesure"));
       dispatch(mesureUpdated(json));
-      piwik.push(["trackEvent", "Mesures", "Updated", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Updated", data.id]);
     })
-    .catch(e => {
-      console.log(e);
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.error(error);
+      /* eslint-enable no-console */
       alert("Impossible de soumettre les données");
-      throw e;
+      throw error;
     });
 
 export const updateMesureAttente = data => dispatch => {
@@ -90,12 +92,14 @@ export const updateMesureAttente = data => dispatch => {
       dispatch(hide("ValiderMesureEnAttente"));
       dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureUpdated(json));
-      piwik.push(["trackEvent", "Mesures", "Validated", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Validated", data.id]);
     })
-    .catch(e => {
-      console.log(e);
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.error(error);
+      /* eslint-enable no-console */
       alert("Impossible de soumettre les données");
-      throw e;
+      throw error;
     });
 };
 
@@ -106,12 +110,14 @@ export const closeMesure = data => dispatch =>
       dispatch(hide("CloseMesure"));
       dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureClosed(json));
-      piwik.push(["trackEvent", "Mesures", "Closed", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Closed", data.id]);
     })
-    .catch(e => {
-      console.log(e);
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.error(error);
+      /* eslint-enable no-console */
       alert("Impossible de soumettre les données");
-      throw e;
+      throw error;
     });
 
 export const reactivateMesure = data => dispatch =>
@@ -121,12 +127,14 @@ export const reactivateMesure = data => dispatch =>
       dispatch(hide("ReactivateMesure"));
       dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureReactivated(json));
-      piwik.push(["trackEvent", "Mesures", "Reactivated", data.id]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Reactivated", data.id]);
     })
-    .catch(e => {
-      console.log(e);
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.error(error);
+      /* eslint-enable no-console */
       alert("Impossible de soumettre les données");
-      throw e;
+      throw error;
     });
 
 export const createMesureSave = data => dispatch =>
@@ -135,12 +143,14 @@ export const createMesureSave = data => dispatch =>
     .then(json => {
       dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureCreated(json));
-      piwik.push(["trackEvent", "Mesures", "Created"]);
+      ReactPiwik.push(["trackEvent", "Mesures", "Created"]);
     })
-    .catch(e => {
-      console.log("ERROR", e);
-      dispatch(mesureCreatedError(e.message));
-      throw e;
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.log("ERROR", error);
+      /* eslint-enable no-console */
+      dispatch(mesureCreatedError(error.message));
+      throw error;
     });
 
 export const mesureImportCreated = data => dispatch => {
@@ -149,9 +159,9 @@ export const mesureImportCreated = data => dispatch => {
       dispatch(mandataireProfilesUpdated(json));
       dispatch(mesureCreated(data));
     })
-    .catch(e => {
-      dispatch(mesureCreatedError(e.message));
-      throw e;
+    .catch(error => {
+      dispatch(mesureCreatedError(error.message));
+      throw error;
     });
 };
 // ------------ PLAIN ACTIONS
