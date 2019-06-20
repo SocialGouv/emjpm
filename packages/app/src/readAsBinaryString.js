@@ -6,7 +6,7 @@ if (typeof window !== "undefined" && !FileReader.prototype.readAsBinaryString) {
     let binary = "";
     const pt = this;
     const reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function() {
       const bytes = new Uint8Array(reader.result);
       const length = bytes.byteLength;
       for (let i = 0; i < length; i++) {

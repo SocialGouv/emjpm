@@ -16,8 +16,10 @@ export const zoomCodePostal = codePostal => dispatch => {
     .then(mesure => {
       dispatch(coordinates(mesure));
     })
-    .catch(e => {
-      console.log(e);
+    .catch(error => {
+      /* eslint-disable no-console */
+      console.log(error);
+      /* eslint-enable no-console */
     });
 };
 

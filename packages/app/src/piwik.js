@@ -1,11 +1,5 @@
 import ReactPiwik from "react-piwik";
 
-export const piwik = new ReactPiwik({
-  url: "stats.data.gouv.fr",
-  siteId: 52,
-  trackErrors: true
-});
-
 export const doTrackPageChange = url => {
   ReactPiwik.push(["setDocumentTitle", document && document.title]);
   ReactPiwik.push(["setCustomUrl", url]);
@@ -34,8 +28,10 @@ function getJWTPayloadFormLocalStorageIdToken() {
   // "Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded."
   try {
     return JSON.parse(atob(payloadPart) || "{}");
-  } catch (e) {
-    console.log("Error decoding JWT", e);
+  } catch (error) {
+    /* eslint-disable no-console */
+    console.log("Error decoding JWT", error);
+    /* eslint-enable no-console */
     return {};
   }
 }
