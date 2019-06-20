@@ -178,7 +178,7 @@ describe("Inscription", () => {
       cy.loginByForm("admin", "admin");
 
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 1);
+      cy.getCellAction().should("have.length", 2);
 
       cy.visit("/inscription");
 
@@ -217,11 +217,11 @@ describe("Inscription", () => {
 
       cy.get("li.text-danger").should("have.length", 0);
 
-      cy.location("pathname").should("eq", "/inscription-done/");
+      cy.location("pathname").should("eq", "/inscription-done");
 
       cy.loginByForm("admin", "admin");
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 2);
+      cy.getCellAction().should("have.length", 3);
     });
     it("account should not login before activation", function() {
       cy.loginByForm("email1@email.com", "password100");
@@ -231,21 +231,21 @@ describe("Inscription", () => {
       cy.loginByForm("admin", "admin");
       cy.getCellAction().should("have.length", 4);
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 2);
+      cy.getCellAction().should("have.length", 3);
       cy.contains("nom 1 prenom 1")
         .parent()
         .contains("Activer")
         .click();
-      cy.getCellAction().should("have.length", 2);
+      cy.getCellAction().should("have.length", 3);
       cy.contains("Actifs").click();
       cy.getCellAction().should("have.length", 5);
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 1);
+      cy.getCellAction().should("have.length", 2);
     });
     it("account should login after activation", function() {
       cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 0);
-      cy.location("pathname").should("eq", "/mandataires/");
+      cy.location("pathname").should("eq", "/mandataires");
     });
   });
 
@@ -256,7 +256,7 @@ describe("Inscription", () => {
     it("should register tis", function() {
       cy.loginByForm("admin", "admin");
       cy.contains("En attente de validation").click();
-      cy.getCellAction().should("have.length", 1);
+      cy.getCellAction().should("have.length", 2);
 
       cy.visit("/inscription");
 
@@ -297,7 +297,7 @@ describe("Inscription", () => {
 
       cy.get("li.text-danger").should("have.length", 0);
 
-      cy.location("pathname").should("eq", "/inscription-done/");
+      cy.location("pathname").should("eq", "/inscription-done");
 
       cy.loginByForm("admin", "admin");
       cy.contains("TI").click();
@@ -329,7 +329,7 @@ describe("Inscription", () => {
     it("account should login after activation", function() {
       cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 0);
-      cy.location("pathname").should("eq", "/tis/");
+      cy.location("pathname").should("eq", "/tis");
     });
   });
 });
