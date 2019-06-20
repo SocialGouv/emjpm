@@ -217,7 +217,7 @@ describe("Inscription", () => {
 
       cy.get("li.text-danger").should("have.length", 0);
 
-      cy.location("pathname").should("eq", "/inscription-done");
+      cy.location("pathname").should("contain", "/inscription-done");
 
       cy.loginByForm("admin", "admin");
       cy.contains("En attente de validation").click();
@@ -245,7 +245,7 @@ describe("Inscription", () => {
     it("account should login after activation", function() {
       cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 0);
-      cy.location("pathname").should("eq", "/mandataires");
+      cy.location("pathname").should("contain", "/mandataires");
     });
   });
 
@@ -297,7 +297,7 @@ describe("Inscription", () => {
 
       cy.get("li.text-danger").should("have.length", 0);
 
-      cy.location("pathname").should("eq", "/inscription-done");
+      cy.location("pathname").should("contain", "/inscription-done");
 
       cy.loginByForm("admin", "admin");
       cy.contains("TI").click();
@@ -329,7 +329,7 @@ describe("Inscription", () => {
     it("account should login after activation", function() {
       cy.loginByForm("email1@email.com", "password100");
       cy.get(".alert-danger").should("have.length", 0);
-      cy.location("pathname").should("eq", "/tis");
+      cy.location("pathname").should("contain", "/tis");
     });
   });
 });
