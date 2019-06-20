@@ -88,7 +88,7 @@ describe("Tis", function() {
           cy.contains("Adrien");
         });
 
-        it("table should show 1 mandataires on prepose filter", () => {
+        it("table should show 2 mandataires on prepose filter", () => {
           cy.get("[data-cy=tab-Prepose]").click();
           cy.get(".react-tabs .rt-tr-group").should("have.length", 1);
           cy.contains("Julien");
