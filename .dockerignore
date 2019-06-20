@@ -1,4 +1,8 @@
-.next
-dist
-node_modules
-out
+*.md
+.git
+**/dist
+**/build
+**/node_modules
+**/.next
+**/coverage
+scripts
