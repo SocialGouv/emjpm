@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 
 const Footer = ({ fixed }) => (
@@ -27,7 +28,7 @@ const Footer = ({ fixed }) => (
         <li>
           <Link href="/mentions-legales-modalites-utilisation">
             <a className="button button_transparent" style={{ fontSize: "1em" }}>
-              Mentions légales et conditions générales d'utilisation
+              {`Mentions légales et conditions générales d'utilisation`}
             </a>
           </Link>
         </li>
