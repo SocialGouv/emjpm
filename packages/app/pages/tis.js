@@ -1,3 +1,4 @@
+import React from "react";
 import Tis from "../src/components/tiComponents";
 import { Layout } from "../src/components";
 
