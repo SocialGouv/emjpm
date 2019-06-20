@@ -19,8 +19,7 @@ describe("Login", () => {
     cy.get("#root_newPassword").type("adad");
     cy.get("#root_verifyPassword").type("adad");
     cy.get("button.btn-success").click();
-
-    cy.location("pathname").should("eq", "/login/");
+    cy.location("pathname").should("eq", "/login");
   });
 
   it("Login with invalid account should show error message", function() {
@@ -40,14 +39,14 @@ describe("Login", () => {
     cy.get("#root_username").type("ad");
     cy.get("#root_password").type("adad");
     cy.get("button.btn-success").click();
-    cy.location("pathname").should("eq", "/mandataires/");
+    cy.location("pathname").should("eq", "/mandataires");
   });
 
   it("Forgot password process", function() {
     cy.visit("/forgot-password");
     cy.get("#root_email").type("ud@ud.com");
     cy.get("button.btn-success").click();
-    cy.location("pathname").should("eq", "/login/");
+    cy.location("pathname").should("eq", "/login");
   });
 
   it("'jeremy' should redirect to /mandataires/", function() {
@@ -55,7 +54,7 @@ describe("Login", () => {
     cy.get("#root_username").type("jeremy");
     cy.get("#root_password").type("johnson123");
     cy.get("button.btn-success").click();
-    cy.location("pathname").should("eq", "/mandataires/");
+    cy.location("pathname").should("eq", "/mandataires");
   });
 
   it("'ti1' should redirect to /tis/", function() {
@@ -63,6 +62,6 @@ describe("Login", () => {
     cy.get("#root_username").type("ti1");
     cy.get("#root_password").type("ti1");
     cy.get("button.btn-success").click();
-    cy.location("pathname").should("eq", "/tis/");
+    cy.location("pathname").should("eq", "/tis");
   });
 });
