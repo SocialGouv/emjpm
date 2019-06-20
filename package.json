@@ -6,10 +6,23 @@
     "dev": "lerna run dev --parallel",
     "lint": "lerna run lint --parallel",
     "start": "lerna run start --parallel",
-    "test": "lerna run test --parallel --ignore @optional/e2e"
+    "test": "lerna run test --parallel --ignore @optional/e2e",
+    "commitmsg": "validate-commit-msg"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
+    "husky": "^2.4.1"
   },
   "dependencies": {
     "lerna": "^3.15.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint",
+      "pre-push": "yarn test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "workspaces": [
     "packages/*"
