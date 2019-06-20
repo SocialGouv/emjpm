@@ -1,0 +1,22 @@
+{
+  "name": "@optional/e2e.runner.puppetteer",
+  "version": "0.0.0",
+  "description": "",
+  "main": "codecept.conf.js",
+  "scripts": {
+    "test": "codeceptjs run --verbose --features"
+  },
+<<<<<<< Updated upstream
+  "keywords": [],
+  "author": "Douglas Duteil <douglasduteil@gmail.com> (douglasduteil.github.io)",
+  "license": "WTFPL",
+    "scripts": {
+    "test": "codeceptjs run"
+  },
+=======
+>>>>>>> Stashed changes
+  "dependencies": {
+    "codeceptjs": "^2.1.0",
+    "puppeteer": "^1.14.0"
+  }
+}

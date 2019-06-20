@@ -4,6 +4,7 @@
     "install": "node node_modules/husky/lib/installer/bin install",
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
+    "e2e": "yarn run -- lerna --scope @optional/e2e.runner.puppetteer exec yarn --",
     "lint": "lerna run lint --parallel",
     "start": "lerna run start --parallel",
     "test": "lerna run test --parallel --ignore @optional/e2e"
