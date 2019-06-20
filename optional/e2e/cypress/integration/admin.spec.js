@@ -17,9 +17,10 @@ describe("Admins", () => {
     cy.contains("Marcel");
   });
 
-  it("should show 1 inactive users", function() {
+  it("should show 2 inactive users", function() {
     cy.contains("En attente de validation").click();
-    cy.getCellAction().should("have.length", 1);
+    cy.getCellAction().should("have.length", 2);
+    cy.contains("Paul");
     cy.contains("Doug");
   });
 
