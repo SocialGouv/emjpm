@@ -70,7 +70,7 @@ $ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc e
 
 ```sh
 # The e2e script will retore the db before each scenario with 
-$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username=postgres --clean --dbname=emjpm_test optional/e3e/test-seed.dump
+$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres --clean --dbname=emjpm_test optional/e3e/test-seed.dump
 ```
 
 ```sh

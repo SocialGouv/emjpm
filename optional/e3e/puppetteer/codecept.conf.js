@@ -1,29 +1,30 @@
 exports.config = {
-  output: './output',
+  output: "./output",
   helpers: {
     Puppeteer: {
       chrome: {
         headless: false
       },
-      url: 'http://localhost:3000'
+      restart: false,
+      url: "http://localhost:3000"
     }
   },
   include: {
-    I: './steps_file.js'
+    I: "./steps_file.js"
   },
   mocha: {},
   bootstrap: null,
   teardown: null,
   hooks: [],
   gherkin: {
-    features: './features/*.feature',
-    steps: ['./step_definitions/steps.js']
+    features: "./features/*.feature",
+    steps: ["./step_definitions/steps.js"]
   },
   plugins: {
     screenshotOnFail: {
       enabled: true
     }
   },
-  tests: './*_test.js',
-  name: 'emjpm'
-}
+  tests: "./*_test.js",
+  name: "emjpm"
+};
