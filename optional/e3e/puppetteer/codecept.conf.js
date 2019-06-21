@@ -3,7 +3,7 @@ exports.config = {
   helpers: {
     Puppeteer: {
       chrome: {
-        headless: false
+        headless: true
       },
       restart: false,
       url: "http://localhost:3000"
