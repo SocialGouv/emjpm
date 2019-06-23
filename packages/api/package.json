@@ -28,6 +28,7 @@
     "knex": "^0.16.5",
     "nodemailer": "^6.2.1",
     "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-stub": "^1.1.1",
