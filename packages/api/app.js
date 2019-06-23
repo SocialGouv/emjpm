@@ -9,6 +9,7 @@ const routes = require("./routes/index");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const inscriptionRoutes = require("./routes/inscription");
+const userController = require("./controllers/user");
 
 const app = express();
 
@@ -41,6 +42,10 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
+
+app.post("/login", userController.postLogin);
+app.get("/webhook", userController.getWebhook);
+app.get("/jwks", userController.getJwks);
 
 app.use("/api/v1/inscription", inscriptionRoutes);
 app.use("/api/v1", passport.authenticate("jwt", { session: false }), routes);
