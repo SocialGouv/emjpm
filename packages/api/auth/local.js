@@ -1,5 +1,6 @@
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+const { Strategy: LocalStrategy } = require("passport-local");
+const { Strategy: BearerStrategy } = require("passport-http-bearer");
 
 const init = require("./passport");
 const knex = require("../db/knex");
@@ -48,7 +49,7 @@ passport.use(
     },
     function(jwtPayload, cb) {
       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
-      return knex("users")
+      knex("users")
         .where("id", parseInt(jwtPayload.id))
         .select()
         .then(user => {
@@ -62,6 +63,27 @@ passport.use(
         });
     }
   )
+);
+
+passport.use(
+  new BearerStrategy(function(token, done) {
+    knex("users")
+      .where("token", token)
+      .first()
+      .eager("roles")
+      .then(function(user) {
+        if (!user) {
+          return done("Invalid Token");
+        }
+        if (!user.active) {
+          return done("User is inactive");
+        }
+        return done(null, user);
+      })
+      .catch(function(err) {
+        done(err);
+      });
+  })
 );
 
 module.exports = passport;
