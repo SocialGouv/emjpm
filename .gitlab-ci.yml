@@ -160,7 +160,6 @@ Register app image:
 
 E2E Test @optional/e2e:
   <<: *end_to_end_stage
-  allow_failure: true
   image: $CI_REGISTRY_IMAGE/puppeteer:$CI_COMMIT_SHA
   services:
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
