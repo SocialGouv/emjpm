@@ -40,6 +40,7 @@ const schema = {
     adresse: { type: "string", title: "Rue", default: "" },
     code_postal: { type: "string", title: "Code Postal", default: "" },
     ville: { type: "string", title: "Commune", default: "" },
+    zip: { type: "string", title: "Informations à destination des magistrats" },
     dispo_max: {
       type: "integer",
       title: "Nombre de mesures souhaitées",
@@ -79,6 +80,9 @@ const uiSchema = {
   },
   dispo_max: {
     "ui:placeholder": "Nombre de mesures souhaitées"
+  },
+  zip: {
+    "ui:widget": "textarea"
   }
 };
 
