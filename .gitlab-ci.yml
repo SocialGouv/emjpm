@@ -203,6 +203,9 @@ E2E Test @optional/e2e:
     - yarn workspace @emjpm/knex run migrate --env test
     - yarn workspace @emjpm/knex run seeds --env test
     #
+    # Allows installation of postgresql-client-10 on Debian stretch which the Node images are based on
+    - echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' > /etc/apt/sources.list.d/pgdg.list
+    - wget -q -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
     - apt-get update && apt-get install -y --no-install-recommends postgresql-client-10
     - PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm_test > optional/e3e/test-seed.dump
     #
