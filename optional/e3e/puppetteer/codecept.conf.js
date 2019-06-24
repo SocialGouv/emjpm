@@ -6,7 +6,7 @@ exports.config = {
         headless: true
       },
       restart: false,
-      url: "http://localhost:3000"
+      url: process.env.CODECEPT_BASEURL || "http://localhost:3000"
     }
   },
   include: {

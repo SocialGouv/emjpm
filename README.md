@@ -75,7 +75,7 @@ $ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres --
 
 ```sh
 # Install the e2e runner env
-$ yarn e2e yarn
+$ yarn e2e
 # short for
 $ yarn run -- lerna --scope @optional/e2e.runner.puppetteer exec yarn
 
