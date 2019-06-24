@@ -49,8 +49,7 @@
     "rasha": "^1.2.5",
     "serve-favicon": "^2.5.0",
     "swagger-jsdoc": "^3.2.9",
-    "swagger-ui-dist": "^3.22.1",
-    "util": "^0.12.0"
+    "swagger-ui-dist": "^3.22.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
