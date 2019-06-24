@@ -22,6 +22,14 @@ stages:
 - "Deploy"
 - "Notify Finished Deployment"
 
+Register puppeteer image:
+  <<: *register_stage
+  stage: "Prepare"
+  variables:
+    CONTEXT: ./optional/e3e/puppetteer
+    DOCKER_BUILD_ARGS: ""
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/puppeteer
+
 #
 <<<<<<< HEAD
 =======
@@ -153,7 +161,7 @@ Register app image:
 E2E Test @optional/e2e:
   <<: *end_to_end_stage
   allow_failure: true
-  image: node:10
+  image: $CI_REGISTRY_IMAGE/puppeteer:$CI_COMMIT_SHA
   services:
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
@@ -204,9 +212,6 @@ E2E Test @optional/e2e:
     - yarn workspace @emjpm/knex run seeds --env test
     #
     # Allows installation of postgresql-client-10 on Debian stretch which the Node images are based on
-    - echo 'deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main' > /etc/apt/sources.list.d/pgdg.list
-    - wget -q -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-    - apt-get update && apt-get install -y --no-install-recommends postgresql-client-10
     - PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm_test > optional/e3e/test-seed.dump
     #
     - yarn e2e test
