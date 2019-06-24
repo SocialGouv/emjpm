@@ -33,54 +33,77 @@ const schema = {
     adresse: { type: "string", title: "Rue", default: "" },
     code_postal: { type: "string", title: "Code Postal", default: "" },
     ville: { type: "string", title: "Commune", default: "" },
-    information: { type: "string", title: "Informations à destination des magistrats" },
+
     dispo_max: {
       type: "integer",
       title: "Nombre de mesures souhaitées",
       default: ""
-    }
+    },
+    information: { type: "string", title: "Informations à destination des magistrats" }
   }
 };
 
 const uiSchema = {
-  secretariat: {
-    "ui:widget": "select"
+  etablissement: {
+    "ui:placeholder": "Etablissement",
+    classNames: "service_input"
   },
   nom: {
-    "ui:placeholder": "Nom"
+    "ui:placeholder": "Nom",
+    classNames: "service_input"
   },
   prenom: {
-    "ui:placeholder": "Prénom"
+    "ui:placeholder": "Prénom",
+    classNames: "service_input"
   },
   genre: {
-    "ui:placeholder": "Genre"
+    "ui:placeholder": "Genre",
+    classNames: "service_input"
   },
   telephone: {
-    "ui:placeholder": "Téléphone"
+    "ui:placeholder": "Téléphone",
+    classNames: "service_input"
   },
   email: {
-    "ui:placeholder": "Adresse email"
+    "ui:placeholder": "Adresse email",
+    classNames: "service_input"
   },
   adresse: {
-    "ui:placeholder": "Rue"
+    "ui:placeholder": "Rue",
+    classNames: "service_input"
   },
   code_postal: {
-    "ui:placeholder": "Code Postal"
+    "ui:placeholder": "Code Postal",
+    classNames: "service_input"
   },
   ville: {
-    "ui:placeholder": "Commune"
+    "ui:placeholder": "Commune",
+    classNames: "service_input"
   },
   dispo_max: {
-    "ui:placeholder": "Nombre de mesures souhaitées"
+    "ui:placeholder": "Nombre de mesures souhaitées",
+    classNames: "service_input"
   },
   information: {
-    "ui:widget": "textarea"
+    "ui:widget": "textarea",
+    classNames: "service_input_information"
   }
 };
 
 const EditServiceSiege = ({ show, handleHide, formData, onSubmit }) => {
   const cleanData = {
-    ...formData
+    ...formData,
+    etablissement: formData.etablissement || "",
+    nom: formData.nom || "",
+    prenom: formData.prenom || "",
+    email: formData.email || "",
+    genre: formData.genre || "",
+    telephone: formData.telephone || "",
+    adresse: formData.adresse || "",
+    code_postal: formData.code_postal || "",
+    dispo_max: formData.dispo_max || 0,
+    ville: formData.ville || "",
+    information: formData.information || ""
   };
   return (
     <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">

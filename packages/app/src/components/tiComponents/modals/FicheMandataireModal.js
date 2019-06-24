@@ -128,6 +128,8 @@ class FicheMandataireModal extends React.Component {
       handleHide
     } = this.props;
     const labelGenre = genre[currentMandataire.genre];
+    console.log("service", currentMandataire);
+
     return (
       <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
         <div style={{ display: "flex", padding: "20px", boxSizing: "border-box" }}>
@@ -155,6 +157,7 @@ class FicheMandataireModal extends React.Component {
                   dispo_max={currentMandataire.service_dispo_max}
                   type={currentMandataire.type}
                   displayTitle={"none"}
+                  information={currentMandataire.service_info}
                 />
                 <br />
                 <b>Antennes</b>

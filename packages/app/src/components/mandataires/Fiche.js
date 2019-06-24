@@ -17,7 +17,8 @@ const FicheMandataire = ({
   secretariat = false,
   mesures_en_cours = 0,
   nb_secretariat = 0,
-  type = ""
+  type = "",
+  information = ""
 }) => {
   const hasAdresse = adresse || code_postal || ville;
   return (
