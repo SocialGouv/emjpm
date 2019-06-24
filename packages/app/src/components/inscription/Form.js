@@ -10,16 +10,16 @@ import Router from "next/router";
 
 const formsMandataires = {
   individuel(props) {
-    <InscriptionIndividuel {...props} />;
+    return <InscriptionIndividuel {...props} />;
   },
   prepose(props) {
-    <InscriptionPrepose {...props} />;
+    return <InscriptionPrepose {...props} />;
   },
   service(props) {
-    <InscriptionService {...props} />;
+    return <InscriptionService {...props} />;
   },
   ti(props) {
-    <InscriptionTi {...props} />;
+    return <InscriptionTi {...props} />;
   }
 };
 
