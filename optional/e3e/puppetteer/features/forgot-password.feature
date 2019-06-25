@@ -2,19 +2,18 @@
 Feature: Forgot password
   In order to recover a forgotten password
   As a registered user
-  I want to be able to reset it
+  I want to be able to reset my password
 
   Background: Navigate to HomePage
     Given a clean test database
     And an empty inbox
     Given a web browser is on EMJJM
 
-  Scenario: Adrien (ud@ud.com) forgotten his password
+  Scenario: Adrien (ud@ud.com) forgot his password
     When I click on "J'ai oublié mon mot de passe et / ou mon identifiant"
 
     Given I see "Récupérer votre compte"
-    When I fill in the following
-      | email | ud@ud.com |
+    When I enter "ud@ud.com" as "email"
     # NOTE(douglasduteil): we should not accept popups...
     And I am accepting popups
     Then I click on "Demander mon mot de passe"
@@ -23,13 +22,12 @@ Feature: Forgot password
 
     Then I have one unread message in my indox
     And I consult the last unread message
-
     Given the last email as the following info
       | subject         | Nouveau mot de passe pour e-MJPM |
       | from[0].address | contact@emjpm.beta.gouv.fr       |
       | to[0].address   | ud@ud.com                        |
 
-    When I click on the "http:\/\/localhost:3000\/reset-password\?token=.{16}" link in the last email
+    When I click on the "\/reset-password\?token=.{16}" link in the last email
     Then I see "Mot de passe oublié"
 
     When I fill in the following
