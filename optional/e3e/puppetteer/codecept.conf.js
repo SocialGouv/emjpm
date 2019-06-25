@@ -3,8 +3,8 @@ exports.config = {
   helpers: {
     Puppeteer: {
       chrome: {
-        headless: true,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]
+        headless: false,
+        args: process.env.CI ? ["--no-sandbox", "--disable-setuid-sandbox"] : []
       },
       restart: false,
       url: process.env.CODECEPT_BASEURL || "http://localhost:3000"

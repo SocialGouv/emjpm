@@ -7,8 +7,10 @@
     "test": "codeceptjs run --features"
   },
   "dependencies": {
+    "chai": "^4.2.0",
     "codeceptjs": "^2.1.0",
     "execa": "^1.0.0",
+    "got": "^9.6.0",
     "puppeteer": "^1.14.0"
   }
 }

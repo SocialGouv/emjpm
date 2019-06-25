@@ -24,6 +24,9 @@ services:
 
   maildev:
     image: djfarrelly/maildev
+    ports:
+      - 25:25
+      - 1080:80
 
   api:
     build:
