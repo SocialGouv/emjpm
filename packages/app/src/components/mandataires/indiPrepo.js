@@ -61,7 +61,8 @@ class MandataireTabs extends React.Component {
                 "status",
                 "professionnel",
                 "mandataire_id",
-                "reason_fin_de_mandat"
+                "reason_fin_de_mandat",
+                "fin-mandat-attente"
               ]}
             />
           </React.Fragment>
@@ -88,7 +89,8 @@ class MandataireTabs extends React.Component {
               "ti",
               "status",
               "professionnel",
-              "mandataire_id"
+              "mandataire_id",
+              "fin-mandat-attente"
             ]}
           />
         )
@@ -111,7 +113,8 @@ class MandataireTabs extends React.Component {
               "professionnel",
               "mandataire_id",
               "numero_dossier",
-              "reason_fin_de_mandat"
+              "reason_fin_de_mandat",
+              "fin-mandat-attente"
             ]}
           />
         )
