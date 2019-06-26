@@ -66,6 +66,16 @@ const mandataireReducer = (state = TI_INITIAL_STATE, action) => {
       return {
         ...state
       };
+    case "MESURE_UPDATED":
+      return {
+        ...state,
+        lastUpdate: new Date()
+      };
+    case "MESURE_CLOSED":
+      return {
+        ...state,
+        lastUpdate: new Date()
+      };
     default:
       return state;
   }
