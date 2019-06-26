@@ -1,5 +1,11 @@
 #
 
+include:
+  - /.gitlab-ci/variables.yml
+  - /.gitlab-ci/extends.yml
+
+#
+
 .quality_stage: &quality_stage
   stage: "Code Quality"
   dependencies: []
