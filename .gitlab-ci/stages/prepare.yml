@@ -1,11 +1,5 @@
 #
 
-include:
-  - /.gitlab-ci/variables.yml
-  - /.gitlab-ci/extends.yml
-
-#
-
 .prepare_stage: &prepare_stage
   extends: .base-docker-image-stage
   stage: "Prepare"
