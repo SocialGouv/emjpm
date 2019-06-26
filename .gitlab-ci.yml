@@ -11,4 +11,6 @@ include:
 
 stages:
   - "Prepare"
+  - "Code Quality"
+
 #
