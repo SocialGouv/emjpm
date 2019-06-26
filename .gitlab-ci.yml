@@ -6,6 +6,7 @@ include:
   - /.gitlab-ci/extends.yml
   #
   - /.gitlab-ci/stages/prepare.yml
+  - /.gitlab-ci/stages/quality.yml
 
 #
 
