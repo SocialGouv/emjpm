@@ -7,11 +7,13 @@ include:
   #
   - /.gitlab-ci/stages/prepare.yml
   - /.gitlab-ci/stages/quality.yml
+  - /.gitlab-ci/stages/register.yml
 
 #
 
 stages:
   - "Prepare"
   - "Code Quality"
+  - "Registration"
 
 #
