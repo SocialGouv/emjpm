@@ -1,0 +1,16 @@
+variables:
+
+  # CI variables
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://localhost:2375
+  GIT_STRATEGY: fetch
+  # Override CI_PROJECT_PATH to match Github repo name
+  PROJECT_PATH: "SocialGouv/work-in-france"
+
+  # Infra
+  IMAGE_INFRA_BASE_NAME: infra/images-docker
+
+  # Globals
+  DOCKER_VERSION: "18"
+  PYTHON_VERSION: "3.6-alpine"
+

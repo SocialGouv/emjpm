@@ -1,0 +1,38 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: ${K8S_NAMESPACE}-frontend${HASH_BRANCH_NAME}
+  labels:
+    app: ${K8S_NAMESPACE}-frontend${HASH_BRANCH_NAME}
+    branch: ${BRANCH_NAME}
+    commit: ${COMMIT}
+    job: "${JOB_ID}"
+    tag: "${COMMIT_TAG}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${K8S_NAMESPACE}-frontend${HASH_BRANCH_NAME}
+  template:
+    metadata:
+      labels:
+        app: ${K8S_NAMESPACE}-frontend${HASH_BRANCH_NAME}
+    spec:
+      containers:
+        - image: ${REGISTRY}/frontend:${IMAGE_TAG}
+          name: ${K8S_NAMESPACE}-frontend
+          ports:
+            - containerPort: ${PORT}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: ${PORT}
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: ${PORT}
+            initialDelaySeconds: 3
+            periodSeconds: 5

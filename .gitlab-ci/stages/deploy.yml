@@ -1,0 +1,63 @@
+#
+
+.deploy_stage: &deploy_stage
+  stage: "Deploy"
+  dependencies: []
+  services:
+    - docker:dind
+  variables: &deploy_stage_variables
+    IMAGE_TAG: $CI_COMMIT_SHA
+    REGISTRY: $CI_REGISTRY_IMAGE
+
+.incubateur_stage: &incubateur_stage
+  environment:
+    name: incubateur
+  only:
+    - tags
+
+.dev_stage: &dev_stage
+  environment:
+    name: dev.factory
+  only:
+    - branches
+
+.docker_kube_dev_stage: &docker_kube_dev_stage
+  before_script:
+    - source ./.gitlab-ci/env.sh
+
+.k8s-fontend-depoyment:
+  extends: .base-docker-kube-image-stage
+  script:
+    - /apps/create-kubeconfig.sh
+    #
+    - envsubst < ./.k8s/frontend/deployment.yml > ./deployment.yml
+    - envsubst < ./.k8s/frontend/service.yml > ./service.yml
+    - envsubst < ./.k8s/frontend/ingress.yml > ./ingress.yml
+    #
+    - kubectl apply -f ./deployment.yml
+    - kubectl apply -f ./service.yml
+    - kubectl apply -f ./ingress.yml
+    #
+    - echo "CDTN frontend available at - ${FRONTEND_HOST}"
+#
+#
+#
+
+.deploy-frontend: &deploy_frontend
+  <<: *deploy_stage
+  extends: .k8s-fontend-depoyment
+  variables:
+    <<: *deploy_stage_variables
+    PORT: 80
+
+#
+
+Deploy App (dev):
+  <<: *deploy_frontend
+  <<: *dev_stage
+  <<: *docker_kube_dev_stage
+
+Deploy App (incubateur):
+  <<: *deploy_frontend
+  <<: *incubateur_stage
+  <<: *docker_kube_dev_stage
