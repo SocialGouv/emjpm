@@ -11,3 +11,17 @@
   image:
     name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
     entrypoint: [""]
+
+#
+
+.base-register-stage:
+  extends: .base-docker-image-stage
+  stage: "Registration"
+  dependencies: []
+  before_script:
+    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+  script:
+    - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA || true
+    - echo "> docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA -t $IMAGE_NAME:$CI_COMMIT_SHA $CONTEXT"
+    - docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA -t $IMAGE_NAME:$CI_COMMIT_SHA $CONTEXT
+    - docker push $IMAGE_NAME
