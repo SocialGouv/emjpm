@@ -50,7 +50,7 @@ const FicheMandataire = ({
       </div>
       <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
         <Info style={iconStyle} />
-        {zip || "Non renseigné"}
+        {zip || information || "Non renseigné"}
       </div>
       <br />
       <table style={{ width: 350 }} cellPadding={5}>

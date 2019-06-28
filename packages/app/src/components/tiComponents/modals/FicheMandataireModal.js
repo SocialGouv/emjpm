@@ -128,7 +128,6 @@ class FicheMandataireModal extends React.Component {
       handleHide
     } = this.props;
     const labelGenre = genre[currentMandataire.genre];
-    console.log("service", currentMandataire);
 
     return (
       <Layout show={show} handleHide={handleHide} className="FicheMandataireModal">
