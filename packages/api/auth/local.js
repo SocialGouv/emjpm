@@ -1,65 +1,42 @@
 const passport = require("passport");
 const { Strategy: LocalStrategy } = require("passport-local");
 const { Strategy: BearerStrategy } = require("passport-http-bearer");
+const { User } = require("../db/schema");
 
 const init = require("./passport");
-const knex = require("../db/knex");
-const authHelpers = require("./_helpers");
-
-const passportJWT = require("passport-jwt");
-const JWTStrategy = passportJWT.Strategy;
-const ExtractJWT = passportJWT.ExtractJwt;
-
-const options = {};
 
 init();
 
 passport.use(
-  new LocalStrategy(options, (username, password, done) => {
-    // check to see if the username exists
-    knex("users")
-      .where("username", "ilike", username.trim())
-      .orWhere("email", "ilike", username.trim())
-      .first()
-      .then(user => {
-        if (!user) return done(null, false);
-        if (!user.active) return done(null, false);
-        if (!authHelpers.comparePass(password, user.password)) {
-          return done(null, false);
-        } else {
-          return done(null, user);
-        }
-      })
-      .catch(err => {
-        return done(err);
-      });
-  })
-);
-
-passport.use(
-  new JWTStrategy(
+  new LocalStrategy(
     {
-      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey:
-        process.env.JWT_KEY ||
-        /* eslint-disable no-console */
-        console.log("WARN: no process.env.JWT_KEY defined") ||
-        /* eslint-enable no-console */
-        "emjpm-jwtkey"
+      usernameField: "username",
+      passwordField: "password"
     },
-    function(jwtPayload, cb) {
-      //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
-      knex("users")
-        .where("id", parseInt(jwtPayload.id))
-        .select()
-        .then(user => {
-          return cb(null, JSON.parse(JSON.stringify(user[0])));
+    function(username, password, done) {
+      User.query()
+        .where("username", username)
+        .first()
+        .eager("roles")
+        .then(function(user) {
+          if (!user) {
+            return done("Unknown user");
+          }
+          if (!user.active) {
+            return done("User is inactive");
+          }
+          user.verifyPassword(password, function(err, passwordCorrect) {
+            if (err) {
+              return done(err);
+            }
+            if (!passwordCorrect) {
+              return done("Invalid password");
+            }
+            return done(null, user);
+          });
         })
-        .catch(err => {
-          /* eslint-disable no-console */
-          console.log("err");
-          /* eslint-enable no-console */
-          return cb(err);
+        .catch(function(err) {
+          done(err);
         });
     }
   )
@@ -67,7 +44,7 @@ passport.use(
 
 passport.use(
   new BearerStrategy(function(token, done) {
-    knex("users")
+    User.query()
       .where("token", token)
       .first()
       .eager("roles")
