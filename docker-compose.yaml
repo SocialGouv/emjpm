@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 #
 # In development we only start postgres server
@@ -21,7 +21,7 @@ services:
     build:
       context: ./docker/postgres
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -35,7 +35,7 @@ services:
       - POSTGRES_READONLY_USER_NAME=readonly
       - POSTGRES_READONLY_USER_PASSWORD=readonlyPassword
     ports:
-      - '5434:5432'
+      - "5434:5432"
     volumes:
       - emjpm-pgdata:/var/lib/postgresql/data
 
@@ -52,9 +52,9 @@ services:
     restart: always
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm_dev
-      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true' # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://192.168.1.73:4000/jwks"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://192.168.1.20:4000/jwks"}'
       ## uncomment next line to set an admin secret
 
 volumes:
