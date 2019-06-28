@@ -35,6 +35,7 @@ export const cabinet = [
   "1",
   "1A",
   "1B",
+  "1C",
   "2",
   "2A",
   "2B",
