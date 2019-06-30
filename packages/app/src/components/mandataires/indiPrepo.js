@@ -24,6 +24,10 @@ const getCurrentDispos = props =>
   null;
 
 class MandataireTabs extends React.Component {
+  state = { tabIndex: 0 };
+
+  updateIndexIndi = tabIndex => this.setState({ tabIndex });
+
   render() {
     const currentDispos = getCurrentDispos(this.props);
 
@@ -49,7 +53,7 @@ class MandataireTabs extends React.Component {
         content: (
           <React.Fragment>
             <CreateMesure />
-            <DispoMagistrat currentDispos={currentDispos} />
+            <DispoMagistrat currentDispos={currentDispos} updateIndexIndi={this.updateIndexIndi} />
             <TableMesures
               fetch={() => apiFetch(`/mandataires/1/mesures`)}
               hideColumns={[
@@ -135,7 +139,7 @@ class MandataireTabs extends React.Component {
     return (
       <React.Fragment>
         <Header />
-        <DummyTabs tabs={tabs} />
+        <DummyTabs tabs={tabs} tabIndex={this.state.tabIndex} />
       </React.Fragment>
     );
   }
