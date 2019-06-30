@@ -144,7 +144,7 @@ function getAllByMandatairesFilter(
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
     )
-    .leftOuterJoin("services", "mandataires.service_id", "services.id")
+    .leftOuterJoin("services", "users.service_id", "services.id")
     .groupBy(
       "geolocalisation_code_postal.latitude",
       "geolocalisation_code_postal.longitude",
@@ -189,7 +189,7 @@ function getAllByMandatairesFilter(
           "geolocalisation_code_postal.code_postal",
           "mandataires.code_postal"
         )
-        .leftOuterJoin("services", "mandataires.service_id", "services.id")
+        .leftOuterJoin("services", "users.service_id", "services.id")
         .where("users.type", "service")
         .where("service_tis.ti_id", parseInt(ti_id));
     });
