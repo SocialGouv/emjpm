@@ -22,57 +22,35 @@ const FicheMandataire = ({
   const hasAdresse = adresse || code_postal || ville;
   return (
     <div>
-      {type === "service"
-        ? (contact_email && (
-            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
-              <Mail style={iconStyle} />
-              <a href={`mailto:${contact_email}`}>{contact_email}</a>
-            </div>
-          )) ||
-          null
-        : (email ? (
-            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
-              <Mail style={iconStyle} />
-              <a href={`mailto:${email}`}>{email}</a>
-            </div>
-          ) : (
-            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
-              <Mail style={iconStyle} />
-              Non renseigné
-            </div>
-          )) || null}
+      {type === "service" ? (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
+          <Mail style={iconStyle} />
+          <a href={`mailto:${contact_email}`}>{contact_email || "Non renseigné"}</a>
+        </div>
+      ) : (
+        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-email">
+          <Mail style={iconStyle} />
+          <a href={`mailto:${email}`}>{email || "Non renseigné"}</a>
+        </div>
+      )}
       <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone">
         <Phone style={iconStyle} />
-        {telephone}
+        {telephone || "Non renseigné"}
       </div>
-      {type !== "service" && telephone_portable ? (
+      {type !== "service" ? (
         <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
           <Smartphone style={iconStyle} />
-          {telephone_portable}
+          {telephone_portable || "Non renseigné"}
         </div>
-      ) : (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
-          <Smartphone style={iconStyle} />
-          Non renseigné
-        </div>
-      )}
-      {hasAdresse ? (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
-          <Home style={iconStyle} />
-          {adresse} {code_postal} {ville}
-        </div>
-      ) : (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
-          <Home style={iconStyle} />
-          Non renseigné
-        </div>
-      )}
-      {zip && (
-        <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
-          <Info style={iconStyle} />
-          {zip}
-        </div>
-      )}
+      ) : null}
+      <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-adresse">
+        <Home style={iconStyle} />
+        {hasAdresse ? ` ${adresse} ${code_postal} ${ville}` : "Non renseigné"}
+      </div>
+      <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-telephone-portable">
+        <Info style={iconStyle} />
+        {zip || "Non renseigné"}
+      </div>
       <br />
       <table style={{ width: 350 }} cellPadding={5}>
         <tbody style={{ fontSize: "1.1em" }}>
