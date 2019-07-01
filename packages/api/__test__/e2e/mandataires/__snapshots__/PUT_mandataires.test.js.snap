@@ -42,6 +42,7 @@ Object {
   "email": "testSiege@email.com",
   "etablissement": "UDAHF Siege",
   "id": 1,
+  "information": null,
   "nom": null,
   "prenom": null,
   "telephone": "0237100000",

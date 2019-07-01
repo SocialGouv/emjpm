@@ -187,12 +187,6 @@ class MandataireProfile extends React.Component {
               />
             )}
           />
-          {newMandataire.zip && (
-            <div style={{ lineHeight: "3em" }} data-cy="fiche-manda-zip">
-              <h3>Informations à destination des magistrats </h3>
-              {newMandataire.zip}
-            </div>
-          )}
         </div>
       </div>
     );
