@@ -2,9 +2,7 @@ import { hide } from "redux-modal";
 import ReactPiwik from "react-piwik";
 
 import apiFetch from "../../communComponents/Api";
-import {
-  fetchUpdateMesureAttente,
-} from "./mandataire";
+import { fetchUpdateMesureAttente } from "./mandataire";
 
 import { mesureClosed } from "../../mandataires/actions/mesures";
 
@@ -54,7 +52,6 @@ export const closeMesure = data => dispatch =>
       });
     })
     .catch(e => {
-      console.log(e);
       alert("Impossible de soumettre les données");
       throw e;
     });

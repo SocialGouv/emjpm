@@ -1,3 +1,4 @@
+import React from "react";
 import Form from "react-jsonschema-form";
 
 import { connectModal } from "redux-modal";
@@ -19,7 +20,7 @@ const uiSchema = {
   }
 };
 
-const CloseMesureAttente = ({ show, handleHide, onSubmit, id, mandataire_id, ...props }) => {
+const CloseMesureAttente = ({ show, handleHide, onSubmit, id, mandataire_id }) => {
   const onSubmitted = ({ formData }) => {
     onSubmit({
       date: formData,
@@ -33,8 +34,8 @@ const CloseMesureAttente = ({ show, handleHide, onSubmit, id, mandataire_id, ...
         <h3>Supprimer la mesure? </h3>
         <br />
         <p style={{ padding: 20 }}>
-          Une fois cette opération effectuée, la mesure sera définitivement supprimée de votre profil ainsi que du profil du mandataire
-          sélectionné.
+          Une fois cette opération effectuée, la mesure sera définitivement supprimée de votre
+          profil ainsi que du profil du mandataire sélectionné.
         </p>
         <Form
           schema={schema}
@@ -53,11 +54,11 @@ const CloseMesureAttente = ({ show, handleHide, onSubmit, id, mandataire_id, ...
   );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) =>
-  bindActionCreators({ onSubmit: closeMesure }, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ onSubmit: closeMesure }, dispatch);
 
 // connect to redux store actions
 // connect to redux-modal
-export default connect(null, mapDispatchToProps)(
-  connectModal({ name: "CloseMesureAttente", destroyOnHide: true })(CloseMesureAttente)
-);
+export default connect(
+  null,
+  mapDispatchToProps
+)(connectModal({ name: "CloseMesureAttente", destroyOnHide: true })(CloseMesureAttente));

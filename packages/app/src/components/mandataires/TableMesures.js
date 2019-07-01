@@ -41,8 +41,9 @@ const CellCloseMesureRedux = connect(
   </Button>
 ));
 
-const CellCloseMesureAttenteRedux = connect(null, dispatch =>
-  bindActionCreators({ show }, dispatch)
+const CellCloseMesureAttenteRedux = connect(
+  null,
+  dispatch => bindActionCreators({ show }, dispatch)
 )(({ row, show }) => (
   <Button
     data-cy="button-close-mesure"
@@ -247,7 +248,9 @@ const COLUMNS = [
   {
     Header: "Supprimer la mesure",
     id: "fin-mandat-attente",
-    Cell: row => <CellCloseMesureAttenteRedux row={row} />,
+    Cell(row) {
+      return <CellCloseMesureAttenteRedux row={row} />;
+    },
     width: 200,
     style: { textAlign: "center", alignSelf: "center" }
   },
