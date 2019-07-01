@@ -44,41 +44,56 @@ const schema = {
       type: "integer",
       title: "Nombre de mesures souhaitées",
       default: ""
-    }
+    },
+    zip: { type: "string", title: "Informations à destination des magistrats", default: "" }
   }
 };
 
 const uiSchema = {
-  secretariat: {
-    "ui:widget": "select"
+  etablissement: {
+    "ui:placeholder": "Etablissement",
+    classNames: "service_input"
   },
   contact_nom: {
-    "ui:placeholder": "Nom"
+    "ui:placeholder": "Nom",
+    classNames: "service_input"
   },
 
   contact_prenom: {
-    "ui:placeholder": "Prénom"
+    "ui:placeholder": "Prénom",
+    classNames: "service_input"
   },
   genre: {
-    "ui:placeholder": "Genre"
+    "ui:placeholder": "Genre",
+    classNames: "service_input"
   },
   telephone: {
-    "ui:placeholder": "Téléphone"
+    "ui:placeholder": "Téléphone",
+    classNames: "service_input"
   },
   contact_email: {
-    "ui:placeholder": "Adresse email"
+    "ui:placeholder": "Adresse email",
+    classNames: "service_input"
   },
   adresse: {
-    "ui:placeholder": "Rue"
+    "ui:placeholder": "Rue",
+    classNames: "service_input"
   },
   code_postal: {
-    "ui:placeholder": "Code Postal"
+    "ui:placeholder": "Code Postal",
+    classNames: "service_input"
   },
   ville: {
-    "ui:placeholder": "Commune"
+    "ui:placeholder": "Commune",
+    classNames: "service_input"
   },
   dispo_max: {
-    "ui:placeholder": "Nombre de mesures souhaitées"
+    "ui:placeholder": "Nombre de mesures souhaitées",
+    classNames: "service_input"
+  },
+  zip: {
+    "ui:widget": "textarea",
+    classNames: "service_input_information"
   }
 };
 
@@ -90,6 +105,21 @@ class EditService extends React.Component {
   };
 
   render() {
+    const { formData } = this.props;
+    const cleanData = {
+      ...formData,
+      etablissement: formData.etablissement || "",
+      contact_nom: formData.contact_nom || "",
+      contact_prenom: formData.contact_prenom || "",
+      contact_email: formData.contact_email || "",
+      zip: formData.zip || "",
+      genre: formData.genre || "",
+      telephone: formData.telephone || "",
+      adresse: formData.adresse || "",
+      code_postal: formData.code_postal || "",
+      dispo_max: formData.dispo_max || 0,
+      ville: formData.ville || ""
+    };
     const validate = (formData, errors) => {
       let number = 0;
       this.props.profiles.map(profile => {
@@ -114,7 +144,7 @@ class EditService extends React.Component {
         <Form
           schema={schema}
           uiSchema={uiSchema}
-          formData={this.props.formData}
+          formData={cleanData}
           onSubmit={this.onSubmitted}
           validate={validate}
           showErrorList={false}

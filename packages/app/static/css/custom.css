@@ -113,7 +113,6 @@
 }
 
 .ModalEditMandataire {
-  width: 700px !important;
   height: 500px !important;
   margin: 0 auto;
   margin-top: 100px;
@@ -326,6 +325,17 @@
   display: inline-block;
 }
 
+.service_input_information {
+  width: 710px;
+  display: inline-block;
+}
+
+.service_input {
+  width: 230px;
+  display: inline-block;
+}
+
+
 /*. INSCRIPTION */
 
 .Inscription .input__long {
@@ -380,4 +390,3 @@
 .array-item-remove::after {
   content: "Supprimer";
 }
-
