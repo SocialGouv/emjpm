@@ -11,7 +11,6 @@ const removeUnique = (arr, key) => {
 
 exports.seed = knex => {
   const newRows = zipCodes.map(row => {
-    console.log(row);
     return {
       code_postal: row.code_postal,
       latitude: row.latitude,
