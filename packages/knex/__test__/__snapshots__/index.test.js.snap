@@ -715,6 +715,12 @@ Object {
     "nullable": false,
     "type": "integer",
   },
+  "information": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "nom": Object {
     "defaultValue": null,
     "maxLength": 255,
