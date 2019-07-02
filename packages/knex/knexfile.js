@@ -4,7 +4,7 @@ const { join } = require("path");
 
 module.exports = {
   test: {
-    debug: true,
+    // debug: true,
     client: "pg",
     connection: process.env.DATABASE_URL || {
       host: "localhost",
