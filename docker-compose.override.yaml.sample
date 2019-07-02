@@ -49,6 +49,8 @@ services:
       dockerfile: Dockerfile
       args:
         BASE_IMAGE: ${BASE_IMAGE:-socialgouv/emjpm:master}
+    volumes:
+      - uploads:/app/uploads
     env_file: .env
     ports:
       - 4000:4000
@@ -71,3 +73,4 @@ services:
 
 volumes:
   metabase:
+  uploads:
