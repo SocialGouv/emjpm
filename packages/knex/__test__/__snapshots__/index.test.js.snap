@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`city table schema 1`] = `
+Object {
+  "code_postal": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('city_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "latitude": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "longitude": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "ville": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+}
+`;
+
 exports[`commentaires table schema 1`] = `
 Object {
   "comment": Object {
@@ -131,6 +166,12 @@ Object {
 
 exports[`geolocalisation_code_postal table schema 1`] = `
 Object {
+  "cities": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "ARRAY",
+  },
   "code_postal": Object {
     "defaultValue": null,
     "maxLength": 255,
@@ -744,6 +785,7 @@ Object {
 
 exports[`should list all tables 1`] = `
 Array [
+  "city",
   "commentaires",
   "departements",
   "etablissements",
