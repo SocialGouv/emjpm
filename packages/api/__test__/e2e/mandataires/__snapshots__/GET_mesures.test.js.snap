@@ -105,6 +105,7 @@ Array [
     "array_agg": Array [
       "preposes 2010-10-05",
     ],
+    "city": "St Denis",
     "code_postal": "93000",
     "count": "1",
     "latitude": 48.91,
@@ -114,6 +115,7 @@ Array [
     "array_agg": Array [
       "preposes 2010-10-05",
     ],
+    "city": "Arras",
     "code_postal": "62000",
     "count": "1",
     "latitude": 50.5333,
