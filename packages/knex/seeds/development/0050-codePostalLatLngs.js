@@ -15,8 +15,7 @@ exports.seed = knex => {
       code_postal: row.code_postal,
       latitude: row.latitude,
       longitude: row.longitude,
-      cities: row.cities,
-      code_insee: row.code_commune_INSEE
+      cities: row.cities
     };
   });
   return knex.transaction(tr => {
