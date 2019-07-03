@@ -51,4 +51,4 @@ Delete useless k8s objects:
   image: ${CI_REGISTRY}/socialgouv/docker/k8s-object-killer:0.0.2
   before_script: []
   script:
-    - /entrypoint.sh
+    - sh /entrypoint.sh
