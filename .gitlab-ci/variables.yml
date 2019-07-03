@@ -10,4 +10,5 @@ variables:
 
   # Globals
   DOCKER_VERSION: "18"
+  PYTHON_VERSION: "3.6-alpine"
 
