@@ -26,7 +26,7 @@
     - source ./.gitlab-ci/env.sh
 
 .k8s-fontend-depoyment:
-  extends: .base-docker-kube-image-stage
+  extends: .base_docker_kube_image_stage
   script:
     - /apps/create-kubeconfig.sh
     #
