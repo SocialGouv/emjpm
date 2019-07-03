@@ -46,9 +46,9 @@ Notify Success:
     - sh -x ./.k8s/scripts/send-url.sh $(cat $DEPLOY_ID_FILE) success
 
 Delete useless k8s objects:
-  <<: *notify_stage
   stage: "Notify Finished Deployment"
   image: ${CI_REGISTRY}/socialgouv/docker/k8s-object-killer:0.0.4
-  before_script: []
+  environment:
+    name: dev.factory
   script:
     - sh /entrypoint.sh
