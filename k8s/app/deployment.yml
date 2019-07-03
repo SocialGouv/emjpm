@@ -1,0 +1,38 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: emjpm-app${HASH_BRANCH_NAME}
+  labels:
+    app: emjpm-app${HASH_BRANCH_NAME}
+    branch: emjpm${HASH_BRANCH_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emjpm-app${HASH_BRANCH_NAME}
+  template:
+    metadata:
+      labels:
+        app: emjpm-app${HASH_BRANCH_NAME}
+    spec:
+      containers:
+      - image: ${EMJPM_REGISTRY}/app:${IMAGE_TAG}
+        name: emjpm-app
+        ports:
+        - containerPort: ${PORT}
+        livenessProbe:
+          httpGet:
+            path: /
+            port: ${PORT}
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: ${PORT}
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        env:
+        - name: API_URL
+          value: "http://${HASH_BRANCH_INGRESS}emjpm-api.${ENVIRONMENT}.social.gouv.fr"
