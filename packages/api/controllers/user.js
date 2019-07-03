@@ -25,8 +25,12 @@ exports.getJwks = async (req, res) => {
  * Sign in using username and password and returns JWT
  */
 exports.postLogin = async (req, res, next) => {
-  const errors = validationResult(req);
-  console.log(errors);
+  const { errors } = validationResult(req);
+
+  if (errors) {
+    return res.status(400).json({ errors: errors });
+  }
+
   passport.authenticate("local", (err, user) => {
     if (err) {
       return handleResponse(res, 400, { error: err });
