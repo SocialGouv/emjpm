@@ -1,29 +1,24 @@
 #
 
-.register-stage: &register-stage
+.register_stage: &register_stage
   extends: .base_register_stage
   stage: "Registration"
   dependencies: []
 
 #
 
-Register frontend image:
-  <<: *register-stage
-  before_script:
-    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
-    - docker pull $CI_REGISTRY_IMAGE/builder:$CI_COMMIT_SHA || true
+Register api image:
+  <<: *register_stage
   variables:
-    CONTEXT: .
+    CONTEXT: packages/api
     DOCKER_BUILD_ARGS: >-
-      --shm-size 521M
-      --cache-from $CI_REGISTRY_IMAGE/builder:$CI_COMMIT_SHA
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/frontend
+      --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
 
-Register builder image:
-  <<: *register-stage
-  stage: "Code Quality"
+Register app image:
+  <<: *register_stage
   variables:
-    CONTEXT: .
-    # Required to put yarn_cache in tmp files
-    DOCKER_BUILD_ARGS: "--shm-size 521M --target builder"
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/builder
+    CONTEXT: packages/app
+    DOCKER_BUILD_ARGS: >-
+      --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
