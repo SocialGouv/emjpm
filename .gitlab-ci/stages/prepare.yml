@@ -1,0 +1,22 @@
+#
+
+.prepare_stage: &prepare_stage
+  extends: .base-register-stage
+  stage: "Prepare"
+  dependencies: []
+
+#
+
+Register socialgouv/emjpm base image:
+  <<: *prepare_stage
+  variables:
+    CONTEXT: .
+    DOCKER_BUILD_ARGS: ""
+    IMAGE_NAME: $CI_REGISTRY_IMAGE
+
+Register postgres image:
+  <<: *prepare_stage
+  variables:
+    CONTEXT: ./docker/postgres
+    DOCKER_BUILD_ARGS: ""
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
