@@ -48,6 +48,8 @@
   extends: .k8s-fontend-depoyment
   variables:
     <<: *deploy_stage_variables
+    CONTEXT: app
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     PORT: 80
 
 #
