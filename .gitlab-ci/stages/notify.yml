@@ -48,3 +48,5 @@ Notify Success:
 Delete useless k8s objects:
   <<: *notify_stage
   image: ${CI_REGISTRY}/socialgouv/docker/k8s-object-killer:0.0.2
+  script:
+    - /entrypoint.sh
