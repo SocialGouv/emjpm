@@ -42,7 +42,7 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm_dev
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://host.docker.internal:4000/jwks"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://host.docker.internal:4000/auth/v2/jwks"}'
       ## uncomment next line to set an admin secret
 
 volumes:
