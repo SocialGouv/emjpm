@@ -2,15 +2,15 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: ${K8S_NAMESPACE}-frontend-${BRANCH_HASH}
+  name: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
   labels:
-    app: ${K8S_NAMESPACE}-frontend-${BRANCH_HASH}
+    app: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
     git/branch: ${BRANCH_NAME}
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
 spec:
   selector:
-    app: ${K8S_NAMESPACE}-frontend-${BRANCH_HASH}
+    app: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
   ports:
     - port: ${PORT}
-      name: frontend
+      name: ${CONTEXT}
