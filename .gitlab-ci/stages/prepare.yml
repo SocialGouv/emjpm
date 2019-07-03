@@ -11,7 +11,8 @@ Register socialgouv/emjpm base image:
   <<: *prepare_stage
   variables:
     CONTEXT: .
-    DOCKER_BUILD_ARGS: ""
+    DOCKER_BUILD_ARGS: >-
+      --shm-size 521M
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
 Register postgres image:
