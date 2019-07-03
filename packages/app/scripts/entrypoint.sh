@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-ROOT_DIRECTORY="/www"
+ROOT_DIRECTORY="/usr/share/nginx/html"
 
 ##############################################################
 # Step 1 : replace default environment values in .html files #

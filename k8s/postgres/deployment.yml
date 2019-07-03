@@ -1,0 +1,24 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgres${HASH_BRANCH_NAME}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres${HASH_BRANCH_NAME}
+    spec:
+      containers:
+      - name: postgres
+        image: ${EMJPM_REGISTRY}/postgres:${IMAGE_TAG}
+        imagePullPolicy: "IfNotPresent"
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgredb
+      volumes:
+      - name: postgredb
+        emptyDir: {}
