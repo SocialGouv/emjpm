@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.4.0](https://github.com/SocialGouv/emjpm/compare/v23.3.333...v23.4.0) (2019-07-04)
+
+
+### Bug Fixes
+
+* **admin:** only mandataire can be view in admin mandataire ([#270](https://github.com/SocialGouv/emjpm/issues/270)) ([b4676e1](https://github.com/SocialGouv/emjpm/commit/b4676e1))
+* **app:** add missing returns ([#407](https://github.com/SocialGouv/emjpm/issues/407)) ([7d63be2](https://github.com/SocialGouv/emjpm/commit/7d63be2))
+* **debs:** fix lint ([#416](https://github.com/SocialGouv/emjpm/issues/416)) ([f43827a](https://github.com/SocialGouv/emjpm/commit/f43827a))
+* **magistrats:** change null to quote  ([#396](https://github.com/SocialGouv/emjpm/issues/396)) ([42f4e2a](https://github.com/SocialGouv/emjpm/commit/42f4e2a))
+
+
+### Features
+
+* **debs:** Change font of file ([#405](https://github.com/SocialGouv/emjpm/issues/405)) ([21737b0](https://github.com/SocialGouv/emjpm/commit/21737b0))
+* **import:** add type of mesure for importation ([#421](https://github.com/SocialGouv/emjpm/issues/421)) ([7ff0bb7](https://github.com/SocialGouv/emjpm/commit/7ff0bb7))
+* **inscription:** add 1C to cabinet in inscription ([#419](https://github.com/SocialGouv/emjpm/issues/419)) ([79f0a7a](https://github.com/SocialGouv/emjpm/commit/79f0a7a))
+* **magistrats:** add Femme and Homme to mandataire display on magistrat side ([#296](https://github.com/SocialGouv/emjpm/issues/296)) ([f99c920](https://github.com/SocialGouv/emjpm/commit/f99c920))
+* **magistrats:** ETQ magistrat je souhaite pouvoir annuler une mesure. ([#236](https://github.com/SocialGouv/emjpm/issues/236)) ([934b498](https://github.com/SocialGouv/emjpm/commit/934b498))
+* **magistrats:** remove référence de la mesure for magistrats ([#414](https://github.com/SocialGouv/emjpm/issues/414)) ([a12f82c](https://github.com/SocialGouv/emjpm/commit/a12f82c))
+* **magistrats, mandataires:** add change of RG  number to mandataire and tis ([#255](https://github.com/SocialGouv/emjpm/issues/255)) ([bf6b47d](https://github.com/SocialGouv/emjpm/commit/bf6b47d))
+* **mandataire:** can add more type of mesure ([#411](https://github.com/SocialGouv/emjpm/issues/411)) ([e7abd16](https://github.com/SocialGouv/emjpm/commit/e7abd16))
+* **mandataires:** add name when not defined ([#420](https://github.com/SocialGouv/emjpm/issues/420)) ([36d5927](https://github.com/SocialGouv/emjpm/commit/36d5927))
+* **mention:** add font and style to mention legale ([#284](https://github.com/SocialGouv/emjpm/issues/284)) ([0f6048a](https://github.com/SocialGouv/emjpm/commit/0f6048a))
+
+
+
+
+
 ## [23.3.333](https://github.com/SocialGouv/emjpm/compare/v1.2.0...v23.3.333) (2019-06-13)
 
 
