@@ -7,7 +7,7 @@ if [ ! "$INJECT_DATA_POSTGRES_POD_STATUS" ]
 then
     kubectl apply -f ./pod-inject-dataset.yml
 else
-    kubectl delete pod "${K8S_NAMESPACE}"-dataset"$1"
+    kubectl delete pod "${K8S_NAMESPACE}"-dataset-"$1"
     kubectl apply -f ./pod-inject-dataset.yml
 fi
 
