@@ -375,28 +375,19 @@ router.get(
       }
       const mesures = await getMesuresMap(mandataire.id);
       const mesuresWithCityCoordinates = mesures.map(async mesure => {
-        let cityCoordinates = await getCityCoordinates(
+        const [firstCityCoordinates] = (await getCityCoordinates(
           mesure.ville.toUpperCase(),
           mesure.code_postal
-        );
-        if (cityCoordinates.length > 1) {
-          cityCoordinates = cityCoordinates.filter(cityMesure => {
-            return cityMesure.ville === mesure.ville.toUpperCase();
-          });
-        }
+        ).filter(cityMesure => {
+          return cityMesure.ville === mesure.ville.toUpperCase();
+        })) || [{}];
         return {
           count: mesure.count,
           array_agg: mesure.array_agg,
           city: mesure.ville,
           code_postal: mesure.code_postal,
-          latitude:
-            cityCoordinates.length > 0
-              ? cityCoordinates[0].latitude
-              : mesure.latitude,
-          longitude:
-            cityCoordinates.length > 0
-              ? cityCoordinates[0].longitude
-              : mesure.longitude
+          latitude: firstCityCoordinates.latitude || mesure.latitude,
+          longitude: firstCityCoordinates.longitude || mesure.longitude
         };
       });
       Promise.all(mesuresWithCityCoordinates).then(results =>
