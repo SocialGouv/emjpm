@@ -2,14 +2,16 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: ${EMJPM_REGISTRY}-dataset-${BRANCH_HASH}
+  name: ${K8S_NAMESPACE}-dataset-${BRANCH_HASH}
   labels:
-    app: ${EMJPM_REGISTRY}-dataset
-    branch: ${EMJPM_REGISTRY}-dataset-${BRANCH_HASH}
+    app: ${K8S_NAMESPACE}-dataset
+    git/branch: ${BRANCH_NAME}
+    git/commit: ${COMMIT}
+    gitlab/job: "${JOB_ID}"
 spec:
   containers:
     - image: ${EMJPM_REGISTRY}:${IMAGE_TAG}
-      name: ${EMJPM_REGISTRY}-dataset-${BRANCH_HASH}
+      name: ${K8S_NAMESPACE}-dataset-${BRANCH_HASH}
       command: ["sh"]
       args: ["/dataset/inject-dataset.sh"]
       env:
