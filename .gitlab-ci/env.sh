@@ -7,6 +7,7 @@ export COMMIT_TAG=${COMMIT_TAG:=$CI_COMMIT_TAG}
 export COMMIT=${COMMIT:=$CI_COMMIT_SHA}
 export ENVIRONMENT=${ENVIRONMENT:="dev.factory"};
 export HASH_SIZE=${HASH_SIZE:=7}
+export PROJECT_PATH=${PROJECT_PATH:=$CI_PROJECT_PATH}
 export JOB_ID=${JOB_ID:=$CI_JOB_ID}
 
 BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
