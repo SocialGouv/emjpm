@@ -21,6 +21,5 @@ stages:
 - "Registration"
 - "Deploy"
 - "Notify Finished Deployment"
-- "Delete K8S Objects"
 
 #
