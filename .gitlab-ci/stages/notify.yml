@@ -47,7 +47,7 @@ Notify Success:
 
 Delete useless k8s objects:
   stage: "Notify Finished Deployment"
-  image: ${CI_REGISTRY}/socialgouv/docker/k8s-object-killer:0.0.5
+  image: ${CI_REGISTRY}/socialgouv/docker/k8s-object-killer:0.0.6
   environment:
     name: dev.factory
   script:
