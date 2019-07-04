@@ -51,4 +51,5 @@ Delete useless k8s objects:
   environment:
     name: dev.factory
   script:
+    - source ./.gitlab-ci/env.sh
     - sh /entrypoint.sh
