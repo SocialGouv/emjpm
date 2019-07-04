@@ -38,17 +38,9 @@ fi
 
 #
 
-#context=(
-#  'BRANCH_HASH'
-#  'BRANCH_NAME'
-#  'COMMIT'
-#  'COMMIT_TAG'
-#  'ENVIRONMENT'
-#  'HASH_SIZE'
-#  'JOB_ID'
-  #
-#  'FRONTEND_HOST'
-#  'API_HOST'
-#  )
-
-#printenv | grep -E "'$(printf "%s|"  "${context[@]}")'" | sort
+printenv | grep -E \
+  "BRANCH_HASH|BRANCH_NAME|COMMIT|COMMIT_TAG|ENVIRONMENT|HASH_SIZE|JOB_ID" \
+  | sort
+printenv | grep -E \
+  "FRONTEND_HOST|API_HOST|API_URL" \
+  | sort
