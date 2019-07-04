@@ -1,0 +1,24 @@
+#
+
+.register_stage: &register_stage
+  extends: .base_register_stage
+  stage: "Registration"
+  dependencies: []
+
+#
+
+Register api image:
+  <<: *register_stage
+  variables:
+    CONTEXT: packages/api
+    DOCKER_BUILD_ARGS: >-
+      --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+
+Register app image:
+  <<: *register_stage
+  variables:
+    CONTEXT: packages/app
+    DOCKER_BUILD_ARGS: >-
+      --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app

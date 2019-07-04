@@ -1,0 +1,117 @@
+#
+
+include:
+  - /.k8s/api/.k8s-deploy-api.yml
+  - /.k8s/app/.k8s-deploy-app.yml
+  - /.k8s/postgres/.k8s-deploy-postgres.yml
+
+#
+
+.deploy_stage: &deploy_stage
+  stage: "Deploy"
+  dependencies: []
+  services:
+    - docker:dind
+  variables: &deploy_stage_variables
+    IMAGE_TAG: $CI_COMMIT_SHA
+    REGISTRY: $CI_REGISTRY_IMAGE
+
+.incubateur_stage: &incubateur_stage
+  environment:
+    name: incubateur
+  only:
+    refs:
+      - triggers
+    variables:
+      - $PRODUCTION
+
+.dev_stage: &dev_stage
+  environment:
+    name: dev.factory
+  only:
+    - branches
+    - tags
+#
+#
+#
+
+.deploy-frontend: &deploy_frontend
+  <<: *deploy_stage
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: app
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+    PORT: 80
+  after_script:
+    # NOTE(douglasduteil): re-run env.sh
+    # Because the `after_script` runs in a separated shell context.
+    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
+    - source ./.gitlab-ci/env.sh
+    - echo "Frontend available at - ${FRONTEND_URL}"
+
+#
+
+Deploy App (dev):
+  extends: .k8s-deploy-app-dev
+  <<: *deploy_frontend
+  <<: *dev_stage
+
+Deploy App (incubateur):
+  extends: .k8s-deploy-app-prod
+  <<: *deploy_frontend
+  <<: *incubateur_stage
+
+#
+#
+#
+
+.deploy-api: &deploy_api
+  <<: *deploy_stage
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: api
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+    PORT: 4000
+  after_script:
+    # NOTE(douglasduteil): re-run env.sh
+    # Because the `after_script` runs in a separated shell context.
+    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
+    - source ./.gitlab-ci/env.sh
+    - echo "Api available at - ${API_URL}"
+
+#
+
+Deploy Api (dev):
+  extends: .k8s-deploy-api-dev
+  <<: *deploy_api
+  <<: *dev_stage
+
+Deploy Api (incubateur):
+  extends: .k8s-deploy-api-prod
+  <<: *deploy_api
+  <<: *incubateur_stage
+
+#
+#
+#
+
+.deploy-postgres: &deploy_postgres
+  <<: *deploy_stage
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: postgres
+    EMJPM_REGISTRY: $CI_REGISTRY_IMAGE
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
+    PORT: 5432
+
+#
+
+Deploy postgres (dev):
+  extends: .k8s-deploy-postgres-dev
+  <<: *deploy_postgres
+  <<: *dev_stage
+
+Deploy postgres (incubateur):
+  extends: .k8s-deploy-postgres-prod
+  <<: *deploy_postgres
+  <<: *incubateur_stage
