@@ -29,7 +29,7 @@ spec:
   restartPolicy: Never
   initContainers:
     - name: wait-for-postgres
-      image: postgres:11-alpine
+      image: postgres:10-alpine
       imagePullPolicy: Always
       command:
         - sh

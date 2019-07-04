@@ -13,4 +13,4 @@ spec:
   ports:
     - port: ${PORT}
   selector:
-    app: ${CONTEXT}-${BRANCH_HASH}
+    app: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
