@@ -4,13 +4,13 @@
     entrypoint: [""]
   before_script:
   - /apps/create-kubeconfig.sh
-  - envsubst < k8s/api/deployment.yml > k8s/api/deployment-emjpm.yml
-  - envsubst < k8s/api/service.yml > k8s/api/service-emjpm.yml
-  - envsubst < k8s/api/ingress.yml > k8s/api/ingress-emjpm.yml
+  - envsubst < ./.k8s/api/deployment.yml > ./deployment.yml
+  - envsubst < ./.k8s/api/service.yml > ./service.yml
+  - envsubst < ./.k8s/api/ingress.yml > ./ingress.yml
   script:
-  - kubectl apply -f k8s/api/deployment-emjpm.yml
-  - kubectl apply -f k8s/api/service-emjpm.yml
-  - kubectl apply -f k8s/api/ingress-emjpm.yml
+  - kubectl apply -f ./deployment.yml
+  - kubectl apply -f ./service.yml
+  - kubectl apply -f ./ingress.yml
   allow_failure: false
 
 
@@ -20,11 +20,11 @@
     entrypoint: [""]
   before_script:
   - /apps/create-kubeconfig.sh
-  - envsubst < k8s/api/deployment-prod.yml > k8s/api/deployment-emjpm.yml
-  - envsubst < k8s/api/service.yml > k8s/api/service-emjpm.yml
-  - envsubst < k8s/api/ingress-prod.yml > k8s/api/ingress-emjpm-prod.yml
+  - envsubst < ./.k8s/api/deployment-prod.yml > ./deployment.yml
+  - envsubst < ./.k8s/api/service.yml > ./service.yml
+  - envsubst < ./.k8s/api/ingress-prod.yml > ./ingress.yml
   script:
-  - kubectl apply -f k8s/api/deployment-emjpm.yml
-  - kubectl apply -f k8s/api/service-emjpm.yml
-  - kubectl apply -f k8s/api/ingress-emjpm-prod.yml
+  - kubectl apply -f ./deployment.yml
+  - kubectl apply -f ./service.yml
+  - kubectl apply -f ./ingress.yml
   allow_failure: false
