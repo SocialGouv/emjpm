@@ -1,8 +1,9 @@
 #
 
 include:
-  - /.k8s/app/.k8s-deploy-app.yml
   - /.k8s/api/.k8s-deploy-api.yml
+  - /.k8s/app/.k8s-deploy-app.yml
+  - /.k8s/postgres/.k8s-deploy-postgres.yml
 
 #
 
@@ -76,4 +77,29 @@ Deploy Api (dev):
 Deploy Api (incubateur):
   extends: .k8s-deploy-api-prod
   <<: *deploy_api
+  <<: *incubateur_stage
+
+#
+#
+#
+
+.deploy-postgres: &deploy_postgres
+  <<: *deploy_stage
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: postgres
+    EMJPM_REGISTRY: $CI_REGISTRY_IMAGE
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
+    PORT: 5432
+
+#
+
+Deploy postgres (dev):
+  extends: .k8s-deploy-postgres-dev
+  <<: *deploy_postgres
+  <<: *dev_stage
+
+Deploy postgres (incubateur):
+  extends: .k8s-deploy-postgres-prod
+  <<: *deploy_postgres
   <<: *incubateur_stage

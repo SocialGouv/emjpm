@@ -2,14 +2,14 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: emjpm-init-postgres${HASH_BRANCH_NAME}
+  name: emjpm-init-postgres-${BRANCH_HASH}
   labels:
-    app: emjpm-init-postgres${HASH_BRANCH_NAME}
-    branch: emjpm${HASH_BRANCH_NAME}
+    app: emjpm-init-postgres-${BRANCH_HASH}
+    branch: emjpm-${BRANCH_HASH}
 spec:
   containers:
   - image: postgres:11-alpine
-    name: emjpm-init-postgres${HASH_BRANCH_NAME}
+    name: emjpm-init-postgres-${BRANCH_HASH}
     command: ["sh"]
     args: ["/app/postgres-init.sh"]
     env:

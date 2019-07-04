@@ -1,24 +1,27 @@
 ---
-apiVersion: extensions/v1beta1
 kind: Deployment
+apiVersion: extensions/v1beta1
 metadata:
-  name: postgres${HASH_BRANCH_NAME}
+  name: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: postgres${HASH_BRANCH_NAME}
+        app: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
+        git/branch: ${BRANCH_NAME}
+        git/commit: ${COMMIT}
+        gitlab/job: "${JOB_ID}"
     spec:
       containers:
-      - name: postgres
-        image: ${EMJPM_REGISTRY}/postgres:${IMAGE_TAG}
-        imagePullPolicy: "IfNotPresent"
-        ports:
-        - containerPort: 5432
-        volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: postgredb
+        - image: ${IMAGE_NAME}:${IMAGE_TAG}
+          name: ${K8S_NAMESPACE}-${CONTEXT}
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb
       volumes:
-      - name: postgredb
-        emptyDir: {}
+        - name: postgredb
+          emptyDir: {}

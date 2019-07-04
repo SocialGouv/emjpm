@@ -34,6 +34,7 @@ else
   export FRONTEND_HOST="${BRANCH_HASH}.emjpm.${ENVIRONMENT}.social.gouv.fr";
   export API_HOST="${BRANCH_HASH}.api.emjpm.${ENVIRONMENT}.social.gouv.fr";
   export API_URL="http://${API_HOST}"
+  export POSTGRES_HOST="${K8S_NAMESPACE}-posgres-${BRANCH_HASH}"
 fi
 
 #
