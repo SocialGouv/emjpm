@@ -11,6 +11,8 @@
   image:
     name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
     entrypoint: [""]
+  before_script:
+    - /apps/create-kubeconfig.sh
 
 #
 
