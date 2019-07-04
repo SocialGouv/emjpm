@@ -53,3 +53,5 @@ Delete useless k8s objects:
   script:
     - source ./.gitlab-ci/env.sh
     - sh /entrypoint.sh
+  only:
+    - master
