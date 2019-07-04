@@ -28,10 +28,12 @@ if [[ -n "${PRODUCTION+x}" ]]; then
   export BRANCH_HASH=prod;
   #
   export FRONTEND_HOST="emjpm.${ENVIRONMENT}.social.gouv.fr";
+  export FRONTEND_URL="https://${FRONTEND_HOST}"
   export API_HOST="api.emjpm.${ENVIRONMENT}.social.gouv.fr";
   export API_URL="https://${API_HOST}"
 else
   export FRONTEND_HOST="${BRANCH_HASH}.emjpm.${ENVIRONMENT}.social.gouv.fr";
+  export FRONTEND_URL="http://${FRONTEND_HOST}"
   export API_HOST="${BRANCH_HASH}.api.emjpm.${ENVIRONMENT}.social.gouv.fr";
   export API_URL="http://${API_HOST}"
   export POSTGRES_HOST="${K8S_NAMESPACE}-posgres-${BRANCH_HASH}"
