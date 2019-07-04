@@ -8,7 +8,7 @@ exports.seed = knex => {
     .split("\n")
     .slice(1)
     .map(row => {
-      const [code_postal, latitude, longitude] = row.split(";");
+      const [, code_postal, latitude, longitude] = row.split(";");
       return {
         code_postal,
         latitude,
