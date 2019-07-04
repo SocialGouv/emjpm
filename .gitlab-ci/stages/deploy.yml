@@ -1,5 +1,11 @@
 #
 
+include:
+  - /.k8s/app/.k8s-deploy-app.yml
+  - /.k8s/api/.k8s-deploy-api.yml
+
+#
+
 .deploy_stage: &deploy_stage
   stage: "Deploy"
   dependencies: []
@@ -25,41 +31,57 @@
   before_script:
     - source ./.gitlab-ci/env.sh
 
-.k8s-fontend-depoyment:
-  extends: .base_docker_kube_image_stage
-  script:
-    - /apps/create-kubeconfig.sh
-    #
-    - envsubst < ./.k8s/frontend/deployment.yml > ./deployment.yml
-    - envsubst < ./.k8s/frontend/service.yml > ./service.yml
-    - envsubst < ./.k8s/frontend/ingress.yml > ./ingress.yml
-    #
-    - kubectl apply -f ./deployment.yml
-    - kubectl apply -f ./service.yml
-    - kubectl apply -f ./ingress.yml
-    #
-    - echo "frontend available at - ${FRONTEND_HOST}"
 #
 #
 #
 
 .deploy-frontend: &deploy_frontend
   <<: *deploy_stage
-  extends: .k8s-fontend-depoyment
+  <<: *docker_kube_dev_stage
   variables:
     <<: *deploy_stage_variables
     CONTEXT: app
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     PORT: 80
+  after_script:
+    - echo "Frontend available at - ${FRONTEND_HOST}"
 
 #
 
 Deploy App (dev):
+  extends: .k8s-deploy-app-dev
   <<: *deploy_frontend
+  <<: *dev_stage
+
+Deploy App (incubateur):
+  extends: .k8s-deploy-app-prod
+  <<: *deploy_frontend
+  <<: *incubateur_stage
+
+#
+#
+#
+
+.deploy-api: &deploy_api
+  <<: *deploy_stage
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: api
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+    PORT: 4000
+  after_script:
+    - echo "Api available at - ${API_HOST}"
+
+#
+
+Deploy Api (dev):
+  extends: .k8s-deploy-api-dev
+  <<: *deploy_api
   <<: *dev_stage
   <<: *docker_kube_dev_stage
 
-Deploy App (incubateur):
-  <<: *deploy_frontend
+Deploy Api (incubateur):
+  extends: .k8s-deploy-api-prod
+  <<: *deploy_api
   <<: *incubateur_stage
   <<: *docker_kube_dev_stage
