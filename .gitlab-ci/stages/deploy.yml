@@ -40,6 +40,7 @@ include:
   <<: *docker_kube_dev_stage
   variables:
     <<: *deploy_stage_variables
+    CI_DEBUG_TRACE: "true"
     CONTEXT: app
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     PORT: 80
