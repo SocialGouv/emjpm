@@ -26,18 +26,12 @@ include:
     name: dev.factory
   only:
     - branches
-
-.docker_kube_dev_stage: &docker_kube_dev_stage
-  before_script:
-    - source ./.gitlab-ci/env.sh
-
 #
 #
 #
 
 .deploy-frontend: &deploy_frontend
   <<: *deploy_stage
-  <<: *docker_kube_dev_stage
   variables:
     <<: *deploy_stage_variables
     CI_DEBUG_TRACE: "true"
@@ -79,10 +73,8 @@ Deploy Api (dev):
   extends: .k8s-deploy-api-dev
   <<: *deploy_api
   <<: *dev_stage
-  <<: *docker_kube_dev_stage
 
 Deploy Api (incubateur):
   extends: .k8s-deploy-api-prod
   <<: *deploy_api
   <<: *incubateur_stage
-  <<: *docker_kube_dev_stage
