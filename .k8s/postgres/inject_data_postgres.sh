@@ -1,6 +1,6 @@
 #!/bin/sh
 
-INJECT_DATA_POSTGRES_POD_STATUS=$(kubectl get pod "${K8S_NAMESPACE}"-dataset"$1")
+INJECT_DATA_POSTGRES_POD_STATUS=$(kubectl get pod "${K8S_NAMESPACE}"-dataset-"$1")
 
 # Check if emjpm-dataset pod exists
 if [ ! "$INJECT_DATA_POSTGRES_POD_STATUS" ]
