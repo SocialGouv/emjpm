@@ -29,11 +29,11 @@ if [[ -n "${PRODUCTION+x}" ]]; then
   #
   export FRONTEND_HOST="emjpm.${ENVIRONMENT}.social.gouv.fr";
   export API_HOST="api.emjpm.${ENVIRONMENT}.social.gouv.fr";
-  export API_URL="http://${API_HOST}"
+  export API_URL="https://${API_HOST}"
 else
   export FRONTEND_HOST="${BRANCH_HASH}.emjpm.${ENVIRONMENT}.social.gouv.fr";
   export API_HOST="${BRANCH_HASH}.api.emjpm.${ENVIRONMENT}.social.gouv.fr";
-  export API_URL="https://${API_HOST}"
+  export API_URL="http://${API_HOST}"
 fi
 
 #
