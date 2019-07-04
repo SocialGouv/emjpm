@@ -9,6 +9,8 @@ git:
 _environments:
   - &github_keys
     - secure: "LZyPUNRfrmjaET9B+6on3gKDhSA3iECxYT4q37AVfzzIuumXhm2QkcYGegf2oY5vcZzucJDRSpvtZG+P2pW3mYibsYoPXBJQ0X2hg9EzSnk7cw/18yUmVOb/1ARXc+Cqs10a7k3A+55UoB3ZAyDkNZ+8p5C0DlIrGkvQiIPUB1mA8imAGjaORDdZJSY244Gm3VVnbifgtZUsWyzJ3/V5/ss6sR++jMkOMwLC15X56LPNQnGJkeLGS095U2D7AopF7NcgzD3Qs8a1xoKno29+QnswwtGUVZ2LtT8xqiOh0hp6ypY+Mp6NYcP/1OXxUC8ld+SRwmcS5ZtogUsgI+1Obhvdtk2jyqXgdy0MvEvCXa1OE/HsmvH7loegCxHsELdJ31LZQ+UWGOm3R2+PZ7Ts4qGny40f0bFOJe8bI+8vWiwybW0kvBsG+DEZV+uDVvMw8y+3yxOfNv628od+0D5XfkhgDSR1Y12S7q9vduKJkxYqPqFeCs6yvtV0xxhdJLiJZ8s2zQerCTTMVtyhyGZU4ARkoXrCQTH5IiZltgs6ch0SrLQZdm9fG7YeGi1tpH03S6e4HLJa+dCarscFKOrwBoBJa+yqUUYTTXQJShLqSeWYj5ebozvaZxtPpi1EL6I+BUi2kKn3bZUqmwLv9hU+ladyAwfCQV578C4sm9gVpQ8="
+  - &gitlab_keys
+    - secure: "ERLPGvg90Gsrx13sb4F0d6ut9OuT64zXDTugqVWjXIlK5EkRbaiJf10Q+H8JpPx6/exa2pKioxVE0VJk9g17GNr3gvTBbGGPITBRF90ftE1t3IzkS456x8oBjvii1+YSE9sDr4wJcNyL9n6izR7/6H7+1fm6GkTPEs3TvVOArFbOcKJlbvTk1IEeTE67wG0MbmTXmoQTGzKNcjHhUYfNJZ7H4sp5d6ZFH9lD/3lQz9mjL1pJYaGz9HC+lwcrhcMsBoeHDi5n2QRV6h5QKu5CdN42IK5XnvfAS5a0bU5URFfZmOngnRMCw2ndNrZUHeYRnGtKAGR9ejCrBJSbNbeOsKybJfk3/swJKT9aFnqG5l0v+IuV9Uqu1sVoN2VdDHVD3TIaAmkEqHrISXn0H6PYvp/uuIzlKIcyCZv9h5jGWrEJUJHOBYWlMMBsGhmxaZE4w6xt/cErX/89ofgRjqErhOWn9OfXRNjhXlda+hX9TTDMbsRB449EGUwXBIDk8KwTndW+qBgY2b4A5zNOWcD4F8DCEIBexlWj/Wd5eEUEwvMmHdh7ScTZ4e4Yh3j2Knhi+hOE6xN01Q5brWQbX40oMfQfOVOUe7ytj+i7pjp5QyyLIHSZX265wZ2umnOkbEDZB0snoruTYGJDHOA9lFMizAFLMAXhpUeAAyEFMzKhC5I="
   - &docker_keys
     - secure: "WGQEsSvoMg7arBJDMOYJfS3U0/7jIsaQIMRTg45T/xQXOZK/7xdl0vcUl0H6B9IuMH3WGlFEriRh9lLbnbXqJKODvigGU59zvo9o9PstWSQpdoTzUnaUdrZmvV8zzJmjUIcXnu5EHpMZO8b5Wf1ND1d781IDAdHFoix+OfLCEraIGl6ZBjLZDDV+/vCebqnNVH3RnwAv4vds8/owEN+bucbjoMBWG5lu9sQJFrphljZBikY56oofCHcHzmmyc/0o9qCJfgYMjUYkcbVX/CkMa5nZfUM19nVXt291a/9LWmBHdE81pP0uJ2aapnDne3bq7wQ9Dwvzuh4OsCpWimAQABRgxP700F+Wuo8jgKIG3cD+4iRgm1QHwWtKyx+tRy39tT4IedIKnEq/+XGDGj5ANI/QOhiWY8q9tZNXbuf3ipvWXLmi159vJlbViE9j73LGT2p1zz9cQTELnMC7+E/y8GLgXQQopRbWXQSjKj4A8pQEB+6y337Z8S/XlKETxLb/u/WByZsKVMi37PqJsc14bGgp7pJxc0Ec7YNVY0lsXWi/F+bpNynUj9rPkTDYyHf9MlkMSyfLckIRVux/74Tq9QYN6l/Ldu1ghcEn7q3it9bUZtLgwBNTDcZ4Gc/24ygSiD7jw6uJV3NBqJvDBy2if/Sj6Fqc/YKQ8YRp7uVrAVA="
     - secure: "m80Um5bwdEjFYPx8VrgGe/xUKQN8zDmJANCwAAm58gRQkPRyGwMwvYMqejo+mtvadrY/nhvxKi6FBexRAkrdrONT+hmuElwN/X4TCHaws4plvBGMnLtaVpfWejgcJnvEFFBp6zm95h783t1+RqPnomt//dT29IA6xAiOymhpVi1n2LcNCTA813FzetbkIEZTCPHagzMscKNECXAjZ53D68bhu0aM6jsN2Y/QoeLkNNd7HULUxvoNz5ykVc6A4ddfxIKMZt8rgM7HZvXq5Q5wB/nzF2oq3Ybo1T+IN+ZynNJRrK9EjILSjHVOMA+jIIDvzoY6FV+Kmw6UQTqwK6+2ESVtNTHqgmL9zMgBumK7mMssewB2544rBEH7sQtSkGTbGpdQRci9EmLq0FD8Cj+prLsMCrgQFii/0yqZuR/s+7mGISOM0l+6rwV/69mJkJT4H4vFyXXWRic5evbJ5V3lZfWTG+ftjxKy/k5pj0Uq5OQp4naD2ylcrBmBCBvlrQwNEhy1JArDIfWsCWY1uzKtjOf6W1BF4bMswdTDn8ZuwVNPiRCrZcij2i/FjF91eVDEeeNcRetnJzghVV6iYPrDwA4Eno3MV6bnL9/WodQjHzhlBo4wQQIoYY4ybkTe6PptV3loHTfnbp7zOgJkxuHGLCqKWW24ho4JcmK990RN+OY="
@@ -121,6 +123,25 @@ jobs:
         - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG}.git
       script:
         - GH_TOKEN=${GITHUB_TOKEN} yarn lerna version ${LERNA_ARGS:=--yes}
+    #
+    #
+    #
+
+    - stage: Go Prod
+      if: env(PRODUCTION)
+      name: A tag is going to production 🏭
+      branches:
+        only:
+        - /v.*/
+      env: *gitlab_keys
+      script:
+        >-
+          curl -X POST
+          -F token=${GITLAB_TOKEN}
+          -F ref=${TRAVIS_BRANCH}
+          -F "variables[PRODUCTION]=true"
+          https://gitlab.factory.social.gouv.fr/api/v4/projects/50/trigger/pipeline
+
     #
     #
     #
