@@ -1,6 +1,4 @@
-ARG TAG_BASE_IMAGE=master
-ARG REGISTRY=socialgouv/emjpm:master
-ARG BASE_IMAGE=${REGISTRY}:${TAG_BASE_IMAGE}
+ARG BASE_IMAGE=socialgouv/emjpm:master
 
 FROM ${BASE_IMAGE} as emjpm-base-image
 

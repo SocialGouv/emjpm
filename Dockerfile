@@ -17,7 +17,7 @@ COPY ./yarn.lock /app/yarn.lock
 WORKDIR /app
 
 # Fist run without postinstall
-RUN yarn --frozen-lockfile --ignore-scripts
+RUN yarn --frozen-lockfile --ignore-scripts --cache-folder /dev/shm/yarn
 
 COPY ./packages/jest-environment-knex /app/packages/jest-environment-knex
 COPY ./packages/knex /app/packages/knex
@@ -25,7 +25,7 @@ COPY ./packages/api /app/packages/api
 COPY ./packages/app /app/packages/app
 
 # Second run with postinstall
-RUN yarn --frozen-lockfile && yarn cache clean
+RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
 
 ARG API_URL=${API_URL:-%%API_URL%%}
 ARG SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN:-%%SENTRY_PUBLIC_DSN%%}
