@@ -1,12 +1,9 @@
-.deploy-emjpm-api-k8s-dev:
+.k8s-deploy-api-dev:
   image:
     name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
     entrypoint: [""]
   before_script:
   - /apps/create-kubeconfig.sh
-  - HASH_BRANCH_NAME=$(printf "$CI_COMMIT_REF_NAME" | sha1sum | cut -c1-5)
-  - export HASH_BRANCH_INGRESS=$HASH_BRANCH_NAME-
-  - export HASH_BRANCH_NAME=-$HASH_BRANCH_NAME
   - envsubst < k8s/api/deployment.yml > k8s/api/deployment-emjpm.yml
   - envsubst < k8s/api/service.yml > k8s/api/service-emjpm.yml
   - envsubst < k8s/api/ingress.yml > k8s/api/ingress-emjpm.yml
@@ -17,7 +14,7 @@
   allow_failure: false
 
 
-.deploy-emjpm-api-k8s-prod:
+.k8s-deploy-api-prod:
   image:
     name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
     entrypoint: [""]
