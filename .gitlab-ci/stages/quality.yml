@@ -16,29 +16,27 @@
     #
     - cd /app
 
-
 ###########################################
 ###                LINT                 ###
 ###########################################
-
 
 Lint @emjpm/api:
   <<: *quality_stage
   <<: *master_based_stage
   script:
-  - yarn workspace @emjpm/api lint
+    - yarn workspace @emjpm/api lint
 
 Lint @emjpm/app:
   <<: *quality_stage
   <<: *master_based_stage
   script:
-  - yarn workspace @emjpm/app lint
+    - yarn workspace @emjpm/app lint
 
 Lint @emjpm/knex:
   <<: *quality_stage
   <<: *master_based_stage
   script:
-  - yarn workspace @emjpm/knex lint
+    - yarn workspace @emjpm/knex lint
 
 Lint @optional/e2e:
   <<: *quality_stage
@@ -57,13 +55,11 @@ Lint jest-environment-knex:
   <<: *quality_stage
   <<: *master_based_stage
   script:
-  - yarn workspace jest-environment-knex lint
-
+    - yarn workspace jest-environment-knex lint
 
 ###########################################
 ###                TESTS                ###
 ###########################################
-
 
 Test @emjpm/api:
   <<: *quality_stage
@@ -91,7 +87,7 @@ Test @emjpm/api:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
   script:
-    - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
+    - npx wait-for-postgres --host localhost --port 5434 --username=${POSTGRES_USER} --password=${POSTGRES_PASSWORD}
     - yarn workspace @emjpm/api test --coverage
 
 Test @emjpm/app:
@@ -104,19 +100,19 @@ Test @emjpm/app:
     GIT_STRATEGY: none
     JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/app/coverage
   script:
-  - yarn workspace @emjpm/app test --coverage
+    - yarn workspace @emjpm/app test --coverage
   after_script:
-  - CI_PROJECT_DIR=/app npx codecov -F app
+    - CI_PROJECT_DIR=/app npx codecov -F app
 
 Test @emjpm/knex:
   <<: *quality_stage
   <<: *master_based_stage
   services:
-  - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
-    command: ["-p", "5434"]
+    - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
+      command: ["-p", "5434"]
   variables:
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
   script:
-  - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
-  - yarn workspace @emjpm/knex test
+    - npx wait-for-postgres --host localhost --port 5434 --username=${POSTGRES_USER} --password=${POSTGRES_PASSWORD}
+    - yarn workspace @emjpm/knex test
