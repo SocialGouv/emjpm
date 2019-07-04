@@ -6,7 +6,6 @@ data:
   inject-dataset.sh: |
     #!/bin/bash
     cd /app
-    yarn install
     yarn workspace @emjpm/knex run migrate
     yarn workspace @emjpm/knex run seeds
   postgres-init.sh: |

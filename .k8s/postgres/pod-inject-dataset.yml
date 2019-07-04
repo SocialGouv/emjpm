@@ -18,7 +18,7 @@ spec:
         - name: DATABASE_URL
           value: "psql://${POSTGRES_API_USER}:${POSTGRES_API_USER_PASSWORD}@{POSTGRES_HOST}/emjpm_dev"
         - name: NODE_ENV
-          value: "development"
+          value: "test"
       volumeMounts:
         - name: dataset
           mountPath: /dataset
