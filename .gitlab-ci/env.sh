@@ -20,7 +20,6 @@ if [[ "${BRANCH_NAME}" = "master" ]]; then
 fi
 
 if [[ -n "${COMMIT_TAG}" ]]; then
-  export ENVIRONMENT=incubateur;
   export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
 fi
 
