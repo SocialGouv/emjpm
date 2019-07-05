@@ -1,11 +1,12 @@
 const passport = require("../auth/local");
 const rasha = require("rasha");
+
 const jwtConfig = require("../config/jwt");
 const { validationResult } = require("express-validator");
-
+const { User } = require("../db/schema");
 const { updateLastLogin } = require("../db/queries/users");
-
 const { addDataLogs } = require("../db/queries/logsData");
+const { errorHandler } = require("../db/errors");
 
 /**
  * Sends the JWT key set
@@ -29,15 +30,15 @@ exports.getJwks = async (req, res) => {
  * Sign in using username and password and returns JWT
  */
 exports.postLogin = async (req, res, next) => {
-  const { errors } = validationResult(req);
+  const errors = validationResult(req);
 
-  if (errors.length) {
+  if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors });
   }
 
   passport.authenticate("local", (err, user) => {
     if (err) {
-      return handleResponse(res, 400, { error: err });
+      return handleResponse(res, 400, { errors: errors.array() });
     }
     if (user) {
       updateLastLogin(user.id).then(() => {
@@ -50,6 +51,36 @@ exports.postLogin = async (req, res, next) => {
       });
     }
   })(req, res, next);
+};
+
+/**
+ * POST /signup
+ * Create a new local account
+ */
+exports.postSignup = async (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors });
+  }
+
+  try {
+    const user = await User.query()
+      .allowInsert("[username, password]")
+      .insert({
+        username: req.body.username,
+        password: req.body.password,
+        role: req.body.password,
+        nom: req.body.password,
+        prenom: req.body.password,
+        email: req.body.password
+      });
+
+    return res.json({ success: true });
+  } catch (err) {
+    errorHandler(err, res);
+    return;
+  }
 };
 
 // Webhook can be used with hasura
