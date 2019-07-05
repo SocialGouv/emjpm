@@ -140,7 +140,7 @@ jobs:
           -F token=${GITLAB_TOKEN}
           -F ref=${TRAVIS_BRANCH}
           -F "variables[PRODUCTION]=true"
-          https://gitlab.factory.social.gouv.fr/api/v4/projects/50/trigger/pipeline
+          https://gitlab.factory.social.gouv.fr/api/v4/projects/34/trigger/pipeline
 
     #
     #
