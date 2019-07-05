@@ -130,6 +130,30 @@ $ CONVENTIONAL_GITHUB_RELEASER_TOKEN==************ npx conventional-github-relea
 # You might want to add a Gif to your release to make it groovy ;)
 ```
 
+## Deployment policy
+
+All branches and tags are automaticly deployed
+See https://github.com/SocialGouv/work-in-france/deployments
+
+### Auto
+
+Trigger a custom build on [Travis](https://travis-ci.com/SocialGouv/emjpm) (in the "More options" right menu) on the tag `v*` you  with a custom config:
+
+```yml
+env:
+  global:
+    - PRODUCTION=true
+```
+
+### Manual
+
+```sh
+# Run the k8s files
+$ kubectl apply -f ./.k8s/frontend/deployment.yml
+$ kubectl apply -f ./.k8s/frontend/service.yml
+$ kubectl apply -f ./.k8s/frontend/ingress.yml
+```
+
 ## Branch name
 
 You need to name your branch with the commit lint convention
