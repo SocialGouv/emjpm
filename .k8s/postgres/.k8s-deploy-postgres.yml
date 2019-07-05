@@ -14,8 +14,8 @@
 .k8s-deploy-postgres-prod:
   extends: .base_docker_kube_image_stage
   script:
-    - envsubst < k8s/postgres/pod-inject-dataset-prod.yml > ./pod-inject-dataset.yml
-    - envsubst < k8s/postgres/pod-init-postgres-prod.yml > ./pod-init-postgres.yml
+    - envsubst < ./.k8s/postgres/pod-inject-dataset-prod.yml > ./pod-inject-dataset.yml
+    - envsubst < ./.k8s/postgres/pod-init-postgres-prod.yml > ./pod-init-postgres.yml
     #
     - kubectl apply -f ./.k8s/postgres/configmap.yml
     - kubectl apply -f ./pod-init-postgres.yml
