@@ -19,5 +19,5 @@
     "eslint-plugin-cypress": "^2.2.1",
     "prettier": "^1.17.1"
   },
-  "version": "23.4.3"
+  "version": "23.4.4"
 }
