@@ -3,6 +3,10 @@ const rasha = require("rasha");
 const jwtConfig = require("../config/jwt");
 const { validationResult } = require("express-validator");
 
+const { updateLastLogin } = require("../db/queries/users");
+
+const { addDataLogs } = require("../db/queries/logsData");
+
 /**
  * Sends the JWT key set
  */
@@ -36,7 +40,14 @@ exports.postLogin = async (req, res, next) => {
       return handleResponse(res, 400, { error: err });
     }
     if (user) {
-      handleResponse(res, 200, user.getUser());
+      updateLastLogin(user.id).then(() => {
+        addDataLogs({
+          user_id: user.id,
+          action: "connexion",
+          result: "success"
+        });
+        handleResponse(res, 200, user.getUser());
+      });
     }
   })(req, res, next);
 };
