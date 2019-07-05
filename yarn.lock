@@ -9154,6 +9154,13 @@ object.values@^1.0.4, object.values@^1.1.0:
     function-bind "^1.1.1"
     has "^1.0.3"
 
+objection-db-errors@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/objection-db-errors/-/objection-db-errors-1.1.1.tgz#27ebd44bfc0a6dae112f65a830a86947c670704b"
+  integrity sha512-WklFhl7ckK+9RQz+2AtLK21KIx+qgchwN6e8w2vblxC9A7SDcWmGXKaGw590HKaoURzdjaBnBeu//JgQeOHWGw==
+  dependencies:
+    db-errors "^0.2.1"
+
 objection@^1.6.9:
   version "1.6.9"
   resolved "https://registry.yarnpkg.com/objection/-/objection-1.6.9.tgz#deb067e0ba938bce22a4a2691b93d9df68346748"

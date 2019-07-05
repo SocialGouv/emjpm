@@ -27,6 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.16.5",
     "nodemailer": "^6.2.1",
+    "objection-db-errors": "^1.1.1",
     "passport": "^0.4.0",
     "passport-http-bearer": "^1.0.1",
     "passport-jwt": "^4.0.0",
