@@ -29,8 +29,12 @@ include:
   environment:
     name: dev.factory
   only:
-    - branches
-    - tags
+    refs:
+      - branches
+      - tags
+  except:
+    variables:
+      - $PRODUCTION
 #
 #
 #
