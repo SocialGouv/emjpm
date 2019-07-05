@@ -27,7 +27,7 @@ exports.getJwks = async (req, res) => {
 exports.postLogin = async (req, res, next) => {
   const { errors } = validationResult(req);
 
-  if (errors) {
+  if (errors.length) {
     return res.status(400).json({ errors: errors });
   }
 
