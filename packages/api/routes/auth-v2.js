@@ -23,7 +23,6 @@ router.post(
   ],
   userController.postSignup
 );
-router.get("/webhook", userController.getWebhook);
 router.get("/jwks", userController.getJwks);
 
 module.exports = router;

@@ -85,6 +85,7 @@ class User extends Model {
     };
     const claim = {
       name: this.username,
+      id: this.id,
       // iat: Math.floor(Date.now() / 1000),
       "https://hasura.io/jwt/claims": this.getHasuraClaims()
     };
