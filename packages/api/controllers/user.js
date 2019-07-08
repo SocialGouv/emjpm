@@ -3,7 +3,7 @@ const rasha = require("rasha");
 
 const jwtConfig = require("../config/jwt");
 const { validationResult } = require("express-validator");
-const { User } = require("../db/schema");
+const { User, Mandataire, Service, UserTi } = require("../db/schema");
 const { updateLastLogin } = require("../db/queries/users");
 const { addDataLogs } = require("../db/queries/logsData");
 const { errorHandler } = require("../db/errors");
@@ -66,16 +66,65 @@ exports.postSignup = async (req, res) => {
 
   try {
     // eslint-disable-next-line
+    const service =
+      req.body.role === "service" &&
+      (await Service.query()
+        .allowInsert(
+          "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
+        )
+        .insert({
+          etablissement: req.body.etablissement,
+          nom: req.body.nom,
+          prenom: req.body.prenom,
+          email: req.body.email,
+          telephone: req.body.telephone,
+          adresse: req.body.adresse,
+          code_postal: req.body.code_postal,
+          ville: req.body.ville,
+          dispo_max: req.body.dispo_max
+        }));
+
     const user = await User.query()
-      .allowInsert("[username, password]")
+      .allowInsert("[username, password,role,nom,prenom,email]")
       .insert({
         username: req.body.username,
         password: req.body.password,
-        role: req.body.password,
-        nom: req.body.password,
-        prenom: req.body.password,
-        email: req.body.password
+        role: req.body.role,
+        nom: req.body.nom,
+        prenom: req.body.prenom,
+        cabinet: req.body.role === "ti" ? req.body.cabinet : null,
+        email: req.body.email,
+        service_id: service ? service.id : null
       });
+
+    req.body.role === "individue" ||
+      (req.body.role === "prepose" &&
+        (await Mandataire.query()
+          .allowInsert(
+            "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
+          )
+          .insert({
+            user_id: user.id,
+            etablissement: req.body.etablissement,
+            telephone: req.body.telephone,
+            telephone_portable: req.body.telephone_portable,
+            adresse: req.body.adresse,
+            code_postal: req.body.code_postal,
+            ville: req.body.ville
+          })));
+
+    await Promise.all(
+      req.body.tis.map(ti_id =>
+        UserTi.query()
+          .allowInsert(
+            "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
+          )
+          .insert({
+            user_id: user.id,
+            ti_id
+          })
+      )
+    );
 
     return res.json({ success: true });
   } catch (err) {
