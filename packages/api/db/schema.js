@@ -25,6 +25,16 @@ class Role extends Model {
   }
 }
 
+class Tis extends Model {
+  static get tableName() {
+    return "tis";
+  }
+
+  static get idColumn() {
+    return "id";
+  }
+}
+
 class User extends Model {
   static get tableName() {
     return "users";
@@ -46,6 +56,18 @@ class User extends Model {
             to: "user_role.role_id"
           },
           to: "role.id"
+        }
+      },
+      tis: {
+        relation: Model.ManyToManyRelation,
+        modelClass: UserTi,
+        join: {
+          from: "users.id",
+          through: {
+            from: "user_tis.user_id",
+            to: "user_tis.ti_id"
+          },
+          to: "tis.id"
         }
       }
     };
@@ -111,10 +133,119 @@ class User extends Model {
       required: ["username"],
       properties: {
         id: { type: "integer" },
-        username: { type: "string", minLength: 1, maxLength: 255 }
+        username: { type: "string", minLength: 1, maxLength: 255 },
+        nom: { type: "string" },
+        prenom: { type: "string" },
+        email: { type: "string" },
+        cabinet: { type: "string" }
       }
     };
   }
 }
 
-module.exports = { User, Role };
+class Mandataire extends Model {
+  static get tableName() {
+    return "mandataires";
+  }
+
+  static get idColumn() {
+    return "id";
+  }
+
+  static get jsonSchema() {
+    return {
+      type: "object",
+      required: ["username"],
+      properties: {
+        etablissement: { type: "string" },
+        id: { type: "integer" },
+        genre: {
+          type: "string"
+        },
+        telephone: { type: "string" },
+        telephone_portable: {
+          type: "string"
+        },
+        adresse: { type: "string" },
+        code_postal: { type: "string" },
+        ville: { type: "string" },
+        dispo_max: {
+          type: "integer"
+        },
+        secretariat: {
+          type: "boolean"
+        },
+        zip: {
+          type: "string"
+        }
+      }
+    };
+  }
+  static get relationMappings() {
+    return {
+      users: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: User,
+        join: {
+          from: "mandataires.user_id",
+          to: "users.id"
+        }
+      }
+    };
+  }
+}
+
+class Service extends Model {
+  static get tableName() {
+    return "services";
+  }
+
+  static get idColumn() {
+    return "id";
+  }
+
+  static get jsonSchema() {
+    return {
+      type: "object",
+      required: ["username"],
+      properties: {
+        id: { type: "integer" },
+        etablissement: { type: "string" },
+        telephone: { type: "string" },
+        adresse: { type: "string" },
+        code_postal: { type: "string" },
+        ville: { type: "string" },
+        dispo_max: {
+          type: "integer"
+        },
+        zip: {
+          type: "string"
+        }
+      }
+    };
+  }
+}
+
+class UserTi extends Model {
+  static get tableName() {
+    return "user_tis";
+  }
+
+  static get idColumn() {
+    return "id";
+  }
+
+  static get jsonSchema() {
+    return {
+      type: "object",
+      required: ["user_id", "ti_id"],
+      properties: {
+        id: { type: "integer" },
+        user_id: { type: "integer" },
+        ti_id: { type: "integer" }
+      }
+    };
+  }
+}
+
+module.exports = { User, Role, Mandataire, Service, UserTi, Tis };
