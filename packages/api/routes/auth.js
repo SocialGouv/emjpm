@@ -5,6 +5,7 @@ const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 const uid = require("rand-token").uid;
 const Sentry = require("@sentry/node");
+const jwtConfig = require("../config/jwt");
 
 const authHelpers = require("../auth/_helpers");
 const passport = require("../auth/local");
@@ -110,7 +111,7 @@ router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
             };
             const token = jwt.sign(
               JSON.parse(JSON.stringify(user)),
-              process.env.JWT_KEY || "emjpm-jwtkey",
+              jwtConfig.key || "emjpm-jwtkey",
               signOptions
             );
             return res.status(200).json({
