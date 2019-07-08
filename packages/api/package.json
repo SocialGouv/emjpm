@@ -8,7 +8,7 @@
     "dev": "nodemon --inspect app.js",
     "test:mocha": "NODE_ENV=test mocha --timeout 10000 --exit",
     "test": "NODE_ENV=test jest --verbose",
-    "lint": "eslint __test__ auth db email routes scripts app.js",
+    "lint": "eslint __test__ auth db email routes scripts controllers db app.js",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",

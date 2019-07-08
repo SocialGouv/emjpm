@@ -57,7 +57,7 @@ exports.postLogin = async (req, res, next) => {
  * POST /signup
  * Create a new local account
  */
-exports.postSignup = async (req, res, next) => {
+exports.postSignup = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -65,6 +65,7 @@ exports.postSignup = async (req, res, next) => {
   }
 
   try {
+    // eslint-disable-next-line
     const user = await User.query()
       .allowInsert("[username, password]")
       .insert({
