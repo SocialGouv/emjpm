@@ -85,7 +85,7 @@ class User extends Model {
   }
 
   async $beforeUpdate() {
-    await $beforeInsert();
+    await super.$beforeInsert();
   }
 
   verifyPassword(password, callback) {
