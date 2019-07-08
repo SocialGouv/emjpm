@@ -1,6 +1,5 @@
 const passport = require("passport");
 const { Strategy: LocalStrategy } = require("passport-local");
-const { Strategy: BearerStrategy } = require("passport-http-bearer");
 
 const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
@@ -9,7 +8,6 @@ const knex = require("../db/knex");
 const jwtConfig = require("../config/jwt");
 
 const { User } = require("../db/schema");
-const authHelpers = require("./_helpers");
 
 const init = require("./passport");
 
@@ -56,14 +54,13 @@ passport.use(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey:
-        jwtConfig.key ||
+        jwtConfig.publicKey ||
         /* eslint-disable no-console */
         console.log("WARN: no process.env.JWT_KEY defined") ||
         /* eslint-enable no-console */
         "emjpm-jwtkey"
     },
     function(jwtPayload, cb) {
-      console.log(jwtPayload);
       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
       return knex("users")
         .where("id", parseInt(jwtPayload.id))
