@@ -4,6 +4,15 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwtConfig = require("../config/jwt");
 
+const redirs = {
+  individuel: "/mandataires",
+  prepose: "/mandataires",
+  service: "/services",
+  ti: "/tis",
+  admin: "/admin",
+  default: "/"
+};
+
 Model.knex(knexConnection);
 
 class Role extends Model {
@@ -51,7 +60,10 @@ class User extends Model {
       id: this.id,
       username: this.username,
       roles: this.getRoles(),
-      token: this.getJwt()
+      token: this.getJwt(),
+      // TODO: remove when full graphql auth
+      url: redirs[this.type] || redirs.default,
+      type: this.type
     };
   }
 
