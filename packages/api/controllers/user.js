@@ -84,20 +84,6 @@ exports.postSignup = async (req, res) => {
   }
 };
 
-// Webhook can be used with hasura
-exports.getWebhook = async (req, res, next) => {
-  passport.authenticate("bearer", (err, user) => {
-    if (err) {
-      return handleResponse(res, 401, { error: err });
-    }
-    if (user) {
-      handleResponse(res, 200, user.getHasuraClaims());
-    } else {
-      handleResponse(res, 200, { "X-Hasura-Role": "anonymous" });
-    }
-  })(req, res, next);
-};
-
 function handleResponse(res, code, statusMsg) {
   res.status(code).json(statusMsg);
 }
