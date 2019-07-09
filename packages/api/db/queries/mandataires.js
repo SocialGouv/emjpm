@@ -123,7 +123,8 @@ function getAllByMandatairesFilter(
       "services.telephone as service_telephone",
       "services.prenom as service_prenom",
       "services.email as service_email",
-      "services.dispo_max as service_dispo_max"
+      "services.dispo_max as service_dispo_max",
+      "services.information as service_info"
     )
     .where({ "user_tis.ti_id": parseInt(ti_id), "users.active": true })
     .where(builder =>
@@ -144,7 +145,7 @@ function getAllByMandatairesFilter(
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
     )
-    .leftOuterJoin("services", "mandataires.service_id", "services.id")
+    .leftOuterJoin("services", "users.service_id", "services.id")
     .groupBy(
       "geolocalisation_code_postal.latitude",
       "geolocalisation_code_postal.longitude",
@@ -159,7 +160,8 @@ function getAllByMandatairesFilter(
       "service_telephone",
       "service_prenom",
       " service_email",
-      "service_dispo_max"
+      "service_dispo_max",
+      "service_info"
     )
     .union(function() {
       this.select(
@@ -177,7 +179,8 @@ function getAllByMandatairesFilter(
         "services.telephone as service_telephone",
         "services.prenom as service_prenom",
         "services.email as service_email",
-        "services.dispo_max as service_dispo_max"
+        "services.dispo_max as service_dispo_max",
+        "services.information as service_info"
       )
         .from("mandataires")
         .innerJoin("users", "mandataires.user_id", "users.id")
@@ -187,7 +190,7 @@ function getAllByMandatairesFilter(
           "geolocalisation_code_postal.code_postal",
           "mandataires.code_postal"
         )
-        .leftOuterJoin("services", "mandataires.service_id", "services.id")
+        .leftOuterJoin("services", "users.service_id", "services.id")
         .where("users.type", "service")
         .where("service_tis.ti_id", parseInt(ti_id));
     });
@@ -311,7 +314,8 @@ const getAllServicesMandatairesByTis = ti_id =>
       "services.telephone as service_telephone",
       "services.prenom as service_prenom",
       "services.email as service_email",
-      "services.dispo_max as service_dispo_max"
+      "services.dispo_max as service_dispo_max",
+      "services.information as service_info"
     )
     .innerJoin("mandataires", "service_tis.mandataire_id", "mandataires.id")
     .innerJoin("users", "mandataires.user_id", "users.id")

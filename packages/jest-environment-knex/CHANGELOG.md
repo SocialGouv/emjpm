@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [23.4.5](https://github.com/SocialGouv/emjpm/compare/v23.4.4...v23.4.5) (2019-07-05)
+
+**Note:** Version bump only for package jest-environment-knex
+
+
+
+
+
+## [23.4.4](https://github.com/SocialGouv/emjpm/compare/v23.4.3...v23.4.4) (2019-07-05)
+
+**Note:** Version bump only for package jest-environment-knex
+
+
+
+
+
+## [23.4.3](https://github.com/SocialGouv/emjpm/compare/v23.4.2...v23.4.3) (2019-07-05)
+
+**Note:** Version bump only for package jest-environment-knex
+
+
+
+
+
+## [23.4.2](https://github.com/SocialGouv/emjpm/compare/v23.4.1...v23.4.2) (2019-07-05)
+
+**Note:** Version bump only for package jest-environment-knex
+
+
+
+
+
+## [23.4.1](https://github.com/SocialGouv/emjpm/compare/v23.4.0...v23.4.1) (2019-07-04)
+
+**Note:** Version bump only for package jest-environment-knex
+
+
+
+
+
 ## [23.3.333](https://github.com/SocialGouv/emjpm/compare/v1.2.0...v23.3.333) (2019-06-13)
 
 **Note:** Version bump only for package jest-environment-knex

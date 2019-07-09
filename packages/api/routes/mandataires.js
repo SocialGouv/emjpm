@@ -167,7 +167,8 @@ const WHITELISTSIEGESOCIAL = [
   "mesures_en_cours",
   "contact_nom",
   "contact_prenom",
-  "contact_email"
+  "contact_email",
+  "information"
 ];
 
 const whiteListSiegeSocial = obj =>

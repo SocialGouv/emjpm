@@ -30,12 +30,16 @@ const { getMandataireByUserId } = require("../db/queries/mandataires");
  *               items:
  *                 type: object
  */
-router.get("/1/etablissement", loginRequired, async (req, res, next) => {
-  const mandataire = await getMandataireByUserId(req.user.id);
-  getAllEtablissementsByMandataire(mandataire.id)
-    .then(etablissements => res.status(200).json(etablissements))
-    .catch(error => next(error));
-});
+router.get(
+  "/:mandataireID/etablissement",
+  loginRequired,
+  async (req, res, next) => {
+    const mandataire = await getMandataireByUserId(req.user.id);
+    getAllEtablissementsByMandataire(mandataire.id)
+      .then(etablissements => res.status(200).json(etablissements))
+      .catch(error => next(error));
+  }
+);
 
 //ToDo rm
 
