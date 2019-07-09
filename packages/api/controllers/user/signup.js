@@ -22,60 +22,62 @@ const postSignup = async (req, res) => {
       .insert({
         username: req.body.username,
         password: req.body.password,
-        role: req.body.role,
+        type: req.body.type,
         nom: req.body.nom,
         prenom: req.body.prenom,
-        cabinet: req.body.role === "ti" ? req.body.cabinet : null,
-        email: req.body.email,
-        service_id: service ? service.id : null
+        email: req.body.email
+        // cabinet: req.body.role === "ti" ? req.body.cabinet : null,
+        // service_id: service ? service.id : null
       });
 
-    const service =
-      req.body.role === "service" &&
-      (await Service.query()
-        .allowInsert(
-          "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
-        )
-        .insert({
-          etablissement: req.body.etablissement,
-          nom: req.body.nom,
-          prenom: req.body.prenom,
-          email: req.body.email,
-          telephone: req.body.telephone,
-          adresse: req.body.adresse,
-          code_postal: req.body.code_postal,
-          ville: req.body.ville,
-          dispo_max: req.body.dispo_max
-        }));
+    const { type } = req.body;
 
-    req.body.role === "individue" ||
-      (req.body.role === "prepose" &&
-        (await Mandataire.query()
-          .allowInsert(
-            "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
-          )
-          .insert({
-            user_id: user.id,
-            etablissement: req.body.etablissement,
-            telephone: req.body.telephone,
-            telephone_portable: req.body.telephone_portable,
-            adresse: req.body.adresse,
-            code_postal: req.body.code_postal,
-            ville: req.body.ville
-          })));
+    // const service =
+    //   req.body.role === "service" &&
+    //   (await Service.query()
+    //     .allowInsert(
+    //       "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
+    //     )
+    //     .insert({
+    //       etablissement: req.body.etablissement,
+    //       nom: req.body.nom,
+    //       prenom: req.body.prenom,
+    //       email: req.body.email,
+    //       telephone: req.body.telephone,
+    //       adresse: req.body.adresse,
+    //       code_postal: req.body.code_postal,
+    //       ville: req.body.ville,
+    //       dispo_max: req.body.dispo_max
+    //     }));
 
-    await Promise.all(
-      req.body.tis.map(ti_id =>
-        UserTi.query()
-          .allowInsert(
-            "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
-          )
-          .insert({
-            user_id: user.id,
-            ti_id
-          })
-      )
-    );
+    // req.body.role === "individue" ||
+    //   (req.body.role === "prepose" &&
+    //     (await Mandataire.query()
+    //       .allowInsert(
+    //         "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
+    //       )
+    //       .insert({
+    //         user_id: user.id,
+    //         etablissement: req.body.etablissement,
+    //         telephone: req.body.telephone,
+    //         telephone_portable: req.body.telephone_portable,
+    //         adresse: req.body.adresse,
+    //         code_postal: req.body.code_postal,
+    //         ville: req.body.ville
+    //       })));
+
+    // await Promise.all(
+    //   req.body.tis.map(ti_id =>
+    //     UserTi.query()
+    //       .allowInsert(
+    //         "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
+    //       )
+    //       .insert({
+    //         user_id: user.id,
+    //         ti_id
+    //       })
+    //   )
+    // );
 
     return res.json({ success: true });
   } catch (err) {
