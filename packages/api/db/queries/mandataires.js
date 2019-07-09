@@ -75,6 +75,7 @@ const getMesuresMap = mandataireId =>
       knex.raw(
         "COUNT(mesures.code_postal), array_agg('' || mesures.type || ' ' || mesures.annee || '')"
       ),
+      "mesures.ville",
       "mesures.code_postal",
       knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
       knex.raw(
@@ -94,7 +95,7 @@ const getMesuresMap = mandataireId =>
       "users.active": true
     })
     .groupByRaw(
-      "mesures.code_postal,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
+      "mesures.ville,mesures.code_postal,geolocalisation_code_postal.latitude,geolocalisation_code_postal.longitude"
     )
     .orderBy("latitude", "asc");
 
