@@ -2,6 +2,10 @@
 
 exports[`should get mandataires for postcode 62000 1`] = `
 Object {
+  "cities": Array [
+    "ARRAS",
+    "DAINVILLE",
+  ],
   "code_postal": "62000",
   "id": 1,
   "latitude": 50.5333,

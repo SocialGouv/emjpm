@@ -232,6 +232,16 @@ const getMesuresByGeolocalisation = (ti_id, type) => {
     );
 };
 
+const getCityCoordinates = (city, code_postal) => {
+  return knex
+    .from("city")
+    .where("ville", "like", `%${city}%`)
+    .where({
+      code_postal: code_postal
+    })
+    .select("latitude", "longitude", "ville");
+};
+
 const getAllMesuresByTis = ti_id =>
   knex
     .from("mesures")
@@ -320,5 +330,6 @@ module.exports = {
   getAllMesuresAttente,
   getMesuresEnCoursMandataire,
   addMesure,
+  getCityCoordinates,
   bulk
 };
