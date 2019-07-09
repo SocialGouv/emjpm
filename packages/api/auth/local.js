@@ -7,7 +7,7 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const knex = require("../db/knex");
 const jwtConfig = require("../config/jwt");
 
-const { User } = require("../db/schema");
+const { User } = require("../model/User");
 
 const init = require("./passport");
 

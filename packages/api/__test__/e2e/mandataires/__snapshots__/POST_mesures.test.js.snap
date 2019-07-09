@@ -1,10 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TI should POST mesure and send email 1`] = `
-Object {
-  "success": true,
-}
-`;
+exports[`TI should POST mesure and send email 1`] = `Object {}`;
 
 exports[`TI should POST mesure and send email 2`] = `
 Array [
@@ -47,18 +43,7 @@ L’équipe e-mjpm.",
 ]
 `;
 
-exports[`TI should POST mesure-reservation 1`] = `
-Object {
-  "RowCtor": null,
-  "_parsers": Array [],
-  "command": "INSERT",
-  "fields": Array [],
-  "oid": 0,
-  "rowAsArray": false,
-  "rowCount": 1,
-  "rows": Array [],
-}
-`;
+exports[`TI should POST mesure-reservation 1`] = `Object {}`;
 
 exports[`mandataire mesures count should be updated 1`] = `
 Array [

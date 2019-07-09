@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const { check, body } = require("express-validator");
-const userController = require("../controllers/user");
+const postLogin = require("../controllers/user/login");
+const postSignup = require("../controllers/user/signup");
+
+const jwkController = require("../controllers/jwk");
 
 router.post(
   "/login",
@@ -9,8 +12,9 @@ router.post(
     check("username").isLength({ min: 5 }),
     check("password").isLength({ min: 5 })
   ],
-  userController.postLogin
+  postLogin
 );
+
 router.post(
   "/signup",
   [
@@ -21,8 +25,9 @@ router.post(
       min: 4
     })
   ],
-  userController.postSignup
+  postSignup
 );
-router.get("/jwks", userController.getJwks);
+
+router.get("/jwks", jwkController.getJwks);
 
 module.exports = router;
