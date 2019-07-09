@@ -1,12 +1,8 @@
 exports.up = function(knex) {
   return knex.schema.createTable("user_role", table => {
+    table.increments("id").primary();
     table
-      .uuid("id")
-      .primary()
-      .unique()
-      .defaultTo(knex.raw("gen_random_uuid()"));
-    table
-      .uuid("role_id")
+      .integer("role_id")
       .unsigned()
       .index()
       .references("id")
