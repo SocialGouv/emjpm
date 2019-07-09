@@ -582,6 +582,23 @@ Object {
 }
 `;
 
+exports[`role table schema 1`] = `
+Object {
+  "id": Object {
+    "defaultValue": "nextval('role_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "name": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+}
+`;
+
 exports[`service_antennes table schema 1`] = `
 Object {
   "adresse": Object {
@@ -803,10 +820,12 @@ Array [
   "mandataires",
   "mesures",
   "regions",
+  "role",
   "service_antennes",
   "service_tis",
   "services",
   "tis",
+  "user_role",
   "user_tis",
   "users",
 ]
@@ -873,6 +892,29 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
+  },
+}
+`;
+
+exports[`user_role table schema 1`] = `
+Object {
+  "id": Object {
+    "defaultValue": "nextval('user_role_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "role_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
   },
 }
 `;
