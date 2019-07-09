@@ -2004,26 +2004,16 @@
     "@sentry/types" "5.1.0"
     tslib "^1.9.3"
 
-"@socialgouv/eslint-config-react@^0.7.0":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-react/-/eslint-config-react-0.7.1.tgz#7aaa8e054eaf66d8c2071d4ae5aac11a5c085eeb"
-  integrity sha512-At7chyecVgojXobHyPSwpHZz+Epk1WlZBXcw1jCicft4SLDJy1M1RA1kV/Opfr72cAeQruXyHrnoLCl+U7YlsQ==
+"@socialgouv/eslint-config-react@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-react/-/eslint-config-react-0.7.2.tgz#c3bf9d049104b55fdc3a3eb396bb45215541d35e"
+  integrity sha512-QBErzyWe4LTPP3xDKC7oZJhBosWYo72N35hxxGwyDcaCl5sHOLerM328oUbwT7uurNXX1Ee+RIhZe2SlaWCEAg==
   dependencies:
-    "@socialgouv/eslint-config-recommended" "^0.7.1"
+    "@socialgouv/eslint-config-recommended" "^0.7.2"
     babel-eslint "^10.0.1"
     eslint-plugin-jsx-a11y "~6.2.1"
     eslint-plugin-react "~7.13.0"
     eslint-plugin-react-hooks "~1.6.0"
-
-"@socialgouv/eslint-config-recommended@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-recommended/-/eslint-config-recommended-0.7.1.tgz#a1408e52b9285434cf2ac921fa48ede8a2fd6064"
-  integrity sha512-Ok79Zb1Hp8IczWaVaWFTGaVBDEymi4r/Z9luqQavSHeJawCzw2EnpiViOerB8tTahOf1yqyVQRKqKefjYu7HDQ==
-  dependencies:
-    eslint-config-prettier "~4.2.0"
-    eslint-plugin-import "~2.17.2"
-    eslint-plugin-jest "^22.5.1"
-    eslint-plugin-prettier "~3.1.0"
 
 "@socialgouv/eslint-config-recommended@^0.7.2":
   version "0.7.2"
@@ -5122,7 +5112,7 @@ escodegen@^1.9.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-prettier@^4.2.0, eslint-config-prettier@~4.2.0:
+eslint-config-prettier@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-4.2.0.tgz#70b946b629cd0e3e98233fd9ecde4cb9778de96c"
   integrity sha512-y0uWc/FRfrHhpPZCYflWC8aE0KRJRY04rdZVfl8cL3sEZmOYyaBdhdlQPjKZBnuRMyLVK+JUZr7HaZFClQiH4w==
@@ -5168,11 +5158,6 @@ eslint-plugin-import@~2.17.2:
     minimatch "^3.0.4"
     read-pkg-up "^2.0.0"
     resolve "^1.10.0"
-
-eslint-plugin-jest@^22.5.1:
-  version "22.5.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.5.1.tgz#a31dfe9f9513c6af7c17ece4c65535a1370f060b"
-  integrity sha512-c3WjZR/HBoi4GedJRwo2OGHa8Pzo1EbSVwQ2HFzJ+4t2OoYM7Alx646EH/aaxZ+9eGcPiq0FT0UGkRuFFx2FHg==
 
 eslint-plugin-jest@^22.6.4:
   version "22.7.2"
