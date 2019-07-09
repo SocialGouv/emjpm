@@ -45,7 +45,8 @@ const {
   getAllMesuresEteinte,
   getAllMesuresAttente,
   getMesuresEnCoursMandataire,
-  addMesure
+  addMesure,
+  getCityCoordinates
 } = require("../db/queries/mesures");
 
 const { reservationEmail } = require("../email/reservation-email");
@@ -373,7 +374,31 @@ router.get(
         throw createError.Unauthorized(`Mandataire not found`);
       }
       const mesures = await getMesuresMap(mandataire.id);
-      res.status(200).json(mesures);
+      const mesuresWithCityCoordinates = mesures.map(async mesure => {
+        const [cityCoordinates] = await getCityCoordinates(
+          mesure.ville.toUpperCase(),
+          mesure.code_postal
+        ).then(coordinates =>
+          coordinates.filter(cityMesure => {
+            return cityMesure.ville === mesure.ville.toUpperCase();
+          })
+        );
+        return {
+          count: mesure.count,
+          array_agg: mesure.array_agg,
+          city: mesure.ville,
+          code_postal: mesure.code_postal,
+          latitude: cityCoordinates
+            ? cityCoordinates.latitude
+            : mesure.latitude,
+          longitude: cityCoordinates
+            ? cityCoordinates.longitude
+            : mesure.longitude
+        };
+      });
+      Promise.all(mesuresWithCityCoordinates).then(results =>
+        res.status(200).json(results)
+      );
     } catch (err) {
       next(err);
     }
