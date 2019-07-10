@@ -15,7 +15,6 @@ class UserTi extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["user_id", "ti_id"],
       properties: {
         id: { type: "integer" },
         user_id: { type: "integer" },

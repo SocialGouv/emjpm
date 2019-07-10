@@ -3,12 +3,63 @@ const { User } = require("../../model/User");
 const { Mandataire } = require("../../model/Mandataire");
 const { Service } = require("../../model/Service");
 const { UserTi } = require("../../model/UserTi");
+const { UserRole } = require("../../model/UserRole");
+const { Role } = require("../../model/Role");
 const { errorHandler } = require("../../db/errors");
 
 /**
  * POST /signup
  * Create a new local account
  */
+
+const insertMandataire = (body, user) =>
+  Mandataire.query()
+    .allowInsert(
+      "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
+    )
+    .insert({
+      user_id: user.id,
+      etablissement: body.etablissement,
+      telephone: body.telephone,
+      telephone_portable: body.telephone_portable,
+      adresse: body.adresse,
+      code_postal: body.code_postal,
+      ville: body.ville
+    });
+
+const insertService = body =>
+  Service.query()
+    .allowInsert(
+      "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
+    )
+    .insert({
+      etablissement: body.etablissement,
+      nom: body.nom,
+      prenom: body.prenom,
+      email: body.email,
+      telephone: body.telephone,
+      adresse: body.adresse,
+      code_postal: body.code_postal,
+      ville: body.ville,
+      dispo_max: body.dispo_max
+    });
+
+const updateUserService = (service, user) =>
+  User.query()
+    .update({ service_id: service.id })
+    .where("id", user.id);
+
+const insertUserTis = (body, user) =>
+  Promise.all(
+    body.tis.map(ti_id =>
+      UserTi.query()
+        .allowInsert("[user_id, ti_id]")
+        .insert({
+          user_id: user.id,
+          ti_id
+        })
+    )
+  );
 const postSignup = async (req, res) => {
   const errors = validationResult(req);
 
@@ -17,67 +68,56 @@ const postSignup = async (req, res) => {
   }
 
   try {
+    const {
+      type,
+      tis,
+      cabinet,
+      username,
+      password,
+      nom,
+      prenom,
+      email
+    } = req.body;
+
     const user = await User.query()
       .allowInsert("[username, password,role,nom,prenom,email]")
       .insert({
-        username: req.body.username,
-        password: req.body.password,
-        type: req.body.type,
-        nom: req.body.nom,
-        prenom: req.body.prenom,
-        email: req.body.email
-        // cabinet: req.body.role === "ti" ? req.body.cabinet : null,
-        // service_id: service ? service.id : null
+        username,
+        password,
+        type,
+        nom,
+        prenom,
+        email
       });
 
-    const { type } = req.body;
+    const [role] = await Role.query().where("name", type);
 
-    // const service =
-    //   req.body.role === "service" &&
-    //   (await Service.query()
-    //     .allowInsert(
-    //       "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
-    //     )
-    //     .insert({
-    //       etablissement: req.body.etablissement,
-    //       nom: req.body.nom,
-    //       prenom: req.body.prenom,
-    //       email: req.body.email,
-    //       telephone: req.body.telephone,
-    //       adresse: req.body.adresse,
-    //       code_postal: req.body.code_postal,
-    //       ville: req.body.ville,
-    //       dispo_max: req.body.dispo_max
-    //     }));
+    await UserRole.query()
+      .allowInsert("[user_id,role_id]")
+      .insert({
+        user_id: user.id,
+        role_id: role.id
+      });
 
-    // req.body.role === "individue" ||
-    //   (req.body.role === "prepose" &&
-    //     (await Mandataire.query()
-    //       .allowInsert(
-    //         "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
-    //       )
-    //       .insert({
-    //         user_id: user.id,
-    //         etablissement: req.body.etablissement,
-    //         telephone: req.body.telephone,
-    //         telephone_portable: req.body.telephone_portable,
-    //         adresse: req.body.adresse,
-    //         code_postal: req.body.code_postal,
-    //         ville: req.body.ville
-    //       })));
-
-    // await Promise.all(
-    //   req.body.tis.map(ti_id =>
-    //     UserTi.query()
-    //       .allowInsert(
-    //         "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
-    //       )
-    //       .insert({
-    //         user_id: user.id,
-    //         ti_id
-    //       })
-    //   )
-    // );
+    switch (type) {
+      case "individuel":
+      case "preprose":
+        await insertMandataire(req.body, user);
+        await insertUserTis(req.body, user);
+        break;
+      case "service": // toto vaut 0 donc ce cas correspond
+        const service = await insertService(req.body);
+        await updateUserService(service, user);
+        break;
+      case "ti":
+        await User.query()
+          .update({ cabinet })
+          .where("id", user.id);
+        await insertUserTis(req.body, user);
+        break;
+      default:
+        return;
+    }
 
     return res.json({ success: true });
   } catch (err) {
