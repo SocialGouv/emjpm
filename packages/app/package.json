@@ -41,7 +41,7 @@
     "react-dom": "^16.8.6",
     "react-feather": "^1.1.6",
     "react-icons": "^3.6.1",
-    "react-jsonschema-form": "^1.5.0",
+    "react-jsonschema-form": "^1.6.1",
     "react-leaflet": "^2.2.1",
     "react-modal": "^3.8.1",
     "react-piwik": "^1.6.0",
