@@ -43,7 +43,7 @@
     "passport-stub": "^1.1.1",
     "pg": "^4.5.3",
     "pg-native": "^3.0.0",
-    "query-string": "^6.5.0",
+    "query-string": "^6.8.1",
     "rand-token": "^0.4.0",
     "serve-favicon": "^2.5.0",
     "swagger-jsdoc": "^3.2.9",
