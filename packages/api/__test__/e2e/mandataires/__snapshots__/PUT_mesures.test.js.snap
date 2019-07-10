@@ -1,6 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TI should NOT PUT other TI mesure 1`] = `Object {}`;
+exports[`TI should NOT PUT other TI mesure 1`] = `
+Array [
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "F",
+    "code_postal": "93000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "UDAHF",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 3,
+    "manda": "UDAHF",
+    "mandataire_id": 1,
+    "nom": null,
+    "numero_dossier": null,
+    "numero_rg": null,
+    "prenom": "Adrien",
+    "reason_extinction": null,
+    "residence": null,
+    "status": "Mesure en attente",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": null,
+  },
+]
+`;
 
 exports[`TI should PUT his mandataire mesure 1`] = `
 Array [
@@ -31,7 +58,52 @@ Array [
 ]
 `;
 
-exports[`mandataire should NOT PUT other mandataire mesure 1`] = `Object {}`;
+exports[`mandataire should NOT PUT other mandataire mesure 1`] = `
+Array [
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "F",
+    "code_postal": "62000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "UDAHF",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 1,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "numero_rg": null,
+    "reason_extinction": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "Arras",
+  },
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "H",
+    "code_postal": "93000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "etablissement": "CAROUF",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 4,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "numero_rg": null,
+    "reason_extinction": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": null,
+    "type": "preposes",
+    "ville": "St Denis",
+  },
+]
+`;
 
 exports[`mandataire should PUT his mesure 1`] = `
 Array [

@@ -68,16 +68,7 @@ const postSignup = async (req, res) => {
   }
 
   try {
-    const {
-      type,
-      tis,
-      cabinet,
-      username,
-      password,
-      nom,
-      prenom,
-      email
-    } = req.body;
+    const { type, cabinet, username, password, nom, prenom, email } = req.body;
 
     const user = await User.query()
       .allowInsert("[username, password,role,nom,prenom,email]")
@@ -105,10 +96,11 @@ const postSignup = async (req, res) => {
         await insertMandataire(req.body, user);
         await insertUserTis(req.body, user);
         break;
-      case "service": // toto vaut 0 donc ce cas correspond
+      case "service": {
         const service = await insertService(req.body);
         await updateUserService(service, user);
         break;
+      }
       case "ti":
         await User.query()
           .update({ cabinet })
