@@ -32,7 +32,7 @@
     "next": "^7.0.2",
     "next-images": "^1.1.1",
     "next-plugin-transpile-modules": "^2.0.0",
-    "polished": "^3.4.0",
+    "polished": "^3.4.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.5.0",
     "react": "^16.8.6",
