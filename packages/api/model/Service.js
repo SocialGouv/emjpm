@@ -15,7 +15,6 @@ class Service extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["username"],
       properties: {
         id: { type: "integer" },
         etablissement: { type: "string" },

@@ -16,7 +16,6 @@ class Mandataire extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["username"],
       properties: {
         etablissement: { type: "string" },
         id: { type: "integer" },
