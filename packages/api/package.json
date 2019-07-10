@@ -47,7 +47,7 @@
     "rand-token": "^0.4.0",
     "serve-favicon": "^2.5.0",
     "swagger-jsdoc": "^3.2.9",
-    "swagger-ui-dist": "^3.22.1"
+    "swagger-ui-dist": "^3.23.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
