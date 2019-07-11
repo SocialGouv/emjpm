@@ -27,7 +27,7 @@ const createMandataire = (body, user) =>
       ville: body.ville
     });
 
-const createtService = body =>
+const createService = body =>
   Service.query()
     .allowInsert(
       "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
@@ -97,7 +97,7 @@ const postSignup = async (req, res) => {
         await createUserTis(req.body, user);
         break;
       case "service": {
-        const service = await createtService(req.body);
+        const service = await createService(req.body);
         await updateUserService(service, user);
         break;
       }
