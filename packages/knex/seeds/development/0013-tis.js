@@ -37,4 +37,9 @@ const rows = data
   .filter(Boolean)
   .map(splitRow);
 
-exports.seed = knex => knex.batchInsert("tis", rows);
+exports.seed = knex => {
+  if (process.env.NODE_ENV === "test") {
+    return Promise.resolve();
+  }
+  return knex.batchInsert("tis", rows);
+};
