@@ -1,70 +1,90 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`' jeRemY  ' should login as individuel 1`] = `
+exports[`' jeRemY  ' not login individuel 1`] = `
 Object {
-  "success": true,
-  "token": Any<String>,
-  "url": "/mandataires",
+  "err": "Unknown user",
 }
 `;
 
 exports[`'admin' should login as admin 1`] = `
 Object {
-  "success": true,
+  "id": 4,
+  "roles": Array [
+    "user",
+  ],
   "token": Any<String>,
+  "type": "admin",
   "url": "/admin",
+  "username": "admin",
 }
 `;
 
 exports[`'inactive' not login an inactive user 1`] = `
 Object {
-  "message": "User not found",
-  "success": false,
+  "err": "User is inactive",
 }
 `;
 
 exports[`'jeremy' not login a registered user with wrong password 1`] = `
 Object {
-  "message": "User not found",
-  "success": false,
+  "err": "Invalid password",
 }
 `;
 
 exports[`'jeremy' should login as individuel 1`] = `
 Object {
-  "success": true,
+  "id": 1,
+  "roles": Array [
+    "user",
+  ],
   "token": Any<String>,
+  "type": "individuel",
   "url": "/mandataires",
+  "username": "jeremy",
 }
 `;
 
 exports[`'kelly' should login as prepose 1`] = `
 Object {
-  "success": true,
+  "id": 2,
+  "roles": Array [
+    "user",
+  ],
   "token": Any<String>,
+  "type": "prepose",
   "url": "/mandataires",
+  "username": "kelly",
 }
 `;
 
 exports[`'michael' not login an unregistered user 1`] = `
 Object {
-  "message": "User not found",
-  "success": false,
+  "err": "Unknown user",
 }
 `;
 
 exports[`'service1' should login as service 1`] = `
 Object {
-  "success": true,
+  "id": 3,
+  "roles": Array [
+    "user",
+  ],
   "token": Any<String>,
+  "type": "service",
   "url": "/services",
+  "username": "service1",
 }
 `;
 
 exports[`'ti1' should login as ti 1`] = `
 Object {
-  "success": true,
+  "id": 5,
+  "roles": Array [
+    "user",
+  ],
   "token": Any<String>,
+  "type": "ti",
   "url": "/tis",
+  "username": "ti1",
 }
 `;

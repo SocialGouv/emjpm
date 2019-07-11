@@ -1,38 +1,52 @@
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-
-const init = require("./passport");
-const knex = require("../db/knex");
-const authHelpers = require("./_helpers");
+const { Strategy: LocalStrategy } = require("passport-local");
 
 const passportJWT = require("passport-jwt");
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
+const knex = require("../db/knex");
+const jwtConfig = require("../config/jwt");
 
-const options = {};
+const { User } = require("../model/User");
+
+const init = require("./passport");
 
 init();
 
 passport.use(
-  new LocalStrategy(options, (username, password, done) => {
-    // check to see if the username exists
-    knex("users")
-      .where("username", "ilike", username.trim())
-      .orWhere("email", "ilike", username.trim())
-      .first()
-      .then(user => {
-        if (!user) return done(null, false);
-        if (!user.active) return done(null, false);
-        if (!authHelpers.comparePass(password, user.password)) {
-          return done(null, false);
-        } else {
-          return done(null, user);
-        }
-      })
-      .catch(err => {
-        return done(err);
-      });
-  })
+  new LocalStrategy(
+    {
+      usernameField: "username",
+      passwordField: "password"
+    },
+    function(username, password, done) {
+      User.query()
+        .where("username", username)
+        .orWhere("email", username)
+        .first()
+        .eager("roles")
+        .then(function(user) {
+          if (!user) {
+            return done("Unknown user");
+          }
+          if (!user.active) {
+            return done("User is inactive");
+          }
+          user.verifyPassword(password, function(err, passwordCorrect) {
+            if (err) {
+              return done(err);
+            }
+            if (!passwordCorrect) {
+              return done("Invalid password");
+            }
+            return done(null, user);
+          });
+        })
+        .catch(function(err) {
+          done(err);
+        });
+    }
+  )
 );
 
 passport.use(
@@ -40,7 +54,7 @@ passport.use(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
       secretOrKey:
-        process.env.JWT_KEY ||
+        jwtConfig.publicKey ||
         /* eslint-disable no-console */
         console.log("WARN: no process.env.JWT_KEY defined") ||
         /* eslint-enable no-console */

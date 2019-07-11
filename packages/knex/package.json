@@ -15,6 +15,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "knex": "^0.16.5",
+    "objection": "^1.6.9",
     "pg": "^7.8.1"
   },
   "devDependencies": {
