@@ -12,7 +12,7 @@ const { errorHandler } = require("../../db/errors");
  * Create a new local account
  */
 
-const insertMandataire = (body, user) =>
+const createMandataire = (body, user) =>
   Mandataire.query()
     .allowInsert(
       "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
@@ -27,7 +27,7 @@ const insertMandataire = (body, user) =>
       ville: body.ville
     });
 
-const insertService = body =>
+const createtService = body =>
   Service.query()
     .allowInsert(
       "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
@@ -49,7 +49,7 @@ const updateUserService = (service, user) =>
     .update({ service_id: service.id })
     .where("id", user.id);
 
-const insertUserTis = (body, user) =>
+const createUserTis = (body, user) =>
   Promise.all(
     body.tis.map(ti_id =>
       UserTi.query()
@@ -93,11 +93,11 @@ const postSignup = async (req, res) => {
     switch (type) {
       case "individuel":
       case "preprose":
-        await insertMandataire(req.body, user);
-        await insertUserTis(req.body, user);
+        await createMandataire(req.body, user);
+        await createUserTis(req.body, user);
         break;
       case "service": {
-        const service = await insertService(req.body);
+        const service = await createtService(req.body);
         await updateUserService(service, user);
         break;
       }
@@ -105,7 +105,7 @@ const postSignup = async (req, res) => {
         await User.query()
           .update({ cabinet })
           .where("id", user.id);
-        await insertUserTis(req.body, user);
+        await createUserTis(req.body, user);
         break;
       default:
         return;
