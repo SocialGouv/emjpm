@@ -9,8 +9,8 @@ const jwkController = require("../controllers/jwk");
 router.post(
   "/login",
   [
-    check("username").isLength({ min: 5 }),
-    check("password").isLength({ min: 5 })
+    check("username").isLength({ min: 3 }),
+    check("password").isLength({ min: 3 })
   ],
   postLogin
 );
