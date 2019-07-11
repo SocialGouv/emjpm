@@ -1,5 +1,5 @@
 import * as cors from "@koa/cors";
-import { ApolloServer, gql } from "apollo-server-koa";
+import { ApolloServer } from "apollo-server-koa";
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
 import resolvers from "./resolvers";
