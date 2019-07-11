@@ -5,6 +5,21 @@ exports.seed = (knex, Promise) => {
     .del()
     .then(() => {
       const salt = bcrypt.genSaltSync();
+      const hash = bcrypt.hashSync("direction_national", salt);
+      return Promise.join(
+        knex("users").insert({
+          username: "direction_national",
+          password: hash,
+          type: "direction_national",
+          active: true,
+          email: "direction_national@direction_national.com",
+          nom: "nom direction_national",
+          prenom: "prenom direction_national"
+        })
+      );
+    })
+    .then(() => {
+      const salt = bcrypt.genSaltSync();
       const hash = bcrypt.hashSync("individuel", salt);
       return Promise.join(
         knex("users").insert({

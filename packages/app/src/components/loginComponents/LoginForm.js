@@ -14,7 +14,7 @@ import ReactPiwik from "react-piwik";
 import { trackUser } from "../../piwik";
 
 const doLogin = formData => {
-  const url = `${API_URL}/auth/login`;
+  const url = `${API_URL}/auth/v2/login`;
   return fetch(url, {
     credentials: "include",
     method: "POST",
