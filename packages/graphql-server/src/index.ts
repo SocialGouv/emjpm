@@ -2,25 +2,8 @@ import * as cors from "@koa/cors";
 import { ApolloServer, gql } from "apollo-server-koa";
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
-
-// import * as resolvers from "./resolvers";
-// import * as typeDefs from "./schemas";
-
-// console.log(resolvers);
-// console.log(typeDefs);
-
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-// Provide resolver functions for your schema fields
-const resolvers = {
-  Query: {
-    hello: () => "Hello world!",
-  },
-};
+import typeDefs from "./schemas"
+import resolvers from "./resolvers"
 
 const server = new ApolloServer({ resolvers, typeDefs });
 const app = new Koa();
