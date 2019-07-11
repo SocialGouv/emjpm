@@ -9,8 +9,18 @@ const jwkController = require("../controllers/jwk");
 router.post(
   "/login",
   [
-    check("username").isLength({ min: 3 }),
-    check("password").isLength({ min: 3 })
+    body("username")
+      .not()
+      .isEmpty(),
+    body("password")
+      .not()
+      .isEmpty(),
+    check("username", "username must be at least 3 characters long").isLength({
+      min: 3
+    }),
+    check("password", "password must be at least 3 characters long").isLength({
+      min: 3
+    })
   ],
   postLogin
 );
@@ -22,7 +32,7 @@ router.post(
       .not()
       .isEmpty(),
     check("password", "Password must be at least 4 characters long").isLength({
-      min: 4
+      min: 3
     })
   ],
   postSignup
