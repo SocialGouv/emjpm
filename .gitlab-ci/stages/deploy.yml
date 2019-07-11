@@ -4,6 +4,7 @@ include:
   - /.k8s/api/.k8s-deploy-api.yml
   - /.k8s/app/.k8s-deploy-app.yml
   - /.k8s/postgres/.k8s-deploy-postgres.yml
+  - /.k8s/hasura/.k8s-deploy-hasura.yml
 
 #
 
@@ -118,4 +119,27 @@ Deploy postgres (dev):
 Deploy postgres (incubateur):
   extends: .k8s-deploy-postgres-prod
   <<: *deploy_postgres
+  <<: *incubateur_stage
+
+#
+#
+#
+
+.deploy-hasura: &deploy_hasura
+  <<: *deploy_stage
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: hasura
+    PORT: 8080
+
+#
+
+Deploy hasura (dev):
+  extends: .k8s-deploy-hasura-dev
+  <<: *deploy_hasura
+  <<: *dev_stage
+
+Deploy hasura (incubateur):
+  extends: .k8s-deploy-hasura-prod
+  <<: *deploy_hasura
   <<: *incubateur_stage
