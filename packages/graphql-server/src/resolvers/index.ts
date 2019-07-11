@@ -1,3 +1,6 @@
-import test from "./test";
+import { merge } from 'lodash';
+import hello from "./hello";
 
-export { test };
+const resolvers = merge(hello)
+
+export default resolvers;

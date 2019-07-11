@@ -1,3 +1,7 @@
-import test from "./test";
+import helloSchema from "./hello";
 
-export { test };
+const typeDefs = [
+  helloSchema
+]
+
+export default typeDefs;
