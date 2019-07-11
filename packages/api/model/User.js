@@ -1,8 +1,13 @@
-const knexConnection = require("./knex");
-const { Model } = require("objection");
+const knexConnection = require("../db/knex");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwtConfig = require("../config/jwt");
+const { Model } = require("objection");
+
+const { Role } = require("./Role");
+const { UserTi } = require("./UserTi");
+
+Model.knex(knexConnection);
 
 const redirs = {
   individuel: "/mandataires",
@@ -12,18 +17,6 @@ const redirs = {
   admin: "/admin",
   default: "/"
 };
-
-Model.knex(knexConnection);
-
-class Role extends Model {
-  static get tableName() {
-    return "role";
-  }
-
-  static get idColumn() {
-    return "id";
-  }
-}
 
 class User extends Model {
   static get tableName() {
@@ -46,6 +39,18 @@ class User extends Model {
             to: "user_role.role_id"
           },
           to: "role.id"
+        }
+      },
+      tis: {
+        relation: Model.ManyToManyRelation,
+        modelClass: UserTi,
+        join: {
+          from: "users.id",
+          through: {
+            from: "user_tis.user_id",
+            to: "user_tis.ti_id"
+          },
+          to: "tis.id"
         }
       }
     };
@@ -72,21 +77,18 @@ class User extends Model {
       "x-hasura-allowed-roles": this.getRoles(),
       "x-hasura-default-role": "user",
       "x-hasura-user-id": `${this.id}`
-      // 'x-hasura-org-id': '123',
-      // 'x-hasura-custom': 'custom-value'
     };
   }
 
   getJwt() {
     const signOptions = {
       subject: this.id.toString(),
-      expiresIn: "30d", // 30 days validity
+      expiresIn: "30d",
       algorithm: "RS256"
     };
     const claim = {
       name: this.username,
       id: this.id,
-      // iat: Math.floor(Date.now() / 1000),
       "https://hasura.io/jwt/claims": this.getHasuraClaims()
     };
     return jwt.sign(claim, jwtConfig.key, signOptions);
@@ -108,13 +110,16 @@ class User extends Model {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["username"],
       properties: {
         id: { type: "integer" },
-        username: { type: "string", minLength: 1, maxLength: 255 }
+        username: { type: "string", minLength: 1, maxLength: 255 },
+        nom: { type: "string" },
+        prenom: { type: "string" },
+        email: { type: "string" },
+        cabinet: { type: "string" }
       }
     };
   }
 }
 
-module.exports = { User, Role };
+module.exports = { User };
