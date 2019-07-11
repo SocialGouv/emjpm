@@ -5,6 +5,7 @@ const { Service } = require("../../model/Service");
 const { UserTi } = require("../../model/UserTi");
 const { UserRole } = require("../../model/UserRole");
 const { Role } = require("../../model/Role");
+const { Direction } = require("../../model/Direction");
 const { errorHandler } = require("../../db/errors");
 
 /**
@@ -60,6 +61,23 @@ const createUserTis = (body, user) =>
         })
     )
   );
+const createDirection = (body, user) =>
+  Direction.query().insert({
+    user_id: user.id,
+    department_id:
+      body.type === "direction_departemental" ? body.department_id : null,
+    region_id: body.type === "direction_regional" ? body.region_id : null
+  });
+
+const createRole = async (user, type) => {
+  const [role] = await Role.query().where("name", type);
+  return UserRole.query()
+    .allowInsert("[user_id,role_id]")
+    .insert({
+      user_id: user.id,
+      role_id: role.id
+    });
+};
 const postSignup = async (req, res) => {
   const errors = validationResult(req);
 
@@ -81,14 +99,7 @@ const postSignup = async (req, res) => {
         email
       });
 
-    const [role] = await Role.query().where("name", type);
-
-    await UserRole.query()
-      .allowInsert("[user_id,role_id]")
-      .insert({
-        user_id: user.id,
-        role_id: role.id
-      });
+    await createRole(user, type);
 
     switch (type) {
       case "individuel":
@@ -107,6 +118,14 @@ const postSignup = async (req, res) => {
           .where("id", user.id);
         await createUserTis(req.body, user);
         break;
+      case "direction":
+      case "direction_national":
+      case "direction_regional":
+      case "direction_departemen": {
+        await createRole(user, "direction");
+        await createDirection(req.body, user);
+        break;
+      }
       default:
         return;
     }
