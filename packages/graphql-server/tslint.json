@@ -1,3 +1,5 @@
 {
-  "extends": ["@socialgouv/tslint-config-recommended"]
+  "extends": [
+    "@socialgouv/tslint-config-recommended"
+  ]
 }
