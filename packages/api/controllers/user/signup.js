@@ -121,7 +121,7 @@ const postSignup = async (req, res) => {
       case "direction":
       case "direction_national":
       case "direction_regional":
-      case "direction_departemen": {
+      case "direction_departemental": {
         await createRole(user, "direction");
         await createDirection(req.body, user);
         break;
