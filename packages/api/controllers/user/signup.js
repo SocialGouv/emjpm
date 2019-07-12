@@ -118,7 +118,6 @@ const postSignup = async (req, res) => {
           .where("id", user.id);
         await createUserTis(req.body, user);
         break;
-      case "direction":
       case "direction_national":
       case "direction_regional":
       case "direction_departemental": {
