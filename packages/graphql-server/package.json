@@ -8,18 +8,27 @@
   "scripts": {
     "dev": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/index.ts",
     "build": "tsc",
-    "lint": "tslint -p tsconfig.json -t stylish"
+    "lint": "tslint -p tsconfig.json -t stylish",
+    "generate": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@koa/cors": "^3.0.0",
+    "@types/graphql": "^14.2.2",
     "@types/lodash": "^4.14.136",
+    "@types/node": "^12.6.2",
+    "@types/node-fetch": "^2.3.7",
+    "apollo-cache-inmemory": "^1.6.2",
+    "apollo-client": "^2.6.3",
+    "apollo-link-http": "^1.5.15",
     "apollo-server-koa": "^2.6.9",
     "graphql": "^14.4.2",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
-    "lodash": "^4.17.14"
+    "lodash": "^4.17.14",
+    "node-fetch": "^2.6.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.4.0",
     "@socialgouv/tslint-config-recommended": "^0.7.2",
     "@types/koa": "^2.0.49",
     "@types/koa-bodyparser": "^4.3.0",
@@ -30,6 +39,9 @@
     "prettier": "^1.17.0",
     "ts-node": "^8.3.0",
     "tslint": "^5.16.0",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "@graphql-codegen/typescript": "1.4.0",
+    "@graphql-codegen/typescript-resolvers": "1.4.0",
+    "@graphql-codegen/introspection": "1.4.0"
   }
 }
