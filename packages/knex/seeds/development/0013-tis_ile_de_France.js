@@ -1,6 +1,9 @@
 const fs = require("fs");
 
-const data = fs.readFileSync("./tis_Ile_de_France.csv", "utf8");
+const data = fs.readFileSync(
+  `${__dirname}/../../tis_Ile_de_France.csv`,
+  "utf8"
+);
 
 const cols = ["etablissement", "code_postal", "ville", "telephone", "email"];
 
@@ -18,4 +21,9 @@ const rows = data
   .filter(Boolean)
   .map(splitRow);
 
-exports.seed = knex => knex.batchInsert("tis", rows);
+exports.seed = knex => {
+  if (process.env.NODE_ENV === "test") {
+    return Promise.resolve();
+  }
+  return knex.batchInsert("tis", rows);
+};
