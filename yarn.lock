@@ -12610,10 +12610,10 @@ swagger-parser@8.0.0:
     swagger-methods "^2.0.0"
     z-schema "^4.1.0"
 
-swagger-ui-dist@^3.22.1:
-  version "3.23.0"
-  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.23.0.tgz#41ebb4331464677d5d14975995c0391672befe5d"
-  integrity sha512-DMnt69K3p8BwnKf8f8uOqsts/teZNRS4LlXAqjfa8HS2RKWWOCSiVEHkMzY3zlU4wqu/olPdF0zDEm9Ed5JZ4A==
+swagger-ui-dist@^3.23.1:
+  version "3.23.1"
+  resolved "https://registry.yarnpkg.com/swagger-ui-dist/-/swagger-ui-dist-3.23.1.tgz#0f548d269dd959ba4f92a9b9df0376d32e8456f6"
+  integrity sha512-chMAB3JY3tJGLtswyBJGWa5L0nghbImUtFpy2CupswVVC1UsSmVwOI69oOQ1sCxEzQfC2DCu0jUD/x5SjNs+zw==
 
 symbol-observable@^1.0.4, symbol-observable@^1.2.0:
   version "1.2.0"
