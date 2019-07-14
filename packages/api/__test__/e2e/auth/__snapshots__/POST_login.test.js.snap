@@ -10,6 +10,7 @@ exports[`'admin' should login as admin 1`] = `
 Object {
   "id": 4,
   "roles": Array [
+    "admin",
     "user",
   ],
   "token": Any<String>,
@@ -35,6 +36,7 @@ exports[`'jeremy' should login as individuel 1`] = `
 Object {
   "id": 1,
   "roles": Array [
+    "individuel",
     "user",
   ],
   "token": Any<String>,
@@ -48,6 +50,7 @@ exports[`'kelly' should login as prepose 1`] = `
 Object {
   "id": 2,
   "roles": Array [
+    "prepose",
     "user",
   ],
   "token": Any<String>,
@@ -67,6 +70,7 @@ exports[`'service1' should login as service 1`] = `
 Object {
   "id": 3,
   "roles": Array [
+    "service",
     "user",
   ],
   "token": Any<String>,
@@ -80,6 +84,7 @@ exports[`'ti1' should login as ti 1`] = `
 Object {
   "id": 5,
   "roles": Array [
+    "ti",
     "user",
   ],
   "token": Any<String>,
