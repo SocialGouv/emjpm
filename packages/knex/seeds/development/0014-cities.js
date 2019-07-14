@@ -1,6 +1,9 @@
 var zipCodes = require("../postal_raw.json");
 
 exports.seed = knex => {
+  if (process.env.NODE_ENV === "test") {
+    return Promise.resolve();
+  }
   const newRows = zipCodes.map(row => {
     return {
       code_postal: row.fields.code_postal,

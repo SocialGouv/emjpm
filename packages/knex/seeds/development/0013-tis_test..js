@@ -1,4 +1,7 @@
 exports.seed = function(knex) {
+  if (process.env.NODE_ENV != "test") {
+    return Promise.resolve();
+  }
   return knex("tis")
     .del() // Deletes ALL existing entries
     .then(function() {
