@@ -1,8 +1,9 @@
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from "apollo-cache-inmemory";
+import { ApolloClient } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
-import { gql } from 'apollo-server-koa';
-import fetch from "node-fetch"
+import { gql } from "apollo-server-koa";
+import fetch from "node-fetch";
+import { logger } from "../logger";
 import { Resolvers } from "../types/resolvers-types";
 
 const client = new ApolloClient({
@@ -37,11 +38,11 @@ const test = client.query({
 export const resolvers: Resolvers = {
   Query: {
     hello: () => {
-      test.then((result) => {
+      test.then(result => {
         const mesures = result.data.mesures;
         // tslint:disable-next-line no-console
-        console.log(mesures.length);
-      })
+        logger.info(mesures.length);
+      });
       return "hello world";
     }
   }
