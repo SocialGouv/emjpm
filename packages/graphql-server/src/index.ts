@@ -5,7 +5,13 @@ import * as bodyParser from "koa-bodyparser";
 import resolvers from "./resolvers";
 import typeDefs from "./schemas";
 
-const server = new ApolloServer({ resolvers, typeDefs });
+const context = async ({ ctx }: { ctx: any }) => {
+  return {
+    authorisation: ctx.request.header.authorisation
+  };
+};
+
+const server = new ApolloServer({ context, resolvers, typeDefs });
 const app = new Koa();
 
 app.use(bodyParser());
