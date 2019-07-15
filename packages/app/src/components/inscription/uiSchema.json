@@ -74,5 +74,6 @@
   "cabinet": {
     "ui:title": "Cabinet",
     "ui:placeholder": "cabinet"
-  }
+  },
+  "type": { "ui:widget": "radio" }
 }
