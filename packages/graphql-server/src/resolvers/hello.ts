@@ -4,6 +4,7 @@ import { createHttpLink } from "apollo-link-http";
 import { gql } from 'apollo-server-koa';
 import fetch from "node-fetch"
 import { Resolvers } from "../types/resolvers-types";
+import { logger } from '../util';
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -40,7 +41,7 @@ export const resolvers: Resolvers = {
       test.then((result) => {
         const mesures = result.data.mesures;
         // tslint:disable-next-line no-console
-        console.log(mesures.length);
+        logger.info(mesures.length);
       })
       return "hello world";
     }
