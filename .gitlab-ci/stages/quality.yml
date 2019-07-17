@@ -38,6 +38,12 @@ Lint @emjpm/knex:
   script:
     - yarn workspace @emjpm/knex lint
 
+Lint @emjpm/graphql-server:
+  <<: *quality_stage
+  <<: *master_based_stage
+  script:
+    - yarn workspace @emjpm/graphql-server lint
+
 Lint @optional/e2e:
   <<: *quality_stage
   <<: *master_based_stage
