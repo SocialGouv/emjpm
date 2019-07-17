@@ -36,9 +36,7 @@
     "passport-local": "^1.0.0",
     "passport-stub": "^1.1.1",
     "rand-token": "^0.4.0",
-    "rasha": "^1.2.5",
-    "swagger-jsdoc": "^3.3.0",
-    "swagger-ui-dist": "^3.23.1"
+    "rasha": "^1.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
