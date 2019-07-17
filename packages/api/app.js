@@ -48,7 +48,6 @@ app.use("/api/v1/inscription", inscriptionRoutes);
 app.use("/api/v1", passport.authenticate("jwt", { session: false }), routes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
-app.use("/doc", require("./routes/doc"));
 
 app.get("/ping", function(req, res) {
   if (!req.user) {
