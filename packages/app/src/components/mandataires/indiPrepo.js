@@ -13,6 +13,7 @@ import Header from "./Header";
 import CreateMesure from "./CreateMesure";
 import InputFiles from "./inputFiles";
 import { DispoMagistrat } from "../common/ShowBox";
+import TableState from "../common/TableState";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 const getCurrentDispos = props =>
@@ -24,6 +25,10 @@ const getCurrentDispos = props =>
   null;
 
 class MandataireTabs extends React.Component {
+  state = { activeTabIndex: 0 };
+
+  updateIndexIndi = activeTabIndex => this.setState({ activeTabIndex });
+
   render() {
     const currentDispos = getCurrentDispos(this.props);
 
@@ -49,7 +54,7 @@ class MandataireTabs extends React.Component {
         content: (
           <React.Fragment>
             <CreateMesure />
-            <DispoMagistrat currentDispos={currentDispos} />
+            <DispoMagistrat currentDispos={currentDispos} updateIndexIndi={this.updateIndexIndi} />
             <TableMesures
               fetch={() => apiFetch(`/mandataires/1/mesures`)}
               hideColumns={[
@@ -135,7 +140,12 @@ class MandataireTabs extends React.Component {
     return (
       <React.Fragment>
         <Header />
-        <DummyTabs tabs={tabs} />
+        <TableState
+          activeTabIndex={this.state.activeTabIndex}
+          render={({ onSelect, activeTabIndex }) => {
+            return <DummyTabs tabs={tabs} onSelect={onSelect} activeTabIndex={activeTabIndex} />;
+          }}
+        />
       </React.Fragment>
     );
   }
