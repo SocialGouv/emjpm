@@ -57,6 +57,12 @@ Lint @optional/e2e:
     - yarn run -- lerna exec --scope=@optional/e2e yarn -- --ignore-scripts
     - yarn run -- lerna run --scope=@optional/e2e lint
 
+Lint jest-environment-knex:
+  <<: *quality_stage
+  <<: *master_based_stage
+  script:
+    - yarn workspace jest-environment-knex lint
+
 ###########################################
 ###                TESTS                ###
 ###########################################
