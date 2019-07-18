@@ -99,6 +99,35 @@ Object {
 }
 `;
 
+exports[`direction table schema 1`] = `
+Object {
+  "department_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "id": Object {
+    "defaultValue": "nextval('direction_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "region_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`etablissements table schema 1`] = `
 Object {
   "adresse": Object {
@@ -811,6 +840,7 @@ Array [
   "city",
   "commentaires",
   "departements",
+  "direction",
   "etablissements",
   "geolocalisation_code_postal",
   "knex_migrations",
@@ -863,29 +893,11 @@ Object {
     "nullable": false,
     "type": "integer",
   },
-  "latitude": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": false,
-    "type": "real",
-  },
-  "longitude": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": false,
-    "type": "real",
-  },
   "telephone": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
-  },
-  "user_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
   },
   "ville": Object {
     "defaultValue": null,
@@ -1024,7 +1036,7 @@ Object {
   },
   "type": Object {
     "defaultValue": null,
-    "maxLength": 20,
+    "maxLength": 255,
     "nullable": true,
     "type": "character varying",
   },

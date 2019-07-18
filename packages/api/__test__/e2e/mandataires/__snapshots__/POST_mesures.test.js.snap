@@ -51,13 +51,6 @@ exports[`TI should POST mesure-reservation 1`] = `
 Object {
   "RowCtor": null,
   "_parsers": Array [],
-  "_types": Object {
-    "_types": Object {
-      "arrayParser": Object {},
-    },
-    "binary": Object {},
-    "text": Object {},
-  },
   "command": "INSERT",
   "fields": Array [],
   "oid": 0,
