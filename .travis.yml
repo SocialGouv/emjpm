@@ -38,7 +38,7 @@ _steps:
       - docker pull socialgouv/emjpm:latest || true
       - docker pull $DOCKER_IMAGE:latest || true
       #
-      - docker build --cache-from $DOCKER_IMAGE:latest -t $DOCKER_IMAGE:$TRAVIS_COMMIT $CONTEXT
+      - docker build --shm-size 521M --cache-from $DOCKER_IMAGE:latest -t $DOCKER_IMAGE:$TRAVIS_COMMIT $CONTEXT
       #
       - docker build --cache-from $DOCKER_IMAGE:$TRAVIS_COMMIT -t $DOCKER_IMAGE:$TRAVIS_BRANCH $CONTEXT
       - docker build --cache-from $DOCKER_IMAGE:$TRAVIS_COMMIT -t $DOCKER_IMAGE:latest $CONTEXT
