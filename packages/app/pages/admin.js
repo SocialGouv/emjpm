@@ -3,6 +3,7 @@ import { Home, User } from "react-feather";
 
 import { Layout, DummyTabs } from "../src/components";
 import Users from "../src/components/admin/Users";
+import TableState from "../src/components/common/TableState";
 
 const tabs = [
   {
@@ -32,7 +33,12 @@ const tabs = [
 const AdminPage = () => (
   <Layout logout>
     <h2 style={{ margin: "30px 0" }}>Administration e-MJPM</h2>
-    <DummyTabs tabs={tabs} />
+
+    <TableState
+      render={({ onSelect, activeTabIndex }) => {
+        return <DummyTabs tabs={tabs} onSelect={onSelect} activeTabIndex={activeTabIndex} />;
+      }}
+    />
   </Layout>
 );
 export default AdminPage;

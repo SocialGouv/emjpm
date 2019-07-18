@@ -32,6 +32,7 @@ import TableMesures from "../mandataires/TableMesures";
 //import TableMesures from "./TableMesures";
 import apiFetch from "../communComponents/Api";
 import Profile from "./ProfileTi";
+import TableState from "../common/TableState";
 
 const MapTable = dynamic(() => import("./MapTi"), { ssr: false });
 
@@ -95,7 +96,11 @@ class Ti extends React.Component {
     ];
     return (
       <div style={{ backgroundColor: "#ebeff2", minHeight: "60vh" }}>
-        <DummyTabs tabs={tabs} />
+        <TableState
+          render={({ onSelect, activeTabIndex }) => {
+            return <DummyTabs tabs={tabs} onSelect={onSelect} activeTabIndex={activeTabIndex} />;
+          }}
+        />
         <FicheMandataireModal />
         <ModalMesureValidation />
         <ModalMesureReservation />

@@ -44,8 +44,13 @@ const StyledTab = styled(Tab)`
 `;
 
 // dummy tabs : pass an array of [{icon: ReactElelemnt, text: String, content: ReactElement}]
-const DummyTabs = ({ tabs }) => (
-  <Tabs style={{ background: "white" }}>
+
+const DummyTabs = ({ tabs, onSelect, activeTabIndex }) => (
+  <Tabs
+    selectedIndex={activeTabIndex}
+    onSelect={activeTabIndex => onSelect(activeTabIndex)}
+    style={{ background: "white" }}
+  >
     <TabList style={{ background: "#cad4de", borderBottom: 0, marginBottom: 0 }}>
       {tabs.map(tab => (
         <StyledTab className="react-tabs__tab" data-cy={tab.text} key={tab.text}>

@@ -16,6 +16,7 @@ import { changeMandataireId } from "./actions/mandataire";
 import { DispoMagistrat } from "../common/ShowBox";
 import styled from "styled-components";
 import { show } from "redux-modal";
+import TableState from "../common/TableState";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 
@@ -222,7 +223,15 @@ class ServiceTabsAntennes extends React.Component {
     ];
     return (
       <React.Fragment>
-        {this.props.mandataireId !== 0 ? <DummyTabs tabs={tabs} /> : ""}{" "}
+        {this.props.mandataireId !== 0 ? (
+          <TableState
+            render={({ onSelect, activeTabIndex }) => {
+              return <DummyTabs tabs={tabs} onSelect={onSelect} activeTabIndex={activeTabIndex} />;
+            }}
+          />
+        ) : (
+          ""
+        )}{" "}
       </React.Fragment>
     );
   }
