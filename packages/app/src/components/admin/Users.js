@@ -2,6 +2,7 @@ import React from "react";
 import { User, UserCheck } from "react-feather";
 import TableUser from "./TableUser";
 import { DummyTabs } from "..";
+import TableState from "../common/TableState";
 
 const tabs = type =>
   [
@@ -51,6 +52,12 @@ const tabs = type =>
     }
   ].filter(tab => tab.type.toLowerCase().indexOf(type.toLowerCase()) > -1);
 
-const Users = ({ type }) => <DummyTabs tabs={tabs(type)} />;
+const Users = ({ type }) => (
+  <TableState
+    render={({ onSelect, activeTabIndex }) => {
+      return <DummyTabs tabs={tabs(type)} onSelect={onSelect} activeTabIndex={activeTabIndex} />;
+    }}
+  />
+);
 
 export default Users;
