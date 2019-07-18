@@ -10,18 +10,24 @@ COPY ./package.json /app/package.json
 COPY ./packages/api/package.json /app/packages/api/package.json
 COPY ./packages/app/package.json /app/packages/app/package.json
 COPY ./packages/graphql-server/package.json /app/packages/graphql-server/package.json
+COPY ./packages/jest-environment-knex/package.json /app/packages/jest-environment-knex/package.json
 COPY ./packages/knex/package.json /app/packages/knex/package.json
 
 COPY ./yarn.lock /app/yarn.lock
 
 WORKDIR /app
 
-RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
+# Fist run without postinstall
+RUN yarn --frozen-lockfile --ignore-scripts --cache-folder /dev/shm/yarn
 
 COPY ./packages/api /app/packages/api
 COPY ./packages/app /app/packages/app
 COPY ./packages/graphql-server /app/packages/graphql-server
+COPY ./packages/jest-environment-knex /app/packages/jest-environment-knex
 COPY ./packages/knex /app/packages/knex
+
+# Second run with postinstall
+RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
 
 RUN yarn build --stream
 
