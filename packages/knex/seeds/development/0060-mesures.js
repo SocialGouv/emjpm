@@ -14,7 +14,8 @@ exports.seed = function(knex) {
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "F",
-        status: "Mesure en cours"
+        status: "Eteindre mesure",
+        extinction: "2019-07-01T00:00:00Z"
       });
     })
     .then(function() {
