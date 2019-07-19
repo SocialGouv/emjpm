@@ -70,6 +70,7 @@ Lint jest-environment-knex:
 Test @emjpm/api:
   <<: *quality_stage
   <<: *master_based_stage
+  allow_failure: true
   services:
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
       command:
@@ -113,6 +114,7 @@ Test @emjpm/app:
 Test @emjpm/knex:
   <<: *quality_stage
   <<: *master_based_stage
+  allow_failure: true
   services:
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
       command: ["-p", "5434"]
