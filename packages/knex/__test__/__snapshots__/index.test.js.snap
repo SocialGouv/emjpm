@@ -628,107 +628,6 @@ Object {
 }
 `;
 
-exports[`service_antennes table schema 1`] = `
-Object {
-  "adresse": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "code_postal": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "created_at": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
-  "dispo_max": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "email": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "etablissement": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "id": Object {
-    "defaultValue": "nextval('\\"serviceAntennes_id_seq\\"'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "mandataire_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "mesures_en_cours": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "nom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "poste": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "prenom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "telephone": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "telephone_portable": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "type": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "ville": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-}
-`;
-
 exports[`service_tis table schema 1`] = `
 Object {
   "created_at": Object {
@@ -851,7 +750,6 @@ Array [
   "mesures",
   "regions",
   "role",
-  "service_antennes",
   "service_tis",
   "services",
   "tis",
