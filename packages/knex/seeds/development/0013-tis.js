@@ -27,7 +27,7 @@ const splitRow = row =>
   row
     .split(";")
     .filter((r, i) => i < cols.length)
-    .reduce((a, c, i) => ({ ...a, [cols[i]]: c }));
+    .reduce((a, c, i) => ({ ...a, [cols[i]]: c }), {});
 
 const rows = data
   .split("\n")
