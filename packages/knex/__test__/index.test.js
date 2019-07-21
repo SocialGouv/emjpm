@@ -4,6 +4,7 @@ const { knex } = global;
 
 beforeAll(async () => {
   await knex.migrate.latest();
+  await knex.seed.run();
 });
 
 test("should list all tables", async () => {

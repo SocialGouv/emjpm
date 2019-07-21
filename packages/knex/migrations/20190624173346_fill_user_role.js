@@ -1,5 +1,5 @@
-exports.up = function(knex, Promise) {
-  const users = knex("users");
+exports.up = async function(knex) {
+  const users = await knex("users").select(["type", "id"]);
 
   return Promise.all(
     users.map(async user => {
@@ -15,11 +15,13 @@ exports.up = function(knex, Promise) {
   );
 };
 
-exports.down = function(knex, Promise) {
-  const user_roles = knex("user_role");
+exports.down = async function(knex) {
+  const user_roles = await knex("user_role").select("id");
   return Promise.all(
-    user_roles.map(user_role => {
-      return user_role.del();
+    user_roles.map(({ id }) => {
+      return knex("user_role")
+        .where("id", id)
+        .del();
     })
   );
 };

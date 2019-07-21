@@ -1,7 +1,6 @@
 {
   "private": true,
   "scripts": {
-    "postinstall": "yarn build --stream --ignore @{emjpm,optional}/*",
     "install": "node node_modules/husky/lib/installer/bin install",
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
