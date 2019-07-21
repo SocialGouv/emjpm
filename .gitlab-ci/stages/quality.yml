@@ -108,8 +108,6 @@ Test @emjpm/app:
     JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/app/coverage
   script:
     - yarn workspace @emjpm/app test --coverage
-  after_script:
-    - CI_PROJECT_DIR=/app npx codecov -F app
 
 Test @emjpm/knex:
   <<: *quality_stage
