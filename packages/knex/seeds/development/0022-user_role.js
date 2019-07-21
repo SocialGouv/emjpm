@@ -1,5 +1,5 @@
-exports.seed = function(knex, Promise) {
-  const users = knex("users");
+exports.seed = async function(knex) {
+  const users = await knex("users");
   return Promise.all(
     users.map(async user => {
       const role = await knex("role")
