@@ -15,7 +15,7 @@ const typesMesure = {
     "Sauvegarde de justice avec mandat spécial"
 };
 
-exports.up = function(knex, Promise) {
+exports.up = function(knex) {
   return Promise.all(
     Object.keys(typesMesure).map(type =>
       knex("mesures")
@@ -25,6 +25,6 @@ exports.up = function(knex, Promise) {
   );
 };
 
-exports.down = function(knex, Promise) {
+exports.down = function() {
   return Promise.resolve();
 };

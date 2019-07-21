@@ -8206,10 +8206,10 @@ jest-environment-jsdom@^24.8.0:
     jest-util "^24.8.0"
     jsdom "^11.5.1"
 
-jest-environment-knex@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/jest-environment-knex/-/jest-environment-knex-1.1.0.tgz#b52945f8bf8325bfd3a80f21885a958a82b64302"
-  integrity sha512-t+JiHypfgMR57wHOUO9B4ReZXgl6nvINMcRXMDMoVJIkrHkKJ4cfBoo7Kc7f9ST8nkaKKXLQx54MJxZ1d4HGig==
+jest-environment-knex@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/jest-environment-knex/-/jest-environment-knex-1.1.1.tgz#274ce09d3e58f6696aeacd780eb2c9310e9330bd"
+  integrity sha512-ujzwu4YNcl012o+cPiD+uUmGNxvhHU/CnTSyGwaaKaJOtVfhsRI9Dja7bgL4IOhDyMyrytUeA0bt4qeXqrZ+jA==
   dependencies:
     jest-environment-node "^24.8.0"
     knex "^0.19.0"
