@@ -113,7 +113,22 @@ E2E Test @optional/e2e:
   dependencies: []
   image: $CI_REGISTRY_IMAGE/puppeteer:$CI_COMMIT_SHA
   services:
-    - docker:$DOCKER_VERSION-dind
+    - name: djfarrelly/maildev
+      command: ["--smtp", "25", "--web", "1080"]
+    - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
+    - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
+    - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
+      command:
+        [
+          "-p",
+          "5434",
+          "-c",
+          "fsync=off",
+          "-c",
+          "synchronous_commit=off",
+          "-c",
+          "full_page_writes=off",
+        ]
   variables:
     CODECEPT_BASEURL: "http://localhost:3000"
     API_URL: http://localhost:4000
@@ -132,8 +147,6 @@ E2E Test @optional/e2e:
     when: always
     paths:
       - optional/e2e/puppetteer/output
-  before_script:
-    - docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml -f ./docker-compose.ci.yaml up -d
   script:
     - rm -rf packages/{api,app,jest-environment-knex}
     #
