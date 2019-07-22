@@ -21,3 +21,10 @@ Register postgres image:
     CONTEXT: ./docker/postgres
     DOCKER_BUILD_ARGS: ""
     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
+
+Register puppeteer image:
+  <<: *prepare_stage
+  variables:
+    CONTEXT: ./optional/e2e/puppetteer
+    DOCKER_BUILD_ARGS: ""
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/puppeteer

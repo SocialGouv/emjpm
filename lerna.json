@@ -8,7 +8,7 @@
   },
   "packages": [
     "optional/*",
-    "optional/e3e/puppetteer",
+    "optional/e2e/*",
     "packages/*"
   ],
   "npmClient": "yarn",

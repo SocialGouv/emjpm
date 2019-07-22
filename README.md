@@ -52,7 +52,8 @@ $ docker volume rm -f emjpm_emjpm-pgdata
 
 # Start the app, api, etc...
 #
-$ docker build --cache-from socialgouv/emjpm:master -t socialgouv/emjpm:master . 
+$ docker pull registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm:master
+$ docker build --shm-size 521M --cache-from registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm:master -t socialgouv/emjpm:master . 
 $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up --build
 # or
 $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up db 
@@ -65,12 +66,12 @@ $ yarn workspace @emjpm/knex run seeds --env test
 
 # Instantiate the initial seed
 #
-$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm_test > optional/e3e/test-seed.dump
+$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm_test > optional/e2e/test-seed.dump
 ```
 
 ```sh
 # The e2e script will retore the db before each scenario with 
-$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres --clean --dbname=emjpm_test optional/e3e/test-seed.dump
+$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres --clean --dbname=emjpm_test optional/e2e/test-seed.dump
 ```
 
 ```sh

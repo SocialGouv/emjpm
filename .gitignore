@@ -6,4 +6,4 @@ dist
 docker-compose.override.yaml
 
 # Generated before launching e3e test
-optional/e3e/test-seed.dump
+optional/e2e/test-seed.dump

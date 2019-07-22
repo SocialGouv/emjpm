@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "chai": "^4.2.0",
-    "codeceptjs": "^2.1.0",
-    "execa": "^1.0.0",
+    "codeceptjs": "^2.2.0",
+    "execa": "^2.0.3",
     "got": "^9.6.0",
-    "puppeteer": "^1.14.0"
+    "puppeteer": "^1.18.1"
   }
 }

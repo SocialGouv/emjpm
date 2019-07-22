@@ -56,3 +56,62 @@ Delete useless k8s objects:
     - sh /entrypoint.sh
   only:
     - master
+
+
+E2E Test @optional/e2e:
+  <<: *notify_stage
+  stage: "Notify Finished Deployment"
+  image: $CI_REGISTRY_IMAGE/puppeteer:$CI_COMMIT_SHA
+  services:
+    - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
+    - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
+    - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
+      command:
+        [
+          "-p",
+          "5434",
+          "-c",
+          "fsync=off",
+          "-c",
+          "synchronous_commit=off",
+          "-c",
+          "full_page_writes=off",
+        ]
+  variables:
+    CODECEPT_BASEURL: "http://localhost:80"
+    API_URL: http://localhost:4000
+    POSTGRES_USER: postgres
+    POSTGRES_PASSWORD: test
+    NODE_ENV: test
+  cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+    paths:
+      - ./node_modules/
+      - ./optional/e2e/puppetteer/node_modules
+      - $CI_PROJECT_DIR/.yarn
+  artifacts:
+    expire_in: 1 week
+    when: always
+    paths:
+      - optional/e2e/puppetteer/output
+  script:
+    - rm -rf packages/{api,app,jest-environment-knex}
+    #
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    - yarn --production --ignore-scripts
+    - yarn e2e --frozen-lockfile
+    #
+    # Database on localhost:5434
+    - npx wait-port --timeout 30000 localhost:5434 # 30_000 = 1000 * 30s
+    # API on localhost:4000
+    - npx wait-port --timeout 30000 localhost:4000 # 30_000 = 1000 * 30s
+    # Front on localhost:80
+    - npx wait-port --timeout 30000 localhost:80 # 30_000 = 1000 * 30s
+    #
+    - yarn workspace @emjpm/knex run migrate --env test
+    - yarn workspace @emjpm/knex run seeds --env test
+    #
+    # Allows installation of postgresql-client-10 on Debian stretch which the Node images are based on
+    - PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm_test > optional/e2e/test-seed.dump
+    #
+    - yarn e2e test
