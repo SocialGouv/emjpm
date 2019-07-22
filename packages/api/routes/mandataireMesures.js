@@ -5,7 +5,10 @@ const router = express.Router();
 
 const { typeRequired } = require("../auth/_helpers");
 const whitelist = require("../db/queries/whitelist");
-const { getAllMesuresByTis } = require("../db/queries/mesures");
+const {
+  getAllMesuresByTis,
+  getDepartementByCodePostal
+} = require("../db/queries/mesures");
 const {
   getMandataireById,
   isServiceInTi,
@@ -213,6 +216,13 @@ router.post(
         res.status(200).json();
         return;
       }
+
+      // TODO(tglatt): make code postal required for all roles.
+      let departement;
+      if (req.body.code_postal) {
+        departement = await getDepartementByCodePostal(req.body.code_postal);
+      }
+
       if (
         req.user.type === "individuel" ||
         req.user.type === "prepose" ||
@@ -222,7 +232,8 @@ router.post(
 
         const body = {
           ...req.body,
-          mandataire_id: mandataire && mandataire.id
+          mandataire_id: mandataire && mandataire.id,
+          department_id: departement ? departement.id : undefined
         };
         if (!body.mandataire_id) {
           throw createError.UnprocessableEntity("Mandataire not found");
@@ -252,7 +263,8 @@ router.post(
           await addMesure({
             ...bodyTi,
             ti_id: ti.id,
-            cabinet: ti.cabinet
+            cabinet: ti.cabinet,
+            department_id: departement ? departement.id : undefined
           });
           await reservationEmail(ti, bodyTi);
           res.status(200).json({ success: true });
@@ -300,6 +312,7 @@ router.post(
           throw createError.Unauthorized(`Mandataire not found`);
         }
       }
+
       const mesures = await addMesure({
         ...req.body
       });
