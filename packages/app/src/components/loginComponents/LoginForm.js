@@ -181,7 +181,6 @@ class LoginForm extends React.Component {
             ReactPiwik.push(["trackEvent", "login", "success"]);
 
             trackUser();
-
             Router.push(json.url);
             this.setState({
               status: "success",
