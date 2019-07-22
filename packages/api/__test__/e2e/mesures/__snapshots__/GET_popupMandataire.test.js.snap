@@ -4,17 +4,7 @@ exports[`should return get markers for mandataire for a specific Ti 1`] = `
 Array [
   Object {
     "array_agg": Array [
-      "preposes 2010-10-05",
-    ],
-    "code_postal": "62000",
-    "count": "1",
-    "latitude": 50.5333,
-    "longitude": 2.6333,
-    "type": "individuel",
-  },
-  Object {
-    "array_agg": Array [
-      "preposes 2010-10-05",
+      "Sauvegarde de justice 2010-10-05",
     ],
     "code_postal": "93000",
     "count": "1",
@@ -24,7 +14,7 @@ Array [
   },
   Object {
     "array_agg": Array [
-      "preposes 2010-10-05",
+      "Mandat de protection future 2010-10-05",
     ],
     "code_postal": "75000",
     "count": "1",
