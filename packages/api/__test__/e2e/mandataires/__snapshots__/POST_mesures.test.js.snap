@@ -22,7 +22,7 @@ Array [
 <br><br>
     Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
 <br><br>
-  Pour rappel, à ce jour, vous avez déclaré \\"2\\" mesures pour une capacité souhaitée de \\"5\\" mesures.
+  Pour rappel, à ce jour, vous avez déclaré \\"1\\" mesures pour une capacité souhaitée de \\"5\\" mesures.
 <br><br>
   À bientôt
 <br><br>
@@ -37,7 +37,7 @@ L’équipe e-mjpm.",
 
   Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
 
-  Pour rappel, à ce jour, vous avez déclaré \\"2\\" mesures pour une capacité souhaitée de \\"5\\" mesures .
+  Pour rappel, à ce jour, vous avez déclaré \\"1\\" mesures pour une capacité souhaitée de \\"5\\" mesures .
 
   À bientôt
 
@@ -72,27 +72,6 @@ Array [
   Object {
     "annee": "2010-10-05",
     "cabinet": null,
-    "civilite": "F",
-    "code_postal": "62000",
-    "created_at": "2010-10-05T00:00:00.000Z",
-    "date_ouverture": "2010-10-04T22:00:00.000Z",
-    "department_id": null,
-    "etablissement": "UDAHF",
-    "etablissement_id": null,
-    "extinction": null,
-    "mandataire_id": 1,
-    "numero_dossier": null,
-    "numero_rg": null,
-    "reason_extinction": null,
-    "residence": "oui",
-    "status": "Mesure en cours",
-    "ti_id": null,
-    "type": "preposes",
-    "ville": "Arras",
-  },
-  Object {
-    "annee": "2010-10-05",
-    "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
     "created_at": "2010-10-05T00:00:00.000Z",
@@ -108,7 +87,7 @@ Array [
     "residence": "oui",
     "status": "Mesure en cours",
     "ti_id": null,
-    "type": "preposes",
+    "type": "Sauvegarde de justice",
     "ville": "St Denis",
   },
   Object {
@@ -140,27 +119,6 @@ Array [
   Object {
     "annee": "2010-10-05",
     "cabinet": null,
-    "civilite": "F",
-    "code_postal": "62000",
-    "created_at": "2010-10-05T00:00:00.000Z",
-    "date_ouverture": "2010-10-04T22:00:00.000Z",
-    "department_id": null,
-    "etablissement": "UDAHF",
-    "etablissement_id": null,
-    "extinction": null,
-    "mandataire_id": 1,
-    "numero_dossier": null,
-    "numero_rg": null,
-    "reason_extinction": null,
-    "residence": "oui",
-    "status": "Mesure en cours",
-    "ti_id": null,
-    "type": "preposes",
-    "ville": "Arras",
-  },
-  Object {
-    "annee": "2010-10-05",
-    "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
     "created_at": "2010-10-05T00:00:00.000Z",
@@ -176,7 +134,7 @@ Array [
     "residence": "oui",
     "status": "Mesure en cours",
     "ti_id": null,
-    "type": "preposes",
+    "type": "Sauvegarde de justice",
     "ville": "St Denis",
   },
   Object {
@@ -208,27 +166,6 @@ Array [
   Object {
     "annee": "2010-10-05",
     "cabinet": null,
-    "civilite": "F",
-    "code_postal": "62000",
-    "created_at": "2010-10-05T00:00:00.000Z",
-    "date_ouverture": "2010-10-04T22:00:00.000Z",
-    "department_id": null,
-    "etablissement": "UDAHF",
-    "etablissement_id": null,
-    "extinction": null,
-    "mandataire_id": 1,
-    "numero_dossier": null,
-    "numero_rg": null,
-    "reason_extinction": null,
-    "residence": "oui",
-    "status": "Mesure en cours",
-    "ti_id": null,
-    "type": "preposes",
-    "ville": "Arras",
-  },
-  Object {
-    "annee": "2010-10-05",
-    "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
     "created_at": "2010-10-05T00:00:00.000Z",
@@ -244,7 +181,7 @@ Array [
     "residence": "oui",
     "status": "Mesure en cours",
     "ti_id": null,
-    "type": "preposes",
+    "type": "Sauvegarde de justice",
     "ville": "St Denis",
   },
   Object {
@@ -276,27 +213,6 @@ Array [
   Object {
     "annee": "2010-10-05",
     "cabinet": null,
-    "civilite": "F",
-    "code_postal": "62000",
-    "created_at": "2010-10-05T00:00:00.000Z",
-    "date_ouverture": "2010-10-04T22:00:00.000Z",
-    "department_id": null,
-    "etablissement": "UDAHF",
-    "etablissement_id": null,
-    "extinction": null,
-    "mandataire_id": 1,
-    "numero_dossier": null,
-    "numero_rg": null,
-    "reason_extinction": null,
-    "residence": "oui",
-    "status": "Mesure en cours",
-    "ti_id": null,
-    "type": "preposes",
-    "ville": "Arras",
-  },
-  Object {
-    "annee": "2010-10-05",
-    "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
     "created_at": "2010-10-05T00:00:00.000Z",
@@ -312,7 +228,7 @@ Array [
     "residence": "oui",
     "status": "Mesure en cours",
     "ti_id": null,
-    "type": "preposes",
+    "type": "Sauvegarde de justice",
     "ville": "St Denis",
   },
   Object {
