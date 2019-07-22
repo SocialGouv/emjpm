@@ -57,12 +57,13 @@ Delete useless k8s objects:
   only:
     - master
 
-
 E2E Test @optional/e2e:
   stage: "Notify Finished Deployment"
   dependencies: []
   image: $CI_REGISTRY_IMAGE/puppeteer:$CI_COMMIT_SHA
   services:
+    - name: djfarrelly/maildev
+      command: ["--smtp", "25", "--web", "1080"]
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
