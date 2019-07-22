@@ -319,6 +319,12 @@ const getAllMesuresEteinte = mandataireID =>
     status: "Eteindre mesure"
   });
 
+const getDepartementByCodePostal = async code_postal => {
+  const codePostalDepartement = await code_postal.substr(0, 2);
+  return knex("departements")
+    .where("code", "like", `${codePostalDepartement}%`)
+    .first();
+};
 module.exports = {
   getAllMesuresByMandataires,
   getAllMesuresByMandatairesFilter,
@@ -331,5 +337,6 @@ module.exports = {
   getMesuresEnCoursMandataire,
   addMesure,
   getCityCoordinates,
-  bulk
+  bulk,
+  getDepartementByCodePostal
 };

@@ -513,6 +513,12 @@ Object {
     "nullable": true,
     "type": "date",
   },
+  "department_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "etablissement": Object {
     "defaultValue": null,
     "maxLength": 255,
