@@ -596,7 +596,6 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
 
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));
-router.use("/", require("./serviceAntennes"));
 router.use("/", require("./mandatairesEtablissements"));
 router.use("/", require("./tis"));
 router.use("/", require("./importation-excel"));
