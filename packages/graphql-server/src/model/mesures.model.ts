@@ -4,6 +4,12 @@ import {
   NullableString
 } from "../utils/types.util";
 
+export type MesureStatus =
+  | "Mesure en cours"
+  | "Mesure en attente"
+  | "Eteindre mesure"
+  | null;
+
 export type MesureType =
   | "Curatelle"
   | "Curatelle renforcée"
@@ -46,7 +52,7 @@ export interface Mesures {
   date_ouverture: NullableDate;
   residence: MesureResidence;
   civilite: NullableString;
-  status: NullableString;
+  status: MesureStatus;
   extinction: NullableDate;
   etablissement_id: NullableNumber;
   ti_id: NullableNumber;
