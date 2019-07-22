@@ -7,22 +7,10 @@ const {
 } = getConfig();
 
 // forceLogin: redirect user to /login when receiving a 401
-const apiFetch = (route, params, options = { forceLogin: true }) => {
+const apiFetch = (route, params, options = { forceLogin: true, hasUrl: false }) => {
   const getToken = () => {
     return localStorage.getItem("id_token");
   };
-
-  // const isTokenExpired = token => {
-  //   try {
-  //     const decoded = decode(token);
-  //     if (decoded.exp < Date.now() / 1000) {
-  //       // Checking if token is expired. N
-  //       return true;
-  //     } else return false;
-  //   } catch (err) {
-  //     return false;
-  //   }
-  // };
 
   const hasToken = () => {
     const token = getToken();
@@ -48,7 +36,10 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
       "Content-Type": "application/json"
     };
   }
-  return fetch(`${API_URL}/api/v1${route}`, fetchParams)
+
+  const url = options.hasUrl ? route : `${API_URL}/api/v1${route}`;
+
+  return fetch(url, fetchParams)
     .then(res => {
       // intercept
       if (options.forceLogin && res.status === 401) {

@@ -2,12 +2,18 @@ import React from "react";
 import InscriptionIndividuel from "./InscriptionIndividuel";
 import InscriptionPrepose from "./InscriptionPrepose";
 import InscriptionService from "./InscriptionService";
+import InscriptionDirection from "./InscriptionDirection";
 import InscriptionTi from "./InscriptionTi";
 import TiSelector from "./TiSelector";
 import Resolve from "../common/Resolve";
 import apiFetch from "../communComponents/Api";
 import Router from "next/router";
 import Modal from "react-modal";
+import getConfig from "next/config";
+
+const {
+  publicRuntimeConfig: { API_URL }
+} = getConfig();
 
 const formsMandataires = {
   individuel(props) {
@@ -21,6 +27,9 @@ const formsMandataires = {
   },
   ti(props) {
     return <InscriptionTi {...props} />;
+  },
+  direction(props) {
+    return <InscriptionDirection {...props} />;
   }
 };
 
@@ -83,25 +92,24 @@ class Form extends React.Component {
   };
 
   submitUser = formData => {
-    const urls = {
-      ti: "/inscription/tis",
-      default: "/inscription/mandataires"
-    };
-
-    const url = urls[this.state.typeMandataire] || urls.default;
+    const url = `${API_URL}/api/v2/auth/signup`;
     const usernameData = formData.email.toLowerCase().trim();
-    apiFetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        ...formData,
-        etablissement: formData.etablissement || "",
-        tis: this.state.tis,
-        type: this.state.typeMandataire,
-        username: usernameData,
-        mesures_en_cours: formData.mesures_en_cours || 0,
-        cabinet: formData.cabinet || null
-      })
-    })
+    apiFetch(
+      url,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          ...formData,
+          etablissement: formData.etablissement || "",
+          tis: this.state.tis,
+          type: this.state.typeMandataire,
+          username: usernameData,
+          mesures_en_cours: formData.mesures_en_cours || 0,
+          cabinet: formData.cabinet || null
+        })
+      },
+      { hasUrl: true }
+    )
       .then(json => {
         if (json.success === false) {
           this.setState({ status: "error", message: json.message });
@@ -119,13 +127,22 @@ class Form extends React.Component {
     const hasSingleTi = this.state.tis.length === 1;
     const hasMultipleTi = this.state.tis.length > 1;
     const isTi = this.state.typeMandataire === "ti";
+<<<<<<< HEAD
 
     if (hasNoTi) {
       this.handleOpenModal("Saisissez au moins un tribunal d'instance de référence");
     } else if (isTi && hasMultipleTi) {
       this.handleOpenModal("Saisissez un seul tribunal d'instance de référence");
+=======
+    const userType = this.state.typeMandataire;
+    const isAgent = userType === "direction";
+    if (hasNoTi && !isAgent) {
+      return alert("Saisissez au moins un TI de référence");
+    } else if (isTi && hasMultipleTi && !isAgent) {
+      return alert("Saisissez un seul TI de référence");
+>>>>>>> fix(signup): fix signup api and frontend its alive
     } else {
-      if ((isTi && hasSingleTi) || !hasNoTi) {
+      if ((isTi && hasSingleTi) || !hasNoTi || isAgent) {
         this.setState({ status: "loading", formData }, () => {
           this.submitUser(formData);
         });
@@ -174,6 +191,11 @@ class Form extends React.Component {
                   <FormSelector
                     value="ti"
                     label="Tribunal Instance"
+                    onChange={this.setTypeMandataire}
+                  />
+                  <FormSelector
+                    value="direction"
+                    label="Agent de l'état"
                     onChange={this.setTypeMandataire}
                   />
                 </tr>

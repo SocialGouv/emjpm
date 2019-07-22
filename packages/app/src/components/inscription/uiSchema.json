@@ -1,9 +1,11 @@
 {
-  "pass1": {
+  "password": {
+    "ui:widget": "password",
     "ui:title": "Mot de passe",
     "ui:placeholder": "8 caractères minimum"
   },
-  "pass2": {
+  "passwordConfirmation": {
+    "ui:widget": "password",
     "ui:title": "Répétez le mot de passe",
     "ui:placeholder": "8 caractères minimum"
   },
@@ -75,5 +77,8 @@
     "ui:title": "Cabinet",
     "ui:placeholder": "cabinet"
   },
-  "type": { "ui:widget": "radio" }
+  "type": {
+    "ui:title": "Type d'agent",
+    "ui:placeholder": "Type d'agent"
+  }
 }
