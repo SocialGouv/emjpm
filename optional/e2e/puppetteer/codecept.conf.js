@@ -3,7 +3,7 @@ exports.config = {
   helpers: {
     Puppeteer: {
       chrome: {
-        headless: false,
+        headless: process.env.CI ? true : process.env.HEADLESS ? true : false,
         args: process.env.CI ? ["--no-sandbox", "--disable-setuid-sandbox"] : []
       },
       restart: false,
