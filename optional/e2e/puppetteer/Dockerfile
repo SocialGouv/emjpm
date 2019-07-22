@@ -1,10 +1,3 @@
-#
-
-FROM docker:18 as docker
-FROM docker/compose:1.23.2 as docker-compose
-
-#
-
 FROM node:10
 
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
@@ -26,11 +19,6 @@ RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && mkdir -p /home/pptruser/Downloads /app \
     && chown -R pptruser:pptruser /home/pptruser \
     && chown -R pptruser:pptruser /app
-
-
-
-COPY --from=docker /usr/local/bin/docker /usr/local/bin/docker
-COPY --from=docker-compose /usr/local/bin/docker-compose /usr/local/bin/docker-compose
 
 # Run everything after as non-privileged user.
 USER pptruser
