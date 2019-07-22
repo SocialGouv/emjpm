@@ -26,6 +26,7 @@ Notify Starting Deployment:
 Notify Fail:
   <<: *notify_stage
   stage: "Notify Finished Deployment"
+  allow_failure: true
   when: on_failure
   dependencies:
     - Notify Starting Deployment
