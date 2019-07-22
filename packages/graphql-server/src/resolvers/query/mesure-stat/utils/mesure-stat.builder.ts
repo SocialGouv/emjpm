@@ -6,7 +6,7 @@ import {
   MesureTypeCategoryEvolution,
   MesureTypeCategoryStatistic,
   MonthlyNumber
-} from "../../../types/resolvers-types";
+} from "../../../../types/resolvers-types";
 
 const buildMesureStateCategoryStatistic = (
   mesureStateCategory: MesureStateCategory

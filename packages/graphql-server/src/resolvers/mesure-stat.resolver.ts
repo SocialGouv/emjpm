@@ -1,12 +1,12 @@
 import { logger } from "../logger";
+import { QueryGetAvailableMesureNumberArgs } from "../types/resolvers-types";
 import {
   getClosedMesureNumber,
   getMesureStateCategoryStatistics,
   getMesureTypeCategoryEvolution,
   getMesureTypeCategoryStatistics,
   getNewMesureNumber
-} from "../query-resolvers/mesure-stat";
-import { QueryGetAvailableMesureNumberArgs } from "../types/resolvers-types";
+} from "./query/mesure-stat";
 
 export const resolvers = {
   Query: {

@@ -1,10 +1,10 @@
-import { mesureQuery, SearchMesureResult } from "../../client/mesure.query";
-import { logger } from "../../logger";
+import { mesureQuery, SearchMesureResult } from "../../../client/mesure.query";
+import { logger } from "../../../logger";
 import {
   MesureStateCategory,
   MesureStateCategoryStatistic,
   QueryGetMesureStateCategoryStatisticsArgs
-} from "../../types/resolvers-types";
+} from "../../../types/resolvers-types";
 import { buildMesureStateCategoryStatistics } from "./utils/mesure-stat.builder";
 
 export const getMesureStateCategoryStatistics = async (

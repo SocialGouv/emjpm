@@ -1,9 +1,9 @@
-import { mesureQuery, SearchMesureResult } from "../../client/mesure.query";
-import { logger } from "../../logger";
+import { mesureQuery, SearchMesureResult } from "../../../client/mesure.query";
+import { logger } from "../../../logger";
 import {
   MesureTypeCategoryStatistic,
   QueryGetMesureTypeCategoryStatisticsArgs
-} from "../../types/resolvers-types";
+} from "../../../types/resolvers-types";
 import { mesureStatAdapter } from "./utils/mesure-stat.adapter";
 import { buildMesureTypeCategoryStatistics } from "./utils/mesure-stat.builder";
 

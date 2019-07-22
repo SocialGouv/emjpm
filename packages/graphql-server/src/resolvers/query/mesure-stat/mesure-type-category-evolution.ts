@@ -1,10 +1,10 @@
 import { isAfter, isBefore } from "date-fns";
-import { mesureQuery, SearchMesureResult } from "../../client/mesure.query";
-import { logger } from "../../logger";
+import { mesureQuery, SearchMesureResult } from "../../../client/mesure.query";
+import { logger } from "../../../logger";
 import {
   MesureTypeCategoryEvolution,
   QueryGetMesureTypeCategoryEvolutionArgs
-} from "../../types/resolvers-types";
+} from "../../../types/resolvers-types";
 import { mesureStatAdapter } from "./utils/mesure-stat.adapter";
 import { buildMesureTypeCategoryEvolutions } from "./utils/mesure-stat.builder";
 

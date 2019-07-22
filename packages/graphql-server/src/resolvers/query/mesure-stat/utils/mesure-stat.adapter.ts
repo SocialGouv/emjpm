@@ -1,8 +1,8 @@
-import { MesureStatus, MesureType } from "../../../model/mesures.model";
+import { MesureStatus, MesureType } from "../../../../model/mesures.model";
 import {
   MesureStateCategory,
   MesureTypeCategory
-} from "../../../types/resolvers-types";
+} from "../../../../types/resolvers-types";
 
 export const mesureStatAdapter = {
   adaptState: (status: MesureStatus) => {
