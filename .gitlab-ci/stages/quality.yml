@@ -44,19 +44,6 @@ Lint @emjpm/graphql-server:
   script:
     - yarn workspace @emjpm/graphql-server lint
 
-Lint @optional/e2e:
-  <<: *quality_stage
-  <<: *master_based_stage
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
-    paths:
-      - /app/optional/e2e/node_modules/
-      - $CI_PROJECT_DIR/.yarn
-  script:
-    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
-    - yarn run -- lerna exec --scope=@optional/e2e yarn -- --ignore-scripts
-    - yarn run -- lerna run --scope=@optional/e2e lint
-
 ###########################################
 ###                TESTS                ###
 ###########################################
