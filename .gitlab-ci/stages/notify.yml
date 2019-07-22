@@ -59,8 +59,8 @@ Delete useless k8s objects:
 
 
 E2E Test @optional/e2e:
-  <<: *notify_stage
   stage: "Notify Finished Deployment"
+  dependencies: []
   image: $CI_REGISTRY_IMAGE/puppeteer:$CI_COMMIT_SHA
   services:
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
