@@ -29,6 +29,9 @@ services:
       - 1080:80
 
   api:
+    build:
+      context: packages/api
+      dockerfile: Dockerfile
     env_file: .env.test
     ports:
       - 4000:4000
