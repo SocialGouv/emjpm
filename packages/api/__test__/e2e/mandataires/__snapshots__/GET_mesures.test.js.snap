@@ -5,28 +5,6 @@ Array [
   Object {
     "annee": "2010-10-05",
     "cabinet": null,
-    "civilite": "F",
-    "code_postal": "62000",
-    "created_at": "2010-10-05T00:00:00.000Z",
-    "date_ouverture": "2010-10-04T22:00:00.000Z",
-    "department_id": null,
-    "etablissement": "UDAHF",
-    "etablissement_id": null,
-    "extinction": null,
-    "id": 1,
-    "mandataire_id": 1,
-    "numero_dossier": null,
-    "numero_rg": null,
-    "reason_extinction": null,
-    "residence": "oui",
-    "status": "Mesure en cours",
-    "ti_id": null,
-    "type": "preposes",
-    "ville": "Arras",
-  },
-  Object {
-    "annee": "2010-10-05",
-    "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
     "created_at": "2010-10-05T00:00:00.000Z",
@@ -43,7 +21,7 @@ Array [
     "residence": "oui",
     "status": "Mesure en cours",
     "ti_id": null,
-    "type": "preposes",
+    "type": "Sauvegarde de justice",
     "ville": "St Denis",
   },
 ]
@@ -70,7 +48,7 @@ Array [
     "residence": null,
     "status": "Mesure en attente",
     "ti_id": null,
-    "type": "preposes",
+    "type": "Tutelle",
     "ville": null,
   },
 ]
@@ -78,6 +56,28 @@ Array [
 
 exports[`should get list of mesures eteintes 1`] = `
 Array [
+  Object {
+    "annee": "2010-10-05",
+    "cabinet": null,
+    "civilite": "F",
+    "code_postal": "62000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "department_id": null,
+    "etablissement": "UDAHF",
+    "etablissement_id": null,
+    "extinction": "2019-06-30T22:00:00.000Z",
+    "id": 1,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "numero_rg": null,
+    "reason_extinction": null,
+    "residence": "oui",
+    "status": "Eteindre mesure",
+    "ti_id": null,
+    "type": "Curatelle renforcée à la personne",
+    "ville": "Arras",
+  },
   Object {
     "annee": "2012-10-05",
     "cabinet": null,
@@ -97,7 +97,7 @@ Array [
     "residence": "oui",
     "status": "Eteindre mesure",
     "ti_id": null,
-    "type": "preposes",
+    "type": "Tutelle aux biens",
     "ville": "St ambroise",
   },
 ]
@@ -107,23 +107,13 @@ exports[`should get list of mesures for maps 1`] = `
 Array [
   Object {
     "array_agg": Array [
-      "preposes 2010-10-05",
+      "Sauvegarde de justice 2010-10-05",
     ],
     "city": "St Denis",
     "code_postal": "93000",
     "count": "1",
     "latitude": 48.91,
     "longitude": 2.41998,
-  },
-  Object {
-    "array_agg": Array [
-      "preposes 2010-10-05",
-    ],
-    "city": "Arras",
-    "code_postal": "62000",
-    "count": "1",
-    "latitude": 50.5333,
-    "longitude": 2.6333,
   },
 ]
 `;
