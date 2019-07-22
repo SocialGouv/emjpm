@@ -10,11 +10,12 @@ exports.seed = function(knex) {
         mandataire_id: 1,
         created_at: "2010-10-05",
         annee: "2010-10-05",
-        type: "preposes",
+        type: "Curatelle renforcée à la personne",
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "F",
-        status: "Mesure en cours"
+        status: "Eteindre mesure",
+        extinction: "2019-07-01T00:00:00Z"
       });
     })
     .then(function() {
@@ -26,7 +27,7 @@ exports.seed = function(knex) {
         mandataire_id: 2,
         created_at: "2010-10-05",
         annee: "2010-10-05",
-        type: "preposes",
+        type: "Mandat de protection future",
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "F",
@@ -41,7 +42,7 @@ exports.seed = function(knex) {
         mandataire_id: 1,
         created_at: "2010-10-05",
         annee: "2010-10-05",
-        type: "preposes",
+        type: "Tutelle",
         date_ouverture: "2010-10-05",
         civilite: "F",
         status: "Mesure en attente"
@@ -56,7 +57,7 @@ exports.seed = function(knex) {
         mandataire_id: 1,
         created_at: "2010-10-05",
         annee: "2010-10-05",
-        type: "preposes",
+        type: "Sauvegarde de justice",
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "H",
@@ -72,7 +73,7 @@ exports.seed = function(knex) {
         mandataire_id: 1,
         created_at: "2012-10-05",
         annee: "2012-10-05",
-        type: "preposes",
+        type: "Tutelle aux biens",
         date_ouverture: "2012-10-05",
         residence: "oui",
         civilite: "F",
