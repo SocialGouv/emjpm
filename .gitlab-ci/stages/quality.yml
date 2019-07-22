@@ -112,6 +112,8 @@ E2E Test @optional/e2e:
   stage: "Notify Finished Deployment"
   dependencies: []
   image: $CI_REGISTRY_IMAGE/puppeteer:$CI_COMMIT_SHA
+  services:
+    - docker:$DOCKER_VERSION-dind
   variables:
     CODECEPT_BASEURL: "http://localhost:3000"
     API_URL: http://localhost:4000
