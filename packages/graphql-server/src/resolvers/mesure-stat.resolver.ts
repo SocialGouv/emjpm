@@ -1,28 +1,28 @@
 import { logger } from "../logger";
-import { QueryGetAvailableMesureNumberArgs } from "../types/resolvers-types";
+import { QueryAvailableMesureNumberArgs } from "../types/resolvers-types";
 import {
-  getClosedMesureNumber,
-  getMesureStateCategoryStatistics,
-  getMesureTypeCategoryEvolution,
-  getMesureTypeCategoryStatistics,
-  getNewMesureNumber
+  closedMesureNumber,
+  mesureStateCategoryStatistics,
+  mesureTypeCategoryEvolution,
+  mesureTypeCategoryStatistics,
+  newMesureNumber
 } from "./query/mesure-stat";
 
 export const resolvers = {
   Query: {
-    getAvailableMesureNumber: async (
+    availableMesureNumber: async (
       _: any,
-      args: QueryGetAvailableMesureNumberArgs,
+      args: QueryAvailableMesureNumberArgs,
       context: any
     ) => {
       logger.info(args, context);
       return null;
     },
-    getClosedMesureNumber,
-    getMesureStateCategoryStatistics,
-    getMesureTypeCategoryEvolution,
-    getMesureTypeCategoryStatistics,
-    getNewMesureNumber
+    closedMesureNumber,
+    mesureStateCategoryStatistics,
+    mesureTypeCategoryEvolution,
+    mesureTypeCategoryStatistics,
+    newMesureNumber
   }
 };
 

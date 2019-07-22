@@ -1,10 +1,10 @@
 import { mesureQuery, SearchMesureResult } from "../../../client/mesure.query";
 import { logger } from "../../../logger";
-import { QueryGetClosedMesureNumberArgs } from "../../../types/resolvers-types";
+import { QueryClosedMesureNumberArgs } from "../../../types/resolvers-types";
 
-export const getClosedMesureNumber = async (
+export const closedMesureNumber = async (
   _: any,
-  args: QueryGetClosedMesureNumberArgs,
+  args: QueryClosedMesureNumberArgs,
   context: any
 ) => {
   logger.info(args, context);

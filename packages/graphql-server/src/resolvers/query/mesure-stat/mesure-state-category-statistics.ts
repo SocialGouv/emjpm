@@ -3,13 +3,13 @@ import { logger } from "../../../logger";
 import {
   MesureStateCategory,
   MesureStateCategoryStatistic,
-  QueryGetMesureStateCategoryStatisticsArgs
+  QueryMesureStateCategoryStatisticsArgs
 } from "../../../types/resolvers-types";
 import { buildMesureStateCategoryStatistics } from "./utils/mesure-stat.builder";
 
-export const getMesureStateCategoryStatistics = async (
+export const mesureStateCategoryStatistics = async (
   _: any,
-  args: QueryGetMesureStateCategoryStatisticsArgs,
+  args: QueryMesureStateCategoryStatisticsArgs,
   context: any
 ) => {
   logger.info(args, context);

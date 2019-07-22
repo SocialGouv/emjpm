@@ -2,14 +2,14 @@ import { mesureQuery, SearchMesureResult } from "../../../client/mesure.query";
 import { logger } from "../../../logger";
 import {
   MesureTypeCategoryStatistic,
-  QueryGetMesureTypeCategoryStatisticsArgs
+  QueryMesureTypeCategoryStatisticsArgs
 } from "../../../types/resolvers-types";
 import { mesureStatAdapter } from "./utils/mesure-stat.adapter";
 import { buildMesureTypeCategoryStatistics } from "./utils/mesure-stat.builder";
 
-export const getMesureTypeCategoryStatistics = async (
+export const mesureTypeCategoryStatistics = async (
   _: any,
-  args: QueryGetMesureTypeCategoryStatisticsArgs,
+  args: QueryMesureTypeCategoryStatisticsArgs,
   context: any
 ) => {
   logger.info(args, context);

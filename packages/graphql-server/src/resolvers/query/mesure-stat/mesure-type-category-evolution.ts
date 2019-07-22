@@ -3,14 +3,14 @@ import { mesureQuery, SearchMesureResult } from "../../../client/mesure.query";
 import { logger } from "../../../logger";
 import {
   MesureTypeCategoryEvolution,
-  QueryGetMesureTypeCategoryEvolutionArgs
+  QueryMesureTypeCategoryEvolutionArgs
 } from "../../../types/resolvers-types";
 import { mesureStatAdapter } from "./utils/mesure-stat.adapter";
 import { buildMesureTypeCategoryEvolutions } from "./utils/mesure-stat.builder";
 
-export const getMesureTypeCategoryEvolution = async (
+export const mesureTypeCategoryEvolution = async (
   _: any,
-  args: QueryGetMesureTypeCategoryEvolutionArgs,
+  args: QueryMesureTypeCategoryEvolutionArgs,
   context: any
 ) => {
   logger.info(args, context);

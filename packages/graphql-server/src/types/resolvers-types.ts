@@ -59,21 +59,21 @@ export type MonthlyNumber = {
 
 export type Query = {
   __typename?: "Query";
-  getAvailableMesureNumber: Scalars["Int"];
-  getNewMesureNumber: Scalars["Int"];
-  getClosedMesureNumber: Scalars["Int"];
-  getMesureTypeCategoryStatistics: Array<MesureTypeCategoryStatistic>;
-  getMesureStateCategoryStatistics: Array<MesureStateCategoryStatistic>;
-  getMesureTypeCategoryEvolution: Array<MesureTypeCategoryEvolution>;
+  availableMesureNumber: Scalars["Int"];
+  newMesureNumber: Scalars["Int"];
+  closedMesureNumber: Scalars["Int"];
+  mesureTypeCategoryStatistics: Array<MesureTypeCategoryStatistic>;
+  mesureStateCategoryStatistics: Array<MesureStateCategoryStatistic>;
+  mesureTypeCategoryEvolution: Array<MesureTypeCategoryEvolution>;
 };
 
-export type QueryGetAvailableMesureNumberArgs = {
+export type QueryAvailableMesureNumberArgs = {
   region?: Maybe<Scalars["Int"]>;
   department?: Maybe<Scalars["Int"]>;
   court?: Maybe<Scalars["Int"]>;
 };
 
-export type QueryGetNewMesureNumberArgs = {
+export type QueryNewMesureNumberArgs = {
   start: Scalars["String"];
   end: Scalars["String"];
   region?: Maybe<Scalars["Int"]>;
@@ -81,7 +81,7 @@ export type QueryGetNewMesureNumberArgs = {
   court?: Maybe<Scalars["Int"]>;
 };
 
-export type QueryGetClosedMesureNumberArgs = {
+export type QueryClosedMesureNumberArgs = {
   start: Scalars["String"];
   end: Scalars["String"];
   region?: Maybe<Scalars["Int"]>;
@@ -89,20 +89,20 @@ export type QueryGetClosedMesureNumberArgs = {
   court?: Maybe<Scalars["Int"]>;
 };
 
-export type QueryGetMesureTypeCategoryStatisticsArgs = {
+export type QueryMesureTypeCategoryStatisticsArgs = {
   region?: Maybe<Scalars["Int"]>;
   department?: Maybe<Scalars["Int"]>;
   court?: Maybe<Scalars["Int"]>;
 };
 
-export type QueryGetMesureStateCategoryStatisticsArgs = {
+export type QueryMesureStateCategoryStatisticsArgs = {
   date: Scalars["String"];
   region?: Maybe<Scalars["Int"]>;
   department?: Maybe<Scalars["Int"]>;
   court?: Maybe<Scalars["Int"]>;
 };
 
-export type QueryGetMesureTypeCategoryEvolutionArgs = {
+export type QueryMesureTypeCategoryEvolutionArgs = {
   start: Scalars["String"];
   end: Scalars["String"];
   region?: Maybe<Scalars["Int"]>;

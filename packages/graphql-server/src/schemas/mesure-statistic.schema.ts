@@ -2,9 +2,9 @@ import { gql } from "apollo-server-koa";
 
 export default gql`
   type Query {
-    getAvailableMesureNumber(region: Int, department: Int, court: Int): Int!
+    availableMesureNumber(region: Int, department: Int, court: Int): Int!
 
-    getNewMesureNumber(
+    newMesureNumber(
       start: String!
       end: String!
       region: Int
@@ -12,7 +12,7 @@ export default gql`
       court: Int
     ): Int!
 
-    getClosedMesureNumber(
+    closedMesureNumber(
       start: String!
       end: String!
       region: Int
@@ -20,20 +20,20 @@ export default gql`
       court: Int
     ): Int!
 
-    getMesureTypeCategoryStatistics(
+    mesureTypeCategoryStatistics(
       region: Int
       department: Int
       court: Int
     ): [MesureTypeCategoryStatistic!]!
 
-    getMesureStateCategoryStatistics(
+    mesureStateCategoryStatistics(
       date: String!
       region: Int
       department: Int
       court: Int
     ): [MesureStateCategoryStatistic!]!
 
-    getMesureTypeCategoryEvolution(
+    mesureTypeCategoryEvolution(
       start: String!
       end: String!
       region: Int
