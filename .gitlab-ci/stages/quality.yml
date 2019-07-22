@@ -130,7 +130,7 @@ E2E Test @optional/e2e:
           "full_page_writes=off",
         ]
   variables:
-    CODECEPT_BASEURL: "http://localhost:3000"
+    CODECEPT_BASEURL: "http://localhost:80"
     API_URL: http://localhost:4000
     POSTGRES_USER: postgres
     POSTGRES_PASSWORD: test
@@ -160,8 +160,8 @@ E2E Test @optional/e2e:
     - npx wait-port --timeout ${TIMEOUT} localhost:4000
     # Maildev API on localhost:1080
     - npx wait-port --timeout ${TIMEOUT} localhost:1080
-    # Front on localhost:3000
-    - npx wait-port --timeout ${TIMEOUT} localhost:3000
+    # Front on localhost:80
+    - npx wait-port --timeout ${TIMEOUT} localhost:80
     #
     - yarn workspace @emjpm/knex run migrate --env test
     - yarn workspace @emjpm/knex run seeds --env test
