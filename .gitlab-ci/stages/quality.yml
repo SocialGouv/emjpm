@@ -114,7 +114,7 @@ E2E Test @optional/e2e:
   image: $CI_REGISTRY_IMAGE/puppeteer:$CI_COMMIT_SHA
   services:
     - name: djfarrelly/maildev
-      command: ["--web", "1080", "--smtp", "25"]
+      command: ["bin/maildev", "--web", "1080", "--smtp", "25"]
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
