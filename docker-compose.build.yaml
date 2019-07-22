@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  db:
+    build:
+      context: ./docker/postgres
+  api:
+    build:
+      context: ./packages/api
+  frontend:
+    build:
+      context: ./packages/app
