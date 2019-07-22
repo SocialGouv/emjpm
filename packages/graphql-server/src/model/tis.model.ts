@@ -1,5 +1,3 @@
-import { NullableNumber } from "../utils/types.util";
-
 export interface Tis {
   id: number;
   etablissement: string;
@@ -7,8 +5,5 @@ export interface Tis {
   code_postal: string;
   ville: string;
   telephone: string;
-  latitude: number;
-  longitude: number;
   created_at: Date;
-  user_id: NullableNumber;
 }
