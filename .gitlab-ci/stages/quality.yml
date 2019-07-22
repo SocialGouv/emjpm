@@ -113,7 +113,7 @@ E2E Test @optional/e2e:
   dependencies: []
   image: $CI_REGISTRY_IMAGE/puppeteer:$CI_COMMIT_SHA
   services:
-    - name: djfarrelly/maildev
+    - name: djfarrelly/maildev:1.0.0
       command: ["bin/maildev", "--web", "1080", "--smtp", "25"]
     - name: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_SHA
     - name: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_SHA
@@ -169,4 +169,4 @@ E2E Test @optional/e2e:
     # Allows installation of postgresql-client-10 on Debian stretch which the Node images are based on
     - PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm_test > optional/e2e/test-seed.dump
     #
-    - yarn e2e test
+    - yarn e2e test --verbose

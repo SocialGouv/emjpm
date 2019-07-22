@@ -1,7 +1,7 @@
 const { I } = inject();
 const { output, recorder } = require("codeceptjs");
 
-const MAILDEV_API_URL = "http://localhost:1080";
+const MAILDEV_API_URL = process.env.MAILDEV_API_URL || "http://localhost:1080";
 
 //
 
