@@ -67,7 +67,8 @@ class Form extends React.Component {
       status: "idle",
       message: "",
       showModal: false,
-      modalContent: ""
+      modalContent: "",
+      errors: []
     };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -118,8 +119,10 @@ class Form extends React.Component {
         }
         Router.push("/inscription-done");
       })
-      .catch(e => {
-        this.setState({ status: "error", message: e && e.message });
+      .catch(error => {
+        const test = this.state.errors;
+        const errorsArray = test.concat(error.errors);
+        this.setState({ status: "error", message: error && errorsArray });
       });
   };
 
@@ -128,21 +131,12 @@ class Form extends React.Component {
     const hasSingleTi = this.state.tis.length === 1;
     const hasMultipleTi = this.state.tis.length > 1;
     const isTi = this.state.typeMandataire === "ti";
-<<<<<<< HEAD
-
+    const userType = this.state.typeMandataire;
+    const isAgent = userType === "direction";
     if (hasNoTi) {
       this.handleOpenModal("Saisissez au moins un tribunal d'instance de référence");
     } else if (isTi && hasMultipleTi) {
       this.handleOpenModal("Saisissez un seul tribunal d'instance de référence");
-=======
-    const userType = this.state.typeMandataire;
-    const isAgent = userType === "direction";
-    if (hasNoTi && !isAgent) {
-      return alert("Saisissez au moins un TI de référence");
-    } else if (isTi && hasMultipleTi && !isAgent) {
-      return alert("Saisissez un seul TI de référence");
->>>>>>> fix(signup): fix signup api and frontend its alive
-    } else {
       if ((isTi && hasSingleTi) || !hasNoTi || isAgent) {
         this.setState({ status: "loading", formData }, () => {
           this.submitUser(formData);
@@ -191,7 +185,7 @@ class Form extends React.Component {
                 </tr>
               </tbody>
             </table>
-            {!isAgent && (
+            {!isAgent && userType && (
               <Resolve
                 promises={[() => getTis()]}
                 render={({ status, result }) => (
@@ -213,9 +207,19 @@ class Form extends React.Component {
                 formData={this.state.formData}
               />
             )}
+
             {this.state.status === "error" && (
-              <div style={{ textAlign: "center", color: "red", fontSize: "1.1em" }}>
-                {this.state.message}
+              <div>
+                {this.state.message.map(error => {
+                  return (
+                    <div
+                      key={error.msg}
+                      style={{ textAlign: "center", color: "red", fontSize: "1.1em" }}
+                    >
+                      {error.msg}
+                    </div>
+                  );
+                })}
               </div>
             )}
             <Modal

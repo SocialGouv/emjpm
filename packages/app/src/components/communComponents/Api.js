@@ -55,20 +55,26 @@ const apiFetch = (route, params, options = { forceLogin: true, apiVersion: "v1" 
         /* eslint-enable no-console */
         throw new Error(404);
       }
-      if (res.status >= 500) {
-        /* eslint-disable no-console */
-        console.log(`${res.status} on ${route}`);
-        /* eslint-enable no-console */
-        throw new Error(res.status);
-      }
       return res;
     })
     .then(async res => {
+      if (res.status >= 500) {
+        const body = await res.json();
+        const error = new Error(body.message);
+        Object.assign(body, error);
+        throw body;
+      }
+      if (res.status === 400) {
+        const body = await res.json();
+        const error = new Error(body.message);
+        Object.assign(body, error);
+        throw body;
+      }
       if (res.status > 404 && res.status < 500) {
         const body = await res.json();
         const error = new Error(body.message);
         Object.assign(error, body);
-        throw error;
+        throw body;
       }
       return res;
     })
