@@ -23,6 +23,11 @@ COPY ./packages/app /app/packages/app
 COPY ./packages/graphql-server /app/packages/graphql-server
 COPY ./packages/knex /app/packages/knex
 
+# NOTE(douglasduteil): add frontend app environment variables
+# The frontend app needs to be built with %%ENV_VALUE%% so we can switch endpoint at runtime 
+ARG API_URL=${API_URL:-%%API_URL%%}
+ARG SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN:-%%SENTRY_PUBLIC_DSN%%}
+
 RUN yarn build --stream
 
 # Optional packages not required
