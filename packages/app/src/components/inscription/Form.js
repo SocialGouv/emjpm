@@ -52,7 +52,8 @@ const getTis = () =>
   // only fetch client-side
   (typeof window !== "undefined" &&
     apiFetch("/inscription/tis", null, {
-      forceLogin: false
+      forceLogin: false,
+      apiVersion: "v1"
     })) ||
   Promise.resolve();
 
@@ -92,7 +93,7 @@ class Form extends React.Component {
   };
 
   submitUser = formData => {
-    const url = `${API_URL}/api/v2/auth/signup`;
+    const url = `/auth/signup`;
     const usernameData = formData.email.toLowerCase().trim();
     apiFetch(
       url,
@@ -108,7 +109,7 @@ class Form extends React.Component {
           cabinet: formData.cabinet || null
         })
       },
-      { hasUrl: true }
+      { apiVersion: "v2" }
     )
       .then(json => {
         if (json.success === false) {
@@ -151,6 +152,8 @@ class Form extends React.Component {
   };
 
   render() {
+    const userType = this.state.typeMandataire;
+    const isAgent = userType === "direction";
     const FormMandataire = formsMandataires[this.state.typeMandataire];
     const { modalContent, showModal } = this.state;
     return (
@@ -158,19 +161,6 @@ class Form extends React.Component {
         <div className="col-12 offset-sm-2 col-sm-8 offset-md-2 col-md-8">
           <h1 style={{ margin: 20 }}>Inscription</h1>
           <div style={{ backgroundColor: "white", padding: 25 }}>
-            <Resolve
-              promises={[() => getTis()]}
-              render={({ status, result }) => (
-                <div style={{ margin: "20px 0" }}>
-                  <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
-                    Choisissez les tribunaux sur lesquels vous exercez :
-                  </div>
-                  {status === "success" && <TiSelector onChange={this.setTis} tis={result[0]} />}
-                  {status === "error" && <div>Impossible de charger la liste des Tribunaux</div>}
-                  {status === "loading" && <div>Chargement de la liste des Tribunaux...</div>}
-                </div>
-              )}
-            />
             <div style={{ fontSize: "1.2em", fontWeight: "bold" }}>Vous êtes :</div>
             <table
               style={{
@@ -201,6 +191,21 @@ class Form extends React.Component {
                 </tr>
               </tbody>
             </table>
+            {!isAgent && (
+              <Resolve
+                promises={[() => getTis()]}
+                render={({ status, result }) => (
+                  <div style={{ margin: "20px 0" }}>
+                    <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
+                      Choisissez les tribunaux sur lesquels vous exercez :
+                    </div>
+                    {status === "success" && <TiSelector onChange={this.setTis} tis={result[0]} />}
+                    {status === "error" && <div>Impossible de charger la liste des Tribunaux</div>}
+                    {status === "loading" && <div>Chargement de la liste des Tribunaux...</div>}
+                  </div>
+                )}
+              />
+            )}
             {FormMandataire && (
               <FormMandataire
                 typeMandataire={this.state.typeMandataire}
