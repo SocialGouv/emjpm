@@ -21,6 +21,7 @@ module.exports = flow(
     "color",
     "decode-uri-component",
     "fuse.js",
+    "query-string",
     "strict-uri-encode"
   ]
 });
