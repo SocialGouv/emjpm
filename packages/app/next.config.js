@@ -1,11 +1,9 @@
 const webpack = require("webpack");
 const withCSS = require("@zeit/next-css");
 const withImages = require("next-images");
-const withTM = require("next-transpile-modules");
 const flow = require("lodash.flow");
 
 module.exports = flow(
-  withTM,
   withCSS,
   withImages
 )({
@@ -16,12 +14,5 @@ module.exports = flow(
   publicRuntimeConfig: {
     SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN,
     API_URL: process.env.API_URL || "http://127.0.0.1:4000"
-  },
-  transpileModules: [
-    "color",
-    "decode-uri-component",
-    "fuse.js",
-    "query-string",
-    "strict-uri-encode"
-  ]
+  }
 });
