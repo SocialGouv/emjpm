@@ -19,9 +19,8 @@ module.exports = flow(
   },
   transpileModules: [
     "color",
-    "strict-uri-encode",
     "decode-uri-component",
-    "query-string",
-    "fuse.js"
+    "fuse.js",
+    "strict-uri-encode"
   ]
 });
