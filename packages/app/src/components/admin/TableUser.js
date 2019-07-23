@@ -1,7 +1,7 @@
 import React from "react";
 import ReactTable from "react-table";
 import format from "date-fns/format";
-import queryString from "query-string";
+import { stringify } from "query-string";
 import ToggleState from "../common/ToggleState";
 import SearchButton from "../communComponents/SearchButton";
 import { default as apiFetch, updateUser } from "../communComponents/Api";
@@ -126,8 +126,8 @@ class TableUser extends React.Component {
   fetchData = () => {
     const url =
       this.props.type === "mandataire"
-        ? `/admin/mandataires?${queryString.stringify(this.props.filters)}`
-        : `/admin/tis?${queryString.stringify(this.props.filters)}`;
+        ? `/admin/mandataires?${stringify(this.props.filters)}`
+        : `/admin/tis?${stringify(this.props.filters)}`;
     this.setState({ loading: true }, () =>
       apiFetch(url).then(res => {
         this.setState({
