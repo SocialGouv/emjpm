@@ -9,11 +9,6 @@ import Resolve from "../common/Resolve";
 import apiFetch from "../communComponents/Api";
 import Router from "next/router";
 import Modal from "react-modal";
-import getConfig from "next/config";
-
-const {
-  publicRuntimeConfig: { API_URL }
-} = getConfig();
 
 const formsMandataires = {
   individuel(props) {
