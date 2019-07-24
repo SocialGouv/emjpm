@@ -3,6 +3,7 @@
 exports[`mandataire should update his profile 1`] = `
 Object {
   "adresse": "21 rue de houx",
+  "antenne_id": null,
   "code_postal": "62000",
   "contact_email": null,
   "contact_nom": null,
@@ -23,7 +24,6 @@ Object {
   "nom": null,
   "prenom": "Adrien",
   "secretariat": false,
-  "service_id": null,
   "telephone": "phone-test",
   "telephone_portable": "0101010101",
   "type": "individuel",
