@@ -11,7 +11,7 @@ const schema = {
     passwordConfirmation: { type: "string", title: "Verifier le Mot de passe", minLength: 8 },
     nom: { type: "string", title: "Nom", default: "" },
     prenom: { type: "string", title: "Prenom", default: "" },
-    type: {
+    directionType: {
       type: "string",
       anyOf: [
         {
