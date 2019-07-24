@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
 import getConfig from "next/config";
 import ReactPiwik from "react-piwik";
+import Modal from "react-modal";
 
 const {
   publicRuntimeConfig: { API_URL }
@@ -107,7 +108,9 @@ class ForgotPassword extends React.Component {
   state = {
     error: null,
     status: null,
-    formData: {}
+    formData: {},
+    showModal: false,
+    modalContent: ""
   };
   componentDidMount() {
     // eslint-disable-next-line react/no-find-dom-node
@@ -132,7 +135,7 @@ class ForgotPassword extends React.Component {
 
         doForgotPassword(formData)
           .then(() => {
-            alert("Un email vient de vous être envoyé");
+            this.handleOpenModal("Un email vient de vous être envoyé");
             Router.push("/login");
             this.setState({
               status: "success",
@@ -150,13 +153,28 @@ class ForgotPassword extends React.Component {
   };
 
   render() {
+    const { modalContent, showModal } = this.state;
     return (
-      <ForgotPasswordView
-        formData={this.state.formData}
-        onSubmit={this.onSubmit}
-        error={this.state.error}
-        status={this.state.status}
-      />
+      <Fragment>
+        <Modal
+          className="modal-alert"
+          overlayClassName="modal-overlay"
+          isOpen={showModal}
+          contentLabel="Minimal Modal Example"
+        >
+          <h2>Attention</h2>
+          <p>{modalContent}</p>
+          <button className="close-modal" onClick={this.handleCloseModal}>
+            Close Modal
+          </button>
+        </Modal>
+        <ForgotPasswordView
+          formData={this.state.formData}
+          onSubmit={this.onSubmit}
+          error={this.state.error}
+          status={this.state.status}
+        />
+      </Fragment>
     );
   }
 }
