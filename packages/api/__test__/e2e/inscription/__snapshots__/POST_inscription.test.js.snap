@@ -82,12 +82,7 @@ qui exerce sur le TI: ti arras.
 
 Merci de vérifier cette nouvelle demande et de la valider.
 
-Bonne journée :)
-",
-    "to": "contact@emjpm.beta.gouv.fr",
-  },
-]
-`;
+exports[`should add user tis 2`] = `Array []`;
 
 exports[`should send an email with good values 1`] = `
 Array [
