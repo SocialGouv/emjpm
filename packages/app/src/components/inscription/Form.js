@@ -7,6 +7,7 @@ import TiSelector from "./TiSelector";
 import Resolve from "../common/Resolve";
 import apiFetch from "../communComponents/Api";
 import Router from "next/router";
+import Modal from "react-modal";
 
 const formsMandataires = {
   individuel(props) {
@@ -47,13 +48,29 @@ const getTis = () =>
   Promise.resolve();
 
 class Form extends React.Component {
-  state = {
-    typeMandataire: null,
-    tis: [],
-    formData: {},
-    status: "idle",
-    message: ""
-  };
+  constructor() {
+    super();
+    this.state = {
+      typeMandataire: null,
+      tis: [],
+      formData: {},
+      status: "idle",
+      message: "",
+      showModal: false,
+      modalContent: ""
+    };
+
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  handleOpenModal(content) {
+    this.setState({ showModal: true, modalContent: content });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
 
   setTypeMandataire = e => {
     this.setState({ typeMandataire: e.target.value });
@@ -104,9 +121,9 @@ class Form extends React.Component {
     const isTi = this.state.typeMandataire === "ti";
 
     if (hasNoTi) {
-      return alert("Saisissez au moins un TI de référence");
+      this.handleOpenModal("Saisissez au moins un tribunal d'instance de référence");
     } else if (isTi && hasMultipleTi) {
-      return alert("Saisissez un seul TI de référence");
+      this.handleOpenModal("Saisissez un seul tribunal d'instance de référence");
     } else {
       if ((isTi && hasSingleTi) || !hasNoTi) {
         this.setState({ status: "loading", formData }, () => {
@@ -118,6 +135,7 @@ class Form extends React.Component {
 
   render() {
     const FormMandataire = formsMandataires[this.state.typeMandataire];
+    const { modalContent, showModal } = this.state;
     return (
       <div className="container Inscription" data-cy="form-inscription">
         <div className="col-12 offset-sm-2 col-sm-8 offset-md-2 col-md-8">
@@ -173,6 +191,18 @@ class Form extends React.Component {
                 {this.state.message}
               </div>
             )}
+            <Modal
+              className="modal-alert"
+              overlayClassName="modal-overlay"
+              isOpen={showModal}
+              contentLabel="Minimal Modal Example"
+            >
+              <h2>Attention</h2>
+              <p>{modalContent}</p>
+              <button className="close-modal" onClick={this.handleCloseModal}>
+                Close Modal
+              </button>
+            </Modal>
           </div>
         </div>
       </div>
