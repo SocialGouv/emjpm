@@ -75,6 +75,14 @@ When("I fill in the following", table => {
   });
 });
 
+When("I click on {string} on the line with {string}", (buttonName, text) => {
+  // From "features/login.feature" {"line":16,"column":5}
+
+  within(locate("[role=row]").withText(text).locator, () => {
+    I.click(buttonName);
+  });
+});
+
 When("I am accepting popups", () => {
   I.amAcceptingPopups();
 });
