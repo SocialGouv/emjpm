@@ -130,11 +130,12 @@ E2E Test @optional/e2e:
           "full_page_writes=off",
         ]
   variables:
-    CODECEPT_BASEURL: "http://localhost:80"
     API_URL: http://localhost:4000
-    POSTGRES_USER: postgres
-    POSTGRES_PASSWORD: test
+    CODECEPT_BASEURL: "http://localhost:80"
     NODE_ENV: test
+    POSTGRES_PASSWORD: test
+    POSTGRES_USER: postgres
+    SMTP_FROM: contact@emjpm.beta.gouv.fr
     TIMEOUT: 30000 # 30_000 = 1000 * 30s
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
