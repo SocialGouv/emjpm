@@ -84,12 +84,12 @@ When("I accept the popup", () => {
 });
 
 When("I have one unread message in my indox", async () => {
-  const {expect} = require("chai");
+  const { expect } = require("chai");
 
   recorder.retry({ retries: 5 });
 
   recorder.add(async () => {
-    const emails = await mailDev("GET", "/email").then(JSON.parse)
+    const emails = await mailDev("GET", "/email").then(JSON.parse);
     expect(emails).to.have.lengthOf.above(0, "No email received");
 
     const unreadEmails = emails.filter(email => !email.read);
@@ -98,19 +98,22 @@ When("I have one unread message in my indox", async () => {
   await recorder.promise();
 
   recorder.reset();
-})
+});
 When("I consult the last unread message", async () => {
-  const emails = await mailDev("GET", "/email").then(JSON.parse)
-  const [{id}] = emails.filter(email => !email.read).reverse();
-  state.lastUnreadMessage = await mailDev("GET", "/email/" + id).then(JSON.parse);
-})
+  const emails = await mailDev("GET", "/email").then(JSON.parse);
+  const [{ id }] = emails.filter(email => !email.read).reverse();
+  state.lastUnreadMessage = await mailDev("GET", "/email/" + id).then(
+    JSON.parse
+  );
+});
 
-Given("the last email as the following info", async (table) => {
-  const {expect} = require("chai");
+Given("the last email as the following info", async table => {
+  const { expect } = require("chai");
 
   expect(state.lastUnreadMessage, "No email found").to.exist;
+  output.log(state.lastUnreadMessage);
   table.rows.forEach(({ cells: [{ value: path }, { value }] }) => {
-    expect(state.lastUnreadMessage).to.nested.include({ [path]: value });;
+    expect(state.lastUnreadMessage).to.nested.include({ [path]: value });
   });
 });
 
@@ -124,7 +127,7 @@ Given("an empty inbox", async () => {
 When("I click on the {string} link in the last email", regexStr => {
   const { expect } = require("chai");
 
-  expect(state.lastUnreadMessage, 'No email found').to.exist;
+  expect(state.lastUnreadMessage, "No email found").to.exist;
   const reg = new RegExp(regexStr);
   const [link] = reg.exec(state.lastUnreadMessage.text);
 
@@ -133,7 +136,6 @@ When("I click on the {string} link in the last email", regexStr => {
 
 if (process.env.DEBUG) {
   Fail((test, err) => {
-
     // test didn't
     output.log("Fail", test);
     output.log("Failed with", err);
