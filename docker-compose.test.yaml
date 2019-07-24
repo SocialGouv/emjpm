@@ -33,9 +33,17 @@ services:
     build:
       context: ./packages/app
       dockerfile: Dockerfile
-    depends_on:
-      - api
     ports:
-      - 5000:80
+      - 3000:80
     volumes:
       - ./nginx-logs:/var/log/nginx
+
+  graphql-engine:
+    depends_on:
+      - db
+      - api
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm_test
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_ADMIN_SECRET: secret
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/auth/v2/jwks"}'
