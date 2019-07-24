@@ -82,7 +82,7 @@ exports.seed = function(knex) {
           secretariat: true,
           nb_secretariat: 1,
           user_id: 3,
-          service_id: 1
+          antenne_id: 1
         });
       })
   );

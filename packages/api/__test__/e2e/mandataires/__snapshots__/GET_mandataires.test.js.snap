@@ -22,6 +22,7 @@ exports[`TI should GET list of mandataires 1`] = `
 Array [
   Object {
     "adresse": "21 rue de houx",
+    "antenne_id": null,
     "code_postal": "62000",
     "contact_email": null,
     "contact_nom": null,
@@ -41,7 +42,6 @@ Array [
     "nom": null,
     "prenom": "Adrien",
     "secretariat": false,
-    "service_id": null,
     "telephone": "0237100000",
     "telephone_portable": "0101010101",
     "type": "individuel",
@@ -51,6 +51,7 @@ Array [
   },
   Object {
     "adresse": "21 rue monge",
+    "antenne_id": null,
     "code_postal": "62000",
     "contact_email": null,
     "contact_nom": null,
@@ -70,7 +71,6 @@ Array [
     "nom": null,
     "prenom": "Julien",
     "secretariat": true,
-    "service_id": null,
     "telephone": "0237100000",
     "telephone_portable": "0101010101",
     "type": "prepose",
@@ -93,6 +93,7 @@ Object {
 exports[`User should GET all mandataires 1`] = `
 Object {
   "adresse": "67 rue saint louis",
+  "antenne_id": 1,
   "code_postal": "13000",
   "contact_email": null,
   "contact_nom": null,
@@ -113,7 +114,6 @@ Object {
   "nom": null,
   "prenom": "Mélanie",
   "secretariat": true,
-  "service_id": 1,
   "telephone": "0237100000",
   "telephone_portable": "0101010101",
   "type": "service",
@@ -126,6 +126,7 @@ Object {
 exports[`should GET mandataire profile 1`] = `
 Object {
   "adresse": "21 rue de houx",
+  "antenne_id": null,
   "code_postal": "62000",
   "contact_email": null,
   "contact_nom": null,
@@ -145,7 +146,6 @@ Object {
   "nom": null,
   "prenom": "Adrien",
   "secretariat": false,
-  "service_id": null,
   "telephone": "0237100000",
   "telephone_portable": "0101010101",
   "type": "individuel",
