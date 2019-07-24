@@ -564,7 +564,7 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
     } = req.body;
 
     // TODO(tglatt): will be refactored while implementing service UI
-    let antenne;
+    let antenne = {};
     if (service_id) {
       const antennes = await ServiceAntenneModel.query().where(
         "service_id",
@@ -586,7 +586,7 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
       contact_nom,
       contact_prenom,
       contact_email,
-      antenne_id: antenne ? antenne.id : undefined,
+      antenne_id: antenne.id,
       dispo_max
     });
 
