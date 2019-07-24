@@ -26,6 +26,9 @@ const createMandataire = (data, trx) =>
 const createService = (data, trx) =>
   (trx || knex).table("services").insert(data, "id");
 
+const createServiceAntenne = (data, trx) =>
+  (trx || knex).table("service_antenne").insert(data, "id");
+
 const createUserTi = (data, trx) =>
   (trx || knex).table("user_tis").insert(data, "id");
 
@@ -38,5 +41,6 @@ module.exports = {
   createMandataire,
   createUserTi,
   createService,
+  createServiceAntenne,
   createMandataireTi
 };

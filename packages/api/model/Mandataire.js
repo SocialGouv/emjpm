@@ -1,7 +1,6 @@
 const knexConnection = require("../db/knex");
 const { Model } = require("objection");
 
-const { User } = require("./User");
 Model.knex(knexConnection);
 
 class Mandataire extends Model {
@@ -42,6 +41,8 @@ class Mandataire extends Model {
     };
   }
   static get relationMappings() {
+    const { User } = require("./User");
+    const { ServiceAntenneModel } = require("./ServiceAntenneModel");
     return {
       users: {
         relation: Model.BelongsToOneRelation,
@@ -49,6 +50,14 @@ class Mandataire extends Model {
         join: {
           from: "mandataires.user_id",
           to: "users.id"
+        }
+      },
+      antenne: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: ServiceAntenneModel,
+        join: {
+          from: "mandataires.antenne_id",
+          to: "service_antenne.id"
         }
       }
     };

@@ -245,6 +245,16 @@ router.post("/mandataires", async (req, res, next) => {
             },
             trx
           );
+
+          // TODO(tglatt): will be refactored while implementing service UI
+          // only for retro compatibility
+          await queries.createServiceAntenne(
+            {
+              name: etablissement,
+              service_id: serviceId[0]
+            },
+            trx
+          );
           await queries.createUser(
             {
               username,
