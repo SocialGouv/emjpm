@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
 import queryString from "query-string";
 import getConfig from "next/config";
+import Modal from "react-modal";
 
 const {
   publicRuntimeConfig: { API_URL }
@@ -112,11 +113,17 @@ export const ResetPasswordView = ({ formData, onSubmit, error, status }) => (
 );
 
 class ResetPassword extends React.Component {
-  state = {
-    error: null,
-    status: null,
-    formData: {}
-  };
+  constructor() {
+    super();
+    this.state = {
+      error: null,
+      status: null,
+      formData: {},
+      showModal: false,
+      modalContent: ""
+    };
+  }
+
   componentDidMount() {
     // eslint-disable-next-line react/no-find-dom-node
     const node = findDOMNode(this);
@@ -145,7 +152,7 @@ class ResetPassword extends React.Component {
             throw e;
           })
           .then(() => {
-            alert("Un email de confirmation vient de vous être envoyé");
+            this.handleOpenModal("Un email de confirmation vient de vous être envoyé");
             Router.push("/login");
             this.setState({
               status: "success",
@@ -157,13 +164,28 @@ class ResetPassword extends React.Component {
   };
 
   render() {
+    const { modalContent, showModal } = this.state;
     return (
-      <ResetPasswordView
-        formData={this.state.formData}
-        onSubmit={this.onSubmit}
-        error={this.state.error}
-        status={this.state.status}
-      />
+      <Fragment>
+        <Modal
+          className="modal-alert"
+          overlayClassName="modal-overlay"
+          isOpen={showModal}
+          contentLabel="Minimal Modal Example"
+        >
+          <h2>Attention</h2>
+          <p>{modalContent}</p>
+          <button className="close-modal" onClick={this.handleCloseModal}>
+            Close Modal
+          </button>
+        </Modal>
+        <ResetPasswordView
+          formData={this.state.formData}
+          onSubmit={this.onSubmit}
+          error={this.state.error}
+          status={this.state.status}
+        />
+      </Fragment>
     );
   }
 }
