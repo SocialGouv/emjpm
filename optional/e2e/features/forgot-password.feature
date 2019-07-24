@@ -14,11 +14,7 @@ Feature: Forgot password
 
     Given I see "Récupérer votre compte"
     When I enter "ud@ud.com" as "email"
-    # NOTE(douglasduteil): we should not accept popups...
-    And I am accepting popups
     Then I click on "Demander mon mot de passe"
-    # NOTE(douglasduteil): we should not accept popups...
-    And I accept the popup
 
     Then I have one unread message in my indox
     And I consult the last unread message
