@@ -5,6 +5,8 @@ const router = express.Router();
 
 const { typeRequired, loginRequired } = require("../auth/_helpers");
 
+const { ServiceAntenneModel } = require("../model/ServiceAntenneModel");
+
 const {
   getMandataireByUserId,
   updateMandataire,
@@ -561,6 +563,18 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
       tis
     } = req.body;
 
+    // TODO(tglatt): will be refactored while implementing service UI
+    let antenne;
+    if (service_id) {
+      const antennes = await ServiceAntenneModel.query().where(
+        "service_id",
+        service_id
+      );
+      if (antennes && antennes.length) {
+        antenne = antennes[0];
+      }
+    }
+
     const mandataire = await createMandataire({
       user_id: req.user.id,
       etablissement,
@@ -572,7 +586,7 @@ router.post("/", typeRequired("service"), async (req, res, next) => {
       contact_nom,
       contact_prenom,
       contact_email,
-      service_id,
+      antenne_id: antenne ? antenne.id : undefined,
       dispo_max
     });
 
