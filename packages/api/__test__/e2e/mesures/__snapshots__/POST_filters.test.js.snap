@@ -4,6 +4,7 @@ exports[`should get mesures filtered by localisation 1`] = `
 Array [
   Object {
     "adresse": "21 rue de houx",
+    "antenne_id": null,
     "cabinet": null,
     "code_postal": "62000",
     "contact_email": null,
@@ -26,7 +27,6 @@ Array [
     "service_dispo_max": null,
     "service_email": null,
     "service_etablissement": null,
-    "service_id": null,
     "service_nom": null,
     "service_prenom": null,
     "service_telephone": null,
@@ -39,6 +39,7 @@ Array [
   },
   Object {
     "adresse": "21 rue monge",
+    "antenne_id": null,
     "cabinet": null,
     "code_postal": "62000",
     "contact_email": null,
@@ -61,7 +62,6 @@ Array [
     "service_dispo_max": null,
     "service_email": null,
     "service_etablissement": null,
-    "service_id": null,
     "service_nom": null,
     "service_prenom": null,
     "service_telephone": null,

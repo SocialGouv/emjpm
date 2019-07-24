@@ -3,6 +3,7 @@
 exports[`should register with good values 1`] = `
 Object {
   "adresse": "",
+  "antenne_id": null,
   "code_postal": "75010",
   "contact_email": "totoManda@toto.com",
   "contact_nom": "testMandaAd",
@@ -17,7 +18,6 @@ Object {
   "mesures_en_cours": null,
   "nb_secretariat": null,
   "secretariat": null,
-  "service_id": null,
   "telephone": "",
   "telephone_portable": null,
   "user_id": 3,
