@@ -111,7 +111,6 @@ Given("the last email as the following info", async table => {
   const { expect } = require("chai");
 
   expect(state.lastUnreadMessage, "No email found").to.exist;
-  output.log(JSON.stringify(state.lastUnreadMessage, null, 2));
   table.rows.forEach(({ cells: [{ value: path }, { value }] }) => {
     expect(state.lastUnreadMessage).to.nested.include({ [path]: value });
   });

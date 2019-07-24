@@ -170,4 +170,4 @@ E2E Test @optional/e2e:
     # Allows installation of postgresql-client-10 on Debian stretch which the Node images are based on
     - PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm_test > optional/e2e/test-seed.dump
     #
-    - yarn e2e test --verbose
+    - yarn e2e test --steps
