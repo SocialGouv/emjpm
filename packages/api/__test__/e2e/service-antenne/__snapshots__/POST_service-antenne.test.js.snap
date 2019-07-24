@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should create a mandataire with antenne 1`] = `
+Object {
+  "adresse": "",
+  "antenne_id": 1,
+  "code_postal": "75010",
+  "contact_email": "totoManda@toto.com",
+  "contact_nom": "testMandaAd",
+  "contact_prenom": "testPrenom",
+  "date_mesure_update": null,
+  "dispo_max": null,
+  "email_send": null,
+  "etablissement": "",
+  "genre": null,
+  "id": 6,
+  "mesures_en_attente": null,
+  "mesures_en_cours": null,
+  "nb_secretariat": null,
+  "secretariat": null,
+  "telephone": "",
+  "telephone_portable": null,
+  "user_id": 3,
+  "ville": "",
+  "zip": null,
+}
+`;
