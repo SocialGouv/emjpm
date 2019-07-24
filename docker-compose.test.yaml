@@ -39,6 +39,9 @@ services:
       - ./nginx-logs:/var/log/nginx
 
   graphql-engine:
+    depends_on:
+      - db
+      - api
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm_test
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console

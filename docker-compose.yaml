@@ -37,7 +37,6 @@ services:
       - 5000:8080
     depends_on:
       - db
-      - api
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm_dev
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
