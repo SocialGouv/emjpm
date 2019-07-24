@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`should register with good values 1`] = `
+exports[`should create a mandataire with antenne 1`] = `
 Object {
   "adresse": "",
-  "antenne_id": null,
+  "antenne_id": 1,
   "code_postal": "75010",
   "contact_email": "totoManda@toto.com",
   "contact_nom": "testMandaAd",
