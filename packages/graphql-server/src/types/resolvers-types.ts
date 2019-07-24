@@ -59,18 +59,11 @@ export type MonthlyNumber = {
 
 export type Query = {
   __typename?: "Query";
-  availableMesureNumber: Scalars["Int"];
   newMesureNumber: Scalars["Int"];
   closedMesureNumber: Scalars["Int"];
   mesureTypeCategoryStatistics: Array<MesureTypeCategoryStatistic>;
   mesureStateCategoryStatistics: Array<MesureStateCategoryStatistic>;
   mesureTypeCategoryEvolution: Array<MesureTypeCategoryEvolution>;
-};
-
-export type QueryAvailableMesureNumberArgs = {
-  region?: Maybe<Scalars["Int"]>;
-  department?: Maybe<Scalars["Int"]>;
-  court?: Maybe<Scalars["Int"]>;
 };
 
 export type QueryNewMesureNumberArgs = {
