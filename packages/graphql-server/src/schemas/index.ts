@@ -1,7 +1,5 @@
-import helloSchema from "./hello";
+import mesureStatSchema from "./mesure-statistic.schema";
 
-const typeDefs = [
-  helloSchema
-]
+const typeDefs = [mesureStatSchema];
 
 export default typeDefs;
