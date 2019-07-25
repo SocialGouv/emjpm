@@ -14,7 +14,7 @@ exports.up = async function(knex) {
 
   return Promise.all(
     services.map(service => {
-      return knex("service_antennes").insert({
+      return knex("service_antenne").insert({
         service_id: service.id,
         name: service.etablissement
       });
