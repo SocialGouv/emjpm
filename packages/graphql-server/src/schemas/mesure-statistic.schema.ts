@@ -2,8 +2,6 @@ import { gql } from "apollo-server-koa";
 
 export default gql`
   type Query {
-    availableMesureNumber(region: Int, department: Int, court: Int): Int!
-
     newMesureNumber(
       start: String!
       end: String!
