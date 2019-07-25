@@ -13,9 +13,9 @@ exports.up = async function(knex) {
     mandataires.map(mandataire => {
       const serviceId = mandataire.service_id;
       const antenne = antennes.find(antenne => antenne.id === serviceId);
-      return knex(mandataires)
-        .where("id", mandataire.id)
-        .update("antenne_id", antenne.id);
+      return knex("mandataires")
+        .where({ id: mandataire.id })
+        .update({ antenne_id: antenne.id });
     })
   );
 
