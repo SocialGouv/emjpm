@@ -7,6 +7,20 @@ const { UserRole } = require("../../model/UserRole");
 const { Role } = require("../../model/Role");
 const { Direction } = require("../../model/Direction");
 const { errorHandler } = require("../../db/errors");
+const { inscriptionEmail } = require("../../email/inscription");
+const { getTiById } = require("../../db/queries/tis");
+
+// TODO: Move me into an util file
+const getTisNames = async tis => {
+  const getEtablissementByTi = id =>
+    getTiById(id).then(json => json.etablissement);
+  if (tis) {
+    const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(
+      ", "
+    );
+    return tiNames;
+  }
+};
 
 /**
  * POST /signup
@@ -50,9 +64,13 @@ const updateUserService = (service, user) =>
     .update({ service_id: service.id })
     .where("id", user.id);
 
-const createUserTis = (body, user) =>
+const createUserTis = (body, user) => {
+  const { tis } = body;
+  if (!tis || tis.length === 0) {
+    return true;
+  }
   Promise.all(
-    body.tis.map(ti_id =>
+    tis.map(ti_id =>
       UserTi.query()
         .allowInsert("[user_id, ti_id]")
         .insert({
@@ -61,12 +79,17 @@ const createUserTis = (body, user) =>
         })
     )
   );
+};
+
 const createDirection = (body, user) =>
   Direction.query().insert({
     user_id: user.id,
     department_id:
-      body.type === "direction_departemental" ? body.department_id : null,
-    region_id: body.type === "direction_regional" ? body.region_id : null
+      body.directionType === "direction_departemental"
+        ? body.department_id
+        : null,
+    region_id:
+      body.directionType === "direction_regional" ? body.region_id : null
   });
 
 const createRole = async (user, type) => {
@@ -78,16 +101,26 @@ const createRole = async (user, type) => {
       role_id: role.id
     });
 };
+
 const postSignup = async (req, res) => {
   const errors = validationResult(req);
-
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors });
+    return res.status(400).json({ errors: errors.array() });
   }
 
   try {
-    const { type, cabinet, username, password, nom, prenom, email } = req.body;
-
+    const {
+      password,
+      directionType,
+      username,
+      type,
+      nom,
+      prenom,
+      email,
+      code_postal,
+      tis,
+      cabinet
+    } = req.body;
     const user = await User.query()
       .allowInsert("[username, password,role,nom,prenom,email]")
       .insert({
@@ -98,9 +131,7 @@ const postSignup = async (req, res) => {
         prenom,
         email
       });
-
     await createRole(user, type);
-
     switch (type) {
       case "individuel":
       case "preprose":
@@ -118,17 +149,16 @@ const postSignup = async (req, res) => {
           .where("id", user.id);
         await createUserTis(req.body, user);
         break;
-      case "direction_national":
-      case "direction_regional":
-      case "direction_departemental": {
-        await createRole(user, "direction");
+      case "direction": {
+        await createRole(user, directionType);
         await createDirection(req.body, user);
         break;
       }
       default:
         return;
     }
-
+    const tiNames = await getTisNames(tis);
+    await inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
     return res.json({ success: true });
   } catch (err) {
     errorHandler(err, res);
