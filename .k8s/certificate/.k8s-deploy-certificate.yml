@@ -1,0 +1,6 @@
+.k8s-deploy-certificate:
+  extends: .base_docker_kube_image_stage
+  script:
+    - envsubst < ./.k8s/certificate/certificate.yml > ./certificate.yml
+    #
+    - kubectl apply -f ./certificate.yml
