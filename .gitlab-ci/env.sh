@@ -13,6 +13,8 @@ export JOB_ID=${JOB_ID:=$CI_JOB_ID}
 BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
 export BRANCH_HASH=${BRANCH_HASH:=$BRANCH_NAME_HASHED}
 
+export DOMAIN="emjpm.${ENVIRONMENT}.social.gouv.fr";
+
 #
 
 if [[ "${BRANCH_NAME}" = "master" ]]; then
@@ -26,20 +28,24 @@ fi
 if [[ -n "${PRODUCTION+x}" ]]; then
   export BRANCH_HASH=prod;
   #
-  export FRONTEND_HOST="emjpm.${ENVIRONMENT}.social.gouv.fr";
-  export FRONTEND_URL="https://${FRONTEND_HOST}"
-  export API_HOST="api.emjpm.${ENVIRONMENT}.social.gouv.fr";
-  export API_URL="https://${API_HOST}"
   export POSTGRES_DATABASE="emjpm_prod"
-  export HASURA_HOST="hasura.emjpm.${ENVIRONMENT}.social.gouv.fr";
 else
-  export FRONTEND_HOST="${BRANCH_HASH}.emjpm.${ENVIRONMENT}.social.gouv.fr";
-  export FRONTEND_URL="http://${FRONTEND_HOST}"
-  export API_HOST="${BRANCH_HASH}.api.emjpm.${ENVIRONMENT}.social.gouv.fr";
-  export API_URL="http://${API_HOST}"
-  export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
+  export DOMAIN="${BRANCH_HASH}.${DOMAIN}";
+  #
   export POSTGRES_DATABASE="emjpm_dev"
-  export HASURA_HOST="${BRANCH_HASH}.hasura.emjpm.${ENVIRONMENT}.social.gouv.fr";
+fi
+
+export API_HOST="api.${DOMAIN}";
+export FRONTEND_HOST="emjpm.${DOMAIN}";
+export HASURA_HOST="hasura.${DOMAIN}";
+export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
+
+if [[  -n "${PRODUCTION+x}" || "${BRANCH_NAME}" = "master" ]]; then
+  export API_URL="https://${API_HOST}"
+  export FRONTEND_URL="https://${FRONTEND_HOST}"
+else
+  export API_URL="http://${API_HOST}"
+  export FRONTEND_URL="http://${FRONTEND_HOST}"
 fi
 
 #
@@ -48,5 +54,5 @@ printenv | grep -E \
   "BRANCH_HASH|BRANCH_NAME|COMMIT|COMMIT_TAG|ENVIRONMENT|HASH_SIZE|JOB_ID" \
   | sort
 printenv | grep -E \
-  "FRONTEND_HOST|API_HOST|API_URL" \
+  "API_HOST|API_URL|FRONTEND_HOST|FRONTEND_URL|HASURA_HOST|POSTGRES_HOST" \
   | sort
