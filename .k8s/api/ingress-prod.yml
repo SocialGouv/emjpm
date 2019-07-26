@@ -20,4 +20,4 @@ spec:
               servicePort: ${PORT}
 
   tls:
-    - secretName: emjpm-crt-secret
+    - secretName: ${CERTIFICATE_HOST}-secret
