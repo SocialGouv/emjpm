@@ -19,8 +19,8 @@ services:
       retries: 10
     environment:
       # master password
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=test
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       # API dedicated password
       - POSTGRES_API_USER=api
       - POSTGRES_API_USER_PASSWORD=test
@@ -39,11 +39,10 @@ services:
       - db
 
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm_dev
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
+      HASURA_GRAPHQL_DATABASE_URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@db:5432/emjpm_dev
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER:4000/api/v2/auth/jwks"}'
-      ## uncomment next line to set an admin secret
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/v2/auth/jwks"}'
 
 volumes:
   emjpm-pgdata:
