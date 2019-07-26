@@ -39,6 +39,7 @@ export API_HOST="api.${DOMAIN}";
 export FRONTEND_HOST="emjpm.${DOMAIN}";
 export HASURA_HOST="hasura.${DOMAIN}";
 export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
+export CERTIFICATE_HOST="${K8S_NAMESPACE}-certificate-${BRANCH_HASH}"
 
 if [[  -n "${PRODUCTION+x}" || "${BRANCH_NAME}" = "master" ]]; then
   export API_URL="https://${API_HOST}"
