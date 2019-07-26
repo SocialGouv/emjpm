@@ -2,9 +2,9 @@
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: ${K8S_NAMESPACE}-${CONTEXT}
+  name: ${CERTIFICATE_HOST}
 spec:
-  secretName: ${K8S_NAMESPACE}-${CONTEXT}-secret
+  secretName: ${CERTIFICATE_HOST}-secret
   dnsNames:
     - ${FRONTEND_HOST}
     - ${API_HOST}
