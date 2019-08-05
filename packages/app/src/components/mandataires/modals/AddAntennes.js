@@ -62,9 +62,11 @@ const uiSchema = {
     "ui:placeholder": "Nombre de mesures souhaitées"
   }
 };
+
 const getTis = () =>
   apiFetch("/inscription/tis", null, {
-    forceLogin: false
+    forceLogin: false,
+    apiVersion: "v1"
   }) || Promise.resolve();
 
 class AddAntennes extends React.Component {

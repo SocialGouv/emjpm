@@ -63,6 +63,22 @@ app.get("/", function(req, res) {
   });
 });
 
+app.get("/json/version", function(req, res) {
+  res.json({
+    title: "API eMJPM",
+    version: pkg.version,
+    NODE_ENV: process.env.NODE_ENV || "development"
+  });
+});
+
+app.get("/json", function(req, res) {
+  res.json({
+    title: "API eMJPM",
+    version: pkg.version,
+    NODE_ENV: process.env.NODE_ENV || "development"
+  });
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   /* eslint-disable no-console */
