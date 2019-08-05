@@ -5,8 +5,8 @@ import uiSchema from "./uiSchema.json";
 const schema = {
   type: "object",
   required: [
-    "pass1",
-    "pass2",
+    "password",
+    "passwordConfirmation",
     "nom",
     "prenom",
     "telephone",
@@ -18,8 +18,8 @@ const schema = {
   ],
   properties: {
     email: { type: "string", format: "email", default: "" },
-    pass1: { type: "string", minLength: 8 },
-    pass2: { type: "string", minLength: 8 },
+    password: { type: "string", minLength: 8 },
+    passwordConfirmation: { type: "string", minLength: 8 },
     nom: { type: "string", default: "" },
     prenom: { type: "string", default: "" },
     genre: {

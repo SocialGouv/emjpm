@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import { Navigation, Footer } from "..";
+import Navigation from "../communComponents/Navigation";
+import Footer from "../communComponents/Footer";
 
 const LayoutContainer = styled.div`
   display: flex;

@@ -2,9 +2,6 @@ import React from "react";
 import Router from "next/router";
 import ReactPiwik from "react-piwik";
 
-// todo: hack: force embedding the SVG due to some webpack+next+static issues in a gh-pages env
-const logo = require("!!url-loader?limit=0!../../../static/images/logo_emjpm_num.png");
-
 const doLogout = () => {
   // Clear user token and profile data from localStorage
   localStorage.removeItem("id_token");
@@ -31,7 +28,7 @@ const Navigation = ({ logout, inscription }) => (
     <div style={{ flex: "1 0 auto" }}>
       <a href="https://emjpm.beta.gouv.fr/">
         <img
-          src={logo}
+          src={"/static/images/logo_emjpm_num.png"}
           style={{ width: "60%", maxWidth: 350 }}
           alt="Accueil de eMJPM.beta.gouv.fr"
         />
