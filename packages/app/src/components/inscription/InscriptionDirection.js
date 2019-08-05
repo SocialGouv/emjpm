@@ -17,7 +17,7 @@ const schema = {
         {
           type: "string",
           title: "direction départementale",
-          enum: ["direction_departementale"]
+          enum: ["direction_departemental"]
         },
         {
           type: "string",
@@ -27,7 +27,7 @@ const schema = {
         {
           type: "string",
           title: "direction nationale",
-          enum: ["direction_nationale"]
+          enum: ["direction_national"]
         }
       ]
     }

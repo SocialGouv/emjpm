@@ -128,15 +128,14 @@ class Form extends React.Component {
     const isTi = this.state.typeMandataire === "ti";
     const userType = this.state.typeMandataire;
     const isAgent = userType === "direction";
-    if (hasNoTi) {
+    if (hasNoTi && !isAgent) {
       this.handleOpenModal("Saisissez au moins un tribunal d'instance de référence");
     } else if (isTi && hasMultipleTi) {
       this.handleOpenModal("Saisissez un seul tribunal d'instance de référence");
-      if ((isTi && hasSingleTi) || !hasNoTi || isAgent) {
-        this.setState({ status: "loading", formData }, () => {
-          this.submitUser(formData);
-        });
-      }
+    } else if ((isTi && hasSingleTi) || !hasNoTi || isAgent) {
+      this.setState({ status: "loading", formData }, () => {
+        this.submitUser(formData);
+      });
     }
   };
 
