@@ -9,19 +9,8 @@ import { mandataireMount } from "./actions/mandataire";
 import mesuresReducer from "./reducers/mesures";
 import mandataireReducer from "./reducers/mandataire";
 import MandataireTabs from "./indiPrepo";
-import ServiceTabs from "./service";
-import ServiceSiegeSocial from "./ServiceSiegeSocial";
 
-import {
-  EditMesure,
-  CloseMesure,
-  ReactivateMesure,
-  EditMandataire,
-  ValiderMesureEnAttente,
-  EditService,
-  EditServiceSiege,
-  AddAntennes
-} from "./modals";
+import { CloseMesure, ReactivateMesure, EditMandataire, ValiderMesureEnAttente } from "./modals";
 
 class MandataireIndex extends React.Component {
   state = {
@@ -44,23 +33,11 @@ class MandataireIndex extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.state.isToggleOn === false ? (
-          this.props.currentMandataire && this.props.currentMandataire.type === "service" ? (
-            <ServiceTabs handleClick={this.handleClick} />
-          ) : (
-            <MandataireTabs />
-          )
-        ) : (
-          <ServiceSiegeSocial handleClick={this.handleClick} />
-        )}
-        <EditMesure />
+        <MandataireTabs />
         <CloseMesure />
         <ReactivateMesure />
         <EditMandataire />
         <ValiderMesureEnAttente />
-        <EditService />
-        <EditServiceSiege />
-        <AddAntennes />
       </React.Fragment>
     );
   }
