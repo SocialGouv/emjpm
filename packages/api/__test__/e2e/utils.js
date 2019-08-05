@@ -69,7 +69,7 @@ exports.shouldBeProtected = (method, url, options = {}) => {
 
 exports.logMeIn = async (userType = exports.userTypes.mandataire) =>
   request(server)
-    .post("/auth/v2/login")
+    .post("/api/v2/auth/login")
     .send(userType);
 
 exports.getTokenByUserType = async userType =>

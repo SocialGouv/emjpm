@@ -1,143 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 const uid = require("rand-token").uid;
-const Sentry = require("@sentry/node");
-const jwtConfig = require("../config/jwt");
-
-const authHelpers = require("../auth/_helpers");
-const passport = require("../auth/local");
-
 const {
-  updateLastLogin,
   updateResetPassword,
   updateUser,
   getSpecificUser,
   getUserWithValidToken
 } = require("../db/queries/users");
 
-const { addDataLogs } = require("../db/queries/logsData");
 const { resetPasswordEmail } = require("../email/password-reset");
 const { confirmationPasswordEmail } = require("../email/password-confirmation");
-
-const redirs = {
-  individuel: "/mandataires",
-  prepose: "/mandataires",
-  service: "/services",
-  ti: "/tis",
-  admin: "/admin",
-  default: "/"
-};
-
-/**
- * @swagger
- *
- * components:
- *   requestBodies:
- *     Login:
- *       description: A JSON object containing user credentials
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               username:
- *                 type: string
- *                 required: true
- *               password:
- *                 type: string
- *                 required: true
- */
-
-/**
- * @swagger
- * /auth/login:
- *   post:
- *     tags:
- *       - login
- *     description: login to the API
- *     requestBody:
- *       required: true
- *       $ref: '#/components/requestBodies/Login'
- *     responses:
- *       200:
- *         headers:
- *           Set-Cookie:
- *             description: API server cookie
- *             schema:
- *               type: string
- *               example: connect.sid=abcde12345; Path=/; HttpOnly
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/SuccessResponse'
- */
-router.post("/login", authHelpers.loginRedirect, (req, res, next) => {
-  passport.authenticate("local", { session: false }, (err, user) => {
-    if (err) {
-      return next(err);
-    }
-    if (!user) {
-      if (process.env.NODE_ENV !== "test") {
-        /* eslint-disable no-console */
-        console.log(`Unauthorized user : ${req.body.username}`);
-        /* eslint-enable no-console */
-        Sentry.captureMessage(`Unauthorized user : ${req.body.username}`);
-      }
-      return res
-        .status(401)
-        .json({ success: false, message: "User not found" });
-    }
-    if (user) {
-      req.logIn(user, { session: false }, function(err) {
-        if (err) {
-          return next(err);
-        }
-
-        updateLastLogin(user.id)
-          .then(() =>
-            addDataLogs({
-              user_id: user.id,
-              action: "connexion",
-              result: "success"
-            })
-          )
-          .then(() => {
-            const signOptions = {
-              expiresIn: "31d"
-            };
-            const token = jwt.sign(
-              JSON.parse(JSON.stringify(user)),
-              jwtConfig.key || "emjpm-jwtkey",
-              signOptions
-            );
-            return res.status(200).json({
-              success: true,
-              url: redirs[user.type] || redirs.default,
-              token
-            });
-          })
-          .catch(e => {
-            addDataLogs({
-              user_id: user.id,
-              action: "connexion",
-              result: "fail"
-            });
-            /* eslint-disable no-console */
-            return console.log(e);
-            /* eslint-enable no-console */
-          });
-      });
-    }
-  })(req, res, next);
-});
-
-router.get("/checkToken", authHelpers.loginRequired, (req, res) => {
-  return res.sendStatus(200);
-});
 
 router.post("/checkUser", async (req, res, next) => {
   try {
