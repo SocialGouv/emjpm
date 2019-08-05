@@ -77,10 +77,10 @@ test("should register with good values", async () => {
     .post("/api/v2/auth/signup")
     .send(defaultRegister);
   expect(response.body).toMatchInlineSnapshot(`
-            Object {
-              "success": true,
-            }
-      `);
+                Object {
+                  "success": true,
+                }
+        `);
   expect(response.status).toBe(200);
 
   const lastInsert = await knex
@@ -127,10 +127,10 @@ test("should NOT register when password!==passwordConfirmation", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
     `
-                Object {
-                  "errors": Any<Array>,
-                }
-        `
+                    Object {
+                      "errors": Any<Array>,
+                    }
+          `
   );
   expect(response.status).toBe(400);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
@@ -147,10 +147,10 @@ test("should NOT register when email already exist", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
     `
-                    Object {
-                      "errors": Any<Array>,
-                    }
-          `
+                        Object {
+                          "errors": Any<Array>,
+                        }
+            `
   );
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
   expect(response.status).toBe(409);
@@ -167,10 +167,10 @@ test("should NOT register when username already exist", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
     `
-                    Object {
-                      "errors": Any<Array>,
-                    }
-          `
+                        Object {
+                          "errors": Any<Array>,
+                        }
+            `
   );
   expect(response.status).toBe(409);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
@@ -186,10 +186,10 @@ test("should NOT register when empty username", async () => {
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
     `
-            Object {
-              "errors": Any<Array>,
-            }
-      `
+                Object {
+                  "errors": Any<Array>,
+                }
+        `
   );
   expect(response.status).toBe(400);
 

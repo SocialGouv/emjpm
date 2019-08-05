@@ -81,9 +81,9 @@ const createUserTis = (body, user) => {
   );
 };
 
-const createDirection = (body, user) =>
+const createDirection = (body, userId) => {
   Direction.query().insert({
-    user_id: user.id,
+    user_id: userId,
     department_id:
       body.directionType === "direction_departemental"
         ? body.department_id
@@ -91,15 +91,18 @@ const createDirection = (body, user) =>
     region_id:
       body.directionType === "direction_regional" ? body.region_id : null
   });
+};
 
-const createRole = async (user, type) => {
+const createRole = async (userId, type) => {
   const [role] = await Role.query().where("name", type);
-  return UserRole.query()
-    .allowInsert("[user_id,role_id]")
-    .insert({
-      user_id: user.id,
-      role_id: role.id
-    });
+  if (role && userId) {
+    return UserRole.query()
+      .allowInsert("[user_id,role_id]")
+      .insert({
+        user_id: userId,
+        role_id: role.id
+      });
+  }
 };
 
 const postSignup = async (req, res) => {
@@ -131,7 +134,7 @@ const postSignup = async (req, res) => {
         prenom,
         email
       });
-    await createRole(user, type);
+    await createRole(user.id, type);
     switch (type) {
       case "individuel":
       case "preprose":
@@ -150,8 +153,8 @@ const postSignup = async (req, res) => {
         await createUserTis(req.body, user);
         break;
       case "direction": {
-        await createRole(user, directionType);
-        await createDirection(req.body, user);
+        await createRole(user.id, directionType);
+        await createDirection(req.body, user.id);
         break;
       }
       default:
