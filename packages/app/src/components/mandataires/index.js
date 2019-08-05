@@ -59,9 +59,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({ onMount: mandataireM
 // connect to redux-modal
 const MandataireTabsRedux = connect(
   state => ({
-    currentMandataire:
-      (state.mandataire.profiles && state.mandataire.profiles[0]) || state.mandataire.user,
-    service: state.mandataire.service
+    currentMandataire: state.mandataire.user
   }),
   mapDispatchToProps
 )(MandataireIndex);
