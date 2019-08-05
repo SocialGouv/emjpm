@@ -82,31 +82,6 @@ qui exerce sur le TI: ti arras.
 
 Merci de vérifier cette nouvelle demande et de la valider.
 
-exports[`should add user tis 2`] = `
-Array [
-  Object {
-    "from": "ne-pas-repondre@emjpm.gouv.fr",
-    "html": "
-Bonjour la super team eMJPM :),<br />
-Nous avons reçu une nouvelle inscription de testPrenom testAd , toto@toto.com , 75010, <br />
-
-qui exerce sur le TI: ti arras. <br />
-
-Merci de vérifier cette nouvelle demande et de la valider.
-<br /><br />
-Bonne journée :)
-",
-    "subject": "Nouvelle inscription",
-    "text": "
-Bonjour la super team emjpm :) ,
-
-Nous avons reçu une nouvelle inscription de testPrenom testAd , toto@toto.com , 75010,
-agrée sur TI: ti arras / qui exerce sur TI: ti arras.
-
-qui exerce sur le TI: ti arras.
-
-Merci de vérifier cette nouvelle demande et de la valider.
-
 Bonne journée :)
 ",
     "to": "contact@emjpm.beta.gouv.fr",
