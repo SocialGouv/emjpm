@@ -35,6 +35,9 @@ afterEach(async () => {
   }
 
   try {
+    await knex("user_role")
+      .where({ user_id: user.id })
+      .delete();
     await knex("user_tis")
       .where({ user_id: user.id })
       .delete();
@@ -59,8 +62,8 @@ const defaultRegister = {
   etablissement: "",
   email: "toto@toto.com",
   type: "individuel",
-  pass1: "secret",
-  pass2: "secret",
+  password: "test123456?",
+  passwordConfirmation: "test123456?",
   adresse: "",
   code_postal: "75010",
   ville: "",
@@ -71,13 +74,13 @@ const defaultRegister = {
 
 test("should register with good values", async () => {
   const response = await request(server)
-    .post("/api/v1/inscription/mandataires")
+    .post("/api/v2/auth/signup")
     .send(defaultRegister);
   expect(response.body).toMatchInlineSnapshot(`
-    Object {
-      "success": true,
-    }
-  `);
+            Object {
+              "success": true,
+            }
+      `);
   expect(response.status).toBe(200);
 
   const lastInsert = await knex
@@ -89,16 +92,15 @@ test("should register with good values", async () => {
 
 test("should send an email with good values", async () => {
   await request(server)
-    .post("/api/v1/inscription/mandataires")
+    .post("/api/v2/auth/signup")
     .send(defaultRegister);
-
   expect(nodemailerMock.mock.sentMail().length).toBe(1);
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
 });
 
 test("created user should NOT be active", async () => {
   const response = await request(server)
-    .post("/api/v1/inscription/mandataires")
+    .post("/api/v2/auth/signup")
     .send(defaultRegister);
   expect(response.body.success).toBe(true);
   expect(response.status).toBe(200);
@@ -113,48 +115,42 @@ test("created user should NOT be active", async () => {
   });
 });
 
-test("should NOT register when pass1!==pass2", async () => {
+test("should NOT register when password!==passwordConfirmation", async () => {
   const response = await request(server)
-    .post("/api/v1/inscription/mandataires")
+    .post("/api/v2/auth/signup")
     .send({
       ...defaultRegister,
-      pass1: "hello",
-      pass2: "world"
+      password: "hello",
+      passwordConfirmation: "world"
     });
 
   expect(response.body).toMatchInlineSnapshot(
-    { stack: expect.any(String) },
+    { errors: expect.any(Array) },
     `
-    Object {
-      "message": "Les mots de passe ne sont pas conformes",
-      "name": "UnprocessableEntityError",
-      "stack": Any<String>,
-      "status": 422,
-    }
-  `
+                Object {
+                  "errors": Any<Array>,
+                }
+        `
   );
-  expect(response.status).toBe(422);
+  expect(response.status).toBe(400);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
 });
 
 test("should NOT register when email already exist", async () => {
   const response = await request(server)
-    .post("/api/v1/inscription/mandataires")
+    .post("/api/v2/auth/signup")
     .send({
       ...defaultRegister,
       email: "marcel@paris.com"
     });
 
   expect(response.body).toMatchInlineSnapshot(
-    { stack: expect.any(String) },
+    { errors: expect.any(Array) },
     `
-    Object {
-      "message": "Un compte avec cet email existe déjà",
-      "name": "ConflictError",
-      "stack": Any<String>,
-      "status": 409,
-    }
-  `
+                    Object {
+                      "errors": Any<Array>,
+                    }
+          `
   );
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
   expect(response.status).toBe(409);
@@ -162,22 +158,19 @@ test("should NOT register when email already exist", async () => {
 
 test("should NOT register when username already exist", async () => {
   const response = await request(server)
-    .post("/api/v1/inscription/mandataires")
+    .post("/api/v2/auth/signup")
     .send({
       ...defaultRegister,
       username: "jeremy"
     });
 
   expect(response.body).toMatchInlineSnapshot(
-    { stack: expect.any(String) },
+    { errors: expect.any(Array) },
     `
-    Object {
-      "message": "Key (username)=(jeremy) already exists.",
-      "name": "ConflictError",
-      "stack": Any<String>,
-      "status": 409,
-    }
-  `
+                    Object {
+                      "errors": Any<Array>,
+                    }
+          `
   );
   expect(response.status).toBe(409);
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
@@ -185,42 +178,27 @@ test("should NOT register when username already exist", async () => {
 
 test("should NOT register when empty username", async () => {
   const response = await request(server)
-    .post("/api/v1/inscription/mandataires")
+    .post("/api/v2/auth/signup")
     .send({
       ...defaultRegister,
       username: ""
     });
   expect(response.body).toMatchInlineSnapshot(
-    { stack: expect.any(String) },
+    { errors: expect.any(Array) },
     `
-    Object {
-      "message": "Les mots de passe ne sont pas conformes",
-      "name": "UnprocessableEntityError",
-      "stack": Any<String>,
-      "status": 422,
-    }
-  `
+            Object {
+              "errors": Any<Array>,
+            }
+      `
   );
-  expect(response.status).toBe(422);
+  expect(response.status).toBe(400);
 
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
-  expect(response.body).toMatchInlineSnapshot(
-    { stack: expect.any(String) },
-    `
-    Object {
-      "message": "Les mots de passe ne sont pas conformes",
-      "name": "UnprocessableEntityError",
-      "stack": Any<String>,
-      "status": 422,
-    }
-  `
-  );
-  expect(response.status).toBe(422);
 });
 
 test("should add mandataire tis", async () => {
   const response = await request(server)
-    .post("/api/v1/inscription/mandataires")
+    .post("/api/v2/auth/signup")
     .send({
       ...defaultRegister,
       tis: [1, 2]
@@ -239,7 +217,7 @@ test("should add mandataire tis", async () => {
 
 test("should add user tis", async () => {
   const response = await request(server)
-    .post("/api/v1/inscription/tis")
+    .post("/api/v2/auth/signup")
     .send({
       ...defaultRegister,
       username: "user_ti",
