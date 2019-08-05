@@ -7,22 +7,13 @@ const {
 } = getConfig();
 
 // forceLogin: redirect user to /login when receiving a 401
-const apiFetch = (route, params, options = { forceLogin: true }) => {
+const apiFetch = (route, params, options = { forceLogin: true, apiVersion: "v1" }) => {
+  const { apiVersion, forceLogin } = options;
+  const url = `${API_URL}/api/${apiVersion}${route}`;
+
   const getToken = () => {
     return localStorage.getItem("id_token");
   };
-
-  // const isTokenExpired = token => {
-  //   try {
-  //     const decoded = decode(token);
-  //     if (decoded.exp < Date.now() / 1000) {
-  //       // Checking if token is expired. N
-  //       return true;
-  //     } else return false;
-  //   } catch (err) {
-  //     return false;
-  //   }
-  // };
 
   const hasToken = () => {
     const token = getToken();
@@ -48,10 +39,11 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
       "Content-Type": "application/json"
     };
   }
-  return fetch(`${API_URL}/api/v1${route}`, fetchParams)
+
+  return fetch(url, fetchParams)
     .then(res => {
       // intercept
-      if (options.forceLogin && res.status === 401) {
+      if (forceLogin && res.status === 401) {
         /* eslint-disable no-console */
         console.log(`401 on ${route}`);
         /* eslint-enable no-console */
@@ -63,20 +55,26 @@ const apiFetch = (route, params, options = { forceLogin: true }) => {
         /* eslint-enable no-console */
         throw new Error(404);
       }
-      if (res.status >= 500) {
-        /* eslint-disable no-console */
-        console.log(`${res.status} on ${route}`);
-        /* eslint-enable no-console */
-        throw new Error(res.status);
-      }
       return res;
     })
     .then(async res => {
+      if (res.status >= 500) {
+        const body = await res.json();
+        const error = new Error(body.message);
+        Object.assign(body, error);
+        throw body;
+      }
+      if (res.status === 400) {
+        const body = await res.json();
+        const error = new Error(body.message);
+        Object.assign(body, error);
+        throw body;
+      }
       if (res.status > 404 && res.status < 500) {
         const body = await res.json();
         const error = new Error(body.message);
         Object.assign(error, body);
-        throw error;
+        throw body;
       }
       return res;
     })

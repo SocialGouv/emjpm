@@ -2,6 +2,7 @@ import React from "react";
 import InscriptionIndividuel from "./InscriptionIndividuel";
 import InscriptionPrepose from "./InscriptionPrepose";
 import InscriptionService from "./InscriptionService";
+import InscriptionDirection from "./InscriptionDirection";
 import InscriptionTi from "./InscriptionTi";
 import TiSelector from "./TiSelector";
 import Resolve from "../common/Resolve";
@@ -21,6 +22,9 @@ const formsMandataires = {
   },
   ti(props) {
     return <InscriptionTi {...props} />;
+  },
+  direction(props) {
+    return <InscriptionDirection {...props} />;
   }
 };
 
@@ -43,7 +47,8 @@ const getTis = () =>
   // only fetch client-side
   (typeof window !== "undefined" &&
     apiFetch("/inscription/tis", null, {
-      forceLogin: false
+      forceLogin: false,
+      apiVersion: "v1"
     })) ||
   Promise.resolve();
 
@@ -57,7 +62,8 @@ class Form extends React.Component {
       status: "idle",
       message: "",
       showModal: false,
-      modalContent: ""
+      modalContent: "",
+      errors: []
     };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -83,25 +89,24 @@ class Form extends React.Component {
   };
 
   submitUser = formData => {
-    const urls = {
-      ti: "/inscription/tis",
-      default: "/inscription/mandataires"
-    };
-
-    const url = urls[this.state.typeMandataire] || urls.default;
+    const url = `/auth/signup`;
     const usernameData = formData.email.toLowerCase().trim();
-    apiFetch(url, {
-      method: "POST",
-      body: JSON.stringify({
-        ...formData,
-        etablissement: formData.etablissement || "",
-        tis: this.state.tis,
-        type: this.state.typeMandataire,
-        username: usernameData,
-        mesures_en_cours: formData.mesures_en_cours || 0,
-        cabinet: formData.cabinet || null
-      })
-    })
+    apiFetch(
+      url,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          ...formData,
+          etablissement: formData.etablissement || "",
+          tis: this.state.tis,
+          type: this.state.typeMandataire,
+          username: usernameData,
+          mesures_en_cours: formData.mesures_en_cours || 0,
+          cabinet: formData.cabinet || null
+        })
+      },
+      { apiVersion: "v2" }
+    )
       .then(json => {
         if (json.success === false) {
           this.setState({ status: "error", message: json.message });
@@ -109,8 +114,10 @@ class Form extends React.Component {
         }
         Router.push("/inscription-done");
       })
-      .catch(e => {
-        this.setState({ status: "error", message: e && e.message });
+      .catch(error => {
+        const test = this.state.errors;
+        const errorsArray = test.concat(error.errors);
+        this.setState({ status: "error", message: error && errorsArray });
       });
   };
 
@@ -119,21 +126,22 @@ class Form extends React.Component {
     const hasSingleTi = this.state.tis.length === 1;
     const hasMultipleTi = this.state.tis.length > 1;
     const isTi = this.state.typeMandataire === "ti";
-
-    if (hasNoTi) {
+    const userType = this.state.typeMandataire;
+    const isAgent = userType === "direction";
+    if (hasNoTi && !isAgent) {
       this.handleOpenModal("Saisissez au moins un tribunal d'instance de référence");
     } else if (isTi && hasMultipleTi) {
       this.handleOpenModal("Saisissez un seul tribunal d'instance de référence");
-    } else {
-      if ((isTi && hasSingleTi) || !hasNoTi) {
-        this.setState({ status: "loading", formData }, () => {
-          this.submitUser(formData);
-        });
-      }
+    } else if ((isTi && hasSingleTi) || !hasNoTi || isAgent) {
+      this.setState({ status: "loading", formData }, () => {
+        this.submitUser(formData);
+      });
     }
   };
 
   render() {
+    const userType = this.state.typeMandataire;
+    const isAgent = userType === "direction";
     const FormMandataire = formsMandataires[this.state.typeMandataire];
     const { modalContent, showModal } = this.state;
     return (
@@ -141,19 +149,6 @@ class Form extends React.Component {
         <div className="col-12 offset-sm-2 col-sm-8 offset-md-2 col-md-8">
           <h1 style={{ margin: 20 }}>Inscription</h1>
           <div style={{ backgroundColor: "white", padding: 25 }}>
-            <Resolve
-              promises={[() => getTis()]}
-              render={({ status, result }) => (
-                <div style={{ margin: "20px 0" }}>
-                  <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
-                    Choisissez les tribunaux sur lesquels vous exercez :
-                  </div>
-                  {status === "success" && <TiSelector onChange={this.setTis} tis={result[0]} />}
-                  {status === "error" && <div>Impossible de charger la liste des Tribunaux</div>}
-                  {status === "loading" && <div>Chargement de la liste des Tribunaux...</div>}
-                </div>
-              )}
-            />
             <div style={{ fontSize: "1.2em", fontWeight: "bold" }}>Vous êtes :</div>
             <table
               style={{
@@ -176,9 +171,29 @@ class Form extends React.Component {
                     label="Tribunal Instance"
                     onChange={this.setTypeMandataire}
                   />
+                  <FormSelector
+                    value="direction"
+                    label="Agent de l'état"
+                    onChange={this.setTypeMandataire}
+                  />
                 </tr>
               </tbody>
             </table>
+            {!isAgent && userType && (
+              <Resolve
+                promises={[() => getTis()]}
+                render={({ status, result }) => (
+                  <div style={{ margin: "20px 0" }}>
+                    <div style={{ fontSize: "1.2em", fontWeight: "bold", margin: "20px 0" }}>
+                      Choisissez les tribunaux sur lesquels vous exercez :
+                    </div>
+                    {status === "success" && <TiSelector onChange={this.setTis} tis={result[0]} />}
+                    {status === "error" && <div>Impossible de charger la liste des Tribunaux</div>}
+                    {status === "loading" && <div>Chargement de la liste des Tribunaux...</div>}
+                  </div>
+                )}
+              />
+            )}
             {FormMandataire && (
               <FormMandataire
                 typeMandataire={this.state.typeMandataire}
@@ -186,9 +201,19 @@ class Form extends React.Component {
                 formData={this.state.formData}
               />
             )}
+
             {this.state.status === "error" && (
-              <div style={{ textAlign: "center", color: "red", fontSize: "1.1em" }}>
-                {this.state.message}
+              <div>
+                {this.state.message.map(error => {
+                  return (
+                    <div
+                      key={error.msg}
+                      style={{ textAlign: "center", color: "red", fontSize: "1.1em" }}
+                    >
+                      {error.msg}
+                    </div>
+                  );
+                })}
               </div>
             )}
             <Modal
