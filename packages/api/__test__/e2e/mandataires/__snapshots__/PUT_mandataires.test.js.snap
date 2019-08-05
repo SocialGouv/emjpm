@@ -32,22 +32,3 @@ Object {
   "zip": null,
 }
 `;
-
-exports[`service should update his siege profile 1`] = `
-Object {
-  "adresse": "21 rue de houx",
-  "code_postal": "62000",
-  "created_at": Any<String>,
-  "dispo_max": 3,
-  "email": "testSiege@email.com",
-  "etablissement": "UDAHF Siege",
-  "id": 1,
-  "information": null,
-  "nom": null,
-  "prenom": null,
-  "telephone": "0237100000",
-  "type": "service",
-  "userId": 3,
-  "ville": "Arras",
-}
-`;
