@@ -100,10 +100,12 @@ exports.up = async function(knex) {
   );
 };
 
-exports.down = function(knex) {
+exports.down = async function(knex) {
+  await knex.schema.alterTable("service_antenne", function(table) {
+    table.dropColumn("bak_mandataire_id");
+  });
   return knex.schema.alterTable("mandataires", function(table) {
     table.integer("antenne_id");
     table.dropColumn("service_id");
-    table.dropColumn("bak_mandataire_id");
   });
 };

@@ -19,6 +19,5 @@ exports.down = function(knex) {
       .foreign("mandataire_id")
       .references("id")
       .inTable("mandataires");
-    table.dropColumn("antenne_id");
   });
 };
