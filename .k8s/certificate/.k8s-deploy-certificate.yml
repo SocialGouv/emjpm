@@ -4,9 +4,3 @@
     - envsubst < ./.k8s/certificate/certificate.yml > ./certificate.yml
     #
     - kubectl apply -f ./certificate.yml
-    #
-    - envsubst < ./.k8s/app/ingress-prod.yml > ./ingress.yml
-    - kubectl apply -f ./ingress.yml
-    #
-    - envsubst < ./.k8s/api/ingress-prod.yml > ./ingress.yml
-    - kubectl apply -f ./ingress.yml
