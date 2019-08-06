@@ -37,6 +37,12 @@ Object {
 
 exports[`commentaires table schema 1`] = `
 Object {
+  "antenne_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "comment": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -346,12 +352,6 @@ Object {
     "nullable": false,
     "type": "character varying",
   },
-  "antenne_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
   "code_postal": Object {
     "defaultValue": null,
     "maxLength": 255,
@@ -482,6 +482,12 @@ Object {
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
+  },
+  "antenne_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
   },
   "cabinet": Object {
     "defaultValue": null,
@@ -636,14 +642,80 @@ Object {
 
 exports[`service_antenne table schema 1`] = `
 Object {
+  "address_city": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "address_street": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "address_zip_code": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "bak_mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "contact_email": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "contact_firstname": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "contact_lastname": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "contact_phone": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
     "maxLength": null,
     "nullable": false,
     "type": "timestamp with time zone",
   },
+  "headquarters": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": false,
+    "type": "boolean",
+  },
   "id": Object {
     "defaultValue": "nextval('service_antenne_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mesures_in_progress": Object {
+    "defaultValue": "0",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mesures_max": Object {
+    "defaultValue": "0",
     "maxLength": null,
     "nullable": false,
     "type": "integer",
@@ -665,6 +737,12 @@ Object {
 
 exports[`service_tis table schema 1`] = `
 Object {
+  "antenne_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
   "created_at": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -675,12 +753,6 @@ Object {
     "defaultValue": "nextval('service_tis_id_seq'::regclass)",
     "maxLength": null,
     "nullable": false,
-    "type": "integer",
-  },
-  "mandataire_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
     "type": "integer",
   },
   "ti_id": Object {
