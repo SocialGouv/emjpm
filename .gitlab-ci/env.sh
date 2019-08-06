@@ -36,7 +36,7 @@ else
 fi
 
 export API_HOST="api.${DOMAIN}";
-export FRONTEND_HOST="${DOMAIN}";
+export FRONTEND_HOST="emjpm.${DOMAIN}";
 export HASURA_HOST="hasura.${DOMAIN}";
 export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
 export CERTIFICATE_HOST="${K8S_NAMESPACE}-certificate-${BRANCH_HASH}"
