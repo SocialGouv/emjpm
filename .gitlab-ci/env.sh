@@ -36,10 +36,10 @@ else
 fi
 
 export API_HOST="api.${DOMAIN}";
-export CERTIFICATE_HOST="${K8S_NAMESPACE}-certificate-${BRANCH_HASH}"
 export FRONTEND_HOST="${DOMAIN}";
 export HASURA_HOST="hasura.${DOMAIN}";
 export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
+export CERTIFICATE_HOST="${K8S_NAMESPACE}-certificate-${BRANCH_HASH}"
 
 if [[  -n "${PRODUCTION+x}" || "${BRANCH_NAME}" = "master" ]]; then
   export API_URL="https://${API_HOST}"
@@ -55,5 +55,5 @@ printenv | grep -E \
   "BRANCH_HASH|BRANCH_NAME|COMMIT|COMMIT_TAG|ENVIRONMENT|HASH_SIZE|JOB_ID" \
   | sort
 printenv | grep -E \
-  "API_HOST|API_URL|CERTIFICATE_HOST|FRONTEND_HOST|FRONTEND_URL|HASURA_HOST|POSTGRES_HOST" \
+  "API_HOST|API_URL|FRONTEND_HOST|FRONTEND_URL|HASURA_HOST|POSTGRES_HOST" \
   | sort
