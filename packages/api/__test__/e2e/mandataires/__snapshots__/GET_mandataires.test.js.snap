@@ -4,7 +4,6 @@ exports[`TI should GET list of mandataires 1`] = `
 Array [
   Object {
     "adresse": "21 rue de houx",
-    "antenne_id": null,
     "code_postal": "62000",
     "contact_email": null,
     "contact_nom": null,
@@ -33,7 +32,6 @@ Array [
   },
   Object {
     "adresse": "21 rue monge",
-    "antenne_id": null,
     "code_postal": "62000",
     "contact_email": null,
     "contact_nom": null,
@@ -75,7 +73,6 @@ Object {
 exports[`should GET mandataire profile 1`] = `
 Object {
   "adresse": "21 rue de houx",
-  "antenne_id": null,
   "code_postal": "62000",
   "contact_email": null,
   "contact_nom": null,
