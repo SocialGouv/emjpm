@@ -5,12 +5,10 @@
     #
     - kubectl apply -f ./certificate.yml
     #
-    - export CONTEXT=app
     - export PORT=80
     - envsubst < ./.k8s/app/ingress-prod.yml > ./ingress.yml
     - kubectl apply -f ./ingress.yml
     #
-    - export CONTEXT=api
     - export PORT=4000
     - envsubst < ./.k8s/api/ingress-prod.yml > ./ingress.yml
     - kubectl apply -f ./ingress.yml
