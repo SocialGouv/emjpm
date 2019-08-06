@@ -36,12 +36,11 @@ else
 fi
 
 export API_HOST="api.${DOMAIN}";
-export FRONTEND_HOST="emjpm.${DOMAIN}";
+export FRONTEND_HOST="${DOMAIN}";
 export HASURA_HOST="hasura.${DOMAIN}";
 export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
-export CERTIFICATE_HOST="${K8S_NAMESPACE}-certificate-${BRANCH_HASH}"
 
-if [[  -n "${PRODUCTION+x}" || "${BRANCH_NAME}" = "master" ]]; then
+if [[ -n "${PRODUCTION+x}" ]]; then
   export API_URL="https://${API_HOST}"
   export FRONTEND_URL="https://${FRONTEND_HOST}"
 else
