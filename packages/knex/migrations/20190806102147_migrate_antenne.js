@@ -47,7 +47,8 @@ exports.up = async function(knex) {
           contact_phone: mandataire.telephone,
           mesures_awaiting: mandataire.mesures_en_attente || 0,
           mesures_in_progress: mandataire.mesures_en_cours || 0,
-          mesures_max: mandataire.dispo_max || 0
+          mesures_max: mandataire.dispo_max || 0,
+          date_mesure_update: mandataire.date_mesure_update
         });
         headquarters = false;
       }

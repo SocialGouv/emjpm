@@ -23,6 +23,7 @@ exports.up = function(knex) {
       .integer("mesures_max")
       .notNullable()
       .defaultTo(0);
+    table.timestamp("date_mesure_update");
   });
 };
 
@@ -39,5 +40,6 @@ exports.down = function(knex) {
     table.dropColumn("mesures_awaiting");
     table.dropColumn("mesures_in_progress");
     table.dropColumn("mesures_max");
+    table.dropColumn("date_mesure_update");
   });
 };
