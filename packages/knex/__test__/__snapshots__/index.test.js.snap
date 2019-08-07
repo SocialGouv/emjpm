@@ -696,6 +696,12 @@ Object {
     "nullable": false,
     "type": "timestamp with time zone",
   },
+  "date_mesure_update": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
   "headquarters": Object {
     "defaultValue": "false",
     "maxLength": null,
