@@ -12,6 +12,10 @@ exports.up = function(knex) {
     table.string("contact_email");
     table.string("contact_phone");
     table
+      .integer("mesures_awaiting")
+      .notNullable()
+      .defaultTo(0);
+    table
       .integer("mesures_in_progress")
       .notNullable()
       .defaultTo(0);
@@ -32,6 +36,7 @@ exports.down = function(knex) {
     table.dropColumn("contact_firstname");
     table.dropColumn("contact_email");
     table.dropColumn("contact_phone");
+    table.dropColumn("mesures_awaiting");
     table.dropColumn("mesures_in_progress");
     table.dropColumn("mesures_max");
   });

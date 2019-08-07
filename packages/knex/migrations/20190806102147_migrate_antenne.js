@@ -45,6 +45,7 @@ exports.up = async function(knex) {
           contact_firstname: mandataire.contact_prenom,
           contact_email: mandataire.contact_email,
           contact_phone: mandataire.telephone,
+          mesures_awaiting: mandataire.mesures_en_attente || 0,
           mesures_in_progress: mandataire.mesures_en_cours || 0,
           mesures_max: mandataire.dispo_max || 0
         });
@@ -62,6 +63,7 @@ exports.up = async function(knex) {
         contact_firstname: service.prenom,
         contact_email: service.email,
         contact_phone: service.telephone,
+        mesures_awaiting: 0,
         mesures_in_progress: 0,
         mesures_max: service.dispo_max || 0
       });

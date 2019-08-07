@@ -708,6 +708,12 @@ Object {
     "nullable": false,
     "type": "integer",
   },
+  "mesures_awaiting": Object {
+    "defaultValue": "0",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
   "mesures_in_progress": Object {
     "defaultValue": "0",
     "maxLength": null,
