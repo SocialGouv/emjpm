@@ -144,7 +144,7 @@ class FicheMandataireModal extends React.Component {
               <br /> {currentMandataire.type.toUpperCase()} <br /> {labelGenre}
             </TitleMandataire>
             <FicheMandataire
-              email={currentMandataire.email || currentMandataire.contact_email}
+              email={currentMandataire.email}
               telephone={currentMandataire.telephone}
               telephone_portable={currentMandataire.telephone_portable}
               adresse={currentMandataire.adresse}

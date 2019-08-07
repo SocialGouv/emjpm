@@ -24,7 +24,4 @@ export interface Mandataires {
   mesures_en_attente: NullableNumber;
   zip: NullableString;
   antenne_id: NullableNumber;
-  contact_email: NullableString;
-  contact_nom: NullableString;
-  contact_prenom: NullableString;
 }
