@@ -3,7 +3,6 @@
 include:
   - /.k8s/api/.k8s-deploy-api.yml
   - /.k8s/app/.k8s-deploy-app.yml
-  - /.k8s/certificate/.k8s-deploy-certificate.yml
   - /.k8s/postgres/.k8s-deploy-postgres.yml
   - /.k8s/hasura/.k8s-deploy-hasura.yml
 
@@ -120,33 +119,6 @@ Deploy postgres (dev):
 Deploy postgres (incubateur):
   extends: .k8s-deploy-postgres-prod
   <<: *deploy_postgres
-  <<: *incubateur_stage
-
-#
-#
-#
-
-.deploy-certificate: &deploy_certificate
-  <<: *deploy_stage
-  extends: .k8s-deploy-certificate
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: certificate
-
-#
-
-Deploy certificate (dev):
-  <<: *deploy_certificate
-  <<: *dev_stage
-  only:
-    refs:
-      - master
-  except:
-    variables:
-      - $PRODUCTION
-
-Deploy certificate (incubateur):
-  <<: *deploy_certificate
   <<: *incubateur_stage
 
 #
