@@ -39,18 +39,3 @@ test("should add ti for a  mandataire", async () => {
     .first();
   expect(simpler(lastInsert)).toMatchSnapshot();
 });
-
-test("should add ti for a service", async () => {
-  const token = await getTokenByUserType("service");
-  const response = await request(server)
-    .post("/api/v1/mandataires/1/tis")
-    .set("Authorization", "Bearer " + token)
-    .send(defaultRegister);
-  expect(response.status).toBe(200);
-
-  const lastInsert = await knex
-    .table("service_tis")
-    .orderBy("created_at", "desc")
-    .first();
-  expect(simpler(lastInsert)).toMatchSnapshot();
-});

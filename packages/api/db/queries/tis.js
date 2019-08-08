@@ -82,21 +82,6 @@ const getTiByUserIdWithCodePostal = userId =>
     .where("user_tis.user_id", parseInt(userId))
     .first();
 
-const getAllTisByMandataireService = mandataireId =>
-  knex("service_tis")
-    .select("tis.id", "tis.etablissement", "service_tis.ti_id")
-    .innerJoin("tis", "service_tis.ti_id", "tis.id")
-    .innerJoin("mandataires", "mandataires.id", "service_tis.mandataire_id")
-    .where({
-      "mandataires.id": parseInt(mandataireId)
-    });
-
-const addServiceTis = (ti_id, mandataire_id) =>
-  knex("service_tis").insert({
-    ti_id: ti_id,
-    mandataire_id: mandataire_id
-  });
-
 module.exports = {
   getAllTisByMandataire,
   addMandataireTis,
@@ -104,7 +89,5 @@ module.exports = {
   getTis,
   getTiByUserId,
   getTiByUserIdWithCodePostal,
-  getAllTisByMandataireService,
-  addServiceTis,
   getTiById
 };

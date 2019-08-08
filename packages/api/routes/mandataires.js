@@ -5,8 +5,6 @@ const router = express.Router();
 
 const { typeRequired, loginRequired } = require("../auth/_helpers");
 
-const { ServiceAntenneModel } = require("../model/ServiceAntenneModel");
-
 const {
   getMandataireByUserId,
   updateMandataire,
@@ -16,9 +14,6 @@ const {
   getAllServicesByTis,
   getAllMandataires,
   getAllByMandatairesFilter,
-  getParentService,
-  updateService,
-  getAllMandatairesByUserId,
   findMandataire
 } = require("../db/queries/mandataires");
 
@@ -29,11 +24,6 @@ const {
 const { updateUser } = require("../db/queries/users");
 
 const { getTiByUserId } = require("../db/queries/tis");
-
-const {
-  createMandataire,
-  createMandataireTi
-} = require("../db/queries/inscription");
 
 // récupère les données d'un mandataire
 
@@ -122,7 +112,7 @@ const {
  */
 router.get(
   "/1",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
@@ -156,27 +146,6 @@ const WHITELIST = [
   "contact_prenom",
   "contact_email"
 ];
-const WHITELISTSIEGESOCIAL = [
-  "nom",
-  "prenom",
-  "etablissement",
-  "telephone",
-  "email",
-  "adresse",
-  "code_postal",
-  "ville",
-  "dispo_max",
-  "mesures_en_cours",
-  "contact_nom",
-  "contact_prenom",
-  "contact_email",
-  "information"
-];
-
-const whiteListSiegeSocial = obj =>
-  Object.keys(obj)
-    .filter(key => WHITELISTSIEGESOCIAL.indexOf(key) > -1)
-    .reduce((a, c) => ({ ...a, [c]: obj[c] }), {});
 
 const whiteList = obj =>
   Object.keys(obj)
@@ -208,7 +177,7 @@ const whiteList = obj =>
  */
 router.put(
   "/1",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     try {
       const {
@@ -236,10 +205,6 @@ router.put(
       const mandataire = await findMandataire(req, req.body.id);
       if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
-      }
-
-      if (req.user.type === "service" && mandataire.user_id !== req.user.id) {
-        throw createError.Unauthorized(`Update not authorize`);
       }
 
       const body = whiteList(req.body);
@@ -428,7 +393,7 @@ router.get("/postcode/:postcode", loginRequired, async (req, res, next) => {
  */
 router.put(
   "/:mandataireId/capacite",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     try {
       const mandataire = await getMandataireByUserId(req.user.id);
@@ -474,7 +439,7 @@ router.put(
  */
 router.put(
   "/:mandataireId/mesures-en-attente",
-  typeRequired("individuel", "prepose", "ti", "service"),
+  typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
     try {
       // const mandataire = await queries.getMandataireByUserId(req.user.id);
@@ -497,116 +462,22 @@ router.put(
   }
 );
 
-router.get("/service", typeRequired("service"), async (req, res, next) => {
-  try {
-    const service = await getParentService(req.user.service_id);
-    if (!service) {
-      throw createError.Unauthorized(
-        `Service not found: ${req.user.service_id}`
-      );
-    }
-    res.status(200).json(service);
-  } catch (err) {
-    next(err);
-  }
-});
-
-router.put(
-  "/service/:serviceId",
-  typeRequired("service"),
-  async (req, res, next) => {
-    try {
-      const service = await getParentService(req.body.id);
-      if (req.user.id !== service.userId) {
-        throw createError.Unauthorized(`Service not found`);
-      }
-      await updateService(req.body.id, whiteListSiegeSocial(req.body));
-      const serviceUpdated = await getParentService(req.body.id);
-      res.status(200).json(serviceUpdated);
-    } catch (err) {
-      next(err);
-    }
-  }
-);
-
 //ToDo(Adrien):Move /all to users routes
 router.get(
   "/all",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     try {
-      const mandataires = await getAllMandatairesByUserId(req.user.id);
-      if (!mandataires) {
+      const mandataire = await getMandataireByUserId(req.user.id);
+      if (!mandataire) {
         throw createError.Unauthorized(`Mandataire not found`);
       }
-      res.status(200).json(mandataires);
+      res.status(200).json(mandataire);
     } catch (err) {
       next(err);
     }
   }
 );
-
-router.post("/", typeRequired("service"), async (req, res, next) => {
-  try {
-    const {
-      etablissement,
-      contact_nom,
-      contact_prenom,
-      telephone,
-      telephone_portable,
-      contact_email,
-      adresse,
-      code_postal,
-      ville,
-      service_id,
-      dispo_max,
-      tis
-    } = req.body;
-
-    // TODO(tglatt): will be refactored while implementing service UI
-    let antenne = {};
-    if (service_id) {
-      const antennes = await ServiceAntenneModel.query().where(
-        "service_id",
-        service_id
-      );
-      if (antennes && antennes.length) {
-        antenne = antennes[0];
-      }
-    }
-
-    const mandataire = await createMandataire({
-      user_id: req.user.id,
-      etablissement,
-      telephone,
-      telephone_portable,
-      adresse,
-      code_postal,
-      ville,
-      contact_nom,
-      contact_prenom,
-      contact_email,
-      antenne_id: antenne.id,
-      dispo_max
-    });
-
-    if (!tis || tis.length === 0) {
-      return true;
-    }
-    await Promise.all(
-      tis.map(ti_id =>
-        createMandataireTi({
-          mandataire_id: mandataire[0],
-          ti_id
-        })
-      )
-    );
-
-    res.json({ success: true });
-  } catch (err) {
-    next(err);
-  }
-});
 
 router.use("/", require("./commentaires"));
 router.use("/", require("./mandataireMesures"));

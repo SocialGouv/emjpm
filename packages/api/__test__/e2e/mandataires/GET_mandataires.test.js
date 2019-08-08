@@ -54,25 +54,3 @@ test("TI should GET list of mandataires", async () => {
 
   expect(response.status).toBe(200);
 });
-
-test("Mandataire should GET service", async () => {
-  const token = await getTokenByUserType("service");
-  const response = await request(server)
-    .get("/api/v1/mandataires/service")
-    .set("Authorization", "Bearer " + token);
-
-  expect(simpler(response.body)).toMatchSnapshot();
-
-  expect(response.status).toBe(200);
-});
-
-test("User should GET all mandataires", async () => {
-  const token = await getTokenByUserType("service");
-  const response = await request(server)
-    .get("/api/v1/mandataires/all")
-    .set("Authorization", "Bearer " + token);
-
-  expect(response.body[0]).toMatchSnapshot({ created_at: expect.any(String) });
-
-  expect(response.status).toBe(200);
-});

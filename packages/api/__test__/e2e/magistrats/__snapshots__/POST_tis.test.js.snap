@@ -7,11 +7,3 @@ Object {
   "user_id": 1,
 }
 `;
-
-exports[`should add ti for a service 1`] = `
-Object {
-  "id": 1,
-  "mandataire_id": 1,
-  "ti_id": 1,
-}
-`;

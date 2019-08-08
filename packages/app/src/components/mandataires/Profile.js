@@ -66,7 +66,7 @@ const ButtonEditMandataire = connect(
       data-cy="button-edit-profile"
       style={{ marginLeft: 0 }}
       onClick={() =>
-        show(formData.type === "service" ? "EditService" : "EditMandataire", {
+        show("EditMandataire", {
           formData
         })
       }
@@ -89,10 +89,7 @@ const changePassword = email => {
     });
 };
 
-const getNewMandataire = props =>
-  props.currentMandataire && props.currentMandataire.length !== 1
-    ? props.currentMandataire.filter(manda => manda.id === props.mandataireId)[0]
-    : props.currentMandataire && props.currentMandataire[0];
+const getNewMandataire = props => props.currentMandataire;
 
 class MandataireProfile extends React.Component {
   render() {

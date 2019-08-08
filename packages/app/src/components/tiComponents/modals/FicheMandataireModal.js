@@ -143,27 +143,6 @@ class FicheMandataireModal extends React.Component {
               )}
               <br /> {currentMandataire.type.toUpperCase()} <br /> {labelGenre}
             </TitleMandataire>
-            {currentMandataire.type === "service" && (
-              <React.Fragment>
-                <br />
-                <b>Siège social</b>
-                <br />
-                <b>{currentMandataire.service_etablissement}</b>
-                <FicheMandataire
-                  email={currentMandataire.service_email}
-                  telephone={currentMandataire.telephone}
-                  adresse={currentMandataire.service_telephone}
-                  dispo_max={currentMandataire.service_dispo_max}
-                  type={currentMandataire.type}
-                  displayTitle={"none"}
-                  information={currentMandataire.service_info}
-                />
-                <br />
-                <b>Antennes</b>
-                <br />
-                <b>{currentMandataire.etablissement}</b>
-              </React.Fragment>
-            )}
             <FicheMandataire
               email={currentMandataire.email || currentMandataire.contact_email}
               telephone={currentMandataire.telephone}

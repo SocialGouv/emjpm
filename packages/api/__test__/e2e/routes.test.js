@@ -29,12 +29,12 @@ const accessChecks = [
   {
     method: "GET",
     url: "/api/v1/mandataires/1",
-    type: ["mandataire", "service"]
+    type: ["mandataire"]
   },
   {
     method: "PUT",
     url: "/api/v1/mandataires/1/capacite",
-    type: ["mandataire", "service"]
+    type: ["mandataire"]
   },
   {
     method: "GET",
@@ -52,11 +52,6 @@ const accessChecks = [
     type: "ti"
   },
   {
-    method: "GET",
-    url: "/api/v1/mandataires/service",
-    type: ["service"]
-  },
-  {
     method: "POST",
     url: "/api/v1/mandataires/1/mesure-reservation",
     type: ["ti"]
@@ -64,7 +59,7 @@ const accessChecks = [
   {
     method: "POST",
     url: "/api/v1/mandataires/1/mesures",
-    type: ["mandataire", "ti", "service"]
+    type: ["mandataire", "ti"]
   },
   { method: "DELETE", url: "/api/v1/mandataires/1/commentaires/1", type: "ti" },
   { method: "GET", url: "/api/v1/mandataires/1/commentaires", type: "ti" },
@@ -72,41 +67,31 @@ const accessChecks = [
   {
     method: "GET",
     url: "/api/v1/mandataires/1/mesures",
-    type: ["mandataire", "service"]
+    type: ["mandataire"]
   },
   {
     method: "PUT",
     url: "/api/v1/mandataires/1/mesures-en-attente",
-    type: ["mandataire", "ti", "service"]
+    type: ["mandataire", "ti"]
   },
   {
     method: "PUT",
     url: "/api/v1/mandataires/1/mesures/1",
-    type: ["mandataire", "ti", "service"]
+    type: ["mandataire", "ti"]
   },
   {
     method: "GET",
     url: "/api/v1/mandataires/1/mesures/Eteinte",
-    type: ["mandataire", "service"]
+    type: ["mandataire"]
   },
   {
     method: "GET",
     url: "/api/v1/mandataires/1/mesures/attente",
-    type: ["mandataire", "service"]
+    type: ["mandataire"]
   },
   {
     method: "POST",
     url: "/api/v1/mandataires/filters",
-    type: "ti"
-  },
-  {
-    method: "GET",
-    url: "/api/v1/mandataires/services",
-    type: "ti"
-  },
-  {
-    method: "GET",
-    url: "/api/v1/mandataires/services",
     type: "ti"
   },
   {

@@ -18,10 +18,9 @@ import TableState from "../common/TableState";
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 const getCurrentDispos = props =>
   (props.profiles &&
-    props.profiles[0] &&
-    props.profiles[0].dispo_max -
-      props.profiles[0].mesures_en_cours -
-      props.profiles[0].mesures_en_attente) ||
+    props.profiles.dispo_max -
+      props.profiles.mesures_en_cours -
+      props.profiles.mesures_en_attente) ||
   null;
 
 class MandataireTabs extends React.Component {
@@ -39,16 +38,8 @@ class MandataireTabs extends React.Component {
         url: "/mandataires/mesures/en-cours",
         icon: (
           <PillDispo
-            mesures_en_cours={
-              (this.props.profiles &&
-                this.props.profiles[0] &&
-                this.props.profiles[0].mesures_en_cours) ||
-              0
-            }
-            dispo_max={
-              (this.props.profiles && this.props.profiles[0] && this.props.profiles[0].dispo_max) ||
-              0
-            }
+            mesures_en_cours={(this.props.profiles && this.props.profiles.mesures_en_cours) || 0}
+            dispo_max={(this.props.profiles && this.props.profiles.dispo_max) || 0}
           />
         ),
         content: (

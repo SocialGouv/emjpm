@@ -4,7 +4,6 @@ exports[`should get mesures filtered by localisation 1`] = `
 Array [
   Object {
     "adresse": "21 rue de houx",
-    "antenne_id": null,
     "cabinet": null,
     "code_postal": "62000",
     "contact_email": null,
@@ -39,7 +38,6 @@ Array [
   },
   Object {
     "adresse": "21 rue monge",
-    "antenne_id": null,
     "cabinet": null,
     "code_postal": "62000",
     "contact_email": null,

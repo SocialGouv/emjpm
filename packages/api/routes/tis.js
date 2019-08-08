@@ -7,9 +7,7 @@ const {
   getAllTisByMandataire,
   addMandataireTis,
   deleteMandataireTis,
-  getTis,
-  getAllTisByMandataireService,
-  addServiceTis
+  getTis
 } = require("../db/queries/tis");
 
 const {
@@ -88,16 +86,13 @@ router.post("/:mandataireId/tis", loginRequired, async (req, res, next) => {
       ? getMandataireById(req.params.mandataireId)
       : getMandataireByUserId(req.user.id));
 
-    const updaterMethod =
-      req.user.type === "service" ? addServiceTis : addMandataireTis;
-    await updaterMethod(req.body.ti_id, mandataire.id);
+    await addMandataireTis(req.body.ti_id, mandataire.id);
     const tis = await getAllTisByMandataire(mandataire.id);
     res.status(200).json(tis);
   } catch (err) {
     next(err);
   }
 });
-
 // TODO: ensure we can delete this
 
 /** @swagger
@@ -168,11 +163,7 @@ router.get("/:mandataireId/tis", loginRequired, async (req, res, next) => {
       ? getMandataireById(req.params.mandataireId)
       : getMandataireByUserId(req.user.id));
 
-    const updaterMethod =
-      req.user.type === "service"
-        ? getAllTisByMandataireService
-        : getAllTisByMandataire;
-    const tis = await updaterMethod(mandataire.id);
+    const tis = await getAllTisByMandataire(mandataire.id);
     res.status(200).json(tis);
   } catch (err) {
     next(err);
