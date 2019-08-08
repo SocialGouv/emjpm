@@ -4,6 +4,7 @@ exports[`should get list of mesures 1`] = `
 Array [
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
@@ -31,6 +32,7 @@ exports[`should get list of mesures en attente 1`] = `
 Array [
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "F",
     "code_postal": "93000",
@@ -58,6 +60,7 @@ exports[`should get list of mesures eteintes 1`] = `
 Array [
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "F",
     "code_postal": "62000",
@@ -80,6 +83,7 @@ Array [
   },
   Object {
     "annee": "2012-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "F",
     "code_postal": "92000",

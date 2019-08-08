@@ -4,6 +4,7 @@ exports[`should return mesures of user type prepose 1`] = `
 Array [
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "F",
     "code_postal": "93000",

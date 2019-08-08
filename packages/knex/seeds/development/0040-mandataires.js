@@ -81,8 +81,7 @@ exports.seed = function(knex) {
           dispo_max: 55,
           secretariat: true,
           nb_secretariat: 1,
-          user_id: 3,
-          antenne_id: 1
+          user_id: 3
         });
       })
   );

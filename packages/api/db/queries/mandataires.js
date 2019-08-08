@@ -162,38 +162,38 @@ function getAllByMandatairesFilter(
       " service_email",
       "service_dispo_max",
       "service_info"
-    )
-    .union(function() {
-      this.select(
-        knex.raw("distinct ON(mandataires.id) mandataires.id"),
-        "mandataires.*",
-        "geolocalisation_code_postal.latitude",
-        "geolocalisation_code_postal.longitude",
-        "users.type",
-        "users.email",
-        "users.nom",
-        "users.prenom",
-        "users.cabinet",
-        "services.etablissement as service_etablissement",
-        "services.nom as service_nom",
-        "services.telephone as service_telephone",
-        "services.prenom as service_prenom",
-        "services.email as service_email",
-        "services.dispo_max as service_dispo_max",
-        "services.information as service_info"
-      )
-        .from("mandataires")
-        .innerJoin("users", "mandataires.user_id", "users.id")
-        .innerJoin("service_tis", "service_tis.mandataire_id", "mandataires.id")
-        .innerJoin(
-          "geolocalisation_code_postal",
-          "geolocalisation_code_postal.code_postal",
-          "mandataires.code_postal"
-        )
-        .leftOuterJoin("services", "users.service_id", "services.id")
-        .where("users.type", "service")
-        .where("service_tis.ti_id", parseInt(ti_id));
-    });
+    );
+  // .union(function() {
+  //   this.select(
+  //     knex.raw("distinct ON(mandataires.id) mandataires.id"),
+  //     "mandataires.*",
+  //     "geolocalisation_code_postal.latitude",
+  //     "geolocalisation_code_postal.longitude",
+  //     "users.type",
+  //     "users.email",
+  //     "users.nom",
+  //     "users.prenom",
+  //     "users.cabinet",
+  //     "services.etablissement as service_etablissement",
+  //     "services.nom as service_nom",
+  //     "services.telephone as service_telephone",
+  //     "services.prenom as service_prenom",
+  //     "services.email as service_email",
+  //     "services.dispo_max as service_dispo_max",
+  //     "services.information as service_info"
+  //   )
+  //     .from("mandataires")
+  //     .innerJoin("users", "mandataires.user_id", "users.id")
+  //     .innerJoin("service_tis", "service_tis.mandataire_id", "mandataires.id")
+  //     .innerJoin(
+  //       "geolocalisation_code_postal",
+  //       "geolocalisation_code_postal.code_postal",
+  //       "mandataires.code_postal"
+  //     )
+  //     .leftOuterJoin("services", "users.service_id", "services.id")
+  //     .where("users.type", "service")
+  //     .where("service_tis.ti_id", parseInt(ti_id));
+  // });
 }
 
 const getAllMandataires = ti_id =>
@@ -221,18 +221,13 @@ const getAllMandataires = ti_id =>
 const getAllServicesByTis = ti_id =>
   knex
     .from("service_tis")
-    .select(
-      "mandataires.id",
-      "mandataires.*",
-      "users.type",
-      "users.email",
-      "users.nom",
-      "users.prenom",
-      "users.cabinet"
+    .select("service_antenne.id", "service_antenne.*")
+    .innerJoin(
+      "service_antenne",
+      "service_tis.antenne_id",
+      "service_antenne.id"
     )
-    .innerJoin("mandataires", "service_tis.mandataire_id", "mandataires.id")
-    .innerJoin("users", "mandataires.user_id", "users.id")
-    .where({ ti_id: parseInt(ti_id), "users.type": "service" });
+    .where({ ti_id: parseInt(ti_id) });
 
 const mesureEnAttente = mandataireID =>
   knex("mesures")
@@ -264,28 +259,6 @@ const isMandataireInTi = (mandataire_id, ti_id) =>
     })
     .then(res => res.length > 0);
 
-const getAllMandatairesByUserId = user_id =>
-  knex("mandataires")
-    .select(
-      "mandataires.*",
-      "users.type",
-      "users.nom",
-      "users.prenom",
-      "users.email",
-      knex.raw("COALESCE(geolocalisation_code_postal.latitude, 0) as latitude"),
-      knex.raw(
-        "COALESCE(geolocalisation_code_postal.longitude, 0) as longitude"
-      )
-    )
-    .leftOuterJoin(
-      "geolocalisation_code_postal",
-      "geolocalisation_code_postal.code_postal",
-      "mandataires.code_postal"
-    )
-    .innerJoin("users", "mandataires.user_id", "users.id")
-    .where({
-      "mandataires.user_id": parseInt(user_id)
-    });
 const getParentService = id =>
   knex("services")
     .select("services.*", "users.type", "users.id as userId")
@@ -297,46 +270,6 @@ const updateService = (serviceId, updates) =>
   knex("services")
     .where("id", parseInt(serviceId))
     .update(updates);
-
-const getAllServicesMandatairesByTis = ti_id =>
-  knex
-    .from("service_tis")
-    .select(
-      "mandataires.id",
-      "mandataires.*",
-      "users.type",
-      "users.email",
-      "users.nom",
-      "users.prenom",
-      "users.cabinet",
-      "services.etablissement as service_etablissement",
-      "services.nom as service_nom",
-      "services.telephone as service_telephone",
-      "services.prenom as service_prenom",
-      "services.email as service_email",
-      "services.dispo_max as service_dispo_max",
-      "services.information as service_info"
-    )
-    .innerJoin("mandataires", "service_tis.mandataire_id", "mandataires.id")
-    .innerJoin("users", "mandataires.user_id", "users.id")
-    .innerJoin("services", "mandataires.service_id", "services.id")
-    .where({ ti_id: parseInt(ti_id), "users.type": "service" });
-
-const isServiceInTi = (mandataire_id, ti_id) =>
-  knex
-    .from("service_tis")
-    .select(
-      "mandataires.id",
-      "mandataires.user_id",
-      "service_tis.mandataire_id",
-      "service_tis.ti_id"
-    )
-    .innerJoin("mandataires", "mandataires.id", "service_tis.mandataire_id")
-    .where({
-      "mandataires.id": mandataire_id,
-      ti_id
-    })
-    .then(res => res.length > 0);
 
 const findMandataire = (req, params) => {
   return req.user.type === "service" || req.user.type === "ti"
@@ -350,7 +283,6 @@ module.exports = {
   updateDateMesureUpdate,
   getMandataire,
   getMandataireById,
-  getMandataireByUserId,
   updateMandataire,
   getMesuresMap,
   mesureEnAttente,
@@ -358,10 +290,8 @@ module.exports = {
   getAllMandataires,
   getAllByMandatairesFilter,
   update,
-  getAllMandatairesByUserId,
+  getMandataireByUserId,
   getParentService,
   updateService,
-  getAllServicesMandatairesByTis,
-  isServiceInTi,
   findMandataire
 };
