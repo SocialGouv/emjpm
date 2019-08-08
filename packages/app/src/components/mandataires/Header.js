@@ -70,8 +70,7 @@ const HeaderMandataire = ({ nom = "", prenom = "", profiles, handleClick, user, 
 };
 
 const HeaderMandataireRedux = connect(state => ({
-  profiles:
-    state.mandataire.profiles && state.mandataire.profiles[0] && state.mandataire.profiles[0],
+  profiles: state.mandataire.profiles,
   service: state.mandataire.service,
   user: state.mandataire.user
 }))(HeaderMandataire);

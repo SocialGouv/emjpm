@@ -1,28 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Mandataire should GET service 1`] = `
-Object {
-  "adresse": "21 rue de houx",
-  "code_postal": "62000",
-  "dispo_max": 3,
-  "email": null,
-  "etablissement": "UDAHF Siege",
-  "id": 1,
-  "information": null,
-  "nom": null,
-  "prenom": null,
-  "telephone": "0237100000",
-  "type": "service",
-  "userId": 3,
-  "ville": "Arras",
-}
-`;
-
 exports[`TI should GET list of mandataires 1`] = `
 Array [
   Object {
     "adresse": "21 rue de houx",
-    "antenne_id": null,
     "code_postal": "62000",
     "contact_email": null,
     "contact_nom": null,
@@ -51,7 +32,6 @@ Array [
   },
   Object {
     "adresse": "21 rue monge",
-    "antenne_id": null,
     "code_postal": "62000",
     "contact_email": null,
     "contact_nom": null,
@@ -90,43 +70,9 @@ Object {
 }
 `;
 
-exports[`User should GET all mandataires 1`] = `
-Object {
-  "adresse": "67 rue saint louis",
-  "antenne_id": 1,
-  "code_postal": "13000",
-  "contact_email": null,
-  "contact_nom": null,
-  "contact_prenom": null,
-  "created_at": Any<String>,
-  "date_mesure_update": null,
-  "dispo_max": 55,
-  "email": "melanie@paris.com",
-  "email_send": null,
-  "etablissement": "service-1",
-  "genre": null,
-  "id": 5,
-  "latitude": 0,
-  "longitude": 0,
-  "mesures_en_attente": null,
-  "mesures_en_cours": 12,
-  "nb_secretariat": 1,
-  "nom": null,
-  "prenom": "Mélanie",
-  "secretariat": true,
-  "telephone": "0237100000",
-  "telephone_portable": "0101010101",
-  "type": "service",
-  "user_id": 3,
-  "ville": "Marseille",
-  "zip": null,
-}
-`;
-
 exports[`should GET mandataire profile 1`] = `
 Object {
   "adresse": "21 rue de houx",
-  "antenne_id": null,
   "code_postal": "62000",
   "contact_email": null,
   "contact_nom": null,
