@@ -10,4 +10,6 @@ exports.up = async function(knex) {
   );
 };
 
-exports.down = function() {};
+exports.down = function() {
+  return Promise.resolve();
+};
