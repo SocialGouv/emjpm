@@ -29,10 +29,7 @@ const updateMandataireApi = data =>
       adresse: data.adresse || "",
       code_postal: data.code_postal || "",
       dispo_max: data.dispo_max || 0,
-      ville: data.ville || "",
-      contact_nom: data.contact_nom || "",
-      contact_prenom: data.contact_prenom || "",
-      contact_email: data.contact_email || ""
+      ville: data.ville || ""
     })
   });
 

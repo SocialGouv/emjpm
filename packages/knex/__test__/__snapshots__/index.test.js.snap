@@ -358,24 +358,6 @@ Object {
     "nullable": false,
     "type": "character varying",
   },
-  "contact_email": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "contact_nom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "contact_prenom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
     "maxLength": null,
