@@ -71,6 +71,7 @@ exports[`mandataire mesures count should be updated 1`] = `
 Array [
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
@@ -92,6 +93,7 @@ Array [
   },
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "madame",
     "code_postal": "28000",
@@ -118,6 +120,7 @@ exports[`mandataire should NOT POST mesure for another one [REST url abuse] 1`] 
 Array [
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
@@ -139,6 +142,7 @@ Array [
   },
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "madame",
     "code_postal": "28000",
@@ -165,6 +169,7 @@ exports[`mandataire should NOT POST mesure for another one [body forge] 1`] = `
 Array [
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
@@ -186,6 +191,7 @@ Array [
   },
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "madame",
     "code_postal": "28000",
@@ -212,6 +218,7 @@ exports[`mandataire should POST mesure 1`] = `
 Array [
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "H",
     "code_postal": "93000",
@@ -233,6 +240,7 @@ Array [
   },
   Object {
     "annee": "2010-10-05",
+    "antenne_id": null,
     "cabinet": null,
     "civilite": "madame",
     "code_postal": "28000",

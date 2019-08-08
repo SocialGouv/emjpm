@@ -11,7 +11,6 @@ const {
 } = require("../db/queries/mesures");
 const {
   getMandataireById,
-  isServiceInTi,
   findMandataire
 } = require("../db/queries/mandataires");
 
@@ -138,18 +137,14 @@ const { reservationEmail } = require("../email/reservation-email");
  */
 router.put(
   "/:mandataireId/mesures/:mesureId",
-  typeRequired("individuel", "prepose", "ti", "service"),
+  typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
     try {
       if (Object.keys(req.body).length === 0) {
         return res.status(200).json();
       }
 
-      if (
-        req.user.type === "individuel" ||
-        req.user.type === "prepose" ||
-        req.user.type === "service"
-      ) {
+      if (req.user.type === "individuel" || req.user.type === "prepose") {
         const mandataire = await findMandataire(req, req.params.mandataireId);
 
         await updateMesure(
@@ -208,7 +203,7 @@ router.put(
  */
 router.post(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose", "service", "ti"),
+  typeRequired("individuel", "prepose", "ti"),
   async (req, res, next) => {
     try {
       if (Object.keys(req.body).length === 0) {
@@ -223,11 +218,7 @@ router.post(
         departement = await getDepartementByCodePostal(req.body.code_postal);
       }
 
-      if (
-        req.user.type === "individuel" ||
-        req.user.type === "prepose" ||
-        req.user.type === "service"
-      ) {
+      if (req.user.type === "individuel" || req.user.type === "prepose") {
         const mandataire = await findMandataire(req, req.body.mandataire_id);
 
         const body = {
@@ -252,9 +243,10 @@ router.post(
             mandataire_id: manda && manda.id
           };
 
-          const isAllowed = await (manda && manda.type === "service"
-            ? isServiceInTi(req.body.mandataire_id, ti.id)
-            : isMandataireInTi(req.body.mandataire_id, ti.id));
+          const isAllowed = await isMandataireInTi(
+            req.body.mandataire_id,
+            ti.id
+          );
 
           // TI cannot post for some other TI mandataire
           if (!isAllowed) {
@@ -343,7 +335,7 @@ router.post(
  */
 router.get(
   "/:mandataireId/mesures",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     try {
       const mandataire = await findMandataire(req, req.params.mandataireId);
@@ -379,7 +371,7 @@ router.get(
  */
 router.get(
   "/:mandataireId/mesuresForMaps",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     try {
       const mandataire = await findMandataire(req, req.params.mandataireId);
@@ -438,7 +430,7 @@ router.get(
  */
 router.get(
   "/:mandataireId/mesures/attente",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     try {
       const mandataire = await findMandataire(req, req.params.mandataireId);
@@ -473,7 +465,7 @@ router.get(
  */
 router.get(
   "/:mandataireId/mesures/Eteinte",
-  typeRequired("individuel", "prepose", "service"),
+  typeRequired("individuel", "prepose"),
   async (req, res, next) => {
     try {
       const mandataire = await findMandataire(req, req.params.mandataireId);

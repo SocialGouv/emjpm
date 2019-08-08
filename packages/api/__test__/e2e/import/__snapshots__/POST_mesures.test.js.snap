@@ -12,6 +12,7 @@ exports[`should import mesures correctly 2`] = `
 Array [
   Object {
     "annee": null,
+    "antenne_id": null,
     "cabinet": null,
     "civilite": null,
     "code_postal": null,
@@ -33,6 +34,7 @@ Array [
   },
   Object {
     "annee": null,
+    "antenne_id": null,
     "cabinet": null,
     "civilite": null,
     "code_postal": null,

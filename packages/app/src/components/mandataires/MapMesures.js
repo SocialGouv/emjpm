@@ -50,10 +50,9 @@ const MapMesures = ({ getPromise, center = [48.866667, 2.333333] }) => (
 const mapStateToProps = state => ({
   center: (state.mandataire &&
     state.mandataire.profiles &&
-    state.mandataire.profiles[0] &&
-    state.mandataire.profiles[0].latitude && [
-      state.mandataire.profiles[0].latitude,
-      state.mandataire.profiles[0].longitude
+    state.mandataire.profiles.latitude && [
+      state.mandataire.profiles.latitude,
+      state.mandataire.profiles.longitude
     ]) || [0, 0]
 });
 
