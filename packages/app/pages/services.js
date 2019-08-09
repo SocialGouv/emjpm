@@ -1,5 +1,5 @@
 import React from "react";
-import Services from "../src/components/mandataires";
+import Services from "../src/components/service";
 import { Layout } from "../src/components";
 
 const ServicePage = () => (
