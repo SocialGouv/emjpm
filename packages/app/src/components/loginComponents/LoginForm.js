@@ -1,17 +1,17 @@
+import cookie from "cookie";
+import fetch from "isomorphic-fetch";
+import getConfig from "next/config";
+import Router from "next/router";
 import React from "react";
 import { findDOMNode } from "react-dom";
-import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
+import ReactPiwik from "react-piwik";
 import styled from "styled-components";
-import Router from "next/router";
-import getConfig from "next/config";
+import { trackUser } from "../../piwik";
 
 const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
-
-import ReactPiwik from "react-piwik";
-import { trackUser } from "../../piwik";
 
 const doLogin = formData => {
   const url = `${API_URL}/api/v2/auth/login`;
@@ -164,6 +164,9 @@ class LoginForm extends React.Component {
     // Saves user token to localStorage
     // todo: move to more secure location
     localStorage.setItem("id_token", idToken);
+    document.cookie = cookie.serialize("token", idToken, {
+      maxAge: 30 * 24 * 60 * 60 // 30 days
+    });
   };
 
   onSubmit = ({ formData }) => {
