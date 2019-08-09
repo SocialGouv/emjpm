@@ -61,6 +61,15 @@ class User extends Model {
     return this.roles.map(el => el.name).concat("user");
   }
 
+  getDefaultRole() {
+    for (const role of this.roles) {
+      if (["admin", "service", "mandataire", "direction"].includes(role.name)) {
+        return role.name;
+      }
+    }
+    throw new Error("No default role found in the list", this.roles);
+  }
+
   getUser() {
     return {
       id: this.id,
@@ -76,7 +85,7 @@ class User extends Model {
   getHasuraClaims() {
     return {
       "x-hasura-allowed-roles": this.getRoles(),
-      "x-hasura-default-role": "user",
+      "x-hasura-default-role": this.getDefaultRole(),
       "x-hasura-user-id": `${this.id}`
     };
   }
