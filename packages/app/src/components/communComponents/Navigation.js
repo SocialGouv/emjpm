@@ -2,7 +2,7 @@ import Router from "next/router";
 import React from "react";
 import { ApolloConsumer } from "react-apollo";
 import { authService } from "../../business";
-import redirect from "../../lib/redirect";
+import { redirect } from "../../lib";
 import { untrackUser } from "../../piwik";
 
 const doLogout = apolloClient => {
