@@ -34,4 +34,4 @@ spec:
                 name: emjpm-secret
                 key: HASURA_GRAPHQL_ADMIN_SECRET
           - name: HASURA_GRAPHQL_JWT_SECRET
-            value: "{\"type\": \"RS256\",\"jwk_url\": \"${API_URL}/auth/v2/jwks\"}"
+            value: "{\"type\": \"RS256\",\"jwk_url\": \"${API_URL}/api/auth/v2/jwks\"}"
