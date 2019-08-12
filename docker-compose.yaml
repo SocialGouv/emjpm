@@ -42,7 +42,7 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@db:5432/emjpm_dev
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/v2/auth/jwks"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/v2/auth/jwks"}'
 
 volumes:
   emjpm-pgdata:
