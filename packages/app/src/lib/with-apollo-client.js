@@ -11,7 +11,6 @@ function parseCookies(req, options = {}) {
 
 export default App => {
   return class Apollo extends React.Component {
-    static displayName = "withApollo(App)";
     static propTypes = {
       apolloState: PropTypes.object.isRequired
     };

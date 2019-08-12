@@ -1,6 +1,6 @@
 import React from "react";
-import Services from "../src/components/service";
 import { Layout } from "../src/components";
+import Services from "../src/features/service";
 
 const ServicePage = () => (
   <Layout logout>

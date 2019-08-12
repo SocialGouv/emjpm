@@ -1,4 +1,3 @@
-import cookie from "cookie";
 import fetch from "isomorphic-fetch";
 import getConfig from "next/config";
 import Router from "next/router";
@@ -8,6 +7,7 @@ import Form from "react-jsonschema-form";
 import ReactPiwik from "react-piwik";
 import styled from "styled-components";
 import { trackUser } from "../../piwik";
+import { authService } from "../../services";
 
 const {
   publicRuntimeConfig: { API_URL }
@@ -155,20 +155,6 @@ class LoginForm extends React.Component {
     }
   }
 
-  setLogin = login => {
-    // Saves login to localStorage
-    localStorage.setItem("login", login);
-  };
-
-  setToken = idToken => {
-    // Saves user token to localStorage
-    // todo: move to more secure location
-    localStorage.setItem("id_token", idToken);
-    document.cookie = cookie.serialize("token", idToken, {
-      maxAge: 30 * 24 * 60 * 60 // 30 days
-    });
-  };
-
   onSubmit = ({ formData }) => {
     this.setState(
       {
@@ -179,10 +165,8 @@ class LoginForm extends React.Component {
       () => {
         doLogin(formData)
           .then(json => {
-            this.setLogin(formData.username);
-            this.setToken(json.token);
+            authService.login(formData.username, json.token);
             ReactPiwik.push(["trackEvent", "login", "success"]);
-
             trackUser();
             Router.push(json.url);
             this.setState({

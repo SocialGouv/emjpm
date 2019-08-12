@@ -1,18 +1,10 @@
-import gql from "graphql-tag";
 import React from "react";
 import { Query } from "react-apollo";
-
-export const mesuresQuery = gql`
-  {
-    mesures(order_by: { created_at: asc }, limit: 10) {
-      id
-    }
-  }
-`;
+import { allMesures } from "../../../graphql/Queries";
 
 export default function MesureList() {
   return (
-    <Query query={mesuresQuery}>
+    <Query query={allMesures}>
       {({ loading, error, data }) => {
         if (!data) return <div>No Data</div>;
         if (error) return <div>Error loading mesures</div>;
@@ -25,7 +17,8 @@ export default function MesureList() {
                 <li key={mesure.id}>
                   <div>
                     <span>{index + 1}. </span>
-                    <span>{mesure.id}</span>
+                    <span>{mesure.id} - </span>
+                    <span>{mesure.ville}</span>
                   </div>
                 </li>
               ))}
