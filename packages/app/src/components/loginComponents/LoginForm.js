@@ -6,8 +6,8 @@ import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import ReactPiwik from "react-piwik";
 import styled from "styled-components";
+import { authService } from "../../business";
 import { trackUser } from "../../piwik";
-import { authService } from "../../services";
 
 const {
   publicRuntimeConfig: { API_URL }
