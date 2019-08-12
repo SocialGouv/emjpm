@@ -6,6 +6,7 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
+    "start": "node dist/index.js",
     "dev": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/index.ts",
     "build": "tsc",
     "lint": "tslint -p tsconfig.json -t stylish",

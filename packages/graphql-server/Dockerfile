@@ -7,6 +7,8 @@ FROM node:10-alpine
 WORKDIR /app
 
 COPY --from=emjpm-base-image /app/packages/graphql-server/dist /app/dist
+COPY --from=emjpm-base-image /app/node_modules /app/node_modules
+COPY ./package.json /app/package.json
 
 EXPOSE 4001
 
