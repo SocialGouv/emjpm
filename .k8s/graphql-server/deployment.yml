@@ -38,4 +38,4 @@ spec:
 
           env:
             - name: HASURA_GRAPHQL_URI
-              value: "${HASURA_HOST}/graphql"
+              value: "${HASURA_HOST}/v1/graphql"
