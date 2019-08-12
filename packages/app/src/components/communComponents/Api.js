@@ -1,7 +1,7 @@
 import fetch from "isomorphic-fetch";
 import getConfig from "next/config";
 import Router from "next/router";
-import { localStorageService } from "../../services";
+import { storageService } from "../../util";
 
 const {
   publicRuntimeConfig: { API_URL }
@@ -18,9 +18,9 @@ const apiFetch = (route, params, options = { forceLogin: true, apiVersion: "v1" 
     ...params
   };
 
-  if (localStorageService.hasToken()) {
+  if (storageService.hasToken()) {
     fetchParams.headers = {
-      Authorization: "Bearer " + localStorageService.getToken(),
+      Authorization: "Bearer " + storageService.getToken(),
       "Content-Type": "application/json"
     };
   }

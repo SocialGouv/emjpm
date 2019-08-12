@@ -1,5 +1,5 @@
 import ReactPiwik from "react-piwik";
-import { localStorageService } from "./services";
+import { storageService } from "./util";
 
 export const doTrackPageChange = url => {
   ReactPiwik.push(["setDocumentTitle", document && document.title]);
@@ -27,7 +27,7 @@ export const untrackUser = () => {
 };
 
 function getJWTPayloadFormLocalStorageIdToken() {
-  const token = localStorageService.getToken() || "";
+  const token = storageService.getToken() || "";
   const [, payloadPart = ""] = token.split(".");
   // prevent some token decoding exceptions
   // "Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded."
