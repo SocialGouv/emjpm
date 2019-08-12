@@ -64,9 +64,14 @@ class User extends Model {
   getDefaultRole() {
     for (const role of this.roles) {
       if (
-        ["admin", "service", "individuel", "prepose", "direction"].includes(
-          role.name
-        )
+        [
+          "admin",
+          "service",
+          "individuel",
+          "prepose",
+          "direction",
+          "ti"
+        ].includes(role.name)
       ) {
         return role.name;
       }
