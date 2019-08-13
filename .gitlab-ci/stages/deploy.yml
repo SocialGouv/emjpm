@@ -153,15 +153,9 @@ Deploy hasura (incubateur):
   <<: *deploy_stage
   variables:
     <<: *deploy_stage_variables
-    CONTEXT: graphql-server
+    CONTEXT: gql
     IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
     PORT: 4001
-  after_script:
-    # NOTE(douglasduteil): re-run env.sh
-    # Because the `after_script` runs in a separated shell context.
-    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
-    - source ./.gitlab-ci/env.sh
-    - echo "GraphQL server available at - ${GQL_SERVER_URL}"
 
 #
 

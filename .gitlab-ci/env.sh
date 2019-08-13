@@ -39,16 +39,14 @@ export API_HOST="api.${DOMAIN}";
 export FRONTEND_HOST="${DOMAIN}";
 export HASURA_HOST="hasura.${DOMAIN}";
 export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
-export GQL_SERVER_HOST="graphql-server.${DOMAIN}";
+export GQL_SERVER_HOST="gql.${DOMAIN}";
 
 if [[ -n "${PRODUCTION+x}" ]]; then
   export API_URL="https://${API_HOST}"
   export FRONTEND_URL="https://${FRONTEND_HOST}"
-  export GQL_SERVER_URL="https://graphql-server.${DOMAIN}";
 else
   export API_URL="http://${API_HOST}"
   export FRONTEND_URL="http://${FRONTEND_HOST}"
-  export GQL_SERVER_URL="http://graphql-server.${DOMAIN}";
 fi
 
 #
@@ -57,5 +55,5 @@ printenv | grep -E \
   "BRANCH_HASH|BRANCH_NAME|COMMIT|COMMIT_TAG|ENVIRONMENT|HASH_SIZE|JOB_ID" \
   | sort
 printenv | grep -E \
-  "GQL_SERVER_HOST|GQL_SERVER_URL|API_HOST|API_URL|FRONTEND_HOST|FRONTEND_URL|HASURA_HOST|POSTGRES_HOST" \
+  "GQL_SERVER_HOST|API_HOST|API_URL|FRONTEND_HOST|FRONTEND_URL|HASURA_HOST|POSTGRES_HOST" \
   | sort
