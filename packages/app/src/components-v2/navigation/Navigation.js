@@ -2,18 +2,8 @@ import React from "react";
 import { Flex, Box } from "rebass";
 import Link from "./Link";
 
-const links = [
-  {
-    title: "mesures",
-    url: "/direction"
-  },
-  {
-    title: "mandataires",
-    url: "/mandataires"
-  }
-];
-
-export const Navigation = () => {
+export const Navigation = props => {
+  const { links } = props;
   return (
     <Box mt="2">
       <Flex alignItems="center" flexWrap="wrap">
