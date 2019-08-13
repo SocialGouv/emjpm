@@ -1,7 +1,11 @@
 import * as cors from "@koa/cors";
 import { ApolloServer } from "apollo-server-koa";
+import { Server } from "http";
 import * as Koa from "koa";
 import * as bodyParser from "koa-bodyparser";
+import * as Router from "koa-router";
+import { AddressInfo } from "net";
+import { configuration } from "./config";
 import { logger } from "./logger";
 import resolvers from "./resolvers";
 import typeDefs from "./schemas";
@@ -23,6 +27,20 @@ app.use(bodyParser());
 app.use(cors());
 server.applyMiddleware({ app });
 
-app.listen({ port: 4001 }, () =>
-  logger.info(`🚀 Server ready at http://localhost:4001${server.graphqlPath}`)
-);
+const router = new Router();
+
+router.get(`/health-check`, (ctx: Koa.Context) => {
+  ctx.status = 200;
+  ctx.body = "health-check ok!!";
+});
+
+app.use(router.routes());
+
+app.listen({ port: configuration.PORT }, function(this: Server) {
+  const { address, port } = this.address() as AddressInfo;
+  logger.info(
+    `Listening on http://${address === "::" ? "localhost" : address}:${port}${
+      server.graphqlPath
+    }`
+  );
+});

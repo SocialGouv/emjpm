@@ -16,6 +16,5 @@ exports.getJwks = async (req, res) => {
     keys: [jwk]
   };
   res.setHeader("Content-Type", "application/json");
-  res.send(JSON.stringify(jwks, null, 2) + "\n");
   return res.status(200).json(jwks);
 };

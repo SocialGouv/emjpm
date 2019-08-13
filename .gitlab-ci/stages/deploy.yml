@@ -5,6 +5,7 @@ include:
   - /.k8s/app/.k8s-deploy-app.yml
   - /.k8s/postgres/.k8s-deploy-postgres.yml
   - /.k8s/hasura/.k8s-deploy-hasura.yml
+  - /.k8s/graphql-server/.k8s-deploy-graphql-server.yml
 
 #
 
@@ -142,4 +143,27 @@ Deploy hasura (dev):
 Deploy hasura (incubateur):
   extends: .k8s-deploy-hasura-prod
   <<: *deploy_hasura
+  <<: *incubateur_stage
+
+#
+#
+#
+
+.deploy-graphql-server: &deploy_graphql-server
+  <<: *deploy_stage
+  extends: .k8s-deploy-graphql-server
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: gql
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
+    PORT: 80
+
+#
+
+Deploy graphql-server (dev):
+  <<: *deploy_graphql-server
+  <<: *dev_stage
+
+Deploy graphql-server (incubateur):
+  <<: *deploy_graphql-server
   <<: *incubateur_stage
