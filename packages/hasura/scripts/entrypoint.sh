@@ -1,4 +1,6 @@
-#!/usr/bin/env sh
+#!/bin/sh
+
+set -e
 
 ROOT_DIRECTORY="/hasura-migrations"
 
