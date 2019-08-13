@@ -9,6 +9,6 @@ WORKDIR /app
 COPY --from=emjpm-base-image /app/packages/graphql-server/dist /app/dist
 COPY ./package.json /app/package.json
 
-EXPOSE 4001
+EXPOSE 80
 
 ENTRYPOINT [ "yarn", "start" ]
