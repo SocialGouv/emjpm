@@ -1,17 +1,17 @@
+import fetch from "isomorphic-fetch";
+import getConfig from "next/config";
+import Router from "next/router";
 import React from "react";
 import { findDOMNode } from "react-dom";
-import fetch from "isomorphic-fetch";
 import Form from "react-jsonschema-form";
+import ReactPiwik from "react-piwik";
 import styled from "styled-components";
-import Router from "next/router";
-import getConfig from "next/config";
+import { authService } from "../../business";
+import { trackUser } from "../../piwik";
 
 const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
-
-import ReactPiwik from "react-piwik";
-import { trackUser } from "../../piwik";
 
 const doLogin = formData => {
   const url = `${API_URL}/api/v2/auth/login`;
@@ -155,17 +155,6 @@ class LoginForm extends React.Component {
     }
   }
 
-  setLogin = login => {
-    // Saves login to localStorage
-    localStorage.setItem("login", login);
-  };
-
-  setToken = idToken => {
-    // Saves user token to localStorage
-    // todo: move to more secure location
-    localStorage.setItem("id_token", idToken);
-  };
-
   onSubmit = ({ formData }) => {
     this.setState(
       {
@@ -176,10 +165,8 @@ class LoginForm extends React.Component {
       () => {
         doLogin(formData)
           .then(json => {
-            this.setLogin(formData.username);
-            this.setToken(json.token);
+            authService.login(formData.username, json.token);
             ReactPiwik.push(["trackEvent", "login", "success"]);
-
             trackUser();
             Router.push(json.url);
             this.setState({

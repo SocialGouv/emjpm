@@ -9,6 +9,15 @@ const { UserTi } = require("./UserTi");
 
 Model.knex(knexConnection);
 
+const MAIN_ROLES = [
+  "admin",
+  "service",
+  "individuel",
+  "prepose",
+  "direction",
+  "ti"
+];
+
 const redirs = {
   individuel: "/mandataires",
   prepose: "/mandataires",
@@ -61,6 +70,18 @@ class User extends Model {
     return this.roles.map(el => el.name).concat("user");
   }
 
+  getDefaultRole() {
+    const defaultRoleName = (
+      this.roles.find(role => MAIN_ROLES.includes(role.name)) || {}
+    ).name;
+    if (!defaultRoleName) {
+      throw new Error(
+        "No default role found in the list : " + JSON.stringify(this.roles)
+      );
+    }
+    return defaultRoleName;
+  }
+
   getUser() {
     return {
       id: this.id,
@@ -76,7 +97,7 @@ class User extends Model {
   getHasuraClaims() {
     return {
       "x-hasura-allowed-roles": this.getRoles(),
-      "x-hasura-default-role": "user",
+      "x-hasura-default-role": this.getDefaultRole(),
       "x-hasura-user-id": `${this.id}`
     };
   }
