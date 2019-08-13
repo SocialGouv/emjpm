@@ -4,6 +4,8 @@ const TOKEN_KEY = "token";
 const ID_TOKEN_KEY = "id_token";
 const LOGIN_KEY = "login";
 
+const THIRTY_DAYS_TIME = 30 * 24 * 60 * 60;
+
 const getToken = () => {
   return localStorage.getItem(ID_TOKEN_KEY);
 };
@@ -30,7 +32,7 @@ export const storageService = {
   setToken(token) {
     localStorage.setItem(ID_TOKEN_KEY, token);
     document.cookie = cookie.serialize(TOKEN_KEY, token, {
-      maxAge: 30 * 24 * 60 * 60 // 30 days
+      maxAge: THIRTY_DAYS_TIME
     });
   }
 };
