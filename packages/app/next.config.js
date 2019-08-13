@@ -22,10 +22,9 @@ module.exports = withTM(
         return config;
       },
       publicRuntimeConfig: {
-        SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN || "https://sentry.dev",
+        SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN,
         API_URL: process.env.API_URL || "http://127.0.0.1:4000"
       }
     })
   )
 );
-
