@@ -14,7 +14,7 @@ const app = express();
 
 if (process.env.SENTRY_PUBLIC_DSN) {
   Sentry.init({
-    dsn: process.env.SENTRY_PUBLIC_DSN || "https://sentry.dev",
+    dsn: process.env.SENTRY_PUBLIC_DSN,
     environment: process.env.SENTRY_ENV
   });
 }
