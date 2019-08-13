@@ -11,23 +11,23 @@ const getToken = () => {
 export const storageService = {
   getToken,
 
-  hasToken: () => {
+  hasToken() {
     const token = getToken();
     return !!token;
   },
-  removeToken: () => {
+  removeToken() {
     localStorage.removeItem(ID_TOKEN_KEY);
     document.cookie = cookie.serialize(TOKEN_KEY, "", {
       maxAge: -1 // Expire the cookie immediately
     });
   },
-  removeLogin: () => {
+  removeLogin() {
     localStorage.removeItem(LOGIN_KEY);
   },
-  setLogin: login => {
+  setLogin(login) {
     localStorage.setItem(LOGIN_KEY, login);
   },
-  setToken: token => {
+  setToken(token) {
     localStorage.setItem(ID_TOKEN_KEY, token);
     document.cookie = cookie.serialize(TOKEN_KEY, token, {
       maxAge: 30 * 24 * 60 * 60 // 30 days
