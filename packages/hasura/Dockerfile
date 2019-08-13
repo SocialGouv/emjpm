@@ -1,6 +1,6 @@
 FROM hasura/graphql-engine:v1.0.0-beta.4.cli-migrations
 
-COPY ./packages/hasura/migrations /hasura-migrations
+COPY ./migrations /hasura-migrations
 
 COPY ./scripts/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
