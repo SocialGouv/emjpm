@@ -5,14 +5,13 @@ import { authService } from "../../business";
 import { redirect } from "../../lib";
 import { untrackUser } from "../../piwik";
 
-const doLogout = apolloClient => {
+const doLogout = async apolloClient => {
   authService.logout();
   // Force a reload of all the current queries now that the user is
   // logged in, so we don't accidentally leave any state around.
-  apolloClient.cache.reset().then(() => {
-    untrackUser();
-    redirect({}, "/login");
-  });
+  await apolloClient.cache.reset();
+  untrackUser();
+  redirect({}, "/login");
 };
 
 const doInscription = () => {

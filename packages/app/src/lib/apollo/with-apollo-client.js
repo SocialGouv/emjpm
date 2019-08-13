@@ -15,12 +15,10 @@ export default App => {
       apolloState: PropTypes.object.isRequired
     };
 
-    static async getInitialProps(ctx) {
-      const {
-        Component,
-        router,
-        ctx: { req, res }
-      } = ctx;
+    static async getInitialProps(context) {
+      const { Component, router, ctx } = context;
+
+      const { req, res } = ctx;
 
       const apollo = initApollo(
         {},
@@ -29,7 +27,7 @@ export default App => {
         }
       );
 
-      ctx.ctx.apolloClient = apollo;
+      context.ctx.apolloClient = apollo;
 
       let appProps = {};
       if (App.getInitialProps) {

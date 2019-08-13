@@ -9,6 +9,15 @@ const { UserTi } = require("./UserTi");
 
 Model.knex(knexConnection);
 
+const MAIN_ROLES = [
+  "admin",
+  "service",
+  "individuel",
+  "prepose",
+  "direction",
+  "ti"
+];
+
 const redirs = {
   individuel: "/mandataires",
   prepose: "/mandataires",
@@ -62,16 +71,8 @@ class User extends Model {
   }
 
   getDefaultRole() {
-    const mainRoles = [
-      "admin",
-      "service",
-      "individuel",
-      "prepose",
-      "direction",
-      "ti"
-    ];
     const defaultRoleName = (
-      this.roles.find(role => mainRoles.includes(role.name)) || {}
+      this.roles.find(role => MAIN_ROLES.includes(role.name)) || {}
     ).name;
     if (!defaultRoleName) {
       throw new Error(
