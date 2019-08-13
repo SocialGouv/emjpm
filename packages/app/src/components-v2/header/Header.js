@@ -1,14 +1,24 @@
 import React from "react";
-import { Flex, Box } from "rebass";
+import { Flex, Box, Text } from "rebass";
 import { Logo } from "../commons";
+import { UserCircle } from "styled-icons/fa-regular";
 
 export const Header = () => {
   return (
-    <Flex>
+    <Flex alignItems="center" flexWrap="wrap" justifyContent="space-between">
       <Box p={1}>
         <Logo />
       </Box>
-      <Box p={1}>Nom du user</Box>
+      <Box p={1}>
+        <Flex alignItems={"center"}>
+          <Box height={"25px"}>
+            <UserCircle size={25} />
+          </Box>
+          <Box>
+            <Text ml={1}>Nom du user</Text>
+          </Box>
+        </Flex>
+      </Box>
     </Flex>
   );
 };
