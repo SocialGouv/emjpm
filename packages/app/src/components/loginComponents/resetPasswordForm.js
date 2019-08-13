@@ -3,7 +3,7 @@ import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import styled from "styled-components";
 import Router from "next/router";
-import queryString from "query-string";
+import { parse } from "query-string";
 import getConfig from "next/config";
 import Modal from "react-modal";
 
@@ -21,7 +21,7 @@ const doForgotPassword = formData => {
     },
     body: JSON.stringify({
       ...formData,
-      token: queryString.parse(location.search).token
+      token: parse(location.search).token
     })
   }).then(res => {
     if (res.status >= 400) {
