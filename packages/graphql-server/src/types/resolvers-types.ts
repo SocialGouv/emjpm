@@ -15,17 +15,19 @@ export enum CacheControlScope {
   Private = "PRIVATE"
 }
 
-export enum MesureStateCategory {
-  Awaiting = "AWAITING",
-  InProgress = "IN_PROGRESS",
-  Closed = "CLOSED"
-}
+export type Department = {
+  __typename?: "Department";
+  code: Scalars["String"];
+  nom: Scalars["String"];
+};
 
-export type MesureStateCategoryStatistic = {
-  __typename?: "MesureStateCategoryStatistic";
-  mesureStateCategory: MesureStateCategory;
-  number: Scalars["Int"];
-  percentage: Scalars["Float"];
+export type DepartmentAvailibility = {
+  __typename?: "DepartmentAvailibility";
+  department: Department;
+  inProgress: Scalars["Int"];
+  available: Scalars["Int"];
+  awaiting: Scalars["Int"];
+  max: Scalars["Int"];
 };
 
 export enum MesureTypeCategory {
@@ -62,8 +64,8 @@ export type Query = {
   newMesureNumber: Scalars["Int"];
   closedMesureNumber: Scalars["Int"];
   mesureTypeCategoryStatistics: Array<MesureTypeCategoryStatistic>;
-  mesureStateCategoryStatistics: Array<MesureStateCategoryStatistic>;
   mesureTypeCategoryEvolution: Array<MesureTypeCategoryEvolution>;
+  departmentAvailabilities: Array<DepartmentAvailibility>;
 };
 
 export type QueryNewMesureNumberArgs = {
@@ -83,13 +85,6 @@ export type QueryClosedMesureNumberArgs = {
 };
 
 export type QueryMesureTypeCategoryStatisticsArgs = {
-  region?: Maybe<Scalars["Int"]>;
-  department?: Maybe<Scalars["Int"]>;
-  court?: Maybe<Scalars["Int"]>;
-};
-
-export type QueryMesureStateCategoryStatisticsArgs = {
-  date: Scalars["String"];
   region?: Maybe<Scalars["Int"]>;
   department?: Maybe<Scalars["Int"]>;
   court?: Maybe<Scalars["Int"]>;
