@@ -1,8 +1,17 @@
 import * as Sentry from "@sentry/browser";
+// all global css
+import "bootstrap/dist/css/bootstrap.css";
 import App, { Container } from "next/app";
 import getConfig from "next/config";
 import React from "react";
+import { ApolloProvider } from "react-apollo";
 import ReactPiwik from "react-piwik";
+import "react-tabs/style/react-tabs.css";
+import { withApolloClient } from "../src/lib/apollo";
+import "../static/css/custom.css";
+import "../static/css/footer.css";
+import "../static/css/hero.css";
+import "../static/css/panel.css";
 
 export const piwik = new ReactPiwik({
   url: "stats.data.gouv.fr",
@@ -14,15 +23,7 @@ const {
   publicRuntimeConfig: { SENTRY_PUBLIC_DSN }
 } = getConfig();
 
-// all global css
-import "bootstrap/dist/css/bootstrap.css";
-import "react-tabs/style/react-tabs.css";
-import "../static/css/hero.css";
-import "../static/css/footer.css";
-import "../static/css/custom.css";
-import "../static/css/panel.css";
-
-export default class MyApp extends App {
+class MyApp extends App {
   static async getInitialProps(appContext) {
     const { Component, ctx } = appContext;
 
@@ -47,14 +48,18 @@ export default class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, apolloClient } = this.props;
     return (
       <Container>
-        <Component {...pageProps} />
+        <ApolloProvider client={apolloClient}>
+          <Component {...pageProps} />
+        </ApolloProvider>
       </Container>
     );
   }
 }
+
+export default withApolloClient(MyApp);
 
 //
 
