@@ -3,12 +3,13 @@ import { ApolloClient, ApolloQueryResult } from "apollo-client";
 import { createHttpLink } from "apollo-link-http";
 import { DocumentNode } from "graphql";
 import fetch from "node-fetch";
+import { configuration } from "../config";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: createHttpLink({
     fetch,
-    uri: "http://localhost:5000/v1/graphql"
+    uri: configuration.HASURA_GRAPHQL_URI
   })
 });
 
