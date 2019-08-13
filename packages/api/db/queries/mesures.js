@@ -293,7 +293,7 @@ const updateMesure = (where, updates) =>
     .where(where)
     .update(updates);
 
-const addMesure = data => knex("mesures").insert(data);
+const addMesure = data => knex("mesures").insert(data, ["*"]);
 
 const getMesuresEnCoursMandataire = mandataireID =>
   knex("mesures").where({

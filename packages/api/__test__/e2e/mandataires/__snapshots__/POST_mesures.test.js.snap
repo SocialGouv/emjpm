@@ -48,23 +48,31 @@ L’équipe e-mjpm.",
 `;
 
 exports[`TI should POST mesure-reservation 1`] = `
-Object {
-  "RowCtor": null,
-  "_parsers": Array [],
-  "_types": Object {
-    "_types": Object {
-      "arrayParser": Object {},
-    },
-    "binary": Object {},
-    "text": Object {},
+Array [
+  Object {
+    "annee": "2010-10-05",
+    "antenne_id": null,
+    "cabinet": null,
+    "civilite": "madame",
+    "code_postal": "28000",
+    "created_at": "2010-10-05T00:00:00.000Z",
+    "date_ouverture": "2010-10-04T22:00:00.000Z",
+    "department_id": null,
+    "etablissement": "peu pas",
+    "etablissement_id": null,
+    "extinction": null,
+    "id": 6,
+    "mandataire_id": 1,
+    "numero_dossier": null,
+    "numero_rg": null,
+    "reason_extinction": null,
+    "residence": "oui",
+    "status": "Mesure en cours",
+    "ti_id": 1,
+    "type": "preposes",
+    "ville": "Chartres",
   },
-  "command": "INSERT",
-  "fields": Array [],
-  "oid": 0,
-  "rowAsArray": false,
-  "rowCount": 1,
-  "rows": Array [],
-}
+]
 `;
 
 exports[`mandataire mesures count should be updated 1`] = `
