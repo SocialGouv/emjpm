@@ -15,7 +15,7 @@ spec:
         gitlab/job: "${JOB_ID}"
     spec:
       containers:
-        - image: hasura/graphql-engine:v1.0.0-beta.2
+        - image: ${IMAGE_NAME}:${IMAGE_TAG}
           name: ${K8S_NAMESPACE}-${CONTEXT}
           imagePullPolicy: "IfNotPresent"
           ports:
@@ -29,3 +29,5 @@ spec:
             value: "secret"
           - name: HASURA_GRAPHQL_JWT_SECRET
             value: "{\"type\": \"RS256\",\"jwk_url\": \"${API_URL}/api/v2/auth/jwks\"}"
+          - name: WHATEVER_URL
+            value: "http://${K8S_NAMESPACE}-graphql-server-${BRANCH_HASH}"

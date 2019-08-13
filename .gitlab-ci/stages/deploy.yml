@@ -131,6 +131,7 @@ Deploy postgres (incubateur):
   variables:
     <<: *deploy_stage_variables
     CONTEXT: hasura
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
     PORT: 8080
 
 #
@@ -154,7 +155,7 @@ Deploy hasura (incubateur):
   extends: .k8s-deploy-graphql-server
   variables:
     <<: *deploy_stage_variables
-    CONTEXT: gql
+    CONTEXT: graphql-server
     IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
     PORT: 80
 
