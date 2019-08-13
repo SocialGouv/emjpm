@@ -6,8 +6,9 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
+    "start": "node dist/index.js",
     "dev": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/index.ts",
-    "build": "tsc",
+    "build": "ncc build src/index.ts",
     "lint": "tslint -p tsconfig.json -t stylish",
     "generate": "graphql-codegen --config codegen.yml"
   },
@@ -39,6 +40,7 @@
     "@types/node": "^12.6.3",
     "@types/node-fetch": "^2.3.7",
     "@types/pino": "^5.8.8",
+    "@zeit/ncc": "^0.20.4",
     "nodemon": "^1.19.0",
     "prettier": "^1.17.0",
     "ts-node": "^8.3.0",
