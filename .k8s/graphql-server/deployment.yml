@@ -39,3 +39,5 @@ spec:
           env:
             - name: HASURA_GRAPHQL_URI
               value: "http://${HASURA_HOST}/v1/graphql"
+            - name: PORT
+              value: "${PORT}"
