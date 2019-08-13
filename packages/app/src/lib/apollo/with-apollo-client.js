@@ -28,7 +28,7 @@ export default App => {
         }
       );
 
-      context.ctx.apolloClient = apollo;
+      ctx.apolloClient = apollo;
 
       let appProps = {};
       if (App.getInitialProps) {
