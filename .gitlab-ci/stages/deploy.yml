@@ -151,20 +151,19 @@ Deploy hasura (incubateur):
 
 .deploy-graphql-server: &deploy_graphql-server
   <<: *deploy_stage
+  extends: .k8s-deploy-graphql-server
   variables:
     <<: *deploy_stage_variables
     CONTEXT: gql
     IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
-    PORT: 4001
+    PORT: 80
 
 #
 
 Deploy graphql-server (dev):
-  extends: .k8s-deploy-graphql-server-dev
   <<: *deploy_graphql-server
   <<: *dev_stage
 
 Deploy graphql-server (incubateur):
-  extends: .k8s-deploy-graphql-server-prod
   <<: *deploy_graphql-server
   <<: *incubateur_stage
