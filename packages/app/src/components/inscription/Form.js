@@ -1,14 +1,15 @@
+import Router from "next/router";
 import React from "react";
+import Modal from "react-modal";
+import { isBrowser } from "../../util";
+import Resolve from "../common/Resolve";
+import apiFetch from "../communComponents/Api";
+import InscriptionDirection from "./InscriptionDirection";
 import InscriptionIndividuel from "./InscriptionIndividuel";
 import InscriptionPrepose from "./InscriptionPrepose";
 import InscriptionService from "./InscriptionService";
-import InscriptionDirection from "./InscriptionDirection";
 import InscriptionTi from "./InscriptionTi";
 import TiSelector from "./TiSelector";
-import Resolve from "../common/Resolve";
-import apiFetch from "../communComponents/Api";
-import Router from "next/router";
-import Modal from "react-modal";
 
 const formsMandataires = {
   individuel(props) {
@@ -45,7 +46,7 @@ const FormSelector = ({ label, value, onChange }) => (
 
 const getTis = () =>
   // only fetch client-side
-  (typeof window !== "undefined" &&
+  (isBrowser() &&
     apiFetch("/inscription/tis", null, {
       forceLogin: false,
       apiVersion: "v1"
