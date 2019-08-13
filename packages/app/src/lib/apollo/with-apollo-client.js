@@ -3,6 +3,7 @@ import Head from "next/head";
 import PropTypes from "prop-types";
 import React from "react";
 import { getDataFromTree } from "react-apollo";
+import { isBrowser } from "../../util";
 import initApollo from "./init-apollo";
 
 function parseCookies(req, options = {}) {
@@ -42,7 +43,7 @@ export default App => {
 
       // Run all GraphQL queries in the component tree
       // and extract the resulting data
-      if (typeof window === "undefined") {
+      if (!isBrowser()) {
         try {
           // Run all GraphQL queries
           await getDataFromTree(
