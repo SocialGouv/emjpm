@@ -1,6 +1,5 @@
 import * as Sentry from "@sentry/browser";
 // all global css
-import "bootstrap/dist/css/bootstrap.css";
 import App, { Container } from "next/app";
 import getConfig from "next/config";
 import React from "react";

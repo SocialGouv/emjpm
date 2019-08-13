@@ -4,10 +4,12 @@ import { Wrapper } from "../src/components-v2/commons";
 import { Header } from "../src/components-v2/header";
 import { Navigation } from "../src/components-v2/navigation";
 import { Global, css } from "@emotion/core";
+import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 
 const direction = () => {
   return (
     <Fragment>
+      <GlobalStyle />
       <Global
         styles={css`
           body,
