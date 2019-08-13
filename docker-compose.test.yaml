@@ -23,10 +23,15 @@ services:
       - 4000:4000
     depends_on:
       - db
-      - maildev
     links:
       - db
-      - maildev
+
+  graphql-server:
+    build:
+      context: packages/graphql-server
+    env_file: .env.test
+    ports:
+      - 4001:4001
 
   frontend:
     env_file: .env.test
@@ -40,10 +45,12 @@ services:
 
   graphql-engine:
     depends_on:
-      - db
       - api
+      - db
+      - graphql-server
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm_test
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/auth/v2/jwks"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/api/v2/auth/jwks"}'
+      WHATEVER_URL: http://graphql-server:4001

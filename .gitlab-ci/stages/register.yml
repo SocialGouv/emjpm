@@ -30,3 +30,9 @@ Register graphql-server image:
     DOCKER_BUILD_ARGS: >-
       --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
+
+Register hasura image:
+  <<: *register_stage
+  variables:
+    CONTEXT: packages/hasura
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
