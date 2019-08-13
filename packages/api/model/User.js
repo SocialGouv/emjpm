@@ -62,23 +62,23 @@ class User extends Model {
   }
 
   getDefaultRole() {
-    for (const role of this.roles) {
-      if (
-        [
-          "admin",
-          "service",
-          "individuel",
-          "prepose",
-          "direction",
-          "ti"
-        ].includes(role.name)
-      ) {
-        return role.name;
-      }
+    const mainRoles = [
+      "admin",
+      "service",
+      "individuel",
+      "prepose",
+      "direction",
+      "ti"
+    ];
+    const defaultRoleName = (
+      this.roles.find(role => mainRoles.includes(role.name)) || {}
+    ).name;
+    if (!defaultRoleName) {
+      throw new Error(
+        "No default role found in the list : " + JSON.stringify(this.roles)
+      );
     }
-    throw new Error(
-      "No default role found in the list : " + JSON.stringify(this.roles)
-    );
+    return defaultRoleName;
   }
 
   getUser() {
