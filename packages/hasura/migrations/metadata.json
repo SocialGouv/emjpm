@@ -1,0 +1,19 @@
+{
+  "functions": [],
+  "remote_schemas": [
+    {
+      "name": "whatever",
+      "definition": {
+        "url": "%%WHATEVER_URL%%/graphql",
+        "url_from_env": null,
+        "headers": [],
+        "forward_client_headers": true
+      },
+      "comment": null
+    }
+  ],
+  "query_collections": [],
+  "allowlist": [],
+  "tables": [],
+  "query_templates": []
+}
