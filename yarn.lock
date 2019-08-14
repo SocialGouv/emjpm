@@ -2426,10 +2426,17 @@
     "@sentry/types" "5.6.1"
     tslib "^1.9.3"
 
+<<<<<<< HEAD
 "@socialgouv/emjpm-ui-core@^1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.6.0.tgz#83708571945dfccb0d6e70188c7870b786391f6b"
   integrity sha512-CJisoAOfZrKHfrgVkD1onIbT1eE8isem1yA+5Whqce/bx9kxNuCldLC764jdresF799sdfBH3Sc3IRkxqrW38Q==
+=======
+"@socialgouv/emjpm-ui-core@^1.4.0":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.4.1.tgz#2b06b6091f6a5aaee301613910ac816e9c1d0d39"
+  integrity sha512-fSs3zk4THz0k3JGQbk1YGb5gMBrowJZd9ZmQ0JQz4KkKcf7H2LHYFXumlj+NYi3ynMbZG2e2zedrl4wKZA1CKw==
+>>>>>>> feat(filters): add filters components
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
