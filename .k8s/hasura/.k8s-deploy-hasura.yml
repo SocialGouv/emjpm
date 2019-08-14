@@ -1,19 +1,11 @@
-.k8s-deploy-hasura-dev:
+.k8s-deploy-hasura:
   extends: .base_docker_kube_image_stage
   script:
-    - envsubst < ./.k8s/hasura/deployment-dev.yml > ./deployment.yml
-    - envsubst < ./.k8s/hasura/service.yml > ./service.yml
-    - envsubst < ./.k8s/hasura/ingress-dev.yml > ./ingress.yml
+    #
+    - envsubst < ./.k8s/api/deployment${SUFFIX}.yml > ./deployment.yml
+    - envsubst < ./.k8s/api/service.yml > ./service.yml
+    - envsubst < ./.k8s/api/ingress${SUFFIX}.yml > ./ingress.yml
     #
     - kubectl apply -f ./deployment.yml
     - kubectl apply -f ./service.yml
     - kubectl apply -f ./ingress.yml
-
-.k8s-deploy-hasura-prod:
-  extends: .base_docker_kube_image_stage
-  script:
-    - envsubst < ./.k8s/hasura/deployment-prod.yml > ./deployment.yml
-    - envsubst < ./.k8s/hasura/service.yml > ./service.yml
-    #
-    - kubectl apply -f ./deployment.yml
-    - kubectl apply -f ./service.yml
