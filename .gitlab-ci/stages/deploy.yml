@@ -43,6 +43,7 @@ include:
 
 .deploy-frontend: &deploy_frontend
   <<: *deploy_stage
+  extends: .k8s-deploy-app
   variables:
     <<: *deploy_stage_variables
     CONTEXT: app
@@ -58,12 +59,10 @@ include:
 #
 
 Deploy App (dev):
-  extends: .k8s-deploy-app-dev
   <<: *deploy_frontend
   <<: *dev_stage
 
 Deploy App (incubateur):
-  extends: .k8s-deploy-app-prod
   <<: *deploy_frontend
   <<: *incubateur_stage
 
@@ -73,6 +72,7 @@ Deploy App (incubateur):
 
 .deploy-api: &deploy_api
   <<: *deploy_stage
+  extends: .k8s-deploy-api
   variables:
     <<: *deploy_stage_variables
     CONTEXT: api
@@ -88,12 +88,10 @@ Deploy App (incubateur):
 #
 
 Deploy Api (dev):
-  extends: .k8s-deploy-api-dev
   <<: *deploy_api
   <<: *dev_stage
 
 Deploy Api (incubateur):
-  extends: .k8s-deploy-api-prod
   <<: *deploy_api
   <<: *incubateur_stage
 
@@ -128,6 +126,7 @@ Deploy postgres (incubateur):
 
 .deploy-hasura: &deploy_hasura
   <<: *deploy_stage
+  extends: .k8s-deploy-hasura
   variables:
     <<: *deploy_stage_variables
     CONTEXT: hasura
@@ -137,12 +136,10 @@ Deploy postgres (incubateur):
 #
 
 Deploy hasura (dev):
-  extends: .k8s-deploy-hasura-dev
   <<: *deploy_hasura
   <<: *dev_stage
 
 Deploy hasura (incubateur):
-  extends: .k8s-deploy-hasura-prod
   <<: *deploy_hasura
   <<: *incubateur_stage
 

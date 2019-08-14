@@ -18,6 +18,3 @@ spec:
             backend:
               serviceName: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
               servicePort: ${PORT}
-
-  tls:
-    - secretName: emjpm-crt-secret
