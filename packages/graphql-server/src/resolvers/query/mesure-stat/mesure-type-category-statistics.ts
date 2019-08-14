@@ -1,5 +1,5 @@
-import { mesureQuery, SearchMesureResult } from "../../../client/mesure.query";
-import { logger } from "../../../logger";
+import { DataSource } from "../../../datasource";
+import { SearchMesureResult } from "../../../datasource/mesure.api";
 import {
   MesureTypeCategoryStatistic,
   QueryMesureTypeCategoryStatisticsArgs
@@ -10,10 +10,11 @@ import { buildMesureTypeCategoryStatistics } from "./utils/mesure-stat.builder";
 export const mesureTypeCategoryStatistics = async (
   _: any,
   args: QueryMesureTypeCategoryStatisticsArgs,
-  context: any
+  { dataSources }: { dataSources: DataSource }
 ) => {
-  logger.info(args, context);
-  const mesures: SearchMesureResult[] = await mesureQuery.searchMesures(args);
+  const mesures: SearchMesureResult[] = await dataSources.mesureAPI.searchMesures(
+    args
+  );
 
   const res: MesureTypeCategoryStatistic[] = buildMesureTypeCategoryStatistics();
   for (const mesure of mesures) {

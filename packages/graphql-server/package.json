@@ -14,9 +14,7 @@
   },
   "dependencies": {
     "@koa/cors": "^3.0.0",
-    "apollo-cache-inmemory": "^1.6.2",
-    "apollo-client": "^2.6.3",
-    "apollo-link-http": "^1.5.15",
+    "apollo-datasource-rest": "^0.6.1",
     "apollo-server-koa": "^2.6.9",
     "graphql": "^14.4.2",
     "koa": "^2.7.0",
