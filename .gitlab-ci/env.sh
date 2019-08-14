@@ -36,6 +36,7 @@ else
 fi
 
 export API_HOST="api.${DOMAIN}";
+export CERTIFICATE_NAME="${K8S_NAMESPACE}-certificate-${BRANCH_HASH}";
 export FRONTEND_HOST="${DOMAIN}";
 export GQL_SERVER_HOST="${K8S_NAMESPACE}-graphql-server-${BRANCH_HASH}";
 export HASURA_HOST="hasura.${DOMAIN}";
