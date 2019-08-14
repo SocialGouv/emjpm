@@ -2427,6 +2427,7 @@
     tslib "^1.9.3"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@socialgouv/emjpm-ui-core@^1.6.0":
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.6.0.tgz#83708571945dfccb0d6e70188c7870b786391f6b"
@@ -2437,6 +2438,12 @@
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.4.1.tgz#2b06b6091f6a5aaee301613910ac816e9c1d0d39"
   integrity sha512-fSs3zk4THz0k3JGQbk1YGb5gMBrowJZd9ZmQ0JQz4KkKcf7H2LHYFXumlj+NYi3ynMbZG2e2zedrl4wKZA1CKw==
 >>>>>>> feat(filters): add filters components
+=======
+"@socialgouv/emjpm-ui-core@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.4.2.tgz#47e6869e7d4fd1a0e0b2ea8f99d244658a4dc424"
+  integrity sha512-OaEatRaOEdo0VKkuBKIT4tYBfQz0Y6oZmbBtav35QrlP2L9rZMbYOTu7FzpcLv0nEZUsVFgV71ZOqGUr1stsaw==
+>>>>>>> feat(layout): add mesure
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
