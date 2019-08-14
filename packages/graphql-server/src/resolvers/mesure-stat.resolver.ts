@@ -1,9 +1,15 @@
-import { closedMesureNumber, mesureStateCategoryStatistics, mesureTypeCategoryEvolution, mesureTypeCategoryStatistics, newMesureNumber } from "./query/mesure-stat";
+import {
+  closedMesureNumber,
+  departmentAvailabilities,
+  mesureTypeCategoryEvolution,
+  mesureTypeCategoryStatistics,
+  newMesureNumber
+} from "./query/mesure-stat";
 
 export const resolvers = {
   Query: {
     closedMesureNumber,
-    mesureStateCategoryStatistics,
+    departmentAvailabilities,
     mesureTypeCategoryEvolution,
     mesureTypeCategoryStatistics,
     newMesureNumber

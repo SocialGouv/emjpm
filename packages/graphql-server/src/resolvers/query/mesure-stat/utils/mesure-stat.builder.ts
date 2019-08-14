@@ -1,22 +1,11 @@
 import { addMonths, isBefore } from "date-fns";
 import {
-  MesureStateCategory,
-  MesureStateCategoryStatistic,
   MesureTypeCategory,
   MesureTypeCategoryEvolution,
   MesureTypeCategoryStatistic,
   MonthlyNumber
 } from "../../../../types/resolvers-types";
 
-const buildMesureStateCategoryStatistic = (
-  mesureStateCategory: MesureStateCategory
-) => {
-  return {
-    mesureStateCategory,
-    number: 0,
-    percentage: 0
-  };
-};
 const buildMesureCategoryTypeStatistic = (
   mesureTypeCategory: MesureTypeCategory
 ) => {
@@ -24,14 +13,6 @@ const buildMesureCategoryTypeStatistic = (
     mesureTypeCategory,
     number: 0
   };
-};
-
-export const buildMesureStateCategoryStatistics: () => MesureStateCategoryStatistic[] = () => {
-  return [
-    buildMesureStateCategoryStatistic(MesureStateCategory.Closed),
-    buildMesureStateCategoryStatistic(MesureStateCategory.InProgress),
-    buildMesureStateCategoryStatistic(MesureStateCategory.Awaiting)
-  ];
 };
 
 export const buildMesureTypeCategoryStatistics: () => MesureTypeCategoryStatistic[] = () => {
