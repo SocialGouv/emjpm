@@ -1,6 +1,6 @@
 import { isAfter, isBefore } from "date-fns";
-import { mesureQuery, SearchMesureResult } from "../../../client/mesure.query";
-import { logger } from "../../../logger";
+import { DataSource } from "../../../datasource";
+import { SearchMesureResult } from "../../../datasource/mesure.api";
 import {
   MesureTypeCategoryEvolution,
   QueryMesureTypeCategoryEvolutionArgs
@@ -11,22 +11,22 @@ import { buildMesureTypeCategoryEvolutions } from "./utils/mesure-stat.builder";
 export const mesureTypeCategoryEvolution = async (
   _: any,
   args: QueryMesureTypeCategoryEvolutionArgs,
-  context: any
+  { dataSources }: { dataSources: DataSource }
 ) => {
-  logger.info(args, context);
+  const mesures: SearchMesureResult[] = await dataSources.mesureAPI.searchMesures(
+    {
+      closed: {
+        gt_or_null: args.start
+      },
+      opening: {
+        lt: args.end
+      },
 
-  const mesures: SearchMesureResult[] = await mesureQuery.searchMesures({
-    closed: {
-      gt_or_null: args.start
-    },
-    opening: {
-      lt: args.end
-    },
-
-    court: args.court,
-    department: args.department,
-    region: args.region
-  });
+      court: args.court,
+      department: args.department,
+      region: args.region
+    }
+  );
 
   const res: MesureTypeCategoryEvolution[] = buildMesureTypeCategoryEvolutions(
     args.start,

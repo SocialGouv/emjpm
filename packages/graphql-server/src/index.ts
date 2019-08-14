@@ -6,18 +6,20 @@ import * as bodyParser from "koa-bodyparser";
 import * as Router from "koa-router";
 import { AddressInfo } from "net";
 import { configuration } from "./config";
+import dataSources from "./datasource";
 import { logger } from "./logger";
 import resolvers from "./resolvers";
 import typeDefs from "./schemas";
 
 const context = async ({ ctx }: { ctx: any }) => {
   return {
-    authorisation: ctx.request.header.authorisation
+    token: ctx.request.header.authorization
   };
 };
 
 const server = new ApolloServer({
   context,
+  dataSources,
   resolvers,
   typeDefs
 });

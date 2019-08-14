@@ -1,7 +1,12 @@
-import { departmentAvailabilityQuery } from "../../../client/department-availibility.query";
+import { DataSource } from "../../../datasource";
 
-export const departmentAvailabilities = async () => {
-  const res = await departmentAvailabilityQuery.all();
+export const departmentAvailabilities = async (
+  _: any,
+  // tslint:disable-next-line: variable-name
+  _args: any,
+  { dataSources }: { dataSources: DataSource }
+) => {
+  const res = await dataSources.departmentAvailabilityAPI.all();
   return res.map(availability => {
     const max = availability.mesures_max || 0;
     const awaiting = availability.mesures_awaiting || 0;
