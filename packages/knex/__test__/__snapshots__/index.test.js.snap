@@ -858,6 +858,8 @@ Array [
   "user_role",
   "user_tis",
   "users",
+  "view_department_availability",
+  "view_mesure_gestionnaire",
 ]
 `;
 
@@ -1045,6 +1047,82 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
+  },
+}
+`;
+
+exports[`view_department_availability table schema 1`] = `
+Object {
+  "department_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "mesures_awaiting": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "bigint",
+  },
+  "mesures_in_progress": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "bigint",
+  },
+  "mesures_max": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "bigint",
+  },
+}
+`;
+
+exports[`view_mesure_gestionnaire table schema 1`] = `
+Object {
+  "dep_nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "department_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "discriminator": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "text",
+  },
+  "mesures_awaiting": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "mesures_in_progress": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "mesures_max": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "source_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
   },
 }
 `;
