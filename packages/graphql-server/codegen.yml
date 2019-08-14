@@ -5,6 +5,3 @@ generates:
   src/types/resolvers-types.ts:
     plugins:
       - "typescript"
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"
