@@ -15,7 +15,7 @@
       "comment": null
     }
   ],
-    "tables": [
+  "tables": [
     {
       "table": "direction",
       "object_relationships": [],
@@ -199,6 +199,37 @@
     {
       "table": "user_tis",
       "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "view_mesure_gestionnaire",
+      "object_relationships": [],
+      "array_relationships": [],
+      "insert_permissions": [],
+      "select_permissions": [],
+      "update_permissions": [],
+      "delete_permissions": [],
+      "event_triggers": []
+    },
+    {
+      "table": "view_department_availability",
+      "object_relationships": [
+        {
+          "using": {
+            "manual_configuration": {
+              "remote_table": "departements",
+              "column_mapping": { "department_id": "id" }
+            }
+          },
+          "name": "department",
+          "comment": null
+        }
+      ],
       "array_relationships": [],
       "insert_permissions": [],
       "select_permissions": [],
