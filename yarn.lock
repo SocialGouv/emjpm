@@ -2426,10 +2426,10 @@
     "@sentry/types" "5.6.1"
     tslib "^1.9.3"
 
-"@socialgouv/emjpm-ui-core@^1.4.0":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.4.1.tgz#2b06b6091f6a5aaee301613910ac816e9c1d0d39"
-  integrity sha512-fSs3zk4THz0k3JGQbk1YGb5gMBrowJZd9ZmQ0JQz4KkKcf7H2LHYFXumlj+NYi3ynMbZG2e2zedrl4wKZA1CKw==
+"@socialgouv/emjpm-ui-core@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.4.2.tgz#47e6869e7d4fd1a0e0b2ea8f99d244658a4dc424"
+  integrity sha512-OaEatRaOEdo0VKkuBKIT4tYBfQz0Y6oZmbBtav35QrlP2L9rZMbYOTu7FzpcLv0nEZUsVFgV71ZOqGUr1stsaw==
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
@@ -7847,9 +7847,9 @@ ignore@^4.0.3, ignore@^4.0.6:
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
 ignore@^5.1.1:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.2.tgz#e28e584d43ad7e92f96995019cc43b9e1ac49558"
-  integrity sha512-vdqWBp7MyzdmHkkRWV5nY+PfGRbYbahfuvsBCh277tq+w9zyNi7h5CYJCK0kmzti9kU+O/cB7sE8HvKv6aXAKQ==
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/ignore/-/ignore-5.1.4.tgz#84b7b3dbe64552b6ef0eca99f6743dbec6d97adf"
+  integrity sha512-MzbUSahkTW1u7JpKKjY7LCARd1fU5W2rLdxlM4kdkayuCwZImjkpluF9CM1aLewYJguPDqewLam18Y6AU69A8A==
 
 import-cwd@^2.0.0:
   version "2.1.0"
