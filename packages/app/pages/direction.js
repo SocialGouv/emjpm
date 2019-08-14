@@ -1,5 +1,6 @@
 import React from "react";
 import { Layout } from "../src/components-v2/layout";
+import { Filters } from "../src/components-v2/filters";
 
 const links = [
   {
@@ -15,7 +16,7 @@ const links = [
 const direction = () => {
   return (
     <Layout links={links}>
-      <div>test</div>
+      <Filters />
     </Layout>
   );
 };

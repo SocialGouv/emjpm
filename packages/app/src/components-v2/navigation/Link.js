@@ -23,7 +23,7 @@ const LineStyle = {
 
 const BoxStyle = {
   overflow: "hidden",
-  height: "38px"
+  height: "32px"
 };
 
 const ActiveLink = ({ router, ...props }) => {

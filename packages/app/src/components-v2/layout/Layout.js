@@ -16,6 +16,7 @@ const Layout = props => {
           body,
           html,
           div#__next {
+            font-family: "open-sans", sans-serif;
             background: #f2f5f9;
           }
         `}
@@ -26,7 +27,9 @@ const Layout = props => {
           <Navigation links={links} />
         </Wrapper>
       </Box>
-      <Box>{props.children}</Box>
+      <Wrapper>
+        <Box mt="6">{props.children}</Box>
+      </Wrapper>
     </Fragment>
   );
 };
