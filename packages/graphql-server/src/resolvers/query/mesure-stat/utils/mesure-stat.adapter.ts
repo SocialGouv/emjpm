@@ -1,27 +1,7 @@
-import { MesureStatus, MesureType } from "../../../../model/mesures.model";
-import {
-  MesureStateCategory,
-  MesureTypeCategory
-} from "../../../../types/resolvers-types";
+import { MesureType } from "../../../../model/mesures.model";
+import { MesureTypeCategory } from "../../../../types/resolvers-types";
 
 export const mesureStatAdapter = {
-  adaptState: (status: MesureStatus) => {
-    if (!status) {
-      return null;
-    }
-    switch (status) {
-      case "Mesure en attente":
-        return MesureStateCategory.Awaiting;
-      case "Mesure en cours":
-        return MesureStateCategory.InProgress;
-      case "Eteindre mesure":
-        return MesureStateCategory.Closed;
-      default:
-        throw new Error(
-          `[mesureStatAdapter.adaptType] ${status} is not adaptable`
-        );
-    }
-  },
   adaptType: (type: MesureType) => {
     if (!type) {
       return null;

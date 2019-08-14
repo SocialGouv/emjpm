@@ -24,13 +24,6 @@ export default gql`
       court: Int
     ): [MesureTypeCategoryStatistic!]!
 
-    mesureStateCategoryStatistics(
-      date: String!
-      region: Int
-      department: Int
-      court: Int
-    ): [MesureStateCategoryStatistic!]!
-
     mesureTypeCategoryEvolution(
       start: String!
       end: String!
@@ -38,6 +31,21 @@ export default gql`
       department: Int
       court: Int
     ): [MesureTypeCategoryEvolution!]!
+
+    departmentAvailabilities: [DepartmentAvailibility!]!
+  }
+
+  type DepartmentAvailibility {
+    department: Department!
+    inProgress: Int!
+    available: Int!
+    awaiting: Int!
+    max: Int!
+  }
+
+  type Department {
+    code: String!
+    nom: String!
   }
 
   type MesureTypeCategoryEvolution {
@@ -53,12 +61,6 @@ export default gql`
     number: Int!
   }
 
-  type MesureStateCategoryStatistic {
-    mesureStateCategory: MesureStateCategory!
-    number: Int!
-    percentage: Float!
-  }
-
   type MesureTypeCategoryStatistic {
     mesureTypeCategory: MesureTypeCategory!
     number: Int!
@@ -70,11 +72,5 @@ export default gql`
     CURATELLE_RENFORCEE
     SAUVEGARDE_JUSTICE
     OTHER
-  }
-
-  enum MesureStateCategory {
-    AWAITING
-    IN_PROGRESS
-    CLOSED
   }
 `;
