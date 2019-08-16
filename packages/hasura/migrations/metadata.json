@@ -4,7 +4,7 @@
     {
       "name": "whatever",
       "definition": {
-        "url": "http://host.docker.internal:4001/graphql",
+        "url": "%%WHATEVER_URL%%/graphql",
         "url_from_env": null,
         "headers": [],
         "forward_client_headers": true
@@ -51,16 +51,6 @@
           }
         }
       ],
-      "delete_permissions": [],
-      "event_triggers": []
-    },
-    {
-      "table": "sessions",
-      "object_relationships": [],
-      "array_relationships": [],
-      "insert_permissions": [],
-      "select_permissions": [],
-      "update_permissions": [],
       "delete_permissions": [],
       "event_triggers": []
     },
@@ -358,16 +348,6 @@
     },
     {
       "table": "knex_migrations_lock",
-      "object_relationships": [],
-      "array_relationships": [],
-      "insert_permissions": [],
-      "select_permissions": [],
-      "update_permissions": [],
-      "delete_permissions": [],
-      "event_triggers": []
-    },
-    {
-      "table": "regions1",
       "object_relationships": [],
       "array_relationships": [],
       "insert_permissions": [],
