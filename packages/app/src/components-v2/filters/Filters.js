@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Card } from "@socialgouv/emjpm-ui-core";
+import { Card, Select, Input } from "@socialgouv/emjpm-ui-core";
 import { Text, Flex, Box } from "rebass";
-import { Select } from "./Select";
-import { Input } from "./Input";
 
 const TextStyle = {
   textTransform: "uppercase",
@@ -33,6 +31,7 @@ const Filters = () => {
             <Text sx={TextStyle}>Affiner</Text>
             <Box width="170px" mr={1}>
               <Select
+                size="small"
                 options={options}
                 placeholder={"region"}
                 value={selectedRegionalValue}
@@ -41,6 +40,7 @@ const Filters = () => {
             </Box>
             <Box width="170px" mr={1}>
               <Select
+                size="small"
                 options={options}
                 placeholder={"departement"}
                 value={selectedDepartementValue}
@@ -49,6 +49,7 @@ const Filters = () => {
             </Box>
             <Box width="170px" mr={1}>
               <Select
+                size="small"
                 options={options}
                 placeholder={"tribunal"}
                 value={selectedTribunalValue}
@@ -60,10 +61,10 @@ const Filters = () => {
         <Box>
           <Flex>
             <Box width="170px" mr={1}>
-              <Input type="date" placeholder="du" />
+              <Input name="startDate" size="small" type="date" placeholder="du" />
             </Box>
             <Box width="170px">
-              <Input type="date" placeholder="au" />
+              <Input name="endDate" size="small" type="date" placeholder="au" />
             </Box>
           </Flex>
         </Box>
