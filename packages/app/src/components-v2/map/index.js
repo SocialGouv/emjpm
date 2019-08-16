@@ -25,7 +25,7 @@ export const Map = () => {
     });
 
   return (
-    <Card flexBasis="50%">
+    <Card flexBasis="49.5%">
       <Box p="1">
         <Heading2>Cartes de la disponibilité des mesures</Heading2>
       </Box>
