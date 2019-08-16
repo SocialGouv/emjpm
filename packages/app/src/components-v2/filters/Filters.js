@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import { useQuery } from "@apollo/react-hooks";
 import { Card, Select, Input } from "@socialgouv/emjpm-ui-core";
-import { Text, Flex, Box } from "rebass";
+import React, { useContext, useState } from "react";
+import { Box, Flex, Text } from "rebass";
+import { GET_REGIONS } from "../../graphql/Queries";
+import { toOptions } from "../../util/option/OptionUtil";
+import { FiltersContext } from "./context";
 
 const TextStyle = {
   textTransform: "uppercase",
@@ -19,9 +23,32 @@ const options = [
 ];
 
 const Filters = () => {
-  const [selectedRegionalValue, changeRegionalValue] = useState(false);
-  const [selectedDepartementValue, changeDepartementValue] = useState(false);
-  const [selectedTribunalValue, changeTribunalValue] = useState(false);
+  const { data: regionsData, loading } = useQuery(GET_REGIONS);
+
+  const {
+    selectedRegionalValue,
+    changeRegionalValue,
+    selectedDepartementValue,
+    changeDepartementValue,
+    selectedTribunalValue,
+    changeTribunalValue
+  } = useContext(FiltersContext);
+
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+
+  if (loading) {
+    return <div>loading</div>;
+  }
+
+  const regionalOptions = datasToOptions(regionsData.regions);
+
+  const selectRegion = selectedOption => {
+    changeRegionalValue(selectedOption);
+    const departments = regionsData.regions.find(region => region.id === selectedOption.id)
+      .departements;
+    setDepartmentOptions(datasToOptions(departments));
+    changeDepartementValue(null);
+  };
 
   return (
     <Card>
@@ -32,16 +59,17 @@ const Filters = () => {
             <Box width="170px" mr={1}>
               <Select
                 size="small"
-                options={options}
+                options={regionalOptions}
                 placeholder={"region"}
                 value={selectedRegionalValue}
-                onChange={selectedOption => changeRegionalValue(selectedOption)}
+                onChange={selectedOption => selectRegion(selectedOption)}
               />
             </Box>
+
             <Box width="170px" mr={1}>
               <Select
                 size="small"
-                options={options}
+                options={departmentOptions}
                 placeholder={"departement"}
                 value={selectedDepartementValue}
                 onChange={selectedOption => changeDepartementValue(selectedOption)}
@@ -74,3 +102,7 @@ const Filters = () => {
 };
 
 export { Filters };
+
+function datasToOptions(datas) {
+  return toOptions(datas, "id", "nom");
+}
