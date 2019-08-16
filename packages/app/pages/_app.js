@@ -1,13 +1,14 @@
 import * as Sentry from "@sentry/browser";
 // all global css
-import "bootstrap/dist/css/bootstrap.css";
 import App, { Container } from "next/app";
 import getConfig from "next/config";
 import React from "react";
 import { ApolloProvider } from "react-apollo";
 import ReactPiwik from "react-piwik";
-import "react-tabs/style/react-tabs.css";
 import { withApolloClient } from "../src/lib/apollo";
+import { ThemeProvider } from "theme-ui";
+import theme from "@socialgouv/emjpm-ui-theme";
+import "react-tabs/style/react-tabs.css";
 import "../static/css/custom.css";
 import "../static/css/footer.css";
 import "../static/css/hero.css";
@@ -51,9 +52,11 @@ class MyApp extends App {
     const { Component, pageProps, apolloClient } = this.props;
     return (
       <Container>
-        <ApolloProvider client={apolloClient}>
-          <Component {...pageProps} />
-        </ApolloProvider>
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={apolloClient}>
+            <Component {...pageProps} />
+          </ApolloProvider>
+        </ThemeProvider>
       </Container>
     );
   }
