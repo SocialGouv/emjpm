@@ -12,19 +12,22 @@ const logoTextStyle = {
   ml: 1
 };
 
-const Logo = () => {
+const Logo = props => {
+  const { hasTitle } = props;
   return (
     <Flex>
       <Box>
         <Image src={"static/images/marianne.svg"} sx={LogoStyle} />
       </Box>
-      <Box>
-        <Text sx={logoTextStyle}>
-          empjm.
-          <b>beta.gouv</b>
-          .fr
-        </Text>
-      </Box>
+      {hasTitle && (
+        <Box>
+          <Text sx={logoTextStyle}>
+            empjm.
+            <b>beta.gouv</b>
+            .fr
+          </Text>
+        </Box>
+      )}
     </Flex>
   );
 };
