@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import "bootstrap/dist/css/bootstrap.css";
 
 import Navigation from "../communComponents/Navigation";
 import Footer from "../communComponents/Footer";
