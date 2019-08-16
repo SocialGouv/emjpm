@@ -7,7 +7,7 @@ export const Header = () => {
   return (
     <Flex alignItems="center" flexWrap="wrap" justifyContent="space-between">
       <Box p={1}>
-        <Logo />
+        <Logo hasTitle />
       </Box>
       <Box p={1}>
         <Flex alignItems={"center"}>
