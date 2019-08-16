@@ -7,6 +7,7 @@ const convertDates = (mesure: SearchMesureResult) => {
     ? new Date(mesure.date_ouverture)
     : null;
   mesure.extinction = mesure.extinction ? new Date(mesure.extinction) : null;
+  return mesure
 };
 
 export interface SearchMesureResultWrapper {
