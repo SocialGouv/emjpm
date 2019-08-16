@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Select, Input } from "@socialgouv/emjpm-ui-core";
+import { Card, Input, Select } from "@socialgouv/emjpm-ui-core";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 import { GET_REGIONS } from "../../graphql/Queries";
-import { regionsToOptions, departementToOptions } from "../../util/option/OptionUtil";
+import { departementToOptions, regionsToOptions } from "../../util/option/OptionUtil";
 import { FiltersContext } from "./context";
 
 const TextStyle = {
