@@ -3,7 +3,7 @@ import { Card, Select, Input } from "@socialgouv/emjpm-ui-core";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 import { GET_REGIONS } from "../../graphql/Queries";
-import { toOptions } from "../../util/option/OptionUtil";
+import { regionsToOptions, departementToOptions } from "../../util/option/OptionUtil";
 import { FiltersContext } from "./context";
 
 const TextStyle = {
@@ -40,13 +40,13 @@ const Filters = () => {
     return <div>loading</div>;
   }
 
-  const regionalOptions = datasToOptions(regionsData.regions);
+  const regionalOptions = regionsToOptions(regionsData.regions);
 
   const selectRegion = selectedOption => {
     changeRegionalValue(selectedOption);
-    const departments = regionsData.regions.find(region => region.id === selectedOption.id)
+    const departments = regionsData.regions.find(region => region.id === selectedOption.value)
       .departements;
-    setDepartmentOptions(datasToOptions(departments));
+    setDepartmentOptions(departementToOptions(departments));
     changeDepartementValue(null);
   };
 
@@ -65,7 +65,6 @@ const Filters = () => {
                 onChange={selectedOption => selectRegion(selectedOption)}
               />
             </Box>
-
             <Box width="170px" mr={1}>
               <Select
                 size="small"
@@ -102,7 +101,3 @@ const Filters = () => {
 };
 
 export { Filters };
-
-function datasToOptions(datas) {
-  return toOptions(datas, "id", "nom");
-}
