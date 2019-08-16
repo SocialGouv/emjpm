@@ -15,7 +15,6 @@ export const mesureTypeCategoryStatistics = async (
   const mesures: SearchMesureResult[] = await dataSources.mesureAPI.searchMesures(
     args
   );
-
   const res: MesureTypeCategoryStatistic[] = buildMesureTypeCategoryStatistics();
   for (const mesure of mesures) {
     const mesureTypeCategory = mesureStatAdapter.adaptType(mesure.type);
@@ -23,12 +22,14 @@ export const mesureTypeCategoryStatistics = async (
       (value: MesureTypeCategoryStatistic) =>
         value.mesureTypeCategory === mesureTypeCategory
     );
-    if (!mesureTypeCategoryStatistic) {
-      throw new Error(
-        `no mesureTypeCategoryStatistic found for type ${mesure.type}`
-      );
+    if (mesureTypeCategoryStatistic) {
+      mesureTypeCategoryStatistic.number++;
+      // console.log(mesure)
+      // throw new Error(
+      //   `no mesureTypeCategoryStatistic found for type ${mesure.type}`
+      // );
     }
-    mesureTypeCategoryStatistic.number++;
+    
   }
 
   return res;

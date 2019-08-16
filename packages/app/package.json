@@ -58,6 +58,7 @@
     "react-tabs": "^3.0.0",
     "react-tippy": "^1.2.3",
     "rebass": "^4.0.2",
+    "recharts": "^1.7.1",
     "redux": "^4.0.4",
     "redux-modal": "^3.0.1",
     "redux-thunk": "^2.3.0",
