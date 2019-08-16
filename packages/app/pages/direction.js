@@ -1,9 +1,10 @@
-import { Card, Heading0, Heading4 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
+import { Card, Heading0, Heading4 } from "@socialgouv/emjpm-ui-core";
 import { Box, Flex } from "rebass";
 import { Filters } from "../src/components-v2/filters";
 import { FiltersContextProvider } from "../src/components-v2/filters/context";
 import { Layout } from "../src/components-v2/layout";
+import { Map } from "../src/components-v2/map";
 
 const links = [
   {
@@ -39,6 +40,11 @@ const direction = () => {
               <Heading4>Mesure éteintes</Heading4>
               <Heading0 mt={"7"}>30949</Heading0>
             </Card>
+          </Flex>
+        </Box>
+        <Box mt={5}>
+          <Flex justifyContent="space-between" flex={"wrap"}>
+            <Map />
           </Flex>
         </Box>
       </Layout>
