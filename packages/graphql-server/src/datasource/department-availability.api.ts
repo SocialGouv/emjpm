@@ -2,8 +2,10 @@ import { AuthDataSource } from "./auth-datasource";
 
 export interface DepartmentAvailabilityResult {
   department: {
+    id: number;
     code: string;
     nom: string;
+    id_region: number;
   };
   mesures_awaiting: number;
   mesures_in_progress: number;
@@ -19,8 +21,10 @@ export class DepartmentAvailabilityAPI extends AuthDataSource {
     const query = `{
       view_department_availability {
         department {
+          id
           code
           nom
+          id_region
         }
         mesures_awaiting
         mesures_in_progress
