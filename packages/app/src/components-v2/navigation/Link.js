@@ -17,13 +17,13 @@ const LineStyle = {
   width: "100%",
   height: "10px",
   bg: "primary",
-  mt: 2,
+  mt: 1,
   borderRadius: "5px"
 };
 
 const BoxStyle = {
   overflow: "hidden",
-  height: "32px"
+  height: "34px"
 };
 
 const ActiveLink = ({ router, ...props }) => {
