@@ -101,6 +101,12 @@ export const GET_NEW_MESURE_NUMBER = gql`
   }
 `;
 
+export const GET_OPEN_MESURE_NUMBER = gql`
+  query OpenMesureNumber($court: Int, $department: Int, $region: Int) {
+    openMesureNumber(court: $court, department: $department, region: $region)
+  }
+`;
+
 export const GET_CLOSED_MESURE_NUMBER = gql`
   query closedMesureNumber(
     $end: String!

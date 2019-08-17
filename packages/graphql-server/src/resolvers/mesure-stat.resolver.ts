@@ -3,7 +3,8 @@ import {
   departmentAvailabilities,
   mesureTypeCategoryEvolution,
   mesureTypeCategoryStatistics,
-  newMesureNumber
+  newMesureNumber,
+  openMesureNumber
 } from "./query/mesure-stat";
 
 export const resolvers = {
@@ -12,7 +13,8 @@ export const resolvers = {
     departmentAvailabilities,
     mesureTypeCategoryEvolution,
     mesureTypeCategoryStatistics,
-    newMesureNumber
+    newMesureNumber,
+    openMesureNumber
   }
 };
 
