@@ -1,4 +1,4 @@
-import { Mesures } from "../model/mesures.model";
+import { Mesures, MesureStatus } from "../model/mesures.model";
 import { NullableNumber } from "../utils/types.util";
 import { AuthDataSource } from "./auth-datasource";
 
@@ -7,7 +7,7 @@ const convertDates = (mesure: SearchMesureResult) => {
     ? new Date(mesure.date_ouverture)
     : null;
   mesure.extinction = mesure.extinction ? new Date(mesure.extinction) : null;
-  return mesure
+  return mesure;
 };
 
 export interface SearchMesureResultWrapper {
@@ -39,6 +39,7 @@ export interface SearchMesuresParam {
   region?: NullableNumber;
   department?: NullableNumber;
   court?: NullableNumber;
+  status?: MesureStatus;
 }
 
 export type SearchMesureResult = Pick<
@@ -118,6 +119,9 @@ export class MesureAPI extends AuthDataSource {
     }
     if (params.court) {
       filters.push(`ti_id: {_eq: ${params.court}}`);
+    }
+    if (params.status) {
+      filters.push(`status: {_eq: "${params.status}"}`);
     }
     return filters;
   }
