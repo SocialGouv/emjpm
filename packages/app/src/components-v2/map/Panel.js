@@ -16,7 +16,8 @@ const ButtonStyle = {
 
 const Panel = props => {
   const { currentPanel, togglePanel } = props;
-  const available = currentPanel.mesures_max - currentPanel.mesures_in_progress;
+  const available =
+    currentPanel.mesures_max - currentPanel.mesures_in_progress - currentPanel.mesures_awaiting;
   return (
     <Box sx={{ position: "absolute", left: "0", bottom: "10px", minWidth: "230px" }}>
       <Card variant="sideCard">

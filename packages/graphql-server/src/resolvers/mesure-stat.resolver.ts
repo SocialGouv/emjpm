@@ -1,4 +1,5 @@
 import {
+  availableMesureNumber,
   closedMesureNumber,
   departmentAvailabilities,
   mesureTypeCategoryEvolution,
@@ -9,6 +10,7 @@ import {
 
 export const resolvers = {
   Query: {
+    availableMesureNumber,
     closedMesureNumber,
     departmentAvailabilities,
     mesureTypeCategoryEvolution,

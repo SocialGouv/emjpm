@@ -53,9 +53,10 @@ export class MesureAPI extends AuthDataSource {
   }
 
   public searchMesures(params: SearchMesuresParam) {
+    const where = this.buildFilters(params).join(", ");
     const query = `
     {
-      mesures(where: { ${this.buildFilters(params).join(", ")} }) {
+      mesures(where: { ${where} }) {
         date_ouverture
         cabinet
         civilite
@@ -115,7 +116,7 @@ export class MesureAPI extends AuthDataSource {
     //   filters.push(`region_id: {_eq: ${params.region}}`);
     // }
     if (params.department) {
-      filters.push(`code_postal: {_like: "${params.department}%"}`);
+      filters.push(`department_id: {_eq: ${params.department}}`);
     }
     if (params.court) {
       filters.push(`ti_id: {_eq: ${params.court}}`);
