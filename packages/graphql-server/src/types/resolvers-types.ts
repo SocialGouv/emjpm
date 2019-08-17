@@ -65,6 +65,7 @@ export type Query = {
   newMesureNumber: Scalars['Int'],
   closedMesureNumber: Scalars['Int'],
   openMesureNumber: Scalars['Int'],
+  availableMesureNumber: Scalars['Int'],
   mesureTypeCategoryStatistics: Array<MesureTypeCategoryStatistic>,
   mesureTypeCategoryEvolution: Array<MesureTypeCategoryEvolution>,
   departmentAvailabilities: Array<DepartmentAvailibility>,
@@ -90,6 +91,13 @@ export type QueryClosedMesureNumberArgs = {
 
 
 export type QueryOpenMesureNumberArgs = {
+  region?: Maybe<Scalars['Int']>,
+  department?: Maybe<Scalars['Int']>,
+  court?: Maybe<Scalars['Int']>
+};
+
+
+export type QueryAvailableMesureNumberArgs = {
   region?: Maybe<Scalars['Int']>,
   department?: Maybe<Scalars['Int']>,
   court?: Maybe<Scalars['Int']>
