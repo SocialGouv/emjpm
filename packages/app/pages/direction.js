@@ -6,6 +6,7 @@ import { FiltersContextProvider } from "../src/components-v2/filters/context";
 import { Layout } from "../src/components-v2/layout";
 import { Map } from "../src/components-v2/map";
 import { MesureAllocation } from "../src/components-v2/mesureAllocation";
+import { MesureEvolution } from "../src/components-v2/mesureEvolution";
 const links = [
   {
     title: "mesures",
@@ -46,6 +47,11 @@ const direction = () => {
           <Flex justifyContent="space-between" flex={"wrap"}>
             <Map />
             <MesureAllocation />
+          </Flex>
+        </Box>
+        <Box mt={5}>
+          <Flex justifyContent="space-between" flex={"wrap"}>
+            <MesureEvolution />
           </Flex>
         </Box>
       </Layout>

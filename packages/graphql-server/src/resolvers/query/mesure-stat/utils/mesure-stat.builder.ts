@@ -32,7 +32,6 @@ const buildMesureTypeCategoryEvolution = (
 ): MesureTypeCategoryEvolution => {
   const startDate = new Date(start);
   const endDate = new Date(end);
-
   let refDate = startDate;
 
   const monthlyEvolutions: MonthlyNumber[] = [];
