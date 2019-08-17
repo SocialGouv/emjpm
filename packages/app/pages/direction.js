@@ -1,7 +1,11 @@
 import React from "react";
 import { Card, Heading0, Heading4 } from "@socialgouv/emjpm-ui-core";
 import { Box, Flex } from "rebass";
-import { DirectionIndicator, NewMesureIndicator } from "../src/components-v2/direction-indicators";
+import {
+  DirectionIndicator,
+  NewMesureIndicator,
+  ClosedMesureIndicator
+} from "../src/components-v2/direction-indicators";
 import { Filters } from "../src/components-v2/filters";
 import { FiltersContextProvider } from "../src/components-v2/filters/context";
 import { Layout } from "../src/components-v2/layout";
@@ -29,7 +33,7 @@ const direction = () => {
             <NewMesureIndicator />
             <DirectionIndicator title="Mesures disponibles" indicator="4"></DirectionIndicator>
             <DirectionIndicator title="Nouvelle mesures" indicator="5"></DirectionIndicator>
-            <DirectionIndicator title="Mesures éteintes" indicator="6"></DirectionIndicator>
+            <ClosedMesureIndicator />
           </Flex>
         </Box>
         <Box mt={5}>

@@ -1,4 +1,6 @@
+import React from "react";
 import { Card, Heading0, Heading4 } from "@socialgouv/emjpm-ui-core";
+
 const DirectionIndicator = props => {
   return (
     <Card flexBasis="250px">
