@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Flex } from "rebass";
 import {
-  DirectionIndicator,
   NewMesureIndicator,
   ClosedMesureIndicator,
-  OpenMesureIndicator
+  OpenMesureIndicator,
+  AvailableMesureIndicator
 } from "../src/components-v2/direction-indicators";
 import { Filters } from "../src/components-v2/filters";
 import { FiltersContextProvider } from "../src/components-v2/filters/context";
@@ -30,9 +30,9 @@ const direction = () => {
         <Filters />
         <Box mt={5}>
           <Flex justifyContent="space-between" flex={"wrap"}>
-            <NewMesureIndicator />
-            <DirectionIndicator title="Mesures disponibles" indicator="4"></DirectionIndicator>
             <OpenMesureIndicator />
+            <AvailableMesureIndicator />
+            <NewMesureIndicator />
             <ClosedMesureIndicator />
           </Flex>
         </Box>
