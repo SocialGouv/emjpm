@@ -82,3 +82,39 @@ export const GET_CATEGORY_EVOLUTION = gql`
     }
   }
 `;
+
+export const GET_NEW_MESURE_NUMBER = gql`
+  query NewMesureNumber(
+    $end: String!
+    $start: String!
+    $court: Int
+    $department: Int
+    $region: Int
+  ) {
+    newMesureNumber(
+      end: $end
+      start: $start
+      court: $court
+      department: $department
+      region: $region
+    )
+  }
+`;
+
+export const GET_CLOSED_MESURE_NUMBER = gql`
+  query closedMesureNumber(
+    $end: String!
+    $start: String!
+    $court: Int
+    $department: Int
+    $region: Int
+  ) {
+    closedMesureNumber(
+      end: $end
+      start: $start
+      court: $court
+      department: $department
+      region: $region
+    )
+  }
+`;
