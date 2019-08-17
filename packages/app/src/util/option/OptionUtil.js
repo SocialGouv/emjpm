@@ -3,7 +3,7 @@ export const regionsToOptions = datas => {
 };
 
 export const departementToOptions = datas => {
-  return toOptions(datas, "code", "nom");
+  return toOptions(datas, "id", "nom");
 };
 
 export const toOptions = (datas, idKey, labelKey) =>

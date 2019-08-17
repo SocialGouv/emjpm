@@ -24,6 +24,12 @@ export default gql`
       court: Int
     ): Int!
 
+    availableMesureNumber(
+      region: Int
+      department: Int
+      court: Int
+    ): Int!
+
     mesureTypeCategoryStatistics(
       region: Int
       department: Int
