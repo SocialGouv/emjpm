@@ -40,8 +40,6 @@ export const MesureEvolution = () => {
     );
   }
 
-  console.log(data);
-
   return (
     <Card flexBasis="100%">
       <Heading2>Évolution du nombre de mesures</Heading2>

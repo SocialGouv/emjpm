@@ -1,3 +1,3 @@
-import { Layout } from "./Layout";
+import { LayoutDirection } from "./LayoutDirection";
 
-export { Layout };
+export { LayoutDirection };

@@ -10,8 +10,6 @@ const AvailableMesureIndicator = () => {
     FiltersContext
   );
 
-  console.log(selectedDepartementValue);
-
   const { data, loading } = useQuery(GET_AVAILABLE_MESURE_NUMBER, {
     variables: {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,

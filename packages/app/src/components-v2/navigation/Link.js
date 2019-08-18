@@ -9,16 +9,24 @@ const LinkStyle = isActive => {
     fontFamily: "heading",
     fontWeight: "700",
     cursor: "pointer",
-    p: "2px"
+    p: "2px",
+    position: "relative",
+    display: "inline-block",
+    lineHeight: "1.5",
+    "&:hover": {
+      textDecoration: "none"
+    }
   };
 };
 
 const LineStyle = {
-  width: "100%",
+  left: 0,
+  right: 0,
   height: "10px",
   bg: "primary",
-  mt: 1,
-  borderRadius: "5px"
+  mt: "8px",
+  borderRadius: "5px",
+  position: "absolute"
 };
 
 const BoxStyle = {
