@@ -7,7 +7,6 @@ import { GET_CATEGORY_EVOLUTION } from "../../graphql/Queries";
 import { MesureEvolutionChart } from "./MesureEvolutionChart";
 
 export const MesureEvolution = () => {
-  // eslint-disable-next-line no-unused-vars
   const {
     startDateValue,
     endDateValue,
