@@ -6,8 +6,8 @@ import { FiltersContextProvider } from "../../src/components-v2/filters/context"
 import {
   BoxWrapper,
   FlexWrapper,
-  fourColumnStyle,
-  twoColumnStyle
+  fourColumnStyle
+  // twoColumnStyle
 } from "../../src/components-v2/commons";
 import { Filters } from "../../src/components-v2/filters";
 import { LayoutDirection } from "../../src/components-v2/layout";
