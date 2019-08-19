@@ -2429,10 +2429,10 @@
     "@sentry/types" "5.6.1"
     tslib "^1.9.3"
 
-"@socialgouv/emjpm-ui-core@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.6.0.tgz#83708571945dfccb0d6e70188c7870b786391f6b"
-  integrity sha512-CJisoAOfZrKHfrgVkD1onIbT1eE8isem1yA+5Whqce/bx9kxNuCldLC764jdresF799sdfBH3Sc3IRkxqrW38Q==
+"@socialgouv/emjpm-ui-core@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.7.0.tgz#68497400234e28d7e7c251b071d5868e6a63ae05"
+  integrity sha512-EJFrMWnWlhnBBKkDydVf3eQH82DY1P4LUHsem8FKlRYUvYyaY377xZJcX5teIMIDOBx+LisnMYzdbsg91SVwFg==
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
@@ -2453,10 +2453,10 @@
     normalize.css "^8.0.1"
     react "^16.8.6"
 
-"@socialgouv/emjpm-ui-theme@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-theme/-/emjpm-ui-theme-1.5.0.tgz#56318e65ec5a4e83a64d2cfd988aa2ce6752dff0"
-  integrity sha512-k24YREW4dDS3tQBlzxKug1CrainNfiCajnAWqrRevwc8UL+s8SxQvETRNUrizE/0GZKcU9zzD5YRFG/7wz3TuQ==
+"@socialgouv/emjpm-ui-theme@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-theme/-/emjpm-ui-theme-1.6.0.tgz#2d22feedc9a54fe9aeecf927e5ec1bbd57f7a666"
+  integrity sha512-2ykkJCq2as2CclhtnYfmbvtnwRs+gpui5tFX3HHVFnIqayjIFgKNnW1/mvDzjklp+141ms6zwIWkXb/bVYJfNw==
 
 "@socialgouv/eslint-config-react@^0.9.2":
   version "0.9.4"
