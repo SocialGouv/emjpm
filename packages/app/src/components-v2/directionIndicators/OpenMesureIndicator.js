@@ -2,26 +2,33 @@ import { useQuery } from "@apollo/react-hooks";
 import React, { useContext } from "react";
 import { GET_OPEN_MESURE_NUMBER } from "../../graphql/Queries";
 import { FiltersContext } from "../filters/context";
-import { DirectionIndicator } from "./DirectionIndicator";
+import { Indicator } from "./Indicator";
 
 const OpenMesureIndicator = () => {
-  // eslint-disable-next-line no-unused-vars
-  const { selectedRegionalValue, selectedDepartementValue, selectedTribunalValue } = useContext(
-    FiltersContext
-  );
+  const {
+    selectedRegionalValue,
+    selectedDepartementValue,
+    startDateValue,
+    endDateValue
+  } = useContext(FiltersContext);
 
-  const { data, loading } = useQuery(GET_OPEN_MESURE_NUMBER, {
+  const { error, data, loading } = useQuery(GET_OPEN_MESURE_NUMBER, {
     variables: {
+      start: startDateValue,
+      end: endDateValue,
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
     }
   });
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  return <DirectionIndicator title="Mesures en cours" indicator={data.openMesureNumber} />;
+  return (
+    <Indicator
+      error={error}
+      loading={loading}
+      title="Mesures en cours"
+      indicator={data.openMesureNumber}
+    />
+  );
 };
 
 export { OpenMesureIndicator };
