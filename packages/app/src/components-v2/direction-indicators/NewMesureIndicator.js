@@ -6,18 +6,25 @@ import { DirectionIndicator } from "./DirectionIndicator";
 
 const NewMesureIndicator = () => {
   // eslint-disable-next-line no-unused-vars
-  const { selectedRegionalValue, selectedDepartementValue, selectedTribunalValue } = useContext(
-    FiltersContext
-  );
+  const {
+    selectedRegionalValue,
+    selectedDepartementValue,
+    startDateValue,
+    endDateValue
+  } = useContext(FiltersContext);
 
-  const { data, loading } = useQuery(GET_NEW_MESURE_NUMBER, {
+  const { error, data, loading } = useQuery(GET_NEW_MESURE_NUMBER, {
     variables: {
-      start: "2017-01-01",
-      end: "2019-12-31",
+      start: startDateValue,
+      end: endDateValue,
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
     }
   });
+
+  if (error) {
+    return <div>loading...</div>;
+  }
 
   if (loading) {
     return <div>loading...</div>;

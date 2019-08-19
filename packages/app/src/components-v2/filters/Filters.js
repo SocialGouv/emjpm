@@ -1,7 +1,9 @@
+import React, { useContext, useState } from "react";
+
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Input, Select } from "@socialgouv/emjpm-ui-core";
-import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
+
 import { GET_REGIONS } from "../../graphql/Queries";
 import { departementToOptions, regionsToOptions } from "../../util/option/OptionUtil";
 import { FiltersContext } from "./context";
@@ -24,14 +26,17 @@ const options = [
 
 const Filters = () => {
   const { data: regionsData, loading } = useQuery(GET_REGIONS);
-
   const {
     selectedRegionalValue,
     changeRegionalValue,
     selectedDepartementValue,
     changeDepartementValue,
     selectedTribunalValue,
-    changeTribunalValue
+    changeTribunalValue,
+    startDateValue,
+    changeStartDate,
+    endDateValue,
+    changeEndDate
   } = useContext(FiltersContext);
 
   const [departmentOptions, setDepartmentOptions] = useState([]);
@@ -88,10 +93,32 @@ const Filters = () => {
         <Box>
           <Flex>
             <Box width="170px" mr={1}>
-              <Input name="startDate" size="small" type="date" placeholder="du" />
+              <Input
+                value={startDateValue}
+                spellCheck="false"
+                autoComplete="false"
+                onChange={event => {
+                  changeStartDate(event.target.value);
+                }}
+                name="startDate"
+                size="small"
+                type="date"
+                placeholder="du"
+              />
             </Box>
             <Box width="170px">
-              <Input name="endDate" size="small" type="date" placeholder="au" />
+              <Input
+                value={endDateValue}
+                spellCheck="false"
+                autoComplete="false"
+                onChange={event => {
+                  changeEndDate(event.target.value);
+                }}
+                name="endDate"
+                size="small"
+                type="date"
+                placeholder="au"
+              />
             </Box>
           </Flex>
         </Box>
