@@ -17,7 +17,7 @@ const Logo = props => {
   return (
     <Flex>
       <Box>
-        <Image src={"static/images/marianne.svg"} sx={LogoStyle} />
+        <Image src={"/static/images/marianne.svg"} sx={LogoStyle} />
       </Box>
       {hasTitle && (
         <Box>
