@@ -120,3 +120,19 @@ export const GET_CLOSED_MESURE_NUMBER = gql`
     )
   }
 `;
+
+export const GET_USERS = gql`
+  {
+    users {
+      email
+      created_at
+      cabinet
+      id
+      last_login
+      nom
+      prenom
+      type
+      username
+    }
+  }
+`;

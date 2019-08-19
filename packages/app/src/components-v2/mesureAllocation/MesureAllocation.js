@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading2, Heading4 } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Box } from "rebass";
 import { MesureAllocationChart } from "./MesureAllocationChart";
 import { FiltersContext } from "../filters/context";
 import { GET_CATEGORY_STATS } from "../../graphql/Queries";
@@ -15,31 +16,36 @@ const type = {
 
 export const MesureAllocation = () => {
   // eslint-disable-next-line no-unused-vars
-  const { selectedRegionalValue, selectedDepartementValue, selectedTribunalValue } = useContext(
-    FiltersContext
-  );
+  const {
+    selectedRegionalValue,
+    startDateValue,
+    selectedDepartementValue,
+    endDateValue
+  } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(GET_CATEGORY_STATS, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined
-      // region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
-      // court: selectedTribunalValue ? parseInt(selectedTribunalValue.value) : undefined
+      start: startDateValue,
+      end: endDateValue,
+      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
+      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
     }
   });
 
   if (loading) {
     return (
-      <Card flexBasis="49.5%">
+      <Card flexBasis="49%">
         <Heading2>Répartition des mesures à date</Heading2>
-        <Heading4>chargement</Heading4>
-        {/* <Spinner variant="bgDark" /> */}
+        <Box my="5">
+          <Spinner />
+        </Box>
       </Card>
     );
   }
 
   if (error) {
     return (
-      <Card flexBasis="49.5%">
+      <Card flexBasis="49%">
         <Heading2>Répartition des mesures à date</Heading2>
         <Heading4>erreur</Heading4>
       </Card>

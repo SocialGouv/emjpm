@@ -5,28 +5,18 @@ import {
   ClosedMesureIndicator,
   OpenMesureIndicator,
   AvailableMesureIndicator
-} from "../src/components-v2/direction-indicators";
-import { Filters } from "../src/components-v2/filters";
-import { FiltersContextProvider } from "../src/components-v2/filters/context";
-import { Layout } from "../src/components-v2/layout";
-import { Map } from "../src/components-v2/map";
-import { MesureAllocation } from "../src/components-v2/mesureAllocation";
-import { MesureEvolution } from "../src/components-v2/mesureEvolution";
-const links = [
-  {
-    title: "mesures",
-    url: "/direction"
-  },
-  {
-    title: "mandataires",
-    url: "/mandataires"
-  }
-];
+} from "../../src/components-v2/directionIndicators";
+import { Filters } from "../../src/components-v2/filters";
+import { FiltersContextProvider } from "../../src/components-v2/filters/context";
+import { LayoutDirection } from "../../src/components-v2/layout";
+import { AvailabilityMap } from "../../src/components-v2/availabilityMap";
+import { MesureAllocation } from "../../src/components-v2/mesureAllocation";
+import { MesureEvolution } from "../../src/components-v2/mesureEvolution";
 
-const direction = () => {
+const Mesures = () => {
   return (
     <FiltersContextProvider>
-      <Layout links={links}>
+      <LayoutDirection>
         <Filters />
         <Box mt={5}>
           <Flex justifyContent="space-between" flex={"wrap"}>
@@ -38,7 +28,7 @@ const direction = () => {
         </Box>
         <Box mt={5}>
           <Flex justifyContent="space-between" flex={"wrap"}>
-            <Map />
+            <AvailabilityMap />
             <MesureAllocation />
           </Flex>
         </Box>
@@ -47,9 +37,9 @@ const direction = () => {
             <MesureEvolution />
           </Flex>
         </Box>
-      </Layout>
+      </LayoutDirection>
     </FiltersContextProvider>
   );
 };
 
-export default direction;
+export default Mesures;
