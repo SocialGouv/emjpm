@@ -18,12 +18,6 @@ const TextStyle = {
   mr: 1
 };
 
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
-];
-
 const Filters = () => {
   const { data: regionsData, loading } = useQuery(GET_REGIONS);
   const {
@@ -31,8 +25,6 @@ const Filters = () => {
     changeRegionalValue,
     selectedDepartementValue,
     changeDepartementValue,
-    selectedTribunalValue,
-    changeTribunalValue,
     startDateValue,
     changeStartDate,
     endDateValue,
@@ -77,15 +69,6 @@ const Filters = () => {
                 placeholder={"departement"}
                 value={selectedDepartementValue}
                 onChange={selectedOption => changeDepartementValue(selectedOption)}
-              />
-            </Box>
-            <Box width="170px" mr={1}>
-              <Select
-                size="small"
-                options={options}
-                placeholder={"tribunal"}
-                value={selectedTribunalValue}
-                onChange={selectedOption => changeTribunalValue(selectedOption)}
               />
             </Box>
           </Flex>

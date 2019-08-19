@@ -10,7 +10,6 @@ export const Provider = props => {
   // Use State to keep the values
   const [selectedRegionalValue, changeRegionalValue] = useState(false);
   const [selectedDepartementValue, changeDepartementValue] = useState(false);
-  const [selectedTribunalValue, changeTribunalValue] = useState(false);
   const [startDateValue, changeStartDate] = useState(startDate);
   const [endDateValue, changeEndDate] = useState(endDate);
 
@@ -20,8 +19,6 @@ export const Provider = props => {
     changeRegionalValue,
     selectedDepartementValue,
     changeDepartementValue,
-    selectedTribunalValue,
-    changeTribunalValue,
     startDateValue,
     changeStartDate,
     endDateValue,
