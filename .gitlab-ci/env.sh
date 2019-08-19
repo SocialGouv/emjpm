@@ -45,9 +45,11 @@ export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
 if [[ -n "${PRODUCTION+x}" ]]; then
   export API_URL="https://${API_HOST}"
   export FRONTEND_URL="https://${FRONTEND_HOST}"
+  export HASURA_URL="https://${HASURA_HOST}"
 else
   export API_URL="http://${API_HOST}"
   export FRONTEND_URL="http://${FRONTEND_HOST}"
+  export HASURA_URL="http://${HASURA_HOST}"
 fi
 
 #

@@ -39,3 +39,5 @@ spec:
           env:
             - name: API_URL
               value: "${API_URL}"
+            - name: GRAPHQL_SERVER_URI
+              value: "${HASURA_URL}"
