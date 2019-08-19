@@ -1,15 +1,35 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Box } from "rebass";
-import { Card, Heading2 } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading2, Spinner } from "@socialgouv/emjpm-ui-core";
 import MapComponent from "./Map";
 import { GET_DEPARTEMENTS_AVAILABILITY } from "../../graphql/Queries";
 
-export const Map = () => {
+const AvailabilityMap = () => {
   const { data, loading } = useQuery(GET_DEPARTEMENTS_AVAILABILITY);
 
   if (loading) {
-    return <div>loading...</div>;
+    return (
+      <Card p="4" flexBasis="49.25%">
+        <Box>
+          <Heading2>Cartes de la disponibilité des mesures</Heading2>
+        </Box>
+        <Box sx={{ position: "relative", p: "6" }}>
+          <Spinner />
+        </Box>
+      </Card>
+    );
+  }
+
+  if (loading) {
+    return (
+      <Card p="4" flexBasis="49.25%">
+        <Box>
+          <Heading2>Cartes de la disponibilité des mesures</Heading2>
+        </Box>
+        <Box sx={{ position: "relative", p: "6" }}>error</Box>
+      </Card>
+    );
   }
 
   const departements = data.view_department_availability
@@ -25,7 +45,7 @@ export const Map = () => {
     });
 
   return (
-    <Card p="4" flexBasis="49.5%">
+    <Card p="4" flexBasis="49.25%">
       <Box>
         <Heading2>Cartes de la disponibilité des mesures</Heading2>
       </Box>
@@ -35,3 +55,5 @@ export const Map = () => {
     </Card>
   );
 };
+
+export { AvailabilityMap };

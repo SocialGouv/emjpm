@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading2, Heading4 } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Box } from "rebass";
 import { FiltersContext } from "../filters/context";
 import { GET_CATEGORY_EVOLUTION } from "../../graphql/Queries";
 import { MesureEvolutionChart } from "./MesureEvolutionChart";
@@ -27,8 +28,9 @@ export const MesureEvolution = () => {
     return (
       <Card flexBasis="100%">
         <Heading2>Répartition des mesures à date</Heading2>
-        <Heading4>chargement</Heading4>
-        {/* <Spinner variant="bgDark" /> */}
+        <Box my="4">
+          <Spinner />
+        </Box>
       </Card>
     );
   }

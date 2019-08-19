@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading2, Heading4 } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Box } from "rebass";
 import { MesureAllocationChart } from "./MesureAllocationChart";
 import { FiltersContext } from "../filters/context";
 import { GET_CATEGORY_STATS } from "../../graphql/Queries";
@@ -33,17 +34,18 @@ export const MesureAllocation = () => {
 
   if (loading) {
     return (
-      <Card flexBasis="49.5%">
+      <Card flexBasis="49%">
         <Heading2>Répartition des mesures à date</Heading2>
-        <Heading4>chargement</Heading4>
-        {/* <Spinner variant="bgDark" /> */}
+        <Box my="5">
+          <Spinner />
+        </Box>
       </Card>
     );
   }
 
   if (error) {
     return (
-      <Card flexBasis="49.5%">
+      <Card flexBasis="49%">
         <Heading2>Répartition des mesures à date</Heading2>
         <Heading4>erreur</Heading4>
       </Card>

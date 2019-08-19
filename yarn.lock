@@ -2429,10 +2429,10 @@
     "@sentry/types" "5.6.1"
     tslib "^1.9.3"
 
-"@socialgouv/emjpm-ui-core@^1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.7.2.tgz#3777cd238d6258d3b29500ea3c95793b2969407e"
-  integrity sha512-JxtIexnQxU4/vOcr9/ZYhCe7YLFe57+s/BbJ/JZ/CvC9v73wxjvv7XweLmNiA5Grcr5neDBPzidXwrIblrmhBA==
+"@socialgouv/emjpm-ui-core@^1.7.3":
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.7.3.tgz#5f9c4fd59b4354e98521211888061c0a3e621821"
+  integrity sha512-IJmogauKcGtERjwqvdAqE5HPThZyHG2yC8yezG/Cb2wCZkLXmFQTK45IjPhpS0Kvvur5b56xZgqpxoTw/LjyFA==
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
