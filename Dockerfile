@@ -30,6 +30,7 @@ RUN sh ./packages/app/scripts/transpile_modules.sh
 # The frontend app needs to be built with %%ENV_VALUE%% so we can switch endpoint at runtime
 ARG API_URL=${API_URL:-%%API_URL%%}
 ARG SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN:-%%SENTRY_PUBLIC_DSN%%}
+ARG GRAPHQL_SERVER_URI=${GRAPHQL_SERVER_URI:-%%GRAPHQL_SERVER_URI%%}
 
 RUN yarn build --stream
 
