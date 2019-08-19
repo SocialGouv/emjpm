@@ -7,17 +7,19 @@ import { MesureEvolutionChart } from "./MesureEvolutionChart";
 
 export const MesureEvolution = () => {
   // eslint-disable-next-line no-unused-vars
-  const { selectedRegionalValue, selectedDepartementValue, selectedTribunalValue } = useContext(
-    FiltersContext
-  );
+  const {
+    startDateValue,
+    endDateValue,
+    selectedRegionalValue,
+    selectedDepartementValue
+  } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(GET_CATEGORY_EVOLUTION, {
     variables: {
-      start: "2017-01-01",
-      end: "2019-12-31",
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined
-      // region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
-      // court: selectedTribunalValue ? parseInt(selectedTribunalValue.value) : undefined
+      start: startDateValue,
+      end: endDateValue,
+      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
+      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
     }
   });
 
@@ -41,7 +43,7 @@ export const MesureEvolution = () => {
   }
 
   return (
-    <Card flexBasis="100%">
+    <Card p="4" flexBasis="100%">
       <Heading2>Évolution du nombre de mesures</Heading2>
       <MesureEvolutionChart data={data} />
     </Card>

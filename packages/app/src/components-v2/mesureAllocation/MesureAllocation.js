@@ -15,15 +15,19 @@ const type = {
 
 export const MesureAllocation = () => {
   // eslint-disable-next-line no-unused-vars
-  const { selectedRegionalValue, selectedDepartementValue, selectedTribunalValue } = useContext(
-    FiltersContext
-  );
+  const {
+    selectedRegionalValue,
+    startDateValue,
+    selectedDepartementValue,
+    endDateValue
+  } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(GET_CATEGORY_STATS, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined
-      // region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
-      // court: selectedTribunalValue ? parseInt(selectedTribunalValue.value) : undefined
+      start: startDateValue,
+      end: endDateValue,
+      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
+      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
     }
   });
 

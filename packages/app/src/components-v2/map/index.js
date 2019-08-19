@@ -25,8 +25,8 @@ export const Map = () => {
     });
 
   return (
-    <Card flexBasis="49.5%">
-      <Box p="1">
+    <Card p="4" flexBasis="49.5%">
+      <Box>
         <Heading2>Cartes de la disponibilité des mesures</Heading2>
       </Box>
       <Box sx={{ position: "relative", p: "6" }}>
