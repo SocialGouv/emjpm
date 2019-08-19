@@ -1,4 +1,7 @@
 import React, { Fragment, useState } from "react";
+
+import { Select } from "@socialgouv/emjpm-ui-core";
+import { Box } from "rebass";
 import {
   ResponsiveContainer,
   LineChart,
@@ -9,49 +12,8 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import { Select } from "@socialgouv/emjpm-ui-core";
-import { Box } from "rebass";
 
-const months = {
-  0: "JAN",
-  1: "FEV",
-  2: "MAR",
-  3: "AVR",
-  4: "MAI",
-  5: "JUI",
-  6: "JUI",
-  7: "AOU",
-  8: "SEP",
-  9: "OCT",
-  10: "NOV",
-  11: "DEC"
-};
-
-const getEvolution = data => {
-  const evolutionDatas = [];
-  const evolutionFilters = [];
-  data.map((type, index) => {
-    evolutionFilters[index] = {
-      value: type.mesureTypeCategory,
-      label: type.mesureTypeCategory
-    };
-    type.monthlyEvolutions.map((monthlyEvolution, index) => {
-      evolutionDatas[index] = {
-        ...evolutionDatas[index],
-        [type.mesureTypeCategory]: monthlyEvolution.number,
-        TOTAL: evolutionDatas[index]
-          ? evolutionDatas[index].TOTAL + monthlyEvolution.number
-          : monthlyEvolution.number,
-        month: months[monthlyEvolution.month]
-      };
-    });
-  });
-  evolutionFilters.push({
-    value: "TOTAL",
-    label: "TOTAL"
-  });
-  return { evolutionDatas, evolutionFilters };
-};
+import { getEvolution } from "./getEvolution";
 
 const MesureEvolutionChart = props => {
   const [selectedMesures, setMesures] = useState([]);
