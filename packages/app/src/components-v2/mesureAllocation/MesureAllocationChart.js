@@ -6,9 +6,9 @@ import { ComposedChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from
 const MesureAllocationChart = props => {
   const { mesures } = props;
   return (
-    <Card flexBasis="49.5%">
+    <Card p="4" flexBasis="49.25%">
       <Heading2>Répartition des mesures à date</Heading2>
-      <Box p="2" mt="3">
+      <Box mt="3">
         <ComposedChart
           layout="vertical"
           width={450}
