@@ -6,7 +6,7 @@ const Indicator = props => {
   const { error, loading, indicator } = props;
   if (error) {
     return (
-      <Card flexBasis="24%">
+      <Card height="100%">
         <Heading4>{props.title}</Heading4>
         <Heading4 color="error" mt={"7"}>
           aucune données disponible
@@ -17,7 +17,7 @@ const Indicator = props => {
 
   if (loading) {
     return (
-      <Card flexBasis="24%">
+      <Card height="100%">
         <Heading4>{props.title}</Heading4>
         <Box mt="7">
           <Spinner />
@@ -27,7 +27,7 @@ const Indicator = props => {
   }
 
   return (
-    <Card flexBasis={["100%", "24%"]}>
+    <Card height="100%">
       <Heading4>{props.title}</Heading4>
       <Heading0 mt={"7"}>{indicator}</Heading0>
     </Card>
