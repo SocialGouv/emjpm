@@ -34,7 +34,7 @@ export const MesureAllocation = () => {
 
   if (loading) {
     return (
-      <Card flexBasis="49%">
+      <Card>
         <Heading2>Répartition des mesures à date</Heading2>
         <Box my="5">
           <Spinner />
@@ -45,7 +45,7 @@ export const MesureAllocation = () => {
 
   if (error) {
     return (
-      <Card flexBasis="49%">
+      <Card>
         <Heading2>Répartition des mesures à date</Heading2>
         <Heading4>erreur</Heading4>
       </Card>

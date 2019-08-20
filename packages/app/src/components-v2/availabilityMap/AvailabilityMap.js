@@ -10,7 +10,7 @@ const AvailabilityMap = () => {
 
   if (loading) {
     return (
-      <Card p="4" flexBasis="49.25%">
+      <Card p="4" minHeight="450px">
         <Box>
           <Heading2>Cartes de la disponibilité des mesures</Heading2>
         </Box>
@@ -23,7 +23,7 @@ const AvailabilityMap = () => {
 
   if (loading) {
     return (
-      <Card p="4" flexBasis="49.25%">
+      <Card p="4">
         <Box>
           <Heading2>Cartes de la disponibilité des mesures</Heading2>
         </Box>
@@ -45,11 +45,11 @@ const AvailabilityMap = () => {
     });
 
   return (
-    <Card p="4" flexBasis="49.25%">
+    <Card p="4">
       <Box>
         <Heading2>Cartes de la disponibilité des mesures</Heading2>
       </Box>
-      <Box sx={{ position: "relative", p: "6" }}>
+      <Box sx={{ position: "relative", p: "2", mt: "2" }}>
         <MapComponent departements={departements} />
       </Box>
     </Card>
