@@ -1,42 +1,58 @@
 import React from "react";
-import { Box, Flex } from "rebass";
+
+import { Box } from "rebass";
+
+import {
+  FlexWrapper,
+  BoxWrapper,
+  fourColumnStyle,
+  twoColumnStyle
+} from "../../src/components-v2/commons";
+import { LayoutDirection } from "../../src/components-v2/layout";
+import { Filters } from "../../src/components-v2/filters";
+import { FiltersContextProvider } from "../../src/components-v2/filters/context";
+import { AvailabilityMap } from "../../src/components-v2/availabilityMap";
+import { MesureAllocation } from "../../src/components-v2/mesureAllocation";
+import { MesureEvolution } from "../../src/components-v2/mesureEvolution";
 import {
   NewMesureIndicator,
   ClosedMesureIndicator,
   OpenMesureIndicator,
   AvailableMesureIndicator
 } from "../../src/components-v2/directionIndicators";
-import { Filters } from "../../src/components-v2/filters";
-import { FiltersContextProvider } from "../../src/components-v2/filters/context";
-import { LayoutDirection } from "../../src/components-v2/layout";
-import { AvailabilityMap } from "../../src/components-v2/availabilityMap";
-import { MesureAllocation } from "../../src/components-v2/mesureAllocation";
-import { MesureEvolution } from "../../src/components-v2/mesureEvolution";
 
 const Mesures = () => {
   return (
     <FiltersContextProvider>
       <LayoutDirection>
-        <Filters />
-        <Box mt={5}>
-          <Flex justifyContent="space-between" flex={"wrap"}>
+        <BoxWrapper mt={5} px="1">
+          <Filters />
+        </BoxWrapper>
+        <FlexWrapper flexWrap={"wrap"} mt={5}>
+          <Box sx={fourColumnStyle}>
             <OpenMesureIndicator />
+          </Box>
+          <Box sx={fourColumnStyle}>
             <AvailableMesureIndicator />
+          </Box>
+          <Box sx={fourColumnStyle}>
             <NewMesureIndicator />
+          </Box>
+          <Box sx={fourColumnStyle}>
             <ClosedMesureIndicator />
-          </Flex>
-        </Box>
-        <Box mt={5}>
-          <Flex justifyContent="space-between" flex={"wrap"}>
+          </Box>
+        </FlexWrapper>
+        <FlexWrapper flexWrap={"wrap"} mt={5}>
+          <Box sx={twoColumnStyle}>
             <AvailabilityMap />
+          </Box>
+          <Box sx={twoColumnStyle}>
             <MesureAllocation />
-          </Flex>
-        </Box>
-        <Box mt={5}>
-          <Flex justifyContent="space-between" flex={"wrap"}>
-            <MesureEvolution />
-          </Flex>
-        </Box>
+          </Box>
+        </FlexWrapper>
+        <BoxWrapper mt={5} px="1">
+          <MesureEvolution />
+        </BoxWrapper>
       </LayoutDirection>
     </FiltersContextProvider>
   );

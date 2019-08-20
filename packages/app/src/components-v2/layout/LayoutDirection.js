@@ -6,11 +6,11 @@ import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import { useQuery } from "@apollo/react-hooks";
 
 import { GET_USERS } from "../../graphql/Queries";
-import { Wrapper } from "../commons";
 import { Header } from "../header";
 import { Footer } from "../footer";
 import { Navigation } from "../navigation";
 import { DropDownMenu } from "../dropDownMenu";
+import { BoxWrapper } from "../commons";
 
 const navigationLinks = [
   {
@@ -58,17 +58,15 @@ const LayoutDirection = props => {
           username={username}
           DropDownMenu={() => <DropDownMenu dropDownLinks={dropDownLinks} />}
         />
-        <Wrapper>
+        <BoxWrapper>
           <Navigation links={navigationLinks} />
-        </Wrapper>
+        </BoxWrapper>
       </Box>
-      <Wrapper>
-        <Box mt="6">{props.children}</Box>
-      </Wrapper>
+      {props.children}
       <Box bg="cardPrimary">
-        <Wrapper>
+        <BoxWrapper px="1">
           <Footer />
-        </Wrapper>
+        </BoxWrapper>
       </Box>
     </Fragment>
   );
