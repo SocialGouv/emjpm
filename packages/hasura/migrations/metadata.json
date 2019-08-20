@@ -4,7 +4,7 @@
     {
       "name": "whatever",
       "definition": {
-        "url": "http://host.docker.internal:4001/graphql",
+        "url": "%%WHATEVER_URL%%/graphql",
         "url_from_env": null,
         "headers": [],
         "forward_client_headers": true
@@ -24,9 +24,20 @@
           "role": "direction",
           "comment": null,
           "permission": {
-            "set": { "user_id": "x-hasura-User-Id" },
-            "check": { "user_id": { "_eq": "X-Hasura-User-Id" } },
-            "columns": ["id", "region_id", "user_id", "department_id"]
+            "set": {
+              "user_id": "x-hasura-User-Id"
+            },
+            "check": {
+              "user_id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            },
+            "columns": [
+              "id",
+              "region_id",
+              "user_id",
+              "department_id"
+            ]
           }
         }
       ],
@@ -35,8 +46,17 @@
           "role": "direction",
           "comment": null,
           "permission": {
-            "columns": ["id", "region_id", "user_id", "department_id"],
-            "filter": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+            "columns": [
+              "id",
+              "region_id",
+              "user_id",
+              "department_id"
+            ],
+            "filter": {
+              "user_id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         }
       ],
@@ -45,9 +65,20 @@
           "role": "direction",
           "comment": null,
           "permission": {
-            "set": { "user_id": "x-hasura-User-Id" },
-            "columns": ["id", "region_id", "user_id", "department_id"],
-            "filter": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+            "set": {
+              "user_id": "x-hasura-User-Id"
+            },
+            "columns": [
+              "id",
+              "region_id",
+              "user_id",
+              "department_id"
+            ],
+            "filter": {
+              "user_id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         }
       ],
@@ -213,7 +244,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "nom"],
+            "columns": [
+              "id",
+              "nom"
+            ],
             "filter": {}
           }
         },
@@ -222,7 +256,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "nom"],
+            "columns": [
+              "id",
+              "nom"
+            ],
             "filter": {}
           }
         },
@@ -231,7 +268,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "nom"],
+            "columns": [
+              "id",
+              "nom"
+            ],
             "filter": {}
           }
         },
@@ -240,7 +280,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "nom"],
+            "columns": [
+              "id",
+              "nom"
+            ],
             "filter": {}
           }
         },
@@ -249,7 +292,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "nom"],
+            "columns": [
+              "id",
+              "nom"
+            ],
             "filter": {}
           }
         }
@@ -262,12 +308,16 @@
       "table": "service_tis",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "ti_id" },
+          "using": {
+            "foreign_key_constraint_on": "ti_id"
+          },
           "name": "ti",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "antenne_id" },
+          "using": {
+            "foreign_key_constraint_on": "antenne_id"
+          },
           "name": "service_antenne",
           "comment": null
         }
@@ -301,7 +351,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "name"],
+            "columns": [
+              "id",
+              "name"
+            ],
             "filter": {}
           }
         },
@@ -310,7 +363,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "name"],
+            "columns": [
+              "id",
+              "name"
+            ],
             "filter": {}
           }
         },
@@ -319,7 +375,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "name"],
+            "columns": [
+              "id",
+              "name"
+            ],
             "filter": {}
           }
         },
@@ -328,7 +387,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "name"],
+            "columns": [
+              "id",
+              "name"
+            ],
             "filter": {}
           }
         },
@@ -337,7 +399,10 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "name"],
+            "columns": [
+              "id",
+              "name"
+            ],
             "filter": {}
           }
         }
@@ -360,7 +425,9 @@
       "table": "users",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "service_id" },
+          "using": {
+            "foreign_key_constraint_on": "service_id"
+          },
           "name": "service",
           "comment": null
         },
@@ -368,7 +435,9 @@
           "using": {
             "manual_configuration": {
               "remote_table": "mandataires",
-              "column_mapping": { "id": "user_id" }
+              "column_mapping": {
+                "id": "user_id"
+              }
             }
           },
           "name": "mandataire",
@@ -541,7 +610,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -565,7 +638,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -589,7 +666,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -613,7 +694,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -637,7 +722,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         }
       ],
@@ -663,7 +752,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -687,7 +780,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -711,7 +808,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -735,7 +836,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -759,7 +864,11 @@
               "type",
               "username"
             ],
-            "filter": { "id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         }
       ],
@@ -770,7 +879,9 @@
       "table": "departements",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "id_region" },
+          "using": {
+            "foreign_key_constraint_on": "id_region"
+          },
           "name": "region",
           "comment": null
         }
@@ -794,7 +905,12 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "id_region", "code", "nom"],
+            "columns": [
+              "id",
+              "id_region",
+              "code",
+              "nom"
+            ],
             "filter": {}
           }
         },
@@ -803,7 +919,12 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "id_region", "code", "nom"],
+            "columns": [
+              "id",
+              "id_region",
+              "code",
+              "nom"
+            ],
             "filter": {}
           }
         },
@@ -812,7 +933,12 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "id_region", "code", "nom"],
+            "columns": [
+              "id",
+              "id_region",
+              "code",
+              "nom"
+            ],
             "filter": {}
           }
         },
@@ -821,7 +947,12 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "id_region", "code", "nom"],
+            "columns": [
+              "id",
+              "id_region",
+              "code",
+              "nom"
+            ],
             "filter": {}
           }
         },
@@ -830,7 +961,12 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "id_region", "code", "nom"],
+            "columns": [
+              "id",
+              "id_region",
+              "code",
+              "nom"
+            ],
             "filter": {}
           }
         }
@@ -843,17 +979,23 @@
       "table": "commentaires",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "ti_id" },
+          "using": {
+            "foreign_key_constraint_on": "ti_id"
+          },
           "name": "ti",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "antenne_id" },
+          "using": {
+            "foreign_key_constraint_on": "antenne_id"
+          },
           "name": "service_antenne",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "mandataire_id" },
+          "using": {
+            "foreign_key_constraint_on": "mandataire_id"
+          },
           "name": "mandataire",
           "comment": null
         }
@@ -866,7 +1008,13 @@
           "permission": {
             "set": {},
             "check": {
-              "ti": { "user_tis": { "user_id": { "_eq": "X-Hasura-User-Id" } } }
+              "ti": {
+                "user_tis": {
+                  "user_id": {
+                    "_eq": "X-Hasura-User-Id"
+                  }
+                }
+              }
             },
             "columns": [
               "id",
@@ -893,7 +1041,13 @@
               "antenne_id"
             ],
             "filter": {
-              "ti": { "user_tis": { "user_id": { "_eq": "X-Hasura-User-Id" } } }
+              "ti": {
+                "user_tis": {
+                  "user_id": {
+                    "_eq": "X-Hasura-User-Id"
+                  }
+                }
+              }
             }
           }
         }
@@ -913,7 +1067,13 @@
               "antenne_id"
             ],
             "filter": {
-              "ti": { "user_tis": { "user_id": { "_eq": "X-Hasura-User-Id" } } }
+              "ti": {
+                "user_tis": {
+                  "user_id": {
+                    "_eq": "X-Hasura-User-Id"
+                  }
+                }
+              }
             }
           }
         }
@@ -924,7 +1084,13 @@
           "comment": null,
           "permission": {
             "filter": {
-              "ti": { "user_tis": { "user_id": { "_eq": "X-Hasura-User-Id" } } }
+              "ti": {
+                "user_tis": {
+                  "user_id": {
+                    "_eq": "X-Hasura-User-Id"
+                  }
+                }
+              }
             }
           }
         }
@@ -935,12 +1101,16 @@
       "table": "mandataire_etablissements",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "etablissement_id" },
+          "using": {
+            "foreign_key_constraint_on": "etablissement_id"
+          },
           "name": "etablissement",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "mandataire_id" },
+          "using": {
+            "foreign_key_constraint_on": "mandataire_id"
+          },
           "name": "mandataire",
           "comment": null
         }
@@ -953,9 +1123,18 @@
           "permission": {
             "set": {},
             "check": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             },
-            "columns": ["etablissement_id", "id", "mandataire_id", "created_at"]
+            "columns": [
+              "etablissement_id",
+              "id",
+              "mandataire_id",
+              "created_at"
+            ]
           }
         }
       ],
@@ -986,7 +1165,11 @@
               "created_at"
             ],
             "filter": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             }
           }
         }
@@ -1004,7 +1187,11 @@
               "created_at"
             ],
             "filter": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             }
           }
         }
@@ -1015,7 +1202,11 @@
           "comment": null,
           "permission": {
             "filter": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             }
           }
         }
@@ -1029,7 +1220,9 @@
           "using": {
             "manual_configuration": {
               "remote_table": "users",
-              "column_mapping": { "id": "service_id" }
+              "column_mapping": {
+                "id": "service_id"
+              }
             }
           },
           "name": "user",
@@ -1190,7 +1383,9 @@
       "table": "service_antenne",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "service_id" },
+          "using": {
+            "foreign_key_constraint_on": "service_id"
+          },
           "name": "service",
           "comment": null
         }
@@ -1265,27 +1460,37 @@
       "table": "mesures",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "ti_id" },
+          "using": {
+            "foreign_key_constraint_on": "ti_id"
+          },
           "name": "ti",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "department_id" },
+          "using": {
+            "foreign_key_constraint_on": "department_id"
+          },
           "name": "departement",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "etablissement_id" },
+          "using": {
+            "foreign_key_constraint_on": "etablissement_id"
+          },
           "name": "etablissementByEtablissementId",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "antenne_id" },
+          "using": {
+            "foreign_key_constraint_on": "antenne_id"
+          },
           "name": "service_antenne",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "mandataire_id" },
+          "using": {
+            "foreign_key_constraint_on": "mandataire_id"
+          },
           "name": "mandataire",
           "comment": null
         }
@@ -1298,7 +1503,11 @@
           "permission": {
             "set": {},
             "check": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             },
             "columns": [
               "date_ouverture",
@@ -1331,7 +1540,11 @@
           "permission": {
             "set": {},
             "check": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             },
             "columns": [
               "id",
@@ -1364,7 +1577,13 @@
           "permission": {
             "set": {},
             "check": {
-              "ti": { "user_tis": { "user_id": { "_eq": "X-Hasura-User-Id" } } }
+              "ti": {
+                "user_tis": {
+                  "user_id": {
+                    "_eq": "X-Hasura-User-Id"
+                  }
+                }
+              }
             },
             "columns": [
               "date_ouverture",
@@ -1453,7 +1672,11 @@
               "ville"
             ],
             "filter": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             }
           }
         },
@@ -1485,7 +1708,11 @@
               "antenne_id"
             ],
             "filter": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             }
           }
         },
@@ -1518,7 +1745,13 @@
               "ville"
             ],
             "filter": {
-              "ti": { "user_tis": { "user_id": { "_eq": "X-Hasura-User-Id" } } }
+              "ti": {
+                "user_tis": {
+                  "user_id": {
+                    "_eq": "X-Hasura-User-Id"
+                  }
+                }
+              }
             }
           }
         }
@@ -1553,7 +1786,11 @@
               "ville"
             ],
             "filter": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             }
           }
         },
@@ -1586,7 +1823,11 @@
               "ville"
             ],
             "filter": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             }
           }
         },
@@ -1622,10 +1863,18 @@
               "_and": [
                 {
                   "ti": {
-                    "user_tis": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+                    "user_tis": {
+                      "user_id": {
+                        "_eq": "X-Hasura-User-Id"
+                      }
+                    }
                   }
                 },
-                { "date_ouverture": { "_is_null": true } }
+                {
+                  "date_ouverture": {
+                    "_is_null": true
+                  }
+                }
               ]
             }
           }
@@ -1637,7 +1886,11 @@
           "comment": null,
           "permission": {
             "filter": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             }
           }
         },
@@ -1646,7 +1899,11 @@
           "comment": null,
           "permission": {
             "filter": {
-              "mandataire": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+              "mandataire": {
+                "user_id": {
+                  "_eq": "X-Hasura-User-Id"
+                }
+              }
             }
           }
         }
@@ -1657,12 +1914,16 @@
       "table": "user_role",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "role_id" },
+          "using": {
+            "foreign_key_constraint_on": "role_id"
+          },
           "name": "role",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "user_id" },
+          "using": {
+            "foreign_key_constraint_on": "user_id"
+          },
           "name": "user",
           "comment": null
         }
@@ -1675,7 +1936,11 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "role_id", "user_id"],
+            "columns": [
+              "id",
+              "role_id",
+              "user_id"
+            ],
             "filter": {}
           }
         },
@@ -1684,7 +1949,11 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "role_id", "user_id"],
+            "columns": [
+              "id",
+              "role_id",
+              "user_id"
+            ],
             "filter": {}
           }
         },
@@ -1693,7 +1962,11 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "role_id", "user_id"],
+            "columns": [
+              "id",
+              "role_id",
+              "user_id"
+            ],
             "filter": {}
           }
         },
@@ -1702,7 +1975,11 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "role_id", "user_id"],
+            "columns": [
+              "id",
+              "role_id",
+              "user_id"
+            ],
             "filter": {}
           }
         },
@@ -1711,7 +1988,11 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "role_id", "user_id"],
+            "columns": [
+              "id",
+              "role_id",
+              "user_id"
+            ],
             "filter": {}
           }
         }
@@ -1731,7 +2012,13 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "code_postal", "ville", "latitude", "longitude"],
+            "columns": [
+              "id",
+              "code_postal",
+              "ville",
+              "latitude",
+              "longitude"
+            ],
             "filter": {}
           }
         },
@@ -1740,7 +2027,13 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "code_postal", "ville", "latitude", "longitude"],
+            "columns": [
+              "id",
+              "code_postal",
+              "ville",
+              "latitude",
+              "longitude"
+            ],
             "filter": {}
           }
         },
@@ -1749,7 +2042,13 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "code_postal", "ville", "latitude", "longitude"],
+            "columns": [
+              "id",
+              "code_postal",
+              "ville",
+              "latitude",
+              "longitude"
+            ],
             "filter": {}
           }
         },
@@ -1758,7 +2057,13 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "code_postal", "ville", "latitude", "longitude"],
+            "columns": [
+              "id",
+              "code_postal",
+              "ville",
+              "latitude",
+              "longitude"
+            ],
             "filter": {}
           }
         },
@@ -1767,7 +2072,13 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "code_postal", "ville", "latitude", "longitude"],
+            "columns": [
+              "id",
+              "code_postal",
+              "ville",
+              "latitude",
+              "longitude"
+            ],
             "filter": {}
           }
         }
@@ -1787,7 +2098,13 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["id", "code_postal", "latitude", "longitude", "cities"],
+            "columns": [
+              "id",
+              "code_postal",
+              "latitude",
+              "longitude",
+              "cities"
+            ],
             "filter": {}
           }
         },
@@ -1796,7 +2113,13 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["latitude", "longitude", "id", "cities", "code_postal"],
+            "columns": [
+              "latitude",
+              "longitude",
+              "id",
+              "cities",
+              "code_postal"
+            ],
             "filter": {}
           }
         },
@@ -1805,7 +2128,13 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["latitude", "longitude", "id", "cities", "code_postal"],
+            "columns": [
+              "latitude",
+              "longitude",
+              "id",
+              "cities",
+              "code_postal"
+            ],
             "filter": {}
           }
         },
@@ -1814,7 +2143,13 @@
           "comment": null,
           "permission": {
             "allow_aggregations": false,
-            "columns": ["latitude", "longitude", "id", "cities", "code_postal"],
+            "columns": [
+              "latitude",
+              "longitude",
+              "id",
+              "cities",
+              "code_postal"
+            ],
             "filter": {}
           }
         },
@@ -1836,7 +2171,9 @@
       "table": "mandataires",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "user_id" },
+          "using": {
+            "foreign_key_constraint_on": "user_id"
+          },
           "name": "user",
           "comment": null
         }
@@ -1879,7 +2216,11 @@
           "comment": null,
           "permission": {
             "set": {},
-            "check": { "user_id": { "_eq": "X-Hasura-User-Id" } },
+            "check": {
+              "user_id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            },
             "columns": [
               "id",
               "etablissement",
@@ -1907,7 +2248,11 @@
           "comment": null,
           "permission": {
             "set": {},
-            "check": { "user_id": { "_eq": "X-Hasura-User-Id" } },
+            "check": {
+              "user_id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            },
             "columns": [
               "secretariat",
               "nb_secretariat",
@@ -1985,7 +2330,11 @@
               "telephone_portable",
               "ville"
             ],
-            "filter": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "user_id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -2013,7 +2362,11 @@
               "telephone_portable",
               "ville"
             ],
-            "filter": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "user_id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -2071,7 +2424,11 @@
               "telephone_portable",
               "ville"
             ],
-            "filter": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "user_id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         },
         {
@@ -2099,7 +2456,11 @@
               "telephone_portable",
               "ville"
             ],
-            "filter": { "user_id": { "_eq": "X-Hasura-User-Id" } }
+            "filter": {
+              "user_id": {
+                "_eq": "X-Hasura-User-Id"
+              }
+            }
           }
         }
       ],
@@ -2110,12 +2471,16 @@
       "table": "user_tis",
       "object_relationships": [
         {
-          "using": { "foreign_key_constraint_on": "ti_id" },
+          "using": {
+            "foreign_key_constraint_on": "ti_id"
+          },
           "name": "ti",
           "comment": null
         },
         {
-          "using": { "foreign_key_constraint_on": "user_id" },
+          "using": {
+            "foreign_key_constraint_on": "user_id"
+          },
           "name": "user",
           "comment": null
         }
@@ -2230,7 +2595,9 @@
           "using": {
             "manual_configuration": {
               "remote_table": "departements",
-              "column_mapping": { "department_id": "id" }
+              "column_mapping": {
+                "department_id": "id"
+              }
             }
           },
           "name": "department",
