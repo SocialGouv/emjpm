@@ -45,7 +45,7 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@db:5432/emjpm_dev
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/v2/auth/jwks"}'
-      WHATEVER_URL: http://host.docker.internal:4001
+      WHATEVER_URL: $WHATEVER_URL
 
 volumes:
   emjpm-pgdata:
