@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 
 import { FiltersContext } from "../filters/context";
-import { Indicator } from "./Indicator";
+import { Indicator } from "@socialgouv/emjpm-ui-components";
 // Replace me with the real query
 import { GET_OPEN_MESURE_NUMBER } from "../../graphql/Queries";
 
