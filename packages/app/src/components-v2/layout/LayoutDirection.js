@@ -3,14 +3,13 @@ import React, { Fragment } from "react";
 import { Box } from "rebass";
 import { Global, css } from "@emotion/core";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
+import { Header, DropDownMenu } from "@socialgouv/emjpm-ui-components";
 import { useQuery } from "@apollo/react-hooks";
 
 import { GET_USERS } from "../../graphql/Queries";
-import { Header } from "../header";
 import { Footer } from "../footer";
 import { Navigation } from "../navigation";
-import { DropDownMenu } from "../dropDownMenu";
-import { BoxWrapper } from "../commons";
+import { BoxWrapper, Link } from "../commons";
 
 const navigationLinks = [
   {
@@ -24,10 +23,9 @@ const navigationLinks = [
 ];
 
 const dropDownLinks = [
-  {
-    title: "Mon compte",
-    url: "/direction/mesures"
-  }
+  { title: "Centre d'assistance", url: "test" },
+  { title: "Profil", url: "test" },
+  { title: "Paramètres", url: "test" }
 ];
 
 const LayoutDirection = props => {
@@ -53,10 +51,15 @@ const LayoutDirection = props => {
           }
         `}
       />
-      <Box bg="cardPrimary">
+      <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
         <Header
+          Link={Link}
+          dropDownLinks={dropDownLinks}
+          disconnect={() => {
+            console.log("disconnect");
+          }}
+          DropDownMenu={DropDownMenu}
           username={username}
-          DropDownMenu={() => <DropDownMenu dropDownLinks={dropDownLinks} />}
         />
         <BoxWrapper>
           <Navigation links={navigationLinks} />

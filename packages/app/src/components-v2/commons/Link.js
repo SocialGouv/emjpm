@@ -17,7 +17,7 @@ const LinkStyle = () => {
 const Link = props => {
   return (
     <NextLink {...props}>
-      <RebassLink {...props} sx={LinkStyle()}>
+      <RebassLink sx={LinkStyle()} {...props}>
         {props.children}
       </RebassLink>
     </NextLink>
