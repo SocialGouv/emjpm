@@ -4,9 +4,9 @@
     "install": "node node_modules/husky/lib/installer/bin install",
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
-    "lint": "lerna run lint --parallel",
+    "lint": "lerna run lint --parallel --ignore @optional/*",
     "start": "lerna run start --parallel",
-    "test": "lerna run test --parallel --ignore @optional/e2e"
+    "test": "lerna run test --parallel --ignore @optional/*"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.0.0",
