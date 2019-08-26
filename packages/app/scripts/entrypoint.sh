@@ -10,13 +10,10 @@ ROOT_DIRECTORY="/usr/share/nginx/html"
 printenv >> env-vars
 
 while IFS='=' read -r KEY VALUE
-
 do
-  match="%%$KEY%%"
-  repl="$VALUE"
-
   # replace default environment variables value
-  find $ROOT_DIRECTORY -type f -name \*.html -exec sed -i -e "s|$match|$repl|g" {} +
+  find $ROOT_DIRECTORY -type f -name \*.html -exec \
+    sed -i -e "s|%%$KEY%%|$VALUE|g" {} +
 done <env-vars
 
 rm env-vars
