@@ -7,6 +7,7 @@ module.exports = flow(
   withCSS,
   withImages
 )({
+  exportTrailingSlash: true,
   webpack: config => {
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
     return config;
