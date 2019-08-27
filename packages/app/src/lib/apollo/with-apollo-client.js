@@ -1,9 +1,6 @@
 import cookie from "cookie";
-import Head from "next/head";
 import PropTypes from "prop-types";
 import React from "react";
-import { getDataFromTree } from "react-apollo";
-import { isBrowser } from "../../util";
 import initApollo from "./init-apollo";
 
 function parseCookies(req, options = {}) {
@@ -17,7 +14,7 @@ export default App => {
     };
 
     static async getInitialProps(context) {
-      const { Component, router, ctx } = context;
+      const { ctx } = context;
 
       const { req, res } = ctx;
 
