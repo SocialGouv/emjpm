@@ -38,6 +38,9 @@ $ yarn workspace <package-name> test
 
 # For example for "@emjpm/api"
 $ yarn workspace @emjpm/api test
+
+# executing the test in the same condition than the ci
+$ yarn workspace @emjpm/api test --maxWorkers=2 --coverage
 ```
 
 ## E2E tests
