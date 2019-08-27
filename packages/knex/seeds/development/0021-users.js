@@ -18,14 +18,6 @@ const getInsertData = (knex, { password, ...others }) => ({
 
 const USERS = [
   {
-    active: true,
-    email: "johnhenry@paris.com",
-    password: "test123456?",
-    prenom: "john",
-    type: "direction",
-    username: "johnhenry"
-  },
-  {
     email: "ud@ud.com",
     password: "johnson123",
     prenom: "Adrien",
@@ -115,6 +107,14 @@ const USERS = [
     reset_password_token: "LpWpzK4Jla9I87Aq",
     email: "marcel@paris.com",
     prenom: "Marcel"
+  },
+  {
+    active: true,
+    email: "johnhenry@paris.com",
+    password: "test123456?",
+    prenom: "john",
+    type: "direction",
+    username: "johnhenry"
   }
 ];
 
