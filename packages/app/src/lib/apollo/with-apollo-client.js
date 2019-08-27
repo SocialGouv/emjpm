@@ -1,9 +1,6 @@
 import cookie from "cookie";
-import Head from "next/head";
 import PropTypes from "prop-types";
 import React from "react";
-import { getDataFromTree } from "react-apollo";
-import { isBrowser } from "../../util";
 import initApollo from "./init-apollo";
 
 function parseCookies(req, options = {}) {
@@ -17,7 +14,7 @@ export default App => {
     };
 
     static async getInitialProps(context) {
-      const { Component, router, ctx } = context;
+      const { ctx } = context;
 
       const { req, res } = ctx;
 
@@ -39,27 +36,6 @@ export default App => {
         // When redirecting, the response is finished.
         // No point in continuing to render
         return {};
-      }
-
-      // Run all GraphQL queries in the component tree
-      // and extract the resulting data
-      if (!isBrowser()) {
-        try {
-          // Run all GraphQL queries
-          await getDataFromTree(
-            <App {...appProps} Component={Component} router={router} apolloClient={apollo} />
-          );
-        } catch (error) {
-          // Prevent Apollo Client GraphQL errors from crashing SSR.
-          // Handle them in components via the data.error prop:
-          // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
-          /* eslint-disable no-console */
-          console.error("Error while running `getDataFromTree`", error);
-        }
-
-        // getDataFromTree does not call componentWillUnmount
-        // head side effect therefore need to be cleared manually
-        Head.rewind();
       }
 
       // Extract query data from the Apollo store
