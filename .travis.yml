@@ -43,9 +43,9 @@ jobs:
       script:
         - yarn build --stream
         # - yarn lint --stream
-        - yarn workspace @emjpm/knex test --maxWorkers=2
-        - yarn workspace @emjpm/app test --maxWorkers=2 --coverage
-        - JWT_KEY=lol yarn workspace @emjpm/api test --maxWorkers=2 --coverage
+        - yarn workspace @emjpm/knex test
+        - yarn workspace @emjpm/app test --coverage
+        - JWT_KEY=lol yarn workspace @emjpm/api test --coverage
       after_script:
         - npx codecov
         - docker-compose down
