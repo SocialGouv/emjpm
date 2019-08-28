@@ -25,8 +25,8 @@ exports.createServiceAntenne = (body, service_id) =>
   ServiceAntenne.query().insert({
     headquarters: true,
     name: body.etablissement,
-    contact_firstname: body.nom,
-    contact_lastname: body.prenom,
+    contact_firstname: body.prenom,
+    contact_lastname: body.nom,
     contact_email: body.email,
     contact_phone: body.telephone,
     address_street: body.adresse,
