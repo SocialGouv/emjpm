@@ -34,8 +34,8 @@ const dropDownLinks = [
 
 const LayoutDirection = props => {
   const { data, error, loading } = useQuery(GET_USERS);
-  if (loading) return <div>test</div>;
-  if (error) return <div>test</div>;
+  if (loading) return <div>chargement</div>;
+  if (error) return <div>erreur</div>;
   const [user] = data.users;
   const { username } = user;
 
