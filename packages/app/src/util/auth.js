@@ -24,8 +24,8 @@ export const withAuthSync = WrappedComponent =>
 
       const componentProps =
         WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
-
-      return { ...componentProps, token };
+      const props = { ...componentProps, token };
+      return props;
     }
 
     constructor(props) {
@@ -56,8 +56,8 @@ export const withAuthSync = WrappedComponent =>
   };
 
 export const auth = ctx => {
-  const { token } = nextCookie(ctx);
-
+  const cookie = nextCookie(ctx);
+  const { token } = cookie;
   /*
    * This happens on server only, ctx.req is available means it's being
    * rendered on server. If we are on server and token is not available,
