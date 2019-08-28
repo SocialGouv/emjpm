@@ -2,7 +2,9 @@ const { validationResult } = require("express-validator");
 const { User } = require("../../model/User");
 const { Mandataire } = require("../../model/Mandataire");
 const { Service } = require("../../model/Service");
-const { UserTi } = require("../../model/UserTi");
+const { ServiceAntenne } = require("../../model/ServiceAntenne");
+const { ServiceTis } = require("../../model/ServiceTis");
+const { UserTis } = require("../../model/UserTis");
 const { UserRole } = require("../../model/UserRole");
 const { Role } = require("../../model/Role");
 const { Direction } = require("../../model/Direction");
@@ -59,22 +61,54 @@ const createService = body =>
       dispo_max: body.dispo_max
     });
 
-const updateUserService = (service, user) =>
-  User.query()
-    .update({ service_id: service.id })
-    .where("id", user.id);
+const createServiceAntenne = (body, service_id) =>
+  ServiceAntenne.query().insert({
+    headquarters: true,
+    name: body.etablissement,
+    contact_firstname: body.nom,
+    contact_lastname: body.prenom,
+    contact_email: body.email,
+    contact_phone: body.telephone,
+    address_street: body.adresse,
+    address_zip_code: body.code_postal,
+    address_city: body.ville,
+    mesures_max: body.dispo_max,
+    service_id: service_id
+  });
 
-const createUserTis = (body, user) => {
+const createServiceAntenneTis = (body, serviceAntenne_id) => {
   const { tis } = body;
   if (!tis || tis.length === 0) {
     return true;
   }
   Promise.all(
     tis.map(ti_id =>
-      UserTi.query()
+      ServiceTis.query()
+        .allowInsert("[antenne_id, ti_id]")
+        .insert({
+          antenne_id: serviceAntenne_id,
+          ti_id
+        })
+    )
+  );
+};
+
+const updateUserService = (service, user) =>
+  User.query()
+    .update({ service_id: service.id })
+    .where("id", user.id);
+
+const createUserTis = (body, user_id) => {
+  const { tis } = body;
+  if (!tis || tis.length === 0) {
+    return true;
+  }
+  Promise.all(
+    tis.map(ti_id =>
+      UserTis.query()
         .allowInsert("[user_id, ti_id]")
         .insert({
-          user_id: user.id,
+          user_id: user_id,
           ti_id
         })
     )
@@ -139,10 +173,12 @@ const postSignup = async (req, res) => {
       case "individuel":
       case "preprose":
         await createMandataire(req.body, user);
-        await createUserTis(req.body, user);
+        await createUserTis(req.body, user.id);
         break;
       case "service": {
         const service = await createService(req.body);
+        const serviceAntenne = await createServiceAntenne(req.body, service.id);
+        await createServiceAntenneTis(req.body, serviceAntenne.id);
         await updateUserService(service, user);
         break;
       }
