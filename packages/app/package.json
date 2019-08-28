@@ -13,7 +13,8 @@
     "lint:fix": "eslint pages src --fix",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
-    "build": "next build && next export"
+    "build": "next build && next export",
+    "generate": "hygen component new"
   },
   "keywords": [],
   "license": "ISC",
@@ -34,6 +35,7 @@
     "date-fns": "^1.30.1",
     "fuse.js": "^3.4.4",
     "graphql": "^14.4.2",
+    "hygen": "^4.0.9",
     "isomorphic-fetch": "^2.2.1",
     "isomorphic-unfetch": "^3.0.0",
     "leaflet": "^1.4.0",

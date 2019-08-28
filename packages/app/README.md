@@ -51,3 +51,9 @@ sudo docker rm emjpm-app
 # Lances le docker
 sudo docker run -d --restart always --name emjpm-app -p 80:80 emjpm-app
 ```
+
+## Generate component with hygen
+
+```
+yarn workspace @emjpm/app generate
+```
