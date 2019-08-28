@@ -10,7 +10,8 @@ const {
 // forceLogin: redirect user to /login when receiving a 401
 const apiFetch = (route, params, options = { forceLogin: true, apiVersion: "v1" }) => {
   const { apiVersion, forceLogin } = options;
-  const url = `${API_URL}/api/${apiVersion}${route}`;
+  const apiVersionFragment = apiVersion ? `/api/${apiVersion}` : "";
+  const url = `${API_URL}${apiVersionFragment}${route}`;
 
   const fetchParams = {
     method: "GET",
