@@ -5,6 +5,7 @@ import { Box, Flex } from "rebass";
 import { BoxWrapper } from "../../src/components-v2/commons";
 import { Heading2 } from "@socialgouv/emjpm-ui-core";
 import { LayoutServices } from "../../src/components-v2/layout";
+import { ServicesInformations } from "../../src/components-v2/servicesInformations";
 
 const Informations = () => {
   return (
@@ -23,7 +24,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Vos informations</Heading2>
-            Mesures list
+            <ServicesInformations />
           </Box>
           <Box
             sx={{
