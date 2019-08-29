@@ -622,6 +622,29 @@ Object {
 }
 `;
 
+exports[`service_admin table schema 1`] = `
+Object {
+  "id": Object {
+    "defaultValue": "nextval('service_admin_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "service_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`service_antenne table schema 1`] = `
 Object {
   "address_city": Object {
@@ -908,6 +931,29 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
+  },
+}
+`;
+
+exports[`user_antenne table schema 1`] = `
+Object {
+  "antenne_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "id": Object {
+    "defaultValue": "nextval('user_antenne_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
   },
 }
 `;
