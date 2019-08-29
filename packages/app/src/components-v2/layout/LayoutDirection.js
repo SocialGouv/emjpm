@@ -10,6 +10,7 @@ import { GET_USERS } from "../../graphql/Queries";
 import { Footer } from "../footer";
 import { Navigation } from "../navigation";
 import { BoxWrapper, Link } from "../commons";
+import { logout } from "../../util/auth";
 
 const navigationLinks = [
   {
@@ -59,9 +60,7 @@ const LayoutDirection = props => {
         <Header
           Link={Link}
           dropDownLinks={dropDownLinks}
-          disconnect={() => {
-            console.log("disconnect");
-          }}
+          disconnect={logout}
           DropDownMenu={DropDownMenu}
           username={username}
         />
