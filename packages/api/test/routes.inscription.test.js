@@ -36,7 +36,7 @@ describe("routes : inscription", () => {
       chai
         .request(server)
         .get("/api/v1/inscription/tis")
-        .then((res, req) => {
+        .then(res => {
           res.status.should.eql(200);
           res.type.should.eql("application/json");
           res.body.length.should.eql(2);
@@ -129,7 +129,7 @@ describe("routes : inscription", () => {
           latitude: 2,
           longitude: 2
         })
-        .then((res, req) => {
+        .then(res => {
           res.status.should.eql(200);
         }));
 
@@ -152,10 +152,10 @@ describe("routes : inscription", () => {
           latitude: 2,
           longitude: 2
         })
-        .then((res, req) => {
+        .then(res => {
           res.status.should.eql(200);
         })
-        .then(async (res, req) => {
+        .then(async () => {
           const user = await knex
             .table("users")
             .where("username", "testeur42")
@@ -186,10 +186,10 @@ describe("routes : inscription", () => {
           cabinet: "2A",
           tis: [1]
         })
-        .then((res, req) => {
+        .then(res => {
           res.status.should.eql(200);
         })
-        .then(async (res, req) => {
+        .then(async () => {
           const user = await knex
             .table("users")
             .where("username", "user_ti")
@@ -222,10 +222,10 @@ describe("routes : inscription", () => {
           latitude: 2,
           longitude: 2
         })
-        .then((res, req) => {
+        .then(res => {
           res.status.should.eql(200);
         })
-        .then(async (res, req) => {
+        .then(async () => {
           const user = await knex
             .table("users")
             .where("id", 42)

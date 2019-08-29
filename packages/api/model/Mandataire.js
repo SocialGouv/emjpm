@@ -42,7 +42,7 @@ class Mandataire extends Model {
   }
   static get relationMappings() {
     const { User } = require("./User");
-    const { ServiceAntenneModel } = require("./ServiceAntenneModel");
+    const { ServiceAntenneModel } = require("./ServiceAntenne");
     return {
       users: {
         relation: Model.BelongsToOneRelation,
