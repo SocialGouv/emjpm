@@ -5,7 +5,7 @@ const jwtConfig = require("../config/jwt");
 const { Model } = require("objection");
 
 const { Role } = require("./Role");
-const { UserTi } = require("./UserTi");
+const { UserTis } = require("./UserTis");
 
 Model.knex(knexConnection);
 
@@ -53,7 +53,7 @@ class User extends Model {
       },
       tis: {
         relation: Model.ManyToManyRelation,
-        modelClass: UserTi,
+        modelClass: UserTis,
         join: {
           from: "users.id",
           through: {

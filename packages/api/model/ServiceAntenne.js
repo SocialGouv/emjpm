@@ -3,7 +3,7 @@ const { Model } = require("objection");
 
 Model.knex(knexConnection);
 
-class ServiceAntenneModel extends Model {
+class ServiceAntenne extends Model {
   static get tableName() {
     return "service_antenne";
   }
@@ -19,6 +19,33 @@ class ServiceAntenneModel extends Model {
         id: { type: "integer" },
         name: {
           type: "string"
+        },
+        headquarter: {
+          type: "boolean"
+        },
+        contact_firstname: {
+          type: "string"
+        },
+        contact_lastname: {
+          type: "string"
+        },
+        contact_email: {
+          type: "string"
+        },
+        telephone: {
+          type: "string"
+        },
+        adresse: {
+          type: "string"
+        },
+        code_postal: {
+          type: "string"
+        },
+        ville: {
+          type: "string"
+        },
+        mesure_max: {
+          type: "integer"
         }
       }
     };
@@ -48,4 +75,4 @@ class ServiceAntenneModel extends Model {
   }
 }
 
-module.exports = { ServiceAntenneModel };
+module.exports = { ServiceAntenne };

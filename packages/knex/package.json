@@ -8,6 +8,7 @@
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seeds": "knex seed:run",
+    "migration:create": "knex migrate:make",
     "test": "jest"
   },
   "keywords": [],

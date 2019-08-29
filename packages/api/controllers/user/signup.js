@@ -1,31 +1,20 @@
 const { validationResult } = require("express-validator");
 const { User } = require("../../model/User");
 const { Mandataire } = require("../../model/Mandataire");
-const { Service } = require("../../model/Service");
-const { UserTi } = require("../../model/UserTi");
+const { UserTis } = require("../../model/UserTis");
 const { UserRole } = require("../../model/UserRole");
 const { Role } = require("../../model/Role");
 const { Direction } = require("../../model/Direction");
 const { errorHandler } = require("../../db/errors");
 const { inscriptionEmail } = require("../../email/inscription");
-const { getTiById } = require("../../db/queries/tis");
-
-// TODO: Move me into an util file
-const getTisNames = async tis => {
-  const getEtablissementByTi = id =>
-    getTiById(id).then(json => json.etablissement);
-  if (tis) {
-    const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(
-      ", "
-    );
-    return tiNames;
-  }
-};
-
-/**
- * POST /signup
- * Create a new local account
- */
+const { getTisNames } = require("./utils/tis");
+const {
+  createService,
+  createServiceAntenne,
+  createServiceAntenneTis,
+  createUserAntenne,
+  createServiceAdmin
+} = require("./utils/service");
 
 const createMandataire = (body, user) =>
   Mandataire.query()
@@ -42,39 +31,17 @@ const createMandataire = (body, user) =>
       ville: body.ville
     });
 
-const createService = body =>
-  Service.query()
-    .allowInsert(
-      "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
-    )
-    .insert({
-      etablissement: body.etablissement,
-      nom: body.nom,
-      prenom: body.prenom,
-      email: body.email,
-      telephone: body.telephone,
-      adresse: body.adresse,
-      code_postal: body.code_postal,
-      ville: body.ville,
-      dispo_max: body.dispo_max
-    });
-
-const updateUserService = (service, user) =>
-  User.query()
-    .update({ service_id: service.id })
-    .where("id", user.id);
-
-const createUserTis = (body, user) => {
+const createUserTis = (body, user_id) => {
   const { tis } = body;
   if (!tis || tis.length === 0) {
     return true;
   }
   Promise.all(
     tis.map(ti_id =>
-      UserTi.query()
+      UserTis.query()
         .allowInsert("[user_id, ti_id]")
         .insert({
-          user_id: user.id,
+          user_id: user_id,
           ti_id
         })
     )
@@ -104,6 +71,11 @@ const createRole = async (userId, type) => {
       });
   }
 };
+
+/**
+ * POST /signup
+ * Create a new local account
+ */
 
 const postSignup = async (req, res) => {
   const errors = validationResult(req);
@@ -139,18 +111,21 @@ const postSignup = async (req, res) => {
       case "individuel":
       case "preprose":
         await createMandataire(req.body, user);
-        await createUserTis(req.body, user);
+        await createUserTis(req.body, user.id);
         break;
       case "service": {
         const service = await createService(req.body);
-        await updateUserService(service, user);
+        const serviceAntenne = await createServiceAntenne(req.body, service.id);
+        await createUserAntenne(user.id, serviceAntenne.id);
+        await createServiceAdmin(user.id, service.id);
+        await createServiceAntenneTis(req.body, serviceAntenne.id);
         break;
       }
       case "ti":
         await User.query()
           .update({ cabinet })
           .where("id", user.id);
-        await createUserTis(req.body, user);
+        await createUserTis(req.body, user.id);
         break;
       case "direction": {
         await createRole(user.id, directionType);

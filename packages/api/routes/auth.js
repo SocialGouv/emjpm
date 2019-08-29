@@ -10,6 +10,7 @@ const {
   getUserWithValidToken
 } = require("../db/queries/users");
 
+const inscription = require("../db/queries/inscription");
 const { resetPasswordEmail } = require("../email/password-reset");
 const { confirmationPasswordEmail } = require("../email/password-confirmation");
 
@@ -164,6 +165,15 @@ router.post("/reset_password", (req, res, next) => {
       res.status(200).json();
     })
     .catch(next);
+});
+
+router.get("/tis", async (req, res, next) => {
+  try {
+    const data = await inscription.getTiByRegion();
+    res.json(data);
+  } catch (e) {
+    next(e);
+  }
 });
 
 module.exports = router;
