@@ -125,7 +125,7 @@ const postSignup = async (req, res) => {
         await User.query()
           .update({ cabinet })
           .where("id", user.id);
-        await createUserTis(req.body, user);
+        await createUserTis(req.body, user.id);
         break;
       case "direction": {
         await createRole(user.id, directionType);
