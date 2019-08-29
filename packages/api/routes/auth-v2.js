@@ -3,7 +3,6 @@ const router = express.Router();
 const { check, body } = require("express-validator");
 const postLogin = require("../controllers/user/login");
 const postSignup = require("../controllers/user/signup");
-const inscription = require("../db/queries/inscription");
 
 const jwkController = require("../controllers/jwk");
 
@@ -56,15 +55,6 @@ router.post(
   ],
   postSignup
 );
-
-router.get("/tis", async (req, res, next) => {
-  try {
-    const data = await inscription.getTiByRegion();
-    res.json(data);
-  } catch (e) {
-    next(e);
-  }
-});
 
 router.get("/jwks", jwkController.getJwks);
 

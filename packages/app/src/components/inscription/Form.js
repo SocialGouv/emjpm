@@ -47,9 +47,8 @@ const FormSelector = ({ label, value, onChange }) => (
 const getTis = () =>
   // only fetch client-side
   (isBrowser() &&
-    apiFetch("/inscription/tis", null, {
-      forceLogin: false,
-      apiVersion: "v1"
+    apiFetch("/auth/tis", null, {
+      forceLogin: false
     })) ||
   Promise.resolve();
 
