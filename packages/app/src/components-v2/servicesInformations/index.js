@@ -13,11 +13,10 @@ const ServicesInformations = () => {
   if (loading) {
     return <div>loading</div>;
   }
+
   if (error) {
     return <div>error</div>;
   }
-
-  console.log(data);
 
   const { service_antenne } = data;
 
