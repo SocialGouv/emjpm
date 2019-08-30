@@ -7,8 +7,8 @@ import {
   BoxWrapper,
   fourColumnStyle,
   twoColumnStyle
-} from "../../src/components-v2/commons";
-import { LayoutDirection } from "../../src/components-v2/layout";
+} from "@socialgouv/emjpm-ui-core";
+import { LayoutDirection } from "../../src/presentationalComponents/layout";
 import { Filters } from "../../src/components-v2/filters";
 import { FiltersContextProvider } from "../../src/components-v2/filters/context";
 import { AvailabilityMap } from "../../src/components-v2/availabilityMap";

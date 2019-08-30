@@ -8,9 +8,9 @@ import {
   FlexWrapper,
   fourColumnStyle
   // twoColumnStyle
-} from "../../src/components-v2/commons";
+} from "@socialgouv/emjpm-ui-core";
 import { Filters } from "../../src/components-v2/filters";
-import { LayoutDirection } from "../../src/components-v2/layout";
+import { LayoutDirection } from "../../src/presentationalComponents/layout";
 import {
   ServicesIndicator,
   MandatairesIndicator,

@@ -3,9 +3,9 @@ import React from "react";
 import { Box } from "rebass";
 
 import { FiltersContextProvider } from "../../src/components-v2/filters/context";
-import { BoxWrapper, FlexWrapper, fourColumnStyle } from "../../src/components-v2/commons";
+import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@socialgouv/emjpm-ui-core";
 import { Filters } from "../../src/components-v2/filters";
-import { LayoutDirection } from "../../src/components-v2/layout";
+import { LayoutDirection } from "../../src/presentationalComponents/layout";
 import { ServicesIndicator } from "../../src/components-v2/directionIndicators";
 
 const DemographicDatas = () => {

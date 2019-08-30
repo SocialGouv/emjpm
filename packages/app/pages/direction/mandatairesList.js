@@ -1,7 +1,7 @@
 import React from "react";
 import { FiltersContextProvider } from "../../src/components-v2/filters/context";
 import { Filters } from "../../src/components-v2/filters";
-import { LayoutDirection } from "../../src/components-v2/layout";
+import { LayoutDirection } from "../../src/presentationalComponents/layout";
 
 const Mandataires = () => {
   return (
