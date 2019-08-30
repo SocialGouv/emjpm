@@ -72,6 +72,11 @@ const createRole = async (userId, type) => {
   }
 };
 
+const updateUserService = (service, user) =>
+  User.query()
+    .update({ service_id: service.id })
+    .where("id", user.id);
+
 /**
  * POST /signup
  * Create a new local account
@@ -119,6 +124,7 @@ const postSignup = async (req, res) => {
         await createUserAntenne(user.id, serviceAntenne.id);
         await createServiceAdmin(user.id, service.id);
         await createServiceAntenneTis(req.body, serviceAntenne.id);
+        await updateUserService(service, user);
         break;
       }
       case "ti":

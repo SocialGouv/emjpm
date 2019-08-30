@@ -98,7 +98,9 @@ class User extends Model {
     return {
       "x-hasura-allowed-roles": this.getRoles(),
       "x-hasura-default-role": this.getDefaultRole(),
-      "x-hasura-user-id": `${this.id}`
+      "x-hasura-user-id": `${this.id}`,
+      "x-hasura-service-ids": `${this.id}`,
+      "x-hasura-antenne-ids": `${this.id}`
     };
   }
 

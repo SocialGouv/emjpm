@@ -74,8 +74,3 @@ exports.createServiceAdmin = async (userId, serviceId) => {
       });
   }
 };
-
-// export.updateUserService = (service, user) =>
-//   User.query()
-//     .update({ service_id: service.id })
-//     .where("id", user.id);
