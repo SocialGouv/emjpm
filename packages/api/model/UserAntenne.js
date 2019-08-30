@@ -11,6 +11,17 @@ class UserAntenne extends Model {
   static get idColumn() {
     return "id";
   }
+
+  static get jsonSchema() {
+    return {
+      type: "object",
+      properties: {
+        id: { type: "integer" },
+        antenne_id: { type: "integer" },
+        user_id: { type: "integer" }
+      }
+    };
+  }
 }
 
 module.exports = { UserAntenne };

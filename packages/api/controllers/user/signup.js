@@ -121,10 +121,15 @@ const postSignup = async (req, res) => {
       case "service": {
         const service = await createService(req.body);
         const serviceAntenne = await createServiceAntenne(req.body, service.id);
-        await createUserAntenne(user.id, serviceAntenne.id);
+        await createUserAntenne(user.id, [{ id: serviceAntenne.id }]);
         await createServiceAdmin(user.id, service.id);
         await createServiceAntenneTis(req.body, serviceAntenne.id);
         await updateUserService(service, user);
+        break;
+      }
+      case "serviceAntenne": {
+        await createUserAntenne(user.id, req.body.antennes);
+        await updateUserService(req.body.serviceId, user);
         break;
       }
       case "ti":
