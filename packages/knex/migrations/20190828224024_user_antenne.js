@@ -3,7 +3,6 @@ exports.up = function(knex) {
     table.increments("id").primary();
     table
       .integer("user_id")
-      .unique()
       .unsigned()
       .index()
       .references("id")
