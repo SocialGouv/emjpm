@@ -1,21 +1,21 @@
 import React from "react";
 
 import { Box } from "rebass";
-
-import { FiltersContextProvider } from "../../src/components-v2/filters/context";
 import {
   BoxWrapper,
   FlexWrapper,
   fourColumnStyle
   // twoColumnStyle
-} from "../../src/components-v2/commons";
-import { Filters } from "../../src/components-v2/filters";
-import { LayoutDirection } from "../../src/components-v2/layout";
+} from "@socialgouv/emjpm-ui-core";
+
+import { LayoutDirection } from "../../src/components-v2/Layout";
+import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
+import { Filters } from "../../src/components-v2/Filters";
 import {
   ServicesIndicator,
   MandatairesIndicator,
   EtablissementIndicator
-} from "../../src/components-v2/directionIndicators";
+} from "../../src/components-v2/Indicators";
 
 const Mandataires = () => {
   return (
