@@ -1,25 +1,25 @@
 import React from "react";
 
 import { Box } from "rebass";
-
 import {
   FlexWrapper,
   BoxWrapper,
   fourColumnStyle,
   twoColumnStyle
 } from "@socialgouv/emjpm-ui-core";
-import { LayoutDirection } from "../../src/presentationalComponents/layout";
-import { Filters } from "../../src/components-v2/filters";
-import { FiltersContextProvider } from "../../src/components-v2/filters/context";
-import { AvailabilityMap } from "../../src/components-v2/availabilityMap";
-import { MesureAllocation } from "../../src/components-v2/mesureAllocation";
-import { MesureEvolution } from "../../src/components-v2/mesureEvolution";
+
+import { LayoutDirection } from "../../src/components-v2/Layout";
+import { Filters } from "../../src/components-v2/Filters";
+import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
+import { AvailabilityMap } from "../../src/components-v2/AvailabilityMap";
+import { MesureAllocation } from "../../src/components-v2/MesureAllocation";
+import { MesureEvolution } from "../../src/components-v2/MesureEvolution";
 import {
   NewMesureIndicator,
   ClosedMesureIndicator,
   OpenMesureIndicator,
   AvailableMesureIndicator
-} from "../../src/components-v2/directionIndicators";
+} from "../../src/components-v2/Indicators";
 
 const Mesures = () => {
   return (

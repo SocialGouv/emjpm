@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Box } from "rebass";
 import { Card, Heading2, Spinner } from "@socialgouv/emjpm-ui-core";
 import MapComponent from "./Map";
-import { GET_DEPARTEMENTS_AVAILABILITY } from "../../graphql/Queries";
+import { GET_DEPARTEMENTS_AVAILABILITY } from "./queries";
 
 const AvailabilityMap = () => {
   const { data, loading } = useQuery(GET_DEPARTEMENTS_AVAILABILITY);

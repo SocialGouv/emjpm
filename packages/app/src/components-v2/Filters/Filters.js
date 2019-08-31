@@ -4,9 +4,9 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { Box, Flex, Text } from "rebass";
 
-import { GET_REGIONS } from "../../graphql/Queries";
 import { departementToOptions, regionsToOptions } from "../../util/option/OptionUtil";
 import { FiltersContext } from "./context";
+import { GET_REGIONS } from "./queries";
 
 const TextStyle = {
   textTransform: "uppercase",

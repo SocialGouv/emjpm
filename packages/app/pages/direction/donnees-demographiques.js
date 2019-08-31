@@ -1,12 +1,12 @@
 import React from "react";
 
 import { Box } from "rebass";
-
-import { FiltersContextProvider } from "../../src/components-v2/filters/context";
 import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@socialgouv/emjpm-ui-core";
-import { Filters } from "../../src/components-v2/filters";
-import { LayoutDirection } from "../../src/presentationalComponents/layout";
-import { ServicesIndicator } from "../../src/components-v2/directionIndicators";
+
+import { LayoutDirection } from "../../src/components-v2/Layout";
+import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
+import { Filters } from "../../src/components-v2/Filters";
+import { ServicesIndicator } from "../../src/components-v2/Indicators";
 
 const DemographicDatas = () => {
   return (

@@ -1,11 +1,10 @@
 import React from "react";
 
 import { Box, Flex } from "rebass";
-
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
-import { ServicesFilters } from "../../src/presentationalComponents/servicesFilters";
-import { LayoutServices } from "../../src/presentationalComponents/layout";
+import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
+import { LayoutServices } from "../../src/components-v2/Layout";
 
 const AddMesures = () => {
   return (

@@ -2,8 +2,9 @@ import React from "react";
 import { Box, Text, Flex } from "rebass";
 import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 import { InformationsStyle } from "./style";
-import { LinkButton } from "../commons/LinkButton";
 import { MailOutline, Smartphone } from "styled-icons/material";
+
+import { LinkButton } from "../Commons";
 
 const Informations = props => {
   const { service_antenne } = props;

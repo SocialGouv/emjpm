@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
+
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import { Box } from "rebass";
+
 import { MesureAllocationChart } from "./MesureAllocationChart";
-import { FiltersContext } from "../filters/context";
-import { GET_CATEGORY_STATS } from "../../graphql/Queries";
+import { FiltersContext } from "../Filters/context";
+import { GET_CATEGORY_STATS } from "./queries";
 
 const type = {
   TUTELLE: "Tutelle",

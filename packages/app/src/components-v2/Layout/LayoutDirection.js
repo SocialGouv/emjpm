@@ -8,9 +8,9 @@ import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { useQuery } from "@apollo/react-hooks";
 
 import { GET_USERS } from "./queries";
-import { Footer } from "../footer";
-import { Navigation } from "../navigation";
-import { Link } from "../commons";
+import { Footer } from "../Footer";
+import { Navigation } from "../Navigation";
+import { Link } from "../Commons";
 import { logout } from "../../util/auth";
 
 const navigationLinks = [

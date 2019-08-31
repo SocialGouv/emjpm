@@ -1,3 +1,3 @@
-import ServicesRoot from "./mesure-list/MesureList";
+import ServicesRoot from "./MesureList/MesureList";
 
 export default ServicesRoot;

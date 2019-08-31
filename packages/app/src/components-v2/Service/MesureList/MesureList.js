@@ -1,6 +1,6 @@
 import React from "react";
 import { Query } from "react-apollo";
-import { allMesures } from "../../../graphql/Queries";
+import { allMesures } from "../queries";
 
 export default function MesureList() {
   return (

@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-
 import { useQuery } from "@apollo/react-hooks";
-
-import { FiltersContext } from "../filters/context";
+import React, { useContext } from "react";
 import { Indicator } from "@socialgouv/emjpm-ui-components";
-// Replace me with the real query
-import { GET_OPEN_MESURE_NUMBER } from "../../graphql/Queries";
 
-const ServicesIndicator = () => {
+import { FiltersContext } from "../Filters/context";
+import { GET_NEW_MESURE_NUMBER } from "./queries";
+
+const NewMesureIndicator = () => {
   const {
     selectedRegionalValue,
     selectedDepartementValue,
@@ -15,8 +13,7 @@ const ServicesIndicator = () => {
     endDateValue
   } = useContext(FiltersContext);
 
-  // Replace me with the real query
-  const { error, data, loading } = useQuery(GET_OPEN_MESURE_NUMBER, {
+  const { error, data, loading } = useQuery(GET_NEW_MESURE_NUMBER, {
     variables: {
       start: startDateValue,
       end: endDateValue,
@@ -29,10 +26,10 @@ const ServicesIndicator = () => {
     <Indicator
       error={error}
       loading={loading}
-      title="Services mandataires"
-      indicator={data.openMesureNumber}
+      title="Nouvelles mesures"
+      indicator={data.newMesureNumber}
     />
   );
 };
 
-export { ServicesIndicator };
+export { NewMesureIndicator };

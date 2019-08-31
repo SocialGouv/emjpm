@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Text, Flex } from "rebass";
 import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 
-import { LinkButton } from "../commons/LinkButton";
+import { LinkButton } from "../Commons";
 
 import { PreferencesPanelStyle } from "./style";
 

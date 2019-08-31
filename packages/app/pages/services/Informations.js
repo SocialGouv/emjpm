@@ -1,15 +1,12 @@
 import React from "react";
 
 import { Box, Flex } from "rebass";
-
 import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 
-import { LayoutServices } from "../../src/presentationalComponents/layout";
-
-import { ServicesInformations } from "../../src/components-v2/servicesInformations";
-
-import { PreferencesPanel } from "../../src/presentationalComponents/PreferencesPanel";
-import { Antennes } from "../../src/presentationalComponents/Antennes";
+import { LayoutServices } from "../../src/components-v2/Layout";
+import { ServicesInformations } from "../../src/components-v2/ServicesInformations";
+import { PreferencesPanel } from "../../src/components-v2/PreferencesPanel";
+import { Antennes } from "../../src/components-v2/Antennes";
 
 const Informations = () => {
   return (

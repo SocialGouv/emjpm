@@ -1,7 +1,8 @@
 import React from "react";
 import { Flex, Box } from "rebass";
 import { BoxWrapper, Logo } from "@socialgouv/emjpm-ui-core";
-import { List, ListItem, ListTitle, Link } from "../commons";
+
+import { List, ListItem, ListTitle, Link } from "../Commons";
 
 function Footer() {
   return (
