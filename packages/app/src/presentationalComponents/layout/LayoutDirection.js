@@ -4,12 +4,13 @@ import { Box } from "rebass";
 import { Global, css } from "@emotion/core";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import { Header, DropDownMenu } from "@socialgouv/emjpm-ui-components";
+import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { useQuery } from "@apollo/react-hooks";
 
 import { GET_USERS } from "./queries";
 import { Footer } from "../footer";
 import { Navigation } from "../navigation";
-import { BoxWrapper, Link } from "../commons";
+import { Link } from "../commons";
 import { logout } from "../../util/auth";
 
 const navigationLinks = [

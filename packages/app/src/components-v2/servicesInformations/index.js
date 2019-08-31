@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { Informations } from "../../presentationalComponents/informations";
 
-const ServicesInformations = () => {
+const ServicesInformations = props => {
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
       serviceId: 1
@@ -20,7 +20,7 @@ const ServicesInformations = () => {
 
   const { service_antenne } = data;
 
-  return <Informations service_antenne={service_antenne} />;
+  return <Informations {...props} service_antenne={service_antenne} />;
 };
 
 export { ServicesInformations };

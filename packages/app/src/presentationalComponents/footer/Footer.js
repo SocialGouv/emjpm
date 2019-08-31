@@ -1,6 +1,7 @@
 import React from "react";
 import { Flex, Box } from "rebass";
-import { BoxWrapper, List, ListItem, ListTitle, Link, Logo } from "../commons";
+import { BoxWrapper, Logo } from "@socialgouv/emjpm-ui-core";
+import { List, ListItem, ListTitle, Link } from "../commons";
 
 function Footer() {
   return (
@@ -8,7 +9,7 @@ function Footer() {
       <BoxWrapper>
         <Flex justifyContent="space-between" flexWrap="wrap">
           <Box mb={[3, 0]} flexBasis={["100%", "13%"]}>
-            <Logo />
+            <Logo hasTitle={false} />
           </Box>
           <List flexBasis={["100%", "27%"]}>
             <ListTitle>A propos de nous</ListTitle>

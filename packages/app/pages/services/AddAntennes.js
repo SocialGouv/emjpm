@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
-import { ServicesFilters } from "../../src/components-v2/servicesFilters";
+import { ServicesFilters } from "../../src/presentationalComponents/servicesFilters";
 import { LayoutServices } from "../../src/presentationalComponents/layout";
 
 const AddAntennes = () => {
