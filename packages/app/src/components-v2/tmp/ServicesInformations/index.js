@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_SERVICES_ANTENNE } from "./queries";
-import { Informations } from "../../presentationalComponents/informations";
+import { Informations } from "../informations";
 
 const ServicesInformations = props => {
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
