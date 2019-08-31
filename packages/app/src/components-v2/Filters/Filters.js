@@ -7,19 +7,10 @@ import { Box, Flex, Text } from "rebass";
 import { departementToOptions, regionsToOptions } from "../../util/option/OptionUtil";
 import { FiltersContext } from "./context";
 import { GET_REGIONS } from "./queries";
-
-const TextStyle = {
-  textTransform: "uppercase",
-  fontFamily: "body",
-  fontSize: "11px",
-  fontWeight: "600",
-  letterSpacing: ".76px",
-  lineHeight: "44px",
-  mr: 1
-};
+import { TextStyle, BoxStyle, SimpleBoxStyle } from "./style";
 
 const Filters = () => {
-  const { data: regionsData, loading } = useQuery(GET_REGIONS);
+  const { data: regionsData, loading, error } = useQuery(GET_REGIONS);
   const {
     selectedRegionalValue,
     changeRegionalValue,
@@ -35,6 +26,10 @@ const Filters = () => {
 
   if (loading) {
     return <div>loading</div>;
+  }
+
+  if (error) {
+    return <div>error</div>;
   }
 
   const regionalOptions = regionsToOptions(regionsData.regions);
@@ -53,7 +48,7 @@ const Filters = () => {
         <Box>
           <Flex>
             <Text sx={TextStyle}>Affiner</Text>
-            <Box width="170px" mr={1}>
+            <Box sx={BoxStyle}>
               <Select
                 size="small"
                 options={regionalOptions}
@@ -62,7 +57,7 @@ const Filters = () => {
                 onChange={selectedOption => selectRegion(selectedOption)}
               />
             </Box>
-            <Box width="170px" mr={1}>
+            <Box sx={BoxStyle}>
               <Select
                 size="small"
                 options={departmentOptions}
@@ -75,7 +70,7 @@ const Filters = () => {
         </Box>
         <Box>
           <Flex>
-            <Box width="170px" mr={1}>
+            <Box sx={BoxStyle}>
               <Input
                 value={startDateValue}
                 spellCheck="false"
@@ -89,7 +84,7 @@ const Filters = () => {
                 placeholder="du"
               />
             </Box>
-            <Box width="170px">
+            <Box sx={SimpleBoxStyle}>
               <Input
                 value={endDateValue}
                 spellCheck="false"

@@ -1,82 +1,52 @@
 import React from "react";
 import { Box, Text, Flex } from "rebass";
 import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
-import { InformationsStyle } from "./style";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
 import { LinkButton } from "../Commons";
-
+import {
+  titleStyle,
+  innerTextStyle,
+  topTextStyle,
+  iconTextStyle,
+  boxStyle,
+  flexStyle
+} from "./style";
 const Informations = props => {
   const { service_antenne } = props;
 
   const [service] = service_antenne;
 
   return (
-    <Box sx={InformationsStyle} {...props}>
+    <Box {...props}>
       <Card p="5">
-        <Text fontSize="2" fontStyle="italic" color="mediumGray">
-          Service
-        </Text>
+        <Text sx={titleStyle}>Service</Text>
         <Heading3>{service.name}</Heading3>
-        <Flex
-          sx={{
-            mt: 5,
-            flexWrap: "wrap"
-          }}
-        >
-          <Box
-            sx={{
-              flexGrow: 1
-            }}
-          >
+        <Flex sx={flexStyle}>
+          <Box sx={boxStyle}>
             <Heading5>Contact</Heading5>
             <Flex mt="2">
               <MailOutline size="16" />
-              <Text ml="1" color="mediumGray" fontWeight="600">
-                {service.contact_email}
-              </Text>
+              <Text sx={iconTextStyle}>{service.contact_email}</Text>
             </Flex>
             <Flex mt="1">
               <Smartphone size="16" />
-              <Text ml="1" color="mediumGray" fontWeight="600">
-                {service.contact_phone}
-              </Text>
+              <Text sx={iconTextStyle}>{service.contact_phone}</Text>
             </Flex>
-
             <Heading5 mt="5">Informations</Heading5>
-            <Text mt="2" color="mediumGray" fontWeight="600">
-              {service.address_street}
-            </Text>
-            <Text mt="1" color="mediumGray" fontWeight="600">
-              {service.address_zip_code}
-            </Text>
-            <Text mt="1" color="mediumGray" fontWeight="600">
-              {service.address_city}
-            </Text>
+            <Text sx={topTextStyle}>{service.address_street}</Text>
+            <Text sx={innerTextStyle}>{service.address_zip_code}</Text>
+            <Text sx={innerTextStyle}>{service.address_city}</Text>
           </Box>
-          <Box
-            sx={{
-              flexGrow: 1
-            }}
-          >
+          <Box sx={boxStyle}>
             <Heading5 mt="5">Tribunaux d’instance</Heading5>
-            <Text mt="2" color="mediumGray" fontWeight="600">
-              {"Tribunal d'Instance d'Arras"}
-            </Text>
+            <Text sx={topTextStyle}>{"Tribunal d'Instance d'Arras"}</Text>
             <Heading5 mt="5">Langues parlées</Heading5>
-            <Text mt="2" color="mediumGray" fontWeight="600">
-              • Anglais
-            </Text>
-            <Text mt="1" color="mediumGray" fontWeight="600">
-              • Arabe
-            </Text>
+            <Text sx={topTextStyle}>• Anglais</Text>
+            <Text sx={innerTextStyle}>• Arabe</Text>
             <Heading5 mt="5">Compétences particulières</Heading5>
-            <Text mt="2" color="mediumGray" fontWeight="600">
-              Troubles psychiques
-            </Text>
-            <Text mt="1" color="mediumGray" fontWeight="600">
-              Langage des signes
-            </Text>
+            <Text sx={topTextStyle}>Troubles psychiques</Text>
+            <Text sx={innerTextStyle}>Langage des signes</Text>
           </Box>
         </Flex>
         <Flex mt="5">
