@@ -24,7 +24,7 @@ passport.use(
         .where("username", username)
         .orWhere("email", username)
         .first()
-        .eager("roles")
+        .eager("[roles, antennes, tis]")
         .then(function(user) {
           if (!user) {
             return done("Unknown user");

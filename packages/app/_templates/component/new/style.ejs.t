@@ -1,8 +1,8 @@
 ---
-to: src/components-v2/<%= h.capitalize(name) %>/style.js
+to: src/presentationalComponents/<%= h.inflection.camelize(name) %>/style.js
 ---
-const <%= h.capitalize(name)%>Style = {
+const <%= h.inflection.camelize(name)%>Style = {
   bg: "blue"
 };
 
-export { <%= h.capitalize(name)%>Style };
+export { <%= h.inflection.camelize(name)%>Style };

@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const GET_SERVICES_ANTENNE = gql`
   query service_antenne($serviceId: Int!) {
-    service_antenne(where: { service_id: { _eq: $serviceId } }) {
+    service_antenne(where: { headquarters: { _eq: true }, id: { _eq: $serviceId } }) {
       address_city
       address_street
       address_zip_code

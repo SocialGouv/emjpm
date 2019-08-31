@@ -2,7 +2,7 @@ import React from "react";
 import { Flex, Box } from "rebass";
 
 const wrapperStyle = {
-  maxWidth: "1024px",
+  maxWidth: "1200px",
   margin: "0 auto"
 };
 

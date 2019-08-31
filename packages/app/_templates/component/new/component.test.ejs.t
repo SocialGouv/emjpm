@@ -1,11 +1,11 @@
 ---
-to: src/components-v2/<%= h.capitalize(name) %>/<%= h.capitalize(name) %>.test.js
+to: src/presentationalComponents/<%= h.inflection.camelize(name) %>/<%= h.inflection.camelize(name) %>.test.js
 ---
 import React from "react";
-import { <%= h.capitalize(name) %> } from "./<%= h.capitalize(name) %>";
+import { <%= h.inflection.camelize(name) %> } from "./<%= h.inflection.camelize(name) %>";
 import renderer from "react-test-renderer";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<<%= h.capitalize(name) %> />).toJSON();
+  const tree = renderer.create(<<%= h.inflection.camelize(name) %> />).toJSON();
   expect(tree).toMatchSnapshot();
 });

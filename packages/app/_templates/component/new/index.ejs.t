@@ -1,6 +1,6 @@
 ---
-to: src/components-v2/<%= h.capitalize(name) %>/index.js
+to: src/presentationalComponents/<%= h.inflection.camelize(name) %>/index.js
 ---
-import { <%= h.capitalize(name) %> } from "./<%= h.capitalize(name) %>";
+import { <%= h.inflection.camelize(name) %> } from "./<%= h.inflection.camelize(name) %>";
 
-export { <%= h.capitalize(name) %> };
+export { <%= h.inflection.camelize(name) %> };
