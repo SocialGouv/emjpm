@@ -7,46 +7,9 @@ const data = [
   { name: "Group B", value: 300 },
   { name: "Group C", value: 300 }
 ];
+
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
-
-const textStyle = {
-  fontFamily: "heading",
-  fontWeight: "600",
-  textAlign: "center"
-};
-
-const numberStyle = {
-  pt: 2,
-  fontSize: 5,
-  fontFamily: "heading",
-  fontWeight: "600",
-  textAlign: "center"
-};
-
-const percentStyle = {
-  pt: 1,
-  fontSize: 3,
-  fontFamily: "heading",
-  fontWeight: "600",
-  textAlign: "center"
-};
-
-const pieTextStyle = {
-  fontSize: 4,
-  fontWeight: "600",
-  fontFamily: "heading",
-  position: "absolute",
-  width: "100px",
-  textAlign: "center",
-  left: "50%",
-  top: "50%",
-  ml: "-50px",
-  mt: "-20px"
-};
-
-const legendStyle = {
-  fontSize: 1
-};
+import { textStyle, numberStyle, percentStyle, pieTextStyle, legendStyle } from "./style";
 
 const MandatairesActivityChart = () => {
   return (
@@ -81,21 +44,21 @@ const MandatairesActivityChart = () => {
         }}
       >
         <Box>
-          <Text color="#3174D6" sx={textStyle}>
+          <Text color={COLORS[0]} sx={textStyle}>
             SERVICES MANDATAIRES
           </Text>
           <Text sx={numberStyle}>6700</Text>
           <Text sx={percentStyle}>23,9 %</Text>
         </Box>
         <Box>
-          <Text color="#D6317D" sx={textStyle}>
+          <Text color={COLORS[1]} sx={textStyle}>
             MANDATAIRES INDIVIDUELS
           </Text>
           <Text sx={numberStyle}>5000</Text>
           <Text sx={percentStyle}>23,9 %</Text>
         </Box>
         <Box>
-          <Text color="#D29E10" sx={textStyle}>
+          <Text color={COLORS[2]} sx={textStyle}>
             PRÉPOSÉS D’ÉTABLISSEMENTS
           </Text>
           <Text sx={numberStyle}>4200</Text>
