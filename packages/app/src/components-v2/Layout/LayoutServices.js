@@ -7,7 +7,7 @@ import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { Header, DropDownMenu } from "@socialgouv/emjpm-ui-components";
 import { useQuery } from "@apollo/react-hooks";
 
-import { GET_USERS } from "./queries";
+import { GET_SERVICE_USERS } from "./queries";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
 import { Link } from "../Commons";
@@ -31,7 +31,7 @@ const dropDownLinks = [
 ];
 
 const LayoutServices = props => {
-  const { data, error, loading } = useQuery(GET_USERS);
+  const { data, error, loading } = useQuery(GET_SERVICE_USERS);
   if (loading) return <div>loading</div>;
   if (error) return <div>error</div>;
   const [user] = data.users;
