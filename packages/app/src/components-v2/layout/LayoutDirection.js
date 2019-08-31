@@ -6,7 +6,7 @@ import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import { Header, DropDownMenu } from "@socialgouv/emjpm-ui-components";
 import { useQuery } from "@apollo/react-hooks";
 
-import { GET_USERS } from "../../graphql/Queries";
+import { GET_USERS } from "./queries";
 import { Footer } from "../footer";
 import { Navigation } from "../navigation";
 import { BoxWrapper, Link } from "../commons";

@@ -53,14 +53,16 @@ exports.createServiceAntenneTis = (body, serviceAntenne_id) => {
   );
 };
 
-exports.createUserAntenne = async (userId, antenneId) => {
-  if (antenneId && userId) {
-    return UserAntenne.query()
-      .allowInsert("[user_id,antenne_id]")
-      .insert({
-        user_id: userId,
-        antenne_id: antenneId
-      });
+exports.createUserAntenne = async (userId, antennes) => {
+  if (antennes.length > 0 && userId) {
+    antennes.map(antenne => {
+      return UserAntenne.query()
+        .allowInsert("[user_id,antenne_id]")
+        .insert({
+          user_id: userId,
+          antenne_id: antenne.id
+        });
+    });
   }
 };
 
@@ -74,8 +76,3 @@ exports.createServiceAdmin = async (userId, serviceId) => {
       });
   }
 };
-
-// export.updateUserService = (service, user) =>
-//   User.query()
-//     .update({ service_id: service.id })
-//     .where("id", user.id);

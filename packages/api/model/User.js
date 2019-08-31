@@ -5,13 +5,15 @@ const jwtConfig = require("../config/jwt");
 const { Model } = require("objection");
 
 const { Role } = require("./Role");
-const { UserTis } = require("./UserTis");
+const { Tis } = require("./Tis");
+const { ServiceAntenne } = require("./ServiceAntenne");
 
 Model.knex(knexConnection);
 
 const MAIN_ROLES = [
   "admin",
   "service",
+  "serviceAntenne",
   "individuel",
   "prepose",
   "direction",
@@ -51,9 +53,21 @@ class User extends Model {
           to: "role.id"
         }
       },
+      antennes: {
+        relation: Model.ManyToManyRelation,
+        modelClass: ServiceAntenne,
+        join: {
+          from: "users.id",
+          through: {
+            from: "user_antenne.user_id",
+            to: "user_antenne.antenne_id"
+          },
+          to: "service_antenne.id"
+        }
+      },
       tis: {
         relation: Model.ManyToManyRelation,
-        modelClass: UserTis,
+        modelClass: Tis,
         join: {
           from: "users.id",
           through: {
@@ -94,11 +108,17 @@ class User extends Model {
     };
   }
 
+  getAntennes() {
+    return this.antennes.map(el => el.id);
+  }
+
   getHasuraClaims() {
     return {
       "x-hasura-allowed-roles": this.getRoles(),
       "x-hasura-default-role": this.getDefaultRole(),
-      "x-hasura-user-id": `${this.id}`
+      "x-hasura-user-id": `${this.id}`,
+      "x-hasura-service-id": `${this.service_id}`,
+      "x-hasura-antenne-id": `${this.getAntennes()}`
     };
   }
 

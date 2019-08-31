@@ -1,17 +1,17 @@
 ---
-to: src/components-v2/<%= h.capitalize(name) %>/<%= h.capitalize(name) %>.js
+to: src/presentationalComponents/<%= h.inflection.camelize(name) %>/<%= h.inflection.camelize(name) %>.js
 ---
 import React from "react";
 import { Box } from "rebass";
 
-import { <%= h.capitalize(name) %>Style } from "./style";
+import { <%= h.inflection.camelize(name) %>Style } from "./style";
 
-const <%= h.capitalize(name) %> = props => {
+const <%= h.inflection.camelize(name) %> = props => {
   return (
-    <Box sx={<%= h.capitalize(name) %>Style} {...props}>
-      <%= h.capitalize(name) %>
+    <Box sx={<%= h.inflection.camelize(name) %>Style} {...props}>
+      <%= h.inflection.camelize(name) %>
     </Box>
   );
 };
 
-export { <%= h.capitalize(name) %> };
+export { <%= h.inflection.camelize(name) %> };

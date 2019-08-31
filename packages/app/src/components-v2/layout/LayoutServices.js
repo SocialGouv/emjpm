@@ -6,7 +6,7 @@ import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import { Header, DropDownMenu } from "@socialgouv/emjpm-ui-components";
 import { useQuery } from "@apollo/react-hooks";
 
-import { GET_USERS } from "../../graphql/Queries";
+import { GET_USERS } from "./queries";
 import { Footer } from "../footer";
 import { Navigation } from "../navigation";
 import { BoxWrapper, Link } from "../commons";
@@ -34,6 +34,7 @@ const LayoutServices = props => {
   if (loading) return <div>loading</div>;
   if (error) return <div>error</div>;
   const [user] = data.users;
+  console.log(data);
   const { username } = user;
 
   return (

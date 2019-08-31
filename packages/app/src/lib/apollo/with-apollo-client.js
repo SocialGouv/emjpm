@@ -19,7 +19,10 @@ export default App => {
       const { req, res } = ctx;
 
       const apollo = initApollo(
-        {},
+        {
+          serviceId: "",
+          antenneId: ""
+        },
         {
           getToken: () => parseCookies(req).token
         }

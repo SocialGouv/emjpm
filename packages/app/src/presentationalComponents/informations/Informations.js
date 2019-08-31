@@ -2,23 +2,14 @@ import React from "react";
 import { Box, Text, Flex } from "rebass";
 import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 import { InformationsStyle } from "./style";
-import { LinkButton } from "../commons/LinkButton.js";
+import { LinkButton } from "../../components-v2/commons/LinkButton";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
 const Informations = props => {
-  const { service_antenne, loading, error } = props;
-
-  if (loading) {
-    return <div>loading</div>;
-  }
-  if (error) {
-    return <div>error</div>;
-  }
+  const { service_antenne } = props;
 
   const [service] = service_antenne;
 
-  console.log(service);
-  // console.log(service);
   return (
     <Box sx={InformationsStyle} {...props}>
       <Card p="5">
@@ -88,7 +79,7 @@ const Informations = props => {
           </Box>
         </Flex>
         <Flex mt="5">
-          <LinkButton>Modifier mes informations</LinkButton>
+          <LinkButton href="/services/edit-informations">Modifier mes informations</LinkButton>
         </Flex>
       </Card>
     </Box>
