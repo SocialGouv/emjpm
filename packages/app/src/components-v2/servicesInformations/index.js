@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_SERVICES_ANTENNE } from "./queries";
-import { Informations } from "../informations";
+import { Informations } from "../../presentationalComponents/informations";
 
 const ServicesInformations = () => {
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
@@ -13,19 +13,14 @@ const ServicesInformations = () => {
   if (loading) {
     return <div>loading</div>;
   }
+
   if (error) {
     return <div>error</div>;
   }
 
-  console.log(data);
-
   const { service_antenne } = data;
 
-  return (
-    <div>
-      <Informations loading={loading} error={loading} service_antenne={service_antenne} />
-    </div>
-  );
+  return <Informations service_antenne={service_antenne} />;
 };
 
 export { ServicesInformations };

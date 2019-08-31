@@ -17,7 +17,7 @@ do
     repl="$VALUE"
 
     # replace default environment variables value
-    sed -i -e "s|$match|$repl|g" $ROOT_DIRECTORY/*.json
+    sed -i -e "s|$match|$repl|g" $ROOT_DIRECTORY/*.yaml
 done <env-vars
 
 rm env-vars
