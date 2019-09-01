@@ -17,6 +17,7 @@ import {
   EtablissementIndicator
 } from "../../src/components-v2/Indicators";
 import { MandatairesActivity } from "../../src/components-v2/MandatairesActivity";
+import { MandatairesDisponibility } from "../../src/components-v2/MandatairesDisponibility";
 
 const Mandataires = () => {
   return (
@@ -39,6 +40,9 @@ const Mandataires = () => {
         <FlexWrapper flexWrap={"wrap"} mt={5}>
           <Box sx={twoColumnStyle}>
             <MandatairesActivity />
+          </Box>
+          <Box sx={twoColumnStyle}>
+            <MandatairesDisponibility />
           </Box>
         </FlexWrapper>
       </LayoutDirection>

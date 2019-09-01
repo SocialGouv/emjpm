@@ -14,7 +14,7 @@ import { textStyle, numberStyle, percentStyle, pieTextStyle, legendStyle } from 
 const MandatairesActivityChart = () => {
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: 300, mt: "2" }}>
+      <Box sx={{ position: "relative", width: "100%", height: 300 }}>
         <Text sx={pieTextStyle}>
           11304
           <Text sx={legendStyle}>mesures</Text>
@@ -38,6 +38,7 @@ const MandatairesActivityChart = () => {
       </Box>
       <Box
         sx={{
+          mt: "1",
           display: "grid",
           gridGap: 3,
           gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"]

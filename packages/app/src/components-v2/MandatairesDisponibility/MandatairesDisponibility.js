@@ -3,11 +3,11 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import { Box } from "rebass";
 
-import { MandatairesActivityChart } from "./MandatairesActivityChart";
+import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { FiltersContext } from "../Filters/context";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 
-const MandatairesActivity = props => {
+const MandatairesDisponibility = props => {
   const {
     selectedRegionalValue,
     startDateValue,
@@ -27,7 +27,7 @@ const MandatairesActivity = props => {
   if (loading) {
     return (
       <Card p="4">
-        <Heading2>Répartition de l’activité par type de mandataires</Heading2>
+        <Heading2>Disponibilité par type de mandataires</Heading2>
         <Box my="5">
           <Spinner />
         </Box>
@@ -38,7 +38,7 @@ const MandatairesActivity = props => {
   if (error) {
     return (
       <Card p="4">
-        <Heading2>Répartition de l’activité par type de mandataires</Heading2>
+        <Heading2>Disponibilité par type de mandataires</Heading2>
         <Heading4>erreur</Heading4>
       </Card>
     );
@@ -46,10 +46,10 @@ const MandatairesActivity = props => {
 
   return (
     <Card p="4" {...props}>
-      <Heading2>Répartition de l’activité par type de mandataires</Heading2>
-      <MandatairesActivityChart data={data} />
+      <Heading2>Disponibilité par type de mandataires</Heading2>
+      <MandatairesDisponibilityChart data={data} />
     </Card>
   );
 };
 
-export { MandatairesActivity };
+export { MandatairesDisponibility };
