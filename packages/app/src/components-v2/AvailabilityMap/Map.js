@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { SvgLoader, SvgProxy } from "react-svgmt";
 
 import Map from "./MapSvg";
-import Panel from "./Panel";
+import { Panel } from "./Panel";
 
 const France = props => {
   const { color, aboveColor, belowColor, departements } = props;
