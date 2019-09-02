@@ -5,9 +5,8 @@ import { Global, css } from "@emotion/core";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import { Header, DropDownMenu } from "@socialgouv/emjpm-ui-components";
 import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
-import { useQuery } from "@apollo/react-hooks";
-
-import { GET_DIRECTION_USERS } from "./queries";
+import { useQuery, useApolloClient } from "@apollo/react-hooks";
+import { DIRECTION_USERS, CURRENT_USER } from "./queries";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
 import { Link } from "../Commons";
@@ -35,7 +34,14 @@ const dropDownLinks = [
 ];
 
 const LayoutDirection = props => {
-  const { data, error, loading } = useQuery(GET_DIRECTION_USERS);
+  const client = useApolloClient();
+  const { currentId } = client.readQuery({ query: CURRENT_USER });
+  const { data, error, loading } = useQuery(DIRECTION_USERS, {
+    variables: {
+      userId: currentId
+    }
+  });
+
   if (loading) return <div>chargement</div>;
   if (error) return <div>erreur</div>;
   const [user] = data.users;
