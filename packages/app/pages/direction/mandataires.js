@@ -18,6 +18,7 @@ import {
 import { LayoutDirection } from "../../src/components-v2/Layout";
 import { MandatairesActivity } from "../../src/components-v2/MandatairesActivity";
 import { MandatairesDisponibility } from "../../src/components-v2/MandatairesDisponibility";
+import { MandatairesCapacity } from "../../src/components-v2/MandatairesCapacity";
 
 const Mandataires = () => {
   return (

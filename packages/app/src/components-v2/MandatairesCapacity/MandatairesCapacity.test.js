@@ -1,8 +1,8 @@
 import React from "react";
-import { MandataireCapacity } from "./MandataireCapacity";
+import { MandatairesCapacity } from "./MandatairesCapacity";
 import renderer from "react-test-renderer";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<MandataireCapacity />).toJSON();
+  const tree = renderer.create(<MandatairesCapacity />).toJSON();
   expect(tree).toMatchSnapshot();
 });

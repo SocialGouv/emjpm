@@ -3,11 +3,11 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import { Box } from "rebass";
 
-import { MandatairesCapacityChart } from "./MandataireCapacityChart";
+import { MandatairesCapacityChart } from "./MandatairesCapacityChart";
 import { FiltersContext } from "../Filters/context";
-import { MANDATAIRE_ACTIVITY } from "./queries";
+import { MANDATAIRES_CAPACITY } from "./queries";
 
-const MandataireCapacity = props => {
+const MandatairesCapacity = props => {
   const {
     selectedRegionalValue,
     startDateValue,
@@ -15,7 +15,7 @@ const MandataireCapacity = props => {
     endDateValue
   } = useContext(FiltersContext);
 
-  const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
+  const { data, error, loading } = useQuery(MANDATAIRES_CAPACITY, {
     variables: {
       start: startDateValue,
       end: endDateValue,
@@ -27,7 +27,7 @@ const MandataireCapacity = props => {
   if (loading) {
     return (
       <Card p="4">
-        <Heading2>Répartition de l’activité par type de mandataires</Heading2>
+        <Heading2>Capacité des mandataires</Heading2>
         <Box my="5">
           <Spinner />
         </Box>
@@ -38,7 +38,7 @@ const MandataireCapacity = props => {
   if (error) {
     return (
       <Card p="4">
-        <Heading2>Répartition de l’activité par type de mandataires</Heading2>
+        <Heading2>Capacité des mandataires</Heading2>
         <Heading4>erreur</Heading4>
       </Card>
     );
@@ -46,10 +46,10 @@ const MandataireCapacity = props => {
 
   return (
     <Card p="4" {...props}>
-      <Heading2>Répartition de l’activité par type de mandataires</Heading2>
+      <Heading2>Capacité des mandataires</Heading2>
       <MandatairesCapacityChart data={data} />
     </Card>
   );
 };
 
-export { MandataireCapacity };
+export { MandatairesCapacity };
