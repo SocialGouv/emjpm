@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const GET_SERVICE_USERS = gql`
-  {
-    users {
+  query users($userId: Int) {
+    users(where: { id: { _eq: $userId } }) {
       email
       created_at
       cabinet
@@ -32,9 +32,9 @@ export const GET_SERVICE_USERS = gql`
   }
 `;
 
-export const GET_DIRECTION_USERS = gql`
-  {
-    users {
+export const DIRECTION_USERS = gql`
+  query users($userId: Int) {
+    users(where: { id: { _eq: $userId } }) {
       email
       created_at
       cabinet
@@ -45,5 +45,11 @@ export const GET_DIRECTION_USERS = gql`
       type
       username
     }
+  }
+`;
+
+export const CURRENT_USER = gql`
+  {
+    currentId
   }
 `;
