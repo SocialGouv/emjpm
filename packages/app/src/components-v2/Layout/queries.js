@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const GET_USERS = gql`
+export const GET_SERVICE_USERS = gql`
   {
     users {
       email
@@ -28,6 +28,22 @@ export const GET_USERS = gql`
         id
         antenne_id
       }
+    }
+  }
+`;
+
+export const GET_DIRECTION_USERS = gql`
+  {
+    users {
+      email
+      created_at
+      cabinet
+      id
+      last_login
+      nom
+      prenom
+      type
+      username
     }
   }
 `;
