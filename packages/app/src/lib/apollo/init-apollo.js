@@ -34,7 +34,6 @@ function create(initialState, { getToken, fetchOptions }) {
   });
 
   const cache = new InMemoryCache().restore(initialState || {});
-  console.log(cache);
   cache.writeData({
     data: {
       currentId: initialState.currentId
