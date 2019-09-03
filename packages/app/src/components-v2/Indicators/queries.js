@@ -47,3 +47,18 @@ export const GET_CLOSED_MESURE_NUMBER = gql`
     )
   }
 `;
+
+export const GET_GESTIONNAIRE_NUMBER = gql`
+  query gestionnaireNumber($type: String, $department: Int, $region: Int) {
+    view_mesure_gestionnaire_aggregate(
+      where: {
+        discriminator: { _eq: $type }
+        departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } }
+      }
+    ) {
+      aggregate {
+        count(distinct: true)
+      }
+    }
+  }
+`;
