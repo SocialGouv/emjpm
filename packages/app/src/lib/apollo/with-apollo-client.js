@@ -15,7 +15,6 @@ export default App => {
     };
 
     static async getInitialProps(context) {
-      console.log(isBrowser());
       const { ctx } = context;
       const { req, res } = ctx;
       const currentId = !isBrowser() ? null : jwtDecode(parseCookies(req).token);
