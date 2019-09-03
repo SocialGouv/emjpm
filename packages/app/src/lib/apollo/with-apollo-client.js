@@ -21,7 +21,7 @@ export default App => {
       const currentId = !isBrowser() ? null : jwtDecode(parseCookies(req).token);
       const apollo = initApollo(
         {
-          currentId: currentId
+          currentId
         },
         {
           getToken: () => parseCookies(req).token
