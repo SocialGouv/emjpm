@@ -25,7 +25,7 @@ const MandatairesIndicator = () => {
       error={error}
       loading={loading}
       title="Mandataires individuels"
-      indicator={data.view_mesure_gestionnaire_aggregate.aggregate.count}
+      indicator={data.gestionnaireNumber.aggregate.count}
     />
   );
 };
