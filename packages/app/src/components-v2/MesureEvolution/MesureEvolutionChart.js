@@ -1,18 +1,21 @@
-import React, { Fragment, useState } from "react";
-
 import { Select } from "@socialgouv/emjpm-ui-core";
+import React, { Fragment, useState } from "react";
 import { Box } from "rebass";
 import {
-  ResponsiveContainer,
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
   CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
   Tooltip,
-  Legend
+  XAxis,
+  YAxis
 } from "recharts";
-
+import {
+  getMesureCategoryTypeColor,
+  getMesureCategoryTypeLabel,
+  MESURE_CATEGORY_TYPE_KEYS
+} from "../../util/mesures";
 import { getEvolution } from "./getEvolution";
 
 const MesureEvolutionChart = props => {
@@ -24,7 +27,7 @@ const MesureEvolutionChart = props => {
   const selectMesures = selectedOptions => {
     if (selectedOptions) {
       const active = selectedOptions.map(option => {
-        return option.label;
+        return option.value;
       });
       setMesures(active);
     } else {
@@ -50,24 +53,18 @@ const MesureEvolutionChart = props => {
             <CartesianGrid stroke="#f5f5f5" />
             <Tooltip />
             <Legend />
-            {(selectedMesures.includes("TOTAL") || selectedMesures.length === 0) && (
-              <Line type="monotone" dot={false} strokeWidth={2} dataKey="TOTAL" stroke="red" />
-            )}
-            {(selectedMesures.includes("CURATELLE_RENFORCEE") || selectedMesures.length === 0) && (
-              <Line type="monotone" dot={false} dataKey="CURATELLE_RENFORCEE" stroke="#00977B" />
-            )}
-            {(selectedMesures.includes("CURATELLE_SIMPLE") || selectedMesures.length === 0) && (
-              <Line type="monotone" dot={false} dataKey="CURATELLE_SIMPLE" stroke="#E46137" />
-            )}
-            {(selectedMesures.includes("OTHER") || selectedMesures.length === 0) && (
-              <Line type="monotone" dot={false} dataKey="OTHER" stroke="#CEA914" />
-            )}
-            {(selectedMesures.includes("SAUVEGARDE_JUSTICE") || selectedMesures.length === 0) && (
-              <Line type="monotone" dot={false} dataKey="SAUVEGARDE_JUSTICE" stroke="#362983" />
-            )}
-            {(selectedMesures.includes("TUTELLE") || selectedMesures.length === 0) && (
-              <Line type="monotone" dot={false} dataKey="TUTELLE" stroke="#9C0E68" />
-            )}
+            {MESURE_CATEGORY_TYPE_KEYS.filter(key => {
+              return selectedMesures.includes(key) || selectedMesures.length === 0;
+            }).map((key, index) => (
+              <Line
+                key={index}
+                type="monotone"
+                dot={false}
+                strokeWidth={2}
+                dataKey={getMesureCategoryTypeLabel(key)}
+                stroke={getMesureCategoryTypeColor(key)}
+              />
+            ))}
           </LineChart>
         </ResponsiveContainer>
       </Box>

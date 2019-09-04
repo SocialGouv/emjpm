@@ -1,17 +1,18 @@
-import React from "react";
-
 import { Card, Heading2 } from "@socialgouv/emjpm-ui-core";
+import React from "react";
 import { Box } from "rebass";
 import {
-  ResponsiveContainer,
-  ComposedChart,
   Bar,
-  XAxis,
-  YAxis,
   CartesianGrid,
+  Cell,
+  ComposedChart,
+  Legend,
+  ResponsiveContainer,
   Tooltip,
-  Legend
+  XAxis,
+  YAxis
 } from "recharts";
+import { getMesureCategoryTypeColor } from "../../util/mesures";
 
 const MesureAllocationChart = props => {
   const { mesures } = props;
@@ -35,7 +36,11 @@ const MesureAllocationChart = props => {
             <YAxis dataKey="name" type="category" />
             <Tooltip />
             <Legend />
-            <Bar dataKey="nombre de mesures" barSize={24} fill="#0D31B2" />
+            <Bar dataKey="nombre de mesures" barSize={24}>
+              {mesures.map((mesure, index) => (
+                <Cell key={index} fill={getMesureCategoryTypeColor(mesure.type)} />
+              ))}
+            </Bar>
           </ComposedChart>
         </ResponsiveContainer>
       </Box>
