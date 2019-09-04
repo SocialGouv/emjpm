@@ -1,16 +1,20 @@
 import React from "react";
-import { createStore, combineReducers, applyMiddleware, bindActionCreators } from "redux";
-import { reducer as modal } from "redux-modal";
-import { Provider, connect } from "react-redux";
-import thunk from "redux-thunk";
+import { connect, Provider } from "react-redux";
+import { applyMiddleware, bindActionCreators, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-
+import { reducer as modal } from "redux-modal";
+import thunk from "redux-thunk";
 import { mandataireMount } from "./actions/mandataire";
-import mesuresReducer from "./reducers/mesures";
-import mandataireReducer from "./reducers/mandataire";
 import MandataireTabs from "./indiPrepo";
-
-import { CloseMesure, ReactivateMesure, EditMandataire, ValiderMesureEnAttente } from "./modals";
+import {
+  CloseMesure,
+  EditMandataire,
+  EditMesure,
+  ReactivateMesure,
+  ValiderMesureEnAttente
+} from "./modals";
+import mandataireReducer from "./reducers/mandataire";
+import mesuresReducer from "./reducers/mesures";
 
 class MandataireIndex extends React.Component {
   state = {
@@ -35,6 +39,7 @@ class MandataireIndex extends React.Component {
       <React.Fragment>
         <MandataireTabs />
         <CloseMesure />
+        <EditMesure />
         <ReactivateMesure />
         <EditMandataire />
         <ValiderMesureEnAttente />
