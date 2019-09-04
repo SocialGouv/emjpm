@@ -2,7 +2,6 @@ import cookie from "cookie";
 import PropTypes from "prop-types";
 import React from "react";
 import initApollo from "./init-apollo";
-import jwtDecode from "jwt-decode";
 
 function parseCookies(req, options = {}) {
   return cookie.parse(req ? req.headers.cookie || "" : document.cookie, options);
@@ -17,11 +16,9 @@ export default App => {
     static async getInitialProps(context) {
       const { ctx } = context;
       const { req, res } = ctx;
-      const token = parseCookies(req).token;
-      const currentUser = token ? jwtDecode(token) : null;
       const apollo = initApollo(
         {
-          currentId: currentUser ? currentUser.id : null
+          currentId: null
         },
         {
           getToken: () => parseCookies(req).token
