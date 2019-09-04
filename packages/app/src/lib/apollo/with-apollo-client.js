@@ -18,10 +18,10 @@ export default App => {
       const { ctx } = context;
       const { req, res } = ctx;
       const token = parseCookies(req).token;
-      const currentId = token ? jwtDecode(token) : null;
+      const currentUser = token ? jwtDecode(token) : null;
       const apollo = initApollo(
         {
-          currentId: currentId
+          currentId: currentUser.id
         },
         {
           getToken: () => parseCookies(req).token
