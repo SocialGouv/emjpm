@@ -1,4 +1,5 @@
 import { months } from "../../constants";
+import { getMesureCategoryTypeLabel } from "../../util/mesures";
 
 const getEvolution = data => {
   const evolutionDatas = [];
@@ -6,14 +7,14 @@ const getEvolution = data => {
   data.map((type, index) => {
     evolutionFilters[index] = {
       value: type.mesureTypeCategory,
-      label: type.mesureTypeCategory
+      label: getMesureCategoryTypeLabel(type.mesureTypeCategory)
     };
     type.monthlyEvolutions.map((monthlyEvolution, index) => {
       evolutionDatas[index] = {
         ...evolutionDatas[index],
-        [type.mesureTypeCategory]: monthlyEvolution.number,
-        TOTAL: evolutionDatas[index]
-          ? evolutionDatas[index].TOTAL + monthlyEvolution.number
+        [getMesureCategoryTypeLabel(type.mesureTypeCategory)]: monthlyEvolution.number,
+        Total: evolutionDatas[index]
+          ? evolutionDatas[index].Total + monthlyEvolution.number
           : monthlyEvolution.number,
         month: months[monthlyEvolution.month]
       };
@@ -21,7 +22,7 @@ const getEvolution = data => {
   });
   evolutionFilters.push({
     value: "TOTAL",
-    label: "TOTAL"
+    label: "Total"
   });
   return { evolutionDatas, evolutionFilters };
 };

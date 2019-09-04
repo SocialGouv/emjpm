@@ -1,23 +1,13 @@
-import React, { useContext } from "react";
-
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import React, { useContext } from "react";
 import { Box } from "rebass";
-
-import { MesureAllocationChart } from "./MesureAllocationChart";
+import { getMesureCategoryTypeLabel } from "../../util/mesures";
 import { FiltersContext } from "../Filters/context";
+import { MesureAllocationChart } from "./MesureAllocationChart";
 import { GET_CATEGORY_STATS } from "./queries";
 
-const type = {
-  TUTELLE: "Tutelle",
-  CURATELLE_SIMPLE: "Curatelle simple",
-  CURATELLE_RENFORCEE: "Curatelle renforcee",
-  SAUVEGARDE_JUSTICE: "Sauvegarde de justice",
-  OTHER: "Autre"
-};
-
 export const MesureAllocation = () => {
-  // eslint-disable-next-line no-unused-vars
   const {
     selectedRegionalValue,
     startDateValue,
@@ -56,7 +46,8 @@ export const MesureAllocation = () => {
 
   const mesures = data.mesureTypeCategoryStatistics.map(mesure => {
     return {
-      name: type[mesure.mesureTypeCategory],
+      name: getMesureCategoryTypeLabel(mesure.mesureTypeCategory),
+      type: mesure.mesureTypeCategory,
       "nombre de mesures": mesure.number
     };
   });

@@ -17,11 +17,11 @@ const buildMesureCategoryTypeStatistic = (
 
 export const buildMesureTypeCategoryStatistics: () => MesureTypeCategoryStatistic[] = () => {
   return [
+    buildMesureCategoryTypeStatistic(MesureTypeCategory.Tutelle),
     buildMesureCategoryTypeStatistic(MesureTypeCategory.CuratelleRenforcee),
     buildMesureCategoryTypeStatistic(MesureTypeCategory.CuratelleSimple),
-    buildMesureCategoryTypeStatistic(MesureTypeCategory.Other),
     buildMesureCategoryTypeStatistic(MesureTypeCategory.SauvegardeJustice),
-    buildMesureCategoryTypeStatistic(MesureTypeCategory.Tutelle)
+    buildMesureCategoryTypeStatistic(MesureTypeCategory.Other)
   ];
 };
 
@@ -56,6 +56,7 @@ export const buildMesureTypeCategoryEvolutions = (
   end: string
 ) => {
   return [
+    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Tutelle),
     buildMesureTypeCategoryEvolution(
       start,
       end,
@@ -66,12 +67,11 @@ export const buildMesureTypeCategoryEvolutions = (
       end,
       MesureTypeCategory.CuratelleSimple
     ),
-    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Other),
     buildMesureTypeCategoryEvolution(
       start,
       end,
       MesureTypeCategory.SauvegardeJustice
     ),
-    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Tutelle)
+    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Other)
   ];
 };
