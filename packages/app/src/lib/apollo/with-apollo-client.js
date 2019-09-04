@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import initApollo from "./init-apollo";
 import jwtDecode from "jwt-decode";
-import { isBrowser } from "../../util";
+
 function parseCookies(req, options = {}) {
   return cookie.parse(req ? req.headers.cookie || "" : document.cookie, options);
 }
@@ -17,10 +17,11 @@ export default App => {
     static async getInitialProps(context) {
       const { ctx } = context;
       const { req, res } = ctx;
-      const currentId = !isBrowser() ? null : jwtDecode(parseCookies(req).token);
+      const token = parseCookies(req).token;
+      const currentId = token ? jwtDecode(token) : null;
       const apollo = initApollo(
         {
-          currentId
+          currentId: currentId
         },
         {
           getToken: () => parseCookies(req).token
