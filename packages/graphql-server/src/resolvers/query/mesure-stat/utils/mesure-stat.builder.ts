@@ -56,6 +56,7 @@ export const buildMesureTypeCategoryEvolutions = (
   end: string
 ) => {
   return [
+    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Tutelle),
     buildMesureTypeCategoryEvolution(
       start,
       end,
@@ -66,12 +67,11 @@ export const buildMesureTypeCategoryEvolutions = (
       end,
       MesureTypeCategory.CuratelleSimple
     ),
-    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Other),
     buildMesureTypeCategoryEvolution(
       start,
       end,
       MesureTypeCategory.SauvegardeJustice
     ),
-    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Tutelle)
+    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Other)
   ];
 };

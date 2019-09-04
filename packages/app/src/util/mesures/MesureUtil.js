@@ -1,4 +1,13 @@
-const MESURE_COLORS = {
+export const MESURE_CATEGORY_TYPE_KEYS = [
+  "TOTAL",
+  "TUTELLE",
+  "CURATELLE_RENFORCEE",
+  "CURATELLE_SIMPLE",
+  "SAUVEGARDE_JUSTICE",
+  "OTHER"
+];
+
+const MESURE_CATEGORY_TYPE_COLORS = {
   TOTAL: "red",
   CURATELLE_RENFORCEE: "#00977B",
   CURATELLE_SIMPLE: "#E46137",
@@ -16,6 +25,6 @@ const VALUE_LABEL = {
   TUTELLE: "Tutelle"
 };
 
-export const getMesureTypeColor = type => MESURE_COLORS[type];
+export const getMesureCategoryTypeColor = type => MESURE_CATEGORY_TYPE_COLORS[type];
 
-export const getMesureTypeLabel = type => VALUE_LABEL[type];
+export const getMesureCategoryTypeLabel = type => VALUE_LABEL[type];
