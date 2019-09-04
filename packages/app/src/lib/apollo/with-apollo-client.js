@@ -21,7 +21,7 @@ export default App => {
       const currentUser = token ? jwtDecode(token) : null;
       const apollo = initApollo(
         {
-          currentId: currentUser.id
+          currentId: currentUser ? currentUser.id : null
         },
         {
           getToken: () => parseCookies(req).token
