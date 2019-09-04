@@ -26,7 +26,7 @@ const AvailableMesureIndicator = () => {
     <Indicator
       error={error}
       loading={loading}
-      title="Mesures disponibles"
+      title="Disponibilités"
       indicator={data.availableMesureNumber}
     />
   );
