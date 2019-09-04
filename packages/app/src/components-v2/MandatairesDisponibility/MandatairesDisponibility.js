@@ -27,7 +27,7 @@ const MandatairesDisponibility = props => {
   if (loading) {
     return (
       <Card p="4">
-        <Heading2>Disponibilité par type de mandataires</Heading2>
+        <Heading2>Disponibilités par type de mandataires</Heading2>
         <Box my="5">
           <Spinner />
         </Box>
@@ -38,7 +38,7 @@ const MandatairesDisponibility = props => {
   if (error) {
     return (
       <Card p="4">
-        <Heading2>Disponibilité par type de mandataires</Heading2>
+        <Heading2>Disponibilités par type de mandataires</Heading2>
         <Heading4>erreur</Heading4>
       </Card>
     );
@@ -46,7 +46,7 @@ const MandatairesDisponibility = props => {
 
   return (
     <Card p="4" {...props}>
-      <Heading2>Disponibilité par type de mandataires</Heading2>
+      <Heading2>Disponibilités par type de mandataires</Heading2>
       <MandatairesDisponibilityChart data={data} />
     </Card>
   );

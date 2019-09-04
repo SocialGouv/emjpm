@@ -12,7 +12,7 @@ const AvailabilityMap = () => {
     return (
       <Card p="4" minHeight="450px">
         <Box>
-          <Heading2>Cartes de la disponibilité des mesures</Heading2>
+          <Heading2>Disponibilités par territoire</Heading2>
         </Box>
         <Box sx={{ position: "relative", p: "6" }}>
           <Spinner />
@@ -25,7 +25,7 @@ const AvailabilityMap = () => {
     return (
       <Card p="4">
         <Box>
-          <Heading2>Cartes de la disponibilité des mesures</Heading2>
+          <Heading2>Disponibilités par territoire</Heading2>
         </Box>
         <Box sx={{ position: "relative", p: "6" }}>error</Box>
       </Card>
@@ -47,7 +47,7 @@ const AvailabilityMap = () => {
   return (
     <Card p="4">
       <Box>
-        <Heading2>Cartes de la disponibilité des mesures</Heading2>
+        <Heading2>Disponibilités par territoire</Heading2>
       </Box>
       <Box sx={{ position: "relative", p: "2", mt: "2" }}>
         <MapComponent departements={departements} />
