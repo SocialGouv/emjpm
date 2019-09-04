@@ -28,7 +28,7 @@ const Panel = props => {
         <Heading4 mb="2">{currentPanel.department.nom}</Heading4>
         <Text mb="6px">{"Mesures en cours"}</Text>
         <Text fontWeight="bold" mb="2">{`${currentPanel.mesures_in_progress}`}</Text>
-        <Text mb="6px">{"Mesures disponibles"}</Text>
+        <Text mb="6px">{"Disponibilités"}</Text>
         <Text fontWeight="bold" mb="2" color={available > 0 ? "success" : "error"}>
           {available}
         </Text>
