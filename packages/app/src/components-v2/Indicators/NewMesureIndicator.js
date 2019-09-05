@@ -26,7 +26,7 @@ const NewMesureIndicator = () => {
       error={error}
       loading={loading}
       title="Nouvelles mesures"
-      indicator={data ? data.newMesureNumber : {}}
+      indicator={data && data.newMesureNumber ? data.newMesureNumber : 0}
     />
   );
 };

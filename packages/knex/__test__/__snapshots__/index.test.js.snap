@@ -1111,13 +1111,13 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "bigint",
+    "type": "numeric",
   },
   "mesures_in_progress": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "bigint",
+    "type": "numeric",
   },
   "mesures_max": Object {
     "defaultValue": null,
@@ -1152,13 +1152,13 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "integer",
+    "type": "bigint",
   },
   "mesures_in_progress": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "integer",
+    "type": "bigint",
   },
   "mesures_max": Object {
     "defaultValue": null,

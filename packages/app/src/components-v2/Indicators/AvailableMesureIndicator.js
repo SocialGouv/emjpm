@@ -26,7 +26,7 @@ const AvailableMesureIndicator = () => {
       error={error}
       loading={loading}
       title="Disponibilités"
-      indicator={data ? data.availableMesureNumber : {}}
+      indicator={data && data.availableMesureNumber ? data.availableMesureNumber : 0}
     />
   );
 };
