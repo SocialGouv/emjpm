@@ -36,5 +36,5 @@ union
    WHERE dep.code = substring(man.code_postal, 0, 3)
   `);
 
-  return knex.raw(VIEW_MESURE_GESTIONNAIRE);
+  return knex.raw(VIEW_DEPARTMENT_AVAILIBILITY);
 };
