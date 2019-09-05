@@ -24,7 +24,7 @@ const ServicesIndicator = () => {
       error={error}
       loading={loading}
       title="Services mandataires"
-      indicator={data.gestionnaireNumber.aggregate.count}
+      indicator={data ? data.gestionnaireNumber.aggregate.count : {}}
     />
   );
 };

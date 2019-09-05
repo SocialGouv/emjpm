@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Indicator } from "@socialgouv/emjpm-ui-components";
-
+import React, { useContext } from "react";
 import { FiltersContext } from "../Filters/context";
 import { GET_OPEN_MESURE_NUMBER } from "./queries";
 
@@ -27,7 +26,7 @@ const OpenMesureIndicator = () => {
       error={error}
       loading={loading}
       title="Mesures en cours"
-      indicator={data.openMesureNumber}
+      indicator={data ? data.openMesureNumber : {}}
     />
   );
 };

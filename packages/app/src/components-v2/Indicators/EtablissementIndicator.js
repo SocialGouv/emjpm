@@ -24,7 +24,7 @@ const EtablissementIndicator = () => {
       error={error}
       loading={loading}
       title="Préposés d'établissement"
-      indicator={data.gestionnaireNumber.aggregate.count}
+      indicator={data ? data.gestionnaireNumber.aggregate.count : {}}
     />
   );
 };

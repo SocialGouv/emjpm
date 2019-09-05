@@ -1,9 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
-import React, { useContext } from "react";
 import { Indicator } from "@socialgouv/emjpm-ui-components";
-
-import { GET_AVAILABLE_MESURE_NUMBER } from "./queries";
+import React, { useContext } from "react";
 import { FiltersContext } from "../Filters/context";
+import { GET_AVAILABLE_MESURE_NUMBER } from "./queries";
 
 const AvailableMesureIndicator = () => {
   const {
@@ -27,7 +26,7 @@ const AvailableMesureIndicator = () => {
       error={error}
       loading={loading}
       title="Disponibilités"
-      indicator={data.availableMesureNumber}
+      indicator={data ? data.availableMesureNumber : {}}
     />
   );
 };
