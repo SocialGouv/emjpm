@@ -9,18 +9,20 @@ const ServicesIndicator = () => {
 
   const { error, data, loading } = useQuery(GET_GESTIONNAIRE_NUMBER, {
     variables: {
-      type: "ANTENNE",
+      type: "SERVICE",
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
     }
   });
+
+  console.log(data);
 
   return (
     <Indicator
       error={error}
       loading={loading}
       title="Services mandataires"
-      indicator={data ? data.gestionnaireNumber.aggregate.count : {}}
+      indicator={data && data.gestionnaireNumber ? data.gestionnaireNumber.aggregate.count : {}}
     />
   );
 };

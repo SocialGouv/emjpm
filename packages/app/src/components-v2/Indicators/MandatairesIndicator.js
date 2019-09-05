@@ -7,7 +7,6 @@ import { GET_GESTIONNAIRE_NUMBER } from "./queries";
 const MandatairesIndicator = () => {
   const { selectedRegionalValue, selectedDepartementValue } = useContext(FiltersContext);
 
-  // Replace me with the real query
   const { error, data, loading } = useQuery(GET_GESTIONNAIRE_NUMBER, {
     variables: {
       type: "MANDATAIRE_IND",
@@ -21,7 +20,7 @@ const MandatairesIndicator = () => {
       error={error}
       loading={loading}
       title="Mandataires individuels"
-      indicator={data ? data.gestionnaireNumber.aggregate.count : {}}
+      indicator={data && data.gestionnaireNumber ? data.gestionnaireNumber.aggregate.count : {}}
     />
   );
 };
