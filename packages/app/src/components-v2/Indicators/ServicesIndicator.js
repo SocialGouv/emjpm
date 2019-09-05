@@ -15,14 +15,12 @@ const ServicesIndicator = () => {
     }
   });
 
-  console.log(data);
-
   return (
     <Indicator
       error={error}
       loading={loading}
       title="Services mandataires"
-      indicator={data && data.gestionnaireNumber ? data.gestionnaireNumber.aggregate.count : {}}
+      indicator={data && data.gestionnaireNumber ? data.gestionnaireNumber.aggregate.count : 0}
     />
   );
 };
