@@ -1,24 +1,17 @@
-import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import React, { useContext } from "react";
 import { Box } from "rebass";
-
-import { MandatairesActivityChart } from "./MandatairesActivityChart";
+import { convertToPercentage } from "../../util/math";
 import { FiltersContext } from "../Filters/context";
+import { MandatairesActivityChart } from "./MandatairesActivityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 
 const MandatairesActivity = props => {
-  const {
-    selectedRegionalValue,
-    startDateValue,
-    selectedDepartementValue,
-    endDateValue
-  } = useContext(FiltersContext);
+  const { selectedRegionalValue, selectedDepartementValue } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
-      start: startDateValue,
-      end: endDateValue,
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
     }
@@ -44,10 +37,31 @@ const MandatairesActivity = props => {
     );
   }
 
+  const service = data.service.aggregate.sum.mesures_in_progress;
+  const mandataireIndividuel = data.mandataireIndividuel.aggregate.sum.mesures_in_progress;
+  const mandatairePrepose = data.mandatairePrepose.aggregate.sum.mesures_in_progress;
+  const total = service + mandataireIndividuel + mandatairePrepose;
+
+  const activityChartData = {
+    total,
+    service: {
+      sum: service,
+      percentage: convertToPercentage(service, total)
+    },
+    mandataireIndividuel: {
+      sum: mandataireIndividuel,
+      percentage: convertToPercentage(mandataireIndividuel, total)
+    },
+    mandatairePrepose: {
+      sum: mandatairePrepose,
+      percentage: convertToPercentage(mandatairePrepose, total)
+    }
+  };
+
   return (
     <Card p="4" {...props}>
       <Heading2>Répartition de l’activité par type de mandataires</Heading2>
-      <MandatairesActivityChart data={data} />
+      <MandatairesActivityChart data={activityChartData} />
     </Card>
   );
 };

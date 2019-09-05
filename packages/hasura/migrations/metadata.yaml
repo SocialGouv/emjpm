@@ -15,6 +15,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships:
   - comment: null
     name: user
@@ -55,6 +56,7 @@ tables:
       set:
         user_id: x-hasura-User-Id
     role: direction
+  is_enum: false
   object_relationships: []
   select_permissions:
   - comment: null
@@ -87,6 +89,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships:
   - comment: null
     name: user
@@ -138,6 +141,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships: []
   select_permissions:
   - comment: null
@@ -217,6 +221,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships: []
   select_permissions:
   - comment: null
@@ -265,6 +270,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships:
   - comment: null
     name: ti
@@ -287,6 +293,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships: []
   select_permissions:
   - comment: null
@@ -459,6 +466,7 @@ tables:
       - username
       set: {}
     role: ti
+  is_enum: false
   object_relationships:
   - comment: null
     name: service
@@ -704,6 +712,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships:
   - comment: null
     name: region
@@ -790,6 +799,7 @@ tables:
       - antenne_id
       set: {}
     role: ti
+  is_enum: false
   object_relationships:
   - comment: null
     name: ti
@@ -861,6 +871,7 @@ tables:
       - created_at
       set: {}
     role: prepose
+  is_enum: false
   object_relationships:
   - comment: null
     name: etablissement
@@ -925,6 +936,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships:
   - comment: null
     name: user
@@ -952,6 +964,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships: []
   select_permissions:
   - comment: null
@@ -1064,6 +1077,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships:
   - comment: null
     name: service
@@ -1227,6 +1241,7 @@ tables:
       - ville
       set: {}
     role: ti
+  is_enum: false
   object_relationships:
   - comment: null
     name: ti
@@ -1466,6 +1481,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships:
   - comment: null
     name: role
@@ -1527,8 +1543,20 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships: []
   select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      filter: {}
+    role: service
   - comment: null
     permission:
       allow_aggregations: false
@@ -1573,23 +1601,13 @@ tables:
       - longitude
       filter: {}
     role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      filter: {}
-    role: service
   table: city
   update_permissions: []
 - array_relationships: []
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships: []
   select_permissions:
   - comment: null
@@ -1718,6 +1736,7 @@ tables:
       - ville
       set: {}
     role: prepose
+  is_enum: false
   object_relationships:
   - comment: null
     name: user
@@ -1882,6 +1901,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships:
   - comment: null
     name: ti
@@ -1898,11 +1918,19 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
-  object_relationships: []
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: departement
+    using:
+      manual_configuration:
+        column_mapping:
+          department_id: id
+        remote_table: departements
   select_permissions:
   - comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       columns:
       - department_id
       - dep_nom
@@ -1971,6 +1999,7 @@ tables:
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
+  is_enum: false
   object_relationships:
   - comment: null
     name: department
