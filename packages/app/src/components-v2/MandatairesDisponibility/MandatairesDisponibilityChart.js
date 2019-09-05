@@ -29,7 +29,7 @@ const data = [
 const MandatairesDisponibilityChart = () => {
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: 300 }}>
+      <Box sx={{ position: "relative", width: "100%", height: 397 }}>
         <ResponsiveContainer>
           <BarChart
             data={data}
@@ -89,7 +89,7 @@ const MandatairesDisponibilityChart = () => {
         }}
       >
         <Box>
-          <Flex mt="6" mb="7px">
+          <Flex mt="5" mb="7px">
             <Box bg="#3174D6" flexBasis="30px" maxWidth="30px" flexGrow="1" height="10px" />
             <Text ml="1" fontSize="10px">
               CAPACITÉ DES MANDATAIRES
@@ -97,7 +97,7 @@ const MandatairesDisponibilityChart = () => {
           </Flex>
         </Box>
         <Box>
-          <Flex mt="6" mb="7px">
+          <Flex mt="5" mb="7px">
             <Box bg="#D63C31" flexBasis="30px" maxWidth="30px" flexGrow="1" height="10px" />
             <Text ml="1" fontSize="10px">
               MANDATAIRES EN SURCAPACITÉ
@@ -105,7 +105,7 @@ const MandatairesDisponibilityChart = () => {
           </Flex>
         </Box>
         <Box>
-          <Flex mt="6" mb="7px">
+          <Flex mt="5" mb="7px">
             <Box bg="#70D54F" flexBasis="30px" maxWidth="30px" flexGrow="1" height="10px" />
             <Text ml="1" fontSize="10px">
               MANDATAIRES DISPONIBILITE
