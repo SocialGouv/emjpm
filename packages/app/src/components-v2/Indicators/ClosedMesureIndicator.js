@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
-import React, { useContext } from "react";
 import { Indicator } from "@socialgouv/emjpm-ui-components";
-
+import React, { useContext } from "react";
 import { FiltersContext } from "../Filters/context";
 import { GET_CLOSED_MESURE_NUMBER } from "./queries";
 
@@ -27,7 +26,7 @@ const ClosedMesureIndicator = () => {
       error={error}
       loading={loading}
       title="Mesures éteintes"
-      indicator={data.closedMesureNumber}
+      indicator={data ? data.closedMesureNumber : {}}
     />
   );
 };
