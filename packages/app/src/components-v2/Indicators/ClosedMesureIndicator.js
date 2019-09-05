@@ -26,7 +26,7 @@ const ClosedMesureIndicator = () => {
       error={error}
       loading={loading}
       title="Mesures éteintes"
-      indicator={data ? data.closedMesureNumber : {}}
+      indicator={data && data.closedMesureNumber ? data.closedMesureNumber : 0}
     />
   );
 };

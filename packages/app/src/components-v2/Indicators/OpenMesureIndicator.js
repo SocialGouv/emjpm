@@ -26,7 +26,7 @@ const OpenMesureIndicator = () => {
       error={error}
       loading={loading}
       title="Mesures en cours"
-      indicator={data ? data.openMesureNumber : {}}
+      indicator={data && data.openMesureNumber ? data.openMesureNumber : 0}
     />
   );
 };
