@@ -54,7 +54,10 @@ const Mandataires = () => {
         </FlexWrapper>
         <FlexWrapper flexWrap={"wrap"} mt={5}>
           <Box sx={twoColumnStyle}>
-            <MandatairesActivity />
+            <MandatairesDisponibility />
+          </Box>
+          <Box sx={twoColumnStyle}>
+            <MandatairesCapacity />
           </Box>
         </FlexWrapper>
       </LayoutDirection>
