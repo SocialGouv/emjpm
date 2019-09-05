@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box } from "rebass";
+import { convertToPercentage } from "../../util/math";
 import { FiltersContext } from "../Filters/context";
 import { MandatairesActivityChart } from "./MandatairesActivityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
@@ -36,45 +37,33 @@ const MandatairesActivity = props => {
     );
   }
 
+  const service = data.service.aggregate.sum.mesures_in_progress;
+  const mandataireIndividuel = data.mandataireIndividuel.aggregate.sum.mesures_in_progress;
+  const mandatairePrepose = data.mandatairePrepose.aggregate.sum.mesures_in_progress;
+  const total = service + mandataireIndividuel + mandatairePrepose;
+
+  const activityChartData = {
+    total,
+    service: {
+      sum: service,
+      percentage: convertToPercentage(service, total)
+    },
+    mandataireIndividuel: {
+      sum: mandataireIndividuel,
+      percentage: convertToPercentage(mandataireIndividuel, total)
+    },
+    mandatairePrepose: {
+      sum: mandatairePrepose,
+      percentage: convertToPercentage(mandatairePrepose, total)
+    }
+  };
+
   return (
     <Card p="4" {...props}>
       <Heading2>Répartition de l’activité par type de mandataires</Heading2>
-      <MandatairesActivityChart data={adaptData(data)} />
+      <MandatairesActivityChart data={activityChartData} />
     </Card>
   );
 };
 
 export { MandatairesActivity };
-
-function adaptData(data) {
-  const service = data.service.aggregate.sum.mesures_in_progress;
-  const mandataireIndividuel = data.mandataireIndividuel.aggregate.sum.mesures_in_progress;
-  const mandatairePrepose = data.mandatairePrepose.aggregate.sum.mesures_in_progress;
-  const total = service + mandataireIndividuel + mandatairePrepose;
-  return {
-    total,
-    service: {
-      sum: service,
-      percentage: percentage(service, total)
-    },
-    mandataireIndividuel: {
-      sum: mandataireIndividuel,
-      percentage: percentage(mandataireIndividuel, total)
-    },
-    mandatairePrepose: {
-      sum: mandatairePrepose,
-      percentage: percentage(mandatairePrepose, total)
-    }
-  };
-}
-
-function percentage(value, total) {
-  if (!total || total == 0) {
-    return;
-  }
-  return round((value / total) * 100);
-}
-
-function round(value) {
-  return Math.round(value * 100) / 100;
-}
