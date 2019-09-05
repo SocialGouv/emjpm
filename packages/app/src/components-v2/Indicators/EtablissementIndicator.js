@@ -15,10 +15,6 @@ const EtablissementIndicator = () => {
     }
   });
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
   return (
     <Indicator
       error={error}
