@@ -77,7 +77,7 @@ const data = [
 const MandatairesCapacityChart = () => {
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: 600 }}>
+      <Box sx={{ position: "relative", width: "100%", height: 400 }}>
         <ResponsiveContainer>
           <ComposedChart
             layout="vertical"
@@ -86,17 +86,17 @@ const MandatairesCapacityChart = () => {
             data={data}
             margin={{
               top: 20,
-              right: 20,
+              right: 0,
               bottom: 20,
-              left: 20
+              left: 0
             }}
           >
             <CartesianGrid stroke="#f5f5f5" />
             <XAxis type="number" hide={true} />
             <YAxis dataKey="name" type="category" />
             <Tooltip />
-            <Bar dataKey="Disponibilité max" stackId="a" barSize={20} fill="#3174D6" />
-            <Bar dataKey="Disponibilité actuelle" stackId="a" barSize={20} fill="#D63C31">
+            <Bar dataKey="Disponibilité max" stackId="a" barSize={10} fill="#3174D6" />
+            <Bar dataKey="Disponibilité actuelle" stackId="a" barSize={10} fill="#D63C31">
               {data.map((entry, index) => {
                 return (
                   <Cell key={`cell-${index}`} fill={entry.overcapacity ? "#D63C31" : "#70D54F"} />

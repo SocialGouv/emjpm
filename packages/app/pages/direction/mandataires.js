@@ -19,7 +19,7 @@ import { LayoutDirection } from "../../src/components-v2/Layout";
 import { MandatairesActivity } from "../../src/components-v2/MandatairesActivity";
 import { MandatairesDisponibility } from "../../src/components-v2/MandatairesDisponibility";
 import { MandatairesCapacity } from "../../src/components-v2/MandatairesCapacity";
-
+import { MandatairesSubNavigation } from "../../src/components-v2/MandatairesSubNavigation";
 const Mandataires = () => {
   return (
     <FiltersContextProvider>
@@ -42,11 +42,14 @@ const Mandataires = () => {
           </Box>
         </FlexWrapper>
         <FlexWrapper flexWrap={"wrap"} mt={5}>
+          <MandatairesSubNavigation />
+        </FlexWrapper>
+        <FlexWrapper flexWrap={"wrap"} mt={5}>
           <Box sx={twoColumnStyle}>
             <AvailabilityMap />
           </Box>
           <Box sx={twoColumnStyle}>
-            <MandatairesDisponibility />
+            <MandatairesActivity />
           </Box>
         </FlexWrapper>
         <FlexWrapper flexWrap={"wrap"} mt={5}>
