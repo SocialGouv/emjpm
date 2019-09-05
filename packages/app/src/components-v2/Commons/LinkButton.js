@@ -1,8 +1,9 @@
 import React from "react";
 import { Link as RebassLink } from "rebass";
+import { withRouter } from "next/router";
 import NextLink from "next/link";
 
-const LinkButtonStyle = () => {
+const LinkButtonStyle = isActive => {
   return {
     bg: "primary",
     borderRadius: "default",
@@ -15,23 +16,28 @@ const LinkButtonStyle = () => {
     lineHeight: "1.2",
     outline: "none",
     transition: "150ms ease-in-out opacity",
+    opacity: isActive ? 1 : 0.6,
     "&:hover": {
-      opacity: "0.9"
+      color: "white",
+      opacity: "0.8",
+      textDecoration: "none"
     },
     "&:active": {
-      opacity: "0.8"
+      color: "white",
+      opacity: "0.6"
     }
   };
 };
 
-const LinkButton = props => {
+const LinkButton = ({ router, ...props }) => {
+  const isActive = router.pathname === props.href;
   return (
     <NextLink {...props}>
-      <RebassLink sx={LinkButtonStyle()} {...props}>
+      <RebassLink sx={LinkButtonStyle(isActive)} {...props}>
         {props.children}
       </RebassLink>
     </NextLink>
   );
 };
 
-export { LinkButton };
+export default withRouter(LinkButton);
