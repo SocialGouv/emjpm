@@ -1,35 +1,46 @@
 import React from "react";
-import { Pie, PieChart, Cell, ResponsiveContainer } from "recharts";
 import { Box, Text } from "rebass";
-
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 }
-];
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { legendStyle, numberStyle, percentStyle, textStyle, pieTextStyle } from "./style";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
-import { textStyle, numberStyle, percentStyle, pieTextStyle, legendStyle } from "./style";
 
-const MandatairesActivityChart = () => {
+const MandatairesActivityChart = props => {
+  const total = props.data.total;
+
+  const serviceSum = props.data.service.sum;
+  const servicePercentage = props.data.service.percentage;
+
+  const mandataireIndividuelSum = props.data.mandataireIndividuel.sum;
+  const mandataireIndividuelPercentage = props.data.mandataireIndividuel.percentage;
+
+  const mandatairePreposeSum = props.data.mandatairePrepose.sum;
+  const mandatairePreposePercentage = props.data.mandatairePrepose.percentage;
+
+  const pieChartData = [
+    { name: "SERVICES MANDATAIRES", value: serviceSum },
+    { name: "MANDATAIRES INDIVIDUELS", value: mandataireIndividuelSum },
+    { name: "PRÉPOSÉS D’ÉTABLISSEMENTS", value: mandatairePreposeSum }
+  ];
+
   return (
     <Box>
       <Box sx={{ position: "relative", width: "100%", height: 300 }}>
         <Text sx={pieTextStyle}>
-          11304
+          {total}
           <Text sx={legendStyle}>mesures</Text>
         </Text>
         <ResponsiveContainer>
-          <PieChart onMouseEnter={data => console.log(data)}>
+          <PieChart>
             <Pie
-              data={data}
+              data={pieChartData}
               innerRadius={60}
               outerRadius={80}
               fill="#8884d8"
               paddingAngle={5}
               dataKey="value"
             >
-              {data.map((entry, index) => (
+              {pieChartData.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
@@ -48,22 +59,22 @@ const MandatairesActivityChart = () => {
           <Text color={COLORS[0]} sx={textStyle}>
             SERVICES MANDATAIRES
           </Text>
-          <Text sx={numberStyle}>6700</Text>
-          <Text sx={percentStyle}>23,9 %</Text>
+          <Text sx={numberStyle}>{serviceSum}</Text>
+          <Text sx={percentStyle}>{servicePercentage} %</Text>
         </Box>
         <Box>
           <Text color={COLORS[1]} sx={textStyle}>
             MANDATAIRES INDIVIDUELS
           </Text>
-          <Text sx={numberStyle}>5000</Text>
-          <Text sx={percentStyle}>23,9 %</Text>
+          <Text sx={numberStyle}>{mandataireIndividuelSum}</Text>
+          <Text sx={percentStyle}>{mandataireIndividuelPercentage} %</Text>
         </Box>
         <Box>
           <Text color={COLORS[2]} sx={textStyle}>
             PRÉPOSÉS D’ÉTABLISSEMENTS
           </Text>
-          <Text sx={numberStyle}>4200</Text>
-          <Text sx={percentStyle}>23,9 %</Text>
+          <Text sx={numberStyle}>{mandatairePreposeSum}</Text>
+          <Text sx={percentStyle}>{mandatairePreposePercentage} %</Text>
         </Box>
       </Box>
     </Box>
