@@ -1,32 +1,11 @@
 import React from "react";
-import { BarChart, Bar, ResponsiveContainer, Cell, Tooltip } from "recharts";
-import { Box, Text, Flex } from "rebass";
-
+import { Box, Flex, Text } from "rebass";
+import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip } from "recharts";
 import { textStyle } from "../MandatairesActivity/style";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
-const data = [
-  {
-    name: "SERVICES MANDATAIRES",
-    "Disponibilité max": 30000,
-    "Disponibilité actuelle": -2000,
-    overcapacity: true
-  },
-  {
-    name: "MANDATAIRES INDIVIDUELS",
-    "Disponibilité max": 10000,
-    "Disponibilité actuelle": -8000,
-    overcapacity: true
-  },
-  {
-    name: "PRÉPOSÉS D’ÉTABLISSEMENTS",
-    "Disponibilité max": 15000,
-    "Disponibilité actuelle": 9000,
-    overcapacity: false
-  }
-];
 
-const MandatairesDisponibilityChart = () => {
+const MandatairesDisponibilityChart = ({ data }) => {
   return (
     <Box>
       <Box sx={{ position: "relative", width: "100%", height: [300, 300, 402] }}>
