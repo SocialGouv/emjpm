@@ -1,0 +1,3 @@
+const MandatairesExportStyle = {};
+
+export { MandatairesExportStyle };

@@ -498,9 +498,7 @@ tables:
       - reset_password_token
       - type
       - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
+      filter: {}
     role: direction
   - comment: null
     permission:
@@ -945,7 +943,25 @@ tables:
         column_mapping:
           id: service_id
         remote_table: users
-  select_permissions: []
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - etablissement
+      - email
+      - nom
+      - prenom
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - dispo_max
+      - created_at
+      - information
+      filter: {}
+    role: direction
   table: services
   update_permissions: []
 - array_relationships:
@@ -1745,30 +1761,6 @@ tables:
   select_permissions:
   - comment: null
     permission:
-      allow_aggregations: true
-      columns:
-      - id
-      - etablissement
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - mesures_en_cours
-      - dispo_max
-      - user_id
-      - telephone_portable
-      - secretariat
-      - nb_secretariat
-      - created_at
-      - date_mesure_update
-      - email_send
-      - genre
-      - mesures_en_attente
-      - zip
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
       allow_aggregations: false
       columns:
       - secretariat
@@ -1843,6 +1835,30 @@ tables:
       - ville
       filter: {}
     role: ti
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - etablissement
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - mesures_en_cours
+      - dispo_max
+      - user_id
+      - telephone_portable
+      - secretariat
+      - nb_secretariat
+      - created_at
+      - date_mesure_update
+      - email_send
+      - genre
+      - mesures_en_attente
+      - zip
+      filter: {}
+    role: direction
   table: mandataires
   update_permissions:
   - comment: null
