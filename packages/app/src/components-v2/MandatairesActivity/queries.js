@@ -5,7 +5,7 @@ export const MANDATAIRE_ACTIVITY = gql`
     service: view_mesure_gestionnaire_aggregate(
       where: {
         departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } }
-        discriminator: { _eq: "ANTENNE" }
+        discriminator: { _eq: "SERVICE" }
       }
     ) {
       aggregate {
