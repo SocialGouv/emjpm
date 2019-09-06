@@ -1,24 +1,16 @@
-import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import React, { useContext } from "react";
 import { Box } from "rebass";
-
-import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { FiltersContext } from "../Filters/context";
+import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 
 const MandatairesDisponibility = props => {
-  const {
-    selectedRegionalValue,
-    startDateValue,
-    selectedDepartementValue,
-    endDateValue
-  } = useContext(FiltersContext);
+  const { selectedDepartementValue, selectedRegionalValue } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
-      start: startDateValue,
-      end: endDateValue,
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
     }
@@ -44,12 +36,37 @@ const MandatairesDisponibility = props => {
     );
   }
 
+  const remainingCapacity = data =>
+    data.mesures_max - data.mesures_awaiting - data.mesures_in_progress;
+
+  const overcapacity = data => remainingCapacity(data) < 0;
+
+  const getCapacity = data => ({
+    "Disponibilité max": data.mesures_max,
+    "Disponibilité actuelle": remainingCapacity(data),
+    overcapacity: overcapacity(data)
+  });
+
+  const activityChartData = [
+    {
+      name: "SERVICES MANDATAIRES",
+      ...getCapacity(data.service.aggregate.sum)
+    },
+    {
+      name: "MANDATAIRES INDIVIDUELS",
+      ...getCapacity(data.mandataireIndividuel.aggregate.sum)
+    },
+    {
+      name: "PRÉPOSÉS D’ÉTABLISSEMENTS",
+      ...getCapacity(data.mandatairePrepose.aggregate.sum)
+    }
+  ];
+
   return (
     <Card p="4" {...props}>
       <Heading2>Disponibilités par type de mandataires</Heading2>
-      <MandatairesDisponibilityChart data={data} />
+      <MandatairesDisponibilityChart data={activityChartData} />
     </Card>
   );
 };
-
 export { MandatairesDisponibility };
