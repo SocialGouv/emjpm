@@ -16,7 +16,7 @@ const LinkButtonStyle = isActive => {
     lineHeight: "1.2",
     outline: "none",
     transition: "150ms ease-in-out opacity",
-    opacity: isActive ? 1 : 0.6,
+    opacity: isActive ? 0.6 : 1,
     "&:hover": {
       color: "white",
       opacity: "0.8",

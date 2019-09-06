@@ -11,9 +11,9 @@ const MandatairesSubNavigation = props => {
         <LinkButton href="/direction/mandataires" mr="1">
           Vue globale
         </LinkButton>
-        <LinkButton href="/direction/mandataireslist">Vue détaillée</LinkButton>
+        <LinkButton href="/direction/mandataires/list">Vue détaillée</LinkButton>
       </Flex>
-      <LinkButton href="/direction/mandataireslist">Exporter toutes les données</LinkButton>
+      <LinkButton href="/direction">Exporter toutes les données</LinkButton>
     </Flex>
   );
 };
