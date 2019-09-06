@@ -77,7 +77,7 @@ const data = [
 const MandatairesCapacityChart = () => {
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: 400 }}>
+      <Box sx={{ position: "relative", width: "100%", height: [300, 300, 400] }}>
         <ResponsiveContainer>
           <ComposedChart
             layout="vertical"
