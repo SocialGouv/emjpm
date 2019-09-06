@@ -29,7 +29,7 @@ const data = [
 const MandatairesDisponibilityChart = () => {
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: 397 }}>
+      <Box sx={{ position: "relative", width: "100%", height: [300, 300, 402] }}>
         <ResponsiveContainer>
           <BarChart
             data={data}
