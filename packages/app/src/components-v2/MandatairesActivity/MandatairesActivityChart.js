@@ -25,7 +25,7 @@ const MandatairesActivityChart = props => {
 
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: 300 }}>
+      <Box sx={{ position: "relative", width: "100%", height: [300, 300, 300] }}>
         <Text sx={pieTextStyle}>
           {total}
           <Text sx={legendStyle}>mesures</Text>
