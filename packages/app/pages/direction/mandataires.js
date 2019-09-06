@@ -17,9 +17,10 @@ import {
 } from "../../src/components-v2/Indicators";
 import { LayoutDirection } from "../../src/components-v2/Layout";
 import { MandatairesActivity } from "../../src/components-v2/MandatairesActivity";
-import { MandatairesDisponibility } from "../../src/components-v2/MandatairesDisponibility";
 import { MandatairesCapacity } from "../../src/components-v2/MandatairesCapacity";
+import { MandatairesDisponibility } from "../../src/components-v2/MandatairesDisponibility";
 import { MandatairesSubNavigation } from "../../src/components-v2/MandatairesSubNavigation";
+
 const Mandataires = () => {
   return (
     <FiltersContextProvider>
