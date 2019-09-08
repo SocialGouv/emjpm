@@ -136,7 +136,7 @@ $ CONVENTIONAL_GITHUB_RELEASER_TOKEN==************ npx conventional-github-relea
 ## Deployment policy
 
 All branches and tags are automaticly deployed
-See https://github.com/SocialGouv/work-in-france/deployments
+See https://github.com/SocialGouv/emjpm/deployments
 
 ### Auto
 
