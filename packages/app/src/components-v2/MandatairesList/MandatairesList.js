@@ -36,6 +36,7 @@ const MandatairesList = props => {
       </Card>
     );
   }
+
   const list = formatMandatairesList(data.mandatairesList);
   return (
     <Box sx={MandatairesListStyle} {...props}>

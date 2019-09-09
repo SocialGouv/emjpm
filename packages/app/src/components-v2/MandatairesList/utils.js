@@ -1,31 +1,46 @@
+const TYPES = {
+  SERVICE: "service",
+  MANDATAIRE_PRE: "préposé",
+  MANDATAIRE_IND: "individuel"
+};
+
+const capitalize = string => {
+  return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
+};
+
 export const formatMandatairesList = mandatairesList => {
   return mandatairesList.map(row => {
     let currentDiscriminator = {};
     const { discriminator, mesures_max, mesures_in_progress, service, mandataire } = row;
+
     const common = {
       currentAvailability: mesures_max - mesures_in_progress,
       dispo_max: mesures_max || 0,
       isAvailable: mesures_max < mesures_in_progress,
-      cvLink: "test"
+      cvLink: "test",
+      type: TYPES[discriminator]
     };
-    if (service) {
+
+    if (discriminator === "SERVICE") {
       currentDiscriminator = {
         id: `${discriminator}-${service.id}`,
-        email: service.email ? service.email : "",
-        nom: service.nom ? service.nom : "",
-        prenom: service.prenom ? service.prenom : "",
-        telephone_portable: service.telephone ? service.telephone : "",
-        ville: service.ville ? service.ville : ""
+        email: service.email ? service.email : "non renseigné",
+        nom: service.nom ? capitalize(service.nom) : "non renseigné",
+        prenom: service.prenom ? capitalize(service.prenom) : "non renseigné",
+        telephone_portable: service.telephone ? service.telephone : "non renseigné",
+        ville: service.ville ? capitalize(service.ville) : "non renseigné",
+        genre: "F"
       };
     } else {
+      console.log();
       currentDiscriminator = {
         id: `${discriminator}-${mandataire.id}`,
-        email: mandataire.user.email ? mandataire.user.email : "Email",
-        nom: mandataire.user.nom,
-        prenom: mandataire.user.prenom,
-        telephone_portable: mandataire.telephone ? mandataire.user.telephone : "Téléphone",
-        ville: mandataire.ville ? mandataire.ville : "Ville",
-        isWoman: mandataire.genre === "H" ? false : true
+        email: mandataire.user.email ? mandataire.user.email : "non renseigné",
+        nom: mandataire.user.nom ? capitalize(mandataire.user.nom) : "non renseigné",
+        prenom: mandataire.user.prenom ? capitalize(mandataire.user.prenom) : "non renseigné",
+        telephone_portable: mandataire.telephone,
+        ville: mandataire.ville ? capitalize(mandataire.ville) : "non renseigné",
+        genre: mandataire.genre ? mandataire.genre : "F"
       };
     }
     return {
