@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.5.0](https://github.com/SocialGouv/emjpm/compare/v23.4.5...v23.5.0) (2019-09-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cypress to ^3.3.2 ([#464](https://github.com/SocialGouv/emjpm/issues/464)) ([f1056c1](https://github.com/SocialGouv/emjpm/commit/f1056c1))
+
+
+### Features
+
+* **hasura:** introduce hasura, change auth ([#504](https://github.com/SocialGouv/emjpm/issues/504)) ([83a0fe9](https://github.com/SocialGouv/emjpm/commit/83a0fe9))
+
+
+
+
+
 ## [23.4.5](https://github.com/SocialGouv/emjpm/compare/v23.4.4...v23.4.5) (2019-07-05)
 
 **Note:** Version bump only for package @optional/e2e
