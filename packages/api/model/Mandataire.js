@@ -42,7 +42,7 @@ class Mandataire extends Model {
   }
   static get relationMappings() {
     const { User } = require("./User");
-    const { ServiceAntenneModel } = require("./ServiceAntenne");
+    const { Department } = require("./Departments");
     return {
       users: {
         relation: Model.BelongsToOneRelation,
@@ -52,12 +52,12 @@ class Mandataire extends Model {
           to: "users.id"
         }
       },
-      antenne: {
+      department: {
         relation: Model.BelongsToOneRelation,
-        modelClass: ServiceAntenneModel,
+        modelClass: Department,
         join: {
-          from: "mandataires.antenne_id",
-          to: "service_antenne.id"
+          from: "mandataires.department_id",
+          to: "departements.id"
         }
       }
     };
