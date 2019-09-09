@@ -63,14 +63,6 @@ class ServiceAntenne extends Model {
           from: "service_antenne.service_id",
           to: "users.id"
         }
-      },
-      mandataires: {
-        relation: Model.HasManyRelation,
-        modelClass: Mandataire,
-        join: {
-          from: "service_antenne.id",
-          to: "mandataires.id"
-        }
       }
     };
   }
