@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const { User } = require("../../model/User");
 const { Mandataire } = require("../../model/Mandataire");
+const { Department } = require("../../model/Departments");
 const { UserTis } = require("../../model/UserTis");
 const { UserRole } = require("../../model/UserRole");
 const { Role } = require("../../model/Role");
@@ -16,10 +17,19 @@ const {
   createServiceAdmin
 } = require("./utils/service");
 
-const createMandataire = (body, user) =>
-  Mandataire.query()
+const createMandataire = async (body, user) => {
+  const code_postal = body.code_postal;
+
+  const department = await Department.query()
+    .where("code", code_postal.substring(0, 2))
+    .limit(1)
+    .first();
+
+  const department_id = department.id;
+
+  return Mandataire.query()
     .allowInsert(
-      "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville]"
+      "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville, department_id]"
     )
     .insert({
       user_id: user.id,
@@ -27,9 +37,11 @@ const createMandataire = (body, user) =>
       telephone: body.telephone,
       telephone_portable: body.telephone_portable,
       adresse: body.adresse,
-      code_postal: body.code_postal,
+      code_postal,
+      department_id,
       ville: body.ville
     });
+};
 
 const createUserTis = (body, user_id) => {
   const { tis } = body;

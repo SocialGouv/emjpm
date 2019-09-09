@@ -370,6 +370,12 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
+  "department_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
   "dispo_max": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -800,6 +806,12 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "timestamp with time zone",
+  },
+  "department_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
   },
   "dispo_max": Object {
     "defaultValue": null,
