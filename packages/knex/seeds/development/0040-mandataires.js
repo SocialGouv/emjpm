@@ -7,6 +7,7 @@ exports.seed = function(knex) {
         return knex("mandataires").insert({
           etablissement: "UDAHF",
           code_postal: "62000",
+          department_id: 6,
           ville: "Arras",
           telephone: "0237100000",
           telephone_portable: "0101010101",
@@ -23,6 +24,7 @@ exports.seed = function(knex) {
         return knex("mandataires").insert({
           etablissement: "test42",
           code_postal: "62000",
+          department_id: 6,
           ville: "Paris",
           telephone: "0237100000",
           telephone_portable: "0101010101",
@@ -40,6 +42,7 @@ exports.seed = function(knex) {
         return knex("mandataires").insert({
           etablissement: "test43",
           code_postal: "75000",
+          department_id: 7,
           ville: "Paris",
           telephone: "0237100000",
           telephone_portable: "0101010101",
@@ -56,6 +59,7 @@ exports.seed = function(knex) {
         return knex("mandataires").insert({
           etablissement: "test43",
           code_postal: "10000",
+          department_id: 10,
           ville: "Paris",
           telephone: "0237100000",
           telephone_portable: "0101010101",
@@ -73,6 +77,7 @@ exports.seed = function(knex) {
         return knex("mandataires").insert({
           etablissement: "service-1",
           code_postal: "13000",
+          department_id: 13,
           ville: "Marseille",
           telephone: "0237100000",
           telephone_portable: "0101010101",
