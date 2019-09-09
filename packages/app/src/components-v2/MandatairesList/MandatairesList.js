@@ -1,11 +1,10 @@
+import { useQuery } from "@apollo/react-hooks";
+import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
+import { Button, Card, Heading2, Heading4, Spinner, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import { Box } from "rebass";
-import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading2, Heading4, Spinner, Button, Text } from "@socialgouv/emjpm-ui-core";
-import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
-
-import { MandatairesListStyle } from "./style";
 import { GET_MANDATAIRES } from "./queries";
+import { MandatairesListStyle } from "./style";
 
 const MandatairesList = props => {
   const [current, setCurrentPage] = useState(0);
@@ -34,24 +33,16 @@ const MandatairesList = props => {
     );
   }
 
-  const datas = data.view_mesure_gestionnaire.map(mandataire => {
+  const datas = data.mandatairesList.map(row => {
     let currentDiscriminator = {};
-    const {
-      discriminator,
-      user,
-      service,
-      mesures_max,
-      mesures_in_progress,
-      source_id
-    } = mandataire;
+    const { mesures_max, mesures_in_progress, service, mandataire } = row;
     const common = {
       currentAvailability: mesures_max - mesures_in_progress,
       dispo_max: mesures_max || 0,
-      id: source_id,
       isAvailable: mesures_max < mesures_in_progress,
       cvLink: "test"
     };
-    if (discriminator === "SERVICE") {
+    if (service) {
       currentDiscriminator = {
         email: service.email,
         nom: service.nom,
@@ -61,12 +52,12 @@ const MandatairesList = props => {
       };
     } else {
       currentDiscriminator = {
-        email: user ? user.email : "Email",
-        nom: user ? user.nom : "",
-        prenom: user ? user.prenom : "",
-        telephone_portable: user && user.mandataire ? user.mandataire.telephone : "Téléphone",
-        ville: user && user.mandataire ? user.mandataire.ville : "Ville",
-        isWoman: user && user.mandataire ? user.mandataire.genre === "H" : true
+        email: mandataire.user.email ? mandataire.user.email : "Email",
+        nom: mandataire.user.nom,
+        prenom: mandataire.user.prenom,
+        telephone_portable: mandataire.telephone ? mandataire.user.telephone : "Téléphone",
+        ville: mandataire.ville ? mandataire.ville : "Ville",
+        isWoman: mandataire.genre === "H" ? false : true
       };
     }
     return {
