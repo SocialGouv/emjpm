@@ -1,4 +1,5 @@
 const knex = require("../knex.js");
+
 //const whitelist = require("./whitelist");
 
 //const ALLOWED_FILTERS = ["users.active", "users.type"];
@@ -17,10 +18,19 @@ const getCountMesures = (id, filters = { status: "Mesure en cours" }) =>
     .then(r => r.count);
 
 // update mandataire data
-const updateMandataire = (id, data) =>
-  knex("mandataires")
+const updateMandataire = async (id, data) => {
+  if (data.code_postal) {
+    const departments = await knex("departements").where(
+      "code",
+      data.code_postal.substring(0, 2)
+    );
+    data.department_id = departments[0].id;
+  }
+
+  return knex("mandataires")
     .where({ id })
     .update(data);
+};
 
 // todo move to trigger/view
 const updateCountMesures = id =>
