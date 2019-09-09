@@ -20,12 +20,12 @@ const {
 const createMandataire = async (body, user) => {
   const code_postal = body.code_postal;
 
-  const departments = await Department.query().where(
-    "code",
-    code_postal.substring(0, 2)
-  );
+  const department = await Department.query()
+    .where("code", code_postal.substring(0, 2))
+    .limit(1)
+    .first();
 
-  const department_id = departments[0].id;
+  const department_id = department.id;
 
   return Mandataire.query()
     .allowInsert(
