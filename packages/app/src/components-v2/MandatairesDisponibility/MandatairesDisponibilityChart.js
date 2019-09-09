@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip } from "recharts";
+import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 import { textStyle } from "../MandatairesActivity/style";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
@@ -20,6 +20,7 @@ const MandatairesDisponibilityChart = ({ data }) => {
             }}
           >
             <Tooltip cursor={{ fill: "#F1F5F9" }} />
+            <XAxis dataKey="name" hide={true} />
             <Bar barSize={40} dataKey="Disponibilité max" stackId="a">
               {data.map((entry, index) => {
                 return <Cell key={`cell-${index}`} fill="#3174D6" />;
