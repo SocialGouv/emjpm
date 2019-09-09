@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.5.0](https://github.com/SocialGouv/emjpm/compare/v23.4.5...v23.5.0) (2019-09-09)
+
+
+### Bug Fixes
+
+* **api-signup:** add validation and update tests ([#620](https://github.com/SocialGouv/emjpm/issues/620)) ([e8ac0dc](https://github.com/SocialGouv/emjpm/commit/e8ac0dc))
+* **deps:** update dependencies ([#489](https://github.com/SocialGouv/emjpm/issues/489)) ([8ca4a42](https://github.com/SocialGouv/emjpm/commit/8ca4a42))
+* **deps:** update dependency es6-promise to ^4.2.8 ([#467](https://github.com/SocialGouv/emjpm/issues/467)) ([bfcb45c](https://github.com/SocialGouv/emjpm/commit/bfcb45c))
+* **deps:** update dependency nodemailer to ^6.3.0 ([#534](https://github.com/SocialGouv/emjpm/issues/534)) ([6278273](https://github.com/SocialGouv/emjpm/commit/6278273))
+* **deps:** update dependency pg to ^4.5.7 ([#477](https://github.com/SocialGouv/emjpm/issues/477)) ([550af56](https://github.com/SocialGouv/emjpm/commit/550af56))
+* **deps:** update dependency swagger-ui-dist to ^3.23.1 ([#533](https://github.com/SocialGouv/emjpm/issues/533)) ([36a9ddf](https://github.com/SocialGouv/emjpm/commit/36a9ddf))
+* **mandataires:** prepose can see their etablissement ([#441](https://github.com/SocialGouv/emjpm/issues/441)) ([76f4eb5](https://github.com/SocialGouv/emjpm/commit/76f4eb5))
+* **sentry:** initialise sentry if necessary ([#626](https://github.com/SocialGouv/emjpm/issues/626)) ([a6457cb](https://github.com/SocialGouv/emjpm/commit/a6457cb))
+
+
+### Features
+
+* **api:** add postal-code and city synchronisation ([#424](https://github.com/SocialGouv/emjpm/issues/424)) ([3a31901](https://github.com/SocialGouv/emjpm/commit/3a31901))
+* **apollo-client:** introduce apollo client ([#625](https://github.com/SocialGouv/emjpm/issues/625)) ([1de496c](https://github.com/SocialGouv/emjpm/commit/1de496c))
+* **app:** update to next 9 and styled-components 4 ([#583](https://github.com/SocialGouv/emjpm/issues/583)) ([b29bd0c](https://github.com/SocialGouv/emjpm/commit/b29bd0c)), closes [#83](https://github.com/SocialGouv/emjpm/issues/83)
+* **department-id:** add column in mandataires and services ([#707](https://github.com/SocialGouv/emjpm/issues/707)) ([a379b95](https://github.com/SocialGouv/emjpm/commit/a379b95))
+* **direction:** reorder files and code splitting ([#647](https://github.com/SocialGouv/emjpm/issues/647)) ([4d168d6](https://github.com/SocialGouv/emjpm/commit/4d168d6))
+* **hasura:** introduce hasura, change auth ([#504](https://github.com/SocialGouv/emjpm/issues/504)) ([83a0fe9](https://github.com/SocialGouv/emjpm/commit/83a0fe9))
+* **inscription:** fix service creation with new database organization ([#672](https://github.com/SocialGouv/emjpm/issues/672)) ([f25c2a0](https://github.com/SocialGouv/emjpm/commit/f25c2a0))
+* **inscription:** inscription for dr and dd ([#518](https://github.com/SocialGouv/emjpm/issues/518)) ([8ab7c93](https://github.com/SocialGouv/emjpm/commit/8ab7c93))
+* **mesures:** add departement_id for mesures ([#571](https://github.com/SocialGouv/emjpm/issues/571)) ([12d46a7](https://github.com/SocialGouv/emjpm/commit/12d46a7))
+* **service-antenne:** introduce service antenne without changing UI ([#584](https://github.com/SocialGouv/emjpm/issues/584)) ([0f855c5](https://github.com/SocialGouv/emjpm/commit/0f855c5))
+* **signup:** allow DRDD to sign up ([#580](https://github.com/SocialGouv/emjpm/issues/580)) ([96aab34](https://github.com/SocialGouv/emjpm/commit/96aab34))
+
+
+
+
+
 ## [23.4.5](https://github.com/SocialGouv/emjpm/compare/v23.4.4...v23.4.5) (2019-07-05)
 
 **Note:** Version bump only for package @emjpm/api

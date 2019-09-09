@@ -3,6 +3,72 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.5.0](https://github.com/SocialGouv/emjpm/compare/v23.4.5...v23.5.0) (2019-09-09)
+
+
+### Bug Fixes
+
+* **alert:** remove alert in favor of react modal ref [#582](https://github.com/SocialGouv/emjpm/issues/582) ([#585](https://github.com/SocialGouv/emjpm/issues/585)) ([cef5214](https://github.com/SocialGouv/emjpm/commit/cef5214))
+* **apollo-state:** fix only browser apollo cache state ([#685](https://github.com/SocialGouv/emjpm/issues/685)) ([1dcce41](https://github.com/SocialGouv/emjpm/commit/1dcce41))
+* **apollo-token:** fix token decode ([#689](https://github.com/SocialGouv/emjpm/issues/689)) ([8686079](https://github.com/SocialGouv/emjpm/commit/8686079))
+* **current-id:** add missing currentUser verification ([#693](https://github.com/SocialGouv/emjpm/issues/693)) ([656533e](https://github.com/SocialGouv/emjpm/commit/656533e))
+* **current-user:** add id instead of plain object ([#691](https://github.com/SocialGouv/emjpm/issues/691)) ([d8d953d](https://github.com/SocialGouv/emjpm/commit/d8d953d))
+* **deps:** update dependencies ([#489](https://github.com/SocialGouv/emjpm/issues/489)) ([8ca4a42](https://github.com/SocialGouv/emjpm/commit/8ca4a42))
+* **deps:** update dependency detect-browser to ^4.6.0 ([#466](https://github.com/SocialGouv/emjpm/issues/466)) ([ed8cd19](https://github.com/SocialGouv/emjpm/commit/ed8cd19))
+* **deps:** update dependency react-feather to v2 ([#494](https://github.com/SocialGouv/emjpm/issues/494)) ([1d5c930](https://github.com/SocialGouv/emjpm/commit/1d5c930))
+* **deps:** update dependency react-modal to ^3.9.1 ([#537](https://github.com/SocialGouv/emjpm/issues/537)) ([baa1b6a](https://github.com/SocialGouv/emjpm/commit/baa1b6a))
+* **deps:** update dependency redux to ^4.0.4 ([#497](https://github.com/SocialGouv/emjpm/issues/497)) ([046a28e](https://github.com/SocialGouv/emjpm/commit/046a28e))
+* **direction:** add tooltip title ([#705](https://github.com/SocialGouv/emjpm/issues/705)) ([4083467](https://github.com/SocialGouv/emjpm/commit/4083467))
+* **direction:** initialize indicator data ([#698](https://github.com/SocialGouv/emjpm/issues/698)) ([982e0ef](https://github.com/SocialGouv/emjpm/commit/982e0ef))
+* **disponibility-chart:** fix chart style ([#682](https://github.com/SocialGouv/emjpm/issues/682)) ([a231420](https://github.com/SocialGouv/emjpm/commit/a231420))
+* **frontend:** remove apollo calls during SSR ([#664](https://github.com/SocialGouv/emjpm/issues/664)) ([714d2f7](https://github.com/SocialGouv/emjpm/commit/714d2f7))
+* **get-user-id:** add fix for user id ([#695](https://github.com/SocialGouv/emjpm/issues/695)) ([09a5ec2](https://github.com/SocialGouv/emjpm/commit/09a5ec2))
+* **layout:** remove test ([#665](https://github.com/SocialGouv/emjpm/issues/665)) ([aead2c7](https://github.com/SocialGouv/emjpm/commit/aead2c7))
+* **mandataire:** edit mesure modal ([#694](https://github.com/SocialGouv/emjpm/issues/694)) ([36891c8](https://github.com/SocialGouv/emjpm/commit/36891c8))
+* **mandataires-style:** fix mandataires responsive style ([#701](https://github.com/SocialGouv/emjpm/issues/701)) ([7752f15](https://github.com/SocialGouv/emjpm/commit/7752f15))
+* **map-panel:** fix panel remove deprecated components ([#681](https://github.com/SocialGouv/emjpm/issues/681)) ([d369fed](https://github.com/SocialGouv/emjpm/commit/d369fed))
+* **mesure-evolution:** code splitting ([#648](https://github.com/SocialGouv/emjpm/issues/648)) ([face726](https://github.com/SocialGouv/emjpm/commit/face726))
+* **select-options:** change key args ([#639](https://github.com/SocialGouv/emjpm/issues/639)) ([f94eef1](https://github.com/SocialGouv/emjpm/commit/f94eef1))
+* **sentry:** initialise sentry if necessary ([#626](https://github.com/SocialGouv/emjpm/issues/626)) ([a6457cb](https://github.com/SocialGouv/emjpm/commit/a6457cb))
+
+
+### Features
+
+* **apollo-client:** introduce apollo client ([#625](https://github.com/SocialGouv/emjpm/issues/625)) ([1de496c](https://github.com/SocialGouv/emjpm/commit/1de496c))
+* **app:** update to next 9 and styled-components 4 ([#583](https://github.com/SocialGouv/emjpm/issues/583)) ([b29bd0c](https://github.com/SocialGouv/emjpm/commit/b29bd0c)), closes [#83](https://github.com/SocialGouv/emjpm/issues/83)
+* **app:** use exportTrailingSlash next option ([#659](https://github.com/SocialGouv/emjpm/issues/659)) ([e1ca3aa](https://github.com/SocialGouv/emjpm/commit/e1ca3aa))
+* **auth:** add current user id to apollo cache ffs ([#683](https://github.com/SocialGouv/emjpm/issues/683)) ([fb067c0](https://github.com/SocialGouv/emjpm/commit/fb067c0))
+* **components-package:** add new component package ([#656](https://github.com/SocialGouv/emjpm/issues/656)) ([732e6a2](https://github.com/SocialGouv/emjpm/commit/732e6a2))
+* **demographic-datas:** add base ([#649](https://github.com/SocialGouv/emjpm/issues/649)) ([e6d3ffb](https://github.com/SocialGouv/emjpm/commit/e6d3ffb))
+* **direction:** add available mesure indicator ([#646](https://github.com/SocialGouv/emjpm/issues/646)) ([dcb6839](https://github.com/SocialGouv/emjpm/commit/dcb6839))
+* **direction:** add open mesure indicator ([#645](https://github.com/SocialGouv/emjpm/issues/645)) ([ee66722](https://github.com/SocialGouv/emjpm/commit/ee66722))
+* **direction:** connect mandataire components to data ([#696](https://github.com/SocialGouv/emjpm/issues/696)) ([c7daab5](https://github.com/SocialGouv/emjpm/commit/c7daab5))
+* **direction:** connect mandataire disponibility chart to data ([#704](https://github.com/SocialGouv/emjpm/issues/704)) ([4399eb5](https://github.com/SocialGouv/emjpm/commit/4399eb5))
+* **direction:** implement indicators ([#640](https://github.com/SocialGouv/emjpm/issues/640)) ([c34ee9f](https://github.com/SocialGouv/emjpm/commit/c34ee9f))
+* **direction:** implement mandataire export ([#703](https://github.com/SocialGouv/emjpm/issues/703)) ([0581d96](https://github.com/SocialGouv/emjpm/commit/0581d96))
+* **direction:** introduce context to handle filters value ([#636](https://github.com/SocialGouv/emjpm/issues/636)) ([1d1bb5a](https://github.com/SocialGouv/emjpm/commit/1d1bb5a))
+* **direction:** relies statistic on service ([#697](https://github.com/SocialGouv/emjpm/issues/697)) ([c05e70c](https://github.com/SocialGouv/emjpm/commit/c05e70c))
+* **direction:** reorder files and code splitting ([#647](https://github.com/SocialGouv/emjpm/issues/647)) ([4d168d6](https://github.com/SocialGouv/emjpm/commit/4d168d6))
+* **direction-map:** add map component with query ref [#544](https://github.com/SocialGouv/emjpm/issues/544) ([#641](https://github.com/SocialGouv/emjpm/issues/641)) ([523346e](https://github.com/SocialGouv/emjpm/commit/523346e))
+* **hasura:** introduce hasura, change auth ([#504](https://github.com/SocialGouv/emjpm/issues/504)) ([83a0fe9](https://github.com/SocialGouv/emjpm/commit/83a0fe9))
+* **inscription:** fix service creation with new database organization ([#672](https://github.com/SocialGouv/emjpm/issues/672)) ([f25c2a0](https://github.com/SocialGouv/emjpm/commit/f25c2a0))
+* **layout:** refactor layout and box code ([#651](https://github.com/SocialGouv/emjpm/issues/651)) ([190ad69](https://github.com/SocialGouv/emjpm/commit/190ad69))
+* **logout:** add new logout function with protected routes hoc ([#671](https://github.com/SocialGouv/emjpm/issues/671)) ([16aed9e](https://github.com/SocialGouv/emjpm/commit/16aed9e))
+* **mandataire-activity:** add activity chart ([#676](https://github.com/SocialGouv/emjpm/issues/676)) ([8fb975f](https://github.com/SocialGouv/emjpm/commit/8fb975f))
+* **mandataire-capacity:** add mandataires page base components ([#684](https://github.com/SocialGouv/emjpm/issues/684)) ([df8cd9d](https://github.com/SocialGouv/emjpm/commit/df8cd9d))
+* **mandataires:** change message to see measure number ([#422](https://github.com/SocialGouv/emjpm/issues/422)) ([6794c4d](https://github.com/SocialGouv/emjpm/commit/6794c4d))
+* **mandataires-list:** add mandataires list components ([#702](https://github.com/SocialGouv/emjpm/issues/702)) ([a7b4618](https://github.com/SocialGouv/emjpm/commit/a7b4618))
+* **mesure-allocation:** add mesure alloication components ref [#545](https://github.com/SocialGouv/emjpm/issues/545) ([#642](https://github.com/SocialGouv/emjpm/issues/642)) ([a6d2aa8](https://github.com/SocialGouv/emjpm/commit/a6d2aa8))
+* **mesure-evolution:** add mesure evolution components ([#643](https://github.com/SocialGouv/emjpm/issues/643)) ([dd6c924](https://github.com/SocialGouv/emjpm/commit/dd6c924))
+* **mesures:** add departement_id for mesures ([#571](https://github.com/SocialGouv/emjpm/issues/571)) ([12d46a7](https://github.com/SocialGouv/emjpm/commit/12d46a7))
+* **services:** add informations components and query ([#670](https://github.com/SocialGouv/emjpm/issues/670)) ([3f0dc3a](https://github.com/SocialGouv/emjpm/commit/3f0dc3a))
+* **services-pages:** add services basic pages and layout ([#667](https://github.com/SocialGouv/emjpm/issues/667)) ([b0ff9b3](https://github.com/SocialGouv/emjpm/commit/b0ff9b3))
+* **signup:** allow DRDD to sign up ([#580](https://github.com/SocialGouv/emjpm/issues/580)) ([96aab34](https://github.com/SocialGouv/emjpm/commit/96aab34))
+
+
+
+
+
 ## [23.4.5](https://github.com/SocialGouv/emjpm/compare/v23.4.4...v23.4.5) (2019-07-05)
 
 **Note:** Version bump only for package @emjpm/app
