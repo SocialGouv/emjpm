@@ -937,6 +937,10 @@ tables:
   is_enum: false
   object_relationships:
   - comment: null
+    name: departement
+    using:
+      foreign_key_constraint_on: department_id
+  - comment: null
     name: user
     using:
       manual_configuration:
@@ -1754,6 +1758,10 @@ tables:
     role: prepose
   is_enum: false
   object_relationships:
+  - comment: null
+    name: departement
+    using:
+      foreign_key_constraint_on: department_id
   - comment: null
     name: user
     using:
