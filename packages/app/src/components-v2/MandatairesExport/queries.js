@@ -1,8 +1,14 @@
 import gql from "graphql-tag";
 
 export const MANDATAIRES = gql`
-  {
-    users {
+  query all($department: Int, $region: Int) {
+    mandataires: users(
+      where: {
+        mandataire: {
+          departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } }
+        }
+      }
+    ) {
       type
       nom
       prenom
@@ -18,12 +24,9 @@ export const MANDATAIRES = gql`
         mesures_en_attente
       }
     }
-  }
-`;
-
-export const SERVICES = gql`
-  {
-    services {
+    services: services(
+      where: { departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } } }
+    ) {
       etablissement
       adresse
       code_postal
