@@ -10,6 +10,9 @@
         envsubst < ./.k8s/certificate/certificate.yml > ./certificate.yml;
         kubectl apply -f ./certificate.yml;
       fi
+    - cat ./deployment.yml
+    - cat ./service.yml
+    - cat ./ingress.yml
     - kubectl apply -f ./deployment.yml
     - kubectl apply -f ./service.yml
     - kubectl apply -f ./ingress.yml
