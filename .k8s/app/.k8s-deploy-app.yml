@@ -13,6 +13,6 @@
     - cat ./deployment.yml
     - cat ./service.yml
     - cat ./ingress.yml
-    - kubectl apply -f ./deployment.yml
-    - kubectl apply -f ./service.yml
-    - kubectl apply -f ./ingress.yml
+    - kubectl apply --namespace ${K8S_NAMESPACE}-feature -f ./deployment.yml
+    - kubectl apply --namespace ${K8S_NAMESPACE}-feature  -f ./service.yml
+    - kubectl apply --namespace ${K8S_NAMESPACE}-feature  -f ./ingress.yml
