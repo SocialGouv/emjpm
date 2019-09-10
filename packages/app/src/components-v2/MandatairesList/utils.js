@@ -32,7 +32,6 @@ export const formatMandatairesList = mandatairesList => {
         genre: "F"
       };
     } else {
-      console.log();
       currentDiscriminator = {
         id: `${discriminator}-${mandataire.id}`,
         email: mandataire.user.email ? mandataire.user.email : "non renseigné",
