@@ -1,102 +1,66 @@
-import React from "react";
-import { Box } from "rebass";
+import React, { useState } from "react";
+import { useQuery } from "@apollo/react-hooks";
 
-import { MandatairesListStyle } from "./style";
+import { Button, Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Box, Flex } from "rebass";
 import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
 
-console.log(Mandatairelist);
-
-const datas = [
-  {
-    currentAvailability: 50,
-    cvLink: "http://google.fr",
-    dispo_max: 150,
-    email: "sarah@connor.com",
-    id: 123,
-    isAvailable: true,
-    isWoman: true,
-    nom: "Sarah",
-    prenom: "Connor",
-    telephone_portable: "0683961487",
-    type: "individuel",
-    ville: "Paris"
-  },
-  {
-    currentAvailability: -50,
-    cvLink: "http://google.fr",
-    dispo_max: 150,
-    email: "johnhenry@skynet.com",
-    id: 123,
-    isAvailable: true,
-    isWoman: false,
-    nom: "John",
-    prenom: "henry",
-    telephone_portable: "0683961487",
-    type: "service",
-    ville: "Paris"
-  },
-  {
-    currentAvailability: 50,
-    cvLink: "http://google.fr",
-    dispo_max: 150,
-    email: "sarah@connor.com",
-    id: 123,
-    isAvailable: true,
-    isWoman: true,
-    nom: "Sarah",
-    prenom: "Connor",
-    telephone_portable: "0683961487",
-    type: "individuel",
-    ville: "Paris"
-  },
-  {
-    currentAvailability: -50,
-    cvLink: "http://google.fr",
-    dispo_max: 150,
-    email: "johnhenry@skynet.com",
-    id: 123,
-    isAvailable: true,
-    isWoman: false,
-    nom: "John",
-    prenom: "henry",
-    telephone_portable: "0683961487",
-    type: "service",
-    ville: "Paris"
-  },
-  {
-    currentAvailability: 50,
-    cvLink: "http://google.fr",
-    dispo_max: 150,
-    email: "sarah@connor.com",
-    id: 123,
-    isAvailable: true,
-    isWoman: true,
-    nom: "Sarah",
-    prenom: "Connor",
-    telephone_portable: "0683961487",
-    type: "individuel",
-    ville: "Paris"
-  },
-  {
-    currentAvailability: -50,
-    cvLink: "http://google.fr",
-    dispo_max: 150,
-    email: "johnhenry@skynet.com",
-    id: 123,
-    isAvailable: true,
-    isWoman: false,
-    nom: "John",
-    prenom: "henry",
-    telephone_portable: "0683961487",
-    type: "service",
-    ville: "Paris"
-  }
-];
+import { formatMandatairesList } from "./utils";
+import { GET_MANDATAIRES } from "./queries";
+import { MandatairesListStyle } from "./style";
 
 const MandatairesList = props => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const { data, error, loading, fetchMore } = useQuery(GET_MANDATAIRES, {
+    variables: {
+      offset: 0
+    }
+  });
+
+  if (loading) {
+    return (
+      <Card>
+        <Heading2>Répartition des mesures à date</Heading2>
+        <Box my="5">
+          <Spinner />
+        </Box>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card>
+        <Heading2>Répartition des mesures à date</Heading2>
+        <Heading4>erreur</Heading4>
+      </Card>
+    );
+  }
+
+  const list = formatMandatairesList(data.mandatairesList);
   return (
     <Box sx={MandatairesListStyle} {...props}>
-      <Mandatairelist mandataires={datas} />
+      <Mandatairelist mandataires={list} />
+      <Flex mt="5" alignItem="center">
+        <Button
+          onClick={() => {
+            fetchMore({
+              variables: {
+                offset: currentPage + 10
+              },
+              updateQuery: (prev, { fetchMoreResult }) => {
+                setCurrentPage(currentPage + 10);
+                return {
+                  count: fetchMoreResult.count,
+                  mandatairesList: [...prev.mandatairesList, ...fetchMoreResult.mandatairesList]
+                };
+              }
+            });
+          }}
+        >
+          Afficher les mandataires suivants
+        </Button>
+      </Flex>
     </Box>
   );
 };

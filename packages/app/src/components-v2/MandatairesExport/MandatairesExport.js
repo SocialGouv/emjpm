@@ -35,7 +35,10 @@ const MandatairesExport = () => {
   return (
     <ApolloConsumer>
       {client => (
-        <Button onClick={() => exportFile(client, selectedRegionalValue, selectedDepartementValue)}>
+        <Button
+          mr={0}
+          onClick={() => exportFile(client, selectedRegionalValue, selectedDepartementValue)}
+        >
           Exporter toutes les données
         </Button>
       )}

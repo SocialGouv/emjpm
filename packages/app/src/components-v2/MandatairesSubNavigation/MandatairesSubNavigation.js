@@ -9,7 +9,7 @@ const MandatairesSubNavigation = ({ router, ...props }) => {
   return (
     <Flex sx={MandatairesSubNavigationStyle} {...props}>
       <Flex>
-        <LinkButton href="/direction/mandataires" mr="1">
+        <LinkButton href="/direction/mandataires" mr={"1"}>
           Vue globale
         </LinkButton>
         <LinkButton href="/direction/mandataires/list">Vue détaillée</LinkButton>
