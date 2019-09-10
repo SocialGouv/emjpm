@@ -9,6 +9,7 @@ metadata:
   annotations:
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
+    kubernetes.io/ingress.class: "azure/application-gateway"
 spec:
   rules:
     - host: ${API_HOST}
