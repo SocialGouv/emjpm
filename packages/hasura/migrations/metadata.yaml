@@ -1943,18 +1943,33 @@ tables:
         column_mapping:
           department_id: id
         remote_table: departements
+  - comment: null
+    name: service
+    using:
+      manual_configuration:
+        column_mapping:
+          service_id: id
+        remote_table: services
+  - comment: null
+    name: mandataire
+    using:
+      manual_configuration:
+        column_mapping:
+          mandataire_id: id
+        remote_table: mandataires
   select_permissions:
   - comment: null
     permission:
       allow_aggregations: true
       columns:
+      - service_id
+      - mandataire_id
+      - discriminator
       - department_id
       - dep_nom
-      - discriminator
-      - source_id
+      - mesures_max
       - mesures_awaiting
       - mesures_in_progress
-      - mesures_max
       filter: {}
     role: direction
   - comment: null
@@ -1962,10 +1977,11 @@ tables:
       allow_aggregations: false
       columns:
       - department_id
+      - mandataire_id
+      - mesures_max
+      - service_id
       - mesures_awaiting
       - mesures_in_progress
-      - mesures_max
-      - source_id
       - discriminator
       - dep_nom
       filter: {}
@@ -1975,10 +1991,11 @@ tables:
       allow_aggregations: false
       columns:
       - department_id
+      - mandataire_id
+      - mesures_max
+      - service_id
       - mesures_awaiting
       - mesures_in_progress
-      - mesures_max
-      - source_id
       - discriminator
       - dep_nom
       filter: {}
@@ -1988,10 +2005,11 @@ tables:
       allow_aggregations: false
       columns:
       - department_id
+      - mandataire_id
+      - mesures_max
+      - service_id
       - mesures_awaiting
       - mesures_in_progress
-      - mesures_max
-      - source_id
       - discriminator
       - dep_nom
       filter: {}
@@ -2001,10 +2019,11 @@ tables:
       allow_aggregations: false
       columns:
       - department_id
+      - mandataire_id
+      - mesures_max
+      - service_id
       - mesures_awaiting
       - mesures_in_progress
-      - mesures_max
-      - source_id
       - discriminator
       - dep_nom
       filter: {}
