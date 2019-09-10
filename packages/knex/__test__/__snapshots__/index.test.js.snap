@@ -1184,6 +1184,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "remaining_capacity": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "bigint",
+  },
   "service_id": Object {
     "defaultValue": null,
     "maxLength": null,
