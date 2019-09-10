@@ -20,7 +20,7 @@ include:
 
 .incubateur_stage: &incubateur_stage
   environment:
-    name: incubateur
+    name: prod
   only:
     refs:
       - triggers
@@ -29,7 +29,7 @@ include:
 
 .dev_stage: &dev_stage
   environment:
-    name: dev.factory
+    name: empjpm-dev
   only:
     refs:
       - branches

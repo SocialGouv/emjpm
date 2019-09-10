@@ -50,7 +50,7 @@ Delete useless k8s objects:
   stage: "Notify Finished Deployment"
   image: ${CI_REGISTRY}/socialgouv/docker/k8s-object-killer:0.0.8
   environment:
-    name: dev.factory
+    name: emjpm-dev
   script:
     - source ./.gitlab-ci/env.sh
     - sh /entrypoint.sh
