@@ -33,6 +33,9 @@ export const MANDATAIRES = gql`
       ville
       telephone
       dispo_max
+      email
+      nom
+      prenom
       service_antennes {
         name
         address_street
