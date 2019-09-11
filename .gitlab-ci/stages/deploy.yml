@@ -40,6 +40,23 @@ include:
 #
 #
 
+.create_namespace: &create_namespace
+  <<: *deploy_stage
+  extends: .base_docker_kube_image_stage
+  stage: "Registration"
+  script:
+    - kubectl create namespace ${K8S_NAMESPACE}
+    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=c-gsm8d:p-vdtv7
+
+Create namespace:
+  <<: *create_namespace
+  <<: *dev_stage
+
+
+#
+#
+#
+
 .deploy-frontend: &deploy_frontend
   <<: *deploy_stage
   extends: .k8s-deploy-app

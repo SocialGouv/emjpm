@@ -14,11 +14,14 @@ BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
 export BRANCH_HASH=${BRANCH_HASH:=$BRANCH_NAME_HASHED}
 
 export DOMAIN="emjpm.dev.fabrique.social.gouv.fr";
+export K8S_PROJECT="emjpm"
+export K8S_NAMESPACE="emjpm-feature-${BRANCH_HASH}"
 
 #
 
 if [[ "${BRANCH_NAME}" = "master" ]]; then
   export BRANCH_HASH=master;
+  export K8S_NAMESPACE="emjpm-master"
 fi
 
 if [[ -n "${COMMIT_TAG}" ]]; then
@@ -27,6 +30,7 @@ fi
 
 if [[ -n "${PRODUCTION+x}" ]]; then
   export BRANCH_HASH=prod;
+  export K8S_NAMESPACE="emjpm"
   #
   export POSTGRES_DATABASE="emjpm_prod"
   export DOMAIN="emjpm.fabrique.social.gouv.fr";

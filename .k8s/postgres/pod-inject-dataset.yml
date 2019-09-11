@@ -2,16 +2,16 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: ${K8S_NAMESPACE}-dataset-${BRANCH_HASH}
+  name: ${K8S_PROJECT}-dataset-${BRANCH_HASH}
   labels:
-    app: ${K8S_NAMESPACE}-dataset
+    app: ${K8S_PROJECT}-dataset
     git/branch: ${BRANCH_NAME}
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
 spec:
   containers:
     - image: ${EMJPM_REGISTRY}:${IMAGE_TAG}
-      name: ${K8S_NAMESPACE}-dataset-${BRANCH_HASH}
+      name: ${K8S_PROJECT}-dataset-${BRANCH_HASH}
       command: ["sh"]
       args: ["/dataset/inject-dataset.sh"]
       env:
