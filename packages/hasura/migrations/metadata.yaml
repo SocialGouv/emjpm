@@ -383,7 +383,6 @@ tables:
       - prenom
       - cabinet
       - email
-      - service_id
       set: {}
     role: direction
   - comment: null
@@ -392,7 +391,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -412,7 +410,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -432,7 +429,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -452,7 +448,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -469,10 +464,6 @@ tables:
   is_enum: false
   object_relationships:
   - comment: null
-    name: service
-    using:
-      foreign_key_constraint_on: service_id
-  - comment: null
     name: mandataire
     using:
       manual_configuration:
@@ -486,7 +477,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -506,7 +496,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -528,7 +517,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -550,7 +538,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -572,7 +559,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -595,7 +581,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -617,7 +602,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -639,7 +623,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -661,7 +644,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -683,7 +665,6 @@ tables:
       columns:
       - active
       - id
-      - service_id
       - created_at
       - last_login
       - reset_password_expires
@@ -940,13 +921,6 @@ tables:
     name: departement
     using:
       foreign_key_constraint_on: department_id
-  - comment: null
-    name: user
-    using:
-      manual_configuration:
-        column_mapping:
-          id: service_id
-        remote_table: users
   select_permissions:
   - comment: null
     permission:
@@ -1684,12 +1658,6 @@ tables:
   update_permissions: []
 - array_relationships:
   - comment: null
-    name: commentaires
-    using:
-      foreign_key_constraint_on:
-        column: mandataire_id
-        table: commentaires
-  - comment: null
     name: mandataire_etablissements
     using:
       foreign_key_constraint_on:
@@ -1701,6 +1669,12 @@ tables:
       foreign_key_constraint_on:
         column: mandataire_id
         table: mesures
+  - comment: null
+    name: commentaires
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table: commentaires
   delete_permissions: []
   event_triggers: []
   insert_permissions:

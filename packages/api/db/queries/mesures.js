@@ -43,13 +43,7 @@ const getAllMesuresByMandatairesFilter = (
       "users.type",
       "users.nom",
       "users.prenom",
-      "users.cabinet",
-      "services.etablissement as service_etablissement",
-      "services.nom as service_nom",
-      "services.telephone as service_telephone",
-      "services.prenom as service_prenom",
-      "services.email as service_email",
-      "services.dispo_max as service_dispo_max"
+      "users.cabinet"
     )
     .where("status", "Mesure en cours")
     .whereBetween("geolocalisation_code_postal.latitude", [
@@ -69,7 +63,6 @@ const getAllMesuresByMandatairesFilter = (
       "mesures.code_postal"
     )
     .whereIn("users.type", ["individuel", "prepose"])
-    .leftOuterJoin("services", "users.service_id", "services.id")
     .groupBy(
       "geolocalisation_code_postal.latitude",
       "geolocalisation_code_postal.longitude",
@@ -77,13 +70,7 @@ const getAllMesuresByMandatairesFilter = (
       "users.type",
       "users.nom",
       "users.prenom",
-      "users.cabinet",
-      "service_etablissement",
-      "service_nom",
-      "service_telephone",
-      "service_prenom",
-      "service_email",
-      "service_dispo_max"
+      "users.cabinet"
     )
     .where({ "user_tis.ti_id": Number(ti_id), "users.active": true });
 // .union(function() {

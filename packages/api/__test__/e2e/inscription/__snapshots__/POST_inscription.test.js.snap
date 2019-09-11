@@ -13,7 +13,6 @@ Object {
   "prenom": "testPrenom",
   "reset_password_expires": null,
   "reset_password_token": null,
-  "service_id": null,
   "type": "individuel",
   "username": "toto",
 }
