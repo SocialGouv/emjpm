@@ -2,8 +2,9 @@ import gql from "graphql-tag";
 
 export const MESURES = gql`
   query mesures($antenneId: Int!) {
-    mesures(where: { antenne_id: { _eq: 127 } }) {
+    mesures(where: { antenne_id: { _eq: 127 } }, limit: 10) {
       antenne_id
+      id
       cabinet
       civilite
       code_postal

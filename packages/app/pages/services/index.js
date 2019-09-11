@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Box, Flex } from "rebass";
+import { Flex } from "rebass";
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
 import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
@@ -16,18 +16,19 @@ const Mesures = () => {
         <ServicesFilters />
         <Flex
           sx={{
+            mt: "2",
             flexWrap: "wrap"
           }}
         >
-          <Box
+          {/* <Box
             sx={{
               flexGrow: 99999,
               flexBasis: 0,
               minWidth: 320
             }}
-          >
-            <UserInformations Component={props => <ServiceMesures {...props} />} />
-          </Box>
+          > */}
+          <UserInformations Component={props => <ServiceMesures {...props} />} />
+          {/* </Box>
           <Box
             sx={{
               flexGrow: 1,
@@ -35,7 +36,7 @@ const Mesures = () => {
             }}
           >
             map and other stuff
-          </Box>
+          </Box> */}
         </Flex>
       </BoxWrapper>
     </LayoutServices>
