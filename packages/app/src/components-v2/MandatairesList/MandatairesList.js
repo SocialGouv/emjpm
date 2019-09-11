@@ -23,6 +23,8 @@ const optionsCapacity = [
   { label: "Descendant", value: "desc" }
 ];
 
+const RESULT_PER_PAGE = 10;
+
 const MandatairesList = props => {
   const { selectedDepartementValue, selectedRegionalValue } = useContext(FiltersContext);
   const [selectedType, setType] = useState(false);
@@ -58,6 +60,7 @@ const MandatairesList = props => {
     );
   }
 
+  const { count } = data.count.aggregate;
   const list = formatMandatairesList(data.mandatairesList);
   return (
     <Box sx={MandatairesListStyle} {...props}>
@@ -82,26 +85,28 @@ const MandatairesList = props => {
         </Box>
       </Flex>
       <Mandatairelist mandataires={list} />
-      <Flex mt="5" alignItem="center">
-        <Button
-          onClick={() => {
-            fetchMore({
-              variables: {
-                offset: currentPage + 10
-              },
-              updateQuery: (prev, { fetchMoreResult }) => {
-                setCurrentPage(currentPage + 10);
-                return {
-                  count: fetchMoreResult.count,
-                  mandatairesList: [...prev.mandatairesList, ...fetchMoreResult.mandatairesList]
-                };
-              }
-            });
-          }}
-        >
-          Afficher les mandataires suivants
-        </Button>
-      </Flex>
+      {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
+        <Flex mt="5" alignItem="center">
+          <Button
+            onClick={() => {
+              fetchMore({
+                variables: {
+                  offset: currentPage + RESULT_PER_PAGE
+                },
+                updateQuery: (prev, { fetchMoreResult }) => {
+                  setCurrentPage(currentPage + RESULT_PER_PAGE);
+                  return {
+                    count: fetchMoreResult.count,
+                    mandatairesList: [...prev.mandatairesList, ...fetchMoreResult.mandatairesList]
+                  };
+                }
+              });
+            }}
+          >
+            Afficher les mandataires suivants
+          </Button>
+        </Flex>
+      )}
     </Box>
   );
 };
