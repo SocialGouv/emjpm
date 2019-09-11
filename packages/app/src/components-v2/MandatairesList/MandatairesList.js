@@ -18,17 +18,20 @@ const optionsType = [
 ];
 
 const optionsCapacity = [
-  { label: "Ascendant", value: "MANDATAIRE_IND" },
-  { label: "Descendant", value: "SERVICE" }
+  { label: "Aucun", value: null },
+  { label: "Ascendant", value: "asc" },
+  { label: "Descendant", value: "desc" }
 ];
 
 const MandatairesList = props => {
   const { selectedDepartementValue, selectedRegionalValue } = useContext(FiltersContext);
   const [selectedType, setType] = useState(false);
+  const [selectedCapacity, setCapacity] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const { data, error, loading, fetchMore } = useQuery(GET_MANDATAIRES, {
     variables: {
       offset: 0,
+      order: selectedCapacity ? selectedCapacity.value : null,
       discriminator: selectedType ? selectedType.value : null,
       departement: selectedDepartementValue ? selectedDepartementValue.value : null,
       region: selectedRegionalValue ? selectedRegionalValue.value : null
@@ -54,7 +57,7 @@ const MandatairesList = props => {
       </Card>
     );
   }
-  console.log(data.mandatairesList);
+
   const list = formatMandatairesList(data.mandatairesList);
   return (
     <Box sx={MandatairesListStyle} {...props}>
@@ -63,7 +66,7 @@ const MandatairesList = props => {
           <Select
             size="small"
             placeholder="Type de mandataire"
-            onChange={selectedOption => setType(selectedOption)}
+            onChange={option => setType(option)}
             value={selectedType}
             options={optionsType}
           />
@@ -72,8 +75,8 @@ const MandatairesList = props => {
           <Select
             size="small"
             placeholder="trier par capacité"
-            onChange={selectedOption => setType(selectedOption)}
-            value={selectedType}
+            onChange={capacity => setCapacity(capacity)}
+            value={selectedCapacity}
             options={optionsCapacity}
           />
         </Box>

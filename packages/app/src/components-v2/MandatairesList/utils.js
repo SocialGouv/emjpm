@@ -11,11 +11,18 @@ const capitalize = string => {
 export const formatMandatairesList = mandatairesList => {
   return mandatairesList.map(row => {
     let currentDiscriminator = {};
-    const { discriminator, mesures_max, mesures_in_progress, service, mandataire } = row;
+    const {
+      remaining_capacity,
+      discriminator,
+      mesures_max,
+      mesures_in_progress,
+      service,
+      mandataire
+    } = row;
 
     const common = {
-      currentAvailability: mesures_max - mesures_in_progress,
-      dispoMax: mesures_max || 0,
+      currentAvailability: remaining_capacity ? remaining_capacity : 0,
+      dispoMax: mesures_max ? mesures_max : 0,
       isAvailable: mesures_max < mesures_in_progress,
       cvLink: "test",
       type: TYPES[discriminator]
