@@ -15,7 +15,7 @@ Object {
   "id": 1,
   "latitude": 50.5333,
   "longitude": 2.6333,
-  "mesures_en_attente": null,
+  "mesures_en_attente": 0,
   "mesures_en_cours": 1,
   "nb_secretariat": 2,
   "nom": null,
