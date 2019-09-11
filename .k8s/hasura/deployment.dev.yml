@@ -18,6 +18,13 @@ spec:
         - image: ${IMAGE_NAME}:${IMAGE_TAG}
           name: ${K8S_NAMESPACE}-${CONTEXT}
           imagePullPolicy: "IfNotPresent"
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
           ports:
           - containerPort: 8080
           env:
