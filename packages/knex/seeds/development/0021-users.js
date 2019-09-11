@@ -36,7 +36,6 @@ const USERS = [
     email: "melanie@paris.com",
     password: "service1",
     prenom: "Mélanie",
-    service_id: 1,
     type: "service",
     username: "service1"
   },
