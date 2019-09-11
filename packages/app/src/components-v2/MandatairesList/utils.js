@@ -11,11 +11,18 @@ const capitalize = string => {
 export const formatMandatairesList = mandatairesList => {
   return mandatairesList.map(row => {
     let currentDiscriminator = {};
-    const { discriminator, mesures_max, mesures_in_progress, service, mandataire } = row;
+    const {
+      remaining_capacity,
+      discriminator,
+      mesures_max,
+      mesures_in_progress,
+      service,
+      mandataire
+    } = row;
 
     const common = {
-      currentAvailability: mesures_max - mesures_in_progress,
-      dispo_max: mesures_max || 0,
+      currentAvailability: remaining_capacity ? remaining_capacity : 0,
+      dispoMax: mesures_max ? mesures_max : 0,
       isAvailable: mesures_max < mesures_in_progress,
       cvLink: "test",
       type: TYPES[discriminator]
@@ -27,7 +34,7 @@ export const formatMandatairesList = mandatairesList => {
         email: service.email ? service.email : "non renseigné",
         nom: service.nom ? capitalize(service.nom) : "non renseigné",
         prenom: service.prenom ? capitalize(service.prenom) : "non renseigné",
-        telephone_portable: service.telephone ? service.telephone : "non renseigné",
+        telephone: service.telephone ? service.telephone : "non renseigné",
         ville: service.ville ? capitalize(service.ville) : "non renseigné",
         genre: "F"
       };
@@ -37,7 +44,7 @@ export const formatMandatairesList = mandatairesList => {
         email: mandataire.user.email ? mandataire.user.email : "non renseigné",
         nom: mandataire.user.nom ? capitalize(mandataire.user.nom) : "non renseigné",
         prenom: mandataire.user.prenom ? capitalize(mandataire.user.prenom) : "non renseigné",
-        telephone_portable: mandataire.telephone,
+        telephone: mandataire.telephone,
         ville: mandataire.ville ? capitalize(mandataire.ville) : "non renseigné",
         genre: mandataire.genre ? mandataire.genre : "F"
       };
