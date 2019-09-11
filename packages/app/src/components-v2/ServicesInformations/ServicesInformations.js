@@ -11,7 +11,7 @@ const ServicesInformations = props => {
   const [mainAntenne] = user_antennes;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
-      serviceId: mainAntenne.antenne_id
+      antenneId: mainAntenne.antenne_id
     }
   });
 

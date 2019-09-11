@@ -5,6 +5,8 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
 import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
 import { LayoutServices } from "../../src/components-v2/Layout";
+import { ServiceMesures } from "../../src/components-v2/ServiceMesures";
+import { UserInformations } from "../../src/components-v2/UserInformations";
 
 const Mesures = () => {
   return (
@@ -24,7 +26,7 @@ const Mesures = () => {
               minWidth: 320
             }}
           >
-            Mesures list
+            <UserInformations Component={props => <ServiceMesures {...props} />} />
           </Box>
           <Box
             sx={{
