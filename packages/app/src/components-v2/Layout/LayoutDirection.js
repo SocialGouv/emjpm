@@ -28,11 +28,11 @@ const navigationLinks = [
   {
     title: "mandataires",
     url: "/direction/mandataires"
-  },
-  {
-    title: "données démographiques",
-    url: "/direction/donnees-demographiques"
   }
+  // {
+  //   title: "données démographiques",
+  //   url: "/direction/donnees-demographiques"
+  // }
 ];
 
 const dropDownLinks = [
