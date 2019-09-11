@@ -8,7 +8,7 @@ const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 const MandatairesDisponibilityChart = ({ data }) => {
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: [300, 300, 402] }}>
+      <Box sx={{ position: "relative", width: "100%", height: [300, 313, 300] }}>
         <ResponsiveContainer>
           <BarChart
             data={data}
