@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.6.0](https://github.com/SocialGouv/emjpm/compare/v23.5.0...v23.6.0) (2019-09-11)
+
+
+### Features
+
+* **mandataire-list:** add real data fetch and paginate ([#708](https://github.com/SocialGouv/emjpm/issues/708)) ([4e54e6f](https://github.com/SocialGouv/emjpm/commit/4e54e6f))
+
+
+
+
+
 # [23.5.0](https://github.com/SocialGouv/emjpm/compare/v23.4.5...v23.5.0) (2019-09-09)
 
 
