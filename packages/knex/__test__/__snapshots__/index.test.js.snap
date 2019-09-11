@@ -407,15 +407,15 @@ Object {
     "type": "integer",
   },
   "mesures_en_attente": Object {
-    "defaultValue": null,
+    "defaultValue": "0",
     "maxLength": null,
-    "nullable": true,
+    "nullable": false,
     "type": "integer",
   },
   "mesures_en_cours": Object {
-    "defaultValue": null,
+    "defaultValue": "0",
     "maxLength": null,
-    "nullable": true,
+    "nullable": false,
     "type": "integer",
   },
   "nb_secretariat": Object {
@@ -1183,6 +1183,12 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "integer",
+  },
+  "remaining_capacity": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "bigint",
   },
   "service_id": Object {
     "defaultValue": null,

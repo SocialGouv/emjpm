@@ -5,9 +5,9 @@
     - envsubst < ./.k8s/postgres/service.yml > ./service.yml
     - envsubst < ./.k8s/postgres/pod-inject-dataset.yml > ./pod-inject-dataset.yml
     #
-    - kubectl apply -f ./.k8s/postgres/configmap.yml
-    - kubectl apply -f ./deployment.yml
-    - kubectl apply -f ./service.yml
+    - kubectl apply -f ./.k8s/postgres/configmap.yml -n emjpm-feature
+    - kubectl apply -f ./deployment.yml -n emjpm-feature
+    - kubectl apply -f ./service.yml -n emjpm-feature
     #
     - sh ./.k8s/postgres/inject_data_postgres.sh $BRANCH_HASH
 

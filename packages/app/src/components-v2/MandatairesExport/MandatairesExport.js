@@ -3,25 +3,23 @@ import React, { useContext } from "react";
 import { ApolloConsumer } from "react-apollo";
 import { FiltersContext } from "../Filters/context";
 import { exportMandataires } from "./MandatairesExcel";
-import { MANDATAIRES, SERVICES } from "./queries";
+import { MANDATAIRES } from "./queries";
 
-const fetchMandatairesData = async client => {
+const fetchMandatairesData = async (client, regionalValue, departementalValue) => {
   const queryResult = await client.query({
-    query: MANDATAIRES
+    query: MANDATAIRES,
+    variables: {
+      department: departementalValue ? parseInt(departementalValue.value) : undefined,
+      region: regionalValue ? parseInt(regionalValue.value) : undefined
+    }
   });
-  return queryResult.data.users;
-};
-
-const fetchServicesData = async client => {
-  const queryResult = await client.query({
-    query: SERVICES
-  });
-  return queryResult.data.services;
+  return queryResult.data;
 };
 
 const doExport = async (client, regionalValue, departementalValue) => {
-  const users = await fetchMandatairesData(client);
-  const services = await fetchServicesData(client);
+  const all = await fetchMandatairesData(client, regionalValue, departementalValue);
+  const users = all.mandataires;
+  const services = all.services;
   exportMandataires(users, services, regionalValue, departementalValue);
 };
 
