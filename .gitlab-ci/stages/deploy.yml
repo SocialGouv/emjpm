@@ -29,11 +29,10 @@ include:
 
 .dev_stage: &dev_stage
   environment:
-    name: empjpm-dev
+    name: fabrique-dev
   only:
     refs:
       - branches
-      - tags
   except:
     variables:
       - $PRODUCTION
