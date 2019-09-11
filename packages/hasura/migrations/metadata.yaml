@@ -1968,20 +1968,6 @@ tables:
   select_permissions:
   - comment: null
     permission:
-      allow_aggregations: true
-      columns:
-      - service_id
-      - mandataire_id
-      - discriminator
-      - department_id
-      - dep_nom
-      - mesures_max
-      - mesures_awaiting
-      - mesures_in_progress
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
       allow_aggregations: false
       columns:
       - department_id
@@ -2036,6 +2022,21 @@ tables:
       - dep_nom
       filter: {}
     role: ti
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - dep_nom
+      - department_id
+      - discriminator
+      - mandataire_id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - remaining_capacity
+      - service_id
+      filter: {}
+    role: direction
   table: view_mesure_gestionnaire
   update_permissions: []
 - array_relationships: []
