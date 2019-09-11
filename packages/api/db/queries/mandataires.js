@@ -129,14 +129,7 @@ function getAllByMandatairesFilter(
       "users.email",
       "users.nom",
       "users.prenom",
-      "users.cabinet",
-      "services.etablissement as service_etablissement",
-      "services.nom as service_nom",
-      "services.telephone as service_telephone",
-      "services.prenom as service_prenom",
-      "services.email as service_email",
-      "services.dispo_max as service_dispo_max",
-      "services.information as service_info"
+      "users.cabinet"
     )
     .where({ "user_tis.ti_id": parseInt(ti_id), "users.active": true })
     .where(builder =>
@@ -157,7 +150,6 @@ function getAllByMandatairesFilter(
       "geolocalisation_code_postal.code_postal",
       "mandataires.code_postal"
     )
-    .leftOuterJoin("services", "users.service_id", "services.id")
     .groupBy(
       "geolocalisation_code_postal.latitude",
       "geolocalisation_code_postal.longitude",
@@ -166,14 +158,7 @@ function getAllByMandatairesFilter(
       "users.email",
       "users.nom",
       "users.prenom",
-      "users.cabinet",
-      "service_etablissement",
-      "service_nom",
-      "service_telephone",
-      "service_prenom",
-      " service_email",
-      "service_dispo_max",
-      "service_info"
+      "users.cabinet"
     );
   // .union(function() {
   //   this.select(

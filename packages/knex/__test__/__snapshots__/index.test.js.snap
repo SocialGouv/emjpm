@@ -1090,12 +1090,6 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
-  "service_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
   "type": Object {
     "defaultValue": null,
     "maxLength": 255,
