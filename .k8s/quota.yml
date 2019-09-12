@@ -16,7 +16,7 @@ spec:
     # + 125m // hasura
     # + 125m // postgres
     # ======
-    #   600m    ~
+    #   600m    ~1 CPU
     limits.cpu: 1000m
 
     #   512Mi // api
@@ -28,4 +28,4 @@ spec:
     # + 512Mi // postgres
     # =======
     #  2240Mi      ~2^12
-    limits.memory: 4096Mi
+    limits.memory: 4Gi
