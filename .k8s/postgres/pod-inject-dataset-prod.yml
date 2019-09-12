@@ -34,6 +34,13 @@ spec:
     - name: wait-for-postgres
       image: postgres:10-alpine
       imagePullPolicy: Always
+      resources:
+        requests:
+          cpu: 5m
+          memory: 16Mi
+        limits:
+          cpu: 25m
+          memory: 32Mi
       command:
         - sh
         - -c
