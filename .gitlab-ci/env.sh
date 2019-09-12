@@ -14,11 +14,14 @@ BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
 export BRANCH_HASH=${BRANCH_HASH:=$BRANCH_NAME_HASHED}
 
 export DOMAIN="emjpm.dev.fabrique.social.gouv.fr";
+export K8S_PROJECT="emjpm"
+export K8S_NAMESPACE="emjpm-feature-${BRANCH_HASH}"
 
 #
 
 if [[ "${BRANCH_NAME}" = "master" ]]; then
   export BRANCH_HASH=master;
+  export K8S_NAMESPACE="emjpm-master"
 fi
 
 if [[ -n "${COMMIT_TAG}" ]]; then
@@ -27,6 +30,7 @@ fi
 
 if [[ -n "${PRODUCTION+x}" ]]; then
   export BRANCH_HASH=prod;
+  export K8S_NAMESPACE="emjpm"
   #
   export POSTGRES_DATABASE="emjpm_prod"
   export DOMAIN="emjpm.fabrique.social.gouv.fr";
@@ -37,11 +41,11 @@ else
 fi
 
 export API_HOST="api.${DOMAIN}";
-export CERTIFICATE_NAME="${K8S_NAMESPACE}-certificate-${BRANCH_HASH}";
+export CERTIFICATE_NAME="${K8S_PROJECT}-certificate-${BRANCH_HASH}";
 export FRONTEND_HOST="${DOMAIN}";
-export GQL_SERVER_HOST="${K8S_NAMESPACE}-graphql-server-${BRANCH_HASH}";
+export GQL_SERVER_HOST="${K8S_PROJECT}-graphql-server-${BRANCH_HASH}";
 export HASURA_HOST="hasura.${DOMAIN}";
-export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
+export POSTGRES_HOST="${K8S_PROJECT}-postgres-${BRANCH_HASH}"
 
 export API_URL="https://${API_HOST}"
 export FRONTEND_URL="https://${FRONTEND_HOST}"
@@ -53,5 +57,5 @@ printenv | grep -E \
   "BRANCH_HASH|BRANCH_NAME|COMMIT|COMMIT_TAG|ENVIRONMENT|HASH_SIZE|JOB_ID" \
   | sort
 printenv | grep -E \
-  "API_HOST|API_URL|FRONTEND_HOST|FRONTEND_URL|GQL_SERVER_HOST|HASURA_HOST|POSTGRES_HOST" \
+  "API_HOST|API_URL|CERTIFICATE_NAME|FRONTEND_HOST|FRONTEND_URL|GQL_SERVER_HOST|HASURA_HOST|POSTGRES_HOST" \
   | sort
