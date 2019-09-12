@@ -49,6 +49,7 @@ include:
     - "[[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
 
     # - kubectl delete namespaces ${K8S_NAMESPACE} || true
+    - kubectl create namespace ${K8S_NAMESPACE}
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=c-gsm8d:p-vdtv7
     - kubectl delete resourcequota -n ${K8S_NAMESPACE} -l "cattle.io/creator=norman,resourcequota.management.cattle.io/default-resource-quota=true"
     - envsubst < ./.k8s/quota.yml > ./quota.yml
