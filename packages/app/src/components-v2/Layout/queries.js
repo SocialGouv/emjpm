@@ -21,6 +21,10 @@ export const GET_SERVICE_USERS = gql`
         service_id
       }
       user_antennes {
+        service_antenne {
+          id
+          name
+        }
         user {
           prenom
           nom

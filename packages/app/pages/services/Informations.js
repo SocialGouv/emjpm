@@ -6,7 +6,8 @@ import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import { LayoutServices } from "../../src/components-v2/Layout";
 import { ServicesInformations } from "../../src/components-v2/ServicesInformations";
 import { PreferencesPanel } from "../../src/components-v2/PreferencesPanel";
-import { Antennes } from "../../src/components-v2/Antennes";
+// import { Antennes } from "../../src/components-v2/Antennes";
+import { UserInformations } from "../../src/components-v2/UserInformations";
 
 const Informations = () => {
   return (
@@ -26,7 +27,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Informations générales</Heading2>
-            <ServicesInformations mt="3" />
+            <UserInformations Component={props => <ServicesInformations {...props} mt="3" />} />
           </Box>
           <Box
             sx={{
@@ -39,14 +40,14 @@ const Informations = () => {
             <PreferencesPanel />
           </Box>
         </Flex>
-        <Box
+        {/* <Box
           sx={{
             p: 1
           }}
         >
           <Heading2 mt="1">Antennes</Heading2>
           <Antennes mt="1" />
-        </Box>
+        </Box> */}
       </BoxWrapper>
     </LayoutServices>
   );
