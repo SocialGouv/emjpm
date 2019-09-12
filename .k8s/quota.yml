@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ResourceQuota
 metadata:
-  name: mem-cpu-demo
+  name: ${K8S_NAMESPACE}-quota
 spec:
   hard:
     requests.cpu: "1"
