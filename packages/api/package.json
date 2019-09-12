@@ -7,7 +7,7 @@
     "build": "ncc build app.js -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
     "dev": "nodemon --inspect app.js",
     "test:mocha": "NODE_ENV=test mocha --timeout 10000 --exit",
-    "test": "NODE_ENV=test jest --verbose",
+    "test": "NODE_ENV=test jest",
     "lint": "eslint __test__ auth db email routes scripts controllers db app.js",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check '**/*.js'",
