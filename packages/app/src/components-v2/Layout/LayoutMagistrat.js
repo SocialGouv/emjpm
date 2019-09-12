@@ -3,16 +3,16 @@ import { css, Global } from "@emotion/core";
 import { DropDownMenu, Header } from "@socialgouv/emjpm-ui-components";
 import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
+import cookie from "cookie";
+import jwtDecode from "jwt-decode";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
+import { isBrowser } from "../../util";
 import { logout } from "../../util/auth";
 import { Link } from "../Commons";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
 import { MAGISTRAT_USERS } from "./queries";
-import cookie from "cookie";
-import jwtDecode from "jwt-decode";
-import { isBrowser } from "../../util";
 
 function parseCookies(options = {}) {
   return cookie.parse(document.cookie, options);
@@ -20,14 +20,13 @@ function parseCookies(options = {}) {
 
 const navigationLinks = [
   {
+    title: "Vos mandataire",
+    url: "/magistrats"
+  },
+  {
     title: "Vos mesures",
-    url: "/services"
+    url: "/magistrats/mesures"
   }
-  // ,
-  // {
-  //   title: "Vos informations",
-  //   url: "/services/informations"
-  // }
 ];
 
 const dropDownLinks = [
