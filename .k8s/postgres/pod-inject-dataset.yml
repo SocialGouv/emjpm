@@ -2,16 +2,16 @@
 kind: Pod
 apiVersion: v1
 metadata:
-  name: ${K8S_NAMESPACE}-dataset-${BRANCH_HASH}
+  name: ${K8S_PROJECT}-dataset-${BRANCH_HASH}
   labels:
-    app: ${K8S_NAMESPACE}-dataset
+    app: ${K8S_PROJECT}-dataset
     git/branch: ${BRANCH_NAME}
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
 spec:
   containers:
     - image: ${EMJPM_REGISTRY}:${IMAGE_TAG}
-      name: ${K8S_NAMESPACE}-dataset-${BRANCH_HASH}
+      name: ${K8S_PROJECT}-dataset-${BRANCH_HASH}
       command: ["sh"]
       args: ["/dataset/inject-dataset.sh"]
       env:
@@ -22,6 +22,13 @@ spec:
       volumeMounts:
         - name: dataset
           mountPath: /dataset
+      resources:
+        limits:
+          cpu: 500m
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
   volumes:
     - name: dataset
       configMap:
@@ -31,6 +38,13 @@ spec:
     - name: wait-for-postgres
       image: postgres:10-alpine
       imagePullPolicy: Always
+      resources:
+        limits:
+          cpu: 500m
+          memory: 512Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
       command:
         - sh
         - -c

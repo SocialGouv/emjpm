@@ -4,9 +4,9 @@
     - envsubst < ./.k8s/app/deployment.yml > ./deployment.yml
     - envsubst < ./.k8s/app/service.yml > ./service.yml
     - envsubst < ./.k8s/app/ingress${SUFFIX}.yml > ./ingress.yml
-    - envsubst < ./.k8s/certificate//certificate${SUFFIX}.yml > ./certificate.yml
+    - envsubst < ./.k8s/certificate/certificate${SUFFIX}.yml > ./certificate.yml
     #    #
-    - kubectl apply -f ./certificate.yml -n ${K8S_NAMESPACE}-feature;
-    - kubectl apply -f ./deployment.yml -n ${K8S_NAMESPACE}-feature
-    - kubectl apply -f ./service.yml -n ${K8S_NAMESPACE}-feature
-    - kubectl apply -f ./ingress.yml -n ${K8S_NAMESPACE}-feature
+    - kubectl apply -f ./certificate.yml -n ${K8S_NAMESPACE}
+    - kubectl apply -f ./deployment.yml -n ${K8S_NAMESPACE}
+    - kubectl apply -f ./service.yml -n ${K8S_NAMESPACE}
+    - kubectl apply -f ./ingress.yml -n ${K8S_NAMESPACE}

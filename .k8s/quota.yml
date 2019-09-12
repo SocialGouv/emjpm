@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: ${K8S_NAMESPACE}-quota
+  namespace: ${K8S_NAMESPACE}
+spec:
+  hard:
+    limits.cpu: 3000m
+    limits.memory: 4096Mi
