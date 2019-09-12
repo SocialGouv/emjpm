@@ -24,10 +24,10 @@ spec:
           mountPath: /dataset
       resources:
         limits:
-          cpu: 500m
+          cpu: 125m
           memory: 512Mi
         requests:
-          cpu: 100m
+          cpu: 25m
           memory: 128Mi
   volumes:
     - name: dataset
@@ -40,10 +40,10 @@ spec:
       imagePullPolicy: Always
       resources:
         limits:
-          cpu: 500m
+          cpu: 125m
           memory: 512Mi
         requests:
-          cpu: 100m
+          cpu: 25m
           memory: 128Mi
       command:
         - sh
