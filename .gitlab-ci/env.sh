@@ -41,11 +41,11 @@ else
 fi
 
 export API_HOST="api.${DOMAIN}";
-export CERTIFICATE_NAME="${K8S_NAMESPACE}-certificate-${BRANCH_HASH}";
+export CERTIFICATE_NAME="${K8S_PROJECT}-certificate-${BRANCH_HASH}";
 export FRONTEND_HOST="${DOMAIN}";
-export GQL_SERVER_HOST="${K8S_NAMESPACE}-graphql-server-${BRANCH_HASH}";
+export GQL_SERVER_HOST="${K8S_PROJECT}-graphql-server-${BRANCH_HASH}";
 export HASURA_HOST="hasura.${DOMAIN}";
-export POSTGRES_HOST="${K8S_NAMESPACE}-postgres-${BRANCH_HASH}"
+export POSTGRES_HOST="${K8S_PROJECT}-postgres-${BRANCH_HASH}"
 
 export API_URL="https://${API_HOST}"
 export FRONTEND_URL="https://${FRONTEND_HOST}"
