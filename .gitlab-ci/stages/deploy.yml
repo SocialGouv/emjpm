@@ -49,7 +49,7 @@ include:
     - kubectl create namespace ${K8S_NAMESPACE}
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=c-gsm8d:p-vdtv7
     - envsubst < ./.k8s/quota.yml > ./quota.yml
-    - kubectl create -f ./quota.yml -n ${K8S_NAMESPACE}
+    - kubectl apply -f ./quota.yml -n ${K8S_NAMESPACE}
 
 Create namespace:
   <<: *create_namespace
