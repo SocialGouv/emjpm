@@ -8,5 +8,5 @@ metadata:
     resourcequota.management.cattle.io/default-resource-quota: "true"
 spec:
   hard:
-    limits.cpu: 4000m
+    limits.cpu: 5000m
     limits.memory: 4096Mi
