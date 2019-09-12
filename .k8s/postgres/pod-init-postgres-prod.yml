@@ -9,6 +9,13 @@ metadata:
 spec:
   containers:
   - image: postgres:11-alpine
+    resources:
+      requests:
+        cpu: 5m
+        memory: 16Mi
+      limits:
+        cpu: 25m
+        memory: 32Mi
     name: emjpm-init-postgres-${BRANCH_HASH}
     command: ["sh"]
     args: ["/app/postgres-init.sh"]
@@ -64,6 +71,13 @@ spec:
   - name: wait-for-postgres
     image: postgres:11-alpine
     imagePullPolicy: Always
+      resources:
+        requests:
+          cpu: 5m
+          memory: 16Mi
+        limits:
+          cpu: 25m
+          memory: 32Mi
     command:
     - sh
     - -c

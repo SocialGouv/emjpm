@@ -10,22 +10,22 @@ spec:
   hard:
     #   100m // api
     # +  50m // app
-    # +  50m // dataset (wait-for-postgres)
+    # +  25m // dataset (wait-for-postgres)
     # +  50m // dataset (inject)
     # + 100m // graphql-server
-    # + 125m // hasura
-    # + 125m // postgres
+    # + 100m // hasura
+    # +  50m // postgres
     # ======
-    #   600m    ~1 CPU
+    #   475m    ~.5 CPU x2
     limits.cpu: 1000m
 
-    #   512Mi // api
-    # +  64Mi // app
-    # +  64Mi // dataset (wait-for-postgres)
-    # +  64Mi // dataset (inject)
-    # + 512Mi // graphql-server
-    # + 512Mi // hasura
-    # + 512Mi // postgres
+    #   256Mi // api
+    # +  32Mi // app
+    # +  32Mi // dataset (wait-for-postgres)
+    # + 128Mi // dataset (inject)
+    # + 256Mi // graphql-server
+    # + 256Mi // hasura
+    # + 128Mi // postgres
     # =======
-    #  2240Mi      ~2^12
-    limits.memory: 4Gi
+    #  1088Mi      ~2^10 x2
+    limits.memory: 2Gi

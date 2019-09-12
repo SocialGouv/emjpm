@@ -23,12 +23,12 @@ spec:
         - name: dataset
           mountPath: /dataset
       resources:
-        limits:
-          cpu: 125m
-          memory: 512Mi
         requests:
-          cpu: 25m
-          memory: 128Mi
+          cpu: 10m
+          memory: 32Mi
+        limits:
+          cpu: 50m
+          memory: 64Mi
   volumes:
     - name: dataset
       configMap:
@@ -39,12 +39,12 @@ spec:
       image: postgres:10-alpine
       imagePullPolicy: Always
       resources:
-        limits:
-          cpu: 125m
-          memory: 512Mi
         requests:
+          cpu: 5m
+          memory: 16Mi
+        limits:
           cpu: 25m
-          memory: 128Mi
+          memory: 32Mi
       command:
         - sh
         - -c

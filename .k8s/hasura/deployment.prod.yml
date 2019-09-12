@@ -19,12 +19,12 @@ spec:
           name: ${K8S_PROJECT}-${CONTEXT}
           imagePullPolicy: "IfNotPresent"
           resources:
-            limits:
-              cpu: 125m
-              memory: 512Mi
             requests:
-              cpu: 25m
+              cpu: 50m
               memory: 128Mi
+            limits:
+              cpu: 100m
+              memory: 256Mi
           ports:
           - containerPort: 8080
           env:
