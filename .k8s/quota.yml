@@ -8,5 +8,24 @@ metadata:
     resourcequota.management.cattle.io/default-resource-quota: "true"
 spec:
   hard:
-    limits.cpu: 5000m
-    limits.memory: 4096Mi
+    #   100m // api
+    # +  50m // app
+    # +  50m // dataset (wait-for-postgres)
+    # +  50m // dataset (inject)
+    # + 100m // graphql-server
+    # + 125m // hasura
+    # + 125m // postgres
+    # ======
+    #   600m
+    limits.cpu: 600m
+
+    #   512Mi // api
+    # +  64Mi // app
+    # +  64Mi // dataset (wait-for-postgres)
+    # +  64Mi // dataset (inject)
+    # + 512Mi // graphql-server
+    # + 512Mi // hasura
+    # + 512Mi // postgres
+    # =======
+    #  2240Mi
+    limits.memory: 2240Mi
