@@ -52,6 +52,22 @@ export const DIRECTION_USERS = gql`
   }
 `;
 
+export const MAGISTRAT_USERS = gql`
+  query users($userId: Int) {
+    users(where: { id: { _eq: $userId } }) {
+      email
+      created_at
+      cabinet
+      id
+      last_login
+      nom
+      prenom
+      type
+      username
+    }
+  }
+`;
+
 export const CURRENT_USER = gql`
   {
     currentId

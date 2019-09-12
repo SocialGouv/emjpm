@@ -24,7 +24,7 @@ const redirs = {
   individuel: "/mandataires",
   prepose: "/mandataires",
   service: "/services",
-  ti: "/tis",
+  ti: "/magistrats",
   admin: "/admin",
   direction: "/direction/mandataires",
   default: "/"
