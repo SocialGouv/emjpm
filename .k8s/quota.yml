@@ -5,7 +5,7 @@ metadata:
   namespace: ${K8S_NAMESPACE}
 spec:
   hard:
-    requests.cpu: "1"
+    requests.cpu: "500m"
     requests.memory: 1Gi
-    limits.cpu: "2.5"
-    limits.memory: 2Gi
+    limits.cpu: "2500m"
+    limits.memory: 4Gi
