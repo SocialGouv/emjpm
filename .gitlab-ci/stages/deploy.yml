@@ -45,7 +45,7 @@ include:
   extends: .base_docker_kube_image_stage
   stage: "Registration"
   script:
-    - exit ${CI_JOB_SKIP_EXIT_CODE:-0}
+    - kubectl delete namespaces ${K8S_NAMESPACE} || true
     - kubectl create namespace ${K8S_NAMESPACE}
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=c-gsm8d:p-vdtv7
     - kubectl create -f .k8s/quota.yml -n ${K8S_NAMESPACE}
