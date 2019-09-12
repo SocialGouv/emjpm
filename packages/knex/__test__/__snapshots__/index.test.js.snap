@@ -760,20 +760,14 @@ Object {
 
 exports[`service_tis table schema 1`] = `
 Object {
-  "antenne_id": Object {
-    "defaultValue": null,
+  "id": Object {
+    "defaultValue": "nextval('service_tis_id_seq'::regclass)",
     "maxLength": null,
     "nullable": false,
     "type": "integer",
   },
-  "created_at": Object {
+  "service_id": Object {
     "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
-  "id": Object {
-    "defaultValue": "nextval('service_tis_id_seq'::regclass)",
     "maxLength": null,
     "nullable": false,
     "type": "integer",

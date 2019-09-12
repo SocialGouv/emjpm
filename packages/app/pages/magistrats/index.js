@@ -1,14 +1,14 @@
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
-import { MandatairesList } from "../../src/components-v2/MandatairesList";
+import { MagistratMandatairesList } from "../../src/components-v2/MagistratMandatairesList";
 
 const Mandataires = () => {
   return (
     <LayoutMagistrat>
       <BoxWrapper mt={6} px="1">
         <Heading1>Tous les mandataires</Heading1>
-        <MandatairesList />
+        <MagistratMandatairesList />
         {/* <Flex
           sx={{
             flexWrap: "wrap"
