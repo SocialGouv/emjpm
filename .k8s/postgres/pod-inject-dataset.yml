@@ -24,10 +24,10 @@ spec:
           mountPath: /dataset
       resources:
         requests:
-          cpu: 5m
+          cpu: 10m
           memory: 16Mi
         limits:
-          cpu: 25m
+          cpu: 50m
           memory: 32Mi
   volumes:
     - name: dataset

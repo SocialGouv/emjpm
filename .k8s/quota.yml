@@ -11,12 +11,12 @@ spec:
     #   100m // api
     # +  50m // app
     # +  25m // dataset (wait-for-postgres)
-    # +  25m // dataset (inject)
+    # +  50m // dataset (inject)
     # + 100m // graphql-server
     # + 100m // hasura
     # +  50m // postgres
     # ======
-    #   450m    ~.5 CPU x2
+    #   475m    ~.5 CPU x2
     limits.cpu: 1000m
 
     #   256Mi // api
