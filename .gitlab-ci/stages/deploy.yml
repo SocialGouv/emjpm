@@ -46,7 +46,7 @@ include:
   stage: "Registration"
   script:
     # Skip the job if the namespace exists
-    - [[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}
+    - "[[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
 
     # - kubectl delete namespaces ${K8S_NAMESPACE} || true
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=c-gsm8d:p-vdtv7
