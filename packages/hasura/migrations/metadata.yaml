@@ -688,6 +688,18 @@ tables:
       foreign_key_constraint_on:
         column: department_id
         table: mesures
+  - comment: null
+    name: mandataires
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table: mandataires
+  - comment: null
+    name: services
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table: services
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -912,6 +924,12 @@ tables:
       foreign_key_constraint_on:
         column: service_id
         table: service_admin
+  - comment: null
+    name: service_tis
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table: service_tis
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -1061,6 +1079,29 @@ tables:
       filter: {}
     role: service
   table: etablissements
+  update_permissions: []
+- array_relationships: []
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: service_gestionnaire
+    using:
+      manual_configuration:
+        column_mapping:
+          service_id: service_id
+        remote_table: view_mesure_gestionnaire
+  - comment: null
+    name: mandataire_gestionnaire
+    using:
+      manual_configuration:
+        column_mapping:
+          mandataire_id: mandataire_id
+        remote_table: view_mesure_gestionnaire
+  select_permissions: []
+  table: view_mesure_gestionnaire_tis
   update_permissions: []
 - array_relationships:
   - comment: null

@@ -891,6 +891,7 @@ Array [
   "users",
   "view_department_availability",
   "view_mesure_gestionnaire",
+  "view_mesure_gestionnaire_tis",
 ]
 `;
 
