@@ -2,13 +2,13 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
+  name: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
+        app: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
         git/branch: ${BRANCH_NAME}
       annotations:
         git/commit: ${COMMIT}
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - image: ${IMAGE_NAME}:${IMAGE_TAG}
-          name: ${K8S_NAMESPACE}-${CONTEXT}
+          name: ${K8S_PROJECT}-${CONTEXT}
           imagePullPolicy: "IfNotPresent"
           resources:
             limits:
@@ -35,6 +35,6 @@ spec:
           - name: HASURA_GRAPHQL_ADMIN_SECRET
             value: "secret"
           - name: HASURA_GRAPHQL_JWT_SECRET
-            value: "{\"type\": \"RS256\",\"jwk_url\": \"http://${K8S_NAMESPACE}-api-${BRANCH_HASH}:4000/api/v2/auth/jwks\"}"
+            value: "{\"type\": \"RS256\",\"jwk_url\": \"http://${K8S_PROJECT}-api-${BRANCH_HASH}:4000/api/v2/auth/jwks\"}"
           - name: WHATEVER_URL
-            value: "http://${K8S_NAMESPACE}-graphql-server-${BRANCH_HASH}"
+            value: "http://${K8S_PROJECT}-graphql-server-${BRANCH_HASH}"
