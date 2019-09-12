@@ -1,7 +1,7 @@
-import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { MesureList } from "@socialgouv/emjpm-ui-components";
-
+import React, { useContext } from "react";
+import { FiltersContext } from "../ServicesFilters/context";
 import { MESURES } from "./queries";
 
 const Link = props => {
@@ -9,15 +9,13 @@ const Link = props => {
   return <a href={href}>{children}</a>;
 };
 
-const ServiceMesures = props => {
-  const {
-    currentUser: { user_antennes }
-  } = props;
-  const [mainAntenne] = user_antennes;
+const ServiceMesures = () => {
+  const { selectedRegionalValue, selectedDepartementValue } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(MESURES, {
     variables: {
-      antenneId: mainAntenne.antenne_id
+      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
+      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
     }
   });
 

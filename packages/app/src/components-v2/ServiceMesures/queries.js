@@ -1,8 +1,11 @@
 import gql from "graphql-tag";
 
 export const MESURES = gql`
-  query mesures($antenneId: Int!) {
-    mesures(where: { antenne_id: { _eq: 127 } }, limit: 10) {
+  query mesures($department: Int, $region: Int) {
+    mesures(
+      limit: 10
+      where: { departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } } }
+    ) {
       antenne_id
       id
       cabinet
