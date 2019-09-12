@@ -5,7 +5,7 @@ metadata:
   namespace: ${K8S_NAMESPACE}
   labels:
     cattle.io/creator: norman
-    resourcequota.management.cattle.io/default-resource-quota: true
+    resourcequota.management.cattle.io/default-resource-quota: "true"
 spec:
   hard:
     limits.cpu: 4000m
