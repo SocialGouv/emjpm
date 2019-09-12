@@ -22,10 +22,10 @@ spec:
     #   256Mi // api
     # +  32Mi // app
     # +  32Mi // dataset (wait-for-postgres)
-    # +  64Mi // dataset (inject)
+    # + 128Mi // dataset (inject)
     # + 256Mi // graphql-server
     # + 256Mi // hasura
     # + 128Mi // postgres
     # =======
-    #  1024Mi      ~2^10 x2
+    #  1088Mi      ~2^10 x2
     limits.memory: 2Gi
