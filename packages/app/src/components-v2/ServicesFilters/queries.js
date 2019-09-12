@@ -1,13 +1,13 @@
 import gql from "graphql-tag";
 
-export const GET_REGIONS = gql`
+export const GET_CURRENT_USER = gql`
   {
-    regions(order_by: { nom: asc }) {
-      id
-      nom
-      departements(order_by: { nom: asc }) {
-        id
-        nom
+    currentUser @client {
+      user_antennes {
+        service_antenne {
+          id
+          name
+        }
       }
     }
   }

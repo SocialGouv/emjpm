@@ -10,12 +10,13 @@ const Link = props => {
 };
 
 const ServiceMesures = () => {
-  const { selectedRegionalValue, selectedDepartementValue } = useContext(FiltersContext);
+  const { mesureType, mesureStatus, antenne } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(MESURES, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
+      antenne: antenne ? antenne.value : undefined,
+      type: mesureType ? mesureType.value : undefined,
+      status: mesureStatus ? mesureStatus.value : undefined
     }
   });
 

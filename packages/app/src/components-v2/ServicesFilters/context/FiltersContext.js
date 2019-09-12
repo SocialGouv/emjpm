@@ -7,18 +7,19 @@ export const Provider = props => {
   const { children } = props;
 
   // Use State to keep the values
-  const [selectedRegionalValue, changeRegionalValue] = useState(false);
-  const [selectedDepartementValue, changeDepartementValue] = useState(false);
+  const [antenne, changeAntenne] = useState(false);
+  const [mesureType, changeMesureType] = useState(false);
+  const [mesureStatus, changeMesureStatus] = useState(false);
 
   // Make the context object:
   const filtersContext = {
-    selectedRegionalValue,
-    changeRegionalValue,
-    selectedDepartementValue,
-    changeDepartementValue
+    antenne,
+    changeAntenne,
+    mesureType,
+    changeMesureType,
+    mesureStatus,
+    changeMesureStatus
   };
-
-  console.log(filtersContext);
 
   // pass the value in provider and return
   return <Context.Provider value={filtersContext}>{children}</Context.Provider>;
