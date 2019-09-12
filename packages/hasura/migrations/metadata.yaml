@@ -277,9 +277,9 @@ tables:
     using:
       foreign_key_constraint_on: ti_id
   - comment: null
-    name: service_antenne
+    name: service
     using:
-      foreign_key_constraint_on: antenne_id
+      foreign_key_constraint_on: service_id
   select_permissions: []
   table: service_tis
   update_permissions: []
@@ -1069,12 +1069,6 @@ tables:
       foreign_key_constraint_on:
         column: antenne_id
         table: mesures
-  - comment: null
-    name: service_tis
-    using:
-      foreign_key_constraint_on:
-        column: antenne_id
-        table: service_tis
   - comment: null
     name: commentaires
     using:
