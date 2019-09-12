@@ -53,9 +53,6 @@ Delete useless k8s namespaces:
   image: ${CI_REGISTRY}/socialgouv/docker/k8s-ns-killer:0.5.0
   environment: fabrique-dev
   script:
-    - git --version
-    - kubectl version
-    - kubectl get namespaces
     - sh -x /bin/k8s-ns-killer emjpm-feature-
   only:
     - master
