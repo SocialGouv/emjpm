@@ -56,6 +56,6 @@ Delete useless k8s namespaces:
     - git --version
     - kubectl version
     - kubectl get namespaces
-    - sh -x /bin/k8s-ns-killer emjpm-fetures-
+    - sh -x /bin/k8s-ns-killer emjpm-feature-
   only:
     - master
