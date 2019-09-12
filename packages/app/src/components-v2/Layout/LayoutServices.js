@@ -8,7 +8,7 @@ import { isBrowser } from "../../util";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { Header, DropDownMenu } from "@socialgouv/emjpm-ui-components";
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useApolloClient } from "@apollo/react-hooks";
 
 import { GET_SERVICE_USERS } from "./queries";
 import { Footer } from "../Footer";
@@ -38,6 +38,7 @@ const dropDownLinks = [
 ];
 
 const LayoutServices = props => {
+  const client = useApolloClient();
   if (isBrowser()) {
     const token = parseCookies().token;
     const currentUser = token ? jwtDecode(token) : null;
@@ -47,11 +48,14 @@ const LayoutServices = props => {
         userId: currentUser.id
       }
     });
+
     if (loading) return <div>loading</div>;
     if (error) return <div>error</div>;
+
     const [user] = data.users;
     const { username } = user;
 
+    client.writeData({ data: { currentUser: user } });
     return (
       <Fragment>
         {/* @socialgouv global style */}
