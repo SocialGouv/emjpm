@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.0.1](https://github.com/SocialGouv/emjpm/compare/v24.0.0...v24.0.1) (2019-09-13)
+
+
+### Bug Fixes
+
+* **gitlab:** publish tags on the new cluster ([2efbee3](https://github.com/SocialGouv/emjpm/commit/2efbee3))
+
+
+
+
+
 # [24.0.0](https://github.com/SocialGouv/emjpm/compare/v23.5.0...v24.0.0) (2019-09-13)
 
 
