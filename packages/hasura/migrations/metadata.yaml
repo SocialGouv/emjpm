@@ -924,6 +924,25 @@ tables:
   select_permissions:
   - comment: null
     permission:
+      allow_aggregations: false
+      columns:
+      - department_id
+      - dispo_max
+      - id
+      - created_at
+      - adresse
+      - code_postal
+      - email
+      - etablissement
+      - information
+      - nom
+      - prenom
+      - telephone
+      - ville
+      filter: {}
+    role: service
+  - comment: null
+    permission:
       allow_aggregations: true
       columns:
       - id
@@ -1080,6 +1099,32 @@ tables:
   select_permissions:
   - comment: null
     permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - service_id
+      - name
+      - created_at
+      - headquarters
+      - address_street
+      - address_zip_code
+      - address_city
+      - contact_lastname
+      - contact_firstname
+      - contact_email
+      - contact_phone
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - date_mesure_update
+      - bak_mandataire_id
+      filter:
+        user_antennes:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
       allow_aggregations: true
       columns:
       - id
@@ -1101,29 +1146,6 @@ tables:
       - bak_mandataire_id
       filter: {}
     role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - service_id
-      - name
-      - created_at
-      - headquarters
-      - address_street
-      - address_zip_code
-      - address_city
-      - contact_lastname
-      - contact_firstname
-      - contact_email
-      - contact_phone
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - date_mesure_update
-      - bak_mandataire_id
-      filter: {}
-    role: service
   table: service_antenne
   update_permissions: []
 - array_relationships: []
@@ -1260,6 +1282,37 @@ tables:
   select_permissions:
   - comment: null
     permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - etablissement
+      - mandataire_id
+      - created_at
+      - annee
+      - type
+      - date_ouverture
+      - residence
+      - civilite
+      - status
+      - extinction
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - reason_extinction
+      - numero_rg
+      - department_id
+      - antenne_id
+      filter:
+        service_antenne:
+          user_antennes:
+            user_id:
+              _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
       allow_aggregations: true
       columns:
       - id
@@ -1375,37 +1428,6 @@ tables:
             user_id:
               _eq: X-Hasura-User-Id
     role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
-      - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
-      - antenne_id
-      filter:
-        service_antenne:
-          user_antennes:
-            user_id:
-              _eq: X-Hasura-User-Id
-    role: service
   table: mesures
   update_permissions:
   - comment: null
