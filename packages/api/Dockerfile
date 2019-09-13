@@ -11,6 +11,4 @@ COPY ./package.json /app/package.json
 COPY ./private.pem /app/private.pem
 COPY ./public.pem /app/public.pem
 
-EXPOSE 4000
-
 ENTRYPOINT [ "yarn", "start" ]

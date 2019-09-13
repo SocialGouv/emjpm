@@ -26,15 +26,15 @@ spec:
               cpu: 500m
               memory: 256Mi
           ports:
-          - containerPort: 8080
+            - containerPort: 8080
           env:
-          - name: HASURA_GRAPHQL_DATABASE_URL
-            value: "postgres://postgres@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
-          - name: HASURA_GRAPHQL_ENABLE_CONSOLE
-            value: "true"
-          - name: HASURA_GRAPHQL_ADMIN_SECRET
-            value: "secret"
-          - name: HASURA_GRAPHQL_JWT_SECRET
-            value: "{\"type\": \"RS256\",\"jwk_url\": \"http://${K8S_PROJECT}-api-${BRANCH_HASH}:4000/api/v2/auth/jwks\"}"
-          - name: WHATEVER_URL
-            value: "http://${K8S_PROJECT}-graphql-server-${BRANCH_HASH}"
+            - name: HASURA_GRAPHQL_DATABASE_URL
+              value: "postgres://postgres@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
+            - name: HASURA_GRAPHQL_ENABLE_CONSOLE
+              value: "true"
+            - name: HASURA_GRAPHQL_ADMIN_SECRET
+              value: "secret"
+            - name: HASURA_GRAPHQL_JWT_SECRET
+              value: '{"type": "RS256","jwk_url": "http://${K8S_PROJECT}-api-${BRANCH_HASH}/api/v2/auth/jwks"}'
+            - name: WHATEVER_URL
+              value: "http://${K8S_PROJECT}-graphql-server-${BRANCH_HASH}"
