@@ -23,6 +23,7 @@ if [[ "${BRANCH_NAME}" = "master" ]]; then
 fi
 
 if [[ -n "${COMMIT_TAG}" ]]; then
+  export IMAGE_TAG=$(printf "${COMMIT_TAG}" | sed "s/^v//")
   export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
 fi
 
