@@ -33,6 +33,7 @@ include:
   only:
     refs:
       - branches
+      - tags
   except:
     variables:
       - $PRODUCTION
