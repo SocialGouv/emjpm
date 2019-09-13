@@ -11,23 +11,25 @@ export PROJECT_PATH=${PROJECT_PATH:=$CI_PROJECT_PATH}
 export JOB_ID=${JOB_ID:=$CI_JOB_ID}
 
 BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
-export BRANCH_HASH=${BRANCH_HASH:="feature-$BRANCH_NAME_HASHED"}
+export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
 
 export DOMAIN="emjpm.dev.fabrique.social.gouv.fr";
+
 export K8S_PROJECT="emjpm"
+export K8S_NAMESPACE="emjpm-feature-${BRANCH_HASH}"
 
 #
 
 if [[ "${BRANCH_NAME}" = "master" ]]; then
   export BRANCH_HASH=master;
+  export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
 fi
 
 if [[ -n "${COMMIT_TAG}" ]]; then
   export IMAGE_TAG=$(printf "${COMMIT_TAG}" | sed "s/^v//")
   export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
+  export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
 fi
-
-export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
 
 #
 
