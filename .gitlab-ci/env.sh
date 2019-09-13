@@ -15,18 +15,20 @@ export BRANCH_HASH=${BRANCH_HASH:=$BRANCH_NAME_HASHED}
 
 export DOMAIN="emjpm.dev.fabrique.social.gouv.fr";
 export K8S_PROJECT="emjpm"
-export K8S_NAMESPACE="emjpm-feature-${BRANCH_HASH}"
 
 #
 
 if [[ "${BRANCH_NAME}" = "master" ]]; then
   export BRANCH_HASH=master;
-  export K8S_NAMESPACE="emjpm-master"
 fi
 
 if [[ -n "${COMMIT_TAG}" ]]; then
   export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
 fi
+
+export K8S_NAMESPACE="emjpm-feature-${BRANCH_HASH}"
+
+#
 
 if [[ -n "${PRODUCTION+x}" ]]; then
   export BRANCH_HASH=prod;
