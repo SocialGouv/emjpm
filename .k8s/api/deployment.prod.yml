@@ -50,4 +50,4 @@ spec:
                   name: emjpm-secret
                   key: DATABASE_URL
             - name: PORT
-              value: ${PORT}
+              value: "${PORT}"
