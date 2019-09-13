@@ -10,7 +10,6 @@ export const mesureStatAdapter = {
       case "curatelle renforcée":
       case "Curatelle renforcée":
       case "Curatelle renforcée aux biens":
-      case "curatelle renforcée aux biens et à la personne":
       case "Curatelle renforcée aux biens et à la personne":
       case "Curatelle renforcée à la personne":
         return MesureTypeCategory.CuratelleRenforcee;
@@ -28,12 +27,9 @@ export const mesureStatAdapter = {
         return MesureTypeCategory.Other;
       case "Sauvegarde de justice":
       case "Sauvegarde de justice avec mandat spécial":
-      case "sauvegarde de justice avec mandat spécial":
         return MesureTypeCategory.SauvegardeJustice;
       case "Tutelle":
       case "Tutelle aux biens":
-      case "tutelle aux biens":
-      case "tutelle aux biens et à la personne":
       case "Tutelle aux biens et à la personne":
       case "Tutelle à la personne":
         return MesureTypeCategory.Tutelle;
