@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MesureList } from "@socialgouv/emjpm-ui-components";
+import { MesureList, MesureContextProvider } from "@socialgouv/emjpm-ui-components";
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import { Flex, Box } from "rebass";
 import { Button } from "@socialgouv/emjpm-ui-core";
@@ -7,12 +7,9 @@ import { Button } from "@socialgouv/emjpm-ui-core";
 import { MesureListStyle } from "./style";
 import { formatMesureList } from "./utils";
 import { FiltersContext } from "../ServicesFilters/context";
-import { MESURES } from "./queries";
+import { ServiceCloseMesure } from "./ServiceCloseMesure";
 
-const Link = props => {
-  const { href, children } = props;
-  return <a href={href}>{children}</a>;
-};
+import { MESURES } from "./queries";
 
 const RESULT_PER_PAGE = 20;
 
@@ -41,44 +38,47 @@ const ServiceMesures = () => {
 
   const { count } = data.mesures_aggregate.aggregate;
   const mesures = formatMesureList(data.mesures);
+
   return (
-    <Box sx={MesureListStyle}>
-      <Fragment>
-        {mesures.length > 0 ? (
-          <Fragment>
-            <MesureList
-              LinkComponent={props => <Link {...props} />}
-              validate={id => console.log(id)}
-              mesures={mesures}
-            />
-            {count > RESULT_PER_PAGE && count > currentPage && (
-              <Flex mt="5" alignItem="center">
-                <Button
-                  onClick={() => {
-                    fetchMore({
-                      variables: {
-                        offset: currentPage + RESULT_PER_PAGE
-                      },
-                      updateQuery: (prev, { fetchMoreResult }) => {
-                        setCurrentPage(currentPage + RESULT_PER_PAGE);
-                        return {
-                          count: fetchMoreResult.count,
-                          mesures: [...prev.mesures, ...fetchMoreResult.mesures]
-                        };
-                      }
-                    });
-                  }}
-                >
-                  Afficher les mandataires suivants
-                </Button>
-              </Flex>
-            )}
-          </Fragment>
-        ) : (
-          <div>Pas de donnée à afficher</div>
-        )}
-      </Fragment>
-    </Box>
+    <MesureContextProvider>
+      <Box sx={MesureListStyle}>
+        <Fragment>
+          {mesures.length > 0 ? (
+            <Fragment>
+              <MesureList
+                CloseComponent={ServiceCloseMesure}
+                onPanelOpen={id => console.log(id)}
+                mesures={mesures}
+              />
+              {count > RESULT_PER_PAGE && count > currentPage && (
+                <Flex mt="5" alignItem="center">
+                  <Button
+                    onClick={() => {
+                      fetchMore({
+                        variables: {
+                          offset: currentPage + RESULT_PER_PAGE
+                        },
+                        updateQuery: (prev, { fetchMoreResult }) => {
+                          setCurrentPage(currentPage + RESULT_PER_PAGE);
+                          return {
+                            count: fetchMoreResult.count,
+                            mesures: [...prev.mesures, ...fetchMoreResult.mesures]
+                          };
+                        }
+                      });
+                    }}
+                  >
+                    Afficher les mandataires suivants
+                  </Button>
+                </Flex>
+              )}
+            </Fragment>
+          ) : (
+            <div>Pas de donnée à afficher</div>
+          )}
+        </Fragment>
+      </Box>
+    </MesureContextProvider>
   );
 };
 
