@@ -11,6 +11,7 @@ export const MESURES = gql`
     }
     mesures(
       limit: $limit
+      order_by: { date_ouverture: desc }
       offset: $offset
       where: { status: { _eq: $status }, type: { _eq: $type }, antenne_id: { _eq: $antenne } }
     ) {
