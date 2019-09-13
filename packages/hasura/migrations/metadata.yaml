@@ -138,6 +138,12 @@ tables:
       foreign_key_constraint_on:
         column: ti_id
         table: user_tis
+  - comment: null
+    name: magistrats
+    using:
+      foreign_key_constraint_on:
+        column: ti_id
+        table: magistrat
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -277,9 +283,9 @@ tables:
     using:
       foreign_key_constraint_on: ti_id
   - comment: null
-    name: service_antenne
+    name: service
     using:
-      foreign_key_constraint_on: antenne_id
+      foreign_key_constraint_on: service_id
   select_permissions: []
   table: service_tis
   update_permissions: []
@@ -470,6 +476,13 @@ tables:
         column_mapping:
           id: user_id
         remote_table: mandataires
+  - comment: null
+    name: magistrat
+    using:
+      manual_configuration:
+        column_mapping:
+          id: user_id
+        remote_table: magistrat
   select_permissions:
   - comment: null
     permission:
@@ -531,27 +544,6 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
     role: service
   - comment: null
     permission:
@@ -574,6 +566,25 @@ tables:
         id:
           _eq: X-Hasura-User-Id
     role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      filter: {}
+    role: ti
   table: users
   update_permissions:
   - comment: null
@@ -681,6 +692,26 @@ tables:
           _eq: X-Hasura-User-Id
       set: {}
     role: ti
+- array_relationships: []
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships: []
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - user_id
+      - ti_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: ti
+  table: magistrat
+  update_permissions: []
 - array_relationships:
   - comment: null
     name: mesures
@@ -688,6 +719,18 @@ tables:
       foreign_key_constraint_on:
         column: department_id
         table: mesures
+  - comment: null
+    name: mandataires
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table: mandataires
+  - comment: null
+    name: services
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table: services
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -912,6 +955,12 @@ tables:
       foreign_key_constraint_on:
         column: service_id
         table: service_admin
+  - comment: null
+    name: service_tis
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table: service_tis
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -959,6 +1008,25 @@ tables:
       - information
       filter: {}
     role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - etablissement
+      - email
+      - nom
+      - prenom
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - dispo_max
+      - created_at
+      - information
+      - department_id
+      filter: {}
+    role: ti
   table: services
   update_permissions: []
 - array_relationships:
@@ -1062,6 +1130,33 @@ tables:
     role: service
   table: etablissements
   update_permissions: []
+- array_relationships: []
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: gestionnaire
+    using:
+      manual_configuration:
+        column_mapping:
+          id: id
+        remote_table: view_mesure_gestionnaire
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - service_id
+      - mandataire_id
+      - discriminator
+      - ti_id
+      filter: {}
+    role: ti
+  table: view_mesure_gestionnaire_tis
+  update_permissions: []
 - array_relationships:
   - comment: null
     name: mesures
@@ -1069,12 +1164,6 @@ tables:
       foreign_key_constraint_on:
         column: antenne_id
         table: mesures
-  - comment: null
-    name: service_tis
-    using:
-      foreign_key_constraint_on:
-        column: antenne_id
-        table: service_tis
   - comment: null
     name: commentaires
     using:
@@ -1401,6 +1490,37 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - id
+      - code_postal
+      - ville
+      - etablissement
+      - mandataire_id
+      - created_at
+      - annee
+      - type
+      - date_ouverture
+      - residence
+      - civilite
+      - status
+      - extinction
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - reason_extinction
+      - numero_rg
+      - department_id
+      - antenne_id
+      filter:
+        service_antenne:
+          user_antennes:
+            user_id:
+              _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
       - date_ouverture
       - extinction
       - antenne_id
@@ -1424,7 +1544,7 @@ tables:
       - ville
       filter:
         ti:
-          user_tis:
+          magistrats:
             user_id:
               _eq: X-Hasura-User-Id
     role: ti
@@ -1965,7 +2085,14 @@ tables:
   select_permissions: []
   table: user_tis
   update_permissions: []
-- array_relationships: []
+- array_relationships:
+  - comment: null
+    name: gestionnaire_tis
+    using:
+      manual_configuration:
+        column_mapping:
+          id: id
+        remote_table: view_mesure_gestionnaire_tis
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -1995,6 +2122,22 @@ tables:
   select_permissions:
   - comment: null
     permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - service_id
+      - mandataire_id
+      - discriminator
+      - department_id
+      - dep_nom
+      - mesures_max
+      - mesures_awaiting
+      - mesures_in_progress
+      - remaining_capacity
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
       allow_aggregations: false
       columns:
       - department_id
@@ -2003,7 +2146,9 @@ tables:
       - service_id
       - mesures_awaiting
       - mesures_in_progress
+      - remaining_capacity
       - discriminator
+      - id
       - dep_nom
       filter: {}
     role: mandataire
@@ -2017,7 +2162,9 @@ tables:
       - service_id
       - mesures_awaiting
       - mesures_in_progress
+      - remaining_capacity
       - discriminator
+      - id
       - dep_nom
       filter: {}
     role: prepose
@@ -2031,13 +2178,15 @@ tables:
       - service_id
       - mesures_awaiting
       - mesures_in_progress
+      - remaining_capacity
       - discriminator
+      - id
       - dep_nom
       filter: {}
     role: service
   - comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       columns:
       - department_id
       - mandataire_id
@@ -2045,25 +2194,12 @@ tables:
       - service_id
       - mesures_awaiting
       - mesures_in_progress
+      - remaining_capacity
       - discriminator
+      - id
       - dep_nom
       filter: {}
     role: ti
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - dep_nom
-      - department_id
-      - discriminator
-      - mandataire_id
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - remaining_capacity
-      - service_id
-      filter: {}
-    role: direction
   table: view_mesure_gestionnaire
   update_permissions: []
 - array_relationships: []
