@@ -315,6 +315,29 @@ Object {
 }
 `;
 
+exports[`magistrat table schema 1`] = `
+Object {
+  "id": Object {
+    "defaultValue": "nextval('magistrat_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "ti_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`mandataire_etablissements table schema 1`] = `
 Object {
   "created_at": Object {
@@ -875,6 +898,7 @@ Array [
   "knex_migrations",
   "knex_migrations_lock",
   "logs_data",
+  "magistrat",
   "mandataire_etablissements",
   "mandataires",
   "mesures",
@@ -1180,6 +1204,35 @@ Object {
     "type": "bigint",
   },
   "service_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
+exports[`view_mesure_gestionnaire_tis table schema 1`] = `
+Object {
+  "discriminator": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "text",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "service_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "ti_id": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
