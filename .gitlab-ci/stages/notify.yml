@@ -51,7 +51,7 @@ Delete useless k8s namespaces:
   dependencies: []
   allow_failure: true
   image: ${CI_REGISTRY}/socialgouv/docker/k8s-ns-killer:0.5.2
-  variable:
+  variables:
     GIT_STRATEGY: clone
   environment: fabrique-dev
   script:
