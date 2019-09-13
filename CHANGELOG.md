@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.0.2](https://github.com/SocialGouv/emjpm/compare/v24.0.1...v24.0.2) (2019-09-13)
+
+
+### Bug Fixes
+
+* **gitlab:** rename tag k8s namespace ([f7c30ac](https://github.com/SocialGouv/emjpm/commit/f7c30ac))
+
+
+
+
+
 ## [24.0.1](https://github.com/SocialGouv/emjpm/compare/v24.0.0...v24.0.1) (2019-09-13)
 
 
