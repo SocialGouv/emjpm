@@ -9,21 +9,21 @@ import { REACTIVATE_MESURE } from "./mutations";
 import { Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 
-export const ServiceReactivateMesure = props => {
+export const ServiceDeleteMesure = props => {
   const { currentMesure } = props;
   const [UpdateMesure] = useMutation(REACTIVATE_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
-        <Heading5 mb="1">Réactiver la mesure</Heading5>
+        <Heading5 mb="1">Supprimer la mesure</Heading5>
         <Text lineHeight="1.5">
           {`En cliquant sur le bouton "réactiver la mesure", celle-ci redevient active, c'est-à-dire qu'elle reprend sa place dans les "mesures en cours" de votre service, elle est comptabilisée comme une "mesure en cours" pour l'ensemble des statistiques, apparaît sur les cartes et est décomptée dans la disponibilité du services.`}
         </Text>
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="3">
-          <Heading3>Réactiver la mesure</Heading3>
+          <Heading3>Supprimer la mesure</Heading3>
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
@@ -55,7 +55,7 @@ export const ServiceReactivateMesure = props => {
                     id="reason_extinction"
                     name="reason_extinction"
                     onChange={handleChange}
-                    placeholder="Raison de la réactivation"
+                    placeholder="Raison de la suppression"
                   />
                 </Box>
                 <Flex justifyContent="flex-end">
@@ -86,6 +86,6 @@ export const ServiceReactivateMesure = props => {
   );
 };
 
-ServiceReactivateMesure.propTypes = {
+ServiceDeleteMesure.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };
