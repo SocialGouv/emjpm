@@ -4,16 +4,16 @@ export const MESURE_STATUS_LABEL_VALUE = [
     value: null
   },
   {
-    label: "à venir",
-    value: "Mesure en attente"
+    label: "Mesure éteinte",
+    value: "Eteindre mesure"
   },
   {
-    label: "en cours",
+    label: "Mesure en cours",
     value: "Mesure en cours"
   },
   {
-    label: "cloturée",
-    value: "Eteindre mesure"
+    label: "Mesure en attente",
+    value: "Mesure en attente"
   }
 ];
 
@@ -27,10 +27,6 @@ export const MESURE_TYPE_LABEL_VALUE = [
     value: "Curatelle"
   },
   {
-    label: "curatelle renforcée",
-    value: "curatelle renforcée"
-  },
-  {
     label: "Curatelle renforcée",
     value: "Curatelle renforcée"
   },
@@ -41,10 +37,6 @@ export const MESURE_TYPE_LABEL_VALUE = [
   {
     label: "Curatelle renforcée aux biens",
     value: "Curatelle renforcée aux biens"
-  },
-  {
-    label: "curatelle renforcée aux biens et à la personne",
-    value: "curatelle renforcée aux biens et à la personne"
   },
   {
     label: "Curatelle renforcée aux biens et à la personne",
@@ -87,10 +79,6 @@ export const MESURE_TYPE_LABEL_VALUE = [
     value: "Sauvegarde de justice"
   },
   {
-    label: "sauvegarde de justice avec mandat spécial",
-    value: "sauvegarde de justice avec mandat spécial"
-  },
-  {
     label: "Sauvegarde de justice avec mandat spécial",
     value: "Sauvegarde de justice avec mandat spécial"
   },
@@ -109,14 +97,6 @@ export const MESURE_TYPE_LABEL_VALUE = [
   {
     label: "Tutelle à la personne",
     value: "Tutelle à la personne"
-  },
-  {
-    label: "tutelle aux biens et à la personne",
-    value: "tutelle aux biens et à la personne"
-  },
-  {
-    label: "tutelle aux biens",
-    value: "tutelle aux biens"
   },
   {
     label: "Tutelle aux biens",
