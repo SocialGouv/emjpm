@@ -3,7 +3,7 @@ import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
 import { Button, Card, Heading4, Select, Spinner } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
-import { GET_MANDATAIRES } from "./queries";
+import { CURRENT_USER, GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle } from "./style";
 import { formatMandatairesList } from "./utils";
 
@@ -27,15 +27,18 @@ const MagistratMandatairesList = props => {
   const [selectedCapacity, setCapacity] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
 
+  const userQuery = useQuery(CURRENT_USER);
+
   const { data, error, loading, fetchMore } = useQuery(GET_MANDATAIRES, {
     variables: {
       offset: 0,
+      tribunal: userQuery.data.currentUser.magistrat.ti_id,
       order: selectedCapacity ? selectedCapacity.value : null,
       discriminator: selectedType ? selectedType.value : null
     }
   });
 
-  if (loading) {
+  if (userQuery.loading || loading) {
     return (
       <Card>
         <Box my="5">
@@ -45,7 +48,7 @@ const MagistratMandatairesList = props => {
     );
   }
 
-  if (error) {
+  if (userQuery.error || error) {
     return (
       <Card>
         <Heading4>erreur</Heading4>

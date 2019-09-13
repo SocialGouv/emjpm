@@ -64,6 +64,9 @@ export const MAGISTRAT_USERS = gql`
       prenom
       type
       username
+      magistrat {
+        ti_id
+      }
     }
   }
 `;

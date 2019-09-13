@@ -1173,6 +1173,12 @@ Object {
     "nullable": true,
     "type": "text",
   },
+  "id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "text",
+  },
   "mandataire_id": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -1215,6 +1221,12 @@ Object {
 exports[`view_mesure_gestionnaire_tis table schema 1`] = `
 Object {
   "discriminator": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "text",
+  },
+  "id": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
