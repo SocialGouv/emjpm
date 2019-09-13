@@ -13,6 +13,7 @@ const Link = props => {
   const { href, children } = props;
   return <a href={href}>{children}</a>;
 };
+
 const RESULT_PER_PAGE = 20;
 const ServiceMesures = () => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -41,32 +42,38 @@ const ServiceMesures = () => {
   return (
     <Box sx={MesureListStyle}>
       <Fragment>
-        <MesureList
-          LinkComponent={props => <Link {...props} />}
-          validate={id => console.log(id)}
-          mesures={mesures}
-        />
-        {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
-          <Flex mt="5" alignItem="center">
-            <Button
-              onClick={() => {
-                fetchMore({
-                  variables: {
-                    offset: currentPage + RESULT_PER_PAGE
-                  },
-                  updateQuery: (prev, { fetchMoreResult }) => {
-                    setCurrentPage(currentPage + RESULT_PER_PAGE);
-                    return {
-                      count: fetchMoreResult.count,
-                      mesures: [...prev.mesures, ...fetchMoreResult.mesures]
-                    };
-                  }
-                });
-              }}
-            >
-              Afficher les mandataires suivants
-            </Button>
-          </Flex>
+        {mesures.length > 0 ? (
+          <Fragment>
+            <MesureList
+              LinkComponent={props => <Link {...props} />}
+              validate={id => console.log(id)}
+              mesures={mesures}
+            />
+            {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
+              <Flex mt="5" alignItem="center">
+                <Button
+                  onClick={() => {
+                    fetchMore({
+                      variables: {
+                        offset: currentPage + RESULT_PER_PAGE
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        setCurrentPage(currentPage + RESULT_PER_PAGE);
+                        return {
+                          count: fetchMoreResult.count,
+                          mesures: [...prev.mesures, ...fetchMoreResult.mesures]
+                        };
+                      }
+                    });
+                  }}
+                >
+                  Afficher les mandataires suivants
+                </Button>
+              </Flex>
+            )}
+          </Fragment>
+        ) : (
+          <div>Pas de donnée à afficher</div>
         )}
       </Fragment>
     </Box>
