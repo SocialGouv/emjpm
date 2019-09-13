@@ -89,7 +89,7 @@ Object {
   ],
   "token": Any<String>,
   "type": "ti",
-  "url": "/tis",
+  "url": "/magistrats",
   "username": "ti1",
 }
 `;
