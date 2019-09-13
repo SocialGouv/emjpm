@@ -29,7 +29,7 @@ include:
 
 .dev_stage: &dev_stage
   environment:
-    name: fabrique-dev
+    name: dev.factory
   only:
     refs:
       - branches
