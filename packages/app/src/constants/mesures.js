@@ -1,5 +1,9 @@
 export const MESURE_STATUS_LABEL_VALUE = [
   {
+    label: "Toutes les mesures",
+    value: null
+  },
+  {
     label: "à venir",
     value: "Mesure en attente"
   },
@@ -14,6 +18,10 @@ export const MESURE_STATUS_LABEL_VALUE = [
 ];
 
 export const MESURE_TYPE_LABEL_VALUE = [
+  {
+    label: "Tous les types",
+    value: null
+  },
   {
     label: "Curatelle",
     value: "Curatelle"
