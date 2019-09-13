@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MesureList } from "@socialgouv/emjpm-ui-components";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
 import { Flex, Box } from "rebass";
 import { Button } from "@socialgouv/emjpm-ui-core";
 
@@ -20,6 +20,7 @@ const ServiceMesures = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const { mesureType, mesureStatus, antenne } = useContext(FiltersContext);
 
+  useEffect(() => setCurrentPage(RESULT_PER_PAGE), [mesureType, mesureStatus, antenne]);
   const { data, error, loading, fetchMore } = useQuery(MESURES, {
     variables: {
       offset: 0,
@@ -50,7 +51,7 @@ const ServiceMesures = () => {
               validate={id => console.log(id)}
               mesures={mesures}
             />
-            {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
+            {count > RESULT_PER_PAGE && count > currentPage && (
               <Flex mt="5" alignItem="center">
                 <Button
                   onClick={() => {
