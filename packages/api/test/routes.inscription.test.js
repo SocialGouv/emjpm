@@ -195,13 +195,14 @@ describe("routes : inscription", () => {
             .where("username", "user_ti")
             .first();
           user.username.should.equal("user_ti");
-          const user_tis = await knex
-            .table("user_tis")
-            .innerJoin("users", "users.id", "user_tis.user_id")
+          user.cabinet.should.equal("2A");
+
+          const magistrat = await knex
+            .table("magistrat")
+            .innerJoin("users", "users.id", "magistrat.user_id")
             .where("user_id", user.id)
             .first();
-          user.cabinet.should.equal("2A");
-          user_tis.ti_id.should.equal(1);
+          magistrat.ti_id.should.equal(1);
         }));
     it("created user should NOT be active", () =>
       chai

@@ -50,6 +50,10 @@ afterEach(async () => {
     .where({ user_id: user.id })
     .delete();
 
+  await knex("magistrat")
+    .where({ user_id: user.id })
+    .delete();
+
   await knex("users")
     .where({ id: user.id })
     .delete();
@@ -240,11 +244,11 @@ test("should add user tis", async () => {
     .first();
 
   expect(user.username).toEqual("user_ti");
-  const user_tis = await knex
-    .table("user_tis")
-    .innerJoin("users", "users.id", "user_tis.user_id")
+  const magistrat = await knex
+    .table("magistrat")
+    .innerJoin("users", "users.id", "magistrat.user_id")
     .where("user_id", user.id)
     .first();
-  expect(user_tis.cabinet).toEqual("2A");
-  expect(user_tis.ti_id).toEqual(1);
+  expect(magistrat.cabinet).toEqual("2A");
+  expect(magistrat.ti_id).toEqual(1);
 });

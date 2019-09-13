@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const { User } = require("../../model/User");
 const { Mandataire } = require("../../model/Mandataire");
+const { Magistrat } = require("../../model/Magistrat");
 const { Department } = require("../../model/Departments");
 const { UserTis } = require("../../model/UserTis");
 const { UserRole } = require("../../model/UserRole");
@@ -16,6 +17,20 @@ const {
   createUserAntenne,
   createServiceAdmin
 } = require("./utils/service");
+
+const createMagistrat = async (body, user) => {
+  const { tis } = body;
+  if (!tis || tis.length === 0) {
+    throw new Error("a ti is required for user `magistrat`");
+  }
+  const ti_id = tis[0];
+  return Magistrat.query()
+    .allowInsert("[user_id, ti_id]")
+    .insert({
+      user_id: user.id,
+      ti_id
+    });
+};
 
 const createMandataire = async (body, user) => {
   const code_postal = body.code_postal;
@@ -148,7 +163,7 @@ const postSignup = async (req, res) => {
         await User.query()
           .update({ cabinet })
           .where("id", user.id);
-        await createUserTis(req.body, user.id);
+        await createMagistrat(req.body, user);
         break;
       case "direction": {
         await createRole(user.id, directionType);
