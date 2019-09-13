@@ -15,6 +15,7 @@ const Link = props => {
 };
 
 const RESULT_PER_PAGE = 20;
+
 const ServiceMesures = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const { mesureType, mesureStatus, antenne } = useContext(FiltersContext);
