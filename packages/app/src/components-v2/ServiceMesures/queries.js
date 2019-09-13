@@ -1,9 +1,17 @@
 import gql from "graphql-tag";
 
 export const MESURES = gql`
-  query mesures($antenne: Int, $type: String, $status: String) {
+  query mesures($limit: Int, $antenne: Int, $type: String, $status: String, $offset: Int) {
+    mesures_aggregate(
+      where: { status: { _eq: $status }, type: { _eq: $type }, antenne_id: { _eq: $antenne } }
+    ) {
+      aggregate {
+        count
+      }
+    }
     mesures(
-      limit: 20
+      limit: $limit
+      offset: $offset
       where: { status: { _eq: $status }, type: { _eq: $type }, antenne_id: { _eq: $antenne } }
     ) {
       antenne_id
