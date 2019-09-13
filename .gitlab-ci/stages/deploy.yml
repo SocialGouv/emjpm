@@ -103,7 +103,7 @@ Deploy App (incubateur):
     <<: *deploy_stage_variables
     CONTEXT: api
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-    PORT: 4000
+    PORT: 80
   after_script:
     # NOTE(douglasduteil): re-run env.sh
     # Because the `after_script` runs in a separated shell context.
