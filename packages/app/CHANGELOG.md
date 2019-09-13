@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.0.0](https://github.com/SocialGouv/emjpm/compare/v23.5.0...v24.0.0) (2019-09-13)
+
+
+### Features
+
+* **direction:** add columns to mandataire export ([#715](https://github.com/SocialGouv/emjpm/issues/715)) ([2dc074d](https://github.com/SocialGouv/emjpm/commit/2dc074d))
+* **direction:** apply filters in mandataires export ([#710](https://github.com/SocialGouv/emjpm/issues/710)) ([fa219d9](https://github.com/SocialGouv/emjpm/commit/fa219d9))
+* **mandataire-list:** add real data fetch and paginate ([#708](https://github.com/SocialGouv/emjpm/issues/708)) ([4e54e6f](https://github.com/SocialGouv/emjpm/commit/4e54e6f))
+
+
+
+
+
 # [23.5.0](https://github.com/SocialGouv/emjpm/compare/v23.4.5...v23.5.0) (2019-09-09)
 
 

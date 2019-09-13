@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.0.0](https://github.com/SocialGouv/emjpm/compare/v23.5.0...v24.0.0) (2019-09-13)
+
+
+### Features
+
+* **direction:** add columns to mandataire export ([#715](https://github.com/SocialGouv/emjpm/issues/715)) ([2dc074d](https://github.com/SocialGouv/emjpm/commit/2dc074d))
+* **direction:** apply filters in mandataires export ([#710](https://github.com/SocialGouv/emjpm/issues/710)) ([fa219d9](https://github.com/SocialGouv/emjpm/commit/fa219d9))
+* **knex:** set default value for mesure data ([#712](https://github.com/SocialGouv/emjpm/issues/712)) ([3628f82](https://github.com/SocialGouv/emjpm/commit/3628f82))
+* **knex:** update view gestionnaire mesure ([#711](https://github.com/SocialGouv/emjpm/issues/711)) ([5f15d72](https://github.com/SocialGouv/emjpm/commit/5f15d72))
+* **mandataire-list:** add real data fetch and paginate ([#708](https://github.com/SocialGouv/emjpm/issues/708)) ([4e54e6f](https://github.com/SocialGouv/emjpm/commit/4e54e6f))
+* **service-admin:** populate table service_admin ([#719](https://github.com/SocialGouv/emjpm/issues/719)) ([7a882d7](https://github.com/SocialGouv/emjpm/commit/7a882d7))
+* **view_mesure_gestionnaire :** update medatas ([#717](https://github.com/SocialGouv/emjpm/issues/717)) ([b07416d](https://github.com/SocialGouv/emjpm/commit/b07416d))
+
+
+
+
+
 # [23.5.0](https://github.com/SocialGouv/emjpm/compare/v23.4.5...v23.5.0) (2019-09-09)
 
 
