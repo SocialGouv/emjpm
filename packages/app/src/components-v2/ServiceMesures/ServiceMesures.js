@@ -9,6 +9,8 @@ import { formatMesureList } from "./utils";
 import { FiltersContext } from "../ServicesFilters/context";
 import { ServiceCloseMesure } from "./ServiceCloseMesure";
 import { ServiceReactivateMesure } from "./ServiceReactivateMesure";
+import { ServiceDeleteMesure } from "./ServiceDeleteMesure";
+
 import { MESURES } from "./queries";
 
 const RESULT_PER_PAGE = 20;
@@ -38,6 +40,13 @@ const ServiceMesures = () => {
 
   const { count } = data.mesures_aggregate.aggregate;
   const mesures = formatMesureList(data.mesures);
+  const queryVariables = {
+    offset: 0,
+    limit: RESULT_PER_PAGE,
+    antenne: antenne ? antenne.value : undefined,
+    type: mesureType ? mesureType.value : undefined,
+    status: mesureStatus ? mesureStatus.value : undefined
+  };
 
   return (
     <MesureContextProvider>
@@ -47,6 +56,9 @@ const ServiceMesures = () => {
             <Fragment>
               <MesureList
                 CloseComponent={ServiceCloseMesure}
+                RemoveComponent={props => (
+                  <ServiceDeleteMesure {...props} queryVariable={queryVariables} />
+                )}
                 ReactivateComponent={ServiceReactivateMesure}
                 onPanelOpen={id => console.log(id)}
                 mesures={mesures}
