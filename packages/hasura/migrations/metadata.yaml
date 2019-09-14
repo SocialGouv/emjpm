@@ -7,7 +7,7 @@ remote_schemas:
     forward_client_headers: true
     headers: []
     timeout_seconds: null
-    url: "%%WHATEVER_URL%%/graphql"
+    url: http://host.docker.internal:4001/graphql
     url_from_env: null
   name: whatever
 tables:
@@ -1253,6 +1253,14 @@ tables:
           user_id:
             _eq: X-Hasura-User-Id
     role: prepose
+  - comment: null
+    permission:
+      filter:
+        service_antenne:
+          user_antennes:
+            user_id:
+              _eq: X-Hasura-User-Id
+    role: service
   event_triggers: []
   insert_permissions:
   - comment: null
@@ -1346,6 +1354,37 @@ tables:
       - ville
       set: {}
     role: ti
+  - comment: null
+    permission:
+      check:
+        service_antenne:
+          user_antennes:
+            user_id:
+              _eq: X-Hasura-User-Id
+      columns:
+      - date_ouverture
+      - extinction
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      set: {}
+    role: service
   is_enum: false
   object_relationships:
   - comment: null
@@ -1369,37 +1408,6 @@ tables:
     using:
       foreign_key_constraint_on: mandataire_id
   select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
-      - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
-      - antenne_id
-      filter:
-        service_antenne:
-          user_antennes:
-            user_id:
-              _eq: X-Hasura-User-Id
-    role: service
   - comment: null
     permission:
       allow_aggregations: true
@@ -1517,6 +1525,37 @@ tables:
             user_id:
               _eq: X-Hasura-User-Id
     role: ti
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - code_postal
+      - ville
+      - etablissement
+      - mandataire_id
+      - created_at
+      - annee
+      - type
+      - date_ouverture
+      - residence
+      - civilite
+      - status
+      - extinction
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - reason_extinction
+      - numero_rg
+      - department_id
+      - antenne_id
+      filter:
+        service_antenne:
+          user_antennes:
+            user_id:
+              _eq: X-Hasura-User-Id
+    role: service
   table: mesures
   update_permissions:
   - comment: null
@@ -1613,6 +1652,37 @@ tables:
             _is_null: true
       set: {}
     role: ti
+  - comment: null
+    permission:
+      columns:
+      - id
+      - code_postal
+      - ville
+      - etablissement
+      - mandataire_id
+      - created_at
+      - annee
+      - type
+      - date_ouverture
+      - residence
+      - civilite
+      - status
+      - extinction
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - reason_extinction
+      - numero_rg
+      - department_id
+      - antenne_id
+      filter:
+        service_antenne:
+          user_antennes:
+            user_id:
+              _eq: X-Hasura-User-Id
+      set: {}
+    role: service
 - array_relationships: []
   delete_permissions: []
   event_triggers: []
