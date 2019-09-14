@@ -8,7 +8,7 @@ import { MesureListStyle } from "./style";
 import { formatMesureList } from "./utils";
 import { FiltersContext } from "../ServicesFilters/context";
 import { ServiceCloseMesure } from "./ServiceCloseMesure";
-
+import { ServiceReactivateMesure } from "./ServiceReactivateMesure";
 import { MESURES } from "./queries";
 
 const RESULT_PER_PAGE = 20;
@@ -47,6 +47,7 @@ const ServiceMesures = () => {
             <Fragment>
               <MesureList
                 CloseComponent={ServiceCloseMesure}
+                ReactivateComponent={ServiceReactivateMesure}
                 onPanelOpen={id => console.log(id)}
                 mesures={mesures}
               />
