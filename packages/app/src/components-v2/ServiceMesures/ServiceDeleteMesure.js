@@ -6,12 +6,11 @@ import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
 
 import { DELETE_MESURE } from "./mutations";
-import { MESURES } from "./queries";
 import { Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 
 export const ServiceDeleteMesure = props => {
-  const { currentMesure, queryVariable } = props;
+  const { currentMesure } = props;
   const [UpdateMesure] = useMutation(DELETE_MESURE);
 
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
