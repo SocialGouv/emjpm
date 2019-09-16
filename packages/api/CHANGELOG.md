@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.1.0](https://github.com/SocialGouv/emjpm/compare/v24.0.2...v24.1.0) (2019-09-16)
+
+
+### Features
+
+* **magistrat:** magistrat interface with mesures / mandataires  ([#733](https://github.com/SocialGouv/emjpm/issues/733)) ([abee816](https://github.com/SocialGouv/emjpm/commit/abee816))
+
+
+
+
+
 ## [24.0.2](https://github.com/SocialGouv/emjpm/compare/v24.0.1...v24.0.2) (2019-09-13)
 
 **Note:** Version bump only for package @emjpm/api
