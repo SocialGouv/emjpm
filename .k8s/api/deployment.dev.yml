@@ -2,23 +2,23 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
+  name: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
+      app: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
   template:
     metadata:
       labels:
-        app: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
+        app: ${K8S_NAMESPACE}-${CONTEXT}-${BRANCH_HASH}
         git/branch: ${BRANCH_NAME}
         git/commit: ${COMMIT}
         gitlab/job: "${JOB_ID}"
     spec:
       containers:
         - image: ${IMAGE_NAME}:${IMAGE_TAG}
-          name: ${K8S_PROJECT}-${CONTEXT}
+          name: ${K8S_NAMESPACE}-${CONTEXT}
           ports:
             - containerPort: ${PORT}
           livenessProbe:
@@ -33,18 +33,9 @@ spec:
               port: ${PORT}
             initialDelaySeconds: 3
             periodSeconds: 5
-          resources:
-            requests:
-              cpu: 100m
-              memory: 128Mi
-            limits:
-              cpu: 200m
-              memory: 256Mi
 
           #
 
           env:
             - name: DATABASE_URL
               value: "psql://${POSTGRES_API_USER}:${POSTGRES_API_USER_PASSWORD}@${POSTGRES_HOST}/emjpm_dev"
-            - name: PORT
-              value: "${PORT}"
