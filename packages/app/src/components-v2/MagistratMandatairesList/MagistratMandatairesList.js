@@ -1,11 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
+import { Mandatairelist, MandataireContextProvider } from "@socialgouv/emjpm-ui-components";
 import { Button, Card, Heading4, Select, Spinner } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import { CURRENT_USER, GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle } from "./style";
 import { formatMandatairesList } from "./utils";
+import { MagistratChoose } from "./MagistratChoose";
 
 const optionsType = [
   { label: "Tous les types", value: null },
@@ -59,51 +60,53 @@ const MagistratMandatairesList = props => {
   const { count } = data.count.aggregate;
   const list = formatMandatairesList(data.mandatairesList);
   return (
-    <Box sx={MagistratMandatairesListStyle} {...props}>
-      <Flex mb="3">
-        <Box width="200px" mr="2">
-          <Select
-            size="small"
-            placeholder="Type de mandataire"
-            onChange={option => setType(option)}
-            value={selectedType}
-            options={optionsType}
-          />
-        </Box>
-        <Box width="200px">
-          <Select
-            size="small"
-            placeholder="trier par capacité"
-            onChange={capacity => setCapacity(capacity)}
-            value={selectedCapacity}
-            options={optionsCapacity}
-          />
-        </Box>
-      </Flex>
-      <Mandatairelist isMagistrat mandataires={list} />
-      {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
-        <Flex mt="5" alignItem="center">
-          <Button
-            onClick={() => {
-              fetchMore({
-                variables: {
-                  offset: currentPage + RESULT_PER_PAGE
-                },
-                updateQuery: (prev, { fetchMoreResult }) => {
-                  setCurrentPage(currentPage + RESULT_PER_PAGE);
-                  return {
-                    count: fetchMoreResult.count,
-                    mandatairesList: [...prev.mandatairesList, ...fetchMoreResult.mandatairesList]
-                  };
-                }
-              });
-            }}
-          >
-            Afficher les mandataires suivants
-          </Button>
+    <MandataireContextProvider>
+      <Box sx={MagistratMandatairesListStyle} {...props}>
+        <Flex mb="3">
+          <Box width="200px" mr="2">
+            <Select
+              size="small"
+              placeholder="Type de mandataire"
+              onChange={option => setType(option)}
+              value={selectedType}
+              options={optionsType}
+            />
+          </Box>
+          <Box width="200px">
+            <Select
+              size="small"
+              placeholder="trier par capacité"
+              onChange={capacity => setCapacity(capacity)}
+              value={selectedCapacity}
+              options={optionsCapacity}
+            />
+          </Box>
         </Flex>
-      )}
-    </Box>
+        <Mandatairelist isMagistrat ChooseComponent={MagistratChoose} mandataires={list} />
+        {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
+          <Flex mt="5" alignItem="center">
+            <Button
+              onClick={() => {
+                fetchMore({
+                  variables: {
+                    offset: currentPage + RESULT_PER_PAGE
+                  },
+                  updateQuery: (prev, { fetchMoreResult }) => {
+                    setCurrentPage(currentPage + RESULT_PER_PAGE);
+                    return {
+                      count: fetchMoreResult.count,
+                      mandatairesList: [...prev.mandatairesList, ...fetchMoreResult.mandatairesList]
+                    };
+                  }
+                });
+              }}
+            >
+              Afficher les mandataires suivants
+            </Button>
+          </Flex>
+        )}
+      </Box>
+    </MandataireContextProvider>
   );
 };
 
