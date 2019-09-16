@@ -3,6 +3,12 @@ kind: postgresql
 metadata:
   name: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
   namespace: ${K8S_NAMESPACE}
+  labels:
+    app: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
+    git/branch: ${BRANCH_NAME}
+  annotations:
+    git/commit: ${COMMIT}
+    gitlab/job: "${JOB_ID}"
 spec:
   teamId: "ACID"
   volume:
