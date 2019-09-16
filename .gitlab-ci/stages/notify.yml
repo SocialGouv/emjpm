@@ -83,3 +83,20 @@ Release:
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     - yarn --frozen-lockfile
     - GH_TOKEN=${GITHUB_TOKEN} yarn lerna version ${LERNA_ARGS:=--yes}
+
+Put to production:
+  <<: *notify_stage
+  stage: "Notify Finished Deployment"
+  when: manual
+  only:
+    - tags
+  except:
+    variables:
+      - $PRODUCTION
+  script:
+    - echo "Put ${CI_COMMIT_REF_NAME}@${CI_COMMIT_SHORT_SHA} in production"
+    - curl --request POST
+        --form ref="${CI_COMMIT_REF_NAME}"
+        --form token="${PIPELINE_TIGER_TOKEN}"
+        --form variables[PRODUCTION]="true"
+        https://gitlab.factory.social.gouv.fr/api/v4/projects/34/trigger/pipeline
