@@ -2,7 +2,18 @@ import gql from "graphql-tag";
 
 export const MESURES = gql`
   query mesures($antenne: Int, $type: String, $status: String) {
-    mesures(limit: 10, where: { status: { _eq: $status }, type: { _eq: $type } }) {
+    mesures_aggregate(
+      where: {
+        status: { _eq: "Mesure en attente" }
+        type: { _eq: $type }
+        antenne_id: { _eq: $antenne }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    mesures(limit: 10, where: { status: { _eq: "Mesure en attente" }, type: { _eq: $type } }) {
       id
       cabinet
       civilite

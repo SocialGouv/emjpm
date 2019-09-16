@@ -80,7 +80,7 @@ const MagistratMandatairesList = props => {
           />
         </Box>
       </Flex>
-      <Mandatairelist mandataires={list} />
+      <Mandatairelist isMagistrat mandataires={list} />
       {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
         <Flex mt="5" alignItem="center">
           <Button
