@@ -12,6 +12,7 @@ import { ServiceReactivateMesure } from "./ServiceReactivateMesure";
 import { ServiceAcceptMesure } from "./ServiceAcceptMesure";
 
 import { ServiceDeleteMesure } from "./ServiceDeleteMesure";
+import { ServiceEditMesure } from "./ServiceEditMesure";
 
 import { MESURES } from "./queries";
 
@@ -50,6 +51,7 @@ const ServiceMesures = () => {
           {mesures.length > 0 ? (
             <Fragment>
               <MesureList
+                EditComponent={ServiceEditMesure}
                 CloseComponent={ServiceCloseMesure}
                 RemoveComponent={ServiceDeleteMesure}
                 AcceptComponent={ServiceAcceptMesure}
