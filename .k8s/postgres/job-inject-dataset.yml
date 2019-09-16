@@ -1,0 +1,52 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ${K8S_PROJECT}-dataset
+  labels:
+    app: ${K8S_PROJECT}-dataset
+    git/branch: ${BRANCH_NAME}
+    git/commit: ${COMMIT}
+    gitlab/job: "${JOB_ID}"
+spec:
+  template:
+    spec:
+      containers:
+        - name: ${K8S_PROJECT}-dataset
+#          image: postgres:10.10
+          image: ${EMJPM_REGISTRY}:${IMAGE_TAG}
+          command: ["sh"]
+          args: ["/dataset/inject-dataset.sh"]
+          env:
+            - name: DATABASE_URL
+              value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/emjpm_dev"
+            - name: NODE_ENV
+              value: "development"
+          volumeMounts:
+            - name: dataset
+              mountPath: /dataset
+      volumes:
+        - name: dataset
+          configMap:
+            name: init-postgres
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-postgres
+          image: postgres:10-alpine
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 5m
+              memory: 16Mi
+            limits:
+              cpu: 25m
+              memory: 32Mi
+          command:
+            - sh
+            - -c
+            - |
+              retry=120; # 5s * (12 * 10) = 10min
+              while ! pg_isready -h ${POSTGRES_HOST} > /dev/null 2> /dev/null && [[ $(( retry-- )) -gt 0 ]];
+                do
+                  echo "Waiting for Postgres to go Green ($(( retry )))" ; sleep 5s ; done ;
+              echo Ready;
