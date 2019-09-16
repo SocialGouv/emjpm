@@ -1,0 +1,19 @@
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
+  namespace: postgresql
+spec:
+  teamId: "ACID"
+  volume:
+    size: 1Gi
+  numberOfInstances: 1
+  users:
+    postgresql:  # database owner
+      - superuser
+      - createdb
+    foo_user: []  # role for application foo
+  databases:
+    foo: postgresqldb  # dbname: owner
+  postgresql:
+    version: "10"
