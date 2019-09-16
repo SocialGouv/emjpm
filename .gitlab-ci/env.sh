@@ -13,7 +13,7 @@ export JOB_ID=${JOB_ID:=$CI_JOB_ID}
 BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
 export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
 
-export DOMAIN="emjpm.dev.fabrique.social.gouv.fr";
+export DOMAIN="emjpm.dev.factory.social.gouv.fr";
 
 export K8S_PROJECT="emjpm"
 export K8S_NAMESPACE="emjpm-feature-${BRANCH_HASH}"
