@@ -20,7 +20,7 @@ include:
 
 .incubateur_stage: &incubateur_stage
   environment:
-    name: prod
+    name: incubateur
   only:
     refs:
       - triggers
@@ -37,32 +37,6 @@ include:
   except:
     variables:
       - $PRODUCTION
-#
-#
-#
-
-# .create_namespace: &create_namespace
-#   <<: *deploy_stage
-#   extends: .base_docker_kube_image_stage
-#   stage: "Registration"
-#   script:
-#     # Skip the job if the namespace exists
-#     - "[[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
-#     # Or (re)create to ensure new quota are applied
-#     # - kubectl delete namespaces ${K8S_NAMESPACE} || true
-#     #
-#     - kubectl create namespace ${K8S_NAMESPACE}
-#     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
-#     - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
-#     - kubectl delete resourcequota -n ${K8S_NAMESPACE} -l "cattle.io/creator=norman,resourcequota.management.cattle.io/default-resource-quota=true"
-#     - envsubst < ./.k8s/quota.yml > ./quota.yml
-#     - kubectl apply -f ./quota.yml -n ${K8S_NAMESPACE}
-
-# Create namespace:
-#   <<: *create_namespace
-#   <<: *dev_stage
-
-
 #
 #
 #
@@ -103,7 +77,7 @@ Deploy App (incubateur):
     <<: *deploy_stage_variables
     CONTEXT: api
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-    PORT: 80
+    PORT: 4000
   after_script:
     # NOTE(douglasduteil): re-run env.sh
     # Because the `after_script` runs in a separated shell context.

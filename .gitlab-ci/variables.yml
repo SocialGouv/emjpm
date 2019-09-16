@@ -12,5 +12,3 @@ variables:
   DOCKER_VERSION: "18"
   PYTHON_VERSION: "3.6-alpine"
 
-  RANCHER_PROJECT_ID: c-gsm8d:p-vdtv7
-

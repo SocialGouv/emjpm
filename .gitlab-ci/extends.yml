@@ -13,6 +13,7 @@
     entrypoint: [""]
   before_script:
     - source ./.gitlab-ci/env.sh
+    - /apps/create-kubeconfig.sh
     - if [ -n "${PRODUCTION+x}" ]; then SUFFIX=".prod"; else SUFFIX=".dev"; fi
 
 
