@@ -1,13 +1,21 @@
 .k8s-deploy-postgres-dev:
-  extends: .base_docker_kube_image_stage
+  extends: .base_docker_helm_image_stage
   script:
-    - envsubst < ./.k8s/postgres/deployment.yml > ./deployment.yml
-    - envsubst < ./.k8s/postgres/service.yml > ./service.yml
+#    - envsubst < ./.k8s/postgres/service.yml > ./service.yml
     - envsubst < ./.k8s/postgres/pod-inject-dataset.yml > ./pod-inject-dataset.yml
+    - envsubst < ./.k8s/postgres/pod-inject-dataset.yml > ./pod-inject-dataset.yml
+
+    - kubectl get secret -n emjpm emjpm-secret -o json
+    - export POSTGRESQL_USER=$(kubectl get secret -n emjpm emjpm-secret -o jsonpath='{.data.POSTGRES_USER}' | base64 --decode)
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret -n emjpm emjpm-secret -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 --decode)
+    - env
+    - envsubst < ./.k8s/postgres/values-postgresql.yaml > ./values-postgresql.yaml
+    - cat ./values-postgresql.yaml
     #
-    - kubectl apply -f ./.k8s/postgres/configmap.yml -n ${K8S_NAMESPACE}
-    - kubectl apply -f ./deployment.yml -n ${K8S_NAMESPACE}
-    - kubectl apply -f ./service.yml -n ${K8S_NAMESPACE}
+#    - kubectl apply -f ./.k8s/postgres/configmap.yml -n ${K8S_NAMESPACE}
+#    - kubectl apply -f ./deployment.yml -n ${K8S_NAMESPACE}
+#    - kubectl apply -f ./service.yml -n ${K8S_NAMESPACE}
+    - helm install --name my-release -f ./values-postgresql.yaml stable/postgresql
     #
     - sh ./.k8s/postgres/inject_data_postgres.sh $BRANCH_HASH
 
