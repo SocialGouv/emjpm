@@ -107,3 +107,14 @@ export const MESURE_TYPE_LABEL_VALUE = [
     value: "Tutelle aux biens et à la personne"
   }
 ];
+
+export const RESIDENCE = [
+  { label: "A Domicile", value: "A Domicile" },
+  { label: "En établissement", value: "En établissement" },
+  {
+    label: "En établissement avec conservation du domicile",
+    value: "En établissement avec conservation du domicile"
+  },
+  { label: "SDF", value: "SDF" },
+  { label: "Autres", value: "Autres" }
+];

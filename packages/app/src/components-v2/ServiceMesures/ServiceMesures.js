@@ -9,6 +9,8 @@ import { formatMesureList } from "./utils";
 import { FiltersContext } from "../ServicesFilters/context";
 import { ServiceCloseMesure } from "./ServiceCloseMesure";
 import { ServiceReactivateMesure } from "./ServiceReactivateMesure";
+import { ServiceAcceptMesure } from "./ServiceAcceptMesure";
+
 import { ServiceDeleteMesure } from "./ServiceDeleteMesure";
 
 import { MESURES } from "./queries";
@@ -50,6 +52,7 @@ const ServiceMesures = () => {
               <MesureList
                 CloseComponent={ServiceCloseMesure}
                 RemoveComponent={ServiceDeleteMesure}
+                AcceptComponent={ServiceAcceptMesure}
                 ReactivateComponent={ServiceReactivateMesure}
                 onPanelOpen={id => console.log(id)}
                 mesures={mesures}
