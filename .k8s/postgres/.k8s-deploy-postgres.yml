@@ -15,12 +15,16 @@
     #    - kubectl apply -f ./service.yml -n ${K8S_NAMESPACE}
     - helm init --client-only
     #    - helm repo update
-    - helm install --name postgres-emjpm -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
+    - export HELM_DB_EXISTS=$(helm list --namespace ${K8S_NAMESPACE} | grep postgres-emjpm | wc -l)
+    - echo "DB exist ? ${HELM_DB_EXISTS}"
+    - echo $([ ${HELM_DB_EXISTS} -eq "1" ] && echo "need to update DB" || echo "need to install DB")
+    - HELM_ACTION=$([ ${HELM_DB_EXISTS} -eq "1" ] && echo upgrade || echo install)
+    - helm ${HELM_ACTION} --name postgres-emjpm --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
+    #
     - kubectl delete pod "${K8S_PROJECT}-dataset" -n ${K8S_NAMESPACE} || true;
     # - cat ./.k8s/postgres/jod-inject-dataset-prod.yml | envsubst | kubectl apply -f --namespace ${K8S_NAMESPACE} -
+    - cat ./job-inject-dataset.yml
     - kubectl apply -f ./job-inject-dataset.yml -n ${K8S_NAMESPACE}
-
-
     #
     - sh ./.k8s/postgres/inject_data_postgres.sh $BRANCH_HASH
 
