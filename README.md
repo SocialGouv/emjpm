@@ -97,6 +97,10 @@ $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.dev.yaml exec api 
 
 ## Release policy
 
+### One click semantic release !
+
+[On a successful `master` branch pipeline click on trigger the `Release` job.](https://gitlab.factory.social.gouv.fr/SocialGouv/emjpm/pipelines)
+
 ### Auto
 
 Trigger a custom build on [Travis](https://travis-ci.com/SocialGouv/emjpm) (in the "More options" right menu) on the `master` branch with a custom config:
@@ -135,8 +139,17 @@ $ CONVENTIONAL_GITHUB_RELEASER_TOKEN==************ npx conventional-github-relea
 
 ## Deployment policy
 
-All branches and tags are automaticly deployed
+All branches and tags are automatically deployed
 See https://github.com/SocialGouv/emjpm/deployments
+
+ - **Development** : https://master.emjpm.dev.fabrique.social.gouv.fr/
+ - **Prod Mirror** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
+ - **Pre Prod** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
+ - **Prod** : https://emjpm.fabrique.social.gouv.fr
+
+### One click tag release !
+
+[On a successful `tag` branch pipeline click on trigger the `Put to production` job.](https://gitlab.factory.social.gouv.fr/SocialGouv/emjpm/pipelines?scope=tags&page=1)
 
 ### Auto
 
