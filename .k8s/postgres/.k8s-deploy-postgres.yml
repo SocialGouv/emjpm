@@ -1,7 +1,7 @@
 .k8s-deploy-postgres-dev:
   extends: .base_docker_kube_image_stage
   script:
-    - cat ./.k8s/postgres/cluster.yml | envsubst | kubectl apply -f -
+    - cat ./.k8s/postgres/cluster.yml | envsubst | kubectl apply -n ${K8S_NAMESPACE} -f -
 
 .k8s-deploy-postgres-prod:
   extends: .base_docker_kube_image_stage
