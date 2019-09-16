@@ -330,7 +330,7 @@ readinessProbe:
 ## Configure metrics exporter
 ##
 metrics:
-  enabled: true
+  enabled: false
   # resources: {}
   service:
     type: ClusterIP
