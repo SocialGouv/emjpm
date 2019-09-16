@@ -16,7 +16,21 @@ import {
 } from "../../constants/mesures";
 
 export const ServiceEditMesure = props => {
-  const { currentMesure } = props;
+  console.log(props);
+  const {
+    currentMesure,
+    age,
+    antenneId,
+    civilite,
+    codePostal,
+    dateOuverture,
+    numeroRg,
+    numero_dossier,
+    residence,
+    status,
+    type,
+    ville
+  } = props;
   const [UpdateMesure] = useMutation(EDIT_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   return (
@@ -34,7 +48,6 @@ export const ServiceEditMesure = props => {
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
             setTimeout(() => {
               UpdateMesure({
                 variables: {
@@ -58,29 +71,29 @@ export const ServiceEditMesure = props => {
             }, 500);
           }}
           validationSchema={Yup.object().shape({
-            date_ouverture: Yup.date().required("Required"),
-            type: Yup.string().required("Required"),
-            residence: Yup.string().required("Required"),
-            code_postal: Yup.string().required("Required"),
-            ville: Yup.string().required("Required"),
-            civilite: Yup.string().required("Required"),
-            annee: Yup.string().required("Required"),
-            numero_dossier: Yup.string().required("Required"),
-            numero_rg: Yup.string().required("Required"),
-            status: Yup.string().required("Required")
+            date_ouverture: Yup.date(),
+            type: Yup.string(),
+            residence: Yup.string(),
+            code_postal: Yup.string(),
+            ville: Yup.string(),
+            civilite: Yup.string(),
+            annee: Yup.string(),
+            numero_dossier: Yup.string(),
+            numero_rg: Yup.string(),
+            status: Yup.string()
           })}
           initialValues={{
-            date_ouverture: "",
-            type: "",
-            residence: "",
-            code_postal: "",
-            ville: "",
-            civilite: "",
-            annee: "",
-            numero_dossier: "",
-            numero_rg: "",
-            status: "",
-            antenne_id: ""
+            annee: age,
+            antenne_id: antenneId,
+            civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
+            code_postal: codePostal,
+            date_ouverture: dateOuverture,
+            numero_rg: numeroRg,
+            numero_dossier: numero_dossier,
+            residence: { label: residence, value: residence },
+            status: { label: status, value: status },
+            type: { label: type, value: type },
+            ville: ville
           }}
         >
           {props => {
@@ -93,7 +106,6 @@ export const ServiceEditMesure = props => {
               handleSubmit,
               setFieldValue
             } = props;
-            console.log(errors);
             return (
               <form onSubmit={handleSubmit}>
                 <Box mb="2">
