@@ -16,7 +16,6 @@ import {
 } from "../../constants/mesures";
 
 export const ServiceEditMesure = props => {
-  console.log(props);
   const {
     currentMesure,
     age,
@@ -25,7 +24,7 @@ export const ServiceEditMesure = props => {
     codePostal,
     dateOuverture,
     numeroRg,
-    numero_dossier,
+    numeroDossier,
     residence,
     status,
     type,
@@ -89,7 +88,7 @@ export const ServiceEditMesure = props => {
             code_postal: codePostal,
             date_ouverture: dateOuverture,
             numero_rg: numeroRg,
-            numero_dossier: numero_dossier,
+            numero_dossier: numeroDossier,
             residence: { label: residence, value: residence },
             status: { label: status, value: status },
             type: { label: type, value: type },
