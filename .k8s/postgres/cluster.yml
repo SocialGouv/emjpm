@@ -10,7 +10,7 @@ metadata:
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
 spec:
-  teamId: "ACID"
+  teamId: ${K8S_PROJECT}
   volume:
     size: 1Gi
   numberOfInstances: 1
