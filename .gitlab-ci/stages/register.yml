@@ -4,6 +4,9 @@
   extends: .base_register_stage
   stage: "Registration"
   dependencies: []
+  except:
+    variables:
+      - $PRODUCTION
 
 #
 
