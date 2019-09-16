@@ -296,6 +296,9 @@ resources:
   requests:
     memory: 256Mi
     cpu: 250m
+  limits:
+    memory: 1024Mi
+    cpu: 500m
 
 networkPolicy:
   ## Enable creation of NetworkPolicy resources.
