@@ -25,6 +25,13 @@ spec:
           volumeMounts:
             - name: dataset
               mountPath: /dataset
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
       volumes:
         - name: dataset
           configMap:
