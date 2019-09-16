@@ -2,7 +2,7 @@ apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
   name: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
-  namespace: postgresql
+  namespace: ${K8S_NAMESPACE}
 spec:
   teamId: "ACID"
   volume:
