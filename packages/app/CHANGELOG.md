@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.1.0](https://github.com/SocialGouv/emjpm/compare/v24.0.2...v24.1.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* **page-name:** update page name in lower case ([#753](https://github.com/SocialGouv/emjpm/issues/753)) ([0b8681c](https://github.com/SocialGouv/emjpm/commit/0b8681c))
+* **services-mesures-metadata:** update services mesures permissions ([#732](https://github.com/SocialGouv/emjpm/issues/732)) ([9fe8a77](https://github.com/SocialGouv/emjpm/commit/9fe8a77))
+
+
+### Features
+
+* **magistrat:** magistrat interface with mesures / mandataires  ([#733](https://github.com/SocialGouv/emjpm/issues/733)) ([abee816](https://github.com/SocialGouv/emjpm/commit/abee816))
+* **service-accept-mesure:** add base data component ([#752](https://github.com/SocialGouv/emjpm/issues/752)) ([27d69e7](https://github.com/SocialGouv/emjpm/commit/27d69e7))
+* **service-close-mesure:** add close mesure mutation ([#744](https://github.com/SocialGouv/emjpm/issues/744)) ([0abab67](https://github.com/SocialGouv/emjpm/commit/0abab67))
+* **service-reactivate-mesure:** add reactivate mutation ([#745](https://github.com/SocialGouv/emjpm/issues/745)) ([dedc228](https://github.com/SocialGouv/emjpm/commit/dedc228))
+
+
+
+
+
 ## [24.0.2](https://github.com/SocialGouv/emjpm/compare/v24.0.1...v24.0.2) (2019-09-13)
 
 **Note:** Version bump only for package @emjpm/app

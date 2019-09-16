@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.1.0](https://github.com/SocialGouv/emjpm/compare/v24.0.2...v24.1.0) (2019-09-16)
+
+
+### Bug Fixes
+
+* **ci:** force bump to test release process ([20856d6](https://github.com/SocialGouv/emjpm/commit/20856d6))
+* **data:** fix mesure type in db ([#742](https://github.com/SocialGouv/emjpm/issues/742)) ([75ac228](https://github.com/SocialGouv/emjpm/commit/75ac228))
+* **hasura:** delete duplicate permission ([#743](https://github.com/SocialGouv/emjpm/issues/743)) ([035739b](https://github.com/SocialGouv/emjpm/commit/035739b))
+* **page-name:** update page name in lower case ([#753](https://github.com/SocialGouv/emjpm/issues/753)) ([0b8681c](https://github.com/SocialGouv/emjpm/commit/0b8681c))
+* **service-metadata:** update metadata add correct url ([#748](https://github.com/SocialGouv/emjpm/issues/748)) ([4144352](https://github.com/SocialGouv/emjpm/commit/4144352))
+* **services-mesures-metadata:** update services mesures permissions ([#732](https://github.com/SocialGouv/emjpm/issues/732)) ([9fe8a77](https://github.com/SocialGouv/emjpm/commit/9fe8a77))
+
+
+### Features
+
+* **magistrat:** magistrat interface with mesures / mandataires  ([#733](https://github.com/SocialGouv/emjpm/issues/733)) ([abee816](https://github.com/SocialGouv/emjpm/commit/abee816))
+* **service-accept-mesure:** add base data component ([#752](https://github.com/SocialGouv/emjpm/issues/752)) ([27d69e7](https://github.com/SocialGouv/emjpm/commit/27d69e7))
+* **service-close-mesure:** add close mesure mutation ([#744](https://github.com/SocialGouv/emjpm/issues/744)) ([0abab67](https://github.com/SocialGouv/emjpm/commit/0abab67))
+* **service-metadata:** add metadata for services ([#747](https://github.com/SocialGouv/emjpm/issues/747)) ([63f0d90](https://github.com/SocialGouv/emjpm/commit/63f0d90))
+* **service-reactivate-mesure:** add reactivate mutation ([#745](https://github.com/SocialGouv/emjpm/issues/745)) ([dedc228](https://github.com/SocialGouv/emjpm/commit/dedc228))
+
+
+
+
+
 ## [24.0.2](https://github.com/SocialGouv/emjpm/compare/v24.0.1...v24.0.2) (2019-09-13)
 
 
