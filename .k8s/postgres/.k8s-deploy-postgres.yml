@@ -21,6 +21,7 @@
     - kubectl delete pod "${K8S_PROJECT}-dataset" -n ${K8S_NAMESPACE} || true;
     # - cat ./.k8s/postgres/jod-inject-dataset-prod.yml | envsubst | kubectl apply -f --namespace ${K8S_NAMESPACE} -
     - cat ./job-inject-dataset.yml
+    - kubectl version
     - kubectl apply -f ./job-inject-dataset.yml -n ${K8S_NAMESPACE}
     #
     - sh ./.k8s/postgres/inject_data_postgres.sh $BRANCH_HASH
