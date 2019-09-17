@@ -1,8 +1,8 @@
 .k8s-deploy-hasura:
   extends: .base_docker_kube_image_stage
   script:
-    - export HASURA_POSTGRESQL_USER=postgres
-    - export HASURA_POSTGRES_PASSWORD=$(kubectl get secret --namespace ${K8S_NAMESPACE} ${POSTGRES_HOST} -o jsonpath="{.data.postgresql-password}" | base64 --decode)
+    - export HASURA_POSTGRESQL_USER=${POSTGRESQL_USER}
+    - export HASURA_POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD}
     #
     - envsubst < ./.k8s/hasura/deployment.yml > ./deployment.yml
     - envsubst < ./.k8s/hasura/service.yml > ./service.yml

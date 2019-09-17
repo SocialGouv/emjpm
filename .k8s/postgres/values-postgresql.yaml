@@ -178,6 +178,40 @@ initdbScripts:
       CREATE USER ${POSTGRESQL_USER} with encrypted password '${POSTGRESQL_PASSWORD}';
 
       GRANT ALL PRIVILEGES ON DATABASE ${POSTGRES_DATABASE} TO ${POSTGRESQL_USER};
+
+
+
+      -- create pgcrypto extension, required for UUID
+      CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+      -- create the schemas required by the hasura system
+      -- NOTE: If you are starting from scratch: drop the below schemas first, if they exist.
+      CREATE SCHEMA IF NOT EXISTS hdb_catalog;
+      CREATE SCHEMA IF NOT EXISTS hdb_views;
+
+      -- make the user an owner of system schemas
+      ALTER SCHEMA hdb_catalog OWNER TO ${POSTGRESQL_USER};
+      ALTER SCHEMA hdb_views OWNER TO ${POSTGRESQL_USER};
+
+      -- grant select permissions on information_schema and pg_catalog. This is
+      -- required for hasura to query list of available tables
+      GRANT SELECT ON ALL TABLES IN SCHEMA information_schema TO ${POSTGRESQL_USER};
+      GRANT SELECT ON ALL TABLES IN SCHEMA pg_catalog TO ${POSTGRESQL_USER};
+
+      -- Below permissions are optional. This is dependent on what access to your
+      -- tables/schemas - you want give to hasura. If you want expose the public
+      -- schema for GraphQL query then give permissions on public schema to the
+      -- hasura user.
+      -- Be careful to use these in your production db. Consult the postgres manual or
+      -- your DBA and give appropriate permissions.
+
+      -- grant all privileges on all tables in the public schema. This can be customised:
+      -- For example, if you only want to use GraphQL regular queries and not mutations,
+      -- then you can set: GRANT SELECT ON ALL TABLES...
+      GRANT USAGE ON SCHEMA public TO ${POSTGRESQL_USER};
+      GRANT ALL ON ALL TABLES IN SCHEMA public TO ${POSTGRESQL_USER};
+      GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO ${POSTGRESQL_USER};
+
     EOSQL
 
 ## ConfigMap with scripts to be run at first boot
