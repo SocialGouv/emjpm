@@ -174,7 +174,9 @@ initdbScripts:
   my_init_script.sh: |
     #!/bin/bash
     set -e
-    psql -v ON_ERROR_STOP=1 <<-EOSQL
+    echo "starting my_init_script.sh"
+
+    psql -v ON_ERROR_STOP=1 -U postgres <<-EOSQL
       CREATE USER ${POSTGRESQL_USER} with encrypted password '${POSTGRESQL_PASSWORD}';
       ALTER USER ${POSTGRESQL_USER} WITH SUPERUSER;
       GRANT ALL PRIVILEGES ON DATABASE ${POSTGRES_DATABASE} TO ${POSTGRESQL_USER};
@@ -211,6 +213,8 @@ initdbScripts:
       GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO ${POSTGRESQL_USER};
 
     EOSQL
+    echo "ending my_init_script.sh"
+
 
 ## ConfigMap with scripts to be run at first boot
 ## NOTE: This will override initdbScripts
