@@ -19,8 +19,8 @@ const optionsType = [
 
 const optionsCapacity = [
   { label: "Aucun", value: null },
-  { label: "Ascendant", value: "asc" },
-  { label: "Descendant", value: "desc" }
+  { label: "Ascendant", value: "asc_nulls_last" },
+  { label: "Descendant", value: "desc_nulls_last" }
 ];
 
 const RESULT_PER_PAGE = 10;
