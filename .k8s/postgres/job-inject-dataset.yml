@@ -2,9 +2,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: ${K8S_PROJECT}-dataset
+  name: ${K8S_PROJECT}-dataset-${BRANCH_HASH}
   labels:
-    app: ${K8S_PROJECT}-dataset
+    app: ${K8S_PROJECT}-dataset-${BRANCH_HASH}
     git/branch: ${BRANCH_NAME}
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
@@ -12,7 +12,7 @@ spec:
   template:
     spec:
       containers:
-        - name: ${K8S_PROJECT}-dataset
+        - name: ${K8S_PROJECT}-dataset-${BRANCH_HASH}
 #          image: postgres:10.10
           image: ${EMJPM_REGISTRY}:${IMAGE_TAG}
           command: ["sh"]
