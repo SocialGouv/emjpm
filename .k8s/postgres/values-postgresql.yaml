@@ -39,7 +39,7 @@ image:
 
 ## String to fully override postgresql.fullname template
 ##
-# fullnameOverride:
+fullnameOverride: ${POSTGRES_HOST}
 
 ##
 ## Init containers parameters:
