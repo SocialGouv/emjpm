@@ -12,9 +12,8 @@
     #    - kubectl apply -f ./service.yml -n ${K8S_NAMESPACE}
     - helm init --client-only
     #    - helm repo update
-    - export HELM_DB_EXISTS=$(helm list --namespace ${K8S_NAMESPACE} | grep postgres-emjpm | wc -l)
-    - echo "DB exist ? ${HELM_DB_EXISTS}"
-    - echo $([ ${HELM_DB_EXISTS} -eq "1" ] && echo "need to update DB" || echo "need to install DB")
+    - export HELM_DB_EXISTS=$(helm list --namespace ${K8S_NAMESPACE} | grep ${POSTGRES_HOST} | wc -l)
+    - echo "DB exist ? ${HELM_DB_EXISTS} -> $([ ${HELM_DB_EXISTS} -eq "1" ] && echo "need to update DB" || echo "need to install DB")"
     - HELM_ACTION=$([ ${HELM_DB_EXISTS} -eq "1" ] && echo upgrade || echo "install --name")
     - helm ${HELM_ACTION} ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
     #
