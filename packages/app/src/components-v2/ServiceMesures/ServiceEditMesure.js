@@ -65,7 +65,7 @@ export const ServiceEditMesure = props => {
                 }
               });
               setSubmitting(false);
-              setPanelType(PANEL_TYPE.CLOSE);
+              setPanelType(null);
               setCurrentMesure(null);
             }, 500);
           }}

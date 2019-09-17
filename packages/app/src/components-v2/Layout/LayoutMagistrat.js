@@ -20,7 +20,7 @@ function parseCookies(options = {}) {
 
 const navigationLinks = [
   {
-    title: "Vos mandataire",
+    title: "Vos mandataires",
     url: "/magistrats"
   },
   {

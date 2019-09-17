@@ -1,24 +1,24 @@
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 import { Formik } from "formik";
 import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
 
 import { CHOOSE_MANDATAIRE } from "./mutations";
-import { Select, Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { Select, Button, Input, Heading3 } from "@socialgouv/emjpm-ui-core";
+import { MandataireContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { MESURE_TYPE_LABEL_VALUE, CIVILITY } from "../../constants/mesures";
+import { MandataireInformations } from "./MandataireInformations";
 
 export const MagistratChoose = props => {
   const { currentMandataire } = props;
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
-  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+  const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
-        <Heading5 mb="1">Créer une mesure</Heading5>
-        <Text lineHeight="1.5">{`Texte de création d'une mesure`}</Text>
+        <MandataireInformations {...props} />
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="3">
@@ -37,8 +37,8 @@ export const MagistratChoose = props => {
                 }
               });
               setSubmitting(false);
-              setPanelType(PANEL_TYPE.CLOSE);
-              setCurrentMesure(null);
+              setPanelType(null);
+              setCurrentMandataire(null);
             }, 500);
           }}
           validationSchema={Yup.object().shape({
@@ -115,7 +115,7 @@ export const MagistratChoose = props => {
                       variant="outline"
                       onClick={() => {
                         setPanelType(PANEL_TYPE.CHOOSE);
-                        setCurrentMesure(null);
+                        setCurrentMandataire(null);
                       }}
                     >
                       Annuler
