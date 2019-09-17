@@ -5,7 +5,6 @@ import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratInformations } from "../../src/components-v2/MagistratInformations";
-import { PreferencesPanel } from "../../src/components-v2/PreferencesPanel";
 
 const Informations = () => {
   return (
@@ -33,10 +32,7 @@ const Informations = () => {
               flexGrow: 1,
               flexBasis: 320
             }}
-          >
-            <Heading2>Mesures souhaitées</Heading2>
-            <PreferencesPanel />
-          </Box>
+          />
         </Flex>
       </BoxWrapper>
     </LayoutMagistrat>

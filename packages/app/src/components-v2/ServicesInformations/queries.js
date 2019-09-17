@@ -20,6 +20,14 @@ export const GET_SERVICES_ANTENNE = gql`
       contact_phone
       contact_lastname
       contact_firstname
+      service {
+        service_tis {
+          ti {
+            etablissement
+            id
+          }
+        }
+      }
     }
   }
 `;

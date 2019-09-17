@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Informations } from "./Informations";
 import { MAGISTRAT } from "./queries";
 
-const MagistratInformations = () => {
+const MagistratInformations = props => {
   const { data, error, loading } = useQuery(MAGISTRAT);
 
   if (loading) {
@@ -15,7 +15,7 @@ const MagistratInformations = () => {
     return <div>error</div>;
   }
 
-  return <Informations userInformations={data} />;
+  return <Informations {...props} userInformations={data} />;
 };
 
 export { MagistratInformations };

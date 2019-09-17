@@ -14,41 +14,37 @@ import {
 } from "./style";
 
 const Informations = props => {
-  console.log(props);
+  const [user] = props.userInformations.users;
+  const { email, magistrat } = user;
   return (
-    <Box>
+    <Box {...props}>
       <Card p="5">
-        <Text sx={titleStyle}>Service</Text>
-        <Heading3>{"service.name"}</Heading3>
+        <Text sx={titleStyle}>Tribunal</Text>
+        <Heading3>{magistrat.ti.etablissement}</Heading3>
         <Flex sx={flexStyle}>
           <Box sx={boxStyle}>
             <Heading5>Contact</Heading5>
             <Flex mt="2">
               <MailOutline size="16" />
-              <Text sx={iconTextStyle}>{"service.contact_email"}</Text>
+              <Text sx={iconTextStyle}>{email}</Text>
             </Flex>
             <Flex mt="1">
               <Smartphone size="16" />
-              <Text sx={iconTextStyle}>{"service.contact_phone"}</Text>
+              <Text sx={iconTextStyle}>{magistrat.ti.telephone}</Text>
             </Flex>
-            <Heading5 mt="5">Informations</Heading5>
-            <Text sx={topTextStyle}>{"service.address_street"}</Text>
-            <Text sx={innerTextStyle}>{"service.address_zip_code"}</Text>
-            <Text sx={innerTextStyle}>{"service.address_city"}</Text>
           </Box>
           <Box sx={boxStyle}>
-            <Heading5 mt="5">Tribunaux d’instance</Heading5>
-            <Text sx={topTextStyle}>{"Tribunal d'Instance d'Arras"}</Text>
-            <Heading5 mt="5">Langues parlées</Heading5>
-            <Text sx={topTextStyle}>• Anglais</Text>
-            <Text sx={innerTextStyle}>• Arabe</Text>
-            <Heading5 mt="5">Compétences particulières</Heading5>
-            <Text sx={topTextStyle}>Troubles psychiques</Text>
-            <Text sx={innerTextStyle}>Langage des signes</Text>
+            <Heading5>Informations</Heading5>
+            <Text sx={topTextStyle}>
+              {magistrat.user.nom} {magistrat.user.prenom}
+            </Text>
+            <Text sx={innerTextStyle}>
+              {magistrat.ti.code_postal} {magistrat.ti.ville}
+            </Text>
           </Box>
         </Flex>
         <Flex mt="5">
-          <LinkButton href="/services/edit-informations">Modifier mes informations</LinkButton>
+          <LinkButton href="/magistrats/edit-informations">Modifier mes informations</LinkButton>
         </Flex>
       </Card>
     </Box>
