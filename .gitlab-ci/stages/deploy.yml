@@ -63,6 +63,19 @@ Create namespace:
   <<: *dev_stage
 
 
+.create_emjpm_secret: &create_emjpm_secret
+  <<: *deploy_stage
+  extends: .base_docker_kube_image_stage
+  stage: "Deploy"
+  script:
+    - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
+    - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
+
+Create emjpm-secret:
+  <<: *create_emjpm_secret
+  <<: *dev_stage
+
+
 #
 #
 #
