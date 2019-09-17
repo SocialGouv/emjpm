@@ -35,7 +35,7 @@ image:
 
 ## String to partially override postgresql.fullname template (will maintain the release name)
 ##
-# nameOverride:
+nameOverride: ${POSTGRES_HOST}
 
 ## String to fully override postgresql.fullname template
 ##
@@ -266,7 +266,6 @@ master:
   affinity: {}
   tolerations: []
   podLabels:
-    app: ${POSTGRES_HOST}
     git/branch: ${BRANCH_NAME}
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
@@ -290,7 +289,6 @@ slave:
   affinity: {}
   tolerations: []
   podLabels:
-    app: ${POSTGRES_HOST}
     git/branch: ${BRANCH_NAME}
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
