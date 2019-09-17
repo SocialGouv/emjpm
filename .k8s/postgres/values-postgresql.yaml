@@ -14,8 +14,8 @@ global:
 ##
 image:
   registry: docker.io
-  repository: bitnami/postgresql
-  tag: 10.10.0-debian-9-r40
+  repository: postgres
+  tag: 10.6
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -123,7 +123,7 @@ postgresqlDatabase: ${POSTGRES_DATABASE}
 ## PostgreSQL data dir
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md
 ##
-postgresqlDataDir: /bitnami/postgresql/data
+postgresqlDataDir: /data/pgdata
 
 ## Specify extra initdb args
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md
@@ -270,7 +270,7 @@ persistence:
   ## The path the volume will be mounted at, useful when using different
   ## PostgreSQL images.
   ##
-  mountPath: /bitnami/postgresql
+  mountPath: /data
 
   ## The subdirectory of the volume to mount to, useful in dev environments
   ## and one PV for multiple services.
