@@ -19,7 +19,7 @@ spec:
           args: ["/dataset/inject-dataset.sh"]
           env:
             - name: DATABASE_URL
-              value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/emjpm_prod"
+              value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
             - name: NODE_ENV
               value: "development"
           volumeMounts:

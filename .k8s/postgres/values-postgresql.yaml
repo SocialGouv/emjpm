@@ -118,7 +118,7 @@ postgresqlUsername: postgres
 ## Create a database
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run
 ##
-postgresqlDatabase: emjpm_prod
+postgresqlDatabase: ${POSTGRES_DATABASE}
 
 ## PostgreSQL data dir
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md
@@ -177,7 +177,7 @@ initdbScripts:
     psql -v ON_ERROR_STOP=1 <<-EOSQL
       CREATE USER ${POSTGRESQL_USER} with encrypted password '${POSTGRESQL_PASSWORD}';
 
-      GRANT ALL PRIVILEGES ON DATABASE emjpm_prod TO ${POSTGRESQL_USER};
+      GRANT ALL PRIVILEGES ON DATABASE ${POSTGRES_DATABASE} TO ${POSTGRESQL_USER};
     EOSQL
 
 ## ConfigMap with scripts to be run at first boot
