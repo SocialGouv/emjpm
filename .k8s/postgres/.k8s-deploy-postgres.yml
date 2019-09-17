@@ -8,7 +8,7 @@
     - envsubst < ./.k8s/postgres/job-inject-dataset.yml > ./job-inject-dataset.yml
     #
     - helm init --client-only
-    - helm upgrade --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
+    - helm upgrade --debug --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
     #
     - kubectl delete job "${K8S_PROJECT}-dataset-${BRANCH_HASH}" -n ${K8S_NAMESPACE} || true;
     - cat ./.k8s/postgres/configmap.yml | envsubst | kubectl apply -n ${K8S_NAMESPACE} -f -
