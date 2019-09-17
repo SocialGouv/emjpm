@@ -8,14 +8,11 @@ export const Provider = props => {
 
   // Use State to keep the values
   const [mesureType, changeMesureType] = useState(false);
-  const [mesureStatus, changeMesureStatus] = useState(false);
 
   // Make the context object:
   const filtersContext = {
     mesureType,
-    changeMesureType,
-    mesureStatus,
-    changeMesureStatus
+    changeMesureType
   };
 
   // pass the value in provider and return

@@ -39,7 +39,7 @@ export const ServiceDeleteMesure = props => {
                 refetchQueries: ["mesures"]
               });
               setSubmitting(false);
-              setPanelType(PANEL_TYPE.CLOSE);
+              setPanelType(null);
               setCurrentMesure(null);
             }, 500);
           }}
