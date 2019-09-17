@@ -29,11 +29,14 @@ spec:
             - containerPort: 8080
           env:
             - name: HASURA_GRAPHQL_DATABASE_URL
-              value: "postgres://postgres@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
+              value: "postgres://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
             - name: HASURA_GRAPHQL_ENABLE_CONSOLE
               value: "true"
             - name: HASURA_GRAPHQL_ADMIN_SECRET
-              value: "secret"
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: HASURA_GRAPHQL_ADMIN_SECRET
             - name: HASURA_GRAPHQL_JWT_SECRET
               value: '{"type": "RS256","jwk_url": "http://${K8S_PROJECT}-api-${BRANCH_HASH}/api/v2/auth/jwks"}'
             - name: WHATEVER_URL
