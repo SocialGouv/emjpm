@@ -35,7 +35,6 @@ const ALLOWED_FILTERS = [
 ];
 
 const {
-  updateCountMesures,
   getMesuresMap,
   isMandataireInTi
 } = require("../db/queries/mandataires");
@@ -155,7 +154,6 @@ router.put(
           },
           whitelist(req.body, ALLOWED_FILTERS)
         );
-        await updateCountMesures(mandataire.id);
         const mesures = await getMesuresEnCoursMandataire(mandataire.id);
         res.status(200).json(mesures);
       } else if (req.user.type === "ti") {
@@ -230,7 +228,6 @@ router.post(
           throw createError.UnprocessableEntity("Mandataire not found");
         }
         await addMesure(body);
-        await updateCountMesures(body.mandataire_id);
         const mesures = await getMesuresEnCoursMandataire(body.mandataire_id);
         res.status(200).json(mesures);
       } else if (req.user.type === "ti") {

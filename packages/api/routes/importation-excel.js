@@ -7,10 +7,7 @@ const { addDataLogs } = require("../db/queries/logsData");
 
 const router = express.Router();
 
-const {
-  updateCountMesures,
-  findMandataire
-} = require("../db/queries/mandataires");
+const { findMandataire } = require("../db/queries/mandataires");
 
 router.post(
   "/mesures/bulk",
@@ -65,7 +62,6 @@ router.post(
             message
           });
         })
-        .then(() => updateCountMesures(mandataire.id))
         .then(() =>
           addDataLogs({
             user_id: req.user.id,
