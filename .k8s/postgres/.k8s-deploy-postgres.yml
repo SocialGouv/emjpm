@@ -11,4 +11,5 @@
     - helm upgrade --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
     #
     - kubectl delete pod "${K8S_PROJECT}-dataset" -n ${K8S_NAMESPACE} || true;
+    - cat ./.k8s/postgres/configmap.yml | envsubst | kubectl apply -n ${K8S_NAMESPACE} -
     - kubectl apply -f ./job-inject-dataset.yml -n ${K8S_NAMESPACE}
