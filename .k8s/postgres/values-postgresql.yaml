@@ -102,7 +102,7 @@ replication:
 
 ## PostgreSQL admin user
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
-postgresqlUsername: postgres
+postgresqlUsername: ${POSTGRESQL_USER}
 
 ## PostgreSQL password
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
