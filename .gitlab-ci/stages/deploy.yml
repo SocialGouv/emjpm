@@ -140,6 +140,7 @@ Deploy Api (incubateur):
 
 .deploy-postgres: &deploy_postgres
   <<: *deploy_stage
+  stage: "Registration"
   extends: .k8s-deploy-postgres
   variables:
     <<: *deploy_stage_variables
