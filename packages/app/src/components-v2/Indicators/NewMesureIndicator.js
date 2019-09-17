@@ -25,7 +25,7 @@ const NewMesureIndicator = () => {
     <Indicator
       error={error}
       loading={loading}
-      title="Nouvelles mesures"
+      title="Mesures en attente"
       indicator={data && data.newMesureNumber ? data.newMesureNumber : 0}
     />
   );

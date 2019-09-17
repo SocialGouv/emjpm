@@ -17,8 +17,8 @@ const optionsType = [
 
 const optionsCapacity = [
   { label: "Aucun", value: null },
-  { label: "Ascendant", value: "asc_nulls_last" },
-  { label: "Descendant", value: "desc_nulls_last" }
+  { label: "Du moins disponible au plus disponible", value: "asc_nulls_last" },
+  { label: "Du plus disponible au moins disponible", value: "desc_nulls_last" }
 ];
 
 const RESULT_PER_PAGE = 20;
@@ -78,7 +78,7 @@ const MagistratMandatairesList = props => {
             <Box width="200px">
               <Select
                 size="small"
-                placeholder="trier par capacité"
+                placeholder="Trier par capacité"
                 onChange={capacity => setCapacity(capacity)}
                 value={selectedCapacity}
                 options={optionsCapacity}
