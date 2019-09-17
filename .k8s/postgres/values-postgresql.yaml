@@ -176,10 +176,8 @@ initdbScripts:
     set -e
     psql -v ON_ERROR_STOP=1 <<-EOSQL
       CREATE USER ${POSTGRESQL_USER} with encrypted password '${POSTGRESQL_PASSWORD}';
-
+      ALTER USER ${POSTGRESQL_USER} WITH SUPERUSER;
       GRANT ALL PRIVILEGES ON DATABASE ${POSTGRES_DATABASE} TO ${POSTGRESQL_USER};
-
-
 
       -- create pgcrypto extension, required for UUID
       CREATE EXTENSION IF NOT EXISTS pgcrypto;
