@@ -8,16 +8,6 @@ const { Department } = require("../../model/Departments");
 // nombre de mesures pour le mandataire
 const Mandataires = () => knex("mandataires");
 
-const getCountMesures = (id, filters = { status: "Mesure en cours" }) =>
-  knex("mesures")
-    .count("*")
-    .where({
-      mandataire_id: parseInt(id),
-      ...filters
-    })
-    .first()
-    .then(r => r.count);
-
 // update mandataire data
 const updateMandataire = async (id, data) => {
   if (data.code_postal) {
@@ -33,22 +23,6 @@ const updateMandataire = async (id, data) => {
     .where({ id })
     .update(data);
 };
-
-// todo move to trigger/view
-const updateCountMesures = id =>
-  getCountMesures(id).then(count =>
-    knex.raw(
-      `UPDATE mandataires SET mesures_en_cours=${count} WHERE ID = ${id};`
-    )
-  );
-
-// todo move to trigger/view
-const updateDateMesureUpdate = id =>
-  knex("mandataires")
-    .where({ id })
-    .update({
-      date_mesure_update: new Date()
-    });
 
 const getMandataire = filters =>
   knex("mandataires")
@@ -276,8 +250,6 @@ const findMandataire = (req, params) => {
 
 module.exports = {
   isMandataireInTi,
-  updateCountMesures,
-  updateDateMesureUpdate,
   getMandataire,
   getMandataireById,
   updateMandataire,
