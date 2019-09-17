@@ -45,9 +45,6 @@ spec:
 
           env:
             - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: emjpm-secret
-                  key: DATABASE_URL
+              value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
             - name: PORT
               value: "${PORT}"
