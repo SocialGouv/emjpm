@@ -102,12 +102,12 @@ replication:
 
 ## PostgreSQL admin user
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
-postgresqlUsername: ${POSTGRESQL_USER}
+postgresqlUsername: postgres
 
 ## PostgreSQL password
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
 ##
-postgresqlPassword: ${POSTGRESQL_PASSWORD}
+#postgresqlPassword: ${POSTGRESQL_PASSWORD}
 
 ## PostgreSQL password using existing secret
 ## existingSecret: secret
@@ -172,10 +172,16 @@ postgresqlDataDir: /bitnami/postgresql/data
 ##
 initdbScripts:
   my_init_script.sql: |
+    CREATE USER $POSTGRESQL_USER with encrypted password '$POSTGRESQL_PASSWORD';
     CREATE USER $POSTGRES_API_USER with encrypted password '$POSTGRES_API_USER_PASSWORD';
     CREATE DATABASE emjpm_prod;
     CREATE DATABASE emjpm_dev;
     CREATE DATABASE emjpm_test;
+
+    GRANT ALL PRIVILEGES ON DATABASE emjpm_prod TO $POSTGRESQL_USER;
+    GRANT ALL PRIVILEGES ON DATABASE emjpm_dev TO $POSTGRESQL_USER;
+    GRANT ALL PRIVILEGES ON DATABASE emjpm_test TO $POSTGRESQL_USER;
+
     GRANT ALL PRIVILEGES ON DATABASE emjpm_prod TO $POSTGRES_API_USER;
     GRANT ALL PRIVILEGES ON DATABASE emjpm_dev TO $POSTGRES_API_USER;
     GRANT ALL PRIVILEGES ON DATABASE emjpm_test TO $POSTGRES_API_USER;
