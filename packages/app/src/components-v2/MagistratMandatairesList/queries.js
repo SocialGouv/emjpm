@@ -16,6 +16,7 @@ export const GET_MANDATAIRES = gql`
     $offset: Int!
     $discriminator: String
     $order: order_by
+    $limit: Int
   ) {
     count: view_mesure_gestionnaire_aggregate(
       where: {
@@ -28,7 +29,7 @@ export const GET_MANDATAIRES = gql`
       }
     }
     mandatairesList: view_mesure_gestionnaire_tis(
-      limit: 10
+      limit: $limit
       offset: $offset
       order_by: { gestionnaire: { remaining_capacity: $order } }
       where: { discriminator: { _eq: $discriminator }, ti_id: { _eq: $tribunal } }
@@ -44,6 +45,8 @@ export const GET_MANDATAIRES = gql`
         mandataire {
           telephone
           ville
+          adresse
+          code_postal
           user {
             nom
             prenom
@@ -52,11 +55,19 @@ export const GET_MANDATAIRES = gql`
           genre
           id
         }
+        gestionnaire_tis {
+          tis {
+            id
+            etablissement
+          }
+        }
         service {
           id
           nom
           prenom
           ville
+          adresse
+          code_postal
           telephone
           email
         }

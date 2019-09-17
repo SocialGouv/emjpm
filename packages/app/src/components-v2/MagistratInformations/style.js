@@ -1,7 +1,3 @@
-const MagistratMandatairesListStyle = {
-  width: "100%"
-};
-
 const titleStyle = {
   fontSize: "2",
   fontStyle: "italic",
@@ -12,16 +8,6 @@ const topTextStyle = {
   mt: "2",
   color: "mediumGray",
   fontWeight: "600"
-};
-
-const TextStyle = {
-  textTransform: "uppercase",
-  fontFamily: "body",
-  fontSize: "11px",
-  fontWeight: "600",
-  letterSpacing: ".76px",
-  lineHeight: "44px",
-  mr: 1
 };
 
 const innerTextStyle = {
@@ -41,17 +27,8 @@ const boxStyle = {
 };
 
 const flexStyle = {
-  mt: 2,
+  mt: 5,
   flexWrap: "wrap"
 };
 
-export {
-  titleStyle,
-  innerTextStyle,
-  topTextStyle,
-  iconTextStyle,
-  boxStyle,
-  flexStyle,
-  TextStyle,
-  MagistratMandatairesListStyle
-};
+export { titleStyle, innerTextStyle, topTextStyle, iconTextStyle, boxStyle, flexStyle };
