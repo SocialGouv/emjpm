@@ -12,7 +12,7 @@ spec:
   acme:
     config:
       - http01:
-          ingressClass: nginx
+          ingressClass: azure/application-gateway
         domains:
           - ${FRONTEND_HOST}
           - ${API_HOST}
