@@ -140,6 +140,7 @@ Deploy Api (incubateur):
 
 .deploy-postgres: &deploy_postgres
   <<: *deploy_stage
+  extends: .k8s-deploy-postgres
   variables:
     <<: *deploy_stage_variables
     CONTEXT: postgres
@@ -150,12 +151,10 @@ Deploy Api (incubateur):
 #
 
 Deploy postgres (dev):
-  extends: .k8s-deploy-postgres-dev
   <<: *deploy_postgres
   <<: *dev_stage
 
 Deploy postgres (incubateur):
-  extends: .k8s-deploy-postgres-prod
   <<: *deploy_postgres
   <<: *incubateur_stage
 

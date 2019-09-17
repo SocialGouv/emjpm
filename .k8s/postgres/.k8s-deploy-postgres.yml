@@ -1,4 +1,4 @@
-.k8s-deploy-postgres-dev:
+.k8s-deploy-postgres:
   extends: .base_docker_helm_image_stage
   script:
     - export POSTGRESQL_USER=$(kubectl get secret -n emjpm emjpm-secret -o jsonpath='{.data.POSTGRES_USER}' | base64 --decode)
@@ -12,14 +12,3 @@
     #
     - kubectl delete pod "${K8S_PROJECT}-dataset" -n ${K8S_NAMESPACE} || true;
     - kubectl apply -f ./job-inject-dataset.yml -n ${K8S_NAMESPACE}
-
-.k8s-deploy-postgres-prod:
-  extends: .base_docker_kube_image_stage
-  script:
-    - envsubst < ./.k8s/postgres/pod-inject-dataset-prod.yml > ./pod-inject-dataset.yml
-    - envsubst < ./.k8s/postgres/pod-init-postgres-prod.yml > ./pod-init-postgres.yml
-    #
-    #    - export DATABASE_URL="user:passwortd@dsfsqg"
-    - kubectl apply -f ./.k8s/postgres/configmap.yml
-    - kubectl apply -f ./pod-init-postgres.yml
-    - sh ./.k8s/postgres/inject_data_postgres.sh $BRANCH_HASH
