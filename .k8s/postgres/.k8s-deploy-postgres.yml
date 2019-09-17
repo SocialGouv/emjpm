@@ -1,7 +1,6 @@
 .k8s-deploy-postgres-dev:
   extends: .base_docker_helm_image_stage
   script:
-    #    - envsubst < ./.k8s/postgres/service.yml > ./service.yml
     - export POSTGRESQL_USER=$(kubectl get secret -n emjpm emjpm-secret -o jsonpath='{.data.POSTGRES_USER}' | base64 --decode)
     - export POSTGRESQL_PASSWORD=$(kubectl get secret -n emjpm emjpm-secret -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 --decode)
 
@@ -9,16 +8,10 @@
     - envsubst < ./.k8s/postgres/job-inject-dataset.yml > ./job-inject-dataset.yml
     #
     - helm init --client-only
-    - export HELM_DB_EXISTS=$(helm list --namespace ${K8S_NAMESPACE} | grep ${POSTGRES_HOST} | wc -l)
-    - echo "DB exist ? ${HELM_DB_EXISTS} -> $([ ${HELM_DB_EXISTS} -eq "1" ] && echo "need to update DB" || echo "need to install DB")"
-    - HELM_ACTION=$([ ${HELM_DB_EXISTS} -eq "1" ] && echo upgrade || echo "install --name")
-    - helm ${HELM_ACTION} ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
+    - helm upgrade --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
     #
     - kubectl delete pod "${K8S_PROJECT}-dataset" -n ${K8S_NAMESPACE} || true;
-    # - cat ./.k8s/postgres/jod-inject-dataset-prod.yml | envsubst | kubectl apply -f --namespace ${K8S_NAMESPACE} -
     - kubectl apply -f ./job-inject-dataset.yml -n ${K8S_NAMESPACE}
-    #
-    # - sh ./.k8s/postgres/inject_data_postgres.sh $BRANCH_HASH
 
 .k8s-deploy-postgres-prod:
   extends: .base_docker_kube_image_stage
