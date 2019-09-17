@@ -26,6 +26,10 @@ const navigationLinks = [
   {
     title: "Vos mesures",
     url: "/magistrats/mesures"
+  },
+  {
+    title: "Vos informations",
+    url: "/magistrats/informations"
   }
 ];
 
