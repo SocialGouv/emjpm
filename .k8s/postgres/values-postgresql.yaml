@@ -174,16 +174,11 @@ initdbScripts:
   my_init_script.sh: |
     #!/bin/bash
     set -e
-    echo "nous sommes ici"
-
     psql -v ON_ERROR_STOP=1 <<-EOSQL
       CREATE USER ${POSTGRESQL_USER} with encrypted password '${POSTGRESQL_PASSWORD}';
 
       GRANT ALL PRIVILEGES ON DATABASE emjpm_prod TO ${POSTGRESQL_USER};
     EOSQL
-
-    echo "fin du initdb"
-
 
 ## ConfigMap with scripts to be run at first boot
 ## NOTE: This will override initdbScripts
