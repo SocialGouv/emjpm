@@ -16,7 +16,7 @@
     - echo "DB exist ? ${HELM_DB_EXISTS}"
     - echo $([ ${HELM_DB_EXISTS} -eq "1" ] && echo "need to update DB" || echo "need to install DB")
     - HELM_ACTION=$([ ${HELM_DB_EXISTS} -eq "1" ] && echo upgrade || echo "install --name")
-    - helm ${HELM_ACTION} postgres-emjpm --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
+    - helm ${HELM_ACTION} ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
     #
     - kubectl delete pod "${K8S_PROJECT}-dataset" -n ${K8S_NAMESPACE} || true;
     # - cat ./.k8s/postgres/jod-inject-dataset-prod.yml | envsubst | kubectl apply -f --namespace ${K8S_NAMESPACE} -
