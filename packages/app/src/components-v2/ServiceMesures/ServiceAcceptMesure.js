@@ -19,8 +19,10 @@ export const ServiceAcceptMesure = props => {
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
         <Heading5 mb="1">Accepter la mesure</Heading5>
         <Text lineHeight="1.5">
-          {`Dans l'outil, il faut une étape de validation pour activer la mesure, étape correspondant à la réception de la notification courrier par les mandataires.
-Pour vérifier que le mandataire a bien reçu le courrier, l'outil eMJPM demande des informations complémentaires à l'utilisateur, informations contenues uniquement dans le courrier de notification.`}
+          {`A reception de la notification de la decision du juge par courrier, le formulaire ci-contre vous permet de valider que cette mesure vous a ete attribuee.`}
+        </Text>
+        <Text lineHeight="1.5">
+          {`Afin de rendre cette mesure active, vous devez imperativement remplir tous les champs de ce formulaire, puis cliquer sur "Valider la mesure".`}
         </Text>
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
@@ -121,7 +123,7 @@ Pour vérifier que le mandataire a bien reçu le courrier, l'outil eMJPM demande
                   </Box>
                   <Box>
                     <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                      Confirmer la fin du mandat
+                      Valider la mesure
                     </Button>
                   </Box>
                 </Flex>

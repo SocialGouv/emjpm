@@ -19,11 +19,13 @@ export const ServiceDeleteMesure = props => {
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading5 mb="1">Supprimer la mesure</Heading5>
         <Text mb="2" lineHeight="1.5">
-          {`Vous êtes sur le point de supprimer définitivement une mesure de protection du système eMJPM. Toute suppression est irreversible, vous ne pourrez pas récupérer les données associées à cette mesure et celle-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'Etat. Si vous souhaitez supprimer définitivement cette mesure, cliquez sur "valider".`}
+          {`Vous êtes sur le point de supprimer définitivement une mesure de protection du système eMJPM. Toute suppression est irreversible, vous ne pourrez pas récupérer les données associées à cette mesure et celle-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'Etat.`}
         </Text>
-        <Text lineHeight="1.5">
-          {`Dans le cas contraire, cliquez sur "annuler", vous reviendrez sur l'onglet de vos mesures éteintes, celles-ci ne sont plus comptabilisées dans votre activité actuelle mais apparaissent dans les statistiques nationales et dans votre historique d'activité sur eMJPM.`}
+        <Text mb="2" lineHeight="1.5">
+          {`NB : les mesures eteintes ne sont plus comptabilisees dans vos "mesures en cours", elles n'apparaissent donc plus aupres des Magistrats.`}
         </Text>
+        <Text lineHeight="1.5">{`Si vous souhaitez supprimer definitivement cette mesure, cliquez sur "Supprimer la mesure".`}</Text>
+        <Text lineHeight="1.5">{`Dans le cas contraire, cliquez sur "Annuler".`}</Text>
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">

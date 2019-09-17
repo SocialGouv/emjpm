@@ -16,28 +16,43 @@ function Footer() {
           <List sx={FooterItemStyle}>
             <ListTitle>A propos de nous</ListTitle>
             <ListItem>
-              <Link href="/">Qui sommes-nous ?</Link>
+              <Link target="_blank" href="https://emjpm-blog.azurewebsites.net/category/news/">
+                Notre actualite
+              </Link>
             </ListItem>
             <ListItem>
-              <Link href="/">Mentions légales</Link>
+              <Link target="_blank" href="/mentions-legales-modalites-utilisation/">
+                Mentions légales
+              </Link>
             </ListItem>
           </List>
           <List sx={FooterItemStyle}>
             <ListTitle>Aide et ressources</ListTitle>
             <ListItem>
-              <Link href="/">Guide d’utilisation</Link>
+              <Link target="_blank" href="https://emjpm-blog.azurewebsites.net/medias/ ">
+                Guide d’utilisation
+              </Link>
             </ListItem>
             <ListItem>
-              <Link href="/">Code source</Link>
+              <Link target="_blank" href="/github.com/SocialGouv/emjpm">
+                Code source
+              </Link>
             </ListItem>
           </List>
           <List sx={FooterItemStyle}>
             <ListTitle>Contactez-nous</ListTitle>
             <ListItem>
-              <Link href="/">Par email</Link>
+              <Link target="_blank" href="/support.emjpm@fabrique.social.gouv.fr">
+                Par email
+              </Link>
             </ListItem>
             <ListItem>
-              <Link href="/">Proposez une fonctionnalités</Link>
+              <Link
+                target="_blank"
+                href="https://docs.google.com/forms/d/1W8f9ySchjaJfAoYMVsYxjsk1PUAGoCX51Aykb_CUNXA/prefill"
+              >
+                Proposez une fonctionnalités
+              </Link>
             </ListItem>
           </List>
         </Flex>

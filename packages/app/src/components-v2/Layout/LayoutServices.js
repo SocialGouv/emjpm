@@ -15,6 +15,7 @@ import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
 import { Link } from "../Commons";
 import { logout } from "../../util/auth";
+import { dropDownLinks } from "./dropDownLink";
 
 function parseCookies(options = {}) {
   return cookie.parse(document.cookie, options);
@@ -29,12 +30,6 @@ const navigationLinks = [
     title: "Vos informations",
     url: "/services/informations"
   }
-];
-
-const dropDownLinks = [
-  { title: "Centre d'assistance", url: "test" },
-  { title: "Profil", url: "test" },
-  { title: "Paramètres", url: "test" }
 ];
 
 const LayoutServices = props => {
