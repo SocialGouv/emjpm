@@ -265,7 +265,11 @@ master:
   nodeSelector: {}
   affinity: {}
   tolerations: []
-  podLabels: {}
+  podLabels:
+    app: ${POSTGRES_HOST}
+    git/branch: ${BRANCH_NAME}
+    git/commit: ${COMMIT}
+    gitlab/job: "${JOB_ID}"
   podAnnotations: {}
   ## Additional PostgreSQL Master Volume mounts
   ##
@@ -285,7 +289,11 @@ slave:
   nodeSelector: {}
   affinity: {}
   tolerations: []
-  podLabels: {}
+  podLabels:
+    app: ${POSTGRES_HOST}
+    git/branch: ${BRANCH_NAME}
+    git/commit: ${COMMIT}
+    gitlab/job: "${JOB_ID}"
   podAnnotations: {}
   ## Additional PostgreSQL Slave Volume mounts
   ##
