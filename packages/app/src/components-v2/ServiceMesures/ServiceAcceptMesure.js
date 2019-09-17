@@ -40,7 +40,7 @@ Pour vérifier que le mandataire a bien reçu le courrier, l'outil eMJPM demande
                 }
               });
               setSubmitting(false);
-              setPanelType(PANEL_TYPE.CLOSE);
+              setPanelType(null);
               setCurrentMesure(null);
             }, 500);
           }}

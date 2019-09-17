@@ -15,7 +15,7 @@ import {
   MESURE_STATUS_LABEL_VALUE
 } from "../../constants/mesures";
 
-export const ServiceEditMesure = props => {
+export const MagistratEditMesure = props => {
   const {
     currentMesure,
     age,
@@ -240,6 +240,6 @@ export const ServiceEditMesure = props => {
   );
 };
 
-ServiceEditMesure.propTypes = {
+MagistratEditMesure.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };
