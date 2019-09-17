@@ -2,15 +2,15 @@ import React from "react";
 
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
-import { LayoutServices } from "../../src/components-v2/Layout";
+import { LayoutMagistrat } from "../../src/components-v2/Layout";
 
 const EditInformations = () => {
   return (
-    <LayoutServices>
+    <LayoutMagistrat>
       <BoxWrapper mt={6} px="1">
-        <Heading1>Page en construction</Heading1>
+        <Heading1>page en construction</Heading1>
       </BoxWrapper>
-    </LayoutServices>
+    </LayoutMagistrat>
   );
 };
 

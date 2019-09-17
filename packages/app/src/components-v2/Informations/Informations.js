@@ -14,7 +14,6 @@ import {
 } from "./style";
 const Informations = props => {
   const { service_antenne } = props;
-
   const [service] = service_antenne;
 
   return (
@@ -40,13 +39,13 @@ const Informations = props => {
           </Box>
           <Box sx={boxStyle}>
             <Heading5 mt="5">Tribunaux d’instance</Heading5>
-            <Text sx={topTextStyle}>{"Tribunal d'Instance d'Arras"}</Text>
-            <Heading5 mt="5">Langues parlées</Heading5>
-            <Text sx={topTextStyle}>• Anglais</Text>
-            <Text sx={innerTextStyle}>• Arabe</Text>
-            <Heading5 mt="5">Compétences particulières</Heading5>
-            <Text sx={topTextStyle}>Troubles psychiques</Text>
-            <Text sx={innerTextStyle}>Langage des signes</Text>
+            {service.service.service_tis.map(ti => {
+              return (
+                <Text key={ti.ti.id} sx={topTextStyle}>
+                  {ti.ti.etablissement}
+                </Text>
+              );
+            })}
           </Box>
         </Flex>
         <Flex mt="5">
@@ -58,3 +57,10 @@ const Informations = props => {
 };
 
 export { Informations };
+
+// <Heading5 mt="5">Langues parlées</Heading5>
+// <Text sx={topTextStyle}>• Anglais</Text>
+// <Text sx={innerTextStyle}>• Arabe</Text>
+// <Heading5 mt="5">Compétences particulières</Heading5>
+// <Text sx={topTextStyle}>Troubles psychiques</Text>
+// <Text sx={innerTextStyle}>Langage des signes</Text>

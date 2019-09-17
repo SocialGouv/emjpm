@@ -37,7 +37,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Mesures souhaitées</Heading2>
-            <PreferencesPanel />
+            <UserInformations Component={props => <PreferencesPanel {...props} mt="3" />} />
           </Box>
         </Flex>
         {/* <Box
