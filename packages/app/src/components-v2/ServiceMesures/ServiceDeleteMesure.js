@@ -22,7 +22,7 @@ export const ServiceDeleteMesure = props => {
           {`Vous êtes sur le point de supprimer définitivement une mesure de protection du système eMJPM. Toute suppression est irreversible, vous ne pourrez pas récupérer les données associées à cette mesure et celle-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'Etat.`}
         </Text>
         <Text mb="2" lineHeight="1.5">
-          {`NB : les mesures eteintes ne sont plus comptabilisees dans vos "mesures en cours", elles n'apparaissent donc plus aupres des Magistrats.`}
+          {`NB : les mesures éteintes ne sont plus comptabilisees dans vos "mesures en cours", elles n'apparaissent donc plus aupres des Magistrats.`}
         </Text>
         <Text lineHeight="1.5">{`Si vous souhaitez supprimer definitivement cette mesure, cliquez sur "Supprimer la mesure".`}</Text>
         <Text lineHeight="1.5">{`Dans le cas contraire, cliquez sur "Annuler".`}</Text>

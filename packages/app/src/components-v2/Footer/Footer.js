@@ -17,7 +17,7 @@ function Footer() {
             <ListTitle>A propos de nous</ListTitle>
             <ListItem>
               <Link target="_blank" href="https://emjpm-blog.azurewebsites.net/category/news/">
-                Notre actualite
+                Notre actualité
               </Link>
             </ListItem>
             <ListItem>
