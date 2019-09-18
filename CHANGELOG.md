@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.2.0](https://github.com/SocialGouv/emjpm/compare/v24.1.0...v24.2.0) (2019-09-18)
+
+
+### Bug Fixes
+
+* **coralie:** change links ([#762](https://github.com/SocialGouv/emjpm/issues/762)) ([36eb352](https://github.com/SocialGouv/emjpm/commit/36eb352))
+* **coralie:** change texts ([#764](https://github.com/SocialGouv/emjpm/issues/764)) ([55e3c0c](https://github.com/SocialGouv/emjpm/commit/55e3c0c))
+* **extinction:** add select ([#763](https://github.com/SocialGouv/emjpm/issues/763)) ([ecdafc7](https://github.com/SocialGouv/emjpm/commit/ecdafc7))
+* **footer-links:** fix uncorrect links in footer ([#766](https://github.com/SocialGouv/emjpm/issues/766)) ([37b9024](https://github.com/SocialGouv/emjpm/commit/37b9024))
+* **hasura:** bring back %%WHATEVER_URL%% in metadata ([bd0d329](https://github.com/SocialGouv/emjpm/commit/bd0d329))
+* **k8s:** fix SSL certificate error ([#756](https://github.com/SocialGouv/emjpm/issues/756)) ([7c3cfb0](https://github.com/SocialGouv/emjpm/commit/7c3cfb0))
+* **mesure-status:** update mesure status ([#754](https://github.com/SocialGouv/emjpm/issues/754)) ([c6fbc40](https://github.com/SocialGouv/emjpm/commit/c6fbc40))
+
+
+### Features
+
+* **k8s:** create k8s secret for deployment on dev envs ([#759](https://github.com/SocialGouv/emjpm/issues/759)) ([6415484](https://github.com/SocialGouv/emjpm/commit/6415484))
+* **k8s:** postgresql helm for production ([#757](https://github.com/SocialGouv/emjpm/issues/757)) ([44ac47c](https://github.com/SocialGouv/emjpm/commit/44ac47c))
+* **mesure-counter:** create trigger to update mesure counters ([#755](https://github.com/SocialGouv/emjpm/issues/755)) ([70f7413](https://github.com/SocialGouv/emjpm/commit/70f7413))
+
+
+
+
+
 # [24.1.0](https://github.com/SocialGouv/emjpm/compare/v24.0.2...v24.1.0) (2019-09-16)
 
 
