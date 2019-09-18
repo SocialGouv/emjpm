@@ -1,13 +1,11 @@
-import React, { useContext, useState } from "react";
-
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Input, Select } from "@socialgouv/emjpm-ui-core";
+import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
-
 import { departementToOptions, regionsToOptions } from "../../util/option/OptionUtil";
 import { FiltersContext } from "./context";
 import { GET_REGIONS } from "./queries";
-import { TextStyle, BoxStyle, SimpleBoxStyle } from "./style";
+import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
 
 const Filters = () => {
   const { data: regionsData, loading, error } = useQuery(GET_REGIONS);
@@ -33,6 +31,12 @@ const Filters = () => {
   }
 
   const regionalOptions = regionsToOptions(regionsData.regions);
+
+  const allDepartments = regionsData.regions.reduce((acc, current) => {
+    Array.prototype.push.apply(acc, current.departements);
+    return acc;
+  }, []);
+  const allDepartmentOptions = departementToOptions(allDepartments);
 
   const selectRegion = selectedOption => {
     changeRegionalValue(selectedOption);
@@ -60,7 +64,7 @@ const Filters = () => {
             <Box sx={BoxStyle}>
               <Select
                 size="small"
-                options={departmentOptions}
+                options={departmentOptions.length > 0 ? departmentOptions : allDepartmentOptions}
                 placeholder={"departement"}
                 value={selectedDepartementValue}
                 onChange={selectedOption => changeDepartementValue(selectedOption)}
