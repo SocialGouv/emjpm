@@ -5,6 +5,9 @@ metadata:
   name: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
   template:
     metadata:
       labels:
