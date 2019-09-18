@@ -55,6 +55,8 @@ Delete useless k8s namespaces:
     GIT_STRATEGY: clone
   environment: fabrique-dev
   script:
+    - git remote set-url origin https://github.com/${CI_PROJECT_PATH}.git
+    - git fetch origin
     - git branch
     - sh -x /bin/k8s-ns-killer emjpm-feature-
   only:
