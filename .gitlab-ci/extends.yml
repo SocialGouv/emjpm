@@ -9,7 +9,7 @@
 
 .base_docker_kube_image_stage:
   image:
-    name: $CI_REGISTRY/$IMAGE_INFRA_BASE_NAME/docker-kube:latest
+    name: $CI_REGISTRY/socialgouv/docker/kubectl:0.7.1
     entrypoint: [""]
   before_script:
     - source ./.gitlab-ci/env.sh
@@ -17,8 +17,7 @@
 
 .base_docker_helm_image_stage:
   image:
-#    name: $CI_REGISTRY/socialgouv/docker/helm:1.3
-    name: $CI_REGISTRY/socialgouv/docker/helm:update-kubectl-version   # TODO set release version
+    name: $CI_REGISTRY/socialgouv/docker/helm:0.7.1
     entrypoint: [""]
   before_script:
     - source ./.gitlab-ci/env.sh
