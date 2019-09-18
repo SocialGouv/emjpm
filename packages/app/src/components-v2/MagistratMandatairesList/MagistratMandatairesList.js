@@ -7,7 +7,6 @@ import { CURRENT_USER, GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";
 import { formatMandatairesList } from "./utils";
 import { MagistratChoose } from "./MagistratChoose";
-
 const optionsType = [
   { label: "Tous les types", value: null },
   { label: "Préposé", value: "MANDATAIRE_PRE" },
@@ -86,7 +85,13 @@ const MagistratMandatairesList = props => {
             </Box>
           </Flex>
         </Card>
-        <Mandatairelist isMagistrat ChooseComponent={MagistratChoose} mandataires={list} />
+        <Mandatairelist
+          isMagistrat
+          ChooseComponent={props => (
+            <MagistratChoose ti={userQuery.data.currentUser.magistrat.ti_id} {...props} />
+          )}
+          mandataires={list}
+        />
         {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
           <Flex mt="5" alignItem="center">
             <Button

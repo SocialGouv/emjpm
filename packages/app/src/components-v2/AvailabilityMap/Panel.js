@@ -15,7 +15,6 @@ const ButtonStyle = {
 };
 
 const Panel = props => {
-  console.log(props);
   const { currentPanel, togglePanel } = props;
   const available =
     currentPanel.mesures_max - currentPanel.mesures_in_progress - currentPanel.mesures_awaiting;
