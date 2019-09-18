@@ -16,12 +16,12 @@ function Footer() {
           <List sx={FooterItemStyle}>
             <ListTitle>A propos de nous</ListTitle>
             <ListItem>
-              <Link target="_blank" href="https://emjpm-blog.azurewebsites.net/category/news/">
+              <Link target="_blank" href="https://emjpm-blog.azurewebsites.net/category/news">
                 Notre actualité
               </Link>
             </ListItem>
             <ListItem>
-              <Link target="_blank" href="/mentions-legales-modalites-utilisation/">
+              <Link target="_blank" href="/mentions-legales-modalites-utilisation">
                 Mentions légales
               </Link>
             </ListItem>
@@ -34,7 +34,7 @@ function Footer() {
               </Link>
             </ListItem>
             <ListItem>
-              <Link target="_blank" href="/github.com/SocialGouv/emjpm">
+              <Link target="_blank" href="https://github.com/SocialGouv/emjpm">
                 Code source
               </Link>
             </ListItem>
@@ -42,7 +42,7 @@ function Footer() {
           <List sx={FooterItemStyle}>
             <ListTitle>Contactez-nous</ListTitle>
             <ListItem>
-              <Link target="_blank" href="/support.emjpm@fabrique.social.gouv.fr">
+              <Link target="_blank" href="mailto:support.emjpm@fabrique.social.gouv.fr">
                 Par email
               </Link>
             </ListItem>
