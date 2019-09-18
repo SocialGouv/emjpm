@@ -1,6 +1,6 @@
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
 spec:
@@ -10,7 +10,6 @@ spec:
       labels:
         app: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
         git/branch: ${BRANCH_NAME}
-      annotations:
         git/commit: ${COMMIT}
         gitlab/job: "${JOB_ID}"
     spec:
