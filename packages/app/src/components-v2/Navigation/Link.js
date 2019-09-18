@@ -1,7 +1,7 @@
-import React from "react";
-import { withRouter } from "next/router";
-import { Link, Box } from "rebass";
 import NextLink from "next/link";
+import { withRouter } from "next/router";
+import React from "react";
+import { Box, Link } from "rebass";
 
 const LinkStyle = isActive => {
   return {
@@ -35,7 +35,7 @@ const BoxStyle = {
 };
 
 const ActiveLink = ({ router, ...props }) => {
-  const isActive = router.pathname === props.href;
+  const isActive = router.pathname.startsWith(props.href);
   return (
     <Box sx={BoxStyle}>
       <NextLink {...props}>
