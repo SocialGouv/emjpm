@@ -12,7 +12,8 @@ import { MESURE_TYPE_LABEL_VALUE, CIVILITY } from "../../constants/mesures";
 import { MandataireInformations } from "./MandataireInformations";
 
 export const MagistratChoose = props => {
-  const { currentMandataire } = props;
+  const { antenneId, mandataireId } = props;
+  console.log(props);
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
   const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
   return (
@@ -29,7 +30,8 @@ export const MagistratChoose = props => {
             setTimeout(() => {
               chooseMandataire({
                 variables: {
-                  mandataire_id: currentMandataire,
+                  antenne_id: antenneId || null,
+                  mandataire_id: mandataireId || null,
                   type: values.type.value,
                   civilite: values.civilite.value,
                   annee: values.annee,
@@ -137,5 +139,6 @@ export const MagistratChoose = props => {
 };
 
 MagistratChoose.propTypes = {
-  currentMandataire: PropTypes.number.isRequired
+  antenneId: PropTypes.number,
+  mandataireId: PropTypes.number
 };
