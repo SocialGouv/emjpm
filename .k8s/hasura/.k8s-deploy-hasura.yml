@@ -1,10 +1,12 @@
 .k8s-deploy-hasura:
   extends: .base_docker_kube_image_stage
   script:
+    - export HASURA_POSTGRESQL_USER=$(kubectl get secret -n ${K8S_NAMESPACE} emjpm-secret -o jsonpath='{.data.POSTGRES_USER}' | base64 --decode)
+    - export HASURA_POSTGRES_PASSWORD=$(kubectl get secret -n ${K8S_NAMESPACE} emjpm-secret -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 --decode)
     #
-    - envsubst < ./.k8s/hasura/deployment${SUFFIX}.yml > ./deployment.yml
+    - envsubst < ./.k8s/hasura/deployment.yml > ./deployment.yml
     - envsubst < ./.k8s/hasura/service.yml > ./service.yml
-    - envsubst < ./.k8s/hasura/ingress${SUFFIX}.yml > ./ingress.yml
+    - envsubst < ./.k8s/hasura/ingress.yml > ./ingress.yml
     #
     - kubectl apply -f ./deployment.yml -n ${K8S_NAMESPACE}
     - kubectl apply -f ./service.yml -n ${K8S_NAMESPACE}

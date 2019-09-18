@@ -1,22 +1,15 @@
-.k8s-deploy-postgres-dev:
-  extends: .base_docker_kube_image_stage
+.k8s-deploy-postgres:
+  extends: .base_docker_helm_image_stage
   script:
-    - envsubst < ./.k8s/postgres/deployment.yml > ./deployment.yml
-    - envsubst < ./.k8s/postgres/service.yml > ./service.yml
-    - envsubst < ./.k8s/postgres/pod-inject-dataset.yml > ./pod-inject-dataset.yml
-    #
-    - kubectl apply -f ./.k8s/postgres/configmap.yml -n ${K8S_NAMESPACE}
-    - kubectl apply -f ./deployment.yml -n ${K8S_NAMESPACE}
-    - kubectl apply -f ./service.yml -n ${K8S_NAMESPACE}
-    #
-    - sh ./.k8s/postgres/inject_data_postgres.sh $BRANCH_HASH
+    - export POSTGRESQL_USER=$(kubectl get secret -n ${K8S_NAMESPACE} emjpm-secret -o jsonpath='{.data.POSTGRES_USER}' | base64 --decode)
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret -n ${K8S_NAMESPACE} emjpm-secret -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 --decode)
 
-.k8s-deploy-postgres-prod:
-  extends: .base_docker_kube_image_stage
-  script:
-    - envsubst < ./.k8s/postgres/pod-inject-dataset-prod.yml > ./pod-inject-dataset.yml
-    - envsubst < ./.k8s/postgres/pod-init-postgres-prod.yml > ./pod-init-postgres.yml
+    - envsubst < ./.k8s/postgres/values-postgresql.yaml > ./values-postgresql.yaml
+    - envsubst < ./.k8s/postgres/job-inject-dataset.yml > ./job-inject-dataset.yml
     #
-    - kubectl apply -f ./.k8s/postgres/configmap.yml
-    - kubectl apply -f ./pod-init-postgres.yml
-    - sh ./.k8s/postgres/inject_data_postgres.sh $BRANCH_HASH
+    - helm init --client-only
+    - helm upgrade --debug --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
+    #
+    - kubectl delete job "${K8S_PROJECT}-dataset-${BRANCH_HASH}" -n ${K8S_NAMESPACE} || true;
+    - cat ./.k8s/postgres/configmap.yml | envsubst | kubectl apply -n ${K8S_NAMESPACE} -f -
+    - kubectl apply -f ./job-inject-dataset.yml -n ${K8S_NAMESPACE}

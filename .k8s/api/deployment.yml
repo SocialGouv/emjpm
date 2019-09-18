@@ -45,6 +45,6 @@ spec:
 
           env:
             - name: DATABASE_URL
-              value: "psql://${POSTGRES_API_USER}:${POSTGRES_API_USER_PASSWORD}@${POSTGRES_HOST}/emjpm_dev"
+              value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
             - name: PORT
               value: "${PORT}"
