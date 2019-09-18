@@ -1,21 +1,19 @@
-import React, { Fragment } from "react";
-
+import { useQuery } from "@apollo/react-hooks";
+import { css, Global } from "@emotion/core";
+import { DropDownMenu, Header } from "@socialgouv/emjpm-ui-components";
+import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
+import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import cookie from "cookie";
 import jwtDecode from "jwt-decode";
-import { isBrowser } from "../../util";
+import React, { Fragment } from "react";
 import { Box } from "rebass";
-import { Global, css } from "@emotion/core";
-import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
-import { Header, DropDownMenu } from "@socialgouv/emjpm-ui-components";
-import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
-import { useQuery } from "@apollo/react-hooks";
-
-import { DIRECTION_USERS } from "./queries";
+import { isBrowser } from "../../util";
+import { logout } from "../../util/auth";
+import { Link } from "../Commons";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
-import { Link } from "../Commons";
-import { logout } from "../../util/auth";
 import { dropDownLinks } from "./dropDownLink";
+import { DIRECTION_USERS } from "./queries";
 
 function parseCookies(options = {}) {
   return cookie.parse(document.cookie, options);
@@ -23,13 +21,14 @@ function parseCookies(options = {}) {
 
 const navigationLinks = [
   {
-    title: "mesures",
-    url: "/direction/mesures"
+    title: "Mandataires",
+    url: "/direction/mandataires"
   },
   {
-    title: "mandataires",
-    url: "/direction/mandataires"
+    title: "Mesures",
+    url: "/direction/mesures"
   }
+
   // {
   //   title: "données démographiques",
   //   url: "/direction/donnees-demographiques"
