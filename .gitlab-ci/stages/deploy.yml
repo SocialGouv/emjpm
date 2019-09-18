@@ -57,24 +57,13 @@ include:
     - kubectl delete resourcequota -n ${K8S_NAMESPACE} -l "cattle.io/creator=norman,resourcequota.management.cattle.io/default-resource-quota=true"
     - envsubst < ./.k8s/quota.yml > ./quota.yml
     - kubectl apply -f ./quota.yml -n ${K8S_NAMESPACE}
+    # Create secrets
+    - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
+    - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
 
 Create namespace:
   <<: *create_namespace
   <<: *dev_stage
-
-
-.create_emjpm_secret: &create_emjpm_secret
-  <<: *deploy_stage
-  extends: .base_docker_kube_image_stage
-  stage: "Deploy"
-  script:
-    - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
-    - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
-
-Create emjpm-secret:
-  <<: *create_emjpm_secret
-  <<: *dev_stage
-
 
 #
 #
@@ -140,7 +129,6 @@ Deploy Api (incubateur):
 
 .deploy-postgres: &deploy_postgres
   <<: *deploy_stage
-  stage: "Registration"
   extends: .k8s-deploy-postgres
   variables:
     <<: *deploy_stage_variables
