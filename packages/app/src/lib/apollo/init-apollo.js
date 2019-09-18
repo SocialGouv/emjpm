@@ -44,7 +44,8 @@ function create(initialState, { getToken, fetchOptions }) {
     connectToDevTools: isBrowser(),
     ssrMode: false,
     link: authLink.concat(httpLink),
-    cache: cache
+    cache: cache,
+    resolvers: {}
   });
 }
 

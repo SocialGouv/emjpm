@@ -10,13 +10,12 @@ const UserInformations = props => {
   if (loading) {
     return <div>loading</div>;
   }
-
   if (error) {
     return <div>error</div>;
   }
 
   const { currentUser } = data;
-  return <Component currentUser={currentUser} />;
+  return <Component {...props} currentUser={currentUser} />;
 };
 
 export { UserInformations };

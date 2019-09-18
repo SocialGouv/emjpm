@@ -5,3 +5,4 @@ coverage
 dist
 docker-compose.override.yaml
 dump
+.vscode
