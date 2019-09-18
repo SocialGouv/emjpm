@@ -18,8 +18,12 @@ export const ServiceReactivateMesure = props => {
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
         <Heading5 mb="1">Réactiver la mesure</Heading5>
         <Text lineHeight="1.5">
-          {`En cliquant sur le bouton "réactiver la mesure", celle-ci redevient active, c'est-à-dire qu'elle reprend sa place dans les "mesures en cours" de votre service, elle est comptabilisée comme une "mesure en cours" pour l'ensemble des statistiques, apparaît sur les cartes et est décomptée dans la disponibilité du services.`}
+          {`Le formulaire ci-contre vous permet de réactiver une mesure. Dans ce cas, elle reprend place dans les "mesures en cours" de votre service, elle est des lors décomptée dans la "disponibilite actuelle" du service, apparait sur la carte et prise en compte dans vos statistiques d'activité.`}
         </Text>
+        <Text lineHeight="1.5">
+          {`Si vous souhaitez enregistrer vos modifications, cliquez sur le bouton "Réactiver la mesure".`}
+        </Text>
+        <Text lineHeight="1.5">{`Dans le cas contraire, cliquez sur le bouton "Annuler".`}</Text>
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="3">

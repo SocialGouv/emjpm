@@ -13,6 +13,7 @@ import { Link } from "../Commons";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
 import { MAGISTRAT_USERS } from "./queries";
+import { dropDownLinks } from "./dropDownLink";
 
 function parseCookies(options = {}) {
   return cookie.parse(document.cookie, options);
@@ -31,12 +32,6 @@ const navigationLinks = [
     title: "Vos informations",
     url: "/magistrats/informations"
   }
-];
-
-const dropDownLinks = [
-  { title: "Centre d'assistance", url: "test" },
-  { title: "Profil", url: "test" },
-  { title: "Paramètres", url: "test" }
 ];
 
 const LayoutMagistrat = props => {
