@@ -19,9 +19,9 @@ export const MagistratRemoveMesure = props => {
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading5 mb="1">Supprimer la mesure</Heading5>
         <Text mb="2" lineHeight="1.5">
-          {`Vous êtes sur le point de supprimer définitivement une mesure reservee du système eMJPM. Toute suppression est irreversible.`}
+          {`Vous êtes sur le point de supprimer définitivement une mesure réservée du système eMJPM. Toute suppression est irreversible.`}
         </Text>
-        <Text lineHeight="1.5">{`Si vous souhaitez supprimer cette mesure reservee, cliquez sur "Supprimer la mesure".`}</Text>
+        <Text lineHeight="1.5">{`Si vous souhaitez supprimer cette mesure réservée, cliquez sur "Supprimer la mesure".`}</Text>
         <Text lineHeight="1.5">{`Dans le cas contraire, cliquez sur "Annuler".`}</Text>
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
