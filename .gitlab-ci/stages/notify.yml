@@ -55,6 +55,7 @@ Delete useless k8s namespaces:
     GIT_STRATEGY: clone
   environment: fabrique-dev
   script:
+    - git branch
     - sh -x /bin/k8s-ns-killer emjpm-feature-
   only:
     - master
