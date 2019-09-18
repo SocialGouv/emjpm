@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.2.0](https://github.com/SocialGouv/emjpm/compare/v24.1.0...v24.2.0) (2019-09-18)
+
+
+### Bug Fixes
+
+* **mesure-status:** update mesure status ([#754](https://github.com/SocialGouv/emjpm/issues/754)) ([c6fbc40](https://github.com/SocialGouv/emjpm/commit/c6fbc40))
+
+
+### Features
+
+* **mesure-counter:** create trigger to update mesure counters ([#755](https://github.com/SocialGouv/emjpm/issues/755)) ([70f7413](https://github.com/SocialGouv/emjpm/commit/70f7413))
+
+
+
+
+
 # [24.1.0](https://github.com/SocialGouv/emjpm/compare/v24.0.2...v24.1.0) (2019-09-16)
 
 
