@@ -6,8 +6,18 @@ import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
 
 import { CLOSE_MESURE } from "./mutations";
-import { Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
+import { Select, Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+
+const EXTINCTION_LABEL_VALUE = [
+  { label: "caducité", value: "caducité" },
+  { label: "changement de mandataires", value: "changement de mandataires" },
+  { label: "changement de tribunal d'instance", value: "changement de tribunal d'instance" },
+  { label: "décès", value: "décès" },
+  { label: "main levée", value: "levée" },
+  { label: "erreur de saisie", value: "saisie" },
+  { label: "autre", value: "autr" }
+];
 
 export const ServiceCloseMesure = props => {
   const { currentMesure } = props;
@@ -32,7 +42,7 @@ export const ServiceCloseMesure = props => {
               UpdateMesure({
                 variables: {
                   id: currentMesure,
-                  reason_extinction: values.reason_extinction,
+                  reason_extinction: values.reason_extinction.value,
                   extinction: values.extinction
                 }
               });
@@ -48,7 +58,15 @@ export const ServiceCloseMesure = props => {
           initialValues={{ reason_extinction: "", extinction: "" }}
         >
           {props => {
-            const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
+            const {
+              setFieldValue,
+              values,
+              touched,
+              errors,
+              isSubmitting,
+              handleChange,
+              handleSubmit
+            } = props;
             return (
               <form onSubmit={handleSubmit}>
                 <Box mb="2">
@@ -63,13 +81,14 @@ export const ServiceCloseMesure = props => {
                   />
                 </Box>
                 <Box mb="2">
-                  <Input
-                    value={values.reason_extinction}
-                    hasError={errors.reason_extinction && touched.reason_extinction}
+                  <Select
                     id="reason_extinction"
                     name="reason_extinction"
-                    onChange={handleChange}
                     placeholder="Raison de l'extinction"
+                    value={values.type}
+                    hasError={errors.type && touched.type}
+                    onChange={option => setFieldValue("reason_extinction", option)}
+                    options={EXTINCTION_LABEL_VALUE}
                   />
                 </Box>
                 <Flex justifyContent="flex-end">
