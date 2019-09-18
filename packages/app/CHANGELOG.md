@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.2.0](https://github.com/SocialGouv/emjpm/compare/v24.1.0...v24.2.0) (2019-09-18)
+
+
+### Bug Fixes
+
+* **coralie:** change links ([#762](https://github.com/SocialGouv/emjpm/issues/762)) ([36eb352](https://github.com/SocialGouv/emjpm/commit/36eb352))
+* **coralie:** change texts ([#764](https://github.com/SocialGouv/emjpm/issues/764)) ([55e3c0c](https://github.com/SocialGouv/emjpm/commit/55e3c0c))
+* **extinction:** add select ([#763](https://github.com/SocialGouv/emjpm/issues/763)) ([ecdafc7](https://github.com/SocialGouv/emjpm/commit/ecdafc7))
+* **footer-links:** fix uncorrect links in footer ([#766](https://github.com/SocialGouv/emjpm/issues/766)) ([37b9024](https://github.com/SocialGouv/emjpm/commit/37b9024))
+
+
+
+
+
 # [24.1.0](https://github.com/SocialGouv/emjpm/compare/v24.0.2...v24.1.0) (2019-09-16)
 
 
