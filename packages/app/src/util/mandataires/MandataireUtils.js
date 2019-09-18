@@ -29,7 +29,9 @@ export const formatMandataire = (
   };
 
   if (discriminator === "SERVICE") {
+    const [headquarter] = service.service_antennes;
     currentDiscriminator = {
+      antenneId: headquarter.id,
       id: `${discriminator}-${service.id}`,
       email: service.email ? service.email : "non renseigné",
       nom: service.nom ? capitalize(service.nom) : "non renseigné",
@@ -42,6 +44,7 @@ export const formatMandataire = (
     };
   } else {
     currentDiscriminator = {
+      mandataireId: mandataire.id,
       id: `${discriminator}-${mandataire.id}`,
       email: mandataire.user && mandataire.user.email ? mandataire.user.email : "non renseigné",
       nom:
