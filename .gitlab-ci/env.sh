@@ -7,8 +7,9 @@ export COMMIT_TAG=${COMMIT_TAG:=$CI_COMMIT_TAG}
 export COMMIT=${COMMIT:=$CI_COMMIT_SHA}
 export ENVIRONMENT=${ENVIRONMENT:="emjpm-dev"};
 export HASH_SIZE=${HASH_SIZE:=7}
-export PROJECT_PATH=${PROJECT_PATH:=$CI_PROJECT_PATH}
 export JOB_ID=${JOB_ID:=$CI_JOB_ID}
+export NODE_ENV=${NODE_ENV:="development"}
+export PROJECT_PATH=${PROJECT_PATH:=$CI_PROJECT_PATH}
 
 BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
 export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
@@ -26,6 +27,7 @@ if [[ "${BRANCH_NAME}" = "master" ]]; then
 fi
 
 if [[ -n "${COMMIT_TAG}" ]]; then
+  export NODE_ENV="production"
   export IMAGE_TAG=$(printf "${COMMIT_TAG}" | sed "s/^v//")
   export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
   export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
