@@ -35,15 +35,17 @@ export const MagistratEditMesure = props => {
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
-        <Heading5 mb="1">éditer la mesure</Heading5>
+        <Heading5 mb="1">Modifier la mesure réservée</Heading5>
         <Text lineHeight="1.5">
-          {`On parle de fermeture d'une mesure, d'extinction d'une mesure ou de "fin de mandat pour dire que la mesure de protection a pris fin. Suite à ça, on parle de "mesure éteinte". Pour les raisons de traçabilité
-          évoquée ci-dessus, une mesure éteinte n'est pas supprimée.`}
+          {`Le formulaire ci-contre vous permet de modifier une mesure réservée aupres d'un mandataire.`}
+        </Text>
+        <Text lineHeight="1.5">
+          {`Une fois les modifications souhaitées apportées, cliquer sur "Enregistrer".`}
         </Text>
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="3">
-          <Heading3>éditer la mesure</Heading3>
+          <Heading3>Modifier la mesure réservée</Heading3>
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
