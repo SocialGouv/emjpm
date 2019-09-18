@@ -29,12 +29,28 @@ spec:
             - containerPort: 8080
           env:
             - name: HASURA_GRAPHQL_DATABASE_URL
-              value: "postgres://postgres@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
+              value: "postgres://${HASURA_POSTGRESQL_USER}:${HASURA_POSTGRES_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
             - name: HASURA_GRAPHQL_ENABLE_CONSOLE
               value: "true"
             - name: HASURA_GRAPHQL_ADMIN_SECRET
-              value: "secret"
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: HASURA_GRAPHQL_ADMIN_SECRET
             - name: HASURA_GRAPHQL_JWT_SECRET
               value: '{"type": "RS256","jwk_url": "http://${K8S_PROJECT}-api-${BRANCH_HASH}/api/v2/auth/jwks"}'
             - name: WHATEVER_URL
               value: "http://${K8S_PROJECT}-graphql-server-${BRANCH_HASH}"
+      initContainers:
+        - name: check-db-ready
+          image: postgres:10.10
+          command: ['sh', '-c',
+                    'until pg_isready -h ${POSTGRES_HOST} -p 5432;
+                do echo waiting for database; sleep 2; done;']
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
