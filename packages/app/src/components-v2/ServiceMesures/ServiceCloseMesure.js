@@ -27,10 +27,9 @@ export const ServiceCloseMesure = props => {
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
         <Heading5 mb="1">Mettre fin au mandat</Heading5>
-        <Text lineHeight="1.5">
-          {`On parle de fermeture d'une mesure, d'extinction d'une mesure ou de "fin de mandat pour dire que la mesure de protection a pris fin. Suite à ça, on parle de "mesure éteinte". Pour les raisons de traçabilité
-          évoquée ci-dessus, une mesure éteinte n'est pas supprimée.`}
-        </Text>
+        <Text lineHeight="1.5">{`Le formulaire ci-contre vous permet de mettre fin au madat de protection selectionne. Vous devez indiquer la date et la raison de l'extinction de la mesure.`}</Text>
+        <Text lineHeight="1.5">{`Les mesures pour lesquelles vous mettez fin au mandat ne sont plus comptabilisees dans vos "mesures en cours".`}</Text>
+        <Text lineHeight="1.5">{`Pour enregistrer vos modifications, cliquez sur "Confirmer la fin du mandat".`}</Text>
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="3">
@@ -77,14 +76,14 @@ export const ServiceCloseMesure = props => {
                     hasError={errors.extinction && touched.extinction}
                     type="date"
                     onChange={handleChange}
-                    placeholder="Date d'extinction"
+                    placeholder="Date de fin de mandat"
                   />
                 </Box>
                 <Box mb="2">
                   <Select
                     id="reason_extinction"
                     name="reason_extinction"
-                    placeholder="Raison de l'extinction"
+                    placeholder="Raison de la fin de mandat"
                     value={values.type}
                     hasError={errors.type && touched.type}
                     onChange={option => setFieldValue("reason_extinction", option)}
