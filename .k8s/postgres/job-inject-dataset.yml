@@ -21,7 +21,7 @@ spec:
             - name: DATABASE_URL
               value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
             - name: NODE_ENV
-              value: "development"
+              value: "${NODE_ENV}"
           volumeMounts:
             - name: dataset
               mountPath: /dataset
