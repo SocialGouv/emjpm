@@ -51,7 +51,7 @@ const ServicesFilters = () => {
               <Select
                 size="small"
                 options={antenneOptions}
-                placeholder={"antenne"}
+                placeholder={"Antenne"}
                 value={antenne}
                 onChange={option => changeAntenne(option)}
               />
@@ -60,7 +60,7 @@ const ServicesFilters = () => {
               <Select
                 size="small"
                 options={MESURE_TYPE_LABEL_VALUE}
-                placeholder={"type"}
+                placeholder={"Type"}
                 value={mesureType}
                 onChange={option => changeMesureType(option)}
               />
@@ -69,7 +69,7 @@ const ServicesFilters = () => {
               <Select
                 size="small"
                 options={MESURE_STATUS_LABEL_VALUE}
-                placeholder={"état"}
+                placeholder={"État"}
                 value={mesureStatus}
                 onChange={option => changeMesureStatus(option)}
               />
