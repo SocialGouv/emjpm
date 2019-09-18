@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.2.1](https://github.com/SocialGouv/emjpm/compare/v24.2.0...v24.2.1) (2019-09-18)
+
+
+### Bug Fixes
+
+* **trigger:** trigger update counters only on status update ([#768](https://github.com/SocialGouv/emjpm/issues/768)) ([04fe125](https://github.com/SocialGouv/emjpm/commit/04fe125))
+
+
+
+
+
 # [24.2.0](https://github.com/SocialGouv/emjpm/compare/v24.1.0...v24.2.0) (2019-09-18)
 
 
