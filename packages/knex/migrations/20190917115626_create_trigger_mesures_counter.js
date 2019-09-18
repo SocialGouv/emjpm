@@ -35,7 +35,7 @@ exports.up = function(knex) {
  $$ language 'plpgsql';
 
 CREATE TRIGGER on_update_mesures
- AFTER update or delete or insert ON mesures
+ AFTER update of status or delete or insert ON mesures
  FOR EACH row
  EXECUTE PROCEDURE update_gestionnaire_counters();
   `);
