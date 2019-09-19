@@ -1,6 +1,8 @@
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Flex } from "rebass";
+
+import { withAuthSync } from "../../src/util/auth";
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratMandatairesList } from "../../src/components-v2/MagistratMandatairesList";
 
@@ -22,4 +24,4 @@ const Mandataires = () => {
   );
 };
 
-export default Mandataires;
+export default withAuthSync(Mandataires);
