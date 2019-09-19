@@ -8,7 +8,7 @@ import { PageTracker } from "../src/components/common/PageTracker";
 
 const ResetPasswordContainer = ({ style }) => (
   <div className="container" style={style}>
-    <div className="col-12 offset-sm-2 col-sm-8 offset-md-3 col-md-6">
+    <div className="col-12 col-sm-12 offset-md-3 col-md-6">
       <Form />
     </div>
   </div>

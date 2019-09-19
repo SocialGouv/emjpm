@@ -8,11 +8,6 @@ import ReactPiwik from "react-piwik";
 import { withApolloClient } from "../src/lib/apollo";
 import { ThemeProvider } from "theme-ui";
 import theme from "@socialgouv/emjpm-ui-theme";
-import "react-tabs/style/react-tabs.css";
-import "../static/css/custom.css";
-import "../static/css/footer.css";
-import "../static/css/hero.css";
-import "../static/css/panel.css";
 
 export const piwik = new ReactPiwik({
   url: "stats.data.gouv.fr",
