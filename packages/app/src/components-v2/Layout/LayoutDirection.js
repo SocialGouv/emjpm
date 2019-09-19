@@ -74,7 +74,7 @@ const LayoutDirection = props => {
             username={username}
           />
           <BoxWrapper>
-            <Navigation links={navigationLinks} />
+            <Navigation links={navigationLinks} activeNestedLinks={true} />
           </BoxWrapper>
         </Box>
         {props.children}
