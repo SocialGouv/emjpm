@@ -130,7 +130,7 @@ Deploy Api (incubateur):
 .deploy-postgres: &deploy_postgres
   <<: *deploy_stage
   extends: .k8s-deploy-postgres
-  variables:
+  variables: &deploy_postgres_stage_variables
     CONTEXT: postgres
     EMJPM_REGISTRY: $CI_REGISTRY_IMAGE
     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
@@ -143,12 +143,14 @@ Deploy postgres (dev):
   <<: *dev_stage
   variables:
     <<: *deploy_stage_variables
+    <<: *deploy_postgres_stage_variables
 
 Deploy postgres (incubateur):
   <<: *deploy_postgres
   <<: *incubateur_stage
   variables:
     <<: *deploy_stage_variables
+    <<: *deploy_postgres_stage_variables
 
 #
 #
