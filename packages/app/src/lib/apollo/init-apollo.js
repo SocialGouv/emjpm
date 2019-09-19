@@ -1,9 +1,10 @@
 import { ApolloClient, InMemoryCache } from "apollo-boost";
-import { setContext } from "apollo-link-context";
 import { createHttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
 import getConfig from "next/config";
 import { isBrowser } from "../../util";
+import cookie from "js-cookie";
+import { ApolloLink, concat } from "apollo-link";
 
 let apolloClient = null;
 
@@ -12,64 +13,57 @@ if (!isBrowser()) {
   global.fetch = fetch;
 }
 
+const getToken = () => {
+  let token = null;
+  if (typeof document !== "undefined") {
+    token = "Bearer " + cookie.get("token");
+  }
+  return token;
+};
+
 const {
   publicRuntimeConfig: { GRAPHQL_SERVER_URI }
 } = getConfig();
 
-function create(initialState, { getToken, fetchOptions }) {
-  const httpLink = createHttpLink({
-    uri: GRAPHQL_SERVER_URI,
-    credentials: "same-origin",
-    fetchOptions
+function create(initialState) {
+  const authMiddleware = new ApolloLink((operation, forward) => {
+    // add the authorization to the headers
+    operation.setContext({
+      headers: {
+        authorization: getToken()
+      }
+    });
+
+    return forward(operation);
   });
 
-  const authLink = setContext((_, { headers }) => {
-    const token = getToken();
-    return {
-      headers: {
-        ...headers,
-        authorization: token ? `Bearer ${token}` : ""
-      }
-    };
+  const httpLink = createHttpLink({
+    uri: GRAPHQL_SERVER_URI,
+    credentials: "same-origin"
   });
 
   const cache = new InMemoryCache().restore(initialState || {});
-  cache.writeData({
-    data: {
-      currentId: initialState.currentId
-    }
-  });
+
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
     connectToDevTools: isBrowser(),
-    ssrMode: false,
-    link: authLink.concat(httpLink),
+    ssrMode: true,
+    link: concat(authMiddleware, httpLink),
     cache: cache,
     resolvers: {}
   });
 }
 
-export default function initApollo(initialState, options) {
+export default function initApollo(initialState) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
-  if (!isBrowser()) {
-    const fetchOptions = {};
-    // If you are using a https_proxy, add fetchOptions with 'https-proxy-agent' agent instance
-    // 'https-proxy-agent' is required here because it's a sever-side only module
-    // if (process.env.https_proxy) {
-    //   fetchOptions = {
-    //     agent: new (require("https-proxy-agent"))(process.env.https_proxy)
-    //   };
-    // }
-    return create(initialState, {
-      ...options,
-      fetchOptions
-    });
+  if (!process.browser) {
+    return create(initialState);
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = create(initialState, options);
+    apolloClient = create(initialState);
   }
 
   return apolloClient;
