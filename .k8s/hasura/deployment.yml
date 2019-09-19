@@ -41,7 +41,7 @@ spec:
                   key: HASURA_GRAPHQL_ADMIN_SECRET
             - name: HASURA_GRAPHQL_JWT_SECRET
               value: '{"type": "RS256","jwk_url": "http://${K8S_PROJECT}-api-${BRANCH_HASH}/api/v2/auth/jwks"}'
-            - name: PORT
+            - name: HASURA_GRAPHQL_SERVER_PORT
               value: "${PORT}"
             - name: WHATEVER_URL
               value: "http://${K8S_PROJECT}-graphql-server-${BRANCH_HASH}"
