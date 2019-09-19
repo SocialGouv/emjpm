@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.2.3](https://github.com/SocialGouv/emjpm/compare/v24.2.2...v24.2.3) (2019-09-19)
+
+
+### Bug Fixes
+
+* **external-link:** use simple link for external link ([#781](https://github.com/SocialGouv/emjpm/issues/781)) ([25d3e33](https://github.com/SocialGouv/emjpm/commit/25d3e33))
+* **hasura-metadata:** update metadata ([#782](https://github.com/SocialGouv/emjpm/issues/782)) ([0f6d0e1](https://github.com/SocialGouv/emjpm/commit/0f6d0e1))
+* **k8s:** communication from graphql-server to hasura ([#778](https://github.com/SocialGouv/emjpm/issues/778)) ([28b9ed0](https://github.com/SocialGouv/emjpm/commit/28b9ed0))
+* **knex:** remove the bad old knex production seeds ([#772](https://github.com/SocialGouv/emjpm/issues/772)) ([1fa9eae](https://github.com/SocialGouv/emjpm/commit/1fa9eae))
+* **magistrat:** fix mesure create ([#773](https://github.com/SocialGouv/emjpm/issues/773)) ([e0906f1](https://github.com/SocialGouv/emjpm/commit/e0906f1))
+* **nav-link:** add possibility to active nested  nav link ([#779](https://github.com/SocialGouv/emjpm/issues/779)) ([2e84e94](https://github.com/SocialGouv/emjpm/commit/2e84e94))
+* **service-informations:** fix bad query ([#783](https://github.com/SocialGouv/emjpm/issues/783)) ([84150c3](https://github.com/SocialGouv/emjpm/commit/84150c3))
+
+
+### Reverts
+
+* ci(gittlab): update k8s-ns-killer:0.7.1 ([6e6eabb](https://github.com/SocialGouv/emjpm/commit/6e6eabb))
+
+
+
+
+
 ## [24.2.2](https://github.com/SocialGouv/emjpm/compare/v24.2.1...v24.2.2) (2019-09-18)
 
 

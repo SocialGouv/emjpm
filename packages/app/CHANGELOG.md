@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.2.3](https://github.com/SocialGouv/emjpm/compare/v24.2.2...v24.2.3) (2019-09-19)
+
+
+### Bug Fixes
+
+* **external-link:** use simple link for external link ([#781](https://github.com/SocialGouv/emjpm/issues/781)) ([25d3e33](https://github.com/SocialGouv/emjpm/commit/25d3e33))
+* **magistrat:** fix mesure create ([#773](https://github.com/SocialGouv/emjpm/issues/773)) ([e0906f1](https://github.com/SocialGouv/emjpm/commit/e0906f1))
+* **nav-link:** add possibility to active nested  nav link ([#779](https://github.com/SocialGouv/emjpm/issues/779)) ([2e84e94](https://github.com/SocialGouv/emjpm/commit/2e84e94))
+* **service-informations:** fix bad query ([#783](https://github.com/SocialGouv/emjpm/issues/783)) ([84150c3](https://github.com/SocialGouv/emjpm/commit/84150c3))
+
+
+
+
+
 ## [24.2.2](https://github.com/SocialGouv/emjpm/compare/v24.2.1...v24.2.2) (2019-09-18)
 
 **Note:** Version bump only for package @emjpm/app
