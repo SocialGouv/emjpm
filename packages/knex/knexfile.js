@@ -47,9 +47,6 @@ module.exports = {
     },
     migrations: {
       directory: join(__dirname, "migrations")
-    },
-    seeds: {
-      directory: join(__dirname, "seeds/production")
     }
   }
 };
