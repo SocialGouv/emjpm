@@ -34,8 +34,14 @@ const BoxStyle = {
   height: "34px"
 };
 
-const ActiveLink = ({ router, ...props }) => {
-  const isActive = router.pathname.startsWith(props.href);
+const ActiveLink = ({ router, activeNestedLinks, ...props }) => {
+  let isActive;
+  if (activeNestedLinks) {
+    isActive = router.pathname.startsWith(props.href);
+  } else {
+    isActive = router.pathname === props.href;
+  }
+
   return (
     <Box sx={BoxStyle}>
       <NextLink {...props}>
