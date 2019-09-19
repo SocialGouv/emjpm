@@ -158,7 +158,7 @@ Deploy postgres (incubateur):
     <<: *deploy_stage_variables
     CONTEXT: hasura
     IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
-    PORT: 8080
+    PORT: 80
 
 #
 
