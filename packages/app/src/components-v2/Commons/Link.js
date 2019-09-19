@@ -1,6 +1,6 @@
+import NextLink from "next/link";
 import React from "react";
 import { Link as RebassLink } from "rebass";
-import NextLink from "next/link";
 
 const LinkStyle = () => {
   return {
@@ -14,7 +14,16 @@ const LinkStyle = () => {
   };
 };
 
+const isExternalLink = href => href && (href.startsWith("http") || href.startsWith("mailto"));
+
 const Link = props => {
+  if (isExternalLink(props.href)) {
+    return (
+      <RebassLink sx={LinkStyle()} {...props}>
+        {props.children}
+      </RebassLink>
+    );
+  }
   return (
     <NextLink {...props}>
       <RebassLink sx={LinkStyle()} {...props}>
