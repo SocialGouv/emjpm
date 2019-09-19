@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.2.3](https://github.com/SocialGouv/emjpm/compare/v24.2.2...v24.2.3) (2019-09-19)
+
+
+### Bug Fixes
+
+* **knex:** remove the bad old knex production seeds ([#772](https://github.com/SocialGouv/emjpm/issues/772)) ([1fa9eae](https://github.com/SocialGouv/emjpm/commit/1fa9eae))
+
+
+
+
+
 ## [24.2.2](https://github.com/SocialGouv/emjpm/compare/v24.2.1...v24.2.2) (2019-09-18)
 
 **Note:** Version bump only for package @emjpm/knex
