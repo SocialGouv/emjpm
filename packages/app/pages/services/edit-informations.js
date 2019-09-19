@@ -1,7 +1,7 @@
 import React from "react";
-
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
+import { withAuthSync } from "../../src/util/auth";
 import { LayoutServices } from "../../src/components-v2/Layout";
 
 const EditInformations = () => {
@@ -14,4 +14,4 @@ const EditInformations = () => {
   );
 };
 
-export default EditInformations;
+export default withAuthSync(EditInformations);
