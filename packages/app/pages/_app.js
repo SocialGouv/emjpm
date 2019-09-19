@@ -52,11 +52,11 @@ class MyApp extends App {
     const { Component, pageProps, apolloClient } = this.props;
     return (
       <Container>
-        <ThemeProvider theme={theme}>
-          <ApolloProvider client={apolloClient}>
+        <ApolloProvider client={apolloClient}>
+          <ThemeProvider theme={theme}>
             <Component {...pageProps} />
-          </ApolloProvider>
-        </ThemeProvider>
+          </ThemeProvider>
+        </ApolloProvider>
       </Container>
     );
   }

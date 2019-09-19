@@ -1,6 +1,8 @@
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Flex } from "rebass";
+
+import { withAuthSync } from "../../src/util/auth";
 import { LayoutServices } from "../../src/components-v2/Layout";
 import { ServiceMesures } from "../../src/components-v2/ServiceMesures";
 import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
@@ -44,4 +46,4 @@ const Mesures = () => {
   );
 };
 
-export default Mesures;
+export default withAuthSync(Mesures);
