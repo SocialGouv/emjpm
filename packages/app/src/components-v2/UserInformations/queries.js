@@ -6,9 +6,6 @@ export const GET_CURRENT_USER = gql`
       user_antennes {
         antenne_id
       }
-      magistrat {
-        ti_id
-      }
     }
   }
 `;
