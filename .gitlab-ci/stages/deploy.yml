@@ -130,7 +130,8 @@ Deploy Api (incubateur):
 .deploy-postgres: &deploy_postgres
   <<: *deploy_stage
   extends: .k8s-deploy-postgres
-  variables: &deploy_postgres_stage_variables
+  variables:
+    <<: *deploy_stage_variables
     CONTEXT: postgres
     EMJPM_REGISTRY: $CI_REGISTRY_IMAGE
     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
@@ -141,18 +142,10 @@ Deploy Api (incubateur):
 Deploy postgres (dev):
   <<: *deploy_postgres
   <<: *dev_stage
-  variables:
-    <<: *deploy_stage_variables
-    <<: *deploy_postgres_stage_variables
-    PERSISTENCE_ENABLED: false
 
 Deploy postgres (incubateur):
   <<: *deploy_postgres
   <<: *incubateur_stage
-  variables:
-    <<: *deploy_stage_variables
-    <<: *deploy_postgres_stage_variables
-    PERSISTENCE_ENABLED: true
 
 #
 #
@@ -165,7 +158,7 @@ Deploy postgres (incubateur):
     <<: *deploy_stage_variables
     CONTEXT: hasura
     IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
-    PORT: 8080
+    PORT: 80
 
 #
 
