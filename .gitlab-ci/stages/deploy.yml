@@ -144,7 +144,7 @@ Deploy postgres (dev):
   variables:
     <<: *deploy_stage_variables
     <<: *deploy_postgres_stage_variables
-    PERSISTENCE_ENABLED: false
+    PERSISTENCE_ENABLED: "false"
 
 Deploy postgres (incubateur):
   <<: *deploy_postgres
@@ -152,7 +152,7 @@ Deploy postgres (incubateur):
   variables:
     <<: *deploy_stage_variables
     <<: *deploy_postgres_stage_variables
-    PERSISTENCE_ENABLED: true
+    PERSISTENCE_ENABLED: "true"
 
 #
 #
