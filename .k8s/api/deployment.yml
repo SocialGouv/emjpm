@@ -48,3 +48,5 @@ spec:
               value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
             - name: PORT
               value: "${PORT}"
+            - name: NODE_ENV
+              value: "${NODE_ENV}"

@@ -48,3 +48,5 @@ spec:
               value: "http://${HASURA_HOST}/v1/graphql"
             - name: PORT
               value: "${PORT}"
+            - name: NODE_ENV
+              value: "${NODE_ENV}"
