@@ -1,8 +1,8 @@
 import React from "react";
-
 import { Box, Flex } from "rebass";
 import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 
+import { withAuthSync } from "../../src/util/auth";
 import { LayoutServices } from "../../src/components-v2/Layout";
 import { ServicesInformations } from "../../src/components-v2/ServicesInformations";
 import { PreferencesPanel } from "../../src/components-v2/PreferencesPanel";
@@ -53,4 +53,4 @@ const Informations = () => {
   );
 };
 
-export default Informations;
+export default withAuthSync(Informations);

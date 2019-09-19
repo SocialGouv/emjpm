@@ -1,8 +1,8 @@
 import React from "react";
-
 import { Box, Flex } from "rebass";
 import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 
+import { withAuthSync } from "../../src/util/auth";
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratInformations } from "../../src/components-v2/MagistratInformations";
 
@@ -39,4 +39,4 @@ const Informations = () => {
   );
 };
 
-export default Informations;
+export default withAuthSync(Informations);

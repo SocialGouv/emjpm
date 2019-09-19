@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Head from "next/head";
+import "bootstrap/dist/css/bootstrap.css";
 
 import LoginForm from "../src/components/loginComponents/LoginForm";
 import { Layout } from "../src/components";
