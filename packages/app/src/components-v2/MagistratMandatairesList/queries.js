@@ -70,6 +70,7 @@ export const GET_MANDATAIRES = gql`
           code_postal
           telephone
           email
+          etablissement
           service_antennes(where: { headquarters: { _eq: true } }) {
             id
           }
