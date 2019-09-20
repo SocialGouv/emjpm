@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.3.0](https://github.com/SocialGouv/emjpm/compare/v24.2.3...v24.3.0) (2019-09-20)
+
+
+### Bug Fixes
+
+* **format-mandataires:** fix empty array value ([#792](https://github.com/SocialGouv/emjpm/issues/792)) ([08d5409](https://github.com/SocialGouv/emjpm/commit/08d5409))
+* **knex:** use correct pg user for test ([#806](https://github.com/SocialGouv/emjpm/issues/806)) ([dd01307](https://github.com/SocialGouv/emjpm/commit/dd01307))
+* **login-style:** move old css to related layout, enhance login style ([#786](https://github.com/SocialGouv/emjpm/issues/786)) ([dde1481](https://github.com/SocialGouv/emjpm/commit/dde1481))
+* **magistrat:** fix update query add gr number use the good names ([#796](https://github.com/SocialGouv/emjpm/issues/796)) ([999517f](https://github.com/SocialGouv/emjpm/commit/999517f))
+* **region-filter:** check if region is defined: ([#798](https://github.com/SocialGouv/emjpm/issues/798)) ([ac19378](https://github.com/SocialGouv/emjpm/commit/ac19378))
+
+
+### Features
+
+* **admin:** display direction user ([#800](https://github.com/SocialGouv/emjpm/issues/800)) ([1022567](https://github.com/SocialGouv/emjpm/commit/1022567))
+* **db:** add user / use one database emjpm ([#795](https://github.com/SocialGouv/emjpm/issues/795)) ([9ef8020](https://github.com/SocialGouv/emjpm/commit/9ef8020))
+
+
+
+
+
 ## [24.2.3](https://github.com/SocialGouv/emjpm/compare/v24.2.2...v24.2.3) (2019-09-19)
 
 
