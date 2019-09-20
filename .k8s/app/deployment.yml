@@ -45,6 +45,6 @@ spec:
 
           env:
             - name: API_URL
-              value: "${API_URL}"
+              value: "//${API_HOST}"
             - name: GRAPHQL_SERVER_URI
-              value: "${HASURA_URL}/v1/graphql"
+              value: "//${HASURA_HOST}/v1/graphql"
