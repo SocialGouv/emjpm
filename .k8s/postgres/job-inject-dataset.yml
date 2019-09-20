@@ -35,7 +35,7 @@ spec:
       volumes:
         - name: dataset
           configMap:
-            name: ${K8S_PROJECT}-postgres-init-config-${BRANCH_HASH}
+            name: ${K8S_PROJECT}-dataset-configmap-${BRANCH_HASH}
       restartPolicy: Never
       initContainers:
         - name: wait-for-postgres
