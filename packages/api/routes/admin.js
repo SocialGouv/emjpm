@@ -116,6 +116,15 @@ router.get("/mandataires", typeRequired("admin"), async (req, res, next) => {
   }
 });
 
+router.get("/directions", typeRequired("admin"), async (req, res, next) => {
+  try {
+    const directions = await queries.getDirections({ filters: req.query });
+    res.json(directions);
+  } catch (e) {
+    next(e);
+  }
+});
+
 /**
  * @swagger
  * /admin/tis:
