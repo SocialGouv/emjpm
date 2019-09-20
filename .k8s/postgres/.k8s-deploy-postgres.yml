@@ -9,7 +9,7 @@
     - helm init --client-only
     - helm upgrade --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
     #
-    - kubectl create configmap ${K8S_PROJECT}-postgres-init-config-${BRANCH_HASH} --from-file=./.k8s/postgres/configmap
+    - kubectl create configmap ${K8S_PROJECT}-dataset-configmap-${BRANCH_HASH} --from-file=./.k8s/postgres/configmap
     #
     - kubectl delete job "${K8S_PROJECT}-dataset-${BRANCH_HASH}" || true;
     - cat ./.k8s/postgres/job-inject-dataset.yml | envsubst | kubectl apply -f -
