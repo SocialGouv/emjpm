@@ -13,7 +13,7 @@ const tabs = [
     content: (
       <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
         <h2 style={{ padding: "10px" }}>Gestion des utilisateurs</h2>
-        <Users type={"mandataire"} />
+        <Users type={"mandataires"} />
       </div>
     )
   },
@@ -24,7 +24,18 @@ const tabs = [
     content: (
       <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
         <h2 style={{ padding: "10px" }}>Gestion des TI</h2>
-        <Users type={"ti"} />
+        <Users type={"tis"} />
+      </div>
+    )
+  },
+  {
+    text: "Direction",
+    url: "/admin/direction",
+    icon: <Home />,
+    content: (
+      <div style={{ paddingTop: 10, background: "rgb(215, 223, 232)" }}>
+        <h2 style={{ padding: "10px" }}>Gestion des DR-DD</h2>
+        <Users type={"directions"} />
       </div>
     )
   }
