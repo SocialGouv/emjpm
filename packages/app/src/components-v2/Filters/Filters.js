@@ -40,9 +40,14 @@ const Filters = () => {
 
   const selectRegion = selectedOption => {
     changeRegionalValue(selectedOption);
-    const departments = regionsData.regions.find(region => region.id === selectedOption.value)
-      .departements;
-    setDepartmentOptions(departementToOptions(departments));
+    if (selectedOption && selectedOption.value) {
+      const departments = regionsData.regions.find(region => region.id === selectedOption.value)
+        .departements;
+      setDepartmentOptions(departementToOptions(departments));
+    } else {
+      setDepartmentOptions(allDepartmentOptions);
+    }
+
     changeDepartementValue(null);
   };
 
