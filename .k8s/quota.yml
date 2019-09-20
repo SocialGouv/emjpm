@@ -9,23 +9,25 @@ metadata:
 spec:
   hard:
     #   200m // api
-    # +  50m // app
+    # + 100m // app
     # +  25m // dataset (wait-for-postgres)
     # + 225m // dataset (inject)
     # + 200m // graphql-server
     # + 500m // hasura
-    # + 200m // postgres
+    # +  50m // hasura (check-db-ready)
+    # + 500m // postgres
     # ======
-    #  1400m    ~1.5 CPU x2
-    limits.cpu: 3000m
+    #  1750m    ~1.75 CPU x2
+    limits.cpu: 3500m
 
     #   256Mi // api
-    # +  32Mi // app
+    # + 128Mi // app
     # +  32Mi // dataset (wait-for-postgres)
     # + 256Mi // dataset (inject)
     # + 256Mi // graphql-server
     # + 256Mi // hasura
-    # + 128Mi // postgres
+    # +  32Mi // hasura (check-db-ready)
+    # + 256Mi // postgres
     # =======
-    #  1216Mi      ~2^10 x2
-    limits.memory: 2.5Gi
+    #  1344Mi      ~2^11 x2
+    limits.memory: 4Gi
