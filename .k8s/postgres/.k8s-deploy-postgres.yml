@@ -1,8 +1,8 @@
 .k8s-deploy-postgres:
   extends: .base_docker_helm_image_stage
   script:
-    - export POSTGRESQL_USER=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_USER}' | base64 --decode)
-    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 --decode)
+    - export POSTGRESQL_USER=emjpm
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
     #
     - envsubst < ./.k8s/postgres/values-postgresql.yaml > ./values-postgresql.yaml
     #
