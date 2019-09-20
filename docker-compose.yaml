@@ -23,13 +23,13 @@ services:
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       # API dedicated password
       - POSTGRES_EMJPM_USER=emjpm
-      - POSTGRES_EMJPM_USER_PASSWORD=test
+      - POSTGRES_EMJPM_PASSWORD=test
       # Metabase dedicated user
-      - POSTGRES_METABASE_USER_NAME=metabase
-      - POSTGRES_METABASE_USER_PASSWORD=metabasePassword
+      - POSTGRES_METABASE_USER=metabase
+      - POSTGRES_METABASE_PASSWORD=metabasePassword
       # Hasura dedicated user
-      - POSTGRES_HASURA_USER_NAME=hasura
-      - POSTGRES_HASURA_USER_PASSWORD=hasuraPassword
+      - POSTGRES_HASURA_USER=hasura
+      - POSTGRES_HASURA_PASSWORD=hasuraPassword
     ports:
       - "5434:5432"
     volumes:
