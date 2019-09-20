@@ -19,6 +19,8 @@ export DOMAIN="emjpm.dev.fabrique.social.gouv.fr";
 export K8S_PROJECT="emjpm"
 export K8S_NAMESPACE="emjpm-feature-${BRANCH_HASH}"
 
+export POSTGRES_DATABASE="emjpm"
+
 #
 
 if [[ "${BRANCH_NAME}" = "master" ]]; then
@@ -39,12 +41,10 @@ if [[ -n "${PRODUCTION+x}" ]]; then
   export BRANCH_HASH=prod;
   export K8S_NAMESPACE="emjpm"
   #
-  export POSTGRES_DATABASE="emjpm_prod"
   export DOMAIN="emjpm.fabrique.social.gouv.fr";
 else
   export DOMAIN="${BRANCH_HASH}.${DOMAIN}";
   #
-  export POSTGRES_DATABASE="emjpm_dev"
 fi
 
 export API_HOST="api.${DOMAIN}";
