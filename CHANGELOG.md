@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.3.3](https://github.com/SocialGouv/emjpm/compare/v24.3.2...v24.3.3) (2019-09-22)
+
+
+### Features
+
+* **k8s:** add daily dump in prod ([#810](https://github.com/SocialGouv/emjpm/issues/810)) ([7dbb4cd](https://github.com/SocialGouv/emjpm/commit/7dbb4cd))
+* **k8s:** recalcul backup cron quota ([cb2eeef](https://github.com/SocialGouv/emjpm/commit/cb2eeef))
+
+
+### Reverts
+
+* ci(gitlab): force release as default ([64bcabc](https://github.com/SocialGouv/emjpm/commit/64bcabc))
+
+
+
+
+
 ## [24.3.2](https://github.com/SocialGouv/emjpm/compare/v24.3.1...v24.3.2) (2019-09-22)
 
 **Note:** Version bump only for package emjpm
