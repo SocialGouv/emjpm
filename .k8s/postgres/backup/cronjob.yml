@@ -21,10 +21,10 @@ spec:
               args: ["/script/backup.sh"]
               resources:
                 requests:
-                  cpu: 300m
-                  memory: 512Mi
+                  cpu: 500m
+                  memory: 256Mi
                 limits:
-                  cpu: 300m
+                  cpu: 750m
                   memory: 512Mi
               env:
                 - name: PGHOST
