@@ -37,8 +37,8 @@ spec:
                       name: emjpm-secret
                       key: POSTGRES_HASURA_PASSWORD
               volumeMounts:
-                - mountPath: "/unsafe_data"
-                  name: unsafe_data
+                - mountPath: "/data"
+                  name: data
                 - mountPath: "/script"
                   name: script
           restartPolicy: OnFailure
@@ -46,7 +46,7 @@ spec:
             - name: script
               configMap:
                 name: ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
-            - name: unsafe_data
+            - name: data
               azureFile:
                 secretName: azure-backup-volume-secret
                 shareName: emjpm
