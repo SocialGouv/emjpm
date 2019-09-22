@@ -16,9 +16,10 @@ spec:
     # + 500m // hasura
     # +  50m // hasura (check-db-ready)
     # + 500m // postgres
+    # + 750m // backup cronjob
     # ======
-    #  1750m    ~1.75 CPU x2
-    limits.cpu: 3500m
+    #  2500m    ~2.5 CPU x2
+    limits.cpu: 5000m
 
     #   256Mi // api
     # + 128Mi // app
@@ -28,6 +29,7 @@ spec:
     # + 256Mi // hasura
     # +  32Mi // hasura (check-db-ready)
     # + 256Mi // postgres
+    # + 512Mi // backup cronjob
     # =======
-    #  1344Mi      ~2^11 x2
+    #  1856Mi      ~2^11 x2
     limits.memory: 4Gi
