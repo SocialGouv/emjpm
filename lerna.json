@@ -11,5 +11,5 @@
     "packages/*"
   ],
   "npmClient": "yarn",
-  "version": "24.3.2"
+  "version": "24.3.3"
 }
