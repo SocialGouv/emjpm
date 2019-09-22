@@ -83,7 +83,7 @@ Release:
   script:
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     - yarn --frozen-lockfile
-    - GH_TOKEN=${GITHUB_TOKEN} yarn lerna version ${LERNA_ARGS:=--yes}
+    - GH_TOKEN=${GITHUB_TOKEN} yarn lerna version ${LERNA_ARGS:="--force-publish --yes"}
 
 Put to production:
   <<: *notify_stage
