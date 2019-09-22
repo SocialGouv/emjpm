@@ -9,8 +9,20 @@
     - helm init --client-only
     - helm upgrade --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
     #
+    # Dataset job
     - kubectl delete configmap ${K8S_PROJECT}-dataset-configmap-${BRANCH_HASH} || true;
-    - kubectl create configmap ${K8S_PROJECT}-dataset-configmap-${BRANCH_HASH} --from-file=./.k8s/postgres/configmap
+    - kubectl create configmap ${K8S_PROJECT}-dataset-configmap-${BRANCH_HASH}
+        --from-file=./.k8s/postgres/dataset/configmap
     #
     - kubectl delete job ${K8S_PROJECT}-dataset-${BRANCH_HASH} || true;
-    - cat ./.k8s/postgres/job-inject-dataset.yml | envsubst | kubectl apply -f -
+    - cat ./.k8s/postgres/dataset/job-inject-dataset.yml | envsubst | kubectl apply -f -
+    #
+    # Backup cronjob
+    - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} || true;
+    - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+        --from-file=./.k8s/postgres/backup/configmap
+    #
+    - if [ -n "${PRODUCTION+x}" ]; then
+        kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
+        cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
+      fi
