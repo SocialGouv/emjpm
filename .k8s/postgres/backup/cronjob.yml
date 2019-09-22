@@ -9,7 +9,7 @@ metadata:
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
 spec:
-  schedule: "*/5 * * * *"
+  schedule: "0 0 * * *"
   jobTemplate:
     spec:
       template:
