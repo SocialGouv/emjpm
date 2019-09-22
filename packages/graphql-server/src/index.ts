@@ -20,6 +20,7 @@ const context = async ({ ctx }: { ctx: any }) => {
 const server = new ApolloServer({
   context,
   dataSources,
+  introspection: true,
   resolvers,
   typeDefs
 });
