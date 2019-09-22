@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.3.4](https://github.com/SocialGouv/emjpm/compare/v24.3.3...v24.3.4) (2019-09-22)
+
+
+### Bug Fixes
+
+* **k8s:** unsafe_data is not valid volume name ([07d7cd5](https://github.com/SocialGouv/emjpm/commit/07d7cd5))
+
+
+
+
+
 ## [24.3.3](https://github.com/SocialGouv/emjpm/compare/v24.3.2...v24.3.3) (2019-09-22)
 
 
