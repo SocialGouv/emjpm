@@ -22,7 +22,5 @@
     - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
         --from-file=./.k8s/postgres/backup/configmap
     #
-    - if [ -n "${PRODUCTION+x}" ]; then
-        kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
-        cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
-      fi
+    - kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
+    - cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
