@@ -8,6 +8,9 @@ import ReactPiwik from "react-piwik";
 import { withApolloClient } from "../src/lib/apollo";
 import { ThemeProvider } from "theme-ui";
 import theme from "@socialgouv/emjpm-ui-theme";
+import jwtDecode from "jwt-decode";
+
+import { formatUserFromToken } from "../src/util/formatUserFromToken";
 
 export const piwik = new ReactPiwik({
   url: "stats.data.gouv.fr",
@@ -45,6 +48,11 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, apolloClient } = this.props;
+    const { token } = pageProps;
+    const currentUser = token ? jwtDecode(token) : null;
+    const data = { currentUser: formatUserFromToken(currentUser) };
+    apolloClient.cache.writeData({ data });
+
     return (
       <Container>
         <ApolloProvider client={apolloClient}>

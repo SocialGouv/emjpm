@@ -1,11 +1,38 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 
-import { GET_CURRENT_USER } from "./queries";
+import { MAGISTRAT_USERS, DIRECTION_USERS, GET_SERVICE_USERS, CURRENT_USER } from "./queries";
+
+const QUERY_TYPE = {
+  ti: MAGISTRAT_USERS,
+  direction: DIRECTION_USERS,
+  service: GET_SERVICE_USERS
+};
+
+const CurrentUser = props => {
+  const { Component, userData } = props;
+
+  const { data, error, loading } = useQuery(QUERY_TYPE[userData.currentUser.role], {
+    variables: {
+      userId: userData.currentUser.id
+    }
+  });
+
+  if (loading) {
+    return <div>Chargement</div>;
+  }
+  if (error) {
+    return <div>Erreur</div>;
+  }
+
+  const [user] = data.users;
+  return <Component {...user} />;
+};
 
 const UserInformations = props => {
   const { Component } = props;
-  const { data, error, loading } = useQuery(GET_CURRENT_USER);
+
+  const { data, loading, error } = useQuery(CURRENT_USER);
 
   if (loading) {
     return <div>loading</div>;
@@ -14,8 +41,7 @@ const UserInformations = props => {
     return <div>error</div>;
   }
 
-  const { currentUser } = data;
-  return <Component {...props} currentUser={currentUser} />;
+  return <CurrentUser Component={Component} userData={data} />;
 };
 
 export { UserInformations };

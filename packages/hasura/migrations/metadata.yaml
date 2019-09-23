@@ -499,22 +499,16 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
       - cabinet
+      - created_at
       - email
+      - id
+      - last_login
       - nom
-      - password
       - prenom
-      - reset_password_token
       - type
       - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
+      filter: {}
     role: ti
   - comment: null
     permission:
@@ -771,7 +765,7 @@ tables:
       - code
       - nom
       filter: {}
-    role: prepose
+    role: mandataire
   - comment: null
     permission:
       allow_aggregations: false
@@ -781,7 +775,7 @@ tables:
       - code
       - nom
       filter: {}
-    role: mandataire
+    role: prepose
   - comment: null
     permission:
       allow_aggregations: false
@@ -1871,6 +1865,12 @@ tables:
   - comment: null
     permission:
       allow_aggregations: false
+      columns: []
+      filter: {}
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
       columns:
       - latitude
       - longitude
@@ -1912,12 +1912,6 @@ tables:
       - code_postal
       filter: {}
     role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns: []
-      filter: {}
-    role: service
   table: geolocalisation_code_postal
   update_permissions: []
 - array_relationships:

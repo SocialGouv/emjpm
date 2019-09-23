@@ -15,7 +15,7 @@ const Mesures = () => {
       <LayoutServices>
         <BoxWrapper mt={6} px="1">
           <Heading1>Toutes vos mesures</Heading1>
-          <ServicesFilters />
+          <UserInformations Component={props => <ServicesFilters {...props} />} />
           <Flex
             sx={{
               mt: "2",

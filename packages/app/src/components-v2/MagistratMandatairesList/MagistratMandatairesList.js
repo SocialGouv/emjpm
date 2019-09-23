@@ -3,7 +3,7 @@ import { Mandatairelist, MandataireContextProvider } from "@socialgouv/emjpm-ui-
 import { Button, Card, Heading4, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
-import { CURRENT_USER, GET_MANDATAIRES } from "./queries";
+import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";
 import { formatMandatairesList } from "./utils";
 import { MagistratChoose } from "./MagistratChoose";
@@ -23,23 +23,25 @@ const optionsCapacity = [
 const RESULT_PER_PAGE = 20;
 
 const MagistratMandatairesList = props => {
+  const {
+    magistrat: { ti_id }
+  } = props;
+
   const [selectedType, setType] = useState(false);
   const [selectedCapacity, setCapacity] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-
-  const userQuery = useQuery(CURRENT_USER);
 
   const { data, error, loading, fetchMore } = useQuery(GET_MANDATAIRES, {
     variables: {
       offset: 0,
       limit: RESULT_PER_PAGE,
-      tribunal: userQuery.data.currentUser.magistrat.ti_id,
+      tribunal: ti_id,
       order: selectedCapacity ? selectedCapacity.value : null,
       discriminator: selectedType ? selectedType.value : null
     }
   });
 
-  if (userQuery.loading || loading) {
+  if (loading) {
     return (
       <Card width="100%">
         <Box my="5">
@@ -49,7 +51,7 @@ const MagistratMandatairesList = props => {
     );
   }
 
-  if (userQuery.error || error) {
+  if (error) {
     return (
       <Card width="100%">
         <Heading4>erreur</Heading4>
@@ -87,9 +89,7 @@ const MagistratMandatairesList = props => {
         </Card>
         <Mandatairelist
           isMagistrat
-          ChooseComponent={props => (
-            <MagistratChoose ti={userQuery.data.currentUser.magistrat.ti_id} {...props} />
-          )}
+          ChooseComponent={props => <MagistratChoose ti={ti_id} {...props} />}
           mandataires={list}
         />
         {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
