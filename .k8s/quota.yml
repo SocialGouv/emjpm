@@ -9,7 +9,7 @@ metadata:
 spec:
   hard:
     #   200m // api
-    # + 100m // app
+    # + 200m // app
     # +  25m // dataset (wait-for-postgres)
     # + 225m // dataset (inject)
     # + 200m // graphql-server
