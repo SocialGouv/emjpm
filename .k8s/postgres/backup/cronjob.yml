@@ -12,35 +12,92 @@ spec:
   schedule: "0 0 * * *"
   jobTemplate:
     spec:
+      activeDeadlineSeconds: 300
       template:
         spec:
           containers:
+            #
+            #
+            #
+
             - name: backup
               image: postgres:10
-              command: ["sh"]
+              command: ["sh", "-x"]
               args: ["/mnt/script/backup.sh"]
               resources:
                 requests:
-                  cpu: 500m
+                  cpu: 250m
                   memory: 256Mi
                 limits:
-                  cpu: 750m
-                  memory: 512Mi
+                  cpu: 500m
+                  memory: 256Mi
               env:
                 - name: PGHOST
-                  value: ${POSTGRES_HOST}
+                  value: ${K8S_PROJECT}-postgres-${BRANCH_HASH}
                 - name: PGUSER
-                  value: hasura
+                  value: emjpm
                 - name: PGPASSWORD
                   valueFrom:
                     secretKeyRef:
                       name: emjpm-secret
-                      key: POSTGRES_HASURA_PASSWORD
+                      key: POSTGRES_EMJPM_PASSWORD
               volumeMounts:
                 - mountPath: "/mnt/data"
                   name: data
                 - mountPath: "/mnt/script"
                   name: script
+
+            #
+            #
+            #
+
+            - name: postgres
+              image: postgres:10
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 32Mi
+                limits:
+                  cpu: 100m
+                  memory: 64Mi
+              ports:
+                - containerPort: 5432
+              env:
+                - name: PGUSER
+                  value: postgres
+
+            #
+            #
+            #
+
+            - name: anonymize
+              image: postgres:10
+              command: ["sh", "-x"]
+              args:
+                - /mnt/script/anonymous.sh
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 32Mi
+                limits:
+                  cpu: 100m
+                  memory: 64Mi
+              env:
+                - name: PGHOST
+                  value: localhost
+                - name: PGUSER
+                  value: postgres
+              volumeMounts:
+                - mountPath: "/mnt/data"
+                  name: data
+                - mountPath: "/mnt/anonymous"
+                  name: anonymous
+                - mountPath: "/mnt/script"
+                  name: script
+
+            #
+            #
+            #
           restartPolicy: OnFailure
           volumes:
             - name: script
@@ -49,5 +106,10 @@ spec:
             - name: data
               azureFile:
                 secretName: azure-backup-volume-secret
+                shareName: emjpm
+                readOnly: false
+            - name: anonymous
+              azureFile:
+                secretName: azure-anonymous-volume-secret
                 shareName: emjpm
                 readOnly: false
