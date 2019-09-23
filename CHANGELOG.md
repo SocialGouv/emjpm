@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.4.0](https://github.com/SocialGouv/emjpm/compare/v24.3.4...v24.4.0) (2019-09-23)
+
+
+### Bug Fixes
+
+* **k8s:** add missing anonymize files ([5c9e819](https://github.com/SocialGouv/emjpm/commit/5c9e819))
+* **k8s:** change mounting points ([e84e4e9](https://github.com/SocialGouv/emjpm/commit/e84e4e9))
+* **knex:** give db creation privilege to emjpm ([#817](https://github.com/SocialGouv/emjpm/issues/817)) ([c7f47c6](https://github.com/SocialGouv/emjpm/commit/c7f47c6))
+* **knex:** use emjpm user for migration ([#814](https://github.com/SocialGouv/emjpm/issues/814)) ([629f7bc](https://github.com/SocialGouv/emjpm/commit/629f7bc))
+* **magistrat:** fix update query add gr number use the good names ([#811](https://github.com/SocialGouv/emjpm/issues/811)) ([0f285fd](https://github.com/SocialGouv/emjpm/commit/0f285fd))
+* **next-export:** remove get data from tree add default value fo… ([#822](https://github.com/SocialGouv/emjpm/issues/822)) ([f178b2d](https://github.com/SocialGouv/emjpm/commit/f178b2d))
+* **panel:** update panel texts ([#823](https://github.com/SocialGouv/emjpm/issues/823)) ([754141e](https://github.com/SocialGouv/emjpm/commit/754141e))
+* **trigger:** update counters if antenne id changes ([#813](https://github.com/SocialGouv/emjpm/issues/813)) ([150e78e](https://github.com/SocialGouv/emjpm/commit/150e78e))
+* **user informations:** update permission for users and refactor user infos with query component ([#812](https://github.com/SocialGouv/emjpm/issues/812)) ([0e699c7](https://github.com/SocialGouv/emjpm/commit/0e699c7))
+
+
+### Features
+
+* **informations-panel:** add panel and fixes ([#821](https://github.com/SocialGouv/emjpm/issues/821)) ([e1c4426](https://github.com/SocialGouv/emjpm/commit/e1c4426))
+* **k8s:** anonymize the dump ([#819](https://github.com/SocialGouv/emjpm/issues/819)) ([2d054d7](https://github.com/SocialGouv/emjpm/commit/2d054d7))
+
+
+
+
+
 ## [24.3.4](https://github.com/SocialGouv/emjpm/compare/v24.3.3...v24.3.4) (2019-09-22)
 
 
