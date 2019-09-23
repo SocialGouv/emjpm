@@ -5,6 +5,7 @@ import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import { withAuthSync } from "../../src/util/auth";
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratInformations } from "../../src/components-v2/MagistratInformations";
+import { UserInformations } from "../../src/components-v2/UserInformations";
 
 const Informations = () => {
   return (
@@ -24,7 +25,11 @@ const Informations = () => {
             }}
           >
             <Heading2>Informations générales</Heading2>
-            <MagistratInformations mt="3" />
+            <UserInformations
+              Component={props => {
+                return <MagistratInformations {...props} mt="3" />;
+              }}
+            />
           </Box>
           <Box
             sx={{

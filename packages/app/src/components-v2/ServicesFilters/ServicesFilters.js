@@ -1,14 +1,12 @@
-import { useQuery } from "@apollo/react-hooks";
 import { Card, Select } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import { MESURE_STATUS_LABEL_VALUE, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { FiltersContext } from "./context";
-import { GET_CURRENT_USER } from "./queries";
 import { TextStyle } from "./style";
 
-const ServicesFilters = () => {
-  const { data, error, loading } = useQuery(GET_CURRENT_USER);
+const ServicesFilters = props => {
+  const { user_antennes } = props;
 
   const {
     mesureType,
@@ -19,25 +17,18 @@ const ServicesFilters = () => {
     changeAntenne
   } = useContext(FiltersContext);
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
-  }
-
   const antenneOptions = [
     {
       label: "Toutes les antennes",
       value: null
     }
   ];
+
   Array.prototype.push.apply(
     antenneOptions,
-    data.currentUser.user_antennes.map(ua => ({
-      label: ua.service_antenne.name,
-      value: ua.service_antenne.id
+    user_antennes.map(user_antenne => ({
+      label: user_antenne.service_antenne.name,
+      value: user_antenne.service_antenne.id
     }))
   );
 
