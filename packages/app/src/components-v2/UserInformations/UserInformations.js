@@ -11,10 +11,12 @@ const QUERY_TYPE = {
 
 const CurrentUser = props => {
   const { Component, userData } = props;
+  const type = userData && userData.currentUser ? userData.currentUser.role : "direction";
+  const userId = userData && userData.currentUser ? userData.currentUser.id : 42;
 
-  const { data, error, loading } = useQuery(QUERY_TYPE[userData.currentUser.role], {
+  const { data, error, loading } = useQuery(QUERY_TYPE[type], {
     variables: {
-      userId: userData.currentUser.id
+      userId: userId
     }
   });
 
