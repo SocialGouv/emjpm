@@ -24,15 +24,13 @@ const Mesures = () => {
           <Card sx={cardStyle(isHidden)} mb="5">
             <Heading3 mb="2">{`Emjpm s'améliore`}</Heading3>
             <Text mb="1" lineHeight="1.5">
-              {`Nous vous proposons une nouvelle version de notre plateforme e-MJPM. Cette nouvelle
-            formule vous propose une nouvelle ergonomie ainsi que plusieurs nouvelles
-            fonctionnalités issues directement de vos retours.`}
+              {`Nous vous proposons une nouvelle version de la plateforme e-MJPM. Cette refonte  vous propose une ergonomie plus adaptée aux usages ainsi que plusieurs nouvelles fonctionnalités issues directement de vos retours.`}
             </Text>
             <Text mb="1" lineHeight="1.5">
               {`La version du profil Service à venir dans les prochains jours vous permettra de créer des subdivisions (par exemple pour vos antennes) et d'y administrer des mesures.`}
             </Text>
             <Text mb="1" lineHeight="1.5">
-              {`Courant octobre nous vous proposerons une fonctionnalité permettant d'attribuer des administrateurs pour chaque subdivision, l'import excel revue ainsi qu'une visualisation des mesures géolocalisées`}
+              {`Courant octobre, nous vous proposerons des fonctionnalités complémentaires comme : attribuer des  administrateurs à chaque subdivisions ; la possibilité d'importer de manière fluide ses mesures en cours via un tableau Excel ; ainsi qu'une visualisation géolocalisée des mesures `}
             </Text>
             <Flex flexDirection="row" justifyContent="flex-end">
               <Box>
