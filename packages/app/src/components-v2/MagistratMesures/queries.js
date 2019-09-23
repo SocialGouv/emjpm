@@ -8,6 +8,7 @@ export const MESURES = gql`
         type: { _eq: $type }
         antenne_id: { _eq: $antenne }
       }
+      order_by: { created_at: desc_nulls_last }
     ) {
       aggregate {
         count

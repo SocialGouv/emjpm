@@ -15,7 +15,6 @@ const optionsType = [
 ];
 
 const optionsCapacity = [
-  { label: "Aucun", value: null },
   { label: "Du moins disponible au plus disponible", value: "asc_nulls_last" },
   { label: "Du plus disponible au moins disponible", value: "desc_nulls_last" }
 ];
@@ -28,7 +27,10 @@ const MagistratMandatairesList = props => {
   } = props;
 
   const [selectedType, setType] = useState(false);
-  const [selectedCapacity, setCapacity] = useState(false);
+  const [selectedCapacity, setCapacity] = useState({
+    label: "Du plus disponible au moins disponible",
+    value: "desc_nulls_last"
+  });
   const [currentPage, setCurrentPage] = useState(0);
 
   const { data, error, loading, fetchMore } = useQuery(GET_MANDATAIRES, {
