@@ -3,7 +3,6 @@ import { Box, Flex } from "rebass";
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
 import { withAuthSync } from "../../src/util/auth";
-import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
 import { LayoutServices } from "../../src/components-v2/Layout";
 
 const Preferences = () => {
@@ -11,7 +10,6 @@ const Preferences = () => {
     <LayoutServices>
       <BoxWrapper mt={6} px="1">
         <Heading1>Préférences</Heading1>
-        <ServicesFilters />
         <Flex
           sx={{
             flexWrap: "wrap"

@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const MAGISTRAT = gql`
-  {
-    users {
+  query users($userId: Int) {
+    users(where: { id: { _eq: $userId } }) {
       id
       cabinet
       created_at

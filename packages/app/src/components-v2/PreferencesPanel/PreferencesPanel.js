@@ -9,9 +9,7 @@ import { LinkButton } from "../Commons";
 import { PreferencesPanelStyle } from "./style";
 
 const PreferencesPanel = props => {
-  const {
-    currentUser: { user_antennes }
-  } = props;
+  const { user_antennes } = props;
   const [mainAntenne] = user_antennes;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
