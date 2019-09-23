@@ -18,7 +18,7 @@ spec:
             - name: backup
               image: postgres:10
               command: ["sh"]
-              args: ["/script/backup.sh"]
+              args: ["/mnt/script/backup.sh"]
               resources:
                 requests:
                   cpu: 500m
@@ -37,9 +37,9 @@ spec:
                       name: emjpm-secret
                       key: POSTGRES_HASURA_PASSWORD
               volumeMounts:
-                - mountPath: "/data"
+                - mountPath: "/mnt/data"
                   name: data
-                - mountPath: "/script"
+                - mountPath: "/mnt/script"
                   name: script
           restartPolicy: OnFailure
           volumes:
@@ -47,11 +47,6 @@ spec:
               configMap:
                 name: ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
             - name: data
-              azureFile:
-                secretName: azure-backup-volume-secret
-                shareName: emjpm
-                readOnly: false
-            - name: anonymous
               azureFile:
                 secretName: azure-backup-volume-secret
                 shareName: emjpm
