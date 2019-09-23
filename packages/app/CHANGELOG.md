@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.4.0](https://github.com/SocialGouv/emjpm/compare/v24.3.4...v24.4.0) (2019-09-23)
+
+
+### Bug Fixes
+
+* **next-export:** remove get data from tree add default value fo… ([#822](https://github.com/SocialGouv/emjpm/issues/822)) ([f178b2d](https://github.com/SocialGouv/emjpm/commit/f178b2d))
+* **panel:** update panel texts ([#823](https://github.com/SocialGouv/emjpm/issues/823)) ([754141e](https://github.com/SocialGouv/emjpm/commit/754141e))
+* **user informations:** update permission for users and refactor user infos with query component ([#812](https://github.com/SocialGouv/emjpm/issues/812)) ([0e699c7](https://github.com/SocialGouv/emjpm/commit/0e699c7))
+
+
+### Features
+
+* **informations-panel:** add panel and fixes ([#821](https://github.com/SocialGouv/emjpm/issues/821)) ([e1c4426](https://github.com/SocialGouv/emjpm/commit/e1c4426))
+
+
+
+
+
 ## [24.3.4](https://github.com/SocialGouv/emjpm/compare/v24.3.3...v24.3.4) (2019-09-22)
 
 **Note:** Version bump only for package @emjpm/app

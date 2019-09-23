@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.4.0](https://github.com/SocialGouv/emjpm/compare/v24.3.4...v24.4.0) (2019-09-23)
+
+
+### Bug Fixes
+
+* **knex:** use emjpm user for migration ([#814](https://github.com/SocialGouv/emjpm/issues/814)) ([629f7bc](https://github.com/SocialGouv/emjpm/commit/629f7bc))
+* **trigger:** update counters if antenne id changes ([#813](https://github.com/SocialGouv/emjpm/issues/813)) ([150e78e](https://github.com/SocialGouv/emjpm/commit/150e78e))
+
+
+
+
+
 ## [24.3.4](https://github.com/SocialGouv/emjpm/compare/v24.3.3...v24.3.4) (2019-09-22)
 
 **Note:** Version bump only for package @emjpm/knex
