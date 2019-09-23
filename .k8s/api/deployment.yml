@@ -50,3 +50,28 @@ spec:
               value: "${PORT}"
             - name: NODE_ENV
               value: "${NODE_ENV}"
+            - name: SMTP_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: SMTP_HOST
+            - name: SMTP_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: SMTP_PORT
+            - name: SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: SMTP_USER
+            - name: SMTP_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: SMTP_PASS
+            - name: SMTP_FROM
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: SMTP_FROM
