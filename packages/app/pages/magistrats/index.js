@@ -21,9 +21,7 @@ const Mandataires = () => {
         <Card sx={cardStyle(isHidden)} mb="5">
           <Heading3 mb="2">{`Emjpm s'améliore`}</Heading3>
           <Text mb="1" lineHeight="1.5">
-            {`Nous vous proposons une nouvelle version de notre plateforme e-MJPM. Cette nouvelle
-            formule vous propose une nouvelle ergonomie ainsi que plusieurs nouvelles
-            fonctionnalités issues directement de vos retours.`}
+            {`Nous vous proposons une nouvelle version de la plateforme e-MJPM. Cette refonte vous propose une ergonomie plus adaptée aux usages ainsi que plusieurs nouvelles fonctionnalités issues directement de vos retours.`}
           </Text>
           <Text mb="1" lineHeight="1.5">
             {`La version du profil Magistrats
