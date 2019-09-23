@@ -51,7 +51,7 @@ function Footer() {
                 target="_blank"
                 href="https://docs.google.com/forms/d/1W8f9ySchjaJfAoYMVsYxjsk1PUAGoCX51Aykb_CUNXA/prefill"
               >
-                Proposez une fonctionnalités
+                Proposez une fonctionnalité
               </Link>
             </ListItem>
           </List>
