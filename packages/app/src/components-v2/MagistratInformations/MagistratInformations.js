@@ -5,14 +5,17 @@ import { Informations } from "./Informations";
 import { MAGISTRAT } from "./queries";
 
 const MagistratInformations = props => {
-  const { data, error, loading } = useQuery(MAGISTRAT);
+  const { id } = props;
+  const { data, error, loading } = useQuery(MAGISTRAT, {
+    variables: { userId: id }
+  });
 
   if (loading) {
-    return <div>loading</div>;
+    return <div>Chargement</div>;
   }
 
   if (error) {
-    return <div>error</div>;
+    return <div>Erreur</div>;
   }
 
   return <Informations {...props} userInformations={data} />;

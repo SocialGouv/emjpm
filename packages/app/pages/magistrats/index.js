@@ -5,6 +5,7 @@ import { Flex } from "rebass";
 import { withAuthSync } from "../../src/util/auth";
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratMandatairesList } from "../../src/components-v2/MagistratMandatairesList";
+import { UserInformations } from "../../src/components-v2/UserInformations";
 
 const Mandataires = () => {
   return (
@@ -17,7 +18,11 @@ const Mandataires = () => {
             flexWrap: "wrap"
           }}
         >
-          <MagistratMandatairesList />
+          <UserInformations
+            Component={props => {
+              return <MagistratMandatairesList {...props} />;
+            }}
+          />
         </Flex>
       </BoxWrapper>
     </LayoutMagistrat>
