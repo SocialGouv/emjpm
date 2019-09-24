@@ -48,7 +48,9 @@ router.post(
       .withMessage("Votre mot de passe doit ne doit pas être vide")
       .isLength({ min: 8 })
       .withMessage("Votre mot de passe doit être de 8 caractères minimum")
-      .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/
+      )
       .withMessage(
         "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spéciale"
       )
