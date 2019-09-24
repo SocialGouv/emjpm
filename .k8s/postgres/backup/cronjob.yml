@@ -9,10 +9,10 @@ metadata:
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
 spec:
-  schedule: "0 0 * * *"
+  schedule: "0 7 * * *"
   jobTemplate:
     spec:
-      activeDeadlineSeconds: 300
+      activeDeadlineSeconds: 1800
       template:
         spec:
           containers:
@@ -26,11 +26,11 @@ spec:
               args: ["/mnt/script/backup.sh"]
               resources:
                 requests:
-                  cpu: 250m
-                  memory: 256Mi
+                  cpu: 75m
+                  memory: 32Mi
                 limits:
-                  cpu: 500m
-                  memory: 256Mi
+                  cpu: 100m
+                  memory: 64Mi
               env:
                 - name: PGHOST
                   value: ${K8S_PROJECT}-postgres-${BRANCH_HASH}
@@ -55,7 +55,7 @@ spec:
               image: postgres:10
               resources:
                 requests:
-                  cpu: 100m
+                  cpu: 75m
                   memory: 32Mi
                 limits:
                   cpu: 100m
@@ -77,7 +77,7 @@ spec:
                 - /mnt/script/anonymous.sh
               resources:
                 requests:
-                  cpu: 100m
+                  cpu: 75m
                   memory: 32Mi
                 limits:
                   cpu: 100m
