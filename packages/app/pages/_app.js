@@ -13,8 +13,8 @@ import jwtDecode from "jwt-decode";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
 
 export const piwik = new ReactPiwik({
-  url: "stats.data.gouv.fr",
-  siteId: 52,
+  url: "matomo.tools.factory.social.gouv.fr",
+  siteId: 13,
   trackErrors: true
 });
 
