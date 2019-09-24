@@ -30,7 +30,6 @@ export const withAuthSync = WrappedComponent =>
 
     constructor(props) {
       super(props);
-
       this.syncLogout = this.syncLogout.bind(this);
     }
 
