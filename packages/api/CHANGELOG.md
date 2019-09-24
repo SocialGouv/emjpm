@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.5.0](https://github.com/SocialGouv/emjpm/compare/v24.4.3...v24.5.0) (2019-09-24)
+
+
+### Bug Fixes
+
+* **passwor-verification:** update authorized special char ([#827](https://github.com/SocialGouv/emjpm/issues/827)) ([235c7cf](https://github.com/SocialGouv/emjpm/commit/235c7cf))
+* **service:** create correct graph objects in signup ([#825](https://github.com/SocialGouv/emjpm/issues/825)) ([22d9363](https://github.com/SocialGouv/emjpm/commit/22d9363))
+* **signup-mail:** remove useless await ([#826](https://github.com/SocialGouv/emjpm/issues/826)) ([f3aeba3](https://github.com/SocialGouv/emjpm/commit/f3aeba3))
+
+
+
+
+
 ## [24.4.3](https://github.com/SocialGouv/emjpm/compare/v24.4.2...v24.4.3) (2019-09-23)
 
 **Note:** Version bump only for package @emjpm/api
