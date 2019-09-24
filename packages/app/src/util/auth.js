@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Router from "next/router";
 import nextCookie from "next-cookies";
 import cookie from "js-cookie";
-import { getUserFromCookie } from "./getUserFromCookie";
+
 export const logout = () => {
   cookie.remove("token");
   // to support logging out from all windows
@@ -19,17 +19,16 @@ export const withAuthSync = WrappedComponent =>
   class extends Component {
     static displayName = `withAuthSync(${getDisplayName(WrappedComponent)})`;
 
-    static async getInitialProps(ctx) {
-      const token = auth(ctx);
+    // static async getInitialProps(ctx) {
+    //   const token = auth(ctx);
 
-      const componentProps =
-        WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
-      return { ...componentProps, token };
-    }
+    //   const componentProps =
+    //     WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
+    //   return { ...componentProps, token };
+    // }
 
     constructor(props) {
       super(props);
-
       this.syncLogout = this.syncLogout.bind(this);
     }
 
@@ -50,28 +49,32 @@ export const withAuthSync = WrappedComponent =>
     }
 
     render() {
+      if (!this.props.token && typeof window !== "undefined") {
+        console.log("no token");
+        Router.push("/");
+        return null;
+      }
       return <WrappedComponent {...this.props} />;
     }
   };
 
 export const auth = ctx => {
   const { token } = nextCookie(ctx);
-  const user = getUserFromCookie(token);
 
   /*
    * This happens on server only, ctx.req is available means it's being
    * rendered on server. If we are on server and token is not available,
    * means user is not logged in.
    */
-  if ((ctx.req && !token) || !user["https://hasura.io/jwt/claims"]) {
-    ctx.res.writeHead(302, { Location: "/" });
+  if (ctx.req && !token) {
+    ctx.res.writeHead(302, { Location: "/login" });
     ctx.res.end();
     return;
   }
 
   // We already checked for server. This should only happen on client.
   if (!token) {
-    Router.push("/");
+    Router.push("/login");
   }
 
   return token;

@@ -52,7 +52,6 @@ class MyApp extends App {
     const currentUser = token ? jwtDecode(token) : null;
     const data = { currentUser: formatUserFromToken(currentUser) };
     apolloClient.cache.writeData({ data });
-
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
