@@ -92,20 +92,3 @@ function sentrySetup() {
     }
   }
 }
-
-// function piwikSetup() {
-//   const isBrowser = typeof document !== undefined;
-//   if (!isBrowser) {
-//     return;
-//   }
-
-//   ReactPiwik.push(["trackContentImpressionsWithinNode", document.getElementById("__next")]);
-
-//   ReactPiwik.push(["setCustomUrl", document.location.href]);
-//   ReactPiwik.push(["setDocumentTitle", document.title]);
-
-//   trackUser();
-
-//   ReactPiwik.push(["trackPageView"]);
-//   ReactPiwik.push(["enableLinkTracking"]);
-// }
