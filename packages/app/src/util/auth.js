@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Router from "next/router";
 import nextCookie from "next-cookies";
 import cookie from "js-cookie";
-
+import { getUserFromCookie } from "./getUserFromCookie";
 export const logout = () => {
   cookie.remove("token");
   // to support logging out from all windows
@@ -24,7 +24,6 @@ export const withAuthSync = WrappedComponent =>
 
       const componentProps =
         WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
-
       return { ...componentProps, token };
     }
 
@@ -57,21 +56,22 @@ export const withAuthSync = WrappedComponent =>
 
 export const auth = ctx => {
   const { token } = nextCookie(ctx);
+  const user = getUserFromCookie(token);
 
   /*
    * This happens on server only, ctx.req is available means it's being
    * rendered on server. If we are on server and token is not available,
    * means user is not logged in.
    */
-  if (ctx.req && !token) {
-    ctx.res.writeHead(302, { Location: "/login" });
+  if ((ctx.req && !token) || !user["https://hasura.io/jwt/claims"]) {
+    ctx.res.writeHead(302, { Location: "/" });
     ctx.res.end();
     return;
   }
 
   // We already checked for server. This should only happen on client.
   if (!token) {
-    Router.push("/login");
+    Router.push("/");
   }
 
   return token;
