@@ -37,16 +37,16 @@ const UserInformations = props => {
   const { data, loading, error } = useQuery(CURRENT_USER);
 
   if (loading) {
-    return <div>loading</div>;
+    return <div>Chargement</div>;
   }
   if (error) {
-    return <div>error</div>;
+    return <div>Erreur</div>;
   }
 
   if (data && data.currentUser) {
     return <CurrentUser Component={Component} userData={data} />;
   } else {
-    return <div>loading</div>;
+    return <div>Chargement</div>;
   }
 };
 
