@@ -17,7 +17,7 @@ class ServiceTis extends Model {
       type: "object",
       properties: {
         id: { type: "integer" },
-        antenne_id: { type: "integer" },
+        service_id: { type: "integer" },
         ti_id: { type: "integer" }
       }
     };

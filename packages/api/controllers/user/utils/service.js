@@ -48,7 +48,7 @@ exports.createServiceAntenne = (body, service_id) =>
     service_id: service_id
   });
 
-exports.createServiceAntenneTis = (body, serviceAntenne_id) => {
+exports.createServiceTis = (body, service_id) => {
   const { tis } = body;
   if (!tis || tis.length === 0) {
     return true;
@@ -56,9 +56,9 @@ exports.createServiceAntenneTis = (body, serviceAntenne_id) => {
   Promise.all(
     tis.map(ti_id =>
       ServiceTis.query()
-        .allowInsert("[antenne_id, ti_id]")
+        .allowInsert("[service_id, ti_id]")
         .insert({
-          antenne_id: serviceAntenne_id,
+          service_id: service_id,
           ti_id
         })
     )
@@ -66,7 +66,10 @@ exports.createServiceAntenneTis = (body, serviceAntenne_id) => {
 };
 
 exports.createUserAntenne = async (userId, antennes) => {
-  if (antennes.length > 0 && userId) {
+  if (antennes.length == 0 || !userId) {
+    return true;
+  }
+  Promise.all(
     antennes.map(antenne => {
       return UserAntenne.query()
         .allowInsert("[user_id,antenne_id]")
@@ -74,8 +77,8 @@ exports.createUserAntenne = async (userId, antennes) => {
           user_id: userId,
           antenne_id: antenne.id
         });
-    });
-  }
+    })
+  );
 };
 
 exports.createServiceAdmin = async (userId, serviceId) => {
