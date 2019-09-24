@@ -33,7 +33,7 @@ exports.createService = async body => {
     });
 };
 
-exports.createServiceAntenne = (body, service_id) =>
+exports.createServiceAntenne = async (body, service_id) =>
   ServiceAntenne.query().insert({
     headquarters: true,
     name: body.etablissement,
@@ -48,7 +48,7 @@ exports.createServiceAntenne = (body, service_id) =>
     service_id: service_id
   });
 
-exports.createServiceTis = (body, service_id) => {
+exports.createServiceTis = async (body, service_id) => {
   const { tis } = body;
   if (!tis || tis.length === 0) {
     return true;

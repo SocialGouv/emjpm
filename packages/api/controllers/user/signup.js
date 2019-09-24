@@ -138,7 +138,7 @@ const postSignup = async (req, res) => {
       case "individuel":
       case "preprose":
         await createMandataire(req.body, user);
-        await createUserTis(req.body, user.id);
+        createUserTis(req.body, user.id);
         break;
       case "service": {
         const service = await createService(req.body);
@@ -160,14 +160,14 @@ const postSignup = async (req, res) => {
         break;
       case "direction": {
         await createRole(user.id, directionType);
-        await createDirection(req.body, user.id);
+        createDirection(req.body, user.id);
         break;
       }
       default:
         return;
     }
     const tiNames = await getTisNames(tis);
-    await inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
+    inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
     return res.json({ success: true });
   } catch (err) {
     errorHandler(err, res);
