@@ -15,6 +15,7 @@ const LinkButtonStyle = (isActive, disabled) => {
     fontWeight: 500,
     lineHeight: "1.2",
     outline: "none",
+    display: "inline-block",
     transition: "150ms ease-in-out opacity",
     opacity: isActive ? (disabled ? 0.3 : 0.6) : 1,
     "&:hover": {

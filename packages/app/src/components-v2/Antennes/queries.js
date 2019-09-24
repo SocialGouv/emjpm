@@ -9,6 +9,7 @@ export const ANTENNE = gql`
           count
         }
       }
+      id
       mesures_max
       mesures_in_progress
       mesures_awaiting

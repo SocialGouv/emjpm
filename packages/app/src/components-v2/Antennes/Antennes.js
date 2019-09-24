@@ -1,9 +1,10 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Box } from "rebass";
-import { Card, Text, BoxWrapper, Spinner, Heading4 } from "@socialgouv/emjpm-ui-core";
-
+import { Card, BoxWrapper, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Antenne } from "@socialgouv/emjpm-ui-components";
 import { ANTENNE } from "./queries";
+import { LinkButton } from "../Commons";
 
 import { AntennesStyle } from "./style";
 
@@ -29,17 +30,21 @@ const Antennes = props => {
   }
 
   const { service_antenne } = data;
-  console.log(service_antenne);
+
   return (
     <BoxWrapper>
       <Box sx={AntennesStyle} {...props}>
         {service_antenne.map(antenne => {
+          antenne = { ...antenne, preferences: [] };
           return (
-            <Card key={antenne.id}>
-              <Heading4 sx={{ textAlign: "center" }}>{antenne.name}</Heading4>
-              <Text>{antenne.mesures_max} mesures souhaitées</Text>
-              <Text>{antenne.mesures_in_progress} mesures en cours</Text>
-            </Card>
+            <Antenne
+              sx={{ p: "3", minHeight: "300px" }}
+              key={antenne.id}
+              antenne={antenne}
+              linkText="Voir l'antenne"
+              href={`/services/antennes/${antenne.id}`}
+              Link={LinkButton}
+            />
           );
         })}
       </Box>
