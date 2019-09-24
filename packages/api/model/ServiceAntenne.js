@@ -53,7 +53,6 @@ class ServiceAntenne extends Model {
 
   static get relationMappings() {
     const { Service } = require("./Service");
-    const { Mandataire } = require("./Mandataire");
 
     return {
       service: {
