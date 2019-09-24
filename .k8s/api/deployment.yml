@@ -75,3 +75,10 @@ spec:
                 secretKeyRef:
                   name: emjpm-secret
                   key: SMTP_FROM
+            - name: SENTRY_PUBLIC_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: SENTRY_PUBLIC_DSN
+            - name: SENTRY_ENV
+              value: "${NODE_ENV}"

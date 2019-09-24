@@ -50,3 +50,8 @@ spec:
               value: "${PORT}"
             - name: NODE_ENV
               value: "${NODE_ENV}"
+            - name: SENTRY_PUBLIC_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: SENTRY_PUBLIC_DSN
