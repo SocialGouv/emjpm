@@ -13,7 +13,7 @@ const { getTisNames } = require("./utils/tis");
 const {
   createService,
   createServiceAntenne,
-  createServiceAntenneTis,
+  createServiceTis,
   createUserAntenne,
   createServiceAdmin
 } = require("./utils/service");
@@ -99,11 +99,6 @@ const createRole = async (userId, type) => {
   }
 };
 
-const updateUserService = (service, user) =>
-  User.query()
-    .update({ service_id: service.id })
-    .where("id", user.id);
-
 /**
  * POST /signup
  * Create a new local account
@@ -150,13 +145,11 @@ const postSignup = async (req, res) => {
         const serviceAntenne = await createServiceAntenne(req.body, service.id);
         await createUserAntenne(user.id, [{ id: serviceAntenne.id }]);
         await createServiceAdmin(user.id, service.id);
-        await createServiceAntenneTis(req.body, serviceAntenne.id);
-        await updateUserService(service, user);
+        await createServiceTis(req.body, service.id);
         break;
       }
       case "serviceAntenne": {
         await createUserAntenne(user.id, req.body.antennes);
-        await updateUserService(req.body.serviceId, user);
         break;
       }
       case "ti":
