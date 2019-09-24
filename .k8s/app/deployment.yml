@@ -48,3 +48,8 @@ spec:
               value: "//${API_HOST}"
             - name: GRAPHQL_SERVER_URI
               value: "//${HASURA_HOST}/v1/graphql"
+            - name: SENTRY_PUBLIC_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: SENTRY_PUBLIC_DSN
