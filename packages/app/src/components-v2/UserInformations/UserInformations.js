@@ -11,8 +11,8 @@ const QUERY_TYPE = {
 
 const CurrentUser = props => {
   const { Component, userData } = props;
-  const type = userData && userData.currentUser ? userData.currentUser.role : "direction";
-  const userId = userData && userData.currentUser ? userData.currentUser.id : 42;
+  const type = userData && userData.currentUser ? userData.currentUser.role : null;
+  const userId = userData && userData.currentUser ? userData.currentUser.id : null;
 
   const { data, error, loading } = useQuery(QUERY_TYPE[type], {
     variables: {
@@ -37,13 +37,17 @@ const UserInformations = props => {
   const { data, loading, error } = useQuery(CURRENT_USER);
 
   if (loading) {
-    return <div>loading</div>;
+    return <div>Chargement</div>;
   }
   if (error) {
-    return <div>error</div>;
+    return <div>Erreur</div>;
   }
 
-  return <CurrentUser Component={Component} userData={data} />;
+  if (data && data.currentUser) {
+    return <CurrentUser Component={Component} userData={data} />;
+  } else {
+    return <div>Chargement</div>;
+  }
 };
 
 export { UserInformations };

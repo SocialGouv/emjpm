@@ -40,8 +40,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:80
-    volumes:
-      - ./nginx-logs:/var/log/nginx
 
   graphql-engine:
     depends_on:

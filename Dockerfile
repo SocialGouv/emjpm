@@ -16,7 +16,7 @@ COPY ./yarn.lock /app/yarn.lock
 
 WORKDIR /app
 
-RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
+RUN yarn --frozen-lockfile
 
 COPY ./packages/api /app/packages/api
 COPY ./packages/app /app/packages/app
@@ -25,12 +25,6 @@ COPY ./packages/knex /app/packages/knex
 
 # NOTE(douglasduteil): manual node_modules transpilation
 RUN sh ./packages/app/scripts/transpile_modules.sh
-
-# NOTE(douglasduteil): add frontend app environment variables
-# The frontend app needs to be built with %%ENV_VALUE%% so we can switch endpoint at runtime
-ARG API_URL=${API_URL:-%%API_URL%%}
-ARG SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN:-%%SENTRY_PUBLIC_DSN%%}
-ARG GRAPHQL_SERVER_URI=${GRAPHQL_SERVER_URI:-%%GRAPHQL_SERVER_URI%%}
 
 RUN yarn build --stream
 
