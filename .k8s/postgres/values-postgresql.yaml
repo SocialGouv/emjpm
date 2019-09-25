@@ -297,11 +297,11 @@ slave:
 ##
 resources:
   requests:
+    cpu: 375m
     memory: 128Mi
-    cpu: 250m
   limits:
-    memory: 256Mi
     cpu: 500m
+    memory: 256Mi
 
 networkPolicy:
   ## Enable creation of NetworkPolicy resources.
