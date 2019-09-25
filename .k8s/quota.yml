@@ -15,12 +15,13 @@ spec:
     # + 500m // graphql-server
     # + 550m // hasura
     # +  50m // hasura (check-db-ready)
+    # + 100m // metabase
     # + 500m // postgres
     # + 100m // backup cronjob (anonymize)
     # + 100m // backup cronjob (postgres)
     # + 100m // backup cronjob (backup)
     # ======
-    #  3200m    ~3.2 CPU x2
+    #  3300m    ~3.3 CPU x2
     limits.cpu: 7000m
 
     #   256Mi // api
@@ -30,10 +31,11 @@ spec:
     # + 256Mi // graphql-server
     # + 256Mi // hasura
     # +  32Mi // hasura (check-db-ready)
+    # + 128Mi // metabase
     # + 256Mi // postgres
     # +  64Mi // backup cronjob (anonymize)
     # +  64Mi // backup cronjob (postgres)
     # +  64Mi // backup cronjob (backup)
     # =======
-    #  1792Mi      1.75 Gi x2
+    #  1984Mi      1.75 Gi x2
     limits.memory: 4Gi
