@@ -52,7 +52,7 @@ const USERS = [
     password: "ti1",
     prenom: "Pierre",
     type: "ti",
-    tis: [{ ti_id: 22 }],
+    tis: [40],
     username: "ti1"
   },
   {
@@ -67,7 +67,7 @@ const USERS = [
     prenom: "Jack",
     password: "ti2",
     type: "ti",
-    tis: [{ ti_id: 22 }],
+    tis: [40],
     active: false
   },
   {
@@ -84,7 +84,7 @@ const USERS = [
     username: "titest",
     password: "titest",
     type: "ti",
-    tis: [{ ti_id: 22 }],
+    tis: [40],
     //reset_password_token: "LpWpzK4Jla9I87Aq",
     active: false,
     cabinet: "6D",
@@ -96,7 +96,7 @@ const USERS = [
     username: "tiToken",
     password: "tiToken",
     type: "ti",
-    tis: [{ ti_id: 22 }],
+    tis: [40],
     cabinet: "6D",
     reset_password_token: "LpWpzK4Jla9I87Aqtry",
     email: "test3@ti.com",
