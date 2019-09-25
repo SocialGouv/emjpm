@@ -9,7 +9,7 @@ import { withApolloClient } from "../src/lib/apollo";
 import { ThemeProvider } from "theme-ui";
 import theme from "@socialgouv/emjpm-ui-theme";
 import jwtDecode from "jwt-decode";
-
+import { trackUser } from "../src/piwik";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
 
 const {
@@ -45,6 +45,7 @@ class MyApp extends App {
   }
 
   componentDidMount() {
+    piwikSetup();
     sentrySetup();
   }
 
@@ -91,4 +92,21 @@ function sentrySetup() {
       /* eslint-enable no-console */
     }
   }
+}
+
+function piwikSetup() {
+  const isBrowser = typeof document !== undefined;
+  if (!isBrowser) {
+    return;
+  }
+
+  ReactPiwik.push(["trackContentImpressionsWithinNode", document.getElementById("__next")]);
+
+  ReactPiwik.push(["setCustomUrl", document.location.href]);
+  ReactPiwik.push(["setDocumentTitle", document.title]);
+
+  trackUser();
+
+  ReactPiwik.push(["trackPageView"]);
+  ReactPiwik.push(["enableLinkTracking"]);
 }
