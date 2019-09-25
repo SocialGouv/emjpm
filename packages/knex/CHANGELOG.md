@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.0.0](https://github.com/SocialGouv/emjpm/compare/v24.5.0...v25.0.0) (2019-09-25)
+
+
+### Bug Fixes
+
+* **knex:** use postgres user locally ([#843](https://github.com/SocialGouv/emjpm/issues/843)) ([de8b778](https://github.com/SocialGouv/emjpm/commit/de8b778))
+
+
+### Code Refactoring
+
+* **app:** use next server instead of export ([#839](https://github.com/SocialGouv/emjpm/issues/839)) ([3439ec7](https://github.com/SocialGouv/emjpm/commit/3439ec7))
+
+
+### BREAKING CHANGES
+
+* **app:** refactor(app): use next server instead of export 
+  - The frontend is now served by a node.js/next server instead of nginx
+
+
+
+
+
 # [24.5.0](https://github.com/SocialGouv/emjpm/compare/v24.4.3...v24.5.0) (2019-09-24)
 
 **Note:** Version bump only for package @emjpm/knex
