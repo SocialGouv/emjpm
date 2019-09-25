@@ -54,9 +54,13 @@ include:
     - kubectl create namespace ${K8S_NAMESPACE}
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
     - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
-    - kubectl delete resourcequota -n ${K8S_NAMESPACE} -l "cattle.io/creator=norman,resourcequota.management.cattle.io/default-resource-quota=true"
+    #
     - envsubst < ./.k8s/quota.yml > ./quota.yml
     - kubectl apply -f ./quota.yml -n ${K8S_NAMESPACE}
+    # Remove the default- quota
+    - kubectl get resourcequota -n ${K8S_NAMESPACE}
+    - kubectl delete $(kubectl get -n ${K8S_NAMESPACE} resourcequota --output=name | grep default-)
+    #
     # Create secrets
     - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
     - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
