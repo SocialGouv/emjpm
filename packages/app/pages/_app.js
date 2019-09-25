@@ -5,24 +5,22 @@ import getConfig from "next/config";
 import React from "react";
 import { ApolloProvider } from "react-apollo";
 import ReactPiwik from "react-piwik";
+import { piwikSetup } from "../src/piwik";
 import { withApolloClient } from "../src/lib/apollo";
 import { ThemeProvider } from "theme-ui";
 import theme from "@socialgouv/emjpm-ui-theme";
 import jwtDecode from "jwt-decode";
-import { trackUser } from "../src/piwik";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
 
 const {
-  publicRuntimeConfig: { SENTRY_PUBLIC_DSN, NODE_ENV }
+  publicRuntimeConfig: { SENTRY_PUBLIC_DSN }
 } = getConfig();
 
-if (NODE_ENV !== "development") {
-  new ReactPiwik({
-    url: "matomo.tools.factory.social.gouv.fr",
-    siteId: 13,
-    trackErrors: true
-  });
-}
+new ReactPiwik({
+  url: "matomo.tools.factory.social.gouv.fr",
+  siteId: 13,
+  trackErrors: true
+});
 
 class MyApp extends App {
   static async getInitialProps(appContext) {
@@ -92,21 +90,4 @@ function sentrySetup() {
       /* eslint-enable no-console */
     }
   }
-}
-
-function piwikSetup() {
-  const isBrowser = typeof document !== undefined;
-  if (!isBrowser) {
-    return;
-  }
-
-  ReactPiwik.push(["trackContentImpressionsWithinNode", document.getElementById("__next")]);
-
-  ReactPiwik.push(["setCustomUrl", document.location.href]);
-  ReactPiwik.push(["setDocumentTitle", document.title]);
-
-  trackUser();
-
-  ReactPiwik.push(["trackPageView"]);
-  ReactPiwik.push(["enableLinkTracking"]);
 }

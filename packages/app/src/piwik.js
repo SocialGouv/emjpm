@@ -41,4 +41,21 @@ function getJWTPayloadFormLocalStorageIdToken() {
   }
 }
 
-export default ReactPiwik;
+const piwikSetup = () => {
+  const isBrowser = typeof window !== undefined;
+  if (!isBrowser) {
+    return;
+  }
+
+  ReactPiwik.push(["trackContentImpressionsWithinNode", document.getElementById("__next")]);
+
+  ReactPiwik.push(["setCustomUrl", document.location.href]);
+  ReactPiwik.push(["setDocumentTitle", document.title]);
+
+  trackUser();
+
+  ReactPiwik.push(["trackPageView"]);
+  ReactPiwik.push(["enableLinkTracking"]);
+};
+
+export { piwikSetup, ReactPiwik as default };
