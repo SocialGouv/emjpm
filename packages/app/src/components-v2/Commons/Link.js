@@ -25,7 +25,7 @@ const Link = props => {
     );
   }
   return (
-    <NextLink {...props}>
+    <NextLink href={props.href}>
       <RebassLink sx={LinkStyle()} {...props}>
         {props.children}
       </RebassLink>
