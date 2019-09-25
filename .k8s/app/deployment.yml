@@ -25,14 +25,14 @@ spec:
             httpGet:
               path: /
               port: ${PORT}
-            initialDelaySeconds: 3
-            periodSeconds: 5
+            initialDelaySeconds: 30
+            periodSeconds: 30
           readinessProbe:
             httpGet:
               path: /
               port: ${PORT}
-            initialDelaySeconds: 3
-            periodSeconds: 5
+            initialDelaySeconds: 30
+            periodSeconds: 30
           resources:
             requests:
               cpu: 375m
