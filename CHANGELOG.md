@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.0.0](https://github.com/SocialGouv/emjpm/compare/v24.5.0...v25.0.0) (2019-09-25)
+
+
+### Bug Fixes
+
+* **k8s:** add APP_URL environment variable ([#842](https://github.com/SocialGouv/emjpm/issues/842)) ([e42bb4c](https://github.com/SocialGouv/emjpm/commit/e42bb4c))
+* **k8s:** use secure SMTP port ([#841](https://github.com/SocialGouv/emjpm/issues/841)) ([685235e](https://github.com/SocialGouv/emjpm/commit/685235e))
+* **knex:** use postgres user locally ([#843](https://github.com/SocialGouv/emjpm/issues/843)) ([de8b778](https://github.com/SocialGouv/emjpm/commit/de8b778))
+* **matomo-local:** dont load react piwik if dev ([#837](https://github.com/SocialGouv/emjpm/issues/837)) ([053fbba](https://github.com/SocialGouv/emjpm/commit/053fbba))
+* **next-link:** add onyl the target as props ([#838](https://github.com/SocialGouv/emjpm/issues/838)) ([8f41649](https://github.com/SocialGouv/emjpm/commit/8f41649))
+
+
+### Code Refactoring
+
+* **app:** use next server instead of export ([#839](https://github.com/SocialGouv/emjpm/issues/839)) ([3439ec7](https://github.com/SocialGouv/emjpm/commit/3439ec7))
+
+
+### Features
+
+* **k8s:** recalcul quota ([#834](https://github.com/SocialGouv/emjpm/issues/834)) ([d6238a4](https://github.com/SocialGouv/emjpm/commit/d6238a4))
+
+
+### BREAKING CHANGES
+
+* **app:** refactor(app): use next server instead of export 
+  - The frontend is now served by a node.js/next server instead of nginx
+
+
+
+
+
 # [24.5.0](https://github.com/SocialGouv/emjpm/compare/v24.4.3...v24.5.0) (2019-09-24)
 
 
