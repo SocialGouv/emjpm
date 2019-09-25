@@ -37,7 +37,7 @@ export const MagistratChoose = props => {
                   annee: values.annee,
                   numero_rg: values.numero_rg
                 },
-                refetchQueries: ["mesures", "view_mesure_gestionnaire"]
+                refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"]
               });
               setSubmitting(false);
               setPanelType(null);
