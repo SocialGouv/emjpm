@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Just in case...
-sleep 10s
+sleep 60s
 
 UNSAFE_DUMP_FILE="/mnt/data/$(cat /mnt/data/LATEST)"
 OUTPUT_FILE="/mnt/anonymous/$(cat /mnt/data/LATEST)"
