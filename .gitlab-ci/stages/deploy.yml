@@ -62,6 +62,7 @@ include:
     - kubectl delete $(kubectl get -n ${K8S_NAMESPACE} resourcequota --output=name | grep default-)
     #
     # Create secrets
+    - export APP_URL=$(echo $FRONTEND_URL | base64)
     - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
     - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
 
