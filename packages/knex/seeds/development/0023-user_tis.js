@@ -42,5 +42,12 @@ exports.seed = function(knex) {
         ti_id: 1,
         user_id: 32
       });
+    })
+    .then(function() {
+      // Inserts seed entries one by one in series
+      return knex("user_tis").insert({
+        ti_id: 1,
+        user_id: 32
+      });
     });
 };
