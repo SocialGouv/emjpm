@@ -7,6 +7,7 @@ WORKDIR /app
 
 COPY --from=emjpm-base-image /app/packages/app/.next /app/.next
 COPY --from=emjpm-base-image /app/packages/app/static /app/static
+COPY --from=emjpm-base-image /app/packages/app/next.config.js /app/next.config.js
 COPY --from=emjpm-base-image /app/packages/app/package.json /app/package.json
 COPY --from=emjpm-base-image /app/node_modules /app/node_modules
 
