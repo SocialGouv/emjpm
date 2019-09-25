@@ -209,7 +209,7 @@ Deploy graphql-server (incubateur):
   variables:
     <<: *deploy_stage_variables
     CONTEXT: metabase
-    PORT: 80
+    PORT: 3000
   after_script:
     # NOTE(douglasduteil): re-run env.sh
     # Because the `after_script` runs in a separated shell context.
