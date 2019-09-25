@@ -25,7 +25,6 @@ const MagistratMandatairesList = props => {
   const {
     magistrat: { ti_id }
   } = props;
-
   const [selectedType, setType] = useState(false);
   const [selectedCapacity, setCapacity] = useState({
     label: "Du plus disponible au moins disponible",

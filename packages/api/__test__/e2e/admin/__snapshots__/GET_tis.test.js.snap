@@ -23,7 +23,7 @@ Array [
     "type": "ti",
   },
   Object {
-    "active": false,
+    "active": true,
     "cabinet": "6D",
     "email": "test@ti.com",
     "id": 32,
