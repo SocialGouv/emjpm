@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/browser";
 // all global css
-import App, { Container } from "next/app";
+import App from "next/app";
 import getConfig from "next/config";
 import React from "react";
 import { ApolloProvider } from "react-apollo";
@@ -12,15 +12,17 @@ import jwtDecode from "jwt-decode";
 
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
 
-export const piwik = new ReactPiwik({
-  url: "matomo.tools.factory.social.gouv.fr",
-  siteId: 13,
-  trackErrors: true
-});
-
 const {
-  publicRuntimeConfig: { SENTRY_PUBLIC_DSN }
+  publicRuntimeConfig: { SENTRY_PUBLIC_DSN, NODE_ENV }
 } = getConfig();
+
+if (NODE_ENV !== "development") {
+  new ReactPiwik({
+    url: "matomo.tools.factory.social.gouv.fr",
+    siteId: 13,
+    trackErrors: true
+  });
+}
 
 class MyApp extends App {
   static async getInitialProps(appContext) {
@@ -54,13 +56,11 @@ class MyApp extends App {
     apolloClient.cache.writeData({ data });
 
     return (
-      <Container>
-        <ApolloProvider client={apolloClient}>
-          <ThemeProvider theme={theme}>
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </ApolloProvider>
-      </Container>
+      <ApolloProvider client={apolloClient}>
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
+      </ApolloProvider>
     );
   }
 }
@@ -92,20 +92,3 @@ function sentrySetup() {
     }
   }
 }
-
-// function piwikSetup() {
-//   const isBrowser = typeof document !== undefined;
-//   if (!isBrowser) {
-//     return;
-//   }
-
-//   ReactPiwik.push(["trackContentImpressionsWithinNode", document.getElementById("__next")]);
-
-//   ReactPiwik.push(["setCustomUrl", document.location.href]);
-//   ReactPiwik.push(["setDocumentTitle", document.title]);
-
-//   trackUser();
-
-//   ReactPiwik.push(["trackPageView"]);
-//   ReactPiwik.push(["enableLinkTracking"]);
-// }
