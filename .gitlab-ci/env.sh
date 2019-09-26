@@ -60,9 +60,32 @@ export HASURA_URL="https://${HASURA_HOST}"
 
 #
 
-printenv | grep -E \
-  "BRANCH_HASH|BRANCH_NAME|COMMIT|COMMIT_TAG|ENVIRONMENT|HASH_SIZE|JOB_ID" \
-  | sort
-printenv | grep -E \
-  "API_HOST|API_URL|CERTIFICATE_NAME|FRONTEND_HOST|FRONTEND_URL|GQL_SERVER_HOST|HASURA_HOST|POSTGRES_HOST" \
+printenv | grep \
+  -e BRANCH_HASH \
+  -e BRANCH_NAME \
+  -e COMMIT \
+  -e COMMIT_TAG \
+  -e DOMAIN \
+  -e ENVIRONMENT \
+  -e HASH_SIZE \
+  -e IMAGE_TAG \
+  -e JOB_ID \
+  -e K8S_NAMESPACE \
+  -e K8S_PROJECT \
+  -e NODE_ENV \
+  -e PROJECT_PATH \
+  -e REGISTRY \
+  -e REGISTRY \
+  \
+  -e API_URL \
+  -e CERTIFICATE_NAME \
+  -e FRONTEND_HOST \
+  -e FRONTEND_URL \
+  -e GQL_SERVER_HOST \
+  -e HASURA_HOST \
+  -e POSTGRES_HOST \
+  \
+  -e CONTEXT \
+  -e PORT \
+  -e IMAGE_NAME \
   | sort
