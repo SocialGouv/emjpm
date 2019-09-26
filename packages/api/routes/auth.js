@@ -96,14 +96,14 @@ router.post("/forgot_password", (req, res, next) => {
       }
       return updateResetPassword(user.id, token, "24 hours").then(() => user);
     })
-    .then(user =>
+    .then(user => {
+      res.status(200).json();
       resetPasswordEmail(
         user,
         email,
         `${process.env.APP_URL}/reset-password?token=${token}`
-      )
-    )
-    .then(() => res.status(200).json())
+      );
+    })
     .catch(next);
 });
 
@@ -155,14 +155,12 @@ router.post("/reset_password", (req, res, next) => {
           reset_password_token: null,
           reset_password_expires: null
         }).then(() => {
+          res.status(200).json();
           return confirmationPasswordEmail(user.email);
         });
       } else {
         throw createError.UnprocessableEntity("Not equal passwords.");
       }
-    })
-    .then(function() {
-      res.status(200).json();
     })
     .catch(next);
 });
