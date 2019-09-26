@@ -4,9 +4,7 @@ import nextCookie from "next-cookies";
 import cookie from "js-cookie";
 
 export const logout = () => {
-  console.log("logout");
   Router.push("/error", "/login");
-  console.log(Router);
   cookie.remove("token");
   // to support logging out from all windows
   window.localStorage.setItem("logout", Date.now());
