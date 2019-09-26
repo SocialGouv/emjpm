@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.1.0](https://github.com/SocialGouv/emjpm/compare/v25.0.1...v25.1.0) (2019-09-26)
+
+
+### Bug Fixes
+
+* **knex:** use emjpm user for knex ([#855](https://github.com/SocialGouv/emjpm/issues/855)) ([4927a2f](https://github.com/SocialGouv/emjpm/commit/4927a2f))
+
+
+### Features
+
+* **api:** introduce env configuration ([#854](https://github.com/SocialGouv/emjpm/issues/854)) ([1fba29c](https://github.com/SocialGouv/emjpm/commit/1fba29c))
+
+
+
+
+
 ## [25.0.1](https://github.com/SocialGouv/emjpm/compare/v25.0.0...v25.0.1) (2019-09-26)
 
 
