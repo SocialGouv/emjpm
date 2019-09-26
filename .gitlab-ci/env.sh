@@ -85,6 +85,8 @@ printenv | grep \
   -e FRONTEND_URL \
   -e GQL_SERVER_HOST \
   -e HASURA_HOST \
+  -e METABASE_HOST \
+  -e METABASE_URL \
   -e POSTGRES_HOST \
   \
   -e CONTEXT \
