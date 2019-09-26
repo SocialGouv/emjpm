@@ -16,11 +16,12 @@ const RESULT_PER_PAGE = 20;
 const MagistratMesures = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const { mesureType, mesureStatus } = useContext(FiltersContext);
-  const { data, error, loading, fetchMore, refetch } = useQuery(MESURES, {
+  const { data, error, loading, fetchMore } = useQuery(MESURES, {
     variables: {
       type: mesureType ? mesureType.value : undefined,
       status: mesureStatus ? mesureStatus.value : undefined
-    }
+    },
+    fetchPolicy: "network-only"
   });
 
   if (loading) {
@@ -31,12 +32,8 @@ const MagistratMesures = () => {
     return <div>error</div>;
   }
 
-  // Sick hack trick for cache problem
-  refetch();
-
   const { count } = data.mesures_aggregate.aggregate;
   const mesures = formatMesureList(data.mesures);
-
   return (
     <MesureContextProvider>
       <Box sx={MagistratListStyle}>
