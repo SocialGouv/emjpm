@@ -123,6 +123,20 @@ class ForgotPassword extends React.Component {
     }
   }
 
+  constructor() {
+    super();
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  handleOpenModal(content) {
+    this.setState({ showModal: true, modalContent: content });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+
   onSubmit = ({ formData }) => {
     this.setState(
       {
@@ -136,18 +150,17 @@ class ForgotPassword extends React.Component {
         doForgotPassword(formData)
           .then(() => {
             this.handleOpenModal("Un email vient de vous être envoyé");
-            Router.push("/login");
             this.setState({
               status: "success",
               error: null
             });
           })
-          .catch(() => {
+          .catch(() =>
             this.setState({
               status: "error",
               error: "Impossible de trouver l'email"
-            });
-          });
+            })
+          );
       }
     );
   };
@@ -164,7 +177,10 @@ class ForgotPassword extends React.Component {
         >
           <h2>Attention</h2>
           <p>{modalContent}</p>
-          <button className="close-modal" onClick={this.handleCloseModal}>
+          <button className="btn btn-success" onClick={() => Router.push("/login")}>
+            Revenir à la page de connexion
+          </button>
+          <button className="close-modal" onClick={() => Router.push("/login")}>
             Close Modal
           </button>
         </Modal>
