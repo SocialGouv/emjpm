@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.0.1](https://github.com/SocialGouv/emjpm/compare/v25.0.0...v25.0.1) (2019-09-26)
+
+
+### Bug Fixes
+
+* **reset-password:** fix pasword reset and add non blocking mail ([#853](https://github.com/SocialGouv/emjpm/issues/853)) ([9118a64](https://github.com/SocialGouv/emjpm/commit/9118a64))
+
+
+
+
+
 # [25.0.0](https://github.com/SocialGouv/emjpm/compare/v24.5.0...v25.0.0) (2019-09-25)
 
 
