@@ -34,6 +34,7 @@
     "bootstrap": "^4.3.1",
     "cookie": "^0.4.0",
     "date-fns": "^1.30.1",
+    "dotenv": "^8.1.0",
     "eslint-plugin-jest": "^22.16.0",
     "formik": "^1.5.8",
     "fuse.js": "^3.4.4",
