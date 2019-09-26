@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.0.1](https://github.com/SocialGouv/emjpm/compare/v25.0.0...v25.0.1) (2019-09-26)
+
+
+### Bug Fixes
+
+* service name ([#847](https://github.com/SocialGouv/emjpm/issues/847)) ([1514658](https://github.com/SocialGouv/emjpm/commit/1514658))
+* **choose-mandataire:** add require on all field ([#850](https://github.com/SocialGouv/emjpm/issues/850)) ([de8ad30](https://github.com/SocialGouv/emjpm/commit/de8ad30))
+* **forgot-password:** fix forgot password error ([#849](https://github.com/SocialGouv/emjpm/issues/849)) ([ab7b517](https://github.com/SocialGouv/emjpm/commit/ab7b517))
+* **hotjar:** add the right id ([#846](https://github.com/SocialGouv/emjpm/issues/846)) ([28206a9](https://github.com/SocialGouv/emjpm/commit/28206a9))
+* **reset-password:** fix pasword reset and add non blocking mail ([#853](https://github.com/SocialGouv/emjpm/issues/853)) ([9118a64](https://github.com/SocialGouv/emjpm/commit/9118a64))
+* **service-name:** fix service name ([#845](https://github.com/SocialGouv/emjpm/issues/845)) ([e6c6017](https://github.com/SocialGouv/emjpm/commit/e6c6017))
+* **trailing-slash:** remove trailing slash ([#848](https://github.com/SocialGouv/emjpm/issues/848)) ([90fa17b](https://github.com/SocialGouv/emjpm/commit/90fa17b))
+
+
+
+
+
 # [25.0.0](https://github.com/SocialGouv/emjpm/compare/v24.5.0...v25.0.0) (2019-09-25)
 
 
