@@ -7,6 +7,7 @@ import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratFilters } from "../../src/components-v2/MagistratFilters";
 import { FiltersContextProvider } from "../../src/components-v2/MagistratFilters/context";
 import { MagistratMesures } from "../../src/components-v2/MagistratMesures";
+import { UserInformations } from "../../src/components-v2/UserInformations";
 
 const Mesures = () => {
   return (
@@ -21,7 +22,11 @@ const Mesures = () => {
               flexWrap: "wrap"
             }}
           >
-            <MagistratMesures />
+            <UserInformations
+              Component={props => {
+                return <MagistratMesures {...props} />;
+              }}
+            />
           </Flex>
         </BoxWrapper>
       </LayoutMagistrat>
