@@ -36,7 +36,7 @@ export const formatMandataire = (
       email: service.email ? service.email : "non renseigné",
       etablissement: service.etablissement ? service.etablissement : "non renseigné",
       nom: service.etablissement ? service.etablissement : service.nom,
-      prenom: service.etablissement ? service.etablissement : service.prenom,
+      prenom: service.etablissement ? null : service.prenom,
       telephone: service.telephone ? service.telephone : "non renseigné",
       adresse: service.adresse ? capitalize(service.adresse) : "non renseigné",
       codePostal: service.code_postal ? capitalize(service.code_postal) : "non renseigné",
