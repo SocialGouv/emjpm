@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.1.1](https://github.com/SocialGouv/emjpm/compare/v25.1.0...v25.1.1) (2019-09-26)
+
+
+### Bug Fixes
+
+* **mesure-eteinte:** update package ([#857](https://github.com/SocialGouv/emjpm/issues/857)) ([fec415a](https://github.com/SocialGouv/emjpm/commit/fec415a))
+* **mesure-magistrats:** fix magistrats mesure fetching policy ([#856](https://github.com/SocialGouv/emjpm/issues/856)) ([be2c5ef](https://github.com/SocialGouv/emjpm/commit/be2c5ef))
+
+
+
+
+
 # [25.1.0](https://github.com/SocialGouv/emjpm/compare/v25.0.1...v25.1.0) (2019-09-26)
 
 
