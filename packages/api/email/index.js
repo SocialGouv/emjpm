@@ -1,29 +1,30 @@
 const nodemailer = require("nodemailer");
+const configuration = require("../env");
 
-const SMTP_HOST = process.env.SMTP_HOST || "127.0.0.1";
-const SMTP_PORT = process.env.SMTP_PORT || "25";
-const SMTP_USER = process.env.SMTP_USER;
-const SMTP_PASS = process.env.SMTP_PASS;
-const SMTP_FROM = process.env.SMTP_FROM;
+const smtpHost = configuration.smtpHost;
+const smtpPort = configuration.smtpPort;
+const smtpUser = configuration.smtpUser;
+const smtpPass = configuration.smtpPass;
+const smtpFrom = configuration.smtpFrom;
 
 const smtpConfig = {
-  host: SMTP_HOST,
-  port: SMTP_PORT,
+  host: smtpHost,
+  port: smtpPort,
   ignoreTLS: true,
   secure: false
 };
 
-if (SMTP_USER) {
+if (smtpUser) {
   smtpConfig.auth = {
-    user: SMTP_USER,
-    pass: SMTP_PASS
+    user: smtpUser,
+    pass: smtpPass
   };
 }
 
 const sendEmail = (sendTo, subject, text, html) => {
   let transporter = nodemailer.createTransport(smtpConfig);
   let mailOptions = {
-    from: SMTP_FROM,
+    from: smtpFrom,
     to: sendTo,
     subject: subject,
     text: text,
