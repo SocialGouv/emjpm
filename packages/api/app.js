@@ -10,12 +10,14 @@ const authRoutes = require("./routes/auth");
 const authV2Routes = require("./routes/auth-v2");
 const userRoutes = require("./routes/users");
 
+const configuration = require("./env");
+
 const app = express();
 
-if (process.env.SENTRY_PUBLIC_DSN) {
+if (configuration.sentryPublicDSN) {
   Sentry.init({
-    dsn: process.env.SENTRY_PUBLIC_DSN,
-    environment: process.env.SENTRY_ENV
+    dsn: configuration.sentryPublicDSN,
+    environment: configuration.sentryEnv
   });
 }
 
