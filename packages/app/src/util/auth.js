@@ -4,12 +4,12 @@ import nextCookie from "next-cookies";
 import cookie from "js-cookie";
 
 export const logout = () => {
+  Router.push("/error", "/login");
   cookie.remove("token");
   // to support logging out from all windows
   window.localStorage.setItem("logout", Date.now());
   window.localStorage.removeItem("id_token");
   window.localStorage.removeItem("login");
-  Router.push("/login");
 };
 
 // Gets the display name of a JSX component for dev tools
