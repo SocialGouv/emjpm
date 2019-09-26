@@ -45,10 +45,10 @@ export const MagistratChoose = props => {
             }, 500);
           }}
           validationSchema={Yup.object().shape({
-            type: Yup.string(),
-            civilite: Yup.string(),
-            annee: Yup.string(),
-            numero_rg: Yup.string()
+            type: Yup.string().required(),
+            civilite: Yup.string().required(),
+            annee: Yup.string().required(),
+            numero_rg: Yup.string().required()
           })}
           initialValues={{
             annee: "",
