@@ -24,4 +24,5 @@ const ForgotPassword = () => (
     <ForgotPasswordContainer style={{ marginTop: 100 }} />
   </Layout>
 );
+
 export default ForgotPassword;

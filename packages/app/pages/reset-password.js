@@ -1,8 +1,7 @@
 import React from "react";
 import Head from "next/head";
 
-import Navigation from "../src/components/communComponents/Navigation";
-import Footer from "../src/components/communComponents/Footer";
+import { Layout } from "../src/components";
 import Form from "../src/components/loginComponents/resetPasswordForm";
 import { PageTracker } from "../src/components/common/PageTracker";
 
@@ -15,16 +14,14 @@ const ResetPasswordContainer = ({ style }) => (
 );
 
 const ResetPassword = () => (
-  <div style={{ display: "block", backgroundColor: "#cad4de", minHeight: "100%" }}>
+  <Layout>
     <Head>
       <title>Récupérer votre compte</title>
     </Head>
 
     <PageTracker url="/reset-password" />
 
-    <Navigation />
     <ResetPasswordContainer style={{ marginTop: 100 }} />
-    <Footer fixed />
-  </div>
+  </Layout>
 );
 export default ResetPassword;
