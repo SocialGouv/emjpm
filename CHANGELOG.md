@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.1.5](https://github.com/SocialGouv/emjpm/compare/v25.1.4...v25.1.5) (2019-09-27)
+
+
+### Bug Fixes
+
+* **postgres:** there is no emjpm shema... ([94fe101](https://github.com/SocialGouv/emjpm/commit/94fe101))
+
+
+
+
+
 ## [25.1.4](https://github.com/SocialGouv/emjpm/compare/v25.1.3...v25.1.4) (2019-09-27)
 
 
