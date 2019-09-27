@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.1.2](https://github.com/SocialGouv/emjpm/compare/v25.1.1...v25.1.2) (2019-09-27)
+
+
+### Bug Fixes
+
+* **deps:** use same dotenv dep ([#861](https://github.com/SocialGouv/emjpm/issues/861)) ([23af4ba](https://github.com/SocialGouv/emjpm/commit/23af4ba))
+
+
+
+
+
 ## [25.1.1](https://github.com/SocialGouv/emjpm/compare/v25.1.0...v25.1.1) (2019-09-26)
 
 **Note:** Version bump only for package @emjpm/api
