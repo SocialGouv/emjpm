@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.1.3](https://github.com/SocialGouv/emjpm/compare/v25.1.2...v25.1.3) (2019-09-27)
+
+
+### Bug Fixes
+
+* **email:** use support.emjpm@fabrique.social.gouv.fr ([#862](https://github.com/SocialGouv/emjpm/issues/862)) ([d9284d1](https://github.com/SocialGouv/emjpm/commit/d9284d1))
+
+
+
+
+
 ## [25.1.2](https://github.com/SocialGouv/emjpm/compare/v25.1.1...v25.1.2) (2019-09-27)
 
 
