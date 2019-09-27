@@ -5,6 +5,7 @@ include:
   - /.k8s/app/.k8s-deploy-app.yml
   - /.k8s/postgres/.k8s-deploy-postgres.yml
   - /.k8s/hasura/.k8s-deploy-hasura.yml
+  - /.k8s/metabase/.k8s-deploy-metabase.yml
   - /.k8s/graphql-server/.k8s-deploy-graphql-server.yml
 
 #
@@ -197,3 +198,22 @@ Deploy graphql-server (dev):
 Deploy graphql-server (incubateur):
   <<: *deploy_graphql-server
   <<: *incubateur_stage
+
+#
+#
+#
+
+Deploy metabase (incubateur):
+  <<: *incubateur_stage
+  <<: *deploy_stage
+  extends: .k8s-deploy-metabase
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: metabase
+    PORT: 3000
+  after_script:
+    # NOTE(douglasduteil): re-run env.sh
+    # Because the `after_script` runs in a separated shell context.
+    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
+    - source ./.gitlab-ci/env.sh
+    - echo "Metabase available at - ${METABASE_URL}"
