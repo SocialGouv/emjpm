@@ -203,7 +203,8 @@ Deploy graphql-server (incubateur):
 #
 #
 
-.deploy-metabase: &deploy_metabase
+Deploy metabase (incubateur):
+  <<: *incubateur_stage
   <<: *deploy_stage
   extends: .k8s-deploy-metabase
   variables:
@@ -216,13 +217,3 @@ Deploy graphql-server (incubateur):
     # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
     - source ./.gitlab-ci/env.sh
     - echo "Metabase available at - ${METABASE_URL}"
-
-#
-
-Deploy metabase (dev):
-  <<: *deploy_metabase
-  <<: *dev_stage
-
-Deploy metabase (incubateur):
-  <<: *deploy_metabase
-  <<: *incubateur_stage
