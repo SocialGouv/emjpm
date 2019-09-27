@@ -18,5 +18,5 @@ spec:
           - ${API_HOST}
           - ${HASURA_HOST}
   issuerRef:
-    name: letsencrypt-prod
+    name: letsencrypt-staging
     kind: ClusterIssuer
