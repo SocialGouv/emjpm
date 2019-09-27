@@ -1,16 +1,13 @@
 import React from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import * as XLSX from "xlsx";
-import { connect } from "react-redux";
-
-import apiFetch from "../communComponents/Api";
 import { read } from "../../excel/parse";
 import { validate } from "../../excel/validate";
-
-import { mesureImportCreated } from "./actions/mesures";
-
 // IE11 polyfill
 import "../../readAsBinaryString";
+import apiFetch from "../communComponents/Api";
+import { mesureImportCreated } from "./actions/mesures";
 
 const Alert = ({ className, Icon, children }) =>
   (children && (
@@ -244,7 +241,10 @@ class InputFiles extends React.Component {
 
         <div style={{ color: "red", fontSize: "1.5em", marginTop: 10 }}>
           Vous n&apos;arrivez pas à importer votre tableau excel? Envoyez-le nous par email à{" "}
-          <a href="mailto:contact@emjpm.beta.gouv.fr">contact@emjpm.beta.gouv.fr</a>.
+          <a href="mailto:support.emjpm@fabrique.social.gouv.fr">
+            support.emjpm@fabrique.social.gouv.fr
+          </a>
+          .
           <br />
           <br />
           Nous le vérifierons, le mettrons en page et vous le renverrons pour que vous puissiez

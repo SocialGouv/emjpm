@@ -19,7 +19,7 @@ const Footer = ({ fixed }) => (
           <a
             className="button button_transparent"
             style={{ fontSize: "1em" }}
-            href="mailto:contact@emjpm.beta.gouv.fr"
+            href="mailto:support.emjpm@fabrique.social.gouv.fr"
           >
             Nous contacter{" "}
           </a>
