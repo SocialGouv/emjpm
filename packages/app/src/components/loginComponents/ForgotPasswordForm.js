@@ -97,7 +97,7 @@ export const ForgotPasswordView = ({ formData, onSubmit, error, status }) => (
       <br />
       <ErrorBox message={error} />
       <hr style={{ marginTop: 20 }} />
-      <a href="mailto:contact@emjpm.beta.gouv.fr?subject=eMJPM&body=Bonjour,">
+      <a href="mailto:support.emjpm@fabrique.social.gouv.fr?subject=eMJPM&body=Bonjour,">
         Contactez-nous en cas de difficulté de connexion
       </a>
     </StyledForm>
