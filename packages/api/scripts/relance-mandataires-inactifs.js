@@ -16,7 +16,7 @@ Afin que les magistrats puissent connaître en temps réel votre activité et b�
 
 Vous pouvez directement vous connecter via ce lien : https://emjpm.num.social.gouv.fr/
 
-Pour toute difficulté, n'hésitez pas à nous contacter : contact@emjpm.beta.gouv.fr
+Pour toute difficulté, n'hésitez pas à nous contacter : support.emjpm@fabrique.social.gouv.fr
 
 En vous remerciant de votre précieuse collaboration.
 
@@ -33,7 +33,7 @@ Afin que les magistrats puissent connaître en temps réel votre activité et b�
 <br><br>
 Vous pouvez directement vous connecter via ce lien : <a href="https://emjpm.num.social.gouv.fr/">emjpm.num.social.gouv.fr</a>
 <br><br>
-Pour toute difficulté, n'hésitez pas à nous contacter : <a href="mailto:contact@emjpm.beta.gouv.fr">contact@emjpm.beta.gouv.fr</a>
+Pour toute difficulté, n'hésitez pas à nous contacter : <a href="mailto:support.emjpm@fabrique.social.gouv.fr">support.emjpm@fabrique.social.gouv.fr</a>
 <br><br><br>
 En vous remerciant de votre précieuse collaboration.
 <br><br><br>

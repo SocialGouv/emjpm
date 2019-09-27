@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/test", function(req, res) {
   sendEmail(
-    "contact@emjpm.beta.gouv.fr",
+    "support.emjpm@fabrique.social.gouv.fr",
     "e-MJPM : test",
     "Bonjour !",
     "Bonjour !"
