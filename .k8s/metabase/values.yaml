@@ -9,8 +9,6 @@ image:
   tag: v0.33.3
   pullPolicy: IfNotPresent
 
-nameOverride: ${K8S_PROJECT}-metabase-${BRANCH_HASH}
-
 # Config Jetty web server
 listen:
   host: "0.0.0.0"
