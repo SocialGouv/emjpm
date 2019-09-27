@@ -30,7 +30,8 @@ const ServiceMesures = () => {
       antenne: antenne ? antenne.value : undefined,
       type: mesureType ? mesureType.value : undefined,
       status: mesureStatus ? mesureStatus.value : undefined
-    }
+    },
+    fetchPolicy: "network-only"
   });
 
   if (loading) {
