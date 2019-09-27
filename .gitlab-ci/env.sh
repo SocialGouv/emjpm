@@ -52,11 +52,13 @@ export CERTIFICATE_NAME="${K8S_PROJECT}-certificate-${BRANCH_HASH}";
 export FRONTEND_HOST="${DOMAIN}";
 export GQL_SERVER_HOST="${K8S_PROJECT}-graphql-server-${BRANCH_HASH}";
 export HASURA_HOST="hasura.${DOMAIN}";
+export METABASE_HOST="metabase.${DOMAIN}";
 export POSTGRES_HOST="${K8S_PROJECT}-postgres-${BRANCH_HASH}"
 
 export API_URL="https://${API_HOST}"
 export FRONTEND_URL="https://${FRONTEND_HOST}"
 export HASURA_URL="https://${HASURA_HOST}"
+export METABASE_URL="https://${METABASE_HOST}"
 
 #
 
@@ -83,6 +85,8 @@ printenv | grep \
   -e FRONTEND_URL \
   -e GQL_SERVER_HOST \
   -e HASURA_HOST \
+  -e METABASE_HOST \
+  -e METABASE_URL \
   -e POSTGRES_HOST \
   \
   -e CONTEXT \
