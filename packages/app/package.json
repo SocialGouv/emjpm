@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/app",
-  "version": "25.1.5",
+  "version": "25.1.6",
   "private": true,
   "description": "",
   "main": "index.js",
