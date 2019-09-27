@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.1.6](https://github.com/SocialGouv/emjpm/compare/v25.1.5...v25.1.6) (2019-09-27)
+
+
+### Reverts
+
+* feat(k8s): add metabase ([#840](https://github.com/SocialGouv/emjpm/issues/840)) ([8d6386a](https://github.com/SocialGouv/emjpm/commit/8d6386a))
+
+
+
+
+
 ## [25.1.5](https://github.com/SocialGouv/emjpm/compare/v25.1.4...v25.1.5) (2019-09-27)
 
 
