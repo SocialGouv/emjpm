@@ -139,15 +139,18 @@ restore production dump
 
 ```bash
 # drop database emjpm
-psql -h localhost -c "DROP DATABASE IF EXISTS emjpm" -U $PGUSER
+cat <<EOF > reset-database.sql
+SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'emjpm';
+DROP DATABASE IF EXISTS emjpm;
+CREATE DATABASE emjpm WITH OWNER = emjpm;
+EOF
 
-# create database emjpm
-psql -h localhost -c "CREATE DATABASE emjpm WITH OWNER = emjpm" -U $PGUSER
+cat reset-database.sql | psql -h localhost -U postgres
 
 # restore production dump
-pg_restore -h localhost --if-exists --clean -e -Fc -d emjpm ./$DUMP_FILE
+pg_restore -h localhost --if-exists --clean -e -Fc -U postgres -d emjpm ./$DUMP_FILE
 
-psql -h localhost -c "ALTER SCHEMA public OWNER TO emjpm" -U $PGUSER emjpm
+psql -h localhost -c "ALTER SCHEMA public OWNER TO emjpm" -U postgres emjpm
 ```
 
 
