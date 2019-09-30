@@ -47,7 +47,7 @@ function create(initialState) {
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
     connectToDevTools: isBrowser(),
-    ssrMode: true,
+    ssrMode: false,
     link: concat(authMiddleware, httpLink),
     cache: cache,
     resolvers: {}
