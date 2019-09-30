@@ -91,9 +91,9 @@ resources:
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   requests:
     cpu: 100m
-    memory: 128Mi
+    memory: 256Mi
   limits:
-    cpu: 300m
+    cpu: 500m
     memory: 512Mi
 
 ## Node labels for pod assignment

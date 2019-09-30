@@ -35,11 +35,11 @@ spec:
             periodSeconds: 5
           resources:
             requests:
-              cpu: 375m
-              memory: 128Mi
+              cpu: 10m
+              memory: 256Mi
             limits:
               cpu: 500m
-              memory: 256Mi
+              memory: 512Mi
 
           #
 
