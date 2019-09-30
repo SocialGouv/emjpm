@@ -16,7 +16,7 @@ spec:
     # + 550m // hasura
     # +  50m // hasura (check-db-ready)
     # + 100m // metabase
-    # + 500m // postgres
+    # + 100m // postgres
     # + 100m // backup cronjob (anonymize)
     # + 100m // backup cronjob (postgres)
     # + 100m // backup cronjob (backup)
