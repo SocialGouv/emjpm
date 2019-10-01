@@ -174,3 +174,58 @@ export const DELETE_MESURE = gql`
     }
   }
 `;
+
+export const ADD_MESURE = gql`
+  mutation addMesure(
+    $date_ouverture: date!
+    $type: String!
+    $residence: String!
+    $code_postal: String!
+    $ville: String!
+    $civilite: String!
+    $annee: String!
+    $numero_dossier: String!
+    $numero_rg: String!
+    $status: String!
+    $antenne_id: Int!
+  ) {
+    insert_mesures(
+      objects: {
+        date_ouverture: $date_ouverture
+        type: $type
+        residence: $residence
+        code_postal: $code_postal
+        ville: $ville
+        civilite: $civilite
+        annee: $annee
+        numero_dossier: $numero_dossier
+        numero_rg: $numero_rg
+        status: $status
+        antenne_id: $antenne_id
+      }
+    ) {
+      returning {
+        antenne_id
+        id
+        cabinet
+        civilite
+        code_postal
+        departement {
+          nom
+          region {
+            nom
+          }
+        }
+        status
+        type
+        ville
+        residence
+        numero_rg
+        numero_dossier
+        etablissement
+        annee
+        date_ouverture
+      }
+    }
+  }
+`;

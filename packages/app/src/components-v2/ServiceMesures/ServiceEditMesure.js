@@ -123,7 +123,7 @@ export const ServiceEditMesure = props => {
                     name="date_ouverture"
                     hasError={errors.date_ouverture && touched.date_ouverture}
                     onChange={handleChange}
-                    placeholder="Date d'extinction"
+                    placeholder="Date d'ouverture"
                   />
                 </Box>
                 <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
