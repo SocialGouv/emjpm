@@ -4,6 +4,7 @@ import { Box, Flex, Text } from "rebass";
 import { Formik } from "formik";
 import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
+import getConfig from "next/config";
 
 import { EDIT_MESURE } from "./mutations";
 import { Select, Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
@@ -14,6 +15,10 @@ import {
   CIVILITY,
   MESURE_STATUS_LABEL_VALUE
 } from "../../constants/mesures";
+
+const {
+  publicRuntimeConfig: { NODE_ENV }
+} = getConfig();
 
 export const ServiceEditMesure = props => {
   const {
@@ -206,17 +211,19 @@ export const ServiceEditMesure = props => {
                     placeholder="numero rg"
                   />
                 </Box>
-                <Box sx={{ zIndex: "70", position: "relative" }} mb="2">
-                  <Select
-                    id="status"
-                    name="status"
-                    placeholder="status de la mesure"
-                    value={values.status}
-                    hasError={errors.status && touched.status}
-                    onChange={option => setFieldValue("status", option)}
-                    options={MESURE_STATUS_LABEL_VALUE}
-                  />
-                </Box>
+                {NODE_ENV === "development" && (
+                  <Box sx={{ zIndex: "70", position: "relative" }} mb="2">
+                    <Select
+                      id="status"
+                      name="status"
+                      placeholder="status de la mesure"
+                      value={values.status}
+                      hasError={errors.status && touched.status}
+                      onChange={option => setFieldValue("status", option)}
+                      options={MESURE_STATUS_LABEL_VALUE}
+                    />
+                  </Box>
+                )}
                 <Flex justifyContent="flex-end">
                   <Box>
                     <Button
