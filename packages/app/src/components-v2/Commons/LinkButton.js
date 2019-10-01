@@ -34,7 +34,12 @@ const LinkButton = ({ router, ...props }) => {
   const isActive = router.pathname === props.href;
   return (
     <NextLink as={props.href} href={props.disabled ? "" : props.href}>
-      <RebassLink sx={LinkButtonStyle(isActive, props.disabled)}>{props.children}</RebassLink>
+      <RebassLink
+        href={props.disabled ? "" : props.href}
+        sx={LinkButtonStyle(isActive, props.disabled)}
+      >
+        {props.children}
+      </RebassLink>
     </NextLink>
   );
 };
