@@ -1,13 +1,13 @@
-import { BoxWrapper, Heading1, Card, Text, Heading3, Button } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, Button, Card, Heading1, Heading3, Text } from "@socialgouv/emjpm-ui-core";
+import Link from "next/link";
 import React, { useState } from "react";
-import { Flex, Box } from "rebass";
-
-import { withAuthSync } from "../../src/util/auth";
+import { Box, Flex } from "rebass";
 import { LayoutServices } from "../../src/components-v2/Layout";
 import { ServiceMesures } from "../../src/components-v2/ServiceMesures";
 import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
 import { FiltersContextProvider } from "../../src/components-v2/ServicesFilters/context";
 import { UserInformations } from "../../src/components-v2/UserInformations";
+import { withAuthSync } from "../../src/util/auth";
 
 const cardStyle = isHidden => {
   return {
@@ -41,7 +41,17 @@ const Mesures = () => {
               </Box>
             </Flex>
           </Card>
-          <Heading1>Toutes vos mesures</Heading1>
+          <Flex flexDirection="row" justifyContent="space-between">
+            <Heading1>Toutes vos mesures</Heading1>
+            <Box>
+              <Button>
+                <Link href="/services/add-mesures">
+                  <a>Ajouter une mesure</a>
+                </Link>
+              </Button>
+            </Box>
+          </Flex>
+
           <UserInformations Component={props => <ServicesFilters {...props} />} />
           <Flex
             sx={{
