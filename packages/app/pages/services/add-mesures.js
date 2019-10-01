@@ -8,7 +8,7 @@ import { withAuthSync } from "../../src/util/auth";
 
 const AddMesures = () => {
   return (
-    <LayoutServices navigation={false}>
+    <LayoutServices hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
         <Heading1>{"Création d'une mesure"}</Heading1>
         <Flex
