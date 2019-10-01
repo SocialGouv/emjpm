@@ -1,16 +1,15 @@
+import { css, Global } from "@emotion/core";
+import { DropDownMenu, Header } from "@socialgouv/emjpm-ui-components";
+import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
+import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
-import { Global, css } from "@emotion/core";
-import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
-import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
-import { Header, DropDownMenu } from "@socialgouv/emjpm-ui-components";
-
+import { logout } from "../../util/auth";
+import { Link } from "../Commons";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
-import { Link } from "../Commons";
-import { logout } from "../../util/auth";
-import { dropDownLinks } from "./dropDownLink";
 import { UserInformations } from "../UserInformations";
+import { dropDownLinks } from "./dropDownLink";
 
 const navigationLinks = [
   {
@@ -24,7 +23,7 @@ const navigationLinks = [
 ];
 
 const LayoutServices = props => {
-  const { children } = props;
+  const { children, hasNavigation } = props;
 
   return (
     <Fragment>
@@ -56,9 +55,11 @@ const LayoutServices = props => {
             );
           }}
         />
-        <BoxWrapper>
-          <Navigation links={navigationLinks} />
-        </BoxWrapper>
+        {hasNavigation && (
+          <BoxWrapper>
+            <Navigation links={navigationLinks} />
+          </BoxWrapper>
+        )}
       </Box>
       {children}
       <Box bg="cardPrimary">
