@@ -8,7 +8,7 @@ import { AntenneLinkButton, LinkButton } from "../Commons";
 
 import { AntennesStyle } from "./style";
 
-const Antennes = props => {
+const ServiceAntennes = props => {
   const { data, loading, error } = useQuery(ANTENNE, { fetchPolicy: "cache-and-network" });
 
   if (loading) {
@@ -96,4 +96,4 @@ const Antennes = props => {
   );
 };
 
-export { Antennes };
+export { ServiceAntennes };

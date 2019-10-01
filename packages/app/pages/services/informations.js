@@ -6,7 +6,7 @@ import { withAuthSync } from "../../src/util/auth";
 import { LayoutServices } from "../../src/components-v2/Layout";
 import { ServicesInformations } from "../../src/components-v2/ServicesInformations";
 import { PreferencesPanel } from "../../src/components-v2/PreferencesPanel";
-import { Antennes } from "../../src/components-v2/Antennes";
+import { ServiceAntennes } from "../../src/components-v2/ServiceAntennes";
 import { UserInformations } from "../../src/components-v2/UserInformations";
 
 const Informations = () => {
@@ -45,7 +45,7 @@ const Informations = () => {
             p: 1
           }}
         >
-          <Antennes mt="1" />
+          <ServiceAntennes mt="1" />
         </Box>
       </BoxWrapper>
     </LayoutServices>
