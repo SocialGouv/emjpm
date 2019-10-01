@@ -55,27 +55,24 @@ export const ServiceEditMesure = props => {
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              UpdateMesure({
-                variables: {
-                  id: currentMesure,
-                  date_ouverture: values.date_ouverture,
-                  type: values.type.value,
-                  residence: values.residence.value,
-                  code_postal: values.code_postal,
-                  ville: values.ville,
-                  civilite: values.civilite.value,
-                  annee: values.annee,
-                  numero_dossier: values.numero_dossier,
-                  numero_rg: values.numero_rg,
-                  status: values.status.value
-                  // antenne_id: values.antenneId
-                }
-              });
-              setSubmitting(false);
-              setPanelType(null);
-              setCurrentMesure(null);
-            }, 500);
+            UpdateMesure({
+              variables: {
+                id: currentMesure,
+                date_ouverture: values.date_ouverture,
+                type: values.type.value,
+                residence: values.residence.value,
+                code_postal: values.code_postal,
+                ville: values.ville,
+                civilite: values.civilite.value,
+                annee: values.annee,
+                numero_dossier: values.numero_dossier,
+                numero_rg: values.numero_rg,
+                status: values.status.value
+              }
+            });
+            setSubmitting(false);
+            setPanelType(null);
+            setCurrentMesure(null);
           }}
           validationSchema={Yup.object().shape({
             date_ouverture: Yup.date(),

@@ -3,7 +3,7 @@ import { Link as RebassLink } from "rebass";
 import { withRouter } from "next/router";
 import NextLink from "next/link";
 
-const LinkButtonStyle = (isActive, disabled) => {
+const AntenneLinkButtonStyle = (isActive, disabled) => {
   return {
     bg: "primary",
     borderRadius: "default",
@@ -30,13 +30,16 @@ const LinkButtonStyle = (isActive, disabled) => {
   };
 };
 
-const LinkButton = ({ router, ...props }) => {
+const AntenneLinkButton = ({ router, ...props }) => {
   const isActive = router.pathname === props.href;
+  const antenne_id = props.href;
   return (
-    <NextLink as={props.href} href={props.disabled ? "" : props.href}>
-      <RebassLink sx={LinkButtonStyle(isActive, props.disabled)}>{props.children}</RebassLink>
+    <NextLink href="/services/antennes/[antenne_id]" as={`/services/antennes/${antenne_id}`}>
+      <RebassLink sx={AntenneLinkButtonStyle(isActive, props.disabled)}>
+        {props.children}
+      </RebassLink>
     </NextLink>
   );
 };
 
-export default withRouter(LinkButton);
+export default withRouter(AntenneLinkButton);

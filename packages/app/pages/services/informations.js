@@ -45,7 +45,6 @@ const Informations = () => {
             p: 1
           }}
         >
-          <Heading2 mt="1">Antennes</Heading2>
           <Antennes mt="1" />
         </Box>
       </BoxWrapper>
