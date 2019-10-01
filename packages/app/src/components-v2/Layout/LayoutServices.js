@@ -24,7 +24,7 @@ const navigationLinks = [
 ];
 
 const LayoutServices = props => {
-  const { children } = props;
+  const { children, navigation } = props;
 
   return (
     <Fragment>
@@ -56,9 +56,11 @@ const LayoutServices = props => {
             );
           }}
         />
-        <BoxWrapper>
-          <Navigation links={navigationLinks} />
-        </BoxWrapper>
+        {navigation && (
+          <BoxWrapper>
+            <Navigation links={navigationLinks} />
+          </BoxWrapper>
+        )}
       </Box>
       {children}
       <Box bg="cardPrimary">
