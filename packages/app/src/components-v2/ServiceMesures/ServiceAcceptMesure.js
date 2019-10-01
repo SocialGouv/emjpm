@@ -9,21 +9,14 @@ import { ACCEPT_MESURE } from "./mutations";
 import { Select, Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { RESIDENCE } from "../../constants/mesures";
-
-const formatAntenneOptions = user_antennes => {
-  return user_antennes.map(user_antenne => {
-    return {
-      value: user_antenne.service_antenne.id,
-      label: user_antenne.service_antenne.name
-    };
-  });
-};
+import { formatAntenneOptions } from "./utils";
 
 export const ServiceAcceptMesure = props => {
   const { currentMesure, user_antennes } = props;
   const [UpdateMesure] = useMutation(ACCEPT_MESURE, {});
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
+  const [headquarter] = ANTENNE_OPTIONS;
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
@@ -42,6 +35,7 @@ export const ServiceAcceptMesure = props => {
         <Formik
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
+              console.log(values);
               UpdateMesure({
                 variables: {
                   id: currentMesure,
@@ -69,7 +63,7 @@ export const ServiceAcceptMesure = props => {
             residence: "",
             code_postal: "",
             ville: "",
-            antenne_id: null
+            antenne_id: headquarter
           }}
         >
           {props => {
@@ -126,17 +120,19 @@ export const ServiceAcceptMesure = props => {
                     placeholder="ville"
                   />
                 </Box>
-                <Box sx={{ zIndex: "70", position: "relative" }} mb="2">
-                  <Select
-                    id="antenne_id"
-                    name="antenne_id"
-                    placeholder="Antenne"
-                    value={values.antenne_id}
-                    hasError={errors.antenne_id && touched.antenne_id}
-                    onChange={option => setFieldValue("antenne_id", option)}
-                    options={ANTENNE_OPTIONS}
-                  />
-                </Box>
+                {user_antennes.length >= 2 && (
+                  <Box sx={{ zIndex: "70", position: "relative" }} mb="2">
+                    <Select
+                      id="antenne_id"
+                      name="antenne_id"
+                      placeholder="Antenne"
+                      value={values.antenne_id}
+                      hasError={errors.antenne_id && touched.antenne_id}
+                      onChange={option => setFieldValue("antenne_id", option)}
+                      options={ANTENNE_OPTIONS}
+                    />
+                  </Box>
+                )}
                 <Flex justifyContent="flex-end">
                   <Box>
                     <Button

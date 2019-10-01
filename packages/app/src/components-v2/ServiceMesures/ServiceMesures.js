@@ -59,7 +59,9 @@ const ServiceMesures = props => {
           {mesures.length > 0 ? (
             <Fragment>
               <MesureList
-                EditComponent={ServiceEditMesure}
+                EditComponent={props => (
+                  <ServiceEditMesure user_antennes={user_antennes} {...props} />
+                )}
                 CloseComponent={ServiceCloseMesure}
                 RemoveComponent={ServiceDeleteMesure}
                 AcceptComponent={props => (

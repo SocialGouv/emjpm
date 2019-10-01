@@ -49,12 +49,14 @@ export const EDIT_MESURE = gql`
     $numero_dossier: String
     $numero_rg: String
     $status: String
+    $antenne_id: Int
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
       _set: {
         date_ouverture: $date_ouverture
         type: $type
+        antenne_id: $antenne_id
         residence: $residence
         code_postal: $code_postal
         ville: $ville
