@@ -18,18 +18,26 @@ import { MESURES } from "./queries";
 
 const RESULT_PER_PAGE = 20;
 
-const ServiceMesures = () => {
+const ServiceMesures = props => {
+  const { isOnlyWaiting } = props;
   const [currentPage, setCurrentPage] = useState(0);
   const { mesureType, mesureStatus, antenne } = useContext(FiltersContext);
-
   useEffect(() => setCurrentPage(RESULT_PER_PAGE), [mesureType, mesureStatus, antenne]);
+
+  let currentMesureType = null;
+  if (isOnlyWaiting) {
+    currentMesureType = "Mesure en attente";
+  } else {
+    currentMesureType = mesureStatus ? mesureStatus.value : null;
+  }
+  console.log(currentMesureType);
   const { data, error, loading, fetchMore } = useQuery(MESURES, {
     variables: {
       offset: 0,
       limit: RESULT_PER_PAGE,
-      antenne: antenne ? antenne.value : undefined,
-      type: mesureType ? mesureType.value : undefined,
-      status: mesureStatus ? mesureStatus.value : undefined
+      antenne: antenne ? antenne.value : null,
+      type: mesureType ? mesureType.value : null,
+      status: currentMesureType
     },
     fetchPolicy: "network-only"
   });
