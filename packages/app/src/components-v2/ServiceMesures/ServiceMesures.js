@@ -19,7 +19,7 @@ import { MESURES } from "./queries";
 const RESULT_PER_PAGE = 20;
 
 const ServiceMesures = props => {
-  const { isOnlyWaiting } = props;
+  const { isOnlyWaiting, user_antennes } = props;
   const [currentPage, setCurrentPage] = useState(0);
   const { mesureType, mesureStatus, antenne } = useContext(FiltersContext);
   useEffect(() => setCurrentPage(RESULT_PER_PAGE), [mesureType, mesureStatus, antenne]);
@@ -30,7 +30,6 @@ const ServiceMesures = props => {
   } else {
     currentMesureType = mesureStatus ? mesureStatus.value : null;
   }
-  console.log(currentMesureType);
   const { data, error, loading, fetchMore } = useQuery(MESURES, {
     variables: {
       offset: 0,
@@ -63,7 +62,9 @@ const ServiceMesures = props => {
                 EditComponent={ServiceEditMesure}
                 CloseComponent={ServiceCloseMesure}
                 RemoveComponent={ServiceDeleteMesure}
-                AcceptComponent={ServiceAcceptMesure}
+                AcceptComponent={props => (
+                  <ServiceAcceptMesure user_antennes={user_antennes} {...props} />
+                )}
                 ReactivateComponent={ServiceReactivateMesure}
                 onPanelOpen={id => console.log(id)}
                 mesures={mesures}

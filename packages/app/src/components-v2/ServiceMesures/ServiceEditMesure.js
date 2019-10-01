@@ -73,7 +73,8 @@ export const ServiceEditMesure = props => {
                 numero_dossier: values.numero_dossier,
                 numero_rg: values.numero_rg,
                 status: values.status.value
-              }
+              },
+              refetchQueries: ["mesures", "mesures_aggregate"]
             });
             setSubmitting(false);
             setPanelType(null);

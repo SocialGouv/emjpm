@@ -38,7 +38,7 @@ export const ServiceDeleteMesure = props => {
                 variables: {
                   id: currentMesure
                 },
-                refetchQueries: ["mesures"]
+                refetchQueries: ["mesures", "mesures_aggregate"]
               });
               setSubmitting(false);
               setPanelType(null);

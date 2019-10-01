@@ -10,10 +10,20 @@ import { Select, Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { RESIDENCE } from "../../constants/mesures";
 
+const formatAntenneOptions = user_antennes => {
+  return user_antennes.map(user_antenne => {
+    return {
+      value: user_antenne.service_antenne.id,
+      label: user_antenne.service_antenne.name
+    };
+  });
+};
+
 export const ServiceAcceptMesure = props => {
-  const { currentMesure } = props;
-  const [UpdateMesure] = useMutation(ACCEPT_MESURE);
+  const { currentMesure, user_antennes } = props;
+  const [UpdateMesure] = useMutation(ACCEPT_MESURE, {});
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+  const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
@@ -38,8 +48,10 @@ export const ServiceAcceptMesure = props => {
                   date_ouverture: values.date_ouverture,
                   residence: values.residence.value,
                   code_postal: values.code_postal,
-                  ville: values.ville
-                }
+                  ville: values.ville,
+                  antenne_id: values.antenne_id.value
+                },
+                refetchQueries: ["mesures", "mesures_aggregate"]
               });
               setSubmitting(false);
               setPanelType(null);
@@ -47,12 +59,18 @@ export const ServiceAcceptMesure = props => {
             }, 500);
           }}
           validationSchema={Yup.object().shape({
-            date_ouverture: Yup.date(),
-            residence: Yup.string(),
-            code_postal: Yup.string(),
-            ville: Yup.string()
+            date_ouverture: Yup.date().required(),
+            residence: Yup.string().required(),
+            code_postal: Yup.string().required(),
+            ville: Yup.string().required()
           })}
-          initialValues={{ date_ouverture: "", residence: "", code_postal: "", ville: "" }}
+          initialValues={{
+            date_ouverture: "",
+            residence: "",
+            code_postal: "",
+            ville: "",
+            antenne_id: null
+          }}
         >
           {props => {
             const {
@@ -106,6 +124,17 @@ export const ServiceAcceptMesure = props => {
                     hasError={errors.ville && touched.ville}
                     onChange={handleChange}
                     placeholder="ville"
+                  />
+                </Box>
+                <Box sx={{ zIndex: "70", position: "relative" }} mb="2">
+                  <Select
+                    id="antenne_id"
+                    name="antenne_id"
+                    placeholder="Antenne"
+                    value={values.antenne_id}
+                    hasError={errors.antenne_id && touched.antenne_id}
+                    onChange={option => setFieldValue("antenne_id", option)}
+                    options={ANTENNE_OPTIONS}
                   />
                 </Box>
                 <Flex justifyContent="flex-end">

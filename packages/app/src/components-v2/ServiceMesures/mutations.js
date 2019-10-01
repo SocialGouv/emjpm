@@ -126,14 +126,16 @@ export const REACTIVATE_MESURE = gql`
 export const ACCEPT_MESURE = gql`
   mutation editMesure(
     $id: Int!
-    $date_ouverture: date
-    $residence: String
-    $code_postal: String
-    $ville: String
+    $date_ouverture: date!
+    $residence: String!
+    $code_postal: String!
+    $ville: String!
+    $antenne_id: Int!
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
       _set: {
+        antenne_id: $antenne_id
         status: "Mesure en cours"
         date_ouverture: $date_ouverture
         residence: $residence
