@@ -1,12 +1,11 @@
 import React from "react";
-
 import { Box, Flex } from "rebass";
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
-import { withAuthSync } from "../../src/util/auth";
-import { LayoutServices } from "../../src/components-v2/Layout";
+import { withAuthSync } from "../../../../src/util/auth";
+import { LayoutServices } from "../../../../src/components-v2/Layout";
 
-const AddAntennes = () => {
+const AddUser = () => {
   return (
     <LayoutServices>
       <BoxWrapper mt={6} px="1">
@@ -41,4 +40,4 @@ const AddAntennes = () => {
   );
 };
 
-export default withAuthSync(AddAntennes);
+export default withAuthSync(AddUser);

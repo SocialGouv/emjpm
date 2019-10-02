@@ -6,7 +6,7 @@ import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
 const ServicesFilters = props => {
-  const { user_antennes } = props;
+  const { isStatusHidden, user_antennes } = props;
 
   const {
     mesureType,
@@ -58,15 +58,17 @@ const ServicesFilters = props => {
                 onChange={option => changeMesureType(option)}
               />
             </Box>
-            <Box width="170px" mr={1}>
-              <Select
-                size="small"
-                options={MESURE_STATUS_LABEL_VALUE}
-                placeholder={"État"}
-                value={mesureStatus}
-                onChange={option => changeMesureStatus(option)}
-              />
-            </Box>
+            {!isStatusHidden && (
+              <Box width="170px" mr={1}>
+                <Select
+                  size="small"
+                  options={MESURE_STATUS_LABEL_VALUE}
+                  placeholder={"État"}
+                  value={mesureStatus}
+                  onChange={option => changeMesureStatus(option)}
+                />
+              </Box>
+            )}
           </Flex>
         </Box>
         <Box width="250px" mr={1}>
