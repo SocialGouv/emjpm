@@ -1,8 +1,8 @@
 import React from "react";
-import { Antennes } from "./Antennes";
+import { ServiceAntennes } from "./ServiceAntennes";
 import renderer from "react-test-renderer";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<Antennes />).toJSON();
+  const tree = renderer.create(<ServiceAntennes />).toJSON();
   expect(tree).toMatchSnapshot();
 });

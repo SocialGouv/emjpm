@@ -43,7 +43,8 @@ export const ServiceCloseMesure = props => {
                   id: currentMesure,
                   reason_extinction: values.reason_extinction.value,
                   extinction: values.extinction
-                }
+                },
+                refetchQueries: ["mesures", "mesures_aggregate"]
               });
               setSubmitting(false);
               setPanelType(null);

@@ -36,7 +36,8 @@ export const ServiceReactivateMesure = props => {
                 variables: {
                   id: currentMesure,
                   reason_extinction: values.reason_extinction
-                }
+                },
+                refetchQueries: ["mesures", "mesures_aggregate"]
               });
               setSubmitting(false);
               setPanelType(null);

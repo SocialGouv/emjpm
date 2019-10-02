@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Box, Text, Flex } from "rebass";
 import { useQuery } from "@apollo/react-hooks";
@@ -9,11 +10,11 @@ import { LinkButton } from "../Commons";
 import { PreferencesPanelStyle } from "./style";
 
 const PreferencesPanel = props => {
-  const { user_antennes } = props;
+  const { user_antennes, currentAntenne } = props;
   const [mainAntenne] = user_antennes;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
-      antenneId: mainAntenne.antenne_id
+      antenneId: currentAntenne ? currentAntenne : mainAntenne.antenne_id
     }
   });
 
@@ -53,6 +54,16 @@ const PreferencesPanel = props => {
       </Text>
     </Box>
   );
+};
+
+PreferencesPanel.defaultProps = {
+  user_antennes: [],
+  currentAntenne: null
+};
+
+PreferencesPanel.propTypes = {
+  user_antennes: PropTypes.array,
+  currentAntenne: PropTypes.string
 };
 
 export { PreferencesPanel };
