@@ -75,7 +75,8 @@ volumePermissions:
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/
 ##
 securityContext:
-  enabled: true
+  ##enabled: true
+  enabled: false
   fsGroup: 1001
   runAsUser: 1001
 
@@ -170,50 +171,50 @@ postgresqlDataDir: /data/pgdata
 ## Specify dictionary of scripts to be run at first boot
 ## Alternatively, you can put your scripts under the files/docker-entrypoint-initdb.d directory
 ##
-initdbScripts:
-  my_init_script.sh: |
-    #!/bin/bash
-    set -e
-    echo "starting my_init_script.sh"
-
-    psql -v ON_ERROR_STOP=1 -U postgres <<-EOSQL
-      CREATE USER ${POSTGRESQL_USER} with encrypted password '${POSTGRESQL_PASSWORD}';
-      ALTER USER ${POSTGRESQL_USER} WITH SUPERUSER;
-      GRANT ALL PRIVILEGES ON DATABASE ${POSTGRES_DATABASE} TO ${POSTGRESQL_USER};
-
-      -- create pgcrypto extension, required for UUID
-      CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
-      -- create the schemas required by the hasura system
-      -- NOTE: If you are starting from scratch: drop the below schemas first, if they exist.
-      CREATE SCHEMA IF NOT EXISTS hdb_catalog;
-      CREATE SCHEMA IF NOT EXISTS hdb_views;
-
-      -- make the user an owner of system schemas
-      ALTER SCHEMA hdb_catalog OWNER TO ${POSTGRESQL_USER};
-      ALTER SCHEMA hdb_views OWNER TO ${POSTGRESQL_USER};
-
-      -- grant select permissions on information_schema and pg_catalog. This is
-      -- required for hasura to query list of available tables
-      GRANT SELECT ON ALL TABLES IN SCHEMA information_schema TO ${POSTGRESQL_USER};
-      GRANT SELECT ON ALL TABLES IN SCHEMA pg_catalog TO ${POSTGRESQL_USER};
-
-      -- Below permissions are optional. This is dependent on what access to your
-      -- tables/schemas - you want give to hasura. If you want expose the public
-      -- schema for GraphQL query then give permissions on public schema to the
-      -- hasura user.
-      -- Be careful to use these in your production db. Consult the postgres manual or
-      -- your DBA and give appropriate permissions.
-
-      -- grant all privileges on all tables in the public schema. This can be customised:
-      -- For example, if you only want to use GraphQL regular queries and not mutations,
-      -- then you can set: GRANT SELECT ON ALL TABLES...
-      GRANT USAGE ON SCHEMA public TO ${POSTGRESQL_USER};
-      GRANT ALL ON ALL TABLES IN SCHEMA public TO ${POSTGRESQL_USER};
-      GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO ${POSTGRESQL_USER};
-
-    EOSQL
-    echo "ending my_init_script.sh"
+#initdbScripts:
+#  my_init_script.sh: |
+#    #!/bin/bash
+#    set -e
+#    echo "starting my_init_script.sh"
+#
+#    psql -v ON_ERROR_STOP=1 -U postgres <<-EOSQL
+#      CREATE USER postgres with encrypted password 'password';
+#      ALTER USER postgres WITH SUPERUSER;
+#      GRANT ALL PRIVILEGES ON DATABASE "emjpm_dev" TO postgres;
+#
+#      -- create pgcrypto extension, required for UUID
+#      CREATE EXTENSION IF NOT EXISTS pgcrypto;
+#
+#      -- create the schemas required by the hasura system
+#      -- NOTE: If you are starting from scratch: drop the below schemas first, if they exist.
+#      CREATE SCHEMA IF NOT EXISTS hdb_catalog;
+#      CREATE SCHEMA IF NOT EXISTS hdb_views;
+#
+#      -- make the user an owner of system schemas
+#      ALTER SCHEMA hdb_catalog OWNER TO postgres;
+#      ALTER SCHEMA hdb_views OWNER TO postgres;
+#
+#      -- grant select permissions on information_schema and pg_catalog. This is
+#      -- required for hasura to query list of available tables
+#      GRANT SELECT ON ALL TABLES IN SCHEMA information_schema TO postgres;
+#      GRANT SELECT ON ALL TABLES IN SCHEMA pg_catalog TO postgres;
+#
+#      -- Below permissions are optional. This is dependent on what access to your
+#      -- tables/schemas - you want give to hasura. If you want expose the public
+#      -- schema for GraphQL query then give permissions on public schema to the
+#      -- hasura user.
+#      -- Be careful to use these in your production db. Consult the postgres manual or
+#      -- your DBA and give appropriate permissions.
+#
+#      -- grant all privileges on all tables in the public schema. This can be customised:
+#      -- For example, if you only want to use GraphQL regular queries and not mutations,
+#      -- then you can set: GRANT SELECT ON ALL TABLES...
+#      GRANT USAGE ON SCHEMA public TO postgres;
+#      GRANT ALL ON ALL TABLES IN SCHEMA public TO postgres;
+#      GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO postgres;
+#
+#    EOSQL
+#    echo "ending my_init_script.sh"
 
 
 ## ConfigMap with scripts to be run at first boot
@@ -262,7 +263,7 @@ service:
 ##   GKE, AWS & OpenStack)
 ##
 persistence:
-  enabled: ${PERSISTENCE_ENABLED}
+  enabled: false
   ## A manually managed Persistent Volume and Claim
   ## If defined, PVC must be created manually before volume will be bound
   ## The value is evaluated as a template, so, for example, the name can depend on .Release or .Chart
@@ -272,7 +273,7 @@ persistence:
   ## The path the volume will be mounted at, useful when using different
   ## PostgreSQL images.
   ##
-  mountPath: /data
+  ##mountPath: /data
 
   ## The subdirectory of the volume to mount to, useful in dev environments
   ## and one PV for multiple services.
