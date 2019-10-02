@@ -1,15 +1,23 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 
 import { Informations } from "../Informations";
 import { GET_SERVICES_ANTENNE } from "./queries";
 
+export const getHeadquarter = user_antennes => {
+  return user_antennes.filter(user_antenne => user_antenne.service_antenne.headquarters === true);
+};
+
 const ServicesInformations = props => {
-  const { user_antennes } = props;
+  const { user_antennes, currentAntenne } = props;
   const [mainAntenne] = user_antennes;
+  const antennes = getHeadquarter(user_antennes);
+  const [headquarter] = antennes;
+  const currentAntenneId = currentAntenne || headquarter.service_antenne.id;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
-      antenneId: mainAntenne.antenne_id
+      antenneId: currentAntenne ? currentAntenne : mainAntenne.antenne_id
     }
   });
 
@@ -22,7 +30,19 @@ const ServicesInformations = props => {
   }
 
   const { service_antenne } = data;
-  return <Informations {...props} service_antenne={service_antenne} />;
+  return (
+    <Informations {...props} service_antenne={service_antenne} currentAntenne={currentAntenneId} />
+  );
+};
+
+ServicesInformations.defaultProps = {
+  user_antennes: [],
+  currentAntenne: null
+};
+
+ServicesInformations.propTypes = {
+  user_antennes: PropTypes.array,
+  currentAntenne: PropTypes.string
 };
 
 export { ServicesInformations };
