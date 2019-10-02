@@ -34,7 +34,7 @@ const ServiceMesures = props => {
       limit: RESULT_PER_PAGE,
       antenne: antenne ? antenne.value : null,
       type: mesureType ? mesureType.value : null,
-      status: mesureStatus ? mesureStatus.value : null,
+      status: currentMesureType,
       searchText:
         debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
     },
