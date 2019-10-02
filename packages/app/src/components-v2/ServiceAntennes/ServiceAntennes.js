@@ -84,7 +84,7 @@ const ServiceAntennes = props => {
                   key={antenne.id}
                   antenne={antenne}
                   linkText="Voir l'antenne"
-                  href={antenne.id}
+                  href={parseInt(antenne.id, 10)}
                   Link={AntenneLinkButton}
                 />
               );

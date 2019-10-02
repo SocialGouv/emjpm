@@ -3,7 +3,7 @@ import { Box, Text, Flex } from "rebass";
 import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
-import { LinkButton } from "../Commons";
+import { AntenneEditLinkButton } from "../Commons";
 import {
   titleStyle,
   innerTextStyle,
@@ -13,7 +13,7 @@ import {
   flexStyle
 } from "./style";
 const Informations = props => {
-  const { service_antenne } = props;
+  const { service_antenne, currentAntenne } = props;
   const [service] = service_antenne;
 
   return (
@@ -55,7 +55,9 @@ const Informations = props => {
           </Box>
         </Flex>
         <Flex mt="5">
-          <LinkButton href="/services/edit-informations">Modifier mes informations</LinkButton>
+          <AntenneEditLinkButton href={currentAntenne}>
+            Modifier mes informations
+          </AntenneEditLinkButton>
         </Flex>
       </Card>
     </Box>

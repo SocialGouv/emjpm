@@ -33,8 +33,19 @@ export const GET_SERVICE_USERS = gql`
       }
       user_antennes {
         service_antenne {
-          id
           name
+          mesures_max
+          mesures_in_progress
+          mesures_awaiting
+          id
+          headquarters
+          contact_phone
+          contact_lastname
+          contact_firstname
+          contact_email
+          address_zip_code
+          address_street
+          address_city
         }
         user {
           prenom

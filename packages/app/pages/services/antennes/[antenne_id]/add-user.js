@@ -2,8 +2,8 @@ import React from "react";
 import { Box, Flex } from "rebass";
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
-import { withAuthSync } from "../../src/util/auth";
-import { LayoutServices } from "../../src/components-v2/Layout";
+import { withAuthSync } from "../../../../src/util/auth";
+import { LayoutServices } from "../../../../src/components-v2/Layout";
 
 const AddUser = () => {
   return (
