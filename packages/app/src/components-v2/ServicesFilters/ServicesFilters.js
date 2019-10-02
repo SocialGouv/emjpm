@@ -1,4 +1,4 @@
-import { Card, Select } from "@socialgouv/emjpm-ui-core";
+import { Card, Input, Select } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import { MESURE_STATUS_LABEL_VALUE, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
@@ -14,7 +14,9 @@ const ServicesFilters = props => {
     mesureStatus,
     changeMesureStatus,
     antenne,
-    changeAntenne
+    changeAntenne,
+    searchText,
+    changeSearchText
   } = useContext(FiltersContext);
 
   const antenneOptions = [
@@ -68,6 +70,17 @@ const ServicesFilters = props => {
               </Box>
             )}
           </Flex>
+        </Box>
+        <Box width="250px" mr={1}>
+          <Input
+            value={searchText}
+            spellCheck="false"
+            autoComplete="false"
+            onChange={event => changeSearchText(event.target.value)}
+            name="search"
+            size="small"
+            placeholder="Rechercher une mesure"
+          />
         </Box>
       </Flex>
     </Card>
