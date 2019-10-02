@@ -23,17 +23,9 @@ export const getCurrentAntenne = (user_antennes, currentAntenne) => {
 };
 
 const ServiceEditAntenne = props => {
-  console.log(props);
   const { service_admins, id, currentAntenne, user_antennes } = props;
   const [currentUserService] = service_admins;
   const { service_id } = currentUserService;
-  const [createAntenne] = useMutation(EDIT_ANTENNE, {
-    update() {
-      Router.push("/services/antennes/[antenne_id]", `/services/antennes/${currentAntenne}`, {
-        shallow: true
-      });
-    }
-  });
   const [antenne] = getCurrentAntenne(user_antennes, currentAntenne);
   const {
     address_city,
@@ -44,8 +36,23 @@ const ServiceEditAntenne = props => {
     contact_lastname,
     contact_phone,
     mesures_max,
+    headquarters,
     name
   } = antenne.service_antenne;
+  const [createAntenne] = useMutation(EDIT_ANTENNE, {
+    update() {
+      if (headquarters) {
+        Router.push("/services/informations", `/services/informations`, {
+          shallow: true
+        });
+      } else {
+        Router.push("/services/antennes/[antenne_id]", `/services/antennes/${currentAntenne}`, {
+          shallow: true
+        });
+      }
+    }
+  });
+
   return (
     <Card sx={cardStyle}>
       <Flex sx={ServiceEditAntenneStyle} {...props}>
