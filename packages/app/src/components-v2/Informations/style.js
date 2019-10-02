@@ -5,13 +5,15 @@ const titleStyle = {
 };
 
 const topTextStyle = {
-  mt: "2",
+  mt: "5px",
+  lineHeight: "1.4",
   color: "mediumGray",
   fontWeight: "600"
 };
 
 const innerTextStyle = {
-  mt: "1",
+  mt: "5px",
+  lineHeight: "1.4",
   color: "mediumGray",
   fontWeight: "600"
 };
@@ -23,7 +25,7 @@ const iconTextStyle = {
 };
 
 const boxStyle = {
-  flexGrow: 1
+  width: "50%"
 };
 
 const flexStyle = {
