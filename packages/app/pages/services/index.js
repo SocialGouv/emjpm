@@ -1,7 +1,7 @@
-import { BoxWrapper, Button, Card, Heading1, Heading3, Text } from "@socialgouv/emjpm-ui-core";
-import Link from "next/link";
+import { Button, BoxWrapper, Card, Heading1, Heading3, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
+import { LinkButton } from "../../src/components-v2/Commons";
 import { LayoutServices } from "../../src/components-v2/Layout";
 import { ServiceMesures } from "../../src/components-v2/ServiceMesures";
 import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
@@ -44,11 +44,7 @@ const Mesures = () => {
           <Flex flexDirection="row" justifyContent="space-between">
             <Heading1>Toutes vos mesures</Heading1>
             <Box>
-              <Button>
-                <Link href="/services/add-mesures">
-                  <a>Ajouter une mesure</a>
-                </Link>
-              </Button>
+              <LinkButton href="/services/add-mesures">Ajouter une mesure</LinkButton>
             </Box>
           </Flex>
 
@@ -59,23 +55,7 @@ const Mesures = () => {
               flexWrap: "wrap"
             }}
           >
-            {/* <Box
-            sx={{
-              flexGrow: 99999,
-              flexBasis: 0,
-              minWidth: 320
-            }}
-          > */}
             <UserInformations Component={props => <ServiceMesures {...props} />} />
-            {/* </Box>
-          <Box
-            sx={{
-              flexGrow: 1,
-              flexBasis: 256
-            }}
-          >
-            map and other stuff
-          </Box> */}
           </Flex>
         </BoxWrapper>
       </LayoutServices>
