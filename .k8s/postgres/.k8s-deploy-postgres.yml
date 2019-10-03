@@ -1,15 +1,28 @@
 .k8s-deploy-postgres:
   extends: .base_docker_helm_image_stage
   script:
-    - export POSTGRESQL_USER=$(kubectl get secret -n ${K8S_NAMESPACE} emjpm-secret -o jsonpath='{.data.POSTGRES_USER}' | base64 --decode)
-    - export POSTGRESQL_PASSWORD=$(kubectl get secret -n ${K8S_NAMESPACE} emjpm-secret -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 --decode)
-
+    - export POSTGRESQL_USER=emjpm
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+    #
     - envsubst < ./.k8s/postgres/values-postgresql.yaml > ./values-postgresql.yaml
-    - envsubst < ./.k8s/postgres/job-inject-dataset.yml > ./job-inject-dataset.yml
     #
     - helm init --client-only
-    - helm upgrade --debug --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
+    - helm upgrade --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
     #
-    - kubectl delete job "${K8S_PROJECT}-dataset-${BRANCH_HASH}" -n ${K8S_NAMESPACE} || true;
-    - cat ./.k8s/postgres/configmap.yml | envsubst | kubectl apply -n ${K8S_NAMESPACE} -f -
-    - kubectl apply -f ./job-inject-dataset.yml -n ${K8S_NAMESPACE}
+    # Dataset job
+    - kubectl delete configmap ${K8S_PROJECT}-dataset-configmap-${BRANCH_HASH} || true;
+    - kubectl create configmap ${K8S_PROJECT}-dataset-configmap-${BRANCH_HASH}
+        --from-file=./.k8s/postgres/dataset/configmap
+    #
+    - kubectl delete job ${K8S_PROJECT}-dataset-${BRANCH_HASH} || true;
+    - cat ./.k8s/postgres/dataset/job-inject-dataset.yml | envsubst | kubectl apply -f -
+    #
+    # Backup cronjob
+    - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} || true;
+    - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+        --from-file=./.k8s/postgres/backup/configmap
+    #
+    - if [ -n "${PRODUCTION+x}" ]; then
+        kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
+        cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
+      fi

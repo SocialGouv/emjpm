@@ -4,12 +4,12 @@ import nextCookie from "next-cookies";
 import cookie from "js-cookie";
 
 export const logout = () => {
+  Router.push("/error", "/login");
   cookie.remove("token");
   // to support logging out from all windows
   window.localStorage.setItem("logout", Date.now());
   window.localStorage.removeItem("id_token");
   window.localStorage.removeItem("login");
-  Router.push("/login");
 };
 
 // Gets the display name of a JSX component for dev tools
@@ -24,8 +24,8 @@ export const withAuthSync = WrappedComponent =>
 
       const componentProps =
         WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
-      const props = { ...componentProps, token };
-      return props;
+
+      return { ...componentProps, token };
     }
 
     constructor(props) {
@@ -56,8 +56,8 @@ export const withAuthSync = WrappedComponent =>
   };
 
 export const auth = ctx => {
-  const cookie = nextCookie(ctx);
-  const { token } = cookie;
+  const { token } = nextCookie(ctx);
+
   /*
    * This happens on server only, ctx.req is available means it's being
    * rendered on server. If we are on server and token is not available,

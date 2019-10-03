@@ -1,17 +1,16 @@
-import React from "react";
-
-import { Box, Flex } from "rebass";
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
-
-import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
+import React from "react";
+import { Box, Flex } from "rebass";
 import { LayoutServices } from "../../src/components-v2/Layout";
+import { ServiceAddMesure } from "../../src/components-v2/ServiceMesures";
+import { UserInformations } from "../../src/components-v2/UserInformations";
+import { withAuthSync } from "../../src/util/auth";
 
 const AddMesures = () => {
   return (
-    <LayoutServices>
+    <LayoutServices hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
-        <Heading1>Toutes vos mesures</Heading1>
-        <ServicesFilters />
+        <Heading1>{"Création d'une mesure"}</Heading1>
         <Flex
           sx={{
             flexWrap: "wrap"
@@ -25,16 +24,11 @@ const AddMesures = () => {
               minWidth: 320
             }}
           >
-            Mesures list
-          </Box>
-          <Box
-            sx={{
-              p: 3,
-              flexGrow: 1,
-              flexBasis: 256
-            }}
-          >
-            map and other stuff
+            <UserInformations
+              Component={props => {
+                return <ServiceAddMesure {...props} />;
+              }}
+            />
           </Box>
         </Flex>
       </BoxWrapper>
@@ -42,4 +36,4 @@ const AddMesures = () => {
   );
 };
 
-export default AddMesures;
+export default withAuthSync(AddMesures);

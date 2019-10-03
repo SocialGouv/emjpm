@@ -1,36 +1,44 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MesureList, MesureContextProvider } from "@socialgouv/emjpm-ui-components";
-import React, { Fragment, useContext, useState, useEffect } from "react";
-import { Flex, Box } from "rebass";
+import { MesureContextProvider, MesureList } from "@socialgouv/emjpm-ui-components";
 import { Button } from "@socialgouv/emjpm-ui-core";
-
-import { MesureListStyle } from "./style";
-import { formatMesureList } from "./utils";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { Box, Flex } from "rebass";
 import { FiltersContext } from "../ServicesFilters/context";
-import { ServiceCloseMesure } from "./ServiceCloseMesure";
-import { ServiceReactivateMesure } from "./ServiceReactivateMesure";
+import { MESURES } from "./queries";
 import { ServiceAcceptMesure } from "./ServiceAcceptMesure";
-
+import { ServiceCloseMesure } from "./ServiceCloseMesure";
 import { ServiceDeleteMesure } from "./ServiceDeleteMesure";
 import { ServiceEditMesure } from "./ServiceEditMesure";
-
-import { MESURES } from "./queries";
+import { ServiceReactivateMesure } from "./ServiceReactivateMesure";
+import { MesureListStyle } from "./style";
+import { formatMesureList } from "./utils";
 
 const RESULT_PER_PAGE = 20;
 
-const ServiceMesures = () => {
+const ServiceMesures = props => {
+  const { isOnlyWaiting, user_antennes } = props;
   const [currentPage, setCurrentPage] = useState(0);
-  const { mesureType, mesureStatus, antenne } = useContext(FiltersContext);
+  const { mesureType, mesureStatus, antenne, debouncedSearchText } = useContext(FiltersContext);
 
   useEffect(() => setCurrentPage(RESULT_PER_PAGE), [mesureType, mesureStatus, antenne]);
+
+  let currentMesureType = null;
+  if (isOnlyWaiting) {
+    currentMesureType = "Mesure en attente";
+  } else {
+    currentMesureType = mesureStatus ? mesureStatus.value : null;
+  }
   const { data, error, loading, fetchMore } = useQuery(MESURES, {
     variables: {
       offset: 0,
       limit: RESULT_PER_PAGE,
-      antenne: antenne ? antenne.value : undefined,
-      type: mesureType ? mesureType.value : undefined,
-      status: mesureStatus ? mesureStatus.value : undefined
-    }
+      antenne: antenne ? antenne.value : null,
+      type: mesureType ? mesureType.value : null,
+      status: currentMesureType,
+      searchText:
+        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
+    },
+    fetchPolicy: "network-only"
   });
 
   if (loading) {
@@ -51,10 +59,14 @@ const ServiceMesures = () => {
           {mesures.length > 0 ? (
             <Fragment>
               <MesureList
-                EditComponent={ServiceEditMesure}
+                EditComponent={props => (
+                  <ServiceEditMesure user_antennes={user_antennes} {...props} />
+                )}
                 CloseComponent={ServiceCloseMesure}
                 RemoveComponent={ServiceDeleteMesure}
-                AcceptComponent={ServiceAcceptMesure}
+                AcceptComponent={props => (
+                  <ServiceAcceptMesure user_antennes={user_antennes} {...props} />
+                )}
                 ReactivateComponent={ServiceReactivateMesure}
                 onPanelOpen={id => console.log(id)}
                 mesures={mesures}

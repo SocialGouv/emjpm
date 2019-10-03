@@ -2,13 +2,15 @@ ARG BASE_IMAGE=socialgouv/emjpm:master
 
 FROM ${BASE_IMAGE} as emjpm-base-image
 
-FROM nginx:1.17-alpine
+FROM node:10-stretch
+WORKDIR /app
 
-COPY --from=emjpm-base-image /app/packages/app/out /usr/share/nginx/html
-
-COPY ./nginx.conf /etc/nginx/nginx.conf
-COPY ./scripts /
+COPY --from=emjpm-base-image /app/packages/app/.next /app/.next
+COPY --from=emjpm-base-image /app/packages/app/static /app/static
+COPY --from=emjpm-base-image /app/packages/app/next.config.js /app/next.config.js
+COPY --from=emjpm-base-image /app/packages/app/package.json /app/package.json
+COPY --from=emjpm-base-image /app/node_modules /app/node_modules
 
 EXPOSE 80
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["yarn", "start:build"]

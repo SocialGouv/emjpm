@@ -3,6 +3,198 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.1.6](https://github.com/SocialGouv/emjpm/compare/v25.1.5...v25.1.6) (2019-09-27)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [25.1.5](https://github.com/SocialGouv/emjpm/compare/v25.1.4...v25.1.5) (2019-09-27)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [25.1.4](https://github.com/SocialGouv/emjpm/compare/v25.1.3...v25.1.4) (2019-09-27)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [25.1.3](https://github.com/SocialGouv/emjpm/compare/v25.1.2...v25.1.3) (2019-09-27)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [25.1.2](https://github.com/SocialGouv/emjpm/compare/v25.1.1...v25.1.2) (2019-09-27)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [25.1.1](https://github.com/SocialGouv/emjpm/compare/v25.1.0...v25.1.1) (2019-09-26)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+# [25.1.0](https://github.com/SocialGouv/emjpm/compare/v25.0.1...v25.1.0) (2019-09-26)
+
+
+### Bug Fixes
+
+* **knex:** use emjpm user for knex ([#855](https://github.com/SocialGouv/emjpm/issues/855)) ([4927a2f](https://github.com/SocialGouv/emjpm/commit/4927a2f))
+
+
+
+
+
+## [25.0.1](https://github.com/SocialGouv/emjpm/compare/v25.0.0...v25.0.1) (2019-09-26)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+# [25.0.0](https://github.com/SocialGouv/emjpm/compare/v24.5.0...v25.0.0) (2019-09-25)
+
+
+### Bug Fixes
+
+* **knex:** use postgres user locally ([#843](https://github.com/SocialGouv/emjpm/issues/843)) ([de8b778](https://github.com/SocialGouv/emjpm/commit/de8b778))
+
+
+### Code Refactoring
+
+* **app:** use next server instead of export ([#839](https://github.com/SocialGouv/emjpm/issues/839)) ([3439ec7](https://github.com/SocialGouv/emjpm/commit/3439ec7))
+
+
+### BREAKING CHANGES
+
+* **app:** refactor(app): use next server instead of export 
+  - The frontend is now served by a node.js/next server instead of nginx
+
+
+
+
+
+# [24.5.0](https://github.com/SocialGouv/emjpm/compare/v24.4.3...v24.5.0) (2019-09-24)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [24.4.3](https://github.com/SocialGouv/emjpm/compare/v24.4.2...v24.4.3) (2019-09-23)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [24.4.2](https://github.com/SocialGouv/emjpm/compare/v24.4.1...v24.4.2) (2019-09-23)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [24.4.1](https://github.com/SocialGouv/emjpm/compare/v24.4.0...v24.4.1) (2019-09-23)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+# [24.4.0](https://github.com/SocialGouv/emjpm/compare/v24.3.4...v24.4.0) (2019-09-23)
+
+
+### Bug Fixes
+
+* **knex:** use emjpm user for migration ([#814](https://github.com/SocialGouv/emjpm/issues/814)) ([629f7bc](https://github.com/SocialGouv/emjpm/commit/629f7bc))
+* **trigger:** update counters if antenne id changes ([#813](https://github.com/SocialGouv/emjpm/issues/813)) ([150e78e](https://github.com/SocialGouv/emjpm/commit/150e78e))
+
+
+
+
+
+## [24.3.4](https://github.com/SocialGouv/emjpm/compare/v24.3.3...v24.3.4) (2019-09-22)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [24.3.3](https://github.com/SocialGouv/emjpm/compare/v24.3.2...v24.3.3) (2019-09-22)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [24.3.2](https://github.com/SocialGouv/emjpm/compare/v24.3.1...v24.3.2) (2019-09-22)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+## [24.3.1](https://github.com/SocialGouv/emjpm/compare/v24.3.0...v24.3.1) (2019-09-20)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
+# [24.3.0](https://github.com/SocialGouv/emjpm/compare/v24.2.3...v24.3.0) (2019-09-20)
+
+
+### Bug Fixes
+
+* **knex:** use correct pg user for test ([#806](https://github.com/SocialGouv/emjpm/issues/806)) ([dd01307](https://github.com/SocialGouv/emjpm/commit/dd01307))
+
+
+### Features
+
+* **db:** add user / use one database emjpm ([#795](https://github.com/SocialGouv/emjpm/issues/795)) ([9ef8020](https://github.com/SocialGouv/emjpm/commit/9ef8020))
+
+
+
+
+
+## [24.2.3](https://github.com/SocialGouv/emjpm/compare/v24.2.2...v24.2.3) (2019-09-19)
+
+
+### Bug Fixes
+
+* **knex:** remove the bad old knex production seeds ([#772](https://github.com/SocialGouv/emjpm/issues/772)) ([1fa9eae](https://github.com/SocialGouv/emjpm/commit/1fa9eae))
+
+
+
+
+
 ## [24.2.2](https://github.com/SocialGouv/emjpm/compare/v24.2.1...v24.2.2) (2019-09-18)
 
 **Note:** Version bump only for package @emjpm/knex

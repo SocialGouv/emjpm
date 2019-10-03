@@ -1,10 +1,10 @@
-import React from "react";
-import ReactTable from "react-table";
 import format from "date-fns/format";
 import { stringify } from "query-string";
+import React from "react";
+import ReactTable from "react-table";
 import ToggleState from "../common/ToggleState";
-import SearchButton from "../communComponents/SearchButton";
 import { default as apiFetch, updateUser } from "../communComponents/Api";
+import SearchButton from "../communComponents/SearchButton";
 
 const CellActive = ({ active }) => {
   return (
@@ -124,10 +124,7 @@ class TableUser extends React.Component {
     loading: true
   };
   fetchData = () => {
-    const url =
-      this.props.type === "mandataire"
-        ? `/admin/mandataires?${stringify(this.props.filters)}`
-        : `/admin/tis?${stringify(this.props.filters)}`;
+    const url = `/admin/${this.props.type}?${stringify(this.props.filters)}`;
     this.setState({ loading: true }, () =>
       apiFetch(url).then(res => {
         this.setState({

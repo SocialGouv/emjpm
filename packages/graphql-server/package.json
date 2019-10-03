@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/graphql-server",
-  "version": "24.2.2",
+  "version": "25.1.6",
   "main": "index.js",
   "author": "Incubateur des Ministères Sociaux <dsi-incubateur@sg.social.gouv.fr> (https://incubateur.social.gouv.fr)",
   "license": "Apache-2.0",
@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/index.ts",
-    "build": "ncc build src/index.ts",
+    "build": "ncc build --source-map src/index.ts",
     "lint": "tslint -p tsconfig.json -t stylish",
     "generate": "graphql-codegen --config codegen.yml"
   },

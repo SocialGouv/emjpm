@@ -1,9 +1,8 @@
 import React from "react";
-
 import { Box, Flex } from "rebass";
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
-import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
+import { withAuthSync } from "../../src/util/auth";
 import { LayoutServices } from "../../src/components-v2/Layout";
 
 const ImportMesures = () => {
@@ -11,7 +10,6 @@ const ImportMesures = () => {
     <LayoutServices>
       <BoxWrapper mt={6} px="1">
         <Heading1>Toutes vos mesures</Heading1>
-        <ServicesFilters />
         <Flex
           sx={{
             flexWrap: "wrap"
@@ -42,4 +40,4 @@ const ImportMesures = () => {
   );
 };
 
-export default ImportMesures;
+export default withAuthSync(ImportMesures);

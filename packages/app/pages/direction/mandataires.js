@@ -6,6 +6,8 @@ import {
 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box } from "rebass";
+
+import { withAuthSync } from "../../src/util/auth";
 import { AvailabilityMap } from "../../src/components-v2/AvailabilityMap";
 import { Filters } from "../../src/components-v2/Filters";
 import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
@@ -67,4 +69,4 @@ const Mandataires = () => {
   );
 };
 
-export default Mandataires;
+export default withAuthSync(Mandataires);

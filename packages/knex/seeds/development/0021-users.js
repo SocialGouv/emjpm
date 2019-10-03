@@ -83,7 +83,7 @@ const USERS = [
     password: "titest",
     type: "ti",
     //reset_password_token: "LpWpzK4Jla9I87Aq",
-    active: false,
+    active: true,
     cabinet: "6D",
     email: "test@ti.com",
     prenom: "Jean"

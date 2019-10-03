@@ -1,15 +1,5 @@
 import gql from "graphql-tag";
 
-export const CURRENT_USER = gql`
-  {
-    currentUser @client {
-      magistrat {
-        ti_id
-      }
-    }
-  }
-`;
-
 export const GET_MANDATAIRES = gql`
   query view_mesure_gestionnaire(
     $tribunal: Int!
@@ -70,6 +60,7 @@ export const GET_MANDATAIRES = gql`
           code_postal
           telephone
           email
+          etablissement
           service_antennes(where: { headquarters: { _eq: true } }) {
             id
           }

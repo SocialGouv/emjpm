@@ -8,10 +8,10 @@ module.exports = {
     client: "pg",
     connection: process.env.DATABASE_URL || {
       host: "localhost",
-      user: "postgres",
+      user: "emjpm",
       password: "test",
       port: "5434",
-      database: "emjpm_test"
+      database: "emjpm"
     },
     migrations: {
       directory: join(__dirname, "migrations")
@@ -24,10 +24,10 @@ module.exports = {
     client: "pg",
     connection: process.env.DATABASE_URL || {
       host: "localhost",
-      user: "api",
+      user: "emjpm",
       password: "test",
       port: "5434",
-      database: "emjpm_dev"
+      database: "emjpm"
     },
     migrations: {
       directory: join(__dirname, "migrations")
@@ -40,16 +40,13 @@ module.exports = {
     client: "pg",
     connection: process.env.DATABASE_URL || {
       host: "localhost",
-      user: "postgres",
+      user: "emjpm",
       password: "test",
       port: "5434",
-      database: "emjpm_prod"
+      database: "emjpm"
     },
     migrations: {
       directory: join(__dirname, "migrations")
-    },
-    seeds: {
-      directory: join(__dirname, "seeds/production")
     }
   }
 };

@@ -5,6 +5,7 @@ include:
   - /.k8s/app/.k8s-deploy-app.yml
   - /.k8s/postgres/.k8s-deploy-postgres.yml
   - /.k8s/hasura/.k8s-deploy-hasura.yml
+  - /.k8s/metabase/.k8s-deploy-metabase.yml
   - /.k8s/graphql-server/.k8s-deploy-graphql-server.yml
 
 #
@@ -54,10 +55,15 @@ include:
     - kubectl create namespace ${K8S_NAMESPACE}
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
     - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
-    - kubectl delete resourcequota -n ${K8S_NAMESPACE} -l "cattle.io/creator=norman,resourcequota.management.cattle.io/default-resource-quota=true"
+    #
     - envsubst < ./.k8s/quota.yml > ./quota.yml
     - kubectl apply -f ./quota.yml -n ${K8S_NAMESPACE}
+    # Remove the default- quota
+    - kubectl get resourcequota -n ${K8S_NAMESPACE}
+    - kubectl delete $(kubectl get -n ${K8S_NAMESPACE} resourcequota --output=name | grep default-)
+    #
     # Create secrets
+    - export APP_URL=$(echo $FRONTEND_URL | base64)
     - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
     - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
 
@@ -165,7 +171,7 @@ Deploy postgres (incubateur):
     <<: *deploy_stage_variables
     CONTEXT: hasura
     IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
-    PORT: 8080
+    PORT: 80
 
 #
 
@@ -199,3 +205,22 @@ Deploy graphql-server (dev):
 Deploy graphql-server (incubateur):
   <<: *deploy_graphql-server
   <<: *incubateur_stage
+
+#
+#
+#
+
+Deploy metabase (incubateur):
+  <<: *incubateur_stage
+  <<: *deploy_stage
+  extends: .k8s-deploy-metabase
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: metabase
+    PORT: 3000
+  after_script:
+    # NOTE(douglasduteil): re-run env.sh
+    # Because the `after_script` runs in a separated shell context.
+    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
+    - source ./.gitlab-ci/env.sh
+    - echo "Metabase available at - ${METABASE_URL}"

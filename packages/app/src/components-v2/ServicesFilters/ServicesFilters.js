@@ -1,14 +1,12 @@
-import { useQuery } from "@apollo/react-hooks";
-import { Card, Select } from "@socialgouv/emjpm-ui-core";
+import { Card, Input, Select } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import { MESURE_STATUS_LABEL_VALUE, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { FiltersContext } from "./context";
-import { GET_CURRENT_USER } from "./queries";
 import { TextStyle } from "./style";
 
-const ServicesFilters = () => {
-  const { data, error, loading } = useQuery(GET_CURRENT_USER);
+const ServicesFilters = props => {
+  const { isStatusHidden, user_antennes } = props;
 
   const {
     mesureType,
@@ -16,16 +14,10 @@ const ServicesFilters = () => {
     mesureStatus,
     changeMesureStatus,
     antenne,
-    changeAntenne
+    changeAntenne,
+    searchText,
+    changeSearchText
   } = useContext(FiltersContext);
-
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
-  }
 
   const antenneOptions = [
     {
@@ -33,11 +25,12 @@ const ServicesFilters = () => {
       value: null
     }
   ];
+
   Array.prototype.push.apply(
     antenneOptions,
-    data.currentUser.user_antennes.map(ua => ({
-      label: ua.service_antenne.name,
-      value: ua.service_antenne.id
+    user_antennes.map(user_antenne => ({
+      label: user_antenne.service_antenne.name,
+      value: user_antenne.service_antenne.id
     }))
   );
 
@@ -65,16 +58,29 @@ const ServicesFilters = () => {
                 onChange={option => changeMesureType(option)}
               />
             </Box>
-            <Box width="170px" mr={1}>
-              <Select
-                size="small"
-                options={MESURE_STATUS_LABEL_VALUE}
-                placeholder={"État"}
-                value={mesureStatus}
-                onChange={option => changeMesureStatus(option)}
-              />
-            </Box>
+            {!isStatusHidden && (
+              <Box width="170px" mr={1}>
+                <Select
+                  size="small"
+                  options={MESURE_STATUS_LABEL_VALUE}
+                  placeholder={"État"}
+                  value={mesureStatus}
+                  onChange={option => changeMesureStatus(option)}
+                />
+              </Box>
+            )}
           </Flex>
+        </Box>
+        <Box width="250px" mr={1}>
+          <Input
+            value={searchText}
+            spellCheck="false"
+            autoComplete="false"
+            onChange={event => changeSearchText(event.target.value)}
+            name="search"
+            size="small"
+            placeholder="Rechercher une mesure"
+          />
         </Box>
       </Flex>
     </Card>

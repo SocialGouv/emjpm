@@ -1,9 +1,11 @@
-import React from "react";
-import { Flex, Box } from "rebass";
 import { BoxWrapper, Logo } from "@socialgouv/emjpm-ui-core";
+import getConfig from "next/config";
+import React from "react";
+import { Box, Flex } from "rebass";
+import { Link, List, ListItem, ListTitle } from "../Commons";
+import { FooterFlexStyle, FooterItemStyle, FooterWrapperStyle } from "./style";
 
-import { List, ListItem, ListTitle, Link } from "../Commons";
-import { FooterWrapperStyle, FooterFlexStyle, FooterItemStyle } from "./style";
+const { publicRuntimeConfig } = getConfig();
 
 function Footer() {
   return (
@@ -35,7 +37,7 @@ function Footer() {
             </ListItem>
             <ListItem>
               <Link target="_blank" href="https://github.com/SocialGouv/emjpm">
-                Code source
+                Version {publicRuntimeConfig.PACKAGE_VERSION}
               </Link>
             </ListItem>
           </List>
@@ -51,7 +53,7 @@ function Footer() {
                 target="_blank"
                 href="https://docs.google.com/forms/d/1W8f9ySchjaJfAoYMVsYxjsk1PUAGoCX51Aykb_CUNXA/prefill"
               >
-                Proposez une fonctionnalités
+                Proposez une fonctionnalité
               </Link>
             </ListItem>
           </List>

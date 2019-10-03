@@ -22,16 +22,16 @@ spec:
           imagePullPolicy: "IfNotPresent"
           resources:
             requests:
-              cpu: 250m
+              cpu: 375m
               memory: 128Mi
             limits:
               cpu: 500m
               memory: 256Mi
           ports:
-            - containerPort: 8080
+            - containerPort: ${PORT}
           env:
             - name: HASURA_GRAPHQL_DATABASE_URL
-              value: "postgres://${HASURA_POSTGRESQL_USER}:${HASURA_POSTGRES_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
+              value: "postgres://${POSTGRES_HASURA_USER}:${POSTGRES_HASURA_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
             - name: HASURA_GRAPHQL_ENABLE_CONSOLE
               value: "true"
             - name: HASURA_GRAPHQL_ADMIN_SECRET
@@ -41,6 +41,8 @@ spec:
                   key: HASURA_GRAPHQL_ADMIN_SECRET
             - name: HASURA_GRAPHQL_JWT_SECRET
               value: '{"type": "RS256","jwk_url": "http://${K8S_PROJECT}-api-${BRANCH_HASH}/api/v2/auth/jwks"}'
+            - name: HASURA_GRAPHQL_SERVER_PORT
+              value: "${PORT}"
             - name: WHATEVER_URL
               value: "http://${K8S_PROJECT}-graphql-server-${BRANCH_HASH}"
       initContainers:
@@ -51,8 +53,8 @@ spec:
                 do echo waiting for database; sleep 2; done;']
           resources:
             requests:
-              cpu: 100m
-              memory: 128Mi
+              cpu: 25m
+              memory: 16Mi
             limits:
-              cpu: 200m
-              memory: 256Mi
+              cpu: 50m
+              memory: 32Mi

@@ -33,3 +33,12 @@ export const formatMesureList = mesureList => {
   });
   return mesures;
 };
+
+export const formatAntenneOptions = user_antennes => {
+  return user_antennes.map(user_antenne => {
+    return {
+      value: user_antenne.service_antenne.id,
+      label: user_antenne.service_antenne.name
+    };
+  });
+};

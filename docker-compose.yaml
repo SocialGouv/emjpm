@@ -22,10 +22,14 @@ services:
       - POSTGRES_USER=$POSTGRES_USER
       - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
       # API dedicated password
-      - POSTGRES_API_USER=api
-      - POSTGRES_API_USER_PASSWORD=test
-      - POSTGRES_READONLY_USER_NAME=readonly
-      - POSTGRES_READONLY_USER_PASSWORD=readonlyPassword
+      - POSTGRES_EMJPM_USER=emjpm
+      - POSTGRES_EMJPM_PASSWORD=test
+      # Metabase dedicated user
+      - POSTGRES_METABASE_USER=metabase
+      - POSTGRES_METABASE_PASSWORD=metabasePassword
+      # Hasura dedicated user
+      - POSTGRES_HASURA_USER=hasura
+      - POSTGRES_HASURA_PASSWORD=hasuraPassword
     ports:
       - "5434:5432"
     volumes:
@@ -40,7 +44,7 @@ services:
       - db
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_DATABASE_URL: postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@db:5432/emjpm_dev
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasuraPassword@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/v2/auth/jwks"}'
       WHATEVER_URL: $WHATEVER_URL

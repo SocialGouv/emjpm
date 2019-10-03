@@ -3,6 +3,302 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.1.6](https://github.com/SocialGouv/emjpm/compare/v25.1.5...v25.1.6) (2019-09-27)
+
+
+### Reverts
+
+* feat(k8s): add metabase ([#840](https://github.com/SocialGouv/emjpm/issues/840)) ([8d6386a](https://github.com/SocialGouv/emjpm/commit/8d6386a))
+
+
+
+
+
+## [25.1.5](https://github.com/SocialGouv/emjpm/compare/v25.1.4...v25.1.5) (2019-09-27)
+
+
+### Bug Fixes
+
+* **postgres:** there is no emjpm shema... ([94fe101](https://github.com/SocialGouv/emjpm/commit/94fe101))
+
+
+
+
+
+## [25.1.4](https://github.com/SocialGouv/emjpm/compare/v25.1.3...v25.1.4) (2019-09-27)
+
+
+### Features
+
+* **k8s:** add metabase ([#840](https://github.com/SocialGouv/emjpm/issues/840)) ([ac76678](https://github.com/SocialGouv/emjpm/commit/ac76678))
+
+
+
+
+
+## [25.1.3](https://github.com/SocialGouv/emjpm/compare/v25.1.2...v25.1.3) (2019-09-27)
+
+
+### Bug Fixes
+
+* **email:** use support.emjpm@fabrique.social.gouv.fr ([#862](https://github.com/SocialGouv/emjpm/issues/862)) ([d9284d1](https://github.com/SocialGouv/emjpm/commit/d9284d1))
+
+
+
+
+
+## [25.1.2](https://github.com/SocialGouv/emjpm/compare/v25.1.1...v25.1.2) (2019-09-27)
+
+
+### Bug Fixes
+
+* **deps:** use same dotenv dep ([#861](https://github.com/SocialGouv/emjpm/issues/861)) ([23af4ba](https://github.com/SocialGouv/emjpm/commit/23af4ba))
+* **mesure-list:** fix mesure list refetch ([#858](https://github.com/SocialGouv/emjpm/issues/858)) ([8e9c724](https://github.com/SocialGouv/emjpm/commit/8e9c724))
+
+
+
+
+
+## [25.1.1](https://github.com/SocialGouv/emjpm/compare/v25.1.0...v25.1.1) (2019-09-26)
+
+
+### Bug Fixes
+
+* **mesure-eteinte:** update package ([#857](https://github.com/SocialGouv/emjpm/issues/857)) ([fec415a](https://github.com/SocialGouv/emjpm/commit/fec415a))
+* **mesure-magistrats:** fix magistrats mesure fetching policy ([#856](https://github.com/SocialGouv/emjpm/issues/856)) ([be2c5ef](https://github.com/SocialGouv/emjpm/commit/be2c5ef))
+
+
+
+
+
+# [25.1.0](https://github.com/SocialGouv/emjpm/compare/v25.0.1...v25.1.0) (2019-09-26)
+
+
+### Bug Fixes
+
+* **knex:** use emjpm user for knex ([#855](https://github.com/SocialGouv/emjpm/issues/855)) ([4927a2f](https://github.com/SocialGouv/emjpm/commit/4927a2f))
+
+
+### Features
+
+* **api:** introduce env configuration ([#854](https://github.com/SocialGouv/emjpm/issues/854)) ([1fba29c](https://github.com/SocialGouv/emjpm/commit/1fba29c))
+
+
+
+
+
+## [25.0.1](https://github.com/SocialGouv/emjpm/compare/v25.0.0...v25.0.1) (2019-09-26)
+
+
+### Bug Fixes
+
+* service name ([#847](https://github.com/SocialGouv/emjpm/issues/847)) ([1514658](https://github.com/SocialGouv/emjpm/commit/1514658))
+* **choose-mandataire:** add require on all field ([#850](https://github.com/SocialGouv/emjpm/issues/850)) ([de8ad30](https://github.com/SocialGouv/emjpm/commit/de8ad30))
+* **forgot-password:** fix forgot password error ([#849](https://github.com/SocialGouv/emjpm/issues/849)) ([ab7b517](https://github.com/SocialGouv/emjpm/commit/ab7b517))
+* **hotjar:** add the right id ([#846](https://github.com/SocialGouv/emjpm/issues/846)) ([28206a9](https://github.com/SocialGouv/emjpm/commit/28206a9))
+* **reset-password:** fix pasword reset and add non blocking mail ([#853](https://github.com/SocialGouv/emjpm/issues/853)) ([9118a64](https://github.com/SocialGouv/emjpm/commit/9118a64))
+* **service-name:** fix service name ([#845](https://github.com/SocialGouv/emjpm/issues/845)) ([e6c6017](https://github.com/SocialGouv/emjpm/commit/e6c6017))
+* **trailing-slash:** remove trailing slash ([#848](https://github.com/SocialGouv/emjpm/issues/848)) ([90fa17b](https://github.com/SocialGouv/emjpm/commit/90fa17b))
+
+
+
+
+
+# [25.0.0](https://github.com/SocialGouv/emjpm/compare/v24.5.0...v25.0.0) (2019-09-25)
+
+
+### Bug Fixes
+
+* **k8s:** add APP_URL environment variable ([#842](https://github.com/SocialGouv/emjpm/issues/842)) ([e42bb4c](https://github.com/SocialGouv/emjpm/commit/e42bb4c))
+* **k8s:** use secure SMTP port ([#841](https://github.com/SocialGouv/emjpm/issues/841)) ([685235e](https://github.com/SocialGouv/emjpm/commit/685235e))
+* **knex:** use postgres user locally ([#843](https://github.com/SocialGouv/emjpm/issues/843)) ([de8b778](https://github.com/SocialGouv/emjpm/commit/de8b778))
+* **matomo-local:** dont load react piwik if dev ([#837](https://github.com/SocialGouv/emjpm/issues/837)) ([053fbba](https://github.com/SocialGouv/emjpm/commit/053fbba))
+* **next-link:** add onyl the target as props ([#838](https://github.com/SocialGouv/emjpm/issues/838)) ([8f41649](https://github.com/SocialGouv/emjpm/commit/8f41649))
+
+
+### Code Refactoring
+
+* **app:** use next server instead of export ([#839](https://github.com/SocialGouv/emjpm/issues/839)) ([3439ec7](https://github.com/SocialGouv/emjpm/commit/3439ec7))
+
+
+### Features
+
+* **k8s:** recalcul quota ([#834](https://github.com/SocialGouv/emjpm/issues/834)) ([d6238a4](https://github.com/SocialGouv/emjpm/commit/d6238a4))
+
+
+### BREAKING CHANGES
+
+* **app:** refactor(app): use next server instead of export 
+  - The frontend is now served by a node.js/next server instead of nginx
+
+
+
+
+
+# [24.5.0](https://github.com/SocialGouv/emjpm/compare/v24.4.3...v24.5.0) (2019-09-24)
+
+
+### Bug Fixes
+
+* **passwor-verification:** update authorized special char ([#827](https://github.com/SocialGouv/emjpm/issues/827)) ([235c7cf](https://github.com/SocialGouv/emjpm/commit/235c7cf))
+* **service:** create correct graph objects in signup ([#825](https://github.com/SocialGouv/emjpm/issues/825)) ([22d9363](https://github.com/SocialGouv/emjpm/commit/22d9363))
+* **signup-mail:** remove useless await ([#826](https://github.com/SocialGouv/emjpm/issues/826)) ([f3aeba3](https://github.com/SocialGouv/emjpm/commit/f3aeba3))
+
+
+### Features
+
+* **app:** use the tool factory matomo ([#831](https://github.com/SocialGouv/emjpm/issues/831)) ([45efc89](https://github.com/SocialGouv/emjpm/commit/45efc89))
+* **k8s:** add sentry public dns ([#828](https://github.com/SocialGouv/emjpm/issues/828)) ([bb0f3a1](https://github.com/SocialGouv/emjpm/commit/bb0f3a1))
+
+
+
+
+
+## [24.4.3](https://github.com/SocialGouv/emjpm/compare/v24.4.2...v24.4.3) (2019-09-23)
+
+
+### Features
+
+* **k8s:** more power to nginx ([7674354](https://github.com/SocialGouv/emjpm/commit/7674354))
+
+
+
+
+
+## [24.4.2](https://github.com/SocialGouv/emjpm/compare/v24.4.1...v24.4.2) (2019-09-23)
+
+
+### Bug Fixes
+
+* **k8s:** invalid base64 ([e41977b](https://github.com/SocialGouv/emjpm/commit/e41977b))
+
+
+
+
+
+## [24.4.1](https://github.com/SocialGouv/emjpm/compare/v24.4.0...v24.4.1) (2019-09-23)
+
+**Note:** Version bump only for package emjpm
+
+
+
+
+
+# [24.4.0](https://github.com/SocialGouv/emjpm/compare/v24.3.4...v24.4.0) (2019-09-23)
+
+
+### Bug Fixes
+
+* **k8s:** add missing anonymize files ([5c9e819](https://github.com/SocialGouv/emjpm/commit/5c9e819))
+* **k8s:** change mounting points ([e84e4e9](https://github.com/SocialGouv/emjpm/commit/e84e4e9))
+* **knex:** give db creation privilege to emjpm ([#817](https://github.com/SocialGouv/emjpm/issues/817)) ([c7f47c6](https://github.com/SocialGouv/emjpm/commit/c7f47c6))
+* **knex:** use emjpm user for migration ([#814](https://github.com/SocialGouv/emjpm/issues/814)) ([629f7bc](https://github.com/SocialGouv/emjpm/commit/629f7bc))
+* **magistrat:** fix update query add gr number use the good names ([#811](https://github.com/SocialGouv/emjpm/issues/811)) ([0f285fd](https://github.com/SocialGouv/emjpm/commit/0f285fd))
+* **next-export:** remove get data from tree add default value fo… ([#822](https://github.com/SocialGouv/emjpm/issues/822)) ([f178b2d](https://github.com/SocialGouv/emjpm/commit/f178b2d))
+* **panel:** update panel texts ([#823](https://github.com/SocialGouv/emjpm/issues/823)) ([754141e](https://github.com/SocialGouv/emjpm/commit/754141e))
+* **trigger:** update counters if antenne id changes ([#813](https://github.com/SocialGouv/emjpm/issues/813)) ([150e78e](https://github.com/SocialGouv/emjpm/commit/150e78e))
+* **user informations:** update permission for users and refactor user infos with query component ([#812](https://github.com/SocialGouv/emjpm/issues/812)) ([0e699c7](https://github.com/SocialGouv/emjpm/commit/0e699c7))
+
+
+### Features
+
+* **informations-panel:** add panel and fixes ([#821](https://github.com/SocialGouv/emjpm/issues/821)) ([e1c4426](https://github.com/SocialGouv/emjpm/commit/e1c4426))
+* **k8s:** anonymize the dump ([#819](https://github.com/SocialGouv/emjpm/issues/819)) ([2d054d7](https://github.com/SocialGouv/emjpm/commit/2d054d7))
+
+
+
+
+
+## [24.3.4](https://github.com/SocialGouv/emjpm/compare/v24.3.3...v24.3.4) (2019-09-22)
+
+
+### Bug Fixes
+
+* **k8s:** unsafe_data is not valid volume name ([07d7cd5](https://github.com/SocialGouv/emjpm/commit/07d7cd5))
+
+
+
+
+
+## [24.3.3](https://github.com/SocialGouv/emjpm/compare/v24.3.2...v24.3.3) (2019-09-22)
+
+
+### Features
+
+* **k8s:** add daily dump in prod ([#810](https://github.com/SocialGouv/emjpm/issues/810)) ([7dbb4cd](https://github.com/SocialGouv/emjpm/commit/7dbb4cd))
+* **k8s:** recalcul backup cron quota ([cb2eeef](https://github.com/SocialGouv/emjpm/commit/cb2eeef))
+
+
+### Reverts
+
+* ci(gitlab): force release as default ([64bcabc](https://github.com/SocialGouv/emjpm/commit/64bcabc))
+
+
+
+
+
+## [24.3.2](https://github.com/SocialGouv/emjpm/compare/v24.3.1...v24.3.2) (2019-09-22)
+
+**Note:** Version bump only for package emjpm
+
+
+
+
+
+## [24.3.1](https://github.com/SocialGouv/emjpm/compare/v24.3.0...v24.3.1) (2019-09-20)
+
+
+### Bug Fixes
+
+* **postgres:** missing S ([70e5980](https://github.com/SocialGouv/emjpm/commit/70e5980))
+
+
+
+
+
+# [24.3.0](https://github.com/SocialGouv/emjpm/compare/v24.2.3...v24.3.0) (2019-09-20)
+
+
+### Bug Fixes
+
+* **format-mandataires:** fix empty array value ([#792](https://github.com/SocialGouv/emjpm/issues/792)) ([08d5409](https://github.com/SocialGouv/emjpm/commit/08d5409))
+* **knex:** use correct pg user for test ([#806](https://github.com/SocialGouv/emjpm/issues/806)) ([dd01307](https://github.com/SocialGouv/emjpm/commit/dd01307))
+* **login-style:** move old css to related layout, enhance login style ([#786](https://github.com/SocialGouv/emjpm/issues/786)) ([dde1481](https://github.com/SocialGouv/emjpm/commit/dde1481))
+* **magistrat:** fix update query add gr number use the good names ([#796](https://github.com/SocialGouv/emjpm/issues/796)) ([999517f](https://github.com/SocialGouv/emjpm/commit/999517f))
+* **region-filter:** check if region is defined: ([#798](https://github.com/SocialGouv/emjpm/issues/798)) ([ac19378](https://github.com/SocialGouv/emjpm/commit/ac19378))
+
+
+### Features
+
+* **admin:** display direction user ([#800](https://github.com/SocialGouv/emjpm/issues/800)) ([1022567](https://github.com/SocialGouv/emjpm/commit/1022567))
+* **db:** add user / use one database emjpm ([#795](https://github.com/SocialGouv/emjpm/issues/795)) ([9ef8020](https://github.com/SocialGouv/emjpm/commit/9ef8020))
+
+
+
+
+
+## [24.2.3](https://github.com/SocialGouv/emjpm/compare/v24.2.2...v24.2.3) (2019-09-19)
+
+
+### Bug Fixes
+
+* **external-link:** use simple link for external link ([#781](https://github.com/SocialGouv/emjpm/issues/781)) ([25d3e33](https://github.com/SocialGouv/emjpm/commit/25d3e33))
+* **hasura-metadata:** update metadata ([#782](https://github.com/SocialGouv/emjpm/issues/782)) ([0f6d0e1](https://github.com/SocialGouv/emjpm/commit/0f6d0e1))
+* **k8s:** communication from graphql-server to hasura ([#778](https://github.com/SocialGouv/emjpm/issues/778)) ([28b9ed0](https://github.com/SocialGouv/emjpm/commit/28b9ed0))
+* **knex:** remove the bad old knex production seeds ([#772](https://github.com/SocialGouv/emjpm/issues/772)) ([1fa9eae](https://github.com/SocialGouv/emjpm/commit/1fa9eae))
+* **magistrat:** fix mesure create ([#773](https://github.com/SocialGouv/emjpm/issues/773)) ([e0906f1](https://github.com/SocialGouv/emjpm/commit/e0906f1))
+* **nav-link:** add possibility to active nested  nav link ([#779](https://github.com/SocialGouv/emjpm/issues/779)) ([2e84e94](https://github.com/SocialGouv/emjpm/commit/2e84e94))
+* **service-informations:** fix bad query ([#783](https://github.com/SocialGouv/emjpm/issues/783)) ([84150c3](https://github.com/SocialGouv/emjpm/commit/84150c3))
+
+
+### Reverts
+
+* ci(gittlab): update k8s-ns-killer:0.7.1 ([6e6eabb](https://github.com/SocialGouv/emjpm/commit/6e6eabb))
+
+
+
+
+
 ## [24.2.2](https://github.com/SocialGouv/emjpm/compare/v24.2.1...v24.2.2) (2019-09-18)
 
 

@@ -218,7 +218,7 @@ const MentionPage = () => (
       </p>
       <p>
         Pour cela, il vous suffit de nous contacter, en justifiant de votre identité, par voie
-        électronique ou contact@emjpm.beta.gouv.fr ou à l’adresse postale suivante :
+        électronique ou support.emjpm@fabrique.social.gouv.fr ou à l’adresse postale suivante :
       </p>
       <p>
         Direction des systèmes d’information

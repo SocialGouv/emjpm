@@ -86,9 +86,22 @@ tables:
         user_id: x-hasura-User-Id
     role: direction
 - array_relationships: []
-  delete_permissions: []
+  delete_permissions:
+  - comment: null
+    permission:
+      filter: {}
+    role: service
   event_triggers: []
-  insert_permissions: []
+  insert_permissions:
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - id
+      - user_id
+      - antenne_id
+      set: {}
+    role: service
   is_enum: false
   object_relationships:
   - comment: null
@@ -112,7 +125,16 @@ tables:
           _eq: X-Hasura-User-Id
     role: service
   table: user_antenne
-  update_permissions: []
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - antenne_id
+      - id
+      - user_id
+      filter: {}
+      set: {}
+    role: service
 - array_relationships:
   - comment: null
     name: magistrats
@@ -499,22 +521,16 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
       - cabinet
+      - created_at
       - email
+      - id
+      - last_login
       - nom
-      - password
       - prenom
-      - reset_password_token
       - type
       - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
+      filter: {}
     role: ti
   - comment: null
     permission:
@@ -771,7 +787,7 @@ tables:
       - code
       - nom
       filter: {}
-    role: prepose
+    role: mandataire
   - comment: null
     permission:
       allow_aggregations: false
@@ -781,7 +797,7 @@ tables:
       - code
       - nom
       filter: {}
-    role: mandataire
+    role: prepose
   - comment: null
     permission:
       allow_aggregations: false
@@ -1204,9 +1220,36 @@ tables:
       foreign_key_constraint_on:
         column: antenne_id
         table: user_antenne
-  delete_permissions: []
+  delete_permissions:
+  - comment: null
+    permission:
+      filter: {}
+    role: service
   event_triggers: []
-  insert_permissions: []
+  insert_permissions:
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - id
+      - service_id
+      - name
+      - created_at
+      - headquarters
+      - address_street
+      - address_zip_code
+      - address_city
+      - contact_lastname
+      - contact_firstname
+      - contact_email
+      - contact_phone
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - date_mesure_update
+      - bak_mandataire_id
+      set: {}
+    role: service
   is_enum: false
   object_relationships:
   - comment: null
@@ -1287,7 +1330,30 @@ tables:
       filter: {}
     role: direction
   table: service_antenne
-  update_permissions: []
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - headquarters
+      - bak_mandataire_id
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - service_id
+      - created_at
+      - date_mesure_update
+      - address_city
+      - address_street
+      - address_zip_code
+      - contact_email
+      - contact_firstname
+      - contact_lastname
+      - contact_phone
+      - name
+      filter: {}
+      set: {}
+    role: service
 - array_relationships: []
   delete_permissions:
   - comment: null
@@ -1871,6 +1937,12 @@ tables:
   - comment: null
     permission:
       allow_aggregations: false
+      columns: []
+      filter: {}
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
       columns:
       - latitude
       - longitude
@@ -1912,12 +1984,6 @@ tables:
       - code_postal
       filter: {}
     role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns: []
-      filter: {}
-    role: service
   table: geolocalisation_code_postal
   update_permissions: []
 - array_relationships:

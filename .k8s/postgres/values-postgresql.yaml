@@ -13,9 +13,9 @@ global:
 ## ref: https://hub.docker.com/r/bitnami/postgresql/tags/
 ##
 image:
-  registry: docker.io
+  registry: ${CI_REGISTRY_IMAGE}
   repository: postgres
-  tag: 10.6
+  tag: ${IMAGE_TAG}
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -119,7 +119,7 @@ postgresqlUsername: postgres
 ## Create a database
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run
 ##
-postgresqlDatabase: ${POSTGRES_DATABASE}
+# postgresqlDatabase: ${POSTGRES_DATABASE}
 
 ## PostgreSQL data dir
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md
@@ -171,51 +171,7 @@ postgresqlDataDir: /data/pgdata
 ## Specify dictionary of scripts to be run at first boot
 ## Alternatively, you can put your scripts under the files/docker-entrypoint-initdb.d directory
 ##
-#initdbScripts:
-#  my_init_script.sh: |
-#    #!/bin/bash
-#    set -e
-#    echo "starting my_init_script.sh"
-#
-#    psql -v ON_ERROR_STOP=1 -U postgres <<-EOSQL
-#      CREATE USER postgres with encrypted password 'password';
-#      ALTER USER postgres WITH SUPERUSER;
-#      GRANT ALL PRIVILEGES ON DATABASE "emjpm_dev" TO postgres;
-#
-#      -- create pgcrypto extension, required for UUID
-#      CREATE EXTENSION IF NOT EXISTS pgcrypto;
-#
-#      -- create the schemas required by the hasura system
-#      -- NOTE: If you are starting from scratch: drop the below schemas first, if they exist.
-#      CREATE SCHEMA IF NOT EXISTS hdb_catalog;
-#      CREATE SCHEMA IF NOT EXISTS hdb_views;
-#
-#      -- make the user an owner of system schemas
-#      ALTER SCHEMA hdb_catalog OWNER TO postgres;
-#      ALTER SCHEMA hdb_views OWNER TO postgres;
-#
-#      -- grant select permissions on information_schema and pg_catalog. This is
-#      -- required for hasura to query list of available tables
-#      GRANT SELECT ON ALL TABLES IN SCHEMA information_schema TO postgres;
-#      GRANT SELECT ON ALL TABLES IN SCHEMA pg_catalog TO postgres;
-#
-#      -- Below permissions are optional. This is dependent on what access to your
-#      -- tables/schemas - you want give to hasura. If you want expose the public
-#      -- schema for GraphQL query then give permissions on public schema to the
-#      -- hasura user.
-#      -- Be careful to use these in your production db. Consult the postgres manual or
-#      -- your DBA and give appropriate permissions.
-#
-#      -- grant all privileges on all tables in the public schema. This can be customised:
-#      -- For example, if you only want to use GraphQL regular queries and not mutations,
-#      -- then you can set: GRANT SELECT ON ALL TABLES...
-#      GRANT USAGE ON SCHEMA public TO postgres;
-#      GRANT ALL ON ALL TABLES IN SCHEMA public TO postgres;
-#      GRANT ALL ON ALL SEQUENCES IN SCHEMA public TO postgres;
-#
-#    EOSQL
-#    echo "ending my_init_script.sh"
-
+# initdbScripts:
 
 ## ConfigMap with scripts to be run at first boot
 ## NOTE: This will override initdbScripts
@@ -342,11 +298,11 @@ slave:
 ##
 resources:
   requests:
-    memory: 256Mi
-    cpu: 250m
+    cpu: 375m
+    memory: 128Mi
   limits:
-    memory: 1024Mi
     cpu: 500m
+    memory: 256Mi
 
 networkPolicy:
   ## Enable creation of NetworkPolicy resources.
@@ -431,4 +387,24 @@ metrics:
     successThreshold: 1
 
 # Define custom environment variables to pass to the image here
-extraEnv: {}
+extraEnv:
+  - name: HASURA_GRAPHQL_ADMIN_SECRET
+    valueFrom:
+      secretKeyRef:
+        name: emjpm-secret
+        key: HASURA_GRAPHQL_ADMIN_SECRET
+  - name: POSTGRES_EMJPM_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: emjpm-secret
+        key: POSTGRES_EMJPM_PASSWORD
+  - name: POSTGRES_HASURA_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: emjpm-secret
+        key: POSTGRES_HASURA_PASSWORD
+  - name: POSTGRES_METABASE_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: emjpm-secret
+        key: POSTGRES_METABASE_PASSWORD

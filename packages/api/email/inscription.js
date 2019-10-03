@@ -34,7 +34,7 @@ Bonne journée :)
 
 const inscriptionEmail = (nom, prenom, email, codePostal, type, tis) =>
   sendEmail(
-    "contact@emjpm.beta.gouv.fr",
+    "support.emjpm@fabrique.social.gouv.fr",
     "Nouvelle inscription",
     EMAIL_RELANCE_TEXT(nom, prenom, email, codePostal, type, tis),
     EMAIL_RELANCE_HTML(nom, prenom, email, codePostal, type, tis)

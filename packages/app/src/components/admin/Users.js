@@ -1,14 +1,14 @@
 import React from "react";
 import { User, UserCheck } from "react-feather";
-import TableUser from "./TableUser";
 import { DummyTabs } from "..";
 import TableState from "../common/TableState";
+import TableUser from "./TableUser";
 
 const tabs = type =>
   [
     {
       text: "Actifs",
-      type: "mandataire",
+      type: "mandataires",
       icon: <UserCheck />,
       url: "/admin/users/actifs",
       content: (
@@ -18,7 +18,7 @@ const tabs = type =>
     {
       text: "En attente de validation",
       icon: <User />,
-      type: "mandataire",
+      type: "mandataires",
       url: "/admin/users/en-attente",
       content: (
         <TableUser type={type} filters={{ "users.active": false }} hideColumns={["cabinet"]} />
@@ -27,7 +27,7 @@ const tabs = type =>
     {
       text: "Actifs",
       icon: <UserCheck />,
-      type: "ti",
+      type: "tis",
       url: "/admin/users/actifs/ti",
       content: (
         <TableUser
@@ -40,12 +40,38 @@ const tabs = type =>
     {
       text: "En attente de validation",
       icon: <User />,
-      type: "ti",
+      type: "tis",
       url: "/admin/users/en-attente/ti",
       content: (
         <TableUser
           type={type}
           filters={{ "users.active": false, "users.type": "ti" }}
+          hideColumns={["code_postal"]}
+        />
+      )
+    },
+    {
+      text: "Actifs",
+      icon: <UserCheck />,
+      type: "directions",
+      url: "/admin/users/actifs/direction",
+      content: (
+        <TableUser
+          type={type}
+          filters={{ "users.active": true, "users.type": "direction" }}
+          hideColumns={["code_postal"]}
+        />
+      )
+    },
+    {
+      text: "En attente de validation",
+      icon: <User />,
+      type: "directions",
+      url: "/admin/users/en-attente/direction",
+      content: (
+        <TableUser
+          type={type}
+          filters={{ "users.active": false, "users.type": "direction" }}
           hideColumns={["code_postal"]}
         />
       )

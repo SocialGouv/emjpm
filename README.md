@@ -80,6 +80,81 @@ BASE_IMAGE=emjpm-base docker-compose run knex yarn workspace @emjpm/knex run mig
 BASE_IMAGE=emjpm-base docker-compose run knex yarn workspace @emjpm/knex run seeds
 ```
 
+## Maintenance
+
+### Database
+
+#### dump production database
+
+connect to PG pod
+
+```bash
+kubectl exec -it emjpm-postgres-prod-0 sh
+```
+
+dump database
+
+```bash
+DUMP_FILE=emjpm_prod_`date +%d-%m-%Y"_"%H_%M_%S`.dump
+pg_dump emjpm -U postgres -Fc -W > /tmp/$DUMP_FILE
+```
+
+copy dump on loca
+
+```bash
+kubectl cp emjpm-postgres-prod-0:/tmp/$DUMP_FILE ./$DUMP_FILE
+```
+
+#### restore production dump on local
+
+```bash
+export PGUSER=postgres
+export PGPASSWORD=test
+
+cat <<EOF > reset-database.sql
+SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'emjpm';
+DROP DATABASE IF EXISTS emjpm;
+CREATE DATABASE emjpm WITH OWNER = emjpm;
+EOF
+
+# drop / create database emjpm
+cat reset-database.sql | psql -h localhost -p 5434 -U $PGUSER
+
+# restore production dump
+pg_restore -h localhost -p 5434 --if-exists --clean -e -Fc -d emjpm ./$DUMP_FILE
+
+psql -h localhost -p 5434 -c "ALTER SCHEMA public OWNER TO emjpm" -U $PGUSER emjpm
+
+rm reset-database.sql
+```
+
+#### restore production dump on k8s pod
+
+connect to PG pod
+
+```bash
+kubectl exec -it emjpm-postgres-your-feature sh
+```
+
+restore production dump
+
+```bash
+# drop database emjpm
+cat <<EOF > reset-database.sql
+SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'emjpm';
+DROP DATABASE IF EXISTS emjpm;
+CREATE DATABASE emjpm WITH OWNER = emjpm;
+EOF
+
+cat reset-database.sql | psql -h localhost -U postgres
+
+# restore production dump
+pg_restore -h localhost --if-exists --clean -e -Fc -U postgres -d emjpm ./$DUMP_FILE
+
+psql -h localhost -c "ALTER SCHEMA public OWNER TO emjpm" -U postgres emjpm
+```
+
+
 ## FAQ
 
 - _If you have the `Can't take lock to run migrations: Migration table is already locked` error_

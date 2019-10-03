@@ -1,5 +1,8 @@
-import React from "react";
+import getConfig from "next/config";
 import Link from "next/link";
+import React from "react";
+
+const { publicRuntimeConfig } = getConfig();
 
 const Footer = ({ fixed }) => (
   <footer
@@ -19,7 +22,7 @@ const Footer = ({ fixed }) => (
           <a
             className="button button_transparent"
             style={{ fontSize: "1em" }}
-            href="mailto:contact@emjpm.beta.gouv.fr"
+            href="mailto:support.emjpm@fabrique.social.gouv.fr"
           >
             Nous contacter{" "}
           </a>
@@ -32,6 +35,7 @@ const Footer = ({ fixed }) => (
             </a>
           </Link>
         </li>
+        <li>Version {publicRuntimeConfig.PACKAGE_VERSION}</li>
       </ul>
       <ul className="footer__links"> </ul>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Head from "next/head";
+import "bootstrap/dist/css/bootstrap.css";
 
 import LoginForm from "../src/components/loginComponents/LoginForm";
 import { Layout } from "../src/components";
@@ -31,7 +32,7 @@ switch (browser && browser.name) {
 
 const LoginContainer = ({ style }) => (
   <div className="container" style={style}>
-    <div className="col-12 offset-sm-2 col-sm-8 offset-md-3 col-md-6">
+    <div className="col-12 col-sm-12 offset-md-3 col-md-6">
       <Title>Espace professionnels</Title>
       <LoginForm />
     </div>

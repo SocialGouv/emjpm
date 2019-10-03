@@ -12,8 +12,7 @@ import { MESURE_TYPE_LABEL_VALUE, CIVILITY } from "../../constants/mesures";
 import { MandataireInformations } from "./MandataireInformations";
 
 export const MagistratChoose = props => {
-  const { antenneId, mandataireId } = props;
-  console.log(props);
+  const { ti, antenneId, mandataireId } = props;
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
   const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
   return (
@@ -30,13 +29,15 @@ export const MagistratChoose = props => {
             setTimeout(() => {
               chooseMandataire({
                 variables: {
+                  ti: ti,
                   antenne_id: antenneId || null,
                   mandataire_id: mandataireId || null,
                   type: values.type.value,
                   civilite: values.civilite.value,
                   annee: values.annee,
                   numero_rg: values.numero_rg
-                }
+                },
+                refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"]
               });
               setSubmitting(false);
               setPanelType(null);
@@ -44,10 +45,10 @@ export const MagistratChoose = props => {
             }, 500);
           }}
           validationSchema={Yup.object().shape({
-            type: Yup.string(),
-            civilite: Yup.string(),
-            annee: Yup.string(),
-            numero_rg: Yup.string()
+            type: Yup.string().required(),
+            civilite: Yup.string().required(),
+            annee: Yup.string().required(),
+            numero_rg: Yup.string().required()
           })}
           initialValues={{
             annee: "",

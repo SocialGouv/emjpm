@@ -13,7 +13,7 @@ const { getTisNames } = require("./utils/tis");
 const {
   createService,
   createServiceAntenne,
-  createServiceAntenneTis,
+  createServiceTis,
   createUserAntenne,
   createServiceAdmin
 } = require("./utils/service");
@@ -99,11 +99,6 @@ const createRole = async (userId, type) => {
   }
 };
 
-const updateUserService = (service, user) =>
-  User.query()
-    .update({ service_id: service.id })
-    .where("id", user.id);
-
 /**
  * POST /signup
  * Create a new local account
@@ -143,20 +138,18 @@ const postSignup = async (req, res) => {
       case "individuel":
       case "preprose":
         await createMandataire(req.body, user);
-        await createUserTis(req.body, user.id);
+        createUserTis(req.body, user.id);
         break;
       case "service": {
         const service = await createService(req.body);
         const serviceAntenne = await createServiceAntenne(req.body, service.id);
         await createUserAntenne(user.id, [{ id: serviceAntenne.id }]);
         await createServiceAdmin(user.id, service.id);
-        await createServiceAntenneTis(req.body, serviceAntenne.id);
-        await updateUserService(service, user);
+        await createServiceTis(req.body, service.id);
         break;
       }
       case "serviceAntenne": {
         await createUserAntenne(user.id, req.body.antennes);
-        await updateUserService(req.body.serviceId, user);
         break;
       }
       case "ti":
@@ -167,14 +160,14 @@ const postSignup = async (req, res) => {
         break;
       case "direction": {
         await createRole(user.id, directionType);
-        await createDirection(req.body, user.id);
+        createDirection(req.body, user.id);
         break;
       }
       default:
         return;
     }
     const tiNames = await getTisNames(tis);
-    await inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
+    inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
     return res.json({ success: true });
   } catch (err) {
     errorHandler(err, res);

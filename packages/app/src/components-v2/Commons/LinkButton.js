@@ -15,6 +15,7 @@ const LinkButtonStyle = (isActive, disabled) => {
     fontWeight: 500,
     lineHeight: "1.2",
     outline: "none",
+    display: "inline-block",
     transition: "150ms ease-in-out opacity",
     opacity: isActive ? (disabled ? 0.3 : 0.6) : 1,
     "&:hover": {
@@ -32,8 +33,11 @@ const LinkButtonStyle = (isActive, disabled) => {
 const LinkButton = ({ router, ...props }) => {
   const isActive = router.pathname === props.href;
   return (
-    <NextLink href={props.disabled ? "" : props.href}>
-      <RebassLink sx={LinkButtonStyle(isActive, props.disabled)} {...props}>
+    <NextLink as={props.href} href={props.disabled ? "" : props.href}>
+      <RebassLink
+        href={props.disabled ? "" : props.href}
+        sx={LinkButtonStyle(isActive, props.disabled)}
+      >
         {props.children}
       </RebassLink>
     </NextLink>

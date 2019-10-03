@@ -4,6 +4,7 @@ import { Box, Flex, Text } from "rebass";
 import { Formik } from "formik";
 import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
+import getConfig from "next/config";
 
 import { EDIT_MESURE } from "./mutations";
 import { Select, Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
@@ -14,6 +15,22 @@ import {
   CIVILITY,
   MESURE_STATUS_LABEL_VALUE
 } from "../../constants/mesures";
+import { formatAntenneOptions } from "./utils";
+
+const {
+  publicRuntimeConfig: { NODE_ENV }
+} = getConfig();
+
+const getMesureAntenne = (antenne_id, user_antennes) => {
+  const filteredAntennes = user_antennes.filter(
+    user_antenne => user_antenne.antenne_id === antenne_id
+  );
+  const [currentAntenne] = filteredAntennes;
+  return {
+    value: currentAntenne.service_antenne.id,
+    label: currentAntenne.service_antenne.name
+  };
+};
 
 export const ServiceEditMesure = props => {
   const {
@@ -28,10 +45,14 @@ export const ServiceEditMesure = props => {
     residence,
     status,
     type,
-    ville
+    ville,
+    user_antennes
   } = props;
+  const currentMesureAntenne = getMesureAntenne(antenneId, user_antennes);
+
   const [UpdateMesure] = useMutation(EDIT_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+  const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
@@ -55,27 +76,26 @@ export const ServiceEditMesure = props => {
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              UpdateMesure({
-                variables: {
-                  id: currentMesure,
-                  date_ouverture: values.date_ouverture,
-                  type: values.type.value,
-                  residence: values.residence.value,
-                  code_postal: values.code_postal,
-                  ville: values.ville,
-                  civilite: values.civilite.value,
-                  annee: values.annee,
-                  numero_dossier: values.numero_dossier,
-                  numero_rg: values.numero_rg,
-                  status: values.status.value
-                  // antenne_id: values.antenneId
-                }
-              });
-              setSubmitting(false);
-              setPanelType(null);
-              setCurrentMesure(null);
-            }, 500);
+            UpdateMesure({
+              variables: {
+                id: currentMesure,
+                date_ouverture: values.date_ouverture,
+                type: values.type.value,
+                residence: values.residence.value,
+                code_postal: values.code_postal,
+                ville: values.ville,
+                civilite: values.civilite.value,
+                annee: values.annee,
+                numero_dossier: values.numero_dossier,
+                numero_rg: values.numero_rg,
+                status: values.status.value,
+                antenne_id: values.antenne_id.value
+              },
+              refetchQueries: ["mesures", "mesures_aggregate"]
+            });
+            setSubmitting(false);
+            setPanelType(null);
+            setCurrentMesure(null);
           }}
           validationSchema={Yup.object().shape({
             date_ouverture: Yup.date(),
@@ -91,7 +111,7 @@ export const ServiceEditMesure = props => {
           })}
           initialValues={{
             annee: age,
-            antenne_id: antenneId,
+            antenne_id: currentMesureAntenne,
             civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
             code_postal: codePostal,
             date_ouverture: dateOuverture,
@@ -123,7 +143,7 @@ export const ServiceEditMesure = props => {
                     name="date_ouverture"
                     hasError={errors.date_ouverture && touched.date_ouverture}
                     onChange={handleChange}
-                    placeholder="Date d'extinction"
+                    placeholder="Date d'ouverture"
                   />
                 </Box>
                 <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
@@ -209,17 +229,32 @@ export const ServiceEditMesure = props => {
                     placeholder="numero rg"
                   />
                 </Box>
-                <Box sx={{ zIndex: "70", position: "relative" }} mb="2">
-                  <Select
-                    id="status"
-                    name="status"
-                    placeholder="status de la mesure"
-                    value={values.status}
-                    hasError={errors.status && touched.status}
-                    onChange={option => setFieldValue("status", option)}
-                    options={MESURE_STATUS_LABEL_VALUE}
-                  />
-                </Box>
+                {user_antennes.length >= 2 && (
+                  <Box sx={{ zIndex: "80", position: "relative" }} mb="2">
+                    <Select
+                      id="antenne_id"
+                      name="antenne_id"
+                      placeholder="Antenne"
+                      value={values.antenne_id}
+                      hasError={errors.antenne_id && touched.antenne_id}
+                      onChange={option => setFieldValue("antenne_id", option)}
+                      options={ANTENNE_OPTIONS}
+                    />
+                  </Box>
+                )}
+                {NODE_ENV === "development" && (
+                  <Box sx={{ zIndex: "70", position: "relative" }} mb="2">
+                    <Select
+                      id="status"
+                      name="status"
+                      placeholder="status de la mesure"
+                      value={values.status}
+                      hasError={errors.status && touched.status}
+                      onChange={option => setFieldValue("status", option)}
+                      options={MESURE_STATUS_LABEL_VALUE}
+                    />
+                  </Box>
+                )}
                 <Flex justifyContent="flex-end">
                   <Box>
                     <Button

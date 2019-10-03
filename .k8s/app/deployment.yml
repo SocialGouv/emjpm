@@ -35,16 +35,23 @@ spec:
             periodSeconds: 5
           resources:
             requests:
-              cpu: 10m
-              memory: 16Mi
+              cpu: 375m
+              memory: 128Mi
             limits:
-              cpu: 50m
-              memory: 32Mi
+              cpu: 500m
+              memory: 256Mi
 
           #
 
           env:
             - name: API_URL
-              value: "${API_URL}"
+              value: "//${API_HOST}"
             - name: GRAPHQL_SERVER_URI
-              value: "${HASURA_URL}/v1/graphql"
+              value: "//${HASURA_HOST}/v1/graphql"
+            - name: VERSION
+              value: "${VERSION}"
+            - name: SENTRY_PUBLIC_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: SENTRY_PUBLIC_DSN

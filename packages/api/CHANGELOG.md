@@ -3,6 +3,195 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.1.6](https://github.com/SocialGouv/emjpm/compare/v25.1.5...v25.1.6) (2019-09-27)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+## [25.1.5](https://github.com/SocialGouv/emjpm/compare/v25.1.4...v25.1.5) (2019-09-27)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+## [25.1.4](https://github.com/SocialGouv/emjpm/compare/v25.1.3...v25.1.4) (2019-09-27)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+## [25.1.3](https://github.com/SocialGouv/emjpm/compare/v25.1.2...v25.1.3) (2019-09-27)
+
+
+### Bug Fixes
+
+* **email:** use support.emjpm@fabrique.social.gouv.fr ([#862](https://github.com/SocialGouv/emjpm/issues/862)) ([d9284d1](https://github.com/SocialGouv/emjpm/commit/d9284d1))
+
+
+
+
+
+## [25.1.2](https://github.com/SocialGouv/emjpm/compare/v25.1.1...v25.1.2) (2019-09-27)
+
+
+### Bug Fixes
+
+* **deps:** use same dotenv dep ([#861](https://github.com/SocialGouv/emjpm/issues/861)) ([23af4ba](https://github.com/SocialGouv/emjpm/commit/23af4ba))
+
+
+
+
+
+## [25.1.1](https://github.com/SocialGouv/emjpm/compare/v25.1.0...v25.1.1) (2019-09-26)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+# [25.1.0](https://github.com/SocialGouv/emjpm/compare/v25.0.1...v25.1.0) (2019-09-26)
+
+
+### Features
+
+* **api:** introduce env configuration ([#854](https://github.com/SocialGouv/emjpm/issues/854)) ([1fba29c](https://github.com/SocialGouv/emjpm/commit/1fba29c))
+
+
+
+
+
+## [25.0.1](https://github.com/SocialGouv/emjpm/compare/v25.0.0...v25.0.1) (2019-09-26)
+
+
+### Bug Fixes
+
+* **reset-password:** fix pasword reset and add non blocking mail ([#853](https://github.com/SocialGouv/emjpm/issues/853)) ([9118a64](https://github.com/SocialGouv/emjpm/commit/9118a64))
+
+
+
+
+
+# [25.0.0](https://github.com/SocialGouv/emjpm/compare/v24.5.0...v25.0.0) (2019-09-25)
+
+
+### Code Refactoring
+
+* **app:** use next server instead of export ([#839](https://github.com/SocialGouv/emjpm/issues/839)) ([3439ec7](https://github.com/SocialGouv/emjpm/commit/3439ec7))
+
+
+### BREAKING CHANGES
+
+* **app:** refactor(app): use next server instead of export 
+  - The frontend is now served by a node.js/next server instead of nginx
+
+
+
+
+
+# [24.5.0](https://github.com/SocialGouv/emjpm/compare/v24.4.3...v24.5.0) (2019-09-24)
+
+
+### Bug Fixes
+
+* **passwor-verification:** update authorized special char ([#827](https://github.com/SocialGouv/emjpm/issues/827)) ([235c7cf](https://github.com/SocialGouv/emjpm/commit/235c7cf))
+* **service:** create correct graph objects in signup ([#825](https://github.com/SocialGouv/emjpm/issues/825)) ([22d9363](https://github.com/SocialGouv/emjpm/commit/22d9363))
+* **signup-mail:** remove useless await ([#826](https://github.com/SocialGouv/emjpm/issues/826)) ([f3aeba3](https://github.com/SocialGouv/emjpm/commit/f3aeba3))
+
+
+
+
+
+## [24.4.3](https://github.com/SocialGouv/emjpm/compare/v24.4.2...v24.4.3) (2019-09-23)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+## [24.4.2](https://github.com/SocialGouv/emjpm/compare/v24.4.1...v24.4.2) (2019-09-23)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+## [24.4.1](https://github.com/SocialGouv/emjpm/compare/v24.4.0...v24.4.1) (2019-09-23)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+# [24.4.0](https://github.com/SocialGouv/emjpm/compare/v24.3.4...v24.4.0) (2019-09-23)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+## [24.3.4](https://github.com/SocialGouv/emjpm/compare/v24.3.3...v24.3.4) (2019-09-22)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+## [24.3.3](https://github.com/SocialGouv/emjpm/compare/v24.3.2...v24.3.3) (2019-09-22)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+## [24.3.2](https://github.com/SocialGouv/emjpm/compare/v24.3.1...v24.3.2) (2019-09-22)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+## [24.3.1](https://github.com/SocialGouv/emjpm/compare/v24.3.0...v24.3.1) (2019-09-20)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+# [24.3.0](https://github.com/SocialGouv/emjpm/compare/v24.2.3...v24.3.0) (2019-09-20)
+
+
+### Features
+
+* **admin:** display direction user ([#800](https://github.com/SocialGouv/emjpm/issues/800)) ([1022567](https://github.com/SocialGouv/emjpm/commit/1022567))
+
+
+
+
+
+## [24.2.3](https://github.com/SocialGouv/emjpm/compare/v24.2.2...v24.2.3) (2019-09-19)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
 ## [24.2.2](https://github.com/SocialGouv/emjpm/compare/v24.2.1...v24.2.2) (2019-09-18)
 
 **Note:** Version bump only for package @emjpm/api

@@ -6,6 +6,7 @@ import Router from "next/router";
 import { parse } from "query-string";
 import getConfig from "next/config";
 import Modal from "react-modal";
+import ReactPiwik from "react-piwik";
 
 const {
   publicRuntimeConfig: { API_URL }
@@ -105,7 +106,7 @@ export const ResetPasswordView = ({ formData, onSubmit, error, status }) => (
       <br />
       <ErrorBox message={error} />
       <hr style={{ marginTop: 20 }} />
-      <a href="mailto:contact@emjpm.beta.gouv.fr?subject=eMJPM&body=Bonjour,">
+      <a href="mailto:support.emjpm@fabrique.social.gouv.fr?subject=eMJPM&body=Bonjour,">
         Contactez-nous en cas de difficulté de connexion
       </a>
     </StyledForm>
@@ -122,6 +123,8 @@ class ResetPassword extends React.Component {
       showModal: false,
       modalContent: ""
     };
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidMount() {
@@ -135,6 +138,14 @@ class ResetPassword extends React.Component {
     }
   }
 
+  handleOpenModal(content) {
+    this.setState({ showModal: true, modalContent: content });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+
   onSubmit = ({ formData }) => {
     this.setState(
       {
@@ -143,20 +154,19 @@ class ResetPassword extends React.Component {
         formData
       },
       () => {
+        ReactPiwik.push(["trackEvent", "has reset his/her password", formData.email]);
         doForgotPassword(formData)
-          .catch(e => {
-            this.setState({
-              status: "error",
-              error: "Vos mots de passe ne sont pas identiques"
-            });
-            throw e;
-          })
           .then(() => {
             this.handleOpenModal("Un email de confirmation vient de vous être envoyé");
-            Router.push("/login");
             this.setState({
               status: "success",
               error: null
+            });
+          })
+          .catch(() => {
+            this.setState({
+              status: "error",
+              error: "Vos mots de passe ne sont pas identiques"
             });
           });
       }
@@ -175,7 +185,10 @@ class ResetPassword extends React.Component {
         >
           <h2>Attention</h2>
           <p>{modalContent}</p>
-          <button className="close-modal" onClick={this.handleCloseModal}>
+          <button className="btn btn-success" onClick={() => Router.push("/login")}>
+            Revenir à la page de connexion
+          </button>
+          <button className="close-modal" onClick={() => Router.push("/login")}>
             Close Modal
           </button>
         </Modal>
