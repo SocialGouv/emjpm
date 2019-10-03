@@ -26,8 +26,8 @@ spec:
               args: ["/mnt/script/backup.sh"]
               resources:
                 requests:
-                  cpu: 75m
-                  memory: 32Mi
+                  cpu: 0m
+                  memory: 0Mi
                 limits:
                   cpu: 100m
                   memory: 64Mi
@@ -55,8 +55,8 @@ spec:
               image: postgres:10
               resources:
                 requests:
-                  cpu: 75m
-                  memory: 32Mi
+                  cpu: 0m
+                  memory: 0Mi
                 limits:
                   cpu: 100m
                   memory: 64Mi
@@ -77,8 +77,8 @@ spec:
                 - /mnt/script/anonymous.sh
               resources:
                 requests:
-                  cpu: 75m
-                  memory: 32Mi
+                  cpu: 0m
+                  memory: 0Mi
                 limits:
                   cpu: 100m
                   memory: 64Mi
