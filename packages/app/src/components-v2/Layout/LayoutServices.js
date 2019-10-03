@@ -21,6 +21,10 @@ const navigationLinks = [
     url: "/services/waiting-mesures"
   },
   {
+    title: "Import",
+    url: "/services/import-mesures"
+  },
+  {
     title: "Vos informations",
     url: "/services/informations"
   }
