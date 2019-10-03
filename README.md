@@ -111,20 +111,21 @@ kubectl cp emjpm-postgres-prod-0:/tmp/$DUMP_FILE ./$DUMP_FILE
 export PGUSER=postgres
 export PGPASSWORD=test
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+cat <<EOF > reset-database.sql
+SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'emjpm';
+DROP DATABASE IF EXISTS emjpm;
+CREATE DATABASE emjpm WITH OWNER = emjpm;
+EOF
 
-cd $DIR
-
-# drop database emjpm
-psql -h localhost -p 5434 -c "DROP DATABASE IF EXISTS emjpm" -U $PGUSER
-
-# create database emjpm
-psql -h localhost -p 5434 -c "CREATE DATABASE emjpm WITH OWNER = emjpm" -U $PGUSER
+# drop / create database emjpm
+cat reset-database.sql | psql -h localhost -p 5434 -U $PGUSER
 
 # restore production dump
 pg_restore -h localhost -p 5434 --if-exists --clean -e -Fc -d emjpm ./$DUMP_FILE
 
 psql -h localhost -p 5434 -c "ALTER SCHEMA public OWNER TO emjpm" -U $PGUSER emjpm
+
+rm reset-database.sql
 ```
 
 #### restore production dump on k8s pod
