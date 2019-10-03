@@ -27,7 +27,7 @@ const navigationLinks = [
 ];
 
 const LayoutServices = props => {
-  const { children, hasNavigation } = props;
+  const { children, hasNavigation = true } = props;
 
   return (
     <Fragment>
