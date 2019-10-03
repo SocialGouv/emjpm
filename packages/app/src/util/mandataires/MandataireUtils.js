@@ -15,6 +15,7 @@ export const formatMandataire = (
   mesures_in_progress,
   service,
   mandataire,
+  mesures_awaiting,
   gestionnaire_tis
 ) => {
   let currentDiscriminator = {};
@@ -23,6 +24,7 @@ export const formatMandataire = (
     currentAvailability: remaining_capacity ? remaining_capacity : 0,
     dispoMax: mesures_max ? mesures_max : 0,
     mesuresInProgress: mesures_in_progress,
+    mesuresAwaiting: mesures_awaiting,
     isAvailable: mesures_max < mesures_in_progress,
     cvLink: "test",
     type: TYPES[discriminator]
