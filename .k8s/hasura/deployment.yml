@@ -22,7 +22,7 @@ spec:
           imagePullPolicy: "IfNotPresent"
           resources:
             requests:
-              cpu: 375m
+              cpu: 15m
               memory: 128Mi
             limits:
               cpu: 500m
@@ -53,8 +53,8 @@ spec:
                 do echo waiting for database; sleep 2; done;']
           resources:
             requests:
-              cpu: 25m
-              memory: 16Mi
+              cpu: 0m
+              memory: 0Mi
             limits:
               cpu: 50m
               memory: 32Mi
