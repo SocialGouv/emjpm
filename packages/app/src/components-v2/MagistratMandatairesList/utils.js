@@ -7,9 +7,10 @@ export const formatMandatairesList = mandatairesList => {
       discriminator,
       mesures_max,
       mesures_in_progress,
-      service,
       mandataire,
-      gestionnaire_tis
+      gestionnaire_tis,
+      mesures_awaiting,
+      service
     } = row.gestionnaire;
     return formatMandataire(
       remaining_capacity,
@@ -18,6 +19,7 @@ export const formatMandatairesList = mandatairesList => {
       mesures_in_progress,
       service,
       mandataire,
+      mesures_awaiting,
       gestionnaire_tis
     );
   });
