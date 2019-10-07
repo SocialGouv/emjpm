@@ -52,7 +52,7 @@ export const ServiceAddMesureImport = () => {
       const data = new Uint8Array(reader.result);
       const wb = XLSX.read(data, { type: "array" });
       const sheet_name_list = wb.SheetNames;
-      const datas = XLSX.utils.sheet_to_json(wb.Sheets[sheet_name_list[0]], { raw: true });
+      const datas = XLSX.utils.sheet_to_json(wb.Sheets[sheet_name_list[0]], { raw: false });
       const errors = checkExcelDatas(datas);
 
       if (errors.length == 0) {
