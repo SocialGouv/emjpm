@@ -84,6 +84,7 @@ const ServiceEditAntenne = props => {
                 createAntenne({
                   variables: {
                     user_id: id,
+                    antenne_id: currentAntenne,
                     service_id: service_id,
                     name: values.name,
                     mesures_max: values.mesures_max,

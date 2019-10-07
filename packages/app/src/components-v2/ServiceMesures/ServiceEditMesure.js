@@ -49,7 +49,6 @@ export const ServiceEditMesure = props => {
     user_antennes
   } = props;
   const currentMesureAntenne = getMesureAntenne(antenneId, user_antennes);
-
   const [UpdateMesure] = useMutation(EDIT_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
@@ -91,6 +90,7 @@ export const ServiceEditMesure = props => {
                 status: values.status.value,
                 antenne_id: values.antenne_id.value
               },
+              awaitRefetchQueries: true,
               refetchQueries: ["mesures", "mesures_aggregate"]
             });
             setSubmitting(false);
