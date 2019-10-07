@@ -40,15 +40,17 @@ const ServicesFilters = props => {
         <Box>
           <Flex>
             <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
-            <Box width="170px" mr={1}>
-              <Select
-                size="small"
-                options={antenneOptions}
-                placeholder={"Antenne"}
-                value={antenne}
-                onChange={option => changeAntenne(option)}
-              />
-            </Box>
+            {user_antennes.length >= 2 && (
+              <Box width="170px" mr={1}>
+                <Select
+                  size="small"
+                  options={antenneOptions}
+                  placeholder={"Antenne"}
+                  value={antenne}
+                  onChange={option => changeAntenne(option)}
+                />
+              </Box>
+            )}
             <Box width="170px" mr={1}>
               <Select
                 size="small"
@@ -71,7 +73,7 @@ const ServicesFilters = props => {
             )}
           </Flex>
         </Box>
-        <Box width="250px" mr={1}>
+        <Box width="250px">
           <Input
             value={searchText}
             spellCheck="false"
