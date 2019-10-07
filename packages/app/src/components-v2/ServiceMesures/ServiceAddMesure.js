@@ -8,6 +8,7 @@ import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { ADD_MESURE } from "./mutations";
+import { getHeadquarter } from "../../util/getHeadquarter";
 
 const ServiceCreateAntenneStyle = {
   flexWrap: "wrap"
@@ -22,12 +23,18 @@ const grayBox = {
 const cardStyle = { p: "0", m: "1", mt: "5" };
 
 export const ServiceAddMesure = props => {
-  const [AddMesure] = useMutation(ADD_MESURE);
+  const [AddMesure] = useMutation(ADD_MESURE, {
+    options: {
+      awaitRefetchQueries: true,
+      refetchQueries: ["mesures", "mesures_aggregate"]
+    }
+  });
 
   const antenneOptions = props.user_antennes.map(ua => ({
     label: ua.service_antenne.name,
     value: ua.service_antenne.id
   }));
+  const [headquarter] = getHeadquarter(props.user_antennes);
 
   return (
     <Card sx={cardStyle}>
@@ -36,7 +43,7 @@ export const ServiceAddMesure = props => {
           <Box height="155px">
             <Heading4>{`Information de l'antenne`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Information relative a votre service et son antenne le cas écheant`}
+              {`Informations relatives à votre service et son antenne le cas écheant`}
             </Text>
           </Box>
           <Box height="280px">
@@ -58,38 +65,40 @@ export const ServiceAddMesure = props => {
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  AddMesure({
-                    variables: {
-                      antenne_id: Number.parseInt(values.antenne.value),
-                      date_ouverture: values.date_ouverture,
-                      type: values.type.value,
-                      residence: values.residence.value,
-                      code_postal: values.code_postal,
-                      ville: values.ville,
-                      civilite: values.civilite.value,
-                      annee: values.annee,
-                      numero_dossier: values.numero_dossier,
-                      numero_rg: values.numero_rg,
-                      status: "Mesure en cours"
-                    },
-                    refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"]
-                  });
-                  setSubmitting(false);
-                  Router.push("/services");
-                }, 500);
+                AddMesure({
+                  variables: {
+                    antenne_id: Number.parseInt(values.antenne.value),
+                    date_ouverture: values.date_ouverture,
+                    type: values.type.value,
+                    residence: values.residence.value,
+                    code_postal: values.code_postal,
+                    ville: values.ville,
+                    civilite: values.civilite.value,
+                    annee: values.annee.toString(),
+                    numero_dossier: values.numero_dossier,
+                    numero_rg: values.numero_rg,
+                    status: "Mesure en cours"
+                  },
+                  awaitRefetchQueries: true,
+                  refetchQueries: ["mesures", "mesures_aggregate"]
+                });
+                setSubmitting(false);
+                Router.push("/services");
               }}
               validationSchema={Yup.object().shape({
-                antenne: Yup.string().required(),
-                date_ouverture: Yup.date().required(),
-                type: Yup.string().required(),
-                residence: Yup.string().required(),
-                code_postal: Yup.string().required(),
-                ville: Yup.string().required(),
-                civilite: Yup.string().required(),
-                annee: Yup.string().required(),
-                numero_dossier: Yup.string().required(),
-                numero_rg: Yup.string().required()
+                antenne: Yup.string().required("Le champs requit"),
+                date_ouverture: Yup.date().required("Le champs requit"),
+                type: Yup.string().required("Le champs requit"),
+                residence: Yup.string().required("Le champs requit"),
+                code_postal: Yup.string().required("Le champs requit"),
+                ville: Yup.string().required("Le champs requit"),
+                civilite: Yup.string().required("Le champs requit"),
+                annee: Yup.number()
+                  .required("Le champs requit")
+                  .min(1900, "l'année choisi doit être au minimum 1900")
+                  .max(2019, "l'année choisi doit être au maximum 2019"),
+                numero_dossier: Yup.string().required("Le champs requit"),
+                numero_rg: Yup.string().required("Le champs requit")
               })}
               initialValues={{
                 date_ouverture: "",
@@ -98,7 +107,11 @@ export const ServiceAddMesure = props => {
                 annee: "",
                 civilite: "",
                 numero_rg: "",
-                numero_dossier: ""
+                numero_dossier: "",
+                antenne: {
+                  label: headquarter.service_antenne.name,
+                  value: headquarter.service_antenne.id
+                }
               }}
             >
               {props => {
@@ -123,6 +136,7 @@ export const ServiceAddMesure = props => {
                         onChange={option => setFieldValue("antenne", option)}
                         options={antenneOptions}
                       />
+                      {errors.antenne_id && touched.antenne_id && <Text>{errors.antenne_id}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
                       <Input
@@ -131,8 +145,11 @@ export const ServiceAddMesure = props => {
                         name="numero_dossier"
                         hasError={errors.numero_dossier && touched.numero_dossier}
                         onChange={handleChange}
-                        placeholder="numero de dossier"
+                        placeholder="Numero de dossier"
                       />
+                      {errors.numero_dossier && touched.numero_dossier && (
+                        <Text>{errors.numero_dossier}</Text>
+                      )}
                     </Box>
                     <Box mb="2" mt="5">
                       <Input
@@ -144,6 +161,9 @@ export const ServiceAddMesure = props => {
                         onChange={handleChange}
                         placeholder="Date d'ouverture"
                       />
+                      {errors.date_ouverture && touched.date_ouverture && (
+                        <Text>{errors.date_ouverture}</Text>
+                      )}
                     </Box>
                     <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
                       <Select
@@ -155,6 +175,7 @@ export const ServiceAddMesure = props => {
                         onChange={option => setFieldValue("type", option)}
                         options={MESURE_TYPE_LABEL_VALUE}
                       />
+                      {errors.type && touched.type && <Text>{errors.type}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "90", position: "relative" }} mb="2">
                       <Select
@@ -166,6 +187,7 @@ export const ServiceAddMesure = props => {
                         onChange={option => setFieldValue("residence", option)}
                         options={RESIDENCE}
                       />
+                      {errors.residence && touched.residence && <Text>{errors.residence}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
                       <Input
@@ -174,18 +196,21 @@ export const ServiceAddMesure = props => {
                         name="numero_rg"
                         hasError={errors.numero_rg && touched.numero_rg}
                         onChange={handleChange}
-                        placeholder="numero rg"
+                        placeholder="Numéro RG"
                       />
+                      {errors.numero_rg && touched.numero_rg && <Text>{errors.numero_rg}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "1", position: "relative" }} mt="5" mb="2">
                       <Input
                         value={values.annee}
                         id="annee"
                         name="annee"
+                        type="number"
                         hasError={errors.annee && touched.annee}
                         onChange={handleChange}
                         placeholder="année"
                       />
+                      {errors.annee && touched.annee && <Text>{errors.annee}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
                       <Input
@@ -196,6 +221,9 @@ export const ServiceAddMesure = props => {
                         onChange={handleChange}
                         placeholder="Code postal"
                       />
+                      {errors.code_postal && touched.code_postal && (
+                        <Text>{errors.code_postal}</Text>
+                      )}
                     </Box>
                     <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
                       <Input
@@ -204,19 +232,21 @@ export const ServiceAddMesure = props => {
                         name="ville"
                         hasError={errors.ville && touched.ville}
                         onChange={handleChange}
-                        placeholder="ville"
+                        placeholder="Ville"
                       />
+                      {errors.ville && touched.ville && <Text>{errors.ville}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "80", position: "relative" }} mb="2">
                       <Select
                         id="civilite"
                         name="civilite"
-                        placeholder="civilité"
+                        placeholder="Civilité"
                         value={values.civilite}
                         hasError={errors.civilite && touched.civilite}
                         onChange={option => setFieldValue("civilite", option)}
                         options={CIVILITY}
                       />
+                      {errors.civilite && touched.civilite && <Text>{errors.civilite}</Text>}
                     </Box>
                     <Flex justifyContent="flex-end">
                       <Box>

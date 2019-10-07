@@ -86,22 +86,9 @@ tables:
         user_id: x-hasura-User-Id
     role: direction
 - array_relationships: []
-  delete_permissions:
-  - comment: null
-    permission:
-      filter: {}
-    role: service
+  delete_permissions: []
   event_triggers: []
-  insert_permissions:
-  - comment: null
-    permission:
-      check: {}
-      columns:
-      - id
-      - user_id
-      - antenne_id
-      set: {}
-    role: service
+  insert_permissions: []
   is_enum: false
   object_relationships:
   - comment: null
@@ -125,16 +112,7 @@ tables:
           _eq: X-Hasura-User-Id
     role: service
   table: user_antenne
-  update_permissions:
-  - comment: null
-    permission:
-      columns:
-      - antenne_id
-      - id
-      - user_id
-      filter: {}
-      set: {}
-    role: service
+  update_permissions: []
 - array_relationships:
   - comment: null
     name: magistrats
