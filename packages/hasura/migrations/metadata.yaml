@@ -957,6 +957,67 @@ tables:
       set: {}
     role: ti
 - array_relationships: []
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions:
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - antenne_id
+      - content
+      - created_at
+      - file_name
+      - file_size
+      - file_type
+      - id
+      - processed_at
+      - status
+      set:
+        user_id: x-hasura-User-Id
+    role: service
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: user
+    using:
+      foreign_key_constraint_on: user_id
+  - comment: null
+    name: service_antenne
+    using:
+      foreign_key_constraint_on: antenne_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - antenne_id
+      - file_size
+      - id
+      - user_id
+      - content
+      - created_at
+      - processed_at
+      - file_name
+      - file_type
+      - status
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: service
+  table: mesures_import
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - processed_at
+      - status
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set: {}
+    role: service
+- array_relationships: []
   delete_permissions:
   - comment: null
     permission:
@@ -1950,6 +2011,17 @@ tables:
       - latitude
       - longitude
       filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      filter: {}
     role: service
   - comment: null
     permission:
@@ -1984,17 +2056,6 @@ tables:
       - longitude
       filter: {}
     role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      filter: {}
-    role: direction
   table: city
   update_permissions: []
 - array_relationships: []
