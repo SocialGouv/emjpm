@@ -1,4 +1,6 @@
-// const REGEXP_DATE_OUVERTURE = "^([0-2][0-9]|(3)[0-1])(/)(((0)[0-9])|((1)[0-2]))(/)d{4}$";
+const REGEX_DATE_OUVERTURE = "^([0-2][0-9]|(3)[0-1])(/)((0[0-9])|(1[0-2]))(/)(([12][0-9]{3}))$";
+const REGEX_ANNEE = "^([12][0-9]{3})$";
+const REGEX_CODE_POSTAL = "^[0-9]{5}$";
 
 const HEADER = [
   "date_ouverture",
@@ -7,6 +9,7 @@ const HEADER = [
   "ville",
   "civilite",
   "annee",
+  "numero_rg",
   "numero_dossier",
   "residence"
 ];
@@ -46,64 +49,81 @@ export const CIVILITY = ["F", "H"];
 
 const checkHeaders = (datas, errors) => {
   const headers = Object.keys(datas);
-  if (headers.length < 9) {
+  if (headers.length < HEADER.length) {
     errors.push("Le nombre de colonnes du fichier ne correspond pas au modèle de fichier");
   } else {
-    if (headers[0] !== HEADER[0]) {
-      errors.push("Le titre de la première colonne doit être 'date_ouverture'");
-    } else if (headers[1] !== HEADER[1]) {
-      errors.push("Le titre de la deuxième colonne doit être 'type'");
-    } else if (headers[2] !== HEADER[2]) {
-      errors.push("Le titre de la troisième colonne doit être 'code_postal'");
-    } else if (headers[3] !== HEADER[3]) {
-      errors.push("Le titre de la quatrième colonne doit être 'ville'");
-    } else if (headers[4] !== HEADER[4]) {
-      errors.push("Le titre de la cinquième colonne doit être 'civilite'");
-    } else if (headers[5] !== HEADER[5]) {
-      errors.push("Le titre de la sixième colonne doit être 'annee'");
-    } else if (headers[6] !== HEADER[6]) {
-      errors.push("Le titre de la septième colonne doit être 'numero_dossier'");
-    } else if (headers[7] !== HEADER[7]) {
-      errors.push("Le titre de la huitième colonne doit être 'residence'");
+    for (let i = 0; i++; i < 8) {
+      if (headers[i] !== HEADER[i]) {
+        errors.push(`Le titre de la colonne '${i} n'est pas '${HEADER[i]}'`);
+      }
     }
   }
 };
 
-const checkType = (datas, errors) => {
-  for (const row of datas) {
-    if (!MESURE_TYPE.includes(row.type)) {
-      errors.push(`Le type d'une mesure ne peut pas être '${row.type}'`);
-    }
+const checkType = (row, errors) => {
+  if (!MESURE_TYPE.includes(row.type)) {
+    errors.push(`Les valeurs possible du type de mesure sont  '${MESURE_TYPE}'`);
   }
 };
 
-const checkGender = (datas, errors) => {
-  for (const row of datas) {
-    if (!CIVILITY.includes(row.civilite)) {
-      errors.push(`La civilité d'un majeur ne peut pas être '${row.civilite}'`);
-    }
+const checkGender = (row, errors) => {
+  if (!CIVILITY.includes(row.civilite)) {
+    errors.push(`Les valeurs possible de la civilité '${CIVILITY}'`);
   }
 };
 
-const checkResidence = (datas, errors) => {
-  for (const row of datas) {
-    if (!RESIDENCE.includes(row.residence)) {
-      errors.push(`La résidence d'un majeur ne peut pas être '${row.residence}'`);
-    }
+const checkResidence = (row, errors) => {
+  if (!RESIDENCE.includes(row.residence)) {
+    errors.push(`Les valeurs possibles de la résidence sont: ${RESIDENCE}`);
+  }
+};
+
+const checkDateOuverture = (row, errors) => {
+  const val = row.date_ouverture;
+  if (!String(val).match(REGEX_DATE_OUVERTURE)) {
+    errors.push(`La date d'ouverture '${val}' doit être au format 'jj/mm/aaaa'`);
+  }
+};
+
+const checkAnnee = (row, errors) => {
+  if (!String(row.annee).match(REGEX_ANNEE)) {
+    errors.push(`L'année '${row.annee}' doit être au format 'aaaa'`);
+  }
+};
+
+const checkCodePostal = (row, errors) => {
+  if (!String(row.code_postal).match(REGEX_CODE_POSTAL)) {
+    errors.push(`Le code postal '${row.code_postal}' doit être au format '75001'`);
+  }
+};
+
+const checkNumeroRg = (row, errors) => {
+  if (!row.numero_rg) {
+    errors.push(`Le numéro RG est obligatoire`);
   }
 };
 
 export default datas => {
   const errors = [];
-
-  checkHeaders(datas, errors);
-  checkType(datas, errors);
-  checkGender(datas, errors);
-  checkResidence(datas, errors);
-
-  // check code postal
-
-  // check annee
+  datas.forEach((row, index) => {
+    const errorMessages = [];
+    checkHeaders(row, errorMessages);
+    checkDateOuverture(row, errorMessages);
+    checkCodePostal(row, errorMessages);
+    checkAnnee(row, errorMessages);
+    checkType(row, errorMessages);
+    checkGender(row, errorMessages);
+    checkNumeroRg(row, errorMessages);
+    checkResidence(row, errorMessages);
+    if (errorMessages.length > 0) {
+      errors.push({
+        line: index + 1,
+        messages: errorMessages,
+        row
+      });
+    }
+  });
+  console.log(errors);
 
   return errors;
 };
