@@ -36,7 +36,7 @@ export const ServiceAddMesure = props => {
           <Box height="155px">
             <Heading4>{`Information de l'antenne`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Information relative a votre service et son antenne le cas écheant`}
+              {`Informations relatives à votre service et son antenne le cas écheant`}
             </Text>
           </Box>
           <Box height="280px">
@@ -131,7 +131,7 @@ export const ServiceAddMesure = props => {
                         name="numero_dossier"
                         hasError={errors.numero_dossier && touched.numero_dossier}
                         onChange={handleChange}
-                        placeholder="numero de dossier"
+                        placeholder="Numero de dossier"
                       />
                     </Box>
                     <Box mb="2" mt="5">
@@ -174,7 +174,7 @@ export const ServiceAddMesure = props => {
                         name="numero_rg"
                         hasError={errors.numero_rg && touched.numero_rg}
                         onChange={handleChange}
-                        placeholder="numero rg"
+                        placeholder="Numéro RG"
                       />
                     </Box>
                     <Box sx={{ zIndex: "1", position: "relative" }} mt="5" mb="2">
@@ -204,14 +204,14 @@ export const ServiceAddMesure = props => {
                         name="ville"
                         hasError={errors.ville && touched.ville}
                         onChange={handleChange}
-                        placeholder="ville"
+                        placeholder="Ville"
                       />
                     </Box>
                     <Box sx={{ zIndex: "80", position: "relative" }} mb="2">
                       <Select
                         id="civilite"
                         name="civilite"
-                        placeholder="civilité"
+                        placeholder="Civilité"
                         value={values.civilite}
                         hasError={errors.civilite && touched.civilite}
                         onChange={option => setFieldValue("civilite", option)}
