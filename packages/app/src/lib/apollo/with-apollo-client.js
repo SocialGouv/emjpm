@@ -13,10 +13,9 @@ export default App => {
       if (App.getInitialProps) {
         appProps = await App.getInitialProps(ctx);
       }
-
       // Run all GraphQL queries in the component tree
       // and extract the resulting data
-      const apollo = initApollo();
+      const apollo = initApollo({}, ctx);
       // Use me with a real server not an export
       if (!process.browser) {
         try {

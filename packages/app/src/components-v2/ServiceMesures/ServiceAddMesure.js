@@ -23,7 +23,12 @@ const grayBox = {
 const cardStyle = { p: "0", m: "1", mt: "5" };
 
 export const ServiceAddMesure = props => {
-  const [AddMesure] = useMutation(ADD_MESURE);
+  const [AddMesure] = useMutation(ADD_MESURE, {
+    options: {
+      awaitRefetchQueries: true,
+      refetchQueries: ["mesures", "mesures_aggregate"]
+    }
+  });
 
   const antenneOptions = props.user_antennes.map(ua => ({
     label: ua.service_antenne.name,
@@ -60,26 +65,25 @@ export const ServiceAddMesure = props => {
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  AddMesure({
-                    variables: {
-                      antenne_id: Number.parseInt(values.antenne.value),
-                      date_ouverture: values.date_ouverture,
-                      type: values.type.value,
-                      residence: values.residence.value,
-                      code_postal: values.code_postal,
-                      ville: values.ville,
-                      civilite: values.civilite.value,
-                      annee: values.annee.toString(),
-                      numero_dossier: values.numero_dossier,
-                      numero_rg: values.numero_rg,
-                      status: "Mesure en cours"
-                    },
-                    refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"]
-                  });
-                  setSubmitting(false);
-                  Router.push("/services");
-                }, 500);
+                AddMesure({
+                  variables: {
+                    antenne_id: Number.parseInt(values.antenne.value),
+                    date_ouverture: values.date_ouverture,
+                    type: values.type.value,
+                    residence: values.residence.value,
+                    code_postal: values.code_postal,
+                    ville: values.ville,
+                    civilite: values.civilite.value,
+                    annee: values.annee.toString(),
+                    numero_dossier: values.numero_dossier,
+                    numero_rg: values.numero_rg,
+                    status: "Mesure en cours"
+                  },
+                  awaitRefetchQueries: true,
+                  refetchQueries: ["mesures", "mesures_aggregate"]
+                });
+                setSubmitting(false);
+                Router.push("/services");
               }}
               validationSchema={Yup.object().shape({
                 antenne: Yup.string().required("Le champs requit"),

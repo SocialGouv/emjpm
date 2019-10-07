@@ -91,6 +91,7 @@ export const ServiceEditMesure = props => {
                 status: values.status.value,
                 antenne_id: values.antenne_id.value
               },
+              awaitRefetchQueries: true,
               refetchQueries: ["mesures", "mesures_aggregate"]
             });
             setSubmitting(false);
