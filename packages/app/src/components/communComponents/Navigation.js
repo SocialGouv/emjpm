@@ -33,11 +33,11 @@ const Navigation = ({ logout, inscription }) => (
       >
         <div style={{ flex: "0 0 50px" }} />
         <div style={{ flex: "1 0 auto" }}>
-          <a href="https://emjpm.beta.gouv.fr/">
+          <a href="https://emjpm.fabrique.social.gouv.fr">
             <img
               src={"/static/images/logo_emjpm_num.png"}
               style={{ width: "60%", maxWidth: 350 }}
-              alt="Accueil de eMJPM.beta.gouv.fr"
+              alt="Accueil de eMJPM"
             />
           </a>
         </div>
