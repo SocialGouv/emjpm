@@ -617,6 +617,71 @@ Object {
 }
 `;
 
+exports[`mesures_import table schema 1`] = `
+Object {
+  "antenne_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "content": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": false,
+    "type": "timestamp with time zone",
+  },
+  "file_name": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "file_size": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "file_type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('mesures_import_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "processed_at": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "status": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`regions table schema 1`] = `
 Object {
   "id": Object {
@@ -902,6 +967,7 @@ Array [
   "mandataire_etablissements",
   "mandataires",
   "mesures",
+  "mesures_import",
   "regions",
   "role",
   "service_admin",
