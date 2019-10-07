@@ -9,7 +9,7 @@ const LinkButtonStyle = (isActive, disabled) => {
     borderRadius: "default",
     px: 3,
     py: 2,
-    color: "white",
+    color: "white !important",
     cursor: "pointer",
     fontSize: 1,
     fontWeight: 500,

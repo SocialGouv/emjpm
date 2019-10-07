@@ -19,10 +19,6 @@ export const MESURE_STATUS_LABEL_VALUE = [
 
 export const MESURE_TYPE_LABEL_VALUE = [
   {
-    label: "Tous les types",
-    value: null
-  },
-  {
     label: "Curatelle",
     value: "Curatelle"
   },

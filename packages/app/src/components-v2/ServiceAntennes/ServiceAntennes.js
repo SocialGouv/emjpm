@@ -30,7 +30,6 @@ const ServiceAntennes = props => {
   }
 
   const { service_antenne } = data;
-
   return (
     <BoxWrapper>
       {service_antenne.length < 2 && (

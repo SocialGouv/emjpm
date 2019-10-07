@@ -4,7 +4,8 @@ import fetch from "isomorphic-unfetch";
 import getConfig from "next/config";
 import { isBrowser } from "../../util";
 import cookie from "js-cookie";
-import { ApolloLink, concat } from "apollo-link";
+import { setContext } from "apollo-link-context";
+import nextCookies from "next-cookies";
 
 let apolloClient = null;
 
@@ -13,9 +14,12 @@ if (!isBrowser()) {
   global.fetch = fetch;
 }
 
-const getToken = () => {
+const getToken = context => {
   let token = null;
-  if (typeof document !== "undefined") {
+  if (typeof document === "undefined") {
+    const cookies = nextCookies(context.ctx);
+    token = "Bearer " + cookies.token;
+  } else {
     token = "Bearer " + cookie.get("token");
   }
   return token;
@@ -25,16 +29,14 @@ const {
   publicRuntimeConfig: { GRAPHQL_SERVER_URI }
 } = getConfig();
 
-function create(initialState) {
-  const authMiddleware = new ApolloLink((operation, forward) => {
-    // add the authorization to the headers
-    operation.setContext({
+function create(initialState, context) {
+  const authLink = setContext(() => {
+    const token = getToken(context);
+    return {
       headers: {
-        authorization: getToken()
+        Authorization: token ? token : null
       }
-    });
-
-    return forward(operation);
+    };
   });
 
   const httpLink = createHttpLink({
@@ -42,23 +44,21 @@ function create(initialState) {
     credentials: "same-origin"
   });
 
-  const cache = new InMemoryCache().restore(initialState || {});
-
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
     connectToDevTools: isBrowser(),
-    ssrMode: false,
-    link: concat(authMiddleware, httpLink),
-    cache: cache,
+    ssrMode: typeof window === "undefined",
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache().restore(initialState || {}),
     resolvers: {}
   });
 }
 
-export default function initApollo(initialState) {
+export default function initApollo(initialState, context) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (!process.browser) {
-    return create(initialState);
+    return create(initialState, context);
   }
 
   // Reuse client on the client-side

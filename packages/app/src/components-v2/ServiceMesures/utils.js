@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 // move me in the good folder
 export const formatMesureList = mesureList => {
   const mesures = mesureList.map(mesure => {
@@ -15,9 +17,11 @@ export const formatMesureList = mesureList => {
       date_ouverture,
       numero_rg
     } = mesure;
+    const formatedDate = format(date_ouverture, "DD/MM/YYYY");
     return {
       age: annee ? annee : "nc",
       civilite: civilite ? civilite : "H",
+      dateOuvertureFormated: date_ouverture ? formatedDate : "non reseigné",
       dateOuverture: date_ouverture ? date_ouverture : "non reseigné",
       href: `/services/mesure/${id}/`,
       id: id,
