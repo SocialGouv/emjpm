@@ -49,7 +49,6 @@ export const ServiceEditMesure = props => {
     user_antennes
   } = props;
   const currentMesureAntenne = getMesureAntenne(antenneId, user_antennes);
-
   const [UpdateMesure] = useMutation(EDIT_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);

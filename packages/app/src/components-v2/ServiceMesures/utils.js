@@ -21,7 +21,8 @@ export const formatMesureList = mesureList => {
     return {
       age: annee ? annee : "nc",
       civilite: civilite ? civilite : "H",
-      dateOuverture: date_ouverture ? formatedDate : "non reseigné",
+      dateOuvertureFormated: date_ouverture ? formatedDate : "non reseigné",
+      dateOuverture: date_ouverture ? date_ouverture : "non reseigné",
       href: `/services/mesure/${id}/`,
       id: id,
       numeroRg: numero_rg ? numero_rg : "RG-00000000",
