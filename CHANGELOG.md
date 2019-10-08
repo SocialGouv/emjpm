@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.2.0](https://github.com/SocialGouv/emjpm/compare/v25.1.6...v25.2.0) (2019-10-08)
+
+
+### Bug Fixes
+
+* **conflict:** update bad conflict resolution ([#873](https://github.com/SocialGouv/emjpm/issues/873)) ([7682390](https://github.com/SocialGouv/emjpm/commit/7682390))
+* **home-link:** use https://emjpm.fabrique.social.gouv.fr ([#882](https://github.com/SocialGouv/emjpm/issues/882)) ([341eb8b](https://github.com/SocialGouv/emjpm/commit/341eb8b))
+* **lists:** fix mandataire and mesure lists fix button spacing ([#877](https://github.com/SocialGouv/emjpm/issues/877)) ([d98316b](https://github.com/SocialGouv/emjpm/commit/d98316b))
+* **next-ssr:** disable ssrmode so fetch policy can be network only ([#863](https://github.com/SocialGouv/emjpm/issues/863)) ([850df57](https://github.com/SocialGouv/emjpm/commit/850df57))
+* **service:** navigation visibility ([#875](https://github.com/SocialGouv/emjpm/issues/875)) ([28528bc](https://github.com/SocialGouv/emjpm/commit/28528bc))
+* **service-antenne:** update hasura metadata ([#874](https://github.com/SocialGouv/emjpm/issues/874)) ([cd6f5d5](https://github.com/SocialGouv/emjpm/commit/cd6f5d5))
+* **services:** fix service bugs ref [#879](https://github.com/SocialGouv/emjpm/issues/879) ([#881](https://github.com/SocialGouv/emjpm/issues/881)) ([9342664](https://github.com/SocialGouv/emjpm/commit/9342664))
+
+
+### Features
+
+* **app:** display app version in footer ([#865](https://github.com/SocialGouv/emjpm/issues/865)) ([89a9ab5](https://github.com/SocialGouv/emjpm/commit/89a9ab5))
+* **k8s:** dream quota ([#871](https://github.com/SocialGouv/emjpm/issues/871)) ([60b8403](https://github.com/SocialGouv/emjpm/commit/60b8403))
+* **magistrat:** add search input in mesure list ([#876](https://github.com/SocialGouv/emjpm/issues/876)) ([3dd077c](https://github.com/SocialGouv/emjpm/commit/3dd077c))
+* **service:** add search input in mesures list ([#869](https://github.com/SocialGouv/emjpm/issues/869)) ([e2b9035](https://github.com/SocialGouv/emjpm/commit/e2b9035))
+* **service:** mesure creation ([#866](https://github.com/SocialGouv/emjpm/issues/866)) ([3a2881e](https://github.com/SocialGouv/emjpm/commit/3a2881e))
+* **service-add-mesure:** add page style ([#878](https://github.com/SocialGouv/emjpm/issues/878)) ([7e81399](https://github.com/SocialGouv/emjpm/commit/7e81399))
+* **service-antenne:** add component and query ([#787](https://github.com/SocialGouv/emjpm/issues/787)) ([3c18fe9](https://github.com/SocialGouv/emjpm/commit/3c18fe9))
+
+
+
+
+
 ## [25.1.6](https://github.com/SocialGouv/emjpm/compare/v25.1.5...v25.1.6) (2019-09-27)
 
 
