@@ -7,7 +7,7 @@ remote_schemas:
     forward_client_headers: true
     headers: []
     timeout_seconds: null
-    url: http://host.docker.internal:4001/graphql
+    url: "%%WHATEVER_URL%%/graphql"
     url_from_env: null
   name: whatever
 tables:
@@ -1424,7 +1424,7 @@ tables:
       interval_sec: 10
       num_retries: 0
       timeout_sec: 60
-    webhook: http://host.docker.internal:4000/email
+    webhook: "%%WEB_HOOK_URL%%"/webhook/mesure-reservation
   insert_permissions:
   - comment: null
     permission:
