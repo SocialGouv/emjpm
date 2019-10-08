@@ -1424,7 +1424,7 @@ tables:
       interval_sec: 10
       num_retries: 0
       timeout_sec: 60
-    webhook: "%%WEB_HOOK_URL%%"/webhook/mesure-reservation
+    webhook: "%%WEB_HOOK_URL%%/webhook/mesure-reservation"
   insert_permissions:
   - comment: null
     permission:
