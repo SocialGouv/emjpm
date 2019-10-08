@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.2.1](https://github.com/SocialGouv/emjpm/compare/v25.2.0...v25.2.1) (2019-10-08)
+
+
+### Bug Fixes
+
+* **antenne-service:** fix metadata ([#884](https://github.com/SocialGouv/emjpm/issues/884)) ([1ce740b](https://github.com/SocialGouv/emjpm/commit/1ce740b))
+* **magistrat:** change updatable fields ([#885](https://github.com/SocialGouv/emjpm/issues/885)) ([8c6a0d4](https://github.com/SocialGouv/emjpm/commit/8c6a0d4))
+
+
+
+
+
 # [25.2.0](https://github.com/SocialGouv/emjpm/compare/v25.1.6...v25.2.0) (2019-10-08)
 
 
