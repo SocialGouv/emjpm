@@ -9,7 +9,6 @@ const routes = require("./routes/index");
 const authRoutes = require("./routes/auth");
 const authV2Routes = require("./routes/auth-v2");
 const userRoutes = require("./routes/users");
-
 const configuration = require("./env");
 
 const app = express();

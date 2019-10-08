@@ -13,6 +13,8 @@ router.get("/test", function(req, res) {
   res.json({ success: true });
 });
 
-module.exports = {
-  router
-};
+router.post("/reservation", function(req, res) {
+  res.json({ success: true });
+});
+
+module.exports = router;
