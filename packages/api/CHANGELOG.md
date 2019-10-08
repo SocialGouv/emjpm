@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.2.0](https://github.com/SocialGouv/emjpm/compare/v25.1.6...v25.2.0) (2019-10-08)
+
+
+### Features
+
+* **service:** mesure creation ([#866](https://github.com/SocialGouv/emjpm/issues/866)) ([3a2881e](https://github.com/SocialGouv/emjpm/commit/3a2881e))
+
+
+
+
+
 ## [25.1.6](https://github.com/SocialGouv/emjpm/compare/v25.1.5...v25.1.6) (2019-09-27)
 
 **Note:** Version bump only for package @emjpm/api
