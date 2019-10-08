@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.2.1](https://github.com/SocialGouv/emjpm/compare/v25.2.0...v25.2.1) (2019-10-08)
+
+**Note:** Version bump only for package @optional/e2e
+
+
+
+
+
 # [25.2.0](https://github.com/SocialGouv/emjpm/compare/v25.1.6...v25.2.0) (2019-10-08)
 
 **Note:** Version bump only for package @optional/e2e
