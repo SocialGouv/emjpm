@@ -3,7 +3,9 @@ const express = require("express");
 const { sendEmail } = require("../email");
 const router = express.Router();
 
-router.get("/test", function(req, res) {
+router.get("/mesure-reservation", function(req, res) {
+  // eslint-disable-next-line no-console
+  console.log(req);
   sendEmail(
     "support.emjpm@fabrique.social.gouv.fr",
     "e-MJPM : test",

@@ -50,7 +50,7 @@ const {
   getCityCoordinates
 } = require("../db/queries/mesures");
 
-const { reservationEmail } = require("../email/`");
+const { reservationEmail } = require("../email/reservation-email");
 
 /**
  * @swagger
