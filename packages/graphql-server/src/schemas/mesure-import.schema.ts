@@ -1,16 +1,24 @@
 import { gql } from "apollo-server-koa";
 
 export default gql`
-  type Mutation {
-
-    importMesure(mesuresImport: MesuresImport!)
-
+  input MesureImportData {
+    date_ouverture: String!
+    type: String!
+    code_postal: String!
+    ville: String!
+    civilite: String!
+    annee: String!
+    numero_rg: String!
+    numero_dossier: String
+    residence: String!
   }
 
-  type MesuresImport {
-    content: jsonb!
-    file_name: String!
-    file_size: Int!
-    file_type: String!
+  type Mutation {
+    importMesures(
+      content: [MesureImportData!]!
+      file_name: String!
+      file_size: Int!
+      file_type: String!
+    ): Int!
   }
 `;

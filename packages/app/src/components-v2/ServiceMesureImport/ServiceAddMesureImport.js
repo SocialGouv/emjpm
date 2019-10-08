@@ -5,8 +5,8 @@ import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import * as XLSX from "xlsx";
 import checkExcelDatas from "./checkExcelDatas";
-import { ADD_MESURE_IMPORT } from "./mutations";
 import { ServiceMesureImportResultStyle } from "./style";
+import { IMPORT_MESURES } from "./mutations";
 
 const FilePicker = props => {
   return (
@@ -43,7 +43,7 @@ const ResultMessage = ({ success, restart }) => (
 
 export const ServiceAddMesureImport = () => {
   const [result, setResult] = useState(false);
-  const [AddMesureImport] = useMutation(ADD_MESURE_IMPORT);
+  const [importMesures] = useMutation(IMPORT_MESURES);
 
   const handleFileChosen = file => {
     const reader = new FileReader();
@@ -56,7 +56,7 @@ export const ServiceAddMesureImport = () => {
       const errors = checkExcelDatas(datas);
 
       if (errors.length == 0) {
-        AddMesureImport({
+        importMesures({
           variables: {
             file_name: file.name,
             file_size: file.size,
