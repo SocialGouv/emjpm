@@ -1,52 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TI should POST mesure and send email 1`] = `
-Object {
-  "success": true,
-}
-`;
-
-exports[`TI should POST mesure and send email 2`] = `
-Array [
-  Object {
-    "from": "ne-pas-repondre@emjpm.gouv.fr",
-    "html": "Madame, Monsieur,
-<br><br>
-  Pour information, le ti paris cabinet 6D, a décidé de vous confier une nouvelle mesure :
-  <br>
-  - \\"type de mesure\\": preposes
-  <br>
-  - \\"genre\\": madame
-  <br>
-  - \\"année de naissance\\": 2010-10-05.
-<br><br>
-    Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
-<br><br>
-  Pour rappel, à ce jour, vous avez déclaré \\"2\\" mesures pour une capacité souhaitée de \\"5\\" mesures.
-<br><br>
-  À bientôt
-<br><br>
-L’équipe e-mjpm.",
-    "subject": "e-MJPM : une nouvelle mesure vous a été attribuée",
-    "text": "Madame, Monsieur,
-
-  Pour information, le ti paris cabinet 6D, a décidé de vous confier une nouvelle mesure :
-  - \\"type de mesure\\": preposes
-  - \\"genre\\": madame
-  - \\"année de naissance\\": 2010-10-05.
-
-  Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
-
-  Pour rappel, à ce jour, vous avez déclaré \\"2\\" mesures pour une capacité souhaitée de \\"5\\" mesures .
-
-  À bientôt
-
-  L’équipe e-mjpm.",
-    "to": "ud@ud.com",
-  },
-]
-`;
-
 exports[`TI should POST mesure-reservation 1`] = `
 Array [
   Object {

@@ -9,7 +9,6 @@ const routes = require("./routes/index");
 const authRoutes = require("./routes/auth");
 const authV2Routes = require("./routes/auth-v2");
 const userRoutes = require("./routes/users");
-
 const configuration = require("./env");
 
 const app = express();
@@ -48,6 +47,7 @@ app.use("/api/v2/auth", authV2Routes);
 app.use("/api/v1", passport.authenticate("jwt", { session: false }), routes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+app.use("/webhook", require("./routes/webhook"));
 
 app.get("/ping", function(req, res) {
   if (!req.user) {
