@@ -136,9 +136,9 @@ const postSignup = async (req, res) => {
     await createRole(user.id, type);
     switch (type) {
       case "individuel":
-      case "preprose":
+      case "prepose":
         await createMandataire(req.body, user);
-        createUserTis(req.body, user.id);
+        await createUserTis(req.body, user.id);
         break;
       case "service": {
         const service = await createService(req.body);
@@ -160,7 +160,7 @@ const postSignup = async (req, res) => {
         break;
       case "direction": {
         await createRole(user.id, directionType);
-        createDirection(req.body, user.id);
+        await createDirection(req.body, user.id);
         break;
       }
       default:
