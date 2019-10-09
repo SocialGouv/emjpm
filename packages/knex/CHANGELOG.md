@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.3.0](https://github.com/SocialGouv/emjpm/compare/v25.2.2...v25.3.0) (2019-10-09)
+
+
+### Bug Fixes
+
+* **signup:** use correct user type in switch case ([#889](https://github.com/SocialGouv/emjpm/issues/889)) ([73f8e2a](https://github.com/SocialGouv/emjpm/commit/73f8e2a))
+
+
+### Features
+
+* **login:** trim and use lower case ([#888](https://github.com/SocialGouv/emjpm/issues/888)) ([8ddaf76](https://github.com/SocialGouv/emjpm/commit/8ddaf76))
+
+
+
+
+
 ## [25.2.2](https://github.com/SocialGouv/emjpm/compare/v25.2.1...v25.2.2) (2019-10-09)
 
 **Note:** Version bump only for package @emjpm/knex
