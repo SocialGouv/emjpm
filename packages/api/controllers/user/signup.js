@@ -131,7 +131,7 @@ const postSignup = async (req, res) => {
         type,
         nom,
         prenom,
-        email
+        email: email.toLowerCase().trim()
       });
     await createRole(user.id, type);
     switch (type) {
