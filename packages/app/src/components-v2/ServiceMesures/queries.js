@@ -11,7 +11,7 @@ export const MESURES = gql`
   ) {
     mesures_aggregate(
       where: {
-        _or: { numero_dossier: { _ilike: $searchText }, numero_rg: { _ilike: $searchText } }
+        _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
         type: { _eq: $type }
         antenne_id: { _eq: $antenne }
@@ -26,7 +26,7 @@ export const MESURES = gql`
       order_by: { date_ouverture: desc }
       offset: $offset
       where: {
-        _or: { numero_dossier: { _ilike: $searchText }, numero_rg: { _ilike: $searchText } }
+        _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
         type: { _eq: $type }
         antenne_id: { _eq: $antenne }
