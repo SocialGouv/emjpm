@@ -132,33 +132,6 @@ test("mandataire mesures count should be updated", async () => {
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
 });
 
-test("TI should POST mesure and send email", async () => {
-  const mesuresCount = (await knex("mesures").where({
-    mandataire_id: 1
-  })).length;
-
-  const token = await getTokenByUserType("ti");
-  const response = await request(server)
-    .post("/api/v1/mandataires/1/mesures")
-    .set("Authorization", "Bearer " + token)
-    .send({
-      ...sampleMesure,
-      mandataire_id: 1
-    });
-
-  expect(response.body).toMatchSnapshot();
-  expect(response.status).toBe(200);
-
-  const newMesuresCount = (await knex("mesures").where({
-    mandataire_id: 1
-  })).length;
-
-  expect(newMesuresCount).toBe(mesuresCount + 1);
-
-  expect(nodemailerMock.mock.sentMail().length).toBe(1);
-  expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
-});
-
 test("TI should NOT POST mesure reservation for another TI mandataire", async () => {
   const mesuresCount = (await knex("mesures").where({
     mandataire_id: 3

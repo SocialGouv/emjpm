@@ -52,3 +52,4 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: secret
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/api/v2/auth/jwks"}'
       WHATEVER_URL: http://graphql-server:4001
+      WEB_HOOK_URL: http://api:4000
