@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.2.2](https://github.com/SocialGouv/emjpm/compare/v25.2.1...v25.2.2) (2019-10-09)
+
+
+### Bug Fixes
+
+* **service:** fix mesure search query ([#887](https://github.com/SocialGouv/emjpm/issues/887)) ([0bcec5b](https://github.com/SocialGouv/emjpm/commit/0bcec5b))
+
+
+
+
+
 ## [25.2.1](https://github.com/SocialGouv/emjpm/compare/v25.2.0...v25.2.1) (2019-10-08)
 
 
