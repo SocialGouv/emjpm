@@ -22,7 +22,7 @@ passport.use(
     function(username, password, done) {
       User.query()
         .where("username", username)
-        .orWhere("email", username)
+        .orWhere("email", username.toLowerCase().trim())
         .first()
         .eager("[roles, antennes, tis]")
         .then(function(user) {
