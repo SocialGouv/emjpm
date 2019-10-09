@@ -3,7 +3,6 @@ const router = express.Router();
 const { check, body } = require("express-validator");
 const postLogin = require("../controllers/user/login");
 const postSignup = require("../controllers/user/signup");
-
 const jwkController = require("../controllers/jwk");
 
 router.post(

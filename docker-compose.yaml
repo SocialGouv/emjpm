@@ -48,6 +48,7 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/v2/auth/jwks"}'
       WHATEVER_URL: $WHATEVER_URL
+      WEB_HOOK_URL: $WEB_HOOK_URL
 
 volumes:
   emjpm-pgdata:
