@@ -1395,29 +1395,6 @@ tables:
       enable_manual: false
       insert:
         columns: '*'
-      update:
-        columns:
-        - date_ouverture
-        - extinction
-        - antenne_id
-        - department_id
-        - etablissement_id
-        - id
-        - mandataire_id
-        - ti_id
-        - created_at
-        - annee
-        - cabinet
-        - civilite
-        - code_postal
-        - etablissement
-        - numero_dossier
-        - numero_rg
-        - reason_extinction
-        - residence
-        - status
-        - type
-        - ville
     headers: []
     name: email
     retry_conf:
