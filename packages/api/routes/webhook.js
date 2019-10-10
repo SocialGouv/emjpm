@@ -33,7 +33,11 @@ router.post("/mesure-reservation", async function(req, res) {
   const [currentTi] = await Tis.query().where("id", ti_id);
   const [mandataire] = await Mandataire.query().where("id", mandataire_id);
   const user = getUser(headquarter, mandataire);
-  reservationEmail(currentTi, newMesure, user);
+  if (currentTi) {
+    reservationEmail(currentTi, newMesure, user);
+  } else {
+    res.json({ success: true });
+  }
   res.json({ success: true });
 });
 
