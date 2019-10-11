@@ -36,6 +36,7 @@
     #
     #
     # Run pg_restore
+    - kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} || true;
     - kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
         --from-file=./.k8s/postgres/restore/configmap
     - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -;
