@@ -66,6 +66,13 @@ include:
     - export APP_URL=$(echo $FRONTEND_URL | base64)
     - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
     - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
+    #
+    # Create azure volume secrets for anonymized export
+    - export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret ${K8S_PROJECT}-export-anonymized -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
+    - export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret ${K8S_PROJECT}-export-anonymized -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
+    - export AZURE_VOLUME_SECRET_NAME=emjpm-export-anonymized
+    - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
+    - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
 
 Create namespace:
   <<: *create_namespace
@@ -159,6 +166,15 @@ Deploy postgres (incubateur):
     <<: *deploy_stage_variables
     <<: *deploy_postgres_stage_variables
     PERSISTENCE_ENABLED: "true"
+
+#
+#
+#
+
+Restore postgres data (dev):
+  <<: *deploy_stage
+  extends: .k8s-restore-postgres-data
+  when: manual
 
 #
 #

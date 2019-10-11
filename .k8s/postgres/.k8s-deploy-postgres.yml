@@ -26,3 +26,13 @@
         kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
         cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
       fi
+
+.k8s-restore-postgres-data:
+  extends: .base_docker_helm_image_stage
+  script:
+    #
+    #
+    # Run pg_restore
+    - kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
+        --from-file=./.k8s/postgres/restore/configmap
+    - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -;
