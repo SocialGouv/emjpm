@@ -45,7 +45,7 @@ spec:
             name: ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
         - name: volume
           azureFile:
-            secretName: emjpm-backup-restore
+            secretName: ${K8S_PROJECT}-azure-storage-${BRANCH_HASH}
             shareName: emjpm-backup-restore
             readOnly: false
       initContainers:
