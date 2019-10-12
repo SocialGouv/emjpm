@@ -13,9 +13,12 @@ spec:
     spec:
       containers:
         - name: ${K8S_PROJECT}-restore-${BRANCH_HASH}
-          image: postgres:10
-          command: ["sh"]
-          args: ["/mnt/script/restore.sh", "$( cat /mnt/data/LATEST )"]
+          image: postgres:10-alpine
+          command:
+            - sh
+          args:
+            - -c
+            - sh -x /mnt/script/restore.sh /mnt/data/$(cat /mnt/data/LATEST)
           resources:
             requests:
               cpu: 0m
