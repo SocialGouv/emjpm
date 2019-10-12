@@ -13,4 +13,6 @@ pg_restore \
   --dbname emjpm \
   ${1}
 
+psql -d emjpm -c "GRANT ALL ON SCHEMA public TO emjpm"
+
 sleep 10s
