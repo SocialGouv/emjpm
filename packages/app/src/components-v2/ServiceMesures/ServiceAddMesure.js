@@ -86,19 +86,19 @@ export const ServiceAddMesure = props => {
                 Router.push("/services");
               }}
               validationSchema={Yup.object().shape({
-                antenne: Yup.string().required("Le champs requit"),
-                date_ouverture: Yup.date().required("Le champs requit"),
-                type: Yup.string().required("Le champs requit"),
-                residence: Yup.string().required("Le champs requit"),
-                code_postal: Yup.string().required("Le champs requit"),
-                ville: Yup.string().required("Le champs requit"),
-                civilite: Yup.string().required("Le champs requit"),
+                antenne: Yup.string().required("Le champs obligatoire"),
+                date_ouverture: Yup.date().required("Le champs obligatoire"),
+                type: Yup.string().required("Le champs obligatoire"),
+                residence: Yup.string().required("Le champs obligatoire"),
+                code_postal: Yup.string().required("Le champs obligatoire"),
+                ville: Yup.string().required("Le champs obligatoire"),
+                civilite: Yup.string().required("Le champs obligatoire"),
                 annee: Yup.number()
-                  .required("Le champs requit")
+                  .required("Le champs obligatoire")
                   .min(1900, "l'année choisi doit être au minimum 1900")
                   .max(2019, "l'année choisi doit être au maximum 2019"),
-                numero_dossier: Yup.string().required("Le champs requit"),
-                numero_rg: Yup.string().required("Le champs requit")
+                numero_dossier: Yup.string().required("Le champs obligatoire"),
+                numero_rg: Yup.string().required("Le champs obligatoire")
               })}
               initialValues={{
                 date_ouverture: "",
