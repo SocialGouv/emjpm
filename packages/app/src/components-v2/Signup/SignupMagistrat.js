@@ -1,14 +1,39 @@
-import { Button, Card, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { useQuery } from "@apollo/react-hooks";
+import { Button, Card, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
-import { SignupContext } from "./context";
 import { MAGISTRAT_CABINET_LABEL_VALUE } from "../../constants/magistrat";
+import { SignupContext } from "./context";
+import { TRIBUNAUX } from "./queries";
 
 export const SignupMagistrat = props => {
   const { validateStepOne } = useContext(SignupContext);
+  const { data: tribunaux, loading, error } = useQuery(TRIBUNAUX);
+
+  if (loading) {
+    return (
+      <Card p="4" minHeight="450px">
+        <Box sx={{ position: "relative", p: "6" }}>
+          <Spinner />
+        </Box>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card p="4" minHeight="450px">
+        <Box sx={{ position: "relative", p: "6" }}>Erreur</Box>
+      </Card>
+    );
+  }
+  const tribunalOptions = tribunaux.tis.map(ti => ({
+    value: ti.id,
+    label: ti.etablissement
+  }));
 
   return (
     <Card>
@@ -17,9 +42,11 @@ export const SignupMagistrat = props => {
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               validationSchema={Yup.object().shape({
+                tribunal: Yup.string().required("Le champs obligatoire"),
                 cabinet: Yup.string().required("Le champs obligatoire")
               })}
               initialValues={{
+                tribunal: "",
                 cabinet: ""
               }}
             >
@@ -35,6 +62,18 @@ export const SignupMagistrat = props => {
                 return (
                   <form onSubmit={handleSubmit}>
                     <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
+                      <Select
+                        id="tribunal"
+                        name="tribunal"
+                        placeholder="Tribunal d'instance"
+                        value={values.tribunal}
+                        hasError={errors.tribunal && touched.tribunal}
+                        onChange={option => setFieldValue("tribunal", option)}
+                        options={tribunalOptions}
+                      />
+                      {errors.tribunal && touched.tribunal && <Text>{errors.tribunal}</Text>}
+                    </Box>
+                    <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
                       <Select
                         id="cabinet"
                         name="cabinet"

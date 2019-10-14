@@ -3,9 +3,8 @@ import React from "react";
 import { LayoutSignup } from "../../src/components-v2/Layout";
 import Signup from "../../src/components-v2/Signup";
 import { SignupContextProvider } from "../../src/components-v2/Signup/context";
-import { withAuthSync } from "../../src/util/auth";
 
-const Mesures = () => {
+const SignupPage = () => {
   return (
     <SignupContextProvider>
       <LayoutSignup>
@@ -17,4 +16,4 @@ const Mesures = () => {
   );
 };
 
-export default withAuthSync(Mesures);
+export default SignupPage;

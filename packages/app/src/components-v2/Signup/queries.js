@@ -9,3 +9,27 @@ export const CHECK_EMAIL_UNICITY = gql`
     }
   }
 `;
+
+export const TRIBUNAUX = gql`
+  {
+    tis {
+      id
+      etablissement
+      code_postal
+      ville
+    }
+  }
+`;
+
+export const REGIONS = gql`
+  {
+    regions(order_by: { nom: asc }) {
+      id
+      nom
+      departements(order_by: { nom: asc }) {
+        id
+        nom
+      }
+    }
+  }
+`;
