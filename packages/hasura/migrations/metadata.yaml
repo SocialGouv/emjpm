@@ -180,6 +180,16 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - code_postal
+      - etablissement
+      - id
+      - ville
+      filter: {}
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
       - id
       - etablissement
       - email
@@ -256,6 +266,14 @@ tables:
   is_enum: false
   object_relationships: []
   select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - nom
+      filter: {}
+    role: anonymous
   - comment: null
     permission:
       allow_aggregations: false
@@ -791,6 +809,16 @@ tables:
       - code
       - nom
       filter: {}
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - id_region
+      - code
+      - nom
+      filter: {}
     role: mandataire
   - comment: null
     permission:
@@ -1012,6 +1040,15 @@ tables:
     using:
       foreign_key_constraint_on: department_id
   select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - code_postal
+      - etablissement
+      - id
+      filter: {}
+    role: anonymous
   - comment: null
     permission:
       allow_aggregations: false
@@ -1363,6 +1400,20 @@ tables:
   - comment: null
     permission:
       filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: mandataire
+  - comment: null
+    permission:
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      filter:
         ti:
           magistrats:
             user_id:
@@ -1376,20 +1427,6 @@ tables:
             user_id:
               _eq: X-Hasura-User-Id
     role: service
-  - comment: null
-    permission:
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: mandataire
-  - comment: null
-    permission:
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: prepose
   event_triggers:
   - definition:
       enable_manual: false
