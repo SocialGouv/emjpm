@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.3.2](https://github.com/SocialGouv/emjpm/compare/v25.3.1...v25.3.2) (2019-10-14)
+
+
+### Bug Fixes
+
+* **email:** fix email missing addresses ([#892](https://github.com/SocialGouv/emjpm/issues/892)) ([076c843](https://github.com/SocialGouv/emjpm/commit/076c843))
+
+
+
+
+
 ## [25.3.1](https://github.com/SocialGouv/emjpm/compare/v25.3.0...v25.3.1) (2019-10-10)
 
 
