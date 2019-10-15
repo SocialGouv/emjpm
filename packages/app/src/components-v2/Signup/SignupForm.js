@@ -1,3 +1,4 @@
+import { useApolloClient } from "@apollo/react-hooks";
 import { Button, Card, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
@@ -5,6 +6,7 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { SignupContext } from "./context";
+import { CHECK_EMAIL_UNICITY } from "./queries";
 
 const TYPE_OPTIONS = [
   {
@@ -32,26 +34,49 @@ const TYPE_OPTIONS = [
 export const SignupForm = props => {
   const { user, setUser, validateStepOne } = useContext(SignupContext);
 
+  const client = useApolloClient();
+
+  const isEmailExists = async email => {
+    const checkEmail = await client.query({
+      query: CHECK_EMAIL_UNICITY,
+      fetchPolicy: "network-only",
+      context: {
+        headers: {
+          "X-Hasura-Email": email
+        }
+      }
+    });
+    return checkEmail.data.users.length > 0;
+  };
+
   return (
     <Card>
       <Flex {...props}>
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
-              onSubmit={(values, { setSubmitting }) => {
-                setUser({
-                  type: values.type.value,
-                  email: values.email,
-                  nom: values.nom,
-                  prenom: values.prenom
-                });
-                validateStepOne(true);
+              onSubmit={async (values, { setSubmitting, setErrors }) => {
+                const exists = await isEmailExists(values.email);
+                if (exists) {
+                  setErrors({
+                    email: "Cet email existe déjà"
+                  });
+                } else {
+                  setUser({
+                    type: values.type.value,
+                    email: values.email,
+                    nom: values.nom,
+                    prenom: values.prenom
+                  });
+                  validateStepOne(true);
+                }
+
                 setSubmitting(false);
               }}
               validationSchema={Yup.object().shape({
                 type: Yup.string().required("Le champs obligatoire"),
                 email: Yup.string()
-                  .email()
+                  .email("Le format de votre email n'est pas correct")
                   .required("Le champs obligatoire"),
                 nom: Yup.string().required("Le champs obligatoire"),
                 prenom: Yup.string().required("Le champs obligatoire")

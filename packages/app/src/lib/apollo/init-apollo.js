@@ -33,17 +33,19 @@ const {
 } = getConfig();
 
 function create(initialState, context) {
-  const authLink = setContext(() => {
+  const authLink = setContext((_, { headers }) => {
     const token = getToken(context);
     if (token) {
       return {
         headers: {
+          ...headers,
           Authorization: token ? token : null
         }
       };
     }
     return {
       headers: {
+        ...headers,
         "X-Hasura-Role": "anonymous"
       }
     };
