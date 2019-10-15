@@ -1,11 +1,11 @@
 import { ApolloClient, InMemoryCache } from "apollo-boost";
+import { setContext } from "apollo-link-context";
 import { createHttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
+import cookie from "js-cookie";
+import nextCookies from "next-cookies";
 import getConfig from "next/config";
 import { isBrowser } from "../../util";
-import cookie from "js-cookie";
-import { setContext } from "apollo-link-context";
-import nextCookies from "next-cookies";
 
 let apolloClient = null;
 
@@ -18,11 +18,14 @@ const getToken = context => {
   let token = null;
   if (typeof document === "undefined") {
     const cookies = nextCookies(context.ctx);
-    token = "Bearer " + cookies.token;
+    token = cookies.token;
   } else {
-    token = "Bearer " + cookie.get("token");
+    token = cookie.get("token");
   }
-  return token;
+  if (!token) {
+    return null;
+  }
+  return "Bearer " + token;
 };
 
 const {
@@ -32,9 +35,16 @@ const {
 function create(initialState, context) {
   const authLink = setContext(() => {
     const token = getToken(context);
+    if (token) {
+      return {
+        headers: {
+          Authorization: token ? token : null
+        }
+      };
+    }
     return {
       headers: {
-        Authorization: token ? token : null
+        "X-Hasura-Role": "anonymous"
       }
     };
   });

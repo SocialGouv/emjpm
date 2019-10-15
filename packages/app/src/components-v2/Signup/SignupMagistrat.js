@@ -1,5 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
-import { Button, Card, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
 import React, { useContext } from "react";
@@ -7,37 +6,19 @@ import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { MAGISTRAT_CABINET_LABEL_VALUE } from "../../constants/magistrat";
 import { SignupContext } from "./context";
-import { TRIBUNAUX } from "./queries";
+import { SignupDatas } from "./SignupDatas";
 
-export const SignupMagistrat = props => {
+const SignupMagistratForm = ({ tiDatas }) => {
   const { validateStepOne } = useContext(SignupContext);
-  const { data: tribunaux, loading, error } = useQuery(TRIBUNAUX);
 
-  if (loading) {
-    return (
-      <Card p="4" minHeight="450px">
-        <Box sx={{ position: "relative", p: "6" }}>
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card p="4" minHeight="450px">
-        <Box sx={{ position: "relative", p: "6" }}>Erreur</Box>
-      </Card>
-    );
-  }
-  const tribunalOptions = tribunaux.tis.map(ti => ({
+  const tribunalOptions = tiDatas.map(ti => ({
     value: ti.id,
     label: ti.etablissement
   }));
 
   return (
     <Card>
-      <Flex {...props}>
+      <Flex>
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
@@ -114,3 +95,9 @@ export const SignupMagistrat = props => {
     </Card>
   );
 };
+
+const SignupMagistrat = props => (
+  <SignupDatas {...props} Component={props => <SignupMagistratForm {...props} />} />
+);
+
+export { SignupMagistrat };

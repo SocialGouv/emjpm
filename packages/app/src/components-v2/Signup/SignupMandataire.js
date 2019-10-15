@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { SignupContext } from "./context";
+import { SignupDatas } from "./SignupDatas";
 
 const GENDER_OPTIONS = [
   {
@@ -17,17 +18,22 @@ const GENDER_OPTIONS = [
   }
 ];
 
-export const SignupMandataire = props => {
+const SignupMandataireForm = ({ tiDatas }) => {
   const { validateStepOne } = useContext(SignupContext);
+
+  const tiOptions = tiDatas.map(ti => ({
+    value: ti.id,
+    label: ti.etablissement
+  }));
 
   return (
     <Card>
-      <Flex {...props}>
+      <Flex>
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               validationSchema={Yup.object().shape({
-                tis: Yup.string().required("Le champs obligatoire"),
+                tis: Yup.mixed().required("Le champs obligatoire"),
                 genre: Yup.string().required("Le champs obligatoire"),
                 telephone: Yup.string().required("Le champs obligatoire"),
                 telephone_portable: Yup.string(),
@@ -39,7 +45,7 @@ export const SignupMandataire = props => {
                 )
               })}
               initialValues={{
-                tis: "",
+                tis: null,
                 genre: "",
                 telephone: "",
                 telephone_portable: "",
@@ -69,7 +75,8 @@ export const SignupMandataire = props => {
                         value={values.tis}
                         hasError={errors.tis && touched.tis}
                         onChange={option => setFieldValue("tis", option)}
-                        options={[]}
+                        options={tiOptions}
+                        isMulti
                       />
                       {errors.tis && touched.tis && <Text>{errors.tis}</Text>}
                     </Box>
@@ -180,3 +187,9 @@ export const SignupMandataire = props => {
     </Card>
   );
 };
+
+const SignupMandataire = props => (
+  <SignupDatas {...props} Component={props => <SignupMandataireForm {...props} />} />
+);
+
+export { SignupMandataire };

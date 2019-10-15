@@ -10,7 +10,7 @@ export const CHECK_EMAIL_UNICITY = gql`
   }
 `;
 
-export const TRIBUNAUX = gql`
+export const ALL_DATA_OPTIONS = gql`
   {
     tis {
       id
@@ -18,18 +18,18 @@ export const TRIBUNAUX = gql`
       code_postal
       ville
     }
-  }
-`;
 
-export const REGIONS = gql`
-  {
-    regions(order_by: { nom: asc }) {
+    departements(order_by: { nom: asc }) {
       id
+      id_region
       nom
-      departements(order_by: { nom: asc }) {
-        id
-        nom
-      }
+      code
+    }
+
+    services(order_by: { code_postal: asc }) {
+      id
+      etablissement
+      code_postal
     }
   }
 `;

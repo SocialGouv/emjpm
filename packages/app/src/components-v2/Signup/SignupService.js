@@ -1,29 +1,56 @@
 import { Button, Card, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { SignupContext } from "./context";
+import { SignupDatas } from "./SignupDatas";
 
-export const SignupService = props => {
+const SignupServiceForm = ({ tiDatas, departementDatas, serviceDatas }) => {
   const { validateStepOne } = useContext(SignupContext);
+
+  const [serviceOptions, setServiceOptions] = useState([]);
+
+  const tiOptions = tiDatas.map(ti => ({
+    value: ti.id,
+    label: ti.etablissement
+  }));
+
+  const departementOptions = departementDatas.map(departement => ({
+    value: departement.id,
+    label: departement.nom
+  }));
+
+  const selectDepartement = option => {
+    const selectedDepartement = departementDatas.find(data => data.id === option.value);
+    const departementalServices = serviceDatas.filter(data => {
+      const code = data.code_postal.substring(0, 2);
+      return code === selectedDepartement.code;
+    });
+    setServiceOptions(
+      departementalServices.map(data => ({
+        value: data.id,
+        label: data.etablissement
+      }))
+    );
+  };
 
   return (
     <Card>
-      <Flex {...props}>
+      <Flex>
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               validationSchema={Yup.object().shape({
-                region: Yup.string().required("Le champs obligatoire"),
-                departement: Yup.string().required("Le champs obligatoire"),
-                service: Yup.string().required("Le champs obligatoire")
+                tis: Yup.mixed().required("Le champs obligatoire"),
+                departement: Yup.mixed().required("Le champs obligatoire"),
+                service: Yup.mixed().required("Le champs obligatoire")
               })}
               initialValues={{
-                region: "",
-                departement: "",
-                service: ""
+                tis: null,
+                departement: null,
+                service: null
               }}
             >
               {props => {
@@ -39,15 +66,16 @@ export const SignupService = props => {
                   <form onSubmit={handleSubmit}>
                     <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
                       <Select
-                        id="region"
-                        name="region"
-                        placeholder="Région de votre service"
-                        value={values.region}
-                        hasError={errors.region && touched.region}
-                        onChange={option => setFieldValue("region", option)}
-                        options={[]}
+                        id="tis"
+                        name="tis"
+                        placeholder="Tribunaux dans lesquels vous exercez"
+                        value={values.tis}
+                        hasError={errors.tis && touched.tis}
+                        onChange={option => setFieldValue("tis", option)}
+                        options={tiOptions}
+                        isMulti
                       />
-                      {errors.region && touched.region && <Text>{errors.region}</Text>}
+                      {errors.tis && touched.tis && <Text>{errors.tis}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
                       <Select
@@ -56,8 +84,11 @@ export const SignupService = props => {
                         placeholder="Département de votre service"
                         value={values.departement}
                         hasError={errors.departement && touched.departement}
-                        onChange={option => setFieldValue("departement", option)}
-                        options={[]}
+                        onChange={option => {
+                          selectDepartement(option);
+                          setFieldValue("departement", option);
+                        }}
+                        options={departementOptions}
                       />
                       {errors.departement && touched.departement && (
                         <Text>{errors.departement}</Text>
@@ -71,7 +102,7 @@ export const SignupService = props => {
                         value={values.service}
                         hasError={errors.service && touched.service}
                         onChange={option => setFieldValue("service", option)}
-                        options={[]}
+                        options={serviceOptions}
                       />
                       {errors.service && touched.service && <Text>{errors.service}</Text>}
                     </Box>
@@ -104,3 +135,9 @@ export const SignupService = props => {
     </Card>
   );
 };
+
+const SignupService = props => (
+  <SignupDatas {...props} Component={props => <SignupServiceForm {...props} />} />
+);
+
+export { SignupService };
