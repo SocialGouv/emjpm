@@ -1,18 +1,23 @@
 import React from "react";
 
-import { LayoutMagistratMap } from "../../src/components/Layout";
-import { MagistratMapMandataires } from "../../src/components/MagistratMapMandataires";
-import { UserInformations } from "../../src/components/UserInformations";
+import dynamic from "next/dynamic";
 import { withAuthSync } from "../../src/util/auth";
+import { LayoutMagistratMap } from "../../src/components-v2/Layout";
+import { useWindowSize } from "../../src/lib/hooks";
+
+const MagistratMandatairesMap = dynamic(
+  () =>
+    import("../../src/components-v2/MagistratMandatairesMap").then(
+      mod => mod.MagistratMandatairesMap
+    ),
+  { ssr: false }
+);
 
 const Map = () => {
+  const { innerHeight, innerWidth } = useWindowSize();
   return (
     <LayoutMagistratMap>
-      <UserInformations
-        Component={props => {
-          return <MagistratMapMandataires {...props} />;
-        }}
-      />
+      <MagistratMandatairesMap height={innerHeight} width={innerWidth} />
     </LayoutMagistratMap>
   );
 };
