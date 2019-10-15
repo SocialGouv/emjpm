@@ -7,7 +7,6 @@ import { Box } from "rebass";
 
 import { logout } from "../../util/auth";
 import { Link } from "../Commons";
-import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
 import { UserInformations } from "../UserInformations";
 import { dropDownLinks } from "./dropDownLink";
@@ -31,7 +30,7 @@ const navigationLinks = [
   }
 ];
 
-const LayoutMagistrat = props => {
+const LayoutMagistratMap = props => {
   const { children } = props;
   return (
     <Fragment>
@@ -43,7 +42,6 @@ const LayoutMagistrat = props => {
           body,
           html,
           div#__next {
-            font-size: 14px;
             font-family: "Open Sans", sans-serif;
             background: #f2f5f9;
             -webkit-font-smoothing: antialiased;
@@ -69,13 +67,8 @@ const LayoutMagistrat = props => {
         </BoxWrapper>
       </Box>
       {children}
-      <Box bg="cardPrimary">
-        <BoxWrapper px="1">
-          <Footer />
-        </BoxWrapper>
-      </Box>
     </Fragment>
   );
 };
 
-export { LayoutMagistrat };
+export { LayoutMagistratMap };

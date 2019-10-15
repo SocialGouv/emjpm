@@ -63,6 +63,7 @@
     "react-feather": "^2.0.3",
     "react-jsonschema-form": "^1.6.1",
     "react-leaflet": "^2.2.1",
+    "react-map-gl": "^5.0.12",
     "react-modal": "^3.9.1",
     "react-paginate": "^6.3.2",
     "react-piwik": "^1.6.0",

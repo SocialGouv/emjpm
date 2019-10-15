@@ -1,6 +1,7 @@
 import { LayoutAdmin } from "./LayoutAdmin";
 import { LayoutDirection } from "./LayoutDirection";
 import { LayoutMagistrat } from "./LayoutMagistrat";
+import { LayoutMagistratMap } from "./LayoutMagistratMap";
 import { LayoutMandataire } from "./LayoutMandataire";
 import { LayoutPublic } from "./LayoutPublic";
 import { LayoutServices } from "./LayoutServices";
@@ -13,5 +14,6 @@ export {
   LayoutAdmin,
   LayoutSignup,
   LayoutMandataire,
-  LayoutPublic
+  LayoutPublic,
+  LayoutMagistratMap
 };
