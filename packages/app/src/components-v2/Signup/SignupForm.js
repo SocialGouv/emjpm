@@ -66,7 +66,9 @@ export const SignupForm = props => {
                     type: values.type.value,
                     email: values.email,
                     nom: values.nom,
-                    prenom: values.prenom
+                    prenom: values.prenom,
+                    password: values.password,
+                    confirmPassword: values.confirmPassword
                   });
                   validateStepOne(true);
                 }
@@ -79,13 +81,32 @@ export const SignupForm = props => {
                   .email("Le format de votre email n'est pas correct")
                   .required("Le champs obligatoire"),
                 nom: Yup.string().required("Le champs obligatoire"),
-                prenom: Yup.string().required("Le champs obligatoire")
+                prenom: Yup.string().required("Le champs obligatoire"),
+                password: Yup.string()
+                  .label("Mot de passe")
+                  .required()
+                  .min(8, "Votre mot de passe doit être de 8 caractères minimum")
+                  .matches(
+                    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/,
+                    {
+                      message:
+                        "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spéciale"
+                    }
+                  ),
+                confirmPassword: Yup.string()
+                  .required()
+                  .label("Confirmation du mot de passe")
+                  .test("passwords-match", "Les mots de passe ne sont pas égaux", function(value) {
+                    return this.parent.password === value;
+                  })
               })}
               initialValues={{
                 type: user ? TYPE_OPTIONS.find(val => user.type === val.value) : "",
                 email: user ? user.email : "",
                 nom: user ? user.nom : "",
-                prenom: user ? user.prenom : ""
+                prenom: user ? user.prenom : "",
+                password: user ? user.password : "",
+                confirmPassword: user ? user.confirmPassword : ""
               }}
             >
               {props => {
@@ -144,6 +165,32 @@ export const SignupForm = props => {
                         placeholder="Prénom"
                       />
                       {errors.prenom && touched.prenom && <Text>{errors.prenom}</Text>}
+                    </Box>
+                    <Box mb="2">
+                      <Input
+                        value={values.password}
+                        type="password"
+                        id="password"
+                        name="password"
+                        hasError={errors.password && touched.password}
+                        onChange={handleChange}
+                        placeholder="Mot de passe"
+                      />
+                      {errors.password && touched.password && <Text>{errors.password}</Text>}
+                    </Box>
+                    <Box mb="2">
+                      <Input
+                        value={values.confirmPassword}
+                        type="password"
+                        id="confirmPassword"
+                        name="confirmPassword"
+                        hasError={errors.confirmPassword && touched.confirmPassword}
+                        onChange={handleChange}
+                        placeholder="Confirmation du mot de passe"
+                      />
+                      {errors.confirmPassword && touched.confirmPassword && (
+                        <Text>{errors.confirmPassword}</Text>
+                      )}
                     </Box>
                     <Flex justifyContent="flex-end">
                       <Box>
