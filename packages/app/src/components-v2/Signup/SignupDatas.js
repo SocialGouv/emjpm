@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
-import { ALL_DATA_OPTIONS } from "./queries";
+import { SIGNUP_DATA } from "./queries";
 
 const SignupDatas = props => {
   const { Component } = props;
 
-  const { data, loading, error } = useQuery(ALL_DATA_OPTIONS);
+  const { data, loading, error } = useQuery(SIGNUP_DATA);
 
   if (loading) {
     return <div>loading...</div>;
@@ -18,12 +18,14 @@ const SignupDatas = props => {
   const tiDatas = data.tis;
   const departementDatas = data.departements;
   const serviceDatas = data.services;
+  const roleDatas = data.role;
 
   return (
     <Component
       tiDatas={tiDatas}
       departementDatas={departementDatas}
       serviceDatas={serviceDatas}
+      roleDatas={roleDatas}
       {...props}
     />
   );

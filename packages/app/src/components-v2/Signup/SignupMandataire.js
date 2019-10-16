@@ -1,10 +1,13 @@
 import { Button, Card, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
+import Router from "next/router";
 import React, { useContext } from "react";
+import { useMutation } from "@apollo/react-hooks";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { SignupContext } from "./context";
+import { ADD_MANDATAIRE } from "./mutations";
 import { SignupDatas } from "./SignupDatas";
 
 const GENDER_OPTIONS = [
@@ -18,8 +21,11 @@ const GENDER_OPTIONS = [
   }
 ];
 
-const SignupMandataireForm = ({ tiDatas }) => {
-  const { validateStepOne } = useContext(SignupContext);
+const SignupMandataireForm = props => {
+  const { tiDatas, departementDatas, roleDatas } = props;
+  const { user, validateStepOne } = useContext(SignupContext);
+
+  const [AddMandataire] = useMutation(ADD_MANDATAIRE);
 
   const tiOptions = tiDatas.map(ti => ({
     value: ti.id,
@@ -32,6 +38,51 @@ const SignupMandataireForm = ({ tiDatas }) => {
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
+              onSubmit={(values, { setSubmitting, setErrors }) => {
+                const department_id = departementDatas.find(
+                  data => data.code === values.code_postal.substring(0, 2)
+                ).id;
+                const role_id = roleDatas.find(data => data.name === user.type).id;
+                if (!department_id)
+                  setErrors({
+                    code_postal: "Merci de renseigner un code postal valide"
+                  });
+                else {
+                  const input = {
+                    adresse: values.adresse,
+                    code_postal: values.code_postal,
+                    genre: values.genre.value,
+                    telephone: values.telephone,
+                    telephone_portable: values.telephone_portable,
+                    ville: values.ville,
+                    department_id,
+                    etablissement: "",
+                    dispo_max: values.dispo_max,
+                    user: {
+                      data: {
+                        username: user.email,
+                        email: user.email,
+                        type: user.type,
+                        nom: user.nom,
+                        prenom: user.prenom,
+                        password: user.password,
+                        user_tis: { data: values.tis.map(ti => ({ ti_id: ti.value })) },
+                        user_roles: { data: [{ role_id }] }
+                      }
+                    }
+                  };
+                  AddMandataire({
+                    variables: {
+                      objects: [input]
+                    },
+                    onCompleted: data => {
+                      console.log(data);
+                      Router.push("/inscription-done");
+                    }
+                  });
+                }
+                setSubmitting(false);
+              }}
               validationSchema={Yup.object().shape({
                 tis: Yup.mixed().required("Champs obligatoire"),
                 genre: Yup.string().required("Champs obligatoire"),

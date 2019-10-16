@@ -8,7 +8,7 @@ export const CHECK_EMAIL_UNICITY = gql`
   }
 `;
 
-export const ALL_DATA_OPTIONS = gql`
+export const SIGNUP_DATA = gql`
   {
     tis {
       id
@@ -28,6 +28,11 @@ export const ALL_DATA_OPTIONS = gql`
       id
       etablissement
       code_postal
+    }
+
+    role {
+      id
+      name
     }
   }
 `;
