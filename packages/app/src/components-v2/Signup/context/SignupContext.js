@@ -8,6 +8,7 @@ export const Provider = props => {
 
   // Use State to keep the values
   const [user, setUser] = useState(false);
+  const [mandataire, setMandataire] = useState(false);
   const [isStepOneValidate, validateStepOne] = useState(false);
 
   // Make the context object:
@@ -15,7 +16,9 @@ export const Provider = props => {
     isStepOneValidate,
     validateStepOne,
     user,
-    setUser
+    setUser,
+    mandataire,
+    setMandataire
   };
 
   // pass the value in provider and return

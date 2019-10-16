@@ -3,11 +3,10 @@ import { Formik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
 import React, { useContext } from "react";
-import { useMutation } from "@apollo/react-hooks";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { SignupContext } from "./context";
-import { ADD_MANDATAIRE } from "./mutations";
+import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 
 const GENDER_OPTIONS = [
@@ -22,10 +21,8 @@ const GENDER_OPTIONS = [
 ];
 
 const SignupMandataireForm = props => {
-  const { tiDatas, departementDatas, roleDatas } = props;
-  const { user, validateStepOne } = useContext(SignupContext);
-
-  const [AddMandataire] = useMutation(ADD_MANDATAIRE);
+  const { tiDatas, departementDatas } = props;
+  const { user, mandataire, setMandataire, validateStepOne } = useContext(SignupContext);
 
   const tiOptions = tiDatas.map(ti => ({
     value: ti.id,
@@ -42,42 +39,38 @@ const SignupMandataireForm = props => {
                 const department_id = departementDatas.find(
                   data => data.code === values.code_postal.substring(0, 2)
                 ).id;
-                const role_id = roleDatas.find(data => data.name === user.type).id;
                 if (!department_id)
                   setErrors({
                     code_postal: "Merci de renseigner un code postal valide"
                   });
                 else {
-                  const input = {
-                    adresse: values.adresse,
-                    code_postal: values.code_postal,
-                    genre: values.genre.value,
-                    telephone: values.telephone,
-                    telephone_portable: values.telephone_portable,
-                    ville: values.ville,
-                    department_id,
-                    etablissement: "",
-                    dispo_max: values.dispo_max,
-                    user: {
-                      data: {
-                        username: user.email,
-                        email: user.email,
-                        type: user.type,
-                        nom: user.nom,
-                        prenom: user.prenom,
-                        password: user.password,
-                        user_tis: { data: values.tis.map(ti => ({ ti_id: ti.value })) },
-                        user_roles: { data: [{ role_id }] }
-                      }
-                    }
-                  };
-                  AddMandataire({
-                    variables: {
-                      objects: [input]
+                  const body = {
+                    mandataire: {
+                      adresse: values.adresse,
+                      code_postal: values.code_postal,
+                      genre: values.genre.value,
+                      telephone: values.telephone,
+                      telephone_portable: values.telephone_portable,
+                      ville: values.ville,
+                      department_id,
+                      etablissement: "",
+                      dispo_max: parseInt(values.dispo_max)
                     },
-                    onCompleted: data => {
-                      console.log(data);
-                      Router.push("/inscription-done");
+                    user: {
+                      username: user.email,
+                      email: user.email,
+                      type: user.type,
+                      nom: user.nom,
+                      prenom: user.prenom,
+                      password: user.password
+                    },
+                    tis: values.tis.map(ti => ti.value)
+                  };
+                  signup(body).then(res => {
+                    if (res.json.sucess) {
+                      Router.push("signup/congratulation");
+                    } else {
+                      // TODO
                     }
                   });
                 }
@@ -97,13 +90,13 @@ const SignupMandataireForm = props => {
               })}
               initialValues={{
                 tis: null,
-                genre: "",
-                telephone: "",
-                telephone_portable: "",
-                adresse: "",
-                code_postal: "",
-                ville: "",
-                dispo_max: ""
+                genre: mandataire ? mandataire.genre : "",
+                telephone: mandataire ? mandataire.telephone : "",
+                telephone_portable: mandataire ? mandataire.telephone_portable : "",
+                adresse: mandataire ? mandataire.adresse : "",
+                code_postal: mandataire ? mandataire.code_postal : "",
+                ville: mandataire ? mandataire.ville : "",
+                dispo_max: mandataire ? mandataire.dispo_max : null
               }}
             >
               {props => {
@@ -218,7 +211,14 @@ const SignupMandataireForm = props => {
                         </Button>
                       </Box>
                       <Box>
-                        <Button mr="2" variant="outline" onClick={() => validateStepOne(false)}>
+                        <Button
+                          mr="2"
+                          variant="outline"
+                          onClick={() => {
+                            setMandataire(values);
+                            validateStepOne(false);
+                          }}
+                        >
                           <a>Retour</a>
                         </Button>
                       </Box>
