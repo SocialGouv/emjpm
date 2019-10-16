@@ -1,42 +1,58 @@
 import getConfig from "next/config";
 import React, { useState } from "react";
-import ReactMapGL from "react-map-gl";
-import { Box, Flex } from "rebass";
+import ReactMapboxGl from "react-mapbox-gl";
 
-import { MagistratMapMandataireList } from "../MagistratMapMandataireList";
-import { MagistratMandatairesMapStyle } from "./style";
+import LayerIndividuel from "./LayerIndividuel";
+import LayerMesures from "./LayerMesures";
+import LayerPrepose from "./LayerPrepose";
+import LayerServices from "./LayerServices";
 
-const {
-  publicRuntimeConfig: { MAPBOX_TOKEN }
-} = getConfig();
+const Map = ReactMapboxGl({ accessToken: "" });
 
 const MagistratMandatairesMap = props => {
-  const { width, height } = props;
-  const [currentViewport, setViewport] = useState({
-    latitude: 48.866667,
-    longitude: 2.333333,
-    zoom: 10,
-    bearing: 0,
-    pitch: 0
-  });
+  const { view_mesure_gestionnaire } = props;
+  const [center, setCenter] = useState([2.3488, 48.8534]);
+  const [mesures, setMesures] = useState([]);
+  const [currentGestionnaire, setcurrentGestionnaire] = useState(false);
+
+  const services = view_mesure_gestionnaire.filter(
+    gestionnaire => gestionnaire.discriminator === "SERVICE"
+  );
+  const individuel = view_mesure_gestionnaire.filter(
+    gestionnaire => gestionnaire.discriminator === "MANDATAIRE_IND"
+  );
+  const prepose = view_mesure_gestionnaire.filter(
+    gestionnaire => gestionnaire.discriminator === "MANDATAIRE_PRE"
+  );
 
   return (
-    <Flex>
-      <Box>
-        <MagistratMapMandataireList />
-      </Box>
-      <Box sx={MagistratMandatairesMapStyle(width, height)} {...props}>
-        <ReactMapGL
-          width="100%"
-          height="100%"
-          {...currentViewport}
-          onViewStateChange={({ viewState }) => {
-            setViewport({ viewState });
-          }}
-          mapboxApiAccessToken={MAPBOX_TOKEN}
-        />
-      </Box>
-    </Flex>
+    <Map
+      style="https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json"
+      center={center}
+      containerStyle={{
+        height: "100%",
+        width: "100%"
+      }}
+    >
+      <LayerMesures mesures={mesures} />
+      <LayerIndividuel
+        currentGestionnaire={currentGestionnaire}
+        setCenter={setCenter}
+        individuel={individuel}
+      />
+      <LayerPrepose
+        currentGestionnaire={currentGestionnaire}
+        setCenter={setCenter}
+        prepose={prepose}
+      />
+      <LayerServices
+        currentGestionnaire={currentGestionnaire}
+        setcurrentGestionnaire={setcurrentGestionnaire}
+        setCenter={setCenter}
+        setMesures={setMesures}
+        services={services}
+      />
+    </Map>
   );
 };
 

@@ -1,3 +1,3 @@
-import { MagistratMandatairesMap } from "./MagistratMandatairesMap";
+import { MagistratMandataires } from "./MagistratMandataires";
 
-export { MagistratMandatairesMap };
+export { MagistratMandataires as MagistratMandatairesMap };

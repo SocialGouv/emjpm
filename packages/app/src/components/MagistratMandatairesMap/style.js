@@ -1,7 +1,10 @@
-const MagistratMandatairesMapStyle = (height, width) => {
+const MagistratMandatairesMapStyle = () => {
   return {
-    height: height - 115,
-    width: width - 700
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    top: "0",
+    pt: "115px"
   };
 };
 
