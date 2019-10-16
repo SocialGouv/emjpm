@@ -362,6 +362,14 @@ tables:
       - id
       - name
       filter: {}
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - name
+      filter: {}
     role: direction
   - comment: null
     permission:
@@ -539,6 +547,16 @@ tables:
           id: user_id
         remote_table: magistrat
   select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - email
+      filter:
+        email:
+          _eq: X-Hasura-Email
+      limit: 1
+    role: anonymous
   - comment: null
     permission:
       allow_aggregations: false
