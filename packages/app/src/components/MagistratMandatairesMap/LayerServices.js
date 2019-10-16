@@ -15,6 +15,7 @@ const LayerServices = props => {
   let currentServices = services;
 
   const chooseMandataire = service => {
+    // Should move that when data are fetched so it will be less laggy
     setcurrentGestionnaire({ id: service.service.id, discriminator: "SERVICE" });
     getMesures({ variables: { id: service.service.id } });
     setCenter([service.longitude, service.latitude]);
@@ -29,7 +30,9 @@ const LayerServices = props => {
   }
 
   if (data && data.mesures) {
-    setMesures(data.mesures);
+    setTimeout(function() {
+      setMesures(data.mesures);
+    }, 1000);
   }
 
   return (
