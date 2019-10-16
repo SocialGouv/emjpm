@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
+import dynamic from "next/dynamic";
 import React from "react";
 import { Box, Flex } from "rebass";
-import dynamic from "next/dynamic";
 
 import { MagistratMapMandataireList } from "../MagistratMapMandataireList";
-import { MagistratMandatairesMapStyle } from "./style";
 import { MESURES_GESTIONNAIRE } from "./queries";
+import { MagistratMandatairesMapStyle } from "./style";
 
 const formatData = view_mesure_gestionnaire => {
   return view_mesure_gestionnaire.map(gestionnaire => {

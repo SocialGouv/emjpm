@@ -1,5 +1,5 @@
 import React from "react";
-import { Layer, Feature } from "react-mapbox-gl";
+import { Feature, Layer } from "react-mapbox-gl";
 
 import iconMarker from "../../../static/images/map-icon-individuel-man@2x.png";
 
