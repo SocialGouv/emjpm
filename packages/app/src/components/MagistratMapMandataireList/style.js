@@ -1,5 +1,5 @@
 const MagistratMapMandataireListStyle = {
-  width: "700px"
+  width: "600px"
 };
 
 export { MagistratMapMandataireListStyle };
