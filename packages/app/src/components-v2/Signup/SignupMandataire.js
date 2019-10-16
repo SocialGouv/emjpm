@@ -33,15 +33,15 @@ const SignupMandataireForm = ({ tiDatas }) => {
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               validationSchema={Yup.object().shape({
-                tis: Yup.mixed().required("Le champs obligatoire"),
-                genre: Yup.string().required("Le champs obligatoire"),
-                telephone: Yup.string().required("Le champs obligatoire"),
+                tis: Yup.mixed().required("Champs obligatoire"),
+                genre: Yup.string().required("Champs obligatoire"),
+                telephone: Yup.string().required("Champs obligatoire"),
                 telephone_portable: Yup.string(),
-                adresse: Yup.string().required("Le champs obligatoire"),
-                code_postal: Yup.string().required("Le champs obligatoire"),
-                ville: Yup.string().required("Le champs obligatoire"),
+                adresse: Yup.string().required("Champs obligatoire"),
+                code_postal: Yup.string().required("Champs obligatoire"),
+                ville: Yup.string().required("Champs obligatoire"),
                 dispo_max: Yup.number("Le champs doit être en nombre").required(
-                  "Le champs obligatoire"
+                  "Champs obligatoire"
                 )
               })}
               initialValues={{

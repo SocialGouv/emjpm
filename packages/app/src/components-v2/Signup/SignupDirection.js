@@ -17,7 +17,7 @@ export const SignupDirection = props => {
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               validationSchema={Yup.object().shape({
-                cabinet: Yup.string().required("Le champs obligatoire")
+                cabinet: Yup.string().required("Champs obligatoire")
               })}
               initialValues={{
                 cabinet: ""

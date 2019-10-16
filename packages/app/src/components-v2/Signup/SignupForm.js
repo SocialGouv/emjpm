@@ -76,12 +76,12 @@ export const SignupForm = props => {
                 setSubmitting(false);
               }}
               validationSchema={Yup.object().shape({
-                type: Yup.string().required("Le champs obligatoire"),
+                type: Yup.string().required("Champs obligatoire"),
                 email: Yup.string()
                   .email("Le format de votre email n'est pas correct")
-                  .required("Le champs obligatoire"),
-                nom: Yup.string().required("Le champs obligatoire"),
-                prenom: Yup.string().required("Le champs obligatoire"),
+                  .required("Champs obligatoire"),
+                nom: Yup.string().required("Champs obligatoire"),
+                prenom: Yup.string().required("Champs obligatoire"),
                 password: Yup.string()
                   .label("Mot de passe")
                   .required()

@@ -43,9 +43,9 @@ const SignupServiceForm = ({ tiDatas, departementDatas, serviceDatas }) => {
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               validationSchema={Yup.object().shape({
-                tis: Yup.mixed().required("Le champs obligatoire"),
-                departement: Yup.mixed().required("Le champs obligatoire"),
-                service: Yup.mixed().required("Le champs obligatoire")
+                tis: Yup.mixed().required("Champs obligatoire"),
+                departement: Yup.mixed().required("Champs obligatoire"),
+                service: Yup.mixed().required("Champs obligatoire")
               })}
               initialValues={{
                 tis: null,

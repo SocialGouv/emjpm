@@ -23,8 +23,8 @@ const SignupMagistratForm = ({ tiDatas }) => {
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               validationSchema={Yup.object().shape({
-                tribunal: Yup.string().required("Le champs obligatoire"),
-                cabinet: Yup.string().required("Le champs obligatoire")
+                tribunal: Yup.string().required("Champs obligatoire"),
+                cabinet: Yup.string().required("Champs obligatoire")
               })}
               initialValues={{
                 tribunal: "",
