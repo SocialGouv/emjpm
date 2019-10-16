@@ -1,9 +1,9 @@
-import React from "react";
-import { Layer, Feature } from "react-mapbox-gl";
 import { useLazyQuery } from "@apollo/react-hooks";
+import React from "react";
+import { Feature, Layer } from "react-mapbox-gl";
 
-import { MESURES_SERVICE } from "./queries";
 import iconMarker from "../../../static/images/map-icon-service@2x.png";
+import { MESURES_SERVICE } from "./queries";
 
 const image = new Image(60, 72);
 image.src = iconMarker;
