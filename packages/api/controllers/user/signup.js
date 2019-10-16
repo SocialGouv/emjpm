@@ -15,17 +15,16 @@ const {
   createServiceAdmin
 } = require("./utils/service");
 
-const createMagistrat = async (body, user) => {
-  const { tis } = body;
-  if (!tis || tis.length === 0) {
+const createMagistrat = async (magistrat, user) => {
+  const { ti } = magistrat;
+  if (!ti) {
     throw new Error("a ti is required for user `magistrat`");
   }
-  const ti_id = tis[0];
   return Magistrat.query()
     .allowInsert("[user_id, ti_id]")
     .insert({
       user_id: user.id,
-      ti_id
+      ti_id: ti
     });
 };
 
@@ -74,15 +73,9 @@ const createUserTis = (tis, user_id) => {
   );
 };
 
-const createDirection = (body, userId) => {
-  Direction.query().insert({
-    user_id: userId,
-    department_id:
-      body.directionType === "direction_departemental"
-        ? body.department_id
-        : null,
-    region_id:
-      body.directionType === "direction_regional" ? body.region_id : null
+const createDirection = userId => {
+  return Direction.query().insert({
+    user_id: userId
   });
 };
 
@@ -143,13 +136,13 @@ const postSignup = async (req, res) => {
         await User.query()
           .update({ cabinet })
           .where("id", user.id);
-        await createMagistrat(body, user);
+        await createMagistrat(body.magistrat, user);
         break;
       }
       case "direction": {
         const { directionType } = body.direction;
         await createRole(user.id, directionType);
-        await createDirection(body, user.id);
+        await createDirection(user.id);
         break;
       }
       default:

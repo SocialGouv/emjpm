@@ -24,7 +24,7 @@ export const SIGNUP_DATA = gql`
       code
     }
 
-    services(order_by: { code_postal: asc }) {
+    services(order_by: { etablissement: asc }) {
       id
       etablissement
       code_postal

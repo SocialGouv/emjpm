@@ -5,17 +5,15 @@ import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { SignupContext } from "./context";
+import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
+import { SignupGeneralError } from "./SignupGeneralError";
+import Router from "next/router";
 
-const SignupServiceForm = ({ tiDatas, departementDatas, serviceDatas }) => {
-  const { service, setService, validateStepOne } = useContext(SignupContext);
+const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
+  const { user, service, setService, validateStepOne } = useContext(SignupContext);
 
   const [serviceOptions, setServiceOptions] = useState([]);
-
-  const tiOptions = tiDatas.map(ti => ({
-    value: ti.id,
-    label: ti.etablissement
-  }));
 
   const departementOptions = departementDatas.map(departement => ({
     value: departement.id,
@@ -42,13 +40,36 @@ const SignupServiceForm = ({ tiDatas, departementDatas, serviceDatas }) => {
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
+              onSubmit={(values, { setSubmitting, setErrors }) => {
+                const body = {
+                  service: {
+                    service_id: values.service.value
+                  },
+                  user: {
+                    username: user.email,
+                    ...user
+                  }
+                };
+                signup(body)
+                  .then(res => {
+                    if (res.success) {
+                      Router.push("/signup/congratulation");
+                    } else {
+                      setErrors({ general: res.errors.map(error => error.msg) });
+                    }
+                  })
+                  .catch(error => {
+                    setErrors({ general: [error.message] });
+                  })
+                  .finally(() => {
+                    setSubmitting(false);
+                  });
+              }}
               validationSchema={Yup.object().shape({
-                tis: Yup.mixed().required("Champs obligatoire"),
                 departement: Yup.mixed().required("Champs obligatoire"),
                 service: Yup.mixed().required("Champs obligatoire")
               })}
               initialValues={{
-                tis: service ? service.tis : null,
                 departement: service ? service.departement : null,
                 service: service ? service.service : null
               }}
@@ -64,19 +85,7 @@ const SignupServiceForm = ({ tiDatas, departementDatas, serviceDatas }) => {
                 } = props;
                 return (
                   <form onSubmit={handleSubmit}>
-                    <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
-                      <Select
-                        id="tis"
-                        name="tis"
-                        placeholder="Tribunaux dans lesquels vous exercez"
-                        value={values.tis}
-                        hasError={errors.tis && touched.tis}
-                        onChange={option => setFieldValue("tis", option)}
-                        options={tiOptions}
-                        isMulti
-                      />
-                      {errors.tis && touched.tis && <Text>{errors.tis}</Text>}
-                    </Box>
+                    <SignupGeneralError errors={props.errors} />
                     <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
                       <Select
                         id="departement"

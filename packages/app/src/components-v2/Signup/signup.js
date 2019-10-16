@@ -6,7 +6,6 @@ const {
 } = getConfig();
 
 export default body => {
-  console.log(body);
   const url = `${API_URL}/api/v2/auth/signup`;
 
   const fetchParams = {
@@ -17,5 +16,5 @@ export default body => {
     body: JSON.stringify(body)
   };
 
-  return fetch(url, fetchParams);
+  return fetch(url, fetchParams).then(res => res.json());
 };

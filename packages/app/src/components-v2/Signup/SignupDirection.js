@@ -1,13 +1,17 @@
 import { Button, Card, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
+import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { DIRECTION_TYPE_LABEL_VALUE } from "../../constants/direction";
 import { SignupContext } from "./context";
+import signup from "./signup";
+import { SignupGeneralError } from "./SignupGeneralError";
+
 export const SignupDirection = props => {
-  const { direction, setDirection, validateStepOne } = useContext(SignupContext);
+  const { user, direction, setDirection, validateStepOne } = useContext(SignupContext);
 
   return (
     <Card>
@@ -15,6 +19,31 @@ export const SignupDirection = props => {
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
+              onSubmit={(values, { setSubmitting, setErrors }) => {
+                const body = {
+                  direction: {
+                    directionType: values.directionType.value
+                  },
+                  user: {
+                    username: user.email,
+                    ...user
+                  }
+                };
+                signup(body)
+                  .then(res => {
+                    if (res.success) {
+                      Router.push("/signup/congratulation");
+                    } else {
+                      setErrors({ general: res.errors.map(error => error.msg) });
+                    }
+                  })
+                  .catch(error => {
+                    setErrors({ general: [error.message] });
+                  })
+                  .finally(() => {
+                    setSubmitting(false);
+                  });
+              }}
               validationSchema={Yup.object().shape({
                 directionType: Yup.string().required("Champs obligatoire")
               })}
@@ -33,6 +62,7 @@ export const SignupDirection = props => {
                 } = props;
                 return (
                   <form onSubmit={handleSubmit}>
+                    <SignupGeneralError errors={props.errors} />
                     <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
                       <Select
                         id="directionType"

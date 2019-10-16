@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
+import { SignupGeneralError } from "./SignupGeneralError";
 
 const GENDER_OPTIONS = [
   {
@@ -39,11 +40,12 @@ const SignupMandataireForm = props => {
                 const department_id = departementDatas.find(
                   data => data.code === values.code_postal.substring(0, 2)
                 ).id;
-                if (!department_id)
+                if (!department_id) {
                   setErrors({
                     code_postal: "Merci de renseigner un code postal valide"
                   });
-                else {
+                  setSubmitting(false);
+                } else {
                   const body = {
                     mandataire: {
                       adresse: values.adresse,
@@ -58,23 +60,25 @@ const SignupMandataireForm = props => {
                     },
                     user: {
                       username: user.email,
-                      email: user.email,
-                      type: user.type,
-                      nom: user.nom,
-                      prenom: user.prenom,
-                      password: user.password
+                      ...user
                     },
                     tis: values.tis.map(ti => ti.value)
                   };
-                  signup(body).then(res => {
-                    if (res.json.sucess) {
-                      Router.push("signup/congratulation");
-                    } else {
-                      // TODO
-                    }
-                  });
+                  signup(body)
+                    .then(res => {
+                      if (res.success) {
+                        Router.push("/signup/congratulation");
+                      } else {
+                        setErrors({ general: res.errors.map(error => error.msg) });
+                      }
+                    })
+                    .catch(error => {
+                      setErrors({ general: [error.message] });
+                    })
+                    .finally(() => {
+                      setSubmitting(false);
+                    });
                 }
-                setSubmitting(false);
               }}
               validationSchema={Yup.object().shape({
                 tis: Yup.mixed().required("Champs obligatoire"),
@@ -111,6 +115,7 @@ const SignupMandataireForm = props => {
                 } = props;
                 return (
                   <form onSubmit={handleSubmit}>
+                    <SignupGeneralError errors={props.errors} />
                     <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
                       <Select
                         id="tis"
