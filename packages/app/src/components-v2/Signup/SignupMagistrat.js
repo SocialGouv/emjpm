@@ -9,9 +9,9 @@ import { SignupContext } from "./context";
 import { SignupDatas } from "./SignupDatas";
 
 const SignupMagistratForm = ({ tiDatas }) => {
-  const { validateStepOne } = useContext(SignupContext);
+  const { magistrat, setMagistrat, validateStepOne } = useContext(SignupContext);
 
-  const tribunalOptions = tiDatas.map(ti => ({
+  const tiOptions = tiDatas.map(ti => ({
     value: ti.id,
     label: ti.etablissement
   }));
@@ -23,12 +23,12 @@ const SignupMagistratForm = ({ tiDatas }) => {
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               validationSchema={Yup.object().shape({
-                tribunal: Yup.string().required("Champs obligatoire"),
+                ti: Yup.string().required("Champs obligatoire"),
                 cabinet: Yup.string().required("Champs obligatoire")
               })}
               initialValues={{
-                tribunal: "",
-                cabinet: ""
+                ti: magistrat ? magistrat.ti : "",
+                cabinet: magistrat ? magistrat.cabinet : ""
               }}
             >
               {props => {
@@ -44,15 +44,15 @@ const SignupMagistratForm = ({ tiDatas }) => {
                   <form onSubmit={handleSubmit}>
                     <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
                       <Select
-                        id="tribunal"
-                        name="tribunal"
+                        id="ti"
+                        name="ti"
                         placeholder="Tribunal d'instance"
-                        value={values.tribunal}
-                        hasError={errors.tribunal && touched.tribunal}
-                        onChange={option => setFieldValue("tribunal", option)}
-                        options={tribunalOptions}
+                        value={values.ti}
+                        hasError={errors.ti && touched.ti}
+                        onChange={option => setFieldValue("ti", option)}
+                        options={tiOptions}
                       />
-                      {errors.tribunal && touched.tribunal && <Text>{errors.tribunal}</Text>}
+                      {errors.ti && touched.ti && <Text>{errors.ti}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
                       <Select
@@ -75,7 +75,14 @@ const SignupMagistratForm = ({ tiDatas }) => {
                         </Button>
                       </Box>
                       <Box>
-                        <Button mr="2" variant="outline" onClick={() => validateStepOne(false)}>
+                        <Button
+                          mr="2"
+                          variant="outline"
+                          onClick={() => {
+                            setMagistrat(values);
+                            validateStepOne(false);
+                          }}
+                        >
                           <a>Retour</a>
                         </Button>
                       </Box>

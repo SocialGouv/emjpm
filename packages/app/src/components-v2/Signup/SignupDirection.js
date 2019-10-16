@@ -4,11 +4,10 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+import { DIRECTION_TYPE_LABEL_VALUE } from "../../constants/direction";
 import { SignupContext } from "./context";
-import { MAGISTRAT_CABINET_LABEL_VALUE } from "../../constants/magistrat";
-
 export const SignupDirection = props => {
-  const { validateStepOne } = useContext(SignupContext);
+  const { direction, setDirection, validateStepOne } = useContext(SignupContext);
 
   return (
     <Card>
@@ -17,10 +16,10 @@ export const SignupDirection = props => {
           <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
             <Formik
               validationSchema={Yup.object().shape({
-                cabinet: Yup.string().required("Champs obligatoire")
+                directionType: Yup.string().required("Champs obligatoire")
               })}
               initialValues={{
-                cabinet: ""
+                directionType: direction ? direction.directionType : ""
               }}
             >
               {props => {
@@ -36,13 +35,13 @@ export const SignupDirection = props => {
                   <form onSubmit={handleSubmit}>
                     <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
                       <Select
-                        id="cabinet"
-                        name="cabinet"
-                        placeholder="Cabinet"
-                        value={values.cabinet}
-                        hasError={errors.cabinet && touched.cabinet}
-                        onChange={option => setFieldValue("cabinet", option)}
-                        options={MAGISTRAT_CABINET_LABEL_VALUE}
+                        id="directionType"
+                        name="directionType"
+                        placeholder="Type de direction"
+                        value={values.directionType}
+                        hasError={errors.directionType && touched.directionType}
+                        onChange={option => setFieldValue("directionType", option)}
+                        options={DIRECTION_TYPE_LABEL_VALUE}
                       />
                       {errors.cabinet && touched.cabinet && <Text>{errors.cabinet}</Text>}
                     </Box>
@@ -55,7 +54,14 @@ export const SignupDirection = props => {
                         </Button>
                       </Box>
                       <Box>
-                        <Button mr="2" variant="outline" onClick={() => validateStepOne(false)}>
+                        <Button
+                          mr="2"
+                          variant="outline"
+                          onClick={() => {
+                            setDirection(values);
+                            validateStepOne(false);
+                          }}
+                        >
                           <a>Retour</a>
                         </Button>
                       </Box>

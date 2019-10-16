@@ -8,7 +8,7 @@ import { SignupContext } from "./context";
 import { SignupDatas } from "./SignupDatas";
 
 const SignupServiceForm = ({ tiDatas, departementDatas, serviceDatas }) => {
-  const { validateStepOne } = useContext(SignupContext);
+  const { service, setService, validateStepOne } = useContext(SignupContext);
 
   const [serviceOptions, setServiceOptions] = useState([]);
 
@@ -48,9 +48,9 @@ const SignupServiceForm = ({ tiDatas, departementDatas, serviceDatas }) => {
                 service: Yup.mixed().required("Champs obligatoire")
               })}
               initialValues={{
-                tis: null,
-                departement: null,
-                service: null
+                tis: service ? service.tis : null,
+                departement: service ? service.departement : null,
+                service: service ? service.service : null
               }}
             >
               {props => {
@@ -115,7 +115,14 @@ const SignupServiceForm = ({ tiDatas, departementDatas, serviceDatas }) => {
                         </Button>
                       </Box>
                       <Box>
-                        <Button mr="2" variant="outline" onClick={() => validateStepOne(false)}>
+                        <Button
+                          mr="2"
+                          variant="outline"
+                          onClick={() => {
+                            setService(values);
+                            validateStepOne(false);
+                          }}
+                        >
                           <a>Retour</a>
                         </Button>
                       </Box>

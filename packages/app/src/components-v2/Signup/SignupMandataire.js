@@ -89,14 +89,14 @@ const SignupMandataireForm = props => {
                 )
               })}
               initialValues={{
-                tis: null,
+                tis: mandataire ? mandataire.tis : "",
                 genre: mandataire ? mandataire.genre : "",
                 telephone: mandataire ? mandataire.telephone : "",
                 telephone_portable: mandataire ? mandataire.telephone_portable : "",
                 adresse: mandataire ? mandataire.adresse : "",
                 code_postal: mandataire ? mandataire.code_postal : "",
                 ville: mandataire ? mandataire.ville : "",
-                dispo_max: mandataire ? mandataire.dispo_max : null
+                dispo_max: mandataire ? mandataire.dispo_max : ""
               }}
             >
               {props => {

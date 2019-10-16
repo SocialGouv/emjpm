@@ -9,6 +9,9 @@ export const Provider = props => {
   // Use State to keep the values
   const [user, setUser] = useState(false);
   const [mandataire, setMandataire] = useState(false);
+  const [magistrat, setMagistrat] = useState(false);
+  const [direction, setDirection] = useState(false);
+  const [service, setService] = useState(false);
   const [isStepOneValidate, validateStepOne] = useState(false);
 
   // Make the context object:
@@ -18,7 +21,13 @@ export const Provider = props => {
     user,
     setUser,
     mandataire,
-    setMandataire
+    setMandataire,
+    magistrat,
+    setMagistrat,
+    direction,
+    setDirection,
+    service,
+    setService
   };
 
   // pass the value in provider and return
