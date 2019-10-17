@@ -46,13 +46,14 @@ const MagistratMandataires = props => {
   if (error) {
     return <div>error</div>;
   }
+
   const { view_mesure_gestionnaire } = data;
   const datas = formatData(view_mesure_gestionnaire);
 
   return (
     <Flex sx={MagistratMandatairesMapStyle()}>
       <Box height="100%" flex="0 1 auto">
-        <MagistratMapMandataireList />
+        <MagistratMapMandataireList tiId={ti_id} />
       </Box>
       <Box height="100%" flex="1 1 auto">
         <MagistratMandatairesMap view_mesure_gestionnaire={datas} />
