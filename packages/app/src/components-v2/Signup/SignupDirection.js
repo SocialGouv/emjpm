@@ -29,20 +29,12 @@ export const SignupDirection = props => {
                     ...user
                   }
                 };
-                signup(body)
-                  .then(res => {
-                    if (res.success) {
-                      Router.push("/signup/congratulation");
-                    } else {
-                      setErrors({ general: res.errors.map(error => error.msg) });
-                    }
-                  })
-                  .catch(error => {
-                    setErrors({ general: [error.message] });
-                  })
-                  .finally(() => {
-                    setSubmitting(false);
-                  });
+                signup({
+                  body,
+                  onSuccess: () => Router.push("/signup/congratulation"),
+                  onError: errors => setErrors(errors),
+                  onComplete: () => setSubmitting(false)
+                });
               }}
               validationSchema={Yup.object().shape({
                 directionType: Yup.string().required("Champs obligatoire")
