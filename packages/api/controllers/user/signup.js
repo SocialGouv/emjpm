@@ -18,7 +18,9 @@ const {
 const createMagistrat = async (magistrat, user) => {
   const { ti } = magistrat;
   if (!ti) {
-    throw new Error("a ti is required for user `magistrat`");
+    throw new Error(
+      "Renseigner un tribunal est obligatoire pour un compte 'magistrat'"
+    );
   }
   return Magistrat.query()
     .allowInsert("[user_id, ti_id]")
