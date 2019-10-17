@@ -1,12 +1,13 @@
-import React, { useState } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Box, Flex } from "rebass";
 import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
 import { Button } from "@socialgouv/emjpm-ui-core";
+import React, { useState } from "react";
 import { Scrollbar } from "react-scrollbars-custom";
+import { Box, Flex } from "rebass";
+
 import { formatMandatairesList } from "../MandatairesList/utils";
-import { MagistratMapMandataireListStyle } from "./style";
 import { MESURES_GESTIONNAIRE } from "./queries";
+import { MagistratMapMandataireListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
@@ -41,7 +42,11 @@ const MagistratMapMandataireList = props => {
     <Box pt="2" px="2" sx={MagistratMapMandataireListStyle} {...props}>
       <Scrollbar style={{ width: "100%", height: "100%" }}>
         <Box mr="1">
-          <Mandatairelist isMagistratMap mandataires={list} />
+          <Mandatairelist
+            isMagistratMap
+            selectCurrentMandataire={data => console.log(data)}
+            mandataires={list}
+          />
           {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
             <Flex mt="5" mb="5" alignItem="center">
               <Button

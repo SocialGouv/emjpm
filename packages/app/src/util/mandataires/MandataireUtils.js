@@ -58,6 +58,7 @@ export const formatMandataire = (
 
     currentDiscriminator = {
       adresse: service.adresse ? capitalize(service.adresse) : "non renseigné",
+      antenneId: service.service_antennes ? headquarter.id : null,
       codePostal: service.code_postal ? capitalize(service.code_postal) : "non renseigné",
       email: service.email ? service.email : "non renseigné",
       etablissement: service.etablissement ? service.etablissement : "non renseigné",

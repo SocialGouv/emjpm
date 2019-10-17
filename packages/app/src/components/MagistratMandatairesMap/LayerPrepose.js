@@ -1,21 +1,48 @@
-import React from "react";
+import { useLazyQuery } from "@apollo/react-hooks";
+import React, { useContext } from "react";
 import { Feature, Layer } from "react-mapbox-gl";
 
 import iconMarker from "../../../static/images/map-icon-propose-man@2x.png";
+import { MapContext } from "./context";
+import { MESURES_MANDATAIRE } from "./queries";
 
 const image = new Image(60, 72);
 image.src = iconMarker;
 const images = ["prepose", image, { pixelRatio: 2 }];
 
 const LayerPrepose = props => {
-  const { prepose, setCenter, currentGestionnaire } = props;
-  let currentPrepose = prepose;
+  const { prepose } = props;
+  const { currentGestionnaire, setCenter, setMesures, setcurrentGestionnaire } = useContext(
+    MapContext
+  );
+  const [getMesures, { data }] = useLazyQuery(MESURES_MANDATAIRE);
+
+  let currentPreposes = prepose;
+
+  const chooseMandataire = prepose => {
+    // Should move that when data are fetched so it will be less laggy
+    setcurrentGestionnaire({
+      id: prepose.mandataire.id,
+      discriminator: "SERVICE",
+      coordinates: [prepose.longitude, prepose.latitude]
+    });
+    getMesures({ variables: { id: prepose.mandataire.id } });
+  };
+
   if (currentGestionnaire) {
-    currentPrepose = prepose.filter(
-      currentService =>
-        currentService.mandataire.id === currentGestionnaire.id &&
-        currentGestionnaire.discriminator === "MANDATAIRE_PRE"
-    );
+    currentPreposes = prepose.filter(currentPrepose => {
+      if (currentGestionnaire.discriminator === "MANDATAIRE_PRE") {
+        return null;
+      }
+      return currentPrepose.mandataire.id === currentGestionnaire.id;
+    });
+  }
+
+  if (data && data.mesures) {
+    setTimeout(function() {
+      setCenter(currentGestionnaire.coordinates);
+      setMesures(data.mesures);
+    }, 300);
   }
 
   return (
@@ -31,10 +58,10 @@ const LayerPrepose = props => {
       images={images}
       layout={{ "icon-image": "prepose" }}
     >
-      {currentPrepose.map(gestionnaire => {
+      {currentPreposes.map(gestionnaire => {
         return (
           <Feature
-            onClick={() => setCenter([gestionnaire.longitude, gestionnaire.latitude])}
+            onClick={() => chooseMandataire(gestionnaire)}
             key={gestionnaire.id}
             coordinates={[gestionnaire.longitude, gestionnaire.latitude]}
           />

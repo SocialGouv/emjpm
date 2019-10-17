@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Feature, Layer } from "react-mapbox-gl";
 
 import iconMarker from "../../../static/images/map-icon-mesure@2x.png";
+import { MapContext } from "./context";
 
 const image = new Image(60, 72);
 image.src = iconMarker;
 const images = ["mesure", image, { pixelRatio: 2 }];
 
-const LayerMesures = props => {
-  const { mesures } = props;
+const LayerMesures = () => {
+  const { mesures } = useContext(MapContext);
   return (
     <Layer
       onMouseEnter={e => {

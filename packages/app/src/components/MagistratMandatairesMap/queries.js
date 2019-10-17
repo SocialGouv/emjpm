@@ -44,3 +44,12 @@ export const MESURES_SERVICE = gql`
     }
   }
 `;
+
+export const MESURES_MANDATAIRE = gql`
+  query MesureGestionnaire($id: Int!) {
+    mesures(where: { mandataire_id: { _eq: $id } }) {
+      id
+      code_postal
+    }
+  }
+`;
