@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { MagistratMapMandataireList } from "../MagistratMapMandataireList";
+import { MapContextProvider } from "./context";
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { MagistratMandatairesMapStyle } from "./style";
 
@@ -51,14 +52,16 @@ const MagistratMandataires = props => {
   const datas = formatData(view_mesure_gestionnaire);
 
   return (
-    <Flex sx={MagistratMandatairesMapStyle()}>
-      <Box height="100%" flex="0 1 auto">
-        <MagistratMapMandataireList tiId={ti_id} />
-      </Box>
-      <Box height="100%" flex="1 1 auto">
-        <MagistratMandatairesMap view_mesure_gestionnaire={datas} />
-      </Box>
-    </Flex>
+    <MapContextProvider>
+      <Flex sx={MagistratMandatairesMapStyle()}>
+        <Box height="100%" flex="0 1 auto">
+          <MagistratMapMandataireList tiId={ti_id} />
+        </Box>
+        <Box height="100%" flex="1 1 auto">
+          <MagistratMandatairesMap view_mesure_gestionnaire={datas} />
+        </Box>
+      </Flex>
+    </MapContextProvider>
   );
 };
 

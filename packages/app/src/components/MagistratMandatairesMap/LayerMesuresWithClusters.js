@@ -1,8 +1,8 @@
 import React from "react";
 import { Cluster, Marker } from "react-mapbox-gl";
 
-import iconMarker from "../../../static/images/map-icon-mesure@2x.png";
 import iconEmpty from "../../../static/images/map-icon-empty@2x.png";
+import iconMarker from "../../../static/images/map-icon-mesure@2x.png";
 
 const styles = {
   clusterMarker: {
