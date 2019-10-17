@@ -27,7 +27,7 @@ beforeEach(async () => {
 afterEach(async () => {
   // Remove created user
   const user = await knex("users")
-    .where({ email: defaultRegister.email })
+    .where({ email: defaultRegister().user.email })
     .first();
 
   if (!user) {
@@ -61,14 +61,15 @@ afterEach(async () => {
 
 const defaultRegister = params => ({
   user: {
-    username: params && params.username ? params.username : "toto",
-    nom: params && params.nom ? params.nom : "testAd",
-    prenom: params && params.prenom ? params.prenom : "testPrenom",
-    email: params && params.email ? params.email : "toto@toto.com",
-    type: params && params.type ? params.type : "individuel",
-    password: params && params.password ? params.password : "test123456?",
+    username: params && params.username != undefined ? params.username : "toto",
+    nom: params && params.nom != undefined ? params.nom : "testAd",
+    prenom: params && params.prenom != undefined ? params.prenom : "testPrenom",
+    email: params && params.email != undefined ? params.email : "toto@toto.com",
+    type: params && params.type != undefined ? params.type : "individuel",
+    password:
+      params && params.password != undefined ? params.password : "test123456?",
     passwordConfirmation:
-      params && params.passwordConfirmation
+      params && params.passwordConfirmation != undefined
         ? params.passwordConfirmation
         : "test123456?"
   },
