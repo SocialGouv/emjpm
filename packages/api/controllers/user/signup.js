@@ -148,10 +148,9 @@ const postSignup = async (req, res) => {
       default:
         return;
     }
-
-    const tiNames = await getTisNames(body.tis);
+    const tis = body.magistrat ? [body.magistrat.ti] : body.tis;
     const code_postal = body.mandataire ? body.mandataire.code_postal : "";
-
+    const tiNames = await getTisNames(tis);
     inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
     return res.json({ success: true });
   } catch (err) {

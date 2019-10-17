@@ -59,27 +59,33 @@ afterEach(async () => {
     .delete();
 });
 
-const defaultRegister = {
-  username: "toto",
-  nom: "testAd",
-  prenom: "testPrenom",
-  etablissement: "",
-  email: "toto@toto.com",
-  type: "individuel",
-  password: "test123456?",
-  passwordConfirmation: "test123456?",
-  adresse: "",
-  code_postal: "75010",
-  ville: "",
-  telephone: "",
-  latitude: 2,
-  longitude: 2
-};
+const defaultRegister = params => ({
+  user: {
+    username: params && params.username ? params.username : "toto",
+    nom: params && params.nom ? params.nom : "testAd",
+    prenom: params && params.prenom ? params.prenom : "testPrenom",
+    email: params && params.email ? params.email : "toto@toto.com",
+    type: params && params.type ? params.type : "individuel",
+    password: params && params.password ? params.password : "test123456?",
+    passwordConfirmation:
+      params && params.passwordConfirmation
+        ? params.passwordConfirmation
+        : "test123456?"
+  },
+  mandataire: {
+    etablissement: "",
+    adresse: "",
+    code_postal: "75010",
+    department_id: 1,
+    ville: "",
+    telephone: ""
+  }
+});
 
 test("should register with good values", async () => {
   const response = await request(server)
     .post("/api/v2/auth/signup")
-    .send(defaultRegister);
+    .send(defaultRegister());
   expect(response.body).toMatchInlineSnapshot(`
                 Object {
                   "success": true,
@@ -97,7 +103,7 @@ test("should register with good values", async () => {
 test("should send an email with good values", async () => {
   await request(server)
     .post("/api/v2/auth/signup")
-    .send(defaultRegister);
+    .send(defaultRegister());
   expect(nodemailerMock.mock.sentMail().length).toBe(1);
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
 });
@@ -105,7 +111,7 @@ test("should send an email with good values", async () => {
 test("created user should NOT be active", async () => {
   const response = await request(server)
     .post("/api/v2/auth/signup")
-    .send(defaultRegister);
+    .send(defaultRegister());
   expect(response.body.success).toBe(true);
   expect(response.status).toBe(200);
 
@@ -122,11 +128,9 @@ test("created user should NOT be active", async () => {
 test("should NOT register when password!==passwordConfirmation", async () => {
   const response = await request(server)
     .post("/api/v2/auth/signup")
-    .send({
-      ...defaultRegister,
-      password: "hello",
-      passwordConfirmation: "world"
-    });
+    .send(
+      defaultRegister({ password: "hello", passwordConfirmation: "world" })
+    );
 
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
@@ -143,10 +147,7 @@ test("should NOT register when password!==passwordConfirmation", async () => {
 test("should NOT register when email already exist", async () => {
   const response = await request(server)
     .post("/api/v2/auth/signup")
-    .send({
-      ...defaultRegister,
-      email: "marcel@paris.com"
-    });
+    .send(defaultRegister({ email: "marcel@paris.com" }));
 
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
@@ -163,10 +164,7 @@ test("should NOT register when email already exist", async () => {
 test("should NOT register when username already exist", async () => {
   const response = await request(server)
     .post("/api/v2/auth/signup")
-    .send({
-      ...defaultRegister,
-      username: "jeremy"
-    });
+    .send(defaultRegister({ username: "jeremy" }));
 
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
@@ -183,10 +181,7 @@ test("should NOT register when username already exist", async () => {
 test("should NOT register when empty username", async () => {
   const response = await request(server)
     .post("/api/v2/auth/signup")
-    .send({
-      ...defaultRegister,
-      username: ""
-    });
+    .send(defaultRegister({ username: "" }));
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
     `
@@ -203,10 +198,7 @@ test("should NOT register when empty username", async () => {
 test("should add mandataire tis", async () => {
   const response = await request(server)
     .post("/api/v2/auth/signup")
-    .send({
-      ...defaultRegister,
-      tis: [1, 2]
-    });
+    .send({ ...defaultRegister(), tis: [1, 2] });
 
   expect(response.body).toMatchSnapshot();
   expect(response.status).toBe(200);
@@ -223,11 +215,14 @@ test("should add user tis", async () => {
   const response = await request(server)
     .post("/api/v2/auth/signup")
     .send({
-      ...defaultRegister,
-      username: "user_ti",
-      type: "ti",
-      cabinet: "2A",
-      tis: [1]
+      ...defaultRegister({
+        username: "user_ti",
+        type: "ti"
+      }),
+      magistrat: {
+        cabinet: "2A",
+        ti: 1
+      }
     });
 
   expect(response.body).toMatchInlineSnapshot(`
