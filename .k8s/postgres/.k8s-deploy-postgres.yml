@@ -1,13 +1,16 @@
 .k8s-deploy-postgres:
   extends: .base_docker_helm_image_stage
   script:
-    - export POSTGRESQL_USER=emjpm
-    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+    #
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 --decode)
     #
     - envsubst < ./.k8s/postgres/values-postgresql.yaml > ./values-postgresql.yaml
     #
     - helm init --client-only
     - helm upgrade --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
+    #
+    - export POSTGRESQL_USER=emjpm
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
     #
     # Dataset job
     - kubectl delete configmap ${K8S_PROJECT}-dataset-configmap-${BRANCH_HASH} || true;
@@ -26,3 +29,16 @@
         kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
         cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
       fi
+
+.k8s-restore-postgres-data:
+  extends: .base_docker_helm_image_stage
+  script:
+    #
+    #
+    # Run pg_restore
+    - kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} || true;
+    - kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
+        --from-file=./.k8s/postgres/restore/configmap
+    #
+    - kubectl delete job ${K8S_PROJECT}-restore-${BRANCH_HASH} || true;
+    - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -;
