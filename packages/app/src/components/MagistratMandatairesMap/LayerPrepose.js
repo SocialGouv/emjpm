@@ -23,7 +23,7 @@ const LayerPrepose = props => {
     // Should move that when data are fetched so it will be less laggy
     setcurrentGestionnaire({
       id: prepose.mandataire.id,
-      discriminator: "SERVICE",
+      discriminator: "MANDATAIRE_PRE",
       coordinates: [prepose.longitude, prepose.latitude]
     });
     getMesures({ variables: { id: prepose.mandataire.id } });
@@ -31,10 +31,10 @@ const LayerPrepose = props => {
 
   if (currentGestionnaire) {
     currentPreposes = prepose.filter(currentPrepose => {
-      if (currentGestionnaire.discriminator === "MANDATAIRE_PRE") {
-        return null;
-      }
-      return currentPrepose.mandataire.id === currentGestionnaire.id;
+      return (
+        currentPrepose.mandataire.id === currentGestionnaire.id &&
+        currentGestionnaire.discriminator === "MANDATAIRE_PRE"
+      );
     });
   }
 
