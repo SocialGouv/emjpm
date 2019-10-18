@@ -4,6 +4,6 @@ export TIMESTAMP=$(date '+%Y-%m-%d_%H-%M-%S')
 
 pg_dump --version
 
-pg_dump --verbose -n public -Fc emjpm > /mnt/data/backup_emjpm_${TIMESTAMP}.dump
+pg_dump --verbose -Fc ${PGDATABASE} > ${DUMP_DIR}/backup_emjpm_${TIMESTAMP}.dump
 
-echo "backup_emjpm_${TIMESTAMP}.dump" > /mnt/data/LATEST
+echo "backup_emjpm_${TIMESTAMP}.dump" > ${DUMP_DIR}/LATEST
