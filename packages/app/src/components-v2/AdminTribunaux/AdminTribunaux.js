@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
-import { SERVICES } from "./queries";
+import { TRIBUNAUX } from "./queries";
 import { cardStyle } from "./style";
 
 const RowItem = ({ id, etablissement, code_postal, ville }) => (
@@ -23,11 +23,11 @@ const RowItem = ({ id, etablissement, code_postal, ville }) => (
   </Card>
 );
 
-const AdminServices = () => {
+const AdminTribunaux = () => {
   const resultPerPage = 50;
   const { debouncedSearchText } = useContext(AdminFilterContext);
 
-  const { data, error, loading, fetchMore } = useQuery(SERVICES, {
+  const { data, error, loading, fetchMore } = useQuery(TRIBUNAUX, {
     variables: {
       offset: 0,
       limit: resultPerPage,
@@ -45,15 +45,15 @@ const AdminServices = () => {
     return <div>error</div>;
   }
 
-  const { count } = data.services_aggregate.aggregate;
-  const services = data.services;
-  const isMoreEntry = services.length < count;
+  const { count } = data.tis_aggregate.aggregate;
+  const tis = data.tis;
+  const isMoreEntry = tis.length < count;
 
   return (
     <PaginatedList
       resultPerPage={resultPerPage}
       RowItem={RowItem}
-      entries={services}
+      entries={tis}
       totalEntry={count}
       isMoreEntry={isMoreEntry}
       onLoadMore={offset => {
@@ -64,7 +64,7 @@ const AdminServices = () => {
           updateQuery: (prev, { fetchMoreResult }) => {
             return {
               count: fetchMoreResult.count,
-              services: [...prev.services, ...fetchMoreResult.services]
+              tis: [...prev.tis, ...fetchMoreResult.tis]
             };
           }
         });
@@ -73,4 +73,4 @@ const AdminServices = () => {
   );
 };
 
-export { AdminServices };
+export { AdminTribunaux };

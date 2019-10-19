@@ -3,10 +3,10 @@ import React, { Fragment, useState } from "react";
 import { Box, Flex } from "rebass";
 import { PaginatedListStyle } from "./style";
 
-const DataList = ({ entries, RowComponent }) => (
+const DataList = ({ entries, RowItem }) => (
   <Flex flexDirection="column">
     {entries.map((entry, index) => (
-      <RowComponent key={index} {...entry} />
+      <RowItem key={index} {...entry} />
     ))}
   </Flex>
 );
@@ -14,9 +14,9 @@ const DataList = ({ entries, RowComponent }) => (
 const PaginatedList = ({
   entries,
   onLoadMore,
-  RowComponent,
+  RowItem,
   resultPerPage = 20,
-  isMoreEntries = true
+  isMoreEntry = true
 }) => {
   const [currentOffset, setCurrentOffset] = useState(resultPerPage);
 
@@ -24,8 +24,8 @@ const PaginatedList = ({
     <Box sx={PaginatedListStyle}>
       {entries.length > 0 ? (
         <Fragment>
-          <DataList entries={entries} RowComponent={RowComponent} />
-          {isMoreEntries && (
+          <DataList entries={entries} RowItem={RowItem} />
+          {isMoreEntry && (
             <Flex mt="5" alignItem="center">
               <Button
                 onClick={() => {

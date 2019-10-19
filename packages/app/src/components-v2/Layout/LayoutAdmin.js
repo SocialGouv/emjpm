@@ -22,7 +22,7 @@ const navigationLinks = [
   },
   {
     title: "Tribunaux",
-    url: "/admin-v2/tis"
+    url: "/admin-v2/tribunaux"
   }
 ];
 
