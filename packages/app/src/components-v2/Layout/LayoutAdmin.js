@@ -13,12 +13,12 @@ import { dropDownLinks } from "./dropDownLink";
 
 const navigationLinks = [
   {
-    title: "Services",
-    url: "/admin-v2/services"
-  },
-  {
     title: "Utilisateurs",
     url: "/admin-v2/users"
+  },
+  {
+    title: "Services",
+    url: "/admin-v2/services"
   },
   {
     title: "Tribunaux",
