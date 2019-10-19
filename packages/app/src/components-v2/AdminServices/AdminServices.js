@@ -1,12 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Card } from "@socialgouv/emjpm-ui-core";
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
+import { PaginatedList } from "../PaginatedList";
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { SERVICES } from "./queries";
-import { AdminServicesStyle, cardStyle } from "./style";
-
-const RESULT_PER_PAGE = 20;
+import { cardStyle } from "./style";
 
 const ServiceRow = ({ id, etablissement, code_postal, ville }) => (
   <Card sx={cardStyle} width="100%">
@@ -24,25 +23,14 @@ const ServiceRow = ({ id, etablissement, code_postal, ville }) => (
   </Card>
 );
 
-const ServiceList = ({ services }) => (
-  <Flex flexDirection="column">
-    {services.map(service => (
-      <ServiceRow key={service.id} {...service} />
-    ))}
-  </Flex>
-);
-
 const AdminServices = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-
-  useEffect(() => setCurrentPage(RESULT_PER_PAGE), []);
-
+  const resultPerPage = 50;
   const { debouncedSearchText } = useContext(AdminFilterContext);
 
   const { data, error, loading, fetchMore } = useQuery(SERVICES, {
     variables: {
       offset: 0,
-      limit: RESULT_PER_PAGE,
+      limit: resultPerPage,
       searchText:
         debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
     },
@@ -59,39 +47,29 @@ const AdminServices = () => {
 
   const { count } = data.services_aggregate.aggregate;
   const services = data.services;
+  const isMoreEntries = services.length < count;
 
   return (
-    <Box sx={AdminServicesStyle}>
-      {services.length > 0 ? (
-        <Fragment>
-          <ServiceList services={services} />
-          {count > RESULT_PER_PAGE && count > currentPage && (
-            <Flex mt="5" alignItem="center">
-              <Button
-                onClick={() => {
-                  fetchMore({
-                    variables: {
-                      offset: currentPage + RESULT_PER_PAGE
-                    },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                      setCurrentPage(currentPage + RESULT_PER_PAGE);
-                      return {
-                        count: fetchMoreResult.count,
-                        services: [...prev.services, ...fetchMoreResult.services]
-                      };
-                    }
-                  });
-                }}
-              >
-                Afficher les services suivants
-              </Button>
-            </Flex>
-          )}
-        </Fragment>
-      ) : (
-        <div>Pas de donnée à afficher</div>
-      )}
-    </Box>
+    <PaginatedList
+      resultPerPage={resultPerPage}
+      RowComponent={ServiceRow}
+      entries={services}
+      totalEntry={count}
+      isMoreEntries={isMoreEntries}
+      onLoadMore={offset => {
+        fetchMore({
+          variables: {
+            offset
+          },
+          updateQuery: (prev, { fetchMoreResult }) => {
+            return {
+              count: fetchMoreResult.count,
+              services: [...prev.services, ...fetchMoreResult.services]
+            };
+          }
+        });
+      }}
+    />
   );
 };
 
