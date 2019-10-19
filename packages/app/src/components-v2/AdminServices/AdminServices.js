@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Button, Card, Input } from "@socialgouv/emjpm-ui-core";
-import React, { Fragment, useEffect, useState } from "react";
-import { Box, Flex, Text } from "rebass";
-import { useDebounce } from "../../lib/hooks";
+import { Button, Card } from "@socialgouv/emjpm-ui-core";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { Box, Flex } from "rebass";
+import { AdminFilterContext } from "../AdminFilterBar/context";
 import { SERVICES } from "./queries";
-import { AdminServicesStyle, cardStyle, FilterTextStyle } from "./style";
+import { AdminServicesStyle, cardStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
@@ -32,36 +32,12 @@ const ServiceList = ({ services }) => (
   </Flex>
 );
 
-const FilterBar = ({ searchText, changeSearchText }) => (
-  <Card mt="3">
-    <Flex justifyContent={"space-between"} flexWrap="wrap">
-      <Box>
-        <Flex>
-          <Text sx={FilterTextStyle}>AFFINER LES RÉSULTATS</Text>
-          <Box width="170px" mr={1}>
-            <Input
-              value={searchText}
-              spellCheck="false"
-              autoComplete="false"
-              onChange={event => changeSearchText(event.target.value)}
-              name="search"
-              size="small"
-              placeholder="Filtre"
-            />
-          </Box>
-        </Flex>
-      </Box>
-    </Flex>
-  </Card>
-);
-
 const AdminServices = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => setCurrentPage(RESULT_PER_PAGE), []);
 
-  const [searchText, changeSearchText] = useState("");
-  const debouncedSearchText = useDebounce(searchText, 1000);
+  const { debouncedSearchText } = useContext(AdminFilterContext);
 
   const { data, error, loading, fetchMore } = useQuery(SERVICES, {
     variables: {
@@ -86,7 +62,6 @@ const AdminServices = () => {
 
   return (
     <Box sx={AdminServicesStyle}>
-      <FilterBar searchText={searchText} changeSearchText={changeSearchText} />
       {services.length > 0 ? (
         <Fragment>
           <ServiceList services={services} />
