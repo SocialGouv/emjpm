@@ -92,3 +92,18 @@ export const MAGISTRAT_USERS = gql`
     }
   }
 `;
+
+export const ADMIN_USERS = gql`
+  query users($userId: Int) {
+    users(where: { id: { _eq: $userId } }) {
+      email
+      created_at
+      id
+      last_login
+      nom
+      prenom
+      type
+      username
+    }
+  }
+`;

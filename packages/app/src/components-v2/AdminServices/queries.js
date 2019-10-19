@@ -1,0 +1,22 @@
+import gql from "graphql-tag";
+
+export const SERVICES = gql`
+  query services($limit: Int, $searchText: String, $offset: Int) {
+    services_aggregate(where: { etablissement: { _ilike: $searchText } }) {
+      aggregate {
+        count
+      }
+    }
+    services(
+      limit: $limit
+      order_by: { etablissement: desc }
+      offset: $offset
+      where: { etablissement: { _ilike: $searchText } }
+    ) {
+      id
+      etablissement
+      code_postal
+      ville
+    }
+  }
+`;
