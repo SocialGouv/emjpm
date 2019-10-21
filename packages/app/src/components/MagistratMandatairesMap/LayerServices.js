@@ -23,7 +23,7 @@ const LayerServices = props => {
     setcurrentGestionnaire({
       id: service.service.id,
       discriminator: "SERVICE",
-      coordinates: [service.longitude, service.latitude]
+      coordinates: [service.service.longitude, service.service.latitude]
     });
     getMesures({ variables: { id: service.service.id } });
   };
@@ -38,6 +38,7 @@ const LayerServices = props => {
 
   if (data && data.mesures) {
     setTimeout(function() {
+      console.log(data);
       setCenter(currentGestionnaire.coordinates);
       setMesures(data.mesures);
     }, 300);
@@ -56,12 +57,12 @@ const LayerServices = props => {
       images={images}
       layout={{ "icon-image": "service" }}
     >
-      {currentServices.map(service => {
+      {currentServices.map(gestionnaire => {
         return (
           <Feature
-            onClick={() => chooseMandataire(service)}
-            key={service.id}
-            coordinates={[service.longitude, service.latitude]}
+            onClick={() => chooseMandataire(gestionnaire)}
+            key={gestionnaire.id}
+            coordinates={[gestionnaire.service.longitude, gestionnaire.service.latitude]}
           />
         );
       })}

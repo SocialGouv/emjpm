@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { MagistratMapMandataireList } from "../MagistratMapMandataireList";
+import { MagistratMandatairesMapPanel } from "../MagistratMandatairesMapPanel";
 import { MapContextProvider } from "./context";
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { MagistratMandatairesMapStyle } from "./style";
@@ -11,9 +11,7 @@ import { MagistratMandatairesMapStyle } from "./style";
 const formatData = view_mesure_gestionnaire => {
   return view_mesure_gestionnaire.map(gestionnaire => {
     return {
-      ...gestionnaire,
-      latitude: 48.866667 + Math.random() - Math.random(),
-      longitude: 2.333333 - Math.random() + Math.random()
+      ...gestionnaire
     };
   });
 };
@@ -55,7 +53,7 @@ const MagistratMandataires = props => {
     <MapContextProvider>
       <Flex sx={MagistratMandatairesMapStyle()}>
         <Box height="100%" flex="0 1 auto">
-          <MagistratMapMandataireList tiId={ti_id} />
+          <MagistratMandatairesMapPanel tiId={ti_id} />
         </Box>
         <Box height="100%" flex="1 1 auto">
           <MagistratMandatairesMap view_mesure_gestionnaire={datas} />
