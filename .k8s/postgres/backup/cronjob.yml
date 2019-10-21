@@ -12,7 +12,10 @@ spec:
   schedule: "0 7 * * *"
   jobTemplate:
     spec:
-      activeDeadlineSeconds: 1800
+      # NOTE(douglasduteil): Ensure to keep the backup jobs at least a day.
+      # So we can consult its logs
+      # 86400 = 60s * 60m * 24h => 1 jour
+      ttlSecondsAfterFinished: 86400
       template:
         spec:
           containers:
@@ -21,72 +24,115 @@ spec:
             #
 
             - name: backup
-              image: postgres:10
-              command: ["sh", "-x"]
-              args: ["/mnt/script/backup.sh"]
+              image: postgres:10-alpine
+              command:
+                - sh
+              args:
+                - -c
+                - |
+                  sh -x /mnt/script/backup.sh ;
+                  sh -x /mnt/script/status.sh backup ;
               resources:
                 requests:
-                  cpu: 0m
-                  memory: 0Mi
+                  cpu: 10m
+                  memory: 32Mi
                 limits:
                   cpu: 100m
                   memory: 64Mi
               env:
+                - name: CRONJOB_STATUS_DIR
+                  value: /var/lib/cronjob/status
+                - name: DUMP_DIR
+                  value: /mnt/data
+                - name: PGDATABASE
+                  value: emjpm
                 - name: PGHOST
                   value: ${K8S_PROJECT}-postgres-${BRANCH_HASH}
                 - name: PGUSER
-                  value: emjpm
+                  value: postgres
                 - name: PGPASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: emjpm-secret
-                      key: POSTGRES_EMJPM_PASSWORD
+                      name: ${K8S_PROJECT}-secret
+                      key: POSTGRES_PASSWORD
               volumeMounts:
                 - mountPath: "/mnt/data"
                   name: data
                 - mountPath: "/mnt/script"
                   name: script
+                - mountPath: "/var/lib/cronjob/status"
+                  name: cronjob-config
 
             #
             #
             #
 
             - name: postgres
-              image: postgres:10
+              image: ${CI_REGISTRY_IMAGE}/postgres:${IMAGE_TAG}
+              command:
+                - sh
+              args:
+                - -c
+                - |
+                  (
+                    sh -x /mnt/script/wait_for_status.sh anonymize &&
+                    gosu postgres pg_ctl stop
+                  ) &
+                  gosu postgres docker-entrypoint.sh postgres ;
               resources:
                 requests:
-                  cpu: 0m
-                  memory: 0Mi
+                  cpu: 10m
+                  memory: 32Mi
                 limits:
                   cpu: 100m
-                  memory: 64Mi
+                  memory: 128Mi
               ports:
                 - containerPort: 5432
               env:
+                - name: CRONJOB_STATUS_DIR
+                  value: /var/lib/cronjob/status
                 - name: PGUSER
                   value: postgres
+              volumeMounts:
+                - mountPath: "/mnt/script"
+                  name: script
+                - mountPath: "/var/lib/cronjob/status"
+                  name: cronjob-config
 
             #
             #
             #
 
             - name: anonymize
-              image: postgres:10
-              command: ["sh", "-x"]
+              image: postgres:10-alpine
+              command:
+                - sh
               args:
-                - /mnt/script/anonymous.sh
+                - -c
+                - |
+                  sh -x /mnt/script/wait_for_status.sh backup ;
+                  sh -x /mnt/script/anonymous.sh ;
+                  sh -x /mnt/script/status.sh anonymize ;
               resources:
                 requests:
-                  cpu: 0m
-                  memory: 0Mi
+                  cpu: 10m
+                  memory: 32Mi
                 limits:
                   cpu: 100m
                   memory: 64Mi
               env:
+                - name: CRONJOB_STATUS_DIR
+                  value: /var/lib/cronjob/status
+                - name: PGDATABASE
+                  value: emjpm
                 - name: PGHOST
                   value: localhost
                 - name: PGUSER
                   value: postgres
+                - name: SAFE_DUMP_DIR
+                  value: /mnt/anonymous
+                - name: UNSAFE_DUMP_DIR
+                  value: /mnt/data
               volumeMounts:
                 - mountPath: "/mnt/data"
                   name: data
@@ -94,22 +140,27 @@ spec:
                   name: anonymous
                 - mountPath: "/mnt/script"
                   name: script
+                - mountPath: "/var/lib/cronjob/status"
+                  name: cronjob-config
 
             #
             #
             #
-          restartPolicy: OnFailure
+
+          restartPolicy: Never
           volumes:
             - name: script
               configMap:
                 name: ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+            - name: cronjob-config
+              emptyDir: {}
             - name: data
               azureFile:
-                secretName: azure-backup-volume-secret
-                shareName: emjpm
+                secretName: ${K8S_PROJECT}-azure-storage-${BRANCH_HASH}
+                shareName: ${K8S_PROJECT}-backup-restore
                 readOnly: false
             - name: anonymous
               azureFile:
-                secretName: azure-anonymous-volume-secret
-                shareName: emjpm
+                secretName: ${K8S_PROJECT}-azure-storage-dev
+                shareName: ${K8S_PROJECT}-backup-restore
                 readOnly: false
