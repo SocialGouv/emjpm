@@ -10,6 +10,7 @@ const images = ["mesure", image, { pixelRatio: 2 }];
 
 const LayerMesures = () => {
   const { mesures } = useContext(MapContext);
+  console.log(mesures);
   return (
     <Layer
       onMouseEnter={e => {
@@ -24,15 +25,7 @@ const LayerMesures = () => {
       layout={{ "icon-image": "mesure" }}
     >
       {mesures.map(mesure => {
-        return (
-          <Feature
-            key={mesure.id}
-            coordinates={[
-              2.333333 - Math.random() + Math.random(),
-              48.866667 + Math.random() - Math.random()
-            ]}
-          />
-        );
+        return <Feature key={mesure.id} coordinates={[mesure.longitude, mesure.latitude]} />;
       })}
     </Layer>
   );

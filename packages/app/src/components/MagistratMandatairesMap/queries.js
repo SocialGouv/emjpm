@@ -8,9 +8,13 @@ export const MESURES_GESTIONNAIRE = gql`
       mandataire {
         id
         code_postal
+        longitude
+        latitude
       }
       service {
         id
+        longitude
+        latitude
       }
     }
   }
@@ -41,6 +45,8 @@ export const MESURES_SERVICE = gql`
     mesures(where: { service_antenne: { service_id: { _eq: $id } } }) {
       id
       code_postal
+      longitude
+      latitude
     }
   }
 `;
@@ -50,6 +56,8 @@ export const MESURES_MANDATAIRE = gql`
     mesures(where: { mandataire_id: { _eq: $id } }) {
       id
       code_postal
+      longitude
+      latitude
     }
   }
 `;

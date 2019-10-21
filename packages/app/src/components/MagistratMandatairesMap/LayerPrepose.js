@@ -24,7 +24,7 @@ const LayerPrepose = props => {
     setcurrentGestionnaire({
       id: prepose.mandataire.id,
       discriminator: "MANDATAIRE_PRE",
-      coordinates: [prepose.longitude, prepose.latitude]
+      coordinates: [prepose.mandataire.longitude, prepose.mandataire.latitude]
     });
     getMesures({ variables: { id: prepose.mandataire.id } });
   };
@@ -63,7 +63,7 @@ const LayerPrepose = props => {
           <Feature
             onClick={() => chooseMandataire(gestionnaire)}
             key={gestionnaire.id}
-            coordinates={[gestionnaire.longitude, gestionnaire.latitude]}
+            coordinates={[gestionnaire.mandataire.longitude, gestionnaire.mandataire.latitude]}
           />
         );
       })}

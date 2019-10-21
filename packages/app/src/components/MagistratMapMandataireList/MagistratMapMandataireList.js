@@ -14,6 +14,9 @@ const RESULT_PER_PAGE = 20;
 const MagistratMapMandataireList = props => {
   const { tiId } = props;
   const [currentPage, setCurrentPage] = useState(0);
+
+  // const [getMesures, { data: mesureData }] = useLazyQuery(MESURES_MANDATAIRE);
+
   const { data, error, loading, fetchMore } = useQuery(
     MESURES_GESTIONNAIRE,
     {
@@ -36,6 +39,12 @@ const MagistratMapMandataireList = props => {
     return <div>error</div>;
   }
 
+  const chooseMandataire = data => {
+    console.log(data);
+    // setCenter(currentGestionnaire.coordinates);
+    // setMesures(data.mesures);
+  };
+
   const { count } = data.count.aggregate;
   const list = formatMandatairesList(data.mandatairesList);
   return (
@@ -44,7 +53,7 @@ const MagistratMapMandataireList = props => {
         <Box mr="1">
           <Mandatairelist
             isMagistratMap
-            selectCurrentMandataire={data => console.log(data)}
+            selectCurrentMandataire={data => chooseMandataire(data)}
             mandataires={list}
           />
           {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
