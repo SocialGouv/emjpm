@@ -21,6 +21,7 @@ export const USERS = gql`
       mandataire {
         adresse
         code_postal
+        ville
       }
       magistrat {
         ti {
