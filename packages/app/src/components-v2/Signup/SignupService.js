@@ -39,14 +39,14 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
     <Card sx={cardStyle}>
       <Flex flexDirection="column">
         <Box pl={5} pb={3}>
-          <Heading1>{`Création d'un compte de service`}</Heading1>
+          <Heading1>{`Création d'un compte de service mandataire`}</Heading1>
         </Box>
         <Flex>
           <Box width={[1, 2 / 5]} sx={grayBox}>
             <Box height="80px" pt={1}>
               <Heading4>{`Votre service`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                {`Sélectionnez le département puis le service pour lequel vous travaillez.`}
+                {`Sélectionnez le département dans lequel se situe le siège social du service mandataire pour lequel vous travaillez.`}
               </Text>
             </Box>
           </Box>

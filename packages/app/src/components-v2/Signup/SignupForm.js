@@ -15,11 +15,11 @@ const TYPE_OPTIONS = [
     value: "individuel"
   },
   {
-    label: "Mandataire préposé",
+    label: "Mandataire préposé d'établissement",
     value: "prepose"
   },
   {
-    label: "Service",
+    label: "Service mandataire",
     value: "service"
   },
   {
@@ -73,7 +73,8 @@ export const SignupForm = () => {
             <Box height="160px">
               <Heading4>{`Identifiants de connexion`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                Ces informations permettront de vous connecter à votre compte.
+                {`Ces informations permettront de vous connecter à votre compte. L'adresse email
+                renseignée sera votre identifiant.`}
               </Text>
             </Box>
           </Box>
