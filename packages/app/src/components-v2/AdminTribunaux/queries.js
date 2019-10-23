@@ -9,7 +9,7 @@ export const TRIBUNAUX = gql`
     }
     tis(
       limit: $limit
-      order_by: { etablissement: desc }
+      order_by: { code_postal: asc }
       offset: $offset
       where: { ville: { _ilike: $searchText } }
     ) {

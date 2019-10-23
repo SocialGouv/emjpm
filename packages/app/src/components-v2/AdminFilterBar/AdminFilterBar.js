@@ -1,10 +1,10 @@
-import { Card, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Input, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import { AdminFilterContext } from "./context";
 import { AdminFilterBarStyle, FilterTextStyle } from "./style";
 
-const AdminFilterBar = () => {
+const AdminFilterBar = ({ onAddButtonClick }) => {
   const { searchText, changeSearchText } = useContext(AdminFilterContext);
   return (
     <Card mt="3" sx={AdminFilterBarStyle} mb={2}>
@@ -24,6 +24,11 @@ const AdminFilterBar = () => {
               />
             </Box>
           </Flex>
+        </Box>
+        <Box>
+          <Button width="120px" onClick={onAddButtonClick}>
+            Ajouter
+          </Button>
         </Box>
       </Flex>
     </Card>

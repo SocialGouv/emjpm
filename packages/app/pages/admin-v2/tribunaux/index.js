@@ -6,6 +6,7 @@ import { AdminFilterProvider } from "../../../src/components-v2/AdminFilterBar/c
 import { AdminTribunaux } from "../../../src/components-v2/AdminTribunaux";
 import { LayoutAdmin } from "../../../src/components-v2/Layout";
 import { withAuthSync } from "../../../src/util/auth";
+import Router from "next/router";
 
 const AdminTribunauxPage = () => {
   return (
@@ -19,7 +20,9 @@ const AdminTribunauxPage = () => {
               flexWrap: "wrap"
             }}
           >
-            <AdminFilterBar />
+            <AdminFilterBar
+              onAddButtonClick={() => Router.push("/admin-v2/tribunaux/add-tribunal")}
+            />
             <AdminTribunaux />
           </Flex>
         </BoxWrapper>
