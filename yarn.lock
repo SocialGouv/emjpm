@@ -9404,16 +9404,16 @@ jest-environment-jsdom@^24.9.0:
     jest-util "^24.9.0"
     jsdom "^11.5.1"
 
-jest-environment-knex@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/jest-environment-knex/-/jest-environment-knex-1.1.1.tgz#274ce09d3e58f6696aeacd780eb2c9310e9330bd"
-  integrity sha512-ujzwu4YNcl012o+cPiD+uUmGNxvhHU/CnTSyGwaaKaJOtVfhsRI9Dja7bgL4IOhDyMyrytUeA0bt4qeXqrZ+jA==
+jest-environment-knex@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/jest-environment-knex/-/jest-environment-knex-1.1.2.tgz#d322ebff3f34ab5260b9b3019afca72bf36c2f2a"
+  integrity sha512-kTsbhAOZUtCf5HQCrIvQua+ihtn1BUhMKkEFbPTLwGV2Yrx1ep4IsA1ZhRsgehgawlbjaM+T7WJ/Q9bcwEH6SA==
   dependencies:
-    jest-environment-node "^24.8.0"
-    knex "^0.19.0"
+    jest-environment-node "^24.9.0"
+    knex "^0.19.5"
     rand-token "^0.4.0"
 
-jest-environment-node@^24.8.0, jest-environment-node@^24.9.0:
+jest-environment-node@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-environment-node/-/jest-environment-node-24.9.0.tgz#333d2d2796f9687f2aeebf0742b519f33c1cbfd3"
   integrity sha512-6d4V2f4nxzIzwendo27Tr0aFm+IXWa0XEUnaH6nU0FMaozxovt+sfRvh4J47wL1OvF83I3SSTu0XK+i4Bqe7uA==
@@ -9910,7 +9910,7 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-knex@^0.19.0:
+knex@^0.19.0, knex@^0.19.5:
   version "0.19.5"
   resolved "https://registry.yarnpkg.com/knex/-/knex-0.19.5.tgz#3597ebecf88a5942f18c3e6d91af53bda59eeb5d"
   integrity sha512-Hy258avCVircQq+oj3WBqPzl8jDIte438Qlq+8pt1i/TyLYVA4zPh2uKc7Bx0t+qOpa6D42HJ2jjtl2vagzilw==
