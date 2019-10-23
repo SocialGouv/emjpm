@@ -6,7 +6,7 @@ import MapComponent from "./Map";
 import { GET_DEPARTEMENTS_AVAILABILITY } from "./queries";
 
 const AvailabilityMap = () => {
-  const { data, loading } = useQuery(GET_DEPARTEMENTS_AVAILABILITY);
+  const { data, loading, error } = useQuery(GET_DEPARTEMENTS_AVAILABILITY);
 
   if (loading) {
     return (
@@ -21,7 +21,7 @@ const AvailabilityMap = () => {
     );
   }
 
-  if (loading) {
+  if (error) {
     return (
       <Card p="4">
         <Box>

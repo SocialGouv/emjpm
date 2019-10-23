@@ -91,3 +91,7 @@ exports.createServiceAdmin = async (userId, serviceId) => {
       });
   }
 };
+
+exports.getServiceAntennesByService = async service_id => {
+  return ServiceAntenne.query().where({ service_id });
+};
