@@ -936,7 +936,7 @@ Object {
   "email": Object {
     "defaultValue": null,
     "maxLength": 255,
-    "nullable": false,
+    "nullable": true,
     "type": "character varying",
   },
   "etablissement": Object {
@@ -954,7 +954,7 @@ Object {
   "telephone": Object {
     "defaultValue": null,
     "maxLength": 255,
-    "nullable": false,
+    "nullable": true,
     "type": "character varying",
   },
   "ville": Object {
