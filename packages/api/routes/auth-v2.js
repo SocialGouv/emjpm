@@ -27,22 +27,22 @@ router.post(
 router.post(
   "/signup",
   [
-    body("username", "Votre nom d'utilisateur ne doit pas être vide")
+    body("user.username", "Votre nom d'utilisateur ne doit pas être vide")
       .not()
       .isEmpty(),
     check(
-      "username",
+      "user.username",
       "Votre nom d'utilisateur doit être de 3 caractères minimum"
     ).isLength({
       min: 3
     }),
     check(
-      "password",
+      "user.password",
       "Votre mot de passe doit être de 8 caractères minimum"
     ).isLength({
       min: 8
     }),
-    check("password")
+    check("user.password")
       .exists()
       .withMessage("Votre mot de passe doit ne doit pas être vide")
       .isLength({ min: 8 })

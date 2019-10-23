@@ -13,7 +13,6 @@ Model.knex(knexConnection);
 const MAIN_ROLES = [
   "admin",
   "service",
-  "serviceAntenne",
   "individuel",
   "prepose",
   "direction",
