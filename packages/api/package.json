@@ -49,7 +49,7 @@
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",
     "jest-cli": "^24.8.0",
-    "jest-environment-knex": "^1.1.1",
+    "jest-environment-knex": "^1.1.2",
     "nodemailer-mock": "^1.4.1",
     "nodemon": "^1.19.0",
     "pg": "^7.11.0",
