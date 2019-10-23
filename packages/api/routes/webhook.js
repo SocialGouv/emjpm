@@ -29,10 +29,10 @@ router.post("/mesure-reservation", async function(req, res) {
   const { ti_id, antenne_id, mandataire_id } = newMesure;
   const [currentTi] = await Tis.query().where("id", ti_id);
   if (currentTi) {
+    const antennes = await ServiceAntenne.query().where("id", antenne_id);
     const [headquarter] = antennes.filter(
       antenne => antenne.headquarters === true
     );
-    const antennes = await ServiceAntenne.query().where("id", antenne_id);
     const [mandataire] = await Mandataire.query().where("id", mandataire_id);
     const [currentUser] = await User.query().where("id", mandataire.user_id);
     const user = getUser(headquarter, mandataire, currentUser);
