@@ -2,7 +2,6 @@ const { validationResult } = require("express-validator");
 const { User } = require("../../model/User");
 const { Mandataire } = require("../../model/Mandataire");
 const { Magistrat } = require("../../model/Magistrat");
-const { Department } = require("../../model/Departments");
 const { UserTis } = require("../../model/UserTis");
 const { UserRole } = require("../../model/UserRole");
 const { Role } = require("../../model/Role");
@@ -11,55 +10,56 @@ const { errorHandler } = require("../../db/errors");
 const { inscriptionEmail } = require("../../email/inscription");
 const { getTisNames } = require("./utils/tis");
 const {
-  createService,
-  createServiceAntenne,
-  createServiceTis,
+  getServiceAntennesByService,
   createUserAntenne,
   createServiceAdmin
 } = require("./utils/service");
 
-const createMagistrat = async (body, user) => {
-  const { tis } = body;
-  if (!tis || tis.length === 0) {
-    throw new Error("a ti is required for user `magistrat`");
+const createMagistrat = async (magistrat, user) => {
+  const { ti } = magistrat;
+  if (!ti) {
+    throw new Error(
+      "Renseigner un tribunal est obligatoire pour un compte 'magistrat'"
+    );
   }
-  const ti_id = tis[0];
   return Magistrat.query()
     .allowInsert("[user_id, ti_id]")
     .insert({
       user_id: user.id,
-      ti_id
+      ti_id: ti
     });
 };
 
-const createMandataire = async (body, user) => {
-  const code_postal = body.code_postal;
-
-  const department = await Department.query()
-    .where("code", code_postal.substring(0, 2))
-    .limit(1)
-    .first();
-
-  const department_id = department.id;
+const createMandataire = async (mandataire, user_id) => {
+  const {
+    etablissement,
+    telephone,
+    telephone_portable,
+    adresse,
+    code_postal,
+    department_id,
+    ville,
+    dispo_max
+  } = mandataire;
 
   return Mandataire.query()
     .allowInsert(
-      "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville, department_id]"
+      "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville, department_id, dispo_max]"
     )
     .insert({
-      user_id: user.id,
-      etablissement: body.etablissement,
-      telephone: body.telephone,
-      telephone_portable: body.telephone_portable,
-      adresse: body.adresse,
+      user_id,
+      etablissement,
+      telephone,
+      telephone_portable,
+      adresse,
       code_postal,
       department_id,
-      ville: body.ville
+      ville,
+      dispo_max
     });
 };
 
-const createUserTis = (body, user_id) => {
-  const { tis } = body;
+const createUserTis = (tis, user_id) => {
   if (!tis || tis.length === 0) {
     return true;
   }
@@ -68,22 +68,16 @@ const createUserTis = (body, user_id) => {
       UserTis.query()
         .allowInsert("[user_id, ti_id]")
         .insert({
-          user_id: user_id,
+          user_id,
           ti_id
         })
     )
   );
 };
 
-const createDirection = (body, userId) => {
-  Direction.query().insert({
-    user_id: userId,
-    department_id:
-      body.directionType === "direction_departemental"
-        ? body.department_id
-        : null,
-    region_id:
-      body.directionType === "direction_regional" ? body.region_id : null
+const createDirection = userId => {
+  return Direction.query().insert({
+    user_id: userId
   });
 };
 
@@ -111,18 +105,10 @@ const postSignup = async (req, res) => {
   }
 
   try {
-    const {
-      password,
-      directionType,
-      username,
-      type,
-      nom,
-      prenom,
-      email,
-      code_postal,
-      tis,
-      cabinet
-    } = req.body;
+    const body = req.body;
+
+    const { type, nom, prenom, password, username, email } = body.user;
+
     const user = await User.query()
       .allowInsert("[username, password,role,nom,prenom,email]")
       .insert({
@@ -137,35 +123,35 @@ const postSignup = async (req, res) => {
     switch (type) {
       case "individuel":
       case "prepose":
-        await createMandataire(req.body, user);
-        await createUserTis(req.body, user.id);
+        await createMandataire(body.mandataire, user.id);
+        await createUserTis(body.tis, user.id);
         break;
       case "service": {
-        const service = await createService(req.body);
-        const serviceAntenne = await createServiceAntenne(req.body, service.id);
-        await createUserAntenne(user.id, [{ id: serviceAntenne.id }]);
-        await createServiceAdmin(user.id, service.id);
-        await createServiceTis(req.body, service.id);
+        const { service_id } = body.service;
+        const antennes = await getServiceAntennesByService(service_id);
+        await createUserAntenne(user.id, antennes);
+        await createServiceAdmin(user.id, service_id);
         break;
       }
-      case "serviceAntenne": {
-        await createUserAntenne(user.id, req.body.antennes);
-        break;
-      }
-      case "ti":
+      case "ti": {
+        const { cabinet } = body.magistrat;
         await User.query()
           .update({ cabinet })
           .where("id", user.id);
-        await createMagistrat(req.body, user);
+        await createMagistrat(body.magistrat, user);
         break;
+      }
       case "direction": {
+        const { directionType } = body.direction;
         await createRole(user.id, directionType);
-        await createDirection(req.body, user.id);
+        await createDirection(user.id);
         break;
       }
       default:
         return;
     }
+    const tis = body.magistrat ? [body.magistrat.ti] : body.tis;
+    const code_postal = body.mandataire ? body.mandataire.code_postal : "";
     const tiNames = await getTisNames(tis);
     inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
     return res.json({ success: true });

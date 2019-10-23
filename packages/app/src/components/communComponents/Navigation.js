@@ -16,7 +16,7 @@ const doLogout = async apolloClient => {
 
 const doInscription = () => {
   // Clear user token and profile data from localStorage
-  Router.push("/inscription");
+  Router.push("/signup");
 };
 
 const Navigation = ({ logout, inscription }) => (
