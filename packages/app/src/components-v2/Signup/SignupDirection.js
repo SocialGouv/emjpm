@@ -25,7 +25,7 @@ export const SignupDirection = () => {
             <Box height="80px" pt={1}>
               <Heading4>{`Institution`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                {`Dans quel type d'institution travaillez-vous?`}
+                {`Pour quelle direction travaillez-vous?`}
               </Text>
             </Box>
           </Box>
