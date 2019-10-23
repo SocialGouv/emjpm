@@ -38,10 +38,9 @@ const LayerServices = props => {
 
   if (data && data.mesures) {
     setTimeout(function() {
-      console.log(data);
       setCenter(currentGestionnaire.coordinates);
       setMesures(data.mesures);
-    }, 300);
+    }, 100);
   }
 
   return (
