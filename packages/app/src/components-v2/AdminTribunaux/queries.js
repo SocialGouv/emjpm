@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const TRIBUNAUX = gql`
-  query services($limit: Int, $searchText: String, $offset: Int) {
+  query tis($limit: Int, $searchText: String, $offset: Int) {
     tis_aggregate(where: { ville: { _ilike: $searchText } }) {
       aggregate {
         count
@@ -17,6 +17,8 @@ export const TRIBUNAUX = gql`
       etablissement
       code_postal
       ville
+      telephone
+      email
     }
   }
 `;

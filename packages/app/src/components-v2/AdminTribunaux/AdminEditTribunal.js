@@ -1,25 +1,28 @@
 import { useMutation } from "@apollo/react-hooks";
-import Router from "next/router";
 import React from "react";
+import { UPDATE_TRIBUNAL } from "./mutations";
 import { AdminTribunalForm } from "./AdminTribunalForm";
-import { ADD_TRIBUNAL } from "./mutations";
 
-export const AdminAddTribunal = () => {
-  const [AddTribunal] = useMutation(ADD_TRIBUNAL, {
-    onCompleted: () => Router.push("/admin/tribunaux")
+export const AdminEditTribunal = ({ tribunal, closePanel }) => {
+  const [UpdateTribunal] = useMutation(UPDATE_TRIBUNAL, {
+    onCompleted: closePanel
   });
+
   return (
     <AdminTribunalForm
-      onCancel={() => Router.push("/admin/tribunaux")}
+      tribunal={tribunal}
+      onCancel={closePanel}
       onSubmit={values =>
-        AddTribunal({
+        UpdateTribunal({
           variables: {
+            id: tribunal.id,
             etablissement: values.etablissement,
             email: values.email,
             code_postal: values.code_postal,
             ville: values.ville,
             telephone: values.telephone
-          }
+          },
+          refetchQueries: ["tis", "tis_aggregate"]
         })
       }
     />
