@@ -8,17 +8,37 @@ POSTGRES_METABASE_PASSWORD=${POSTGRES_METABASE_PASSWORD:="metabasePassword"}
 POSTGRES_HASURA_USER=${POSTGRES_HASURA_USER:="hasura"}
 POSTGRES_HASURA_PASSWORD=${POSTGRES_HASURA_PASSWORD:="hasuraPassword"}
 
-psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
-  -- Ensure that the emjpm database is not
+# HACK(douglasduteil): recreate dummy users if not exist.
+# As there is no `DROP *IF EXISTS* OWNED BY <role>`, I'm creating dummy users so
+# `DROP OWNED BY <role>` doesn't fail on me T-T
+createuser $POSTGRES_EMJPM_USER || true;
+createuser $POSTGRES_METABASE_USER || true;
+createuser $POSTGRES_HASURA_USER || true;
+
+psql -v ON_ERROR_STOP=1 --username postgres <<-EOSQL
+  -- Ensure that no one is connected to the database
+  SELECT pg_terminate_backend(pid)
+    FROM pg_stat_activity
+    WHERE pid <> pg_backend_pid() AND datname = 'emjpm';
+
+  -- Ensure that the emjpm database and schema is not
   DROP DATABASE IF EXISTS emjpm;
+
+  -- Create the emjpm database and the default public schema
   CREATE DATABASE emjpm;
 
   -- emjpm user
+  DROP OWNED BY $POSTGRES_EMJPM_USER;
+  DROP USER IF EXISTS $POSTGRES_EMJPM_USER;
+
   CREATE USER $POSTGRES_EMJPM_USER with encrypted password '$POSTGRES_EMJPM_PASSWORD';
   GRANT ALL PRIVILEGES ON DATABASE emjpm TO $POSTGRES_EMJPM_USER;
   ALTER USER $POSTGRES_EMJPM_USER CREATEDB;
 
   -- metabase readonly user
+  DROP OWNED BY $POSTGRES_METABASE_USER;
+  DROP USER IF EXISTS $POSTGRES_METABASE_USER;
+
   CREATE USER $POSTGRES_METABASE_USER with encrypted password '$POSTGRES_METABASE_PASSWORD';
   GRANT CONNECT ON DATABASE emjpm TO $POSTGRES_METABASE_USER;
   GRANT USAGE ON SCHEMA public TO $POSTGRES_METABASE_USER;
@@ -26,6 +46,9 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
   ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO $POSTGRES_METABASE_USER;
 
   -- hasura user
+  DROP OWNED BY $POSTGRES_HASURA_USER CASCADE;
+  DROP USER IF EXISTS $POSTGRES_HASURA_USER;
+
   CREATE USER ${POSTGRES_HASURA_USER} with encrypted password '${POSTGRES_HASURA_PASSWORD}';
   ALTER USER ${POSTGRES_HASURA_USER} WITH SUPERUSER;
   GRANT ALL PRIVILEGES ON DATABASE emjpm TO ${POSTGRES_HASURA_USER};
