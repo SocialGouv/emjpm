@@ -42,7 +42,7 @@ const LayerPrepose = props => {
     setTimeout(function() {
       setCenter(currentGestionnaire.coordinates);
       setMesures(data.mesures);
-    }, 300);
+    }, 100);
   }
 
   return (

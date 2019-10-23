@@ -1,21 +1,41 @@
+<<<<<<< HEAD:packages/app/src/components/MagistratMapMandataireList/MagistratMapMandataireList.js
 import { useQuery } from "@apollo/react-hooks";
+=======
+import React, { useState, useContext } from "react";
+import { useQuery, useLazyQuery } from "@apollo/react-hooks";
+import { Box, Flex } from "rebass";
+>>>>>>> feat(mandataire-map): add mesure fetching for list select:packages/app/src/components-v2/MagistratMapMandataireList/MagistratMapMandataireList.js
 import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
 import { Button } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import { Scrollbar } from "react-scrollbars-custom";
+<<<<<<< HEAD:packages/app/src/components/MagistratMapMandataireList/MagistratMapMandataireList.js
 import { Box, Flex } from "rebass";
 
 import { formatMandatairesList } from "../MandatairesList/utils";
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { MagistratMapMandataireListStyle } from "./style";
+=======
+
+import { MapContext } from "../MagistratMandatairesMap/context";
+import { formatMandatairesList } from "../MandatairesList/utils";
+import { MagistratMapMandataireListStyle } from "./style";
+import { MESURES_SERVICE, MESURES_MANDATAIRE, MESURES_GESTIONNAIRE } from "./queries";
+>>>>>>> feat(mandataire-map): add mesure fetching for list select:packages/app/src/components-v2/MagistratMapMandataireList/MagistratMapMandataireList.js
 
 const RESULT_PER_PAGE = 20;
 
 const MagistratMapMandataireList = props => {
   const { tiId } = props;
   const [currentPage, setCurrentPage] = useState(0);
+  const {
+    //setCenter,
+    setMesures
+    //setcurrentGestionnaire
+  } = useContext(MapContext);
 
-  // const [getMesures, { data: mesureData }] = useLazyQuery(MESURES_MANDATAIRE);
+  const [getServicesMesures, { data: servicesMesures }] = useLazyQuery(MESURES_SERVICE);
+  const [getMandatairesMesures, { data: mandatairesMesures }] = useLazyQuery(MESURES_MANDATAIRE);
 
   const { data, error, loading, fetchMore } = useQuery(
     MESURES_GESTIONNAIRE,
@@ -39,10 +59,21 @@ const MagistratMapMandataireList = props => {
     return <div>error</div>;
   }
 
+  if (servicesMesures) {
+    setMesures(servicesMesures.mesures);
+  }
+
+  if (mandatairesMesures) {
+    setMesures(mandatairesMesures.mesures);
+  }
+
   const chooseMandataire = data => {
-    console.log(data);
-    // setCenter(currentGestionnaire.coordinates);
-    // setMesures(data.mesures);
+    if (data.type === "service") {
+      getServicesMesures({ variables: { id: data.serviceId } });
+    }
+    if (data.type === "préposé" || data.type === "individuel") {
+      getMandatairesMesures({ variables: { id: data.mandataireId } });
+    }
   };
 
   const { count } = data.count.aggregate;
