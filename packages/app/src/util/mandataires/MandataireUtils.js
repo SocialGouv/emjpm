@@ -81,6 +81,7 @@ export const formatMandataire = (
       email: mandataire.user && mandataire.user.email ? mandataire.user.email : "non renseigné",
       genre: mandataire.genre ? mandataire.genre : "F",
       id: `${discriminator}-${mandataire.id}`,
+      id: `${discriminator}-${mandataire.id}`,
       lastLogin:
         mandataire.user && mandataire.user.last_login
           ? formatLastLogin(mandataire.user.last_login)

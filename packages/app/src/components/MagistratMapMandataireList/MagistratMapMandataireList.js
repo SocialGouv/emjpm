@@ -28,11 +28,7 @@ const RESULT_PER_PAGE = 20;
 const MagistratMapMandataireList = props => {
   const { tiId } = props;
   const [currentPage, setCurrentPage] = useState(0);
-  const {
-    //setCenter,
-    setMesures
-    //setcurrentGestionnaire
-  } = useContext(MapContext);
+  const { setCenter, setMesures, setcurrentGestionnaire } = useContext(MapContext);
 
   const [getServicesMesures, { data: servicesMesures }] = useLazyQuery(MESURES_SERVICE);
   const [getMandatairesMesures, { data: mandatairesMesures }] = useLazyQuery(MESURES_MANDATAIRE);
@@ -68,10 +64,21 @@ const MagistratMapMandataireList = props => {
   }
 
   const chooseMandataire = data => {
+    setCenter([data.longitude, data.latitude]);
     if (data.type === "service") {
+      setcurrentGestionnaire({
+        id: data.serviceId,
+        discriminator: "SERVICE",
+        coordinates: [data.longitude, data.latitude]
+      });
       getServicesMesures({ variables: { id: data.serviceId } });
     }
     if (data.type === "préposé" || data.type === "individuel") {
+      setcurrentGestionnaire({
+        id: data.mandataireId,
+        discriminator: data.type === "préposé" ? "MANDATAIRE_PRE" : "MANDATAIRE_IND",
+        coordinates: [data.longitude, data.latitude]
+      });
       getMandatairesMesures({ variables: { id: data.mandataireId } });
     }
   };
