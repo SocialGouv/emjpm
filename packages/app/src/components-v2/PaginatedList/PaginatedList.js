@@ -6,7 +6,7 @@ import { PaginatedListStyle } from "./style";
 const DataList = ({ entries, RowItem }) => (
   <Flex flexDirection="column">
     {entries.map((entry, index) => (
-      <RowItem key={index} {...entry} />
+      <RowItem key={index} item={entry} />
     ))}
   </Flex>
 );

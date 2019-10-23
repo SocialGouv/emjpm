@@ -7,35 +7,38 @@ import { PaginatedList } from "../PaginatedList";
 import { TRIBUNAUX } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
-const RowItem = ({ id, etablissement, code_postal, ville }) => (
-  <Card sx={cardStyle} width="100%">
-    <Flex justifyContent="space-between">
-      <Box>
-        <Flex justifyContent="space-start">
-          <Flex width="50px" flexDirection="column">
-            <Text sx={labelStyle}>id</Text>
-            <Text sx={descriptionStyle}>{id}</Text>
+const RowItem = ({ item }) => {
+  const { id, etablissement, code_postal, ville } = item;
+  return (
+    <Card sx={cardStyle} width="100%">
+      <Flex justifyContent="space-between">
+        <Box>
+          <Flex justifyContent="space-start">
+            <Flex width="50px" flexDirection="column">
+              <Text sx={labelStyle}>id</Text>
+              <Text sx={descriptionStyle}>{id}</Text>
+            </Flex>
+            <Flex width="350px" flexDirection="column">
+              <Text sx={labelStyle}>Nom</Text>
+              <Text sx={descriptionStyle}>{etablissement}</Text>
+            </Flex>
+            <Flex width="300px" flexDirection="column">
+              <Text sx={labelStyle}>Ville</Text>
+              <Text sx={descriptionStyle}>
+                {ville} ({code_postal})
+              </Text>
+            </Flex>
           </Flex>
-          <Flex width="350px" flexDirection="column">
-            <Text sx={labelStyle}>Nom</Text>
-            <Text sx={descriptionStyle}>{etablissement}</Text>
-          </Flex>
-          <Flex width="300px" flexDirection="column">
-            <Text sx={labelStyle}>Ville</Text>
-            <Text sx={descriptionStyle}>
-              {ville} ({code_postal})
-            </Text>
-          </Flex>
-        </Flex>
-      </Box>
-      <Box mr="1" width="120px">
-        <Button width="120px" onClick={() => {}} variant="outline">
-          Modifier
-        </Button>
-      </Box>
-    </Flex>
-  </Card>
-);
+        </Box>
+        <Box mr="1" width="120px">
+          <Button width="120px" onClick={() => {}} variant="outline">
+            Modifier
+          </Button>
+        </Box>
+      </Flex>
+    </Card>
+  );
+};
 
 const AdminTribunaux = () => {
   const resultPerPage = 50;

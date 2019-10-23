@@ -1,27 +1,29 @@
 import { useMutation } from "@apollo/react-hooks";
-import Router from "next/router";
 import React from "react";
 import { AdminServiceForm } from "./AdminServiceForm";
-import { ADD_SERVICE } from "./mutations";
+import { UPDATE_SERVICE } from "./mutations";
 
-export const AdminAddService = () => {
-  const [AddService] = useMutation(ADD_SERVICE, {
-    onCompleted: () => Router.push("/admin-v2/services")
+export const AdminEditService = ({ service, closePanel }) => {
+  const [UpdateService] = useMutation(UPDATE_SERVICE, {
+    onCompleted: closePanel
   });
 
   return (
     <AdminServiceForm
-      onCancel={() => Router.push("/admin-v2/services")}
+      service={service}
+      onCancel={closePanel}
       onSubmit={values =>
-        AddService({
+        UpdateService({
           variables: {
+            id: service.id,
             etablissement: values.etablissement,
             email: values.email,
             code_postal: values.code_postal,
             ville: values.ville,
             telephone: values.telephone,
             department_id: values.departement.value
-          }
+          },
+          refetchQueries: ["services", "services_aggregate"]
         })
       }
     />

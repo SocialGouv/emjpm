@@ -55,8 +55,8 @@ const getDetail = type => {
   }
 };
 
-const RowItem = props => {
-  const { id, active, nom, prenom, email, type } = props;
+const RowItem = ({ item }) => {
+  const { id, active, nom, prenom, email, type } = item;
   const [isActive, setActive] = useState(active);
   const [activateUser] = useMutation(ACTIVATE_USER, {
     onCompleted: data => {
@@ -95,7 +95,7 @@ const RowItem = props => {
             <Text sx={descriptionStyle}>{nom}</Text>
           </Flex>
           <Flex width="300px" flexDirection="column">
-            <DetailComponent {...props} />
+            <DetailComponent {...item} />
           </Flex>
           <Box mr="1" width="120px">
             <Button

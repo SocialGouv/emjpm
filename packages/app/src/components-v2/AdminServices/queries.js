@@ -17,6 +17,7 @@ export const SERVICES = gql`
       etablissement
       code_postal
       ville
+      department_id
     }
   }
 `;
