@@ -27,4 +27,13 @@ const descriptionStyle = {
   whiteSpace: "nowrap"
 };
 
-export { AdminUsersStyle, cardStyle, labelStyle, descriptionStyle };
+const activateButtonStyle = active => {
+  return active
+    ? {}
+    : {
+        color: "success",
+        borderColor: "success"
+      };
+};
+
+export { AdminUsersStyle, cardStyle, labelStyle, descriptionStyle, activateButtonStyle };

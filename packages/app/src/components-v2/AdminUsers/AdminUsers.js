@@ -1,75 +1,117 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Card } from "@socialgouv/emjpm-ui-core";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
+import { ACTIVATE_USER } from "./mutations";
 import { USERS } from "./queries";
-import { cardStyle, labelStyle, descriptionStyle } from "./style";
+import { activateButtonStyle, cardStyle, descriptionStyle, labelStyle } from "./style";
 
-const RowItem = ({
-  id,
-  nom,
-  prenom,
-  email,
-  type,
-  magistrat,
-  mandataire,
-  user_tis,
-  service_admins
-}) => (
-  <Card sx={cardStyle} width="100%">
-    <Flex justifyContent="flex-start">
-      <Flex width="100px" flexDirection="column">
-        <Text sx={labelStyle}>id</Text>
-        <Text sx={descriptionStyle}>{id}</Text>
-        <Text sx={descriptionStyle}>{type}</Text>
-      </Flex>
-      <Box width="300px">
-        <Text sx={labelStyle}>email</Text>
-        <Text sx={descriptionStyle}>{email}</Text>
-      </Box>
-      <Flex width="200px" flexDirection="column">
-        <Text sx={labelStyle}>prénom / nom</Text>
-        <Text sx={descriptionStyle}>{prenom}</Text>
-        <Text sx={descriptionStyle}>{nom}</Text>
-      </Flex>
-      <Flex width="300px" flexDirection="column" ml={1}>
-        {mandataire && (
-          <>
-            <Text sx={labelStyle}>tribunaux</Text>
-            {user_tis.map((ti, index) => (
-              <Text sx={descriptionStyle} key={index}>
-                {ti.etablissement}
-              </Text>
-            ))}
-          </>
-        )}
-        {service_admins && (
-          <>
-            <Text sx={labelStyle}>service</Text>
-            {service_admins.map((val, index) => (
-              <Text sx={descriptionStyle} key={index}>
-                {val.service.etablissement}
-              </Text>
-            ))}
-          </>
-        )}
-        {magistrat && (
-          <>
-            <Text sx={labelStyle}>tribunal</Text>
-            <Text sx={descriptionStyle}>{magistrat.ti.etablissement}</Text>
-          </>
-        )}
-      </Flex>
-      <Box mr="1" width="120px">
-        <Button width="120px" onClick={() => {}} variant="outline">
-          Modifier
-        </Button>
-      </Box>
-    </Flex>
-  </Card>
+const ServiceDetail = ({ service_admins }) => (
+  <>
+    <Text sx={labelStyle}>service</Text>
+    {service_admins.map((val, index) => (
+      <Text sx={descriptionStyle} key={index}>
+        {val.service.etablissement}
+      </Text>
+    ))}
+  </>
 );
+
+const MandataireDetail = ({ user_tis }) => (
+  <>
+    <Text sx={labelStyle}>tribunaux</Text>
+    {user_tis.map((val, index) => (
+      <Text sx={descriptionStyle} key={index}>
+        {val.ti.ville}
+      </Text>
+    ))}
+  </>
+);
+
+const MagistratDetail = ({ magistrat }) => (
+  <>
+    <Text sx={labelStyle}>tribunal</Text>
+    <Text sx={descriptionStyle}>
+      {magistrat && magistrat.ti ? magistrat.ti.ville : "Non renseigné"}
+    </Text>
+  </>
+);
+
+const DirectionDetail = () => <></>;
+
+const getDetail = type => {
+  if (type === "service") {
+    return ServiceDetail;
+  } else if (type === "individuel") {
+    return MandataireDetail;
+  } else if (type === "prepose") {
+    return MandataireDetail;
+  } else if (type === "ti") {
+    return MagistratDetail;
+  } else {
+    return DirectionDetail;
+  }
+};
+
+const RowItem = props => {
+  const { id, active, nom, prenom, email, type } = props;
+  const [isActive, setActive] = useState(active);
+  const [activateUser] = useMutation(ACTIVATE_USER, {
+    onCompleted: data => {
+      setActive(data.update_users.returning[0].active);
+    }
+  });
+
+  const toogleActivation = () => {
+    const newState = !isActive;
+    activateUser({
+      variables: {
+        id,
+        active: newState
+      }
+    });
+  };
+
+  const DetailComponent = getDetail(type);
+
+  return (
+    <>
+      <Card sx={cardStyle} width="100%">
+        <Flex justifyContent="flex-start">
+          <Flex width="100px" flexDirection="column">
+            <Text sx={labelStyle}>id</Text>
+            <Text sx={descriptionStyle}>{id}</Text>
+            <Text sx={descriptionStyle}>{type}</Text>
+          </Flex>
+          <Box width="300px">
+            <Text sx={labelStyle}>email</Text>
+            <Text sx={descriptionStyle}>{email}</Text>
+          </Box>
+          <Flex width="200px" flexDirection="column">
+            <Text sx={labelStyle}>prénom / nom</Text>
+            <Text sx={descriptionStyle}>{prenom}</Text>
+            <Text sx={descriptionStyle}>{nom}</Text>
+          </Flex>
+          <Flex width="300px" flexDirection="column">
+            <DetailComponent {...props} />
+          </Flex>
+          <Box mr="1" width="120px">
+            <Button
+              sx={activateButtonStyle(isActive)}
+              width="120px"
+              onClick={toogleActivation}
+              variant="outline"
+            >
+              {isActive ? "Bloquer" : "Activer"}
+            </Button>
+          </Box>
+        </Flex>
+      </Card>
+    </>
+  );
+};
 
 const AdminUsers = () => {
   const resultPerPage = 50;
@@ -111,7 +153,6 @@ const AdminUsers = () => {
           },
           updateQuery: (prev, { fetchMoreResult }) => {
             return {
-              count: fetchMoreResult.count,
               users: [...prev.users, ...fetchMoreResult.users]
             };
           }

@@ -9,7 +9,7 @@ export const USERS = gql`
     }
     users(
       limit: $limit
-      order_by: { nom: asc }
+      order_by: { active: asc, id: desc }
       offset: $offset
       where: { nom: { _ilike: $searchText } }
     ) {
@@ -18,6 +18,7 @@ export const USERS = gql`
       prenom
       type
       email
+      active
       mandataire {
         adresse
         code_postal
@@ -25,12 +26,12 @@ export const USERS = gql`
       }
       magistrat {
         ti {
-          etablissement
+          ville
         }
       }
-      user_tis {
+      user_tis(order_by: { ti: { ville: asc } }) {
         ti {
-          etablissement
+          ville
         }
       }
       service_admins {
