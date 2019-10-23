@@ -18,7 +18,9 @@ spec:
             - sh
           args:
             - -c
-            - sh -x /mnt/script/restore.sh /mnt/data/$(cat /mnt/data/LATEST)
+            - |
+              sh -x /mnt/script/postgres-init.sh
+              sh -x /mnt/script/restore.sh /mnt/data/$(cat /mnt/data/LATEST)
           resources:
             requests:
               cpu: 0m
@@ -36,6 +38,21 @@ spec:
                 secretKeyRef:
                   name: ${K8S_PROJECT}-postgres-${BRANCH_HASH}
                   key: postgresql-password
+            - name: POSTGRES_EMJPM_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: POSTGRES_EMJPM_PASSWORD
+            - name: POSTGRES_HASURA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: POSTGRES_HASURA_PASSWORD
+            - name: POSTGRES_METABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: emjpm-secret
+                  key: POSTGRES_METABASE_PASSWORD
           volumeMounts:
             - mountPath: "/mnt/data"
               name: volume
