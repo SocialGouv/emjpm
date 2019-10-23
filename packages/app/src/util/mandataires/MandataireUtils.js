@@ -66,6 +66,8 @@ export const formatMandataire = (
       id: `${discriminator}-${service.id}`,
       lastLogin: lastLogin ? formatLastLogin(lastLogin) : "non renseigné",
       lastLoginIsCritical: lastLogin && isCriticalDate(lastLogin),
+      latitude: service.latitude || null,
+      longitude: service.longitude || null,
       nom: service.nom ? service.nom : null,
       prenom: service.prenom ? service.prenom : null,
       serviceId: service.id,
@@ -79,12 +81,15 @@ export const formatMandataire = (
       email: mandataire.user && mandataire.user.email ? mandataire.user.email : "non renseigné",
       genre: mandataire.genre ? mandataire.genre : "F",
       id: `${discriminator}-${mandataire.id}`,
+      id: `${discriminator}-${mandataire.id}`,
       lastLogin:
         mandataire.user && mandataire.user.last_login
           ? formatLastLogin(mandataire.user.last_login)
           : "non renseigné",
       lastLoginIsCritical:
         mandataire.user && mandataire.user.last_login && isCriticalDate(mandataire.user.last_login),
+      latitude: mandataire.latitude || null,
+      longitude: mandataire.longitude || null,
       mandataireId: mandataire.id,
       nom:
         mandataire.user && mandataire.user.nom ? capitalize(mandataire.user.nom) : "non renseigné",
