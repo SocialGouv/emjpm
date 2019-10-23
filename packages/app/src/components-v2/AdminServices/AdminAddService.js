@@ -6,12 +6,12 @@ import { ADD_SERVICE } from "./mutations";
 
 export const AdminAddService = () => {
   const [AddService] = useMutation(ADD_SERVICE, {
-    onCompleted: () => Router.push("/admin-v2/services")
+    onCompleted: () => Router.push("/admin/services")
   });
 
   return (
     <AdminServiceForm
-      onCancel={() => Router.push("/admin-v2/services")}
+      onCancel={() => Router.push("/admin/services")}
       onSubmit={values =>
         AddService({
           variables: {

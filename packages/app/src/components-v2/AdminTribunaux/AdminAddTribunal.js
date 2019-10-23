@@ -21,7 +21,7 @@ const grayBox = {
 
 export const AdminAddTribunal = props => {
   const [AddTribunal] = useMutation(ADD_TRIBUNAL, {
-    onCompleted: () => Router.push("/admin-v2/tribunaux")
+    onCompleted: () => Router.push("/admin/tribunaux")
   });
 
   return (
@@ -137,7 +137,7 @@ export const AdminAddTribunal = props => {
                     <Flex justifyContent="flex-end">
                       <Box>
                         <Button mr="2" variant="outline">
-                          <Link href="/admin-v2/tribunaux">
+                          <Link href="/admin/tribunaux">
                             <a>Annuler</a>
                           </Link>
                         </Button>

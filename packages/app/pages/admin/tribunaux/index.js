@@ -20,9 +20,7 @@ const AdminTribunauxPage = () => {
               flexWrap: "wrap"
             }}
           >
-            <AdminFilterBar
-              onAddButtonClick={() => Router.push("/admin-v2/tribunaux/add-tribunal")}
-            />
+            <AdminFilterBar onAddButtonClick={() => Router.push("/admin/tribunaux/add-tribunal")} />
             <AdminTribunaux />
           </Flex>
         </BoxWrapper>

@@ -20,9 +20,7 @@ const AdminServicesPage = () => {
               flexWrap: "wrap"
             }}
           >
-            <AdminFilterBar
-              onAddButtonClick={() => Router.push("/admin-v2/services/add-service ")}
-            />
+            <AdminFilterBar onAddButtonClick={() => Router.push("/admin/services/add-service ")} />
             <AdminServices />
           </Flex>
         </BoxWrapper>
