@@ -37,7 +37,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
           <Heading1>
             {user.type === "individuel"
               ? `Création d'un compte de mandataire individuel`
-              : `Création d'un compte de mandataire préposé`}
+              : `Création d'un compte de mandataire préposé d'établissement`}
           </Heading1>
         </Box>
         <Flex>
@@ -45,25 +45,25 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             <Box height="80px">
               <Heading4>{`Tribunaux`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                {`Tribunaux dans lesquels vous êtes agréés`}
+                {`Sélectionner l'ensemble des tribunaux sur lesquels vous êtes agréés`}
               </Text>
             </Box>
             <Box height="80px">
-              <Heading4>{`Titre de civilité`}</Heading4>
+              <Heading4>{`Civilité`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                {`Votre titre de civilité`}
+                {`Votre civilité`}
               </Text>
             </Box>
             <Box height="140px">
               <Heading4>{`Numéro de téléphone professionel`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                Vos numéros de téléphone profesionnels
+                Vos numéros de téléphone profesionnels fixe et portable
               </Text>
             </Box>
             <Box height="200px">
               <Heading4>{`Adresse professionelle`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                {`L'adresse de votre lieu de travail`}
+                {`L'adresse de votre siège social`}
               </Text>
             </Box>
             <Box height="80px">
