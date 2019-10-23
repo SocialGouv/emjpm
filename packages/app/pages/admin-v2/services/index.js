@@ -6,6 +6,7 @@ import { AdminServices } from "../../../src/components-v2/AdminServices";
 import { AdminFilterBar } from "../../../src/components-v2/AdminFilterBar";
 import { LayoutAdmin } from "../../../src/components-v2/Layout";
 import { withAuthSync } from "../../../src/util/auth";
+import Router from "next/router";
 
 const AdminServicesPage = () => {
   return (
@@ -19,7 +20,9 @@ const AdminServicesPage = () => {
               flexWrap: "wrap"
             }}
           >
-            <AdminFilterBar />
+            <AdminFilterBar
+              onAddButtonClick={() => Router.push("/admin-v2/services/add-service ")}
+            />
             <AdminServices />
           </Flex>
         </BoxWrapper>

@@ -20,3 +20,12 @@ export const SERVICES = gql`
     }
   }
 `;
+
+export const DEPARTEMENTS = gql`
+  {
+    departements(order_by: { nom: asc }) {
+      id
+      nom
+    }
+  }
+`;

@@ -1,15 +1,16 @@
-import { useMutation } from "@apollo/react-hooks";
-import { Text, Heading4, Card, Input, Button } from "@socialgouv/emjpm-ui-core";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { Button, Card, Heading4, Input, Text, Select } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
-import { ADD_TRIBUNAL } from "./mutations";
+import { ADD_SERVICE } from "./mutations";
+import { DEPARTEMENTS } from "./queries";
 import { cardStyle } from "./style";
 
-const AdminAddTribunalStyle = {
+const AdminAddServiceStyle = {
   flexWrap: "wrap"
 };
 
@@ -19,23 +20,35 @@ const grayBox = {
   p: "5"
 };
 
-export const AdminAddTribunal = props => {
-  const [AddTribunal] = useMutation(ADD_TRIBUNAL, {
-    onCompleted: () => Router.push("/admin-v2/tribunaux")
+export const AdminAddService = props => {
+  const { data, loading, error } = useQuery(DEPARTEMENTS);
+  const [AddService] = useMutation(ADD_SERVICE, {
+    onCompleted: () => Router.push("/admin-v2/services")
   });
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+  if (error) {
+    return <div>error</div>;
+  }
+  const departmentOptions = data.departements.map(dep => ({
+    label: dep.nom,
+    value: dep.id
+  }));
 
   return (
     <Card sx={cardStyle} width="100%">
-      <Flex sx={AdminAddTribunalStyle} {...props}>
+      <Flex sx={AdminAddServiceStyle} {...props}>
         <Box width={[1, 2 / 5]} sx={grayBox}>
           <Box height="230px">
-            <Heading4>{`Information du tribunal`}</Heading4>
+            <Heading4>{`Information du service`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Informations relatives au tribunal`}
+              {`Informations relatives au service`}
             </Text>
           </Box>
           <Box height="150px">
-            <Heading4>{`Contact du tribunal`}</Heading4>
+            <Heading4>{`Contact du service`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               Contact du tribunal
             </Text>
@@ -45,13 +58,14 @@ export const AdminAddTribunal = props => {
           <Box mb="2">
             <Formik
               onSubmit={(values, { setSubmitting }) => {
-                AddTribunal({
+                AddService({
                   variables: {
                     etablissement: values.etablissement,
                     email: values.email,
                     code_postal: values.code_postal,
                     ville: values.ville,
-                    telephone: values.telephone
+                    telephone: values.telephone,
+                    department_id: values.departement.value
                   }
                 });
                 setSubmitting(false);
@@ -61,7 +75,7 @@ export const AdminAddTribunal = props => {
                 code_postal: Yup.string().required("Champs obligatoire"),
                 ville: Yup.string().required("Champs obligatoire"),
                 email: Yup.string().email("Le format de votre email n'est pas correct"),
-                telephone: Yup.string().required("Champs obligatoire")
+                telephone: Yup.string()
               })}
               initialValues={{
                 etablissement: "",
@@ -72,7 +86,15 @@ export const AdminAddTribunal = props => {
               }}
             >
               {props => {
-                const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
+                const {
+                  values,
+                  touched,
+                  errors,
+                  isSubmitting,
+                  handleChange,
+                  handleSubmit,
+                  setFieldValue
+                } = props;
                 return (
                   <form onSubmit={handleSubmit}>
                     <Box mb="2">
@@ -82,11 +104,20 @@ export const AdminAddTribunal = props => {
                         name="etablissement"
                         hasError={errors.etablissement && touched.etablissement}
                         onChange={handleChange}
-                        placeholder="Nom du tribunal"
+                        placeholder="Nom du service"
                       />
                       {errors.etablissement && touched.etablissement && (
                         <Text>{errors.etablissement}</Text>
                       )}
+                    </Box>
+                    <Box mb="2">
+                      <Select
+                        size="small"
+                        options={departmentOptions}
+                        placeholder={"departement"}
+                        value={values.departement}
+                        onChange={option => setFieldValue("departement", option)}
+                      />
                     </Box>
                     <Box mb="2">
                       <Input
@@ -137,7 +168,7 @@ export const AdminAddTribunal = props => {
                     <Flex justifyContent="flex-end">
                       <Box>
                         <Button mr="2" variant="outline">
-                          <Link href="/admin-v2/tribunaux">
+                          <Link href="/admin-v2/services">
                             <a>Annuler</a>
                           </Link>
                         </Button>
