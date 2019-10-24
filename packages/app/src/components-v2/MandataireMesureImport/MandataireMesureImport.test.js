@@ -1,8 +1,8 @@
 import React from "react";
-import { ServiceMesureImport } from "./ServiceMesureImport";
+import { MandataireMesureImport } from "./MandataireMesureImport";
 import renderer from "react-test-renderer";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<ServiceMesureImport />).toJSON();
+  const tree = renderer.create(<MandataireMesureImport />).toJSON();
   expect(tree).toMatchSnapshot();
 });

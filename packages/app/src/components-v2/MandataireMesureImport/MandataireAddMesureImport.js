@@ -41,7 +41,7 @@ const ResultMessage = ({ success, restart }) => (
   </Flex>
 );
 
-export const ServiceAddMesureImport = () => {
+export const MandataireAddMesureImport = () => {
   const [result, setResult] = useState(false);
   const [importMesures] = useMutation(IMPORT_MESURES);
 

@@ -13,20 +13,16 @@ import { dropDownLinks } from "./dropDownLink";
 
 const navigationLinks = [
   {
-    title: "Toute vos mesures",
-    url: "/services"
+    title: "Retour à mon espace",
+    url: "/mandataires"
   },
   {
-    title: "Vos mesures en attente",
-    url: "/services/waiting-mesures"
-  },
-  {
-    title: "Vos informations",
-    url: "/services/informations"
+    title: "Import de vos mesures",
+    url: "/mandataires/import-mesures"
   }
 ];
 
-const LayoutServices = props => {
+const LayoutMandataire = props => {
   const { children, hasNavigation = true } = props;
 
   return (
@@ -75,4 +71,4 @@ const LayoutServices = props => {
   );
 };
 
-export { LayoutServices };
+export { LayoutMandataire };

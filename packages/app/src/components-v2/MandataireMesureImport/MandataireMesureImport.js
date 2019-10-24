@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 import { FileExcel } from "styled-icons/fa-regular/FileExcel";
 import { FilePdf } from "styled-icons/fa-regular/FilePdf";
-import { ServiceAddMesureImport } from "./ServiceAddMesureImport";
+import { MandataireAddMesureImport } from "./MandataireAddMesureImport";
 
 const DocumentLink = props => {
   const { children, document } = props;
@@ -29,7 +29,7 @@ const DocumentLink = props => {
   );
 };
 
-const ServiceMesureImport = () => {
+const MandataireMesureImport = () => {
   return (
     <>
       <Card mb="5">
@@ -84,7 +84,7 @@ const ServiceMesureImport = () => {
             <Text mb="1" lineHeight="2">
               {`Utilisez le cadre ci-dessous pour nous transmettre votre tableau excel de mesures. Si vous eprouvez des difficultés, vous pouvez nous envoyer un mail avec votre tableau en pièce-jointe à contact@emjpm.beta.gouv.fr. Nous le vérifierons, le mettrons en page et nous vous le renverrons pour que vous puissiez l’importer.`}
             </Text>
-            <ServiceAddMesureImport />
+            <MandataireAddMesureImport />
           </Box>
         </Flex>
       </Card>
@@ -92,4 +92,4 @@ const ServiceMesureImport = () => {
   );
 };
 
-export { ServiceMesureImport };
+export { MandataireMesureImport };
