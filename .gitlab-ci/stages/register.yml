@@ -31,7 +31,7 @@ Use previous api image:
   extends: .base_use_previous_image_stage
   except:
     <<: *register_stage_except
-    <<: *prepare_api_scope
+    <<: *register_api_scope
   variables:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
 
@@ -59,7 +59,7 @@ Use previous app image:
   extends: .base_use_previous_image_stage
   except:
     <<: *register_stage_except
-    <<: *prepare_app_scope
+    <<: *register_app_scope
   variables:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
@@ -87,7 +87,7 @@ Use previous graphql-server image:
   extends: .base_use_previous_image_stage
   except:
     <<: *register_stage_except
-    <<: *prepare_graphql-server_scope
+    <<: *register_graphql-server_scope
   variables:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
 
@@ -113,6 +113,6 @@ Use previous hasura image:
   extends: .base_use_previous_image_stage
   except:
     <<: *register_stage_except
-    <<: *prepare_hasura_scope
+    <<: *register_hasura_scope
   variables:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
