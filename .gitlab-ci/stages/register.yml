@@ -1,41 +1,118 @@
 #
 
 .register_stage: &register_stage
-  extends: .base_register_stage
   stage: "Registration"
   dependencies: []
-  except:
+  except: &register_stage_except
     variables:
       - $PRODUCTION
 
 #
+#
+#
+
+.register_api_scope: &register_api_scope
+  changes:
+    - packages/api/**
 
 Register api image:
   <<: *register_stage
+  extends: .base_register_stage
+  only:
+    <<: *register_api_scope
   variables:
     CONTEXT: packages/api
     DOCKER_BUILD_ARGS: >-
       --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
 
+Use previous api image:
+  <<: *register_stage
+  extends: .base_use_previous_image_stage
+  except:
+    <<: *register_stage_except
+    <<: *prepare_api_scope
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+
+#
+#
+#
+
+.register_app_scope: &register_app_scope
+  changes:
+    - packages/app/**
+
 Register app image:
   <<: *register_stage
+  extends: .base_register_stage
+  only:
+    <<: *register_app_scope
   variables:
     CONTEXT: packages/app
     DOCKER_BUILD_ARGS: >-
       --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
+Use previous app image:
+  <<: *register_stage
+  extends: .base_use_previous_image_stage
+  except:
+    <<: *register_stage_except
+    <<: *prepare_app_scope
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+
+#
+#
+#
+
+.register_graphql-server_scope: &register_graphql-server_scope
+  changes:
+    - packages/graphql-server/**
+
 Register graphql-server image:
   <<: *register_stage
+  extends: .base_register_stage
+  only:
+    <<: *register_graphql-server_scope
   variables:
     CONTEXT: packages/graphql-server
     DOCKER_BUILD_ARGS: >-
       --build-arg BASE_IMAGE=$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
     IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
 
+Use previous graphql-server image:
+  <<: *register_stage
+  extends: .base_use_previous_image_stage
+  except:
+    <<: *register_stage_except
+    <<: *prepare_graphql-server_scope
+  variables:
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
+
+#
+#
+#
+
+.register_hasura_scope: &register_hasura_scope
+  changes:
+    - packages/hasura/**
+
 Register hasura image:
   <<: *register_stage
+  extends: .base_register_stage
+  only:
+    <<: *register_hasura_scope
   variables:
     CONTEXT: packages/hasura
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
+
+Use previous hasura image:
+  <<: *register_stage
+  extends: .base_use_previous_image_stage
+  except:
+    <<: *register_stage_except
+    <<: *prepare_hasura_scope
+  variables:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
