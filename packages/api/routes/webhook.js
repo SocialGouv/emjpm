@@ -42,4 +42,9 @@ router.post("/mesure-reservation", async function(req, res) {
   }
 });
 
+router.post("/mesures-import", async function(req, res) {
+  console.log(req.body.event.data.new.id);
+  res.json({ success: true });
+});
+
 module.exports = router;

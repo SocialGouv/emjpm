@@ -6,9 +6,9 @@ remote_schemas:
   definition:
     forward_client_headers: true
     headers: []
-    timeout_seconds: null
-    url: "%%WHATEVER_URL%%/graphql"
-    url_from_env: null
+    timeout_seconds: 60
+    url: null
+    url_from_env: WHATEVER_URL
   name: whatever
 tables:
 - array_relationships: []
@@ -453,6 +453,27 @@ tables:
       - type
       - username
       set: {}
+    role: prepose
+  - comment: null
+    permission:
+      check:
+        id:
+          _eq: X-Hasura-User-Id
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      set: {}
     role: ti
   - comment: null
     permission:
@@ -510,25 +531,6 @@ tables:
       - type
       - username
       set: {}
-    role: prepose
-  - comment: null
-    permission:
-      check: {}
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      set: {}
     role: service
   is_enum: false
   object_relationships:
@@ -547,6 +549,27 @@ tables:
           id: user_id
         remote_table: magistrat
   select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - username
+      - password
+      - created_at
+      - type
+      - last_login
+      - active
+      - reset_password_token
+      - reset_password_expires
+      - nom
+      - prenom
+      - cabinet
+      - email
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: individuel
   - comment: null
     permission:
       allow_aggregations: false
@@ -958,7 +981,18 @@ tables:
     role: ti
 - array_relationships: []
   delete_permissions: []
-  event_triggers: []
+  event_triggers:
+  - definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    headers: []
+    name: import
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: WEB_HOOK_URL_MESURES_IMPORT
   insert_permissions:
   - comment: null
     permission:
@@ -1517,7 +1551,7 @@ tables:
       interval_sec: 10
       num_retries: 0
       timeout_sec: 60
-    webhook: "%%WEB_HOOK_URL%%/webhook/mesure-reservation"
+    webhook_from_env: WEB_HOOK_URL_EMAIL_RESERVATION
   insert_permissions:
   - comment: null
     permission:
