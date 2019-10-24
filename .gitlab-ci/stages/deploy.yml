@@ -92,7 +92,7 @@ Create namespace:
         --debug
         --install
         --set clusterIssuer=${LETSENCRYPT_ISSUER}
-        --set host="{
+        --set hosts="{
           ${API_HOST},
           ${FRONTEND_HOST},
           ${HASURA_HOST},
