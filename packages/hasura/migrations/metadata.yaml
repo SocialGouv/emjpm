@@ -998,6 +998,40 @@ tables:
     permission:
       check: {}
       columns:
+      - id
+      - created_at
+      - processed_at
+      - content
+      - file_name
+      - file_size
+      - file_type
+      - status
+      - user_id
+      - antenne_id
+      set:
+        user_id: x-hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - antenne_id
+      - file_size
+      - id
+      - user_id
+      - content
+      - created_at
+      - processed_at
+      - file_name
+      - file_type
+      - status
+      set:
+        user_id: x-hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      check: {}
+      columns:
       - antenne_id
       - content
       - created_at

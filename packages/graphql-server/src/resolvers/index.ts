@@ -1,7 +1,6 @@
 import { merge } from "lodash";
-import mesureImportResolver from "./mesure-import.resolver";
 import mesureStatResolver from "./mesure-stat.resolver";
 
-const resolvers = merge(mesureStatResolver, mesureImportResolver);
+const resolvers = merge(mesureStatResolver);
 
 export default resolvers;

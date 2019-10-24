@@ -39,7 +39,7 @@ export const MESURE_TYPE = [
 ];
 
 export const RESIDENCE = [
-  "A Domicile",
+  "A domicile",
   "En établissement",
   "En établissement avec conservation du domicile",
   "SDF"
@@ -49,32 +49,28 @@ export const CIVILITY = ["F", "H"];
 
 const checkHeaders = (datas, errors) => {
   const headers = Object.keys(datas);
-  if (headers.length < HEADER.length) {
-    errors.push("Le nombre de colonnes du fichier ne correspond pas au modèle de fichier");
-  } else {
-    for (let i = 0; i++; i < 8) {
-      if (headers[i] !== HEADER[i]) {
-        errors.push(`Le titre de la colonne '${i} n'est pas '${HEADER[i]}'`);
-      }
+  for (let i = 0; i++; i < HEADER.length) {
+    if (headers[i] !== HEADER[i]) {
+      errors.push(`Le titre de la colonne '${i} n'est pas '${HEADER[i]}'`);
     }
   }
 };
 
 const checkType = (row, errors) => {
   if (!MESURE_TYPE.includes(row.type)) {
-    errors.push(`Les valeurs possible du type de mesure sont  '${MESURE_TYPE}'`);
+    errors.push(`La valeur '${row.type}' n'est pas dans la liste: ${MESURE_TYPE}`);
   }
 };
 
 const checkGender = (row, errors) => {
   if (!CIVILITY.includes(row.civilite)) {
-    errors.push(`Les valeurs possible de la civilité '${CIVILITY}'`);
+    errors.push(`La valeur '${row.civilite}' n'est pas dans la liste: ${CIVILITY}`);
   }
 };
 
 const checkResidence = (row, errors) => {
   if (!RESIDENCE.includes(row.residence)) {
-    errors.push(`Les valeurs possibles de la résidence sont: ${RESIDENCE}`);
+    errors.push(`La valeur '${row.residence}' n'est pas dans la liste: ${RESIDENCE}`);
   }
 };
 
@@ -105,6 +101,7 @@ const checkNumeroRg = (row, errors) => {
 
 export default datas => {
   const errors = [];
+  const mesures = [];
   datas.forEach((row, index) => {
     const errorMessages = [];
     checkHeaders(row, errorMessages);
@@ -121,9 +118,10 @@ export default datas => {
         messages: errorMessages,
         row
       });
+    } else {
+      mesures.push(row);
     }
   });
-  console.log(errors);
 
-  return errors;
+  return { errors, mesures };
 };

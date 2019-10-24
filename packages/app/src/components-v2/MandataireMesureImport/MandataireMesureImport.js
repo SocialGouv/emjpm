@@ -35,9 +35,9 @@ const MandataireMesureImport = () => {
       <Card mb="5">
         <Flex flexDirection="column">
           <Box mb={2}>
-            <Heading3 mb="2">{`Import de vos mesures avec un fichier excel`}</Heading3>
+            <Heading3 mb="2">{`Import de vos mesures avec un fichier au format csv`}</Heading3>
             <Text mb="1" lineHeight="2">
-              {`Pour simplifier la première mise à jour de toutes vos mesures en cours, vous pouvez importer un fichier excel. Ce fichier excel doit être conforme au modèle que vous pourrez télécharger ci-dessous et devra contenir les informations suivantes :`}
+              {`Pour simplifier la première mise à jour de toutes vos mesures en cours, vous pouvez importer vos mesures avec un fichier csv. Ce fichier csv doit être conforme au modèle que vous pourrez télécharger ci-dessous et devra contenir les informations suivantes :`}
             </Text>
             <Text ml={3} mb="1" lineHeight="1.2">
               {`- La date d’ouverture de la mesure`}

@@ -31,18 +31,6 @@ export type DepartmentAvailibility = {
   max: Scalars['Int'],
 };
 
-export type MesureImportData = {
-  date_ouverture: Scalars['String'],
-  type: Scalars['String'],
-  code_postal: Scalars['String'],
-  ville: Scalars['String'],
-  civilite: Scalars['String'],
-  annee: Scalars['String'],
-  numero_rg: Scalars['String'],
-  numero_dossier?: Maybe<Scalars['String']>,
-  residence: Scalars['String'],
-};
-
 export enum MesureTypeCategory {
   Tutelle = 'TUTELLE',
   CuratelleSimple = 'CURATELLE_SIMPLE',
@@ -70,19 +58,6 @@ export type MonthlyNumber = {
   month: Scalars['Int'],
   year: Scalars['Int'],
   number: Scalars['Int'],
-};
-
-export type Mutation = {
-  __typename?: 'Mutation',
-  importMesures: Scalars['Int'],
-};
-
-
-export type MutationImportMesuresArgs = {
-  content: Array<MesureImportData>,
-  file_name: Scalars['String'],
-  file_size: Scalars['Int'],
-  file_type: Scalars['String']
 };
 
 export type Query = {

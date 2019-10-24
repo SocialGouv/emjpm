@@ -1,12 +1,18 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Input } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading2, Input } from "@socialgouv/emjpm-ui-core";
 import { Text } from "@socialgouv/emjpm-ui-core/dist/Type";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
-import * as XLSX from "xlsx";
-import checkExcelDatas from "./checkExcelDatas";
+import checkDatas from "./checkDatas";
+import { ADD_IMPORT } from "./mutations";
 import { ServiceMesureImportResultStyle } from "./style";
-import { IMPORT_MESURES } from "./mutations";
+
+const grayCard = {
+  borderRadius: "5px 0 0 5px",
+  bg: "cardSecondary",
+  p: "5",
+  m: "2"
+};
 
 const FilePicker = props => {
   return (
@@ -15,6 +21,7 @@ const FilePicker = props => {
         id="file"
         type="file"
         name="file"
+        value=""
         onChange={event => {
           props.handleFileChosen(event.currentTarget.files[0]);
         }}
@@ -30,53 +37,88 @@ const RestartButton = ({ restart }) => (
   </Button>
 );
 
-const ResultMessage = ({ success, restart }) => (
-  <Flex flexDirection="row" alignItems="center" p={7} sx={ServiceMesureImportResultStyle(success)}>
-    <Text ml={2} fontSize={6}>
-      {success
-        ? "Votre fichier a été importé correctement"
-        : "Votre fichier comporte des données non compatibles."}
-    </Text>
-    <RestartButton restart={restart} />
-  </Flex>
-);
+const ResultMessage = ({ result, restart }) => {
+  const errors = result.errors;
+  const mesures = result.mesures;
+  return (
+    <>
+      <Flex alignItems="center" p={7} sx={ServiceMesureImportResultStyle}>
+        <Flex flexDirection="column">
+          <Heading2>{`Résultat de l'import`}</Heading2>
+          <Text
+            m={2}
+            fontSize={2}
+          >{`${mesures.length} mesures ont été importées ou mises à jour`}</Text>
+          <Text
+            m={2}
+            fontSize={2}
+          >{`${errors.length} mesures n'ont pas été importées ou mises à jour. Les erreurs sont indiquées ci-dessous.`}</Text>
+        </Flex>
+        <RestartButton restart={restart} />
+      </Flex>
+      {errors && (
+        <Card sx={grayCard} overflow="hidden">
+          <pre>{JSON.stringify(errors, null, 2)}</pre>
+        </Card>
+      )}
+    </>
+  );
+};
+
+function csvToArray(csv) {
+  var lines = csv.split("\n");
+  var result = [];
+  var headers = lines[0].split("\t").map(header => header.trim());
+
+  for (var i = 1; i < lines.length; i++) {
+    var obj = {};
+    var currentline = lines[i].split("\t");
+
+    for (var j = 0; j < headers.length; j++) {
+      const val = currentline[j];
+      obj[headers[j]] = val ? val.trim() : undefined;
+    }
+
+    result.push(obj);
+  }
+
+  return result;
+}
 
 export const MandataireAddMesureImport = () => {
   const [result, setResult] = useState(false);
-  const [importMesures] = useMutation(IMPORT_MESURES);
+  const [AddImport] = useMutation(ADD_IMPORT);
 
   const handleFileChosen = file => {
     const reader = new FileReader();
-    reader.readAsArrayBuffer(file);
-    reader.onload = function() {
-      const data = new Uint8Array(reader.result);
-      const wb = XLSX.read(data, { type: "array" });
-      const sheet_name_list = wb.SheetNames;
-      const datas = XLSX.utils.sheet_to_json(wb.Sheets[sheet_name_list[0]], { raw: false });
-      const errors = checkExcelDatas(datas);
 
-      if (errors.length == 0) {
-        importMesures({
+    reader.onload = function() {
+      const result = reader.result;
+      const datas = csvToArray(result);
+      const { errors, mesures } = checkDatas(datas);
+
+      if (mesures.length > 0) {
+        AddImport({
           variables: {
             file_name: file.name,
             file_size: file.size,
             file_type: file.type,
-            content: datas
+            content: mesures
           }
         });
       }
       setResult({
-        errors
+        errors,
+        mesures
       });
     };
+    reader.readAsBinaryString(file);
   };
 
   return (
     <>
       {!result && <FilePicker handleFileChosen={handleFileChosen} />}
-      {result && (
-        <ResultMessage restart={() => setResult(false)} success={result.errors.length == 0} />
-      )}
+      {result && <ResultMessage restart={() => setResult(false)} result={result} />}
     </>
   );
 };
