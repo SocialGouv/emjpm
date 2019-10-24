@@ -91,7 +91,7 @@ Create namespace:
         socialgouv/certificate
         --debug
         --install
-        --clusterIssuer=${LETSENCRYPT_ISSUER}
+        --set clusterIssuer=${LETSENCRYPT_ISSUER}
         --set host={
           ${API_HOST},
           ${FRONTEND_HOST},
