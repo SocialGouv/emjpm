@@ -14,7 +14,7 @@ exports.up = async function(knex) {
       code_postal: row.fields.code_postal,
       latitude: lat,
       longitude: long,
-      city: row.fields.nom_de_la_commune
+      cities: row.fields.nom_de_la_commune
     };
   });
   return knex.transaction(tr => {

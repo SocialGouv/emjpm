@@ -2571,7 +2571,7 @@ tables:
       - latitude
       - longitude
       - id
-      - city
+      - cities
       - code_postal
       computed_fields: []
       filter: {}
@@ -2583,7 +2583,7 @@ tables:
       - latitude
       - longitude
       - id
-      - city
+      - cities
       - code_postal
       computed_fields: []
       filter: {}
@@ -2596,7 +2596,7 @@ tables:
       - code_postal
       - latitude
       - longitude
-      - city
+      - cities
       filter: {}
     role: direction
   - comment: null
@@ -2606,7 +2606,7 @@ tables:
       - latitude
       - longitude
       - id
-      - city
+      - cities
       - code_postal
       computed_fields: []
       filter: {}

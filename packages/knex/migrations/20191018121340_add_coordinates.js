@@ -15,7 +15,9 @@ exports.up = async function(knex) {
     .alterTable("geolocalisation_code_postal", function(table) {
       table.dropColumn("cities");
       table.string("insee");
-      table.string("city");
+    })
+    .alterTable("geolocalisation_code_postal", function(table) {
+      table.string("cities");
     });
 };
 
