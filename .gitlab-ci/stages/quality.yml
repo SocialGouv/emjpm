@@ -26,30 +26,45 @@
 Lint @emjpm/api:
   <<: *quality_stage
   <<: *master_based_stage
+  only:
+    changes:
+      - packages/api/**
   script:
     - yarn workspace @emjpm/api lint
 
 Lint @emjpm/app:
   <<: *quality_stage
   <<: *master_based_stage
+  only:
+    changes:
+      - packages/app/**
   script:
     - yarn workspace @emjpm/app lint
-
-Lint @emjpm/knex:
-  <<: *quality_stage
-  <<: *master_based_stage
-  script:
-    - yarn workspace @emjpm/knex lint
 
 Lint @emjpm/graphql-server:
   <<: *quality_stage
   <<: *master_based_stage
+  only:
+    changes:
+      - packages/graphql-server/**
   script:
     - yarn workspace @emjpm/graphql-server lint
+
+Lint @emjpm/knex:
+  <<: *quality_stage
+  <<: *master_based_stage
+  only:
+    changes:
+      - packages/knex/**
+  script:
+    - yarn workspace @emjpm/knex lint
 
 Lint @optional/e2e:
   <<: *quality_stage
   <<: *master_based_stage
+  only:
+    changes:
+      - optional/e2e/**
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
     paths:
@@ -67,6 +82,9 @@ Lint @optional/e2e:
 Test @emjpm/api:
   <<: *quality_stage
   <<: *master_based_stage
+  only:
+    changes:
+      - packages/api/**
   allow_failure: true
   services:
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
@@ -97,6 +115,9 @@ Test @emjpm/api:
 Test @emjpm/app:
   <<: *quality_stage
   <<: *master_based_stage
+  only:
+    changes:
+      - packages/app/**
   artifacts:
     paths:
       - packages/app/coverage
@@ -109,6 +130,9 @@ Test @emjpm/app:
 Test @emjpm/knex:
   <<: *quality_stage
   <<: *master_based_stage
+  only:
+    changes:
+      - packages/knex/**
   allow_failure: true
   services:
     - name: $CI_REGISTRY_IMAGE/postgres:$CI_COMMIT_SHA
