@@ -91,6 +91,12 @@ Create namespace:
         socialgouv/certificate
         --debug
         --install
+        --set clusterIssuer=${LETSENCRYPT_ISSUER}
+        --set host="{
+          ${API_HOST},
+          ${FRONTEND_HOST},
+          ${HASURA_HOST},
+          ${METABASE_HOST} }"
         --wait || helm delete --purge ${K8S_PROJECT}-certificate-${BRANCH_HASH}
 
 Deploy Certificate (dev):
