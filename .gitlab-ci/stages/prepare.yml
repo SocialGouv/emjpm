@@ -12,7 +12,7 @@
 #
 
 .prepare_base_image_scope: &prepare_base_image_scope
-  chamges:
+  changes:
     - packages/**
     - lerna.json
     - package.json
@@ -42,7 +42,7 @@ Use previous socialgouv/emjpm base image:
 #
 
 .prepare_postgres_scope: &prepare_postgres_scope
-  chamges:
+  changes:
     - docker/postgres/**
 
 Register postgres image:
