@@ -2313,7 +2313,7 @@ tables:
       - latitude
       - longitude
       - id
-      - cities
+      - city
       - code_postal
       filter: {}
     role: individuel
@@ -2324,7 +2324,7 @@ tables:
       - latitude
       - longitude
       - id
-      - cities
+      - city
       - code_postal
       filter: {}
     role: prepose
@@ -2336,7 +2336,7 @@ tables:
       - code_postal
       - latitude
       - longitude
-      - cities
+      - city
       filter: {}
     role: direction
   - comment: null
@@ -2346,7 +2346,7 @@ tables:
       - latitude
       - longitude
       - id
-      - cities
+      - city
       - code_postal
       filter: {}
     role: ti
