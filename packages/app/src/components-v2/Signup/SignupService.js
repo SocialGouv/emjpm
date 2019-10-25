@@ -1,15 +1,16 @@
-import { Heading1, Heading4, Button, Card, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { Heading4, Card, Heading1, Button, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, Fragment } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 import Router from "next/router";
-import { grayBox, cardStyle } from "./style";
+import { cardStyle, grayBox } from "./style";
 
 const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
   const { user, service, setService, validateStepOne } = useContext(SignupContext);
@@ -36,12 +37,10 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
   };
 
   return (
-    <Card sx={cardStyle}>
-      <Flex flexDirection="column">
-        <Box pl={5} pb={3}>
-          <Heading1>{`Création d'un compte de service mandataire`}</Heading1>
-        </Box>
-        <Flex>
+    <Fragment>
+      <Heading1 px="1">{`Création d'un compte de service mandataire`}</Heading1>
+      <Card sx={cardStyle}>
+        <Flex mt="3">
           <Box width={[1, 2 / 5]} sx={grayBox}>
             <Box height="80px" pt={1}>
               <Heading4>{`Votre service`}</Heading4>
@@ -153,8 +152,8 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
             </Box>
           </Box>
         </Flex>
-      </Flex>
-    </Card>
+      </Card>
+    </Fragment>
   );
 };
 
