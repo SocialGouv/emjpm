@@ -1,12 +1,18 @@
-import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-
-import { MAGISTRAT_USERS, DIRECTION_USERS, GET_SERVICE_USERS, CURRENT_USER } from "./queries";
+import React from "react";
+import {
+  MAGISTRAT_USERS,
+  DIRECTION_USERS,
+  GET_SERVICE_USERS,
+  CURRENT_USER,
+  ADMIN_USERS
+} from "./queries";
 
 const QUERY_TYPE = {
   ti: MAGISTRAT_USERS,
   direction: DIRECTION_USERS,
-  service: GET_SERVICE_USERS
+  service: GET_SERVICE_USERS,
+  admin: ADMIN_USERS
 };
 
 const CurrentUser = props => {
