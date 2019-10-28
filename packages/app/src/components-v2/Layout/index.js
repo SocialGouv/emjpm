@@ -5,4 +5,11 @@ import { LayoutMandataire } from "./LayoutMandataire";
 import { LayoutServices } from "./LayoutServices";
 import { LayoutSignup } from "./LayoutSignup";
 
-export { LayoutDirection, LayoutServices, LayoutMagistrat, LayoutAdmin, LayoutSignup };
+export {
+  LayoutDirection,
+  LayoutServices,
+  LayoutMagistrat,
+  LayoutAdmin,
+  LayoutSignup,
+  LayoutMandataire
+};
