@@ -15,6 +15,7 @@ Array [
     "etablissement_id": null,
     "extinction": null,
     "id": 3,
+    "import_flag": null,
     "manda": "UDAHF",
     "mandataire_id": 1,
     "nom": null,
