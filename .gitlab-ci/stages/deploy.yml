@@ -95,7 +95,7 @@ Create namespace:
         --set image.tag=${IMAGE_TAG}
         --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=${LETSENCRYPT_ISSUER}
         --set ingress.hosts[0].host=${FRONTEND_HOST}
-        --set ingress.tls[0].host=${FRONTEND_HOST}
+        --set ingress.tls[0].hosts[0]=${FRONTEND_HOST}
         --values ./.k8s/app/value.yml
         --wait || helm delete --purge ${K8S_PROJECT}-app-${BRANCH_HASH}
 
