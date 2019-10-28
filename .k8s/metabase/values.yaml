@@ -75,9 +75,9 @@ ingress:
     appgw.ingress.kubernetes.io/ssl-redirect: "true"
   tls:
     # Secrets must be manually created in the namespace.
-    - secretName: ${CERTIFICATE_NAME}-secret
-    #   hosts:
-    #     - metabase.domain.com
+    - secretName: ${K8S_PROJECT}-certificate-${BRANCH_HASH}-secret
+      hosts:
+        - ${METABASE_HOST}
 
 # A custom log4j.properties file can be provided using a multiline YAML string.
 # See https://github.com/metabase/metabase/blob/master/resources/log4j.properties

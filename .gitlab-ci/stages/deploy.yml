@@ -99,21 +99,21 @@ Create namespace:
           ${METABASE_HOST} }"
         --wait || helm delete --purge ${K8S_PROJECT}-certificate-${BRANCH_HASH}
 
-Deploy Certificate (dev):
-  <<: *deploy_stage
-  <<: *dev_stage
-  <<: *deploy_certificate
-  variables:
-    <<: *deploy_stage_variables
-    LETSENCRYPT_ISSUER: letsencrypt-staging
+# Deploy Certificate (dev):
+#   <<: *deploy_stage
+#   <<: *dev_stage
+#   <<: *deploy_certificate
+#   variables:
+#     <<: *deploy_stage_variables
+#     LETSENCRYPT_ISSUER: letsencrypt-staging
 
-Deploy Certificate (incubateur):
-  <<: *deploy_stage
-  <<: *incubateur_stage
-  <<: *deploy_certificate
-  variables:
-    <<: *deploy_stage_variables
-    LETSENCRYPT_ISSUER: letsencrypt-prod
+# Deploy Certificate (incubateur):
+#   <<: *deploy_stage
+#   <<: *incubateur_stage
+#   <<: *deploy_certificate
+#   variables:
+#     <<: *deploy_stage_variables
+#     LETSENCRYPT_ISSUER: letsencrypt-prod
 
 #
 #
