@@ -8,6 +8,12 @@ deployment:
   readinessProbe:
     initialDelaySeconds: 30
 
+  resources:
+    limits:
+      memory: 64Mi
+    requests:
+      memory: 32Mi
+
   env:
   - name: PORT
     value: "80"
