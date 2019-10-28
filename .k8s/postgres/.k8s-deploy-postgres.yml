@@ -7,7 +7,7 @@
     - envsubst < ./.k8s/postgres/values-postgresql.yaml > ./values-postgresql.yaml
     #
     - helm init --client-only
-    - helm upgrade --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE}
+    - helm upgrade --install ${POSTGRES_HOST} --wait -f ./values-postgresql.yaml stable/postgresql --namespace ${K8S_NAMESPACE} --version ${HELM_POSTGRES_CHART_VERSION}
     #
     - export POSTGRESQL_USER=emjpm
     - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
