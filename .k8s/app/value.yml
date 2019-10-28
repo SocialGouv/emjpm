@@ -2,15 +2,13 @@ image:
   repository: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app
   tag: latest
 
-resources:
-  limits:
-    cpu: 50m
-    memory: 32Mi
-  requests:
-    cpu: 5m
-    memory: 16Mi
+deployment:
+  livenessProbe:
+    initialDelaySeconds: 30
+  readinessProbe:
+    initialDelaySeconds: 30
 
-env:
+  env:
   - name: PORT
     value: "80"
   - name: NODE_ENV
