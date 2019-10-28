@@ -1,7 +1,6 @@
 #
 
 include:
-  - /.k8s/api/.k8s-deploy-api.yml
   - /.k8s/postgres/.k8s-deploy-postgres.yml
   - /.k8s/hasura/.k8s-deploy-hasura.yml
   - /.k8s/metabase/.k8s-deploy-metabase.yml
