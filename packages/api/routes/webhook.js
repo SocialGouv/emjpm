@@ -5,6 +5,8 @@ const { ServiceAntenne } = require("../model/ServiceAntenne");
 const { Mandataire } = require("../model/Mandataire");
 const { Tis } = require("../model/Tis");
 const { User } = require("../model/User");
+const { MesuresImport } = require("../model/MesuresImport");
+const { Mesures } = require("../model/Mesures");
 const { reservationEmail } = require("../email/reservation-email");
 
 const getUser = (headquarter, mandataire, currentUser) => {
@@ -42,8 +44,60 @@ router.post("/mesure-reservation", async function(req, res) {
   }
 });
 
+const toDate = dateStr => {
+  const [day, month, year] = dateStr.split("/");
+  return new Date(year, month - 1, day);
+};
+
 router.post("/mesures-import", async function(req, res) {
-  // console.log(req.body.event.data.new.id);
+  const importId = req.body.event.data.new.id;
+  const mesuresImport = await MesuresImport.query().findById(importId);
+  const mandataire = Mandataire.query().findOne({
+    user_id: mesuresImport.user_id
+  });
+  const datas = mesuresImport.content;
+  for (const data of datas) {
+    const {
+      date_ouverture,
+      code_postal,
+      residence,
+      numero_rg,
+      civilite,
+      ville,
+      annee,
+      type
+    } = data;
+    const [mesure] = await Mesures.query().where({ numero_rg: numero_rg });
+    // console.log(mesure);
+    if (!mesure) {
+      await Mesures.query().insert({
+        date_ouverture: toDate(date_ouverture),
+        code_postal,
+        residence,
+        numero_rg,
+        civilite,
+        ville,
+        annee,
+        type,
+        mandataire_id: mandataire.id
+      });
+    } else {
+      await Mesures.query()
+        .findById(mesure.id)
+        .patch({
+          date_ouverture: toDate(date_ouverture),
+          code_postal,
+          residence,
+          numero_rg,
+          civilite,
+          ville,
+          annee,
+          type,
+          mandataire_id: mandataire.id
+        });
+    }
+  }
+  // console.log(content);
   res.json({ success: true });
 });
 
