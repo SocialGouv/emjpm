@@ -2,7 +2,7 @@ import { Heading1, Heading4, Button, Card, Input, Select, Text } from "@socialgo
 import { Formik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { SignupContext } from "./context";
@@ -31,15 +31,13 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
   }));
 
   return (
-    <Card sx={cardStyle}>
-      <Flex flexDirection="column">
-        <Box pl={5} pb={3}>
-          <Heading1>
-            {user.type === "individuel"
-              ? `Création d'un compte de mandataire individuel`
-              : `Création d'un compte de mandataire préposé d'établissement`}
-          </Heading1>
-        </Box>
+    <Fragment>
+      <Heading1 px="1">
+        {user.type === "individuel"
+          ? `Création d'un compte de mandataire individuel`
+          : `Création d'un compte de mandataire préposé d'établissement`}
+      </Heading1>
+      <Card sx={cardStyle}>
         <Flex>
           <Box width={[1, 2 / 5]} sx={grayBox}>
             <Box height="80px">
@@ -273,8 +271,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             </Box>
           </Box>
         </Flex>
-      </Flex>
-    </Card>
+      </Card>
+    </Fragment>
   );
 };
 

@@ -26,10 +26,10 @@ const LayoutSignup = props => {
           }
         `}
       />
-      <Header {...props} dropDownLinks={dropDownLinks} isDisconnected />
-      <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        {children}
+      <Box sx={{ height: "66px", position: "relative", "z-index": "1000" }} bg="cardPrimary">
+        <Header {...props} dropDownLinks={dropDownLinks} isDisconnected />
       </Box>
+      {children}
       <Box bg="cardPrimary">
         <BoxWrapper px="1">
           <Footer />
