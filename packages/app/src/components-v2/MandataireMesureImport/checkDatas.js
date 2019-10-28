@@ -2,7 +2,7 @@ const REGEX_DATE_OUVERTURE = "^([0-2][0-9]|(3)[0-1])(/)((0[0-9])|(1[0-2]))(/)(([
 const REGEX_ANNEE = "^([12][0-9]{3})$";
 const REGEX_CODE_POSTAL = "^[0-9]{5}$";
 
-const HEADER = [
+export const HEADER = [
   "date_ouverture",
   "type",
   "code_postal",

@@ -1,7 +1,6 @@
 import { Card, Heading3, Text } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
-import { FileExcel } from "styled-icons/fa-regular/FileExcel";
 import { FilePdf } from "styled-icons/fa-regular/FilePdf";
 import { MandataireAddMesureImport } from "./MandataireAddMesureImport";
 
@@ -37,41 +36,13 @@ const MandataireMesureImport = () => {
           <Box mb={2}>
             <Heading3 mb="2">{`Import de vos mesures avec un fichier au format csv`}</Heading3>
             <Text mb="1" lineHeight="2">
-              {`Pour simplifier la première mise à jour de toutes vos mesures en cours, vous pouvez importer vos mesures avec un fichier csv. Ce fichier csv doit être conforme au modèle que vous pourrez télécharger ci-dessous et devra contenir les informations suivantes :`}
+              {`Pour simplifier la première mise à jour de toutes vos mesures en cours, vous pouvez importer vos mesures avec un fichier csv. Ce fichier csv doit être conforme au modèle décrit dans la note explicative ci-dessous:`}
             </Text>
-            <Text ml={3} mb="1" lineHeight="1.2">
-              {`- La date d’ouverture de la mesure`}
-            </Text>
-            <Text ml={3} mb="1" lineHeight="1.2">
-              {`- Le type de mesure : Tutelle, curatelle, sauvegarde de justice, mesure ad hoc, MAJ`}
-            </Text>
-            <Text ml={3} mb="1" lineHeight="1.2">
-              {`- Le code postal, la ville et le type de résidence du majeur à proteger`}
-            </Text>
-            <Text ml={3} mb="1" lineHeight="1.2">
-              {`- la ville et le type de résidence du majeur à proteger`}
-            </Text>
-            <Text ml={3} mb="1" lineHeight="1.2">
-              {`- Le genre du majeur à protéger : H ou F`}
-            </Text>
-            <Text ml={3} mb="1" lineHeight="1.2">
-              {`- L’année de naissance du majeur à protéger`}
-            </Text>
-            <Text ml={3} mb="1" lineHeight="1.2">
-              {`- Le numéro de dossier tel que vous avez l’habitude de le connaitre (facultatif)`}
-            </Text>
-
             <Flex flexDirection="row" justifyContent="center" mt={2} mb={2}>
               <DocumentLink document="/static/docs/Notice_d_utilisation_de_l_import.pdf">
                 <FilePdf size="86" width="100%" color="#FF0000" />
                 <Box textAlign="center" mt={2} color="#0067EA">
                   Télécharger la note explicative (.pdf)
-                </Box>
-              </DocumentLink>
-              <DocumentLink document="/static/docs/Template_Import-Excel_e-MJPM.xlsx">
-                <FileExcel size="86" width="100%" color="#008000" />
-                <Box textAlign="center" mt={2} color="#0067EA">
-                  Télécharger le modèle de fichier excel (.xlsx)
                 </Box>
               </DocumentLink>
             </Flex>
