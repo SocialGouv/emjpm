@@ -11,6 +11,7 @@ include:
 
 .deploy_stage: &deploy_stage
   stage: "Deploy"
+  retry: 1
   dependencies: []
   services:
     - docker:dind
