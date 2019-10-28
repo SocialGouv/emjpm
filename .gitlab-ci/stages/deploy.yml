@@ -2,7 +2,6 @@
 
 include:
   - /.k8s/api/.k8s-deploy-api.yml
-  - /.k8s/app/.k8s-deploy-app.yml
   - /.k8s/postgres/.k8s-deploy-postgres.yml
   - /.k8s/hasura/.k8s-deploy-hasura.yml
   - /.k8s/metabase/.k8s-deploy-metabase.yml
@@ -81,30 +80,41 @@ Create namespace:
 #
 #
 
-.deploy-frontend: &deploy_frontend
-  <<: *deploy_stage
-  extends: .k8s-deploy-app
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: app
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-    PORT: 80
-  after_script:
-    # NOTE(douglasduteil): re-run env.sh
-    # Because the `after_script` runs in a separated shell context.
-    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
-    - source ./.gitlab-ci/env.sh
-    - echo "Frontend available at - ${FRONTEND_URL}"
+
+.deploy_app: &deploy_app
+  extends: .base_docker_helm_image_stage
+  script:
+    - helm init --client-only
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.3.0
+    - helm upgrade
+        ${K8S_PROJECT}-app-${BRANCH_HASH}
+        socialgouv/nodejs
+        --debug
+        --install
+        --set image.tag=${IMAGE_TAG}
+        --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=${LETSENCRYPT_ISSUER}
+        --set ingress.hosts[0].host=${FRONTEND_HOST}
+        --set ingress.tls[0].host=${FRONTEND_HOST}
+        --values ./.k8s/app/value.yml
+        --wait || helm delete --purge ${K8S_PROJECT}-app-${BRANCH_HASH}
 
 #
 
 Deploy App (dev):
-  <<: *deploy_frontend
+  <<: *deploy_stage
   <<: *dev_stage
+  <<: *deploy_app
+  variables:
+    <<: *deploy_stage_variables
+    LETSENCRYPT_ISSUER: letsencrypt-staging
 
 Deploy App (incubateur):
-  <<: *deploy_frontend
+  <<: *deploy_stage
   <<: *incubateur_stage
+  <<: *deploy_app
+  variables:
+    <<: *deploy_stage_variables
+    LETSENCRYPT_ISSUER: letsencrypt-prod
 
 #
 #
