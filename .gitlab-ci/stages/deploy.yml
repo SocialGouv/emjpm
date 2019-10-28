@@ -81,10 +81,8 @@ Create namespace:
 #
 
 .deploy_app: &deploy_app
-  extends: .base_docker_helm_image_stage
+  extends: .base_docker_helm_social_gouv_image_stage
   script:
-    - helm init --client-only
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/${SOCIALGOUV_HELMCHART_VERSION}
     - envsubst < ./.k8s/app/value.yml > ./value.yml
     - helm upgrade
         ${K8S_PROJECT}-app-${BRANCH_HASH}
@@ -122,11 +120,8 @@ Deploy App (incubateur):
 
 
 .deploy_api: &deploy_api
-  extends: .base_docker_helm_image_stage
+  extends: .base_docker_helm_social_gouv_image_stage
   script:
-    - helm init --client-only
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/${SOCIALGOUV_HELMCHART_VERSION}
-    #
     - export POSTGRESQL_USER=emjpm
     - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
     #

@@ -18,6 +18,14 @@
   extends: .base_docker_kube_image_stage
   image: $CI_REGISTRY/socialgouv/docker/helm:0.7.1
 
+.base_docker_helm_social_gouv_image_stage:
+  extends: .base_docker_helm_image_stage
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    - helm init --client-only
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.4.2
+
 #
 
 .base_register_stage:
