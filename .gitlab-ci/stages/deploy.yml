@@ -81,12 +81,12 @@ Create namespace:
 #
 #
 
-
 .deploy_app: &deploy_app
   extends: .base_docker_helm_image_stage
   script:
     - helm init --client-only
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.4.2
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/${SOCIALGOUV_HELMCHART_VERSION}
+    - envsubst < ./.k8s/app/value.yml > ./value.yml
     - helm upgrade
         ${K8S_PROJECT}-app-${BRANCH_HASH}
         socialgouv/nodejs
@@ -96,7 +96,7 @@ Create namespace:
         --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=${LETSENCRYPT_ISSUER}
         --set ingress.hosts[0].host=${FRONTEND_HOST}
         --set ingress.tls[0].hosts[0]=${FRONTEND_HOST}
-        --values ./.k8s/app/value.yml
+        --values ./value.yml
         --wait || helm delete --purge ${K8S_PROJECT}-app-${BRANCH_HASH}
 
 #
@@ -121,30 +121,46 @@ Deploy App (incubateur):
 #
 #
 
-.deploy-api: &deploy_api
-  <<: *deploy_stage
-  extends: .k8s-deploy-api
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: api
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-    PORT: 80
-  after_script:
-    # NOTE(douglasduteil): re-run env.sh
-    # Because the `after_script` runs in a separated shell context.
-    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
-    - source ./.gitlab-ci/env.sh
-    - echo "Api available at - ${API_URL}"
+
+.deploy_api: &deploy_api
+  extends: .base_docker_helm_image_stage
+  script:
+    - helm init --client-only
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/${SOCIALGOUV_HELMCHART_VERSION}
+    #
+    - export POSTGRESQL_USER=emjpm
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+    #
+    - envsubst < ./.k8s/api/value.yml > ./value.yml
+    - helm upgrade
+        ${K8S_PROJECT}-api-${BRANCH_HASH}
+        socialgouv/nodejs
+        --debug
+        --install
+        --set image.tag=${IMAGE_TAG}
+        --set ingress.annotations."certmanager\.k8s\.io/cluster-issuer"=${LETSENCRYPT_ISSUER}
+        --set ingress.hosts[0].host=${API_HOST}
+        --set ingress.tls[0].hosts[0]=${API_HOST}
+        --values ./value.yml
+        --wait || helm delete --purge ${K8S_PROJECT}-api-${BRANCH_HASH}
 
 #
 
 Deploy Api (dev):
-  <<: *deploy_api
+  <<: *deploy_stage
   <<: *dev_stage
+  <<: *deploy_api
+  variables:
+    <<: *deploy_stage_variables
+    LETSENCRYPT_ISSUER: letsencrypt-staging
 
 Deploy Api (incubateur):
-  <<: *deploy_api
+  <<: *deploy_stage
   <<: *incubateur_stage
+  <<: *deploy_api
+  variables:
+    <<: *deploy_stage_variables
+    LETSENCRYPT_ISSUER: letsencrypt-prod
 
 #
 #
