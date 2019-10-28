@@ -7,6 +7,7 @@ const { Tis } = require("../model/Tis");
 const { User } = require("../model/User");
 const { MesuresImport } = require("../model/MesuresImport");
 const { Mesures } = require("../model/Mesures");
+const { Department } = require("../model/Departments");
 const { reservationEmail } = require("../email/reservation-email");
 
 const getUser = (headquarter, mandataire, currentUser) => {
@@ -49,55 +50,55 @@ const toDate = dateStr => {
   return new Date(year, month - 1, day);
 };
 
+const saveOrUpdateMesure = async mesureDatas => {
+  const code = mesureDatas.code_postal.substring(0, 2);
+  const department = await Department.query().findOne({
+    code
+  });
+  if (!department) {
+    throw new Error(`no departement found with code ${code}`);
+  }
+  const [mesure] = await Mesures.query().where({
+    numero_rg: mesureDatas.numero_rg
+  });
+  if (!mesure) {
+    await Mesures.query().insert(mesureDatas);
+  } else {
+    await Mesures.query()
+      .findById(mesure.id)
+      .patch(mesureDatas);
+  }
+};
+
 router.post("/mesures-import", async function(req, res) {
   const importId = req.body.event.data.new.id;
   const mesuresImport = await MesuresImport.query().findById(importId);
-  const mandataire = Mandataire.query().findOne({
+  if (!mesuresImport) {
+    throw new Error(`mesures_import with id ${importId} does not exist.`);
+  }
+  const mandataire = await Mandataire.query().findOne({
     user_id: mesuresImport.user_id
   });
-  const datas = mesuresImport.content;
-  for (const data of datas) {
-    const {
-      date_ouverture,
-      code_postal,
-      residence,
-      numero_rg,
-      civilite,
-      ville,
-      annee,
-      type
-    } = data;
-    const [mesure] = await Mesures.query().where({ numero_rg: numero_rg });
-    // console.log(mesure);
-    if (!mesure) {
-      await Mesures.query().insert({
-        date_ouverture: toDate(date_ouverture),
-        code_postal,
-        residence,
-        numero_rg,
-        civilite,
-        ville,
-        annee,
-        type,
-        mandataire_id: mandataire.id
-      });
-    } else {
-      await Mesures.query()
-        .findById(mesure.id)
-        .patch({
-          date_ouverture: toDate(date_ouverture),
-          code_postal,
-          residence,
-          numero_rg,
-          civilite,
-          ville,
-          annee,
-          type,
-          mandataire_id: mandataire.id
-        });
-    }
+  if (!mandataire) {
+    throw new Error(
+      `mandataire with user_id ${mesuresImport.user_id} does not exist.`
+    );
   }
-  // console.log(content);
+
+  // save or update mesures
+  for (const data of mesuresImport.content) {
+    saveOrUpdateMesure({
+      ...data,
+      date_ouverture: toDate(data.date_ouverture),
+      mandataire_id: mandataire.id,
+      status: "Mesure en cours"
+    });
+  }
+  // mark mesures_import as completed
+  await MesuresImport.query()
+    .findById(importId)
+    .patch({ status: "IMPORT", processed_at: new Date() });
+
   res.json({ success: true });
 });
 
