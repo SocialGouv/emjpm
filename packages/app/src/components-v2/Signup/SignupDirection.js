@@ -2,7 +2,7 @@ import { Heading1, Heading4, Button, Card, Select, Text } from "@socialgouv/emjp
 import { Formik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { DIRECTION_TYPE_LABEL_VALUE } from "../../constants/direction";
@@ -15,12 +15,10 @@ export const SignupDirection = () => {
   const { user, direction, setDirection, validateStepOne } = useContext(SignupContext);
 
   return (
-    <Card sx={cardStyle}>
-      <Flex flexDirection="column">
-        <Box pl={5} pb={3}>
-          <Heading1>{`Création d'un compte d'agent de l'état`}</Heading1>
-        </Box>
-        <Flex>
+    <Fragment>
+      <Card sx={cardStyle}>
+        <Heading1 px="1">{`Création d'un compte d'agent de l'état`}</Heading1>
+        <Flex flexDirection="column">
           <Box width={[1, 2 / 5]} sx={grayBox}>
             <Box height="80px" pt={1}>
               <Heading4>{`Institution`}</Heading4>
@@ -113,7 +111,7 @@ export const SignupDirection = () => {
             </Box>
           </Box>
         </Flex>
-      </Flex>
-    </Card>
+      </Card>
+    </Fragment>
   );
 };
