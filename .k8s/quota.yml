@@ -9,7 +9,7 @@ metadata:
 spec:
   hard:
     #   500m // api
-    # + 500m // app
+    # + 250m // app
     # +  50m // dataset (wait-for-postgres)
     # + 250m // dataset (inject)
     # + 500m // graphql-server
@@ -21,11 +21,11 @@ spec:
     # + 100m // backup cronjob (postgres)
     # + 100m // backup cronjob (backup)
     # ======
-    #  3300m    ~3.3 CPU x2
-    limits.cpu: 7000m
+    #  3050m    ~3.05 CPU x2
+    limits.cpu: 6500m
 
     #   512Mi // api
-    # + 512Mi // app
+    # + 256Mi // app
     # +  32Mi // dataset (wait-for-postgres)
     # + 256Mi // dataset (inject)
     # + 256Mi // graphql-server
@@ -37,5 +37,5 @@ spec:
     # +  64Mi // backup cronjob (postgres)
     # +  64Mi // backup cronjob (backup)
     # =======
-    #  2432Mi      2.375 Gi x2
-    limits.memory: 5Gi
+    #  2176Mi      2.176 Gi x2
+    limits.memory: 2.125Gi
