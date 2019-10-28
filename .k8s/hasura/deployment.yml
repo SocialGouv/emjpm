@@ -51,6 +51,10 @@ spec:
               value: "http://${K8S_PROJECT}-api-${BRANCH_HASH}/webhook/email-reservation"
             - name: WEB_HOOK_URL_MESURES_IMPORT
               value: "http://${K8S_PROJECT}-api-${BRANCH_HASH}/webhook/mesures-import"
+            - name: WEB_HOOK_URL_MESURE_STATES_MANDATAIRE
+              value: "http://${K8S_PROJECT}-api-${BRANCH_HASH}/mesure-states-mandataire"
+            - name: WEB_HOOK_URL_MESURE_STATES_ANTENNE
+              value: "http://${K8S_PROJECT}-api-${BRANCH_HASH}/mesure-states-antenne"
       initContainers:
         - name: check-db-ready
           image: postgres:10.10

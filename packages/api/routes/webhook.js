@@ -29,7 +29,7 @@ const getUser = (headquarter, mandataire, currentUser) => {
   return null;
 };
 
-router.post("/mesure-reservation", async function(req, res) {
+router.post("/email-reservation", async function(req, res) {
   const newMesure = req.body.event.data.new;
   const { ti_id, antenne_id, mandataire_id } = newMesure;
   const [currentTi] = await Tis.query().where("id", ti_id);
@@ -101,10 +101,15 @@ router.post("/mesures-import", async function(req, res) {
     .findById(importId)
     .patch({ status: "IMPORT", processed_at: new Date() });
 
-  // update mesures_en_cours
+  res.json({ success: true });
+});
+
+// UPDATE MANDATAIRE MESURE STATES
+
+const updateMandataireMesureStates = async mandataire_id => {
   const counters = await Mesures.query()
     .where({
-      mandataire_id: mandataire.id
+      mandataire_id
     })
     .groupBy("status")
     .select(raw("status, count(*)"));
@@ -113,12 +118,69 @@ router.post("/mesures-import", async function(req, res) {
     counter => counter.status === "Mesure en cours"
   );
   const mesures_en_attente = counters.find(
-    counter => counter.status === "Eteindre mesure"
+    counter => counter.status === "Mesure en attente"
   );
   await Mandataire.query().patch({
     mesures_en_cours: mesures_en_cours ? mesures_en_cours.count : 0,
     mesures_en_attente: mesures_en_attente ? mesures_en_attente.count : 0
   });
+};
+
+router.post("/mesure-states-mandataire", async function(req, res) {
+  const oldMesure = req.body.event.data.old;
+  const newMesure = req.body.event.data.new;
+
+  const oldMandataireId = oldMesure ? oldMesure.mandataire_id : null;
+  const newMandataireId = newMesure ? newMesure.mandataire_id : null;
+
+  if (oldMandataireId || newMandataireId) {
+    await updateMandataireMesureStates(
+      newMandataireId ? newMandataireId : oldMandataireId
+    );
+  }
+
+  res.json({ success: true });
+});
+
+// UPDATE ANTENNE MESURE STATES
+
+const updateAntenneMesureStates = async mandataire_id => {
+  const counters = await Mesures.query()
+    .where({
+      mandataire_id
+    })
+    .groupBy("status")
+    .select(raw("status, count(*)"));
+
+  const mesures_in_progress = counters.find(
+    counter => counter.status === "Mesure en cours"
+  );
+  const mesures_awaiting = counters.find(
+    counter => counter.status === "Mesure en attente"
+  );
+  await ServiceAntenne.query().patch({
+    mesures_in_progress: mesures_in_progress ? mesures_in_progress.count : 0,
+    mesures_awaiting: mesures_awaiting ? mesures_awaiting.count : 0
+  });
+};
+
+router.post("/mesure-states-antenne", async function(req, res) {
+  const oldMesure = req.body.event.data.old;
+  const newMesure = req.body.event.data.new;
+
+  const oldAntenneId = oldMesure ? oldMesure.antenne_id : null;
+  const newAntenneId = newMesure ? newMesure.antenne_id : null;
+
+  if (oldAntenneId && !newAntenneId) {
+    await updateAntenneMesureStates(oldAntenneId);
+  } else if (!oldAntenneId && newAntenneId) {
+    await updateAntenneMesureStates(newAntenneId);
+  } else if (oldAntenneId && newAntenneId) {
+    await updateAntenneMesureStates(oldAntenneId);
+    if (oldAntenneId !== newAntenneId) {
+      await updateAntenneMesureStates(newAntenneId);
+    }
+  }
 
   res.json({ success: true });
 });
