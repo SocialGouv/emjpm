@@ -10,6 +10,8 @@ const { Mesures } = require("../model/Mesures");
 const { Department } = require("../model/Departments");
 const { reservationEmail } = require("../email/reservation-email");
 
+const { raw } = require("objection");
+
 const getUser = (headquarter, mandataire, currentUser) => {
   if (mandataire) {
     return {
@@ -98,6 +100,25 @@ router.post("/mesures-import", async function(req, res) {
   await MesuresImport.query()
     .findById(importId)
     .patch({ status: "IMPORT", processed_at: new Date() });
+
+  // update mesures_en_cours
+  const counters = await Mesures.query()
+    .where({
+      mandataire_id: mandataire.id
+    })
+    .groupBy("status")
+    .select(raw("status, count(*)"));
+
+  const mesures_en_cours = counters.find(
+    counter => counter.status === "Mesure en cours"
+  );
+  const mesures_en_attente = counters.find(
+    counter => counter.status === "Eteindre mesure"
+  );
+  await Mandataire.query().patch({
+    mesures_en_cours: mesures_en_cours ? mesures_en_cours.count : 0,
+    mesures_en_attente: mesures_en_attente ? mesures_en_attente.count : 0
+  });
 
   res.json({ success: true });
 });
