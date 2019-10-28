@@ -4,6 +4,6 @@ const grayBox = {
   p: "5"
 };
 
-const cardStyle = { pt: "2", pb: "4", m: "1", mt: "5" };
+const cardStyle = { p: "0", m: "1", mt: "5" };
 
 export { grayBox, cardStyle };

@@ -2,9 +2,10 @@ import { useApolloClient } from "@apollo/react-hooks";
 import { Button, Card, Heading1, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { SignupContext } from "./context";
 import { CHECK_EMAIL_UNICITY } from "./queries";
 import { cardStyle, grayBox } from "./style";
@@ -51,12 +52,10 @@ export const SignupForm = () => {
   };
 
   return (
-    <Card sx={cardStyle}>
-      <Flex flexDirection="column">
-        <Box pl={5} pb={3}>
-          <Heading1>{`Création de compte`}</Heading1>
-        </Box>
-        <Flex>
+    <Fragment>
+      <Heading1 px="1">{`Création de compte`}</Heading1>
+      <Card sx={cardStyle}>
+        <Flex mt="3">
           <Box width={[1, 2 / 5]} sx={grayBox}>
             <Box height="80px">
               <Heading4>{`Information professionelle`}</Heading4>
@@ -242,7 +241,7 @@ export const SignupForm = () => {
             </Box>
           </Box>
         </Flex>
-      </Flex>
-    </Card>
+      </Card>
+    </Fragment>
   );
 };
