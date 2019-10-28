@@ -86,7 +86,7 @@ Create namespace:
   extends: .base_docker_helm_image_stage
   script:
     - helm init --client-only
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.4.0
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.4.2
     - helm upgrade
         ${K8S_PROJECT}-app-${BRANCH_HASH}
         socialgouv/nodejs
