@@ -1586,6 +1586,40 @@ tables:
       num_retries: 0
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_EMAIL_RESERVATION
+  - definition:
+      delete:
+        columns: '*'
+      enable_manual: false
+      insert:
+        columns: '*'
+      update:
+        columns:
+        - mandataire_id
+        - status
+    headers: []
+    name: mesure-states-mandataire
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: WEB_HOOK_URL_MESURE_STATES_MANDATAIRE
+  - definition:
+      delete:
+        columns: '*'
+      enable_manual: false
+      insert:
+        columns: '*'
+      update:
+        columns:
+        - antenne_id
+        - status
+    headers: []
+    name: mesure-states-antenne
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: WEB_HOOK_URL_MESURE_STATES_ANTENNE
   insert_permissions:
   - comment: null
     permission:

@@ -12,6 +12,69 @@ const { reservationEmail } = require("../email/reservation-email");
 
 const { raw } = require("objection");
 
+// TODO(tglatt): move db queries in other file
+const updateMandataireMesureStates = async mandataire_id => {
+  const counters = await Mesures.query()
+    .where({
+      mandataire_id
+    })
+    .groupBy("status")
+    .select(raw("status, count(*)"));
+
+  const mesures_en_cours = counters.find(
+    counter => counter.status === "Mesure en cours"
+  );
+  const mesures_en_attente = counters.find(
+    counter => counter.status === "Mesure en attente"
+  );
+  await Mandataire.query().patch({
+    mesures_en_cours: mesures_en_cours ? mesures_en_cours.count : 0,
+    mesures_en_attente: mesures_en_attente ? mesures_en_attente.count : 0
+  });
+};
+
+// TODO(tglatt): move db queries in other file
+const updateAntenneMesureStates = async mandataire_id => {
+  const counters = await Mesures.query()
+    .where({
+      mandataire_id
+    })
+    .groupBy("status")
+    .select(raw("status, count(*)"));
+
+  const mesures_in_progress = counters.find(
+    counter => counter.status === "Mesure en cours"
+  );
+  const mesures_awaiting = counters.find(
+    counter => counter.status === "Mesure en attente"
+  );
+  await ServiceAntenne.query().patch({
+    mesures_in_progress: mesures_in_progress ? mesures_in_progress.count : 0,
+    mesures_awaiting: mesures_awaiting ? mesures_awaiting.count : 0
+  });
+};
+
+// TODO(tglatt): move db queries in other file
+const saveOrUpdateMesure = async mesureDatas => {
+  const code = mesureDatas.code_postal.substring(0, 2);
+  const department = await Department.query().findOne({
+    code
+  });
+  if (!department) {
+    throw new Error(`no departement found with code ${code}`);
+  }
+  const [mesure] = await Mesures.query().where({
+    numero_rg: mesureDatas.numero_rg
+  });
+  if (!mesure) {
+    await Mesures.query().insert(mesureDatas);
+  } else {
+    await Mesures.query()
+      .findById(mesure.id)
+      .patch(mesureDatas);
+  }
+};
+
 const getUser = (headquarter, mandataire, currentUser) => {
   if (mandataire) {
     return {
@@ -52,26 +115,6 @@ const toDate = dateStr => {
   return new Date(year, month - 1, day);
 };
 
-const saveOrUpdateMesure = async mesureDatas => {
-  const code = mesureDatas.code_postal.substring(0, 2);
-  const department = await Department.query().findOne({
-    code
-  });
-  if (!department) {
-    throw new Error(`no departement found with code ${code}`);
-  }
-  const [mesure] = await Mesures.query().where({
-    numero_rg: mesureDatas.numero_rg
-  });
-  if (!mesure) {
-    await Mesures.query().insert(mesureDatas);
-  } else {
-    await Mesures.query()
-      .findById(mesure.id)
-      .patch(mesureDatas);
-  }
-};
-
 router.post("/mesures-import", async function(req, res) {
   const importId = req.body.event.data.new.id;
   const mesuresImport = await MesuresImport.query().findById(importId);
@@ -89,13 +132,21 @@ router.post("/mesures-import", async function(req, res) {
 
   // save or update mesures
   for (const data of mesuresImport.content) {
-    saveOrUpdateMesure({
+    await saveOrUpdateMesure({
       ...data,
       date_ouverture: toDate(data.date_ouverture),
       mandataire_id: mandataire.id,
-      status: "Mesure en cours"
+      status: "Mesure en cours",
+      import_flag: mesuresImport.id
     });
   }
+
+  await Mesures.query()
+    .patch({ import_flag: null })
+    .where({ import_flag: mesuresImport.id });
+
+  await updateMandataireMesureStates(mandataire.id);
+
   // mark mesures_import as completed
   await MesuresImport.query()
     .findById(importId)
@@ -106,29 +157,21 @@ router.post("/mesures-import", async function(req, res) {
 
 // UPDATE MANDATAIRE MESURE STATES
 
-const updateMandataireMesureStates = async mandataire_id => {
-  const counters = await Mesures.query()
-    .where({
-      mandataire_id
-    })
-    .groupBy("status")
-    .select(raw("status, count(*)"));
-
-  const mesures_en_cours = counters.find(
-    counter => counter.status === "Mesure en cours"
-  );
-  const mesures_en_attente = counters.find(
-    counter => counter.status === "Mesure en attente"
-  );
-  await Mandataire.query().patch({
-    mesures_en_cours: mesures_en_cours ? mesures_en_cours.count : 0,
-    mesures_en_attente: mesures_en_attente ? mesures_en_attente.count : 0
-  });
+const isFromImport = mesure => {
+  return mesure && mesure.import_flag;
 };
 
 router.post("/mesure-states-mandataire", async function(req, res) {
   const oldMesure = req.body.event.data.old;
   const newMesure = req.body.event.data.new;
+
+  if (isFromImport(oldMesure) || isFromImport(newMesure)) {
+    res.json({
+      success: true,
+      message: `import in progress`
+    });
+    return;
+  }
 
   const oldMandataireId = oldMesure ? oldMesure.mandataire_id : null;
   const newMandataireId = newMesure ? newMesure.mandataire_id : null;
@@ -144,29 +187,17 @@ router.post("/mesure-states-mandataire", async function(req, res) {
 
 // UPDATE ANTENNE MESURE STATES
 
-const updateAntenneMesureStates = async mandataire_id => {
-  const counters = await Mesures.query()
-    .where({
-      mandataire_id
-    })
-    .groupBy("status")
-    .select(raw("status, count(*)"));
-
-  const mesures_in_progress = counters.find(
-    counter => counter.status === "Mesure en cours"
-  );
-  const mesures_awaiting = counters.find(
-    counter => counter.status === "Mesure en attente"
-  );
-  await ServiceAntenne.query().patch({
-    mesures_in_progress: mesures_in_progress ? mesures_in_progress.count : 0,
-    mesures_awaiting: mesures_awaiting ? mesures_awaiting.count : 0
-  });
-};
-
 router.post("/mesure-states-antenne", async function(req, res) {
   const oldMesure = req.body.event.data.old;
   const newMesure = req.body.event.data.new;
+
+  if (isFromImport(oldMesure) || isFromImport(newMesure)) {
+    res.json({
+      success: true,
+      message: `import in progress`
+    });
+    return;
+  }
 
   const oldAntenneId = oldMesure ? oldMesure.antenne_id : null;
   const newAntenneId = newMesure ? newMesure.antenne_id : null;
