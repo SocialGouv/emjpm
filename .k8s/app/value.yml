@@ -4,9 +4,9 @@ image:
 
 deployment:
   livenessProbe:
-    initialDelaySeconds: 30
+    initialDelaySeconds: 45
   readinessProbe:
-    initialDelaySeconds: 30
+    initialDelaySeconds: 45
 
   resources:
     limits:
