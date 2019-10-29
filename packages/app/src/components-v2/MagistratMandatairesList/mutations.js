@@ -46,5 +46,12 @@ export const CHOOSE_MANDATAIRE = gql`
         date_ouverture
       }
     }
+    update_mandataires(where: { id: { _eq: $mandataire_id } }, _inc: { mesures_en_cours: 1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_en_cours
+      }
+    }
   }
 `;

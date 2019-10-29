@@ -1,5 +1,15 @@
 import gql from "graphql-tag";
 
+export const MESURE = gql`
+  query mesure($id: Int!) {
+    mesures(where: { id: { _eq: $id } }) {
+      id
+      mandataire_id
+      antenne_id
+    }
+  }
+`;
+
 export const MESURES = gql`
   query mesures($antenne: Int, $type: String, $status: String, $searchText: String, $offset: Int) {
     mesures_aggregate(

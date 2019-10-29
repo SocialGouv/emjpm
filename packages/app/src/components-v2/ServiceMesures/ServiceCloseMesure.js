@@ -1,13 +1,13 @@
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { Formik } from "formik";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
-import { Formik } from "formik";
-import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
-
 import { CLOSE_MESURE } from "./mutations";
-import { Select, Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { MESURE } from "./queries";
 
 const EXTINCTION_LABEL_VALUE = [
   { label: "caducité", value: "caducité" },
@@ -21,8 +21,22 @@ const EXTINCTION_LABEL_VALUE = [
 
 export const ServiceCloseMesure = props => {
   const { currentMesure } = props;
-  const [UpdateMesure] = useMutation(CLOSE_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+  const { data, loading, error } = useQuery(MESURE, {
+    variables: {
+      id: currentMesure
+    }
+  });
+  const [UpdateMesure] = useMutation(CLOSE_MESURE);
+  if (error) {
+    return <div>error</div>;
+  }
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  const mesure = data.mesures[0];
+
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
@@ -41,6 +55,7 @@ export const ServiceCloseMesure = props => {
               UpdateMesure({
                 variables: {
                   id: currentMesure,
+                  antenne_id: mesure.antenne_id,
                   reason_extinction: values.reason_extinction.value,
                   extinction: values.extinction
                 },
