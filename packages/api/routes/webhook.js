@@ -81,15 +81,31 @@ const saveOrUpdateMesure = async mesureDatas => {
   if (!department) {
     throw new Error(`no departement found with code ${code}`);
   }
+
+  const ti = await Tis.query().findOne({
+    siret: mesureDatas.tribunal_siret
+  });
+  if (!ti) {
+    throw new Error(
+      `ti with siret ${mesureDatas.tribunal_siret} does not exist.`
+    );
+  }
+
+  const data = {
+    ...mesureDatas,
+    department_id: department.id,
+    ti_id: ti.id
+  };
+
   const [mesure] = await Mesures.query().where({
-    numero_rg: mesureDatas.numero_rg
+    numero_rg: data.numero_rg
   });
   if (!mesure) {
-    await Mesures.query().insert(mesureDatas);
-  } else if (mesure.mandataire_id === mesureDatas.mandataire_id) {
+    await Mesures.query().insert(data);
+  } else if (mesure.mandataire_id === data.mandataire_id) {
     await Mesures.query()
       .findById(mesure.id)
-      .patch(mesureDatas);
+      .patch(data);
   }
 };
 
