@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.4.2](https://github.com/SocialGouv/emjpm/compare/v25.4.1...v25.4.2) (2019-10-29)
+
+
+### Bug Fixes
+
+* **choose-mandataire:** decremeent mesure states ([#917](https://github.com/SocialGouv/emjpm/issues/917)) ([c44b8c4](https://github.com/SocialGouv/emjpm/commit/c44b8c4))
+* **email-reservation:** send email to all user belonging to antenne ([#918](https://github.com/SocialGouv/emjpm/issues/918)) ([1f16354](https://github.com/SocialGouv/emjpm/commit/1f16354))
+
+
+
+
+
 ## [25.4.1](https://github.com/SocialGouv/emjpm/compare/v25.4.0...v25.4.1) (2019-10-29)
 
 **Note:** Version bump only for package @emjpm/api
