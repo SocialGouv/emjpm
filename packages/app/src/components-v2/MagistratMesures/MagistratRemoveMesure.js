@@ -1,19 +1,36 @@
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
+import { Formik } from "formik";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
-import { Formik } from "formik";
-import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
-
-import { DELETE_MESURE } from "./mutations";
-import { Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { DELETE_ANTENNE_MESURE, DELETE_MANDATAIRE_MESURE } from "./mutations";
+import { MESURE } from "./queries";
 
 export const MagistratRemoveMesure = props => {
   const { currentMesure } = props;
-  const [UpdateMesure] = useMutation(DELETE_MESURE);
+  const { data, loading, error } = useQuery(MESURE, {
+    variables: {
+      id: currentMesure
+    }
+  });
 
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+
+  const [DeleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE);
+  const [DeleteAntenneMesure] = useMutation(DELETE_ANTENNE_MESURE);
+
+  if (error) {
+    return <div>error</div>;
+  }
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  const mesure = data.mesures[0];
+
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
@@ -31,12 +48,23 @@ export const MagistratRemoveMesure = props => {
         <Formik
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              UpdateMesure({
-                variables: {
-                  id: currentMesure
-                },
-                refetchQueries: ["mesures"]
-              });
+              if (mesure.mandataire_id) {
+                DeleteMandataireMesure({
+                  variables: {
+                    id: currentMesure,
+                    mandataire_id: mesure.mandataire_id
+                  },
+                  refetchQueries: ["mesures"]
+                });
+              } else if (mesure.antenne_id) {
+                DeleteAntenneMesure({
+                  variables: {
+                    id: currentMesure,
+                    antenne_id: mesure.antenne_id
+                  },
+                  refetchQueries: ["mesures"]
+                });
+              }
               setSubmitting(false);
               setPanelType(PANEL_TYPE.REMOVE);
               setCurrentMesure(null);

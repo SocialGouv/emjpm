@@ -49,10 +49,32 @@ export const EDIT_MESURE = gql`
   }
 `;
 
-export const DELETE_MESURE = gql`
-  mutation deleteMesure($id: Int!) {
+export const DELETE_MANDATAIRE_MESURE = gql`
+  mutation deleteMesure($id: Int!, $mandataire_id: Int) {
     delete_mesures(where: { id: { _eq: $id } }) {
       affected_rows
+    }
+    update_mandataires(where: { id: { _eq: $mandataire_id } }, _inc: { mesures_en_attente: -1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_en_attente
+      }
+    }
+  }
+`;
+
+export const DELETE_ANTENNE_MESURE = gql`
+  mutation deleteMesure($id: Int!, $antenne_id: Int) {
+    delete_mesures(where: { id: { _eq: $id } }) {
+      affected_rows
+    }
+    update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_awaiting: -1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_awaiting
+      }
     }
   }
 `;
