@@ -43,6 +43,8 @@ test("mandataire should update his profile", async () => {
   expect(newProfileRow.telephone).toBe(newProfile.telephone);
   expect(newUserRow.email).toBe(newProfile.email);
 
-  expect(response.body).toMatchSnapshot();
+  expect(response.body).toMatchSnapshot({
+    created_at: expect.any(String)
+  });
   expect(response.status).toBe(200);
 });

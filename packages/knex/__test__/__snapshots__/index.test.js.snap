@@ -560,12 +560,6 @@ Object {
     "nullable": false,
     "type": "integer",
   },
-  "import_flag": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
   "mandataire_id": Object {
     "defaultValue": null,
     "maxLength": null,
