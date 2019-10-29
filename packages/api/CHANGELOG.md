@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.4.0](https://github.com/SocialGouv/emjpm/compare/v25.3.3...v25.4.0) (2019-10-29)
+
+
+### Bug Fixes
+
+* **webhook:** fix wrong variable order ([#902](https://github.com/SocialGouv/emjpm/issues/902)) ([1f9840d](https://github.com/SocialGouv/emjpm/commit/1f9840d))
+
+
+### Features
+
+* **import:** add possibility to import mesures as mandataire ([#911](https://github.com/SocialGouv/emjpm/issues/911)) ([7878fc9](https://github.com/SocialGouv/emjpm/commit/7878fc9)), closes [#760](https://github.com/SocialGouv/emjpm/issues/760)
+* **import:** handle ti in mesures import ([#916](https://github.com/SocialGouv/emjpm/issues/916)) ([b8397b0](https://github.com/SocialGouv/emjpm/commit/b8397b0))
+* **signup:** refactor signup and allow service selection ([#893](https://github.com/SocialGouv/emjpm/issues/893)) ([88f640b](https://github.com/SocialGouv/emjpm/commit/88f640b))
+
+
+
+
+
 ## [25.3.3](https://github.com/SocialGouv/emjpm/compare/v25.3.2...v25.3.3) (2019-10-21)
 
 **Note:** Version bump only for package @emjpm/api
