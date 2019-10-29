@@ -1,0 +1,21 @@
+image:
+  repository: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app
+  tag: latest
+
+deployment:
+  livenessProbe:
+    path: /health-check
+  readinessProbe:
+    path: /health-check
+  env:
+    - name: HASURA_GRAPHQL_URI
+      value: "http://${HASURA_HOST}/v1/graphql"
+    - name: PORT
+      value: "80"
+    - name: NODE_ENV
+      value: "production"
+    - name: SENTRY_PUBLIC_DSN
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: SENTRY_PUBLIC_DSN

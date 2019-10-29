@@ -24,7 +24,7 @@
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     - helm init --client-only
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.4.2
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.5.0
 
 #
 

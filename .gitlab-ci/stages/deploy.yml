@@ -197,6 +197,11 @@ Restore postgres data (dev):
   extends: .k8s-restore-postgres-data
   when: manual
 
+Restore postgres data (dev):
+  <<: *deploy_stage
+  <<: *incubateur_stage
+  extends: .k8s-restore-postgres-data
+  when: manual
 #
 #
 #
@@ -224,23 +229,29 @@ Deploy hasura (incubateur):
 #
 #
 
-.deploy-graphql-server: &deploy_graphql-server
-  <<: *deploy_stage
-  extends: .k8s-deploy-graphql-server
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: graphql-server
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
-    PORT: 80
+.deploy_graphql_server: &deploy_graphql_server
+  extends: .base_docker_helm_social_gouv_image_stage
+  script:
+    - export export HASURA_HOST=${K8S_PROJECT}-hasura-${BRANCH_HASH}
+    #
+    - envsubst < ./.k8s/graphql-server/value.yml > ./value.yml
+    - helm upgrade
+        ${K8S_PROJECT}-graphql-server-${BRANCH_HASH}
+        socialgouv/nodejs
+        --debug
+        --install
+        --set image.tag=${IMAGE_TAG}
+        --values ./value.yml
+        --wait || helm delete --purge ${K8S_PROJECT}-graphql-server-${BRANCH_HASH}
 
 #
 
 Deploy graphql-server (dev):
-  <<: *deploy_graphql-server
+  <<: *deploy_graphql_server
   <<: *dev_stage
 
 Deploy graphql-server (incubateur):
-  <<: *deploy_graphql-server
+  <<: *deploy_graphql_server
   <<: *incubateur_stage
 
 #
