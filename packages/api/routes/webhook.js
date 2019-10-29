@@ -86,7 +86,7 @@ const saveOrUpdateMesure = async mesureDatas => {
   });
   if (!mesure) {
     await Mesures.query().insert(mesureDatas);
-  } else {
+  } else if (mesure.mandataire_id === mesureDatas.mandataire_id) {
     await Mesures.query()
       .findById(mesure.id)
       .patch(mesureDatas);
