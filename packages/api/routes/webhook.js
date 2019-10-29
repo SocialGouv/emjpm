@@ -5,6 +5,7 @@ const { ServiceAntenne } = require("../model/ServiceAntenne");
 const { Mandataire } = require("../model/Mandataire");
 const { Tis } = require("../model/Tis");
 const { User } = require("../model/User");
+const { UserAntenne } = require("../model/UserAntenne");
 const { MesuresImport } = require("../model/MesuresImport");
 const { Mesures } = require("../model/Mesures");
 const { Department } = require("../model/Departments");
@@ -12,25 +13,30 @@ const { reservationEmail } = require("../email/reservation-email");
 
 const { raw } = require("objection");
 
-const getUser = async (mandataire_id, antenne_id) => {
+const getUsers = async (mandataire_id, antenne_id) => {
   if (mandataire_id) {
     const [mandataire] = await Mandataire.query().where("id", mandataire_id);
     const [currentUser] = await User.query().where("id", mandataire.user_id);
-    return {
-      mesures_en_cours: mandataire.mesures_en_cours,
-      dispo_max: mandataire.dispo_max,
-      email: currentUser.email
-    };
+    return [
+      {
+        mesures_en_cours: mandataire.mesures_en_cours,
+        dispo_max: mandataire.dispo_max,
+        email: currentUser.email
+      }
+    ];
   } else {
-    const antennes = await ServiceAntenne.query().where("id", antenne_id);
-    const [headquarter] = antennes.filter(
-      antenne => antenne.headquarters === true
+    const antenne = await ServiceAntenne.query().findById(antenne_id);
+    const userAntennes = await UserAntenne.query().where(
+      "antenne_id",
+      antenne_id
     );
-    return {
-      mesures_en_cours: headquarter.mesures_in_progress,
-      dispo_max: headquarter.mesures_max,
-      email: headquarter.contact_email
-    };
+    const userIds = userAntennes.map(ua => ua.user_id);
+    const users = await User.query().findByIds(userIds);
+    return users.map(user => ({
+      mesures_en_cours: antenne.mesures_in_progress,
+      dispo_max: antenne.mesures_max,
+      email: user.email
+    }));
   }
 };
 
@@ -39,13 +45,10 @@ router.post("/email-reservation", async function(req, res) {
   const { ti_id, antenne_id, mandataire_id, status } = newMesure;
   if (status === "Mesure en attente") {
     const [currentTi] = await Tis.query().where("id", ti_id);
-    const user = await getUser(mandataire_id, antenne_id);
-    if (!user.email) {
-      throw new Error(
-        `[email-reservation] no email found for mesure ${newMesure.id}`
-      );
+    const users = await getUsers(mandataire_id, antenne_id);
+    for (const user of users) {
+      reservationEmail(currentTi, newMesure, user);
     }
-    reservationEmail(currentTi, newMesure, user);
   }
   res.json({ success: true });
 });
