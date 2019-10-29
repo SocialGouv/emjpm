@@ -40,6 +40,11 @@ router.post("/email-reservation", async function(req, res) {
   if (status === "Mesure en attente") {
     const [currentTi] = await Tis.query().where("id", ti_id);
     const user = await getUser(mandataire_id, antenne_id);
+    if (!user.email) {
+      throw new Error(
+        `[email-reservation] no email found for mesure ${newMesure.id}`
+      );
+    }
     reservationEmail(currentTi, newMesure, user);
   }
   res.json({ success: true });

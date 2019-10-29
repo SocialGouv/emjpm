@@ -5,7 +5,7 @@ import { Formik } from "formik";
 import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
 
-import { CHOOSE_MANDATAIRE } from "./mutations";
+import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
 import { Select, Button, Input, Heading3 } from "@socialgouv/emjpm-ui-core";
 import { MandataireContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { MESURE_TYPE_LABEL_VALUE, CIVILITY } from "../../constants/mesures";
@@ -14,6 +14,7 @@ import { MandataireInformations } from "./MandataireInformations";
 export const MagistratChoose = props => {
   const { ti, antenneId, mandataireId } = props;
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
+  const [chooseService] = useMutation(CHOOSE_SERVICE);
   const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
   return (
     <Flex flexWrap="wrap">
@@ -27,18 +28,32 @@ export const MagistratChoose = props => {
         <Formik
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
-              chooseMandataire({
-                variables: {
-                  ti: ti,
-                  antenne_id: antenneId || null,
-                  mandataire_id: mandataireId || null,
-                  type: values.type.value,
-                  civilite: values.civilite.value,
-                  annee: values.annee,
-                  numero_rg: values.numero_rg
-                },
-                refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"]
-              });
+              if (mandataireId) {
+                chooseMandataire({
+                  variables: {
+                    ti: ti,
+                    mandataire_id: mandataireId,
+                    type: values.type.value,
+                    civilite: values.civilite.value,
+                    annee: values.annee,
+                    numero_rg: values.numero_rg
+                  },
+                  refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"]
+                });
+              } else {
+                chooseService({
+                  variables: {
+                    ti: ti,
+                    antenne_id: antenneId,
+                    type: values.type.value,
+                    civilite: values.civilite.value,
+                    annee: values.annee,
+                    numero_rg: values.numero_rg
+                  },
+                  refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"]
+                });
+              }
+
               setSubmitting(false);
               setPanelType(null);
               setCurrentMandataire(null);
