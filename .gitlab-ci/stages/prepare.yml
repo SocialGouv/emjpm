@@ -1,6 +1,7 @@
 #
 
 .prepare_stage: &prepare_stage
+  extends: .base_register_stage
   stage: "Prepare"
   dependencies: []
   except:
@@ -8,57 +9,18 @@
       - $PRODUCTION
 
 #
-#
-#
-
-.prepare_base_image_scope: &prepare_base_image_scope
-  changes:
-    - packages/**
-    - lerna.json
-    - package.json
-    - yarn.lock
 
 Register socialgouv/emjpm base image:
   <<: *prepare_stage
-  extends: .base_register_stage
-  only:
-    <<: *prepare_base_image_scope
   variables:
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-
       --shm-size 600M
     IMAGE_NAME: $CI_REGISTRY_IMAGE
 
-Use previous socialgouv/emjpm base image:
-  <<: *prepare_stage
-  extends: .base_use_previous_image_stage
-  except:
-    <<: *prepare_base_image_scope
-  variables:
-    IMAGE_NAME: $CI_REGISTRY_IMAGE
-
-#
-#
-#
-
-.prepare_postgres_scope: &prepare_postgres_scope
-  changes:
-    - docker/postgres/**
-
 Register postgres image:
   <<: *prepare_stage
-  extends: .base_register_stage
-  only:
-    <<: *prepare_postgres_scope
   variables:
     CONTEXT: ./docker/postgres
     DOCKER_BUILD_ARGS: ""
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
-
-Use previous postgres image:
-  <<: *prepare_stage
-  extends: .base_use_previous_image_stage
-  except:
-    <<: *prepare_postgres_scope
-  variables:
     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
