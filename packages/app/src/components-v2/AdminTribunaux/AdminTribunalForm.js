@@ -45,14 +45,16 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                 code_postal: Yup.string().required("Champs obligatoire"),
                 ville: Yup.string().required("Champs obligatoire"),
                 email: Yup.string().email("Le format de votre email n'est pas correct"),
-                telephone: Yup.string()
+                telephone: Yup.string(),
+                siret: Yup.string().required("Champs obligatoire")
               })}
               initialValues={{
                 etablissement: tribunal ? tribunal.etablissement : "",
                 email: tribunal && tribunal.email ? tribunal.email : "",
                 code_postal: tribunal ? tribunal.code_postal : "",
                 ville: tribunal ? tribunal.ville : "",
-                telephone: tribunal && tribunal.telephone ? tribunal.telephone : ""
+                telephone: tribunal && tribunal.telephone ? tribunal.telephone : "",
+                siret: tribunal && tribunal.siret ? tribunal.siret : ""
               }}
             >
               {props => {
@@ -71,6 +73,17 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                       {errors.etablissement && touched.etablissement && (
                         <Text>{errors.etablissement}</Text>
                       )}
+                    </Box>
+                    <Box mb="2">
+                      <Input
+                        value={values.siret}
+                        id="siret"
+                        name="siret"
+                        hasError={errors.siret && touched.siret}
+                        onChange={handleChange}
+                        placeholder="SIRET"
+                      />
+                      {errors.siret && touched.siret && <Text>{errors.siret}</Text>}
                     </Box>
                     <Box mb="2">
                       <Input

@@ -8,6 +8,7 @@ export const UPDATE_TRIBUNAL = gql`
     $ville: String!
     $email: String
     $telephone: String
+    $siret: String
   ) {
     update_tis(
       where: { id: { _eq: $id } }
@@ -17,6 +18,7 @@ export const UPDATE_TRIBUNAL = gql`
         ville: $ville
         email: $email
         telephone: $telephone
+        siret: $siret
       }
     ) {
       affected_rows
@@ -31,6 +33,7 @@ export const ADD_TRIBUNAL = gql`
     $ville: String!
     $email: String!
     $telephone: String!
+    $siret: String!
   ) {
     insert_tis(
       objects: {
@@ -39,6 +42,7 @@ export const ADD_TRIBUNAL = gql`
         ville: $ville
         email: $email
         telephone: $telephone
+        siret: $siret
       }
     ) {
       returning {
