@@ -8,6 +8,7 @@ const { typeRequired, loginRequired } = require("../auth/_helpers");
 const {
   getMandataireByUserId,
   updateMandataire,
+  updateCountMesures,
   mesureEnAttente,
   update,
   getAllServicesByTis,
@@ -353,6 +354,50 @@ router.get("/postcode/:postcode", loginRequired, async (req, res, next) => {
     next(err);
   }
 });
+
+// ?
+// met à jour la capacité ("disponibilite") d'un mandataire
+// selon le nb de mesures en cours
+// droits : ?
+//
+// TODO : trigger pour MAJ + rename colonnes
+// met à jour la capacité ("disponibilite") d'un mandataire
+// selon le nb de mesures en cours
+// droits : user en cours
+
+/** @swagger
+ * /mandataires/1/capacite:
+ *   put:
+ *     tags:
+ *       - mandataire
+ *     description: update capacite of specific mandataire
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               items:
+ *                 type: object
+ */
+router.put(
+  "/:mandataireId/capacite",
+  typeRequired("individuel", "prepose"),
+  async (req, res, next) => {
+    try {
+      const mandataire = await getMandataireByUserId(req.user.id);
+      if (!mandataire) {
+        throw createError.Unauthorized(`Mandataire not found`);
+      }
+      await updateCountMesures(mandataire.id);
+      res.status(200).json(mandataire);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
 
 /** @swagger
  * /mandataires/1/mesures-en-attente:

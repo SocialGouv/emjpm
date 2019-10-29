@@ -5,6 +5,7 @@ Array [
   Object {
     "adresse": "21 rue de houx",
     "code_postal": "62000",
+    "date_mesure_update": null,
     "department_id": 6,
     "dispo_max": 5,
     "email": "ud@ud.com",
@@ -30,6 +31,7 @@ Array [
   Object {
     "adresse": "21 rue monge",
     "code_postal": "62000",
+    "date_mesure_update": null,
     "department_id": 6,
     "dispo_max": 3,
     "email": "panam@paris.com",
@@ -68,6 +70,7 @@ exports[`should GET mandataire profile 1`] = `
 Object {
   "adresse": "21 rue de houx",
   "code_postal": "62000",
+  "date_mesure_update": null,
   "department_id": 6,
   "dispo_max": 5,
   "email": "ud@ud.com",
