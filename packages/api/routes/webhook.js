@@ -31,7 +31,12 @@ const getUser = (headquarter, mandataire, currentUser) => {
 
 router.post("/email-reservation", async function(req, res) {
   const newMesure = req.body.event.data.new;
-  const { ti_id, antenne_id, mandataire_id } = newMesure;
+  const { ti_id, antenne_id, mandataire_id, status } = newMesure;
+  if (status === "Mesure en attente") {
+    res.json({ success: true });
+    return;
+  }
+
   const [currentTi] = await Tis.query().where("id", ti_id);
   if (currentTi) {
     const antennes = await ServiceAntenne.query().where("id", antenne_id);
@@ -92,9 +97,19 @@ const saveOrUpdateMesure = async mesureDatas => {
   }
 
   const data = {
-    ...mesureDatas,
+    date_ouverture: mesureDatas.date_ouverture,
+    ville: mesureDatas.ville,
+    type: mesureDatas.type,
+    status: mesureDatas.status,
+    code_postal: mesureDatas.code_postal,
+    civilite: mesureDatas.civilite,
+    annee: mesureDatas.annee,
+    numero_rg: mesureDatas.numero_rg,
+    numero_dossier: mesureDatas.numero_dossier,
+    mandataire_id: mesureDatas.mandataire_id,
+    residence: mesureDatas.residence,
     department_id: department.id,
-    ti_id: ti.id
+    ti_id: ti ? ti.id : null
   };
 
   const [mesure] = await Mesures.query().where({
@@ -106,6 +121,13 @@ const saveOrUpdateMesure = async mesureDatas => {
     await Mesures.query()
       .findById(mesure.id)
       .patch(data);
+  } else {
+    // TODO(@tglatt): send event with Sentry
+
+    // eslint-disable-next-line no-console
+    console.log(
+      `mesure ${mesure.numero_rg} is owned by mandataire ${mesure.mandataire_id} or antenne ${mesure.antenne_id}`
+    );
   }
 };
 
