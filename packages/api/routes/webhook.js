@@ -12,39 +12,37 @@ const { reservationEmail } = require("../email/reservation-email");
 
 const { raw } = require("objection");
 
-const getUser = (headquarter, mandataire, currentUser) => {
-  if (mandataire) {
+const getUser = async (mandataire_id, antenne_id) => {
+  if (mandataire_id) {
+    const [mandataire] = await Mandataire.query().where("id", mandataire_id);
+    const [currentUser] = await User.query().where("id", mandataire.user_id);
     return {
       mesures_en_cours: mandataire.mesures_en_cours,
       dispo_max: mandataire.dispo_max,
       email: currentUser.email
     };
-  } else if (headquarter) {
+  } else {
+    const antennes = await ServiceAntenne.query().where("id", antenne_id);
+    const [headquarter] = antennes.filter(
+      antenne => antenne.headquarters === true
+    );
     return {
       mesures_en_cours: headquarter.mesures_in_progress,
       dispo_max: headquarter.mesures_max,
       email: headquarter.contact_email
     };
   }
-  return null;
 };
 
 router.post("/email-reservation", async function(req, res) {
   const newMesure = req.body.event.data.new;
-  const { ti_id, antenne_id, mandataire_id } = newMesure;
-  const [currentTi] = await Tis.query().where("id", ti_id);
-  if (currentTi) {
-    const antennes = await ServiceAntenne.query().where("id", antenne_id);
-    const [headquarter] = antennes.filter(
-      antenne => antenne.headquarters === true
-    );
-    const [mandataire] = await Mandataire.query().where("id", mandataire_id);
-    const [currentUser] = await User.query().where("id", mandataire.user_id);
-    const user = getUser(headquarter, mandataire, currentUser);
+  const { ti_id, antenne_id, mandataire_id, status } = newMesure;
+  if (status === "Mesure en attente") {
+    const [currentTi] = await Tis.query().where("id", ti_id);
+    const user = await getUser(mandataire_id, antenne_id);
     reservationEmail(currentTi, newMesure, user);
-  } else {
-    res.json({ success: true });
   }
+  res.json({ success: true });
 });
 
 // ----------------------------------
@@ -81,15 +79,48 @@ const saveOrUpdateMesure = async mesureDatas => {
   if (!department) {
     throw new Error(`no departement found with code ${code}`);
   }
+
+  const ti = await Tis.query().findOne({
+    siret: mesureDatas.tribunal_siret
+  });
+  if (!ti) {
+    throw new Error(
+      `ti with siret ${mesureDatas.tribunal_siret} does not exist.`
+    );
+  }
+
+  const data = {
+    date_ouverture: mesureDatas.date_ouverture,
+    ville: mesureDatas.ville,
+    type: mesureDatas.type,
+    status: mesureDatas.status,
+    code_postal: mesureDatas.code_postal,
+    civilite: mesureDatas.civilite,
+    annee: mesureDatas.annee,
+    numero_rg: mesureDatas.numero_rg,
+    numero_dossier: mesureDatas.numero_dossier,
+    mandataire_id: mesureDatas.mandataire_id,
+    residence: mesureDatas.residence,
+    department_id: department.id,
+    ti_id: ti ? ti.id : null
+  };
+
   const [mesure] = await Mesures.query().where({
-    numero_rg: mesureDatas.numero_rg
+    numero_rg: data.numero_rg
   });
   if (!mesure) {
-    await Mesures.query().insert(mesureDatas);
-  } else if (mesure.mandataire_id === mesureDatas.mandataire_id) {
+    await Mesures.query().insert(data);
+  } else if (mesure.mandataire_id === data.mandataire_id) {
     await Mesures.query()
       .findById(mesure.id)
-      .patch(mesureDatas);
+      .patch(data);
+  } else {
+    // TODO(@tglatt): send event with Sentry
+
+    // eslint-disable-next-line no-console
+    console.log(
+      `mesure ${mesure.numero_rg} is owned by mandataire ${mesure.mandataire_id} or antenne ${mesure.antenne_id}`
+    );
   }
 };
 

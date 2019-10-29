@@ -11,7 +11,8 @@ export const HEADER = [
   "annee",
   "numero_rg",
   "numero_dossier",
-  "residence"
+  "residence",
+  "tribunal_siret"
 ];
 
 export const MESURE_TYPE = [
@@ -99,6 +100,12 @@ const checkNumeroRg = (row, errors) => {
   }
 };
 
+const checkTribunalSiret = (row, errors) => {
+  if (!row.tribunal_siret) {
+    errors.push(`Le SIRET du tribunal est obligatoire`);
+  }
+};
+
 export default datas => {
   const errors = [];
   const mesures = [];
@@ -112,6 +119,7 @@ export default datas => {
     checkGender(row, errorMessages);
     checkNumeroRg(row, errorMessages);
     checkResidence(row, errorMessages);
+    checkTribunalSiret(row, errorMessages);
     if (errorMessages.length > 0) {
       errors.push({
         line: index + 1,
