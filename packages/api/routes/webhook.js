@@ -12,69 +12,6 @@ const { reservationEmail } = require("../email/reservation-email");
 
 const { raw } = require("objection");
 
-// TODO(tglatt): move db queries in other file
-const updateMandataireMesureStates = async mandataire_id => {
-  const counters = await Mesures.query()
-    .where({
-      mandataire_id
-    })
-    .groupBy("status")
-    .select(raw("status, count(*)"));
-
-  const mesures_en_cours = counters.find(
-    counter => counter.status === "Mesure en cours"
-  );
-  const mesures_en_attente = counters.find(
-    counter => counter.status === "Mesure en attente"
-  );
-  await Mandataire.query().patch({
-    mesures_en_cours: mesures_en_cours ? mesures_en_cours.count : 0,
-    mesures_en_attente: mesures_en_attente ? mesures_en_attente.count : 0
-  });
-};
-
-// TODO(tglatt): move db queries in other file
-const updateAntenneMesureStates = async mandataire_id => {
-  const counters = await Mesures.query()
-    .where({
-      mandataire_id
-    })
-    .groupBy("status")
-    .select(raw("status, count(*)"));
-
-  const mesures_in_progress = counters.find(
-    counter => counter.status === "Mesure en cours"
-  );
-  const mesures_awaiting = counters.find(
-    counter => counter.status === "Mesure en attente"
-  );
-  await ServiceAntenne.query().patch({
-    mesures_in_progress: mesures_in_progress ? mesures_in_progress.count : 0,
-    mesures_awaiting: mesures_awaiting ? mesures_awaiting.count : 0
-  });
-};
-
-// TODO(tglatt): move db queries in other file
-const saveOrUpdateMesure = async mesureDatas => {
-  const code = mesureDatas.code_postal.substring(0, 2);
-  const department = await Department.query().findOne({
-    code
-  });
-  if (!department) {
-    throw new Error(`no departement found with code ${code}`);
-  }
-  const [mesure] = await Mesures.query().where({
-    numero_rg: mesureDatas.numero_rg
-  });
-  if (!mesure) {
-    await Mesures.query().insert(mesureDatas);
-  } else {
-    await Mesures.query()
-      .findById(mesure.id)
-      .patch(mesureDatas);
-  }
-};
-
 const getUser = (headquarter, mandataire, currentUser) => {
   if (mandataire) {
     return {
@@ -110,6 +47,52 @@ router.post("/email-reservation", async function(req, res) {
   }
 });
 
+// ----------------------------------
+// ------------- IMPORT--------------
+// ----------------------------------
+
+// TODO(tglatt): move db queries in other file
+const updateMandataireMesureStates = async mandataire_id => {
+  const counters = await Mesures.query()
+    .where({
+      mandataire_id
+    })
+    .groupBy("status")
+    .select(raw("status, count(*)"));
+
+  const mesures_en_cours = counters.find(
+    counter => counter.status === "Mesure en cours"
+  );
+  const mesures_en_attente = counters.find(
+    counter => counter.status === "Mesure en attente"
+  );
+  await Mandataire.query().patch({
+    mesures_en_cours: mesures_en_cours ? mesures_en_cours.count : 0,
+    mesures_en_attente: mesures_en_attente ? mesures_en_attente.count : 0
+  });
+};
+
+// TODO(tglatt): move db queries in other file
+const saveOrUpdateMesure = async mesureDatas => {
+  const code = mesureDatas.code_postal.substring(0, 2);
+  const department = await Department.query().findOne({
+    code
+  });
+  if (!department) {
+    throw new Error(`no departement found with code ${code}`);
+  }
+  const [mesure] = await Mesures.query().where({
+    numero_rg: mesureDatas.numero_rg
+  });
+  if (!mesure) {
+    await Mesures.query().insert(mesureDatas);
+  } else {
+    await Mesures.query()
+      .findById(mesure.id)
+      .patch(mesureDatas);
+  }
+};
+
 const toDate = dateStr => {
   const [day, month, year] = dateStr.split("/");
   return new Date(year, month - 1, day);
@@ -136,14 +119,9 @@ router.post("/mesures-import", async function(req, res) {
       ...data,
       date_ouverture: toDate(data.date_ouverture),
       mandataire_id: mandataire.id,
-      status: "Mesure en cours",
-      import_flag: mesuresImport.id
+      status: "Mesure en cours"
     });
   }
-
-  await Mesures.query()
-    .patch({ import_flag: null })
-    .where({ import_flag: mesuresImport.id });
 
   await updateMandataireMesureStates(mandataire.id);
 
@@ -151,67 +129,6 @@ router.post("/mesures-import", async function(req, res) {
   await MesuresImport.query()
     .findById(importId)
     .patch({ status: "IMPORT", processed_at: new Date() });
-
-  res.json({ success: true });
-});
-
-// UPDATE MANDATAIRE MESURE STATES
-
-const isFromImport = mesure => {
-  return mesure && mesure.import_flag;
-};
-
-router.post("/mesure-states-mandataire", async function(req, res) {
-  const oldMesure = req.body.event.data.old;
-  const newMesure = req.body.event.data.new;
-
-  if (isFromImport(oldMesure) || isFromImport(newMesure)) {
-    res.json({
-      success: true,
-      message: `import in progress`
-    });
-    return;
-  }
-
-  const oldMandataireId = oldMesure ? oldMesure.mandataire_id : null;
-  const newMandataireId = newMesure ? newMesure.mandataire_id : null;
-
-  if (oldMandataireId || newMandataireId) {
-    await updateMandataireMesureStates(
-      newMandataireId ? newMandataireId : oldMandataireId
-    );
-  }
-
-  res.json({ success: true });
-});
-
-// UPDATE ANTENNE MESURE STATES
-
-router.post("/mesure-states-antenne", async function(req, res) {
-  const oldMesure = req.body.event.data.old;
-  const newMesure = req.body.event.data.new;
-
-  if (isFromImport(oldMesure) || isFromImport(newMesure)) {
-    res.json({
-      success: true,
-      message: `import in progress`
-    });
-    return;
-  }
-
-  const oldAntenneId = oldMesure ? oldMesure.antenne_id : null;
-  const newAntenneId = newMesure ? newMesure.antenne_id : null;
-
-  if (oldAntenneId && !newAntenneId) {
-    await updateAntenneMesureStates(oldAntenneId);
-  } else if (!oldAntenneId && newAntenneId) {
-    await updateAntenneMesureStates(newAntenneId);
-  } else if (oldAntenneId && newAntenneId) {
-    await updateAntenneMesureStates(oldAntenneId);
-    if (oldAntenneId !== newAntenneId) {
-      await updateAntenneMesureStates(newAntenneId);
-    }
-  }
 
   res.json({ success: true });
 });
