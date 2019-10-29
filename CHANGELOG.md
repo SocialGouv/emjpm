@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.4.0](https://github.com/SocialGouv/emjpm/compare/v25.3.3...v25.4.0) (2019-10-29)
+
+
+### Bug Fixes
+
+* **deploy:** problem with helm postgres chart by setting previous ([#909](https://github.com/SocialGouv/emjpm/issues/909)) ([9d327b3](https://github.com/SocialGouv/emjpm/commit/9d327b3))
+* **webhook:** fix wrong variable order ([#902](https://github.com/SocialGouv/emjpm/issues/902)) ([1f9840d](https://github.com/SocialGouv/emjpm/commit/1f9840d))
+
+
+### Features
+
+* **admin:** new admin interface ([#897](https://github.com/SocialGouv/emjpm/issues/897)) ([7ffef20](https://github.com/SocialGouv/emjpm/commit/7ffef20))
+* **import:** add possibility to import mesures as mandataire ([#911](https://github.com/SocialGouv/emjpm/issues/911)) ([7878fc9](https://github.com/SocialGouv/emjpm/commit/7878fc9)), closes [#760](https://github.com/SocialGouv/emjpm/issues/760)
+* **import:** handle ti in mesures import ([#916](https://github.com/SocialGouv/emjpm/issues/916)) ([b8397b0](https://github.com/SocialGouv/emjpm/commit/b8397b0))
+* **postgres:** make the init script replayable ([#898](https://github.com/SocialGouv/emjpm/issues/898)) ([6b3d164](https://github.com/SocialGouv/emjpm/commit/6b3d164))
+* **signup:** refactor signup and allow service selection ([#893](https://github.com/SocialGouv/emjpm/issues/893)) ([88f640b](https://github.com/SocialGouv/emjpm/commit/88f640b))
+* **ti-siret:** add siret for ti ([#915](https://github.com/SocialGouv/emjpm/issues/915)) ([0785658](https://github.com/SocialGouv/emjpm/commit/0785658))
+
+
+### Reverts
+
+* ci(gitlab): speed up the quality stage with only changes ([#914](https://github.com/SocialGouv/emjpm/issues/914)) ([1cdb904](https://github.com/SocialGouv/emjpm/commit/1cdb904))
+
+
+
+
+
 ## [25.3.3](https://github.com/SocialGouv/emjpm/compare/v25.3.2...v25.3.3) (2019-10-21)
 
 **Note:** Version bump only for package emjpm
