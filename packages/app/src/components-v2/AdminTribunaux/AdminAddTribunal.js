@@ -18,7 +18,8 @@ export const AdminAddTribunal = () => {
             email: values.email,
             code_postal: values.code_postal,
             ville: values.ville,
-            telephone: values.telephone
+            telephone: values.telephone,
+            siret: values.siret
           }
         })
       }

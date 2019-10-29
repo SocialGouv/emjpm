@@ -9,7 +9,7 @@ import { cardStyle, descriptionStyle, labelStyle } from "./style";
 import { AdminEditTribunal } from "./AdminEditTribunal";
 
 const RowItem = ({ item }) => {
-  const { id, etablissement, code_postal, ville } = item;
+  const { id, etablissement, code_postal, ville, siret } = item;
   const [editMode, setEditMode] = useState(false);
 
   const toogleEditMode = () => setEditMode(!editMode);
@@ -33,6 +33,10 @@ const RowItem = ({ item }) => {
                 <Text sx={descriptionStyle}>
                   {ville} ({code_postal})
                 </Text>
+              </Flex>
+              <Flex width="300px" flexDirection="column">
+                <Text sx={labelStyle}>SIRET</Text>
+                <Text sx={descriptionStyle}>{siret}</Text>
               </Flex>
             </Flex>
           </Box>
