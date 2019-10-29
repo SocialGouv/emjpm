@@ -12,44 +12,37 @@ const { reservationEmail } = require("../email/reservation-email");
 
 const { raw } = require("objection");
 
-const getUser = (headquarter, mandataire, currentUser) => {
-  if (mandataire) {
+const getUser = async (mandataire_id, antenne_id) => {
+  if (mandataire_id) {
+    const [mandataire] = await Mandataire.query().where("id", mandataire_id);
+    const [currentUser] = await User.query().where("id", mandataire.user_id);
     return {
       mesures_en_cours: mandataire.mesures_en_cours,
       dispo_max: mandataire.dispo_max,
       email: currentUser.email
     };
-  } else if (headquarter) {
+  } else {
+    const antennes = await ServiceAntenne.query().where("id", antenne_id);
+    const [headquarter] = antennes.filter(
+      antenne => antenne.headquarters === true
+    );
     return {
       mesures_en_cours: headquarter.mesures_in_progress,
       dispo_max: headquarter.mesures_max,
       email: headquarter.contact_email
     };
   }
-  return null;
 };
 
 router.post("/email-reservation", async function(req, res) {
   const newMesure = req.body.event.data.new;
   const { ti_id, antenne_id, mandataire_id, status } = newMesure;
   if (status === "Mesure en attente") {
-    res.json({ success: true });
-    return;
-  }
-
-  const [currentTi] = await Tis.query().where("id", ti_id);
-  if (currentTi) {
-    const antennes = await ServiceAntenne.query().where("id", antenne_id);
-    const [headquarter] = antennes.filter(
-      antenne => antenne.headquarters === true
-    );
-    const [mandataire] = await Mandataire.query().where("id", mandataire_id);
-    const [currentUser] = await User.query().where("id", mandataire.user_id);
-    const user = getUser(headquarter, mandataire, currentUser);
+    const [currentTi] = await Tis.query().where("id", ti_id);
+    const user = await getUser(mandataire_id, antenne_id);
     reservationEmail(currentTi, newMesure, user);
-  } else {
-    res.json({ success: true });
   }
+  res.json({ success: true });
 });
 
 // ----------------------------------
