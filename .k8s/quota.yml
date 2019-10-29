@@ -8,7 +8,7 @@ metadata:
     resourcequota.management.cattle.io/default-resource-quota: "true"
 spec:
   hard:
-    #   500m // api
+    #   250m // api
     # + 250m // app
     # +  50m // dataset (wait-for-postgres)
     # + 250m // dataset (inject)
@@ -21,10 +21,10 @@ spec:
     # + 100m // backup cronjob (postgres)
     # + 100m // backup cronjob (backup)
     # ======
-    #  3050m    ~3.05 CPU x2
-    limits.cpu: 6500m
+    #  2800m    ~2.8 CPU x2
+    limits.cpu: 5600m
 
-    #   512Mi // api
+    #   256Mi // api
     # + 256Mi // app
     # +  32Mi // dataset (wait-for-postgres)
     # + 256Mi // dataset (inject)
@@ -37,5 +37,5 @@ spec:
     # +  64Mi // backup cronjob (postgres)
     # +  64Mi // backup cronjob (backup)
     # =======
-    #  2176Mi      2.176 Gi x2
-    limits.memory: 2.125Gi
+    #  1920Mi      1.875 Gi x2
+    limits.memory: 3.75Gi
