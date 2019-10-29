@@ -54,5 +54,4 @@ services:
       WHATEVER_URL: http://graphql-server:4001/graphql
       WEB_HOOK_URL_EMAIL_RESERVATION: http://api:4000/webhook/email-reservation
       WEB_HOOK_URL_MESURES_IMPORT: http://api:4000/webhook/mesures-import
-      WEB_HOOK_URL_MESURE_STATES_ANTENNE: http://api:4000/webhook/mesure-states-antenne
-      WEB_HOOK_URL_MESURE_STATES_MANDATAIRE: http://api:4000/webhook/mesure-states-mandataire
+
