@@ -28,55 +28,6 @@ Array [
 ]
 `;
 
-exports[`mandataire mesures count should be updated 1`] = `
-Array [
-  Object {
-    "annee": "2010-10-05",
-    "antenne_id": null,
-    "cabinet": null,
-    "civilite": "H",
-    "code_postal": "93000",
-    "created_at": "2010-10-05T00:00:00.000Z",
-    "date_ouverture": "2010-10-04T22:00:00.000Z",
-    "department_id": 94,
-    "etablissement": "CAROUF",
-    "etablissement_id": null,
-    "extinction": null,
-    "mandataire_id": 1,
-    "numero_dossier": null,
-    "numero_rg": null,
-    "reason_extinction": null,
-    "residence": "oui",
-    "status": "Mesure en cours",
-    "ti_id": null,
-    "type": "Sauvegarde de justice",
-    "ville": "St Denis",
-  },
-  Object {
-    "annee": "2010-10-05",
-    "antenne_id": null,
-    "cabinet": null,
-    "civilite": "madame",
-    "code_postal": "28000",
-    "created_at": "2010-10-05T00:00:00.000Z",
-    "date_ouverture": "2010-10-04T22:00:00.000Z",
-    "department_id": 27,
-    "etablissement": "peu pas",
-    "etablissement_id": null,
-    "extinction": null,
-    "mandataire_id": 1,
-    "numero_dossier": null,
-    "numero_rg": null,
-    "reason_extinction": null,
-    "residence": "oui",
-    "status": "Mesure en cours",
-    "ti_id": null,
-    "type": "preposes",
-    "ville": "Chartres",
-  },
-]
-`;
-
 exports[`mandataire should NOT POST mesure for another one [REST url abuse] 1`] = `
 Array [
   Object {

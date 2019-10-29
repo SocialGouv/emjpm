@@ -1,5 +1,6 @@
-import ReactPiwik from "react-piwik";
 import { hide } from "redux-modal";
+import ReactPiwik from "react-piwik";
+
 import apiFetch from "../../communComponents/Api";
 import { fetchProfiles, mandataireProfilesUpdated } from "./mandataire";
 
@@ -42,7 +43,12 @@ const reactivateMesureApi = data =>
       status: "Mesure en cours",
       extinction: null
     })
-  });
+  }).then(() =>
+    // todo: move to trigger
+    apiFetch(`/mandataires/1/capacite`, {
+      method: "PUT"
+    })
+  );
 
 // todo : better API
 const createMesureApi = data =>
@@ -147,17 +153,6 @@ export const createMesureSave = data => dispatch =>
       throw error;
     });
 
-export const mesureImportCreated = data => dispatch => {
-  return fetchProfiles()
-    .then(json => {
-      dispatch(mandataireProfilesUpdated(json));
-      dispatch(mesureCreated(data));
-    })
-    .catch(error => {
-      dispatch(mesureCreatedError(error.message));
-      throw error;
-    });
-};
 // ------------ PLAIN ACTIONS
 
 export const createMesure = () => ({
