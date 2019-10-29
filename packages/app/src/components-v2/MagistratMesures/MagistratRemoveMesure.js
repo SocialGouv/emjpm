@@ -11,13 +11,13 @@ import { MESURE } from "./queries";
 
 export const MagistratRemoveMesure = props => {
   const { currentMesure } = props;
+  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+
   const { data, loading, error } = useQuery(MESURE, {
     variables: {
       id: currentMesure
     }
   });
-
-  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
   const [DeleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE);
   const [DeleteAntenneMesure] = useMutation(DELETE_ANTENNE_MESURE);

@@ -1,7 +1,12 @@
 import gql from "graphql-tag";
 
 export const CLOSE_MESURE = gql`
-  mutation closeMesure($id: Int!, $reason_extinction: String!, $extinction: date!) {
+  mutation closeMesure(
+    $id: Int!
+    $antenne_id: Int!
+    $reason_extinction: String!
+    $extinction: date!
+  ) {
     update_mesures(
       where: { id: { _eq: $id } }
       _set: {
@@ -33,12 +38,21 @@ export const CLOSE_MESURE = gql`
         date_ouverture
       }
     }
+    update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_in_progress: -1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_in_progress
+      }
+    }
   }
 `;
 
 export const EDIT_MESURE = gql`
   mutation editMesure(
     $id: Int!
+    $antenne_id: Int!
+    $previous_antenne_id: Int!
     $date_ouverture: date
     $type: String
     $residence: String
@@ -48,8 +62,6 @@ export const EDIT_MESURE = gql`
     $annee: String
     $numero_dossier: String
     $numero_rg: String
-    $status: String
-    $antenne_id: Int
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -64,7 +76,6 @@ export const EDIT_MESURE = gql`
         annee: $annee
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
-        status: $status
       }
     ) {
       returning {
@@ -90,11 +101,31 @@ export const EDIT_MESURE = gql`
         date_ouverture
       }
     }
+    updateNewAntenne: update_service_antenne(
+      where: { id: { _eq: $antenne_id } }
+      _inc: { mesures_in_progress: 1 }
+    ) {
+      affected_rows
+      returning {
+        id
+        mesures_in_progress
+      }
+    }
+    updatePreviousAntenne: update_service_antenne(
+      where: { id: { _eq: $previous_antenne_id } }
+      _inc: { mesures_in_progress: -1 }
+    ) {
+      affected_rows
+      returning {
+        id
+        mesures_in_progress
+      }
+    }
   }
 `;
 
 export const REACTIVATE_MESURE = gql`
-  mutation reactivateMesure($id: Int!, $reason_extinction: String!) {
+  mutation reactivateMesure($id: Int!, $antenne_id: Int!, $reason_extinction: String!) {
     update_mesures(
       where: { id: { _eq: $id } }
       _set: { reason_extinction: $reason_extinction, status: "Mesure en cours" }
@@ -120,6 +151,13 @@ export const REACTIVATE_MESURE = gql`
         etablissement
         annee
         date_ouverture
+      }
+    }
+    update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_in_progress: 1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_in_progress
       }
     }
   }
@@ -168,6 +206,17 @@ export const ACCEPT_MESURE = gql`
         date_ouverture
       }
     }
+    update_service_antenne(
+      where: { id: { _eq: $antenne_id } }
+      _inc: { mesures_in_progress: 1, mesures_awaiting: -1 }
+    ) {
+      affected_rows
+      returning {
+        id
+        mesures_in_progress
+        mesures_awaiting
+      }
+    }
   }
 `;
 
@@ -190,7 +239,6 @@ export const ADD_MESURE = gql`
     $annee: String!
     $numero_dossier: String!
     $numero_rg: String!
-    $status: String!
     $antenne_id: Int!
   ) {
     insert_mesures(
@@ -204,7 +252,7 @@ export const ADD_MESURE = gql`
         annee: $annee
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
-        status: $status
+        status: "Mesure en cours"
         antenne_id: $antenne_id
       }
     ) {
@@ -229,6 +277,13 @@ export const ADD_MESURE = gql`
         etablissement
         annee
         date_ouverture
+      }
+    }
+    update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_in_progress: 1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_in_progress
       }
     }
   }

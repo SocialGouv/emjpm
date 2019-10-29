@@ -76,8 +76,7 @@ export const ServiceAddMesure = props => {
                     civilite: values.civilite.value,
                     annee: values.annee.toString(),
                     numero_dossier: values.numero_dossier,
-                    numero_rg: values.numero_rg,
-                    status: "Mesure en cours"
+                    numero_rg: values.numero_rg
                   },
                   awaitRefetchQueries: true,
                   refetchQueries: ["mesures", "mesures_aggregate"]
