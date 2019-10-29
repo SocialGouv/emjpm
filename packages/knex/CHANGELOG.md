@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.4.0](https://github.com/SocialGouv/emjpm/compare/v25.3.3...v25.4.0) (2019-10-29)
+
+
+### Features
+
+* **admin:** new admin interface ([#897](https://github.com/SocialGouv/emjpm/issues/897)) ([7ffef20](https://github.com/SocialGouv/emjpm/commit/7ffef20))
+* **import:** add possibility to import mesures as mandataire ([#911](https://github.com/SocialGouv/emjpm/issues/911)) ([7878fc9](https://github.com/SocialGouv/emjpm/commit/7878fc9)), closes [#760](https://github.com/SocialGouv/emjpm/issues/760)
+* **import:** handle ti in mesures import ([#916](https://github.com/SocialGouv/emjpm/issues/916)) ([b8397b0](https://github.com/SocialGouv/emjpm/commit/b8397b0))
+* **ti-siret:** add siret for ti ([#915](https://github.com/SocialGouv/emjpm/issues/915)) ([0785658](https://github.com/SocialGouv/emjpm/commit/0785658))
+
+
+
+
+
 ## [25.3.3](https://github.com/SocialGouv/emjpm/compare/v25.3.2...v25.3.3) (2019-10-21)
 
 **Note:** Version bump only for package @emjpm/knex
