@@ -6,9 +6,9 @@ remote_schemas:
   definition:
     forward_client_headers: true
     headers: []
-    timeout_seconds: null
-    url: "%%WHATEVER_URL%%/graphql"
-    url_from_env: null
+    timeout_seconds: 60
+    url: null
+    url_from_env: WHATEVER_URL
   name: whatever
 tables:
 - array_relationships: []
@@ -453,6 +453,27 @@ tables:
       - type
       - username
       set: {}
+    role: prepose
+  - comment: null
+    permission:
+      check:
+        id:
+          _eq: X-Hasura-User-Id
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      set: {}
     role: ti
   - comment: null
     permission:
@@ -510,25 +531,6 @@ tables:
       - type
       - username
       set: {}
-    role: prepose
-  - comment: null
-    permission:
-      check: {}
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      set: {}
     role: service
   is_enum: false
   object_relationships:
@@ -547,6 +549,27 @@ tables:
           id: user_id
         remote_table: magistrat
   select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - username
+      - password
+      - created_at
+      - type
+      - last_login
+      - active
+      - reset_password_token
+      - reset_password_expires
+      - nom
+      - prenom
+      - cabinet
+      - email
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: individuel
   - comment: null
     permission:
       allow_aggregations: false
@@ -956,6 +979,112 @@ tables:
               _eq: X-Hasura-User-Id
       set: {}
     role: ti
+- array_relationships: []
+  delete_permissions: []
+  event_triggers:
+  - definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    headers: []
+    name: import
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: WEB_HOOK_URL_MESURES_IMPORT
+  insert_permissions:
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - processed_at
+      - content
+      - file_name
+      - file_size
+      - file_type
+      - status
+      - user_id
+      - antenne_id
+      set:
+        user_id: x-hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - antenne_id
+      - file_size
+      - id
+      - user_id
+      - content
+      - created_at
+      - processed_at
+      - file_name
+      - file_type
+      - status
+      set:
+        user_id: x-hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - antenne_id
+      - content
+      - created_at
+      - file_name
+      - file_size
+      - file_type
+      - id
+      - processed_at
+      - status
+      set:
+        user_id: x-hasura-User-Id
+    role: service
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: user
+    using:
+      foreign_key_constraint_on: user_id
+  - comment: null
+    name: service_antenne
+    using:
+      foreign_key_constraint_on: antenne_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - antenne_id
+      - file_size
+      - id
+      - user_id
+      - content
+      - created_at
+      - processed_at
+      - file_name
+      - file_type
+      - status
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: service
+  table: mesures_import
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - processed_at
+      - status
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set: {}
+    role: service
 - array_relationships: []
   delete_permissions:
   - comment: null
@@ -1413,6 +1542,14 @@ tables:
       filter: {}
       set: {}
     role: service
+  - comment: null
+    permission:
+      columns:
+      - mesures_awaiting
+      - mesures_in_progress
+      filter: {}
+      set: {}
+    role: ti
 - array_relationships: []
   delete_permissions:
   - comment: null
@@ -1456,7 +1593,7 @@ tables:
       interval_sec: 10
       num_retries: 0
       timeout_sec: 60
-    webhook: "%%WEB_HOOK_URL%%/webhook/mesure-reservation"
+    webhook_from_env: WEB_HOOK_URL_EMAIL_RESERVATION
   insert_permissions:
   - comment: null
     permission:
@@ -1950,6 +2087,17 @@ tables:
       - latitude
       - longitude
       filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      filter: {}
     role: service
   - comment: null
     permission:
@@ -1984,17 +2132,6 @@ tables:
       - longitude
       filter: {}
     role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      filter: {}
-    role: direction
   table: city
   update_permissions: []
 - array_relationships: []
@@ -2243,6 +2380,14 @@ tables:
     role: direction
   table: mandataires
   update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - mesures_en_attente
+      - mesures_en_cours
+      filter: {}
+      set: {}
+    role: ti
   - comment: null
     permission:
       columns:

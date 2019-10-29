@@ -8,6 +8,7 @@ import { typeMesure, residence, civilite } from "../common/nomination";
 
 import { Button, ToggleState, Autocomplete } from "..";
 import { createMesure, createMesureSave } from "./actions/mesures";
+import Router from "next/router";
 
 const Alert = ({ className, Icon, message }) =>
   (message && (
@@ -327,16 +328,24 @@ const CreateMesure = ({
                 </Form>
               </React.Fragment>
             )) || (
-              <Button
-                data-cy="button-create-mesure"
-                onClick={() => {
-                  createMesure();
-                  toggle();
-                }}
-                style={{ marginTop: 30, width: 260 }}
-              >
-                <PlusSquare style={buttonIconStyle} /> Créer une nouvelle mesure
-              </Button>
+              <>
+                <Button
+                  data-cy="button-create-mesure"
+                  onClick={() => {
+                    createMesure();
+                    toggle();
+                  }}
+                  style={{ marginTop: 30, width: 260 }}
+                >
+                  <PlusSquare style={buttonIconStyle} /> Créer une nouvelle mesure
+                </Button>
+                <Button
+                  onClick={() => Router.push("/mandataires/import-mesures")}
+                  style={{ marginTop: 30, width: 260 }}
+                >
+                  <PlusSquare style={buttonIconStyle} /> Importer vos mesures
+                </Button>
+              </>
             )}
         </div>
       )}

@@ -1,25 +1,14 @@
+import { useMutation } from "@apollo/react-hooks";
+import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { Formik } from "formik";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
-import { Formik } from "formik";
-import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
-import getConfig from "next/config";
-
+import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { EDIT_MESURE } from "./mutations";
-import { Select, Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
-import {
-  MESURE_TYPE_LABEL_VALUE,
-  RESIDENCE,
-  CIVILITY,
-  MESURE_STATUS_LABEL_VALUE
-} from "../../constants/mesures";
 import { formatAntenneOptions } from "./utils";
-
-const {
-  publicRuntimeConfig: { NODE_ENV }
-} = getConfig();
 
 const getMesureAntenne = (antenne_id, user_antennes) => {
   const filteredAntennes = user_antennes.filter(
@@ -43,7 +32,6 @@ export const ServiceEditMesure = props => {
     numeroRg,
     numeroDossier,
     residence,
-    status,
     type,
     ville,
     user_antennes
@@ -87,7 +75,7 @@ export const ServiceEditMesure = props => {
                 annee: values.annee,
                 numero_dossier: values.numero_dossier,
                 numero_rg: values.numero_rg,
-                status: values.status.value,
+                previous_antenne_id: antenneId,
                 antenne_id: values.antenne_id.value
               },
               awaitRefetchQueries: true,
@@ -106,8 +94,7 @@ export const ServiceEditMesure = props => {
             civilite: Yup.string(),
             annee: Yup.string(),
             numero_dossier: Yup.string(),
-            numero_rg: Yup.string(),
-            status: Yup.string()
+            numero_rg: Yup.string()
           })}
           initialValues={{
             annee: age,
@@ -118,7 +105,6 @@ export const ServiceEditMesure = props => {
             numero_rg: numeroRg,
             numero_dossier: numeroDossier,
             residence: { label: residence, value: residence },
-            status: { label: status, value: status },
             type: { label: type, value: type },
             ville: ville
           }}
@@ -239,19 +225,6 @@ export const ServiceEditMesure = props => {
                       hasError={errors.antenne_id && touched.antenne_id}
                       onChange={option => setFieldValue("antenne_id", option)}
                       options={ANTENNE_OPTIONS}
-                    />
-                  </Box>
-                )}
-                {NODE_ENV === "development" && (
-                  <Box sx={{ zIndex: "70", position: "relative" }} mb="2">
-                    <Select
-                      id="status"
-                      name="status"
-                      placeholder="status de la mesure"
-                      value={values.status}
-                      hasError={errors.status && touched.status}
-                      onChange={option => setFieldValue("status", option)}
-                      options={MESURE_STATUS_LABEL_VALUE}
                     />
                   </Box>
                 )}

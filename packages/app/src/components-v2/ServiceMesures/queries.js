@@ -1,5 +1,14 @@
 import gql from "graphql-tag";
 
+export const MESURE = gql`
+  query mesure($id: Int!) {
+    mesures(where: { id: { _eq: $id } }) {
+      id
+      antenne_id
+    }
+  }
+`;
+
 export const MESURES = gql`
   query mesures(
     $limit: Int
