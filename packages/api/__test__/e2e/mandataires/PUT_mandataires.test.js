@@ -44,8 +44,7 @@ test("mandataire should update his profile", async () => {
   expect(newUserRow.email).toBe(newProfile.email);
 
   expect(response.body).toMatchSnapshot({
-    created_at: expect.any(String),
-    date_mesure_update: expect.any(String)
+    created_at: expect.any(String)
   });
   expect(response.status).toBe(200);
 });

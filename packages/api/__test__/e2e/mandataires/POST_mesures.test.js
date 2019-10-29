@@ -32,14 +32,6 @@ beforeEach(async () => {
 // eslint-disable-next-line no-unused-vars
 const simplerMesure = ({ id, ...props }) => props;
 
-const getMesuresCounter = async id =>
-  (await knex("mandataires")
-    .select("mesures_en_cours")
-    .where({
-      id
-    })
-    .first()).mesures_en_cours;
-
 const getMesuresCount = async mandataire_id =>
   (await knex("mesures").where({
     mandataire_id
@@ -109,25 +101,6 @@ test("mandataire should NOT POST mesure for another one [body forge]", async () 
   // ensure mandataire posted on id=1 not id=2
   expect(newMesuresCount1).toBe(mesuresCount1 + 1);
   expect(newMesuresCount2).toBe(mesuresCount2);
-
-  expect(nodemailerMock.mock.sentMail().length).toBe(0);
-});
-
-test("mandataire mesures count should be updated", async () => {
-  const token = await getTokenByUserType("mandataire");
-
-  const mesuresCounter = await getMesuresCounter(1);
-
-  const response = await request(server)
-    .post("/api/v1/mandataires/1/mesures")
-    .set("Authorization", "Bearer " + token)
-    .send(sampleMesure);
-
-  expect(response.body.map(simplerMesure)).toMatchSnapshot();
-  expect(response.status).toBe(200);
-
-  const newMesuresCounter = await getMesuresCounter(1);
-  expect(newMesuresCounter).toBe(mesuresCounter + 1);
 
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
 });

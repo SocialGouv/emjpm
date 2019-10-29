@@ -1,19 +1,16 @@
-import React from "react";
 import dynamic from "next/dynamic";
-import { Home, Map, UserMinus, Clock, FilePlus } from "react-feather";
-
-import { DummyTabs } from "..";
-import apiFetch from "../communComponents/Api";
+import React from "react";
+import { Clock, Home, Map, UserMinus } from "react-feather";
 import { connect } from "react-redux";
-
+import { DummyTabs } from "..";
+import { DispoMagistrat } from "../common/ShowBox";
+import TableState from "../common/TableState";
+import apiFetch from "../communComponents/Api";
+import CreateMesure from "./CreateMesure";
+import Header from "./Header";
 import { PillDispo } from "./PillDispo";
 import Profile from "./Profile";
 import TableMesures from "./TableMesures";
-import Header from "./Header";
-import CreateMesure from "./CreateMesure";
-import InputFiles from "./inputFiles";
-import { DispoMagistrat } from "../common/ShowBox";
-import TableState from "../common/TableState";
 
 const OpenStreeMap = dynamic(() => import("./MapMesures"), { ssr: false });
 const getCurrentDispos = props =>
@@ -120,12 +117,6 @@ class MandataireTabs extends React.Component {
         url: "/mandataires/mes-informations",
         icon: <Home />,
         content: <Profile />
-      },
-      {
-        text: `Importer`,
-        url: "/mandataires/importer",
-        icon: <FilePlus />,
-        content: <InputFiles />
       }
     ];
     return (
