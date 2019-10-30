@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.4.3](https://github.com/SocialGouv/emjpm/compare/v25.4.2...v25.4.3) (2019-10-30)
+
+
+### Bug Fixes
+
+* **import:** update mesure states of the right mandataire ([#919](https://github.com/SocialGouv/emjpm/issues/919)) ([240317b](https://github.com/SocialGouv/emjpm/commit/240317b))
+
+
+
+
+
 ## [25.4.2](https://github.com/SocialGouv/emjpm/compare/v25.4.1...v25.4.2) (2019-10-29)
 
 
