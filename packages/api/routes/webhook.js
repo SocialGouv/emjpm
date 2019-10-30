@@ -72,10 +72,12 @@ const updateMandataireMesureStates = async mandataire_id => {
   const mesures_en_attente = counters.find(
     counter => counter.status === "Mesure en attente"
   );
-  await Mandataire.query().patch({
-    mesures_en_cours: mesures_en_cours ? mesures_en_cours.count : 0,
-    mesures_en_attente: mesures_en_attente ? mesures_en_attente.count : 0
-  });
+  await Mandataire.query()
+    .findById(mandataire_id)
+    .patch({
+      mesures_en_cours: mesures_en_cours ? mesures_en_cours.count : 0,
+      mesures_en_attente: mesures_en_attente ? mesures_en_attente.count : 0
+    });
 };
 
 // TODO(tglatt): move db queries in other file
