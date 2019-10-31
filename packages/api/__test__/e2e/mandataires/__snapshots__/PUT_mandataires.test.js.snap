@@ -21,6 +21,7 @@ Object {
   "nom": null,
   "prenom": "Adrien",
   "secretariat": false,
+  "siret": null,
   "telephone": "phone-test",
   "telephone_portable": "0101010101",
   "type": "individuel",
