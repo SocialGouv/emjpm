@@ -8,6 +8,14 @@ export const CHECK_EMAIL_UNICITY = gql`
   }
 `;
 
+export const CHECK_SIRET_UNICITY = gql`
+  query MANDATAIRE_SIRET($siret: String!) {
+    mandataires(where: { siret: { _eq: $siret } }) {
+      siret
+    }
+  }
+`;
+
 export const SIGNUP_DATA = gql`
   {
     tis {
