@@ -16,7 +16,7 @@
 
 .base_docker_helm_image_stage:
   extends: .base_docker_kube_image_stage
-  image: $CI_REGISTRY/socialgouv/docker/helm:0.7.0
+  image: $CI_REGISTRY/socialgouv/docker/helm:0.6.0
 
 #
 
