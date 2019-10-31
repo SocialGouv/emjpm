@@ -75,8 +75,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             <Box height="220px">
               <Heading4>{`Informations professionelles`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                Votre SIRET sera utilisé pour vous identifier lors des imports de mesures, avec OCMI
-                par exemple.
+                {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
+                d'autres systèmes (OCMI par exemple)`}
               </Text>
             </Box>
             <Box height="200px">
@@ -120,7 +120,6 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                         ville: values.ville,
                         department_id,
                         etablissement: "",
-
                         dispo_max: parseInt(values.dispo_max)
                       },
                       user: {
