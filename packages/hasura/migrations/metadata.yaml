@@ -2282,6 +2282,16 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - siret
+      filter:
+        siret:
+          _eq: X-Hasura-Siret
+      limit: 1
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
       - secretariat
       - nb_secretariat
       - dispo_max

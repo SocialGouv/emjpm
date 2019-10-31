@@ -1,15 +1,17 @@
-import { Heading1, Heading4, Button, Card, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { useApolloClient } from "@apollo/react-hooks";
+import { Button, Card, Heading1, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
-import React, { useContext, Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { SignupContext } from "./context";
+import { CHECK_SIRET_UNICITY } from "./queries";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
-import { grayBox, cardStyle } from "./style";
+import { cardStyle, grayBox } from "./style";
 
 const GENDER_OPTIONS = [
   {
@@ -29,6 +31,24 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
     value: ti.id,
     label: ti.etablissement
   }));
+
+  const client = useApolloClient();
+
+  const isSiretExists = async siret => {
+    const checkSiret = await client.query({
+      query: CHECK_SIRET_UNICITY,
+      variables: {
+        siret
+      },
+      fetchPolicy: "network-only",
+      context: {
+        headers: {
+          "X-Hasura-Siret": siret
+        }
+      }
+    });
+    return checkSiret.data.mandataires.length > 0;
+  };
 
   return (
     <Fragment>
@@ -52,10 +72,11 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                 {`Votre civilité`}
               </Text>
             </Box>
-            <Box height="140px">
-              <Heading4>{`Numéro de téléphone professionel`}</Heading4>
+            <Box height="220px">
+              <Heading4>{`Informations professionels`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                Vos numéros de téléphone profesionnels fixe et portable
+                Votre SIRET sera utilisé pour vous identifier lors des imports de mesures, avec OCMI
+                par exemple.
               </Text>
             </Box>
             <Box height="200px">
@@ -75,7 +96,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
           <Box p="5" pb={0} width={[1, 3 / 5]}>
             <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
               <Formik
-                onSubmit={(values, { setSubmitting, setErrors }) => {
+                onSubmit={async (values, { setSubmitting, setErrors }) => {
                   const department_id = departementDatas.find(
                     data => data.code === values.code_postal.substring(0, 2)
                   ).id;
@@ -83,7 +104,10 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                     setErrors({
                       code_postal: "Merci de renseigner un code postal valide"
                     });
-                    setSubmitting(false);
+                  } else if (await isSiretExists(values.siret)) {
+                    setErrors({
+                      siret: "Ce SIRET existe déjà"
+                    });
                   } else {
                     const body = {
                       mandataire: {
@@ -92,9 +116,11 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                         genre: values.genre.value,
                         telephone: values.telephone,
                         telephone_portable: values.telephone_portable,
+                        siret: values.siret,
                         ville: values.ville,
                         department_id,
                         etablissement: "",
+
                         dispo_max: parseInt(values.dispo_max)
                       },
                       user: {
@@ -110,10 +136,15 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                       onComplete: () => setSubmitting(false)
                     });
                   }
+                  setSubmitting(false);
                 }}
                 validationSchema={Yup.object().shape({
                   tis: Yup.mixed().required("Champs obligatoire"),
                   genre: Yup.string().required("Champs obligatoire"),
+                  siret: Yup.string()
+                    .trim()
+                    .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
+                    .required("Champs obligatoire"),
                   telephone: Yup.string().required("Champs obligatoire"),
                   telephone_portable: Yup.string(),
                   adresse: Yup.string().required("Champs obligatoire"),
@@ -126,6 +157,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                 initialValues={{
                   tis: mandataire ? mandataire.tis : "",
                   genre: mandataire ? mandataire.genre : "",
+                  siret: mandataire ? mandataire.siret : "",
                   telephone: mandataire ? mandataire.telephone : "",
                   telephone_portable: mandataire ? mandataire.telephone_portable : "",
                   adresse: mandataire ? mandataire.adresse : "",
@@ -171,6 +203,17 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                           options={GENDER_OPTIONS}
                         />
                         {errors.genre && touched.genre && <Text>{errors.genre}</Text>}
+                      </Box>
+                      <Box mb="2" pt="2">
+                        <Input
+                          value={values.siret}
+                          id="siret"
+                          name="siret"
+                          hasError={errors.siret && touched.siret}
+                          onChange={handleChange}
+                          placeholder="SIRET"
+                        />
+                        {errors.siret && touched.siret && <Text>{errors.siret}</Text>}
                       </Box>
                       <Box mb="2" pt="2">
                         <Input
