@@ -121,7 +121,7 @@ const COLUMNS = [
     Header: "Date de réservation",
     id: "date_demande",
     width: 300,
-    accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
+    accessor: d => format(d.created_at, "YYYY-MM-DD"),
     Cell(row) {
       return (
         <div>
