@@ -141,7 +141,6 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                   tis: Yup.mixed().required("Champs obligatoire"),
                   genre: Yup.string().required("Champs obligatoire"),
                   siret: Yup.string()
-                    .trim()
                     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
                     .required("Champs obligatoire"),
                   telephone: Yup.string().required("Champs obligatoire"),
