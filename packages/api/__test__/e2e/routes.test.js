@@ -13,16 +13,6 @@ beforeAll(async () => {
 const accessChecks = [
   {
     method: "GET",
-    url: "/api/v1/admin/mandataires",
-    type: "admin"
-  },
-  {
-    method: "GET",
-    url: "/api/v1/admin/tis",
-    type: "admin"
-  },
-  {
-    method: "GET",
     url: "/api/v1/mandataires",
     type: "ti"
   },
