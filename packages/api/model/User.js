@@ -107,6 +107,13 @@ class User extends Model {
     };
   }
 
+  getImpersonateUser(realUserId) {
+    return {
+      ...this.getUser(),
+      realUserId
+    };
+  }
+
   getAntennes() {
     return this.antennes.map(el => el.id);
   }

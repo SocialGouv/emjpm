@@ -8,6 +8,7 @@ const pkg = require("./package.json");
 const routes = require("./routes/index");
 const authRoutes = require("./routes/auth");
 const authV2Routes = require("./routes/auth-v2");
+const impersonateV2Routes = require("./routes/impersonate-v2");
 const userRoutes = require("./routes/users");
 const configuration = require("./env");
 
@@ -44,10 +45,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
 app.use("/api/v2/auth", authV2Routes);
+app.use(
+  "/api/v2/impersonate",
+  passport.authenticate("jwt", { session: false }),
+  impersonateV2Routes
+);
+app.use("/webhook", require("./routes/webhook"));
+
 app.use("/api/v1", passport.authenticate("jwt", { session: false }), routes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
-app.use("/webhook", require("./routes/webhook"));
 
 app.get("/ping", function(req, res) {
   if (!req.user) {
