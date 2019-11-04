@@ -10,8 +10,26 @@ const { MesuresImport } = require("../model/MesuresImport");
 const { Mesures } = require("../model/Mesures");
 const { Department } = require("../model/Departments");
 const { reservationEmail } = require("../email/reservation-email");
+const { validationEmail } = require("../email/validation-email");
 
 const { raw } = require("objection");
+
+// ----------------------------------
+// -------EMAIL ACCOUNT VALIDATION---
+// ----------------------------------
+
+router.post("/email-account-validation", function(req, res) {
+  const newUser = req.body.event.data.new;
+  const oldUser = req.body.event.data.old;
+  if (newUser.active && !oldUser.active) {
+    validationEmail(newUser.email, `${process.env.APP_URL}`);
+  }
+  res.json({ success: true });
+});
+
+// ----------------------------------
+// ------------- EMAIL RESERVATION---
+// ----------------------------------
 
 const getUsers = async (mandataire_id, antenne_id) => {
   if (mandataire_id) {
