@@ -362,6 +362,14 @@ tables:
       - id
       - name
       filter: {}
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - name
+      filter: {}
     role: anonymous
   - comment: null
     permission:
@@ -395,14 +403,6 @@ tables:
       - name
       filter: {}
     role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - name
-      filter: {}
-    role: service
   table: role
   update_permissions: []
 - array_relationships:
@@ -431,7 +431,19 @@ tables:
         column: user_id
         table: user_antenne
   delete_permissions: []
-  event_triggers: []
+  event_triggers:
+  - definition:
+      enable_manual: false
+      update:
+        columns:
+        - active
+    headers: []
+    name: email-account-validation
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION
   insert_permissions:
   - comment: null
     permission:
@@ -2087,6 +2099,17 @@ tables:
       - latitude
       - longitude
       filter: {}
+    role: ti
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      filter: {}
     role: direction
   - comment: null
     permission:
@@ -2121,17 +2144,6 @@ tables:
       - longitude
       filter: {}
     role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      filter: {}
-    role: ti
   table: city
   update_permissions: []
 - array_relationships: []
