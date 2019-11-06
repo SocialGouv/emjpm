@@ -4,10 +4,10 @@ import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
-
 import { logout } from "../../util/auth";
 import { Link } from "../Commons";
 import { Footer } from "../Footer";
+import { ImpersonateBar } from "../ImpersonateBar/ImpersonateBar";
 import { Navigation } from "../Navigation";
 import { UserInformations } from "../UserInformations";
 import { dropDownLinks } from "./dropDownLink";
@@ -59,6 +59,7 @@ const LayoutDirection = props => {
             );
           }}
         />
+        <ImpersonateBar />
         <BoxWrapper>
           <Navigation links={navigationLinks} isNestedLinks={true} />
         </BoxWrapper>

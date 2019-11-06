@@ -136,11 +136,9 @@ class User extends Model {
       id: this.id,
       url: redirs[this.type] || redirs.default,
       role: this.getDefaultRole(),
+      realUserId: realUserId ? realUserId : this.id,
       "https://hasura.io/jwt/claims": this.getHasuraClaims()
     };
-    if (realUserId) {
-      claim.realUserId = realUserId;
-    }
     return jwt.sign(claim, jwtConfig.key, signOptions);
   }
 

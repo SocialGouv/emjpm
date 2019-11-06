@@ -2,13 +2,13 @@ import { useQuery } from "@apollo/react-hooks";
 import { Button } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
 import React from "react";
-import { Box } from "rebass";
+import { Box, Flex } from "rebass";
 import { stopImpersonate } from "../../business/ImpersonateService";
 import { CURRENT_USER } from "./queries";
 import { ImpersonateBarStyle } from "./style";
 
-const doStopImpersonate = async readUserId => {
-  const url = await stopImpersonate(readUserId);
+const doStopImpersonate = async realUserId => {
+  const url = await stopImpersonate(realUserId);
   Router.push(url);
 };
 
@@ -20,12 +20,16 @@ const ImpersonateBar = props => {
   if (loading) {
     return <div>loading</div>;
   }
-  const readUserId = data.currentUser.realUserId;
+  const realUserId = data.currentUser.realUserId;
+  const id = data.currentUser.id;
+  const impersonate = realUserId != id;
   return (
-    <Box p={2} sx={ImpersonateBarStyle(readUserId)} {...props}>
-      <Button variant="outline" onClick={() => doStopImpersonate(readUserId)}>
-        Stop impersonate
-      </Button>
+    <Box p={2} sx={ImpersonateBarStyle(impersonate)} {...props}>
+      <Flex flexDirection="row" justifyContent="flex-end">
+        <Box>
+          <Button onClick={() => doStopImpersonate(realUserId)}>Stop impersonate</Button>
+        </Box>
+      </Flex>
     </Box>
   );
 };
