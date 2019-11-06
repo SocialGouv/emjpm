@@ -97,10 +97,10 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
               <Formik
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
-                  const department_id = departementDatas.find(
+                  const department = departementDatas.find(
                     data => data.code === values.code_postal.substring(0, 2)
-                  ).id;
-                  if (!department_id) {
+                  );
+                  if (!department) {
                     setErrors({
                       code_postal: "Merci de renseigner un code postal valide"
                     });
@@ -118,7 +118,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                         telephone_portable: values.telephone_portable,
                         siret: values.siret,
                         ville: values.ville,
-                        department_id,
+                        department_id: department.id,
                         etablissement: "",
                         dispo_max: parseInt(values.dispo_max)
                       },
