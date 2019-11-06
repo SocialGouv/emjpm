@@ -1,7 +1,7 @@
 const { User } = require("../../model/User");
 
 const postStopImpersonate = async (req, res) => {
-  const realUserId = req.user.id;
+  const realUserId = req.user.realUserId;
   const user_id = req.body.user_id;
   const user = await User.query()
     .findById(user_id)

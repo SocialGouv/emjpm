@@ -1,8 +1,10 @@
 import { storageService } from "../util";
 
 export const authService = {
-  login(login, idToken) {
-    storageService.setLogin(login);
+  logout() {
+    storageService.removeToken();
+  },
+  login(idToken) {
     storageService.setToken(idToken);
   },
   logout() {

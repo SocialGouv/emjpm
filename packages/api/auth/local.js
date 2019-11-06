@@ -66,6 +66,10 @@ passport.use(
         .where("id", parseInt(jwtPayload.id))
         .select()
         .then(user => {
+          // in impersonate case
+          if (jwtPayload.realUserId) {
+            user.realUserId = jwtPayload.realUserId;
+          }
           return cb(null, JSON.parse(JSON.stringify(user[0])));
         })
         .catch(err => {

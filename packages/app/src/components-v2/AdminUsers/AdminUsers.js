@@ -78,7 +78,7 @@ const RowItem = ({ item }) => {
   };
 
   const doImpersonate = async () => {
-    const url = await startImpersonate(id, email);
+    const url = await startImpersonate(id);
     Router.push(url);
   };
 
