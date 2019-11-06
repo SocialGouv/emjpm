@@ -113,17 +113,21 @@ router.get(
  *               items:
  *                 type: object
  */
-router.post("/1/etablissements", loginRequired, async (req, res, next) => {
-  // secu : ensure TI can write on this mandataire + add related test
-  const mandataire = await getMandataireByUserId(req.user.id);
-  addMandataireToEtablissement({
-    etablissement_id: req.body.etablissement_id,
-    mandataire_id: mandataire.id
-  })
-    .then(() => getAllEtablissementsByMandataire(mandataire.id))
-    .then(etablissements => res.status(200).json(etablissements))
-    .catch(error => next(error));
-});
+router.post(
+  "/:mandataireID/etablissements",
+  loginRequired,
+  async (req, res, next) => {
+    // secu : ensure TI can write on this mandataire + add related test
+    const mandataire = await getMandataireByUserId(req.user.id);
+    addMandataireToEtablissement({
+      etablissement_id: req.body.etablissement_id,
+      mandataire_id: mandataire.id
+    })
+      .then(() => getAllEtablissementsByMandataire(mandataire.id))
+      .then(etablissements => res.status(200).json(etablissements))
+      .catch(error => next(error));
+  }
+);
 
 /** @swagger
  * mandataires/1/etablissements/:mandatairesEtablissementId:
@@ -151,7 +155,7 @@ router.post("/1/etablissements", loginRequired, async (req, res, next) => {
  */
 // todo : ensure user can delete this entry
 router.delete(
-  "/1/etablissements/:mandatairesEtablissementId",
+  "/:mandataireID/etablissements/:mandatairesEtablissementId",
   loginRequired,
   async (req, res, next) => {
     const mandataire = await getMandataireByUserId(req.user.id);
@@ -185,11 +189,15 @@ router.delete(
  *               items:
  *                 type: object
  */
-router.get("/1/etablissements", loginRequired, async (req, res, next) => {
-  const mandataire = await getMandataireByUserId(req.user.id);
-  getEtablissements(mandataire.id)
-    .then(etablissements => res.status(200).json(etablissements))
-    .catch(error => next(error));
-});
+router.get(
+  "/:mandataireID/etablissements",
+  loginRequired,
+  async (req, res, next) => {
+    const mandataire = await getMandataireByUserId(req.user.id);
+    getEtablissements(mandataire.id)
+      .then(etablissements => res.status(200).json(etablissements))
+      .catch(error => next(error));
+  }
+);
 
 module.exports = router;
