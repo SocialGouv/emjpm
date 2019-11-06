@@ -1,6 +1,13 @@
-exports.up = function(knex) {
+exports.up = async function(knex) {
+  const res = await knex.raw(
+    `select count(*) from pg_catalog.pg_tables where schemaname = 'public' and tablename = 'users'`
+  );
+  const count = res.rows[0].count;
+  if (count == 1) {
+    return Promise.resolve();
+  }
   return knex.raw(`
-CREATE OR REPLACE FUNCTION on_update_timestamp()
+CREATE FUNCTION on_update_timestamp()
   RETURNS trigger AS $$
   BEGIN
    NEW.date_mesure_update = now();
@@ -8,7 +15,7 @@ CREATE OR REPLACE FUNCTION on_update_timestamp()
   END;
 $$ language 'plpgsql';
 
-CREATE OR REPLACE FUNCTION update_mesures_departement() RETURNS trigger AS $$
+CREATE FUNCTION update_mesures_departement() RETURNS trigger AS $$
   BEGIN
    update mesures set department_id = (
      select departements.id from departements where departements.code = substring(NEW.code_postal, 0,3)
