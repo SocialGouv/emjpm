@@ -4528,7 +4528,7 @@ binary-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.0.0.tgz#23c0df14f6a88077f5f986c0d167ec03c3d5537c"
   integrity sha512-Phlt0plgpIIBOGTT/ehfFnbNlfsDEiqmzE2KRXoX1bLIlir4X/MR+zSyBEkL05ffWgnRSf/DXv+WrUAVr93/ow==
 
-bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5, bluebird@^3.7.0:
+bluebird@^3.5.0, bluebird@^3.5.1, bluebird@^3.5.3, bluebird@^3.5.5, bluebird@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.7.1.tgz#df70e302b471d7473489acf26a93d63b53f874de"
   integrity sha512-DdmyoGCleJnkbp3nkbxTLJ18rjDsE4yCggEwKNXkeV123sPNfOCYeDoeuOY+F2FrSjO1YXcTU+dsy96KMy+gcg==
@@ -9404,13 +9404,13 @@ jest-environment-jsdom@^24.9.0:
     jest-util "^24.9.0"
     jsdom "^11.5.1"
 
-jest-environment-knex@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/jest-environment-knex/-/jest-environment-knex-1.1.2.tgz#d322ebff3f34ab5260b9b3019afca72bf36c2f2a"
-  integrity sha512-kTsbhAOZUtCf5HQCrIvQua+ihtn1BUhMKkEFbPTLwGV2Yrx1ep4IsA1ZhRsgehgawlbjaM+T7WJ/Q9bcwEH6SA==
+jest-environment-knex@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/jest-environment-knex/-/jest-environment-knex-1.1.3.tgz#fd933141ab3bde1ed9266d4464d3c7b4170da44f"
+  integrity sha512-p1JxewqZKoJjWDayLoyxQy9UbSjcshcc001pYus6deO6tI1LhmcYLrBJkBNGgzLrikaHlzo/iIbMpTk1Z1X9eA==
   dependencies:
     jest-environment-node "^24.9.0"
-    knex "^0.19.5"
+    knex "^0.20.1"
     rand-token "^0.4.0"
 
 jest-environment-node@^24.9.0:
@@ -9910,12 +9910,12 @@ kleur@^3.0.3:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-3.0.3.tgz#a79c9ecc86ee1ce3fa6206d1216c501f147fc07e"
   integrity sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==
 
-knex@^0.19.0, knex@^0.19.5:
-  version "0.19.5"
-  resolved "https://registry.yarnpkg.com/knex/-/knex-0.19.5.tgz#3597ebecf88a5942f18c3e6d91af53bda59eeb5d"
-  integrity sha512-Hy258avCVircQq+oj3WBqPzl8jDIte438Qlq+8pt1i/TyLYVA4zPh2uKc7Bx0t+qOpa6D42HJ2jjtl2vagzilw==
+knex@^0.20.1:
+  version "0.20.1"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-0.20.1.tgz#e2765492a810b3ae6b4c1b49a7bc4719c83f5c12"
+  integrity sha512-vQvlzsCw4kkqWLmUFVhPX8H4KrfSLVSVGbMJVo4fhJ8N5fN+CH0LzgAmQBh0iwbJY7x8Sk3T4pEjnUlUKjnCPw==
   dependencies:
-    bluebird "^3.7.0"
+    bluebird "^3.7.1"
     colorette "1.1.0"
     commander "^3.0.2"
     debug "4.1.1"
