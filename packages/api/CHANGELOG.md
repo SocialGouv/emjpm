@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.5.1](https://github.com/SocialGouv/emjpm/compare/v25.5.0...v25.5.1) (2019-11-06)
+
+
+### Bug Fixes
+
+* **prepose:** use slug in api path ([#928](https://github.com/SocialGouv/emjpm/issues/928)) ([9494dec](https://github.com/SocialGouv/emjpm/commit/9494dec))
+
+
+
+
+
 # [25.5.0](https://github.com/SocialGouv/emjpm/compare/v25.4.3...v25.5.0) (2019-11-04)
 
 
