@@ -14,7 +14,7 @@ passportStub.install(server);
 
 describe("routes : PreposeEtablissement", () => {
   beforeEach(() => {
-    knex.raw("DELETE FROM 'knex_migrations_lock';");
+    knex.raw("DELETE FROM 'knex_migrations_v2_lock';");
     return knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())

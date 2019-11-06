@@ -160,7 +160,7 @@ psql -h localhost -c "ALTER SCHEMA public OWNER TO emjpm" -U postgres emjpm
 - _If you have the `Can't take lock to run migrations: Migration table is already locked` error_
 
 ```sh
-$ docker-compose exec db psql -U postgres -d emjpm_test -c 'UPDATE knex_migrations_lock set is_locked=0;'
+$ docker-compose exec db psql -U postgres -d emjpm_test -c 'UPDATE knex_migrations_v2_lock set is_locked=0;'
 UPDATE 1
 ```
 

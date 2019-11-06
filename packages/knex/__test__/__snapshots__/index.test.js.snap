@@ -234,7 +234,7 @@ Object {
 }
 `;
 
-exports[`knex_migrations table schema 1`] = `
+exports[`knex_migrations_v2 table schema 1`] = `
 Object {
   "batch": Object {
     "defaultValue": null,
@@ -243,7 +243,7 @@ Object {
     "type": "integer",
   },
   "id": Object {
-    "defaultValue": "nextval('knex_migrations_id_seq'::regclass)",
+    "defaultValue": "nextval('knex_migrations_v2_id_seq'::regclass)",
     "maxLength": null,
     "nullable": false,
     "type": "integer",
@@ -263,10 +263,10 @@ Object {
 }
 `;
 
-exports[`knex_migrations_lock table schema 1`] = `
+exports[`knex_migrations_v2_lock table schema 1`] = `
 Object {
   "index": Object {
-    "defaultValue": "nextval('knex_migrations_lock_index_seq'::regclass)",
+    "defaultValue": "nextval('knex_migrations_v2_lock_index_seq'::regclass)",
     "maxLength": null,
     "nullable": false,
     "type": "integer",
@@ -966,8 +966,8 @@ Array [
   "direction",
   "etablissements",
   "geolocalisation_code_postal",
-  "knex_migrations",
-  "knex_migrations_lock",
+  "knex_migrations_v2",
+  "knex_migrations_v2_lock",
   "logs_data",
   "magistrat",
   "mandataire_etablissements",

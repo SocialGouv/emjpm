@@ -48,8 +48,8 @@ test("should rollback to nothing", async () => {
   const results = await knex.raw(query, [knex.client.database()]);
   expect(results.rows.map(row => row.table_name).sort()).toMatchInlineSnapshot(`
 Array [
-  "knex_migrations",
-  "knex_migrations_lock",
+  "knex_migrations_v2",
+  "knex_migrations_v2_lock",
 ]
 `);
 });

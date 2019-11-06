@@ -14,7 +14,8 @@ module.exports = {
       database: "emjpm"
     },
     migrations: {
-      directory: join(__dirname, "migrations")
+      directory: join(__dirname, "migrations_v2"),
+      tableName: "knex_migrations_v2"
     },
     seeds: {
       directory: join(__dirname, "seeds/development")
@@ -30,7 +31,8 @@ module.exports = {
       database: "emjpm"
     },
     migrations: {
-      directory: join(__dirname, "migrations")
+      directory: join(__dirname, "migrations_v2"),
+      tableName: "knex_migrations_v2"
     },
     seeds: {
       directory: join(__dirname, "seeds/development")
@@ -46,7 +48,8 @@ module.exports = {
       database: "emjpm"
     },
     migrations: {
-      directory: join(__dirname, "migrations")
+      directory: join(__dirname, "migrations_v2"),
+      tableName: "knex_migrations_v2"
     }
   }
 };

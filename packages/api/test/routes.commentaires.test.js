@@ -15,7 +15,7 @@ const agent = chai.request.agent(server);
 
 describe("routes : commentaires", () => {
   beforeEach(() => {
-    knex.raw("DELETE FROM 'knex_migrations_lock';");
+    knex.raw("DELETE FROM 'knex_migrations_v2_lock';");
     return knex.migrate
       .rollback()
       .then(() => knex.migrate.latest())
