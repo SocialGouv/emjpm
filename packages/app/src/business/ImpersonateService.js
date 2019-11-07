@@ -12,6 +12,7 @@ export const startImpersonate = async id => {
     { forceLogin: true, apiVersion: "v2" }
   );
   const token = json.token;
+  authService.logout();
   authService.login(token);
   return json.url;
 };
@@ -27,6 +28,7 @@ export const stopImpersonate = async realUserId => {
     { forceLogin: true, apiVersion: "v2" }
   );
   const token = json.token;
+  authService.logout();
   authService.login(token);
   return json.url;
 };

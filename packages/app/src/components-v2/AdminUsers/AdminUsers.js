@@ -119,7 +119,7 @@ const RowItem = ({ item }) => {
             <Box mr="1" width="120px">
               <Button
                 sx={activateButtonStyle(isActive)}
-                width="120px"
+                width="130px"
                 onClick={doImpersonate}
                 variant="outline"
               >
