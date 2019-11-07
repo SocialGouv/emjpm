@@ -7,10 +7,12 @@ export const CHOOSE_MANDATAIRE = gql`
     $type: String!
     $civilite: String!
     $annee: String!
+    $cabinet: String
     $numero_rg: String!
   ) {
     insert_mesures(
       objects: {
+        cabinet: $cabinet
         ti_id: $ti
         mandataire_id: $mandataire_id
         type: $type
@@ -60,11 +62,13 @@ export const CHOOSE_SERVICE = gql`
     $type: String!
     $civilite: String!
     $annee: String!
+    $cabinet: String
     $numero_rg: String!
   ) {
     insert_mesures(
       objects: {
         ti_id: $ti
+        cabinet: $cabinet
         antenne_id: $antenne_id
         type: $type
         civilite: $civilite

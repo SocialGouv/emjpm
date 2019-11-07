@@ -12,7 +12,7 @@ import { MESURE_TYPE_LABEL_VALUE, CIVILITY } from "../../constants/mesures";
 import { MandataireInformations } from "./MandataireInformations";
 
 export const MagistratChoose = props => {
-  const { ti, antenneId, mandataireId } = props;
+  const { ti, antenneId, mandataireId, cabinet } = props;
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
   const [chooseService] = useMutation(CHOOSE_SERVICE);
   const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
@@ -32,6 +32,7 @@ export const MagistratChoose = props => {
                 chooseMandataire({
                   variables: {
                     ti: ti,
+                    cabinet: cabinet,
                     mandataire_id: mandataireId,
                     type: values.type.value,
                     civilite: values.civilite.value,
@@ -44,6 +45,7 @@ export const MagistratChoose = props => {
                 chooseService({
                   variables: {
                     ti: ti,
+                    cabinet: cabinet,
                     antenne_id: antenneId,
                     type: values.type.value,
                     civilite: values.civilite.value,
