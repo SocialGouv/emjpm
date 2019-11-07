@@ -191,49 +191,67 @@ tables:
       allow_aggregations: false
       columns:
       - id
-      - etablissement
-      - email
-      - code_postal
-      - ville
-      - telephone
       - created_at
+      - code_postal
+      - email
+      - etablissement
+      - siret
+      - telephone
+      - ville
       filter: {}
-    role: service
+    role: individuel
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - id
-      - etablissement
-      - email
       - code_postal
-      - ville
-      - telephone
       - created_at
+      - email
+      - etablissement
+      - id
+      - siret
+      - telephone
+      - ville
       filter: {}
     role: direction
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - id
-      - created_at
       - code_postal
+      - created_at
       - email
       - etablissement
+      - id
+      - siret
       - telephone
       - ville
       filter: {}
-    role: mandataire
+    role: ti
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - id
-      - created_at
       - code_postal
+      - created_at
       - email
       - etablissement
+      - id
+      - siret
+      - telephone
+      - ville
+      filter: {}
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - code_postal
+      - created_at
+      - email
+      - etablissement
+      - id
+      - siret
       - telephone
       - ville
       filter: {}
@@ -242,15 +260,16 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - id
-      - created_at
       - code_postal
+      - created_at
       - email
       - etablissement
+      - id
+      - siret
       - telephone
       - ville
       filter: {}
-    role: ti
+    role: mandataire
   table: tis
   update_permissions: []
 - array_relationships:
@@ -803,13 +822,13 @@ tables:
   is_enum: false
   object_relationships:
   - comment: null
-    name: ti
-    using:
-      foreign_key_constraint_on: ti_id
-  - comment: null
     name: user
     using:
       foreign_key_constraint_on: user_id
+  - comment: null
+    name: ti
+    using:
+      foreign_key_constraint_on: ti_id
   select_permissions:
   - comment: null
     permission:
