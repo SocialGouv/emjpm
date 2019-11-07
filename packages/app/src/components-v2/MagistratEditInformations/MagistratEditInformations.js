@@ -17,7 +17,7 @@ const grayBox = {
 };
 
 const MagistratEditInformations = props => {
-  const { cabinet, username, prenom, nom, email, id } = props;
+  const { cabinet, prenom, nom, email, id } = props;
   const [EditUser] = useMutation(EDIT_USER, {
     update() {
       Router.push("/magistrats/informations", `/magistrats/informations`, {
@@ -43,10 +43,9 @@ const MagistratEditInformations = props => {
                 EditUser({
                   variables: {
                     cabinet: values.cabinet,
-                    username: values.username,
                     prenom: values.prenom,
                     nom: values.nom,
-                    email: values.email,
+                    email: values.email.toLowerCase(),
                     id: id
                   },
                   refetchQueries: ["users"]
@@ -55,14 +54,14 @@ const MagistratEditInformations = props => {
               }}
               validationSchema={Yup.object().shape({
                 cabinet: Yup.string(),
-                username: Yup.string().required(),
                 prenom: Yup.string().required(),
                 nom: Yup.string().required(),
-                email: Yup.string().required()
+                email: Yup.string()
+                  .email()
+                  .required()
               })}
               initialValues={{
                 cabinet: cabinet || "",
-                username: username || "",
                 prenom: prenom || "",
                 nom: nom || "",
                 email: email || ""
@@ -81,16 +80,7 @@ const MagistratEditInformations = props => {
                         onChange={handleChange}
                         placeholder="Cabinet"
                       />
-                    </Box>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
-                      <Input
-                        value={values.username}
-                        id="username"
-                        name="username"
-                        hasError={errors.username && touched.username}
-                        onChange={handleChange}
-                        placeholder="Nom d'utilisateur"
-                      />
+                      {errors.cabinet && touched.cabinet && <Text mt="1">{errors.cabinet}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
                       <Input
@@ -101,6 +91,7 @@ const MagistratEditInformations = props => {
                         onChange={handleChange}
                         placeholder="Prénom"
                       />
+                      {errors.prenom && touched.prenom && <Text mt="1">{errors.prenom}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
                       <Input
@@ -111,6 +102,7 @@ const MagistratEditInformations = props => {
                         onChange={handleChange}
                         placeholder="Nom"
                       />
+                      {errors.nom && touched.nom && <Text mt="1">{errors.nom}</Text>}
                     </Box>
                     <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
                       <Input
@@ -121,6 +113,7 @@ const MagistratEditInformations = props => {
                         onChange={handleChange}
                         placeholder="Email"
                       />
+                      {errors.email && touched.email && <Text mt="1">{errors.email}</Text>}
                     </Box>
                     <Box>
                       <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
