@@ -27,7 +27,8 @@ const CurrentUser = props => {
   const { data, error, loading } = useQuery(QUERY_TYPE[type], {
     variables: {
       userId: userId
-    }
+    },
+    fetchPolicy: "network-only"
   });
 
   if (loading) {
@@ -44,7 +45,9 @@ const CurrentUser = props => {
 const UserInformations = props => {
   const { Component } = props;
 
-  const { data, loading, error } = useQuery(CURRENT_USER);
+  const { data, loading, error } = useQuery(CURRENT_USER, {
+    fetchPolicy: "network-only"
+  });
 
   if (loading) {
     return <div>Chargement</div>;

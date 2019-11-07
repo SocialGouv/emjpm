@@ -14,37 +14,60 @@ import {
 } from "./style";
 
 const Informations = props => {
-  const [user] = props.userInformations.users;
-  const { email, magistrat } = user;
+  const {
+    email,
+    cabinet,
+    nom,
+    prenom,
+    magistrat: { ti }
+  } = props;
   return (
     <Box {...props}>
       <Card p="5">
-        <Text sx={titleStyle}>Tribunal</Text>
-        <Heading3>{magistrat.ti.etablissement}</Heading3>
+        <Text sx={titleStyle}>
+          {nom ? nom : "Nom non renseigné"} {prenom ? prenom : "Prénom non renseigné"}
+        </Text>
+        <Heading3>{ti.etablissement}</Heading3>
         <Flex sx={flexStyle}>
           <Box sx={boxStyle}>
-            <Heading5>Contact</Heading5>
+            <Heading5>Vos informations</Heading5>
             <Flex mt="2">
               <MailOutline size="16" />
               <Text sx={iconTextStyle}>{email}</Text>
             </Flex>
-            <Flex mt="1">
-              <Smartphone size="16" />
-              <Text sx={iconTextStyle}>{magistrat.ti.telephone}</Text>
-            </Flex>
+            <Text sx={innerTextStyle}>{nom ? nom : "Nom non renseigné"} </Text>
+            <Text sx={innerTextStyle}>{prenom ? prenom : "Prénom non renseigné"}</Text>
+            <Text sx={innerTextStyle}>
+              {cabinet ? `Cabinet: ${cabinet}` : "Cabinet non renseigné"}{" "}
+            </Text>
           </Box>
           <Box sx={boxStyle}>
-            <Heading5>Informations</Heading5>
-            <Text sx={topTextStyle}>
-              {magistrat.user.nom} {magistrat.user.prenom}
+            <Heading5>Votre tribunal</Heading5>
+            <Text sx={topTextStyle}>{ti.etablissement}</Text>
+            <Text sx={innerTextStyle}>
+              {ti.code_postal} {ti.ville}
             </Text>
             <Text sx={innerTextStyle}>
-              {magistrat.ti.code_postal} {magistrat.ti.ville}
+              {ti.siret ? `Siret: ${ti.siret}` : "Numero de siret non renseigné"}
             </Text>
+            <Flex mt="3">
+              <MailOutline size="16" />
+              <Text sx={iconTextStyle}>
+                {ti.email.length > 1 ? ti.email : "Email non renseigné"}
+              </Text>
+            </Flex>
+            <Flex mt="1">
+              <Smartphone size="16" />
+              <Text sx={iconTextStyle}>
+                {ti.telephone.length > 1 ? ti.telephone : "Téléphone non renseigné"}
+              </Text>
+            </Flex>
           </Box>
         </Flex>
         <Flex mt="5">
-          <LinkButton href="/magistrats/edit-informations">Modifier mes informations</LinkButton>
+          <Box mr="1">
+            <LinkButton href="/magistrats/edit-informations">Modifier mes informations</LinkButton>
+          </Box>
         </Flex>
       </Card>
     </Box>

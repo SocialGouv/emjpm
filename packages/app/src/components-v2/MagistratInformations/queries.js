@@ -9,6 +9,7 @@ export const MAGISTRAT = gql`
       email
       magistrat {
         ti {
+          siret
           ville
           telephone
           etablissement
@@ -18,6 +19,7 @@ export const MAGISTRAT = gql`
         user {
           nom
           prenom
+          cabinet
           username
         }
       }
