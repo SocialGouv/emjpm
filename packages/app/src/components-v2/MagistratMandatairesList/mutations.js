@@ -110,3 +110,26 @@ export const CHOOSE_SERVICE = gql`
     }
   }
 `;
+
+export const ADD_COMMENT = gql`
+  mutation InsertComment($comment: String!, $antenne_id: Int, $ti_id: Int!, $mandataire_id: Int) {
+    insert_commentaires(
+      objects: {
+        comment: $comment
+        antenne_id: $antenne_id
+        ti_id: $ti_id
+        mandataire_id: $mandataire_id
+      }
+    ) {
+      affected_rows
+      returning {
+        comment
+        created_at
+        id
+        antenne_id
+        mandataire_id
+        ti_id
+      }
+    }
+  }
+`;

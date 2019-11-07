@@ -1,5 +1,20 @@
 import gql from "graphql-tag";
 
+export const MANDATAIRE_COMMENTS = gql`
+  query MandataireComments($antenne_id: Int, $mandataire_id: Int) {
+    commentaires(
+      where: { antenne_id: { _eq: $antenne_id }, mandataire_id: { _eq: $mandataire_id } }
+    ) {
+      comment
+      antenne_id
+      created_at
+      id
+      mandataire_id
+      ti_id
+    }
+  }
+`;
+
 export const GET_MANDATAIRES = gql`
   query view_mesure_gestionnaire(
     $tribunal: Int!
@@ -36,6 +51,10 @@ export const GET_MANDATAIRES = gql`
           telephone
           ville
           adresse
+          commentaires {
+            comment
+            ti_id
+          }
           code_postal
           user {
             nom
@@ -63,6 +82,10 @@ export const GET_MANDATAIRES = gql`
           etablissement
           service_antennes(where: { headquarters: { _eq: true } }) {
             id
+            commentaires {
+              comment
+              ti_id
+            }
           }
         }
       }

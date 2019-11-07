@@ -1,11 +1,52 @@
 import React from "react";
-import { Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
+import { Heading3, Heading5, Card, Heading4, Spinner, Button } from "@socialgouv/emjpm-ui-core";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
+import { useQuery } from "@apollo/react-hooks";
+
 import { topTextStyle, iconTextStyle, boxStyle, flexStyle } from "./style";
+import { MANDATAIRE_COMMENTS } from "./queries";
 
 const MandataireInformations = props => {
-  const { nom, prenom, telephone, email, ville, tis, adresse, codePostal } = props;
+  const {
+    antenneId,
+    mandataireId,
+    nom,
+    prenom,
+    telephone,
+    email,
+    ville,
+    tis,
+    adresse,
+    codePostal
+  } = props;
+
+  const { data, error, loading } = useQuery(MANDATAIRE_COMMENTS, {
+    variables: {
+      antenne_id: antenneId,
+      mandataire_id: mandataireId
+    }
+  });
+
+  if (loading) {
+    return (
+      <Card width="100%">
+        <Box my="5">
+          <Spinner />
+        </Box>
+      </Card>
+    );
+  }
+
+  if (error) {
+    return (
+      <Card width="100%">
+        <Heading4>erreur</Heading4>
+      </Card>
+    );
+  }
+
+  const { commentaires } = data;
   return (
     <div>
       <Heading3>{`${nom} ${prenom}`}</Heading3>
@@ -34,6 +75,21 @@ const MandataireInformations = props => {
               </Text>
             );
           })}
+        </Box>
+        {commentaires.length > 0 && (
+          <Box>
+            <Heading5 mt="3">Commentaire sur le mandataire</Heading5>
+            {commentaires.map(commentaire => {
+              return (
+                <Text sx={topTextStyle} key={commentaire.id}>
+                  - {commentaire.comment}
+                </Text>
+              );
+            })}
+          </Box>
+        )}
+        <Box mt="3">
+          <Button variant="outline">Ajouter un commentaire</Button>
         </Box>
       </Flex>
     </div>
