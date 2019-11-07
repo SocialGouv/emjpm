@@ -1,11 +1,10 @@
+import { useMutation } from "@apollo/react-hooks";
+import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Formik } from "formik";
+import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
-import Router from "next/router";
-import { Formik } from "formik";
-import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
-import { Text, Heading4, Card, Input, Button } from "@socialgouv/emjpm-ui-core";
-
 import { EDIT_USER } from "./mutations";
 
 const cardStyle = { p: "0", m: "1", mt: "5" };
@@ -54,11 +53,11 @@ const MagistratEditInformations = props => {
               }}
               validationSchema={Yup.object().shape({
                 cabinet: Yup.string(),
-                prenom: Yup.string().required(),
-                nom: Yup.string().required(),
-                email: Yup.string()
-                  .email()
-                  .required()
+                prenom: Yup.string().required("Champs obligatoire"),
+                nom: Yup.string().required("Champs obligatoire"),
+                email: Yup.string("Champs obligatoire")
+                  .email("Le format de votre email n'est pas correct")
+                  .required("Champs obligatoire")
               })}
               initialValues={{
                 cabinet: cabinet || "",
@@ -78,7 +77,7 @@ const MagistratEditInformations = props => {
                         name="cabinet"
                         hasError={errors.cabinet && touched.cabinet}
                         onChange={handleChange}
-                        placeholder="Cabinet"
+                        placeholder="Cabinet (optionnel)"
                       />
                       {errors.cabinet && touched.cabinet && <Text mt="1">{errors.cabinet}</Text>}
                     </Box>
