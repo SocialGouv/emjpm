@@ -15,7 +15,8 @@ export const formatMesureList = mesureList => {
       annee,
       civilite,
       date_ouverture,
-      numero_rg
+      numero_rg,
+      cabinet
     } = mesure;
     const formatedDate = format(date_ouverture, "DD/MM/YYYY");
     return {
@@ -32,7 +33,8 @@ export const formatMesureList = mesureList => {
       residence: residence ? residence : "non reseigné",
       codePostal: code_postal ? code_postal : "non reseigné",
       numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
-      antenneId: antenne_id ? antenne_id : "non reseigné"
+      antenneId: antenne_id ? antenne_id : "non reseigné",
+      cabinet: cabinet ? cabinet : ""
     };
   });
   return mesures;

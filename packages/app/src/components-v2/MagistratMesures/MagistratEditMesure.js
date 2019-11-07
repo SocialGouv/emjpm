@@ -10,7 +10,17 @@ import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/me
 import { EDIT_MESURE } from "./mutations";
 
 export const MagistratEditMesure = props => {
-  const { currentMesure, age, civilite, codePostal, numeroRg, residence, type, ville } = props;
+  const {
+    currentMesure,
+    age,
+    civilite,
+    codePostal,
+    numeroRg,
+    residence,
+    type,
+    ville,
+    cabinet
+  } = props;
   const [UpdateMesure] = useMutation(EDIT_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   return (
@@ -40,7 +50,8 @@ export const MagistratEditMesure = props => {
                   ville: values.ville,
                   civilite: values.civilite.value,
                   annee: values.annee,
-                  numero_rg: values.numero_rg
+                  numero_rg: values.numero_rg,
+                  cabinet: values.cabinet
                 }
               });
               setSubmitting(false);
@@ -49,13 +60,14 @@ export const MagistratEditMesure = props => {
             }, 500);
           }}
           validationSchema={Yup.object().shape({
-            type: Yup.string(),
+            type: Yup.string().required(),
             residence: Yup.string(),
             code_postal: Yup.string(),
             ville: Yup.string(),
-            civilite: Yup.string(),
-            annee: Yup.string(),
-            numero_rg: Yup.string()
+            civilite: Yup.string().required(),
+            annee: Yup.string().required(),
+            numero_rg: Yup.string().required(),
+            cabinet: Yup.string()
           })}
           initialValues={{
             annee: age,
@@ -64,7 +76,8 @@ export const MagistratEditMesure = props => {
             numero_rg: numeroRg,
             residence: { label: residence, value: residence },
             type: { label: type, value: type },
-            ville: ville
+            ville: ville,
+            cabinet: cabinet ? cabinet : ""
           }}
         >
           {props => {
@@ -150,6 +163,16 @@ export const MagistratEditMesure = props => {
                     hasError={errors.numero_rg && touched.numero_rg}
                     onChange={handleChange}
                     placeholder="numero rg"
+                  />
+                </Box>
+                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                  <Input
+                    value={values.cabinet}
+                    id="cabinet"
+                    name="cabinet"
+                    hasError={errors.cabinet && touched.cabinet}
+                    onChange={handleChange}
+                    placeholder="Cabinet (optionnel)"
                   />
                 </Box>
                 <Flex justifyContent="flex-end">
