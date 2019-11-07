@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Text, Flex } from "rebass";
-import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
+import { Card, Button, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 import { MailOutline } from "styled-icons/material";
 
 import { LinkButton } from "../Commons";
 import { innerTextStyle, iconTextStyle, boxStyle, flexStyle } from "./style";
+import { doForgotPassword } from "../../components/loginComponents/ForgotPasswordForm";
 
 const MagistratInformations = props => {
+  const [isOpen, toggleModal] = useState(false);
   const { email, cabinet, nom, prenom } = props;
+  const changePassword = email => {
+    doForgotPassword({ email: email }).then(() => {
+      toggleModal(true);
+    });
+  };
+
   return (
     <Box {...props}>
       <Card p="5">
         <Heading3>
-          {" "}
           {nom ? nom : "Nom non renseigné"} {prenom ? prenom : "Prénom non renseigné"}
         </Heading3>
         <Flex sx={flexStyle}>
@@ -35,9 +42,17 @@ const MagistratInformations = props => {
           </Box>
         </Flex>
         <Flex mt="1">
-          <Box>
-            <LinkButton href="/magistrats/edit-informations">Modifier mon mot de passe</LinkButton>
-          </Box>
+          {isOpen ? (
+            <Box>
+              <Card backgroundColor="success" color="white">
+                Un mail vient de vous être envoyer pour réinitialiser votre mot de passe
+              </Card>
+            </Box>
+          ) : (
+            <Box>
+              <Button onClick={() => changePassword(email)}>Réinitialiser mon mot de passe</Button>
+            </Box>
+          )}
         </Flex>
       </Card>
     </Box>
