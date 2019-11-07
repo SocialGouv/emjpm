@@ -88,6 +88,15 @@ export const MAGISTRAT_USERS = gql`
       username
       magistrat {
         ti_id
+        ti {
+          id
+          siret
+          ville
+          telephone
+          etablissement
+          email
+          code_postal
+        }
       }
     }
   }
