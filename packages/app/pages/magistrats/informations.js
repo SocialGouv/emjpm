@@ -5,6 +5,7 @@ import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import { withAuthSync } from "../../src/util/auth";
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratInformations } from "../../src/components-v2/MagistratInformations";
+import { MagistratTribunalInformations } from "../../src/components-v2/MagistratTribunalInformations";
 import { UserInformations } from "../../src/components-v2/UserInformations";
 
 const Informations = () => {
@@ -35,9 +36,14 @@ const Informations = () => {
             sx={{
               p: 1,
               flexGrow: 1,
-              flexBasis: 320
+              flexBasis: 420
             }}
-          />
+          >
+            <Heading2>Votre tribunal</Heading2>
+            <UserInformations
+              Component={props => <MagistratTribunalInformations {...props} mt="3" />}
+            />
+          </Box>
         </Flex>
       </BoxWrapper>
     </LayoutMagistrat>
