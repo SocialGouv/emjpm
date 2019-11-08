@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Heading3, Heading5, Card, Heading4, Spinner, Button } from "@socialgouv/emjpm-ui-core";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
 import { useQuery } from "@apollo/react-hooks";
 
+import { MagistratMandataireAddComment } from "./MagistratMandataireAddComment";
 import { topTextStyle, iconTextStyle, boxStyle, flexStyle } from "./style";
 import { MANDATAIRE_COMMENTS } from "./queries";
 
@@ -18,8 +19,11 @@ const MandataireInformations = props => {
     ville,
     tis,
     adresse,
-    codePostal
+    codePostal,
+    ti
   } = props;
+
+  const [isOpen, toggleCommentForm] = useState(false);
 
   const { data, error, loading } = useQuery(MANDATAIRE_COMMENTS, {
     variables: {
@@ -45,7 +49,6 @@ const MandataireInformations = props => {
       </Card>
     );
   }
-
   const { commentaires } = data;
   return (
     <div>
@@ -88,9 +91,24 @@ const MandataireInformations = props => {
             })}
           </Box>
         )}
-        <Box mt="3">
-          <Button variant="outline">Ajouter un commentaire</Button>
-        </Box>
+        {isOpen ? (
+          <MagistratMandataireAddComment
+            ti={ti}
+            antenneId={antenneId}
+            mandataireId={mandataireId}
+          />
+        ) : (
+          <Box mt="3">
+            <Button
+              variant="outline"
+              onClick={() => {
+                toggleCommentForm(true);
+              }}
+            >
+              Ajouter un commentaire
+            </Button>
+          </Box>
+        )}
       </Flex>
     </div>
   );
