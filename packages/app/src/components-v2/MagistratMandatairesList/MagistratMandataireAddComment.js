@@ -10,7 +10,7 @@ import { MandataireContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { ADD_COMMENT } from "./mutations";
 
 export const MagistratMandataireAddComment = props => {
-  const { ti, antenneId, mandataireId } = props;
+  const { ti, antenneId, mandataireId, toggleCommentForm } = props;
   const [InsertComment] = useMutation(ADD_COMMENT);
   const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
   return (
@@ -27,6 +27,7 @@ export const MagistratMandataireAddComment = props => {
             refetchQueries: ["MandataireComments"]
           });
           setSubmitting(false);
+          toggleCommentForm(false);
         }}
         validationSchema={Yup.object().shape({
           comment: Yup.string().required()

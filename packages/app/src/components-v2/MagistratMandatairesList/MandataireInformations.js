@@ -96,6 +96,7 @@ const MandataireInformations = props => {
         )}
         {isOpen ? (
           <MagistratMandataireAddComment
+            toggleCommentForm={toggleCommentForm}
             ti={ti}
             antenneId={antenneId}
             mandataireId={mandataireId}
