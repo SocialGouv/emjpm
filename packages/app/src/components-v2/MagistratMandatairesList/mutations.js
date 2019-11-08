@@ -133,3 +133,11 @@ export const ADD_COMMENT = gql`
     }
   }
 `;
+
+export const REMOVE_COMMENT = gql`
+  mutation RemoveComment($id: Int!) {
+    delete_commentaires(where: { id: { _eq: $id } }) {
+      affected_rows
+    }
+  }
+`;

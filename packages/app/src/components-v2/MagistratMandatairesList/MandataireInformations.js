@@ -7,6 +7,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { MagistratMandataireAddComment } from "./MagistratMandataireAddComment";
 import { topTextStyle, iconTextStyle, boxStyle, flexStyle } from "./style";
 import { MANDATAIRE_COMMENTS } from "./queries";
+import { MagistratMandataireComment } from "./MagistratMandataireComment";
 
 const MandataireInformations = props => {
   const {
@@ -80,13 +81,15 @@ const MandataireInformations = props => {
           })}
         </Box>
         {commentaires.length > 0 && (
-          <Box>
+          <Box width="100%">
             <Heading5 mt="3">Commentaire sur le mandataire</Heading5>
             {commentaires.map(commentaire => {
               return (
-                <Text sx={topTextStyle} key={commentaire.id}>
-                  - {commentaire.comment}
-                </Text>
+                <MagistratMandataireComment
+                  key={commentaire.id}
+                  id={commentaire.id}
+                  comment={commentaire.comment}
+                />
               );
             })}
           </Box>

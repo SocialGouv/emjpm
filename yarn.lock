@@ -1139,6 +1139,13 @@
   dependencies:
     "@emotion/memoize" "0.7.3"
 
+"@emotion/is-prop-valid@^0.8.3":
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.5.tgz#2dda0791f0eafa12b7a0a5b39858405cc7bde983"
+  integrity sha512-6ZODuZSFofbxSbcxwsFz+6ioPjb0ISJRRPLZ+WIbjcU2IMU0Io+RGQjjaTgOvNQl007KICBm7zXQaYQEC1r6Bg==
+  dependencies:
+    "@emotion/memoize" "0.7.3"
+
 "@emotion/memoize@0.7.2", "@emotion/memoize@^0.7.1":
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.7.2.tgz#7f4c71b7654068dfcccad29553520f984cc66b30"
@@ -14563,6 +14570,14 @@ styled-icons@^8.3.0:
   integrity sha512-6qCrJzaaDQjdIOsXeMA6Wc8oA0vu2dzMfgTo0TxolCJJwUE0vQoJGnfU0NdJkic+MaHPKa2j5F7Gqm+baW6wkw==
   dependencies:
     "@emotion/is-prop-valid" "^0.8.2"
+    tslib "^1.9.3"
+
+styled-icons@^8.6.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/styled-icons/-/styled-icons-8.6.0.tgz#e5b7183b2ca569fe414e913adaa9f67f6e45142b"
+  integrity sha512-qxHyIIVzy9AKAlKSoH3FjfugwIwdOO/gzMZwJTy/ltE+jQQeF+rvJ1RG6rDrK0ZTp+2sY/S6tvnMiR7LIVFBjA==
+  dependencies:
+    "@emotion/is-prop-valid" "^0.8.3"
     tslib "^1.9.3"
 
 styled-jsx@3.2.1, styled-jsx@^3.2.1:
