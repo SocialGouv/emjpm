@@ -21,6 +21,7 @@ export const MagistratEditMesure = props => {
     ville,
     cabinet
   } = props;
+  console.log(props);
   const [UpdateMesure] = useMutation(EDIT_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   return (
