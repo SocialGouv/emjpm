@@ -3,8 +3,8 @@ const { sendEmail } = require(".");
 const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
   `Madame, Monsieur,
 
-  Pour information, le ${ti.etablissement} ${(ti.cabinet &&
-    `cabinet ${ti.cabinet},`) ||
+  Pour information, le ${ti.etablissement} ${(mesure.cabinet &&
+    `cabinet ${mesure.cabinet},`) ||
     ""} a décidé de vous confier une nouvelle mesure :
   - "type de mesure": ${mesure.type}
   - "genre": ${mesure.civilite}
@@ -23,8 +23,8 @@ const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
 const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
   `Madame, Monsieur,
 <br><br>
-  Pour information, le ${ti.etablissement} ${(ti.cabinet &&
-    `cabinet ${ti.cabinet},`) ||
+  Pour information, le ${ti.etablissement} ${(mesure.cabinet &&
+    `cabinet ${mesure.cabinet},`) ||
     ""} a décidé de vous confier une nouvelle mesure :
   <br>
   - "type de mesure": ${mesure.type}
