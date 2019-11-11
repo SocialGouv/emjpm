@@ -1,18 +1,17 @@
+import { useMutation } from "@apollo/react-hooks";
+import { MandataireContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { Button, Heading3, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { Formik } from "formik";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
-import { Formik } from "formik";
-import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
-
-import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
-import { Select, Button, Input, Heading3 } from "@socialgouv/emjpm-ui-core";
-import { MandataireContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
-import { MESURE_TYPE_LABEL_VALUE, CIVILITY } from "../../constants/mesures";
+import { CIVILITY, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { MandataireInformations } from "./MandataireInformations";
+import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
 
 export const MagistratChoose = props => {
-  const { ti, antenneId, mandataireId } = props;
+  const { ti, antenneId, mandataireId, cabinet } = props;
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
   const [chooseService] = useMutation(CHOOSE_SERVICE);
   const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
@@ -32,6 +31,7 @@ export const MagistratChoose = props => {
                 chooseMandataire({
                   variables: {
                     ti: ti,
+                    cabinet: values.cabinet,
                     mandataire_id: mandataireId,
                     type: values.type.value,
                     civilite: values.civilite.value,
@@ -44,6 +44,7 @@ export const MagistratChoose = props => {
                 chooseService({
                   variables: {
                     ti: ti,
+                    cabinet: values.cabinet,
                     antenne_id: antenneId,
                     type: values.type.value,
                     civilite: values.civilite.value,
@@ -63,13 +64,15 @@ export const MagistratChoose = props => {
             type: Yup.string().required(),
             civilite: Yup.string().required(),
             annee: Yup.string().required(),
-            numero_rg: Yup.string().required()
+            numero_rg: Yup.string().required(),
+            cabinet: Yup.string()
           })}
           initialValues={{
             annee: "",
             civilite: "",
             numero_rg: "",
-            type: ""
+            type: "",
+            cabinet
           }}
         >
           {props => {
@@ -124,6 +127,16 @@ export const MagistratChoose = props => {
                     hasError={errors.numero_rg && touched.numero_rg}
                     onChange={handleChange}
                     placeholder="numero rg"
+                  />
+                </Box>
+                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                  <Input
+                    value={values.cabinet}
+                    id="cabinet"
+                    name="cabinet"
+                    hasError={errors.cabinet && touched.cabinet}
+                    onChange={handleChange}
+                    placeholder="cabinet (optionnel)"
                   />
                 </Box>
                 <Flex justifyContent="flex-end">
