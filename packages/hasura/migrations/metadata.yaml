@@ -1171,8 +1171,6 @@ tables:
       - etablissement
       - id
       - information
-      - latitude
-      - longitude
       - nom
       - prenom
       - telephone
@@ -1192,8 +1190,6 @@ tables:
       - etablissement
       - id
       - information
-      - latitude
-      - longitude
       - nom
       - prenom
       - telephone
@@ -1212,8 +1208,6 @@ tables:
       - etablissement
       - id
       - information
-      - latitude
-      - longitude
       - nom
       - prenom
       - telephone
@@ -1253,16 +1247,12 @@ tables:
       - ville
       - tel
       - fax
-      - latitude
-      - longitude
       filter: {}
     role: direction
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - latitude
-      - longitude
       - id
       - adresse
       - code_postal
@@ -1747,8 +1737,6 @@ tables:
       - etablissement_id
       - extinction
       - id
-      - latitude
-      - longitude
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -1779,8 +1767,6 @@ tables:
       - etablissement_id
       - extinction
       - id
-      - latitude
-      - longitude
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -1811,8 +1797,6 @@ tables:
       - etablissement_id
       - extinction
       - id
-      - latitude
-      - longitude
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -1844,8 +1828,6 @@ tables:
       - etablissement_id
       - extinction
       - id
-      - latitude
-      - longitude
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -2354,8 +2336,6 @@ tables:
       - etablissement
       - genre
       - id
-      - latitude
-      - longitude
       - mesures_en_attente
       - mesures_en_cours
       - nb_secretariat
