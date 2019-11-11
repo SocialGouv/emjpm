@@ -1,16 +1,15 @@
-import { Heading1, Heading4, Button, Card, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading1, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
-import React, { useContext, Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
-import { MAGISTRAT_CABINET_LABEL_VALUE } from "../../constants/magistrat";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
-import { grayBox, cardStyle } from "./style";
+import { cardStyle, grayBox } from "./style";
 
 const SignupMagistratForm = ({ tiDatas }) => {
   const { user, magistrat, setMagistrat, validateStepOne } = useContext(SignupContext);
@@ -24,7 +23,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
     <Fragment>
       <Heading1 px="1">{`Création d'un compte de magistrat`}</Heading1>
       <Card sx={cardStyle}>
-        <Flex flexDirection="column">
+        <Flex>
           <Box width={[1, 2 / 5]} sx={grayBox}>
             <Box height="80px" pt={1}>
               <Heading4>{`Tribunal`}</Heading4>
@@ -40,7 +39,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
                   const body = {
                     magistrat: {
                       ti: values.ti.value,
-                      cabinet: values.cabinet.value
+                      cabinet: values.cabinet
                     },
                     user: {
                       username: user.email,
@@ -56,7 +55,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
                 }}
                 validationSchema={Yup.object().shape({
                   ti: Yup.string().required("Champs obligatoire"),
-                  cabinet: Yup.string().required("Champs obligatoire")
+                  cabinet: Yup.string()
                 })}
                 initialValues={{
                   ti: magistrat ? magistrat.ti : "",
@@ -70,7 +69,8 @@ const SignupMagistratForm = ({ tiDatas }) => {
                     errors,
                     isSubmitting,
                     handleSubmit,
-                    setFieldValue
+                    setFieldValue,
+                    handleChange
                   } = props;
                   return (
                     <form onSubmit={handleSubmit}>
@@ -88,14 +88,13 @@ const SignupMagistratForm = ({ tiDatas }) => {
                         {errors.ti && touched.ti && <Text>{errors.ti}</Text>}
                       </Box>
                       <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
-                        <Select
+                        <Input
                           id="cabinet"
                           name="cabinet"
-                          placeholder="Cabinet"
+                          placeholder="Cabinet (optionnel)"
                           value={values.cabinet}
                           hasError={errors.cabinet && touched.cabinet}
-                          onChange={option => setFieldValue("cabinet", option)}
-                          options={MAGISTRAT_CABINET_LABEL_VALUE}
+                          onChange={handleChange}
                         />
                         {errors.cabinet && touched.cabinet && <Text>{errors.cabinet}</Text>}
                       </Box>

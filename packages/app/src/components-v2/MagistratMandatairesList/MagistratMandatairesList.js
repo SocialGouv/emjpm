@@ -23,6 +23,7 @@ const RESULT_PER_PAGE = 20;
 
 const MagistratMandatairesList = props => {
   const {
+    cabinet,
     magistrat: { ti_id }
   } = props;
   const [selectedType, setType] = useState(false);
@@ -90,7 +91,7 @@ const MagistratMandatairesList = props => {
         </Card>
         <Mandatairelist
           isMagistrat
-          ChooseComponent={props => <MagistratChoose ti={ti_id} {...props} />}
+          ChooseComponent={props => <MagistratChoose ti={ti_id} cabinet={cabinet} {...props} />}
           mandataires={list}
         />
         {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (

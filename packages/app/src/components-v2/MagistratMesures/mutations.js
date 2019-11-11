@@ -10,6 +10,7 @@ export const EDIT_MESURE = gql`
     $civilite: String
     $annee: String
     $numero_rg: String
+    $cabinet: String
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -21,6 +22,7 @@ export const EDIT_MESURE = gql`
         civilite: $civilite
         annee: $annee
         numero_rg: $numero_rg
+        cabinet: $cabinet
       }
     ) {
       returning {
