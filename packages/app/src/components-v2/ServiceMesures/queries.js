@@ -52,6 +52,9 @@ export const MESURES = gql`
           nom
         }
       }
+      ti {
+        etablissement
+      }
       status
       type
       ville
