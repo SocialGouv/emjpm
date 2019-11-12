@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 import { Formik } from "formik";
 import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
@@ -23,6 +23,9 @@ export const MagistratMandataireCommentForm = props => {
   const [EditComment] = useMutation(EDIT_COMMENT);
   return (
     <Box mt="3" mb="3" width="100%">
+      <Text mb="1" lineHeight="1.5">
+        Les observations sont visibles uniquement par les magistrats de votre tribunal
+      </Text>
       <Formik
         onSubmit={(values, { setSubmitting }) => {
           if (isEditing) {

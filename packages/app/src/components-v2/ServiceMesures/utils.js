@@ -36,7 +36,7 @@ export const formatMesureList = mesureList => {
       codePostal: code_postal ? code_postal : "non reseigné",
       numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
       antenneId: antenne_id ? antenne_id : "non reseigné",
-      cabinet: cabinet ? `Cabinet ${cabinet}` : null
+      cabinet: cabinet ? cabinet : null
     };
   });
   return mesures;
