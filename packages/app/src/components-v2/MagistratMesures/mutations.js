@@ -4,9 +4,6 @@ export const EDIT_MESURE = gql`
   mutation editMesure(
     $id: Int!
     $type: String
-    $residence: String
-    $code_postal: String
-    $ville: String
     $civilite: String
     $annee: String
     $numero_rg: String
@@ -16,9 +13,6 @@ export const EDIT_MESURE = gql`
       where: { id: { _eq: $id } }
       _set: {
         type: $type
-        residence: $residence
-        code_postal: $code_postal
-        ville: $ville
         civilite: $civilite
         annee: $annee
         numero_rg: $numero_rg
