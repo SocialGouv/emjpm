@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { Heading3, Heading5, Card, Heading4, Spinner, Button } from "@socialgouv/emjpm-ui-core";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
 import { useQuery } from "@apollo/react-hooks";
 
-import { MagistratMandataireAddComment } from "./MagistratMandataireAddComment";
+import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
 import { topTextStyle, iconTextStyle, boxStyle, flexStyle } from "./style";
 import { MANDATAIRE_COMMENTS } from "./queries";
 import { MagistratMandataireComment } from "./MagistratMandataireComment";
@@ -25,6 +25,8 @@ const MandataireInformations = props => {
   } = props;
 
   const [isOpen, toggleCommentForm] = useState(false);
+  const [isEditOpen, toggleEditCommentForm] = useState(false);
+  const [currentComment, setCurrentComment] = useState(false);
 
   const { data, error, loading } = useQuery(MANDATAIRE_COMMENTS, {
     variables: {
@@ -82,11 +84,16 @@ const MandataireInformations = props => {
         </Box>
         {commentaires.length > 0 && (
           <Box width="100%">
-            <Heading5 mt="3">Commentaire sur le mandataire</Heading5>
+            <Heading5 mt="3">Observations sur le mandataire</Heading5>
             {commentaires.map(commentaire => {
               return (
                 <MagistratMandataireComment
                   key={commentaire.id}
+                  toggleCommentForm={toggleCommentForm}
+                  currentComment={currentComment}
+                  setCurrentComment={setCurrentComment}
+                  isEditOpen={isEditOpen}
+                  toggleEditCommentForm={toggleEditCommentForm}
                   id={commentaire.id}
                   comment={commentaire.comment}
                 />
@@ -95,23 +102,27 @@ const MandataireInformations = props => {
           </Box>
         )}
         {isOpen ? (
-          <MagistratMandataireAddComment
+          <MagistratMandataireCommentForm
             toggleCommentForm={toggleCommentForm}
             ti={ti}
             antenneId={antenneId}
             mandataireId={mandataireId}
           />
         ) : (
-          <Box mt="3">
-            <Button
-              variant="outline"
-              onClick={() => {
-                toggleCommentForm(true);
-              }}
-            >
-              Ajouter un commentaire
-            </Button>
-          </Box>
+          <Fragment>
+            {!isEditOpen && (
+              <Box mt="3">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    toggleCommentForm(true);
+                  }}
+                >
+                  Ajouter une observation
+                </Button>
+              </Box>
+            )}
+          </Fragment>
         )}
       </Flex>
     </div>

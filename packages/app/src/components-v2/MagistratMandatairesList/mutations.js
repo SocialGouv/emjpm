@@ -134,6 +134,22 @@ export const ADD_COMMENT = gql`
   }
 `;
 
+export const EDIT_COMMENT = gql`
+  mutation UpdateComment($comment: String!, $id: Int) {
+    update_commentaires(_set: { comment: $comment }, where: { id: { _eq: $id } }) {
+      affected_rows
+      returning {
+        comment
+        created_at
+        id
+        antenne_id
+        mandataire_id
+        ti_id
+      }
+    }
+  }
+`;
+
 export const REMOVE_COMMENT = gql`
   mutation RemoveComment($id: Int!) {
     delete_commentaires(where: { id: { _eq: $id } }) {

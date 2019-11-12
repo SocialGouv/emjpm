@@ -1,39 +1,59 @@
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Flex } from "rebass";
 import { Formik } from "formik";
 import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
 
 import { Button, Input } from "@socialgouv/emjpm-ui-core";
-import { MandataireContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
-import { ADD_COMMENT } from "./mutations";
+import { ADD_COMMENT, EDIT_COMMENT } from "./mutations";
 
-export const MagistratMandataireAddComment = props => {
-  const { ti, antenneId, mandataireId, toggleCommentForm } = props;
+export const MagistratMandataireCommentForm = props => {
+  const {
+    ti,
+    antenneId,
+    mandataireId,
+    toggleEditCommentForm,
+    toggleCommentForm,
+    id,
+    comment,
+    isEditing
+  } = props;
   const [InsertComment] = useMutation(ADD_COMMENT);
-  const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
+  const [EditComment] = useMutation(EDIT_COMMENT);
   return (
     <Box mt="3" width="100%">
       <Formik
         onSubmit={(values, { setSubmitting }) => {
-          InsertComment({
-            variables: {
-              comment: values.comment,
-              antenne_id: antenneId,
-              ti_id: ti,
-              mandataire_id: mandataireId
-            },
-            refetchQueries: ["MandataireComments"]
-          });
+          if (isEditing) {
+            EditComment({
+              variables: {
+                comment: values.comment,
+                id: id
+              },
+              refetchQueries: ["MandataireComments"]
+            });
+
+            toggleEditCommentForm(false);
+          } else {
+            InsertComment({
+              variables: {
+                comment: values.comment,
+                antenne_id: antenneId,
+                ti_id: ti,
+                mandataire_id: mandataireId
+              },
+              refetchQueries: ["MandataireComments"]
+            });
+            toggleCommentForm(false);
+          }
           setSubmitting(false);
-          toggleCommentForm(false);
         }}
         validationSchema={Yup.object().shape({
           comment: Yup.string().required()
         })}
         initialValues={{
-          comment: ""
+          comment: comment || null
         }}
       >
         {props => {
@@ -47,7 +67,7 @@ export const MagistratMandataireAddComment = props => {
                   name="comment"
                   hasError={errors.comment && touched.comment}
                   onChange={handleChange}
-                  placeholder="Commentaire"
+                  placeholder="Observations"
                 />
               </Box>
               <Flex justifyContent="flex-end">
@@ -56,8 +76,11 @@ export const MagistratMandataireAddComment = props => {
                     mr="2"
                     variant="outline"
                     onClick={() => {
-                      setPanelType(PANEL_TYPE.CHOOSE);
-                      setCurrentMandataire(null);
+                      if (isEditing) {
+                        toggleEditCommentForm(false);
+                      } else {
+                        toggleCommentForm(false);
+                      }
                     }}
                   >
                     Annuler
@@ -77,8 +100,24 @@ export const MagistratMandataireAddComment = props => {
   );
 };
 
-MagistratMandataireAddComment.propTypes = {
+MagistratMandataireCommentForm.defaultProps = {
+  isEditing: false,
+  antenneId: null,
+  mandataireId: null,
+  ti: null,
+  id: null,
+  comment: null,
+  toggleEditCommentForm: null,
+  toggleCommentForm: null
+};
+
+MagistratMandataireCommentForm.propTypes = {
+  toggleEditCommentForm: PropTypes.func,
+  toggleCommentForm: PropTypes.func,
+  isEditing: PropTypes.bool,
   antenneId: PropTypes.number,
   mandataireId: PropTypes.number,
-  ti: PropTypes.number
+  ti: PropTypes.number,
+  id: PropTypes.number,
+  comment: PropTypes.string
 };
