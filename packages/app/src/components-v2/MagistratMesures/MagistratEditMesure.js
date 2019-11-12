@@ -6,23 +6,13 @@ import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
-import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { EDIT_MESURE } from "./mutations";
 
 export const MagistratEditMesure = props => {
-  const {
-    currentMesure,
-    age,
-    civilite,
-    codePostal,
-    numeroRg,
-    residence,
-    type,
-    ville,
-    cabinet
-  } = props;
-  console.log(props);
+  const { currentMesure, age, civilite, numeroRg, type, cabinet } = props;
   const [UpdateMesure] = useMutation(EDIT_MESURE);
+  console.log(props);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   return (
     <Flex flexWrap="wrap">
@@ -46,9 +36,6 @@ export const MagistratEditMesure = props => {
                 variables: {
                   id: currentMesure,
                   type: values.type.value,
-                  residence: values.residence.value,
-                  code_postal: values.code_postal,
-                  ville: values.ville,
                   civilite: values.civilite.value,
                   annee: values.annee,
                   numero_rg: values.numero_rg,
@@ -62,9 +49,6 @@ export const MagistratEditMesure = props => {
           }}
           validationSchema={Yup.object().shape({
             type: Yup.string().required(),
-            residence: Yup.string(),
-            code_postal: Yup.string(),
-            ville: Yup.string(),
             civilite: Yup.string().required(),
             annee: Yup.string().required(),
             numero_rg: Yup.string().required(),
@@ -73,11 +57,8 @@ export const MagistratEditMesure = props => {
           initialValues={{
             annee: age,
             civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
-            code_postal: codePostal,
             numero_rg: numeroRg,
-            residence: { label: residence, value: residence },
             type: { label: type, value: type },
-            ville: ville,
             cabinet: cabinet ? cabinet : ""
           }}
         >
@@ -102,37 +83,6 @@ export const MagistratEditMesure = props => {
                     hasError={errors.type && touched.type}
                     onChange={option => setFieldValue("type", option)}
                     options={MESURE_TYPE_LABEL_VALUE}
-                  />
-                </Box>
-                <Box sx={{ zIndex: "90", position: "relative" }} mb="2">
-                  <Select
-                    id="residence"
-                    name="residence"
-                    placeholder="Type de residence"
-                    value={values.residence}
-                    hasError={errors.residence && touched.residence}
-                    onChange={option => setFieldValue("residence", option)}
-                    options={RESIDENCE}
-                  />
-                </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
-                  <Input
-                    value={values.code_postal}
-                    id="code_postal"
-                    name="code_postal"
-                    hasError={errors.code_postal && touched.code_postal}
-                    onChange={handleChange}
-                    placeholder="Code postal"
-                  />
-                </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
-                  <Input
-                    value={values.ville}
-                    id="ville"
-                    name="ville"
-                    hasError={errors.ville && touched.ville}
-                    onChange={handleChange}
-                    placeholder="ville"
                   />
                 </Box>
                 <Box sx={{ zIndex: "80", position: "relative" }} mb="2">
