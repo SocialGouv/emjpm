@@ -22,7 +22,7 @@ export const MagistratMandataireCommentForm = props => {
   const [InsertComment] = useMutation(ADD_COMMENT);
   const [EditComment] = useMutation(EDIT_COMMENT);
   return (
-    <Box mt="3" width="100%">
+    <Box mt="3" mb="3" width="100%">
       <Formik
         onSubmit={(values, { setSubmitting }) => {
           if (isEditing) {

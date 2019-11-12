@@ -57,31 +57,6 @@ const MandataireInformations = props => {
     <div>
       <Heading3>{`${nom} ${prenom}`}</Heading3>
       <Flex sx={flexStyle}>
-        <Box sx={boxStyle}>
-          <Heading5>Contact</Heading5>
-          <Flex mt="2">
-            <MailOutline size="16" />
-            <Text sx={iconTextStyle}>{email}</Text>
-          </Flex>
-          <Flex mt="1">
-            <Smartphone size="16" />
-            <Text sx={iconTextStyle}>{telephone}</Text>
-          </Flex>
-          <Heading5 mt="5">Adresse d’activité</Heading5>
-          <Text sx={topTextStyle}>
-            {adresse} {codePostal} {ville}
-          </Text>
-        </Box>
-        <Box sx={boxStyle}>
-          <Heading5 mt="5">Tribunaux d’instance</Heading5>
-          {tis.map(ti => {
-            return (
-              <Text key={ti.tis.id} sx={topTextStyle}>
-                - {ti.tis.etablissement}
-              </Text>
-            );
-          })}
-        </Box>
         {commentaires.length > 0 && (
           <Box width="100%">
             <Heading5 mt="3">Observations sur le mandataire</Heading5>
@@ -111,7 +86,7 @@ const MandataireInformations = props => {
         ) : (
           <Fragment>
             {!isEditOpen && (
-              <Box mt="3">
+              <Box mt="3" mb="3">
                 <Button
                   variant="outline"
                   onClick={() => {
@@ -124,6 +99,31 @@ const MandataireInformations = props => {
             )}
           </Fragment>
         )}
+        <Box sx={boxStyle}>
+          <Heading5>Contact</Heading5>
+          <Flex mt="2">
+            <MailOutline size="16" />
+            <Text sx={iconTextStyle}>{email}</Text>
+          </Flex>
+          <Flex mt="1">
+            <Smartphone size="16" />
+            <Text sx={iconTextStyle}>{telephone}</Text>
+          </Flex>
+          <Heading5 mt="5">Adresse d’activité</Heading5>
+          <Text sx={topTextStyle}>
+            {adresse} {codePostal} {ville}
+          </Text>
+        </Box>
+        <Box sx={boxStyle}>
+          <Heading5 mt="5">Tribunaux d’instance</Heading5>
+          {tis.map(ti => {
+            return (
+              <Text key={ti.tis.id} sx={topTextStyle}>
+                - {ti.tis.etablissement}
+              </Text>
+            );
+          })}
+        </Box>
       </Flex>
     </div>
   );
