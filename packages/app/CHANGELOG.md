@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.6.0](https://github.com/SocialGouv/emjpm/compare/v25.5.2...v25.6.0) (2019-11-12)
+
+
+### Features
+
+* **edit-mesure:** update edit mesure form add null values ([#960](https://github.com/SocialGouv/emjpm/issues/960)) ([8a310b5](https://github.com/SocialGouv/emjpm/commit/8a310b5))
+* **mesure-ti:** add ti in mesures ([#961](https://github.com/SocialGouv/emjpm/issues/961)) ([d4d7310](https://github.com/SocialGouv/emjpm/commit/d4d7310))
+
+
+
+
+
 ## [25.5.2](https://github.com/SocialGouv/emjpm/compare/v25.5.1...v25.5.2) (2019-11-07)
 
 **Note:** Version bump only for package @emjpm/app
