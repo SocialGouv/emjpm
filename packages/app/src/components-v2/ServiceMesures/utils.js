@@ -16,10 +16,12 @@ export const formatMesureList = mesureList => {
       civilite,
       date_ouverture,
       numero_rg,
-      cabinet
+      cabinet,
+      ti
     } = mesure;
     const formatedDate = format(date_ouverture, "DD/MM/YYYY");
     return {
+      tribunal: ti ? ti.etablissement : "Tribunal non reseigné",
       age: annee ? annee : "nc",
       civilite: civilite ? civilite : "H",
       dateOuvertureFormated: date_ouverture ? formatedDate : "non reseigné",
@@ -34,7 +36,7 @@ export const formatMesureList = mesureList => {
       codePostal: code_postal ? code_postal : "non reseigné",
       numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
       antenneId: antenne_id ? antenne_id : "non reseigné",
-      cabinet: cabinet ? cabinet : ""
+      cabinet: cabinet ? `Cabinet ${cabinet}` : null
     };
   });
   return mesures;
