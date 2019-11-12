@@ -4,7 +4,7 @@ import { Button } from "@socialgouv/emjpm-ui-core";
 import React, { Fragment, useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 import { FiltersContext } from "../MagistratFilters/context";
-import { formatMesureList } from "../ServiceMesures/utils";
+import { formatMandatairesMesureList } from "./utils";
 import { MagistratEditMesure } from "./MagistratEditMesure";
 import { MagistratRemoveMesure } from "./MagistratRemoveMesure";
 import { MESURES } from "./queries";
@@ -34,7 +34,7 @@ const MagistratMesures = () => {
   }
 
   const { count } = data.mesures_aggregate.aggregate;
-  const mesures = formatMesureList(data.mesures);
+  const mesures = formatMandatairesMesureList(data.mesures);
   return (
     <MesureContextProvider>
       <Box sx={MagistratListStyle}>
