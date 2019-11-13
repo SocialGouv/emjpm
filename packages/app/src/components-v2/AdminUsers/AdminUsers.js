@@ -79,7 +79,7 @@ const RowItem = ({ item }) => {
 
   const doImpersonate = async () => {
     const url = await startImpersonate(id);
-    Router.push(url);
+    Router.push(url, url);
   };
 
   const DetailComponent = getDetail(type);
