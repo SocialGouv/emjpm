@@ -86,7 +86,7 @@ const MandataireInformations = props => {
         ) : (
           <Fragment>
             {!isEditOpen && (
-              <Box mt="3" mb="3">
+              <Box width="100%" mt="3" mb="3">
                 <Button
                   variant="outline"
                   onClick={() => {
