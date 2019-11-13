@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { Text, Flex, Box } from "rebass";
-import { CloseCircle, EditBox } from "styled-icons/remix-line";
+import { Edit, XCircle } from "styled-icons/boxicons-regular";
 
 import { topTextStyle } from "./style";
 import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
@@ -47,7 +47,7 @@ const MagistratMandataireComment = props => {
                 setCurrentComment(id);
               }}
             >
-              <EditBox size="16" />
+              <Edit size="16" />
             </Box>
             <Box
               sx={{ cursor: "pointer", width: "16px" }}
@@ -55,7 +55,7 @@ const MagistratMandataireComment = props => {
                 RemoveComment({ variables: { id: id }, refetchQueries: ["MandataireComments"] });
               }}
             >
-              <CloseCircle size="16" />
+              <XCircle size="16" />
             </Box>
           </Flex>
         </Text>
