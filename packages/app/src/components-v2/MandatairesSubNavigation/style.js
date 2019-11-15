@@ -1,7 +1,7 @@
 const MandatairesSubNavigationStyle = {
+  justifyContent: "space-between",
   px: 1,
-  width: "100%",
-  justifyContent: "space-between"
+  width: "100%"
 };
 
 export { MandatairesSubNavigationStyle };

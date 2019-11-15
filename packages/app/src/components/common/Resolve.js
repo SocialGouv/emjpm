@@ -19,9 +19,9 @@ const Example = () => <Resolve
 */
 class Resolve extends React.Component {
   state = {
-    status: "idle",
+    error: null,
     result: null,
-    error: null
+    status: "idle"
   };
   shouldComponentUpdate() {
     // dont retry on success
@@ -29,16 +29,16 @@ class Resolve extends React.Component {
   }
   componentDidMount() {
     const { promises } = this.props;
-    this.setState({ status: "loading", result: null, error: null }, () => {
+    this.setState({ error: null, result: null, status: "loading" }, () => {
       Promise.all(promises.map(p => p()))
         .then(result => {
-          this.setState({ result, status: "success", error: null });
+          this.setState({ error: null, result, status: "success" });
         })
         .catch(error => {
           /* eslint-disable no-console */
           console.error(error);
           /* eslint-enable no-console */
-          this.setState({ result: null, status: "error", error: error.message });
+          this.setState({ error: error.message, result: null, status: "error" });
         });
     });
   }

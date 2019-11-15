@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box } from "rebass";
+
 import { convertToPercentage } from "../../util/math";
 import { FiltersContext } from "../Filters/context";
 import { MandatairesActivityChart } from "./MandatairesActivityChart";
@@ -43,19 +44,19 @@ const MandatairesActivity = props => {
   const total = service + mandataireIndividuel + mandatairePrepose;
 
   const activityChartData = {
-    total,
-    service: {
-      sum: service,
-      percentage: convertToPercentage(service, total)
-    },
     mandataireIndividuel: {
-      sum: mandataireIndividuel,
-      percentage: convertToPercentage(mandataireIndividuel, total)
+      percentage: convertToPercentage(mandataireIndividuel, total),
+      sum: mandataireIndividuel
     },
     mandatairePrepose: {
-      sum: mandatairePrepose,
-      percentage: convertToPercentage(mandatairePrepose, total)
-    }
+      percentage: convertToPercentage(mandatairePrepose, total),
+      sum: mandatairePrepose
+    },
+    service: {
+      percentage: convertToPercentage(service, total),
+      sum: service
+    },
+    total
   };
 
   return (

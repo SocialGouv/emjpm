@@ -1,6 +1,6 @@
+import { useQuery } from "@apollo/react-hooks";
 import PropTypes from "prop-types";
 import React from "react";
-import { useQuery } from "@apollo/react-hooks";
 
 import { Informations } from "../Informations";
 import { GET_SERVICES_ANTENNE } from "./queries";
@@ -37,13 +37,13 @@ const ServicesInformations = props => {
 };
 
 ServicesInformations.defaultProps = {
-  user_antennes: [],
-  currentAntenne: null
+  currentAntenne: null,
+  user_antennes: []
 };
 
 ServicesInformations.propTypes = {
-  user_antennes: PropTypes.array,
-  currentAntenne: PropTypes.string
+  currentAntenne: PropTypes.string,
+  user_antennes: PropTypes.array
 };
 
 export { ServicesInformations };

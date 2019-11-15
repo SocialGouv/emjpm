@@ -4,6 +4,7 @@ import { Formik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { DEPARTEMENTS } from "./queries";
 import { cardStyle } from "./style";
 
@@ -12,8 +13,8 @@ const AdminServiceFormStyle = {
 };
 
 const grayBox = {
-  borderRadius: "5px 0 0 5px",
   bg: "cardSecondary",
+  borderRadius: "5px 0 0 5px",
   p: "5"
 };
 
@@ -56,22 +57,22 @@ export const AdminServiceForm = ({ service, onSubmit, onCancel }) => {
                 setSubmitting(false);
               }}
               validationSchema={Yup.object().shape({
-                etablissement: Yup.string().required("Champs obligatoire"),
                 code_postal: Yup.string().required("Champs obligatoire"),
-                ville: Yup.string().required("Champs obligatoire"),
+                departement: Yup.mixed().required(),
                 email: Yup.string().email("Le format de votre email n'est pas correct"),
+                etablissement: Yup.string().required("Champs obligatoire"),
                 telephone: Yup.string(),
-                departement: Yup.mixed().required()
+                ville: Yup.string().required("Champs obligatoire")
               })}
               initialValues={{
-                etablissement: service ? service.etablissement : "",
-                email: service ? service.email : "",
                 code_postal: service ? service.code_postal : "",
-                ville: service ? service.ville : "",
-                telephone: service ? service.telephone : "",
                 departement: service
                   ? departmentOptions.find(option => option.value === service.department_id)
-                  : ""
+                  : "",
+                email: service ? service.email : "",
+                etablissement: service ? service.etablissement : "",
+                telephone: service ? service.telephone : "",
+                ville: service ? service.ville : ""
               }}
             >
               {props => {
@@ -99,7 +100,7 @@ export const AdminServiceForm = ({ service, onSubmit, onCancel }) => {
                         <Text>{errors.etablissement}</Text>
                       )}
                     </Box>
-                    <Box mb="2" sx={{ zIndex: "110", position: "relative" }}>
+                    <Box mb="2" sx={{ position: "relative", zIndex: "110" }}>
                       <Select
                         size="small"
                         options={departmentOptions}

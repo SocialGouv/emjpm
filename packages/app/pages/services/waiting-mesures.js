@@ -2,12 +2,12 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Flex } from "rebass";
 
-import { withAuthSync } from "../../src/util/auth";
 import { LayoutServices } from "../../src/components-v2/Layout";
 import { ServiceMesures } from "../../src/components-v2/ServiceMesures";
 import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
 import { FiltersContextProvider } from "../../src/components-v2/ServicesFilters/context";
 import { UserInformations } from "../../src/components-v2/UserInformations";
+import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {
   return (
@@ -18,8 +18,8 @@ const Mesures = () => {
           <UserInformations Component={props => <ServicesFilters {...props} isStatusHidden />} />
           <Flex
             sx={{
-              mt: "2",
-              flexWrap: "wrap"
+              flexWrap: "wrap",
+              mt: "2"
             }}
           >
             <UserInformations Component={props => <ServiceMesures isOnlyWaiting {...props} />} />

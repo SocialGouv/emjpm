@@ -1,14 +1,14 @@
+import { Card, Heading4 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Button, Text } from "rebass";
 import { XCircle } from "styled-icons/boxicons-regular";
-import { Card, Heading4 } from "@socialgouv/emjpm-ui-core";
 
 const ButtonStyle = {
+  bg: "cardSecondary",
+  border: "none",
+  color: "black",
   outline: "none",
   p: 1,
-  bg: "cardSecondary",
-  color: "black",
-  border: "none",
   position: "absolute",
   right: 0,
   top: 0
@@ -19,7 +19,7 @@ const Panel = props => {
   const available =
     currentPanel.mesures_max - currentPanel.mesures_in_progress - currentPanel.mesures_awaiting;
   return (
-    <Box sx={{ position: "absolute", left: "0", bottom: "10px", minWidth: "230px" }}>
+    <Box sx={{ bottom: "10px", left: "0", minWidth: "230px", position: "absolute" }}>
       <Card variant="sideCard">
         <Button sx={ButtonStyle} onClick={() => togglePanel({ isActive: false })}>
           <XCircle size={25} />

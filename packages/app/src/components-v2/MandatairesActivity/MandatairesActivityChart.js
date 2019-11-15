@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, Text } from "rebass";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
-import { legendStyle, numberStyle, percentStyle, textStyle, pieTextStyle } from "./style";
+
+import { legendStyle, numberStyle, percentStyle, pieTextStyle, textStyle } from "./style";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
@@ -25,7 +26,7 @@ const MandatairesActivityChart = props => {
 
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: [300, 300, 300] }}>
+      <Box sx={{ height: [300, 300, 300], position: "relative", width: "100%" }}>
         <Text sx={pieTextStyle}>
           {total}
           <Text sx={legendStyle}>mesures</Text>
@@ -49,10 +50,10 @@ const MandatairesActivityChart = props => {
       </Box>
       <Box
         sx={{
-          mt: "1",
           display: "grid",
           gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"]
+          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
+          mt: "1"
         }}
       >
         <Box>

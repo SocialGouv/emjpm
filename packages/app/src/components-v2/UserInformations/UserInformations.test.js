@@ -1,6 +1,7 @@
 import React from "react";
-import { UserInformations } from "./UserInformations";
 import renderer from "react-test-renderer";
+
+import { UserInformations } from "./UserInformations";
 
 it("renders correctly", () => {
   const tree = renderer.create(<UserInformations />).toJSON();

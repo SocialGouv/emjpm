@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box } from "rebass";
+
 import { getMesureCategoryTypeLabel } from "../../util/mesures";
 import { FiltersContext } from "../Filters/context";
 import { MesureAllocationChart } from "./MesureAllocationChart";
@@ -17,10 +18,10 @@ export const MesureAllocation = () => {
 
   const { data, error, loading } = useQuery(GET_CATEGORY_STATS, {
     variables: {
-      start: startDateValue,
-      end: endDateValue,
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
+      end: endDateValue,
+      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
+      start: startDateValue
     }
   });
 
@@ -47,8 +48,8 @@ export const MesureAllocation = () => {
   const mesures = data.mesureTypeCategoryStatistics.map(mesure => {
     return {
       name: getMesureCategoryTypeLabel(mesure.mesureTypeCategory),
-      type: mesure.mesureTypeCategory,
-      "nombre de mesures": mesure.number
+      "nombre de mesures": mesure.number,
+      type: mesure.mesureTypeCategory
     };
   });
 

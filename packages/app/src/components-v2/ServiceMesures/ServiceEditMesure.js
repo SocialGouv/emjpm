@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
+
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { EDIT_MESURE } from "./mutations";
 import { formatAntenneOptions } from "./utils";
@@ -16,8 +17,8 @@ const getMesureAntenne = (antenne_id, user_antennes) => {
   );
   const [currentAntenne] = filteredAntennes;
   return {
-    value: currentAntenne.service_antenne.id,
-    label: currentAntenne.service_antenne.name
+    label: currentAntenne.service_antenne.name,
+    value: currentAntenne.service_antenne.id
   };
 };
 
@@ -64,37 +65,37 @@ export const ServiceEditMesure = props => {
         <Formik
           onSubmit={(values, { setSubmitting }) => {
             UpdateMesure({
+              awaitRefetchQueries: true,
+              refetchQueries: ["mesures", "mesures_aggregate"],
               variables: {
-                id: currentMesure,
-                date_ouverture: values.date_ouverture,
-                type: values.type.value,
-                residence: values.residence.value,
-                code_postal: values.code_postal,
-                ville: values.ville,
-                civilite: values.civilite.value,
                 annee: values.annee,
+                antenne_id: values.antenne_id.value,
+                civilite: values.civilite.value,
+                code_postal: values.code_postal,
+                date_ouverture: values.date_ouverture,
+                id: currentMesure,
                 numero_dossier: values.numero_dossier,
                 numero_rg: values.numero_rg,
                 previous_antenne_id: antenneId,
-                antenne_id: values.antenne_id.value
-              },
-              awaitRefetchQueries: true,
-              refetchQueries: ["mesures", "mesures_aggregate"]
+                residence: values.residence.value,
+                type: values.type.value,
+                ville: values.ville
+              }
             });
             setSubmitting(false);
             setPanelType(null);
             setCurrentMesure(null);
           }}
           validationSchema={Yup.object().shape({
-            date_ouverture: Yup.date(),
-            type: Yup.string(),
-            residence: Yup.string(),
-            code_postal: Yup.string(),
-            ville: Yup.string(),
-            civilite: Yup.string(),
             annee: Yup.string(),
+            civilite: Yup.string(),
+            code_postal: Yup.string(),
+            date_ouverture: Yup.date(),
             numero_dossier: Yup.string(),
-            numero_rg: Yup.string()
+            numero_rg: Yup.string(),
+            residence: Yup.string(),
+            type: Yup.string(),
+            ville: Yup.string()
           })}
           initialValues={{
             annee: age,
@@ -102,8 +103,8 @@ export const ServiceEditMesure = props => {
             civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
             code_postal: codePostal,
             date_ouverture: dateOuverture,
-            numero_rg: numeroRg,
             numero_dossier: numeroDossier,
+            numero_rg: numeroRg,
             residence: { label: residence, value: residence },
             type: { label: type, value: type },
             ville: ville
@@ -132,7 +133,7 @@ export const ServiceEditMesure = props => {
                     placeholder="Date d'ouverture"
                   />
                 </Box>
-                <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
                   <Select
                     id="type"
                     name="type"
@@ -143,7 +144,7 @@ export const ServiceEditMesure = props => {
                     options={MESURE_TYPE_LABEL_VALUE}
                   />
                 </Box>
-                <Box sx={{ zIndex: "90", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
                   <Select
                     id="residence"
                     name="residence"
@@ -154,7 +155,7 @@ export const ServiceEditMesure = props => {
                     options={RESIDENCE}
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.code_postal}
                     id="code_postal"
@@ -164,7 +165,7 @@ export const ServiceEditMesure = props => {
                     placeholder="Code postal"
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.ville}
                     id="ville"
@@ -174,7 +175,7 @@ export const ServiceEditMesure = props => {
                     placeholder="ville"
                   />
                 </Box>
-                <Box sx={{ zIndex: "80", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
                   <Select
                     id="civilite"
                     name="civilite"
@@ -185,7 +186,7 @@ export const ServiceEditMesure = props => {
                     options={CIVILITY}
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.annee}
                     id="annee"
@@ -195,7 +196,7 @@ export const ServiceEditMesure = props => {
                     placeholder="année"
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.numero_dossier}
                     id="numero_dossier"
@@ -205,7 +206,7 @@ export const ServiceEditMesure = props => {
                     placeholder="numero de dossier"
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.numero_rg}
                     id="numero_rg"
@@ -216,7 +217,7 @@ export const ServiceEditMesure = props => {
                   />
                 </Box>
                 {user_antennes.length >= 2 && (
-                  <Box sx={{ zIndex: "80", position: "relative" }} mb="2">
+                  <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
                     <Select
                       id="antenne_id"
                       name="antenne_id"

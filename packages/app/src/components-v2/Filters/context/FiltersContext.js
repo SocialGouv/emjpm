@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 
-import { startDate, endDate } from "../../../util/dates";
+import { endDate, startDate } from "../../../util/dates";
 export const Context = createContext({});
 
 export const Provider = props => {
@@ -15,14 +15,14 @@ export const Provider = props => {
 
   // Make the context object:
   const filtersContext = {
-    selectedRegionalValue,
-    changeRegionalValue,
-    selectedDepartementValue,
     changeDepartementValue,
-    startDateValue,
+    changeEndDate,
+    changeRegionalValue,
     changeStartDate,
     endDateValue,
-    changeEndDate
+    selectedDepartementValue,
+    selectedRegionalValue,
+    startDateValue
   };
 
   // pass the value in provider and return

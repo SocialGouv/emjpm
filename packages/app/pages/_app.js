@@ -1,15 +1,16 @@
 import * as Sentry from "@sentry/browser";
+import theme from "@socialgouv/emjpm-ui-theme";
+import jwtDecode from "jwt-decode";
 // all global css
 import App from "next/app";
 import getConfig from "next/config";
 import React from "react";
 import { ApolloProvider } from "react-apollo";
 import ReactPiwik from "react-piwik";
-import { piwikSetup } from "../src/piwik";
-import { withApolloClient } from "../src/lib/apollo";
 import { ThemeProvider } from "theme-ui";
-import theme from "@socialgouv/emjpm-ui-theme";
-import jwtDecode from "jwt-decode";
+
+import { withApolloClient } from "../src/lib/apollo";
+import { piwikSetup } from "../src/piwik";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
 
 const {
@@ -17,9 +18,9 @@ const {
 } = getConfig();
 
 new ReactPiwik({
-  url: "matomo.tools.factory.social.gouv.fr",
   siteId: 13,
-  trackErrors: true
+  trackErrors: true,
+  url: "matomo.tools.factory.social.gouv.fr"
 });
 
 class MyApp extends App {
@@ -76,8 +77,8 @@ function sentrySetup() {
   if (SENTRY_PUBLIC_DSN) {
     try {
       Sentry.init({
-        dsn: SENTRY_PUBLIC_DSN,
         attachStacktrace: true,
+        dsn: SENTRY_PUBLIC_DSN,
         integrations: integrations => {
           // remove dedupe plugin
           return integrations.filter(integration => integration.name !== "Dedupe");

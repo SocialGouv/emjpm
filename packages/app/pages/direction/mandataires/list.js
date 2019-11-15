@@ -2,7 +2,6 @@ import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@socialgouv/emjpm-ui-c
 import React from "react";
 import { Box } from "rebass";
 
-import { withAuthSync } from "../../../src/util/auth";
 import { Filters } from "../../../src/components-v2/Filters";
 import { FiltersContextProvider } from "../../../src/components-v2/Filters/context";
 import {
@@ -12,8 +11,9 @@ import {
   ServicesIndicator
 } from "../../../src/components-v2/Indicators";
 import { LayoutDirection } from "../../../src/components-v2/Layout";
-import { MandatairesSubNavigation } from "../../../src/components-v2/MandatairesSubNavigation";
 import { MandatairesList } from "../../../src/components-v2/MandatairesList";
+import { MandatairesSubNavigation } from "../../../src/components-v2/MandatairesSubNavigation";
+import { withAuthSync } from "../../../src/util/auth";
 
 const Mandataires = () => {
   return (

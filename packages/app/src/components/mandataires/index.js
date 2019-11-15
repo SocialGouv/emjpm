@@ -4,6 +4,7 @@ import { applyMiddleware, bindActionCreators, combineReducers, createStore } fro
 import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer as modal } from "redux-modal";
 import thunk from "redux-thunk";
+
 import { mandataireMount } from "./actions/mandataire";
 import MandataireTabs from "./indiPrepo";
 import {
@@ -51,8 +52,8 @@ class MandataireIndex extends React.Component {
 // plug redux stuff
 
 const rootReducer = combineReducers({
-  mesures: mesuresReducer,
   mandataire: mandataireReducer,
+  mesures: mesuresReducer,
   modal
 });
 

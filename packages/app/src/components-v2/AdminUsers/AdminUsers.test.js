@@ -1,6 +1,7 @@
 import React from "react";
-import { AdminUsers } from "./AdminUsers";
 import renderer from "react-test-renderer";
+
+import { AdminUsers } from "./AdminUsers";
 
 it("renders correctly", () => {
   const tree = renderer.create(<AdminUsers />).toJSON();

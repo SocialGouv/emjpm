@@ -1,26 +1,27 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Text, Heading4, Card, Input, Button, Select } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
-import { ADD_MESURE } from "./mutations";
 import { getHeadquarter } from "../../util/getHeadquarter";
+import { ADD_MESURE } from "./mutations";
 
 const ServiceCreateAntenneStyle = {
   flexWrap: "wrap"
 };
 
 const grayBox = {
-  borderRadius: "5px 0 0 5px",
   bg: "cardSecondary",
+  borderRadius: "5px 0 0 5px",
   p: "5"
 };
 
-const cardStyle = { p: "0", m: "1", mt: "5" };
+const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export const ServiceAddMesure = props => {
   const [AddMesure] = useMutation(ADD_MESURE, {
@@ -62,55 +63,55 @@ export const ServiceAddMesure = props => {
           </Box>
         </Box>
         <Box p="5" width={[1, 3 / 5]}>
-          <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <Formik
               onSubmit={(values, { setSubmitting }) => {
                 AddMesure({
-                  variables: {
-                    antenne_id: Number.parseInt(values.antenne.value),
-                    date_ouverture: values.date_ouverture,
-                    type: values.type.value,
-                    residence: values.residence.value,
-                    code_postal: values.code_postal,
-                    ville: values.ville,
-                    civilite: values.civilite.value,
-                    annee: values.annee.toString(),
-                    numero_dossier: values.numero_dossier,
-                    numero_rg: values.numero_rg
-                  },
                   awaitRefetchQueries: true,
-                  refetchQueries: ["mesures", "mesures_aggregate"]
+                  refetchQueries: ["mesures", "mesures_aggregate"],
+                  variables: {
+                    annee: values.annee.toString(),
+                    antenne_id: Number.parseInt(values.antenne.value),
+                    civilite: values.civilite.value,
+                    code_postal: values.code_postal,
+                    date_ouverture: values.date_ouverture,
+                    numero_dossier: values.numero_dossier,
+                    numero_rg: values.numero_rg,
+                    residence: values.residence.value,
+                    type: values.type.value,
+                    ville: values.ville
+                  }
                 });
                 setSubmitting(false);
                 Router.push("/services");
               }}
               validationSchema={Yup.object().shape({
-                antenne: Yup.string().required("Champs obligatoire"),
-                date_ouverture: Yup.date().required("Champs obligatoire"),
-                type: Yup.string().required("Champs obligatoire"),
-                residence: Yup.string().required("Champs obligatoire"),
-                code_postal: Yup.string().required("Champs obligatoire"),
-                ville: Yup.string().required("Champs obligatoire"),
-                civilite: Yup.string().required("Champs obligatoire"),
                 annee: Yup.number()
                   .required("Champs obligatoire")
                   .min(1900, "l'année choisi doit être au minimum 1900")
                   .max(2019, "l'année choisi doit être au maximum 2019"),
+                antenne: Yup.string().required("Champs obligatoire"),
+                civilite: Yup.string().required("Champs obligatoire"),
+                code_postal: Yup.string().required("Champs obligatoire"),
+                date_ouverture: Yup.date().required("Champs obligatoire"),
                 numero_dossier: Yup.string().required("Champs obligatoire"),
-                numero_rg: Yup.string().required("Champs obligatoire")
+                numero_rg: Yup.string().required("Champs obligatoire"),
+                residence: Yup.string().required("Champs obligatoire"),
+                type: Yup.string().required("Champs obligatoire"),
+                ville: Yup.string().required("Champs obligatoire")
               })}
               initialValues={{
-                date_ouverture: "",
-                code_postal: "",
-                ville: "",
                 annee: "",
-                civilite: "",
-                numero_rg: "",
-                numero_dossier: "",
                 antenne: {
                   label: headquarter.service_antenne.name,
                   value: headquarter.service_antenne.id
-                }
+                },
+                civilite: "",
+                code_postal: "",
+                date_ouverture: "",
+                numero_dossier: "",
+                numero_rg: "",
+                ville: ""
               }}
             >
               {props => {
@@ -125,7 +126,7 @@ export const ServiceAddMesure = props => {
                 } = props;
                 return (
                   <form onSubmit={handleSubmit}>
-                    <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
                       <Select
                         id="antenne"
                         name="antenne"
@@ -137,7 +138,7 @@ export const ServiceAddMesure = props => {
                       />
                       {errors.antenne_id && touched.antenne_id && <Text>{errors.antenne_id}</Text>}
                     </Box>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.numero_dossier}
                         id="numero_dossier"
@@ -164,7 +165,7 @@ export const ServiceAddMesure = props => {
                         <Text>{errors.date_ouverture}</Text>
                       )}
                     </Box>
-                    <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
                       <Select
                         id="type"
                         name="type"
@@ -176,7 +177,7 @@ export const ServiceAddMesure = props => {
                       />
                       {errors.type && touched.type && <Text>{errors.type}</Text>}
                     </Box>
-                    <Box sx={{ zIndex: "90", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
                       <Select
                         id="residence"
                         name="residence"
@@ -188,7 +189,7 @@ export const ServiceAddMesure = props => {
                       />
                       {errors.residence && touched.residence && <Text>{errors.residence}</Text>}
                     </Box>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.numero_rg}
                         id="numero_rg"
@@ -199,7 +200,7 @@ export const ServiceAddMesure = props => {
                       />
                       {errors.numero_rg && touched.numero_rg && <Text>{errors.numero_rg}</Text>}
                     </Box>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mt="5" mb="2">
+                    <Box sx={{ position: "relative", zIndex: "1" }} mt="5" mb="2">
                       <Input
                         value={values.annee}
                         id="annee"
@@ -211,7 +212,7 @@ export const ServiceAddMesure = props => {
                       />
                       {errors.annee && touched.annee && <Text>{errors.annee}</Text>}
                     </Box>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.code_postal}
                         id="code_postal"
@@ -224,7 +225,7 @@ export const ServiceAddMesure = props => {
                         <Text>{errors.code_postal}</Text>
                       )}
                     </Box>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.ville}
                         id="ville"
@@ -235,7 +236,7 @@ export const ServiceAddMesure = props => {
                       />
                       {errors.ville && touched.ville && <Text>{errors.ville}</Text>}
                     </Box>
-                    <Box sx={{ zIndex: "80", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
                       <Select
                         id="civilite"
                         name="civilite"

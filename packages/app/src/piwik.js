@@ -1,4 +1,5 @@
 import ReactPiwik from "react-piwik";
+
 import { storageService } from "./util";
 
 export const doTrackPageChange = url => {

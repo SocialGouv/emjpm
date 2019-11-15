@@ -1,13 +1,12 @@
-import * as React from "react";
 import Router from "next/router";
+import * as React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { show } from "redux-modal";
 
-import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";
-import { Button, Autocomplete, SelectionManager } from "..";
+import { Autocomplete, Button, SelectionManager } from "..";
 import apiFetch from "../communComponents/Api";
-
+import { doForgotPassword } from "../loginComponents/ForgotPasswordForm";
 import { updateMandataire } from "./actions/mandataire";
 import Fiche from "./Fiche";
 
@@ -28,7 +27,7 @@ const Selector = ({
         <tr>
           <th colSpan={2}>
             <Autocomplete
-              inputProps={{ placeholder, style: { width: 400, padding: 5 } }}
+              inputProps={{ placeholder, style: { padding: 5, width: 400 } }}
               items={autocompleteItems}
               onSelect={onAdd}
             />
@@ -46,7 +45,7 @@ const Selector = ({
         {selected.map(({ id, nom }, i) => (
           <tr key={id} style={{ background: i % 2 ? "#fff" : "rgba(0, 0, 0, 0.03)" }}>
             <td style={{ padding: 5 }}>▪ {nom}</td>
-            <td style={{ width: 20, textAlign: "center" }} />
+            <td style={{ textAlign: "center", width: 20 }} />
           </tr>
         ))}
       </tbody>
@@ -98,7 +97,7 @@ class MandataireProfile extends React.Component {
     const newMandataire = getNewMandataire(this.props) || {};
 
     return (
-      <div style={{ padding: 20, display: "flex", flexDirection: "row" }}>
+      <div style={{ display: "flex", flexDirection: "row", padding: 20 }}>
         <div style={{ flex: "0 0 50%" }}>
           <h3>Mes coordonnées</h3>
           <Fiche {...newMandataire} />
@@ -116,10 +115,10 @@ class MandataireProfile extends React.Component {
               mandataireId={newMandataire.id}
               onAdd={etablissement_id =>
                 apiFetch(`/mandataires/${newMandataire.id}/etablissements`, {
-                  method: "POST",
                   body: JSON.stringify({
                     etablissement_id
-                  })
+                  }),
+                  method: "POST"
                 })
               }
               getSelection={() => apiFetch(`/mandataires/${newMandataire.id}/etablissement`)}
@@ -148,10 +147,10 @@ class MandataireProfile extends React.Component {
             mandataireId={newMandataire.id}
             onAdd={ti_id =>
               apiFetch(`/mandataires/${newMandataire.id}/tis`, {
-                method: "POST",
                 body: JSON.stringify({
                   ti_id
-                })
+                }),
+                method: "POST"
               })
             }
             onRemove={id =>
