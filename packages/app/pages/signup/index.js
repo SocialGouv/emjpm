@@ -4,6 +4,7 @@ import React from "react";
 import { LayoutSignup } from "../../src/components-v2/Layout";
 import Signup from "../../src/components-v2/Signup";
 import { SignupContextProvider } from "../../src/components-v2/Signup/context";
+import { withAuthSync } from "../../src/util/auth";
 
 const SignupPage = () => {
   return (
@@ -17,4 +18,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default withAuthSync(SignupPage);

@@ -2,6 +2,7 @@ import cookie from "js-cookie";
 import nextCookie from "next-cookies";
 import Router from "next/router";
 import React, { Component } from "react";
+import jwtDecode from "jwt-decode";
 
 export const logout = () => {
   Router.push("/error", "/login");
@@ -55,6 +56,14 @@ export const withAuthSync = WrappedComponent =>
     }
   };
 
+const routes = {
+  ti: "/magistrats",
+  service: "/service",
+  mandataires: "/magistrats",
+  direction: "/direction",
+  admin: "/admin"
+};
+
 export const auth = ctx => {
   const { token } = nextCookie(ctx);
 
@@ -67,6 +76,18 @@ export const auth = ctx => {
     ctx.res.writeHead(302, { Location: "/login" });
     ctx.res.end();
     return;
+  }
+
+  if (token) {
+    const { role } = jwtDecode(token);
+    const { pathname } = ctx;
+    if (pathname === "/login" || pathname === "/signup" || pathname === "/") {
+      if (ctx.req) {
+        ctx.res.writeHead(302, { Location: routes[role] });
+        ctx.res.end();
+      }
+      Router.push(routes[role]);
+    }
   }
 
   // We already checked for server. This should only happen on client.

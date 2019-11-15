@@ -130,6 +130,7 @@ class User extends Model {
     const claim = {
       name: this.username,
       id: this.id,
+      role: this.getDefaultRole(),
       "https://hasura.io/jwt/claims": this.getHasuraClaims()
     };
     return jwt.sign(claim, jwtConfig.key, signOptions);
