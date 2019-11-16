@@ -66,33 +66,31 @@ const routes = {
 
 export const auth = ctx => {
   const { token } = nextCookie(ctx);
-
-  /*
-   * This happens on server only, ctx.req is available means it's being
-   * rendered on server. If we are on server and token is not available,
-   * means user is not logged in.
-   */
-  if (ctx.req && !token) {
-    ctx.res.writeHead(302, { Location: "/login" });
-    ctx.res.end();
-    return;
-  }
+  const { pathname } = ctx;
+  const isLogin = pathname === "/login" || pathname === "/signup" || pathname === "/";
 
   if (token) {
     const { role } = jwtDecode(token);
-    const { pathname } = ctx;
-    if (pathname === "/login" || pathname === "/signup" || pathname === "/") {
+    const isTokenPath = pathname.indexOf(routes[role]) !== -1;
+    if (!isTokenPath) {
       if (ctx.req) {
         ctx.res.writeHead(302, { Location: routes[role] });
         ctx.res.end();
+      } else {
+        Router.push(routes[role]);
       }
-      Router.push(routes[role]);
     }
   }
 
-  // We already checked for server. This should only happen on client.
   if (!token) {
-    Router.push("/login");
+    if (!isLogin) {
+      if (ctx.req) {
+        ctx.res.writeHead(302, { Location: "/login" });
+        ctx.res.end();
+      } else {
+        Router.push("/login");
+      }
+    }
   }
 
   return token;
