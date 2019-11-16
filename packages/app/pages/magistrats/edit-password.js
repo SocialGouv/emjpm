@@ -1,11 +1,10 @@
+import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 
-import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
-
-import { withAuthSync } from "../../src/util/auth";
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratEditInformations } from "../../src/components-v2/MagistratEditInformations";
 import { UserInformations } from "../../src/components-v2/UserInformations";
+import { withAuthSync } from "../../src/util/auth";
 
 const EditInformations = () => {
   return (

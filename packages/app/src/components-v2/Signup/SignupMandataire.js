@@ -6,6 +6,7 @@ import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { SignupContext } from "./context";
 import { CHECK_SIRET_UNICITY } from "./queries";
 import signup from "./signup";
@@ -28,23 +29,23 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
   const { user, mandataire, setMandataire, validateStepOne } = useContext(SignupContext);
 
   const tiOptions = tiDatas.map(ti => ({
-    value: ti.id,
-    label: ti.etablissement
+    label: ti.etablissement,
+    value: ti.id
   }));
 
   const client = useApolloClient();
 
   const isSiretExists = async siret => {
     const checkSiret = await client.query({
-      query: CHECK_SIRET_UNICITY,
-      variables: {
-        siret
-      },
-      fetchPolicy: "network-only",
       context: {
         headers: {
           "X-Hasura-Siret": siret
         }
+      },
+      fetchPolicy: "network-only",
+      query: CHECK_SIRET_UNICITY,
+      variables: {
+        siret
       }
     });
     return checkSiret.data.mandataires.length > 0;
@@ -94,7 +95,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
           </Box>
 
           <Box p="5" pb={0} width={[1, 3 / 5]}>
-            <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+            <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
               <Formik
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
                   const department = departementDatas.find(
@@ -113,55 +114,55 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                       mandataire: {
                         adresse: values.adresse,
                         code_postal: values.code_postal,
+                        department_id: department.id,
+                        dispo_max: parseInt(values.dispo_max),
+                        etablissement: "",
                         genre: values.genre.value,
+                        siret: values.siret,
                         telephone: values.telephone,
                         telephone_portable: values.telephone_portable,
-                        siret: values.siret,
-                        ville: values.ville,
-                        department_id: department.id,
-                        etablissement: "",
-                        dispo_max: parseInt(values.dispo_max)
+                        ville: values.ville
                       },
+                      tis: values.tis.map(ti => ti.value),
                       user: {
                         username: user.email,
                         ...user
-                      },
-                      tis: values.tis.map(ti => ti.value)
+                      }
                     };
                     signup({
                       body,
-                      onSuccess: () => Router.push("/signup/congratulation"),
+                      onComplete: () => setSubmitting(false),
                       onError: errors => setErrors(errors),
-                      onComplete: () => setSubmitting(false)
+                      onSuccess: () => Router.push("/signup/congratulation")
                     });
                   }
                   setSubmitting(false);
                 }}
                 validationSchema={Yup.object().shape({
-                  tis: Yup.mixed().required("Champs obligatoire"),
+                  adresse: Yup.string().required("Champs obligatoire"),
+                  code_postal: Yup.string().required("Champs obligatoire"),
+                  dispo_max: Yup.number("Le champs doit être en nombre").required(
+                    "Champs obligatoire"
+                  ),
                   genre: Yup.string().required("Champs obligatoire"),
                   siret: Yup.string()
                     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
                     .required("Champs obligatoire"),
                   telephone: Yup.string().required("Champs obligatoire"),
                   telephone_portable: Yup.string(),
-                  adresse: Yup.string().required("Champs obligatoire"),
-                  code_postal: Yup.string().required("Champs obligatoire"),
-                  ville: Yup.string().required("Champs obligatoire"),
-                  dispo_max: Yup.number("Le champs doit être en nombre").required(
-                    "Champs obligatoire"
-                  )
+                  tis: Yup.mixed().required("Champs obligatoire"),
+                  ville: Yup.string().required("Champs obligatoire")
                 })}
                 initialValues={{
-                  tis: mandataire ? mandataire.tis : "",
+                  adresse: mandataire ? mandataire.adresse : "",
+                  code_postal: mandataire ? mandataire.code_postal : "",
+                  dispo_max: mandataire ? mandataire.dispo_max : "",
                   genre: mandataire ? mandataire.genre : "",
                   siret: mandataire ? mandataire.siret : "",
                   telephone: mandataire ? mandataire.telephone : "",
                   telephone_portable: mandataire ? mandataire.telephone_portable : "",
-                  adresse: mandataire ? mandataire.adresse : "",
-                  code_postal: mandataire ? mandataire.code_postal : "",
-                  ville: mandataire ? mandataire.ville : "",
-                  dispo_max: mandataire ? mandataire.dispo_max : ""
+                  tis: mandataire ? mandataire.tis : "",
+                  ville: mandataire ? mandataire.ville : ""
                 }}
               >
                 {props => {
@@ -177,7 +178,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                   return (
                     <form onSubmit={handleSubmit}>
                       <SignupGeneralError errors={props.errors} />
-                      <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
+                      <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
                         <Select
                           id="tis"
                           name="tis"
@@ -190,7 +191,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                         />
                         {errors.tis && touched.tis && <Text>{errors.tis}</Text>}
                       </Box>
-                      <Box sx={{ zIndex: "100", position: "relative" }} mb="2" pt="2">
+                      <Box sx={{ position: "relative", zIndex: "100" }} mb="2" pt="2">
                         <Select
                           id="genre"
                           name="genre"

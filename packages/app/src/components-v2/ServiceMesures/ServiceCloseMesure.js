@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
+
 import { CLOSE_MESURE } from "./mutations";
 import { MESURE } from "./queries";
 
@@ -53,13 +54,13 @@ export const ServiceCloseMesure = props => {
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               UpdateMesure({
+                refetchQueries: ["mesures", "mesures_aggregate"],
                 variables: {
-                  id: currentMesure,
                   antenne_id: mesure.antenne_id,
-                  reason_extinction: values.reason_extinction.value,
-                  extinction: values.extinction
-                },
-                refetchQueries: ["mesures", "mesures_aggregate"]
+                  extinction: values.extinction,
+                  id: currentMesure,
+                  reason_extinction: values.reason_extinction.value
+                }
               });
               setSubmitting(false);
               setPanelType(null);
@@ -70,7 +71,7 @@ export const ServiceCloseMesure = props => {
             extinction: Yup.date().required("Required"),
             reason_extinction: Yup.string().required("Required")
           })}
-          initialValues={{ reason_extinction: "", extinction: "" }}
+          initialValues={{ extinction: "", reason_extinction: "" }}
         >
           {props => {
             const {

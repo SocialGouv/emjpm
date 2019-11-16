@@ -1,6 +1,7 @@
 import React from "react";
-import { Layout } from "../src/components";
 import styled from "styled-components";
+
+import { Layout } from "../src/components";
 
 const Container = styled.div`
   background-color: white;
@@ -468,7 +469,7 @@ const MentionPage = () => (
       id="ui-toc-affix"
       className="ui-affix-toc ui-toc-dropdown unselectable hidden-print"
       data-spy="affix"
-      style={{ top: "17px", display: "none" }}
+      style={{ display: "none", top: "17px" }}
     >
       <div className="toc">
         <ul className="nav">

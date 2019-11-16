@@ -1,9 +1,9 @@
-import React from "react";
 import Head from "next/head";
+import React from "react";
 
 import { Layout } from "../src/components";
-import Form from "../src/components/loginComponents/resetPasswordForm";
 import { PageTracker } from "../src/components/common/PageTracker";
+import Form from "../src/components/loginComponents/resetPasswordForm";
 
 const ResetPasswordContainer = ({ style }) => (
   <div className="container" style={style}>

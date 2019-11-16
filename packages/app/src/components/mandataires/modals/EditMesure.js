@@ -1,95 +1,92 @@
+import { format } from "date-fns";
 import React from "react";
 import Form from "react-jsonschema-form";
-
-import { connectModal } from "redux-modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { format } from "date-fns";
-import { updateMesure } from "../actions/mesures";
-import Layout from "../../communComponents/ModalLayout";
+import { connectModal } from "redux-modal";
+
 import { Autocomplete } from "../..";
-import { typeMesure, residence, civilite } from "../../common/nomination";
+import { civilite, residence, typeMesure } from "../../common/nomination";
+import Layout from "../../communComponents/ModalLayout";
+import { updateMesure } from "../actions/mesures";
 
 const schema = {
-  title: "Ouvrir une nouvelle mesure",
-  type: "object",
-  required: ["code_postal", "ville", "civilite", "annee", "residence", "date_ouverture"],
   properties: {
-    date_ouverture: {
-      type: "string",
-      format: "date"
-    },
-    type: {
-      type: "string",
-      enum: typeMesure
-    },
+    annee: { maxLength: 4, type: "integer" },
+    civilite: { enum: civilite, type: "string" },
     //TODO(Adrien): discus with PO
     // ti_id: { type: "number" },
     // cabinet: { type: "string", enum: cabinet },
-    residence: {
-      type: "string",
-      enum: residence
-    },
     code_postal: { type: "string" },
-    ville: { type: "string" },
-    civilite: { type: "string", enum: civilite },
-    annee: { type: "integer", maxLength: 4 },
-    numero_dossier: { type: "string", default: " " },
-    numero_rg: { type: "string", title: "Numéro RG" }
-  }
+    date_ouverture: {
+      format: "date",
+      type: "string"
+    },
+    numero_dossier: { default: " ", type: "string" },
+    numero_rg: { title: "Numéro RG", type: "string" },
+    residence: {
+      enum: residence,
+      type: "string"
+    },
+    type: {
+      enum: typeMesure,
+      type: "string"
+    },
+    ville: { type: "string" }
+  },
+  required: ["code_postal", "ville", "civilite", "annee", "residence", "date_ouverture"],
+  title: "Ouvrir une nouvelle mesure",
+  type: "object"
 };
 
 const uiSchema = {
-  date_ouverture: {
-    "ui:autofocus": true,
-    "ui:title": "Ouverture de la mesure",
-    classNames: "input_mesure_ouverture",
-    "ui:options": {
-      label: true
-    }
-  },
-  code_postal: {
-    "ui:placeholder": "Code Postal",
-    "ui:title": "Code Postal",
-    classNames: "input_mesure_commune",
-    "ui:options": {
-      label: false
-    }
-  },
-  etablissement: {
-    "ui:placeholder": "Etablissement",
-    "ui:options": {
-      label: false
-    }
-  },
   annee: {
+    classNames: "input_mesure_annee",
     "ui:placeholder": "Année de naissance",
-    "ui:title": "Année de naissance",
-    classNames: "input_mesure_annee"
+    "ui:title": "Année de naissance"
   },
   civilite: {
-    "ui:placeholder": "Genre",
     classNames: "input_mesure_civilite",
-    "ui:title": "Le majeur à protéger",
     "ui:options": {
       label: true
-    }
+    },
+    "ui:placeholder": "Genre",
+    "ui:title": "Le majeur à protéger"
   },
-  ville: {
-    "ui:placeholder": "Commune",
-    "ui:title": "Commune",
+  code_postal: {
     classNames: "input_mesure_commune",
     "ui:options": {
       label: false
-    }
+    },
+    "ui:placeholder": "Code Postal",
+    "ui:title": "Code Postal"
   },
-  residence: {
-    "ui:placeholder": "Lieu de vie",
-    "ui:title": "Résidence du majeur à protéger",
-    classNames: "input_mesure_residence",
+  date_ouverture: {
+    classNames: "input_mesure_ouverture",
+    "ui:autofocus": true,
     "ui:options": {
       label: true
-    }
+    },
+    "ui:title": "Ouverture de la mesure"
+  },
+  etablissement: {
+    "ui:options": {
+      label: false
+    },
+    "ui:placeholder": "Etablissement"
+  },
+  numero_dossier: {
+    "ui:autofocus": true,
+    "ui:options": {
+      label: true
+    },
+    "ui:title": "Numéro de dossier"
+  },
+  numero_rg: {
+    "ui:options": {
+      label: false
+    },
+    "ui:placeholder": "Numéro RG"
   },
   //TODO(Adrien): discus with PO
   // ti_id: {
@@ -100,27 +97,30 @@ const uiSchema = {
   //     label: true
   //   }
   // },
+  residence: {
+    classNames: "input_mesure_residence",
+    "ui:options": {
+      label: true
+    },
+    "ui:placeholder": "Lieu de vie",
+    "ui:title": "Résidence du majeur à protéger"
+  },
   type: {
-    "ui:placeholder": "Type de mesure",
-    "ui:title": "Type de mesure",
-
     classNames: "input_mesure_type",
     "ui:options": {
       label: false
-    }
+    },
+
+    "ui:placeholder": "Type de mesure",
+    "ui:title": "Type de mesure"
   },
-  numero_dossier: {
-    "ui:autofocus": true,
-    "ui:title": "Numéro de dossier",
-    "ui:options": {
-      label: true
-    }
-  },
-  numero_rg: {
-    "ui:placeholder": "Numéro RG",
+  ville: {
+    classNames: "input_mesure_commune",
     "ui:options": {
       label: false
-    }
+    },
+    "ui:placeholder": "Commune",
+    "ui:title": "Commune"
   }
 };
 
@@ -128,8 +128,8 @@ const TisOfMandataireAutoComplete = ({ items, value, onChange }) => (
   <Autocomplete
     items={items}
     inputProps={{
-      style: { width: 300 },
-      placeholder: "Choisissez un tis ou vous êtes agrée"
+      placeholder: "Choisissez un tis ou vous êtes agrée",
+      style: { width: 300 }
     }}
     resetOnSelect={false}
     value={value}
@@ -154,8 +154,8 @@ const EditMesure = ({ show, handleHide, formData, onSubmit }) => {
   // todo: we should have perfect mapping api<->data<->form
   const cleanData = {
     ...formData,
-    date_ouverture: format(formData.date_ouverture, "YYYY-MM-DD"),
     annee: (formData.annee && parseInt(formData.annee)) || null,
+    date_ouverture: format(formData.date_ouverture, "YYYY-MM-DD"),
     numero_dossier: formData.numero_dossier || ""
   };
   return (
@@ -185,4 +185,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   null,
   mapDispatchToProps
-)(connectModal({ name: "EditMesure", destroyOnHide: true })(EditMesure));
+)(connectModal({ destroyOnHide: true, name: "EditMesure" })(EditMesure));

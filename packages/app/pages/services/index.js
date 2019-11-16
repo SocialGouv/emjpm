@@ -1,6 +1,7 @@
-import { Button, BoxWrapper, Card, Heading1, Heading3, Text } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, Button, Card, Heading1, Heading3, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
+
 import { LinkButton } from "../../src/components-v2/Commons";
 import { LayoutServices } from "../../src/components-v2/Layout";
 import { ServiceMesures } from "../../src/components-v2/ServiceMesures";
@@ -51,8 +52,8 @@ const Mesures = () => {
           <UserInformations Component={props => <ServicesFilters {...props} />} />
           <Flex
             sx={{
-              mt: "2",
-              flexWrap: "wrap"
+              flexWrap: "wrap",
+              mt: "2"
             }}
           >
             <UserInformations Component={props => <ServiceMesures {...props} />} />

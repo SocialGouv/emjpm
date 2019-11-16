@@ -2,8 +2,8 @@ const MESURES_INITIAL_STATE = {
   // store last udpate of the data. hack to be able to force update views when this change
   lastUpdate: null,
   // hold mesure created form API return status+message
-  mesureCreatedStatus: null,
-  mesureCreatedMessage: null
+  mesureCreatedMessage: null,
+  mesureCreatedStatus: null
 };
 
 const mesuresReducer = (state = MESURES_INITIAL_STATE, action) => {
@@ -11,8 +11,8 @@ const mesuresReducer = (state = MESURES_INITIAL_STATE, action) => {
     case "MESURE_CREATE":
       return {
         ...state,
-        mesureCreatedStatus: null,
-        mesureCreatedMessage: null
+        mesureCreatedMessage: null,
+        mesureCreatedStatus: null
       };
     case "MESURE_UPDATED":
     case "MESURE_REACTIVATED":
@@ -24,16 +24,16 @@ const mesuresReducer = (state = MESURES_INITIAL_STATE, action) => {
     case "MESURE_CREATED":
       return {
         ...state,
-        mesureCreatedStatus: "success",
+        lastUpdate: new Date(),
         mesureCreatedMessage: null,
-        lastUpdate: new Date()
+        mesureCreatedStatus: "success"
       };
     case "MESURE_CREATED_ERROR":
       return {
         ...state,
-        mesureCreatedStatus: "error",
+        lastUpdate: new Date(),
         mesureCreatedMessage: action.message,
-        lastUpdate: new Date()
+        mesureCreatedStatus: "error"
       };
     default:
       return state;

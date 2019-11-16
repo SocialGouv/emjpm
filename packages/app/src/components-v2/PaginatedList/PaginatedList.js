@@ -1,6 +1,7 @@
 import { Button } from "@socialgouv/emjpm-ui-core";
 import React, { Fragment, useState } from "react";
 import { Box, Flex } from "rebass";
+
 import { PaginatedListStyle } from "./style";
 
 const DataList = ({ entries, RowItem }) => (

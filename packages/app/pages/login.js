@@ -1,11 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.css";
 
-import LoginForm from "../src/components/loginComponents/LoginForm";
+import Head from "next/head";
+import React from "react";
+import styled from "styled-components";
+
 import { Layout } from "../src/components";
 import { PageTracker } from "../src/components/common/PageTracker";
+import LoginForm from "../src/components/loginComponents/LoginForm";
 
 const Title = styled.div`
   text-align: left;

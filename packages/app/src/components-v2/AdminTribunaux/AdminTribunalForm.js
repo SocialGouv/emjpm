@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { cardStyle } from "./style";
 
 const AdminTribunalFormStyle = {
@@ -10,8 +11,8 @@ const AdminTribunalFormStyle = {
 };
 
 const grayBox = {
-  borderRadius: "5px 0 0 5px",
   bg: "cardSecondary",
+  borderRadius: "5px 0 0 5px",
   p: "5"
 };
 
@@ -41,20 +42,20 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                 setSubmitting(false);
               }}
               validationSchema={Yup.object().shape({
-                etablissement: Yup.string().required("Champs obligatoire"),
                 code_postal: Yup.string().required("Champs obligatoire"),
-                ville: Yup.string().required("Champs obligatoire"),
                 email: Yup.string().email("Le format de votre email n'est pas correct"),
+                etablissement: Yup.string().required("Champs obligatoire"),
+                siret: Yup.string().required("Champs obligatoire"),
                 telephone: Yup.string(),
-                siret: Yup.string().required("Champs obligatoire")
+                ville: Yup.string().required("Champs obligatoire")
               })}
               initialValues={{
-                etablissement: tribunal ? tribunal.etablissement : "",
-                email: tribunal && tribunal.email ? tribunal.email : "",
                 code_postal: tribunal ? tribunal.code_postal : "",
-                ville: tribunal ? tribunal.ville : "",
+                email: tribunal && tribunal.email ? tribunal.email : "",
+                etablissement: tribunal ? tribunal.etablissement : "",
+                siret: tribunal && tribunal.siret ? tribunal.siret : "",
                 telephone: tribunal && tribunal.telephone ? tribunal.telephone : "",
-                siret: tribunal && tribunal.siret ? tribunal.siret : ""
+                ville: tribunal ? tribunal.ville : ""
               }}
             >
               {props => {

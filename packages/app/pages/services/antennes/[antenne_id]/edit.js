@@ -1,11 +1,11 @@
-import React from "react";
-import { useRouter } from "next/router";
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
+import { useRouter } from "next/router";
+import React from "react";
 
-import { withAuthSync } from "../../../../src/util/auth";
 import { LayoutServices } from "../../../../src/components-v2/Layout";
 import { ServiceEditAntenne } from "../../../../src/components-v2/ServiceEditAntenne";
 import { UserInformations } from "../../../../src/components-v2/UserInformations";
+import { withAuthSync } from "../../../../src/util/auth";
 
 const AddAntennes = () => {
   const router = useRouter();

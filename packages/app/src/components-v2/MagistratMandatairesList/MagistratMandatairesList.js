@@ -1,12 +1,13 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Mandatairelist, MandataireContextProvider } from "@socialgouv/emjpm-ui-components";
+import { MandataireContextProvider, Mandatairelist } from "@socialgouv/emjpm-ui-components";
 import { Button, Card, Heading4, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
+
+import { MagistratChoose } from "./MagistratChoose";
 import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";
 import { formatMandatairesList } from "./utils";
-import { MagistratChoose } from "./MagistratChoose";
 const optionsType = [
   { label: "Tous les types", value: null },
   { label: "Préposé", value: "MANDATAIRE_PRE" },
@@ -35,11 +36,11 @@ const MagistratMandatairesList = props => {
 
   const { data, error, loading, fetchMore } = useQuery(GET_MANDATAIRES, {
     variables: {
-      offset: 0,
+      discriminator: selectedType ? selectedType.value : null,
       limit: RESULT_PER_PAGE,
-      tribunal: ti_id,
+      offset: 0,
       order: selectedCapacity ? selectedCapacity.value : null,
-      discriminator: selectedType ? selectedType.value : null
+      tribunal: ti_id
     }
   });
 
@@ -99,16 +100,16 @@ const MagistratMandatairesList = props => {
             <Button
               onClick={() => {
                 fetchMore({
-                  variables: {
-                    limit: RESULT_PER_PAGE,
-                    offset: currentPage + RESULT_PER_PAGE
-                  },
                   updateQuery: (prev, { fetchMoreResult }) => {
                     setCurrentPage(currentPage + RESULT_PER_PAGE);
                     return {
                       count: fetchMoreResult.count,
                       mandatairesList: [...prev.mandatairesList, ...fetchMoreResult.mandatairesList]
                     };
+                  },
+                  variables: {
+                    limit: RESULT_PER_PAGE,
+                    offset: currentPage + RESULT_PER_PAGE
                   }
                 });
               }}

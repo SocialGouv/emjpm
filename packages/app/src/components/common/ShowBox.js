@@ -1,6 +1,6 @@
-import React from "react";
-import { CheckCircle, AlertTriangle } from "react-feather";
 import Link from "next/link";
+import React from "react";
+import { AlertTriangle, CheckCircle } from "react-feather";
 
 const formatMessageDispo = nb =>
   nb === 1
@@ -55,12 +55,12 @@ export const Alert = ({ className, Icon, message, updateIndexIndi }) =>
     <div
       className={`alert ${className || ""}`}
       role="alert"
-      style={{ marginTop: 10, fontSize: "1.2em", borderRadius: "0px" }}
+      style={{ borderRadius: "0px", fontSize: "1.2em", marginTop: 10 }}
     >
       <Icon
         style={{
-          verticalAlign: "middle",
-          marginRight: 10
+          marginRight: 10,
+          verticalAlign: "middle"
         }}
       />{" "}
       {message}{" "}

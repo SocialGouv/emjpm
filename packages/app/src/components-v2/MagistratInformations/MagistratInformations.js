@@ -1,11 +1,11 @@
+import { Button, Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
-import { Box, Text, Flex } from "rebass";
-import { Card, Button, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
+import { Box, Flex, Text } from "rebass";
 import { MailOutline } from "styled-icons/material";
 
-import { LinkButton } from "../Commons";
-import { innerTextStyle, iconTextStyle, boxStyle, flexStyle } from "./style";
 import { doForgotPassword } from "../../components/loginComponents/ForgotPasswordForm";
+import { LinkButton } from "../Commons";
+import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
 
 const MagistratInformations = props => {
   const [isOpen, toggleModal] = useState(false);

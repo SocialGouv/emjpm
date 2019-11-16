@@ -1,26 +1,26 @@
-import React from "react";
-import Form from "react-jsonschema-form";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import { X, Save, PlusSquare, XCircle, CheckCircle } from "react-feather";
 import { format } from "date-fns";
-import { typeMesure, residence, civilite } from "../common/nomination";
-
-import { Button, ToggleState, Autocomplete } from "..";
-import { createMesure, createMesureSave } from "./actions/mesures";
 import Router from "next/router";
+import React from "react";
+import { CheckCircle, PlusSquare, Save, X, XCircle } from "react-feather";
+import Form from "react-jsonschema-form";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import { Autocomplete, Button, ToggleState } from "..";
+import { civilite, residence, typeMesure } from "../common/nomination";
+import { createMesure, createMesureSave } from "./actions/mesures";
 
 const Alert = ({ className, Icon, message }) =>
   (message && (
     <div
       className={`alert ${className || ""}`}
       role="alert"
-      style={{ marginTop: 20, marginLeft: 20, fontSize: "1.2em" }}
+      style={{ fontSize: "1.2em", marginLeft: 20, marginTop: 20 }}
     >
       <Icon
         style={{
-          verticalAlign: "middle",
-          marginRight: 10
+          marginRight: 10,
+          verticalAlign: "middle"
         }}
       />{" "}
       {message}
@@ -37,31 +37,6 @@ const SucessBox = ({ message }) => (
 );
 
 const schema = {
-  type: "object",
-  required: ["code_postal", "ville", "civilite", "annee", "date_ouverture", "type", "residence"],
-  properties: {
-    date_ouverture: {
-      type: "string",
-      format: "date"
-    },
-    type: {
-      type: "string",
-      enum: typeMesure
-    },
-    //TODO(Adrien): discus with PO
-    // ti_id: { type: "number" },
-    //cabinet: { type: "string", enum: cabinet },
-    code_postal: { type: "string" },
-    ville: { type: "string" },
-    civilite: { type: "string", enum: civilite },
-
-    annee: { type: "integer", default: "" },
-    numero_dossier: { type: "string", default: "" },
-    residence: {
-      type: "string",
-      enum: residence
-    }
-  },
   dependencies: {
     residence: {
       oneOf: [
@@ -81,75 +56,101 @@ const schema = {
         },
         {
           properties: {
-            residence: {
-              enum: ["En établissement"]
-            },
             etablissement_id: {
               type: "number"
+            },
+            residence: {
+              enum: ["En établissement"]
             }
           }
         }
       ]
     }
-  }
+  },
+  properties: {
+    annee: { default: "", type: "integer" },
+    civilite: { enum: civilite, type: "string" },
+    //TODO(Adrien): discus with PO
+    // ti_id: { type: "number" },
+    //cabinet: { type: "string", enum: cabinet },
+    code_postal: { type: "string" },
+    date_ouverture: {
+      format: "date",
+      type: "string"
+    },
+    numero_dossier: { default: "", type: "string" },
+
+    residence: {
+      enum: residence,
+      type: "string"
+    },
+    type: {
+      enum: typeMesure,
+      type: "string"
+    },
+    ville: { type: "string" }
+  },
+  required: ["code_postal", "ville", "civilite", "annee", "date_ouverture", "type", "residence"],
+  type: "object"
 };
 
 const uiSchema = {
-  date_ouverture: {
-    "ui:autofocus": true,
-    "ui:title": "Date de décision",
-    classNames: "input_mesure_ouverture",
+  annee: {
+    classNames: "input_mesure_annee",
     "ui:options": {
       label: true
-    }
+    },
+    "ui:placeholder": "Année de naissance",
+    "ui:title": "Année de naissance du majeur",
+    "ui:widget": "updown"
+  },
+  civilite: {
+    classNames: "input_mesure_civilite",
+    "ui:options": {
+      label: true
+    },
+
+    "ui:placeholder": "Genre",
+    "ui:title": "Le majeur à protéger"
   },
   code_postal: {
-    "ui:placeholder": "Code Postal",
     classNames: "input_mesure_commune",
     "ui:options": {
       label: false
-    }
+    },
+    "ui:placeholder": "Code Postal"
   },
-  type: {
-    "ui:placeholder": "Type de mesure",
-    classNames: "input_mesure_type",
-    "ui:options": {
-      label: false
-    }
-  },
-  annee: {
-    "ui:placeholder": "Année de naissance",
-    "ui:title": "Année de naissance du majeur",
-    classNames: "input_mesure_annee",
-    "ui:widget": "updown",
+  date_ouverture: {
+    classNames: "input_mesure_ouverture",
+    "ui:autofocus": true,
     "ui:options": {
       label: true
-    }
+    },
+    "ui:title": "Date de décision"
   },
-  civilite: {
-    "ui:placeholder": "Genre",
-    classNames: "input_mesure_civilite",
-
-    "ui:title": "Le majeur à protéger",
+  etablissement_id: {
     "ui:options": {
       label: true
-    }
+    },
+    "ui:placeholder": "Etablissement",
+    "ui:title": "Etablissement",
+    "ui:widget": "EtablissementAutoComplete"
   },
-  ville: {
-    "ui:placeholder": "Commune",
-    classNames: "input_mesure_ville",
+  numero_dossier: {
+    "ui:autofocus": true,
     "ui:options": {
-      label: false
-    }
+      label: true
+    },
+    "ui:title": "Numéro de dossier"
   },
   residence: {
-    "ui:widget": "radio",
-    "ui:placeholder": "Lieu de vie",
-    "ui:title": "Résidence",
     classNames: "input_mesure_lieuDeVie",
     "ui:options": {
       label: true
-    }
+    },
+    "ui:placeholder": "Lieu de vie",
+    "ui:title": "Résidence",
+    "ui:widget": "radio"
   },
   //TODO(Adrien): discus with PO
   // ti_id: {
@@ -160,20 +161,19 @@ const uiSchema = {
   //     label: true
   //   }
   // },
-  etablissement_id: {
-    "ui:widget": "EtablissementAutoComplete",
-    "ui:title": "Etablissement",
-    "ui:placeholder": "Etablissement",
+  type: {
+    classNames: "input_mesure_type",
     "ui:options": {
-      label: true
-    }
+      label: false
+    },
+    "ui:placeholder": "Type de mesure"
   },
-  numero_dossier: {
-    "ui:autofocus": true,
-    "ui:title": "Numéro de dossier",
+  ville: {
+    classNames: "input_mesure_ville",
     "ui:options": {
-      label: true
-    }
+      label: false
+    },
+    "ui:placeholder": "Commune"
   }
 };
 
@@ -181,8 +181,8 @@ const TisOfMandataireAutoComplete = ({ items, value, onChange }) => (
   <Autocomplete
     items={items}
     inputProps={{
-      style: { width: 300 },
-      placeholder: "Choisissez un tis ou vous êtes agrée"
+      placeholder: "Choisissez un tis ou vous êtes agrée",
+      style: { width: 300 }
     }}
     resetOnSelect={false}
     value={value}
@@ -195,8 +195,8 @@ const EtablissementAutoComplete = ({ items, value, onChange }) => (
   <Autocomplete
     items={items}
     inputProps={{
-      style: { width: 500 },
-      placeholder: "Choisissez un établissement"
+      placeholder: "Choisissez un établissement",
+      style: { width: 500 }
     }}
     resetOnSelect={false}
     value={value}
@@ -256,7 +256,7 @@ const CustomFieldTemplate = props => {
   );
 };
 
-const buttonIconStyle = { width: 22, height: 22, marginRight: 5, marginTop: -2 };
+const buttonIconStyle = { height: 22, marginRight: 5, marginTop: -2, width: 22 };
 
 const CreateMesure = ({
   onSubmit,
@@ -281,7 +281,7 @@ const CreateMesure = ({
                 onClick={() => {
                   createMesure();
                 }}
-                style={{ width: 260, marginLeft: 20 }}
+                style={{ marginLeft: 20, width: 260 }}
               >
                 <PlusSquare style={buttonIconStyle} /> Créer une nouvelle mesure
               </Button>
@@ -290,7 +290,7 @@ const CreateMesure = ({
           )) ||
             (active && (
               <React.Fragment>
-                <div style={{ fontSize: "1.4em", marginTop: 0, marginLeft: 10 }}>
+                <div style={{ fontSize: "1.4em", marginLeft: 10, marginTop: 0 }}>
                   Créer une nouvelle mesure
                 </div>
                 <Form
@@ -310,7 +310,7 @@ const CreateMesure = ({
                     <Button
                       data-cy="button-submit-mesure"
                       type="submit"
-                      style={{ width: 260, marginLeft: 20 }}
+                      style={{ marginLeft: 20, width: 260 }}
                     >
                       <Save style={buttonIconStyle} /> Enregistrer la mesure
                     </Button>
@@ -320,7 +320,7 @@ const CreateMesure = ({
                       type="button"
                       onClick={toggle}
                       disabled={status === "loading"}
-                      style={{ width: 120, marginLeft: 20 }}
+                      style={{ marginLeft: 20, width: 120 }}
                     >
                       <X style={buttonIconStyle} /> Annuler
                     </Button>
@@ -354,8 +354,8 @@ const CreateMesure = ({
 };
 
 const mapStateToProps = state => ({
-  mesureCreatedStatus: state.mesures.mesureCreatedStatus,
-  mesureCreatedMessage: state.mesures.mesureCreatedMessage
+  mesureCreatedMessage: state.mesures.mesureCreatedMessage,
+  mesureCreatedStatus: state.mesures.mesureCreatedStatus
 });
 
 const mapDispatchToProps = dispatch =>

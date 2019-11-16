@@ -9,8 +9,8 @@ import { logout } from "../../util/auth";
 import { Link } from "../Commons";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
-import { dropDownLinks } from "./dropDownLink";
 import { UserInformations } from "../UserInformations";
+import { dropDownLinks } from "./dropDownLink";
 
 const navigationLinks = [
   {

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Router from "next/router";
-import nextCookie from "next-cookies";
 import cookie from "js-cookie";
+import nextCookie from "next-cookies";
+import Router from "next/router";
+import React, { Component } from "react";
 
 export const logout = () => {
   Router.push("/error", "/login");

@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Box } from "rebass";
+import { Box, Text } from "rebass";
 
 const ListStyle = {
   fontSize: "1",
@@ -7,10 +7,10 @@ const ListStyle = {
 };
 
 const ListTitleStyle = {
-  fontWeight: "700",
   color: "#555555",
-  fontSize: "2",
   fontFamily: "Quicksand, sans-serif",
+  fontSize: "2",
+  fontWeight: "700",
   mb: "3"
 };
 

@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { Clock, Home, Map, UserMinus } from "react-feather";
 import { connect } from "react-redux";
+
 import { DummyTabs } from "..";
 import { DispoMagistrat } from "../common/ShowBox";
 import TableState from "../common/TableState";
@@ -31,14 +32,6 @@ class MandataireTabs extends React.Component {
     // define the content of the tabs
     const tabs = [
       {
-        text: "Mesures en cours",
-        url: "/mandataires/mesures/en-cours",
-        icon: (
-          <PillDispo
-            mesures_en_cours={(this.props.profiles && this.props.profiles.mesures_en_cours) || 0}
-            dispo_max={(this.props.profiles && this.props.profiles.dispo_max) || 0}
-          />
-        ),
         content: (
           <React.Fragment>
             <CreateMesure />
@@ -59,18 +52,23 @@ class MandataireTabs extends React.Component {
               ]}
             />
           </React.Fragment>
-        )
+        ),
+        icon: (
+          <PillDispo
+            mesures_en_cours={(this.props.profiles && this.props.profiles.mesures_en_cours) || 0}
+            dispo_max={(this.props.profiles && this.props.profiles.dispo_max) || 0}
+          />
+        ),
+        text: "Mesures en cours",
+        url: "/mandataires/mesures/en-cours"
       },
       {
-        text: "Vue Carte",
-        url: "/mandataires/vue-carte",
+        content: <OpenStreeMap getPromise={() => apiFetch(`/mandataires/1/mesuresForMaps`)} />,
         icon: <Map />,
-        content: <OpenStreeMap getPromise={() => apiFetch(`/mandataires/1/mesuresForMaps`)} />
+        text: "Vue Carte",
+        url: "/mandataires/vue-carte"
       },
       {
-        text: "Fins de mandats",
-        url: "/mandataires/mesures/eteintes",
-        icon: <UserMinus />,
         content: (
           <TableMesures
             fetch={() => apiFetch(`/mandataires/1/mesures/Eteinte`)}
@@ -86,12 +84,12 @@ class MandataireTabs extends React.Component {
               "fin-mandat-attente"
             ]}
           />
-        )
+        ),
+        icon: <UserMinus />,
+        text: "Fins de mandats",
+        url: "/mandataires/mesures/eteintes"
       },
       {
-        text: "Mesures en attente",
-        url: "/mandataires/mesures/en-attente",
-        icon: <Clock />,
         content: (
           <TableMesures
             fetch={() => apiFetch(`/mandataires/1/mesures/attente`)}
@@ -110,13 +108,16 @@ class MandataireTabs extends React.Component {
               "fin-mandat-attente"
             ]}
           />
-        )
+        ),
+        icon: <Clock />,
+        text: "Mesures en attente",
+        url: "/mandataires/mesures/en-attente"
       },
       {
-        text: "Mes informations",
-        url: "/mandataires/mes-informations",
+        content: <Profile />,
         icon: <Home />,
-        content: <Profile />
+        text: "Mes informations",
+        url: "/mandataires/mes-informations"
       }
     ];
     return (
@@ -135,8 +136,8 @@ class MandataireTabs extends React.Component {
 
 export default connect(
   state => ({
-    profiles: state.mandataire.profiles,
-    mandataireId: state.mandataire.mandataireId
+    mandataireId: state.mandataire.mandataireId,
+    profiles: state.mandataire.profiles
   }),
   null
 )(MandataireTabs);

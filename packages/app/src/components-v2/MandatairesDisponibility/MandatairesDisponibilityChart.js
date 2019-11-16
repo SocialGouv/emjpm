@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+
 import { textStyle } from "../MandatairesActivity/style";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
@@ -8,15 +9,15 @@ const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 const MandatairesDisponibilityChart = ({ data }) => {
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: [300, 313, 300] }}>
+      <Box sx={{ height: [300, 313, 300], position: "relative", width: "100%" }}>
         <ResponsiveContainer>
           <BarChart
             data={data}
             margin={{
-              top: 20,
-              right: 0,
+              bottom: 20,
               left: 0,
-              bottom: 20
+              right: 0,
+              top: 20
             }}
           >
             <Tooltip cursor={{ fill: "#F1F5F9" }} />
@@ -38,10 +39,10 @@ const MandatairesDisponibilityChart = ({ data }) => {
       </Box>
       <Box
         sx={{
-          mt: "1",
           display: "grid",
           gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"]
+          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
+          mt: "1"
         }}
       >
         <Box>
@@ -62,10 +63,10 @@ const MandatairesDisponibilityChart = ({ data }) => {
       </Box>
       <Box
         sx={{
-          mt: "1",
           display: "grid",
           gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"]
+          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
+          mt: "1"
         }}
       >
         <Box>

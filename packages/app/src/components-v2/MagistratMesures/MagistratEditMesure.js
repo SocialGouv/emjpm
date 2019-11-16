@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
+
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { EDIT_MESURE } from "./mutations";
 
@@ -34,12 +35,12 @@ export const MagistratEditMesure = props => {
             setTimeout(() => {
               UpdateMesure({
                 variables: {
-                  id: currentMesure,
-                  type: values.type.value,
-                  civilite: values.civilite.value,
                   annee: values.annee,
+                  cabinet: values.cabinet,
+                  civilite: values.civilite.value,
+                  id: currentMesure,
                   numero_rg: values.numero_rg,
-                  cabinet: values.cabinet
+                  type: values.type.value
                 }
               });
               setSubmitting(false);
@@ -48,18 +49,18 @@ export const MagistratEditMesure = props => {
             }, 500);
           }}
           validationSchema={Yup.object().shape({
-            type: Yup.string().required(),
-            civilite: Yup.string().required(),
             annee: Yup.string().required(),
+            cabinet: Yup.string(),
+            civilite: Yup.string().required(),
             numero_rg: Yup.string().required(),
-            cabinet: Yup.string()
+            type: Yup.string().required()
           })}
           initialValues={{
             annee: age,
+            cabinet: cabinet ? cabinet : "",
             civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
             numero_rg: numeroRg,
-            type: { label: type, value: type },
-            cabinet: cabinet ? cabinet : ""
+            type: { label: type, value: type }
           }}
         >
           {props => {
@@ -74,7 +75,7 @@ export const MagistratEditMesure = props => {
             } = props;
             return (
               <form onSubmit={handleSubmit}>
-                <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
                   <Select
                     id="type"
                     name="type"
@@ -85,7 +86,7 @@ export const MagistratEditMesure = props => {
                     options={MESURE_TYPE_LABEL_VALUE}
                   />
                 </Box>
-                <Box sx={{ zIndex: "80", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
                   <Select
                     id="civilite"
                     name="civilite"
@@ -96,7 +97,7 @@ export const MagistratEditMesure = props => {
                     options={CIVILITY}
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.annee}
                     id="annee"
@@ -106,7 +107,7 @@ export const MagistratEditMesure = props => {
                     placeholder="année"
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.numero_rg}
                     id="numero_rg"
@@ -116,7 +117,7 @@ export const MagistratEditMesure = props => {
                     placeholder="numero rg"
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.cabinet}
                     id="cabinet"

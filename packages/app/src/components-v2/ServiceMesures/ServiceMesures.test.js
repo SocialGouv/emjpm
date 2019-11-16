@@ -1,6 +1,7 @@
 import React from "react";
-import { ServiceMesures } from "./ServiceMesures";
 import renderer from "react-test-renderer";
+
+import { ServiceMesures } from "./ServiceMesures";
 
 it("renders correctly", () => {
   const tree = renderer.create(<ServiceMesures />).toJSON();

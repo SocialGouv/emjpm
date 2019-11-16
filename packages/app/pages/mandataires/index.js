@@ -1,6 +1,7 @@
 import React from "react";
-import Mandataires from "../../src/components/mandataires";
+
 import { Layout } from "../../src/components";
+import Mandataires from "../../src/components/mandataires";
 
 const MandatairesPage = () => (
   <Layout logout>

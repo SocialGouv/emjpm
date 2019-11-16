@@ -1,6 +1,10 @@
 extends:
   - "@socialgouv/eslint-config-react"
 
+plugins:
+  - sort-keys-fix
+  - simple-import-sort
+
 rules:
   react/self-closing-comp: 
   - error
@@ -13,3 +17,7 @@ rules:
   jsx-a11y/click-events-have-key-events: off
   jsx-a11y/no-static-element-interactions: off
   jsx-a11y/no-noninteractive-tabindex: off
+  simple-import-sort/sort: error
+  sort-keys-fix/sort-keys-fix: 
+  - error
+  - asc

@@ -1,5 +1,3 @@
-import React from "react";
-import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-tabs/style/react-tabs.css";
 import "../../../static/css/custom.css";
@@ -7,8 +5,11 @@ import "../../../static/css/footer.css";
 import "../../../static/css/hero.css";
 import "../../../static/css/panel.css";
 
-import Navigation from "../communComponents/Navigation";
+import React from "react";
+import styled from "styled-components";
+
 import Footer from "../communComponents/Footer";
+import Navigation from "../communComponents/Navigation";
 
 const LayoutContainer = styled.div`
   display: flex;

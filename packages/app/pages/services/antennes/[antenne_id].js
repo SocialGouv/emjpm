@@ -1,12 +1,12 @@
-import React from "react";
-import { Box, Flex } from "rebass";
 import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import { useRouter } from "next/router";
+import React from "react";
+import { Box, Flex } from "rebass";
 
-import { withAuthSync } from "../../../src/util/auth";
 import { LayoutServices } from "../../../src/components-v2/Layout";
 import { PreferencesPanel } from "../../../src/components-v2/PreferencesPanel";
 import { ServicesInformations } from "../../../src/components-v2/ServicesInformations";
+import { withAuthSync } from "../../../src/util/auth";
 
 const Antennes = () => {
   const router = useRouter();
@@ -21,10 +21,10 @@ const Antennes = () => {
         >
           <Box
             sx={{
-              p: 1,
-              flexGrow: 99999,
               flexBasis: 0,
-              minWidth: 320
+              flexGrow: 99999,
+              minWidth: 320,
+              p: 1
             }}
           >
             <Heading2>Informations générales</Heading2>
@@ -32,9 +32,9 @@ const Antennes = () => {
           </Box>
           <Box
             sx={{
-              p: 1,
+              flexBasis: 320,
               flexGrow: 1,
-              flexBasis: 320
+              p: 1
             }}
           >
             <Heading2>Mesures souhaitées</Heading2>

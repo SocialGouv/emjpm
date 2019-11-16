@@ -3,6 +3,7 @@ import { MesureContextProvider, MesureList } from "@socialgouv/emjpm-ui-componen
 import { Button } from "@socialgouv/emjpm-ui-core";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Box, Flex } from "rebass";
+
 import { FiltersContext } from "../ServicesFilters/context";
 import { MESURES } from "./queries";
 import { ServiceAcceptMesure } from "./ServiceAcceptMesure";
@@ -29,16 +30,16 @@ const ServiceMesures = props => {
     currentMesureType = mesureStatus ? mesureStatus.value : null;
   }
   const { data, error, loading, fetchMore } = useQuery(MESURES, {
+    fetchPolicy: "network-only",
     variables: {
-      offset: 0,
-      limit: RESULT_PER_PAGE,
       antenne: antenne ? antenne.value : null,
-      type: mesureType ? mesureType.value : null,
-      status: currentMesureType,
+      limit: RESULT_PER_PAGE,
+      offset: 0,
       searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
-    },
-    fetchPolicy: "network-only"
+        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+      status: currentMesureType,
+      type: mesureType ? mesureType.value : null
+    }
   });
 
   if (loading) {
@@ -76,15 +77,15 @@ const ServiceMesures = props => {
                   <Button
                     onClick={() => {
                       fetchMore({
-                        variables: {
-                          offset: currentPage + RESULT_PER_PAGE
-                        },
                         updateQuery: (prev, { fetchMoreResult }) => {
                           setCurrentPage(currentPage + RESULT_PER_PAGE);
                           return {
                             count: fetchMoreResult.count,
                             mesures: [...prev.mesures, ...fetchMoreResult.mesures]
                           };
+                        },
+                        variables: {
+                          offset: currentPage + RESULT_PER_PAGE
                         }
                       });
                     }}
