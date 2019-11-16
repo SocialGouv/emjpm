@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
+
 import { DELETE_ANTENNE_MESURE, DELETE_MANDATAIRE_MESURE } from "./mutations";
 import { MESURE } from "./queries";
 
@@ -50,19 +51,19 @@ export const MagistratRemoveMesure = props => {
             setTimeout(() => {
               if (mesure.mandataire_id) {
                 DeleteMandataireMesure({
+                  refetchQueries: ["mesures"],
                   variables: {
                     id: currentMesure,
                     mandataire_id: mesure.mandataire_id
-                  },
-                  refetchQueries: ["mesures"]
+                  }
                 });
               } else if (mesure.antenne_id) {
                 DeleteAntenneMesure({
+                  refetchQueries: ["mesures"],
                   variables: {
-                    id: currentMesure,
-                    antenne_id: mesure.antenne_id
-                  },
-                  refetchQueries: ["mesures"]
+                    antenne_id: mesure.antenne_id,
+                    id: currentMesure
+                  }
                 });
               }
               setSubmitting(false);

@@ -5,33 +5,33 @@ import { Box, Link } from "rebass";
 
 const LinkStyle = isActive => {
   return {
-    color: isActive ? "primary" : "black",
-    fontFamily: "heading",
-    fontWeight: "700",
-    cursor: "pointer",
-    p: "2px",
-    position: "relative",
-    display: "inline-block",
-    lineHeight: "1.5",
     "&:hover": {
       textDecoration: "none"
-    }
+    },
+    color: isActive ? "primary" : "black",
+    cursor: "pointer",
+    display: "inline-block",
+    fontFamily: "heading",
+    fontWeight: "700",
+    lineHeight: "1.5",
+    p: "2px",
+    position: "relative"
   };
 };
 
 const LineStyle = {
-  left: 0,
-  right: 0,
-  height: "10px",
   bg: "primary",
-  mt: "8px",
   borderRadius: "5px",
-  position: "absolute"
+  height: "10px",
+  left: 0,
+  mt: "8px",
+  position: "absolute",
+  right: 0
 };
 
 const BoxStyle = {
-  overflow: "hidden",
-  height: "34px"
+  height: "34px",
+  overflow: "hidden"
 };
 
 const ActiveLink = ({ router, isNestedLinks, ...props }) => {

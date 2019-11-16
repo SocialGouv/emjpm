@@ -1,16 +1,16 @@
-import React from "react";
-import { Box, Text, Flex } from "rebass";
 import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
+import React from "react";
+import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
 import { AntenneEditLinkButton } from "../Commons";
 import {
-  titleStyle,
-  innerTextStyle,
-  topTextStyle,
-  iconTextStyle,
   boxStyle,
-  flexStyle
+  flexStyle,
+  iconTextStyle,
+  innerTextStyle,
+  titleStyle,
+  topTextStyle
 } from "./style";
 const Informations = props => {
   const { service_antenne, currentAntenne } = props;

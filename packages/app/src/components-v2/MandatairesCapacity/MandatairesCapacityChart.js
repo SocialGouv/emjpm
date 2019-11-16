@@ -1,75 +1,75 @@
 import React from "react";
+import { Box, Flex, Text } from "rebass";
 import {
-  ResponsiveContainer,
-  ComposedChart,
   Bar,
-  XAxis,
-  YAxis,
   CartesianGrid,
+  Cell,
+  ComposedChart,
+  ResponsiveContainer,
   Tooltip,
-  Cell
+  XAxis,
+  YAxis
 } from "recharts";
-import { Box, Text, Flex } from "rebass";
 
 const data = [
   {
-    name: "Page A",
-    "Disponibilité max": 590,
     "Disponibilité actuelle": 800,
+    "Disponibilité max": 590,
+    name: "Page A",
     overcapacity: true
   },
   {
-    name: "Page B",
-    "Disponibilité max": 868,
     "Disponibilité actuelle": 967,
+    "Disponibilité max": 868,
+    name: "Page B",
     overcapacity: true
   },
   {
-    name: "Page C",
-    "Disponibilité max": 1397,
     "Disponibilité actuelle": 1098,
-    overcapacity: true
-  },
-  {
-    name: "Page D",
-    "Disponibilité max": 1480,
-    "Disponibilité actuelle": 1200,
-    overcapacity: false
-  },
-  {
-    name: "Page E",
-    "Disponibilité max": 1520,
-    "Disponibilité actuelle": 1108,
-    overcapacity: false
-  },
-  {
-    name: "Page F",
-    "Disponibilité max": 1400,
-    "Disponibilité actuelle": 680,
-    overcapacity: true
-  },
-  {
-    name: "Page C",
     "Disponibilité max": 1397,
-    "Disponibilité actuelle": 1098,
-    overcapacity: false
-  },
-  {
-    name: "Page D",
-    "Disponibilité max": 1480,
-    "Disponibilité actuelle": 1200,
+    name: "Page C",
     overcapacity: true
   },
   {
-    name: "Page E",
-    "Disponibilité max": 1520,
-    "Disponibilité actuelle": 1108,
+    "Disponibilité actuelle": 1200,
+    "Disponibilité max": 1480,
+    name: "Page D",
     overcapacity: false
   },
   {
-    name: "Page F",
-    "Disponibilité max": 1400,
+    "Disponibilité actuelle": 1108,
+    "Disponibilité max": 1520,
+    name: "Page E",
+    overcapacity: false
+  },
+  {
     "Disponibilité actuelle": 680,
+    "Disponibilité max": 1400,
+    name: "Page F",
+    overcapacity: true
+  },
+  {
+    "Disponibilité actuelle": 1098,
+    "Disponibilité max": 1397,
+    name: "Page C",
+    overcapacity: false
+  },
+  {
+    "Disponibilité actuelle": 1200,
+    "Disponibilité max": 1480,
+    name: "Page D",
+    overcapacity: true
+  },
+  {
+    "Disponibilité actuelle": 1108,
+    "Disponibilité max": 1520,
+    name: "Page E",
+    overcapacity: false
+  },
+  {
+    "Disponibilité actuelle": 680,
+    "Disponibilité max": 1400,
+    name: "Page F",
     overcapacity: true
   }
 ];
@@ -77,7 +77,7 @@ const data = [
 const MandatairesCapacityChart = () => {
   return (
     <Box>
-      <Box sx={{ position: "relative", width: "100%", height: [300, 300, 400] }}>
+      <Box sx={{ height: [300, 300, 400], position: "relative", width: "100%" }}>
         <ResponsiveContainer>
           <ComposedChart
             layout="vertical"
@@ -85,10 +85,10 @@ const MandatairesCapacityChart = () => {
             height={400}
             data={data}
             margin={{
-              top: 20,
-              right: 0,
               bottom: 20,
-              left: 0
+              left: 0,
+              right: 0,
+              top: 20
             }}
           >
             <CartesianGrid stroke="#f5f5f5" />
@@ -108,10 +108,10 @@ const MandatairesCapacityChart = () => {
       </Box>
       <Box
         sx={{
-          ml: "6",
           display: "grid",
           gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"]
+          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
+          ml: "6"
         }}
       >
         <Box>

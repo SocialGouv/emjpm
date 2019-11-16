@@ -1,12 +1,12 @@
 export const FooterWrapperStyle = {
+  bg: "cardPrimary",
   mt: 7,
-  py: 5,
-  bg: "cardPrimary"
+  py: 5
 };
 
 export const FooterFlexStyle = {
-  justifyContent: "space-between",
-  flexWrap: "wrap"
+  flexWrap: "wrap",
+  justifyContent: "space-between"
 };
 
 export const FooterItemStyle = {

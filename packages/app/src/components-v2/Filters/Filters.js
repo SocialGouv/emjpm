@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Input, Select } from "@socialgouv/emjpm-ui-core";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
+
 import { departementToOptions, regionsToOptions } from "../../util/option/OptionUtil";
 import { FiltersContext } from "./context";
 import { GET_REGIONS } from "./queries";

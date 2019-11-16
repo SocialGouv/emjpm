@@ -1,13 +1,13 @@
-import React from "react";
-import { show } from "redux-modal";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import ReactTable from "react-table";
 import format from "date-fns/format";
+import PropTypes from "prop-types";
+import React from "react";
+import Form from "react-jsonschema-form";
+import { connect } from "react-redux";
+import ReactTable from "react-table";
+import { bindActionCreators } from "redux";
+import { show } from "redux-modal";
 
 import { Button } from "..";
-import Form from "react-jsonschema-form";
 
 // bouton connecté à redux-modal.show pour EditMesure
 
@@ -97,17 +97,13 @@ const concat = (...strings) =>
 const COLUMNS = [
   {
     Header: "ID",
-    id: "id",
     accessor: "id",
-    width: 50,
+    id: "id",
     show: false,
-    style: { textAlign: "center", verticalAlign: "middle" }
+    style: { textAlign: "center", verticalAlign: "middle" },
+    width: 50
   },
   {
-    Header: "Date de décision",
-    id: "date_ouverture",
-    width: 140,
-    accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
     Cell(row) {
       return (
         <div>
@@ -115,13 +111,13 @@ const COLUMNS = [
         </div>
       );
     },
-    style: { textAlign: "center", alignSelf: "center" }
+    Header: "Date de décision",
+    accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
+    id: "date_ouverture",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 140
   },
   {
-    Header: "Date de réservation",
-    id: "date_demande",
-    width: 300,
-    accessor: d => format(d.created_at, "YYYY-MM-DD"),
     Cell(row) {
       return (
         <div>
@@ -129,75 +125,75 @@ const COLUMNS = [
         </div>
       );
     },
-    style: { textAlign: "center", alignSelf: "center" }
+    Header: "Date de réservation",
+    accessor: d => format(d.created_at, "YYYY-MM-DD"),
+    id: "date_demande",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 300
   },
   {
     Header: "Professionnel",
-    id: "professionnel",
     accessor: d => (d.manda === "" ? d.nom : d.manda),
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "professionnel",
+    style: { alignSelf: "center", textAlign: "center" }
   },
   {
     Header: "Mandataire",
-    id: "mandataire_id",
     accessor: d => d.mandataire_id,
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "mandataire_id",
+    style: { alignSelf: "center", textAlign: "center" }
   },
   {
     Header: "Tribunal d'instance",
-    id: "ti",
     accessor: d => d.etablissement,
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "ti",
+    style: { alignSelf: "center", textAlign: "center" }
   },
   {
     Header: "Résidence du majeur",
-    id: "residence",
     accessor: d => concat(d.code_postal ? d.code_postal : "", d.ville ? d.ville.toUpperCase() : ""),
+    id: "residence",
     style: { alignSelf: "center" }
   },
   {
     Header: "Type de mesure",
-    id: "type",
-    width: 150,
     accessor: d => d.type,
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "type",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 150
   },
   {
     Header: "Genre",
-    id: "civilite",
-    width: 70,
     accessor: d => d.civilite,
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "civilite",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 70
   },
   {
-    Header: "Année de naissance",
-    id: "annee",
-    width: 80,
-    accessor: "annee",
     Cell(row) {
       return <div>{(row.row.annee && format(row.row.annee, "YYYY")) || null}</div>;
     },
-    style: { textAlign: "center", alignSelf: "center" }
+    Header: "Année de naissance",
+    accessor: "annee",
+    id: "annee",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 80
   },
   {
     Header: "Référence de la mesure",
-    id: "numero_dossier",
-    width: 80,
     accessor: "numero_dossier",
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "numero_dossier",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 80
   },
   {
     Header: "Numéro RG",
-    id: "numero_rg",
-    width: 75,
     accessor: d => d.numero_rg,
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "numero_rg",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 75
   },
   {
-    Header: "Extinction",
-    id: "extinction",
-    width: 100,
-    accessor: d => format(d.extinction, "YYYY-MM-DD"),
     Cell(row) {
       return (
         <div>
@@ -205,99 +201,103 @@ const COLUMNS = [
         </div>
       );
     },
-    style: { textAlign: "center", alignSelf: "center" }
+    Header: "Extinction",
+    accessor: d => format(d.extinction, "YYYY-MM-DD"),
+    id: "extinction",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 100
   },
   {
     Header: "Fin de mandat",
-    id: "reason_fin_de_mandat",
-    width: 75,
     accessor: d => d.reason_extinction,
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "reason_fin_de_mandat",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 75
   },
   {
-    Header: "Modifier",
-    id: "modifier",
     Cell(row) {
       return <CellEditMesureRedux row={row} />;
     },
-    width: 150,
-    style: { textAlign: "center", alignSelf: "center" }
+    Header: "Modifier",
+    id: "modifier",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 150
   },
   {
     Header: "Cabinet",
-    id: "cabinet",
-    width: 60,
     accessor: d => d.cabinet,
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "cabinet",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 60
   },
   {
     Header: "Statut",
-    id: "status",
     accessor: d => d.status,
-    style: { textAlign: "center", alignSelf: "center" }
+    id: "status",
+    style: { alignSelf: "center", textAlign: "center" }
   },
   {
-    Header: "Fin de mandat",
-    id: "fin-mandat",
     Cell(row) {
       return <CellCloseMesureRedux row={row} />;
     },
-    width: 200,
-    style: { textAlign: "center", alignSelf: "center" }
+    Header: "Fin de mandat",
+    id: "fin-mandat",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 200
   },
   {
-    Header: "Supprimer la mesure",
-    id: "fin-mandat-attente",
     Cell(row) {
       return <CellCloseMesureAttenteRedux row={row} />;
     },
-    width: 200,
-    style: { textAlign: "center", alignSelf: "center" }
+    Header: "Supprimer la mesure",
+    id: "fin-mandat-attente",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 200
   },
   {
-    Header: "Réactiver",
-    id: "reactiver",
     Cell(row) {
       return <CellReactivateMesureRedux row={row} />;
     },
-    width: 200,
-    style: { textAlign: "center", alignSelf: "center" }
+    Header: "Réactiver",
+    id: "reactiver",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 200
   },
   {
-    Header: "Valider",
-    id: "valider",
     Cell(row) {
       return <CellValidationMesureRedux row={row} />;
     },
-    width: 200,
-    style: { textAlign: "center", alignSelf: "center" }
+    Header: "Valider",
+    id: "valider",
+    style: { alignSelf: "center", textAlign: "center" },
+    width: 200
   }
 ];
 
 const schema = {
-  type: "object",
   properties: {
     search: {
       type: "string"
     }
-  }
+  },
+  type: "object"
 };
 
 const uiSchema = {
   search: {
-    "ui:placeholder": "Référence de la mesure",
+    classNames: "input__search",
     "ui:options": {
       label: false
     },
-    classNames: "input__search"
+    "ui:placeholder": "Référence de la mesure"
   }
 };
 
 class TableMesures extends React.Component {
   state = {
     data: [],
-    newData: [],
-    loading: false
+    loading: false,
+    newData: []
   };
   fetchData = () => {
     if (!this.state.loading) {
@@ -348,9 +348,9 @@ class TableMesures extends React.Component {
             uiSchema={uiSchema}
             onSubmit={this.onChange}
             style={{
-              textAlign: "right",
               display: "flex",
-              flexDirection: "row"
+              flexDirection: "row",
+              textAlign: "right"
             }}
           >
             <Button
@@ -374,8 +374,8 @@ class TableMesures extends React.Component {
           multiSort={false}
           defaultSorted={[
             {
-              id: "date_ouverture",
-              desc: true
+              desc: true,
+              id: "date_ouverture"
             }
           ]}
           loading={loading}

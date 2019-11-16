@@ -3,12 +3,13 @@ import { MesureContextProvider, MesureList } from "@socialgouv/emjpm-ui-componen
 import { Button } from "@socialgouv/emjpm-ui-core";
 import React, { Fragment, useContext, useState } from "react";
 import { Box, Flex } from "rebass";
+
 import { FiltersContext } from "../MagistratFilters/context";
-import { formatMandatairesMesureList } from "./utils";
 import { MagistratEditMesure } from "./MagistratEditMesure";
 import { MagistratRemoveMesure } from "./MagistratRemoveMesure";
 import { MESURES } from "./queries";
 import { MagistratListStyle } from "./style";
+import { formatMandatairesMesureList } from "./utils";
 
 const RESULT_PER_PAGE = 20;
 
@@ -16,13 +17,13 @@ const MagistratMesures = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const { mesureType, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
   const { data, error, loading, fetchMore } = useQuery(MESURES, {
+    fetchPolicy: "network-only",
     variables: {
-      type: mesureType ? mesureType.value : null,
-      status: mesureStatus ? mesureStatus.value : null,
       searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
-    },
-    fetchPolicy: "network-only"
+        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+      status: mesureStatus ? mesureStatus.value : null,
+      type: mesureType ? mesureType.value : null
+    }
   });
 
   if (loading) {
@@ -53,15 +54,15 @@ const MagistratMesures = () => {
                   <Button
                     onClick={() => {
                       fetchMore({
-                        variables: {
-                          offset: currentPage + RESULT_PER_PAGE
-                        },
                         updateQuery: (prev, { fetchMoreResult }) => {
                           setCurrentPage(currentPage + RESULT_PER_PAGE);
                           return {
                             count: fetchMoreResult.count,
                             mesures: [...prev.mesures, ...fetchMoreResult.mesures]
                           };
+                        },
+                        variables: {
+                          offset: currentPage + RESULT_PER_PAGE
                         }
                       });
                     }}

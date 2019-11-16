@@ -4,13 +4,13 @@ import { Link as RebassLink } from "rebass";
 
 const LinkStyle = () => {
   return {
-    color: "#007AD9",
-    cursor: "pointer",
-    fontWeight: 600,
-    fontSize: "13px",
     "&:hover": {
       textDecoration: "underline"
-    }
+    },
+    color: "#007AD9",
+    cursor: "pointer",
+    fontSize: "13px",
+    fontWeight: 600
   };
 };
 

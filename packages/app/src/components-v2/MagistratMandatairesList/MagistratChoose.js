@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { MandataireInformations } from "./MandataireInformations";
 import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
@@ -29,29 +30,29 @@ export const MagistratChoose = props => {
             setTimeout(() => {
               if (mandataireId) {
                 chooseMandataire({
+                  refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
                   variables: {
-                    ti: ti,
-                    cabinet: values.cabinet,
-                    mandataire_id: mandataireId,
-                    type: values.type.value,
-                    civilite: values.civilite.value,
                     annee: values.annee,
-                    numero_rg: values.numero_rg
-                  },
-                  refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"]
+                    cabinet: values.cabinet,
+                    civilite: values.civilite.value,
+                    mandataire_id: mandataireId,
+                    numero_rg: values.numero_rg,
+                    ti: ti,
+                    type: values.type.value
+                  }
                 });
               } else {
                 chooseService({
+                  refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
                   variables: {
-                    ti: ti,
-                    cabinet: values.cabinet,
-                    antenne_id: antenneId,
-                    type: values.type.value,
-                    civilite: values.civilite.value,
                     annee: values.annee,
-                    numero_rg: values.numero_rg
-                  },
-                  refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"]
+                    antenne_id: antenneId,
+                    cabinet: values.cabinet,
+                    civilite: values.civilite.value,
+                    numero_rg: values.numero_rg,
+                    ti: ti,
+                    type: values.type.value
+                  }
                 });
               }
               setSubmitting(false);
@@ -60,18 +61,18 @@ export const MagistratChoose = props => {
             }, 500);
           }}
           validationSchema={Yup.object().shape({
-            type: Yup.string().required(),
-            civilite: Yup.string().required(),
             annee: Yup.string().required(),
+            cabinet: Yup.string(),
+            civilite: Yup.string().required(),
             numero_rg: Yup.string().required(),
-            cabinet: Yup.string()
+            type: Yup.string().required()
           })}
           initialValues={{
             annee: "",
+            cabinet,
             civilite: "",
             numero_rg: "",
-            type: "",
-            cabinet
+            type: ""
           }}
         >
           {props => {
@@ -86,7 +87,7 @@ export const MagistratChoose = props => {
             } = props;
             return (
               <form onSubmit={handleSubmit}>
-                <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
                   <Select
                     id="type"
                     name="type"
@@ -97,7 +98,7 @@ export const MagistratChoose = props => {
                     options={MESURE_TYPE_LABEL_VALUE}
                   />
                 </Box>
-                <Box sx={{ zIndex: "80", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
                   <Select
                     id="civilite"
                     name="civilite"
@@ -108,7 +109,7 @@ export const MagistratChoose = props => {
                     options={CIVILITY}
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.annee}
                     id="annee"
@@ -118,7 +119,7 @@ export const MagistratChoose = props => {
                     placeholder="année"
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.numero_rg}
                     id="numero_rg"
@@ -128,7 +129,7 @@ export const MagistratChoose = props => {
                     placeholder="numero rg"
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.cabinet}
                     id="cabinet"

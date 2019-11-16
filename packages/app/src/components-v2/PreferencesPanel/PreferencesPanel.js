@@ -1,12 +1,11 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { Box, Text, Flex } from "rebass";
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3 } from "@socialgouv/emjpm-ui-core";
+import PropTypes from "prop-types";
+import React from "react";
+import { Box, Flex, Text } from "rebass";
 
-import { GET_SERVICES_ANTENNE } from "./queries";
 import { AntenneEditLinkButton } from "../Commons";
-
+import { GET_SERVICES_ANTENNE } from "./queries";
 import { PreferencesPanelStyle } from "./style";
 
 // TODO MOVE ME IN UTILS
@@ -52,12 +51,12 @@ const PreferencesPanel = props => {
       </Card>
       <Text
         sx={{
-          textAlign: "center",
-          fontStyle: "italic",
-          mt: "5",
           color: "textSecondary",
+          fontStyle: "italic",
           fontWeight: 600,
-          lineHeight: 1.6
+          lineHeight: 1.6,
+          mt: "5",
+          textAlign: "center"
         }}
       >
         Ces préférences sont indicatives et sont communiquées au juge lors de son choix
@@ -67,13 +66,13 @@ const PreferencesPanel = props => {
 };
 
 PreferencesPanel.defaultProps = {
-  user_antennes: [],
-  currentAntenne: null
+  currentAntenne: null,
+  user_antennes: []
 };
 
 PreferencesPanel.propTypes = {
-  user_antennes: PropTypes.array,
-  currentAntenne: PropTypes.string
+  currentAntenne: PropTypes.string,
+  user_antennes: PropTypes.array
 };
 
 export { PreferencesPanel };

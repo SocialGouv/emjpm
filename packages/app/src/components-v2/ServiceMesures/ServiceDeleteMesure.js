@@ -1,13 +1,13 @@
+import { useMutation } from "@apollo/react-hooks";
+import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
+import { Formik } from "formik";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
-import { Formik } from "formik";
-import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
 
 import { DELETE_MESURE } from "./mutations";
-import { Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 
 export const ServiceDeleteMesure = props => {
   const { currentMesure } = props;
@@ -35,10 +35,10 @@ export const ServiceDeleteMesure = props => {
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               UpdateMesure({
+                refetchQueries: ["mesures", "mesures_aggregate"],
                 variables: {
                   id: currentMesure
-                },
-                refetchQueries: ["mesures", "mesures_aggregate"]
+                }
               });
               setSubmitting(false);
               setPanelType(null);

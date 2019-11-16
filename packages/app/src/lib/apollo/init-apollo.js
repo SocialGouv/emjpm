@@ -5,6 +5,7 @@ import fetch from "isomorphic-unfetch";
 import cookie from "js-cookie";
 import nextCookies from "next-cookies";
 import getConfig from "next/config";
+
 import { isBrowser } from "../../util";
 
 let apolloClient = null;
@@ -52,17 +53,17 @@ function create(initialState, context) {
   });
 
   const httpLink = createHttpLink({
-    uri: GRAPHQL_SERVER_URI,
-    credentials: "same-origin"
+    credentials: "same-origin",
+    uri: GRAPHQL_SERVER_URI
   });
 
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
-    connectToDevTools: isBrowser(),
-    ssrMode: typeof window === "undefined",
-    link: authLink.concat(httpLink),
     cache: new InMemoryCache().restore(initialState || {}),
-    resolvers: {}
+    connectToDevTools: isBrowser(),
+    link: authLink.concat(httpLink),
+    resolvers: {},
+    ssrMode: typeof window === "undefined"
   });
 }
 

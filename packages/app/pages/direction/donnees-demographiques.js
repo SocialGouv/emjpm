@@ -1,13 +1,12 @@
-import React from "react";
-
-import { Box } from "rebass";
 import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@socialgouv/emjpm-ui-core";
+import React from "react";
+import { Box } from "rebass";
 
-import { withAuthSync } from "../../src/util/auth";
-import { LayoutDirection } from "../../src/components-v2/Layout";
-import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
 import { Filters } from "../../src/components-v2/Filters";
+import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
 import { ServicesIndicator } from "../../src/components-v2/Indicators";
+import { LayoutDirection } from "../../src/components-v2/Layout";
+import { withAuthSync } from "../../src/util/auth";
 
 const DemographicDatas = () => {
   return (

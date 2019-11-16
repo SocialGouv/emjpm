@@ -1,9 +1,9 @@
-import React from "react";
-import { Box, Text, Flex } from "rebass";
 import { Card, Heading3 } from "@socialgouv/emjpm-ui-core";
+import React from "react";
+import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
-import { innerTextStyle, iconTextStyle, boxStyle } from "./style";
+import { boxStyle, iconTextStyle, innerTextStyle } from "./style";
 
 const MagistratTribunalInformations = props => {
   const {

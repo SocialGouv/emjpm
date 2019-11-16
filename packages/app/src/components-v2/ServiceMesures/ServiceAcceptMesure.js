@@ -1,14 +1,14 @@
+import { useMutation } from "@apollo/react-hooks";
+import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { Formik } from "formik";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
-import { Formik } from "formik";
-import { useMutation } from "@apollo/react-hooks";
 import * as Yup from "yup";
 
-import { ACCEPT_MESURE } from "./mutations";
-import { Select, Button, Input, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { RESIDENCE } from "../../constants/mesures";
+import { ACCEPT_MESURE } from "./mutations";
 import { formatAntenneOptions } from "./utils";
 
 export const ServiceAcceptMesure = props => {
@@ -35,32 +35,32 @@ export const ServiceAcceptMesure = props => {
         <Formik
           onSubmit={(values, { setSubmitting }) => {
             UpdateMesure({
+              refetchQueries: ["mesures", "mesures_aggregate"],
               variables: {
-                id: currentMesure,
-                date_ouverture: values.date_ouverture,
-                residence: values.residence.value,
+                antenne_id: values.antenne_id.value,
                 code_postal: values.code_postal,
-                ville: values.ville,
-                antenne_id: values.antenne_id.value
-              },
-              refetchQueries: ["mesures", "mesures_aggregate"]
+                date_ouverture: values.date_ouverture,
+                id: currentMesure,
+                residence: values.residence.value,
+                ville: values.ville
+              }
             });
             setSubmitting(false);
             setPanelType(null);
             setCurrentMesure(null);
           }}
           validationSchema={Yup.object().shape({
+            code_postal: Yup.string().required(),
             date_ouverture: Yup.date().required(),
             residence: Yup.string().required(),
-            code_postal: Yup.string().required(),
             ville: Yup.string().required()
           })}
           initialValues={{
+            antenne_id: headquarter,
+            code_postal: "",
             date_ouverture: "",
             residence: "",
-            code_postal: "",
-            ville: "",
-            antenne_id: headquarter
+            ville: ""
           }}
         >
           {props => {
@@ -86,7 +86,7 @@ export const ServiceAcceptMesure = props => {
                     placeholder="Date d'ouverture"
                   />
                 </Box>
-                <Box sx={{ zIndex: "90", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
                   <Select
                     id="residence"
                     name="residence"
@@ -97,7 +97,7 @@ export const ServiceAcceptMesure = props => {
                     options={RESIDENCE}
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.code_postal}
                     id="code_postal"
@@ -107,7 +107,7 @@ export const ServiceAcceptMesure = props => {
                     placeholder="Code postal"
                   />
                 </Box>
-                <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
                     value={values.ville}
                     id="ville"
@@ -118,7 +118,7 @@ export const ServiceAcceptMesure = props => {
                   />
                 </Box>
                 {user_antennes.length >= 2 && (
-                  <Box sx={{ zIndex: "70", position: "relative" }} mb="2">
+                  <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
                     <Select
                       id="antenne_id"
                       name="antenne_id"

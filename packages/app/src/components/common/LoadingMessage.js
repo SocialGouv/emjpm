@@ -1,11 +1,11 @@
 import React from "react";
 
 const LoadingMessage = () => (
-  <div style={{ display: "flex", alignItems: "center" }}>
+  <div style={{ alignItems: "center", display: "flex" }}>
     <div
       style={{
-        margin: "25px 0",
         flex: "1 0 auto",
+        margin: "25px 0",
         textAlign: "center"
       }}
     >

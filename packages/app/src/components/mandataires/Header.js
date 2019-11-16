@@ -44,14 +44,14 @@ const HeaderMandataire = ({ nom = "", prenom = "", profiles, handleClick, user, 
                 <a
                   href="#"
                   onClick={handleClick}
-                  style={{ flex: "1 0 auto", textAlign: "left", paddingLeft: "10px" }}
+                  style={{ flex: "1 0 auto", paddingLeft: "10px", textAlign: "left" }}
                 >
                   {" "}
                   Toutes les informations
                 </a>
               </div>
 
-              <div style={{ textAlign: "right", fontSize: "1em", color: "#53657d" }}>
+              <div style={{ color: "#53657d", fontSize: "1em", textAlign: "right" }}>
                 {profiles && profiles.date_mesure_update && (
                   <div>
                     Dernière mise à jour :{" "}

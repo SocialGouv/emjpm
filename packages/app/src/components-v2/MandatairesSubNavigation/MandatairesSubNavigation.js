@@ -1,6 +1,7 @@
 import { withRouter } from "next/router";
 import React from "react";
-import { Flex, Box } from "rebass";
+import { Box, Flex } from "rebass";
+
 import { LinkButton } from "../Commons";
 import { MandatairesExport } from "../MandatairesExport";
 import { MandatairesSubNavigationStyle } from "./style";

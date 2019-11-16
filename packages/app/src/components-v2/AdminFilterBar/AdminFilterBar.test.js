@@ -1,6 +1,7 @@
 import React from "react";
-import { AdminFilterBar } from "./AdminFilterBar";
 import renderer from "react-test-renderer";
+
+import { AdminFilterBar } from "./AdminFilterBar";
 
 it("renders correctly", () => {
   const tree = renderer.create(<AdminFilterBar />).toJSON();

@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { FiltersContext } from "../Filters/context";
@@ -17,10 +17,10 @@ export const MesureEvolution = () => {
 
   const { data, error, loading } = useQuery(GET_CATEGORY_EVOLUTION, {
     variables: {
-      start: startDateValue,
-      end: endDateValue,
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
+      end: endDateValue,
+      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
+      start: startDateValue
     }
   });
 

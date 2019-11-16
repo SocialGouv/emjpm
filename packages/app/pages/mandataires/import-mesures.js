@@ -1,5 +1,6 @@
 import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import React from "react";
+
 import { LayoutMandataire } from "../../src/components-v2/Layout";
 import { MandataireMesureImport } from "../../src/components-v2/MandataireMesureImport";
 import { withAuthSync } from "../../src/util/auth";

@@ -1,6 +1,7 @@
 import React from "react";
-import { MagistratMandatairesList } from "./MagistratMandatairesList";
 import renderer from "react-test-renderer";
+
+import { MagistratMandatairesList } from "./MagistratMandatairesList";
 
 it("renders correctly", () => {
   const tree = renderer.create(<MagistratMandatairesList />).toJSON();

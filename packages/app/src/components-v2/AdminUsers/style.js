@@ -31,8 +31,8 @@ const activateButtonStyle = active => {
   return active
     ? {}
     : {
-        color: "success",
-        borderColor: "success"
+        borderColor: "success",
+        color: "success"
       };
 };
 

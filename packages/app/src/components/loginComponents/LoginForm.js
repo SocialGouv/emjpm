@@ -6,6 +6,7 @@ import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
 import ReactPiwik from "react-piwik";
 import styled from "styled-components";
+
 import { authService } from "../../business";
 import { trackUser } from "../../piwik";
 
@@ -16,12 +17,12 @@ const {
 const doLogin = formData => {
   const url = `${API_URL}/api/v2/auth/login`;
   return fetch(url, {
+    body: JSON.stringify(formData),
     credentials: "include",
-    method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(formData)
+    method: "POST"
   }).then(res => {
     if (res.status > 400) {
       // unauthorized
@@ -32,32 +33,32 @@ const doLogin = formData => {
 };
 
 const schema = {
-  type: "object",
-  required: ["username", "password"],
   properties: {
-    username: { type: "string", title: "", default: "" },
-    password: { type: "string", title: "", default: "" }
+    password: { default: "", title: "", type: "string" },
+    username: { default: "", title: "", type: "string" }
     // done: {
     //   type: "boolean",
     //   title: " se souvenir de mes informations ",
     //   default: false
     // }
-  }
+  },
+  required: ["username", "password"],
+  type: "object"
 };
 
 const uiSchema = {
   password: {
-    "ui:placeholder": "Mot de passe",
-    "ui:widget": "password",
     "ui:options": {
       label: false
-    }
+    },
+    "ui:placeholder": "Mot de passe",
+    "ui:widget": "password"
   },
   username: {
-    "ui:placeholder": "Identifiant",
     "ui:options": {
       label: false
-    }
+    },
+    "ui:placeholder": "Identifiant"
   }
 };
 
@@ -122,8 +123,8 @@ export const LoginFormView = ({ formData, onSubmit, error, status }) => (
 class LoginForm extends React.Component {
   state = {
     error: null,
-    status: null,
-    formData: {}
+    formData: {},
+    status: null
   };
   componentDidMount() {
     ReactPiwik.push(["trackEvent", "navigation", "login"]);
@@ -139,8 +140,8 @@ class LoginForm extends React.Component {
       // https://github.com/mozilla-services/react-jsonschema-form/issues/184
       // use the DOM to fill initial formData
       const autofillValues = {
-        username: (username && username.value) || localStorage.getItem("login") || "",
-        password: password && password.value
+        password: password && password.value,
+        username: (username && username.value) || localStorage.getItem("login") || ""
       };
 
       if (username && !autofillValues.username) {
@@ -159,8 +160,8 @@ class LoginForm extends React.Component {
     this.setState(
       {
         error: null,
-        status: "loading",
-        formData
+        formData,
+        status: "loading"
       },
       () => {
         doLogin(formData)
@@ -170,26 +171,26 @@ class LoginForm extends React.Component {
             trackUser();
             Router.push(json.url);
             this.setState({
-              status: "success",
-              error: null
+              error: null,
+              status: "success"
             });
           })
           .catch(() => {
             ReactPiwik.push(["trackEvent", "login", "error"]);
             const url = `${API_URL}/auth/checkUser`;
             return fetch(url, {
-              credentials: "include",
-              method: "POST",
               body: JSON.stringify(formData),
+              credentials: "include",
               headers: {
                 "Content-Type": "application/json"
-              }
+              },
+              method: "POST"
             })
               .then(res => res && res.json())
               .then(res => {
                 this.setState({
-                  status: "error",
-                  error: res.message
+                  error: res.message,
+                  status: "error"
                 });
               });
           });

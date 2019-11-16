@@ -1,27 +1,27 @@
 const titleStyle = {
+  color: "mediumGray",
   fontSize: "2",
-  fontStyle: "italic",
-  color: "mediumGray"
+  fontStyle: "italic"
 };
 
 const topTextStyle = {
-  mt: "5px",
-  lineHeight: "1.4",
   color: "mediumGray",
-  fontWeight: "600"
+  fontWeight: "600",
+  lineHeight: "1.4",
+  mt: "5px"
 };
 
 const innerTextStyle = {
-  mt: "5px",
-  lineHeight: "1.4",
   color: "mediumGray",
-  fontWeight: "600"
+  fontWeight: "600",
+  lineHeight: "1.4",
+  mt: "5px"
 };
 
 const iconTextStyle = {
-  ml: "1",
   color: "mediumGray",
-  fontWeight: "600"
+  fontWeight: "600",
+  ml: "1"
 };
 
 const boxStyle = {
@@ -29,8 +29,8 @@ const boxStyle = {
 };
 
 const flexStyle = {
-  mt: 5,
-  flexWrap: "wrap"
+  flexWrap: "wrap",
+  mt: 5
 };
 
 export { titleStyle, innerTextStyle, topTextStyle, iconTextStyle, boxStyle, flexStyle };
