@@ -6,8 +6,8 @@ const getEvolution = data => {
   const evolutionFilters = [];
   data.map((type, index) => {
     evolutionFilters[index] = {
-      value: type.mesureTypeCategory,
-      label: getMesureCategoryTypeLabel(type.mesureTypeCategory)
+      label: getMesureCategoryTypeLabel(type.mesureTypeCategory),
+      value: type.mesureTypeCategory
     };
     type.monthlyEvolutions.map((monthlyEvolution, index) => {
       evolutionDatas[index] = {
@@ -21,8 +21,8 @@ const getEvolution = data => {
     });
   });
   evolutionFilters.push({
-    value: "TOTAL",
-    label: "Total"
+    label: "Total",
+    value: "TOTAL"
   });
   return { evolutionDatas, evolutionFilters };
 };

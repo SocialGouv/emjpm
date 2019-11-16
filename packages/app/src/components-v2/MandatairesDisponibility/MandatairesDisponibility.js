@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box } from "rebass";
+
 import { FiltersContext } from "../Filters/context";
 import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
@@ -42,8 +43,8 @@ const MandatairesDisponibility = props => {
   const overcapacity = data => remainingCapacity(data) < 0;
 
   const getCapacity = data => ({
-    "Disponibilité max": data.mesures_max,
     "Disponibilité actuelle": remainingCapacity(data),
+    "Disponibilité max": data.mesures_max,
     overcapacity: overcapacity(data)
   });
 

@@ -1,32 +1,32 @@
+import NextLink from "next/link";
+import { withRouter } from "next/router";
 import React from "react";
 import { Link as RebassLink } from "rebass";
-import { withRouter } from "next/router";
-import NextLink from "next/link";
 
 const LinkButtonStyle = (isActive, disabled) => {
   return {
-    bg: "primary",
-    borderRadius: "default",
-    px: 3,
-    py: 2,
-    color: "white !important",
-    cursor: "pointer",
-    fontSize: 1,
-    fontWeight: 500,
-    lineHeight: "1.2",
-    outline: "none",
-    display: "inline-block",
-    transition: "150ms ease-in-out opacity",
-    opacity: isActive ? (disabled ? 0.3 : 0.6) : 1,
+    "&:active": {
+      color: "white",
+      opacity: "0.6"
+    },
     "&:hover": {
       color: "white",
       opacity: "0.8",
       textDecoration: "none"
     },
-    "&:active": {
-      color: "white",
-      opacity: "0.6"
-    }
+    bg: "primary",
+    borderRadius: "default",
+    color: "white !important",
+    cursor: "pointer",
+    display: "inline-block",
+    fontSize: 1,
+    fontWeight: 500,
+    lineHeight: "1.2",
+    opacity: isActive ? (disabled ? 0.3 : 0.6) : 1,
+    outline: "none",
+    px: 3,
+    py: 2,
+    transition: "150ms ease-in-out opacity"
   };
 };
 

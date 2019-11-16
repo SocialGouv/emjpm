@@ -1,9 +1,9 @@
+import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
-import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 
-import { withAuthSync } from "../../../../src/util/auth";
 import { LayoutServices } from "../../../../src/components-v2/Layout";
+import { withAuthSync } from "../../../../src/util/auth";
 
 const AddUser = () => {
   return (
@@ -17,19 +17,19 @@ const AddUser = () => {
         >
           <Box
             sx={{
-              p: 3,
-              flexGrow: 99999,
               flexBasis: 0,
-              minWidth: 320
+              flexGrow: 99999,
+              minWidth: 320,
+              p: 3
             }}
           >
             Mesures list
           </Box>
           <Box
             sx={{
-              p: 3,
+              flexBasis: 256,
               flexGrow: 1,
-              flexBasis: 256
+              p: 3
             }}
           >
             map and other stuff

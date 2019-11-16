@@ -1,7 +1,8 @@
-import React from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Box } from "rebass";
 import { Card, Heading2, Spinner } from "@socialgouv/emjpm-ui-core";
+import React from "react";
+import { Box } from "rebass";
+
 import MapComponent from "./Map";
 import { GET_DEPARTEMENTS_AVAILABILITY } from "./queries";
 
@@ -14,7 +15,7 @@ const AvailabilityMap = () => {
         <Box>
           <Heading2>Disponibilités par territoire</Heading2>
         </Box>
-        <Box sx={{ position: "relative", p: "6" }}>
+        <Box sx={{ p: "6", position: "relative" }}>
           <Spinner />
         </Box>
       </Card>
@@ -27,7 +28,7 @@ const AvailabilityMap = () => {
         <Box>
           <Heading2>Disponibilités par territoire</Heading2>
         </Box>
-        <Box sx={{ position: "relative", p: "6" }}>error</Box>
+        <Box sx={{ p: "6", position: "relative" }}>error</Box>
       </Card>
     );
   }
@@ -49,7 +50,7 @@ const AvailabilityMap = () => {
       <Box>
         <Heading2>Disponibilités par territoire</Heading2>
       </Box>
-      <Box sx={{ position: "relative", p: "2", mt: "2", height: ["auto", "auto", "434px"] }}>
+      <Box sx={{ height: ["auto", "auto", "434px"], mt: "2", p: "2", position: "relative" }}>
         <MapComponent departements={departements} />
       </Box>
     </Card>

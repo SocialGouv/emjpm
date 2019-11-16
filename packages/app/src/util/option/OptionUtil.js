@@ -25,6 +25,6 @@ export const departementToOptions = datas => {
 
 export const toOptions = (datas, idKey, labelKey) =>
   datas.map(data => ({
-    value: data[idKey],
-    label: data[labelKey]
+    label: data[labelKey],
+    value: data[idKey]
   }));

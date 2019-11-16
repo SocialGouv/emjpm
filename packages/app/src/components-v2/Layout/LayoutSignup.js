@@ -1,10 +1,11 @@
 import { css, Global } from "@emotion/core";
+import { Header } from "@socialgouv/emjpm-ui-components";
 import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
+
 import { Footer } from "../Footer";
-import { Header } from "@socialgouv/emjpm-ui-components";
 import { dropDownLinks } from "./dropDownLink";
 
 const LayoutSignup = props => {

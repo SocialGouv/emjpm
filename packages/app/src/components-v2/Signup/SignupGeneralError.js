@@ -1,5 +1,5 @@
-import React from "react";
 import { Text } from "@socialgouv/emjpm-ui-core";
+import React from "react";
 import { Box } from "rebass";
 
 const SignupGeneralError = ({ errors }) => {

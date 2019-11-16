@@ -1,11 +1,11 @@
-import React, { Fragment } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { Text, Flex, Box } from "rebass";
+import React, { Fragment } from "react";
+import { Box, Flex, Text } from "rebass";
 import { Edit, XCircle } from "styled-icons/boxicons-regular";
 
-import { topTextStyle } from "./style";
 import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
 import { REMOVE_COMMENT } from "./mutations";
+import { topTextStyle } from "./style";
 
 const MagistratMandataireComment = props => {
   const {
@@ -33,14 +33,14 @@ const MagistratMandataireComment = props => {
           <Flex>
             <Box
               sx={{
-                flexGrow: 1,
-                flexBasis: 256
+                flexBasis: 256,
+                flexGrow: 1
               }}
             >
               - {comment}
             </Box>
             <Box
-              sx={{ cursor: "pointer", width: "16px", mr: "1" }}
+              sx={{ cursor: "pointer", mr: "1", width: "16px" }}
               onClick={() => {
                 toggleCommentForm(false);
                 toggleEditCommentForm(true);
@@ -52,7 +52,7 @@ const MagistratMandataireComment = props => {
             <Box
               sx={{ cursor: "pointer", width: "16px" }}
               onClick={() => {
-                RemoveComment({ variables: { id: id }, refetchQueries: ["MandataireComments"] });
+                RemoveComment({ refetchQueries: ["MandataireComments"], variables: { id: id } });
               }}
             >
               <XCircle size="16" />

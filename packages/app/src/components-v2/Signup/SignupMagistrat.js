@@ -5,6 +5,7 @@ import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
@@ -15,8 +16,8 @@ const SignupMagistratForm = ({ tiDatas }) => {
   const { user, magistrat, setMagistrat, validateStepOne } = useContext(SignupContext);
 
   const tiOptions = tiDatas.map(ti => ({
-    value: ti.id,
-    label: ti.etablissement
+    label: ti.etablissement,
+    value: ti.id
   }));
 
   return (
@@ -33,13 +34,13 @@ const SignupMagistratForm = ({ tiDatas }) => {
             </Box>
           </Box>
           <Box p="5" pb={0} width={[1, 3 / 5]}>
-            <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+            <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
               <Formik
                 onSubmit={(values, { setSubmitting, setErrors }) => {
                   const body = {
                     magistrat: {
-                      ti: values.ti.value,
-                      cabinet: values.cabinet
+                      cabinet: values.cabinet,
+                      ti: values.ti.value
                     },
                     user: {
                       username: user.email,
@@ -48,18 +49,18 @@ const SignupMagistratForm = ({ tiDatas }) => {
                   };
                   signup({
                     body,
-                    onSuccess: () => Router.push("/signup/congratulation"),
+                    onComplete: () => setSubmitting(false),
                     onError: errors => setErrors(errors),
-                    onComplete: () => setSubmitting(false)
+                    onSuccess: () => Router.push("/signup/congratulation")
                   });
                 }}
                 validationSchema={Yup.object().shape({
-                  ti: Yup.string().required("Champs obligatoire"),
-                  cabinet: Yup.string()
+                  cabinet: Yup.string(),
+                  ti: Yup.string().required("Champs obligatoire")
                 })}
                 initialValues={{
-                  ti: magistrat ? magistrat.ti : "",
-                  cabinet: magistrat ? magistrat.cabinet : ""
+                  cabinet: magistrat ? magistrat.cabinet : "",
+                  ti: magistrat ? magistrat.ti : ""
                 }}
               >
                 {props => {
@@ -75,7 +76,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
                   return (
                     <form onSubmit={handleSubmit}>
                       <SignupGeneralError errors={props.errors} />
-                      <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
+                      <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
                         <Select
                           id="ti"
                           name="ti"
@@ -87,7 +88,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
                         />
                         {errors.ti && touched.ti && <Text>{errors.ti}</Text>}
                       </Box>
-                      <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
+                      <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
                         <Input
                           id="cabinet"
                           name="cabinet"

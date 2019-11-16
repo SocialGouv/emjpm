@@ -1,9 +1,9 @@
-import React from "react";
 import Head from "next/head";
+import React from "react";
 
-import Form from "../src/components/loginComponents/ForgotPasswordForm";
 import { Layout } from "../src/components";
 import { PageTracker } from "../src/components/common/PageTracker";
+import Form from "../src/components/loginComponents/ForgotPasswordForm";
 
 const ForgotPasswordContainer = ({ style }) => (
   <div className="container" style={style}>

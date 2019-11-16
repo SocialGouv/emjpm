@@ -1,6 +1,7 @@
 import { Button, Card, Input, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
+
 import { AdminFilterContext } from "./context";
 import { AdminFilterBarStyle, FilterTextStyle } from "./style";
 

@@ -1,7 +1,8 @@
-import { Heading4, Card, Heading1, Button, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading1, Heading4, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
-import React, { useContext, useState, Fragment } from "react";
+import Router from "next/router";
+import React, { Fragment, useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
@@ -9,7 +10,6 @@ import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
-import Router from "next/router";
 import { cardStyle, grayBox } from "./style";
 
 const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
@@ -18,8 +18,8 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
   const [serviceOptions, setServiceOptions] = useState([]);
 
   const departementOptions = departementDatas.map(departement => ({
-    value: departement.id,
-    label: departement.nom
+    label: departement.nom,
+    value: departement.id
   }));
 
   const selectDepartement = option => {
@@ -30,8 +30,8 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
     });
     setServiceOptions(
       departementalServices.map(data => ({
-        value: data.id,
-        label: data.etablissement
+        label: data.etablissement,
+        value: data.id
       }))
     );
   };
@@ -50,7 +50,7 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
             </Box>
           </Box>
           <Box p="5" pb={0} width={[1, 3 / 5]}>
-            <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+            <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
               <Formik
                 onSubmit={(values, { setSubmitting, setErrors }) => {
                   const body = {
@@ -64,9 +64,9 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
                   };
                   signup({
                     body,
-                    onSuccess: () => Router.push("/signup/congratulation"),
+                    onComplete: () => setSubmitting(false),
                     onError: errors => setErrors(errors),
-                    onComplete: () => setSubmitting(false)
+                    onSuccess: () => Router.push("/signup/congratulation")
                   });
                 }}
                 validationSchema={Yup.object().shape({
@@ -90,7 +90,7 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
                   return (
                     <form onSubmit={handleSubmit}>
                       <SignupGeneralError errors={props.errors} />
-                      <Box sx={{ zIndex: "100", position: "relative" }} mb="2">
+                      <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
                         <Select
                           id="departement"
                           name="departement"
@@ -107,7 +107,7 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
                           <Text>{errors.departement}</Text>
                         )}
                       </Box>
-                      <Box sx={{ zIndex: "90", position: "relative" }} mb="2">
+                      <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
                         <Select
                           id="service"
                           name="service"

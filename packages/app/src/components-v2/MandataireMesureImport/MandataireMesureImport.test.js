@@ -1,6 +1,7 @@
 import React from "react";
-import { MandataireMesureImport } from "./MandataireMesureImport";
 import renderer from "react-test-renderer";
+
+import { MandataireMesureImport } from "./MandataireMesureImport";
 
 it("renders correctly", () => {
   const tree = renderer.create(<MandataireMesureImport />).toJSON();

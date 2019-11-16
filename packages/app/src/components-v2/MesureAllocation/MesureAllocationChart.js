@@ -12,6 +12,7 @@ import {
   XAxis,
   YAxis
 } from "recharts";
+
 import { getMesureCategoryTypeColor } from "../../util/mesures";
 
 const MesureAllocationChart = props => {
@@ -19,16 +20,16 @@ const MesureAllocationChart = props => {
   return (
     <Card p="4">
       <Heading2>Répartition des mesures à date</Heading2>
-      <Box sx={{ width: "100%", height: 453, mt: "2" }}>
+      <Box sx={{ height: 453, mt: "2", width: "100%" }}>
         <ResponsiveContainer>
           <ComposedChart
             layout="vertical"
             data={mesures}
             margin={{
-              top: 20,
-              right: 20,
               bottom: 20,
-              left: 25
+              left: 25,
+              right: 20,
+              top: 20
             }}
           >
             <CartesianGrid stroke="#f5f5f5" />

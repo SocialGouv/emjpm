@@ -28,9 +28,9 @@ const France = props => {
 France.propTypes = {};
 
 France.defaultProps = {
-  color: "#f6f6f9",
   aboveColor: "#FF6966",
   belowColor: "#70D54F",
+  color: "#f6f6f9",
   departements: []
 };
 export default France;

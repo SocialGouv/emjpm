@@ -9,11 +9,11 @@ const postSignup = body => {
   const url = `${API_URL}/api/v2/auth/signup`;
 
   const fetchParams = {
-    method: "POST",
+    body: JSON.stringify(body),
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(body)
+    method: "POST"
   };
 
   return fetch(url, fetchParams).then(res => res.json());

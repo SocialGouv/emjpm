@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading2, Heading4, Spinner, CheckBox, Select } from "@socialgouv/emjpm-ui-core";
+import { Card, CheckBox, Heading2, Heading4, Select, Spinner } from "@socialgouv/emjpm-ui-core";
+import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { MandatairesCapacityChart } from "./MandatairesCapacityChart";
 import { FiltersContext } from "../Filters/context";
+import { MandatairesCapacityChart } from "./MandatairesCapacityChart";
 import { MANDATAIRES_CAPACITY } from "./queries";
 
 const options = [
@@ -23,10 +23,10 @@ const MandatairesCapacity = props => {
 
   const { data, error, loading } = useQuery(MANDATAIRES_CAPACITY, {
     variables: {
-      start: startDateValue,
-      end: endDateValue,
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
+      end: endDateValue,
+      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
+      start: startDateValue
     }
   });
 

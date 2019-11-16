@@ -1,11 +1,11 @@
-import { BoxWrapper, Heading1, Card, Text, Heading3, Button } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, Button, Card, Heading1, Heading3, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
-import { Flex, Box } from "rebass";
+import { Box, Flex } from "rebass";
 
-import { withAuthSync } from "../../src/util/auth";
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratMandatairesList } from "../../src/components-v2/MagistratMandatairesList";
 import { UserInformations } from "../../src/components-v2/UserInformations";
+import { withAuthSync } from "../../src/util/auth";
 
 const cardStyle = isHidden => {
   return {
@@ -42,8 +42,8 @@ const Mandataires = () => {
         <Heading1>Tous les mandataires</Heading1>
         <Flex
           sx={{
-            mt: "2",
-            flexWrap: "wrap"
+            flexWrap: "wrap",
+            mt: "2"
           }}
         >
           <UserInformations

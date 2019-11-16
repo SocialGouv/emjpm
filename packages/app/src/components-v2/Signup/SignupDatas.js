@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
+
 import { SIGNUP_DATA } from "./queries";
 
 const SignupDatas = props => {

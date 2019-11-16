@@ -1,10 +1,10 @@
-import { NewMesureIndicator } from "./NewMesureIndicator";
-import { ClosedMesureIndicator } from "./ClosedMesureIndicator";
-import { OpenMesureIndicator } from "./OpenMesureIndicator";
 import { AvailableMesureIndicator } from "./AvailableMesureIndicator";
-import { ServicesIndicator } from "./ServicesIndicator";
-import { MandatairesIndicator } from "./MandatairesIndicator";
+import { ClosedMesureIndicator } from "./ClosedMesureIndicator";
 import { EtablissementIndicator } from "./EtablissementIndicator";
+import { MandatairesIndicator } from "./MandatairesIndicator";
+import { NewMesureIndicator } from "./NewMesureIndicator";
+import { OpenMesureIndicator } from "./OpenMesureIndicator";
+import { ServicesIndicator } from "./ServicesIndicator";
 
 export {
   NewMesureIndicator,

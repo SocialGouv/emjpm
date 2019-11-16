@@ -1,12 +1,12 @@
+import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
-import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 
-import { withAuthSync } from "../../src/util/auth";
 import { LayoutMagistrat } from "../../src/components-v2/Layout";
 import { MagistratInformations } from "../../src/components-v2/MagistratInformations";
 import { MagistratTribunalInformations } from "../../src/components-v2/MagistratTribunalInformations";
 import { UserInformations } from "../../src/components-v2/UserInformations";
+import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {
   return (
@@ -19,10 +19,10 @@ const Informations = () => {
         >
           <Box
             sx={{
-              p: 1,
-              flexGrow: 99999,
               flexBasis: 0,
-              minWidth: 320
+              flexGrow: 99999,
+              minWidth: 320,
+              p: 1
             }}
           >
             <Heading2>Informations générales</Heading2>
@@ -34,9 +34,9 @@ const Informations = () => {
           </Box>
           <Box
             sx={{
-              p: 1,
+              flexBasis: 420,
               flexGrow: 1,
-              flexBasis: 420
+              p: 1
             }}
           >
             <Heading2>Votre tribunal</Heading2>

@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Card } from "@socialgouv/emjpm-ui-core";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
+
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
 import { ACTIVATE_USER } from "./mutations";
@@ -68,8 +69,8 @@ const RowItem = ({ item }) => {
     const newState = !isActive;
     activateUser({
       variables: {
-        id,
-        active: newState
+        active: newState,
+        id
       }
     });
   };
@@ -118,13 +119,13 @@ const AdminUsers = () => {
   const { debouncedSearchText } = useContext(AdminFilterContext);
 
   const { data, error, loading, fetchMore } = useQuery(USERS, {
+    fetchPolicy: "network-only",
     variables: {
-      offset: 0,
       limit: resultPerPage,
+      offset: 0,
       searchText:
         debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
-    },
-    fetchPolicy: "network-only"
+    }
   });
 
   if (loading) {
@@ -148,13 +149,13 @@ const AdminUsers = () => {
       isMoreEntry={isMoreEntry}
       onLoadMore={offset => {
         fetchMore({
-          variables: {
-            offset
-          },
           updateQuery: (prev, { fetchMoreResult }) => {
             return {
               users: [...prev.users, ...fetchMoreResult.users]
             };
+          },
+          variables: {
+            offset
           }
         });
       }}

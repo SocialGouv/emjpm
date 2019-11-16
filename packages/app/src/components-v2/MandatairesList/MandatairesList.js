@@ -1,14 +1,13 @@
-import React, { useState, useContext } from "react";
 import { useQuery } from "@apollo/react-hooks";
-
-import { Button, Card, Heading2, Heading4, Spinner, Select } from "@socialgouv/emjpm-ui-core";
-import { Box, Flex } from "rebass";
 import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
+import { Button, Card, Heading2, Heading4, Select, Spinner } from "@socialgouv/emjpm-ui-core";
+import React, { useContext, useState } from "react";
+import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "../Filters/context";
-import { formatMandatairesList } from "./utils";
 import { GET_MANDATAIRES } from "./queries";
 import { MandatairesListStyle } from "./style";
+import { formatMandatairesList } from "./utils";
 
 const optionsType = [
   { label: "Tous les types", value: null },
@@ -32,10 +31,10 @@ const MandatairesList = props => {
   const [currentPage, setCurrentPage] = useState(0);
   const { data, error, loading, fetchMore } = useQuery(GET_MANDATAIRES, {
     variables: {
+      departement: selectedDepartementValue ? selectedDepartementValue.value : null,
+      discriminator: selectedType ? selectedType.value : null,
       offset: 0,
       order: selectedCapacity ? selectedCapacity.value : null,
-      discriminator: selectedType ? selectedType.value : null,
-      departement: selectedDepartementValue ? selectedDepartementValue.value : null,
       region: selectedRegionalValue ? selectedRegionalValue.value : null
     }
   });
@@ -90,15 +89,15 @@ const MandatairesList = props => {
           <Button
             onClick={() => {
               fetchMore({
-                variables: {
-                  offset: currentPage + RESULT_PER_PAGE
-                },
                 updateQuery: (prev, { fetchMoreResult }) => {
                   setCurrentPage(currentPage + RESULT_PER_PAGE);
                   return {
                     count: fetchMoreResult.count,
                     mandatairesList: [...prev.mandatairesList, ...fetchMoreResult.mandatairesList]
                   };
+                },
+                variables: {
+                  offset: currentPage + RESULT_PER_PAGE
                 }
               });
             }}

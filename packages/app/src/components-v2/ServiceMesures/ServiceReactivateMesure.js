@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
+
 import { REACTIVATE_MESURE } from "./mutations";
 import { MESURE } from "./queries";
 
@@ -49,12 +50,12 @@ export const ServiceReactivateMesure = props => {
           onSubmit={(values, { setSubmitting }) => {
             setTimeout(() => {
               UpdateMesure({
+                refetchQueries: ["mesures", "mesures_aggregate"],
                 variables: {
-                  id: currentMesure,
                   antenne_id: mesure.antenne_id,
+                  id: currentMesure,
                   reason_extinction: values.reason_extinction
-                },
-                refetchQueries: ["mesures", "mesures_aggregate"]
+                }
               });
               setSubmitting(false);
               setPanelType(null);

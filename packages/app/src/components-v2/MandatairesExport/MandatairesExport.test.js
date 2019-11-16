@@ -1,6 +1,7 @@
 import React from "react";
-import { MandatairesExport } from "./MandatairesExport";
 import renderer from "react-test-renderer";
+
+import { MandatairesExport } from "./MandatairesExport";
 
 it("renders correctly", () => {
   const tree = renderer.create(<MandatairesExport />).toJSON();

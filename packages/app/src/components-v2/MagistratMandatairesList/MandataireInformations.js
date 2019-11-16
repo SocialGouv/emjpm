@@ -1,13 +1,13 @@
-import React, { useState, Fragment } from "react";
-import { Heading3, Heading5, Card, Heading4, Spinner, Button } from "@socialgouv/emjpm-ui-core";
+import { useQuery } from "@apollo/react-hooks";
+import { Button, Card, Heading3, Heading4, Heading5, Spinner } from "@socialgouv/emjpm-ui-core";
+import React, { Fragment, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
-import { useQuery } from "@apollo/react-hooks";
 
-import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
-import { topTextStyle, iconTextStyle, boxStyle, flexStyle } from "./style";
-import { MANDATAIRE_COMMENTS } from "./queries";
 import { MagistratMandataireComment } from "./MagistratMandataireComment";
+import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
+import { MANDATAIRE_COMMENTS } from "./queries";
+import { boxStyle, flexStyle, iconTextStyle, topTextStyle } from "./style";
 
 const MandataireInformations = props => {
   const {

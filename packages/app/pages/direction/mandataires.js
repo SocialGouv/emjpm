@@ -7,7 +7,6 @@ import {
 import React from "react";
 import { Box } from "rebass";
 
-import { withAuthSync } from "../../src/util/auth";
 import { AvailabilityMap } from "../../src/components-v2/AvailabilityMap";
 import { Filters } from "../../src/components-v2/Filters";
 import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
@@ -22,6 +21,7 @@ import { MandatairesActivity } from "../../src/components-v2/MandatairesActivity
 // import { MandatairesCapacity } from "../../src/components-v2/MandatairesCapacity";
 import { MandatairesDisponibility } from "../../src/components-v2/MandatairesDisponibility";
 import { MandatairesSubNavigation } from "../../src/components-v2/MandatairesSubNavigation";
+import { withAuthSync } from "../../src/util/auth";
 
 const Mandataires = () => {
   return (

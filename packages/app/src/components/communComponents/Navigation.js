@@ -1,6 +1,7 @@
 import Router from "next/router";
 import React from "react";
 import { ApolloConsumer } from "react-apollo";
+
 import { authService } from "../../business";
 import { redirect } from "../../lib";
 import { untrackUser } from "../../piwik";
@@ -25,10 +26,10 @@ const Navigation = ({ logout, inscription }) => (
       <div
         style={{
           background: "white",
-          padding: "7px 0",
-          textAlign: "left",
           display: "flex",
-          flexDirection: "row"
+          flexDirection: "row",
+          padding: "7px 0",
+          textAlign: "left"
         }}
       >
         <div style={{ flex: "0 0 50px" }} />
@@ -36,15 +37,15 @@ const Navigation = ({ logout, inscription }) => (
           <a href="https://emjpm.fabrique.social.gouv.fr">
             <img
               src={"/static/images/logo_emjpm_num.png"}
-              style={{ width: "60%", maxWidth: 350 }}
+              style={{ maxWidth: 350, width: "60%" }}
               alt="Accueil de eMJPM"
             />
           </a>
         </div>
-        <div style={{ flex: "0 0 300px", textAlign: "right", paddingRight: 10 }}>
+        <div style={{ flex: "0 0 300px", paddingRight: 10, textAlign: "right" }}>
           <a
             href="https://emjpm-doc.num.social.gouv.Fr"
-            style={{ cursor: "pointer", marginTop: 10, marginRight: 10 }}
+            style={{ cursor: "pointer", marginRight: 10, marginTop: 10 }}
           >
             Guide d&apos;utilisation
           </a>
@@ -55,8 +56,8 @@ const Navigation = ({ logout, inscription }) => (
               style={{
                 color: "#007bff",
                 cursor: "pointer",
-                marginTop: 10,
-                display: "inline-block"
+                display: "inline-block",
+                marginTop: 10
               }}
             >
               Inscription
@@ -69,8 +70,8 @@ const Navigation = ({ logout, inscription }) => (
               style={{
                 color: "#007bff",
                 cursor: "pointer",
-                marginTop: 10,
-                display: "inline-block"
+                display: "inline-block",
+                marginTop: 10
               }}
             >
               Se déconnecter

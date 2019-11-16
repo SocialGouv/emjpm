@@ -1,13 +1,13 @@
+import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
-import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 
-import { withAuthSync } from "../../src/util/auth";
 import { LayoutServices } from "../../src/components-v2/Layout";
-import { ServicesInformations } from "../../src/components-v2/ServicesInformations";
 import { PreferencesPanel } from "../../src/components-v2/PreferencesPanel";
 import { ServiceAntennes } from "../../src/components-v2/ServiceAntennes";
+import { ServicesInformations } from "../../src/components-v2/ServicesInformations";
 import { UserInformations } from "../../src/components-v2/UserInformations";
+import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {
   return (
@@ -20,10 +20,10 @@ const Informations = () => {
         >
           <Box
             sx={{
-              p: 1,
-              flexGrow: 99999,
               flexBasis: 0,
-              minWidth: 320
+              flexGrow: 99999,
+              minWidth: 320,
+              p: 1
             }}
           >
             <Heading2>Informations générales</Heading2>
@@ -31,9 +31,9 @@ const Informations = () => {
           </Box>
           <Box
             sx={{
-              p: 1,
+              flexBasis: 320,
               flexGrow: 1,
-              flexBasis: 320
+              p: 1
             }}
           >
             <Heading2>Mesures souhaitées</Heading2>
