@@ -2,13 +2,14 @@ import { BoxWrapper, Button, Card, Heading2, Text } from "@socialgouv/emjpm-ui-c
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Link } from "rebass";
+
 import { LayoutSignup } from "../../src/components-v2/Layout";
 
 const backLogin = () => {
   Router.push("/login");
 };
 
-const cardStyle = { p: "5", m: "1", mt: "5" };
+const cardStyle = { m: "1", mt: "5", p: "5" };
 
 const CongratulationPage = () => {
   return (

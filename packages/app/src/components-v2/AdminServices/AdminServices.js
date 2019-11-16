@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
+
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
 import { AdminEditService } from "./AdminEditService";
@@ -57,13 +58,13 @@ const AdminServices = () => {
   const { debouncedSearchText } = useContext(AdminFilterContext);
 
   const { data, error, loading, fetchMore } = useQuery(SERVICES, {
+    fetchPolicy: "network-only",
     variables: {
-      offset: 0,
       limit: resultPerPage,
+      offset: 0,
       searchText:
         debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
-    },
-    fetchPolicy: "network-only"
+    }
   });
 
   if (loading) {
@@ -87,14 +88,14 @@ const AdminServices = () => {
       isMoreEntry={isMoreEntry}
       onLoadMore={offset => {
         fetchMore({
-          variables: {
-            offset
-          },
           updateQuery: (prev, { fetchMoreResult }) => {
             return {
               count: fetchMoreResult.count,
               services: [...prev.services, ...fetchMoreResult.services]
             };
+          },
+          variables: {
+            offset
           }
         });
       }}

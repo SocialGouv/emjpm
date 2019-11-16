@@ -2,7 +2,7 @@ import { useApolloClient } from "@apollo/react-hooks";
 import { Button, Card, Heading1, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
-import React, { useContext, Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
@@ -40,13 +40,13 @@ export const SignupForm = () => {
 
   const isEmailExists = async email => {
     const checkEmail = await client.query({
-      query: CHECK_EMAIL_UNICITY,
-      fetchPolicy: "network-only",
       context: {
         headers: {
           "X-Hasura-Email": email
         }
-      }
+      },
+      fetchPolicy: "network-only",
+      query: CHECK_EMAIL_UNICITY
     });
     return checkEmail.data.users.length > 0;
   };
@@ -78,7 +78,7 @@ export const SignupForm = () => {
             </Box>
           </Box>
           <Box p="5" pb={0} width={[1, 3 / 5]}>
-            <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+            <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
               <Formik
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
                   const exists = await isEmailExists(values.email);
@@ -88,12 +88,12 @@ export const SignupForm = () => {
                     });
                   } else {
                     setUser({
-                      type: values.type.value,
+                      confirmPassword: values.confirmPassword,
                       email: values.email,
                       nom: values.nom,
-                      prenom: values.prenom,
                       password: values.password,
-                      confirmPassword: values.confirmPassword
+                      prenom: values.prenom,
+                      type: values.type.value
                     });
                     validateStepOne(true);
                   }
@@ -101,12 +101,18 @@ export const SignupForm = () => {
                   setSubmitting(false);
                 }}
                 validationSchema={Yup.object().shape({
-                  type: Yup.string().required("Champs obligatoire"),
+                  confirmPassword: Yup.string()
+                    .required()
+                    .label("Confirmation du mot de passe")
+                    .test("passwords-match", "Les mots de passe ne sont pas égaux", function(
+                      value
+                    ) {
+                      return this.parent.password === value;
+                    }),
                   email: Yup.string()
                     .email("Le format de votre email n'est pas correct")
                     .required("Champs obligatoire"),
                   nom: Yup.string().required("Champs obligatoire"),
-                  prenom: Yup.string().required("Champs obligatoire"),
                   password: Yup.string()
                     .label("Mot de passe")
                     .required()
@@ -118,22 +124,16 @@ export const SignupForm = () => {
                           "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spéciale"
                       }
                     ),
-                  confirmPassword: Yup.string()
-                    .required()
-                    .label("Confirmation du mot de passe")
-                    .test("passwords-match", "Les mots de passe ne sont pas égaux", function(
-                      value
-                    ) {
-                      return this.parent.password === value;
-                    })
+                  prenom: Yup.string().required("Champs obligatoire"),
+                  type: Yup.string().required("Champs obligatoire")
                 })}
                 initialValues={{
-                  type: user ? TYPE_OPTIONS.find(val => user.type === val.value) : "",
+                  confirmPassword: user ? user.confirmPassword : "",
                   email: user ? user.email : "",
                   nom: user ? user.nom : "",
-                  prenom: user ? user.prenom : "",
                   password: user ? user.password : "",
-                  confirmPassword: user ? user.confirmPassword : ""
+                  prenom: user ? user.prenom : "",
+                  type: user ? TYPE_OPTIONS.find(val => user.type === val.value) : ""
                 }}
               >
                 {props => {
@@ -148,7 +148,7 @@ export const SignupForm = () => {
                   } = props;
                   return (
                     <form onSubmit={handleSubmit}>
-                      <Box sx={{ zIndex: "110", position: "relative" }} mb="2">
+                      <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
                         <Select
                           id="type"
                           name="type"

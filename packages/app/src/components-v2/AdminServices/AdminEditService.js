@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
 import React from "react";
+
 import { AdminServiceForm } from "./AdminServiceForm";
 import { UPDATE_SERVICE } from "./mutations";
 
@@ -14,16 +15,16 @@ export const AdminEditService = ({ service, closePanel }) => {
       onCancel={closePanel}
       onSubmit={values =>
         UpdateService({
+          refetchQueries: ["services", "services_aggregate"],
           variables: {
-            id: service.id,
-            etablissement: values.etablissement,
-            email: values.email,
             code_postal: values.code_postal,
-            ville: values.ville,
+            department_id: values.departement.value,
+            email: values.email,
+            etablissement: values.etablissement,
+            id: service.id,
             telephone: values.telephone,
-            department_id: values.departement.value
-          },
-          refetchQueries: ["services", "services_aggregate"]
+            ville: values.ville
+          }
         })
       }
     />

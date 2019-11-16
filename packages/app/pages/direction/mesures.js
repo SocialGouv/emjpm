@@ -2,7 +2,6 @@ import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@socialgouv/emjpm-ui-c
 import React from "react";
 import { Box } from "rebass";
 
-import { withAuthSync } from "../../src/util/auth";
 import { Filters } from "../../src/components-v2/Filters";
 import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
 import {
@@ -13,6 +12,7 @@ import {
 import { LayoutDirection } from "../../src/components-v2/Layout";
 import { MesureAllocation } from "../../src/components-v2/MesureAllocation";
 import { MesureEvolution } from "../../src/components-v2/MesureEvolution";
+import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {
   return (

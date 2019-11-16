@@ -1,7 +1,8 @@
-import React from "react";
-import styled from "styled-components";
 import Head from "next/head";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import React from "react";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import styled from "styled-components";
+
 import { PageTracker } from "./PageTracker";
 
 const IconWrapper = styled.div`

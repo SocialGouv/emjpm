@@ -1,7 +1,8 @@
 import { useMutation } from "@apollo/react-hooks";
 import React from "react";
-import { UPDATE_TRIBUNAL } from "./mutations";
+
 import { AdminTribunalForm } from "./AdminTribunalForm";
+import { UPDATE_TRIBUNAL } from "./mutations";
 
 export const AdminEditTribunal = ({ tribunal, closePanel }) => {
   const [UpdateTribunal] = useMutation(UPDATE_TRIBUNAL, {
@@ -14,16 +15,16 @@ export const AdminEditTribunal = ({ tribunal, closePanel }) => {
       onCancel={closePanel}
       onSubmit={values =>
         UpdateTribunal({
+          refetchQueries: ["tis", "tis_aggregate"],
           variables: {
-            id: tribunal.id,
-            etablissement: values.etablissement,
-            email: values.email,
             code_postal: values.code_postal,
-            ville: values.ville,
+            email: values.email,
+            etablissement: values.etablissement,
+            id: tribunal.id,
+            siret: values.siret,
             telephone: values.telephone,
-            siret: values.siret
-          },
-          refetchQueries: ["tis", "tis_aggregate"]
+            ville: values.ville
+          }
         })
       }
     />

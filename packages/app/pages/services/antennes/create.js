@@ -1,11 +1,10 @@
+import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 
-import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
-
-import { withAuthSync } from "../../../src/util/auth";
 import { LayoutServices } from "../../../src/components-v2/Layout";
 import { ServiceCreateAntenne } from "../../../src/components-v2/ServiceCreateAntenne";
 import { UserInformations } from "../../../src/components-v2/UserInformations";
+import { withAuthSync } from "../../../src/util/auth";
 
 const AddAntennes = () => {
   return (

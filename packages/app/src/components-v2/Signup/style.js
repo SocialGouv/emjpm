@@ -1,9 +1,9 @@
 const grayBox = {
-  borderRadius: "5px 0 0 5px",
   bg: "cardSecondary",
+  borderRadius: "5px 0 0 5px",
   p: "5"
 };
 
-const cardStyle = { p: "0", m: "1", mt: "5" };
+const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export { grayBox, cardStyle };

@@ -5,13 +5,14 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { EDIT_USER } from "./mutations";
 
-const cardStyle = { p: "0", m: "1", mt: "5" };
+const cardStyle = { m: "1", mt: "5", p: "0" };
 
 const grayBox = {
-  borderRadius: "5px 0 0 5px",
   bg: "cardSecondary",
+  borderRadius: "5px 0 0 5px",
   p: "5"
 };
 
@@ -36,41 +37,41 @@ const MagistratEditInformations = props => {
           </Box>
         </Box>
         <Box p="5" width={[1, 3 / 5]}>
-          <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <Formik
               onSubmit={(values, { setSubmitting }) => {
                 EditUser({
+                  refetchQueries: ["users"],
                   variables: {
                     cabinet: values.cabinet,
-                    prenom: values.prenom,
-                    nom: values.nom,
                     email: values.email.toLowerCase(),
-                    id: id
-                  },
-                  refetchQueries: ["users"]
+                    id: id,
+                    nom: values.nom,
+                    prenom: values.prenom
+                  }
                 });
                 setSubmitting(false);
               }}
               validationSchema={Yup.object().shape({
                 cabinet: Yup.string(),
-                prenom: Yup.string().required("Champs obligatoire"),
-                nom: Yup.string().required("Champs obligatoire"),
                 email: Yup.string("Champs obligatoire")
                   .email("Le format de votre email n'est pas correct")
-                  .required("Champs obligatoire")
+                  .required("Champs obligatoire"),
+                nom: Yup.string().required("Champs obligatoire"),
+                prenom: Yup.string().required("Champs obligatoire")
               })}
               initialValues={{
                 cabinet: cabinet || "",
-                prenom: prenom || "",
+                email: email || "",
                 nom: nom || "",
-                email: email || ""
+                prenom: prenom || ""
               }}
             >
               {props => {
                 const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
                 return (
                   <form onSubmit={handleSubmit}>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.cabinet}
                         id="cabinet"
@@ -81,7 +82,7 @@ const MagistratEditInformations = props => {
                       />
                       {errors.cabinet && touched.cabinet && <Text mt="1">{errors.cabinet}</Text>}
                     </Box>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.prenom}
                         id="prenom"
@@ -92,7 +93,7 @@ const MagistratEditInformations = props => {
                       />
                       {errors.prenom && touched.prenom && <Text mt="1">{errors.prenom}</Text>}
                     </Box>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.nom}
                         id="nom"
@@ -103,7 +104,7 @@ const MagistratEditInformations = props => {
                       />
                       {errors.nom && touched.nom && <Text mt="1">{errors.nom}</Text>}
                     </Box>
-                    <Box sx={{ zIndex: "1", position: "relative" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.email}
                         id="email"

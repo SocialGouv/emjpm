@@ -24,18 +24,18 @@ const getMandataireRows = (datas, type) => {
       const awaiting = data.mandataire ? data.mandataire.mesures_en_attente : undefined;
       const max = data.mandataire ? data.mandataire.dispo_max : undefined;
       return {
-        Genre: cellValue(data.mandataire ? data.mandataire.genre : undefined),
-        Prénom: cellValue(data.prenom),
-        Nom: cellValue(data.nom),
         Adresse: cellValue(data.mandataire ? data.mandataire.adresse : undefined),
         "Code postal": cellValue(data.mandataire ? data.mandataire.code_postal : undefined),
-        Ville: cellValue(data.mandataire ? data.mandataire.ville : undefined),
-        Télephone: cellValue(data.mandataire ? data.mandataire.telephone : undefined),
-        Portable: cellValue(data.mandataire ? data.mandataire.portable : undefined),
         "Disponibilité actuelle": remainingCapacity(max, awaiting, inProgress),
-        "Mesures en cours": cellValue(inProgress),
+        "Disponibilité max": cellValue(max),
+        Genre: cellValue(data.mandataire ? data.mandataire.genre : undefined),
         "Mesures en attente": cellValue(awaiting),
-        "Disponibilité max": cellValue(max)
+        "Mesures en cours": cellValue(inProgress),
+        Nom: cellValue(data.nom),
+        Portable: cellValue(data.mandataire ? data.mandataire.portable : undefined),
+        Prénom: cellValue(data.prenom),
+        Télephone: cellValue(data.mandataire ? data.mandataire.telephone : undefined),
+        Ville: cellValue(data.mandataire ? data.mandataire.ville : undefined)
       };
     });
 };
@@ -52,19 +52,19 @@ const getServiceRows = datas => {
     );
     const max = data.dispo_max;
     return {
-      Nom: cellValue(data.etablissement),
       Adresse: cellValue(data.adresse),
       "Code postal": cellValue(data.code_postal),
-      Ville: cellValue(data.ville),
-      Email: cellValue(data.email),
-      Télephone: cellValue(data.telephone),
-      "Nom du contact": cellValue(data.nom),
-      "Prénom du contact": cellValue(data.prenom),
       "Disponibilité actuelle": remainingCapacity(max, awaiting, inProgress),
-      "Mesures en cours": cellValue(inProgress),
-      "Mesures en attente": cellValue(awaiting),
       "Disponibilité max": cellValue(max),
-      "Nombre d'antenne": data.service_antennes.length
+      Email: cellValue(data.email),
+      "Mesures en attente": cellValue(awaiting),
+      "Mesures en cours": cellValue(inProgress),
+      Nom: cellValue(data.etablissement),
+      "Nom du contact": cellValue(data.nom),
+      "Nombre d'antenne": data.service_antennes.length,
+      "Prénom du contact": cellValue(data.prenom),
+      Télephone: cellValue(data.telephone),
+      Ville: cellValue(data.ville)
     };
   });
 };
@@ -72,23 +72,23 @@ const getServiceRows = datas => {
 const writeSheet = (wb, region, department, title, datas) => {
   const filterData = [
     {
-      Région: region ? region.label : "Aucun filtre",
-      Département: department ? department.label : "Aucun filtre"
+      Département: department ? department.label : "Aucun filtre",
+      Région: region ? region.label : "Aucun filtre"
     }
   ];
 
   wb.SheetNames.push(title);
   wb.Sheets[title] = XLSX.utils.sheet_add_json(wb.Sheets[title], [{ title: title }], {
-    skipHeader: true,
-    origin: "B2"
+    origin: "B2",
+    skipHeader: true
   });
   wb.Sheets[title] = XLSX.utils.sheet_add_json(wb.Sheets[title], filterData, {
-    skipHeader: false,
-    origin: "B4"
+    origin: "B4",
+    skipHeader: false
   });
   wb.Sheets[title] = XLSX.utils.sheet_add_json(wb.Sheets[title], datas, {
-    skipHeader: false,
-    origin: "B7"
+    origin: "B7",
+    skipHeader: false
   });
 };
 

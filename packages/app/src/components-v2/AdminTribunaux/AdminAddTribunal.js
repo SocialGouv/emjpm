@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import Router from "next/router";
 import React from "react";
+
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { ADD_TRIBUNAL } from "./mutations";
 
@@ -14,12 +15,12 @@ export const AdminAddTribunal = () => {
       onSubmit={values =>
         AddTribunal({
           variables: {
-            etablissement: values.etablissement,
-            email: values.email,
             code_postal: values.code_postal,
-            ville: values.ville,
+            email: values.email,
+            etablissement: values.etablissement,
+            siret: values.siret,
             telephone: values.telephone,
-            siret: values.siret
+            ville: values.ville
           }
         })
       }

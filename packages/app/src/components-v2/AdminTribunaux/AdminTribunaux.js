@@ -2,11 +2,12 @@ import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
+
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
+import { AdminEditTribunal } from "./AdminEditTribunal";
 import { TRIBUNAUX } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
-import { AdminEditTribunal } from "./AdminEditTribunal";
 
 const RowItem = ({ item }) => {
   const { id, etablissement, code_postal, ville, siret } = item;
@@ -61,13 +62,13 @@ const AdminTribunaux = () => {
   const { debouncedSearchText } = useContext(AdminFilterContext);
 
   const { data, error, loading, fetchMore } = useQuery(TRIBUNAUX, {
+    fetchPolicy: "network-only",
     variables: {
-      offset: 0,
       limit: resultPerPage,
+      offset: 0,
       searchText:
         debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
-    },
-    fetchPolicy: "network-only"
+    }
   });
 
   if (loading) {
@@ -91,14 +92,14 @@ const AdminTribunaux = () => {
       isMoreEntry={isMoreEntry}
       onLoadMore={offset => {
         fetchMore({
-          variables: {
-            offset
-          },
           updateQuery: (prev, { fetchMoreResult }) => {
             return {
               count: fetchMoreResult.count,
               tis: [...prev.tis, ...fetchMoreResult.tis]
             };
+          },
+          variables: {
+            offset
           }
         });
       }}

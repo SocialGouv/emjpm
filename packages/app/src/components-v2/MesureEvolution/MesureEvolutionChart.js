@@ -11,6 +11,7 @@ import {
   XAxis,
   YAxis
 } from "recharts";
+
 import {
   getMesureCategoryTypeColor,
   getMesureCategoryTypeLabel,
@@ -45,9 +46,9 @@ const MesureEvolutionChart = props => {
           onChange={selectedOptions => selectMesures(selectedOptions)}
         />
       </Box>
-      <Box sx={{ width: "100%", height: 450 }}>
+      <Box sx={{ height: 450, width: "100%" }}>
         <ResponsiveContainer>
-          <LineChart data={evolutionDatas} margin={{ top: 50, right: 30, left: 20, bottom: 5 }}>
+          <LineChart data={evolutionDatas} margin={{ bottom: 5, left: 20, right: 30, top: 50 }}>
             <XAxis dataKey="month" />
             <YAxis />
             <CartesianGrid stroke="#f5f5f5" />

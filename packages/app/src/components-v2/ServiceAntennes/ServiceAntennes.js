@@ -1,11 +1,11 @@
-import React, { Fragment } from "react";
 import { useQuery } from "@apollo/react-hooks";
-import { Box, Flex } from "rebass";
-import { Heading2, Text, Heading4, Card, BoxWrapper, Spinner } from "@socialgouv/emjpm-ui-core";
 import { Antenne } from "@socialgouv/emjpm-ui-components";
-import { ANTENNE } from "./queries";
-import { AntenneLinkButton, LinkButton } from "../Commons";
+import { BoxWrapper, Card, Heading2, Heading4, Spinner, Text } from "@socialgouv/emjpm-ui-core";
+import React, { Fragment } from "react";
+import { Box, Flex } from "rebass";
 
+import { AntenneLinkButton, LinkButton } from "../Commons";
+import { ANTENNE } from "./queries";
 import { AntennesStyle } from "./style";
 
 const ServiceAntennes = props => {
@@ -14,7 +14,7 @@ const ServiceAntennes = props => {
   if (loading) {
     return (
       <Card p="1" minHeight="450px">
-        <Box sx={{ position: "relative", p: "6" }}>
+        <Box sx={{ p: "6", position: "relative" }}>
           <Spinner />
         </Box>
       </Card>
@@ -24,7 +24,7 @@ const ServiceAntennes = props => {
   if (error) {
     return (
       <Card p="1">
-        <Box sx={{ position: "relative", p: "6" }}>error</Box>
+        <Box sx={{ p: "6", position: "relative" }}>error</Box>
       </Card>
     );
   }
@@ -39,8 +39,8 @@ const ServiceAntennes = props => {
             <Flex alignItems="center">
               <Box
                 sx={{
-                  flexGrow: 1,
-                  flexBasis: 120
+                  flexBasis: 120,
+                  flexGrow: 1
                 }}
               >
                 <img src="/static/images/enterprise.svg" alt="entreprise" />
@@ -54,8 +54,8 @@ const ServiceAntennes = props => {
               </Box>
               <Box
                 sx={{
-                  flexGrow: 1,
-                  flexBasis: 260
+                  flexBasis: 260,
+                  flexGrow: 1
                 }}
               >
                 <LinkButton href="/services/antennes/create" ml="1">
@@ -79,7 +79,7 @@ const ServiceAntennes = props => {
               antenne = { ...antenne, preferences: [] };
               return (
                 <Antenne
-                  sx={{ p: "3", minHeight: "300px" }}
+                  sx={{ minHeight: "300px", p: "3" }}
                   key={antenne.id}
                   antenne={antenne}
                   linkText="Voir l'antenne"

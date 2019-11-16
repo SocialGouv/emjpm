@@ -16,18 +16,18 @@ export const Provider = props => {
 
   // Make the context object:
   const filtersContext = {
-    isStepOneValidate,
-    validateStepOne,
-    user,
-    setUser,
-    mandataire,
-    setMandataire,
-    magistrat,
-    setMagistrat,
     direction,
-    setDirection,
+    isStepOneValidate,
+    magistrat,
+    mandataire,
     service,
-    setService
+    setDirection,
+    setMagistrat,
+    setMandataire,
+    setService,
+    setUser,
+    user,
+    validateStepOne
   };
 
   // pass the value in provider and return

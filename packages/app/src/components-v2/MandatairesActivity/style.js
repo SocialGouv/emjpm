@@ -5,32 +5,32 @@ const textStyle = {
 };
 
 const numberStyle = {
-  pt: 2,
-  fontSize: 5,
   fontFamily: "heading",
+  fontSize: 5,
   fontWeight: "600",
+  pt: 2,
   textAlign: "center"
 };
 
 const percentStyle = {
-  pt: 1,
-  fontSize: 3,
   fontFamily: "heading",
+  fontSize: 3,
   fontWeight: "600",
+  pt: 1,
   textAlign: "center"
 };
 
 const pieTextStyle = {
+  fontFamily: "heading",
   fontSize: 4,
   fontWeight: "600",
-  fontFamily: "heading",
-  position: "absolute",
-  width: "100px",
-  textAlign: "center",
   left: "50%",
-  top: "50%",
   ml: "-50px",
-  mt: "-20px"
+  mt: "-20px",
+  position: "absolute",
+  textAlign: "center",
+  top: "50%",
+  width: "100px"
 };
 
 const legendStyle = {

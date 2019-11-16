@@ -1,11 +1,11 @@
+import getConfig from "next/config";
+import Router from "next/router";
 import React, { Fragment } from "react";
 import { findDOMNode } from "react-dom";
 import Form from "react-jsonschema-form";
-import styled from "styled-components";
-import Router from "next/router";
-import getConfig from "next/config";
-import ReactPiwik from "react-piwik";
 import Modal from "react-modal";
+import ReactPiwik from "react-piwik";
+import styled from "styled-components";
 
 const {
   publicRuntimeConfig: { API_URL }
@@ -14,12 +14,12 @@ const {
 export const doForgotPassword = formData => {
   const url = `${API_URL}/auth/forgot_password`;
   return fetch(url, {
+    body: JSON.stringify(formData),
     credentials: "include",
-    method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(formData)
+    method: "POST"
   }).then(res => {
     if (res.status > 400) {
       throw new Error(res.status);
@@ -29,19 +29,19 @@ export const doForgotPassword = formData => {
 };
 
 const schema = {
-  type: "object",
-  required: ["email"],
   properties: {
-    email: { type: "string", title: "", default: "" }
-  }
+    email: { default: "", title: "", type: "string" }
+  },
+  required: ["email"],
+  type: "object"
 };
 
 const uiSchema = {
   email: {
-    "ui:placeholder": "email",
     "ui:options": {
       label: false
-    }
+    },
+    "ui:placeholder": "email"
   }
 };
 
@@ -107,10 +107,10 @@ export const ForgotPasswordView = ({ formData, onSubmit, error, status }) => (
 class ForgotPassword extends React.Component {
   state = {
     error: null,
-    status: null,
     formData: {},
+    modalContent: "",
     showModal: false,
-    modalContent: ""
+    status: null
   };
   componentDidMount() {
     // eslint-disable-next-line react/no-find-dom-node
@@ -130,7 +130,7 @@ class ForgotPassword extends React.Component {
   }
 
   handleOpenModal(content) {
-    this.setState({ showModal: true, modalContent: content });
+    this.setState({ modalContent: content, showModal: true });
   }
 
   handleCloseModal() {
@@ -141,8 +141,8 @@ class ForgotPassword extends React.Component {
     this.setState(
       {
         error: null,
-        status: "loading",
-        formData
+        formData,
+        status: "loading"
       },
       () => {
         ReactPiwik.push(["trackEvent", "has forgot his/her password", formData.email]);
@@ -151,14 +151,14 @@ class ForgotPassword extends React.Component {
           .then(() => {
             this.handleOpenModal("Un email vient de vous être envoyé");
             this.setState({
-              status: "success",
-              error: null
+              error: null,
+              status: "success"
             });
           })
           .catch(() =>
             this.setState({
-              status: "error",
-              error: "Impossible de trouver l'email"
+              error: "Impossible de trouver l'email",
+              status: "error"
             })
           );
       }

@@ -1,6 +1,7 @@
 import { Card, Input, Select } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
+
 import { MESURE_STATUS_LABEL_VALUE, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";

@@ -3,15 +3,16 @@ import { Button, Card, Heading2, Input } from "@socialgouv/emjpm-ui-core";
 import { Text } from "@socialgouv/emjpm-ui-core/dist/Type";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
+
 import checkDatas from "./checkDatas";
 import { ADD_IMPORT } from "./mutations";
 import { ServiceMesureImportResultStyle } from "./style";
 
 const grayCard = {
-  borderRadius: "5px 0 0 5px",
   bg: "cardSecondary",
-  p: "5",
-  m: "2"
+  borderRadius: "5px 0 0 5px",
+  m: "2",
+  p: "5"
 };
 
 const FilePicker = props => {
@@ -100,10 +101,10 @@ export const MandataireAddMesureImport = () => {
       if (mesures.length > 0) {
         AddImport({
           variables: {
+            content: mesures,
             file_name: file.name,
             file_size: file.size,
-            file_type: file.type,
-            content: mesures
+            file_type: file.type
           }
         });
       }

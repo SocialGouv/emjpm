@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+
 import { useDebounce } from "../../../lib/hooks";
 
 export const Context = createContext({});
@@ -15,11 +16,11 @@ export const Provider = props => {
 
   // Make the context object:
   const filtersContext = {
-    mesureType,
     changeMesureType,
-    searchText,
     changeSearchText,
-    debouncedSearchText
+    debouncedSearchText,
+    mesureType,
+    searchText
   };
 
   // pass the value in provider and return

@@ -1,17 +1,16 @@
 import React from "react";
-import { connectModal } from "redux-modal";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import { connectModal } from "redux-modal";
 
 import { Button } from "../..";
-
-import { reactivateMesure } from "../actions/mesures";
 import Layout from "../../communComponents/ModalLayout";
+import { reactivateMesure } from "../actions/mesures";
 
 const ReactivateMesure = ({ show, handleHide, onSubmit, id, mandataire_id }) => {
   return (
     <Layout show={show} handleHide={handleHide}>
-      <div style={{ textAlign: "center", marginTop: 50 }}>
+      <div style={{ marginTop: 50, textAlign: "center" }}>
         <h3>Voulez-vous réactiver la mesure ? </h3>
         <br />
         <br />
@@ -39,4 +38,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   null,
   mapDispatchToProps
-)(connectModal({ name: "ReactivateMesure", destroyOnHide: true })(ReactivateMesure));
+)(connectModal({ destroyOnHide: true, name: "ReactivateMesure" })(ReactivateMesure));

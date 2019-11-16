@@ -17,14 +17,14 @@ export const storageService = {
     const token = getToken();
     return !!token;
   },
+  removeLogin() {
+    localStorage.removeItem(LOGIN_KEY);
+  },
   removeToken() {
     localStorage.removeItem(ID_TOKEN_KEY);
     document.cookie = cookie.serialize(TOKEN_KEY, "", {
       maxAge: -1 // Expire the cookie immediately
     });
-  },
-  removeLogin() {
-    localStorage.removeItem(LOGIN_KEY);
   },
   setLogin(login) {
     localStorage.setItem(LOGIN_KEY, login);
