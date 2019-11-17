@@ -181,11 +181,15 @@ tables:
       allow_aggregations: false
       columns:
       - code_postal
+      - created_at
+      - email
       - etablissement
       - id
+      - siret
+      - telephone
       - ville
       filter: {}
-    role: anonymous
+    role: ti
   - comment: null
     permission:
       allow_aggregations: false
@@ -197,30 +201,19 @@ tables:
       - ville
       - telephone
       - created_at
+      - siret
       filter: {}
-    role: service
+    role: individuel
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - id
-      - etablissement
-      - email
       - code_postal
-      - ville
-      - telephone
       - created_at
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - created_at
-      - code_postal
       - email
       - etablissement
+      - id
+      - siret
       - telephone
       - ville
       filter: {}
@@ -229,11 +222,12 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - id
-      - created_at
       - code_postal
+      - created_at
       - email
       - etablissement
+      - id
+      - siret
       - telephone
       - ville
       filter: {}
@@ -251,7 +245,32 @@ tables:
       - telephone
       - ville
       filter: {}
-    role: ti
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - code_postal
+      - created_at
+      - email
+      - etablissement
+      - id
+      - siret
+      - telephone
+      - ville
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - code_postal
+      - etablissement
+      - id
+      - siret
+      - ville
+      filter: {}
+    role: anonymous
   table: tis
   update_permissions: []
 - array_relationships:
@@ -695,39 +714,10 @@ tables:
   - comment: null
     permission:
       columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
       - cabinet
       - email
       - nom
-      - password
       - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-      set: {}
-    role: direction
-  - comment: null
-    permission:
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
       - username
       filter:
         id:
@@ -737,18 +727,9 @@ tables:
   - comment: null
     permission:
       columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
       - email
       - nom
-      - password
       - prenom
-      - reset_password_token
-      - type
       - username
       filter:
         id:
@@ -758,18 +739,9 @@ tables:
   - comment: null
     permission:
       columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
       - email
       - nom
-      - password
       - prenom
-      - reset_password_token
-      - type
       - username
       filter:
         id:
@@ -779,18 +751,22 @@ tables:
   - comment: null
     permission:
       columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
+      - email
+      - nom
+      - prenom
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      set: {}
+    role: direction
+  - comment: null
+    permission:
+      columns:
       - cabinet
       - email
       - nom
-      - password
       - prenom
-      - reset_password_token
-      - type
       - username
       filter:
         id:
@@ -920,11 +896,7 @@ tables:
   delete_permissions:
   - comment: null
     permission:
-      filter:
-        ti:
-          magistrats:
-            user_id:
-              _eq: X-Hasura-User-Id
+      filter: {}
     role: ti
   event_triggers: []
   insert_permissions:
@@ -983,7 +955,7 @@ tables:
       - antenne_id
       filter:
         ti:
-          magistrats:
+          user_tis:
             user_id:
               _eq: X-Hasura-User-Id
       set: {}
@@ -1218,8 +1190,6 @@ tables:
       - etablissement
       - id
       - information
-      - latitude
-      - longitude
       - nom
       - prenom
       - telephone
@@ -1239,8 +1209,6 @@ tables:
       - etablissement
       - id
       - information
-      - latitude
-      - longitude
       - nom
       - prenom
       - telephone
@@ -1259,8 +1227,6 @@ tables:
       - etablissement
       - id
       - information
-      - latitude
-      - longitude
       - nom
       - prenom
       - telephone
@@ -1300,16 +1266,12 @@ tables:
       - ville
       - tel
       - fax
-      - latitude
-      - longitude
       filter: {}
     role: direction
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - latitude
-      - longitude
       - id
       - adresse
       - code_postal
@@ -1794,8 +1756,6 @@ tables:
       - etablissement_id
       - extinction
       - id
-      - latitude
-      - longitude
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -1826,8 +1786,6 @@ tables:
       - etablissement_id
       - extinction
       - id
-      - latitude
-      - longitude
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -1858,8 +1816,6 @@ tables:
       - etablissement_id
       - extinction
       - id
-      - latitude
-      - longitude
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -1891,8 +1847,6 @@ tables:
       - etablissement_id
       - extinction
       - id
-      - latitude
-      - longitude
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -2313,36 +2267,37 @@ tables:
     role: anonymous
   - comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       columns:
-      - secretariat
-      - nb_secretariat
+      - adresse
+      - code_postal
+      - created_at
+      - date_mesure_update
+      - department_id
       - dispo_max
+      - email_send
+      - etablissement
+      - genre
       - id
       - mesures_en_attente
       - mesures_en_cours
-      - user_id
-      - zip
-      - created_at
-      - date_mesure_update
-      - email_send
-      - adresse
-      - code_postal
-      - etablissement
-      - genre
+      - nb_secretariat
+      - secretariat
+      - siret
       - telephone
       - telephone_portable
+      - user_id
       - ville
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: mandataire
+      - zip
+      filter: {}
+    role: direction
   - comment: null
     permission:
       allow_aggregations: false
       columns:
       - secretariat
       - nb_secretariat
+      - department_id
       - dispo_max
       - id
       - mesures_en_attente
@@ -2356,37 +2311,68 @@ tables:
       - code_postal
       - etablissement
       - genre
+      - siret
       - telephone
       - telephone_portable
       - ville
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - adresse
+      - code_postal
+      - created_at
+      - date_mesure_update
+      - dispo_max
+      - email_send
+      - etablissement
+      - genre
+      - id
+      - mesures_en_attente
+      - mesures_en_cours
+      - nb_secretariat
+      - secretariat
+      - siret
+      - telephone
+      - telephone_portable
+      - user_id
+      - ville
+      - zip
       filter:
         user_id:
           _eq: X-Hasura-User-Id
     role: prepose
   - comment: null
     permission:
-      allow_aggregations: true
+      allow_aggregations: false
       columns:
-      - id
-      - etablissement
-      - code_postal
-      - ville
-      - telephone
       - adresse
-      - mesures_en_cours
-      - dispo_max
-      - user_id
-      - telephone_portable
-      - secretariat
-      - nb_secretariat
+      - code_postal
       - created_at
       - date_mesure_update
+      - dispo_max
       - email_send
+      - etablissement
       - genre
+      - id
       - mesures_en_attente
+      - mesures_en_cours
+      - nb_secretariat
+      - secretariat
+      - siret
+      - telephone
+      - telephone_portable
+      - user_id
+      - ville
       - zip
-      filter: {}
-    role: direction
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: mandataire
   - comment: null
     permission:
       allow_aggregations: false
@@ -2401,12 +2387,11 @@ tables:
       - etablissement
       - genre
       - id
-      - latitude
-      - longitude
       - mesures_en_attente
       - mesures_en_cours
       - nb_secretariat
       - secretariat
+      - siret
       - telephone
       - telephone_portable
       - user_id
