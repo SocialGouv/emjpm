@@ -2,6 +2,7 @@ import cookie from "js-cookie";
 import nextCookie from "next-cookies";
 import Router from "next/router";
 import React, { Component } from "react";
+import jwtDecode from "jwt-decode";
 
 export const logout = () => {
   Router.push("/error", "/login");
@@ -55,23 +56,41 @@ export const withAuthSync = WrappedComponent =>
     }
   };
 
+const routes = {
+  ti: "/magistrats",
+  service: "/service",
+  mandataires: "/magistrats",
+  direction: "/direction",
+  admin: "/admin"
+};
+
 export const auth = ctx => {
   const { token } = nextCookie(ctx);
+  const { pathname } = ctx;
+  const isLogin = pathname === "/login" || pathname === "/signup" || pathname === "/";
 
-  /*
-   * This happens on server only, ctx.req is available means it's being
-   * rendered on server. If we are on server and token is not available,
-   * means user is not logged in.
-   */
-  if (ctx.req && !token) {
-    ctx.res.writeHead(302, { Location: "/login" });
-    ctx.res.end();
-    return;
+  if (token) {
+    const { role } = jwtDecode(token);
+    const isTokenPath = pathname.indexOf(routes[role]) !== -1;
+    if (!isTokenPath) {
+      if (ctx.req) {
+        ctx.res.writeHead(302, { Location: routes[role] });
+        ctx.res.end();
+      } else {
+        Router.push(routes[role]);
+      }
+    }
   }
 
-  // We already checked for server. This should only happen on client.
   if (!token) {
-    Router.push("/login");
+    if (!isLogin) {
+      if (ctx.req) {
+        ctx.res.writeHead(302, { Location: "/login" });
+        ctx.res.end();
+      } else {
+        Router.push("/login");
+      }
+    }
   }
 
   return token;
