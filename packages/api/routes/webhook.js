@@ -136,7 +136,8 @@ const saveOrUpdateMesure = async mesureDatas => {
   };
 
   const [mesure] = await Mesures.query().where({
-    numero_rg: data.numero_rg
+    numero_rg: data.numero_rg,
+    ti_id: ti.id
   });
   if (!mesure) {
     await Mesures.query().insert(data);
