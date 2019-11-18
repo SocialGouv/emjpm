@@ -27,6 +27,7 @@ Object {
 exports[`should add mandataire tis 2`] = `
 Array [
   Object {
+    "bcc": undefined,
     "from": "ne-pas-repondre@emjpm.gouv.fr",
     "html": "
 Bonjour la super team eMJPM :),<br />
@@ -59,6 +60,7 @@ Bonne journée :)
 exports[`should add user tis 2`] = `
 Array [
   Object {
+    "bcc": undefined,
     "from": "ne-pas-repondre@emjpm.gouv.fr",
     "html": "
 Bonjour la super team eMJPM :),<br />
@@ -91,6 +93,7 @@ Bonne journée :)
 exports[`should send an email with good values 1`] = `
 Array [
   Object {
+    "bcc": undefined,
     "from": "ne-pas-repondre@emjpm.gouv.fr",
     "html": "
 Bonjour la super team eMJPM :),<br />
