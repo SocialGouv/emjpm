@@ -11,6 +11,9 @@ const { Mesures } = require("../model/Mesures");
 const { Department } = require("../model/Departments");
 const { reservationEmail } = require("../email/reservation-email");
 const { validationEmail } = require("../email/validation-email");
+const { mesuresImportEmail } = require("../email/mesures-import-email");
+
+const { getRegionCode } = require("../util/DepartementUtil");
 
 const { raw } = require("objection");
 
@@ -99,22 +102,26 @@ const updateMandataireMesureStates = async mandataire_id => {
 };
 
 // TODO(tglatt): move db queries in other file
-const saveOrUpdateMesure = async mesureDatas => {
-  const code = mesureDatas.code_postal.substring(0, 2);
+const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
+  const regionCode = getRegionCode(mesureDatas.code_postal);
   const department = await Department.query().findOne({
-    code
+    code: regionCode
   });
   if (!department) {
-    throw new Error(`no departement found with code ${code}`);
+    importSummary.errors.push(
+      `Aucun département ne correspond au code ${regionCode}`
+    );
+    return;
   }
 
   const ti = await Tis.query().findOne({
     siret: mesureDatas.tribunal_siret
   });
   if (!ti) {
-    throw new Error(
-      `ti with siret ${mesureDatas.tribunal_siret} does not exist.`
+    importSummary.errors.push(
+      `Aucun tribunal ne correspond au SIRET ${mesureDatas.tribunal_siret}`
     );
+    return;
   }
 
   const data = {
@@ -134,20 +141,20 @@ const saveOrUpdateMesure = async mesureDatas => {
   };
 
   const [mesure] = await Mesures.query().where({
-    numero_rg: data.numero_rg
+    numero_rg: data.numero_rg,
+    ti_id: ti.id
   });
   if (!mesure) {
     await Mesures.query().insert(data);
+    ++importSummary.creationNumber;
   } else if (mesure.mandataire_id === data.mandataire_id) {
     await Mesures.query()
       .findById(mesure.id)
       .patch(data);
+    ++importSummary.updateNumber;
   } else {
-    // TODO(@tglatt): send event with Sentry
-
-    // eslint-disable-next-line no-console
-    console.log(
-      `mesure ${mesure.numero_rg} is owned by mandataire ${mesure.mandataire_id} or antenne ${mesure.antenne_id}`
+    importSummary.errors.push(
+      `La mesure avec le numéro RG ${mesure.numero_rg} et le tribunal de ${ti.ville} est gérée par un autre MJPM.`
     );
   }
 };
@@ -163,6 +170,9 @@ router.post("/mesures-import", async function(req, res) {
   if (!mesuresImport) {
     throw new Error(`mesures_import with id ${importId} does not exist.`);
   }
+
+  const user = await User.query().findById(mesuresImport.user_id);
+
   const mandataire = await Mandataire.query().findOne({
     user_id: mesuresImport.user_id
   });
@@ -172,14 +182,23 @@ router.post("/mesures-import", async function(req, res) {
     );
   }
 
+  const importSummary = {
+    creationNumber: 0,
+    updateNumber: 0,
+    errors: []
+  };
+
   // save or update mesures
   for (const data of mesuresImport.content) {
-    await saveOrUpdateMesure({
-      ...data,
-      date_ouverture: toDate(data.date_ouverture),
-      mandataire_id: mandataire.id,
-      status: "Mesure en cours"
-    });
+    await saveOrUpdateMesure(
+      {
+        ...data,
+        date_ouverture: toDate(data.date_ouverture),
+        mandataire_id: mandataire.id,
+        status: "Mesure en cours"
+      },
+      importSummary
+    );
   }
 
   await updateMandataireMesureStates(mandataire.id);
@@ -188,6 +207,8 @@ router.post("/mesures-import", async function(req, res) {
   await MesuresImport.query()
     .findById(importId)
     .patch({ status: "IMPORT", processed_at: new Date() });
+
+  mesuresImportEmail(user.email, importSummary);
 
   res.json({ success: true });
 });

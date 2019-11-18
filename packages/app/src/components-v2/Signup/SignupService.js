@@ -6,6 +6,7 @@ import React, { Fragment, useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
+import { getRegionCode } from "../../util/departements";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
@@ -25,8 +26,8 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
   const selectDepartement = option => {
     const selectedDepartement = departementDatas.find(data => data.id === option.value);
     const departementalServices = serviceDatas.filter(data => {
-      const code = data.code_postal.substring(0, 2);
-      return code === selectedDepartement.code;
+      const regionCode = getRegionCode(data.code_postal);
+      return regionCode === selectedDepartement.code;
     });
     setServiceOptions(
       departementalServices.map(data => ({

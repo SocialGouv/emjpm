@@ -5,11 +5,13 @@ const { ServiceTis } = require("../../../model/ServiceTis");
 const { ServiceAdmin } = require("../../../model/ServiceAdmin");
 const { UserAntenne } = require("../../../model/UserAntenne");
 
+const { getRegionCode } = require("../../../util/DepartementUtil");
+
 exports.createService = async body => {
-  const code_postal = body.code_postal;
+  const regionCode = getRegionCode(body.code_postal);
 
   const department = await Department.query()
-    .where("code", code_postal.substring(0, 2))
+    .where("code", regionCode)
     .limit(1)
     .first();
 
