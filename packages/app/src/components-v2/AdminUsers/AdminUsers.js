@@ -1,8 +1,10 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Card } from "@socialgouv/emjpm-ui-core";
+import Router from "next/router";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { startImpersonate } from "../../business";
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
 import { ACTIVATE_USER } from "./mutations";
@@ -75,6 +77,11 @@ const RowItem = ({ item }) => {
     });
   };
 
+  const doImpersonate = async () => {
+    const url = await startImpersonate(id);
+    Router.push(url, url);
+  };
+
   const DetailComponent = getDetail(type);
 
   return (
@@ -108,6 +115,18 @@ const RowItem = ({ item }) => {
               {isActive ? "Bloquer" : "Activer"}
             </Button>
           </Box>
+          {isActive && (
+            <Box mr="1" width="120px">
+              <Button
+                sx={activateButtonStyle(isActive)}
+                width="130px"
+                onClick={doImpersonate}
+                variant="outline"
+              >
+                {"Impersonate"}
+              </Button>
+            </Box>
+          )}
         </Flex>
       </Card>
     </>
