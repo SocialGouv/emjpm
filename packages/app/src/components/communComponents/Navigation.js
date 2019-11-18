@@ -26,10 +26,10 @@ const Navigation = ({ logout, inscription }) => (
       <div
         style={{
           background: "white",
-          display: "flex",
-          flexDirection: "row",
           padding: "7px 0",
-          textAlign: "left"
+          textAlign: "left",
+          display: "flex",
+          flexDirection: "row"
         }}
       >
         <div style={{ flex: "0 0 50px" }} />
@@ -37,15 +37,15 @@ const Navigation = ({ logout, inscription }) => (
           <a href="https://emjpm.fabrique.social.gouv.fr">
             <img
               src={"/static/images/logo_emjpm_num.png"}
-              style={{ maxWidth: 350, width: "60%" }}
+              style={{ width: "60%", maxWidth: 350 }}
               alt="Accueil de eMJPM"
             />
           </a>
         </div>
-        <div style={{ flex: "0 0 300px", paddingRight: 10, textAlign: "right" }}>
+        <div style={{ flex: "0 0 300px", textAlign: "right", paddingRight: 10 }}>
           <a
             href="https://emjpm-doc.num.social.gouv.Fr"
-            style={{ cursor: "pointer", marginRight: 10, marginTop: 10 }}
+            style={{ cursor: "pointer", marginTop: 10, marginRight: 10 }}
           >
             Guide d&apos;utilisation
           </a>
@@ -56,8 +56,8 @@ const Navigation = ({ logout, inscription }) => (
               style={{
                 color: "#007bff",
                 cursor: "pointer",
-                display: "inline-block",
-                marginTop: 10
+                marginTop: 10,
+                display: "inline-block"
               }}
             >
               Inscription
@@ -70,8 +70,8 @@ const Navigation = ({ logout, inscription }) => (
               style={{
                 color: "#007bff",
                 cursor: "pointer",
-                display: "inline-block",
-                marginTop: 10
+                marginTop: 10,
+                display: "inline-block"
               }}
             >
               Se déconnecter

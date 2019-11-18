@@ -52,8 +52,8 @@ class MandataireIndex extends React.Component {
 // plug redux stuff
 
 const rootReducer = combineReducers({
-  mandataire: mandataireReducer,
   mesures: mesuresReducer,
+  mandataire: mandataireReducer,
   modal
 });
 
