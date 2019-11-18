@@ -21,3 +21,9 @@ rules:
   sort-keys-fix/sort-keys-fix: 
   - error
   - asc
+
+overrides:
+  - files:
+    - src/components/**/*.js
+    rules:
+      sort-keys-fix/sort-keys-fix: off
