@@ -17,20 +17,20 @@ export const fetchProfiles = () => apiFetch(`/mandataires/all`);
 
 const updateMandataireApi = data =>
   apiFetch(`/mandataires/1`, {
+    method: "PUT",
     body: JSON.stringify({
       ...data,
+      zip: data.zip || "",
+      genre: data.genre || "",
+      secretariat: data.secretariat || false,
+      nb_secretariat: data.nb_secretariat || 0,
+      telephone: data.telephone || "",
+      telephone_portable: data.telephone_portable || "",
       adresse: data.adresse || "",
       code_postal: data.code_postal || "",
       dispo_max: data.dispo_max || 0,
-      genre: data.genre || "",
-      nb_secretariat: data.nb_secretariat || 0,
-      secretariat: data.secretariat || false,
-      telephone: data.telephone || "",
-      telephone_portable: data.telephone_portable || "",
-      ville: data.ville || "",
-      zip: data.zip || ""
-    }),
-    method: "PUT"
+      ville: data.ville || ""
+    })
   });
 
 const fetchAllTis = () => apiFetch("/mandataires/tis");
@@ -73,34 +73,34 @@ export const changeMandataireId = data => dispatch => {
 
 /* ----------- PLAIN ACTIONS  */
 
-export const changeMandataireIdDisplay = data => ({ data, type: CHANGE_MANDATAIRE_ID });
+export const changeMandataireIdDisplay = data => ({ type: CHANGE_MANDATAIRE_ID, data });
 
 export const userProfileUpdated = data => ({
-  data,
-  type: USER_PROFILE_UPDATED
+  type: USER_PROFILE_UPDATED,
+  data
 });
 
 export const changeMandataireIdDisplayInit = data => ({
-  data,
-  type: CHANGE_MANDATAIRE_ID_INIT
+  type: CHANGE_MANDATAIRE_ID_INIT,
+  data
 });
 
 export const mandataireProfileUpdated = data => ({
-  data,
-  type: MANDATAIRE_PROFILE_UPDATED
+  type: MANDATAIRE_PROFILE_UPDATED,
+  data
 });
 
 export const finessUpdated = data => ({
-  data,
-  type: FINESS_UPDATED
+  type: FINESS_UPDATED,
+  data
 });
 
 export const tisUpdated = data => ({
-  data,
-  type: TIS_UPDATED
+  type: TIS_UPDATED,
+  data
 });
 
 export const mandataireProfilesUpdated = data => ({
-  data,
-  type: MANDATAIRE_PROFILES_UPDATED
+  type: MANDATAIRE_PROFILES_UPDATED,
+  data
 });

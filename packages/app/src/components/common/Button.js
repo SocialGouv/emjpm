@@ -2,10 +2,6 @@ import { lighten } from "polished";
 import styled from "styled-components";
 
 const variants = {
-  black: {
-    background: "#444444",
-    backgroundHover: "#222222"
-  },
   default: {
     background: "#43b04a",
     backgroundHover: "#69a65d"
@@ -13,6 +9,10 @@ const variants = {
   error: {
     background: "#da4747",
     backgroundHover: "#ff2e00"
+  },
+  black: {
+    background: "#444444",
+    backgroundHover: "#222222"
   }
 };
 

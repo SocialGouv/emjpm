@@ -15,15 +15,15 @@ const {
 const doForgotPassword = formData => {
   const url = `${API_URL}/auth/reset_password`;
   return fetch(url, {
-    body: JSON.stringify({
-      ...formData,
-      token: parse(location.search).token
-    }),
     credentials: "include",
+    method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    method: "POST"
+    body: JSON.stringify({
+      ...formData,
+      token: parse(location.search).token
+    })
   }).then(res => {
     if (res.status >= 400) {
       throw new Error(res.status);
@@ -33,28 +33,28 @@ const doForgotPassword = formData => {
 };
 
 const schema = {
-  properties: {
-    newPassword: { default: "", title: "", type: "string" },
-    verifyPassword: { default: "", title: "", type: "string" }
-  },
+  type: "object",
   required: ["newPassword", "verifyPassword"],
-  type: "object"
+  properties: {
+    newPassword: { type: "string", title: "", default: "" },
+    verifyPassword: { type: "string", title: "", default: "" }
+  }
 };
 
 const uiSchema = {
   newPassword: {
+    "ui:placeholder": "Nouveau mot de passe",
+    "ui:widget": "password",
     "ui:options": {
       label: false
-    },
-    "ui:placeholder": "Nouveau mot de passe",
-    "ui:widget": "password"
+    }
   },
   verifyPassword: {
+    "ui:placeholder": "Vérification mot de passe",
+    "ui:widget": "password",
     "ui:options": {
       label: false
-    },
-    "ui:placeholder": "Vérification mot de passe",
-    "ui:widget": "password"
+    }
   }
 };
 
@@ -118,10 +118,10 @@ class ResetPassword extends React.Component {
     super();
     this.state = {
       error: null,
+      status: null,
       formData: {},
-      modalContent: "",
       showModal: false,
-      status: null
+      modalContent: ""
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -139,7 +139,7 @@ class ResetPassword extends React.Component {
   }
 
   handleOpenModal(content) {
-    this.setState({ modalContent: content, showModal: true });
+    this.setState({ showModal: true, modalContent: content });
   }
 
   handleCloseModal() {
@@ -150,8 +150,8 @@ class ResetPassword extends React.Component {
     this.setState(
       {
         error: null,
-        formData,
-        status: "loading"
+        status: "loading",
+        formData
       },
       () => {
         ReactPiwik.push(["trackEvent", "has reset his/her password", formData.email]);
@@ -159,14 +159,14 @@ class ResetPassword extends React.Component {
           .then(() => {
             this.handleOpenModal("Un email de confirmation vient de vous être envoyé");
             this.setState({
-              error: null,
-              status: "success"
+              status: "success",
+              error: null
             });
           })
           .catch(() => {
             this.setState({
-              error: "Vos mots de passe ne sont pas identiques",
-              status: "error"
+              status: "error",
+              error: "Vos mots de passe ne sont pas identiques"
             });
           });
       }

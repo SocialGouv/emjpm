@@ -4,11 +4,11 @@ import ReactPiwik from "react-piwik";
 
 const MANDATAIRE_INITIAL_STATE = {
   finess: [],
-  lastUpdate: null,
-  mandataireId: null,
   profiles: {},
-  service: {},
   tis: [],
+  service: {},
+  mandataireId: null,
+  lastUpdate: null,
   user: {}
 };
 
@@ -32,26 +32,26 @@ const mandataireReducer = (state = MANDATAIRE_INITIAL_STATE, action) => {
     case "CHANGE_MANDATAIRE_ID":
       return {
         ...state,
-        lastUpdate: new Date(),
-        mandataireId: action.data
+        mandataireId: action.data,
+        lastUpdate: new Date()
       };
     case "CHANGE_MANDATAIRE_ID_INIT":
       return {
         ...state,
-        lastUpdate: new Date(),
-        mandataireId: action.data.id
+        mandataireId: action.data.id,
+        lastUpdate: new Date()
       };
     case "MANDATAIRE_PROFILES_UPDATED":
       return {
         ...state,
-        lastUpdate: new Date(),
-        profiles: action.data
+        profiles: action.data,
+        lastUpdate: new Date()
       };
     case "USER_PROFILE_UPDATED":
       return {
         ...state,
-        lastUpdate: new Date(),
-        user: action.data
+        user: action.data,
+        lastUpdate: new Date()
       };
     case "FINESS_UPDATED":
       return {

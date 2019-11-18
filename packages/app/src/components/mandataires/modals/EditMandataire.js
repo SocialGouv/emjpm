@@ -9,6 +9,39 @@ import Layout from "../../communComponents/ModalLayout";
 import { updateMandataire } from "../actions/mandataire";
 
 const schema = {
+  title: "Modifier mes informations",
+  type: "object",
+  required: ["nom", "prenom", "email", "dispo_max"],
+  properties: {
+    nom: { type: "string", title: "Nom", default: "" },
+    prenom: { type: "string", title: "Prénom", default: "" },
+    genre: {
+      type: "string",
+      title: "Genre",
+      enum: ["F", "H"],
+      enumNames: ["Femme", "Homme"]
+    },
+    telephone: { type: "string", title: "Téléphone", default: "" },
+    telephone_portable: {
+      type: "string",
+      title: "Téléphone Portable",
+      default: ""
+    },
+    email: { type: "string", title: "Adresse email", default: "" },
+    adresse: { type: "string", title: "Rue", default: "" },
+    code_postal: { type: "string", title: "Code Postal", default: "" },
+    ville: { type: "string", title: "Commune", default: "" },
+    dispo_max: {
+      type: "integer",
+      title: "Nombre total de mesures souhaitées"
+    },
+    secretariat: {
+      type: "boolean",
+      title: "Secretariat",
+      enumNames: ["Oui", "Non"]
+    },
+    zip: { type: "string", title: "Informations à destination des magistrats" }
+  },
   dependencies: {
     secretariat: {
       oneOf: [
@@ -21,82 +54,34 @@ const schema = {
         },
         {
           properties: {
-            nb_secretariat: {
-              default: "",
-              title: "Secrétariat : nombre d'ETP( Si temps partiel à 80% mettre 0.8)",
-              type: "number"
-            },
             secretariat: {
               enum: [true]
+            },
+            nb_secretariat: {
+              type: "number",
+              title: "Secrétariat : nombre d'ETP( Si temps partiel à 80% mettre 0.8)",
+              default: ""
             }
           }
         }
       ]
     }
-  },
-  properties: {
-    adresse: { default: "", title: "Rue", type: "string" },
-    code_postal: { default: "", title: "Code Postal", type: "string" },
-    dispo_max: {
-      title: "Nombre total de mesures souhaitées",
-      type: "integer"
-    },
-    email: { default: "", title: "Adresse email", type: "string" },
-    genre: {
-      enum: ["F", "H"],
-      enumNames: ["Femme", "Homme"],
-      title: "Genre",
-      type: "string"
-    },
-    nom: { default: "", title: "Nom", type: "string" },
-    prenom: { default: "", title: "Prénom", type: "string" },
-    secretariat: {
-      enumNames: ["Oui", "Non"],
-      title: "Secretariat",
-      type: "boolean"
-    },
-    telephone: { default: "", title: "Téléphone", type: "string" },
-    telephone_portable: {
-      default: "",
-      title: "Téléphone Portable",
-      type: "string"
-    },
-    ville: { default: "", title: "Commune", type: "string" },
-    zip: { title: "Informations à destination des magistrats", type: "string" }
-  },
-  required: ["nom", "prenom", "email", "dispo_max"],
-  title: "Modifier mes informations",
-  type: "object"
+  }
 };
 
 const uiSchema = {
-  adresse: {
-    "ui:placeholder": "Rue"
-  },
-  code_postal: {
-    "ui:placeholder": "Code Postal"
-  },
-
-  dispo_max: {
-    "ui:placeholder": "Nombre de mesures souhaitées"
-  },
-  email: {
-    "ui:placeholder": "Adresse email"
-  },
-  genre: {
-    "ui:placeholder": "Genre"
-  },
-  nb_secretariat: {
-    "ui:placeholder": "Secrétariat : nombre d'ETP"
+  secretariat: {
+    "ui:widget": "select"
   },
   nom: {
     "ui:placeholder": "Nom"
   },
+
   prenom: {
     "ui:placeholder": "Prénom"
   },
-  secretariat: {
-    "ui:widget": "select"
+  genre: {
+    "ui:placeholder": "Genre"
   },
   telephone: {
     "ui:placeholder": "Téléphone"
@@ -104,8 +89,23 @@ const uiSchema = {
   telephone_portable: {
     "ui:placeholder": "Téléphone Portable"
   },
+  email: {
+    "ui:placeholder": "Adresse email"
+  },
+  adresse: {
+    "ui:placeholder": "Rue"
+  },
+  code_postal: {
+    "ui:placeholder": "Code Postal"
+  },
   ville: {
     "ui:placeholder": "Commune"
+  },
+  dispo_max: {
+    "ui:placeholder": "Nombre de mesures souhaitées"
+  },
+  nb_secretariat: {
+    "ui:placeholder": "Secrétariat : nombre d'ETP"
   },
   zip: {
     "ui:widget": "textarea"
@@ -114,19 +114,19 @@ const uiSchema = {
 
 const EditMandataire = ({ show, handleHide, formData, onSubmit }) => {
   const cleanData = {
+    nom: formData.nom || "",
+    prenom: formData.prenom || "",
+    email: formData.email || "",
+    zip: formData.zip || "",
+    genre: formData.genre || "",
+    secretariat: formData.secretariat || false,
+    nb_secretariat: formData.nb_secretariat || 0,
+    telephone: formData.telephone || "",
+    telephone_portable: formData.telephone_portable || "",
     adresse: formData.adresse || "",
     code_postal: formData.code_postal || "",
     dispo_max: formData.dispo_max || 0,
-    email: formData.email || "",
-    genre: formData.genre || "",
-    nb_secretariat: formData.nb_secretariat || 0,
-    nom: formData.nom || "",
-    prenom: formData.prenom || "",
-    secretariat: formData.secretariat || false,
-    telephone: formData.telephone || "",
-    telephone_portable: formData.telephone_portable || "",
-    ville: formData.ville || "",
-    zip: formData.zip || ""
+    ville: formData.ville || ""
   };
 
   return (
@@ -150,4 +150,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   null,
   mapDispatchToProps
-)(connectModal({ destroyOnHide: true, name: "EditMandataire" })(EditMandataire));
+)(connectModal({ name: "EditMandataire", destroyOnHide: true })(EditMandataire));
