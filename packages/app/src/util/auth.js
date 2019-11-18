@@ -59,7 +59,8 @@ export const withAuthSync = WrappedComponent =>
 const routes = {
   admin: "/admin",
   direction: "/direction",
-  mandataires: "/magistrats",
+  individuel: "/mandataires",
+  prepose: "/mandataires",
   service: "/service",
   ti: "/magistrats"
 };
@@ -70,14 +71,21 @@ export const auth = ctx => {
   const isLogin = pathname === "/login" || pathname === "/signup" || pathname === "/";
 
   if (token) {
-    const { role } = jwtDecode(token);
+    const { url, role } = jwtDecode(token);
     const isTokenPath = pathname.indexOf(routes[role]) !== -1;
-    if (!isTokenPath) {
+    if (!url) {
+      if (ctx.req) {
+        ctx.res.writeHead(302, { Location: "/login" });
+        ctx.res.end();
+      } else {
+        Router.push("/login", "/login");
+      }
+    } else if (!isTokenPath) {
       if (ctx.req) {
         ctx.res.writeHead(302, { Location: routes[role] });
         ctx.res.end();
       } else {
-        Router.push(routes[role]);
+        Router.push(routes[role], routes[role]);
       }
     }
   }
@@ -88,7 +96,7 @@ export const auth = ctx => {
         ctx.res.writeHead(302, { Location: "/login" });
         ctx.res.end();
       } else {
-        Router.push("/login");
+        Router.push("/login", "/login");
       }
     }
   }
