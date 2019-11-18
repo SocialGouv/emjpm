@@ -4,8 +4,8 @@ import React from "react";
 // useful for dynamic loading components
 class PromiseState extends React.Component {
   state = {
-    data: null,
-    status: "idle"
+    status: "idle",
+    data: null
   };
   load = () => {
     this.setState(
@@ -17,14 +17,14 @@ class PromiseState extends React.Component {
           .getPromise()
           .then(data => {
             this.setState({
-              data,
-              status: "success"
+              status: "success",
+              data
             });
           })
           .catch(e => {
             this.setState({
-              data: e,
-              status: "error"
+              status: "error",
+              data: e
             });
           });
       }

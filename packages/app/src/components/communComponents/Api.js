@@ -9,14 +9,14 @@ const {
 } = getConfig();
 
 // forceLogin: redirect user to /login when receiving a 401
-const apiFetch = (route, params, options = { apiVersion: "v1", forceLogin: true }) => {
+const apiFetch = (route, params, options = { forceLogin: true, apiVersion: "v1" }) => {
   const { apiVersion, forceLogin } = options;
   const apiVersionFragment = apiVersion ? `/api/${apiVersion}` : "";
   const url = `${API_URL}${apiVersionFragment}${route}`;
 
   const fetchParams = {
-    credentials: "include",
     method: "GET",
+    credentials: "include",
     ...params
   };
 
@@ -79,10 +79,10 @@ const apiFetch = (route, params, options = { apiVersion: "v1", forceLogin: true 
 // destructuring as a whitelist
 export const updateUser = ({ id, active }) =>
   apiFetch(`/admin/user/${id}`, {
+    method: "PUT",
     body: JSON.stringify({
       active
-    }),
-    method: "PUT"
+    })
   }).catch(error => {
     /* eslint-disable no-console */
     console.error(error);

@@ -15,34 +15,34 @@ export const MESURE_REACTIVATED = "MESURE_REACTIVATED";
 
 const updateMesureApi = data =>
   apiFetch(`/mandataires/${data.mandataire_id}/mesures/${data.id}`, {
-    body: JSON.stringify(data),
-    method: "PUT"
+    method: "PUT",
+    body: JSON.stringify(data)
   });
 
 const closeMesureApi = data =>
   apiFetch(`/mandataires/${data.mandataire_id}/mesures/${data.id}`, {
+    method: "PUT",
     body: JSON.stringify({
       ...data,
       status: "Eteindre mesure"
-    }),
-    method: "PUT"
+    })
   });
 const attenteMesureApi = data =>
   apiFetch(`/mandataires/${data.mandataire_id}/mesures/${data.id}`, {
+    method: "PUT",
     body: JSON.stringify({
       ...data,
       status: "Mesure en cours"
-    }),
-    method: "PUT"
+    })
   });
 
 const reactivateMesureApi = data =>
   apiFetch(`/mandataires/${data.mandataire_id}/mesures/${data.id}`, {
+    method: "PUT",
     body: JSON.stringify({
-      extinction: null,
-      status: "Mesure en cours"
-    }),
-    method: "PUT"
+      status: "Mesure en cours",
+      extinction: null
+    })
   }).then(() =>
     // todo: move to trigger
     apiFetch(`/mandataires/1/capacite`, {
@@ -53,19 +53,19 @@ const reactivateMesureApi = data =>
 // todo : better API
 const createMesureApi = data =>
   apiFetch(`/mandataires/1/mesures`, {
+    method: "POST",
     body: JSON.stringify({
       ...data,
       status: "Mesure en cours"
-    }),
-    method: "POST"
+    })
   });
 
 const fetchUpdateMesureAttente = data =>
   apiFetch(`/mandataires/${data.mandataire_id}/mesures-en-attente`, {
+    method: "PUT",
     body: JSON.stringify({
       ...data
-    }),
-    method: "PUT"
+    })
   });
 // -------- ACTIONS CREATORS
 
@@ -160,26 +160,26 @@ export const createMesure = () => ({
 });
 
 export const mesureCreated = data => ({
-  data,
-  type: MESURE_CREATED
+  type: MESURE_CREATED,
+  data
 });
 
 export const mesureCreatedError = message => ({
-  message,
-  type: MESURE_CREATED_ERROR
+  type: MESURE_CREATED_ERROR,
+  message
 });
 
 export const mesureUpdated = data => ({
-  data,
-  type: MESURE_UPDATED
+  type: MESURE_UPDATED,
+  data
 });
 
 export const mesureClosed = data => ({
-  data,
-  type: MESURE_CLOSED
+  type: MESURE_CLOSED,
+  data
 });
 
 export const mesureReactivated = data => ({
-  data,
-  type: MESURE_REACTIVATED
+  type: MESURE_REACTIVATED,
+  data
 });

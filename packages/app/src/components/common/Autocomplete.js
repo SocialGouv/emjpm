@@ -4,18 +4,18 @@ import React from "react";
 import ReactAutocomplete from "react-autocomplete";
 
 const DEFAULT_FUSE_OPTIONS = {
-  includeMatches: true,
-  includeScore: true,
-  keys: ["nom"],
+  shouldSort: true,
+  tokenize: true,
   matchAllTokens: true,
+  includeMatches: true,
   //findAllMatches: true,
-  maxPatternLength: 16,
-  minMatchCharLength: 2,
+  includeScore: true,
+  threshold: 0.5,
   //location: 0,
   //distance: 100,
-  shouldSort: true,
-  threshold: 0.5,
-  tokenize: true
+  maxPatternLength: 16,
+  minMatchCharLength: 2,
+  keys: ["nom"]
 };
 
 // init a fuse instance
@@ -44,7 +44,7 @@ class FuseHighLighter extends React.Component {
     return (
       <div
         onClick={onClick}
-        style={{ background: isHighlighted ? "lightgray" : "white", cursor: "pointer" }}
+        style={{ cursor: "pointer", background: isHighlighted ? "lightgray" : "white" }}
         key={html}
         dangerouslySetInnerHTML={{
           __html: newHtml || html
@@ -56,8 +56,8 @@ class FuseHighLighter extends React.Component {
 // just wrap react-autocomplete state and internal event for some props.component(default=ReactAutocomplete)
 class Autocomplete extends React.Component {
   state = {
-    items: [],
-    value: ""
+    value: "",
+    items: []
   };
   onSelect = (value, obj) => {
     if (this.props.onSelect) {
@@ -80,7 +80,7 @@ class Autocomplete extends React.Component {
       .search(value)
       .filter(q => q.matches.length)
       .slice(0, 25);
-    this.setState({ items, value });
+    this.setState({ value, items });
   };
   componentDidMount() {
     // instantiate fuse index
@@ -92,12 +92,12 @@ class Autocomplete extends React.Component {
     return (
       <Component
         menuStyle={{
-          background: "white",
+          zIndex: 99999,
+          position: "absolute",
           border: "1px solid silver",
           borderTop: 0,
-          padding: 5,
-          position: "absolute",
-          zIndex: 99999
+          background: "white",
+          padding: 5
         }}
         {...this.props}
         items={this.state.items}
@@ -118,9 +118,9 @@ class Autocomplete extends React.Component {
   }
 }
 Autocomplete.propTypes = {
+  onSelect: PropTypes.func.isRequired,
   component: PropTypes.func.isRequired,
   getLabel: PropTypes.func.isRequired,
-  onSelect: PropTypes.func.isRequired,
   resetOnSelect: PropTypes.bool.isRequired
 };
 Autocomplete.defaultProps = {

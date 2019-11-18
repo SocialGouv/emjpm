@@ -10,7 +10,7 @@ import { reactivateMesure } from "../actions/mesures";
 const ReactivateMesure = ({ show, handleHide, onSubmit, id, mandataire_id }) => {
   return (
     <Layout show={show} handleHide={handleHide}>
-      <div style={{ marginTop: 50, textAlign: "center" }}>
+      <div style={{ textAlign: "center", marginTop: 50 }}>
         <h3>Voulez-vous réactiver la mesure ? </h3>
         <br />
         <br />
@@ -38,4 +38,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   null,
   mapDispatchToProps
-)(connectModal({ destroyOnHide: true, name: "ReactivateMesure" })(ReactivateMesure));
+)(connectModal({ name: "ReactivateMesure", destroyOnHide: true })(ReactivateMesure));
