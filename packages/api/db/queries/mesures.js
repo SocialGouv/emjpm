@@ -1,4 +1,5 @@
 const knex = require("../knex.js");
+const { getRegionCode } = require("../../util/DepartementUtil");
 
 const getAllMesuresByMandataires = ti_id =>
   knex
@@ -303,8 +304,8 @@ const getAllMesuresEteinte = mandataireID =>
     status: "Eteindre mesure"
   });
 
-const getDepartementByCodePostal = async code_postal => {
-  const codePostalDepartement = await code_postal.substr(0, 2);
+const getDepartementByCodePostal = code_postal => {
+  const codePostalDepartement = getRegionCode(code_postal);
   return knex("departements")
     .where("code", "like", `${codePostalDepartement}%`)
     .first();

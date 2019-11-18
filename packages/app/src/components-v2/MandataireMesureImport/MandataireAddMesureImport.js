@@ -49,11 +49,11 @@ const ResultMessage = ({ result, restart }) => {
           <Text
             m={2}
             fontSize={2}
-          >{`${mesures.length} mesures ont été importées ou mises à jour`}</Text>
+          >{`${mesures.length} mesures vont être importées ou mises à jour. Vous allez recevoir un email dans quelques instants.`}</Text>
           <Text
             m={2}
             fontSize={2}
-          >{`${errors.length} mesures n'ont pas été importées ou mises à jour. Les erreurs sont indiquées ci-dessous.`}</Text>
+          >{`${errors.length} mesures ne seront pas importées ou mises à jour. Les erreurs sont indiquées ci-dessous.`}</Text>
         </Flex>
         <RestartButton restart={restart} />
       </Flex>

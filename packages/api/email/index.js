@@ -21,14 +21,15 @@ if (smtpUser) {
   };
 }
 
-const sendEmail = (sendTo, subject, text, html) => {
+const sendEmail = (sendTo, subject, text, html, bcc) => {
   let transporter = nodemailer.createTransport(smtpConfig);
   let mailOptions = {
     from: smtpFrom,
     to: sendTo,
-    subject: subject,
-    text: text,
-    html: html
+    subject,
+    text,
+    html,
+    bcc
   };
   return transporter.sendMail(mailOptions);
 };
