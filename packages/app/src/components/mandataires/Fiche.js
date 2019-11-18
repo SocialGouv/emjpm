@@ -1,7 +1,7 @@
 import React from "react";
 import { Home, Info, Mail, Phone, Smartphone } from "react-feather";
 
-const iconStyle = { height: 22, marginRight: 10, width: 22 };
+const iconStyle = { width: 22, height: 22, marginRight: 10 };
 
 // fiche recap
 const FicheMandataire = ({
@@ -44,12 +44,12 @@ const FicheMandataire = ({
       <table style={{ width: 350 }} cellPadding={5}>
         <tbody style={{ fontSize: "1.1em" }}>
           <tr>
-            <td style={{ borderBottom: "1px solid silver", borderRight: "1px solid silver" }}>
+            <td style={{ borderRight: "1px solid silver", borderBottom: "1px solid silver" }}>
               <b>Nombre total de mesures souhaitées</b>
             </td>
             <td
               data-cy="fiche-manda-dispo-max"
-              style={{ borderBottom: "1px solid silver", textAlign: "center", width: 80 }}
+              style={{ textAlign: "center", borderBottom: "1px solid silver", width: 80 }}
             >
               {dispo_max || "-"}
             </td>

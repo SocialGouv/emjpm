@@ -97,13 +97,17 @@ const concat = (...strings) =>
 const COLUMNS = [
   {
     Header: "ID",
-    accessor: "id",
     id: "id",
+    accessor: "id",
+    width: 50,
     show: false,
-    style: { textAlign: "center", verticalAlign: "middle" },
-    width: 50
+    style: { textAlign: "center", verticalAlign: "middle" }
   },
   {
+    Header: "Date de décision",
+    id: "date_ouverture",
+    width: 140,
+    accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
     Cell(row) {
       return (
         <div>
@@ -111,13 +115,13 @@ const COLUMNS = [
         </div>
       );
     },
-    Header: "Date de décision",
-    accessor: d => format(d.date_ouverture, "YYYY-MM-DD"),
-    id: "date_ouverture",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 140
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Date de réservation",
+    id: "date_demande",
+    width: 300,
+    accessor: d => format(d.created_at, "YYYY-MM-DD"),
     Cell(row) {
       return (
         <div>
@@ -125,75 +129,75 @@ const COLUMNS = [
         </div>
       );
     },
-    Header: "Date de réservation",
-    accessor: d => format(d.created_at, "YYYY-MM-DD"),
-    id: "date_demande",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 300
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Professionnel",
-    accessor: d => (d.manda === "" ? d.nom : d.manda),
     id: "professionnel",
-    style: { alignSelf: "center", textAlign: "center" }
+    accessor: d => (d.manda === "" ? d.nom : d.manda),
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Mandataire",
-    accessor: d => d.mandataire_id,
     id: "mandataire_id",
-    style: { alignSelf: "center", textAlign: "center" }
+    accessor: d => d.mandataire_id,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Tribunal d'instance",
-    accessor: d => d.etablissement,
     id: "ti",
-    style: { alignSelf: "center", textAlign: "center" }
+    accessor: d => d.etablissement,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Résidence du majeur",
-    accessor: d => concat(d.code_postal ? d.code_postal : "", d.ville ? d.ville.toUpperCase() : ""),
     id: "residence",
+    accessor: d => concat(d.code_postal ? d.code_postal : "", d.ville ? d.ville.toUpperCase() : ""),
     style: { alignSelf: "center" }
   },
   {
     Header: "Type de mesure",
-    accessor: d => d.type,
     id: "type",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 150
+    width: 150,
+    accessor: d => d.type,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Genre",
-    accessor: d => d.civilite,
     id: "civilite",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 70
+    width: 70,
+    accessor: d => d.civilite,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Année de naissance",
+    id: "annee",
+    width: 80,
+    accessor: "annee",
     Cell(row) {
       return <div>{(row.row.annee && format(row.row.annee, "YYYY")) || null}</div>;
     },
-    Header: "Année de naissance",
-    accessor: "annee",
-    id: "annee",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 80
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Référence de la mesure",
-    accessor: "numero_dossier",
     id: "numero_dossier",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 80
+    width: 80,
+    accessor: "numero_dossier",
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Numéro RG",
-    accessor: d => d.numero_rg,
     id: "numero_rg",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 75
+    width: 75,
+    accessor: d => d.numero_rg,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Extinction",
+    id: "extinction",
+    width: 100,
+    accessor: d => format(d.extinction, "YYYY-MM-DD"),
     Cell(row) {
       return (
         <div>
@@ -201,103 +205,99 @@ const COLUMNS = [
         </div>
       );
     },
-    Header: "Extinction",
-    accessor: d => format(d.extinction, "YYYY-MM-DD"),
-    id: "extinction",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 100
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Fin de mandat",
-    accessor: d => d.reason_extinction,
     id: "reason_fin_de_mandat",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 75
+    width: 75,
+    accessor: d => d.reason_extinction,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Modifier",
+    id: "modifier",
     Cell(row) {
       return <CellEditMesureRedux row={row} />;
     },
-    Header: "Modifier",
-    id: "modifier",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 150
+    width: 150,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Cabinet",
-    accessor: d => d.cabinet,
     id: "cabinet",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 60
+    width: 60,
+    accessor: d => d.cabinet,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
     Header: "Statut",
-    accessor: d => d.status,
     id: "status",
-    style: { alignSelf: "center", textAlign: "center" }
+    accessor: d => d.status,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Fin de mandat",
+    id: "fin-mandat",
     Cell(row) {
       return <CellCloseMesureRedux row={row} />;
     },
-    Header: "Fin de mandat",
-    id: "fin-mandat",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 200
+    width: 200,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Supprimer la mesure",
+    id: "fin-mandat-attente",
     Cell(row) {
       return <CellCloseMesureAttenteRedux row={row} />;
     },
-    Header: "Supprimer la mesure",
-    id: "fin-mandat-attente",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 200
+    width: 200,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Réactiver",
+    id: "reactiver",
     Cell(row) {
       return <CellReactivateMesureRedux row={row} />;
     },
-    Header: "Réactiver",
-    id: "reactiver",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 200
+    width: 200,
+    style: { textAlign: "center", alignSelf: "center" }
   },
   {
+    Header: "Valider",
+    id: "valider",
     Cell(row) {
       return <CellValidationMesureRedux row={row} />;
     },
-    Header: "Valider",
-    id: "valider",
-    style: { alignSelf: "center", textAlign: "center" },
-    width: 200
+    width: 200,
+    style: { textAlign: "center", alignSelf: "center" }
   }
 ];
 
 const schema = {
+  type: "object",
   properties: {
     search: {
       type: "string"
     }
-  },
-  type: "object"
+  }
 };
 
 const uiSchema = {
   search: {
-    classNames: "input__search",
+    "ui:placeholder": "Référence de la mesure",
     "ui:options": {
       label: false
     },
-    "ui:placeholder": "Référence de la mesure"
+    classNames: "input__search"
   }
 };
 
 class TableMesures extends React.Component {
   state = {
     data: [],
-    loading: false,
-    newData: []
+    newData: [],
+    loading: false
   };
   fetchData = () => {
     if (!this.state.loading) {
@@ -348,9 +348,9 @@ class TableMesures extends React.Component {
             uiSchema={uiSchema}
             onSubmit={this.onChange}
             style={{
+              textAlign: "right",
               display: "flex",
-              flexDirection: "row",
-              textAlign: "right"
+              flexDirection: "row"
             }}
           >
             <Button
@@ -374,8 +374,8 @@ class TableMesures extends React.Component {
           multiSort={false}
           defaultSorted={[
             {
-              desc: true,
-              id: "date_ouverture"
+              id: "date_ouverture",
+              desc: true
             }
           ]}
           loading={loading}

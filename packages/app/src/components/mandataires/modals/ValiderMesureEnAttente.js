@@ -18,53 +18,53 @@ const Paragraphe = styled.p`
 `;
 
 const schema = {
+  type: "object",
+  required: ["date_ouverture", "code_postal", "ville", "residence"],
   properties: {
-    code_postal: { type: "string" },
     date_ouverture: {
-      format: "date",
-      type: "string"
+      type: "string",
+      format: "date"
     },
     residence: {
-      enum: residence,
-      type: "string"
+      type: "string",
+      enum: residence
     },
+    code_postal: { type: "string" },
     ville: { type: "string" }
-  },
-  required: ["date_ouverture", "code_postal", "ville", "residence"],
-  type: "object"
+  }
 };
 
 const uiSchema = {
+  date_ouverture: {
+    "ui:autofocus": true,
+    "ui:title": "Date de décision",
+    classNames: "input_mesure_ouverture",
+    "ui:options": {
+      label: true
+    }
+  },
   code_postal: {
+    "ui:placeholder": "Code Postal",
+    "ui:title": "Code Postal",
     classNames: "input_mesure_commune",
     "ui:options": {
       label: true
-    },
-    "ui:placeholder": "Code Postal",
-    "ui:title": "Code Postal"
+    }
   },
-  date_ouverture: {
-    classNames: "input_mesure_ouverture",
-    "ui:autofocus": true,
+  ville: {
+    "ui:placeholder": "Commune",
+    "ui:title": "Commune",
+    classNames: "input_mesure_commune",
     "ui:options": {
       label: true
-    },
-    "ui:title": "Date de décision"
+    }
   },
   residence: {
+    "ui:title": "Lieu de vie du majeur à protéger",
     classNames: "input_mesure_residence",
     "ui:options": {
       label: true
-    },
-    "ui:title": "Lieu de vie du majeur à protéger"
-  },
-  ville: {
-    classNames: "input_mesure_commune",
-    "ui:options": {
-      label: true
-    },
-    "ui:placeholder": "Commune",
-    "ui:title": "Commune"
+    }
   }
 };
 
@@ -102,4 +102,4 @@ const mapDispatchToProps = dispatch =>
 export default connect(
   null,
   mapDispatchToProps
-)(connectModal({ destroyOnHide: true, name: "ValiderMesureEnAttente" })(ValiderMesureEnAttente));
+)(connectModal({ name: "ValiderMesureEnAttente", destroyOnHide: true })(ValiderMesureEnAttente));

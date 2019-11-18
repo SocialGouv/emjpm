@@ -34,7 +34,7 @@ const MapMesures = ({ getPromise, center = [48.866667, 2.333333] }) => (
     render={({ status, result }) => (
       <React.Fragment>
         {status === "success" && (
-          <Map center={center} zoom={9} style={{ height: "70vh", padding: 0, width: "100%" }}>
+          <Map center={center} zoom={9} style={{ width: "100%", height: "70vh", padding: 0 }}>
             <Attribution />
             {result[0] &&
               result[0].map((marker, i) => <MesureMarker key={marker.id + "" + i} {...marker} />)}

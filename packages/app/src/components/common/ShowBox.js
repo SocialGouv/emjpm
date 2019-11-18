@@ -55,12 +55,12 @@ export const Alert = ({ className, Icon, message, updateIndexIndi }) =>
     <div
       className={`alert ${className || ""}`}
       role="alert"
-      style={{ borderRadius: "0px", fontSize: "1.2em", marginTop: 10 }}
+      style={{ marginTop: 10, fontSize: "1.2em", borderRadius: "0px" }}
     >
       <Icon
         style={{
-          marginRight: 10,
-          verticalAlign: "middle"
+          verticalAlign: "middle",
+          marginRight: 10
         }}
       />{" "}
       {message}{" "}

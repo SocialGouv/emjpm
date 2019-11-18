@@ -14,12 +14,12 @@ const {
 export const doForgotPassword = formData => {
   const url = `${API_URL}/auth/forgot_password`;
   return fetch(url, {
-    body: JSON.stringify(formData),
     credentials: "include",
+    method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    method: "POST"
+    body: JSON.stringify(formData)
   }).then(res => {
     if (res.status > 400) {
       throw new Error(res.status);
@@ -29,19 +29,19 @@ export const doForgotPassword = formData => {
 };
 
 const schema = {
-  properties: {
-    email: { default: "", title: "", type: "string" }
-  },
+  type: "object",
   required: ["email"],
-  type: "object"
+  properties: {
+    email: { type: "string", title: "", default: "" }
+  }
 };
 
 const uiSchema = {
   email: {
+    "ui:placeholder": "email",
     "ui:options": {
       label: false
-    },
-    "ui:placeholder": "email"
+    }
   }
 };
 
@@ -107,10 +107,10 @@ export const ForgotPasswordView = ({ formData, onSubmit, error, status }) => (
 class ForgotPassword extends React.Component {
   state = {
     error: null,
+    status: null,
     formData: {},
-    modalContent: "",
     showModal: false,
-    status: null
+    modalContent: ""
   };
   componentDidMount() {
     // eslint-disable-next-line react/no-find-dom-node
@@ -130,7 +130,7 @@ class ForgotPassword extends React.Component {
   }
 
   handleOpenModal(content) {
-    this.setState({ modalContent: content, showModal: true });
+    this.setState({ showModal: true, modalContent: content });
   }
 
   handleCloseModal() {
@@ -141,8 +141,8 @@ class ForgotPassword extends React.Component {
     this.setState(
       {
         error: null,
-        formData,
-        status: "loading"
+        status: "loading",
+        formData
       },
       () => {
         ReactPiwik.push(["trackEvent", "has forgot his/her password", formData.email]);
@@ -151,14 +151,14 @@ class ForgotPassword extends React.Component {
           .then(() => {
             this.handleOpenModal("Un email vient de vous être envoyé");
             this.setState({
-              error: null,
-              status: "success"
+              status: "success",
+              error: null
             });
           })
           .catch(() =>
             this.setState({
-              error: "Impossible de trouver l'email",
-              status: "error"
+              status: "error",
+              error: "Impossible de trouver l'email"
             })
           );
       }

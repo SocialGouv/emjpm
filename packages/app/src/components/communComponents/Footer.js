@@ -8,11 +8,11 @@ const Footer = ({ fixed }) => (
   <footer
     className="footer"
     style={{
-      backgroundColor: "#26353fff",
       marginTop: 50,
-      textAlign: "center",
+      backgroundColor: "#26353fff",
       width: "100%",
-      ...((fixed && { bottom: 0, position: "fixed" }) || {})
+      textAlign: "center",
+      ...((fixed && { position: "fixed", bottom: 0 }) || {})
     }}
   >
     <div className="footer_container">
