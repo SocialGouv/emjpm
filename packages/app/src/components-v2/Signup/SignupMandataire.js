@@ -7,6 +7,7 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
+import { getRegionCode } from "../../util/departements";
 import { SignupContext } from "./context";
 import { CHECK_SIRET_UNICITY } from "./queries";
 import signup from "./signup";
@@ -98,9 +99,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
               <Formik
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
-                  const department = departementDatas.find(
-                    data => data.code === values.code_postal.substring(0, 2)
-                  );
+                  const regionCode = getRegionCode(values.code_postal);
+                  const department = departementDatas.find(data => data.code === regionCode);
                   if (!department) {
                     setErrors({
                       code_postal: "Merci de renseigner un code postal valide"
