@@ -95,16 +95,20 @@ class User extends Model {
     return defaultRoleName;
   }
 
-  getUser() {
+  getUser(realUserId) {
     return {
       id: this.id,
       username: this.username,
       roles: this.getRoles(),
-      token: this.getJwt(),
+      token: this.getJwt(realUserId),
       // TODO: remove when full graphql auth
       url: redirs[this.type] || redirs.default,
       type: this.type
     };
+  }
+
+  getImpersonateUser(realUserId) {
+    return this.getUser(realUserId);
   }
 
   getAntennes() {
@@ -121,7 +125,7 @@ class User extends Model {
     };
   }
 
-  getJwt() {
+  getJwt(realUserId) {
     const signOptions = {
       subject: this.id.toString(),
       expiresIn: "30d",
@@ -132,6 +136,7 @@ class User extends Model {
       id: this.id,
       url: redirs[this.type] || redirs.default,
       role: this.getDefaultRole(),
+      realUserId: realUserId ? realUserId : this.id,
       "https://hasura.io/jwt/claims": this.getHasuraClaims()
     };
     return jwt.sign(claim, jwtConfig.key, signOptions);
