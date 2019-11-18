@@ -34,8 +34,8 @@ const doLogin = formData => {
 
 const schema = {
   properties: {
-    password: { default: "", title: "", type: "string" },
-    username: { default: "", title: "", type: "string" }
+    username: { default: "", title: "", type: "string" },
+    password: { default: "", title: "", type: "string" }
     // done: {
     //   type: "boolean",
     //   title: " se souvenir de mes informations ",
