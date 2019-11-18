@@ -5,7 +5,7 @@ export const getRegionCode = codePostal => {
   } else if (codePostal.startsWith("202")) {
     code = "2B";
   } else {
-    codePostal.substring(0, 2);
+    code = codePostal.substring(0, 2);
   }
   return code;
 };
