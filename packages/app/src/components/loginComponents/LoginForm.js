@@ -166,7 +166,7 @@ class LoginForm extends React.Component {
       () => {
         doLogin(formData)
           .then(json => {
-            authService.login(formData.username, json.token);
+            authService.login(json.token);
             ReactPiwik.push(["trackEvent", "login", "success"]);
             trackUser();
             Router.push(json.url);
