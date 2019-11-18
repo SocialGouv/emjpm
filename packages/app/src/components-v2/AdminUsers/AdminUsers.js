@@ -80,6 +80,7 @@ const RowItem = ({ item }) => {
   const doImpersonate = async () => {
     const url = await startImpersonate(id);
     Router.push(url, url);
+    if (typeof window !== "undefined") window.location.reload();
   };
 
   const DetailComponent = getDetail(type);

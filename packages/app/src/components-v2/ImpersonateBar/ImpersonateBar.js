@@ -11,6 +11,7 @@ import { ImpersonateBarStyle } from "./style";
 const doStopImpersonate = async realUserId => {
   const url = await stopImpersonate(realUserId);
   Router.push(url);
+  if (typeof window !== "undefined") window.location.reload();
 };
 
 const ImpersonateBar = props => {
