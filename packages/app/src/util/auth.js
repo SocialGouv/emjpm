@@ -1,8 +1,8 @@
 import cookie from "js-cookie";
+import jwtDecode from "jwt-decode";
 import nextCookie from "next-cookies";
 import Router from "next/router";
 import React, { Component } from "react";
-import jwtDecode from "jwt-decode";
 
 export const logout = () => {
   Router.push("/error", "/login");
@@ -57,11 +57,11 @@ export const withAuthSync = WrappedComponent =>
   };
 
 const routes = {
-  ti: "/magistrats",
-  service: "/service",
-  mandataires: "/magistrats",
+  admin: "/admin",
   direction: "/direction",
-  admin: "/admin"
+  mandataires: "/magistrats",
+  service: "/service",
+  ti: "/magistrats"
 };
 
 export const auth = ctx => {
