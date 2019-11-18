@@ -54,7 +54,13 @@ const UserInformations = props => {
   }
 
   if (data && data.currentUser) {
-    return <CurrentUser Component={Component} userData={data} />;
+    return (
+      <CurrentUser
+        sx={data.currentUser.realUserId ? { background: "red" } : {}}
+        Component={Component}
+        userData={data}
+      />
+    );
   } else {
     return <div>Chargement</div>;
   }
