@@ -1,13 +1,13 @@
 import "bootstrap/dist/css/bootstrap.css";
+
 import Head from "next/head";
 import React from "react";
 import styled from "styled-components";
+
 import { Layout } from "../src/components";
 import { PageTracker } from "../src/components/common/PageTracker";
 import LoginForm from "../src/components/loginComponents/LoginForm";
 import { withAuthSync } from "../src/util/auth";
-
-
 
 const Title = styled.div`
   text-align: left;
