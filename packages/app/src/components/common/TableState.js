@@ -21,8 +21,8 @@ class TableState extends React.Component {
 
   render() {
     return this.props.render({
-      activeTabIndex: this.state.activeTabIndex,
-      onSelect: this.onSelect
+      onSelect: this.onSelect,
+      activeTabIndex: this.state.activeTabIndex
     });
   }
 }

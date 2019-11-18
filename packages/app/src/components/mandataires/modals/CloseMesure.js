@@ -8,12 +8,15 @@ import Layout from "../../communComponents/ModalLayout";
 import { closeMesure } from "../actions/mesures";
 
 const schema = {
+  type: "object",
+  required: ["extinction", "reason_extinction"],
   properties: {
     extinction: {
-      format: "date",
-      type: "string"
+      type: "string",
+      format: "date"
     },
     reason_extinction: {
+      type: "string",
       enum: [
         "Caducité",
         "Changement de mandataire",
@@ -21,27 +24,24 @@ const schema = {
         "Décès",
         "Main levée",
         "Autre"
-      ],
-      type: "string"
+      ]
     }
-  },
-  required: ["extinction", "reason_extinction"],
-  type: "object"
+  }
 };
 
 const uiSchema = {
   extinction: {
+    "ui:title": "Date d'extinction",
     "ui:options": {
       label: true
-    },
-    "ui:title": "Date d'extinction"
+    }
   },
   reason_extinction: {
     "ui:autofocus": true,
+    "ui:title": "Raison de l'extinction",
     "ui:options": {
       label: true
-    },
-    "ui:title": "Raison de l'extinction"
+    }
   }
 };
 
@@ -55,7 +55,7 @@ const CloseMesure = ({ show, handleHide, onSubmit, id, mandataire_id }) => {
   };
   return (
     <Layout show={show} handleHide={handleHide}>
-      <div style={{ marginTop: 50, textAlign: "center" }}>
+      <div style={{ textAlign: "center", marginTop: 50 }}>
         <h3>Mettre fin au mandat </h3>
         <br />
         <p style={{ padding: 20 }}>
@@ -81,4 +81,4 @@ const mapDispatchToProps = dispatch => bindActionCreators({ onSubmit: closeMesur
 export default connect(
   null,
   mapDispatchToProps
-)(connectModal({ destroyOnHide: true, name: "CloseMesure" })(CloseMesure));
+)(connectModal({ name: "CloseMesure", destroyOnHide: true })(CloseMesure));
