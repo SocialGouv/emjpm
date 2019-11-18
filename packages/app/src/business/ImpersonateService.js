@@ -6,10 +6,10 @@ export const startImpersonate = async id => {
   const json = await apiFetch(
     url,
     {
-      method: "POST",
-      body: JSON.stringify({ user_id: id })
+      body: JSON.stringify({ user_id: id }),
+      method: "POST"
     },
-    { forceLogin: true, apiVersion: "v2" }
+    { apiVersion: "v2", forceLogin: true }
   );
   const token = json.token;
   authService.logout();
@@ -22,10 +22,10 @@ export const stopImpersonate = async realUserId => {
   const json = await apiFetch(
     url,
     {
-      method: "POST",
-      body: JSON.stringify({ user_id: realUserId })
+      body: JSON.stringify({ user_id: realUserId }),
+      method: "POST"
     },
-    { forceLogin: true, apiVersion: "v2" }
+    { apiVersion: "v2", forceLogin: true }
   );
   const token = json.token;
   authService.logout();

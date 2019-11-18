@@ -1,6 +1,7 @@
 import React from "react";
-import { ImpersonateBar } from "./ImpersonateBar";
 import renderer from "react-test-renderer";
+
+import { ImpersonateBar } from "./ImpersonateBar";
 
 it("renders correctly", () => {
   const tree = renderer.create(<ImpersonateBar />).toJSON();

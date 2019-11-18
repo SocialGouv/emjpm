@@ -3,6 +3,7 @@ import { Button } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
+
 import { stopImpersonate } from "../../business/ImpersonateService";
 import { CURRENT_USER } from "./queries";
 import { ImpersonateBarStyle } from "./style";
