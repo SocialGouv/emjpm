@@ -1,5 +1,6 @@
 const knex = require("../knex.js");
 const { Department } = require("../../model/Departments");
+const { getRegionCode } = require("../../util/DepartementUtil");
 
 //const whitelist = require("./whitelist");
 
@@ -21,8 +22,9 @@ const getCountMesures = (id, filters = { status: "Mesure en cours" }) =>
 // update mandataire data
 const updateMandataire = async (id, data) => {
   if (data.code_postal) {
+    const regionCode = getRegionCode(data.code_postal);
     const department = await Department.query()
-      .where("code", data.code_postal.substring(0, 2))
+      .where("code", regionCode)
       .limit(1)
       .first();
 

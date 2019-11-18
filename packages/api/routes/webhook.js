@@ -12,6 +12,8 @@ const { Department } = require("../model/Departments");
 const { reservationEmail } = require("../email/reservation-email");
 const { validationEmail } = require("../email/validation-email");
 
+const { getRegionCode } = require("../util/DepartementUtil");
+
 const { raw } = require("objection");
 
 // ----------------------------------
@@ -100,12 +102,12 @@ const updateMandataireMesureStates = async mandataire_id => {
 
 // TODO(tglatt): move db queries in other file
 const saveOrUpdateMesure = async mesureDatas => {
-  const code = mesureDatas.code_postal.substring(0, 2);
+  const regionCode = getRegionCode(mesureDatas.code_postal);
   const department = await Department.query().findOne({
-    code
+    code: regionCode
   });
   if (!department) {
-    throw new Error(`no departement found with code ${code}`);
+    throw new Error(`no departement found with code ${regionCode}`);
   }
 
   const ti = await Tis.query().findOne({
