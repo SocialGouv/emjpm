@@ -8,7 +8,6 @@ import { Box } from "rebass";
 import { logout } from "../../util/auth";
 import { Link } from "../Commons";
 import { Footer } from "../Footer";
-import { ImpersonateBar } from "../ImpersonateBar";
 import { Navigation } from "../Navigation";
 import { UserInformations } from "../UserInformations";
 import { dropDownLinks } from "./dropDownLink";
@@ -60,7 +59,6 @@ const LayoutMagistrat = props => {
             );
           }}
         />
-        <ImpersonateBar />
         <BoxWrapper>
           <Navigation links={navigationLinks} />
         </BoxWrapper>

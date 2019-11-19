@@ -67,10 +67,6 @@ passport.use(
         .select()
         .then(users => {
           const user = users[0];
-          // in impersonate case
-          if (jwtPayload.realUserId) {
-            user.realUserId = jwtPayload.realUserId;
-          }
           return cb(null, JSON.parse(JSON.stringify(user)));
         })
         .catch(err => {
