@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.7.0](https://github.com/SocialGouv/emjpm/compare/v25.6.0...v25.7.0) (2019-11-19)
+
+
+### Bug Fixes
+
+* **button-comment:** fix width ([#966](https://github.com/SocialGouv/emjpm/issues/966)) ([7ed0efe](https://github.com/SocialGouv/emjpm/commit/7ed0efe))
+* **comment-metadata:** update metadata ([#977](https://github.com/SocialGouv/emjpm/issues/977)) ([24d2381](https://github.com/SocialGouv/emjpm/commit/24d2381))
+* **icons:** change icons ([#967](https://github.com/SocialGouv/emjpm/issues/967)) ([c480d40](https://github.com/SocialGouv/emjpm/commit/c480d40))
+* **lint:** add old files lint with import order ([#981](https://github.com/SocialGouv/emjpm/issues/981)) ([608bd53](https://github.com/SocialGouv/emjpm/commit/608bd53))
+* **login:** fix redirections ([#984](https://github.com/SocialGouv/emjpm/issues/984)) ([4caa3a4](https://github.com/SocialGouv/emjpm/commit/4caa3a4))
+* **login:** lint files ([#978](https://github.com/SocialGouv/emjpm/issues/978)) ([9b39f4a](https://github.com/SocialGouv/emjpm/commit/9b39f4a))
+
+
+### Features
+
+* **auth-redirect:** redirect when on login signup with token ([#969](https://github.com/SocialGouv/emjpm/issues/969)) ([b174de4](https://github.com/SocialGouv/emjpm/commit/b174de4))
+* **impersonate:** allow starting impersonate ([#926](https://github.com/SocialGouv/emjpm/issues/926)) ([2855ffa](https://github.com/SocialGouv/emjpm/commit/2855ffa))
+* **impersonate:** remove impersonate ([#988](https://github.com/SocialGouv/emjpm/issues/988)) ([209b642](https://github.com/SocialGouv/emjpm/commit/209b642))
+* **lint:** add sort plugins ([#968](https://github.com/SocialGouv/emjpm/issues/968)) ([6f2a6dc](https://github.com/SocialGouv/emjpm/commit/6f2a6dc))
+* **mesures-import:** use numero rg + ti_id as key ([#982](https://github.com/SocialGouv/emjpm/issues/982)) ([c73149a](https://github.com/SocialGouv/emjpm/commit/c73149a))
+
+
+
+
+
 # [25.6.0](https://github.com/SocialGouv/emjpm/compare/v25.5.2...v25.6.0) (2019-11-12)
 
 
