@@ -61,7 +61,7 @@ const routes = {
   direction: "/direction",
   individuel: "/mandataires",
   prepose: "/mandataires",
-  service: "/service",
+  service: "/services",
   ti: "/magistrats"
 };
 
