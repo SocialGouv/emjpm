@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.7.0](https://github.com/SocialGouv/emjpm/compare/v25.6.0...v25.7.0) (2019-11-19)
+
+
+### Bug Fixes
+
+* **login:** fix redirections ([#984](https://github.com/SocialGouv/emjpm/issues/984)) ([4caa3a4](https://github.com/SocialGouv/emjpm/commit/4caa3a4))
+
+
+### Features
+
+* **auth-redirect:** redirect when on login signup with token ([#969](https://github.com/SocialGouv/emjpm/issues/969)) ([b174de4](https://github.com/SocialGouv/emjpm/commit/b174de4))
+* **impersonate:** allow starting impersonate ([#926](https://github.com/SocialGouv/emjpm/issues/926)) ([2855ffa](https://github.com/SocialGouv/emjpm/commit/2855ffa))
+* **mesures-import:** use numero rg + ti_id as key ([#982](https://github.com/SocialGouv/emjpm/issues/982)) ([c73149a](https://github.com/SocialGouv/emjpm/commit/c73149a))
+
+
+
+
+
 # [25.6.0](https://github.com/SocialGouv/emjpm/compare/v25.5.2...v25.6.0) (2019-11-12)
 
 
