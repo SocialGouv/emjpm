@@ -14,7 +14,7 @@ const clearToken = () => {
 
 export const logout = () => {
   clearToken();
-  Router.push("/login", "/login");
+  Router.push("/error", "/login");
 };
 
 // Gets the display name of a JSX component for dev tools
