@@ -1,12 +1,12 @@
 import gql from "graphql-tag";
 
 export const MANDATAIRE_COMMENTS = gql`
-  query MandataireComments($antenne_id: Int, $mandataire_id: Int) {
+  query MandataireComments($service_id: Int, $mandataire_id: Int) {
     commentaires(
-      where: { antenne_id: { _eq: $antenne_id }, mandataire_id: { _eq: $mandataire_id } }
+      where: { service_id: { _eq: $service_id }, mandataire_id: { _eq: $mandataire_id } }
     ) {
       comment
-      antenne_id
+      service_id
       created_at
       id
       mandataire_id
@@ -80,13 +80,6 @@ export const GET_MANDATAIRES = gql`
           telephone
           email
           etablissement
-          service_antennes(where: { headquarters: { _eq: true } }) {
-            id
-            commentaires {
-              comment
-              ti_id
-            }
-          }
         }
       }
     }
