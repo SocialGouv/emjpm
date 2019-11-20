@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.7.2](https://github.com/SocialGouv/emjpm/compare/v25.7.1...v25.7.2) (2019-11-20)
+
+
+### Bug Fixes
+
+* **logout:** use correct redirection ([#996](https://github.com/SocialGouv/emjpm/issues/996)) ([d2cc75d](https://github.com/SocialGouv/emjpm/commit/d2cc75d))
+
+
+
+
+
 ## [25.7.1](https://github.com/SocialGouv/emjpm/compare/v25.7.0...v25.7.1) (2019-11-20)
 
 
