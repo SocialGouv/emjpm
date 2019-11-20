@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.7.1](https://github.com/SocialGouv/emjpm/compare/v25.7.0...v25.7.1) (2019-11-20)
+
+
+### Bug Fixes
+
+* **auth-redirection:** clear old auth token ([#994](https://github.com/SocialGouv/emjpm/issues/994)) ([49afd91](https://github.com/SocialGouv/emjpm/commit/49afd91))
+* **auth-redirection:** redirect to /services ([#993](https://github.com/SocialGouv/emjpm/issues/993)) ([f08e490](https://github.com/SocialGouv/emjpm/commit/f08e490))
+
+
+
+
+
 # [25.7.0](https://github.com/SocialGouv/emjpm/compare/v25.6.0...v25.7.0) (2019-11-19)
 
 
