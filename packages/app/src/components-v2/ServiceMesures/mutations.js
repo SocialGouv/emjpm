@@ -4,6 +4,10 @@ export const CLOSE_MESURE = gql`
   mutation closeMesure(
     $id: Int!
     $service_id: Int!
+<<<<<<< HEAD
+=======
+    $antenne_id: Int
+>>>>>>> feat(service-mesure): handle service in mesures
     $reason_extinction: String!
     $extinction: date!
   ) {
@@ -216,8 +220,13 @@ export const ACCEPT_MESURE = gql`
         date_ouverture
       }
     }
+<<<<<<< HEAD
     update_services(
       where: { id: { _eq: $service_id } }
+=======
+    update_service(
+      where: { id: { _eq: $antenne_id } }
+>>>>>>> feat(service-mesure): handle service in mesures
       _inc: { mesures_in_progress: 1, mesures_awaiting: -1 }
     ) {
       affected_rows
@@ -251,7 +260,10 @@ export const ADD_MESURE = gql`
     $numero_rg: String!
     $service_id: Int!
     $antenne_id: Int
+<<<<<<< HEAD
     $ti_id: Int!
+=======
+>>>>>>> feat(service-mesure): handle service in mesures
   ) {
     insert_mesures(
       objects: {
@@ -268,6 +280,7 @@ export const ADD_MESURE = gql`
         numero_rg: $numero_rg
         status: "Mesure en cours"
         antenne_id: $antenne_id
+        service_id: $service_id
       }
     ) {
       returning {
@@ -294,7 +307,11 @@ export const ADD_MESURE = gql`
         date_ouverture
       }
     }
+<<<<<<< HEAD
     update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: 1 }) {
+=======
+    update_service(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: 1 }) {
+>>>>>>> feat(service-mesure): handle service in mesures
       affected_rows
       returning {
         id

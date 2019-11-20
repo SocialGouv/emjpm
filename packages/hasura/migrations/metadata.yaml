@@ -1254,7 +1254,7 @@ tables:
       - telephone
       - ville
       filter: {}
-    role: ti
+    role: service
   - comment: null
     permission:
       allow_aggregations: false
@@ -1834,13 +1834,14 @@ tables:
       - type
       - ville
       filter:
-        ti:
-          magistrats:
+        service_antenne:
+          user_antennes:
             user_id:
               _eq: X-Hasura-User-Id
-    role: ti
+    role: service
   - comment: null
     permission:
+      allow_aggregations: true
       columns:
       - annee
       - antenne_id
@@ -1859,15 +1860,17 @@ tables:
       - numero_rg
       - reason_extinction
       - residence
+      - service_id
       - status
       - ti_id
       - type
       - ville
       filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: prepose
+        ti:
+          magistrats:
+            user_id:
+              _eq: X-Hasura-User-Id
+    role: ti
   - comment: null
     permission:
       allow_aggregations: false
