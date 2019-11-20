@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const CLOSE_MESURE = gql`
   mutation closeMesure(
     $id: Int!
+    $service_id: Int!
     $antenne_id: Int!
     $reason_extinction: String!
     $extinction: date!
@@ -17,6 +18,7 @@ export const CLOSE_MESURE = gql`
     ) {
       returning {
         antenne_id
+        service_id
         id
         cabinet
         civilite
@@ -36,6 +38,13 @@ export const CLOSE_MESURE = gql`
         etablissement
         annee
         date_ouverture
+      }
+    }
+    update_service(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: -1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_in_progress
       }
     }
     update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_in_progress: -1 }) {
@@ -187,6 +196,7 @@ export const ACCEPT_MESURE = gql`
     ) {
       returning {
         antenne_id
+        service_id
         id
         cabinet
         civilite
@@ -208,7 +218,7 @@ export const ACCEPT_MESURE = gql`
         date_ouverture
       }
     }
-    update_service_antenne(
+    update_service(
       where: { id: { _eq: $antenne_id } }
       _inc: { mesures_in_progress: 1, mesures_awaiting: -1 }
     ) {
@@ -241,7 +251,8 @@ export const ADD_MESURE = gql`
     $annee: String!
     $numero_dossier: String!
     $numero_rg: String!
-    $antenne_id: Int!
+    $service_id: Int!
+    $antenne_id: Int
     $ti_id: Int!
   ) {
     insert_mesures(
@@ -258,10 +269,12 @@ export const ADD_MESURE = gql`
         numero_rg: $numero_rg
         status: "Mesure en cours"
         antenne_id: $antenne_id
+        service_id: $service_id
       }
     ) {
       returning {
         antenne_id
+        service_id
         id
         cabinet
         civilite
@@ -283,7 +296,7 @@ export const ADD_MESURE = gql`
         date_ouverture
       }
     }
-    update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_in_progress: 1 }) {
+    update_service(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: 1 }) {
       affected_rows
       returning {
         id

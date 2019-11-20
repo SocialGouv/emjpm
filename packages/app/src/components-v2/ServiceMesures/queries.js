@@ -53,6 +53,7 @@ export const MESURES = gql`
       }
     ) {
       antenne_id
+      service_id
       id
       cabinet
       civilite

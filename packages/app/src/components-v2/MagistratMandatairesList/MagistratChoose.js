@@ -12,7 +12,7 @@ import { MandataireInformations } from "./MandataireInformations";
 import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
 
 export const MagistratChoose = props => {
-  const { ti, antenneId, mandataireId, cabinet } = props;
+  const { ti, serviceId, mandataireId, cabinet } = props;
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
   const [chooseService] = useMutation(CHOOSE_SERVICE);
   const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
@@ -46,10 +46,10 @@ export const MagistratChoose = props => {
                   refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
                   variables: {
                     annee: values.annee,
-                    antenne_id: antenneId,
                     cabinet: values.cabinet,
                     civilite: values.civilite.value,
                     numero_rg: values.numero_rg,
+                    service_id: serviceId,
                     ti: ti,
                     type: values.type.value
                   }

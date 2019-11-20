@@ -938,12 +938,12 @@ tables:
               id:
                 _eq: X-Hasura-User-Id
       columns:
-      - id
       - comment
-      - mandataire_id
-      - ti_id
       - created_at
-      - antenne_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
       set: {}
     role: ti
   is_enum: false
@@ -964,12 +964,12 @@ tables:
   - comment: null
     permission:
       columns:
-      - id
       - comment
-      - mandataire_id
-      - ti_id
       - created_at
-      - antenne_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
       filter:
         ti:
           magistrats:
@@ -982,12 +982,12 @@ tables:
   - comment: null
     permission:
       columns:
-      - id
       - comment
-      - mandataire_id
-      - ti_id
       - created_at
-      - antenne_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
       filter:
         ti:
           magistrats:
@@ -1215,6 +1215,27 @@ tables:
     role: anonymous
   - comment: null
     permission:
+      allow_aggregations: true
+      columns:
+      - adresse
+      - code_postal
+      - created_at
+      - department_id
+      - dispo_max
+      - email
+      - etablissement
+      - id
+      - information
+      - mesures_awaiting
+      - mesures_in_progress
+      - nom
+      - prenom
+      - telephone
+      - ville
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
       allow_aggregations: false
       columns:
       - adresse
@@ -1226,6 +1247,8 @@ tables:
       - etablissement
       - id
       - information
+      - mesures_awaiting
+      - mesures_in_progress
       - nom
       - prenom
       - telephone
@@ -1245,32 +1268,31 @@ tables:
       - etablissement
       - id
       - information
+      - mesures_awaiting
+      - mesures_in_progress
       - nom
       - prenom
       - telephone
       - ville
       filter: {}
     role: ti
+  table: services
+  update_permissions:
   - comment: null
     permission:
-      allow_aggregations: true
       columns:
       - adresse
-      - code_postal
-      - created_at
+      - department_id
       - dispo_max
       - email
-      - etablissement
-      - id
-      - information
+      - mesures_awaiting
+      - mesures_in_progress
       - nom
       - prenom
       - telephone
-      - ville
       filter: {}
-    role: direction
-  table: services
-  update_permissions: []
+      set: {}
+    role: service
 - array_relationships:
   - comment: null
     name: mandataire_etablissements
@@ -1748,32 +1770,37 @@ tables:
     name: mandataire
     using:
       foreign_key_constraint_on: mandataire_id
+  - comment: null
+    name: service
+    using:
+      foreign_key_constraint_on: service_id
   select_permissions:
   - comment: null
     permission:
       allow_aggregations: true
       columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
       - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
       - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
       filter: {}
     role: direction
   - comment: null
@@ -1797,6 +1824,39 @@ tables:
       - numero_rg
       - reason_extinction
       - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      filter:
+        service_antenne:
+          user_antennes:
+            user_id:
+              _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
       - status
       - ti_id
       - type
@@ -1836,37 +1896,6 @@ tables:
           user_id:
             _eq: X-Hasura-User-Id
     role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - ti_id
-      - type
-      - ville
-      filter:
-        service_antenne:
-          user_antennes:
-            user_id:
-              _eq: X-Hasura-User-Id
-    role: service
   - comment: null
     permission:
       allow_aggregations: false
@@ -2157,12 +2186,6 @@ tables:
   - comment: null
     permission:
       allow_aggregations: false
-      columns: []
-      filter: {}
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
       columns:
       - latitude
       - longitude
@@ -2204,6 +2227,12 @@ tables:
       - code_postal
       filter: {}
     role: ti
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns: []
+      filter: {}
+    role: service
   table: geolocalisation_code_postal
   update_permissions: []
 - array_relationships:
