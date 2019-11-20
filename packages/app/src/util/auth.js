@@ -4,13 +4,17 @@ import nextCookie from "next-cookies";
 import Router from "next/router";
 import React, { Component } from "react";
 
-export const logout = () => {
-  Router.push("/error", "/login");
+const clearToken = () => {
   cookie.remove("token");
   // to support logging out from all windows
   window.localStorage.setItem("logout", Date.now());
   window.localStorage.removeItem("id_token");
   window.localStorage.removeItem("login");
+};
+
+export const logout = () => {
+  clearToken();
+  Router.push("/login", "/login");
 };
 
 // Gets the display name of a JSX component for dev tools
@@ -74,6 +78,7 @@ export const auth = ctx => {
     const { url, role } = jwtDecode(token);
     const isTokenPath = pathname.indexOf(routes[role]) !== -1;
     if (!url) {
+      clearToken();
       if (ctx.req) {
         ctx.res.writeHead(302, { Location: "/login" });
         ctx.res.end();
