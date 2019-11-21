@@ -819,12 +819,6 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
-  "headquarters": Object {
-    "defaultValue": "false",
-    "maxLength": null,
-    "nullable": false,
-    "type": "boolean",
-  },
   "id": Object {
     "defaultValue": "nextval('service_antenne_id_seq'::regclass)",
     "maxLength": null,

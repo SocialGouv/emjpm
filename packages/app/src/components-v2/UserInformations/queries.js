@@ -38,7 +38,6 @@ export const GET_SERVICE_USERS = gql`
           mesures_in_progress
           mesures_awaiting
           id
-          headquarters
           contact_phone
           contact_lastname
           contact_firstname

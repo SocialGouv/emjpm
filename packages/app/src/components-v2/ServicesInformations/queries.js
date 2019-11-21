@@ -14,7 +14,6 @@ export const GET_SERVICES_ANTENNE = gql`
       mesures_in_progress
       mesures_awaiting
       id
-      headquarters
       date_mesure_update
       created_at
       contact_phone
