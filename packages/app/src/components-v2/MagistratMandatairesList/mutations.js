@@ -101,7 +101,7 @@ export const CHOOSE_SERVICE = gql`
         date_ouverture
       }
     }
-    update_service(where: { id: { _eq: $service_id } }, _inc: { mesures_awaiting: 1 }) {
+    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_awaiting: 1 }) {
       affected_rows
       returning {
         id

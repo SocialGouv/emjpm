@@ -1297,6 +1297,13 @@ tables:
           _eq: X-Hasura-Service-Id
       set: {}
     role: service
+  - comment: null
+    permission:
+      columns:
+      - mesures_awaiting
+      filter: {}
+      set: {}
+    role: ti
 - array_relationships:
   - comment: null
     name: mandataire_etablissements
@@ -1629,33 +1636,6 @@ tables:
   insert_permissions:
   - comment: null
     permission:
-      check: {}
-      columns:
-      - date_ouverture
-      - extinction
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      set: {}
-    role: ti
-  - comment: null
-    permission:
       check:
         mandataire:
           user_id:
@@ -1744,6 +1724,33 @@ tables:
       set:
         service_id: x-hasura-Service-Id
     role: service
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      set: {}
+    role: ti
   is_enum: false
   object_relationships:
   - comment: null
@@ -1947,37 +1954,6 @@ tables:
       - type
       - ville
       filter:
-        ti:
-          magistrats:
-            user_id:
-              _eq: X-Hasura-User-Id
-      set: {}
-    role: ti
-  - comment: null
-    permission:
-      columns:
-      - date_ouverture
-      - extinction
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      filter:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
@@ -2042,6 +2018,35 @@ tables:
           _eq: X-Hasura-Service-Id
       set: {}
     role: service
+  - comment: null
+    permission:
+      columns:
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        ti:
+          magistrats:
+            user_id:
+              _eq: X-Hasura-User-Id
+      set: {}
+    role: ti
 - array_relationships: []
   delete_permissions: []
   event_triggers: []
