@@ -4,7 +4,6 @@ export const CLOSE_MESURE = gql`
   mutation closeMesure(
     $id: Int!
     $service_id: Int!
-    $antenne_id: Int!
     $reason_extinction: String!
     $extinction: date!
   ) {
@@ -47,21 +46,13 @@ export const CLOSE_MESURE = gql`
         mesures_in_progress
       }
     }
-    update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_in_progress: -1 }) {
-      affected_rows
-      returning {
-        id
-        mesures_in_progress
-      }
-    }
   }
 `;
 
 export const EDIT_MESURE = gql`
   mutation editMesure(
     $id: Int!
-    $antenne_id: Int!
-    $previous_antenne_id: Int!
+    $antenne_id: Int
     $date_ouverture: date
     $type: String
     $residence: String
@@ -112,19 +103,21 @@ export const EDIT_MESURE = gql`
         date_ouverture
       }
     }
-    updateNewAntenne: update_service_antenne(
+  }
+`;
+
+export const UPDATE_ANTENNE_COUTERS = gql`
+  mutation updateAntenneCounters(
+    $antenne_id: Int!
+    $inc_mesures_in_progress: Int!
+    $inc_mesures_awaiting: Int!
+  ) {
+    update_service_antenne(
       where: { id: { _eq: $antenne_id } }
-      _inc: { mesures_in_progress: 1 }
-    ) {
-      affected_rows
-      returning {
-        id
-        mesures_in_progress
+      _inc: {
+        mesures_in_progress: $inc_mesures_in_progress
+        mesures_awaiting: $inc_mesures_awaiting
       }
-    }
-    updatePreviousAntenne: update_service_antenne(
-      where: { id: { _eq: $previous_antenne_id } }
-      _inc: { mesures_in_progress: -1 }
     ) {
       affected_rows
       returning {
@@ -136,13 +129,14 @@ export const EDIT_MESURE = gql`
 `;
 
 export const REACTIVATE_MESURE = gql`
-  mutation reactivateMesure($id: Int!, $antenne_id: Int!, $reason_extinction: String!) {
+  mutation reactivateMesure($id: Int!, $service_id: Int!, $reason_extinction: String!) {
     update_mesures(
       where: { id: { _eq: $id } }
       _set: { reason_extinction: $reason_extinction, status: "Mesure en cours" }
     ) {
       returning {
         antenne_id
+        service_id
         id
         cabinet
         civilite
@@ -164,11 +158,15 @@ export const REACTIVATE_MESURE = gql`
         date_ouverture
       }
     }
-    update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_in_progress: 1 }) {
+    update_services(
+      where: { id: { _eq: $service_id } }
+      _inc: { mesures_in_progress: 1, mesures_awaiting: 0 }
+    ) {
       affected_rows
       returning {
         id
         mesures_in_progress
+        mesures_awaiting
       }
     }
   }
@@ -219,7 +217,7 @@ export const ACCEPT_MESURE = gql`
       }
     }
     update_services(
-      where: { id: { _eq: $antenne_id } }
+      where: { id: { _eq: $service_id } }
       _inc: { mesures_in_progress: 1, mesures_awaiting: -1 }
     ) {
       affected_rows
@@ -257,6 +255,7 @@ export const ADD_MESURE = gql`
   ) {
     insert_mesures(
       objects: {
+        service_id: $service_id
         date_ouverture: $date_ouverture
         type: $type
         ti_id: $ti_id

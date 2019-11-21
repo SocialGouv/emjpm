@@ -8,12 +8,13 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { RESIDENCE } from "../../constants/mesures";
-import { ACCEPT_MESURE } from "./mutations";
+import { ACCEPT_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
 import { formatAntenneOptions } from "./utils";
 
 export const ServiceAcceptMesure = props => {
   const { currentMesure, user_antennes } = props;
   const [UpdateMesure] = useMutation(ACCEPT_MESURE, {});
+  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
   return (
@@ -36,7 +37,7 @@ export const ServiceAcceptMesure = props => {
             UpdateMesure({
               refetchQueries: ["mesures", "mesures_aggregate"],
               variables: {
-                antenne_id: values.antenne_id.value,
+                antenne_id: values.antenne_id ? values.antenne_id.value : null,
                 code_postal: values.code_postal,
                 date_ouverture: values.date_ouverture,
                 id: currentMesure,
@@ -44,6 +45,15 @@ export const ServiceAcceptMesure = props => {
                 ville: values.ville
               }
             });
+            if (values.antenne_id) {
+              UpdateAntenneCounters({
+                variables: {
+                  antenne_id: values.antenne_id.value,
+                  inc_mesures_awaiting: -1,
+                  inc_mesures_in_progress: 1
+                }
+              });
+            }
             setSubmitting(false);
             setPanelType(null);
             setCurrentMesure(null);

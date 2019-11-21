@@ -1696,36 +1696,6 @@ tables:
     role: prepose
   - comment: null
     permission:
-      check:
-        service_id:
-          _eq: X-Hasura-Service-Id
-      columns:
-      - date_ouverture
-      - extinction
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      set:
-        service_id: x-hasura-Service-Id
-    role: service
-  - comment: null
-    permission:
       check: {}
       columns:
       - annee
@@ -1751,6 +1721,37 @@ tables:
       - ville
       set: {}
     role: ti
+  - comment: null
+    permission:
+      check:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      set:
+        service_id: x-hasura-Service-Id
+    role: service
   is_enum: false
   object_relationships:
   - comment: null

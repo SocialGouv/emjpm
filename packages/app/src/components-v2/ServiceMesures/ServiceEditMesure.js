@@ -8,20 +8,9 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
-import { EDIT_MESURE } from "./mutations";
+import { EDIT_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
-import { formatAntenneOptions, formatTribunalList } from "./utils";
-
-const getMesureAntenne = (antenne_id, user_antennes) => {
-  const filteredAntennes = user_antennes.filter(
-    user_antenne => user_antenne.antenne_id === antenne_id
-  );
-  const [currentAntenne] = filteredAntennes;
-  return {
-    label: currentAntenne.service_antenne.name,
-    value: currentAntenne.service_antenne.id
-  };
-};
+import { formatTribunalList } from "./utils";
 
 export const ServiceEditMesure = props => {
   const {
@@ -43,6 +32,7 @@ export const ServiceEditMesure = props => {
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
   const [UpdateMesure] = useMutation(EDIT_MESURE);
+  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
   if (loading) {
@@ -53,7 +43,6 @@ export const ServiceEditMesure = props => {
     return <div>error...</div>;
   }
 
-  const currentMesureAntenne = getMesureAntenne(antenneId, user_antennes);
   const tribunalList = formatTribunalList(data.service_tis);
   const tribunalDefautValue = tiId ? { label: tribunal, value: tiId } : "";
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
@@ -86,19 +75,37 @@ export const ServiceEditMesure = props => {
               refetchQueries: ["mesures", "mesures_aggregate"],
               variables: {
                 annee: values.annee,
-                antenne_id: values.antenne_id.value,
+                antenne_id: values.antenne_id ? values.antenne_id.value : null,
                 civilite: values.civilite.value,
                 code_postal: values.code_postal,
                 date_ouverture: values.date_ouverture,
                 id: currentMesure,
                 numero_dossier: values.numero_dossier,
                 numero_rg: values.numero_rg,
-                previous_antenne_id: antenneId,
                 residence: values.residence.value,
                 type: values.type.value,
                 ville: values.ville
               }
             });
+            if (values.antenne_id) {
+              UpdateAntenneCounters({
+                variables: {
+                  antenne_id: values.antenne_id.value,
+                  inc_mesures_awaiting: 0,
+                  inc_mesures_in_progress: 1
+                }
+              });
+            }
+            if (antenneId) {
+              UpdateAntenneCounters({
+                variables: {
+                  antenne_id: antenneId,
+                  inc_mesures_awaiting: 0,
+                  inc_mesures_in_progress: -1
+                }
+              });
+            }
+
             setSubmitting(false);
             setPanelType(null);
             setCurrentMesure(null);
@@ -116,7 +123,7 @@ export const ServiceEditMesure = props => {
           })}
           initialValues={{
             annee: age,
-            antenne_id: currentMesureAntenne,
+            antenne_id: antenneId ? ANTENNE_OPTIONS.find(o => o.value === antenneId) : null,
             civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
             code_postal: codePostal,
             date_ouverture: dateOuverture,

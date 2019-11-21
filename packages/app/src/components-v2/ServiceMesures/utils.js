@@ -22,7 +22,7 @@ export const formatMesureList = mesureList => {
     const formatedDate = format(date_ouverture, "DD/MM/YYYY");
     return {
       age: annee ? annee : "nc",
-      antenneId: antenne_id ? antenne_id : "non reseigné",
+      antenneId: antenne_id ? antenne_id : null,
       cabinet: cabinet ? cabinet : null,
       civilite: civilite ? civilite : "H",
       codePostal: code_postal ? code_postal : "non reseigné",

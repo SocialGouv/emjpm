@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { CLOSE_MESURE } from "./mutations";
+import { CLOSE_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
 import { MESURE } from "./queries";
 
 const EXTINCTION_LABEL_VALUE = [
@@ -29,6 +29,7 @@ export const ServiceCloseMesure = props => {
     }
   });
   const [UpdateMesure] = useMutation(CLOSE_MESURE);
+  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   if (error) {
     return <div>error</div>;
   }
@@ -56,13 +57,21 @@ export const ServiceCloseMesure = props => {
               UpdateMesure({
                 refetchQueries: ["mesures", "mesures_aggregate"],
                 variables: {
-                  antenne_id: mesure.antenne_id ? mesure.antenne_id : null,
                   extinction: values.extinction,
                   id: currentMesure,
                   reason_extinction: values.reason_extinction.value,
                   service_id: mesure.service_id
                 }
               });
+              if (mesure.antenne_id) {
+                UpdateAntenneCounters({
+                  variables: {
+                    antenne_id: mesure.antenne_id,
+                    inc_mesures_awaiting: 0,
+                    inc_mesures_in_progress: -1
+                  }
+                });
+              }
               setSubmitting(false);
               setPanelType(null);
               setCurrentMesure(null);
