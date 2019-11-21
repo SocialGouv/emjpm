@@ -110,12 +110,14 @@ export const UPDATE_ANTENNE_COUTERS = gql`
   mutation updateAntenneCounters(
     $antenne_id: Int!
     $inc_mesures_in_progress: Int!
-    $inc_mesure_awaiting: Int!
+    $inc_mesures_awaiting: Int!
   ) {
     update_service_antenne(
       where: { id: { _eq: $antenne_id } }
-      _inc: { mesures_in_progress: $inc_mesures_in_progress }
-      _inc: { mesures_awaiting: $inc_mesures_awaiting }
+      _inc: {
+        mesures_in_progress: $inc_mesures_in_progress
+        mesures_awaiting: $inc_mesures_awaiting
+      }
     ) {
       affected_rows
       returning {
