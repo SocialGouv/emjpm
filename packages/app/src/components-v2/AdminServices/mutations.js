@@ -23,13 +23,6 @@ export const UPDATE_SERVICE = gql`
     ) {
       affected_rows
     }
-
-    update_service_antenne(
-      where: { service_id: { _eq: $id }, headquarters: { _eq: true } }
-      _set: { name: $etablissement, address_city: $ville, address_zip_code: $code_postal }
-    ) {
-      affected_rows
-    }
   }
 `;
 
@@ -50,14 +43,6 @@ export const ADD_SERVICE = gql`
         email: $email
         department_id: $department_id
         telephone: $telephone
-        service_antennes: {
-          data: {
-            name: $etablissement
-            address_city: $ville
-            address_zip_code: $code_postal
-            headquarters: true
-          }
-        }
       }
     ) {
       returning {

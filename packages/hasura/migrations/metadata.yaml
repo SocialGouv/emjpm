@@ -1458,7 +1458,6 @@ tables:
       - service_id
       - name
       - created_at
-      - headquarters
       - address_street
       - address_zip_code
       - address_city
@@ -1488,7 +1487,6 @@ tables:
       - service_id
       - name
       - created_at
-      - headquarters
       - address_street
       - address_zip_code
       - address_city
@@ -1511,7 +1509,6 @@ tables:
       - service_id
       - name
       - created_at
-      - headquarters
       - address_street
       - address_zip_code
       - address_city
@@ -1537,7 +1534,6 @@ tables:
       - service_id
       - name
       - created_at
-      - headquarters
       - address_street
       - address_zip_code
       - address_city
@@ -1557,7 +1553,6 @@ tables:
   - comment: null
     permission:
       columns:
-      - headquarters
       - bak_mandataire_id
       - id
       - mesures_awaiting
@@ -1612,10 +1607,8 @@ tables:
   - comment: null
     permission:
       filter:
-        service_antenne:
-          user_antennes:
-            user_id:
-              _eq: X-Hasura-User-Id
+        service_id:
+          _eq: X-Hasura-Service-Id
     role: service
   event_triggers:
   - definition:
@@ -1657,37 +1650,6 @@ tables:
       - ville
       set: {}
     role: ti
-  - comment: null
-    permission:
-      check:
-        service_antenne:
-          user_antennes:
-            user_id:
-              _eq: X-Hasura-User-Id
-      columns:
-      - date_ouverture
-      - extinction
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      set: {}
-    role: service
   - comment: null
     permission:
       check:
@@ -1748,6 +1710,35 @@ tables:
       - antenne_id
       set: {}
     role: prepose
+  - comment: null
+    permission:
+      check:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      columns:
+      - date_ouverture
+      - extinction
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      set: {}
+    role: service
   is_enum: false
   object_relationships:
   - comment: null
@@ -1830,38 +1821,6 @@ tables:
       - type
       - ville
       filter:
-        service_antenne:
-          user_antennes:
-            user_id:
-              _eq: X-Hasura-User-Id
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
-      filter:
         ti:
           magistrats:
             user_id:
@@ -1926,6 +1885,36 @@ tables:
           user_id:
             _eq: X-Hasura-User-Id
     role: mandataire
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    role: service
   table: mesures
   update_permissions:
   - comment: null
@@ -1959,37 +1948,6 @@ tables:
               _eq: X-Hasura-User-Id
       set: {}
     role: ti
-  - comment: null
-    permission:
-      columns:
-      - date_ouverture
-      - extinction
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      filter:
-        service_antenne:
-          user_antennes:
-            user_id:
-              _eq: X-Hasura-User-Id
-      set: {}
-    role: service
   - comment: null
     permission:
       columns:
@@ -2050,6 +2008,35 @@ tables:
             _eq: X-Hasura-User-Id
       set: {}
     role: prepose
+  - comment: null
+    permission:
+      columns:
+      - date_ouverture
+      - extinction
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      set: {}
+    role: service
 - array_relationships: []
   delete_permissions: []
   event_triggers: []

@@ -37,7 +37,6 @@ export const CREATE_ANTENNE = gql`
         contact_firstname
         contact_lastname
         contact_phone
-        headquarters
         id
         mesures_max
         name

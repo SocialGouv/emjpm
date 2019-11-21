@@ -1,54 +1,7 @@
-const { Service } = require("../../../model/Service");
-const { Department } = require("../../../model/Departments");
 const { ServiceAntenne } = require("../../../model/ServiceAntenne");
 const { ServiceTis } = require("../../../model/ServiceTis");
 const { ServiceAdmin } = require("../../../model/ServiceAdmin");
 const { UserAntenne } = require("../../../model/UserAntenne");
-
-const { getRegionCode } = require("../../../util/DepartementUtil");
-
-exports.createService = async body => {
-  const regionCode = getRegionCode(body.code_postal);
-
-  const department = await Department.query()
-    .where("code", regionCode)
-    .limit(1)
-    .first();
-
-  const department_id = department.id;
-
-  return Service.query()
-    .allowInsert(
-      "[etablissement, telephone,user_id,telephone_portable,adresse,code_postal,ville,department_id]"
-    )
-    .insert({
-      etablissement: body.etablissement,
-      nom: body.nom,
-      prenom: body.prenom,
-      email: body.email,
-      telephone: body.telephone,
-      adresse: body.adresse,
-      code_postal: body.code_postal,
-      ville: body.ville,
-      dispo_max: body.dispo_max,
-      department_id
-    });
-};
-
-exports.createServiceAntenne = async (body, service_id) =>
-  ServiceAntenne.query().insert({
-    headquarters: true,
-    name: body.etablissement,
-    contact_firstname: body.prenom,
-    contact_lastname: body.nom,
-    contact_email: body.email,
-    contact_phone: body.telephone,
-    address_street: body.adresse,
-    address_zip_code: body.code_postal,
-    address_city: body.ville,
-    mesures_max: body.dispo_max,
-    service_id: service_id
-  });
 
 exports.createServiceTis = async (body, service_id) => {
   const { tis } = body;

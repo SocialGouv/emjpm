@@ -8,17 +8,10 @@ import { AntenneEditLinkButton } from "../Commons";
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { PreferencesPanelStyle } from "./style";
 
-// TODO MOVE ME IN UTILS
-export const getHeadquarter = user_antennes => {
-  return user_antennes.filter(user_antenne => user_antenne.service_antenne.headquarters === true);
-};
-
 const PreferencesPanel = props => {
   const { user_antennes, currentAntenne } = props;
   const [mainAntenne] = user_antennes;
-  const antennes = getHeadquarter(user_antennes);
-  const [headquarter] = antennes;
-  const currentAntenneId = currentAntenne || headquarter.service_antenne.id;
+  const currentAntenneId = currentAntenne;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
       antenneId: currentAntenne ? currentAntenne : mainAntenne.antenne_id

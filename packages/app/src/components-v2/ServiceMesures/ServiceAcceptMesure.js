@@ -16,7 +16,6 @@ export const ServiceAcceptMesure = props => {
   const [UpdateMesure] = useMutation(ACCEPT_MESURE, {});
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
-  const [headquarter] = ANTENNE_OPTIONS;
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
@@ -56,7 +55,7 @@ export const ServiceAcceptMesure = props => {
             ville: Yup.string().required()
           })}
           initialValues={{
-            antenne_id: headquarter,
+            antenne_id: "",
             code_postal: "",
             date_ouverture: "",
             residence: "",

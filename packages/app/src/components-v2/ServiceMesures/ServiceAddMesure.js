@@ -8,7 +8,6 @@ import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
-import { getHeadquarter } from "../../util/getHeadquarter";
 import { ADD_MESURE } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
 import { formatTribunalList } from "./utils";
@@ -48,7 +47,6 @@ export const ServiceAddMesure = props => {
     value: ua.service_antenne.id
   }));
 
-  const [headquarter] = getHeadquarter(props.user_antennes);
   const tribunalList = formatTribunalList(data.service_tis);
   const [uniqueTribunal] = tribunalList;
   const tribunalDefaultValue =
@@ -121,10 +119,7 @@ export const ServiceAddMesure = props => {
               })}
               initialValues={{
                 annee: "",
-                antenne: {
-                  label: headquarter.service_antenne.name,
-                  value: headquarter.service_antenne.id
-                },
+                antenne: "",
                 civilite: "",
                 code_postal: "",
                 date_ouverture: "",
