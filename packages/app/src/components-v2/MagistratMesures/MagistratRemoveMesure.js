@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { DELETE_ANTENNE_MESURE, DELETE_MANDATAIRE_MESURE } from "./mutations";
+import { DELETE_MANDATAIRE_MESURE, DELETE_SERVICE_MESURE } from "./mutations";
 import { MESURE } from "./queries";
 
 export const MagistratRemoveMesure = props => {
@@ -21,7 +21,7 @@ export const MagistratRemoveMesure = props => {
   });
 
   const [DeleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE);
-  const [DeleteAntenneMesure] = useMutation(DELETE_ANTENNE_MESURE);
+  const [DeleteServiceMesure] = useMutation(DELETE_SERVICE_MESURE);
 
   if (error) {
     return <div>error</div>;
@@ -57,12 +57,12 @@ export const MagistratRemoveMesure = props => {
                     mandataire_id: mesure.mandataire_id
                   }
                 });
-              } else if (mesure.antenne_id) {
-                DeleteAntenneMesure({
+              } else if (mesure.service_id) {
+                DeleteServiceMesure({
                   refetchQueries: ["mesures"],
                   variables: {
-                    antenne_id: mesure.antenne_id,
-                    id: currentMesure
+                    id: currentMesure,
+                    service_id: mesure.service_id
                   }
                 });
               }
