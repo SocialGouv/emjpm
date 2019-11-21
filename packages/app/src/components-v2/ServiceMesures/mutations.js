@@ -181,7 +181,7 @@ export const ACCEPT_MESURE = gql`
     $residence: String!
     $code_postal: String!
     $ville: String!
-    $antenne_id: Int!
+    $antenne_id: Int
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -269,7 +269,6 @@ export const ADD_MESURE = gql`
         numero_rg: $numero_rg
         status: "Mesure en cours"
         antenne_id: $antenne_id
-        service_id: $service_id
       }
     ) {
       returning {
@@ -296,7 +295,7 @@ export const ADD_MESURE = gql`
         date_ouverture
       }
     }
-    update_service(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: 1 }) {
+    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: 1 }) {
       affected_rows
       returning {
         id

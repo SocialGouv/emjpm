@@ -6,11 +6,11 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
-
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { ADD_MESURE } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
 import { formatTribunalList } from "./utils";
+
 
 const ServiceCreateAntenneStyle = {
   flexWrap: "wrap"
@@ -25,6 +25,9 @@ const grayBox = {
 const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export const ServiceAddMesure = props => {
+  const { user_antennes, service_admins } = props;
+  const [serviceAdmin] = service_admins;
+
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
 
   const [AddMesure] = useMutation(ADD_MESURE, {
@@ -42,7 +45,7 @@ export const ServiceAddMesure = props => {
     return <div>Erreur...</div>;
   }
 
-  const antenneOptions = props.user_antennes.map(ua => ({
+  const antenneOptions = user_antennes.map(ua => ({
     label: ua.service_antenne.name,
     value: ua.service_antenne.id
   }));
@@ -86,7 +89,7 @@ export const ServiceAddMesure = props => {
                   refetchQueries: ["mesures", "mesures_aggregate"],
                   variables: {
                     annee: values.annee.toString(),
-                    antenne_id: Number.parseInt(values.antenne.value),
+                    antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
                     civilite: values.civilite.value,
                     code_postal: values.code_postal,
                     date_ouverture: values.date_ouverture,
@@ -94,6 +97,7 @@ export const ServiceAddMesure = props => {
                     numero_rg: values.numero_rg,
                     residence: values.residence.value,
                     ti_id: values.tribunal.value,
+                    service_id: serviceAdmin.service_id,
                     type: values.type.value,
                     ville: values.ville
                   }
@@ -106,7 +110,7 @@ export const ServiceAddMesure = props => {
                   .required("Champs obligatoire")
                   .min(1900, "l'année choisi doit être au minimum 1900")
                   .max(2019, "l'année choisi doit être au maximum 2019"),
-                antenne: Yup.string().required("Champs obligatoire"),
+                antenne: Yup.string(),
                 civilite: Yup.string().required("Champs obligatoire"),
                 code_postal: Yup.string().required("Champs obligatoire"),
                 date_ouverture: Yup.date().required("Champs obligatoire"),
