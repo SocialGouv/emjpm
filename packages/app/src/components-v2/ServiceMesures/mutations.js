@@ -4,7 +4,7 @@ export const CLOSE_MESURE = gql`
   mutation closeMesure(
     $id: Int!
     $service_id: Int!
-    $antenne_id: Int
+    $antenne_id: Int!
     $reason_extinction: String!
     $extinction: date!
   ) {
@@ -38,6 +38,13 @@ export const CLOSE_MESURE = gql`
         etablissement
         annee
         date_ouverture
+      }
+    }
+    update_service(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: -1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_in_progress
       }
     }
     update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_in_progress: -1 }) {

@@ -56,10 +56,11 @@ export const ServiceCloseMesure = props => {
               UpdateMesure({
                 refetchQueries: ["mesures", "mesures_aggregate"],
                 variables: {
-                  antenne_id: mesure.antenne_id,
+                  antenne_id: mesure.antenne_id ? mesure.antenne_id : null,
                   extinction: values.extinction,
                   id: currentMesure,
-                  reason_extinction: values.reason_extinction.value
+                  reason_extinction: values.reason_extinction.value,
+                  service_id: mesure.service_id
                 }
               });
               setSubmitting(false);
