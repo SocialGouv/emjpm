@@ -7,7 +7,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
-import { ADD_MESURE } from "./mutations";
+import { ADD_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
 import { formatTribunalList } from "./utils";
 
@@ -36,6 +36,7 @@ export const ServiceAddMesure = props => {
       refetchQueries: ["mesures", "mesures_aggregate"]
     }
   });
+  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
 
   if (loading) {
     return <div>Chargement...</div>;
@@ -102,6 +103,15 @@ export const ServiceAddMesure = props => {
                     ville: values.ville
                   }
                 });
+                if (values.antenne_id) {
+                  UpdateAntenneCounters({
+                    variables: {
+                      antenne_id: values.antenne_id.value,
+                      inc_mesures_awaiting: 0,
+                      inc_mesures_in_progress: 1
+                    }
+                  });
+                }
                 setSubmitting(false);
                 Router.push("/services");
               }}

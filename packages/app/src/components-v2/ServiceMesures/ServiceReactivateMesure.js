@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { REACTIVATE_MESURE } from "./mutations";
+import { REACTIVATE_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
 import { MESURE } from "./queries";
 
 export const ServiceReactivateMesure = props => {
@@ -20,6 +20,7 @@ export const ServiceReactivateMesure = props => {
     }
   });
   const [UpdateMesure] = useMutation(REACTIVATE_MESURE);
+  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
 
   if (error) {
     return <div>error</div>;
@@ -52,11 +53,20 @@ export const ServiceReactivateMesure = props => {
               UpdateMesure({
                 refetchQueries: ["mesures", "mesures_aggregate"],
                 variables: {
-                  antenne_id: mesure.antenne_id,
                   id: currentMesure,
-                  reason_extinction: values.reason_extinction
+                  reason_extinction: values.reason_extinction,
+                  service_id: mesure.service_id
                 }
               });
+              if (mesure.antenne_id) {
+                UpdateAntenneCounters({
+                  variables: {
+                    antenne_id: mesure.antenne_id,
+                    inc_mesures_awaiting: 0,
+                    inc_mesures_in_progress: 1
+                  }
+                });
+              }
               setSubmitting(false);
               setPanelType(null);
               setCurrentMesure(null);
