@@ -2,7 +2,8 @@
 
 include:
   - /.k8s/api/.k8s-deploy-api.yml
-  - /.k8s/app/.k8s-deploy-app.yml
+  - /.k8s/app/.k8s-deploy-app-dev.yml
+  - /.k8s/app/.k8s-deploy-app-prod.yml
   - /.k8s/postgres/.k8s-deploy-postgres.yml
   - /.k8s/hasura/.k8s-deploy-hasura.yml
   - /.k8s/metabase/.k8s-deploy-metabase.yml
@@ -56,6 +57,7 @@ include:
     - kubectl create namespace ${K8S_NAMESPACE}
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
     - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
+    - kubectl label namespace ${K8S_NAMESPACE} cert=wildcard # Should be remove in prod
     #
     - envsubst < ./.k8s/quota.yml > ./quota.yml
     - kubectl apply -f ./quota.yml -n ${K8S_NAMESPACE}
@@ -82,9 +84,9 @@ Create namespace:
 #
 #
 
-.deploy-frontend: &deploy_frontend
+.deploy-frontend-dev: &deploy_frontend-dev
   <<: *deploy_stage
-  extends: .k8s-deploy-app
+  extends: .k8s-deploy-app-dev
   variables:
     <<: *deploy_stage_variables
     CONTEXT: app
@@ -96,15 +98,35 @@ Create namespace:
     # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
     - source ./.gitlab-ci/env.sh
     - echo "Frontend available at - ${FRONTEND_URL}"
-
+  except:
+    variables:
+      - $PRODUCTION
 #
 
+.deploy-frontend-prod: &deploy_frontend-prod
+  <<: *deploy_stage
+  extends: .k8s-deploy-app-prod
+  variables:
+    <<: *deploy_stage_variables
+    CONTEXT: app
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+    PORT: 80
+  after_script:
+    # NOTE(douglasduteil): re-run env.sh
+    # Because the `after_script` runs in a separated shell context.
+    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
+    - source ./.gitlab-ci/env.sh
+    - echo "Frontend available at - ${FRONTEND_URL}"
+  only:
+    variables:
+      - $PRODUCTION
+
 Deploy App (dev):
-  <<: *deploy_frontend
+  <<: *deploy_frontend-dev
   <<: *dev_stage
 
 Deploy App (incubateur):
-  <<: *deploy_frontend
+  <<: *deploy_frontend-prod
   <<: *incubateur_stage
 
 #
