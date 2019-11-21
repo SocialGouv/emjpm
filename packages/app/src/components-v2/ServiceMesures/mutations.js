@@ -40,7 +40,7 @@ export const CLOSE_MESURE = gql`
         date_ouverture
       }
     }
-    update_service(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: -1 }) {
+    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: -1 }) {
       affected_rows
       returning {
         id
@@ -218,7 +218,7 @@ export const ACCEPT_MESURE = gql`
         date_ouverture
       }
     }
-    update_service(
+    update_services(
       where: { id: { _eq: $antenne_id } }
       _inc: { mesures_in_progress: 1, mesures_awaiting: -1 }
     ) {
