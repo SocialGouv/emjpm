@@ -219,10 +219,13 @@ export const ACCEPT_MESURE = gql`
 <<<<<<< HEAD
     update_services(
       where: { id: { _eq: $service_id } }
+<<<<<<< HEAD
 =======
     update_service(
       where: { id: { _eq: $antenne_id } }
 >>>>>>> feat(service-mesure): handle service in mesures
+=======
+>>>>>>> fix(service-mesures): restore mesures actions
       _inc: { mesures_in_progress: 1, mesures_awaiting: -1 }
     ) {
       affected_rows
