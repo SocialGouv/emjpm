@@ -1254,7 +1254,7 @@ tables:
       - telephone
       - ville
       filter: {}
-    role: service
+    role: ti
   - comment: null
     permission:
       allow_aggregations: false
@@ -1274,8 +1274,10 @@ tables:
       - prenom
       - telephone
       - ville
-      filter: {}
-    role: ti
+      filter:
+        id:
+          _eq: X-Hasura-Service-Id
+    role: service
   table: services
   update_permissions:
   - comment: null
@@ -1290,7 +1292,9 @@ tables:
       - nom
       - prenom
       - telephone
-      filter: {}
+      filter:
+        id:
+          _eq: X-Hasura-Service-Id
       set: {}
     role: service
 - array_relationships:
@@ -1737,7 +1741,8 @@ tables:
       - status
       - type
       - ville
-      set: {}
+      set:
+        service_id: x-hasura-Service-Id
     role: service
   is_enum: false
   object_relationships:
