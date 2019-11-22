@@ -6,11 +6,11 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
+
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { ADD_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
 import { formatTribunalList } from "./utils";
-
 
 const ServiceCreateAntenneStyle = {
   flexWrap: "wrap"
@@ -97,8 +97,8 @@ export const ServiceAddMesure = props => {
                     numero_dossier: values.numero_dossier,
                     numero_rg: values.numero_rg,
                     residence: values.residence.value,
-                    ti_id: values.tribunal.value,
                     service_id: serviceAdmin.service_id,
+                    ti_id: values.tribunal.value,
                     type: values.type.value,
                     ville: values.ville
                   }

@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { EDIT_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
-import { formatTribunalList } from "./utils";
+import { formatAntenneOptions, formatTribunalList } from "./utils";
 
 export const ServiceEditMesure = props => {
   const {
