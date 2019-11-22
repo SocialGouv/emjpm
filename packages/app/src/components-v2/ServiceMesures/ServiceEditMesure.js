@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
@@ -9,7 +9,8 @@ import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { EDIT_MESURE } from "./mutations";
-import { formatAntenneOptions } from "./utils";
+import { SERVICE_TRIBUNAL } from "./queries";
+import { formatAntenneOptions, formatTribunalList } from "./utils";
 
 const getMesureAntenne = (antenne_id, user_antennes) => {
   const filteredAntennes = user_antennes.filter(
@@ -35,12 +36,28 @@ export const ServiceEditMesure = props => {
     residence,
     type,
     ville,
-    user_antennes
+    user_antennes,
+    tribunal,
+    tiId
   } = props;
-  const currentMesureAntenne = getMesureAntenne(antenneId, user_antennes);
+
+  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
   const [UpdateMesure] = useMutation(EDIT_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  if (error) {
+    return <div>error...</div>;
+  }
+
+  const currentMesureAntenne = getMesureAntenne(antenneId, user_antennes);
+  const tribunalList = formatTribunalList(data.service_tis);
+  const tribunalDefautValue = tiId ? { label: tribunal, value: tiId } : "";
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
+
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
@@ -106,6 +123,7 @@ export const ServiceEditMesure = props => {
             numero_dossier: numeroDossier,
             numero_rg: numeroRg,
             residence: { label: residence, value: residence },
+            tribunal: tribunalDefautValue,
             type: { label: type, value: type },
             ville: ville
           }}
@@ -229,6 +247,18 @@ export const ServiceEditMesure = props => {
                     />
                   </Box>
                 )}
+                <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+                  <Select
+                    id="tribunal"
+                    name="tribunal"
+                    placeholder="Tribunal"
+                    value={values.tribunal}
+                    options={tribunalList}
+                    hasError={errors.tribunal && touched.tribunal}
+                    onChange={option => setFieldValue("tribunal", option)}
+                  />
+                  {errors.tribunal && touched.tribunal && <Text>{errors.tribunal}</Text>}
+                </Box>
                 <Flex justifyContent="flex-end">
                   <Box>
                     <Button
