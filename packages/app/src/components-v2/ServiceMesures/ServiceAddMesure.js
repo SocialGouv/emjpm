@@ -8,8 +8,7 @@ import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
-import { getHeadquarter } from "../../util/getHeadquarter";
-import { ADD_MESURE } from "./mutations";
+import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
 import { formatTribunalList } from "./utils";
 
@@ -26,12 +25,42 @@ const grayBox = {
 const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export const ServiceAddMesure = props => {
+  const { user_antennes, service_admins } = props;
+  const [serviceAdmin] = service_admins;
+
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
+  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
 
   const [AddMesure] = useMutation(ADD_MESURE, {
     options: {
-      awaitRefetchQueries: true,
       refetchQueries: ["mesures", "mesures_aggregate"]
+    },
+    update(
+      cache,
+      {
+        data: {
+          insert_mesures: { returning }
+        }
+      }
+    ) {
+      const [mesure] = returning;
+      UpdateServicesCounter({
+        variables: {
+          mesures_awaiting: 0,
+          mesures_in_progress: 1,
+          service_id: mesure.service_id
+        }
+      });
+      if (mesure.antenne_id) {
+        UpdateAntenneCounters({
+          variables: {
+            antenne_id: mesure.antenne_id,
+            inc_mesures_awaiting: -1,
+            inc_mesures_in_progress: 1
+          }
+        });
+      }
     }
   });
 
@@ -43,12 +72,11 @@ export const ServiceAddMesure = props => {
     return <div>Erreur...</div>;
   }
 
-  const antenneOptions = props.user_antennes.map(ua => ({
+  const antenneOptions = user_antennes.map(ua => ({
     label: ua.service_antenne.name,
     value: ua.service_antenne.id
   }));
 
-  const [headquarter] = getHeadquarter(props.user_antennes);
   const tribunalList = formatTribunalList(data.service_tis);
   const [uniqueTribunal] = tribunalList;
   const tribunalDefaultValue =
@@ -88,18 +116,28 @@ export const ServiceAddMesure = props => {
                   refetchQueries: ["mesures", "mesures_aggregate"],
                   variables: {
                     annee: values.annee.toString(),
-                    antenne_id: Number.parseInt(values.antenne.value),
+                    antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
                     civilite: values.civilite.value,
                     code_postal: values.code_postal,
                     date_ouverture: values.date_ouverture,
                     numero_dossier: values.numero_dossier,
                     numero_rg: values.numero_rg,
                     residence: values.residence.value,
+                    service_id: serviceAdmin.service_id,
                     ti_id: values.tribunal.value,
                     type: values.type.value,
                     ville: values.ville
                   }
                 });
+                if (values.antenne_id) {
+                  UpdateAntenneCounters({
+                    variables: {
+                      antenne_id: values.antenne_id.value,
+                      inc_mesures_awaiting: 0,
+                      inc_mesures_in_progress: 1
+                    }
+                  });
+                }
                 setSubmitting(false);
                 Router.push("/services");
               }}
@@ -108,7 +146,7 @@ export const ServiceAddMesure = props => {
                   .required("Champs obligatoire")
                   .min(1900, "l'année choisi doit être au minimum 1900")
                   .max(2019, "l'année choisi doit être au maximum 2019"),
-                antenne: Yup.string().required("Champs obligatoire"),
+                antenne: Yup.string(),
                 civilite: Yup.string().required("Champs obligatoire"),
                 code_postal: Yup.string().required("Champs obligatoire"),
                 date_ouverture: Yup.date().required("Champs obligatoire"),
@@ -121,10 +159,7 @@ export const ServiceAddMesure = props => {
               })}
               initialValues={{
                 annee: "",
-                antenne: {
-                  label: headquarter.service_antenne.name,
-                  value: headquarter.service_antenne.id
-                },
+                antenne: "",
                 civilite: "",
                 code_postal: "",
                 date_ouverture: "",

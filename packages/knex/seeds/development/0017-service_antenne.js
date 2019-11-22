@@ -5,7 +5,6 @@ exports.seed = async function(knex) {
     services.map(service =>
       knex("service_antenne").insert({
         service_id: service.id,
-        headquarters: true,
         name: "skynet antenne",
         contact_firstname: "sarah",
         contact_lastname: "connor",

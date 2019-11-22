@@ -11,7 +11,7 @@ import { boxStyle, flexStyle, iconTextStyle, topTextStyle } from "./style";
 
 const MandataireInformations = props => {
   const {
-    antenneId,
+    serviceId,
     mandataireId,
     nom,
     prenom,
@@ -30,8 +30,8 @@ const MandataireInformations = props => {
 
   const { data, error, loading } = useQuery(MANDATAIRE_COMMENTS, {
     variables: {
-      antenne_id: antenneId,
-      mandataire_id: mandataireId
+      mandataire_id: mandataireId,
+      service_id: serviceId
     }
   });
 
@@ -80,7 +80,7 @@ const MandataireInformations = props => {
           <MagistratMandataireCommentForm
             toggleCommentForm={toggleCommentForm}
             ti={ti}
-            antenneId={antenneId}
+            serviceId={serviceId}
             mandataireId={mandataireId}
           />
         ) : (

@@ -58,7 +58,7 @@ export const CHOOSE_MANDATAIRE = gql`
 export const CHOOSE_SERVICE = gql`
   mutation chooseService(
     $ti: Int!
-    $antenne_id: Int!
+    $service_id: Int!
     $type: String!
     $civilite: String!
     $annee: String!
@@ -69,7 +69,7 @@ export const CHOOSE_SERVICE = gql`
       objects: {
         ti_id: $ti
         cabinet: $cabinet
-        antenne_id: $antenne_id
+        service_id: $service_id
         type: $type
         civilite: $civilite
         annee: $annee
@@ -78,7 +78,7 @@ export const CHOOSE_SERVICE = gql`
       }
     ) {
       returning {
-        antenne_id
+        service_id
         id
         cabinet
         civilite
@@ -101,7 +101,7 @@ export const CHOOSE_SERVICE = gql`
         date_ouverture
       }
     }
-    update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_awaiting: 1 }) {
+    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_awaiting: 1 }) {
       affected_rows
       returning {
         id
@@ -112,11 +112,11 @@ export const CHOOSE_SERVICE = gql`
 `;
 
 export const ADD_COMMENT = gql`
-  mutation InsertComment($comment: String!, $antenne_id: Int, $ti_id: Int!, $mandataire_id: Int) {
+  mutation InsertComment($comment: String!, $service_id: Int, $ti_id: Int!, $mandataire_id: Int) {
     insert_commentaires(
       objects: {
         comment: $comment
-        antenne_id: $antenne_id
+        service_id: $service_id
         ti_id: $ti_id
         mandataire_id: $mandataire_id
       }
@@ -126,7 +126,7 @@ export const ADD_COMMENT = gql`
         comment
         created_at
         id
-        antenne_id
+        service_id
         mandataire_id
         ti_id
       }
@@ -142,7 +142,7 @@ export const EDIT_COMMENT = gql`
         comment
         created_at
         id
-        antenne_id
+        service_id
         mandataire_id
         ti_id
       }

@@ -1,8 +1,7 @@
 import gql from "graphql-tag";
 
-export const EDIT_ANTENNE = gql`
-  mutation editAntenne(
-    $antenne_id: Int
+export const CREATE_ANTENNE = gql`
+  mutation createAntenne(
     $user_id: Int
     $service_id: Int
     $name: String
@@ -15,9 +14,10 @@ export const EDIT_ANTENNE = gql`
     $address_street: String
     $address_city: String
   ) {
-    update_service_antenne(
-      where: { id: { _eq: $antenne_id } }
-      _set: {
+    insert_service_antenne(
+      objects: {
+        user_antennes: { data: { user_id: $user_id } }
+        service_id: $service_id
         name: $name
         mesures_max: $mesures_max
         contact_phone: $contact_phone
@@ -37,7 +37,6 @@ export const EDIT_ANTENNE = gql`
         contact_firstname
         contact_lastname
         contact_phone
-        headquarters
         id
         mesures_max
         name

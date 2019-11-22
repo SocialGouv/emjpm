@@ -7,12 +7,11 @@ CREATE VIEW view_mesure_gestionnaire AS
   , dep.id department_id
   , dep.nom dep_nom
   , ser.dispo_max mesures_max
-  , sum(ant.mesures_awaiting) mesures_awaiting
-  , sum(ant.mesures_in_progress) mesures_in_progress
-  , (ser.dispo_max - sum(ant.mesures_awaiting) - sum(ant.mesures_in_progress)) remaining_capacity
-  FROM services ser, service_antenne ant, departements dep
-  WHERE ser.id = ant.service_id
-  AND dep.id = ser.department_id
+  , ser.mesures_awaiting
+  , ser.mesures_in_progress
+  , (ser.dispo_max - ser.mesures_awaiting - ser.mesures_in_progress) remaining_capacity
+  FROM services ser, departements dep
+  WHERE dep.id = ser.department_id
   GROUP BY ser.id, dep.id, dep.nom, ser.dispo_max
   UNION
   SELECT concat(u.type, '-', man.id) id

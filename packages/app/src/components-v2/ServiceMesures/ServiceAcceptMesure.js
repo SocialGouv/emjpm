@@ -8,15 +8,45 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { RESIDENCE } from "../../constants/mesures";
-import { ACCEPT_MESURE } from "./mutations";
+import { ACCEPT_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { formatAntenneOptions } from "./utils";
 
 export const ServiceAcceptMesure = props => {
   const { currentMesure, user_antennes } = props;
-  const [UpdateMesure] = useMutation(ACCEPT_MESURE, {});
+  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+
+  const [UpdateMesure] = useMutation(ACCEPT_MESURE, {
+    update(
+      cache,
+      {
+        data: {
+          update_mesures: { returning }
+        }
+      }
+    ) {
+      const [mesure] = returning;
+      UpdateServicesCounter({
+        variables: {
+          mesures_awaiting: -1,
+          mesures_in_progress: 1,
+          service_id: mesure.service_id
+        }
+      });
+      if (mesure.antenne_id) {
+        UpdateAntenneCounters({
+          variables: {
+            antenne_id: mesure.antenne_id,
+            inc_mesures_awaiting: -1,
+            inc_mesures_in_progress: 1
+          }
+        });
+      }
+    }
+  });
+
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
-  const [headquarter] = ANTENNE_OPTIONS;
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
@@ -37,7 +67,7 @@ export const ServiceAcceptMesure = props => {
             UpdateMesure({
               refetchQueries: ["mesures", "mesures_aggregate"],
               variables: {
-                antenne_id: values.antenne_id.value,
+                antenne_id: values.antenne_id ? values.antenne_id.value : null,
                 code_postal: values.code_postal,
                 date_ouverture: values.date_ouverture,
                 id: currentMesure,
@@ -56,7 +86,7 @@ export const ServiceAcceptMesure = props => {
             ville: Yup.string().required()
           })}
           initialValues={{
-            antenne_id: headquarter,
+            antenne_id: "",
             code_postal: "",
             date_ouverture: "",
             residence: "",
