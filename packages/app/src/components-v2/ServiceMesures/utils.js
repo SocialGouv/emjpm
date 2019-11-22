@@ -34,7 +34,7 @@ export const formatMesureList = mesureList => {
       numeroRg: numero_rg ? numero_rg : "RG-00000000",
       residence: residence ? residence : "non reseigné",
       status: status ? status : "non reseigné",
-      tiId: ti ? ti.id : "Tribunal non reseigné",
+      tiId: ti ? ti.id : null,
       tribunal: ti ? ti.etablissement : "Tribunal non reseigné",
       type: type ? type : "type de mesure non reseigné",
       ville: ville ? ville : "ville non reseigné"

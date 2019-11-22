@@ -30,7 +30,7 @@ const ServiceMesures = props => {
     currentMesureType = mesureStatus ? mesureStatus.value : null;
   }
   const { data, error, loading, fetchMore } = useQuery(MESURES, {
-    fetchPolicy: "network-only",
+    fetchPolicy: "cache-and-network",
     variables: {
       antenne: antenne ? antenne.value : null,
       limit: RESULT_PER_PAGE,
