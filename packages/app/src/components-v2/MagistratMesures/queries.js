@@ -5,13 +5,13 @@ export const MESURE = gql`
     mesures(where: { id: { _eq: $id } }) {
       id
       mandataire_id
-      antenne_id
+      service_id
     }
   }
 `;
 
 export const MESURES = gql`
-  query mesures($antenne: Int, $type: String, $status: String, $searchText: String, $offset: Int) {
+  query mesures($type: String, $status: String, $searchText: String, $offset: Int) {
     mesures_aggregate(
       where: {
         numero_rg: { _ilike: $searchText }

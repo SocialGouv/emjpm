@@ -23,6 +23,7 @@ Array [
     "prenom": "Adrien",
     "reason_extinction": null,
     "residence": null,
+    "service_id": null,
     "status": "Mesure en attente",
     "ti_id": null,
     "type": "Tutelle",

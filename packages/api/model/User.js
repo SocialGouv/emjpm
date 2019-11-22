@@ -7,6 +7,7 @@ const { Model } = require("objection");
 const { Role } = require("./Role");
 const { Tis } = require("./Tis");
 const { ServiceAntenne } = require("./ServiceAntenne");
+const { Service } = require("./Service");
 
 Model.knex(knexConnection);
 
@@ -50,6 +51,18 @@ class User extends Model {
             to: "user_role.role_id"
           },
           to: "role.id"
+        }
+      },
+      service: {
+        relation: Model.HasOneThroughRelation,
+        modelClass: Service,
+        join: {
+          from: "users.id",
+          through: {
+            from: "service_admin.user_id",
+            to: "service_admin.service_id"
+          },
+          to: "services.id"
         }
       },
       antennes: {
@@ -111,12 +124,16 @@ class User extends Model {
     return this.antennes.map(el => el.id);
   }
 
+  getService() {
+    return this.service ? this.service.id : null;
+  }
+
   getHasuraClaims() {
     return {
       "x-hasura-allowed-roles": this.getRoles(),
       "x-hasura-default-role": this.getDefaultRole(),
       "x-hasura-user-id": `${this.id}`,
-      "x-hasura-service-id": `${this.service_id}`,
+      "x-hasura-service-id": `${this.getService()}`,
       "x-hasura-antenne-id": `${this.getAntennes()}`
     };
   }

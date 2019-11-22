@@ -27,6 +27,7 @@ export const GET_SERVICE_USERS = gql`
         user {
           prenom
           nom
+          id
         }
         id
         service_id
@@ -38,7 +39,6 @@ export const GET_SERVICE_USERS = gql`
           mesures_in_progress
           mesures_awaiting
           id
-          headquarters
           contact_phone
           contact_lastname
           contact_firstname
