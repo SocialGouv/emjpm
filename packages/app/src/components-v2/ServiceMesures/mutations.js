@@ -62,6 +62,7 @@ export const EDIT_MESURE = gql`
     $annee: String
     $numero_dossier: String
     $numero_rg: String
+    $ti_id: Int!
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -74,6 +75,7 @@ export const EDIT_MESURE = gql`
         ville: $ville
         civilite: $civilite
         annee: $annee
+        ti_id: $ti_id
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
       }
@@ -240,11 +242,13 @@ export const ADD_MESURE = gql`
     $numero_dossier: String!
     $numero_rg: String!
     $antenne_id: Int!
+    $ti_id: Int!
   ) {
     insert_mesures(
       objects: {
         date_ouverture: $date_ouverture
         type: $type
+        ti_id: $ti_id
         residence: $residence
         code_postal: $code_postal
         ville: $ville
