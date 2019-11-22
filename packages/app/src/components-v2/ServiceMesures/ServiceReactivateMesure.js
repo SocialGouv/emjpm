@@ -7,20 +7,49 @@ import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { REACTIVATE_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
+import { REACTIVATE_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { MESURE } from "./queries";
 
 export const ServiceReactivateMesure = props => {
   const { currentMesure } = props;
-  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
+  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const { data, loading, error } = useQuery(MESURE, {
     variables: {
       id: currentMesure
     }
   });
-  const [UpdateMesure] = useMutation(REACTIVATE_MESURE);
+
   const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+  const [UpdateMesure] = useMutation(REACTIVATE_MESURE, {
+    update(
+      cache,
+      {
+        data: {
+          update_mesures: { returning }
+        }
+      }
+    ) {
+      const [mesure] = returning;
+      UpdateServicesCounter({
+        variables: {
+          mesures_awaiting: 0,
+          mesures_in_progress: 1,
+          service_id: mesure.service_id
+        }
+      });
+      if (mesure.antenne_id) {
+        UpdateAntenneCounters({
+          variables: {
+            antenne_id: mesure.antenne_id,
+            inc_mesures_awaiting: -1,
+            inc_mesures_in_progress: 1
+          }
+        });
+      }
+    }
+  });
 
   if (error) {
     return <div>error</div>;

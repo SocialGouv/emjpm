@@ -35,7 +35,6 @@ const ServicesInformations = props => {
     code_postal,
     email,
     etablissement,
-    id,
     service_tis,
     telephone,
     ville
@@ -69,7 +68,7 @@ const ServicesInformations = props => {
             </Heading5>
             {service_tis.map(ti => {
               return (
-                <Text key={id} sx={topTextStyle}>
+                <Text key={ti.ti.id} sx={topTextStyle}>
                   {ti.ti.etablissement}
                 </Text>
               );

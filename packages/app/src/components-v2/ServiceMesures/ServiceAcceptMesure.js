@@ -8,13 +8,43 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { RESIDENCE } from "../../constants/mesures";
-import { ACCEPT_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
+import { ACCEPT_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { formatAntenneOptions } from "./utils";
 
 export const ServiceAcceptMesure = props => {
   const { currentMesure, user_antennes } = props;
-  const [UpdateMesure] = useMutation(ACCEPT_MESURE, {});
   const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+
+  const [UpdateMesure] = useMutation(ACCEPT_MESURE, {
+    update(
+      cache,
+      {
+        data: {
+          update_mesures: { returning }
+        }
+      }
+    ) {
+      const [mesure] = returning;
+      UpdateServicesCounter({
+        variables: {
+          mesures_awaiting: -1,
+          mesures_in_progress: 1,
+          service_id: mesure.service_id
+        }
+      });
+      if (mesure.antenne_id) {
+        UpdateAntenneCounters({
+          variables: {
+            antenne_id: mesure.antenne_id,
+            inc_mesures_awaiting: -1,
+            inc_mesures_in_progress: 1
+          }
+        });
+      }
+    }
+  });
+
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
   return (
@@ -45,15 +75,6 @@ export const ServiceAcceptMesure = props => {
                 ville: values.ville
               }
             });
-            if (values.antenne_id) {
-              UpdateAntenneCounters({
-                variables: {
-                  antenne_id: values.antenne_id.value,
-                  inc_mesures_awaiting: -1,
-                  inc_mesures_in_progress: 1
-                }
-              });
-            }
             setSubmitting(false);
             setPanelType(null);
             setCurrentMesure(null);

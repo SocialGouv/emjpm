@@ -44,7 +44,7 @@ export const MESURES = gql`
     }
     mesures(
       limit: $limit
-      order_by: { date_ouverture: desc }
+      order_by: { created_at: desc_nulls_last }
       offset: $offset
       where: {
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]

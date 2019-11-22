@@ -8,7 +8,7 @@ import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
-import { ADD_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
+import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
 import { formatTribunalList } from "./utils";
 
@@ -29,14 +29,40 @@ export const ServiceAddMesure = props => {
   const [serviceAdmin] = service_admins;
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
+  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
 
   const [AddMesure] = useMutation(ADD_MESURE, {
     options: {
-      awaitRefetchQueries: true,
       refetchQueries: ["mesures", "mesures_aggregate"]
+    },
+    update(
+      cache,
+      {
+        data: {
+          insert_mesures: { returning }
+        }
+      }
+    ) {
+      const [mesure] = returning;
+      UpdateServicesCounter({
+        variables: {
+          mesures_awaiting: 0,
+          mesures_in_progress: 1,
+          service_id: mesure.service_id
+        }
+      });
+      if (mesure.antenne_id) {
+        UpdateAntenneCounters({
+          variables: {
+            antenne_id: mesure.antenne_id,
+            inc_mesures_awaiting: -1,
+            inc_mesures_in_progress: 1
+          }
+        });
+      }
     }
   });
-  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
 
   if (loading) {
     return <div>Chargement...</div>;

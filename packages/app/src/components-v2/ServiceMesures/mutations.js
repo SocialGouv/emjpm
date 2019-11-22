@@ -39,18 +39,11 @@ export const CLOSE_MESURE = gql`
         date_ouverture
       }
     }
-    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: -1 }) {
-      affected_rows
-      returning {
-        id
-        mesures_in_progress
-      }
-    }
   }
 `;
 
 export const EDIT_MESURE = gql`
-  mutation editMesure(
+  mutation EditMesure(
     $id: Int!
     $antenne_id: Int
     $date_ouverture: date
@@ -158,17 +151,6 @@ export const REACTIVATE_MESURE = gql`
         date_ouverture
       }
     }
-    update_services(
-      where: { id: { _eq: $service_id } }
-      _inc: { mesures_in_progress: 1, mesures_awaiting: 0 }
-    ) {
-      affected_rows
-      returning {
-        id
-        mesures_in_progress
-        mesures_awaiting
-      }
-    }
   }
 `;
 
@@ -216,9 +198,18 @@ export const ACCEPT_MESURE = gql`
         date_ouverture
       }
     }
+  }
+`;
+
+export const UPDATE_SERVICES_COUTERS = gql`
+  mutation UpdateServicesCounter(
+    $service_id: Int!
+    $mesures_in_progress: Int!
+    $mesures_awaiting: Int!
+  ) {
     update_services(
       where: { id: { _eq: $service_id } }
-      _inc: { mesures_in_progress: 1, mesures_awaiting: -1 }
+      _inc: { mesures_in_progress: $mesures_in_progress, mesures_awaiting: $mesures_awaiting }
     ) {
       affected_rows
       returning {
@@ -292,13 +283,6 @@ export const ADD_MESURE = gql`
         etablissement
         annee
         date_ouverture
-      }
-    }
-    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: 1 }) {
-      affected_rows
-      returning {
-        id
-        mesures_in_progress
       }
     }
   }

@@ -153,7 +153,7 @@ const ServiceEditAntenne = props => {
                     </Box>
                     <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
-                        value={values.mesures_max}
+                        value={values.mesures_max.toString()}
                         id="mesures_max"
                         name="mesures_max"
                         hasError={errors.mesures_max && touched.mesures_max}

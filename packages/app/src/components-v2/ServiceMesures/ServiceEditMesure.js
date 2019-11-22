@@ -29,9 +29,8 @@ export const ServiceEditMesure = props => {
     tribunal,
     tiId
   } = props;
-
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
-  const [UpdateMesure] = useMutation(EDIT_MESURE);
+  const [EditMesure] = useMutation(EDIT_MESURE);
   const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
@@ -70,7 +69,7 @@ export const ServiceEditMesure = props => {
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
-            UpdateMesure({
+            EditMesure({
               awaitRefetchQueries: true,
               refetchQueries: ["mesures", "mesures_aggregate"],
               variables: {
@@ -83,6 +82,7 @@ export const ServiceEditMesure = props => {
                 numero_dossier: values.numero_dossier,
                 numero_rg: values.numero_rg,
                 residence: values.residence.value,
+                ti_id: values.tribunal.value,
                 type: values.type.value,
                 ville: values.ville
               }
