@@ -1,9 +1,12 @@
+import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
+import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
 import { AntenneEditLinkButton } from "../Commons";
+import { GET_SERVICES_ANTENNE } from "./queries";
 import {
   boxStyle,
   flexStyle,
@@ -12,10 +15,26 @@ import {
   titleStyle,
   topTextStyle
 } from "./style";
-const Informations = props => {
-  const { service_antenne, currentAntenne } = props;
-  const [service] = service_antenne;
 
+const ServicesInformations = props => {
+  const { antenne_id } = props;
+  const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
+    fetchPolicy: "cache-and-network",
+    variables: {
+      antenneId: antenne_id
+    }
+  });
+
+  if (loading) {
+    return <div>loading</div>;
+  }
+
+  if (error) {
+    return <div>error</div>;
+  }
+
+  const { service_antenne } = data;
+  const [service] = service_antenne;
   return (
     <Box {...props}>
       <Card p="5">
@@ -55,20 +74,21 @@ const Informations = props => {
           </Box>
         </Flex>
         <Flex mt="5">
-          <AntenneEditLinkButton href={currentAntenne}>
-            Modifier mes informations
-          </AntenneEditLinkButton>
+          <AntenneEditLinkButton href={antenne_id}>Modifier mes informations</AntenneEditLinkButton>
         </Flex>
       </Card>
     </Box>
   );
 };
 
-export { Informations };
+ServicesInformations.defaultProps = {
+  currentAntenne: null,
+  user_antennes: []
+};
 
-// <Heading5 mt="5">Langues parlées</Heading5>
-// <Text sx={topTextStyle}>• Anglais</Text>
-// <Text sx={innerTextStyle}>• Arabe</Text>
-// <Heading5 mt="5">Compétences particulières</Heading5>
-// <Text sx={topTextStyle}>Troubles psychiques</Text>
-// <Text sx={innerTextStyle}>Langage des signes</Text>
+ServicesInformations.propTypes = {
+  currentAntenne: PropTypes.string,
+  user_antennes: PropTypes.array
+};
+
+export { ServicesInformations };

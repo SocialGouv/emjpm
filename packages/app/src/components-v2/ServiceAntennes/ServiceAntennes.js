@@ -32,7 +32,7 @@ const ServiceAntennes = props => {
   const { service_antenne } = data;
   return (
     <BoxWrapper>
-      {service_antenne.length < 2 && (
+      {service_antenne.length < 1 && (
         <Fragment>
           <Heading2 mt="1">Antennes</Heading2>
           <Card p="6" mt="3">
@@ -66,7 +66,7 @@ const ServiceAntennes = props => {
           </Card>
         </Fragment>
       )}
-      {service_antenne.length > 1 && (
+      {service_antenne.length > 0 && (
         <Fragment>
           <Flex flexWrap="wrap" mb="3" alignItems="center" justifyContent="space-between">
             <Heading2 mt="1">Antennes</Heading2>

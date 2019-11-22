@@ -1,4 +1,3 @@
-
 exports.up = async function(knex) {
   return knex.raw(`
 create table temp as select service_id, count(service_id) antenne_nb from service_antenne group by service_id;
@@ -13,11 +12,11 @@ drop table temp;
 drop table temp2;
 
 alter table service_antenne drop headquarters CASCADE;
-  `)
+  `);
 };
 
 exports.down = function(knex) {
   return knex.raw(`
 alter table service_antenne add headquarters boolean null;
-  `)
+  `);
 };

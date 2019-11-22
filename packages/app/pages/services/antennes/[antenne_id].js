@@ -1,16 +1,14 @@
 import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
-import { useRouter } from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServices } from "../../../src/components-v2/Layout";
-import { PreferencesPanel } from "../../../src/components-v2/PreferencesPanel";
-import { ServicesInformations } from "../../../src/components-v2/ServicesInformations";
+import { PreferencesPanel } from "../../../src/components-v2/ServiceAntenneSidebar";
+import { ServicesInformations } from "../../../src/components-v2/ServicesAntenneInformations";
 import { withAuthSync } from "../../../src/util/auth";
 
-const Antennes = () => {
-  const router = useRouter();
-  const { antenne_id } = router.query;
+const Antennes = props => {
+  const { antenne_id } = props;
   return (
     <LayoutServices>
       <BoxWrapper mt={6} px="1">
@@ -28,7 +26,7 @@ const Antennes = () => {
             }}
           >
             <Heading2>Informations générales</Heading2>
-            <ServicesInformations currentAntenne={antenne_id} mt="3" />
+            <ServicesInformations antenne_id={antenne_id} mt="3" />
           </Box>
           <Box
             sx={{
@@ -44,6 +42,10 @@ const Antennes = () => {
       </BoxWrapper>
     </LayoutServices>
   );
+};
+
+Antennes.getInitialProps = async ({ query }) => {
+  return { antenne_id: query.antenne_id };
 };
 
 export default withAuthSync(Antennes);

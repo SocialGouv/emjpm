@@ -1,4 +1,3 @@
-
 exports.up = async function(knex) {
   await knex.schema.alterTable("services", function(table) {
     table.integer("mesures_in_progress");
