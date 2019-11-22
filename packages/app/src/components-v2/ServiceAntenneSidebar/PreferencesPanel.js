@@ -32,7 +32,15 @@ const PreferencesPanel = props => {
       <Card p="5">
         <Heading3>
           {antenne.mesures_max}
-          <Text sx={{ color: "mediumGray", fontSize: "1" }}>mesures souhaitées</Text>
+          <Text sx={{ color: "mediumGray", fontSize: "1", mb: "1" }}>mesures souhaitées</Text>
+        </Heading3>
+        <Heading3>
+          {antenne.mesures_in_progress}
+          <Text sx={{ color: "mediumGray", fontSize: "1", mb: "1" }}>mesures en cours</Text>
+        </Heading3>
+        <Heading3>
+          {antenne.mesures_awaiting}
+          <Text sx={{ color: "mediumGray", fontSize: "1" }}>mesures en attente</Text>
         </Heading3>
       </Card>
       <Text
