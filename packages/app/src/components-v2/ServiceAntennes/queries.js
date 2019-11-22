@@ -13,7 +13,6 @@ export const ANTENNE = gql`
       mesures_max
       mesures_in_progress
       mesures_awaiting
-      headquarters
       address_city
       address_street
       address_zip_code

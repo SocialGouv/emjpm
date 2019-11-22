@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { CLOSE_MESURE } from "./mutations";
+import { CLOSE_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { MESURE } from "./queries";
 
 const EXTINCTION_LABEL_VALUE = [
@@ -22,13 +22,45 @@ const EXTINCTION_LABEL_VALUE = [
 
 export const ServiceCloseMesure = props => {
   const { currentMesure } = props;
+
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const { data, loading, error } = useQuery(MESURE, {
     variables: {
       id: currentMesure
     }
   });
-  const [UpdateMesure] = useMutation(CLOSE_MESURE);
+
+  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [UpdateMesure] = useMutation(CLOSE_MESURE, {
+    update(
+      cache,
+      {
+        data: {
+          update_mesures: { returning }
+        }
+      }
+    ) {
+      const [mesure] = returning;
+      UpdateServicesCounter({
+        variables: {
+          mesures_awaiting: 0,
+          mesures_in_progress: -1,
+          service_id: mesure.service_id
+        }
+      });
+      if (mesure.antenne_id) {
+        UpdateAntenneCounters({
+          variables: {
+            antenne_id: mesure.antenne_id,
+            inc_mesures_awaiting: -1,
+            inc_mesures_in_progress: 1
+          }
+        });
+      }
+    }
+  });
+
   if (error) {
     return <div>error</div>;
   }
@@ -56,12 +88,21 @@ export const ServiceCloseMesure = props => {
               UpdateMesure({
                 refetchQueries: ["mesures", "mesures_aggregate"],
                 variables: {
-                  antenne_id: mesure.antenne_id,
                   extinction: values.extinction,
                   id: currentMesure,
-                  reason_extinction: values.reason_extinction.value
+                  reason_extinction: values.reason_extinction.value,
+                  service_id: mesure.service_id
                 }
               });
+              if (mesure.antenne_id) {
+                UpdateAntenneCounters({
+                  variables: {
+                    antenne_id: mesure.antenne_id,
+                    inc_mesures_awaiting: 0,
+                    inc_mesures_in_progress: -1
+                  }
+                });
+              }
               setSubmitting(false);
               setPanelType(null);
               setCurrentMesure(null);

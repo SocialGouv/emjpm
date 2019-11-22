@@ -67,6 +67,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "service_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "ti_id": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -596,6 +602,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "service_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "status": Object {
     "defaultValue": null,
     "maxLength": 255,
@@ -807,12 +819,6 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
-  "headquarters": Object {
-    "defaultValue": "false",
-    "maxLength": null,
-    "nullable": false,
-    "type": "boolean",
-  },
   "id": Object {
     "defaultValue": "nextval('service_antenne_id_seq'::regclass)",
     "maxLength": null,
@@ -930,6 +936,18 @@ Object {
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
+  },
+  "mesures_awaiting": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "mesures_in_progress": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
   },
   "nom": Object {
     "defaultValue": null,
@@ -1214,13 +1232,13 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "numeric",
+    "type": "bigint",
   },
   "mesures_in_progress": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "numeric",
+    "type": "bigint",
   },
   "mesures_max": Object {
     "defaultValue": null,
@@ -1267,13 +1285,13 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "bigint",
+    "type": "integer",
   },
   "mesures_in_progress": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "bigint",
+    "type": "integer",
   },
   "mesures_max": Object {
     "defaultValue": null,
@@ -1285,7 +1303,7 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "bigint",
+    "type": "integer",
   },
   "service_id": Object {
     "defaultValue": null,

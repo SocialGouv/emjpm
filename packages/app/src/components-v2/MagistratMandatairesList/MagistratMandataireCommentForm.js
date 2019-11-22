@@ -11,7 +11,7 @@ import { ADD_COMMENT, EDIT_COMMENT } from "./mutations";
 export const MagistratMandataireCommentForm = props => {
   const {
     ti,
-    antenneId,
+    serviceId,
     mandataireId,
     toggleEditCommentForm,
     toggleCommentForm,
@@ -42,9 +42,9 @@ export const MagistratMandataireCommentForm = props => {
             InsertComment({
               refetchQueries: ["MandataireComments"],
               variables: {
-                antenne_id: antenneId,
                 comment: values.comment,
                 mandataire_id: mandataireId,
+                service_id: serviceId,
                 ti_id: ti
               }
             });

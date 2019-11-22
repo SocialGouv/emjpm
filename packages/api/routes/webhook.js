@@ -1,11 +1,11 @@
 const express = require("express");
 
 const router = express.Router();
-const { ServiceAntenne } = require("../model/ServiceAntenne");
+const { Service } = require("../model/Service");
+const { ServiceAdmin } = require("../model/ServiceAdmin");
 const { Mandataire } = require("../model/Mandataire");
 const { Tis } = require("../model/Tis");
 const { User } = require("../model/User");
-const { UserAntenne } = require("../model/UserAntenne");
 const { MesuresImport } = require("../model/MesuresImport");
 const { Mesures } = require("../model/Mesures");
 const { Department } = require("../model/Departments");
@@ -34,7 +34,7 @@ router.post("/email-account-validation", function(req, res) {
 // ------------- EMAIL RESERVATION---
 // ----------------------------------
 
-const getUsers = async (mandataire_id, antenne_id) => {
+const getUsers = async (mandataire_id, service_id) => {
   if (mandataire_id) {
     const [mandataire] = await Mandataire.query().where("id", mandataire_id);
     const [currentUser] = await User.query().where("id", mandataire.user_id);
@@ -46,16 +46,16 @@ const getUsers = async (mandataire_id, antenne_id) => {
       }
     ];
   } else {
-    const antenne = await ServiceAntenne.query().findById(antenne_id);
-    const userAntennes = await UserAntenne.query().where(
-      "antenne_id",
-      antenne_id
+    const service = await Service.query().findById(service_id);
+    const serviceAdmins = await ServiceAdmin.query().where(
+      "service_id",
+      service_id
     );
-    const userIds = userAntennes.map(ua => ua.user_id);
+    const userIds = serviceAdmins.map(sa => sa.user_id);
     const users = await User.query().findByIds(userIds);
     return users.map(user => ({
-      mesures_en_cours: antenne.mesures_in_progress,
-      dispo_max: antenne.mesures_max,
+      mesures_en_cours: service.mesures_in_progress,
+      dispo_max: service.dispo_max,
       email: user.email
     }));
   }
@@ -63,10 +63,10 @@ const getUsers = async (mandataire_id, antenne_id) => {
 
 router.post("/email-reservation", async function(req, res) {
   const newMesure = req.body.event.data.new;
-  const { ti_id, antenne_id, mandataire_id, status } = newMesure;
+  const { ti_id, service_id, mandataire_id, status } = newMesure;
   if (status === "Mesure en attente") {
     const [currentTi] = await Tis.query().where("id", ti_id);
-    const users = await getUsers(mandataire_id, antenne_id);
+    const users = await getUsers(mandataire_id, service_id);
     for (const user of users) {
       reservationEmail(currentTi, newMesure, user);
     }
