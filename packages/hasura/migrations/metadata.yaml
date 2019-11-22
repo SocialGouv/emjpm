@@ -339,7 +339,11 @@ tables:
       - id
       - service_id
       - ti_id
-      filter: {}
+      filter:
+        service:
+          service_admins:
+            service_id:
+              _eq: X-Hasura-Service-Id
     role: service
   table: service_tis
   update_permissions: []
