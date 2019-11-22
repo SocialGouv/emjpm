@@ -9,6 +9,17 @@ export const MESURE = gql`
   }
 `;
 
+export const SERVICE_TRIBUNAL = gql`
+  query ServiceTribunal {
+    service_tis {
+      ti {
+        etablissement
+        id
+      }
+    }
+  }
+`;
+
 export const MESURES = gql`
   query mesures(
     $limit: Int
@@ -53,6 +64,7 @@ export const MESURES = gql`
         }
       }
       ti {
+        id
         etablissement
       }
       status

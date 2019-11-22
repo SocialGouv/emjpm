@@ -34,6 +34,7 @@ export const formatMesureList = mesureList => {
       numeroRg: numero_rg ? numero_rg : "RG-00000000",
       residence: residence ? residence : "non reseigné",
       status: status ? status : "non reseigné",
+      tiId: ti ? ti.id : "Tribunal non reseigné",
       tribunal: ti ? ti.etablissement : "Tribunal non reseigné",
       type: type ? type : "type de mesure non reseigné",
       ville: ville ? ville : "ville non reseigné"
@@ -47,6 +48,15 @@ export const formatAntenneOptions = user_antennes => {
     return {
       label: user_antenne.service_antenne.name,
       value: user_antenne.service_antenne.id
+    };
+  });
+};
+
+export const formatTribunalList = tribunalList => {
+  return tribunalList.map(tribunal => {
+    return {
+      label: tribunal.ti.etablissement,
+      value: tribunal.ti.id
     };
   });
 };

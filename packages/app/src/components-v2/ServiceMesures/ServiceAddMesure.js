@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Card, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
@@ -10,6 +10,8 @@ import * as Yup from "yup";
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { getHeadquarter } from "../../util/getHeadquarter";
 import { ADD_MESURE } from "./mutations";
+import { SERVICE_TRIBUNAL } from "./queries";
+import { formatTribunalList } from "./utils";
 
 const ServiceCreateAntenneStyle = {
   flexWrap: "wrap"
@@ -24,6 +26,8 @@ const grayBox = {
 const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export const ServiceAddMesure = props => {
+  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
+
   const [AddMesure] = useMutation(ADD_MESURE, {
     options: {
       awaitRefetchQueries: true,
@@ -31,11 +35,24 @@ export const ServiceAddMesure = props => {
     }
   });
 
+  if (loading) {
+    return <div>Chargement...</div>;
+  }
+
+  if (error) {
+    return <div>Erreur...</div>;
+  }
+
   const antenneOptions = props.user_antennes.map(ua => ({
     label: ua.service_antenne.name,
     value: ua.service_antenne.id
   }));
+
   const [headquarter] = getHeadquarter(props.user_antennes);
+  const tribunalList = formatTribunalList(data.service_tis);
+  const [uniqueTribunal] = tribunalList;
+  const tribunalDefaultValue =
+    tribunalList.length <= 1 ? { label: uniqueTribunal.label, value: uniqueTribunal.value } : "";
 
   return (
     <Card sx={cardStyle}>
@@ -78,6 +95,7 @@ export const ServiceAddMesure = props => {
                     numero_dossier: values.numero_dossier,
                     numero_rg: values.numero_rg,
                     residence: values.residence.value,
+                    ti_id: values.tribunal.value,
                     type: values.type.value,
                     ville: values.ville
                   }
@@ -97,6 +115,7 @@ export const ServiceAddMesure = props => {
                 numero_dossier: Yup.string().required("Champs obligatoire"),
                 numero_rg: Yup.string().required("Champs obligatoire"),
                 residence: Yup.string().required("Champs obligatoire"),
+                tribunal: Yup.string().required("Champs obligatoire"),
                 type: Yup.string().required("Champs obligatoire"),
                 ville: Yup.string().required("Champs obligatoire")
               })}
@@ -111,6 +130,7 @@ export const ServiceAddMesure = props => {
                 date_ouverture: "",
                 numero_dossier: "",
                 numero_rg: "",
+                tribunal: tribunalDefaultValue,
                 ville: ""
               }}
             >
@@ -247,6 +267,18 @@ export const ServiceAddMesure = props => {
                         options={CIVILITY}
                       />
                       {errors.civilite && touched.civilite && <Text>{errors.civilite}</Text>}
+                    </Box>
+                    <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+                      <Select
+                        id="tribunal"
+                        name="tribunal"
+                        placeholder="Tribunal"
+                        value={values.tribunal}
+                        options={tribunalList}
+                        hasError={errors.tribunal && touched.tribunal}
+                        onChange={option => setFieldValue("tribunal", option)}
+                      />
+                      {errors.tribunal && touched.tribunal && <Text>{errors.tribunal}</Text>}
                     </Box>
                     <Flex justifyContent="flex-end">
                       <Box>
