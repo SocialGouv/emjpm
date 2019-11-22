@@ -2,23 +2,14 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3 } from "@socialgouv/emjpm-ui-core";
 import PropTypes from "prop-types";
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Text } from "rebass";
 
-import { AntenneEditLinkButton } from "../Commons";
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { PreferencesPanelStyle } from "./style";
-
-// TODO MOVE ME IN UTILS
-export const getHeadquarter = user_antennes => {
-  return user_antennes.filter(user_antenne => user_antenne.service_antenne.headquarters === true);
-};
 
 const PreferencesPanel = props => {
   const { user_antennes, currentAntenne } = props;
   const [mainAntenne] = user_antennes;
-  const antennes = getHeadquarter(user_antennes);
-  const [headquarter] = antennes;
-  const currentAntenneId = currentAntenne || headquarter.service_antenne.id;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
       antenneId: currentAntenne ? currentAntenne : mainAntenne.antenne_id
@@ -41,13 +32,16 @@ const PreferencesPanel = props => {
       <Card p="5">
         <Heading3>
           {antenne.mesures_max}
-          <Text sx={{ color: "mediumGray", fontSize: "1" }}>mesures souhaitées</Text>
+          <Text sx={{ color: "mediumGray", fontSize: "1", mb: "1" }}>mesures souhaitées</Text>
         </Heading3>
-        <Flex mt="5">
-          <AntenneEditLinkButton href={currentAntenneId}>
-            Modifier mes informations
-          </AntenneEditLinkButton>
-        </Flex>
+        <Heading3>
+          {antenne.mesures_in_progress}
+          <Text sx={{ color: "mediumGray", fontSize: "1", mb: "1" }}>mesures en cours</Text>
+        </Heading3>
+        <Heading3>
+          {antenne.mesures_awaiting}
+          <Text sx={{ color: "mediumGray", fontSize: "1" }}>mesures en attente</Text>
+        </Heading3>
       </Card>
       <Text
         sx={{

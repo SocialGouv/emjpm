@@ -37,20 +37,13 @@ const ServiceEditAntenne = props => {
     contact_lastname,
     contact_phone,
     mesures_max,
-    headquarters,
     name
   } = antenne.service_antenne;
   const [createAntenne] = useMutation(EDIT_ANTENNE, {
     update() {
-      if (headquarters) {
-        Router.push("/services/informations", `/services/informations`, {
-          shallow: true
-        });
-      } else {
-        Router.push("/services/antennes/[antenne_id]", `/services/antennes/${currentAntenne}`, {
-          shallow: true
-        });
-      }
+      Router.push("/services/antennes/[antenne_id]", `/services/antennes/${currentAntenne}`, {
+        shallow: true
+      });
     }
   });
 
@@ -160,7 +153,7 @@ const ServiceEditAntenne = props => {
                     </Box>
                     <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
-                        value={values.mesures_max}
+                        value={values.mesures_max.toString()}
                         id="mesures_max"
                         name="mesures_max"
                         hasError={errors.mesures_max && touched.mesures_max}

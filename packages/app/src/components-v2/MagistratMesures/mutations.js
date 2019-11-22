@@ -20,7 +20,6 @@ export const EDIT_MESURE = gql`
       }
     ) {
       returning {
-        antenne_id
         id
         cabinet
         civilite
@@ -60,12 +59,12 @@ export const DELETE_MANDATAIRE_MESURE = gql`
   }
 `;
 
-export const DELETE_ANTENNE_MESURE = gql`
-  mutation deleteMesure($id: Int!, $antenne_id: Int) {
+export const DELETE_SERVICE_MESURE = gql`
+  mutation deleteMesure($id: Int!, $service_id: Int!) {
     delete_mesures(where: { id: { _eq: $id } }) {
       affected_rows
     }
-    update_service_antenne(where: { id: { _eq: $antenne_id } }, _inc: { mesures_awaiting: -1 }) {
+    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_awaiting: -1 }) {
       affected_rows
       returning {
         id

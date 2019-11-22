@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 
 import { LayoutServices } from "../../../../src/components-v2/Layout";
-import { ServiceEditAntenne } from "../../../../src/components-v2/ServiceEditAntenne";
+import { ServiceEditAntenne } from "../../../../src/components-v2/ServiceAntenneEdit";
 import { UserInformations } from "../../../../src/components-v2/UserInformations";
 import { withAuthSync } from "../../../../src/util/auth";
 

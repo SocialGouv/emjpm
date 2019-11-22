@@ -20,9 +20,6 @@ class ServiceAntenne extends Model {
         name: {
           type: "string"
         },
-        headquarter: {
-          type: "boolean"
-        },
         contact_firstname: {
           type: "string"
         },
