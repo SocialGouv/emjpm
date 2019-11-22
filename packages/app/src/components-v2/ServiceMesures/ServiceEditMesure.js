@@ -111,15 +111,16 @@ export const ServiceEditMesure = props => {
             setCurrentMesure(null);
           }}
           validationSchema={Yup.object().shape({
-            annee: Yup.string(),
-            civilite: Yup.string(),
-            code_postal: Yup.string(),
-            date_ouverture: Yup.date(),
-            numero_dossier: Yup.string(),
-            numero_rg: Yup.string(),
-            residence: Yup.string(),
-            type: Yup.string(),
-            ville: Yup.string()
+            annee: Yup.string().required("Champs obligatoire"),
+            civilite: Yup.string().required("Champs obligatoire"),
+            code_postal: Yup.string().required("Champs obligatoire"),
+            date_ouverture: Yup.date().required("Champs obligatoire"),
+            numero_dossier: Yup.string().required("Champs obligatoire"),
+            numero_rg: Yup.string().required("Champs obligatoire"),
+            residence: Yup.string().required("Champs obligatoire"),
+            tribunal: Yup.string().required("Champs obligatoire"),
+            type: Yup.string().required("Champs obligatoire"),
+            ville: Yup.string().required("Champs obligatoire")
           })}
           initialValues={{
             annee: age,
