@@ -949,13 +949,13 @@ tables:
   is_enum: false
   object_relationships:
   - comment: null
-    name: ti
-    using:
-      foreign_key_constraint_on: ti_id
-  - comment: null
     name: service_antenne
     using:
       foreign_key_constraint_on: antenne_id
+  - comment: null
+    name: ti
+    using:
+      foreign_key_constraint_on: ti_id
   - comment: null
     name: mandataire
     using:
@@ -1283,15 +1283,21 @@ tables:
   - comment: null
     permission:
       columns:
-      - adresse
-      - department_id
-      - dispo_max
+      - id
+      - etablissement
       - email
-      - mesures_awaiting
-      - mesures_in_progress
       - nom
       - prenom
+      - code_postal
+      - ville
       - telephone
+      - adresse
+      - dispo_max
+      - created_at
+      - information
+      - department_id
+      - mesures_in_progress
+      - mesures_awaiting
       filter:
         id:
           _eq: X-Hasura-Service-Id
@@ -2127,28 +2133,6 @@ tables:
       - latitude
       - longitude
       filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      filter: {}
     role: service
   - comment: null
     permission:
@@ -2161,6 +2145,28 @@ tables:
       - longitude
       filter: {}
     role: mandataire
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      filter: {}
+    role: ti
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      filter: {}
+    role: direction
   - comment: null
     permission:
       allow_aggregations: false

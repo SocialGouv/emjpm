@@ -216,8 +216,16 @@ export const ACCEPT_MESURE = gql`
         date_ouverture
       }
     }
+<<<<<<< HEAD
     update_services(
       where: { id: { _eq: $service_id } }
+<<<<<<< HEAD
+=======
+    update_service(
+      where: { id: { _eq: $antenne_id } }
+>>>>>>> feat(service-mesure): handle service in mesures
+=======
+>>>>>>> fix(service-mesures): restore mesures actions
       _inc: { mesures_in_progress: 1, mesures_awaiting: -1 }
     ) {
       affected_rows
@@ -251,7 +259,10 @@ export const ADD_MESURE = gql`
     $numero_rg: String!
     $service_id: Int!
     $antenne_id: Int
+<<<<<<< HEAD
     $ti_id: Int!
+=======
+>>>>>>> feat(service-mesure): handle service in mesures
   ) {
     insert_mesures(
       objects: {
@@ -294,7 +305,15 @@ export const ADD_MESURE = gql`
         date_ouverture
       }
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
     update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: 1 }) {
+=======
+    update_service(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: 1 }) {
+>>>>>>> feat(service-mesure): handle service in mesures
+=======
+    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_in_progress: 1 }) {
+>>>>>>> fix(mesure-creation): restore mesures creation by service
       affected_rows
       returning {
         id

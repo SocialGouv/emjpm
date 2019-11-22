@@ -3,8 +3,8 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServices } from "../../src/components-v2/Layout";
-import { PreferencesPanel } from "../../src/components-v2/PreferencesPanel";
 import { ServiceAntennes } from "../../src/components-v2/ServiceAntennes";
+import { PreferencesPanel } from "../../src/components-v2/ServiceSidebar";
 import { ServicesInformations } from "../../src/components-v2/ServicesInformations";
 import { UserInformations } from "../../src/components-v2/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
@@ -26,7 +26,7 @@ const Informations = () => {
               p: 1
             }}
           >
-            <Heading2>Informations générales</Heading2>
+            <Heading2>Informations générales de votre service</Heading2>
             <UserInformations Component={props => <ServicesInformations {...props} mt="3" />} />
           </Box>
           <Box
