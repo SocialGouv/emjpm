@@ -26,7 +26,7 @@ const Informations = () => {
               p: 1
             }}
           >
-            <Heading2>Informations générales</Heading2>
+            <Heading2>Informations générales de votre service</Heading2>
             <UserInformations Component={props => <ServicesInformations {...props} mt="3" />} />
           </Box>
           <Box
