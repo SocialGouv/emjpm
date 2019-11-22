@@ -75,7 +75,7 @@ const ServicesInformations = props => {
         </Flex>
         <Flex mt="5">
           <AntenneEditLinkButton href={antenne_id}>
-            {`Modifier mes informations de l'antenne`}
+            {`Modifier les informations de l'antenne`}
           </AntenneEditLinkButton>
         </Flex>
       </Card>

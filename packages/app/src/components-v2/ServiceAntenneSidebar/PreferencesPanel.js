@@ -2,16 +2,14 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3 } from "@socialgouv/emjpm-ui-core";
 import PropTypes from "prop-types";
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Text } from "rebass";
 
-import { AntenneEditLinkButton } from "../Commons";
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { PreferencesPanelStyle } from "./style";
 
 const PreferencesPanel = props => {
   const { user_antennes, currentAntenne } = props;
   const [mainAntenne] = user_antennes;
-  const currentAntenneId = currentAntenne;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
       antenneId: currentAntenne ? currentAntenne : mainAntenne.antenne_id
@@ -36,11 +34,6 @@ const PreferencesPanel = props => {
           {antenne.mesures_max}
           <Text sx={{ color: "mediumGray", fontSize: "1" }}>mesures souhaitées</Text>
         </Heading3>
-        <Flex mt="5">
-          <AntenneEditLinkButton href={currentAntenneId}>
-            Modifier mes informations
-          </AntenneEditLinkButton>
-        </Flex>
       </Card>
       <Text
         sx={{

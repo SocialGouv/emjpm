@@ -2,9 +2,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3 } from "@socialgouv/emjpm-ui-core";
 import PropTypes from "prop-types";
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Text } from "rebass";
 
-import { ServiceEditLinkButton } from "../Commons";
 import { GET_SERVICES_DISPONIBILITY } from "./queries";
 import { PreferencesPanelStyle } from "./style";
 
@@ -36,9 +35,6 @@ const PreferencesPanel = props => {
           {service.mesures_awaiting}
           <Text sx={{ color: "mediumGray", fontSize: "1" }}>mesures en attente</Text>
         </Heading3>
-        <Flex mt="5">
-          <ServiceEditLinkButton>Modifier mes informations</ServiceEditLinkButton>
-        </Flex>
       </Card>
       <Text
         sx={{
