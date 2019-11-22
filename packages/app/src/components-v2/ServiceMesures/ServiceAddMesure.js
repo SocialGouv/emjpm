@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { getHeadquarter } from "../../util/getHeadquarter";
 import { ADD_MESURE } from "./mutations";
-import { TRIBUNAL } from "./queries";
+import { SERVICE_TRIBUNAL } from "./queries";
 import { formatTribunalList } from "./utils";
 
 const ServiceCreateAntenneStyle = {
@@ -26,7 +26,7 @@ const grayBox = {
 const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export const ServiceAddMesure = props => {
-  const { loading, error, data } = useQuery(TRIBUNAL);
+  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
 
   const [AddMesure] = useMutation(ADD_MESURE, {
     options: {
@@ -36,11 +36,11 @@ export const ServiceAddMesure = props => {
   });
 
   if (loading) {
-    return <div>loading...</div>;
+    return <div>Chargement...</div>;
   }
 
   if (error) {
-    return <div>error...</div>;
+    return <div>Erreur...</div>;
   }
 
   const antenneOptions = props.user_antennes.map(ua => ({
@@ -49,7 +49,10 @@ export const ServiceAddMesure = props => {
   }));
 
   const [headquarter] = getHeadquarter(props.user_antennes);
-  const tribunalList = formatTribunalList(data.tis);
+  const tribunalList = formatTribunalList(data.service_tis);
+  const [uniqueTribunal] = tribunalList;
+  const tribunalDefaultValue =
+    tribunalList.length <= 1 ? { label: uniqueTribunal.label, value: uniqueTribunal.value } : "";
 
   return (
     <Card sx={cardStyle}>
@@ -80,7 +83,6 @@ export const ServiceAddMesure = props => {
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <Formik
               onSubmit={(values, { setSubmitting }) => {
-                console.log(values);
                 AddMesure({
                   awaitRefetchQueries: true,
                   refetchQueries: ["mesures", "mesures_aggregate"],
@@ -128,7 +130,7 @@ export const ServiceAddMesure = props => {
                 date_ouverture: "",
                 numero_dossier: "",
                 numero_rg: "",
-                tribunal: "",
+                tribunal: tribunalDefaultValue,
                 ville: ""
               }}
             >

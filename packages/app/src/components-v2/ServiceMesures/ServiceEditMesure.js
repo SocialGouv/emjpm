@@ -9,7 +9,7 @@ import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { EDIT_MESURE } from "./mutations";
-import { TRIBUNAL } from "./queries";
+import { SERVICE_TRIBUNAL } from "./queries";
 import { formatAntenneOptions, formatTribunalList } from "./utils";
 
 const getMesureAntenne = (antenne_id, user_antennes) => {
@@ -36,11 +36,12 @@ export const ServiceEditMesure = props => {
     residence,
     type,
     ville,
-    user_antennes
+    user_antennes,
+    tribunal,
+    tiId
   } = props;
-  console.log(props);
 
-  const { loading, error, data } = useQuery(TRIBUNAL);
+  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
   const [UpdateMesure] = useMutation(EDIT_MESURE);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
@@ -53,7 +54,8 @@ export const ServiceEditMesure = props => {
   }
 
   const currentMesureAntenne = getMesureAntenne(antenneId, user_antennes);
-  const tribunalList = formatTribunalList(data.tis);
+  const tribunalList = formatTribunalList(data.service_tis);
+  const tribunalDefautValue = tiId ? { label: tribunal, value: tiId } : "";
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
 
   return (
@@ -121,6 +123,7 @@ export const ServiceEditMesure = props => {
             numero_dossier: numeroDossier,
             numero_rg: numeroRg,
             residence: { label: residence, value: residence },
+            tribunal: tribunalDefautValue,
             type: { label: type, value: type },
             ville: ville
           }}

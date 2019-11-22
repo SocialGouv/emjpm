@@ -9,11 +9,13 @@ export const MESURE = gql`
   }
 `;
 
-export const TRIBUNAL = gql`
-  query Tribunal {
-    tis {
-      id
-      etablissement
+export const SERVICE_TRIBUNAL = gql`
+  query ServiceTribunal {
+    service_tis {
+      ti {
+        etablissement
+        id
+      }
     }
   }
 `;
