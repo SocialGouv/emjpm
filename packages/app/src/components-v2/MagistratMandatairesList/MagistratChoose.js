@@ -12,53 +12,52 @@ import { MandataireInformations } from "./MandataireInformations";
 import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
 
 export const MagistratChoose = props => {
-  const { ti, serviceId, mandataireId, cabinet } = props;
+  const { tiId, serviceId, mandataireId, cabinet } = props;
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
   const [chooseService] = useMutation(CHOOSE_SERVICE);
   const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
+
   return (
     <Flex flexWrap="wrap">
-      <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
+      <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <MandataireInformations {...props} />
       </Box>
-      <Box p="5" width={[1, 3 / 5]}>
+      <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">
           <Heading3>Créer une mesure</Heading3>
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              if (mandataireId) {
-                chooseMandataire({
-                  refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
-                  variables: {
-                    annee: values.annee,
-                    cabinet: values.cabinet,
-                    civilite: values.civilite.value,
-                    mandataire_id: mandataireId,
-                    numero_rg: values.numero_rg,
-                    ti: ti,
-                    type: values.type.value
-                  }
-                });
-              } else {
-                chooseService({
-                  refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
-                  variables: {
-                    annee: values.annee,
-                    cabinet: values.cabinet,
-                    civilite: values.civilite.value,
-                    numero_rg: values.numero_rg,
-                    service_id: serviceId,
-                    ti: ti,
-                    type: values.type.value
-                  }
-                });
-              }
-              setSubmitting(false);
-              setPanelType(null);
-              setCurrentMandataire(null);
-            }, 500);
+            if (mandataireId) {
+              chooseMandataire({
+                refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
+                variables: {
+                  annee: values.annee,
+                  cabinet: values.cabinet,
+                  civilite: values.civilite.value,
+                  mandataire_id: mandataireId,
+                  numero_rg: values.numero_rg,
+                  tiId: tiId,
+                  type: values.type.value
+                }
+              });
+            } else {
+              chooseService({
+                refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
+                variables: {
+                  annee: values.annee,
+                  cabinet: values.cabinet,
+                  civilite: values.civilite.value,
+                  numero_rg: values.numero_rg,
+                  service_id: serviceId,
+                  tiId: tiId,
+                  type: values.type.value
+                }
+              });
+            }
+            setSubmitting(false);
+            setPanelType(null);
+            setCurrentMandataire(null);
           }}
           validationSchema={Yup.object().shape({
             annee: Yup.string().required(),
