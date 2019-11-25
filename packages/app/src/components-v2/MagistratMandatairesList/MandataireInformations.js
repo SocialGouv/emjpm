@@ -63,7 +63,7 @@ const MandataireInformations = props => {
           serviceId={serviceId}
           mandataireId={mandataireId}
         />
-        <MagistratInformationsAntenne {...props} />
+        {serviceId && <MagistratInformationsAntenne {...props} />}
       </Flex>
     </Fragment>
   );

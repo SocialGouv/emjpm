@@ -1,12 +1,17 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Button, Card, Heading3, Heading4, Heading5, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading3, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
-import { MailOutline, Smartphone } from "styled-icons/material";
 
 import { SERVICE_ANTENNES } from "./queries";
-import { boxStyle, iconTextStyle, topTextStyle } from "./style";
+import { boxStyle } from "./style";
+
+const countColor = isOvercapacity => {
+  return {
+    color: isOvercapacity ? "error" : "success"
+  };
+};
 
 const MagistratInformationsAntenne = props => {
   const { serviceId } = props;
@@ -15,8 +20,6 @@ const MagistratInformationsAntenne = props => {
       serviceId: serviceId
     }
   });
-
-  const [isOpen, toggleAntennes] = useState(false);
 
   if (loading) {
     return (
@@ -37,63 +40,41 @@ const MagistratInformationsAntenne = props => {
   }
 
   const { service_antenne } = data;
+
   if (service_antenne.length < 1) {
     return null;
   }
+
   return (
     <Box sx={{ mt: 1, width: "100%" }}>
-      <Heading3>Liste des antennes du service</Heading3>
-      <Button
-        variant="outline"
-        my="2"
-        onClick={() => {
-          toggleAntennes(!isOpen);
+      <Heading3 mb="2">Liste des antennes du service</Heading3>
+      <Box
+        css={{
+          display: "grid",
+          gridGap: "1%",
+          gridTemplateColumns: "repeat(auto-fit, minmax(24%, 49%))"
         }}
       >
-        {isOpen ? (
-          <Fragment>Fermer les informations des antennes</Fragment>
-        ) : (
-          <Fragment>Afficher les informations des antennes</Fragment>
-        )}
-      </Button>
-      {isOpen && (
-        <Box
-          css={{
-            display: "grid",
-            gridGap: "1%",
-            gridTemplateColumns: "repeat(auto-fit, minmax(24%, 49%))"
-          }}
-        >
-          {service_antenne.map(antenne => {
-            return (
-              <Card sx={boxStyle} bg="white" key={antenne.id}>
-                <Heading4>{antenne.name}</Heading4>
-                <Text sx={topTextStyle}>
-                  {antenne.contact_lastname} {antenne.contact_firstname}
-                </Text>
-                <Heading5 mt="1">Adresse d’activité</Heading5>
-                <Text sx={topTextStyle}>
-                  {antenne.address_street} {antenne.address_zip_code} {antenne.address_city}
-                </Text>
-                <Flex mt="2">
-                  <MailOutline size="16" />
-                  <Text sx={iconTextStyle}>{antenne.contact_email}</Text>
-                </Flex>
-                <Flex mt="1">
-                  <Smartphone size="16" />
-                  <Text sx={iconTextStyle}>{antenne.contact_phone}</Text>
-                </Flex>
-                <Heading5 mt="1">Mesures en attente</Heading5>
-                <Text sx={topTextStyle}>{antenne.mesures_awaiting}</Text>
-                <Heading5 mt="1">Disponibilité maximum</Heading5>
-                <Text sx={topTextStyle}>{antenne.mesures_max}</Text>
-                <Heading5 mt="1">Disponibilité actuelle</Heading5>
-                <Text sx={topTextStyle}>{antenne.mesures_in_progress}</Text>
-              </Card>
-            );
-          })}
-        </Box>
-      )}
+        {service_antenne.map(antenne => {
+          return (
+            <Card sx={boxStyle} bg="white" key={antenne.id}>
+              <Flex>
+                <Box width="60%">
+                  <Heading4 mb="4px">{antenne.name}</Heading4>
+                  <Text>
+                    {antenne.address_zip_code} {antenne.address_city}
+                  </Text>
+                </Box>
+                <Box width="40%" textAlign="right">
+                  <Heading4 sx={countColor(antenne.mesures_in_progress >= antenne.mesures_max)}>
+                    {antenne.mesures_in_progress}/{antenne.mesures_max}
+                  </Heading4>
+                </Box>
+              </Flex>
+            </Card>
+          );
+        })}
+      </Box>
     </Box>
   );
 };
