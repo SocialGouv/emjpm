@@ -52,7 +52,7 @@ const ServiceMesures = props => {
   }
 
   const { count } = data.mesures_aggregate.aggregate;
-  const totalPage = count / 20;
+  const totalPage = count / RESULT_PER_PAGE;
   const mesures = formatMesureList(data.mesures);
 
   return (
