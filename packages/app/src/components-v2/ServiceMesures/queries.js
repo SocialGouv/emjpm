@@ -59,6 +59,8 @@ export const MESURES = gql`
       cabinet
       civilite
       code_postal
+      judgment_date
+      is_urgent
       departement {
         nom
         region {

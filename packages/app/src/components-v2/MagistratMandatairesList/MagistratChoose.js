@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
-import { CIVILITY, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
+import { CIVILITY, IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { MandataireInformations } from "./MandataireInformations";
 import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
 
@@ -35,10 +35,12 @@ export const MagistratChoose = props => {
                   annee: values.annee,
                   cabinet: values.cabinet,
                   civilite: values.civilite.value,
+                  judgmentDate: values.judgmentDate,
                   mandataire_id: mandataireId,
                   numero_rg: values.numero_rg,
-                  tiId: tiId,
-                  type: values.type.value
+                  ti: ti,
+                  type: values.type.value,
+                  urgent: values.urgent.value
                 }
               });
             } else {
@@ -48,10 +50,12 @@ export const MagistratChoose = props => {
                   annee: values.annee,
                   cabinet: values.cabinet,
                   civilite: values.civilite.value,
+                  judgmentDate: values.judgmentDate,
                   numero_rg: values.numero_rg,
                   service_id: serviceId,
-                  tiId: tiId,
-                  type: values.type.value
+                  ti: ti,
+                  type: values.type.value,
+                  urgent: values.urgent.value
                 }
               });
             }
@@ -63,15 +67,22 @@ export const MagistratChoose = props => {
             annee: Yup.string().required(),
             cabinet: Yup.string(),
             civilite: Yup.string().required(),
+            judgmentDate: Yup.date(),
             numero_rg: Yup.string().required(),
-            type: Yup.string().required()
+            type: Yup.string().required(),
+            urgent: Yup.object().shape({
+              label: Yup.string(),
+              value: Yup.boolean()
+            })
           })}
           initialValues={{
             annee: "",
             cabinet,
             civilite: "",
+            judgmentDate: "",
             numero_rg: "",
-            type: ""
+            type: "",
+            urgent: false
           }}
         >
           {props => {
@@ -136,6 +147,28 @@ export const MagistratChoose = props => {
                     hasError={errors.cabinet && touched.cabinet}
                     onChange={handleChange}
                     placeholder="cabinet (optionnel)"
+                  />
+                </Box>
+                <Box sx={{ position: "relative", zIndex: "10" }} mb="2">
+                  <Select
+                    id="urgent"
+                    name="urgent"
+                    placeholder="Est-ce une demande urgente"
+                    value={values.urgent}
+                    hasError={errors.urgent && touched.urgent}
+                    onChange={option => setFieldValue("urgent", option)}
+                    options={IS_URGENT}
+                  />
+                </Box>
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                  <Input
+                    value={values.judgmentDate}
+                    id="judgmentDate"
+                    name="judgmentDate"
+                    hasError={errors.judgmentDate && touched.judgmentDate}
+                    type="date"
+                    onChange={handleChange}
+                    placeholder="Date de jugement"
                   />
                 </Box>
                 <Flex justifyContent="flex-end">

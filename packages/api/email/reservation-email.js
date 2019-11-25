@@ -1,3 +1,4 @@
+const { format } = require("date-fns");
 const { sendEmail } = require(".");
 
 const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
@@ -38,6 +39,16 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
   Pour rappel, à ce jour, vous avez déclaré "${
     user.mesures_en_cours
   }" mesures pour une capacité souhaitée de "${user.dispo_max}" mesures.
+<br><br>
+${
+  mesure.is_urgent
+    ? `
+Le magistrat a précisé le caractère urgent lors de la réservation de cette mesure. La date prévisionnelle du jugement est le ${format(
+        mesure.judgment_date,
+        "DD/MM/YYYY"
+      )}.`
+    : null
+}
 <br><br>
   À bientôt
 <br><br>

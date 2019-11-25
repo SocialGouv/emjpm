@@ -16,10 +16,13 @@ export const formatMesureList = mesureList => {
       civilite,
       date_ouverture,
       numero_rg,
+      is_urgent,
+      judgment_date,
       cabinet,
       ti
     } = mesure;
     const formatedDate = format(date_ouverture, "DD/MM/YYYY");
+    const formatedJudgementDate = format(judgment_date, "DD/MM/YYYY");
     return {
       age: annee ? annee : "nc",
       antenneId: antenne_id ? antenne_id : null,
@@ -30,6 +33,8 @@ export const formatMesureList = mesureList => {
       dateOuvertureFormated: date_ouverture ? formatedDate : "non reseigné",
       href: `/services/mesure/${id}/`,
       id: id,
+      isUrgent: is_urgent,
+      judgmentDate: judgment_date ? formatedJudgementDate : "non reseigné",
       numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
       numeroRg: numero_rg ? numero_rg : "RG-00000000",
       residence: residence ? residence : "non reseigné",
