@@ -10,7 +10,7 @@ import { ADD_COMMENT, EDIT_COMMENT } from "./mutations";
 
 export const MagistratMandataireCommentForm = props => {
   const {
-    ti,
+    tiId,
     serviceId,
     mandataireId,
     toggleEditCommentForm,
@@ -45,7 +45,7 @@ export const MagistratMandataireCommentForm = props => {
                 comment: values.comment,
                 mandataire_id: mandataireId,
                 service_id: serviceId,
-                ti_id: ti
+                ti_id: tiId
               }
             });
             toggleCommentForm(false);
@@ -109,7 +109,7 @@ MagistratMandataireCommentForm.defaultProps = {
   id: null,
   isEditing: false,
   mandataireId: null,
-  ti: null,
+  tiId: null,
   toggleCommentForm: null,
   toggleEditCommentForm: null
 };
@@ -120,7 +120,7 @@ MagistratMandataireCommentForm.propTypes = {
   id: PropTypes.number,
   isEditing: PropTypes.bool,
   mandataireId: PropTypes.number,
-  ti: PropTypes.number,
+  tiId: PropTypes.number,
   toggleCommentForm: PropTypes.func,
   toggleEditCommentForm: PropTypes.func
 };
