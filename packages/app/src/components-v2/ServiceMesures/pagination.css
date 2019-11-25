@@ -1,0 +1,32 @@
+.react-paginate {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 20px;
+}
+
+.react-paginate li {
+  display: inline-block;
+  padding: 2px;
+}
+
+.react-paginate li a {
+  display: inline-block;
+  padding: 10px 18px;
+  outline: none;
+}
+
+.react-paginate li a:hover {
+  background: rgb(0, 122, 217);
+  opacity: 0.8;
+  color: white;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.react-paginate li.active a{
+  background: rgb(0, 122, 217);
+  color: white;
+
+  border-radius: 3px;
+}
