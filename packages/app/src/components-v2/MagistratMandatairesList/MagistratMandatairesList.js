@@ -92,7 +92,7 @@ const MagistratMandatairesList = props => {
         </Card>
         <Mandatairelist
           isMagistrat
-          ChooseComponent={props => <MagistratChoose ti={ti_id} cabinet={cabinet} {...props} />}
+          ChooseComponent={props => <MagistratChoose tiId={ti_id} cabinet={cabinet} {...props} />}
           mandataires={list}
         />
         {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
