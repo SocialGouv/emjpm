@@ -6,9 +6,9 @@ import { MailOutline } from "styled-icons/material";
 import { LinkButton } from "../Commons";
 import { ForgotLink } from "../ForgotLink";
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
-const MagistratInformations = props => {
-  const { email, cabinet, nom, prenom } = props;
 
+const DirectionInformations = props => {
+  const { email, nom, prenom } = props;
   return (
     <Box {...props}>
       <Card p="5">
@@ -24,14 +24,11 @@ const MagistratInformations = props => {
             </Flex>
             <Text sx={innerTextStyle}>{nom ? nom : "Nom non renseigné"} </Text>
             <Text sx={innerTextStyle}>{prenom ? prenom : "Prénom non renseigné"}</Text>
-            <Text sx={innerTextStyle}>
-              {cabinet ? `Cabinet: ${cabinet}` : "Cabinet non renseigné"}
-            </Text>
           </Box>
         </Flex>
         <Flex mt="5">
           <Box>
-            <LinkButton href="/magistrats/edit-informations">Modifier mes informations</LinkButton>
+            <LinkButton href="/direction/edit-informations">Modifier mes informations</LinkButton>
           </Box>
         </Flex>
         <ForgotLink email={email} />
@@ -40,4 +37,4 @@ const MagistratInformations = props => {
   );
 };
 
-export { MagistratInformations };
+export { DirectionInformations };

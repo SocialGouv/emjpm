@@ -20,11 +20,11 @@ const navigationLinks = [
   {
     title: "Mesures",
     url: "/direction/mesures"
+  },
+  {
+    title: "Vos informations",
+    url: "/direction/informations"
   }
-  // {
-  //   title: "données démographiques",
-  //   url: "/direction/donnees-demographiques"
-  // }
 ];
 
 const LayoutDirection = props => {
