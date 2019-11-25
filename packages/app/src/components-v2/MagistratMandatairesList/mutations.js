@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const CHOOSE_MANDATAIRE = gql`
   mutation chooseMandataire(
-    $ti: Int!
+    $tiId: Int!
     $mandataire_id: Int!
     $type: String!
     $civilite: String!
@@ -13,7 +13,7 @@ export const CHOOSE_MANDATAIRE = gql`
     insert_mesures(
       objects: {
         cabinet: $cabinet
-        ti_id: $ti
+        ti_id: $tiId
         mandataire_id: $mandataire_id
         type: $type
         civilite: $civilite
@@ -57,7 +57,7 @@ export const CHOOSE_MANDATAIRE = gql`
 
 export const CHOOSE_SERVICE = gql`
   mutation chooseService(
-    $ti: Int!
+    $tiId: Int!
     $service_id: Int!
     $type: String!
     $civilite: String!
@@ -67,7 +67,7 @@ export const CHOOSE_SERVICE = gql`
   ) {
     insert_mesures(
       objects: {
-        ti_id: $ti
+        ti_id: $tiId
         cabinet: $cabinet
         service_id: $service_id
         type: $type
