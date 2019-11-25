@@ -72,7 +72,11 @@ const routes = {
 export const auth = ctx => {
   const { token } = nextCookie(ctx);
   const { pathname } = ctx;
-  const isLogin = pathname === "/login" || pathname === "/signup" || pathname === "/";
+  const isLogin =
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/inscription" ||
+    pathname === "/";
 
   if (token) {
     const { url, role } = jwtDecode(token);
