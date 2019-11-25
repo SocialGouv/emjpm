@@ -20,8 +20,5 @@ spec:
             backend:
               serviceName: ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH}
               servicePort: ${PORT}
-
-#
-
   tls:
     - secretName: ${CERTIFICATE_NAME}-secret

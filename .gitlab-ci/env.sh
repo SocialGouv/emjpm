@@ -45,7 +45,7 @@ if [[ -n "${PRODUCTION+x}" ]]; then
   #
   export DOMAIN="emjpm.fabrique.social.gouv.fr";
 else
-  export DOMAIN="${BRANCH_HASH}.${DOMAIN}";
+  export DOMAIN="${BRANCH_HASH}-${DOMAIN}";
   #
 fi
 
