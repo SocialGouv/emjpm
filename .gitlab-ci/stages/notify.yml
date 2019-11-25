@@ -65,8 +65,6 @@ Delete useless k8s namespaces:
 Release:
   stage: "Notify Finished Deployment"
   image: node:10
-  only:
-    - master
   when: manual
   variables:
     GIT_AUTHOR_EMAIL: 45039513+SocialGroovyBot@users.noreply.github.com
