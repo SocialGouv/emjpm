@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.7.3](https://github.com/SocialGouv/emjpm/compare/v25.7.2...v25.7.3) (2019-11-25)
+
+
+### Bug Fixes
+
+* **inscription-access:** handle /inscription in redirection rule ([#1003](https://github.com/SocialGouv/emjpm/issues/1003)) ([922918a](https://github.com/SocialGouv/emjpm/commit/922918a))
+
+
+
+
+
 ## [25.7.2](https://github.com/SocialGouv/emjpm/compare/v25.7.1...v25.7.2) (2019-11-20)
 
 
