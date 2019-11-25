@@ -1,7 +1,9 @@
+import "./pagination.css";
+
 import { useQuery } from "@apollo/react-hooks";
 import { MesureContextProvider, MesureList } from "@socialgouv/emjpm-ui-components";
-import { Button } from "@socialgouv/emjpm-ui-core";
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "../ServicesFilters/context";
@@ -18,10 +20,8 @@ const RESULT_PER_PAGE = 20;
 
 const ServiceMesures = props => {
   const { isOnlyWaiting, user_antennes } = props;
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentOffset, setCurrentOffset] = useState(0);
   const { mesureType, mesureStatus, antenne, debouncedSearchText } = useContext(FiltersContext);
-
-  useEffect(() => setCurrentPage(RESULT_PER_PAGE), [mesureType, mesureStatus, antenne]);
 
   let currentMesureType = null;
   if (isOnlyWaiting) {
@@ -29,6 +29,7 @@ const ServiceMesures = props => {
   } else {
     currentMesureType = mesureStatus ? mesureStatus.value : null;
   }
+
   const { data, error, loading, fetchMore } = useQuery(MESURES, {
     fetchPolicy: "cache-and-network",
     variables: {
@@ -51,6 +52,7 @@ const ServiceMesures = props => {
   }
 
   const { count } = data.mesures_aggregate.aggregate;
+  const totalPage = count / 20;
   const mesures = formatMesureList(data.mesures);
 
   return (
@@ -72,31 +74,42 @@ const ServiceMesures = props => {
                 onPanelOpen={id => console.log(id)}
                 mesures={mesures}
               />
-              {count > RESULT_PER_PAGE && count > currentPage && (
-                <Flex mt="5" alignItem="center">
-                  <Button
-                    onClick={() => {
-                      fetchMore({
-                        updateQuery: (prev, { fetchMoreResult }) => {
-                          setCurrentPage(currentPage + RESULT_PER_PAGE);
-                          return {
-                            count: fetchMoreResult.count,
-                            mesures: [...prev.mesures, ...fetchMoreResult.mesures]
-                          };
-                        },
-                        variables: {
-                          offset: currentPage + RESULT_PER_PAGE
-                        }
-                      });
-                    }}
-                  >
-                    Afficher les mandataires suivants
-                  </Button>
-                </Flex>
-              )}
             </Fragment>
           ) : (
             <div>Pas de donnée à afficher</div>
+          )}
+          {count > RESULT_PER_PAGE && (
+            <Flex alignItems="center" justifyContent="center">
+              <ReactPaginate
+                previousLabel={"Précédent"}
+                nextLabel={"Suivant"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={totalPage}
+                containerClassName={"react-paginate"}
+                marginPagesDisplayed={2}
+                forcePage={currentOffset / RESULT_PER_PAGE}
+                pageRangeDisplayed={5}
+                onPageChange={data => {
+                  console.log(data);
+                  fetchMore({
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                      return {
+                        count: fetchMoreResult.count,
+                        mesures: fetchMoreResult.mesures,
+                        mesures_aggregate: fetchMoreResult.mesures_aggregate
+                      };
+                    },
+                    variables: {
+                      offset: data.selected * RESULT_PER_PAGE
+                    }
+                  });
+                  setCurrentOffset(data.selected * RESULT_PER_PAGE);
+                }}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+              />
+            </Flex>
           )}
         </Fragment>
       </Box>
