@@ -6,6 +6,7 @@ import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
 import { ServiceEditLinkButton } from "../Commons";
+import { ForgotLink } from "../ForgotLink";
 import { GET_SERVICES } from "./queries";
 import {
   boxStyle,
@@ -82,6 +83,7 @@ const ServicesInformations = props => {
         <Flex mt="5">
           <ServiceEditLinkButton>Modifier les informations de mon service</ServiceEditLinkButton>
         </Flex>
+        <ForgotLink email={email} />
       </Card>
     </Box>
   );
