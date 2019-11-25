@@ -10,6 +10,7 @@ const { MesuresImport } = require("../model/MesuresImport");
 const { Mesures } = require("../model/Mesures");
 const { Department } = require("../model/Departments");
 const { reservationEmail } = require("../email/reservation-email");
+const { cancelReservationEmail } = require("../email/cancel-reservation-email");
 const { validationEmail } = require("../email/validation-email");
 const { mesuresImportEmail } = require("../email/mesures-import-email");
 
@@ -69,6 +70,29 @@ router.post("/email-reservation", async function(req, res) {
     const users = await getUsers(mandataire_id, service_id);
     for (const user of users) {
       reservationEmail(currentTi, newMesure, user);
+    }
+  }
+  res.json({ success: true });
+});
+
+// -----------------------------------------
+// ------------- EMAIL CANCEL RESERVATION---
+// -----------------------------------------
+
+router.post("/email-cancel-reservation", async function(req, res) {
+  const sessionVars = req.body.event.session_variables;
+  const role = sessionVars["x-hasura-role"];
+  const userId = sessionVars["x-hasura-user-id"];
+
+  if (role === "ti" && userId) {
+    const oldMesure = req.body.event.data.old;
+    const { ti_id, service_id, mandataire_id, status } = oldMesure;
+    if (status === "Mesure en attente") {
+      const [currentTi] = await Tis.query().where("id", ti_id);
+      const users = await getUsers(mandataire_id, service_id);
+      for (const user of users) {
+        cancelReservationEmail(currentTi, oldMesure, user);
+      }
     }
   }
   res.json({ success: true });
