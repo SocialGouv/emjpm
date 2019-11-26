@@ -7,7 +7,7 @@ exports.up = async function(knex) {
 
 exports.down = async function(knex) {
   await knex.schema.alterTable("mesures", function(table) {
-    table.dropColumn("urgent");
+    table.dropColumn("is_urgent");
     table.dropColumn("judgment_date");
   });
 };

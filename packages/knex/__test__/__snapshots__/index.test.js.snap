@@ -572,6 +572,18 @@ Object {
     "nullable": false,
     "type": "integer",
   },
+  "is_urgent": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "judgment_date": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "date",
+  },
   "mandataire_id": Object {
     "defaultValue": null,
     "maxLength": null,
