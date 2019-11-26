@@ -73,7 +73,7 @@ export const CHOOSE_SERVICE = gql`
   ) {
     insert_mesures(
       objects: {
-        ti_id: $ti
+        ti_id: $tiId
         is_urgent: $urgent
         cabinet: $cabinet
         service_id: $service_id
