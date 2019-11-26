@@ -38,7 +38,7 @@ export const MagistratChoose = props => {
                   judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
                   mandataire_id: mandataireId,
                   numero_rg: values.numero_rg,
-                  ti: ti,
+                  ti: tiId,
                   type: values.type.value,
                   urgent: values.urgent.value
                 }
@@ -53,7 +53,7 @@ export const MagistratChoose = props => {
                   judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
                   numero_rg: values.numero_rg,
                   service_id: serviceId,
-                  ti: ti,
+                  ti: tiId,
                   type: values.type.value,
                   urgent: values.urgent.value
                 }
