@@ -45,16 +45,16 @@ if [[ -n "${PRODUCTION+x}" ]]; then
   #
   export DOMAIN="emjpm.fabrique.social.gouv.fr";
 else
-  export DOMAIN="${BRANCH_HASH}.${DOMAIN}";
+  export DOMAIN="${BRANCH_HASH}-${DOMAIN}";
   #
 fi
 
-export API_HOST="api.${DOMAIN}";
+export API_HOST="api-${DOMAIN}";
 export CERTIFICATE_NAME="${K8S_PROJECT}-certificate-${BRANCH_HASH}";
 export FRONTEND_HOST="${DOMAIN}";
 export GQL_SERVER_HOST="${K8S_PROJECT}-graphql-server-${BRANCH_HASH}";
-export HASURA_HOST="hasura.${DOMAIN}";
-export METABASE_HOST="metabase.${DOMAIN}";
+export HASURA_HOST="hasura-${DOMAIN}";
+export METABASE_HOST="metabase-${DOMAIN}";
 export POSTGRES_HOST="${K8S_PROJECT}-postgres-${BRANCH_HASH}"
 
 export API_URL="https://${API_HOST}"
