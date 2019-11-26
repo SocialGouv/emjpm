@@ -339,11 +339,7 @@ tables:
       - id
       - service_id
       - ti_id
-      filter:
-        service:
-          service_admins:
-            service_id:
-              _eq: X-Hasura-Service-Id
+      filter: {}
     role: service
   table: service_tis
   update_permissions: []
@@ -1287,21 +1283,15 @@ tables:
   - comment: null
     permission:
       columns:
-      - id
-      - etablissement
+      - adresse
+      - department_id
+      - dispo_max
       - email
+      - mesures_awaiting
+      - mesures_in_progress
       - nom
       - prenom
-      - code_postal
-      - ville
       - telephone
-      - adresse
-      - dispo_max
-      - created_at
-      - information
-      - department_id
-      - mesures_in_progress
-      - mesures_awaiting
       filter:
         id:
           _eq: X-Hasura-Service-Id
@@ -1447,12 +1437,6 @@ tables:
   update_permissions: []
 - array_relationships:
   - comment: null
-    name: mesures
-    using:
-      foreign_key_constraint_on:
-        column: antenne_id
-        table: mesures
-  - comment: null
     name: commentaires
     using:
       foreign_key_constraint_on:
@@ -1464,6 +1448,12 @@ tables:
       foreign_key_constraint_on:
         column: antenne_id
         table: user_antenne
+  - comment: null
+    name: mesures
+    using:
+      foreign_key_constraint_on:
+        column: antenne_id
+        table: mesures
   delete_permissions:
   - comment: null
     permission:
@@ -1643,55 +1633,10 @@ tables:
       num_retries: 0
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_EMAIL_RESERVATION
-  - definition:
-      delete:
-        columns: '*'
-      enable_manual: false
-    headers: []
-    name: email-cancel-reservation
-    retry_conf:
-      interval_sec: 10
-      num_retries: 0
-      timeout_sec: 60
-    webhook_from_env: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
   insert_permissions:
   - comment: null
     permission:
-      check:
-        service_id:
-          _eq: X-Hasura-Service-Id
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
-      set: {}
-    role: service
-  - comment: null
-    permission:
-      check:
-        ti:
-          magistrats:
-            user_id:
-              _eq: X-Hasura-User-Id
+      check: {}
       columns:
       - annee
       - cabinet
@@ -1704,6 +1649,8 @@ tables:
       - etablissement_id
       - extinction
       - id
+      - is_urgent
+      - judgment_date
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -1776,6 +1723,37 @@ tables:
       - antenne_id
       set: {}
     role: prepose
+  - comment: null
+    permission:
+      check:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      set:
+        service_id: x-hasura-Service-Id
+    role: service
   is_enum: false
   object_relationships:
   - comment: null
@@ -1819,6 +1797,8 @@ tables:
       - etablissement_id
       - extinction
       - id
+      - is_urgent
+      - judgment_date
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -1829,8 +1809,12 @@ tables:
       - ti_id
       - type
       - ville
-      filter: {}
-    role: direction
+      filter:
+        ti:
+          magistrats:
+            user_id:
+              _eq: X-Hasura-User-Id
+    role: ti
   - comment: null
     permission:
       allow_aggregations: true
@@ -1857,12 +1841,8 @@ tables:
       - ti_id
       - type
       - ville
-      filter:
-        ti:
-          magistrats:
-            user_id:
-              _eq: X-Hasura-User-Id
-    role: ti
+      filter: {}
+    role: direction
   - comment: null
     permission:
       columns:
@@ -1938,6 +1918,8 @@ tables:
       - etablissement_id
       - extinction
       - id
+      - is_urgent
+      - judgment_date
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -1954,35 +1936,6 @@ tables:
     role: service
   table: mesures
   update_permissions:
-  - comment: null
-    permission:
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - ti_id
-      - type
-      - ville
-      filter:
-        service_id:
-          _eq: X-Hasura-Service-Id
-      set: {}
-    role: service
   - comment: null
     permission:
       columns:
@@ -2046,6 +1999,35 @@ tables:
   - comment: null
     permission:
       columns:
+      - date_ouverture
+      - extinction
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      set: {}
+    role: service
+  - comment: null
+    permission:
+      columns:
       - annee
       - cabinet
       - civilite
@@ -2057,6 +2039,8 @@ tables:
       - etablissement_id
       - extinction
       - id
+      - is_urgent
+      - judgment_date
       - mandataire_id
       - numero_dossier
       - numero_rg

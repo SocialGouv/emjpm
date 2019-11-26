@@ -8,10 +8,14 @@ export const CHOOSE_MANDATAIRE = gql`
     $civilite: String!
     $annee: String!
     $cabinet: String
+    $urgent: Boolean!
+    $judgmentDate: date
     $numero_rg: String!
   ) {
     insert_mesures(
       objects: {
+        is_urgent: $urgent
+        judgment_date: $judgmentDate
         cabinet: $cabinet
         ti_id: $tiId
         mandataire_id: $mandataire_id
@@ -63,17 +67,21 @@ export const CHOOSE_SERVICE = gql`
     $civilite: String!
     $annee: String!
     $cabinet: String
+    $judgmentDate: date
     $numero_rg: String!
+    $urgent: Boolean!
   ) {
     insert_mesures(
       objects: {
-        ti_id: $tiId
+        ti_id: $ti
+        is_urgent: $urgent
         cabinet: $cabinet
         service_id: $service_id
         type: $type
         civilite: $civilite
         annee: $annee
         numero_rg: $numero_rg
+        judgment_date: $judgmentDate
         status: "Mesure en attente"
       }
     ) {
