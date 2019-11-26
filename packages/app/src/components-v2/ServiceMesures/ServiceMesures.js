@@ -91,7 +91,6 @@ const ServiceMesures = props => {
                 forcePage={currentOffset / RESULT_PER_PAGE}
                 pageRangeDisplayed={5}
                 onPageChange={data => {
-                  console.log(data);
                   fetchMore({
                     updateQuery: (prev, { fetchMoreResult }) => {
                       return {
