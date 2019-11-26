@@ -136,3 +136,8 @@ export const CABINET = [
   "6A",
   "6B"
 ];
+
+export const IS_URGENT = [
+  { label: "oui, c'est une demande urgente", value: true },
+  { label: "non, c'est n'est pas une demande urgente", value: false }
+];
