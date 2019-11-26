@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.8.0](https://github.com/SocialGouv/emjpm/compare/v25.7.2...v25.8.0) (2019-11-26)
+
+
+### Bug Fixes
+
+* **test:** update snapshot / fix rollback script ([31322b7](https://github.com/SocialGouv/emjpm/commit/31322b7))
+
+
+### Features
+
+* **mesure-service:** handle service_id in mesures ([#999](https://github.com/SocialGouv/emjpm/issues/999)) ([b7651a6](https://github.com/SocialGouv/emjpm/commit/b7651a6)), closes [#1000](https://github.com/SocialGouv/emjpm/issues/1000)
+* **reservation-magistrat:** add magistrat new input for urgent ([#1007](https://github.com/SocialGouv/emjpm/issues/1007)) ([c4764a2](https://github.com/SocialGouv/emjpm/commit/c4764a2))
+
+
+
+
+
 ## [25.7.2](https://github.com/SocialGouv/emjpm/compare/v25.7.1...v25.7.2) (2019-11-20)
 
 **Note:** Version bump only for package @emjpm/knex

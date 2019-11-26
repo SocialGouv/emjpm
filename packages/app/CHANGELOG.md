@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.8.0](https://github.com/SocialGouv/emjpm/compare/v25.7.2...v25.8.0) (2019-11-26)
+
+
+### Bug Fixes
+
+* **inscription-access:** handle /inscription in redirection rule ([#1003](https://github.com/SocialGouv/emjpm/issues/1003)) ([ade263a](https://github.com/SocialGouv/emjpm/commit/ade263a))
+* **service-mesure-ti:** update metadata add required tribunal select ([#1001](https://github.com/SocialGouv/emjpm/issues/1001)) ([ca68543](https://github.com/SocialGouv/emjpm/commit/ca68543))
+
+
+### Features
+
+* **magistrat-antenne-informations:** add infos ([#1006](https://github.com/SocialGouv/emjpm/issues/1006)) ([bc87d08](https://github.com/SocialGouv/emjpm/commit/bc87d08))
+* **mesure-service:** handle service_id in mesures ([#999](https://github.com/SocialGouv/emjpm/issues/999)) ([b7651a6](https://github.com/SocialGouv/emjpm/commit/b7651a6)), closes [#1000](https://github.com/SocialGouv/emjpm/issues/1000)
+* **mesures-ti:** add ti to mesures creation for services ([#998](https://github.com/SocialGouv/emjpm/issues/998)) ([97fef89](https://github.com/SocialGouv/emjpm/commit/97fef89))
+* **password-reset:** add password reset for services and direction ([#1008](https://github.com/SocialGouv/emjpm/issues/1008)) ([91b6a65](https://github.com/SocialGouv/emjpm/commit/91b6a65))
+* **reservation-magistrat:** add magistrat new input for urgent ([#1007](https://github.com/SocialGouv/emjpm/issues/1007)) ([c4764a2](https://github.com/SocialGouv/emjpm/commit/c4764a2))
+
+
+
+
+
 ## [25.7.2](https://github.com/SocialGouv/emjpm/compare/v25.7.1...v25.7.2) (2019-11-20)
 
 
