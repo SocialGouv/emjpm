@@ -24,4 +24,4 @@ spec:
 #
 
   tls:
-    - secretName: ${CERTIFICATE_NAME}-secret
+    - secretName: wildcard-crt
