@@ -82,7 +82,7 @@ export const MagistratChoose = props => {
             judgmentDate: "",
             numero_rg: "",
             type: "",
-            urgent: false
+            urgent: IS_URGENT.find(lv => lv.value == false)
           }}
         >
           {props => {
