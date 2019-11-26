@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.8.1](https://github.com/SocialGouv/emjpm/compare/v25.8.0...v25.8.1) (2019-11-26)
+
+
+### Bug Fixes
+
+* **choose-service:** use correct graphql param ([cb52eb0](https://github.com/SocialGouv/emjpm/commit/cb52eb0))
+* **choose-service:** use correct graphql param ([eab8c6c](https://github.com/SocialGouv/emjpm/commit/eab8c6c))
+
+
+
+
+
 # [25.8.0](https://github.com/SocialGouv/emjpm/compare/v25.7.2...v25.8.0) (2019-11-26)
 
 
