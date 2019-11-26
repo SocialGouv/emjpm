@@ -23,6 +23,13 @@ const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
     user.mesures_en_cours
   }" mesures pour une capacité souhaitée de "${user.dispo_max}" mesures .
 
+  ${
+    mesure.is_urgent
+      ? `
+  Le magistrat a précisé le caractère urgent lors de la réservation de cette mesure.`
+      : ""
+  }
+
   À bientôt
 
   L’équipe e-mjpm.`;
@@ -53,12 +60,13 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
   Pour rappel, à ce jour, vous avez déclaré "${
     user.mesures_en_cours
   }" mesures pour une capacité souhaitée de "${user.dispo_max}" mesures.
-<br><br>
+
 ${
   mesure.is_urgent
     ? `
+  <br><br>
 Le magistrat a précisé le caractère urgent lors de la réservation de cette mesure.`
-    : null
+    : ""
 }
 <br><br>
   À bientôt
