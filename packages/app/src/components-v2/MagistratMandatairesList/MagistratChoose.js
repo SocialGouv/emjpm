@@ -168,7 +168,7 @@ export const MagistratChoose = props => {
                     hasError={errors.judgmentDate && touched.judgmentDate}
                     type="date"
                     onChange={handleChange}
-                    placeholder="Date de jugement"
+                    placeholder="Date prévisionnelle du jugement"
                   />
                 </Box>
                 <Flex justifyContent="flex-end">

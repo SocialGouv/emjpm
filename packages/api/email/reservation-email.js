@@ -7,9 +7,15 @@ const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
   Pour information, le ${ti.etablissement} ${(mesure.cabinet &&
     `cabinet ${mesure.cabinet},`) ||
     ""} a décidé de vous confier une nouvelle mesure :
-  - "type de mesure": ${mesure.type}
-  - "genre": ${mesure.civilite}
-  - "année de naissance": ${mesure.annee}.
+  - type de mesure: ${mesure.type}
+  - genre: ${mesure.civilite}
+  - année de naissance: ${mesure.annee}
+  ${
+    mesure.judgment_date
+      ? `- date prévisionnelle du jugement: ` +
+        format(mesure.judgment_date, "DD/MM/YYYY")
+      : ""
+  }
 
   Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
 
@@ -28,11 +34,19 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
     `cabinet ${mesure.cabinet},`) ||
     ""} a décidé de vous confier une nouvelle mesure :
   <br>
-  - "type de mesure": ${mesure.type}
+  - type de mesure: ${mesure.type}
   <br>
-  - "genre": ${mesure.civilite}
+  - genre: ${mesure.civilite}
   <br>
-  - "année de naissance": ${mesure.annee}.
+  - année de naissance: ${mesure.annee}.
+  ${
+    mesure.judgment_date
+      ? `
+      <br>
+      - date prévisionnelle du jugement: ` +
+        format(mesure.judgment_date, "DD/MM/YYYY")
+      : ""
+  }
 <br><br>
     Quand cette dernière vous sera officiellement notifiée, nous vous invitons à mettre à jour vos mesures en cours.
 <br><br>
@@ -43,10 +57,7 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
 ${
   mesure.is_urgent
     ? `
-Le magistrat a précisé le caractère urgent lors de la réservation de cette mesure. La date prévisionnelle du jugement est le ${format(
-        mesure.judgment_date,
-        "DD/MM/YYYY"
-      )}.`
+Le magistrat a précisé le caractère urgent lors de la réservation de cette mesure.`
     : null
 }
 <br><br>
