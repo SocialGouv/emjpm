@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 const { User } = require("../../model/User");
 
 /**
- * Sign in using username and password and returns JWT
+ * Reset password using username, password, new_password and new_password_confirmation return ok
  */
 const postResetPassword = async (req, res) => {
   const errors = validationResult(req);
