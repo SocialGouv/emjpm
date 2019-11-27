@@ -46,7 +46,7 @@ router.post(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/
       )
       .withMessage(
-        "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spéciale"
+        "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spécial"
       ),
     body("new_password", "new_password_confirmation").custom(
       (value, { req }) => {
@@ -91,7 +91,7 @@ router.post(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/
       )
       .withMessage(
-        "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spéciale"
+        "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spécial"
       )
   ],
   postSignup
