@@ -66,14 +66,28 @@ const ResultMessage = ({ result, restart }) => {
   );
 };
 
+const findSeparator = line => {
+  const tabulation = "\t";
+  const semilicon = ";";
+
+  let separatorChar = tabulation;
+  if (line.split(semilicon).length > 1) {
+    separatorChar = semilicon;
+  }
+  return separatorChar;
+};
+
 function csvToArray(csv) {
   var lines = csv.split("\n");
+  const separatorChar = findSeparator(lines[0]);
+
   var result = [];
-  var headers = lines[0].split("\t").map(header => header.trim());
+  const headerCells = lines[0].split(separatorChar);
+  var headers = headerCells.map(header => header.trim());
 
   for (var i = 1; i < lines.length; i++) {
     var obj = {};
-    var currentline = lines[i].split("\t");
+    var currentline = lines[i].split(separatorChar);
 
     for (var j = 0; j < headers.length; j++) {
       const val = currentline[j];
@@ -113,7 +127,7 @@ export const MandataireAddMesureImport = () => {
         mesures
       });
     };
-    reader.readAsBinaryString(file);
+    reader.readAsText(file);
   };
 
   return (
