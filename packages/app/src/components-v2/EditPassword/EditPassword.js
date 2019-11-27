@@ -7,6 +7,8 @@ import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 import * as Yup from "yup";
 
+import { PATH } from "../../constants/basePath";
+
 const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
@@ -19,10 +21,10 @@ const grayBox = {
   p: "5"
 };
 
-function checkStatus(response, setSubmitting, setStatus) {
+function checkStatus(response, setSubmitting, setStatus, type) {
   if (response.ok) {
     setSubmitting(false);
-    Router.push("/magistrats/informations", `/magistrats/informations`, {
+    Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
       shallow: true
     });
     return response;
@@ -35,10 +37,10 @@ function checkStatus(response, setSubmitting, setStatus) {
 }
 
 const EditPassword = props => {
-  const { username } = props;
+  const { username, type } = props;
   const url = `${API_URL}/api/v2/auth/reset-password`;
 
-  const handleSubmit = async (values, setSubmitting, setStatus) => {
+  const handleSubmit = async (values, setSubmitting, setStatus, type) => {
     fetch(url, {
       body: JSON.stringify({
         new_password: values.newPassword,
@@ -50,7 +52,7 @@ const EditPassword = props => {
         "Content-Type": "application/json"
       },
       method: "POST"
-    }).then(response => checkStatus(response, setSubmitting, setStatus));
+    }).then(response => checkStatus(response, setSubmitting, setStatus, type));
   };
 
   return (
@@ -68,7 +70,7 @@ const EditPassword = props => {
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <Formik
               onSubmit={(values, { setSubmitting, setStatus }) =>
-                handleSubmit(values, setSubmitting, setStatus)
+                handleSubmit(values, setSubmitting, setStatus, type)
               }
               validationSchema={Yup.object().shape({
                 newPassword: Yup.string("Champs obligatoire")
