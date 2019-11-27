@@ -1,8 +1,15 @@
 import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
+import getConfig from "next/config";
+import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
+import fetch from "unfetch";
 import * as Yup from "yup";
+
+const {
+  publicRuntimeConfig: { API_URL }
+} = getConfig();
 
 const cardStyle = { mt: "5", p: "0" };
 
@@ -12,7 +19,40 @@ const grayBox = {
   p: "5"
 };
 
+function checkStatus(response, setSubmitting, setStatus) {
+  if (response.ok) {
+    setSubmitting(false);
+    Router.push("/magistrats/informations", `/magistrats/informations`, {
+      shallow: true
+    });
+    return response;
+  } else {
+    response.json().then(response => {
+      setStatus({ errorMsg: response.errors.msg, field: response.errors.param });
+      setSubmitting(false);
+    });
+  }
+}
+
 const EditPassword = props => {
+  const { username } = props;
+  const url = `${API_URL}/api/v2/auth/reset-password`;
+
+  const handleSubmit = async (values, setSubmitting, setStatus) => {
+    fetch(url, {
+      body: JSON.stringify({
+        new_password: values.newPassword,
+        new_password_confirmation: values.newPasswordConfirmation,
+        password: values.password,
+        username: username
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST"
+    }).then(response => checkStatus(response, setSubmitting, setStatus));
+  };
+
   return (
     <Card sx={cardStyle}>
       <Flex {...props}>
@@ -27,9 +67,9 @@ const EditPassword = props => {
         <Box p="5" width={[1, 1 / 2]}>
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <Formik
-              onSubmit={(values, { setSubmitting }) => {
-                setSubmitting(false);
-              }}
+              onSubmit={(values, { setSubmitting, setStatus }) =>
+                handleSubmit(values, setSubmitting, setStatus)
+              }
               validationSchema={Yup.object().shape({
                 newPassword: Yup.string("Champs obligatoire")
                   .min(8, "Votre mot de passe doit être de 8 caractères minimum")
@@ -53,9 +93,22 @@ const EditPassword = props => {
               }}
             >
               {props => {
-                const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
+                const {
+                  status,
+                  values,
+                  touched,
+                  errors,
+                  isSubmitting,
+                  handleChange,
+                  handleSubmit
+                } = props;
                 return (
                   <form onSubmit={handleSubmit}>
+                    {!!status && (
+                      <Box color="error" mb="1">
+                        {status.errorMsg}
+                      </Box>
+                    )}
                     <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.password}

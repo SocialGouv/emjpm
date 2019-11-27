@@ -34,6 +34,12 @@ router.post(
     body("password")
       .not()
       .isEmpty(),
+    body("new_password_confirmation")
+      .not()
+      .isEmpty(),
+    body("new_password")
+      .not()
+      .isEmpty(),
     check("username", "username must be at least 3 characters long").isLength({
       min: 3
     }),
