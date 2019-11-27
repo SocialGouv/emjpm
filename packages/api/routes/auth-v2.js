@@ -3,6 +3,7 @@ const router = express.Router();
 const { check, body } = require("express-validator");
 const postLogin = require("../controllers/user/login");
 const postSignup = require("../controllers/user/signup");
+const resetPassword = require("../controllers/user/reset-password");
 const jwkController = require("../controllers/jwk");
 
 router.post(
@@ -22,6 +23,45 @@ router.post(
     })
   ],
   postLogin
+);
+
+router.post(
+  "/reset-password",
+  [
+    body("username")
+      .not()
+      .isEmpty(),
+    body("password")
+      .not()
+      .isEmpty(),
+    check("username", "username must be at least 3 characters long").isLength({
+      min: 3
+    }),
+    body("new_password", "new_password_confirmation").custom(
+      (value, { req }) => {
+        if (value !== req.body.new_password_confirmation) {
+          // trow error if passwords do not match
+          throw new Error(
+            "Votre nouveau mot de passe être similaire à la confirmation"
+          );
+        } else {
+          return value;
+        }
+      }
+    ),
+    check("new_password", "new_password_confirmation")
+      .exists()
+      .withMessage("Votre mot de passe doit ne doit pas être vide")
+      .isLength({ min: 8 })
+      .withMessage("Votre mot de passe doit être de 8 caractères minimum")
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/
+      )
+      .withMessage(
+        "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spéciale"
+      )
+  ],
+  resetPassword
 );
 
 router.post(
