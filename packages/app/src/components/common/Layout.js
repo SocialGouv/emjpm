@@ -1,9 +1,9 @@
-import "bootstrap/dist/css/bootstrap.css";
-import "react-tabs/style/react-tabs.css";
-import "../../../static/css/custom.css";
-import "../../../static/css/footer.css";
-import "../../../static/css/hero.css";
-import "../../../static/css/panel.css";
+// import "bootstrap/dist/css/bootstrap.css";
+// import "react-tabs/style/react-tabs.css";
+// import "../../../static/css/custom.css";
+// import "../../../static/css/footer.css";
+// import "../../../static/css/hero.css";
+// import "../../../static/css/panel.css";
 
 import React from "react";
 import styled from "styled-components";

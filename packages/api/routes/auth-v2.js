@@ -4,6 +4,7 @@ const { check, body } = require("express-validator");
 const postLogin = require("../controllers/user/login");
 const postSignup = require("../controllers/user/signup");
 const resetPassword = require("../controllers/user/reset-password");
+const forgotPassword = require("../controllers/user/forgot-password");
 const jwkController = require("../controllers/jwk");
 
 router.post(
@@ -23,6 +24,16 @@ router.post(
     })
   ],
   postLogin
+);
+
+router.post(
+  "/forgot-password",
+  [
+    body("email")
+      .not()
+      .isEmpty()
+  ],
+  forgotPassword
 );
 
 router.post(
