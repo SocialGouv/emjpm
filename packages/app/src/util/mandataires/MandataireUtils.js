@@ -19,6 +19,7 @@ export const formatMandataire = (
   gestionnaire_tis
 ) => {
   let currentDiscriminator = {};
+
   const common = {
     currentAvailability: remaining_capacity ? remaining_capacity : 0,
     cvLink: "test",
@@ -38,6 +39,7 @@ export const formatMandataire = (
       etablissement: service.etablissement ? service.etablissement : "non renseigné",
       genre: "F",
       id: `${discriminator}-${service.id}`,
+      lastLogin: "non renseigné", //service.user.last_login ? service.user.last_login : "non renseigné",
       nom: service.nom ? service.nom : null,
       prenom: service.prenom ? service.prenom : null,
       serviceId: service.id,
@@ -51,6 +53,10 @@ export const formatMandataire = (
       email: mandataire.user && mandataire.user.email ? mandataire.user.email : "non renseigné",
       genre: mandataire.genre ? mandataire.genre : "F",
       id: `${discriminator}-${mandataire.id}`,
+      lastLogin:
+        mandataire.user && mandataire.user.last_login
+          ? mandataire.user.last_login
+          : "non renseigné",
       mandataireId: mandataire.id,
       nom:
         mandataire.user && mandataire.user.nom ? capitalize(mandataire.user.nom) : "non renseigné",

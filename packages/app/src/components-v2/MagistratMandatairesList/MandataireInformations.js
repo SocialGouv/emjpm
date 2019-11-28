@@ -19,7 +19,8 @@ const MandataireInformations = props => {
     adresse,
     codePostal,
     tiId,
-    etablissement
+    etablissement,
+    lastLogin
   } = props;
 
   return (
@@ -47,6 +48,8 @@ const MandataireInformations = props => {
           <Text sx={topTextStyle}>
             {adresse} {codePostal} {ville}
           </Text>
+          <Heading5 mt="5">Dernière connexion</Heading5>
+          <Text sx={topTextStyle}>{lastLogin}</Text>
         </Box>
         <Box sx={boxStyle}>
           <Heading5 mt="5">Tribunaux d’instance</Heading5>

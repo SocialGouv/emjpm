@@ -79,6 +79,7 @@ export const GET_MANDATAIRES = gql`
             nom
             prenom
             email
+            last_login
           }
           genre
           id
