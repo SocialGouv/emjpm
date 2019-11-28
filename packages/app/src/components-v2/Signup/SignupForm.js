@@ -121,7 +121,7 @@ export const SignupForm = () => {
                       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/,
                       {
                         message:
-                          "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spéciale"
+                          "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spéciale"
                       }
                     ),
                   prenom: Yup.string().required("Champs obligatoire"),

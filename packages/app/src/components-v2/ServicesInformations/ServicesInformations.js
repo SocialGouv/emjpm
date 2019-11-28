@@ -5,8 +5,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
-import { ServiceEditLinkButton } from "../Commons";
-import { ForgotLink } from "../ForgotLink";
+import { LinkButton, ServiceEditLinkButton } from "../Commons";
 import { GET_SERVICES } from "./queries";
 import {
   boxStyle,
@@ -81,9 +80,11 @@ const ServicesInformations = props => {
           </Box>
         </Flex>
         <Flex mt="5">
-          <ServiceEditLinkButton>Modifier les informations de mon service</ServiceEditLinkButton>
+          <ServiceEditLinkButton>Modifier les informations de votre service</ServiceEditLinkButton>
         </Flex>
-        <ForgotLink email={email} />
+        <Flex mt="1">
+          <LinkButton href="/services/edit-password">Modifier votre mot de passe</LinkButton>
+        </Flex>
       </Card>
     </Box>
   );
