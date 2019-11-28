@@ -58,9 +58,7 @@ router.post(
       (value, { req }) => {
         if (value !== req.body.new_password_confirmation) {
           // trow error if passwords do not match
-          throw new Error(
-            "Votre nouveau mot de passe être similaire à la confirmation"
-          );
+          throw new Error("Les mots de passe ne sont pas égaux");
         } else {
           return value;
         }
