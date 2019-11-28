@@ -245,13 +245,11 @@ export const ADD_MESURE = gql`
     $annee: String!
     $numero_dossier: String!
     $numero_rg: String!
-    $service_id: Int!
     $antenne_id: Int
     $ti_id: Int!
   ) {
     insert_mesures(
       objects: {
-        service_id: $service_id
         department_id: $department_id
         date_ouverture: $date_ouverture
         type: $type

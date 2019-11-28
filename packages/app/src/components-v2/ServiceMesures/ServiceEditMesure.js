@@ -8,8 +8,9 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { getRegionCode } from "../../util/departements";
 import { EDIT_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
-import { SERVICE_TRIBUNAL } from "./queries";
+import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
 import { formatAntenneOptions, formatTribunalList } from "./utils";
 
 export const ServiceEditMesure = props => {
@@ -30,16 +31,21 @@ export const ServiceEditMesure = props => {
     tiId
   } = props;
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
+  const {
+    data: departementsData,
+    loading: departementsLoading,
+    error: departementsError
+  } = useQuery(DEPARTEMENTS);
   const [EditMesure] = useMutation(EDIT_MESURE);
   const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
-  if (loading) {
-    return <div>loading...</div>;
+  if (loading || departementsLoading) {
+    return <div>Chargement...</div>;
   }
 
-  if (error) {
-    return <div>error...</div>;
+  if (error || departementsError) {
+    return <div>Erreur...</div>;
   }
 
   const tribunalList = formatTribunalList(data.service_tis);
@@ -68,47 +74,56 @@ export const ServiceEditMesure = props => {
           <Heading3>Modifier la mesure</Heading3>
         </Box>
         <Formik
-          onSubmit={(values, { setSubmitting }) => {
-            EditMesure({
-              awaitRefetchQueries: true,
-              refetchQueries: ["mesures", "mesures_aggregate"],
-              variables: {
-                annee: values.annee,
-                antenne_id: values.antenne_id ? values.antenne_id.value : null,
-                civilite: values.civilite.value,
-                code_postal: values.code_postal,
-                date_ouverture: values.date_ouverture,
-                id: currentMesure,
-                numero_dossier: values.numero_dossier,
-                numero_rg: values.numero_rg,
-                residence: values.residence.value,
-                ti_id: values.tribunal.value,
-                type: values.type.value,
-                ville: values.ville
+          onSubmit={(values, { setSubmitting, setErrors }) => {
+            const regionCode = getRegionCode(values.code_postal);
+            const departements = departementsData.departements;
+            const departement = departements.find(dep => dep.code === regionCode);
+            if (!departement) {
+              setErrors({
+                code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
+              });
+            } else {
+              EditMesure({
+                awaitRefetchQueries: true,
+                refetchQueries: ["mesures", "mesures_aggregate"],
+                variables: {
+                  annee: values.annee,
+                  antenne_id: values.antenne_id ? values.antenne_id.value : null,
+                  civilite: values.civilite.value,
+                  code_postal: values.code_postal,
+                  date_ouverture: values.date_ouverture,
+                  department_id: departement.id,
+                  id: currentMesure,
+                  numero_dossier: values.numero_dossier,
+                  numero_rg: values.numero_rg,
+                  residence: values.residence.value,
+                  ti_id: values.tribunal.value,
+                  type: values.type.value,
+                  ville: values.ville
+                }
+              });
+              if (values.antenne_id) {
+                UpdateAntenneCounters({
+                  variables: {
+                    antenne_id: values.antenne_id.value,
+                    inc_mesures_awaiting: 0,
+                    inc_mesures_in_progress: 1
+                  }
+                });
               }
-            });
-            if (values.antenne_id) {
-              UpdateAntenneCounters({
-                variables: {
-                  antenne_id: values.antenne_id.value,
-                  inc_mesures_awaiting: 0,
-                  inc_mesures_in_progress: 1
-                }
-              });
+              if (antenneId) {
+                UpdateAntenneCounters({
+                  variables: {
+                    antenne_id: antenneId,
+                    inc_mesures_awaiting: 0,
+                    inc_mesures_in_progress: -1
+                  }
+                });
+              }
+              setPanelType(null);
+              setCurrentMesure(null);
             }
-            if (antenneId) {
-              UpdateAntenneCounters({
-                variables: {
-                  antenne_id: antenneId,
-                  inc_mesures_awaiting: 0,
-                  inc_mesures_in_progress: -1
-                }
-              });
-            }
-
             setSubmitting(false);
-            setPanelType(null);
-            setCurrentMesure(null);
           }}
           validationSchema={Yup.object().shape({
             annee: Yup.string().required("Champs obligatoire"),
@@ -190,6 +205,7 @@ export const ServiceEditMesure = props => {
                     onChange={handleChange}
                     placeholder="Code postal"
                   />
+                  {errors.code_postal && touched.code_postal && <Text>{errors.code_postal}</Text>}
                 </Box>
                 <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input
