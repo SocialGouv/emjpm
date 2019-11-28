@@ -2,7 +2,7 @@ import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 import * as Yup from "yup";
@@ -21,12 +21,15 @@ const grayBox = {
   p: "5"
 };
 
-function checkStatus(response, setSubmitting, setStatus) {
+function checkStatus(response, setSubmitting, setStatus, toggleMessage) {
   if (response.ok) {
     setSubmitting(false);
-    Router.push(`/login`, `/login`, {
-      shallow: true
-    });
+    toggleMessage(true);
+    setTimeout(function() {
+      Router.push(`/login`, `/login`, {
+        shallow: true
+      });
+    }, 3000);
     return response;
   } else {
     response.json().then(response => {
@@ -38,9 +41,10 @@ function checkStatus(response, setSubmitting, setStatus) {
 
 const ResetPassword = props => {
   const { token } = props;
+  const [isMessageVisible, toggleMessage] = useState(false);
   const url = `${API_URL}/api/v2/auth/reset-password-with-token`;
 
-  const handleSubmit = async (values, setSubmitting, setStatus, token) => {
+  const handleSubmit = async (values, setSubmitting, setStatus, token, toggleMessage) => {
     fetch(url, {
       body: JSON.stringify({
         new_password: values.newPassword,
@@ -51,7 +55,7 @@ const ResetPassword = props => {
         "Content-Type": "application/json"
       },
       method: "POST"
-    }).then(response => checkStatus(response, setSubmitting, setStatus));
+    }).then(response => checkStatus(response, setSubmitting, setStatus, toggleMessage));
   };
 
   return (
@@ -62,13 +66,28 @@ const ResetPassword = props => {
           <Text lineHeight="1.5" color="textSecondary">
             {`Pour changer votre mot de passe, saisissez remplissez les deux champs si dessous.`}
           </Text>
+          {isMessageVisible && (
+            <Box
+              sx={{
+                bg: "success",
+                borderRadius: 3,
+                color: "white",
+                lineHeight: "1.5",
+                mt: "1",
+                p: "1"
+              }}
+            >
+              {`Votre mot de passe a bien été changé, vous allez être
+              redirigé vers la page de connection`}
+            </Box>
+          )}
         </Box>
       </Box>
       <Box p="5">
         <Box sx={{ position: "relative", zIndex: "1" }}>
           <Formik
             onSubmit={(values, { setSubmitting, setStatus }) =>
-              handleSubmit(values, setSubmitting, setStatus, token)
+              handleSubmit(values, setSubmitting, setStatus, token, toggleMessage)
             }
             validationSchema={Yup.object().shape({
               newPassword: Yup.string("Champs obligatoire")

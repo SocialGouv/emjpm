@@ -2,7 +2,7 @@ import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 import * as Yup from "yup";
@@ -21,12 +21,15 @@ const grayBox = {
   p: "5"
 };
 
-function checkStatus(response, setSubmitting, setStatus) {
+function checkStatus(response, setSubmitting, setStatus, toggleMessage) {
   if (response.ok) {
     setSubmitting(false);
-    Router.push(`/login`, `/login`, {
-      shallow: true
-    });
+    toggleMessage(true);
+    setTimeout(function() {
+      Router.push(`/login`, `/login`, {
+        shallow: true
+      });
+    }, 3000);
     return response;
   } else {
     response.json().then(response => {
@@ -38,7 +41,7 @@ function checkStatus(response, setSubmitting, setStatus) {
 
 const ForgotPassword = () => {
   const url = `${API_URL}/api/v2/auth/forgot-password`;
-
+  const [isMessageVisible, toggleMessage] = useState(false);
   const handleSubmit = async (values, setSubmitting, setStatus) => {
     fetch(url, {
       body: JSON.stringify({
@@ -48,7 +51,7 @@ const ForgotPassword = () => {
         "Content-Type": "application/json"
       },
       method: "POST"
-    }).then(response => checkStatus(response, setSubmitting, setStatus));
+    }).then(response => checkStatus(response, setSubmitting, setStatus, toggleMessage));
   };
 
   return (
@@ -59,13 +62,28 @@ const ForgotPassword = () => {
           <Text lineHeight="1.5" color="textSecondary">
             {`Pour demander une réinitialisation de votre mot de passe, saisissez l'adresse e-mail que vous utilisez pour vous connecter à E-mjpm`}
           </Text>
+          {isMessageVisible && (
+            <Box
+              sx={{
+                bg: "success",
+                borderRadius: 3,
+                color: "white",
+                lineHeight: "1.5",
+                mt: "1",
+                p: "1"
+              }}
+            >
+              {`un email avec un lien de réinitialisation vient de vous être envoyé, vous allez être
+              redirigé vers la page principale d'E-mjpm`}
+            </Box>
+          )}
         </Box>
       </Box>
       <Box p="5">
         <Box sx={{ position: "relative", zIndex: "1" }}>
           <Formik
             onSubmit={(values, { setSubmitting, setStatus }) =>
-              handleSubmit(values, setSubmitting, setStatus)
+              handleSubmit(values, setSubmitting, setStatus, toggleMessage)
             }
             validationSchema={Yup.object().shape({
               email: Yup.string()
@@ -93,6 +111,7 @@ const ForgotPassword = () => {
                       {status.errorMsg}
                     </Box>
                   )}
+
                   <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                     <Input
                       value={values.email}
