@@ -60,9 +60,9 @@ const EditPassword = props => {
       <Flex {...props}>
         <Box width={[1, 1 / 2]} sx={grayBox}>
           <Box height="80px">
-            <Heading4>{`Modifier votre mot de passe`}</Heading4>
+            <Heading4>{`Changer votre mot de passe`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Votre mot de passe doit comprendre 8 caractère minimum et doit être composé de chiffre de lettre et d'au moin un caractère spécial.`}
+              {`Votre mot de passe doit comprendre 8 caractères minimum et doit contenir au moins 1 chiffre et un caractère spécial.`}
             </Text>
           </Box>
         </Box>
@@ -77,14 +77,11 @@ const EditPassword = props => {
                   .min(8, "Votre mot de passe doit être de 8 caractères minimum")
                   .matches(
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/,
-                    "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spécial"
+                    "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spécial"
                   )
                   .required("Champs obligatoire"),
                 newPasswordConfirmation: Yup.string()
-                  .oneOf(
-                    [Yup.ref("newPassword"), null],
-                    "la confirmation de votre nouveau mot de passe doit être similaire à votre mot de passe"
-                  )
+                  .oneOf([Yup.ref("newPassword"), null], "Les mots de passe ne sont pas égaux")
                   .required("Champs obligatoire"),
                 password: Yup.string().required("Champs obligatoire")
               })}
