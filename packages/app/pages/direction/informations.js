@@ -3,13 +3,13 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { DirectionInformations } from "../../src/components-v2/DirectionInformations";
-import { LayoutMagistrat } from "../../src/components-v2/Layout";
+import { LayoutDirection } from "../../src/components-v2/Layout";
 import { UserInformations } from "../../src/components-v2/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {
   return (
-    <LayoutMagistrat>
+    <LayoutDirection>
       <BoxWrapper mt={6} px="0">
         <Flex
           sx={{
@@ -33,7 +33,7 @@ const Informations = () => {
           </Box>
         </Flex>
       </BoxWrapper>
-    </LayoutMagistrat>
+    </LayoutDirection>
   );
 };
 
