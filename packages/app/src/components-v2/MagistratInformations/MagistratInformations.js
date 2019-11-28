@@ -4,7 +4,6 @@ import { Box, Flex, Text } from "rebass";
 import { MailOutline } from "styled-icons/material";
 
 import { LinkButton } from "../Commons";
-import { ForgotLink } from "../ForgotLink";
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
 const MagistratInformations = props => {
   const { email, cabinet, nom, prenom } = props;
@@ -34,7 +33,9 @@ const MagistratInformations = props => {
             <LinkButton href="/magistrats/edit-informations">Modifier mes informations</LinkButton>
           </Box>
         </Flex>
-        <ForgotLink email={email} />
+        <Flex mt="1">
+          <LinkButton href="/magistrats/edit-password">Modifier votre mot de passe</LinkButton>
+        </Flex>
       </Card>
     </Box>
   );

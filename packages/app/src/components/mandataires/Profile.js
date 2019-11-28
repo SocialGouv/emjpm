@@ -106,7 +106,7 @@ class MandataireProfile extends React.Component {
           <ButtonEditMandataire formData={newMandataire} />
           <a href="#" onClick={() => changePassword({ email: newMandataire.email })}>
             {" "}
-            Modifier mon mot de passe{" "}
+            Modifier votre mot de passe{" "}
           </a>
         </div>
         <div style={{ flex: "0 0 50%" }}>
