@@ -46,7 +46,7 @@ const ServiceAntennes = props => {
                 <img src="/static/images/enterprise.svg" alt="entreprise" />
               </Box>
               <Box ml="5">
-                <Heading4 mb="1">Créer des antennes pour mon service</Heading4>
+                <Heading4 mb="1">Créer des antennes pour votre service</Heading4>
                 <Text lineHeight="1.5">
                   Si votre service est découpés en antennes indépendantes, eMJPM vous permet de
                   gérer des mesures et des préférences d’affectation pour chacune d’entre elles.
