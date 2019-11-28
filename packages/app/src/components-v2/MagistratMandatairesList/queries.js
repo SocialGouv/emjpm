@@ -100,6 +100,11 @@ export const GET_MANDATAIRES = gql`
           telephone
           email
           etablissement
+          service_admins {
+            user {
+              last_login
+            }
+          }
         }
       }
     }

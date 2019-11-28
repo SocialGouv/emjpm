@@ -1,3 +1,5 @@
+import { compareDesc, format } from "date-fns";
+
 const TYPES = {
   MANDATAIRE_IND: "individuel",
   MANDATAIRE_PRE: "préposé",
@@ -6,6 +8,17 @@ const TYPES = {
 
 const capitalize = string => {
   return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
+};
+
+const formatLastLogin = date => {
+  return format(date, ["DD/MM/YYYY"]);
+};
+
+const newestLastLogin = admins => {
+  const dates = admins.map(({ user: { last_login } }) => last_login).filter(Boolean);
+  const [newest] = dates.sort(compareDesc);
+
+  return newest;
 };
 
 export const formatMandataire = (
@@ -39,7 +52,9 @@ export const formatMandataire = (
       etablissement: service.etablissement ? service.etablissement : "non renseigné",
       genre: "F",
       id: `${discriminator}-${service.id}`,
-      lastLogin: "non renseigné", //service.user.last_login ? service.user.last_login : "non renseigné",
+      lastLogin: service.service_admins
+        ? formatLastLogin(newestLastLogin(service.service_admins))
+        : "non renseigné",
       nom: service.nom ? service.nom : null,
       prenom: service.prenom ? service.prenom : null,
       serviceId: service.id,
@@ -55,7 +70,7 @@ export const formatMandataire = (
       id: `${discriminator}-${mandataire.id}`,
       lastLogin:
         mandataire.user && mandataire.user.last_login
-          ? mandataire.user.last_login
+          ? formatLastLogin(mandataire.user.last_login)
           : "non renseigné",
       mandataireId: mandataire.id,
       nom:

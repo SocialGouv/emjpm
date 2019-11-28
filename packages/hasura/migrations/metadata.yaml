@@ -33,10 +33,17 @@ tables:
       - id
       - user_id
       - service_id
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+      filter: {}
     role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - user_id
+      - service_id
+      filter: {}
+    role: ti
   table: service_admin
   update_permissions: []
 - array_relationships: []
