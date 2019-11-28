@@ -45,6 +45,7 @@ export const CLOSE_MESURE = gql`
 export const EDIT_MESURE = gql`
   mutation EditMesure(
     $id: Int!
+    $department_id: Int!
     $antenne_id: Int
     $date_ouverture: date
     $type: String
@@ -61,6 +62,7 @@ export const EDIT_MESURE = gql`
       where: { id: { _eq: $id } }
       _set: {
         date_ouverture: $date_ouverture
+        department_id: $department_id
         type: $type
         antenne_id: $antenne_id
         residence: $residence
@@ -157,6 +159,7 @@ export const REACTIVATE_MESURE = gql`
 export const ACCEPT_MESURE = gql`
   mutation editMesure(
     $id: Int!
+    $department_id: Int!
     $date_ouverture: date!
     $residence: String!
     $code_postal: String!
@@ -167,6 +170,7 @@ export const ACCEPT_MESURE = gql`
       where: { id: { _eq: $id } }
       _set: {
         antenne_id: $antenne_id
+        department_id: $department_id
         status: "Mesure en cours"
         date_ouverture: $date_ouverture
         residence: $residence
@@ -232,6 +236,7 @@ export const DELETE_MESURE = gql`
 export const ADD_MESURE = gql`
   mutation addMesure(
     $date_ouverture: date!
+    $department_id: Int!
     $type: String!
     $residence: String!
     $code_postal: String!
@@ -240,13 +245,12 @@ export const ADD_MESURE = gql`
     $annee: String!
     $numero_dossier: String!
     $numero_rg: String!
-    $service_id: Int!
     $antenne_id: Int
     $ti_id: Int!
   ) {
     insert_mesures(
       objects: {
-        service_id: $service_id
+        department_id: $department_id
         date_ouverture: $date_ouverture
         type: $type
         ti_id: $ti_id

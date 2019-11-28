@@ -31,7 +31,8 @@ const ALLOWED_FILTERS = [
   "numero_dossier",
   "extinction",
   "reason_extinction",
-  "numero_rg"
+  "numero_rg",
+  "department_id"
 ];
 
 const {
@@ -144,16 +145,27 @@ router.put(
         return res.status(200).json();
       }
 
+      // TODO(tglatt): make code postal required for all roles.
+      let departement;
+      if (req.body.code_postal) {
+        departement = await getDepartementByCodePostal(req.body.code_postal);
+      }
+
       if (req.user.type === "individuel" || req.user.type === "prepose") {
         const mandataire = await findMandataire(req, req.params.mandataireId);
-
         await updateMesure(
           {
             id: req.params.mesureId,
             // ⚠️ ensure to override a mandataire only
             mandataire_id: mandataire.id
           },
-          whitelist(req.body, ALLOWED_FILTERS)
+          whitelist(
+            {
+              ...req.body,
+              department_id: departement ? departement.id : undefined
+            },
+            ALLOWED_FILTERS
+          )
         );
         await updateCountMesures(mandataire.id);
         const mesures = await getMesuresEnCoursMandataire(mandataire.id);
