@@ -34,7 +34,7 @@ const MagistratInformations = props => {
           </Box>
         </Flex>
         <Flex mt="1">
-          <LinkButton href="/magistrats/edit-password">Modifier mon mot de passe</LinkButton>
+          <LinkButton href="/magistrats/edit-password">Modifier votre mot de passe</LinkButton>
         </Flex>
       </Card>
     </Box>

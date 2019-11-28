@@ -80,10 +80,10 @@ const ServicesInformations = props => {
           </Box>
         </Flex>
         <Flex mt="5">
-          <ServiceEditLinkButton>Modifier les informations de mon service</ServiceEditLinkButton>
+          <ServiceEditLinkButton>Modifier les informations de votre service</ServiceEditLinkButton>
         </Flex>
         <Flex mt="1">
-          <LinkButton href="/services/edit-password">Modifier mon mot de passe</LinkButton>
+          <LinkButton href="/services/edit-password">Modifier votre mot de passe</LinkButton>
         </Flex>
       </Card>
     </Box>

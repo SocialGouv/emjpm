@@ -31,7 +31,7 @@ const DirectionInformations = props => {
           </Box>
         </Flex>
         <Flex mt="1">
-          <LinkButton href="/direction/edit-password">Modifier mon mot de passe</LinkButton>
+          <LinkButton href="/direction/edit-password">Modifier votre mot de passe</LinkButton>
         </Flex>
       </Card>
     </Box>

@@ -60,7 +60,7 @@ const EditPassword = props => {
       <Flex {...props}>
         <Box width={[1, 1 / 2]} sx={grayBox}>
           <Box height="80px">
-            <Heading4>{`Changer votre mot de passe`}</Heading4>
+            <Heading4>{`Modifier votre mot de passe`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Votre mot de passe doit comprendre 8 caractères minimum et doit contenir au moins 1 chiffre et un caractère spécial.`}
             </Text>

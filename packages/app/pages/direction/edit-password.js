@@ -10,7 +10,7 @@ const EditInformations = () => {
   return (
     <LayoutDirection>
       <BoxWrapper mt={6} px="1">
-        <Heading1>Changer mon mot de passe</Heading1>
+        <Heading1>Modifier votre mot de passe</Heading1>
         <UserInformations
           Component={props => {
             return <EditPassword {...props} mt="3" />;
