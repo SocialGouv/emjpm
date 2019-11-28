@@ -8,6 +8,7 @@ import fetch from "unfetch";
 import * as Yup from "yup";
 
 import { PATH } from "../../constants/basePath";
+import { Link } from "../Commons";
 
 const {
   publicRuntimeConfig: { API_URL }
@@ -148,11 +149,16 @@ const EditPassword = props => {
                         <Text mt="1">{errors.newPasswordConfirmation}</Text>
                       )}
                     </Box>
-                    <Box>
-                      <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                        Enregistrer
-                      </Button>
-                    </Box>
+                    <Flex alignItems="center" justifyContent="flex-end">
+                      <Box mr="2">
+                        <Link href={`${PATH[type]}/informations`}>Annuler</Link>
+                      </Box>
+                      <Box>
+                        <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
+                          Enregistrer
+                        </Button>
+                      </Box>
+                    </Flex>
                   </form>
                 );
               }}
