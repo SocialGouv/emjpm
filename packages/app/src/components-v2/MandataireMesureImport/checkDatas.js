@@ -58,9 +58,22 @@ const checkHeaders = (datas, errors) => {
 };
 
 const checkType = (row, errors) => {
-  if (!MESURE_TYPE.includes(row.type)) {
-    errors.push(`La valeur '${row.type}' n'est pas dans la liste: ${MESURE_TYPE}`);
+  const type = row.type;
+  if (!type) {
+    errors.push(`Le type de la mesure est obligatoire`);
+    return;
+  } else if (MESURE_TYPE.includes(type)) {
+    return;
+  } else {
+    const typeInLowerCase = type.toLowerCase();
+    for (const mesureType of MESURE_TYPE) {
+      if (mesureType.toLowerCase() === typeInLowerCase) {
+        row.type = mesureType;
+        return;
+      }
+    }
   }
+  errors.push(`La valeur '${row.type}' n'est pas dans la liste: ${MESURE_TYPE}`);
 };
 
 const checkGender = (row, errors) => {
@@ -70,9 +83,22 @@ const checkGender = (row, errors) => {
 };
 
 const checkResidence = (row, errors) => {
-  if (!RESIDENCE.includes(row.residence)) {
-    errors.push(`La valeur '${row.residence}' n'est pas dans la liste: ${RESIDENCE}`);
+  const residence = row.residence;
+  if (!residence) {
+    errors.push(`Le lieux de vie du majeur est obligatoire`);
+    return;
+  } else if (RESIDENCE.includes(residence)) {
+    return;
+  } else {
+    const residenceInLowerCase = residence.toLowerCase();
+    for (const mesureResidence of RESIDENCE) {
+      if (mesureResidence.toLowerCase() === residenceInLowerCase) {
+        row.residence = mesureResidence;
+        return;
+      }
+    }
   }
+  errors.push(`La valeur '${row.residence}' n'est pas dans la liste: ${RESIDENCE}`);
 };
 
 const checkDateOuverture = (row, errors) => {
