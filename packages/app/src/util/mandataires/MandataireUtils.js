@@ -52,9 +52,10 @@ export const formatMandataire = (
       etablissement: service.etablissement ? service.etablissement : "non renseigné",
       genre: "F",
       id: `${discriminator}-${service.id}`,
-      lastLogin: service.service_admins
-        ? formatLastLogin(newestLastLogin(service.service_admins))
-        : "non renseigné",
+      lastLogin:
+        service.service_admins && service.service_admins.length
+          ? formatLastLogin(newestLastLogin(service.service_admins))
+          : "non renseigné",
       nom: service.nom ? service.nom : null,
       prenom: service.prenom ? service.prenom : null,
       serviceId: service.id,
