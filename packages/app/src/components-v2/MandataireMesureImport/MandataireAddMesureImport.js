@@ -3,6 +3,7 @@ import { Button, Card, Heading2, Input } from "@socialgouv/emjpm-ui-core";
 import { Text } from "@socialgouv/emjpm-ui-core/dist/Type";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
+import * as XLSX from "xlsx";
 
 import checkDatas from "./checkDatas";
 import { ADD_IMPORT } from "./mutations";
@@ -107,9 +108,27 @@ export const MandataireAddMesureImport = () => {
   const handleFileChosen = file => {
     const reader = new FileReader();
 
+    const filename = file.name;
+    const isExcel = filename.endsWith(".xls") || filename.endsWith(".xlsx");
     reader.onload = function() {
-      const result = reader.result;
-      const datas = csvToArray(result);
+      let datas;
+      if (isExcel) {
+        const bstr = reader.result;
+        const wb = XLSX.read(bstr, { type: "binary" });
+        const wsname = wb.SheetNames[0];
+        const ws = wb.Sheets[wsname];
+        datas = XLSX.utils.sheet_to_json(ws, { dateNF: "dd/mm/yyyy" });
+      } else {
+        const result = reader.result;
+        datas = csvToArray(result);
+      }
+
+      const trimProperties = data =>
+        Object.keys(data).map(
+          k => (data[k] = typeof data[k] == "string" ? data[k].trim() : data[k])
+        );
+
+      datas.forEach(data => trimProperties(data));
       const { errors, mesures } = checkDatas(datas);
 
       if (mesures.length > 0) {
@@ -127,7 +146,11 @@ export const MandataireAddMesureImport = () => {
         mesures
       });
     };
-    reader.readAsText(file);
+    if (isExcel) {
+      reader.readAsBinaryString(file);
+    } else {
+      reader.readAsText(file);
+    }
   };
 
   return (
