@@ -127,15 +127,18 @@ const updateMandataireMesureStates = async mandataire_id => {
 
 // TODO(tglatt): move db queries in other file
 const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
-  const regionCode = getRegionCode(mesureDatas.code_postal);
-  const department = await Department.query().findOne({
-    code: regionCode
-  });
-  if (!department) {
-    importSummary.errors.push(
-      `Aucun département ne correspond au code ${regionCode}`
-    );
-    return;
+  const mandataire = mesureDatas.mandataire;
+  const department_id = mandataire.department_id;
+  const code_postal = mesureDatas.code_postal;
+
+  let department;
+  if (code_postal) {
+    const regionCode = getRegionCode(code_postal);
+    department = await Department.query().findOne({
+      code: regionCode
+    });
+  } else {
+    department = await Department.query().findById(department_id);
   }
 
   const ti = await Tis.query().findOne({
@@ -158,7 +161,7 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     annee: mesureDatas.annee,
     numero_rg: mesureDatas.numero_rg,
     numero_dossier: mesureDatas.numero_dossier,
-    mandataire_id: mesureDatas.mandataire_id,
+    mandataire_id: mesureDatas.mandataire.id,
     residence: mesureDatas.residence,
     department_id: department.id,
     ti_id: ti ? ti.id : null
@@ -218,7 +221,7 @@ router.post("/mesures-import", async function(req, res) {
       {
         ...data,
         date_ouverture: toDate(data.date_ouverture),
-        mandataire_id: mandataire.id,
+        mandataire,
         status: "Mesure en cours"
       },
       importSummary

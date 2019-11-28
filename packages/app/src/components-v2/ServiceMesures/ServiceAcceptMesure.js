@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
@@ -8,11 +8,16 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { RESIDENCE } from "../../constants/mesures";
+import { getRegionCode } from "../../util/departements";
 import { ACCEPT_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
+import { DEPARTEMENTS } from "./queries";
 import { formatAntenneOptions } from "./utils";
 
 export const ServiceAcceptMesure = props => {
   const { currentMesure, user_antennes } = props;
+
+  const { data: departementsData } = useQuery(DEPARTEMENTS);
+
   const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
 
@@ -63,21 +68,31 @@ export const ServiceAcceptMesure = props => {
           <Heading3>Accepter la mesure</Heading3>
         </Box>
         <Formik
-          onSubmit={(values, { setSubmitting }) => {
-            UpdateMesure({
-              refetchQueries: ["mesures", "mesures_aggregate"],
-              variables: {
-                antenne_id: values.antenne_id ? values.antenne_id.value : null,
-                code_postal: values.code_postal,
-                date_ouverture: values.date_ouverture,
-                id: currentMesure,
-                residence: values.residence.value,
-                ville: values.ville
-              }
-            });
+          onSubmit={(values, { setSubmitting, setErrors }) => {
+            const regionCode = getRegionCode(values.code_postal);
+            const departements = departementsData.departements;
+            const departement = departements.find(dep => dep.code === regionCode);
+            if (!departement) {
+              setErrors({
+                code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
+              });
+            } else {
+              UpdateMesure({
+                refetchQueries: ["mesures", "mesures_aggregate"],
+                variables: {
+                  antenne_id: values.antenne_id ? values.antenne_id.value : null,
+                  code_postal: values.code_postal,
+                  date_ouverture: values.date_ouverture,
+                  department_id: departement.id,
+                  id: currentMesure,
+                  residence: values.residence.value,
+                  ville: values.ville
+                }
+              });
+              setPanelType(null);
+              setCurrentMesure(null);
+            }
             setSubmitting(false);
-            setPanelType(null);
-            setCurrentMesure(null);
           }}
           validationSchema={Yup.object().shape({
             code_postal: Yup.string().required(),
@@ -136,6 +151,7 @@ export const ServiceAcceptMesure = props => {
                     onChange={handleChange}
                     placeholder="Code postal"
                   />
+                  {errors.code_postal && touched.code_postal && <Text>{errors.code_postal}</Text>}
                 </Box>
                 <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                   <Input

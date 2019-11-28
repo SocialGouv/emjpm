@@ -8,8 +8,9 @@ import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { getRegionCode } from "../../util/departements";
 import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
-import { SERVICE_TRIBUNAL } from "./queries";
+import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
 import { formatTribunalList } from "./utils";
 
 const ServiceCreateAntenneStyle = {
@@ -25,10 +26,15 @@ const grayBox = {
 const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export const ServiceAddMesure = props => {
-  const { user_antennes, service_admins } = props;
-  const [serviceAdmin] = service_admins;
+  const { user_antennes } = props;
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
+  const {
+    data: departementsData,
+    loading: departementsLoading,
+    error: departementsError
+  } = useQuery(DEPARTEMENTS);
+
   const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
 
@@ -64,11 +70,11 @@ export const ServiceAddMesure = props => {
     }
   });
 
-  if (loading) {
+  if (loading || departementsLoading) {
     return <div>Chargement...</div>;
   }
 
-  if (error) {
+  if (error || departementsError) {
     return <div>Erreur...</div>;
   }
 
@@ -110,36 +116,45 @@ export const ServiceAddMesure = props => {
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <Formik
-              onSubmit={(values, { setSubmitting }) => {
-                AddMesure({
-                  awaitRefetchQueries: true,
-                  refetchQueries: ["mesures", "mesures_aggregate"],
-                  variables: {
-                    annee: values.annee.toString(),
-                    antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
-                    civilite: values.civilite.value,
-                    code_postal: values.code_postal,
-                    date_ouverture: values.date_ouverture,
-                    numero_dossier: values.numero_dossier,
-                    numero_rg: values.numero_rg,
-                    residence: values.residence.value,
-                    service_id: serviceAdmin.service_id,
-                    ti_id: values.tribunal.value,
-                    type: values.type.value,
-                    ville: values.ville
-                  }
-                });
-                if (values.antenne_id) {
-                  UpdateAntenneCounters({
+              onSubmit={(values, { setSubmitting, setErrors }) => {
+                const regionCode = getRegionCode(values.code_postal);
+                const departements = departementsData.departements;
+                const departement = departements.find(dep => dep.code === regionCode);
+                if (!departement) {
+                  setErrors({
+                    code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
+                  });
+                } else {
+                  AddMesure({
+                    awaitRefetchQueries: true,
+                    refetchQueries: ["mesures", "mesures_aggregate"],
                     variables: {
-                      antenne_id: values.antenne_id.value,
-                      inc_mesures_awaiting: 0,
-                      inc_mesures_in_progress: 1
+                      annee: values.annee.toString(),
+                      antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
+                      civilite: values.civilite.value,
+                      code_postal: values.code_postal,
+                      date_ouverture: values.date_ouverture,
+                      department_id: departement.id,
+                      numero_dossier: values.numero_dossier,
+                      numero_rg: values.numero_rg,
+                      residence: values.residence.value,
+                      ti_id: values.tribunal.value,
+                      type: values.type.value,
+                      ville: values.ville
                     }
                   });
+                  if (values.antenne_id) {
+                    UpdateAntenneCounters({
+                      variables: {
+                        antenne_id: values.antenne_id.value,
+                        inc_mesures_awaiting: 0,
+                        inc_mesures_in_progress: 1
+                      }
+                    });
+                  }
+                  Router.push("/services");
                 }
                 setSubmitting(false);
-                Router.push("/services");
               }}
               validationSchema={Yup.object().shape({
                 annee: Yup.number()

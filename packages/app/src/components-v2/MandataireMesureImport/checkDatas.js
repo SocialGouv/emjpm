@@ -115,6 +115,9 @@ const checkAnnee = (row, errors) => {
 };
 
 const checkCodePostal = (row, errors) => {
+  if (!row.code_postal) {
+    return;
+  }
   if (!String(row.code_postal).match(REGEX_CODE_POSTAL)) {
     errors.push(`Le code postal '${row.code_postal}' doit être au format '75001'`);
   }

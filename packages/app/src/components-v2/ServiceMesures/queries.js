@@ -1,5 +1,15 @@
 import gql from "graphql-tag";
 
+export const DEPARTEMENTS = gql`
+  {
+    departements {
+      id
+      code
+      nom
+    }
+  }
+`;
+
 export const MESURE = gql`
   query mesure($id: Int!) {
     mesures(where: { id: { _eq: $id } }) {
