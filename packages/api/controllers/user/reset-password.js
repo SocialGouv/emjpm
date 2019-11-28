@@ -5,7 +5,7 @@ const { User } = require("../../model/User");
 /**
  * Reset password using username, password, new_password and new_password_confirmation return ok
  */
-const postResetPassword = async (req, res) => {
+const resetPassword = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors });
@@ -60,4 +60,4 @@ const postResetPassword = async (req, res) => {
     });
 };
 
-module.exports = postResetPassword;
+module.exports = resetPassword;

@@ -1,8 +1,9 @@
 import React from "react";
-import { ResetPassword } from "./ResetPassword";
 import renderer from "react-test-renderer";
 
+import { ForgotPassword } from "./ForgotPassword";
+
 it("renders correctly", () => {
-  const tree = renderer.create(<ResetPassword />).toJSON();
+  const tree = renderer.create(<ForgotPassword />).toJSON();
   expect(tree).toMatchSnapshot();
 });

@@ -6,7 +6,7 @@ const { Logs } = require("../../model/Logs");
 /**
  * Sign in using username and password and returns JWT
  */
-const postLogin = async (req, res, next) => {
+const login = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -33,4 +33,4 @@ const postLogin = async (req, res, next) => {
   })(req, res, next);
 };
 
-module.exports = postLogin;
+module.exports = login;

@@ -31,7 +31,7 @@ function checkStatus(response, setSubmitting, setStatus, type) {
     return response;
   } else {
     response.json().then(response => {
-      setStatus({ errorMsg: response.errors.msg, field: response.errors.param });
+      setStatus({ errorMsg: response.errors.msg });
       setSubmitting(false);
     });
   }

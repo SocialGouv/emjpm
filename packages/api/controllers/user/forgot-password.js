@@ -10,23 +10,30 @@ const uid = require("rand-token").uid;
 
 const forgotPassword = async (req, res, next) => {
   const errors = validationResult(req);
-
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors });
   }
 
   const email = req.body.email;
   const token = uid(16);
+  let tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
 
   User.query()
     .where("email", email.toLowerCase().trim())
     .first()
-    .then(function(user) {
+    .then(async function(user) {
       if (!user) {
         return next(
           createError.NotFound(`Aucun utilisateur avec l'email "${email}"`)
         );
       }
+      await User.query()
+        .where("id", user.id)
+        .update({
+          reset_password_token: token,
+          reset_password_expires: tomorrow
+        });
       resetPasswordEmail(
         user,
         email,

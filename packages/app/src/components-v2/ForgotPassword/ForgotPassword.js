@@ -30,22 +30,19 @@ function checkStatus(response, setSubmitting, setStatus) {
     return response;
   } else {
     response.json().then(response => {
-      setStatus({ errorMsg: response.errors.msg });
+      setStatus({ errorMsg: response.message });
       setSubmitting(false);
     });
   }
 }
 
-const ResetPassword = props => {
-  const { token } = props;
-  const url = `${API_URL}/api/v2/auth/reset-password-with-token`;
+const ForgotPassword = () => {
+  const url = `${API_URL}/api/v2/auth/forgot-password`;
 
-  const handleSubmit = async (values, setSubmitting, setStatus, token) => {
+  const handleSubmit = async (values, setSubmitting, setStatus) => {
     fetch(url, {
       body: JSON.stringify({
-        new_password: values.newPassword,
-        new_password_confirmation: values.newPasswordConfirmation,
-        token: token
+        email: values.email
       }),
       headers: {
         "Content-Type": "application/json"
@@ -58,9 +55,9 @@ const ResetPassword = props => {
     <Card sx={cardStyle} maxWidth={["100%", "60%", "50%"]}>
       <Box sx={grayBox}>
         <Box>
-          <Heading4 mb="1">{`Nouveau mot de passe`}</Heading4>
+          <Heading4 mb="1">{`Demande de réinitialisation du mot de passe`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Pour changer votre mot de passe, saisissez remplissez les deux champs si dessous.`}
+            {`Pour demander une réinitialisation de votre mot de passe, saisissez l'adresse e-mail que vous utilisez pour vous connecter à E-mjpm`}
           </Text>
         </Box>
       </Box>
@@ -68,23 +65,15 @@ const ResetPassword = props => {
         <Box sx={{ position: "relative", zIndex: "1" }}>
           <Formik
             onSubmit={(values, { setSubmitting, setStatus }) =>
-              handleSubmit(values, setSubmitting, setStatus, token)
+              handleSubmit(values, setSubmitting, setStatus)
             }
             validationSchema={Yup.object().shape({
-              newPassword: Yup.string("Champs obligatoire")
-                .min(8, "Votre mot de passe doit être de 8 caractères minimum")
-                .matches(
-                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/,
-                  "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spécial"
-                )
-                .required("Champs obligatoire"),
-              newPasswordConfirmation: Yup.string()
-                .oneOf([Yup.ref("newPassword"), null], "Les mots de passe ne sont pas égaux")
+              email: Yup.string()
+                .email("Le format de votre email n'est pas correct")
                 .required("Champs obligatoire")
             })}
             initialValues={{
-              newPassword: "",
-              newPasswordConfirmation: ""
+              email: ""
             }}
           >
             {props => {
@@ -106,31 +95,15 @@ const ResetPassword = props => {
                   )}
                   <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                     <Input
-                      value={values.newPassword}
-                      id="newPassword"
-                      name="newPassword"
-                      type="password"
-                      hasError={errors.newPassword && touched.newPassword}
+                      value={values.email}
+                      id="email"
+                      name="email"
+                      type="text"
+                      hasError={errors.email && touched.email}
                       onChange={handleChange}
-                      placeholder="Entrez votre nouveau mot de passe"
+                      placeholder="Entrez votre email"
                     />
-                    {errors.newPassword && touched.newPassword && (
-                      <Text mt="1">{errors.newPassword}</Text>
-                    )}
-                  </Box>
-                  <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                    <Input
-                      value={values.newPasswordConfirmation}
-                      id="newPasswordConfirmation"
-                      name="newPasswordConfirmation"
-                      type="password"
-                      hasError={errors.newPasswordConfirmation && touched.newPasswordConfirmation}
-                      onChange={handleChange}
-                      placeholder="Confirmer votre nouveau mot de passe"
-                    />
-                    {errors.newPasswordConfirmation && touched.newPasswordConfirmation && (
-                      <Text mt="1">{errors.newPasswordConfirmation}</Text>
-                    )}
+                    {errors.email && touched.email && <Text mt="1">{errors.email}</Text>}
                   </Box>
                   <Flex alignItems="center" justifyContent="flex-end">
                     <Box mr="2">
@@ -138,7 +111,7 @@ const ResetPassword = props => {
                     </Box>
                     <Box>
                       <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                        Enregistrer mon nouveau mot de passe
+                        Obtenir le lien de réinitialisation
                       </Button>
                     </Box>
                   </Flex>
@@ -152,4 +125,4 @@ const ResetPassword = props => {
   );
 };
 
-export { ResetPassword };
+export { ForgotPassword };
