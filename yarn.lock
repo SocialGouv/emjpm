@@ -2561,17 +2561,10 @@
     "@sentry/types" "5.6.1"
     tslib "^1.9.3"
 
-<<<<<<< HEAD
-"@socialgouv/emjpm-ui-components@0.43.0":
-  version "0.43.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.43.0.tgz#df265afdf7a8c13e068ee5be4ffed918f85be70f"
-  integrity sha512-VAySCX3aXqp1zMGIDTo7bn29raO6vZzbjIzbSIaWW3qLxu06SpuiaFak4sLiGzWNqf7y/laqQBDahFZLyOQhGg==
-=======
-"@socialgouv/emjpm-ui-components@0.44.0":
-  version "0.44.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.44.0.tgz#ba291f9254b410e6104a3dd0528b368078e2075a"
-  integrity sha512-5cY/tTOUcSO/RtYC6vWmUlWXiUnEYpB1xJ+gQxnaJKxmUqp/1PfAjCg3FMvXfUE8/dN/Z2slNvNPlawGW5GDuA==
->>>>>>> feat(disponibility): update package to use component style
+"@socialgouv/emjpm-ui-components@0.45.0":
+  version "0.45.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.45.0.tgz#fd22873cc2f31872a838e14fd93d2d545879d6ba"
+  integrity sha512-na4rPl7E6tAFTZpeQErWSVOJH6SZj9zcVkhoh+haMOVJLJW2MN2SlhqMGluN/qRl/U/jYqc73b1KVOolLlx+lA==
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
