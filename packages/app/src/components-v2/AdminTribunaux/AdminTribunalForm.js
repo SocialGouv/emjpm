@@ -42,12 +42,12 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                 setSubmitting(false);
               }}
               validationSchema={Yup.object().shape({
-                code_postal: Yup.string().required("Champs obligatoire"),
+                code_postal: Yup.string().required("Champ obligatoire"),
                 email: Yup.string().email("Le format de votre email n'est pas correct"),
-                etablissement: Yup.string().required("Champs obligatoire"),
-                siret: Yup.string().required("Champs obligatoire"),
+                etablissement: Yup.string().required("Champ obligatoire"),
+                siret: Yup.string().required("Champ obligatoire"),
                 telephone: Yup.string(),
-                ville: Yup.string().required("Champs obligatoire")
+                ville: Yup.string().required("Champ obligatoire")
               })}
               initialValues={{
                 code_postal: tribunal ? tribunal.code_postal : "",

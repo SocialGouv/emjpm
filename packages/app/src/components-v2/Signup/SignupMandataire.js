@@ -139,19 +139,19 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                   setSubmitting(false);
                 }}
                 validationSchema={Yup.object().shape({
-                  adresse: Yup.string().required("Champs obligatoire"),
-                  code_postal: Yup.string().required("Champs obligatoire"),
+                  adresse: Yup.string().required("Champ obligatoire"),
+                  code_postal: Yup.string().required("Champ obligatoire"),
                   dispo_max: Yup.number("Le champs doit être en nombre").required(
-                    "Champs obligatoire"
+                    "Champ obligatoire"
                   ),
-                  genre: Yup.string().required("Champs obligatoire"),
+                  genre: Yup.string().required("Champ obligatoire"),
                   siret: Yup.string()
                     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
-                    .required("Champs obligatoire"),
-                  telephone: Yup.string().required("Champs obligatoire"),
+                    .required("Champ obligatoire"),
+                  telephone: Yup.string().required("Champ obligatoire"),
                   telephone_portable: Yup.string(),
-                  tis: Yup.mixed().required("Champs obligatoire"),
-                  ville: Yup.string().required("Champs obligatoire")
+                  tis: Yup.mixed().required("Champ obligatoire"),
+                  ville: Yup.string().required("Champ obligatoire")
                 })}
                 initialValues={{
                   adresse: mandataire ? mandataire.adresse : "",
