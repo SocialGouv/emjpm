@@ -6,7 +6,7 @@ const { Logs } = require("../../model/Logs");
 /**
  * Sign in using username and password and returns JWT
  */
-const postLogin = async (req, res, next) => {
+const login = async (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -15,7 +15,13 @@ const postLogin = async (req, res, next) => {
 
   passport.authenticate("local", async (err, user) => {
     if (err) {
-      return res.status(401).json({ err });
+      return res.status(401).json({
+        errors: {
+          msg: "Vos informations de connection sont erronées",
+          location: "body",
+          error: err
+        }
+      });
     }
     if (user) {
       await User.query()
@@ -33,4 +39,4 @@ const postLogin = async (req, res, next) => {
   })(req, res, next);
 };
 
-module.exports = postLogin;
+module.exports = login;

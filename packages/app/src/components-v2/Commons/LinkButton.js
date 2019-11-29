@@ -37,6 +37,7 @@ const LinkButton = ({ router, ...props }) => {
       <RebassLink
         href={props.disabled ? "" : props.href}
         sx={LinkButtonStyle(isActive, props.disabled)}
+        {...props}
       >
         {props.children}
       </RebassLink>

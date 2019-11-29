@@ -49,7 +49,7 @@ export const SignupDirection = () => {
                   });
                 }}
                 validationSchema={Yup.object().shape({
-                  directionType: Yup.string().required("Champs obligatoire")
+                  directionType: Yup.string().required("Champ obligatoire")
                 })}
                 initialValues={{
                   directionType: direction ? direction.directionType : ""
