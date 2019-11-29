@@ -1,10 +1,11 @@
-import { compareDesc, format } from "date-fns";
+import { compareDesc, differenceInMonths, format } from "date-fns";
 
 const TYPES = {
   MANDATAIRE_IND: "individuel",
   MANDATAIRE_PRE: "préposé",
   SERVICE: "service"
 };
+const TODAY = new Date();
 
 const capitalize = string => {
   return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
@@ -19,6 +20,10 @@ const newestLastLogin = admins => {
   const [newest] = dates.sort(compareDesc);
 
   return newest;
+};
+
+const isCriticalDate = date => {
+  return differenceInMonths(TODAY, date) >= 1;
 };
 
 export const formatMandataire = (
@@ -45,6 +50,11 @@ export const formatMandataire = (
   };
 
   if (discriminator === "SERVICE") {
+    const lastLogin =
+      service.service_admins && service.service_admins.length
+        ? newestLastLogin(service.service_admins)
+        : null;
+
     currentDiscriminator = {
       adresse: service.adresse ? capitalize(service.adresse) : "non renseigné",
       codePostal: service.code_postal ? capitalize(service.code_postal) : "non renseigné",
@@ -52,10 +62,8 @@ export const formatMandataire = (
       etablissement: service.etablissement ? service.etablissement : "non renseigné",
       genre: "F",
       id: `${discriminator}-${service.id}`,
-      lastLogin:
-        service.service_admins && service.service_admins.length
-          ? formatLastLogin(newestLastLogin(service.service_admins))
-          : "non renseigné",
+      lastLogin: lastLogin ? formatLastLogin(lastLogin) : "non renseigné",
+      lastLoginIsCritical: lastLogin && isCriticalDate(lastLogin),
       nom: service.nom ? service.nom : null,
       prenom: service.prenom ? service.prenom : null,
       serviceId: service.id,
@@ -73,6 +81,8 @@ export const formatMandataire = (
         mandataire.user && mandataire.user.last_login
           ? formatLastLogin(mandataire.user.last_login)
           : "non renseigné",
+      lastLoginIsCritical:
+        mandataire.user && mandataire.user.last_login && isCriticalDate(mandataire.user.last_login),
       mandataireId: mandataire.id,
       nom:
         mandataire.user && mandataire.user.nom ? capitalize(mandataire.user.nom) : "non renseigné",

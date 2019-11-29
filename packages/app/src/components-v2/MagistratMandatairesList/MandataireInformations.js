@@ -20,8 +20,11 @@ const MandataireInformations = props => {
     codePostal,
     tiId,
     etablissement,
-    lastLogin
+    lastLogin,
+    lastLoginIsCritical
   } = props;
+
+  const lastLoginColor = lastLoginIsCritical ? "error" : "";
 
   return (
     <Fragment>
@@ -49,7 +52,9 @@ const MandataireInformations = props => {
             {adresse} {codePostal} {ville}
           </Text>
           <Heading5 mt="5">Dernière connexion</Heading5>
-          <Text sx={topTextStyle}>{lastLogin}</Text>
+          <Text color={lastLoginColor} sx={topTextStyle}>
+            {lastLogin}
+          </Text>
         </Box>
         <Box sx={boxStyle}>
           <Heading5 mt="5">Tribunaux d’instance</Heading5>
