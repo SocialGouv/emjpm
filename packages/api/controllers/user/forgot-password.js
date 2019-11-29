@@ -19,37 +19,36 @@ const forgotPassword = async (req, res, next) => {
   let tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  User.query()
-    .where("email", email.toLowerCase().trim())
-    .first()
-    .then(async function(user) {
-      if (!user) {
-        return next(
-          createError.NotFound(`Aucun utilisateur avec l'email "${email}"`)
-        );
-      }
-      await User.query()
-        .where("id", user.id)
-        .update({
-          reset_password_token: token,
-          reset_password_expires: tomorrow
-        });
-      resetPasswordEmail(
-        user,
-        email,
-        `${process.env.APP_URL}/account/reset-password?token=${token}`
+  try {
+    const user = await User.query()
+      .where("email", email.toLowerCase().trim())
+      .first();
+    if (!user) {
+      return next(
+        createError.NotFound(`Aucun utilisateur avec l'email "${email}"`)
       );
-      return res.status(200).json();
-    })
-    .catch(function(err) {
-      return res.status(400).json({
-        errors: {
-          msg: "Une erreur est survenue",
-          location: "body",
-          error: err
-        }
+    }
+    await User.query()
+      .where("id", user.id)
+      .update({
+        reset_password_token: token,
+        reset_password_expires: tomorrow
       });
+    resetPasswordEmail(
+      user,
+      email,
+      `${process.env.APP_URL}/account/reset-password?token=${token}`
+    );
+    return res.status(200).json();
+  } catch (err) {
+    return res.status(400).json({
+      errors: {
+        msg: "Une erreur est survenue",
+        location: "body",
+        error: err
+      }
     });
+  }
 };
 
 module.exports = forgotPassword;

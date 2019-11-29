@@ -21,7 +21,7 @@ const grayBox = {
   p: "5"
 };
 
-function checkStatus(response, setSubmitting, setStatus, toggleMessage) {
+const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) => {
   if (response.ok) {
     setSubmitting(false);
     toggleMessage(true);
@@ -32,12 +32,15 @@ function checkStatus(response, setSubmitting, setStatus, toggleMessage) {
     }, 3000);
     return response;
   } else {
-    response.json().then(response => {
-      setStatus({ errorMsg: response.errors.msg });
+    try {
+      const json = await response.json();
+      setStatus({ errorMsg: json.errors.msg });
       setSubmitting(false);
-    });
+    } catch (errors) {
+      setStatus({ errorMsg: errors.msg });
+    }
   }
-}
+};
 
 const ResetPassword = props => {
   const { token } = props;

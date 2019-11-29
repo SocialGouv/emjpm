@@ -24,9 +24,10 @@ const grayBox = {
   p: "5"
 };
 
-function checkStatus(response, setSubmitting, setStatus) {
+const checkStatus = async (response, setSubmitting, setStatus) => {
   if (response.ok) {
-    response.json().then(json => {
+    try {
+      const json = await response.json();
       authService.login(json.token);
       ReactPiwik.push(["trackEvent", "login", "success"]);
       trackUser();
@@ -36,16 +37,21 @@ function checkStatus(response, setSubmitting, setStatus) {
         document.location.reload(true);
       }
       setSubmitting(false);
-    });
+    } catch (errors) {
+      setStatus({ errorMsg: errors.msg });
+    }
     return response;
   } else {
     ReactPiwik.push(["trackEvent", "login", "error"]);
-    response.json().then(response => {
-      setStatus({ errorMsg: response.errors.msg });
+    try {
+      const json = await response.json();
+      setStatus({ errorMsg: json.errors.msg });
       setSubmitting(false);
-    });
+    } catch (errors) {
+      setStatus({ errorMsg: errors.msg });
+    }
   }
-}
+};
 
 const Login = props => {
   const { token } = props;
