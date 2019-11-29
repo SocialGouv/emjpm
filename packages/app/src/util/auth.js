@@ -62,7 +62,7 @@ export const withAuthSync = WrappedComponent =>
 
 const routes = {
   admin: "/admin",
-  direction: "/direction",
+  direction: "/direction/mandataires",
   individuel: "/mandataires",
   prepose: "/mandataires",
   service: "/services",
@@ -72,11 +72,13 @@ const routes = {
 export const auth = ctx => {
   const { token } = nextCookie(ctx);
   const { pathname } = ctx;
-  const isLogin =
+  const isPublic =
     pathname === "/login" ||
     pathname === "/signup" ||
     pathname === "/inscription" ||
-    pathname === "/";
+    pathname === "/" ||
+    pathname === "/account/reset-password" ||
+    pathname === "/account/forgot-password";
 
   if (token) {
     const { url, role } = jwtDecode(token);
@@ -100,7 +102,7 @@ export const auth = ctx => {
   }
 
   if (!token) {
-    if (!isLogin) {
+    if (!isPublic) {
       if (ctx.req) {
         ctx.res.writeHead(302, { Location: "/login" });
         ctx.res.end();

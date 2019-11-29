@@ -1,18 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const createError = require("http-errors");
-const bcrypt = require("bcryptjs");
 const uid = require("rand-token").uid;
-const {
-  updateResetPassword,
-  updateUser,
-  getSpecificUser,
-  getUserWithValidToken
-} = require("../db/queries/users");
+const { updateResetPassword, getSpecificUser } = require("../db/queries/users");
 
 const inscription = require("../db/queries/inscription");
-const { resetPasswordEmail } = require("../email/password-reset");
-const { confirmationPasswordEmail } = require("../email/password-confirmation");
+const { resetPasswordEmail } = require("../email/forgot-password-email");
 
 router.post("/checkUser", async (req, res, next) => {
   try {
@@ -103,64 +96,6 @@ router.post("/forgot_password", (req, res, next) => {
         email,
         `${process.env.APP_URL}/reset-password?token=${token}`
       );
-    })
-    .catch(next);
-});
-
-/**
- * @swagger
- * /auth/reset_password:
- *   post:
- *     tags:
- *       - login
- *     description: Reset password and create new one
- *     requestBody:
- *       description: A JSON object containing reset password
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               token:
- *                 type: string
- *                 required: true
- *               newPassword:
- *                 type: string
- *                 required: true
- *               verifyPassword:
- *                 type: string
- *                 required: true
- *     responses:
- *       200:
- *         description: send email to the user with confirmation of reset password
- *         headers:
- *           Set-Cookie:
- *             description: API server cookie
- */
-router.post("/reset_password", (req, res, next) => {
-  getUserWithValidToken({ reset_password_token: req.body.token })
-    .catch(err => {
-      // 419 Authentication Timeout see http://getstatuscode.com/419
-      // message: "Votre lien a expiré."
-      throw createError(419, err);
-    })
-    .then(user => {
-      if (!user) {
-        throw createError.Unauthorized("Invalid token");
-      }
-      if (req.body.newPassword === req.body.verifyPassword) {
-        return updateUser(user.id, {
-          password: bcrypt.hashSync(req.body.newPassword, 10),
-          reset_password_token: null,
-          reset_password_expires: null
-        }).then(() => {
-          res.status(200).json();
-          return confirmationPasswordEmail(user.email);
-        });
-      } else {
-        throw createError.UnprocessableEntity("Not equal passwords.");
-      }
     })
     .catch(next);
 });

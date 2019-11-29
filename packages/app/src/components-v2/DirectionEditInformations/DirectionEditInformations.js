@@ -53,11 +53,11 @@ const DirectionEditInformations = props => {
                 setSubmitting(false);
               }}
               validationSchema={Yup.object().shape({
-                email: Yup.string("Champs obligatoire")
+                email: Yup.string("Champ obligatoire")
                   .email("Le format de votre email n'est pas correct")
-                  .required("Champs obligatoire"),
-                nom: Yup.string().required("Champs obligatoire"),
-                prenom: Yup.string().required("Champs obligatoire")
+                  .required("Champ obligatoire"),
+                nom: Yup.string().required("Champ obligatoire"),
+                prenom: Yup.string().required("Champ obligatoire")
               })}
               initialValues={{
                 email: email || "",

@@ -56,7 +56,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
                 }}
                 validationSchema={Yup.object().shape({
                   cabinet: Yup.string(),
-                  ti: Yup.string().required("Champs obligatoire")
+                  ti: Yup.string().required("Champ obligatoire")
                 })}
                 initialValues={{
                   cabinet: magistrat ? magistrat.cabinet : "",
