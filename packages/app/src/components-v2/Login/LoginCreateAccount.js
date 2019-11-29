@@ -13,7 +13,7 @@ const LineBox = styled.div`
   &:before {
     content: "";
     position: absolute;
-    height: 9px;
+    height: 12px;
     border-bottom: 1px solid #cfcfcf;
     top: 0;
     width: 100%;
