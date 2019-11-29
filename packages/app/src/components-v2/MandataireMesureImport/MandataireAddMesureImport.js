@@ -111,16 +111,16 @@ export const MandataireAddMesureImport = () => {
     const filename = file.name;
     const isExcel = filename.endsWith(".xls") || filename.endsWith(".xlsx");
     reader.onload = function() {
-      let datas;
+      let mesureDatas;
       if (isExcel) {
-        const bstr = reader.result;
-        const wb = XLSX.read(bstr, { type: "binary" });
+        const binaryString = reader.result;
+        const wb = XLSX.read(binaryString, { type: "binary" });
         const wsname = wb.SheetNames[0];
         const ws = wb.Sheets[wsname];
-        datas = XLSX.utils.sheet_to_json(ws, { dateNF: "dd/mm/yyyy" });
+        mesureDatas = XLSX.utils.sheet_to_json(ws, { dateNF: "dd/mm/yyyy" });
       } else {
-        const result = reader.result;
-        datas = csvToArray(result);
+        const fileContentAsText = reader.result;
+        mesureDatas = csvToArray(fileContentAsText);
       }
 
       const trimProperties = data =>
@@ -128,8 +128,8 @@ export const MandataireAddMesureImport = () => {
           k => (data[k] = typeof data[k] == "string" ? data[k].trim() : data[k])
         );
 
-      datas.forEach(data => trimProperties(data));
-      const { errors, mesures } = checkDatas(datas);
+      mesureDatas.forEach(data => trimProperties(data));
+      const { errors, mesures } = checkDatas(mesureDatas);
 
       if (mesures.length > 0) {
         AddImport({
