@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Antenne } from "@socialgouv/emjpm-ui-components";
 import { BoxWrapper, Card, Heading2, Heading4, Spinner, Text } from "@socialgouv/emjpm-ui-core";
+import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
@@ -9,6 +10,7 @@ import { ANTENNE } from "./queries";
 import { AntennesStyle } from "./style";
 
 const ServiceAntennes = props => {
+  const { isAntenneCreationHidden } = props;
   const { data, loading, error } = useQuery(ANTENNE, { fetchPolicy: "cache-and-network" });
 
   if (loading) {
@@ -32,7 +34,7 @@ const ServiceAntennes = props => {
   const { service_antenne } = data;
   return (
     <BoxWrapper>
-      {service_antenne.length < 1 && (
+      {service_antenne.length < 1 && !isAntenneCreationHidden && (
         <Fragment>
           <Heading2 mt="1">Antennes</Heading2>
           <Card p="6" mt="3">
@@ -70,9 +72,11 @@ const ServiceAntennes = props => {
         <Fragment>
           <Flex flexWrap="wrap" mb="3" alignItems="center" justifyContent="space-between">
             <Heading2 mt="1">Antennes</Heading2>
-            <LinkButton href="/services/antennes/create" ml="1">
-              Créer une antenne
-            </LinkButton>
+            {!isAntenneCreationHidden && (
+              <LinkButton href="/services/antennes/create" ml="1">
+                Créer une antenne
+              </LinkButton>
+            )}
           </Flex>
           <Box sx={AntennesStyle} {...props}>
             {service_antenne.map(antenne => {
@@ -93,6 +97,14 @@ const ServiceAntennes = props => {
       )}
     </BoxWrapper>
   );
+};
+
+ServiceAntennes.defaultProps = {
+  isAntenneCreationHidden: false
+};
+
+ServiceAntennes.propTypes = {
+  isAntenneCreationHidden: PropTypes.bool
 };
 
 export { ServiceAntennes };

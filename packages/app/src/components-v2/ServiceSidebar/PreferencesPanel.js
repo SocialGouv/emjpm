@@ -8,6 +8,7 @@ import { GET_SERVICES_DISPONIBILITY } from "./queries";
 import { PreferencesPanelStyle } from "./style";
 
 const PreferencesPanel = props => {
+  const { isDescriptionHidden } = props;
   const { data, error, loading } = useQuery(GET_SERVICES_DISPONIBILITY);
 
   if (loading) {
@@ -36,29 +37,33 @@ const PreferencesPanel = props => {
           <Text sx={{ color: "mediumGray", fontSize: "1" }}>mesures en attente</Text>
         </Heading3>
       </Card>
-      <Text
-        sx={{
-          color: "textSecondary",
-          fontStyle: "italic",
-          fontWeight: 600,
-          lineHeight: 1.6,
-          mt: "5",
-          textAlign: "center"
-        }}
-      >
-        Ces préférences sont indicatives et sont communiquées au juge lors de son choix
-      </Text>
+      {!isDescriptionHidden && (
+        <Text
+          sx={{
+            color: "textSecondary",
+            fontStyle: "italic",
+            fontWeight: 600,
+            lineHeight: 1.6,
+            mt: "5",
+            textAlign: "center"
+          }}
+        >
+          Ces préférences sont indicatives et sont communiquées au juge lors de son choix
+        </Text>
+      )}
     </Box>
   );
 };
 
 PreferencesPanel.defaultProps = {
   currentAntenne: null,
+  isDescriptionHidden: false,
   user_antennes: []
 };
 
 PreferencesPanel.propTypes = {
   currentAntenne: PropTypes.string,
+  isDescriptionHidden: PropTypes.bool,
   user_antennes: PropTypes.array
 };
 
