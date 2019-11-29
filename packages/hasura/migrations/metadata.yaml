@@ -31,6 +31,15 @@ tables:
       allow_aggregations: false
       columns:
       - id
+      - service_id
+      - user_id
+      filter: {}
+    role: ti
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
       - user_id
       - service_id
       filter:
@@ -949,13 +958,13 @@ tables:
   is_enum: false
   object_relationships:
   - comment: null
-    name: ti
-    using:
-      foreign_key_constraint_on: ti_id
-  - comment: null
     name: service_antenne
     using:
       foreign_key_constraint_on: antenne_id
+  - comment: null
+    name: ti
+    using:
+      foreign_key_constraint_on: ti_id
   - comment: null
     name: mandataire
     using:

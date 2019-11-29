@@ -79,6 +79,7 @@ export const GET_MANDATAIRES = gql`
             nom
             prenom
             email
+            last_login
           }
           genre
           id
@@ -99,6 +100,11 @@ export const GET_MANDATAIRES = gql`
           telephone
           email
           etablissement
+          service_admins {
+            user {
+              last_login
+            }
+          }
         }
       }
     }
