@@ -1,58 +1,57 @@
-import "bootstrap/dist/css/bootstrap.css";
+// import "bootstrap/dist/css/bootstrap.css";
 
-import Head from "next/head";
+import { BoxWrapper, FlexWrapper, Heading1, Heading4 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
-import styled from "styled-components";
+import { Box, Image } from "rebass";
 
-import { Layout } from "../src/components";
-import { PageTracker } from "../src/components/common/PageTracker";
-import LoginForm from "../src/components/loginComponents/LoginForm";
+import { LayoutPublic } from "../src/components-v2/Layout";
+import { Login, LoginCreateAccount } from "../src/components-v2/Login";
 import { withAuthSync } from "../src/util/auth";
 
-const Title = styled.div`
-  text-align: left;
-  font-size: 2em;
-  padding-bottom: 15px;
-  font-weight: bold;
-`;
-/*TODO (adrien) : check for ie < 11
-const { detect } = require("detect-browser");
-const browser = detect();
-
-//handle the case where we don't detect the browser
-
-switch (browser && browser.name) {
-  case "ie":
-    alert(
-      "Votre navigateur n'est pas compatible avec l'application e-mjpm. Nous vous recommandons d'utiliser Firefox ou Chromium ou Chrome."
-    );
-    break;
-  default:
-    console.log("not supported");
-}
-*/
-
-const LoginContainer = ({ style }) => (
-  <div className="container" style={style}>
-    <div className="col-12 col-sm-12 offset-md-3 col-md-6">
-      <Title>Espace professionnels</Title>
-      <LoginForm />
-    </div>
-  </div>
-);
-
-class LoginPage extends React.Component {
-  render() {
-    return (
-      <Layout inscription>
-        <Head>
-          <title>Login</title>
-        </Head>
-        <PageTracker url="/login" />
-        <LoginContainer style={{ marginTop: 100 }} />{" "}
-      </Layout>
-    );
-  }
-}
+const LoginPage = () => {
+  return (
+    <LayoutPublic>
+      <BoxWrapper>
+        <Heading1 mt={"80px"} textAlign="center">
+          Trouvez le bon professionnel pour les majeurs à protéger
+        </Heading1>
+      </BoxWrapper>
+      <FlexWrapper my="50px">
+        <Box
+          sx={{
+            flexBasis: ["100%", "50%"],
+            p: "3"
+          }}
+        >
+          <Image
+            src="/static/images/login.png"
+            sx={{
+              p: "3",
+              width: ["100%"]
+            }}
+          />
+          <Box sx={{ p: "6" }}>
+            <Heading4 mb="3">
+              Une connaissance en temps réel de l’activité des travailleurs sociaux
+            </Heading4>
+            <Heading4 mb="3">
+              Un référentiel géolocalisé de l’ensemble des tuteurs et de leur disponibilité
+            </Heading4>
+            <Heading4>Une simplification des démarches pour les personnes sous protection</Heading4>
+          </Box>
+        </Box>
+        <Box
+          sx={{
+            flexBasis: ["100%", "50%"],
+            p: "3"
+          }}
+        >
+          <Login />
+          <LoginCreateAccount />
+        </Box>
+      </FlexWrapper>
+    </LayoutPublic>
+  );
+};
 
 export default withAuthSync(LoginPage);

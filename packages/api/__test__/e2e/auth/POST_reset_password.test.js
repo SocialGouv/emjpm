@@ -38,11 +38,11 @@ beforeEach(async () => {
 
 test("reset a password", async () => {
   const response = await request(server)
-    .post("/auth/reset_password")
+    .post("/api/v2/auth/reset-password-with-token")
     .send({
       token: "LpWpzK4Jla9I87Aq",
-      newPassword: "adad",
-      verifyPassword: "adad"
+      new_password: "test123456?",
+      new_password_confirmation: "test123456?"
     });
   expect(response.body).toMatchSnapshot();
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
@@ -51,48 +51,42 @@ test("reset a password", async () => {
 
 test("fail because the inputs don't match", async () => {
   const response = await request(server)
-    .post("/auth/reset_password")
+    .post("/api/v2/auth/reset-password-with-token")
     .send({
       token: "LpWpzK4Jla9I87Aq",
-      newPassword: "adad",
-      verifyPassword: "tataadad"
+      new_password: "test123456?",
+      new_password_confirmation: "test123456"
     });
   expect(response.body).toMatchInlineSnapshot(
-    { stack: expect.any(String) },
+    { errors: expect.any(Object) },
     `
-Object {
-  "message": "Not equal passwords.",
-  "name": "UnprocessableEntityError",
-  "stack": Any<String>,
-  "status": 422,
-}
-`
+    Object {
+      "errors": Any<Object>,
+    }
+  `
   );
   expect(nodemailerMock.mock.sentMail()).toEqual([]);
-  expect(response.status).toBe(422);
+  expect(response.status).toBe(400);
 });
 
 test("fail because nekot is not a valid token", async () => {
   const response = await request(server)
-    .post("/auth/reset_password")
+    .post("/api/v2/auth/reset-password-with-token")
     .send({
       token: "nekot",
-      newPassword: "adad",
-      verifyPassword: "adad"
+      new_password: "test123456?",
+      new_password_confirmation: "test123456?"
     });
   expect(response.body).toMatchInlineSnapshot(
-    { stack: expect.any(String) },
+    { errors: expect.any(Object) },
     `
-Object {
-  "message": "Invalid token",
-  "name": "UnauthorizedError",
-  "stack": Any<String>,
-  "status": 401,
-}
-`
+    Object {
+      "errors": Any<Object>,
+    }
+  `
   );
   expect(nodemailerMock.mock.sentMail()).toEqual([]);
-  expect(response.status).toBe(401);
+  expect(response.status).toBe(419);
 });
 
 test("fail because the token has expired", async () => {
@@ -103,25 +97,22 @@ test("fail because the token has expired", async () => {
     });
 
   const response = await request(server)
-    .post("/auth/reset_password")
+    .post("/api/v2/auth/reset-password-with-token")
     .send({
       token: "LpWpzK4Jla9I87Aq",
-      newPassword: "adad",
-      verifyPassword: "adad"
+      new_password: "test123456?",
+      new_password_confirmation: "test123456?"
     });
   expect(response.body).toMatchInlineSnapshot(
-    { stack: expect.any(String) },
+    { errors: expect.any(Object) },
     `
-Object {
-  "message": "Invalid token",
-  "name": "UnauthorizedError",
-  "stack": Any<String>,
-  "status": 401,
-}
-`
+    Object {
+      "errors": Any<Object>,
+    }
+  `
   );
   expect(nodemailerMock.mock.sentMail()).toEqual([]);
-  expect(response.status).toBe(401);
+  expect(response.status).toBe(419);
 });
 
 test("should empty user token+expiration on password reset", async () => {
@@ -133,11 +124,11 @@ test("should empty user token+expiration on password reset", async () => {
     });
 
   const response = await request(server)
-    .post("/auth/reset_password")
+    .post("/api/v2/auth/reset-password-with-token")
     .send({
       token: "abcdef",
-      newPassword: "adad",
-      verifyPassword: "adad"
+      new_password: "test123456?",
+      new_password_confirmation: "test123456?"
     });
 
   const userData = await knex("users")

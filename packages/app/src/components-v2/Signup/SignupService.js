@@ -71,8 +71,8 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
                   });
                 }}
                 validationSchema={Yup.object().shape({
-                  departement: Yup.mixed().required("Champs obligatoire"),
-                  service: Yup.mixed().required("Champs obligatoire")
+                  departement: Yup.mixed().required("Champ obligatoire"),
+                  service: Yup.mixed().required("Champ obligatoire")
                 })}
                 initialValues={{
                   departement: service ? service.departement : null,

@@ -22,27 +22,31 @@ const grayBox = {
   p: "5"
 };
 
-function checkStatus(response, setSubmitting, setStatus, type) {
-  if (response.ok) {
-    setSubmitting(false);
-    Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
-      shallow: true
-    });
-    return response;
-  } else {
-    response.json().then(response => {
-      setStatus({ errorMsg: response.errors.msg, field: response.errors.param });
-      setSubmitting(false);
-    });
+const checkStatus = async (response, setSubmitting, setStatus, type) => {
+  let json = null;
+  setSubmitting(false);
+  try {
+    json = await response.json();
+  } catch (errors) {
+    setStatus({ errorMsg: errors.msg });
   }
-}
+  if (!response.ok) {
+    setStatus({ errorMsg: json.errors.msg });
+    return json;
+  }
+  setSubmitting(false);
+  Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
+    shallow: true
+  });
+  return json;
+};
 
 const EditPassword = props => {
   const { username, type } = props;
   const url = `${API_URL}/api/v2/auth/reset-password`;
 
   const handleSubmit = async (values, setSubmitting, setStatus, type) => {
-    fetch(url, {
+    const response = await fetch(url, {
       body: JSON.stringify({
         new_password: values.newPassword,
         new_password_confirmation: values.newPasswordConfirmation,
@@ -53,7 +57,8 @@ const EditPassword = props => {
         "Content-Type": "application/json"
       },
       method: "POST"
-    }).then(response => checkStatus(response, setSubmitting, setStatus, type));
+    });
+    checkStatus(response, setSubmitting, setStatus, type);
   };
 
   return (
@@ -74,17 +79,17 @@ const EditPassword = props => {
                 handleSubmit(values, setSubmitting, setStatus, type)
               }
               validationSchema={Yup.object().shape({
-                newPassword: Yup.string("Champs obligatoire")
+                newPassword: Yup.string("Champ obligatoire")
                   .min(8, "Votre mot de passe doit être de 8 caractères minimum")
                   .matches(
                     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/,
                     "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spécial"
                   )
-                  .required("Champs obligatoire"),
+                  .required("Champ obligatoire"),
                 newPasswordConfirmation: Yup.string()
                   .oneOf([Yup.ref("newPassword"), null], "Les mots de passe ne sont pas égaux")
-                  .required("Champs obligatoire"),
-                password: Yup.string().required("Champs obligatoire")
+                  .required("Champ obligatoire"),
+                password: Yup.string().required("Champ obligatoire")
               })}
               initialValues={{
                 newPassword: "",

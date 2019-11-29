@@ -2,7 +2,11 @@
 
 exports[`' jeRemY  ' not login individuel 1`] = `
 Object {
-  "err": "Unknown user",
+  "errors": Object {
+    "error": "Unknown user",
+    "location": "body",
+    "msg": "Vos informations de connection sont erronées",
+  },
 }
 `;
 
@@ -22,13 +26,21 @@ Object {
 
 exports[`'inactive' not login an inactive user 1`] = `
 Object {
-  "err": "User is inactive",
+  "errors": Object {
+    "error": "User is inactive",
+    "location": "body",
+    "msg": "Vos informations de connection sont erronées",
+  },
 }
 `;
 
 exports[`'jeremy' not login a registered user with wrong password 1`] = `
 Object {
-  "err": "Invalid password",
+  "errors": Object {
+    "error": "Invalid password",
+    "location": "body",
+    "msg": "Vos informations de connection sont erronées",
+  },
 }
 `;
 
@@ -62,7 +74,11 @@ Object {
 
 exports[`'michael' not login an unregistered user 1`] = `
 Object {
-  "err": "Unknown user",
+  "errors": Object {
+    "error": "Unknown user",
+    "location": "body",
+    "msg": "Vos informations de connection sont erronées",
+  },
 }
 `;
 
