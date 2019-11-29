@@ -91,7 +91,7 @@ const ForgotPassword = () => {
             validationSchema={Yup.object().shape({
               email: Yup.string()
                 .email("Le format de votre email n'est pas correct")
-                .required("Champs obligatoire")
+                .required("Champ obligatoire")
             })}
             initialValues={{
               email: ""

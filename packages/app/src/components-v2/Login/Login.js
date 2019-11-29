@@ -87,8 +87,8 @@ const Login = props => {
               handleSubmit(values, setSubmitting, setStatus, token)
             }
             validationSchema={Yup.object().shape({
-              password: Yup.string().required("Champs obligatoire"),
-              username: Yup.string().required("Champs obligatoire")
+              password: Yup.string().required("Champ obligatoire"),
+              username: Yup.string().required("Champ obligatoire")
             })}
             initialValues={{
               password: "",

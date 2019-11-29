@@ -111,8 +111,8 @@ export const SignupForm = () => {
                     }),
                   email: Yup.string()
                     .email("Le format de votre email n'est pas correct")
-                    .required("Champs obligatoire"),
-                  nom: Yup.string().required("Champs obligatoire"),
+                    .required("Champ obligatoire"),
+                  nom: Yup.string().required("Champ obligatoire"),
                   password: Yup.string()
                     .label("Mot de passe")
                     .required()
@@ -124,8 +124,8 @@ export const SignupForm = () => {
                           "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spéciale"
                       }
                     ),
-                  prenom: Yup.string().required("Champs obligatoire"),
-                  type: Yup.string().required("Champs obligatoire")
+                  prenom: Yup.string().required("Champ obligatoire"),
+                  type: Yup.string().required("Champ obligatoire")
                 })}
                 initialValues={{
                   confirmPassword: user ? user.confirmPassword : "",
