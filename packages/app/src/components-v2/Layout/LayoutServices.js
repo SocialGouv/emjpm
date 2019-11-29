@@ -14,8 +14,12 @@ import { dropDownLinks } from "./dropDownLink";
 
 const navigationLinks = [
   {
-    title: "Toutes vos mesures",
+    title: "Dashboard",
     url: "/services"
+  },
+  {
+    title: "Toutes vos mesures",
+    url: "/services/mesures"
   },
   {
     title: "Vos mesures en attente",
