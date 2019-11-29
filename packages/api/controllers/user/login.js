@@ -15,7 +15,13 @@ const login = async (req, res, next) => {
 
   passport.authenticate("local", async (err, user) => {
     if (err) {
-      return res.status(401).json({ err });
+      return res.status(401).json({
+        errors: {
+          msg: "Vos informations de connection sont erronées",
+          location: "body",
+          error: err
+        }
+      });
     }
     if (user) {
       await User.query()
