@@ -85,7 +85,6 @@ const checkGender = (row, errors) => {
 const checkResidence = (row, errors) => {
   const residence = row.residence;
   if (!residence) {
-    errors.push(`Le lieux de vie du majeur est obligatoire`);
     return;
   } else if (RESIDENCE.includes(residence)) {
     return;

@@ -1,4 +1,9 @@
 exports.getRegionCode = codePostal => {
+  if (!codePostal) {
+    return;
+  }
+  codePostal = `${codePostal}`;
+
   let code;
   if (codePostal.startsWith("201")) {
     code = "2A";
