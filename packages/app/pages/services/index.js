@@ -26,7 +26,9 @@ const Informations = () => {
             }}
           >
             <Heading2>Mesures souhaitées par votre service</Heading2>
-            <UserInformations Component={props => <PreferencesPanel {...props} mt="3" />} />
+            <UserInformations
+              Component={props => <PreferencesPanel isDescriptionHidden={true} {...props} mt="3" />}
+            />
           </Box>
         </Flex>
         <Box
@@ -34,7 +36,7 @@ const Informations = () => {
             p: 1
           }}
         >
-          <ServiceAntennes mt="1" />
+          <ServiceAntennes isAntenneCreationHidden="true" mt="1" />
         </Box>
       </BoxWrapper>
     </LayoutServices>
