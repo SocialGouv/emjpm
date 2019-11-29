@@ -22,7 +22,7 @@ const resetPasswordWithToken = async (req, res) => {
       .andWhere("reset_password_expires", ">", "now()")
       .first();
     if (!user) {
-      throw createError.Unauthorized("Votre lien de réinitialisation à expiré");
+      throw createError.Unauthorized("Votre lien de réinitialisation a expiré");
     }
     try {
       await User.query()
@@ -39,7 +39,7 @@ const resetPasswordWithToken = async (req, res) => {
   } catch (err) {
     return res.status(419).json({
       errors: {
-        msg: "Votre lien de réinitialisation à expiré",
+        msg: "Votre lien de réinitialisation a expiré",
         location: "body",
         error: err
       }
