@@ -2561,14 +2561,14 @@
     "@sentry/types" "5.6.1"
     tslib "^1.9.3"
 
-"@socialgouv/emjpm-ui-components@0.43.0":
-  version "0.43.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.43.0.tgz#df265afdf7a8c13e068ee5be4ffed918f85be70f"
-  integrity sha512-VAySCX3aXqp1zMGIDTo7bn29raO6vZzbjIzbSIaWW3qLxu06SpuiaFak4sLiGzWNqf7y/laqQBDahFZLyOQhGg==
+"@socialgouv/emjpm-ui-components@0.45.0":
+  version "0.45.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.45.0.tgz#fd22873cc2f31872a838e14fd93d2d545879d6ba"
+  integrity sha512-na4rPl7E6tAFTZpeQErWSVOJH6SZj9zcVkhoh+haMOVJLJW2MN2SlhqMGluN/qRl/U/jYqc73b1KVOolLlx+lA==
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
-    "@socialgouv/emjpm-ui-core" "^1.10.1"
+    "@socialgouv/emjpm-ui-core" "^1.11.0"
     "@storybook/addon-actions" "^5.2.4"
     prop-types "^15.7.2"
     react "^16.8.6"
@@ -2581,6 +2581,20 @@
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.10.1.tgz#c9f901f745e5a0a8faf9f50f2dada2d735d9869d"
   integrity sha512-XHH2yMmbIPgodJ6dofdSti2VF636cADhQfWxZzAvdjITCd5x8lASR8BJAgI+PXuXKmPTViqg/1rwtE6vtAVT8g==
+  dependencies:
+    "@emotion/core" "^10.0.15"
+    "@emotion/styled" "^10.0.15"
+    prop-types "^15.7.2"
+    react "^16.8.6"
+    react-select "^3.0.4"
+    rebass "^4.0.1"
+    styled-icons "^8.3.0"
+    theme-ui "^0.2.31"
+
+"@socialgouv/emjpm-ui-core@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.11.0.tgz#750ae8dcf9ac78200018ef618036442a18f6e8e6"
+  integrity sha512-qscjzivhSz02Mq9rtsw8pmSiQkPumZf9b3UGKU2dwGEtcqwCa6eQ45YvgBRShxXMena2QNJ6ufbqTCFaY0bDCA==
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
