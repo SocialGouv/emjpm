@@ -1,8 +1,6 @@
 const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
-const {
-  confirmationPasswordEmail
-} = require("../../email/password-confirmation");
+
 const { User } = require("../../model/User");
 
 /**
@@ -46,8 +44,7 @@ const resetPassword = async (req, res) => {
         await User.query()
           .where("id", user.id)
           .update({ password: newPasswordHash });
-        res.status(200).json({ status: "ok" });
-        return confirmationPasswordEmail(user.email);
+        return res.status(200).json({ status: "ok" });
       } catch (err) {
         return res.status(400).json({ err });
       }
