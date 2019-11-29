@@ -58,7 +58,7 @@ const Login = props => {
   const url = `${API_URL}/api/v2/auth/login`;
 
   const handleSubmit = async (values, setSubmitting, setStatus) => {
-    fetch(url, {
+    const response = await fetch(url, {
       body: JSON.stringify({
         password: values.password,
         username: values.username
@@ -67,7 +67,8 @@ const Login = props => {
         "Content-Type": "application/json"
       },
       method: "POST"
-    }).then(response => checkStatus(response, setSubmitting, setStatus));
+    });
+    checkStatus(response, setSubmitting, setStatus);
   };
 
   return (

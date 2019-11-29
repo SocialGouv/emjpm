@@ -46,7 +46,7 @@ const ForgotPassword = () => {
   const url = `${API_URL}/api/v2/auth/forgot-password`;
   const [isMessageVisible, toggleMessage] = useState(false);
   const handleSubmit = async (values, setSubmitting, setStatus) => {
-    fetch(url, {
+    const response = await fetch(url, {
       body: JSON.stringify({
         email: values.email
       }),
@@ -54,7 +54,8 @@ const ForgotPassword = () => {
         "Content-Type": "application/json"
       },
       method: "POST"
-    }).then(response => checkStatus(response, setSubmitting, setStatus, toggleMessage));
+    });
+    checkStatus(response, setSubmitting, setStatus, toggleMessage);
   };
 
   return (

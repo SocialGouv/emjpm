@@ -42,7 +42,7 @@ const EditPassword = props => {
   const url = `${API_URL}/api/v2/auth/reset-password`;
 
   const handleSubmit = async (values, setSubmitting, setStatus, type) => {
-    fetch(url, {
+    const response = fetch(url, {
       body: JSON.stringify({
         new_password: values.newPassword,
         new_password_confirmation: values.newPasswordConfirmation,
@@ -53,7 +53,8 @@ const EditPassword = props => {
         "Content-Type": "application/json"
       },
       method: "POST"
-    }).then(response => checkStatus(response, setSubmitting, setStatus, type));
+    });
+    checkStatus(response, setSubmitting, setStatus, type);
   };
 
   return (

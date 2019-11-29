@@ -48,7 +48,7 @@ const ResetPassword = props => {
   const url = `${API_URL}/api/v2/auth/reset-password-with-token`;
 
   const handleSubmit = async (values, setSubmitting, setStatus, token, toggleMessage) => {
-    fetch(url, {
+    const response = await fetch(url, {
       body: JSON.stringify({
         new_password: values.newPassword,
         new_password_confirmation: values.newPasswordConfirmation,
@@ -58,7 +58,8 @@ const ResetPassword = props => {
         "Content-Type": "application/json"
       },
       method: "POST"
-    }).then(response => checkStatus(response, setSubmitting, setStatus, toggleMessage));
+    });
+    checkStatus(response, setSubmitting, setStatus, toggleMessage);
   };
 
   return (
