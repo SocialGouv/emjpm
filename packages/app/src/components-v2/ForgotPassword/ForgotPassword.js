@@ -22,24 +22,24 @@ const grayBox = {
 };
 
 const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) => {
-  if (response.ok) {
-    setSubmitting(false);
-    toggleMessage(true);
-    setTimeout(function() {
-      Router.push(`/login`, `/login`, {
-        shallow: true
-      });
-    }, 3000);
-    return response;
-  } else {
-    try {
-      const json = await response.json();
-      setStatus({ errorMsg: json.message });
-      setSubmitting(false);
-    } catch (errors) {
-      setStatus({ errorMsg: errors.message });
-    }
+  let json = null;
+  setSubmitting(false);
+  try {
+    json = await response.json();
+  } catch (errors) {
+    setStatus({ errorMsg: errors.msg });
   }
+  if (!response.ok) {
+    setStatus({ errorMsg: json.msg });
+    return json;
+  }
+  toggleMessage(true);
+  setTimeout(function() {
+    Router.push(`/login`, `/login`, {
+      shallow: true
+    });
+  }, 3000);
+  return json;
 };
 
 const ForgotPassword = () => {

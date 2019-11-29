@@ -25,32 +25,27 @@ const grayBox = {
 };
 
 const checkStatus = async (response, setSubmitting, setStatus) => {
-  if (response.ok) {
-    try {
-      const json = await response.json();
-      authService.login(json.token);
-      ReactPiwik.push(["trackEvent", "login", "success"]);
-      trackUser();
-      Router.push(json.url);
-      // TODO remove that hack when mandataire is all done
-      if (json.url === "/mandataires") {
-        document.location.reload(true);
-      }
-      setSubmitting(false);
-    } catch (errors) {
-      setStatus({ errorMsg: errors.msg });
-    }
-    return response;
-  } else {
-    ReactPiwik.push(["trackEvent", "login", "error"]);
-    try {
-      const json = await response.json();
-      setStatus({ errorMsg: json.errors.msg });
-      setSubmitting(false);
-    } catch (errors) {
-      setStatus({ errorMsg: errors.msg });
-    }
+  let json = null;
+  setSubmitting(false);
+  try {
+    json = await response.json();
+  } catch (errors) {
+    setStatus({ errorMsg: errors.msg });
   }
+  if (!response.ok) {
+    ReactPiwik.push(["trackEvent", "login", "error"]);
+    setStatus({ errorMsg: json.errors.msg });
+    return json;
+  }
+  authService.login(json.token);
+  ReactPiwik.push(["trackEvent", "login", "success"]);
+  trackUser();
+  Router.push(json.url);
+  // TODO remove that hack when mandataire is all done
+  if (json.url === "/mandataires") {
+    document.location.reload(true);
+  }
+  return json;
 };
 
 const Login = props => {
@@ -145,7 +140,7 @@ const Login = props => {
                     </Box>
                   </Flex>
                   <Box my="2">
-                    <Link href="/account">{`J'ai oublié mon mot de passe et / ou mon identifiant`}</Link>
+                    <Link href="/account/forgot-password">{`J'ai oublié mon mot de passe et / ou mon identifiant`}</Link>
                   </Box>
                   <Box>
                     <Link href="mailto:support.emjpm@fabrique.social.gouv.fr">{`Contactez-nous en cas de difficulté de connexion`}</Link>

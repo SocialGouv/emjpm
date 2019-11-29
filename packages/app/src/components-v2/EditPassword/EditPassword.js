@@ -22,27 +22,31 @@ const grayBox = {
   p: "5"
 };
 
-function checkStatus(response, setSubmitting, setStatus, type) {
-  if (response.ok) {
-    setSubmitting(false);
-    Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
-      shallow: true
-    });
-    return response;
-  } else {
-    response.json().then(response => {
-      setStatus({ errorMsg: response.errors.msg });
-      setSubmitting(false);
-    });
+const checkStatus = async (response, setSubmitting, setStatus, type) => {
+  let json = null;
+  setSubmitting(false);
+  try {
+    json = await response.json();
+  } catch (errors) {
+    setStatus({ errorMsg: errors.msg });
   }
-}
+  if (!response.ok) {
+    setStatus({ errorMsg: json.errors.msg });
+    return json;
+  }
+  setSubmitting(false);
+  Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
+    shallow: true
+  });
+  return json;
+};
 
 const EditPassword = props => {
   const { username, type } = props;
   const url = `${API_URL}/api/v2/auth/reset-password`;
 
   const handleSubmit = async (values, setSubmitting, setStatus, type) => {
-    const response = fetch(url, {
+    const response = await fetch(url, {
       body: JSON.stringify({
         new_password: values.newPassword,
         new_password_confirmation: values.newPasswordConfirmation,
