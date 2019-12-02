@@ -1,5 +1,3 @@
-import "./pagination.css";
-
 import { useQuery } from "@apollo/react-hooks";
 import { MesureContextProvider, MesureList } from "@socialgouv/emjpm-ui-components";
 import React, { Fragment, useContext, useState } from "react";
