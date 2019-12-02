@@ -3,20 +3,19 @@ import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { getMesureCategoryTypeLabel } from "../../util/mesures";
-import { FiltersContext } from "../Filters/context";
-import { MesureAllocationChart } from "./MesureAllocationChart";
-import { GET_CATEGORY_STATS } from "./queries";
+import { FiltersContext } from "../DirectionFilters/context";
+import { MesureEvolutionChart } from "./MesureEvolutionChart";
+import { GET_CATEGORY_EVOLUTION } from "./queries";
 
-export const MesureAllocation = () => {
+export const MesureEvolution = () => {
   const {
-    selectedRegionalValue,
     startDateValue,
-    selectedDepartementValue,
-    endDateValue
+    endDateValue,
+    selectedRegionalValue,
+    selectedDepartementValue
   } = useContext(FiltersContext);
 
-  const { data, error, loading } = useQuery(GET_CATEGORY_STATS, {
+  const { data, error, loading } = useQuery(GET_CATEGORY_EVOLUTION, {
     variables: {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       end: endDateValue,
@@ -27,9 +26,9 @@ export const MesureAllocation = () => {
 
   if (loading) {
     return (
-      <Card>
+      <Card flexBasis="100%">
         <Heading2>Répartition des mesures à date</Heading2>
-        <Box my="5">
+        <Box my="4">
           <Spinner />
         </Box>
       </Card>
@@ -38,20 +37,17 @@ export const MesureAllocation = () => {
 
   if (error) {
     return (
-      <Card>
+      <Card flexBasis="100%">
         <Heading2>Répartition des mesures à date</Heading2>
         <Heading4>erreur</Heading4>
       </Card>
     );
   }
 
-  const mesures = data.mesureTypeCategoryStatistics.map(mesure => {
-    return {
-      name: getMesureCategoryTypeLabel(mesure.mesureTypeCategory),
-      "nombre de mesures": mesure.number,
-      type: mesure.mesureTypeCategory
-    };
-  });
-
-  return <MesureAllocationChart mesures={mesures} />;
+  return (
+    <Card p="4" flexBasis="100%">
+      <Heading2>Évolution du nombre de mesures</Heading2>
+      <MesureEvolutionChart data={data} />
+    </Card>
+  );
 };

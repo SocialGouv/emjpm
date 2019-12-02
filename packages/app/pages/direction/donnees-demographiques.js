@@ -2,9 +2,9 @@ import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@socialgouv/emjpm-ui-c
 import React from "react";
 import { Box } from "rebass";
 
-import { Filters } from "../../src/components-v2/Filters";
-import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
-import { ServicesIndicator } from "../../src/components-v2/Indicators";
+import { Filters } from "../../src/components-v2/DirectionFilters";
+import { FiltersContextProvider } from "../../src/components-v2/DirectionFilters/context";
+import { ServicesIndicator } from "../../src/components-v2/DirectionIndicators";
 import { LayoutDirection } from "../../src/components-v2/Layout";
 import { withAuthSync } from "../../src/util/auth";
 

@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LinkButton } from "../Commons";
-import { MandatairesExport } from "../MandatairesExport";
+import { MandatairesExport } from "../DirectionMandatairesExport";
 import { MandatairesSubNavigationStyle } from "./style";
 
 const MandatairesSubNavigation = ({ router, ...props }) => {

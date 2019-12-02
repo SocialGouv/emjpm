@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { convertToPercentage } from "../../util/math";
-import { FiltersContext } from "../Filters/context";
+import { FiltersContext } from "../DirectionFilters/context";
 import { MandatairesActivityChart } from "./MandatairesActivityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 

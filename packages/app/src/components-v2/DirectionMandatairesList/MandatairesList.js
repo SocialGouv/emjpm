@@ -4,7 +4,7 @@ import { Button, Card, Heading2, Heading4, Select, Spinner } from "@socialgouv/e
 import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
-import { FiltersContext } from "../Filters/context";
+import { FiltersContext } from "../DirectionFilters/context";
 import { GET_MANDATAIRES } from "./queries";
 import { MandatairesListStyle } from "./style";
 import { formatMandatairesList } from "./utils";
