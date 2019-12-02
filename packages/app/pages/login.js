@@ -1,6 +1,6 @@
 // import "bootstrap/dist/css/bootstrap.css";
 
-import { BoxWrapper, FlexWrapper, Heading1, Heading4 } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, FlexWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Image } from "rebass";
 
@@ -30,7 +30,7 @@ const LoginPage = () => {
               width: ["100%"]
             }}
           />
-          <Box sx={{ p: "6" }}>
+          {/* <Box sx={{ p: "6" }}>
             <Heading4 mb="3">
               Une connaissance en temps réel de l’activité des travailleurs sociaux
             </Heading4>
@@ -38,7 +38,7 @@ const LoginPage = () => {
               Un référentiel géolocalisé de l’ensemble des tuteurs et de leur disponibilité
             </Heading4>
             <Heading4>Une simplification des démarches pour les personnes sous protection</Heading4>
-          </Box>
+          </Box> */}
         </Box>
         <Box
           sx={{
