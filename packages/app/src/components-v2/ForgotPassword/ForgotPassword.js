@@ -1,7 +1,6 @@
 import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import getConfig from "next/config";
-import Router from "next/router";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
@@ -30,15 +29,10 @@ const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) =>
     setStatus({ errorMsg: errors.msg });
   }
   if (!response.ok) {
-    setStatus({ errorMsg: json.msg });
+    setStatus({ errorMsg: json.message });
     return json;
   }
   toggleMessage(true);
-  setTimeout(function() {
-    Router.push(`/login`, `/login`, {
-      shallow: true
-    });
-  }, 3000);
   return json;
 };
 
@@ -77,8 +71,7 @@ const ForgotPassword = () => {
                 p: "1"
               }}
             >
-              {`un email avec un lien de réinitialisation vient de vous être envoyé, vous allez être
-              redirigé vers la page principale d'E-mjpm`}
+              {`Un email avec un lien de réinitialisation vient de vous être envoyé.`}
             </Box>
           )}
         </Box>
