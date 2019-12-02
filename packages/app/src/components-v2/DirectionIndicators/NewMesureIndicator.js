@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Indicator } from "@socialgouv/emjpm-ui-components";
 import React, { useContext } from "react";
 
-import { FiltersContext } from "../Filters/context";
+import { FiltersContext } from "../DirectionFilters/context";
 import { GET_NEW_MESURE_NUMBER } from "./queries";
 
 const NewMesureIndicator = () => {

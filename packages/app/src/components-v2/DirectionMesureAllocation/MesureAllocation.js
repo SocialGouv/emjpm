@@ -3,19 +3,20 @@ import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { FiltersContext } from "../Filters/context";
-import { MesureEvolutionChart } from "./MesureEvolutionChart";
-import { GET_CATEGORY_EVOLUTION } from "./queries";
+import { getMesureCategoryTypeLabel } from "../../util/mesures";
+import { FiltersContext } from "../DirectionFilters/context";
+import { MesureAllocationChart } from "./MesureAllocationChart";
+import { GET_CATEGORY_STATS } from "./queries";
 
-export const MesureEvolution = () => {
+export const MesureAllocation = () => {
   const {
-    startDateValue,
-    endDateValue,
     selectedRegionalValue,
-    selectedDepartementValue
+    startDateValue,
+    selectedDepartementValue,
+    endDateValue
   } = useContext(FiltersContext);
 
-  const { data, error, loading } = useQuery(GET_CATEGORY_EVOLUTION, {
+  const { data, error, loading } = useQuery(GET_CATEGORY_STATS, {
     variables: {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       end: endDateValue,
@@ -26,9 +27,9 @@ export const MesureEvolution = () => {
 
   if (loading) {
     return (
-      <Card flexBasis="100%">
+      <Card>
         <Heading2>Répartition des mesures à date</Heading2>
-        <Box my="4">
+        <Box my="5">
           <Spinner />
         </Box>
       </Card>
@@ -37,17 +38,20 @@ export const MesureEvolution = () => {
 
   if (error) {
     return (
-      <Card flexBasis="100%">
+      <Card>
         <Heading2>Répartition des mesures à date</Heading2>
         <Heading4>erreur</Heading4>
       </Card>
     );
   }
 
-  return (
-    <Card p="4" flexBasis="100%">
-      <Heading2>Évolution du nombre de mesures</Heading2>
-      <MesureEvolutionChart data={data} />
-    </Card>
-  );
+  const mesures = data.mesureTypeCategoryStatistics.map(mesure => {
+    return {
+      name: getMesureCategoryTypeLabel(mesure.mesureTypeCategory),
+      "nombre de mesures": mesure.number,
+      type: mesure.mesureTypeCategory
+    };
+  });
+
+  return <MesureAllocationChart mesures={mesures} />;
 };

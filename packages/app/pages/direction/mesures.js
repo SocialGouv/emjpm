@@ -2,16 +2,16 @@ import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@socialgouv/emjpm-ui-c
 import React from "react";
 import { Box } from "rebass";
 
-import { Filters } from "../../src/components-v2/Filters";
-import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
+import { Filters } from "../../src/components-v2/DirectionFilters";
+import { FiltersContextProvider } from "../../src/components-v2/DirectionFilters/context";
 import {
   ClosedMesureIndicator,
   NewMesureIndicator,
   OpenMesureIndicator
-} from "../../src/components-v2/Indicators";
+} from "../../src/components-v2/DirectionIndicators";
+import { MesureAllocation } from "../../src/components-v2/DirectionMesureAllocation";
+import { MesureEvolution } from "../../src/components-v2/DirectionMesureEvolution";
 import { LayoutDirection } from "../../src/components-v2/Layout";
-import { MesureAllocation } from "../../src/components-v2/MesureAllocation";
-import { MesureEvolution } from "../../src/components-v2/MesureEvolution";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {

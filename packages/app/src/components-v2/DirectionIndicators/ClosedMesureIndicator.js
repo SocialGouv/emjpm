@@ -2,10 +2,10 @@ import { useQuery } from "@apollo/react-hooks";
 import { Indicator } from "@socialgouv/emjpm-ui-components";
 import React, { useContext } from "react";
 
-import { FiltersContext } from "../Filters/context";
-import { GET_AVAILABLE_MESURE_NUMBER } from "./queries";
+import { FiltersContext } from "../DirectionFilters/context";
+import { GET_CLOSED_MESURE_NUMBER } from "./queries";
 
-const AvailableMesureIndicator = () => {
+const ClosedMesureIndicator = () => {
   const {
     selectedRegionalValue,
     selectedDepartementValue,
@@ -13,7 +13,7 @@ const AvailableMesureIndicator = () => {
     endDateValue
   } = useContext(FiltersContext);
 
-  const { error, data, loading } = useQuery(GET_AVAILABLE_MESURE_NUMBER, {
+  const { error, data, loading } = useQuery(GET_CLOSED_MESURE_NUMBER, {
     variables: {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       end: endDateValue,
@@ -26,10 +26,10 @@ const AvailableMesureIndicator = () => {
     <Indicator
       error={error}
       loading={loading}
-      title="Disponibilités"
-      indicator={data && data.availableMesureNumber ? data.availableMesureNumber : 0}
+      title="Mesures éteintes"
+      indicator={data && data.closedMesureNumber ? data.closedMesureNumber : 0}
     />
   );
 };
 
-export { AvailableMesureIndicator };
+export { ClosedMesureIndicator };
