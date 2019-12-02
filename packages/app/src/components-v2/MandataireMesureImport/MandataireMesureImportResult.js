@@ -1,20 +1,16 @@
-import { Button, Card, Heading2 } from "@socialgouv/emjpm-ui-core";
+import { Button, Heading2 } from "@socialgouv/emjpm-ui-core";
 import { Text } from "@socialgouv/emjpm-ui-core/dist/Type";
 import React from "react";
 import { Flex } from "rebass";
 
+import MandataireMesureImportErrors from "./MandataireMesureImportErrors";
 import { ServiceMesureImportResultStyle } from "./style";
-
-const grayCard = {
-  bg: "cardSecondary",
-  borderRadius: "5px 0 0 5px",
-  m: "2",
-  p: "5"
-};
 
 const MandataireMesureImportResult = props => {
   const { result, reset } = props;
   const { errors, mesures } = result;
+
+  console.log(errors);
 
   return (
     <>
@@ -34,11 +30,7 @@ const MandataireMesureImportResult = props => {
           Sélectionner un autre fichier
         </Button>
       </Flex>
-      {errors && (
-        <Card sx={grayCard} overflow="hidden">
-          <pre>{JSON.stringify(errors, null, 2)}</pre>
-        </Card>
-      )}
+      {errors && <MandataireMesureImportErrors errors={errors} />}
     </>
   );
 };

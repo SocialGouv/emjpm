@@ -76,7 +76,7 @@ const validateType = ({ type }) => {
     }
   }
 
-  return `La valeur '${type}' n'est pas dans la liste: ${MESURE_TYPE}`;
+  return `La valeur '${type}' n'est pas dans la liste: ${MESURE_TYPE.join(", ")}`;
 };
 
 const validateGender = ({ civilite }) => {
@@ -147,21 +147,21 @@ const rowValidators = [
   validateTribunalSiret
 ];
 
-const initialState = {
-  errors: [],
-  mesures: []
-};
-
 export default data => {
-  return data.reduce((state, row, index) => {
-    const messages = rowValidators.map(validate => validate(row)).filter(Boolean);
+  const res = data.reduce(
+    (state, row, index) => {
+      const messages = rowValidators.map(validate => validate(row)).filter(Boolean);
 
-    if (messages.length) {
-      state.errors.push({ line: index + 1, messages, row });
-    } else {
-      state.mesures.push(row);
-    }
+      if (messages.length) {
+        state.errors.push({ line: index + 1, messages, row });
+      } else {
+        state.mesures.push(row);
+      }
 
-    return state;
-  }, initialState);
+      return state;
+    },
+    { errors: [], mesures: [] }
+  );
+
+  return res;
 };
