@@ -15,7 +15,7 @@ import { dropDownLinks } from "./dropDownLink";
 const navigationLinks = [
   {
     title: "Mandataires",
-    url: "/direction/mandataires"
+    url: "/direction"
   },
   {
     title: "Mesures",
@@ -60,7 +60,7 @@ const LayoutDirection = props => {
           }}
         />
         <BoxWrapper>
-          <Navigation links={navigationLinks} isNestedLinks={true} />
+          <Navigation links={navigationLinks} />
         </BoxWrapper>
       </Box>
       {children}

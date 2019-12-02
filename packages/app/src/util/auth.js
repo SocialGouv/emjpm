@@ -62,7 +62,7 @@ export const withAuthSync = WrappedComponent =>
 
 const routes = {
   admin: "/admin",
-  direction: "/direction/mandataires",
+  direction: "/direction",
   individuel: "/mandataires",
   prepose: "/mandataires",
   service: "/services",
