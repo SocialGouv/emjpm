@@ -72,7 +72,7 @@ const Login = props => {
         <Box>
           <Heading4 mb="1">{`Connectez-vous à votre compte.`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Indiquez votre nom d'utilisateur et votre mot de passe pour vous connecter.`}
+            {`Indiquez votre email et votre mot de passe pour vous connecter.`}
           </Text>
         </Box>
       </Box>

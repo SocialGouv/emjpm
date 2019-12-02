@@ -2577,20 +2577,6 @@
     styled-icons "^8.3.0"
     theme-ui "^0.2.31"
 
-"@socialgouv/emjpm-ui-core@^1.10.1":
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.10.1.tgz#c9f901f745e5a0a8faf9f50f2dada2d735d9869d"
-  integrity sha512-XHH2yMmbIPgodJ6dofdSti2VF636cADhQfWxZzAvdjITCd5x8lASR8BJAgI+PXuXKmPTViqg/1rwtE6vtAVT8g==
-  dependencies:
-    "@emotion/core" "^10.0.15"
-    "@emotion/styled" "^10.0.15"
-    prop-types "^15.7.2"
-    react "^16.8.6"
-    react-select "^3.0.4"
-    rebass "^4.0.1"
-    styled-icons "^8.3.0"
-    theme-ui "^0.2.31"
-
 "@socialgouv/emjpm-ui-core@^1.11.0":
   version "1.11.0"
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.11.0.tgz#750ae8dcf9ac78200018ef618036442a18f6e8e6"

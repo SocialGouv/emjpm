@@ -1642,6 +1642,17 @@ tables:
       num_retries: 0
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_EMAIL_RESERVATION
+  - definition:
+      delete:
+        columns: '*'
+      enable_manual: false
+    headers: []
+    name: email-cancel-reservation
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
   insert_permissions:
   - comment: null
     permission:
