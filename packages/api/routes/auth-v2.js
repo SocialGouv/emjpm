@@ -16,13 +16,7 @@ router.post(
       .isEmpty(),
     body("password")
       .not()
-      .isEmpty(),
-    check("username", "username must be at least 3 characters long").isLength({
-      min: 3
-    }),
-    check("password", "password must be at least 3 characters long").isLength({
-      min: 3
-    })
+      .isEmpty()
   ],
   login
 );
