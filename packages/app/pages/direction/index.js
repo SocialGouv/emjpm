@@ -7,20 +7,20 @@ import {
 import React from "react";
 import { Box } from "rebass";
 
-import { AvailabilityMap } from "../../src/components-v2/AvailabilityMap";
-import { Filters } from "../../src/components-v2/Filters";
-import { FiltersContextProvider } from "../../src/components-v2/Filters/context";
+import { AvailabilityMap } from "../../src/components-v2/DirectionAvailabilityMap";
+import { Filters } from "../../src/components-v2/DirectionFilters";
+import { FiltersContextProvider } from "../../src/components-v2/DirectionFilters/context";
 import {
   AvailableMesureIndicator,
   EtablissementIndicator,
   MandatairesIndicator,
   ServicesIndicator
-} from "../../src/components-v2/Indicators";
-import { LayoutDirection } from "../../src/components-v2/Layout";
-import { MandatairesActivity } from "../../src/components-v2/MandatairesActivity";
+} from "../../src/components-v2/DirectionIndicators";
+import { MandatairesActivity } from "../../src/components-v2/DirectionMandatairesActivity";
 // import { MandatairesCapacity } from "../../src/components-v2/MandatairesCapacity";
-import { MandatairesDisponibility } from "../../src/components-v2/MandatairesDisponibility";
-import { MandatairesSubNavigation } from "../../src/components-v2/MandatairesSubNavigation";
+import { MandatairesDisponibility } from "../../src/components-v2/DirectionMandatairesDisponibility";
+import { MandatairesSubNavigation } from "../../src/components-v2/DirectionMandatairesSubNavigation";
+import { LayoutDirection } from "../../src/components-v2/Layout";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mandataires = () => {

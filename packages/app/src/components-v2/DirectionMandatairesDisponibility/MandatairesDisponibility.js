@@ -3,7 +3,7 @@ import { Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { FiltersContext } from "../Filters/context";
+import { FiltersContext } from "../DirectionFilters/context";
 import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 

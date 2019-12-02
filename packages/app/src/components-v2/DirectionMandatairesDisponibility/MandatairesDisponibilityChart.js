@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis } from "recharts";
 
-import { textStyle } from "../MandatairesActivity/style";
+import { textStyle } from "../DirectionMandatairesActivity/style";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
