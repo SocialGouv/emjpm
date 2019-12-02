@@ -48,15 +48,18 @@ export const RESIDENCE = [
 
 export const CIVILITY = ["F", "H"];
 
-// const validateHeaders = row => {
-//   Object.keys(row)
-//     .map((key, index) => {
-//       if (row[key] !== HEADERS[index]) {
-//         return `Le titre de la colonne '${index} n'est pas '${HEADERS[index]}'`;
-//       }
-//     })
-//     .filter(Boolean);
-// };
+const validateHeaders = row => {
+  return Object.keys(row)
+    .map(key => {
+      if (!HEADERS.includes(key)) {
+        return {
+          line: 0,
+          messages: [`Le titre de la colonne '${key}' n'est pas valide`]
+        };
+      }
+    })
+    .filter(Boolean);
+};
 
 const validateType = ({ type }) => {
   if (!type) {
@@ -148,6 +151,12 @@ const rowValidators = [
 ];
 
 export default data => {
+  const errors = validateHeaders(data[0]);
+
+  if (errors.length) {
+    return { errors, mesures: [] };
+  }
+
   const res = data.reduce(
     (state, row, index) => {
       const messages = rowValidators.map(validate => validate(row)).filter(Boolean);

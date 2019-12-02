@@ -11,13 +11,25 @@ const MandataireMesureImportErrors = props => {
     <Card sx={importErrorsWrapperStyle} overflow="hidden">
       <Heading3 mb={4}>Erreurs par ligne</Heading3>
       {errors.map(({ line, messages }, index) => (
-        <Box key={`error-${line}${index}`} mb={3}>
-          <Heading5 mb={1}>Ligne {line}</Heading5>
-          {messages.map(message => (
-            <Text width={1} color="error" key={message}>
-              - {message}
-            </Text>
-          ))}
+        <Box key={`error-${index}`} mb={3}>
+          {line ? (
+            <>
+              <Heading5 mb={1}>Ligne {line}</Heading5>
+              {messages.map(message => (
+                <Text width={1} color="error" key={message}>
+                  - {message}
+                </Text>
+              ))}
+            </>
+          ) : (
+            <>
+              {messages.map(message => (
+                <Text width={1} color="error" key={message}>
+                  - {message}
+                </Text>
+              ))}
+            </>
+          )}
         </Box>
       ))}
     </Card>
