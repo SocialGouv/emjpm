@@ -3,7 +3,7 @@ import { Card, CheckBox, Heading2, Heading4, Select, Spinner } from "@socialgouv
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { FiltersContext } from "../Filters/context";
+import { FiltersContext } from "../DirectionFilters/context";
 import { MandatairesCapacityChart } from "./MandatairesCapacityChart";
 import { MANDATAIRES_CAPACITY } from "./queries";
 
