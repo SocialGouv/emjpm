@@ -61,6 +61,7 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="/static/css/react-table.css" />
           <link rel="stylesheet" href="/static/css/leaflet/leaflet.css" />
           <link rel="stylesheet" href="/static/css/font.css" />
+          <link rel="stylesheet" href="/static/css/pagination.css" />
           {this.props.styleTags}
         </Head>
         <body>
