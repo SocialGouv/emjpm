@@ -31,10 +31,12 @@ tables:
       allow_aggregations: false
       columns:
       - id
-      - service_id
       - user_id
-      filter: {}
-    role: ti
+      - service_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: service
   - comment: null
     permission:
       allow_aggregations: false
@@ -42,10 +44,8 @@ tables:
       - id
       - user_id
       - service_id
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: service
+      filter: {}
+    role: ti
   table: service_admin
   update_permissions: []
 - array_relationships: []
@@ -190,20 +190,6 @@ tables:
       allow_aggregations: false
       columns:
       - code_postal
-      - created_at
-      - email
-      - etablissement
-      - id
-      - siret
-      - telephone
-      - ville
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - code_postal
       - etablissement
       - id
       - ville
@@ -261,6 +247,20 @@ tables:
       - ville
       filter: {}
     role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - etablissement
+      - email
+      - code_postal
+      - ville
+      - telephone
+      - created_at
+      - siret
+      filter: {}
+    role: ti
   table: tis
   update_permissions: []
 - array_relationships:
@@ -958,13 +958,13 @@ tables:
   is_enum: false
   object_relationships:
   - comment: null
-    name: service_antenne
-    using:
-      foreign_key_constraint_on: antenne_id
-  - comment: null
     name: ti
     using:
       foreign_key_constraint_on: ti_id
+  - comment: null
+    name: service_antenne
+    using:
+      foreign_key_constraint_on: antenne_id
   - comment: null
     name: mandataire
     using:
@@ -1446,6 +1446,12 @@ tables:
   update_permissions: []
 - array_relationships:
   - comment: null
+    name: mesures
+    using:
+      foreign_key_constraint_on:
+        column: antenne_id
+        table: mesures
+  - comment: null
     name: commentaires
     using:
       foreign_key_constraint_on:
@@ -1457,12 +1463,6 @@ tables:
       foreign_key_constraint_on:
         column: antenne_id
         table: user_antenne
-  - comment: null
-    name: mesures
-    using:
-      foreign_key_constraint_on:
-        column: antenne_id
-        table: mesures
   delete_permissions:
   - comment: null
     permission:
@@ -1656,9 +1656,44 @@ tables:
   insert_permissions:
   - comment: null
     permission:
-      check: {}
+      check:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
       columns:
       - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - ti_id
+      - type
+      - ville
+      set: {}
+    role: mandataire
+  - comment: null
+    permission:
+      check:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      columns:
+      - annee
+      - antenne_id
       - cabinet
       - civilite
       - code_postal
@@ -1681,8 +1716,9 @@ tables:
       - ti_id
       - type
       - ville
-      set: {}
-    role: ti
+      set:
+        service_id: x-hasura-Service-Id
+    role: service
   - comment: null
     permission:
       check:
@@ -1690,13 +1726,16 @@ tables:
           user_id:
             _eq: X-Hasura-User-Id
       columns:
+      - is_urgent
       - date_ouverture
       - extinction
+      - judgment_date
       - antenne_id
       - department_id
       - etablissement_id
       - id
       - mandataire_id
+      - service_id
       - ti_id
       - created_at
       - annee
@@ -1711,69 +1750,38 @@ tables:
       - status
       - type
       - ville
-      set: {}
-    role: mandataire
-  - comment: null
-    permission:
-      check:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
-      - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
-      - antenne_id
       set: {}
     role: prepose
   - comment: null
     permission:
-      check:
-        service_id:
-          _eq: X-Hasura-Service-Id
+      check: {}
       columns:
-      - annee
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
       - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
       - cabinet
       - civilite
       - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
       - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - mandataire_id
       - numero_dossier
       - numero_rg
       - reason_extinction
       - residence
-      - service_id
       - status
-      - ti_id
       - type
       - ville
-      set:
-        service_id: x-hasura-Service-Id
-    role: service
+      set: {}
+    role: ti
   is_enum: false
   object_relationships:
   - comment: null
@@ -1830,6 +1838,102 @@ tables:
       - type
       - ville
       filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - ti_id
+      - type
+      - ville
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: mandataire
+  - comment: null
+    permission:
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
         ti:
           magistrats:
             user_id:
@@ -1863,205 +1967,28 @@ tables:
       - ville
       filter: {}
     role: direction
-  - comment: null
-    permission:
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - ti_id
-      - type
-      - ville
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - ti_id
-      - type
-      - ville
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: mandataire
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - is_urgent
-      - judgment_date
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
-      filter:
-        service_id:
-          _eq: X-Hasura-Service-Id
-    role: service
   table: mesures
   update_permissions:
   - comment: null
     permission:
       columns:
-      - date_ouverture
-      - extinction
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      set: {}
-    role: mandataire
-  - comment: null
-    permission:
-      columns:
-      - date_ouverture
-      - extinction
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      set: {}
-    role: prepose
-  - comment: null
-    permission:
-      columns:
-      - date_ouverture
-      - extinction
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      filter:
-        service_id:
-          _eq: X-Hasura-Service-Id
-      set: {}
-    role: service
-  - comment: null
-    permission:
-      columns:
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
       - is_urgent
+      - date_ouverture
+      - extinction
       - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
       - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
       - numero_dossier
       - numero_rg
       - reason_extinction
@@ -2076,6 +2003,101 @@ tables:
               _eq: X-Hasura-User-Id
       set: {}
     role: ti
+  - comment: null
+    permission:
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      set: {}
+    role: service
+  - comment: null
+    permission:
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      set: {}
+    role: prepose
+  - comment: null
+    permission:
+      columns:
+      - date_ouverture
+      - extinction
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      set: {}
+    role: mandataire
 - array_relationships: []
   delete_permissions: []
   event_triggers: []

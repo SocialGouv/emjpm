@@ -1,5 +1,3 @@
-// import "bootstrap/dist/css/bootstrap.css";
-
 import { BoxWrapper, FlexWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Image } from "rebass";
