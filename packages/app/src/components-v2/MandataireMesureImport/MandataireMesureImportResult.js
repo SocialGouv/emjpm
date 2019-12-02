@@ -10,8 +10,6 @@ const MandataireMesureImportResult = props => {
   const { result, reset } = props;
   const { errors, mesures } = result;
 
-  console.log(errors);
-
   return (
     <>
       <Flex alignItems="center" p={7} sx={ServiceMesureImportResultStyle}>
