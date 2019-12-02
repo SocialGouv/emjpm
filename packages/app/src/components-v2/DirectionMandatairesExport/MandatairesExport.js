@@ -2,7 +2,7 @@ import { Button } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { ApolloConsumer } from "react-apollo";
 
-import { FiltersContext } from "../Filters/context";
+import { FiltersContext } from "../DirectionFilters/context";
 import { exportMandataires } from "./MandatairesExcel";
 import { MANDATAIRES } from "./queries";
 
