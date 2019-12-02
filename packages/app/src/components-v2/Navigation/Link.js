@@ -39,7 +39,9 @@ const ActiveLink = ({ router, isNestedLinks, ...props }) => {
   if (isNestedLinks) {
     isActive = router.pathname.startsWith(props.href);
   } else {
-    isActive = router.pathname === props.href;
+    isActive =
+      router.pathname === props.href ||
+      (router.pathname === "/direction/mandataires/list" && props.href === "/direction");
   }
 
   return (
