@@ -14,12 +14,16 @@ import { dropDownLinks } from "./dropDownLink";
 
 const navigationLinks = [
   {
-    title: "Retour à mon espace",
+    title: "Vos mesures",
     url: "/mandataires"
   },
   {
-    title: "Import de vos mesures",
+    title: "Importez vos mesures",
     url: "/mandataires/import-mesures"
+  },
+  {
+    title: "Vos informations",
+    url: "/mandataires/informations"
   }
 ];
 

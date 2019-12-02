@@ -18,8 +18,8 @@ const grayBox = {
   p: "5"
 };
 
-const MagistratEditInformations = props => {
-  const { cabinet, prenom, nom, email, id, type } = props;
+const MandatairesEditInformations = props => {
+  const { prenom, nom, email, id, type } = props;
   const [EditUser] = useMutation(EDIT_USER, {
     update() {
       Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
@@ -45,7 +45,6 @@ const MagistratEditInformations = props => {
                 EditUser({
                   refetchQueries: ["users"],
                   variables: {
-                    cabinet: values.cabinet,
                     email: values.email.toLowerCase(),
                     id: id,
                     nom: values.nom,
@@ -55,7 +54,6 @@ const MagistratEditInformations = props => {
                 setSubmitting(false);
               }}
               validationSchema={Yup.object().shape({
-                cabinet: Yup.string(),
                 email: Yup.string("Champ obligatoire")
                   .email("Le format de votre email n'est pas correct")
                   .required("Champ obligatoire"),
@@ -63,7 +61,6 @@ const MagistratEditInformations = props => {
                 prenom: Yup.string().required("Champ obligatoire")
               })}
               initialValues={{
-                cabinet: cabinet || "",
                 email: email || "",
                 nom: nom || "",
                 prenom: prenom || ""
@@ -73,17 +70,6 @@ const MagistratEditInformations = props => {
                 const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
                 return (
                   <form onSubmit={handleSubmit}>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.cabinet}
-                        id="cabinet"
-                        name="cabinet"
-                        hasError={errors.cabinet && touched.cabinet}
-                        onChange={handleChange}
-                        placeholder="Cabinet (optionnel)"
-                      />
-                      {errors.cabinet && touched.cabinet && <Text mt="1">{errors.cabinet}</Text>}
-                    </Box>
                     <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.prenom}
@@ -138,4 +124,4 @@ const MagistratEditInformations = props => {
   );
 };
 
-export { MagistratEditInformations };
+export { MandatairesEditInformations };
