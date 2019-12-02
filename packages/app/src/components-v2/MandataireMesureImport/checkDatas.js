@@ -137,6 +137,7 @@ const checkTribunalSiret = (row, errors) => {
 export default datas => {
   const errors = [];
   const mesures = [];
+
   datas.forEach((row, index) => {
     const errorMessages = [];
     checkHeaders(row, errorMessages);
