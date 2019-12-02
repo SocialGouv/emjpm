@@ -68,7 +68,7 @@ const ResetPassword = props => {
         <Box>
           <Heading4 mb="1">{`Nouveau mot de passe`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Pour changer votre mot de passe, saisissez remplissez les deux champs si dessous.`}
+            {`Pour changer votre mot de passe, saisissez les deux champs si dessous.`}
           </Text>
           {isMessageVisible && (
             <Box

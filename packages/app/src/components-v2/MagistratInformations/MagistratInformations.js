@@ -30,7 +30,7 @@ const MagistratInformations = props => {
         </Flex>
         <Flex mt="5">
           <Box>
-            <LinkButton href="/magistrats/edit-informations">Modifier mes informations</LinkButton>
+            <LinkButton href="/magistrats/edit-informations">Modifier vos informations</LinkButton>
           </Box>
         </Flex>
         <Flex mt="1">
