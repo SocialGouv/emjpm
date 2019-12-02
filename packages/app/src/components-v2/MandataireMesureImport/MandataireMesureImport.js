@@ -50,7 +50,7 @@ const MandataireMesureImport = () => {
                   Télécharger la note explicative (.pdf)
                 </Box>
               </DocumentLink>
-              <DocumentLink document="/static/docs/Template_import_mesure.xlsx">
+              <DocumentLink document="/static/docs/Template_import_mesures.xlsx">
                 <FileExcel size="86" width="100%" color="#008000" />
                 <Box textAlign="center" mt={2} color="#0067EA">
                   Télécharger la modèle Excel
