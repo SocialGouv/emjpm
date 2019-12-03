@@ -4,6 +4,10 @@ import { Box, Flex } from "rebass";
 import { FileExcel } from "styled-icons/fa-regular/FileExcel";
 import { FilePdf } from "styled-icons/fa-regular/FilePdf";
 
+import {
+  MANDATAIRE_MESURE_IMPORT_MANUAL,
+  MANDATAIRE_MESURE_IMPORT_TEMPLATE
+} from "../../constants/import";
 import { MandataireAddMesureImport } from "./MandataireAddMesureImport";
 
 const DocumentLink = props => {
@@ -44,13 +48,13 @@ const MandataireMesureImport = () => {
               {`Rapprochez-vous de votre éditeur de logiciel pour vous assurez qu'un export est compatible avec ce format.`}
             </Text>
             <Flex flexDirection="row" justifyContent="center" mt={2} mb={2}>
-              <DocumentLink document="/static/docs/Notice_d_utilisation_de_l_import.pdf">
+              <DocumentLink document={MANDATAIRE_MESURE_IMPORT_MANUAL}>
                 <FilePdf size="86" width="100%" color="#FF0000" />
                 <Box textAlign="center" mt={2} color="#0067EA">
                   Télécharger la note explicative (.pdf)
                 </Box>
               </DocumentLink>
-              <DocumentLink document="/static/docs/Template_import_mesures.xlsx">
+              <DocumentLink document={MANDATAIRE_MESURE_IMPORT_TEMPLATE}>
                 <FileExcel size="86" width="100%" color="#008000" />
                 <Box textAlign="center" mt={2} color="#0067EA">
                   Télécharger la modèle Excel
