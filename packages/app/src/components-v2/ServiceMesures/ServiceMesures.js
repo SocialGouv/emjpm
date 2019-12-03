@@ -17,7 +17,7 @@ import { formatMesureList } from "./utils";
 const RESULT_PER_PAGE = 20;
 
 const ServiceMesures = props => {
-  const { isOnlyWaiting, user_antennes } = props;
+  const { isOnlyWaiting, user_antennes, service_admins } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { mesureType, mesureStatus, antenne, debouncedSearchText } = useContext(FiltersContext);
 
@@ -52,7 +52,7 @@ const ServiceMesures = props => {
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
   const mesures = formatMesureList(data.mesures);
-
+  const [service] = service_admins;
   return (
     <MesureContextProvider>
       <Box sx={MesureListStyle}>
@@ -61,7 +61,7 @@ const ServiceMesures = props => {
             <Fragment>
               <MesureList
                 EditComponent={props => (
-                  <ServiceEditMesure user_antennes={user_antennes} {...props} />
+                  <ServiceEditMesure service={service} user_antennes={user_antennes} {...props} />
                 )}
                 CloseComponent={ServiceCloseMesure}
                 RemoveComponent={ServiceDeleteMesure}

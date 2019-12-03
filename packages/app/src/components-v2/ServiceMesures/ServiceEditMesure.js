@@ -28,9 +28,13 @@ export const ServiceEditMesure = props => {
     ville,
     user_antennes,
     tribunal,
-    tiId
+    tiId,
+    service: { service_id }
   } = props;
-  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
+
+  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
+    variables: { serviceId: service_id }
+  });
   const {
     data: departementsData,
     loading: departementsLoading,
