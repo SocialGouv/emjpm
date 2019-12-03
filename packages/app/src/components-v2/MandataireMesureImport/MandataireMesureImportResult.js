@@ -7,8 +7,10 @@ import { MandataireMesureImportErrors } from "./MandataireMesureImportErrors";
 import { ServiceMesureImportResultStyle } from "./style";
 
 const MandataireMesureImportResult = props => {
-  const { result, reset } = props;
-  const { errors, mesures } = result;
+  const {
+    result: { errors, mesures },
+    reset
+  } = props;
 
   return (
     <Fragment>
