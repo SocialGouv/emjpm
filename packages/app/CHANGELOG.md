@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.9.0](https://github.com/SocialGouv/emjpm/compare/v25.8.1...v25.9.0) (2019-12-03)
+
+
+### Bug Fixes
+
+* **forgot-password-link:** remove redirect add error ([#1030](https://github.com/SocialGouv/emjpm/issues/1030)) ([eef645f](https://github.com/SocialGouv/emjpm/commit/eef645f))
+* **pages:** fix pages redir and metadata ([#1034](https://github.com/SocialGouv/emjpm/issues/1034)) ([3c0731d](https://github.com/SocialGouv/emjpm/commit/3c0731d))
+* **service-add-tis:** add service tis only ([#1041](https://github.com/SocialGouv/emjpm/issues/1041)) ([ac94ddf](https://github.com/SocialGouv/emjpm/commit/ac94ddf))
+
+
+### Features
+
+* **change-password:** deep refactoring of change password ([#1014](https://github.com/SocialGouv/emjpm/issues/1014)) ([621d87d](https://github.com/SocialGouv/emjpm/commit/621d87d))
+* **choose-mandataire:** add lastlogin to choosemandataire ([#1018](https://github.com/SocialGouv/emjpm/issues/1018)) ([2b85da2](https://github.com/SocialGouv/emjpm/commit/2b85da2))
+* **disponibility:** update package to use component style ([#1023](https://github.com/SocialGouv/emjpm/issues/1023)) ([b20cae9](https://github.com/SocialGouv/emjpm/commit/b20cae9))
+* **forgot-password:** add forgot password and new login components and api ([#1019](https://github.com/SocialGouv/emjpm/issues/1019)) ([9b9fb7d](https://github.com/SocialGouv/emjpm/commit/9b9fb7d))
+* **hasura:** update text + export hasura metadata ([#1032](https://github.com/SocialGouv/emjpm/issues/1032)) ([cde934e](https://github.com/SocialGouv/emjpm/commit/cde934e))
+* **import:** handle excel ([#1020](https://github.com/SocialGouv/emjpm/issues/1020)) ([d01691c](https://github.com/SocialGouv/emjpm/commit/d01691c))
+* **import:** test in lower case to match data ([#1016](https://github.com/SocialGouv/emjpm/issues/1016)) ([24f3ce6](https://github.com/SocialGouv/emjpm/commit/24f3ce6))
+* **import-separator:** handle multiple separator ([#1015](https://github.com/SocialGouv/emjpm/issues/1015)) ([7b3aa99](https://github.com/SocialGouv/emjpm/commit/7b3aa99))
+* **mandataire-import:** handle code postal if undefined ([#1013](https://github.com/SocialGouv/emjpm/issues/1013)) ([156231d](https://github.com/SocialGouv/emjpm/commit/156231d))
+* **service:** remove dashboard ([#1044](https://github.com/SocialGouv/emjpm/issues/1044)) ([acb401f](https://github.com/SocialGouv/emjpm/commit/acb401f))
+* **service-dashboard:** add dashboard for services ([#1022](https://github.com/SocialGouv/emjpm/issues/1022)) ([0f6f24f](https://github.com/SocialGouv/emjpm/commit/0f6f24f))
+
+
+
+
+
 ## [25.8.1](https://github.com/SocialGouv/emjpm/compare/v25.8.0...v25.8.1) (2019-11-26)
 
 

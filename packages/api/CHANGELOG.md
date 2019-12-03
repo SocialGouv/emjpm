@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.9.0](https://github.com/SocialGouv/emjpm/compare/v25.8.1...v25.9.0) (2019-12-03)
+
+
+### Bug Fixes
+
+* **login-api:** remove length verification ([#1031](https://github.com/SocialGouv/emjpm/issues/1031)) ([22b1c9d](https://github.com/SocialGouv/emjpm/commit/22b1c9d))
+* **reset-password-email:** add email when reset password in account ([#1029](https://github.com/SocialGouv/emjpm/issues/1029)) ([874f402](https://github.com/SocialGouv/emjpm/commit/874f402))
+
+
+### Features
+
+* **change-password:** deep refactoring of change password ([#1014](https://github.com/SocialGouv/emjpm/issues/1014)) ([621d87d](https://github.com/SocialGouv/emjpm/commit/621d87d))
+* **forgot-password:** add forgot password and new login components and api ([#1019](https://github.com/SocialGouv/emjpm/issues/1019)) ([9b9fb7d](https://github.com/SocialGouv/emjpm/commit/9b9fb7d))
+* **import:** handle excel ([#1020](https://github.com/SocialGouv/emjpm/issues/1020)) ([d01691c](https://github.com/SocialGouv/emjpm/commit/d01691c))
+* **mandataire-import:** handle code postal if undefined ([#1013](https://github.com/SocialGouv/emjpm/issues/1013)) ([156231d](https://github.com/SocialGouv/emjpm/commit/156231d))
+
+
+
+
+
 ## [25.8.1](https://github.com/SocialGouv/emjpm/compare/v25.8.0...v25.8.1) (2019-11-26)
 
 **Note:** Version bump only for package @emjpm/api
