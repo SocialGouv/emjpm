@@ -52,22 +52,21 @@ const ServiceEditAntenne = props => {
       <Flex sx={ServiceEditAntenneStyle} {...props}>
         <Box width={[1, 2 / 5]} sx={grayBox}>
           <Box height="80px">
-            <Heading4>{`Information de l'antenne`}</Heading4>
+            <Heading4>{`Information de cette  antenne`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Information de l'antenne 22`}
+              {`Information de cette antenne`}
             </Text>
           </Box>
           <Box height="220px">
             <Heading4>{`Information du responsable`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              Ces informations nous permettent de vous présenter les profils de mandataires les plus
-              adaptés.
+              {`Ces informations permettent d'identifier la personne en charge de cette antenne.`}
             </Text>
           </Box>
           <Box height="200px">
             <Heading4>{`Contact de l'antenne`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              Pour identifier les mandataires disponibles les plus proches géographiquement.
+              {`Ces informations permettent de renseigner les coordonnées de cette antenne.`}
             </Text>
           </Box>
         </Box>
