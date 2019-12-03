@@ -26,9 +26,13 @@ const grayBox = {
 const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export const ServiceAddMesure = props => {
-  const { user_antennes } = props;
+  const { user_antennes, service_admins } = props;
+  const [service] = service_admins;
 
-  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
+  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
+    variables: { serviceId: service.service_id }
+  });
+
   const {
     data: departementsData,
     loading: departementsLoading,
