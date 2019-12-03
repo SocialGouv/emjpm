@@ -96,24 +96,17 @@ export const ServiceAddMesure = props => {
     <Card sx={cardStyle}>
       <Flex sx={ServiceCreateAntenneStyle} {...props}>
         <Box width={[1, 2 / 5]} sx={grayBox}>
-          <Box height="155px">
-            <Heading4>{`Information de l'antenne`}</Heading4>
+          <Box height="280px">
+            <Heading4>{`Informations générales`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Informations relatives à votre service et son antenne le cas écheant`}
+              {`Informations relatives à votre mesure`}
             </Text>
           </Box>
           <Box height="280px">
-            <Heading4>{`Informations de la mesure`}</Heading4>
+            <Heading4>{`Caractéristique de la mesure`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               Ces informations nous permettent de vous présenter les mesures de mandataires les plus
               adaptés.
-            </Text>
-          </Box>
-          <Box height="200px">
-            <Heading4>{`Informations complémentaires`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              Ces informations facultatives nous permettent de vous présenter les informations
-              relative à vos mesures de façon plus adaptés.
             </Text>
           </Box>
         </Box>
@@ -200,17 +193,28 @@ export const ServiceAddMesure = props => {
                 } = props;
                 return (
                   <form onSubmit={handleSubmit}>
-                    <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
-                      <Select
-                        id="antenne"
-                        name="antenne"
-                        placeholder="Antenne"
-                        value={values.antenne}
-                        hasError={errors.antenne_id && touched.antenne_id}
-                        onChange={option => setFieldValue("antenne", option)}
-                        options={antenneOptions}
+                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                      <Input
+                        value={values.numero_rg}
+                        id="numero_rg"
+                        name="numero_rg"
+                        hasError={errors.numero_rg && touched.numero_rg}
+                        onChange={handleChange}
+                        placeholder="Numéro RG"
                       />
-                      {errors.antenne_id && touched.antenne_id && <Text>{errors.antenne_id}</Text>}
+                      {errors.numero_rg && touched.numero_rg && <Text>{errors.numero_rg}</Text>}
+                    </Box>
+                    <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+                      <Select
+                        id="tribunal"
+                        name="tribunal"
+                        placeholder="Tribunal"
+                        value={values.tribunal}
+                        options={tribunalList}
+                        hasError={errors.tribunal && touched.tribunal}
+                        onChange={option => setFieldValue("tribunal", option)}
+                      />
+                      {errors.tribunal && touched.tribunal && <Text>{errors.tribunal}</Text>}
                     </Box>
                     <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
@@ -224,6 +228,18 @@ export const ServiceAddMesure = props => {
                       {errors.numero_dossier && touched.numero_dossier && (
                         <Text>{errors.numero_dossier}</Text>
                       )}
+                    </Box>
+                    <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
+                      <Select
+                        id="antenne"
+                        name="antenne"
+                        placeholder="Antenne"
+                        value={values.antenne}
+                        hasError={errors.antenne_id && touched.antenne_id}
+                        onChange={option => setFieldValue("antenne", option)}
+                        options={antenneOptions}
+                      />
+                      {errors.antenne_id && touched.antenne_id && <Text>{errors.antenne_id}</Text>}
                     </Box>
                     <Box mb="2" mt="5">
                       <Input
@@ -251,30 +267,20 @@ export const ServiceAddMesure = props => {
                       />
                       {errors.type && touched.type && <Text>{errors.type}</Text>}
                     </Box>
-                    <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
+                    <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
                       <Select
-                        id="residence"
-                        name="residence"
-                        placeholder="Type de residence"
-                        value={values.residence}
-                        hasError={errors.residence && touched.residence}
-                        onChange={option => setFieldValue("residence", option)}
-                        options={RESIDENCE}
+                        id="civilite"
+                        name="civilite"
+                        placeholder="Civilité"
+                        value={values.civilite}
+                        hasError={errors.civilite && touched.civilite}
+                        onChange={option => setFieldValue("civilite", option)}
+                        options={CIVILITY}
                       />
-                      {errors.residence && touched.residence && <Text>{errors.residence}</Text>}
+                      {errors.civilite && touched.civilite && <Text>{errors.civilite}</Text>}
                     </Box>
+
                     <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.numero_rg}
-                        id="numero_rg"
-                        name="numero_rg"
-                        hasError={errors.numero_rg && touched.numero_rg}
-                        onChange={handleChange}
-                        placeholder="Numéro RG"
-                      />
-                      {errors.numero_rg && touched.numero_rg && <Text>{errors.numero_rg}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mt="5" mb="2">
                       <Input
                         value={values.annee}
                         id="annee"
@@ -286,6 +292,19 @@ export const ServiceAddMesure = props => {
                       />
                       {errors.annee && touched.annee && <Text>{errors.annee}</Text>}
                     </Box>
+                    <Box sx={{ position: "relative", zIndex: "90" }} mt="5" mb="2">
+                      <Select
+                        id="residence"
+                        name="residence"
+                        placeholder="Type de residence"
+                        value={values.residence}
+                        hasError={errors.residence && touched.residence}
+                        onChange={option => setFieldValue("residence", option)}
+                        options={RESIDENCE}
+                      />
+                      {errors.residence && touched.residence && <Text>{errors.residence}</Text>}
+                    </Box>
+
                     <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                       <Input
                         value={values.code_postal}
@@ -310,30 +329,7 @@ export const ServiceAddMesure = props => {
                       />
                       {errors.ville && touched.ville && <Text>{errors.ville}</Text>}
                     </Box>
-                    <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
-                      <Select
-                        id="civilite"
-                        name="civilite"
-                        placeholder="Civilité"
-                        value={values.civilite}
-                        hasError={errors.civilite && touched.civilite}
-                        onChange={option => setFieldValue("civilite", option)}
-                        options={CIVILITY}
-                      />
-                      {errors.civilite && touched.civilite && <Text>{errors.civilite}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
-                      <Select
-                        id="tribunal"
-                        name="tribunal"
-                        placeholder="Tribunal"
-                        value={values.tribunal}
-                        options={tribunalList}
-                        hasError={errors.tribunal && touched.tribunal}
-                        onChange={option => setFieldValue("tribunal", option)}
-                      />
-                      {errors.tribunal && touched.tribunal && <Text>{errors.tribunal}</Text>}
-                    </Box>
+
                     <Flex justifyContent="flex-end">
                       <Box>
                         <Button mr="2" variant="outline">
