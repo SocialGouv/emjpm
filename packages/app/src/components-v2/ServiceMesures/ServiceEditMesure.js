@@ -167,6 +167,38 @@ export const ServiceEditMesure = props => {
             } = props;
             return (
               <form onSubmit={handleSubmit}>
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                  <Input
+                    value={values.numero_rg}
+                    id="numero_rg"
+                    name="numero_rg"
+                    hasError={errors.numero_rg && touched.numero_rg}
+                    onChange={handleChange}
+                    placeholder="numero rg"
+                  />
+                </Box>
+                <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+                  <Select
+                    id="tribunal"
+                    name="tribunal"
+                    placeholder="Tribunal"
+                    value={values.tribunal}
+                    options={tribunalList}
+                    hasError={errors.tribunal && touched.tribunal}
+                    onChange={option => setFieldValue("tribunal", option)}
+                  />
+                  {errors.tribunal && touched.tribunal && <Text>{errors.tribunal}</Text>}
+                </Box>
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                  <Input
+                    value={values.numero_dossier}
+                    id="numero_dossier"
+                    name="numero_dossier"
+                    hasError={errors.numero_dossier && touched.numero_dossier}
+                    onChange={handleChange}
+                    placeholder="numero de dossier"
+                  />
+                </Box>
                 <Box mb="2">
                   <Input
                     value={values.date_ouverture}
@@ -178,6 +210,19 @@ export const ServiceEditMesure = props => {
                     placeholder="Date d'ouverture"
                   />
                 </Box>
+                {user_antennes.length >= 2 && (
+                  <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+                    <Select
+                      id="antenne_id"
+                      name="antenne_id"
+                      placeholder="Antenne"
+                      value={values.antenne_id}
+                      hasError={errors.antenne_id && touched.antenne_id}
+                      onChange={option => setFieldValue("antenne_id", option)}
+                      options={ANTENNE_OPTIONS}
+                    />
+                  </Box>
+                )}
                 <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
                   <Select
                     id="type"
@@ -187,6 +232,27 @@ export const ServiceEditMesure = props => {
                     hasError={errors.type && touched.type}
                     onChange={option => setFieldValue("type", option)}
                     options={MESURE_TYPE_LABEL_VALUE}
+                  />
+                </Box>
+                <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+                  <Select
+                    id="civilite"
+                    name="civilite"
+                    placeholder="civilité"
+                    value={values.civilite}
+                    hasError={errors.civilite && touched.civilite}
+                    onChange={option => setFieldValue("civilite", option)}
+                    options={CIVILITY}
+                  />
+                </Box>
+                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                  <Input
+                    value={values.annee}
+                    id="annee"
+                    name="annee"
+                    hasError={errors.annee && touched.annee}
+                    onChange={handleChange}
+                    placeholder="année"
                   />
                 </Box>
                 <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
@@ -221,72 +287,7 @@ export const ServiceEditMesure = props => {
                     placeholder="ville"
                   />
                 </Box>
-                <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
-                  <Select
-                    id="civilite"
-                    name="civilite"
-                    placeholder="civilité"
-                    value={values.civilite}
-                    hasError={errors.civilite && touched.civilite}
-                    onChange={option => setFieldValue("civilite", option)}
-                    options={CIVILITY}
-                  />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                  <Input
-                    value={values.annee}
-                    id="annee"
-                    name="annee"
-                    hasError={errors.annee && touched.annee}
-                    onChange={handleChange}
-                    placeholder="année"
-                  />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                  <Input
-                    value={values.numero_dossier}
-                    id="numero_dossier"
-                    name="numero_dossier"
-                    hasError={errors.numero_dossier && touched.numero_dossier}
-                    onChange={handleChange}
-                    placeholder="numero de dossier"
-                  />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                  <Input
-                    value={values.numero_rg}
-                    id="numero_rg"
-                    name="numero_rg"
-                    hasError={errors.numero_rg && touched.numero_rg}
-                    onChange={handleChange}
-                    placeholder="numero rg"
-                  />
-                </Box>
-                {user_antennes.length >= 2 && (
-                  <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
-                    <Select
-                      id="antenne_id"
-                      name="antenne_id"
-                      placeholder="Antenne"
-                      value={values.antenne_id}
-                      hasError={errors.antenne_id && touched.antenne_id}
-                      onChange={option => setFieldValue("antenne_id", option)}
-                      options={ANTENNE_OPTIONS}
-                    />
-                  </Box>
-                )}
-                <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
-                  <Select
-                    id="tribunal"
-                    name="tribunal"
-                    placeholder="Tribunal"
-                    value={values.tribunal}
-                    options={tribunalList}
-                    hasError={errors.tribunal && touched.tribunal}
-                    onChange={option => setFieldValue("tribunal", option)}
-                  />
-                  {errors.tribunal && touched.tribunal && <Text>{errors.tribunal}</Text>}
-                </Box>
+
                 <Flex justifyContent="flex-end">
                   <Box>
                     <Button
