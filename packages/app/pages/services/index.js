@@ -1,46 +1,40 @@
-import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
 
+import { LinkButton } from "../../src/components-v2/Commons";
 import { LayoutServices } from "../../src/components-v2/Layout";
-import { ServiceAntennes } from "../../src/components-v2/ServiceAntennes";
-import { PreferencesPanel } from "../../src/components-v2/ServiceSidebar";
+import { ServiceMesures } from "../../src/components-v2/ServiceMesures";
+import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
+import { FiltersContextProvider } from "../../src/components-v2/ServicesFilters/context";
 import { UserInformations } from "../../src/components-v2/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
-const Informations = () => {
+const Mesures = () => {
   return (
-    <LayoutServices>
-      <BoxWrapper mt={6} px="0">
-        <Flex
-          sx={{
-            flexWrap: "wrap"
-          }}
-        >
-          <Box
+    <FiltersContextProvider>
+      <LayoutServices>
+        <BoxWrapper mt={6} px="1">
+          <Flex flexDirection="row" justifyContent="space-between">
+            <Heading1>Toutes vos mesures</Heading1>
+            <Box>
+              <LinkButton href="/services/add-mesures">Ajouter une mesure</LinkButton>
+            </Box>
+          </Flex>
+
+          <UserInformations Component={props => <ServicesFilters {...props} />} />
+          <Flex
             sx={{
-              flexBasis: 320,
-              flexGrow: 1,
-              maxWidth: "50%",
-              p: 1
+              flexWrap: "wrap",
+              mt: "2"
             }}
           >
-            <Heading2>Mesures souhaitées par votre service</Heading2>
-            <UserInformations
-              Component={props => <PreferencesPanel isDescriptionHidden={true} {...props} mt="3" />}
-            />
-          </Box>
-        </Flex>
-        <Box
-          sx={{
-            p: 1
-          }}
-        >
-          <ServiceAntennes isAntenneCreationHidden="true" mt="1" />
-        </Box>
-      </BoxWrapper>
-    </LayoutServices>
+            <UserInformations Component={props => <ServiceMesures {...props} />} />
+          </Flex>
+        </BoxWrapper>
+      </LayoutServices>
+    </FiltersContextProvider>
   );
 };
 
-export default withAuthSync(Informations);
+export default withAuthSync(Mesures);
