@@ -2,7 +2,7 @@ import { Input } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box } from "rebass";
 
-const MandataireMesureImportFilePicker = props => {
+const MandataireMesureImportFilepicker = props => {
   return (
     <Box mb="2">
       <Input
@@ -19,4 +19,4 @@ const MandataireMesureImportFilePicker = props => {
   );
 };
 
-export default MandataireMesureImportFilePicker;
+export { MandataireMesureImportFilepicker };

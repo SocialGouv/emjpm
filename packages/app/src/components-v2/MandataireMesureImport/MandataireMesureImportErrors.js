@@ -36,4 +36,4 @@ const MandataireMesureImportErrors = props => {
   );
 };
 
-export default MandataireMesureImportErrors;
+export { MandataireMesureImportErrors };

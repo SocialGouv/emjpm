@@ -2,8 +2,8 @@ import { useMutation } from "@apollo/react-hooks";
 import React, { useState } from "react";
 
 import { csvToJson, validateImportData, xlsToJson } from "../../util/import/index";
-import MandataireMesureImportFilepicker from "./MandataireMesureImportFilepicker";
-import MandataireMesureImportResult from "./MandataireMesureImportResult";
+import { MandataireMesureImportFilepicker } from "./MandataireMesureImportFilepicker";
+import { MandataireMesureImportResult } from "./MandataireMesureImportResult";
 import { ADD_IMPORT } from "./mutations";
 
 export const MandataireAddMesureImport = () => {

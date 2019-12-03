@@ -3,7 +3,7 @@ import { Text } from "@socialgouv/emjpm-ui-core/dist/Type";
 import React from "react";
 import { Flex } from "rebass";
 
-import MandataireMesureImportErrors from "./MandataireMesureImportErrors";
+import { MandataireMesureImportErrors } from "./MandataireMesureImportErrors";
 import { ServiceMesureImportResultStyle } from "./style";
 
 const MandataireMesureImportResult = props => {
@@ -33,4 +33,4 @@ const MandataireMesureImportResult = props => {
   );
 };
 
-export default MandataireMesureImportResult;
+export { MandataireMesureImportResult };
