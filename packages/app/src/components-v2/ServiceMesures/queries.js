@@ -21,8 +21,8 @@ export const MESURE = gql`
 `;
 
 export const SERVICE_TRIBUNAL = gql`
-  query ServiceTribunal {
-    service_tis {
+  query ServiceTribunal($serviceId: Int!) {
+    service_tis(where: { service_id: { _eq: $serviceId } }) {
       ti {
         etablissement
         id
