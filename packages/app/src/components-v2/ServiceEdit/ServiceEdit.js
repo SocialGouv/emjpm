@@ -63,14 +63,13 @@ const ServiceEdit = props => {
           <Box height="220px">
             <Heading4>{`Information du responsable`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              Ces informations nous permettent de vous présenter les profils de mandataires les plus
-              adaptés.
+              {`Ces informations permettent d'identifier la personne en charge de ce service.`}
             </Text>
           </Box>
           <Box height="200px">
             <Heading4>{`Contact du service`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              Pour identifier les mandataires disponibles les plus proches géographiquement.
+              {`Ces informations permettent de renseigner les coordonnées de ce service.`}
             </Text>
           </Box>
         </Box>

@@ -13,7 +13,7 @@ const AddAntennes = () => {
   return (
     <LayoutServices>
       <BoxWrapper mt={6}>
-        <Heading1 mx="1">Créer une antenne pour votre service</Heading1>
+        <Heading1 mx="1">{`Modification de l'antenne`}</Heading1>
         <UserInformations
           Component={props => <ServiceEditAntenne {...props} currentAntenne={antenne_id} mt="3" />}
         />
