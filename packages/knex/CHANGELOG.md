@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.9.0](https://github.com/SocialGouv/emjpm/compare/v25.8.1...v25.9.0) (2019-12-03)
+
+
+### Features
+
+* **mandataire-import:** handle code postal if undefined ([#1013](https://github.com/SocialGouv/emjpm/issues/1013)) ([156231d](https://github.com/SocialGouv/emjpm/commit/156231d))
+
+
+
+
+
 ## [25.8.1](https://github.com/SocialGouv/emjpm/compare/v25.8.0...v25.8.1) (2019-11-26)
 
 **Note:** Version bump only for package @emjpm/knex
