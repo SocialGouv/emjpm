@@ -1,5 +1,5 @@
 import { Card, Heading3, Text } from "@socialgouv/emjpm-ui-core";
-import React from "react";
+import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 import { FileExcel } from "styled-icons/fa-regular/FileExcel";
 import { FilePdf } from "styled-icons/fa-regular/FilePdf";
@@ -36,7 +36,7 @@ const DocumentLink = props => {
 
 const MandataireMesureImport = () => {
   return (
-    <>
+    <Fragment>
       <Card mb="5">
         <Flex flexDirection="column">
           <Box mb={2}>
@@ -74,7 +74,7 @@ const MandataireMesureImport = () => {
           </Box>
         </Flex>
       </Card>
-    </>
+    </Fragment>
   );
 };
 

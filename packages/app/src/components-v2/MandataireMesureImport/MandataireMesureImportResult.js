@@ -1,6 +1,6 @@
 import { Button, Heading2 } from "@socialgouv/emjpm-ui-core";
 import { Text } from "@socialgouv/emjpm-ui-core/dist/Type";
-import React from "react";
+import React, { Fragment } from "react";
 import { Flex } from "rebass";
 
 import { MandataireMesureImportErrors } from "./MandataireMesureImportErrors";
@@ -11,7 +11,7 @@ const MandataireMesureImportResult = props => {
   const { errors, mesures } = result;
 
   return (
-    <>
+    <Fragment>
       <Flex alignItems="center" p={7} sx={ServiceMesureImportResultStyle}>
         <Flex flexDirection="column">
           <Heading2>{`Résultat de l'import`}</Heading2>
@@ -29,7 +29,7 @@ const MandataireMesureImportResult = props => {
         </Button>
       </Flex>
       {errors && <MandataireMesureImportErrors errors={errors} />}
-    </>
+    </Fragment>
   );
 };
 
