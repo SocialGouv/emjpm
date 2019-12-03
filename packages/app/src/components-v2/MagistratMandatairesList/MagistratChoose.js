@@ -24,7 +24,7 @@ export const MagistratChoose = props => {
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">
-          <Heading3>Créer une mesure</Heading3>
+          <Heading3>Réserver une mesure</Heading3>
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {

@@ -60,18 +60,6 @@ const ServicesInformations = props => {
             <Text sx={innerTextStyle}>{antenne.address_zip_code}</Text>
             <Text sx={innerTextStyle}>{antenne.address_city}</Text>
           </Box>
-          <Box sx={boxStyle}>
-            <Heading5 mt="5" mb="3">
-              Tribunaux d’instance
-            </Heading5>
-            {antenne.service.service_tis.map(ti => {
-              return (
-                <Text key={ti.ti.id} sx={topTextStyle}>
-                  {ti.ti.etablissement}
-                </Text>
-              );
-            })}
-          </Box>
         </Flex>
         <Flex mt="5">
           <AntenneEditLinkButton href={antenne_id}>
