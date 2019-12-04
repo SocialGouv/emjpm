@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.10.1](https://github.com/SocialGouv/emjpm/compare/v25.10.0...v25.10.1) (2019-12-04)
+
+
+### Bug Fixes
+
+* **login-redirect:** remove useless style remove error push ([#1054](https://github.com/SocialGouv/emjpm/issues/1054)) ([a1c3f95](https://github.com/SocialGouv/emjpm/commit/a1c3f95))
+
+
+
+
+
 # [25.10.0](https://github.com/SocialGouv/emjpm/compare/v25.9.2...v25.10.0) (2019-12-04)
 
 
