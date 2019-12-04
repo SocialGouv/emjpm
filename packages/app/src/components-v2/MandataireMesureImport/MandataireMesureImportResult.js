@@ -30,7 +30,7 @@ const MandataireMesureImportResult = props => {
           Sélectionner un autre fichier
         </Button>
       </Flex>
-      {errors && <MandataireMesureImportErrors errors={errors} />}
+      {errors.length > 0 && <MandataireMesureImportErrors errors={errors} />}
     </Fragment>
   );
 };
