@@ -9,7 +9,7 @@ import { logout } from "../../util/auth";
 import { Link } from "../Commons";
 import { Footer } from "../Footer";
 import { Navigation } from "../Navigation";
-import { Sidebar } from "../Sidebar";
+import { ServiceInformationsSidebar } from "../ServiceInformationsSidebar";
 import { UserInformations } from "../UserInformations";
 import { dropDownLinks } from "./dropDownLink";
 
@@ -47,7 +47,7 @@ const LayoutServices = props => {
           }
         `}
       />
-      <Box sx={{ mr: "250px", position: "relative", "z-index": "1000" }}>
+      <Box sx={{ mr: "300px", position: "relative", "z-index": "1000" }}>
         <Box sx={{ bg: "white" }}>
           <UserInformations
             Component={props => {
@@ -68,7 +68,7 @@ const LayoutServices = props => {
             </BoxWrapper>
           )}
         </Box>
-        {children}
+        <Box px="1">{children}</Box>
         <Box bg="cardPrimary">
           <BoxWrapper px="1">
             <Footer />
@@ -80,15 +80,16 @@ const LayoutServices = props => {
           bg: "white",
           borderLeft: "2px solid #E3E6EA",
           height: "100vh",
+          overflow: "scroll",
           position: "fixed",
           right: 0,
           top: 0,
-          width: "250px"
+          width: "300px"
         }}
       >
         <UserInformations
           Component={props => {
-            return <Sidebar {...props} />;
+            return <ServiceInformationsSidebar {...props} />;
           }}
         />
       </Box>
