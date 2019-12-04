@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.10.0](https://github.com/SocialGouv/emjpm/compare/v25.9.2...v25.10.0) (2019-12-04)
+
+
+### Features
+
+* **mandataire-import:** handle date format with excel ([#1055](https://github.com/SocialGouv/emjpm/issues/1055)) ([8175ac6](https://github.com/SocialGouv/emjpm/commit/8175ac6))
+
+
+
+
+
 ## [25.9.2](https://github.com/SocialGouv/emjpm/compare/v25.9.1...v25.9.2) (2019-12-04)
 
 **Note:** Version bump only for package @emjpm/app
