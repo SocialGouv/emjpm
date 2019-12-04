@@ -32,17 +32,6 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <style>{`
-          html {
-            font-size: 14px;
-          }
-          html,
-          body,
-          div#__next {
-            background:white;
-            height: 100%;
-          }
-          `}</style>
           {/* TODO : Remove me in favor of self hosted */}
           <link
             href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Quicksand:400,700&display=swap"
