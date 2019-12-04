@@ -63,9 +63,6 @@ include:
     #
     - envsubst < ./.k8s/quota.yml > ./quota.yml
     - kubectl apply -f ./quota.yml -n ${K8S_NAMESPACE}
-    # Remove the default- quota
-    - kubectl get resourcequota -n ${K8S_NAMESPACE}
-    - kubectl delete $(kubectl get -n ${K8S_NAMESPACE} resourcequota --output=name | grep default-)
     #
     # Create secrets
     - export APP_URL=$(echo $FRONTEND_URL | base64)
