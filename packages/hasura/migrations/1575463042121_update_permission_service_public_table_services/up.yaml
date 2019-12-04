@@ -1,0 +1,35 @@
+- args:
+    role: service
+    table:
+      name: services
+      schema: public
+  type: drop_update_permission
+- args:
+    permission:
+      columns:
+      - adresse
+      - code_postal
+      - department_id
+      - dispo_max
+      - email
+      - etablissement
+      - id
+      - information
+      - mesures_awaiting
+      - mesures_in_progress
+      - nom
+      - prenom
+      - telephone
+      - ville
+      filter:
+        id:
+          _eq: X-Hasura-Service-Id
+      localPresets:
+      - key: ""
+        value: ""
+      set: {}
+    role: service
+    table:
+      name: services
+      schema: public
+  type: create_update_permission
