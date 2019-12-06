@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.11.0](https://github.com/SocialGouv/emjpm/compare/v25.10.1...v25.11.0) (2019-12-06)
+
+
+### Bug Fixes
+
+* **auth:** fix auth disconnect and direction base url ([#1071](https://github.com/SocialGouv/emjpm/issues/1071)) ([fc2de32](https://github.com/SocialGouv/emjpm/commit/fc2de32))
+
+
+
+
+
 ## [25.10.1](https://github.com/SocialGouv/emjpm/compare/v25.10.0...v25.10.1) (2019-12-04)
 
 **Note:** Version bump only for package @emjpm/api
