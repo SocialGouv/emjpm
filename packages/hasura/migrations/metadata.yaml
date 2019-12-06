@@ -575,6 +575,69 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: mandataire
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
       - id
       - username
       - password
@@ -636,69 +699,6 @@ tables:
       - username
       filter: {}
     role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-    role: mandataire
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-    role: prepose
   table: users
   update_permissions:
   - comment: null
@@ -1293,14 +1293,17 @@ tables:
     permission:
       columns:
       - adresse
+      - code_postal
       - department_id
       - dispo_max
       - email
+      - information
       - mesures_awaiting
       - mesures_in_progress
       - nom
       - prenom
       - telephone
+      - ville
       filter:
         id:
           _eq: X-Hasura-Service-Id
