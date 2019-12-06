@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Card, Text } from "@socialgouv/emjpm-ui-core";
+import Link from "next/link";
 import React, { useCallback } from "react";
 import { Box } from "rebass";
 
@@ -59,9 +60,14 @@ const AdminUserInformations = props => {
       <Box mb={2}>
         <AdminUserDetails user={user} />
       </Box>
-      <Button bg={activateButtonStyle} onClick={toggleActivation}>
+      <Button mr={2} bg={activateButtonStyle} onClick={toggleActivation}>
         {activateButtonText}
       </Button>
+      <Link href={`/admin/users/${id}/import`}>
+        <a>
+          <Button bg="primary">Import</Button>
+        </a>
+      </Link>
     </Card>
   );
 };
