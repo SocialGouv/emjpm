@@ -14,9 +14,9 @@ const description = isImportant => {
   return {
     color: isImportant ? "white" : "mediumGray",
     fontFamily: "body",
-    fontSize: "11px",
+    fontSize: "12px",
     fontWeight: "600",
-    mb: "2px"
+    mb: "4px"
   };
 };
 

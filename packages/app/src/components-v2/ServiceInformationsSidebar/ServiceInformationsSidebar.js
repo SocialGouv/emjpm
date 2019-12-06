@@ -1,9 +1,8 @@
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import { BuildingHouse, Buildings } from "styled-icons/boxicons-solid";
-import { Information, LogoutCircleR } from "styled-icons/remix-line";
+import { Information } from "styled-icons/remix-line";
 
-import { logout } from "../../util/auth";
 import { CardStyle, description, icon, partTitle, SidebarStyle, title } from "./style";
 
 const ServiceInformationsSidebar = props => {
@@ -12,19 +11,9 @@ const ServiceInformationsSidebar = props => {
   const { dispo_max, mesures_in_progress, mesures_awaiting, etablissement } = serviceAdmin.service;
   return (
     <Box sx={SidebarStyle} {...props}>
-      <Box sx={{ cursor: "pointer" }} onClick={logout}>
-        <Flex alignItems="center" justifyContent="space-between" mb="3">
-          <Box>
-            <Text sx={partTitle}>Se déconnecter</Text>
-          </Box>
-          <Box color="mediumGray">
-            <LogoutCircleR size="16" />
-          </Box>
-        </Flex>
-      </Box>
       <Flex alignItems="center" justifyContent="space-between" mb="3">
         <Box>
-          <Text sx={partTitle}>Informations de votre service</Text>
+          <Text sx={partTitle}>Informations</Text>
         </Box>
         <Box color="mediumGray">
           <Information size="16" />
