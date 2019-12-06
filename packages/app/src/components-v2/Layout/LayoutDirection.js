@@ -39,6 +39,7 @@ const LayoutDirection = props => {
           body,
           html,
           div#__next {
+            font-size: 14px;
             font-family: "Open Sans", sans-serif;
             background: #f2f5f9;
             -webkit-font-smoothing: antialiased;
