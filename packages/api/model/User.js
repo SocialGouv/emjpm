@@ -26,7 +26,7 @@ const redirs = {
   service: "/services",
   ti: "/magistrats",
   admin: "/admin",
-  direction: "/direction/mandataires",
+  direction: "/direction",
   default: "/"
 };
 
