@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.11.0](https://github.com/SocialGouv/emjpm/compare/v25.10.1...v25.11.0) (2019-12-06)
+
+
+### Bug Fixes
+
+* **auth:** fix auth disconnect and direction base url ([#1071](https://github.com/SocialGouv/emjpm/issues/1071)) ([fc2de32](https://github.com/SocialGouv/emjpm/commit/fc2de32))
+* **auth:** update next cookie for next 9 ([#1072](https://github.com/SocialGouv/emjpm/issues/1072)) ([ade8581](https://github.com/SocialGouv/emjpm/commit/ade8581))
+* **hasura-permission:** update metadata ([#1070](https://github.com/SocialGouv/emjpm/issues/1070)) ([5a6a53b](https://github.com/SocialGouv/emjpm/commit/5a6a53b))
+
+
+### Features
+
+* **service-sidebar:** add new layout and sidebar component ([#1051](https://github.com/SocialGouv/emjpm/issues/1051)) ([7b2cbb2](https://github.com/SocialGouv/emjpm/commit/7b2cbb2))
+
+
+
+
+
 ## [25.10.1](https://github.com/SocialGouv/emjpm/compare/v25.10.0...v25.10.1) (2019-12-04)
 
 
