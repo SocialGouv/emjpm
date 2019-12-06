@@ -31,6 +31,13 @@ export const GET_SERVICE_USERS = gql`
         }
         id
         service_id
+        user_id
+        service {
+          mesures_in_progress
+          mesures_awaiting
+          dispo_max
+          etablissement
+        }
       }
       user_antennes {
         service_antenne {
