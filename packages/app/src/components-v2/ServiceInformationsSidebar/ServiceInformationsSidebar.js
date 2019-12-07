@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex, Text } from "rebass";
+import { InfoCircle } from "styled-icons/boxicons-regular";
 import { BuildingHouse, Buildings } from "styled-icons/boxicons-solid";
-import { Information } from "styled-icons/remix-line";
 
 import { CardStyle, description, icon, partTitle, SidebarStyle, title } from "./style";
 
@@ -16,7 +16,7 @@ const ServiceInformationsSidebar = props => {
           <Text sx={partTitle}>Informations</Text>
         </Box>
         <Box color="mediumGray">
-          <Information size="16" />
+          <InfoCircle size="16" />
         </Box>
       </Flex>
       <Flex sx={CardStyle(true)} alignItems="center" mb="2">
