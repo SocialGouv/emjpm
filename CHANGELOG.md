@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.11.2](https://github.com/SocialGouv/emjpm/compare/v25.11.1...v25.11.2) (2019-12-08)
+
+
+### Bug Fixes
+
+* **direction:** mandataires page redirection ([#1074](https://github.com/SocialGouv/emjpm/issues/1074)) ([0593127](https://github.com/SocialGouv/emjpm/commit/0593127))
+
+
+
+
+
 ## [25.11.1](https://github.com/SocialGouv/emjpm/compare/v25.11.0...v25.11.1) (2019-12-07)
 
 **Note:** Version bump only for package emjpm
