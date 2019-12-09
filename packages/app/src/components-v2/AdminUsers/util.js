@@ -18,8 +18,7 @@ const directionDetail = () => {
   return { type: "direction", values: [] };
 };
 
-const getAdminUserDetails = props => {
-  const { user } = props;
+export const getAdminUserDetails = user => {
   const { type } = user;
 
   if (type === "service") {
@@ -32,5 +31,3 @@ const getAdminUserDetails = props => {
     return directionDetail(user);
   }
 };
-
-export { getAdminUserDetails };
