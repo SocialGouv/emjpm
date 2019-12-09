@@ -14,7 +14,7 @@ const Import = props => {
     <LayoutAdmin>
       <BoxWrapper mt={6} px={1}>
         <Heading1 mb={2}>
-          <Link href={`/users/${userId}`}>
+          <Link href={`/admin/users/${userId}`}>
             <a>Utilisateur #{userId} </a>
           </Link>
           / Import

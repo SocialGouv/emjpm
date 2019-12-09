@@ -1,12 +1,11 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Card, Text } from "@socialgouv/emjpm-ui-core";
-import Link from "next/link";
 import React, { useCallback } from "react";
-import { Box } from "rebass";
+import { Box, Flex } from "rebass";
 
-import { AdminUserDetails } from "./AdminUserDetails";
 import { ACTIVATE_USER } from "./mutations";
 import { USER } from "./queries";
+import { getAdminUserDetails } from "./util";
 
 const AdminUserInformations = props => {
   const { userId } = props;
@@ -34,40 +33,66 @@ const AdminUserInformations = props => {
 
   const [user] = data.users;
   const { active, id, type, nom, prenom, email } = user;
+  const details = getAdminUserDetails(user);
   const activateButtonStyle = active ? "warning" : "primary";
   const activateButtonText = active ? "Bloquer" : "Activer";
 
   return (
-    <Card mb={2}>
-      <Box mb={2}>
-        <Text color="textSecondary">ID</Text>
-        <Text>{id}</Text>
-      </Box>
-      <Box mb={2}>
-        <Text color="textSecondary">Type</Text>
-        <Text>{type}</Text>
-      </Box>
-      <Box mb={2}>
-        <Text color="textSecondary">Email</Text>
-        <Text>{email}</Text>
-      </Box>
-      <Box mb={2}>
-        <Text color="textSecondary">Prénom / Nom</Text>
-        <Text>
-          {prenom} {nom}
-        </Text>
-      </Box>
-      <Box mb={2}>
-        <AdminUserDetails user={user} />
-      </Box>
-      <Button mr={2} bg={activateButtonStyle} onClick={toggleActivation}>
-        {activateButtonText}
-      </Button>
-      <Link href={`/admin/users/${id}/import`}>
-        <a>
-          <Button bg="primary">Import</Button>
-        </a>
-      </Link>
+    <Card>
+      <Flex mb={4}>
+        <Box width={1 / 3} p={2} bg="cardSecondary">
+          ID
+        </Box>
+        <Box width={2 / 3} px={4} py={2}>
+          <Text>{id}</Text>
+        </Box>
+      </Flex>
+      <Flex mb={4}>
+        <Box width={1 / 3} p={2} bg="cardSecondary">
+          Type
+        </Box>
+        <Box width={2 / 3} px={4} py={2}>
+          <Text>{type}</Text>
+        </Box>
+      </Flex>
+      <Flex mb={4}>
+        <Box width={1 / 3} p={2} bg="cardSecondary">
+          Email
+        </Box>
+        <Box width={2 / 3} px={4} py={2}>
+          <Text>{email}</Text>
+        </Box>
+      </Flex>
+      <Flex mb={4}>
+        <Box width={1 / 3} p={2} bg="cardSecondary">
+          Nom / Prenom
+        </Box>
+        <Box width={2 / 3} px={4} py={2}>
+          <Text>
+            {prenom} {nom}
+          </Text>
+        </Box>
+      </Flex>
+      <Flex mb={4}>
+        <Box width={1 / 3} p={2} bg="cardSecondary">
+          {details.type}
+        </Box>
+        <Box width={2 / 3} px={4} py={2}>
+          {details.values.map(value => (
+            <Text key={`aui-${value}`}>{value}</Text>
+          ))}
+        </Box>
+      </Flex>
+      <Flex>
+        <Box width={1 / 3} p={2} bg="cardSecondary">
+          Activer / Bloquer
+        </Box>
+        <Box width={2 / 3} px={4} py={2}>
+          <Button mr={2} bg={activateButtonStyle} onClick={toggleActivation}>
+            {activateButtonText}
+          </Button>
+        </Box>
+      </Flex>
     </Card>
   );
 };
