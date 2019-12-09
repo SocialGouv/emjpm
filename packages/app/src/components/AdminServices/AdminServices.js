@@ -1,22 +1,26 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Text } from "@socialgouv/emjpm-ui-core";
-import React, { useContext, useState } from "react";
+import Link from "next/link";
+import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
-import { AdminEditService } from "./AdminEditService";
 import { SERVICES } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
+// import { AdminEditService } from "./AdminEditService";
+// {editMode && (
+//   <Card overflow="hidden" p="0" pt="1" m="1" mt="-20px">
+//     <AdminEditService service={item} closePanel={toogleEditMode} />
+//   </Card>
+// )}
+
 const RowItem = ({ item }) => {
   const { id, etablissement, code_postal, ville } = item;
-  const [editMode, setEditMode] = useState(false);
-
-  const toogleEditMode = () => setEditMode(!editMode);
 
   return (
-    <>
+    <Fragment>
       <Card sx={cardStyle} width="100%">
         <Flex justifyContent="space-between">
           <Box>
@@ -38,18 +42,15 @@ const RowItem = ({ item }) => {
             </Flex>
           </Box>
           <Box mr="1" width="120px">
-            <Button width="120px" onClick={toogleEditMode} variant="outline">
-              Modifier
-            </Button>
+            <Link href={`/admin/services/${id}`}>
+              <a>
+                <Button>Voir</Button>
+              </a>
+            </Link>
           </Box>
         </Flex>
       </Card>
-      {editMode && (
-        <Card overflow="hidden" p="0" pt="1" m="1" mt="-20px">
-          <AdminEditService service={item} closePanel={toogleEditMode} />
-        </Card>
-      )}
-    </>
+    </Fragment>
   );
 };
 
