@@ -1,0 +1,99 @@
+.app_cache: &app_cache
+  key: "$CI_COMMIT_REF_SLUG-app-node_modules"
+  paths:
+    - $CI_PROJECT_DIR/.yarn
+  policy: pull
+
+#
+
+Install app:
+  extends: .prepare_stage
+  image: node:12-alpine
+  # rules:
+  #   - changes:
+  #       - packages/app/.gitlab-ci.yml
+  #       - packages/app/package.json
+  #       - yarn.lock
+  #     when: always
+  cache:
+    <<: *app_cache
+    policy: pull-push
+  before_script:
+    - find packages -maxdepth 1 -type d -not -name app | tail -n +2 | xargs rm -rf
+  script:
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    - yarn --frozen-lockfile
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - node_modules
+      - packages/app/node_modules
+
+#
+
+Lint @emjpm/app:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install app
+  needs:
+    - Install app
+  script:
+    - yarn workspace @emjpm/app lint
+
+Test @emjpm/app:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install app
+  needs:
+    - Install app
+  services:
+    - name: postgres:10-alpine
+  allow_failure: true
+  retry: 1
+  variables:
+    DATABASE_URL: psql://postgres:@localhost/emjpm
+    PGHOST: localhost
+    PGUSER: postgres
+    TZ: Europe/Paris
+  before_script:
+    - apk add --update --no-cache postgresql=~11
+    - psql --version
+    #
+    - pg_isready -h localhost
+  script:
+    - sh -x docker/postgres/postgres-init.sh
+    - yarn workspace @emjpm/app test
+
+#
+
+Build @emjpm/app:
+  extends: .quality_stage
+  dependencies:
+    - Install app
+  needs:
+    - Install app
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/app build
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - packages/app/.next
+
+#
+
+Register app image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  dependencies:
+    - Build @emjpm/app
+  needs:
+    - Build @emjpm/app
+  before_script:
+    - cp yarn.lock packages/app/yarn.lock
+  variables:
+    CONTEXT: packages/app
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app

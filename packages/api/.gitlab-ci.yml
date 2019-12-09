@@ -1,0 +1,99 @@
+.api_cache: &api_cache
+  key: "$CI_COMMIT_REF_SLUG-api-node_modules"
+  paths:
+    - $CI_PROJECT_DIR/.yarn
+  policy: pull
+
+#
+
+Install api:
+  extends: .prepare_stage
+  image: node:12-alpine
+  # rules:
+  #   - changes:
+  #       - packages/api/.gitlab-ci.yml
+  #       - packages/api/package.json
+  #       - yarn.lock
+  #     when: always
+  cache:
+    <<: *api_cache
+    policy: pull-push
+  before_script:
+    - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
+  script:
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    - yarn --frozen-lockfile
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - node_modules
+      - packages/api/node_modules
+
+#
+
+Lint @emjpm/api:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install api
+  needs:
+    - Install api
+  script:
+    - yarn workspace @emjpm/api lint
+
+Test @emjpm/api:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install api
+  needs:
+    - Install api
+  services:
+    - name: postgres:10-alpine
+  allow_failure: true
+  retry: 1
+  variables:
+    DATABASE_URL: psql://postgres:@localhost/emjpm
+    PGHOST: localhost
+    PGUSER: postgres
+    TZ: Europe/Paris
+  before_script:
+    - apk add --update --no-cache postgresql=~11
+    - psql --version
+    #
+    - pg_isready -h localhost
+  script:
+    - sh -x docker/postgres/postgres-init.sh
+    - yarn workspace @emjpm/api test
+
+#
+
+Build @emjpm/api:
+  extends: .quality_stage
+  dependencies:
+    - Install api
+  needs:
+    - Install api
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/api build
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - packages/api/dist
+
+#
+
+Register api image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  dependencies:
+    - Build @emjpm/api
+  needs:
+    - Build @emjpm/api
+  before_script:
+    - cp yarn.lock packages/api/yarn.lock
+  variables:
+    CONTEXT: packages/api
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api

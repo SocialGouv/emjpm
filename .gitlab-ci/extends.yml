@@ -22,9 +22,8 @@
 
 .base_register_stage:
   extends: .base_docker_image_stage
-  before_script:
-    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
   script:
+    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
     - >
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
         export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")

@@ -1,0 +1,7 @@
+Register hasura image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  variables:
+    CONTEXT: packages/hasura
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura

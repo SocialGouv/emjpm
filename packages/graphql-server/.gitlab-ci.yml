@@ -1,0 +1,71 @@
+.graphql_cache: &graphql_cache
+  key: "$CI_COMMIT_REF_SLUG-graphql-server-node_modules"
+  paths:
+    - $CI_PROJECT_DIR/.yarn
+  policy: pull
+
+#
+
+Install graphql-server:
+  extends: .prepare_stage
+  image: node:12-alpine
+  # rules:
+  #   - changes:
+  #       - packages/graphql-server/.gitlab-ci.yml
+  #       - packages/graphql-server/package.json
+  #       - yarn.lock
+  #     when: always
+  cache:
+    <<: *graphql_cache
+    policy: pull-push
+  before_script:
+    - find packages -maxdepth 1 -type d -not -name graphql-server | tail -n +2 | xargs rm -rf
+  script:
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    - yarn --frozen-lockfile
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - node_modules
+      - packages/graphql-server/node_modules
+
+#
+
+Lint @emjpm/graphql-server:
+  extends: .quality_stage
+  dependencies:
+    - Install graphql-server
+  needs:
+    - Install graphql-server
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/graphql-server lint
+
+Build @emjpm/graphql-server:
+  extends: .quality_stage
+  dependencies:
+    - Install graphql-server
+  needs:
+    - Install graphql-server
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/graphql-server build
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - packages/graphql-server/dist
+
+#
+
+Register graphql-server image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  dependencies:
+    - Build @emjpm/graphql-server
+  needs:
+    - Install graphql-server
+    - Build @emjpm/graphql-server
+  variables:
+    CONTEXT: packages/graphql-server
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server

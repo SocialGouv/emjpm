@@ -7,11 +7,14 @@ include:
   - /.gitlab-ci/variables.yml
   - /.gitlab-ci/extends.yml
   #
-  - /.gitlab-ci/stages/prepare.yml
-  - /.gitlab-ci/stages/quality.yml
-  - /.gitlab-ci/stages/register.yml
   - /.gitlab-ci/stages/notify.yml
   - /.gitlab-ci/stages/deploy.yml
+  #
+  - /packages/api/.gitlab-ci.yml
+  - /packages/app/.gitlab-ci.yml
+  - /packages/graphql-server/.gitlab-ci.yml
+  - /packages/hasura/.gitlab-ci.yml
+  - /packages/knex/.gitlab-ci.yml
 
 #
 
@@ -23,3 +26,21 @@ stages:
 - "Notify Finished Deployment"
 
 #
+
+.prepare_stage: &prepare_stage
+  stage: "Prepare"
+  dependencies: []
+
+.quality_stage:
+  stage: "Code Quality"
+  dependencies: []
+  except:
+    variables:
+      - $PRODUCTION
+
+.register_stage: &register_stage
+  stage: "Registration"
+  dependencies: []
+  except:
+    variables:
+      - $PRODUCTION
