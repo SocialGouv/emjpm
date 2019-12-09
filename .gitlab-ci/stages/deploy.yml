@@ -34,7 +34,6 @@ include:
 .dev_stage: &dev_stage
   environment:
     name: fabrique-dev
-  when: manual
   only:
     refs:
       - branches
