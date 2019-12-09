@@ -70,8 +70,8 @@ include:
     - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
     #
     # Create azure volume secrets for anonymized export
-    - export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret ${K8S_PROJECT}-export-anonymized -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
-    - export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret ${K8S_PROJECT}-export-anonymized -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
+    - export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
+    - export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
     - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
     - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
 
