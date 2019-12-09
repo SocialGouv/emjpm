@@ -1,0 +1,6 @@
+- args:
+    role: individuel
+    table:
+      name: mesures
+      schema: public
+  type: drop_delete_permission

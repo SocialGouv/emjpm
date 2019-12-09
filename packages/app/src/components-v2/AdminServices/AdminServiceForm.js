@@ -27,6 +27,7 @@ export const AdminServiceForm = ({ service, onSubmit, onCancel }) => {
   if (error) {
     return <div>error</div>;
   }
+
   const departmentOptions = data.departements.map(dep => ({
     label: dep.nom,
     value: dep.id

@@ -7,7 +7,7 @@
   "homepage": "https://socialgouv.github.io/emjpm-app",
   "scripts": {
     "start": "next dev",
-    "dev": "next",
+    "dev": "NODE_OPTIONS=--inspect next",
     "test": "jest ./test",
     "lint": "eslint pages src",
     "lint:fix": "eslint pages src --fix",
