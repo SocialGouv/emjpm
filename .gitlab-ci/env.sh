@@ -50,12 +50,12 @@ else
 fi
 
 export API_HOST="api-${DOMAIN}";
-export CERTIFICATE_NAME="${K8S_PROJECT}-certificate-${BRANCH_HASH}";
+export API_SRV_HOST="api-nodejs";
 export FRONTEND_HOST="${DOMAIN}";
-export GQL_SERVER_HOST="${K8S_PROJECT}-graphql-server-${BRANCH_HASH}";
+export GQL_SERVER_SRV_HOST="graphql-server-nodejs";
 export HASURA_HOST="hasura-${DOMAIN}";
 export METABASE_HOST="metabase-${DOMAIN}";
-export POSTGRES_HOST="${K8S_PROJECT}-postgres-${BRANCH_HASH}"
+export POSTGRES_SRV_HOST="postgres-postgresql"
 
 export API_URL="https://${API_HOST}"
 export FRONTEND_URL="https://${FRONTEND_HOST}"
@@ -81,15 +81,17 @@ printenv | grep \
   -e REGISTRY \
   -e REGISTRY \
   \
+  -e API_HOST \
+  -e API_SRV_HOST \
   -e API_URL \
   -e CERTIFICATE_NAME \
   -e FRONTEND_HOST \
   -e FRONTEND_URL \
-  -e GQL_SERVER_HOST \
+  -e GQL_SERVER_SRV_HOST \
   -e HASURA_HOST \
   -e METABASE_HOST \
   -e METABASE_URL \
-  -e POSTGRES_HOST \
+  -e POSTGRES_SRV_HOST \
   \
   -e CONTEXT \
   -e PORT \

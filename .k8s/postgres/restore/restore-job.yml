@@ -32,7 +32,7 @@ spec:
             - name: PGUSER
               value: postgres
             - name: PGHOST
-              value: ${K8S_PROJECT}-postgres-${BRANCH_HASH}
+              value: ${POSTGRES_SRV_HOST}
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
@@ -70,21 +70,14 @@ spec:
             readOnly: false
       initContainers:
         - name: wait-for-postgres
-          image: postgres:10-alpine
-          imagePullPolicy: Always
+          image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:0.19.0
+          env:
+            - name: PGHOST
+              value: ${POSTGRES_SRV_HOST}
           resources:
-            requests:
-              cpu: 0m
-              memory: 0Mi
             limits:
               cpu: 50m
               memory: 32Mi
-          command:
-            - sh
-            - -c
-            - |
-              retry=120; # 5s * (12 * 10) = 10min
-              while ! pg_isready -h ${POSTGRES_HOST} > /dev/null 2> /dev/null && [[ $(( retry-- )) -gt 0 ]];
-                do
-                  echo "Waiting for Postgres to go Green ($(( retry )))" ; sleep 5s ; done ;
-              echo Ready;
+            requests:
+              cpu: 0m
+              memory: 0Mi

@@ -1,0 +1,83 @@
+#
+
+Install graphql-server:
+  extends: .base_yarn_workspace_install
+  variables:
+    CONTEXT: graphql-server
+  before_script:
+    - find packages -maxdepth 1 -type d -not -name graphql-server | tail -n +2 | xargs rm -rf
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - node_modules
+      - packages/graphql-server/node_modules
+
+#
+
+Lint @emjpm/graphql-server:
+  extends: .quality_stage
+  dependencies:
+    - Install graphql-server
+  needs:
+    - Install graphql-server
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/graphql-server lint
+
+Build @emjpm/graphql-server:
+  extends: .quality_stage
+  dependencies:
+    - Install graphql-server
+  needs:
+    - Install graphql-server
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/graphql-server build
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - packages/graphql-server/dist
+
+#
+
+Register graphql-server image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  dependencies:
+    - Build @emjpm/graphql-server
+  needs:
+    - Install graphql-server
+    - Build @emjpm/graphql-server
+  variables:
+    CONTEXT: packages/graphql-server
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
+
+#
+
+.deploy_graphql-server_stage: &deploy_graphql-server_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  variables:
+    CONTEXT: graphql-server
+    IMAGE_TAG: $CI_COMMIT_SHA
+    PORT: 80
+    VALUES_FILE: ./packages/graphql-server/.k8s.values.yml
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - HASURA_HOST=${K8S_PROJECT}-hasura-${BRANCH_HASH}
+
+#
+
+Deploy graphql-server (dev):
+  extends:
+    - .deploy_graphql-server_stage
+    - .dev_stage
+
+Deploy graphql-server (prod):
+  extends:
+    - .deploy_graphql-server_stage
+    - .incubateur_stage

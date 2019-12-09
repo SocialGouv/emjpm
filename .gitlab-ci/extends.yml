@@ -1,41 +1,45 @@
 #
 
-.base_docker_image_stage:
-  image: docker:$DOCKER_VERSION
-  services:
-    - docker:$DOCKER_VERSION-dind
-
-#
-
-.base_docker_kube_image_stage:
-  image: $CI_REGISTRY/socialgouv/docker/kubectl:0.7.0
-  before_script:
-    - source ./.gitlab-ci/env.sh
-    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-    - if [ -n "${PRODUCTION+x}" ]; then SUFFIX=".prod"; else SUFFIX=".dev"; fi
-
-.base_docker_helm_image_stage:
-  extends: .base_docker_kube_image_stage
-  image: $CI_REGISTRY/socialgouv/docker/helm:0.6.0
-
-#
-
-.base_register_stage:
-  extends: .base_docker_image_stage
-  before_script:
-    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+.base_yarn_workspace_install:
+  extends: .prepare_stage
+  image: node:12-alpine
+  interruptible: true
+  variables:
+    CONTEXT: ${CI_JOB_NAME}
   script:
-    - >
-      if [[ -n "${CI_COMMIT_TAG}" ]]; then
-        export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
-      else
-        export TAG=$CI_COMMIT_REF_SLUG
+    - apk add curl=~7 git=~2
+    #
+    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/minio_s3_cache.sh &&
+      source minio_s3_cache.sh
+    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/git_files_changes.sh &&
+      source git_files_changes.sh
+    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/manual_caching.sh &&
+      source manual_caching.sh
+    #
+    # Download node_modules cache
+    - checking_cache "${CI_COMMIT_REF_SLUG}/${CONTEXT}-node_modules.tar.gz" ||
+      (echo "" && checking_cache ${CI_DEFAULT_BRANCH}/${CONTEXT}-node_modules.tar.gz) ||
+      true
+    #
+    - >-
+      if [[ -d node_modules ]] && [[ -z ${INVALID_GIT_FILES_CHANGES} ]] ; then
+        echo '"node_modules" folder found !'
+
+        git fetch origin ${CI_DEFAULT_BRANCH}
+        if ! git_files_changes "^packages/${CONTEXT}/package.json"; then
+          echo "Skipping job as ^packages/${CONTEXT}/package.json didn't change"
+          exit ${CI_JOB_SKIP_EXIT_CODE:-0}
+        fi
+        echo "^packages/${CONTEXT}/package.json files change detected"
       fi
     #
-    - docker pull $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA || true
-    - docker pull $IMAGE_NAME:$TAG || true
-    - docker pull $IMAGE_NAME:master || true
-    - echo "> docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA --cache-from $IMAGE_NAME:$TAG --cache-from $IMAGE_NAME:master -t $IMAGE_NAME:$CI_COMMIT_SHA -t $IMAGE_NAME:$TAG $CONTEXT"
-    - docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA --cache-from $IMAGE_NAME:$TAG --cache-from $IMAGE_NAME:master -t $IMAGE_NAME:$CI_COMMIT_SHA -t $IMAGE_NAME:$TAG $CONTEXT
-    - docker push $IMAGE_NAME:$CI_COMMIT_SHA
-    - docker push $IMAGE_NAME:$TAG
+    # Download yarn cache
+    - checking_cache "${CI_COMMIT_REF_SLUG}/${CONTEXT}-yarn.tar.gz" ||
+      (echo "" && checking_cache ${CI_DEFAULT_BRANCH}/${CONTEXT}-yarn.tar.gz) ||
+      true
+    #
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    - yarn --frozen-lockfile
+    #
+    - creating_cache ${CONTEXT}-yarn.tar.gz .yarn || true
+    - creating_cache ${CONTEXT}-node_modules.tar.gz node_modules packages/${CONTEXT}/node_modules || true

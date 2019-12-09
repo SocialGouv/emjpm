@@ -33,7 +33,7 @@ database:
   # username:
   # password:
   ## Alternatively, use a connection URI for full configurability. Example for SSL enabled Postgres.
-  connectionURI: "postgres://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
+  connectionURI: "postgres://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_SRV_HOST}/${POSTGRES_DATABASE}"
 
 password:
   # Changing Metabase password complexity:
@@ -49,7 +49,7 @@ emojiLogging: true
 # pluginsDirectory:
 
 service:
-  name: ${K8S_PROJECT}-metabase-${BRANCH_HASH}
+  name: metabase
   type: ClusterIP
   externalPort: 80
   internalPort: ${PORT}
@@ -71,13 +71,15 @@ ingress:
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
   annotations:
-    kubernetes.io/ingress.class: "azure/application-gateway"
     appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: "azure/application-gateway"
+    kubernetes.io/tls-acme: true
   tls:
     # Secrets must be manually created in the namespace.
-    - secretName: ${CERTIFICATE_NAME}-secret
-    #   hosts:
-    #     - metabase.domain.com
+    - secretName: metabase-certificate
+      hosts:
+        - ${METABASE_HOST}
 
 # A custom log4j.properties file can be provided using a multiline YAML string.
 # See https://github.com/metabase/metabase/blob/master/resources/log4j.properties
