@@ -105,15 +105,11 @@
 
   function creating_cache() {
     local file=${1}
-    local folder="${2}"
+    shift;
+    local folders=${@}
 
-    if [[ ! -d ${folder} ]]; then
-      echo "No ${folder} to cache"
-      return 1
-    fi
-
-    echo "Creating ${file} from ${folder}"
-    time tar czf ${file} ${folder}
+    echo "Creating ${file} from ${folders}"
+    time tar czf ${file} ${folders}
     echo ""
 
     if [[ -f cache.tar.gz ]]; then
@@ -138,11 +134,11 @@
     - *minio
     - *manual_caching
     - apk add curl=~7
-    - checking_cache ${CONTEXT}-yarn.tar.gz || true
+    - checking_cache ${CONTEXT}-yarn.tar.gz || checking_cache ${CONTEXT}-yarn.tar.gz || true
     - checking_cache ${CONTEXT}-node_modules.tar.gz || true
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     #
     - yarn --frozen-lockfile
     #
     - creating_cache ${CONTEXT}-yarn.tar.gz .yarn || true
-    - creating_cache ${CONTEXT}-node_modules.tar.gz node_modules || true
+    - creating_cache ${CONTEXT}-node_modules.tar.gz node_modules packages/${CONTEXT}/node_modules || true
