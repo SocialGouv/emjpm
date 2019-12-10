@@ -2,7 +2,6 @@ import { BoxWrapper, Card, Heading1, Heading4 } from "@socialgouv/emjpm-ui-core"
 import Link from "next/link";
 import React from "react";
 
-// import { AdminUserInformations } from "../../../../src/components-v2/AdminUsers/AdminUserInformations";
 import { LayoutAdmin } from "../../../../src/components-v2/Layout";
 import { MandataireAddMesureImport } from "../../../../src/components-v2/MandataireMesureImport/MandataireAddMesureImport";
 import { withAuthSync } from "../../../../src/util/auth";

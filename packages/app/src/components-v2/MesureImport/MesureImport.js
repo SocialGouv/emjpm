@@ -30,14 +30,6 @@ const MesureImport = props => {
 
     setState({ ...state, mesures });
 
-    console.log({
-      content: mesures,
-      file_name: file.name,
-      file_size: file.size,
-      file_type: file.type,
-      ...variables
-    });
-
     addImport({
       variables: {
         content: mesures,

@@ -4,7 +4,6 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { SERVICE } from "./queries";
-// import { getAdminServiceDetails } from "./util";
 
 const AdminServiceInformations = props => {
   const { serviceId } = props;
@@ -20,7 +19,6 @@ const AdminServiceInformations = props => {
 
   const [service] = data.services;
   const { id, etablissement, code_postal, ville } = service;
-  // const details = getAdminUserDetails(user);
 
   return (
     <Card>
