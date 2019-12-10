@@ -74,6 +74,7 @@ Register app image:
   dependencies:
     - Build @emjpm/app
   needs:
+    - Install app
     - Build @emjpm/app
   before_script:
     - cp yarn.lock packages/app/yarn.lock
