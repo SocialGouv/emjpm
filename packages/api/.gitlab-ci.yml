@@ -17,10 +17,11 @@
 
   function putS3() {
     local file=$1
+    local path=$2
 
     tokenS3
 
-    curl ${MINIO}'/minio/upload/'${BUCKET}'/'${file}\
+    curl ${MINIO}'/minio/upload/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${path}\
       -H 'Authorization: Bearer '$(cat TOKEN_S3)\
       -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)'\
       -T ${file} \
@@ -32,7 +33,7 @@
 
     tokenS3
 
-    curl ${MINIO}'/minio/download/gitlab-runner/'${file}'?token='$(cat TOKEN_S3)\
+    curl ${MINIO}'/minio/download/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${file}'?token='$(cat TOKEN_S3)\
       -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)'
   }
 
@@ -57,7 +58,7 @@
     # fi
 
     echo "Uploading ${file} to ${MINIO}/minio/upload/${BUCKET}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_SLUG}/${file}"
-    time putS3 ${file} "${MINIO}/minio/upload/${BUCKET}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_SLUG}/${file}"
+    time putS3 ${file} "${CI_COMMIT_REF_SLUG}/${file}"
     echo "Successfully uploaded"
   }
 
@@ -82,7 +83,9 @@ Install api:
     - apk add curl=~7 jq=~1
     - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
     - set -x
-    # - getS3 hello.txt
+    - echo "lol" > foo.txt
+    - putS3 foo.txt foo.txt
+    - getS3 foo.txt
     # - >-
 
     #   function checking_cache() {
