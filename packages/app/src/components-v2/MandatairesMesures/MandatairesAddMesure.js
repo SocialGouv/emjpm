@@ -9,11 +9,11 @@ import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { getRegionCode } from "../../util/departements";
-import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
-import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
-import { formatServiceTribunalList } from "./utils";
+import { ADD_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
+import { DEPARTEMENTS, USER_TRIBUNAL } from "./queries";
+import { formatUserTribunalList } from "./utils";
 
-const ServiceCreateAntenneStyle = {
+const MandatairesCreateAntenneStyle = {
   flexWrap: "wrap"
 };
 
@@ -25,12 +25,12 @@ const grayBox = {
 
 const cardStyle = { m: "1", mt: "5", p: "0" };
 
-export const ServiceAddMesure = props => {
-  const { user_antennes, service_admins } = props;
-  const [service] = service_admins;
+export const MandatairesAddMesure = props => {
+  const { user_antennes, mandataires_admins } = props;
+  const [mandataires] = mandataires_admins;
 
-  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
-    variables: { serviceId: service.service_id }
+  const { loading, error, data } = useQuery(USER_TRIBUNAL, {
+    variables: { mandatairesId: mandataires.mandataires_id }
   });
 
   const {
@@ -39,8 +39,7 @@ export const ServiceAddMesure = props => {
     error: departementsError
   } = useQuery(DEPARTEMENTS);
 
-  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
-  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+  const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
 
   const [AddMesure] = useMutation(ADD_MESURE, {
     options: {
@@ -55,22 +54,13 @@ export const ServiceAddMesure = props => {
       }
     ) {
       const [mesure] = returning;
-      UpdateServicesCounter({
+      UpdateMandatairesCounter({
         variables: {
+          mandataireId: mesure.mandataires_id,
           mesures_awaiting: 0,
-          mesures_in_progress: 1,
-          service_id: mesure.service_id
+          mesures_in_progress: 1
         }
       });
-      if (mesure.antenne_id) {
-        UpdateAntenneCounters({
-          variables: {
-            antenne_id: mesure.antenne_id,
-            inc_mesures_awaiting: -1,
-            inc_mesures_in_progress: 1
-          }
-        });
-      }
     }
   });
 
@@ -83,18 +73,18 @@ export const ServiceAddMesure = props => {
   }
 
   const antenneOptions = user_antennes.map(ua => ({
-    label: ua.service_antenne.name,
-    value: ua.service_antenne.id
+    label: ua.mandataires_antenne.name,
+    value: ua.mandataires_antenne.id
   }));
 
-  const tribunalList = formatServiceTribunalList(data.service_tis);
+  const tribunalList = formatUserTribunalList(data.mandataires_tis);
   const [uniqueTribunal] = tribunalList;
   const tribunalDefaultValue =
     tribunalList.length <= 1 ? { label: uniqueTribunal.label, value: uniqueTribunal.value } : "";
 
   return (
     <Card sx={cardStyle}>
-      <Flex sx={ServiceCreateAntenneStyle} {...props}>
+      <Flex sx={MandatairesCreateAntenneStyle} {...props}>
         <Box width={[1, 2 / 5]} sx={grayBox}>
           <Box height="280px">
             <Heading4>{`Informations générales`}</Heading4>
@@ -127,7 +117,6 @@ export const ServiceAddMesure = props => {
                     refetchQueries: ["mesures", "mesures_aggregate"],
                     variables: {
                       annee: values.annee.toString(),
-                      antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
                       civilite: values.civilite.value,
                       code_postal: values.code_postal,
                       date_ouverture: values.date_ouverture,
@@ -140,7 +129,7 @@ export const ServiceAddMesure = props => {
                       ville: values.ville
                     }
                   });
-                  Router.push("/services");
+                  Router.push("/mandatairess");
                 }
                 setSubmitting(false);
               }}
@@ -324,7 +313,7 @@ export const ServiceAddMesure = props => {
                     <Flex justifyContent="flex-end">
                       <Box>
                         <Button mr="2" variant="outline">
-                          <Link href="/services">
+                          <Link href="/mandatairess">
                             <a>Annuler</a>
                           </Link>
                         </Button>

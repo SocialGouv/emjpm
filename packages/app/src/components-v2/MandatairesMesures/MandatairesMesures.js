@@ -5,19 +5,21 @@ import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "../MandataireFilters/context";
-import { UserContext } from "../UserContext";
-import { MANDATAIRE_MESURES } from "./query";
+import { MANDATAIRE_MESURES } from "./queries";
 import { formatMesureList } from "./utils";
 const RESULT_PER_PAGE = 20;
+import { MandatairesAcceptMesure } from "./MandatairesAcceptMesure";
+import { MandatairesCloseMesure } from "./MandatairesCloseMesure";
+import { MandatairesDeleteMesure } from "./MandatairesDeleteMesure";
+import { MandatairesEditMesure } from "./MandatairesEditMesure";
+import { MandatairesReactivateMesure } from "./MandatairesReactivateMesure";
 import { MesureListStyle } from "./style";
 
 const MandatairesMesures = props => {
   const { isOnlyWaiting } = props;
-  const {
-    mandataire: { id }
-  } = useContext(UserContext);
   const [currentOffset, setCurrentOffset] = useState(0);
   const { mesureType, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
+
   let currentMesureType = null;
   if (isOnlyWaiting) {
     currentMesureType = "Mesure en attente";
@@ -25,16 +27,17 @@ const MandatairesMesures = props => {
     currentMesureType = mesureStatus ? mesureStatus.value : null;
   }
 
-  const { data, error, loading, fetchMore } = useQuery(MANDATAIRE_MESURES, {
-    variables: {
-      limit: RESULT_PER_PAGE,
-      mandataireId: id,
-      offset: 0,
-      searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
-      status: currentMesureType,
-      type: mesureType ? mesureType.value : null
-    }
+  const queryVariables = {
+    limit: RESULT_PER_PAGE,
+    offset: currentOffset,
+    searchText:
+      debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+    status: currentMesureType,
+    type: mesureType ? mesureType.value : null
+  };
+
+  const { data, error, loading } = useQuery(MANDATAIRE_MESURES, {
+    variables: queryVariables
   });
 
   if (loading) {
@@ -56,16 +59,14 @@ const MandatairesMesures = props => {
           {mesures.length > 0 ? (
             <Fragment>
               <MesureList
-                // EditComponent={props => (
-                //   <ServiceEditMesure service={service} user_antennes={user_antennes} {...props} />
-                // )}
-                // CloseComponent={ServiceCloseMesure}
-                // RemoveComponent={ServiceDeleteMesure}
-                // AcceptComponent={props => (
-                //   <ServiceAcceptMesure user_antennes={user_antennes} {...props} />
-                // )}
-                // ReactivateComponent={ServiceReactivateMesure}
-                onPanelOpen={id => console.log(id)}
+                EditComponent={MandatairesEditMesure}
+                CloseComponent={MandatairesCloseMesure}
+                RemoveComponent={props => (
+                  <MandatairesDeleteMesure {...props} queryVariables={queryVariables} />
+                )}
+                AcceptComponent={MandatairesAcceptMesure}
+                ReactivateComponent={MandatairesReactivateMesure}
+                onPanelOpen={() => null}
                 mesures={mesures}
               />
             </Fragment>
@@ -85,18 +86,6 @@ const MandatairesMesures = props => {
                 forcePage={currentOffset / RESULT_PER_PAGE}
                 pageRangeDisplayed={5}
                 onPageChange={data => {
-                  fetchMore({
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                      return {
-                        count: fetchMoreResult.count,
-                        mesures: fetchMoreResult.mesures,
-                        mesures_aggregate: fetchMoreResult.mesures_aggregate
-                      };
-                    },
-                    variables: {
-                      offset: data.selected * RESULT_PER_PAGE
-                    }
-                  });
                   setCurrentOffset(data.selected * RESULT_PER_PAGE);
                 }}
                 subContainerClassName={"pages pagination"}

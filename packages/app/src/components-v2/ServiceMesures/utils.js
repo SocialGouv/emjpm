@@ -57,7 +57,7 @@ export const formatAntenneOptions = user_antennes => {
   });
 };
 
-export const formatTribunalList = tribunalList => {
+export const formatServiceTribunalList = tribunalList => {
   return tribunalList.map(tribunal => {
     return {
       label: tribunal.ti.etablissement,

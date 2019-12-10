@@ -48,16 +48,7 @@ export const formatMesureList = mesureList => {
   return mesures;
 };
 
-export const formatAntenneOptions = user_antennes => {
-  return user_antennes.map(user_antenne => {
-    return {
-      label: user_antenne.service_antenne.name,
-      value: user_antenne.service_antenne.id
-    };
-  });
-};
-
-export const formatTribunalList = tribunalList => {
+export const formatUserTribunalList = tribunalList => {
   return tribunalList.map(tribunal => {
     return {
       label: tribunal.ti.etablissement,

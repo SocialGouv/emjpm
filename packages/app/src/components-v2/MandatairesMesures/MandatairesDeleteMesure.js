@@ -8,13 +8,14 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { DELETE_MESURE } from "./mutations";
-import { MESURES } from "./queries";
+import { MANDATAIRE_MESURES } from "./queries";
 
-export const ServiceDeleteMesure = props => {
+export const MandatairesDeleteMesure = props => {
   const { currentMesure, queryVariables } = props;
+  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+
   const [UpdateMesure] = useMutation(DELETE_MESURE);
 
-  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
@@ -35,7 +36,7 @@ export const ServiceDeleteMesure = props => {
         <Formik
           onSubmit={(values, { setSubmitting }) => {
             UpdateMesure({
-              refetchQueries: [{ query: MESURES, variables: queryVariables }],
+              refetchQueries: [{ query: MANDATAIRE_MESURES, variables: queryVariables }],
               variables: {
                 id: currentMesure
               }
@@ -91,6 +92,6 @@ export const ServiceDeleteMesure = props => {
   );
 };
 
-ServiceDeleteMesure.propTypes = {
+MandatairesDeleteMesure.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };

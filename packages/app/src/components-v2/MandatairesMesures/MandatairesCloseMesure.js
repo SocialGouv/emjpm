@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
@@ -7,8 +7,7 @@ import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { CLOSE_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
-import { MESURE } from "./queries";
+import { CLOSE_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
 
 const EXTINCTION_LABEL_VALUE = [
   { label: "caducité", value: "caducité" },
@@ -20,18 +19,12 @@ const EXTINCTION_LABEL_VALUE = [
   { label: "autre", value: "autr" }
 ];
 
-export const ServiceCloseMesure = props => {
+export const MandatairesCloseMesure = props => {
   const { currentMesure } = props;
 
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
-  const { data, loading, error } = useQuery(MESURE, {
-    variables: {
-      id: currentMesure
-    }
-  });
 
-  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
-  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
   const [UpdateMesure] = useMutation(CLOSE_MESURE, {
     update(
       cache,
@@ -42,33 +35,15 @@ export const ServiceCloseMesure = props => {
       }
     ) {
       const [mesure] = returning;
-      UpdateServicesCounter({
+      UpdateMandatairesCounter({
         variables: {
+          mandataireId: mesure.mandataire_id,
           mesures_awaiting: 0,
-          mesures_in_progress: -1,
-          service_id: mesure.service_id
+          mesures_in_progress: -1
         }
       });
-      if (mesure.antenne_id) {
-        UpdateAntenneCounters({
-          variables: {
-            antenne_id: mesure.antenne_id,
-            inc_mesures_awaiting: -1,
-            inc_mesures_in_progress: 1
-          }
-        });
-      }
     }
   });
-
-  if (error) {
-    return <div>error</div>;
-  }
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  const mesure = data.mesures[0];
 
   return (
     <Flex flexWrap="wrap">
@@ -84,20 +59,17 @@ export const ServiceCloseMesure = props => {
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              UpdateMesure({
-                refetchQueries: ["mesures", "mesures_aggregate"],
-                variables: {
-                  extinction: values.extinction,
-                  id: currentMesure,
-                  reason_extinction: values.reason_extinction.value,
-                  service_id: mesure.service_id
-                }
-              });
-              setSubmitting(false);
-              setPanelType(null);
-              setCurrentMesure(null);
-            }, 500);
+            UpdateMesure({
+              refetchQueries: ["mesures", "mesures_aggregate"],
+              variables: {
+                extinction: values.extinction,
+                id: currentMesure,
+                reason_extinction: values.reason_extinction.value
+              }
+            });
+            setSubmitting(false);
+            setPanelType(null);
+            setCurrentMesure(null);
           }}
           validationSchema={Yup.object().shape({
             extinction: Yup.date().required("Required"),
@@ -167,6 +139,6 @@ export const ServiceCloseMesure = props => {
   );
 };
 
-ServiceCloseMesure.propTypes = {
+MandatairesCloseMesure.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };

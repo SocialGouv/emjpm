@@ -9,15 +9,14 @@ import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { getRegionCode } from "../../util/departements";
-import { EDIT_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
-import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
-import { formatAntenneOptions, formatServiceTribunalList } from "./utils";
+import { EDIT_MESURE } from "./mutations";
+import { DEPARTEMENTS, USER_TRIBUNAL } from "./queries";
+import { formatUserTribunalList } from "./utils";
 
-export const ServiceEditMesure = props => {
+export const MandatairesEditMesure = props => {
   const {
     currentMesure,
     age,
-    antenneId,
     civilite,
     codePostal,
     dateOuverture,
@@ -26,22 +25,17 @@ export const ServiceEditMesure = props => {
     residence,
     type,
     ville,
-    user_antennes,
     tribunal,
-    tiId,
-    service: { service_id }
+    tiId
   } = props;
 
-  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
-    variables: { serviceId: service_id }
-  });
+  const { loading, error, data } = useQuery(USER_TRIBUNAL);
   const {
     data: departementsData,
     loading: departementsLoading,
     error: departementsError
   } = useQuery(DEPARTEMENTS);
   const [EditMesure] = useMutation(EDIT_MESURE);
-  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
   if (loading || departementsLoading) {
@@ -52,9 +46,8 @@ export const ServiceEditMesure = props => {
     return <div>Erreur...</div>;
   }
 
-  const tribunalList = formatServiceTribunalList(data.service_tis);
+  const tribunalList = formatUserTribunalList(data.user_tis);
   const tribunalDefautValue = tiId ? { label: tribunal, value: tiId } : "";
-  const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
 
   return (
     <Flex flexWrap="wrap">
@@ -89,10 +82,9 @@ export const ServiceEditMesure = props => {
             } else {
               EditMesure({
                 awaitRefetchQueries: true,
-                refetchQueries: ["mesures", "mesures_aggregate"],
+                refetchQueries: ["mesures", "mesures_aggregate", "user_tis", "ti"],
                 variables: {
                   annee: values.annee,
-                  antenne_id: values.antenne_id ? values.antenne_id.value : null,
                   civilite: values.civilite.value,
                   code_postal: values.code_postal,
                   date_ouverture: values.date_ouverture,
@@ -106,24 +98,6 @@ export const ServiceEditMesure = props => {
                   ville: values.ville
                 }
               });
-              if (values.antenne_id) {
-                UpdateAntenneCounters({
-                  variables: {
-                    antenne_id: values.antenne_id.value,
-                    inc_mesures_awaiting: 0,
-                    inc_mesures_in_progress: 1
-                  }
-                });
-              }
-              if (antenneId) {
-                UpdateAntenneCounters({
-                  variables: {
-                    antenne_id: antenneId,
-                    inc_mesures_awaiting: 0,
-                    inc_mesures_in_progress: -1
-                  }
-                });
-              }
               setPanelType(null);
               setCurrentMesure(null);
             }
@@ -143,7 +117,6 @@ export const ServiceEditMesure = props => {
           })}
           initialValues={{
             annee: age,
-            antenne_id: antenneId ? ANTENNE_OPTIONS.find(o => o.value === antenneId) : null,
             civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
             code_postal: codePostal,
             date_ouverture: dateOuverture,
@@ -210,19 +183,6 @@ export const ServiceEditMesure = props => {
                     placeholder="Date d'ouverture"
                   />
                 </Box>
-                {user_antennes.length >= 2 && (
-                  <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
-                    <Select
-                      id="antenne_id"
-                      name="antenne_id"
-                      placeholder="Antenne"
-                      value={values.antenne_id}
-                      hasError={errors.antenne_id && touched.antenne_id}
-                      onChange={option => setFieldValue("antenne_id", option)}
-                      options={ANTENNE_OPTIONS}
-                    />
-                  </Box>
-                )}
                 <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
                   <Select
                     id="type"
@@ -316,6 +276,6 @@ export const ServiceEditMesure = props => {
   );
 };
 
-ServiceEditMesure.propTypes = {
+MandatairesEditMesure.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };

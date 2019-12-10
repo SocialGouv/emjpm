@@ -27,18 +27,18 @@ const ServiceMesures = props => {
   } else {
     currentMesureType = mesureStatus ? mesureStatus.value : null;
   }
+  const queryVariables = {
+    antenne: antenne ? antenne.value : null,
+    limit: RESULT_PER_PAGE,
+    offset: currentOffset,
+    searchText:
+      debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+    status: currentMesureType,
+    type: mesureType ? mesureType.value : null
+  };
 
-  const { data, error, loading, fetchMore } = useQuery(MESURES, {
-    fetchPolicy: "cache-and-network",
-    variables: {
-      antenne: antenne ? antenne.value : null,
-      limit: RESULT_PER_PAGE,
-      offset: 0,
-      searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
-      status: currentMesureType,
-      type: mesureType ? mesureType.value : null
-    }
+  const { data, error, loading } = useQuery(MESURES, {
+    variables: queryVariables
   });
 
   if (loading) {
@@ -64,7 +64,9 @@ const ServiceMesures = props => {
                   <ServiceEditMesure service={service} user_antennes={user_antennes} {...props} />
                 )}
                 CloseComponent={ServiceCloseMesure}
-                RemoveComponent={ServiceDeleteMesure}
+                RemoveComponent={props => (
+                  <ServiceDeleteMesure queryVariables={queryVariables} {...props} />
+                )}
                 AcceptComponent={props => (
                   <ServiceAcceptMesure user_antennes={user_antennes} {...props} />
                 )}
@@ -89,18 +91,6 @@ const ServiceMesures = props => {
                 forcePage={currentOffset / RESULT_PER_PAGE}
                 pageRangeDisplayed={5}
                 onPageChange={data => {
-                  fetchMore({
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                      return {
-                        count: fetchMoreResult.count,
-                        mesures: fetchMoreResult.mesures,
-                        mesures_aggregate: fetchMoreResult.mesures_aggregate
-                      };
-                    },
-                    variables: {
-                      offset: data.selected * RESULT_PER_PAGE
-                    }
-                  });
                   setCurrentOffset(data.selected * RESULT_PER_PAGE);
                 }}
                 subContainerClassName={"pages pagination"}

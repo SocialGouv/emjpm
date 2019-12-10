@@ -15,7 +15,6 @@ export const MANDATAIRE_MESURES = gql`
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
         type: { _eq: $type }
-        mandataire_id: { _eq: $mandataireId }
       }
     ) {
       aggregate {
@@ -25,11 +24,11 @@ export const MANDATAIRE_MESURES = gql`
     mesures(
       offset: $offset
       limit: $limit
+      order_by: { date_ouverture: desc_nulls_first }
       where: {
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
         type: { _eq: $type }
-        mandataire_id: { _eq: $mandataireId }
       }
     ) {
       annee
@@ -56,6 +55,40 @@ export const MANDATAIRE_MESURES = gql`
       ti_id
       type
       ville
+      departement {
+        nom
+        region {
+          nom
+        }
+      }
+      ti {
+        id
+        etablissement
+      }
+    }
+  }
+`;
+
+export const DEPARTEMENTS = gql`
+  {
+    departements {
+      id
+      code
+      nom
+    }
+  }
+`;
+
+export const USER_TRIBUNAL = gql`
+  query UserTribunal {
+    user_tis {
+      id
+      ti_id
+      user_id
+      ti {
+        etablissement
+        id
+      }
     }
   }
 `;
