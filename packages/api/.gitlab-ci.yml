@@ -88,12 +88,6 @@ Install api:
   #       - packages/api/package.json
   #       - yarn.lock
   #     when: always
-  cache:
-    key: "$CI_COMMIT_REF_SLUG-api"
-    paths:
-      - YARN_CACHE_URL
-      - NODE_MODULES_CACHE_URL
-    policy: pull-push
   before_script:
     - *minio
     - *manual_caching
@@ -111,10 +105,7 @@ Install api:
     #     echo "Successfully extracted cache"
     #   }
 
-    - >-
-      if [[ -f YARN_CACHE_URL ]]; then
-        checking_cache "${CI_JOB_NAME}-yarn.tar.gz" || true
-      fi
+    - checking_cache "api-yarn.tar.gz" || true
 
     # - >-
     #   if [[ -f NODE_MODULES_CACHE_URL ]]; then
@@ -130,7 +121,7 @@ Install api:
     - *manual_caching
     - set -x
 
-    - creating_cache "${CI_JOB_NAME}-yarn.tar.gz" .yarn && mv URL YARN_CACHE_URL;
+    - creating_cache "api-yarn.tar.gz" .yarn || true
     # - creating_cache node_modules && mv URL NODE_MODULES_CACHE_URL;
 
     - set +x
