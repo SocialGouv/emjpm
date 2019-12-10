@@ -48,7 +48,7 @@
 
   function tokenS3() {
 
-    curl -s -w %{time_connect}:%{time_starttransfer}:%{time_total} \
+    curl -Ss \
       -H 'Content-Type: application/json' \
       --data-binary '{"id":1,"jsonrpc":"2.0","params":{"username":"'${S3KEY}'","password":"'${S3SECRET}'"},"method":"Web.Login"}'\
       ${MINIO}'/minio/webrpc' \
@@ -66,7 +66,8 @@
 
     tokenS3
 
-    curl -s -w %{time_connect}:%{time_starttransfer}:%{time_total} \
+    curl -Ss \
+      -w '\nEstablish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' \
       -H 'Authorization: Bearer '$(cat TOKEN_S3) \
       -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)' \
       -T ${file} \
@@ -97,6 +98,7 @@
     getS3 "${CI_COMMIT_REF_SLUG}/${file}" -s -o cache.tar.gz
     echo "Extracting cache.tar.gz"
     time tar xzf cache.tar.gz
+    echo ""
     echo "Successfully extracted cache"
   }
 
@@ -111,6 +113,7 @@
 
     echo "Creating ${file} from ${folder}"
     time tar czf ${file} ${folder}
+    echo ""
 
     # if [[ -f cache.tar.gz]] &&\
     #   [[ diff cache.tar.gz ${file} ]] ; then
