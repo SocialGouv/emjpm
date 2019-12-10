@@ -93,24 +93,17 @@ Install api:
     - *manual_caching
     - apk add curl=~7 jq=~1
     - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
-    - set -x
-
     - checking_cache api-yarn.tar.gz || true
     - checking_cache api-node_modules.tar.gz || true
-
-    - set +x
+    - ls -la
   script:
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     - yarn --frozen-lockfile
   after_script:
     - *minio
     - *manual_caching
-    - set -x
-
     - creating_cache api-yarn.tar.gz .yarn || true
     - creating_cache api-node_modules.tar.gz node_modules || true
-
-    - set +x
   artifacts:
     expire_in: 30 mins
     paths:
