@@ -120,9 +120,10 @@
     echo ""
 
     if [[ -f cache.tar.gz ]]; then
-      diff cache.tar.gz ${file}
-      echo "No changes detected"
-      return
+      if diff -s cache.tar.gz ${file}; then
+        echo "No changes detected"
+        return
+      fi
     fi
 
     local url=${MINIO}/minio/upload/${BUCKET}/${PROJECT_FOLDER}/${file}
