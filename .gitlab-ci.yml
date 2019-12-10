@@ -12,7 +12,7 @@ include:
   #
   - /packages/api/.gitlab-ci.yml
   - /packages/app/.gitlab-ci.yml
-  # - /packages/graphql-server/.gitlab-ci.yml
+  - /packages/graphql-server/.gitlab-ci.yml
   # - /packages/hasura/.gitlab-ci.yml
   # - /packages/knex/.gitlab-ci.yml
 

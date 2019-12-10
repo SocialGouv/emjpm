@@ -1,28 +1,11 @@
-.graphql_cache: &graphql_cache
-  key: "$CI_COMMIT_REF_SLUG-graphql-server-node_modules"
-  paths:
-    - $CI_PROJECT_DIR/.yarn
-  policy: pull
-
 #
 
 Install graphql-server:
-  extends: .prepare_stage
-  image: node:12-alpine
-  # rules:
-  #   - changes:
-  #       - packages/graphql-server/.gitlab-ci.yml
-  #       - packages/graphql-server/package.json
-  #       - yarn.lock
-  #     when: always
-  cache:
-    <<: *graphql_cache
-    policy: pull-push
+  extends: .base_yarn_workspace_install
+  variables:
+    CONTEXT: graphql-server
   before_script:
     - find packages -maxdepth 1 -type d -not -name graphql-server | tail -n +2 | xargs rm -rf
-  script:
-    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
-    - yarn --frozen-lockfile
   artifacts:
     expire_in: 30 mins
     paths:
