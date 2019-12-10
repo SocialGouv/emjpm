@@ -29,7 +29,6 @@ export const mesureTypeCategoryStatistics = async (
       //   `no mesureTypeCategoryStatistic found for type ${mesure.type}`
       // );
     }
-    
   }
 
   return res;

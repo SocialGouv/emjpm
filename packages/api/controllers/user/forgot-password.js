@@ -16,7 +16,7 @@ const forgotPassword = async (req, res, next) => {
 
   const email = req.body.email;
   const token = uid(16);
-  let tomorrow = new Date();
+  const tomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   try {

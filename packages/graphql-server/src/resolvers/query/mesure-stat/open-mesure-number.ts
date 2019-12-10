@@ -12,7 +12,7 @@ export const openMesureNumber = async (
       court: args.court,
       department: args.department,
       region: args.region,
-      status: "Mesure en cours",
+      status: "Mesure en cours"
     }
   );
   return mesures.length;

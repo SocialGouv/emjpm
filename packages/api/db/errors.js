@@ -165,7 +165,7 @@ function errorHandler(err, res) {
       ]
     });
   } else if (err.code === "23505") {
-    let message = getErrorMessage(err);
+    const message = getErrorMessage(err);
     res.status(409).send({
       errors: [
         {
