@@ -48,7 +48,7 @@
 
   function tokenS3() {
 
-    time curl -s \
+    curl -s -w %{time_connect}:%{time_starttransfer}:%{time_total} \
       -H 'Content-Type: application/json' \
       --data-binary '{"id":1,"jsonrpc":"2.0","params":{"username":"'${S3KEY}'","password":"'${S3SECRET}'"},"method":"Web.Login"}'\
       ${MINIO}'/minio/webrpc' \
@@ -66,7 +66,7 @@
 
     tokenS3
 
-    time curl -s \
+    curl -s -w %{time_connect}:%{time_starttransfer}:%{time_total} \
       -H 'Authorization: Bearer '$(cat TOKEN_S3) \
       -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)' \
       -T ${file} \
