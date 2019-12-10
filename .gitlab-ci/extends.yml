@@ -153,7 +153,7 @@
     #
     - git fetch origin ${CI_DEFAULT_BRANCH}
     - >-
-      [[ -d $CI_PROJECT_DIR/.yarn ]] &&
+      [[ -d node_modules ]] &&
         changes "^packages/${CONTEXT}" || exit ${CI_JOB_SKIP_EXIT_CODE:-0}
     #
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
