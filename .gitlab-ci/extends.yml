@@ -116,8 +116,8 @@
     time tar czf ${file} ${folder}
     echo ""
 
-    if [[ -f cache.tar.gz]] &&\
-      [[ diff cache.tar.gz ${file} ]] ; then
+    if [[ -f cache.tar.gz]]; then
+      diff cache.tar.gz ${file}
       echo "No changes detected"
       return
     fi
