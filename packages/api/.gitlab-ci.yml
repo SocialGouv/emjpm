@@ -80,3 +80,30 @@ Register api image:
   variables:
     CONTEXT: packages/api
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+
+#
+
+.deploy_api_stage: &deploy_api_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  variables:
+    CONTEXT: api
+    VALUES_FILE: ./packages/api/.k8s.values.yml
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - POSTGRESQL_USER=emjpm
+    - POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+    - HOST=${API_HOST}
+
+#
+
+Deploy api (dev):
+  extends:
+    - .deploy_api_stage
+    - .dev_stage
+
+Deploy api (prod):
+  extends:
+    - .deploy_api_stage
+    - .incubateur_stage

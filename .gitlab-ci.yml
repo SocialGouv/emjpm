@@ -9,13 +9,13 @@ include:
   #
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_nodejs_chart_stage.yml
-    ref: v2.2.1
+    ref: v3.0.5
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v2.2.1
+    ref: v3.0.5
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v2.2.1
+    ref: v3.0.5
   #
   - /.gitlab-ci/stages/notify.yml
   - /.gitlab-ci/stages/deploy.yml

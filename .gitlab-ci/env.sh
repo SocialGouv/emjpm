@@ -81,6 +81,7 @@ printenv | grep \
   -e REGISTRY \
   -e REGISTRY \
   \
+  -e API_HOST \
   -e API_URL \
   -e CERTIFICATE_NAME \
   -e FRONTEND_HOST \

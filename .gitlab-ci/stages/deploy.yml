@@ -131,52 +131,6 @@ Deploy App (incubateur):
 #
 #
 
-.deploy-api-dev: &deploy_api-dev
-  <<: *deploy_stage
-  extends: .k8s-deploy-api-dev
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: api
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-    PORT: 80
-  after_script:
-    # NOTE(douglasduteil): re-run env.sh
-    # Because the `after_script` runs in a separated shell context.
-    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
-    - source ./.gitlab-ci/env.sh
-    - echo "Api available at - ${API_URL}"
-  except:
-    variables:
-      - $PRODUCTION
-
-.deploy-api-prod: &deploy_api-prod
-  <<: *deploy_stage
-  extends: .k8s-deploy-api-prod
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: api
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-    PORT: 80
-  after_script:
-    # NOTE(douglasduteil): re-run env.sh
-    # Because the `after_script` runs in a separated shell context.
-    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
-    - source ./.gitlab-ci/env.sh
-    - echo "Api available at - ${API_URL}"
-  only:
-    variables:
-      - $PRODUCTION
-
-#
-
-Deploy Api (dev):
-  <<: *deploy_api-dev
-  <<: *dev_stage
-
-Deploy Api (incubateur):
-  <<: *deploy_api-prod
-  <<: *incubateur_stage
-
 #
 #
 #
