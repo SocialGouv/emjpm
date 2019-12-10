@@ -43,6 +43,8 @@
 
 .git_changes: &git_changes |
   function did_changes() {
+    echo "git diff --stat HEAD..origin/${CI_DEFAULT_BRANCH}"
+    git diff --stat HEAD..origin/${CI_DEFAULT_BRANCH}
     git diff --stat HEAD..origin/${CI_DEFAULT_BRANCH} | head -1 | cut -d' ' -f2 | grep $1
   }
 
@@ -94,14 +96,13 @@
   }
 
 .manual_caching: &manual_caching |
-  export PROJECT_FOLDER=${CI_PROJECT_PATH}/${CI_COMMIT_REF_SLUG}
 
   function checking_cache() {
     local file="${1}"
-    local url=${MINIO}/minio/upload/${BUCKET}/${PROJECT_FOLDER}/${file}
+    local url=${MINIO}/minio/upload/${BUCKET}/${CI_PROJECT_PATH}/${file}
 
     echo "Downloading cache.tar.gz from ${url}"
-    getS3 "${CI_COMMIT_REF_SLUG}/${file}" -s -o cache.tar.gz
+    getS3 "${file}" -s -o cache.tar.gz
 
     echo "Extracting cache.tar.gz"
     if ! tar tf cache.tar.gz &> /dev/null ; then
@@ -130,7 +131,7 @@
       fi
     fi
 
-    local url=${MINIO}/minio/upload/${BUCKET}/${PROJECT_FOLDER}/${file}
+    local url=${MINIO}/minio/upload/${BUCKET}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_SLUG}/${file}
     echo "Uploading ${file} to ${url}"
     putS3 "${file}" "${CI_COMMIT_REF_SLUG}/${file}"
     echo "${file}" > URL
@@ -148,8 +149,12 @@
     - *manual_caching
     - apk add curl=~7 git=~2
     #
-    - checking_cache ${CONTEXT}-yarn.tar.gz || checking_cache ${CI_DEFAULT_BRANCH}-yarn.tar.gz || true
-    - checking_cache ${CONTEXT}-node_modules.tar.gz || checking_cache ${CI_DEFAULT_BRANCH}-node_modules.tar.gz || true
+    - checking_cache "${CI_COMMIT_REF_SLUG}/${CONTEXT}-yarn.tar.gz" ||
+      checking_cache ${CI_DEFAULT_BRANCH}/${CONTEXT}-yarn.tar.gz ||
+      true
+    - checking_cache "${CI_COMMIT_REF_SLUG}/${CONTEXT}-node_modules.tar.gz" ||
+      checking_cache ${CI_DEFAULT_BRANCH}/${CONTEXT}-node_modules.tar.gz ||
+      true
     #
     - git fetch origin ${CI_DEFAULT_BRANCH}
     - >-
