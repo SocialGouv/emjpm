@@ -94,23 +94,9 @@ Install api:
     - apk add curl=~7 jq=~1
     - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
     - set -x
-    # - >-
 
-    #   function checking_cache() {
-    #     local url="${1}"
-    #     echo "Downloading cache.tar.gz from ${url}"
-    #     time curl -s -o cache.tar.gz ${url}
-    #     echo "Extracting cache.tar.gz"
-    #     time tar xzf cache.tar.gz
-    #     echo "Successfully extracted cache"
-    #   }
-
-    - checking_cache "api-yarn.tar.gz" || true
-
-    # - >-
-    #   if [[ -f NODE_MODULES_CACHE_URL ]]; then
-    #     checking_cache $(cat NODE_MODULES_CACHE_URL)
-    #   fi
+    - checking_cache api-yarn.tar.gz || true
+    - checking_cache api-node_modules.tar.gz || true
 
     - set +x
   script:
@@ -121,8 +107,8 @@ Install api:
     - *manual_caching
     - set -x
 
-    - creating_cache "api-yarn.tar.gz" .yarn || true
-    # - creating_cache node_modules && mv URL NODE_MODULES_CACHE_URL;
+    - creating_cache api-yarn.tar.gz .yarn || true
+    - creating_cache api-node_modules.tar.gz || true
 
     - set +x
   artifacts:
