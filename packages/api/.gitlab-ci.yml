@@ -89,6 +89,7 @@ Register api image:
   extends: .base_deploy_nodejs_chart_stage
   variables:
     CONTEXT: api
+    IMAGE_TAG: $CI_COMMIT_SHA
     VALUES_FILE: ./packages/api/.k8s.values.yml
   before_script:
     - source ./.gitlab-ci/env.sh
