@@ -1,35 +1,16 @@
-.knex_cache: &knex_cache
-  key: "$CI_COMMIT_REF_SLUG-knex-node_modules"
-  paths:
-    - $CI_PROJECT_DIR/.yarn
-    - node_modules
-    - packages/knex/node_modules
-  policy: pull
-
 #
 
 Install knex:
-  extends: .prepare_stage
-  image: node:12-alpine
-  # rules:
-  #   - changes:
-  #       - packages/knex/.gitlab-ci.yml
-  #       - packages/knex/package.json
-  #       - yarn.lock
-  #     when: always
-  cache:
-    <<: *knex_cache
-    policy: pull-push
+  extends: .base_yarn_workspace_install
+  variables:
+    CONTEXT: knex
   before_script:
     - find packages -maxdepth 1 -type d -not -name knex | tail -n +2 | xargs rm -rf
-  script:
-    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
-    - yarn --frozen-lockfile
-  # artifacts:
-  #   expire_in: 30 mins
-  #   paths:
-  #     - node_modules
-  #     - packages/knex/node_modules
+  artifacts:
+    expire_in: 30 mins
+    paths:
+      - node_modules
+      - packages/knex/node_modules
 
 #
 
