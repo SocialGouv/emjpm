@@ -2,9 +2,9 @@ import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { LayoutServices } from "../../../src/components-v2/Layout";
-import { ServicesInformations } from "../../../src/components-v2/ServiceAntenneInformations";
-import { PreferencesPanel } from "../../../src/components-v2/ServiceAntenneSidebar";
+import { LayoutServices } from "../../../src/components/Layout";
+import { ServicesInformations } from "../../../src/components/ServiceAntenneInformations";
+import { PreferencesPanel } from "../../../src/components/ServiceAntenneSidebar";
 import { withAuthSync } from "../../../src/util/auth";
 
 const Antennes = props => {

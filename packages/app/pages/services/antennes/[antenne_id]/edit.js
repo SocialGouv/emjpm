@@ -2,9 +2,9 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import { useRouter } from "next/router";
 import React from "react";
 
-import { LayoutServices } from "../../../../src/components-v2/Layout";
-import { ServiceEditAntenne } from "../../../../src/components-v2/ServiceAntenneEdit";
-import { UserInformations } from "../../../../src/components-v2/UserInformations";
+import { LayoutServices } from "../../../../src/components/Layout";
+import { ServiceEditAntenne } from "../../../../src/components/ServiceAntenneEdit";
+import { UserInformations } from "../../../../src/components/UserInformations";
 import { withAuthSync } from "../../../../src/util/auth";
 
 const AddAntennes = () => {

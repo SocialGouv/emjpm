@@ -9,7 +9,7 @@ import { ApolloProvider } from "react-apollo";
 import ReactPiwik from "react-piwik";
 import { ThemeProvider } from "theme-ui";
 
-import { UserProvider } from "../src/components-v2/UserContext";
+import { UserProvider } from "../src/components/UserContext";
 import { withApolloClient } from "../src/lib/apollo";
 import { piwikSetup } from "../src/piwik";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";

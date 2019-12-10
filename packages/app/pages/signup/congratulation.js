@@ -3,7 +3,7 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex, Link } from "rebass";
 
-import { LayoutSignup } from "../../src/components-v2/Layout";
+import { LayoutSignup } from "../../src/components/Layout";
 
 const backLogin = () => {
   Router.push("/login");

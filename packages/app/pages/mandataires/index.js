@@ -2,10 +2,10 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Flex } from "rebass";
 
-import { LayoutMandataire } from "../../src/components-v2/Layout";
-import { MandataireFilters } from "../../src/components-v2/MandataireFilters";
-import { FiltersContextProvider } from "../../src/components-v2/MandataireFilters/context";
-import { MandatairesMesures } from "../../src/components-v2/MandatairesMesures";
+import { LayoutMandataire } from "../../src/components/Layout";
+import { MandataireFilters } from "../../src/components/MandataireFilters";
+import { FiltersContextProvider } from "../../src/components/MandataireFilters/context";
+import { MandatairesMesures } from "../../src/components/MandatairesMesures";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mandataires = () => {

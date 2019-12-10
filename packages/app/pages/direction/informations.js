@@ -2,9 +2,9 @@ import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { DirectionInformations } from "../../src/components-v2/DirectionInformations";
-import { LayoutDirection } from "../../src/components-v2/Layout";
-import { UserInformations } from "../../src/components-v2/UserInformations";
+import { DirectionInformations } from "../../src/components/DirectionInformations";
+import { LayoutDirection } from "../../src/components/Layout";
+import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {

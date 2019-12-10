@@ -2,9 +2,9 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Flex } from "rebass";
 
-import { LayoutMagistrat } from "../../src/components-v2/Layout";
-import { MagistratMandatairesList } from "../../src/components-v2/MagistratMandatairesList";
-import { UserInformations } from "../../src/components-v2/UserInformations";
+import { LayoutMagistrat } from "../../src/components/Layout";
+import { MagistratMandatairesList } from "../../src/components/MagistratMandatairesList";
+import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mandataires = () => {

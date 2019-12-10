@@ -1,9 +1,9 @@
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 
-import { LayoutMandataire } from "../../src/components-v2/Layout";
-import { MandatairesEditInformations } from "../../src/components-v2/MandatairesEditInformations";
-import { UserInformations } from "../../src/components-v2/UserInformations";
+import { LayoutMandataire } from "../../src/components/Layout";
+import { MandatairesEditInformations } from "../../src/components/MandatairesEditInformations";
+import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const EditInformations = () => {
