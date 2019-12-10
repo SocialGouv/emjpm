@@ -6,8 +6,8 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { Link as StyledLink } from "rebass";
 
 import { AdminServiceInformations } from "../../../src/components-v2/AdminServices/AdminServiceInformations";
+import { AdminServiceMesureImport } from "../../../src/components-v2/AdminServices/AdminServiceMesureImport";
 import { LayoutAdmin } from "../../../src/components-v2/Layout";
-import { MandataireAddMesureImport } from "../../../src/components-v2/MandataireMesureImport/MandataireAddMesureImport";
 import { withAuthSync } from "../../../src/util/auth";
 
 const StyledTabs = styled(Tabs)({
@@ -70,7 +70,7 @@ const Service = props => {
           <StyledTabPanel>
             <Card>
               <Heading4 mb={2}>Selectionnez le fichier</Heading4>
-              <MandataireAddMesureImport serviceId={serviceId} />
+              <AdminServiceMesureImport id={serviceId} />
             </Card>
           </StyledTabPanel>
         </StyledTabs>
@@ -80,7 +80,7 @@ const Service = props => {
 };
 
 Service.getInitialProps = async ({ query }) => {
-  return { serviceId: query.serviceId };
+  return { serviceId: query.service_id };
 };
 
 export default withAuthSync(Service);
