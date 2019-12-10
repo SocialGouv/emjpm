@@ -54,6 +54,7 @@ Test @emjpm/knex:
     - name: postgres:10-alpine
   allow_failure: true
   retry: 1
+  timeout: 2 minutes
   variables:
     DATABASE_URL: psql://postgres:@localhost/emjpm
     PGHOST: localhost
