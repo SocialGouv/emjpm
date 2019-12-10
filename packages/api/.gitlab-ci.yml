@@ -36,6 +36,31 @@
       -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)'
   }
 
+.manual_caching: &manual_caching |
+
+  function creating_cache() {
+    local file=${1}
+    local folder="${2}"
+
+    if [[ ! -d ${folder} ]]; then
+      echo "No ${folder} to cache"
+      return
+    fi
+
+    echo "Creating ${file} from ${folder}"
+    time tar czf ${file} ${folder}
+
+    # if [[ -f cache.tar.gz]] &&\
+    #   [[ diff cache.tar.gz ${file} ]] ; then
+    #   echo "No changes detected"
+    #   return
+    # fi
+
+    echo "Uploading ${file} to ${MINIO}/minio/upload/${BUCKET}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_SLUG}/${file}"
+    time putS3 ${file} "${MINIO}/minio/upload/${BUCKET}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_SLUG}/${file}"
+    echo "Successfully uploaded"
+  }
+
 Install api:
   extends: .prepare_stage
   image: node:12-alpine
@@ -53,6 +78,7 @@ Install api:
     policy: pull-push
   before_script:
     - *minio
+    - *manual_caching
     - apk add curl=~7 jq=~1
     - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
     - set -x
@@ -84,31 +110,8 @@ Install api:
     - yarn --frozen-lockfile
   after_script:
     - *minio
+    - *manual_caching
     - set -x
-    - >-
-
-      function creating_cache() {
-        local file=${1}
-        local folder="${2}"
-
-        if [[ ! -d ${folder} ]]; then
-          echo "No ${folder} to cache"
-          return
-        fi
-
-        echo "Creating ${file} from ${folder}"
-        time tar czf ${file} ${folder}
-
-        # if [[ -f cache.tar.gz]] &&\
-        #   [[ diff cache.tar.gz ${file} ]] ; then
-        #   echo "No changes detected"
-        #   return
-        # fi
-
-        echo "Uploading ${file} to ${MINIO}'/minio/upload/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${CI_COMMIT_REF_SLUG}'/'${file}"
-        time putS3 ${file} ${MINIO}'/minio/upload/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${CI_COMMIT_REF_SLUG}'/'${file} > URL
-        echo "Successfully uploaded to $(cat URL)"
-      }
 
     - creating_cache yarn.tar.gz .yarn && mv URL YARN_CACHE_URL;
     # - creating_cache node_modules && mv URL NODE_MODULES_CACHE_URL;
