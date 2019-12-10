@@ -152,7 +152,9 @@
     - checking_cache ${CONTEXT}-node_modules.tar.gz || checking_cache ${CI_DEFAULT_BRANCH}-node_modules.tar.gz || true
     #
     - git fetch origin ${CI_DEFAULT_BRANCH}
-    - changes "^packages/${CONTEXT}" || exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
+    - >-
+      [[ -d $CI_PROJECT_DIR/.yarn ]] &&
+        changes "^packages/${CONTEXT}" || exit ${CI_JOB_SKIP_EXIT_CODE:-0}
     #
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     - yarn --frozen-lockfile
