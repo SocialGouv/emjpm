@@ -41,42 +41,6 @@ include:
   except:
     variables:
       - $PRODUCTION
-#
-#
-#
-
-.create_namespace: &create_namespace
-  <<: *deploy_stage
-  extends: .base_docker_kube_image_stage
-  stage: "Registration"
-  script:
-    # Skip the job if the namespace exists
-    - "[[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
-    # Or (re)create to ensure new quota are applied
-    # - kubectl delete namespaces ${K8S_NAMESPACE} || true
-    #
-    - kubectl create namespace ${K8S_NAMESPACE}
-    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
-    - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
-    - kubectl label namespace ${K8S_NAMESPACE} cert=wildcard # Should be remove in prod
-    #
-    - envsubst < ./.k8s/quota.yml > ./quota.yml
-    - kubectl apply -f ./quota.yml -n ${K8S_NAMESPACE}
-    #
-    # Create secrets
-    - export APP_URL=$(echo $FRONTEND_URL | base64)
-    - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
-    - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
-    #
-    # Create azure volume secrets for anonymized export
-    - export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
-    - export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
-    - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
-    - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
-
-Create namespace:
-  <<: *create_namespace
-  <<: *dev_stage
 
 #
 #

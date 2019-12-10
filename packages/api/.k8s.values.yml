@@ -1,0 +1,74 @@
+image:
+  repository: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/api
+  tag: latest
+
+deployment:
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 128Mi
+
+  env:
+    - name: APP_URL
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: APP_URL
+    - name: DATABASE_URL
+      value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_HOST}/${POSTGRES_DATABASE}"
+    - name: PORT
+      value: "80"
+    - name: NODE_ENV
+      value: "production"
+    - name: SMTP_HOST
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: SMTP_HOST
+    - name: SMTP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: SMTP_PORT
+    - name: SMTP_USER
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: SMTP_USER
+    - name: SMTP_PASS
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: SMTP_PASS
+    - name: SMTP_FROM
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: SMTP_FROM
+    - name: SENTRY_PUBLIC_DSN
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: SENTRY_PUBLIC_DSN
+    - name: SENTRY_ENV
+      value: "${NODE_ENV}"
+
+
+ingress:
+  enabled: true
+  annotations:
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-staging
+    kubernetes.io/ingress.class: "azure/application-gateway"
+    kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: api-emjpm.dev.fabrique.social.gouv.fr
+      paths:
+        - /
+  tls:
+    - hosts:
+        - api-emjpm.dev.fabrique.social.gouv.fr
+      secretName: emjpm-certificate-api
