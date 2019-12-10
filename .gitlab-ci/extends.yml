@@ -100,7 +100,7 @@
     getS3 "${CI_COMMIT_REF_SLUG}/${file}" -s -o cache.tar.gz
 
     echo "Extracting cache.tar.gz"
-    if ! tar tf cache.tar.gz ; then
+    if ! tar tf cache.tar.gz &> /dev/null ; then
       echo "Invalid cache.tar.gz"
       return 1
     fi
