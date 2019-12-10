@@ -3,17 +3,18 @@ import { Button, Card, Heading4, Input, Select, Text } from "@socialgouv/emjpm-u
 import { Formik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { getRegionCode } from "../../util/departements";
+import { UserContext } from "../UserContext";
 import { ADD_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
-import { DEPARTEMENTS, USER_TRIBUNAL } from "./queries";
+import { DEPARTEMENTS, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
 import { formatUserTribunalList } from "./utils";
 
-const MandatairesCreateAntenneStyle = {
+const MandatairesCreateStyle = {
   flexWrap: "wrap"
 };
 
@@ -26,12 +27,11 @@ const grayBox = {
 const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export const MandatairesAddMesure = props => {
-  const { user_antennes, mandataires_admins } = props;
-  const [mandataires] = mandataires_admins;
+  const {
+    mandataire: { id }
+  } = useContext(UserContext);
 
-  const { loading, error, data } = useQuery(USER_TRIBUNAL, {
-    variables: { mandatairesId: mandataires.mandataires_id }
-  });
+  const { loading, error, data } = useQuery(USER_TRIBUNAL);
 
   const {
     data: departementsData,
@@ -56,7 +56,7 @@ export const MandatairesAddMesure = props => {
       const [mesure] = returning;
       UpdateMandatairesCounter({
         variables: {
-          mandataireId: mesure.mandataires_id,
+          mandataireId: mesure.mandataire_id,
           mesures_awaiting: 0,
           mesures_in_progress: 1
         }
@@ -72,19 +72,14 @@ export const MandatairesAddMesure = props => {
     return <div>Erreur...</div>;
   }
 
-  const antenneOptions = user_antennes.map(ua => ({
-    label: ua.mandataires_antenne.name,
-    value: ua.mandataires_antenne.id
-  }));
-
-  const tribunalList = formatUserTribunalList(data.mandataires_tis);
+  const tribunalList = formatUserTribunalList(data.user_tis);
   const [uniqueTribunal] = tribunalList;
   const tribunalDefaultValue =
     tribunalList.length <= 1 ? { label: uniqueTribunal.label, value: uniqueTribunal.value } : "";
 
   return (
     <Card sx={cardStyle}>
-      <Flex sx={MandatairesCreateAntenneStyle} {...props}>
+      <Flex sx={MandatairesCreateStyle} {...props}>
         <Box width={[1, 2 / 5]} sx={grayBox}>
           <Box height="280px">
             <Heading4>{`Informations générales`}</Heading4>
@@ -113,8 +108,18 @@ export const MandatairesAddMesure = props => {
                   });
                 } else {
                   AddMesure({
-                    awaitRefetchQueries: true,
-                    refetchQueries: ["mesures", "mesures_aggregate"],
+                    refetchQueries: [
+                      {
+                        query: MANDATAIRE_MESURES,
+                        variables: {
+                          limit: 20,
+                          offset: 0,
+                          searchText: null,
+                          status: null,
+                          type: null
+                        }
+                      }
+                    ],
                     variables: {
                       annee: values.annee.toString(),
                       civilite: values.civilite.value,
@@ -126,10 +131,11 @@ export const MandatairesAddMesure = props => {
                       residence: values.residence.value,
                       ti_id: values.tribunal.value,
                       type: values.type.value,
-                      ville: values.ville
+                      ville: values.ville,
+                      mandataireId: id
                     }
                   });
-                  Router.push("/mandatairess");
+                  Router.push("/mandataires");
                 }
                 setSubmitting(false);
               }}
@@ -138,7 +144,6 @@ export const MandatairesAddMesure = props => {
                   .required("Champ obligatoire")
                   .min(1900, "l'année choisi doit être au minimum 1900")
                   .max(2019, "l'année choisi doit être au maximum 2019"),
-                antenne: Yup.string(),
                 civilite: Yup.string().required("Champ obligatoire"),
                 code_postal: Yup.string().required("Champ obligatoire"),
                 date_ouverture: Yup.date().required("Champ obligatoire"),
@@ -151,7 +156,6 @@ export const MandatairesAddMesure = props => {
               })}
               initialValues={{
                 annee: "",
-                antenne: "",
                 civilite: "",
                 code_postal: "",
                 date_ouverture: "",
@@ -208,18 +212,6 @@ export const MandatairesAddMesure = props => {
                       {errors.numero_dossier && touched.numero_dossier && (
                         <Text>{errors.numero_dossier}</Text>
                       )}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
-                      <Select
-                        id="antenne"
-                        name="antenne"
-                        placeholder="Antenne"
-                        value={values.antenne}
-                        hasError={errors.antenne_id && touched.antenne_id}
-                        onChange={option => setFieldValue("antenne", option)}
-                        options={antenneOptions}
-                      />
-                      {errors.antenne_id && touched.antenne_id && <Text>{errors.antenne_id}</Text>}
                     </Box>
                     <Box mb="2" mt="5">
                       <Input

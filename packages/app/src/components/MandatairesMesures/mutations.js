@@ -219,6 +219,7 @@ export const ADD_MESURE = gql`
     $numero_dossier: String!
     $numero_rg: String!
     $ti_id: Int!
+    $mandataireId: Int!
   ) {
     insert_mesures(
       objects: {
@@ -234,29 +235,44 @@ export const ADD_MESURE = gql`
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
         status: "Mesure en cours"
+        mandataire_id: $mandataireId
       }
     ) {
       returning {
-        id
+        annee
+        antenne_id
         cabinet
         civilite
         code_postal
+        created_at
+        date_ouverture
+        department_id
+        etablissement
+        etablissement_id
+        extinction
+        id
+        is_urgent
+        judgment_date
+        mandataire_id
+        numero_dossier
+        numero_rg
+        reason_extinction
+        residence
+        service_id
+        status
+        ti_id
+        type
+        ville
         departement {
           nom
           region {
             nom
           }
         }
-        status
-        type
-        ville
-        residence
-        mandataire_id
-        numero_rg
-        numero_dossier
-        etablissement
-        annee
-        date_ouverture
+        ti {
+          id
+          etablissement
+        }
       }
     }
   }
