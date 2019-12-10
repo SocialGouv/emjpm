@@ -56,9 +56,10 @@
     #   echo "No changes detected"
     #   return
     # fi
-
-    echo "Uploading ${file} to ${MINIO}/minio/upload/${BUCKET}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_SLUG}/${file}"
+    local url=${MINIO}/minio/upload/${BUCKET}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_SLUG}/${file}
+    echo "Uploading ${file} to ${url}"
     putS3 ${file} "${CI_COMMIT_REF_SLUG}/${file}"
+    echo "${url}" > URL
     echo "Successfully uploaded"
   }
 
