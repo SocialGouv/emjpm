@@ -61,7 +61,7 @@ stages:
 
 Create namespace:
   extends: .base_create_namespace_stage
-  before_script:
+  after_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #

@@ -90,7 +90,7 @@ Register api image:
   variables:
     CONTEXT: api
     VALUES_FILE: ./packages/api/.k8s.values.yml
-  after_script:
+  before_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
