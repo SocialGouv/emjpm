@@ -61,7 +61,7 @@
 
     if [[ ! -d ${folder} ]]; then
       echo "No ${folder} to cache"
-      return
+      return 1
     fi
 
     echo "Creating ${file} from ${folder}"
@@ -108,7 +108,7 @@ Install api:
     - set -x
 
     - creating_cache api-yarn.tar.gz .yarn || true
-    - creating_cache api-node_modules.tar.gz || true
+    - creating_cache api-node_modules.tar.gz node_modules || true
 
     - set +x
   artifacts:
