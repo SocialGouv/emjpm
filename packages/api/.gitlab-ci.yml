@@ -90,6 +90,7 @@ Register api image:
   variables:
     CONTEXT: api
     IMAGE_TAG: $CI_COMMIT_SHA
+    PORT: 80
     VALUES_FILE: ./packages/api/.k8s.values.yml
   before_script:
     - source ./.gitlab-ci/env.sh

@@ -52,3 +52,32 @@ Register graphql-server image:
   variables:
     CONTEXT: packages/graphql-server
     IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
+
+#
+
+.deploy_graphql-server_stage: &deploy_graphql-server_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  variables:
+    CONTEXT: graphql-server
+    IMAGE_TAG: $CI_COMMIT_SHA
+    PORT: 80
+    VALUES_FILE: ./packages/graphql-server/.k8s.values.yml
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - HASURA_HOST=${K8S_PROJECT}-hasura-${BRANCH_HASH}
+
+#
+
+Deploy graphql-server (dev):
+  extends:
+    - .deploy_graphql-server_stage
+    - .dev_stage
+
+Deploy graphql-server (prod):
+  extends:
+    - .deploy_graphql-server_stage
+    - .incubateur_stage

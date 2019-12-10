@@ -81,3 +81,32 @@ Register app image:
   variables:
     CONTEXT: packages/app
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+
+#
+
+.deploy_app_stage: &deploy_app_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  variables:
+    CONTEXT: app
+    IMAGE_TAG: $CI_COMMIT_SHA
+    PORT: 80
+    VALUES_FILE: ./packages/app/.k8s.values.yml
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - HOST=${FRONTEND_HOST}
+
+#
+
+Deploy app (dev):
+  extends:
+    - .deploy_app_stage
+    - .dev_stage
+
+Deploy app (prod):
+  extends:
+    - .deploy_app_stage
+    - .incubateur_stage
