@@ -1,10 +1,40 @@
-.api_cache: &api_cache
-  key: "$CI_COMMIT_REF_SLUG-api-node_modules"
-  paths:
-    - $CI_PROJECT_DIR/.yarn
-  policy: pull
-
 #
+
+.mino: &minio |
+  MINIO=https://minio.fabrique.social.gouv.fr
+  BUCKET=gitlab-runner
+
+  function tokenS3() {
+
+    curl ${MINIO}'/minio/webrpc'\
+      -H 'Content-Type: application/json'\
+      --data-binary '{"id":1,"jsonrpc":"2.0","params":{"username":"'${S3KEY}'","password":"'${S3SECRET}'"},"method":"Web.Login"}'\
+      > json
+
+    cat json | sed "s/{.*\"token\":\"\([^\"]*\).*}/\1/g" > TOKEN_S3
+
+  }
+
+  function putS3() {
+    local file=$1
+
+    tokenS3
+
+    curl ${MINIO}'/minio/upload/'${BUCKET}'/'${file}\
+      -H 'Authorization: Bearer '$(cat TOKEN_S3)\
+      -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)'\
+      -T ${file} \
+      -X PUT
+  }
+
+  function getS3() {
+    local file=$1
+
+    tokenS3
+
+    curl ${MINIO}'/minio/download/gitlab-runner/'${file}'?token='$(cat TOKEN_S3)\
+      -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)'
+  }
 
 Install api:
   extends: .prepare_stage
@@ -16,13 +46,74 @@ Install api:
   #       - yarn.lock
   #     when: always
   cache:
-    <<: *api_cache
+    key: "$CI_COMMIT_REF_SLUG-api"
+    paths:
+      - YARN_CACHE_URL
+      - NODE_MODULES_CACHE_URL
     policy: pull-push
   before_script:
+    - *minio
+    - apk add curl=~7 jq=~1
     - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
+    - set -x
+    - getS3 hello.txt
+    # - >-
+
+    #   function checking_cache() {
+    #     local url="${1}"
+    #     echo "Downloading cache.tar.gz from ${url}"
+    #     time curl -s -o cache.tar.gz ${url}
+    #     echo "Extracting cache.tar.gz"
+    #     time tar xzf cache.tar.gz
+    #     echo "Successfully extracted cache"
+    #   }
+
+    # - >-
+    #   if [[ -f YARN_CACHE_URL ]]; then
+    #     checking_cache $(cat YARN_CACHE_URL)
+    #   fi
+
+    # - >-
+    #   if [[ -f NODE_MODULES_CACHE_URL ]]; then
+    #     checking_cache $(cat NODE_MODULES_CACHE_URL)
+    #   fi
+
+    - set +x
   script:
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     - yarn --frozen-lockfile
+  after_script:
+    - *minio
+    - set -x
+    # - >-
+
+    #   function creating_cache() {
+    #     local folder="${1}"
+    #     if [[ ! -d ${folder} ]]; then
+    #       echo "No ${folder} to cache"
+    #       return
+    #     fi
+
+    #     local tmpfile=$( mktemp cache_XXX.tar.gz )
+
+    #     echo "Creating ${tmpfile} from ${folder}"
+    #     time tar czf ${tmpfile} ${folder}
+
+    #     # if [[ -f cache.tar.gz]] &&\
+    #     #   [[ diff cache.tar.gz ${tmpfile} ]] ; then
+    #     #   echo "No changes detected"
+    #     #   return
+    #     # fi
+
+    #     echo "Uploading ${tmpfile} to https://transfer.sh/${tmpfile}"
+    #     time curl --upload-file ./${tmpfile} https://transfer.sh/${tmpfile} > URL
+    #     echo "Successfully uploaded to $(cat URL)"
+    #   }
+
+    #   # creating_cache .yarn && mv URL YARN_CACHE_URL;
+    # - creating_cache node_modules && mv URL NODE_MODULES_CACHE_URL;
+
+    - set +x
   artifacts:
     expire_in: 30 mins
     paths:
