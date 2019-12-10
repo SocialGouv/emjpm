@@ -6,10 +6,11 @@
 
   function tokenS3() {
 
-    curl ${MINIO}'/minio/webrpc'\
-      -H 'Content-Type: application/json'\
+    curl -s \
+      -H 'Content-Type: application/json' \
       --data-binary '{"id":1,"jsonrpc":"2.0","params":{"username":"'${S3KEY}'","password":"'${S3SECRET}'"},"method":"Web.Login"}'\
-      > json
+      ${MINIO}'/minio/webrpc' \
+    > json
 
     cat json | sed "s/{.*\"token\":\"\([^\"]*\).*}/\1/g" > TOKEN_S3
 
@@ -23,12 +24,13 @@
 
     tokenS3
 
-    curl ${MINIO}'/minio/upload/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${path}\
-      -H 'Authorization: Bearer '$(cat TOKEN_S3)\
-      -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)'\
+    curl -s \
+      -H 'Authorization: Bearer '$(cat TOKEN_S3) \
+      -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)' \
       -T ${file} \
-      -X PUT\
-      "$@"
+      -X PUT \
+      "$@" \
+      ${MINIO}'/minio/upload/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${path}
   }
 
   function getS3() {
@@ -37,9 +39,10 @@
 
     tokenS3
 
-    curl ${MINIO}'/minio/download/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${path}'?token='$(cat TOKEN_S3)\
+    curl -s \
       -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)' \
-      "$@"
+      "$@" \
+      ${MINIO}'/minio/download/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${path}'?token='$(cat TOKEN_S3)
   }
 
 .manual_caching: &manual_caching |
