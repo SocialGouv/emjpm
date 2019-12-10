@@ -38,3 +38,106 @@
     - docker build $DOCKER_BUILD_ARGS --cache-from $IMAGE_NAME:$CI_COMMIT_BEFORE_SHA --cache-from $IMAGE_NAME:$TAG --cache-from $IMAGE_NAME:master -t $IMAGE_NAME:$CI_COMMIT_SHA -t $IMAGE_NAME:$TAG $CONTEXT
     - docker push $IMAGE_NAME:$CI_COMMIT_SHA
     - docker push $IMAGE_NAME:$TAG
+
+#
+
+
+.mino: &minio |
+  MINIO=https://minio.fabrique.social.gouv.fr
+  BUCKET=gitlab-runner
+
+  function tokenS3() {
+
+    time curl -s \
+      -H 'Content-Type: application/json' \
+      --data-binary '{"id":1,"jsonrpc":"2.0","params":{"username":"'${S3KEY}'","password":"'${S3SECRET}'"},"method":"Web.Login"}'\
+      ${MINIO}'/minio/webrpc' \
+    > json
+
+    cat json | sed "s/{.*\"token\":\"\([^\"]*\).*}/\1/g" > TOKEN_S3
+
+  }
+
+  function putS3() {
+    local file=$1
+    shift;
+    local path=$1
+    shift;
+
+    tokenS3
+
+    time curl -s \
+      -H 'Authorization: Bearer '$(cat TOKEN_S3) \
+      -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)' \
+      -T ${file} \
+      -X PUT \
+      "$@" \
+      ${MINIO}'/minio/upload/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${path}
+  }
+
+  function getS3() {
+    local path=$1
+    shift;
+
+    tokenS3
+
+    curl -s \
+      -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)' \
+      "$@" \
+      ${MINIO}'/minio/download/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${path}'?token='$(cat TOKEN_S3)
+  }
+
+.manual_caching: &manual_caching |
+  export PROJECT_FOLDER=${CI_PROJECT_PATH}/${CI_COMMIT_REF_SLUG}
+
+  function checking_cache() {
+    local file="${1}"
+    local url=${MINIO}/minio/upload/${BUCKET}/${PROJECT_FOLDER}/${file}
+    echo "Downloading cache.tar.gz from ${url}"
+    getS3 "${CI_COMMIT_REF_SLUG}/${file}" -s -o cache.tar.gz
+    echo "Extracting cache.tar.gz"
+    time tar xzf cache.tar.gz
+    echo "Successfully extracted cache"
+  }
+
+  function creating_cache() {
+    local file=${1}
+    local folder="${2}"
+
+    if [[ ! -d ${folder} ]]; then
+      echo "No ${folder} to cache"
+      return 1
+    fi
+
+    echo "Creating ${file} from ${folder}"
+    time tar czf ${file} ${folder}
+
+    # if [[ -f cache.tar.gz]] &&\
+    #   [[ diff cache.tar.gz ${file} ]] ; then
+    #   echo "No changes detected"
+    #   return
+    # fi
+    local url=${MINIO}/minio/upload/${BUCKET}/${PROJECT_FOLDER}/${file}
+    echo "Uploading ${file} to ${url}"
+    putS3 "${file}" "${CI_COMMIT_REF_SLUG}/${file}"
+    echo "${file}" > URL
+    echo "Successfully uploaded"
+  }
+
+.base_yarn_workspace_install:
+  extends: .prepare_stage
+  image: node:12-alpine
+  variables:
+    CONTEXT: ${CI_JOB_NAME}
+  script:
+    - *minio
+    - *manual_caching
+    - apk add curl=~7
+    - checking_cache ${CONTEXT}-yarn.tar.gz || true
+    - checking_cache ${CONTEXT}-node_modules.tar.gz || true
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    #
+    - yarn --frozen-lockfile
+    #
+    - creating_cache ${CONTEXT}-yarn.tar.gz .yarn || true
+    - creating_cache ${CONTEXT}-node_modules.tar.gz node_modules || true
