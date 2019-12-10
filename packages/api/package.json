@@ -39,7 +39,7 @@
     "rasha": "^1.2.5"
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
+    "@babel/core": "^7.7.5",
     "@socialgouv/eslint-config-recommended": "^0.7.2",
     "@zeit/ncc": "^0.20.4",
     "babel-core": "7.0.0-bridge.0",
