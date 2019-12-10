@@ -7,7 +7,7 @@ import { Link as StyledLink } from "rebass";
 
 import { AdminUserInformations } from "../../../src/components-v2/AdminUsers/AdminUserInformations";
 import { LayoutAdmin } from "../../../src/components-v2/Layout";
-import { MandataireAddMesureImport } from "../../../src/components-v2/MandataireMesureImport/MandataireAddMesureImport";
+import { MesureImportMandataire } from "../../../src/components-v2/MesureImport";
 import { withAuthSync } from "../../../src/util/auth";
 
 const StyledTabs = styled(Tabs)({
@@ -70,7 +70,7 @@ const User = props => {
           <StyledTabPanel>
             <Card>
               <Heading4 mb={2}>Selectionnez le fichier</Heading4>
-              <MandataireAddMesureImport userId={userId} />
+              <MesureImportMandataire id={userId} />
             </Card>
           </StyledTabPanel>
         </StyledTabs>

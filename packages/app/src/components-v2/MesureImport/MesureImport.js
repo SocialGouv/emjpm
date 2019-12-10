@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { validateImportData } from "../../util/import";
 import { MesureImportFilepicker } from "./MesureImportFilepicker";
 import { MesureImportResults } from "./MesureImportResults";
-import { ADD_IMPORT } from "./mutations";
 
 const INITIAL_STATE = {
   errors: [],
@@ -12,9 +11,9 @@ const INITIAL_STATE = {
 };
 
 const MesureImport = props => {
-  const { variables } = props;
+  const { mutation, variables } = props;
+  const [addImport] = useMutation(mutation);
   const [state, setState] = useState(INITIAL_STATE);
-  const [addImport] = useMutation(ADD_IMPORT);
 
   const handleReset = () => {
     setState(INITIAL_STATE);

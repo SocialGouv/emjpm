@@ -1,3 +1,4 @@
-import { MesureImport } from "./MesureImport";
+import { MesureImportMandataire } from "./MesureImportMandataire";
+import { MesureImportService } from "./MesureImportService";
 
-export { MesureImport };
+export { MesureImportMandataire, MesureImportService };
