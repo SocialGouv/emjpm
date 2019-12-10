@@ -95,9 +95,16 @@
   function checking_cache() {
     local file="${1}"
     local url=${MINIO}/minio/upload/${BUCKET}/${PROJECT_FOLDER}/${file}
+
     echo "Downloading cache.tar.gz from ${url}"
     getS3 "${CI_COMMIT_REF_SLUG}/${file}" -s -o cache.tar.gz
+
     echo "Extracting cache.tar.gz"
+    if ! tar tf cache.tar.gz ; then
+      echo "Invalid cache.tar.gz"
+      return 1
+    fi
+
     time tar xzf cache.tar.gz
     echo ""
     echo "Successfully extracted cache"
