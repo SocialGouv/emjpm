@@ -41,6 +41,10 @@
 
 #
 
+.git_changes: &git_changes |
+  function did_changes() {
+    git diff --stat HEAD..origin/${CI_DEFAULT_BRANCH} | head -1 | cut -d' ' -f2 | grep $1
+  }
 
 .mino: &minio |
   MINIO=https://minio.fabrique.social.gouv.fr
@@ -140,12 +144,17 @@
     CONTEXT: ${CI_JOB_NAME}
   script:
     - *minio
+    - *git_changes
     - *manual_caching
-    - apk add curl=~7
-    - checking_cache ${CONTEXT}-yarn.tar.gz || checking_cache master-yarn.tar.gz || true
-    - checking_cache ${CONTEXT}-node_modules.tar.gz || checking_cache master-node_modules.tar.gz || true
-    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    - apk add curl=~7 git=~2
     #
+    - checking_cache ${CONTEXT}-yarn.tar.gz || checking_cache ${CI_DEFAULT_BRANCH}-yarn.tar.gz || true
+    - checking_cache ${CONTEXT}-node_modules.tar.gz || checking_cache ${CI_DEFAULT_BRANCH}-node_modules.tar.gz || true
+    #
+    - git fetch origin ${CI_DEFAULT_BRANCH}
+    - changes "^packages/${CONTEXT}" || exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
+    #
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     - yarn --frozen-lockfile
     #
     - creating_cache ${CONTEXT}-yarn.tar.gz .yarn || true
