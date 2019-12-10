@@ -82,7 +82,8 @@
 
     tokenS3
 
-    curl -s \
+    curl -Ss \
+      -w '\nEstablish Connection: %{time_connect}s\nTTFB: %{time_starttransfer}s\nTotal: %{time_total}s\n' \
       -H 'User-Agent: Mozilla/5.0 (I am cURL ^^)' \
       "$@" \
       ${MINIO}'/minio/download/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${path}'?token='$(cat TOKEN_S3)
