@@ -116,11 +116,12 @@
     time tar czf ${file} ${folder}
     echo ""
 
-    if [[ -f cache.tar.gz]]; then
+    if [[ -f cache.tar.gz ]]; then
       diff cache.tar.gz ${file}
       echo "No changes detected"
       return
     fi
+
     local url=${MINIO}/minio/upload/${BUCKET}/${PROJECT_FOLDER}/${file}
     echo "Uploading ${file} to ${url}"
     putS3 "${file}" "${CI_COMMIT_REF_SLUG}/${file}"
