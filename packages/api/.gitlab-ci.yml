@@ -113,7 +113,7 @@ Install api:
 
     - >-
       if [[ -f YARN_CACHE_URL ]]; then
-        checking_cache "${CI_JOB_NAME}-yarn.tar.gz"
+        checking_cache "${CI_JOB_NAME}-yarn.tar.gz" || true
       fi
 
     # - >-
