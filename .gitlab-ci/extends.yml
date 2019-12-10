@@ -134,8 +134,8 @@
     - *minio
     - *manual_caching
     - apk add curl=~7
-    - checking_cache ${CONTEXT}-yarn.tar.gz || checking_cache ${CONTEXT}-yarn.tar.gz || true
-    - checking_cache ${CONTEXT}-node_modules.tar.gz || true
+    - checking_cache ${CONTEXT}-yarn.tar.gz || checking_cache master-yarn.tar.gz || true
+    - checking_cache ${CONTEXT}-node_modules.tar.gz || checking_cache master-node_modules.tar.gz || true
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     #
     - yarn --frozen-lockfile
