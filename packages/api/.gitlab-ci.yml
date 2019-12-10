@@ -56,7 +56,7 @@ Install api:
     - apk add curl=~7 jq=~1
     - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
     - set -x
-    - getS3 hello.txt
+    # - getS3 hello.txt
     # - >-
 
     #   function checking_cache() {
@@ -85,32 +85,32 @@ Install api:
   after_script:
     - *minio
     - set -x
-    # - >-
+    - >-
 
-    #   function creating_cache() {
-    #     local folder="${1}"
-    #     if [[ ! -d ${folder} ]]; then
-    #       echo "No ${folder} to cache"
-    #       return
-    #     fi
+      function creating_cache() {
+        local file=${1}
+        local folder="${2}"
 
-    #     local tmpfile=$( mktemp cache_XXX.tar.gz )
+        if [[ ! -d ${folder} ]]; then
+          echo "No ${folder} to cache"
+          return
+        fi
 
-    #     echo "Creating ${tmpfile} from ${folder}"
-    #     time tar czf ${tmpfile} ${folder}
+        echo "Creating ${file} from ${folder}"
+        time tar czf ${file} ${folder}
 
-    #     # if [[ -f cache.tar.gz]] &&\
-    #     #   [[ diff cache.tar.gz ${tmpfile} ]] ; then
-    #     #   echo "No changes detected"
-    #     #   return
-    #     # fi
+        # if [[ -f cache.tar.gz]] &&\
+        #   [[ diff cache.tar.gz ${file} ]] ; then
+        #   echo "No changes detected"
+        #   return
+        # fi
 
-    #     echo "Uploading ${tmpfile} to https://transfer.sh/${tmpfile}"
-    #     time curl --upload-file ./${tmpfile} https://transfer.sh/${tmpfile} > URL
-    #     echo "Successfully uploaded to $(cat URL)"
-    #   }
+        echo "Uploading ${file} to ${MINIO}'/minio/upload/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${CI_COMMIT_REF_SLUG}'/'${file}"
+        time putS3 ${file} ${MINIO}'/minio/upload/'${BUCKET}'/'${CI_PROJECT_PATH}'/'${CI_COMMIT_REF_SLUG}'/'${file} > URL
+        echo "Successfully uploaded to $(cat URL)"
+      }
 
-    #   # creating_cache .yarn && mv URL YARN_CACHE_URL;
+    - creating_cache yarn.tar.gz .yarn && mv URL YARN_CACHE_URL;
     # - creating_cache node_modules && mv URL NODE_MODULES_CACHE_URL;
 
     - set +x
