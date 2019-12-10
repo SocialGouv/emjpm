@@ -19,8 +19,8 @@ Lint @emjpm/knex:
   image: node:12-alpine
   needs:
     - Install knex
-  cache:
-    <<: *knex_cache
+  dependencies:
+    - Install knex
   script:
     - yarn workspace @emjpm/knex lint
 
@@ -29,8 +29,8 @@ Test @emjpm/knex:
   image: node:12-alpine
   needs:
     - Install knex
-  cache:
-    <<: *knex_cache
+  dependencies:
+    - Install knex
   services:
     - name: postgres:10-alpine
   allow_failure: true
