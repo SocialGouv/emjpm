@@ -167,9 +167,7 @@ describe("routes : commentaires", () => {
           if (commentaires.length) {
             return agent
               .delete(
-                `/api/v1/mandataires/2/commentaires/${
-                  commentaires[commentaires.length - 1].id
-                }`
+                `/api/v1/mandataires/2/commentaires/${commentaires[commentaires.length - 1].id}`
               )
               .set("Authorization", "Bearer " + token)
               .then(res => {

@@ -121,12 +121,10 @@ describe("routes : mandataireMesures", () => {
     }).then(async token => {
       const getNbMesures = async () =>
         parseInt(
-          (
-            await knex
-              .table("mesures")
-              .where("mandataire_id", 1)
-              .count()
-          )[0].count
+          (await knex
+            .table("mesures")
+            .where("mandataire_id", 1)
+            .count())[0].count
         );
 
       const nbMesures = await getNbMesures();
