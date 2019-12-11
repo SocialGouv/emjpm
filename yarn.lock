@@ -2699,14 +2699,14 @@
     "@sentry/types" "5.10.0"
     tslib "^1.9.3"
 
-"@socialgouv/emjpm-ui-components@0.46.2":
-  version "0.46.2"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.46.2.tgz#17c66dfeedeb91917d6ffa6685680ff80adbf586"
-  integrity sha512-e3ZSKW5ajl7L1AbBAoz6T3jXxXglZvG4eJ5yfEbrY36q/eN/7XNhSg5xZBB3wQzz6pPWC0TjCQAEZydx13kbSQ==
+"@socialgouv/emjpm-ui-components@0.46.3":
+  version "0.46.3"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.46.3.tgz#ebf25d2e445720f0a663da59a2646aadda4ae755"
+  integrity sha512-F74tG+eiqpRmfYAAsGJ0TngUmGBfuGRKExaJUaZ26mkjNjtco6Fvx9emdQ6PVIeCw0S93lhfV5S/iGq6jDTTkQ==
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
-    "@socialgouv/emjpm-ui-core" "^1.11.1"
+    "@socialgouv/emjpm-ui-core" "^1.12.0"
     "@storybook/addon-actions" "^5.2.4"
     prop-types "^15.7.2"
     react "^16.8.6"
@@ -2715,16 +2715,32 @@
     styled-icons "^9.0.1"
     theme-ui "^0.2.31"
 
-"@socialgouv/emjpm-ui-core@^1.11.1":
-  version "1.11.1"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.11.1.tgz#24ed9217c8ef81937666ec4a07669fe7189cbee7"
-  integrity sha512-RJoZ422Stcne411UQfoOmiVEb59XAYr0VOcJ6fwKSXkhyAvvE0jPwxiV1OUbcHLPQwVKjRVpzo04K4uP/PcyTg==
+"@socialgouv/emjpm-ui-core@^1.12.0":
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.12.0.tgz#1f4e2daf79dbdda3d3e80250404448c9fda84ad9"
+  integrity sha512-eDoyIy8Vgxb4M8gCg9ozSJpGyDK+JqvPI1nehwOvgUOPZlOJxpjdPR6fIvMHhWdLOKAheFRRpFSbYPYRafMZPQ==
   dependencies:
     "@emotion/core" "^10.0.15"
     "@emotion/styled" "^10.0.15"
     prop-types "^15.7.2"
     react "^16.8.6"
     react-select "^3.0.4"
+    react-tabs "^3.0.0"
+    rebass "^4.0.1"
+    styled-icons "^9.0.1"
+    theme-ui "^0.2.31"
+
+"@socialgouv/emjpm-ui-core@^1.12.1":
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.12.1.tgz#bfdd97d16b909f49d75102df29ce2c84fae7d451"
+  integrity sha512-GNtz+C2vZICkUvrUkiQob1A1rOApSXjmon8JYkX41LRFOwflvUpRr/kRCmw/jAhUme9hRsnJIGyltKIltI6AYw==
+  dependencies:
+    "@emotion/core" "^10.0.15"
+    "@emotion/styled" "^10.0.15"
+    prop-types "^15.7.2"
+    react "^16.8.6"
+    react-select "^3.0.4"
+    react-tabs "^3.0.0"
     rebass "^4.0.1"
     styled-icons "^9.0.1"
     theme-ui "^0.2.31"
