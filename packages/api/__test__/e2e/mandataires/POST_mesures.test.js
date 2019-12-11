@@ -33,9 +33,11 @@ beforeEach(async () => {
 const simplerMesure = ({ id, ...props }) => props;
 
 const getMesuresCount = async mandataire_id =>
-  (await knex("mesures").where({
-    mandataire_id
-  })).length;
+  (
+    await knex("mesures").where({
+      mandataire_id
+    })
+  ).length;
 
 test("mandataire should POST mesure", async () => {
   const token = await getTokenByUserType("mandataire");
@@ -106,9 +108,11 @@ test("mandataire should NOT POST mesure for another one [body forge]", async () 
 });
 
 test("TI should NOT POST mesure reservation for another TI mandataire", async () => {
-  const mesuresCount = (await knex("mesures").where({
-    mandataire_id: 3
-  })).length;
+  const mesuresCount = (
+    await knex("mesures").where({
+      mandataire_id: 3
+    })
+  ).length;
 
   const token = await getTokenByUserType("ti");
   const response = await request(server)
@@ -132,9 +136,11 @@ Object {
   );
   expect(response.status).toBe(401);
 
-  const newMesuresCount = (await knex("mesures").where({
-    mandataire_id: 3
-  })).length;
+  const newMesuresCount = (
+    await knex("mesures").where({
+      mandataire_id: 3
+    })
+  ).length;
 
   expect(newMesuresCount).toBe(mesuresCount);
 
@@ -142,9 +148,11 @@ Object {
 });
 
 test("TI should POST mesure-reservation", async () => {
-  const mesuresCount = (await knex("mesures").where({
-    mandataire_id: 1
-  })).length;
+  const mesuresCount = (
+    await knex("mesures").where({
+      mandataire_id: 1
+    })
+  ).length;
 
   const token = await getTokenByUserType("ti");
   const response = await request(server)
@@ -159,9 +167,11 @@ test("TI should POST mesure-reservation", async () => {
   expect(response.body).toMatchSnapshot();
   expect(response.status).toBe(200);
 
-  const newMesuresCount = (await knex("mesures").where({
-    mandataire_id: 1
-  })).length;
+  const newMesuresCount = (
+    await knex("mesures").where({
+      mandataire_id: 1
+    })
+  ).length;
 
   expect(newMesuresCount).toBe(mesuresCount + 1);
 
@@ -169,9 +179,11 @@ test("TI should POST mesure-reservation", async () => {
 });
 
 test("TI should NOT POST mesure-reservation for another TI mandataire", async () => {
-  const mesuresCount = (await knex("mesures").where({
-    mandataire_id: 3
-  })).length;
+  const mesuresCount = (
+    await knex("mesures").where({
+      mandataire_id: 3
+    })
+  ).length;
 
   const token = await getTokenByUserType("ti");
   const response = await request(server)
@@ -196,9 +208,11 @@ Object {
   );
   expect(response.status).toBe(401);
 
-  const newMesuresCount = (await knex("mesures").where({
-    mandataire_id: 3
-  })).length;
+  const newMesuresCount = (
+    await knex("mesures").where({
+      mandataire_id: 3
+    })
+  ).length;
 
   expect(newMesuresCount).toBe(mesuresCount);
 
