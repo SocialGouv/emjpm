@@ -42,7 +42,7 @@ jobs:
         - yarn workspace @emjpm/knex knex seed:run --env test
       script:
         - yarn build --stream
-        # - yarn lint --stream
+        - yarn lint --stream
         - yarn workspace @emjpm/knex test
         # - yarn workspace @emjpm/app test --coverage --coverageReporters text-summary
         - JWT_KEY=lol yarn workspace @emjpm/api test --coverage --coverageReporters text-summary

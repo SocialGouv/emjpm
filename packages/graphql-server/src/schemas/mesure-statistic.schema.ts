@@ -18,17 +18,9 @@ export default gql`
       court: Int
     ): Int!
 
-    openMesureNumber(
-      region: Int
-      department: Int
-      court: Int
-    ): Int!
+    openMesureNumber(region: Int, department: Int, court: Int): Int!
 
-    availableMesureNumber(
-      region: Int
-      department: Int
-      court: Int
-    ): Int!
+    availableMesureNumber(region: Int, department: Int, court: Int): Int!
 
     mesureTypeCategoryStatistics(
       region: Int
