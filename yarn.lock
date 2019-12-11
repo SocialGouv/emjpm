@@ -1166,6 +1166,13 @@
   dependencies:
     find-up "^4.0.0"
 
+"@date-fns/upgrade@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@date-fns/upgrade/-/upgrade-1.0.1.tgz#95cbcb57feddc182b1a1408257b9abffcd1eea26"
+  integrity sha512-jKRhTxAOFAIkflSCLeqq8BjdSofDo1jG/jiy4peJKLDcXaHZnmNr6oq/iJ+A0bvgOh3WePIK1QQ7GulNo5U14A==
+  dependencies:
+    date-fns "^2.1"
+
 "@emotion/cache@^10.0.15", "@emotion/cache@^10.0.9":
   version "10.0.15"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.15.tgz#b81767b48015aae2689c60373992145c67b8de02"
@@ -6439,7 +6446,7 @@ date-fns@^1.27.2:
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
 
-date-fns@^2.8.1:
+date-fns@^2.1, date-fns@^2.8.1:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.8.1.tgz#2109362ccb6c87c3ca011e9e31f702bc09e4123b"
   integrity sha512-EL/C8IHvYRwAHYgFRse4MGAPSqlJVlOrhVYZ75iQBKrnv+ZedmYsgwH3t+BCDuZDXpoo07+q9j4qgSSOa7irJg==
