@@ -12,7 +12,7 @@
     "lint": "eslint pages src",
     "lint:fix": "eslint pages src --fix",
     "prettier": "prettier --check '**/*.js'",
-    "prettier:fix": "prettier --write '**/*.js'",
+    "prettier:fix": "prettier --write 'pages/**/*.js'",
     "build": "next build",
     "start:build": "next start -p 80",
     "generate": "hygen component new"
