@@ -1,8 +1,8 @@
 export const PATH = {
   admin: "/admin",
   direction: "/direction",
-  indiviuel: "/mandataire",
-  prepose: "/mandataire",
+  individuel: "/mandataires",
+  prepose: "/mandataires",
   service: "/services",
   ti: "/magistrats"
 };

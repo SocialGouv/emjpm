@@ -1,8 +1,8 @@
 import { FlexWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 
-import { LayoutPublic } from "../../src/components-v2/Layout";
-import { ResetPassword } from "../../src/components-v2/ResetPassword";
+import { LayoutPublic } from "../../src/components/Layout";
+import { ResetPassword } from "../../src/components/ResetPassword";
 import { withAuthSync } from "../../src/util/auth";
 
 const ResetPasswordPage = props => {

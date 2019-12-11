@@ -1,8 +1,8 @@
 import { FlexWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 
-import { ForgotPassword } from "../../src/components-v2/ForgotPassword";
-import { LayoutPublic } from "../../src/components-v2/Layout";
+import { ForgotPassword } from "../../src/components/ForgotPassword";
+import { LayoutPublic } from "../../src/components/Layout";
 import { withAuthSync } from "../../src/util/auth";
 
 const ForgotPasswordPage = () => {

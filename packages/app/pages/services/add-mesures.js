@@ -1,9 +1,9 @@
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 
-import { LayoutServices } from "../../src/components-v2/Layout";
-import { ServiceAddMesure } from "../../src/components-v2/ServiceMesures";
-import { UserInformations } from "../../src/components-v2/UserInformations";
+import { LayoutServices } from "../../src/components/Layout";
+import { ServiceAddMesure } from "../../src/components/ServiceMesures";
+import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const AddMesures = () => {
