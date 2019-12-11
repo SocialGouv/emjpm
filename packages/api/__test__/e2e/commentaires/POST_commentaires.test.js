@@ -39,14 +39,12 @@ test("should post commentaire for given mandataire and return response", async (
 
 test("should NOT post commentaire for mandataire not in my TI", async () => {
   const token = await getTokenByUserType("ti");
-  const initialCount = (
-    await knex
-      .from("commentaires")
-      .where({
-        mandataire_id: 3
-      })
-      .count()
-  )[0].count;
+  const initialCount = (await knex
+    .from("commentaires")
+    .where({
+      mandataire_id: 3
+    })
+    .count())[0].count;
   const post = await request(server)
     .post("/api/v1/mandataires/3/commentaires")
     .set("Authorization", "Bearer " + token)
@@ -54,13 +52,11 @@ test("should NOT post commentaire for mandataire not in my TI", async () => {
       comment: "this is a super comment"
     });
   expect(post.status).toBe(401);
-  const newCount = (
-    await knex
-      .from("commentaires")
-      .where({
-        mandataire_id: 3
-      })
-      .count()
-  )[0].count;
+  const newCount = (await knex
+    .from("commentaires")
+    .where({
+      mandataire_id: 3
+    })
+    .count())[0].count;
   expect(newCount).toBe(initialCount);
 });

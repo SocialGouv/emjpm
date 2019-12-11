@@ -115,10 +115,7 @@ export const RESIDENCE = [
   { label: "Autres", value: "Autres" }
 ];
 
-export const CIVILITY = [
-  { label: "Femme", value: "F" },
-  { label: "Homme", value: "H" }
-];
+export const CIVILITY = [{ label: "Femme", value: "F" }, { label: "Homme", value: "H" }];
 
 export const CABINET = [
   "1",
