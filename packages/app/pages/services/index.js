@@ -2,12 +2,12 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { LinkButton } from "../../src/components-v2/Commons";
-import { LayoutServices } from "../../src/components-v2/Layout";
-import { ServiceMesures } from "../../src/components-v2/ServiceMesures";
-import { ServicesFilters } from "../../src/components-v2/ServicesFilters";
-import { FiltersContextProvider } from "../../src/components-v2/ServicesFilters/context";
-import { UserInformations } from "../../src/components-v2/UserInformations";
+import { LinkButton } from "../../src/components/Commons";
+import { LayoutServices } from "../../src/components/Layout";
+import { ServiceMesures } from "../../src/components/ServiceMesures";
+import { ServicesFilters } from "../../src/components/ServicesFilters";
+import { FiltersContextProvider } from "../../src/components/ServicesFilters/context";
+import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {

@@ -1,0 +1,38 @@
+- args:
+    permission:
+      allow_upsert: true
+      check: {}
+      columns:
+      - id
+      - code_postal
+      - ville
+      - etablissement
+      - mandataire_id
+      - created_at
+      - annee
+      - type
+      - date_ouverture
+      - residence
+      - civilite
+      - status
+      - extinction
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - reason_extinction
+      - numero_rg
+      - department_id
+      - antenne_id
+      - service_id
+      - is_urgent
+      - judgment_date
+      localPresets:
+      - key: ""
+        value: ""
+      set: {}
+    role: individuel
+    table:
+      name: mesures
+      schema: public
+  type: create_insert_permission

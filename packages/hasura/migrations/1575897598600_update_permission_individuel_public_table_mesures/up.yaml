@@ -1,0 +1,18 @@
+- args:
+    role: individuel
+    table:
+      name: mesures
+      schema: public
+  type: drop_delete_permission
+- args:
+    permission:
+      filter:
+        mandataire:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+    role: individuel
+    table:
+      name: mesures
+      schema: public
+  type: create_delete_permission

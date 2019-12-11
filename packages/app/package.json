@@ -7,8 +7,8 @@
   "homepage": "https://socialgouv.github.io/emjpm-app",
   "scripts": {
     "start": "next dev",
-    "dev": "next",
-    "test": "jest ./test",
+    "dev": "NODE_OPTIONS=--inspect next",
+    "test": "jest",
     "lint": "eslint pages src",
     "lint:fix": "eslint pages src --fix",
     "prettier": "prettier --check '**/*.js'",
@@ -39,7 +39,6 @@
     "eslint-plugin-simple-import-sort": "^4.0.0",
     "eslint-plugin-sort-keys-fix": "^1.1.0",
     "formik": "^1.5.8",
-    "fuse.js": "^3.4.4",
     "graphql": "^14.4.2",
     "hygen": "^4.0.9",
     "isomorphic-fetch": "^2.2.1",

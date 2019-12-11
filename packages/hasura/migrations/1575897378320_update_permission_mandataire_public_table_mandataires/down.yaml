@@ -1,0 +1,36 @@
+- args:
+    role: mandataire
+    table:
+      name: mandataires
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: false
+      columns:
+      - secretariat
+      - nb_secretariat
+      - dispo_max
+      - id
+      - mesures_en_attente
+      - mesures_en_cours
+      - user_id
+      - zip
+      - created_at
+      - date_mesure_update
+      - email_send
+      - adresse
+      - code_postal
+      - etablissement
+      - genre
+      - telephone
+      - telephone_portable
+      - ville
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: mandataire
+    table:
+      name: mandataires
+      schema: public
+  type: create_select_permission
