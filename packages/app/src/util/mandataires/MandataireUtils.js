@@ -1,3 +1,4 @@
+import { convertTokens, legacyParse } from "@date-fns/upgrade/v2";
 import { compareDesc, differenceInMonths, format } from "date-fns";
 
 const TYPES = {
@@ -12,7 +13,7 @@ const capitalize = string => {
 };
 
 const formatLastLogin = date => {
-  return format(date, ["DD/MM/YYYY"]);
+  return format(legacyParse(date), convertTokens("DD/MM/YYYY"));
 };
 
 const newestLastLogin = admins => {
@@ -23,7 +24,7 @@ const newestLastLogin = admins => {
 };
 
 const isCriticalDate = date => {
-  return differenceInMonths(TODAY, date) >= 1;
+  return differenceInMonths(legacyParse(TODAY), legacyParse(date)) >= 1;
 };
 
 export const formatMandataire = (

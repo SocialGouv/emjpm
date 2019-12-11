@@ -1,3 +1,4 @@
+import { convertTokens, legacyParse } from "@date-fns/upgrade/v2";
 import { format } from "date-fns";
 
 // move me in the good folder
@@ -21,8 +22,8 @@ export const formatMesureList = mesureList => {
       cabinet,
       ti
     } = mesure;
-    const formatedDate = format(date_ouverture, "DD/MM/YYYY");
-    const formatedJudgementDate = format(judgment_date, "DD/MM/YYYY");
+    const formatedDate = format(legacyParse(date_ouverture), convertTokens("DD/MM/YYYY"));
+    const formatedJudgementDate = format(legacyParse(judgment_date), convertTokens("DD/MM/YYYY"));
     return {
       age: annee ? annee : "nc",
       antenneId: antenne_id ? antenne_id : null,

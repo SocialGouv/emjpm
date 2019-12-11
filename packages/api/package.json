@@ -15,6 +15,7 @@
     "email-relance": "node ./scripts/relance-mandataires-inactifs"
   },
   "dependencies": {
+    "@date-fns/upgrade": "^1.0.1",
     "@emjpm/knex": "^25.11.5",
     "@sentry/node": "5.1.2",
     "bcryptjs": "^2.4.3",

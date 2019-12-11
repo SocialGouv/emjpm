@@ -1,3 +1,4 @@
+import { convertTokens, legacyParse } from "@date-fns/upgrade/v2";
 import { format } from "date-fns";
 
 export const formatMandatairesMesureList = mesureList => {
@@ -17,7 +18,7 @@ export const formatMandatairesMesureList = mesureList => {
       numero_rg,
       cabinet
     } = mesure;
-    const formatedDate = format(date_ouverture, "DD/MM/YYYY");
+    const formatedDate = format(legacyParse(date_ouverture), convertTokens("DD/MM/YYYY"));
     return {
       age: annee ? annee : null,
       antenneId: antenne_id ? antenne_id : null,
