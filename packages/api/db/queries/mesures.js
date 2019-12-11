@@ -109,9 +109,11 @@ const getAllMesuresByMandatairesFilter = (
 const bulk = ({ mesures, mandataire_id }) => {
   return knex.transaction(trx => {
     const mesureExist = async numero_dossier =>
-      (await knex("mesures")
-        .where({ mandataire_id, numero_dossier: numero_dossier })
-        .count())[0].count > 0;
+      (
+        await knex("mesures")
+          .where({ mandataire_id, numero_dossier: numero_dossier })
+          .count()
+      )[0].count > 0;
     const loadMesure = async (mesure, i) => {
       if (
         mesure.numero_dossier &&
