@@ -3,9 +3,9 @@ import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
-import { AdminUserInformations } from "../../../src/components-v2/AdminUsers/AdminUserInformations";
-import { LayoutAdmin } from "../../../src/components-v2/Layout";
-import { MesureImportMandataire } from "../../../src/components-v2/MesureImport";
+import { AdminUserInformations } from "../../../src/components/AdminUsers/AdminUserInformations";
+import { LayoutAdmin } from "../../../src/components/Layout";
+import { MesureImportMandataire } from "../../../src/components/MesureImport";
 import { withAuthSync } from "../../../src/util/auth";
 
 const User = props => {
