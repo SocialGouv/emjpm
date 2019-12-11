@@ -22,6 +22,18 @@ export const SERVICES = gql`
   }
 `;
 
+export const SERVICE = gql`
+  query service($serviceId: Int) {
+    services(where: { id: { _eq: $serviceId } }) {
+      id
+      etablissement
+      code_postal
+      ville
+      department_id
+    }
+  }
+`;
+
 export const DEPARTEMENTS = gql`
   {
     departements(order_by: { nom: asc }) {
