@@ -28,7 +28,9 @@ test("should delete commentaire for given mandataire and return response", async
   const curComments = response.body;
   const del = await request(server)
     .delete(
-      `/api/v1/mandataires/1/commentaires/${curComments[curComments.length - 1].id}`
+      `/api/v1/mandataires/1/commentaires/${
+        curComments[curComments.length - 1].id
+      }`
     )
     .set("Authorization", "Bearer " + token);
   expect(del.status).toBe(200);
@@ -43,7 +45,9 @@ test("should NOT delete commentaire for another mandataire", async () => {
   });
   const del = await request(server)
     .delete(
-      `/api/v1/mandataires/3/commentaires/${initialComments[initialComments.length - 1].id}`
+      `/api/v1/mandataires/3/commentaires/${
+        initialComments[initialComments.length - 1].id
+      }`
     )
     .set("Authorization", "Bearer " + token);
   expect(del.status).toBe(401);
