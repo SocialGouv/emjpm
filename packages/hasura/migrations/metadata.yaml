@@ -575,69 +575,6 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-    role: mandataire
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
       - id
       - username
       - password
@@ -699,6 +636,69 @@ tables:
       - username
       filter: {}
     role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: mandataire
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: prepose
   table: users
   update_permissions:
   - comment: null
@@ -1297,6 +1297,8 @@ tables:
       - department_id
       - dispo_max
       - email
+      - etablissement
+      - id
       - information
       - mesures_awaiting
       - mesures_in_progress
@@ -1609,6 +1611,14 @@ tables:
     permission:
       filter:
         mandataire:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      filter:
+        mandataire:
           user_id:
             _eq: X-Hasura-User-Id
     role: mandataire
@@ -1657,6 +1667,36 @@ tables:
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
   insert_permissions:
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - id
+      - code_postal
+      - ville
+      - etablissement
+      - mandataire_id
+      - created_at
+      - annee
+      - type
+      - date_ouverture
+      - residence
+      - civilite
+      - status
+      - extinction
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - reason_extinction
+      - numero_rg
+      - department_id
+      - antenne_id
+      - service_id
+      - is_urgent
+      - judgment_date
+      set: {}
+    role: individuel
   - comment: null
     permission:
       check:
@@ -1937,6 +1977,40 @@ tables:
       - type
       - ville
       filter:
+        mandataire:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
         ti:
           magistrats:
             user_id:
@@ -1972,6 +2046,40 @@ tables:
     role: direction
   table: mesures
   update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        mandataire:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+      set: {}
+    role: individuel
   - comment: null
     permission:
       columns:
@@ -2310,6 +2418,32 @@ tables:
   insert_permissions:
   - comment: null
     permission:
+      check: {}
+      columns:
+      - id
+      - etablissement
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - mesures_en_cours
+      - dispo_max
+      - user_id
+      - telephone_portable
+      - secretariat
+      - nb_secretariat
+      - created_at
+      - date_mesure_update
+      - email_send
+      - genre
+      - mesures_en_attente
+      - zip
+      - department_id
+      - siret
+      set: {}
+    role: individuel
+  - comment: null
+    permission:
       check:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2375,18 +2509,37 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - id
+      - etablissement
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - mesures_en_cours
+      - dispo_max
+      - user_id
+      - telephone_portable
+      - secretariat
+      - nb_secretariat
+      - created_at
+      - date_mesure_update
+      - email_send
+      - genre
+      - mesures_en_attente
+      - zip
+      - department_id
       - siret
       filter:
-        siret:
-          _eq: X-Hasura-Siret
-      limit: 1
-    role: anonymous
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: mandataire
   - comment: null
     permission:
       allow_aggregations: false
       columns:
       - secretariat
       - nb_secretariat
+      - department_id
       - dispo_max
       - id
       - mesures_en_attente
@@ -2400,13 +2553,24 @@ tables:
       - code_postal
       - etablissement
       - genre
+      - siret
       - telephone
       - telephone_portable
       - ville
       filter:
         user_id:
           _eq: X-Hasura-User-Id
-    role: mandataire
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - siret
+      filter:
+        siret:
+          _eq: X-Hasura-Siret
+      limit: 1
+    role: anonymous
   - comment: null
     permission:
       allow_aggregations: false
@@ -2484,6 +2648,34 @@ tables:
     role: ti
   table: mandataires
   update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - secretariat
+      - nb_secretariat
+      - department_id
+      - dispo_max
+      - id
+      - mesures_en_attente
+      - mesures_en_cours
+      - user_id
+      - zip
+      - created_at
+      - date_mesure_update
+      - email_send
+      - adresse
+      - code_postal
+      - etablissement
+      - genre
+      - siret
+      - telephone
+      - telephone_portable
+      - ville
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set: {}
+    role: individuel
   - comment: null
     permission:
       columns:

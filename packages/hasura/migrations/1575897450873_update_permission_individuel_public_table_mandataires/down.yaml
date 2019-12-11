@@ -1,0 +1,6 @@
+- args:
+    role: individuel
+    table:
+      name: mandataires
+      schema: public
+  type: drop_update_permission

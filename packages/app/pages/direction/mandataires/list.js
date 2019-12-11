@@ -2,17 +2,17 @@ import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@socialgouv/emjpm-ui-c
 import React from "react";
 import { Box } from "rebass";
 
-import { Filters } from "../../../src/components-v2/DirectionFilters";
-import { FiltersContextProvider } from "../../../src/components-v2/DirectionFilters/context";
+import { Filters } from "../../../src/components/DirectionFilters";
+import { FiltersContextProvider } from "../../../src/components/DirectionFilters/context";
 import {
   AvailableMesureIndicator,
   EtablissementIndicator,
   MandatairesIndicator,
   ServicesIndicator
-} from "../../../src/components-v2/DirectionIndicators";
-import { MandatairesList } from "../../../src/components-v2/DirectionMandatairesList";
-import { MandatairesSubNavigation } from "../../../src/components-v2/DirectionMandatairesSubNavigation";
-import { LayoutDirection } from "../../../src/components-v2/Layout";
+} from "../../../src/components/DirectionIndicators";
+import { MandatairesList } from "../../../src/components/DirectionMandatairesList";
+import { MandatairesSubNavigation } from "../../../src/components/DirectionMandatairesSubNavigation";
+import { LayoutDirection } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
 const Mandataires = () => {

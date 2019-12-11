@@ -2,11 +2,11 @@ import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { LayoutServices } from "../../src/components-v2/Layout";
-import { ServiceAntennes } from "../../src/components-v2/ServiceAntennes";
-import { PreferencesPanel } from "../../src/components-v2/ServiceSidebar";
-import { ServicesInformations } from "../../src/components-v2/ServicesInformations";
-import { UserInformations } from "../../src/components-v2/UserInformations";
+import { LayoutServices } from "../../src/components/Layout";
+import { ServiceAntennes } from "../../src/components/ServiceAntennes";
+import { PreferencesPanel } from "../../src/components/ServiceSidebar";
+import { ServicesInformations } from "../../src/components/ServicesInformations";
+import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {

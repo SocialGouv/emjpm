@@ -1,0 +1,35 @@
+- args:
+    permission:
+      columns:
+      - secretariat
+      - nb_secretariat
+      - department_id
+      - dispo_max
+      - id
+      - mesures_en_attente
+      - mesures_en_cours
+      - user_id
+      - zip
+      - created_at
+      - date_mesure_update
+      - email_send
+      - adresse
+      - code_postal
+      - etablissement
+      - genre
+      - siret
+      - telephone
+      - telephone_portable
+      - ville
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      localPresets:
+      - key: ""
+        value: ""
+      set: {}
+    role: individuel
+    table:
+      name: mandataires
+      schema: public
+  type: create_update_permission
