@@ -1,13 +1,13 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import { Button, Card } from "@socialgouv/emjpm-ui-core";
-import React, { useContext, useState } from "react";
+import Link from "next/link";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
-import { ACTIVATE_USER } from "./mutations";
 import { USERS } from "./queries";
-import { activateButtonStyle, cardStyle, descriptionStyle, labelStyle } from "./style";
+import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 const ServiceDetail = ({ service_admins }) => (
   <>
@@ -57,24 +57,7 @@ const getDetail = type => {
 };
 
 const RowItem = ({ item }) => {
-  const { id, active, nom, prenom, email, type } = item;
-  const [isActive, setActive] = useState(active);
-  const [activateUser] = useMutation(ACTIVATE_USER, {
-    onCompleted: data => {
-      setActive(data.update_users.returning[0].active);
-    }
-  });
-
-  const toogleActivation = () => {
-    const newState = !isActive;
-    activateUser({
-      variables: {
-        active: newState,
-        id
-      }
-    });
-  };
-
+  const { id, nom, prenom, email, type } = item;
   const DetailComponent = getDetail(type);
 
   return (
@@ -99,14 +82,11 @@ const RowItem = ({ item }) => {
             <DetailComponent {...item} />
           </Flex>
           <Box mr="1" width="120px">
-            <Button
-              sx={activateButtonStyle(isActive)}
-              width="120px"
-              onClick={toogleActivation}
-              variant="outline"
-            >
-              {isActive ? "Bloquer" : "Activer"}
-            </Button>
+            <Link href={`/admin/users/${id}`}>
+              <a>
+                <Button>Voir</Button>
+              </a>
+            </Link>
           </Box>
         </Flex>
       </Card>

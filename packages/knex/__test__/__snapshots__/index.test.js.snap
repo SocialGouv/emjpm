@@ -697,6 +697,12 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
+  "service_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "status": Object {
     "defaultValue": null,
     "maxLength": 255,
@@ -706,7 +712,7 @@ Object {
   "user_id": Object {
     "defaultValue": null,
     "maxLength": null,
-    "nullable": false,
+    "nullable": true,
     "type": "integer",
   },
 }
