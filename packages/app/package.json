@@ -23,6 +23,7 @@
     "@emotion/core": "^10.0.15",
     "@emotion/styled": "^10.0.15",
     "@mdx-js/react": "^1.2.2",
+    "@sentry/browser": "^5.10.2",
     "@socialgouv/emjpm-ui-components": "0.46.2",
     "@socialgouv/emjpm-ui-core": "^1.11.1",
     "@socialgouv/emjpm-ui-global-style": "^1.3.0",
@@ -86,7 +87,6 @@
   "devDependencies": {
     "@babel/cli": "^7.7.5",
     "@babel/core": "^7.7.5",
-    "@sentry/browser": "^5.1.3",
     "@socialgouv/eslint-config-react": "^0.9.6",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.2",
