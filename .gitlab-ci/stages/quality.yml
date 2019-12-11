@@ -94,17 +94,17 @@ Test @emjpm/api:
     - npx wait-for-postgres --host localhost --port 5434 --username=${POSTGRES_USER} --password=${POSTGRES_PASSWORD}
     - yarn workspace @emjpm/api test --coverage
 
-Test @emjpm/app:
-  <<: *quality_stage
-  <<: *master_based_stage
-  artifacts:
-    paths:
-      - packages/app/coverage
-  variables:
-    GIT_STRATEGY: none
-    JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/app/coverage
-  script:
-    - yarn workspace @emjpm/app test --coverage
+# Test @emjpm/app:
+#   <<: *quality_stage
+#   <<: *master_based_stage
+#   artifacts:
+#     paths:
+#       - packages/app/coverage
+#   variables:
+#     GIT_STRATEGY: none
+#     JEST_COVERAGE_DIRECTORY: $CI_PROJECT_DIR/packages/app/coverage
+#   script:
+#     - yarn workspace @emjpm/app test --coverage
 
 Test @emjpm/knex:
   <<: *quality_stage
