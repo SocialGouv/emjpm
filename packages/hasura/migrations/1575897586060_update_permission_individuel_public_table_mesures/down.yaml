@@ -1,0 +1,42 @@
+- args:
+    role: individuel
+    table:
+      name: mesures
+      schema: public
+  type: drop_select_permission
+- args:
+    permission:
+      allow_aggregations: false
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        mandataire_id:
+          _eq: X-Hasura-User-Id
+    role: individuel
+    table:
+      name: mesures
+      schema: public
+  type: create_select_permission

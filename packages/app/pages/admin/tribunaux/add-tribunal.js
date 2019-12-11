@@ -2,8 +2,8 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Flex } from "rebass";
 
-import { AdminAddTribunal } from "../../../src/components-v2/AdminTribunaux/AdminAddTribunal";
-import { LayoutAdmin } from "../../../src/components-v2/Layout";
+import { AdminAddTribunal } from "../../../src/components/AdminTribunaux/AdminAddTribunal";
+import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
 const AddTribunauxPage = () => {

@@ -2,10 +2,10 @@ import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { LayoutMagistrat } from "../../src/components-v2/Layout";
-import { MagistratInformations } from "../../src/components-v2/MagistratInformations";
-import { MagistratTribunalInformations } from "../../src/components-v2/MagistratTribunalInformations";
-import { UserInformations } from "../../src/components-v2/UserInformations";
+import { LayoutMagistrat } from "../../src/components/Layout";
+import { MagistratInformations } from "../../src/components/MagistratInformations";
+import { MagistratTribunalInformations } from "../../src/components/MagistratTribunalInformations";
+import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {

@@ -2,8 +2,8 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Flex } from "rebass";
 
-import { AdminAddService } from "../../../src/components-v2/AdminServices/AdminAddService";
-import { LayoutAdmin } from "../../../src/components-v2/Layout";
+import { AdminAddService } from "../../../src/components/AdminServices/AdminAddService";
+import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
 const AddServicePage = () => {

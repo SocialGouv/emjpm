@@ -2,8 +2,8 @@ import { BoxWrapper, FlexWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Image } from "rebass";
 
-import { LayoutPublic } from "../src/components-v2/Layout";
-import { Login, LoginCreateAccount } from "../src/components-v2/Login";
+import { LayoutPublic } from "../src/components/Layout";
+import { Login, LoginCreateAccount } from "../src/components/Login";
 import { withAuthSync } from "../src/util/auth";
 
 const LoginPage = () => {
