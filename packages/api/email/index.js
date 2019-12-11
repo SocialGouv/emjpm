@@ -22,8 +22,8 @@ if (smtpUser) {
 }
 
 const sendEmail = (sendTo, subject, text, html, bcc) => {
-  let transporter = nodemailer.createTransport(smtpConfig);
-  let mailOptions = {
+  const transporter = nodemailer.createTransport(smtpConfig);
+  const mailOptions = {
     from: smtpFrom,
     to: sendTo,
     subject,

@@ -119,7 +119,8 @@ export class MesureAPI extends AuthDataSource {
             region: {
                 id: {_eq: ${params.region}}
             }
-          }`);
+          }`
+      );
     }
     if (params.department) {
       filters.push(`department_id: {_eq: ${params.department}}`);
