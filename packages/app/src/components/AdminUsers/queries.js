@@ -42,3 +42,31 @@ export const USERS = gql`
     }
   }
 `;
+
+export const USER = gql`
+  query user($userId: Int) {
+    users(where: { id: { _eq: $userId } }) {
+      id
+      nom
+      prenom
+      type
+      email
+      active
+      magistrat {
+        ti {
+          ville
+        }
+      }
+      user_tis(order_by: { ti: { ville: asc } }) {
+        ti {
+          ville
+        }
+      }
+      service_admins {
+        service {
+          etablissement
+        }
+      }
+    }
+  }
+`;
