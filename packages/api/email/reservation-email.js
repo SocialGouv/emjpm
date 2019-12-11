@@ -1,6 +1,8 @@
 const { format } = require("date-fns");
 const { sendEmail } = require(".");
 
+const { legacyParse, convertTokens } = require("@date-fns/upgrade/v2");
+
 const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
   `Madame, Monsieur,
 
@@ -13,7 +15,7 @@ const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
   ${
     mesure.judgment_date
       ? `- date prévisionnelle du jugement: ` +
-        format(mesure.judgment_date, "DD/MM/YYYY")
+        format(legacyParse(mesure.judgment_date), convertTokens("DD/MM/YYYY"))
       : ""
   }
 
@@ -51,7 +53,7 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
       ? `
       <br>
       - date prévisionnelle du jugement: ` +
-        format(mesure.judgment_date, "DD/MM/YYYY")
+        format(legacyParse(mesure.judgment_date), convertTokens("DD/MM/YYYY"))
       : ""
   }
 <br><br>
