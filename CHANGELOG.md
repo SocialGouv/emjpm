@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.11.6](https://github.com/SocialGouv/emjpm/compare/v25.11.5...v25.11.6) (2019-12-11)
+
+
+### Bug Fixes
+
+* **lint:** fix lint erros ([#1100](https://github.com/SocialGouv/emjpm/issues/1100)) ([ab5abda](https://github.com/SocialGouv/emjpm/commit/ab5abda))
+* **lint:** lint ([958fe49](https://github.com/SocialGouv/emjpm/commit/958fe49))
+
+
+
+
+
 ## [25.11.5](https://github.com/SocialGouv/emjpm/compare/v25.11.4...v25.11.5) (2019-12-09)
 
 **Note:** Version bump only for package emjpm
