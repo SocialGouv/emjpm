@@ -1,16 +1,16 @@
 import React from "react";
 
+import { LayoutMagistratMap } from "../../src/components/Layout";
+import { MagistratMapMandataires } from "../../src/components/MagistratMapMandataires";
+import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
-import { LayoutMagistratMap } from "../../src/components-v2/Layout";
-import { UserInformations } from "../../src/components-v2/UserInformations";
-import { MagistratMandatairesMap } from "../../src/components-v2/MagistratMandatairesMap";
 
 const Map = () => {
   return (
     <LayoutMagistratMap>
       <UserInformations
         Component={props => {
-          return <MagistratMandatairesMap {...props} />;
+          return <MagistratMapMandataires {...props} />;
         }}
       />
     </LayoutMagistratMap>
