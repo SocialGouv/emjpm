@@ -47,6 +47,17 @@ export default class MyDocument extends Document {
               __html: hotjar
             }}
           />
+          <style>{`
+          html {
+            font-size: 14px;
+          }
+          html,
+          body,
+          div#__next {
+            background:white;
+            height: 100%;
+          }
+          `}</style>
           <link
             href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css"
             rel="stylesheet"
