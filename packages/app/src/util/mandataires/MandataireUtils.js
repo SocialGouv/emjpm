@@ -38,10 +38,10 @@ export const formatMandataire = (
   gestionnaire_tis
 ) => {
   let currentDiscriminator = {};
-
   const common = {
     currentAvailability: remaining_capacity ? remaining_capacity : 0,
     cvLink: "test",
+    discriminator: discriminator,
     dispoMax: mesures_max ? mesures_max : 0,
     isAvailable: mesures_max < mesures_in_progress,
     mesuresAwaiting: mesures_awaiting,
@@ -58,7 +58,6 @@ export const formatMandataire = (
 
     currentDiscriminator = {
       adresse: service.adresse ? capitalize(service.adresse) : "non renseigné",
-      antenneId: service.service_antennes ? headquarter.id : null,
       codePostal: service.code_postal ? capitalize(service.code_postal) : "non renseigné",
       email: service.email ? service.email : "non renseigné",
       etablissement: service.etablissement ? service.etablissement : "non renseigné",
@@ -80,7 +79,6 @@ export const formatMandataire = (
       codePostal: mandataire.code_postal ? capitalize(mandataire.code_postal) : "non renseigné",
       email: mandataire.user && mandataire.user.email ? mandataire.user.email : "non renseigné",
       genre: mandataire.genre ? mandataire.genre : "F",
-      id: `${discriminator}-${mandataire.id}`,
       id: `${discriminator}-${mandataire.id}`,
       lastLogin:
         mandataire.user && mandataire.user.last_login

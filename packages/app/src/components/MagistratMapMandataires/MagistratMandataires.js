@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { MagistratMandatairesMapPanel } from "../MagistratMandatairesMapPanel";
+import { MagistratMapMandatairesPanel } from "../MagistratMapMandatairesPanel";
 import { MapContextProvider } from "./context";
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { MagistratMandatairesMapStyle } from "./style";
@@ -16,8 +16,8 @@ const formatData = view_mesure_gestionnaire => {
   });
 };
 
-const MagistratMandatairesMap = dynamic(
-  () => import("./MagistratMandatairesMap").then(mod => mod.MagistratMandatairesMap),
+const MagistratMapMandataires = dynamic(
+  () => import("./MagistratMapMandataires").then(mod => mod.MagistratMapMandataires),
   { ssr: false }
 );
 
@@ -39,11 +39,11 @@ const MagistratMandataires = props => {
   );
 
   if (loading) {
-    return <div>loading</div>;
+    return <div>Chargement</div>;
   }
 
   if (error) {
-    return <div>error</div>;
+    return <div>Erreur</div>;
   }
 
   const { view_mesure_gestionnaire } = data;
@@ -53,10 +53,10 @@ const MagistratMandataires = props => {
     <MapContextProvider>
       <Flex sx={MagistratMandatairesMapStyle()}>
         <Box height="100%" flex="0 1 auto">
-          <MagistratMandatairesMapPanel tiId={ti_id} />
+          <MagistratMapMandatairesPanel tiId={ti_id} />
         </Box>
         <Box height="100%" flex="1 1 auto">
-          <MagistratMandatairesMap view_mesure_gestionnaire={datas} />
+          <MagistratMapMandataires view_mesure_gestionnaire={datas} />
         </Box>
       </Flex>
     </MapContextProvider>
