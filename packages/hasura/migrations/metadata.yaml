@@ -12,6 +12,15 @@ remote_schemas:
   name: remote_schema
 tables:
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -33,6 +42,7 @@ tables:
       - id
       - user_id
       - service_id
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -44,11 +54,21 @@ tables:
       - id
       - user_id
       - service_id
+      computed_fields: []
       filter: {}
     role: ti
   table: service_admin
   update_permissions: []
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions:
@@ -70,11 +90,13 @@ tables:
   select_permissions:
   - comment: null
     permission:
+      allow_aggregations: false
       columns:
       - id
       - region_id
       - user_id
       - department_id
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -95,6 +117,15 @@ tables:
         user_id: x-hasura-User-Id
     role: direction
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions:
   - comment: null
     permission:
@@ -131,6 +162,7 @@ tables:
       - id
       - user_id
       - antenne_id
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -179,6 +211,15 @@ tables:
       foreign_key_constraint_on:
         column: ti_id
         table: user_tis
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -197,6 +238,7 @@ tables:
       - telephone
       - created_at
       - siret
+      computed_fields: []
       filter: {}
     role: individuel
   - comment: null
@@ -211,6 +253,7 @@ tables:
       - siret
       - telephone
       - ville
+      computed_fields: []
       filter: {}
     role: prepose
   - comment: null
@@ -221,6 +264,7 @@ tables:
       - etablissement
       - id
       - ville
+      computed_fields: []
       filter: {}
     role: anonymous
   - comment: null
@@ -234,6 +278,7 @@ tables:
       - ville
       - telephone
       - created_at
+      computed_fields: []
       filter: {}
     role: service
   - comment: null
@@ -247,6 +292,7 @@ tables:
       - ville
       - telephone
       - created_at
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -261,6 +307,7 @@ tables:
       - telephone
       - created_at
       - siret
+      computed_fields: []
       filter: {}
     role: ti
   table: tis
@@ -272,6 +319,15 @@ tables:
       foreign_key_constraint_on:
         column: id_region
         table: departements
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -284,6 +340,7 @@ tables:
       columns:
       - id
       - nom
+      computed_fields: []
       filter: {}
     role: individuel
   - comment: null
@@ -292,6 +349,7 @@ tables:
       columns:
       - id
       - nom
+      computed_fields: []
       filter: {}
     role: anonymous
   - comment: null
@@ -300,6 +358,7 @@ tables:
       columns:
       - id
       - nom
+      computed_fields: []
       filter: {}
     role: prepose
   - comment: null
@@ -308,6 +367,7 @@ tables:
       columns:
       - id
       - nom
+      computed_fields: []
       filter: {}
     role: ti
   - comment: null
@@ -316,6 +376,7 @@ tables:
       columns:
       - id
       - nom
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -324,11 +385,21 @@ tables:
       columns:
       - id
       - nom
+      computed_fields: []
       filter: {}
     role: service
   table: regions
   update_permissions: []
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -350,6 +421,7 @@ tables:
       - id
       - service_id
       - ti_id
+      computed_fields: []
       filter: {}
     role: service
   table: service_tis
@@ -361,6 +433,15 @@ tables:
       foreign_key_constraint_on:
         column: role_id
         table: user_role
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -373,6 +454,7 @@ tables:
       columns:
       - id
       - name
+      computed_fields: []
       filter: {}
     role: individuel
   - comment: null
@@ -381,6 +463,7 @@ tables:
       columns:
       - id
       - name
+      computed_fields: []
       filter: {}
     role: service
   - comment: null
@@ -389,6 +472,7 @@ tables:
       columns:
       - id
       - name
+      computed_fields: []
       filter: {}
     role: anonymous
   - comment: null
@@ -397,6 +481,7 @@ tables:
       columns:
       - id
       - name
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -405,6 +490,7 @@ tables:
       columns:
       - id
       - name
+      computed_fields: []
       filter: {}
     role: prepose
   - comment: null
@@ -413,6 +499,7 @@ tables:
       columns:
       - id
       - name
+      computed_fields: []
       filter: {}
     role: ti
   table: role
@@ -442,6 +529,15 @@ tables:
       foreign_key_constraint_on:
         column: user_id
         table: user_antenne
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers:
   - definition:
@@ -592,6 +688,7 @@ tables:
       - prenom
       - cabinet
       - email
+      computed_fields: []
       filter:
         id:
           _eq: X-Hasura-User-Id
@@ -601,6 +698,7 @@ tables:
       allow_aggregations: false
       columns:
       - email
+      computed_fields: []
       filter:
         email:
           _eq: X-Hasura-Email
@@ -619,6 +717,7 @@ tables:
       - prenom
       - type
       - username
+      computed_fields: []
       filter: {}
     role: ti
   - comment: null
@@ -638,6 +737,7 @@ tables:
       - reset_password_token
       - type
       - username
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -657,6 +757,7 @@ tables:
       - reset_password_token
       - type
       - username
+      computed_fields: []
       filter:
         id:
           _eq: X-Hasura-User-Id
@@ -678,6 +779,7 @@ tables:
       - reset_password_token
       - type
       - username
+      computed_fields: []
       filter:
         id:
           _eq: X-Hasura-User-Id
@@ -790,6 +892,15 @@ tables:
       set: {}
     role: ti
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -811,6 +922,7 @@ tables:
       - id
       - user_id
       - ti_id
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -836,6 +948,15 @@ tables:
       foreign_key_constraint_on:
         column: department_id
         table: services
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -854,6 +975,7 @@ tables:
       - id_region
       - code
       - nom
+      computed_fields: []
       filter: {}
     role: individuel
   - comment: null
@@ -864,6 +986,7 @@ tables:
       - id_region
       - code
       - nom
+      computed_fields: []
       filter: {}
     role: anonymous
   - comment: null
@@ -874,6 +997,7 @@ tables:
       - id_region
       - code
       - nom
+      computed_fields: []
       filter: {}
     role: prepose
   - comment: null
@@ -884,6 +1008,7 @@ tables:
       - id_region
       - code
       - nom
+      computed_fields: []
       filter: {}
     role: ti
   - comment: null
@@ -894,6 +1019,7 @@ tables:
       - id_region
       - code
       - nom
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -904,11 +1030,21 @@ tables:
       - id_region
       - code
       - nom
+      computed_fields: []
       filter: {}
     role: service
   table: departements
   update_permissions: []
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions:
   - comment: null
     permission:
@@ -955,6 +1091,7 @@ tables:
   select_permissions:
   - comment: null
     permission:
+      allow_aggregations: false
       columns:
       - comment
       - created_at
@@ -962,6 +1099,7 @@ tables:
       - mandataire_id
       - service_id
       - ti_id
+      computed_fields: []
       filter:
         ti:
           magistrats:
@@ -989,6 +1127,15 @@ tables:
       set: {}
     role: ti
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers:
   - definition:
@@ -1078,6 +1225,7 @@ tables:
       - file_name
       - file_type
       - status
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -1095,6 +1243,15 @@ tables:
       set: {}
     role: service
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions:
   - comment: null
     permission:
@@ -1137,6 +1294,7 @@ tables:
       - etablissement_id
       - mandataire_id
       - created_at
+      computed_fields: []
       filter: {}
     role: ti
   - comment: null
@@ -1147,6 +1305,7 @@ tables:
       - id
       - mandataire_id
       - created_at
+      computed_fields: []
       filter:
         mandataire:
           user_id:
@@ -1186,6 +1345,15 @@ tables:
       foreign_key_constraint_on:
         column: service_id
         table: service_tis
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -1203,6 +1371,7 @@ tables:
       - code_postal
       - etablissement
       - id
+      computed_fields: []
       filter: {}
     role: anonymous
   - comment: null
@@ -1224,6 +1393,7 @@ tables:
       - prenom
       - telephone
       - ville
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -1245,6 +1415,7 @@ tables:
       - prenom
       - telephone
       - ville
+      computed_fields: []
       filter: {}
     role: ti
   - comment: null
@@ -1266,6 +1437,7 @@ tables:
       - prenom
       - telephone
       - ville
+      computed_fields: []
       filter:
         id:
           _eq: X-Hasura-Service-Id
@@ -1314,6 +1486,15 @@ tables:
       foreign_key_constraint_on:
         column: etablissement_id
         table: mesures
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -1332,6 +1513,7 @@ tables:
       - ville
       - tel
       - fax
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -1348,6 +1530,7 @@ tables:
       - nom
       - tel
       - ville
+      computed_fields: []
       filter: {}
     role: prepose
   - comment: null
@@ -1364,6 +1547,7 @@ tables:
       - nom
       - tel
       - ville
+      computed_fields: []
       filter: {}
     role: ti
   - comment: null
@@ -1380,11 +1564,21 @@ tables:
       - fax
       - latitude
       - longitude
+      computed_fields: []
       filter: {}
     role: service
   table: etablissements
   update_permissions: []
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -1414,6 +1608,7 @@ tables:
       - mandataire_id
       - discriminator
       - ti_id
+      computed_fields: []
       filter: {}
     role: ti
   table: view_mesure_gestionnaire_tis
@@ -1437,6 +1632,15 @@ tables:
       foreign_key_constraint_on:
         column: antenne_id
         table: user_antenne
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions:
   - comment: null
     permission:
@@ -1493,6 +1697,7 @@ tables:
       - mesures_max
       - date_mesure_update
       - bak_mandataire_id
+      computed_fields: []
       filter: {}
     role: ti
   - comment: null
@@ -1515,6 +1720,7 @@ tables:
       - mesures_max
       - date_mesure_update
       - bak_mandataire_id
+      computed_fields: []
       filter:
         user_antennes:
           user_id:
@@ -1540,6 +1746,7 @@ tables:
       - mesures_max
       - date_mesure_update
       - bak_mandataire_id
+      computed_fields: []
       filter: {}
     role: direction
   table: service_antenne
@@ -1575,6 +1782,15 @@ tables:
       set: {}
     role: ti
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions:
   - comment: null
     permission:
@@ -1813,12 +2029,14 @@ tables:
       - ti_id
       - type
       - ville
+      computed_fields: []
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
     role: service
   - comment: null
     permission:
+      allow_aggregations: false
       columns:
       - is_urgent
       - date_ouverture
@@ -1844,6 +2062,7 @@ tables:
       - status
       - type
       - ville
+      computed_fields: []
       filter:
         mandataire:
           user_id:
@@ -1877,6 +2096,7 @@ tables:
       - status
       - type
       - ville
+      computed_fields: []
       filter:
         mandataire:
           user:
@@ -1911,6 +2131,7 @@ tables:
       - status
       - type
       - ville
+      computed_fields: []
       filter:
         ti:
           magistrats:
@@ -1943,6 +2164,7 @@ tables:
       - ti_id
       - type
       - ville
+      computed_fields: []
       filter: {}
     role: direction
   table: mesures
@@ -2081,6 +2303,15 @@ tables:
       set: {}
     role: prepose
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -2102,6 +2333,7 @@ tables:
       - id
       - role_id
       - user_id
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2110,6 +2342,7 @@ tables:
     permission:
       allow_aggregations: false
       columns: []
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2121,6 +2354,7 @@ tables:
       - id
       - role_id
       - user_id
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2132,6 +2366,7 @@ tables:
       - id
       - role_id
       - user_id
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2143,6 +2378,7 @@ tables:
       - id
       - role_id
       - user_id
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2150,6 +2386,15 @@ tables:
   table: user_role
   update_permissions: []
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -2165,28 +2410,7 @@ tables:
       - ville
       - latitude
       - longitude
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
+      computed_fields: []
       filter: {}
     role: service
   - comment: null
@@ -2198,11 +2422,45 @@ tables:
       - ville
       - latitude
       - longitude
+      computed_fields: []
       filter: {}
     role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      computed_fields: []
+      filter: {}
+    role: ti
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      computed_fields: []
+      filter: {}
+    role: direction
   table: city
   update_permissions: []
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -2218,6 +2476,7 @@ tables:
       - id
       - cities
       - code_postal
+      computed_fields: []
       filter: {}
     role: individuel
   - comment: null
@@ -2229,6 +2488,7 @@ tables:
       - id
       - cities
       - code_postal
+      computed_fields: []
       filter: {}
     role: prepose
   - comment: null
@@ -2240,6 +2500,7 @@ tables:
       - latitude
       - longitude
       - cities
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -2251,12 +2512,14 @@ tables:
       - id
       - cities
       - code_postal
+      computed_fields: []
       filter: {}
     role: ti
   - comment: null
     permission:
       allow_aggregations: false
       columns: []
+      computed_fields: []
       filter: {}
     role: service
   table: geolocalisation_code_postal
@@ -2280,6 +2543,15 @@ tables:
       foreign_key_constraint_on:
         column: mandataire_id
         table: commentaires
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions:
@@ -2370,6 +2642,7 @@ tables:
       - telephone
       - telephone_portable
       - ville
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2379,6 +2652,7 @@ tables:
       allow_aggregations: false
       columns:
       - siret
+      computed_fields: []
       filter:
         siret:
           _eq: X-Hasura-Siret
@@ -2406,6 +2680,7 @@ tables:
       - telephone
       - telephone_portable
       - ville
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2432,6 +2707,7 @@ tables:
       - genre
       - mesures_en_attente
       - zip
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -2457,6 +2733,7 @@ tables:
       - user_id
       - ville
       - zip
+      computed_fields: []
       filter: {}
     role: ti
   table: mandataires
@@ -2524,6 +2801,15 @@ tables:
       set: {}
     role: prepose
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -2546,6 +2832,7 @@ tables:
       - ti_id
       - user_id
       - created_at
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2558,6 +2845,7 @@ tables:
       - ti_id
       - user_id
       - created_at
+      computed_fields: []
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2572,6 +2860,15 @@ tables:
         column_mapping:
           id: id
         remote_table: view_mesure_gestionnaire_tis
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -2613,6 +2910,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       - remaining_capacity
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -2629,6 +2927,7 @@ tables:
       - discriminator
       - id
       - dep_nom
+      computed_fields: []
       filter: {}
     role: mandataire
   - comment: null
@@ -2645,6 +2944,7 @@ tables:
       - discriminator
       - id
       - dep_nom
+      computed_fields: []
       filter: {}
     role: prepose
   - comment: null
@@ -2661,6 +2961,7 @@ tables:
       - discriminator
       - id
       - dep_nom
+      computed_fields: []
       filter: {}
     role: service
   - comment: null
@@ -2677,11 +2978,21 @@ tables:
       - discriminator
       - id
       - dep_nom
+      computed_fields: []
       filter: {}
     role: ti
   table: view_mesure_gestionnaire
   update_permissions: []
 - array_relationships: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -2703,6 +3014,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
+      computed_fields: []
       filter: {}
     role: prepose
   - comment: null
@@ -2713,6 +3025,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
+      computed_fields: []
       filter: {}
     role: direction
   - comment: null
@@ -2723,6 +3036,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
+      computed_fields: []
       filter: {}
     role: mandataire
   - comment: null
@@ -2733,6 +3047,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
+      computed_fields: []
       filter: {}
     role: service
   - comment: null
@@ -2743,6 +3058,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
+      computed_fields: []
       filter: {}
     role: ti
   table: view_department_availability

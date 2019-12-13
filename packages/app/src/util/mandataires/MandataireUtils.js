@@ -38,10 +38,10 @@ export const formatMandataire = (
   gestionnaire_tis
 ) => {
   let currentDiscriminator = {};
-
   const common = {
     currentAvailability: remaining_capacity ? remaining_capacity : 0,
     cvLink: "test",
+    discriminator: discriminator,
     dispoMax: mesures_max ? mesures_max : 0,
     isAvailable: mesures_max < mesures_in_progress,
     mesuresAwaiting: mesures_awaiting,
@@ -65,6 +65,8 @@ export const formatMandataire = (
       id: `${discriminator}-${service.id}`,
       lastLogin: lastLogin ? formatLastLogin(lastLogin) : "non renseigné",
       lastLoginIsCritical: lastLogin && isCriticalDate(lastLogin),
+      latitude: service.latitude || null,
+      longitude: service.longitude || null,
       nom: service.nom ? service.nom : null,
       prenom: service.prenom ? service.prenom : null,
       serviceId: service.id,
@@ -84,6 +86,8 @@ export const formatMandataire = (
           : "non renseigné",
       lastLoginIsCritical:
         mandataire.user && mandataire.user.last_login && isCriticalDate(mandataire.user.last_login),
+      latitude: mandataire.latitude || null,
+      longitude: mandataire.longitude || null,
       mandataireId: mandataire.id,
       nom:
         mandataire.user && mandataire.user.nom ? capitalize(mandataire.user.nom) : "non renseigné",

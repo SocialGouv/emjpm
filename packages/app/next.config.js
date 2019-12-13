@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const withCSS = require("@zeit/next-css");
 const withImages = require("next-images");
 const flow = require("lodash.flow");
+require("dotenv").config();
 
 module.exports = flow(
   withCSS,
