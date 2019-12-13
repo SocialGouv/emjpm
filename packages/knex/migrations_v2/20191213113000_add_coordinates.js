@@ -23,7 +23,8 @@ exports.up = async function(knex) {
 
 exports.down = async function(knex) {
   await knex.raw(`
-  alter table geolocalisation_code_postal alter column cities type text[];
+  alter table geolocalisation_code_postal drop column cities;
+  alter table geolocalisation_code_postal add column cities text[];
   `);
   return knex.schema
     .alterTable("services", function(table) {

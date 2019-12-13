@@ -1,6 +1,9 @@
 const zipCodes = require("../seeds/postal_raw.json");
 
 exports.up = async function(knex) {
+  if (process.env.NODE_ENV === "test") {
+    return Promise.resolve();
+  }
   await knex.raw(`
 truncate geolocalisation_code_postal;
     `);

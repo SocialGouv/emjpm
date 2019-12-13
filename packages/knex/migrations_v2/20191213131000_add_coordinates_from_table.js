@@ -15,7 +15,7 @@ update services set latitude = geo.latitude, longitude = geo.longitude FROM geol
   `);
 };
 
-exports.down = function() {
+exports.down = function(knex) {
   return knex.raw(`
 update mesures set latitude = null, longitude = null;
 update mandataires set latitude = null, longitude = null;
