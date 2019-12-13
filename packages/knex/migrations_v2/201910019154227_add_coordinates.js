@@ -1,4 +1,8 @@
 exports.up = async function(knex) {
+  await knex.raw(`
+  alter table geolocalisation_code_postal alter column cities type varchar(255);
+  alter table geolocalisation_code_postal drop constraint codepostallatlngs_code_postal_unique;
+  `);
   return knex.schema
     .alterTable("services", function(table) {
       table.float("latitude");
@@ -13,17 +17,29 @@ exports.up = async function(knex) {
       table.float("longitude");
     })
     .alterTable("geolocalisation_code_postal", function(table) {
-      table.dropColumn("cities");
       table.string("insee");
-    })
-    .alterTable("geolocalisation_code_postal", function(table) {
-      table.string("cities");
     });
 };
 
-exports.down = function(knex) {
-  return knex.schema.alterTable("services", function(table) {
-    table.dropColumn("latitude");
-    table.dropColumn("longitude");
-  });
+exports.down = async function(knex) {
+  await knex.raw(`
+  alter table geolocalisation_code_postal alter column cities type text[];
+  `);
+  return knex.schema
+    .alterTable("services", function(table) {
+      table.dropColumn("latitude");
+      table.dropColumn("longitude");
+    })
+    .alterTable("mandataires", function(table) {
+      table.dropColumn("latitude");
+      table.dropColumn("longitude");
+    })
+    .alterTable("mesures", function(table) {
+      table.dropColumn("latitude");
+      table.dropColumn("longitude");
+    })
+    .alterTable("geolocalisation_code_postal", function(table) {
+      table.unique('code_postal');
+      table.dropColumn("insee");
+    });
 };
