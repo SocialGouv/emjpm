@@ -209,9 +209,9 @@ exports[`geolocalisation_code_postal table schema 1`] = `
 Object {
   "cities": Object {
     "defaultValue": null,
-    "maxLength": null,
+    "maxLength": 255,
     "nullable": true,
-    "type": "ARRAY",
+    "type": "character varying",
   },
   "code_postal": Object {
     "defaultValue": null,
@@ -224,6 +224,12 @@ Object {
     "maxLength": null,
     "nullable": false,
     "type": "integer",
+  },
+  "insee": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
   },
   "latitude": Object {
     "defaultValue": null,
@@ -435,6 +441,18 @@ Object {
     "nullable": false,
     "type": "integer",
   },
+  "latitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "longitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
   "mesures_en_attente": Object {
     "defaultValue": "0",
     "maxLength": null,
@@ -583,6 +601,18 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "date",
+  },
+  "latitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "longitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
   },
   "mandataire_id": Object {
     "defaultValue": null,
@@ -954,6 +984,18 @@ Object {
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
+  },
+  "latitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "longitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
   },
   "mesures_awaiting": Object {
     "defaultValue": null,
