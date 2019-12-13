@@ -1,6 +1,9 @@
 const zipCodes = require("../seeds/postal_raw.json");
 
 exports.up = async function(knex) {
+  await knex.raw(`
+truncate geolocalisation_code_postal;
+    `);
   const newRows = zipCodes.map(row => {
     let lat = 48.8534;
     let long = 2.3488;
@@ -17,28 +20,15 @@ exports.up = async function(knex) {
       cities: row.fields.nom_de_la_commune
     };
   });
-  return knex.transaction(tr => {
-    return knex
-      .table("geolocalisation_code_postal")
-      .del()
-      .then(() => {
-        return knex
-          .batchInsert(
-            "geolocalisation_code_postal",
-            removeUnique(newRows, "code_postal")
-          )
-          .transacting(tr);
-      });
-  });
+  for (const row of newRows) {
+    await knex.raw(`
+insert into geolocalisation_code_postal (code_postal, insee, latitude, longitude, cities)
+  VALUES ('${row.code_postal}', '${row.insee}', ${row.latitude},${row.longitude}, '${row.cities}');
+    `);
+  }
+  return Promise.resolve();
 };
 
-exports.down = function() {};
-
-function removeUnique(arr, key) {
-  const unique = arr
-    .map(e => e[key])
-    .map((e, i, final) => final.indexOf(e) === i && i)
-    .filter(e => arr[e])
-    .map(e => arr[e]);
-  return unique;
-}
+exports.down = function() {
+  return Promise.resolve();
+};

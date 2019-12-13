@@ -1,71 +1,24 @@
 exports.up = async function(knex) {
-  const services = await knex("services");
-  const mandataires = await knex("mandataires");
-  const mesures = await knex("mesures");
-  Promise.all(
-    services.map(async service => {
-      const [zip_coordinates] = await knex("geolocalisation_code_postal").where(
-        "code_postal",
-        service.code_postal
-      );
-      const [insee_coordinates] = await knex(
-        "geolocalisation_code_postal"
-      ).where("insee", service.code_postal);
-      if (zip_coordinates) {
-        return await knex("services")
-          .where("id", service.id)
-          .update("latitude", zip_coordinates.latitude)
-          .update("longitude", zip_coordinates.longitude);
-      } else if (insee_coordinates) {
-        return await knex("services")
-          .where("id", service.id)
-          .update("latitude", insee_coordinates.latitude)
-          .update("longitude", insee_coordinates.longitude);
-      } else {
-        return null;
-      }
-    })
-  );
-  Promise.all(
-    mandataires.map(async mandataire => {
-      const [zip_coordinates] = await knex("geolocalisation_code_postal").where(
-        "code_postal",
-        mandataire.code_postal
-      );
-      const [insee_coordinates] = await knex(
-        "geolocalisation_code_postal"
-      ).where("insee", mandataire.code_postal);
-      if (zip_coordinates) {
-        return await knex("mandataires")
-          .where("id", mandataire.id)
-          .update("latitude", zip_coordinates.latitude)
-          .update("longitude", zip_coordinates.longitude);
-      } else if (insee_coordinates) {
-        return await knex("mandataires")
-          .where("id", mandataire.id)
-          .update("latitude", insee_coordinates.latitude)
-          .update("longitude", insee_coordinates.longitude);
-      } else {
-        return null;
-      }
-    })
-  );
-  return Promise.all(
-    mesures.map(async mesure => {
-      const [zip_coordinates] = await knex("geolocalisation_code_postal").where(
-        "code_postal",
-        mesure.code_postal
-      );
-      if (zip_coordinates) {
-        return await knex("mesures")
-          .where("id", mesure.id)
-          .update("latitude", zip_coordinates.latitude)
-          .update("longitude", zip_coordinates.longitude);
-      } else {
-        return null;
-      }
-    })
-  );
+  await knex.raw(`
+update mesures set code_postal = null where length(code_postal) <> 5;
+    `);
+  await knex.raw(`
+update mesures set code_postal = trim(code_postal);
+update mandataires set code_postal = trim(code_postal);
+update services set code_postal = trim(code_postal);
+    `);
+
+  return knex.raw(`
+update mesures set latitude = geo.latitude, longitude = geo.longitude FROM geolocalisation_code_postal geo WHERE mesures.code_postal is not null and geo.code_postal = mesures.code_postal;
+update mandataires set latitude = geo.latitude, longitude = geo.longitude FROM geolocalisation_code_postal geo WHERE mandataires.code_postal is not null and geo.code_postal = mandataires.code_postal;
+update services set latitude = geo.latitude, longitude = geo.longitude FROM geolocalisation_code_postal geo WHERE services.code_postal is not null and geo.code_postal = services.code_postal;
+  `);
 };
 
-exports.down = function() {};
+exports.down = function(knex) {
+  return knex.raw(`
+update mesures set latitude = null, longitude = null;
+update mandataires set latitude = null, longitude = null;
+update services set latitude = null, longitude = null;
+  `);
+};
