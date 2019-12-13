@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="css-qocjfr"
+>
+  <button
+    className="css-clrcon"
+    onClick={[Function]}
+  >
+    <div
+      className="css-o6z23g"
+    >
+      Fermer
+    </div>
+  </button>
+  MagistratMandatairePanel
+</div>
+`;
