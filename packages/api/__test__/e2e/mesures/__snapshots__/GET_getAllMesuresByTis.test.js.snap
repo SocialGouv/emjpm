@@ -17,6 +17,8 @@ Array [
     "id": 3,
     "is_urgent": false,
     "judgment_date": null,
+    "latitude": null,
+    "longitude": null,
     "manda": "UDAHF",
     "mandataire_id": 1,
     "nom": null,

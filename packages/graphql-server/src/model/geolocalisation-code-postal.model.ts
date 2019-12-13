@@ -5,5 +5,5 @@ export interface GeolocalisationCodePostal {
   code_postal: NullableString;
   latitude: NullableNumber;
   longitude: NullableNumber;
-  cities: string[] | null;
+  city: string | null;
 }

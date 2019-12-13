@@ -34,20 +34,22 @@ const BoxStyle = {
   overflow: "hidden"
 };
 
-const ActiveLink = ({ router, isNestedLinks, ...props }) => {
+const ActiveLink = props => {
+  const { router, isNestedLinks, href } = props;
+  if (!router) return null;
+  const { pathname } = router;
   let isActive;
   if (isNestedLinks) {
-    isActive = router.pathname.startsWith(props.href);
+    isActive = pathname.startsWith(href);
   } else {
     isActive =
-      router.pathname === props.href ||
-      (router.pathname === "/direction/mandataires/list" && props.href === "/direction");
+      pathname === href || (pathname === "/direction/mandataires/list" && href === "/direction");
   }
 
   return (
     <Box sx={BoxStyle}>
-      <NextLink {...props}>
-        <Link {...props} sx={LinkStyle(isActive)}>
+      <NextLink href={href}>
+        <Link href={href} sx={LinkStyle(isActive)}>
           {props.children}
           {isActive && <Box sx={LineStyle} />}
         </Link>
