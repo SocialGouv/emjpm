@@ -2832,7 +2832,7 @@
     styled-icons "^9.1.0"
     theme-ui "^0.2.49"
 
-"@socialgouv/emjpm-ui-global-style@^1.3.0":
+"@socialgouv/emjpm-ui-global-style@^1.3.1":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-global-style/-/emjpm-ui-global-style-1.3.1.tgz#ddbff07127295992c5432fbe4318aa62d3652c77"
   integrity sha512-8IoaGfZJPJjOtmU6rGXJkwtp/fJdlInQI/8Lpcrq8CmImEnmCR2qOEkthE55H+s5Vei8LD57JioXC7ANSlpAbg==
@@ -2842,7 +2842,7 @@
     normalize.css "^8.0.1"
     react "^16.12.0"
 
-"@socialgouv/emjpm-ui-theme@^1.9.0":
+"@socialgouv/emjpm-ui-theme@^1.9.1":
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-theme/-/emjpm-ui-theme-1.9.1.tgz#c8dff5b52f0542571f97ca1fb068ecc213d31c9e"
   integrity sha512-tZpDaTT+axoi9QOlyFyEuyQ32bX8UTm4zQY3/vbV13CBtPuiAMBuy+JGqRHSeJ065/KH2Ljd8ftmftoL44u1LQ==
@@ -12325,6 +12325,11 @@ osenv@^0.1.4, osenv@^0.1.5:
   dependencies:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.0"
+
+p-debounce@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/p-debounce/-/p-debounce-2.1.0.tgz#e79f70c6e325cbb9bddbcbec0b81025084671ad3"
+  integrity sha512-M9bMt62TTnozdZhqFgs+V7XD2MnuKCaz+7fZdlu2/T7xruI3uIE5CicQ0vx1hV7HIUYF0jF+4/R1AgfOkl74Qw==
 
 p-each-series@^1.0.0:
   version "1.0.0"

@@ -1,5 +1,13 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Button, Card, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
+import {
+  AsyncSelect,
+  Button,
+  Card,
+  Heading4,
+  Input,
+  Select,
+  Text
+} from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -9,10 +17,10 @@ import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { getRegionCode } from "../../util/departements";
+import { debouncedGeocode } from "../../util/geocode";
 import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
 import { formatServiceTribunalList } from "./utils";
-
 const ServiceCreateAntenneStyle = {
   flexWrap: "wrap"
 };
@@ -114,9 +122,10 @@ export const ServiceAddMesure = props => {
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <Formik
               onSubmit={(values, { setSubmitting, setErrors }) => {
-                const regionCode = getRegionCode(values.code_postal);
+                const regionCode = getRegionCode(values.geocode.postcode);
                 const departements = departementsData.departements;
                 const departement = departements.find(dep => dep.code === regionCode);
+
                 if (!departement) {
                   setErrors({
                     code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
@@ -129,15 +138,17 @@ export const ServiceAddMesure = props => {
                       annee: values.annee.toString(),
                       antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
                       civilite: values.civilite.value,
-                      code_postal: values.code_postal,
+                      code_postal: values.geocode.postcode,
+                      ville: values.geocode.ville,
+                      // lat: values.geocode.lat,
+                      // lng: values.geocode.lng,
                       date_ouverture: values.date_ouverture,
                       department_id: departement.id,
                       numero_dossier: values.numero_dossier,
                       numero_rg: values.numero_rg,
                       residence: values.residence.value,
                       ti_id: values.tribunal.value,
-                      type: values.type.value,
-                      ville: values.ville
+                      type: values.type.value
                     }
                   });
                   Router.push("/services");
@@ -151,14 +162,14 @@ export const ServiceAddMesure = props => {
                   .max(2019, "l'année choisi doit être au maximum 2019"),
                 antenne: Yup.string(),
                 civilite: Yup.string().required("Champ obligatoire"),
-                code_postal: Yup.string().required("Champ obligatoire"),
+                // code_postal: Yup.string().required("Champ obligatoire"),
                 date_ouverture: Yup.date().required("Champ obligatoire"),
                 numero_dossier: Yup.string().required("Champ obligatoire"),
                 numero_rg: Yup.string().required("Champ obligatoire"),
                 residence: Yup.string().required("Champ obligatoire"),
                 tribunal: Yup.string().required("Champ obligatoire"),
-                type: Yup.string().required("Champ obligatoire"),
-                ville: Yup.string().required("Champ obligatoire")
+                type: Yup.string().required("Champ obligatoire")
+                // ville: Yup.string().required("Champ obligatoire")
               })}
               initialValues={{
                 annee: "",
@@ -169,7 +180,7 @@ export const ServiceAddMesure = props => {
                 numero_dossier: "",
                 numero_rg: "",
                 tribunal: tribunalDefaultValue,
-                ville: ""
+                geocode: {}
               }}
             >
               {props => {
@@ -296,29 +307,22 @@ export const ServiceAddMesure = props => {
                       {errors.residence && touched.residence && <Text>{errors.residence}</Text>}
                     </Box>
 
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.code_postal}
-                        id="code_postal"
-                        name="code_postal"
-                        hasError={errors.code_postal && touched.code_postal}
-                        onChange={handleChange}
-                        placeholder="Code postal"
+                    <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
+                      <AsyncSelect
+                        name="geocode"
+                        cacheOptions
+                        defaultOptions
+                        hasError={errors}
+                        isClearable
+                        loadOptions={debouncedGeocode}
+                        placeholder="Ville, code postal, ..."
+                        noOptionsMessage={() => "Pas de résultats"}
+                        onChange={({ value }) => {
+                          console.log("change");
+                          console.log(value);
+                          setFieldValue("geocode", value);
+                        }}
                       />
-                      {errors.code_postal && touched.code_postal && (
-                        <Text>{errors.code_postal}</Text>
-                      )}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.ville}
-                        id="ville"
-                        name="ville"
-                        hasError={errors.ville && touched.ville}
-                        onChange={handleChange}
-                        placeholder="Ville"
-                      />
-                      {errors.ville && touched.ville && <Text>{errors.ville}</Text>}
                     </Box>
 
                     <Flex justifyContent="flex-end">
