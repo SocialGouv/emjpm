@@ -1,15 +1,44 @@
 import { BoxWrapper, Heading4, Tab, TabList, TabPanel, Tabs } from "@socialgouv/emjpm-ui-core";
 import Link from "next/link";
-import React from "react";
+import React, { Fragment } from "react";
 import { Link as StyledLink } from "rebass";
 
 import { AdminUserInformations } from "../../../src/components/AdminUsers/AdminUserInformations";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { MesureImportMandataire } from "../../../src/components/MesureImport";
+import { isMandataire } from "../../../src/util";
 import { withAuthSync } from "../../../src/util/auth";
 
+const UserInformationTabPanel = userId => {
+  return <AdminUserInformations userId={userId} />;
+};
+
+const MandataireImportTabPanel = userId => (
+  <Fragment>
+    <Heading4 mb={2}>Selectionnez le fichier</Heading4>
+    <MesureImportMandataire id={userId} />
+  </Fragment>
+);
+
+const getTabInfos = (type, active) => {
+  const tabInfos = [];
+  tabInfos.push({
+    createPanel: UserInformationTabPanel,
+    title: "Information"
+  });
+  if (active && isMandataire(type)) {
+    tabInfos.push({
+      createPanel: MandataireImportTabPanel,
+      title: "Import"
+    });
+  }
+  return tabInfos;
+};
+
 const User = props => {
-  const { userId } = props;
+  const { userId, type, active } = props;
+
+  const tabInfos = getTabInfos(type, active);
 
   return (
     <LayoutAdmin>
@@ -21,16 +50,13 @@ const User = props => {
         </Link>
         <Tabs>
           <TabList>
-            <Tab>Informations</Tab>
-            <Tab>Import</Tab>
+            {tabInfos.map((el, index) => (
+              <Tab key={index}>{el.title}</Tab>
+            ))}
           </TabList>
-          <TabPanel>
-            <AdminUserInformations userId={userId} />
-          </TabPanel>
-          <TabPanel>
-            <Heading4 mb={2}>Selectionnez le fichier</Heading4>
-            <MesureImportMandataire id={userId} />
-          </TabPanel>
+          {tabInfos.map((el, index) => (
+            <TabPanel key={index}>{el.createPanel(userId)}</TabPanel>
+          ))}
         </Tabs>
       </BoxWrapper>
     </LayoutAdmin>
@@ -38,7 +64,7 @@ const User = props => {
 };
 
 User.getInitialProps = async ({ query }) => {
-  return { userId: query.user_id };
+  return { active: query.active, type: query.type, userId: query.user_id };
 };
 
 export default withAuthSync(User);
