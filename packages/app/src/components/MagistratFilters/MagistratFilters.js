@@ -15,16 +15,16 @@ const MagistratFilters = () => {
         <Box>
           <Flex>
             <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
-            <Box width="170px" mr={1}>
+            <Box width="200px" mr={1}>
               <Select
                 size="small"
                 options={MESURE_TYPE_LABEL_VALUE}
-                placeholder={"type"}
+                placeholder={"Type de mesure"}
                 value={mesureType}
                 onChange={option => changeMesureType(option)}
               />
             </Box>
-            <Box width="170px" mr={1}>
+            <Box width="200px" mr={1}>
               <Input
                 value={searchText}
                 spellCheck="false"
