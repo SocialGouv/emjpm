@@ -22,22 +22,19 @@ const MesureImport = props => {
   const handleChange = ({ data, file }) => {
     const { errors, mesures } = validateImportData(data);
 
-    if (errors.length) {
-      setState({ ...state, errors });
-      return;
+    setState({ errors, mesures });
+
+    if (mesures.length > 0) {
+      addImport({
+        variables: {
+          content: mesures,
+          file_name: file.name,
+          file_size: file.size,
+          file_type: file.type,
+          ...variables
+        }
+      });
     }
-
-    setState({ ...state, mesures });
-
-    addImport({
-      variables: {
-        content: mesures,
-        file_name: file.name,
-        file_size: file.size,
-        file_type: file.type,
-        ...variables
-      }
-    });
   };
 
   const { errors, mesures } = state;
