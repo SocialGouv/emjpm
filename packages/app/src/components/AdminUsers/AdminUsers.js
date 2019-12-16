@@ -8,7 +8,6 @@ import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
 import { USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
-
 const ServiceDetail = ({ service_admins }) => (
   <>
     <Text sx={labelStyle}>service</Text>
@@ -57,12 +56,12 @@ const getDetail = type => {
 };
 
 const RowItem = ({ item }) => {
-  const { id, nom, prenom, email, type } = item;
+  const { id, nom, prenom, email, type, active } = item;
   const DetailComponent = getDetail(type);
 
   return (
     <>
-      <Card sx={cardStyle} width="100%">
+      <Card sx={cardStyle(active)} width="100%">
         <Flex justifyContent="flex-start">
           <Flex width="100px" flexDirection="column">
             <Text sx={labelStyle}>id</Text>
@@ -77,6 +76,10 @@ const RowItem = ({ item }) => {
             <Text sx={labelStyle}>prénom / nom</Text>
             <Text sx={descriptionStyle}>{prenom}</Text>
             <Text sx={descriptionStyle}>{nom}</Text>
+          </Flex>
+          <Flex width="100px" flexDirection="column">
+            <Text sx={labelStyle}>état</Text>
+            <Text sx={descriptionStyle}>{active ? "activé" : "non activé"}</Text>
           </Flex>
           <Flex width="300px" flexDirection="column">
             <DetailComponent {...item} />

@@ -2,11 +2,14 @@ const AdminUsersStyle = {
   bg: "blue"
 };
 
-const cardStyle = {
-  mb: "1",
-  overflow: "hidden",
-  pl: "16px",
-  position: "relative"
+const cardStyle = active => {
+  return {
+    mb: "1",
+    overflow: "hidden",
+    pl: "16px",
+    position: "relative",
+    borderLeft: active ? "2px solid green" : "2px solid red"
+  };
 };
 
 const labelStyle = {
