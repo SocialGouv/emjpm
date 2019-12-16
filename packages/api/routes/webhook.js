@@ -198,7 +198,6 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
   }
 
   const { latitude, longitude } = await getGeoDatas(code_postal, ville);
-  console.log(latitude + " / " + longitude);
 
   const ti = await Tis.query().findOne({
     siret: mesureDatas.tribunal_siret
