@@ -7,6 +7,9 @@ const { Mandataire } = require("../model/Mandataire");
 const { Tis } = require("../model/Tis");
 const { User } = require("../model/User");
 const { MesuresImport } = require("../model/MesuresImport");
+const {
+  GeolocalisationCodePostal
+} = require("../model/GeolocalisationCodePostal");
 const { Mesures } = require("../model/Mesures");
 const { Department } = require("../model/Departments");
 const { reservationEmail } = require("../email/reservation-email");
@@ -151,6 +154,34 @@ const updateMandataireMesureStates = async mandataire_id => {
     });
 };
 
+const getMesureDepartment = async code_postal => {
+  let department = null;
+  if (code_postal) {
+    const regionCode = getRegionCode(code_postal);
+    department = await Department.query().findOne({
+      code: regionCode
+    });
+  }
+  return department;
+};
+
+const getGeoDatas = async (code_postal, ville) => {
+  if (!code_postal) {
+    return {};
+  }
+  const geoDatas = await GeolocalisationCodePostal.query().where({
+    code_postal
+  });
+  if (!geoDatas.length) {
+    return {};
+  }
+  let geoData = geoDatas.find(el => el.ville === ville.toUpperCase().trim());
+  if (!geoData) {
+    geoData = geoDatas[0];
+  }
+  return geoData;
+};
+
 // TODO(tglatt): move db queries in other file
 const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
   const mandataire = mesureDatas.mandataire;
@@ -159,16 +190,14 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     ? mandataire.department_id
     : service.department_id;
   const code_postal = mesureDatas.code_postal;
+  const ville = mesureDatas.ville;
 
-  let department;
-  if (code_postal) {
-    const regionCode = getRegionCode(code_postal);
-    department = await Department.query().findOne({
-      code: regionCode
-    });
-  } else {
+  let department = await getMesureDepartment(code_postal, department_id);
+  if (!department) {
     department = await Department.query().findById(department_id);
   }
+
+  const { latitude, longitude } = await getGeoDatas(code_postal, ville);
 
   const ti = await Tis.query().findOne({
     siret: mesureDatas.tribunal_siret
@@ -194,7 +223,9 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     service_id: service ? service.id : null,
     residence: mesureDatas.residence,
     department_id: department.id,
-    ti_id: ti ? ti.id : null
+    ti_id: ti ? ti.id : null,
+    longitude,
+    latitude
   };
 
   const [mesure] = await Mesures.query().where({
