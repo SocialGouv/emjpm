@@ -6,7 +6,7 @@ import iconMarker from "../../../static/images/map-icon-mesure@2x.png";
 const image = new Image(60, 72);
 image.src = iconMarker;
 const images = ["mesure", image, { pixelRatio: 2 }];
-
+// TODO MOVE EVERYTHING IN THE MAP FOLDER
 const LayerMesures = props => {
   const { mesures } = props;
 
