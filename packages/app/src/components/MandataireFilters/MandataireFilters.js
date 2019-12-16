@@ -24,21 +24,21 @@ const MandataireFilters = props => {
         <Box>
           <Flex>
             <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
-            <Box width="170px" mr={1}>
+            <Box width="200px" mr={1}>
               <Select
                 size="small"
                 options={MESURE_TYPE_LABEL_VALUE}
-                placeholder={"Type"}
+                placeholder={"Type de la mesure"}
                 value={mesureType}
                 onChange={option => changeMesureType(option)}
               />
             </Box>
             {!isStatusHidden && (
-              <Box width="170px" mr={1}>
+              <Box width="200px" mr={1}>
                 <Select
                   size="small"
                   options={MESURE_STATUS_LABEL_VALUE}
-                  placeholder={"État"}
+                  placeholder={"État de la mesure"}
                   value={mesureStatus}
                   onChange={option => changeMesureStatus(option)}
                 />
