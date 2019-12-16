@@ -247,6 +247,8 @@ export const ADD_MESURE = gql`
     $numero_rg: String!
     $antenne_id: Int
     $ti_id: Int!
+    $latitude: Float!
+    $longitude: Float!
   ) {
     insert_mesures(
       objects: {
@@ -263,6 +265,8 @@ export const ADD_MESURE = gql`
         numero_rg: $numero_rg
         status: "Mesure en cours"
         antenne_id: $antenne_id
+        latitude: $latitude
+        longitude: $longitude
       }
     ) {
       returning {

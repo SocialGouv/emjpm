@@ -8,34 +8,78 @@ import {
   Select,
   Text
 } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
-import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { serviceAddMesureValidationSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { debouncedGeocode } from "../../util/geocode";
 import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
 import { formatServiceTribunalList } from "./utils";
-const ServiceCreateAntenneStyle = {
-  flexWrap: "wrap"
-};
 
-const grayBox = {
-  bg: "cardSecondary",
-  borderRadius: "5px 0 0 5px",
-  p: "5"
+const initialValues = {
+  annee: "",
+  antenne: "",
+  civilite: "",
+  code_postal: "",
+  date_ouverture: "",
+  numero_dossier: "",
+  numero_rg: "",
+  tribunal: "",
+  geocode: {}
 };
-
-const cardStyle = { m: "1", mt: "5", p: "0" };
 
 export const ServiceAddMesure = props => {
-  const { user_antennes, service_admins } = props;
-  const [service] = service_admins;
+  const {
+    user_antennes,
+    service_admins: [service]
+  } = props;
+
+  const formik = useFormik({
+    onSubmit: (values, { setSubmitting, setErrors }) => {
+      const regionCode = getRegionCode(values.geocode.postcode);
+      const departements = departementsData.departements;
+      const departement = departements.find(dep => dep.code === regionCode);
+
+      if (!departement) {
+        setErrors({
+          code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
+        });
+      } else {
+        addMesure({
+          awaitRefetchQueries: true,
+          refetchQueries: ["mesures", "mesures_aggregate"],
+          variables: {
+            annee: values.annee.toString(),
+            antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
+            civilite: values.civilite.value,
+            code_postal: values.geocode.postcode,
+            ville: values.geocode.city,
+            latitude: values.geocode.lat,
+            longitude: values.geocode.lng,
+            date_ouverture: values.date_ouverture,
+            department_id: departement.id,
+            numero_dossier: values.numero_dossier,
+            numero_rg: values.numero_rg,
+            residence: values.residence.value,
+            ti_id: values.tribunal.value,
+            type: values.type.value
+          }
+        });
+
+        Router.push("/services");
+      }
+
+      setSubmitting(false);
+    },
+    initialValues,
+    validationSchema: serviceAddMesureValidationSchema
+  });
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
     variables: { serviceId: service.service_id }
@@ -47,13 +91,11 @@ export const ServiceAddMesure = props => {
     error: departementsError
   } = useQuery(DEPARTEMENTS);
 
-  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
-  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [updateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
 
-  const [AddMesure] = useMutation(ADD_MESURE, {
-    options: {
-      refetchQueries: ["mesures", "mesures_aggregate"]
-    },
+  const [addMesure] = useMutation(ADD_MESURE, {
+    options: { refetchQueries: ["mesures", "mesures_aggregate"] },
     update(
       cache,
       {
@@ -63,15 +105,17 @@ export const ServiceAddMesure = props => {
       }
     ) {
       const [mesure] = returning;
-      UpdateServicesCounter({
+
+      updateServicesCounter({
         variables: {
           mesures_awaiting: 0,
           mesures_in_progress: 1,
           service_id: mesure.service_id
         }
       });
+
       if (mesure.antenne_id) {
-        UpdateAntenneCounters({
+        updateAntenneCounters({
           variables: {
             antenne_id: mesure.antenne_id,
             inc_mesures_awaiting: -1,
@@ -97,13 +141,13 @@ export const ServiceAddMesure = props => {
 
   const tribunalList = formatServiceTribunalList(data.service_tis);
   const [uniqueTribunal] = tribunalList;
-  const tribunalDefaultValue =
+  const tribunalInitialValue =
     tribunalList.length <= 1 ? { label: uniqueTribunal.label, value: uniqueTribunal.value } : "";
 
   return (
-    <Card sx={cardStyle}>
-      <Flex sx={ServiceCreateAntenneStyle} {...props}>
-        <Box width={[1, 2 / 5]} sx={grayBox}>
+    <Card m="1" mt="5" p="0">
+      <Flex flexWrap="wrap" {...props}>
+        <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
           <Box height="280px">
             <Heading4>{`Informations générales`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
@@ -120,229 +164,162 @@ export const ServiceAddMesure = props => {
         </Box>
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-            <Formik
-              onSubmit={(values, { setSubmitting, setErrors }) => {
-                const regionCode = getRegionCode(values.geocode.postcode);
-                const departements = departementsData.departements;
-                const departement = departements.find(dep => dep.code === regionCode);
+            <form onSubmit={formik.handleSubmit}>
+              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                <Input
+                  value={formik.values.numero_rg}
+                  id="numero_rg"
+                  name="numero_rg"
+                  hasError={formik.errors.numero_rg && formik.touched.numero_rg}
+                  onChange={formik.handleChange}
+                  placeholder="Numéro RG"
+                />
+                {formik.errors.numero_rg && formik.touched.numero_rg && (
+                  <Text>{formik.errors.numero_rg}</Text>
+                )}
+              </Box>
+              <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+                <Select
+                  id="tribunal"
+                  name="tribunal"
+                  placeholder="Tribunal"
+                  value={formik.values.tribunal || tribunalInitialValue}
+                  options={tribunalList}
+                  hasError={formik.errors.tribunal && formik.touched.tribunal}
+                  onChange={option => formik.setFieldValue("tribunal", option)}
+                />
+                {formik.errors.tribunal && formik.touched.tribunal && (
+                  <Text>{formik.errors.tribunal}</Text>
+                )}
+              </Box>
+              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                <Input
+                  value={formik.values.numero_dossier}
+                  id="numero_dossier"
+                  name="numero_dossier"
+                  hasError={formik.errors.numero_dossier && formik.touched.numero_dossier}
+                  onChange={formik.handleChange}
+                  placeholder="Numero de dossier"
+                />
+                {formik.errors.numero_dossier && formik.touched.numero_dossier && (
+                  <Text>{formik.errors.numero_dossier}</Text>
+                )}
+              </Box>
+              <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
+                <Select
+                  id="antenne"
+                  name="antenne"
+                  placeholder="Antenne"
+                  value={formik.values.antenne}
+                  hasError={formik.errors.antenne_id && formik.touched.antenne_id}
+                  onChange={option => formik.setFieldValue("antenne", option)}
+                  options={antenneOptions}
+                />
+                {formik.errors.antenne_id && formik.touched.antenne_id && (
+                  <Text>{formik.errors.antenne_id}</Text>
+                )}
+              </Box>
+              <Box mb="2" mt="5">
+                <Input
+                  value={formik.values.date_ouverture}
+                  id="date_ouverture"
+                  type="date"
+                  name="date_ouverture"
+                  hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
+                  onChange={formik.handleChange}
+                  placeholder="Date d'ouverture"
+                />
+                {formik.errors.date_ouverture && formik.touched.date_ouverture && (
+                  <Text>{formik.errors.date_ouverture}</Text>
+                )}
+              </Box>
+              <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
+                <Select
+                  id="type"
+                  name="type"
+                  placeholder="Type de mesure"
+                  value={formik.values.type}
+                  hasError={formik.errors.type && formik.touched.type}
+                  onChange={option => formik.setFieldValue("type", option)}
+                  options={MESURE_TYPE_LABEL_VALUE}
+                />
+                {formik.errors.type && formik.touched.type && <Text>{formik.errors.type}</Text>}
+              </Box>
+              <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+                <Select
+                  id="civilite"
+                  name="civilite"
+                  placeholder="Civilité"
+                  value={formik.values.civilite}
+                  hasError={formik.errors.civilite && formik.touched.civilite}
+                  onChange={option => formik.setFieldValue("civilite", option)}
+                  options={CIVILITY}
+                />
+                {formik.errors.civilite && formik.touched.civilite && (
+                  <Text>{formik.errors.civilite}</Text>
+                )}
+              </Box>
 
-                if (!departement) {
-                  setErrors({
-                    code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
-                  });
-                } else {
-                  AddMesure({
-                    awaitRefetchQueries: true,
-                    refetchQueries: ["mesures", "mesures_aggregate"],
-                    variables: {
-                      annee: values.annee.toString(),
-                      antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
-                      civilite: values.civilite.value,
-                      code_postal: values.geocode.postcode,
-                      ville: values.geocode.ville,
-                      // lat: values.geocode.lat,
-                      // lng: values.geocode.lng,
-                      date_ouverture: values.date_ouverture,
-                      department_id: departement.id,
-                      numero_dossier: values.numero_dossier,
-                      numero_rg: values.numero_rg,
-                      residence: values.residence.value,
-                      ti_id: values.tribunal.value,
-                      type: values.type.value
-                    }
-                  });
-                  Router.push("/services");
-                }
-                setSubmitting(false);
-              }}
-              validationSchema={Yup.object().shape({
-                annee: Yup.number()
-                  .required("Champ obligatoire")
-                  .min(1900, "l'année choisi doit être au minimum 1900")
-                  .max(2019, "l'année choisi doit être au maximum 2019"),
-                antenne: Yup.string(),
-                civilite: Yup.string().required("Champ obligatoire"),
-                // code_postal: Yup.string().required("Champ obligatoire"),
-                date_ouverture: Yup.date().required("Champ obligatoire"),
-                numero_dossier: Yup.string().required("Champ obligatoire"),
-                numero_rg: Yup.string().required("Champ obligatoire"),
-                residence: Yup.string().required("Champ obligatoire"),
-                tribunal: Yup.string().required("Champ obligatoire"),
-                type: Yup.string().required("Champ obligatoire")
-                // ville: Yup.string().required("Champ obligatoire")
-              })}
-              initialValues={{
-                annee: "",
-                antenne: "",
-                civilite: "",
-                code_postal: "",
-                date_ouverture: "",
-                numero_dossier: "",
-                numero_rg: "",
-                tribunal: tribunalDefaultValue,
-                geocode: {}
-              }}
-            >
-              {props => {
-                const {
-                  values,
-                  touched,
-                  errors,
-                  isSubmitting,
-                  handleChange,
-                  handleSubmit,
-                  setFieldValue
-                } = props;
-                return (
-                  <form onSubmit={handleSubmit}>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.numero_rg}
-                        id="numero_rg"
-                        name="numero_rg"
-                        hasError={errors.numero_rg && touched.numero_rg}
-                        onChange={handleChange}
-                        placeholder="Numéro RG"
-                      />
-                      {errors.numero_rg && touched.numero_rg && <Text>{errors.numero_rg}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
-                      <Select
-                        id="tribunal"
-                        name="tribunal"
-                        placeholder="Tribunal"
-                        value={values.tribunal}
-                        options={tribunalList}
-                        hasError={errors.tribunal && touched.tribunal}
-                        onChange={option => setFieldValue("tribunal", option)}
-                      />
-                      {errors.tribunal && touched.tribunal && <Text>{errors.tribunal}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.numero_dossier}
-                        id="numero_dossier"
-                        name="numero_dossier"
-                        hasError={errors.numero_dossier && touched.numero_dossier}
-                        onChange={handleChange}
-                        placeholder="Numero de dossier"
-                      />
-                      {errors.numero_dossier && touched.numero_dossier && (
-                        <Text>{errors.numero_dossier}</Text>
-                      )}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
-                      <Select
-                        id="antenne"
-                        name="antenne"
-                        placeholder="Antenne"
-                        value={values.antenne}
-                        hasError={errors.antenne_id && touched.antenne_id}
-                        onChange={option => setFieldValue("antenne", option)}
-                        options={antenneOptions}
-                      />
-                      {errors.antenne_id && touched.antenne_id && <Text>{errors.antenne_id}</Text>}
-                    </Box>
-                    <Box mb="2" mt="5">
-                      <Input
-                        value={values.date_ouverture}
-                        id="date_ouverture"
-                        type="date"
-                        name="date_ouverture"
-                        hasError={errors.date_ouverture && touched.date_ouverture}
-                        onChange={handleChange}
-                        placeholder="Date d'ouverture"
-                      />
-                      {errors.date_ouverture && touched.date_ouverture && (
-                        <Text>{errors.date_ouverture}</Text>
-                      )}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
-                      <Select
-                        id="type"
-                        name="type"
-                        placeholder="Type de mesure"
-                        value={values.type}
-                        hasError={errors.type && touched.type}
-                        onChange={option => setFieldValue("type", option)}
-                        options={MESURE_TYPE_LABEL_VALUE}
-                      />
-                      {errors.type && touched.type && <Text>{errors.type}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
-                      <Select
-                        id="civilite"
-                        name="civilite"
-                        placeholder="Civilité"
-                        value={values.civilite}
-                        hasError={errors.civilite && touched.civilite}
-                        onChange={option => setFieldValue("civilite", option)}
-                        options={CIVILITY}
-                      />
-                      {errors.civilite && touched.civilite && <Text>{errors.civilite}</Text>}
-                    </Box>
+              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                <Input
+                  value={formik.values.annee}
+                  id="annee"
+                  name="annee"
+                  type="number"
+                  hasError={formik.errors.annee && formik.touched.annee}
+                  onChange={formik.handleChange}
+                  placeholder="année"
+                />
+                {formik.errors.annee && formik.touched.annee && <Text>{formik.errors.annee}</Text>}
+              </Box>
+              <Box sx={{ position: "relative", zIndex: "90" }} mt="5" mb="2">
+                <Select
+                  id="residence"
+                  name="residence"
+                  placeholder="Type de residence"
+                  value={formik.values.residence}
+                  hasError={formik.errors.residence && formik.touched.residence}
+                  onChange={option => formik.setFieldValue("residence", option)}
+                  options={RESIDENCE}
+                />
+                {formik.errors.residence && formik.touched.residence && (
+                  <Text>{formik.errors.residence}</Text>
+                )}
+              </Box>
 
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.annee}
-                        id="annee"
-                        name="annee"
-                        type="number"
-                        hasError={errors.annee && touched.annee}
-                        onChange={handleChange}
-                        placeholder="année"
-                      />
-                      {errors.annee && touched.annee && <Text>{errors.annee}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "90" }} mt="5" mb="2">
-                      <Select
-                        id="residence"
-                        name="residence"
-                        placeholder="Type de residence"
-                        value={values.residence}
-                        hasError={errors.residence && touched.residence}
-                        onChange={option => setFieldValue("residence", option)}
-                        options={RESIDENCE}
-                      />
-                      {errors.residence && touched.residence && <Text>{errors.residence}</Text>}
-                    </Box>
+              <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
+                <AsyncSelect
+                  name="geocode"
+                  cacheOptions
+                  defaultOptions
+                  hasError={formik.errors}
+                  isClearable
+                  loadOptions={debouncedGeocode}
+                  placeholder="Ville, code postal, ..."
+                  noOptionsMessage={() => "Pas de résultats"}
+                  onChange={({ value }) => formik.setFieldValue("geocode", value)}
+                />
+              </Box>
 
-                    <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
-                      <AsyncSelect
-                        name="geocode"
-                        cacheOptions
-                        defaultOptions
-                        hasError={errors}
-                        isClearable
-                        loadOptions={debouncedGeocode}
-                        placeholder="Ville, code postal, ..."
-                        noOptionsMessage={() => "Pas de résultats"}
-                        onChange={({ value }) => {
-                          console.log("change");
-                          console.log(value);
-                          setFieldValue("geocode", value);
-                        }}
-                      />
-                    </Box>
-
-                    <Flex justifyContent="flex-end">
-                      <Box>
-                        <Button mr="2" variant="outline">
-                          <Link href="/services">
-                            <a>Annuler</a>
-                          </Link>
-                        </Button>
-                      </Box>
-                      <Box>
-                        <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                          Enregistrer
-                        </Button>
-                      </Box>
-                    </Flex>
-                  </form>
-                );
-              }}
-            </Formik>
+              <Flex justifyContent="flex-end">
+                <Box>
+                  <Button mr="2" variant="outline">
+                    <Link href="/services">
+                      <a>Annuler</a>
+                    </Link>
+                  </Button>
+                </Box>
+                <Box>
+                  <Button
+                    type="submit"
+                    disabled={formik.isSubmitting}
+                    isLoading={formik.isSubmitting}
+                  >
+                    Enregistrer
+                  </Button>
+                </Box>
+              </Flex>
+            </form>
           </Box>
         </Box>
       </Flex>
