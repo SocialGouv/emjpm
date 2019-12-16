@@ -1,5 +1,5 @@
 ---
-to: src/components-v2/<%= h.inflection.camelize(name) %>/style.js
+to: src/components/<%= h.inflection.camelize(name) %>/style.js
 ---
 const <%= h.inflection.camelize(name)%>Style = {
   bg: "blue"
