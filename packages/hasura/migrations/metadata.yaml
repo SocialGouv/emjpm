@@ -1328,6 +1328,12 @@ tables:
     role: prepose
 - array_relationships:
   - comment: null
+    name: service_tis
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table: service_tis
+  - comment: null
     name: service_antennes
     using:
       foreign_key_constraint_on:
@@ -1339,12 +1345,6 @@ tables:
       foreign_key_constraint_on:
         column: service_id
         table: service_admin
-  - comment: null
-    name: service_tis
-    using:
-      foreign_key_constraint_on:
-        column: service_id
-        table: service_tis
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -1852,6 +1852,41 @@ tables:
   - comment: null
     permission:
       check:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      set:
+        service_id: x-hasura-Service-Id
+    role: service
+  - comment: null
+    permission:
+      check:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
@@ -1882,39 +1917,6 @@ tables:
       - judgment_date
       set: {}
     role: individuel
-  - comment: null
-    permission:
-      check:
-        service_id:
-          _eq: X-Hasura-Service-Id
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - is_urgent
-      - judgment_date
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
-      set:
-        service_id: x-hasura-Service-Id
-    role: service
   - comment: null
     permission:
       check:
@@ -2484,18 +2486,6 @@ tables:
       - code_postal
       computed_fields: []
       filter: {}
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - latitude
-      - longitude
-      - id
-      - cities
-      - code_postal
-      computed_fields: []
-      filter: {}
     role: prepose
   - comment: null
     permission:
@@ -2528,6 +2518,18 @@ tables:
       computed_fields: []
       filter: {}
     role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - latitude
+      - longitude
+      - id
+      - cities
+      - code_postal
+      computed_fields: []
+      filter: {}
+    role: individuel
   table: geolocalisation_code_postal
   update_permissions: []
 - array_relationships:
@@ -3044,6 +3046,17 @@ tables:
       - mesures_max
       computed_fields: []
       filter: {}
+    role: ti
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - department_id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      computed_fields: []
+      filter: {}
     role: direction
   - comment: null
     permission:
@@ -3067,16 +3080,5 @@ tables:
       computed_fields: []
       filter: {}
     role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - department_id
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      computed_fields: []
-      filter: {}
-    role: ti
   table: view_department_availability
   update_permissions: []
