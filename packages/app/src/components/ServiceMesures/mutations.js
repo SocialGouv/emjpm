@@ -57,6 +57,8 @@ export const EDIT_MESURE = gql`
     $numero_dossier: String
     $numero_rg: String
     $ti_id: Int!
+    $latitude: Float!
+    $longitude: Float!
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -73,6 +75,8 @@ export const EDIT_MESURE = gql`
         ti_id: $ti_id
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
+        latitude: $latitude
+        longitude: $longitude
       }
     ) {
       returning {
@@ -90,6 +94,8 @@ export const EDIT_MESURE = gql`
         status
         type
         ville
+        latitude
+        longitude
         residence
         numero_rg
         numero_dossier
@@ -247,6 +253,8 @@ export const ADD_MESURE = gql`
     $numero_rg: String!
     $antenne_id: Int
     $ti_id: Int!
+    $latitude: Float!
+    $longitude: Float!
   ) {
     insert_mesures(
       objects: {
@@ -263,6 +271,8 @@ export const ADD_MESURE = gql`
         numero_rg: $numero_rg
         status: "Mesure en cours"
         antenne_id: $antenne_id
+        latitude: $latitude
+        longitude: $longitude
       }
     ) {
       returning {
@@ -281,6 +291,8 @@ export const ADD_MESURE = gql`
         status
         type
         ville
+        latitude
+        longitude
         residence
         numero_rg
         numero_dossier
