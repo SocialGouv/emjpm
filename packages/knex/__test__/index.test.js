@@ -2,6 +2,10 @@
 
 const { knex } = global;
 
+// NOTE(douglasduteil): allow knex tests to take up to 25s
+// Slow machine might have difficulties running those test under 5s.
+jest.setTimeout(25 * 1000);
+
 beforeAll(async () => {
   await knex.migrate.latest();
   await knex.seed.run();
