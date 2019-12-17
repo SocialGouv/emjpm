@@ -6,6 +6,7 @@ import iconPreposeMarker from "../../../static/images/map-icon-propose-man@2x.pn
 import iconServiceMarker from "../../../static/images/map-icon-service@2x.png";
 import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discriminator";
 import { MapContext } from "./context";
+// TODO MOVE EVERYTHING IN THE MAP FOLDER
 const icons = [
   { src: iconIndividuelMarker, name: MANDATAIRE_IND },
   { src: iconPreposeMarker, name: MANDATAIRE_PRE },

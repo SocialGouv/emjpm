@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -11,7 +12,7 @@ import { DELETE_MESURE } from "./mutations";
 import { MESURES } from "./queries";
 
 export const ServiceDeleteMesure = props => {
-  const { currentMesure, queryVariables } = props;
+  const { currentMesure, queryVariables, isPage = false } = props;
   const [UpdateMesure] = useMutation(DELETE_MESURE);
 
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
@@ -41,8 +42,13 @@ export const ServiceDeleteMesure = props => {
               }
             });
             setSubmitting(false);
-            setPanelType(null);
-            setCurrentMesure(null);
+            if (!isPage) {
+              // TODO transform me in done function passed to the component
+              setPanelType(null);
+              setCurrentMesure(null);
+            } else {
+              Router.push(`/services`);
+            }
           }}
           validationSchema={Yup.object().shape({
             reason_delete: Yup.string().required("Required")
@@ -69,8 +75,13 @@ export const ServiceDeleteMesure = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        setPanelType(PANEL_TYPE.CLOSE);
-                        setCurrentMesure(null);
+                        if (!isPage) {
+                          // TODO transform me in cancel function passed to the component
+                          setPanelType(PANEL_TYPE.CLOSE);
+                          setCurrentMesure(null);
+                        } else {
+                          Router.push(`/services/mesures/${currentMesure}`);
+                        }
                       }}
                     >
                       Annuler

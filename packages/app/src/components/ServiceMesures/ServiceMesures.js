@@ -39,7 +39,8 @@ const ServiceMesures = props => {
   };
 
   const { data, error, loading } = useQuery(MESURES, {
-    variables: queryVariables
+    variables: queryVariables,
+    fetchPolicy: "cache-and-network"
   });
 
   if (loading) {
