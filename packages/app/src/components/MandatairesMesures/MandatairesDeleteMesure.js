@@ -21,7 +21,7 @@ export const MandatairesDeleteMesure = props => {
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading5 mb="1">Supprimer la mesure</Heading5>
         <Text mb="2" lineHeight="1.5">
-          {`Vous êtes sur le point de supprimer définitivement une mesure de protection du système eMJPM. Toute suppression est irreversible, vous ne pourrez pas récupérer les données associées à cette mesure et celle-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'Etat.`}
+          {`Vous êtes sur le point de supprimer définitivement une mesure de protection du système eMJPM. Toute suppression est irréversible, vous ne pourrez pas récupérer les données associées à cette mesure et celle-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'Etat.`}
         </Text>
         <Text mb="2" lineHeight="1.5">
           {`NB : les mesures éteintes ne sont plus comptabilisees dans vos "mesures en cours", elles n'apparaissent donc plus aupres des Magistrats.`}
