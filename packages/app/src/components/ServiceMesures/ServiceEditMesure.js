@@ -46,13 +46,13 @@ export const ServiceEditMesure = props => {
 
   const [editMesure] = useMutation(EDIT_MESURE);
   const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
 
   const formik = useFormik({
     onSubmit: (values, { setSubmitting, setErrors }) => {
       const regionCode = getRegionCode(values.geocode.postcode);
       const departements = departementsData.departements;
       const departement = departements.find(dep => dep.code === regionCode);
-
       if (!departement) {
         setErrors({
           codePostal: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
@@ -152,7 +152,6 @@ export const ServiceEditMesure = props => {
   }
 
   const tribunalList = formatServiceTribunalList(data.service_tis);
-  const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
 
   return (
     <Flex flexWrap="wrap">
@@ -176,7 +175,7 @@ export const ServiceEditMesure = props => {
           <Heading3>Modifier la mesure</Heading3>
         </Box>
         <form onSubmit={formik.handleSubmit}>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "10" }} mb="2">
             <Input
               value={formik.values.numero_rg}
               id="numero_rg"
@@ -186,7 +185,7 @@ export const ServiceEditMesure = props => {
               placeholder="numero rg"
             />
           </Box>
-          <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "9" }} mb="2">
             <Select
               id="tribunal"
               name="tribunal"
@@ -200,7 +199,7 @@ export const ServiceEditMesure = props => {
               <Text>{formik.errors.tribunal}</Text>
             )}
           </Box>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "8" }} mb="2">
             <Input
               value={formik.values.numero_dossier}
               id="numero_dossier"
@@ -210,7 +209,7 @@ export const ServiceEditMesure = props => {
               placeholder="numero de dossier"
             />
           </Box>
-          <Box mb="2">
+          <Box sx={{ position: "relative", zIndex: "7" }} mb="2">
             <Input
               value={formik.values.date_ouverture}
               id="date_ouverture"
@@ -222,7 +221,7 @@ export const ServiceEditMesure = props => {
             />
           </Box>
           {user_antennes.length >= 2 && (
-            <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+            <Box sx={{ position: "relative", zIndex: "6" }} mb="2">
               <Select
                 id="antenne_id"
                 name="antenne_id"
@@ -234,7 +233,7 @@ export const ServiceEditMesure = props => {
               />
             </Box>
           )}
-          <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "5" }} mb="2">
             <Select
               id="type"
               name="type"
@@ -245,7 +244,7 @@ export const ServiceEditMesure = props => {
               options={MESURE_TYPE_LABEL_VALUE}
             />
           </Box>
-          <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "4" }} mb="2">
             <Select
               id="civilite"
               name="civilite"
@@ -256,7 +255,7 @@ export const ServiceEditMesure = props => {
               options={CIVILITY}
             />
           </Box>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "3" }} mb="2">
             <Input
               value={formik.values.annee}
               id="annee"
@@ -266,7 +265,7 @@ export const ServiceEditMesure = props => {
               placeholder="année"
             />
           </Box>
-          <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "2" }} mb="2">
             <Select
               id="residence"
               name="residence"
@@ -277,7 +276,7 @@ export const ServiceEditMesure = props => {
               options={RESIDENCE}
             />
           </Box>
-          <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
+          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <AsyncSelect
               name="geocode"
               cacheOptions
@@ -294,7 +293,6 @@ export const ServiceEditMesure = props => {
             )}
             {formik.errors.code_postal && <Text>{formik.errors.codePostal}</Text>}
           </Box>
-
           <Flex justifyContent="flex-end">
             <Box>
               <Button
