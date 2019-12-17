@@ -13,6 +13,8 @@ export const EDIT_ANTENNE = gql`
     $service_id: Int
     $ville: String
     $telephone: String
+    $latitude: Float
+    $longitude: Float
   ) {
     __typename
     update_services(
@@ -28,6 +30,8 @@ export const EDIT_ANTENNE = gql`
         etablissement: $etablissement
         information: $information
         ville: $ville
+        latitude: $latitude
+        longitude: $longitude
       }
     ) {
       affected_rows
