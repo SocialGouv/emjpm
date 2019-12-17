@@ -15,3 +15,8 @@ export const getRegionCode = codePostal => {
   }
   return code;
 };
+
+export const findDepartement = (codePostal, departements) => {
+  const regionCode = getRegionCode(codePostal);
+  return departements.find(data => data.code === regionCode);
+};
