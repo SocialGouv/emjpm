@@ -33,6 +33,7 @@ const MandatairesMesures = props => {
     searchText:
       debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
     status: currentMesureType,
+    excludeStatus: isOnlyWaiting ? "" : "Mesure en attente",
     type: mesureType ? mesureType.value : null
   };
 
