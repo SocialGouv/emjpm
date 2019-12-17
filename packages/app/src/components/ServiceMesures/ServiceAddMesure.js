@@ -140,9 +140,6 @@ export const ServiceAddMesure = props => {
   }));
 
   const tribunalList = formatServiceTribunalList(data.service_tis);
-  const [uniqueTribunal] = tribunalList;
-  const tribunalInitialValue =
-    tribunalList.length <= 1 ? { label: uniqueTribunal.label, value: uniqueTribunal.value } : "";
 
   return (
     <Card m="1" mt="5" p="0">
@@ -183,7 +180,7 @@ export const ServiceAddMesure = props => {
                   id="tribunal"
                   name="tribunal"
                   placeholder="Tribunal"
-                  value={formik.values.tribunal || tribunalInitialValue}
+                  value={formik.values.tribunal}
                   options={tribunalList}
                   hasError={formik.errors.tribunal && formik.touched.tribunal}
                   onChange={option => formik.setFieldValue("tribunal", option)}
@@ -297,8 +294,12 @@ export const ServiceAddMesure = props => {
                   loadOptions={debouncedGeocode}
                   placeholder="Ville, code postal, ..."
                   noOptionsMessage={() => "Pas de résultats"}
-                  onChange={({ value }) => formik.setFieldValue("geocode", value)}
+                  onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
                 />
+                {formik.errors.geocode && formik.touched.geocode && (
+                  <Text>{formik.errors.geocode}</Text>
+                )}
+                {formik.errors.code_postal && <Text>{formik.errors.codePostal}</Text>}
               </Box>
 
               <Flex justifyContent="flex-end">

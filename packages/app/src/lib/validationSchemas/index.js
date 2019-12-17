@@ -1,3 +1,4 @@
+import { mandataireMesureSchema } from "./mandataireMesureSchema";
 import { serviceMesureSchema } from "./serviceMesureSchema";
 
-export { serviceMesureSchema };
+export { mandataireMesureSchema, serviceMesureSchema };

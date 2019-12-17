@@ -75,6 +75,8 @@ export const EDIT_MESURE = gql`
         ti_id: $ti_id
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
+        latitude: $latitude
+        longitude: $longitude
       }
     ) {
       returning {
@@ -92,6 +94,8 @@ export const EDIT_MESURE = gql`
         status
         type
         ville
+        latitude
+        longitude
         residence
         numero_rg
         numero_dossier
@@ -287,6 +291,8 @@ export const ADD_MESURE = gql`
         status
         type
         ville
+        latitude
+        longitude
         residence
         numero_rg
         numero_dossier

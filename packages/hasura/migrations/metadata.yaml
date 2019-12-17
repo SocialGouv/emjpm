@@ -1852,6 +1852,41 @@ tables:
   - comment: null
     permission:
       check:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      set: {}
+    role: individuel
+  - comment: null
+    permission:
+      check:
         service_id:
           _eq: X-Hasura-Service-Id
       columns:
@@ -1884,39 +1919,6 @@ tables:
       set:
         service_id: x-hasura-Service-Id
     role: service
-  - comment: null
-    permission:
-      check:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
-      - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
-      - antenne_id
-      - service_id
-      - is_urgent
-      - judgment_date
-      set: {}
-    role: individuel
   - comment: null
     permission:
       check:
@@ -2044,6 +2046,43 @@ tables:
     role: service
   - comment: null
     permission:
+      allow_aggregations: true
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      computed_fields: []
+      filter:
+        mandataire:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
       allow_aggregations: false
       columns:
       - is_urgent
@@ -2076,41 +2115,6 @@ tables:
           user_id:
             _eq: X-Hasura-User-Id
     role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      computed_fields: []
-      filter:
-        mandataire:
-          user:
-            id:
-              _eq: X-Hasura-User-Id
-    role: individuel
   - comment: null
     permission:
       allow_aggregations: true
@@ -2214,28 +2218,30 @@ tables:
   - comment: null
     permission:
       columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
       - annee
+      - antenne_id
       - cabinet
       - civilite
       - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
       - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
       - numero_dossier
       - numero_rg
       - reason_extinction
       - residence
+      - service_id
       - status
+      - ti_id
       - type
       - ville
       filter:
