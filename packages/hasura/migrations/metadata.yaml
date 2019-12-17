@@ -506,6 +506,12 @@ tables:
   update_permissions: []
 - array_relationships:
   - comment: null
+    name: user_antennes
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table: user_antenne
+  - comment: null
     name: user_tis
     using:
       foreign_key_constraint_on:
@@ -523,12 +529,6 @@ tables:
       foreign_key_constraint_on:
         column: user_id
         table: service_admin
-  - comment: null
-    name: user_antennes
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table: user_antenne
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -1449,6 +1449,15 @@ tables:
   - comment: null
     permission:
       columns:
+      - latitude
+      - longitude
+      - mesures_awaiting
+      filter: {}
+      set: {}
+    role: ti
+  - comment: null
+    permission:
+      columns:
       - adresse
       - code_postal
       - department_id
@@ -1468,13 +1477,6 @@ tables:
           _eq: X-Hasura-Service-Id
       set: {}
     role: service
-  - comment: null
-    permission:
-      columns:
-      - mesures_awaiting
-      filter: {}
-      set: {}
-    role: ti
 - array_relationships:
   - comment: null
     name: mandataire_etablissements
@@ -2561,56 +2563,61 @@ tables:
   insert_permissions:
   - comment: null
     permission:
-      check: {}
-      columns:
-      - id
-      - etablissement
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - mesures_en_cours
-      - dispo_max
-      - user_id
-      - telephone_portable
-      - secretariat
-      - nb_secretariat
-      - created_at
-      - date_mesure_update
-      - email_send
-      - genre
-      - mesures_en_attente
-      - zip
-      - department_id
-      - siret
-      set: {}
-    role: individuel
-  - comment: null
-    permission:
       check:
         user_id:
           _eq: X-Hasura-User-Id
       columns:
-      - secretariat
-      - nb_secretariat
-      - dispo_max
-      - id
-      - mesures_en_attente
-      - mesures_en_cours
-      - user_id
-      - zip
-      - created_at
-      - date_mesure_update
-      - email_send
       - adresse
       - code_postal
+      - created_at
+      - date_mesure_update
+      - dispo_max
+      - email_send
       - etablissement
       - genre
+      - id
+      - latitude
+      - longitude
+      - mesures_en_attente
+      - mesures_en_cours
+      - nb_secretariat
+      - secretariat
+      - siret
       - telephone
       - telephone_portable
+      - user_id
       - ville
+      - zip
       set: {}
     role: prepose
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - adresse
+      - code_postal
+      - created_at
+      - date_mesure_update
+      - department_id
+      - dispo_max
+      - email_send
+      - etablissement
+      - genre
+      - id
+      - latitude
+      - longitude
+      - mesures_en_attente
+      - mesures_en_cours
+      - nb_secretariat
+      - secretariat
+      - siret
+      - telephone
+      - telephone_portable
+      - user_id
+      - ville
+      - zip
+      set: {}
+    role: individuel
   is_enum: false
   object_relationships:
   - comment: null
@@ -2745,26 +2752,28 @@ tables:
   - comment: null
     permission:
       columns:
-      - secretariat
-      - nb_secretariat
-      - department_id
-      - dispo_max
-      - id
-      - mesures_en_attente
-      - mesures_en_cours
-      - user_id
-      - zip
-      - created_at
-      - date_mesure_update
-      - email_send
       - adresse
       - code_postal
+      - created_at
+      - date_mesure_update
+      - department_id
+      - dispo_max
+      - email_send
       - etablissement
       - genre
+      - id
+      - latitude
+      - longitude
+      - mesures_en_attente
+      - mesures_en_cours
+      - nb_secretariat
+      - secretariat
       - siret
       - telephone
       - telephone_portable
+      - user_id
       - ville
+      - zip
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -2773,37 +2782,41 @@ tables:
   - comment: null
     permission:
       columns:
-      - mesures_en_attente
-      - mesures_en_cours
-      filter: {}
-      set: {}
-    role: ti
-  - comment: null
-    permission:
-      columns:
-      - secretariat
-      - nb_secretariat
-      - dispo_max
-      - id
-      - mesures_en_attente
-      - mesures_en_cours
-      - user_id
-      - zip
-      - created_at
-      - date_mesure_update
-      - email_send
       - adresse
       - code_postal
+      - created_at
+      - date_mesure_update
+      - department_id
+      - dispo_max
+      - email_send
       - etablissement
       - genre
+      - id
+      - latitude
+      - longitude
+      - mesures_en_attente
+      - mesures_en_cours
+      - nb_secretariat
+      - secretariat
+      - siret
       - telephone
       - telephone_portable
+      - user_id
       - ville
+      - zip
       filter:
         user_id:
           _eq: X-Hasura-User-Id
       set: {}
     role: prepose
+  - comment: null
+    permission:
+      columns:
+      - mesures_en_attente
+      - mesures_en_cours
+      filter: {}
+      set: {}
+    role: ti
 - array_relationships: []
   configuration:
     custom_column_names: {}
