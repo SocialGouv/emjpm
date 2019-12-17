@@ -16,7 +16,7 @@ import {
   topTextStyle
 } from "./style";
 
-const ServicesInformations = props => {
+const ServiceInformations = props => {
   const { antenne_id } = props;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     fetchPolicy: "cache-and-network",
@@ -71,14 +71,14 @@ const ServicesInformations = props => {
   );
 };
 
-ServicesInformations.defaultProps = {
+ServiceInformations.defaultProps = {
   currentAntenne: null,
   user_antennes: []
 };
 
-ServicesInformations.propTypes = {
+ServiceInformations.propTypes = {
   currentAntenne: PropTypes.string,
   user_antennes: PropTypes.array
 };
 
-export { ServicesInformations };
+export { ServiceInformations };

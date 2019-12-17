@@ -4,7 +4,7 @@ import React, { Fragment, useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
-import { FiltersContext } from "../ServicesFilters/context";
+import { FiltersContext } from "../ServiceFilters/context";
 import { MESURES } from "./queries";
 import { ServiceAcceptMesure } from "./ServiceAcceptMesure";
 import { ServiceCloseMesure } from "./ServiceCloseMesure";
