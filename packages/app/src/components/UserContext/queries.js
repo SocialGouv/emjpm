@@ -37,6 +37,8 @@ export const GET_SERVICE_USERS = gql`
           mesures_awaiting
           dispo_max
           etablissement
+          longitude
+          latitude
         }
       }
       user_antennes {

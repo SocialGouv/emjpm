@@ -31,7 +31,6 @@ const UserProvider = props => {
   if (!data) {
     return <Fragment>loading</Fragment>;
   }
-
   const [currentUser] = data.users;
   return <Context.Provider value={currentUser}>{children}</Context.Provider>;
 };
