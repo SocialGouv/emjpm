@@ -45,17 +45,48 @@ $ yarn workspace @emjpm/api test --maxWorkers=2 --coverage
 
 ## E2E tests
 
-The e2e tests are using the latest deployed `socialgouv/emjpm-*` images by default.
-To run the tests with
 
 ```sh
-$ yarn lerna --scope @optional/e2e exec yarn
+#
+# Ensure to have a clean new postgres volume
+$ docker-compose rm -sfv
+$ docker volume rm -f emjpm_emjpm-pgdata
+#
+
+# Start the app, api, etc...
+#
+$ docker pull registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm:master
+$ docker build --shm-size 521M --cache-from registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm:master -t socialgouv/emjpm:master .
 $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up --build
+# or
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up db
 
-$ NODE_ENV=test yarn workspace @emjpm/knex run migrate
-$ NODE_ENV=test yarn workspace @emjpm/knex run seeds
+# Initialize the db
+#
+$ yarn workspace @emjpm/knex run migrate --env test
+$ yarn workspace @emjpm/knex run seeds --env test
 
-$ yarn run -- lerna --scope @optional/e2e run cypress:run -- --headed
+# Instantiate the initial seed
+#
+$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
+```
+
+```sh
+# The e2e script will retore the db before each scenario with
+$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
+```
+
+```sh
+$ docker-compose up --build db graphql-engine
+$ NODE_ENV=test yarn dev
+
+# Install the e2e runner env
+$ yarn e2e
+# short for
+$ yarn run -- lerna --scope @optional/e2e.runner.puppetteer exec yarn
+
+# Run the test
+$ yarn e2e test
 ```
 
 ## Manual deployment
