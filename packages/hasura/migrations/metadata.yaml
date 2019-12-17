@@ -2180,6 +2180,40 @@ tables:
   - comment: null
     permission:
       columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      set: {}
+    role: service
+  - comment: null
+    permission:
+      columns:
       - is_urgent
       - date_ouverture
       - extinction
@@ -2245,38 +2279,6 @@ tables:
               _eq: X-Hasura-User-Id
       set: {}
     role: ti
-  - comment: null
-    permission:
-      columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      filter:
-        service_id:
-          _eq: X-Hasura-Service-Id
-      set: {}
-    role: service
   - comment: null
     permission:
       columns:
