@@ -10,10 +10,6 @@ export const MESURE_STATUS_LABEL_VALUE = [
   {
     label: "Mesure en cours",
     value: "Mesure en cours"
-  },
-  {
-    label: "Mesure en attente",
-    value: "Mesure en attente"
   }
 ];
 
