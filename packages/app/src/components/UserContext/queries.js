@@ -138,6 +138,9 @@ export const MANDATAIRE_USERS = gql`
       cabinet
       mandataire {
         id
+        dispo_max
+        mesures_en_cours
+        mesures_en_attente
       }
     }
   }
