@@ -1,2 +1,3 @@
 admin_secret: secret
 endpoint: http://localhost:5000
+enable_telemetry: false
