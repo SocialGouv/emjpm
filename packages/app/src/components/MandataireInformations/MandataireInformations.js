@@ -1,13 +1,17 @@
 import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline } from "styled-icons/material";
 
 import { LinkButton } from "../Commons";
+import { UserContext } from "../UserContext";
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
 
-const MandatairesInformations = props => {
-  const { email, nom, prenom } = props;
+const MandataireInformations = props => {
+  const user = useContext(UserContext);
+
+  const { email, nom, prenom, user_tis } = user;
+  console.log(user_tis);
   return (
     <Box {...props}>
       <Card p="5">
@@ -24,6 +28,16 @@ const MandatairesInformations = props => {
             <Text sx={innerTextStyle}>{nom ? nom : "Nom non renseigné"} </Text>
             <Text sx={innerTextStyle}>{prenom ? prenom : "Prénom non renseigné"}</Text>
           </Box>
+          <Box sx={boxStyle}>
+            <Heading5 mb="3">Tribunaux d’instance</Heading5>
+            {user_tis.map(ti => {
+              return (
+                <Text key={ti.ti.id} sx={innerTextStyle}>
+                  {ti.ti.etablissement}
+                </Text>
+              );
+            })}
+          </Box>
         </Flex>
         <Flex mt="5">
           <Box>
@@ -38,4 +52,4 @@ const MandatairesInformations = props => {
   );
 };
 
-export { MandatairesInformations };
+export { MandataireInformations };
