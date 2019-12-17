@@ -14,7 +14,7 @@ const Mandataires = () => {
       <LayoutMandataire>
         <BoxWrapper mt={6} px="1">
           <Heading1>Vos mesures en attente</Heading1>
-          <MandataireFilters />
+          <MandataireFilters isStatusHidden />
           <Flex
             sx={{
               flexWrap: "wrap",
