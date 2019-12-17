@@ -30,9 +30,9 @@ const MandataireInformations = props => {
           </Box>
           <Box sx={boxStyle}>
             <Heading5 mb="3">Tribunaux d’instance</Heading5>
-            {user_tis.map(ti => {
+            {user_tis.map((ti, index) => {
               return (
-                <Text key={ti.ti.id} sx={innerTextStyle}>
+                <Text key={index} sx={innerTextStyle}>
                   {ti.ti.etablissement}
                 </Text>
               );
