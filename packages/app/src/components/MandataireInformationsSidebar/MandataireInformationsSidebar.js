@@ -27,11 +27,9 @@ const MandataireInformationsSidebar = props => {
           <BuildingHouse size="24" />
         </Box>
         <Box>
-          {/* <Text sx={description(true)}>Service</Text> */}
           <Text sx={title}>
             {nom} {prenom}
           </Text>
-          {/* <Text sx={description(true)}>En cours</Text> */}
           <Text sx={description(true)}>
             {mesures_en_cours} / {dispo_max} mesures
           </Text>
