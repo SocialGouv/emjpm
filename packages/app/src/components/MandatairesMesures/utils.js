@@ -20,7 +20,9 @@ export const formatMesureList = mesureList => {
       is_urgent,
       judgment_date,
       cabinet,
-      ti
+      ti,
+      latitude,
+      longitude
     } = mesure;
     const formatedDate = format(legacyParse(date_ouverture), convertTokens("DD/MM/YYYY"));
     const formatedJudgementDate = format(legacyParse(judgment_date), convertTokens("DD/MM/YYYY"));
@@ -43,7 +45,9 @@ export const formatMesureList = mesureList => {
       tiId: ti ? ti.id : null,
       tribunal: ti ? ti.etablissement : "Tribunal non reseigné",
       type: type ? type : "type de mesure non reseigné",
-      ville: ville ? ville : "ville non reseigné"
+      ville: ville ? ville : "ville non reseigné",
+      latitude: latitude || 45.5,
+      longitude: longitude || 0.5
     };
   });
   return mesures;

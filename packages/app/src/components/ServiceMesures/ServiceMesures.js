@@ -11,7 +11,6 @@ import { ServiceCloseMesure } from "./ServiceCloseMesure";
 import { ServiceDeleteMesure } from "./ServiceDeleteMesure";
 import { ServiceEditMesure } from "./ServiceEditMesure";
 import { ServiceReactivateMesure } from "./ServiceReactivateMesure";
-import { MesureListStyle } from "./style";
 import { formatMesureList } from "./utils";
 
 const RESULT_PER_PAGE = 20;
@@ -55,9 +54,10 @@ const ServiceMesures = props => {
   const totalPage = count / RESULT_PER_PAGE;
   const mesures = formatMesureList(data.mesures);
   const [service] = service_admins;
+
   return (
     <MesureContextProvider>
-      <Box sx={MesureListStyle}>
+      <Box width={[1]}>
         <Fragment>
           {mesures.length > 0 ? (
             <Fragment>
