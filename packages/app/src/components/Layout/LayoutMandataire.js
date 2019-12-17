@@ -8,10 +8,10 @@ import { Box } from "rebass";
 import { logout } from "../../util/auth";
 import { Link } from "../Commons";
 import { Footer } from "../Footer";
+import { MandataireInformationsSidebar } from "../MandataireInformationsSidebar";
 import { Navigation } from "../Navigation";
 import { UserInformations } from "../UserInformations";
 import { dropDownLinks } from "./dropDownLink";
-
 const navigationLinks = [
   {
     title: "Vos mesures",
@@ -51,31 +51,47 @@ const LayoutMandataire = props => {
           }
         `}
       />
-      <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <UserInformations
-          Component={props => {
-            return (
-              <Header
-                {...props}
-                Link={Link}
-                dropDownLinks={dropDownLinks}
-                disconnect={logout}
-                DropDownMenu={DropDownMenu}
-              />
-            );
-          }}
-        />
-        {hasNavigation && (
-          <BoxWrapper>
-            <Navigation links={navigationLinks} />
+      <Box sx={{ mr: "300px", position: "relative", "z-index": "1000" }}>
+        <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
+          <UserInformations
+            Component={props => {
+              return (
+                <Header
+                  {...props}
+                  Link={Link}
+                  dropDownLinks={dropDownLinks}
+                  disconnect={logout}
+                  DropDownMenu={DropDownMenu}
+                />
+              );
+            }}
+          />
+          {hasNavigation && (
+            <BoxWrapper>
+              <Navigation links={navigationLinks} />
+            </BoxWrapper>
+          )}
+        </Box>
+        {children}
+        <Box bg="cardPrimary">
+          <BoxWrapper px="1">
+            <Footer />
           </BoxWrapper>
-        )}
+        </Box>
       </Box>
-      {children}
-      <Box bg="cardPrimary">
-        <BoxWrapper px="1">
-          <Footer />
-        </BoxWrapper>
+      <Box
+        sx={{
+          bg: "white",
+          borderLeft: "2px solid #E3E6EA",
+          height: "100vh",
+          overflow: "scroll",
+          position: "fixed",
+          right: 0,
+          top: 0,
+          width: "300px"
+        }}
+      >
+        <MandataireInformationsSidebar />
       </Box>
     </Fragment>
   );
