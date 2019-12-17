@@ -162,7 +162,7 @@ export const ServiceAddMesure = props => {
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <form onSubmit={formik.handleSubmit}>
-              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+              <Box sx={{ position: "relative", zIndex: "9" }} mb="2">
                 <Input
                   value={formik.values.numero_rg}
                   id="numero_rg"
@@ -175,7 +175,7 @@ export const ServiceAddMesure = props => {
                   <Text>{formik.errors.numero_rg}</Text>
                 )}
               </Box>
-              <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+              <Box sx={{ position: "relative", zIndex: "8" }} mb="2">
                 <Select
                   id="tribunal"
                   name="tribunal"
@@ -189,7 +189,7 @@ export const ServiceAddMesure = props => {
                   <Text>{formik.errors.tribunal}</Text>
                 )}
               </Box>
-              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+              <Box sx={{ position: "relative", zIndex: "7" }} mb="2">
                 <Input
                   value={formik.values.numero_dossier}
                   id="numero_dossier"
@@ -202,7 +202,7 @@ export const ServiceAddMesure = props => {
                   <Text>{formik.errors.numero_dossier}</Text>
                 )}
               </Box>
-              <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
+              <Box sx={{ position: "relative", zIndex: "6" }} mb="2">
                 <Select
                   id="antenne"
                   name="antenne"
@@ -230,7 +230,7 @@ export const ServiceAddMesure = props => {
                   <Text>{formik.errors.date_ouverture}</Text>
                 )}
               </Box>
-              <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
+              <Box sx={{ position: "relative", zIndex: "5" }} mb="2">
                 <Select
                   id="type"
                   name="type"
@@ -242,7 +242,7 @@ export const ServiceAddMesure = props => {
                 />
                 {formik.errors.type && formik.touched.type && <Text>{formik.errors.type}</Text>}
               </Box>
-              <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+              <Box sx={{ position: "relative", zIndex: "4" }} mb="2">
                 <Select
                   id="civilite"
                   name="civilite"
@@ -257,7 +257,7 @@ export const ServiceAddMesure = props => {
                 )}
               </Box>
 
-              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+              <Box sx={{ position: "relative", zIndex: "3" }} mb="2">
                 <Input
                   value={formik.values.annee}
                   id="annee"
@@ -269,7 +269,7 @@ export const ServiceAddMesure = props => {
                 />
                 {formik.errors.annee && formik.touched.annee && <Text>{formik.errors.annee}</Text>}
               </Box>
-              <Box sx={{ position: "relative", zIndex: "90" }} mt="5" mb="2">
+              <Box sx={{ position: "relative", zIndex: "2" }} mt="5" mb="2">
                 <Select
                   id="residence"
                   name="residence"
@@ -284,7 +284,7 @@ export const ServiceAddMesure = props => {
                 )}
               </Box>
 
-              <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
+              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                 <AsyncSelect
                   name="geocode"
                   cacheOptions
