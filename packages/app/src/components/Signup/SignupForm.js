@@ -6,8 +6,8 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
+import { isEmailExists } from "../../query-service/EmailQueryService";
 import { SignupContext } from "./context";
-import { CHECK_EMAIL_UNICITY } from "./queries";
 import { cardStyle, grayBox } from "./style";
 
 const TYPE_OPTIONS = [
@@ -37,19 +37,6 @@ export const SignupForm = () => {
   const { user, setUser, validateStepOne } = useContext(SignupContext);
 
   const client = useApolloClient();
-
-  const isEmailExists = async email => {
-    const checkEmail = await client.query({
-      context: {
-        headers: {
-          "X-Hasura-Email": email
-        }
-      },
-      fetchPolicy: "network-only",
-      query: CHECK_EMAIL_UNICITY
-    });
-    return checkEmail.data.users.length > 0;
-  };
 
   return (
     <Fragment>
@@ -81,7 +68,7 @@ export const SignupForm = () => {
             <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
               <Formik
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
-                  const exists = await isEmailExists(values.email);
+                  const exists = await isEmailExists(client, values.email);
                   if (exists) {
                     setErrors({
                       email: "Cet email existe déjà"
