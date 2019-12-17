@@ -1368,6 +1368,32 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - id
+      - etablissement
+      - email
+      - nom
+      - prenom
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - dispo_max
+      - created_at
+      - information
+      - department_id
+      - mesures_in_progress
+      - mesures_awaiting
+      - latitude
+      - longitude
+      computed_fields: []
+      filter:
+        id:
+          _eq: X-Hasura-Service-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
       - code_postal
       - etablissement
       - id
@@ -1418,30 +1444,6 @@ tables:
       computed_fields: []
       filter: {}
     role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - adresse
-      - code_postal
-      - created_at
-      - department_id
-      - dispo_max
-      - email
-      - etablissement
-      - id
-      - information
-      - mesures_awaiting
-      - mesures_in_progress
-      - nom
-      - prenom
-      - telephone
-      - ville
-      computed_fields: []
-      filter:
-        id:
-          _eq: X-Hasura-Service-Id
-    role: service
   table: services
   update_permissions:
   - comment: null
@@ -2005,30 +2007,32 @@ tables:
     permission:
       allow_aggregations: true
       columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
       - id
+      - code_postal
+      - ville
+      - etablissement
+      - mandataire_id
+      - created_at
+      - annee
+      - type
+      - date_ouverture
+      - residence
+      - civilite
+      - status
+      - extinction
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - reason_extinction
+      - numero_rg
+      - department_id
+      - antenne_id
+      - service_id
       - is_urgent
       - judgment_date
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
+      - latitude
+      - longitude
       computed_fields: []
       filter:
         service_id:

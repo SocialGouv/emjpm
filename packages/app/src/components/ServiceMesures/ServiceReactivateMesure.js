@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -11,7 +12,7 @@ import { REACTIVATE_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } fr
 import { MESURE } from "./queries";
 
 export const ServiceReactivateMesure = props => {
-  const { currentMesure } = props;
+  const { currentMesure, isPage = false } = props;
 
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const { data, loading, error } = useQuery(MESURE, {
@@ -78,19 +79,22 @@ export const ServiceReactivateMesure = props => {
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              UpdateMesure({
-                refetchQueries: ["mesures", "mesures_aggregate"],
-                variables: {
-                  id: currentMesure,
-                  reason_extinction: values.reason_extinction,
-                  service_id: mesure.service_id
-                }
-              });
-              setSubmitting(false);
+            UpdateMesure({
+              refetchQueries: ["mesures", "mesures_aggregate"],
+              variables: {
+                id: currentMesure,
+                reason_extinction: values.reason_extinction,
+                service_id: mesure.service_id
+              }
+            });
+            setSubmitting(false);
+            if (!isPage) {
+              // TODO transform me in done function passed to the component
               setPanelType(null);
               setCurrentMesure(null);
-            }, 500);
+            } else {
+              Router.push(`/services/mesures/${currentMesure}`);
+            }
           }}
           validationSchema={Yup.object().shape({
             reason_extinction: Yup.string().required("Required")
@@ -117,8 +121,13 @@ export const ServiceReactivateMesure = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        setPanelType(PANEL_TYPE.CLOSE);
-                        setCurrentMesure(null);
+                        if (!isPage) {
+                          // TODO transform me in cancel function passed to the component
+                          setPanelType(PANEL_TYPE.CLOSE);
+                          setCurrentMesure(null);
+                        } else {
+                          Router.push(`/services/mesures/${currentMesure}`);
+                        }
                       }}
                     >
                       Annuler
