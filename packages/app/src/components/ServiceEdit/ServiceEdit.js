@@ -10,6 +10,7 @@ import { ServiceEditForm } from "./ServiceEditForm";
 
 const ServiceEdit = () => {
   const { data, error, loading } = useQuery(GET_SERVICES);
+
   const [createAntenne] = useMutation(EDIT_ANTENNE, {
     update() {
       Router.push("/services/informations", `/services/informations`, {
@@ -28,25 +29,31 @@ const ServiceEdit = () => {
 
   const [service] = data.services;
 
-  const handleSubmit = values => {
-    createAntenne({
-      refetchQueries: ["Service"],
-      variables: {
-        adresse: values.geocode.label,
-        code_postal: values.geocode.code_postal,
-        dispo_max: values.dispo_max,
-        email: values.email,
-        etablissement: values.etablissement,
-        information: values.information,
-        nom: values.nom,
-        prenom: values.prenom,
-        service_id: service.id,
-        telephone: values.telephone,
-        ville: values.geocode.ville,
-        latitude: values.geocode.latitude,
-        longitude: values.geocode.longitude
-      }
-    });
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      await createAntenne({
+        refetchQueries: ["Service"],
+        variables: {
+          adresse: values.geocode.label,
+          code_postal: values.geocode.code_postal,
+          dispo_max: values.dispo_max,
+          email: values.email,
+          etablissement: values.etablissement,
+          information: values.information,
+          nom: values.nom,
+          prenom: values.prenom,
+          service_id: service.id,
+          telephone: values.telephone,
+          ville: values.geocode.ville,
+          latitude: values.geocode.latitude,
+          longitude: values.geocode.longitude
+        }
+      });
+    } catch (error) {
+      // TODO(paullaunay): log in sentry and handle in form
+    }
+
+    setSubmitting(false);
   };
 
   return (

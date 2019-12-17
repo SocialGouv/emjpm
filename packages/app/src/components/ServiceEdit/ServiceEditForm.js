@@ -18,10 +18,7 @@ const ServiceEditForm = props => {
   };
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting }) => {
-      handleSubmit(values);
-      setSubmitting(false);
-    },
+    onSubmit: handleSubmit,
     validationSchema: serviceSchema,
     initialValues: {
       dispo_max: service.dispo_max || "",
