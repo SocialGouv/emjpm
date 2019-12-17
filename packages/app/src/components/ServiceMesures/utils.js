@@ -28,8 +28,6 @@ export const formatMesureList = mesureList => {
     const formatedJudgementDate = format(legacyParse(judgment_date), convertTokens("DD/MM/YYYY"));
 
     return {
-      latitude: latitude,
-      longitude: longitude,
       age: annee ? annee : "nc",
       antenneId: antenne_id ? antenne_id : null,
       cabinet: cabinet ? cabinet : null,
