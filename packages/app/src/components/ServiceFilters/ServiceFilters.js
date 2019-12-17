@@ -6,7 +6,7 @@ import { MESURE_STATUS_LABEL_VALUE, MESURE_TYPE_LABEL_VALUE } from "../../consta
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
-const ServicesFilters = props => {
+const ServiceFilters = props => {
   const { isStatusHidden, user_antennes } = props;
 
   const {
@@ -90,4 +90,4 @@ const ServicesFilters = props => {
   );
 };
 
-export { ServicesFilters };
+export { ServiceFilters };
