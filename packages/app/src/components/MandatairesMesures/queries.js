@@ -7,6 +7,7 @@ export const MANDATAIRE_MESURES = gql`
     $type: String
     $status: String
     $searchText: String
+    $excludeStatus: String
     $offset: Int
   ) {
     __typename
@@ -14,6 +15,7 @@ export const MANDATAIRE_MESURES = gql`
       where: {
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
+        _not: { status: { _eq: $excludeStatus } }
         type: { _eq: $type }
       }
     ) {
@@ -28,6 +30,7 @@ export const MANDATAIRE_MESURES = gql`
       where: {
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
+        _not: { status: { _eq: $excludeStatus } }
         type: { _eq: $type }
       }
     ) {
