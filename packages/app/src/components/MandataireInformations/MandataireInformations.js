@@ -11,7 +11,6 @@ const MandataireInformations = props => {
   const user = useContext(UserContext);
 
   const { email, nom, prenom, user_tis } = user;
-  console.log(user_tis);
   return (
     <Box {...props}>
       <Card p="5">
