@@ -3,7 +3,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServices } from "../../../src/components/Layout";
-import { ServicesInformations } from "../../../src/components/ServiceAntenneInformations";
+import { ServiceInformations } from "../../../src/components/ServiceAntenneInformations";
 import { PreferencesPanel } from "../../../src/components/ServiceAntenneSidebar";
 import { withAuthSync } from "../../../src/util/auth";
 
@@ -26,7 +26,7 @@ const Antennes = props => {
             }}
           >
             <Heading2>Informations de votre antenne</Heading2>
-            <ServicesInformations antenne_id={antenne_id} mt="3" />
+            <ServiceInformations antenne_id={antenne_id} mt="3" />
           </Box>
           <Box
             sx={{

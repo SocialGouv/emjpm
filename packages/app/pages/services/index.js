@@ -4,9 +4,9 @@ import { Box, Flex } from "rebass";
 
 import { LinkButton } from "../../src/components/Commons";
 import { LayoutServices } from "../../src/components/Layout";
+import { ServiceFilters } from "../../src/components/ServiceFilters";
+import { FiltersContextProvider } from "../../src/components/ServiceFilters/context";
 import { ServiceMesures } from "../../src/components/ServiceMesures";
-import { ServicesFilters } from "../../src/components/ServicesFilters";
-import { FiltersContextProvider } from "../../src/components/ServicesFilters/context";
 import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
@@ -22,7 +22,7 @@ const Mesures = () => {
             </Box>
           </Flex>
 
-          <UserInformations Component={props => <ServicesFilters {...props} />} />
+          <UserInformations Component={props => <ServiceFilters {...props} />} />
           <Flex
             sx={{
               flexWrap: "wrap",
