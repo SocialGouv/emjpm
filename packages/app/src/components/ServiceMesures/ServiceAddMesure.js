@@ -15,7 +15,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
-import { serviceAddMesureValidationSchema } from "../../lib/validationSchemas";
+import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { debouncedGeocode } from "../../util/geocode";
 import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
@@ -78,7 +78,7 @@ export const ServiceAddMesure = props => {
       setSubmitting(false);
     },
     initialValues,
-    validationSchema: serviceAddMesureValidationSchema
+    validationSchema: serviceMesureSchema
   });
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {

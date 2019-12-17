@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const serviceAddMesureValidationSchema = Yup.object().shape({
+const serviceMesureSchema = Yup.object().shape({
   annee: Yup.number()
     .required("Champ obligatoire")
     .min(1900, "l'année choisi doit être au minimum 1900")
@@ -8,6 +8,9 @@ const serviceAddMesureValidationSchema = Yup.object().shape({
   antenne: Yup.string(),
   civilite: Yup.string().required("Champ obligatoire"),
   date_ouverture: Yup.date().required("Champ obligatoire"),
+  geocode: Yup.object()
+    .nullable()
+    .required("Champ obligatoire"),
   numero_dossier: Yup.string().required("Champ obligatoire"),
   numero_rg: Yup.string().required("Champ obligatoire"),
   residence: Yup.string().required("Champ obligatoire"),
@@ -15,4 +18,4 @@ const serviceAddMesureValidationSchema = Yup.object().shape({
   type: Yup.string().required("Champ obligatoire")
 });
 
-export { serviceAddMesureValidationSchema };
+export { serviceMesureSchema };

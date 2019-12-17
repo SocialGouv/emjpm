@@ -1,3 +1,3 @@
-import { serviceAddMesureValidationSchema } from "./serviceAddMesure";
+import { serviceMesureSchema } from "./serviceMesureSchema";
 
-export { serviceAddMesureValidationSchema };
+export { serviceMesureSchema };

@@ -57,6 +57,8 @@ export const EDIT_MESURE = gql`
     $numero_dossier: String
     $numero_rg: String
     $ti_id: Int!
+    $latitude: Float!
+    $longitude: Float!
   ) {
     update_mesures(
       where: { id: { _eq: $id } }

@@ -54,6 +54,7 @@ const ServiceMesures = props => {
   const totalPage = count / RESULT_PER_PAGE;
   const mesures = formatMesureList(data.mesures);
   const [service] = service_admins;
+
   return (
     <MesureContextProvider>
       <Box width={[1]}>
