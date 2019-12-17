@@ -40,7 +40,7 @@ exports.down = async function(knex) {
       table.dropColumn("longitude");
     })
     .alterTable("geolocalisation_code_postal", function(table) {
-      table.unique('code_postal');
+      table.unique("code_postal");
       table.dropColumn("insee");
     });
 };

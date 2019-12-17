@@ -5,6 +5,7 @@ import { LayoutMagistratMap } from "./LayoutMagistratMap";
 import { LayoutMandataire } from "./LayoutMandataire";
 import { LayoutPublic } from "./LayoutPublic";
 import { LayoutServices } from "./LayoutServices";
+import { LayoutServicesMap } from "./LayoutServicesMap";
 import { LayoutSignup } from "./LayoutSignup";
 
 export {
@@ -15,5 +16,6 @@ export {
   LayoutSignup,
   LayoutMandataire,
   LayoutPublic,
-  LayoutMagistratMap
+  LayoutMagistratMap,
+  LayoutServicesMap
 };

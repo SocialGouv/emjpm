@@ -1,5 +1,5 @@
 ---
-to: src/components-v2/<%= h.inflection.camelize(name) %>/<%= h.inflection.camelize(name) %>.test.js
+to: src/components/<%= h.inflection.camelize(name) %>/<%= h.inflection.camelize(name) %>.test.js
 ---
 import React from "react";
 import { <%= h.inflection.camelize(name) %> } from "./<%= h.inflection.camelize(name) %>";

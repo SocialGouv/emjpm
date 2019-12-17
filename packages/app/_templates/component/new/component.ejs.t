@@ -1,5 +1,5 @@
 ---
-to: src/components-v2/<%= h.inflection.camelize(name) %>/<%= h.inflection.camelize(name) %>.js
+to: src/components/<%= h.inflection.camelize(name) %>/<%= h.inflection.camelize(name) %>.js
 ---
 import React from "react";
 import { Box } from "rebass";
