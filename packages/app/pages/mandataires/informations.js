@@ -3,8 +3,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataire } from "../../src/components/Layout";
-import { MandatairesInformations } from "../../src/components/MandatairesInformations";
-import { UserInformations } from "../../src/components/UserInformations";
+import { MandataireInformations } from "../../src/components/MandataireInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {
@@ -25,11 +24,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Informations générales</Heading2>
-            <UserInformations
-              Component={props => {
-                return <MandatairesInformations {...props} mt="3" />;
-              }}
-            />
+            <MandataireInformations mt="3" />
           </Box>
         </Flex>
       </BoxWrapper>
