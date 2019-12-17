@@ -42,9 +42,10 @@ services:
       - 5000:8080
     depends_on:
       - db
+    network_mode: "host"
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasuraPassword@db:5432/emjpm
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasuraPassword@localhost:5434/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/v2/auth/jwks"}'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'anonymous'
