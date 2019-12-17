@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MandataireContextProvider, Mandatairelist } from "@socialgouv/emjpm-ui-components";
-import { Button, Card, Heading4, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading4, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
+import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { MagistratChoose } from "./MagistratChoose";
@@ -32,13 +33,13 @@ const MagistratMandatairesList = props => {
     label: "Du plus disponible au moins disponible",
     value: "desc_nulls_last"
   });
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentOffset, setCurrentOffset] = useState(0);
 
-  const { data, error, loading, fetchMore } = useQuery(GET_MANDATAIRES, {
+  const { data, error, loading } = useQuery(GET_MANDATAIRES, {
     variables: {
       discriminator: selectedType ? selectedType.value : null,
       limit: RESULT_PER_PAGE,
-      offset: 0,
+      offset: currentOffset,
       order: selectedCapacity ? selectedCapacity.value : null,
       tribunal: ti_id
     }
@@ -63,6 +64,7 @@ const MagistratMandatairesList = props => {
   }
 
   const { count } = data.count.aggregate;
+  const totalPage = count / RESULT_PER_PAGE;
   const list = formatMandatairesList(data.mandatairesList);
   return (
     <MandataireContextProvider>
@@ -95,27 +97,24 @@ const MagistratMandatairesList = props => {
           ChooseComponent={props => <MagistratChoose tiId={ti_id} cabinet={cabinet} {...props} />}
           mandataires={list}
         />
-        {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
-          <Flex mt="5" alignItem="center">
-            <Button
-              onClick={() => {
-                fetchMore({
-                  updateQuery: (prev, { fetchMoreResult }) => {
-                    setCurrentPage(currentPage + RESULT_PER_PAGE);
-                    return {
-                      count: fetchMoreResult.count,
-                      mandatairesList: [...prev.mandatairesList, ...fetchMoreResult.mandatairesList]
-                    };
-                  },
-                  variables: {
-                    limit: RESULT_PER_PAGE,
-                    offset: currentPage + RESULT_PER_PAGE
-                  }
-                });
+        {count > RESULT_PER_PAGE && (
+          <Flex alignItems="center" justifyContent="center">
+            <ReactPaginate
+              previousLabel={"Précédent"}
+              nextLabel={"Suivant"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={totalPage}
+              containerClassName={"react-paginate"}
+              marginPagesDisplayed={2}
+              forcePage={currentOffset / RESULT_PER_PAGE}
+              pageRangeDisplayed={5}
+              onPageChange={data => {
+                setCurrentOffset(data.selected * RESULT_PER_PAGE);
               }}
-            >
-              Afficher les mandataires suivants
-            </Button>
+              subContainerClassName={"pages pagination"}
+              activeClassName={"active"}
+            />
           </Flex>
         )}
       </Box>
