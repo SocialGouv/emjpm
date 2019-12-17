@@ -7,24 +7,14 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
-import { getRegionCode } from "../../util/departements";
+import { GENDER_OPTIONS } from "../../constants/user";
+import { isSiretExists } from "../../query-service/SiretQueryService";
+import { findDepartement } from "../../util/departements/DepartementUtil";
 import { SignupContext } from "./context";
-import { CHECK_SIRET_UNICITY } from "./queries";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 import { cardStyle, grayBox } from "./style";
-
-const GENDER_OPTIONS = [
-  {
-    label: "Femme",
-    value: "F"
-  },
-  {
-    label: "Homme",
-    value: "H"
-  }
-];
 
 const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
   const { user, mandataire, setMandataire, validateStepOne } = useContext(SignupContext);
@@ -35,22 +25,6 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
   }));
 
   const client = useApolloClient();
-
-  const isSiretExists = async siret => {
-    const checkSiret = await client.query({
-      context: {
-        headers: {
-          "X-Hasura-Siret": siret
-        }
-      },
-      fetchPolicy: "network-only",
-      query: CHECK_SIRET_UNICITY,
-      variables: {
-        siret
-      }
-    });
-    return checkSiret.data.mandataires.length > 0;
-  };
 
   return (
     <Fragment>
@@ -99,13 +73,12 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
               <Formik
                 onSubmit={async (values, { setSubmitting, setErrors }) => {
-                  const regionCode = getRegionCode(values.code_postal);
-                  const department = departementDatas.find(data => data.code === regionCode);
+                  const department = findDepartement(values.code_postal, departementDatas);
                   if (!department) {
                     setErrors({
                       code_postal: "Merci de renseigner un code postal valide"
                     });
-                  } else if (await isSiretExists(values.siret)) {
+                  } else if (await isSiretExists(client, values.siret)) {
                     setErrors({
                       siret: "Ce SIRET existe déjà"
                     });
