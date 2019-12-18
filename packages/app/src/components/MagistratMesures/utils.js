@@ -15,11 +15,17 @@ export const formatMandatairesMesureList = mesureList => {
       annee,
       civilite,
       date_ouverture,
+      is_urgent,
+      judgment_date,
       numero_rg,
       cabinet
     } = mesure;
+
     const formatedDate = format(legacyParse(date_ouverture), convertTokens("DD/MM/YYYY"));
+    const formatedjudgmentDate = format(legacyParse(judgment_date), convertTokens("DD/MM/YYYY"));
     return {
+      judgmentDate: judgment_date ? formatedjudgmentDate : null,
+      isUrgent: is_urgent,
       age: annee ? annee : null,
       antenneId: antenne_id ? antenne_id : null,
       cabinet: cabinet ? cabinet : null,
