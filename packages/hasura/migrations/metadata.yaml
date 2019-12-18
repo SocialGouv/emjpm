@@ -2959,7 +2959,6 @@ tables:
       - service_id
       - mandataire_id
       - discriminator
-      - nom
       - department_id
       - dep_nom
       - mesures_max
