@@ -30,6 +30,10 @@ export const SERVICE = gql`
       code_postal
       ville
       department_id
+      latitude
+      longitude
+      email
+      telephone
     }
   }
 `;
