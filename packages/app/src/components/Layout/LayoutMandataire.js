@@ -22,6 +22,10 @@ const navigationLinks = [
     url: "/mandataires/waiting-mesures"
   },
   {
+    title: "La carte de vos mesures",
+    url: "/mandataires/map"
+  },
+  {
     title: "Importez vos mesures",
     url: "/mandataires/import-mesures"
   },

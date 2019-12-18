@@ -148,6 +148,8 @@ export const MANDATAIRE_USERS = gql`
         dispo_max
         mesures_en_cours
         mesures_en_attente
+        longitude
+        latitude
       }
     }
   }
