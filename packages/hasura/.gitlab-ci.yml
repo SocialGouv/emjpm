@@ -1,0 +1,41 @@
+Register hasura image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  variables:
+    CONTEXT: packages/hasura
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
+
+#
+
+.deploy_hasura_stage: &deploy_hasura_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  variables:
+    CONTEXT: hasura
+    IMAGE_TAG: $CI_COMMIT_SHA
+    PORT: 80
+    VALUES_FILE: ./packages/hasura/.k8s.values.yml
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - HOST=${HASURA_HOST}
+    #
+    - export POSTGRES_HASURA_USER=hasura
+    - export POSTGRES_HASURA_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_HASURA_PASSWORD}' | base64 --decode)
+  after_script:
+    - cat values.yaml
+
+#
+
+Deploy hasura (dev):
+  extends:
+    - .deploy_hasura_stage
+    - .dev_stage
+
+Deploy hasura (prod):
+  extends:
+    - .deploy_hasura_stage
+    - .incubateur_stage

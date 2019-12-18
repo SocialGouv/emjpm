@@ -1,0 +1,43 @@
+image:
+  repository: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app
+  tag: latest
+
+deployment:
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 128Mi
+
+  env:
+  - name: PORT
+    value: "80"
+  - name: NODE_ENV
+    value: "production"
+  - name: API_URL
+    value: "//${API_HOST}"
+  - name: GRAPHQL_SERVER_URI
+    value: "//${HASURA_HOST}/v1/graphql"
+  - name: VERSION
+    value: "${VERSION}"
+  - name: SENTRY_PUBLIC_DSN
+    valueFrom:
+      secretKeyRef:
+        name: emjpm-secret
+        key: SENTRY_PUBLIC_DSN
+
+ingress:
+  enabled: true
+  annotations:
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: "azure/application-gateway"
+  hosts:
+    - host: emjpm.dev.fabrique.social.gouv.fr
+      paths:
+        - /
+  tls:
+    - hosts:
+        - emjpm.dev.fabrique.social.gouv.fr
+      secretName: app-certificate

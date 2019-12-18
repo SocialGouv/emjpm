@@ -1,16 +1,16 @@
-ARG BASE_IMAGE=socialgouv/emjpm:master
+FROM node:10-alpine
 
-FROM ${BASE_IMAGE} as emjpm-base-image
-
-FROM node:10-stretch
 WORKDIR /app
 
-COPY --from=emjpm-base-image /app/packages/app/.next /app/.next
-COPY --from=emjpm-base-image /app/packages/app/static /app/static
-COPY --from=emjpm-base-image /app/packages/app/next.config.js /app/next.config.js
-COPY --from=emjpm-base-image /app/packages/app/package.json /app/package.json
-COPY --from=emjpm-base-image /app/node_modules /app/node_modules
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
 
-EXPOSE 80
+COPY package.json yarn.lock /app/
+
+RUN yarn --production --frozen-lockfile --no-cache
+
+COPY ./next.config.js /app/
+COPY ./static/ /app/static
+COPY .next /app/.next
 
 ENTRYPOINT ["yarn", "start:build"]

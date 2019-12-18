@@ -7,4 +7,4 @@
     - envsubst < ./.k8s/metabase/values.yaml > ./values.yaml
     #
     - helm init --client-only
-    - helm upgrade --install ${K8S_PROJECT}-${CONTEXT}-${BRANCH_HASH} --wait -f ./values.yaml stable/metabase --namespace ${K8S_NAMESPACE}
+    - helm upgrade --install metabase --wait -f ./values.yaml stable/metabase --namespace ${K8S_NAMESPACE}

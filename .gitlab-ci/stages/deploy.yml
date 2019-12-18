@@ -1,15 +1,8 @@
 #
 
 include:
-  - /.k8s/api/.k8s-deploy-api-dev.yml
-  - /.k8s/api/.k8s-deploy-api-prod.yml
-  - /.k8s/app/.k8s-deploy-app-dev.yml
-  - /.k8s/app/.k8s-deploy-app-prod.yml
-  - /.k8s/postgres/.k8s-deploy-postgres.yml
-  - /.k8s/hasura/.k8s-deploy-hasura-dev.yml
-  - /.k8s/hasura/.k8s-deploy-hasura-prod.yml
   - /.k8s/metabase/.k8s-deploy-metabase.yml
-  - /.k8s/graphql-server/.k8s-deploy-graphql-server.yml
+  - /.k8s/postgres/.k8s-deploy-postgres.yml
 
 #
 
@@ -34,7 +27,6 @@ include:
 .dev_stage: &dev_stage
   environment:
     name: fabrique-dev
-  when: manual
   only:
     refs:
       - branches
@@ -42,145 +34,19 @@ include:
   except:
     variables:
       - $PRODUCTION
-#
-#
-#
-
-.create_namespace: &create_namespace
-  <<: *deploy_stage
-  extends: .base_docker_kube_image_stage
-  stage: "Registration"
-  script:
-    # Skip the job if the namespace exists
-    - "[[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
-    # Or (re)create to ensure new quota are applied
-    # - kubectl delete namespaces ${K8S_NAMESPACE} || true
-    #
-    - kubectl create namespace ${K8S_NAMESPACE}
-    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
-    - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
-    - kubectl label namespace ${K8S_NAMESPACE} cert=wildcard # Should be remove in prod
-    #
-    - envsubst < ./.k8s/quota.yml > ./quota.yml
-    - kubectl apply -f ./quota.yml -n ${K8S_NAMESPACE}
-    #
-    # Create secrets
-    - export APP_URL=$(echo $FRONTEND_URL | base64)
-    - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
-    - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
-    #
-    # Create azure volume secrets for anonymized export
-    - export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
-    - export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
-    - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
-    - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
-
-Create namespace:
-  <<: *create_namespace
-  <<: *dev_stage
 
 #
 #
 #
 
-.deploy-frontend-dev: &deploy_frontend-dev
-  <<: *deploy_stage
-  extends: .k8s-deploy-app-dev
+Register postgres image:
+  extends:
+    - .base_register_stage
+    - .register_stage
   variables:
-    <<: *deploy_stage_variables
-    CONTEXT: app
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-    PORT: 80
-  after_script:
-    # NOTE(douglasduteil): re-run env.sh
-    # Because the `after_script` runs in a separated shell context.
-    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
-    - source ./.gitlab-ci/env.sh
-    - echo "Frontend available at - ${FRONTEND_URL}"
-  except:
-    variables:
-      - $PRODUCTION
-#
-
-.deploy-frontend-prod: &deploy_frontend-prod
-  <<: *deploy_stage
-  extends: .k8s-deploy-app-prod
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: app
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-    PORT: 80
-  after_script:
-    # NOTE(douglasduteil): re-run env.sh
-    # Because the `after_script` runs in a separated shell context.
-    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
-    - source ./.gitlab-ci/env.sh
-    - echo "Frontend available at - ${FRONTEND_URL}"
-  only:
-    variables:
-      - $PRODUCTION
-
-Deploy App (dev):
-  <<: *deploy_frontend-dev
-  <<: *dev_stage
-
-Deploy App (incubateur):
-  <<: *deploy_frontend-prod
-  <<: *incubateur_stage
-
-#
-#
-#
-
-.deploy-api-dev: &deploy_api-dev
-  <<: *deploy_stage
-  extends: .k8s-deploy-api-dev
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: api
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-    PORT: 80
-  after_script:
-    # NOTE(douglasduteil): re-run env.sh
-    # Because the `after_script` runs in a separated shell context.
-    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
-    - source ./.gitlab-ci/env.sh
-    - echo "Api available at - ${API_URL}"
-  except:
-    variables:
-      - $PRODUCTION
-
-.deploy-api-prod: &deploy_api-prod
-  <<: *deploy_stage
-  extends: .k8s-deploy-api-prod
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: api
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-    PORT: 80
-  after_script:
-    # NOTE(douglasduteil): re-run env.sh
-    # Because the `after_script` runs in a separated shell context.
-    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
-    - source ./.gitlab-ci/env.sh
-    - echo "Api available at - ${API_URL}"
-  only:
-    variables:
-      - $PRODUCTION
-
-#
-
-Deploy Api (dev):
-  <<: *deploy_api-dev
-  <<: *dev_stage
-
-Deploy Api (incubateur):
-  <<: *deploy_api-prod
-  <<: *incubateur_stage
-
-#
-#
-#
+    CONTEXT: ./docker/postgres
+    DOCKER_BUILD_ARGS: ""
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
 
 .deploy-postgres: &deploy_postgres
   <<: *deploy_stage
@@ -218,67 +84,6 @@ Restore postgres data (dev):
   <<: *dev_stage
   extends: .k8s-restore-postgres-data
   when: manual
-
-#
-#
-#
-
-.deploy-hasura-dev: &deploy_hasura-dev
-  <<: *deploy_stage
-  extends: .k8s-deploy-hasura-dev
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: hasura
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
-    PORT: 80
-  except:
-    variables:
-      - $PRODUCTION
-
-.deploy-hasura-prod: &deploy_hasura-prod
-  <<: *deploy_stage
-  extends: .k8s-deploy-hasura-prod
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: hasura
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
-    PORT: 80
-  only:
-    variables:
-      - $PRODUCTION
-
-#
-
-Deploy hasura (dev):
-  <<: *deploy_hasura-dev
-  <<: *dev_stage
-
-Deploy hasura (incubateur):
-  <<: *deploy_hasura-prod
-  <<: *incubateur_stage
-
-#
-#
-#
-
-.deploy-graphql-server: &deploy_graphql-server
-  <<: *deploy_stage
-  extends: .k8s-deploy-graphql-server
-  variables:
-    <<: *deploy_stage_variables
-    CONTEXT: graphql-server
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
-    PORT: 80
-
-#
-
-Deploy graphql-server (dev):
-  <<: *deploy_graphql-server
-  <<: *dev_stage
-
-Deploy graphql-server (incubateur):
-  <<: *deploy_graphql-server
-  <<: *incubateur_stage
 
 #
 #
