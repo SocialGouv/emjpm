@@ -26,17 +26,12 @@ const MagistratMandataires = props => {
     magistrat: { ti_id }
   } = props;
 
-  const { data, error, loading } = useQuery(
-    MESURES_GESTIONNAIRE,
-    {
-      variables: {
-        tiId: ti_id
-      }
+  const { data, error, loading } = useQuery(MESURES_GESTIONNAIRE, {
+    variables: {
+      tiId: ti_id
     },
-    {
-      fetchPolicy: "network-only"
-    }
-  );
+    fetchPolicy: "network-only"
+  });
 
   if (loading) {
     return <div>Chargement</div>;
