@@ -35,11 +35,11 @@ image:
 
 ## String to partially override postgresql.fullname template (will maintain the release name)
 ##
-nameOverride: ${POSTGRES_HOST}
+# nameOverride: ""
 
 ## String to fully override postgresql.fullname template
 ##
-fullnameOverride: ${POSTGRES_HOST}
+# fullnameOverride: ""
 
 ##
 ## Init containers parameters:
@@ -300,7 +300,7 @@ resources:
     cpu: 20m
     memory: 128Mi
   limits:
-    cpu: 100m
+    cpu: 250m
     memory: 256Mi
 
 networkPolicy:

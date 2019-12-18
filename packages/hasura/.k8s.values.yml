@@ -1,0 +1,69 @@
+image:
+  repository: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/hasura
+  tag: latest
+
+deployment:
+  resources:
+    limits:
+      cpu: 250m
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 128Mi
+
+
+  env:
+    - name: HASURA_GRAPHQL_DATABASE_URL
+      value: "postgres://${POSTGRES_HASURA_USER}:${POSTGRES_HASURA_PASSWORD}@${POSTGRES_SRV_HOST}/${POSTGRES_DATABASE}"
+    - name: HASURA_GRAPHQL_ENABLE_CONSOLE
+      value: "true"
+    - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
+      value: 'anonymous'
+    - name: HASURA_GRAPHQL_ADMIN_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: HASURA_GRAPHQL_ADMIN_SECRET
+    - name: HASURA_GRAPHQL_JWT_SECRET
+      value: '{"type": "RS256","jwk_url": "http://${API_SRV_HOST}/api/v2/auth/jwks"}'
+    - name: HASURA_GRAPHQL_SERVER_PORT
+      value: "${PORT}"
+    - name: WHATEVER_URL
+      value: "http://${GQL_SERVER_SRV_HOST}/graphql"
+    - name: WEB_HOOK_URL_EMAIL_RESERVATION
+      value: "http://${API_SRV_HOST}/webhook/email-reservation"
+    - name: WEB_HOOK_URL_MESURES_IMPORT
+      value: "http://${API_SRV_HOST}/webhook/mesures-import"
+    - name: WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION
+      value: "http://${API_SRV_HOST}/webhook/email-account-validation"
+    - name: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
+      value: "http://${API_SRV_HOST}/webhook/email-cancel-reservation"
+
+  initContainers:
+    - name: wait-for-postgres
+      image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:0.19.0
+      env:
+        - name: PGHOST
+          value: ${POSTGRES_SRV_HOST}
+      resources:
+        limits:
+          cpu: 50m
+          memory: 32Mi
+        requests:
+          cpu: 0m
+          memory: 0Mi
+
+
+ingress:
+  enabled: true
+  annotations:
+    appgw.ingress.kubernetes.io/ssl-redirect: "true"
+    kubernetes.io/ingress.class: "azure/application-gateway"
+  hosts:
+    - host: hasura-emjpm.dev.fabrique.social.gouv.fr
+      paths:
+        - /
+  tls:
+    - hosts:
+        - hasura-emjpm.dev.fabrique.social.gouv.fr
+      secretName: hasura-certificate
