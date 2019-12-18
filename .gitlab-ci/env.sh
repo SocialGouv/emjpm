@@ -54,6 +54,7 @@ export API_SRV_HOST="api-nodejs";
 export FRONTEND_HOST="${DOMAIN}";
 export GQL_SERVER_SRV_HOST="graphql-server-nodejs";
 export HASURA_HOST="hasura-${DOMAIN}";
+export HASURA_SRV_HOST="hasura-nodejs";
 export METABASE_HOST="metabase-${DOMAIN}";
 export POSTGRES_SRV_HOST="postgres-postgresql"
 
@@ -89,6 +90,7 @@ printenv | grep \
   -e FRONTEND_URL \
   -e GQL_SERVER_SRV_HOST \
   -e HASURA_HOST \
+  -e HASURA_SRV_HOST \
   -e METABASE_HOST \
   -e METABASE_URL \
   -e POSTGRES_SRV_HOST \
