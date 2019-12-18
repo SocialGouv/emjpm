@@ -1026,7 +1026,7 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@commitlint/cli@^8.0.0":
+"@commitlint/cli@^8.2.0":
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/@commitlint/cli/-/cli-8.2.0.tgz#fbf9969e04e2162d985eaa644fdad6ce807aadb6"
   integrity sha512-8fJ5pmytc38yw2QWbTTJmXLfSiWPwMkHH4govo9zJ/+ERPBF2jvlxD/dQvk24ezcizjKc6LFka2edYC4OQ+Dgw==
@@ -1043,7 +1043,7 @@
     resolve-from "5.0.0"
     resolve-global "1.0.0"
 
-"@commitlint/config-conventional@^8.0.0":
+"@commitlint/config-conventional@^8.2.0":
   version "8.2.0"
   resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-8.2.0.tgz#886a5538e3708e017ec2871e0cbce00f635d3102"
   integrity sha512-HuwlHQ3DyVhpK9GHgTMhJXD8Zp8PGIQVpQGYh/iTrEU6TVxdRC61BxIDZvfWatCaiG617Z/U8maRAFrqFM4TqA==
@@ -2802,22 +2802,7 @@
     styled-icons "^9.1.0"
     theme-ui "^0.2.52"
 
-"@socialgouv/emjpm-ui-core@^1.13.1":
-  version "1.13.1"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.13.1.tgz#a7ed6f2c6d6ac94682619a0ad0a6f66dcba39f7e"
-  integrity sha512-tJAlwXQnm9gQuowjuOgwgjs/OaZgBCKrryHeEcOyGJMF5Id0yqRzBxBvheNOnFWFoLpkdxwn59BRxBcTT+LbcQ==
-  dependencies:
-    "@emotion/core" "^10.0.22"
-    "@emotion/styled" "^10.0.23"
-    prop-types "^15.7.2"
-    react "^16.12.0"
-    react-select "^3.0.8"
-    react-tabs "^3.0.0"
-    rebass "^4.0.7"
-    styled-icons "^9.1.0"
-    theme-ui "^0.2.49"
-
-"@socialgouv/emjpm-ui-core@^1.13.3":
+"@socialgouv/emjpm-ui-core@^1.13.1", "@socialgouv/emjpm-ui-core@^1.13.3":
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.13.3.tgz#0af2ccdfaf78afb4b5fd43d9957a049240f093a8"
   integrity sha512-EKkJvJ4HMYdvhuUcI5EpMv51b9iGFJJzsCm/2eK4PhXaVhGbSG66c2Lr8yKG+PZgH95iGfweQqiyfVbL90qRFQ==
@@ -15904,16 +15889,7 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-theme-ui@^0.2.33, theme-ui@^0.2.49:
-  version "0.2.49"
-  resolved "https://registry.yarnpkg.com/theme-ui/-/theme-ui-0.2.49.tgz#3803952907e74e6835d40b063aed0d46c213e2d9"
-  integrity sha512-hgULYonGu8iY3delv/GrMx4L/3nAJyEu55gEAAK3GDKVEVf4VNng3lM9/tgx4kUizTFVEB5MN5y+1JTHHOQLXQ==
-  dependencies:
-    "@emotion/is-prop-valid" "^0.8.1"
-    "@styled-system/css" "^5.0.16"
-    deepmerge "^4.0.0"
-
-theme-ui@^0.2.52:
+theme-ui@^0.2.33, theme-ui@^0.2.52:
   version "0.2.52"
   resolved "https://registry.yarnpkg.com/theme-ui/-/theme-ui-0.2.52.tgz#c041a32b0b257fc8ecbae273e14e92abd48c0f2d"
   integrity sha512-JFujorP5aFxIm1UyVCtefN5baXjwh5TXHKFYNWgAP+3rqVvggIr46uSMrRNvDjyhFOQiMK8YI8ctPQrrhcETpw==
