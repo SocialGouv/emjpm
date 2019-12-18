@@ -4,10 +4,13 @@ import { Box } from "rebass";
 import { MapContext } from "../MagistratMapMandataires/context";
 import { MagistratMapMandatairesPanelList } from "../MagistratMapMandatairesPanelList";
 import { MagistratMapMandatairesPanelProfile } from "../MagistratMapMandatairesPanelProfile";
+import { UserContext } from "../UserContext";
 import { MagistratMapMandatairesPanelStyle } from "./style";
 
 const MagistratMapMandatairesPanel = props => {
-  const { tiId } = props;
+  const {
+    magistrat: { ti_id: tiId }
+  } = useContext(UserContext);
 
   const {
     currentGestionnaire: { isActive, currentId }

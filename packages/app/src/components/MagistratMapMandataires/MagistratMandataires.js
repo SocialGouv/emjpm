@@ -1,30 +1,24 @@
 import { useQuery } from "@apollo/react-hooks";
 import dynamic from "next/dynamic";
-import React from "react";
-import { Box, Flex } from "rebass";
+import React, { useContext } from "react";
 
-import { MagistratMapMandatairesPanel } from "../MagistratMapMandatairesPanel";
-import { MapContextProvider } from "./context";
+import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discriminator";
+import { UserContext } from "../UserContext";
+import { MapContext } from "./context";
 import { MESURES_GESTIONNAIRE } from "./queries";
-import { MagistratMandatairesMapStyle } from "./style";
-
-const formatData = view_mesure_gestionnaire => {
-  return view_mesure_gestionnaire.map(gestionnaire => {
-    return {
-      ...gestionnaire
-    };
-  });
-};
+import { filterGestionnairesByDiscriminator } from "./utils";
 
 const MagistratMapMandataires = dynamic(
   () => import("./MagistratMapMandataires").then(mod => mod.MagistratMapMandataires),
   { ssr: false }
 );
 
-const MagistratMandataires = props => {
+const MagistratMandataires = () => {
+  const { currentGestionnaire } = useContext(MapContext);
+
   const {
     magistrat: { ti_id }
-  } = props;
+  } = useContext(UserContext);
 
   const { data, error, loading } = useQuery(MESURES_GESTIONNAIRE, {
     variables: {
@@ -41,20 +35,31 @@ const MagistratMandataires = props => {
     return <div>Erreur</div>;
   }
 
-  const { view_mesure_gestionnaire } = data;
-  const datas = formatData(view_mesure_gestionnaire);
+  const mesureGestionnaires = data.view_mesure_gestionnaire;
+
+  const services = filterGestionnairesByDiscriminator(
+    mesureGestionnaires,
+    SERVICE,
+    currentGestionnaire
+  );
+  const individuel = filterGestionnairesByDiscriminator(
+    mesureGestionnaires,
+    MANDATAIRE_IND,
+    currentGestionnaire
+  );
+  const prepose = filterGestionnairesByDiscriminator(
+    mesureGestionnaires,
+    MANDATAIRE_PRE,
+    currentGestionnaire
+  );
 
   return (
-    <MapContextProvider>
-      <Flex sx={MagistratMandatairesMapStyle()}>
-        <Box height="100%" flex="0 1 auto">
-          <MagistratMapMandatairesPanel tiId={ti_id} />
-        </Box>
-        <Box height="100%" flex="1 1 auto">
-          <MagistratMapMandataires view_mesure_gestionnaire={datas} />
-        </Box>
-      </Flex>
-    </MapContextProvider>
+    <MagistratMapMandataires
+      currentGestionnaire={currentGestionnaire}
+      services={services}
+      individuel={individuel}
+      prepose={prepose}
+    />
   );
 };
 
