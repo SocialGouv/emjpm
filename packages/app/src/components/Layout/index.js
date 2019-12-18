@@ -3,6 +3,7 @@ import { LayoutDirection } from "./LayoutDirection";
 import { LayoutMagistrat } from "./LayoutMagistrat";
 import { LayoutMagistratMap } from "./LayoutMagistratMap";
 import { LayoutMandataire } from "./LayoutMandataire";
+import { LayoutMandataireMap } from "./LayoutMandataireMap";
 import { LayoutPublic } from "./LayoutPublic";
 import { LayoutServices } from "./LayoutServices";
 import { LayoutServicesMap } from "./LayoutServicesMap";
@@ -17,5 +18,6 @@ export {
   LayoutMandataire,
   LayoutPublic,
   LayoutMagistratMap,
-  LayoutServicesMap
+  LayoutServicesMap,
+  LayoutMandataireMap
 };

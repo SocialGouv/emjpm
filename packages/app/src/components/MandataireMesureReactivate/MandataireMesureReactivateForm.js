@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -9,8 +10,8 @@ import * as Yup from "yup";
 
 import { REACTIVATE_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
 
-export const MandatairesReactivateMesure = props => {
-  const { currentMesure } = props;
+export const MandataireMesureReactivateForm = props => {
+  const { currentMesure, isPage } = props;
 
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
@@ -53,18 +54,21 @@ export const MandatairesReactivateMesure = props => {
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              UpdateMesure({
-                refetchQueries: ["mesures", "mesures_aggregate"],
-                variables: {
-                  id: currentMesure,
-                  reason_extinction: values.reason_extinction
-                }
-              });
-              setSubmitting(false);
+            UpdateMesure({
+              refetchQueries: ["mesures", "mesures_aggregate"],
+              variables: {
+                id: currentMesure,
+                reason_extinction: values.reason_extinction
+              }
+            });
+            setSubmitting(false);
+            if (!isPage) {
+              // TODO transform me in done function passed to the component
               setPanelType(null);
               setCurrentMesure(null);
-            }, 500);
+            } else {
+              Router.push({ pathname: `/mandataires/mesures/${currentMesure}` });
+            }
           }}
           validationSchema={Yup.object().shape({
             reason_extinction: Yup.string().required("Required")
@@ -91,8 +95,13 @@ export const MandatairesReactivateMesure = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        setPanelType(PANEL_TYPE.CLOSE);
-                        setCurrentMesure(null);
+                        if (!isPage) {
+                          setPanelType(PANEL_TYPE.CLOSE);
+                          setCurrentMesure(null);
+                        } else {
+                          // TODO transform me in cancel function passed to the component
+                          Router.push(`/mandataires/mesures/${currentMesure}`);
+                        }
                       }}
                     >
                       Annuler
@@ -113,6 +122,6 @@ export const MandatairesReactivateMesure = props => {
   );
 };
 
-MandatairesReactivateMesure.propTypes = {
+MandataireMesureReactivateForm.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };

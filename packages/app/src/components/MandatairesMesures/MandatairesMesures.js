@@ -8,11 +8,11 @@ import { FiltersContext } from "../MandataireFilters/context";
 import { MANDATAIRE_MESURES } from "./queries";
 import { formatMesureList } from "./utils";
 const RESULT_PER_PAGE = 20;
-import { MandatairesAcceptMesure } from "./MandatairesAcceptMesure";
-import { MandatairesCloseMesure } from "./MandatairesCloseMesure";
-import { MandatairesDeleteMesure } from "./MandatairesDeleteMesure";
-import { MandatairesEditMesure } from "./MandatairesEditMesure";
-import { MandatairesReactivateMesure } from "./MandatairesReactivateMesure";
+import { MandataireMesureAcceptForm } from "../MandataireMesureAccept";
+import { MandataireMesureCloseForm } from "../MandataireMesureClose";
+import { MandataireMesureDeleteForm } from "../MandataireMesureDelete";
+import { MandataireMesureEditForm } from "../MandataireMesureEdit";
+import { MandataireMesureReactivateForm } from "../MandataireMesureReactivate";
 import { MesureListStyle } from "./style";
 
 const MandatairesMesures = props => {
@@ -60,13 +60,13 @@ const MandatairesMesures = props => {
           {mesures.length > 0 ? (
             <Fragment>
               <MesureList
-                EditComponent={MandatairesEditMesure}
-                CloseComponent={MandatairesCloseMesure}
+                EditComponent={MandataireMesureEditForm}
+                CloseComponent={MandataireMesureCloseForm}
                 RemoveComponent={props => (
-                  <MandatairesDeleteMesure {...props} queryVariables={queryVariables} />
+                  <MandataireMesureDeleteForm {...props} queryVariables={queryVariables} />
                 )}
-                AcceptComponent={MandatairesAcceptMesure}
-                ReactivateComponent={MandatairesReactivateMesure}
+                AcceptComponent={MandataireMesureAcceptForm}
+                ReactivateComponent={MandataireMesureReactivateForm}
                 onPanelOpen={() => null}
                 mesures={mesures}
               />
