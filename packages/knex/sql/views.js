@@ -4,6 +4,7 @@ CREATE VIEW view_mesure_gestionnaire AS
   , ser.id service_id
   , NULL mandataire_id
   , 'SERVICE' discriminator
+  , ser.etablissement nom
   , dep.id department_id
   , dep.nom dep_nom
   , ser.dispo_max mesures_max
@@ -18,6 +19,7 @@ CREATE VIEW view_mesure_gestionnaire AS
     , NULL service_id
     , man.id mandataire_id
     , case when u.type = 'individuel' then 'MANDATAIRE_IND' else 'MANDATAIRE_PRE' end discriminator
+    , CONCAT(u.nom, ' ', u.prenom) nom
     , dep.id department_id
     , dep.nom dep_nom
     , man.dispo_max mesures_max
