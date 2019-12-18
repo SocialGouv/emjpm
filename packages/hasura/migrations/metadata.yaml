@@ -1705,6 +1705,52 @@ tables:
       - bak_mandataire_id
       computed_fields: []
       filter: {}
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - bak_mandataire_id
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - service_id
+      - created_at
+      - date_mesure_update
+      - address_city
+      - address_street
+      - address_zip_code
+      - contact_email
+      - contact_firstname
+      - contact_lastname
+      - contact_phone
+      - name
+      computed_fields: []
+      filter: {}
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - service_id
+      - name
+      - created_at
+      - address_street
+      - address_zip_code
+      - address_city
+      - contact_lastname
+      - contact_firstname
+      - contact_email
+      - contact_phone
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - date_mesure_update
+      - bak_mandataire_id
+      computed_fields: []
+      filter: {}
     role: ti
   - comment: null
     permission:
@@ -2676,7 +2722,40 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - id
+      - etablissement
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - mesures_en_cours
+      - dispo_max
+      - user_id
+      - telephone_portable
       - secretariat
+      - nb_secretariat
+      - created_at
+      - date_mesure_update
+      - email_send
+      - genre
+      - mesures_en_attente
+      - zip
+      - department_id
+      - siret
+      - latitude
+      - longitude
+      computed_fields: []
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - secretariat
+      - latitude
+      - longitude
       - nb_secretariat
       - department_id
       - dispo_max
@@ -2700,7 +2779,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
-    role: individuel
+    role: prepose
   - comment: null
     permission:
       allow_aggregations: false
@@ -2712,33 +2791,6 @@ tables:
           _eq: X-Hasura-Siret
       limit: 1
     role: anonymous
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - secretariat
-      - nb_secretariat
-      - dispo_max
-      - id
-      - mesures_en_attente
-      - mesures_en_cours
-      - user_id
-      - zip
-      - created_at
-      - date_mesure_update
-      - email_send
-      - adresse
-      - code_postal
-      - etablissement
-      - genre
-      - telephone
-      - telephone_portable
-      - ville
-      computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: prepose
   - comment: null
     permission:
       allow_aggregations: true
@@ -2930,6 +2982,23 @@ tables:
           mandataire_id: id
         remote_table: mandataires
   select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - service_id
+      - mandataire_id
+      - discriminator
+      - department_id
+      - dep_nom
+      - mesures_max
+      - mesures_awaiting
+      - mesures_in_progress
+      - remaining_capacity
+      computed_fields: []
+      filter: {}
+    role: individuel
   - comment: null
     permission:
       allow_aggregations: true
