@@ -22,13 +22,24 @@ const iconTextStyle = {
   ml: "1"
 };
 
+const subtitle = {
+  color: "mediumGray",
+  fontWeight: "500",
+  fontSize: "12px",
+  lineHeight: "1.4"
+};
+
+const content = {
+  color: "black",
+  fontSize: 1,
+  fontWeight: "600",
+  lineHeight: "1.4",
+  mt: "1px",
+  mb: 1
+};
+
 const boxStyle = {
   flexGrow: 1
 };
 
-const flexStyle = {
-  flexWrap: "wrap",
-  mt: 5
-};
-
-export { titleStyle, innerTextStyle, topTextStyle, iconTextStyle, boxStyle, flexStyle };
+export { titleStyle, content, subtitle, innerTextStyle, topTextStyle, iconTextStyle, boxStyle };
