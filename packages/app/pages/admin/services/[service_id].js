@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
+import { AdminEditService } from "../../../src/components/AdminServices/AdminEditService";
 import { AdminServiceInformations } from "../../../src/components/AdminServices/AdminServiceInformations";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { MesureImportService } from "../../../src/components/MesureImport";
@@ -22,10 +23,14 @@ const Service = props => {
         <Tabs>
           <TabList>
             <Tab>Informations</Tab>
+            <Tab>Edition</Tab>
             <Tab>Import</Tab>
           </TabList>
           <TabPanel>
             <AdminServiceInformations serviceId={serviceId} />
+          </TabPanel>
+          <TabPanel>
+            <AdminEditService serviceId={serviceId} />
           </TabPanel>
           <TabPanel>
             <Heading4 mb={2}>Selectionnez le fichier</Heading4>
