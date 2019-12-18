@@ -62,7 +62,6 @@ export default class MyDocument extends Document {
             href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css"
             rel="stylesheet"
           />
-          <link rel="stylesheet" href="/static/css/react-table.css" />
           <link rel="stylesheet" href="/static/css/leaflet/leaflet.css" />
           <link rel="stylesheet" href="/static/css/font.css" />
           <link rel="stylesheet" href="/static/css/pagination.css" />
