@@ -41,6 +41,7 @@ export const GET_MANDATAIRES = gql`
     $discriminator: String
     $order: order_by
     $limit: Int
+    $searchText: String
   ) {
     count: view_mesure_gestionnaire_aggregate(
       where: {
@@ -56,7 +57,11 @@ export const GET_MANDATAIRES = gql`
       limit: $limit
       offset: $offset
       order_by: { gestionnaire: { remaining_capacity: $order } }
-      where: { discriminator: { _eq: $discriminator }, ti_id: { _eq: $tribunal } }
+      where: {
+        discriminator: { _eq: $discriminator }
+        ti_id: { _eq: $tribunal }
+        gestionnaire: { nom: { _ilike: $searchText } }
+      }
     ) {
       gestionnaire {
         discriminator
