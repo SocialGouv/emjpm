@@ -1,20 +1,30 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { Button, Card, Heading1, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import {
+  AsyncSelect,
+  Button,
+  Card,
+  Heading1,
+  Heading4,
+  Input,
+  Select,
+  Text
+} from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
-import * as Yup from "yup";
 
 import { GENDER_OPTIONS } from "../../constants/user";
+import { mandataireSignupSchema } from "../../lib/validationSchemas";
 import { isSiretExists } from "../../query-service/SiretQueryService";
 import { findDepartement } from "../../util/departements/DepartementUtil";
+import { debouncedGeocode } from "../../util/geocode";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
-import { cardStyle, grayBox } from "./style";
+import { grayBox } from "./style";
 
 const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
   const { user, mandataire, setMandataire, validateStepOne } = useContext(SignupContext);
@@ -26,6 +36,58 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
 
   const client = useApolloClient();
 
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
+      const department = findDepartement(values.geocode.postcode, departementDatas);
+
+      if (!department) {
+        setErrors({ code_postal: "Merci de renseigner un code postal valide" });
+      } else if (await isSiretExists(client, values.siret)) {
+        setErrors({ siret: "Ce SIRET existe déjà" });
+      } else {
+        const body = {
+          mandataire: {
+            adresse: values.geocode.label,
+            code_postal: values.geocode.postcode,
+            department_id: department.id,
+            dispo_max: parseInt(values.dispo_max),
+            etablissement: "",
+            genre: values.genre.value,
+            siret: values.siret,
+            telephone: values.telephone,
+            telephone_portable: values.telephone_portable,
+            ville: values.geocode.city,
+            latitude: values.geocode.lat,
+            longitude: values.geocode.lng
+          },
+          tis: values.tis.map(ti => ti.value),
+          user: {
+            username: user.email,
+            ...user
+          }
+        };
+        signup({
+          body,
+          onComplete: () => setSubmitting(false),
+          onError: errors => setErrors(errors),
+          onSuccess: () => Router.push("/signup/congratulation")
+        });
+      }
+      setSubmitting(false);
+    },
+    validationSchema: mandataireSignupSchema,
+    initialValues: {
+      adresse: mandataire ? mandataire.adresse : "",
+      dispo_max: mandataire ? mandataire.dispo_max : "",
+      genre: mandataire ? mandataire.genre : "",
+      geocode: {},
+      siret: mandataire ? mandataire.siret : "",
+      telephone: mandataire ? mandataire.telephone : "",
+      telephone_portable: mandataire ? mandataire.telephone_portable : "",
+      tis: mandataire ? mandataire.tis : ""
+    }
+  });
+
   return (
     <Fragment>
       <Heading1 px="1">
@@ -33,7 +95,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
           ? `Création d'un compte de mandataire individuel`
           : `Création d'un compte de mandataire préposé d'établissement`}
       </Heading1>
-      <Card sx={cardStyle}>
+      <Card m="1" mt="5" p="0">
         <Flex>
           <Box width={[1, 2 / 5]} sx={grayBox}>
             <Box height="80px">
@@ -71,218 +133,132 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
 
           <Box p="5" pb={0} width={[1, 3 / 5]}>
             <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-              <Formik
-                onSubmit={async (values, { setSubmitting, setErrors }) => {
-                  const department = findDepartement(values.code_postal, departementDatas);
-                  if (!department) {
-                    setErrors({
-                      code_postal: "Merci de renseigner un code postal valide"
-                    });
-                  } else if (await isSiretExists(client, values.siret)) {
-                    setErrors({
-                      siret: "Ce SIRET existe déjà"
-                    });
-                  } else {
-                    const body = {
-                      mandataire: {
-                        adresse: values.adresse,
-                        code_postal: values.code_postal,
-                        department_id: department.id,
-                        dispo_max: parseInt(values.dispo_max),
-                        etablissement: "",
-                        genre: values.genre.value,
-                        siret: values.siret,
-                        telephone: values.telephone,
-                        telephone_portable: values.telephone_portable,
-                        ville: values.ville
-                      },
-                      tis: values.tis.map(ti => ti.value),
-                      user: {
-                        username: user.email,
-                        ...user
-                      }
-                    };
-                    signup({
-                      body,
-                      onComplete: () => setSubmitting(false),
-                      onError: errors => setErrors(errors),
-                      onSuccess: () => Router.push("/signup/congratulation")
-                    });
-                  }
-                  setSubmitting(false);
-                }}
-                validationSchema={Yup.object().shape({
-                  adresse: Yup.string().required("Champ obligatoire"),
-                  code_postal: Yup.string().required("Champ obligatoire"),
-                  dispo_max: Yup.number("Le champs doit être en nombre").required(
-                    "Champ obligatoire"
-                  ),
-                  genre: Yup.string().required("Champ obligatoire"),
-                  siret: Yup.string()
-                    .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
-                    .required("Champ obligatoire"),
-                  telephone: Yup.string().required("Champ obligatoire"),
-                  telephone_portable: Yup.string(),
-                  tis: Yup.mixed().required("Champ obligatoire"),
-                  ville: Yup.string().required("Champ obligatoire")
-                })}
-                initialValues={{
-                  adresse: mandataire ? mandataire.adresse : "",
-                  code_postal: mandataire ? mandataire.code_postal : "",
-                  dispo_max: mandataire ? mandataire.dispo_max : "",
-                  genre: mandataire ? mandataire.genre : "",
-                  siret: mandataire ? mandataire.siret : "",
-                  telephone: mandataire ? mandataire.telephone : "",
-                  telephone_portable: mandataire ? mandataire.telephone_portable : "",
-                  tis: mandataire ? mandataire.tis : "",
-                  ville: mandataire ? mandataire.ville : ""
-                }}
-              >
-                {props => {
-                  const {
-                    values,
-                    touched,
-                    errors,
-                    isSubmitting,
-                    handleChange,
-                    handleSubmit,
-                    setFieldValue
-                  } = props;
-                  return (
-                    <form onSubmit={handleSubmit}>
-                      <SignupGeneralError errors={props.errors} />
-                      <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
-                        <Select
-                          id="tis"
-                          name="tis"
-                          placeholder="Tribunaux dans lesquels vous exercez"
-                          value={values.tis}
-                          hasError={errors.tis && touched.tis}
-                          onChange={option => setFieldValue("tis", option)}
-                          options={tiOptions}
-                          isMulti
-                        />
-                        {errors.tis && touched.tis && <Text>{errors.tis}</Text>}
-                      </Box>
-                      <Box sx={{ position: "relative", zIndex: "100" }} mb="2" pt="2">
-                        <Select
-                          id="genre"
-                          name="genre"
-                          placeholder="Titre de civilité"
-                          value={values.genre}
-                          hasError={errors.genre && touched.genre}
-                          onChange={option => setFieldValue("genre", option)}
-                          options={GENDER_OPTIONS}
-                        />
-                        {errors.genre && touched.genre && <Text>{errors.genre}</Text>}
-                      </Box>
-                      <Box mb="2" pt="2">
-                        <Input
-                          value={values.siret}
-                          id="siret"
-                          name="siret"
-                          hasError={errors.siret && touched.siret}
-                          onChange={handleChange}
-                          placeholder="SIRET"
-                        />
-                        {errors.siret && touched.siret && <Text>{errors.siret}</Text>}
-                      </Box>
-                      <Box mb="2" pt="2">
-                        <Input
-                          value={values.telephone}
-                          id="telephone"
-                          name="telephone"
-                          hasError={errors.telephone && touched.telephone}
-                          onChange={handleChange}
-                          placeholder="Téléphone"
-                        />
-                        {errors.telephone && touched.telephone && <Text>{errors.telephone}</Text>}
-                      </Box>
-                      <Box mb="2">
-                        <Input
-                          value={values.telephone_portable}
-                          id="telephone_portable"
-                          name="telephone_portable"
-                          onChange={handleChange}
-                          placeholder="Téléphone portable"
-                        />
-                      </Box>
-                      <Box mb="2" pt="2">
-                        <Input
-                          value={values.adresse}
-                          id="adresse"
-                          name="adresse"
-                          hasError={errors.adresse && touched.adresse}
-                          onChange={handleChange}
-                          placeholder="Adresse"
-                        />
-                        {errors.adresse && touched.adresse && <Text>{errors.adresse}</Text>}
-                      </Box>
-                      <Box mb="2">
-                        <Input
-                          value={values.code_postal}
-                          id="code_postal"
-                          name="code_postal"
-                          hasError={errors.code_postal && touched.code_postal}
-                          onChange={handleChange}
-                          placeholder="Code postal"
-                        />
-                        {errors.code_postal && touched.code_postal && (
-                          <Text>{errors.code_postal}</Text>
-                        )}
-                      </Box>
-                      <Box mb="2">
-                        <Input
-                          value={values.ville}
-                          id="ville"
-                          name="ville"
-                          hasError={errors.ville && touched.ville}
-                          onChange={handleChange}
-                          placeholder="Ville"
-                        />
-                        {errors.ville && touched.ville && <Text>{errors.ville}</Text>}
-                      </Box>
-                      <Box mb="2" pt="2">
-                        <Input
-                          value={values.dispo_max}
-                          id="dispo_max"
-                          name="dispo_max"
-                          hasError={errors.dispo_max && touched.dispo_max}
-                          onChange={handleChange}
-                          placeholder="Nombre de mesures souhaité"
-                        />
-                        {errors.dispo_max && touched.dispo_max && <Text>{errors.dispo_max}</Text>}
-                      </Box>
-                      <Flex justifyContent="flex-end">
-                        <Box>
-                          <Button mr="2" variant="outline">
-                            <Link href="/">
-                              <a>Annuler</a>
-                            </Link>
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Button
-                            mr="2"
-                            variant="outline"
-                            onClick={() => {
-                              setMandataire(values);
-                              validateStepOne(false);
-                            }}
-                          >
-                            <a>Retour</a>
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                            Enregistrer
-                          </Button>
-                        </Box>
-                      </Flex>
-                    </form>
-                  );
-                }}
-              </Formik>
+              <form onSubmit={formik.handleSubmit}>
+                <SignupGeneralError errors={formik.errors} />
+                <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
+                  <Select
+                    id="tis"
+                    name="tis"
+                    placeholder="Tribunaux dans lesquels vous exercez"
+                    value={formik.values.tis}
+                    hasError={formik.errors.tis && formik.touched.tis}
+                    onChange={option => formik.setFieldValue("tis", option)}
+                    options={tiOptions}
+                    isMulti
+                  />
+                  {formik.errors.tis && formik.touched.tis && <Text>{formik.errors.tis}</Text>}
+                </Box>
+                <Box sx={{ position: "relative", zIndex: "100" }} mb="2" pt="2">
+                  <Select
+                    id="genre"
+                    name="genre"
+                    placeholder="Titre de civilité"
+                    value={formik.values.genre}
+                    hasError={formik.errors.genre && formik.touched.genre}
+                    onChange={option => formik.setFieldValue("genre", option)}
+                    options={GENDER_OPTIONS}
+                  />
+                  {formik.errors.genre && formik.touched.genre && (
+                    <Text>{formik.errors.genre}</Text>
+                  )}
+                </Box>
+                <Box mb="2" pt="2">
+                  <Input
+                    value={formik.values.siret}
+                    id="siret"
+                    name="siret"
+                    hasError={formik.errors.siret && formik.touched.siret}
+                    onChange={formik.handleChange}
+                    placeholder="SIRET"
+                  />
+                  {formik.errors.siret && formik.touched.siret && (
+                    <Text>{formik.errors.siret}</Text>
+                  )}
+                </Box>
+                <Box mb="2" pt="2">
+                  <Input
+                    value={formik.values.telephone}
+                    id="telephone"
+                    name="telephone"
+                    hasError={formik.errors.telephone && formik.touched.telephone}
+                    onChange={formik.handleChange}
+                    placeholder="Téléphone"
+                  />
+                  {formik.errors.telephone && formik.touched.telephone && (
+                    <Text>{formik.errors.telephone}</Text>
+                  )}
+                </Box>
+                <Box mb="2">
+                  <Input
+                    value={formik.values.telephone_portable}
+                    id="telephone_portable"
+                    name="telephone_portable"
+                    onChange={formik.handleChange}
+                    placeholder="Téléphone portable"
+                  />
+                </Box>
+                <Box sx={{ position: "relative", zIndex: "10" }} mb="2" pt="2">
+                  <AsyncSelect
+                    name="geocode"
+                    cacheOptions
+                    hasError={formik.errors.geocode && formik.touched.geocode}
+                    isClearable
+                    loadOptions={debouncedGeocode}
+                    placeholder="Adresse"
+                    noOptionsMessage={() => "Pas de résultats"}
+                    onChange={option => {
+                      formik.setFieldValue("geocode", option ? option.value : null);
+                    }}
+                  />
+                  {formik.errors.geocode && formik.touched.geocode && (
+                    <Text>{formik.errors.geocode}</Text>
+                  )}
+                </Box>
+                <Box mb="2" pt="2">
+                  <Input
+                    value={formik.values.dispo_max}
+                    id="dispo_max"
+                    name="dispo_max"
+                    hasError={formik.errors.dispo_max && formik.touched.dispo_max}
+                    onChange={formik.handleChange}
+                    placeholder="Nombre de mesures souhaité"
+                  />
+                  {formik.errors.dispo_max && formik.touched.dispo_max && (
+                    <Text>{formik.errors.dispo_max}</Text>
+                  )}
+                </Box>
+                <Flex justifyContent="flex-end">
+                  <Box>
+                    <Button mr="2" variant="outline">
+                      <Link href="/">
+                        <a>Annuler</a>
+                      </Link>
+                    </Button>
+                  </Box>
+                  <Box>
+                    <Button
+                      mr="2"
+                      variant="outline"
+                      onClick={() => {
+                        // TODO: ask help
+                        setMandataire(formik.values);
+                        validateStepOne(false);
+                      }}
+                    >
+                      <a>Retour</a>
+                    </Button>
+                  </Box>
+                  <Box>
+                    <Button
+                      type="submit"
+                      disabled={formik.isSubmitting}
+                      isLoading={formik.isSubmitting}
+                    >
+                      Enregistrer
+                    </Button>
+                  </Box>
+                </Flex>
+              </form>
             </Box>
           </Box>
         </Flex>
