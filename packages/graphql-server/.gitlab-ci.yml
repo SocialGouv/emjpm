@@ -67,8 +67,6 @@ Register graphql-server image:
   before_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-    #
-    - HASURA_HOST=${K8S_PROJECT}-hasura-${BRANCH_HASH}
 
 #
 
