@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { AsyncSelect, Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -10,11 +11,11 @@ import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/me
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { debouncedGeocode } from "../../util/geocode";
+import { formatUserTribunalList } from "../../util/mandataires";
 import { EDIT_MESURE } from "./mutations";
 import { DEPARTEMENTS, USER_TRIBUNAL } from "./queries";
-import { formatUserTribunalList } from "./utils";
 
-export const MandatairesEditMesure = props => {
+export const MandataireMesureEditForm = props => {
   const {
     currentMesure,
     age,
@@ -29,7 +30,8 @@ export const MandatairesEditMesure = props => {
     tribunal,
     tiId,
     latitude,
-    longitude
+    longitude,
+    isPage = false
   } = props;
 
   const geocode = {
@@ -71,8 +73,13 @@ export const MandatairesEditMesure = props => {
           }
         });
 
-        setPanelType(null);
-        setCurrentMesure(null);
+        if (!isPage) {
+          // TODO transform me in done function passed to the component
+          setPanelType(null);
+          setCurrentMesure(null);
+        } else {
+          Router.push(`/mandataires/mesures/${currentMesure}`);
+        }
       }
 
       setSubmitting(false);
@@ -92,7 +99,6 @@ export const MandatairesEditMesure = props => {
   });
 
   const { loading, error, data } = useQuery(USER_TRIBUNAL);
-
   const {
     data: departementsData,
     loading: departementsLoading,
@@ -249,8 +255,13 @@ export const MandatairesEditMesure = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  setPanelType(PANEL_TYPE.CLOSE);
-                  setCurrentMesure(null);
+                  if (!isPage) {
+                    setPanelType(PANEL_TYPE.CLOSE);
+                    setCurrentMesure(null);
+                  } else {
+                    // TODO transform me in cancel function passed to the component
+                    Router.push(`/mandataires/mesures/${currentMesure}`);
+                  }
                 }}
               >
                 Annuler
@@ -268,6 +279,6 @@ export const MandatairesEditMesure = props => {
   );
 };
 
-MandatairesEditMesure.propTypes = {
+MandataireMesureEditForm.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };
