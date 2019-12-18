@@ -12,10 +12,12 @@ import { MandatairesEditInformationsForm } from "./MandatairesEditInformationsFo
 import { EDIT_USER } from "./mutations";
 import { MANDATAIRE } from "./queries";
 import { grayBox } from "./style";
+
 const MandatairesEditInformations = props => {
   const { id, type } = props;
 
   const { data, error, loading } = useQuery(MANDATAIRE, {
+    fetchPolicy: "network-only",
     variables: {
       userId: id
     }
@@ -76,7 +78,9 @@ const MandatairesEditInformations = props => {
           telephone_portable: values.telephone_portable,
           ville: values.geocode.city,
           latitude: values.geocode.lat,
-          longitude: values.geocode.lng
+          longitude: values.geocode.lng,
+          secretariat: values.secretariat.value,
+          nb_secretariat: parseFloat(values.nb_secretariat)
         }
       });
     }
@@ -100,14 +104,14 @@ const MandatairesEditInformations = props => {
               {`Votre civilité`}
             </Text>
           </Box>
-          <Box height="220px">
+          <Box height="210px">
             <Heading4>{`Informations professionelles`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
                 d'autres systèmes (OCMI par exemple)`}
             </Text>
           </Box>
-          <Box height="200px">
+          <Box height="80px">
             <Heading4>{`Adresse professionelle`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`L'adresse de votre siège social`}
@@ -116,7 +120,7 @@ const MandatairesEditInformations = props => {
           <Box height="80px">
             <Heading4>{`Activité`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              Nombre de mesures souhaité
+              {`Informations relatives à votre activité`}
             </Text>
           </Box>
         </Box>
