@@ -150,6 +150,12 @@ export const MANDATAIRE_USERS = gql`
         mesures_en_attente
         longitude
         latitude
+        telephone
+        telephone_portable
+        secretariat
+        nb_secretariat
+        siret
+        adresse
       }
     }
   }
