@@ -9,6 +9,9 @@ export const UPDATE_SERVICE = gql`
     $email: String
     $telephone: String
     $department_id: Int!
+    $adresse: String!
+    $latitude: Float!
+    $longitude: Float!
   ) {
     update_services(
       where: { id: { _eq: $id } }
@@ -19,6 +22,9 @@ export const UPDATE_SERVICE = gql`
         ville: $ville
         email: $email
         telephone: $telephone
+        adresse: $adresse
+        latitude: $latitude
+        longitude: $longitude
       }
     ) {
       affected_rows
