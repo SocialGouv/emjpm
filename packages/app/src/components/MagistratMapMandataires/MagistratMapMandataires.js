@@ -23,9 +23,9 @@ const MagistratMapMandataires = props => {
     prepose,
     currentGestionnaire: { longitude, latitude, isActive, currentDiscriminator, currentId }
   } = props;
-
   const [iconIndividuel, iconPrepose, iconService] = mapMarkers();
   const [mesures, setMesures] = useState([]);
+
   const [loadMesures, { called, loading, data }] = useLazyQuery(
     currentDiscriminator ? QUERY_TYPE[currentDiscriminator] : QUERY_TYPE["DEFAULT"],
     {

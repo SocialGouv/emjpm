@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 import { LayoutMagistratMap } from "../../src/components/Layout";
 import { MagistratMapMandataires } from "../../src/components/MagistratMapMandataires";
 import { MapContextProvider } from "../../src/components/MagistratMapMandataires/context";
-import { MagistratMapMandatairesPanel } from "../../src/components/MagistratMapMandatairesPanel";
+import { MagistratMapMandatairesPanelList } from "../../src/components/MagistratMapMandatairesPanelList";
 import { withAuthSync } from "../../src/util/auth";
 
 const Map = () => {
@@ -21,7 +21,7 @@ const Map = () => {
           }}
         >
           <Box height="100%" flex="0 1 auto">
-            <MagistratMapMandatairesPanel />
+            <MagistratMapMandatairesPanelList />
           </Box>
           <Box height="100%" flex="1 1 auto">
             <MagistratMapMandataires />
