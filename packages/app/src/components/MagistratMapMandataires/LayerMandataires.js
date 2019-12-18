@@ -1,28 +1,10 @@
 import React, { useContext } from "react";
 import { Feature, Layer } from "react-mapbox-gl";
 
-import iconIndividuelMarker from "../../../static/images/map-icon-individuel-man@2x.png";
-import iconPreposeMarker from "../../../static/images/map-icon-propose-man@2x.png";
-import iconServiceMarker from "../../../static/images/map-icon-service@2x.png";
-import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discriminator";
 import { MapContext } from "./context";
-// TODO MOVE EVERYTHING IN THE MAP FOLDER
-const icons = [
-  { src: iconIndividuelMarker, name: MANDATAIRE_IND },
-  { src: iconPreposeMarker, name: MANDATAIRE_PRE },
-  { src: iconServiceMarker, name: SERVICE }
-];
-
-const mapBoxImages = () => {
-  return icons.map(icon => {
-    const image = new Image(60, 72);
-    image.src = icon.src;
-    return [icon.name, image, { pixelRatio: 2 }];
-  });
-};
 
 const LayerMandataires = props => {
-  const { gestionnaires, discriminator } = props;
+  const { gestionnaires, discriminator, images } = props;
   const { setcurrentGestionnaire } = useContext(MapContext);
   const chooseMandataire = (id, latitude, longitude, discriminator) => {
     setcurrentGestionnaire({
@@ -44,7 +26,7 @@ const LayerMandataires = props => {
       }}
       type="symbol"
       id={discriminator}
-      images={mapBoxImages()}
+      images={images}
       layout={{ "icon-image": discriminator }}
     >
       {gestionnaires.map(gestionnaire => {
