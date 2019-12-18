@@ -57,8 +57,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
             ville: values.geocode.city,
-            latitude: values.geocode.latitude,
-            longitude: values.geocode.longitude
+            latitude: values.geocode.lat,
+            longitude: values.geocode.lng
           },
           tis: values.tis.map(ti => ti.value),
           user: {
@@ -78,15 +78,13 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
     validationSchema: mandataireSignupSchema,
     initialValues: {
       adresse: mandataire ? mandataire.adresse : "",
-      code_postal: mandataire ? mandataire.code_postal : "",
       dispo_max: mandataire ? mandataire.dispo_max : "",
       genre: mandataire ? mandataire.genre : "",
       geocode: {},
       siret: mandataire ? mandataire.siret : "",
       telephone: mandataire ? mandataire.telephone : "",
       telephone_portable: mandataire ? mandataire.telephone_portable : "",
-      tis: mandataire ? mandataire.tis : "",
-      ville: mandataire ? mandataire.ville : ""
+      tis: mandataire ? mandataire.tis : ""
     }
   });
 
