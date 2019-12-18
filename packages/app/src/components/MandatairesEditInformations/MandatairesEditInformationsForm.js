@@ -1,8 +1,9 @@
 import { AsyncSelect, Button, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
+import { SECRETARIAT_OPTIONS } from "../../constants/mandataire";
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
 import { debouncedGeocode } from "../../util/geocode";
@@ -10,6 +11,8 @@ import { Link } from "../Commons";
 
 const MandatairesEditInformationsForm = props => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
+
+  const [isSecretariat, setSecretariat] = useState(mandataire.secretariat);
 
   const geocode = {
     postcode: mandataire.code_postal,
@@ -34,7 +37,9 @@ const MandatairesEditInformationsForm = props => {
       siret: mandataire.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
-      ville: mandataire.ville || ""
+      ville: mandataire.ville || "",
+      secretariat: SECRETARIAT_OPTIONS.find(el => el.value === mandataire.secretariat),
+      nb_secretariat: mandataire.nb_secretariat || ""
     }
   });
 
@@ -149,6 +154,42 @@ const MandatairesEditInformationsForm = props => {
           <Text>{formik.errors.dispo_max}</Text>
         )}
       </Box>
+      <Box mb="2" sx={{ position: "relative", zIndex: "100" }}>
+        <Select
+          value={formik.values.secretariat}
+          id="secretariat"
+          name="secretariat"
+          hasError={formik.errors.secretariat && formik.touched.secretariat}
+          onChange={option => {
+            const isSecretariat = option ? option.value : false;
+            setSecretariat(isSecretariat);
+            formik.setFieldValue("secretariat", option);
+            if (!isSecretariat) {
+              formik.setFieldValue("nb_secretariat", "");
+            }
+          }}
+          placeholder="Secretariat spécialisé"
+          options={SECRETARIAT_OPTIONS}
+        />
+        {formik.errors.secretariat && formik.touched.secretariat && (
+          <Text>{formik.errors.secretariat}</Text>
+        )}
+      </Box>
+      {isSecretariat && (
+        <Box mb="2">
+          <Input
+            value={formik.values.nb_secretariat}
+            id="nb_secretariat"
+            name="nb_secretariat"
+            hasError={formik.errors.nb_secretariat && formik.touched.nb_secretariat}
+            onChange={formik.handleChange}
+            placeholder="Nombre ETP dédié (x.xx)"
+          />
+          {formik.errors.nb_secretariat && formik.touched.nb_secretariat && (
+            <Text>{formik.errors.nb_secretariat}</Text>
+          )}
+        </Box>
+      )}
 
       <Flex alignItems="center" justifyContent="flex-end">
         <Box mr="2">
