@@ -104,3 +104,12 @@ export const formatMandataire = (
     ...currentDiscriminator
   };
 };
+
+export const formatUserTribunalList = tribunalList => {
+  return tribunalList.map(tribunal => {
+    return {
+      label: tribunal.ti.etablissement,
+      value: tribunal.ti.id
+    };
+  });
+};

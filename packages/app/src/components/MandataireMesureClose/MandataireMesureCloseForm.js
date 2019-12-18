@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -19,8 +20,8 @@ const EXTINCTION_LABEL_VALUE = [
   { label: "autre", value: "autr" }
 ];
 
-export const MandatairesCloseMesure = props => {
-  const { currentMesure } = props;
+export const MandataireMesureCloseForm = props => {
+  const { currentMesure, isPage = false } = props;
 
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
@@ -68,8 +69,13 @@ export const MandatairesCloseMesure = props => {
               }
             });
             setSubmitting(false);
-            setPanelType(null);
-            setCurrentMesure(null);
+            if (!isPage) {
+              // TODO transform me in done function passed to the component
+              setPanelType(null);
+              setCurrentMesure(null);
+            } else {
+              Router.push(`/mandataires/mesures/${currentMesure}`);
+            }
           }}
           validationSchema={Yup.object().shape({
             extinction: Yup.date().required("Required"),
@@ -117,8 +123,13 @@ export const MandatairesCloseMesure = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        setPanelType(PANEL_TYPE.CLOSE);
-                        setCurrentMesure(null);
+                        if (!isPage) {
+                          setPanelType(PANEL_TYPE.CLOSE);
+                          setCurrentMesure(null);
+                        } else {
+                          // TODO transform me in cancel function passed to the component
+                          Router.push(`/mandataires/mesures/${currentMesure}`);
+                        }
                       }}
                     >
                       Annuler
@@ -139,6 +150,6 @@ export const MandatairesCloseMesure = props => {
   );
 };
 
-MandatairesCloseMesure.propTypes = {
+MandataireMesureCloseForm.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };
