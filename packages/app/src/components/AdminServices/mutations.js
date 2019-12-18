@@ -34,6 +34,9 @@ export const ADD_SERVICE = gql`
     $email: String
     $telephone: String
     $department_id: Int!
+    $adresse: String!
+    $latitude: Float!
+    $longitude: Float!
   ) {
     insert_services(
       objects: {
@@ -43,6 +46,9 @@ export const ADD_SERVICE = gql`
         email: $email
         department_id: $department_id
         telephone: $telephone
+        adresse: $adresse
+        latitude: $latitude
+        longitude: $longitude
       }
     ) {
       returning {
@@ -52,6 +58,9 @@ export const ADD_SERVICE = gql`
         ville
         telephone
         email
+        adresse
+        latitude
+        longitude
       }
     }
   }
