@@ -1,14 +1,13 @@
 import { useLazyQuery } from "@apollo/react-hooks";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactMapboxGl from "react-mapbox-gl";
 
-import { MapContext } from "./context";
 import LayerMandataires from "./LayerMandataires";
 import LayerMesures from "./LayerMesures";
 const Map = ReactMapboxGl({ accessToken: "" });
 import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discriminator";
 import { MESURES, MESURES_MANDATAIRE, MESURES_SERVICE } from "./queries";
-import { filterGestionnairesByDiscriminator } from "./utils";
+import { mapMarkers } from "./utils";
 
 const QUERY_TYPE = {
   MANDATAIRE_IND: MESURES_MANDATAIRE,
@@ -18,11 +17,14 @@ const QUERY_TYPE = {
 };
 
 const MagistratMapMandataires = props => {
-  const { view_mesure_gestionnaire } = props;
-
-  const { currentGestionnaire } = useContext(MapContext);
+  const {
+    services,
+    individuel,
+    prepose,
+    currentGestionnaire: { longitude, latitude, isActive, currentDiscriminator, currentId }
+  } = props;
+  const [iconIndividuel, iconPrepose, iconService] = mapMarkers();
   const [mesures, setMesures] = useState([]);
-  const { longitude, latitude, isActive, currentDiscriminator, currentId } = currentGestionnaire;
 
   const [loadMesures, { called, loading, data }] = useLazyQuery(
     currentDiscriminator ? QUERY_TYPE[currentDiscriminator] : QUERY_TYPE["DEFAULT"],
@@ -47,22 +49,6 @@ const MagistratMapMandataires = props => {
     }
   }, [called, data, isActive, loading, setMesures]);
 
-  const services = filterGestionnairesByDiscriminator(
-    view_mesure_gestionnaire,
-    SERVICE,
-    currentGestionnaire
-  );
-  const individuel = filterGestionnairesByDiscriminator(
-    view_mesure_gestionnaire,
-    MANDATAIRE_IND,
-    currentGestionnaire
-  );
-  const prepose = filterGestionnairesByDiscriminator(
-    view_mesure_gestionnaire,
-    MANDATAIRE_PRE,
-    currentGestionnaire
-  );
-
   return (
     <Map
       style="https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json"
@@ -73,9 +59,17 @@ const MagistratMapMandataires = props => {
       }}
     >
       <LayerMesures mesures={mesures} />
-      <LayerMandataires gestionnaires={individuel} discriminator={MANDATAIRE_IND} />
-      <LayerMandataires gestionnaires={prepose} discriminator={MANDATAIRE_PRE} />
-      <LayerMandataires gestionnaires={services} discriminator={SERVICE} />
+      <LayerMandataires
+        gestionnaires={individuel}
+        images={iconIndividuel}
+        discriminator={MANDATAIRE_IND}
+      />
+      <LayerMandataires
+        gestionnaires={prepose}
+        images={iconPrepose}
+        discriminator={MANDATAIRE_PRE}
+      />
+      <LayerMandataires gestionnaires={services} images={iconService} discriminator={SERVICE} />
     </Map>
   );
 };

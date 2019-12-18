@@ -8,13 +8,17 @@ import { Box, Flex } from "rebass";
 import { SERVICE } from "../../constants/discriminator";
 import { formatMandatairesList } from "../MagistratMandatairesList/utils";
 import { MapContext } from "../MagistratMapMandataires/context";
+import { UserContext } from "../UserContext";
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { MagistratMapMandataireListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
-const MagistratMapMandatairesPanelList = props => {
-  const { tiId } = props;
+const MagistratMapMandatairesPanelList = () => {
+  const {
+    magistrat: { ti_id: tiId }
+  } = useContext(UserContext);
+
   const [currentOffset, setCurrentOffset] = useState(0);
   const { setcurrentGestionnaire } = useContext(MapContext);
 
@@ -55,7 +59,7 @@ const MagistratMapMandatairesPanelList = props => {
   const totalPage = count / RESULT_PER_PAGE;
   const list = formatMandatairesList(data.mandatairesList);
   return (
-    <Box pt="2" px="2" sx={MagistratMapMandataireListStyle} {...props}>
+    <Box pt="2" px="2" sx={MagistratMapMandataireListStyle}>
       <Scrollbar style={{ width: "100%", height: "100%" }}>
         <Box mr="1" mb="4">
           <Mandatairelist
