@@ -32,11 +32,23 @@ export const geocode = async q => {
   }
 
   return geojson.features.map(({ geometry, properties }) => {
-    const { city, postcode, label } = properties;
+    const { city, postcode, label, context } = properties;
     const { coordinates } = geometry;
     const [lng, lat] = coordinates;
+    const [depcodeString] = context.split(", ");
+    const depcode = parseInt(depcodeString);
 
-    return { label, value: { city, label, lat, lng, postcode } };
+    return {
+      label,
+      value: {
+        city,
+        depcode,
+        label,
+        lat,
+        lng,
+        postcode
+      }
+    };
   });
 };
 
