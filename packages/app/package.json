@@ -48,7 +48,6 @@
     "leaflet": "^1.4.0",
     "lodash.flow": "^3.5.0",
     "mapbox-gl": "^1.4.1",
-    "memoizee": "^0.4.14",
     "next": "^9.1.5",
     "next-cookies": "^2.0.3",
     "next-images": "^1.2.0",
