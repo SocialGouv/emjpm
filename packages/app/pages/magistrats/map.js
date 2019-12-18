@@ -20,7 +20,7 @@ const Map = () => {
             width: "100%"
           }}
         >
-          <Box height="100%" flex="0 1 auto">
+          <Box height="100%" flex="0 1 auto" width="600px">
             <MagistratMapMandatairesPanelList />
           </Box>
           <Box height="100%" flex="1 1 auto">
