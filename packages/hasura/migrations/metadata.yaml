@@ -1451,15 +1451,6 @@ tables:
   - comment: null
     permission:
       columns:
-      - latitude
-      - longitude
-      - mesures_awaiting
-      filter: {}
-      set: {}
-    role: ti
-  - comment: null
-    permission:
-      columns:
       - adresse
       - code_postal
       - department_id
@@ -1468,6 +1459,8 @@ tables:
       - etablissement
       - id
       - information
+      - latitude
+      - longitude
       - mesures_awaiting
       - mesures_in_progress
       - nom
@@ -1479,6 +1472,15 @@ tables:
           _eq: X-Hasura-Service-Id
       set: {}
     role: service
+  - comment: null
+    permission:
+      columns:
+      - latitude
+      - longitude
+      - mesures_awaiting
+      filter: {}
+      set: {}
+    role: ti
 - array_relationships:
   - comment: null
     name: mandataire_etablissements
