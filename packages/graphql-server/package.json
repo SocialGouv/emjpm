@@ -38,7 +38,7 @@
     "@types/node": "^12.12.21",
     "@types/node-fetch": "^2.5.4",
     "@types/pino": "^5.8.8",
-    "@zeit/ncc": "^0.20.4",
+    "@zeit/ncc": "^0.20.5",
     "nodemon": "^1.19.0",
     "prettier": "^1.19.1",
     "ts-node": "^8.3.0",
