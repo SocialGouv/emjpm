@@ -16,7 +16,7 @@
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^0.9.8",
     "eslint": "^5.16.0",
-    "eslint-plugin-cypress": "^2.6.0",
+    "eslint-plugin-cypress": "^2.8.1",
     "prettier": "^1.17.1"
   },
   "version": "25.11.5"
