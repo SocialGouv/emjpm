@@ -2846,7 +2846,7 @@
     eslint-plugin-react "~7.17.0"
     eslint-plugin-react-hooks "~2.3.0"
 
-"@socialgouv/eslint-config-recommended@^0.11.0", "@socialgouv/eslint-config-recommended@^0.11.1":
+"@socialgouv/eslint-config-recommended@^0.11.1":
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-recommended/-/eslint-config-recommended-0.11.1.tgz#0bc9d33ce7b59a639c0c36e2193ecc513269490b"
   integrity sha512-gw7UN1CNtJD+kCuBHawZszxxAahLda1GdXhQYTjCWFbkP7S8GAF2/MKZPuKfyd1Tzsngyq0oNfoMO7Ab/hsLnA==
@@ -11874,7 +11874,7 @@ node-releases@^1.1.42:
   dependencies:
     semver "^6.3.0"
 
-nodemailer-mock@^1.4.1:
+nodemailer-mock@^1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/nodemailer-mock/-/nodemailer-mock-1.4.4.tgz#074301aab6fb9d9decc0f26c3f32beca818e1e22"
   integrity sha512-QoJtAA5Jb+/QhlEKk33HwCA6BnAeXhXYkgwWO3b4njgpTOXR/VLQmio3gcAJzD83f9TQ6LQiHpa/1kvm8Qkl9A==
