@@ -23,7 +23,7 @@
     "@date-fns/upgrade": "^1.0.1",
     "@emotion/core": "^10.0.15",
     "@emotion/styled": "^10.0.15",
-    "@mdx-js/react": "^1.2.2",
+    "@mdx-js/react": "^1.5.2",
     "@sentry/browser": "^5.10.2",
     "@socialgouv/emjpm-ui-components": "0.49.0",
     "@socialgouv/emjpm-ui-core": "^1.13.1",
