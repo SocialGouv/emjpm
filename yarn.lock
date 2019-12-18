@@ -2856,7 +2856,7 @@
     eslint-plugin-jest "^23.1.1"
     eslint-plugin-prettier "~3.1.2"
 
-"@socialgouv/tslint-config-recommended@^0.11.0":
+"@socialgouv/tslint-config-recommended@^0.11.1":
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/@socialgouv/tslint-config-recommended/-/tslint-config-recommended-0.11.1.tgz#9ea9853bd76e6101f1b39b259343e121c194af48"
   integrity sha512-Gs6j9oyH9ffYO53YDRbFcsyE6ZIiuwK+s4dYOJ3giyDl0v9+uoaJxlU4BB1M+MEVId8GXi5gFs4MRYd1sDomCg==
