@@ -6,13 +6,13 @@ import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
-import { formatMesureList } from "../ServiceMesures/utils";
-import { MapContext } from "../ServicesMap/context";
+import { MapContext } from "../MandataireMap/context";
+import { formatMesureList } from "../MandatairesMesures/utils";
 import { MESURES } from "./queries";
-import { ServiceMapPanelMesuresStyle } from "./style";
-const RESULT_PER_PAGE = 50;
+import { MandataireMapPanelMesuresStyle } from "./style";
+const RESULT_PER_PAGE = 20;
 
-const ServiceMapPanelMesures = props => {
+const MandataireMapPanelMesures = props => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { setMesures } = useContext(MapContext);
   const queryVariables = {
@@ -26,7 +26,7 @@ const ServiceMapPanelMesures = props => {
   });
 
   const selectMesure = ({ id }) => {
-    Router.push(`/services/mesures/${id}`);
+    Router.push(`/mandataires/mesures/${id}`);
   };
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const ServiceMapPanelMesures = props => {
   const mesures = formatMesureList(data.mesures);
 
   return (
-    <Box sx={ServiceMapPanelMesuresStyle} {...props}>
+    <Box sx={MandataireMapPanelMesuresStyle} {...props}>
       <Scrollbar style={{ width: "100%", height: "100%" }}>
         <Box p="2">
           {mesures.length > 0 ? (
@@ -92,4 +92,4 @@ const ServiceMapPanelMesures = props => {
   );
 };
 
-export { ServiceMapPanelMesures };
+export { MandataireMapPanelMesures };

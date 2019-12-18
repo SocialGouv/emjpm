@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -10,8 +11,8 @@ import * as Yup from "yup";
 import { DELETE_MESURE } from "./mutations";
 import { MANDATAIRE_MESURES } from "./queries";
 
-export const MandatairesDeleteMesure = props => {
-  const { currentMesure, queryVariables } = props;
+export const MandataireMesureDeleteForm = props => {
+  const { currentMesure, queryVariables, isPage = false } = props;
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
 
   const [UpdateMesure] = useMutation(DELETE_MESURE);
@@ -42,8 +43,13 @@ export const MandatairesDeleteMesure = props => {
               }
             });
             setSubmitting(false);
-            setPanelType(null);
-            setCurrentMesure(null);
+            if (!isPage) {
+              // TODO transform me in done function passed to the component
+              setPanelType(null);
+              setCurrentMesure(null);
+            } else {
+              Router.push(`/mandataires`);
+            }
           }}
           validationSchema={Yup.object().shape({
             reason_delete: Yup.string().required("Required")
@@ -70,8 +76,13 @@ export const MandatairesDeleteMesure = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        setPanelType(PANEL_TYPE.CLOSE);
-                        setCurrentMesure(null);
+                        if (!isPage) {
+                          setPanelType(PANEL_TYPE.CLOSE);
+                          setCurrentMesure(null);
+                        } else {
+                          // TODO transform me in cancel function passed to the component
+                          Router.push(`/mandataires`);
+                        }
                       }}
                     >
                       Annuler
@@ -92,6 +103,6 @@ export const MandatairesDeleteMesure = props => {
   );
 };
 
-MandatairesDeleteMesure.propTypes = {
+MandataireMesureDeleteForm.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };
