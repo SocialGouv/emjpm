@@ -33,6 +33,11 @@ jobs:
       if: NOT (env(RELEASE) OR env(PRODUCTION))
       stage: Build
       name: Build and test
+      cache:
+        directories:
+          - $HOME/.cache/yarn
+          - node_modules
+          - packages/app/.next/cache
       install:
         # Start the database first so it has the time to boot before we interact with it.
         - docker-compose up -d db
