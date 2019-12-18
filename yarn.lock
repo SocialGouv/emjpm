@@ -15390,7 +15390,7 @@ styled-icons@^9.0.1, styled-icons@^9.1.0:
     "@styled-icons/typicons" "^9.0.1"
     tslib "^1.9.3"
 
-styled-jsx@3.2.4, styled-jsx@^3.2.1:
+styled-jsx@3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/styled-jsx/-/styled-jsx-3.2.4.tgz#cbcdedcfb81d717fd355c4a0d8443f8e74527b60"
   integrity sha512-UMclQzI1lss38RhyjTf7SmtXJEMbB6Q9slDz8adGtzHjirYb1PPgeWLSP8SlZc8c9f3LF6axmtv+6K/553ANdg==
