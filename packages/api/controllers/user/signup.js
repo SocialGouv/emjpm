@@ -40,7 +40,9 @@ const createMandataire = async (mandataire, user_id) => {
     department_id,
     ville,
     dispo_max,
-    siret
+    siret,
+    latitude,
+    longitude
   } = mandataire;
 
   return Mandataire.query()
@@ -57,7 +59,9 @@ const createMandataire = async (mandataire, user_id) => {
       code_postal,
       department_id,
       ville,
-      dispo_max
+      dispo_max,
+      latitude,
+      longitude
     });
 };
 
