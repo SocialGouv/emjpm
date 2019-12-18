@@ -12,5 +12,6 @@ variables:
   DOCKER_VERSION: "18"
   PYTHON_VERSION: "3.6-alpine"
 
+  PROJECT: emjpm
   RANCHER_PROJECT_ID: c-kk8xm:p-dpgpt
 
