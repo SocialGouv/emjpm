@@ -1,14 +1,16 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MandataireContextProvider, Mandatairelist } from "@socialgouv/emjpm-ui-components";
-import { Card, Heading4, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading4, Input, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
+import { useDebounce } from "../../lib/hooks";
 import { MagistratChoose } from "./MagistratChoose";
 import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";
 import { formatMandatairesList } from "./utils";
+
 const optionsType = [
   { label: "Tous les types", value: null },
   { label: "Préposé", value: "MANDATAIRE_PRE" },
@@ -33,7 +35,9 @@ const MagistratMandatairesList = props => {
     label: "Du plus disponible au moins disponible",
     value: "desc_nulls_last"
   });
+  const [searchText, changeSearchText] = useState(null);
   const [currentOffset, setCurrentOffset] = useState(0);
+  const debouncedSearchText = useDebounce(searchText, 2000);
 
   const { data, error, loading } = useQuery(GET_MANDATAIRES, {
     variables: {
@@ -41,7 +45,8 @@ const MagistratMandatairesList = props => {
       limit: RESULT_PER_PAGE,
       offset: currentOffset,
       order: selectedCapacity ? selectedCapacity.value : null,
-      tribunal: ti_id
+      tribunal: ti_id,
+      searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null
     }
   });
 
@@ -79,6 +84,17 @@ const MagistratMandatairesList = props => {
                 onChange={option => setType(option)}
                 value={selectedType}
                 options={optionsType}
+              />
+            </Box>
+            <Box width="200px" mr={1}>
+              <Input
+                value={searchText}
+                spellCheck="false"
+                autoComplete="false"
+                onChange={event => changeSearchText(event.target.value)}
+                name="search"
+                size="small"
+                placeholder="mandataire / service"
               />
             </Box>
             <Box width="200px">

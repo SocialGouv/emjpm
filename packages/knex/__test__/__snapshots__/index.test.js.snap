@@ -1359,6 +1359,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "character varying",
+  },
   "remaining_capacity": Object {
     "defaultValue": null,
     "maxLength": null,
