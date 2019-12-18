@@ -11,12 +11,7 @@ const AddServicePage = () => {
     <LayoutAdmin hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
         <Heading1>{`Création d'un tribunal`}</Heading1>
-        <Flex
-          sx={{
-            flexWrap: "wrap",
-            mt: "2"
-          }}
-        >
+        <Flex flexWrap="wrap" mt="2">
           <AdminAddService />
         </Flex>
       </BoxWrapper>
