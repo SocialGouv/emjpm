@@ -1,10 +1,12 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import { Card } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
 import React from "react";
 
 import { AdminServiceForm } from "./AdminServiceForm";
 import { ADD_SERVICE } from "./mutations";
 import { DEPARTEMENTS } from "./queries";
+import { cardStyle } from "./style";
 
 export const AdminAddService = () => {
   const [addService] = useMutation(ADD_SERVICE, {
@@ -52,5 +54,9 @@ export const AdminAddService = () => {
     Router.push("/admin/services");
   };
 
-  return <AdminServiceForm handleSubmit={handleSubmit} handleCancel={handleCancel} />;
+  return (
+    <Card sx={cardStyle} width="100%">
+      <AdminServiceForm handleSubmit={handleSubmit} handleCancel={handleCancel} />
+    </Card>
+  );
 };
