@@ -64,9 +64,6 @@
     "react-svgmt": "^1.1.8",
     "rebass": "^4.0.2",
     "recharts": "^1.7.1",
-    "redux": "^4.0.4",
-    "redux-modal": "^3.0.1",
-    "redux-thunk": "^2.3.0",
     "styled-components": "^4.3.2",
     "styled-icons": "^9.0.1",
     "styled-jsx": "^3.2.1",
@@ -91,7 +88,6 @@
     "next-transpile-modules": "^2.3.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
-    "redux-devtools-extension": "^2.13.8",
     "style-loader": "^0.23.1",
     "webpack": "^4.41.2"
   }
