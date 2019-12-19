@@ -274,7 +274,7 @@ export const MandatairesAddMesure = props => {
               <Flex justifyContent="flex-end">
                 <Box>
                   <Button mr="2" variant="outline">
-                    <Link href="/mandatairess">
+                    <Link href="/mandataires">
                       <a>Annuler</a>
                     </Link>
                   </Button>
