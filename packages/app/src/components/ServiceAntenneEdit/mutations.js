@@ -12,8 +12,10 @@ export const EDIT_ANTENNE = gql`
     $contact_firstname: String
     $contact_email: String
     $address_zip_code: String
-    $address_street: String
+    $address: String
     $address_city: String
+    $latitude: Float
+    $longitude: Float
   ) {
     update_service_antenne(
       where: { id: { _eq: $antenne_id } }
@@ -25,14 +27,18 @@ export const EDIT_ANTENNE = gql`
         contact_firstname: $contact_firstname
         contact_email: $contact_email
         address_zip_code: $address_zip_code
-        address_street: $address_street
+        address: $address
         address_city: $address_city
+        latitude: $latitude
+        longitude: $longitude
       }
     ) {
       returning {
         address_city
-        address_street
+        address
         address_zip_code
+        latitude
+        longitude
         contact_email
         contact_firstname
         contact_lastname
