@@ -55,7 +55,7 @@
     "nodemailer-mock": "^1.4.4",
     "nodemon": "^1.19.0",
     "pg": "^7.11.0",
-    "pg-query-stream": "^2.0.0",
+    "pg-query-stream": "^2.0.1",
     "prettier": "^1.19.1",
     "rewiremock": "^3.13.6",
     "supertest": "^4.0.2"
