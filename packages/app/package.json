@@ -31,6 +31,7 @@
     "@socialgouv/emjpm-ui-theme": "^1.9.1",
     "@zeit/next-css": "^1.0.1",
     "apollo-boost": "^0.4.7",
+    "apollo-client": "^2.6.8",
     "apollo-link-context": "^1.0.19",
     "babel-plugin-polished": "^1.1.0",
     "cookie": "^0.4.0",
@@ -39,14 +40,14 @@
     "eslint-plugin-simple-import-sort": "^4.0.0",
     "eslint-plugin-sort-keys-fix": "^1.1.0",
     "formik": "^2.0.8",
-    "graphql": "^14.4.2",
+    "graphql": "^14.5.8",
     "isomorphic-fetch": "^2.2.1",
     "isomorphic-unfetch": "^3.0.0",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^2.2.0",
     "lodash.flow": "^3.5.0",
     "mapbox-gl": "^1.6.1",
-    "next": "^9.1.5",
+    "next": "^9.1.6",
     "next-cookies": "^2.0.3",
     "next-images": "^1.2.0",
     "p-debounce": "^2.1.0",
@@ -73,6 +74,8 @@
     "@babel/cli": "^7.7.7",
     "@babel/core": "^7.7.7",
     "@socialgouv/eslint-config-react": "^0.11.1",
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.16",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.3",
     "enzyme": "^3.9.0",
@@ -86,6 +89,6 @@
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
     "style-loader": "^0.23.1",
-    "webpack": "^4.41.3"
+    "webpack": "^4.41.4"
   }
 }
