@@ -10,7 +10,7 @@ COPY package.json yarn.lock /app/
 RUN yarn --production --frozen-lockfile --no-cache
 
 COPY ./next.config.js /app/
-COPY ./static/ /app/static
+COPY ./public/ /app/public
 COPY .next /app/.next
 
 ENTRYPOINT ["yarn", "start:build"]
