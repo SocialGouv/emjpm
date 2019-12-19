@@ -5,7 +5,7 @@
 export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
 export COMMIT_TAG=${COMMIT_TAG:=$CI_COMMIT_TAG}
 export COMMIT=${COMMIT:=$CI_COMMIT_SHA}
-export ENVIRONMENT=${ENVIRONMENT:="emjpm-dev"};
+export ENVIRONMENT=${ENVIRONMENT:="staging"};
 export HASH_SIZE=${HASH_SIZE:=7}
 export JOB_ID=${JOB_ID:=$CI_JOB_ID}
 export NODE_ENV=${NODE_ENV:="development"}
@@ -26,11 +26,13 @@ export POSTGRES_DATABASE="emjpm"
 #
 
 if [[ "${BRANCH_NAME}" = "master" ]]; then
+  export ENVIRONMENT="dev"
   export BRANCH_HASH=master;
   export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
 fi
 
 if [[ -n "${COMMIT_TAG}" ]]; then
+  export ENVIRONMENT="preproduction"
   export NODE_ENV="production"
   export IMAGE_TAG=$(printf "${COMMIT_TAG}" | sed "s/^v//")
   export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
@@ -40,6 +42,7 @@ fi
 #
 
 if [[ -n "${PRODUCTION+x}" ]]; then
+  export ENVIRONMENT="production"
   export BRANCH_HASH=prod;
   export K8S_NAMESPACE="emjpm"
   #
