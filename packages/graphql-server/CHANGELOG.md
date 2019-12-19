@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.12.1](https://github.com/SocialGouv/emjpm/compare/v25.12.0...v25.12.1) (2019-12-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency lodash to ^4.17.15 ([#1226](https://github.com/SocialGouv/emjpm/issues/1226)) ([cec044d](https://github.com/SocialGouv/emjpm/commit/cec044dbad3712a3a32f86325c39c414251bb5eb))
+
+
+
+
+
 # [25.12.0](https://github.com/SocialGouv/emjpm/compare/v25.11.5...v25.12.0) (2019-12-19)
 
 

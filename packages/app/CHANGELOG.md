@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.12.1](https://github.com/SocialGouv/emjpm/compare/v25.12.0...v25.12.1) (2019-12-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mapbox-gl to ^1.6.1 ([#1227](https://github.com/SocialGouv/emjpm/issues/1227)) ([87f213d](https://github.com/SocialGouv/emjpm/commit/87f213d95a2f1f8c4eccab875bd04e6453054240))
+* **deps:** update dependency next to ^9.1.6 ([#1228](https://github.com/SocialGouv/emjpm/issues/1228)) ([350f3e2](https://github.com/SocialGouv/emjpm/commit/350f3e2d5102733f92189081e09b59678363fcbc))
+* **metadata-mandataires:** add antenne to mandataires permissions ([#1243](https://github.com/SocialGouv/emjpm/issues/1243)) ([db14297](https://github.com/SocialGouv/emjpm/commit/db14297ef5512ebbf23843de95b8418c580f2b57))
+
+
+
+
+
 # [25.12.0](https://github.com/SocialGouv/emjpm/compare/v25.11.5...v25.12.0) (2019-12-19)
 
 
