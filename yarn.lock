@@ -12169,7 +12169,7 @@ objection-db-errors@^1.1.2:
   dependencies:
     db-errors "^0.2.1"
 
-objection@^1.6.9:
+objection@^1.6.11:
   version "1.6.11"
   resolved "https://registry.yarnpkg.com/objection/-/objection-1.6.11.tgz#6755c15300277eee76c44faf4295704d8e2e02e2"
   integrity sha512-/W6iR6+YvFg1U4k5DyX1MrY+xqodDM8AAOU1J0b3HlptsNw8V3uDHjZgTi1cFPPe5+ZeTTMvhIFhNiUP6+nqYQ==
