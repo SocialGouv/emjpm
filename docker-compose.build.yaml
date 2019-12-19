@@ -5,9 +5,11 @@ version: "3"
 #
 # Listening ports :
 #
-#  - 5434 : postgres
-#  - 5000 : frontend
+#  - 3000 : frontend
 #  - 4000 : api
+#  - 4001 : graphql-server
+#  - 5000 : hasura
+#  - 5434 : postgres
 #
 
 services:
@@ -18,7 +20,7 @@ services:
     build:
       context: packages/api
       dockerfile: Dockerfile
-    env_file: .env.test
+    env_file: .env.build
     ports:
       - 4000:4000
     depends_on:
@@ -29,12 +31,12 @@ services:
   graphql-server:
     build:
       context: packages/graphql-server
-    env_file: .env.test
+    env_file: .env.build
     ports:
       - 4001:4001
 
   frontend:
-    env_file: .env.test
+    env_file: .env.build
     build:
       context: ./packages/app
       dockerfile: Dockerfile
