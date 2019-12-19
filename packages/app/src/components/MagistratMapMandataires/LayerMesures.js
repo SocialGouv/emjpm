@@ -1,7 +1,7 @@
 import React from "react";
 import { Feature, Layer } from "react-mapbox-gl";
 
-import iconMarker from "../../../static/images/map-icon-mesure@2x.png";
+import iconMarker from "../../../public/static/images/map-icon-mesure@2x.png";
 
 const image = new Image(60, 72);
 image.src = iconMarker;
