@@ -2802,7 +2802,7 @@
     styled-icons "^9.1.0"
     theme-ui "^0.2.52"
 
-"@socialgouv/emjpm-ui-core@^1.13.1", "@socialgouv/emjpm-ui-core@^1.13.3":
+"@socialgouv/emjpm-ui-core@^1.13.3":
   version "1.13.3"
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.13.3.tgz#0af2ccdfaf78afb4b5fd43d9957a049240f093a8"
   integrity sha512-EKkJvJ4HMYdvhuUcI5EpMv51b9iGFJJzsCm/2eK4PhXaVhGbSG66c2Lr8yKG+PZgH95iGfweQqiyfVbL90qRFQ==
@@ -2846,7 +2846,7 @@
     eslint-plugin-react "~7.17.0"
     eslint-plugin-react-hooks "~2.3.0"
 
-"@socialgouv/eslint-config-recommended@^0.11.0", "@socialgouv/eslint-config-recommended@^0.11.1":
+"@socialgouv/eslint-config-recommended@^0.11.1":
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-recommended/-/eslint-config-recommended-0.11.1.tgz#0bc9d33ce7b59a639c0c36e2193ecc513269490b"
   integrity sha512-gw7UN1CNtJD+kCuBHawZszxxAahLda1GdXhQYTjCWFbkP7S8GAF2/MKZPuKfyd1Tzsngyq0oNfoMO7Ab/hsLnA==
