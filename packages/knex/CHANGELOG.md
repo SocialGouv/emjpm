@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.12.0](https://github.com/SocialGouv/emjpm/compare/v25.11.5...v25.12.0) (2019-12-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency knex to ^0.20.4 ([#1103](https://github.com/SocialGouv/emjpm/issues/1103)) ([267a0f9](https://github.com/SocialGouv/emjpm/commit/267a0f91c88d995867c7da08fa9e6069aba2ab0f))
+
+
+### Features
+
+* **magistrat:** add mandataire search input ([#1169](https://github.com/SocialGouv/emjpm/issues/1169)) ([f0bbcab](https://github.com/SocialGouv/emjpm/commit/f0bbcab154310ac9ad88150efe96db1928855d40))
+* **map:** add maps ([#894](https://github.com/SocialGouv/emjpm/issues/894)) ([cb142e0](https://github.com/SocialGouv/emjpm/commit/cb142e0db1756be7e611be359e68b53f4ba53d76)), closes [#1110](https://github.com/SocialGouv/emjpm/issues/1110) [#1109](https://github.com/SocialGouv/emjpm/issues/1109)
+* **map:** introduce maps ([#1125](https://github.com/SocialGouv/emjpm/issues/1125)) ([491fab1](https://github.com/SocialGouv/emjpm/commit/491fab17acc2c897c73035c5175486a982747199))
+
+
+
+
+
 ## [25.11.5](https://github.com/SocialGouv/emjpm/compare/v25.11.4...v25.11.5) (2019-12-09)
 
 **Note:** Version bump only for package @emjpm/knex
