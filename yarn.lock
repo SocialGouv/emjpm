@@ -7659,7 +7659,7 @@ expect@^24.9.0:
     jest-message-util "^24.9.0"
     jest-regex-util "^24.9.0"
 
-express-validator@^6.1.1:
+express-validator@^6.3.0:
   version "6.3.0"
   resolved "https://registry.yarnpkg.com/express-validator/-/express-validator-6.3.0.tgz#db40dca4228c8cd6524b929ead1876520aee3dee"
   integrity sha512-qzKJaUg6BrcRBeZH+QNq2G8/QrLOuaozWKFeeod1oVcMcdauDiTxgbvQeWkhCSlS9V37mx/CVaXKvpRBjR0IeQ==
