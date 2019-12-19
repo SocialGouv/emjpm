@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.13.0](https://github.com/SocialGouv/emjpm/compare/v25.12.1...v25.13.0) (2019-12-19)
+
+
+### Bug Fixes
+
+* **1255:** fix mandataires url typo ([#1268](https://github.com/SocialGouv/emjpm/issues/1268)) ([0ee5c47](https://github.com/SocialGouv/emjpm/commit/0ee5c47b64fca3c866183949bc3014eeb354f89c))
+* **deps:** update dependency polished to ^3.4.2 ([#1245](https://github.com/SocialGouv/emjpm/issues/1245)) ([d0a1598](https://github.com/SocialGouv/emjpm/commit/d0a1598913b055aa943bbecafe311fb530895f73))
+* **next:** move static dir in public dir ([#1269](https://github.com/SocialGouv/emjpm/issues/1269)) ([401808d](https://github.com/SocialGouv/emjpm/commit/401808d3006757ef7b09acb76089a1fab811e830))
+
+
+### Features
+
+* **geocode:** add geocode to antenne create ([#1242](https://github.com/SocialGouv/emjpm/issues/1242)) ([43a04e6](https://github.com/SocialGouv/emjpm/commit/43a04e6c59e24df88e4ac81374a9884e5f89bb8e))
+* **mandataire-import:** add xls template ([#1270](https://github.com/SocialGouv/emjpm/issues/1270)) ([e712d27](https://github.com/SocialGouv/emjpm/commit/e712d2745b69eba051532e5fd66d8e1d80631669))
+
+
+
+
+
 ## [25.12.1](https://github.com/SocialGouv/emjpm/compare/v25.12.0...v25.12.1) (2019-12-19)
 
 

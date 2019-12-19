@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.13.0](https://github.com/SocialGouv/emjpm/compare/v25.12.1...v25.13.0) (2019-12-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency graphql to ^14.5.8 ([#1221](https://github.com/SocialGouv/emjpm/issues/1221)) ([42e50da](https://github.com/SocialGouv/emjpm/commit/42e50dabbc4c25e9d259e6226063c8ca114dd8a1))
+
+
+
+
+
 ## [25.12.1](https://github.com/SocialGouv/emjpm/compare/v25.12.0...v25.12.1) (2019-12-19)
 
 

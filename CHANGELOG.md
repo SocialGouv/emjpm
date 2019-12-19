@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.13.0](https://github.com/SocialGouv/emjpm/compare/v25.12.1...v25.13.0) (2019-12-19)
+
+
+### Bug Fixes
+
+* **1255:** fix mandataires url typo ([#1268](https://github.com/SocialGouv/emjpm/issues/1268)) ([0ee5c47](https://github.com/SocialGouv/emjpm/commit/0ee5c47b64fca3c866183949bc3014eeb354f89c))
+* **deps:** update dependency graphql to ^14.5.8 ([#1221](https://github.com/SocialGouv/emjpm/issues/1221)) ([42e50da](https://github.com/SocialGouv/emjpm/commit/42e50dabbc4c25e9d259e6226063c8ca114dd8a1))
+* **deps:** update dependency knex to ^0.20.4 ([#1222](https://github.com/SocialGouv/emjpm/issues/1222)) ([22d6ef9](https://github.com/SocialGouv/emjpm/commit/22d6ef9430c0929c266fb35878f3a9a7e0f76435))
+* **deps:** update dependency objection-db-errors to ^1.1.2 ([#1231](https://github.com/SocialGouv/emjpm/issues/1231)) ([d556eb3](https://github.com/SocialGouv/emjpm/commit/d556eb3f14b474d6a8da2aa686a69974b61caff1))
+* **deps:** update dependency passport to ^0.4.1 ([#1232](https://github.com/SocialGouv/emjpm/issues/1232)) ([6cfef32](https://github.com/SocialGouv/emjpm/commit/6cfef32367caa4a8eb93ef3f22d2417f8ac7b16e))
+* **deps:** update dependency polished to ^3.4.2 ([#1245](https://github.com/SocialGouv/emjpm/issues/1245)) ([d0a1598](https://github.com/SocialGouv/emjpm/commit/d0a1598913b055aa943bbecafe311fb530895f73))
+* **hasura-permission:** remove mandataire role ([#1257](https://github.com/SocialGouv/emjpm/issues/1257)) ([54e7c35](https://github.com/SocialGouv/emjpm/commit/54e7c3594f522fa0de052664e9e0362de97ebfea))
+* **next:** move static dir in public dir ([#1269](https://github.com/SocialGouv/emjpm/issues/1269)) ([401808d](https://github.com/SocialGouv/emjpm/commit/401808d3006757ef7b09acb76089a1fab811e830))
+
+
+### Features
+
+* **geocode:** add geocode to antenne create ([#1242](https://github.com/SocialGouv/emjpm/issues/1242)) ([43a04e6](https://github.com/SocialGouv/emjpm/commit/43a04e6c59e24df88e4ac81374a9884e5f89bb8e))
+* **mandataire-import:** add xls template ([#1270](https://github.com/SocialGouv/emjpm/issues/1270)) ([e712d27](https://github.com/SocialGouv/emjpm/commit/e712d2745b69eba051532e5fd66d8e1d80631669))
+
+
+
+
+
 ## [25.12.1](https://github.com/SocialGouv/emjpm/compare/v25.12.0...v25.12.1) (2019-12-19)
 
 
