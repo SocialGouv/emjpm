@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.13.0](https://github.com/SocialGouv/emjpm/compare/v25.12.1...v25.13.0) (2019-12-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency objection-db-errors to ^1.1.2 ([#1231](https://github.com/SocialGouv/emjpm/issues/1231)) ([d556eb3](https://github.com/SocialGouv/emjpm/commit/d556eb3f14b474d6a8da2aa686a69974b61caff1))
+* **deps:** update dependency passport to ^0.4.1 ([#1232](https://github.com/SocialGouv/emjpm/issues/1232)) ([6cfef32](https://github.com/SocialGouv/emjpm/commit/6cfef32367caa4a8eb93ef3f22d2417f8ac7b16e))
+
+
+
+
+
 ## [25.12.1](https://github.com/SocialGouv/emjpm/compare/v25.12.0...v25.12.1) (2019-12-19)
 
 **Note:** Version bump only for package @emjpm/api
