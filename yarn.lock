@@ -2786,10 +2786,10 @@
     "@sentry/types" "5.10.0"
     tslib "^1.9.3"
 
-"@socialgouv/emjpm-ui-components@0.49.0":
-  version "0.49.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.49.0.tgz#860b32a3388fea720456e9c613cd3f689ca57dc4"
-  integrity sha512-uHrCYPlfzwIr9quZOM8/Z3Y2H+bg2YF5R8mKhuAyvtvab83UMHmrpUATgXCSBhOMLO6srUk9+ccOPcBnNdcCxw==
+"@socialgouv/emjpm-ui-components@0.50.0":
+  version "0.50.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.50.0.tgz#67e641994052871de1ef7e59dafd0acbba59f4e7"
+  integrity sha512-TmKpn4c96uJyYmnfIvaEEXeSpb4n29tWPp9IyErktaDbyOBp6bmAGuanLkrvUa8FTclTNIo/y+N9OHXy8+OHFA==
   dependencies:
     "@emotion/core" "^10.0.22"
     "@emotion/styled" "^10.0.23"
@@ -2846,7 +2846,7 @@
     eslint-plugin-react "~7.17.0"
     eslint-plugin-react-hooks "~2.3.0"
 
-"@socialgouv/eslint-config-recommended@^0.11.0", "@socialgouv/eslint-config-recommended@^0.11.1":
+"@socialgouv/eslint-config-recommended@^0.11.1":
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/@socialgouv/eslint-config-recommended/-/eslint-config-recommended-0.11.1.tgz#0bc9d33ce7b59a639c0c36e2193ecc513269490b"
   integrity sha512-gw7UN1CNtJD+kCuBHawZszxxAahLda1GdXhQYTjCWFbkP7S8GAF2/MKZPuKfyd1Tzsngyq0oNfoMO7Ab/hsLnA==
