@@ -1551,7 +1551,7 @@ tables:
   select_permissions:
   - comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       columns:
       - antenne_id
       - file_size
