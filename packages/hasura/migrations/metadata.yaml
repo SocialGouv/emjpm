@@ -1847,6 +1847,28 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - name
+      computed_fields: []
+      filter:
+        user_antennes:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - name
+      computed_fields: []
+      filter:
+        user_antennes:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
       - id
       - service_id
       - name
