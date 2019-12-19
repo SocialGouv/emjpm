@@ -13985,7 +13985,7 @@ react-smooth@^1.0.5:
     raf "^3.4.0"
     react-transition-group "^2.5.0"
 
-react-svgmt@^1.1.8:
+react-svgmt@^1.1.9:
   version "1.1.9"
   resolved "https://registry.yarnpkg.com/react-svgmt/-/react-svgmt-1.1.9.tgz#b9f20eb5155a9a2e9d42fa9f82fa81d98fa6ba83"
   integrity sha512-nR7GYuaKKTC/d1YaPto2U1r+Hdh7IJeEajGLbwY/QK3JOWO0xaNUgNN3+wqfoFikG+Hmfq/jde7Nrt5jE895xw==
