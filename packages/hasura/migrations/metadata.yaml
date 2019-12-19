@@ -12,6 +12,196 @@ remote_schemas:
   name: remote_schema
 tables:
 - array_relationships: []
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships: []
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      computed_fields: []
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - latitude
+      - longitude
+      - ville
+      computed_fields: []
+      filter: {}
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      computed_fields: []
+      filter: {}
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      computed_fields: []
+      filter: {}
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - code_postal
+      - ville
+      - latitude
+      - longitude
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: city
+  update_permissions: []
+- array_relationships: []
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions:
+  - comment: null
+    permission:
+      filter:
+        ti:
+          magistrats:
+            user:
+              id:
+                _eq: X-Hasura-User-Id
+    role: ti
+  event_triggers: []
+  insert_permissions:
+  - comment: null
+    permission:
+      check:
+        ti:
+          magistrats:
+            user:
+              id:
+                _eq: X-Hasura-User-Id
+      columns:
+      - comment
+      - created_at
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      set: {}
+    role: ti
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: mandataire
+    using:
+      foreign_key_constraint_on: mandataire_id
+  - comment: null
+    name: service_antenne
+    using:
+      foreign_key_constraint_on: antenne_id
+  - comment: null
+    name: ti
+    using:
+      foreign_key_constraint_on: ti_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - comment
+      - created_at
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      computed_fields: []
+      filter:
+        ti:
+          magistrats:
+            user:
+              id:
+                _eq: X-Hasura-User-Id
+    role: ti
+  table: commentaires
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - comment
+      - created_at
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      filter:
+        ti:
+          magistrats:
+            user:
+              id:
+                _eq: X-Hasura-User-Id
+      set: {}
+    role: ti
+- array_relationships:
+  - comment: null
+    name: mandataires
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table: mandataires
+  - comment: null
+    name: mesures
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table: mesures
+  - comment: null
+    name: services
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table: services
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -27,39 +217,80 @@ tables:
   is_enum: false
   object_relationships:
   - comment: null
-    name: user
+    name: region
     using:
-      foreign_key_constraint_on: user_id
-  - comment: null
-    name: service
-    using:
-      foreign_key_constraint_on: service_id
+      foreign_key_constraint_on: id_region
   select_permissions:
   - comment: null
     permission:
       allow_aggregations: false
       columns:
       - id
-      - user_id
-      - service_id
+      - id_region
+      - code
+      - nom
       computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+      filter: {}
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - id_region
+      - code
+      - nom
+      computed_fields: []
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - id_region
+      - code
+      - nom
+      computed_fields: []
+      filter: {}
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - id_region
+      - code
+      - nom
+      computed_fields: []
+      filter: {}
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - id_region
+      - code
+      - nom
+      computed_fields: []
+      filter: {}
     role: service
   - comment: null
     permission:
       allow_aggregations: false
       columns:
       - id
-      - user_id
-      - service_id
+      - id_region
+      - code
+      - nom
       computed_fields: []
       filter: {}
     role: ti
-  table: service_admin
+  table: departements
   update_permissions: []
 - array_relationships: []
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -116,101 +347,20 @@ tables:
       set:
         user_id: x-hasura-User-Id
     role: direction
-- array_relationships: []
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions:
-  - comment: null
-    permission:
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: service
-  event_triggers: []
-  insert_permissions:
-  - comment: null
-    permission:
-      check: {}
-      columns:
-      - id
-      - user_id
-      - antenne_id
-      set: {}
-    role: service
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: user
-    using:
-      foreign_key_constraint_on: user_id
-  - comment: null
-    name: service_antenne
-    using:
-      foreign_key_constraint_on: antenne_id
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - user_id
-      - antenne_id
-      computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: service
-  table: user_antenne
-  update_permissions:
-  - comment: null
-    permission:
-      columns:
-      - antenne_id
-      - id
-      - user_id
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-      set: {}
-    role: service
 - array_relationships:
   - comment: null
-    name: magistrats
+    name: mandataire_etablissements
     using:
       foreign_key_constraint_on:
-        column: ti_id
-        table: magistrat
-  - comment: null
-    name: commentaires
-    using:
-      foreign_key_constraint_on:
-        column: ti_id
-        table: commentaires
+        column: etablissement_id
+        table: mandataire_etablissements
   - comment: null
     name: mesures
     using:
       foreign_key_constraint_on:
-        column: ti_id
+        column: etablissement_id
         table: mesures
-  - comment: null
-    name: service_tis
-    using:
-      foreign_key_constraint_on:
-        column: ti_id
-        table: service_tis
-  - comment: null
-    name: user_tis
-    using:
-      foreign_key_constraint_on:
-        column: ti_id
-        table: user_tis
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -231,27 +381,29 @@ tables:
       allow_aggregations: false
       columns:
       - id
-      - etablissement
-      - email
+      - id_finess
+      - nom
+      - adresse
       - code_postal
       - ville
-      - telephone
-      - created_at
-      - siret
+      - tel
+      - fax
       computed_fields: []
       filter: {}
-    role: individuel
+    role: direction
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - code_postal
-      - created_at
-      - email
-      - etablissement
+      - latitude
+      - longitude
       - id
-      - siret
-      - telephone
+      - adresse
+      - code_postal
+      - fax
+      - id_finess
+      - nom
+      - tel
       - ville
       computed_fields: []
       filter: {}
@@ -260,24 +412,16 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - code_postal
-      - etablissement
       - id
-      - ville
-      computed_fields: []
-      filter: {}
-    role: anonymous
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - etablissement
-      - email
+      - id_finess
+      - nom
+      - adresse
       - code_postal
       - ville
-      - telephone
-      - created_at
+      - tel
+      - fax
+      - latitude
+      - longitude
       computed_fields: []
       filter: {}
     role: service
@@ -285,154 +429,23 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - latitude
+      - longitude
       - id
-      - etablissement
-      - email
+      - adresse
       - code_postal
+      - fax
+      - id_finess
+      - nom
+      - tel
       - ville
-      - telephone
-      - created_at
-      computed_fields: []
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - etablissement
-      - email
-      - code_postal
-      - ville
-      - telephone
-      - created_at
-      - siret
       computed_fields: []
       filter: {}
     role: ti
-  table: tis
-  update_permissions: []
-- array_relationships:
-  - comment: null
-    name: departements
-    using:
-      foreign_key_constraint_on:
-        column: id_region
-        table: departements
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
-  object_relationships: []
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - nom
-      computed_fields: []
-      filter: {}
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - nom
-      computed_fields: []
-      filter: {}
-    role: anonymous
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - nom
-      computed_fields: []
-      filter: {}
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - nom
-      computed_fields: []
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - nom
-      computed_fields: []
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - nom
-      computed_fields: []
-      filter: {}
-    role: service
-  table: regions
+  table: etablissements
   update_permissions: []
 - array_relationships: []
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: ti
-    using:
-      foreign_key_constraint_on: ti_id
-  - comment: null
-    name: service
-    using:
-      foreign_key_constraint_on: service_id
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - service_id
-      - ti_id
-      computed_fields: []
-      filter: {}
-    role: service
-  table: service_tis
-  update_permissions: []
-- array_relationships:
-  - comment: null
-    name: user_roles
-    using:
-      foreign_key_constraint_on:
-        column: role_id
-        table: user_role
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -453,34 +466,10 @@ tables:
       allow_aggregations: false
       columns:
       - id
-      - name
-      computed_fields: []
-      filter: {}
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - name
-      computed_fields: []
-      filter: {}
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - name
-      computed_fields: []
-      filter: {}
-    role: anonymous
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - name
+      - code_postal
+      - latitude
+      - longitude
+      - cities
       computed_fields: []
       filter: {}
     role: direction
@@ -488,410 +477,49 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - cities
+      - code_postal
       - id
-      - name
+      - latitude
+      - longitude
+      computed_fields: []
+      filter: {}
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - latitude
+      - longitude
+      - id
+      - cities
+      - code_postal
       computed_fields: []
       filter: {}
     role: prepose
   - comment: null
     permission:
       allow_aggregations: false
+      columns: []
+      computed_fields: []
+      filter: {}
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
       columns:
+      - latitude
+      - longitude
       - id
-      - name
+      - cities
+      - code_postal
       computed_fields: []
       filter: {}
     role: ti
-  table: role
+  table: geolocalisation_code_postal
   update_permissions: []
-- array_relationships:
-  - comment: null
-    name: user_antennes
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table: user_antenne
-  - comment: null
-    name: user_tis
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table: user_tis
-  - comment: null
-    name: user_roles
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table: user_role
-  - comment: null
-    name: service_admins
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table: service_admin
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers:
-  - definition:
-      enable_manual: false
-      update:
-        columns:
-        - active
-    headers: []
-    name: email-account-validation
-    retry_conf:
-      interval_sec: 10
-      num_retries: 0
-      timeout_sec: 60
-    webhook_from_env: WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION
-  insert_permissions:
-  - comment: null
-    permission:
-      check:
-        id:
-          _eq: X-Hasura-User-Id
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      set: {}
-    role: individuel
-  - comment: null
-    permission:
-      check:
-        id:
-          _eq: X-Hasura-User-Id
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      set: {}
-    role: prepose
-  - comment: null
-    permission:
-      check:
-        id:
-          _eq: X-Hasura-User-Id
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      set: {}
-    role: ti
-  - comment: null
-    permission:
-      check: {}
-      columns:
-      - id
-      - username
-      - password
-      - created_at
-      - type
-      - last_login
-      - active
-      - reset_password_token
-      - reset_password_expires
-      - nom
-      - prenom
-      - cabinet
-      - email
-      set: {}
-    role: direction
-  - comment: null
-    permission:
-      check: {}
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      set: {}
-    role: service
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: mandataire
-    using:
-      manual_configuration:
-        column_mapping:
-          id: user_id
-        remote_table: mandataires
-  - comment: null
-    name: magistrat
-    using:
-      manual_configuration:
-        column_mapping:
-          id: user_id
-        remote_table: magistrat
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - username
-      - password
-      - created_at
-      - type
-      - last_login
-      - active
-      - reset_password_token
-      - reset_password_expires
-      - nom
-      - prenom
-      - cabinet
-      - email
-      computed_fields: []
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - email
-      computed_fields: []
-      filter:
-        email:
-          _eq: X-Hasura-Email
-      limit: 1
-    role: anonymous
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - cabinet
-      - created_at
-      - email
-      - id
-      - last_login
-      - nom
-      - prenom
-      - type
-      - username
-      computed_fields: []
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      computed_fields: []
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      computed_fields: []
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      computed_fields: []
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-    role: prepose
-  table: users
-  update_permissions:
-  - comment: null
-    permission:
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-      set: {}
-    role: individuel
-  - comment: null
-    permission:
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-      set: {}
-    role: direction
-  - comment: null
-    permission:
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-      set: {}
-    role: prepose
-  - comment: null
-    permission:
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-      set: {}
-    role: service
-  - comment: null
-    permission:
-      columns:
-      - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
-      - cabinet
-      - email
-      - nom
-      - password
-      - prenom
-      - reset_password_token
-      - type
-      - username
-      filter:
-        id:
-          _eq: X-Hasura-User-Id
-      set: {}
-    role: ti
 - array_relationships: []
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -929,113 +557,8 @@ tables:
     role: ti
   table: magistrat
   update_permissions: []
-- array_relationships:
-  - comment: null
-    name: mesures
-    using:
-      foreign_key_constraint_on:
-        column: department_id
-        table: mesures
-  - comment: null
-    name: mandataires
-    using:
-      foreign_key_constraint_on:
-        column: department_id
-        table: mandataires
-  - comment: null
-    name: services
-    using:
-      foreign_key_constraint_on:
-        column: department_id
-        table: services
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: region
-    using:
-      foreign_key_constraint_on: id_region
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - id_region
-      - code
-      - nom
-      computed_fields: []
-      filter: {}
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - id_region
-      - code
-      - nom
-      computed_fields: []
-      filter: {}
-    role: anonymous
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - id_region
-      - code
-      - nom
-      computed_fields: []
-      filter: {}
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - id_region
-      - code
-      - nom
-      computed_fields: []
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - id_region
-      - code
-      - nom
-      computed_fields: []
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - id_region
-      - code
-      - nom
-      computed_fields: []
-      filter: {}
-    role: service
-  table: departements
-  update_permissions: []
 - array_relationships: []
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -1049,41 +572,31 @@ tables:
   - comment: null
     permission:
       filter:
-        ti:
-          magistrats:
-            user:
-              id:
-                _eq: X-Hasura-User-Id
-    role: ti
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: prepose
   event_triggers: []
   insert_permissions:
   - comment: null
     permission:
       check:
-        ti:
-          magistrats:
-            user:
-              id:
-                _eq: X-Hasura-User-Id
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
       columns:
-      - comment
-      - created_at
+      - etablissement_id
       - id
       - mandataire_id
-      - service_id
-      - ti_id
+      - created_at
       set: {}
-    role: ti
+    role: prepose
   is_enum: false
   object_relationships:
   - comment: null
-    name: ti
+    name: etablissement
     using:
-      foreign_key_constraint_on: ti_id
-  - comment: null
-    name: service_antenne
-    using:
-      foreign_key_constraint_on: antenne_id
+      foreign_key_constraint_on: etablissement_id
   - comment: null
     name: mandataire
     using:
@@ -1093,40 +606,833 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - comment
-      - created_at
+      - etablissement_id
       - id
       - mandataire_id
-      - service_id
-      - ti_id
+      - created_at
       computed_fields: []
       filter:
-        ti:
-          magistrats:
-            user:
-              id:
-                _eq: X-Hasura-User-Id
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - etablissement_id
+      - mandataire_id
+      - created_at
+      computed_fields: []
+      filter: {}
     role: ti
-  table: commentaires
+  table: mandataire_etablissements
   update_permissions:
   - comment: null
     permission:
       columns:
-      - comment
+      - etablissement_id
+      - id
+      - mandataire_id
       - created_at
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      set: {}
+    role: prepose
+- array_relationships:
+  - comment: null
+    name: commentaires
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table: commentaires
+  - comment: null
+    name: mandataire_etablissements
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table: mandataire_etablissements
+  - comment: null
+    name: mesures
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table: mesures
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions:
+  - comment: null
+    permission:
+      check:
+        user_id:
+          _eq: X-Hasura-User-Id
+      columns:
+      - secretariat
+      - nb_secretariat
+      - dispo_max
+      - id
+      - mesures_en_attente
+      - mesures_en_cours
+      - user_id
+      - zip
+      - created_at
+      - date_mesure_update
+      - email_send
+      - adresse
+      - code_postal
+      - etablissement
+      - genre
+      - telephone
+      - telephone_portable
+      - ville
+      set: {}
+    role: prepose
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: departement
+    using:
+      foreign_key_constraint_on: department_id
+  - comment: null
+    name: user
+    using:
+      foreign_key_constraint_on: user_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - siret
+      computed_fields: []
+      filter:
+        siret:
+          _eq: X-Hasura-Siret
+      limit: 1
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - etablissement
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - mesures_en_cours
+      - dispo_max
+      - user_id
+      - telephone_portable
+      - secretariat
+      - nb_secretariat
+      - created_at
+      - date_mesure_update
+      - email_send
+      - genre
+      - mesures_en_attente
+      - zip
+      computed_fields: []
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - etablissement
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - mesures_en_cours
+      - dispo_max
+      - user_id
+      - telephone_portable
+      - secretariat
+      - nb_secretariat
+      - created_at
+      - date_mesure_update
+      - email_send
+      - genre
+      - mesures_en_attente
+      - zip
+      - department_id
+      - siret
+      - latitude
+      - longitude
+      computed_fields: []
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - secretariat
+      - nb_secretariat
+      - dispo_max
+      - id
+      - mesures_en_attente
+      - mesures_en_cours
+      - user_id
+      - zip
+      - created_at
+      - date_mesure_update
+      - email_send
+      - adresse
+      - code_postal
+      - etablissement
+      - genre
+      - telephone
+      - telephone_portable
+      - ville
+      computed_fields: []
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - etablissement
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - mesures_en_cours
+      - dispo_max
+      - user_id
+      - telephone_portable
+      - secretariat
+      - nb_secretariat
+      - created_at
+      - date_mesure_update
+      - email_send
+      - genre
+      - mesures_en_attente
+      - zip
+      - department_id
+      - siret
+      - latitude
+      - longitude
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: mandataires
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - secretariat
+      - latitude
+      - longitude
+      - nb_secretariat
+      - department_id
+      - dispo_max
+      - id
+      - mesures_en_attente
+      - mesures_en_cours
+      - user_id
+      - zip
+      - created_at
+      - date_mesure_update
+      - email_send
+      - adresse
+      - code_postal
+      - etablissement
+      - genre
+      - siret
+      - telephone
+      - telephone_portable
+      - ville
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set: {}
+    role: individuel
+  - comment: null
+    permission:
+      columns:
+      - secretariat
+      - nb_secretariat
+      - dispo_max
+      - id
+      - mesures_en_attente
+      - mesures_en_cours
+      - user_id
+      - zip
+      - created_at
+      - date_mesure_update
+      - email_send
+      - adresse
+      - code_postal
+      - etablissement
+      - genre
+      - telephone
+      - telephone_portable
+      - ville
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      set: {}
+    role: prepose
+  - comment: null
+    permission:
+      columns:
+      - mesures_en_attente
+      - mesures_en_cours
+      filter: {}
+      set: {}
+    role: ti
+- array_relationships: []
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions:
+  - comment: null
+    permission:
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    role: service
+  - comment: null
+    permission:
+      filter:
+        ti:
+          magistrats:
+            user_id:
+              _eq: X-Hasura-User-Id
+    role: ti
+  event_triggers:
+  - definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    headers: []
+    name: email
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: WEB_HOOK_URL_EMAIL_RESERVATION
+  - definition:
+      delete:
+        columns: '*'
+      enable_manual: false
+    headers: []
+    name: email-cancel-reservation
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
+  insert_permissions:
+  - comment: null
+    permission:
+      check:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - latitude
+      - longitude
+      - antenne_id
+      - department_id
+      - etablissement_id
       - id
       - mandataire_id
       - service_id
       - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      set: {}
+    role: individuel
+  - comment: null
+    permission:
+      check:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      set: {}
+    role: prepose
+  - comment: null
+    permission:
+      check:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      set:
+        service_id: x-hasura-Service-Id
+    role: service
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      set: {}
+    role: ti
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: departement
+    using:
+      foreign_key_constraint_on: department_id
+  - comment: null
+    name: etablissementByEtablissementId
+    using:
+      foreign_key_constraint_on: etablissement_id
+  - comment: null
+    name: mandataire
+    using:
+      foreign_key_constraint_on: mandataire_id
+  - comment: null
+    name: service
+    using:
+      foreign_key_constraint_on: service_id
+  - comment: null
+    name: service_antenne
+    using:
+      foreign_key_constraint_on: antenne_id
+  - comment: null
+    name: ti
+    using:
+      foreign_key_constraint_on: ti_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      computed_fields: []
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - latitude
+      - longitude
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      computed_fields: []
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - latitude
+      - longitude
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      computed_fields: []
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      computed_fields: []
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      computed_fields: []
       filter:
         ti:
           magistrats:
-            user:
-              id:
-                _eq: X-Hasura-User-Id
+            user_id:
+              _eq: X-Hasura-User-Id
+    role: ti
+  table: mesures
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - latitude
+      - longitude
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      set: {}
+    role: individuel
+  - comment: null
+    permission:
+      columns:
+      - annee
+      - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      set: {}
+    role: prepose
+  - comment: null
+    permission:
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      set: {}
+    role: service
+  - comment: null
+    permission:
+      columns:
+      - is_urgent
+      - date_ouverture
+      - extinction
+      - judgment_date
+      - antenne_id
+      - department_id
+      - etablissement_id
+      - id
+      - mandataire_id
+      - service_id
+      - ti_id
+      - created_at
+      - annee
+      - cabinet
+      - civilite
+      - code_postal
+      - etablissement
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
+      - status
+      - type
+      - ville
+      filter:
+        ti:
+          magistrats:
+            user_id:
+              _eq: X-Hasura-User-Id
       set: {}
     role: ti
 - array_relationships: []
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -1203,13 +1509,13 @@ tables:
   is_enum: false
   object_relationships:
   - comment: null
-    name: user
-    using:
-      foreign_key_constraint_on: user_id
-  - comment: null
     name: service_antenne
     using:
       foreign_key_constraint_on: antenne_id
+  - comment: null
+    name: user
+    using:
+      foreign_key_constraint_on: user_id
   select_permissions:
   - comment: null
     permission:
@@ -1242,258 +1548,14 @@ tables:
           _eq: X-Hasura-User-Id
       set: {}
     role: service
-- array_relationships: []
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions:
-  - comment: null
-    permission:
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: prepose
-  event_triggers: []
-  insert_permissions:
-  - comment: null
-    permission:
-      check:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      columns:
-      - etablissement_id
-      - id
-      - mandataire_id
-      - created_at
-      set: {}
-    role: prepose
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: etablissement
-    using:
-      foreign_key_constraint_on: etablissement_id
-  - comment: null
-    name: mandataire
-    using:
-      foreign_key_constraint_on: mandataire_id
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - etablissement_id
-      - mandataire_id
-      - created_at
-      computed_fields: []
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - etablissement_id
-      - id
-      - mandataire_id
-      - created_at
-      computed_fields: []
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: prepose
-  table: mandataire_etablissements
-  update_permissions:
-  - comment: null
-    permission:
-      columns:
-      - etablissement_id
-      - id
-      - mandataire_id
-      - created_at
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      set: {}
-    role: prepose
 - array_relationships:
   - comment: null
-    name: service_tis
+    name: departements
     using:
       foreign_key_constraint_on:
-        column: service_id
-        table: service_tis
-  - comment: null
-    name: service_antennes
-    using:
-      foreign_key_constraint_on:
-        column: service_id
-        table: service_antenne
-  - comment: null
-    name: service_admins
-    using:
-      foreign_key_constraint_on:
-        column: service_id
-        table: service_admin
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: departement
-    using:
-      foreign_key_constraint_on: department_id
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - etablissement
-      - email
-      - nom
-      - prenom
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - dispo_max
-      - created_at
-      - information
-      - department_id
-      - mesures_in_progress
-      - mesures_awaiting
-      - latitude
-      - longitude
-      computed_fields: []
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - etablissement
-      - email
-      - nom
-      - prenom
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - dispo_max
-      - created_at
-      - information
-      - department_id
-      - mesures_in_progress
-      - mesures_awaiting
-      - latitude
-      - longitude
-      computed_fields: []
-      filter:
-        id:
-          _eq: X-Hasura-Service-Id
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - code_postal
-      - etablissement
-      - id
-      computed_fields: []
-      filter: {}
-    role: anonymous
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - adresse
-      - code_postal
-      - created_at
-      - department_id
-      - dispo_max
-      - email
-      - etablissement
-      - id
-      - information
-      - mesures_awaiting
-      - mesures_in_progress
-      - nom
-      - prenom
-      - telephone
-      - ville
-      computed_fields: []
-      filter: {}
-    role: direction
-  table: services
-  update_permissions:
-  - comment: null
-    permission:
-      columns:
-      - adresse
-      - code_postal
-      - department_id
-      - dispo_max
-      - email
-      - etablissement
-      - id
-      - information
-      - latitude
-      - longitude
-      - mesures_awaiting
-      - mesures_in_progress
-      - nom
-      - prenom
-      - telephone
-      - ville
-      filter:
-        id:
-          _eq: X-Hasura-Service-Id
-      set: {}
-    role: service
-  - comment: null
-    permission:
-      columns:
-      - latitude
-      - longitude
-      - mesures_awaiting
-      filter: {}
-      set: {}
-    role: ti
-- array_relationships:
-  - comment: null
-    name: mandataire_etablissements
-    using:
-      foreign_key_constraint_on:
-        column: etablissement_id
-        table: mandataire_etablissements
-  - comment: null
-    name: mesures
-    using:
-      foreign_key_constraint_on:
-        column: etablissement_id
-        table: mesures
+        column: id_region
+        table: departements
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -1514,30 +1576,34 @@ tables:
       allow_aggregations: false
       columns:
       - id
-      - id_finess
       - nom
-      - adresse
-      - code_postal
-      - ville
-      - tel
-      - fax
+      computed_fields: []
+      filter: {}
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - nom
       computed_fields: []
       filter: {}
     role: direction
   - comment: null
     permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - nom
+      computed_fields: []
+      filter: {}
+    role: individuel
+  - comment: null
+    permission:
       allow_aggregations: false
       columns:
-      - latitude
-      - longitude
       - id
-      - adresse
-      - code_postal
-      - fax
-      - id_finess
       - nom
-      - tel
-      - ville
       computed_fields: []
       filter: {}
     role: prepose
@@ -1545,39 +1611,103 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - latitude
-      - longitude
       - id
-      - adresse
-      - code_postal
-      - fax
-      - id_finess
       - nom
-      - tel
-      - ville
       computed_fields: []
       filter: {}
-    role: ti
+    role: service
   - comment: null
     permission:
       allow_aggregations: false
       columns:
       - id
-      - id_finess
       - nom
-      - adresse
-      - code_postal
-      - ville
-      - tel
-      - fax
-      - latitude
-      - longitude
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: regions
+  update_permissions: []
+- array_relationships:
+  - comment: null
+    name: user_roles
+    using:
+      foreign_key_constraint_on:
+        column: role_id
+        table: user_role
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships: []
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - name
+      computed_fields: []
+      filter: {}
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - name
+      computed_fields: []
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - name
+      computed_fields: []
+      filter: {}
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - name
+      computed_fields: []
+      filter: {}
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - name
       computed_fields: []
       filter: {}
     role: service
-  table: etablissements
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - name
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: role
   update_permissions: []
 - array_relationships: []
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -1593,41 +1723,39 @@ tables:
   is_enum: false
   object_relationships:
   - comment: null
-    name: gestionnaire
+    name: service
     using:
-      manual_configuration:
-        column_mapping:
-          id: id
-        remote_table: view_mesure_gestionnaire
+      foreign_key_constraint_on: service_id
   - comment: null
-    name: tis
+    name: user
     using:
-      manual_configuration:
-        column_mapping:
-          ti_id: id
-        remote_table: tis
+      foreign_key_constraint_on: user_id
   select_permissions:
   - comment: null
     permission:
-      allow_aggregations: true
+      allow_aggregations: false
       columns:
       - id
+      - user_id
       - service_id
-      - mandataire_id
-      - discriminator
-      - ti_id
+      computed_fields: []
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - user_id
+      - service_id
       computed_fields: []
       filter: {}
     role: ti
-  table: view_mesure_gestionnaire_tis
+  table: service_admin
   update_permissions: []
 - array_relationships:
-  - comment: null
-    name: mesures
-    using:
-      foreign_key_constraint_on:
-        column: antenne_id
-        table: mesures
   - comment: null
     name: commentaires
     using:
@@ -1635,11 +1763,18 @@ tables:
         column: antenne_id
         table: commentaires
   - comment: null
+    name: mesures
+    using:
+      foreign_key_constraint_on:
+        column: antenne_id
+        table: mesures
+  - comment: null
     name: user_antennes
     using:
       foreign_key_constraint_on:
         column: antenne_id
         table: user_antenne
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -1687,7 +1822,7 @@ tables:
   select_permissions:
   - comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       columns:
       - id
       - service_id
@@ -1707,53 +1842,7 @@ tables:
       - bak_mandataire_id
       computed_fields: []
       filter: {}
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - bak_mandataire_id
-      - id
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - service_id
-      - created_at
-      - date_mesure_update
-      - address_city
-      - address_street
-      - address_zip_code
-      - contact_email
-      - contact_firstname
-      - contact_lastname
-      - contact_phone
-      - name
-      computed_fields: []
-      filter: {}
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - service_id
-      - name
-      - created_at
-      - address_street
-      - address_zip_code
-      - address_city
-      - contact_lastname
-      - contact_firstname
-      - contact_email
-      - contact_phone
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - date_mesure_update
-      - bak_mandataire_id
-      computed_fields: []
-      filter: {}
-    role: ti
+    role: direction
   - comment: null
     permission:
       allow_aggregations: false
@@ -1782,7 +1871,7 @@ tables:
     role: service
   - comment: null
     permission:
-      allow_aggregations: true
+      allow_aggregations: false
       columns:
       - id
       - service_id
@@ -1802,7 +1891,7 @@ tables:
       - bak_mandataire_id
       computed_fields: []
       filter: {}
-    role: direction
+    role: ti
   table: service_antenne
   update_permissions:
   - comment: null
@@ -1835,7 +1924,323 @@ tables:
       filter: {}
       set: {}
     role: ti
+- array_relationships:
+  - comment: null
+    name: service_admins
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table: service_admin
+  - comment: null
+    name: service_antennes
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table: service_antenne
+  - comment: null
+    name: service_tis
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table: service_tis
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: departement
+    using:
+      foreign_key_constraint_on: department_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - code_postal
+      - etablissement
+      - id
+      computed_fields: []
+      filter: {}
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - adresse
+      - code_postal
+      - created_at
+      - department_id
+      - dispo_max
+      - email
+      - etablissement
+      - id
+      - information
+      - mesures_awaiting
+      - mesures_in_progress
+      - nom
+      - prenom
+      - telephone
+      - ville
+      computed_fields: []
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - adresse
+      - code_postal
+      - created_at
+      - department_id
+      - dispo_max
+      - email
+      - etablissement
+      - id
+      - information
+      - mesures_awaiting
+      - mesures_in_progress
+      - nom
+      - prenom
+      - telephone
+      - ville
+      computed_fields: []
+      filter:
+        id:
+          _eq: X-Hasura-Service-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - adresse
+      - code_postal
+      - created_at
+      - department_id
+      - dispo_max
+      - email
+      - etablissement
+      - id
+      - information
+      - latitude
+      - longitude
+      - mesures_awaiting
+      - mesures_in_progress
+      - nom
+      - prenom
+      - telephone
+      - ville
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: services
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - adresse
+      - department_id
+      - dispo_max
+      - email
+      - mesures_awaiting
+      - mesures_in_progress
+      - nom
+      - prenom
+      - telephone
+      filter:
+        id:
+          _eq: X-Hasura-Service-Id
+      set: {}
+    role: service
+  - comment: null
+    permission:
+      columns:
+      - mesures_awaiting
+      filter: {}
+      set: {}
+    role: ti
 - array_relationships: []
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: service
+    using:
+      foreign_key_constraint_on: service_id
+  - comment: null
+    name: ti
+    using:
+      foreign_key_constraint_on: ti_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - service_id
+      - ti_id
+      computed_fields: []
+      filter: {}
+    role: service
+  table: service_tis
+  update_permissions: []
+- array_relationships:
+  - comment: null
+    name: commentaires
+    using:
+      foreign_key_constraint_on:
+        column: ti_id
+        table: commentaires
+  - comment: null
+    name: magistrats
+    using:
+      foreign_key_constraint_on:
+        column: ti_id
+        table: magistrat
+  - comment: null
+    name: mesures
+    using:
+      foreign_key_constraint_on:
+        column: ti_id
+        table: mesures
+  - comment: null
+    name: service_tis
+    using:
+      foreign_key_constraint_on:
+        column: ti_id
+        table: service_tis
+  - comment: null
+    name: user_tis
+    using:
+      foreign_key_constraint_on:
+        column: ti_id
+        table: user_tis
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships: []
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - code_postal
+      - etablissement
+      - id
+      - ville
+      computed_fields: []
+      filter: {}
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - etablissement
+      - email
+      - code_postal
+      - ville
+      - telephone
+      - created_at
+      computed_fields: []
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - etablissement
+      - email
+      - code_postal
+      - ville
+      - telephone
+      - created_at
+      - siret
+      computed_fields: []
+      filter: {}
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - code_postal
+      - created_at
+      - email
+      - etablissement
+      - id
+      - siret
+      - telephone
+      - ville
+      computed_fields: []
+      filter: {}
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - etablissement
+      - email
+      - code_postal
+      - ville
+      - telephone
+      - created_at
+      computed_fields: []
+      filter: {}
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - etablissement
+      - email
+      - code_postal
+      - ville
+      - telephone
+      - created_at
+      - siret
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: tis
+  update_permissions: []
+- array_relationships: []
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -1849,528 +2254,58 @@ tables:
   - comment: null
     permission:
       filter:
-        mandataire:
-          user:
-            id:
-              _eq: X-Hasura-User-Id
-    role: individuel
-  - comment: null
-    permission:
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: prepose
-  - comment: null
-    permission:
-      filter:
-        ti:
-          magistrats:
-            user_id:
-              _eq: X-Hasura-User-Id
-    role: ti
-  - comment: null
-    permission:
-      filter:
-        service_id:
-          _eq: X-Hasura-Service-Id
+        user_id:
+          _eq: X-Hasura-User-Id
     role: service
-  event_triggers:
-  - definition:
-      enable_manual: false
-      insert:
-        columns: '*'
-    headers: []
-    name: email
-    retry_conf:
-      interval_sec: 10
-      num_retries: 0
-      timeout_sec: 60
-    webhook_from_env: WEB_HOOK_URL_EMAIL_RESERVATION
-  - definition:
-      delete:
-        columns: '*'
-      enable_manual: false
-    headers: []
-    name: email-cancel-reservation
-    retry_conf:
-      interval_sec: 10
-      num_retries: 0
-      timeout_sec: 60
-    webhook_from_env: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
+  event_triggers: []
   insert_permissions:
-  - comment: null
-    permission:
-      check:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - is_urgent
-      - judgment_date
-      - latitude
-      - longitude
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
-      set: {}
-    role: individuel
-  - comment: null
-    permission:
-      check:
-        service_id:
-          _eq: X-Hasura-Service-Id
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - is_urgent
-      - judgment_date
-      - latitude
-      - longitude
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
-      set:
-        service_id: x-hasura-Service-Id
-    role: service
-  - comment: null
-    permission:
-      check:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      set: {}
-    role: prepose
   - comment: null
     permission:
       check: {}
       columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
       - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
+      - user_id
+      - antenne_id
       set: {}
-    role: ti
+    role: service
   is_enum: false
   object_relationships:
-  - comment: null
-    name: ti
-    using:
-      foreign_key_constraint_on: ti_id
-  - comment: null
-    name: departement
-    using:
-      foreign_key_constraint_on: department_id
-  - comment: null
-    name: etablissementByEtablissementId
-    using:
-      foreign_key_constraint_on: etablissement_id
   - comment: null
     name: service_antenne
     using:
       foreign_key_constraint_on: antenne_id
   - comment: null
-    name: mandataire
+    name: user
     using:
-      foreign_key_constraint_on: mandataire_id
-  - comment: null
-    name: service
-    using:
-      foreign_key_constraint_on: service_id
+      foreign_key_constraint_on: user_id
   select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
-      computed_fields: []
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
-      - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
-      - antenne_id
-      - service_id
-      - is_urgent
-      - judgment_date
-      - latitude
-      - longitude
-      computed_fields: []
-      filter:
-        ti:
-          magistrats:
-            user_id:
-              _eq: X-Hasura-User-Id
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
-      - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
-      - antenne_id
-      - service_id
-      - is_urgent
-      - judgment_date
-      - latitude
-      - longitude
-      computed_fields: []
-      filter:
-        service_id:
-          _eq: X-Hasura-Service-Id
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - is_urgent
-      - judgment_date
-      - latitude
-      - longitude
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
-      computed_fields: []
-      filter:
-        mandataire:
-          user:
-            id:
-              _eq: X-Hasura-User-Id
-    role: individuel
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
       - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
+      - user_id
+      - antenne_id
       computed_fields: []
       filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: prepose
-  table: mesures
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: service
+  table: user_antenne
   update_permissions:
   - comment: null
     permission:
       columns:
-      - annee
       - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
       - id
-      - is_urgent
-      - judgment_date
-      - latitude
-      - longitude
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
+      - user_id
       filter:
-        service_id:
-          _eq: X-Hasura-Service-Id
+        user_id:
+          _eq: X-Hasura-User-Id
       set: {}
     role: service
-  - comment: null
-    permission:
-      columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
-      - id
-      - is_urgent
-      - judgment_date
-      - latitude
-      - longitude
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
-      - ville
-      filter:
-        mandataire:
-          user:
-            id:
-              _eq: X-Hasura-User-Id
-      set: {}
-    role: individuel
-  - comment: null
-    permission:
-      columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      filter:
-        ti:
-          magistrats:
-            user_id:
-              _eq: X-Hasura-User-Id
-      set: {}
-    role: ti
-  - comment: null
-    permission:
-      columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
-      - annee
-      - cabinet
-      - civilite
-      - code_postal
-      - etablissement
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - status
-      - type
-      - ville
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      set: {}
-    role: prepose
 - array_relationships: []
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -2402,18 +2337,17 @@ tables:
       - role_id
       - user_id
       computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: prepose
+      filter: {}
+    role: direction
   - comment: null
     permission:
       allow_aggregations: false
-      columns: []
+      columns:
+      - id
+      - role_id
+      - user_id
       computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+      filter: {}
     role: individuel
   - comment: null
     permission:
@@ -2423,9 +2357,17 @@ tables:
       - role_id
       - user_id
       computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+      filter: {}
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - role_id
+      - user_id
+      computed_fields: []
+      filter: {}
     role: service
   - comment: null
     permission:
@@ -2435,182 +2377,36 @@ tables:
       - role_id
       - user_id
       computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+      filter: {}
     role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - role_id
-      - user_id
-      computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: direction
   table: user_role
-  update_permissions: []
-- array_relationships: []
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
-  object_relationships: []
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      computed_fields: []
-      filter: {}
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      computed_fields: []
-      filter: {}
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      computed_fields: []
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - ville
-      - latitude
-      - longitude
-      computed_fields: []
-      filter: {}
-    role: direction
-  table: city
-  update_permissions: []
-- array_relationships: []
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
-  object_relationships: []
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - latitude
-      - longitude
-      - id
-      - cities
-      - code_postal
-      computed_fields: []
-      filter: {}
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - code_postal
-      - latitude
-      - longitude
-      - cities
-      computed_fields: []
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - latitude
-      - longitude
-      - id
-      - cities
-      - code_postal
-      computed_fields: []
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns: []
-      computed_fields: []
-      filter: {}
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - latitude
-      - longitude
-      - id
-      - cities
-      - code_postal
-      computed_fields: []
-      filter: {}
-    role: individuel
-  table: geolocalisation_code_postal
   update_permissions: []
 - array_relationships:
   - comment: null
-    name: mandataire_etablissements
+    name: service_admins
     using:
       foreign_key_constraint_on:
-        column: mandataire_id
-        table: mandataire_etablissements
+        column: user_id
+        table: service_admin
   - comment: null
-    name: mesures
+    name: user_antennes
     using:
       foreign_key_constraint_on:
-        column: mandataire_id
-        table: mesures
+        column: user_id
+        table: user_antenne
   - comment: null
-    name: commentaires
+    name: user_roles
     using:
       foreign_key_constraint_on:
-        column: mandataire_id
-        table: commentaires
+        column: user_id
+        table: user_role
+  - comment: null
+    name: user_tis
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table: user_tis
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -2621,274 +2417,318 @@ tables:
       select_by_pk: null
       update: null
   delete_permissions: []
-  event_triggers: []
+  event_triggers:
+  - definition:
+      enable_manual: false
+      update:
+        columns:
+        - active
+    headers: []
+    name: email-account-validation
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION
   insert_permissions:
   - comment: null
     permission:
+      check: {}
+      columns:
+      - id
+      - username
+      - password
+      - created_at
+      - type
+      - last_login
+      - active
+      - reset_password_token
+      - reset_password_expires
+      - nom
+      - prenom
+      - cabinet
+      - email
+      set: {}
+    role: direction
+  - comment: null
+    permission:
       check:
-        user_id:
+        id:
           _eq: X-Hasura-User-Id
       columns:
-      - adresse
-      - code_postal
-      - created_at
-      - date_mesure_update
-      - dispo_max
-      - email_send
-      - etablissement
-      - genre
+      - active
       - id
-      - latitude
-      - longitude
-      - mesures_en_attente
-      - mesures_en_cours
-      - nb_secretariat
-      - secretariat
-      - siret
-      - telephone
-      - telephone_portable
-      - user_id
-      - ville
-      - zip
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
       set: {}
     role: prepose
   - comment: null
     permission:
       check: {}
       columns:
-      - adresse
-      - code_postal
-      - created_at
-      - date_mesure_update
-      - department_id
-      - dispo_max
-      - email_send
-      - etablissement
-      - genre
+      - active
       - id
-      - latitude
-      - longitude
-      - mesures_en_attente
-      - mesures_en_cours
-      - nb_secretariat
-      - secretariat
-      - siret
-      - telephone
-      - telephone_portable
-      - user_id
-      - ville
-      - zip
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
       set: {}
-    role: individuel
+    role: service
+  - comment: null
+    permission:
+      check:
+        id:
+          _eq: X-Hasura-User-Id
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      set: {}
+    role: ti
   is_enum: false
   object_relationships:
   - comment: null
-    name: departement
+    name: magistrat
     using:
-      foreign_key_constraint_on: department_id
+      manual_configuration:
+        column_mapping:
+          id: user_id
+        remote_table: magistrat
   - comment: null
-    name: user
+    name: mandataire
     using:
-      foreign_key_constraint_on: user_id
+      manual_configuration:
+        column_mapping:
+          id: user_id
+        remote_table: mandataires
   select_permissions:
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - id
-      - etablissement
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - mesures_en_cours
-      - dispo_max
-      - user_id
-      - telephone_portable
-      - secretariat
-      - nb_secretariat
-      - created_at
-      - date_mesure_update
-      - email_send
-      - genre
-      - mesures_en_attente
-      - zip
-      - department_id
-      - siret
-      - latitude
-      - longitude
-      computed_fields: []
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - etablissement
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - mesures_en_cours
-      - dispo_max
-      - user_id
-      - telephone_portable
-      - secretariat
-      - nb_secretariat
-      - created_at
-      - date_mesure_update
-      - email_send
-      - genre
-      - mesures_en_attente
-      - zip
-      - department_id
-      - siret
-      - latitude
-      - longitude
+      - email
       computed_fields: []
       filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - secretariat
-      - latitude
-      - longitude
-      - nb_secretariat
-      - department_id
-      - dispo_max
-      - id
-      - mesures_en_attente
-      - mesures_en_cours
-      - user_id
-      - zip
-      - created_at
-      - date_mesure_update
-      - email_send
-      - adresse
-      - code_postal
-      - etablissement
-      - genre
-      - siret
-      - telephone
-      - telephone_portable
-      - ville
-      computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - siret
-      computed_fields: []
-      filter:
-        siret:
-          _eq: X-Hasura-Siret
+        email:
+          _eq: X-Hasura-Email
       limit: 1
     role: anonymous
   - comment: null
     permission:
-      allow_aggregations: true
+      allow_aggregations: false
       columns:
+      - active
       - id
-      - etablissement
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - mesures_en_cours
-      - dispo_max
-      - user_id
-      - telephone_portable
-      - secretariat
-      - nb_secretariat
       - created_at
-      - date_mesure_update
-      - email_send
-      - genre
-      - mesures_en_attente
-      - zip
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
       computed_fields: []
       filter: {}
     role: direction
-  table: mandataires
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - username
+      - password
+      - created_at
+      - type
+      - last_login
+      - active
+      - reset_password_token
+      - reset_password_expires
+      - nom
+      - prenom
+      - cabinet
+      - email
+      computed_fields: []
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      computed_fields: []
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      computed_fields: []
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - cabinet
+      - created_at
+      - email
+      - id
+      - last_login
+      - nom
+      - prenom
+      - type
+      - username
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: users
   update_permissions:
   - comment: null
     permission:
       columns:
-      - adresse
-      - code_postal
-      - created_at
-      - date_mesure_update
-      - department_id
-      - dispo_max
-      - email_send
-      - etablissement
-      - genre
+      - active
       - id
-      - latitude
-      - longitude
-      - mesures_en_attente
-      - mesures_en_cours
-      - nb_secretariat
-      - secretariat
-      - siret
-      - telephone
-      - telephone_portable
-      - user_id
-      - ville
-      - zip
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
       filter:
-        user_id:
+        id:
           _eq: X-Hasura-User-Id
       set: {}
-    role: individuel
+    role: direction
   - comment: null
     permission:
       columns:
-      - adresse
-      - code_postal
-      - created_at
-      - date_mesure_update
-      - department_id
-      - dispo_max
-      - email_send
-      - etablissement
-      - genre
+      - active
       - id
-      - latitude
-      - longitude
-      - mesures_en_attente
-      - mesures_en_cours
-      - nb_secretariat
-      - secretariat
-      - siret
-      - telephone
-      - telephone_portable
-      - user_id
-      - ville
-      - zip
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
       filter:
-        user_id:
+        id:
           _eq: X-Hasura-User-Id
       set: {}
     role: prepose
   - comment: null
     permission:
       columns:
-      - mesures_en_attente
-      - mesures_en_cours
-      filter: {}
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+      set: {}
+    role: service
+  - comment: null
+    permission:
+      columns:
+      - active
+      - id
+      - created_at
+      - last_login
+      - reset_password_expires
+      - cabinet
+      - email
+      - nom
+      - password
+      - prenom
+      - reset_password_token
+      - type
+      - username
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
       set: {}
     role: ti
 - array_relationships: []
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -2940,155 +2780,8 @@ tables:
     role: prepose
   table: user_tis
   update_permissions: []
-- array_relationships:
-  - comment: null
-    name: gestionnaire_tis
-    using:
-      manual_configuration:
-        column_mapping:
-          id: id
-        remote_table: view_mesure_gestionnaire_tis
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: departement
-    using:
-      manual_configuration:
-        column_mapping:
-          department_id: id
-        remote_table: departements
-  - comment: null
-    name: service
-    using:
-      manual_configuration:
-        column_mapping:
-          service_id: id
-        remote_table: services
-  - comment: null
-    name: mandataire
-    using:
-      manual_configuration:
-        column_mapping:
-          mandataire_id: id
-        remote_table: mandataires
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - service_id
-      - mandataire_id
-      - discriminator
-      - department_id
-      - dep_nom
-      - mesures_max
-      - mesures_awaiting
-      - mesures_in_progress
-      - remaining_capacity
-      computed_fields: []
-      filter: {}
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - id
-      - service_id
-      - mandataire_id
-      - discriminator
-      - department_id
-      - dep_nom
-      - mesures_max
-      - mesures_awaiting
-      - mesures_in_progress
-      - remaining_capacity
-      computed_fields: []
-      filter: {}
-    role: direction
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - department_id
-      - mandataire_id
-      - mesures_max
-      - service_id
-      - mesures_awaiting
-      - mesures_in_progress
-      - remaining_capacity
-      - discriminator
-      - id
-      - dep_nom
-      computed_fields: []
-      filter: {}
-    role: mandataire
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - department_id
-      - mandataire_id
-      - mesures_max
-      - service_id
-      - mesures_awaiting
-      - mesures_in_progress
-      - remaining_capacity
-      - discriminator
-      - id
-      - dep_nom
-      computed_fields: []
-      filter: {}
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - department_id
-      - mandataire_id
-      - mesures_max
-      - service_id
-      - mesures_awaiting
-      - mesures_in_progress
-      - remaining_capacity
-      - discriminator
-      - id
-      - dep_nom
-      computed_fields: []
-      filter: {}
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: true
-      columns:
-      - department_id
-      - mandataire_id
-      - mesures_max
-      - service_id
-      - mesures_awaiting
-      - mesures_in_progress
-      - remaining_capacity
-      - discriminator
-      - id
-      - dep_nom
-      computed_fields: []
-      filter: {}
-    role: ti
-  table: view_mesure_gestionnaire
-  update_permissions: []
 - array_relationships: []
+  computed_fields: []
   configuration:
     custom_column_names: {}
     custom_root_fields:
@@ -3121,28 +2814,6 @@ tables:
       - mesures_max
       computed_fields: []
       filter: {}
-    role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - department_id
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      computed_fields: []
-      filter: {}
-    role: ti
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - department_id
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      computed_fields: []
-      filter: {}
     role: direction
   - comment: null
     permission:
@@ -3154,7 +2825,18 @@ tables:
       - mesures_max
       computed_fields: []
       filter: {}
-    role: mandataire
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - department_id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      computed_fields: []
+      filter: {}
+    role: prepose
   - comment: null
     permission:
       allow_aggregations: false
@@ -3166,5 +2848,197 @@ tables:
       computed_fields: []
       filter: {}
     role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - department_id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      computed_fields: []
+      filter: {}
+    role: ti
   table: view_department_availability
   update_permissions: []
+- array_relationships:
+  - comment: null
+    name: gestionnaire_tis
+    using:
+      manual_configuration:
+        column_mapping:
+          id: id
+        remote_table: view_mesure_gestionnaire_tis
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: departement
+    using:
+      manual_configuration:
+        column_mapping:
+          department_id: id
+        remote_table: departements
+  - comment: null
+    name: mandataire
+    using:
+      manual_configuration:
+        column_mapping:
+          mandataire_id: id
+        remote_table: mandataires
+  - comment: null
+    name: service
+    using:
+      manual_configuration:
+        column_mapping:
+          service_id: id
+        remote_table: services
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - service_id
+      - mandataire_id
+      - discriminator
+      - department_id
+      - dep_nom
+      - mesures_max
+      - mesures_awaiting
+      - mesures_in_progress
+      - remaining_capacity
+      computed_fields: []
+      filter: {}
+    role: direction
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - department_id
+      - mandataire_id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - remaining_capacity
+      - service_id
+      - discriminator
+      - id
+      - dep_nom
+      - nom
+      computed_fields: []
+      filter: {}
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - dep_nom
+      - department_id
+      - discriminator
+      - id
+      - mandataire_id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - nom
+      - remaining_capacity
+      - service_id
+      computed_fields: []
+      filter: {}
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - department_id
+      - mandataire_id
+      - mesures_max
+      - service_id
+      - mesures_awaiting
+      - mesures_in_progress
+      - remaining_capacity
+      - discriminator
+      - id
+      - dep_nom
+      computed_fields: []
+      filter: {}
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - dep_nom
+      - department_id
+      - discriminator
+      - id
+      - mandataire_id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - nom
+      - remaining_capacity
+      - service_id
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: view_mesure_gestionnaire
+  update_permissions: []
+- array_relationships: []
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: gestionnaire
+    using:
+      manual_configuration:
+        column_mapping:
+          id: id
+        remote_table: view_mesure_gestionnaire
+  - comment: null
+    name: tis
+    using:
+      manual_configuration:
+        column_mapping:
+          ti_id: id
+        remote_table: tis
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: true
+      columns:
+      - id
+      - service_id
+      - mandataire_id
+      - discriminator
+      - ti_id
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: view_mesure_gestionnaire_tis
+  update_permissions: []
+version: 2

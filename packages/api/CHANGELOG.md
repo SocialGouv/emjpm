@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.12.0](https://github.com/SocialGouv/emjpm/compare/v25.11.5...v25.12.0) (2019-12-19)
+
+
+### Bug Fixes
+
+* **admin-import:** handle import for service ([#1119](https://github.com/SocialGouv/emjpm/issues/1119)) ([524bbc2](https://github.com/SocialGouv/emjpm/commit/524bbc21395174351f16e91025bac6b20baf5f35))
+* **api:** add date-fns dependency ([#1092](https://github.com/SocialGouv/emjpm/issues/1092)) ([3a6c3a4](https://github.com/SocialGouv/emjpm/commit/3a6c3a45b38d61912b3044261b776c7c479c995e))
+* **cancel-resevation:** test if sesssion vars is definedd ([#1114](https://github.com/SocialGouv/emjpm/issues/1114)) ([808dc91](https://github.com/SocialGouv/emjpm/commit/808dc91139a93d41f872933481b1bc6540f7cb8e))
+* **deps:** update dependency @sentry/node to v5.10.2 ([#1210](https://github.com/SocialGouv/emjpm/issues/1210)) ([397291a](https://github.com/SocialGouv/emjpm/commit/397291affd4699a0fe697954a1b56478898946f2))
+* **deps:** update dependency dotenv to ^8.2.0 ([#1216](https://github.com/SocialGouv/emjpm/issues/1216)) ([eefa21b](https://github.com/SocialGouv/emjpm/commit/eefa21b568c5297e58ec2c59cf48cd02ecd922da))
+* **deps:** update dependency express-validator to ^6.3.0 ([#1217](https://github.com/SocialGouv/emjpm/issues/1217)) ([fcf3525](https://github.com/SocialGouv/emjpm/commit/fcf3525a4033a592831ed3e91a8214b7d3384b27))
+* **deps:** update dependency knex to ^0.20.4 ([#1103](https://github.com/SocialGouv/emjpm/issues/1103)) ([267a0f9](https://github.com/SocialGouv/emjpm/commit/267a0f91c88d995867c7da08fa9e6069aba2ab0f))
+* **lint:** fix lint erros ([#1100](https://github.com/SocialGouv/emjpm/issues/1100)) ([a1ff20f](https://github.com/SocialGouv/emjpm/commit/a1ff20f7e07c0543e756bf919883b4db297637d8))
+
+
+### Features
+
+* **geocode-mandataire:** handle geocode for mandataire signup ([#1160](https://github.com/SocialGouv/emjpm/issues/1160)) ([b1ae80e](https://github.com/SocialGouv/emjpm/commit/b1ae80ee85346502d2073555735d7d866e81ca35))
+* **map:** add maps ([#894](https://github.com/SocialGouv/emjpm/issues/894)) ([cb142e0](https://github.com/SocialGouv/emjpm/commit/cb142e0db1756be7e611be359e68b53f4ba53d76)), closes [#1110](https://github.com/SocialGouv/emjpm/issues/1110) [#1109](https://github.com/SocialGouv/emjpm/issues/1109)
+* **mesure-import:** handle longitude/latitude ([#1120](https://github.com/SocialGouv/emjpm/issues/1120)) ([097645f](https://github.com/SocialGouv/emjpm/commit/097645f4d8830ce584dff9ff5aba0e584b3a461d))
+
+
+
+
+
 ## [25.11.5](https://github.com/SocialGouv/emjpm/compare/v25.11.4...v25.11.5) (2019-12-09)
 
 **Note:** Version bump only for package @emjpm/api
