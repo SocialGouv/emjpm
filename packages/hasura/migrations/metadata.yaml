@@ -1676,12 +1676,166 @@ tables:
       select_aggregate: null
       select_by_pk: null
       update: null
-  delete_permissions: []
+  delete_permissions:
+  - comment: null
+    permission:
+      filter: {}
+    role: service
   event_triggers: []
-  insert_permissions: []
+  insert_permissions:
+  - comment: null
+    permission:
+      check: {}
+      columns:
+      - address
+      - address_city
+      - address_street
+      - address_zip_code
+      - bak_mandataire_id
+      - contact_email
+      - contact_firstname
+      - contact_lastname
+      - contact_phone
+      - created_at
+      - date_mesure_update
+      - id
+      - latitude
+      - longitude
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - name
+      - service_id
+      set: {}
+    role: service
   is_enum: false
-  object_relationships: []
+  object_relationships:
+  - comment: null
+    name: service
+    using:
+      foreign_key_constraint_on: service_id
   select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - address
+      - address_city
+      - address_street
+      - address_zip_code
+      - bak_mandataire_id
+      - contact_email
+      - contact_firstname
+      - contact_lastname
+      - contact_phone
+      - created_at
+      - date_mesure_update
+      - id
+      - latitude
+      - longitude
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - name
+      - service_id
+      computed_fields: []
+      filter:
+        user_antennes:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - address
+      - address_city
+      - address_street
+      - address_zip_code
+      - bak_mandataire_id
+      - contact_email
+      - contact_firstname
+      - contact_lastname
+      - contact_phone
+      - created_at
+      - date_mesure_update
+      - id
+      - latitude
+      - longitude
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - name
+      - service_id
+      set: {}
+    role: service
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: service
+    using:
+      foreign_key_constraint_on: service_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - address
+      - address_city
+      - address_street
+      - address_zip_code
+      - bak_mandataire_id
+      - contact_email
+      - contact_firstname
+      - contact_lastname
+      - contact_phone
+      - created_at
+      - date_mesure_update
+      - id
+      - latitude
+      - longitude
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - name
+      - service_id
+      computed_fields: []
+      filter:
+        user_antennes:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - service_id
+      - name
+      - created_at
+      - address_street
+      - address_zip_code
+      - address_city
+      - contact_lastname
+      - contact_firstname
+      - contact_email
+      - contact_phone
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - date_mesure_update
+      - bak_mandataire_id
+      computed_fields: []
+      filter: {}
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      - date_mesure_update
+      - bak_mandataire_id
+      computed_fields: []
+      filter: {}
+    role: individuel
   - comment: null
     permission:
       allow_aggregations: false
@@ -1690,7 +1844,7 @@ tables:
       - name
       computed_fields: []
       filter: {}
-    role: anonymous
+    role: prepose
   - comment: null
     permission:
       allow_aggregations: false
@@ -1709,6 +1863,11 @@ tables:
       computed_fields: []
       filter: {}
     role: individuel
+      filter:
+        user_antennes:
+          user_id:
+            _eq: X-Hasura-User-Id
+    role: prepose
   - comment: null
     permission:
       allow_aggregations: false
