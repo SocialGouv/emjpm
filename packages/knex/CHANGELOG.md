@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.13.0](https://github.com/SocialGouv/emjpm/compare/v25.12.1...v25.13.0) (2019-12-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency knex to ^0.20.4 ([#1222](https://github.com/SocialGouv/emjpm/issues/1222)) ([22d6ef9](https://github.com/SocialGouv/emjpm/commit/22d6ef9430c0929c266fb35878f3a9a7e0f76435))
+
+
+### Features
+
+* **geocode:** add geocode to antenne create ([#1242](https://github.com/SocialGouv/emjpm/issues/1242)) ([43a04e6](https://github.com/SocialGouv/emjpm/commit/43a04e6c59e24df88e4ac81374a9884e5f89bb8e))
+
+
+
+
+
 ## [25.12.1](https://github.com/SocialGouv/emjpm/compare/v25.12.0...v25.12.1) (2019-12-19)
 
 **Note:** Version bump only for package @emjpm/knex
