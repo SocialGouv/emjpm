@@ -15542,7 +15542,7 @@ styled-components@^4.3.2:
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
 
-styled-icons@^9.0.1, styled-icons@^9.1.0:
+styled-icons@^9.1.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/styled-icons/-/styled-icons-9.1.0.tgz#0f78617155c2d403e2aba4605e73b928bdbfa2fa"
   integrity sha512-FcxTre02qgJyrPpIhGb7MDKfkkbHp6YmDovCZye3Zsv0bu1sfQl5Vz75nMR3cuT4FJiSt725EO8X0DKLeDLOCQ==
