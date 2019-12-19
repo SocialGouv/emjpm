@@ -13,7 +13,7 @@
     "husky": "^3.1.0"
   },
   "dependencies": {
-    "lerna": "^3.15.0"
+    "lerna": "^3.19.0"
   },
   "husky": {
     "hooks": {
