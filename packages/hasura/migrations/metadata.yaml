@@ -1551,7 +1551,7 @@ tables:
   select_permissions:
   - comment: null
     permission:
-      allow_aggregations: true
+      allow_aggregations: false
       columns:
       - antenne_id
       - file_size
@@ -1676,175 +1676,21 @@ tables:
       select_aggregate: null
       select_by_pk: null
       update: null
-  delete_permissions:
-  - comment: null
-    permission:
-      filter: {}
-    role: service
+  delete_permissions: []
   event_triggers: []
-  insert_permissions:
-  - comment: null
-    permission:
-      check: {}
-      columns:
-      - address
-      - address_city
-      - address_street
-      - address_zip_code
-      - bak_mandataire_id
-      - contact_email
-      - contact_firstname
-      - contact_lastname
-      - contact_phone
-      - created_at
-      - date_mesure_update
-      - id
-      - latitude
-      - longitude
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - name
-      - service_id
-      set: {}
-    role: service
+  insert_permissions: []
   is_enum: false
-  object_relationships:
-  - comment: null
-    name: service
-    using:
-      foreign_key_constraint_on: service_id
+  object_relationships: []
   select_permissions:
   - comment: null
     permission:
       allow_aggregations: false
       columns:
-      - address
-      - address_city
-      - address_street
-      - address_zip_code
-      - bak_mandataire_id
-      - contact_email
-      - contact_firstname
-      - contact_lastname
-      - contact_phone
-      - created_at
-      - date_mesure_update
-      - id
-      - latitude
-      - longitude
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - name
-      - service_id
-      computed_fields: []
-      filter:
-        user_antennes:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - address
-      - address_city
-      - address_street
-      - address_zip_code
-      - bak_mandataire_id
-      - contact_email
-      - contact_firstname
-      - contact_lastname
-      - contact_phone
-      - created_at
-      - date_mesure_update
-      - id
-      - latitude
-      - longitude
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - name
-      - service_id
-      set: {}
-    role: service
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: service
-    using:
-      foreign_key_constraint_on: service_id
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - address
-      - address_city
-      - address_street
-      - address_zip_code
-      - bak_mandataire_id
-      - contact_email
-      - contact_firstname
-      - contact_lastname
-      - contact_phone
-      - created_at
-      - date_mesure_update
-      - id
-      - latitude
-      - longitude
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - name
-      - service_id
-      computed_fields: []
-      filter:
-        user_antennes:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - service_id
-      - name
-      - created_at
-      - address_street
-      - address_zip_code
-      - address_city
-      - contact_lastname
-      - contact_firstname
-      - contact_email
-      - contact_phone
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - date_mesure_update
-      - bak_mandataire_id
-      computed_fields: []
-      filter: {}
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: false
-      - date_mesure_update
-      - bak_mandataire_id
-      computed_fields: []
-      filter: {}
-    role: individuel
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
       - id
       - name
       computed_fields: []
       filter: {}
-    role: prepose
+    role: anonymous
   - comment: null
     permission:
       allow_aggregations: false
@@ -1863,11 +1709,6 @@ tables:
       computed_fields: []
       filter: {}
     role: individuel
-      filter:
-        user_antennes:
-          user_id:
-            _eq: X-Hasura-User-Id
-    role: prepose
   - comment: null
     permission:
       allow_aggregations: false
@@ -2061,7 +1902,7 @@ tables:
     role: prepose
   - comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       columns:
       - address
       - address_city
@@ -2135,7 +1976,10 @@ tables:
       - mesures_max
       - name
       - service_id
-      filter: {}
+      filter:
+        user_antennes:
+          user_id:
+            _eq: X-Hasura-User-Id
       set: {}
     role: service
   - comment: null
