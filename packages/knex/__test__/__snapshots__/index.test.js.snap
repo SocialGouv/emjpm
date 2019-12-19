@@ -807,6 +807,12 @@ Object {
 
 exports[`service_antenne table schema 1`] = `
 Object {
+  "address": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "address_city": Object {
     "defaultValue": null,
     "maxLength": 255,
@@ -872,6 +878,18 @@ Object {
     "maxLength": null,
     "nullable": false,
     "type": "integer",
+  },
+  "latitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "longitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
   },
   "mesures_awaiting": Object {
     "defaultValue": "0",
