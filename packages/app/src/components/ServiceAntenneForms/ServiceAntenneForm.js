@@ -6,14 +6,9 @@ import { Box } from "rebass";
 import { serviceAntenneSchema } from "../../lib/validationSchemas";
 import { debouncedGeocode } from "../../util/geocode";
 
-export const getCurrentAntenne = (user_antennes, currentAntenne) => {
-  return user_antennes.filter(
-    user_antenne => user_antenne.antenne_id === parseInt(currentAntenne, 10)
-  );
-};
-
 const ServiceAntenneForm = props => {
   const { antenne, handleSubmit } = props;
+
   const {
     contact_email,
     contact_phone,

@@ -9,13 +9,14 @@ import { withAuthSync } from "../../../../src/util/auth";
 
 const AddAntennes = () => {
   const router = useRouter();
-  const { antenne_id } = router.query;
+  const antenneId = parseInt(router.query.antenne_id);
+
   return (
     <LayoutServices>
       <BoxWrapper mt={6}>
         <Heading1 mx="1">{`Modification de l'antenne`}</Heading1>
         <UserInformations
-          Component={props => <ServiceEditAntenne {...props} currentAntenne={antenne_id} mt="3" />}
+          Component={props => <ServiceEditAntenne {...props} antenneId={antenneId} mt="3" />}
         />
       </BoxWrapper>
     </LayoutServices>
