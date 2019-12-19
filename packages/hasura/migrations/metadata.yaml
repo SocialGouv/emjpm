@@ -3036,16 +3036,17 @@ tables:
     permission:
       allow_aggregations: true
       columns:
-      - id
-      - service_id
-      - mandataire_id
-      - discriminator
       - department_id
-      - dep_nom
-      - mesures_max
+      - mandataire_id
       - mesures_awaiting
       - mesures_in_progress
+      - mesures_max
       - remaining_capacity
+      - service_id
+      - discriminator
+      - id
+      - dep_nom
+      - nom
       computed_fields: []
       filter: {}
     role: direction
@@ -3053,16 +3054,17 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - id
-      - service_id
-      - mandataire_id
-      - discriminator
       - department_id
-      - dep_nom
-      - mesures_max
+      - mandataire_id
       - mesures_awaiting
       - mesures_in_progress
+      - mesures_max
       - remaining_capacity
+      - service_id
+      - discriminator
+      - id
+      - dep_nom
+      - nom
       computed_fields: []
       filter: {}
     role: individuel
@@ -3072,14 +3074,15 @@ tables:
       columns:
       - department_id
       - mandataire_id
-      - mesures_max
-      - service_id
       - mesures_awaiting
       - mesures_in_progress
+      - mesures_max
       - remaining_capacity
+      - service_id
       - discriminator
       - id
       - dep_nom
+      - nom
       computed_fields: []
       filter: {}
     role: prepose
@@ -3089,14 +3092,15 @@ tables:
       columns:
       - department_id
       - mandataire_id
-      - mesures_max
-      - service_id
       - mesures_awaiting
       - mesures_in_progress
+      - mesures_max
       - remaining_capacity
+      - service_id
       - discriminator
       - id
       - dep_nom
+      - nom
       computed_fields: []
       filter: {}
     role: service
@@ -3104,16 +3108,17 @@ tables:
     permission:
       allow_aggregations: true
       columns:
-      - department_id
-      - mandataire_id
-      - mesures_max
+      - id
       - service_id
+      - mandataire_id
+      - discriminator
+      - nom
+      - department_id
+      - dep_nom
+      - mesures_max
       - mesures_awaiting
       - mesures_in_progress
       - remaining_capacity
-      - discriminator
-      - id
-      - dep_nom
       computed_fields: []
       filter: {}
     role: ti
