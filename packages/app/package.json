@@ -46,7 +46,7 @@
     "jwt-decode": "^2.2.0",
     "lodash.flow": "^3.5.0",
     "mapbox-gl": "^1.4.1",
-    "next": "^9.1.5",
+    "next": "^9.1.6",
     "next-cookies": "^2.0.3",
     "next-images": "^1.2.0",
     "p-debounce": "^2.1.0",
