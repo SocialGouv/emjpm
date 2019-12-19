@@ -54,7 +54,7 @@
     "jest-environment-knex": "^1.1.5",
     "nodemailer-mock": "^1.4.4",
     "nodemon": "^1.19.4",
-    "pg": "^7.11.0",
+    "pg": "^7.15.1",
     "pg-query-stream": "^2.0.1",
     "prettier": "^1.19.1",
     "rewiremock": "^3.13.9",
