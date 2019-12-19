@@ -6575,7 +6575,7 @@ dateformat@^3.0.0:
   resolved "https://registry.yarnpkg.com/dateformat/-/dateformat-3.0.3.tgz#a6e37499a4d9a9cf85ef5872044d62901c9889ae"
   integrity sha512-jyCETtSl3VMZMWeRo7iY1FL19ges1t55hMo5yaam4Jrsm5EPL89UQkoQRyiI+Yf4k8r2ZpdngkV8hr1lIdjb3Q==
 
-db-errors@^0.2.1:
+db-errors@^0.2.1, db-errors@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/db-errors/-/db-errors-0.2.3.tgz#a6a38952e00b20e790f2695a6446b3c65497ffa2"
   integrity sha512-OOgqgDuCavHXjYSJoV2yGhv6SeG8nk42aoCSoyXLZUH7VwFG27rxbavU1z+VrZbZjphw5UkDQwUlD21MwZpUng==
@@ -12177,6 +12177,14 @@ objection@^1.6.9:
     ajv "^6.10.0"
     bluebird "^3.5.5"
     lodash "^4.17.11"
+
+objection@^2.0.7:
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/objection/-/objection-2.0.7.tgz#b74386a8be7ef8882de8694d3f9d7e29ab232c31"
+  integrity sha512-WRCuGE45K04QhovQ4R9Zs2CsneqbbYMmLdpyQIgUKAzkqPNk8swDFr5VlXEW7NEAZ33xiH7PMDli16e65nWGwA==
+  dependencies:
+    ajv "^6.10.2"
+    db-errors "^0.2.3"
 
 octokit-pagination-methods@^1.1.0:
   version "1.1.0"
