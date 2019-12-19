@@ -17,5 +17,8 @@
     "sourceMap": true,
     "strict": true,
     "target": "esnext"
-  }
+  },
+  "files": [
+    "./src/index.ts"
+  ]
 }
