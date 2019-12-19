@@ -3,6 +3,70 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.12.0](https://github.com/SocialGouv/emjpm/compare/v25.11.5...v25.12.0) (2019-12-19)
+
+
+### Bug Fixes
+
+* **admin-import:** handle import for service ([#1119](https://github.com/SocialGouv/emjpm/issues/1119)) ([524bbc2](https://github.com/SocialGouv/emjpm/commit/524bbc21395174351f16e91025bac6b20baf5f35))
+* **api:** add date-fns dependency ([#1092](https://github.com/SocialGouv/emjpm/issues/1092)) ([3a6c3a4](https://github.com/SocialGouv/emjpm/commit/3a6c3a45b38d61912b3044261b776c7c479c995e))
+* **app:** lodash.flow is a real dependency ([#1094](https://github.com/SocialGouv/emjpm/issues/1094)) ([8df679b](https://github.com/SocialGouv/emjpm/commit/8df679b68c22af3598bd54defc41993c28c2fc1d)), closes [#839](https://github.com/SocialGouv/emjpm/issues/839)
+* **app:** there is not router sometimes ([#1109](https://github.com/SocialGouv/emjpm/issues/1109)) ([6b3cf24](https://github.com/SocialGouv/emjpm/commit/6b3cf2482e21f10fc8b8d176ecf560f933bb128c))
+* **cancel-resevation:** test if sesssion vars is definedd ([#1114](https://github.com/SocialGouv/emjpm/issues/1114)) ([808dc91](https://github.com/SocialGouv/emjpm/commit/808dc91139a93d41f872933481b1bc6540f7cb8e))
+* **deps:** update apollo graphql packages ([#1208](https://github.com/SocialGouv/emjpm/issues/1208)) ([8d96e1b](https://github.com/SocialGouv/emjpm/commit/8d96e1bf067f7a2695562409beb2af92ed60712d))
+* **deps:** update dependency @sentry/browser to ^5.10.2 ([#1097](https://github.com/SocialGouv/emjpm/issues/1097)) ([5f18e4d](https://github.com/SocialGouv/emjpm/commit/5f18e4d9b399b7246b454d12a5e455eeefee97c9))
+* **deps:** update dependency @sentry/node to v5.10.2 ([#1210](https://github.com/SocialGouv/emjpm/issues/1210)) ([397291a](https://github.com/SocialGouv/emjpm/commit/397291affd4699a0fe697954a1b56478898946f2))
+* **deps:** update dependency cypress to ^3.8.0 ([#1215](https://github.com/SocialGouv/emjpm/issues/1215)) ([008f1e1](https://github.com/SocialGouv/emjpm/commit/008f1e1f436c83fe948566312b6072297aa6098b))
+* **deps:** update dependency dotenv to ^8.2.0 ([#1216](https://github.com/SocialGouv/emjpm/issues/1216)) ([eefa21b](https://github.com/SocialGouv/emjpm/commit/eefa21b568c5297e58ec2c59cf48cd02ecd922da))
+* **deps:** update dependency express-validator to ^6.3.0 ([#1217](https://github.com/SocialGouv/emjpm/issues/1217)) ([fcf3525](https://github.com/SocialGouv/emjpm/commit/fcf3525a4033a592831ed3e91a8214b7d3384b27))
+* **deps:** update dependency knex to ^0.20.4 ([#1103](https://github.com/SocialGouv/emjpm/issues/1103)) ([267a0f9](https://github.com/SocialGouv/emjpm/commit/267a0f91c88d995867c7da08fa9e6069aba2ab0f))
+* **deps:** update dependency next to ^9.1.5 ([#1096](https://github.com/SocialGouv/emjpm/issues/1096)) ([a5d28e6](https://github.com/SocialGouv/emjpm/commit/a5d28e64f4e3ce0dbdcbdf86d158de0a440ce386))
+* **hasura:** remove useless script + update metadata ([#1195](https://github.com/SocialGouv/emjpm/issues/1195)) ([0b0e652](https://github.com/SocialGouv/emjpm/commit/0b0e65236bf3c42823b63fa47a6e26c6a7f8cc1b))
+* **hasura-permission:** add geo data permission for ti ([#1219](https://github.com/SocialGouv/emjpm/issues/1219)) ([1059ee4](https://github.com/SocialGouv/emjpm/commit/1059ee485ba9ddf7be77ccc011cdbe743661ec05))
+* **hasura-permission:** add missing permissions for individuel / prepose ([3850baa](https://github.com/SocialGouv/emjpm/commit/3850baa2ad7db483ddc4db519171dc445a4fbcad))
+* **hasura-permission:** remove mandataire role ([#1224](https://github.com/SocialGouv/emjpm/issues/1224)) ([48544b3](https://github.com/SocialGouv/emjpm/commit/48544b3553819ba09a14d4cb500923998e2b6510))
+* **hasura-permission:** update hasura permission for mandataire ([#1107](https://github.com/SocialGouv/emjpm/issues/1107)) ([c79b85c](https://github.com/SocialGouv/emjpm/commit/c79b85cfd313f39b4ebf64608a8c388e2a4045d7))
+* **import:** import all well format mesures ([#1115](https://github.com/SocialGouv/emjpm/issues/1115)) ([29255ce](https://github.com/SocialGouv/emjpm/commit/29255cebbe6f412fe5077625b45c91a41d93fbe1))
+* **lint:** fix lint erros ([#1100](https://github.com/SocialGouv/emjpm/issues/1100)) ([a1ff20f](https://github.com/SocialGouv/emjpm/commit/a1ff20f7e07c0543e756bf919883b4db297637d8))
+* **magistrat-mandataires-map:** add missing metadata fix pagination ([#1150](https://github.com/SocialGouv/emjpm/issues/1150)) ([513f337](https://github.com/SocialGouv/emjpm/commit/513f3378e999dd3b1f68fab1fe83481be53f183d))
+* **magistrat-map:** fix fetch policy ([#1170](https://github.com/SocialGouv/emjpm/issues/1170)) ([1767f5d](https://github.com/SocialGouv/emjpm/commit/1767f5d0f404d0a964923ad01aa00bc7cefafc2f))
+* **magistrat-mesures:**  add missing judgement_date and is_urgent ([#1167](https://github.com/SocialGouv/emjpm/issues/1167)) ([ecb123e](https://github.com/SocialGouv/emjpm/commit/ecb123e861f54da84993963916a7643ac9de4376))
+* **mandataire-edit:** mandataire can update all profile datas ([#1138](https://github.com/SocialGouv/emjpm/issues/1138)) ([e7b3a6c](https://github.com/SocialGouv/emjpm/commit/e7b3a6cf6324a84beb9f7b49eb723a6e378d75a0)), closes [#1134](https://github.com/SocialGouv/emjpm/issues/1134)
+* **mandataire-permission:** fix perm ([#1164](https://github.com/SocialGouv/emjpm/issues/1164)) ([ccd8ee0](https://github.com/SocialGouv/emjpm/commit/ccd8ee0cbe72f94de34686fea5fa202c54b10d82))
+* **mesure-import:** use hasura preset value for user_id ([#1140](https://github.com/SocialGouv/emjpm/issues/1140)) ([857e3a0](https://github.com/SocialGouv/emjpm/commit/857e3a0412c07b0dc64ba410c2d7cbb60add428d))
+* **mesure-wording:** fix wording fix [#1085](https://github.com/SocialGouv/emjpm/issues/1085) ([#1128](https://github.com/SocialGouv/emjpm/issues/1128)) ([d07d999](https://github.com/SocialGouv/emjpm/commit/d07d999903147d9ff885c9f6b6a653dcf699f065))
+* **service-edit-form:** add missing query filed antenne_id ([#1152](https://github.com/SocialGouv/emjpm/issues/1152)) ([2ff6c6a](https://github.com/SocialGouv/emjpm/commit/2ff6c6aefcedded70faca398017b7419e3ccd608))
+* **service-naming:** remove plural on services ([#1126](https://github.com/SocialGouv/emjpm/issues/1126)) ([a38bdc3](https://github.com/SocialGouv/emjpm/commit/a38bdc360c51534df4f5d0fcdad5d03a90fab1a6))
+* **services-form:** fix zindex and antennes options ([#1147](https://github.com/SocialGouv/emjpm/issues/1147)) ([b679ac9](https://github.com/SocialGouv/emjpm/commit/b679ac9f7139ec34f1eae0437e02d469a227315a))
+* **view-medata:** fix sql view permission ([#1196](https://github.com/SocialGouv/emjpm/issues/1196)) ([1501e4e](https://github.com/SocialGouv/emjpm/commit/1501e4e0b60725377633042cb44e8494ebf39585))
+
+
+### Features
+
+* **add-geocode-to-admin-serice-add:** add geocode and handle depid ([#1168](https://github.com/SocialGouv/emjpm/issues/1168)) ([242b6e7](https://github.com/SocialGouv/emjpm/commit/242b6e7457b29c0ab845153961912ad84127434b))
+* **add-geocode-to-admin-service-edit:** add geocode service admin edit ([#1171](https://github.com/SocialGouv/emjpm/issues/1171)) ([fcb05d7](https://github.com/SocialGouv/emjpm/commit/fcb05d7d730f70a8f2ed623a1b8d736de1744d3e))
+* **add-geocode-to-mandataire-edit:** add geocode to mandataire edit ([#1159](https://github.com/SocialGouv/emjpm/issues/1159)) ([f5f0f1e](https://github.com/SocialGouv/emjpm/commit/f5f0f1e352af623378a47a880d5368c122fb337e))
+* **add-geolocation:** add geocode comps, style and util ([#1106](https://github.com/SocialGouv/emjpm/issues/1106)) ([b3b20c4](https://github.com/SocialGouv/emjpm/commit/b3b20c4a20552c0d102fc9134221430f6b9ad11f))
+* **admin-import:** handle import page visibility ([#1118](https://github.com/SocialGouv/emjpm/issues/1118)) ([0f8cd63](https://github.com/SocialGouv/emjpm/commit/0f8cd63ad6936352d20064454bca516f4adb3a99))
+* **admin-user:** display active indicator ([#1116](https://github.com/SocialGouv/emjpm/issues/1116)) ([61a018f](https://github.com/SocialGouv/emjpm/commit/61a018f393a75c0c21ba9fe155e627bcaca9f37d))
+* **filter-waiting-mesures:** add filter for waiting mesures fix [#1087](https://github.com/SocialGouv/emjpm/issues/1087) ([#1129](https://github.com/SocialGouv/emjpm/issues/1129)) ([d2f4bc7](https://github.com/SocialGouv/emjpm/commit/d2f4bc7d9932052c223ed33541dfddfce8b17b62))
+* **geocode-mandataire:** handle geocode for mandataire signup ([#1160](https://github.com/SocialGouv/emjpm/issues/1160)) ([b1ae80e](https://github.com/SocialGouv/emjpm/commit/b1ae80ee85346502d2073555735d7d866e81ca35))
+* **magistrat:** add mandataire search input ([#1169](https://github.com/SocialGouv/emjpm/issues/1169)) ([f0bbcab](https://github.com/SocialGouv/emjpm/commit/f0bbcab154310ac9ad88150efe96db1928855d40))
+* **magistrat-mandataires-pagination:** add pagination ([#1148](https://github.com/SocialGouv/emjpm/issues/1148)) ([2ffc67a](https://github.com/SocialGouv/emjpm/commit/2ffc67ab4e99ab5980e4b015497dff17e1907809))
+* **manataire:** add waiting mesures page ([#1121](https://github.com/SocialGouv/emjpm/issues/1121)) ([5b6c32a](https://github.com/SocialGouv/emjpm/commit/5b6c32abc4212d0c2de59c44daac2dbb4f6f5161))
+* **mandataire-edit:** add all mandataire fields in edit form ([#1165](https://github.com/SocialGouv/emjpm/issues/1165)) ([89ee5e1](https://github.com/SocialGouv/emjpm/commit/89ee5e1e5d0e3a6e792913f59422ce2ceedac48d))
+* **mandataire-info:** display all mandataire info ([#1166](https://github.com/SocialGouv/emjpm/issues/1166)) ([2c9eb3b](https://github.com/SocialGouv/emjpm/commit/2c9eb3ba2f73513be7a8cd4eb1abbcab42a6245a))
+* **mandataire-mesure:** hide status filter in awaiting mesure page ([#1139](https://github.com/SocialGouv/emjpm/issues/1139)) ([5fb390c](https://github.com/SocialGouv/emjpm/commit/5fb390c97dec839ba17d53b880a876219eb1a1af))
+* **mandataire-mesures-map:** add map and mesures pages ([#1162](https://github.com/SocialGouv/emjpm/issues/1162)) ([f2431c5](https://github.com/SocialGouv/emjpm/commit/f2431c59bb8005467040921349855d1a19f22724))
+* **mandataires:** rewrite all pages and components ([#1037](https://github.com/SocialGouv/emjpm/issues/1037)) ([8879519](https://github.com/SocialGouv/emjpm/commit/88795190dff23d31a46f118d9cb9054eac21e61c))
+* **map:** add maps ([#894](https://github.com/SocialGouv/emjpm/issues/894)) ([cb142e0](https://github.com/SocialGouv/emjpm/commit/cb142e0db1756be7e611be359e68b53f4ba53d76)), closes [#1110](https://github.com/SocialGouv/emjpm/issues/1110) [#1109](https://github.com/SocialGouv/emjpm/issues/1109)
+* **map:** introduce maps ([#1125](https://github.com/SocialGouv/emjpm/issues/1125)) ([491fab1](https://github.com/SocialGouv/emjpm/commit/491fab17acc2c897c73035c5175486a982747199))
+* **mesure-import:** handle longitude/latitude ([#1120](https://github.com/SocialGouv/emjpm/issues/1120)) ([097645f](https://github.com/SocialGouv/emjpm/commit/097645f4d8830ce584dff9ff5aba0e584b3a461d))
+
+
+
+
+
 ## [25.11.5](https://github.com/SocialGouv/emjpm/compare/v25.11.4...v25.11.5) (2019-12-09)
 
 **Note:** Version bump only for package emjpm

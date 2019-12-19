@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.12.0](https://github.com/SocialGouv/emjpm/compare/v25.11.5...v25.12.0) (2019-12-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cypress to ^3.8.0 ([#1215](https://github.com/SocialGouv/emjpm/issues/1215)) ([008f1e1](https://github.com/SocialGouv/emjpm/commit/008f1e1f436c83fe948566312b6072297aa6098b))
+
+
+
+
+
 ## [25.11.5](https://github.com/SocialGouv/emjpm/compare/v25.11.4...v25.11.5) (2019-12-09)
 
 **Note:** Version bump only for package @optional/e2e
