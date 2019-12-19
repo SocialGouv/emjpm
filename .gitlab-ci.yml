@@ -56,6 +56,7 @@ stages:
 
 .register_stage: &register_stage
   stage: "Registration"
+  interruptible: true
   dependencies: []
   except:
     variables:
