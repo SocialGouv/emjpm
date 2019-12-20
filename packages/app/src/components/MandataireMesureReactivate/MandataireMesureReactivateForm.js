@@ -28,7 +28,7 @@ export const MandataireMesureReactivateForm = props => {
       const [mesure] = returning;
       UpdateMandatairesCounter({
         variables: {
-          mandataires_id: mesure.mandataires_id,
+          mandataireId: mesure.mandataire_id,
           mesures_awaiting: 0,
           mesures_in_progress: 1
         }
