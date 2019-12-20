@@ -1,7 +1,6 @@
-import { AsyncSelect, Button, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { AsyncSelect, Button, Field, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
-import { Box } from "rebass";
 
 import { serviceSchema } from "../../lib/validationSchemas/serviceSchema";
 import { debouncedGeocode } from "../../util/geocode";
@@ -34,7 +33,7 @@ const ServiceEditForm = props => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      <Field>
         <Input
           value={formik.values.etablissement}
           id="etablissement"
@@ -43,8 +42,8 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Nom du service"
         />
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2" mt="5">
+      </Field>
+      <Field>
         <Input
           value={formik.values.nom}
           id="nom"
@@ -53,8 +52,8 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Nom du responsable"
         />
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.prenom}
           id="prenom"
@@ -63,8 +62,8 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Prénom du responsable"
         />
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.dispo_max.toString()}
           id="dispo_max"
@@ -73,8 +72,8 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Mesures maximum"
         />
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2" mt="5">
+      </Field>
+      <Field>
         <Input
           value={formik.values.telephone}
           id="telephone"
@@ -83,8 +82,8 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Numéro de téléphone"
         />
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.email}
           id="email"
@@ -93,8 +92,8 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Adresse email"
         />
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
+      </Field>
+      <Field>
         <AsyncSelect
           name="geocode"
           cacheOptions
@@ -108,8 +107,8 @@ const ServiceEditForm = props => {
         />
         {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
         {formik.errors.code_postal && <Text>{formik.errors.codePostal}</Text>}
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.information}
           id="information"
@@ -118,12 +117,12 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Informations"
         />
-      </Box>
-      <Box>
+      </Field>
+      <Field>
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
           Enregistrer
         </Button>
-      </Box>
+      </Field>
     </form>
   );
 };
