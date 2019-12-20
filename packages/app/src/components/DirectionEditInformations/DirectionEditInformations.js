@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Router from "next/router";
 import React from "react";
@@ -69,7 +69,7 @@ const DirectionEditInformations = props => {
                 const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
                 return (
                   <form onSubmit={handleSubmit}>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                    <Field>
                       <Input
                         value={values.prenom}
                         id="prenom"
@@ -79,8 +79,8 @@ const DirectionEditInformations = props => {
                         placeholder="Prénom"
                       />
                       {errors.prenom && touched.prenom && <Text mt="1">{errors.prenom}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                    </Field>
+                    <Field>
                       <Input
                         value={values.nom}
                         id="nom"
@@ -90,8 +90,8 @@ const DirectionEditInformations = props => {
                         placeholder="Nom"
                       />
                       {errors.nom && touched.nom && <Text mt="1">{errors.nom}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+                    </Field>
+                    <Field>
                       <Input
                         value={values.email}
                         id="email"
@@ -101,7 +101,7 @@ const DirectionEditInformations = props => {
                         placeholder="Email"
                       />
                       {errors.email && touched.email && <Text mt="1">{errors.email}</Text>}
-                    </Box>
+                    </Field>
                     <Box>
                       <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
                         Enregistrer

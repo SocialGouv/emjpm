@@ -1,4 +1,4 @@
-import { AsyncSelect, Button, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { AsyncSelect, Button, Field, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
 import { Box } from "rebass";
@@ -51,7 +51,7 @@ const ServiceAntenneForm = props => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      <Field>
         <Input
           value={formik.values.name}
           id="name"
@@ -61,8 +61,8 @@ const ServiceAntenneForm = props => {
           placeholder="Nom de l'antenne"
         />
         {formik.errors.name && formik.touched.name && <Text>{formik.errors.name}</Text>}
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2" mt="5">
+      </Field>
+      <Field>
         <Input
           value={formik.values.contact_lastname}
           id="contact_lastname"
@@ -74,8 +74,8 @@ const ServiceAntenneForm = props => {
         {formik.errors.contact_lastname && formik.touched.contact_lastname && (
           <Text>{formik.errors.contact_lastname}</Text>
         )}
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.contact_firstname}
           id="contact_firstname"
@@ -87,8 +87,8 @@ const ServiceAntenneForm = props => {
         {formik.errors.contact_firstname && formik.touched.contact_firstname && (
           <Text>{formik.errors.contact_firstname}</Text>
         )}
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.mesures_max.toString()}
           id="mesures_max"
@@ -100,8 +100,8 @@ const ServiceAntenneForm = props => {
         {formik.errors.mesures_max && formik.touched.mesures_max && (
           <Text>{formik.errors.mesures_max}</Text>
         )}
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2" mt="5">
+      </Field>
+      <Field>
         <Input
           value={formik.values.contact_phone}
           id="contact_phone"
@@ -113,8 +113,8 @@ const ServiceAntenneForm = props => {
         {formik.errors.contact_phone && formik.touched.contact_phone && (
           <Text>{formik.errors.contact_phone}</Text>
         )}
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.contact_email}
           id="contact_email"
@@ -126,8 +126,8 @@ const ServiceAntenneForm = props => {
         {formik.errors.contact_email && formik.touched.contact_email && (
           <Text>{formik.errors.contact_email}</Text>
         )}
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
+      </Field>
+      <Field>
         <AsyncSelect
           name="geocode"
           cacheOptions
@@ -140,7 +140,7 @@ const ServiceAntenneForm = props => {
           onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
         />
         {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
-      </Box>
+      </Field>
       <Box>
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
           Enregistrer
