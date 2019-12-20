@@ -1,23 +1,19 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { useMutation } from "@apollo/react-hooks";
 import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { RESIDENCE } from "../../constants/mesures";
 import { getRegionCode } from "../../util/departements";
+import { formatAntenneOptions } from "../../util/services";
 import { ACCEPT_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
-import { DEPARTEMENTS } from "./queries";
-import { formatAntenneOptions } from "./utils";
 
-export const ServiceAcceptMesure = props => {
-  const { currentMesure, user_antennes, isPage = false } = props;
-
-  const { data: departementsData } = useQuery(DEPARTEMENTS);
+export const ServiceMesureAcceptForm = props => {
+  const { mesureId, user_antennes, departementsData } = props;
 
   const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
@@ -51,7 +47,6 @@ export const ServiceAcceptMesure = props => {
     }
   });
 
-  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
   return (
     <Flex flexWrap="wrap">
@@ -85,18 +80,13 @@ export const ServiceAcceptMesure = props => {
                   code_postal: values.code_postal,
                   date_ouverture: values.date_ouverture,
                   department_id: departement.id,
-                  id: currentMesure,
+                  id: mesureId,
                   residence: values.residence.value,
                   ville: values.ville
                 }
               });
-              if (!isPage) {
-                // TODO transform me in done function passed to the component
-                setPanelType(null);
-                setCurrentMesure(null);
-              } else {
-                Router.push(`/services/mesures/${currentMesure}`);
-              }
+
+              Router.push(`/services/mesures/${mesureId}`);
             }
             setSubmitting(false);
           }}
@@ -188,13 +178,7 @@ export const ServiceAcceptMesure = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        if (!isPage) {
-                          // TODO transform me in cancel function passed to the component
-                          setPanelType(PANEL_TYPE.CLOSE);
-                          setCurrentMesure(null);
-                        } else {
-                          Router.push(`/services/mesures/${currentMesure}`);
-                        }
+                        Router.push(`/services/mesures/${mesureId}`);
                       }}
                     >
                       Annuler
@@ -215,6 +199,6 @@ export const ServiceAcceptMesure = props => {
   );
 };
 
-ServiceAcceptMesure.propTypes = {
+ServiceMesureAcceptForm.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };
