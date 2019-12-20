@@ -1,4 +1,4 @@
-import { AsyncSelect, Button, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { AsyncSelect, Button, Field, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
@@ -45,7 +45,7 @@ const MandatairesEditInformationsForm = props => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      <Field>
         <Input
           value={formik.values.prenom}
           id="prenom"
@@ -57,8 +57,8 @@ const MandatairesEditInformationsForm = props => {
         {formik.errors.prenom && formik.touched.prenom && (
           <Text mt="1">{formik.errors.prenom}</Text>
         )}
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.nom}
           id="nom"
@@ -68,8 +68,8 @@ const MandatairesEditInformationsForm = props => {
           placeholder="Nom"
         />
         {formik.errors.nom && formik.touched.nom && <Text mt="1">{formik.errors.nom}</Text>}
-      </Box>
-      <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.email}
           id="email"
@@ -79,10 +79,10 @@ const MandatairesEditInformationsForm = props => {
           placeholder="Email"
         />
         {formik.errors.email && formik.touched.email && <Text mt="1">{formik.errors.email}</Text>}
-      </Box>
+      </Field>
 
       {/* MANDATAIRE FIELD */}
-      <Box sx={{ position: "relative", zIndex: "100" }} mb="2" pt="2">
+      <Field>
         <Select
           id="genre"
           name="genre"
@@ -93,8 +93,8 @@ const MandatairesEditInformationsForm = props => {
           options={GENDER_OPTIONS}
         />
         {formik.errors.genre && formik.touched.genre && <Text>{formik.errors.genre}</Text>}
-      </Box>
-      <Box mb="2" pt="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.siret}
           id="siret"
@@ -104,8 +104,8 @@ const MandatairesEditInformationsForm = props => {
           placeholder="SIRET"
         />
         {formik.errors.siret && formik.touched.siret && <Text>{formik.errors.siret}</Text>}
-      </Box>
-      <Box mb="2" pt="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.telephone}
           id="telephone"
@@ -117,8 +117,8 @@ const MandatairesEditInformationsForm = props => {
         {formik.errors.telephone && formik.touched.telephone && (
           <Text>{formik.errors.telephone}</Text>
         )}
-      </Box>
-      <Box mb="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.telephone_portable}
           id="telephone_portable"
@@ -126,8 +126,8 @@ const MandatairesEditInformationsForm = props => {
           onChange={formik.handleChange}
           placeholder="Téléphone portable"
         />
-      </Box>
-      <Box mb="2" pt="2">
+      </Field>
+      <Field>
         <AsyncSelect
           name="geocode"
           cacheOptions
@@ -140,8 +140,8 @@ const MandatairesEditInformationsForm = props => {
           onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
         />
         {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
-      </Box>
-      <Box mb="2" pt="2">
+      </Field>
+      <Field>
         <Input
           value={formik.values.dispo_max}
           id="dispo_max"
@@ -153,8 +153,8 @@ const MandatairesEditInformationsForm = props => {
         {formik.errors.dispo_max && formik.touched.dispo_max && (
           <Text>{formik.errors.dispo_max}</Text>
         )}
-      </Box>
-      <Box mb="2" sx={{ position: "relative", zIndex: "100" }}>
+      </Field>
+      <Field>
         <Select
           value={formik.values.secretariat}
           id="secretariat"
@@ -174,9 +174,9 @@ const MandatairesEditInformationsForm = props => {
         {formik.errors.secretariat && formik.touched.secretariat && (
           <Text>{formik.errors.secretariat}</Text>
         )}
-      </Box>
+      </Field>
       {isSecretariat && (
-        <Box mb="2">
+        <Field>
           <Input
             value={formik.values.nb_secretariat}
             id="nb_secretariat"
@@ -188,7 +188,7 @@ const MandatairesEditInformationsForm = props => {
           {formik.errors.nb_secretariat && formik.touched.nb_secretariat && (
             <Text>{formik.errors.nb_secretariat}</Text>
           )}
-        </Box>
+        </Field>
       )}
 
       <Flex alignItems="center" justifyContent="flex-end">
