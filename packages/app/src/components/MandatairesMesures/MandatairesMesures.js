@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MesureContextProvider, MesureList } from "@socialgouv/emjpm-ui-components";
+import { MesureContextProvider, MesureListItem } from "@socialgouv/emjpm-ui-components";
+import Router from "next/router";
 import React, { Fragment, useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
@@ -8,11 +9,6 @@ import { FiltersContext } from "../MandataireFilters/context";
 import { MANDATAIRE_MESURES } from "./queries";
 import { formatMesureList } from "./utils";
 const RESULT_PER_PAGE = 20;
-import { MandataireMesureAcceptForm } from "../MandataireMesureAccept";
-import { MandataireMesureCloseForm } from "../MandataireMesureClose";
-import { MandataireMesureDeleteForm } from "../MandataireMesureDelete";
-import { MandataireMesureEditForm } from "../MandataireMesureEdit";
-import { MandataireMesureReactivateForm } from "../MandataireMesureReactivate";
 import { MesureListStyle } from "./style";
 
 const MandatairesMesures = props => {
@@ -41,6 +37,10 @@ const MandatairesMesures = props => {
     variables: queryVariables
   });
 
+  const selectMesure = ({ id }) => {
+    Router.push(`/mandataires/mesures/${id}`);
+  };
+
   if (loading) {
     return <div>loading</div>;
   }
@@ -59,17 +59,15 @@ const MandatairesMesures = props => {
         <Fragment>
           {mesures.length > 0 ? (
             <Fragment>
-              <MesureList
-                EditComponent={MandataireMesureEditForm}
-                CloseComponent={MandataireMesureCloseForm}
-                RemoveComponent={props => (
-                  <MandataireMesureDeleteForm {...props} queryVariables={queryVariables} />
-                )}
-                AcceptComponent={MandataireMesureAcceptForm}
-                ReactivateComponent={MandataireMesureReactivateForm}
-                onPanelOpen={() => null}
-                mesures={mesures}
-              />
+              {mesures.map(mesure => {
+                return (
+                  <MesureListItem
+                    key={mesure.id}
+                    mesure={mesure}
+                    onClick={({ mesure }) => selectMesure(mesure)}
+                  />
+                );
+              })}
             </Fragment>
           ) : (
             <div>Pas de donnée à afficher</div>
