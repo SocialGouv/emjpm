@@ -1,17 +1,16 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { AsyncSelect, Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import Router from "next/router";
-import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-import * as Yup from "yup";
 
 import { RESIDENCE } from "../../constants/mesures";
+import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
+import { debouncedGeocode } from "../../util/geocode";
 import { formatAntenneOptions } from "../../util/services";
 import { ACCEPT_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
-
 export const ServiceMesureAcceptForm = props => {
   const { mesureId, user_antennes, departementsData } = props;
 
@@ -48,6 +47,45 @@ export const ServiceMesureAcceptForm = props => {
   });
 
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
+
+  const formik = useFormik({
+    onSubmit: (values, { setSubmitting, setErrors }) => {
+      const regionCode = getRegionCode(values.geocode.postcode);
+      const departements = departementsData.departements;
+      const departement = departements.find(dep => dep.code === regionCode);
+      if (!departement) {
+        setErrors({
+          code_postal: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
+        });
+      } else {
+        UpdateMesure({
+          refetchQueries: ["mesures", "mesures_aggregate"],
+          variables: {
+            antenne_id: values.antenne_id ? values.antenne_id.value : null,
+            date_ouverture: values.date_ouverture,
+            department_id: departement.id,
+            id: mesureId,
+            residence: values.residence.value,
+            ville: values.geocode.city,
+            latitude: values.geocode.lat,
+            longitude: values.geocode.lng,
+            code_postal: values.geocode.postcode
+          }
+        });
+
+        Router.push(`/services/mesures/${mesureId}`);
+      }
+      setSubmitting(false);
+    },
+    validationSchema: serviceAcceptMesureSchema,
+    initialValues: {
+      antenne_id: "",
+      date_ouverture: "",
+      residence: ""
+    }
+  });
+  console.log(formik.errors);
+  console.log(formik.touched);
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
@@ -63,142 +101,78 @@ export const ServiceMesureAcceptForm = props => {
         <Box mb="3">
           <Heading3>Accepter la mesure</Heading3>
         </Box>
-        <Formik
-          onSubmit={(values, { setSubmitting, setErrors }) => {
-            const regionCode = getRegionCode(values.code_postal);
-            const departements = departementsData.departements;
-            const departement = departements.find(dep => dep.code === regionCode);
-            if (!departement) {
-              setErrors({
-                code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
-              });
-            } else {
-              UpdateMesure({
-                refetchQueries: ["mesures", "mesures_aggregate"],
-                variables: {
-                  antenne_id: values.antenne_id ? values.antenne_id.value : null,
-                  code_postal: values.code_postal,
-                  date_ouverture: values.date_ouverture,
-                  department_id: departement.id,
-                  id: mesureId,
-                  residence: values.residence.value,
-                  ville: values.ville
-                }
-              });
-
-              Router.push(`/services/mesures/${mesureId}`);
-            }
-            setSubmitting(false);
-          }}
-          validationSchema={Yup.object().shape({
-            code_postal: Yup.string().required(),
-            date_ouverture: Yup.date().required(),
-            residence: Yup.string().required(),
-            ville: Yup.string().required()
-          })}
-          initialValues={{
-            antenne_id: "",
-            code_postal: "",
-            date_ouverture: "",
-            residence: "",
-            ville: ""
-          }}
-        >
-          {props => {
-            const {
-              values,
-              touched,
-              errors,
-              isSubmitting,
-              handleChange,
-              handleSubmit,
-              setFieldValue
-            } = props;
-            return (
-              <form onSubmit={handleSubmit}>
-                <Box mb="2">
-                  <Input
-                    value={values.date_ouverture}
-                    id="date_ouverture"
-                    type="date"
-                    name="date_ouverture"
-                    hasError={errors.date_ouverture && touched.date_ouverture}
-                    onChange={handleChange}
-                    placeholder="Date d'ouverture"
-                  />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
-                  <Select
-                    id="residence"
-                    name="residence"
-                    placeholder="Type de residence"
-                    value={values.residence}
-                    hasError={errors.residence && touched.residence}
-                    onChange={option => setFieldValue("residence", option)}
-                    options={RESIDENCE}
-                  />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                  <Input
-                    value={values.code_postal}
-                    id="code_postal"
-                    name="code_postal"
-                    hasError={errors.code_postal && touched.code_postal}
-                    onChange={handleChange}
-                    placeholder="Code postal"
-                  />
-                  {errors.code_postal && touched.code_postal && <Text>{errors.code_postal}</Text>}
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                  <Input
-                    value={values.ville}
-                    id="ville"
-                    name="ville"
-                    hasError={errors.ville && touched.ville}
-                    onChange={handleChange}
-                    placeholder="ville"
-                  />
-                </Box>
-                {user_antennes.length >= 2 && (
-                  <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
-                    <Select
-                      id="antenne_id"
-                      name="antenne_id"
-                      placeholder="Antenne"
-                      value={values.antenne_id}
-                      hasError={errors.antenne_id && touched.antenne_id}
-                      onChange={option => setFieldValue("antenne_id", option)}
-                      options={ANTENNE_OPTIONS}
-                    />
-                  </Box>
-                )}
-                <Flex justifyContent="flex-end">
-                  <Box>
-                    <Button
-                      mr="2"
-                      variant="outline"
-                      onClick={() => {
-                        Router.push(`/services/mesures/${mesureId}`);
-                      }}
-                    >
-                      Annuler
-                    </Button>
-                  </Box>
-                  <Box>
-                    <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                      Valider la mesure
-                    </Button>
-                  </Box>
-                </Flex>
-              </form>
-            );
-          }}
-        </Formik>
+        <form onSubmit={formik.handleSubmit}>
+          <Box mb="2">
+            <Input
+              value={formik.values.date_ouverture}
+              id="date_ouverture"
+              type="date"
+              name="date_ouverture"
+              hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
+              onChange={formik.handleChange}
+              placeholder="Date d'ouverture"
+            />
+          </Box>
+          <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
+            <Select
+              id="residence"
+              name="residence"
+              placeholder="Type de residence"
+              value={formik.values.residence}
+              hasError={formik.errors.residence && formik.touched.residence}
+              onChange={option => formik.setFieldValue("residence", option)}
+              options={RESIDENCE}
+            />
+            {formik.errors.residence && formik.touched.residence && (
+              <Text>{formik.errors.residence}</Text>
+            )}
+          </Box>
+          <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+            <AsyncSelect
+              name="geocode"
+              cacheOptions
+              hasError={formik.errors.geocode}
+              isClearable
+              loadOptions={debouncedGeocode}
+              placeholder="Ville, code postal, ..."
+              noOptionsMessage={() => "Pas de résultats"}
+              onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
+            />
+            {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
+          </Box>
+          {user_antennes.length >= 2 && (
+            <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+              <Select
+                id="antenne_id"
+                name="antenne_id"
+                placeholder="Antenne"
+                value={formik.values.antenne_id}
+                hasError={formik.errors.antenne_id && formik.touched.antenne_id}
+                onChange={option => formik.setFieldValue("antenne_id", option)}
+                options={ANTENNE_OPTIONS}
+              />
+            </Box>
+          )}
+          <Flex justifyContent="flex-end">
+            <Box>
+              <Button
+                mr="2"
+                variant="outline"
+                onClick={() => {
+                  Router.push(`/services/mesures/${mesureId}`);
+                }}
+              >
+                Annuler
+              </Button>
+            </Box>
+            <Box>
+              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+                Valider la mesure
+              </Button>
+            </Box>
+          </Flex>
+        </form>
       </Box>
     </Flex>
   );
-};
-
-ServiceMesureAcceptForm.propTypes = {
-  currentMesure: PropTypes.number.isRequired
 };

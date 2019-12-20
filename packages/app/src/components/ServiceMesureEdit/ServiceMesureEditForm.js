@@ -259,9 +259,7 @@ export const ServiceMesureEditForm = props => {
               noOptionsMessage={() => "Pas de résultats"}
               onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
             />
-            {formik.errors.geocode && formik.touched.geocode && (
-              <Text>{formik.errors.geocode}</Text>
-            )}
+            {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
             {formik.errors.code_postal && <Text>{formik.errors.codePostal}</Text>}
           </Box>
           <Flex justifyContent="flex-end">
