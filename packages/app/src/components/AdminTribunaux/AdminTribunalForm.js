@@ -1,4 +1,4 @@
-import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
@@ -62,7 +62,7 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                 const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
                 return (
                   <form onSubmit={handleSubmit}>
-                    <Box mb="2">
+                    <Field>
                       <Input
                         value={values.etablissement}
                         id="etablissement"
@@ -74,8 +74,8 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                       {errors.etablissement && touched.etablissement && (
                         <Text>{errors.etablissement}</Text>
                       )}
-                    </Box>
-                    <Box mb="2">
+                    </Field>
+                    <Field>
                       <Input
                         value={values.siret}
                         id="siret"
@@ -85,8 +85,8 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                         placeholder="SIRET"
                       />
                       {errors.siret && touched.siret && <Text>{errors.siret}</Text>}
-                    </Box>
-                    <Box mb="2">
+                    </Field>
+                    <Field>
                       <Input
                         value={values.code_postal}
                         id="code_postal"
@@ -98,8 +98,8 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                       {errors.code_postal && touched.code_postal && (
                         <Text>{errors.code_postal}</Text>
                       )}
-                    </Box>
-                    <Box mb="2">
+                    </Field>
+                    <Field>
                       <Input
                         value={values.ville}
                         id="ville"
@@ -109,8 +109,8 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                         placeholder="Ville"
                       />
                       {errors.ville && touched.ville && <Text>{errors.ville}</Text>}
-                    </Box>
-                    <Box mb="2" mt="5">
+                    </Field>
+                    <Field mt="5">
                       <Input
                         value={values.email}
                         id="email"
@@ -120,8 +120,8 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                         placeholder="Email"
                       />
                       {errors.email && touched.email && <Text>{errors.email}</Text>}
-                    </Box>
-                    <Box mb="2">
+                    </Field>
+                    <Field>
                       <Input
                         value={values.telephone}
                         id="telephone"
@@ -131,7 +131,7 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                         placeholder="Téléphone"
                       />
                       {errors.telephone && touched.telephone && <Text>{errors.telephone}</Text>}
-                    </Box>
+                    </Field>
                     <Flex justifyContent="flex-end">
                       <Box>
                         <Button mr="2" variant="outline" onClick={onCancel}>
