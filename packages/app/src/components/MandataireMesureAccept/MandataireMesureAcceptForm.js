@@ -5,9 +5,9 @@ import Router from "next/router";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-import * as Yup from "yup";
 
 import { RESIDENCE } from "../../constants/mesures";
+import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { debouncedGeocode } from "../../util/geocode";
 import { ACCEPT_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
@@ -39,40 +39,35 @@ export const MandataireMesureAcceptForm = props => {
 
   const formik = useFormik({
     onSubmit: (values, { setSubmitting, setErrors }) => {
-      const regionCode = getRegionCode(values.code_postal);
+      const regionCode = getRegionCode(values.geocode.postcode);
       const departements = departementsData.departements;
       const departement = departements.find(dep => dep.code === regionCode);
       if (!departement) {
         setErrors({
-          code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
+          geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
         });
       } else {
         UpdateMesure({
           refetchQueries: ["mesures", "mesures_aggregate"],
           variables: {
-            code_postal: values.code_postal,
             date_ouverture: values.date_ouverture,
             department_id: departement.id,
             id: mesureId,
             residence: values.residence.value,
-            ville: values.ville
+            ville: values.geocode.city,
+            latitude: values.geocode.lat,
+            longitude: values.geocode.lng,
+            code_postal: values.geocode.postcode
           }
         });
         Router.push(`/mandataires/mesures/${mesureId}`);
       }
       setSubmitting(false);
     },
-    validationSchema: Yup.object().shape({
-      code_postal: Yup.string().required(),
-      date_ouverture: Yup.date().required(),
-      residence: Yup.string().required(),
-      ville: Yup.string().required()
-    }),
+    validationSchema: mandataireAcceptMesureSchema,
     initialValues: {
-      code_postal: "",
       date_ouverture: "",
-      residence: "",
-      ville: ""
+      residence: ""
     }
   });
 
@@ -103,6 +98,7 @@ export const MandataireMesureAcceptForm = props => {
               onChange={formik.handleChange}
               placeholder="Date d'ouverture"
             />
+            {formik.errors.date_ouverture && <Text>{formik.errors.date_ouverture}</Text>}
           </Box>
           <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
             <Select
@@ -114,6 +110,7 @@ export const MandataireMesureAcceptForm = props => {
               onChange={option => formik.setFieldValue("residence", option)}
               options={RESIDENCE}
             />
+            {formik.errors.residence && <Text>{formik.errors.residence}</Text>}
           </Box>
           <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
             <AsyncSelect

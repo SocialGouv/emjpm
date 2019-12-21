@@ -55,7 +55,7 @@ export const ServiceMesureAcceptForm = props => {
       const departement = departements.find(dep => dep.code === regionCode);
       if (!departement) {
         setErrors({
-          code_postal: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
+          geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
         });
       } else {
         UpdateMesure({

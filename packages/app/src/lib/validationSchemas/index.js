@@ -1,3 +1,4 @@
+import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
 import { mandataireMesureSchema } from "./mandataireMesureSchema";
 import { mandataireSignupSchema } from "./mandataireSignupSchema";
@@ -11,5 +12,6 @@ export {
   serviceAntenneSchema,
   serviceMesureSchema,
   mandataireSignupSchema,
-  serviceAcceptMesureSchema
+  serviceAcceptMesureSchema,
+  mandataireAcceptMesureSchema
 };
