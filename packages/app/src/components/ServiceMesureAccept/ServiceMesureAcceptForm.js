@@ -84,8 +84,6 @@ export const ServiceMesureAcceptForm = props => {
       residence: ""
     }
   });
-  console.log(formik.errors);
-  console.log(formik.touched);
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
