@@ -1,26 +1,19 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { useMutation } from "@apollo/react-hooks";
 import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Router from "next/router";
-import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { REACTIVATE_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
-import { MESURE } from "./queries";
+import {
+  REACTIVATE_MESURE,
+  UPDATE_ANTENNE_COUTERS,
+  UPDATE_SERVICES_COUTERS
+} from "../ServiceMesures/mutations";
 
-export const ServiceReactivateMesure = props => {
-  const { currentMesure, isPage = false } = props;
-
-  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
-  const { data, loading, error } = useQuery(MESURE, {
-    variables: {
-      id: currentMesure
-    }
-  });
-
+export const ServiceMesureReactivateForm = props => {
+  const { mesureId, serviceId } = props;
   const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
   const [UpdateMesure] = useMutation(REACTIVATE_MESURE, {
@@ -52,15 +45,6 @@ export const ServiceReactivateMesure = props => {
     }
   });
 
-  if (error) {
-    return <div>error</div>;
-  }
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  const mesure = data.mesures[0];
-
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
@@ -82,19 +66,13 @@ export const ServiceReactivateMesure = props => {
             UpdateMesure({
               refetchQueries: ["mesures", "mesures_aggregate"],
               variables: {
-                id: currentMesure,
+                id: mesureId,
                 reason_extinction: values.reason_extinction,
-                service_id: mesure.service_id
+                service_id: serviceId
               }
             });
             setSubmitting(false);
-            if (!isPage) {
-              // TODO transform me in done function passed to the component
-              setPanelType(null);
-              setCurrentMesure(null);
-            } else {
-              Router.push(`/services/mesures/${currentMesure}`);
-            }
+            Router.push(`/services/mesures/${mesureId}`);
           }}
           validationSchema={Yup.object().shape({
             reason_extinction: Yup.string().required("Required")
@@ -121,13 +99,7 @@ export const ServiceReactivateMesure = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        if (!isPage) {
-                          // TODO transform me in cancel function passed to the component
-                          setPanelType(PANEL_TYPE.CLOSE);
-                          setCurrentMesure(null);
-                        } else {
-                          Router.push(`/services/mesures/${currentMesure}`);
-                        }
+                        Router.push(`/services/mesures/${mesureId}`);
                       }}
                     >
                       Annuler
@@ -146,8 +118,4 @@ export const ServiceReactivateMesure = props => {
       </Box>
     </Flex>
   );
-};
-
-ServiceReactivateMesure.propTypes = {
-  currentMesure: PropTypes.number.isRequired
 };

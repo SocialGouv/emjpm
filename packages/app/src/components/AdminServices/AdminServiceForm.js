@@ -100,9 +100,7 @@ export const AdminServiceForm = props => {
                 noOptionsMessage={() => "Pas de résultats"}
                 onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
               />
-              {formik.errors.geocode && formik.touched.geocode && (
-                <Text>{formik.errors.geocode}</Text>
-              )}
+              {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
             </Box>
             <Flex justifyContent="flex-end">
               {handleCancel && (
