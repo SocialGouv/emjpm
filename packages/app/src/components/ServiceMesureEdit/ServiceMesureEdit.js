@@ -44,7 +44,6 @@ const ServiceMesureEdit = props => {
         tribunalList={tribunalList}
         departementsData={departementsData}
         mesureId={mesureId}
-        isPage
         user_antennes={user_antennes}
         mesure={mesure}
       />

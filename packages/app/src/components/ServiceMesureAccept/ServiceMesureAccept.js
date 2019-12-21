@@ -31,7 +31,6 @@ const ServiceMesureAccept = props => {
         departementsData={departementsData}
         user_antennes={user_antennes}
         mesureId={mesureId}
-        isPage
       />
     </Box>
   );

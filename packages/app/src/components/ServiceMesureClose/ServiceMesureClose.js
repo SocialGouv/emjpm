@@ -9,7 +9,7 @@ const ServiceMesureClose = props => {
 
   return (
     <Box sx={ServiceMesureCloseStyle} {...props}>
-      <ServiceMesureCloseForm mt="3" mesureId={mesureId} isPage />
+      <ServiceMesureCloseForm mt="3" mesureId={mesureId} />
     </Box>
   );
 };

@@ -9,7 +9,7 @@ const MandataireMesureClose = props => {
 
   return (
     <Box sx={ServiceMesureCloseStyle} {...props}>
-      <MandataireMesureCloseForm mt="3" currentMesure={mesureId} isPage />
+      <MandataireMesureCloseForm mt="3" mesureId={mesureId} />
     </Box>
   );
 };

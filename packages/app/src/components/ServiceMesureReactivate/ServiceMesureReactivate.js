@@ -13,7 +13,7 @@ const ServiceMesureReactivate = props => {
 
   return (
     <Box sx={ServiceMesureReactivateStyle} {...props}>
-      <ServiceMesureReactivateForm mt="3" serviceId={service_id} mesureId={mesureId} isPage />
+      <ServiceMesureReactivateForm mt="3" serviceId={service_id} mesureId={mesureId} />
     </Box>
   );
 };
