@@ -39,6 +39,8 @@ export const formatMesureList = mesureList => {
       id: id,
       isUrgent: is_urgent,
       judgmentDate: judgment_date ? formatedJudgementDate : "non reseigné",
+      latitude: latitude || 45.5,
+      longitude: longitude || 0.5,
       numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
       numeroRg: numero_rg ? numero_rg : "RG-00000000",
       residence: residence ? residence : "non reseigné",
@@ -46,9 +48,7 @@ export const formatMesureList = mesureList => {
       tiId: ti ? ti.id : null,
       tribunal: ti ? ti.etablissement : "Tribunal non reseigné",
       type: type ? type : "type de mesure non reseigné",
-      ville: ville ? ville : "ville non reseigné",
-      latitude: latitude || 45.5,
-      longitude: longitude || 0.5
+      ville: ville ? ville : "ville non reseigné"
     };
   });
 

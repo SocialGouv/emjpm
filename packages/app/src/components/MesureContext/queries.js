@@ -12,6 +12,8 @@ export const MESURES = gql`
       civilite
       code_postal
       antenne_id
+      latitude
+      longitude
       judgment_date
       is_urgent
       departement {

@@ -1,40 +1,39 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
+import { useMutation } from "@apollo/react-hooks";
 import { AsyncSelect, Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
-import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { debouncedGeocode } from "../../util/geocode";
-import { EDIT_MESURE, UPDATE_ANTENNE_COUTERS } from "./mutations";
-import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
-import { formatAntenneOptions, formatServiceTribunalList } from "./utils";
+import { formatAntenneOptions } from "../../util/services";
+import { EDIT_MESURE, UPDATE_ANTENNE_COUTERS } from "../ServiceMesures/mutations";
 
-export const ServiceEditMesure = props => {
+export const ServiceMesureEditForm = props => {
   const {
-    currentMesure,
-    age,
-    antenneId,
-    civilite,
-    codePostal,
-    dateOuverture,
-    numeroRg,
-    numeroDossier,
-    residence,
-    type,
-    ville,
-    user_antennes,
-    tribunal,
-    tiId,
-    isPage = false,
-    latitude,
-    longitude,
-    service: { service_id }
+    mesure: {
+      age,
+      antenneId,
+      civilite,
+      codePostal,
+      dateOuverture,
+      numeroRg,
+      numeroDossier,
+      residence,
+      type,
+      ville,
+      tribunal,
+      tiId,
+      latitude,
+      longitude
+    },
+    departementsData,
+    mesureId,
+    tribunalList,
+    user_antennes
   } = props;
 
   const geocode = {
@@ -45,7 +44,10 @@ export const ServiceEditMesure = props => {
   };
 
   const [editMesure] = useMutation(EDIT_MESURE);
-  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS, {
+    onCompleted: () => Router.push(`/services/mesures/${mesureId}`)
+  });
+
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
 
   const formik = useFormik({
@@ -60,7 +62,6 @@ export const ServiceEditMesure = props => {
       } else {
         editMesure({
           awaitRefetchQueries: true,
-          refetchQueries: ["mesures", "mesures_aggregate"],
           variables: {
             annee: values.annee,
             antenne_id: values.antenne_id ? values.antenne_id.value : null,
@@ -68,7 +69,7 @@ export const ServiceEditMesure = props => {
             code_postal: values.geocode.postcode,
             date_ouverture: values.date_ouverture,
             department_id: departement.id,
-            id: currentMesure,
+            id: mesureId,
             numero_dossier: values.numero_dossier,
             numero_rg: values.numero_rg,
             residence: values.residence.value,
@@ -99,14 +100,6 @@ export const ServiceEditMesure = props => {
             }
           });
         }
-
-        if (!isPage) {
-          // TODO transform me in done function passed to the component
-          setPanelType(null);
-          setCurrentMesure(null);
-        } else {
-          Router.push(`/services/mesures/${currentMesure}`);
-        }
       }
 
       setSubmitting(false);
@@ -130,28 +123,6 @@ export const ServiceEditMesure = props => {
       }
     }
   });
-
-  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
-    variables: { serviceId: service_id }
-  });
-
-  const {
-    data: departementsData,
-    loading: departementsLoading,
-    error: departementsError
-  } = useQuery(DEPARTEMENTS);
-
-  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
-
-  if (loading || departementsLoading) {
-    return <div>Chargement...</div>;
-  }
-
-  if (error || departementsError) {
-    return <div>Erreur...</div>;
-  }
-
-  const tribunalList = formatServiceTribunalList(data.service_tis);
 
   return (
     <Flex flexWrap="wrap">
@@ -288,9 +259,7 @@ export const ServiceEditMesure = props => {
               noOptionsMessage={() => "Pas de résultats"}
               onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
             />
-            {formik.errors.geocode && formik.touched.geocode && (
-              <Text>{formik.errors.geocode}</Text>
-            )}
+            {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
             {formik.errors.code_postal && <Text>{formik.errors.codePostal}</Text>}
           </Box>
           <Flex justifyContent="flex-end">
@@ -299,13 +268,7 @@ export const ServiceEditMesure = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  if (!isPage) {
-                    setPanelType(PANEL_TYPE.CLOSE);
-                    setCurrentMesure(null);
-                  } else {
-                    // TODO transform me in cancel function passed to the component
-                    Router.push(`/services/mesures/${currentMesure}`);
-                  }
+                  Router.push(`/services/mesures/${mesureId}`);
                 }}
               >
                 Annuler
@@ -321,8 +284,4 @@ export const ServiceEditMesure = props => {
       </Box>
     </Flex>
   );
-};
-
-ServiceEditMesure.propTypes = {
-  currentMesure: PropTypes.number.isRequired
 };

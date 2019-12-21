@@ -1,22 +1,18 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MesureContextProvider, MesureList } from "@socialgouv/emjpm-ui-components";
+import { MesureContextProvider, MesureListItem } from "@socialgouv/emjpm-ui-components";
+import Router from "next/router";
 import React, { Fragment, useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
+import { formatMesureList } from "../../util/services";
 import { FiltersContext } from "../ServiceFilters/context";
 import { MESURES } from "./queries";
-import { ServiceAcceptMesure } from "./ServiceAcceptMesure";
-import { ServiceCloseMesure } from "./ServiceCloseMesure";
-import { ServiceDeleteMesure } from "./ServiceDeleteMesure";
-import { ServiceEditMesure } from "./ServiceEditMesure";
-import { ServiceReactivateMesure } from "./ServiceReactivateMesure";
-import { formatMesureList } from "./utils";
 
 const RESULT_PER_PAGE = 20;
 
 const ServiceMesures = props => {
-  const { isOnlyWaiting, user_antennes, service_admins } = props;
+  const { isOnlyWaiting } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { mesureType, mesureStatus, antenne, debouncedSearchText } = useContext(FiltersContext);
 
@@ -42,6 +38,10 @@ const ServiceMesures = props => {
     fetchPolicy: "cache-and-network"
   });
 
+  const selectMesure = ({ id }) => {
+    Router.push(`/services/mesures/${id}`);
+  };
+
   if (loading) {
     return <div>loading</div>;
   }
@@ -53,7 +53,6 @@ const ServiceMesures = props => {
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
   const mesures = formatMesureList(data.mesures);
-  const [service] = service_admins;
 
   return (
     <MesureContextProvider>
@@ -61,21 +60,15 @@ const ServiceMesures = props => {
         <Fragment>
           {mesures.length > 0 ? (
             <Fragment>
-              <MesureList
-                EditComponent={props => (
-                  <ServiceEditMesure service={service} user_antennes={user_antennes} {...props} />
-                )}
-                CloseComponent={ServiceCloseMesure}
-                RemoveComponent={props => (
-                  <ServiceDeleteMesure queryVariables={queryVariables} {...props} />
-                )}
-                AcceptComponent={props => (
-                  <ServiceAcceptMesure user_antennes={user_antennes} {...props} />
-                )}
-                ReactivateComponent={ServiceReactivateMesure}
-                onPanelOpen={id => console.log(id)}
-                mesures={mesures}
-              />
+              {mesures.map(mesure => {
+                return (
+                  <MesureListItem
+                    key={mesure.id}
+                    mesure={mesure}
+                    onClick={({ mesure }) => selectMesure(mesure)}
+                  />
+                );
+              })}
             </Fragment>
           ) : (
             <div>Pas de donnée à afficher</div>

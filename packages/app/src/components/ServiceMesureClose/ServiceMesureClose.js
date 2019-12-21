@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "rebass";
 
-import { ServiceCloseMesure } from "../ServiceMesures";
+import { ServiceMesureCloseForm } from "./ServiceMesureCloseForm";
 import { ServiceMesureCloseStyle } from "./style";
 
 const ServiceMesureClose = props => {
@@ -9,7 +9,7 @@ const ServiceMesureClose = props => {
 
   return (
     <Box sx={ServiceMesureCloseStyle} {...props}>
-      <ServiceCloseMesure mt="3" currentMesure={mesureId} isPage />
+      <ServiceMesureCloseForm mt="3" mesureId={mesureId} isPage />
     </Box>
   );
 };
