@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "rebass";
 
-import { ServiceDeleteMesure } from "../ServiceMesures";
+import { ServiceDeleteMesureForm } from "./ServiceMesureDeleteForm";
 import { ServiceMesureDeleteStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
@@ -21,7 +21,7 @@ const ServiceMesureDelete = props => {
 
   return (
     <Box sx={ServiceMesureDeleteStyle} {...props}>
-      <ServiceDeleteMesure mt="3" queryVariables={queryVariables} currentMesure={mesureId} isPage />
+      <ServiceDeleteMesureForm mt="3" queryVariables={queryVariables} mesureId={mesureId} isPage />
     </Box>
   );
 };

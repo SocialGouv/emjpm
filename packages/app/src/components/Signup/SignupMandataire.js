@@ -210,9 +210,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                       formik.setFieldValue("geocode", option ? option.value : null);
                     }}
                   />
-                  {formik.errors.geocode && formik.touched.geocode && (
-                    <Text>{formik.errors.geocode}</Text>
-                  )}
+                  {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
                 </Box>
                 <Box mb="2" pt="2">
                   <Input

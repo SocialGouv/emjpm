@@ -18,9 +18,9 @@ import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/me
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { debouncedGeocode } from "../../util/geocode";
+import { formatServiceTribunalList } from "../../util/services";
 import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
-import { formatServiceTribunalList } from "./utils";
 
 const initialValues = {
   annee: "",
@@ -296,9 +296,7 @@ export const ServiceAddMesure = props => {
                   noOptionsMessage={() => "Pas de résultats"}
                   onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
                 />
-                {formik.errors.geocode && formik.touched.geocode && (
-                  <Text>{formik.errors.geocode}</Text>
-                )}
+                {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
                 {formik.errors.code_postal && <Text>{formik.errors.codePostal}</Text>}
               </Box>
 
