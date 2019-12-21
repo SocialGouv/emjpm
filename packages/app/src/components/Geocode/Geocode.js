@@ -5,7 +5,6 @@ import { debouncedGeocode } from "../../util/geocode";
 
 const Geocode = props => {
   const { hasError, onChange, placeholder, resource } = props;
-
   const {
     address,
     adresse,
@@ -28,7 +27,9 @@ const Geocode = props => {
   };
 
   const isValid = !!latitude && !!longitude;
-  const defaultValue = isValid ? { label: geocode.label, value: geocode } : null;
+  const label = isValid ? geocode.label : "Adresse, ville, ...";
+  const value = isValid ? geocode : undefined;
+  const defaultValue = { label, value };
 
   return (
     <AsyncSelect
