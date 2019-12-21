@@ -1,19 +1,16 @@
 import { useMutation } from "@apollo/react-hooks";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { REACTIVATE_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
 
 export const MandataireMesureReactivateForm = props => {
-  const { currentMesure, isPage } = props;
-
-  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+  const { mesureId } = props;
 
   const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
   const [UpdateMesure] = useMutation(REACTIVATE_MESURE, {
@@ -57,18 +54,13 @@ export const MandataireMesureReactivateForm = props => {
             UpdateMesure({
               refetchQueries: ["mesures", "mesures_aggregate"],
               variables: {
-                id: currentMesure,
+                id: mesureId,
                 reason_extinction: values.reason_extinction
               }
             });
             setSubmitting(false);
-            if (!isPage) {
-              // TODO transform me in done function passed to the component
-              setPanelType(null);
-              setCurrentMesure(null);
-            } else {
-              Router.push({ pathname: `/mandataires/mesures/${currentMesure}` });
-            }
+
+            Router.push({ pathname: `/mandataires/mesures/${mesureId}` });
           }}
           validationSchema={Yup.object().shape({
             reason_extinction: Yup.string().required("Required")
@@ -95,13 +87,7 @@ export const MandataireMesureReactivateForm = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        if (!isPage) {
-                          setPanelType(PANEL_TYPE.CLOSE);
-                          setCurrentMesure(null);
-                        } else {
-                          // TODO transform me in cancel function passed to the component
-                          Router.push(`/mandataires/mesures/${currentMesure}`);
-                        }
+                        Router.push(`/mandataires/mesures/${mesureId}`);
                       }}
                     >
                       Annuler

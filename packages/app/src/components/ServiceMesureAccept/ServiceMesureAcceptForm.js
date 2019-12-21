@@ -55,7 +55,7 @@ export const ServiceMesureAcceptForm = props => {
       const departement = departements.find(dep => dep.code === regionCode);
       if (!departement) {
         setErrors({
-          code_postal: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
+          geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
         });
       } else {
         UpdateMesure({
@@ -84,8 +84,6 @@ export const ServiceMesureAcceptForm = props => {
       residence: ""
     }
   });
-  console.log(formik.errors);
-  console.log(formik.touched);
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>

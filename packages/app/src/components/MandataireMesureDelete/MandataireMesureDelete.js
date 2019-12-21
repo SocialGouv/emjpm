@@ -20,12 +20,7 @@ const MandataireMesureDelete = props => {
 
   return (
     <Box sx={ServiceMesureDeleteStyle} {...props}>
-      <MandataireMesureDeleteForm
-        mt="3"
-        queryVariables={queryVariables}
-        currentMesure={mesureId}
-        isPage
-      />
+      <MandataireMesureDeleteForm mt="3" queryVariables={queryVariables} mesureId={mesureId} />
     </Box>
   );
 };
