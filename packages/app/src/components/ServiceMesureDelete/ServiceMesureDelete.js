@@ -21,7 +21,7 @@ const ServiceMesureDelete = props => {
 
   return (
     <Box sx={ServiceMesureDeleteStyle} {...props}>
-      <ServiceDeleteMesureForm mt="3" queryVariables={queryVariables} mesureId={mesureId} isPage />
+      <ServiceDeleteMesureForm mt="3" queryVariables={queryVariables} mesureId={mesureId} />
     </Box>
   );
 };

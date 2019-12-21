@@ -9,7 +9,7 @@ const MandataireMesureReactivate = props => {
 
   return (
     <Box sx={ServiceMesureReactivateStyle} {...props}>
-      <MandataireMesureReactivateForm mt="3" currentMesure={mesureId} isPage />
+      <MandataireMesureReactivateForm mt="3" mesureId={mesureId} />
     </Box>
   );
 };

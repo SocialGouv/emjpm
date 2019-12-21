@@ -8,6 +8,8 @@ export const ACCEPT_MESURE = gql`
     $residence: String!
     $code_postal: String!
     $ville: String!
+    $latitude: Float!
+    $longitude: Float!
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -18,6 +20,8 @@ export const ACCEPT_MESURE = gql`
         residence: $residence
         code_postal: $code_postal
         ville: $ville
+        latitude: $latitude
+        longitude: $longitude
       }
     ) {
       returning {
