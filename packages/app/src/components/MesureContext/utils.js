@@ -41,7 +41,7 @@ export const formatMesure = mesure => {
   return {
     latitude: latitude,
     longitude: longitude,
-    departmentId: departement ? departement.id : null,
+    departmentId: departement.id,
     age: annee ? annee : "nc",
     realAge: annee ? currentYear - annee : "nc",
     antenne: service_antenne ? service_antenne.name : null,
