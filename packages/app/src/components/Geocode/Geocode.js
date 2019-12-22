@@ -27,9 +27,7 @@ const Geocode = props => {
   };
 
   const isValid = !!latitude && !!longitude;
-  const label = isValid ? geocode.label : "Adresse, ville, ...";
-  const value = isValid ? geocode : undefined;
-  const defaultValue = { label, value };
+  const defaultValue = isValid ? { label: geocode.label, value: geocode } : null;
 
   return (
     <AsyncSelect
