@@ -18,17 +18,13 @@ export const ServiceMesureEditForm = props => {
       age,
       antenneId,
       civilite,
-      codePostal,
       dateOuverture,
       numeroRg,
       numeroDossier,
       residence,
       type,
-      ville,
       tribunal,
-      tiId,
-      latitude,
-      longitude
+      tiId
     },
     departementsData,
     mesureId,
@@ -36,12 +32,7 @@ export const ServiceMesureEditForm = props => {
     user_antennes
   } = props;
 
-  const geocode = geocodeInitialValue({
-    ville,
-    codePostal,
-    latitude,
-    longitude
-  });
+  const geocode = geocodeInitialValue(props.mesure);
 
   const [editMesure] = useMutation(EDIT_MESURE);
   const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS, {
@@ -51,16 +42,17 @@ export const ServiceMesureEditForm = props => {
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting, setErrors }) => {
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
       const regionCode = getRegionCode(values.geocode.postcode);
       const departements = departementsData.departements;
       const departement = departements.find(dep => dep.code === regionCode);
+
       if (!departement) {
         setErrors({
           codePostal: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
         });
       } else {
-        editMesure({
+        await editMesure({
           awaitRefetchQueries: true,
           variables: {
             annee: values.annee,
@@ -82,7 +74,7 @@ export const ServiceMesureEditForm = props => {
         });
 
         if (values.antenne_id) {
-          updateAntenneCounters({
+          await updateAntenneCounters({
             variables: {
               antenne_id: values.antenne_id.value,
               inc_mesures_awaiting: 0,
@@ -92,7 +84,7 @@ export const ServiceMesureEditForm = props => {
         }
 
         if (antenneId) {
-          updateAntenneCounters({
+          await updateAntenneCounters({
             variables: {
               antenne_id: antenneId,
               inc_mesures_awaiting: 0,
@@ -244,7 +236,7 @@ export const ServiceMesureEditForm = props => {
           </Field>
           <Field>
             <Geocode
-              resource={props}
+              resource={props.mesure}
               onChange={geocode => formik.setFieldValue("geocode", geocode)}
             />
             {formik.errors.geocode && formik.touched.geocode && (
