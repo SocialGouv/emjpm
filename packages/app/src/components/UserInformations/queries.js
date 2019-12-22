@@ -50,9 +50,12 @@ export const GET_SERVICE_USERS = gql`
           contact_lastname
           contact_firstname
           contact_email
+          address
           address_zip_code
           address_street
           address_city
+          latitude
+          longitude
         }
         user {
           prenom
