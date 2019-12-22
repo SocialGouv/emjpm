@@ -32,12 +32,7 @@ export const ServiceMesureEditForm = props => {
     user_antennes
   } = props;
 
-  const geocode = geocodeInitialValue({
-    ville,
-    codePostal,
-    latitude,
-    longitude
-  });
+  const geocode = geocodeInitialValue(props.mesure);
 
   const [editMesure] = useMutation(EDIT_MESURE);
   const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS, {
@@ -241,11 +236,7 @@ export const ServiceMesureEditForm = props => {
           </Field>
           <Field>
             <Geocode
-<<<<<<< HEAD
               resource={props.mesure}
-=======
-              resource={props}
->>>>>>> fix(geocode): use geocode comp in service mesure add/edit
               onChange={geocode => formik.setFieldValue("geocode", geocode)}
             />
             {formik.errors.geocode && formik.touched.geocode && (
