@@ -1,14 +1,6 @@
 // TODO move me on a proper folder
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import {
-  AsyncSelect,
-  Button,
-  Card,
-  Heading4,
-  Input,
-  Select,
-  Text
-} from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -18,7 +10,7 @@ import { Box, Flex } from "rebass";
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
-import { debouncedGeocode } from "../../util/geocode";
+import { Geocode, geocodeInitialValue } from "../Geocode";
 import { UserContext } from "../UserContext";
 import { ADD_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
 import { DEPARTEMENTS, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
@@ -29,17 +21,20 @@ export const MandatairesAddMesure = props => {
     mandataire: { id }
   } = useContext(UserContext);
 
+  const geocode = geocodeInitialValue();
+
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting, setErrors }) => {
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
       const regionCode = getRegionCode(values.geocode.postcode);
       const departements = departementsData.departements;
       const departement = departements.find(dep => dep.code === regionCode);
+
       if (!departement) {
         setErrors({
           code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
         });
       } else {
-        addMesure({
+        await addMesure({
           refetchQueries: [
             {
               query: MANDATAIRE_MESURES,
@@ -57,8 +52,8 @@ export const MandatairesAddMesure = props => {
             civilite: values.civilite.value,
             code_postal: values.geocode.postcode,
             ville: values.geocode.city,
-            latitude: values.geocode.lat,
-            longitude: values.geocode.lng,
+            latitude: values.geocode.latitude,
+            longitude: values.geocode.longitude,
             date_ouverture: values.date_ouverture,
             department_id: departement.id,
             numero_dossier: values.numero_dossier,
@@ -69,20 +64,21 @@ export const MandatairesAddMesure = props => {
             mandataireId: id
           }
         });
+
         Router.push("/mandataires");
       }
+
       setSubmitting(false);
     },
     validationSchema: mandataireMesureSchema,
     initialValues: {
       annee: "",
       civilite: "",
-      code_postal: "",
       date_ouverture: "",
       numero_dossier: "",
       numero_rg: "",
       tribunal: "",
-      ville: ""
+      geocode
     }
   });
 
@@ -150,7 +146,7 @@ export const MandatairesAddMesure = props => {
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <form onSubmit={formik.handleSubmit}>
-              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+              <Field>
                 <Input
                   value={formik.values.numero_rg}
                   id="numero_rg"
@@ -162,8 +158,8 @@ export const MandatairesAddMesure = props => {
                 {formik.errors.numero_rg && formik.touched.numero_rg && (
                   <Text>{formik.errors.numero_rg}</Text>
                 )}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+              </Field>
+              <Field>
                 <Select
                   id="tribunal"
                   name="tribunal"
@@ -176,8 +172,8 @@ export const MandatairesAddMesure = props => {
                 {formik.errors.tribunal && formik.touched.tribunal && (
                   <Text>{formik.errors.tribunal}</Text>
                 )}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+              </Field>
+              <Field>
                 <Input
                   value={formik.values.numero_dossier}
                   id="numero_dossier"
@@ -189,8 +185,8 @@ export const MandatairesAddMesure = props => {
                 {formik.errors.numero_dossier && formik.touched.numero_dossier && (
                   <Text>{formik.errors.numero_dossier}</Text>
                 )}
-              </Box>
-              <Box mb="2" mt="5">
+              </Field>
+              <Field>
                 <Input
                   value={formik.values.date_ouverture}
                   id="date_ouverture"
@@ -203,8 +199,8 @@ export const MandatairesAddMesure = props => {
                 {formik.errors.date_ouverture && formik.touched.date_ouverture && (
                   <Text>{formik.errors.date_ouverture}</Text>
                 )}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
+              </Field>
+              <Field>
                 <Select
                   id="type"
                   name="type"
@@ -215,8 +211,8 @@ export const MandatairesAddMesure = props => {
                   options={MESURE_TYPE_LABEL_VALUE}
                 />
                 {formik.errors.type && formik.touched.type && <Text>{formik.errors.type}</Text>}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+              </Field>
+              <Field>
                 <Select
                   id="civilite"
                   name="civilite"
@@ -229,9 +225,9 @@ export const MandatairesAddMesure = props => {
                 {formik.errors.civilite && formik.touched.civilite && (
                   <Text>{formik.errors.civilite}</Text>
                 )}
-              </Box>
+              </Field>
 
-              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+              <Field>
                 <Input
                   value={formik.values.annee}
                   id="annee"
@@ -242,8 +238,8 @@ export const MandatairesAddMesure = props => {
                   placeholder="année"
                 />
                 {formik.errors.annee && formik.touched.annee && <Text>{formik.errors.annee}</Text>}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "90" }} mt="5" mb="2">
+              </Field>
+              <Field>
                 <Select
                   id="residence"
                   name="residence"
@@ -256,21 +252,11 @@ export const MandatairesAddMesure = props => {
                 {formik.errors.residence && formik.touched.residence && (
                   <Text>{formik.errors.residence}</Text>
                 )}
-              </Box>
+              </Field>
 
-              <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
-                <AsyncSelect
-                  name="geocode"
-                  cacheOptions
-                  defaultOptions
-                  hasError={formik.errors}
-                  isClearable
-                  loadOptions={debouncedGeocode}
-                  placeholder="Ville, code postal, ..."
-                  noOptionsMessage={() => "Pas de résultats"}
-                  onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
-                />
-              </Box>
+              <Field>
+                <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
+              </Field>
 
               <Flex justifyContent="flex-end">
                 <Box>
