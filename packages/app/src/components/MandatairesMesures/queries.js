@@ -59,6 +59,7 @@ export const MANDATAIRE_MESURES = gql`
       type
       ville
       departement {
+        id
         nom
         region {
           nom
