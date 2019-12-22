@@ -1,8 +1,8 @@
 import { useApolloClient } from "@apollo/react-hooks";
 import {
-  AsyncSelect,
   Button,
   Card,
+  Field,
   Heading1,
   Heading4,
   Input,
@@ -19,7 +19,7 @@ import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireSignupSchema } from "../../lib/validationSchemas";
 import { isSiretExists } from "../../query-service/SiretQueryService";
 import { findDepartement } from "../../util/departements/DepartementUtil";
-import { debouncedGeocode } from "../../util/geocode";
+import { Geocode, geocodeInitialValue } from "../Geocode";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
@@ -57,8 +57,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
             ville: values.geocode.city,
-            latitude: values.geocode.lat,
-            longitude: values.geocode.lng
+            latitude: values.geocode.latitude,
+            longitude: values.geocode.longitude
           },
           tis: values.tis.map(ti => ti.value),
           user: {
@@ -80,7 +80,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
       adresse: mandataire ? mandataire.adresse : "",
       dispo_max: mandataire ? mandataire.dispo_max : "",
       genre: mandataire ? mandataire.genre : "",
-      geocode: {},
+      geocode: geocodeInitialValue(),
       siret: mandataire ? mandataire.siret : "",
       telephone: mandataire ? mandataire.telephone : "",
       telephone_portable: mandataire ? mandataire.telephone_portable : "",
@@ -135,7 +135,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
               <form onSubmit={formik.handleSubmit}>
                 <SignupGeneralError errors={formik.errors} />
-                <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
+                <Field>
                   <Select
                     id="tis"
                     name="tis"
@@ -147,8 +147,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                     isMulti
                   />
                   {formik.errors.tis && formik.touched.tis && <Text>{formik.errors.tis}</Text>}
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "100" }} mb="2" pt="2">
+                </Field>
+                <Field>
                   <Select
                     id="genre"
                     name="genre"
@@ -161,8 +161,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                   {formik.errors.genre && formik.touched.genre && (
                     <Text>{formik.errors.genre}</Text>
                   )}
-                </Box>
-                <Box mb="2" pt="2">
+                </Field>
+                <Field>
                   <Input
                     value={formik.values.siret}
                     id="siret"
@@ -174,8 +174,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                   {formik.errors.siret && formik.touched.siret && (
                     <Text>{formik.errors.siret}</Text>
                   )}
-                </Box>
-                <Box mb="2" pt="2">
+                </Field>
+                <Field>
                   <Input
                     value={formik.values.telephone}
                     id="telephone"
@@ -187,8 +187,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                   {formik.errors.telephone && formik.touched.telephone && (
                     <Text>{formik.errors.telephone}</Text>
                   )}
-                </Box>
-                <Box mb="2">
+                </Field>
+                <Field>
                   <Input
                     value={formik.values.telephone_portable}
                     id="telephone_portable"
@@ -196,23 +196,14 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                     onChange={formik.handleChange}
                     placeholder="Téléphone portable"
                   />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "10" }} mb="2" pt="2">
-                  <AsyncSelect
-                    name="geocode"
-                    cacheOptions
-                    hasError={formik.errors.geocode && formik.touched.geocode}
-                    isClearable
-                    loadOptions={debouncedGeocode}
-                    placeholder="Adresse"
-                    noOptionsMessage={() => "Pas de résultats"}
-                    onChange={option => {
-                      formik.setFieldValue("geocode", option ? option.value : null);
-                    }}
-                  />
-                  {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
-                </Box>
-                <Box mb="2" pt="2">
+                </Field>
+                <Field>
+                  <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
+                  {formik.errors.geocode && formik.touched.geocode && (
+                    <Text>{formik.errors.geocode}</Text>
+                  )}
+                </Field>
+                <Field>
                   <Input
                     value={formik.values.dispo_max}
                     id="dispo_max"
@@ -224,7 +215,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                   {formik.errors.dispo_max && formik.touched.dispo_max && (
                     <Text>{formik.errors.dispo_max}</Text>
                   )}
-                </Box>
+                </Field>
                 <Flex justifyContent="flex-end">
                   <Box>
                     <Button mr="2" variant="outline">
