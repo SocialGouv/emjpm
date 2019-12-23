@@ -27,7 +27,7 @@ export const MesureEvolution = () => {
   if (loading) {
     return (
       <Card flexBasis="100%">
-        <Heading2>Répartition des mesures à date</Heading2>
+        <Heading2>Évolution du nombre de mesures</Heading2>
         <Box my="4">
           <Spinner />
         </Box>
@@ -38,7 +38,7 @@ export const MesureEvolution = () => {
   if (error) {
     return (
       <Card flexBasis="100%">
-        <Heading2>Répartition des mesures à date</Heading2>
+        <Heading2>Évolution du nombre de mesures</Heading2>
         <Heading4>erreur</Heading4>
       </Card>
     );
