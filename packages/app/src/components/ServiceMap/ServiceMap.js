@@ -3,12 +3,16 @@ import Router from "next/router";
 import React, { useContext } from "react";
 
 import { MapContainer, MapLayer } from "../Map";
-import { MapContext } from "./context";
+import { UserContext } from "../UserContext";
 import { MESURES_SERVICE } from "./queries";
 
 const ServiceMap = () => {
-  const { currentGestionnaire } = useContext(MapContext);
-  const { latitude, longitude } = currentGestionnaire;
+  const { service_admins } = useContext(UserContext);
+  const [service_admin] = service_admins;
+  const {
+    service: { longitude, latitude }
+  } = service_admin;
+
   const { data, loading, error } = useQuery(MESURES_SERVICE);
 
   const selectMesure = event => {
