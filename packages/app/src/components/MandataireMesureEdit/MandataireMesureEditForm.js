@@ -5,7 +5,6 @@ import Router from "next/router";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
@@ -64,10 +63,7 @@ export const MandataireMesureEditForm = props => {
             longitude: values.geocode.longitude
           }
         });
-
-        Router.push(`/mandataires/mesures/${id}`);
       }
-
       setSubmitting(false);
     },
     validationSchema: mandataireMesureSchema,
@@ -84,7 +80,11 @@ export const MandataireMesureEditForm = props => {
     }
   });
 
-  const [editMesure] = useMutation(EDIT_MESURE);
+  const [editMesure] = useMutation(EDIT_MESURE, {
+    onCompleted() {
+      Router.push(`/mandataires/mesures/${id}`);
+    }
+  });
 
   return (
     <Flex flexWrap="wrap">

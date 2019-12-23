@@ -13,7 +13,11 @@ import { MANDATAIRE_MESURES } from "./queries";
 export const MandataireMesureDeleteForm = props => {
   const { mesureId, queryVariables } = props;
 
-  const [UpdateMesure] = useMutation(DELETE_MESURE);
+  const [UpdateMesure] = useMutation(DELETE_MESURE, {
+    onCompleted() {
+      Router.push(`/mandataires`);
+    }
+  });
 
   return (
     <Flex flexWrap="wrap">
@@ -41,7 +45,6 @@ export const MandataireMesureDeleteForm = props => {
               }
             });
             setSubmitting(false);
-            Router.push(`/mandataires`);
           }}
           validationSchema={Yup.object().shape({
             reason_delete: Yup.string().required("Required")

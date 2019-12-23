@@ -6,7 +6,6 @@ import Link from "next/link";
 import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
-
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
@@ -15,6 +14,7 @@ import { UserContext } from "../UserContext";
 import { ADD_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
 import { DEPARTEMENTS, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
 import { formatUserTribunalList } from "./utils";
+
 
 export const MandatairesAddMesure = props => {
   const {
@@ -64,8 +64,6 @@ export const MandatairesAddMesure = props => {
             mandataireId: id
           }
         });
-
-        Router.push("/mandataires");
       }
 
       setSubmitting(false);
@@ -93,6 +91,9 @@ export const MandatairesAddMesure = props => {
   const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
 
   const [addMesure] = useMutation(ADD_MESURE, {
+    onCompleted() {
+      Router.push("/mandataires");
+    },
     options: {
       refetchQueries: ["mesures", "mesures_aggregate"]
     },

@@ -5,7 +5,6 @@ import Router from "next/router";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-
 import { RESIDENCE } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
@@ -19,6 +18,9 @@ export const MandataireMesureAcceptForm = props => {
   const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
 
   const [UpdateMesure] = useMutation(ACCEPT_MESURE, {
+    onCompleted() {
+      Router.push(`/mandataires/mesures/${mesureId}`);
+    },
     update(
       cache,
       {
@@ -61,7 +63,6 @@ export const MandataireMesureAcceptForm = props => {
             code_postal: values.geocode.postcode
           }
         });
-        Router.push(`/mandataires/mesures/${mesureId}`);
       }
       setSubmitting(false);
     },

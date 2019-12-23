@@ -15,6 +15,9 @@ export const MandataireMesureReactivateForm = props => {
 
   const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
   const [UpdateMesure] = useMutation(REACTIVATE_MESURE, {
+    onCompleted() {
+      Router.push({ pathname: `/mandataires/mesures/${mesureId}` });
+    },
     update(
       cache,
       {
@@ -60,8 +63,6 @@ export const MandataireMesureReactivateForm = props => {
               }
             });
             setSubmitting(false);
-
-            Router.push({ pathname: `/mandataires/mesures/${mesureId}` });
           }}
           validationSchema={Yup.object().shape({
             reason_extinction: Yup.string().required("Required")

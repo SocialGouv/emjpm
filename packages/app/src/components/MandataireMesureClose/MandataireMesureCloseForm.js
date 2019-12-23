@@ -25,6 +25,9 @@ export const MandataireMesureCloseForm = props => {
 
   const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
   const [UpdateMesure] = useMutation(CLOSE_MESURE, {
+    onCompleted() {
+      Router.push(`/mandataires/mesures/${mesureId}`);
+    },
     update(
       cache,
       {
@@ -67,7 +70,6 @@ export const MandataireMesureCloseForm = props => {
               }
             });
             setSubmitting(false);
-            Router.push(`/mandataires/mesures/${mesureId}`);
           }}
           validationSchema={Yup.object().shape({
             extinction: Yup.date().required("Required"),
