@@ -10,7 +10,8 @@ import { RESIDENCE } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { debouncedGeocode } from "../../util/geocode";
-import { ACCEPT_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
+import { UPDATE_MANDATAIRES_COUTERS } from "../MandatairesMesures/mutations";
+import { ACCEPT_MESURE } from "./mutations";
 
 export const MandataireMesureAcceptForm = props => {
   const { mesureId, departementsData } = props;

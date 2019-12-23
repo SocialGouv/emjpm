@@ -7,7 +7,8 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { CLOSE_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
+import { UPDATE_MANDATAIRES_COUTERS } from "../MandatairesMesures/mutations";
+import { CLOSE_MESURE } from "./mutations";
 
 const EXTINCTION_LABEL_VALUE = [
   { label: "caducité", value: "caducité" },
