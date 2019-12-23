@@ -50,6 +50,9 @@ const ServiceMapPanelMesures = props => {
                   <MesureListItem
                     key={mesure.id}
                     mesure={mesure}
+                    hasLocation={false}
+                    hasTribunal={false}
+                    hasFolderNumber={false}
                     onItemClick={({ mesure }) => selectMesure(mesure)}
                   />
                 );
