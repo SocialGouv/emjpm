@@ -1,12 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MesureListItem } from "@socialgouv/emjpm-ui-components";
 import Router from "next/router";
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
-import { MapContext } from "../MandataireMap/context";
 import { formatMesureList } from "../MandatairesMesures/utils";
 import { MESURES } from "./queries";
 import { MandataireMapPanelMesuresStyle } from "./style";
@@ -14,33 +13,24 @@ const RESULT_PER_PAGE = 20;
 
 const MandataireMapPanelMesures = props => {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { setMesures } = useContext(MapContext);
-  const queryVariables = {
-    limit: RESULT_PER_PAGE,
-    offset: currentOffset
-  };
 
   const { data, error, loading } = useQuery(MESURES, {
-    variables: queryVariables,
-    fetchPolicy: "cache-first"
+    variables: {
+      limit: RESULT_PER_PAGE,
+      offset: 0
+    }
   });
 
   const selectMesure = ({ id }) => {
     Router.push(`/mandataires/mesures/${id}`);
   };
 
-  useEffect(() => {
-    if (data && !loading && !error) {
-      setMesures(data.mesures);
-    }
-  }, [data, error, loading, setMesures]);
-
   if (loading) {
     return <Box p="2">Chargement</Box>;
   }
 
   if (error) {
-    return <div>Erreur</div>;
+    return <Box p="2">Erreur</Box>;
   }
 
   const { count } = data.mesures_aggregate.aggregate;
