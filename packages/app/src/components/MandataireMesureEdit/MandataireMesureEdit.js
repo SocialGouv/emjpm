@@ -9,7 +9,6 @@ import { DEPARTEMENTS, USER_TRIBUNAL } from "./queries";
 import { ServiceMesureEditStyle } from "./style";
 
 const MandataireMesureEdit = props => {
-  const { mesureId } = props;
   const mesure = useContext(MesureContext);
 
   const { loading, error, data } = useQuery(USER_TRIBUNAL);
@@ -33,7 +32,6 @@ const MandataireMesureEdit = props => {
     <Box sx={ServiceMesureEditStyle} {...props}>
       <MandataireMesureEditForm
         mt="3"
-        mesureId={mesureId}
         departementsData={departementsData}
         tribunalList={tribunalList}
         mesure={mesure}

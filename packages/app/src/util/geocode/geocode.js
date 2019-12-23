@@ -1,4 +1,3 @@
-import pDebounce from "p-debounce";
 import queryString from "query-string";
 import fetch from "unfetch";
 
@@ -34,22 +33,17 @@ export const geocode = async q => {
   return geojson.features.map(({ geometry, properties }) => {
     const { city, postcode, label, context } = properties;
     const { coordinates } = geometry;
-    const [lng, lat] = coordinates;
+    const [longitude, latitude] = coordinates;
     const [depcodeString] = context.split(", ");
     const depcode = parseInt(depcodeString);
 
     return {
+      city,
+      depcode,
       label,
-      value: {
-        city,
-        depcode,
-        label,
-        lat,
-        lng,
-        postcode
-      }
+      latitude,
+      longitude,
+      postcode
     };
   });
 };
-
-export const debouncedGeocode = pDebounce(geocode, 500);

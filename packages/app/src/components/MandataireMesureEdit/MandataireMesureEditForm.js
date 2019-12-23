@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { AsyncSelect, Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -9,40 +9,32 @@ import { Box, Flex, Text } from "rebass";
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
-import { debouncedGeocode } from "../../util/geocode";
+import { Geocode, geocodeInitialValue } from "../Geocode";
 import { EDIT_MESURE } from "./mutations";
 
 export const MandataireMesureEditForm = props => {
+  const { mesure } = props;
   const {
-    mesureId,
     departementsData,
     tribunalList,
     mesure: {
+      id,
       age,
       civilite,
-      codePostal,
       dateOuverture,
       numeroRg,
       numeroDossier,
       residence,
       type,
-      ville,
       tribunal,
-      tiId,
-      latitude,
-      longitude
+      tiId
     }
   } = props;
 
-  const geocode = {
-    city: ville,
-    postcode: codePostal,
-    lat: latitude,
-    lng: longitude
-  };
+  const geocode = geocodeInitialValue(mesure);
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting, setErrors }) => {
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
       const regionCode = getRegionCode(values.geocode.postcode);
       const departements = departementsData.departements;
       const departement = departements.find(dep => dep.code === regionCode);
@@ -61,19 +53,21 @@ export const MandataireMesureEditForm = props => {
             code_postal: values.geocode.postcode,
             date_ouverture: values.date_ouverture,
             department_id: departement.id,
-            id: mesureId,
+            id,
             numero_dossier: values.numero_dossier,
             numero_rg: values.numero_rg,
             residence: values.residence.value,
             ti_id: values.tribunal.value,
             type: values.type.value,
             ville: values.geocode.city,
-            latitude: values.geocode.lat,
-            longitude: values.geocode.lng
+            latitude: values.geocode.latitude,
+            longitude: values.geocode.longitude
           }
         });
-        Router.push(`/mandataires/mesures/${mesureId}`);
+
+        Router.push(`/mandataires/mesures/${id}`);
       }
+
       setSubmitting(false);
     },
     validationSchema: mandataireMesureSchema,
@@ -114,7 +108,7 @@ export const MandataireMesureEditForm = props => {
           <Heading3>Modifier la mesure</Heading3>
         </Box>
         <form onSubmit={formik.handleSubmit}>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+          <Field>
             <Input
               value={formik.values.numero_rg}
               id="numero_rg"
@@ -123,8 +117,8 @@ export const MandataireMesureEditForm = props => {
               onChange={formik.handleChange}
               placeholder="numero rg"
             />
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+          </Field>
+          <Field>
             <Select
               id="tribunal"
               name="tribunal"
@@ -137,8 +131,8 @@ export const MandataireMesureEditForm = props => {
             {formik.errors.tribunal && formik.touched.tribunal && (
               <Text>{formik.errors.tribunal}</Text>
             )}
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+          </Field>
+          <Field>
             <Input
               value={formik.values.numero_dossier}
               id="numero_dossier"
@@ -147,8 +141,8 @@ export const MandataireMesureEditForm = props => {
               onChange={formik.handleChange}
               placeholder="numero de dossier"
             />
-          </Box>
-          <Box mb="2">
+          </Field>
+          <Field>
             <Input
               value={formik.values.date_ouverture}
               id="date_ouverture"
@@ -158,8 +152,8 @@ export const MandataireMesureEditForm = props => {
               onChange={formik.handleChange}
               placeholder="Date d'ouverture"
             />
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
+          </Field>
+          <Field>
             <Select
               id="type"
               name="type"
@@ -169,8 +163,8 @@ export const MandataireMesureEditForm = props => {
               onChange={option => formik.setFieldValue("type", option)}
               options={MESURE_TYPE_LABEL_VALUE}
             />
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+          </Field>
+          <Field>
             <Select
               id="civilite"
               name="civilite"
@@ -180,8 +174,8 @@ export const MandataireMesureEditForm = props => {
               onChange={option => formik.setFieldValue("civilite", option)}
               options={CIVILITY}
             />
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+          </Field>
+          <Field>
             <Input
               value={formik.values.annee}
               id="annee"
@@ -190,8 +184,8 @@ export const MandataireMesureEditForm = props => {
               onChange={formik.handleChange}
               placeholder="année"
             />
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
+          </Field>
+          <Field>
             <Select
               id="residence"
               name="residence"
@@ -201,24 +195,17 @@ export const MandataireMesureEditForm = props => {
               onChange={option => formik.setFieldValue("residence", option)}
               options={RESIDENCE}
             />
-          </Box>
+          </Field>
 
-          <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
-            <AsyncSelect
-              name="geocode"
-              cacheOptions
-              defaultOptions
-              defaultValue={{ value: geocode, label: geocode.city }}
-              hasError={formik.errors.geocode}
-              isClearable
-              loadOptions={debouncedGeocode}
-              placeholder="Ville, code postal, ..."
-              noOptionsMessage={() => "Pas de résultats"}
-              onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
+          <Field>
+            <Geocode
+              resource={mesure}
+              onChange={geocode => formik.setFieldValue("geocode", geocode)}
             />
-            {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
-            {formik.errors.code_postal && <Text>{formik.errors.codePostal}</Text>}
-          </Box>
+            {formik.errors.geocode && formik.touched.geocode && (
+              <Text>{formik.errors.geocode}</Text>
+            )}
+          </Field>
 
           <Flex justifyContent="flex-end">
             <Box>
@@ -226,7 +213,7 @@ export const MandataireMesureEditForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/mandataires/mesures/${mesureId}`);
+                  Router.push(`/mandataires/mesures/${id}`);
                 }}
               >
                 Annuler
@@ -245,5 +232,5 @@ export const MandataireMesureEditForm = props => {
 };
 
 MandataireMesureEditForm.propTypes = {
-  currentMesure: PropTypes.number.isRequired
+  mesure: PropTypes.object.isRequired
 };

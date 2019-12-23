@@ -1,20 +1,12 @@
-import { AsyncSelect, Button, Field, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
 
 import { serviceSchema } from "../../lib/validationSchemas/serviceSchema";
-import { debouncedGeocode } from "../../util/geocode";
+import { Geocode, geocodeInitialValue } from "../Geocode";
 
 const ServiceEditForm = props => {
   const { handleSubmit, service } = props;
-
-  const geocode = {
-    label: service.adresse,
-    postcode: service.code_postal,
-    city: service.ville,
-    latitude: service.latitude,
-    longitude: service.longitude
-  };
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -27,7 +19,7 @@ const ServiceEditForm = props => {
       nom: service.nom || "",
       prenom: service.prenom || "",
       telephone: service.telephone || "",
-      geocode
+      geocode: geocodeInitialValue(service)
     }
   });
 
@@ -94,19 +86,11 @@ const ServiceEditForm = props => {
         />
       </Field>
       <Field>
-        <AsyncSelect
-          name="geocode"
-          cacheOptions
-          defaultValue={{ value: geocode, label: geocode.label }}
-          hasError={formik.errors.geocode && formik.touched.geocode}
-          isClearable
-          loadOptions={debouncedGeocode}
-          placeholder="Adresse"
-          noOptionsMessage={() => "Pas de résultats"}
-          onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
+        <Geocode
+          resource={service}
+          onChange={geocode => formik.setFieldValue("geocode", geocode)}
         />
         {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
-        {formik.errors.code_postal && <Text>{formik.errors.codePostal}</Text>}
       </Field>
       <Field>
         <Input

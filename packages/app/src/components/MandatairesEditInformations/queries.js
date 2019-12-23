@@ -10,6 +10,8 @@ export const MANDATAIRE = gql`
       mandataire {
         adresse
         code_postal
+        latitude
+        longitude
         dispo_max
         etablissement
         genre

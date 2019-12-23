@@ -25,22 +25,28 @@ export const AdminAddService = () => {
 
   const { departements } = data;
 
-  const handleSubmit = async (values, { setSubmitting }) => {
-    const { city, depcode, label, lat, lng, postcode } = values.geocode;
+  const handleSubmit = async (values, { setErrors, setSubmitting }) => {
+    const { depcode } = values.geocode;
     const department = departements.find(d => d.id === depcode);
+
+    if (!department) {
+      setErrors({ geocode: "L'adresse est invalide, veuillez la resaisir" });
+      setSubmitting(false);
+      return;
+    }
 
     try {
       await addService({
         variables: {
-          adresse: label,
-          code_postal: postcode,
+          adresse: values.geocode.label,
+          code_postal: values.geocode.postcode,
           department_id: department.id,
           email: values.email,
           etablissement: values.etablissement,
           telephone: values.telephone,
-          ville: city,
-          latitude: lat,
-          longitude: lng
+          ville: values.geocode.city,
+          latitude: values.geocode.latitude,
+          longitude: values.geocode.longitude
         }
       });
     } catch (error) {

@@ -1,39 +1,22 @@
-import { AsyncSelect, Button, Field, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
 import { Box } from "rebass";
 
 import { serviceAntenneSchema } from "../../lib/validationSchemas";
-import { debouncedGeocode } from "../../util/geocode";
+import { Geocode, geocodeInitialValue } from "../Geocode";
 
 const ServiceAntenneForm = props => {
-  const { antenne, handleSubmit } = props;
-
+  const { antenne = {}, handleSubmit } = props;
   const {
     contact_email,
     contact_phone,
     contact_lastname,
     contact_firstname,
     mesures_max,
-    name,
-    address,
-    address_city,
-    address_zip_code,
-    latitude,
-    longitude
-  } = antenne || {};
-
-  const geocode = antenne
-    ? {
-        postcode: address_zip_code,
-        city: address_city,
-        label: address,
-        lat: latitude,
-        lng: longitude
-      }
-    : null;
-
-  const geocodeDefaultValue = antenne ? { value: geocode, label: geocode.city } : null;
+    name
+  } = antenne;
+  const geocode = geocodeInitialValue(antenne);
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -128,16 +111,9 @@ const ServiceAntenneForm = props => {
         )}
       </Field>
       <Field>
-        <AsyncSelect
-          name="geocode"
-          cacheOptions
-          defaultValue={geocodeDefaultValue}
-          hasError={formik.errors.geocode && formik.touched.geocode}
-          isClearable
-          loadOptions={debouncedGeocode}
-          placeholder="Adresse"
-          noOptionsMessage={() => "Pas de résultats"}
-          onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
+        <Geocode
+          onChange={geocode => formik.setFieldValue("geocode", geocode)}
+          resource={antenne}
         />
         {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
       </Field>
