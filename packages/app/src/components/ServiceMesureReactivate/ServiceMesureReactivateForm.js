@@ -42,6 +42,9 @@ export const ServiceMesureReactivateForm = props => {
           }
         });
       }
+    },
+    onCompleted() {
+      Router.push(`/services/mesures/${mesureId}`);
     }
   });
 
@@ -72,7 +75,6 @@ export const ServiceMesureReactivateForm = props => {
               }
             });
             setSubmitting(false);
-            Router.push(`/services/mesures/${mesureId}`);
           }}
           validationSchema={Yup.object().shape({
             reason_extinction: Yup.string().required("Required")

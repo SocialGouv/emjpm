@@ -11,7 +11,11 @@ import { MESURES } from "../ServiceMesures/queries";
 
 export const ServiceDeleteMesureForm = props => {
   const { mesureId, queryVariables } = props;
-  const [UpdateMesure] = useMutation(DELETE_MESURE);
+  const [UpdateMesure] = useMutation(DELETE_MESURE, {
+    onCompleted() {
+      Router.push(`/services`);
+    }
+  });
 
   return (
     <Flex flexWrap="wrap">
@@ -39,7 +43,6 @@ export const ServiceDeleteMesureForm = props => {
               }
             });
             setSubmitting(false);
-            Router.push(`/services`);
           }}
           validationSchema={Yup.object().shape({
             reason_delete: Yup.string().required("Required")

@@ -35,9 +35,7 @@ export const ServiceMesureEditForm = props => {
   const geocode = geocodeInitialValue(props.mesure);
 
   const [editMesure] = useMutation(EDIT_MESURE);
-  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS, {
-    onCompleted: () => Router.push(`/services/mesures/${mesureId}`)
-  });
+  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
 
   const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
 
@@ -94,6 +92,7 @@ export const ServiceMesureEditForm = props => {
         }
       }
 
+      Router.push(`/services/mesures/${mesureId}`);
       setSubmitting(false);
     },
     validationSchema: serviceMesureSchema,
