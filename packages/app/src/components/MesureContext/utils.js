@@ -25,7 +25,6 @@ export const formatMesure = mesure => {
     service_antenne,
     service_id
   } = mesure;
-  console.log(mesure);
   const formatedDate = format(legacyParse(date_ouverture), convertTokens("DD/MM/YYYY"));
   const formatedJudgementDate = format(legacyParse(judgment_date), convertTokens("DD/MM/YYYY"));
 

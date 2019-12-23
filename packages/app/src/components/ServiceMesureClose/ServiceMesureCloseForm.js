@@ -6,7 +6,11 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { CLOSE_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
+import {
+  CLOSE_MESURE,
+  UPDATE_ANTENNE_COUTERS,
+  UPDATE_SERVICES_COUTERS
+} from "../ServiceMesures/mutations";
 
 const EXTINCTION_LABEL_VALUE = [
   { label: "caducité", value: "caducité" },
@@ -24,6 +28,9 @@ export const ServiceMesureCloseForm = props => {
   const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
   const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const [UpdateMesure] = useMutation(CLOSE_MESURE, {
+    onCompleted() {
+      Router.push(`/services/mesures/${mesureId}`);
+    },
     update(
       cache,
       {
@@ -75,7 +82,6 @@ export const ServiceMesureCloseForm = props => {
               }
             });
             setSubmitting(false);
-            Router.push(`/services/mesures/${mesureId}`);
           }}
           validationSchema={Yup.object().shape({
             extinction: Yup.date().required("Required"),
