@@ -61,7 +61,8 @@ const validateHeaders = row => {
     .filter(Boolean);
 };
 
-const validateType = ({ type }) => {
+const validateType = row => {
+  const { type } = row;
   if (!type) {
     return `Le type de la mesure est obligatoire`;
   }
@@ -74,7 +75,7 @@ const validateType = ({ type }) => {
 
   for (const mesureType of MESURE_TYPE) {
     if (mesureType.toLowerCase() === typeInLowerCase) {
-      type = mesureType;
+      row.type = mesureType;
       return;
     }
   }
@@ -88,7 +89,8 @@ const validateGender = ({ civilite }) => {
   }
 };
 
-const validateResidence = ({ residence }) => {
+const validateResidence = row => {
+  const { residence } = row;
   if (!residence || RESIDENCE.includes(residence)) {
     return;
   }
@@ -97,7 +99,7 @@ const validateResidence = ({ residence }) => {
 
   for (const mesureResidence of RESIDENCE) {
     if (mesureResidence.toLowerCase() === residenceInLowerCase) {
-      residence = mesureResidence;
+      row.residence = mesureResidence;
       return;
     }
   }
