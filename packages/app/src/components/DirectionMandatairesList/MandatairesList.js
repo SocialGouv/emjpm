@@ -42,7 +42,7 @@ const MandatairesList = props => {
   if (loading) {
     return (
       <Card>
-        <Heading2>Répartition des mesures à date</Heading2>
+        <Heading2>Liste des mandataires</Heading2>
         <Box my="5">
           <Spinner />
         </Box>
@@ -53,7 +53,7 @@ const MandatairesList = props => {
   if (error) {
     return (
       <Card>
-        <Heading2>Répartition des mesures à date</Heading2>
+        <Heading2>Liste des mandataires</Heading2>
         <Heading4>erreur</Heading4>
       </Card>
     );
