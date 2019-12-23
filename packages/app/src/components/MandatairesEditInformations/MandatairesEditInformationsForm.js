@@ -1,4 +1,4 @@
-import { AsyncSelect, Button, Field, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
@@ -6,21 +6,15 @@ import { Box, Flex } from "rebass";
 import { SECRETARIAT_OPTIONS } from "../../constants/mandataire";
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
-import { debouncedGeocode } from "../../util/geocode";
 import { Link } from "../Commons";
+import { Geocode, geocodeInitialValue } from "../Geocode";
 
 const MandatairesEditInformationsForm = props => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
 
   const [isSecretariat, setSecretariat] = useState(mandataire.secretariat);
 
-  const geocode = {
-    postcode: mandataire.code_postal,
-    city: mandataire.ville,
-    label: mandataire.adresse,
-    lat: mandataire.latitude,
-    lng: mandataire.longitude
-  };
+  const geocode = geocodeInitialValue(mandataire);
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -30,16 +24,14 @@ const MandatairesEditInformationsForm = props => {
       nom: user.nom || "",
       prenom: user.prenom || "",
       adresse: mandataire.adresse || "",
-      code_postal: mandataire.code_postal || "",
       dispo_max: mandataire.dispo_max || "",
       genre: GENDER_OPTIONS.find(el => el.value === mandataire.genre),
-      geocode,
       siret: mandataire.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
-      ville: mandataire.ville || "",
       secretariat: SECRETARIAT_OPTIONS.find(el => el.value === mandataire.secretariat),
-      nb_secretariat: mandataire.nb_secretariat || ""
+      nb_secretariat: mandataire.nb_secretariat || "",
+      geocode
     }
   });
 
@@ -128,16 +120,9 @@ const MandatairesEditInformationsForm = props => {
         />
       </Field>
       <Field>
-        <AsyncSelect
-          name="geocode"
-          cacheOptions
-          defaultValue={{ value: geocode, label: geocode.label }}
-          hasError={formik.errors.geocode && formik.touched.geocode}
-          isClearable
-          loadOptions={debouncedGeocode}
-          placeholder="Ville, code postal, ..."
-          noOptionsMessage={() => "Pas de résultats"}
-          onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
+        <Geocode
+          resource={mandataire}
+          onChange={geocode => formik.setFieldValue("geocode", geocode)}
         />
         {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
       </Field>

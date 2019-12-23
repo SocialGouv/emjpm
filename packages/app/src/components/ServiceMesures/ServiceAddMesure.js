@@ -1,13 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import {
-  AsyncSelect,
-  Button,
-  Card,
-  Heading4,
-  Input,
-  Select,
-  Text
-} from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -17,8 +9,8 @@ import { Box, Flex } from "rebass";
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
-import { debouncedGeocode } from "../../util/geocode";
 import { formatServiceTribunalList } from "../../util/services";
+import { Geocode, geocodeInitialValue } from "../Geocode";
 import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
 import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
 
@@ -31,7 +23,7 @@ const initialValues = {
   numero_dossier: "",
   numero_rg: "",
   tribunal: "",
-  geocode: {}
+  geocode: geocodeInitialValue()
 };
 
 export const ServiceAddMesure = props => {
@@ -60,8 +52,8 @@ export const ServiceAddMesure = props => {
             civilite: values.civilite.value,
             code_postal: values.geocode.postcode,
             ville: values.geocode.city,
-            latitude: values.geocode.lat,
-            longitude: values.geocode.lng,
+            latitude: values.geocode.latitude,
+            longitude: values.geocode.longitude,
             date_ouverture: values.date_ouverture,
             department_id: departement.id,
             numero_dossier: values.numero_dossier,
@@ -162,7 +154,7 @@ export const ServiceAddMesure = props => {
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <form onSubmit={formik.handleSubmit}>
-              <Box sx={{ position: "relative", zIndex: "9" }} mb="2">
+              <Field>
                 <Input
                   value={formik.values.numero_rg}
                   id="numero_rg"
@@ -174,8 +166,8 @@ export const ServiceAddMesure = props => {
                 {formik.errors.numero_rg && formik.touched.numero_rg && (
                   <Text>{formik.errors.numero_rg}</Text>
                 )}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "8" }} mb="2">
+              </Field>
+              <Field>
                 <Select
                   id="tribunal"
                   name="tribunal"
@@ -188,8 +180,8 @@ export const ServiceAddMesure = props => {
                 {formik.errors.tribunal && formik.touched.tribunal && (
                   <Text>{formik.errors.tribunal}</Text>
                 )}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "7" }} mb="2">
+              </Field>
+              <Field>
                 <Input
                   value={formik.values.numero_dossier}
                   id="numero_dossier"
@@ -201,8 +193,8 @@ export const ServiceAddMesure = props => {
                 {formik.errors.numero_dossier && formik.touched.numero_dossier && (
                   <Text>{formik.errors.numero_dossier}</Text>
                 )}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "6" }} mb="2">
+              </Field>
+              <Field>
                 <Select
                   id="antenne"
                   name="antenne"
@@ -215,8 +207,8 @@ export const ServiceAddMesure = props => {
                 {formik.errors.antenne_id && formik.touched.antenne_id && (
                   <Text>{formik.errors.antenne_id}</Text>
                 )}
-              </Box>
-              <Box mb="2" mt="5">
+              </Field>
+              <Field>
                 <Input
                   value={formik.values.date_ouverture}
                   id="date_ouverture"
@@ -229,8 +221,8 @@ export const ServiceAddMesure = props => {
                 {formik.errors.date_ouverture && formik.touched.date_ouverture && (
                   <Text>{formik.errors.date_ouverture}</Text>
                 )}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "5" }} mb="2">
+              </Field>
+              <Field>
                 <Select
                   id="type"
                   name="type"
@@ -241,8 +233,8 @@ export const ServiceAddMesure = props => {
                   options={MESURE_TYPE_LABEL_VALUE}
                 />
                 {formik.errors.type && formik.touched.type && <Text>{formik.errors.type}</Text>}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "4" }} mb="2">
+              </Field>
+              <Field>
                 <Select
                   id="civilite"
                   name="civilite"
@@ -255,9 +247,9 @@ export const ServiceAddMesure = props => {
                 {formik.errors.civilite && formik.touched.civilite && (
                   <Text>{formik.errors.civilite}</Text>
                 )}
-              </Box>
+              </Field>
 
-              <Box sx={{ position: "relative", zIndex: "3" }} mb="2">
+              <Field>
                 <Input
                   value={formik.values.annee}
                   id="annee"
@@ -268,8 +260,8 @@ export const ServiceAddMesure = props => {
                   placeholder="année"
                 />
                 {formik.errors.annee && formik.touched.annee && <Text>{formik.errors.annee}</Text>}
-              </Box>
-              <Box sx={{ position: "relative", zIndex: "2" }} mt="5" mb="2">
+              </Field>
+              <Field>
                 <Select
                   id="residence"
                   name="residence"
@@ -282,23 +274,14 @@ export const ServiceAddMesure = props => {
                 {formik.errors.residence && formik.touched.residence && (
                   <Text>{formik.errors.residence}</Text>
                 )}
-              </Box>
+              </Field>
 
-              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                <AsyncSelect
-                  name="geocode"
-                  cacheOptions
-                  defaultOptions
-                  hasError={formik.errors}
-                  isClearable
-                  loadOptions={debouncedGeocode}
-                  placeholder="Ville, code postal, ..."
-                  noOptionsMessage={() => "Pas de résultats"}
-                  onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
-                />
-                {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
-                {formik.errors.code_postal && <Text>{formik.errors.codePostal}</Text>}
-              </Box>
+              <Field>
+                <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
+                {formik.errors.geocode && formik.touched.geocode && (
+                  <Text>{formik.errors.geocode}</Text>
+                )}
+              </Field>
 
               <Flex justifyContent="flex-end">
                 <Box>

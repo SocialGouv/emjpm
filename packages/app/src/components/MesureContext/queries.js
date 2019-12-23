@@ -11,12 +11,15 @@ export const MESURES = gql`
       cabinet
       civilite
       code_postal
+      latitude
+      longitude
       antenne_id
       latitude
       longitude
       judgment_date
       is_urgent
       departement {
+        id
         nom
         region {
           nom
