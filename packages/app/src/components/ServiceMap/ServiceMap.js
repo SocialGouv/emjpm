@@ -6,10 +6,11 @@ import { MapContainer, MapLayer } from "../Map";
 import { MapContext } from "./context";
 import { MESURES_SERVICE } from "./queries";
 
-const ServicesMap = () => {
+const ServiceMap = () => {
   const { currentGestionnaire } = useContext(MapContext);
   const { latitude, longitude } = currentGestionnaire;
   const { data, loading, error } = useQuery(MESURES_SERVICE);
+
   const selectMesure = event => {
     const {
       feature: {
@@ -35,4 +36,4 @@ const ServicesMap = () => {
   );
 };
 
-export { ServicesMap };
+export { ServiceMap };

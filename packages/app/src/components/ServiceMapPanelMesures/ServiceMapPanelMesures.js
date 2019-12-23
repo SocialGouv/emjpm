@@ -1,20 +1,18 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MesureListItem } from "@socialgouv/emjpm-ui-components";
 import Router from "next/router";
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
 import { formatMesureList } from "../../util/services";
-import { MapContext } from "../ServicesMap/context";
 import { MESURES } from "./queries";
 import { ServiceMapPanelMesuresStyle } from "./style";
 const RESULT_PER_PAGE = 50;
 
 const ServiceMapPanelMesures = props => {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { setMesures } = useContext(MapContext);
   const queryVariables = {
     limit: RESULT_PER_PAGE,
     offset: currentOffset
@@ -28,12 +26,6 @@ const ServiceMapPanelMesures = props => {
   const selectMesure = ({ id }) => {
     Router.push(`/services/mesures/${id}`);
   };
-
-  useEffect(() => {
-    if (data && !loading && !error) {
-      setMesures(data.mesures);
-    }
-  }, [data, error, loading, setMesures]);
 
   if (loading) {
     return <Box p="2">Chargement</Box>;

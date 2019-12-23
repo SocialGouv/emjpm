@@ -3,12 +3,12 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServicesMap } from "../../src/components/Layout";
+import { MapContextProvider } from "../../src/components/ServiceMap/context";
 import { ServiceMapPanelMesures } from "../../src/components/ServiceMapPanelMesures";
-import { MapContextProvider } from "../../src/components/ServicesMap/context";
 import { UserContext } from "../../src/components/UserContext";
 import { withAuthSync } from "../../src/util/auth";
-const ServicesMap = dynamic(
-  () => import("../../src/components/ServicesMap").then(mod => mod.ServicesMap),
+const ServiceMap = dynamic(
+  () => import("../../src/components/ServicesMap").then(mod => mod.ServiceMap),
   { ssr: false }
 );
 
@@ -39,7 +39,7 @@ const Map = () => {
               minWidth: 320
             }}
           >
-            <ServicesMap />
+            <ServiceMap />
           </Box>
         </Flex>
       </LayoutServicesMap>

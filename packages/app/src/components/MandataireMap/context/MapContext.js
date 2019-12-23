@@ -14,12 +14,8 @@ export const Provider = props => {
     currentId: null
   });
 
-  const [mesures, setMesures] = useState([]);
-
   // Make the context object:
   const mapContext = {
-    mesures,
-    setMesures,
     currentGestionnaire,
     setcurrentGestionnaire
   };
