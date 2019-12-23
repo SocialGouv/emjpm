@@ -63,8 +63,6 @@ export const ServiceAddMesure = props => {
             type: values.type.value
           }
         });
-
-        Router.push("/services");
       }
 
       setSubmitting(false);
@@ -88,6 +86,10 @@ export const ServiceAddMesure = props => {
 
   const [addMesure] = useMutation(ADD_MESURE, {
     options: { refetchQueries: ["mesures", "mesures_aggregate"] },
+    onCompleted({ insert_mesures }) {
+      const [mesure] = insert_mesures.returning;
+      Router.push(`/services/mesures/${mesure.id}`);
+    },
     update(
       cache,
       {
