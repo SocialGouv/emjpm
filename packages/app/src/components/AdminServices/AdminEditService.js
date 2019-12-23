@@ -24,9 +24,15 @@ export const AdminEditService = props => {
   } = serviceQuery.data;
   const { departements } = departmentsQuery.data;
 
-  const handleSubmit = async (values, { setSubmitting }) => {
-    const { city, depcode, label, lat, lng, postcode } = values.geocode;
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+    const { city, depcode, label, longitude, latitude, postcode } = values.geocode;
     const department = departements.find(d => d.id === depcode);
+
+    if (!department) {
+      setErrors({ geocode: "L'adresse est invalide, veuillez la resaisir" });
+      setSubmitting(false);
+      return;
+    }
 
     try {
       await updateService({
@@ -40,8 +46,8 @@ export const AdminEditService = props => {
           etablissement: values.etablissement,
           telephone: values.telephone,
           ville: city,
-          latitude: lat,
-          longitude: lng
+          latitude: latitude,
+          longitude: longitude
         }
       });
     } catch (error) {

@@ -1,25 +1,13 @@
-import { AsyncSelect, Button, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { adminServiceSchema } from "../../lib/validationSchemas/adminServiceSchema";
-import { debouncedGeocode } from "../../util/geocode";
+import { Geocode, geocodeInitialValue } from "../Geocode";
 
 export const AdminServiceForm = props => {
   const { handleCancel, handleSubmit, service } = props;
-
-  const geocode = service
-    ? {
-        postcode: service.code_postal,
-        city: service.ville,
-        lat: service.latitude,
-        lng: service.longitude,
-        label: service.adresse
-      }
-    : null;
-
-  const geocodeDefaultValue = service ? { value: geocode, label: geocode.city } : null;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -28,7 +16,7 @@ export const AdminServiceForm = props => {
       email: service ? service.email : "",
       etablissement: service ? service.etablissement : "",
       telephone: service ? service.telephone : "",
-      geocode
+      geocode: geocodeInitialValue(service)
     }
   });
 
@@ -51,7 +39,7 @@ export const AdminServiceForm = props => {
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="2">
           <form onSubmit={formik.handleSubmit}>
-            <Box mb="2">
+            <Field>
               <Input
                 value={formik.values.etablissement}
                 id="etablissement"
@@ -63,8 +51,8 @@ export const AdminServiceForm = props => {
               {formik.errors.etablissement && formik.touched.etablissement && (
                 <Text>{formik.errors.etablissement}</Text>
               )}
-            </Box>
-            <Box mb="2" mt="5">
+            </Field>
+            <Field>
               <Input
                 value={formik.values.email}
                 id="email"
@@ -74,8 +62,8 @@ export const AdminServiceForm = props => {
                 placeholder="Email"
               />
               {formik.errors.email && formik.touched.email && <Text>{formik.errors.email}</Text>}
-            </Box>
-            <Box mb="2">
+            </Field>
+            <Field>
               <Input
                 value={formik.values.telephone}
                 id="telephone"
@@ -87,21 +75,16 @@ export const AdminServiceForm = props => {
               {formik.errors.telephone && formik.touched.telephone && (
                 <Text>{formik.errors.telephone}</Text>
               )}
-            </Box>
-            <Box sx={{ position: "relative", zIndex: "85" }} mb="2">
-              <AsyncSelect
-                name="geocode"
-                cacheOptions
-                defaultValue={geocodeDefaultValue}
-                hasError={formik.errors.geocode && formik.touched.geocode}
-                isClearable
-                loadOptions={debouncedGeocode}
-                placeholder="Adresse"
-                noOptionsMessage={() => "Pas de résultats"}
-                onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
+            </Field>
+            <Field>
+              <Geocode
+                resource={service}
+                onChange={geocode => formik.setFieldValue("geocode", geocode)}
               />
-              {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
-            </Box>
+              {formik.errors.geocode && formik.touched.geocode && (
+                <Text>{formik.errors.geocode}</Text>
+              )}
+            </Field>
             <Flex justifyContent="flex-end">
               {handleCancel && (
                 <Box>

@@ -35,7 +35,7 @@ const ServiceEdit = () => {
         refetchQueries: ["Service"],
         variables: {
           adresse: values.geocode.label,
-          code_postal: values.geocode.code_postal,
+          code_postal: values.geocode.postcode,
           dispo_max: values.dispo_max,
           email: values.email,
           etablissement: values.etablissement,
@@ -44,7 +44,7 @@ const ServiceEdit = () => {
           prenom: values.prenom,
           service_id: service.id,
           telephone: values.telephone,
-          ville: values.geocode.ville,
+          ville: values.geocode.city,
           latitude: values.geocode.latitude,
           longitude: values.geocode.longitude
         }
