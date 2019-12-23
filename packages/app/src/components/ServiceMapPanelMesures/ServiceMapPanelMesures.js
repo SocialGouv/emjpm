@@ -20,7 +20,7 @@ const ServiceMapPanelMesures = props => {
 
   const { data, error, loading } = useQuery(MESURES, {
     variables: queryVariables,
-    fetchPolicy: "cache-first"
+    fetchPolicy: "no-cache"
   });
 
   const selectMesure = ({ id }) => {

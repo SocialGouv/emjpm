@@ -3,11 +3,10 @@ import React from "react";
 import { Flex } from "rebass";
 
 import { LayoutMagistrat } from "../../../../src/components/Layout";
-import { MagistratMesureEdit } from "../../../../src/components/MagistratMesureEdit";
-import { MesureProvider } from "../../../../src/components/MesureContext";
+import { MagistratMesureDelete } from "../../../../src/components/MagistratMesureDelete";
 import { withAuthSync } from "../../../../src/util/auth";
 
-const MagistratMesureEditPage = props => {
+const MagistratMesureDeletePage = props => {
   const { mesureId } = props;
   return (
     <LayoutMagistrat>
@@ -18,17 +17,15 @@ const MagistratMesureEditPage = props => {
             mt: "2"
           }}
         >
-          <MesureProvider mesureId={mesureId}>
-            <MagistratMesureEdit />
-          </MesureProvider>
+          <MagistratMesureDelete mesureId={mesureId} />
         </Flex>
       </BoxWrapper>
     </LayoutMagistrat>
   );
 };
 
-MagistratMesureEditPage.getInitialProps = async ({ query }) => {
+MagistratMesureDeletePage.getInitialProps = async ({ query }) => {
   return { mesureId: query.mesure_id };
 };
 
-export default withAuthSync(MagistratMesureEditPage);
+export default withAuthSync(MagistratMesureDeletePage);

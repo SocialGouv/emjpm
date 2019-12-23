@@ -29,17 +29,17 @@ const MagistratMesureSideMandataireStyle = {
 };
 
 const MagistratMesureTitleMandataireStyle = {
-  fontSize: 1,
+  fontSize: 0,
   color: "textSecondary",
   fontFamily: "heading",
   mb: "4px"
 };
 
 const MagistratMesureContentMandataireStyle = {
-  fontSize: 2,
+  fontSize: 1,
   color: "text",
   fontFamily: "body",
-  fontWeight: "bold",
+  fontWeight: "600",
   mb: 4
 };
 

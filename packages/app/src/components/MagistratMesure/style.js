@@ -26,17 +26,17 @@ const MagistratMesureMainStyle = {
 };
 
 const MagistratMesureTitleStyle = {
-  fontSize: 1,
+  fontSize: 0,
   color: "textSecondary",
   fontFamily: "heading",
   mb: "4px"
 };
 
 const MagistratMesureContentStyle = {
-  fontSize: 2,
+  fontSize: 1,
   color: "text",
   fontFamily: "body",
-  fontWeight: "bold",
+  fontWeight: "600",
   mb: 4
 };
 

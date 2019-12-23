@@ -1,5 +1,7 @@
 const MagistratMesureEditStyle = {
-  bg: "blue"
+  bg: "white",
+  width: "100%",
+  flexWrap: "wrap"
 };
 
 export { MagistratMesureEditStyle };
