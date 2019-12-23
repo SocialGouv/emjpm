@@ -1,47 +1,5 @@
 import gql from "graphql-tag";
 
-export const UPDATE_ANTENNE_COUTERS = gql`
-  mutation updateAntenneCounters(
-    $antenne_id: Int!
-    $inc_mesures_in_progress: Int!
-    $inc_mesures_awaiting: Int!
-  ) {
-    update_service_antenne(
-      where: { id: { _eq: $antenne_id } }
-      _inc: {
-        mesures_in_progress: $inc_mesures_in_progress
-        mesures_awaiting: $inc_mesures_awaiting
-      }
-    ) {
-      affected_rows
-      returning {
-        id
-        mesures_in_progress
-      }
-    }
-  }
-`;
-
-export const UPDATE_SERVICES_COUTERS = gql`
-  mutation UpdateServicesCounter(
-    $service_id: Int!
-    $mesures_in_progress: Int!
-    $mesures_awaiting: Int!
-  ) {
-    update_services(
-      where: { id: { _eq: $service_id } }
-      _inc: { mesures_in_progress: $mesures_in_progress, mesures_awaiting: $mesures_awaiting }
-    ) {
-      affected_rows
-      returning {
-        id
-        mesures_in_progress
-        mesures_awaiting
-      }
-    }
-  }
-`;
-
 export const ACCEPT_MESURE = gql`
   mutation editMesure(
     $id: Int!
@@ -76,8 +34,10 @@ export const ACCEPT_MESURE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }

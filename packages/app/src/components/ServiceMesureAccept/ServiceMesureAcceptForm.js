@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { AsyncSelect, Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
@@ -8,9 +8,11 @@ import { Box, Flex, Text } from "rebass";
 import { RESIDENCE } from "../../constants/mesures";
 import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
-import { debouncedGeocode } from "../../util/geocode";
 import { formatAntenneOptions } from "../../util/services";
-import { ACCEPT_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
+import { Geocode, geocodeInitialValue } from "../Geocode";
+import { UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "../ServiceMesures/mutations";
+import { ACCEPT_MESURE } from "./mutations";
+
 export const ServiceMesureAcceptForm = props => {
   const { mesureId, user_antennes, departementsData } = props;
 
@@ -43,6 +45,9 @@ export const ServiceMesureAcceptForm = props => {
           }
         });
       }
+    },
+    onCompleted() {
+      Router.push(`/services/mesures/${mesureId}`);
     }
   });
 
@@ -66,14 +71,12 @@ export const ServiceMesureAcceptForm = props => {
             department_id: departement.id,
             id: mesureId,
             residence: values.residence.value,
+            code_postal: values.geocode.postcode,
             ville: values.geocode.city,
-            latitude: values.geocode.lat,
-            longitude: values.geocode.lng,
-            code_postal: values.geocode.postcode
+            latitude: values.geocode.latitude,
+            longitude: values.geocode.longitude
           }
         });
-
-        Router.push(`/services/mesures/${mesureId}`);
       }
       setSubmitting(false);
     },
@@ -81,7 +84,8 @@ export const ServiceMesureAcceptForm = props => {
     initialValues: {
       antenne_id: "",
       date_ouverture: "",
-      residence: ""
+      residence: "",
+      geocode: geocodeInitialValue()
     }
   });
   return (
@@ -126,17 +130,10 @@ export const ServiceMesureAcceptForm = props => {
             )}
           </Box>
           <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
-            <AsyncSelect
-              name="geocode"
-              cacheOptions
-              hasError={formik.errors.geocode}
-              isClearable
-              loadOptions={debouncedGeocode}
-              placeholder="Ville, code postal, ..."
-              noOptionsMessage={() => "Pas de résultats"}
-              onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
-            />
-            {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
+            <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
+            {formik.errors.geocode && formik.touched.geocode && (
+              <Text>{formik.errors.geocode}</Text>
+            )}
           </Box>
           {user_antennes.length >= 2 && (
             <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
