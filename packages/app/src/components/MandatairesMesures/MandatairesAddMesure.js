@@ -6,6 +6,7 @@ import Link from "next/link";
 import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
+
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
@@ -14,7 +15,6 @@ import { UserContext } from "../UserContext";
 import { ADD_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
 import { DEPARTEMENTS, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
 import { formatUserTribunalList } from "./utils";
-
 
 export const MandatairesAddMesure = props => {
   const {

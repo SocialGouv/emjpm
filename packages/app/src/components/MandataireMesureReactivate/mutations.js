@@ -12,8 +12,10 @@ export const REACTIVATE_MESURE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }
