@@ -15,6 +15,8 @@ export const GESTIONNAIRES = gql`
       mandataire {
         telephone
         ville
+        latitude
+        longitude
         adresse
         commentaires {
           comment
@@ -45,6 +47,8 @@ export const GESTIONNAIRES = gql`
         code_postal
         telephone
         email
+        latitude
+        longitude
         etablissement
         service_admins {
           user {

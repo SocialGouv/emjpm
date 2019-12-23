@@ -1,5 +1,3 @@
-import mesure from "../../../public/static/images/mesure.svg";
-
 const MagistratMesureMandataireStyle = {
   bg: "white",
   borderRadius: "6px",
@@ -19,8 +17,6 @@ const MagistratMesureMainMandataireStyle = {
 };
 
 const MagistratMesureSideMandataireStyle = {
-  background: `url(${mesure})`,
-  backgroundSize: "cover",
   flexGrow: 1,
   flexBasis: 380,
   minHeight: "320px",

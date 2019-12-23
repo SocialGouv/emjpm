@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import dynamic from "next/dynamic";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -16,6 +17,11 @@ import {
   MagistratMesureTitleMandataireStyle
 } from "./style";
 import { formatGestionnaire } from "./utils";
+
+const MagistratMesureMap = dynamic(
+  () => import("../MagistratMesureMap").then(mod => mod.MagistratMesureMap),
+  { ssr: false }
+);
 
 const MagistratMesureMandataire = props => {
   const { serviceId, mandataireId, tiId } = useContext(MesureContext);
@@ -45,7 +51,9 @@ const MagistratMesureMandataire = props => {
   }
 
   const [gestionnaire] = data.gestionnaires;
+
   const formatedGestionnaire = formatGestionnaire(gestionnaire);
+  console.log(data.gestionnaires);
   const {
     dispoMax,
     mesuresAwaiting,
@@ -56,18 +64,22 @@ const MagistratMesureMandataire = props => {
     email,
     lastLogin,
     lastLoginIsCritical,
-    // latitude,
-    // longitude,
     nom,
     prenom,
     telephone,
-    ville
+    latitude,
+    longitude,
+    ville,
+    id
   } = formatedGestionnaire;
+
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
   return (
     <Box {...props} width="100%">
       <Flex sx={MagistratMesureMandataireStyle}>
-        <Box sx={MagistratMesureSideMandataireStyle} />
+        <Box sx={MagistratMesureSideMandataireStyle}>
+          <MagistratMesureMap longitude={longitude} latitude={latitude} id={id} />
+        </Box>
         <Flex sx={MagistratMesureMainMandataireStyle}>
           <Box width="50%">
             <Box>
