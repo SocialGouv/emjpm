@@ -1,12 +1,7 @@
 import gql from "graphql-tag";
 
 export const CLOSE_MESURE = gql`
-  mutation closeMesure(
-    $id: Int!
-    $service_id: Int!
-    $reason_extinction: String!
-    $extinction: date!
-  ) {
+  mutation closeMesure($id: Int!, $reason_extinction: String!, $extinction: date!) {
     update_mesures(
       where: { id: { _eq: $id } }
       _set: {
@@ -23,8 +18,10 @@ export const CLOSE_MESURE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }
@@ -86,8 +83,10 @@ export const EDIT_MESURE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }
@@ -143,57 +142,10 @@ export const REACTIVATE_MESURE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
-            nom
-          }
-        }
-        status
-        type
-        ville
-        residence
-        numero_rg
-        numero_dossier
-        etablissement
-        annee
-        date_ouverture
-      }
-    }
-  }
-`;
-
-export const ACCEPT_MESURE = gql`
-  mutation editMesure(
-    $id: Int!
-    $department_id: Int!
-    $date_ouverture: date!
-    $residence: String!
-    $code_postal: String!
-    $ville: String!
-    $antenne_id: Int
-  ) {
-    update_mesures(
-      where: { id: { _eq: $id } }
-      _set: {
-        antenne_id: $antenne_id
-        department_id: $department_id
-        status: "Mesure en cours"
-        date_ouverture: $date_ouverture
-        residence: $residence
-        code_postal: $code_postal
-        ville: $ville
-      }
-    ) {
-      returning {
-        antenne_id
-        service_id
-        id
-        cabinet
-        civilite
-        code_postal
-        departement {
-          nom
-          region {
+            id
             nom
           }
         }
@@ -283,8 +235,10 @@ export const ADD_MESURE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }
