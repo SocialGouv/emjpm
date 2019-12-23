@@ -62,6 +62,7 @@ export const MANDATAIRE_MESURES = gql`
         id
         nom
         region {
+          id
           nom
         }
       }

@@ -7,8 +7,8 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
+import { MANDATAIRE_MESURES } from "../MandatairesMesures/queries";
 import { DELETE_MESURE } from "./mutations";
-import { MANDATAIRE_MESURES } from "./queries";
 
 export const MandataireMesureDeleteForm = props => {
   const { mesureId, queryVariables } = props;
