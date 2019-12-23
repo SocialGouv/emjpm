@@ -77,8 +77,8 @@ const MandatairesEditInformations = props => {
           telephone: values.telephone,
           telephone_portable: values.telephone_portable,
           ville: values.geocode.city,
-          latitude: values.geocode.lat,
-          longitude: values.geocode.lng,
+          latitude: values.geocode.latitude,
+          longitude: values.geocode.longitude,
           secretariat: values.secretariat.value,
           nb_secretariat: parseFloat(values.nb_secretariat)
         }

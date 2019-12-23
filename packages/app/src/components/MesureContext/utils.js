@@ -6,6 +6,7 @@ export const formatMesure = mesure => {
     residence,
     code_postal,
     numero_dossier,
+    departement,
     type,
     ville,
     status,
@@ -24,6 +25,7 @@ export const formatMesure = mesure => {
     service_antenne,
     service_id
   } = mesure;
+  console.log(mesure);
   const formatedDate = format(legacyParse(date_ouverture), convertTokens("DD/MM/YYYY"));
   const formatedJudgementDate = format(legacyParse(judgment_date), convertTokens("DD/MM/YYYY"));
 
@@ -39,6 +41,7 @@ export const formatMesure = mesure => {
   return {
     latitude: latitude,
     longitude: longitude,
+    departmentId: departement ? departement.id : null,
     age: annee ? annee : "nc",
     realAge: annee ? currentYear - annee : "nc",
     antenne: service_antenne ? service_antenne.name : null,

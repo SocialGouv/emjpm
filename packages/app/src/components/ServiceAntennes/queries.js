@@ -13,6 +13,7 @@ export const ANTENNE = gql`
       mesures_max
       mesures_in_progress
       mesures_awaiting
+      address
       address_city
       address_street
       address_zip_code
@@ -20,6 +21,8 @@ export const ANTENNE = gql`
       contact_firstname
       contact_lastname
       contact_phone
+      latitude
+      longitude
     }
   }
 `;

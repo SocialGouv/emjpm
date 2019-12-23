@@ -30,6 +30,7 @@ export const SERVICE = gql`
       code_postal
       ville
       department_id
+      adresse
       latitude
       longitude
       email
