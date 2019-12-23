@@ -3,12 +3,14 @@ import Router from "next/router";
 import React, { useContext } from "react";
 
 import { MapContainer, MapLayer } from "../Map";
-import { MapContext } from "./context";
+import { UserContext } from "../UserContext";
 import { MESURES } from "./queries";
 
 const MandataireMap = () => {
-  const { currentGestionnaire } = useContext(MapContext);
-  const { latitude, longitude } = currentGestionnaire;
+  const {
+    mandataire: { longitude, latitude }
+  } = useContext(UserContext);
+
   const { data, loading, error } = useQuery(MESURES);
   const selectMesure = event => {
     const {

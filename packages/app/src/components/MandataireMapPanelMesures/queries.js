@@ -1,29 +1,44 @@
 import gql from "graphql-tag";
 
 export const MESURES = gql`
-  query mesures($limit: Int, $offset: Int) {
+  query MesuresList($limit: Int, $offset: Int) {
     mesures_aggregate(where: { status: { _eq: "Mesure en cours" } }) {
       aggregate {
         count
       }
     }
     mesures(
-      where: { status: { _eq: "Mesure en cours" } }
-      limit: $limit
-      order_by: { created_at: desc_nulls_last }
       offset: $offset
+      limit: $limit
+      order_by: { date_ouverture: desc_nulls_first }
+      where: { status: { _eq: "Mesure en cours" } }
     ) {
+      annee
       antenne_id
-      service_id
-      id
       cabinet
       civilite
       code_postal
-      judgment_date
+      created_at
+      date_ouverture
+      department_id
+      etablissement
+      etablissement_id
+      extinction
+      id
       is_urgent
-      latitude
-      longitude
+      judgment_date
+      mandataire_id
+      numero_dossier
+      numero_rg
+      reason_extinction
+      residence
+      service_id
+      status
+      ti_id
+      type
+      ville
       departement {
+        id
         nom
         region {
           nom
@@ -33,15 +48,6 @@ export const MESURES = gql`
         id
         etablissement
       }
-      status
-      type
-      ville
-      residence
-      numero_rg
-      numero_dossier
-      etablissement
-      annee
-      date_ouverture
     }
   }
 `;
