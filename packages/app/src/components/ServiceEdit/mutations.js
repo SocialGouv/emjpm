@@ -16,7 +16,6 @@ export const EDIT_ANTENNE = gql`
     $latitude: Float
     $longitude: Float
   ) {
-    __typename
     update_services(
       where: { id: { _eq: $service_id } }
       _set: {

@@ -13,7 +13,6 @@ import { EDIT_MESURE } from "./mutations";
 export const MagistratEditMesure = props => {
   const { currentMesure, age, civilite, numeroRg, type, cabinet } = props;
   const [UpdateMesure] = useMutation(EDIT_MESURE);
-  console.log(props);
   const { setCurrentMesure, setPanelType } = useContext(MesureContext);
   return (
     <Flex flexWrap="wrap">

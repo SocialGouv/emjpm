@@ -20,7 +20,6 @@ export const EDIT_USER = gql`
     $id: Int!
     $department_id: Int!
   ) {
-    __typename
     update_mandataires(
       _set: {
         dispo_max: $dispo_max

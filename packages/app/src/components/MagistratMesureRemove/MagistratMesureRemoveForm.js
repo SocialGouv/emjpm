@@ -26,6 +26,7 @@ export const MagistratRemoveMesure = props => {
   if (error) {
     return <div>error</div>;
   }
+
   if (loading) {
     return <div>loading...</div>;
   }

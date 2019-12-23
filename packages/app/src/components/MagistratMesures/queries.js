@@ -1,15 +1,5 @@
 import gql from "graphql-tag";
 
-export const MESURE = gql`
-  query mesure($id: Int!) {
-    mesures(where: { id: { _eq: $id } }) {
-      id
-      mandataire_id
-      service_id
-    }
-  }
-`;
-
 export const MESURES = gql`
   query mesures($type: String, $status: String, $searchText: String, $offset: Int) {
     mesures_aggregate(
@@ -17,6 +7,7 @@ export const MESURES = gql`
         numero_rg: { _ilike: $searchText }
         status: { _eq: "Mesure en attente" }
         type: { _eq: $type }
+        id: { _eq: null }
       }
     ) {
       aggregate {
@@ -24,13 +15,14 @@ export const MESURES = gql`
       }
     }
     mesures(
-      offset: $offset
-      limit: 20
       where: {
         numero_rg: { _ilike: $searchText }
         status: { _eq: "Mesure en attente" }
         type: { _eq: $type }
+        id: { _eq: null }
       }
+      offset: $offset
+      limit: 20
       order_by: { created_at: desc }
     ) {
       id
