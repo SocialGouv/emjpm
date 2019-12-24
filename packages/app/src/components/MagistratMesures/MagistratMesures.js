@@ -12,10 +12,6 @@ import { formatMandatairesMesureList } from "./utils";
 
 const RESULT_PER_PAGE = 20;
 
-const selectMesure = ({ id }) => {
-  Router.push({ pathname: `/magistrats/mesures/${id}` });
-};
-
 const MagistratMesures = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { mesureType, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
@@ -29,16 +25,19 @@ const MagistratMesures = () => {
   };
 
   const { data, error, loading } = useQuery(MESURES, {
-    fetchPolicy: "no-cache",
+    fetchPolicy: "cache-and-network",
     variables: queryVariables
   });
+
+  const selectMesure = ({ id }) => {
+    Router.push({ pathname: `/magistrats/mesures/${id}` });
+  };
 
   if (loading) {
     return <div>loading</div>;
   }
 
   if (error) {
-    console.log(error);
     return <div>error</div>;
   }
 

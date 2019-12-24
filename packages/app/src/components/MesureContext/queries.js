@@ -2,32 +2,20 @@ import gql from "graphql-tag";
 
 export const MESURES = gql`
   query mesures($id: Int) {
-    mesures_aggregate(
-      where: {
-        numero_rg: { _ilike: null }
-        status: { _eq: null }
-        type: { _eq: null }
-        id: { _eq: $id }
-      }
-    ) {
+    mesures_aggregate(where: { id: { _eq: $id } }) {
       aggregate {
         count
       }
     }
     mesures(
-      where: {
-        numero_rg: { _ilike: null }
-        status: { _eq: null }
-        type: { _eq: null }
-        id: { _eq: $id }
-      }
+      where: { id: { _eq: $id } }
       limit: null
       order_by: { created_at: desc }
       offset: null
     ) {
       service_antenne {
-        id
         name
+        id
       }
       id
       cabinet

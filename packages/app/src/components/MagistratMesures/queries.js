@@ -7,7 +7,6 @@ export const MESURES = gql`
         numero_rg: { _ilike: $searchText }
         status: { _eq: "Mesure en attente" }
         type: { _eq: $type }
-        id: { _eq: null }
       }
     ) {
       aggregate {
@@ -19,7 +18,6 @@ export const MESURES = gql`
         numero_rg: { _ilike: $searchText }
         status: { _eq: "Mesure en attente" }
         type: { _eq: $type }
-        id: { _eq: null }
       }
       offset: $offset
       limit: 20
