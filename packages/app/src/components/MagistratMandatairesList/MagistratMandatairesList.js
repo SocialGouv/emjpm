@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MandataireContextProvider, Mandatairelist } from "@socialgouv/emjpm-ui-components";
+import { MandataireContextProvider, MandataireListItem } from "@socialgouv/emjpm-ui-components";
 import { Card, Heading4, Input, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
+import Router from "next/router";
 import React, { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { useDebounce } from "../../lib/hooks";
-import { MagistratChoose } from "./MagistratChoose";
 import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";
 import { formatMandatairesList } from "./utils";
@@ -27,7 +27,6 @@ const RESULT_PER_PAGE = 20;
 
 const MagistratMandatairesList = props => {
   const {
-    cabinet,
     magistrat: { ti_id }
   } = props;
   const [selectedType, setType] = useState(false);
@@ -70,7 +69,7 @@ const MagistratMandatairesList = props => {
 
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const list = formatMandatairesList(data.mandatairesList);
+  const gestionnaires = formatMandatairesList(data.mandatairesList);
   return (
     <MandataireContextProvider>
       <Box sx={MagistratMandatairesListStyle} {...props}>
@@ -108,11 +107,15 @@ const MagistratMandatairesList = props => {
             </Box>
           </Flex>
         </Card>
-        <Mandatairelist
-          isMagistrat
-          ChooseComponent={props => <MagistratChoose tiId={ti_id} cabinet={cabinet} {...props} />}
-          mandataires={list}
-        />
+        {gestionnaires.map(gestionnaire => {
+          return (
+            <MandataireListItem
+              key={gestionnaire.id}
+              onClick={() => Router.push(`/magistrats/gestionnaires/${gestionnaire.id}`)}
+              gestionnaire={gestionnaire}
+            />
+          );
+        })}
         {count > RESULT_PER_PAGE && (
           <Flex alignItems="center" justifyContent="center">
             <ReactPaginate

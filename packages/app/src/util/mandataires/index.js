@@ -1,1 +1,1 @@
-export { formatMandataire, formatUserTribunalList } from "./MandataireUtils";
+export { formatGestionnaireId, formatMandataire, formatUserTribunalList } from "./MandataireUtils";
