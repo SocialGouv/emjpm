@@ -24,8 +24,10 @@ export const MESURES = gql`
       latitude
       longitude
       departement {
+        id
         nom
         region {
+          id
           nom
         }
       }

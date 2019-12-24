@@ -13,6 +13,7 @@ export const MESURES = gql`
       order_by: { date_ouverture: desc_nulls_first }
       where: { status: { _eq: "Mesure en cours" } }
     ) {
+      id
       annee
       antenne_id
       cabinet
@@ -24,7 +25,6 @@ export const MESURES = gql`
       etablissement
       etablissement_id
       extinction
-      id
       is_urgent
       judgment_date
       mandataire_id
@@ -41,6 +41,7 @@ export const MESURES = gql`
         id
         nom
         region {
+          id
           nom
         }
       }

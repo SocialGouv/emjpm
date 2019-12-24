@@ -3,10 +3,10 @@ import gql from "graphql-tag";
 export const GET_SERVICE_USERS = gql`
   query users($userId: Int) {
     users(where: { id: { _eq: $userId } }) {
+      id
       email
       created_at
       cabinet
-      id
       last_login
       nom
       prenom
@@ -14,6 +14,7 @@ export const GET_SERVICE_USERS = gql`
       username
       service_admins {
         user {
+          id
           prenom
           nom
         }
@@ -26,6 +27,7 @@ export const GET_SERVICE_USERS = gql`
           name
         }
         user {
+          id
           prenom
           nom
         }
@@ -65,6 +67,7 @@ export const MAGISTRAT_USERS = gql`
       type
       username
       magistrat {
+        id
         ti_id
       }
     }

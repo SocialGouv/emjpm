@@ -7,9 +7,10 @@ import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "../MandataireFilters/context";
 import { MANDATAIRE_MESURES } from "./queries";
-import { formatMesureList } from "./utils";
-const RESULT_PER_PAGE = 20;
 import { MesureListStyle } from "./style";
+import { formatMesureList } from "./utils";
+
+const RESULT_PER_PAGE = 20;
 
 const MandatairesMesures = props => {
   const { isOnlyWaiting } = props;
