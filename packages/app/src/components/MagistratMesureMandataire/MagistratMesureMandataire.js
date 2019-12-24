@@ -53,7 +53,6 @@ const MagistratMesureMandataire = props => {
   const [gestionnaire] = data.gestionnaires;
 
   const formatedGestionnaire = formatGestionnaire(gestionnaire);
-  console.log(data.gestionnaires);
   const {
     dispoMax,
     mesuresAwaiting,
