@@ -32,8 +32,10 @@ export const CHOOSE_MANDATAIRE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }
@@ -92,8 +94,10 @@ export const CHOOSE_SERVICE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }

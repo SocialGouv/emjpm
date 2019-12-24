@@ -5,6 +5,7 @@ export const GESTIONNAIRES = gql`
     gestionnaires: view_mesure_gestionnaire(
       where: { mandataire_id: { _eq: $mandataire_id }, service_id: { _eq: $service_id } }
     ) {
+      id
       discriminator
       mesures_awaiting
       mesures_in_progress
@@ -13,24 +14,26 @@ export const GESTIONNAIRES = gql`
       remaining_capacity
       service_id
       mandataire {
+        id
+        genre
         telephone
         ville
         latitude
         longitude
         adresse
         commentaires {
+          id
           comment
           ti_id
         }
         code_postal
         user {
+          id
           nom
           prenom
           email
           last_login
         }
-        genre
-        id
       }
       gestionnaire_tis {
         tis {
@@ -51,7 +54,9 @@ export const GESTIONNAIRES = gql`
         longitude
         etablissement
         service_admins {
+          id
           user {
+            id
             last_login
           }
         }

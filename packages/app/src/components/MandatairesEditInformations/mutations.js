@@ -43,8 +43,8 @@ export const EDIT_USER = gql`
     update_users(_set: { prenom: $prenom, nom: $nom, email: $email }, where: { id: { _eq: $id } }) {
       affected_rows
       returning {
-        email
         id
+        email
         nom
         prenom
       }

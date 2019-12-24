@@ -57,6 +57,7 @@ export const ADD_MESURE = gql`
       }
     ) {
       returning {
+        id
         annee
         antenne_id
         cabinet
@@ -68,7 +69,6 @@ export const ADD_MESURE = gql`
         etablissement
         etablissement_id
         extinction
-        id
         is_urgent
         judgment_date
         mandataire_id

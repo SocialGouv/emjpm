@@ -26,6 +26,7 @@ export const MESURES = gql`
       offset: null
     ) {
       service_antenne {
+        id
         name
       }
       id
