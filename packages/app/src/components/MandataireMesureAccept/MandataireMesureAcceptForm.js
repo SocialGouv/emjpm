@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { AsyncSelect, Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -9,8 +9,9 @@ import { Box, Flex, Text } from "rebass";
 import { RESIDENCE } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
-import { debouncedGeocode } from "../../util/geocode";
-import { ACCEPT_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
+import { Geocode, geocodeInitialValue } from "../Geocode";
+import { UPDATE_MANDATAIRES_COUTERS } from "../MandatairesMesures/mutations";
+import { ACCEPT_MESURE } from "./mutations";
 
 export const MandataireMesureAcceptForm = props => {
   const { mesureId, departementsData } = props;
@@ -18,6 +19,9 @@ export const MandataireMesureAcceptForm = props => {
   const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
 
   const [UpdateMesure] = useMutation(ACCEPT_MESURE, {
+    onCompleted() {
+      Router.push(`/mandataires/mesures/${mesureId}`);
+    },
     update(
       cache,
       {
@@ -54,20 +58,20 @@ export const MandataireMesureAcceptForm = props => {
             department_id: departement.id,
             id: mesureId,
             residence: values.residence.value,
+            code_postal: values.geocode.postcode,
             ville: values.geocode.city,
-            latitude: values.geocode.lat,
-            longitude: values.geocode.lng,
-            code_postal: values.geocode.postcode
+            latitude: values.geocode.latitude,
+            longitude: values.geocode.longitude
           }
         });
-        Router.push(`/mandataires/mesures/${mesureId}`);
       }
       setSubmitting(false);
     },
     validationSchema: mandataireAcceptMesureSchema,
     initialValues: {
       date_ouverture: "",
-      residence: ""
+      residence: "",
+      geocode: geocodeInitialValue()
     }
   });
 
@@ -113,17 +117,10 @@ export const MandataireMesureAcceptForm = props => {
             {formik.errors.residence && <Text>{formik.errors.residence}</Text>}
           </Box>
           <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
-            <AsyncSelect
-              name="geocode"
-              cacheOptions
-              hasError={formik.errors.geocode}
-              isClearable
-              loadOptions={debouncedGeocode}
-              placeholder="Ville, code postal, ..."
-              noOptionsMessage={() => "Pas de résultats"}
-              onChange={option => formik.setFieldValue("geocode", option ? option.value : null)}
-            />
-            {formik.errors.geocode && <Text>{formik.errors.geocode}</Text>}
+            <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
+            {formik.errors.geocode && formik.touched.geocode && (
+              <Text>{formik.errors.geocode}</Text>
+            )}
           </Box>
           <Flex justifyContent="flex-end">
             <Box>

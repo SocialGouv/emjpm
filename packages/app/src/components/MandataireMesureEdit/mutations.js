@@ -44,6 +44,7 @@ export const EDIT_MESURE = gql`
           id
           nom
           region {
+            id
             nom
           }
         }

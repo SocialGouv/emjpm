@@ -22,6 +22,7 @@ export const MESURES = gql`
         id
         nom
         region {
+          id
           nom
         }
       }
