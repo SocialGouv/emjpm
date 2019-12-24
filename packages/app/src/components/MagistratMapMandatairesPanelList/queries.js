@@ -16,6 +16,7 @@ export const MESURES_GESTIONNAIRE = gql`
       where: { ti_id: { _eq: $tiId } }
     ) {
       gestionnaire {
+        id
         discriminator
         mesures_awaiting
         mesures_in_progress
@@ -24,26 +25,29 @@ export const MESURES_GESTIONNAIRE = gql`
         remaining_capacity
         service_id
         mandataire {
+          id
+          genre
           telephone
           ville
           latitude
           longitude
           adresse
           commentaires {
+            id
             comment
             ti_id
           }
           code_postal
           user {
+            id
             nom
             prenom
             email
             last_login
           }
-          genre
-          id
         }
         gestionnaire_tis {
+          id
           tis {
             id
             etablissement
@@ -62,7 +66,9 @@ export const MESURES_GESTIONNAIRE = gql`
           email
           etablissement
           service_admins {
+            id
             user {
+              id
               last_login
             }
           }

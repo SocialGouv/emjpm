@@ -17,8 +17,8 @@ export const USER_TRIBUNAL = gql`
       ti_id
       user_id
       ti {
-        etablissement
         id
+        etablissement
       }
     }
   }

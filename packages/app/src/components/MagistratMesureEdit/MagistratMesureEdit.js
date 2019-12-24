@@ -1,22 +1,27 @@
 import { useMutation } from "@apollo/react-hooks";
-import { MesureContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
 import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
+import { MesureContext } from "../MesureContext";
 import { EDIT_MESURE } from "./mutations";
+import { MagistratMesureEditStyle } from "./style";
 
-export const MagistratEditMesure = props => {
-  const { currentMesure, age, civilite, numeroRg, type, cabinet } = props;
-  const [UpdateMesure] = useMutation(EDIT_MESURE);
-  console.log(props);
-  const { setCurrentMesure, setPanelType } = useContext(MesureContext);
+export const MagistratMesureEdit = () => {
+  const { id, age, civilite, numeroRg, type, cabinet } = useContext(MesureContext);
+  const [UpdateMesure] = useMutation(EDIT_MESURE, {
+    onCompleted() {
+      Router.push(`/magistrats/mesures/${id}`);
+    }
+  });
+
   return (
-    <Flex flexWrap="wrap">
+    <Flex sx={MagistratMesureEditStyle}>
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
         <Heading5 mb="1">Modifier la mesure réservée</Heading5>
         <Text lineHeight="1.5">
@@ -32,21 +37,17 @@ export const MagistratEditMesure = props => {
         </Box>
         <Formik
           onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              UpdateMesure({
-                variables: {
-                  annee: values.annee,
-                  cabinet: values.cabinet,
-                  civilite: values.civilite.value,
-                  id: currentMesure,
-                  numero_rg: values.numero_rg,
-                  type: values.type.value
-                }
-              });
-              setSubmitting(false);
-              setPanelType(null);
-              setCurrentMesure(null);
-            }, 500);
+            UpdateMesure({
+              variables: {
+                annee: values.annee,
+                cabinet: values.cabinet,
+                civilite: values.civilite.value,
+                id: id,
+                numero_rg: values.numero_rg,
+                type: values.type.value
+              }
+            });
+            setSubmitting(false);
           }}
           validationSchema={Yup.object().shape({
             annee: Yup.string().required(),
@@ -133,8 +134,7 @@ export const MagistratEditMesure = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        setPanelType(PANEL_TYPE.CLOSE);
-                        setCurrentMesure(null);
+                        Router.push(`/magistrats/mesures/${id}`);
                       }}
                     >
                       Annuler
@@ -155,6 +155,6 @@ export const MagistratEditMesure = props => {
   );
 };
 
-MagistratEditMesure.propTypes = {
+MagistratMesureEdit.propTypes = {
   currentMesure: PropTypes.number.isRequired
 };

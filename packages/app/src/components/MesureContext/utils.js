@@ -23,7 +23,8 @@ export const formatMesure = mesure => {
     latitude,
     longitude,
     service_antenne,
-    service_id
+    service_id,
+    mandataire_id
   } = mesure;
   const formatedDate = format(legacyParse(date_ouverture), convertTokens("DD/MM/YYYY"));
   const formatedJudgementDate = format(legacyParse(judgment_date), convertTokens("DD/MM/YYYY"));
@@ -39,6 +40,8 @@ export const formatMesure = mesure => {
 
   return {
     latitude: latitude,
+    mandataireId: mandataire_id,
+    serviceId: service_id,
     longitude: longitude,
     departmentId: departement ? departement.id : null,
     age: annee ? annee : "nc",
@@ -54,6 +57,7 @@ export const formatMesure = mesure => {
     antenneId: antenne_id,
     isUrgent: is_urgent,
     service: { service_id: service_id },
+    mandataire: { mandataire_id: mandataire_id },
     judgmentDate: judgment_date ? formatedJudgementDate : "non reseigné",
     numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
     numeroRg: numero_rg ? numero_rg : "RG-00000000",

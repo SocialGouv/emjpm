@@ -3,11 +3,12 @@ import gql from "graphql-tag";
 export const MANDATAIRE = gql`
   query users($userId: Int) {
     users(where: { id: { _eq: $userId } }) {
-      email
       id
+      email
       nom
       prenom
       mandataire {
+        id
         adresse
         code_postal
         latitude
@@ -15,7 +16,6 @@ export const MANDATAIRE = gql`
         dispo_max
         etablissement
         genre
-        id
         nb_secretariat
         secretariat
         siret

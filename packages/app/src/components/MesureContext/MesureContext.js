@@ -11,6 +11,7 @@ export const Provider = props => {
   const { children, mesureId } = props;
 
   const { data } = useQuery(MESURES, {
+    fetchPolicy: "cache-and-network",
     variables: {
       id: mesureId
     }

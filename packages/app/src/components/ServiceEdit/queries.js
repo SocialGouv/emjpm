@@ -20,6 +20,7 @@ export const GET_SERVICES = gql`
       information
       created_at
       service_tis {
+        id
         ti {
           etablissement
           id

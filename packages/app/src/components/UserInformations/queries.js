@@ -33,6 +33,7 @@ export const GET_SERVICE_USERS = gql`
         service_id
         user_id
         service {
+          id
           mesures_in_progress
           mesures_awaiting
           dispo_max
@@ -58,6 +59,7 @@ export const GET_SERVICE_USERS = gql`
           longitude
         }
         user {
+          id
           prenom
           nom
         }
@@ -97,6 +99,7 @@ export const MAGISTRAT_USERS = gql`
       type
       username
       magistrat {
+        id
         ti_id
         ti {
           id

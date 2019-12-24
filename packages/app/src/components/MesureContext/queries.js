@@ -2,11 +2,21 @@ import gql from "graphql-tag";
 
 export const MESURES = gql`
   query mesures($id: Int) {
-    mesures(where: { id: { _eq: $id } }) {
+    mesures_aggregate(where: { id: { _eq: $id } }) {
+      aggregate {
+        count
+      }
+    }
+    mesures(
+      where: { id: { _eq: $id } }
+      limit: null
+      order_by: { created_at: desc }
+      offset: null
+    ) {
       service_antenne {
         name
+        id
       }
-      service_id
       id
       cabinet
       civilite
@@ -18,6 +28,8 @@ export const MESURES = gql`
       longitude
       judgment_date
       is_urgent
+      mandataire_id
+      service_id
       departement {
         id
         nom
