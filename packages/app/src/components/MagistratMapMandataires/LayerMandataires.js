@@ -18,7 +18,6 @@ const LayerMandataires = props => {
       layout={{ "icon-image": discriminator }}
     >
       {gestionnaires.map(gestionnaire => {
-        console.log(gestionnaire);
         const { id, discriminator, longitude, latitude } = gestionnaire;
         return (
           <Feature
