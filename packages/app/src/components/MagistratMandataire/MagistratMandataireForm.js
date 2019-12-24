@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import { Button, Heading3, Heading5, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
@@ -17,8 +18,18 @@ export const MagistratMandataireForm = props => {
     magistrat: { ti_id: tiId }
   } = useContext(UserContext);
 
-  const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
-  const [chooseService] = useMutation(CHOOSE_SERVICE);
+  const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
+    onCompleted({ insert_mesures }) {
+      const [mesure] = insert_mesures.returning;
+      Router.push(`/magistrats/mesures/${mesure.id}`);
+    }
+  });
+  const [chooseService] = useMutation(CHOOSE_SERVICE, {
+    onCompleted({ insert_mesures }) {
+      const [mesure] = insert_mesures.returning;
+      Router.push(`/magistrats/mesures/${mesure.id}`);
+    }
+  });
 
   return (
     <Flex flexWrap="wrap">
@@ -180,7 +191,13 @@ export const MagistratMandataireForm = props => {
                 </Box>
                 <Flex justifyContent="flex-end">
                   <Box>
-                    <Button mr="2" variant="outline" onClick={() => {}}>
+                    <Button
+                      mr="2"
+                      variant="outline"
+                      onClick={() => {
+                        Router.push(`/magistrats`);
+                      }}
+                    >
                       Annuler
                     </Button>
                   </Box>
