@@ -7,13 +7,17 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { REACTIVATE_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
+import { UPDATE_MANDATAIRES_COUTERS } from "../MandatairesMesures/mutations";
+import { REACTIVATE_MESURE } from "./mutations";
 
 export const MandataireMesureReactivateForm = props => {
   const { mesureId } = props;
 
   const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
   const [UpdateMesure] = useMutation(REACTIVATE_MESURE, {
+    onCompleted() {
+      Router.push({ pathname: `/mandataires/mesures/${mesureId}` });
+    },
     update(
       cache,
       {
@@ -59,8 +63,6 @@ export const MandataireMesureReactivateForm = props => {
               }
             });
             setSubmitting(false);
-
-            Router.push({ pathname: `/mandataires/mesures/${mesureId}` });
           }}
           validationSchema={Yup.object().shape({
             reason_extinction: Yup.string().required("Required")

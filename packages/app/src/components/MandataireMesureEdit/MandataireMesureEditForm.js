@@ -64,10 +64,7 @@ export const MandataireMesureEditForm = props => {
             longitude: values.geocode.longitude
           }
         });
-
-        Router.push(`/mandataires/mesures/${id}`);
       }
-
       setSubmitting(false);
     },
     validationSchema: mandataireMesureSchema,
@@ -84,7 +81,11 @@ export const MandataireMesureEditForm = props => {
     }
   });
 
-  const [editMesure] = useMutation(EDIT_MESURE);
+  const [editMesure] = useMutation(EDIT_MESURE, {
+    onCompleted() {
+      Router.push(`/mandataires/mesures/${id}`);
+    }
+  });
 
   return (
     <Flex flexWrap="wrap">
