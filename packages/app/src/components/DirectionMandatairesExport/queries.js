@@ -9,10 +9,12 @@ export const MANDATAIRES = gql`
         }
       }
     ) {
+      id
       type
       nom
       prenom
       mandataire {
+        id
         genre
         adresse
         code_postal
@@ -27,6 +29,7 @@ export const MANDATAIRES = gql`
     services: services(
       where: { departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } } }
     ) {
+      id
       etablissement
       adresse
       code_postal
@@ -37,6 +40,7 @@ export const MANDATAIRES = gql`
       nom
       prenom
       service_antennes {
+        id
         name
         address_street
         address_zip_code

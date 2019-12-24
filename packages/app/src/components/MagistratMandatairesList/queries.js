@@ -64,6 +64,7 @@ export const GET_MANDATAIRES = gql`
       }
     ) {
       gestionnaire {
+        id
         discriminator
         mesures_awaiting
         mesures_in_progress
@@ -76,11 +77,13 @@ export const GET_MANDATAIRES = gql`
           ville
           adresse
           commentaires {
+            id
             comment
             ti_id
           }
           code_postal
           user {
+            id
             nom
             prenom
             email
@@ -106,7 +109,9 @@ export const GET_MANDATAIRES = gql`
           email
           etablissement
           service_admins {
+            id
             user {
+              id
               last_login
             }
           }

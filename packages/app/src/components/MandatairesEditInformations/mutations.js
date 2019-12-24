@@ -20,7 +20,6 @@ export const EDIT_USER = gql`
     $id: Int!
     $department_id: Int!
   ) {
-    __typename
     update_mandataires(
       _set: {
         dispo_max: $dispo_max
@@ -44,8 +43,8 @@ export const EDIT_USER = gql`
     update_users(_set: { prenom: $prenom, nom: $nom, email: $email }, where: { id: { _eq: $id } }) {
       affected_rows
       returning {
-        email
         id
+        email
         nom
         prenom
       }

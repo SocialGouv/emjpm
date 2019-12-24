@@ -8,6 +8,7 @@ export const GET_DEPARTEMENTS_AVAILABILITY = gql`
       mesures_in_progress
       mesures_max
       department {
+        id
         code
         nom
       }

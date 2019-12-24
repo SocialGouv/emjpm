@@ -25,8 +25,10 @@ export const EDIT_MESURE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }

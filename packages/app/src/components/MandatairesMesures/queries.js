@@ -10,7 +10,6 @@ export const MANDATAIRE_MESURES = gql`
     $excludeStatus: String
     $offset: Int
   ) {
-    __typename
     mesures_aggregate(
       where: {
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
