@@ -7,7 +7,8 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { CLOSE_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
+import { UPDATE_MANDATAIRES_COUTERS } from "../MandatairesMesures/mutations";
+import { CLOSE_MESURE } from "./mutations";
 
 const EXTINCTION_LABEL_VALUE = [
   { label: "caducité", value: "caducité" },
@@ -24,6 +25,9 @@ export const MandataireMesureCloseForm = props => {
 
   const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
   const [UpdateMesure] = useMutation(CLOSE_MESURE, {
+    onCompleted() {
+      Router.push(`/mandataires/mesures/${mesureId}`);
+    },
     update(
       cache,
       {
@@ -66,7 +70,6 @@ export const MandataireMesureCloseForm = props => {
               }
             });
             setSubmitting(false);
-            Router.push(`/mandataires/mesures/${mesureId}`);
           }}
           validationSchema={Yup.object().shape({
             extinction: Yup.date().required("Required"),
