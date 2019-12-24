@@ -64,8 +64,6 @@ export const MandatairesAddMesure = props => {
             mandataireId: id
           }
         });
-
-        Router.push("/mandataires");
       }
 
       setSubmitting(false);
@@ -93,6 +91,9 @@ export const MandatairesAddMesure = props => {
   const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
 
   const [addMesure] = useMutation(ADD_MESURE, {
+    onCompleted() {
+      Router.push("/mandataires");
+    },
     options: {
       refetchQueries: ["mesures", "mesures_aggregate"]
     },

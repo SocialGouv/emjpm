@@ -30,8 +30,10 @@ export const ACCEPT_MESURE = gql`
         civilite
         code_postal
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }
@@ -45,26 +47,6 @@ export const ACCEPT_MESURE = gql`
         etablissement
         annee
         date_ouverture
-      }
-    }
-  }
-`;
-
-export const UPDATE_MANDATAIRES_COUTERS = gql`
-  mutation UpdateMandatairesCounter(
-    $mesures_in_progress: Int!
-    $mandataireId: Int!
-    $mesures_awaiting: Int!
-  ) {
-    update_mandataires(
-      where: { id: { _eq: $mandataireId } }
-      _inc: { mesures_en_cours: $mesures_in_progress, mesures_en_attente: $mesures_awaiting }
-    ) {
-      affected_rows
-      returning {
-        id
-        mesures_en_cours
-        mesures_en_attente
       }
     }
   }
