@@ -1886,6 +1886,7 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - id
       - name
       computed_fields: []
       filter:
@@ -1897,6 +1898,7 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - id
       - name
       computed_fields: []
       filter:
