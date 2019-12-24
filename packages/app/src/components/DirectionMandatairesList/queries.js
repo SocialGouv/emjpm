@@ -27,6 +27,7 @@ export const GET_MANDATAIRES = gql`
       }
       order_by: { remaining_capacity: $order }
     ) {
+      id
       discriminator
       mesures_awaiting
       mesures_in_progress
@@ -35,15 +36,16 @@ export const GET_MANDATAIRES = gql`
       remaining_capacity
       service_id
       mandataire {
+        id
         telephone
         ville
         user {
+          id
           nom
           prenom
           email
         }
         genre
-        id
       }
       service {
         id

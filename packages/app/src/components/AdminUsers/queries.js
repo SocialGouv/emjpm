@@ -20,22 +20,29 @@ export const USERS = gql`
       email
       active
       mandataire {
+        id
         adresse
         code_postal
         ville
       }
       magistrat {
+        id
         ti {
+          id
           ville
         }
       }
       user_tis(order_by: { ti: { ville: asc } }) {
+        id
         ti {
+          id
           ville
         }
       }
       service_admins {
+        id
         service {
+          id
           etablissement
         }
       }
@@ -53,17 +60,23 @@ export const USER = gql`
       email
       active
       magistrat {
+        id
         ti {
+          id
           ville
         }
       }
       user_tis(order_by: { ti: { ville: asc } }) {
+        id
         ti {
+          id
           ville
         }
       }
       service_admins {
+        id
         service {
+          id
           etablissement
         }
       }

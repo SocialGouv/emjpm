@@ -77,8 +77,10 @@ export const MESURES = gql`
       judgment_date
       is_urgent
       departement {
+        id
         nom
         region {
+          id
           nom
         }
       }
