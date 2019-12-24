@@ -2908,6 +2908,17 @@ tables:
         user_id:
           _eq: X-Hasura-User-Id
     role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - ti_id
+      - user_id
+      - created_at
+      computed_fields: []
+      filter: {}
+    role: ti
   table: user_tis
   update_permissions: []
 - array_relationships: []
