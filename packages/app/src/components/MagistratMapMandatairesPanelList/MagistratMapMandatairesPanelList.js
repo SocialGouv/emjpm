@@ -53,6 +53,7 @@ const MagistratMapMandatairesPanelList = () => {
             return (
               <MandataireListItem
                 key={gestionnaire.id}
+                isMagistratMap
                 onClick={() => Router.push(`/magistrats/gestionnaires/${gestionnaire.id}`)}
                 gestionnaire={gestionnaire}
               />
