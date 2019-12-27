@@ -12,6 +12,7 @@ const MandataireMap = () => {
   } = useContext(UserContext);
 
   const { data, loading, error } = useQuery(MESURES);
+
   const selectMesure = event => {
     const {
       feature: {
@@ -30,9 +31,10 @@ const MandataireMap = () => {
   }
 
   const { mesures: mesuresMarkers } = data;
+
   return (
     <MapContainer latitude={latitude} longitude={longitude}>
-      <MapLayer markers={mesuresMarkers} onClick={event => selectMesure(event)} type="mesure" />
+      <MapLayer markers={mesuresMarkers} onClick={selectMesure} type="mesure" />
     </MapContainer>
   );
 };

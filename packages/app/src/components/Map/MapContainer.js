@@ -1,10 +1,17 @@
 import React from "react";
 import ReactMapboxGl, { ScaleControl, ZoomControl } from "react-mapbox-gl";
 
+import { MapError } from "./MapError";
+
 const Map = ReactMapboxGl({ accessToken: "" });
 
 const MapContainer = props => {
-  const { children, longitude, latitude } = props;
+  const { children, latitude, longitude } = props;
+
+  if (!latitude || !longitude) {
+    return <MapError />;
+  }
+
   return (
     <Map
       style="https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json"
