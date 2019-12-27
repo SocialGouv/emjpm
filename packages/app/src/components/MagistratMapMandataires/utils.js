@@ -40,20 +40,10 @@ const formatGestionnaires = gestionnaires => {
   });
 };
 
-const filterGestionnaires = (gestionnaires, currentId, currentDiscriminator) =>
-  gestionnaires.filter(gestionnaire => {
-    return gestionnaire.id === currentId && gestionnaire.discriminator === currentDiscriminator;
-  });
-
 // TODO Optimize that function duplication in memory
-const filterGestionnairesByDiscriminator = (gestionnaires, discriminator, currentGestionnaire) => {
-  const { isActive, currentId, currentDiscriminator } = currentGestionnaire;
+const filterGestionnairesByDiscriminator = (gestionnaires, discriminator) => {
   const formatedGestionnaires = formatGestionnaires(gestionnaires);
-  const filteredGestionnaires = isActive
-    ? filterGestionnaires(formatedGestionnaires, currentId, currentDiscriminator)
-    : formatedGestionnaires;
-
-  return filteredGestionnaires.filter(gestionnaire => gestionnaire.discriminator === discriminator);
+  return formatedGestionnaires.filter(gestionnaire => gestionnaire.discriminator === discriminator);
 };
 
-export { formatGestionnaires, filterGestionnaires, filterGestionnairesByDiscriminator };
+export { formatGestionnaires, filterGestionnairesByDiscriminator };

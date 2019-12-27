@@ -1,13 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
+import { MandataireListItem } from "@socialgouv/emjpm-ui-components";
+import Router from "next/router";
 import React, { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
-import { SERVICE } from "../../constants/discriminator";
 import { formatMandatairesList } from "../MagistratMandatairesList/utils";
-import { MapContext } from "../MagistratMapMandataires/context";
 import { UserContext } from "../UserContext";
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { MagistratMapMandataireListStyle } from "./style";
@@ -20,7 +19,6 @@ const MagistratMapMandatairesPanelList = () => {
   } = useContext(UserContext);
 
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { setcurrentGestionnaire } = useContext(MapContext);
 
   const { data, error, loading } = useQuery(
     MESURES_GESTIONNAIRE,
@@ -44,29 +42,23 @@ const MagistratMapMandatairesPanelList = () => {
     return <div>error</div>;
   }
 
-  const chooseMandataire = data => {
-    const { discriminator, serviceId, mandataireId, latitude, longitude } = data;
-    setcurrentGestionnaire({
-      isActive: true,
-      latitude: latitude,
-      longitude: longitude,
-      currentId: discriminator === SERVICE ? serviceId : mandataireId,
-      currentDiscriminator: discriminator
-    });
-  };
-
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const list = formatMandatairesList(data.mandatairesList);
+  const gestionnaires = formatMandatairesList(data.mandatairesList);
   return (
     <Box pt="2" px="2" sx={MagistratMapMandataireListStyle}>
       <Scrollbar style={{ width: "100%", height: "100%" }}>
         <Box mr="1" mb="4">
-          <Mandatairelist
-            isMagistratMap
-            selectCurrentMandataire={data => chooseMandataire(data)}
-            mandataires={list}
-          />
+          {gestionnaires.map(gestionnaire => {
+            return (
+              <MandataireListItem
+                key={gestionnaire.id}
+                isMagistratMap
+                onClick={() => Router.push(`/magistrats/gestionnaires/${gestionnaire.id}`)}
+                gestionnaire={gestionnaire}
+              />
+            );
+          })}
           {count > RESULT_PER_PAGE && (
             <Flex alignItems="center" justifyContent="center">
               <ReactPaginate
