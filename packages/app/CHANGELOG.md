@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.14.0](https://github.com/SocialGouv/emjpm/compare/v25.13.0...v25.14.0) (2019-12-27)
+
+
+### Bug Fixes
+
+* **deps:** update @socialgouv/emjpm-ui-components to 0.52.9 ([e2f3e23](https://github.com/SocialGouv/emjpm/commit/e2f3e2352963dcc6c50d441b782c82963af4091a))
+* **direction:** update text / hasura permission ([#1334](https://github.com/SocialGouv/emjpm/issues/1334)) ([d35a0a1](https://github.com/SocialGouv/emjpm/commit/d35a0a1386a03c5dbc2aa7fe7b53cc1052cb3452))
+* **geocode:** fix invalid geocode ([#1298](https://github.com/SocialGouv/emjpm/issues/1298)) ([ff3ec93](https://github.com/SocialGouv/emjpm/commit/ff3ec938648ba2220115e746a295fe9a42e9c376))
+* **import:** keep case sensitive value while importing data ([#1335](https://github.com/SocialGouv/emjpm/issues/1335)) ([72c6020](https://github.com/SocialGouv/emjpm/commit/72c6020573f916e1f986b8014da1d51913642024))
+* **input-zindex:** bump emjpm-ui core ([#1291](https://github.com/SocialGouv/emjpm/issues/1291)) ([f29168b](https://github.com/SocialGouv/emjpm/commit/f29168b497574b965abf79d1859a293a8a4e6278))
+* **input-zindex:** use field comp ([#1289](https://github.com/SocialGouv/emjpm/issues/1289)) ([d8572df](https://github.com/SocialGouv/emjpm/commit/d8572dfe30072165b89cbcc719b20d3d94cb6e0a))
+* **mandataire-counter:** fix counter remove useless mutations ([#1278](https://github.com/SocialGouv/emjpm/issues/1278)) ([d2760d5](https://github.com/SocialGouv/emjpm/commit/d2760d5a2f1e2934215b92685b23171226d52457))
+* **mandataire-mesure:** use same pattern for all mesure action components ([#1340](https://github.com/SocialGouv/emjpm/issues/1340)) ([6c69780](https://github.com/SocialGouv/emjpm/commit/6c697804a07a8c784a6cb2361c2c7fde9c899c74))
+* **map:** add map error when lat/lng not present ([#1348](https://github.com/SocialGouv/emjpm/issues/1348)) ([71a4e1f](https://github.com/SocialGouv/emjpm/commit/71a4e1ff4390a598a93884049da533ed04dd55c5))
+* **maps:** fix map queries ([#1322](https://github.com/SocialGouv/emjpm/issues/1322)) ([8b4a6ff](https://github.com/SocialGouv/emjpm/commit/8b4a6ff184d46a301699bc8dba642662b1b5a885))
+* **service-mesure:** use same pattern for mesure action components ([#1338](https://github.com/SocialGouv/emjpm/issues/1338)) ([5e55fe6](https://github.com/SocialGouv/emjpm/commit/5e55fe6d6561098a0d159e407b92048c7f239196))
+
+
+### Features
+
+* **magistrat-mesure:** add mesure page ([#1341](https://github.com/SocialGouv/emjpm/issues/1341)) ([72b9753](https://github.com/SocialGouv/emjpm/commit/72b97530d6ac33182c7c435ab3502d3de62b970d))
+* **mandataire-pages:** mandataire remove panel for mesures ([#1290](https://github.com/SocialGouv/emjpm/issues/1290)) ([0d71e62](https://github.com/SocialGouv/emjpm/commit/0d71e62b31f6c38a898f1a10936cbebed273dd20))
+* **mandataire-reservation:** add mandataire form and mandataire profile ([#1345](https://github.com/SocialGouv/emjpm/issues/1345)) ([ac16661](https://github.com/SocialGouv/emjpm/commit/ac16661f79fbd10f8b150da562c545eec69982ff))
+* **service-mesure:** redirect to mesure page after creation ([#1336](https://github.com/SocialGouv/emjpm/issues/1336)) ([4b846f7](https://github.com/SocialGouv/emjpm/commit/4b846f71ed1494fc30d72531564d6a6eb045d403))
+
+
+
+
+
 # [25.13.0](https://github.com/SocialGouv/emjpm/compare/v25.12.1...v25.13.0) (2019-12-19)
 
 
