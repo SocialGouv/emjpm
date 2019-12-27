@@ -4,7 +4,6 @@ import React, { useContext } from "react";
 
 import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discriminator";
 import { UserContext } from "../UserContext";
-import { MapContext } from "./context";
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { filterGestionnairesByDiscriminator } from "./utils";
 
@@ -14,8 +13,6 @@ const MagistratMapMandataires = dynamic(
 );
 
 const MagistratMandataires = () => {
-  const { currentGestionnaire } = useContext(MapContext);
-
   const {
     magistrat: { ti_id }
   } = useContext(UserContext);
@@ -37,30 +34,11 @@ const MagistratMandataires = () => {
 
   const mesureGestionnaires = data.view_mesure_gestionnaire;
 
-  const services = filterGestionnairesByDiscriminator(
-    mesureGestionnaires,
-    SERVICE,
-    currentGestionnaire
-  );
-  const individuel = filterGestionnairesByDiscriminator(
-    mesureGestionnaires,
-    MANDATAIRE_IND,
-    currentGestionnaire
-  );
-  const prepose = filterGestionnairesByDiscriminator(
-    mesureGestionnaires,
-    MANDATAIRE_PRE,
-    currentGestionnaire
-  );
+  const services = filterGestionnairesByDiscriminator(mesureGestionnaires, SERVICE);
+  const individuel = filterGestionnairesByDiscriminator(mesureGestionnaires, MANDATAIRE_IND);
+  const prepose = filterGestionnairesByDiscriminator(mesureGestionnaires, MANDATAIRE_PRE);
 
-  return (
-    <MagistratMapMandataires
-      currentGestionnaire={currentGestionnaire}
-      services={services}
-      individuel={individuel}
-      prepose={prepose}
-    />
-  );
+  return <MagistratMapMandataires services={services} individuel={individuel} prepose={prepose} />;
 };
 
 export { MagistratMandataires };
