@@ -1,28 +1,48 @@
 import { useMutation } from "@apollo/react-hooks";
-import { MandataireContext, PANEL_TYPE } from "@socialgouv/emjpm-ui-components";
-import { Button, Heading3, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { Button, Heading3, Heading5, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
+import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import * as Yup from "yup";
 
 import { CIVILITY, IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
-import { MandataireInformations } from "./MandataireInformations";
+import { UserContext } from "../UserContext";
 import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
 
-export const MagistratChoose = props => {
-  const { tiId, serviceId, mandataireId, cabinet } = props;
-  const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE);
-  const [chooseService] = useMutation(CHOOSE_SERVICE);
-  const { setCurrentMandataire, setPanelType } = useContext(MandataireContext);
+export const MagistratMandataireForm = props => {
+  const { serviceId, mandataireId } = props;
+  const {
+    cabinet,
+    magistrat: { ti_id: tiId }
+  } = useContext(UserContext);
+
+  const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
+    onCompleted({ insert_mesures }) {
+      const [mesure] = insert_mesures.returning;
+      Router.push(`/magistrats/mesures/${mesure.id}`);
+    }
+  });
+  const [chooseService] = useMutation(CHOOSE_SERVICE, {
+    onCompleted({ insert_mesures }) {
+      const [mesure] = insert_mesures.returning;
+      Router.push(`/magistrats/mesures/${mesure.id}`);
+    }
+  });
 
   return (
     <Flex flexWrap="wrap">
-      <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
-        <MandataireInformations {...props} />
+      <Box bg="cardSecondary" p="5" sx={{ flexGrow: 1, flexBasis: 380 }}>
+        <Heading5 mb="1">Réserver une mesures</Heading5>
+        <Text lineHeight="1.5">
+          {`Le formulaire ci-contre vous permet de réserver une mesure aupres d'un mandataire.`}
+        </Text>
+        <Text lineHeight="1.5" mt=" 2">
+          {`Une fois les informations souhaitées remplies, cliquer sur "Enregistrer".`}
+        </Text>
       </Box>
-      <Box p="5" width={[1, 2 / 5]}>
+      <Box p="5" sx={{ flexGrow: 99999, flexBasis: 0, minWidth: 320 }}>
         <Box mb="3">
           <Heading3>Réserver une mesure</Heading3>
         </Box>
@@ -60,8 +80,6 @@ export const MagistratChoose = props => {
               });
             }
             setSubmitting(false);
-            setPanelType(null);
-            setCurrentMandataire(null);
           }}
           validationSchema={Yup.object().shape({
             annee: Yup.string().required(),
@@ -177,8 +195,7 @@ export const MagistratChoose = props => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        setPanelType(PANEL_TYPE.CHOOSE);
-                        setCurrentMandataire(null);
+                        Router.push(`/magistrats`);
                       }}
                     >
                       Annuler
@@ -199,7 +216,7 @@ export const MagistratChoose = props => {
   );
 };
 
-MagistratChoose.propTypes = {
+MagistratMandataireForm.propTypes = {
   antenneId: PropTypes.number,
   mandataireId: PropTypes.number
 };

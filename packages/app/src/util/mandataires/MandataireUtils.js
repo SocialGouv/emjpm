@@ -113,3 +113,15 @@ export const formatUserTribunalList = tribunalList => {
     };
   });
 };
+
+export const formatGestionnaireId = gestionnaireId => {
+  const [discriminator, id] = gestionnaireId.split("-");
+  let mandataireId = null;
+  let serviceId = null;
+  if (discriminator === "SERVICE") {
+    serviceId = id;
+  } else {
+    mandataireId = id;
+  }
+  return { mandataireId, serviceId };
+};
