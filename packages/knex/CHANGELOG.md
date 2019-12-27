@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.14.0](https://github.com/SocialGouv/emjpm/compare/v25.13.0...v25.14.0) (2019-12-27)
+
+
+### Bug Fixes
+
+* **import:** keep case sensitive value while importing data ([#1335](https://github.com/SocialGouv/emjpm/issues/1335)) ([72c6020](https://github.com/SocialGouv/emjpm/commit/72c6020573f916e1f986b8014da1d51913642024))
+
+
+
+
+
 # [25.13.0](https://github.com/SocialGouv/emjpm/compare/v25.12.1...v25.13.0) (2019-12-19)
 
 
