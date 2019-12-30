@@ -43,7 +43,7 @@ services:
       - 5000:8080
     depends_on:
       - db
-    network_mode: "host"
+    # network_mode: "host"
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: secret
       HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasuraPassword@localhost:5434/emjpm

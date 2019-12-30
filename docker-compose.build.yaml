@@ -62,7 +62,7 @@ services:
       - ./nginx-logs:/var/log/nginx
 
   graphql-engine:
-    # NOTE(douglasduteil): might fail if the api or db are too slow to start...
+    env_file: .env.build
     restart: unless-stopped
     depends_on:
       - db
