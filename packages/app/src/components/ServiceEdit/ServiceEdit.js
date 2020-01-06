@@ -32,7 +32,7 @@ const ServiceEdit = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await createAntenne({
-        refetchQueries: ["Service"],
+        refetchQueries: ["Service", "users"],
         variables: {
           adresse: values.geocode.label,
           code_postal: values.geocode.postcode,

@@ -92,11 +92,7 @@ const LayoutServices = props => {
           width: "300px"
         }}
       >
-        <UserInformations
-          Component={props => {
-            return <ServiceInformationsSidebar {...props} />;
-          }}
-        />
+        <ServiceInformationsSidebar />
       </Box>
     </Fragment>
   );
