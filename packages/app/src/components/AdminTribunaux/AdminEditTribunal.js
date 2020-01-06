@@ -5,7 +5,7 @@ import { AdminTribunalForm } from "./AdminTribunalForm";
 import { UPDATE_TRIBUNAL } from "./mutations";
 
 export const AdminEditTribunal = ({ tribunal, closePanel }) => {
-  const [UpdateTribunal] = useMutation(UPDATE_TRIBUNAL, {
+  const [updateTribunal] = useMutation(UPDATE_TRIBUNAL, {
     onCompleted: closePanel
   });
 
@@ -14,16 +14,19 @@ export const AdminEditTribunal = ({ tribunal, closePanel }) => {
       tribunal={tribunal}
       onCancel={closePanel}
       onSubmit={values =>
-        UpdateTribunal({
+        updateTribunal({
           refetchQueries: ["tis", "tis_aggregate"],
           variables: {
-            code_postal: values.code_postal,
+            address: values.geocode.label,
+            code_postal: values.geocode.postcode,
             email: values.email,
             etablissement: values.etablissement,
             id: tribunal.id,
             siret: values.siret,
             telephone: values.telephone,
-            ville: values.ville
+            ville: values.geocode.city,
+            latitude: values.geocode.latitude,
+            longitude: values.geocode.longitude
           }
         })
       }
