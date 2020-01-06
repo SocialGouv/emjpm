@@ -1,11 +1,20 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { Button, Card, Heading1, Heading4, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import {
+  Button,
+  Card,
+  Field,
+  Heading1,
+  Heading4,
+  Input,
+  Select,
+  Text
+} from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import Link from "next/link";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
-import * as Yup from "yup";
 
+import { signupSchema } from "../../lib/validationSchemas";
 import { isEmailExists } from "../../query-service/EmailQueryService";
 import { SignupContext } from "./context";
 import { cardStyle, grayBox } from "./style";
@@ -38,6 +47,38 @@ export const SignupForm = () => {
 
   const client = useApolloClient();
 
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
+      const exists = await isEmailExists(client, values.email);
+      if (exists) {
+        setErrors({
+          email: "Cet email existe déjà"
+        });
+      } else {
+        setUser({
+          confirmPassword: values.confirmPassword,
+          email: values.email,
+          nom: values.nom,
+          password: values.password,
+          prenom: values.prenom,
+          type: values.type.value
+        });
+        validateStepOne(true);
+      }
+
+      setSubmitting(false);
+    },
+    validationSchema: signupSchema,
+    initialValues: {
+      confirmPassword: user ? user.confirmPassword : "",
+      email: user ? user.email : "",
+      nom: user ? user.nom : "",
+      password: user ? user.password : "",
+      prenom: user ? user.prenom : "",
+      type: user ? TYPE_OPTIONS.find(val => user.type === val.value) : ""
+    }
+  });
+
   return (
     <Fragment>
       <Heading1 px="1">{`Création de compte`}</Heading1>
@@ -66,165 +107,103 @@ export const SignupForm = () => {
           </Box>
           <Box p="5" pb={0} width={[1, 3 / 5]}>
             <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-              <Formik
-                onSubmit={async (values, { setSubmitting, setErrors }) => {
-                  const exists = await isEmailExists(client, values.email);
-                  if (exists) {
-                    setErrors({
-                      email: "Cet email existe déjà"
-                    });
-                  } else {
-                    setUser({
-                      confirmPassword: values.confirmPassword,
-                      email: values.email,
-                      nom: values.nom,
-                      password: values.password,
-                      prenom: values.prenom,
-                      type: values.type.value
-                    });
-                    validateStepOne(true);
-                  }
-
-                  setSubmitting(false);
-                }}
-                validationSchema={Yup.object().shape({
-                  confirmPassword: Yup.string()
-                    .required()
-                    .label("Confirmation du mot de passe")
-                    .test("passwords-match", "Les mots de passe ne sont pas égaux", function(
-                      value
-                    ) {
-                      return this.parent.password === value;
-                    }),
-                  email: Yup.string()
-                    .email("Le format de votre email n'est pas correct")
-                    .required("Champ obligatoire"),
-                  nom: Yup.string().required("Champ obligatoire"),
-                  password: Yup.string()
-                    .label("Mot de passe")
-                    .required()
-                    .min(8, "Votre mot de passe doit être de 8 caractères minimum")
-                    .matches(
-                      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/,
-                      {
-                        message:
-                          "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spéciale"
-                      }
-                    ),
-                  prenom: Yup.string().required("Champ obligatoire"),
-                  type: Yup.string().required("Champ obligatoire")
-                })}
-                initialValues={{
-                  confirmPassword: user ? user.confirmPassword : "",
-                  email: user ? user.email : "",
-                  nom: user ? user.nom : "",
-                  password: user ? user.password : "",
-                  prenom: user ? user.prenom : "",
-                  type: user ? TYPE_OPTIONS.find(val => user.type === val.value) : ""
-                }}
-              >
-                {props => {
-                  const {
-                    values,
-                    touched,
-                    errors,
-                    isSubmitting,
-                    handleChange,
-                    handleSubmit,
-                    setFieldValue
-                  } = props;
-                  return (
-                    <form onSubmit={handleSubmit}>
-                      <Box sx={{ position: "relative", zIndex: "110" }} mb="2">
-                        <Select
-                          id="type"
-                          name="type"
-                          placeholder="Vous êtes..."
-                          value={values.type}
-                          hasError={errors.type && touched.type}
-                          onChange={option => setFieldValue("type", option)}
-                          options={TYPE_OPTIONS}
-                        />
-                        {errors.type && touched.type && <Text>{errors.type}</Text>}
-                      </Box>
-
-                      <Box mb="2" pt="2">
-                        <Input
-                          value={values.nom}
-                          id="nom"
-                          name="nom"
-                          hasError={errors.nom && touched.nom}
-                          onChange={handleChange}
-                          placeholder="Nom"
-                        />
-                        {errors.nom && touched.nom && <Text>{errors.nom}</Text>}
-                      </Box>
-                      <Box mb="2">
-                        <Input
-                          value={values.prenom}
-                          id="prenom"
-                          name="prenom"
-                          hasError={errors.prenom && touched.prenom}
-                          onChange={handleChange}
-                          placeholder="Prénom"
-                        />
-                        {errors.prenom && touched.prenom && <Text>{errors.prenom}</Text>}
-                      </Box>
-                      <Box mb="2" pt="2">
-                        <Input
-                          value={values.email}
-                          id="email"
-                          name="email"
-                          hasError={errors.email && touched.email}
-                          onChange={handleChange}
-                          placeholder="Email"
-                        />
-                        {errors.email && touched.email && <Text>{errors.email}</Text>}
-                      </Box>
-                      <Box mb="2">
-                        <Input
-                          value={values.password}
-                          type="password"
-                          id="password"
-                          name="password"
-                          hasError={errors.password && touched.password}
-                          onChange={handleChange}
-                          placeholder="Mot de passe"
-                        />
-                        {errors.password && touched.password && <Text>{errors.password}</Text>}
-                      </Box>
-                      <Box mb="2">
-                        <Input
-                          value={values.confirmPassword}
-                          type="password"
-                          id="confirmPassword"
-                          name="confirmPassword"
-                          hasError={errors.confirmPassword && touched.confirmPassword}
-                          onChange={handleChange}
-                          placeholder="Confirmation du mot de passe"
-                        />
-                        {errors.confirmPassword && touched.confirmPassword && (
-                          <Text>{errors.confirmPassword}</Text>
-                        )}
-                      </Box>
-                      <Flex justifyContent="flex-end">
-                        <Box>
-                          <Button mr="2" variant="outline">
-                            <Link href="/">
-                              <a>Annuler</a>
-                            </Link>
-                          </Button>
-                        </Box>
-                        <Box>
-                          <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                            Suivant
-                          </Button>
-                        </Box>
-                      </Flex>
-                    </form>
-                  );
-                }}
-              </Formik>
+              <form onSubmit={formik.handleSubmit}>
+                <Field>
+                  <Select
+                    id="type"
+                    name="type"
+                    placeholder="Vous êtes..."
+                    value={formik.values.type}
+                    hasError={formik.errors.type && formik.touched.type}
+                    onChange={option => formik.setFieldValue("type", option)}
+                    options={TYPE_OPTIONS}
+                  />
+                  {formik.errors.type && formik.touched.type && <Text>{formik.errors.type}</Text>}
+                </Field>
+                <Field pt="2">
+                  <Input
+                    value={formik.values.nom}
+                    id="nom"
+                    name="nom"
+                    hasError={formik.errors.nom && formik.touched.nom}
+                    onChange={formik.handleChange}
+                    placeholder="Nom"
+                  />
+                  {formik.errors.nom && formik.touched.nom && <Text>{formik.errors.nom}</Text>}
+                </Field>
+                <Field>
+                  <Input
+                    value={formik.values.prenom}
+                    id="prenom"
+                    name="prenom"
+                    hasError={formik.errors.prenom && formik.touched.prenom}
+                    onChange={formik.handleChange}
+                    placeholder="Prénom"
+                  />
+                  {formik.errors.prenom && formik.touched.prenom && (
+                    <Text>{formik.errors.prenom}</Text>
+                  )}
+                </Field>
+                <Field pt="2">
+                  <Input
+                    value={formik.values.email}
+                    id="email"
+                    name="email"
+                    hasError={formik.errors.email && formik.touched.email}
+                    onChange={formik.handleChange}
+                    placeholder="Email"
+                  />
+                  {formik.errors.email && formik.touched.email && (
+                    <Text>{formik.errors.email}</Text>
+                  )}
+                </Field>
+                <Field>
+                  <Input
+                    value={formik.values.password}
+                    type="password"
+                    id="password"
+                    name="password"
+                    hasError={formik.errors.password && formik.touched.password}
+                    onChange={formik.handleChange}
+                    placeholder="Mot de passe"
+                  />
+                  {formik.errors.password && formik.touched.password && (
+                    <Text>{formik.errors.password}</Text>
+                  )}
+                </Field>
+                <Field>
+                  <Input
+                    value={formik.values.confirmPassword}
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    hasError={formik.errors.confirmPassword && formik.touched.confirmPassword}
+                    onChange={formik.handleChange}
+                    placeholder="Confirmation du mot de passe"
+                  />
+                  {formik.errors.confirmPassword && formik.touched.confirmPassword && (
+                    <Text>{formik.errors.confirmPassword}</Text>
+                  )}
+                </Field>
+                <Flex justifyContent="flex-end">
+                  <Box>
+                    <Button mr="2" variant="outline">
+                      <Link href="/">
+                        <a>Annuler</a>
+                      </Link>
+                    </Button>
+                  </Box>
+                  <Box>
+                    <Button
+                      type="submit"
+                      disabled={formik.isSubmitting}
+                      isLoading={formik.isSubmitting}
+                    >
+                      Suivant
+                    </Button>
+                  </Box>
+                </Flex>
+              </form>
             </Box>
           </Box>
         </Flex>
