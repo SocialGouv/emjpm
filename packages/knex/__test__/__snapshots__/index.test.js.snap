@@ -1089,6 +1089,12 @@ Array [
 
 exports[`tis table schema 1`] = `
 Object {
+  "address": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "code_postal": Object {
     "defaultValue": null,
     "maxLength": 255,
@@ -1118,6 +1124,18 @@ Object {
     "maxLength": null,
     "nullable": false,
     "type": "integer",
+  },
+  "latitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "longitude": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
   },
   "siret": Object {
     "defaultValue": null,
