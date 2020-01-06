@@ -10,14 +10,6 @@ import { magistratEditSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
 import { EDIT_USER } from "./mutations";
 
-const cardStyle = { mt: "5", p: "0" };
-
-const grayBox = {
-  bg: "cardSecondary",
-  borderRadius: "5px 0 0 5px",
-  p: "5"
-};
-
 const MagistratEditInformations = props => {
   const { cabinet, prenom, nom, email, id, type } = props;
 
@@ -54,9 +46,9 @@ const MagistratEditInformations = props => {
   });
 
   return (
-    <Card sx={cardStyle}>
-      <Flex {...props}>
-        <Box width={[1, 2 / 5]} sx={grayBox}>
+    <Card mt="5" p="0">
+      <Flex>
+        <Box width={[1, 2 / 5]} bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
           <Box height="80px">
             <Heading4>{`Modifier vos informations`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
