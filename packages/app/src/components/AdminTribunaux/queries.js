@@ -20,6 +20,9 @@ export const TRIBUNAUX = gql`
       telephone
       email
       siret
+      address
+      latitude
+      longitude
     }
   }
 `;

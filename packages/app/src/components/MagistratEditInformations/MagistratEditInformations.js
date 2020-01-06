@@ -1,36 +1,54 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { Button, Card, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
-import * as Yup from "yup";
 
 import { PATH } from "../../constants/basePath";
+import { magistratEditSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
 import { EDIT_USER } from "./mutations";
 
-const cardStyle = { mt: "5", p: "0" };
-
-const grayBox = {
-  bg: "cardSecondary",
-  borderRadius: "5px 0 0 5px",
-  p: "5"
-};
-
 const MagistratEditInformations = props => {
   const { cabinet, prenom, nom, email, id, type } = props;
-  const [EditUser] = useMutation(EDIT_USER, {
+
+  const [editUser] = useMutation(EDIT_USER, {
     update() {
       Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
         shallow: true
       });
     }
   });
+
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
+      await editUser({
+        refetchQueries: ["users"],
+        variables: {
+          cabinet: values.cabinet,
+          email: values.email.toLowerCase(),
+          id: id,
+          nom: values.nom,
+          prenom: values.prenom
+        }
+      });
+
+      setSubmitting(false);
+    },
+    validationSchema: magistratEditSchema,
+    initialValues: {
+      cabinet: cabinet || "",
+      email: email || "",
+      nom: nom || "",
+      prenom: prenom || ""
+    }
+  });
+
   return (
-    <Card sx={cardStyle}>
-      <Flex {...props}>
-        <Box width={[1, 2 / 5]} sx={grayBox}>
+    <Card mt="5" p="0">
+      <Flex>
+        <Box width={[1, 2 / 5]} bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
           <Box height="80px">
             <Heading4>{`Modifier vos informations`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
@@ -40,97 +58,72 @@ const MagistratEditInformations = props => {
         </Box>
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-            <Formik
-              onSubmit={(values, { setSubmitting }) => {
-                EditUser({
-                  refetchQueries: ["users"],
-                  variables: {
-                    cabinet: values.cabinet,
-                    email: values.email.toLowerCase(),
-                    id: id,
-                    nom: values.nom,
-                    prenom: values.prenom
-                  }
-                });
-                setSubmitting(false);
-              }}
-              validationSchema={Yup.object().shape({
-                cabinet: Yup.string(),
-                email: Yup.string("Champ obligatoire")
-                  .email("Le format de votre email n'est pas correct")
-                  .required("Champ obligatoire"),
-                nom: Yup.string().required("Champ obligatoire"),
-                prenom: Yup.string().required("Champ obligatoire")
-              })}
-              initialValues={{
-                cabinet: cabinet || "",
-                email: email || "",
-                nom: nom || "",
-                prenom: prenom || ""
-              }}
-            >
-              {props => {
-                const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
-                return (
-                  <form onSubmit={handleSubmit}>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.cabinet}
-                        id="cabinet"
-                        name="cabinet"
-                        hasError={errors.cabinet && touched.cabinet}
-                        onChange={handleChange}
-                        placeholder="Cabinet (optionnel)"
-                      />
-                      {errors.cabinet && touched.cabinet && <Text mt="1">{errors.cabinet}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.prenom}
-                        id="prenom"
-                        name="prenom"
-                        hasError={errors.prenom && touched.prenom}
-                        onChange={handleChange}
-                        placeholder="Prénom"
-                      />
-                      {errors.prenom && touched.prenom && <Text mt="1">{errors.prenom}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.nom}
-                        id="nom"
-                        name="nom"
-                        hasError={errors.nom && touched.nom}
-                        onChange={handleChange}
-                        placeholder="Nom"
-                      />
-                      {errors.nom && touched.nom && <Text mt="1">{errors.nom}</Text>}
-                    </Box>
-                    <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                      <Input
-                        value={values.email}
-                        id="email"
-                        name="email"
-                        hasError={errors.email && touched.email}
-                        onChange={handleChange}
-                        placeholder="Email"
-                      />
-                      {errors.email && touched.email && <Text mt="1">{errors.email}</Text>}
-                    </Box>
-                    <Flex alignItems="center" justifyContent="flex-end">
-                      <Box mr="2">
-                        <Link href={`${PATH[type]}/informations`}>Annuler</Link>
-                      </Box>
-                      <Box>
-                        <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                          Enregistrer
-                        </Button>
-                      </Box>
-                    </Flex>
-                  </form>
-                );
-              }}
-            </Formik>
+            <form onSubmit={formik.handleSubmit}>
+              <Field sx={{ position: "relative", zIndex: "1" }} mb="2">
+                <Input
+                  value={formik.values.cabinet}
+                  id="cabinet"
+                  name="cabinet"
+                  hasError={formik.errors.cabinet && formik.touched.cabinet}
+                  onChange={formik.handleChange}
+                  placeholder="Cabinet (optionnel)"
+                />
+                {formik.errors.cabinet && formik.touched.cabinet && (
+                  <Text mt="1">{formik.errors.cabinet}</Text>
+                )}
+              </Field>
+              <Field>
+                <Input
+                  value={formik.values.prenom}
+                  id="prenom"
+                  name="prenom"
+                  hasError={formik.errors.prenom && formik.touched.prenom}
+                  onChange={formik.handleChange}
+                  placeholder="Prénom"
+                />
+                {formik.errors.prenom && formik.touched.prenom && (
+                  <Text mt="1">{formik.errors.prenom}</Text>
+                )}
+              </Field>
+              <Field>
+                <Input
+                  value={formik.values.nom}
+                  id="nom"
+                  name="nom"
+                  hasError={formik.errors.nom && formik.touched.nom}
+                  onChange={formik.handleChange}
+                  placeholder="Nom"
+                />
+                {formik.errors.nom && formik.touched.nom && <Text mt="1">{formik.errors.nom}</Text>}
+              </Field>
+              <Field>
+                <Input
+                  value={formik.values.email}
+                  id="email"
+                  name="email"
+                  hasError={formik.errors.email && formik.touched.email}
+                  onChange={formik.handleChange}
+                  placeholder="Email"
+                />
+                {formik.errors.email && formik.touched.email && (
+                  <Text mt="1">{formik.errors.email}</Text>
+                )}
+              </Field>
+              <Flex alignItems="center" justifyContent="flex-end">
+                <Box mr="2">
+                  <Link href={`${PATH[type]}/informations`}>Annuler</Link>
+                </Box>
+                <Box>
+                  <Button
+                    type="submit"
+                    disabled={formik.isSubmitting}
+                    isLoading={formik.isSubmitting}
+                  >
+                    Enregistrer
+                  </Button>
+                </Box>
+              </Flex>
+            </form>
           </Box>
         </Box>
       </Flex>
