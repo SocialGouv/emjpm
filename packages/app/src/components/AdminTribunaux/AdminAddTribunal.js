@@ -6,21 +6,24 @@ import { AdminTribunalForm } from "./AdminTribunalForm";
 import { ADD_TRIBUNAL } from "./mutations";
 
 export const AdminAddTribunal = () => {
-  const [AddTribunal] = useMutation(ADD_TRIBUNAL, {
+  const [addTribunal] = useMutation(ADD_TRIBUNAL, {
     onCompleted: () => Router.push("/admin/tribunaux")
   });
   return (
     <AdminTribunalForm
       onCancel={() => Router.push("/admin/tribunaux")}
       onSubmit={values =>
-        AddTribunal({
+        addTribunal({
           variables: {
-            code_postal: values.code_postal,
+            address: values.geocode.label,
+            code_postal: values.geocode.postcode,
             email: values.email,
             etablissement: values.etablissement,
             siret: values.siret,
             telephone: values.telephone,
-            ville: values.ville
+            ville: values.geocode.city,
+            latitude: values.geocode.latitude,
+            longitude: values.geocode.longitude
           }
         })
       }

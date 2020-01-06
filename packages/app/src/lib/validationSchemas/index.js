@@ -1,3 +1,4 @@
+import { adminTribunalSchema } from "./adminTribunalSchema";
 import { magistratEditSchema } from "./magistratEditSchema";
 import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
@@ -8,6 +9,7 @@ import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMesureSchema } from "./serviceMesureSchema";
 
 export {
+  adminTribunalSchema,
   magistratEditSchema,
   mandataireEditSchema,
   mandataireMesureSchema,
