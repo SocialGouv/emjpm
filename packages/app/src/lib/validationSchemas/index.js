@@ -1,6 +1,7 @@
 import { adminTribunalSchema } from "./adminTribunalSchema";
 import { magistratEditSchema } from "./magistratEditSchema";
 import { magistratMandataireSchema } from "./magistratMandataireSchema";
+import { magistratMesureDeleteSchema } from "./magistratMesureDeleteSchema";
 import { magistratMesureEditSchema } from "./magistratMesureEditSchema";
 import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
@@ -15,6 +16,7 @@ export {
   adminTribunalSchema,
   magistratEditSchema,
   magistratMesureEditSchema,
+  magistratMesureDeleteSchema,
   magistratMandataireSchema,
   mandataireEditSchema,
   mandataireMesureSchema,
