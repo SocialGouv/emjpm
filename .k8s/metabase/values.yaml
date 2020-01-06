@@ -93,10 +93,10 @@ resources:
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   requests:
     cpu: 100m
-    memory: 128Mi
+    memory: 1024Mi
   limits:
     cpu: 500m
-    memory: 512Mi
+    memory: 1280Mi
 
 ## Node labels for pod assignment
 ## ref: https://kubernetes.io/docs/user-guide/node-selection/
