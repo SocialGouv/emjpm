@@ -9,11 +9,11 @@
   script:
     - apk add curl=~7 git=~2
     #
-    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/minio_s3_cache.sh &&
+    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/v4.5.4/minio_s3_cache.sh &&
       source minio_s3_cache.sh
-    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/git_files_changes.sh &&
+    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/v4.5.4/git_files_changes.sh &&
       source git_files_changes.sh
-    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/master/manual_caching.sh &&
+    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/v4.5.4/manual_caching.sh &&
       source manual_caching.sh
     #
     # Download node_modules cache
