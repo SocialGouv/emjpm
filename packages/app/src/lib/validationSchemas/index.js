@@ -4,6 +4,7 @@ import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
 import { mandataireMesureSchema } from "./mandataireMesureSchema";
 import { mandataireSignupSchema } from "./mandataireSignupSchema";
+import { passwordSchema } from "./passwordSchema";
 import { serviceAcceptMesureSchema } from "./serviceAcceptMesureSchema";
 import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMesureSchema } from "./serviceMesureSchema";
@@ -13,6 +14,7 @@ export {
   magistratEditSchema,
   mandataireEditSchema,
   mandataireMesureSchema,
+  passwordSchema,
   serviceAntenneSchema,
   serviceMesureSchema,
   mandataireSignupSchema,
