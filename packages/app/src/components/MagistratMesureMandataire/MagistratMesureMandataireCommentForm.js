@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Input } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { Button, Field, Input } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
@@ -19,86 +19,82 @@ export const MagistratMesureMandataireCommentForm = props => {
     comment,
     isEditing
   } = props;
-  const [InsertComment] = useMutation(ADD_COMMENT);
-  const [EditComment] = useMutation(EDIT_COMMENT);
+  const [insertComment] = useMutation(ADD_COMMENT);
+  const [editComment] = useMutation(EDIT_COMMENT);
+
+  const formik = useFormik({
+    onSubmit: (values, { setSubmitting }) => {
+      if (isEditing) {
+        editComment({
+          refetchQueries: ["MandataireComments"],
+          variables: {
+            comment: values.comment,
+            id: id
+          }
+        });
+
+        toggleEditCommentForm(false);
+      } else {
+        insertComment({
+          refetchQueries: ["MandataireComments"],
+          variables: {
+            comment: values.comment,
+            mandataire_id: mandataireId,
+            service_id: serviceId,
+            ti_id: tiId
+          }
+        });
+        toggleCommentForm(false);
+      }
+      setSubmitting(false);
+    },
+    validationSchema: Yup.object().shape({
+      comment: Yup.string().required()
+    }),
+    initialValues: {
+      comment: comment || null
+    }
+  });
+
   return (
     <Box mt="3" mb="3" width="100%">
       <Text mb="1" lineHeight="1.5">
         Les observations sont visibles uniquement par les magistrats de votre tribunal
       </Text>
-      <Formik
-        onSubmit={(values, { setSubmitting }) => {
-          if (isEditing) {
-            EditComment({
-              refetchQueries: ["MandataireComments"],
-              variables: {
-                comment: values.comment,
-                id: id
-              }
-            });
-
-            toggleEditCommentForm(false);
-          } else {
-            InsertComment({
-              refetchQueries: ["MandataireComments"],
-              variables: {
-                comment: values.comment,
-                mandataire_id: mandataireId,
-                service_id: serviceId,
-                ti_id: tiId
-              }
-            });
-            toggleCommentForm(false);
-          }
-          setSubmitting(false);
-        }}
-        validationSchema={Yup.object().shape({
-          comment: Yup.string().required()
-        })}
-        initialValues={{
-          comment: comment || null
-        }}
-      >
-        {props => {
-          const { values, touched, errors, isSubmitting, handleSubmit, handleChange } = props;
-          return (
-            <form onSubmit={handleSubmit}>
-              <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                <Input
-                  value={values.comment}
-                  id="comment"
-                  name="comment"
-                  hasError={errors.comment && touched.comment}
-                  onChange={handleChange}
-                  placeholder="Observations"
-                />
-              </Box>
-              <Flex justifyContent="flex-end">
-                <Box>
-                  <Button
-                    mr="2"
-                    variant="outline"
-                    onClick={() => {
-                      if (isEditing) {
-                        toggleEditCommentForm(false);
-                      } else {
-                        toggleCommentForm(false);
-                      }
-                    }}
-                  >
-                    Annuler
-                  </Button>
-                </Box>
-                <Box>
-                  <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                    Enregistrer
-                  </Button>
-                </Box>
-              </Flex>
-            </form>
-          );
-        }}
-      </Formik>
+      <form onSubmit={formik.handleSubmit}>
+        <Field>
+          <Input
+            value={formik.values.comment || undefined}
+            id="comment"
+            name="comment"
+            hasError={formik.errors.comment && formik.touched.comment}
+            onChange={formik.handleChange}
+            placeholder="Observations"
+          />
+        </Field>
+        <Flex justifyContent="flex-end">
+          <Box>
+            <Button
+              mr="2"
+              variant="outline"
+              onClick={() => {
+                if (isEditing) {
+                  toggleEditCommentForm(false);
+                } else {
+                  toggleCommentForm(false);
+                }
+              }}
+            >
+              Annuler
+            </Button>
+          </Box>
+          <Box>
+            <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              Enregistrer
+            </Button>
+          </Box>
+        </Flex>
+      </form>
     </Box>
   );
 };
