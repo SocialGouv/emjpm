@@ -1,14 +1,23 @@
-const SidebarStyle = {
+const sidebarStyle = {
   p: 4
 };
-const CardStyle = isImportant => {
-  return {
-    bg: isImportant ? "primary" : "#F2F5F9",
-    borderRadius: "10px",
-    color: isImportant ? "white" : "text",
-    p: 2
-  };
+
+const cardErrorStyle = {
+  alignItems: "unset",
+  bg: "error",
+  borderRadius: "10px",
+  color: "white",
+  flexDirection: "column",
+  mb: 2,
+  p: 2
 };
+
+const cardStyle = isImportant => ({
+  bg: isImportant ? "primary" : "#F2F5F9",
+  borderRadius: "10px",
+  color: isImportant ? "white" : "text",
+  p: 2
+});
 
 const description = isImportant => {
   return {
@@ -48,4 +57,4 @@ const partTitle = {
   fontWeight: "bold"
 };
 
-export { SidebarStyle, CardStyle, description, icon, title, partTitle };
+export { sidebarStyle, cardErrorStyle, cardStyle, description, icon, title, partTitle };
