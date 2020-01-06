@@ -72,11 +72,6 @@ $ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres --
 $ docker-compose stop
 
 $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.built.yaml up
-```
-
-```sh
-$ docker-compose up --build db graphql-engine
-$ NODE_ENV=test yarn dev
 
 # Install the e2e runner env
 $ yarn e2e

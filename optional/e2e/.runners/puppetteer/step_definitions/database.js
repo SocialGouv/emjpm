@@ -1,6 +1,4 @@
 Given("a clean test database", async () => {
-  // From "features/login.feature" {"line":8,"column":5}
-
   const { output } = require("codeceptjs");
   const { stdout } = await require("execa")(
     "pg_restore",

@@ -27,9 +27,9 @@ exports.config = {
   gherkin: {
     features: "../../features/*.feature",
     steps: [
-      "./step_definitions/global.js",
-      "./step_definitions/email.js",
-      "./step_definitions/database.js"
+      "./step_definitions/_global.js",
+      "./step_definitions/database.js",
+      "./step_definitions/email.js"
     ]
   },
   plugins: {

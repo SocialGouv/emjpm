@@ -12,6 +12,24 @@ Before(() => {
 
 //
 
+Given("an empty inbox", async () => {
+  const isDone = await mailDev("DELETE", "/email/all");
+  require("chai")
+    .expect(isDone)
+    .to.eq("true");
+});
+
+Given("the last email as the following info", async table => {
+  const { expect } = require("chai");
+
+  expect(state.lastUnreadMessage, "No email found").to.exist;
+  table.rows.forEach(({ cells: [{ value: path }, { value }] }) => {
+    expect(state.lastUnreadMessage).to.nested.include({ [path]: value });
+  });
+});
+
+//
+
 When("I have one unread message in my indox", async () => {
   const { recorder } = require("codeceptjs");
   const { expect } = require("chai");
@@ -36,13 +54,6 @@ When("I consult the last unread message", async () => {
   state.lastUnreadMessage = await mailDev("GET", "/email/" + id).then(
     JSON.parse
   );
-});
-
-Given("an empty inbox", async () => {
-  const isDone = await mailDev("DELETE", "/email/all");
-  require("chai")
-    .expect(isDone)
-    .to.eq("true");
 });
 
 When("I click on the {string} link in the last email", regexStr => {
