@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.15.0](https://github.com/SocialGouv/emjpm/compare/v25.14.0...v25.15.0) (2020-01-06)
+
+
+### Bug Fixes
+
+* **auth-cookies:** fix [#1287](https://github.com/SocialGouv/emjpm/issues/1287) rewrite cookie set remove service ([#1352](https://github.com/SocialGouv/emjpm/issues/1352)) ([1aae709](https://github.com/SocialGouv/emjpm/commit/1aae7098a26acae197224e2dd83866f47855851f))
+
+
+### Features
+
+* **geocode:** add geocode error info when invalid ([#1350](https://github.com/SocialGouv/emjpm/issues/1350)) ([1be9501](https://github.com/SocialGouv/emjpm/commit/1be9501ab3cc71b15e6f27f7827f49f2cbd85c8f))
+
+
+
+
+
 # [25.14.0](https://github.com/SocialGouv/emjpm/compare/v25.13.0...v25.14.0) (2019-12-27)
 
 
