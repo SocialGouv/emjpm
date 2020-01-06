@@ -8,8 +8,8 @@ import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 import * as Yup from "yup";
 
-import { authService } from "../../business";
 import { trackUser } from "../../piwik";
+import { login } from "../../util/auth";
 import { Link } from "../Commons";
 
 const {
@@ -37,10 +37,11 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
     setStatus({ errorMsg: json.errors.msg });
     return json;
   }
-  authService.login(json.token);
+
+  login({ token: json.token });
+  Router.push(json.url);
   ReactPiwik.push(["trackEvent", "login", "success"]);
   trackUser();
-  Router.push(json.url);
   // TODO remove that hack when mandataire is all done
   if (json.url === "/mandataires") {
     document.location.reload(true);
