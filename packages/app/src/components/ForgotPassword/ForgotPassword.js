@@ -1,5 +1,5 @@
-import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { Button, Card, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import getConfig from "next/config";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
@@ -11,14 +11,6 @@ import { Link } from "../Commons";
 const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
-
-const cardStyle = { mt: "5", p: "0" };
-
-const grayBox = {
-  bg: "cardSecondary",
-  borderRadius: "5px 0 0 5px",
-  p: "5"
-};
 
 const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) => {
   let json = null;
@@ -52,9 +44,23 @@ const ForgotPassword = () => {
     checkStatus(response, setSubmitting, setStatus, toggleMessage);
   };
 
+  const formik = useFormik({
+    onSubmit: (values, { setSubmitting, setStatus }) => {
+      handleSubmit(values, setSubmitting, setStatus, toggleMessage);
+    },
+    validationSchema: Yup.object().shape({
+      email: Yup.string()
+        .email("Le format de votre email n'est pas correct")
+        .required("Champ obligatoire")
+    }),
+    initialValues: {
+      email: ""
+    }
+  });
+
   return (
-    <Card sx={cardStyle} maxWidth={["100%", "60%", "50%"]}>
-      <Box sx={grayBox}>
+    <Card mt="5" p="0" maxWidth={["100%", "60%", "50%"]}>
+      <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
           <Heading4 mb="1">{`Demande de réinitialisation du mot de passe`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
@@ -78,63 +84,41 @@ const ForgotPassword = () => {
       </Box>
       <Box p="5">
         <Box sx={{ position: "relative", zIndex: "1" }}>
-          <Formik
-            onSubmit={(values, { setSubmitting, setStatus }) =>
-              handleSubmit(values, setSubmitting, setStatus, toggleMessage)
-            }
-            validationSchema={Yup.object().shape({
-              email: Yup.string()
-                .email("Le format de votre email n'est pas correct")
-                .required("Champ obligatoire")
-            })}
-            initialValues={{
-              email: ""
-            }}
-          >
-            {props => {
-              const {
-                status,
-                values,
-                touched,
-                errors,
-                isSubmitting,
-                handleChange,
-                handleSubmit
-              } = props;
-              return (
-                <form onSubmit={handleSubmit}>
-                  {!!status && (
-                    <Box color="error" mb="1">
-                      {status.errorMsg}
-                    </Box>
-                  )}
-
-                  <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                    <Input
-                      value={values.email}
-                      id="email"
-                      name="email"
-                      type="text"
-                      hasError={errors.email && touched.email}
-                      onChange={handleChange}
-                      placeholder="Entrez votre email"
-                    />
-                    {errors.email && touched.email && <Text mt="1">{errors.email}</Text>}
-                  </Box>
-                  <Flex alignItems="center" justifyContent="flex-end">
-                    <Box mr="2">
-                      <Link href="/login">Annuler</Link>
-                    </Box>
-                    <Box>
-                      <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                        Obtenir le lien de réinitialisation
-                      </Button>
-                    </Box>
-                  </Flex>
-                </form>
-              );
-            }}
-          </Formik>
+          <form onSubmit={formik.handleSubmit}>
+            {!!formik.status && (
+              <Box color="error" mb="1">
+                {formik.status.errorMsg}
+              </Box>
+            )}
+            <Field>
+              <Input
+                value={formik.values.email}
+                id="email"
+                name="email"
+                type="text"
+                hasError={formik.errors.email && formik.touched.email}
+                onChange={formik.handleChange}
+                placeholder="Entrez votre email"
+              />
+              {formik.errors.email && formik.touched.email && (
+                <Text mt="1">{formik.errors.email}</Text>
+              )}
+            </Field>
+            <Flex alignItems="center" justifyContent="flex-end">
+              <Box mr="2">
+                <Link href="/login">Annuler</Link>
+              </Box>
+              <Box>
+                <Button
+                  type="submit"
+                  disabled={formik.isSubmitting}
+                  isLoading={formik.isSubmitting}
+                >
+                  Obtenir le lien de réinitialisation
+                </Button>
+              </Box>
+            </Flex>
+          </form>
         </Box>
       </Box>
     </Card>
