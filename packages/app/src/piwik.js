@@ -28,7 +28,7 @@ export const untrackUser = () => {
 
 function getJWTPayloadFormLocalStorageIdToken() {
   const token = cookie.get("token");
-  if (!token) return;
+  if (!token) return { type: null, username: null };
   const [, payloadPart = ""] = token.split(".");
   // prevent some token decoding exceptions
   // "Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded."
