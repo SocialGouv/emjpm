@@ -53,27 +53,25 @@ $ docker-compose rm -sfv
 $ docker volume rm -f emjpm_emjpm-pgdata
 #
 
-# Start the app, api, etc...
-#
-$ docker pull registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm:master
-$ docker build --shm-size 521M --cache-from registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm:master -t socialgouv/emjpm:master .
-$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up --build
+# Start a new db
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.built.yaml up db
 # or
-$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up db
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.build.yaml up db --build
 
 # Initialize the db
-#
 $ yarn workspace @emjpm/knex run migrate --env test
 $ yarn workspace @emjpm/knex run seeds --env test
 
 # Instantiate the initial seed
-#
 $ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
-```
 
-```sh
+# Optional
 # The e2e script will retore the db before each scenario with
 $ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
+
+$ docker-compose stop
+
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.built.yaml up
 ```
 
 ```sh
