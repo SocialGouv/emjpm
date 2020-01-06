@@ -1,9 +1,10 @@
 import Link from "next/link";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import { InfoCircle } from "styled-icons/boxicons-regular";
 import { BuildingHouse, Buildings } from "styled-icons/boxicons-solid";
 
+import { UserContext } from "../../../src/components/UserContext";
 import {
   cardErrorStyle,
   cardStyle,
@@ -14,8 +15,9 @@ import {
   title
 } from "./style";
 
-const ServiceInformationsSidebar = props => {
-  const { service_admins, user_antennes } = props;
+const ServiceInformationsSidebar = () => {
+  const user = useContext(UserContext);
+  const { service_admins, user_antennes } = user;
   const [serviceAdmin] = service_admins;
   const {
     dispo_max,
@@ -25,11 +27,10 @@ const ServiceInformationsSidebar = props => {
     latitude,
     longitude
   } = serviceAdmin.service;
-
   const hasInvalidGeocode = !latitude || !longitude;
 
   return (
-    <Box sx={sidebarStyle} {...props}>
+    <Box sx={sidebarStyle}>
       <Flex alignItems="center" justifyContent="space-between" mb="3">
         <Box>
           <Text sx={partTitle}>Informations</Text>

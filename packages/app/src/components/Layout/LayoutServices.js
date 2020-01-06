@@ -2,10 +2,9 @@ import { css, Global } from "@emotion/core";
 import { DropDownMenu, Header } from "@socialgouv/emjpm-ui-components";
 import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 import { Box } from "rebass";
 
-import { UserContext } from "../../../src/components/UserContext";
 import { logout } from "../../util/auth";
 import { Link } from "../Commons";
 import { Footer } from "../Footer";
@@ -35,7 +34,6 @@ const navigationLinks = [
 
 const LayoutServices = props => {
   const { children, hasNavigation = true } = props;
-  const user = useContext(UserContext);
 
   return (
     <Fragment>
@@ -94,7 +92,7 @@ const LayoutServices = props => {
           width: "300px"
         }}
       >
-        <ServiceInformationsSidebar {...user} />
+        <ServiceInformationsSidebar />
       </Box>
     </Fragment>
   );
