@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.16.0](https://github.com/SocialGouv/emjpm/compare/v25.15.0...v25.16.0) (2020-01-06)
+
+
+### Features
+
+* **geocode:** add geocode to tis ([#1353](https://github.com/SocialGouv/emjpm/issues/1353)) ([5f10836](https://github.com/SocialGouv/emjpm/commit/5f10836a0401d59058127e17d0ad69dfa664f422))
+
+
+
+
+
 # [25.15.0](https://github.com/SocialGouv/emjpm/compare/v25.14.0...v25.15.0) (2020-01-06)
 
 
