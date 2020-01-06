@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.alterTable("tis", function(table) {
+exports.up = function(knex) {
+  return knex.schema.alterTable("tis", function(table) {
     table.string("address");
     table.float("latitude");
     table.float("longitude");
