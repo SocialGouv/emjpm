@@ -6,7 +6,6 @@ import React, { Component } from "react";
 
 const clearToken = () => {
   cookie.remove("token");
-  cookie.remove("token", { path: "" });
   // to support logging out from all windows
   window.localStorage.removeItem("token");
 };
