@@ -34,7 +34,6 @@
     "apollo-client": "^2.6.8",
     "apollo-link-context": "^1.0.19",
     "babel-plugin-polished": "^1.1.0",
-    "cookie": "^0.4.0",
     "date-fns": "^2.8.1",
     "dotenv": "^8.2.0",
     "eslint-plugin-simple-import-sort": "^4.0.0",

@@ -6,16 +6,18 @@ import React, { Component } from "react";
 
 const clearToken = () => {
   cookie.remove("token");
-  cookie.remove("token", { path: "" });
   // to support logging out from all windows
-  window.localStorage.setItem("logout", Date.now());
-  window.localStorage.removeItem("id_token");
-  window.localStorage.removeItem("login");
+  window.localStorage.removeItem("token");
 };
 
 export const logout = () => {
   clearToken();
   Router.push("/login", "/login");
+};
+
+export const login = async ({ token }) => {
+  cookie.set("token", token, { expires: 1 });
+  localStorage.setItem("token", token);
 };
 
 // Gets the display name of a JSX component for dev tools
