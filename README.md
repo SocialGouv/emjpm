@@ -53,6 +53,10 @@ $ docker-compose rm -sfv
 $ docker volume rm -f emjpm_emjpm-pgdata
 #
 
+# Optional
+# pull the latest images
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.built.yaml pull
+
 # Start a new db
 $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.built.yaml up db
 # or
