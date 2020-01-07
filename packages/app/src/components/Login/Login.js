@@ -71,7 +71,7 @@ const Login = props => {
     <Card sx={cardStyle}>
       <Box sx={grayBox}>
         <Box>
-          <Heading4 mb="1">{`Douglas. La gestion du cache. Tu gères ?`}</Heading4>
+          <Heading4 mb="1">{`Connectez-vous à votre compte.`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
             {`Indiquez votre email et votre mot de passe pour vous connecter.`}
           </Text>
