@@ -56,47 +56,13 @@ Build @emjpm/app:
   dependencies: []
   variables:
     INVALID_GIT_FILES_CHANGES: "true"
+  dependencies:
+    - Install app
   needs:
     - Install app
   image: node:12-alpine
   script:
-    - apk add curl=~7 git=~2
-    #
-    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/v4.5.4/minio_s3_cache.sh &&
-      source minio_s3_cache.sh
-    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/v4.5.4/git_files_changes.sh &&
-      source git_files_changes.sh
-    - wget https://raw.githubusercontent.com/SocialGouv/gitlab-ci-yml/v4.5.4/manual_caching.sh &&
-      source manual_caching.sh
-    #
-    - checking_cache "${CI_COMMIT_REF_SLUG}/app-build.tar.gz" ||
-      (echo "" && checking_cache ${CI_DEFAULT_BRANCH}/app-build.tar.gz) ||
-      true
-    #
-    - >-
-      if [[ -d packages/app/.next ]] && [[ -z ${INVALID_GIT_FILES_CHANGES} ]] ; then
-        echo '"packages/app/.next" folder found !'
-
-        git fetch origin ${CI_DEFAULT_BRANCH}
-        if ! git_files_changes "^packages/app/src"; then
-          echo "Skipping job as ^packages/app/src didn't change"
-          exit ${CI_JOB_SKIP_EXIT_CODE:-0}
-        fi
-
-        echo "^packages/app/src files change detected"
-
-        rm -rf packages/app/.next/server
-        rm -rf packages/app/.next/static
-      fi
-    #
-
-    - checking_cache "${CI_COMMIT_REF_SLUG}/app-node_modules.tar.gz" ||
-      (echo "" && checking_cache ${CI_DEFAULT_BRANCH}/app-node_modules.tar.gz) ||
-      true
     - yarn workspace @emjpm/app build
-
-    #
-    - creating_cache app-build.tar.gz packages/app/.next || true
   artifacts:
     expire_in: 30 mins
     paths:
