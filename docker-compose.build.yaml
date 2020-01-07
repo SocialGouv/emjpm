@@ -44,12 +44,14 @@ services:
       - 3000:80
 
   graphql-engine:
+    # NOTE(douglasduteil): might fail if the api or db are too slow to start...
+    restart: unless-stopped
     depends_on:
       - api
       - db
       - graphql-server
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm_test
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ADMIN_SECRET: secret
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/api/v2/auth/jwks"}'
