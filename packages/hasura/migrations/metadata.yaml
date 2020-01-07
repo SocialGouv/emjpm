@@ -1156,32 +1156,28 @@ tables:
     permission:
       allow_aggregations: true
       columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
       - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
       - antenne_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - reason_extinction
+      - residence
       - service_id
-      - is_urgent
-      - judgment_date
-      - latitude
-      - longitude
+      - status
+      - ti_id
+      - type
+      - ville
       computed_fields: []
       filter: {}
     role: direction
@@ -1886,7 +1882,6 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - id
       - name
       computed_fields: []
       filter:
@@ -1898,7 +1893,6 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - id
       - name
       computed_fields: []
       filter:
@@ -2309,14 +2303,17 @@ tables:
     permission:
       allow_aggregations: false
       columns:
-      - id
-      - etablissement
-      - email
+      - address
       - code_postal
-      - ville
-      - telephone
       - created_at
+      - email
+      - etablissement
+      - id
+      - latitude
+      - longitude
       - siret
+      - telephone
+      - ville
       computed_fields: []
       filter: {}
     role: ti
@@ -2910,17 +2907,6 @@ tables:
         user_id:
           _eq: X-Hasura-User-Id
     role: prepose
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - ti_id
-      - user_id
-      - created_at
-      computed_fields: []
-      filter: {}
-    role: ti
   table: user_tis
   update_permissions: []
 - array_relationships: []
@@ -3057,7 +3043,6 @@ tables:
       - service_id
       - mandataire_id
       - discriminator
-      - nom
       - department_id
       - dep_nom
       - mesures_max
