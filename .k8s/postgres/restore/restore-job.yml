@@ -36,7 +36,7 @@ spec:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: ${K8S_PROJECT}-postgres-${BRANCH_HASH}
+                  name: postgres-postgresql
                   key: postgresql-password
             - name: POSTGRES_EMJPM_PASSWORD
               valueFrom:

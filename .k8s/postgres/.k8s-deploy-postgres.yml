@@ -20,6 +20,8 @@
 .k8s-restore-postgres-data:
   extends: .base_docker_helm_image_stage
   script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     #
     # Run pg_restore
