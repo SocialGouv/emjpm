@@ -20,6 +20,7 @@
 .k8s-restore-postgres-data:
   extends: .base_docker_helm_image_stage
   script:
+    - source ./.gitlab-ci/env.sh
     #
     #
     # Run pg_restore
