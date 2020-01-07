@@ -7,13 +7,16 @@ import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discrim
 import { mapMarkers } from "./utils";
 
 const MagistratMapMandataires = props => {
-  const { services, individuel, prepose } = props;
+  const { services, individuel, prepose, magistrat } = props;
+  const {
+    ti: { latitude, longitude }
+  } = magistrat;
   const [iconIndividuel, iconPrepose, iconService] = mapMarkers();
 
   return (
     <Map
       style="https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json"
-      center={[2.3488, 48.8534]}
+      center={[longitude, latitude]}
       containerStyle={{
         height: "100%",
         width: "100%"
