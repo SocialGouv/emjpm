@@ -300,8 +300,8 @@ resources:
     cpu: 20m
     memory: 512Mi
   limits:
-    cpu: 100m
-    memory: 256Mi
+    cpu: 250m
+    memory: 768Mi
 
 networkPolicy:
   ## Enable creation of NetworkPolicy resources.
