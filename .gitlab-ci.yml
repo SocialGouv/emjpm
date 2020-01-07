@@ -7,30 +7,11 @@ include:
   - /.gitlab-ci/variables.yml
   - /.gitlab-ci/extends.yml
   #
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_deploy_nodejs_chart_stage.yml
-    ref: v4.0.1
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_docker_kubectl_image_stage.yml
-    ref: v4.0.1
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_docker_helm_image_stage.yml
-    ref: v4.0.1
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_create_namespace_stage.yml
-    ref: v4.0.1
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_register_stage.yml
-    ref: v4.0.1
-  #
+  - /.gitlab-ci/stages/prepare.yml
+  - /.gitlab-ci/stages/quality.yml
+  - /.gitlab-ci/stages/register.yml
   - /.gitlab-ci/stages/notify.yml
   - /.gitlab-ci/stages/deploy.yml
-  #
-  - /packages/api/.gitlab-ci.yml
-  - /packages/app/.gitlab-ci.yml
-  - /packages/graphql-server/.gitlab-ci.yml
-  - /packages/hasura/.gitlab-ci.yml
-  - /packages/knex/.gitlab-ci.yml
 
 #
 
@@ -42,42 +23,3 @@ stages:
 - "Notify Finished Deployment"
 
 #
-
-.prepare_stage: &prepare_stage
-  stage: "Prepare"
-  dependencies: []
-
-.quality_stage:
-  stage: "Code Quality"
-  dependencies: []
-  except:
-    variables:
-      - $PRODUCTION
-
-.register_stage: &register_stage
-  stage: "Registration"
-  interruptible: true
-  dependencies: []
-  except:
-    variables:
-      - $PRODUCTION
-
-
-Create namespace:
-  extends: .base_create_namespace_stage
-  before_script:
-    - source ./.gitlab-ci/env.sh
-  after_script:
-    - source ./.gitlab-ci/env.sh
-    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-    #
-    # Create secrets
-    - export APP_URL=$(echo $FRONTEND_URL | base64)
-    - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
-    - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
-    #
-    # Create azure volume secrets for anonymized export
-    - export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
-    - export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
-    - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
-    - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}

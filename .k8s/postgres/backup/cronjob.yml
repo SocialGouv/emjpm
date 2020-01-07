@@ -47,7 +47,7 @@ spec:
                 - name: PGDATABASE
                   value: emjpm
                 - name: PGHOST
-                  value: ${POSTGRES_SRV_HOST}
+                  value: ${K8S_PROJECT}-postgres-${BRANCH_HASH}
                 - name: PGUSER
                   value: postgres
                 - name: PGPASSWORD

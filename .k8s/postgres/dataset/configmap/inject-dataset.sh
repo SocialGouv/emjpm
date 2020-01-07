@@ -1,4 +1,4 @@
 #!/bin/bash
 cd /app
-yarn migrate
-yarn seeds
+yarn workspace @emjpm/knex run migrate
+yarn workspace @emjpm/knex run seeds
