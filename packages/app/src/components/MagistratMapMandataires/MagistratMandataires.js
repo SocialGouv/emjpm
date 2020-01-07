@@ -13,9 +13,8 @@ const MagistratMapMandataires = dynamic(
 );
 
 const MagistratMandataires = () => {
-  const {
-    magistrat: { ti_id }
-  } = useContext(UserContext);
+  const { magistrat } = useContext(UserContext);
+  const { ti_id } = magistrat;
 
   const { data, error, loading } = useQuery(MESURES_GESTIONNAIRE, {
     variables: {
@@ -38,7 +37,14 @@ const MagistratMandataires = () => {
   const individuel = filterGestionnairesByDiscriminator(mesureGestionnaires, MANDATAIRE_IND);
   const prepose = filterGestionnairesByDiscriminator(mesureGestionnaires, MANDATAIRE_PRE);
 
-  return <MagistratMapMandataires services={services} individuel={individuel} prepose={prepose} />;
+  return (
+    <MagistratMapMandataires
+      magistrat={magistrat}
+      services={services}
+      individuel={individuel}
+      prepose={prepose}
+    />
+  );
 };
 
 export { MagistratMandataires };
