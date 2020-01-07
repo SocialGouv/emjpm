@@ -55,7 +55,7 @@ Build @emjpm/app:
   extends: .quality_stage
   dependencies: []
   variables:
-    INVALID_GIT_FILES_CHANGES: true
+    INVALID_GIT_FILES_CHANGES: "true"
   needs:
     - Install app
   image: node:12-alpine
