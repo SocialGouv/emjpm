@@ -83,10 +83,11 @@ Build @emjpm/app:
 
         echo "^packages/app/src files change detected"
 
-        rm -rf packages/app/.next/server
-        rm -rf packages/app/.next/static
       fi
     #
+
+    - rm -rf packages/app/.next/server
+      rm -rf packages/app/.next/static
 
     - checking_cache "${CI_COMMIT_REF_SLUG}/app-node_modules.tar.gz" ||
       (echo "" && checking_cache ${CI_DEFAULT_BRANCH}/app-node_modules.tar.gz) ||
@@ -112,6 +113,7 @@ Register app image:
     - Install app
     - Build @emjpm/app
   before_script:
+    - rm -rf packages/app/.next/cache
     - cp yarn.lock packages/app/yarn.lock
   variables:
     CONTEXT: packages/app
