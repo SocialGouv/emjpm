@@ -108,6 +108,9 @@ export const MAGISTRAT_USERS = gql`
           etablissement
           email
           code_postal
+          address
+          latitude
+          longitude
         }
       }
     }
