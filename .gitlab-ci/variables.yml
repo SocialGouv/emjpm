@@ -3,6 +3,9 @@ variables:
   # CI variables
   DOCKER_DRIVER: overlay2
   DOCKER_HOST: tcp://localhost:2375
+
+  # Git variables
+  GIT_DEPTH: 5
   GIT_STRATEGY: fetch
 
   # Infra
