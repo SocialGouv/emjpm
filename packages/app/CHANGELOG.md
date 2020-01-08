@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.16.2](https://github.com/SocialGouv/emjpm/compare/v25.16.1...v25.16.2) (2020-01-08)
+
+
+### Bug Fixes
+
+* **map:** magistrats map center ([#1354](https://github.com/SocialGouv/emjpm/issues/1354)) ([49e8b0f](https://github.com/SocialGouv/emjpm/commit/49e8b0fc1329ba528054666b60670074c1d02311))
+
+
+
+
+
 ## [25.16.1](https://github.com/SocialGouv/emjpm/compare/v25.16.0...v25.16.1) (2020-01-07)
 
 **Note:** Version bump only for package @emjpm/app
