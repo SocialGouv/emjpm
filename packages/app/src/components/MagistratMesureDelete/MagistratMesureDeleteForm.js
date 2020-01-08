@@ -4,47 +4,64 @@ import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-import * as Yup from "yup";
 
-import { DELETE_MESURE } from "../ServiceMesures/mutations";
-import { MESURES } from "../ServiceMesures/queries";
+import { magistratMesureDeleteSchema } from "../../lib/validationSchemas";
+import { DELETE_MANDATAIRE_MESURE, DELETE_SERVICE_MESURE } from "./mutations";
+import { MagistratMesureRemoveStyle } from "./style";
 
-export const ServiceDeleteMesureForm = props => {
-  const { mesureId, queryVariables } = props;
-  const [updateMesure] = useMutation(DELETE_MESURE, {
+export const MagistratMesureDeleteForm = props => {
+  const { mesure } = props;
+
+  const [deleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE, {
     onCompleted() {
-      Router.push(`/services`);
+      Router.push(`/magistrats/mesures`);
+    }
+  });
+
+  const [deleteServiceMesure] = useMutation(DELETE_SERVICE_MESURE, {
+    onCompleted() {
+      Router.push(`/magistrats/mesures`);
     }
   });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
-      await updateMesure({
-        refetchQueries: [{ query: MESURES, variables: queryVariables }],
-        variables: {
-          id: mesureId
-        }
-      });
+      if (mesure.mandataire_id) {
+        await deleteMandataireMesure({
+          refetchQueries: ["mesures"],
+          variables: {
+            id: mesure.id,
+            mandataire_id: mesure.mandataire_id
+          }
+        });
+
+        Router.push(`/magistrats/mesures`);
+      } else if (mesure.service_id) {
+        await deleteServiceMesure({
+          refetchQueries: ["mesures"],
+          variables: {
+            id: mesure.id,
+            service_id: mesure.service_id
+          }
+        });
+      }
 
       setSubmitting(false);
     },
-    validationSchema: Yup.object().shape({
-      reason_delete: Yup.string().required("Required")
-    }),
-    initialValues: { reason_delete: "" }
+    validationSchema: magistratMesureDeleteSchema,
+    initialValues: {
+      reason_delete: ""
+    }
   });
 
   return (
-    <Flex flexWrap="wrap">
+    <Flex sx={MagistratMesureRemoveStyle}>
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading5 mb="1">Supprimer la mesure</Heading5>
         <Text mb="2" lineHeight="1.5">
-          {`Vous êtes sur le point de supprimer définitivement une mesure de protection du système eMJPM. Toute suppression est irréversible, vous ne pourrez pas récupérer les données associées à cette mesure et celle-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'Etat.`}
+          {`Vous êtes sur le point de supprimer définitivement une mesure réservée du système eMJPM. Toute suppression est irréversible.`}
         </Text>
-        <Text mb="2" lineHeight="1.5">
-          {`NB : les mesures éteintes ne sont plus comptabilisees dans vos "mesures en cours", elles n'apparaissent donc plus aupres des Magistrats.`}
-        </Text>
-        <Text lineHeight="1.5">{`Si vous souhaitez supprimer definitivement cette mesure, cliquez sur "Supprimer la mesure".`}</Text>
+        <Text lineHeight="1.5">{`Si vous souhaitez supprimer cette mesure réservée, cliquez sur "Supprimer la mesure".`}</Text>
         <Text lineHeight="1.5">{`Dans le cas contraire, cliquez sur "Annuler".`}</Text>
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
@@ -65,10 +82,11 @@ export const ServiceDeleteMesureForm = props => {
           <Flex justifyContent="flex-end">
             <Box>
               <Button
+                type="button"
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/services`);
+                  Router.push(`/magistrats/mesures/${mesure.id}`);
                 }}
               >
                 Annuler
