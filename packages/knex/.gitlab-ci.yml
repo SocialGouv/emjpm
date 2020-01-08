@@ -14,40 +14,40 @@ Install knex:
 
 #
 
-Lint @emjpm/knex:
-  extends: .quality_stage
-  image: node:12-alpine
-  needs:
-    - Install knex
-  dependencies:
-    - Install knex
-  script:
-    - yarn workspace @emjpm/knex lint
+# Lint @emjpm/knex:
+#   extends: .quality_stage
+#   image: node:12-alpine
+#   needs:
+#     - Install knex
+#   dependencies:
+#     - Install knex
+#   script:
+#     - yarn workspace @emjpm/knex lint
 
-Test @emjpm/knex:
-  extends: .quality_stage
-  image: node:12-alpine
-  needs:
-    - Install knex
-  dependencies:
-    - Install knex
-  services:
-    - name: postgres:10-alpine
-  allow_failure: true
-  retry: 1
-  timeout: 2 minutes
-  variables:
-    DATABASE_URL: psql://postgres:@localhost/emjpm
-    PGHOST: localhost
-    PGUSER: postgres
-  before_script:
-    - apk add --update --no-cache postgresql=~11
-    - psql --version
-    #
-    - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
-  script:
-    - sh -x docker/postgres/postgres-init.sh
-    - yarn workspace @emjpm/knex test
+# Test @emjpm/knex:
+#   extends: .quality_stage
+#   image: node:12-alpine
+#   needs:
+#     - Install knex
+#   dependencies:
+#     - Install knex
+#   services:
+#     - name: postgres:10-alpine
+#   allow_failure: true
+#   retry: 1
+#   timeout: 2 minutes
+#   variables:
+#     DATABASE_URL: psql://postgres:@localhost/emjpm
+#     PGHOST: localhost
+#     PGUSER: postgres
+#   before_script:
+#     - apk add --update --no-cache postgresql=~11
+#     - psql --version
+#     #
+#     - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
+#   script:
+#     - sh -x docker/postgres/postgres-init.sh
+#     - yarn workspace @emjpm/knex test
 
 #
 

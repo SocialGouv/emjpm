@@ -14,40 +14,40 @@ Install app:
 
 #
 
-Lint @emjpm/app:
-  extends: .quality_stage
-  image: node:12-alpine
-  dependencies:
-    - Install app
-  needs:
-    - Install app
-  script:
-    - yarn workspace @emjpm/app lint
+# Lint @emjpm/app:
+#   extends: .quality_stage
+#   image: node:12-alpine
+#   dependencies:
+#     - Install app
+#   needs:
+#     - Install app
+#   script:
+#     - yarn workspace @emjpm/app lint
 
-Test @emjpm/app:
-  extends: .quality_stage
-  image: node:12-alpine
-  dependencies:
-    - Install app
-  needs:
-    - Install app
-  services:
-    - name: postgres:10-alpine
-  allow_failure: true
-  retry: 1
-  variables:
-    DATABASE_URL: psql://postgres:@localhost/emjpm
-    PGHOST: localhost
-    PGUSER: postgres
-    TZ: Europe/Paris
-  before_script:
-    - apk add --update --no-cache postgresql=~11
-    - psql --version
-    #
-    - pg_isready -h localhost
-  script:
-    - sh -x docker/postgres/postgres-init.sh
-    - yarn workspace @emjpm/app test
+# Test @emjpm/app:
+#   extends: .quality_stage
+#   image: node:12-alpine
+#   dependencies:
+#     - Install app
+#   needs:
+#     - Install app
+#   services:
+#     - name: postgres:10-alpine
+#   allow_failure: true
+#   retry: 1
+#   variables:
+#     DATABASE_URL: psql://postgres:@localhost/emjpm
+#     PGHOST: localhost
+#     PGUSER: postgres
+#     TZ: Europe/Paris
+#   before_script:
+#     - apk add --update --no-cache postgresql=~11
+#     - psql --version
+#     #
+#     - pg_isready -h localhost
+#   script:
+#     - sh -x docker/postgres/postgres-init.sh
+#     - yarn workspace @emjpm/app test
 
 #
 

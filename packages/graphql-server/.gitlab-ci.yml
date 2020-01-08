@@ -14,15 +14,15 @@ Install graphql-server:
 
 #
 
-Lint @emjpm/graphql-server:
-  extends: .quality_stage
-  dependencies:
-    - Install graphql-server
-  needs:
-    - Install graphql-server
-  image: node:12-alpine
-  script:
-    - yarn workspace @emjpm/graphql-server lint
+# Lint @emjpm/graphql-server:
+#   extends: .quality_stage
+#   dependencies:
+#     - Install graphql-server
+#   needs:
+#     - Install graphql-server
+#   image: node:12-alpine
+#   script:
+#     - yarn workspace @emjpm/graphql-server lint
 
 Build @emjpm/graphql-server:
   extends: .quality_stage
