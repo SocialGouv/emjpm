@@ -1220,7 +1220,7 @@ tables:
     role: individuel
   - comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       columns:
       - is_urgent
       - date_ouverture
