@@ -1038,6 +1038,8 @@ tables:
       - date_ouverture
       - extinction
       - judgment_date
+      - latitude
+      - longitude
       - antenne_id
       - department_id
       - etablissement_id
@@ -1156,28 +1158,32 @@ tables:
     permission:
       allow_aggregations: true
       columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
       - id
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
+      - code_postal
       - ville
+      - etablissement
+      - mandataire_id
+      - created_at
+      - annee
+      - type
+      - date_ouverture
+      - residence
+      - civilite
+      - status
+      - extinction
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - reason_extinction
+      - numero_rg
+      - department_id
+      - antenne_id
+      - service_id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
       computed_fields: []
       filter: {}
     role: direction
@@ -1226,6 +1232,8 @@ tables:
       - date_ouverture
       - extinction
       - judgment_date
+      - latitude
+      - longitude
       - antenne_id
       - department_id
       - etablissement_id
@@ -1369,6 +1377,8 @@ tables:
       - date_ouverture
       - extinction
       - judgment_date
+      - latitude
+      - longitude
       - antenne_id
       - department_id
       - etablissement_id
