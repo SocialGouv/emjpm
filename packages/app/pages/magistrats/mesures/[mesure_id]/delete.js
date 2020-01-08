@@ -8,15 +8,11 @@ import { withAuthSync } from "../../../../src/util/auth";
 
 const MagistratMesureDeletePage = props => {
   const { mesureId } = props;
+
   return (
     <LayoutMagistrat>
-      <BoxWrapper mt={6} px="1">
-        <Flex
-          sx={{
-            flexWrap: "wrap",
-            mt: "2"
-          }}
-        >
+      <BoxWrapper mt="6" px="1">
+        <Flex flexWrap="wrap" mt="2">
           <MagistratMesureDelete mesureId={mesureId} />
         </Flex>
       </BoxWrapper>

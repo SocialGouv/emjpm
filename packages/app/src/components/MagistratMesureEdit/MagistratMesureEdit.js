@@ -1,22 +1,47 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { Button, Field, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
-import * as Yup from "yup";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
+import { magistratMesureEditSchema } from "../../lib/validationSchemas";
 import { MesureContext } from "../MesureContext";
 import { EDIT_MESURE } from "./mutations";
 import { MagistratMesureEditStyle } from "./style";
 
 export const MagistratMesureEdit = () => {
   const { id, age, civilite, numeroRg, type, cabinet } = useContext(MesureContext);
-  const [UpdateMesure] = useMutation(EDIT_MESURE, {
+  const [updateMesure] = useMutation(EDIT_MESURE, {
     onCompleted() {
       Router.push(`/magistrats/mesures/${id}`);
+    }
+  });
+
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
+      await updateMesure({
+        variables: {
+          annee: values.annee,
+          cabinet: values.cabinet,
+          civilite: values.civilite.value,
+          id: id,
+          numero_rg: values.numero_rg,
+          type: values.type.value
+        }
+      });
+
+      setSubmitting(false);
+    },
+    validationSchema: magistratMesureEditSchema,
+    initialValues: {
+      annee: age,
+      cabinet: cabinet ? cabinet : "",
+      civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
+      numero_rg: numeroRg,
+      type: { label: type, value: type }
     }
   });
 
@@ -35,121 +60,78 @@ export const MagistratMesureEdit = () => {
         <Box mb="3">
           <Heading3>Modifier la mesure réservée</Heading3>
         </Box>
-        <Formik
-          onSubmit={(values, { setSubmitting }) => {
-            UpdateMesure({
-              variables: {
-                annee: values.annee,
-                cabinet: values.cabinet,
-                civilite: values.civilite.value,
-                id: id,
-                numero_rg: values.numero_rg,
-                type: values.type.value
-              }
-            });
-            setSubmitting(false);
-          }}
-          validationSchema={Yup.object().shape({
-            annee: Yup.string().required(),
-            cabinet: Yup.string(),
-            civilite: Yup.string().required(),
-            numero_rg: Yup.string().required(),
-            type: Yup.string().required()
-          })}
-          initialValues={{
-            annee: age,
-            cabinet: cabinet ? cabinet : "",
-            civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
-            numero_rg: numeroRg,
-            type: { label: type, value: type }
-          }}
-        >
-          {props => {
-            const {
-              values,
-              touched,
-              errors,
-              isSubmitting,
-              handleChange,
-              handleSubmit,
-              setFieldValue
-            } = props;
-            return (
-              <form onSubmit={handleSubmit}>
-                <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
-                  <Select
-                    id="type"
-                    name="type"
-                    placeholder="Type de mesure"
-                    value={values.type}
-                    hasError={errors.type && touched.type}
-                    onChange={option => setFieldValue("type", option)}
-                    options={MESURE_TYPE_LABEL_VALUE}
-                  />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
-                  <Select
-                    id="civilite"
-                    name="civilite"
-                    placeholder="civilité"
-                    value={values.civilite}
-                    hasError={errors.civilite && touched.civilite}
-                    onChange={option => setFieldValue("civilite", option)}
-                    options={CIVILITY}
-                  />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                  <Input
-                    value={values.annee}
-                    id="annee"
-                    name="annee"
-                    hasError={errors.annee && touched.annee}
-                    onChange={handleChange}
-                    placeholder="année"
-                  />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                  <Input
-                    value={values.numero_rg}
-                    id="numero_rg"
-                    name="numero_rg"
-                    hasError={errors.numero_rg && touched.numero_rg}
-                    onChange={handleChange}
-                    placeholder="numero rg"
-                  />
-                </Box>
-                <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                  <Input
-                    value={values.cabinet}
-                    id="cabinet"
-                    name="cabinet"
-                    hasError={errors.cabinet && touched.cabinet}
-                    onChange={handleChange}
-                    placeholder="Cabinet (optionnel)"
-                  />
-                </Box>
-                <Flex justifyContent="flex-end">
-                  <Box>
-                    <Button
-                      mr="2"
-                      variant="outline"
-                      onClick={() => {
-                        Router.push(`/magistrats/mesures/${id}`);
-                      }}
-                    >
-                      Annuler
-                    </Button>
-                  </Box>
-                  <Box>
-                    <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                      Enregistrer
-                    </Button>
-                  </Box>
-                </Flex>
-              </form>
-            );
-          }}
-        </Formik>
+        <form onSubmit={formik.handleSubmit}>
+          <Field>
+            <Select
+              id="type"
+              name="type"
+              placeholder="Type de mesure"
+              value={formik.values.type}
+              hasError={formik.errors.type && formik.touched.type}
+              onChange={option => formik.setFieldValue("type", option)}
+              options={MESURE_TYPE_LABEL_VALUE}
+            />
+          </Field>
+          <Field>
+            <Select
+              id="civilite"
+              name="civilite"
+              placeholder="civilité"
+              value={formik.values.civilite}
+              hasError={formik.errors.civilite && formik.touched.civilite}
+              onChange={option => formik.setFieldValue("civilite", option)}
+              options={CIVILITY}
+            />
+          </Field>
+          <Field>
+            <Input
+              value={formik.values.annee}
+              id="annee"
+              name="annee"
+              hasError={formik.errors.annee && formik.touched.annee}
+              onChange={formik.handleChange}
+              placeholder="année"
+            />
+          </Field>
+          <Field>
+            <Input
+              value={formik.values.numero_rg}
+              id="numero_rg"
+              name="numero_rg"
+              hasError={formik.errors.numero_rg && formik.touched.numero_rg}
+              onChange={formik.handleChange}
+              placeholder="numero rg"
+            />
+          </Field>
+          <Field>
+            <Input
+              value={formik.values.cabinet}
+              id="cabinet"
+              name="cabinet"
+              hasError={formik.errors.cabinet && formik.touched.cabinet}
+              onChange={formik.handleChange}
+              placeholder="Cabinet (optionnel)"
+            />
+          </Field>
+          <Flex justifyContent="flex-end">
+            <Box>
+              <Button
+                mr="2"
+                variant="outline"
+                onClick={() => {
+                  Router.push(`/magistrats/mesures/${id}`);
+                }}
+              >
+                Annuler
+              </Button>
+            </Box>
+            <Box>
+              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+                Enregistrer
+              </Button>
+            </Box>
+          </Flex>
+        </form>
       </Box>
     </Flex>
   );

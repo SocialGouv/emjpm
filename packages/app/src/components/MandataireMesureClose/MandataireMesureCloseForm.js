@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { Button, Field, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
 import React from "react";
@@ -23,8 +23,8 @@ const EXTINCTION_LABEL_VALUE = [
 export const MandataireMesureCloseForm = props => {
   const { mesureId } = props;
 
-  const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
-  const [UpdateMesure] = useMutation(CLOSE_MESURE, {
+  const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
+  const [updateMesure] = useMutation(CLOSE_MESURE, {
     onCompleted() {
       Router.push(`/mandataires/mesures/${mesureId}`);
     },
@@ -37,7 +37,7 @@ export const MandataireMesureCloseForm = props => {
       }
     ) {
       const [mesure] = returning;
-      UpdateMandatairesCounter({
+      updateMandatairesCounter({
         variables: {
           mandataireId: mesure.mandataire_id,
           mesures_awaiting: 0,
@@ -45,6 +45,25 @@ export const MandataireMesureCloseForm = props => {
         }
       });
     }
+  });
+
+  const formik = useFormik({
+    onSubmit: (values, { setSubmitting }) => {
+      updateMesure({
+        refetchQueries: ["mesures", "mesures_aggregate"],
+        variables: {
+          extinction: values.extinction,
+          id: mesureId,
+          reason_extinction: values.reason_extinction.value
+        }
+      });
+      setSubmitting(false);
+    },
+    validationSchema: Yup.object().shape({
+      extinction: Yup.date().required("Required"),
+      reason_extinction: Yup.string().required("Required")
+    }),
+    initialValues: { extinction: "", reason_extinction: "" }
   });
 
   return (
@@ -59,80 +78,48 @@ export const MandataireMesureCloseForm = props => {
         <Box mb="3">
           <Heading3>Mettre fin au mandat</Heading3>
         </Box>
-        <Formik
-          onSubmit={(values, { setSubmitting }) => {
-            UpdateMesure({
-              refetchQueries: ["mesures", "mesures_aggregate"],
-              variables: {
-                extinction: values.extinction,
-                id: mesureId,
-                reason_extinction: values.reason_extinction.value
-              }
-            });
-            setSubmitting(false);
-          }}
-          validationSchema={Yup.object().shape({
-            extinction: Yup.date().required("Required"),
-            reason_extinction: Yup.string().required("Required")
-          })}
-          initialValues={{ extinction: "", reason_extinction: "" }}
-        >
-          {props => {
-            const {
-              setFieldValue,
-              values,
-              touched,
-              errors,
-              isSubmitting,
-              handleChange,
-              handleSubmit
-            } = props;
-            return (
-              <form onSubmit={handleSubmit}>
-                <Box mb="2">
-                  <Input
-                    value={values.extinction}
-                    id="extinction"
-                    name="extinction"
-                    hasError={errors.extinction && touched.extinction}
-                    type="date"
-                    onChange={handleChange}
-                    placeholder="Date de fin de mandat"
-                  />
-                </Box>
-                <Box mb="2">
-                  <Select
-                    id="reason_extinction"
-                    name="reason_extinction"
-                    placeholder="Raison de la fin de mandat"
-                    value={values.type}
-                    hasError={errors.type && touched.type}
-                    onChange={option => setFieldValue("reason_extinction", option)}
-                    options={EXTINCTION_LABEL_VALUE}
-                  />
-                </Box>
-                <Flex justifyContent="flex-end">
-                  <Box>
-                    <Button
-                      mr="2"
-                      variant="outline"
-                      onClick={() => {
-                        Router.push(`/mandataires/mesures/${mesureId}`);
-                      }}
-                    >
-                      Annuler
-                    </Button>
-                  </Box>
-                  <Box>
-                    <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                      Confirmer la fin du mandat
-                    </Button>
-                  </Box>
-                </Flex>
-              </form>
-            );
-          }}
-        </Formik>
+        <form onSubmit={formik.handleSubmit}>
+          <Field>
+            <Input
+              value={formik.values.extinction}
+              id="extinction"
+              name="extinction"
+              hasError={formik.errors.extinction && formik.touched.extinction}
+              type="date"
+              onChange={formik.handleChange}
+              placeholder="Date de fin de mandat"
+            />
+          </Field>
+          <Field>
+            <Select
+              id="reason_extinction"
+              name="reason_extinction"
+              placeholder="Raison de la fin de mandat"
+              value={formik.values.type}
+              hasError={formik.errors.type && formik.touched.type}
+              onChange={option => formik.setFieldValue("reason_extinction", option)}
+              options={EXTINCTION_LABEL_VALUE}
+            />
+          </Field>
+          <Flex justifyContent="flex-end">
+            <Box>
+              <Button
+                mr="2"
+                variant="outline"
+                onClick={() => {
+                  Router.push(`/mandataires/mesures/${mesureId}`);
+                }}
+              >
+                Annuler
+              </Button>
+            </Box>
+            <Box>
+              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+                Confirmer la fin du mandat
+              </Button>
+            </Box>
+          </Flex>
+        </form>
       </Box>
     </Flex>
   );
