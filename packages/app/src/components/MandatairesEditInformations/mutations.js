@@ -19,6 +19,7 @@ export const EDIT_USER = gql`
     $email: String!
     $id: Int!
     $department_id: Int!
+    $competences: String!
   ) {
     update_mandataires(
       _set: {
@@ -35,6 +36,7 @@ export const EDIT_USER = gql`
         department_id: $department_id
         secretariat: $secretariat
         nb_secretariat: $nb_secretariat
+        competences: $competences
       }
       where: { user_id: { _eq: $id } }
     ) {

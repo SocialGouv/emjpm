@@ -31,6 +31,7 @@ const MandatairesEditInformationsForm = props => {
       telephone_portable: mandataire.telephone_portable || "",
       secretariat: SECRETARIAT_OPTIONS.find(el => el.value === mandataire.secretariat),
       nb_secretariat: mandataire.nb_secretariat || "",
+      competences: mandataire.competences || "",
       geocode
     }
   });
@@ -175,6 +176,19 @@ const MandatairesEditInformationsForm = props => {
           )}
         </Field>
       )}
+      <Field>
+        <Input
+          value={formik.values.competences}
+          id="competences"
+          name="competences"
+          hasError={formik.errors.competences && formik.touched.competences}
+          onChange={formik.handleChange}
+          placeholder="Compétences"
+        />
+        {formik.errors.competences && formik.touched.competences && (
+          <Text>{formik.errors.competences}</Text>
+        )}
+      </Field>
 
       <Flex alignItems="center" justifyContent="flex-end">
         <Box mr="2">

@@ -687,7 +687,7 @@ tables:
       - telephone_portable
       - user_id
       - ville
-      - zip
+      - competences
       set: {}
     role: individuel
   - comment: null
@@ -716,7 +716,7 @@ tables:
       - telephone_portable
       - user_id
       - ville
-      - zip
+      - competences
       set: {}
     role: prepose
   is_enum: false
@@ -762,7 +762,7 @@ tables:
       - email_send
       - genre
       - mesures_en_attente
-      - zip
+      - competences
       computed_fields: []
       filter: {}
     role: direction
@@ -787,7 +787,7 @@ tables:
       - email_send
       - genre
       - mesures_en_attente
-      - zip
+      - competences
       - department_id
       - siret
       - latitude
@@ -811,7 +811,7 @@ tables:
       - mesures_en_attente
       - mesures_en_cours
       - user_id
-      - zip
+      - competences
       - created_at
       - date_mesure_update
       - email_send
@@ -849,7 +849,7 @@ tables:
       - email_send
       - genre
       - mesures_en_attente
-      - zip
+      - competences
       - department_id
       - siret
       - latitude
@@ -883,7 +883,7 @@ tables:
       - telephone_portable
       - user_id
       - ville
-      - zip
+      - competences
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -913,7 +913,7 @@ tables:
       - telephone_portable
       - user_id
       - ville
-      - zip
+      - competences
       filter:
         user_id:
           _eq: X-Hasura-User-Id
