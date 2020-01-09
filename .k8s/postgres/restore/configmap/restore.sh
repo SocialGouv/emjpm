@@ -6,11 +6,13 @@ echo "Restore with ${1}"
 
 pg_restore \
   --clean \
-  --if-exists \
+  --data-only \
+  --dbname emjpm \
+  --disable-triggers \
   --exit-on-error \
   --format=c \
+  --if-exists \
   --verbose \
-  --dbname emjpm \
   ${1}
 
 psql -d emjpm -c "ALTER SCHEMA public OWNER TO emjpm"

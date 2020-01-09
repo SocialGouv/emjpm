@@ -58,7 +58,9 @@ psql -v ON_ERROR_STOP=1 --username postgres <<-EOSQL
 
   -- create the schemas required by the hasura system
   -- NOTE: If you are starting from scratch: drop the below schemas first, if they exist.
+  DROP SCHEMA IF EXISTS hdb_catalog CASCADE;
   CREATE SCHEMA IF NOT EXISTS hdb_catalog;
+  DROP SCHEMA IF EXISTS hdb_views CASCADE;
   CREATE SCHEMA IF NOT EXISTS hdb_views;
 
   -- make the user an owner of system schemas
