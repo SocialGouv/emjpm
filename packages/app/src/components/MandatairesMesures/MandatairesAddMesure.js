@@ -195,7 +195,7 @@ export const MandatairesAddMesure = props => {
                   name="date_ouverture"
                   hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
                   onChange={formik.handleChange}
-                  placeholder="Date d'ouverture"
+                  placeholder="Date d'ordonnance"
                 />
                 {formik.errors.date_ouverture && formik.touched.date_ouverture && (
                   <Text>{formik.errors.date_ouverture}</Text>

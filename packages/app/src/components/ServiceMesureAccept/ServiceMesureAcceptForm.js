@@ -112,7 +112,7 @@ export const ServiceMesureAcceptForm = props => {
               name="date_ouverture"
               hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
               onChange={formik.handleChange}
-              placeholder="Date d'ouverture"
+              placeholder="Date d'ordonnance"
             />
           </Box>
           <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
