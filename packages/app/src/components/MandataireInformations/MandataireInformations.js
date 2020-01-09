@@ -58,6 +58,10 @@ const MandataireInformations = props => {
                   <Text sx={subtitle}>{"ETP dédié"}</Text>
                   <Text sx={content}>{label(mandataire.nb_secretariat)}</Text>
                 </Box>
+                <Box mr={4}>
+                  <Text sx={subtitle}>{"Compétences"}</Text>
+                  <Text sx={content}>{label(mandataire.competences)}</Text>
+                </Box>
               </Flex>
             </Box>
           </Flex>
