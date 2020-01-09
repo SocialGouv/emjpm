@@ -12,6 +12,7 @@ const ServiceEditForm = props => {
     onSubmit: handleSubmit,
     validationSchema: serviceSchema,
     initialValues: {
+      competences: service.competences || "",
       dispo_max: service.dispo_max || "",
       email: service.email || "",
       etablissement: service.etablissement || "",
@@ -94,12 +95,12 @@ const ServiceEditForm = props => {
       </Field>
       <Field>
         <Input
-          value={formik.values.information}
-          id="information"
-          name="information"
-          hasError={formik.errors.information && formik.touched.information}
+          value={formik.values.competences}
+          id="competences"
+          name="competences"
+          hasError={formik.errors.competences && formik.touched.competences}
           onChange={formik.handleChange}
-          placeholder="Informations"
+          placeholder="Compétences"
         />
       </Field>
       <Field>

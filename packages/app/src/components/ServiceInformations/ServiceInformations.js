@@ -31,7 +31,7 @@ const ServiceInformations = props => {
   const [service] = data.services;
   const {
     adresse,
-    information,
+    competences,
     code_postal,
     email,
     etablissement,
@@ -76,7 +76,7 @@ const ServiceInformations = props => {
             <Heading5 mt="5" mb="3">
               Compétences du services
             </Heading5>
-            <Text sx={topTextStyle}>{information}</Text>
+            <Text sx={topTextStyle}>{competences}</Text>
           </Box>
         </Flex>
         <Flex mt="5">
