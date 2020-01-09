@@ -3,7 +3,6 @@ import gql from "graphql-tag";
 export const MANDATAIRE_MESURES = gql`
   query MandataireMesures(
     $limit: Int
-    $mandataireId: Int
     $type: String
     $status: String
     $searchText: String
