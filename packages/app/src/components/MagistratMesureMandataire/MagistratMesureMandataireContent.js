@@ -75,7 +75,7 @@ const MagistratMesureMandataireContent = props => {
 
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
   return (
-    <Box {...props} width="100%">
+    <Box {...props} width="100%" mb={6}>
       <Flex sx={MagistratMesureMandataireStyle}>
         <Box sx={MagistratMesureSideMandataireStyle}>
           <MagistratMesureMap longitude={longitude} latitude={latitude} id={id} />
