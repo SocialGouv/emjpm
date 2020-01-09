@@ -6,7 +6,6 @@ echo "Restore with ${1}"
 
 pg_restore \
   --clean \
-  --data-only \
   --dbname emjpm \
   --disable-triggers \
   --exit-on-error \
