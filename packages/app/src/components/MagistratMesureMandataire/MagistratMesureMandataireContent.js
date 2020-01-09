@@ -55,6 +55,7 @@ const MagistratMesureMandataireContent = props => {
   const formatedGestionnaire = formatGestionnaire(gestionnaire);
   const {
     dispoMax,
+    etablissement,
     mesuresAwaiting,
     mesuresInProgress,
     tis,
@@ -81,12 +82,20 @@ const MagistratMesureMandataireContent = props => {
         </Box>
         <Flex sx={MagistratMesureMainMandataireStyle}>
           <Box width="50%">
+            {mandataireId && (
+              <Box>
+                <Text sx={MagistratMesureTitleMandataireStyle}>Nom du mandataire</Text>
+                <Text sx={MagistratMesureContentMandataireStyle}>{`${prenom} ${nom}`}</Text>
+              </Box>
+            )}
+            {serviceId && (
+              <Box>
+                <Text sx={MagistratMesureTitleMandataireStyle}>{`Nom de l'association`}</Text>
+                <Text sx={MagistratMesureContentMandataireStyle}>{etablissement}</Text>
+              </Box>
+            )}
             <Box>
-              <Text sx={MagistratMesureTitleMandataireStyle}>Nom du mandataire</Text>
-              <Text sx={MagistratMesureContentMandataireStyle}>{`${prenom} ${nom}`}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratMesureTitleMandataireStyle}>Adresse d’activité</Text>
+              <Text sx={MagistratMesureTitleMandataireStyle}>{`Adresse d’activité`}</Text>
               <Text
                 sx={MagistratMesureContentMandataireStyle}
               >{`${adresse} ${codePostal} ${ville}`}</Text>
