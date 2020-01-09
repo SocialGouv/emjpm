@@ -51,9 +51,9 @@ const MagistratMesureMandataireContent = props => {
   }
 
   const [gestionnaire] = data.gestionnaires;
-
   const formatedGestionnaire = formatGestionnaire(gestionnaire);
   const {
+    competences,
     dispoMax,
     etablissement,
     mesuresAwaiting,
@@ -118,6 +118,10 @@ const MagistratMesureMandataireContent = props => {
             </Box>
           </Box>
           <Box width="50%">
+            <Box>
+              <Text sx={MagistratMesureTitleMandataireStyle}>Compétences</Text>
+              <Text sx={MagistratMesureContentMandataireStyle}>{competences}</Text>
+            </Box>
             <Box>
               <Text sx={MagistratMesureTitleMandataireStyle}>Email</Text>
               <Text sx={MagistratMesureContentMandataireStyle}>{email}</Text>

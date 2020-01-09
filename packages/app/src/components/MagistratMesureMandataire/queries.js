@@ -21,6 +21,7 @@ export const GESTIONNAIRES = gql`
         latitude
         longitude
         adresse
+        competences
         commentaires {
           id
           comment
@@ -48,6 +49,7 @@ export const GESTIONNAIRES = gql`
         ville
         adresse
         code_postal
+        competences
         telephone
         email
         latitude
