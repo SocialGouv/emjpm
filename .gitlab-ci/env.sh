@@ -8,7 +8,7 @@ export COMMIT=${COMMIT:=$CI_COMMIT_SHA}
 export ENVIRONMENT=${ENVIRONMENT:="staging"};
 export HASH_SIZE=${HASH_SIZE:=7}
 export JOB_ID=${JOB_ID:=$CI_JOB_ID}
-export NODE_ENV=${NODE_ENV:="development"}
+export NODE_ENV=${NODE_ENV:="production"}
 export PROJECT_PATH=${PROJECT_PATH:=$CI_PROJECT_PATH}
 export VERSION=${VERSION:=$CI_COMMIT_REF_NAME}
 export HELM_POSTGRES_CHART_VERSION=6.4.0
