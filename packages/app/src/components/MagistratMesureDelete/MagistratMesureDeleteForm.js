@@ -26,27 +26,24 @@ export const MagistratMesureDeleteForm = props => {
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
-      if (mesure.mandataire_id) {
+      if (mesure.mandataireId) {
         await deleteMandataireMesure({
-          refetchQueries: ["mesures"],
           variables: {
             id: mesure.id,
-            mandataire_id: mesure.mandataire_id
+            mandataire_id: mesure.mandataireId
           }
         });
-
-        Router.push(`/magistrats/mesures`);
-      } else if (mesure.service_id) {
+      } else if (mesure.serviceId) {
         await deleteServiceMesure({
-          refetchQueries: ["mesures"],
           variables: {
             id: mesure.id,
-            service_id: mesure.service_id
+            service_id: mesure.serviceId
           }
         });
       }
 
       setSubmitting(false);
+      Router.push(`/magistrats/mesures`);
     },
     validationSchema: magistratMesureDeleteSchema,
     initialValues: {
