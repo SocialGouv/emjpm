@@ -259,7 +259,7 @@ export const ServiceAddMesure = props => {
                   type="number"
                   hasError={formik.errors.annee && formik.touched.annee}
                   onChange={formik.handleChange}
-                  placeholder="année"
+                  placeholder="année de naissance"
                 />
                 {formik.errors.annee && formik.touched.annee && <Text>{formik.errors.annee}</Text>}
               </Field>
