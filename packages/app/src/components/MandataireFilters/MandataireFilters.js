@@ -28,7 +28,7 @@ const MandataireFilters = props => {
               <Select
                 size="small"
                 options={MESURE_TYPE_LABEL_VALUE}
-                placeholder={"Type de la mesure"}
+                placeholder={"type de la mesure"}
                 value={mesureType}
                 onChange={option => changeMesureType(option)}
               />
@@ -38,7 +38,7 @@ const MandataireFilters = props => {
                 <Select
                   size="small"
                   options={MESURE_STATUS_LABEL_VALUE}
-                  placeholder={"État de la mesure"}
+                  placeholder={"état de la mesure"}
                   value={mesureStatus}
                   onChange={option => changeMesureStatus(option)}
                 />
@@ -54,7 +54,7 @@ const MandataireFilters = props => {
             onChange={event => changeSearchText(event.target.value)}
             name="search"
             size="small"
-            placeholder="Rechercher une mesure"
+            placeholder="n° RG ou n° dossier"
           />
         </Box>
       </Flex>
