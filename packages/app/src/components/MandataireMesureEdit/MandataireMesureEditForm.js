@@ -183,7 +183,7 @@ export const MandataireMesureEditForm = props => {
               name="annee"
               hasError={formik.errors.annee && formik.touched.annee}
               onChange={formik.handleChange}
-              placeholder="année"
+              placeholder="année de naissance"
             />
           </Field>
           <Field>
