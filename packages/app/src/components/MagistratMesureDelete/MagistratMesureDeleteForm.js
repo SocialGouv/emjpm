@@ -12,17 +12,8 @@ import { MagistratMesureRemoveStyle } from "./style";
 export const MagistratMesureDeleteForm = props => {
   const { mesure } = props;
 
-  const [deleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE, {
-    onCompleted() {
-      Router.push(`/magistrats/mesures`);
-    }
-  });
-
-  const [deleteServiceMesure] = useMutation(DELETE_SERVICE_MESURE, {
-    onCompleted() {
-      Router.push(`/magistrats/mesures`);
-    }
-  });
+  const [deleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE);
+  const [deleteServiceMesure] = useMutation(DELETE_SERVICE_MESURE);
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
