@@ -1,4 +1,4 @@
-import { Button, Field, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, Input, Select, Text, Textarea } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
@@ -177,13 +177,14 @@ const MandatairesEditInformationsForm = props => {
         </Field>
       )}
       <Field>
-        <Input
+        <Textarea
           value={formik.values.competences}
           id="competences"
           name="competences"
-          hasError={formik.errors.competences && formik.touched.competences}
+          error={formik.errors.competences}
           onChange={formik.handleChange}
-          placeholder="Compétences"
+          label="Informations pour le magistrat"
+          placeholder="Préférences géographiques, compétences, ..."
         />
         {formik.errors.competences && formik.touched.competences && (
           <Text>{formik.errors.competences}</Text>

@@ -74,7 +74,7 @@ const ServiceInformations = props => {
               );
             })}
             <Heading5 mt="5" mb="3">
-              Compétences du services
+              Informations pour le magistrat
             </Heading5>
             <Text sx={topTextStyle}>{competences}</Text>
           </Box>

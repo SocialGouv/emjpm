@@ -1,4 +1,4 @@
-import { Button, Field, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, Input, Text, Textarea } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
 
@@ -94,13 +94,14 @@ const ServiceEditForm = props => {
         {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
       </Field>
       <Field>
-        <Input
+        <Textarea
           value={formik.values.competences}
           id="competences"
           name="competences"
-          hasError={formik.errors.competences && formik.touched.competences}
+          error={formik.errors.competences}
           onChange={formik.handleChange}
-          placeholder="Compétences"
+          label="Informations pour le magistrat"
+          placeholder="Préférences géographiques, compétences, ..."
         />
       </Field>
       <Field>
