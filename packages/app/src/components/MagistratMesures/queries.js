@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const MESURES = gql`
-  query mesures($type: String, $status: String, $searchText: String, $offset: Int) {
+  query magistratMesures($type: String, $status: String, $searchText: String, $offset: Int) {
     mesures_aggregate(
       where: {
         numero_rg: { _ilike: $searchText }
