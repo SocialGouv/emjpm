@@ -59,6 +59,7 @@ export const formatMandataire = (
     currentDiscriminator = {
       adresse: service.adresse ? capitalize(service.adresse) : "non renseigné",
       codePostal: service.code_postal ? capitalize(service.code_postal) : "non renseigné",
+      competences: service.competences || "non renseigné",
       email: service.email ? service.email : "non renseigné",
       etablissement: service.etablissement ? service.etablissement : "non renseigné",
       genre: "F",
@@ -77,6 +78,7 @@ export const formatMandataire = (
     currentDiscriminator = {
       adresse: mandataire.adresse ? capitalize(mandataire.adresse) : "non renseigné",
       codePostal: mandataire.code_postal ? capitalize(mandataire.code_postal) : "non renseigné",
+      competences: mandataire.competences || "non renseigné",
       email: mandataire.user && mandataire.user.email ? mandataire.user.email : "non renseigné",
       genre: mandataire.genre ? mandataire.genre : "F",
       id: `${discriminator}-${mandataire.id}`,

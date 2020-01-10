@@ -22,6 +22,7 @@ export const MANDATAIRE = gql`
         telephone
         telephone_portable
         ville
+        competences
       }
     }
   }

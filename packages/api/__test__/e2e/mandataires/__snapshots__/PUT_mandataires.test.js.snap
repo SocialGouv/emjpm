@@ -4,6 +4,7 @@ exports[`mandataire should update his profile 1`] = `
 Object {
   "adresse": "21 rue de houx",
   "code_postal": "62000",
+  "competences": null,
   "created_at": Any<String>,
   "date_mesure_update": null,
   "department_id": 6,
@@ -27,6 +28,5 @@ Object {
   "type": "individuel",
   "user_id": 1,
   "ville": "Arras",
-  "zip": null,
 }
 `;

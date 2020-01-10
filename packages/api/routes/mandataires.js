@@ -141,7 +141,7 @@ const WHITELIST = [
   "secretariat",
   "nb_secretariat",
   "mesures_en_cours",
-  "zip"
+  "competences"
 ];
 
 const whiteList = obj =>
@@ -189,7 +189,7 @@ router.put(
         ville,
         dispo_max,
         secretariat,
-        zip,
+        competences,
         etablissement,
         mesures_en_cours,
         nb_secretariat,
@@ -217,7 +217,7 @@ router.put(
         ville,
         dispo_max,
         secretariat,
-        zip,
+        competences,
         etablissement,
         mesures_en_cours,
         nb_secretariat
