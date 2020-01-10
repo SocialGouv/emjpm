@@ -119,7 +119,9 @@ const MagistratMesureMandataireContent = props => {
           </Box>
           <Box width="50%">
             <Box>
-              <Text sx={MagistratMesureTitleMandataireStyle}>Compétences</Text>
+              <Text sx={MagistratMesureTitleMandataireStyle}>
+                Informations (Préférences géographiques, compétences, ...)
+              </Text>
               <Text sx={MagistratMesureContentMandataireStyle}>{competences}</Text>
             </Box>
             <Box>
