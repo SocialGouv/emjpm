@@ -393,6 +393,12 @@ Object {
     "nullable": false,
     "type": "character varying",
   },
+  "competences": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "text",
+  },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
     "maxLength": null,
@@ -506,12 +512,6 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
-  },
-  "zip": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "text",
   },
 }
 `;
@@ -961,6 +961,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "competences": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
     "maxLength": null,
@@ -996,12 +1002,6 @@ Object {
     "maxLength": null,
     "nullable": false,
     "type": "integer",
-  },
-  "information": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
   },
   "latitude": Object {
     "defaultValue": null,

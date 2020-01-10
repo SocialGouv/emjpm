@@ -80,7 +80,8 @@ const MandatairesEditInformations = props => {
           latitude: values.geocode.latitude,
           longitude: values.geocode.longitude,
           secretariat: values.secretariat.value,
-          nb_secretariat: parseFloat(values.nb_secretariat)
+          nb_secretariat: parseFloat(values.nb_secretariat),
+          competences: values.competences
         }
       });
     }

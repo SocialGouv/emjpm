@@ -5,6 +5,7 @@ Array [
   Object {
     "adresse": "21 rue de houx",
     "code_postal": "62000",
+    "competences": null,
     "date_mesure_update": null,
     "department_id": 6,
     "dispo_max": 5,
@@ -27,11 +28,11 @@ Array [
     "type": "individuel",
     "user_id": 1,
     "ville": "Arras",
-    "zip": null,
   },
   Object {
     "adresse": "21 rue monge",
     "code_postal": "62000",
+    "competences": null,
     "date_mesure_update": null,
     "department_id": 6,
     "dispo_max": 3,
@@ -54,7 +55,6 @@ Array [
     "type": "prepose",
     "user_id": 2,
     "ville": "Paris",
-    "zip": null,
   },
 ]
 `;
@@ -72,6 +72,7 @@ exports[`should GET mandataire profile 1`] = `
 Object {
   "adresse": "21 rue de houx",
   "code_postal": "62000",
+  "competences": null,
   "date_mesure_update": null,
   "department_id": 6,
   "dispo_max": 5,
@@ -94,6 +95,5 @@ Object {
   "type": "individuel",
   "user_id": 1,
   "ville": "Arras",
-  "zip": null,
 }
 `;
