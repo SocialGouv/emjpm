@@ -162,6 +162,7 @@ export const MANDATAIRE_USERS = gql`
         nb_secretariat
         siret
         adresse
+        competences
       }
     }
   }

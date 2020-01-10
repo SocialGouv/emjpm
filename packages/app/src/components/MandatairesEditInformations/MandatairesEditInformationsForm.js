@@ -1,4 +1,4 @@
-import { Button, Field, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, Input, Select, Text, Textarea } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
@@ -31,6 +31,7 @@ const MandatairesEditInformationsForm = props => {
       telephone_portable: mandataire.telephone_portable || "",
       secretariat: SECRETARIAT_OPTIONS.find(el => el.value === mandataire.secretariat),
       nb_secretariat: mandataire.nb_secretariat || "",
+      competences: mandataire.competences || "",
       geocode
     }
   });
@@ -175,6 +176,20 @@ const MandatairesEditInformationsForm = props => {
           )}
         </Field>
       )}
+      <Field>
+        <Textarea
+          value={formik.values.competences}
+          id="competences"
+          name="competences"
+          error={formik.errors.competences}
+          onChange={formik.handleChange}
+          label="Informations pour le magistrat"
+          placeholder="Préférences géographiques, compétences, ..."
+        />
+        {formik.errors.competences && formik.touched.competences && (
+          <Text>{formik.errors.competences}</Text>
+        )}
+      </Field>
 
       <Flex alignItems="center" justifyContent="flex-end">
         <Box mr="2">

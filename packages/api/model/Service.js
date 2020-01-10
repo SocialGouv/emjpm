@@ -25,7 +25,7 @@ class Service extends Model {
         dispo_max: {
           type: "integer"
         },
-        zip: {
+        competences: {
           type: "string"
         }
       }

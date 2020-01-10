@@ -1,6 +1,7 @@
 import * as Yup from "yup";
 
 const mandataireEditSchema = Yup.object().shape({
+  competences: Yup.string(),
   dispo_max: Yup.number("Le champs doit être en nombre").required("Champ obligatoire"),
   email: Yup.string("Champ obligatoire")
     .email("Le format de votre email n'est pas correct")
