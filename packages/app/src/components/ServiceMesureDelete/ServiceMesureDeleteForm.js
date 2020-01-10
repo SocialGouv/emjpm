@@ -7,26 +7,21 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { DELETE_MESURE } from "../ServiceMesures/mutations";
-import { MESURES } from "../ServiceMesures/queries";
 
 export const ServiceDeleteMesureForm = props => {
-  const { mesureId, queryVariables } = props;
-  const [updateMesure] = useMutation(DELETE_MESURE, {
-    onCompleted() {
-      Router.push(`/services`);
-    }
-  });
+  const { mesureId } = props;
+  const [deleteMesure] = useMutation(DELETE_MESURE);
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
-      await updateMesure({
-        refetchQueries: [{ query: MESURES, variables: queryVariables }],
+      await deleteMesure({
         variables: {
           id: mesureId
         }
       });
 
       setSubmitting(false);
+      Router.push(`/services`);
     },
     validationSchema: Yup.object().shape({
       reason_delete: Yup.string().required("Required")
