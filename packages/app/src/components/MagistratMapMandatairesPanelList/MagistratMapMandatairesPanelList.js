@@ -44,7 +44,6 @@ const MagistratMapMandatairesPanelList = () => {
   }
 
   const selectMarker = ({ id, discriminator, longitude, latitude }) => {
-    console.log(id, discriminator, longitude, latitude);
     setCurrentMarker({
       isActive: true,
       id: id,

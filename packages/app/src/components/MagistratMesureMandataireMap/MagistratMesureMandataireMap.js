@@ -5,7 +5,6 @@ import { mapImages } from "../Map/utils";
 
 const MagistratMesureMandataireMap = props => {
   const { latitude, longitude, id, discriminator } = props;
-  console.log(latitude, longitude, id, discriminator);
   return (
     <MapContainer latitude={latitude} longitude={longitude}>
       <MapLayer image={mapImages["MESURE"]} items={[{ id, latitude, longitude }]} type={"MESURE"} />
