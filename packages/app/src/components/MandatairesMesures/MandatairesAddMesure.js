@@ -43,7 +43,8 @@ export const MandatairesAddMesure = props => {
                 offset: 0,
                 searchText: null,
                 status: null,
-                type: null
+                type: null,
+                excludeStatus: "Mesure en attente"
               }
             }
           ],
