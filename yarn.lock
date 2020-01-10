@@ -2787,10 +2787,10 @@
     styled-icons "^9.1.0"
     theme-ui "^0.2.52"
 
-"@socialgouv/emjpm-ui-core@^1.14.2":
-  version "1.14.2"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.14.2.tgz#46998bd5d274e1787eab8ba914c33f6877e4d51a"
-  integrity sha512-AmtknrPZwmWnCsVtpZKVrxbfu1Jtxeu55G+oongO99kZaAT6xVjdLwnjwU1zedLSgdubAJ/DmeMP+WOWj1bNHA==
+"@socialgouv/emjpm-ui-core@^1.14.3":
+  version "1.14.3"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.14.3.tgz#7c2cb890063715d2301269721192f7f5ea1437ac"
+  integrity sha512-uXBK/7yApyXWlf2UIsxgSb8TCaaKCsKUNn9KigIt/4+VjFF8n+E09rVbdwB0x1Qda32INXccx/8sTm4yOP3acQ==
   dependencies:
     "@emotion/core" "^10.0.22"
     "@emotion/styled" "^10.0.23"
@@ -2802,10 +2802,10 @@
     styled-icons "^9.1.0"
     theme-ui "^0.2.52"
 
-"@socialgouv/emjpm-ui-core@^1.14.3":
-  version "1.14.3"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.14.3.tgz#7c2cb890063715d2301269721192f7f5ea1437ac"
-  integrity sha512-uXBK/7yApyXWlf2UIsxgSb8TCaaKCsKUNn9KigIt/4+VjFF8n+E09rVbdwB0x1Qda32INXccx/8sTm4yOP3acQ==
+"@socialgouv/emjpm-ui-core@^1.16.0":
+  version "1.16.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.16.0.tgz#0b5b389934580662d235478d0955426ab88e02fc"
+  integrity sha512-etIy8iUjkTTrhk4DlNPxvxxk75onGRLBp/8ENpRiXcFieBAyWNcmXRMzg0bNtjcHNjZHs3+ifiQ1iZBqibGH7Q==
   dependencies:
     "@emotion/core" "^10.0.22"
     "@emotion/styled" "^10.0.23"

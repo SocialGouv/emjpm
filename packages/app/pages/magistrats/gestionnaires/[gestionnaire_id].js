@@ -18,12 +18,12 @@ const Gestionnaire = props => {
   return (
     <LayoutMagistrat>
       <BoxWrapper mt={6} px="0">
-        <MagistratMandataire serviceId={serviceId} mandataireId={mandataireId} tiId={tiId} />
         <MagistratMesureMandataireContent
           serviceId={serviceId}
           mandataireId={mandataireId}
           tiId={tiId}
         />
+        <MagistratMandataire serviceId={serviceId} mandataireId={mandataireId} tiId={tiId} />
       </BoxWrapper>
     </LayoutMagistrat>
   );
