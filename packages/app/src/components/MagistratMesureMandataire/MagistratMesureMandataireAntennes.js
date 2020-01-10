@@ -1,17 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
+import { Antenne } from "@socialgouv/emjpm-ui-components";
 import { Card, Heading3, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import PropTypes from "prop-types";
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box } from "rebass";
 
 import { SERVICE_ANTENNES } from "./queries";
-import { boxStyle, MagistratMesureAntennesStyle } from "./style";
-
-const countColor = isOvercapacity => {
-  return {
-    color: isOvercapacity ? "error" : "success"
-  };
-};
 
 const MagistratMesureMandataireAntennes = props => {
   const { serviceId } = props;
@@ -46,32 +40,26 @@ const MagistratMesureMandataireAntennes = props => {
   }
 
   return (
-    <Box sx={MagistratMesureAntennesStyle}>
-      <Heading3 mb="2">Liste des antennes du service</Heading3>
+    <Box>
+      <Heading3 mt="4" mb="3">
+        Liste des antennes du service
+      </Heading3>
       <Box
         css={{
           display: "grid",
-          gridGap: "1%",
-          gridTemplateColumns: "repeat(auto-fit, minmax(24%, 49%))"
+          gridGap: 15,
+          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]
         }}
       >
         {service_antenne.map(antenne => {
+          antenne = { ...antenne, preferences: [] };
           return (
-            <Card sx={boxStyle} bg="white" key={antenne.id}>
-              <Flex>
-                <Box width="60%">
-                  <Heading4 mb="4px">{antenne.name}</Heading4>
-                  <Text>
-                    {antenne.address_zip_code} {antenne.address_city}
-                  </Text>
-                </Box>
-                <Box width="40%" textAlign="right">
-                  <Heading4 sx={countColor(antenne.mesures_in_progress >= antenne.mesures_max)}>
-                    {antenne.mesures_in_progress}/{antenne.mesures_max}
-                  </Heading4>
-                </Box>
-              </Flex>
-            </Card>
+            <Antenne
+              sx={{ minHeight: "200px", p: "3" }}
+              key={antenne.id}
+              antenne={antenne}
+              hasButton={false}
+            />
           );
         })}
       </Box>
@@ -82,4 +70,5 @@ const MagistratMesureMandataireAntennes = props => {
 MagistratMesureMandataireAntennes.propTypes = {
   serviceId: PropTypes.number
 };
+
 export { MagistratMesureMandataireAntennes };
