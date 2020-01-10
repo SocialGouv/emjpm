@@ -1,14 +1,8 @@
 import React from "react";
 import { Feature, Layer } from "react-mapbox-gl";
 
-import iconMarker from "../../../public/static/images/map-icon-mesure@2x.png";
-
-const image = new Image(60, 72);
-image.src = iconMarker;
-const images = ["mesure", image, { pixelRatio: 2 }];
-
 const MapLayer = props => {
-  const { markers, type, onClick } = props;
+  const { items, type, image, onMarkerClick } = props;
   return (
     <Layer
       onMouseEnter={e => {
@@ -19,20 +13,15 @@ const MapLayer = props => {
       }}
       type="symbol"
       id={type}
-      images={images}
+      images={image}
       layout={{ "icon-image": type }}
     >
-      {markers.map(marker => {
-        const { id, latitude, longitude } = marker;
+      {items.map(item => {
+        const { id, longitude, latitude } = item;
         return (
           <Feature
+            onClick={() => onMarkerClick({ id, type, longitude, latitude })}
             key={id}
-            onClick={onClick}
-            properties={{
-              currentId: id,
-              latitude: latitude,
-              longitude: longitude
-            }}
             coordinates={[longitude, latitude]}
           />
         );

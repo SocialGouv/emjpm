@@ -10,7 +10,8 @@ export const formatMandatairesList = mandatairesList => {
       mandataire,
       gestionnaire_tis,
       mesures_awaiting,
-      service
+      service,
+      id
     } = row.gestionnaire;
     return formatMandataire(
       remaining_capacity,
@@ -20,7 +21,8 @@ export const formatMandatairesList = mandatairesList => {
       service,
       mandataire,
       mesures_awaiting,
-      gestionnaire_tis
+      gestionnaire_tis,
+      id
     );
   });
 };

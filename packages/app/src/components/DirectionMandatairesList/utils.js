@@ -8,7 +8,8 @@ export const formatMandatairesList = mandatairesList => {
       mesures_max,
       mesures_in_progress,
       service,
-      mandataire
+      mandataire,
+      id
     } = row;
     return formatMandataire(
       remaining_capacity,
@@ -16,7 +17,8 @@ export const formatMandatairesList = mandatairesList => {
       mesures_max,
       mesures_in_progress,
       service,
-      mandataire
+      mandataire,
+      id
     );
   });
 };

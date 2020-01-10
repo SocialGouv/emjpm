@@ -49,20 +49,6 @@ const topTextStyle = {
   mt: "2"
 };
 
-const MagistratCommentsStyle = {
-  bg: "white",
-  borderRadius: "6px",
-  overFlow: "hidden",
-  flexWrap: "wrap",
-  position: "relative",
-  mt: "6",
-  flexGrow: 1,
-  flexBasis: 380,
-  maxWidth: "380px",
-  p: "3",
-  mr: "2%"
-};
-
 const MagistratMesureAntennesStyle = {
   px: 4,
   mt: "6",
@@ -82,6 +68,5 @@ export {
   MagistratMesureContentMandataireStyle,
   topTextStyle,
   boxStyle,
-  MagistratCommentsStyle,
   MagistratMesureAntennesStyle
 };

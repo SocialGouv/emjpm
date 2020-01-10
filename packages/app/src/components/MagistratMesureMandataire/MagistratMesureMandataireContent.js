@@ -5,10 +5,8 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { MagistratMesureMandataireAntennes } from "./MagistratMesureMandataireAntennes";
-import { MagistratMesureMandataireComments } from "./MagistratMesureMandataireComments";
 import { GESTIONNAIRES } from "./queries";
 import {
-  MagistratCommentsStyle,
   MagistratMesureContentMandataireStyle,
   MagistratMesureMainMandataireStyle,
   MagistratMesureMandataireStyle,
@@ -17,14 +15,13 @@ import {
 } from "./style";
 import { formatGestionnaire } from "./utils";
 
-const MagistratMesureMap = dynamic(
-  () => import("../MagistratMesureMap").then(mod => mod.MagistratMesureMap),
+const MagistratMesureMandataireMap = dynamic(
+  () => import("../MagistratMesureMandataireMap").then(mod => mod.MagistratMesureMandataireMap),
   { ssr: false }
 );
 
 const MagistratMesureMandataireContent = props => {
-  const { serviceId, mandataireId, tiId } = props;
-
+  const { serviceId, mandataireId } = props;
   const { data, error, loading } = useQuery(GESTIONNAIRES, {
     variables: {
       mandataire_id: mandataireId,
@@ -67,6 +64,7 @@ const MagistratMesureMandataireContent = props => {
     nom,
     prenom,
     telephone,
+    discriminator,
     latitude,
     longitude,
     ville,
@@ -77,9 +75,6 @@ const MagistratMesureMandataireContent = props => {
   return (
     <Box {...props} width="100%" mb={6}>
       <Flex sx={MagistratMesureMandataireStyle}>
-        <Box sx={MagistratMesureSideMandataireStyle}>
-          <MagistratMesureMap longitude={longitude} latitude={latitude} id={id} />
-        </Box>
         <Flex sx={MagistratMesureMainMandataireStyle}>
           <Box width="50%">
             {mandataireId && (
@@ -147,17 +142,15 @@ const MagistratMesureMandataireContent = props => {
           </Box>
         </Flex>
       </Flex>
-
-      <Flex width="100%">
-        <Box sx={MagistratCommentsStyle}>
-          <MagistratMesureMandataireComments
-            tiId={tiId}
-            serviceId={serviceId}
-            mandataireId={mandataireId}
-          />
-        </Box>
-        {serviceId && <MagistratMesureMandataireAntennes serviceId={serviceId} />}
-      </Flex>
+      <Box height="400px" mt="5" sx={MagistratMesureSideMandataireStyle}>
+        <MagistratMesureMandataireMap
+          longitude={longitude}
+          discriminator={discriminator}
+          latitude={latitude}
+          id={id}
+        />
+      </Box>
+      <Box>{serviceId && <MagistratMesureMandataireAntennes serviceId={serviceId} />}</Box>
     </Box>
   );
 };

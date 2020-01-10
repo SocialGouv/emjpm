@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MandataireListItem } from "@socialgouv/emjpm-ui-components";
-import Router from "next/router";
 import React, { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
 import { formatMandatairesList } from "../MagistratMandatairesList/utils";
+import { MapContext } from "../Map/context";
 import { UserContext } from "../UserContext";
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { MagistratMapMandataireListStyle } from "./style";
@@ -19,6 +19,7 @@ const MagistratMapMandatairesPanelList = () => {
   } = useContext(UserContext);
 
   const [currentOffset, setCurrentOffset] = useState(0);
+  const { setCurrentMarker } = useContext(MapContext);
 
   const { data, error, loading } = useQuery(
     MESURES_GESTIONNAIRE,
@@ -42,6 +43,17 @@ const MagistratMapMandatairesPanelList = () => {
     return <div>error</div>;
   }
 
+  const selectMarker = ({ id, discriminator, longitude, latitude }) => {
+    console.log(id, discriminator, longitude, latitude);
+    setCurrentMarker({
+      isActive: true,
+      id: id,
+      type: discriminator,
+      longitude: longitude,
+      latitude: latitude
+    });
+  };
+
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
   const gestionnaires = formatMandatairesList(data.mandatairesList);
@@ -54,7 +66,7 @@ const MagistratMapMandatairesPanelList = () => {
               <MandataireListItem
                 key={gestionnaire.id}
                 isMagistratMap
-                onClick={() => Router.push(`/magistrats/gestionnaires/${gestionnaire.id}`)}
+                onClick={() => selectMarker(gestionnaire)}
                 gestionnaire={gestionnaire}
               />
             );

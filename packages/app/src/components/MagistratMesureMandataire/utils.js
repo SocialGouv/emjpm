@@ -8,7 +8,8 @@ export const formatGestionnaire = ({
   gestionnaire_tis,
   mesures_awaiting,
   remaining_capacity,
-  service
+  service,
+  id
 }) => {
   return formatMandataire(
     remaining_capacity,
@@ -18,6 +19,7 @@ export const formatGestionnaire = ({
     service,
     mandataire,
     mesures_awaiting,
-    gestionnaire_tis
+    gestionnaire_tis,
+    id
   );
 };

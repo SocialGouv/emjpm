@@ -2,4 +2,11 @@ const MagistratMandataireStyle = {
   bg: "white"
 };
 
-export { MagistratMandataireStyle };
+const MagistratCommentsStyle = {
+  overFlow: "hidden",
+  flexWrap: "wrap",
+  position: "relative",
+  mt: "6"
+};
+
+export { MagistratMandataireStyle, MagistratCommentsStyle };

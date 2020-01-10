@@ -8,8 +8,10 @@ import { Box, Flex } from "rebass";
 
 import { CIVILITY, IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { magistratMandataireSchema } from "../../lib/validationSchemas";
+import { MagistratMesureMandataireComments } from "../MagistratMesureMandataire/MagistratMesureMandataireComments";
 import { UserContext } from "../UserContext";
 import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
+import { MagistratCommentsStyle } from "./style";
 
 export const MagistratMandataireForm = props => {
   const { serviceId, mandataireId } = props;
@@ -90,6 +92,13 @@ export const MagistratMandataireForm = props => {
         <Text lineHeight="1.5" mt=" 2">
           {`Une fois les informations souhaitées remplies, cliquer sur "Enregistrer".`}
         </Text>
+        <Box sx={MagistratCommentsStyle}>
+          <MagistratMesureMandataireComments
+            tiId={tiId}
+            serviceId={serviceId}
+            mandataireId={mandataireId}
+          />
+        </Box>
       </Box>
       <Box p="5" sx={{ flexGrow: 99999, flexBasis: 0, minWidth: 320 }}>
         <Box mb="3">
