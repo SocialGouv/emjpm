@@ -7,7 +7,7 @@ import { Box } from "rebass";
 
 import { SERVICE_ANTENNES } from "./queries";
 
-const MagistratMesureMandataireAntennes = props => {
+const MagistratServiceAntennes = props => {
   const { serviceId } = props;
   const { data, error, loading } = useQuery(SERVICE_ANTENNES, {
     variables: {
@@ -67,8 +67,8 @@ const MagistratMesureMandataireAntennes = props => {
   );
 };
 
-MagistratMesureMandataireAntennes.propTypes = {
+MagistratServiceAntennes.propTypes = {
   serviceId: PropTypes.number
 };
 
-export { MagistratMesureMandataireAntennes };
+export { MagistratServiceAntennes };

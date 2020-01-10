@@ -8,12 +8,12 @@ import { Box, Flex } from "rebass";
 
 import { CIVILITY, IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { magistratMandataireSchema } from "../../lib/validationSchemas";
-import { MagistratMesureMandataireComments } from "../MagistratMesureMandataire/MagistratMesureMandataireComments";
+import { MagistratMandataireComments } from "../MagistratMandataireComments";
 import { UserContext } from "../UserContext";
 import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
 import { MagistratCommentsStyle } from "./style";
 
-export const MagistratMandataireForm = props => {
+export const MagistratMesureAddForm = props => {
   const { serviceId, mandataireId } = props;
   const {
     cabinet,
@@ -93,7 +93,7 @@ export const MagistratMandataireForm = props => {
           {`Une fois les informations souhaitées remplies, cliquer sur "Enregistrer".`}
         </Text>
         <Box sx={MagistratCommentsStyle}>
-          <MagistratMesureMandataireComments
+          <MagistratMandataireComments
             tiId={tiId}
             serviceId={serviceId}
             mandataireId={mandataireId}
@@ -203,7 +203,7 @@ export const MagistratMandataireForm = props => {
   );
 };
 
-MagistratMandataireForm.propTypes = {
+MagistratMesureAddForm.propTypes = {
   antenneId: PropTypes.number,
   mandataireId: PropTypes.number
 };
