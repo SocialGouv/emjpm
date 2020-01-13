@@ -4,11 +4,11 @@ import React, { useContext } from "react";
 
 import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discriminator";
 import { UserContext } from "../UserContext";
-import { MESURES_GESTIONNAIRE } from "./queries";
+import { MESURES_GESTIONNAIRES } from "./queries";
 import { filterGestionnairesByDiscriminator } from "./utils";
 
 const MagistratMapMandataires = dynamic(
-  () => import("./MagistratMapMandataires").then(mod => mod.MagistratMapMandataires),
+  () => import("./MagistratMandatairesMap").then(mod => mod.MagistratMapMandataires),
   { ssr: false }
 );
 
@@ -16,7 +16,7 @@ const MagistratMandataires = () => {
   const { magistrat } = useContext(UserContext);
   const { ti_id } = magistrat;
 
-  const { data, error, loading } = useQuery(MESURES_GESTIONNAIRE, {
+  const { data, error, loading } = useQuery(MESURES_GESTIONNAIRES, {
     variables: {
       tiId: ti_id
     },
