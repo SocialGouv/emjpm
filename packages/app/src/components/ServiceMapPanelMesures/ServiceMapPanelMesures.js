@@ -9,7 +9,7 @@ import { Box, Flex } from "rebass";
 import { formatMesureList } from "../../util/services";
 import { MESURES } from "./queries";
 import { ServiceMapPanelMesuresStyle } from "./style";
-const RESULT_PER_PAGE = 50;
+const RESULT_PER_PAGE = 20;
 
 const ServiceMapPanelMesures = props => {
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -53,7 +53,7 @@ const ServiceMapPanelMesures = props => {
                     hasLocation={false}
                     hasTribunal={false}
                     hasFolderNumber={false}
-                    onItemClick={({ mesure }) => selectMesure(mesure)}
+                    onClick={({ mesure }) => selectMesure(mesure)}
                   />
                 );
               })}
