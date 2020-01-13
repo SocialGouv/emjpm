@@ -51,7 +51,7 @@ const MandataireMapPanelMesures = props => {
                     hasLocation={false}
                     hasTribunal={false}
                     hasFolderNumber={false}
-                    onItemClick={({ mesure }) => selectMesure(mesure)}
+                    onClick={({ mesure }) => selectMesure(mesure)}
                   />
                 );
               })}
