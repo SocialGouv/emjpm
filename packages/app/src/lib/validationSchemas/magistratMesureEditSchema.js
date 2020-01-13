@@ -1,11 +1,11 @@
-import * as Yup from "yup";
+import yup from "./yup";
 
-const magistratMesureEditSchema = Yup.object().shape({
-  annee: Yup.string().required(),
-  cabinet: Yup.string(),
-  civilite: Yup.string().required(),
-  numero_rg: Yup.string().required(),
-  type: Yup.string().required()
+const magistratMesureEditSchema = yup.object().shape({
+  annee: yup.string().required(),
+  cabinet: yup.string(),
+  civilite: yup.string().required(),
+  numero_rg: yup.string().required(),
+  type: yup.string().required()
 });
 
 export { magistratMesureEditSchema };
