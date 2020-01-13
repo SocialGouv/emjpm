@@ -88,70 +88,72 @@ const MagistratMesureMandataire = props => {
             id={id}
           />
         </Box>
-        <Flex sx={MagistratMainStyle}>
-          <Box width="50%">
-            {mandataireId && (
+        <Flex sx={MagistratMainStyle} flexDirection="column">
+          <Flex>
+            <Box width="50%">
+              {mandataireId && (
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>Nom du mandataire</Text>
+                  <Text sx={MagistratContentMandataireStyle}>{`${prenom} ${nom}`}</Text>
+                </Box>
+              )}
+              {serviceId && (
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>{`Nom de l'association`}</Text>
+                  <Text sx={MagistratContentMandataireStyle}>{etablissement}</Text>
+                </Box>
+              )}
               <Box>
-                <Text sx={MagistratTitleMandataireStyle}>Nom du mandataire</Text>
-                <Text sx={MagistratContentMandataireStyle}>{`${prenom} ${nom}`}</Text>
+                <Text sx={MagistratTitleMandataireStyle}>{`Adresse d’activité`}</Text>
+                <Text
+                  sx={MagistratContentMandataireStyle}
+                >{`${adresse} ${codePostal} ${ville}`}</Text>
               </Box>
-            )}
-            {serviceId && (
               <Box>
-                <Text sx={MagistratTitleMandataireStyle}>{`Nom de l'association`}</Text>
-                <Text sx={MagistratContentMandataireStyle}>{etablissement}</Text>
+                <Text sx={MagistratTitleMandataireStyle}>Dernière connexion</Text>
+                <Text color={lastLoginColor} sx={MagistratContentMandataireStyle}>
+                  {lastLogin}
+                </Text>
               </Box>
-            )}
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>{`Adresse d’activité`}</Text>
-              <Text
-                sx={MagistratContentMandataireStyle}
-              >{`${adresse} ${codePostal} ${ville}`}</Text>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>Tribunaux d’instance</Text>
+                {tis.map(ti => {
+                  return (
+                    <Text key={ti.tis.id} sx={MagistratTribunal}>
+                      {ti.tis.etablissement}
+                    </Text>
+                  );
+                })}
+              </Box>
             </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Dernière connexion</Text>
-              <Text color={lastLoginColor} sx={MagistratContentMandataireStyle}>
-                {lastLogin}
-              </Text>
+            <Box width="50%">
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>Email</Text>
+                <Text sx={MagistratContentMandataireStyle}>{email}</Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>Téléphone</Text>
+                <Text sx={MagistratContentMandataireStyle}>{telephone}</Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
+                <Text sx={MagistratContentMandataireStyle}>{dispoMax}</Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>Mesure en attente</Text>
+                <Text sx={MagistratContentMandataireStyle}>{mesuresAwaiting}</Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>Mesure en cours</Text>
+                <Text sx={MagistratContentMandataireStyle}>{mesuresInProgress}</Text>
+              </Box>
             </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Tribunaux d’instance</Text>
-              {tis.map(ti => {
-                return (
-                  <Text key={ti.tis.id} sx={MagistratTribunal}>
-                    {ti.tis.etablissement}
-                  </Text>
-                );
-              })}
-            </Box>
-          </Box>
-          <Box width="50%">
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>
-                Informations (Préférences géographiques, compétences, ...)
-              </Text>
-              <Text sx={MagistratContentMandataireStyle}>{competences}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Email</Text>
-              <Text sx={MagistratContentMandataireStyle}>{email}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Téléphone</Text>
-              <Text sx={MagistratContentMandataireStyle}>{telephone}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
-              <Text sx={MagistratContentMandataireStyle}>{dispoMax}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Mesure en attente</Text>
-              <Text sx={MagistratContentMandataireStyle}>{mesuresAwaiting}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Mesure en cours</Text>
-              <Text sx={MagistratContentMandataireStyle}>{mesuresInProgress}</Text>
-            </Box>
+          </Flex>
+          <Box pt={2}>
+            <Text sx={MagistratTitleMandataireStyle}>
+              Informations (Préférences géographiques, compétences, ...)
+            </Text>
+            <pre style={{ "white-space": "pre-wrap" }}>{competences}</pre>
           </Box>
         </Flex>
       </Flex>
