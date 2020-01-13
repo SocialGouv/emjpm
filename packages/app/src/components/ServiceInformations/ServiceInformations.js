@@ -81,7 +81,7 @@ const ServiceInformations = props => {
           </Heading5>
           <Flex justifyContent="flex-start">
             <Box mr={4}>
-              <pre>{competences}</pre>
+              <pre style={{ "white-space": "pre-wrap" }}>{competences}</pre>
             </Box>
           </Flex>
         </Box>
