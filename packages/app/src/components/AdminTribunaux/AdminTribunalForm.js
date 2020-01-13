@@ -1,4 +1,4 @@
-import { Button, Card, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
@@ -54,9 +54,7 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                   onChange={formik.handleChange}
                   placeholder="Nom du tribunal"
                 />
-                {formik.errors.etablissement && formik.touched.etablissement && (
-                  <Text>{formik.errors.etablissement}</Text>
-                )}
+                <InlineError message={formik.errors.etablissement} fieldId="etablissement" />
               </Field>
               <Field>
                 <Input
@@ -67,7 +65,7 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                   onChange={formik.handleChange}
                   placeholder="SIRET"
                 />
-                {formik.errors.siret && formik.touched.siret && <Text>{formik.errors.siret}</Text>}
+                <InlineError message={formik.errors.siret} fieldId="siret" />
               </Field>
               <Field mt="5">
                 <Input
@@ -78,7 +76,7 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                   onChange={formik.handleChange}
                   placeholder="Email"
                 />
-                {formik.errors.email && formik.touched.email && <Text>{formik.errors.email}</Text>}
+                <InlineError message={formik.errors.email} fieldId="email" />
               </Field>
               <Field>
                 <Input
@@ -89,18 +87,14 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                   onChange={formik.handleChange}
                   placeholder="Téléphone"
                 />
-                {formik.errors.telephone && formik.touched.telephone && (
-                  <Text>{formik.errors.telephone}</Text>
-                )}
+                <InlineError message={formik.errors.telephone} fieldId="telephone" />
               </Field>
               <Field>
                 <Geocode
                   resource={tribunal}
                   onChange={geocode => formik.setFieldValue("geocode", geocode)}
                 />
-                {formik.errors.geocode && formik.touched.geocode && (
-                  <Text>{formik.errors.geocode}</Text>
-                )}
+                <InlineError message={formik.errors.geocode} fieldId="geocode" />
               </Field>
               <Flex justifyContent="flex-end">
                 <Box>
