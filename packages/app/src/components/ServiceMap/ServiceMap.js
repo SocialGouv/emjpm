@@ -3,6 +3,7 @@ import Router from "next/router";
 import React, { useContext } from "react";
 
 import { MapContainer, MapLayer } from "../Map";
+import { mapImages } from "../Map/utils";
 import { UserContext } from "../UserContext";
 import { MESURES_SERVICE } from "./queries";
 
@@ -15,13 +16,8 @@ const ServiceMap = () => {
 
   const { data, loading, error } = useQuery(MESURES_SERVICE);
 
-  const selectMesure = event => {
-    const {
-      feature: {
-        properties: { currentId }
-      }
-    } = event;
-    Router.push(`/services/mesures/${currentId}`);
+  const selectMesure = ({ id }) => {
+    Router.push(`/services/mesures/${id}`);
   };
 
   if (loading) {
@@ -35,7 +31,12 @@ const ServiceMap = () => {
   const { mesures: mesuresMarkers } = data;
   return (
     <MapContainer latitude={latitude} longitude={longitude}>
-      <MapLayer markers={mesuresMarkers} onClick={event => selectMesure(event)} type="mesure" />
+      <MapLayer
+        items={mesuresMarkers}
+        image={mapImages["MESURE"]}
+        onMarkerClick={data => selectMesure(data)}
+        type="MESURE"
+      />
     </MapContainer>
   );
 };
