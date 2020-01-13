@@ -1,5 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import {
+  Button,
+  Field,
+  Heading3,
+  Heading5,
+  InlineError,
+  Input,
+  Select
+} from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -92,7 +100,7 @@ export const MandataireMesureAcceptForm = props => {
         </Box>
 
         <form onSubmit={formik.handleSubmit}>
-          <Box mb="2">
+          <Field>
             <Input
               value={formik.values.date_ouverture}
               id="date_ouverture"
@@ -102,9 +110,9 @@ export const MandataireMesureAcceptForm = props => {
               onChange={formik.handleChange}
               placeholder="Date d'ordonnance"
             />
-            {formik.errors.date_ouverture && <Text>{formik.errors.date_ouverture}</Text>}
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
+            <InlineError message={formik.errors.date_ouverture} fieldId="date_ouverture" />
+          </Field>
+          <Field>
             <Select
               id="residence"
               name="residence"
@@ -114,14 +122,12 @@ export const MandataireMesureAcceptForm = props => {
               onChange={option => formik.setFieldValue("residence", option)}
               options={RESIDENCE}
             />
-            {formik.errors.residence && <Text>{formik.errors.residence}</Text>}
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+            <InlineError message={formik.errors.residence} fieldId="residence" />
+          </Field>
+          <Field>
             <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-            {formik.errors.geocode && formik.touched.geocode && (
-              <Text>{formik.errors.geocode}</Text>
-            )}
-          </Box>
+            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+          </Field>
           <Flex justifyContent="flex-end">
             <Box>
               <Button
