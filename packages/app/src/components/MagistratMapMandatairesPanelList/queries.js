@@ -77,25 +77,3 @@ export const MESURES_GESTIONNAIRE = gql`
     }
   }
 `;
-
-export const MESURES_SERVICE = gql`
-  query MesureGestionnaire($id: Int!) {
-    mesures(where: { service_antenne: { service_id: { _eq: $id } } }) {
-      id
-      code_postal
-      longitude
-      latitude
-    }
-  }
-`;
-
-export const MESURES_MANDATAIRE = gql`
-  query MesureGestionnaire($id: Int!) {
-    mesures(where: { mandataire_id: { _eq: $id } }) {
-      id
-      code_postal
-      longitude
-      latitude
-    }
-  }
-`;

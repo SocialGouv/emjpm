@@ -3,11 +3,11 @@ import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 import { Edit, XCircle } from "styled-icons/boxicons-regular";
 
-import { MagistratMesureMandataireCommentForm } from "./MagistratMesureMandataireCommentForm";
+import { topTextStyle } from "../MagistratMandataire/style";
+import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
 import { REMOVE_COMMENT } from "./mutations";
-import { topTextStyle } from "./style";
 
-const MagistratMesureMandataireComment = props => {
+const MagistratMandataireComment = props => {
   const {
     setCurrentComment,
     currentComment,
@@ -22,7 +22,7 @@ const MagistratMesureMandataireComment = props => {
   return (
     <Fragment>
       {isEditOpen && currentComment === id ? (
-        <MagistratMesureMandataireCommentForm
+        <MagistratMandataireCommentForm
           toggleEditCommentForm={toggleEditCommentForm}
           id={id}
           isEditing
@@ -64,4 +64,4 @@ const MagistratMesureMandataireComment = props => {
   );
 };
 
-export { MagistratMesureMandataireComment };
+export { MagistratMandataireComment };

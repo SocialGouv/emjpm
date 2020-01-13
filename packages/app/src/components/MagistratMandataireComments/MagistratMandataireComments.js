@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
 import { Box, Text } from "rebass";
 
-import { MagistratMesureMandataireComment } from "./MagistratMesureMandataireComment";
-import { MagistratMesureMandataireCommentForm } from "./MagistratMesureMandataireCommentForm";
+import { MagistratMandataireComment } from "./MagistratMandataireComment";
+import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
 import { MANDATAIRE_COMMENTS } from "./queries";
 
-const MagistratMesureMandataireComments = props => {
+const MagistratMandataireComments = props => {
   const { tiId, serviceId, mandataireId } = props;
   const { data, error, loading } = useQuery(MANDATAIRE_COMMENTS, {
     variables: {
@@ -47,7 +47,7 @@ const MagistratMesureMandataireComments = props => {
         <Box width="100%">
           {commentaires.map(commentaire => {
             return (
-              <MagistratMesureMandataireComment
+              <MagistratMandataireComment
                 key={commentaire.id}
                 toggleCommentForm={toggleCommentForm}
                 currentComment={currentComment}
@@ -66,7 +66,7 @@ const MagistratMesureMandataireComments = props => {
         </Text>
       )}
       {isOpen ? (
-        <MagistratMesureMandataireCommentForm
+        <MagistratMandataireCommentForm
           toggleCommentForm={toggleCommentForm}
           tiId={tiId}
           serviceId={serviceId}
@@ -92,10 +92,10 @@ const MagistratMesureMandataireComments = props => {
   );
 };
 
-MagistratMesureMandataireComments.propTypes = {
+MagistratMandataireComments.propTypes = {
   mandataireId: PropTypes.number,
   serviceId: PropTypes.number,
   tiId: PropTypes.number
 };
 
-export { MagistratMesureMandataireComments };
+export { MagistratMandataireComments };

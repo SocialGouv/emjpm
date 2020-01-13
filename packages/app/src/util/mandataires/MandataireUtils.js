@@ -35,7 +35,8 @@ export const formatMandataire = (
   service,
   mandataire,
   mesures_awaiting,
-  gestionnaire_tis
+  gestionnaire_tis,
+  id
 ) => {
   let currentDiscriminator = {};
   const common = {
@@ -63,7 +64,7 @@ export const formatMandataire = (
       email: service.email ? service.email : "non renseigné",
       etablissement: service.etablissement ? service.etablissement : "non renseigné",
       genre: "F",
-      id: `${discriminator}-${service.id}`,
+      id: id,
       lastLogin: lastLogin ? formatLastLogin(lastLogin) : "non renseigné",
       lastLoginIsCritical: lastLogin && isCriticalDate(lastLogin),
       latitude: service.latitude || null,
@@ -81,7 +82,7 @@ export const formatMandataire = (
       competences: mandataire.competences || "non renseigné",
       email: mandataire.user && mandataire.user.email ? mandataire.user.email : "non renseigné",
       genre: mandataire.genre ? mandataire.genre : "F",
-      id: `${discriminator}-${mandataire.id}`,
+      id: id,
       lastLogin:
         mandataire.user && mandataire.user.last_login
           ? formatLastLogin(mandataire.user.last_login)
@@ -120,7 +121,7 @@ export const formatGestionnaireId = gestionnaireId => {
   const [discriminator, id] = gestionnaireId.split("-");
   let mandataireId = null;
   let serviceId = null;
-  if (discriminator === "SERVICE") {
+  if (discriminator === "service") {
     serviceId = id;
   } else {
     mandataireId = id;

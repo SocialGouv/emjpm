@@ -10,3 +10,9 @@ export const SECRETARIAT_ETP_OPTIONS = [
   { label: "supérieure à 70% jusqu'à 90%", value: "70_90_ETP" },
   { label: "à temps plein", value: "100_ETP" }
 ];
+
+export const TYPES = {
+  MANDATAIRE_IND: "prépose",
+  MANDATAIRE_PRE: "individuel",
+  SERVICE: "service"
+};
