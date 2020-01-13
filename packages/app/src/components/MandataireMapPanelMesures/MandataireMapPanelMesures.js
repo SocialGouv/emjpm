@@ -17,7 +17,7 @@ const MandataireMapPanelMesures = props => {
   const { data, error, loading } = useQuery(MESURES, {
     variables: {
       limit: RESULT_PER_PAGE,
-      offset: 0
+      offset: currentOffset
     }
   });
 
@@ -36,7 +36,7 @@ const MandataireMapPanelMesures = props => {
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
   const mesures = formatMesureList(data.mesures);
-
+  console.log(currentOffset);
   return (
     <Box sx={MandataireMapPanelMesuresStyle} {...props}>
       <Scrollbar style={{ width: "100%", height: "100%" }}>
