@@ -13,6 +13,7 @@ import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMesureSchema } from "./serviceMesureSchema";
 import { signupMagistratSchema } from "./signupMagistratSchema";
 import { signupSchema } from "./signupSchema";
+import { signupServiceSchema } from "./signupServiceSchema";
 
 export {
   adminTribunalSchema,
@@ -29,5 +30,6 @@ export {
   serviceAcceptMesureSchema,
   mandataireAcceptMesureSchema,
   signupMagistratSchema,
-  signupSchema
+  signupSchema,
+  signupServiceSchema
 };
