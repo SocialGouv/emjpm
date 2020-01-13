@@ -73,12 +73,18 @@ const ServiceInformations = props => {
                 </Text>
               );
             })}
-            <Heading5 mt="5" mb="3">
-              Informations pour le magistrat
-            </Heading5>
-            <Text sx={topTextStyle}>{competences}</Text>
           </Box>
         </Flex>
+        <Box sx={boxStyle}>
+          <Heading5 mt={2} mb="3">
+            Informations pour le magistrat
+          </Heading5>
+          <Flex justifyContent="flex-start">
+            <Box mr={4}>
+              <pre>{competences}</pre>
+            </Box>
+          </Flex>
+        </Box>
         <Flex mt="5">
           <ServiceEditLinkButton>Modifier les informations de votre service</ServiceEditLinkButton>
         </Flex>

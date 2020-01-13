@@ -99,7 +99,7 @@ const MandataireInformations = props => {
         </Flex>
         <Box sx={boxStyle}>
           <Heading4 mt={2} mb="3">
-            Information pour le magistrat
+            Informations pour le magistrat
           </Heading4>
           <Flex justifyContent="flex-start">
             <Box mr={4}>
