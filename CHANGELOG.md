@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.17.0](https://github.com/SocialGouv/emjpm/compare/v25.16.2...v25.17.0) (2020-01-13)
+
+
+### Bug Fixes
+
+* **exclude-status:** add missing excludeStatus params ([#1377](https://github.com/SocialGouv/emjpm/issues/1377)) ([1b713e3](https://github.com/SocialGouv/emjpm/commit/1b713e35c0e65f86b76679dafe91afe9375f892e))
+* **hasura-permission:** mesure - allow aggregations for prepose ([bde3ff7](https://github.com/SocialGouv/emjpm/commit/bde3ff7ccc4b122c19a454e19c627b57d27450b1))
+* **hasura-permission:** update permissions ([9b53917](https://github.com/SocialGouv/emjpm/commit/9b539177eb6f59392d87fbd55067fdc0f74b2d5e))
+* **magistrat-mesure:** display service name ([d35ede6](https://github.com/SocialGouv/emjpm/commit/d35ede6b2596e83fa156f45ef8db414c09abad0b))
+* **metadata:** add mesure id selection to mandataire permissions ([#1367](https://github.com/SocialGouv/emjpm/issues/1367)) ([0820d97](https://github.com/SocialGouv/emjpm/commit/0820d97e3fe014a2524930b0eb51fea28be31703))
+
+
+### Features
+
+* **magistrat:** add information form and in profile page ([#1379](https://github.com/SocialGouv/emjpm/issues/1379)) ([c4c9de8](https://github.com/SocialGouv/emjpm/commit/c4c9de86592bcdfa7add065d53c2e3a01910588b))
+
+
+
+
+
 ## [25.16.2](https://github.com/SocialGouv/emjpm/compare/v25.16.1...v25.16.2) (2020-01-08)
 
 
