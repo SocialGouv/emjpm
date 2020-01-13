@@ -38,5 +38,5 @@ exports.config = {
     }
   },
   tests: "./specs/*_test.js",
-  name: "code-du-travail-numerique"
+  name: "emjpm"
 };

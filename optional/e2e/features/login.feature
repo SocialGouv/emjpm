@@ -41,4 +41,4 @@ Feature: Login to EMJJM
     When I enter "ti1" as "Votre nom d'utilisateur"
     When I enter "ti1" as "Votre mot de passe"
     And I click on "Se connecter"
-    Then I should redirected to "/tis" page
+    Then I should redirected to "/magistrats" page

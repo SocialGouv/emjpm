@@ -7,8 +7,8 @@ Feature: Inscription
   Background: Navigate to HomePage
     Given a clean test database
     Given a web browser is on EMJJM
-    And I see "Inscription"
-    And I click on "Inscription"
+    And I see "Créer votre compte emjpm"
+    And I click on "Créer votre compte emjpm"
 
   @inscription_individuel
   Scenario Outline: Manu at Arras

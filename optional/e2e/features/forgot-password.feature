@@ -12,9 +12,9 @@ Feature: Forgot password
   Scenario: Adrien (ud@ud.com) forgot his password
     When I click on "J'ai oublié mon mot de passe et / ou mon identifiant"
 
-    Given I see "Récupérer votre compte"
-    When I enter "ud@ud.com" as "email"
-    Then I click on "Demander mon mot de passe"
+    Given I see "Demande de réinitialisation du mot de passe"
+    When I enter "ud@ud.com" as "Entrez votre email"
+    Then I click on "Obtenir le lien de réinitialisation"
 
     Then I have one unread message in my indox
     And I consult the last unread message

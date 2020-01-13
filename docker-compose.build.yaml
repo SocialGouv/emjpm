@@ -28,7 +28,7 @@ services:
     image: djfarrelly/maildev
     ports:
       - 25:25
-      - 1080:80
+      - 1080:1080
 
   api:
     build:
@@ -64,6 +64,8 @@ services:
   graphql-engine:
     env_file: .env.build
     restart: unless-stopped
+    ports:
+      - 5000:5000
     depends_on:
       - db
       - api
