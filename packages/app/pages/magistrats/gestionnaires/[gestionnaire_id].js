@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 
 import { LayoutMagistrat } from "../../../src/components/Layout";
 import { MagistratMandataire } from "../../../src/components/MagistratMandataire";
-import { MagistratMesureMandataireContent } from "../../../src/components/MagistratMesureMandataire";
+import { MagistratMesureAdd } from "../../../src/components/MagistratMesureAdd";
 import { UserContext } from "../../../src/components/UserContext";
 import { withAuthSync } from "../../../src/util/auth";
 import { formatGestionnaireId } from "../../../src/util/mandataires";
@@ -18,11 +18,7 @@ const Gestionnaire = props => {
   return (
     <LayoutMagistrat>
       <BoxWrapper mt={6} px="0">
-        <MagistratMesureMandataireContent
-          serviceId={serviceId}
-          mandataireId={mandataireId}
-          tiId={tiId}
-        />
+        <MagistratMesureAdd serviceId={serviceId} mandataireId={mandataireId} tiId={tiId} />
         <MagistratMandataire serviceId={serviceId} mandataireId={mandataireId} tiId={tiId} />
       </BoxWrapper>
     </LayoutMagistrat>

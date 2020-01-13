@@ -8,7 +8,7 @@ import * as Yup from "yup";
 
 import { ADD_COMMENT, EDIT_COMMENT } from "./mutations";
 
-export const MagistratMesureMandataireCommentForm = props => {
+export const MagistratMandataireCommentForm = props => {
   const {
     tiId,
     serviceId,
@@ -99,7 +99,7 @@ export const MagistratMesureMandataireCommentForm = props => {
   );
 };
 
-MagistratMesureMandataireCommentForm.defaultProps = {
+MagistratMandataireCommentForm.defaultProps = {
   antenneId: null,
   comment: null,
   id: null,
@@ -110,7 +110,7 @@ MagistratMesureMandataireCommentForm.defaultProps = {
   toggleEditCommentForm: null
 };
 
-MagistratMesureMandataireCommentForm.propTypes = {
+MagistratMandataireCommentForm.propTypes = {
   antenneId: PropTypes.number,
   comment: PropTypes.string,
   id: PropTypes.number,
