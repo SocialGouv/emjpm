@@ -1,5 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import {
+  Button,
+  Field,
+  Heading3,
+  Heading5,
+  InlineError,
+  Input,
+  Select
+} from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
@@ -104,7 +112,7 @@ export const ServiceMesureAcceptForm = props => {
           <Heading3>Accepter la mesure</Heading3>
         </Box>
         <form onSubmit={formik.handleSubmit}>
-          <Box mb="2">
+          <Field>
             <Input
               value={formik.values.date_ouverture}
               id="date_ouverture"
@@ -114,8 +122,9 @@ export const ServiceMesureAcceptForm = props => {
               onChange={formik.handleChange}
               placeholder="Date d'ordonnance"
             />
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
+            <InlineError message={formik.errors.date_ouverture} fieldId="date_ouverture" />
+          </Field>
+          <Field>
             <Select
               id="residence"
               name="residence"
@@ -125,18 +134,14 @@ export const ServiceMesureAcceptForm = props => {
               onChange={option => formik.setFieldValue("residence", option)}
               options={RESIDENCE}
             />
-            {formik.errors.residence && formik.touched.residence && (
-              <Text>{formik.errors.residence}</Text>
-            )}
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+            <InlineError message={formik.errors.residence} fieldId="residence" />
+          </Field>
+          <Field>
             <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-            {formik.errors.geocode && formik.touched.geocode && (
-              <Text>{formik.errors.geocode}</Text>
-            )}
-          </Box>
+            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+          </Field>
           {user_antennes.length >= 2 && (
-            <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+            <Field>
               <Select
                 id="antenne_id"
                 name="antenne_id"
@@ -146,7 +151,8 @@ export const ServiceMesureAcceptForm = props => {
                 onChange={option => formik.setFieldValue("antenne_id", option)}
                 options={ANTENNE_OPTIONS}
               />
-            </Box>
+              <InlineError message={formik.errors.antenne_id} fieldId="antenne_id" />
+            </Field>
           )}
           <Flex justifyContent="flex-end">
             <Box>
