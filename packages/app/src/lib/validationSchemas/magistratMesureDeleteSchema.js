@@ -1,7 +1,7 @@
-import * as Yup from "yup";
+import yup from "./yup";
 
-const magistratMesureDeleteSchema = Yup.object().shape({
-  reason_delete: Yup.string().required("Required")
+const magistratMesureDeleteSchema = yup.object().shape({
+  reason_delete: yup.string().required()
 });
 
 export { magistratMesureDeleteSchema };

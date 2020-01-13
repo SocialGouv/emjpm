@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
+import { Button, Heading3, Heading5, InlineError, Input } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
@@ -66,6 +66,7 @@ export const MagistratMesureDeleteForm = props => {
               onChange={formik.handleChange}
               placeholder="Raison de la suppression"
             />
+            <InlineError message={formik.errors.reason_delete} fieldId="reason_delete" />
           </Box>
           <Flex justifyContent="flex-end">
             <Box>
