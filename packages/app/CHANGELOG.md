@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.17.0](https://github.com/SocialGouv/emjpm/compare/v25.16.2...v25.17.0) (2020-01-13)
+
+
+### Bug Fixes
+
+* **exclude-status:** add missing excludeStatus params ([#1377](https://github.com/SocialGouv/emjpm/issues/1377)) ([1b713e3](https://github.com/SocialGouv/emjpm/commit/1b713e35c0e65f86b76679dafe91afe9375f892e))
+* **magistrat-mesure:** display service name ([d35ede6](https://github.com/SocialGouv/emjpm/commit/d35ede6b2596e83fa156f45ef8db414c09abad0b))
+
+
+### Features
+
+* **magistrat:** add information form and in profile page ([#1379](https://github.com/SocialGouv/emjpm/issues/1379)) ([c4c9de8](https://github.com/SocialGouv/emjpm/commit/c4c9de86592bcdfa7add065d53c2e3a01910588b))
+
+
+
+
+
 ## [25.16.2](https://github.com/SocialGouv/emjpm/compare/v25.16.1...v25.16.2) (2020-01-08)
 
 
