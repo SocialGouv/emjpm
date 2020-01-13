@@ -147,7 +147,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                     options={tiOptions}
                     isMulti
                   />
-                  <InlineError message={formik.errors.tis} fieldId="tis" />
+                  {formik.touched.tis && <InlineError message={formik.errors.tis} fieldId="tis" />}
                 </Field>
                 <Field>
                   <Select
@@ -159,7 +159,9 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                     onChange={option => formik.setFieldValue("genre", option)}
                     options={GENDER_OPTIONS}
                   />
-                  <InlineError message={formik.errors.genre} fieldId="genre" />
+                  {formik.touched.genre && (
+                    <InlineError message={formik.errors.genre} fieldId="genre" />
+                  )}
                 </Field>
                 <Field>
                   <Input
@@ -170,7 +172,9 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                     onChange={formik.handleChange}
                     placeholder="SIRET"
                   />
-                  <InlineError message={formik.errors.siret} fieldId="siret" />
+                  {formik.touched.siret && (
+                    <InlineError message={formik.errors.siret} fieldId="siret" />
+                  )}
                 </Field>
                 <Field>
                   <Input
@@ -181,7 +185,9 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                     onChange={formik.handleChange}
                     placeholder="Téléphone"
                   />
-                  <InlineError message={formik.errors.telephone} fieldId="telephone" />
+                  {formik.touched.telephone && (
+                    <InlineError message={formik.errors.telephone} fieldId="telephone" />
+                  )}
                 </Field>
                 <Field>
                   <Input
@@ -194,7 +200,9 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                 </Field>
                 <Field>
                   <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-                  <InlineError message={formik.errors.geocode} fieldId="geocode" />
+                  {formik.touched.geocode && (
+                    <InlineError message={formik.errors.geocode} fieldId="geocode" />
+                  )}
                 </Field>
                 <Field>
                   <Input
@@ -205,7 +213,9 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                     onChange={formik.handleChange}
                     placeholder="Nombre de mesures souhaité"
                   />
-                  <InlineError message={formik.errors.dispo_max} fieldId="dispo_max" />
+                  {formik.touched.dispo_max && (
+                    <InlineError message={formik.errors.dispo_max} fieldId="dispo_max" />
+                  )}
                 </Field>
                 <Flex justifyContent="flex-end">
                   <Box>
