@@ -1,5 +1,5 @@
-import fetch from "isomorphic-fetch";
 import getConfig from "next/config";
+import fetch from "unfetch";
 
 const {
   publicRuntimeConfig: { API_URL }
