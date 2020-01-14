@@ -1,15 +1,15 @@
-import * as Yup from "yup";
+import yup from "./yup";
 
-const magistratMandataireSchema = Yup.object().shape({
-  annee: Yup.string().required(),
-  cabinet: Yup.string(),
-  civilite: Yup.string().required(),
-  judgmentDate: Yup.date(),
-  numero_rg: Yup.string().required(),
-  type: Yup.string().required(),
-  urgent: Yup.object().shape({
-    label: Yup.string(),
-    value: Yup.boolean()
+const magistratMandataireSchema = yup.object().shape({
+  annee: yup.string().required(),
+  cabinet: yup.string(),
+  civilite: yup.string().required(),
+  judgmentDate: yup.date(),
+  numero_rg: yup.string().required(),
+  type: yup.string().required(),
+  urgent: yup.object().shape({
+    label: yup.string(),
+    value: yup.boolean()
   })
 });
 

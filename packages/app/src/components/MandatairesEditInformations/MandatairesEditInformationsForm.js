@@ -1,4 +1,4 @@
-import { Button, Field, Input, Select, Text, Textarea } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, InlineError, Input, Select, Textarea } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
@@ -47,9 +47,7 @@ const MandatairesEditInformationsForm = props => {
           onChange={formik.handleChange}
           placeholder="Prénom"
         />
-        {formik.errors.prenom && formik.touched.prenom && (
-          <Text mt="1">{formik.errors.prenom}</Text>
-        )}
+        <InlineError message={formik.errors.prenom} fieldId="prenom" />
       </Field>
       <Field>
         <Input
@@ -60,7 +58,7 @@ const MandatairesEditInformationsForm = props => {
           onChange={formik.handleChange}
           placeholder="Nom"
         />
-        {formik.errors.nom && formik.touched.nom && <Text mt="1">{formik.errors.nom}</Text>}
+        <InlineError message={formik.errors.nom} fieldId="nom" />
       </Field>
       <Field>
         <Input
@@ -71,7 +69,7 @@ const MandatairesEditInformationsForm = props => {
           onChange={formik.handleChange}
           placeholder="Email"
         />
-        {formik.errors.email && formik.touched.email && <Text mt="1">{formik.errors.email}</Text>}
+        <InlineError message={formik.errors.email} fieldId="email" />
       </Field>
 
       {/* MANDATAIRE FIELD */}
@@ -85,7 +83,7 @@ const MandatairesEditInformationsForm = props => {
           onChange={option => formik.setFieldValue("genre", option)}
           options={GENDER_OPTIONS}
         />
-        {formik.errors.genre && formik.touched.genre && <Text>{formik.errors.genre}</Text>}
+        <InlineError message={formik.errors.genre} fieldId="genre" />
       </Field>
       <Field>
         <Input
@@ -96,7 +94,7 @@ const MandatairesEditInformationsForm = props => {
           onChange={formik.handleChange}
           placeholder="SIRET"
         />
-        {formik.errors.siret && formik.touched.siret && <Text>{formik.errors.siret}</Text>}
+        <InlineError message={formik.errors.siret} fieldId="siret" />
       </Field>
       <Field>
         <Input
@@ -107,9 +105,7 @@ const MandatairesEditInformationsForm = props => {
           onChange={formik.handleChange}
           placeholder="Téléphone"
         />
-        {formik.errors.telephone && formik.touched.telephone && (
-          <Text>{formik.errors.telephone}</Text>
-        )}
+        <InlineError message={formik.errors.telephone} fieldId="telephone" />
       </Field>
       <Field>
         <Input
@@ -119,13 +115,14 @@ const MandatairesEditInformationsForm = props => {
           onChange={formik.handleChange}
           placeholder="Téléphone portable"
         />
+        <InlineError message={formik.errors.telephone_portable} fieldId="telephone_portable" />
       </Field>
       <Field>
         <Geocode
           resource={mandataire}
           onChange={geocode => formik.setFieldValue("geocode", geocode)}
         />
-        {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
+        <InlineError message={formik.errors.geocode} fieldId="geocode" />
       </Field>
       <Field>
         <Input
@@ -136,9 +133,7 @@ const MandatairesEditInformationsForm = props => {
           onChange={formik.handleChange}
           placeholder="Nombre de mesures souhaité"
         />
-        {formik.errors.dispo_max && formik.touched.dispo_max && (
-          <Text>{formik.errors.dispo_max}</Text>
-        )}
+        <InlineError message={formik.errors.dispo_max} fieldId="dispo_max" />
       </Field>
       <Field>
         <Select
@@ -157,9 +152,7 @@ const MandatairesEditInformationsForm = props => {
           placeholder="Secretariat spécialisé"
           options={SECRETARIAT_OPTIONS}
         />
-        {formik.errors.secretariat && formik.touched.secretariat && (
-          <Text>{formik.errors.secretariat}</Text>
-        )}
+        <InlineError message={formik.errors.secretariat} fieldId="secretariat" />
       </Field>
       {isSecretariat && (
         <Field>
@@ -171,9 +164,7 @@ const MandatairesEditInformationsForm = props => {
             onChange={formik.handleChange}
             placeholder="Nombre ETP dédié (x.xx)"
           />
-          {formik.errors.nb_secretariat && formik.touched.nb_secretariat && (
-            <Text>{formik.errors.nb_secretariat}</Text>
-          )}
+          <InlineError message={formik.errors.nb_secretariat} fieldId="nb_secretariat" />
         </Field>
       )}
       <Field>
@@ -186,9 +177,7 @@ const MandatairesEditInformationsForm = props => {
           label="Informations pour le magistrat"
           placeholder="Préférences géographiques, compétences, ..."
         />
-        {formik.errors.competences && formik.touched.competences && (
-          <Text>{formik.errors.competences}</Text>
-        )}
+        <InlineError message={formik.errors.competences} fieldId="competences" />
       </Field>
 
       <Flex alignItems="center" justifyContent="flex-end">

@@ -1,15 +1,16 @@
-import * as Yup from "yup";
+import yup from "./yup";
 
-const serviceAntenneSchema = Yup.object().shape({
-  contact_email: Yup.string().required("Champ obligatoire"),
-  contact_firstname: Yup.string().required("Champ obligatoire"),
-  contact_lastname: Yup.string().required("Champ obligatoire"),
-  contact_phone: Yup.string().required("Champ obligatoire"),
-  geocode: Yup.object()
+const serviceAntenneSchema = yup.object().shape({
+  contact_email: yup.string().required(),
+  contact_firstname: yup.string().required(),
+  contact_lastname: yup.string().required(),
+  contact_phone: yup.string().required(),
+  geocode: yup
+    .object()
     .nullable()
-    .required("Champ obligatoire"),
-  mesures_max: Yup.number().required("Champ obligatoire"),
-  name: Yup.string().required("Champ obligatoire")
+    .required(),
+  mesures_max: yup.number().required(),
+  name: yup.string().required()
 });
 
 export { serviceAntenneSchema };

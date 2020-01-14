@@ -1,4 +1,4 @@
-import { Button, Card, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
@@ -6,8 +6,8 @@ import React from "react";
 import ReactPiwik from "react-piwik";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
-import * as Yup from "yup";
 
+import { loginSchema } from "../../lib/validationSchemas";
 import { trackUser } from "../../piwik";
 import { login } from "../../util/auth";
 import { Link } from "../Commons";
@@ -63,10 +63,7 @@ const Login = props => {
     onSubmit: (values, { setSubmitting, setStatus }) => {
       handleSubmit(values, setSubmitting, setStatus, token);
     },
-    validationSchema: Yup.object().shape({
-      password: Yup.string().required("Champ obligatoire"),
-      username: Yup.string().required("Champ obligatoire")
-    }),
+    validationSchema: loginSchema,
     initialValues: {
       password: "",
       username: ""
@@ -100,8 +97,8 @@ const Login = props => {
               onChange={formik.handleChange}
               placeholder="Votre nom d'utilisateur"
             />
-            {formik.errors.username && formik.touched.username && (
-              <Text mt="1">{formik.errors.username}</Text>
+            {formik.touched.username && (
+              <InlineError message={formik.errors.username} fieldId="username" />
             )}
           </Field>
           <Field>
@@ -114,8 +111,8 @@ const Login = props => {
               onChange={formik.handleChange}
               placeholder="Votre mot de passe"
             />
-            {formik.errors.password && formik.touched.password && (
-              <Text mt="1">{formik.errors.password}</Text>
+            {formik.touched.password && (
+              <InlineError message={formik.errors.password} fieldId="password" />
             )}
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
