@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.17.2](https://github.com/SocialGouv/emjpm/compare/v25.17.1...v25.17.2) (2020-01-14)
+
+
+### Bug Fixes
+
+* **anonymise:** update script ([d0a75c0](https://github.com/SocialGouv/emjpm/commit/d0a75c04963353447dfc57d376f57030943b8ddc))
+* **form-errors:** add inlineerror and localized yup ([#1389](https://github.com/SocialGouv/emjpm/issues/1389)) ([8d0fc84](https://github.com/SocialGouv/emjpm/commit/8d0fc84fc53be6aefe2aa267922d4cf1d4257ca6))
+* **map:** test if onMarkerClick defined ([#1391](https://github.com/SocialGouv/emjpm/issues/1391)) ([884e06c](https://github.com/SocialGouv/emjpm/commit/884e06cb971f36df30dd6bd1b38afb478597f8ac))
+* **sort-date:** convert string to date before sorting ([#1394](https://github.com/SocialGouv/emjpm/issues/1394)) ([e96dc54](https://github.com/SocialGouv/emjpm/commit/e96dc544442973eb5b2ed6c23c14a585468eb32a))
+
+
+
+
+
 ## [25.17.1](https://github.com/SocialGouv/emjpm/compare/v25.17.0...v25.17.1) (2020-01-13)
 
 **Note:** Version bump only for package emjpm
