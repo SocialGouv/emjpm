@@ -2792,7 +2792,7 @@
     styled-icons "^9.1.0"
     theme-ui "^0.2.52"
 
-"@socialgouv/emjpm-ui-core@^1.16.0", "@socialgouv/emjpm-ui-core@^1.17.0":
+"@socialgouv/emjpm-ui-core@^1.17.0":
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.17.0.tgz#0a5e19ebb75ce6f87fbb8f157c54f08df5fd52d4"
   integrity sha512-r1n6Pk8/5081KasHHQ7OBbrIrv/zkLaRghIOzOv3Q/pQTMQIXYyw6Nke1B40AZWYERDt/3LVZ3tXfQ4j9h17dg==

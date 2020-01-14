@@ -1,4 +1,4 @@
-import { Button, Card, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
@@ -77,7 +77,7 @@ const EditPassword = props => {
           </Box>
         </Box>
         <Box p="5" width={[1, 1 / 2]}>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
+          <Box mb="2">
             <form onSubmit={formik.handleSubmit}>
               {!!formik.status && (
                 <Box color="error" mb="1">
@@ -94,9 +94,7 @@ const EditPassword = props => {
                   onChange={formik.handleChange}
                   placeholder="Votre mot de passe actuel"
                 />
-                {formik.errors.password && formik.touched.password && (
-                  <Text mt="1">{formik.errors.password}</Text>
-                )}
+                <InlineError message={formik.errors.password} fieldId="password" />
               </Field>
               <Field>
                 <Input
@@ -108,9 +106,7 @@ const EditPassword = props => {
                   onChange={formik.handleChange}
                   placeholder="Votre nouveau mot de passe"
                 />
-                {formik.errors.newPassword && formik.touched.newPassword && (
-                  <Text mt="1">{formik.errors.newPassword}</Text>
-                )}
+                <InlineError message={formik.errors.newPassword} fieldId="newPassword" />
               </Field>
               <Field>
                 <Input
@@ -124,10 +120,10 @@ const EditPassword = props => {
                   onChange={formik.handleChange}
                   placeholder="Confirmation de votre nouveau mot de passe"
                 />
-                {formik.errors.newPasswordConfirmation &&
-                  formik.touched.newPasswordConfirmation && (
-                    <Text mt="1">{formik.errors.newPasswordConfirmation}</Text>
-                  )}
+                <InlineError
+                  message={formik.errors.newPasswordConfirmation}
+                  fieldId="newPasswordConfirmation"
+                />
               </Field>
               <Flex alignItems="center" justifyContent="flex-end">
                 <Box mr="2">

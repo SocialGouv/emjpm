@@ -1,5 +1,14 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Field, Heading3, Heading5, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
+import {
+  Button,
+  Field,
+  Heading3,
+  Heading5,
+  InlineError,
+  Input,
+  Select,
+  Text
+} from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -115,6 +124,7 @@ export const MagistratMesureAddForm = props => {
               onChange={option => formik.setFieldValue("type", option)}
               options={MESURE_TYPE_LABEL_VALUE}
             />
+            <InlineError message={formik.errors.type} fieldId="type" />
           </Field>
           <Field>
             <Select
@@ -126,6 +136,7 @@ export const MagistratMesureAddForm = props => {
               onChange={option => formik.setFieldValue("civilite", option)}
               options={CIVILITY}
             />
+            <InlineError message={formik.errors.civilite} fieldId="civilite" />
           </Field>
           <Field>
             <Input
@@ -136,6 +147,7 @@ export const MagistratMesureAddForm = props => {
               onChange={formik.handleChange}
               placeholder="année de naissance"
             />
+            <InlineError message={formik.errors.annee} fieldId="annee" />
           </Field>
           <Field>
             <Input
@@ -146,6 +158,7 @@ export const MagistratMesureAddForm = props => {
               onChange={formik.handleChange}
               placeholder="numero rg"
             />
+            <InlineError message={formik.errors.numero_rg} fieldId="numero_rg" />
           </Field>
           <Field>
             <Input
@@ -156,6 +169,7 @@ export const MagistratMesureAddForm = props => {
               onChange={formik.handleChange}
               placeholder="cabinet (optionnel)"
             />
+            <InlineError message={formik.errors.cabinet} fieldId="cabinet" />
           </Field>
           <Field>
             <Select
@@ -167,6 +181,7 @@ export const MagistratMesureAddForm = props => {
               onChange={option => formik.setFieldValue("urgent", option)}
               options={IS_URGENT}
             />
+            <InlineError message={formik.errors.urgent} fieldId="urgent" />
           </Field>
           <Field>
             <Input
@@ -178,6 +193,7 @@ export const MagistratMesureAddForm = props => {
               onChange={formik.handleChange}
               placeholder="Date prévisionnelle du jugement (optionnel)"
             />
+            <InlineError message={formik.errors.judgmentDate} fieldId="judgmentDate" />
           </Field>
           <Flex justifyContent="flex-end">
             <Box>

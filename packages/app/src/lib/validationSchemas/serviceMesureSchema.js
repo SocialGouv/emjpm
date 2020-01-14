@@ -1,21 +1,23 @@
-import * as Yup from "yup";
+import yup from "./yup";
 
-const serviceMesureSchema = Yup.object().shape({
-  annee: Yup.number()
-    .required("Champ obligatoire")
+const serviceMesureSchema = yup.object().shape({
+  annee: yup
+    .number()
+    .required()
     .min(1900, "l'année choisi doit être au minimum 1900")
     .max(2019, "l'année choisi doit être au maximum 2019"),
-  antenne: Yup.string(),
-  civilite: Yup.string().required("Champ obligatoire"),
-  date_ouverture: Yup.date().required("Champ obligatoire"),
-  geocode: Yup.object()
+  antenne: yup.string(),
+  civilite: yup.string().required(),
+  date_ouverture: yup.date().required(),
+  geocode: yup
+    .object()
     .nullable()
-    .required("Champ obligatoire"),
-  numero_dossier: Yup.string().required("Champ obligatoire"),
-  numero_rg: Yup.string().required("Champ obligatoire"),
-  residence: Yup.string().required("Champ obligatoire"),
-  tribunal: Yup.string().required("Champ obligatoire"),
-  type: Yup.string().required("Champ obligatoire")
+    .required(),
+  numero_dossier: yup.string().required(),
+  numero_rg: yup.string().required(),
+  residence: yup.string().required(),
+  tribunal: yup.string().required(),
+  type: yup.string().required()
 });
 
 export { serviceMesureSchema };
