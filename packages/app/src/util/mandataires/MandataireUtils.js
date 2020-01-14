@@ -1,5 +1,5 @@
 import { convertTokens, legacyParse } from "@date-fns/upgrade/v2";
-import { compareDesc, differenceInMonths, format } from "date-fns";
+import { compareDesc, differenceInMonths, format, parseISO } from "date-fns";
 
 const TYPES = {
   MANDATAIRE_IND: "individuel",
@@ -17,7 +17,10 @@ const formatLastLogin = date => {
 };
 
 const newestLastLogin = admins => {
-  const dates = admins.map(({ user: { last_login } }) => last_login).filter(Boolean);
+  const dates = admins
+    .map(({ user: { last_login } }) => last_login)
+    .filter(Boolean)
+    .map(val => parseISO(val));
   const [newest] = dates.sort(compareDesc);
 
   return newest;
