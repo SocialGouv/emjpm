@@ -8,11 +8,11 @@ import { GET_SERVICES_ANTENNE } from "./queries";
 import { PreferencesPanelStyle } from "./style";
 
 const PreferencesPanel = props => {
-  const { user_antennes, currentAntenne } = props;
-  const [mainAntenne] = user_antennes;
+  const { antenneId } = props;
+
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
-      antenneId: currentAntenne ? currentAntenne : mainAntenne.antenne_id
+      antenneId
     }
   });
 
@@ -28,7 +28,7 @@ const PreferencesPanel = props => {
   const [antenne] = service_antenne;
 
   return (
-    <Box sx={PreferencesPanelStyle} {...props}>
+    <Box sx={PreferencesPanelStyle}>
       <Card p="5">
         <Heading3>
           {antenne.mesures_max}
