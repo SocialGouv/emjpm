@@ -65,18 +65,6 @@ class User extends Model {
           to: "services.id"
         }
       },
-      antennes: {
-        relation: Model.ManyToManyRelation,
-        modelClass: ServiceAntenne,
-        join: {
-          from: "users.id",
-          through: {
-            from: "user_antenne.user_id",
-            to: "user_antenne.antenne_id"
-          },
-          to: "service_antenne.id"
-        }
-      },
       tis: {
         relation: Model.ManyToManyRelation,
         modelClass: Tis,
