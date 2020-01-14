@@ -1,12 +1,12 @@
-import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { Formik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
-import * as Yup from "yup";
 
+import { resetPasswordSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
 
 const {
@@ -93,18 +93,7 @@ const ResetPassword = props => {
             onSubmit={(values, { setSubmitting, setStatus }) =>
               handleSubmit(values, setSubmitting, setStatus, token, toggleMessage)
             }
-            validationSchema={Yup.object().shape({
-              newPassword: Yup.string("Champ obligatoire")
-                .min(8, "Votre mot de passe doit être de 8 caractères minimum")
-                .matches(
-                  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/,
-                  "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spécial"
-                )
-                .required("Champ obligatoire"),
-              newPasswordConfirmation: Yup.string()
-                .oneOf([Yup.ref("newPassword"), null], "Les mots de passe ne sont pas égaux")
-                .required("Champ obligatoire")
-            })}
+            validationSchema={resetPasswordSchema}
             initialValues={{
               newPassword: "",
               newPasswordConfirmation: ""
@@ -137,8 +126,8 @@ const ResetPassword = props => {
                       onChange={handleChange}
                       placeholder="Entrez votre nouveau mot de passe"
                     />
-                    {errors.newPassword && touched.newPassword && (
-                      <Text mt="1">{errors.newPassword}</Text>
+                    {touched.newPassword && (
+                      <InlineError message={errors.newPassword} fieldId="newPassword" />
                     )}
                   </Box>
                   <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
@@ -151,8 +140,11 @@ const ResetPassword = props => {
                       onChange={handleChange}
                       placeholder="Confirmer votre nouveau mot de passe"
                     />
-                    {errors.newPasswordConfirmation && touched.newPasswordConfirmation && (
-                      <Text mt="1">{errors.newPasswordConfirmation}</Text>
+                    {touched.newPasswordConfirmation && (
+                      <InlineError
+                        message={errors.newPasswordConfirmation}
+                        fieldId="newPasswordConfirmation"
+                      />
                     )}
                   </Box>
                   <Flex alignItems="center" justifyContent="flex-end">
