@@ -9,7 +9,13 @@ import { ServiceMesureAcceptStyle } from "./style";
 
 const ServiceMesureAccept = props => {
   const { mesureId } = props;
-  const { user_antennes } = useContext(UserContext);
+  const { service_admins } = useContext(UserContext);
+  const [
+    {
+      service: { service_antennes }
+    }
+  ] = service_admins;
+
   const {
     data: departementsData,
     loading: departementsLoading,
@@ -29,7 +35,7 @@ const ServiceMesureAccept = props => {
       <ServiceMesureAcceptForm
         mt="3"
         departementsData={departementsData}
-        user_antennes={user_antennes}
+        service_antennes={service_antennes}
         mesureId={mesureId}
       />
     </Box>
