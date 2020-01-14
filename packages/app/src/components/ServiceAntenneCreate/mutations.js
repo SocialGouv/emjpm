@@ -2,7 +2,6 @@ import gql from "graphql-tag";
 
 export const CREATE_ANTENNE = gql`
   mutation createAntenne(
-    $user_id: Int
     $service_id: Int
     $name: String
     $mesures_max: Int
@@ -18,7 +17,6 @@ export const CREATE_ANTENNE = gql`
   ) {
     insert_service_antenne(
       objects: {
-        user_antennes: { data: { user_id: $user_id } }
         service_id: $service_id
         name: $name
         mesures_max: $mesures_max

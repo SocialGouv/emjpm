@@ -38,33 +38,24 @@ export const GET_SERVICE_USERS = gql`
           mesures_awaiting
           dispo_max
           etablissement
+          service_antennes {
+            name
+            mesures_max
+            mesures_in_progress
+            mesures_awaiting
+            id
+            contact_phone
+            contact_lastname
+            contact_firstname
+            contact_email
+            address
+            address_zip_code
+            address_street
+            address_city
+            latitude
+            longitude
+          }
         }
-      }
-      user_antennes {
-        service_antenne {
-          name
-          mesures_max
-          mesures_in_progress
-          mesures_awaiting
-          id
-          contact_phone
-          contact_lastname
-          contact_firstname
-          contact_email
-          address
-          address_zip_code
-          address_street
-          address_city
-          latitude
-          longitude
-        }
-        user {
-          id
-          prenom
-          nom
-        }
-        id
-        antenne_id
       }
     }
   }
