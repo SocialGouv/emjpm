@@ -1,4 +1,5 @@
 import { adminTribunalSchema } from "./adminTribunalSchema";
+import { forgotPasswordSchema } from "./forgotPasswordSchema";
 import { loginSchema } from "./loginSchema";
 import { magistratEditSchema } from "./magistratEditSchema";
 import { magistratMandataireSchema } from "./magistratMandataireSchema";
@@ -19,6 +20,7 @@ import { signupServiceSchema } from "./signupServiceSchema";
 
 export {
   adminTribunalSchema,
+  forgotPasswordSchema,
   loginSchema,
   magistratEditSchema,
   magistratMesureEditSchema,
