@@ -139,7 +139,7 @@ const MagistratMandataire = props => {
           <Text sx={MagistratTitleMandataireStyle}>
             Informations (Préférences géographiques, compétences, ...)
           </Text>
-          <pre style={{ "white-space": "pre-wrap" }}>{competences}</pre>
+          <pre style={{ whiteSpace: "pre-wrap" }}>{competences}</pre>
         </Box>
       </Flex>
 
