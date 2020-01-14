@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { MandatairesMesures } from "./MandatairesMesures";
+import { ServiceAntenneEdit } from "./ServiceAntenneEdit";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<MandatairesMesures />).toJSON();
+  const tree = renderer.create(<ServiceAntenneEdit />).toJSON();
   expect(tree).toMatchSnapshot();
 });
