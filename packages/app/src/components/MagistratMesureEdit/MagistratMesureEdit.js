@@ -1,5 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Field, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import {
+  Button,
+  Field,
+  Heading3,
+  Heading5,
+  InlineError,
+  Input,
+  Select
+} from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -71,6 +79,7 @@ export const MagistratMesureEdit = () => {
               onChange={option => formik.setFieldValue("type", option)}
               options={MESURE_TYPE_LABEL_VALUE}
             />
+            <InlineError message={formik.errors.type} fieldId="type" />
           </Field>
           <Field>
             <Select
@@ -82,6 +91,7 @@ export const MagistratMesureEdit = () => {
               onChange={option => formik.setFieldValue("civilite", option)}
               options={CIVILITY}
             />
+            <InlineError message={formik.errors.civilite} fieldId="civilite" />
           </Field>
           <Field>
             <Input
@@ -92,6 +102,7 @@ export const MagistratMesureEdit = () => {
               onChange={formik.handleChange}
               placeholder="année de naissance"
             />
+            <InlineError message={formik.errors.annee} fieldId="annee" />
           </Field>
           <Field>
             <Input
@@ -102,6 +113,7 @@ export const MagistratMesureEdit = () => {
               onChange={formik.handleChange}
               placeholder="numero rg"
             />
+            <InlineError message={formik.errors.numero_rg} fieldId="numero_rg" />
           </Field>
           <Field>
             <Input
@@ -112,6 +124,7 @@ export const MagistratMesureEdit = () => {
               onChange={formik.handleChange}
               placeholder="Cabinet (optionnel)"
             />
+            <InlineError message={formik.errors.cabinet} fieldId="cabinet" />
           </Field>
           <Flex justifyContent="flex-end">
             <Box>

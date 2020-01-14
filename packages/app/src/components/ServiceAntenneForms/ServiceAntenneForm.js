@@ -1,4 +1,4 @@
-import { Button, Field, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, InlineError, Input } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
 import { Box } from "rebass";
@@ -43,7 +43,7 @@ const ServiceAntenneForm = props => {
           onChange={formik.handleChange}
           placeholder="Nom de l'antenne"
         />
-        {formik.errors.name && formik.touched.name && <Text>{formik.errors.name}</Text>}
+        <InlineError message={formik.errors.name} fieldId="name" />
       </Field>
       <Field>
         <Input
@@ -54,9 +54,7 @@ const ServiceAntenneForm = props => {
           onChange={formik.handleChange}
           placeholder="Nom du responsable"
         />
-        {formik.errors.contact_lastname && formik.touched.contact_lastname && (
-          <Text>{formik.errors.contact_lastname}</Text>
-        )}
+        <InlineError message={formik.errors.contact_lastname} fieldId="contact_lastname" />
       </Field>
       <Field>
         <Input
@@ -67,9 +65,7 @@ const ServiceAntenneForm = props => {
           onChange={formik.handleChange}
           placeholder="Prénom du responsable"
         />
-        {formik.errors.contact_firstname && formik.touched.contact_firstname && (
-          <Text>{formik.errors.contact_firstname}</Text>
-        )}
+        <InlineError message={formik.errors.contact_firstname} fieldId="contact_firstname" />
       </Field>
       <Field>
         <Input
@@ -80,9 +76,7 @@ const ServiceAntenneForm = props => {
           onChange={formik.handleChange}
           placeholder="Mesures maximum"
         />
-        {formik.errors.mesures_max && formik.touched.mesures_max && (
-          <Text>{formik.errors.mesures_max}</Text>
-        )}
+        <InlineError message={formik.errors.mesures_max} fieldId="mesures_max" />
       </Field>
       <Field>
         <Input
@@ -93,9 +87,7 @@ const ServiceAntenneForm = props => {
           onChange={formik.handleChange}
           placeholder="Numéro de téléphone"
         />
-        {formik.errors.contact_phone && formik.touched.contact_phone && (
-          <Text>{formik.errors.contact_phone}</Text>
-        )}
+        <InlineError message={formik.errors.contact_phone} fieldId="contact_phone" />
       </Field>
       <Field>
         <Input
@@ -106,16 +98,14 @@ const ServiceAntenneForm = props => {
           onChange={formik.handleChange}
           placeholder="Adresse email"
         />
-        {formik.errors.contact_email && formik.touched.contact_email && (
-          <Text>{formik.errors.contact_email}</Text>
-        )}
+        <InlineError message={formik.errors.contact_email} fieldId="contact_email" />
       </Field>
       <Field>
         <Geocode
           onChange={geocode => formik.setFieldValue("geocode", geocode)}
           resource={antenne}
         />
-        {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
+        <InlineError message={formik.errors.geocode} fieldId="geocode" />
       </Field>
       <Box>
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>

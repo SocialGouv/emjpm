@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Card, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
@@ -64,9 +64,7 @@ const DirectionEditInformations = props => {
                   onChange={formik.handleChange}
                   placeholder="Prénom"
                 />
-                {formik.errors.prenom && formik.touched.prenom && (
-                  <Text mt="1">{formik.errors.prenom}</Text>
-                )}
+                <InlineError message={formik.errors.prenom} fieldId="prenom" />
               </Field>
               <Field>
                 <Input
@@ -77,7 +75,7 @@ const DirectionEditInformations = props => {
                   onChange={formik.handleChange}
                   placeholder="Nom"
                 />
-                {formik.errors.nom && formik.touched.nom && <Text mt="1">{formik.errors.nom}</Text>}
+                <InlineError message={formik.errors.nom} fieldId="nom" />
               </Field>
               <Field>
                 <Input
@@ -88,9 +86,7 @@ const DirectionEditInformations = props => {
                   onChange={formik.handleChange}
                   placeholder="Email"
                 />
-                {formik.errors.email && formik.touched.email && (
-                  <Text mt="1">{formik.errors.email}</Text>
-                )}
+                <InlineError message={formik.errors.email} fieldId="email" />
               </Field>
               <Box>
                 <Button

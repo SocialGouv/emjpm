@@ -1,12 +1,13 @@
-import * as Yup from "yup";
+import yup from "./yup";
 
-const magistratEditSchema = Yup.object().shape({
-  cabinet: Yup.string(),
-  email: Yup.string("Champ obligatoire")
-    .email("Le format de votre email n'est pas correct")
-    .required("Champ obligatoire"),
-  nom: Yup.string().required("Champ obligatoire"),
-  prenom: Yup.string().required("Champ obligatoire")
+const magistratEditSchema = yup.object().shape({
+  cabinet: yup.string(),
+  email: yup
+    .string()
+    .email()
+    .required(),
+  nom: yup.string().required(),
+  prenom: yup.string().required()
 });
 
 export { magistratEditSchema };
