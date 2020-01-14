@@ -1,5 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Field, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import {
+  Button,
+  Field,
+  Heading3,
+  Heading5,
+  InlineError,
+  Input,
+  Select
+} from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -33,6 +41,8 @@ export const MandataireMesureEditForm = props => {
 
   const geocode = geocodeInitialValue(mesure);
 
+  const [editMesure] = useMutation(EDIT_MESURE);
+
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       const regionCode = getRegionCode(values.geocode.postcode);
@@ -44,7 +54,7 @@ export const MandataireMesureEditForm = props => {
           code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
         });
       } else {
-        editMesure({
+        await editMesure({
           awaitRefetchQueries: true,
           refetchQueries: ["mesures", "mesures_aggregate", "user_tis", "ti"],
           variables: {
@@ -65,7 +75,9 @@ export const MandataireMesureEditForm = props => {
           }
         });
       }
+
       setSubmitting(false);
+      Router.push(`/mandataires/mesures/${id}`);
     },
     validationSchema: mandataireMesureSchema,
     initialValues: {
@@ -78,12 +90,6 @@ export const MandataireMesureEditForm = props => {
       tribunal: tiId ? { label: tribunal, value: tiId } : "",
       type: { label: type, value: type },
       geocode
-    }
-  });
-
-  const [editMesure] = useMutation(EDIT_MESURE, {
-    onCompleted() {
-      Router.push(`/mandataires/mesures/${id}`);
     }
   });
 
@@ -118,6 +124,7 @@ export const MandataireMesureEditForm = props => {
               onChange={formik.handleChange}
               placeholder="numero rg"
             />
+            <InlineError message={formik.errors.numero_rg} fieldId="numero_rg" />
           </Field>
           <Field>
             <Select
@@ -129,9 +136,7 @@ export const MandataireMesureEditForm = props => {
               hasError={formik.errors.tribunal && formik.touched.tribunal}
               onChange={option => formik.setFieldValue("tribunal", option)}
             />
-            {formik.errors.tribunal && formik.touched.tribunal && (
-              <Text>{formik.errors.tribunal}</Text>
-            )}
+            <InlineError message={formik.errors.tribunal} fieldId="tribunal" />
           </Field>
           <Field>
             <Input
@@ -142,6 +147,7 @@ export const MandataireMesureEditForm = props => {
               onChange={formik.handleChange}
               placeholder="numero de dossier"
             />
+            <InlineError message={formik.errors.numero_dossier} fieldId="numero_dossier" />
           </Field>
           <Field>
             <Input
@@ -153,6 +159,7 @@ export const MandataireMesureEditForm = props => {
               onChange={formik.handleChange}
               placeholder="Date d'ordonnance"
             />
+            <InlineError message={formik.errors.date_ouverture} fieldId="date_ouverture" />
           </Field>
           <Field>
             <Select
@@ -164,6 +171,7 @@ export const MandataireMesureEditForm = props => {
               onChange={option => formik.setFieldValue("type", option)}
               options={MESURE_TYPE_LABEL_VALUE}
             />
+            <InlineError message={formik.errors.type} fieldId="type" />
           </Field>
           <Field>
             <Select
@@ -175,6 +183,7 @@ export const MandataireMesureEditForm = props => {
               onChange={option => formik.setFieldValue("civilite", option)}
               options={CIVILITY}
             />
+            <InlineError message={formik.errors.civilite} fieldId="civilite" />
           </Field>
           <Field>
             <Input
@@ -185,6 +194,7 @@ export const MandataireMesureEditForm = props => {
               onChange={formik.handleChange}
               placeholder="année de naissance"
             />
+            <InlineError message={formik.errors.annee} fieldId="annee" />
           </Field>
           <Field>
             <Select
@@ -196,6 +206,7 @@ export const MandataireMesureEditForm = props => {
               onChange={option => formik.setFieldValue("residence", option)}
               options={RESIDENCE}
             />
+            <InlineError message={formik.errors.residence} fieldId="residence" />
           </Field>
 
           <Field>
@@ -203,9 +214,7 @@ export const MandataireMesureEditForm = props => {
               resource={mesure}
               onChange={geocode => formik.setFieldValue("geocode", geocode)}
             />
-            {formik.errors.geocode && formik.touched.geocode && (
-              <Text>{formik.errors.geocode}</Text>
-            )}
+            <InlineError message={formik.errors.geocode} fieldId="geocode" />
           </Field>
 
           <Flex justifyContent="flex-end">

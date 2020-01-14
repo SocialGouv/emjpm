@@ -1,9 +1,12 @@
-import * as Yup from "yup";
+import yup from "./yup";
 
-const serviceAcceptMesureSchema = Yup.object().shape({
-  date_ouverture: Yup.date().required("Champ obligatoire"),
-  geocode: Yup.object().required("Champ obligatoire"),
-  residence: Yup.string().required("Champ obligatoire")
+const serviceAcceptMesureSchema = yup.object().shape({
+  date_ouverture: yup.date().required(),
+  geocode: yup
+    .object()
+    .nullable()
+    .required(),
+  residence: yup.string().required()
 });
 
 export { serviceAcceptMesureSchema };

@@ -12,11 +12,7 @@ const ServiceCreateAntenne = props => {
   const [currentUserService] = service_admins;
   const { service_id } = currentUserService;
 
-  const [createAntenne] = useMutation(CREATE_ANTENNE, {
-    update() {
-      Router.push("/services/informations");
-    }
-  });
+  const [createAntenne] = useMutation(CREATE_ANTENNE);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
@@ -43,6 +39,7 @@ const ServiceCreateAntenne = props => {
     }
 
     setSubmitting(false);
+    Router.push("/services/informations");
   };
 
   return (

@@ -1,6 +1,6 @@
 import yup from "./yup";
 
-const passwordSchema = yup.object().shape({
+const resetPasswordSchema = yup.object().shape({
   newPassword: yup
     .string()
     .min(8, "Votre mot de passe doit être de 8 caractères minimum")
@@ -12,8 +12,7 @@ const passwordSchema = yup.object().shape({
   newPasswordConfirmation: yup
     .string()
     .oneOf([yup.ref("newPassword"), null], "Les mots de passe ne sont pas égaux")
-    .required(),
-  password: yup.string().required()
+    .required()
 });
 
-export { passwordSchema };
+export { resetPasswordSchema };

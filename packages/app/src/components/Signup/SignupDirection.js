@@ -1,12 +1,21 @@
-import { Button, Card, Field, Heading1, Heading4, Select, Text } from "@socialgouv/emjpm-ui-core";
+import {
+  Button,
+  Card,
+  Field,
+  Heading1,
+  Heading4,
+  InlineError,
+  Select,
+  Text
+} from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
-import * as Yup from "yup";
 
 import { DIRECTION_TYPE_LABEL_VALUE } from "../../constants/direction";
+import { signupDirectionSchema } from "../../lib/validationSchemas";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupGeneralError } from "./SignupGeneralError";
@@ -34,9 +43,7 @@ export const SignupDirection = () => {
         onSuccess: () => Router.push("/signup/congratulation")
       });
     },
-    validationSchema: Yup.object().shape({
-      directionType: Yup.string().required("Champ obligatoire")
-    }),
+    validationSchema: signupDirectionSchema,
     initialValues: {
       directionType: direction ? direction.directionType : ""
     }
@@ -44,9 +51,9 @@ export const SignupDirection = () => {
 
   return (
     <Fragment>
+      <Heading1 px="1">{`Création d'un compte d'agent de l'état`}</Heading1>
       <Card sx={cardStyle}>
-        <Heading1 px="1">{`Création d'un compte d'agent de l'état`}</Heading1>
-        <Flex flexDirection="column">
+        <Flex>
           <Box width={[1, 2 / 5]} sx={grayBox}>
             <Box height="80px" pt={1}>
               <Heading4>{`Institution`}</Heading4>
@@ -69,8 +76,8 @@ export const SignupDirection = () => {
                     onChange={option => formik.setFieldValue("directionType", option)}
                     options={DIRECTION_TYPE_LABEL_VALUE}
                   />
-                  {formik.errors.cabinet && formik.touched.cabinet && (
-                    <Text>{formik.errors.cabinet}</Text>
+                  {formik.touched.directionType && (
+                    <InlineError message={formik.errors.directionType} fieldId="directionType" />
                   )}
                 </Field>
                 <Flex justifyContent="flex-end">

@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Card, Field, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
@@ -59,7 +59,7 @@ const MagistratEditInformations = props => {
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
             <form onSubmit={formik.handleSubmit}>
-              <Field sx={{ position: "relative", zIndex: "1" }} mb="2">
+              <Field>
                 <Input
                   value={formik.values.cabinet}
                   id="cabinet"
@@ -68,9 +68,7 @@ const MagistratEditInformations = props => {
                   onChange={formik.handleChange}
                   placeholder="Cabinet (optionnel)"
                 />
-                {formik.errors.cabinet && formik.touched.cabinet && (
-                  <Text mt="1">{formik.errors.cabinet}</Text>
-                )}
+                <InlineError message={formik.errors.cabinet} fieldId="cabinet" />
               </Field>
               <Field>
                 <Input
@@ -81,9 +79,7 @@ const MagistratEditInformations = props => {
                   onChange={formik.handleChange}
                   placeholder="Prénom"
                 />
-                {formik.errors.prenom && formik.touched.prenom && (
-                  <Text mt="1">{formik.errors.prenom}</Text>
-                )}
+                <InlineError message={formik.errors.prenom} fieldId="prenom" />
               </Field>
               <Field>
                 <Input
@@ -94,7 +90,7 @@ const MagistratEditInformations = props => {
                   onChange={formik.handleChange}
                   placeholder="Nom"
                 />
-                {formik.errors.nom && formik.touched.nom && <Text mt="1">{formik.errors.nom}</Text>}
+                <InlineError message={formik.errors.nom} fieldId="nom" />
               </Field>
               <Field>
                 <Input
@@ -105,9 +101,7 @@ const MagistratEditInformations = props => {
                   onChange={formik.handleChange}
                   placeholder="Email"
                 />
-                {formik.errors.email && formik.touched.email && (
-                  <Text mt="1">{formik.errors.email}</Text>
-                )}
+                <InlineError message={formik.errors.email} fieldId="email" />
               </Field>
               <Flex alignItems="center" justifyContent="flex-end">
                 <Box mr="2">

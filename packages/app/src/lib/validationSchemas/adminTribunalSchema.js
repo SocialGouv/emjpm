@@ -1,13 +1,14 @@
-import * as Yup from "yup";
+import yup from "./yup";
 
-const adminTribunalSchema = Yup.object().shape({
-  email: Yup.string().email("Le format de votre email n'est pas correct"),
-  etablissement: Yup.string().required("Champ obligatoire"),
-  geocode: Yup.object()
+const adminTribunalSchema = yup.object().shape({
+  email: yup.string().email(),
+  etablissement: yup.string().required(),
+  geocode: yup
+    .object()
     .nullable()
-    .required("Champ obligatoire"),
-  siret: Yup.string().required("Champ obligatoire"),
-  telephone: Yup.string()
+    .required(),
+  siret: yup.string().required(),
+  telephone: yup.string()
 });
 
 export { adminTribunalSchema };
