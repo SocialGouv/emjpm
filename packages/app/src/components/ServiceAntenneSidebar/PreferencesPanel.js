@@ -59,14 +59,8 @@ const PreferencesPanel = props => {
   );
 };
 
-PreferencesPanel.defaultProps = {
-  currentAntenne: null,
-  user_antennes: []
-};
-
 PreferencesPanel.propTypes = {
-  currentAntenne: PropTypes.string,
-  user_antennes: PropTypes.array
+  antenneId: PropTypes.array.required
 };
 
 export { PreferencesPanel };
