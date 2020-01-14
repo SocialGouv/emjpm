@@ -103,7 +103,7 @@ const MandataireInformations = props => {
           </Heading4>
           <Flex justifyContent="flex-start">
             <Box mr={4}>
-              <pre style={{ "white-space": "pre-wrap" }}>{label(mandataire.competences)}</pre>
+              <pre style={{ whiteSpace: "pre-wrap" }}>{label(mandataire.competences)}</pre>
             </Box>
           </Flex>
         </Box>
