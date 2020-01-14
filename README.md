@@ -45,6 +45,45 @@ $ yarn workspace @emjpm/api test --maxWorkers=2 --coverage
 
 ## E2E tests
 
+**Local testing**
+
+
+```sh
+#
+# Ensure to have a clean new postgres volume
+$ docker-compose rm -sfv
+$ docker volume rm -f emjpm_emjpm-pgdata
+$ docker-compose system prune --all
+$ docker-compose system prune --volumes
+#
+
+# Start a new db
+$ docker-compose up db
+
+# Initialize the db
+$ yarn workspace @emjpm/knex run migrate --env test
+$ yarn workspace @emjpm/knex run seeds --env test
+# Instantiate the initial seed
+$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
+
+# Or if you have the test-seed.dump
+# The e2e script will retore the db before each scenario with
+$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e --if-exists --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
+
+# start the dev server
+$ yarn dev
+$ docker-compose up graphql-engine
+
+# Install the e2e runner env
+$ yarn e2e
+# short for
+$ yarn run -- lerna --scope @optional/e2e.runner.puppetteer exec yarn
+
+# Run the test
+$ yarn e2e test
+```
+
+**Remote**
 
 ```sh
 #
