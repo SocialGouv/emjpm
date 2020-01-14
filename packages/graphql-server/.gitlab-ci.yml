@@ -7,7 +7,7 @@ Install graphql-server:
   before_script:
     - find packages -maxdepth 1 -type d -not -name graphql-server | tail -n +2 | xargs rm -rf
   artifacts:
-    expire_in: 30 mins
+    expire_in: 1 day
     paths:
       - node_modules
       - packages/graphql-server/node_modules
@@ -34,7 +34,7 @@ Build @emjpm/graphql-server:
   script:
     - yarn workspace @emjpm/graphql-server build
   artifacts:
-    expire_in: 30 mins
+    expire_in: 1 day
     paths:
       - packages/graphql-server/dist
 
