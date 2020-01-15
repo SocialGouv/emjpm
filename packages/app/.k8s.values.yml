@@ -28,6 +28,10 @@ deployment:
         name: emjpm-secret
         key: SENTRY_PUBLIC_DSN
 
+service:
+  port: ${PORT}
+  targetPort: ${PORT}
+
 ingress:
   enabled: true
   annotations:
@@ -36,7 +40,8 @@ ingress:
   hosts:
     - host: emjpm.dev.fabrique.social.gouv.fr
       paths:
-        - /
+        - path: /
+          servicePort: ${PORT}
   tls:
     - hosts:
         - emjpm.dev.fabrique.social.gouv.fr
