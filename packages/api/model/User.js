@@ -108,10 +108,6 @@ class User extends Model {
     };
   }
 
-  getAntennes() {
-    return this.antennes.map(el => el.id);
-  }
-
   getService() {
     return this.service ? this.service.id : null;
   }
@@ -121,8 +117,7 @@ class User extends Model {
       "x-hasura-allowed-roles": this.getRoles(),
       "x-hasura-default-role": this.getDefaultRole(),
       "x-hasura-user-id": `${this.id}`,
-      "x-hasura-service-id": `${this.getService()}`,
-      "x-hasura-antenne-id": `${this.getAntennes()}`
+      "x-hasura-service-id": `${this.getService()}`
     };
   }
 
