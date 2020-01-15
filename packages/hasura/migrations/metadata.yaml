@@ -1974,6 +1974,12 @@ tables:
         column: service_id
         table: service_admin
   - comment: null
+    name: service_antennes
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table: service_antenne
+  - comment: null
     name: service_tis
     using:
       foreign_key_constraint_on:

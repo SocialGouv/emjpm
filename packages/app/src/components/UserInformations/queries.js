@@ -6,7 +6,6 @@ export const CURRENT_USER = gql`
       role
       serviceId
       id
-      antenneId
     }
   }
 `;
