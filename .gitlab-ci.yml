@@ -9,19 +9,19 @@ include:
   #
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_nodejs_chart_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   #
   - /.gitlab-ci/stages/notify.yml
   - /.gitlab-ci/stages/deploy.yml
