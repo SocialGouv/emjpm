@@ -53,6 +53,10 @@ deployment:
           cpu: 0m
           memory: 0Mi
 
+service:
+  port: ${PORT}
+  targetPort: ${PORT}
+
 
 ingress:
   enabled: true
@@ -62,7 +66,8 @@ ingress:
   hosts:
     - host: hasura-emjpm.dev.fabrique.social.gouv.fr
       paths:
-        - /
+        - path: /
+          servicePort: ${PORT}
   tls:
     - hosts:
         - hasura-emjpm.dev.fabrique.social.gouv.fr
