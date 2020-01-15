@@ -8,11 +8,11 @@ import { UserContext } from "../UserContext";
 import { MESURES_SERVICE } from "./queries";
 
 const ServiceMap = () => {
-  const { service_admins } = useContext(UserContext);
-  const [service_admin] = service_admins;
+  const { service_members } = useContext(UserContext);
+  const [service_member] = service_members;
   const {
     service: { longitude, latitude }
-  } = service_admin;
+  } = service_member;
 
   const { data, loading, error } = useQuery(MESURES_SERVICE);
 

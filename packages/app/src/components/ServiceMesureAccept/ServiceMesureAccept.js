@@ -9,12 +9,12 @@ import { ServiceMesureAcceptStyle } from "./style";
 
 const ServiceMesureAccept = props => {
   const { mesureId } = props;
-  const { service_admins } = useContext(UserContext);
+  const { service_members } = useContext(UserContext);
   const [
     {
       service: { service_antennes }
     }
-  ] = service_admins;
+  ] = service_members;
 
   const {
     data: departementsData,

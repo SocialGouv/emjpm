@@ -39,7 +39,7 @@ export const USERS = gql`
           ville
         }
       }
-      service_admins {
+      service_members {
         id
         service {
           id
@@ -73,7 +73,7 @@ export const USER = gql`
           ville
         }
       }
-      service_admins {
+      service_members {
         id
         service {
           id

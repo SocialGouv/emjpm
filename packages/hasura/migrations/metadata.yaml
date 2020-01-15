@@ -1795,7 +1795,7 @@ tables:
       computed_fields: []
       filter: {}
     role: ti
-  table: service_admin
+  table: service_members
   update_permissions: []
 - array_relationships:
   - comment: null
@@ -1968,11 +1968,11 @@ tables:
     role: ti
 - array_relationships:
   - comment: null
-    name: service_admins
+    name: service_members
     using:
       foreign_key_constraint_on:
         column: service_id
-        table: service_admin
+        table: service_members
   - comment: null
     name: service_antennes
     using:
@@ -2381,11 +2381,11 @@ tables:
   update_permissions: []
 - array_relationships:
   - comment: null
-    name: service_admins
+    name: service_members
     using:
       foreign_key_constraint_on:
         column: user_id
-        table: service_admin
+        table: service_members
   - comment: null
     name: user_roles
     using:

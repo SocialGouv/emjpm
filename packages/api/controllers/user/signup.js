@@ -9,7 +9,7 @@ const { Direction } = require("../../model/Direction");
 const { errorHandler } = require("../../db/errors");
 const { inscriptionEmail } = require("../../email/inscription");
 const { getTisNames } = require("./utils/tis");
-const { createServiceAdmin } = require("./utils/service");
+const { createServiceMember } = require("./utils/service");
 
 const createMagistrat = async (magistrat, user) => {
   const { ti } = magistrat;
@@ -130,7 +130,7 @@ const signup = async (req, res) => {
         break;
       case "service": {
         const { service_id } = body.service;
-        await createServiceAdmin(user.id, service_id);
+        await createServiceMember(user.id, service_id);
         break;
       }
       case "ti": {
