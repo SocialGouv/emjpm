@@ -1158,10 +1158,13 @@ Object {
 `;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 exports[`user_antenne table schema 1`] = `Object {}`;
 
 >>>>>>> fix(user-antennes): remove user antenne from api model and knex seeds
+=======
+>>>>>>> test(user-antennes): update knex test snapshot
 exports[`user_role table schema 1`] = `
 Object {
   "id": Object {
