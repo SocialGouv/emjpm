@@ -80,6 +80,7 @@ Put to production:
       - $PRODUCTION
   script:
     - echo "Put ${CI_COMMIT_REF_NAME}@${CI_COMMIT_SHORT_SHA} in production"
+    - apt-get update && apt-get install -y curl
     - curl --request POST
         --form ref="${CI_COMMIT_REF_NAME}"
         --form token="${CI_JOB_TOKEN}"
