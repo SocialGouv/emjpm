@@ -38,8 +38,9 @@ services:
       
   maildev:
     image: djfarrelly/maildev
-    command: bin/maildev --web 1080 --smtp 25 --hide-extensions STARTTLS
+    command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
     ports:
+      - '1025:1025'
       - '1080:1080'
 
   graphql-engine:
