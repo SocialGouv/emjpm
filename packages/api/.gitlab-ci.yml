@@ -85,15 +85,18 @@ Register api image:
 #
 
 .deploy_api_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
   dependencies: []
   stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
   variables:
     CONTEXT: api
     IMAGE_TAG: $CI_COMMIT_SHA
     PORT: 80
     VALUES_FILE: ./packages/api/.k8s.values.yml
   before_script:
+    - exit 0
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
