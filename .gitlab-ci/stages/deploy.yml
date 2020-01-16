@@ -34,7 +34,7 @@ Register postgres image:
     DOCKER_BUILD_ARGS: ""
     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
 
-.deploy-postgres: &deploy_postgres
+.deploy_postgres:
   extends:
     - .k8s-deploy-postgres
     - .deploy_stage
