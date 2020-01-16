@@ -66,9 +66,8 @@ Deploy postgres (incubateur):
 
 Restore postgres data (dev):
   extends:
-    - .k8s-deploy-metabase
+    - .k8s-restore-postgres-data
     - .deploy_stage
-  extends: .k8s-restore-postgres-data
   when: manual
 
 #
