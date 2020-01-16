@@ -6,16 +6,7 @@ include:
 
 #
 
-.deploy_stage: &deploy_stage
-  stage: "Deploy"
-  dependencies: []
-  services:
-    - docker:dind
-  variables: &deploy_stage_variables
-    IMAGE_TAG: $CI_COMMIT_SHA
-    REGISTRY: $CI_REGISTRY_IMAGE
-
-.incubateur_stage: &incubateur_stage
+.incubateur_stage:
   environment:
     name: prod
   only:
@@ -24,16 +15,11 @@ include:
     variables:
       - $PRODUCTION
 
-.dev_stage: &dev_stage
+.dev_stage:
+  extends:
+    - .base_stage
   environment:
     name: fabrique-dev
-  only:
-    refs:
-      - branches
-      - tags
-  except:
-    variables:
-      - $PRODUCTION
 
 #
 #
@@ -48,10 +34,11 @@ Register postgres image:
     DOCKER_BUILD_ARGS: ""
     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
 
-.deploy-postgres: &deploy_postgres
-  <<: *deploy_stage
-  extends: .k8s-deploy-postgres
-  variables: &deploy_postgres_stage_variables
+.deploy_postgres:
+  extends:
+    - .k8s-deploy-postgres
+    - .deploy_stage
+  variables:
     CONTEXT: postgres
     EMJPM_REGISTRY: $CI_REGISTRY_IMAGE
     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
@@ -60,19 +47,17 @@ Register postgres image:
 #
 
 Deploy postgres (dev):
-  <<: *deploy_postgres
-  <<: *dev_stage
+  extends:
+    - .deploy_postgres
+    - .dev_stage
   variables:
-    <<: *deploy_stage_variables
-    <<: *deploy_postgres_stage_variables
     PERSISTENCE_ENABLED: "false"
 
 Deploy postgres (incubateur):
-  <<: *deploy_postgres
-  <<: *incubateur_stage
+  extends:
+    - .deploy_postgres
+    - .incubateur_stage
   variables:
-    <<: *deploy_stage_variables
-    <<: *deploy_postgres_stage_variables
     PERSISTENCE_ENABLED: "true"
 
 #
@@ -80,9 +65,9 @@ Deploy postgres (incubateur):
 #
 
 Restore postgres data (dev):
-  <<: *deploy_stage
-  <<: *dev_stage
-  extends: .k8s-restore-postgres-data
+  extends:
+    - .k8s-restore-postgres-data
+    - .deploy_stage
   when: manual
 
 #
@@ -90,11 +75,11 @@ Restore postgres data (dev):
 #
 
 Deploy metabase (incubateur):
-  <<: *incubateur_stage
-  <<: *deploy_stage
-  extends: .k8s-deploy-metabase
+  extends:
+    - .k8s-deploy-metabase
+    - .deploy_stage
+    - .incubateur_stage
   variables:
-    <<: *deploy_stage_variables
     CONTEXT: metabase
     PORT: 3000
   after_script:
