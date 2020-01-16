@@ -84,7 +84,7 @@ Register api image:
 
 #
 
-.deploy_api_stage: &deploy_api_stage
+.deploy_api_stage:
   dependencies: []
   stage: Deploy
   extends: .base_deploy_nodejs_chart_stage
