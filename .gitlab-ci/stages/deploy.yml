@@ -4,22 +4,6 @@ include:
   - /.k8s/metabase/.k8s-deploy-metabase.yml
   - /.k8s/postgres/.k8s-deploy-postgres.yml
 
-#
-
-.incubateur_stage:
-  environment:
-    name: prod
-  only:
-    refs:
-      - triggers
-    variables:
-      - $PRODUCTION
-
-.dev_stage:
-  extends:
-    - .base_stage
-  environment:
-    name: fabrique-dev
 
 #
 #
@@ -33,6 +17,8 @@ Register postgres image:
     CONTEXT: ./docker/postgres
     DOCKER_BUILD_ARGS: ""
     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
+
+#
 
 .deploy_postgres:
   extends:
@@ -68,6 +54,7 @@ Restore postgres data (dev):
   extends:
     - .k8s-restore-postgres-data
     - .deploy_stage
+    - .dev_stage
   when: manual
 
 #
