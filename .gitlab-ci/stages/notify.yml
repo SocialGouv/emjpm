@@ -57,7 +57,7 @@ Release:
   dependencies: []
   image: node:12.14-alpine3.10
   variables:
-    LERNA_ARGS: --force-publish
+    LERNA_ARGS: --force-publish --yes
     #
     GIT_AUTHOR_EMAIL: 45039513+SocialGroovyBot@users.noreply.github.com
     GIT_AUTHOR_NAME: Social Groovy Bot
