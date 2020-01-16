@@ -11,11 +11,15 @@ include:
 #
 
 Notify Starting Deployment:
-  extends: .base_notify_pending_stage
+  extends:
+    - .base_notify_pending_stage
+    - .base_stage
   stage: Deploy
 
 Notify Fail:
-  extends: .base_notify_fail_stage
+  extends:
+    - .base_notify_fail_stage
+    - .base_stage
   stage: Notify Finished Deployment
   dependencies:
     - Notify Starting Deployment
@@ -24,7 +28,9 @@ Notify Fail:
     - HOST=${FRONTEND_HOST}
 
 Notify Success:
-  extends: .base_notify_success_stage
+  extends:
+    - .base_notify_success_stage
+    - .base_stage
   stage: Notify Finished Deployment
   dependencies:
     - Notify Starting Deployment
@@ -37,7 +43,9 @@ Notify Success:
 #
 
 Delete useless k8s namespaces:
-  extends: .base_delete_useless_k8s_ns_stage
+  extends:
+    - .base_delete_useless_k8s_ns_stage
+    - .base_stage
 
 #
 #
@@ -91,7 +99,6 @@ Release:
     # Run lerna version
     - echo "yarn lerna version ${LERNA_ARGS}"
     - GH_TOKEN=${GITHUB_TOKEN} yarn lerna version ${LERNA_ARGS}
-
 
 #
 #
