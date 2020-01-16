@@ -36,10 +36,8 @@ const initialValues = {
 };
 
 export const ServiceAddMesure = props => {
-  const {
-    user_antennes,
-    service_admins: [service]
-  } = props;
+  const { service } = props;
+  const { service_antennes } = service;
 
   const formik = useFormik({
     onSubmit: (values, { setSubmitting, setErrors }) => {
@@ -81,7 +79,7 @@ export const ServiceAddMesure = props => {
   });
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
-    variables: { serviceId: service.service_id }
+    variables: { serviceId: service.id }
   });
 
   const {
@@ -137,9 +135,9 @@ export const ServiceAddMesure = props => {
     return <div>Erreur...</div>;
   }
 
-  const antenneOptions = user_antennes.map(ua => ({
-    label: ua.service_antenne.name,
-    value: ua.service_antenne.id
+  const antenneOptions = service_antennes.map(antenne => ({
+    label: antenne.name,
+    value: antenne.id
   }));
 
   const tribunalList = formatServiceTribunalList(data.service_tis);

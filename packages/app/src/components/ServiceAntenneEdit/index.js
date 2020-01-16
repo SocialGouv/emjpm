@@ -1,3 +1,3 @@
-import { ServiceEditAntenne } from "./ServiceEditAntenne";
+import { ServiceAntenneEdit } from "./ServiceAntenneEdit";
 
-export { ServiceEditAntenne };
+export { ServiceAntenneEdit };
