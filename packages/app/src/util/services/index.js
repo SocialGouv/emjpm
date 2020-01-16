@@ -55,20 +55,16 @@ export const formatMesureList = mesureList => {
   return mesures;
 };
 
-export const formatAntenneOptions = user_antennes => {
-  return user_antennes.map(user_antenne => {
-    return {
-      label: user_antenne.service_antenne.name,
-      value: user_antenne.service_antenne.id
-    };
-  });
+export const formatAntenneOptions = antennes => {
+  return antennes.map(antenne => ({
+    label: antenne.name,
+    value: antenne.id
+  }));
 };
 
 export const formatServiceTribunalList = tribunalList => {
-  return tribunalList.map(tribunal => {
-    return {
-      label: tribunal.ti.etablissement,
-      value: tribunal.ti.id
-    };
-  });
+  return tribunalList.map(tribunal => ({
+    label: tribunal.ti.etablissement,
+    value: tribunal.ti.id
+  }));
 };

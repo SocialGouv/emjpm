@@ -1,7 +1,6 @@
 const { ServiceAntenne } = require("../../../model/ServiceAntenne");
 const { ServiceTis } = require("../../../model/ServiceTis");
 const { ServiceAdmin } = require("../../../model/ServiceAdmin");
-const { UserAntenne } = require("../../../model/UserAntenne");
 
 exports.createServiceTis = async (body, service_id) => {
   const { tis } = body;
@@ -17,22 +16,6 @@ exports.createServiceTis = async (body, service_id) => {
           ti_id
         })
     )
-  );
-};
-
-exports.createUserAntenne = async (userId, antennes) => {
-  if (antennes.length == 0 || !userId) {
-    return true;
-  }
-  Promise.all(
-    antennes.map(antenne => {
-      return UserAntenne.query()
-        .allowInsert("[user_id,antenne_id]")
-        .insert({
-          user_id: userId,
-          antenne_id: antenne.id
-        });
-    })
   );
 };
 

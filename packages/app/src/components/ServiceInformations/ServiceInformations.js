@@ -97,13 +97,11 @@ const ServiceInformations = props => {
 };
 
 ServiceInformations.defaultProps = {
-  currentAntenne: null,
-  user_antennes: []
+  currentAntenne: null
 };
 
 ServiceInformations.propTypes = {
-  currentAntenne: PropTypes.string,
-  user_antennes: PropTypes.array
+  currentAntenne: PropTypes.string
 };
 
 export { ServiceInformations };

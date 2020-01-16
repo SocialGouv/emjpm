@@ -8,7 +8,8 @@ import { PreferencesPanel } from "../../../src/components/ServiceAntenneSidebar"
 import { withAuthSync } from "../../../src/util/auth";
 
 const Antennes = props => {
-  const { antenne_id } = props;
+  const { antenneId } = props;
+
   return (
     <LayoutServices>
       <BoxWrapper mt={6} px="1">
@@ -26,7 +27,7 @@ const Antennes = props => {
             }}
           >
             <Heading2>Informations de votre antenne</Heading2>
-            <ServiceInformations antenne_id={antenne_id} mt="3" />
+            <ServiceInformations antenne_id={antenneId} mt="3" />
           </Box>
           <Box
             sx={{
@@ -36,7 +37,7 @@ const Antennes = props => {
             }}
           >
             <Heading2>Mesures souhaitées</Heading2>
-            <PreferencesPanel currentAntenne={antenne_id} mt="3" />
+            <PreferencesPanel antenneId={antenneId} mt="3" />
           </Box>
         </Flex>
       </BoxWrapper>
@@ -45,7 +46,7 @@ const Antennes = props => {
 };
 
 Antennes.getInitialProps = async ({ query }) => {
-  return { antenne_id: query.antenne_id };
+  return { antenneId: query.antenne_id };
 };
 
 export default withAuthSync(Antennes);
