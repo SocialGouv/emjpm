@@ -86,8 +86,6 @@ stages:
   environment:
     name: prod
   only:
-    refs:
-      - triggers
     variables:
       - $PRODUCTION
 
