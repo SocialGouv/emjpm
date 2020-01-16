@@ -71,6 +71,7 @@ Release:
 
 Put to production:
   stage: "Notify Finished Deployment"
+  image: curlimages/curl:7.67.0
   dependencies: []
   when: manual
   only:
@@ -79,10 +80,8 @@ Put to production:
     variables:
       - $PRODUCTION
   script:
-    - echo "Put ${CI_COMMIT_REF_NAME}@${CI_COMMIT_SHORT_SHA} in production"
-    - apt-get update && apt-get install -y curl
     - curl --request POST
-        --form ref="${CI_COMMIT_REF_NAME}"
-        --form token="${CI_JOB_TOKEN}"
-        --form variables[PRODUCTION]="true"
-        ${CI_API_V4_URL}/api/v4/projects/${CI_PROJECT_ID}/trigger/pipeline
+      --form ref="${CI_COMMIT_REF_NAME}"
+      --form token="${CI_JOB_TOKEN}"
+      --form variables[PRODUCTION]="true"
+      ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
