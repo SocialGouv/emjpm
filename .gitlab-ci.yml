@@ -64,19 +64,27 @@ stages:
   extends: .base_stage
   stage: "Code Quality"
   dependencies: []
-  except:
-    variables:
-      - $PRODUCTION
 
 .register_stage:
   extends: .base_stage
   stage: "Registration"
   interruptible: true
   dependencies: []
+
+.deploy_stage:
+  stage: "Deploy"
   except:
     variables:
-      - $PRODUCTION
+      # Don't run when running e2e tests
+      - $E2E_TEST
+  dependencies: []
+  services:
+    - docker:dind
+  variables:
+    IMAGE_TAG: ${CI_COMMIT_SHA}
+    REGISTRY: ${CI_REGISTRY_IMAGE}
 
+#
 
 Create namespace:
   extends:
