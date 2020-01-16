@@ -7,7 +7,7 @@ import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
 const ServiceFilters = props => {
-  const { isStatusHidden, user_antennes } = props;
+  const { isStatusHidden, service_antennes } = props;
 
   const {
     mesureType,
@@ -24,16 +24,12 @@ const ServiceFilters = props => {
     {
       label: "Toutes les antennes",
       value: null
-    }
-  ];
-
-  Array.prototype.push.apply(
-    antenneOptions,
-    user_antennes.map(user_antenne => ({
-      label: user_antenne.service_antenne.name,
-      value: user_antenne.service_antenne.id
+    },
+    ...service_antennes.map(antenne => ({
+      label: antenne.name,
+      value: antenne.id
     }))
-  );
+  ];
 
   return (
     <Card mt="3">
@@ -41,7 +37,7 @@ const ServiceFilters = props => {
         <Box>
           <Flex>
             <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
-            {user_antennes.length >= 2 && (
+            {service_antennes.length >= 2 && (
               <Box width="170px" mr={1}>
                 <Select
                   size="small"

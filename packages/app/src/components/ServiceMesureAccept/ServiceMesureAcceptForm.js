@@ -22,12 +22,11 @@ import { UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "../ServiceMesur
 import { ACCEPT_MESURE } from "./mutations";
 
 export const ServiceMesureAcceptForm = props => {
-  const { mesureId, user_antennes, departementsData } = props;
+  const { mesureId, service_antennes, departementsData } = props;
 
-  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
-  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
-
-  const [UpdateMesure] = useMutation(ACCEPT_MESURE, {
+  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [updateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+  const [updateMesure] = useMutation(ACCEPT_MESURE, {
     update(
       cache,
       {
@@ -37,7 +36,7 @@ export const ServiceMesureAcceptForm = props => {
       }
     ) {
       const [mesure] = returning;
-      UpdateServicesCounter({
+      updateServicesCounter({
         variables: {
           mesures_awaiting: -1,
           mesures_in_progress: 1,
@@ -45,7 +44,7 @@ export const ServiceMesureAcceptForm = props => {
         }
       });
       if (mesure.antenne_id) {
-        UpdateAntenneCounters({
+        updateAntenneCounters({
           variables: {
             antenne_id: mesure.antenne_id,
             inc_mesures_awaiting: -1,
@@ -59,10 +58,10 @@ export const ServiceMesureAcceptForm = props => {
     }
   });
 
-  const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
+  const ANTENNE_OPTIONS = formatAntenneOptions(service_antennes);
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting, setErrors }) => {
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
       const regionCode = getRegionCode(values.geocode.postcode);
       const departements = departementsData.departements;
       const departement = departements.find(dep => dep.code === regionCode);
@@ -71,7 +70,7 @@ export const ServiceMesureAcceptForm = props => {
           geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
         });
       } else {
-        UpdateMesure({
+        await updateMesure({
           refetchQueries: ["mesures", "mesures_aggregate"],
           variables: {
             antenne_id: values.antenne_id ? values.antenne_id.value : null,
@@ -86,6 +85,7 @@ export const ServiceMesureAcceptForm = props => {
           }
         });
       }
+
       setSubmitting(false);
     },
     validationSchema: serviceAcceptMesureSchema,
@@ -140,7 +140,7 @@ export const ServiceMesureAcceptForm = props => {
             <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
             <InlineError message={formik.errors.geocode} fieldId="geocode" />
           </Field>
-          {user_antennes.length >= 2 && (
+          {service_antennes.length >= 2 && (
             <Field>
               <Select
                 id="antenne_id"

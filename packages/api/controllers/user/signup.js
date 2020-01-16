@@ -9,11 +9,7 @@ const { Direction } = require("../../model/Direction");
 const { errorHandler } = require("../../db/errors");
 const { inscriptionEmail } = require("../../email/inscription");
 const { getTisNames } = require("./utils/tis");
-const {
-  getServiceAntennesByService,
-  createUserAntenne,
-  createServiceAdmin
-} = require("./utils/service");
+const { createServiceAdmin } = require("./utils/service");
 
 const createMagistrat = async (magistrat, user) => {
   const { ti } = magistrat;
@@ -134,8 +130,6 @@ const signup = async (req, res) => {
         break;
       case "service": {
         const { service_id } = body.service;
-        const antennes = await getServiceAntennesByService(service_id);
-        await createUserAntenne(user.id, antennes);
         await createServiceAdmin(user.id, service_id);
         break;
       }

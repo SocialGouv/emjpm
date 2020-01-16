@@ -24,9 +24,9 @@ import { ACCEPT_MESURE } from "./mutations";
 export const MandataireMesureAcceptForm = props => {
   const { mesureId, departementsData } = props;
 
-  const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
+  const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
 
-  const [UpdateMesure] = useMutation(ACCEPT_MESURE, {
+  const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted() {
       Router.push(`/mandataires/mesures/${mesureId}`);
     },
@@ -39,7 +39,7 @@ export const MandataireMesureAcceptForm = props => {
       }
     ) {
       const [mesure] = returning;
-      UpdateMandatairesCounter({
+      updateMandatairesCounter({
         variables: {
           mandataireId: mesure.mandataire_id,
           mesures_awaiting: -1,
@@ -59,7 +59,7 @@ export const MandataireMesureAcceptForm = props => {
           geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
         });
       } else {
-        UpdateMesure({
+        updateMesure({
           refetchQueries: ["mesures", "mesures_aggregate"],
           variables: {
             date_ouverture: values.date_ouverture,

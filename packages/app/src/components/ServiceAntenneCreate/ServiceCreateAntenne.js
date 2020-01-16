@@ -8,7 +8,7 @@ import { ServiceAntenneForm } from "../ServiceAntenneForms";
 import { CREATE_ANTENNE } from "./mutations";
 
 const ServiceCreateAntenne = props => {
-  const { service_admins, id } = props;
+  const { service_admins } = props;
   const [currentUserService] = service_admins;
   const { service_id } = currentUserService;
 
@@ -30,8 +30,7 @@ const ServiceCreateAntenne = props => {
           contact_phone: values.contact_phone,
           mesures_max: values.mesures_max,
           name: values.name,
-          service_id: service_id,
-          user_id: id
+          service_id: service_id
         }
       });
     } catch (error) {
