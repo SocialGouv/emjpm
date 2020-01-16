@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.17.7](https://github.com/SocialGouv/emjpm/compare/v25.17.6...v25.17.7) (2020-01-16)
+
+**Note:** Version bump only for package @emjpm/graphql-server
+
+
+
+
+
 ## [25.17.6](https://github.com/SocialGouv/emjpm/compare/v25.17.5...v25.17.6) (2020-01-16)
 
 **Note:** Version bump only for package @emjpm/graphql-server
