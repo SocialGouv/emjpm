@@ -1077,7 +1077,6 @@ Array [
   "service_tis",
   "services",
   "tis",
-  "user_antenne",
   "user_role",
   "user_tis",
   "users",
@@ -1154,29 +1153,6 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
-  },
-}
-`;
-
-exports[`user_antenne table schema 1`] = `
-Object {
-  "antenne_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "id": Object {
-    "defaultValue": "nextval('user_antenne_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "user_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
   },
 }
 `;

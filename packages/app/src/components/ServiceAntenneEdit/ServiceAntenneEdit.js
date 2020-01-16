@@ -7,27 +7,21 @@ import { Box, Flex } from "rebass";
 import { ServiceAntenneForm } from "../ServiceAntenneForms";
 import { EDIT_ANTENNE } from "./mutations";
 
-const ServiceEditAntenne = props => {
-  const { service_admins, id, antenneId, user_antennes } = props;
-  const [{ service_id }] = service_admins;
+const ServiceAntenneEdit = props => {
+  const { user, antenneId } = props;
+  const { service_admins } = user;
+  const [{ service }] = service_admins;
+  const { service_antennes } = service;
+  const [antenne] = service_antennes.filter(s => s.id === antenneId);
 
-  const [{ service_antenne: antenne }] = user_antennes.filter(
-    ({ antenne_id }) => antenneId === antenne_id
-  );
-
-  const [editAntenne] = useMutation(EDIT_ANTENNE, {
-    update() {
-      Router.push("/services/antennes/[antenne_id]", `/services/antennes/${antenneId}`, {
-        shallow: true
-      });
-    }
-  });
+  const [editAntenne] = useMutation(EDIT_ANTENNE);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await editAntenne({
         refetchQueries: ["service_antenne"],
         variables: {
+          antenne_id: antenneId,
           address_city: values.geocode.city,
           address: values.geocode.label,
           address_zip_code: values.geocode.postcode,
@@ -39,8 +33,8 @@ const ServiceEditAntenne = props => {
           contact_phone: values.contact_phone,
           mesures_max: values.mesures_max,
           name: values.name,
-          service_id: service_id,
-          user_id: id
+          service_id: service.id,
+          user_id: user.id
         }
       });
     } catch (error) {
@@ -48,6 +42,9 @@ const ServiceEditAntenne = props => {
     }
 
     setSubmitting(false);
+    Router.push("/services/antennes/[antenne_id]", `/services/antennes/${antenneId}`, {
+      shallow: true
+    });
   };
 
   return (
@@ -73,14 +70,12 @@ const ServiceEditAntenne = props => {
             </Text>
           </Box>
         </Box>
-        <Box p="5" width={[1, 3 / 5]}>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-            <ServiceAntenneForm antenne={antenne} handleSubmit={handleSubmit} />
-          </Box>
+        <Box p="5" mb="2" width={[1, 3 / 5]}>
+          <ServiceAntenneForm antenne={antenne} handleSubmit={handleSubmit} />
         </Box>
       </Flex>
     </Card>
   );
 };
 
-export { ServiceEditAntenne };
+export { ServiceAntenneEdit };

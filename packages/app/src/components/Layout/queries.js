@@ -20,19 +20,12 @@ export const GET_SERVICE_USERS = gql`
         }
         id
         service_id
-      }
-      user_antennes {
-        service_antenne {
-          id
-          name
+        service {
+          service_antenne {
+            id
+            name
+          }
         }
-        user {
-          id
-          prenom
-          nom
-        }
-        id
-        antenne_id
       }
     }
   }

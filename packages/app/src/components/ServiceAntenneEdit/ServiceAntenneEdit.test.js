@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { ServiceEditAntenne } from "./ServiceEditAntenne";
+import { ServiceAntenneEdit } from "./ServiceAntenneEdit";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<ServiceEditAntenne />).toJSON();
+  const tree = renderer.create(<ServiceAntenneEdit />).toJSON();
   expect(tree).toMatchSnapshot();
 });

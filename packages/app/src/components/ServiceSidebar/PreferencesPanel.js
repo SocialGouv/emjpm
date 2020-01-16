@@ -57,14 +57,12 @@ const PreferencesPanel = props => {
 
 PreferencesPanel.defaultProps = {
   currentAntenne: null,
-  isDescriptionHidden: false,
-  user_antennes: []
+  isDescriptionHidden: false
 };
 
 PreferencesPanel.propTypes = {
   currentAntenne: PropTypes.string,
-  isDescriptionHidden: PropTypes.bool,
-  user_antennes: PropTypes.array
+  isDescriptionHidden: PropTypes.bool
 };
 
 export { PreferencesPanel };

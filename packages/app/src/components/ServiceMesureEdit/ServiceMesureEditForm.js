@@ -37,7 +37,7 @@ export const ServiceMesureEditForm = props => {
     departementsData,
     mesureId,
     tribunalList,
-    user_antennes
+    service_antennes
   } = props;
 
   const geocode = geocodeInitialValue(props.mesure);
@@ -45,7 +45,7 @@ export const ServiceMesureEditForm = props => {
   const [editMesure] = useMutation(EDIT_MESURE);
   const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
 
-  const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
+  const ANTENNE_OPTIONS = formatAntenneOptions(service_antennes);
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
@@ -185,7 +185,7 @@ export const ServiceMesureEditForm = props => {
             />
             <InlineError message={formik.errors.date_ouverture} fieldId="date_ouverture" />
           </Field>
-          {user_antennes.length >= 2 && (
+          {service_antennes.length >= 2 && (
             <Field>
               <Select
                 id="antenne_id"
