@@ -73,12 +73,6 @@ stages:
 
 .deploy_stage:
   stage: "Deploy"
-  except:
-    variables:
-      # Don't run when running e2e tests
-      - $E2E_TEST
-      # Don't run when tagging a commit
-      - $RELEASE
   dependencies: []
   services:
     - docker:dind
@@ -88,10 +82,25 @@ stages:
 
 #
 
+.incubateur_stage:
+  environment:
+    name: prod
+  only:
+    variables:
+      - $PRODUCTION
+
+.dev_stage:
+  extends:
+    - .base_stage
+  environment:
+    name: fabrique-dev
+
+#
+
 Create namespace:
   extends:
     - .base_create_namespace_stage
-    - .base_stage
+    - .dev_stage
   before_script:
     - source ./.gitlab-ci/env.sh
   after_script:
