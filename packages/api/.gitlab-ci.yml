@@ -85,9 +85,11 @@ Register api image:
 #
 
 .deploy_api_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
   dependencies: []
   stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
   variables:
     CONTEXT: api
     IMAGE_TAG: $CI_COMMIT_SHA
