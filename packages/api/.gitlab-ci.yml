@@ -96,7 +96,6 @@ Register api image:
     PORT: 80
     VALUES_FILE: ./packages/api/.k8s.values.yml
   before_script:
-    - exit 0
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
