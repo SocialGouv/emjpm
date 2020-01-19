@@ -99,10 +99,10 @@ DUMP_FILE=emjpm_prod_`date +%d-%m-%Y"_"%H_%M_%S`.dump
 pg_dump emjpm -U postgres -Fc > /tmp/$DUMP_FILE
 ```
 
-copy dump on loca
+copy dump on local
 
 ```bash
-kubectl cp emjpm-postgres-prod-0:/tmp/$DUMP_FILE ./$DUMP_FILE
+kubectl cp postgres-postgresql-0:/tmp/$DUMP_FILE ./$DUMP_FILE
 ```
 
 #### restore production dump on local
