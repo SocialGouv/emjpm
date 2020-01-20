@@ -57,7 +57,7 @@ const MandataireMesureImport = () => {
               <DocumentLink document={MANDATAIRE_MESURE_IMPORT_TEMPLATE}>
                 <FileExcel size="86" width="100%" color="#008000" />
                 <Box textAlign="center" mt={2} color="#0067EA">
-                  Télécharger la modèle Excel
+                  Télécharger le modèle Excel
                 </Box>
               </DocumentLink>
             </Flex>
