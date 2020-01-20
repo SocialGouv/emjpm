@@ -782,29 +782,6 @@ Object {
 }
 `;
 
-exports[`service_admin table schema 1`] = `
-Object {
-  "id": Object {
-    "defaultValue": "nextval('service_admin_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "service_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "user_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-}
-`;
-
 exports[`service_antenne table schema 1`] = `
 Object {
   "address": Object {
@@ -919,6 +896,35 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": false,
+    "type": "integer",
+  },
+}
+`;
+
+exports[`service_members table schema 1`] = `
+Object {
+  "id": Object {
+    "defaultValue": "nextval('service_admin_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "is_admin": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": false,
+    "type": "boolean",
+  },
+  "service_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
     "type": "integer",
   },
 }
@@ -1072,8 +1078,8 @@ Array [
   "mesures_import",
   "regions",
   "role",
-  "service_admin",
   "service_antenne",
+  "service_members",
   "service_tis",
   "services",
   "tis",

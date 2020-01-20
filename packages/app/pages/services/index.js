@@ -12,12 +12,12 @@ import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {
-  const { service_admins } = useContext(UserContext);
+  const { service_members } = useContext(UserContext);
   const [
     {
       service: { service_antennes }
     }
-  ] = service_admins;
+  ] = service_members;
 
   return (
     <FiltersContextProvider>

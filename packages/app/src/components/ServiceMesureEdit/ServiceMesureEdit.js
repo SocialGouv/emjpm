@@ -15,12 +15,12 @@ const ServiceMesureEdit = props => {
   const {
     service: { service_id }
   } = mesure;
-  const { service_admins } = useContext(UserContext);
+  const { service_members } = useContext(UserContext);
   const [
     {
       service: { service_antennes }
     }
-  ] = service_admins;
+  ] = service_members;
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
     variables: { serviceId: service_id }

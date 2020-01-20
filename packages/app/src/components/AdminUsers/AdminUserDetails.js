@@ -1,5 +1,5 @@
-const serviceDetail = ({ service_admins }) => {
-  const values = service_admins.map(val => val.service.etablissement);
+const serviceDetail = ({ service_members }) => {
+  const values = service_members.map(val => val.service.etablissement);
   return { type: "Service", values };
 };
 

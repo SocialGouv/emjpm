@@ -65,7 +65,7 @@ export const MESURES_GESTIONNAIRE = gql`
           telephone
           email
           etablissement
-          service_admins {
+          service_members {
             id
             user {
               id

@@ -22,7 +22,7 @@ export const GET_SERVICE_USERS = gql`
       prenom
       type
       username
-      service_admins {
+      service_members {
         user {
           prenom
           nom
