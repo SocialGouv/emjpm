@@ -65,7 +65,7 @@ Deploy metabase (incubateur):
   extends:
     - .k8s-deploy-metabase
     - .deploy_stage
-    - .incubateur_stage
+    - .dev_stage
   variables:
     CONTEXT: metabase
     PORT: 3000
