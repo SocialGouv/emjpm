@@ -55,7 +55,7 @@ export const GESTIONNAIRES = gql`
         latitude
         longitude
         etablissement
-        service_admins {
+        service_members {
           id
           user {
             id

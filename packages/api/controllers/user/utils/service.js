@@ -1,6 +1,6 @@
 const { ServiceAntenne } = require("../../../model/ServiceAntenne");
 const { ServiceTis } = require("../../../model/ServiceTis");
-const { ServiceAdmin } = require("../../../model/ServiceAdmin");
+const { ServiceMember } = require("../../../model/ServiceMember");
 
 exports.createServiceTis = async (body, service_id) => {
   const { tis } = body;
@@ -19,9 +19,9 @@ exports.createServiceTis = async (body, service_id) => {
   );
 };
 
-exports.createServiceAdmin = async (userId, serviceId) => {
+exports.createServiceMember = async (userId, serviceId) => {
   if (serviceId && userId) {
-    return ServiceAdmin.query()
+    return ServiceMember.query()
       .allowInsert("[user_id,antenne_id]")
       .insert({
         user_id: userId,

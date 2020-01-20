@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 const { Service } = require("../model/Service");
-const { ServiceAdmin } = require("../model/ServiceAdmin");
+const { ServiceMember } = require("../model/ServiceMember");
 const { Mandataire } = require("../model/Mandataire");
 const { Tis } = require("../model/Tis");
 const { User } = require("../model/User");
@@ -51,7 +51,7 @@ const getEmailUserDatas = async (mandataire_id, service_id) => {
     ];
   } else {
     const service = await Service.query().findById(service_id);
-    const serviceAdmins = await ServiceAdmin.query().where(
+    const serviceAdmins = await ServiceMember.query().where(
       "service_id",
       service_id
     );

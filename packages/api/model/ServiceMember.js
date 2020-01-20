@@ -3,9 +3,9 @@ const { Model } = require("objection");
 
 Model.knex(knexConnection);
 
-class ServiceAdmin extends Model {
+class ServiceMember extends Model {
   static get tableName() {
-    return "service_admin";
+    return "service_members";
   }
 
   static get idColumn() {
@@ -18,10 +18,11 @@ class ServiceAdmin extends Model {
       properties: {
         id: { type: "integer" },
         service_id: { type: "integer" },
-        user_id: { type: "integer" }
+        user_id: { type: "integer" },
+        is_admin: { type: "boolean" }
       }
     };
   }
 }
 
-module.exports = { ServiceAdmin };
+module.exports = { ServiceMember };
