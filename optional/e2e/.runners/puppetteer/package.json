@@ -4,7 +4,7 @@
   "description": "",
   "main": "codecept.conf.js",
   "scripts": {
-    "test": "codeceptjs run --features --verbose"
+    "test": "codeceptjs run --features ../../features/inscription.feature --verbose"
   },
   "dependencies": {
     "codeceptjs": "^2.4.1",
