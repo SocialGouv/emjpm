@@ -21,6 +21,10 @@ When("I enter {string} as {string}", (value, placeholder) => {
   I.fillField(placeholder, value);
 });
 
+When("pause", () => {
+  pause();
+});
+
 Then("I should redirected to {string} page", url => {
   I.waitInUrl(url, 5);
 });
@@ -37,10 +41,18 @@ When("I see {string}", text => {
   I.see(text);
 });
 
+When("I click on {string} in dropdown", text => {
+  I.click(locate("div").withText(text));
+});
+
 When("I fill in the following", table => {
   table.rows.forEach(({ cells: [{ value: label }, { value }] }) => {
     I.fillField(label, value);
   });
+});
+
+Then("I wait for text {string}", text => {
+  I.waitForText(text);
 });
 
 When("I click on {string} on the line with {string}", (buttonName, text) => {

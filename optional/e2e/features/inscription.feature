@@ -7,75 +7,49 @@ Feature: Inscription
   Background: Navigate to HomePage
     Given a clean test database
     Given a web browser is on EMJJM
-    And I see "Créer votre compte emjpm"
     And I click on "Créer votre compte emjpm"
 
-  @inscription_individuel
-  Scenario Outline: Manu at Arras
-    When I click on "Hauts-de-France"
-    And I click on "ti arras"
-    And I click on "<type>"
-    Then I see "Renseignez ci-dessous vos informations professionnelles:"
+  Scenario: Manu at Arras
+    When I click on "Créer votre compte emjpm"
+    Then I should redirected to "/signup" page
+    Then I see "Création de compte"
 
-    When I fill in the following
-      | Adresse email                      | manu@email.com        |
-      | Mot de passe                       | JaimeLesFrites        |
-      | Répétez le mot de passe            | JaimeLesFrites        |
-      | Nom                                | Spontex               |
-      | Prénom                             | Manu                  |
-      | Genre                              | M                     |
-      | Téléphone                          | 0123456789            |
-      | Téléphone Portable                 | 9876543210            |
-      | Adresse (rue)                      | 27, Rue Benoît Voisin |
-      | Code Postal                        | 89100                 |
-      | Commune                            | Sens                  |
-      | Nombre total de mesures souhaitées | 10                    |
+    When I click on "#type"
+    Then I see "Mandataire individuel"
+    And I click on "#react-select-2-option-0"
 
-    And I click on "Créer mon compte"
-    Then I should redirected to "/inscription-done" page
+    Then I fill in the following
+      | Email                              | manu@email.com               |
+      | Mot de passe                       | JaimeLesFrites123456?        |
+      | Confirmation du mot de passe       | JaimeLesFrites123456?        |
+      | Nom                                | Spontex                      |
+      | Prénom                             | Manu                         |
+    And I click on "Suivant"
+    Then I see "Création d'un compte de mandataire individuel"
+    
+    Then I fill in the following
+      | SIRET                              | 12345678912345               |
+      | Téléphone                       | 0685968574        |
+      | Téléphone portable       | 0685968574        |
+      | Nombre de mesures souhaité  | 42  |
+    When I click on "#tis"
+    Then I see "Tribunal d'Instance de Calais"
+    And I click on "#react-select-3-option-0"
+    
+    When I click on "#genre"
+    Then I see "Femme"
+    And I click on "#react-select-4-option-0"    
 
-    Examples:
-      | type       |
-      | Individuel |
-      | Préposé    |
+    When I click on "#genre"
+    Then I see "Femme"
+    And I click on "#react-select-4-option-0"    
 
-  @inscription_service
-  Scenario: Dan Service at Arras
-    When I click on "Hauts-de-France"
-    And I click on "ti arras"
-    And I click on "Service"
-    Then I see "Renseignez ci-dessous vos informations professionnelles:"
-
-    When I fill in the following
-      | Adresse email                        | dan@email.com         |
-      | Mot de passe                         | JaimeLesFrites        |
-      | Répétez le mot de passe              | JaimeLesFrites        |
-      | Nom du service                       | Spontex               |
-      | Nom du contact dans le service       | Spontex               |
-      | Prénom du contact dans le service    | Dan                   |
-      | Téléphone du contact dans le service | 0123456789            |
-      | Adresse (rue)                        | 27, Rue Benoît Voisin |
-      | Code Postal                          | 89100                 |
-      | Commune                              | Sens                  |
-      | Nombre total de mesures souhaitées   | 10                    |
-
-    And I click on "Créer mon compte"
-    Then I should redirected to "/inscription-done" page
-
-  @inscription_tribunal_instance
-  Scenario: Frank Tribunal Instance d'Arras
-    When I click on "Hauts-de-France"
-    And I click on "ti arras"
-    And I click on "Tribunal Instance"
-    Then I see "Renseignez ci-dessous vos informations professionnelles:"
-
-    When I fill in the following
-      | Adresse email           | arras@ti.com   |
-      | Mot de passe            | JaimeLesFrites |
-      | Répétez le mot de passe | JaimeLesFrites |
-      | Nom                     | Spontex        |
-      | Prénom                  | Frank          |
-      | Cabinet                 | 4A             |
-
-    And I click on "Créer mon compte"
-    Then I should redirected to "/inscription-done" page
+    When I enter "37 Quai André Citroën" as "#react-select-5-input"
+    Then I wait for text "37 Quai André Citroën 75015 Paris"
+    And I click on "#react-select-5-option-0"
+    Then I click on "Enregistrer" 
+    Then I should redirected to "/signup/congratulation" page
+    
+    When I see "Votre demande d'inscription est terminée"
+    And I click on "Se connecter"
+    Then I should redirected to "/login" page
