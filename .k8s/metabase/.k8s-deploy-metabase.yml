@@ -1,6 +1,10 @@
 .k8s-deploy-metabase:
   extends: .base_docker_helm_image_stage
   script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    #
     - export POSTGRESQL_USER=metabase
     - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_METABASE_PASSWORD}' | base64 --decode)
     #
