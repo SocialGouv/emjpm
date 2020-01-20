@@ -47,7 +47,6 @@ $ yarn workspace @emjpm/api test --maxWorkers=2 --coverage
 
 **Local testing**
 
-
 ```sh
 #
 # Ensure to have a clean new postgres volume
