@@ -17,8 +17,8 @@ import {
 
 const ServiceInformationsSidebar = () => {
   const user = useContext(UserContext);
-  const { service_admins } = user;
-  const [{ service }] = service_admins;
+  const { service_members } = user;
+  const [{ service }] = service_members;
   const {
     dispo_max,
     mesures_in_progress,

@@ -8,8 +8,8 @@ import { ServiceAntenneForm } from "../ServiceAntenneForms";
 import { CREATE_ANTENNE } from "./mutations";
 
 const ServiceCreateAntenne = props => {
-  const { service_admins } = props;
-  const [currentUserService] = service_admins;
+  const { service_members } = props;
+  const [currentUserService] = service_members;
   const { service_id } = currentUserService;
 
   const [createAntenne] = useMutation(CREATE_ANTENNE);

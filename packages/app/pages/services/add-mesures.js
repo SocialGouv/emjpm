@@ -8,7 +8,7 @@ import { withAuthSync } from "../../src/util/auth";
 
 const AddMesures = () => {
   const {
-    service_admins: [{ service }]
+    service_members: [{ service }]
   } = useContext(UserContext);
 
   return (
