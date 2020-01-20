@@ -108,7 +108,7 @@ export const GET_MANDATAIRES = gql`
           telephone
           email
           etablissement
-          service_admins {
+          service_members {
             id
             user {
               id

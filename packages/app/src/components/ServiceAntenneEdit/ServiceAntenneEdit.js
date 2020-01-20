@@ -9,8 +9,8 @@ import { EDIT_ANTENNE } from "./mutations";
 
 const ServiceAntenneEdit = props => {
   const { user, antenneId } = props;
-  const { service_admins } = user;
-  const [{ service }] = service_admins;
+  const { service_members } = user;
+  const [{ service }] = service_members;
   const { service_antennes } = service;
   const [antenne] = service_antennes.filter(s => s.id === antenneId);
 

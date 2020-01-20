@@ -6,7 +6,6 @@ const { Model } = require("objection");
 
 const { Role } = require("./Role");
 const { Tis } = require("./Tis");
-const { ServiceAntenne } = require("./ServiceAntenne");
 const { Service } = require("./Service");
 
 Model.knex(knexConnection);
@@ -59,8 +58,8 @@ class User extends Model {
         join: {
           from: "users.id",
           through: {
-            from: "service_admin.user_id",
-            to: "service_admin.service_id"
+            from: "service_members.user_id",
+            to: "service_members.service_id"
           },
           to: "services.id"
         }

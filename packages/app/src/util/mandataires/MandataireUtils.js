@@ -56,8 +56,8 @@ export const formatMandataire = (
 
   if (discriminator === "SERVICE") {
     const lastLogin =
-      service.service_admins && service.service_admins.length
-        ? newestLastLogin(service.service_admins)
+      service.service_members && service.service_members.length
+        ? newestLastLogin(service.service_members)
         : null;
 
     currentDiscriminator = {
