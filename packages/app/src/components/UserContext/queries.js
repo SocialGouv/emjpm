@@ -53,6 +53,9 @@ export const GET_SERVICE_USERS = gql`
             address_zip_code
             address_street
             address_city
+            address
+            longitude
+            latitude
           }
         }
       }
