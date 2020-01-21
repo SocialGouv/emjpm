@@ -46,7 +46,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Mesures souhaitées</Heading2>
-            <PreferencesPanel antenneId={antenne.id} mt="3" />
+            {antenne && <PreferencesPanel antenneId={antenne.id} mt="3" />}
           </Box>
         </Flex>
         <Box
