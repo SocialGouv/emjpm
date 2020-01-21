@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.17.8](https://github.com/SocialGouv/emjpm/compare/v25.17.4...v25.17.8) (2020-01-21)
+
+
+### Bug Fixes
+
+* **mesure-cancel:** fix cancel reservation email date format ([#1431](https://github.com/SocialGouv/emjpm/issues/1431)) ([b91a042](https://github.com/SocialGouv/emjpm/commit/b91a0424b0113ca3553665b73e81c6edf9782d28))
+
+
+
+
+
 ## [25.17.7](https://github.com/SocialGouv/emjpm/compare/v25.17.6...v25.17.7) (2020-01-16)
 
 **Note:** Version bump only for package @emjpm/api

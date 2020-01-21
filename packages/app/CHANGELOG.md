@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.17.8](https://github.com/SocialGouv/emjpm/compare/v25.17.4...v25.17.8) (2020-01-21)
+
+
+### Bug Fixes
+
+* **mesure-list-item:** fix type size with new package version ([#1432](https://github.com/SocialGouv/emjpm/issues/1432)) ([641f398](https://github.com/SocialGouv/emjpm/commit/641f398b0a856e19e4ebc53ce256a0b41ef8f725))
+* **wording:** fix service add form heading ([#1414](https://github.com/SocialGouv/emjpm/issues/1414)) ([4d175bd](https://github.com/SocialGouv/emjpm/commit/4d175bd1368ed3fd0baf02772f787848a0a3598c))
+* **wording:** fix text typo ([#1413](https://github.com/SocialGouv/emjpm/issues/1413)) ([2c08818](https://github.com/SocialGouv/emjpm/commit/2c08818959f6a6c84278787125f0f35811c57445))
+
+
+
+
+
 ## [25.17.7](https://github.com/SocialGouv/emjpm/compare/v25.17.6...v25.17.7) (2020-01-16)
 
 **Note:** Version bump only for package @emjpm/app
