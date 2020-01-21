@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.17.9](https://github.com/SocialGouv/emjpm/compare/v25.17.8...v25.17.9) (2020-01-21)
+
+
+### Bug Fixes
+
+* **edit-antenne:** fetch address, longitude, latitude ([#1438](https://github.com/SocialGouv/emjpm/issues/1438)) ([794d249](https://github.com/SocialGouv/emjpm/commit/794d2498151307a792b57edd4c5eda2a6cf267b1))
+* **service-counter:** update service counters ([#1440](https://github.com/SocialGouv/emjpm/issues/1440)) ([12b6395](https://github.com/SocialGouv/emjpm/commit/12b6395d3d17b8b62c2982b3d8929bcd8753d011))
+
+
+
+
+
 ## [25.17.8](https://github.com/SocialGouv/emjpm/compare/v25.17.4...v25.17.8) (2020-01-21)
 
 
