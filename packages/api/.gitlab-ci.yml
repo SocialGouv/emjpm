@@ -14,15 +14,15 @@ Install api:
 
 #
 
-# Lint @emjpm/api:
-#   extends: .quality_stage
-#   image: node:12-alpine
-#   dependencies:
-#     - Install api
-#   needs:
-#     - Install api
-#   script:
-#     - yarn workspace @emjpm/api lint
+Lint @emjpm/api:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install api
+  needs:
+    - Install api
+  script:
+    - yarn workspace @emjpm/api lint
 
 # Test @emjpm/api:
 #   extends: .quality_stage
