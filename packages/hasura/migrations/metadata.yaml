@@ -1909,7 +1909,9 @@ tables:
       - name
       - service_id
       computed_fields: []
-      filter: {}
+      filter:
+        service_id:
+          _eq: x-hasura-service-id
     role: service
   - comment: null
     permission:
