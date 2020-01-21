@@ -8,12 +8,12 @@ import { PATH } from "../../constants/basePath";
 import { getDepartementByCodePostal } from "../../query-service/DepartementQueryService";
 import { isEmailExists } from "../../query-service/EmailQueryService";
 import { isSiretExists } from "../../query-service/SiretQueryService";
-import { MandatairesEditInformationsForm } from "./MandatairesEditInformationsForm";
+import { MandataireEditInformationsForm } from "./MandataireEditInformationsForm";
 import { EDIT_USER } from "./mutations";
 import { MANDATAIRE } from "./queries";
 import { grayBox } from "./style";
 
-const MandatairesEditInformations = props => {
+const MandataireEditInformations = props => {
   const { id, type } = props;
 
   const { data, error, loading } = useQuery(MANDATAIRE, {
@@ -127,7 +127,7 @@ const MandatairesEditInformations = props => {
         </Box>
         <Box p="5" width={[1, 3 / 5]}>
           <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-            <MandatairesEditInformationsForm
+            <MandataireEditInformationsForm
               mandataire={mandataire}
               client={client}
               handleSubmit={handleSubmit}
@@ -141,4 +141,4 @@ const MandatairesEditInformations = props => {
   );
 };
 
-export { MandatairesEditInformations };
+export { MandataireEditInformations };
