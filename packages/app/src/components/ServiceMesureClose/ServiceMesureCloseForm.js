@@ -51,8 +51,8 @@ export const ServiceMesureCloseForm = props => {
         updateAntenneCounters({
           variables: {
             antenne_id: mesure.antenne_id,
-            inc_mesures_awaiting: -1,
-            inc_mesures_in_progress: 1
+            inc_mesures_awaiting: 0,
+            inc_mesures_in_progress: -1
           }
         });
       }
