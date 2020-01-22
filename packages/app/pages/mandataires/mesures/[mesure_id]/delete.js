@@ -36,7 +36,7 @@ const DeleteMesurePage = props => {
                 p: 1
               }}
             >
-              <MandataireMesureDelete mesureId={mesureId} />
+              <MandataireMesureDelete />
             </Box>
           </Flex>
         </BoxWrapper>

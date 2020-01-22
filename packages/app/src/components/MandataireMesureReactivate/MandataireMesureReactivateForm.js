@@ -11,43 +11,31 @@ import { UPDATE_MANDATAIRES_COUTERS } from "../MandataireMesures/mutations";
 import { REACTIVATE_MESURE } from "./mutations";
 
 export const MandataireMesureReactivateForm = props => {
-  const { mesureId } = props;
+  const { mesure } = props;
 
   const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
-  const [updateMesure] = useMutation(REACTIVATE_MESURE, {
-    onCompleted() {
-      Router.push({ pathname: `/mandataires/mesures/${mesureId}` });
-    },
-    update(
-      cache,
-      {
-        data: {
-          update_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      updateMandatairesCounter({
-        variables: {
-          mandataireId: mesure.mandataire_id,
-          mesures_awaiting: 0,
-          mesures_in_progress: 1
-        }
-      });
-    }
-  });
+  const [updateMesure] = useMutation(REACTIVATE_MESURE);
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await updateMesure({
         refetchQueries: ["mesures", "mesures_aggregate"],
         variables: {
-          id: mesureId,
+          id: mesure.id,
           reason_extinction: values.reason_extinction
         }
       });
 
+      await updateMandatairesCounter({
+        variables: {
+          mandataireId: mesure.mandataireId,
+          mesures_awaiting: 0,
+          mesures_in_progress: 1
+        }
+      });
+
       setSubmitting(false);
+      Router.push({ pathname: `/mandataires/mesures/${mesure.id}` });
     },
     validationSchema: Yup.object().shape({
       reason_extinction: Yup.string().required("Required")
@@ -88,7 +76,7 @@ export const MandataireMesureReactivateForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/mandataires/mesures/${mesureId}`);
+                  Router.push(`/mandataires/mesures/${mesure.id}`);
                 }}
               >
                 Annuler

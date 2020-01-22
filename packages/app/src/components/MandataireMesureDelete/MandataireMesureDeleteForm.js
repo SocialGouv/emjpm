@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import { DELETE_MESURE } from "./mutations";
 
 export const MandataireMesureDeleteForm = props => {
-  const { mesureId } = props;
+  const { mesure } = props;
 
   const [deleteMesure] = useMutation(DELETE_MESURE);
 
@@ -18,7 +18,7 @@ export const MandataireMesureDeleteForm = props => {
     onSubmit: async (values, { setSubmitting }) => {
       await deleteMesure({
         variables: {
-          id: mesureId
+          id: mesure.id
         }
       });
 
