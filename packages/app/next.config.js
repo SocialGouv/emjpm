@@ -1,12 +1,15 @@
 const webpack = require("webpack");
 const withCSS = require("@zeit/next-css");
 const withImages = require("next-images");
+const withSourceMaps = require("@zeit/next-source-maps");
 const flow = require("lodash.flow");
+
 require("dotenv").config();
 
 module.exports = flow(
   withCSS,
-  withImages
+  withImages,
+  withSourceMaps
 )({
   publicRuntimeConfig: {
     API_URL: process.env.API_URL || "http://127.0.0.1:4000",
