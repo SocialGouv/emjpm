@@ -11,8 +11,9 @@ pg_restore \
   --format=c \
   --verbose \
   --dbname emjpm \
+  --schema emjpm
   ${1}
 
-psql -d emjpm -c "GRANT ALL ON SCHEMA public TO emjpm"
+psql -d emjpm -c "ALTER SCHEMA public OWNER TO emjpm"
 
 sleep 10s

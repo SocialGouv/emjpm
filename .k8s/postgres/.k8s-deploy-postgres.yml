@@ -22,13 +22,17 @@
   script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-    #
-    #
-    # Run pg_restore
-    - kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} || true;
+
+    - kubectl scale --replicas=0 deploy/${HASURA_SRV_HOST}
+
+    - kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
     - kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
-        --from-file=./.k8s/postgres/restore/configmap
-        --from-file=./docker/postgres/postgres-init.sh
-    #
-    - kubectl delete job ${K8S_PROJECT}-restore-${BRANCH_HASH} || true;
-    - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -;
+      --from-file=./.k8s/postgres/restore/configmap/
+
+    - kubectl delete job ${K8S_PROJECT}-restore-${BRANCH_HASH} || true
+    - kubectl apply -f ./.k8s/postgres/restore/restore-job.yml
+
+    - kubectl delete job ${K8S_PROJECT}-migrate-${BRANCH_HASH} || true
+    - kubectl apply -f ./.k8s/postgres/restore/migrate.yml
+
+    - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
