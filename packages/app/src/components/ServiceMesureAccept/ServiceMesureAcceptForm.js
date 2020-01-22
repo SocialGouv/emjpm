@@ -63,7 +63,7 @@ export const ServiceMesureAcceptForm = props => {
           }
         });
 
-        if (mesure.antenne_id) {
+        if (mesure.antenneId) {
           await updateAntenneCounters({
             variables: {
               antenne_id: mesure.antenneId,
