@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`should add ti for a  mandataire 1`] = `
-Object {
-  "id": 7,
-  "ti_id": 1,
-  "user_id": 1,
-}
-`;
