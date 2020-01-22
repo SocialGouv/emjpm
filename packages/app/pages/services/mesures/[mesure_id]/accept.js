@@ -36,7 +36,7 @@ const AcceptMesurePage = props => {
                 p: 1
               }}
             >
-              <ServiceMesureAccept mesureId={mesureId} />
+              <ServiceMesureAccept />
             </Box>
           </Flex>
         </BoxWrapper>
