@@ -22,58 +22,48 @@ import { UPDATE_MANDATAIRES_COUTERS } from "../MandataireMesures/mutations";
 import { ACCEPT_MESURE } from "./mutations";
 
 export const MandataireMesureAcceptForm = props => {
-  const { mesureId, departementsData } = props;
+  const { mesure, departementsData } = props;
 
   const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
-
-  const [updateMesure] = useMutation(ACCEPT_MESURE, {
-    onCompleted() {
-      Router.push(`/mandataires/mesures/${mesureId}`);
-    },
-    update(
-      cache,
-      {
-        data: {
-          update_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      updateMandatairesCounter({
-        variables: {
-          mandataireId: mesure.mandataire_id,
-          mesures_awaiting: -1,
-          mesures_in_progress: 1
-        }
-      });
-    }
-  });
+  const [updateMesure] = useMutation(ACCEPT_MESURE);
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting, setErrors }) => {
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
       const regionCode = getRegionCode(values.geocode.postcode);
       const departements = departementsData.departements;
       const departement = departements.find(dep => dep.code === regionCode);
+
       if (!departement) {
         setErrors({
           geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
         });
-      } else {
-        updateMesure({
-          refetchQueries: ["mesures", "mesures_aggregate"],
-          variables: {
-            date_ouverture: values.date_ouverture,
-            department_id: departement.id,
-            id: mesureId,
-            residence: values.residence.value,
-            code_postal: values.geocode.postcode,
-            ville: values.geocode.city,
-            latitude: values.geocode.latitude,
-            longitude: values.geocode.longitude
-          }
-        });
+        return;
       }
+
+      await updateMesure({
+        refetchQueries: ["mesures", "mesures_aggregate"],
+        variables: {
+          date_ouverture: values.date_ouverture,
+          department_id: departement.id,
+          id: mesure.id,
+          residence: values.residence.value,
+          code_postal: values.geocode.postcode,
+          ville: values.geocode.city,
+          latitude: values.geocode.latitude,
+          longitude: values.geocode.longitude
+        }
+      });
+
+      await updateMandatairesCounter({
+        variables: {
+          mandataireId: mesure.mandataireId,
+          mesures_awaiting: -1,
+          mesures_in_progress: 1
+        }
+      });
+
       setSubmitting(false);
+      Router.push(`/mandataires/mesures/${mesure.id}`);
     },
     validationSchema: mandataireAcceptMesureSchema,
     initialValues: {
@@ -134,7 +124,7 @@ export const MandataireMesureAcceptForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/mandataires/mesures/${mesureId}`);
+                  Router.push(`/mandataires/mesures/${mesure.id}`);
                 }}
               >
                 Annuler

@@ -10,7 +10,6 @@ import { ServiceMesureEditForm } from "./ServiceMesureEditForm";
 import { ServiceMesureEditStyle } from "./style";
 
 const ServiceMesureEdit = props => {
-  const { mesureId } = props;
   const mesure = useContext(MesureContext);
   const {
     service: { service_id }
@@ -48,7 +47,6 @@ const ServiceMesureEdit = props => {
         mt="3"
         tribunalList={tribunalList}
         departementsData={departementsData}
-        mesureId={mesureId}
         service_antennes={service_antennes}
         mesure={mesure}
       />

@@ -36,7 +36,7 @@ const CloseMesurePage = props => {
                 p: 1
               }}
             >
-              <MandataireMesureClose mesureId={mesureId} />
+              <MandataireMesureClose />
             </Box>
           </Flex>
         </BoxWrapper>

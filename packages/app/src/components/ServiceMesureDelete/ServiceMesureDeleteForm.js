@@ -9,14 +9,14 @@ import * as Yup from "yup";
 import { DELETE_MESURE } from "../ServiceMesures/mutations";
 
 export const ServiceDeleteMesureForm = props => {
-  const { mesureId } = props;
+  const { mesure } = props;
   const [deleteMesure] = useMutation(DELETE_MESURE);
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await deleteMesure({
         variables: {
-          id: mesureId
+          id: mesure.id
         }
       });
 
