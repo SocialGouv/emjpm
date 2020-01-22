@@ -43,21 +43,6 @@ $ yarn workspace @emjpm/api test
 $ yarn workspace @emjpm/api test --maxWorkers=2 --coverage
 ```
 
-## E2E tests
-
-The e2e tests are using the latest deployed `socialgouv/emjpm-*` images by default.
-To run the tests with
-
-```sh
-$ yarn lerna --scope @optional/e2e exec yarn
-$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up --build
-
-$ NODE_ENV=test yarn workspace @emjpm/knex run migrate
-$ NODE_ENV=test yarn workspace @emjpm/knex run seeds
-
-$ yarn run -- lerna --scope @optional/e2e run cypress:run -- --headed
-```
-
 ## Manual deployment
 
 To build and deploy manually some version :
