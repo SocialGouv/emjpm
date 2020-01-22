@@ -1066,6 +1066,7 @@ Array [
   "commentaires",
   "departements",
   "direction",
+  "editors",
   "etablissements",
   "geolocalisation_code_postal",
   "knex_migrations_v2",
