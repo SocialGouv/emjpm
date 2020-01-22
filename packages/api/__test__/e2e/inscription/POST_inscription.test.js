@@ -10,10 +10,10 @@ process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 process.env.APP_URL = "https://emjpm.gouv.fr";
 
 const { knex } = global;
-jest.setMock("@emjpm/api/db/knex", knex);
+jest.setMock("@emjpm/api/src/db/knex", knex);
 
-const server = require("@emjpm/api/app");
-const { getAllTisByMandataire } = require("@emjpm/api/db/queries/tis");
+const server = require("@emjpm/api/src/app");
+const { getAllTisByMandataire } = require("@emjpm/api/src/db/queries/tis");
 
 beforeAll(async () => {
   await knex.migrate.latest();
