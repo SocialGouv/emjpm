@@ -6,14 +6,11 @@ import { ServiceMesureReactivateForm } from "./ServiceMesureReactivateForm";
 import { ServiceMesureReactivateStyle } from "./style";
 
 const ServiceMesureReactivate = props => {
-  const { mesureId } = props;
-  const {
-    service: { service_id }
-  } = useContext(MesureContext);
+  const mesure = useContext(MesureContext);
 
   return (
     <Box sx={ServiceMesureReactivateStyle} {...props}>
-      <ServiceMesureReactivateForm mt="3" serviceId={service_id} mesureId={mesureId} />
+      <ServiceMesureReactivateForm mt="3" mesure={mesure} />
     </Box>
   );
 };
