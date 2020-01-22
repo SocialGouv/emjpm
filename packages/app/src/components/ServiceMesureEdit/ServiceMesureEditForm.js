@@ -27,6 +27,7 @@ export const ServiceMesureEditForm = props => {
       antenneId,
       civilite,
       dateOuverture,
+      id,
       numeroRg,
       numeroDossier,
       residence,
@@ -35,7 +36,6 @@ export const ServiceMesureEditForm = props => {
       tiId
     },
     departementsData,
-    mesureId,
     tribunalList,
     service_antennes
   } = props;
@@ -45,7 +45,7 @@ export const ServiceMesureEditForm = props => {
   const [editMesure] = useMutation(EDIT_MESURE);
   const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
 
-  const ANTENNE_OPTIONS = formatAntenneOptions(service_antennes);
+  const antenneOptions = formatAntenneOptions(service_antennes);
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
@@ -67,7 +67,7 @@ export const ServiceMesureEditForm = props => {
             code_postal: values.geocode.postcode,
             date_ouverture: values.date_ouverture,
             department_id: departement.id,
-            id: mesureId,
+            id: id,
             numero_dossier: values.numero_dossier,
             numero_rg: values.numero_rg,
             residence: values.residence.value,
@@ -100,13 +100,13 @@ export const ServiceMesureEditForm = props => {
         }
       }
 
-      Router.push(`/services/mesures/${mesureId}`);
       setSubmitting(false);
+      Router.push(`/services/mesures/${id}`);
     },
     validationSchema: serviceMesureSchema,
     initialValues: {
       annee: age,
-      antenne_id: antenneId ? ANTENNE_OPTIONS.find(o => o.value === antenneId) : null,
+      antenne_id: antenneId ? antenneOptions.find(o => o.value === antenneId) : null,
       civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
       date_ouverture: dateOuverture,
       numero_dossier: numeroDossier,
@@ -194,7 +194,7 @@ export const ServiceMesureEditForm = props => {
                 value={formik.values.antenne_id}
                 hasError={formik.errors.antenne_id && formik.touched.antenne_id}
                 onChange={option => formik.setFieldValue("antenne_id", option)}
-                options={ANTENNE_OPTIONS}
+                options={antenneOptions}
               />
               <InlineError message={formik.errors.antenne_id} fieldId="antenne_id" />
             </Field>
@@ -259,7 +259,7 @@ export const ServiceMesureEditForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/services/mesures/${mesureId}`);
+                  Router.push(`/services/mesures/${id}`);
                 }}
               >
                 Annuler
