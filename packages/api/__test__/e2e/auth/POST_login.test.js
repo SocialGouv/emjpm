@@ -3,9 +3,9 @@
 const request = require("supertest");
 
 const { knex } = global;
-jest.setMock("@emjpm/api/db/knex", knex);
+jest.setMock("@emjpm/api/src/db/knex", knex);
 
-const server = require("@emjpm/api/app");
+const server = require("@emjpm/api/src/app");
 
 //
 

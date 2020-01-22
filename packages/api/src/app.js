@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const Sentry = require("@sentry/node");
 
-const pkg = require("./package.json");
+const pkg = require("../package.json");
 const authV2Routes = require("./routes/auth-v2");
 const configuration = require("./env");
 
