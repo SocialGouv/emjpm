@@ -21,18 +21,24 @@
   extends: .base_docker_helm_image_stage
   script:
     - source ./.gitlab-ci/env.sh
+
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+
+    - export POSTGRESQL_USER=emjpm
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
 
     - kubectl scale --replicas=0 deploy/${HASURA_SRV_HOST}
 
-    - kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
+    - kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} || true
     - kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
       --from-file=./.k8s/postgres/restore/configmap/
 
-    - kubectl delete job ${K8S_PROJECT}-restore-${BRANCH_HASH} || true
-    - kubectl apply -f ./.k8s/postgres/restore/restore-job.yml
+    - kubectl delete job restore-job || true
+    - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -
+    - kubectl wait --for=condition=complete job/restore-job  --timeout=300s
 
-    - kubectl delete job ${K8S_PROJECT}-migrate-${BRANCH_HASH} || true
-    - kubectl apply -f ./.k8s/postgres/restore/migrate.yml
+    - kubectl delete job migrate-job || true
+    - cat ./.k8s/postgres/restore/migrate-job.yml | envsubst | kubectl apply -f -
 
+    - kubectl wait --for=condition=complete job/migrate-job  --timeout=300s
     - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}

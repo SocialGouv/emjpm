@@ -2,17 +2,23 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: ${K8S_PROJECT}-restore-${BRANCH_HASH}
+  name: restore-job
   labels:
-    app: ${K8S_PROJECT}-restore-${BRANCH_HASH}
+    app: restore-job
     git/branch: ${BRANCH_NAME}
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
 spec:
   template:
+    metadata:
+      labels:
+        app: restore-job
+        git/branch: ${BRANCH_NAME}
+        git/commit: ${COMMIT}
+        gitlab/job: "${JOB_ID}"
     spec:
       containers:
-        - name: ${K8S_PROJECT}-restore-${BRANCH_HASH}
+        - name: restore-job
           image: postgres:10-alpine
           command:
             - sh
