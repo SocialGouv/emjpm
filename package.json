@@ -3,9 +3,9 @@
   "scripts": {
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
-    "lint": "lerna run lint --parallel",
+    "lint": "lerna run lint --parallel --ignore @optional/*",
     "start": "lerna run start --parallel",
-    "test": "lerna run test --parallel"
+    "test": "lerna run test --parallel --ignore @optional/*"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
