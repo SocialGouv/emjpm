@@ -12,7 +12,7 @@ import { formatMesureList } from "./utils";
 
 const RESULT_PER_PAGE = 20;
 
-const MandatairesMesures = props => {
+const MandataireMesures = props => {
   const { isOnlyWaiting } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { mesureType, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
@@ -99,4 +99,4 @@ const MandatairesMesures = props => {
   );
 };
 
-export { MandatairesMesures };
+export { MandataireMesures };

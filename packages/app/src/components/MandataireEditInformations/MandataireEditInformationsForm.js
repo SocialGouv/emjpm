@@ -9,7 +9,7 @@ import { mandataireEditSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 
-const MandatairesEditInformationsForm = props => {
+const MandataireEditInformationsForm = props => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
 
   const [isSecretariat, setSecretariat] = useState(mandataire.secretariat);
@@ -194,4 +194,4 @@ const MandatairesEditInformationsForm = props => {
   );
 };
 
-export { MandatairesEditInformationsForm };
+export { MandataireEditInformationsForm };

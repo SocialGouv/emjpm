@@ -6,7 +6,7 @@ import { LinkButton } from "../../src/components/Commons";
 import { LayoutMandataire } from "../../src/components/Layout";
 import { MandataireFilters } from "../../src/components/MandataireFilters";
 import { FiltersContextProvider } from "../../src/components/MandataireFilters/context";
-import { MandatairesMesures } from "../../src/components/MandatairesMesures";
+import { MandataireMesures } from "../../src/components/MandataireMesures";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mandataires = () => {
@@ -27,7 +27,7 @@ const Mandataires = () => {
               mt: "2"
             }}
           >
-            <MandatairesMesures />
+            <MandataireMesures />
           </Flex>
         </BoxWrapper>
       </LayoutMandataire>
