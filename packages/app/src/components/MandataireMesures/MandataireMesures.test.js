@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { MandatairesMesures } from "./MandatairesMesures";
+import { MandataireMesures } from "./MandataireMesures";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<MandatairesMesures />).toJSON();
+  const tree = renderer.create(<MandataireMesures />).toJSON();
   expect(tree).toMatchSnapshot();
 });
