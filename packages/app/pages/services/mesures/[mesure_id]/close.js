@@ -36,7 +36,7 @@ const CloseMesurePage = props => {
                 p: 1
               }}
             >
-              <ServiceMesureClose mesureId={mesureId} />
+              <ServiceMesureClose />
             </Box>
           </Flex>
         </BoxWrapper>

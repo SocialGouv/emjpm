@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box } from "rebass";
 
+import { MesureContext } from "../MesureContext";
 import { MandataireMesureReactivateForm } from "./MandataireMesureReactivateForm";
 import { ServiceMesureReactivateStyle } from "./style";
 
-const MandataireMesureReactivate = props => {
-  const { mesureId } = props;
+const MandataireMesureReactivate = () => {
+  const mesure = useContext(MesureContext);
 
   return (
-    <Box sx={ServiceMesureReactivateStyle} {...props}>
-      <MandataireMesureReactivateForm mt="3" mesureId={mesureId} />
+    <Box sx={ServiceMesureReactivateStyle}>
+      <MandataireMesureReactivateForm mt="3" mesure={mesure} />
     </Box>
   );
 };
