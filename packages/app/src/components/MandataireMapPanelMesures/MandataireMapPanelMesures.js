@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
-import { formatMesureList } from "../MandatairesMesures/utils";
+import { formatMesureList } from "../MandataireMesures/utils";
 import { MESURES } from "./queries";
 import { MandataireMapPanelMesuresStyle } from "./style";
 const RESULT_PER_PAGE = 20;

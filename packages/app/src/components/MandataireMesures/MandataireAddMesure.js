@@ -16,7 +16,7 @@ import { ADD_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
 import { DEPARTEMENTS, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
 import { formatUserTribunalList } from "./utils";
 
-export const MandatairesAddMesure = props => {
+export const MandataireAddMesure = props => {
   const {
     mandataire: { id }
   } = useContext(UserContext);
