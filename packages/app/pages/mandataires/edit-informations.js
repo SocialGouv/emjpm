@@ -2,7 +2,7 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 
 import { LayoutMandataire } from "../../src/components/Layout";
-import { MandatairesEditInformations } from "../../src/components/MandatairesEditInformations";
+import { MandataireEditInformations } from "../../src/components/MandataireEditInformations";
 import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
@@ -13,7 +13,7 @@ const EditInformations = () => {
         <Heading1>Editer mes informations</Heading1>
         <UserInformations
           Component={props => {
-            return <MandatairesEditInformations {...props} mt="3" />;
+            return <MandataireEditInformations {...props} mt="3" />;
           }}
         />
       </BoxWrapper>

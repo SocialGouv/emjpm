@@ -7,7 +7,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { UPDATE_MANDATAIRES_COUTERS } from "../MandatairesMesures/mutations";
+import { UPDATE_MANDATAIRES_COUTERS } from "../MandataireMesures/mutations";
 import { REACTIVATE_MESURE } from "./mutations";
 
 export const MandataireMesureReactivateForm = props => {
