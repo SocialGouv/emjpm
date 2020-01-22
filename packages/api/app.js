@@ -5,10 +5,7 @@ const passport = require("passport");
 const Sentry = require("@sentry/node");
 
 const pkg = require("./package.json");
-const routes = require("./routes/index");
-const authRoutes = require("./routes/auth");
 const authV2Routes = require("./routes/auth-v2");
-const userRoutes = require("./routes/users");
 const configuration = require("./env");
 
 const app = express();
@@ -45,10 +42,6 @@ app.use(passport.initialize());
 
 app.use("/api/v2/auth", authV2Routes);
 app.use("/webhook", require("./routes/webhook"));
-
-app.use("/api/v1", passport.authenticate("jwt", { session: false }), routes);
-app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
 
 app.get("/ping", function(req, res) {
   if (!req.user) {
