@@ -22,43 +22,13 @@ import { UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "../ServiceMesur
 import { ACCEPT_MESURE } from "./mutations";
 
 export const ServiceMesureAcceptForm = props => {
-  const { mesureId, service_antennes, departementsData } = props;
+  const { mesure, service_antennes, departementsData } = props;
 
   const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const [updateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
-  const [updateMesure] = useMutation(ACCEPT_MESURE, {
-    update(
-      cache,
-      {
-        data: {
-          update_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      updateServicesCounter({
-        variables: {
-          mesures_awaiting: -1,
-          mesures_in_progress: 1,
-          service_id: mesure.service_id
-        }
-      });
-      if (mesure.antenne_id) {
-        updateAntenneCounters({
-          variables: {
-            antenne_id: mesure.antenne_id,
-            inc_mesures_awaiting: -1,
-            inc_mesures_in_progress: 1
-          }
-        });
-      }
-    },
-    onCompleted() {
-      Router.push(`/services/mesures/${mesureId}`);
-    }
-  });
+  const [updateMesure] = useMutation(ACCEPT_MESURE);
 
-  const ANTENNE_OPTIONS = formatAntenneOptions(service_antennes);
+  const antenneOptions = formatAntenneOptions(service_antennes);
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
@@ -76,7 +46,7 @@ export const ServiceMesureAcceptForm = props => {
             antenne_id: values.antenne_id ? values.antenne_id.value : null,
             date_ouverture: values.date_ouverture,
             department_id: departement.id,
-            id: mesureId,
+            id: mesure.id,
             residence: values.residence.value,
             code_postal: values.geocode.postcode,
             ville: values.geocode.city,
@@ -84,6 +54,26 @@ export const ServiceMesureAcceptForm = props => {
             longitude: values.geocode.longitude
           }
         });
+
+        await updateServicesCounter({
+          variables: {
+            mesures_awaiting: -1,
+            mesures_in_progress: 1,
+            service_id: mesure.serviceId
+          }
+        });
+
+        if (mesure.antenneId) {
+          await updateAntenneCounters({
+            variables: {
+              antenne_id: mesure.antenneId,
+              inc_mesures_awaiting: -1,
+              inc_mesures_in_progress: 1
+            }
+          });
+        }
+
+        Router.push(`/services/mesures/${mesure.id}`);
       }
 
       setSubmitting(false);
@@ -149,7 +139,7 @@ export const ServiceMesureAcceptForm = props => {
                 value={formik.values.antenne_id}
                 hasError={formik.errors.antenne_id && formik.touched.antenne_id}
                 onChange={option => formik.setFieldValue("antenne_id", option)}
-                options={ANTENNE_OPTIONS}
+                options={antenneOptions}
               />
               <InlineError message={formik.errors.antenne_id} fieldId="antenne_id" />
             </Field>
@@ -160,7 +150,7 @@ export const ServiceMesureAcceptForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/services/mesures/${mesureId}`);
+                  Router.push(`/services/mesures/${mesure.id}`);
                 }}
               >
                 Annuler

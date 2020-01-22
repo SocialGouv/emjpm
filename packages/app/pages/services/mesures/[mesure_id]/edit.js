@@ -36,7 +36,7 @@ const EditMesurePage = props => {
                 p: 1
               }}
             >
-              <ServiceMesureEdit mesureId={mesureId} />
+              <ServiceMesureEdit />
             </Box>
           </Flex>
         </BoxWrapper>

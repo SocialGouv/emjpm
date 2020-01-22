@@ -21,43 +21,32 @@ const EXTINCTION_LABEL_VALUE = [
 ];
 
 export const MandataireMesureCloseForm = props => {
-  const { mesureId } = props;
+  const { mesure } = props;
 
   const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
-  const [updateMesure] = useMutation(CLOSE_MESURE, {
-    onCompleted() {
-      Router.push(`/mandataires/mesures/${mesureId}`);
-    },
-    update(
-      cache,
-      {
-        data: {
-          update_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      updateMandatairesCounter({
+  const [updateMesure] = useMutation(CLOSE_MESURE);
+
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
+      await updateMesure({
+        refetchQueries: ["mesures", "mesures_aggregate"],
         variables: {
-          mandataireId: mesure.mandataire_id,
+          extinction: values.extinction,
+          id: mesure.id,
+          reason_extinction: values.reason_extinction.value
+        }
+      });
+
+      await updateMandatairesCounter({
+        variables: {
+          mandataireId: mesure.mandataireId,
           mesures_awaiting: 0,
           mesures_in_progress: -1
         }
       });
-    }
-  });
 
-  const formik = useFormik({
-    onSubmit: (values, { setSubmitting }) => {
-      updateMesure({
-        refetchQueries: ["mesures", "mesures_aggregate"],
-        variables: {
-          extinction: values.extinction,
-          id: mesureId,
-          reason_extinction: values.reason_extinction.value
-        }
-      });
       setSubmitting(false);
+      Router.push(`/mandataires/mesures/${mesure.id}`);
     },
     validationSchema: Yup.object().shape({
       extinction: Yup.date().required("Required"),
@@ -107,7 +96,7 @@ export const MandataireMesureCloseForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/mandataires/mesures/${mesureId}`);
+                  Router.push(`/mandataires/mesures/${mesure.id}`);
                 }}
               >
                 Annuler

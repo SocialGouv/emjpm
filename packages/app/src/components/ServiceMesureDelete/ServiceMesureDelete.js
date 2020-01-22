@@ -1,27 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Box } from "rebass";
 
+import { MesureContext } from "../MesureContext";
 import { ServiceDeleteMesureForm } from "./ServiceMesureDeleteForm";
 import { ServiceMesureDeleteStyle } from "./style";
 
-const RESULT_PER_PAGE = 20;
-
 const ServiceMesureDelete = props => {
-  const { mesureId } = props;
-
-  // basic query for mesures page
-  const queryVariables = {
-    antenne: null,
-    limit: RESULT_PER_PAGE,
-    offset: 0,
-    searchText: null,
-    status: null,
-    type: null
-  };
+  const mesure = useContext(MesureContext);
 
   return (
     <Box sx={ServiceMesureDeleteStyle} {...props}>
-      <ServiceDeleteMesureForm mt="3" queryVariables={queryVariables} mesureId={mesureId} />
+      <ServiceDeleteMesureForm mt="3" mesure={mesure} />
     </Box>
   );
 };

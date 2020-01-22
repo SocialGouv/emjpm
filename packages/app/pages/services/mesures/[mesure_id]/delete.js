@@ -36,7 +36,7 @@ const DeleteMesurePage = props => {
                 p: 1
               }}
             >
-              <ServiceMesureDelete mesureId={mesureId} />
+              <ServiceMesureDelete />
             </Box>
           </Flex>
         </BoxWrapper>

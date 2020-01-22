@@ -13,53 +13,43 @@ import {
 } from "../ServiceMesures/mutations";
 
 export const ServiceMesureReactivateForm = props => {
-  const { mesureId, serviceId } = props;
+  const { mesure } = props;
+
   const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
   const [updateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
-  const [updateMesure] = useMutation(REACTIVATE_MESURE, {
-    update(
-      cache,
-      {
-        data: {
-          update_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      updateServicesCounter({
-        variables: {
-          mesures_awaiting: 0,
-          mesures_in_progress: 1,
-          service_id: mesure.service_id
-        }
-      });
-      if (mesure.antenne_id) {
-        updateAntenneCounters({
-          variables: {
-            antenne_id: mesure.antenne_id,
-            inc_mesures_awaiting: 0,
-            inc_mesures_in_progress: 1
-          }
-        });
-      }
-    },
-    onCompleted() {
-      Router.push(`/services/mesures/${mesureId}`);
-    }
-  });
+  const [updateMesure] = useMutation(REACTIVATE_MESURE);
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await updateMesure({
         refetchQueries: ["mesures", "mesures_aggregate"],
         variables: {
-          id: mesureId,
+          id: mesure.id,
           reason_extinction: values.reason_extinction,
-          service_id: serviceId
+          service_id: mesure.serviceId
         }
       });
 
+      await updateServicesCounter({
+        variables: {
+          mesures_awaiting: 0,
+          mesures_in_progress: 1,
+          service_id: mesure.serviceId
+        }
+      });
+
+      if (mesure.antenneId) {
+        await updateAntenneCounters({
+          variables: {
+            antenne_id: mesure.antenneId,
+            inc_mesures_awaiting: 0,
+            inc_mesures_in_progress: 1
+          }
+        });
+      }
+
       setSubmitting(false);
+      Router.push(`/services/mesures/${mesure.id}`);
     },
     validationSchema: Yup.object().shape({
       reason_extinction: Yup.string().required("Required")
@@ -100,7 +90,7 @@ export const ServiceMesureReactivateForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/services/mesures/${mesureId}`);
+                  Router.push(`/services/mesures/${mesure.id}`);
                 }}
               >
                 Annuler
