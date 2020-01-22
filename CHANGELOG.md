@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.17.10](https://github.com/SocialGouv/emjpm/compare/v25.17.9...v25.17.10) (2020-01-22)
+
+
+### Bug Fixes
+
+* **typo:** fix typo ([6a3c54d](https://github.com/SocialGouv/emjpm/commit/6a3c54db14a7e1a64e34b4a50961445050f9c327))
+
+
+
+
+
 ## [25.17.9](https://github.com/SocialGouv/emjpm/compare/v25.17.8...v25.17.9) (2020-01-21)
 
 
