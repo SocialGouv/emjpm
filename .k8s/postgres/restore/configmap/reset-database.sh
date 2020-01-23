@@ -6,6 +6,6 @@ DROP DATABASE IF EXISTS emjpm;
 CREATE DATABASE emjpm WITH OWNER = emjpm;
 EOF
 
-cat reset-database.sql | psql postgres
+psql postgres -f reset-database.sql
 
 
