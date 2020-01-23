@@ -23,7 +23,6 @@ spec:
             - -c
             - |
               sh -x /mnt/script/backup.sh ;
-              sh -x /mnt/script/status.sh backup ;
           resources:
             requests:
               cpu: 10m
