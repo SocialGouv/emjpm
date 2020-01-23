@@ -14,5 +14,7 @@ pg_restore \
   ${1}
 
 psql -d emjpm -c "ALTER SCHEMA public OWNER TO emjpm"
+psql -d emjpm -c "DROP SCHEMA hdb_catalog CASCADE"
+psql -d emjpm -c "DROP SCHEMA hdb_views CASCADE"
 
 sleep 10s
