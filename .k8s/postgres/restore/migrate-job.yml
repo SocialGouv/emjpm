@@ -1,0 +1,54 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate-job
+  labels:
+    app: migrate-job
+    git/branch: ${BRANCH_NAME}
+    git/commit: ${COMMIT}
+    gitlab/job: "${JOB_ID}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: migrate-job
+        git/branch: ${BRANCH_NAME}
+        git/commit: ${COMMIT}
+        gitlab/job: "${JOB_ID}"
+    spec:
+      containers:
+        - name: migrate-job
+          image: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/knex:${IMAGE_TAG}
+          command:
+            - sh
+          args:
+            - -c
+            - |
+              yarn migrate
+          resources:
+            requests:
+              cpu: 0m
+              memory: 0Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: DATABASE_URL
+              value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_SRV_HOST}/${POSTGRES_DATABASE}"
+            - name: NODE_ENV
+              value: "${NODE_ENV}"
+      restartPolicy: Never
+      initContainers:
+        - name: wait-for-postgres
+          image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:0.19.0
+          env:
+            - name: PGHOST
+              value: ${POSTGRES_SRV_HOST}
+          resources:
+            limits:
+              cpu: 50m
+              memory: 32Mi
+            requests:
+              cpu: 0m
+              memory: 0Mi
