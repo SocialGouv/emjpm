@@ -7,22 +7,22 @@ Install app:
   before_script:
     - find packages -maxdepth 1 -type d -not -name app | tail -n +2 | xargs rm -rf
   artifacts:
-    expire_in: 30 mins
+    expire_in: 1 day
     paths:
       - node_modules
       - packages/app/node_modules
 
 #
 
-# Lint @emjpm/app:
-#   extends: .quality_stage
-#   image: node:12-alpine
-#   dependencies:
-#     - Install app
-#   needs:
-#     - Install app
-#   script:
-#     - yarn workspace @emjpm/app lint
+Lint @emjpm/app:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install app
+  needs:
+    - Install app
+  script:
+    - yarn workspace @emjpm/app lint
 
 # Test @emjpm/app:
 #   extends: .quality_stage
@@ -63,7 +63,7 @@ Build @emjpm/app:
   script:
     - yarn workspace @emjpm/app build
   artifacts:
-    expire_in: 30 mins
+    expire_in: 1 day
     paths:
       - packages/app/.next
 

@@ -10,12 +10,16 @@ import { ServiceMesureEditForm } from "./ServiceMesureEditForm";
 import { ServiceMesureEditStyle } from "./style";
 
 const ServiceMesureEdit = props => {
-  const { mesureId } = props;
   const mesure = useContext(MesureContext);
-  const { user_antennes } = useContext(UserContext);
   const {
     service: { service_id }
   } = mesure;
+  const { service_members } = useContext(UserContext);
+  const [
+    {
+      service: { service_antennes }
+    }
+  ] = service_members;
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
     variables: { serviceId: service_id }
@@ -43,8 +47,7 @@ const ServiceMesureEdit = props => {
         mt="3"
         tribunalList={tribunalList}
         departementsData={departementsData}
-        mesureId={mesureId}
-        user_antennes={user_antennes}
+        service_antennes={service_antennes}
         mesure={mesure}
       />
     </Box>

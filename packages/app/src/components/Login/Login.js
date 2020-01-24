@@ -1,13 +1,13 @@
-import { Button, Card, Heading4, Input, Text } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
 import React from "react";
 import ReactPiwik from "react-piwik";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
-import * as Yup from "yup";
 
+import { loginSchema } from "../../lib/validationSchemas";
 import { trackUser } from "../../piwik";
 import { login } from "../../util/auth";
 import { Link } from "../Commons";
@@ -15,14 +15,6 @@ import { Link } from "../Commons";
 const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
-
-const cardStyle = { mt: "5", p: "0" };
-
-const grayBox = {
-  bg: "cardSecondary",
-  borderRadius: "5px 0 0 5px",
-  p: "5"
-};
 
 const checkStatus = async (response, setSubmitting, setStatus) => {
   let json = null;
@@ -67,9 +59,20 @@ const Login = props => {
     checkStatus(response, setSubmitting, setStatus);
   };
 
+  const formik = useFormik({
+    onSubmit: (values, { setSubmitting, setStatus }) => {
+      handleSubmit(values, setSubmitting, setStatus, token);
+    },
+    validationSchema: loginSchema,
+    initialValues: {
+      password: "",
+      username: ""
+    }
+  });
+
   return (
-    <Card sx={cardStyle}>
-      <Box sx={grayBox}>
+    <Card mt="5" p="0">
+      <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
           <Heading4 mb="1">{`Connectez-vous à votre compte.`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
@@ -78,79 +81,54 @@ const Login = props => {
         </Box>
       </Box>
       <Box p="5">
-        <Box sx={{ position: "relative", zIndex: "1" }}>
-          <Formik
-            onSubmit={(values, { setSubmitting, setStatus }) =>
-              handleSubmit(values, setSubmitting, setStatus, token)
-            }
-            validationSchema={Yup.object().shape({
-              password: Yup.string().required("Champ obligatoire"),
-              username: Yup.string().required("Champ obligatoire")
-            })}
-            initialValues={{
-              password: "",
-              username: ""
-            }}
-          >
-            {props => {
-              const {
-                status,
-                values,
-                touched,
-                errors,
-                isSubmitting,
-                handleChange,
-                handleSubmit
-              } = props;
-              return (
-                <form onSubmit={handleSubmit}>
-                  {!!status && (
-                    <Box color="error" mb="1">
-                      {status.errorMsg}
-                    </Box>
-                  )}
-                  <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                    <Input
-                      value={values.username}
-                      id="username"
-                      name="username"
-                      type="text"
-                      hasError={errors.username && touched.username}
-                      onChange={handleChange}
-                      placeholder="Votre nom d'utilisateur"
-                    />
-                    {errors.username && touched.username && <Text mt="1">{errors.username}</Text>}
-                  </Box>
-                  <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-                    <Input
-                      value={values.password}
-                      id="password"
-                      name="password"
-                      type="password"
-                      hasError={errors.password && touched.password}
-                      onChange={handleChange}
-                      placeholder="Votre mot de passe"
-                    />
-                    {errors.password && touched.password && <Text mt="1">{errors.password}</Text>}
-                  </Box>
-                  <Flex alignItems="center" justifyContent="flex-end">
-                    <Box>
-                      <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                        Se connecter
-                      </Button>
-                    </Box>
-                  </Flex>
-                  <Box my="2">
-                    <Link href="/account/forgot-password">{`J'ai oublié mon mot de passe et / ou mon identifiant`}</Link>
-                  </Box>
-                  <Box>
-                    <Link href="mailto:support.emjpm@fabrique.social.gouv.fr">{`Contactez-nous en cas de difficulté de connexion`}</Link>
-                  </Box>
-                </form>
-              );
-            }}
-          </Formik>
-        </Box>
+        <form onSubmit={formik.handleSubmit}>
+          {!!formik.status && (
+            <Box color="error" mb="1">
+              {formik.status.errorMsg}
+            </Box>
+          )}
+          <Field>
+            <Input
+              value={formik.values.username}
+              id="username"
+              name="username"
+              type="text"
+              hasError={formik.errors.username && formik.touched.username}
+              onChange={formik.handleChange}
+              placeholder="Votre nom d'utilisateur"
+            />
+            {formik.touched.username && (
+              <InlineError message={formik.errors.username} fieldId="username" />
+            )}
+          </Field>
+          <Field>
+            <Input
+              value={formik.values.password}
+              id="password"
+              name="password"
+              type="password"
+              hasError={formik.errors.password && formik.touched.password}
+              onChange={formik.handleChange}
+              placeholder="Votre mot de passe"
+            />
+            {formik.touched.password && (
+              <InlineError message={formik.errors.password} fieldId="password" />
+            )}
+          </Field>
+          <Flex alignItems="center" justifyContent="flex-end">
+            <Box>
+              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+                Se connecter
+              </Button>
+            </Box>
+          </Flex>
+          <Box my="2">
+            <Link href="/account/forgot-password">{`J'ai oublié mon mot de passe et / ou mon identifiant`}</Link>
+          </Box>
+          <Box>
+            <Link href="mailto:support.emjpm@fabrique.social.gouv.fr">{`Contactez-nous en cas de difficulté de connexion`}</Link>
+          </Box>
+        </form>
       </Box>
     </Card>
   );

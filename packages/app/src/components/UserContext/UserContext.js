@@ -31,7 +31,9 @@ const UserProvider = props => {
   if (!data) {
     return <Fragment>loading</Fragment>;
   }
+
   const [currentUser] = data.users;
+
   return <Context.Provider value={currentUser}>{children}</Context.Provider>;
 };
 
@@ -39,6 +41,7 @@ export const Provider = props => {
   const { children, user } = props;
   const type = user ? user.role : null;
   const userId = user ? user.id : null;
+
   if (userId) {
     return (
       <UserProvider type={type} userId={userId}>
@@ -46,6 +49,7 @@ export const Provider = props => {
       </UserProvider>
     );
   }
+
   return <Fragment>{children}</Fragment>;
 };
 

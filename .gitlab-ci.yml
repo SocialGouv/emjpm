@@ -9,19 +9,19 @@ include:
   #
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_nodejs_chart_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v4.0.1
+    ref: v4.6.0
   #
   - /.gitlab-ci/stages/notify.yml
   - /.gitlab-ci/stages/deploy.yml
@@ -43,28 +43,64 @@ stages:
 
 #
 
-.prepare_stage: &prepare_stage
+.base_stage:
+  except:
+    variables:
+      # Don't run when running e2e tests
+      - $E2E_TEST
+      # Don't run when deploying in production an existing image
+      - $PRODUCTION
+      # Don't run when tagging a commit
+      - $RELEASE
+
+#
+
+.prepare_stage:
+  extends: .base_stage
   stage: "Prepare"
   dependencies: []
 
 .quality_stage:
+  extends: .base_stage
   stage: "Code Quality"
   dependencies: []
-  except:
-    variables:
-      - $PRODUCTION
 
-.register_stage: &register_stage
+.register_stage:
+  extends: .base_stage
   stage: "Registration"
   interruptible: true
   dependencies: []
-  except:
+
+.deploy_stage:
+  stage: "Deploy"
+  dependencies: []
+  services:
+    - docker:dind
+  variables:
+    IMAGE_TAG: ${CI_COMMIT_SHA}
+    REGISTRY: ${CI_REGISTRY_IMAGE}
+
+#
+
+.incubateur_stage:
+  environment:
+    name: prod
+  only:
     variables:
       - $PRODUCTION
 
+.dev_stage:
+  extends:
+    - .base_stage
+  environment:
+    name: fabrique-dev
+
+#
 
 Create namespace:
-  extends: .base_create_namespace_stage
+  extends:
+    - .base_create_namespace_stage
+    - .dev_stage
   before_script:
     - source ./.gitlab-ci/env.sh
   after_script:

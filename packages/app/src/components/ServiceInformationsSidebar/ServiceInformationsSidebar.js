@@ -17,16 +17,18 @@ import {
 
 const ServiceInformationsSidebar = () => {
   const user = useContext(UserContext);
-  const { service_admins, user_antennes } = user;
-  const [serviceAdmin] = service_admins;
+  const { service_members } = user;
+  const [{ service }] = service_members;
   const {
     dispo_max,
     mesures_in_progress,
     mesures_awaiting,
     etablissement,
     latitude,
-    longitude
-  } = serviceAdmin.service;
+    longitude,
+    service_antennes
+  } = service;
+
   const hasInvalidGeocode = !latitude || !longitude;
 
   return (
@@ -61,24 +63,20 @@ const ServiceInformationsSidebar = () => {
           <Text sx={description(true)}>{mesures_awaiting} en attente</Text>
         </Box>
       </Flex>
-      {user_antennes.map(antenne => {
-        const { antenne_id, service_antenne } = antenne;
-        const { name, mesures_max, mesures_in_progress, mesures_awaiting } = service_antenne;
-        return (
-          <Flex sx={cardStyle(false)} key={antenne_id} alignItems="center" mb="2">
-            <Box sx={icon(false)}>
-              <Buildings size="24" />
-            </Box>
-            <Box>
-              <Text sx={title}>{name}</Text>
-              <Text sx={description(false)}>
-                {mesures_in_progress} / {mesures_max}
-              </Text>
-              <Text sx={description(false)}>{mesures_awaiting} en attente</Text>
-            </Box>
-          </Flex>
-        );
-      })}
+      {service_antennes.map(antenne => (
+        <Flex sx={cardStyle(false)} key={antenne.id} alignItems="center" mb="2">
+          <Box sx={icon(false)}>
+            <Buildings size="24" />
+          </Box>
+          <Box>
+            <Text sx={title}>{antenne.name}</Text>
+            <Text sx={description(false)}>
+              {antenne.mesures_in_progress} / {antenne.mesures_max}
+            </Text>
+            <Text sx={description(false)}>{antenne.mesures_awaiting} en attente</Text>
+          </Box>
+        </Flex>
+      ))}
     </Box>
   );
 };

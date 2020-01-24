@@ -36,7 +36,7 @@ const ReactivateMesurePage = props => {
                 p: 1
               }}
             >
-              <MandataireMesureReactivate mesureId={mesureId} />
+              <MandataireMesureReactivate />
             </Box>
           </Flex>
         </BoxWrapper>

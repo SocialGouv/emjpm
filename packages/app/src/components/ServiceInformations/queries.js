@@ -15,7 +15,7 @@ export const GET_SERVICES = gql`
       telephone
       prenom
       nom
-      information
+      competences
       created_at
       service_tis {
         id

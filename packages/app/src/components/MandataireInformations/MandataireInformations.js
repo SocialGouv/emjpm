@@ -21,12 +21,12 @@ const MandataireInformations = props => {
           {nom ? nom : "Nom non renseigné"} {prenom ? prenom : "Prénom non renseigné"}
         </Heading3>
         <Flex>
-          <Flex flexDirection="column">
+          <Flex flexDirection="column" mr={6}>
             <Box sx={boxStyle}>
               <Heading4 mt={2} mb="3">
                 Vos informations
               </Heading4>
-              <Flex justifyContent="flex-start">
+              <Flex flexDirection="column">
                 <Box mr={4}>
                   <Text sx={subtitle}>{"Email"}</Text>
                   <Text sx={content}>{label(email)}</Text>
@@ -45,7 +45,7 @@ const MandataireInformations = props => {
               <Heading4 mt={2} mb="3">
                 Activité
               </Heading4>
-              <Flex justifyContent="flex-start">
+              <Flex flexDirection="column">
                 <Box mr={4}>
                   <Text sx={subtitle}>{"SIRET"}</Text>
                   <Text sx={content}>{label(mandataire.siret)}</Text>
@@ -61,12 +61,12 @@ const MandataireInformations = props => {
               </Flex>
             </Box>
           </Flex>
-          <Flex ml={4} flexDirection="column">
+          <Flex ml={6} flexDirection="column">
             <Box sx={boxStyle}>
               <Heading4 mt={2} mb="3">
                 Contact
               </Heading4>
-              <Flex justifyContent="flex-start">
+              <Flex flexDirection="column">
                 <Box mr={4}>
                   <Text sx={subtitle}>{"Adresse"}</Text>
                   <Text sx={content}>{label(mandataire.adresse)}</Text>
@@ -97,6 +97,16 @@ const MandataireInformations = props => {
             </Box>
           </Flex>
         </Flex>
+        <Box sx={boxStyle}>
+          <Heading4 mt={2} mb="3">
+            Informations pour le magistrat
+          </Heading4>
+          <Flex justifyContent="flex-start">
+            <Box mr={4}>
+              <pre style={{ whiteSpace: "pre-wrap" }}>{label(mandataire.competences)}</pre>
+            </Box>
+          </Flex>
+        </Box>
         <Flex mt="5">
           <Box>
             <LinkButton href="/mandataires/edit-informations">Modifier vos informations</LinkButton>

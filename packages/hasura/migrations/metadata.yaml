@@ -687,7 +687,7 @@ tables:
       - telephone_portable
       - user_id
       - ville
-      - zip
+      - competences
       set: {}
     role: individuel
   - comment: null
@@ -716,7 +716,7 @@ tables:
       - telephone_portable
       - user_id
       - ville
-      - zip
+      - competences
       set: {}
     role: prepose
   is_enum: false
@@ -762,7 +762,7 @@ tables:
       - email_send
       - genre
       - mesures_en_attente
-      - zip
+      - competences
       computed_fields: []
       filter: {}
     role: direction
@@ -787,7 +787,7 @@ tables:
       - email_send
       - genre
       - mesures_en_attente
-      - zip
+      - competences
       - department_id
       - siret
       - latitude
@@ -811,7 +811,7 @@ tables:
       - mesures_en_attente
       - mesures_en_cours
       - user_id
-      - zip
+      - competences
       - created_at
       - date_mesure_update
       - email_send
@@ -849,7 +849,7 @@ tables:
       - email_send
       - genre
       - mesures_en_attente
-      - zip
+      - competences
       - department_id
       - siret
       - latitude
@@ -883,7 +883,7 @@ tables:
       - telephone_portable
       - user_id
       - ville
-      - zip
+      - competences
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -913,7 +913,7 @@ tables:
       - telephone_portable
       - user_id
       - ville
-      - zip
+      - competences
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -1038,6 +1038,8 @@ tables:
       - date_ouverture
       - extinction
       - judgment_date
+      - latitude
+      - longitude
       - antenne_id
       - department_id
       - etablissement_id
@@ -1156,28 +1158,32 @@ tables:
     permission:
       allow_aggregations: true
       columns:
-      - annee
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_ouverture
-      - department_id
-      - etablissement
-      - etablissement_id
-      - extinction
       - id
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
-      - reason_extinction
-      - residence
-      - service_id
-      - status
-      - ti_id
-      - type
+      - code_postal
       - ville
+      - etablissement
+      - mandataire_id
+      - created_at
+      - annee
+      - type
+      - date_ouverture
+      - residence
+      - civilite
+      - status
+      - extinction
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - reason_extinction
+      - numero_rg
+      - department_id
+      - antenne_id
+      - service_id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
       computed_fields: []
       filter: {}
     role: direction
@@ -1220,12 +1226,14 @@ tables:
     role: individuel
   - comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       columns:
       - is_urgent
       - date_ouverture
       - extinction
       - judgment_date
+      - latitude
+      - longitude
       - antenne_id
       - department_id
       - etablissement_id
@@ -1369,6 +1377,8 @@ tables:
       - date_ouverture
       - extinction
       - judgment_date
+      - latitude
+      - longitude
       - antenne_id
       - department_id
       - etablissement_id
@@ -1738,55 +1748,6 @@ tables:
     role: ti
   table: role
   update_permissions: []
-- array_relationships: []
-  computed_fields: []
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: service
-    using:
-      foreign_key_constraint_on: service_id
-  - comment: null
-    name: user
-    using:
-      foreign_key_constraint_on: user_id
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - user_id
-      - service_id
-      computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: service
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - user_id
-      - service_id
-      computed_fields: []
-      filter: {}
-    role: ti
-  table: service_admin
-  update_permissions: []
 - array_relationships:
   - comment: null
     name: commentaires
@@ -1800,12 +1761,6 @@ tables:
       foreign_key_constraint_on:
         column: antenne_id
         table: mesures
-  - comment: null
-    name: user_antennes
-    using:
-      foreign_key_constraint_on:
-        column: antenne_id
-        table: user_antenne
   computed_fields: []
   configuration:
     custom_column_names: {}
@@ -1882,23 +1837,53 @@ tables:
     permission:
       allow_aggregations: false
       columns:
+      - id
+      - service_id
       - name
+      - created_at
+      - address_street
+      - address_zip_code
+      - address_city
+      - contact_lastname
+      - contact_firstname
+      - contact_email
+      - contact_phone
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - date_mesure_update
+      - bak_mandataire_id
+      - address
+      - latitude
+      - longitude
       computed_fields: []
-      filter:
-        user_antennes:
-          user_id:
-            _eq: X-Hasura-User-Id
+      filter: {}
     role: individuel
   - comment: null
     permission:
       allow_aggregations: false
       columns:
+      - latitude
+      - longitude
+      - bak_mandataire_id
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - service_id
+      - created_at
+      - date_mesure_update
+      - address
+      - address_city
+      - address_street
+      - address_zip_code
+      - contact_email
+      - contact_firstname
+      - contact_lastname
+      - contact_phone
       - name
       computed_fields: []
-      filter:
-        user_antennes:
-          user_id:
-            _eq: X-Hasura-User-Id
+      filter: {}
     role: prepose
   - comment: null
     permission:
@@ -1925,9 +1910,8 @@ tables:
       - service_id
       computed_fields: []
       filter:
-        user_antennes:
-          user_id:
-            _eq: X-Hasura-User-Id
+        service_id:
+          _eq: x-hasura-service-id
     role: service
   - comment: null
     permission:
@@ -1976,10 +1960,7 @@ tables:
       - mesures_max
       - name
       - service_id
-      filter:
-        user_antennes:
-          user_id:
-            _eq: X-Hasura-User-Id
+      filter: {}
       set: {}
     role: service
   - comment: null
@@ -1990,19 +1971,68 @@ tables:
       filter: {}
       set: {}
     role: ti
-- array_relationships:
+- array_relationships: []
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships:
   - comment: null
-    name: service_admins
+    name: service
     using:
-      foreign_key_constraint_on:
-        column: service_id
-        table: service_admin
+      foreign_key_constraint_on: service_id
+  - comment: null
+    name: user
+    using:
+      foreign_key_constraint_on: user_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - user_id
+      - service_id
+      computed_fields: []
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: service
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - user_id
+      - service_id
+      computed_fields: []
+      filter: {}
+    role: ti
+  table: service_members
+  update_permissions: []
+- array_relationships:
   - comment: null
     name: service_antennes
     using:
       foreign_key_constraint_on:
         column: service_id
         table: service_antenne
+  - comment: null
+    name: service_members
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table: service_members
   - comment: null
     name: service_tis
     using:
@@ -2051,7 +2081,7 @@ tables:
       - email
       - etablissement
       - id
-      - information
+      - competences
       - mesures_awaiting
       - mesures_in_progress
       - nom
@@ -2076,7 +2106,7 @@ tables:
       - adresse
       - dispo_max
       - created_at
-      - information
+      - competences
       - department_id
       - mesures_in_progress
       - mesures_awaiting
@@ -2102,7 +2132,7 @@ tables:
       - adresse
       - dispo_max
       - created_at
-      - information
+      - competences
       - department_id
       - mesures_in_progress
       - mesures_awaiting
@@ -2123,7 +2153,7 @@ tables:
       - email
       - etablissement
       - id
-      - information
+      - competences
       - latitude
       - longitude
       - mesures_awaiting
@@ -2330,71 +2360,6 @@ tables:
       select_aggregate: null
       select_by_pk: null
       update: null
-  delete_permissions:
-  - comment: null
-    permission:
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: service
-  event_triggers: []
-  insert_permissions:
-  - comment: null
-    permission:
-      check: {}
-      columns:
-      - id
-      - user_id
-      - antenne_id
-      set: {}
-    role: service
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: service_antenne
-    using:
-      foreign_key_constraint_on: antenne_id
-  - comment: null
-    name: user
-    using:
-      foreign_key_constraint_on: user_id
-  select_permissions:
-  - comment: null
-    permission:
-      allow_aggregations: false
-      columns:
-      - id
-      - user_id
-      - antenne_id
-      computed_fields: []
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-    role: service
-  table: user_antenne
-  update_permissions:
-  - comment: null
-    permission:
-      columns:
-      - antenne_id
-      - id
-      - user_id
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-      set: {}
-    role: service
-- array_relationships: []
-  computed_fields: []
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
-      delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -2470,17 +2435,11 @@ tables:
   update_permissions: []
 - array_relationships:
   - comment: null
-    name: service_admins
+    name: service_members
     using:
       foreign_key_constraint_on:
         column: user_id
-        table: service_admin
-  - comment: null
-    name: user_antennes
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table: user_antenne
+        table: service_members
   - comment: null
     name: user_roles
     using:

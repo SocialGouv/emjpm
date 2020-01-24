@@ -1,40 +1,46 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { Button, Field, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { UPDATE_MANDATAIRES_COUTERS } from "../MandatairesMesures/mutations";
+import { UPDATE_MANDATAIRES_COUTERS } from "../MandataireMesures/mutations";
 import { REACTIVATE_MESURE } from "./mutations";
 
 export const MandataireMesureReactivateForm = props => {
-  const { mesureId } = props;
+  const { mesure } = props;
 
-  const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
-  const [UpdateMesure] = useMutation(REACTIVATE_MESURE, {
-    onCompleted() {
-      Router.push({ pathname: `/mandataires/mesures/${mesureId}` });
-    },
-    update(
-      cache,
-      {
-        data: {
-          update_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      UpdateMandatairesCounter({
+  const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
+  const [updateMesure] = useMutation(REACTIVATE_MESURE);
+
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
+      await updateMesure({
+        refetchQueries: ["mesures", "mesures_aggregate"],
         variables: {
-          mandataireId: mesure.mandataire_id,
+          id: mesure.id,
+          reason_extinction: values.reason_extinction
+        }
+      });
+
+      await updateMandatairesCounter({
+        variables: {
+          mandataireId: mesure.mandataireId,
           mesures_awaiting: 0,
           mesures_in_progress: 1
         }
       });
-    }
+
+      setSubmitting(false);
+      Router.push({ pathname: `/mandataires/mesures/${mesure.id}` });
+    },
+    validationSchema: Yup.object().shape({
+      reason_extinction: Yup.string().required("Required")
+    }),
+    initialValues: { reason_extinction: "" }
   });
 
   return (
@@ -53,58 +59,36 @@ export const MandataireMesureReactivateForm = props => {
         <Box mb="3">
           <Heading3>Réactiver la mesure</Heading3>
         </Box>
-        <Formik
-          onSubmit={(values, { setSubmitting }) => {
-            UpdateMesure({
-              refetchQueries: ["mesures", "mesures_aggregate"],
-              variables: {
-                id: mesureId,
-                reason_extinction: values.reason_extinction
-              }
-            });
-            setSubmitting(false);
-          }}
-          validationSchema={Yup.object().shape({
-            reason_extinction: Yup.string().required("Required")
-          })}
-          initialValues={{ reason_extinction: "" }}
-        >
-          {props => {
-            const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
-            return (
-              <form onSubmit={handleSubmit}>
-                <Box mb="2">
-                  <Input
-                    value={values.reason_extinction}
-                    hasError={errors.reason_extinction && touched.reason_extinction}
-                    id="reason_extinction"
-                    name="reason_extinction"
-                    onChange={handleChange}
-                    placeholder="Raison de la réactivation"
-                  />
-                </Box>
-                <Flex justifyContent="flex-end">
-                  <Box>
-                    <Button
-                      mr="2"
-                      variant="outline"
-                      onClick={() => {
-                        Router.push(`/mandataires/mesures/${mesureId}`);
-                      }}
-                    >
-                      Annuler
-                    </Button>
-                  </Box>
-                  <Box>
-                    <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                      Réactiver la mesure
-                    </Button>
-                  </Box>
-                </Flex>
-              </form>
-            );
-          }}
-        </Formik>
+        <form onSubmit={formik.handleSubmit}>
+          <Field>
+            <Input
+              value={formik.values.reason_extinction}
+              hasError={formik.errors.reason_extinction && formik.touched.reason_extinction}
+              id="reason_extinction"
+              name="reason_extinction"
+              onChange={formik.handleChange}
+              placeholder="Raison de la réactivation"
+            />
+          </Field>
+          <Flex justifyContent="flex-end">
+            <Box>
+              <Button
+                mr="2"
+                variant="outline"
+                onClick={() => {
+                  Router.push(`/mandataires/mesures/${mesure.id}`);
+                }}
+              >
+                Annuler
+              </Button>
+            </Box>
+            <Box>
+              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+                Réactiver la mesure
+              </Button>
+            </Box>
+          </Flex>
+        </form>
       </Box>
     </Flex>
   );

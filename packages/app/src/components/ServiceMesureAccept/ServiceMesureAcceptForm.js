@@ -1,5 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import {
+  Button,
+  Field,
+  Heading3,
+  Heading5,
+  InlineError,
+  Input,
+  Select
+} from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
@@ -14,47 +22,16 @@ import { UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "../ServiceMesur
 import { ACCEPT_MESURE } from "./mutations";
 
 export const ServiceMesureAcceptForm = props => {
-  const { mesureId, user_antennes, departementsData } = props;
+  const { mesure, service_antennes, departementsData } = props;
 
-  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
-  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [updateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+  const [updateMesure] = useMutation(ACCEPT_MESURE);
 
-  const [UpdateMesure] = useMutation(ACCEPT_MESURE, {
-    update(
-      cache,
-      {
-        data: {
-          update_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      UpdateServicesCounter({
-        variables: {
-          mesures_awaiting: -1,
-          mesures_in_progress: 1,
-          service_id: mesure.service_id
-        }
-      });
-      if (mesure.antenne_id) {
-        UpdateAntenneCounters({
-          variables: {
-            antenne_id: mesure.antenne_id,
-            inc_mesures_awaiting: -1,
-            inc_mesures_in_progress: 1
-          }
-        });
-      }
-    },
-    onCompleted() {
-      Router.push(`/services/mesures/${mesureId}`);
-    }
-  });
-
-  const ANTENNE_OPTIONS = formatAntenneOptions(user_antennes);
+  const antenneOptions = formatAntenneOptions(service_antennes);
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting, setErrors }) => {
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
       const regionCode = getRegionCode(values.geocode.postcode);
       const departements = departementsData.departements;
       const departement = departements.find(dep => dep.code === regionCode);
@@ -63,13 +40,13 @@ export const ServiceMesureAcceptForm = props => {
           geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
         });
       } else {
-        UpdateMesure({
+        await updateMesure({
           refetchQueries: ["mesures", "mesures_aggregate"],
           variables: {
             antenne_id: values.antenne_id ? values.antenne_id.value : null,
             date_ouverture: values.date_ouverture,
             department_id: departement.id,
-            id: mesureId,
+            id: mesure.id,
             residence: values.residence.value,
             code_postal: values.geocode.postcode,
             ville: values.geocode.city,
@@ -77,7 +54,28 @@ export const ServiceMesureAcceptForm = props => {
             longitude: values.geocode.longitude
           }
         });
+
+        await updateServicesCounter({
+          variables: {
+            mesures_awaiting: -1,
+            mesures_in_progress: 1,
+            service_id: mesure.serviceId
+          }
+        });
+
+        if (mesure.antenneId) {
+          await updateAntenneCounters({
+            variables: {
+              antenne_id: mesure.antenneId,
+              inc_mesures_awaiting: -1,
+              inc_mesures_in_progress: 1
+            }
+          });
+        }
+
+        Router.push(`/services/mesures/${mesure.id}`);
       }
+
       setSubmitting(false);
     },
     validationSchema: serviceAcceptMesureSchema,
@@ -104,7 +102,7 @@ export const ServiceMesureAcceptForm = props => {
           <Heading3>Accepter la mesure</Heading3>
         </Box>
         <form onSubmit={formik.handleSubmit}>
-          <Box mb="2">
+          <Field>
             <Input
               value={formik.values.date_ouverture}
               id="date_ouverture"
@@ -112,10 +110,11 @@ export const ServiceMesureAcceptForm = props => {
               name="date_ouverture"
               hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
               onChange={formik.handleChange}
-              placeholder="Date d'ouverture"
+              placeholder="Date d'ordonnance"
             />
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "100" }} mb="2">
+            <InlineError message={formik.errors.date_ouverture} fieldId="date_ouverture" />
+          </Field>
+          <Field>
             <Select
               id="residence"
               name="residence"
@@ -125,18 +124,14 @@ export const ServiceMesureAcceptForm = props => {
               onChange={option => formik.setFieldValue("residence", option)}
               options={RESIDENCE}
             />
-            {formik.errors.residence && formik.touched.residence && (
-              <Text>{formik.errors.residence}</Text>
-            )}
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+            <InlineError message={formik.errors.residence} fieldId="residence" />
+          </Field>
+          <Field>
             <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-            {formik.errors.geocode && formik.touched.geocode && (
-              <Text>{formik.errors.geocode}</Text>
-            )}
-          </Box>
-          {user_antennes.length >= 2 && (
-            <Box sx={{ position: "relative", zIndex: "70" }} mb="2">
+            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+          </Field>
+          {service_antennes.length >= 2 && (
+            <Field>
               <Select
                 id="antenne_id"
                 name="antenne_id"
@@ -144,9 +139,10 @@ export const ServiceMesureAcceptForm = props => {
                 value={formik.values.antenne_id}
                 hasError={formik.errors.antenne_id && formik.touched.antenne_id}
                 onChange={option => formik.setFieldValue("antenne_id", option)}
-                options={ANTENNE_OPTIONS}
+                options={antenneOptions}
               />
-            </Box>
+              <InlineError message={formik.errors.antenne_id} fieldId="antenne_id" />
+            </Field>
           )}
           <Flex justifyContent="flex-end">
             <Box>
@@ -154,7 +150,7 @@ export const ServiceMesureAcceptForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/services/mesures/${mesureId}`);
+                  Router.push(`/services/mesures/${mesure.id}`);
                 }}
               >
                 Annuler

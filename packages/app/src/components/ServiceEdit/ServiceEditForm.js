@@ -1,4 +1,4 @@
-import { Button, Field, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, InlineError, Input, Textarea } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
 
@@ -12,6 +12,7 @@ const ServiceEditForm = props => {
     onSubmit: handleSubmit,
     validationSchema: serviceSchema,
     initialValues: {
+      competences: service.competences || "",
       dispo_max: service.dispo_max || "",
       email: service.email || "",
       etablissement: service.etablissement || "",
@@ -34,6 +35,7 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Nom du service"
         />
+        <InlineError message={formik.errors.etablissement} fieldId="etablissement" />
       </Field>
       <Field>
         <Input
@@ -44,6 +46,7 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Nom du responsable"
         />
+        <InlineError message={formik.errors.nom} fieldId="nom" />
       </Field>
       <Field>
         <Input
@@ -54,6 +57,7 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Prénom du responsable"
         />
+        <InlineError message={formik.errors.prenom} fieldId="prenom" />
       </Field>
       <Field>
         <Input
@@ -64,6 +68,7 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Mesures maximum"
         />
+        <InlineError message={formik.errors.dispo_max} fieldId="dispo_max" />
       </Field>
       <Field>
         <Input
@@ -74,6 +79,7 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Numéro de téléphone"
         />
+        <InlineError message={formik.errors.telephone} fieldId="telephone" />
       </Field>
       <Field>
         <Input
@@ -84,23 +90,26 @@ const ServiceEditForm = props => {
           onChange={formik.handleChange}
           placeholder="Adresse email"
         />
+        <InlineError message={formik.errors.etablissement} fieldId="email" />
       </Field>
       <Field>
         <Geocode
           resource={service}
           onChange={geocode => formik.setFieldValue("geocode", geocode)}
         />
-        {formik.errors.geocode && formik.touched.geocode && <Text>{formik.errors.geocode}</Text>}
+        <InlineError message={formik.errors.geocode} fieldId="geocode" />
       </Field>
       <Field>
-        <Input
-          value={formik.values.information}
-          id="information"
-          name="information"
-          hasError={formik.errors.information && formik.touched.information}
+        <Textarea
+          value={formik.values.competences}
+          id="competences"
+          name="competences"
+          error={formik.errors.competences}
           onChange={formik.handleChange}
-          placeholder="Informations"
+          label="Informations pour le magistrat"
+          placeholder="Préférences géographiques, compétences, ..."
         />
+        <InlineError message={formik.errors.competences} fieldId="competences" />
       </Field>
       <Field>
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>

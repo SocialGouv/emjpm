@@ -1,22 +1,34 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { Button, Field, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { MANDATAIRE_MESURES } from "../MandatairesMesures/queries";
 import { DELETE_MESURE } from "./mutations";
 
 export const MandataireMesureDeleteForm = props => {
-  const { mesureId, queryVariables } = props;
+  const { mesure } = props;
 
-  const [UpdateMesure] = useMutation(DELETE_MESURE, {
-    onCompleted() {
+  const [deleteMesure] = useMutation(DELETE_MESURE);
+
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
+      await deleteMesure({
+        variables: {
+          id: mesure.id
+        }
+      });
+
+      setSubmitting(false);
       Router.push(`/mandataires`);
-    }
+    },
+    validationSchema: Yup.object().shape({
+      reason_delete: Yup.string().required("Required")
+    }),
+    initialValues: { reason_delete: "" }
   });
 
   return (
@@ -36,57 +48,36 @@ export const MandataireMesureDeleteForm = props => {
         <Box mb="3">
           <Heading3>Supprimer la mesure</Heading3>
         </Box>
-        <Formik
-          onSubmit={(values, { setSubmitting }) => {
-            UpdateMesure({
-              refetchQueries: [{ query: MANDATAIRE_MESURES, variables: queryVariables }],
-              variables: {
-                id: mesureId
-              }
-            });
-            setSubmitting(false);
-          }}
-          validationSchema={Yup.object().shape({
-            reason_delete: Yup.string().required("Required")
-          })}
-          initialValues={{ reason_delete: "" }}
-        >
-          {props => {
-            const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
-            return (
-              <form onSubmit={handleSubmit}>
-                <Box mb="2">
-                  <Input
-                    value={values.reason_delete}
-                    hasError={errors.reason_delete && touched.reason_delete}
-                    id="reason_delete"
-                    name="reason_delete"
-                    onChange={handleChange}
-                    placeholder="Raison de la suppression"
-                  />
-                </Box>
-                <Flex justifyContent="flex-end">
-                  <Box>
-                    <Button
-                      mr="2"
-                      variant="outline"
-                      onClick={() => {
-                        Router.push(`/mandataires`);
-                      }}
-                    >
-                      Annuler
-                    </Button>
-                  </Box>
-                  <Box>
-                    <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                      Supprimer la mesure
-                    </Button>
-                  </Box>
-                </Flex>
-              </form>
-            );
-          }}
-        </Formik>
+        <form onSubmit={formik.handleSubmit}>
+          <Field>
+            <Input
+              value={formik.values.reason_delete}
+              hasError={formik.errors.reason_delete && formik.touched.reason_delete}
+              id="reason_delete"
+              name="reason_delete"
+              onChange={formik.handleChange}
+              placeholder="Raison de la suppression"
+            />
+          </Field>
+          <Flex justifyContent="flex-end">
+            <Box>
+              <Button
+                mr="2"
+                variant="outline"
+                onClick={() => {
+                  Router.push(`/mandataires`);
+                }}
+              >
+                Annuler
+              </Button>
+            </Box>
+            <Box>
+              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+                Supprimer la mesure
+              </Button>
+            </Box>
+          </Flex>
+        </form>
       </Box>
     </Flex>
   );

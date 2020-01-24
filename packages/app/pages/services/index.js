@@ -1,5 +1,5 @@
 import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { LinkButton } from "../../src/components/Commons";
@@ -7,10 +7,18 @@ import { LayoutServices } from "../../src/components/Layout";
 import { ServiceFilters } from "../../src/components/ServiceFilters";
 import { FiltersContextProvider } from "../../src/components/ServiceFilters/context";
 import { ServiceMesures } from "../../src/components/ServiceMesures";
+import { UserContext } from "../../src/components/UserContext";
 import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {
+  const { service_members } = useContext(UserContext);
+  const [
+    {
+      service: { service_antennes }
+    }
+  ] = service_members;
+
   return (
     <FiltersContextProvider>
       <LayoutServices>
@@ -22,7 +30,7 @@ const Mesures = () => {
             </Box>
           </Flex>
 
-          <UserInformations Component={props => <ServiceFilters {...props} />} />
+          <ServiceFilters service_antennes={service_antennes} />
           <Flex
             sx={{
               flexWrap: "wrap",

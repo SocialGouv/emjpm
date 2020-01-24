@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
-import { Formik } from "formik";
+import { Button, Field, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
+import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
@@ -13,39 +13,48 @@ import {
 } from "../ServiceMesures/mutations";
 
 export const ServiceMesureReactivateForm = props => {
-  const { mesureId, serviceId } = props;
-  const [UpdateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
-  const [UpdateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
-  const [UpdateMesure] = useMutation(REACTIVATE_MESURE, {
-    update(
-      cache,
-      {
-        data: {
-          update_mesures: { returning }
+  const { mesure } = props;
+
+  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [updateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
+  const [updateMesure] = useMutation(REACTIVATE_MESURE);
+
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
+      await updateMesure({
+        refetchQueries: ["mesures", "mesures_aggregate"],
+        variables: {
+          id: mesure.id,
+          reason_extinction: values.reason_extinction,
+          service_id: mesure.serviceId
         }
-      }
-    ) {
-      const [mesure] = returning;
-      UpdateServicesCounter({
+      });
+
+      await updateServicesCounter({
         variables: {
           mesures_awaiting: 0,
           mesures_in_progress: 1,
-          service_id: mesure.service_id
+          service_id: mesure.serviceId
         }
       });
-      if (mesure.antenne_id) {
-        UpdateAntenneCounters({
+
+      if (mesure.antenneId) {
+        await updateAntenneCounters({
           variables: {
-            antenne_id: mesure.antenne_id,
-            inc_mesures_awaiting: -1,
+            antenne_id: mesure.antenneId,
+            inc_mesures_awaiting: 0,
             inc_mesures_in_progress: 1
           }
         });
       }
+
+      setSubmitting(false);
+      Router.push(`/services/mesures/${mesure.id}`);
     },
-    onCompleted() {
-      Router.push(`/services/mesures/${mesureId}`);
-    }
+    validationSchema: Yup.object().shape({
+      reason_extinction: Yup.string().required("Required")
+    }),
+    initialValues: { reason_extinction: "" }
   });
 
   return (
@@ -64,59 +73,36 @@ export const ServiceMesureReactivateForm = props => {
         <Box mb="3">
           <Heading3>Réactiver la mesure</Heading3>
         </Box>
-        <Formik
-          onSubmit={(values, { setSubmitting }) => {
-            UpdateMesure({
-              refetchQueries: ["mesures", "mesures_aggregate"],
-              variables: {
-                id: mesureId,
-                reason_extinction: values.reason_extinction,
-                service_id: serviceId
-              }
-            });
-            setSubmitting(false);
-          }}
-          validationSchema={Yup.object().shape({
-            reason_extinction: Yup.string().required("Required")
-          })}
-          initialValues={{ reason_extinction: "" }}
-        >
-          {props => {
-            const { values, touched, errors, isSubmitting, handleChange, handleSubmit } = props;
-            return (
-              <form onSubmit={handleSubmit}>
-                <Box mb="2">
-                  <Input
-                    value={values.reason_extinction}
-                    hasError={errors.reason_extinction && touched.reason_extinction}
-                    id="reason_extinction"
-                    name="reason_extinction"
-                    onChange={handleChange}
-                    placeholder="Raison de la réactivation"
-                  />
-                </Box>
-                <Flex justifyContent="flex-end">
-                  <Box>
-                    <Button
-                      mr="2"
-                      variant="outline"
-                      onClick={() => {
-                        Router.push(`/services/mesures/${mesureId}`);
-                      }}
-                    >
-                      Annuler
-                    </Button>
-                  </Box>
-                  <Box>
-                    <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
-                      Réactiver la mesure
-                    </Button>
-                  </Box>
-                </Flex>
-              </form>
-            );
-          }}
-        </Formik>
+        <form onSubmit={formik.handleSubmit}>
+          <Field>
+            <Input
+              value={formik.values.reason_extinction}
+              hasError={formik.errors.reason_extinction && formik.touched.reason_extinction}
+              id="reason_extinction"
+              name="reason_extinction"
+              onChange={formik.handleChange}
+              placeholder="Raison de la réactivation"
+            />
+          </Field>
+          <Flex justifyContent="flex-end">
+            <Box>
+              <Button
+                mr="2"
+                variant="outline"
+                onClick={() => {
+                  Router.push(`/services/mesures/${mesure.id}`);
+                }}
+              >
+                Annuler
+              </Button>
+            </Box>
+            <Box>
+              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+                Réactiver la mesure
+              </Button>
+            </Box>
+          </Flex>
+        </form>
       </Box>
     </Flex>
   );

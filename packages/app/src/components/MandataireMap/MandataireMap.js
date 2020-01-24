@@ -3,6 +3,7 @@ import Router from "next/router";
 import React, { useContext } from "react";
 
 import { MapContainer, MapLayer } from "../Map";
+import { mapImages } from "../Map/utils";
 import { UserContext } from "../UserContext";
 import { MESURES } from "./queries";
 
@@ -13,13 +14,8 @@ const MandataireMap = () => {
 
   const { data, loading, error } = useQuery(MESURES);
 
-  const selectMesure = event => {
-    const {
-      feature: {
-        properties: { currentId }
-      }
-    } = event;
-    Router.push(`/mandataires/mesures/${currentId}`);
+  const selectMesure = ({ id }) => {
+    Router.push(`/mandataires/mesures/${id}`);
   };
 
   if (loading) {
@@ -34,7 +30,12 @@ const MandataireMap = () => {
 
   return (
     <MapContainer latitude={latitude} longitude={longitude}>
-      <MapLayer markers={mesuresMarkers} onClick={selectMesure} type="mesure" />
+      <MapLayer
+        items={mesuresMarkers}
+        image={mapImages["MESURE"]}
+        onMarkerClick={data => selectMesure(data)}
+        type="MESURE"
+      />
     </MapContainer>
   );
 };

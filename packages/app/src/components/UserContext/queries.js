@@ -6,7 +6,6 @@ export const CURRENT_USER = gql`
       role
       serviceId
       id
-      antenneId
     }
   }
 `;
@@ -23,7 +22,7 @@ export const GET_SERVICE_USERS = gql`
       prenom
       type
       username
-      service_admins {
+      service_members {
         id
         user {
           prenom
@@ -41,30 +40,24 @@ export const GET_SERVICE_USERS = gql`
           etablissement
           longitude
           latitude
+          service_antennes {
+            name
+            mesures_max
+            mesures_in_progress
+            mesures_awaiting
+            id
+            contact_phone
+            contact_lastname
+            contact_firstname
+            contact_email
+            address_zip_code
+            address_street
+            address_city
+            address
+            longitude
+            latitude
+          }
         }
-      }
-      user_antennes {
-        service_antenne {
-          name
-          mesures_max
-          mesures_in_progress
-          mesures_awaiting
-          id
-          contact_phone
-          contact_lastname
-          contact_firstname
-          contact_email
-          address_zip_code
-          address_street
-          address_city
-        }
-        user {
-          id
-          prenom
-          nom
-        }
-        id
-        antenne_id
       }
     }
   }
@@ -162,6 +155,7 @@ export const MANDATAIRE_USERS = gql`
         nb_secretariat
         siret
         adresse
+        competences
       }
     }
   }

@@ -7,22 +7,22 @@ Install api:
   before_script:
     - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
   artifacts:
-    expire_in: 30 mins
+    expire_in: 1 day
     paths:
       - node_modules
       - packages/api/node_modules
 
 #
 
-# Lint @emjpm/api:
-#   extends: .quality_stage
-#   image: node:12-alpine
-#   dependencies:
-#     - Install api
-#   needs:
-#     - Install api
-#   script:
-#     - yarn workspace @emjpm/api lint
+Lint @emjpm/api:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install api
+  needs:
+    - Install api
+  script:
+    - yarn workspace @emjpm/api lint
 
 # Test @emjpm/api:
 #   extends: .quality_stage
@@ -61,7 +61,7 @@ Build @emjpm/api:
   script:
     - yarn workspace @emjpm/api build
   artifacts:
-    expire_in: 30 mins
+    expire_in: 1 day
     paths:
       - packages/api/dist
 
@@ -84,10 +84,12 @@ Register api image:
 
 #
 
-.deploy_api_stage: &deploy_api_stage
+.deploy_api_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
   dependencies: []
   stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
   variables:
     CONTEXT: api
     IMAGE_TAG: $CI_COMMIT_SHA

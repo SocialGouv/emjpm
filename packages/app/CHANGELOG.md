@@ -3,6 +3,131 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.17.10](https://github.com/SocialGouv/emjpm/compare/v25.17.9...v25.17.10) (2020-01-22)
+
+
+### Bug Fixes
+
+* **typo:** fix typo ([6a3c54d](https://github.com/SocialGouv/emjpm/commit/6a3c54db14a7e1a64e34b4a50961445050f9c327))
+
+
+
+
+
+## [25.17.9](https://github.com/SocialGouv/emjpm/compare/v25.17.8...v25.17.9) (2020-01-21)
+
+
+### Bug Fixes
+
+* **edit-antenne:** fetch address, longitude, latitude ([#1438](https://github.com/SocialGouv/emjpm/issues/1438)) ([794d249](https://github.com/SocialGouv/emjpm/commit/794d2498151307a792b57edd4c5eda2a6cf267b1))
+* **service-counter:** update service counters ([#1440](https://github.com/SocialGouv/emjpm/issues/1440)) ([12b6395](https://github.com/SocialGouv/emjpm/commit/12b6395d3d17b8b62c2982b3d8929bcd8753d011))
+
+
+
+
+
+## [25.17.8](https://github.com/SocialGouv/emjpm/compare/v25.17.4...v25.17.8) (2020-01-21)
+
+
+### Bug Fixes
+
+* **mesure-list-item:** fix type size with new package version ([#1432](https://github.com/SocialGouv/emjpm/issues/1432)) ([641f398](https://github.com/SocialGouv/emjpm/commit/641f398b0a856e19e4ebc53ce256a0b41ef8f725))
+* **wording:** fix service add form heading ([#1414](https://github.com/SocialGouv/emjpm/issues/1414)) ([4d175bd](https://github.com/SocialGouv/emjpm/commit/4d175bd1368ed3fd0baf02772f787848a0a3598c))
+* **wording:** fix text typo ([#1413](https://github.com/SocialGouv/emjpm/issues/1413)) ([2c08818](https://github.com/SocialGouv/emjpm/commit/2c08818959f6a6c84278787125f0f35811c57445))
+
+
+
+
+
+## [25.17.7](https://github.com/SocialGouv/emjpm/compare/v25.17.6...v25.17.7) (2020-01-16)
+
+**Note:** Version bump only for package @emjpm/app
+
+
+
+
+
+## [25.17.6](https://github.com/SocialGouv/emjpm/compare/v25.17.5...v25.17.6) (2020-01-16)
+
+**Note:** Version bump only for package @emjpm/app
+
+
+
+
+
+## [25.17.5](https://github.com/SocialGouv/emjpm/compare/v25.17.3...v25.17.5) (2020-01-16)
+
+**Note:** Version bump only for package @emjpm/app
+
+
+
+
+
+## [25.17.4](https://github.com/SocialGouv/emjpm/compare/v25.17.3...v25.17.4) (2020-01-16)
+
+**Note:** Version bump only for package @emjpm/app
+
+
+
+
+
+## [25.17.3](https://github.com/SocialGouv/emjpm/compare/v25.17.2...v25.17.3) (2020-01-15)
+
+**Note:** Version bump only for package @emjpm/app
+
+
+
+
+
+## [25.17.2](https://github.com/SocialGouv/emjpm/compare/v25.17.1...v25.17.2) (2020-01-14)
+
+
+### Bug Fixes
+
+* **form-errors:** add inlineerror and localized yup ([#1389](https://github.com/SocialGouv/emjpm/issues/1389)) ([8d0fc84](https://github.com/SocialGouv/emjpm/commit/8d0fc84fc53be6aefe2aa267922d4cf1d4257ca6))
+* **map:** test if onMarkerClick defined ([#1391](https://github.com/SocialGouv/emjpm/issues/1391)) ([884e06c](https://github.com/SocialGouv/emjpm/commit/884e06cb971f36df30dd6bd1b38afb478597f8ac))
+* **sort-date:** convert string to date before sorting ([#1394](https://github.com/SocialGouv/emjpm/issues/1394)) ([e96dc54](https://github.com/SocialGouv/emjpm/commit/e96dc544442973eb5b2ed6c23c14a585468eb32a))
+
+
+
+
+
+## [25.17.1](https://github.com/SocialGouv/emjpm/compare/v25.17.0...v25.17.1) (2020-01-13)
+
+**Note:** Version bump only for package @emjpm/app
+
+
+
+
+
+# [25.17.0](https://github.com/SocialGouv/emjpm/compare/v25.16.2...v25.17.0) (2020-01-13)
+
+
+### Bug Fixes
+
+* **exclude-status:** add missing excludeStatus params ([#1377](https://github.com/SocialGouv/emjpm/issues/1377)) ([1b713e3](https://github.com/SocialGouv/emjpm/commit/1b713e35c0e65f86b76679dafe91afe9375f892e))
+* **magistrat-mesure:** display service name ([d35ede6](https://github.com/SocialGouv/emjpm/commit/d35ede6b2596e83fa156f45ef8db414c09abad0b))
+
+
+### Features
+
+* **magistrat:** add information form and in profile page ([#1379](https://github.com/SocialGouv/emjpm/issues/1379)) ([c4c9de8](https://github.com/SocialGouv/emjpm/commit/c4c9de86592bcdfa7add065d53c2e3a01910588b))
+
+
+
+
+
+## [25.16.2](https://github.com/SocialGouv/emjpm/compare/v25.16.1...v25.16.2) (2020-01-08)
+
+
+### Bug Fixes
+
+* **map:** magistrats map center ([#1354](https://github.com/SocialGouv/emjpm/issues/1354)) ([49e8b0f](https://github.com/SocialGouv/emjpm/commit/49e8b0fc1329ba528054666b60670074c1d02311))
+
+
+
+
+
 ## [25.16.1](https://github.com/SocialGouv/emjpm/compare/v25.16.0...v25.16.1) (2020-01-07)
 
 **Note:** Version bump only for package @emjpm/app

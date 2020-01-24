@@ -11,7 +11,7 @@ import { ServiceEditForm } from "./ServiceEditForm";
 const ServiceEdit = () => {
   const { data, error, loading } = useQuery(GET_SERVICES);
 
-  const [createAntenne] = useMutation(EDIT_ANTENNE, {
+  const [editAntenne] = useMutation(EDIT_ANTENNE, {
     update() {
       Router.push("/services/informations", `/services/informations`, {
         shallow: true
@@ -31,15 +31,15 @@ const ServiceEdit = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await createAntenne({
+      await editAntenne({
         refetchQueries: ["Service", "users"],
         variables: {
           adresse: values.geocode.label,
           code_postal: values.geocode.postcode,
+          competences: values.competences,
           dispo_max: values.dispo_max,
           email: values.email,
           etablissement: values.etablissement,
-          information: values.information,
           nom: values.nom,
           prenom: values.prenom,
           service_id: service.id,

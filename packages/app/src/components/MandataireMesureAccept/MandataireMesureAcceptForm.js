@@ -1,5 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input, Select } from "@socialgouv/emjpm-ui-core";
+import {
+  Button,
+  Field,
+  Heading3,
+  Heading5,
+  InlineError,
+  Input,
+  Select
+} from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -10,62 +18,52 @@ import { RESIDENCE } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
-import { UPDATE_MANDATAIRES_COUTERS } from "../MandatairesMesures/mutations";
+import { UPDATE_MANDATAIRES_COUTERS } from "../MandataireMesures/mutations";
 import { ACCEPT_MESURE } from "./mutations";
 
 export const MandataireMesureAcceptForm = props => {
-  const { mesureId, departementsData } = props;
+  const { mesure, departementsData } = props;
 
-  const [UpdateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
-
-  const [UpdateMesure] = useMutation(ACCEPT_MESURE, {
-    onCompleted() {
-      Router.push(`/mandataires/mesures/${mesureId}`);
-    },
-    update(
-      cache,
-      {
-        data: {
-          update_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      UpdateMandatairesCounter({
-        variables: {
-          mandataireId: mesure.mandataire_id,
-          mesures_awaiting: -1,
-          mesures_in_progress: 1
-        }
-      });
-    }
-  });
+  const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
+  const [updateMesure] = useMutation(ACCEPT_MESURE);
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting, setErrors }) => {
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
       const regionCode = getRegionCode(values.geocode.postcode);
       const departements = departementsData.departements;
       const departement = departements.find(dep => dep.code === regionCode);
+
       if (!departement) {
         setErrors({
           geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
         });
-      } else {
-        UpdateMesure({
-          refetchQueries: ["mesures", "mesures_aggregate"],
-          variables: {
-            date_ouverture: values.date_ouverture,
-            department_id: departement.id,
-            id: mesureId,
-            residence: values.residence.value,
-            code_postal: values.geocode.postcode,
-            ville: values.geocode.city,
-            latitude: values.geocode.latitude,
-            longitude: values.geocode.longitude
-          }
-        });
+        return;
       }
+
+      await updateMesure({
+        refetchQueries: ["mesures", "mesures_aggregate"],
+        variables: {
+          date_ouverture: values.date_ouverture,
+          department_id: departement.id,
+          id: mesure.id,
+          residence: values.residence.value,
+          code_postal: values.geocode.postcode,
+          ville: values.geocode.city,
+          latitude: values.geocode.latitude,
+          longitude: values.geocode.longitude
+        }
+      });
+
+      await updateMandatairesCounter({
+        variables: {
+          mandataireId: mesure.mandataireId,
+          mesures_awaiting: -1,
+          mesures_in_progress: 1
+        }
+      });
+
       setSubmitting(false);
+      Router.push(`/mandataires/mesures/${mesure.id}`);
     },
     validationSchema: mandataireAcceptMesureSchema,
     initialValues: {
@@ -92,7 +90,7 @@ export const MandataireMesureAcceptForm = props => {
         </Box>
 
         <form onSubmit={formik.handleSubmit}>
-          <Box mb="2">
+          <Field>
             <Input
               value={formik.values.date_ouverture}
               id="date_ouverture"
@@ -100,11 +98,11 @@ export const MandataireMesureAcceptForm = props => {
               name="date_ouverture"
               hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
               onChange={formik.handleChange}
-              placeholder="Date d'ouverture"
+              placeholder="Date d'ordonnance"
             />
-            {formik.errors.date_ouverture && <Text>{formik.errors.date_ouverture}</Text>}
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "90" }} mb="2">
+            <InlineError message={formik.errors.date_ouverture} fieldId="date_ouverture" />
+          </Field>
+          <Field>
             <Select
               id="residence"
               name="residence"
@@ -114,21 +112,19 @@ export const MandataireMesureAcceptForm = props => {
               onChange={option => formik.setFieldValue("residence", option)}
               options={RESIDENCE}
             />
-            {formik.errors.residence && <Text>{formik.errors.residence}</Text>}
-          </Box>
-          <Box sx={{ position: "relative", zIndex: "80" }} mb="2">
+            <InlineError message={formik.errors.residence} fieldId="residence" />
+          </Field>
+          <Field>
             <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-            {formik.errors.geocode && formik.touched.geocode && (
-              <Text>{formik.errors.geocode}</Text>
-            )}
-          </Box>
+            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+          </Field>
           <Flex justifyContent="flex-end">
             <Box>
               <Button
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/mandataires/mesures/${mesureId}`);
+                  Router.push(`/mandataires/mesures/${mesure.id}`);
                 }}
               >
                 Annuler

@@ -1,22 +1,20 @@
 {
   "name": "@emjpm/api",
-  "version": "25.16.1",
+  "version": "25.17.10",
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
-    "build": "ncc build app.js --source-map -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
-    "dev": "nodemon app.js --inspect",
-    "test:mocha": "NODE_ENV=test mocha --timeout 10000 --exit",
+    "build": "ncc build src/app.js --source-map -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
+    "dev": "nodemon src/app.js --inspect",
     "test": "NODE_ENV=test jest",
-    "lint": "eslint __test__ auth db email routes scripts controllers db app.js",
+    "lint": "eslint __test__ src",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check '**/*.js'",
-    "prettier:fix": "prettier --write '**/*.js'",
-    "email-relance": "node ./scripts/relance-mandataires-inactifs"
+    "prettier:fix": "prettier --write '**/*.js'"
   },
   "dependencies": {
     "@date-fns/upgrade": "^1.0.1",
-    "@emjpm/knex": "^25.16.1",
+    "@emjpm/knex": "^25.17.10",
     "@sentry/node": "5.10.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

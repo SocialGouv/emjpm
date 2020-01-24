@@ -1,15 +1,24 @@
 import { BoxWrapper, Heading2 } from "@socialgouv/emjpm-ui-core";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServices } from "../../src/components/Layout";
 import { ServiceAntennes } from "../../src/components/ServiceAntennes";
 import { ServiceInformations } from "../../src/components/ServiceInformations";
 import { PreferencesPanel } from "../../src/components/ServiceSidebar";
+import { UserContext } from "../../src/components/UserContext";
 import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {
+  const { service_members } = useContext(UserContext);
+  const [
+    {
+      service: { service_antennes }
+    }
+  ] = service_members;
+  const [antenne] = service_antennes;
+
   return (
     <LayoutServices>
       <BoxWrapper mt={6} px="0">
@@ -37,7 +46,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Mesures souhaitées</Heading2>
-            <UserInformations Component={props => <PreferencesPanel {...props} mt="3" />} />
+            {antenne && <PreferencesPanel antenneId={antenne.id} mt="3" />}
           </Box>
         </Flex>
         <Box

@@ -1,28 +1,33 @@
-import * as Yup from "yup";
+import yup from "./yup";
 
-const mandataireEditSchema = Yup.object().shape({
-  dispo_max: Yup.number("Le champs doit être en nombre").required("Champ obligatoire"),
-  email: Yup.string("Champ obligatoire")
-    .email("Le format de votre email n'est pas correct")
-    .required("Champ obligatoire"),
-  genre: Yup.string().required("Champ obligatoire"),
-  geocode: Yup.object()
+const mandataireEditSchema = yup.object().shape({
+  competences: yup.string(),
+  dispo_max: yup.number().required(),
+  email: yup
+    .string()
+    .email()
+    .required(),
+  genre: yup.string().required(),
+  geocode: yup
+    .object()
     .nullable()
-    .required("Champ obligatoire"),
-  nb_secretariat: Yup.number(),
-  nom: Yup.string().required("Champ obligatoire"),
-  prenom: Yup.string().required("Champ obligatoire"),
-  secretariat: Yup.object()
+    .required(),
+  nb_secretariat: yup.number(),
+  nom: yup.string().required(),
+  prenom: yup.string().required(),
+  secretariat: yup
+    .object()
     .shape({
-      label: Yup.string(),
-      value: Yup.boolean()
+      label: yup.string(),
+      value: yup.boolean()
     })
-    .required("Champ obligatoire"),
-  siret: Yup.string()
+    .required(),
+  siret: yup
+    .string()
     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
-    .required("Champ obligatoire"),
-  telephone: Yup.string().required("Champ obligatoire"),
-  telephone_portable: Yup.string()
+    .required(),
+  telephone: yup.string().required(),
+  telephone_portable: yup.string()
 });
 
 export { mandataireEditSchema };

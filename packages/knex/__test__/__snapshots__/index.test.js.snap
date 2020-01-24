@@ -393,6 +393,12 @@ Object {
     "nullable": false,
     "type": "character varying",
   },
+  "competences": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "text",
+  },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
     "maxLength": null,
@@ -506,12 +512,6 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
-  },
-  "zip": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "text",
   },
 }
 `;
@@ -782,29 +782,6 @@ Object {
 }
 `;
 
-exports[`service_admin table schema 1`] = `
-Object {
-  "id": Object {
-    "defaultValue": "nextval('service_admin_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "service_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "user_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-}
-`;
-
 exports[`service_antenne table schema 1`] = `
 Object {
   "address": Object {
@@ -924,6 +901,35 @@ Object {
 }
 `;
 
+exports[`service_members table schema 1`] = `
+Object {
+  "id": Object {
+    "defaultValue": "nextval('service_admin_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "is_admin": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": false,
+    "type": "boolean",
+  },
+  "service_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`service_tis table schema 1`] = `
 Object {
   "id": Object {
@@ -956,6 +962,12 @@ Object {
     "type": "character varying",
   },
   "code_postal": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "competences": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": true,
@@ -996,12 +1008,6 @@ Object {
     "maxLength": null,
     "nullable": false,
     "type": "integer",
-  },
-  "information": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
   },
   "latitude": Object {
     "defaultValue": null,
@@ -1072,12 +1078,11 @@ Array [
   "mesures_import",
   "regions",
   "role",
-  "service_admin",
   "service_antenne",
+  "service_members",
   "service_tis",
   "services",
   "tis",
-  "user_antenne",
   "user_role",
   "user_tis",
   "users",
@@ -1154,29 +1159,6 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
-  },
-}
-`;
-
-exports[`user_antenne table schema 1`] = `
-Object {
-  "antenne_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "id": Object {
-    "defaultValue": "nextval('user_antenne_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "user_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
   },
 }
 `;
