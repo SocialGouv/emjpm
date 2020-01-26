@@ -1,0 +1,65 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ${K8S_PROJECT}-backup-before-${BRANCH_HASH}
+  labels:
+    app: ${K8S_PROJECT}-backup-before-${BRANCH_HASH}
+    git/branch: ${BRANCH_NAME}
+    git/commit: ${COMMIT}
+    gitlab/job: "${JOB_ID}"
+spec:
+  template:
+    spec:
+      containers:
+        #
+        #
+        #
+        - name: backup
+          image: postgres:10-alpine
+          command:
+            - sh
+          args:
+            - -c
+            - |
+              sh -x /mnt/script/backup.sh ;
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          env:
+            - name: CRONJOB_STATUS_DIR
+              value: /var/lib/cronjob/status
+            - name: DUMP_DIR
+              value: /mnt/data
+            - name: PGDATABASE
+              value: emjpm
+            - name: PGHOST
+              value: ${POSTGRES_SRV_HOST}
+            - name: PGUSER
+              value: postgres
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ${K8S_PROJECT}-secret
+                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - mountPath: "/mnt/data"
+              name: data
+            - mountPath: "/mnt/script"
+              name: script
+        #
+        #
+      restartPolicy: Never
+      volumes:
+        - name: script
+          configMap:
+            name: ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+        - name: data
+          azureFile:
+            secretName: ${K8S_PROJECT}-azure-storage-${BRANCH_HASH}
+            shareName: ${K8S_PROJECT}-backup-restore
+            readOnly: false
