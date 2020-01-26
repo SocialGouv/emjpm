@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.18.0](https://github.com/SocialGouv/emjpm/compare/v25.17.10...v25.18.0) (2020-01-26)
+
+
+### Features
+
+* **sentry:** generate sourcemap for sentry debugging ([#1435](https://github.com/SocialGouv/emjpm/issues/1435)) ([c3230a9](https://github.com/SocialGouv/emjpm/commit/c3230a9d0a30bd45b4213f16240618b8a867b45f))
+
+
+
+
+
 ## [25.17.10](https://github.com/SocialGouv/emjpm/compare/v25.17.9...v25.17.10) (2020-01-22)
 
 

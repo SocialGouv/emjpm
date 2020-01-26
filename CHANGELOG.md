@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.18.0](https://github.com/SocialGouv/emjpm/compare/v25.17.10...v25.18.0) (2020-01-26)
+
+
+### Bug Fixes
+
+* **backup:** update anonymisation script ([#1446](https://github.com/SocialGouv/emjpm/issues/1446)) ([4093d54](https://github.com/SocialGouv/emjpm/commit/4093d54b764343f19961488f923da900c010dc7b))
+* **restore-db:** allow restore db ([#1442](https://github.com/SocialGouv/emjpm/issues/1442)) ([79aae67](https://github.com/SocialGouv/emjpm/commit/79aae67b83e81bdc87d6187d7f3fa7d86ac19349))
+
+
+### Features
+
+* **backup-before-prod:** backup db before deploying in production ([#1447](https://github.com/SocialGouv/emjpm/issues/1447)) ([ba3236a](https://github.com/SocialGouv/emjpm/commit/ba3236a566f7300d74d1134713b016ce54ff311f))
+* **sentry:** generate sourcemap for sentry debugging ([#1435](https://github.com/SocialGouv/emjpm/issues/1435)) ([c3230a9](https://github.com/SocialGouv/emjpm/commit/c3230a9d0a30bd45b4213f16240618b8a867b45f))
+
+
+
+
+
 ## [25.17.10](https://github.com/SocialGouv/emjpm/compare/v25.17.9...v25.17.10) (2020-01-22)
 
 
