@@ -39,6 +39,22 @@ Deploy postgres (dev):
   variables:
     PERSISTENCE_ENABLED: "false"
 
+Backup postgres (incubateur):
+  stage: Prepare
+  extends:
+    - .base_docker_kubectl_image_stage
+    - .incubateur_stage
+  script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+
+    - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+    - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+      --from-file=./.k8s/postgres/backup/configmap/
+
+    - kubectl delete job ${K8S_PROJECT}-backup-${BRANCH_HASH}
+    - cat .k8s/postgres/backup/job.yml | envsubst | kubectl apply -f -;
+
 Deploy postgres (incubateur):
   extends:
     - .deploy_postgres
