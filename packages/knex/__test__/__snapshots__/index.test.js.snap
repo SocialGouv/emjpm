@@ -1161,7 +1161,11 @@ Object {
 
 exports[`should list all tables 1`] = `
 Array [
+<<<<<<< HEAD
   "access_tokens",
+=======
+  "api_logs",
+>>>>>>> test(api-logs): update knex test snpashot
   "city",
   "commentaires",
   "departements",
