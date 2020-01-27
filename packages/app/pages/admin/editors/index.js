@@ -21,7 +21,7 @@ const AdminEditorsPage = () => {
               mt: "2"
             }}
           >
-            <AdminFilterBar onAddButtonClick={() => Router.push("/admin/editors/new ")} />
+            <AdminFilterBar onAddButtonClick={() => Router.push("/admin/editors/create ")} />
             <AdminEditors />
           </Flex>
         </BoxWrapper>

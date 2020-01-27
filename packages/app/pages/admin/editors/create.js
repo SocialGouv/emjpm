@@ -2,26 +2,26 @@ import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Flex } from "rebass";
 
-import { AdminAddTribunal } from "../../../src/components/AdminTribunaux/AdminAddTribunal";
+import { AdminEditorCreate } from "../../../src/components/AdminEditors/AdminEditorCreate";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
-const AddTribunauxPage = () => {
+const AdminEditorsCreatePage = () => {
   return (
     <LayoutAdmin hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
-        <Heading1>{`Création d'un tribunal`}</Heading1>
+        <Heading1>{`Création d'un éditeur`}</Heading1>
         <Flex
           sx={{
             flexWrap: "wrap",
             mt: "2"
           }}
         >
-          <AdminAddTribunal />
+          <AdminEditorCreate />
         </Flex>
       </BoxWrapper>
     </LayoutAdmin>
   );
 };
 
-export default withAuthSync(AddTribunauxPage);
+export default withAuthSync(AdminEditorsCreatePage);

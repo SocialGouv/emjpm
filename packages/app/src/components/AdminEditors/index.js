@@ -1,3 +1,4 @@
+import { AdminEditorCreate } from "./AdminEditorCreate";
 import { AdminEditors } from "./AdminEditors";
 
-export { AdminEditors };
+export { AdminEditors, AdminEditorCreate };
