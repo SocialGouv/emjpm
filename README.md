@@ -89,7 +89,7 @@ BASE_IMAGE=emjpm-base docker-compose run knex yarn workspace @emjpm/knex run see
 connect to PG pod
 
 ```bash
-kubectl exec -it emjpm-postgres-prod-0 sh
+kubectl exec -it postgres-postgresql-0 sh
 ```
 
 dump database
