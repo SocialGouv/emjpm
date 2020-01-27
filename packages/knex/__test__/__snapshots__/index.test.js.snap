@@ -1,5 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+<<<<<<< HEAD
 exports[`access_tokens table schema 1`] = `
 Object {
   "access_token": Object {
@@ -10,16 +11,27 @@ Object {
   },
   "editor_id": Object {
     "defaultValue": null,
+=======
+exports[`api_logs table schema 1`] = `
+Object {
+  "id": Object {
+    "defaultValue": "nextval('api_logs_id_seq'::regclass)",
+>>>>>>> test(api): reupdate knex test snapshot
     "maxLength": null,
     "nullable": false,
     "type": "integer",
   },
+<<<<<<< HEAD
   "editor_url": Object {
+=======
+  "request": Object {
+>>>>>>> test(api): reupdate knex test snapshot
     "defaultValue": null,
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
   },
+<<<<<<< HEAD
   "id": Object {
     "defaultValue": "nextval('access_tokens_id_seq'::regclass)",
     "maxLength": null,
@@ -31,6 +43,19 @@ Object {
     "maxLength": null,
     "nullable": false,
     "type": "integer",
+=======
+  "response": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "token": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+>>>>>>> test(api): reupdate knex test snapshot
   },
 }
 `;
