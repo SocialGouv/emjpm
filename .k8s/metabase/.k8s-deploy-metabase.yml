@@ -11,4 +11,7 @@
     - envsubst < ./.k8s/metabase/values.yaml > ./values.yaml
     #
     - helm init --client-only
-    - helm upgrade --install metabase --wait -f ./values.yaml stable/metabase --namespace ${K8S_NAMESPACE}
+
+    - helm just fetch "stable/metabase#0.9.4"
+    - helm just render metabase metabase --values ./values.yaml
+    - helm just apply metabase

@@ -19,13 +19,16 @@ psql -v ON_ERROR_STOP=1 --username postgres <<-EOSQL
   -- Ensure that no one is connected to the database
   SELECT pg_terminate_backend(pid)
     FROM pg_stat_activity
-    WHERE pid <> pg_backend_pid() AND datname = 'emjpm';
+    WHERE pid <> pg_backend_pid() AND datname in ('emjpm', 'metabase');
 
   -- Ensure that the emjpm database and schema is not
   DROP DATABASE IF EXISTS emjpm;
+  DROP DATABASE IF EXISTS metabase;
 
   -- Create the emjpm database and the default public schema
   CREATE DATABASE emjpm;
+  CREATE DATABASE metabase;
+
 
   -- emjpm user
   DROP OWNED BY $POSTGRES_EMJPM_USER;
@@ -38,8 +41,10 @@ psql -v ON_ERROR_STOP=1 --username postgres <<-EOSQL
   -- metabase readonly user
   DROP OWNED BY $POSTGRES_METABASE_USER;
   DROP USER IF EXISTS $POSTGRES_METABASE_USER;
-
   CREATE USER $POSTGRES_METABASE_USER with encrypted password '$POSTGRES_METABASE_PASSWORD';
+
+  GRANT ALL PRIVILEGES ON DATABASE metabase TO $POSTGRES_METABASE_USER;
+
   GRANT CONNECT ON DATABASE emjpm TO $POSTGRES_METABASE_USER;
   GRANT USAGE ON SCHEMA public TO $POSTGRES_METABASE_USER;
   GRANT SELECT ON ALL TABLES IN SCHEMA public TO $POSTGRES_METABASE_USER;
