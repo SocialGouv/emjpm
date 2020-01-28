@@ -27,10 +27,10 @@ export default ({ body, onSuccess, onError, onComplete }) =>
       } else {
         onError(res.errors.map(error => error.msg));
       }
+
+      onComplete();
     })
     .catch(error => {
       onError([error.message]);
-    })
-    .finally(() => {
       onComplete();
     });
