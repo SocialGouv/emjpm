@@ -1,3 +1,4 @@
+import { adminEditorSchema } from "./adminEditorSchema";
 import { adminTribunalSchema } from "./adminTribunalSchema";
 import { forgotPasswordSchema } from "./forgotPasswordSchema";
 import { loginSchema } from "./loginSchema";
@@ -20,6 +21,7 @@ import { signupSchema } from "./signupSchema";
 import { signupServiceSchema } from "./signupServiceSchema";
 
 export {
+  adminEditorSchema,
   adminTribunalSchema,
   forgotPasswordSchema,
   loginSchema,
