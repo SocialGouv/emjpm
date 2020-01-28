@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.19.0](https://github.com/SocialGouv/emjpm/compare/v25.18.0...v25.19.0) (2020-01-28)
+
+
+### Features
+
+* **editor:** add editor api tokens ([#1445](https://github.com/SocialGouv/emjpm/issues/1445)) ([e35ba46](https://github.com/SocialGouv/emjpm/commit/e35ba46ca4be18e6ac8f16877ffda477968983c4))
+
+
+
+
+
 # [25.18.0](https://github.com/SocialGouv/emjpm/compare/v25.17.10...v25.18.0) (2020-01-26)
 
 **Note:** Version bump only for package @emjpm/knex
