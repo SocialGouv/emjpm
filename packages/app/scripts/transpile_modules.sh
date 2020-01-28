@@ -14,7 +14,7 @@ transpile () {
 }
 #
 
-
+transpile "node_modules/p-debounce/index.js"
 transpile "node_modules/query-string/index.js"
 transpile "node_modules/split-on-first/index.js"
 transpile "node_modules/strict-uri-encode/index.js"
