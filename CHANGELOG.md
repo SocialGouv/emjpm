@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.19.0](https://github.com/SocialGouv/emjpm/compare/v25.18.0...v25.19.0) (2020-01-28)
+
+
+### Features
+
+* **editor:** add editor api tokens ([#1445](https://github.com/SocialGouv/emjpm/issues/1445)) ([e35ba46](https://github.com/SocialGouv/emjpm/commit/e35ba46ca4be18e6ac8f16877ffda477968983c4))
+* **sourcemap:** use canary next-source-maps to gen missing sourcemap ([#1451](https://github.com/SocialGouv/emjpm/issues/1451)) ([295b12a](https://github.com/SocialGouv/emjpm/commit/295b12acb21a5acf2074b974f60a6cfa16f35167))
+
+
+### Reverts
+
+* Revert "feat(sourcemap): use canary next-source-maps to gen missing sourcemap (#1451)" (#1454) ([0f08f8f](https://github.com/SocialGouv/emjpm/commit/0f08f8f8f5f5eeb0a347a8e7134212fd186306c9)), closes [#1451](https://github.com/SocialGouv/emjpm/issues/1451) [#1454](https://github.com/SocialGouv/emjpm/issues/1454)
+
+
+
+
+
 # [25.18.0](https://github.com/SocialGouv/emjpm/compare/v25.17.10...v25.18.0) (2020-01-26)
 
 
