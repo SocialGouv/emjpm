@@ -1,7 +1,9 @@
 const webpack = require("webpack");
 const withCSS = require("@zeit/next-css");
 const withImages = require("next-images");
-const withSourceMaps = require("@zeit/next-source-maps");
+const withSourceMaps = require("@zeit/next-source-maps")({
+  devtool: "hidden-source-map"
+});
 const flow = require("lodash.flow");
 
 require("dotenv").config();
