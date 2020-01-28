@@ -140,6 +140,29 @@ Object {
 }
 `;
 
+exports[`editors table schema 1`] = `
+Object {
+  "api_token": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('editors_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "name": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+}
+`;
+
 exports[`etablissements table schema 1`] = `
 Object {
   "adresse": Object {
@@ -1066,6 +1089,7 @@ Array [
   "commentaires",
   "departements",
   "direction",
+  "editors",
   "etablissements",
   "geolocalisation_code_postal",
   "knex_migrations_v2",
