@@ -12,6 +12,9 @@
     #
     - helm init --client-only
 
+    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v2.11.0/helm-just-linux-2.11.0.tgz | tar -C $(helm home) -xzv
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.11.0
+
     - helm just fetch "stable/metabase#0.9.4"
     - helm just render metabase metabase --values ./values.yaml
     - helm just apply metabase
