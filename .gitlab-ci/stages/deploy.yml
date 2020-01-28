@@ -48,11 +48,11 @@ Backup postgres (incubateur):
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
 
-    - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+    - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} || true
     - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
       --from-file=./.k8s/postgres/backup/configmap/
 
-    - kubectl delete job ${K8S_PROJECT}-backup-${BRANCH_HASH}
+    - kubectl delete job ${K8S_PROJECT}-backup-${BRANCH_HASH} || true
     - cat .k8s/postgres/backup/job.yml | envsubst | kubectl apply -f -;
 
 Deploy postgres (incubateur):
