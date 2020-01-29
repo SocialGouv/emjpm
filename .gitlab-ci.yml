@@ -5,115 +5,135 @@
 
 include:
   - /.gitlab-ci/variables.yml
-  - /.gitlab-ci/extends.yml
+  # - /.gitlab-ci/extends.yml
   #
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_deploy_nodejs_chart_stage.yml
-    ref: v4.6.0
+  # - project: SocialGouv/gitlab-ci-yml
+  #   file: /base_deploy_nodejs_chart_stage.yml
+  #   ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
     ref: v4.6.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
     ref: v4.6.0
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_create_namespace_stage.yml
-    ref: v4.6.0
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_register_stage.yml
-    ref: v4.6.0
+  # - project: SocialGouv/gitlab-ci-yml
+  #   file: /base_create_namespace_stage.yml
+  #   ref: v4.6.0
+  # - project: SocialGouv/gitlab-ci-yml
+  #   file: /base_register_stage.yml
+  #   ref: v4.6.0
   #
-  - /.gitlab-ci/stages/notify.yml
-  - /.gitlab-ci/stages/deploy.yml
+  # - /.gitlab-ci/stages/notify.yml
+  # - /.gitlab-ci/stages/deploy.yml
   #
-  - /packages/api/.gitlab-ci.yml
-  - /packages/app/.gitlab-ci.yml
-  - /packages/graphql-server/.gitlab-ci.yml
-  - /packages/hasura/.gitlab-ci.yml
-  - /packages/knex/.gitlab-ci.yml
+  # - /packages/api/.gitlab-ci.yml
+  # - /packages/app/.gitlab-ci.yml
+  # - /packages/graphql-server/.gitlab-ci.yml
+  # - /packages/hasura/.gitlab-ci.yml
+  # - /packages/knex/.gitlab-ci.yml
 
 #
 
 stages:
-- "Prepare"
-- "Code Quality"
-- "Registration"
-- "Deploy"
-- "Notify Finished Deployment"
+# - "Prepare"
+# - "Code Quality"
+# - "Registration"
+# - "Deploy"
+# - "Notify Finished Deployment"
+- "Init Database"
 
 #
 
-.base_stage:
-  except:
-    variables:
-      # Don't run when running e2e tests
-      - $E2E_TEST
-      # Don't run when deploying in production an existing image
-      - $PRODUCTION
-      # Don't run when tagging a commit
-      - $RELEASE
-
-#
-
-.prepare_stage:
-  extends: .base_stage
-  stage: "Prepare"
-  dependencies: []
-
-.quality_stage:
-  extends: .base_stage
-  stage: "Code Quality"
-  dependencies: []
-
-.register_stage:
-  extends: .base_stage
-  stage: "Registration"
-  interruptible: true
-  dependencies: []
-
-.deploy_stage:
-  stage: "Deploy"
-  dependencies: []
-  services:
-    - docker:dind
-  variables:
-    IMAGE_TAG: ${CI_COMMIT_SHA}
-    REGISTRY: ${CI_REGISTRY_IMAGE}
-
-#
-
-.incubateur_stage:
-  environment:
-    name: prod
-  only:
-    variables:
-      - $PRODUCTION
-
-.dev_stage:
-  extends:
-    - .base_stage
+k8s-init-postgres:
+  extends: .base_docker_helm_image_stage
+  stage: "Init Database"
   environment:
     name: fabrique-dev
-
-#
-
-Create namespace:
-  extends:
-    - .base_create_namespace_stage
-    - .dev_stage
-  before_script:
+  script:
     - source ./.gitlab-ci/env.sh
-  after_script:
-    - source ./.gitlab-ci/env.sh
+
+    - export MANAGED_DB_PASSWORD=$(kubectl get secret azure-${K8S_PROJECT}-managed-database -n ${K8S_PROJECT}-secret -ojsonpath='{.data.POSTGRESQL_PASSWORD}' | base64 --decode)
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
-    # Create secrets
-    - export APP_URL=$(echo $FRONTEND_URL | base64)
-    - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
-    - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
+    - kubectl delete configmap ${K8S_PROJECT}-init-db-${BRANCH_HASH} || true
+    - kubectl create configmap ${K8S_PROJECT}-init-db-${BRANCH_HASH}
+      --from-file=./.k8s/postgres/init/configmap/
     #
-    # Create azure volume secrets for anonymized export
-    - export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
-    - export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
-    - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
-    - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
+    - kubectl delete job init-db-job || true
+    - cat ./.k8s/postgres/init/init-db-job.yml | envsubst | kubectl apply -f -
+    - kubectl wait --for=condition=complete job/init-db-job  --timeout=300s
+
+# .base_stage:
+#   except:
+#     variables:
+#       # Don't run when running e2e tests
+#       - $E2E_TEST
+#       # Don't run when deploying in production an existing image
+#       - $PRODUCTION
+#       # Don't run when tagging a commit
+#       - $RELEASE
+
+# #
+
+# .prepare_stage:
+#   extends: .base_stage
+#   stage: "Prepare"
+#   dependencies: []
+
+# .quality_stage:
+#   extends: .base_stage
+#   stage: "Code Quality"
+#   dependencies: []
+
+# .register_stage:
+#   extends: .base_stage
+#   stage: "Registration"
+#   interruptible: true
+#   dependencies: []
+
+# .deploy_stage:
+#   stage: "Deploy"
+#   dependencies: []
+#   services:
+#     - docker:dind
+#   variables:
+#     IMAGE_TAG: ${CI_COMMIT_SHA}
+#     REGISTRY: ${CI_REGISTRY_IMAGE}
+
+# #
+
+# .incubateur_stage:
+#   environment:
+#     name: prod
+#   only:
+#     variables:
+#       - $PRODUCTION
+
+# .dev_stage:
+#   extends:
+#     - .base_stage
+#   environment:
+#     name: fabrique-dev
+
+# #
+
+# Create namespace:
+#   extends:
+#     - .base_create_namespace_stage
+#     - .dev_stage
+#   before_script:
+#     - source ./.gitlab-ci/env.sh
+#   after_script:
+#     - source ./.gitlab-ci/env.sh
+#     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+#     #
+#     # Create secrets
+#     - export APP_URL=$(echo $FRONTEND_URL | base64)
+#     - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
+#     - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
+#     #
+#     # Create azure volume secrets for anonymized export
+#     - export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
+#     - export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
+#     - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
+#     - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
