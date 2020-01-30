@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.20.0](https://github.com/SocialGouv/emjpm/compare/v25.19.2...v25.20.0) (2020-01-30)
+
+
+### Bug Fixes
+
+* **sentry-ff:** fix magistrat issues in ff36/38 ([#1456](https://github.com/SocialGouv/emjpm/issues/1456)) ([cb02401](https://github.com/SocialGouv/emjpm/commit/cb024019132362b9bb95bc23c1afc0b67103b662))
+* **sentry-ff:** fix sentry firefox 38 issues ([#1455](https://github.com/SocialGouv/emjpm/issues/1455)) ([3879840](https://github.com/SocialGouv/emjpm/commit/38798403026c8d118183d2a350ad88154517e489))
+
+
+### Features
+
+* **sentry:** add sourcemap ([#1458](https://github.com/SocialGouv/emjpm/issues/1458)) ([460df00](https://github.com/SocialGouv/emjpm/commit/460df00bf20741a57458dce5813ca8c82cbf3955))
+
+
+
+
+
 ## [25.19.2](https://github.com/SocialGouv/emjpm/compare/v25.19.1...v25.19.2) (2020-01-28)
 
 **Note:** Version bump only for package emjpm
