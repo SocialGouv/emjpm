@@ -21,7 +21,7 @@ const {
 new ReactPiwik({
   siteId: 13,
   trackErrors: true,
-  url: "matomo.tools.factory.social.gouv.fr"
+  url: "matomo.fabrique.social.gouv.fr"
 });
 
 class MyApp extends App {
