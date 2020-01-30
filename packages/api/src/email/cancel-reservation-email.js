@@ -1,12 +1,10 @@
 const { format } = require("date-fns");
 const { sendEmail } = require(".");
 
-const { legacyParse, convertTokens } = require("@date-fns/upgrade/v2");
-
 const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
   `Madame, Monsieur,
 
-Le ${format(legacyParse(mesure.created_at), convertTokens("DD/MM/YYYY"))}, le ${
+Le ${format(new Date(mesure.created_at), "dd/MM/yyyy")}, le ${
     ti.etablissement
   } ${(mesure.cabinet && `cabinet ${mesure.cabinet}`) ||
     ""}, vous a confié une nouvelle mesure :
