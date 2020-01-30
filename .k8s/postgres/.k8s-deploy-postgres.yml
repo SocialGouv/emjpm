@@ -1,21 +1,21 @@
 #
 
-.k8s-deploy-postgres:
-  extends: .base_docker_helm_image_stage
-  script:
-    - source ./.gitlab-ci/env.sh
-    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-    #
-    - helm init --client-only
-    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v2.8.0/helm-just-linux-2.8.0.tgz | tar -C $(helm home) -xzv
-    #
-    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 --decode)
-    #
-    - envsubst < ./.k8s/postgres/values-postgresql.yaml > ./values.yaml
-    #
-    - helm just fetch "stable/postgresql#${HELM_POSTGRES_CHART_VERSION}"
-    - helm just render postgres postgresql --values ./values.yaml
-    - helm just apply postgres
+# .k8s-deploy-postgres:
+#   extends: .base_docker_helm_image_stage
+#   script:
+#     - source ./.gitlab-ci/env.sh
+#     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+#     #
+#     - helm init --client-only
+#     - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v2.8.0/helm-just-linux-2.8.0.tgz | tar -C $(helm home) -xzv
+#     #
+#     - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_PASSWORD}' | base64 --decode)
+#     #
+#     - envsubst < ./.k8s/postgres/values-postgresql.yaml > ./values.yaml
+#     #
+#     - helm just fetch "stable/postgresql#${HELM_POSTGRES_CHART_VERSION}"
+#     - helm just render postgres postgresql --values ./values.yaml
+#     - helm just apply postgres
 
 .k8s-restore-postgres-data:
   extends: .base_docker_helm_image_stage

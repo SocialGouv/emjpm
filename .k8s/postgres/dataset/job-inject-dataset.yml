@@ -21,7 +21,7 @@ spec:
           args: ["-x", "/dataset/inject-dataset.sh"]
           env:
             - name: DATABASE_URL
-              value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_SRV_HOST}/${POSTGRES_DATABASE}"
+              value: "psql://${POSTGRESQL_USER}:${POSTGRESQL_PASSWORD}@${POSTGRES_SRV_HOST}/${POSTGRES_DATABASE_EMJPM}"
             - name: NODE_ENV
               value: "${NODE_ENV}"
           volumeMounts:
@@ -39,16 +39,16 @@ spec:
           configMap:
             name: dataset-configmap
       restartPolicy: Never
-      initContainers:
-        - name: wait-for-postgres
-          image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:0.19.0
-          env:
-            - name: PGHOST
-              value: ${POSTGRES_SRV_HOST}
-          resources:
-            limits:
-              cpu: 50m
-              memory: 32Mi
-            requests:
-              cpu: 0m
-              memory: 0Mi
+      # initContainers:
+      #   - name: wait-for-postgres
+      #     image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:0.19.0
+      #     env:
+      #       - name: PGHOST
+      #         value: ${POSTGRES_SRV_HOST}
+      #     resources:
+      #       limits:
+      #         cpu: 50m
+      #         memory: 32Mi
+      #       requests:
+      #         cpu: 0m
+      #         memory: 0Mi

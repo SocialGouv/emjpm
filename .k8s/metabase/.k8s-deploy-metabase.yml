@@ -5,8 +5,8 @@
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     #
-    - export POSTGRESQL_USER=metabase
-    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_METABASE_PASSWORD}' | base64 --decode)
+    - export POSTGRES_METABASE_USER=metabase
+    - export POSTGRES_METABASE_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_METABASE_PASSWORD}' | base64 --decode)
     #
     - envsubst < ./.k8s/metabase/values.yaml > ./values.yaml
     #

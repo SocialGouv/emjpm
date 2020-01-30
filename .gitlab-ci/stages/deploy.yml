@@ -9,58 +9,49 @@ include:
 #
 #
 
-Register postgres image:
-  extends:
-    - .base_register_stage
-    - .register_stage
-  variables:
-    CONTEXT: ./docker/postgres
-    DOCKER_BUILD_ARGS: ""
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
-
 #
 
-.deploy_postgres:
-  extends:
-    - .k8s-deploy-postgres
-    - .deploy_stage
-  variables:
-    CONTEXT: postgres
-    EMJPM_REGISTRY: $CI_REGISTRY_IMAGE
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
-    PORT: 5432
+# .deploy_postgres:
+#   extends:
+#     - .k8s-deploy-postgres
+#     - .deploy_stage
+#   variables:
+#     CONTEXT: postgres
+#     EMJPM_REGISTRY: $CI_REGISTRY_IMAGE
+#     IMAGE_NAME: $CI_REGISTRY_IMAGE/postgres
+#     PORT: 5432
 
-#
+# #
 
-Deploy postgres (dev):
-  extends:
-    - .deploy_postgres
-    - .dev_stage
-  variables:
-    PERSISTENCE_ENABLED: "false"
+# Deploy postgres (dev):
+#   extends:
+#     - .deploy_postgres
+#     - .dev_stage
+#   variables:
+#     PERSISTENCE_ENABLED: "false"
 
-Backup postgres (incubateur):
-  stage: Prepare
-  extends:
-    - .base_docker_kubectl_image_stage
-    - .incubateur_stage
-  script:
-    - source ./.gitlab-ci/env.sh
-    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+# Backup postgres (incubateur):
+#   stage: Prepare
+#   extends:
+#     - .base_docker_kubectl_image_stage
+#     - .incubateur_stage
+#   script:
+#     - source ./.gitlab-ci/env.sh
+#     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
 
-    - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} || true
-    - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
-      --from-file=./.k8s/postgres/backup/configmap/
+#     - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} || true
+#     - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+#       --from-file=./.k8s/postgres/backup/configmap/
 
-    - kubectl delete job ${K8S_PROJECT}-backup-${BRANCH_HASH} || true
-    - cat .k8s/postgres/backup/job.yml | envsubst | kubectl apply -f -;
+#     - kubectl delete job ${K8S_PROJECT}-backup-${BRANCH_HASH} || true
+#     - cat .k8s/postgres/backup/job.yml | envsubst | kubectl apply -f -;
 
-Deploy postgres (incubateur):
-  extends:
-    - .deploy_postgres
-    - .incubateur_stage
-  variables:
-    PERSISTENCE_ENABLED: "true"
+# Deploy postgres (incubateur):
+#   extends:
+#     - .deploy_postgres
+#     - .incubateur_stage
+#   variables:
+#     PERSISTENCE_ENABLED: "true"
 
 #
 #

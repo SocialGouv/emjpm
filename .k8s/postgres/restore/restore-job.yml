@@ -74,16 +74,16 @@ spec:
             secretName: ${K8S_PROJECT}-azure-storage-${BRANCH_HASH}
             shareName: emjpm-backup-restore
             readOnly: false
-      initContainers:
-        - name: wait-for-postgres
-          image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:0.19.0
-          env:
-            - name: PGHOST
-              value: ${POSTGRES_SRV_HOST}
-          resources:
-            limits:
-              cpu: 50m
-              memory: 32Mi
-            requests:
-              cpu: 0m
-              memory: 0Mi
+      # initContainers:
+      #   - name: wait-for-postgres
+      #     image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:0.19.0
+      #     env:
+      #       - name: PGHOST
+      #         value: ${POSTGRES_SRV_HOST}
+      #     resources:
+      #       limits:
+      #         cpu: 50m
+      #         memory: 32Mi
+      #       requests:
+      #         cpu: 0m
+      #         memory: 0Mi
