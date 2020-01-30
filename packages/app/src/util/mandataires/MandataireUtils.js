@@ -1,33 +1,31 @@
-import { convertTokens, legacyParse } from "@date-fns/upgrade/v2";
-import { compareDesc, differenceInMonths, format, parseISO } from "date-fns";
+import { compareDesc, differenceInMonths, format } from "date-fns";
 
 const TYPES = {
   MANDATAIRE_IND: "individuel",
   MANDATAIRE_PRE: "préposé",
   SERVICE: "service"
 };
-const TODAY = new Date();
 
 const capitalize = string => {
   return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
 };
 
 const formatLastLogin = date => {
-  return format(legacyParse(date), convertTokens("DD/MM/YYYY"));
+  return format(new Date(date), "dd/MM/yyyy");
 };
 
 const newestLastLogin = admins => {
   const dates = admins
     .map(({ user: { last_login } }) => last_login)
     .filter(Boolean)
-    .map(val => parseISO(val));
+    .map(val => new Date(val));
   const [newest] = dates.sort(compareDesc);
 
   return newest;
 };
 
 const isCriticalDate = date => {
-  return differenceInMonths(legacyParse(TODAY), legacyParse(date)) >= 1;
+  return differenceInMonths(new Date(), new Date(date)) >= 1;
 };
 
 export const formatMandataire = (

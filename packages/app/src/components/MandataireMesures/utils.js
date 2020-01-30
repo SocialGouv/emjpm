@@ -1,4 +1,3 @@
-import { convertTokens, legacyParse } from "@date-fns/upgrade/v2";
 import { format } from "date-fns";
 
 // move me in the good folder
@@ -24,8 +23,7 @@ export const formatMesureList = mesureList => {
       latitude,
       longitude
     } = mesure;
-    const formatedDate = format(legacyParse(date_ouverture), convertTokens("DD/MM/YYYY"));
-    const formatedJudgementDate = format(legacyParse(judgment_date), convertTokens("DD/MM/YYYY"));
+
     return {
       age: annee ? annee : "nc",
       antenneId: antenne_id ? antenne_id : null,
@@ -33,11 +31,13 @@ export const formatMesureList = mesureList => {
       civilite: civilite ? civilite : "H",
       codePostal: code_postal ? code_postal : "non reseigné",
       dateOuverture: date_ouverture ? date_ouverture : "non reseigné",
-      dateOuvertureFormated: date_ouverture ? formatedDate : "non reseigné",
+      dateOuvertureFormated: date_ouverture
+        ? format(new Date(date_ouverture), "dd/MM/yyyy")
+        : "non reseigné",
       href: `/services/mesure/${id}/`,
       id: id,
       isUrgent: is_urgent,
-      judgmentDate: judgment_date ? formatedJudgementDate : "non reseigné",
+      judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "non reseigné",
       numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
       numeroRg: numero_rg ? numero_rg : "RG-00000000",
       residence: residence ? residence : "non reseigné",
