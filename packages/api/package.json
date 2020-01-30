@@ -13,7 +13,6 @@
     "prettier:fix": "prettier --write '**/*.js'"
   },
   "dependencies": {
-    "@date-fns/upgrade": "^1.0.1",
     "@emjpm/knex": "^25.19.2",
     "@sentry/node": "5.10.2",
     "bcryptjs": "^2.4.3",

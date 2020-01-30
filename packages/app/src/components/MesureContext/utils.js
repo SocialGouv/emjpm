@@ -1,4 +1,3 @@
-import { convertTokens, legacyParse } from "@date-fns/upgrade/v2";
 import { format } from "date-fns";
 
 export const formatMesure = mesure => {
@@ -26,10 +25,9 @@ export const formatMesure = mesure => {
     service_id,
     mandataire_id
   } = mesure;
-  const formatedDate = format(legacyParse(date_ouverture), convertTokens("DD/MM/YYYY"));
-  const formatedJudgementDate = format(legacyParse(judgment_date), convertTokens("DD/MM/YYYY"));
 
   let currentStatus;
+
   if (status === "Eteindre mesure") {
     currentStatus = "Mesure éteinte";
   } else {
@@ -51,14 +49,16 @@ export const formatMesure = mesure => {
     civilite: civilite ? civilite : "H",
     codePostal: code_postal ? code_postal : "non reseigné",
     dateOuverture: date_ouverture ? date_ouverture : "non reseigné",
-    dateOuvertureFormated: date_ouverture ? formatedDate : "non reseigné",
+    dateOuvertureFormated: date_ouverture
+      ? format(new Date(date_ouverture), "dd/MM/yyyy")
+      : "non reseigné",
     href: `/services/mesure/${id}/`,
     id: id,
     antenneId: antenne_id,
     isUrgent: is_urgent,
     service: { service_id: service_id },
     mandataire: { mandataire_id: mandataire_id },
-    judgmentDate: judgment_date ? formatedJudgementDate : "non reseigné",
+    judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "non reseigné",
     numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
     numeroRg: numero_rg ? numero_rg : "RG-00000000",
     residence: residence ? residence : "non reseigné",
