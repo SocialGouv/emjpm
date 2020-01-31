@@ -81,7 +81,8 @@ export const auth = ctx => {
     pathname === "/inscription" ||
     pathname === "/" ||
     pathname === "/account/reset-password" ||
-    pathname === "/account/forgot-password";
+    pathname === "/account/forgot-password" ||
+    pathname === "/application/authorization";
 
   const isOauth = pathname === "/application/authorization";
 
@@ -90,8 +91,7 @@ export const auth = ctx => {
     const isTokenPath = pathname.indexOf(routes[role]) !== -1;
     if (isOauth) {
       return token;
-    }
-    if (!url) {
+    } else if (!url) {
       clearToken();
       if (ctx.req) {
         ctx.res.writeHead(302, { Location: "/login" });
