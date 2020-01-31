@@ -4,8 +4,6 @@
 #
 
 include:
-  - /.gitlab-ci/variables.yml
-  - /.gitlab-ci/extends.yml
 
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_nodejs_chart_stage.yml
@@ -22,45 +20,41 @@ include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
     ref: v4.6.0
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_notify_github_stage.yml
+    ref: v4.6.0
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_delete_useless_k8s_ns_stage.yml
+    ref: v4.6.0
 
-  - /.gitlab-ci/stages/notify.yml
-  - /.gitlab-ci/stages/deploy.yml
+variables:
+  # CI variables
+  DOCKER_DRIVER: overlay2
+  DOCKER_HOST: tcp://localhost:2375
+  GIT_STRATEGY: fetch
+  GIT_DEPTH: 5
 
-  - /packages/api/.gitlab-ci.yml
-  - /packages/app/.gitlab-ci.yml
-  - /packages/graphql-server/.gitlab-ci.yml
-  - /packages/hasura/.gitlab-ci.yml
-  - /packages/knex/.gitlab-ci.yml
+  # Infra
+  IMAGE_INFRA_BASE_NAME: infra/images-docker
+
+  # Globals
+  DOCKER_VERSION: "18"
+  PYTHON_VERSION: "3.6-alpine"
+
+  PROJECT: emjpm
+  RANCHER_PROJECT_ID: c-kk8xm:p-dpgpt
 
 #
 
 stages:
 - "Prepare"
 - "Code Quality"
+- "Build Image"
 - "Registration"
 - "Deploy"
 - "Notify Finished Deployment"
 
 #
-
-# k8s-init-postgres:
-#   extends: .base_docker_helm_image_stage
-#   stage: "Init Database"
-#   environment:
-#     name: fabrique-dev
-#   script:
-#     - source ./.gitlab-ci/env.sh
-
-#     - export MANAGED_DB_PASSWORD=$(kubectl get secret azure-${K8S_PROJECT}-managed-database -n ${K8S_PROJECT}-secret -ojsonpath='{.data.POSTGRESQL_PASSWORD}' | base64 --decode)
-#     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-#     #
-#     - kubectl delete configmap ${K8S_PROJECT}-init-db-${BRANCH_HASH} || true
-#     - kubectl create configmap ${K8S_PROJECT}-init-db-${BRANCH_HASH}
-#       --from-file=./.k8s/postgres/init/configmap/
-#     #
-#     - kubectl delete job init-db-job || true
-#     - cat ./.k8s/postgres/init/init-db-job.yml | envsubst | kubectl apply -f -
-#     - kubectl wait --for=condition=complete job/init-db-job  --timeout=300s
 
 .base_stage:
   except:
@@ -74,32 +68,6 @@ stages:
 
 # #
 
-.prepare_stage:
-  extends: .base_stage
-  stage: "Prepare"
-  dependencies: []
-
-.quality_stage:
-  extends: .base_stage
-  stage: "Code Quality"
-  dependencies: []
-
-.register_stage:
-  extends: .base_stage
-  stage: "Registration"
-  interruptible: true
-  dependencies: []
-
-.deploy_stage:
-  stage: "Deploy"
-  dependencies: []
-  services:
-    - docker:dind
-  variables:
-    IMAGE_TAG: ${CI_COMMIT_SHA}
-    REGISTRY: ${CI_REGISTRY_IMAGE}
-
-# #
 
 .incubateur_stage:
   environment:
@@ -114,7 +82,292 @@ stages:
   environment:
     name: fabrique-dev
 
-# #
+################################################################################################
+###################################               ##############################################
+###################################     PREPARE   ##############################################
+###################################               ##############################################
+################################################################################################
+
+.prepare_stage:
+  extends: .base_stage
+  stage: "Prepare"
+  dependencies: []
+
+.base_yarn_workspace_install:
+  extends: .prepare_stage
+  image: node:12-alpine
+  interruptible: true
+  script:
+    - "[[ type jq ]] || apk add jq=~1"
+
+    # NOTE(dougladuteil): remove dependencies and devDependencies
+    # As we only install one package, we do not need the cross packages dependencies
+    # like lerna or husky...
+    - "{ rm package.json; jq 'del(.dependencies) | del(.devDependencies)' > package.json; } < package.json"
+
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    - yarn --frozen-lockfile
+
+#
+
+Install api:
+  extends: .base_yarn_workspace_install
+  variables:
+    CONTEXT: api
+  before_script:
+    - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules
+      - packages/api/node_modules
+
+#
+
+Install app:
+  extends: .base_yarn_workspace_install
+  variables:
+    CONTEXT: app
+  before_script:
+    - find packages -maxdepth 1 -type d -not -name app | tail -n +2 | xargs rm -rf
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules
+      - packages/app/node_modules
+
+#
+
+Install graphql-server:
+  extends: .base_yarn_workspace_install
+  variables:
+    CONTEXT: graphql-server
+  before_script:
+    - find packages -maxdepth 1 -type d -not -name graphql-server | tail -n +2 | xargs rm -rf
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules
+      - packages/graphql-server/node_modules
+
+#
+
+Install knex:
+  extends: .base_yarn_workspace_install
+  variables:
+    CONTEXT: knex
+  before_script:
+    - find packages -maxdepth 1 -type d -not -name knex | tail -n +2 | xargs rm -rf
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules
+      - packages/knex/node_modules
+
+################################################################################################
+###################################                    #########################################
+###################################     CODE QUALITY   #########################################
+###################################                    #########################################
+################################################################################################
+
+.quality_stage:
+  extends: .base_stage
+  stage: "Code Quality"
+  dependencies: []
+
+#
+
+Lint @emjpm/api:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install api
+  needs:
+    - Install api
+  script:
+    - yarn workspace @emjpm/api lint
+
+#
+
+Lint @emjpm/app:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install app
+  needs:
+    - Install app
+  script:
+    - yarn workspace @emjpm/app lint
+
+#
+
+Lint @emjpm/graphql-server:
+  extends: .quality_stage
+  dependencies:
+    - Install graphql-server
+  needs:
+    - Install graphql-server
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/graphql-server lint
+
+# Lint @emjpm/knex:
+#   extends: .quality_stage
+#   image: node:12-alpine
+#   needs:
+#     - Install knex
+#   dependencies:
+#     - Install knex
+#   script:
+#     - yarn workspace @emjpm/knex lint
+
+# Test @emjpm/api:
+#   extends: .quality_stage
+#   image: node:12-alpine
+#   dependencies:
+#     - Install api
+#   needs:
+#     - Install api
+#   services:
+#     - name: postgres:10-alpine
+#   allow_failure: true
+#   retry: 1
+#   variables:
+#     DATABASE_URL: psql://postgres:@localhost/emjpm
+#     PGHOST: localhost
+#     PGUSER: postgres
+#     TZ: Europe/Paris
+#   before_script:
+#     - apk add --update --no-cache postgresql=~11
+#     - psql --version
+#     #
+#     - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
+#   script:
+#     - sh -x docker/postgres/postgres-init.sh
+#     - yarn workspace @emjpm/api test
+
+# Test @emjpm/app:
+#   extends: .quality_stage
+#   image: node:12-alpine
+#   dependencies:
+#     - Install app
+#   needs:
+#     - Install app
+#   services:
+#     - name: postgres:10-alpine
+#   allow_failure: true
+#   retry: 1
+#   variables:
+#     DATABASE_URL: psql://postgres:@localhost/emjpm
+#     PGHOST: localhost
+#     PGUSER: postgres
+#     TZ: Europe/Paris
+#   before_script:
+#     - apk add --update --no-cache postgresql=~11
+#     - psql --version
+#     #
+#     - pg_isready -h localhost
+#   script:
+#     - sh -x docker/postgres/postgres-init.sh
+#     - yarn workspace @emjpm/app test
+
+# Test @emjpm/knex:
+#   extends: .quality_stage
+#   image: node:12-alpine
+#   needs:
+#     - Install knex
+#   dependencies:
+#     - Install knex
+#   services:
+#     - name: postgres:10-alpine
+#   allow_failure: true
+#   retry: 1
+#   timeout: 2 minutes
+#   variables:
+#     DATABASE_URL: psql://postgres:@localhost/emjpm
+#     PGHOST: localhost
+#     PGUSER: postgres
+#   before_script:
+#     - apk add --update --no-cache postgresql=~11
+#     - psql --version
+#     #
+#     - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
+#   script:
+#     - sh -x docker/postgres/postgres-init.sh
+#     - yarn workspace @emjpm/knex test
+
+
+################################################################################################
+###################################                    #########################################
+###################################     BUILD IMAGE    #########################################
+###################################                    #########################################
+################################################################################################
+
+.build_stage:
+  extends: .base_stage
+  stage: "Build Image"
+  dependencies: []
+
+Build @emjpm/api:
+  extends: .build_stage
+  dependencies:
+    - Install api
+  needs:
+    - Install api
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/api build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - packages/api/dist
+  #
+
+Build @emjpm/app:
+  extends: .build_stage
+  variables:
+    INVALID_GIT_FILES_CHANGES: "true"
+  dependencies:
+    - Install app
+  needs:
+    - Install app
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/app build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - packages/app/.next
+
+#
+
+Build @emjpm/graphql-server:
+  extends: .build_stage
+  dependencies:
+    - Install graphql-server
+  needs:
+    - Install graphql-server
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/graphql-server build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - packages/graphql-server/dist
+
+################################################################################################
+###################################                    #########################################
+###################################     REGISTRATION   #########################################
+###################################                    #########################################
+################################################################################################
+
+.register_stage:
+  extends: .base_stage
+  stage: "Registration"
+  interruptible: true
+  dependencies: []
+
+################### CREATE NAMESPACE ##############
 
 Create namespace:
   extends:
@@ -136,3 +389,505 @@ Create namespace:
     - export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
     - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
     - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
+
+################### Register API ##################
+
+Register api image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  dependencies:
+    - Build @emjpm/api
+  needs:
+    - Install api
+    - Build @emjpm/api
+  before_script:
+    - cp yarn.lock packages/api/yarn.lock
+  variables:
+    CONTEXT: packages/api
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+
+################### Register APP ##################
+
+Register app image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  dependencies:
+    - Build @emjpm/app
+  needs:
+    - Install app
+    - Build @emjpm/app
+  before_script:
+    - cp yarn.lock packages/app/yarn.lock
+  variables:
+    CONTEXT: packages/app
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+
+################### Register GRAPHQL SERVER ##################
+
+Register graphql-server image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  dependencies:
+    - Build @emjpm/graphql-server
+  needs:
+    - Install graphql-server
+    - Build @emjpm/graphql-server
+  variables:
+    CONTEXT: packages/graphql-server
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
+
+################### Register KNEX ##################
+
+Register knex image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  dependencies: []
+  needs:
+    - Install knex
+  before_script:
+    - cp yarn.lock packages/knex/yarn.lock
+  variables:
+    CONTEXT: packages/knex
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/knex
+
+################### Register HASURA ########################
+
+Register hasura image:
+  extends:
+    - .base_register_stage
+    - .register_stage
+  variables:
+    CONTEXT: packages/hasura
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
+
+################### MANAGED PG Initialisation ##################
+
+k8s-init-postgres:
+  extends:
+    - .base_docker_helm_image_stage
+    - .dev_stage
+    - .register_stage
+  script:
+    - source ./.gitlab-ci/env.sh
+
+    - export MANAGED_DB_PASSWORD=$(kubectl get secret azure-${K8S_PROJECT}-managed-database -n ${K8S_PROJECT}-secret -ojsonpath='{.data.POSTGRESQL_PASSWORD}' | base64 --decode)
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - kubectl delete configmap ${K8S_PROJECT}-init-db-${BRANCH_HASH} || true
+    - kubectl create configmap ${K8S_PROJECT}-init-db-${BRANCH_HASH}
+      --from-file=./.k8s/postgres/init/configmap/
+    #
+    - kubectl delete job init-db-job || true
+    - cat ./.k8s/postgres/init/init-db-job.yml | envsubst | kubectl apply -f -
+    - kubectl wait --for=condition=complete job/init-db-job  --timeout=300s
+
+################################################################################################
+###################################                    #########################################
+###################################     DEPLOY         #########################################
+###################################                    #########################################
+################################################################################################
+
+.deploy_stage:
+  stage: "Deploy"
+  dependencies: []
+  services:
+    - docker:dind
+  variables:
+    IMAGE_TAG: ${CI_COMMIT_SHA}
+    REGISTRY: ${CI_REGISTRY_IMAGE}
+
+############### Deploy API ###########################
+
+.deploy_api_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
+  dependencies: []
+  stage: Deploy
+  variables:
+    CONTEXT: api
+    IMAGE_TAG: $CI_COMMIT_SHA
+    PORT: 80
+    VALUES_FILE: ./packages/api/.k8s.values.yml
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - export POSTGRESQL_USER=emjpm
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+    #
+    - HOST=${API_HOST}
+
+#
+
+Deploy api (dev):
+  extends:
+    - .deploy_api_stage
+    - .dev_stage
+
+Deploy api (prod):
+  extends:
+    - .deploy_api_stage
+    - .incubateur_stage
+
+############### Deploy APP ###############################
+
+.deploy_app_stage: &deploy_app_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  variables:
+    CONTEXT: app
+    IMAGE_TAG: $CI_COMMIT_SHA
+    PORT: 80
+    VALUES_FILE: ./packages/app/.k8s.values.yml
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - HOST=${FRONTEND_HOST}
+
+#
+
+Deploy app (dev):
+  extends:
+    - .deploy_app_stage
+    - .dev_stage
+
+Deploy app (prod):
+  extends:
+    - .deploy_app_stage
+    - .incubateur_stage
+
+################ Deploy GRAPHQL SERVER ###########################
+
+.deploy_graphql-server_stage: &deploy_graphql-server_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  variables:
+    CONTEXT: graphql-server
+    IMAGE_TAG: $CI_COMMIT_SHA
+    PORT: 80
+    VALUES_FILE: ./packages/graphql-server/.k8s.values.yml
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+
+#
+
+Deploy graphql-server (dev):
+  extends:
+    - .deploy_graphql-server_stage
+    - .dev_stage
+
+Deploy graphql-server (prod):
+  extends:
+    - .deploy_graphql-server_stage
+    - .incubateur_stage
+
+
+################ Deploy KNEX #################################
+
+.deploy_knex_stage: &deploy_knex_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_docker_kubectl_image_stage
+  variables:
+    CONTEXT: knex
+    IMAGE_TAG: $CI_COMMIT_SHA
+  script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - export POSTGRESQL_USER=emjpm
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+    #
+    # Dataset job
+    - kubectl delete configmap dataset-configmap || true;
+    - kubectl create configmap dataset-configmap
+        --from-file=./.k8s/postgres/dataset/configmap
+    #
+    - kubectl delete job dataset || true;
+    - cat ./.k8s/postgres/dataset/job-inject-dataset.yml | envsubst | kubectl apply -f -
+    #
+    # Backup cronjob
+    - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} || true;
+    - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+        --from-file=./.k8s/postgres/backup/configmap
+    #
+    - if [ -n "${PRODUCTION+x}" ]; then
+        kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
+        cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
+      fi
+
+#
+
+Deploy knex (dev):
+  extends:
+    - .deploy_knex_stage
+    - .dev_stage
+
+Deploy knex (prod):
+  extends:
+    - .deploy_knex_stage
+    - .incubateur_stage
+
+################ Deploy HASURA #################################
+
+.deploy_hasura_stage: &deploy_hasura_stage
+  dependencies: []
+  stage: Deploy
+  extends: .base_deploy_nodejs_chart_stage
+  variables:
+    CONTEXT: hasura
+    IMAGE_TAG: $CI_COMMIT_SHA
+    PORT: 80
+    VALUES_FILE: ./packages/hasura/.k8s.values.yml
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - HOST=${HASURA_HOST}
+    #
+    - export POSTGRES_HASURA_USER=hasura
+    - export POSTGRES_HASURA_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_HASURA_PASSWORD}' | base64 --decode)
+  after_script:
+    - cat values.yaml
+
+#
+
+Deploy hasura (dev):
+  extends:
+    - .deploy_hasura_stage
+    - .dev_stage
+
+Deploy hasura (prod):
+  extends:
+    - .deploy_hasura_stage
+    - .incubateur_stage
+
+################### Deploy METABASE #############################
+
+Deploy metabase (incubateur):
+  extends:
+    - .deploy_stage
+    # - .incubateur_stage
+    - .base_docker_helm_image_stage
+  variables:
+    CONTEXT: metabase
+    PORT: 3000
+  after_script:
+    # NOTE(douglasduteil): re-run env.sh
+    # Because the `after_script` runs in a separated shell context.
+    # see https://docs.gitlab.com/ee/ci/variables/where_variables_can_be_used.html#execution-shell-environment
+    - source ./.gitlab-ci/env.sh
+    - echo "Metabase available at - ${METABASE_URL}"
+  script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    #
+    - export POSTGRES_METABASE_USER=metabase
+    - export POSTGRES_METABASE_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_METABASE_PASSWORD}' | base64 --decode)
+    #
+    - envsubst < ./.k8s/metabase/values.yaml > ./values.yaml
+    #
+    - helm init --client-only
+
+    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v2.11.0/helm-just-linux-2.11.0.tgz | tar -C $(helm home) -xzv
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v2.11.0
+
+    - helm just fetch "stable/metabase#0.9.4"
+    - helm just render metabase metabase --values ./values.yaml
+    - helm just apply metabase
+
+#######################################################################################################
+##########################################               ##############################################
+##########################################     NOTIFY    ##############################################
+##########################################               ##############################################
+#######################################################################################################
+
+
+############### NOTIFY ################################
+
+Notify Starting Deployment:
+  extends:
+    - .base_notify_pending_stage
+    - .base_stage
+  stage: Deploy
+
+Notify Fail:
+  extends:
+    - .base_notify_fail_stage
+    - .base_stage
+  stage: Notify Finished Deployment
+  dependencies:
+    - Notify Starting Deployment
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - HOST=${FRONTEND_HOST}
+
+Notify Success:
+  extends:
+    - .base_notify_success_stage
+    - .base_stage
+  stage: Notify Finished Deployment
+  dependencies:
+    - Notify Starting Deployment
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - HOST=${FRONTEND_HOST}
+
+############ Delete useless K8s ns #################
+
+Delete useless k8s namespaces:
+  extends:
+    - .base_delete_useless_k8s_ns_stage
+    - .base_stage
+
+
+############ Release #################
+
+Release:
+  extends: .base_stage
+  stage: "Notify Finished Deployment"
+  dependencies: []
+  image: node:12.14-alpine3.10
+  variables:
+    LERNA_ARGS: --force-publish --yes
+    #
+    GIT_AUTHOR_EMAIL: 45039513+SocialGroovyBot@users.noreply.github.com
+    GIT_AUTHOR_NAME: Social Groovy Bot
+    GIT_COMMITTER_EMAIL: $GIT_AUTHOR_EMAIL
+    GIT_COMMITTER_NAME: $GIT_AUTHOR_NAME
+    GIT_DEPTH: 4242
+  only:
+    variables:
+      - $RELEASE
+  cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+    paths:
+      - node_modules
+      - $CI_PROJECT_DIR/.yarn
+  before_script:
+  script:
+    # Ensure to have "git" and "jq"
+    - apk add --no-cache git=~2 jq=~1
+    # Set git to a branch
+    - git checkout ${CI_COMMIT_REF_NAME}
+    # Use github as origin
+    - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_PATH}.git
+
+    # HACK(douglasduteil): remove all packages dependencies
+    # To make the installation blazing fast, we remove all packages dependencies
+    # Only the root package.json dependencies will be installed
+    - find packages -maxdepth 1 -type d | tail -n +2 |
+      xargs -I {} sh -c "[[ -f "{}/package.json" ]] || exit 0 ; {
+        rm {}/package.json ;
+        jq 'del(.dependencies) | del(.devDependencies)' > {}/package.json
+      ; } < {}/package.json"
+
+    # Use local yarn cache
+    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
+    # Should only install workspace dependencies
+    - yarn --frozen-lockfile
+
+    # HACK(douglasduteil): remove all packages dependencies
+    # Restore the package files before bumping versions.
+    # As Lerna will commit, we need to restore the files as they were
+    - git checkout -- .
+
+    # Run lerna version
+    - echo "yarn lerna version ${LERNA_ARGS}"
+    - GH_TOKEN=${GITHUB_TOKEN} yarn lerna version ${LERNA_ARGS}
+
+############ Trigger production ###################
+
+Trigger production:
+  extends: .base_stage
+  stage: "Notify Finished Deployment"
+  image: curlimages/curl:7.67.0
+  when: manual
+  variables:
+    GIT_STRATEGY: none
+  only:
+    refs:
+      - tags
+  script:
+    - curl --request POST
+      --form ref="${CI_COMMIT_REF_NAME}"
+      --form token="${CI_JOB_TOKEN}"
+      --form variables[PRODUCTION]="true"
+      ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
+
+############ Trigger release ########################
+
+Trigger release:
+  extends: .base_stage
+  stage: "Notify Finished Deployment"
+  image: curlimages/curl:7.67.0
+  when: manual
+  variables:
+    GIT_STRATEGY: none
+  only:
+    refs:
+      - branches
+  script:
+    - curl --request POST
+      --form ref="${CI_COMMIT_REF_NAME}"
+      --form token="${CI_JOB_TOKEN}"
+      --form variables[RELEASE]="true"
+      ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
+
+###########################################################################################################
+##########################################                   ##############################################
+########################################## DATABASE ACTION   ##############################################
+##########################################                   ##############################################
+###########################################################################################################
+
+.k8s-restore-postgres-data:
+  extends: .base_docker_helm_image_stage
+  script:
+    - source ./.gitlab-ci/env.sh
+
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+
+    - export POSTGRESQL_USER=emjpm
+    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+
+    - kubectl scale --replicas=0 deploy/${HASURA_SRV_HOST}
+
+    - kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} || true
+    - kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
+      --from-file=./.k8s/postgres/restore/configmap/
+
+    - kubectl delete job restore-job || true
+    - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -
+    - kubectl wait --for=condition=complete job/restore-job  --timeout=300s
+
+    - kubectl delete job migrate-job || true
+    - cat ./.k8s/postgres/restore/migrate-job.yml | envsubst | kubectl apply -f -
+
+    - kubectl wait --for=condition=complete job/migrate-job  --timeout=300s
+    - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
+
+# Backup postgres (incubateur):
+#   stage: Prepare
+#   extends:
+#     - .base_docker_kubectl_image_stage
+#     - .incubateur_stage
+#   script:
+#     - source ./.gitlab-ci/env.sh
+#     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+
+#     - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} || true
+#     - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
+#       --from-file=./.k8s/postgres/backup/configmap/
+
+#     - kubectl delete job ${K8S_PROJECT}-backup-${BRANCH_HASH} || true
+#     - cat .k8s/postgres/backup/job.yml | envsubst | kubectl apply -f -;
