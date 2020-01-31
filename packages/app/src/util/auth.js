@@ -83,9 +83,14 @@ export const auth = ctx => {
     pathname === "/account/reset-password" ||
     pathname === "/account/forgot-password";
 
+  const isOauth = pathname === "/application/authorization";
+
   if (token) {
     const { url, role } = jwtDecode(token);
     const isTokenPath = pathname.indexOf(routes[role]) !== -1;
+    if (isOauth) {
+      return token;
+    }
     if (!url) {
       clearToken();
       if (ctx.req) {
