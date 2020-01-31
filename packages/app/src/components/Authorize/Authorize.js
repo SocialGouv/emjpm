@@ -24,7 +24,8 @@ const grantAuthorization = async (editorId, editorSecret, redirectUrl, id) => {
     },
     method: "POST"
   });
-  console.log(response);
+  const { publicToken } = await response.json();
+  window.location.replace(`${redirectUrl}?token=${publicToken}`);
 };
 
 const Authorize = props => {

@@ -8,7 +8,6 @@ const pkg = require("../package.json");
 const authV2Routes = require("./routes/auth-v2");
 const oauth2Routes = require("./routes/oauth2");
 const configuration = require("./env");
-console.log(oauth2Routes);
 const app = express();
 
 if (configuration.sentryPublicDSN) {
