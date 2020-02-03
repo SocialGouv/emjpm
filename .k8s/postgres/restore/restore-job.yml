@@ -38,7 +38,7 @@ spec:
             - name: PGUSER
               value: postgres
             - name: PGHOST
-              value: ${POSTGRES_SRV_HOST}
+              value: ${PG_HOST}
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:

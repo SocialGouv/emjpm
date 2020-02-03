@@ -44,18 +44,14 @@ if [[ -n "${PRODUCTION+x}" ]]; then
   export K8S_NAMESPACE="emjpm"
   #
   export DOMAIN="emjpm.fabrique.social.gouv.fr";
-  export POSTGRES_HOSTNAME="emjpmprodserver"
   export POSTGRES_DATABASE_EMJPM="emjpm"
   export POSTGRES_DATABASE_METABASE="metabase"
 else
   export DOMAIN="${BRANCH_HASH}-${DOMAIN}";
-  export POSTGRES_HOSTNAME="emjpmdevserver"
   export POSTGRES_DATABASE_EMJPM="emjpm_${BRANCH_HASH}"
   export POSTGRES_DATABASE_METABASE="metabase_${BRANCH_HASH}"
   #
 fi
-
-export POSTGRES_SRV_HOST="${POSTGRES_HOSTNAME}.postgres.database.azure.com"
 
 export API_HOST="api-${DOMAIN}";
 export API_SRV_HOST="api-nodejs";
@@ -101,7 +97,6 @@ printenv | grep \
   -e HASURA_SRV_HOST \
   -e METABASE_HOST \
   -e METABASE_URL \
-  -e POSTGRES_SRV_HOST \
   \
   -e CONTEXT \
   -e PORT \

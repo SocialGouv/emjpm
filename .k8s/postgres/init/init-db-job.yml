@@ -2,9 +2,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: init-db-job
+  name: init-azure-pg-job
   labels:
-    app: init-db-job
+    app: init-azure-pg-job
     git/branch: ${BRANCH_NAME}
     git/commit: ${COMMIT}
     gitlab/job: "${JOB_ID}"
@@ -12,13 +12,13 @@ spec:
   template:
     metadata:
       labels:
-        app: init-db-job
+        app: init-azure-pg-job
         git/branch: ${BRANCH_NAME}
         git/commit: ${COMMIT}
         gitlab/job: "${JOB_ID}"
     spec:
       containers:
-        - name: init-db-job
+        - name: init-azure-pg-job
           image: postgres:10-alpine
           command:
             - sh
@@ -37,11 +37,11 @@ spec:
             - name: BRANCH_HASH
               value: ${BRANCH_HASH}
             - name: PGUSER
-              value: ${POSTGRES_ADMIN_USER}
+              value: ${ADMIN_PG_USER}
             - name: PGHOST
-              value: ${POSTGRES_SRV_HOST}
+              value: ${PG_HOST}
             - name: PGPASSWORD
-              value: ${POSTGRES_ADMIN_PASSWORD}
+              value: ${ADMIN_PG_PASSWORD}
             - name: POSTGRES_EMJPM_USER
               value: ${POSTGRES_EMJPM_USER}
             - name: POSTGRES_HASURA_USER

@@ -474,12 +474,13 @@ Init Managed Database:
   script:
     - source ./.gitlab-ci/env.sh
 
-    - export POSTGRES_ADMIN_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
-    - export POSTGRES_ADMIN_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD}' | base64 --decode)
+    - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
+    - export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
+    - export ADMIN_PG_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD}' | base64 --decode)
 
-    - export POSTGRES_EMJPM_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
-    - export POSTGRES_HASURA_USER=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER}' | base64 --decode)
-    - export POSTGRES_METABASE_USER=$(kubectl get secret azure-pg-metabase-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.METABASE_PG_USER}' | base64 --decode)
+    - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
+    - export HASURA_PG_USER=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER}' | base64 --decode)
+    - export METABASE_PG_USER=$(kubectl get secret azure-pg-metabase-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.METABASE_PG_USER}' | base64 --decode)
 
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
@@ -523,8 +524,9 @@ Init Managed Database:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
-    - export POSTGRESQL_USER=emjpm
-    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+    - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
+    - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
+    - export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD}' | base64 --decode)
     #
     - HOST=${API_HOST}
 
@@ -610,8 +612,9 @@ Deploy graphql-server (prod):
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
-    - export POSTGRESQL_USER=emjpm
-    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+    - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
+    - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
+    - export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD}' | base64 --decode)
     #
     # Dataset job
     - kubectl delete configmap dataset-configmap || true;
@@ -660,8 +663,9 @@ Deploy knex (prod):
     #
     - HOST=${HASURA_HOST}
     #
-    - export POSTGRES_HASURA_USER=hasura
-    - export POSTGRES_HASURA_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_HASURA_PASSWORD}' | base64 --decode)
+    - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
+    - export HASURA_PG_USER=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER}' | base64 --decode)
+    - export HASURA_PG_PASSWORD=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_PASSWORD}' | base64 --decode)
   after_script:
     - cat values.yaml
 
@@ -698,8 +702,10 @@ Deploy metabase (incubateur):
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     #
-    - export POSTGRES_METABASE_USER=metabase
-    - export POSTGRES_METABASE_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_METABASE_PASSWORD}' | base64 --decode)
+
+    - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
+    - export METABASE_PG_USER=$(kubectl get secret azure-pg-metabase-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.METABASE_PG_USER}' | base64 --decode)
+    - export METABASE_PG_PASSWORD=$(kubectl get secret azure-pg-metabase-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.METABASE_PG_PASSWORD}' | base64 --decode)
     #
     - envsubst < ./.k8s/metabase/values.yaml > ./values.yaml
     #
@@ -863,8 +869,9 @@ Trigger release:
 
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
 
-    - export POSTGRESQL_USER=emjpm
-    - export POSTGRESQL_PASSWORD=$(kubectl get secret emjpm-secret -o jsonpath='{.data.POSTGRES_EMJPM_PASSWORD}' | base64 --decode)
+    - export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
+    - export ADMIN_PG_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD}' | base64 --decode)
+    - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
 
     - kubectl scale --replicas=0 deploy/${HASURA_SRV_HOST}
 
