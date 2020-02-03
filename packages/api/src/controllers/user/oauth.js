@@ -3,8 +3,9 @@ const jwtConfig = require("../../config/jwt");
 const jwt = require("jsonwebtoken");
 const { getUid } = require("./utils/uid");
 const { validationResult } = require("express-validator");
+const { Editors } = require("../../model/Editors");
 
-const generateToken = (editorId, editorSecret, redirectUrl, userId, uid) => {
+const generateToken = (editorId, editorToken, redirectUrl, userId, uid) => {
   const signOptions = {
     subject: uid,
     algorithm: "RS256"
@@ -14,7 +15,7 @@ const generateToken = (editorId, editorSecret, redirectUrl, userId, uid) => {
     uid: uid,
     userId: userId,
     editorId: editorId,
-    editorSecret: editorSecret
+    editorToken: editorToken
   };
   return jwt.sign(claim, jwtConfig.key, signOptions);
 };
@@ -26,7 +27,17 @@ const authorize = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors });
   }
-  const { editorId, editorSecret, redirectUrl, userId } = req.body;
+  const { editorId, editorToken, redirectUrl, userId } = req.body;
+  try {
+    const editorApiToken = await Editors.query()
+      .where("id", editorId)
+      .first();
+    if (editorApiToken.api_token !== editorToken) {
+      return res.status(400).json({ errorMsg: "Identifiants editeur inconnu" });
+    }
+  } catch (error) {
+    return res.status(400).json({ errorMsg: "Identifiants editeur inconnu" });
+  }
 
   try {
     await AccessToken.query().insert({
@@ -42,7 +53,7 @@ const authorize = async (req, res) => {
   // This is the public key we'll decode later when an app make a request on our api's
   const publicToken = generateToken(
     editorId,
-    editorSecret,
+    editorToken,
     redirectUrl,
     userId,
     uid

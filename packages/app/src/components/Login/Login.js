@@ -31,7 +31,7 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
   }
 
   login({ token: json.token });
-  Router.push("/application/authorization");
+  Router.push(json.url);
   ReactPiwik.push(["trackEvent", "login", "success"]);
   trackUser();
   return json;
