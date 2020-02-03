@@ -52,9 +52,9 @@ const AuthorizationPage = props => {
 
 AuthorizationPage.getInitialProps = async ({ token, query }) => {
   return {
-    editorId: query["editor-id"],
-    editorSecret: query["editor-secret"],
-    redirectUrl: query["redirect-url"],
+    editorId: query["editor_id"],
+    editorSecret: query["editor_secret"],
+    redirectUrl: query["redirect_url"],
     token
   };
 };
