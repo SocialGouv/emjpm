@@ -9,5 +9,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable("editors");
+  return knex.schema.dropTable("access_tokens");
 };
