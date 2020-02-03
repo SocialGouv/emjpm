@@ -466,7 +466,7 @@ Register hasura image:
 
 ################### MANAGED PG Initialisation ##################
 
-k8s-init-postgres:
+Init Managed Database:
   extends:
     - .base_docker_helm_image_stage
     - .dev_stage
@@ -474,7 +474,13 @@ k8s-init-postgres:
   script:
     - source ./.gitlab-ci/env.sh
 
-    - export MANAGED_DB_PASSWORD=$(kubectl get secret azure-${K8S_PROJECT}-managed-database -n ${K8S_PROJECT}-secret -ojsonpath='{.data.POSTGRESQL_PASSWORD}' | base64 --decode)
+    - export POSTGRES_ADMIN_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
+    - export POSTGRES_ADMIN_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD}' | base64 --decode)
+
+    - export POSTGRES_EMJPM_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
+    - export POSTGRES_HASURA_USER=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER}' | base64 --decode)
+    - export POSTGRES_METABASE_USER=$(kubectl get secret azure-pg-metabase-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.METABASE_PG_USER}' | base64 --decode)
+
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     - kubectl delete configmap ${K8S_PROJECT}-init-db-${BRANCH_HASH} || true

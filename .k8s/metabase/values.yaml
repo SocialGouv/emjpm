@@ -33,7 +33,7 @@ database:
   # username:
   # password:
   ## Alternatively, use a connection URI for full configurability. Example for SSL enabled Postgres.
-  connectionURI: "postgres://${POSTGRES_METABASE_USER}%40${POSTGRES_HOSTNAME}:${POSTGRES_METABASE_PASSWORD}@${POSTGRES_SRV_HOST}/${POSTGRES_DATABASE_METABASE}"
+  connectionURI: "postgres://${POSTGRES_METABASE_USER}:${POSTGRES_METABASE_PASSWORD}@${POSTGRES_SRV_HOST}/${POSTGRES_DATABASE_METABASE}"
 
 password:
   # Changing Metabase password complexity:

@@ -37,26 +37,17 @@ spec:
             - name: BRANCH_HASH
               value: ${BRANCH_HASH}
             - name: PGUSER
-              value: emjpm@emjpmdevserver
+              value: ${POSTGRES_ADMIN_USER}
             - name: PGHOST
-              value: emjpmdevserver.postgres.database.azure.com
+              value: ${POSTGRES_SRV_HOST}
             - name: PGPASSWORD
-              value: ${MANAGED_DB_PASSWORD}
-            - name: POSTGRES_EMJPM_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: emjpm-secret
-                  key: POSTGRES_EMJPM_PASSWORD
-            - name: POSTGRES_HASURA_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: emjpm-secret
-                  key: POSTGRES_HASURA_PASSWORD
-            - name: POSTGRES_METABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: emjpm-secret
-                  key: POSTGRES_METABASE_PASSWORD
+              value: ${POSTGRES_ADMIN_PASSWORD}
+            - name: POSTGRES_EMJPM_USER
+              value: ${POSTGRES_EMJPM_USER}
+            - name: POSTGRES_HASURA_USER
+              value: ${POSTGRES_HASURA_USER}
+            - name: POSTGRES_METABASE_USER
+              value: ${POSTGRES_METABASE_USER}
           volumeMounts:
             - mountPath: "/mnt/script"
               name: script
