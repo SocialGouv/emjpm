@@ -9,7 +9,6 @@ import { withAuthSync } from "../../src/util/auth";
 
 const AuthorizationPage = props => {
   const { token, editorId, editorSecret, redirectUrl } = props;
-
   return (
     <LayoutPublic>
       <BoxWrapper>

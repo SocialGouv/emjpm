@@ -26,6 +26,7 @@
     "fnv-plus": "^1.2.12",
     "http-errors": "^1.7.2",
     "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
     "knex": "^0.20.4",
     "nodemailer": "^6.3.0",
     "objection": "^2.0.7",
