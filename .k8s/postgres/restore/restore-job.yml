@@ -36,29 +36,17 @@ spec:
               memory: 512Mi
           env:
             - name: PGUSER
-              value: postgres
+              value: ${ADMIN_PG_USER}
+            - name: PGPASSWORD
+              value: ${ADMIN_PG_PASSWORD}
             - name: PGHOST
               value: ${PG_HOST}
-            - name: PGPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-postgresql
-                  key: postgresql-password
             - name: POSTGRES_EMJPM_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: emjpm-secret
-                  key: POSTGRES_EMJPM_PASSWORD
+              value: ${ADMIN_PG_PASSWORD}
             - name: POSTGRES_HASURA_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: emjpm-secret
-                  key: POSTGRES_HASURA_PASSWORD
+              value: ${HASURA_PG_PASSWORD}
             - name: POSTGRES_METABASE_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: emjpm-secret
-                  key: POSTGRES_METABASE_PASSWORD
+              value: ${METABASE_PG_PASSWORD}
           volumeMounts:
             - mountPath: "/mnt/data"
               name: volume

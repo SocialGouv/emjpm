@@ -41,7 +41,7 @@ spec:
             - name: PGHOST
               value: ${PG_HOST}
             - name: PGPASSWORD
-              value: ${ADMIN_PG_PASSWORD}
+              value: "${ADMIN_PG_PASSWORD}"
             - name: POSTGRES_EMJPM_USER
               value: ${POSTGRES_EMJPM_USER}
             - name: POSTGRES_HASURA_USER
