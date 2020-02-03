@@ -1,12 +1,15 @@
 const passport = require("passport");
 const { Strategy: LocalStrategy } = require("passport-local");
 
+const jwtDecode = require("jwt-decode");
 const passportJWT = require("passport-jwt");
+const passportBearer = require("passport-http-bearer");
 const JWTStrategy = passportJWT.Strategy;
+const BearerStrategy = passportBearer.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const knex = require("../db/knex");
 const jwtConfig = require("../config/jwt");
-
+const { AccessToken } = require("../model/AccessToken");
 const { User } = require("../model/User");
 
 const init = require("./passport");
@@ -47,6 +50,35 @@ passport.use(
         });
     }
   )
+);
+
+passport.use(
+  new BearerStrategy(async function(token, done) {
+    try {
+      const decoded = jwtDecode(token);
+
+      const accessToken = decoded.uid;
+      const userId = decoded.userId;
+      const editorId = decoded.editorId;
+      try {
+        const currentClient = await AccessToken.query()
+          .where("access_token", accessToken)
+          .first();
+        if (
+          currentClient.user_id === userId &&
+          currentClient.editor_id === parseInt(editorId)
+        ) {
+          return done(null, currentClient, { scope: "all" });
+        } else {
+          return done(null, false);
+        }
+      } catch (error) {
+        return done(null, false);
+      }
+    } catch (error) {
+      return done(null, false);
+    }
+  })
 );
 
 passport.use(
