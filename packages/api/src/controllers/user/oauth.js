@@ -1,7 +1,3 @@
-// const passport = require("../../auth/local");
-// const { validationResult } = require("express-validator");
-// const { User } = require("../../model/User");
-// const { Logs } = require("../../model/Logs");
 const { AccessToken } = require("../../model/AccessToken");
 const jwtConfig = require("../../config/jwt");
 const jwt = require("jsonwebtoken");
