@@ -56,7 +56,6 @@ class MyApp extends App {
     const data = { currentUser: formatUserFromToken(currentUser) };
     const user = formatUserFromToken(currentUser);
     apolloClient.cache.writeData({ data });
-
     return (
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>

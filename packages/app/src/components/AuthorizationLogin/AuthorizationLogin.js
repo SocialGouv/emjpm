@@ -29,15 +29,15 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
     setStatus({ errorMsg: json.errors.msg });
     return json;
   }
-
+  const params = location.search;
   login({ token: json.token });
-  Router.push(json.url);
+  Router.push(`/application/authorization${params}`);
   ReactPiwik.push(["trackEvent", "login", "success"]);
   trackUser();
   return json;
 };
 
-const Login = props => {
+const AuthorizationLogin = props => {
   const { token } = props;
   const url = `${API_URL}/api/v2/auth/login`;
 
@@ -130,4 +130,4 @@ const Login = props => {
   );
 };
 
-export { Login };
+export { AuthorizationLogin };
