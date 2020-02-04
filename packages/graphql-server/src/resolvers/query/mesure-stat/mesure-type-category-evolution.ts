@@ -1,4 +1,4 @@
-import { isAfter, isBefore } from "date-fns";
+import { addMonths } from "date-fns";
 import { DataSource } from "../../../datasource";
 import { SearchMesureResult } from "../../../datasource/mesure.api";
 import {
@@ -13,48 +13,67 @@ export const mesureTypeCategoryEvolution = async (
   args: QueryMesureTypeCategoryEvolutionArgs,
   { dataSources }: { dataSources: DataSource }
 ) => {
-  const mesures: SearchMesureResult[] = await dataSources.mesureAPI.searchMesures(
-    {
-      closed: {
-        gt_or_null: args.start
-      },
-      opening: {
-        lt: args.end
-      },
-
-      court: args.court,
-      department: args.department,
-      region: args.region
-    }
-  );
-
   const res: MesureTypeCategoryEvolution[] = buildMesureTypeCategoryEvolutions(
     args.start,
     args.end
   );
 
-  for (const mesureTypeEvolution of res) {
-    const typeCategory = mesureTypeEvolution.mesureTypeCategory;
-    const filterByType = (mesure: SearchMesureResult) =>
-      mesureStatAdapter.adaptType(mesure.type) === typeCategory;
-    const mesuresFilterByType = mesures.filter(filterByType);
+  const months = res[0].monthlyEvolutions.map(elm => ({
+    month: elm.month,
+    year: elm.year
+  }));
 
-    for (const monthlyEvolution of mesureTypeEvolution.monthlyEvolutions) {
-      const month = new Date(monthlyEvolution.year, monthlyEvolution.month, 1);
-      const isInProgress = (elm: SearchMesureResult) => {
-        const openingDate = elm.date_ouverture;
-        const closedDate = elm.extinction;
+  for (const month of months) {
+    const startMonthDate = new Date(month.year, month.month, 1);
+    const endMonthDate = addMonths(startMonthDate, 1);
+    const mesures: SearchMesureResult[] = await dataSources.mesureAPI.searchMesures(
+      {
+        closed: {
+          gt_or_null: startMonthDate.toISOString()
+        },
+        court: args.court,
+        department: args.department,
+        opening: {
+          lt: endMonthDate.toISOString()
+        },
+        region: args.region
+      }
+    );
 
-        const openingCondition = openingDate && isBefore(openingDate, month);
-        const closedCondition = !closedDate || isAfter(closedDate, month);
-        if (openingCondition && closedCondition) {
-          return true;
-        }
-        return false;
-      };
+    const mesuresByCategoryMap = res.map(elm => ({
+      number: 0,
+      type: elm.mesureTypeCategory
+    }));
 
-      monthlyEvolution.number = mesuresFilterByType.filter(isInProgress).length;
+    for (const mesure of mesures) {
+      const typeCategory = mesureStatAdapter.adaptType(mesure.type);
+      const mesuresByCategory = mesuresByCategoryMap.find(
+        elm => elm.type === typeCategory
+      );
+      if (mesuresByCategory) {
+        mesuresByCategory.number++;
+      }
+    }
+
+    for (const mesuresByCategory of mesuresByCategoryMap) {
+      const mesureTypeEvolution = res.find(
+        elm => elm.mesureTypeCategory === mesuresByCategory.type
+      );
+      if (!mesureTypeEvolution) {
+        throw new Error(`No category type found for ${mesuresByCategory.type}`);
+      }
+
+      const monthlyEvolution = mesureTypeEvolution.monthlyEvolutions.find(
+        elm => elm.month === month.month && elm.year === month.year
+      );
+      if (!monthlyEvolution) {
+        throw new Error(
+          `No monthly evolution found for year ${month.year}, month ${month.month}`
+        );
+      }
+      monthlyEvolution.number = mesuresByCategory.number;
     }
   }
+
   return res;
 };
