@@ -45,17 +45,87 @@ $ yarn workspace @emjpm/api test --maxWorkers=2 --coverage
 
 ## E2E tests
 
-The e2e tests are using the latest deployed `socialgouv/emjpm-*` images by default.
-To run the tests with
+**Local testing**
 
 ```sh
-$ yarn lerna --scope @optional/e2e exec yarn
-$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.test.yaml up --build
+#
+# Ensure to have a clean new postgres volume
+$ docker-compose rm -sfv
+$ docker volume rm -f emjpm_emjpm-pgdata
+$ docker system prune --all
+$ docker system prune --volumes
+#
 
-$ NODE_ENV=test yarn workspace @emjpm/knex run migrate
-$ NODE_ENV=test yarn workspace @emjpm/knex run seeds
+# Start a new db
+$ docker-compose up db
 
-$ yarn run -- lerna --scope @optional/e2e run cypress:run -- --headed
+# Initialize the db
+$ yarn workspace @emjpm/knex run migrate --env test
+$ yarn workspace @emjpm/knex run seeds --env test
+# Instantiate the initial seed
+$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
+
+# Or if you have the test-seed.dump
+# The e2e script will retore the db before each scenario with
+$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e --if-exists --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
+
+# start the dev server
+$ yarn dev
+$ docker-compose up graphql-engine
+$ docker-compose up maildev
+
+# Install the e2e runner env
+$ yarn e2e
+# short for
+$ yarn run -- lerna --scope @optional/e2e.runner.puppetteer exec yarn
+
+# Run the test
+$ yarn e2e test
+
+#if your db is broken
+$ psql --host localhost --port 5434 --username postgres --dbname emjpm -e -f./optional/e2e/.runners/puppetteer/drop.sql
+```
+
+**Remote**
+
+```sh
+#
+# Ensure to have a clean new postgres volume
+$ docker-compose rm -sfv
+$ docker volume rm -f emjpm_emjpm-pgdata
+#
+
+# Optional
+# pull the latest images
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.built.yaml pull
+
+# Start a new db
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.built.yaml up db
+# or
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.build.yaml up db --build
+
+# Initialize the db
+$ yarn workspace @emjpm/knex run migrate --env test
+$ yarn workspace @emjpm/knex run seeds --env test
+
+# Instantiate the initial seed
+$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
+
+# Optional
+# The e2e script will retore the db before each scenario with
+$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e --if-exists --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
+
+$ docker-compose stop
+
+$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.built.yaml up
+
+# Install the e2e runner env
+$ yarn e2e
+# short for
+$ yarn run -- lerna --scope @optional/e2e.runner.puppetteer exec yarn
+
+# Run the test
+$ yarn e2e test
 ```
 
 ## Manual deployment
@@ -154,7 +224,6 @@ pg_restore -h localhost --if-exists --clean -e -Fc -U postgres -d emjpm ./$DUMP_
 psql -h localhost -c "ALTER SCHEMA public OWNER TO emjpm" -U postgres emjpm
 ```
 
-
 ## FAQ
 
 - _If you have the `Can't take lock to run migrations: Migration table is already locked` error_
@@ -217,10 +286,10 @@ $ CONVENTIONAL_GITHUB_RELEASER_TOKEN==************ npx conventional-github-relea
 All branches and tags are automatically deployed
 See https://github.com/SocialGouv/emjpm/deployments
 
- - **Development** : https://master.emjpm.dev.fabrique.social.gouv.fr/
- - **Prod Mirror** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
- - **Pre Prod** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
- - **Prod** : https://emjpm.fabrique.social.gouv.fr
+- **Development** : https://master.emjpm.dev.fabrique.social.gouv.fr/
+- **Prod Mirror** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
+- **Pre Prod** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
+- **Prod** : https://emjpm.fabrique.social.gouv.fr
 
 ### One click tag release !
 
@@ -228,7 +297,7 @@ See https://github.com/SocialGouv/emjpm/deployments
 
 ### Auto
 
-Trigger a custom build on [Travis](https://travis-ci.com/SocialGouv/emjpm) (in the "More options" right menu) on the tag `v*` you  with a custom config:
+Trigger a custom build on [Travis](https://travis-ci.com/SocialGouv/emjpm) (in the "More options" right menu) on the tag `v*` you with a custom config:
 
 ```yml
 env:
