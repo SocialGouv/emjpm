@@ -1,0 +1,13 @@
+{
+  "name": "@optional/e2e.runner.puppetteer",
+  "version": "25.15.0",
+  "description": "",
+  "main": "codecept.conf.js",
+  "scripts": {
+    "test": "codeceptjs run --features --verbose"
+  },
+  "dependencies": {
+    "codeceptjs": "^2.4.1",
+    "got": "^10.2.2"
+  }
+}

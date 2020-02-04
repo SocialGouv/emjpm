@@ -15,7 +15,9 @@ exports.seed = function(knex) {
         residence: "oui",
         civilite: "F",
         status: "Eteindre mesure",
-        extinction: "2019-07-01T00:00:00Z"
+        extinction: "2019-07-01T00:00:00Z",
+        latitude: 48.858483,
+        longitude: 2.27154
       });
     })
     .then(function() {
@@ -31,7 +33,9 @@ exports.seed = function(knex) {
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "F",
-        status: "Mesure en cours"
+        status: "Mesure en cours",
+        latitude: 48.858483,
+        longitude: 2.27154
       });
     })
     .then(function() {
@@ -45,7 +49,9 @@ exports.seed = function(knex) {
         type: "Tutelle",
         date_ouverture: "2010-10-05",
         civilite: "F",
-        status: "Mesure en attente"
+        status: "Mesure en attente",
+        latitude: 48.858483,
+        longitude: 2.27154
       });
     })
     .then(function() {
@@ -61,7 +67,9 @@ exports.seed = function(knex) {
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "H",
-        status: "Mesure en cours"
+        status: "Mesure en cours",
+        latitude: 48.858483,
+        longitude: 2.27154
       });
     })
     .then(function() {
@@ -77,7 +85,9 @@ exports.seed = function(knex) {
         date_ouverture: "2012-10-05",
         residence: "oui",
         civilite: "F",
-        status: "Eteindre mesure"
+        status: "Eteindre mesure",
+        latitude: 48.858483,
+        longitude: 2.27154
       });
     });
 };
