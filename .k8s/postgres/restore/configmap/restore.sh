@@ -13,7 +13,7 @@ pg_restore \
   --dbname emjpm \
   ${1}
 
-psql -d emjpm -c "ALTER SCHEMA public OWNER TO emjpm"
+# psql -d emjpm -c "ALTER SCHEMA public OWNER TO emjpm"
 psql -d emjpm -c "DROP SCHEMA hdb_catalog CASCADE"
 psql -d emjpm -c "DROP SCHEMA hdb_views CASCADE"
 
