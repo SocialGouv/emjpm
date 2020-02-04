@@ -72,6 +72,21 @@ export class MesureAPI extends AuthDataSource {
     });
   }
 
+  public countMesures(params: SearchMesuresParam) {
+    const where = this.buildFilters(params).join(", ");
+    const query = `
+    {
+      mesures_aggregate(where: { ${where} }) {
+        aggregate {
+          count
+        }
+      }
+    }
+  `;
+
+    return this.post("/", { query });
+  }
+
   private buildFilters(params: SearchMesuresParam): string[] {
     const filters = [];
     if (params.created) {
