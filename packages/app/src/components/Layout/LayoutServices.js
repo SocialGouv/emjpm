@@ -29,6 +29,10 @@ const navigationLinks = [
   {
     title: "Vos informations",
     url: "/services/informations"
+  },
+  {
+    title: "Gestion des comptes",
+    url: "/services/members"
   }
 ];
 

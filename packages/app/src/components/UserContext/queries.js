@@ -25,6 +25,7 @@ export const GET_SERVICE_USERS = gql`
       service_members {
         id
         user {
+          email
           prenom
           nom
           id
