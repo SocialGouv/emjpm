@@ -1,12 +1,10 @@
-import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Heading4 } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
-import { XCircle } from "styled-icons/boxicons-regular";
 
+import { AccessToken } from "../AccessToken";
 import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
-import { USER_TOKEN } from "./queries";
 import { boxStyle, content, innerTextStyle, subtitle } from "./style";
 
 const label = value => {
@@ -15,18 +13,6 @@ const label = value => {
 
 const MandataireInformations = props => {
   const user = useContext(UserContext);
-
-  const { data, loading, error } = useQuery(USER_TOKEN);
-
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
-  }
-
-  const { access_tokens } = data;
 
   const { email, nom, prenom, user_tis, mandataire } = user;
   return (
@@ -120,31 +106,7 @@ const MandataireInformations = props => {
                 </Box>
               </Flex>
             </Box>
-
-            <Box sx={boxStyle}>
-              <Heading4 mt={2} mb="2">
-                Logitiels métier authorisé
-              </Heading4>
-              <Box mr={4} mb="3">
-                {access_tokens.map((token, index) => {
-                  return (
-                    <Flex alignItem="center" key={index}>
-                      <Box>
-                        <Text sx={innerTextStyle}>{token.editors.name}</Text>
-                      </Box>
-                      <Box
-                        sx={{ cursor: "pointer", width: "16px" }}
-                        onClick={() => {
-                          console.log("remove token");
-                        }}
-                      >
-                        <XCircle size="16" />
-                      </Box>
-                    </Flex>
-                  );
-                })}
-              </Box>
-            </Box>
+            <AccessToken />
           </Flex>
         </Flex>
         <Flex mt="5">
