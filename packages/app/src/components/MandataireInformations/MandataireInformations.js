@@ -1,9 +1,12 @@
+import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Heading4 } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
+import { XCircle } from "styled-icons/boxicons-regular";
 
 import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
+import { USER_TOKEN } from "./queries";
 import { boxStyle, content, innerTextStyle, subtitle } from "./style";
 
 const label = value => {
@@ -12,6 +15,18 @@ const label = value => {
 
 const MandataireInformations = props => {
   const user = useContext(UserContext);
+
+  const { data, loading, error } = useQuery(USER_TOKEN);
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  if (error) {
+    return <div>error</div>;
+  }
+
+  const { access_tokens } = data;
 
   const { email, nom, prenom, user_tis, mandataire } = user;
   return (
@@ -23,7 +38,7 @@ const MandataireInformations = props => {
         <Flex>
           <Flex flexDirection="column" mr={6}>
             <Box sx={boxStyle}>
-              <Heading4 mt={2} mb="3">
+              <Heading4 mt={2} mb="2">
                 Vos informations
               </Heading4>
               <Flex flexDirection="column">
@@ -42,7 +57,7 @@ const MandataireInformations = props => {
               </Flex>
             </Box>
             <Box sx={boxStyle}>
-              <Heading4 mt={2} mb="3">
+              <Heading4 mt={2} mb="2">
                 Activité
               </Heading4>
               <Flex flexDirection="column">
@@ -63,7 +78,7 @@ const MandataireInformations = props => {
           </Flex>
           <Flex ml={6} flexDirection="column">
             <Box sx={boxStyle}>
-              <Heading4 mt={2} mb="3">
+              <Heading4 mt={2} mb="2">
                 Contact
               </Heading4>
               <Flex flexDirection="column">
@@ -82,10 +97,10 @@ const MandataireInformations = props => {
               </Flex>
             </Box>
             <Box sx={boxStyle}>
-              <Heading4 mt={2} mb="3">
+              <Heading4 mt={2} mb="2">
                 Tribunaux d’instance
               </Heading4>
-              <Box mr={4}>
+              <Box mr={4} mb="3">
                 {user_tis.map((ti, index) => {
                   return (
                     <Text key={index} sx={innerTextStyle}>
@@ -95,18 +110,43 @@ const MandataireInformations = props => {
                 })}
               </Box>
             </Box>
-          </Flex>
-        </Flex>
-        <Box sx={boxStyle}>
-          <Heading4 mt={2} mb="3">
-            Informations pour le magistrat
-          </Heading4>
-          <Flex justifyContent="flex-start">
-            <Box mr={4}>
-              <pre style={{ whiteSpace: "pre-wrap" }}>{label(mandataire.competences)}</pre>
+            <Box sx={boxStyle}>
+              <Heading4 mt={2} mb="2">
+                Informations pour le magistrat
+              </Heading4>
+              <Flex justifyContent="flex-start">
+                <Box mr={4}>
+                  <Text sx={content}>{label(mandataire.competences)}</Text>
+                </Box>
+              </Flex>
+            </Box>
+
+            <Box sx={boxStyle}>
+              <Heading4 mt={2} mb="2">
+                Logitiels métier authorisé
+              </Heading4>
+              <Box mr={4} mb="3">
+                {access_tokens.map((token, index) => {
+                  return (
+                    <Flex alignItem="center" key={index}>
+                      <Box>
+                        <Text sx={innerTextStyle}>{token.editors.name}</Text>
+                      </Box>
+                      <Box
+                        sx={{ cursor: "pointer", width: "16px" }}
+                        onClick={() => {
+                          console.log("remove token");
+                        }}
+                      >
+                        <XCircle size="16" />
+                      </Box>
+                    </Flex>
+                  );
+                })}
+              </Box>
             </Box>
           </Flex>
-        </Box>
+        </Flex>
         <Flex mt="5">
           <Box>
             <LinkButton href="/mandataires/edit-informations">Modifier vos informations</LinkButton>
