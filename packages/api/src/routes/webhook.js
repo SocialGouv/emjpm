@@ -322,13 +322,9 @@ router.post("/email-service-member-invitation", async function(req, res) {
 
   serviceMemberInvitationMail(invitation);
 
-  try {
-    await ServiceMemberInvitation.query()
-      .findById(invitation.id)
-      .patch({ sent_at: new Date() });
-  } catch (error) {
-    // TODO(plaunay): log in sentry
-  }
+  await ServiceMemberInvitation.query()
+    .findById(invitation.id)
+    .patch({ sent_at: new Date() });
 
   res.json({ success: true });
 });
