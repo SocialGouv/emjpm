@@ -3,8 +3,8 @@ exports.up = function(knex) {
     table.increments();
     table.string("email").notNullable();
     table.string("token").notNullable();
-    table.string("created_at").notNullable();
-    table.string("sent_at");
+    table.timestamp("created_at").defaultTo(knex.fn.now());
+    table.timestamp("sent_at");
     table.integer("service_id").notNullable();
     table
       .foreign("service_id")

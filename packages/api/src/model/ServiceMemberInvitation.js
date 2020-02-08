@@ -18,7 +18,6 @@ class ServiceMemberInvitation extends Model {
       properties: {
         id: { type: "integer" },
         email: { type: "string" },
-        sent_at: { type: "string" },
         service_id: { type: "integer" },
         token: { type: "string" }
       }
