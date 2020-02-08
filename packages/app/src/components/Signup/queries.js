@@ -28,3 +28,17 @@ export const SIGNUP_DATA = gql`
     }
   }
 `;
+
+export const SERVICE_MEMBER_INVITATION = gql`
+  query service_member_invitation($token: String!) {
+    service_member_invitations(where: { token: { _eq: $token } }) {
+      id
+      email
+      service_id
+      service {
+        etablissement
+      }
+      token
+    }
+  }
+`;
