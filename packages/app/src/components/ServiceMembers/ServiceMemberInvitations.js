@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Button, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { formatDistanceToNow } from "date-fns";
 import fr from "date-fns/locale/fr";
 import { useFormik } from "formik";
@@ -68,8 +68,31 @@ const ServiceMemberInvitations = props => {
   };
 
   return (
-    <Box mb={6}>
-      <Box as="form" onSubmit={formik.handleSubmit} mb={4}>
+    <Box>
+      <Box mb={4}>
+        <Text mb="4" fontWeight="bold">
+          Invitations en attente ({serviceMemberInvitations.length})
+        </Text>
+        {!!serviceMemberInvitations.length || <Text>Aucune invitations en attente.</Text>}
+        {serviceMemberInvitations.map(invitation => (
+          <Flex mb={1} key={invitation.email}>
+            <Box sx={{ textOverflow: "ellipsis", overflow: "hidden" }} width={250}>
+              {invitation.email}
+            </Box>
+            <Text color="textSecondary" width={300}>
+              Invité il y a {formatDistanceToNow(new Date(invitation.sent_at), { locale: fr })}
+            </Text>
+            <Box
+              color="primary"
+              sx={{ cursor: "pointer" }}
+              onClick={() => handleDelete(invitation.id)}
+            >
+              Supprimer
+            </Box>
+          </Flex>
+        ))}
+      </Box>
+      <Box as="form" onSubmit={formik.handleSubmit}>
         <Text mb="1" fontWeight="bold">
           Invitez un nouveau membre au service
           <Text display="inline" color="primary">
@@ -94,25 +117,6 @@ const ServiceMemberInvitations = props => {
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
           Inviter
         </Button>
-      </Box>
-      <Box>
-        <Heading4 mb={2}>Invitations en attente</Heading4>
-        {!!serviceMemberInvitations.length || <Text>Aucune invitations en cours.</Text>}
-        {serviceMemberInvitations.map(invitation => (
-          <Flex mb={1} key={invitation.email}>
-            <Text width={250}>{invitation.email}</Text>
-            <Text color="textSecondary" width={300}>
-              Invité il y a {formatDistanceToNow(new Date(invitation.sent_at), { locale: fr })}
-            </Text>
-            <Box
-              color="primary"
-              sx={{ cursor: "pointer" }}
-              onClick={() => handleDelete(invitation.id)}
-            >
-              Supprimer
-            </Box>
-          </Flex>
-        ))}
       </Box>
     </Box>
   );
