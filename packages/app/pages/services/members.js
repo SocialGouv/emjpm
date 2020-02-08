@@ -5,8 +5,9 @@ import { ServiceMembers } from "../../src/components/ServiceMembers";
 import { UserContext } from "../../src/components/UserContext";
 import { withAuthSync } from "../../src/util/auth";
 
-const Members = () => {
-  const { service_members } = useContext(UserContext);
+const ServiceMembersPage = () => {
+  const user = useContext(UserContext);
+  const { service_members } = user;
   const [{ service }] = service_members;
 
   return (
@@ -16,4 +17,4 @@ const Members = () => {
   );
 };
 
-export default withAuthSync(Members);
+export default withAuthSync(ServiceMembersPage);

@@ -14,6 +14,7 @@ import { passwordSchema } from "./passwordSchema";
 import { resetPasswordSchema } from "./resetPasswordSchema";
 import { serviceAcceptMesureSchema } from "./serviceAcceptMesureSchema";
 import { serviceAntenneSchema } from "./serviceAntenneSchema";
+import { serviceMemberInvitationSchema } from "./serviceMemberInvitationSchema";
 import { serviceMesureSchema } from "./serviceMesureSchema";
 import { signupDirectionSchema } from "./signupDirectionSchema";
 import { signupMagistratSchema } from "./signupMagistratSchema";
@@ -36,6 +37,7 @@ export {
   serviceMesureSchema,
   mandataireSignupSchema,
   serviceAcceptMesureSchema,
+  serviceMemberInvitationSchema,
   mandataireAcceptMesureSchema,
   resetPasswordSchema,
   signupDirectionSchema,
