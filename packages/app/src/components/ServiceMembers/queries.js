@@ -27,6 +27,7 @@ export const SERVICE_MEMBERS = gql`
         id
         email
         created_at
+        active
       }
     }
   }

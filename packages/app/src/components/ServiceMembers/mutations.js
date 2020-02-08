@@ -21,3 +21,11 @@ export const DELETE_SERVICE_MEMBER_INVITATION = gql`
     }
   }
 `;
+
+export const DELETE_SERVICE_MEMBER = gql`
+  mutation deleteServiceMember($id: Int!) {
+    delete_service_members(where: { id: { _eq: $id } }) {
+      affected_rows
+    }
+  }
+`;
