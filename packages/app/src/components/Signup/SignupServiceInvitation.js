@@ -58,7 +58,6 @@ export const SignupServiceInvitation = props => {
           setErrors(errors);
         },
         onSuccess: () => {
-          console.log("success");
           Router.push("/signup/congratulation");
         }
       });
