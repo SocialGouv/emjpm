@@ -5,21 +5,11 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 import { Trash } from "styled-icons/boxicons-regular";
+import { v4 as uuid } from "uuid";
 
 import { serviceMemberInvitationSchema } from "../../lib/validationSchemas";
 import { CREATE_SERVICE_MEMBER_INVITATION, DELETE_SERVICE_MEMBER_INVITATION } from "./mutations";
 import { SERVICE_MEMBER_INVITATIONS, USER_EMAIL_EXISTS } from "./queries";
-
-// TODO(paullaunay): use generateToken from Christophe
-function generateToken(n) {
-  var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  var token = "";
-  for (var i = 0; i < n; i++) {
-    token += chars[Math.floor(Math.random() * chars.length)];
-  }
-
-  return token;
-}
 
 const ServiceMemberInvitations = props => {
   const { service } = props;
@@ -63,7 +53,7 @@ const ServiceMemberInvitations = props => {
       variables: {
         email: values.email,
         service_id: service.id,
-        token: generateToken(8)
+        token: uuid()
       }
     });
 
