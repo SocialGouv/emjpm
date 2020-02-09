@@ -1103,6 +1103,7 @@ Array [
   "regions",
   "role",
   "service_antenne",
+  "service_member_invitations",
   "service_members",
   "service_tis",
   "services",
