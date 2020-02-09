@@ -25,8 +25,6 @@ export const SignupServiceInvitation = props => {
 
   const [invitation] = data.service_member_invitations;
 
-  console.log(invitation);
-
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const exists = await isEmailExists(client, values.email);
 

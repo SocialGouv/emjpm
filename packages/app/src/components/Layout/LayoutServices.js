@@ -13,31 +13,32 @@ import { ServiceInformationsSidebar } from "../ServiceInformationsSidebar";
 import { UserInformations } from "../UserInformations";
 import { dropDownLinks } from "./dropDownLink";
 
-const navigationLinks = [
-  {
-    title: "Vos mesures",
-    url: "/services"
-  },
-  {
-    title: "Vos mesures en attente",
-    url: "/services/waiting-mesures"
-  },
-  {
-    title: "La carte de vos mesures",
-    url: "/services/map"
-  },
-  {
-    title: "Vos informations",
-    url: "/services/informations"
-  },
-  {
-    title: "Gestion des comptes",
-    url: "/services/members"
-  }
-];
-
 const LayoutServices = props => {
-  const { children, hasNavigation = true } = props;
+  const { children, hasNavigation = true, isAdmin } = props;
+
+  const navigationLinks = [
+    {
+      title: "Vos mesures",
+      url: "/services"
+    },
+    {
+      title: "Vos mesures en attente",
+      url: "/services/waiting-mesures"
+    },
+    {
+      title: "La carte de vos mesures",
+      url: "/services/map"
+    },
+    {
+      title: "Vos informations",
+      url: "/services/informations"
+    },
+    {
+      title: "Gestion des comptes",
+      url: "/services/members",
+      disabled: !isAdmin
+    }
+  ];
 
   return (
     <Fragment>

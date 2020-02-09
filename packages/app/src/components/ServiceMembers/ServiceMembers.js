@@ -90,7 +90,7 @@ const ServiceMembers = props => {
                   width={200}
                   placeholder="Est-ce une demande urgente"
                   value={member.is_admin ? isAdminOptions[0] : isAdminOptions[1]}
-                  hasError={false}
+                  hasError
                   onChange={({ value }) => handleIsAdminUpdate(member.id, value)}
                   options={isAdminOptions}
                 />

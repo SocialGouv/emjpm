@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import { useRouter } from "next/router";
+import React, { useContext, useEffect } from "react";
 
 import { LayoutServices } from "../../src/components/Layout";
 import { ServiceMembers } from "../../src/components/ServiceMembers";
@@ -7,11 +8,23 @@ import { withAuthSync } from "../../src/util/auth";
 
 const ServiceMembersPage = () => {
   const user = useContext(UserContext);
+  const router = useRouter();
+
   const { service_members } = user;
-  const [{ service }] = service_members;
+  const [{ is_admin, service }] = service_members;
+
+  useEffect(() => {
+    if (!is_admin) {
+      router.push("/services");
+    }
+  }, [is_admin, router]);
+
+  if (!is_admin) {
+    return null;
+  }
 
   return (
-    <LayoutServices>
+    <LayoutServices isAdmin={is_admin}>
       <ServiceMembers service={service} members={service_members} />
     </LayoutServices>
   );
