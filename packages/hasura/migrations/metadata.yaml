@@ -2075,7 +2075,11 @@ tables:
       select_aggregate: null
       select_by_pk: null
       update: null
-  delete_permissions: []
+  delete_permissions:
+  - comment: null
+    permission:
+      filter: {}
+    role: service
   event_triggers: []
   insert_permissions: []
   is_enum: false
@@ -2111,7 +2115,14 @@ tables:
       filter: {}
     role: ti
   table: service_members
-  update_permissions: []
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - is_admin
+      filter: {}
+      set: {}
+    role: service
 - array_relationships:
   - comment: null
     name: service_antennes
