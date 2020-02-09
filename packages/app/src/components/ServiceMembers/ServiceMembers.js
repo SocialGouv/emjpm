@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { BoxWrapper, Card, Heading2, Select, Text } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, Card, Heading2, Heading4, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
 import React from "react";
 import { Box, Flex } from "rebass";
@@ -8,9 +8,22 @@ import { Trash } from "styled-icons/boxicons-regular";
 import { DELETE_SERVICE_MEMBER, UPDATE_SERVICE_MEMBER_IS_ADMIN } from "./mutations";
 import { SERVICE_MEMBERS } from "./queries";
 import { ServiceMemberInvitations } from "./ServiceMemberInvitations";
+import {
+  listActionsStyle,
+  listActionStyle,
+  listAdminStyle,
+  listDateStyle,
+  listEmailStyle,
+  listIdStyle,
+  listStyle
+} from "./styles";
 
 const ServiceMembers = props => {
   const { service } = props;
+  const isAdminOptions = [
+    { label: "Administrateur", value: true },
+    { label: "Membre", value: false }
+  ];
 
   const [deleteServiceMember] = useMutation(DELETE_SERVICE_MEMBER);
   const [updateServiceMemberIsAdmin] = useMutation(UPDATE_SERVICE_MEMBER_IS_ADMIN);
@@ -61,59 +74,32 @@ const ServiceMembers = props => {
           Membres
         </Heading2>
         <Card p={4} width={[1]}>
-          <Text mb={4} fontWeight="bold">
-            Liste des membres ({service_members.length})
-          </Text>
+          <Heading4 mb="2">Liste des membres ({service_members.length})</Heading4>
           {service_members.map((member, i) => (
-            <Flex
-              bg={i % 2 ? "" : "muted"}
-              p={2}
-              mb={1}
-              sx={{
-                borderRadius: 4,
-                alignItems: "center"
-              }}
-              key={member.user.email}
-            >
-              <Box color="textSecondary" width={50}>
-                {member.id}.
-              </Box>
-              <Box sx={{ textOverflow: "ellipsis", overflow: "hidden" }} width={250}>
-                {member.user.email}
-              </Box>
-              <Text color="textSecondary" width={200}>
+            <Flex sx={() => listStyle(i)} index={i} key={member.user.email}>
+              <Box sx={listIdStyle}>{member.id}.</Box>
+              <Box sx={listEmailStyle}>{member.user.email}</Box>
+              <Text sx={listDateStyle}>
                 {`Inscrit le `}
                 {format(new Date(member.user.created_at), "dd/MM/yyyy")}
               </Text>
-              <Box width={200} mr={4}>
+              <Box sx={listAdminStyle}>
                 <Select
                   id="urgent"
                   name="urgent"
                   width={200}
                   placeholder="Est-ce une demande urgente"
-                  value={
-                    member.is_admin
-                      ? { label: "Administrateur", value: true }
-                      : { label: "Membre", value: false }
-                  }
+                  value={member.is_admin ? isAdminOptions[0] : isAdminOptions[1]}
                   hasError={false}
                   onChange={({ value }) => handleIsAdminUpdate(member.id, value)}
-                  options={[
-                    { label: "Administrateur", value: true },
-                    { label: "Membre", value: false }
-                  ]}
+                  options={isAdminOptions}
                 />
               </Box>
-              <Box color="textSecondary" width={200}>
+              <Text sx={listDateStyle}>
                 {member.user.active ? "Activé" : "En attente de d'activation"}
-              </Box>
-              <Box sx={{ flexGrow: 1, textAlign: "right" }}>
-                <Box
-                  mx={2}
-                  color="primary"
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => handleDelete(member.id)}
-                >
+              </Text>
+              <Box sx={listActionsStyle}>
+                <Box sx={listActionStyle} onClick={() => handleDelete(member.id)}>
                   <Trash title="Supprimer" size="22" />
                 </Box>
               </Box>

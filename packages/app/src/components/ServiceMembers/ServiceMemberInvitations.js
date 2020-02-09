@@ -1,5 +1,5 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
-import { Button, Field, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
 import { useFormik } from "formik";
 import React from "react";
@@ -10,6 +10,14 @@ import { v4 as uuid } from "uuid";
 import { serviceMemberInvitationSchema } from "../../lib/validationSchemas";
 import { CREATE_SERVICE_MEMBER_INVITATION, DELETE_SERVICE_MEMBER_INVITATION } from "./mutations";
 import { SERVICE_MEMBER_INVITATIONS, USER_EMAIL_EXISTS } from "./queries";
+import {
+  listActionsStyle,
+  listActionStyle,
+  listDateStyle,
+  listEmailStyle,
+  listIdStyle,
+  listStyle
+} from "./styles";
 
 const ServiceMemberInvitations = props => {
   const { service } = props;
@@ -70,13 +78,10 @@ const ServiceMemberInvitations = props => {
   return (
     <Box>
       <Box as="form" onSubmit={formik.handleSubmit} mb={4}>
-        <Text mb="1" fontWeight="bold">
+        <Heading4 mb="2">
           Invitez un nouveau membre au service
-          <Text display="inline" color="primary">
-            {` ${service.etablissement}`}
-          </Text>
-          .
-        </Text>
+          <Text display="inline" color="primary">{` ${service.etablissement}`}</Text>
+        </Heading4>
         <Text mb="1" color="textSecondary">
           {`Un email contenant les instructions d'inscription sera envoyé.`}
         </Text>
@@ -96,45 +101,17 @@ const ServiceMemberInvitations = props => {
         </Button>
       </Box>
       <Box mb={4}>
-        <Text mb="4" fontWeight="bold">
-          Invitations en attente ({serviceMemberInvitations.length})
-        </Text>
+        <Heading4 mb="2">Invitations en attente ({serviceMemberInvitations.length})</Heading4>
         {!!serviceMemberInvitations.length || <Text>Aucune invitations en attente.</Text>}
         {serviceMemberInvitations.map((invitation, i) => (
-          <Flex
-            bg={i % 2 ? "" : "muted"}
-            px={2}
-            py={4}
-            mb={1}
-            sx={{
-              borderRadius: 4,
-              alignItems: "center"
-            }}
-            key={invitation.email}
-          >
-            <Box color="textSecondary" width={50}>
-              {invitation.id}.
-            </Box>
-            <Box sx={{ textOverflow: "ellipsis", overflow: "hidden" }} width={250}>
-              {invitation.email}
-            </Box>
-            <Text color="textSecondary" width={300}>
-              {`Invité le `}
-              {format(new Date(invitation.sent_at), "dd/MM/yyyy")}
+          <Flex sx={() => listStyle(i)} index={i} key={invitation.email}>
+            <Box sx={listIdStyle}>{invitation.id}.</Box>
+            <Box sx={listEmailStyle}>{invitation.email}</Box>
+            <Text sx={listDateStyle}>
+              {`Invité le ${format(new Date(invitation.sent_at), "dd/MM/yyyy")}`}
             </Text>
-            <Box sx={{ marginLeft: "auto" }}>
-              <Box
-                width={24}
-                mx={2}
-                sx={{
-                  cursor: "pointer",
-                  color: "primary",
-                  ":hover": {
-                    color: "text"
-                  }
-                }}
-                onClick={() => handleDelete(invitation.id)}
-              >
+            <Box sx={listActionsStyle}>
+              <Box sx={listActionStyle} onClick={() => handleDelete(invitation.id)}>
                 <Trash title="Supprimer" size="22" />
               </Box>
             </Box>
