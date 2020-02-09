@@ -32,3 +32,11 @@ export const SERVICE_MEMBERS = gql`
     }
   }
 `;
+
+export const USER_EMAIL_EXISTS = gql`
+  query UserEmailExists($email: String!) {
+    users(where: { email: { _eq: $email } }) {
+      email
+    }
+  }
+`;

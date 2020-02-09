@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Field, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
 import { useFormik } from "formik";
@@ -8,7 +8,7 @@ import { Trash } from "styled-icons/boxicons-regular";
 
 import { serviceMemberInvitationSchema } from "../../lib/validationSchemas";
 import { CREATE_SERVICE_MEMBER_INVITATION, DELETE_SERVICE_MEMBER_INVITATION } from "./mutations";
-import { SERVICE_MEMBER_INVITATIONS } from "./queries";
+import { SERVICE_MEMBER_INVITATIONS, USER_EMAIL_EXISTS } from "./queries";
 
 // TODO(paullaunay): use generateToken from Christophe
 function generateToken(n) {
@@ -24,6 +24,7 @@ function generateToken(n) {
 const ServiceMemberInvitations = props => {
   const { service } = props;
 
+  const client = useApolloClient();
   const [createServiceMemberInvitation] = useMutation(CREATE_SERVICE_MEMBER_INVITATION);
   const [deleteServiceMemberInvitation] = useMutation(DELETE_SERVICE_MEMBER_INVITATION);
   const { loading, error, data } = useQuery(SERVICE_MEMBER_INVITATIONS, {
@@ -46,7 +47,17 @@ const ServiceMemberInvitations = props => {
 
   const serviceMemberInvitations = data.service_member_invitations;
 
-  async function handleSubmit(values, { resetForm, setSubmitting }) {
+  async function handleSubmit(values, { resetForm, setErrors }) {
+    const { data } = await client.query({
+      query: USER_EMAIL_EXISTS,
+      variables: { email: values.email }
+    });
+
+    if (data.users.length) {
+      setErrors({ email: "Cet email existe déjà" });
+      return;
+    }
+
     await createServiceMemberInvitation({
       refetchQueries: ["ServiceMemberInvitations"],
       variables: {
@@ -57,7 +68,6 @@ const ServiceMemberInvitations = props => {
     });
 
     resetForm();
-    setSubmitting(false);
   }
 
   const handleDelete = async id => {
@@ -85,11 +95,11 @@ const ServiceMemberInvitations = props => {
             value={formik.values.email}
             id="email"
             name="email"
-            hasError={formik.errors.email}
+            hasError={formik.touched.email && formik.errors.email}
             onChange={formik.handleChange}
             placeholder="Email"
           />
-          <InlineError message={formik.errors.email} fieldId="email" />
+          {formik.touched.email && <InlineError message={formik.errors.email} fieldId="email" />}
         </Field>
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
           Inviter
