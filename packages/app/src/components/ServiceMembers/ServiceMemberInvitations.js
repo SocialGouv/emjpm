@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Field, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
-import { formatDistanceToNow } from "date-fns";
-import fr from "date-fns/locale/fr";
+import { format } from "date-fns";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
+import { Trash } from "styled-icons/boxicons-regular";
 
 import { serviceMemberInvitationSchema } from "../../lib/validationSchemas";
 import { CREATE_SERVICE_MEMBER_INVITATION, DELETE_SERVICE_MEMBER_INVITATION } from "./mutations";
@@ -69,30 +69,7 @@ const ServiceMemberInvitations = props => {
 
   return (
     <Box>
-      <Box mb={4}>
-        <Text mb="4" fontWeight="bold">
-          Invitations en attente ({serviceMemberInvitations.length})
-        </Text>
-        {!!serviceMemberInvitations.length || <Text>Aucune invitations en attente.</Text>}
-        {serviceMemberInvitations.map(invitation => (
-          <Flex mb={1} key={invitation.email}>
-            <Box sx={{ textOverflow: "ellipsis", overflow: "hidden" }} width={250}>
-              {invitation.email}
-            </Box>
-            <Text color="textSecondary" width={300}>
-              Invité il y a {formatDistanceToNow(new Date(invitation.sent_at), { locale: fr })}
-            </Text>
-            <Box
-              color="primary"
-              sx={{ cursor: "pointer" }}
-              onClick={() => handleDelete(invitation.id)}
-            >
-              Supprimer
-            </Box>
-          </Flex>
-        ))}
-      </Box>
-      <Box as="form" onSubmit={formik.handleSubmit}>
+      <Box as="form" onSubmit={formik.handleSubmit} mb={4}>
         <Text mb="1" fontWeight="bold">
           Invitez un nouveau membre au service
           <Text display="inline" color="primary">
@@ -117,6 +94,52 @@ const ServiceMemberInvitations = props => {
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
           Inviter
         </Button>
+      </Box>
+      <Box mb={4}>
+        <Text mb="4" fontWeight="bold">
+          Invitations en attente ({serviceMemberInvitations.length})
+        </Text>
+        {!!serviceMemberInvitations.length || <Text>Aucune invitations en attente.</Text>}
+        {serviceMemberInvitations.map((invitation, i) => (
+          <Flex
+            bg={i % 2 ? "" : "muted"}
+            px={2}
+            py={4}
+            mb={1}
+            sx={{
+              borderRadius: 4,
+              alignItems: "center"
+            }}
+            key={invitation.email}
+          >
+            <Box color="textSecondary" width={50}>
+              {invitation.id}.
+            </Box>
+            <Box sx={{ textOverflow: "ellipsis", overflow: "hidden" }} width={250}>
+              {invitation.email}
+            </Box>
+            <Text color="textSecondary" width={300}>
+              {`Invité le `}
+              {format(new Date(invitation.sent_at), "dd/MM/yyyy")}
+            </Text>
+            <Box sx={{ marginLeft: "auto" }}>
+              <Box
+                width={24}
+                mx={2}
+                sx={{
+                  cursor: "pointer",
+                  color: "primary",
+                  ":hover": {
+                    color: "text"
+                  }
+                }}
+                onClick={() => handleDelete(invitation.id)}
+              >
+                <Trash title="Supprimer" size="22" />
+              </Box>
+            </Box>
+          </Flex>
+        ))}
       </Box>
     </Box>
   );
