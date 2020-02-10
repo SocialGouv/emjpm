@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Button, Card, Text } from "@socialgouv/emjpm-ui-core";
-import React, { useCallback } from "react";
+import { Button, Text } from "@socialgouv/emjpm-ui-core";
+import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
+import { AccessToken } from "../AccessToken";
 import { ACTIVATE_USER } from "./mutations";
 import { USER } from "./queries";
 import { getAdminUserDetails } from "./util";
@@ -38,7 +39,7 @@ const AdminUserInformations = props => {
   const activateButtonText = active ? "Bloquer" : "Activer";
 
   return (
-    <Card>
+    <Fragment>
       <Flex mb={4}>
         <Box width={1 / 3} p={2} bg="cardSecondary">
           ID
@@ -93,7 +94,10 @@ const AdminUserInformations = props => {
           </Button>
         </Box>
       </Flex>
-    </Card>
+      <Box mt="2">
+        <AccessToken bg="cardSecondary" isAdmin userId={id} />
+      </Box>
+    </Fragment>
   );
 };
 
