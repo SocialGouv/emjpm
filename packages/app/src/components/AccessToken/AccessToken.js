@@ -40,9 +40,9 @@ const AccessToken = props => {
         <Box sx={boxStyle}>
           <Heading5 mt={3} mb="2">
             {isAdmin ? (
-              <Fragment>Logitiels métier authorisé à accéder à ce compte utilisateur</Fragment>
+              <Fragment>Logiciels métiers authorisés à accéder à ce compte utilisateur</Fragment>
             ) : (
-              <Fragment>Logitiels métier authorisé à accéder à votre compte</Fragment>
+              <Fragment>Logiciels métiers authorisés à accéder à votre compte</Fragment>
             )}
           </Heading5>
           <Box mr={4} mb="3">
