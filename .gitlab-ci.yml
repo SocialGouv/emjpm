@@ -873,9 +873,6 @@ Restore postgres data:
     - export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER_ENCODED}' | base64 --decode)
     - export ADMIN_PG_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD_ENCODED}' | base64 --decode)
 
-    - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
-    - export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
-
     - kubectl scale --replicas=0 deploy/${HASURA_SRV_HOST}
 
     - kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} || true
@@ -885,6 +882,9 @@ Restore postgres data:
     - kubectl delete job restore-job || true
     - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -
     - kubectl wait --for=condition=complete job/restore-job  --timeout=300s
+
+    - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
+    - export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
 
     - kubectl delete job migrate-job || true
     - cat ./.k8s/postgres/restore/migrate-job.yml | envsubst | kubectl apply -f -

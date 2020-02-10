@@ -42,12 +42,6 @@ spec:
               value: ${PG_HOST}
             - name: PGPASSWORD
               value: "${ADMIN_PG_PASSWORD}"
-            - name: POSTGRES_EMJPM_USER
-              value: ${EMJPM_PG_USER}
-            - name: POSTGRES_HASURA_USER
-              value: ${HASURA_PG_USER}
-            - name: POSTGRES_METABASE_USER
-              value: ${METABASE_PG_USER}
           volumeMounts:
             - mountPath: "/mnt/script"
               name: script
