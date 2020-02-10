@@ -18,7 +18,7 @@ deployment:
           name: emjpm-secret
           key: APP_URL
     - name: DATABASE_URL
-      value: "psql://${EMJPM_PG_USER}:${EMJPM_PG_PASSWORD}@${PG_HOST}/${POSTGRES_DATABASE_EMJPM}"
+      value: "psql://${EMJPM_PG_USER_ENCODED}:${EMJPM_PG_PASSWORD_ENCODED}@${PG_HOST}/${POSTGRES_DATABASE_EMJPM}"
     - name: PORT
       value: "80"
     - name: NODE_ENV
