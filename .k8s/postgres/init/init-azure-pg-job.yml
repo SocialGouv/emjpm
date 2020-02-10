@@ -28,11 +28,11 @@ spec:
               sh -x /mnt/script/init-db.sh
           resources:
             requests:
-              cpu: 1000m
-              memory: 1Gi
+              cpu: 500m
+              memory: 256Mi
             limits:
-              cpu: 1000m
-              memory: 1Gi
+              cpu: 500m
+              memory: 256Mi
           env:
             - name: BRANCH_HASH
               value: ${BRANCH_HASH}
