@@ -49,6 +49,7 @@ app.use(
   passport.authenticate("bearer", { session: false }),
   editorsRoutes
 );
+
 app.use("/webhook", require("./routes/webhook"));
 
 app.get("/ping", function(req, res) {
