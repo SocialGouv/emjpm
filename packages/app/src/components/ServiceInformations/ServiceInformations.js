@@ -5,6 +5,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
+import { AccessToken } from "../AccessToken";
 import { LinkButton, ServiceEditLinkButton } from "../Commons";
 import { GET_SERVICES } from "./queries";
 import {
@@ -63,9 +64,7 @@ const ServiceInformations = props => {
             <Text sx={innerTextStyle}>{ville}</Text>
           </Box>
           <Box sx={boxStyle}>
-            <Heading5 mt="5" mb="3">
-              Tribunaux d’instance
-            </Heading5>
+            <Heading5 mb="3">Tribunaux d’instance</Heading5>
             {service_tis.map(ti => {
               return (
                 <Text key={ti.ti.id} sx={topTextStyle}>
@@ -73,18 +72,21 @@ const ServiceInformations = props => {
                 </Text>
               );
             })}
+            <AccessToken />
           </Box>
         </Flex>
-        <Box sx={boxStyle}>
-          <Heading5 mt={2} mb="3">
-            Informations pour le magistrat
-          </Heading5>
-          <Flex justifyContent="flex-start">
-            <Box mr={4}>
-              <pre style={{ whiteSpace: "pre-wrap" }}>{competences}</pre>
-            </Box>
-          </Flex>
-        </Box>
+        {competences && (
+          <Box sx={boxStyle}>
+            <Heading5 mt={2} mb="3">
+              Informations pour le magistrat
+            </Heading5>
+            <Flex justifyContent="flex-start">
+              <Box mr={4}>
+                <Text sx={innerTextStyle}>{competences}</Text>
+              </Box>
+            </Flex>
+          </Box>
+        )}
         <Flex mt="5">
           <ServiceEditLinkButton>Modifier les informations de votre service</ServiceEditLinkButton>
         </Flex>

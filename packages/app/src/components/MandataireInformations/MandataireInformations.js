@@ -2,6 +2,7 @@ import { Card, Heading3, Heading4 } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { AccessToken } from "../AccessToken";
 import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
 import { boxStyle, content, innerTextStyle, subtitle } from "./style";
@@ -23,7 +24,7 @@ const MandataireInformations = props => {
         <Flex>
           <Flex flexDirection="column" mr={6}>
             <Box sx={boxStyle}>
-              <Heading4 mt={2} mb="3">
+              <Heading4 mt={2} mb="2">
                 Vos informations
               </Heading4>
               <Flex flexDirection="column">
@@ -42,7 +43,7 @@ const MandataireInformations = props => {
               </Flex>
             </Box>
             <Box sx={boxStyle}>
-              <Heading4 mt={2} mb="3">
+              <Heading4 mt={2} mb="2">
                 Activité
               </Heading4>
               <Flex flexDirection="column">
@@ -63,7 +64,7 @@ const MandataireInformations = props => {
           </Flex>
           <Flex ml={6} flexDirection="column">
             <Box sx={boxStyle}>
-              <Heading4 mt={2} mb="3">
+              <Heading4 mt={2} mb="2">
                 Contact
               </Heading4>
               <Flex flexDirection="column">
@@ -82,10 +83,10 @@ const MandataireInformations = props => {
               </Flex>
             </Box>
             <Box sx={boxStyle}>
-              <Heading4 mt={2} mb="3">
+              <Heading4 mt={2} mb="2">
                 Tribunaux d’instance
               </Heading4>
-              <Box mr={4}>
+              <Box mr={4} mb="3">
                 {user_tis.map((ti, index) => {
                   return (
                     <Text key={index} sx={innerTextStyle}>
@@ -95,18 +96,19 @@ const MandataireInformations = props => {
                 })}
               </Box>
             </Box>
+            <Box sx={boxStyle}>
+              <Heading4 mt={2} mb="2">
+                Informations pour le magistrat
+              </Heading4>
+              <Flex justifyContent="flex-start">
+                <Box mr={4}>
+                  <Text sx={content}>{label(mandataire.competences)}</Text>
+                </Box>
+              </Flex>
+            </Box>
+            <AccessToken />
           </Flex>
         </Flex>
-        <Box sx={boxStyle}>
-          <Heading4 mt={2} mb="3">
-            Informations pour le magistrat
-          </Heading4>
-          <Flex justifyContent="flex-start">
-            <Box mr={4}>
-              <pre style={{ whiteSpace: "pre-wrap" }}>{label(mandataire.competences)}</pre>
-            </Box>
-          </Flex>
-        </Box>
         <Flex mt="5">
           <Box>
             <LinkButton href="/mandataires/edit-informations">Modifier vos informations</LinkButton>
