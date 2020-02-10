@@ -19,7 +19,7 @@ import {
 } from "./styles";
 
 const ServiceMemberInvitations = props => {
-  const { service } = props;
+  const { service, isAdmin } = props;
 
   const client = useApolloClient();
   const [createServiceMemberInvitation] = useMutation(CREATE_SERVICE_MEMBER_INVITATION);
@@ -75,29 +75,31 @@ const ServiceMemberInvitations = props => {
 
   return (
     <Box>
-      <Box as="form" onSubmit={formik.handleSubmit} mb={4}>
-        <Heading4 mb="2">
-          Invitez un nouveau membre au service
-          <Text display="inline" color="primary">{` ${service.etablissement}`}</Text>
-        </Heading4>
-        <Text mb="1" color="textSecondary">
-          {`Un email contenant les instructions d'inscription sera envoyé.`}
-        </Text>
-        <Field width={300} mb="1">
-          <Input
-            value={formik.values.email}
-            id="email"
-            name="email"
-            hasError={formik.touched.email && formik.errors.email}
-            onChange={formik.handleChange}
-            placeholder="Email"
-          />
-          {formik.touched.email && <InlineError message={formik.errors.email} fieldId="email" />}
-        </Field>
-        <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
-          Inviter
-        </Button>
-      </Box>
+      {isAdmin && (
+        <Box as="form" onSubmit={formik.handleSubmit} mb={4}>
+          <Heading4 mb="2">
+            Invitez un nouveau membre au service
+            <Text display="inline" color="primary">{` ${service.etablissement}`}</Text>
+          </Heading4>
+          <Text mb="1" color="textSecondary">
+            {`Un email contenant les instructions d'inscription sera envoyé.`}
+          </Text>
+          <Field width={300} mb="1">
+            <Input
+              value={formik.values.email}
+              id="email"
+              name="email"
+              hasError={formik.touched.email && formik.errors.email}
+              onChange={formik.handleChange}
+              placeholder="Email"
+            />
+            {formik.touched.email && <InlineError message={formik.errors.email} fieldId="email" />}
+          </Field>
+          <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+            Inviter
+          </Button>
+        </Box>
+      )}
       <Box mb={4}>
         <Heading4 mb="2">Invitations en attente ({serviceMemberInvitations.length})</Heading4>
         {!!serviceMemberInvitations.length || <Text>Aucune invitations en attente.</Text>}
@@ -109,9 +111,11 @@ const ServiceMemberInvitations = props => {
               {`Invité le ${format(new Date(invitation.sent_at), "dd/MM/yyyy")}`}
             </Text>
             <Box sx={listActionsStyle}>
-              <Box sx={listActionStyle} onClick={() => handleDelete(invitation.id)}>
-                <Trash title="Supprimer" size="22" />
-              </Box>
+              {isAdmin && (
+                <Box sx={listActionStyle} onClick={() => handleDelete(invitation.id)}>
+                  <Trash title="Supprimer" size="22" />
+                </Box>
+              )}
             </Box>
           </Flex>
         ))}

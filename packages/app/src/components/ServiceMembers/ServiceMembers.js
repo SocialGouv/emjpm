@@ -19,7 +19,7 @@ import {
 } from "./styles";
 
 const ServiceMembers = props => {
-  const { service } = props;
+  const { isAdmin, service } = props;
   const isAdminOptions = [
     { label: "Administrateur", value: true },
     { label: "Membre", value: false }
@@ -66,7 +66,7 @@ const ServiceMembers = props => {
           Invitations
         </Heading2>
         <Card width={[1]} p={4} mb={4}>
-          <ServiceMemberInvitations service={service} />
+          <ServiceMemberInvitations isAdmin={isAdmin} service={service} />
         </Card>
       </Box>
       <Box mb={4}>
@@ -84,25 +84,33 @@ const ServiceMembers = props => {
                 {format(new Date(member.user.created_at), "dd/MM/yyyy")}
               </Text>
               <Box sx={listAdminStyle}>
-                <Select
-                  id="urgent"
-                  name="urgent"
-                  width={200}
-                  placeholder="Est-ce une demande urgente"
-                  value={member.is_admin ? isAdminOptions[0] : isAdminOptions[1]}
-                  hasError
-                  onChange={({ value }) => handleIsAdminUpdate(member.id, value)}
-                  options={isAdminOptions}
-                />
+                {isAdmin ? (
+                  <Select
+                    id="urgent"
+                    name="urgent"
+                    width={200}
+                    placeholder="Est-ce une demande urgente"
+                    value={member.is_admin ? isAdminOptions[0] : isAdminOptions[1]}
+                    hasError
+                    onChange={({ value }) => handleIsAdminUpdate(member.id, value)}
+                    options={isAdminOptions}
+                  />
+                ) : member.is_admin ? (
+                  "Administrateur"
+                ) : (
+                  "Membre"
+                )}
               </Box>
               <Text sx={listDateStyle}>
                 {member.user.active ? "Activé" : "En attente de d'activation"}
               </Text>
-              <Box sx={listActionsStyle}>
-                <Box sx={listActionStyle} onClick={() => handleDelete(member.id)}>
-                  <Trash title="Supprimer" size="22" />
+              {isAdmin && (
+                <Box sx={listActionsStyle}>
+                  <Box sx={listActionStyle} onClick={() => handleDelete(member.id)}>
+                    <Trash title="Supprimer" size="22" />
+                  </Box>
                 </Box>
-              </Box>
+              )}
             </Flex>
           ))}
         </Card>

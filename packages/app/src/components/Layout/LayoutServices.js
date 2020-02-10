@@ -14,7 +14,7 @@ import { UserInformations } from "../UserInformations";
 import { dropDownLinks } from "./dropDownLink";
 
 const LayoutServices = props => {
-  const { children, hasNavigation = true, isAdmin } = props;
+  const { children, hasNavigation = true } = props;
 
   const navigationLinks = [
     {
@@ -35,8 +35,7 @@ const LayoutServices = props => {
     },
     {
       title: "Gestion des comptes",
-      url: "/services/members",
-      disabled: !isAdmin
+      url: "/services/members"
     }
   ];
 
