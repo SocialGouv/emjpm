@@ -2004,7 +2004,9 @@ tables:
   delete_permissions:
   - comment: null
     permission:
-      filter: {}
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
     role: service
   event_triggers:
   - definition:
@@ -2021,7 +2023,9 @@ tables:
   insert_permissions:
   - comment: null
     permission:
-      check: {}
+      check:
+        service_id:
+          _eq: X-Hasura-Service-Id
       columns:
       - id
       - email
@@ -2060,7 +2064,9 @@ tables:
       - email
       - token
       computed_fields: []
-      filter: {}
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
     role: service
   table: service_member_invitations
   update_permissions: []
@@ -2078,7 +2084,9 @@ tables:
   delete_permissions:
   - comment: null
     permission:
-      filter: {}
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
     role: service
   event_triggers: []
   insert_permissions: []
@@ -2102,7 +2110,9 @@ tables:
       - service_id
       - user_id
       computed_fields: []
-      filter: {}
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
     role: service
   - comment: null
     permission:
@@ -2120,7 +2130,9 @@ tables:
     permission:
       columns:
       - is_admin
-      filter: {}
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
       set: {}
     role: service
 - array_relationships:
@@ -2643,7 +2655,9 @@ tables:
     role: prepose
   - comment: null
     permission:
-      check: {}
+      check:
+        id:
+          _eq: X-Hasura-User-Id
       columns:
       - active
       - id
@@ -2791,7 +2805,13 @@ tables:
       - type
       - username
       computed_fields: []
-      filter: {}
+      filter:
+        _or:
+        - id:
+            _eq: X-Hasura-User-Id
+        - service_members:
+            service_id:
+              _eq: X-Hasura-Service-Id
     role: service
   - comment: null
     permission:
