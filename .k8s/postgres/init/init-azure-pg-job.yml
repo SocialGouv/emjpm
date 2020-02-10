@@ -28,7 +28,7 @@ spec:
               sh -x /mnt/script/init-db.sh
           resources:
             requests:
-              cpu: 500m
+              cpu: 0m
               memory: 256Mi
             limits:
               cpu: 500m
