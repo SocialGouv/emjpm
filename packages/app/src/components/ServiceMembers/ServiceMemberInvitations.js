@@ -5,7 +5,6 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 import { Trash } from "styled-icons/boxicons-regular";
-import { v4 as uuid } from "uuid";
 
 import { serviceMemberInvitationSchema } from "../../lib/validationSchemas";
 import { CREATE_SERVICE_MEMBER_INVITATION, DELETE_SERVICE_MEMBER_INVITATION } from "./mutations";
@@ -60,8 +59,7 @@ const ServiceMemberInvitations = props => {
       refetchQueries: ["ServiceMemberInvitations"],
       variables: {
         email: values.email,
-        service_id: service.id,
-        token: uuid()
+        service_id: service.id
       }
     });
 

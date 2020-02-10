@@ -1,4 +1,5 @@
 const express = require("express");
+const uid = require("rand-token").uid;
 
 const router = express.Router();
 const { Service } = require("../model/Service");
@@ -324,7 +325,10 @@ router.post("/email-service-member-invitation", async function(req, res) {
 
   await ServiceMemberInvitation.query()
     .findById(invitation.id)
-    .patch({ sent_at: new Date() });
+    .patch({
+      sent_at: new Date(),
+      token: uid(32)
+    });
 
   res.json({ success: true });
 });
