@@ -662,8 +662,8 @@ Deploy knex (prod):
     - HOST=${HASURA_HOST}
     #
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
-    - export HASURA_PG_USER_ENCODED=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER_ENCODED}' | base64 --decode)
-    - export HASURA_PG_PASSWORD_ENCODED=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_PASSWORD_ENCODED}' | base64 --decode)
+    - export POSTGRES_HASURA_USER_ENCODED=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER_ENCODED}' | base64 --decode)
+    - export POSTGRES_HASURA_PASSWORD_ENCODED=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_PASSWORD_ENCODED}' | base64 --decode)
   after_script:
     - cat values.yaml
 
