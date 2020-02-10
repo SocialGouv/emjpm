@@ -37,15 +37,12 @@ spec:
               value: /mnt/data
             - name: PGDATABASE
               value: emjpm
+            - name: PGUSER
+              value: ${ADMIN_PG_USER}
             - name: PGHOST
               value: ${PG_HOST}
-            - name: PGUSER
-              value: postgres
             - name: PGPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: ${K8S_PROJECT}-secret
-                  key: POSTGRES_PASSWORD
+              value: "${ADMIN_PG_PASSWORD}"
           volumeMounts:
             - mountPath: "/mnt/data"
               name: data
