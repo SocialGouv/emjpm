@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const USER_TOKEN = gql`
-  query AccessToken {
-    access_tokens {
+  query AccessToken($userId: Int) {
+    access_tokens(where: { user_id: { _eq: $userId } }) {
       access_token
       editor_id
       editor_url
