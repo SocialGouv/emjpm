@@ -37,11 +37,11 @@ spec:
             - name: BRANCH_HASH
               value: ${BRANCH_HASH}
             - name: PGUSER
-              value: ${ADMIN_PG_USER}
+              value: ${EMJPM_PG_USER}
             - name: PGHOST
               value: ${PG_HOST}
             - name: PGPASSWORD
-              value: "${ADMIN_PG_PASSWORD}"
+              value: "${EMJPM_PG_PASSWORD}"
           volumeMounts:
             - mountPath: "/mnt/script"
               name: script
