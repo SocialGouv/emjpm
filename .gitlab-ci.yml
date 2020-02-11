@@ -684,11 +684,11 @@ Deploy hasura (prod):
 
 ################### Deploy METABASE #############################
 
-Deploy metabase (incubateur):
+.deploy_metabase_stage: &deploy_metabase_stage
   extends:
     - .deploy_stage
-    # - .incubateur_stage
     - .base_docker_helm_image_stage
+  dependencies: []
   variables:
     CONTEXT: metabase
     PORT: 3000
@@ -718,6 +718,17 @@ Deploy metabase (incubateur):
     - helm just fetch "stable/metabase#0.9.4"
     - helm just render metabase metabase --values ./values.yaml
     - helm just apply metabase
+
+Deploy metabase (dev):
+  extends:
+    - .deploy_metabase_stage
+    - .dev_stage
+
+Deploy metabase (prod):
+  extends:
+    - .deploy_metabase_stage
+    - .incubateur_stage
+
 
 #######################################################################################################
 ##########################################               ##############################################
