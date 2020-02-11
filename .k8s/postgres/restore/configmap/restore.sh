@@ -8,6 +8,7 @@ echo "Restore with ${1}"
 
 pg_restore \
   --no-owner \
+  --no-acl \
   --exit-on-error \
   --format=c \
   --verbose \
