@@ -36,9 +36,9 @@ spec:
               memory: 512Mi
           env:
             - name: PGUSER
-              value: ${ADMIN_PG_USER}
+              value: ${EMJPM_PG_USER}
             - name: PGPASSWORD
-              value: "${ADMIN_PG_PASSWORD}"
+              value: "${EMJPM_PG_PASSWORD}"
             - name: PGHOST
               value: ${PG_HOST}
           volumeMounts:

@@ -45,11 +45,9 @@ if [[ -n "${PRODUCTION+x}" ]]; then
   #
   export DOMAIN="emjpm.fabrique.social.gouv.fr";
   export POSTGRES_DATABASE_EMJPM="emjpm"
-  export POSTGRES_DATABASE_METABASE="metabase"
 else
   export DOMAIN="${BRANCH_HASH}-${DOMAIN}";
   export POSTGRES_DATABASE_EMJPM="emjpm_${BRANCH_HASH}"
-  export POSTGRES_DATABASE_METABASE="metabase_${BRANCH_HASH}"
   #
 fi
 
@@ -59,7 +57,6 @@ export FRONTEND_HOST="${DOMAIN}";
 export GQL_SERVER_SRV_HOST="graphql-server-nodejs";
 export HASURA_HOST="hasura-${DOMAIN}";
 export HASURA_SRV_HOST="hasura-nodejs";
-export METABASE_HOST="metabase-${DOMAIN}";
 
 
 export API_URL="https://${API_HOST}"

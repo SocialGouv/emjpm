@@ -15,7 +15,6 @@ spec:
     # + 500m // graphql-server
     # + 550m // hasura
     # +  50m // hasura (check-db-ready)
-    # + 500m // metabase
     # + 100m // postgres
     # + 100m // backup cronjob (anonymize)
     # + 100m // backup cronjob (postgres)
@@ -31,7 +30,6 @@ spec:
     # + 256Mi // graphql-server
     # + 256Mi // hasura
     # +  32Mi // hasura (check-db-ready)
-    # + 128Mi // metabase
     # + 256Mi // postgres
     # +  64Mi // backup cronjob (anonymize)
     # +  64Mi // backup cronjob (postgres)

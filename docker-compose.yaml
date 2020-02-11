@@ -25,9 +25,6 @@ services:
       # API dedicated password
       - POSTGRES_EMJPM_USER=emjpm
       - POSTGRES_EMJPM_PASSWORD=test
-      # Metabase dedicated user
-      - POSTGRES_METABASE_USER=metabase
-      - POSTGRES_METABASE_PASSWORD=readonly
       # Hasura dedicated user
       - POSTGRES_HASURA_USER=hasura
       - POSTGRES_HASURA_PASSWORD=hasura
@@ -35,7 +32,7 @@ services:
       - "5434:5432"
     volumes:
       - emjpm-pgdata:/var/lib/postgresql/data
-      
+
   maildev:
     image: djfarrelly/maildev
     command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
