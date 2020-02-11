@@ -758,6 +758,7 @@ Restore postgres data:
   extends:
     - .base_docker_helm_image_stage
     - .dev_stage
+    - .deploy_stage
   when: manual
   script:
     - source ./.gitlab-ci/env.sh
