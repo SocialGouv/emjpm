@@ -1,5 +1,7 @@
-const test = async (req, res) => {
-  return res.status(200).json({ test: "test" });
-};
+const mesures = require("./mesures");
+const test = require("./test");
 
-module.exports = test;
+module.exports = {
+  test,
+  mesures
+};

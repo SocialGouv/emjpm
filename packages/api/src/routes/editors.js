@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const test = require("../../src/controllers/editor");
+const routes = require("../../src/controllers/editor");
 
-router.get("/test", test);
+router.get("/test", routes.test);
+router.get("/mesures", routes.mesures);
 
 module.exports = router;
