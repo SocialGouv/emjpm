@@ -38,7 +38,7 @@ spec:
             - name: PGUSER
               value: ${ADMIN_PG_USER}
             - name: PGPASSWORD
-              value: ${ADMIN_PG_PASSWORD}
+              value: "${ADMIN_PG_PASSWORD}"
             - name: PGHOST
               value: ${PG_HOST}
           volumeMounts:
