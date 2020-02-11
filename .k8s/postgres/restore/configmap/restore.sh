@@ -7,7 +7,6 @@ pg_isready
 echo "Restore with ${1}"
 
 pg_restore \
-  --clean \
   --if-exists \
   --exit-on-error \
   --format=c \
