@@ -36,9 +36,9 @@ spec:
               memory: 512Mi
           env:
             - name: PGUSER
-              value: ${EMJPM_PG_USER}
+              value: ${ADMIN_PG_USER}
             - name: PGPASSWORD
-              value: "${EMJPM_PG_PASSWORD}"
+              value: "${ADMIN_PG_PASSWORD}"
             - name: PGHOST
               value: ${PG_HOST}
             - name: BRANCH_HASH
