@@ -41,6 +41,8 @@ spec:
               value: "${EMJPM_PG_PASSWORD}"
             - name: PGHOST
               value: ${PG_HOST}
+            - name: BRANCH_HASH
+              value: ${BRANCH_HASH}
           volumeMounts:
             - mountPath: "/mnt/data"
               name: volume
