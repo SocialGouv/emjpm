@@ -924,6 +924,47 @@ Object {
 }
 `;
 
+exports[`service_member_invitations table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "email": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('service_member_invitations_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "sent_at": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "service_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "token": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
 exports[`service_members table schema 1`] = `
 Object {
   "id": Object {
