@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const jwtConfig = require("../config/jwt");
 const { Model } = require("objection");
 
+const { Mandataire } = require("./Mandataire");
 const { Role } = require("./Role");
 const { Tis } = require("./Tis");
 const { Service } = require("./Service");
@@ -50,6 +51,14 @@ class User extends Model {
             to: "user_role.role_id"
           },
           to: "role.id"
+        }
+      },
+      mandataire: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Mandataire,
+        join: {
+          from: "users.id",
+          to: "mandataires.user_id"
         }
       },
       service: {
