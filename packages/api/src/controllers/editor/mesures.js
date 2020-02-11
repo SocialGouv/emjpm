@@ -10,7 +10,6 @@ const mesures = async (req, res) => {
   let mesures = null;
   if (user.type === "service") {
     const service = await user.$relatedQuery("service");
-    console.log(service.id);
     mesures = await Mesures.query()
       .where("service_id", service.id)
       .where("status", "=", status);
