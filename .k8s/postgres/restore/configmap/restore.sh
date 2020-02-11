@@ -11,6 +11,7 @@ pg_restore \
   --format=c \
   --verbose \
   --dbname ${EMJPM_DB} \
+  --schema=public \
   ${1}
 
 # psql -d emjpm -c "ALTER SCHEMA public OWNER TO emjpm"
