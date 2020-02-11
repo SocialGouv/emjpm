@@ -22,6 +22,92 @@ tables:
       select_aggregate: null
       select_by_pk: null
       update: null
+  delete_permissions:
+  - comment: null
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: service
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: editors
+    using:
+      manual_configuration:
+        column_mapping:
+          editor_id: id
+        remote_table: editors
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - user_id
+      - access_token
+      - editor_id
+      - editor_url
+      computed_fields: []
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - editor_id
+      - id
+      - user_id
+      - access_token
+      - editor_url
+      computed_fields: []
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - editor_id
+      - id
+      - user_id
+      - access_token
+      - editor_url
+      computed_fields: []
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: service
+  table: access_tokens
+  update_permissions: []
+- array_relationships: []
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
   delete_permissions: []
   event_triggers: []
   insert_permissions: []
@@ -351,7 +437,37 @@ tables:
   insert_permissions: []
   is_enum: false
   object_relationships: []
-  select_permissions: []
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - api_token
+      - name
+      computed_fields: []
+      filter: {}
+    role: individuel
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - api_token
+      - name
+      computed_fields: []
+      filter: {}
+    role: prepose
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - api_token
+      - name
+      computed_fields: []
+      filter: {}
+    role: service
   table: editors
   update_permissions: []
 - array_relationships:

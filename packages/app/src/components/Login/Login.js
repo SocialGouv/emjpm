@@ -34,10 +34,6 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
   Router.push(json.url);
   ReactPiwik.push(["trackEvent", "login", "success"]);
   trackUser();
-  // TODO remove that hack when mandataire is all done
-  if (json.url === "/mandataires") {
-    document.location.reload(true);
-  }
   return json;
 };
 

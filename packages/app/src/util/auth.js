@@ -82,12 +82,17 @@ export const auth = ctx => {
     pathname === "/inscription" ||
     pathname === "/" ||
     pathname === "/account/reset-password" ||
-    pathname === "/account/forgot-password";
+    pathname === "/account/forgot-password" ||
+    pathname === "/application/authorization";
+
+  const isOauth = pathname === "/application/authorization";
 
   if (token) {
     const { url, role } = jwtDecode(token);
     const isTokenPath = pathname.indexOf(routes[role]) !== -1;
-    if (!url) {
+    if (isOauth) {
+      return token;
+    } else if (!url) {
       clearToken();
       if (ctx.req) {
         ctx.res.writeHead(302, { Location: "/login" });

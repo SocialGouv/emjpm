@@ -7,7 +7,7 @@
     }
   },
   "packages": [
-    "optional/*",
+    "optional/e2e/.runners/*",
     "packages/*"
   ],
   "npmClient": "yarn",

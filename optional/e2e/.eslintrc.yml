@@ -1,9 +1,0 @@
-env:
-  cypress/globals: true
-
-extends:
-  - "@socialgouv/eslint-config-recommended"
-  - plugin:cypress/recommended
-
-plugins:
-  - cypress

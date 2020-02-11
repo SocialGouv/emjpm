@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`access_tokens table schema 1`] = `
+Object {
+  "access_token": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "editor_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "editor_url": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('access_tokens_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`city table schema 1`] = `
 Object {
   "code_postal": Object {
@@ -1126,6 +1161,7 @@ Object {
 
 exports[`should list all tables 1`] = `
 Array [
+  "access_tokens",
   "city",
   "commentaires",
   "departements",

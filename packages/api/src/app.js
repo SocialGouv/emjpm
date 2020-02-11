@@ -6,8 +6,9 @@ const Sentry = require("@sentry/node");
 
 const pkg = require("../package.json");
 const authV2Routes = require("./routes/auth-v2");
+const oauth2Routes = require("./routes/oauth2");
+const editorsRoutes = require("./routes/editors");
 const configuration = require("./env");
-
 const app = express();
 
 if (configuration.sentryPublicDSN) {
@@ -39,8 +40,16 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/api/v2/auth", authV2Routes);
+app.use("/api/v2/oauth", oauth2Routes);
+app.use(
+  "/api/v2/editors",
+  passport.authenticate("bearer", { session: false }),
+  editorsRoutes
+);
+
 app.use("/webhook", require("./routes/webhook"));
 
 app.get("/ping", function(req, res) {

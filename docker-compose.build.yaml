@@ -13,8 +13,22 @@ version: "3"
 #
 
 services:
+  db:
+    command:
+      [
+        "-c",
+        "fsync=off",
+        "-c",
+        "synchronous_commit=off",
+        "-c",
+        "full_page_writes=off",
+      ]
+
   maildev:
     image: djfarrelly/maildev
+    ports:
+      - 25:25
+      - 1080:1080
 
   api:
     build:
@@ -25,8 +39,10 @@ services:
       - 4000:4000
     depends_on:
       - db
+      - maildev
     links:
       - db
+      - maildev
 
   graphql-server:
     build:
@@ -42,14 +58,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:80
+    volumes:
+      - ./nginx-logs:/var/log/nginx
 
   graphql-engine:
-    # NOTE(douglasduteil): might fail if the api or db are too slow to start...
+    env_file: .env.build
     restart: unless-stopped
+    ports:
+      - 5000:5000
     depends_on:
-      - api
       - db
-      - graphql-server
+      - api
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
@@ -61,3 +80,4 @@ services:
       WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION: http://api:4000/webhook/email-account-validation
       WEB_HOOK_URL_MESURES_IMPORT: http://api:4000/webhook/mesures-import
       WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION: http://api:4000/webhook/email-service-member-invitation
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/auth/v2/jwks"}'
