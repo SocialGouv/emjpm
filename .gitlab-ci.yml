@@ -711,7 +711,8 @@ Restore postgres data:
   extends:
     - .base_docker_helm_image_stage
     - .dev_stage
-    - .deploy_stage
+    # - .deploy_stage
+  stage: "Prepare"
   when: manual
   script:
     - source ./.gitlab-ci/env.sh
@@ -720,8 +721,8 @@ Restore postgres data:
 
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
 
-    - export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
-    - export ADMIN_PG_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD}' | base64 --decode)
+    - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
+    - export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD}' | base64 --decode)
 
     - kubectl scale --replicas=0 deploy/${HASURA_SRV_HOST}
 
