@@ -712,6 +712,8 @@ Restore postgres data:
     - .base_docker_helm_image_stage
     - .dev_stage
     # - .deploy_stage
+  variables:
+    IMAGE_TAG: $CI_COMMIT_SHA
   stage: "Prepare"
   when: manual
   script:
