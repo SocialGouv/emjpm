@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.21.0](https://github.com/SocialGouv/emjpm/compare/v25.20.0...v25.21.0) (2020-02-12)
+
+
+### Bug Fixes
+
+* **direction-statistic:** optimize query to avoid timeout ([#1467](https://github.com/SocialGouv/emjpm/issues/1467)) ([ccfa5e8](https://github.com/SocialGouv/emjpm/commit/ccfa5e8fc1bb6d1c13f8f455ce7f5afe5cef10e9))
+
+
+
+
+
 # [25.20.0](https://github.com/SocialGouv/emjpm/compare/v25.19.2...v25.20.0) (2020-01-30)
 
 **Note:** Version bump only for package @emjpm/graphql-server

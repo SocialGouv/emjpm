@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.21.0](https://github.com/SocialGouv/emjpm/compare/v25.20.0...v25.21.0) (2020-02-12)
+
+
+### Features
+
+* **admin-token:** handle user token in admin ([#1473](https://github.com/SocialGouv/emjpm/issues/1473)) ([e18537b](https://github.com/SocialGouv/emjpm/commit/e18537b27de49413e4b9ce1a5c26b66511803ccc))
+* **api-editor-route:** add route and protection with jwt ([#1466](https://github.com/SocialGouv/emjpm/issues/1466)) ([71c321d](https://github.com/SocialGouv/emjpm/commit/71c321d872563830b652d617e5ae900c6a3fac0e))
+* **editor-mesures-api:** add filterable api for mesures ([#1474](https://github.com/SocialGouv/emjpm/issues/1474)) ([d97e881](https://github.com/SocialGouv/emjpm/commit/d97e881b5f8ab3dd418fd267966403cde29baefb))
+* **oauth2:** add working authorization page and api ([#1463](https://github.com/SocialGouv/emjpm/issues/1463)) ([661d84f](https://github.com/SocialGouv/emjpm/commit/661d84fb24ac746738a387388284ee8897aaa523))
+* **token-authorization:** add base query ([#1470](https://github.com/SocialGouv/emjpm/issues/1470)) ([0ced02c](https://github.com/SocialGouv/emjpm/commit/0ced02c786984ad59c36d46344e461dcd55bd6de))
+
+
+
+
+
 # [25.20.0](https://github.com/SocialGouv/emjpm/compare/v25.19.2...v25.20.0) (2020-01-30)
 
 
