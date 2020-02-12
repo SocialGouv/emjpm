@@ -35,6 +35,8 @@ spec:
               cpu: 500m
               memory: 512Mi
           env:
+            - name: PGSSLMODE
+              value: "require"
             - name: PGUSER
               value: ${EMJPM_PG_USER}
             - name: PGPASSWORD

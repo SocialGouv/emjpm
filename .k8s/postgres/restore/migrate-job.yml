@@ -34,6 +34,8 @@ spec:
               cpu: 500m
               memory: 512Mi
           env:
+            - name: PGSSLMODE
+              value: "require"
             - name: DATABASE_URL
               value: "psql://${EMJPM_PG_USER_ENCODED}:${EMJPM_PG_PASSWORD_ENCODED}@${PG_HOST}/${POSTGRES_DATABASE_EMJPM}"
             - name: NODE_ENV
