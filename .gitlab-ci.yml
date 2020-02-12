@@ -52,7 +52,7 @@ stages:
 - "Build Image"
 - "Registration"
 - "Deploy"
-- "After Deploy"
+- "After deploy"
 - "Notify Finished Deployment"
 
 #
