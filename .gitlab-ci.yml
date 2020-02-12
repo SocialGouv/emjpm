@@ -26,6 +26,9 @@ include:
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_k8s_ns_stage.yml
     ref: v4.6.0
+  - project: SocialGouv/gitlab-ci-yml
+    file: /base_delete_useless_managed_postgresql_stage.yml
+    ref: v7.3.0
 
 variables:
   # CI variables
