@@ -52,7 +52,6 @@ stages:
 - "Build Image"
 - "Registration"
 - "Deploy"
-- "After deploy"
 - "Notify Finished Deployment"
 
 #
@@ -706,31 +705,16 @@ Deploy hasura (prod):
     - .deploy_hasura_stage
     - .incubateur_stage
 
-#######################################################################################################
-##########################################               ##############################################
-##########################################     ACTION    ##############################################
-##########################################               ##############################################
-#######################################################################################################
-
-.afterdeploy_stage:
-  stage: "After deploy"
-  dependencies: []
-  services:
-    - docker:dind
-  variables:
-    IMAGE_TAG: ${CI_COMMIT_SHA}
-    REGISTRY: ${CI_REGISTRY_IMAGE}
-
 ################### Restore DATA #############################
 
 Restore postgres data:
   extends:
     - .base_docker_helm_image_stage
     - .dev_stage
-    - .afterdeploy_stage
+    - .deploy_stage
   when: manual
   dependencies:
-    - Deploy knex (dev)
+    - "Register knex image"
   script:
     - source ./.gitlab-ci/env.sh
 
