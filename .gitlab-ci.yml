@@ -714,7 +714,7 @@ Restore postgres data:
     - .deploy_stage
   when: manual
   dependencies:
-    - "Deploy knex (dev)"
+    - Deploy knex (dev)
   script:
     - source ./.gitlab-ci/env.sh
 
