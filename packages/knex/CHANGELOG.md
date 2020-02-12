@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.21.0](https://github.com/SocialGouv/emjpm/compare/v25.20.0...v25.21.0) (2020-02-12)
+
+
+### Features
+
+* **oauth2:** add working authorization page and api ([#1463](https://github.com/SocialGouv/emjpm/issues/1463)) ([661d84f](https://github.com/SocialGouv/emjpm/commit/661d84fb24ac746738a387388284ee8897aaa523))
+
+
+
+
+
 # [25.20.0](https://github.com/SocialGouv/emjpm/compare/v25.19.2...v25.20.0) (2020-01-30)
 
 **Note:** Version bump only for package @emjpm/knex
