@@ -25,17 +25,14 @@ services:
       # API dedicated password
       - POSTGRES_EMJPM_USER=emjpm
       - POSTGRES_EMJPM_PASSWORD=test
-      # Metabase dedicated user
-      - POSTGRES_METABASE_USER=metabase
-      - POSTGRES_METABASE_PASSWORD=metabasePassword
       # Hasura dedicated user
       - POSTGRES_HASURA_USER=hasura
-      - POSTGRES_HASURA_PASSWORD=hasuraPassword
+      - POSTGRES_HASURA_PASSWORD=hasura
     ports:
       - "5434:5432"
     volumes:
       - emjpm-pgdata:/var/lib/postgresql/data
-      
+
   maildev:
     image: djfarrelly/maildev
     command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
@@ -53,7 +50,7 @@ services:
     # network_mode: "host"
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasuraPassword@db:5432/emjpm
+      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/v2/auth/jwks"}'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'anonymous'
