@@ -2,6 +2,7 @@ import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 
 import { LayoutServices } from "../../src/components/Layout";
+import { ServiceMemberInvitationCreate } from "../../src/components/ServiceMemberInvitationCreate";
 import { ServiceMemberInvitations } from "../../src/components/ServiceMemberInvitations";
 import { ServiceMembers } from "../../src/components/ServiceMembers";
 import { UserContext } from "../../src/components/UserContext";
@@ -14,7 +15,8 @@ const ServiceMembersPage = () => {
   return (
     <LayoutServices>
       <BoxWrapper mt={6} px={2}>
-        <ServiceMemberInvitations service={service} isAdmin={is_admin} />
+        {is_admin && <ServiceMemberInvitationCreate service={service} isAdmin={is_admin} />}
+        {is_admin && <ServiceMemberInvitations service={service} isAdmin={is_admin} />}
         <ServiceMembers service={service} isAdmin={is_admin} />
       </BoxWrapper>
     </LayoutServices>

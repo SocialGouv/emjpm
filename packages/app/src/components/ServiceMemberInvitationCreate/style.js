@@ -1,35 +1,35 @@
-export const listStyle = {
+export const listStyle = i => ({
   borderRadius: 4,
   alignItems: "center",
-  bg: "white",
-  px: 4,
-  py: 3,
+  bg: i % 2 ? "" : "muted",
+  px: 2,
+  py: 4,
   mb: 1
-};
+});
 
 export const listEmailStyle = {
   textOverflow: "ellipsis",
   overflow: "hidden",
-  fontFamily: "heading",
-  fontWeight: "bold",
-  fontSize: 2,
   width: 250
 };
 
+export const listIdStyle = {
+  color: "textSecondary",
+  width: 50
+};
+
 export const listDateStyle = {
-  fontWeight: "600",
-  fontSize: 1,
   color: "textSecondary",
   width: 300
 };
 
 export const listActionStyle = {
-  width: 150,
+  width: 24,
   mx: 2,
   cursor: "pointer",
   color: "primary",
   ":hover": {
-    textDecoration: "underline"
+    color: "text"
   }
 };
 
@@ -39,6 +39,5 @@ export const listActionsStyle = {
 
 export const listAdminStyle = {
   width: 200,
-  cursor: "pointer",
   mr: 4
 };

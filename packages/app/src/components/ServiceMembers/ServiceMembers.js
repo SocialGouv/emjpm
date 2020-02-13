@@ -1,10 +1,9 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { BoxWrapper, Card, CheckBox, Heading2, Text } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, CheckBox, Heading2, Text } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { ServiceMemberInvitations } from "../ServiceMemberInvitations";
 import { DELETE_SERVICE_MEMBER, UPDATE_SERVICE_MEMBER_IS_ADMIN } from "./mutations";
 import { SERVICE_MEMBERS } from "./queries";
 import {
@@ -52,16 +51,8 @@ const ServiceMembers = props => {
 
   const { service_members } = data;
   return (
-    <BoxWrapper mt={6} px={2}>
-      <Box mb={4}>
-        <Heading2 width={[1]} mb="2">
-          Invitations
-        </Heading2>
-        <Card width={[1]} p={4} mb={4}>
-          <ServiceMemberInvitations isAdmin={isAdmin} service={service} />
-        </Card>
-      </Box>
-      <Box mb={4}>
+    <BoxWrapper>
+      <Box>
         <Heading2 width={[1]} mb="2">
           Membres du service et accès
         </Heading2>
@@ -76,11 +67,19 @@ const ServiceMembers = props => {
               {member.user.active ? "Utilisateur actif" : "En attente de d'activation"}
             </Text>
             <Box sx={listAdminStyle}>
-              <CheckBox
-                isChecked={member.is_admin}
-                onChange={() => handleIsAdminUpdate(member.id, !member.is_admin)}
-                label="Administrateur"
-              />
+              {isAdmin ? (
+                <Box sx={{ cursor: "pointer" }}>
+                  <CheckBox
+                    isChecked={member.is_admin}
+                    onChange={() => handleIsAdminUpdate(member.id, !member.is_admin)}
+                    label="Administrateur"
+                  />
+                </Box>
+              ) : (
+                <Text fontWeight="bold" color="black" sx={listDateStyle}>
+                  Membre
+                </Text>
+              )}
             </Box>
             {isAdmin && (
               <Box sx={listActionsStyle}>

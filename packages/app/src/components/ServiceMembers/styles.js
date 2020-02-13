@@ -44,6 +44,5 @@ export const listActionsStyle = {
 
 export const listAdminStyle = {
   width: 200,
-  cursor: "pointer",
   mr: 4
 };
