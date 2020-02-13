@@ -1,6 +1,7 @@
 import { addMonths } from "date-fns";
 import { DataSource } from "../../../datasource";
 import { SearchMesureResult } from "../../../datasource/mesure.api";
+import { logger } from "../../../logger";
 import {
   MesureTypeCategoryEvolution,
   QueryMesureTypeCategoryEvolutionArgs
@@ -24,6 +25,7 @@ export const mesureTypeCategoryEvolution = async (
   }));
 
   for (const month of months) {
+    logger.info(`${month.year} ${month.month} - START`);
     const startMonthDate = new Date(month.year, month.month, 1);
     const endMonthDate = addMonths(startMonthDate, 1);
     const mesures: SearchMesureResult[] = await dataSources.mesureAPI.searchMesures(
@@ -39,6 +41,7 @@ export const mesureTypeCategoryEvolution = async (
         region: args.region
       }
     );
+    logger.info(`${month.year} ${month.month} - ${mesures.length} mesures`);
 
     const mesuresByCategoryMap = res.map(elm => ({
       number: 0,
@@ -60,6 +63,7 @@ export const mesureTypeCategoryEvolution = async (
         elm => elm.mesureTypeCategory === mesuresByCategory.type
       );
       if (!mesureTypeEvolution) {
+        logger.error(`No category type found for ${mesuresByCategory.type}`);
         throw new Error(`No category type found for ${mesuresByCategory.type}`);
       }
 
@@ -67,13 +71,17 @@ export const mesureTypeCategoryEvolution = async (
         elm => elm.month === month.month && elm.year === month.year
       );
       if (!monthlyEvolution) {
+        logger.error(
+          `No monthly evolution found for year ${month.year}, month ${month.month}`
+        );
         throw new Error(
           `No monthly evolution found for year ${month.year}, month ${month.month}`
         );
       }
       monthlyEvolution.number = mesuresByCategory.number;
+      logger.info(`${month.year} ${month.month} - END`);
     }
   }
-
+  logger.info(res);
   return res;
 };
