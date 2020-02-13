@@ -1,7 +1,7 @@
 const { User } = require("../../model/User");
 const { Mesures } = require("../../model/Mesures");
 
-const DEFAULT_STATUS = "Mesure en cours";
+const DEFAULT_STATUS = "Mesure en attente";
 
 const mesures = async (req, res) => {
   const {
