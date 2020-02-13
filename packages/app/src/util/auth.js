@@ -78,6 +78,7 @@ export const auth = ctx => {
   const isPublic =
     pathname === "/login" ||
     pathname === "/signup" ||
+    pathname === "/signup/invitation" ||
     pathname === "/inscription" ||
     pathname === "/" ||
     pathname === "/account/reset-password" ||
