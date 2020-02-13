@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
-import { AdminEditorActivity } from "../../../src/components/AdminEditors/AdminEditorActivity";
+import { AdminEditorApiLogs } from "../../../src/components/AdminEditors/AdminEditorApiLogs";
 import { AdminEditorInformations } from "../../../src/components/AdminEditors/AdminEditorInformations";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
@@ -13,22 +13,22 @@ const Editor = props => {
 
   return (
     <LayoutAdmin>
-      <BoxWrapper mt={4} px={1}>
+      <BoxWrapper>
         <Link href="/admin/users">
-          <StyledLink mb={4} display="block">
+          <StyledLink my={4} display="block">
             &larr; Retour
           </StyledLink>
         </Link>
         <Tabs>
           <TabList>
             <Tab>Informations</Tab>
-            <Tab>Activité</Tab>
+            <Tab>API Logs</Tab>
           </TabList>
           <TabPanel>
             <AdminEditorInformations editorId={editorId} />
           </TabPanel>
           <TabPanel>
-            <AdminEditorActivity editorId={editorId} />
+            <AdminEditorApiLogs editorId={editorId} />
           </TabPanel>
         </Tabs>
       </BoxWrapper>

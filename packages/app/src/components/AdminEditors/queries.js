@@ -24,3 +24,19 @@ export const EDITOR = gql`
     }
   }
 `;
+
+export const API_LOGS_BY_EDITOR_ID = gql`
+  query ApiLogsByEditorId($editorId: Int) {
+    api_logs(where: { editor_id: { _eq: $editorId } }) {
+      id
+      request
+      response
+      token
+      created_at
+      editor {
+        id
+        name
+      }
+    }
+  }
+`;
