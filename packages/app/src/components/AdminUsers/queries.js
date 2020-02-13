@@ -19,33 +19,6 @@ export const USERS = gql`
       type
       email
       active
-      mandataire {
-        id
-        adresse
-        code_postal
-        ville
-      }
-      magistrat {
-        id
-        ti {
-          id
-          ville
-        }
-      }
-      user_tis(order_by: { ti: { ville: asc } }) {
-        id
-        ti {
-          id
-          ville
-        }
-      }
-      service_members {
-        id
-        service {
-          id
-          etablissement
-        }
-      }
     }
   }
 `;
