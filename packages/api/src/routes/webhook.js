@@ -1,8 +1,10 @@
 const express = require("express");
+const uid = require("rand-token").uid;
 
 const router = express.Router();
 const { Service } = require("../model/Service");
 const { ServiceMember } = require("../model/ServiceMember");
+const { ServiceMemberInvitation } = require("../model/ServiceMemberInvitation");
 const { Mandataire } = require("../model/Mandataire");
 const { Tis } = require("../model/Tis");
 const { User } = require("../model/User");
@@ -16,6 +18,9 @@ const { reservationEmail } = require("../email/reservation-email");
 const { cancelReservationEmail } = require("../email/cancel-reservation-email");
 const { validationEmail } = require("../email/validation-email");
 const { mesuresImportEmail } = require("../email/mesures-import-email");
+const {
+  serviceMemberInvitationMail
+} = require("../email/service-member-invitation-mail");
 
 const { getRegionCode } = require("../util/DepartementUtil");
 
@@ -309,6 +314,21 @@ router.post("/mesures-import", async function(req, res) {
   for (const userEmail of userEmails) {
     mesuresImportEmail(userEmail, importSummary);
   }
+
+  res.json({ success: true });
+});
+
+router.post("/email-service-member-invitation", async function(req, res) {
+  const invitation = req.body.event.data.new;
+
+  serviceMemberInvitationMail(invitation);
+
+  await ServiceMemberInvitation.query()
+    .findById(invitation.id)
+    .patch({
+      sent_at: new Date(),
+      token: uid(32)
+    });
 
   res.json({ success: true });
 });

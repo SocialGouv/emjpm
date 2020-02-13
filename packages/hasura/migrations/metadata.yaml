@@ -2117,7 +2117,93 @@ tables:
       select_aggregate: null
       select_by_pk: null
       update: null
-  delete_permissions: []
+  delete_permissions:
+  - comment: null
+    permission:
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    role: service
+  event_triggers:
+  - definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    headers: []
+    name: email-service-member-invitation
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook_from_env: WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION
+  insert_permissions:
+  - comment: null
+    permission:
+      check:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      columns:
+      - id
+      - email
+      - token
+      - created_at
+      - sent_at
+      - service_id
+      set: {}
+    role: service
+  is_enum: false
+  object_relationships:
+  - comment: null
+    name: service
+    using:
+      foreign_key_constraint_on: service_id
+  select_permissions:
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - email
+      - id
+      - service_id
+      - token
+      computed_fields: []
+      filter: {}
+    role: anonymous
+  - comment: null
+    permission:
+      allow_aggregations: false
+      columns:
+      - id
+      - service_id
+      - created_at
+      - sent_at
+      - email
+      - token
+      computed_fields: []
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    role: service
+  table: service_member_invitations
+  update_permissions: []
+- array_relationships: []
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions:
+  - comment: null
+    permission:
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    role: service
   event_triggers: []
   insert_permissions: []
   is_enum: false
@@ -2136,12 +2222,13 @@ tables:
       allow_aggregations: false
       columns:
       - id
-      - user_id
+      - is_admin
       - service_id
+      - user_id
       computed_fields: []
       filter:
-        user_id:
-          _eq: X-Hasura-User-Id
+        service_id:
+          _eq: X-Hasura-Service-Id
     role: service
   - comment: null
     permission:
@@ -2154,7 +2241,16 @@ tables:
       filter: {}
     role: ti
   table: service_members
-  update_permissions: []
+  update_permissions:
+  - comment: null
+    permission:
+      columns:
+      - is_admin
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      set: {}
+    role: service
 - array_relationships:
   - comment: null
     name: service_antennes
@@ -2675,7 +2771,9 @@ tables:
     role: prepose
   - comment: null
     permission:
-      check: {}
+      check:
+        id:
+          _eq: X-Hasura-User-Id
       columns:
       - active
       - id
@@ -2824,8 +2922,12 @@ tables:
       - username
       computed_fields: []
       filter:
-        id:
-          _eq: X-Hasura-User-Id
+        _or:
+        - id:
+            _eq: X-Hasura-User-Id
+        - service_members:
+            service_id:
+              _eq: X-Hasura-Service-Id
     role: service
   - comment: null
     permission:
