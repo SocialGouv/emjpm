@@ -118,7 +118,7 @@ postgresqlPassword: ${POSTGRESQL_PASSWORD}
 ## Create a database
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run
 ##
-# postgresqlDatabase: ${POSTGRES_DATABASE}
+# postgresqlDatabase: ${POSTGRES_DATABASE_EMJPM}
 
 ## PostgreSQL data dir
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md

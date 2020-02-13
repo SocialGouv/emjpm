@@ -13,8 +13,10 @@ deployment:
 
 
   env:
+    - name: PGSSLMODE
+      value: "require"
     - name: HASURA_GRAPHQL_DATABASE_URL
-      value: "postgres://${POSTGRES_HASURA_USER}:${POSTGRES_HASURA_PASSWORD}@${POSTGRES_SRV_HOST}/${POSTGRES_DATABASE}"
+      value: "postgres://${POSTGRES_HASURA_USER_ENCODED}:${POSTGRES_HASURA_PASSWORD_ENCODED}@${PG_HOST}/${POSTGRES_DATABASE_EMJPM}"
     - name: HASURA_GRAPHQL_ENABLE_CONSOLE
       value: "true"
     - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
@@ -40,20 +42,6 @@ deployment:
       value: "http://${API_SRV_HOST}/webhook/email-cancel-reservation"
     - name: WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION
       value: "http://${API_SRV_HOST}/webhook/email-service-member-invitation"
-
-  initContainers:
-    - name: wait-for-postgres
-      image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/wait-for-postgres:0.19.0
-      env:
-        - name: PGHOST
-          value: ${POSTGRES_SRV_HOST}
-      resources:
-        limits:
-          cpu: 50m
-          memory: 32Mi
-        requests:
-          cpu: 0m
-          memory: 0Mi
 
 service:
   port: ${PORT}

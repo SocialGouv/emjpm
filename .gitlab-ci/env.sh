@@ -21,9 +21,6 @@ export DOMAIN="emjpm.dev.fabrique.social.gouv.fr";
 export K8S_PROJECT="emjpm"
 export K8S_NAMESPACE="emjpm-feature-${BRANCH_HASH}"
 
-export POSTGRES_DATABASE="emjpm"
-
-#
 
 if [[ "${BRANCH_NAME}" = "master" ]]; then
   export ENVIRONMENT="dev"
@@ -47,8 +44,10 @@ if [[ -n "${PRODUCTION+x}" ]]; then
   export K8S_NAMESPACE="emjpm"
   #
   export DOMAIN="emjpm.fabrique.social.gouv.fr";
+  export POSTGRES_DATABASE_EMJPM="emjpm"
 else
   export DOMAIN="${BRANCH_HASH}-${DOMAIN}";
+  export POSTGRES_DATABASE_EMJPM="emjpm_${BRANCH_HASH}"
   #
 fi
 
@@ -58,8 +57,7 @@ export FRONTEND_HOST="${DOMAIN}";
 export GQL_SERVER_SRV_HOST="graphql-server-nodejs";
 export HASURA_HOST="hasura-${DOMAIN}";
 export HASURA_SRV_HOST="hasura-nodejs";
-export METABASE_HOST="metabase-${DOMAIN}";
-export POSTGRES_SRV_HOST="postgres-postgresql"
+
 
 export API_URL="https://${API_HOST}"
 export FRONTEND_URL="https://${FRONTEND_HOST}"
@@ -96,7 +94,6 @@ printenv | grep \
   -e HASURA_SRV_HOST \
   -e METABASE_HOST \
   -e METABASE_URL \
-  -e POSTGRES_SRV_HOST \
   \
   -e CONTEXT \
   -e PORT \
