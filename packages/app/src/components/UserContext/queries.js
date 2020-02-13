@@ -24,14 +24,15 @@ export const GET_SERVICE_USERS = gql`
       username
       service_members {
         id
+        service_id
+        user_id
+        is_admin
         user {
+          email
           prenom
           nom
           id
         }
-        id
-        service_id
-        user_id
         service {
           id
           mesures_in_progress

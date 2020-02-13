@@ -4,6 +4,9 @@ const { Mandataire } = require("../../model/Mandataire");
 const { Magistrat } = require("../../model/Magistrat");
 const { UserTis } = require("../../model/UserTis");
 const { UserRole } = require("../../model/UserRole");
+const {
+  ServiceMemberInvitation
+} = require("../../model/ServiceMemberInvitation");
 const { Role } = require("../../model/Role");
 const { Direction } = require("../../model/Direction");
 const { errorHandler } = require("../../db/errors");
@@ -102,13 +105,13 @@ const createRole = async (userId, type) => {
 
 const signup = async (req, res) => {
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
 
   try {
-    const body = req.body;
-
+    const { body } = req;
     const { type, nom, prenom, password, username, email } = body.user;
 
     const user = await User.query()
@@ -121,7 +124,9 @@ const signup = async (req, res) => {
         prenom,
         email: email.toLowerCase().trim()
       });
+
     await createRole(user.id, type);
+
     switch (type) {
       case "individuel":
       case "prepose":
@@ -129,8 +134,19 @@ const signup = async (req, res) => {
         await createUserTis(body.tis, user.id);
         break;
       case "service": {
-        const { service_id } = body.service;
+        const {
+          invitation,
+          service: { service_id }
+        } = body;
+
         await createServiceMember(user.id, service_id);
+
+        if (invitation) {
+          await ServiceMemberInvitation.query()
+            .delete()
+            .where("id", invitation.id);
+        }
+
         break;
       }
       case "ti": {
@@ -150,10 +166,13 @@ const signup = async (req, res) => {
       default:
         return;
     }
+
     const tis = body.magistrat ? [body.magistrat.ti] : body.tis;
     const code_postal = body.mandataire ? body.mandataire.code_postal : "";
     const tiNames = await getTisNames(tis);
+
     inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
+
     return res.json({ success: true });
   } catch (err) {
     errorHandler(err, res);
