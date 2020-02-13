@@ -1,9 +1,14 @@
 exports.up = function(knex) {
   return knex.schema.createTable("api_logs", function(table) {
     table.increments();
-    table.string("request").notNullable();
-    table.string("response").notNullable();
-    table.string("token").notNullable();
+    table
+      .integer("editor_id")
+      .references("id")
+      .inTable("editors");
+    table.string("token", 1200);
+    table.jsonb("request");
+    table.jsonb("response");
+    table.dateTime("created_at").defaultTo(knex.fn.now());
   });
 };
 
