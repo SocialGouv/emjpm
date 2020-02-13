@@ -1,28 +1,22 @@
 #!/bin/bash
 
+#!/bin/bash
+set -e
+
 POSTGRES_EMJPM_USER=emjpm
 POSTGRES_HASURA_USER=hasura
 
 EMJPM_DB=emjpm_${BRANCH_HASH}
 
-pg_isready
+if psql -lqt | cut -d \| -f 1 | grep -qw ${EMJPM_DB}; then
+  exit 0;
+else
+psql -v ON_ERROR_STOP=1 postgres  <<-EOSQL
+  CREATE DATABASE ${EMJPM_DB};
+  \c ${EMJPM_DB}
 
-echo "Restore with ${1}"
+  CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-pg_restore \
-  --no-owner \
-  --no-acl \
-  --exit-on-error \
-  --format=c \
-  --verbose \
-  --dbname ${EMJPM_DB} \
-  ${1}
-
-# psql -d emjpm -c "ALTER SCHEMA public OWNER TO emjpm"
-psql -d ${EMJPM_DB} -c "DROP SCHEMA hdb_catalog CASCADE"
-psql -d ${EMJPM_DB} -c "DROP SCHEMA hdb_views CASCADE"
-
-psql -v ON_ERROR_STOP=1 ${EMJPM_DB}  <<-EOSQL
   -- EMJPM
   GRANT CONNECT ON DATABASE ${EMJPM_DB} TO ${POSTGRES_EMJPM_USER};
   GRANT ALL PRIVILEGES ON DATABASE ${EMJPM_DB} TO ${POSTGRES_EMJPM_USER};
@@ -39,4 +33,4 @@ psql -v ON_ERROR_STOP=1 ${EMJPM_DB}  <<-EOSQL
 
 EOSQL
 
-sleep 10s
+fi
