@@ -47,25 +47,25 @@ export const formatMesure = mesure => {
     antenne: service_antenne ? service_antenne.name : null,
     cabinet: cabinet ? cabinet : null,
     civilite: civilite ? civilite : "H",
-    codePostal: code_postal ? code_postal : "non reseigné",
-    dateOuverture: date_ouverture ? date_ouverture : "non reseigné",
+    codePostal: code_postal ? code_postal : "non renseigné",
+    dateOuverture: date_ouverture ? date_ouverture : "non renseigné",
     dateOuvertureFormated: date_ouverture
       ? format(new Date(date_ouverture), "dd/MM/yyyy")
-      : "non reseigné",
+      : "non renseigné",
     href: `/services/mesure/${id}/`,
     id: id,
     antenneId: antenne_id,
     isUrgent: is_urgent,
     service: { service_id: service_id },
     mandataire: { mandataire_id: mandataire_id },
-    judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "non reseigné",
-    numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
+    judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "non renseigné",
+    numeroDossier: numero_dossier ? numero_dossier : "non renseigné",
     numeroRg: numero_rg ? numero_rg : "RG-00000000",
-    residence: residence ? residence : "non reseigné",
-    status: status ? currentStatus : "non reseigné",
+    residence: residence ? residence : "non renseigné",
+    status: status ? currentStatus : "non renseigné",
     tiId: ti ? ti.id : null,
-    tribunal: ti ? ti.etablissement : "Tribunal non reseigné",
-    type: type ? type : "type de mesure non reseigné",
-    ville: ville ? ville : "ville non reseigné"
+    tribunal: ti ? ti.etablissement : "Tribunal non renseigné",
+    type: type ? type : "type de mesure non renseigné",
+    ville: ville ? ville : "ville non renseigné"
   };
 };
