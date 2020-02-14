@@ -29,25 +29,25 @@ export const formatMesureList = mesureList => {
       antenneId: antenne_id ? antenne_id : null,
       cabinet: cabinet ? cabinet : null,
       civilite: civilite ? civilite : "H",
-      codePostal: code_postal ? code_postal : "non reseigné",
-      dateOuverture: date_ouverture ? date_ouverture : "non reseigné",
+      codePostal: code_postal ? code_postal : "non renseigné",
+      dateOuverture: date_ouverture ? date_ouverture : "non renseigné",
       dateOuvertureFormated: date_ouverture
         ? format(new Date(date_ouverture), "dd/MM/yyyy")
-        : "non reseigné",
+        : "non renseigné",
       href: `/services/mesure/${id}/`,
       id: id,
       isUrgent: is_urgent,
-      judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "non reseigné",
+      judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "non renseigné",
       latitude: latitude || 45.5,
       longitude: longitude || 0.5,
-      numeroDossier: numero_dossier ? numero_dossier : "non reseigné",
+      numeroDossier: numero_dossier ? numero_dossier : "non renseigné",
       numeroRg: numero_rg ? numero_rg : "RG-00000000",
-      residence: residence ? residence : "non reseigné",
-      status: status ? status : "non reseigné",
+      residence: residence ? residence : "non renseigné",
+      status: status ? status : "non renseigné",
       tiId: ti ? ti.id : null,
-      tribunal: ti ? ti.etablissement : "Tribunal non reseigné",
-      type: type ? type : "type de mesure non reseigné",
-      ville: ville ? ville : "ville non reseigné"
+      tribunal: ti ? ti.etablissement : "Tribunal non renseigné",
+      type: type ? type : "type de mesure non renseigné",
+      ville: ville ? ville : "ville non renseigné"
     };
   });
 
