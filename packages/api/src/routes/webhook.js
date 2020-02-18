@@ -321,14 +321,19 @@ router.post("/mesures-import", async function(req, res) {
 router.post("/email-service-member-invitation", async function(req, res) {
   const invitation = req.body.event.data.new;
 
-  serviceMemberInvitationMail(invitation);
-
-  await ServiceMemberInvitation.query()
-    .findById(invitation.id)
-    .patch({
+  const serviceMemberInvitation = await ServiceMemberInvitation.query().patchAndFetchById(
+    invitation.id,
+    {
       sent_at: new Date(),
       token: uid(32)
-    });
+    }
+  );
+
+  const service = await Service.query().findById(
+    serviceMemberInvitation.service_id
+  );
+
+  serviceMemberInvitationMail(serviceMemberInvitation, service);
 
   res.json({ success: true });
 });
