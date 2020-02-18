@@ -1,36 +1,35 @@
 const { sendEmail } = require(".");
 
-const text = (invitation, url) =>
+const text = (service, url) =>
   `Madame, Monsieur,
 
-  ${invitation.token}
+  Vous êtes invité par l'administrateur du service mandataire ${service.etablissement} à créer un compte sur e-mjpm.
 
-  ${url}
+  Veuillez cliquer sur le lien suivant: ${url}
 
   À bientôt
 
   L’équipe e-mjpm.`;
 
-const html = (invitation, url) =>
+const html = (service, url) =>
   `Madame, Monsieur,
   <br><br>
-    ${invitation.token}
-    <a href=${url}>réinitialiser mon mot de passe</a>.
+    Vous êtes invité par l'administrateur du service mandataire ${service.etablissement} à créer un compte sur e-mjpm.
+    <br><br>
+    Veuillez cliquer sur le lien suivant <a href=${url}>Créer mon compte</a>.
   <br><br>
     À bientôt
   <br><br>
   L’équipe e-mjpm.`;
 
-const serviceMemberInvitationMail = async invitation => {
+const serviceMemberInvitationMail = async (invitation, service) => {
   const url = `${process.env.APP_URL}/signup/invitation?token=${invitation.token}`;
-
-  console.log(url);
 
   sendEmail(
     invitation.email,
-    "e-MJPM : vous êtes invité à vous inscrire sur la plateforme e-MJPM",
-    text(invitation, url),
-    html(invitation, url)
+    "Vous êtes invité à vous inscrire sur la plateforme e-mjpm",
+    text(service, url),
+    html(service, url)
   ).catch(e => {
     /* eslint-disable no-console */
     console.log(e);
