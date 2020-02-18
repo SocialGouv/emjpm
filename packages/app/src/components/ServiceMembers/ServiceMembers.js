@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { BoxWrapper, CheckBox, Heading2, Text } from "@socialgouv/emjpm-ui-core";
+import { CheckBox, Heading2, Text } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
-import React from "react";
+import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
 import { DELETE_SERVICE_MEMBER, UPDATE_SERVICE_MEMBER_IS_ADMIN } from "./mutations";
@@ -16,7 +16,7 @@ import {
 } from "./styles";
 
 const ServiceMembers = props => {
-  const { isAdmin, service } = props;
+  const { isAdmin, service, userId } = props;
   const [deleteServiceMember] = useMutation(DELETE_SERVICE_MEMBER);
   const [updateServiceMemberIsAdmin] = useMutation(UPDATE_SERVICE_MEMBER_IS_ADMIN);
 
@@ -51,12 +51,12 @@ const ServiceMembers = props => {
 
   const { service_members } = data;
   return (
-    <BoxWrapper>
-      <Box>
-        <Heading2 width={[1]} mb="2">
-          Membres du service et accès
-        </Heading2>
-        {service_members.map((member, i) => (
+    <Box mb="4">
+      <Heading2 width={[1]} mb="2">
+        Membres du service et accès
+      </Heading2>
+      {service_members.map((member, i) => {
+        return (
           <Flex sx={listStyle} index={i} key={member.user.email}>
             <Box sx={listEmailStyle}>{member.user.email}</Box>
             <Text sx={listDateStyle}>
@@ -68,20 +68,28 @@ const ServiceMembers = props => {
             </Text>
             <Box sx={listAdminStyle}>
               {isAdmin ? (
-                <Box sx={{ cursor: "pointer" }}>
-                  <CheckBox
-                    isChecked={member.is_admin}
-                    onChange={() => handleIsAdminUpdate(member.id, !member.is_admin)}
-                    label="Administrateur"
-                  />
-                </Box>
+                <Fragment>
+                  {userId === member.user_id ? (
+                    <Text fontWeight="bold" color="black" sx={listDateStyle}>
+                      Administrateur
+                    </Text>
+                  ) : (
+                    <Box sx={{ cursor: "pointer" }}>
+                      <CheckBox
+                        isChecked={member.is_admin}
+                        onChange={() => handleIsAdminUpdate(member.id, !member.is_admin)}
+                        label="Administrateur"
+                      />
+                    </Box>
+                  )}
+                </Fragment>
               ) : (
                 <Text fontWeight="bold" color="black" sx={listDateStyle}>
                   Membre
                 </Text>
               )}
             </Box>
-            {isAdmin && (
+            {isAdmin && userId !== member.user_id && (
               <Box sx={listActionsStyle}>
                 <Box sx={listActionStyle} onClick={() => handleDelete(member.id)}>
                   Supprimer l’utilisateur
@@ -89,9 +97,9 @@ const ServiceMembers = props => {
               </Box>
             )}
           </Flex>
-        ))}
-      </Box>
-    </BoxWrapper>
+        );
+      })}
+    </Box>
   );
 };
 
