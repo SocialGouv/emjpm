@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import { LayoutMandataire } from "../../src/components/Layout";
 import { ServiceAntennes } from "../../src/components/ServiceAntennes";
-import { PreferencesPanel } from "../../src/components/ServiceSidebar";
+import { ServiceSidebar } from "../../src/components/ServiceSidebar";
 import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
@@ -27,7 +27,7 @@ const Informations = () => {
           >
             <Heading2>Mesures souhaitées par votre service</Heading2>
             <UserInformations
-              Component={props => <PreferencesPanel isDescriptionHidden={true} {...props} mt="3" />}
+              Component={props => <ServiceSidebar isDescriptionHidden={true} {...props} mt="3" />}
             />
           </Box>
         </Flex>
