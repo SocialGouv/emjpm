@@ -112,6 +112,7 @@ const signup = async (req, res) => {
 
   try {
     const { body } = req;
+    const { invitation } = body;
     const { type, nom, prenom, password, username, email } = body.user;
 
     const user = await User.query()
@@ -122,6 +123,7 @@ const signup = async (req, res) => {
         type,
         nom,
         prenom,
+        active: invitation ? true : false,
         email: email.toLowerCase().trim()
       });
 
