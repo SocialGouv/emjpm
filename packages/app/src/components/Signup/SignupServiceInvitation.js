@@ -56,7 +56,7 @@ export const SignupServiceInvitation = props => {
           setErrors(errors);
         },
         onSuccess: () => {
-          Router.push("/signup/congratulation");
+          Router.push("/login");
         }
       });
     }

@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Heading2, Text } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
-import React from "react";
+import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
 import { DELETE_SERVICE_MEMBER_INVITATION } from "./mutations";
@@ -38,31 +38,33 @@ const ServiceMemberInvitations = props => {
   };
 
   const serviceMemberInvitations = data.service_member_invitations;
-
   return (
-    <Box mb={4}>
-      <Heading2 width={[1]} mb="2">
-        Invitations en attente ({serviceMemberInvitations.length})
-      </Heading2>
-      <Box>
-        {!!serviceMemberInvitations.length || <Text>Aucune invitations en attente.</Text>}
-        {serviceMemberInvitations.map((invitation, i) => (
-          <Flex sx={listStyle} index={i} key={invitation.email}>
-            <Box sx={listEmailStyle}>{invitation.email}</Box>
-            <Text sx={listDateStyle}>
-              {`Invité le ${format(new Date(invitation.sent_at), "dd/MM/yyyy")}`}
-            </Text>
-            <Box sx={listActionsStyle}>
-              {isAdmin && (
-                <Box sx={listActionStyle} onClick={() => handleDelete(invitation.id)}>
-                  {`Supprimer l'invitation`}
+    <Fragment>
+      {serviceMemberInvitations.length ? (
+        <Box mb={4}>
+          <Heading2 width={[1]} mb="2">
+            Invitations en attente ({serviceMemberInvitations.length})
+          </Heading2>
+          <Box>
+            {serviceMemberInvitations.map((invitation, i) => (
+              <Flex sx={listStyle} index={i} key={invitation.email}>
+                <Box sx={listEmailStyle}>{invitation.email}</Box>
+                <Text sx={listDateStyle}>
+                  {`Invité le ${format(new Date(invitation.created_at), "dd/MM/yyyy")}`}
+                </Text>
+                <Box sx={listActionsStyle}>
+                  {isAdmin && (
+                    <Box sx={listActionStyle} onClick={() => handleDelete(invitation.id)}>
+                      {`Supprimer l'invitation`}
+                    </Box>
+                  )}
                 </Box>
-              )}
-            </Box>
-          </Flex>
-        ))}
-      </Box>
-    </Box>
+              </Flex>
+            ))}
+          </Box>
+        </Box>
+      ) : null}
+    </Fragment>
   );
 };
 

@@ -9,15 +9,14 @@ import { UserContext } from "../../src/components/UserContext";
 import { withAuthSync } from "../../src/util/auth";
 
 const ServiceMembersPage = () => {
-  const { service_members } = useContext(UserContext);
+  const { service_members, id } = useContext(UserContext);
   const [{ is_admin, service }] = service_members;
-
   return (
     <LayoutServices>
       <BoxWrapper mt={6} px={2}>
-        {is_admin && <ServiceMemberInvitationCreate service={service} isAdmin={is_admin} />}
+        <ServiceMembers service={service} userId={id} isAdmin={is_admin} />
         {is_admin && <ServiceMemberInvitations service={service} isAdmin={is_admin} />}
-        <ServiceMembers service={service} isAdmin={is_admin} />
+        {is_admin && <ServiceMemberInvitationCreate service={service} isAdmin={is_admin} />}
       </BoxWrapper>
     </LayoutServices>
   );
