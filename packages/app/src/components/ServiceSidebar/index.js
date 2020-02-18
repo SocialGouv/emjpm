@@ -1,3 +1,3 @@
-import { PreferencesPanel } from "./PreferencesPanel";
+import { ServiceSidebar } from "./ServiceSidebar";
 
-export { PreferencesPanel };
+export { ServiceSidebar };

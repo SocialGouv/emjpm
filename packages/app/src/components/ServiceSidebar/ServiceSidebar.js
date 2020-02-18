@@ -7,7 +7,7 @@ import { Box, Text } from "rebass";
 import { GET_SERVICES_DISPONIBILITY } from "./queries";
 import { PreferencesPanelStyle } from "./style";
 
-const PreferencesPanel = props => {
+const ServiceSidebar = props => {
   const { isDescriptionHidden } = props;
   const { data, error, loading } = useQuery(GET_SERVICES_DISPONIBILITY);
 
@@ -55,14 +55,14 @@ const PreferencesPanel = props => {
   );
 };
 
-PreferencesPanel.defaultProps = {
+ServiceSidebar.defaultProps = {
   currentAntenne: null,
   isDescriptionHidden: false
 };
 
-PreferencesPanel.propTypes = {
+ServiceSidebar.propTypes = {
   currentAntenne: PropTypes.string,
   isDescriptionHidden: PropTypes.bool
 };
 
-export { PreferencesPanel };
+export { ServiceSidebar };
