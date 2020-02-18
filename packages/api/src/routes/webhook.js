@@ -329,7 +329,11 @@ router.post("/email-service-member-invitation", async function(req, res) {
     }
   );
 
-  serviceMemberInvitationMail(serviceMemberInvitation);
+  const service = await Service.query().findById(
+    serviceMemberInvitation.service_id
+  );
+
+  serviceMemberInvitationMail(serviceMemberInvitation, service);
 
   res.json({ success: true });
 });

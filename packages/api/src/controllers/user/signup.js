@@ -173,7 +173,9 @@ const signup = async (req, res) => {
     const code_postal = body.mandataire ? body.mandataire.code_postal : "";
     const tiNames = await getTisNames(tis);
 
-    inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
+    if (!user.active) {
+      inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
+    }
 
     return res.json({ success: true });
   } catch (err) {
