@@ -2,39 +2,47 @@ const jwtDecode = require("jwt-decode");
 
 const { ApiLog } = require("../model/ApiLog");
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
   const {
     headers: { authorization },
-    protocol,
-    host,
     method,
     originalUrl,
-    params,
-    query
+    params
   } = req;
   const token = authorization ? authorization.slice(7, -1) : null;
-  const { editorId } = jwtDecode(token);
-  const tempSend = res.send;
 
-  res.send = async function asyncSend(response) {
-    const request = {
-      url: originalUrl,
-      method,
-      params,
-      query,
-      protocol,
-      host
+  let decodedToken;
+
+  try {
+    decodedToken = jwtDecode(token);
+  } catch (error) {
+    decodedToken = null;
+  }
+
+  if (decodedToken) {
+    const { editorId } = token;
+    const tempSend = res.send;
+
+    res.send = async function asyncSend(response) {
+      await ApiLog.query().insert({
+        editor_id: editorId,
+        request_url: originalUrl,
+        request_method: method,
+        request_params: params,
+        response,
+        token
+      });
+
+      tempSend.call(this, response);
     };
-
+  } else {
     await ApiLog.query().insert({
-      editor_id: editorId,
-      request,
-      response,
+      request_url: originalUrl,
+      request_method: method,
+      request_params: params,
       token
     });
-
-    tempSend.call(this, response);
-  };
+  }
 
   next();
 };

@@ -1,29 +1,86 @@
-import { useQuery } from "@apollo/react-hooks";
-import { Heading4 } from "@socialgouv/emjpm-ui-core";
+import { useApolloClient } from "@apollo/react-hooks";
+import { Button, Card, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
-import React from "react";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import { Box, Flex } from "rebass";
-import { Eye } from "styled-icons/octicons";
 
-import { API_LOGS_BY_EDITOR_ID } from "./queries";
+import { useDebounce } from "../../lib/hooks";
+import { API_LOGS, API_LOGS_SEARCH } from "./queries";
 
-const AdminEditorApiLogs = props => {
-  const { editorId } = props;
-  const { data, loading, error } = useQuery(API_LOGS_BY_EDITOR_ID, {
-    variables: { editorId }
-  });
+const AdminApiLogs = () => {
+  const [searchQuery, setSearchQuery] = useState(null);
+  const [isLoading, setLoading] = useState(0);
+  const [logs, setLogs] = useState([]);
+  const debouncedSearchQuery = useDebounce(searchQuery, 2000);
+  const client = useApolloClient();
 
-  if (loading) {
-    return <div>Chargement</div>;
-  }
+  useEffect(() => {
+    const run = async () => {
+      const { data } = await client.query({ query: API_LOGS });
 
-  if (error || !data.api_logs) {
-    return <div>Erreur</div>;
-  }
+      setLogs(data.api_logs);
+    };
+
+    run();
+  }, [client]);
+
+  useEffect(() => {
+    setLoading(true);
+
+    if (!debouncedSearchQuery) {
+      const run = async () => {
+        const { data } = await client.query({ query: API_LOGS });
+
+        setLogs(data.api_logs);
+        setLoading(false);
+      };
+
+      run();
+      return;
+    }
+
+    const run = async query => {
+      const { data } = await client.query({
+        query: API_LOGS_SEARCH,
+        variables: { query }
+      });
+
+      setLoading(false);
+      setLogs(data.api_logs);
+    };
+
+    run(debouncedSearchQuery);
+  }, [client, debouncedSearchQuery]);
+
+  const handleSearchChange = event => {
+    setSearchQuery(event.target.value);
+  };
 
   return (
-    <Box>
-      <Heading4 mb={2}>API Logs</Heading4>
+    <Card>
+      <Flex alignItems="center" mt="2" mb="4">
+        <Heading4>API Logs</Heading4>
+        <Flex m="auto" alignItems="center" justifyContent="flex-end" sx={{ flexGrow: 1 }}>
+          {!isLoading || <Spinner />}
+          <Box
+            as="input"
+            placeholder="Rechercher..."
+            sx={{
+              "&:focus": {
+                outline: "none",
+                borderColor: "textTertiary"
+              },
+              width: 300,
+              border: "1px solid",
+              borderColor: "whiteGray",
+              borderRadius: 4,
+              p: 2
+            }}
+            onChange={handleSearchChange}
+          />
+        </Flex>
+      </Flex>
       <Flex
         sx={{
           mb: 2,
@@ -86,9 +143,9 @@ const AdminEditorApiLogs = props => {
           RESPONSE
         </Box>
       </Flex>
-      {data.api_logs.length ? (
+      {logs.length ? (
         <Box>
-          {data.api_logs.map(log => (
+          {logs.map(log => (
             <Flex
               key={log.id}
               sx={{
@@ -114,7 +171,7 @@ const AdminEditorApiLogs = props => {
                   mr: 2
                 }}
               >
-                {log.request.method}
+                {log.request_method}
               </Box>
               <Box
                 sx={{
@@ -125,7 +182,7 @@ const AdminEditorApiLogs = props => {
                   mr: 2
                 }}
               >
-                {log.request.url}
+                {log.request_url}
               </Box>
               <Box
                 sx={{
@@ -158,16 +215,20 @@ const AdminEditorApiLogs = props => {
                   justifyContent: "flex-end"
                 }}
               >
-                <Eye size="18" />
+                <Link href={`/admin/api_logs/${log.id}`}>
+                  <a>
+                    <Button>Voir</Button>
+                  </a>
+                </Link>
               </Flex>
             </Flex>
           ))}
         </Box>
       ) : (
-        <Box>Aucun logs enregistrés.</Box>
+        <Box>Aucun résultats.</Box>
       )}
-    </Box>
+    </Card>
   );
 };
 
-export { AdminEditorApiLogs };
+export { AdminApiLogs };

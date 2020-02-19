@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const Sentry = require("@sentry/node");
 
-const apiLog = require("./util/apiLog");
+const apiLog = require("./middlewares/apiLog");
 const pkg = require("../package.json");
 const authV2Routes = require("./routes/auth-v2");
 const oauth2Routes = require("./routes/oauth2");
@@ -45,7 +45,7 @@ app.use("/api/v2/auth", authV2Routes);
 app.use("/api/v2/oauth", oauth2Routes);
 app.use(
   "/api/v2/editors",
-  [passport.authenticate("bearer", { session: false }), apiLog],
+  [apiLog, passport.authenticate("bearer", { session: false })],
   editorsRoutes
 );
 
@@ -102,6 +102,7 @@ app.use(function(err, req, res, next) {
     return next(err);
   }
   // console.error(err);
+
   const body = {
     code: err.code,
     message: err.message,

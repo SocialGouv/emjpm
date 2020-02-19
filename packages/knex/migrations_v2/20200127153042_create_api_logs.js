@@ -6,7 +6,9 @@ exports.up = function(knex) {
       .references("id")
       .inTable("editors");
     table.string("token", 1200);
-    table.jsonb("request");
+    table.string("request_url");
+    table.string("request_method");
+    table.jsonb("request_params");
     table.jsonb("response");
     table.dateTime("created_at").defaultTo(knex.fn.now());
   });
