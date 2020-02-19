@@ -1,6 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-<<<<<<< HEAD
 exports[`access_tokens table schema 1`] = `
 Object {
   "access_token": Object {
@@ -11,27 +10,16 @@ Object {
   },
   "editor_id": Object {
     "defaultValue": null,
-=======
-exports[`api_logs table schema 1`] = `
-Object {
-  "id": Object {
-    "defaultValue": "nextval('api_logs_id_seq'::regclass)",
->>>>>>> test(api): reupdate knex test snapshot
     "maxLength": null,
     "nullable": false,
     "type": "integer",
   },
-<<<<<<< HEAD
   "editor_url": Object {
-=======
-  "request": Object {
->>>>>>> test(api): reupdate knex test snapshot
     "defaultValue": null,
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
   },
-<<<<<<< HEAD
   "id": Object {
     "defaultValue": "nextval('access_tokens_id_seq'::regclass)",
     "maxLength": null,
@@ -43,19 +31,59 @@ Object {
     "maxLength": null,
     "nullable": false,
     "type": "integer",
-=======
-  "response": Object {
+  },
+}
+`;
+
+exports[`api_logs table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "editor_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "id": Object {
+    "defaultValue": "nextval('api_logs_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "request_method": Object {
     "defaultValue": null,
     "maxLength": 255,
-    "nullable": false,
+    "nullable": true,
     "type": "character varying",
+  },
+  "request_params": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+  "request_url": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "response": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
   },
   "token": Object {
     "defaultValue": null,
-    "maxLength": 255,
-    "nullable": false,
+    "maxLength": 1200,
+    "nullable": true,
     "type": "character varying",
->>>>>>> test(api): reupdate knex test snapshot
   },
 }
 `;
@@ -1186,11 +1214,8 @@ Object {
 
 exports[`should list all tables 1`] = `
 Array [
-<<<<<<< HEAD
   "access_tokens",
-=======
   "api_logs",
->>>>>>> test(api-logs): update knex test snpashot
   "city",
   "commentaires",
   "departements",
