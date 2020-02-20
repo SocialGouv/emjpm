@@ -112,6 +112,29 @@ tables:
   event_triggers: []
   insert_permissions: []
   is_enum: false
+  object_relationships:
+  - comment: null
+    name: editor
+    using:
+      foreign_key_constraint_on: editor_id
+  select_permissions: []
+  table: api_logs
+  update_permissions: []
+- array_relationships: []
+  computed_fields: []
+  configuration:
+    custom_column_names: {}
+    custom_root_fields:
+      delete: null
+      insert: null
+      select: null
+      select_aggregate: null
+      select_by_pk: null
+      update: null
+  delete_permissions: []
+  event_triggers: []
+  insert_permissions: []
+  is_enum: false
   object_relationships: []
   select_permissions:
   - comment: null
