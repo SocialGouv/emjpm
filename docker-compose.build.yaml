@@ -1,5 +1,4 @@
 version: "3"
-
 #
 # In development we can start more services
 #
@@ -11,7 +10,6 @@ version: "3"
 #  - 5000 : hasura
 #  - 5434 : postgres
 #
-
 services:
   db:
     command:
@@ -23,13 +21,11 @@ services:
         "-c",
         "full_page_writes=off",
       ]
-
   maildev:
     image: djfarrelly/maildev
     ports:
       - 25:25
       - 1080:1080
-
   api:
     build:
       context: packages/api
@@ -43,14 +39,12 @@ services:
     links:
       - db
       - maildev
-
   graphql-server:
     build:
       context: packages/graphql-server
     env_file: .env.build
     ports:
       - 4001:4001
-
   frontend:
     env_file: .env.build
     build:
@@ -60,7 +54,6 @@ services:
       - 3000:80
     volumes:
       - ./nginx-logs:/var/log/nginx
-
   graphql-engine:
     env_file: .env.build
     restart: unless-stopped
@@ -73,11 +66,4 @@ services:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/api/v2/auth/jwks"}'
-      WHATEVER_URL: http://graphql-server:4001/graphql
-      WEB_HOOK_URL_EMAIL_RESERVATION: http://api:4000/webhook/email-reservation
-      WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION: http://api:4000/webhook/email-cancel-reservation
-      WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION: http://api:4000/webhook/email-account-validation
-      WEB_HOOK_URL_MESURES_IMPORT: http://api:4000/webhook/mesures-import
-      WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION: http://api:4000/webhook/email-service-member-invitation
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/auth/v2/jwks"}'
