@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const Sentry = require("@sentry/node");
 
+const apiLog = require("./middlewares/apiLog");
 const pkg = require("../package.json");
 const authV2Routes = require("./routes/auth-v2");
 const oauth2Routes = require("./routes/oauth2");
@@ -30,15 +31,13 @@ const corsOptions = {
   origin: true
 };
 
+const bodyParserOptions = {
+  limit: "10mb"
+};
+
 app.use(cors(corsOptions));
-
-app.use(
-  bodyParser.json({
-    limit: "10mb"
-  })
-);
+app.use(bodyParser.json(bodyParserOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -46,7 +45,7 @@ app.use("/api/v2/auth", authV2Routes);
 app.use("/api/v2/oauth", oauth2Routes);
 app.use(
   "/api/v2/editors",
-  passport.authenticate("bearer", { session: false }),
+  [apiLog, passport.authenticate("bearer", { session: false })],
   editorsRoutes
 );
 
@@ -103,6 +102,7 @@ app.use(function(err, req, res, next) {
     return next(err);
   }
   // console.error(err);
+
   const body = {
     code: err.code,
     message: err.message,

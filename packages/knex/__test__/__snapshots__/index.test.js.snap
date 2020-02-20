@@ -35,6 +35,59 @@ Object {
 }
 `;
 
+exports[`api_logs table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "editor_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "id": Object {
+    "defaultValue": "nextval('api_logs_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "request_method": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "request_params": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+  "request_url": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "response": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+  "token": Object {
+    "defaultValue": null,
+    "maxLength": 1200,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
 exports[`city table schema 1`] = `
 Object {
   "code_postal": Object {
@@ -1162,6 +1215,7 @@ Object {
 exports[`should list all tables 1`] = `
 Array [
   "access_tokens",
+  "api_logs",
   "city",
   "commentaires",
   "departements",
