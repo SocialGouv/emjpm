@@ -33,7 +33,7 @@ const TokenRequest = () => {
         <Box>
           <Heading4 mb="1">{`Demande d'accès à l'api métier Emjpm.`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Indiquez le nom de votre logitiel métier et votre email.`}
+            {`Indiquez le nom de votre logiciel métier et votre email.`}
           </Text>
         </Box>
       </Box>
@@ -47,7 +47,7 @@ const TokenRequest = () => {
               type="text"
               hasError={formik.errors.name && formik.touched.name}
               onChange={formik.handleChange}
-              placeholder="Le nom de votre logitiel métier"
+              placeholder="Le nom de votre logiciel métier"
             />
             {formik.touched.name && <InlineError message={formik.errors.name} fieldId="name" />}
           </Field>
@@ -66,7 +66,7 @@ const TokenRequest = () => {
           <Flex alignItems="center" justifyContent="flex-end">
             <Box>
               <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
-                {`Demander une authorisation d'accès`}
+                {`Demander une autorisation d'accès`}
               </Button>
             </Box>
           </Flex>
