@@ -15,13 +15,6 @@ export interface SearchMesureResultWrapper {
 }
 
 export interface SearchMesuresParam {
-  opening?: {
-    between?: {
-      start: string;
-      end: string;
-    };
-    lt?: string;
-  };
   closed?: {
     between?: {
       start: string;
@@ -29,6 +22,7 @@ export interface SearchMesuresParam {
     };
     gt_or_null?: string;
   };
+  court?: NullableNumber;
   created?: {
     between?: {
       start: string;
@@ -36,10 +30,19 @@ export interface SearchMesuresParam {
     };
     lt?: string;
   };
-  region?: NullableNumber;
   department?: NullableNumber;
-  court?: NullableNumber;
+  opening?: {
+    between?: {
+      start: string;
+      end: string;
+    };
+    lt?: string;
+  };
+  region?: NullableNumber;
   status?: MesureStatus;
+  type?: {
+    _in: string[];
+  };
 }
 
 export type SearchMesureResult = Pick<
@@ -89,6 +92,11 @@ export class MesureAPI extends AuthDataSource {
 
   private buildFilters(params: SearchMesuresParam): string[] {
     const filters = [];
+    if (params.type) {
+      if (params.type._in) {
+        filters.push(`type: { _in: ${JSON.stringify(params.type._in)} }`);
+      }
+    }
     if (params.created) {
       if (params.created.between) {
         const between = params.created.between;
