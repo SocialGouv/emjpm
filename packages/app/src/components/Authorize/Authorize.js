@@ -45,7 +45,7 @@ const Authorize = props => {
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading4 mb="1">{`Connectez votre compte E-mjpm à votre logitiel métier.`}</Heading4>
+          <Heading4 mb="1">{`Connectez votre compte E-mjpm à votre logiciel métier.`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
             {`Indiquez votre choix, vos informations E-mjpm seront partagé avec ce dernier, pour faciliter l'échange et la fluidité des services`}
           </Text>

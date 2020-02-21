@@ -8,7 +8,7 @@ import { ADD_EDITOR } from "./mutations";
 import { cardStyle } from "./style";
 
 export const AdminEditorCreate = () => {
-  const [addService] = useMutation(ADD_EDITOR);
+  const [addEditor] = useMutation(ADD_EDITOR);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     // TODO(paullaunay): generate key on server-side via hasura webhook or postgres func
@@ -17,7 +17,7 @@ export const AdminEditorCreate = () => {
       .substring(2);
 
     try {
-      await addService({
+      await addEditor({
         variables: {
           name: values.name,
           api_token
@@ -36,7 +36,7 @@ export const AdminEditorCreate = () => {
   };
 
   return (
-    <Card sx={cardStyle} width="100%">
+    <Card sx={cardStyle} p="0" width="100%">
       <AdminEditorForm handleSubmit={handleSubmit} handleCancel={handleCancel} />
     </Card>
   );

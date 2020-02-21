@@ -24,3 +24,14 @@ export const EDITOR = gql`
     }
   }
 `;
+
+export const EDITOR_REQUESTS = gql`
+  query editorRequests {
+    editor_token_requests {
+      name
+      id
+      email
+      created_at
+    }
+  }
+`;
