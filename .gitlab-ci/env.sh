@@ -28,6 +28,12 @@ if [[ "${BRANCH_NAME}" = "master" ]]; then
   export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
 fi
 
+if [[ "${BRANCH_NAME}" = "apitest" ]]; then
+  export ENVIRONMENT="dev"
+  export BRANCH_HASH=apitest;
+  export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
+fi
+
 if [[ -n "${COMMIT_TAG}" ]]; then
   export ENVIRONMENT="preproduction"
   export NODE_ENV="production"
