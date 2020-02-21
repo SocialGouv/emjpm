@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const routes = require("../../src/controllers/editor");
+const mesures = require("../../src/controllers/mesures");
 
-router.get("/test", routes.test);
-router.get("/mesures", routes.mesures);
+router.get("/mesures", mesures.index);
+router.post("/mesures", mesures.create);
 
 module.exports = router;
