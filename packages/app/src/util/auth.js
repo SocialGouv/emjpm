@@ -83,7 +83,8 @@ export const auth = ctx => {
     pathname === "/" ||
     pathname === "/account/reset-password" ||
     pathname === "/account/forgot-password" ||
-    pathname === "/application/authorization";
+    pathname === "/application/authorization" ||
+    pathname === "/application/token-request";
 
   const isOauth = pathname === "/application/authorization";
 

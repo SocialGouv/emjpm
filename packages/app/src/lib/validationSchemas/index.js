@@ -1,5 +1,6 @@
 import { adminEditorSchema } from "./adminEditorSchema";
 import { adminTribunalSchema } from "./adminTribunalSchema";
+import { editorTokenSchema } from "./editorTokenSchema";
 import { forgotPasswordSchema } from "./forgotPasswordSchema";
 import { loginSchema } from "./loginSchema";
 import { magistratEditSchema } from "./magistratEditSchema";
@@ -43,5 +44,6 @@ export {
   signupDirectionSchema,
   signupMagistratSchema,
   signupSchema,
-  signupServiceSchema
+  signupServiceSchema,
+  editorTokenSchema
 };
