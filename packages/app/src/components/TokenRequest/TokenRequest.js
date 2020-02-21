@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { editorTokenSchema } from "../../lib/validationSchemas";
@@ -9,15 +9,22 @@ import { EDITOR_TOKEN_REQUEST } from "./mutations";
 
 const TokenRequest = () => {
   const [EditorTokenRequest] = useMutation(EDITOR_TOKEN_REQUEST);
+  const [isMessageVisible, toggleMessage] = useState(false);
+  const [isErrorMessageVisible, toggleErrorMessage] = useState(false);
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting }) => {
-      EditorTokenRequest({
-        variables: {
-          email: values.email,
-          name: values.name
-        }
-      });
+    onSubmit: async (values, { setSubmitting }) => {
+      try {
+        await EditorTokenRequest({
+          variables: {
+            email: values.email,
+            name: values.name
+          }
+        });
+        toggleMessage(true);
+      } catch {
+        toggleErrorMessage(true);
+      }
       setSubmitting(false);
     },
     validationSchema: editorTokenSchema,
@@ -35,6 +42,34 @@ const TokenRequest = () => {
           <Text lineHeight="1.5" color="textSecondary">
             {`Indiquez le nom de votre logiciel métier et votre email.`}
           </Text>
+          {isMessageVisible && (
+            <Box
+              sx={{
+                bg: "success",
+                borderRadius: 3,
+                color: "white",
+                lineHeight: "1.5",
+                mt: "1",
+                p: "1"
+              }}
+            >
+              {`Votre demande a bien été prise en compte`}
+            </Box>
+          )}
+          {isErrorMessageVisible && (
+            <Box
+              sx={{
+                bg: "error",
+                borderRadius: 3,
+                color: "white",
+                lineHeight: "1.5",
+                mt: "1",
+                p: "1"
+              }}
+            >
+              {`Un problème est survenu, merci de ressayer`}
+            </Box>
+          )}
         </Box>
       </Box>
       <Box p="5">
