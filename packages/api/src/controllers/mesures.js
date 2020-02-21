@@ -46,12 +46,12 @@ const create = async (req, res) => {
     return res.status(422).json({ error: "User not found" });
   }
 
-  const serviceOrMandataire = await user.$relatedQuery("user.type");
+  const serviceOrMandataire = await user.$relatedQuery(user.type);
 
   try {
     mesure = await Mesures.query().insert({
       ...body,
-      [`${serviceOrMandataire}_id`]: serviceOrMandataire.id
+      [`${user.type}_id`]: serviceOrMandataire.id
     });
   } catch (error) {
     return res.status(422).json({ error: error.message });
