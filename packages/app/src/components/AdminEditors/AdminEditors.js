@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Card } from "@socialgouv/emjpm-ui-core";
 import Link from "next/link";
 import React, { useContext } from "react";
@@ -6,11 +6,26 @@ import { Box, Flex, Text } from "rebass";
 
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
+import { REMOVE_EDITOR } from "./mutations";
 import { EDITORS } from "./queries";
 import { descriptionStyle, labelStyle } from "./style";
 
 const RowItem = ({ item }) => {
   const { id, name, api_token } = item;
+  const [removeEditor] = useMutation(REMOVE_EDITOR);
+
+  const removeEditorFromList = async id => {
+    try {
+      await removeEditor({
+        refetchQueries: ["editors", "editorRequests"],
+        variables: {
+          id: id
+        }
+      });
+    } catch (error) {
+      // TODO(paullaunay): log error in sentry and form
+    }
+  };
 
   return (
     <Card width="100%" mb="2">
@@ -30,12 +45,15 @@ const RowItem = ({ item }) => {
           </Flex>
         </Flex>
 
-        <Box mr="1" width="120px">
+        <Box mr="1" width="220px">
           <Link href={`/admin/editors/${id}`}>
             <a>
               <Button>Voir</Button>
             </a>
           </Link>
+          <Button ml="3" onClick={() => removeEditorFromList(id)}>
+            supprimer
+          </Button>
         </Box>
       </Flex>
     </Card>
