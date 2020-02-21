@@ -98,6 +98,29 @@ tables:
           _eq: X-Hasura-User-Id
   event_triggers: []
   computed_fields: []
+- table: api_logs
+  is_enum: false
+  configuration:
+    custom_root_fields:
+      select: null
+      select_by_pk: null
+      select_aggregate: null
+      insert: null
+      update: null
+      delete: null
+    custom_column_names: {}
+  object_relationships:
+  - using:
+      foreign_key_constraint_on: editor_id
+    name: editor
+    comment: null
+  array_relationships: []
+  insert_permissions: []
+  select_permissions: []
+  update_permissions: []
+  delete_permissions: []
+  event_triggers: []
+  computed_fields: []
 - table: city
   is_enum: false
   configuration:
@@ -107,33 +130,8 @@ tables:
       select_aggregate: null
       insert: null
       update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
-  object_relationships:
-  - comment: null
-    name: editor
-    using:
-      foreign_key_constraint_on: editor_id
-  select_permissions: []
-  table: api_logs
-  update_permissions: []
-- array_relationships: []
-  computed_fields: []
-  configuration:
-    custom_column_names: {}
-    custom_root_fields:
       delete: null
-      insert: null
-      select: null
-      select_aggregate: null
-      select_by_pk: null
-      update: null
-  delete_permissions: []
-  event_triggers: []
-  insert_permissions: []
-  is_enum: false
+    custom_column_names: {}
   object_relationships: []
   array_relationships: []
   insert_permissions: []
