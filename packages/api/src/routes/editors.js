@@ -5,6 +5,7 @@ const mesures = require("../../src/controllers/mesures");
 
 router.get("/mesures", mesures.index);
 router.post("/mesures", mesures.create);
+router.post("/mesures/batch", mesures.batch);
 router.delete("/mesures/:id", mesures.destroy);
 
 module.exports = router;

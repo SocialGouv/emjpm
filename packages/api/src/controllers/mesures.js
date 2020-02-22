@@ -67,6 +67,41 @@ const create = async (req, res) => {
   return res.status(200).json({ mesure });
 };
 
+const batch = async (req, res) => {
+  const {
+    body,
+    user: { user_id }
+  } = req;
+  let user;
+  let serviceOrMandataire;
+  let mesure;
+
+  try {
+    user = await User.query().findById(user_id);
+  } catch (error) {
+    return res.status(422).json({ error: "User not found" });
+  }
+
+  try {
+    serviceOrMandataire = await user.$relatedQuery(user.type);
+  } catch (error) {
+    return res.status(422).json({ error: `${user.type} not found` });
+  }
+
+  try {
+    mesure = await Mesures.query().insert(
+      body.map(mesure => ({
+        ...mesure,
+        [`${user.type}_id`]: serviceOrMandataire.id
+      }))
+    );
+  } catch (error) {
+    return res.status(422).json({ error: error.message });
+  }
+
+  return res.status(200).json({ mesure });
+};
+
 const destroy = async (req, res) => {
   const {
     params: { id },
@@ -99,5 +134,6 @@ const destroy = async (req, res) => {
 module.exports = {
   index,
   create,
-  destroy
+  destroy,
+  batch
 };
