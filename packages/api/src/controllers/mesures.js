@@ -20,13 +20,15 @@ const index = async (req, res) => {
 
     mesures = await Mesures.query()
       .where("service_id", service.id)
-      .where("status", "=", status);
+      .where("status", "=", status)
+      .limit(50);
   } else {
     const mandataire = await user.$relatedQuery("mandataire");
 
     mesures = await Mesures.query()
       .where("mandataire_id", mandataire.id)
-      .where("status", "=", status);
+      .where("status", "=", status)
+      .limit(50);
   }
 
   return res.status(200).json({ mesures: mesures });
@@ -38,6 +40,7 @@ const create = async (req, res) => {
     user: { user_id }
   } = req;
   let user;
+  let serviceOrMandataire;
   let mesure;
 
   try {
@@ -46,7 +49,11 @@ const create = async (req, res) => {
     return res.status(422).json({ error: "User not found" });
   }
 
-  const serviceOrMandataire = await user.$relatedQuery(user.type);
+  try {
+    serviceOrMandataire = await user.$relatedQuery(user.type);
+  } catch (error) {
+    return res.status(422).json({ error: `${user.type} not found` });
+  }
 
   try {
     mesure = await Mesures.query().insert({
@@ -60,7 +67,37 @@ const create = async (req, res) => {
   return res.status(200).json({ mesure });
 };
 
+const destroy = async (req, res) => {
+  const {
+    params: { id },
+    user: { user_id }
+  } = req;
+
+  let user;
+  let serviceOrMandataire;
+
+  try {
+    user = await User.query().findById(user_id);
+  } catch (error) {
+    return res.status(422).json({ error: "user not found" });
+  }
+
+  try {
+    serviceOrMandataire = await user.$relatedQuery(user.type);
+  } catch (error) {
+    return res.status(422).json({ error: `${user.type} not found` });
+  }
+
+  await Mesures.query()
+    .where("id", id)
+    .where(`${user.type}_id`, serviceOrMandataire.id)
+    .delete();
+
+  return res.status(200).json({});
+};
+
 module.exports = {
   index,
-  create
+  create,
+  destroy
 };
