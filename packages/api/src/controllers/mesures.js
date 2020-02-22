@@ -64,7 +64,7 @@ const create = async (req, res) => {
     return res.status(422).json({ error: error.message });
   }
 
-  return res.status(200).json({ mesure });
+  return res.status(201).json({ mesure });
 };
 
 const batch = async (req, res) => {
@@ -99,7 +99,7 @@ const batch = async (req, res) => {
     return res.status(422).json({ error: error.message });
   }
 
-  return res.status(200).json({ mesure });
+  return res.status(201).json({ mesure });
 };
 
 const destroy = async (req, res) => {
@@ -128,7 +128,7 @@ const destroy = async (req, res) => {
     .where(`${user.type}_id`, serviceOrMandataire.id)
     .delete();
 
-  return res.status(200).json({});
+  return res.status(204).json({});
 };
 
 module.exports = {
