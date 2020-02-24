@@ -1,3 +1,5 @@
+const { validationResult } = require("express-validator");
+
 const { User } = require("../model/User");
 const { Mesures } = require("../model/Mesures");
 
@@ -35,6 +37,12 @@ const index = async (req, res) => {
 };
 
 const create = async (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors });
+  }
+
   const {
     body,
     user: { user_id }
@@ -49,16 +57,18 @@ const create = async (req, res) => {
     return res.status(422).json({ error: "User not found" });
   }
 
+  const type = user.type === "service" ? "service" : "mandataire";
+
   try {
-    serviceOrMandataire = await user.$relatedQuery(user.type);
+    serviceOrMandataire = await user.$relatedQuery(type);
   } catch (error) {
-    return res.status(422).json({ error: `${user.type} not found` });
+    return res.status(422).json({ error: `${type} not found` });
   }
 
   try {
     mesure = await Mesures.query().insert({
       ...body,
-      [`${user.type}_id`]: serviceOrMandataire.id
+      [`${type}_id`]: serviceOrMandataire.id
     });
   } catch (error) {
     return res.status(422).json({ error: error.message });
