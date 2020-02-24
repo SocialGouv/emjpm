@@ -2,9 +2,14 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 
-const mesures = require("../../src/controllers/mesures");
+const {
+  mesures,
+  mesureCreate,
+  mesureBatch,
+  mesureDelete
+} = require("../../src/controllers/editor");
 
-router.get("/mesures", mesures.index);
+router.get("/mesures", mesures);
 router.post(
   "/mesures",
   [
@@ -30,9 +35,9 @@ router.post(
       .not()
       .isEmpty()
   ],
-  mesures.create
+  mesureCreate
 );
-router.post("/mesures/batch", mesures.batch);
-router.delete("/mesures/:id", mesures.destroy);
+router.post("/mesures/batch", mesureBatch);
+router.delete("/mesures/:id", mesureDelete);
 
 module.exports = router;

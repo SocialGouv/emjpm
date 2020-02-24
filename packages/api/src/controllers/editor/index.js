@@ -1,7 +1,13 @@
 const mesures = require("./mesures");
-const test = require("./test");
+const mesure = require("./mesure");
+const mesureCreate = require("./mesure-create");
+const mesureBatch = require("./mesure-batch");
+const mesureDelete = require("./mesure-delete");
 
 module.exports = {
-  test,
-  mesures
+  mesures,
+  mesure,
+  mesureCreate,
+  mesureBatch,
+  mesureDelete
 };
