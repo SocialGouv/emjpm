@@ -16,15 +16,17 @@ const mesureDelete = async (req, res) => {
     return res.status(422).json({ error: "user not found" });
   }
 
+  const type = user.type === "service" ? "service" : "mandataire";
+
   try {
-    serviceOrMandataire = await user.$relatedQuery(user.type);
+    serviceOrMandataire = await user.$relatedQuery(type);
   } catch (error) {
-    return res.status(422).json({ error: `${user.type} not found` });
+    return res.status(422).json({ error: `${type} not found` });
   }
 
   await Mesures.query()
     .where("id", id)
-    .where(`${user.type}_id`, serviceOrMandataire.id)
+    .where(`${type}_id`, serviceOrMandataire.id)
     .delete();
 
   return res.status(204).json({});

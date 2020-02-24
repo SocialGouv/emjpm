@@ -8,7 +8,7 @@ const mesureBatch = async (req, res) => {
   } = req;
   let user;
   let serviceOrMandataire;
-  let mesure;
+  let mesures;
 
   try {
     user = await User.query().findById(user_id);
@@ -16,24 +16,26 @@ const mesureBatch = async (req, res) => {
     return res.status(422).json({ error: "User not found" });
   }
 
-  try {
-    serviceOrMandataire = await user.$relatedQuery(user.type);
-  } catch (error) {
-    return res.status(422).json({ error: `${user.type} not found` });
-  }
+  const type = user.type === "service" ? "service" : "mandataire";
 
   try {
-    mesure = await Mesures.query().insert(
-      body.map(mesure => ({
-        ...mesure,
-        [`${user.type}_id`]: serviceOrMandataire.id
-      }))
-    );
+    serviceOrMandataire = await user.$relatedQuery(type);
+  } catch (error) {
+    return res.status(422).json({ error: `${type} not found` });
+  }
+
+  const payload = body.mesures.map(mesure => ({
+    ...mesure,
+    [`${type}_id`]: serviceOrMandataire.id
+  }));
+
+  try {
+    mesures = await Mesures.query().insert(payload);
   } catch (error) {
     return res.status(422).json({ error: error.message });
   }
 
-  return res.status(201).json({ mesure });
+  return res.status(201).json({ mesures });
 };
 
 module.exports = mesureBatch;

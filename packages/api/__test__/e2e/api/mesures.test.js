@@ -19,6 +19,7 @@ beforeAll(async () => {
   const [editor] = await knex("editors");
   const [ti] = await knex("tis");
   const [user] = await knex("users");
+  const [mesure] = await knex("mesures");
 
   await request(server)
     .post("/api/v2/auth/login")
@@ -43,6 +44,7 @@ beforeAll(async () => {
   global.token = publicToken;
   global.user = user;
   global.ti = ti;
+  global.mesure = mesure;
 });
 
 describe("GET /api/v2/editors/mesures", () => {
@@ -105,5 +107,49 @@ describe("POST /api/v2/editors/mesures", () => {
       });
 
     expect(response.status).toBe(201);
+  });
+});
+
+describe("POST /api/v2/editors/mesures/batch", () => {
+  test("it returns 201", async () => {
+    // TODO(plaunay): move payload to proper fixture
+    const response = await request(server)
+      .post("/api/v2/editors/mesures/batch")
+      .set("Accept", "application/json")
+      .set({ Authorization: `Bearer ${global.token}` })
+      .send({
+        mesures: [
+          {
+            annee: "1983",
+            antenne_id: null,
+            civilite: "H",
+            code_postal: "75015",
+            ville: "paris",
+            latitude: "45.8383",
+            longitude: "1.01181",
+            date_ouverture: "2020-02-20",
+            department_id: "75",
+            numero_dossier: "123123123",
+            numero_rg: "RGXXXX123",
+            residence: "En établissement",
+            ti_id: global.ti.id,
+            type: "Curatelle renforcée aux biens et à la personne"
+          }
+        ]
+      });
+
+    expect(response.status).toBe(201);
+  });
+});
+
+describe("DELETE /api/v2/editors/mesures/:id", () => {
+  test("it returns 201", async () => {
+    // TODO(plaunay): move payload to proper fixture
+    const response = await request(server)
+      .delete(`/api/v2/editors/mesures/${global.mesure.id}`)
+      .set("Accept", "application/json")
+      .set({ Authorization: `Bearer ${global.token}` });
+
+    expect(response.status).toBe(204);
   });
 });
