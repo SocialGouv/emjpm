@@ -5,6 +5,7 @@ const { body } = require("express-validator");
 const {
   mesures,
   mesureCreate,
+  mesureUpdate,
   mesureBatch,
   mesureDelete
 } = require("../../src/controllers/editor");
@@ -37,6 +38,7 @@ router.post(
   ],
   mesureCreate
 );
+router.put("/mesures/:id", mesureUpdate);
 router.post("/mesures/batch", mesureBatch);
 router.delete("/mesures/:id", mesureDelete);
 

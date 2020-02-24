@@ -110,6 +110,21 @@ describe("POST /api/v2/editors/mesures", () => {
   });
 });
 
+describe("PUT /api/v2/editors/mesures", () => {
+  test("it returns 200", async () => {
+    // TODO(plaunay): move payload to proper fixture
+    const response = await request(server)
+      .put(`/api/v2/editors/mesures/${global.mesure.id}`)
+      .set("Accept", "application/json")
+      .set({ Authorization: `Bearer ${global.token}` })
+      .send({ annee: "1983" });
+
+    console.log(response.body);
+
+    expect(response.status).toBe(200);
+  });
+});
+
 describe("POST /api/v2/editors/mesures/batch", () => {
   test("it returns 201", async () => {
     // TODO(plaunay): move payload to proper fixture
