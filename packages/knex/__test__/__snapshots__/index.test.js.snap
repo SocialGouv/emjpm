@@ -228,6 +228,35 @@ Object {
 }
 `;
 
+exports[`editor_token_requests table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "email": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('editor_token_requests_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "name": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
 exports[`editors table schema 1`] = `
 Object {
   "api_token": Object {
@@ -1220,6 +1249,7 @@ Array [
   "commentaires",
   "departements",
   "direction",
+  "editor_token_requests",
   "editors",
   "etablissements",
   "geolocalisation_code_postal",
