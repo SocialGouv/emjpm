@@ -1220,6 +1220,7 @@ Array [
   "commentaires",
   "departements",
   "direction",
+  "editor_token_requests",
   "editors",
   "etablissements",
   "geolocalisation_code_postal",
