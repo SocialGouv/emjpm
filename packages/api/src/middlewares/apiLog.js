@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
     originalUrl,
     params
   } = req;
-  const token = authorization ? authorization.slice(7, -1) : null;
+  const token = authorization ? authorization.slice(7, -1) : "";
 
   let decodedToken;
 
