@@ -16,25 +16,23 @@ beforeAll(async () => {
   await knex.migrate.latest();
   await knex.seed.run();
 
-  const name = "test-editor";
-  const api_token = "test-token";
-  const [editorId] = await knex("editors")
-    .insert({ name, api_token })
-    .returning("id");
+  const [editor] = await knex("editors");
+  const [ti] = await knex("tis");
+  const [user] = await knex("users");
 
-  // await request(server)
-  //   .post("/login")
-  //   .send({
-  //     username: "jeremy",
-  //     password: "johnson123"
-  //   });
+  await request(server)
+    .post("/api/v2/auth/login")
+    .send({
+      username: user.username,
+      password: "johnson123"
+    });
 
   const res = await request(server)
     .post("/api/v2/oauth/authorize")
     .send({
-      editorToken: api_token,
-      editorId,
-      userId: 1,
+      userId: user.id,
+      editorId: editor.id,
+      editorToken: editor.api_token,
       redirectUrl: "http://localhost:3001"
     });
 
@@ -43,21 +41,69 @@ beforeAll(async () => {
   } = res;
 
   global.token = publicToken;
-});
-
-afterEach(async () => {
-  await knex("editors").delete();
+  global.user = user;
+  global.ti = ti;
 });
 
 describe("GET /api/v2/editors/mesures", () => {
-  test("it returns 200", async () => {
-    console.log(knex.client);
+  describe("when public token is invalid", () => {
+    test("it returns 401", async () => {
+      const response = await request(server)
+        .get("/api/v2/editors/mesures")
+        .set("Accept", "application/json")
+        .set({ Authorization: `Bearer invalid` });
 
+      expect(response.status).toBe(401);
+    });
+  });
+
+  test("it returns 200", async () => {
     const response = await request(server)
       .get("/api/v2/editors/mesures")
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` });
 
     expect(response.status).toBe(200);
+  });
+});
+
+describe("POST /api/v2/editors/mesures", () => {
+  describe("when params are invalid", () => {
+    test("it returns 422 with errors", async () => {
+      const response = await request(server)
+        .post("/api/v2/editors/mesures")
+        .set("Accept", "application/json")
+        .set({ Authorization: `Bearer ${global.token}` })
+        .send({});
+
+      expect(response.body.errors).toBeTruthy();
+      expect(response.status).toBe(422);
+    });
+  });
+
+  test("it returns 201", async () => {
+    // TODO(plaunay): move payload to proper fixture
+    const response = await request(server)
+      .post("/api/v2/editors/mesures")
+      .set("Accept", "application/json")
+      .set({ Authorization: `Bearer ${global.token}` })
+      .send({
+        annee: "1983",
+        antenne_id: null,
+        civilite: "H",
+        code_postal: "75015",
+        ville: "paris",
+        latitude: "45.8383",
+        longitude: "1.01181",
+        date_ouverture: "2020-02-20",
+        department_id: "75",
+        numero_dossier: "123123123",
+        numero_rg: "RGXXXX123",
+        residence: "En établissement",
+        ti_id: global.ti.id,
+        type: "Curatelle renforcée aux biens et à la personne"
+      });
+
+    expect(response.status).toBe(201);
   });
 });
