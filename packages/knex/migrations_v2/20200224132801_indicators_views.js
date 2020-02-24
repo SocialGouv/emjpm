@@ -20,4 +20,12 @@ select d.nom, u.type, count(distinct(sm.service_id)) from users u, departements 
   `);
 };
 
-exports.down = function() {};
+exports.down = async function(knex) {
+  await knex.raw(`
+		DROP VIEW IF EXISTS view_indicateur_inscrit
+	`);
+
+  await knex.raw(`
+		DROP VIEW IF EXISTS view_indicateur_login
+	`);
+};

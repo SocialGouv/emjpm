@@ -1273,6 +1273,8 @@ Array [
   "user_tis",
   "users",
   "view_department_availability",
+  "view_indicateur_inscrit",
+  "view_indicateur_login",
   "view_mesure_gestionnaire",
   "view_mesure_gestionnaire_tis",
 ]
@@ -1509,6 +1511,52 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "bigint",
+  },
+}
+`;
+
+exports[`view_indicateur_inscrit table schema 1`] = `
+Object {
+  "count": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "bigint",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`view_indicateur_login table schema 1`] = `
+Object {
+  "count": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "bigint",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
   },
 }
 `;
