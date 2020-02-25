@@ -1,5 +1,5 @@
-import { Button } from "@socialgouv/emjpm-ui-core";
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
+import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { PaginatedListStyle } from "./style";
@@ -14,29 +14,35 @@ const DataList = ({ entries, RowItem }) => (
 
 const PaginatedList = ({
   entries,
-  onLoadMore,
   RowItem,
-  resultPerPage = 20,
-  isMoreEntry = true
+  resultPerPage,
+  currentOffset,
+  setCurrentOffset,
+  count
 }) => {
-  const [currentOffset, setCurrentOffset] = useState(resultPerPage);
-
+  const totalPage = count / resultPerPage;
   return (
     <Box sx={PaginatedListStyle}>
       {entries.length > 0 ? (
         <Fragment>
           <DataList entries={entries} RowItem={RowItem} />
-          {isMoreEntry && (
-            <Flex mt="5" alignItem="center">
-              <Button
-                onClick={() => {
-                  onLoadMore(currentOffset);
-                  setCurrentOffset(currentOffset + resultPerPage);
-                }}
-              >
-                Afficher les éléments suivants
-              </Button>
-            </Flex>
+          {count > resultPerPage && (
+            <ReactPaginate
+              previousLabel={"Précédent"}
+              nextLabel={"Suivant"}
+              breakLabel={"..."}
+              breakClassName={"break-me"}
+              pageCount={totalPage}
+              containerClassName={"react-paginate"}
+              marginPagesDisplayed={2}
+              forcePage={currentOffset / resultPerPage}
+              pageRangeDisplayed={5}
+              onPageChange={data => {
+                setCurrentOffset(data.selected * resultPerPage);
+              }}
+              subContainerClassName={"pages pagination"}
+              activeClassName={"active"}
+            />
           )}
         </Fragment>
       ) : (

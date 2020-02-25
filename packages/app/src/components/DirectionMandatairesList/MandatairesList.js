@@ -1,7 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Mandatairelist } from "@socialgouv/emjpm-ui-components";
-import { Button, Card, Heading2, Heading4, Select, Spinner } from "@socialgouv/emjpm-ui-core";
+import { MandataireListItem } from "@socialgouv/emjpm-ui-components";
+import { Card, Heading2, Heading4, Select, Spinner } from "@socialgouv/emjpm-ui-core";
+import Router from "next/router";
 import React, { useContext, useState } from "react";
+import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "../DirectionFilters/context";
@@ -22,18 +24,19 @@ const optionsCapacity = [
   { label: "Descendant", value: "desc_nulls_last" }
 ];
 
-const RESULT_PER_PAGE = 10;
+const RESULT_PER_PAGE = 30;
 
 const MandatairesList = props => {
   const { selectedDepartementValue, selectedRegionalValue } = useContext(FiltersContext);
   const [selectedType, setType] = useState(false);
   const [selectedCapacity, setCapacity] = useState(false);
-  const [currentPage, setCurrentPage] = useState(0);
-  const { data, error, loading, fetchMore } = useQuery(GET_MANDATAIRES, {
+  const [currentOffset, setCurrentOffset] = useState(0);
+  const { data, error, loading } = useQuery(GET_MANDATAIRES, {
     variables: {
       departement: selectedDepartementValue ? selectedDepartementValue.value : null,
       discriminator: selectedType ? selectedType.value : null,
-      offset: 0,
+      offset: currentOffset,
+      limit: RESULT_PER_PAGE,
       order: selectedCapacity ? selectedCapacity.value : null,
       region: selectedRegionalValue ? selectedRegionalValue.value : null
     }
@@ -60,6 +63,7 @@ const MandatairesList = props => {
   }
 
   const { count } = data.count.aggregate;
+  const totalPage = count / RESULT_PER_PAGE;
   const list = formatMandatairesList(data.mandatairesList);
   return (
     <Box sx={MandatairesListStyle} {...props}>
@@ -83,27 +87,33 @@ const MandatairesList = props => {
           />
         </Box>
       </Flex>
-      <Mandatairelist mandataires={list} />
-      {count > RESULT_PER_PAGE && count > currentPage - RESULT_PER_PAGE && (
-        <Flex mt="5" alignItem="center">
-          <Button
-            onClick={() => {
-              fetchMore({
-                updateQuery: (prev, { fetchMoreResult }) => {
-                  setCurrentPage(currentPage + RESULT_PER_PAGE);
-                  return {
-                    count: fetchMoreResult.count,
-                    mandatairesList: [...prev.mandatairesList, ...fetchMoreResult.mandatairesList]
-                  };
-                },
-                variables: {
-                  offset: currentPage + RESULT_PER_PAGE
-                }
-              });
+      {list.map(gestionnaire => {
+        return (
+          <MandataireListItem
+            key={gestionnaire.id}
+            onClick={() => Router.push(`/magistrats/gestionnaires/${gestionnaire.id}`)}
+            gestionnaire={gestionnaire}
+          />
+        );
+      })}
+      {count > RESULT_PER_PAGE && (
+        <Flex alignItems="center" justifyContent="center">
+          <ReactPaginate
+            previousLabel={"Précédent"}
+            nextLabel={"Suivant"}
+            breakLabel={"..."}
+            breakClassName={"break-me"}
+            pageCount={totalPage}
+            containerClassName={"react-paginate"}
+            marginPagesDisplayed={2}
+            forcePage={currentOffset / RESULT_PER_PAGE}
+            pageRangeDisplayed={5}
+            onPageChange={data => {
+              setCurrentOffset(data.selected * RESULT_PER_PAGE);
             }}
-          >
-            Afficher les mandataires suivants
-          </Button>
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+          />
         </Flex>
       )}
     </Box>

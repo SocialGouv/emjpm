@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const GET_MANDATAIRES = gql`
   query view_mesure_gestionnaire(
     $offset: Int!
+    $limit: Int!
     $departement: Int
     $region: Int
     $discriminator: String
@@ -19,7 +20,7 @@ export const GET_MANDATAIRES = gql`
       }
     }
     mandatairesList: view_mesure_gestionnaire(
-      limit: 10
+      limit: $limit
       offset: $offset
       where: {
         discriminator: { _eq: $discriminator }

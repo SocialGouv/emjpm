@@ -16,8 +16,8 @@ export const EDITORS = gql`
 `;
 
 export const EDITOR = gql`
-  query editor($editorId: Int) {
-    editors(where: { id: { _eq: $editorId } }) {
+  query editor($editorId: Int, $limit: Int, $offset: Int) {
+    editors(where: { id: { _eq: $editorId } }, limit: $limit, offset: $offset) {
       id
       name
       api_token
@@ -26,8 +26,8 @@ export const EDITOR = gql`
 `;
 
 export const EDITOR_REQUESTS = gql`
-  query editorRequests {
-    editor_token_requests {
+  query editorRequests($limit: Int, $offset: Int) {
+    editor_token_requests(limit: $limit, offset: $offset) {
       name
       id
       email

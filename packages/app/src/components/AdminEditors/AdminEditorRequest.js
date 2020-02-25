@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Card, Heading5 } from "@socialgouv/emjpm-ui-core";
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { PaginatedList } from "../PaginatedList";
@@ -54,7 +54,15 @@ const RowItem = ({ item }) => {
 };
 
 const AdminEditorRequest = () => {
-  const { data, error, loading, fetchMore } = useQuery(EDITOR_REQUESTS);
+  const [currentOffset, setCurrentOffset] = useState(0);
+  const resultPerPage = 20;
+  const { data, error, loading } = useQuery(EDITOR_REQUESTS, {
+    variables: {
+      limit: resultPerPage,
+      offset: currentOffset
+    }
+  });
+
   if (loading) {
     return <div>loading</div>;
   }
@@ -64,28 +72,18 @@ const AdminEditorRequest = () => {
   }
 
   const { editor_token_requests: editorTokenRequests } = data;
-  const resultPerPage = 50;
+  const count = editorTokenRequests.size;
 
   return (
     <Box width="100%" mt="5">
       <Heading5 mb="3">{`Liste des demandes d'accès`}</Heading5>
       <PaginatedList
-        resultPerPage={resultPerPage}
-        RowItem={RowItem}
         entries={editorTokenRequests}
-        totalEntry={editorTokenRequests.length}
-        onLoadMore={offset => {
-          fetchMore({
-            updateQuery: (prev, { fetchMoreResult }) => {
-              return {
-                editors: [...prev.editors, ...fetchMoreResult.editors]
-              };
-            },
-            variables: {
-              offset
-            }
-          });
-        }}
+        RowItem={RowItem}
+        count={count}
+        resultPerPage={resultPerPage}
+        currentOffset={currentOffset}
+        setCurrentOffset={setCurrentOffset}
       />
     </Box>
   );
