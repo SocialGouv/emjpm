@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Card } from "@socialgouv/emjpm-ui-core";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { AdminFilterContext } from "../AdminFilterBar/context";
@@ -51,13 +51,14 @@ const RowItem = ({ item }) => {
 
 const AdminUsers = () => {
   const resultPerPage = 50;
+  const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText } = useContext(AdminFilterContext);
 
-  const { data, error, loading, fetchMore } = useQuery(USERS, {
+  const { data, error, loading } = useQuery(USERS, {
     fetchPolicy: "network-only",
     variables: {
       limit: resultPerPage,
-      offset: 0,
+      offset: currentOffset,
       searchText:
         debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
     }
@@ -73,27 +74,15 @@ const AdminUsers = () => {
 
   const { count } = data.users_aggregate.aggregate;
   const users = data.users;
-  const isMoreEntry = users.length < count;
 
   return (
     <PaginatedList
-      resultPerPage={resultPerPage}
-      RowItem={RowItem}
       entries={users}
-      totalEntry={count}
-      isMoreEntry={isMoreEntry}
-      onLoadMore={offset => {
-        fetchMore({
-          updateQuery: (prev, { fetchMoreResult }) => {
-            return {
-              users: [...prev.users, ...fetchMoreResult.users]
-            };
-          },
-          variables: {
-            offset
-          }
-        });
-      }}
+      RowItem={RowItem}
+      count={count}
+      resultPerPage={resultPerPage}
+      currentOffset={currentOffset}
+      setCurrentOffset={setCurrentOffset}
     />
   );
 };

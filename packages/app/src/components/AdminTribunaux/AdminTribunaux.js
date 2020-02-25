@@ -58,14 +58,15 @@ const RowItem = ({ item }) => {
 };
 
 const AdminTribunaux = () => {
-  const resultPerPage = 50;
+  const resultPerPage = 20;
+  const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText } = useContext(AdminFilterContext);
 
-  const { data, error, loading, fetchMore } = useQuery(TRIBUNAUX, {
+  const { data, error, loading } = useQuery(TRIBUNAUX, {
     fetchPolicy: "network-only",
     variables: {
       limit: resultPerPage,
-      offset: 0,
+      offset: currentOffset,
       searchText:
         debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
     }
@@ -81,28 +82,15 @@ const AdminTribunaux = () => {
 
   const { count } = data.tis_aggregate.aggregate;
   const tis = data.tis;
-  const isMoreEntry = tis.length < count;
 
   return (
     <PaginatedList
-      resultPerPage={resultPerPage}
-      RowItem={RowItem}
       entries={tis}
-      totalEntry={count}
-      isMoreEntry={isMoreEntry}
-      onLoadMore={offset => {
-        fetchMore({
-          updateQuery: (prev, { fetchMoreResult }) => {
-            return {
-              count: fetchMoreResult.count,
-              tis: [...prev.tis, ...fetchMoreResult.tis]
-            };
-          },
-          variables: {
-            offset
-          }
-        });
-      }}
+      RowItem={RowItem}
+      count={count}
+      resultPerPage={resultPerPage}
+      currentOffset={currentOffset}
+      setCurrentOffset={setCurrentOffset}
     />
   );
 };
