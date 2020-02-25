@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Text } from "@socialgouv/emjpm-ui-core";
 import Link from "next/link";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { AdminFilterContext } from "../AdminFilterBar/context";
@@ -9,16 +9,8 @@ import { PaginatedList } from "../PaginatedList";
 import { SERVICES } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
-// import { AdminEditService } from "./AdminEditService";
-// {editMode && (
-//   <Card overflow="hidden" p="0" pt="1" m="1" mt="-20px">
-//     <AdminEditService service={item} closePanel={toogleEditMode} />
-//   </Card>
-// )}
-
 const RowItem = ({ item }) => {
   const { id, etablissement, code_postal, ville } = item;
-
   return (
     <Fragment>
       <Card sx={cardStyle} width="100%">
@@ -55,14 +47,15 @@ const RowItem = ({ item }) => {
 };
 
 const AdminServices = () => {
+  const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 50;
   const { debouncedSearchText } = useContext(AdminFilterContext);
 
-  const { data, error, loading, fetchMore } = useQuery(SERVICES, {
+  const { data, error, loading } = useQuery(SERVICES, {
     fetchPolicy: "network-only",
     variables: {
       limit: resultPerPage,
-      offset: 0,
+      offset: currentOffset,
       searchText:
         debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
     }
@@ -78,28 +71,15 @@ const AdminServices = () => {
 
   const { count } = data.services_aggregate.aggregate;
   const services = data.services;
-  const isMoreEntry = services.length < count;
 
   return (
     <PaginatedList
-      resultPerPage={resultPerPage}
-      RowItem={RowItem}
       entries={services}
-      totalEntry={count}
-      isMoreEntry={isMoreEntry}
-      onLoadMore={offset => {
-        fetchMore({
-          updateQuery: (prev, { fetchMoreResult }) => {
-            return {
-              count: fetchMoreResult.count,
-              services: [...prev.services, ...fetchMoreResult.services]
-            };
-          },
-          variables: {
-            offset
-          }
-        });
-      }}
+      RowItem={RowItem}
+      count={count}
+      resultPerPage={resultPerPage}
+      currentOffset={currentOffset}
+      setCurrentOffset={setCurrentOffset}
     />
   );
 };
