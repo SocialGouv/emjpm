@@ -17,7 +17,7 @@ const login = async (req, res, next) => {
     if (err) {
       return res.status(401).json({
         errors: {
-          msg: "Vos informations de connection sont erronées",
+          msg: "Vos informations de connexion sont erronées",
           location: "body",
           error: err
         }

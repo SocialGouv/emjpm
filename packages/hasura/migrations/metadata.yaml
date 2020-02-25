@@ -3237,6 +3237,64 @@ tables:
   delete_permissions: []
   event_triggers: []
   computed_fields: []
+- table: view_indicateur_inscrit
+  is_enum: false
+  configuration:
+    custom_root_fields:
+      select: null
+      select_by_pk: null
+      select_aggregate: null
+      insert: null
+      update: null
+      delete: null
+    custom_column_names: {}
+  object_relationships: []
+  array_relationships: []
+  insert_permissions: []
+  select_permissions:
+  - role: anonymous
+    comment: null
+    permission:
+      allow_aggregations: false
+      computed_fields: []
+      columns:
+      - nom
+      - type
+      - count
+      filter: {}
+  update_permissions: []
+  delete_permissions: []
+  event_triggers: []
+  computed_fields: []
+- table: view_indicateur_login
+  is_enum: false
+  configuration:
+    custom_root_fields:
+      select: null
+      select_by_pk: null
+      select_aggregate: null
+      insert: null
+      update: null
+      delete: null
+    custom_column_names: {}
+  object_relationships: []
+  array_relationships: []
+  insert_permissions: []
+  select_permissions:
+  - role: anonymous
+    comment: null
+    permission:
+      allow_aggregations: false
+      computed_fields: []
+      columns:
+      - nom
+      - type
+      - count
+      filter: {}
+  update_permissions: []
+  delete_permissions: []
+  event_triggers: []
+  computed_fields: []
 - table: view_mesure_gestionnaire
   is_enum: false
   configuration:
