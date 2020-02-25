@@ -61,8 +61,8 @@ const IndicatorList = props => {
               <Text>{`${indicators.inscriptionCount} inscription`}</Text>
               <Text>
                 {indicators.loginCount
-                  ? `${indicators.loginCount} Connection dans les 30 derniers jours`
-                  : "Pas de connection"}
+                  ? `${indicators.loginCount} connexion dans les 30 derniers jours`
+                  : "Pas de connexion"}
               </Text>
               <Box
                 sx={{

@@ -56,7 +56,7 @@ const Authorize = props => {
           onClick={() =>
             grantAuthorization(editorId, editorSecret, redirectUrl, id, toggleErrorMessage)
           }
-        >{`Authoriser la connection avec l'éditeur`}</Button>
+        >{`Authoriser la connexion avec l'éditeur`}</Button>
         <Button ml="2" variant="outline">{`refuser`}</Button>
         {errorMessage && (
           <Text mt="3" color="red">

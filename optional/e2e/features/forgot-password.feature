@@ -30,7 +30,7 @@ Feature: Forgot password
       | Entrez votre nouveau mot de passe      | JaimeLesChips123456? |
       | Confirmer votre nouveau mot de passe | JaimeLesChips123456? |
     Then I click on "Enregistrer mon nouveau mot de passe"
-    Given I see "Votre mot de passe a bien été changé, vous allez être redirigé vers la page de connection"
+    Given I see "Votre mot de passe a bien été changé, vous allez être redirigé vers la page de connexion"
     Then I should redirected to "/login" page
 
     Then I have one unread message in my indox

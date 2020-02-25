@@ -82,7 +82,7 @@ const ResetPassword = props => {
               }}
             >
               {`Votre mot de passe a bien été changé, vous allez être
-              redirigé vers la page de connection`}
+              redirigé vers la page de connexion`}
             </Box>
           )}
         </Box>
