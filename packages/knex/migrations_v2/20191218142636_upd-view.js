@@ -1,4 +1,3 @@
-
 exports.up = async function(knex) {
   await knex.raw(`
 DROP VIEW IF EXISTS view_department_availability

@@ -28,6 +28,11 @@ function Footer() {
                 Mentions légales
               </Link>
             </ListItem>
+            <ListItem>
+              <Link target="_blank" href="/indicators">
+                Statistique de connexion
+              </Link>
+            </ListItem>
           </List>
           <List sx={FooterItemStyle}>
             <ListTitle>Aide et ressources</ListTitle>
