@@ -45,7 +45,7 @@ const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) =>
 const ResetPassword = props => {
   const { token } = props;
   const [isMessageVisible, toggleMessage] = useState(false);
-  const url = `${API_URL}/api/v2/auth/reset-password-with-token`;
+  const url = `${API_URL}/api/auth/reset-password-with-token`;
 
   const handleSubmit = async (values, setSubmitting, setStatus, token, toggleMessage) => {
     const response = await fetch(url, {

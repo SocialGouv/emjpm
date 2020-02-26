@@ -52,7 +52,7 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: secret
       HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/v2/auth/jwks"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/auth/jwks"}'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'anonymous'
       WHATEVER_URL: $WHATEVER_URL
       WEB_HOOK_URL_EMAIL_RESERVATION: $WEB_HOOK_URL_EMAIL_RESERVATION

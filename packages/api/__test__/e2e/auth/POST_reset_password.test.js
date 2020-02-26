@@ -38,7 +38,7 @@ beforeEach(async () => {
 
 test("reset a password", async () => {
   const response = await request(server)
-    .post("/api/v2/auth/reset-password-with-token")
+    .post("/api/auth/reset-password-with-token")
     .send({
       token: "LpWpzK4Jla9I87Aq",
       new_password: "test123456?",
@@ -51,7 +51,7 @@ test("reset a password", async () => {
 
 test("fail because the inputs don't match", async () => {
   const response = await request(server)
-    .post("/api/v2/auth/reset-password-with-token")
+    .post("/api/auth/reset-password-with-token")
     .send({
       token: "LpWpzK4Jla9I87Aq",
       new_password: "test123456?",
@@ -71,7 +71,7 @@ test("fail because the inputs don't match", async () => {
 
 test("fail because nekot is not a valid token", async () => {
   const response = await request(server)
-    .post("/api/v2/auth/reset-password-with-token")
+    .post("/api/auth/reset-password-with-token")
     .send({
       token: "nekot",
       new_password: "test123456?",
@@ -97,7 +97,7 @@ test("fail because the token has expired", async () => {
     });
 
   const response = await request(server)
-    .post("/api/v2/auth/reset-password-with-token")
+    .post("/api/auth/reset-password-with-token")
     .send({
       token: "LpWpzK4Jla9I87Aq",
       new_password: "test123456?",
@@ -124,7 +124,7 @@ test("should empty user token+expiration on password reset", async () => {
     });
 
   const response = await request(server)
-    .post("/api/v2/auth/reset-password-with-token")
+    .post("/api/auth/reset-password-with-token")
     .send({
       token: "abcdef",
       new_password: "test123456?",

@@ -39,7 +39,7 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
 
 const AuthorizationLogin = props => {
   const { token } = props;
-  const url = `${API_URL}/api/v2/auth/login`;
+  const url = `${API_URL}/api/auth/login`;
 
   const handleSubmit = async (values, setSubmitting, setStatus) => {
     const response = await fetch(url, {

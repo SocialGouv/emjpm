@@ -35,7 +35,7 @@ const checkStatus = async (response, setSubmitting, setStatus, type) => {
 
 const EditPassword = props => {
   const { username, type } = props;
-  const url = `${API_URL}/api/v2/auth/reset-password`;
+  const url = `${API_URL}/api/auth/reset-password`;
 
   const handleSubmit = async (values, setSubmitting, setStatus, type) => {
     const response = await fetch(url, {
