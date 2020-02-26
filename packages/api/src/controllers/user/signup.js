@@ -7,12 +7,12 @@ const { UserRole } = require("../../model/UserRole");
 const {
   ServiceMemberInvitation
 } = require("../../model/ServiceMemberInvitation");
+const { ServiceMember } = require("../../model/ServiceMember");
 const { Role } = require("../../model/Role");
 const { Direction } = require("../../model/Direction");
 const { errorHandler } = require("../../db/errors");
 const { inscriptionEmail } = require("../../email/inscription");
-const { getTisNames } = require("./utils/tis");
-const { createServiceMember } = require("./utils/service");
+const { getTisNames } = require("../../db/queries/tis");
 
 const createMagistrat = async (magistrat, user) => {
   const { ti } = magistrat;
@@ -141,7 +141,12 @@ const signup = async (req, res) => {
           service: { service_id }
         } = body;
 
-        await createServiceMember(user.id, service_id);
+        await ServiceMember.query()
+          .allowInsert("[user_id,service_id]")
+          .insert({
+            user_id: user.id,
+            service_id
+          });
 
         if (invitation) {
           await ServiceMemberInvitation.query()

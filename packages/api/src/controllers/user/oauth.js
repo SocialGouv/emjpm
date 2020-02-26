@@ -1,7 +1,7 @@
 const { AccessToken } = require("../../model/AccessToken");
 const jwtConfig = require("../../config/jwt");
 const jwt = require("jsonwebtoken");
-const { getUid } = require("./utils/uid");
+const getUid = require("../../utils/getUid");
 const { validationResult } = require("express-validator");
 const { Editors } = require("../../model/Editors");
 

@@ -1,5 +1,6 @@
 const express = require("express");
 const uid = require("rand-token").uid;
+const { raw } = require("objection");
 
 const router = express.Router();
 const { Service } = require("../model/Service");
@@ -21,10 +22,7 @@ const { mesuresImportEmail } = require("../email/mesures-import-email");
 const {
   serviceMemberInvitationMail
 } = require("../email/service-member-invitation-mail");
-
-const { getRegionCode } = require("../util/DepartementUtil");
-
-const { raw } = require("objection");
+const getRegionCode = require("../utils/getRegionCode");
 
 // ----------------------------------
 // -------EMAIL ACCOUNT VALIDATION---
