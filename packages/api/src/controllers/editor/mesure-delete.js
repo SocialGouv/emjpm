@@ -1,5 +1,5 @@
-const { User } = require("../../model/User");
-const { Mesures } = require("../../model/Mesures");
+const { User } = require("../../models/User");
+const { Mesures } = require("../../models/Mesures");
 
 const mesureDelete = async (req, res) => {
   const {

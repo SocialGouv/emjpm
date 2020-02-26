@@ -3,18 +3,20 @@ const uid = require("rand-token").uid;
 const { raw } = require("objection");
 
 const router = express.Router();
-const { Service } = require("../model/Service");
-const { ServiceMember } = require("../model/ServiceMember");
-const { ServiceMemberInvitation } = require("../model/ServiceMemberInvitation");
-const { Mandataire } = require("../model/Mandataire");
-const { Tis } = require("../model/Tis");
-const { User } = require("../model/User");
-const { MesuresImport } = require("../model/MesuresImport");
+const { Service } = require("../models/Service");
+const { ServiceMember } = require("../models/ServiceMember");
+const {
+  ServiceMemberInvitation
+} = require("../models/ServiceMemberInvitation");
+const { Mandataire } = require("../models/Mandataire");
+const { Tis } = require("../models/Tis");
+const { User } = require("../models/User");
+const { MesuresImport } = require("../models/MesuresImport");
 const {
   GeolocalisationCodePostal
-} = require("../model/GeolocalisationCodePostal");
-const { Mesures } = require("../model/Mesures");
-const { Department } = require("../model/Departments");
+} = require("../models/GeolocalisationCodePostal");
+const { Mesures } = require("../models/Mesures");
+const { Department } = require("../models/Departments");
 const { reservationEmail } = require("../email/reservation-email");
 const { cancelReservationEmail } = require("../email/cancel-reservation-email");
 const { validationEmail } = require("../email/validation-email");
