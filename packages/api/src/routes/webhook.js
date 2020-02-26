@@ -15,7 +15,7 @@ const { MesuresImport } = require("../models/MesuresImport");
 const {
   GeolocalisationCodePostal
 } = require("../models/GeolocalisationCodePostal");
-const { Mesures } = require("../models/Mesures");
+const { Mesure } = require("../models/Mesure");
 const { Department } = require("../models/Departments");
 const { reservationEmail } = require("../email/reservation-email");
 const { cancelReservationEmail } = require("../email/cancel-reservation-email");
@@ -120,7 +120,7 @@ const countMesuresInState = (mesures, state) => {
 };
 
 const getMesureStates = async (mandataire_id, service_id) => {
-  return Mesures.query()
+  return Mesure.query()
     .where({
       mandataire_id,
       service_id
@@ -233,15 +233,15 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     latitude
   };
 
-  const [mesure] = await Mesures.query().where({
+  const [mesure] = await Mesure.query().where({
     numero_rg: data.numero_rg,
     ti_id: ti.id
   });
   if (!mesure) {
-    await Mesures.query().insert(data);
+    await Mesure.query().insert(data);
     ++importSummary.creationNumber;
   } else if (mesure.mandataire_id === data.mandataire_id) {
-    await Mesures.query()
+    await Mesure.query()
       .findById(mesure.id)
       .patch(data);
     ++importSummary.updateNumber;

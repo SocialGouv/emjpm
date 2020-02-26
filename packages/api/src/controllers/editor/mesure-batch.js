@@ -1,5 +1,5 @@
 const { User } = require("../../models/User");
-const { Mesures } = require("../../models/Mesures");
+const { Mesure } = require("../../models/Mesure");
 
 const mesureBatch = async (req, res) => {
   const {
@@ -30,7 +30,7 @@ const mesureBatch = async (req, res) => {
   }));
 
   try {
-    mesures = await Mesures.query().insert(payload);
+    mesures = await Mesure.query().insert(payload);
   } catch (error) {
     return res.status(422).json({ error: error.message });
   }

@@ -1,5 +1,5 @@
 const { User } = require("../../models/User");
-const { Mesures } = require("../../models/Mesures");
+const { Mesure } = require("../../models/Mesure");
 
 const DEFAULT_STATUS = "Mesure en attente";
 
@@ -18,13 +18,13 @@ const mesures = async (req, res) => {
   if (user.type === "service") {
     const service = await user.$relatedQuery("service");
 
-    mesures = await Mesures.query()
+    mesures = await Mesure.query()
       .where("service_id", service.id)
       .where("status", "=", status);
   } else {
     const mandataire = await user.$relatedQuery("mandataire");
 
-    mesures = await Mesures.query()
+    mesures = await Mesure.query()
       .where("mandataire_id", mandataire.id)
       .where("status", "=", status);
   }
