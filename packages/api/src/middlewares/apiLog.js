@@ -1,6 +1,6 @@
 const jwtDecode = require("jwt-decode");
 
-const { ApiLog } = require("../model/ApiLog");
+const { ApiLog } = require("../models/ApiLog");
 
 module.exports = async (req, res, next) => {
   const {

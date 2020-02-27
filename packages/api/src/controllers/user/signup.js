@@ -1,18 +1,18 @@
 const { validationResult } = require("express-validator");
-const { User } = require("../../model/User");
-const { Mandataire } = require("../../model/Mandataire");
-const { Magistrat } = require("../../model/Magistrat");
-const { UserTis } = require("../../model/UserTis");
-const { UserRole } = require("../../model/UserRole");
+const { User } = require("../../models/User");
+const { Mandataire } = require("../../models/Mandataire");
+const { Magistrat } = require("../../models/Magistrat");
+const { UserTis } = require("../../models/UserTis");
+const { UserRole } = require("../../models/UserRole");
 const {
   ServiceMemberInvitation
-} = require("../../model/ServiceMemberInvitation");
-const { Role } = require("../../model/Role");
-const { Direction } = require("../../model/Direction");
+} = require("../../models/ServiceMemberInvitation");
+const { ServiceMember } = require("../../models/ServiceMember");
+const { Role } = require("../../models/Role");
+const { Direction } = require("../../models/Direction");
 const { errorHandler } = require("../../db/errors");
 const { inscriptionEmail } = require("../../email/inscription");
-const { getTisNames } = require("./utils/tis");
-const { createServiceMember } = require("./utils/service");
+const { getTisNames } = require("../../db/queries/tis");
 
 const createMagistrat = async (magistrat, user) => {
   const { ti } = magistrat;
@@ -141,7 +141,12 @@ const signup = async (req, res) => {
           service: { service_id }
         } = body;
 
-        await createServiceMember(user.id, service_id);
+        await ServiceMember.query()
+          .allowInsert("[user_id,service_id]")
+          .insert({
+            user_id: user.id,
+            service_id
+          });
 
         if (invitation) {
           await ServiceMemberInvitation.query()

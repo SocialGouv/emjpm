@@ -1,7 +1,7 @@
 const passport = require("../../auth/local");
 const { validationResult } = require("express-validator");
-const { User } = require("../../model/User");
-const { Logs } = require("../../model/Logs");
+const { User } = require("../../models/User");
+const { Logs } = require("../../models/Logs");
 
 /**
  * Sign in using username and password and returns JWT

@@ -22,14 +22,14 @@ beforeAll(async () => {
   const [mesure] = await knex("mesures");
 
   await request(server)
-    .post("/api/v2/auth/login")
+    .post("/api/auth/login")
     .send({
       username: user.username,
       password: "johnson123"
     });
 
   const res = await request(server)
-    .post("/api/v2/oauth/authorize")
+    .post("/api/oauth/authorize")
     .send({
       userId: user.id,
       editorId: editor.id,
@@ -47,11 +47,11 @@ beforeAll(async () => {
   global.mesure = mesure;
 });
 
-describe("GET /api/v2/editors/mesures", () => {
+describe("GET /api/editors/mesures", () => {
   describe("when public token is invalid", () => {
     test("it returns 401", async () => {
       const response = await request(server)
-        .get("/api/v2/editors/mesures")
+        .get("/api/editors/mesures")
         .set("Accept", "application/json")
         .set({ Authorization: `Bearer invalid` });
 
@@ -61,7 +61,7 @@ describe("GET /api/v2/editors/mesures", () => {
 
   test("it returns 200", async () => {
     const response = await request(server)
-      .get("/api/v2/editors/mesures")
+      .get("/api/editors/mesures")
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` });
 
@@ -69,11 +69,11 @@ describe("GET /api/v2/editors/mesures", () => {
   });
 });
 
-describe("POST /api/v2/editors/mesures", () => {
+describe("POST /api/editors/mesures", () => {
   describe("when params are invalid", () => {
     test("it returns 422 with errors", async () => {
       const response = await request(server)
-        .post("/api/v2/editors/mesures")
+        .post("/api/editors/mesures")
         .set("Accept", "application/json")
         .set({ Authorization: `Bearer ${global.token}` })
         .send({});
@@ -86,7 +86,7 @@ describe("POST /api/v2/editors/mesures", () => {
   test("it returns 201", async () => {
     // TODO(plaunay): move payload to proper fixture
     const response = await request(server)
-      .post("/api/v2/editors/mesures")
+      .post("/api/editors/mesures")
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` })
       .send({
@@ -110,11 +110,11 @@ describe("POST /api/v2/editors/mesures", () => {
   });
 });
 
-describe("PUT /api/v2/editors/mesures", () => {
+describe("PUT /api/editors/mesures", () => {
   test("it returns 200", async () => {
     // TODO(plaunay): move payload to proper fixture
     const response = await request(server)
-      .put(`/api/v2/editors/mesures/${global.mesure.id}`)
+      .put(`/api/editors/mesures/${global.mesure.id}`)
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` })
       .send({ annee: "1983" });
@@ -125,11 +125,11 @@ describe("PUT /api/v2/editors/mesures", () => {
   });
 });
 
-describe("POST /api/v2/editors/mesures/batch", () => {
+describe("POST /api/editors/mesures/batch", () => {
   test("it returns 201", async () => {
     // TODO(plaunay): move payload to proper fixture
     const response = await request(server)
-      .post("/api/v2/editors/mesures/batch")
+      .post("/api/editors/mesures/batch")
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` })
       .send({
@@ -157,11 +157,11 @@ describe("POST /api/v2/editors/mesures/batch", () => {
   });
 });
 
-describe("DELETE /api/v2/editors/mesures/:id", () => {
+describe("DELETE /api/editors/mesures/:id", () => {
   test("it returns 201", async () => {
     // TODO(plaunay): move payload to proper fixture
     const response = await request(server)
-      .delete(`/api/v2/editors/mesures/${global.mesure.id}`)
+      .delete(`/api/editors/mesures/${global.mesure.id}`)
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` });
 

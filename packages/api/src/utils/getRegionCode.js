@@ -1,4 +1,4 @@
-exports.getRegionCode = codePostal => {
+module.exports = codePostal => {
   if (!codePostal) {
     return;
   }
