@@ -11,7 +11,7 @@ const {
 } = getConfig();
 
 const grantAuthorization = async (editorId, editorSecret, redirectUrl, id, toggleErrorMessage) => {
-  const url = `${API_URL}/api/v2/oauth/authorize`;
+  const url = `${API_URL}/api/oauth/authorize`;
   try {
     const response = await fetch(url, {
       body: JSON.stringify({

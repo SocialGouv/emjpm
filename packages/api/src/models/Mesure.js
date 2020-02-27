@@ -3,7 +3,7 @@ const { Model } = require("objection");
 
 Model.knex(knexConnection);
 
-class Mesures extends Model {
+class Mesure extends Model {
   static get tableName() {
     return "mesures";
   }
@@ -13,4 +13,4 @@ class Mesures extends Model {
   }
 }
 
-module.exports = { Mesures };
+module.exports = { Mesure };

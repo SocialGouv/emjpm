@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 
-const { User } = require("../../model/User");
-const { Mesures } = require("../../model/Mesures");
+const { User } = require("../../models/User");
+const { Mesure } = require("../../models/Mesure");
 
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
@@ -33,7 +33,7 @@ const mesureCreate = async (req, res) => {
   }
 
   try {
-    mesure = await Mesures.query().insert({
+    mesure = await Mesure.query().insert({
       ...body,
       [`${type}_id`]: serviceOrMandataire.id
     });

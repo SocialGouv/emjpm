@@ -6,7 +6,7 @@ const Sentry = require("@sentry/node");
 
 const apiLog = require("./middlewares/apiLog");
 const pkg = require("../package.json");
-const authV2Routes = require("./routes/auth-v2");
+const authRoutes = require("./routes/auth");
 const oauth2Routes = require("./routes/oauth2");
 const editorsRoutes = require("./routes/editors");
 const configuration = require("./env");
@@ -41,10 +41,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api/v2/auth", authV2Routes);
-app.use("/api/v2/oauth", oauth2Routes);
+app.use("/api/auth", authRoutes);
+app.use("/api/oauth", oauth2Routes);
 app.use(
-  "/api/v2/editors",
+  "/api/editors",
   [apiLog, passport.authenticate("bearer", { session: false })],
   editorsRoutes
 );
