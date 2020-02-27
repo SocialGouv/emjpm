@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.22.0](https://github.com/SocialGouv/emjpm/compare/v25.21.0...v25.22.0) (2020-02-27)
+
+
+### Bug Fixes
+
+* **knex-test:** update snapshot ([#1505](https://github.com/SocialGouv/emjpm/issues/1505)) ([c2cde2e](https://github.com/SocialGouv/emjpm/commit/c2cde2e70f1d8ca14a86168fe90a1945c24b61df))
+
+
+### Features
+
+* **api:** add api logs ([#1450](https://github.com/SocialGouv/emjpm/issues/1450)) ([86a5da1](https://github.com/SocialGouv/emjpm/commit/86a5da10c5eb281cb7a8344277020b917fdf5e72))
+* **indicators:** add indicators migration and component ([#1506](https://github.com/SocialGouv/emjpm/issues/1506)) ([6692625](https://github.com/SocialGouv/emjpm/commit/66926251cf237d1ef4272c602424392a039d7f51))
+* **managed-db:** use managed database ([#1460](https://github.com/SocialGouv/emjpm/issues/1460)) ([aa46f48](https://github.com/SocialGouv/emjpm/commit/aa46f48c2d59c90a0f84d617834347979a23b9eb))
+* **service-members:** add service member invitation and admin permissions ([#1471](https://github.com/SocialGouv/emjpm/issues/1471)) ([6bb6990](https://github.com/SocialGouv/emjpm/commit/6bb69901fdc6a444bd8e55c90eb5c93db3741585))
+
+
+
+
+
 # [25.21.0](https://github.com/SocialGouv/emjpm/compare/v25.20.0...v25.21.0) (2020-02-12)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.22.0](https://github.com/SocialGouv/emjpm/compare/v25.21.0...v25.22.0) (2020-02-27)
+
+
+### Bug Fixes
+
+* **mesure-evolution-resolver:** optimize gql resolver ([#1500](https://github.com/SocialGouv/emjpm/issues/1500)) ([4f00400](https://github.com/SocialGouv/emjpm/commit/4f00400afabc34b7cdbc87070c56b5fbeb0da1a6))
+
+
+### Features
+
+* **managed-db:** use managed database ([#1460](https://github.com/SocialGouv/emjpm/issues/1460)) ([aa46f48](https://github.com/SocialGouv/emjpm/commit/aa46f48c2d59c90a0f84d617834347979a23b9eb))
+
+
+
+
+
 # [25.21.0](https://github.com/SocialGouv/emjpm/compare/v25.20.0...v25.21.0) (2020-02-12)
 
 
