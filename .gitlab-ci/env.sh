@@ -53,7 +53,7 @@ if [[ -n "${PRODUCTION+x}" ]]; then
   export POSTGRES_DATABASE_EMJPM="emjpm"
 else
   export DOMAIN="${BRANCH_HASH}-${DOMAIN}";
-  export POSTGRES_DATABASE_EMJPM="emjpm_${BRANCH_HASH}"
+  export POSTGRES_DATABASE_EMJPM="emjpm_$( printf "${BRANCH_HASH}" | sed "s/\-//g" )"
   #
 fi
 
