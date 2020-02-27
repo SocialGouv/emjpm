@@ -1,5 +1,5 @@
-const { User } = require("../../model/User");
-const { Mesures } = require("../../model/Mesures");
+const { User } = require("../../models/User");
+const { Mesure } = require("../../models/Mesure");
 
 const mesureDelete = async (req, res) => {
   const {
@@ -24,7 +24,7 @@ const mesureDelete = async (req, res) => {
     return res.status(422).json({ error: `${type} not found` });
   }
 
-  await Mesures.query()
+  await Mesure.query()
     .where("id", id)
     .where(`${type}_id`, serviceOrMandataire.id)
     .delete();

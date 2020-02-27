@@ -29,7 +29,7 @@ const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) =>
 };
 
 const ForgotPassword = () => {
-  const url = `${API_URL}/api/v2/auth/forgot-password`;
+  const url = `${API_URL}/api/auth/forgot-password`;
   const [isMessageVisible, toggleMessage] = useState(false);
   const handleSubmit = async (values, setSubmitting, setStatus) => {
     const response = await fetch(url, {

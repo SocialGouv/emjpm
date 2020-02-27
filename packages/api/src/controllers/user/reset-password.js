@@ -3,7 +3,7 @@ const { validationResult } = require("express-validator");
 const {
   confirmationPasswordEmail
 } = require("../../email/password-confirmation");
-const { User } = require("../../model/User");
+const { User } = require("../../models/User");
 
 /**
  * Reset password using username, password, new_password and new_password_confirmation return ok

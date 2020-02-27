@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const { resetPasswordEmail } = require("../../email/forgot-password-email");
 const createError = require("http-errors");
-const { User } = require("../../model/User");
+const { User } = require("../../models/User");
 const uid = require("rand-token").uid;
 
 /**

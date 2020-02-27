@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 
-const { User } = require("../../model/User");
-const { Mesures } = require("../../model/Mesures");
+const { User } = require("../../models/User");
+const { Mesure } = require("../../models/Mesure");
 
 const mesureUpdate = async (req, res) => {
   const errors = validationResult(req);
@@ -34,7 +34,7 @@ const mesureUpdate = async (req, res) => {
   }
 
   try {
-    mesure = await Mesures.query()
+    mesure = await Mesure.query()
       .where({ [`${type}_id`]: serviceOrMandataire.id })
       .findById(id);
   } catch (error) {
@@ -42,7 +42,7 @@ const mesureUpdate = async (req, res) => {
   }
 
   try {
-    mesure = await Mesures.query().patch(body);
+    mesure = await Mesure.query().patch(body);
   } catch (error) {
     return res.status(422).json({ error: error.message });
   }
