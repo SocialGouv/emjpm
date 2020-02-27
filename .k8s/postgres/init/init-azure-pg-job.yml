@@ -38,6 +38,8 @@ spec:
               value: "require"
             - name: BRANCH_HASH
               value: ${BRANCH_HASH}
+            - name: POSTGRES_DATABASE_EMJPM
+              value: "${POSTGRES_DATABASE_EMJPM}"
             - name: PGUSER
               value: ${EMJPM_PG_USER}
             - name: PGHOST
