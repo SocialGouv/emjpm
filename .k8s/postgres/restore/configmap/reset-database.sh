@@ -1,6 +1,6 @@
 #!/bin/bash
 
-EMJPM_DB=emjpm_${BRANCH_HASH}
+EMJPM_DB=${POSTGRES_DATABASE_EMJPM}
 
 cat <<EOF > reset-database.sql
 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '${EMJPM_DB}';

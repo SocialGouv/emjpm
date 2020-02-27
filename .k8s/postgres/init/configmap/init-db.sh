@@ -6,7 +6,7 @@ set -e
 POSTGRES_EMJPM_USER=emjpm
 POSTGRES_HASURA_USER=hasura
 
-EMJPM_DB=emjpm_${BRANCH_HASH}
+EMJPM_DB=${POSTGRES_DATABASE_EMJPM}
 
 if psql -lqt | cut -d \| -f 1 | grep -qw ${EMJPM_DB}; then
   exit 0;
