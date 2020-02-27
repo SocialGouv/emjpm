@@ -6,7 +6,7 @@ const {
 } = getConfig();
 
 const postSignup = body => {
-  const url = `${API_URL}/api/v2/auth/signup`;
+  const url = `${API_URL}/api/auth/signup`;
 
   const fetchParams = {
     body: JSON.stringify(body),

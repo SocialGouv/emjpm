@@ -82,11 +82,23 @@ const getTiByUserIdWithCodePostal = userId =>
     .where("user_tis.user_id", parseInt(userId))
     .first();
 
+const getTisNames = async tis => {
+  const getEtablissementByTi = id =>
+    getTiById(id).then(json => json.etablissement);
+  if (tis) {
+    const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(
+      ", "
+    );
+    return tiNames;
+  }
+};
+
 module.exports = {
   getAllTisByMandataire,
   addMandataireTis,
   deleteMandataireTis,
   getTis,
+  getTisNames,
   getTiByUserId,
   getTiByUserIdWithCodePostal,
   getTiById

@@ -9,8 +9,8 @@ const BearerStrategy = passportBearer.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const knex = require("../db/knex");
 const jwtConfig = require("../config/jwt");
-const { AccessToken } = require("../model/AccessToken");
-const { User } = require("../model/User");
+const { AccessToken } = require("../models/AccessToken");
+const { User } = require("../models/User");
 
 const init = require("./passport");
 

@@ -23,7 +23,7 @@ test.each`
   ${"ti1"}      | ${"ti1"}        | ${"ti"}
 `("'$username' should login as $type", async ({ username, password }) => {
   const response = await request(server)
-    .post("/api/v2/auth/login")
+    .post("/api/auth/login")
     .send({
       username,
       password
@@ -40,7 +40,7 @@ test.each`
   ${"jeremy"}    | ${"johnson1234"} | ${"a registered user with wrong password"}
 `("'$username' not login $type", async ({ username, password }) => {
   const response = await request(server)
-    .post("/api/v2/auth/login")
+    .post("/api/auth/login")
     .send({
       username,
       password

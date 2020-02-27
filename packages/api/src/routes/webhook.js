@@ -1,19 +1,22 @@
 const express = require("express");
 const uid = require("rand-token").uid;
+const { raw } = require("objection");
 
 const router = express.Router();
-const { Service } = require("../model/Service");
-const { ServiceMember } = require("../model/ServiceMember");
-const { ServiceMemberInvitation } = require("../model/ServiceMemberInvitation");
-const { Mandataire } = require("../model/Mandataire");
-const { Tis } = require("../model/Tis");
-const { User } = require("../model/User");
-const { MesuresImport } = require("../model/MesuresImport");
+const { Service } = require("../models/Service");
+const { ServiceMember } = require("../models/ServiceMember");
+const {
+  ServiceMemberInvitation
+} = require("../models/ServiceMemberInvitation");
+const { Mandataire } = require("../models/Mandataire");
+const { Tis } = require("../models/Tis");
+const { User } = require("../models/User");
+const { MesuresImport } = require("../models/MesuresImport");
 const {
   GeolocalisationCodePostal
-} = require("../model/GeolocalisationCodePostal");
-const { Mesures } = require("../model/Mesures");
-const { Department } = require("../model/Departments");
+} = require("../models/GeolocalisationCodePostal");
+const { Mesure } = require("../models/Mesure");
+const { Department } = require("../models/Departments");
 const { reservationEmail } = require("../email/reservation-email");
 const { cancelReservationEmail } = require("../email/cancel-reservation-email");
 const { validationEmail } = require("../email/validation-email");
@@ -21,10 +24,7 @@ const { mesuresImportEmail } = require("../email/mesures-import-email");
 const {
   serviceMemberInvitationMail
 } = require("../email/service-member-invitation-mail");
-
-const { getRegionCode } = require("../util/DepartementUtil");
-
-const { raw } = require("objection");
+const getRegionCode = require("../utils/getRegionCode");
 
 // ----------------------------------
 // -------EMAIL ACCOUNT VALIDATION---
@@ -120,7 +120,7 @@ const countMesuresInState = (mesures, state) => {
 };
 
 const getMesureStates = async (mandataire_id, service_id) => {
-  return Mesures.query()
+  return Mesure.query()
     .where({
       mandataire_id,
       service_id
@@ -233,15 +233,15 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     latitude
   };
 
-  const [mesure] = await Mesures.query().where({
+  const [mesure] = await Mesure.query().where({
     numero_rg: data.numero_rg,
     ti_id: ti.id
   });
   if (!mesure) {
-    await Mesures.query().insert(data);
+    await Mesure.query().insert(data);
     ++importSummary.creationNumber;
   } else if (mesure.mandataire_id === data.mandataire_id) {
-    await Mesures.query()
+    await Mesure.query()
       .findById(mesure.id)
       .patch(data);
     ++importSummary.updateNumber;
