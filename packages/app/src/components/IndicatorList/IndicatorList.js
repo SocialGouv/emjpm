@@ -1,13 +1,27 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading4, Spinner, Text } from "@socialgouv/emjpm-ui-core";
+import { Indicator } from "@socialgouv/emjpm-ui-components";
+import { Card, Heading1, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box } from "rebass";
 
 import { INDICATORS } from "./queries";
 import { IndicatorListStyle } from "./style";
 
+const filterArray = (array, type) => array.filter(element => element.type === type);
+const filterArrays = arrays => {
+  return arrays.map(array => {
+    const [service] = filterArray(array, "service");
+    const [prepose] = filterArray(array, "prepose");
+    const [individuel] = filterArray(array, "individuel");
+    return { service, prepose, individuel };
+  });
+};
+
 const IndicatorList = props => {
-  const { data, error, loading } = useQuery(INDICATORS);
+  const { departementCode } = props;
+  const { data, error, loading } = useQuery(INDICATORS, {
+    variables: { code: departementCode }
+  });
 
   if (loading) {
     return (
@@ -27,60 +41,57 @@ const IndicatorList = props => {
     );
   }
 
-  const indicators = data.view_indicateur_inscrit.map(inscrit => {
-    var login = data.view_indicateur_login.find(function(element) {
-      return element.nom === inscrit.nom;
-    });
-    return {
-      departement: inscrit.nom,
-      inscriptionCount: inscrit.count,
-      loginCount: login ? login.count : null
-    };
-  });
+  const { view_indicateur_login: login, view_indicateur_inscrit: inscrit, departements } = data;
+  const [department] = departements;
+  const [loginData, inscritData] = filterArrays([login, inscrit]);
 
   return (
     <Box sx={IndicatorListStyle} {...props}>
-      {indicators.map((indicators, index) => {
-        const basePercent = 100 / indicators.inscriptionCount;
-        const width = indicators.loginCount * basePercent;
-        return (
-          <Card
-            key={`${index}-${indicators.departement}`}
-            p="4"
-            mb="3"
-            sx={{ borderRadius: "15px" }}
-          >
-            <Box
-              sx={{
-                display: "grid",
-                gridGap: 1,
-                gridTemplateColumns: ["repeat(4, 1fr)"]
-              }}
-            >
-              <Heading4>{indicators.departement}</Heading4>
-              <Text>{`${indicators.inscriptionCount} inscription`}</Text>
-              <Text>
-                {indicators.loginCount
-                  ? `${indicators.loginCount} connexion dans les 30 derniers jours`
-                  : "Pas de connexion"}
-              </Text>
-              <Box
-                sx={{
-                  bg: "primary",
-                  borderRadius: "15px",
-                  overflow: "hidden",
-                  mt: "3px",
-                  height: "10px"
-                }}
-              >
-                <Box
-                  sx={{ width: `${width}%`, bg: "error", height: "10px", borderRadius: "15px" }}
-                />
-              </Box>
-            </Box>
-          </Card>
-        );
-      })}
+      <Heading1 py="4">{`Indicateurs de suivi: ${department.nom}`}</Heading1>
+      <Box
+        sx={{
+          display: "grid",
+          gridGap: 3,
+          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(3, 1fr)"]
+        }}
+      >
+        <Indicator
+          error={false}
+          loading={false}
+          title="Inscrit service"
+          indicator={inscritData.service ? inscritData.service.count : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Inscrit préposé"
+          indicator={inscritData.prepose ? inscritData.prepose.count : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Inscrit individuel"
+          indicator={inscritData.individuel ? inscritData.individuel.count : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Connections service"
+          indicator={loginData.service ? loginData.service.count : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Connections préposé"
+          indicator={loginData.prepose ? loginData.prepose.count : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Connections individuel"
+          indicator={loginData.individuel ? loginData.individuel.count : 0}
+        />
+      </Box>
     </Box>
   );
 };
