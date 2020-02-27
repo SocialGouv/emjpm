@@ -11,7 +11,7 @@ const IndicatorPage = () => {
     <LayoutPublic>
       <BoxWrapper>
         <Box>
-          <Heading1 py="4">Indicateurs de suivit des inscrits à E-mjpm</Heading1>
+          <Heading1 py="4">Indicateurs de suivi</Heading1>
           <IndicatorList />
         </Box>
       </BoxWrapper>
