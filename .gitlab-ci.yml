@@ -799,7 +799,6 @@ Delete useless k8s namespaces:
 ############ Release #################
 
 Release:
-  extends: .base_stage
   stage: "Notify Finished Deployment"
   dependencies: []
   image: node:12.14-alpine3.10
