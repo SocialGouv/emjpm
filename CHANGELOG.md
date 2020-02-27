@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.22.2](https://github.com/SocialGouv/emjpm/compare/v25.22.1...v25.22.2) (2020-02-27)
+
+
+### Bug Fixes
+
+* **database-name:** use POSTGRES_DATABASE_EMJPM ([4758e46](https://github.com/SocialGouv/emjpm/commit/4758e46f46cc88e4fc231e2134752da4d7b9bdbd))
+* **database-name:** use POSTGRES_DATABASE_EMJPM ([f084524](https://github.com/SocialGouv/emjpm/commit/f08452443f3fb56a7b0709029074b4640c6f3ead))
+
+
+
+
+
 ## [25.22.1](https://github.com/SocialGouv/emjpm/compare/v25.22.0...v25.22.1) (2020-02-27)
 
 
