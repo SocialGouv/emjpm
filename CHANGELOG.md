@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.22.1](https://github.com/SocialGouv/emjpm/compare/v25.22.0...v25.22.1) (2020-02-27)
+
+
+### Bug Fixes
+
+* **database-name:** remove characters ([ec62eb5](https://github.com/SocialGouv/emjpm/commit/ec62eb569f0b0877763e6162a8a212655f09b7f5))
+
+
+
+
+
 # [25.22.0](https://github.com/SocialGouv/emjpm/compare/v25.21.0...v25.22.0) (2020-02-27)
 
 
