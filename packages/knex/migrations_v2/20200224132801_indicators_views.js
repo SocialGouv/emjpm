@@ -1,13 +1,5 @@
 exports.up = async function(knex) {
   await knex.raw(`
-		DROP VIEW IF EXISTS view_indicateur_inscrit
-	`);
-
-  await knex.raw(`
-		DROP VIEW IF EXISTS view_indicateur_login
-	`);
-
-  await knex.raw(`
   -- mandataire / service inscrit par departement
 create view view_indicateur_inscrit as select d.nom, u.type, count(m.id) from mandataires m, users u, departements d
 	where m.department_id = d.id and m.user_id = u.id and u.active = true
