@@ -26,7 +26,6 @@ const IndicatorListTotal = () => {
       </Card>
     );
   }
-  console.log(data);
   const {
     serviceLoginCount: {
       aggregate: { count: serviceLoginCount }
@@ -60,37 +59,37 @@ const IndicatorListTotal = () => {
         <Indicator
           error={false}
           loading={false}
-          title="Inscrit service"
+          title="Services mandataires inscrits"
           indicator={serviceInscritCount ? serviceInscritCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Inscrit préposé"
+          title="Préposés à un établissement inscrits"
           indicator={preposeInscritCount ? preposeInscritCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Inscrit individuel"
+          title="Mandataires individuels inscrits"
           indicator={individuelInscritCount ? individuelInscritCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Connections service"
+          title="Services mandataires connectés dans le dernier mois"
           indicator={serviceLoginCount ? serviceLoginCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Connections préposé"
+          title="Préposés à un établissement connectés dans le dernier mois"
           indicator={preposeLoginCount ? preposeLoginCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Connections individuel"
+          title="Mandataires individuels connectés dans le dernier mois"
           indicator={individuelLoginCount ? individuelLoginCount : 0}
         />
       </Box>

@@ -47,7 +47,7 @@ const IndicatorList = props => {
 
   return (
     <Box sx={IndicatorListStyle} {...props}>
-      <Heading1 py="4">{`Indicateurs de suivi: ${department.nom}`}</Heading1>
+      <Heading1 py="4">{`${department.code} - ${department.nom}`}</Heading1>
       <Box
         sx={{
           display: "grid",
@@ -58,37 +58,37 @@ const IndicatorList = props => {
         <Indicator
           error={false}
           loading={false}
-          title="Inscrit service"
+          title="Services mandataires inscrits"
           indicator={inscritData.service ? inscritData.service.count : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Inscrit préposé"
+          title="Préposés à un établissement inscrits"
           indicator={inscritData.prepose ? inscritData.prepose.count : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Inscrit individuel"
+          title="Mandataires individuels inscrits"
           indicator={inscritData.individuel ? inscritData.individuel.count : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Connections service"
+          title="Services mandataires connectés dans le dernier mois"
           indicator={loginData.service ? loginData.service.count : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Connections préposé"
+          title="Préposés à un établissement connectés dans le dernier mois"
           indicator={loginData.prepose ? loginData.prepose.count : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Connections individuel"
+          title="Mandataires individuels connectés dans le dernier mois"
           indicator={loginData.individuel ? loginData.individuel.count : 0}
         />
       </Box>
