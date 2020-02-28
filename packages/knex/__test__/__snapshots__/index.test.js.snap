@@ -1517,6 +1517,12 @@ Object {
 
 exports[`view_indicateur_inscrit table schema 1`] = `
 Object {
+  "code": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "count": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -1540,6 +1546,12 @@ Object {
 
 exports[`view_indicateur_login table schema 1`] = `
 Object {
+  "code": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "count": Object {
     "defaultValue": null,
     "maxLength": null,

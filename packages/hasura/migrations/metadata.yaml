@@ -917,7 +917,7 @@ tables:
   - role: anonymous
     comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       computed_fields: []
       columns:
       - siret
@@ -2871,7 +2871,9 @@ tables:
       allow_aggregations: false
       computed_fields: []
       columns:
+      - active
       - email
+      - type
       limit: 1
       filter:
         email:
@@ -3255,12 +3257,13 @@ tables:
   - role: anonymous
     comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       computed_fields: []
       columns:
+      - code
+      - count
       - nom
       - type
-      - count
       filter: {}
   update_permissions: []
   delete_permissions: []
@@ -3284,12 +3287,13 @@ tables:
   - role: anonymous
     comment: null
     permission:
-      allow_aggregations: false
+      allow_aggregations: true
       computed_fields: []
       columns:
+      - code
+      - count
       - nom
       - type
-      - count
       filter: {}
   update_permissions: []
   delete_permissions: []
