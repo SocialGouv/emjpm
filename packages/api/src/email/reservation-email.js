@@ -1,7 +1,7 @@
 const { format } = require("date-fns");
 const { sendEmail } = require(".");
 
-const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
+const EMAIL_RESERVATION_TEXT = (ti = {}, user, mesure) =>
   `Madame, Monsieur,
 
   Pour information, le ${ti.etablissement} ${(mesure.cabinet &&
@@ -73,7 +73,7 @@ Le magistrat a précisé le caractère urgent lors de la réservation de cette m
 <br><br>
 L’équipe e-mjpm.`;
 
-const reservationEmail = async (ti, mesure, user) => {
+const reservationEmail = async (ti = {}, mesure, user) => {
   sendEmail(
     user.email,
     "e-MJPM : une nouvelle mesure vous a été attribuée",
