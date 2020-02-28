@@ -25,34 +25,46 @@ export const FRANCE_INDICATORS = gql`
   query Inscrits {
     serviceLoginCount: view_indicateur_login_aggregate(where: { type: { _eq: "service" } }) {
       aggregate {
-        count(columns: count)
+        sum {
+          count
+        }
       }
     }
     individuelLoginCount: view_indicateur_login_aggregate(where: { type: { _eq: "individuel" } }) {
       aggregate {
-        count(columns: count)
+        sum {
+          count
+        }
       }
     }
     preposeLoginCount: view_indicateur_login_aggregate(where: { type: { _eq: "prepose" } }) {
       aggregate {
-        count(columns: count)
+        sum {
+          count
+        }
       }
     }
     serviceInscritCount: view_indicateur_inscrit_aggregate(where: { type: { _eq: "service" } }) {
       aggregate {
-        count(columns: count)
+        sum {
+          count
+        }
       }
     }
     individuelInscritCount: view_indicateur_inscrit_aggregate(
       where: { type: { _eq: "individuel" } }
     ) {
       aggregate {
-        count(columns: count)
+        sum {
+          count
+        }
       }
     }
     preposeInscritCount: view_indicateur_inscrit_aggregate(where: { type: { _eq: "prepose" } }) {
       aggregate {
-        count(columns: count)
+        sum {
+          count
+        }
       }
     }
   }
