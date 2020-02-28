@@ -26,29 +26,42 @@ const IndicatorListTotal = () => {
       </Card>
     );
   }
+  console.log(data);
   const {
     serviceLoginCount: {
-      aggregate: { count: serviceLoginCount }
+      aggregate: {
+        sum: { count: serviceLoginCount }
+      }
     },
     individuelLoginCount: {
-      aggregate: { count: individuelLoginCount }
+      aggregate: {
+        sum: { count: individuelLoginCount }
+      }
     },
     preposeLoginCount: {
-      aggregate: { count: preposeLoginCount }
+      aggregate: {
+        sum: { count: preposeLoginCount }
+      }
     },
     serviceInscritCount: {
-      aggregate: { count: serviceInscritCount }
+      aggregate: {
+        sum: { count: serviceInscritCount }
+      }
     },
     individuelInscritCount: {
-      aggregate: { count: individuelInscritCount }
+      aggregate: {
+        sum: { count: individuelInscritCount }
+      }
     },
     preposeInscritCount: {
-      aggregate: { count: preposeInscritCount }
+      aggregate: {
+        sum: { count: preposeInscritCount }
+      }
     }
   } = data;
   return (
     <Box>
-      <Heading1 py="4">{`Indicateurs de suivi: France`}</Heading1>
+      <Heading1 py="4">{`France entière`}</Heading1>
       <Box
         sx={{
           display: "grid",
