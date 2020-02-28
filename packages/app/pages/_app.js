@@ -1,7 +1,8 @@
+import "../src/polyfills";
+
 import * as Sentry from "@sentry/browser";
 import theme from "@socialgouv/emjpm-ui-theme";
 import jwtDecode from "jwt-decode";
-// all global css
 import App from "next/app";
 import getConfig from "next/config";
 import React from "react";
