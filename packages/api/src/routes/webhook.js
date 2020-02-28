@@ -71,15 +71,17 @@ const getEmailUserDatas = async (mandataire_id, service_id) => {
 };
 
 router.post("/email-reservation", async function(req, res) {
-  const newMesure = req.body.event.data.new;
-  const { ti_id, service_id, mandataire_id, status } = newMesure;
+  const mesure = req.body.event.data.new;
+  const { ti_id, service_id, mandataire_id, status } = mesure;
+
   if (status === "Mesure en attente") {
-    const [currentTi] = await Tis.query().where("id", ti_id);
+    const ti = await Tis.query().findById(ti_id);
     const users = await getEmailUserDatas(mandataire_id, service_id);
-    for (const user of users) {
-      reservationEmail(currentTi, newMesure, user);
-    }
+    const emails = users.map(user => reservationEmail(ti, mesure, user));
+
+    await Promise.all(emails);
   }
+
   res.json({ success: true });
 });
 
