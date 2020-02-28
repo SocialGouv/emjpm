@@ -29,7 +29,7 @@ function Footer() {
               </Link>
             </ListItem>
             <ListItem>
-              <Link target="_blank" href="/indicators">
+              <Link target="_blank" href="/indicateurs">
                 Statistique de connexion
               </Link>
             </ListItem>
