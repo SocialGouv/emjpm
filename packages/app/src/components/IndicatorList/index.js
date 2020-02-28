@@ -1,3 +1,3 @@
 import { IndicatorList } from "./IndicatorList";
-
-export { IndicatorList };
+import { IndicatorListTotal } from "./IndicatorListTotal";
+export { IndicatorList, IndicatorListTotal };
