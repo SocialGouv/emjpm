@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.23.0](https://github.com/SocialGouv/emjpm/compare/v25.22.3...v25.23.0) (2020-02-28)
+
+
+### Features
+
+* **indicateurs:** update national query ([679d039](https://github.com/SocialGouv/emjpm/commit/679d039823bb4ad26788d685d2cefe71b2530afc))
+* **indicateurs:** update typo and style ([2f9c17f](https://github.com/SocialGouv/emjpm/commit/2f9c17f5b39530327cacea276971b1f73f0e94ea))
+
+
+
+
+
 ## [25.22.3](https://github.com/SocialGouv/emjpm/compare/v25.22.2...v25.22.3) (2020-02-28)
 
 
