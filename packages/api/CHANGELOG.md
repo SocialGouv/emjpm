@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.22.3](https://github.com/SocialGouv/emjpm/compare/v25.22.2...v25.22.3) (2020-02-28)
+
+
+### Bug Fixes
+
+* **webhook:** set mesure reservation email default ti value ([#1520](https://github.com/SocialGouv/emjpm/issues/1520)) ([ec05723](https://github.com/SocialGouv/emjpm/commit/ec0572333030e9fc7cd162b3a10395c1e55ff28c))
+
+
+
+
+
 ## [25.22.2](https://github.com/SocialGouv/emjpm/compare/v25.22.1...v25.22.2) (2020-02-27)
 
 **Note:** Version bump only for package @emjpm/api
