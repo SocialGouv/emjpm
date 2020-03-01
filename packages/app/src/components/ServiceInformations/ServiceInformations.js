@@ -78,7 +78,7 @@ const ServiceInformations = props => {
         {competences && (
           <Box sx={boxStyle}>
             <Heading5 mt={2} mb="3">
-              Informations pour le magistrat
+              Informations à destination du magistrat
             </Heading5>
             <Flex justifyContent="flex-start">
               <Box mr={4}>
