@@ -38,7 +38,7 @@ const ServiceMemberInvitationCreate = props => {
   return (
     <Box mb={4}>
       <Heading2 width={[1]} mb="2">
-        Créer une invitation
+        Inviter une personne
       </Heading2>
       <Box bg="white">{isAdmin && <ServiceMemberInvitationForm handleSubmit={handleSubmit} />}</Box>
     </Box>

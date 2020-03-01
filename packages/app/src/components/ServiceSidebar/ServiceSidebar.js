@@ -48,7 +48,7 @@ const ServiceSidebar = props => {
             textAlign: "center"
           }}
         >
-          Ces préférences sont indicatives et sont communiquées au juge lors de son choix
+          Ces informations sont indicatives et sont communiquées au juge des tutelles
         </Text>
       )}
     </Box>
