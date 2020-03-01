@@ -106,8 +106,8 @@ const ServiceEditForm = props => {
           name="competences"
           error={formik.errors.competences}
           onChange={formik.handleChange}
-          label="Informations pour le magistrat"
-          placeholder="Préférences géographiques, compétences, ..."
+          label="Informations à destination du magistrat"
+          placeholder="Préférences géographiques, compétences, langues parlées, ..."
         />
         <InlineError message={formik.errors.competences} fieldId="competences" />
       </Field>
