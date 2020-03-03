@@ -26,7 +26,6 @@ const IndicatorListTotal = () => {
       </Card>
     );
   }
-  console.log(data);
   const {
     serviceLoginCount: {
       aggregate: {
