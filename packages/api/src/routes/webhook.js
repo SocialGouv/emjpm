@@ -25,10 +25,13 @@ const {
   serviceMemberInvitationMail
 } = require("../email/service-member-invitation-mail");
 const getRegionCode = require("../utils/getRegionCode");
+const tokenRequest = require("../controllers/webhook/token-request");
 
 // ----------------------------------
 // -------EMAIL ACCOUNT VALIDATION---
 // ----------------------------------
+
+router.post("/token-request", tokenRequest);
 
 router.post("/email-account-validation", function(req, res) {
   const newUser = req.body.event.data.new;
