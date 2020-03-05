@@ -7,28 +7,28 @@ include:
 
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_nodejs_chart_stage.yml
-    ref: v4.6.0
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_kubectl_image_stage.yml
-    ref: v4.6.0
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_docker_helm_image_stage.yml
-    ref: v4.6.0
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_create_namespace_stage.yml
-    ref: v4.6.0
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_register_stage.yml
-    ref: v4.6.0
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_notify_github_stage.yml
-    ref: v4.6.0
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_k8s_ns_stage.yml
-    ref: v4.6.0
+    ref: v8.0.0
   - project: SocialGouv/gitlab-ci-yml
     file: /base_delete_useless_managed_postgresql_stage.yml
-    ref: v7.3.0
+    ref: v8.0.0
 
 variables:
   # CI variables
@@ -702,6 +702,10 @@ Deploy hasura (dev):
   extends:
     - .deploy_hasura_stage
     - .dev_stage
+  variables:
+    HELM_RENDER_ARGS: >-
+      --set deployment.resources.requests.memory=128Mi
+      --set deployment.resources.requests.cpu=5m
 
 Deploy hasura (prod):
   extends:
