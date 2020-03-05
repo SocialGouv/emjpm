@@ -20,7 +20,6 @@ const linkStyle = {
 const IndicatorsMenu = props => {
   const { data, error, loading } = useQuery(INDICATORS);
   const { innerHeight } = useWindowSize();
-  console.log(innerHeight);
   if (loading) {
     return (
       <Card width="100%">
