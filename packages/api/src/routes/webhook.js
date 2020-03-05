@@ -176,6 +176,9 @@ const getGeoDatas = async (code_postal, ville) => {
   if (!code_postal) {
     return {};
   }
+  if (!ville) {
+    return {};
+  }
   const geoDatas = await GeolocalisationCodePostal.query().where({
     code_postal
   });
