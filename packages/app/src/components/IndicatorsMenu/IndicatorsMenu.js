@@ -5,7 +5,6 @@ import React from "react";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Link as StyledLink } from "rebass";
 
-import { useWindowSize } from "../../lib/hooks";
 import { INDICATORS } from "./queries";
 
 const linkStyle = {
@@ -19,7 +18,7 @@ const linkStyle = {
 
 const IndicatorsMenu = props => {
   const { data, error, loading } = useQuery(INDICATORS);
-  const { innerHeight } = useWindowSize();
+
   if (loading) {
     return (
       <Card width="100%">
@@ -39,9 +38,8 @@ const IndicatorsMenu = props => {
   }
 
   const { departements } = data;
-
   return (
-    <Scrollbar style={{ height: innerHeight - 89, width: "100%" }}>
+    <Scrollbar style={{ height: "100%", width: "100%" }}>
       <Box {...props} mr="1">
         <Card p="1" mb="1" sx={{ borderRadius: "15px" }}>
           <Link prefetch={false} href={`/indicateurs`}>
