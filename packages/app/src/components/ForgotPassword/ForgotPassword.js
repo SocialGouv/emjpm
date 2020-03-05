@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/browser";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import getConfig from "next/config";
@@ -12,25 +13,10 @@ const {
   publicRuntimeConfig: { API_URL }
 } = getConfig();
 
-const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) => {
-  let json = null;
-  setSubmitting(false);
-  try {
-    json = await response.json();
-  } catch (errors) {
-    setStatus({ errorMsg: errors.msg });
-  }
-  if (!response.ok) {
-    setStatus({ errorMsg: json.message });
-    return json;
-  }
-  toggleMessage(true);
-  return json;
-};
-
 const ForgotPassword = () => {
   const url = `${API_URL}/api/auth/forgot-password`;
-  const [isMessageVisible, toggleMessage] = useState(false);
+  const [mailSent, setMailSent] = useState(false);
+
   const handleSubmit = async (values, setSubmitting, setStatus) => {
     const response = await fetch(url, {
       body: JSON.stringify({
@@ -41,12 +27,29 @@ const ForgotPassword = () => {
       },
       method: "POST"
     });
-    checkStatus(response, setSubmitting, setStatus, toggleMessage);
+
+    setSubmitting(false);
+    let json = null;
+
+    try {
+      json = await response.json();
+    } catch (error) {
+      Sentry.captureException(error);
+      setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
+      return;
+    }
+
+    if (!response.ok) {
+      setStatus({ error: json.error });
+      return;
+    }
+
+    setMailSent(true);
   };
 
   const formik = useFormik({
     onSubmit: (values, { setSubmitting, setStatus }) => {
-      handleSubmit(values, setSubmitting, setStatus, toggleMessage);
+      handleSubmit(values, setSubmitting, setStatus);
     },
     validationSchema: forgotPasswordSchema,
     initialValues: {
@@ -62,7 +65,7 @@ const ForgotPassword = () => {
           <Text lineHeight="1.5" color="textSecondary">
             {`Pour demander une réinitialisation de votre mot de passe, saisissez l'adresse e-mail que vous utilisez pour vous connecter à E-mjpm`}
           </Text>
-          {isMessageVisible && (
+          {mailSent && (
             <Box
               sx={{
                 bg: "success",
@@ -82,7 +85,7 @@ const ForgotPassword = () => {
         <form onSubmit={formik.handleSubmit}>
           {!!formik.status && (
             <Box color="error" mb="1">
-              {formik.status.errorMsg}
+              {formik.status.error}
             </Box>
           )}
           <Field>
