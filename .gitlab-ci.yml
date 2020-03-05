@@ -589,6 +589,9 @@ Deploy app (dev):
   extends:
     - .deploy_app_stage
     - .dev_stage
+  variables:
+    HELM_RENDER_ARGS: >-
+      --set deployment.resources.requests.memory=128Mi
 
 Deploy app (prod):
   extends:
