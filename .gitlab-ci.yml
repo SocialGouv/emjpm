@@ -616,6 +616,9 @@ Deploy graphql-server (dev):
   extends:
     - .deploy_graphql-server_stage
     - .dev_stage
+  variables:
+    HELM_RENDER_ARGS: >-
+      --set deployment.resources.requests.memory=128Mi
 
 Deploy graphql-server (prod):
   extends:
