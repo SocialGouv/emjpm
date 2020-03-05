@@ -31,9 +31,18 @@ describe("POST /api/auth/forgot-password", () => {
       const response = await request(server)
         .post("/api/auth/forgot-password")
         .set("Accept", "application/json")
-        .send({ email: null });
+        .send({ body: { email: null } });
 
       expect(response.status).toBe(422);
+    });
+
+    test("it returns error message", async () => {
+      const response = await request(server)
+        .post("/api/auth/forgot-password")
+        .set("Accept", "application/json")
+        .send({ email: "notfound@notfound.com" });
+
+      expect(response.body.error).not.toBeFalsy();
     });
   });
 

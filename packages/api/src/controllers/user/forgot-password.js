@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const { endOfTomorrow } = require("date-fns");
 const uid = require("rand-token").uid;
+const Sentry = require("../../utils/sentry");
 
 const { resetPasswordEmail } = require("../../email/forgot-password-email");
 const { User } = require("../../models/User");
@@ -19,6 +20,7 @@ const forgotPassword = async (req, res) => {
   try {
     user = await User.query().findOne({ email });
   } catch (error) {
+    Sentry.captureException(error);
     return res.status(422).json({ error: "Une erreur est survenue" });
   }
 
@@ -36,6 +38,7 @@ const forgotPassword = async (req, res) => {
         reset_password_expires: endOfTomorrow()
       });
   } catch (error) {
+    Sentry.captureException(error);
     return res.status(422).json({ error: "Une erreur est survenue" });
   }
 
@@ -46,6 +49,7 @@ const forgotPassword = async (req, res) => {
       `${process.env.APP_URL}/account/reset-password?token=${token}`
     );
   } catch (error) {
+    Sentry.captureException(error);
     return res.status(422).json({ error: "Une erreur est survenue" });
   }
 
