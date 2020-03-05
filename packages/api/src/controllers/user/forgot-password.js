@@ -1,54 +1,59 @@
 const { validationResult } = require("express-validator");
-const { resetPasswordEmail } = require("../../email/forgot-password-email");
-const createError = require("http-errors");
-const { User } = require("../../models/User");
+const { endOfTomorrow } = require("date-fns");
 const uid = require("rand-token").uid;
+const Sentry = require("../../utils/sentry");
 
-/**
- * Forgot password using email return ok
- */
+const { resetPasswordEmail } = require("../../email/forgot-password-email");
+const { User } = require("../../models/User");
 
-const forgotPassword = async (req, res, next) => {
+const forgotPassword = async (req, res) => {
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors });
+    return res.status(422).json({ errors });
   }
 
-  const email = req.body.email;
+  const email = req.body.email.toLowerCase().trim();
   const token = uid(16);
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
+  let user;
 
   try {
-    const user = await User.query()
-      .where("email", email.toLowerCase().trim())
-      .first();
-    if (!user) {
-      return next(
-        createError.NotFound(`Aucun utilisateur avec l'email "${email}"`)
-      );
-    }
+    user = await User.query().findOne({ email });
+  } catch (error) {
+    Sentry.captureException(error);
+    return res.status(422).json({ error: "Une erreur est survenue" });
+  }
+
+  if (!user) {
+    return res
+      .status(422)
+      .json({ error: `Aucun utilisateur avec l'email "${email}"` });
+  }
+
+  try {
     await User.query()
       .where("id", user.id)
       .update({
         reset_password_token: token,
-        reset_password_expires: tomorrow
+        reset_password_expires: endOfTomorrow()
       });
+  } catch (error) {
+    Sentry.captureException(error);
+    return res.status(422).json({ error: "Une erreur est survenue" });
+  }
+
+  try {
     resetPasswordEmail(
       user,
       email,
       `${process.env.APP_URL}/account/reset-password?token=${token}`
     );
-    return res.status(200).json();
-  } catch (err) {
-    return res.status(400).json({
-      errors: {
-        msg: "Une erreur est survenue",
-        location: "body",
-        error: err
-      }
-    });
+  } catch (error) {
+    Sentry.captureException(error);
+    return res.status(422).json({ error: "Une erreur est survenue" });
   }
+
+  res.status(200).json({});
 };
 
 module.exports = forgotPassword;
