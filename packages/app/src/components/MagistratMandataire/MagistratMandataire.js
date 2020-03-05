@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Button, Card, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React from "react";
@@ -76,12 +76,16 @@ export const MagistratMandataire = props => {
   } = formatedGestionnaire;
 
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
+  const fullname = `${prenom} ${nom}`;
+
   return (
     <Box {...props} width="100%" mb={6}>
-      <Flex justifyContent="flex-end">
+      <Flex alignItems="center" justifyContent="space-between">
+        <Heading2>{`Mandataire ${fullname}`}</Heading2>
+
         <Link href={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
           <a>
-            <Button>Réserver</Button>
+            <Button>Réserver une mesure</Button>
           </a>
         </Link>
       </Flex>

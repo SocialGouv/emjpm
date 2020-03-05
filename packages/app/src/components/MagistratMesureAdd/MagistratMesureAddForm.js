@@ -92,7 +92,7 @@ export const MagistratMesureAddForm = props => {
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" sx={{ flexGrow: 1, flexBasis: 380 }}>
-        <Heading5 mb="1">Réserver une mesures</Heading5>
+        <Heading5 mb="1">Réserver une mesure</Heading5>
         <Text lineHeight="1.5">
           {`Le formulaire ci-contre vous permet de réserver une mesure aupres d'un mandataire.`}
         </Text>
