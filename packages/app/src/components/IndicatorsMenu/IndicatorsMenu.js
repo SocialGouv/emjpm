@@ -41,14 +41,14 @@ const IndicatorsMenu = props => {
   return (
     <Box {...props}>
       <Card p="1" mb="1" sx={{ borderRadius: "15px" }}>
-        <Link href={`/indicateurs`}>
+        <Link prefetch={false} href={`/indicateurs`}>
           <StyledLink sx={linkStyle}>France entière</StyledLink>
         </Link>
       </Card>
       {departements.map((departement, index) => {
         return (
           <Card key={`${index}-${departement.code}`} p="1" mb="1" sx={{ borderRadius: "15px" }}>
-            <Link href={`/indicateurs/${departement.code}`}>
+            <Link prefetch={false} href={`/indicateurs/${departement.code}`}>
               <StyledLink sx={linkStyle}>{`${departement.code} - ${departement.nom}`}</StyledLink>
             </Link>
           </Card>
