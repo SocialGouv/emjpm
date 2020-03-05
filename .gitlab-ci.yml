@@ -560,6 +560,10 @@ Deploy api (dev):
   extends:
     - .deploy_api_stage
     - .dev_stage
+  variables:
+    HELM_RENDER_ARGS: >-
+      --set deployment.resources.requests.memory=128Mi
+      --set deployment.resources.requests.cpu=1m
 
 Deploy api (prod):
   extends:
