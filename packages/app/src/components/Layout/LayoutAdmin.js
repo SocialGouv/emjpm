@@ -28,6 +28,10 @@ const navigationLinks = [
   {
     title: "API Logs",
     url: "/admin/api_logs"
+  },
+  {
+    title: "Campagnes",
+    url: "/admin/campaigns"
   }
 ];
 
