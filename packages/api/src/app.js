@@ -2,22 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const Sentry = require("@sentry/node");
 
+const Sentry = require("./utils/sentry");
 const apiLog = require("./middlewares/apiLog");
 const pkg = require("../package.json");
 const authRoutes = require("./routes/auth");
 const oauth2Routes = require("./routes/oauth2");
 const editorsRoutes = require("./routes/editors");
-const configuration = require("./env");
-const app = express();
 
-if (configuration.sentryPublicDSN) {
-  Sentry.init({
-    dsn: configuration.sentryPublicDSN,
-    environment: configuration.sentryEnv
-  });
-}
+const app = express();
 
 process.on("unhandledRejection", r => {
   Sentry.captureException(r);
