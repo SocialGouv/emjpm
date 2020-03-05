@@ -1,16 +1,12 @@
 import { css, Global } from "@emotion/core";
-import { DropDownMenu, Header } from "@socialgouv/emjpm-ui-components";
 import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
 
-import { logout } from "../../util/auth";
-import { Link } from "../Commons";
 import { Footer } from "../Footer";
+import { Header } from "../Header";
 import { Navigation } from "../Navigation";
-import { UserInformations } from "../UserInformations";
-import { dropDownLinks } from "./dropDownLink";
 
 const navigationLinks = [
   {
@@ -56,19 +52,7 @@ const LayoutAdmin = props => {
         `}
       />
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <UserInformations
-          Component={props => {
-            return (
-              <Header
-                {...props}
-                Link={Link}
-                dropDownLinks={dropDownLinks}
-                disconnect={logout}
-                DropDownMenu={DropDownMenu}
-              />
-            );
-          }}
-        />
+        <Header />
         {hasNavigation && (
           <BoxWrapper>
             <Navigation links={navigationLinks} />
