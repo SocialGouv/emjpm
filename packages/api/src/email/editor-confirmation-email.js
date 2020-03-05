@@ -3,9 +3,8 @@ const { sendEmail } = require(".");
 const EMAIL_EDITOR_CONFIRMATION = () =>
   `Madame, Monsieur,
 
-  Nous avons le plaisir de vous confirmer votre demande d'accès à l'api e-MJPM pour les éditeurs de logitiels métier à destination des mandataires et des services de mandataire.
-  
-  Veuillez que notre équipe a besoin d'un petit délai pour valider votre demande.
+  Nous avons bien pris en compte votre demande d'accès à l'api e-mjpm des éditeurs de logiciel métier.
+  Le délai de traitement des demandes est en moyenne de 2 jours ouvrés.
 
 À bientôt
 
