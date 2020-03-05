@@ -1,12 +1,11 @@
 import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 
-import { LayoutMagistrat } from "../../../src/components/Layout";
-import { MagistratMandataire } from "../../../src/components/MagistratMandataire";
-import { MagistratMesureAdd } from "../../../src/components/MagistratMesureAdd";
-import { UserContext } from "../../../src/components/UserContext";
-import { withAuthSync } from "../../../src/util/auth";
-import { formatGestionnaireId } from "../../../src/util/mandataires";
+import { LayoutMagistrat } from "../../../../src/components/Layout";
+import { MagistratMandataire } from "../../../../src/components/MagistratMandataire";
+import { UserContext } from "../../../../src/components/UserContext";
+import { withAuthSync } from "../../../../src/util/auth";
+import { formatGestionnaireId } from "../../../../src/util/mandataires";
 
 const Gestionnaire = props => {
   const { gestionnaireId } = props;
@@ -18,7 +17,6 @@ const Gestionnaire = props => {
   return (
     <LayoutMagistrat>
       <BoxWrapper mt={6} px="0">
-        <MagistratMesureAdd serviceId={serviceId} mandataireId={mandataireId} tiId={tiId} />
         <MagistratMandataire serviceId={serviceId} mandataireId={mandataireId} tiId={tiId} />
       </BoxWrapper>
     </LayoutMagistrat>
