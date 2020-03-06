@@ -22,7 +22,7 @@ export const INDICATORS = gql`
 `;
 
 export const FRANCE_INDICATORS = gql`
-  query Inscrits {
+  query AllIndicators {
     serviceLoginCount: view_indicateur_login_aggregate(where: { type: { _eq: "service" } }) {
       aggregate {
         sum {
