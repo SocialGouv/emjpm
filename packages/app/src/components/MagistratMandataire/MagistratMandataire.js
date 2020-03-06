@@ -76,12 +76,12 @@ export const MagistratMandataire = props => {
   } = formatedGestionnaire;
 
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
-  const fullname = `${prenom} ${nom}`;
 
   return (
     <Box {...props} width="100%" mb={6}>
       <Flex alignItems="center" justifyContent="space-between">
-        <Heading2>{`Mandataire ${fullname}`}</Heading2>
+        {serviceId && <Heading2>{etablissement}</Heading2>}
+        {mandataireId && <Heading2>{`${prenom} ${nom}`}</Heading2>}
 
         <Link href={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
           <a>
