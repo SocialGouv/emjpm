@@ -1263,6 +1263,7 @@ Array [
   "mesures_import",
   "regions",
   "role",
+  "satisfaction_campaigns",
   "service_antenne",
   "service_member_invitations",
   "service_members",
