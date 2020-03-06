@@ -56,6 +56,7 @@ services:
       WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION: http://api:4000/webhook/email-account-validation
       WEB_HOOK_URL_MESURES_IMPORT: http://api:4000/webhook/mesures-import
       WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION: http://api:4000/webhook/email-service-member-invitation
+      WEB_HOOK_URL_TOKEN_REQUEST: http://api:4000/webhook/token-request
 
   db:
     image: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/postgres:master
