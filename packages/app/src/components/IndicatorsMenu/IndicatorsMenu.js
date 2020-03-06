@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import Link from "next/link";
 import React from "react";
+import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Link as StyledLink } from "rebass";
 
 import { INDICATORS } from "./queries";
@@ -37,24 +38,25 @@ const IndicatorsMenu = props => {
   }
 
   const { departements } = data;
-
   return (
-    <Box {...props}>
-      <Card p="1" mb="1" sx={{ borderRadius: "15px" }}>
-        <Link href={`/indicateurs`}>
-          <StyledLink sx={linkStyle}>France entière</StyledLink>
-        </Link>
-      </Card>
-      {departements.map((departement, index) => {
-        return (
-          <Card key={`${index}-${departement.code}`} p="1" mb="1" sx={{ borderRadius: "15px" }}>
-            <Link href={`/indicateurs/${departement.code}`}>
-              <StyledLink sx={linkStyle}>{`${departement.code} - ${departement.nom}`}</StyledLink>
-            </Link>
-          </Card>
-        );
-      })}
-    </Box>
+    <Scrollbar style={{ height: "100%", width: "100%" }}>
+      <Box {...props} mr="1">
+        <Card p="1" mb="1" sx={{ borderRadius: "15px" }}>
+          <Link prefetch={false} href={`/indicateurs`}>
+            <StyledLink sx={linkStyle}>France entière</StyledLink>
+          </Link>
+        </Card>
+        {departements.map((departement, index) => {
+          return (
+            <Card key={`${index}-${departement.code}`} p="1" mb="1" sx={{ borderRadius: "15px" }}>
+              <Link prefetch={false} href={`/indicateurs/${departement.code}`}>
+                <StyledLink sx={linkStyle}>{`${departement.code} - ${departement.nom}`}</StyledLink>
+              </Link>
+            </Card>
+          );
+        })}
+      </Box>
+    </Scrollbar>
   );
 };
 
