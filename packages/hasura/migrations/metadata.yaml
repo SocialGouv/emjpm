@@ -1497,6 +1497,9 @@ tables:
       filter: {}
 - table:
     schema: public
+    name: satisfaction_campaigns
+- table:
+    schema: public
     name: service_antenne
   object_relationships:
   - name: service
