@@ -1,5 +1,6 @@
 const IndicatorListStyle = {
-  bg: "none"
+  bg: "none",
+  mr: "20px"
 };
 
 export { IndicatorListStyle };
