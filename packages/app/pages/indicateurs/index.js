@@ -5,7 +5,6 @@ import { Box, Flex } from "rebass";
 import { IndicatorListTotal } from "../../src/components/IndicatorList";
 import { IndicatorsMenu } from "../../src/components/IndicatorsMenu";
 import { LayoutPublic } from "../../src/components/Layout";
-import { withAuthSync } from "../../src/util/auth";
 
 const IndicatorPage = () => {
   return (
@@ -42,4 +41,4 @@ const IndicatorPage = () => {
   );
 };
 
-export default withAuthSync(IndicatorPage);
+export default IndicatorPage;
