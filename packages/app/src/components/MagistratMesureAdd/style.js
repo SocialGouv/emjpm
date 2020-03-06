@@ -1,5 +1,6 @@
 const MagistratMandataireStyle = {
-  bg: "white"
+  bg: "white",
+  mt: 4
 };
 
 const MagistratCommentsStyle = {
