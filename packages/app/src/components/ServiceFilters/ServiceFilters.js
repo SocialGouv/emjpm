@@ -61,7 +61,12 @@ const ServiceFilters = props => {
               <Box width="200px" mr={1}>
                 <Select
                   size="small"
-                  options={MESURE_STATUS_LABEL_VALUE}
+                  options={[
+                    {
+                      label: "Toutes les mesures",
+                      value: null
+                    }
+                  ].concat(MESURE_STATUS_LABEL_VALUE)}
                   placeholder={"État de la mesure"}
                   value={mesureStatus}
                   onChange={option => changeMesureStatus(option)}

@@ -1,9 +1,5 @@
 export const MESURE_STATUS_LABEL_VALUE = [
   {
-    label: "Toutes les mesures",
-    value: null
-  },
-  {
     label: "Mesure éteinte",
     value: "Eteindre mesure"
   },
