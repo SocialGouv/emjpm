@@ -42,6 +42,8 @@ deployment:
       value: "http://${API_SRV_HOST}/webhook/email-cancel-reservation"
     - name: WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION
       value: "http://${API_SRV_HOST}/webhook/email-service-member-invitation"
+    - name: WEB_HOOK_URL_TOKEN_REQUEST
+      value: "http://${API_SRV_HOST}/webhook/token-request"      
 
 service:
   port: ${PORT}
