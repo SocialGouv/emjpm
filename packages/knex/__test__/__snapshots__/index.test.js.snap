@@ -922,6 +922,41 @@ Object {
 }
 `;
 
+exports[`satisfaction_campaigns table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "ended_at": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('satisfaction_campaigns_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "name": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "started_at": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "timestamp with time zone",
+  },
+}
+`;
+
 exports[`service_antenne table schema 1`] = `
 Object {
   "address": Object {
@@ -1263,6 +1298,7 @@ Array [
   "mesures_import",
   "regions",
   "role",
+  "satisfaction_campaign_answers",
   "satisfaction_campaigns",
   "service_antenne",
   "service_member_invitations",
