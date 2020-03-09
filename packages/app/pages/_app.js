@@ -1,10 +1,8 @@
 import "../src/polyfills";
 
-import * as Sentry from "@sentry/browser";
 import theme from "@socialgouv/emjpm-ui-theme";
 import jwtDecode from "jwt-decode";
 import App from "next/app";
-import getConfig from "next/config";
 import React from "react";
 import { ApolloProvider } from "react-apollo";
 import ReactPiwik from "react-piwik";
@@ -13,11 +11,8 @@ import { ThemeProvider } from "theme-ui";
 import { UserProvider } from "../src/components/UserContext";
 import { withApolloClient } from "../src/lib/apollo";
 import { piwikSetup } from "../src/piwik";
+import Sentry from "../src/sentry";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
-
-const {
-  publicRuntimeConfig: { SENTRY_PUBLIC_DSN }
-} = getConfig();
 
 new ReactPiwik({
   siteId: 13,
@@ -47,7 +42,6 @@ class MyApp extends App {
 
   componentDidMount() {
     piwikSetup();
-    sentrySetup();
   }
 
   render() {
@@ -70,29 +64,3 @@ class MyApp extends App {
 }
 
 export default withApolloClient(MyApp);
-
-//
-
-function sentrySetup() {
-  const isBrowser = typeof document !== undefined;
-  if (!isBrowser) {
-    return;
-  }
-  if (SENTRY_PUBLIC_DSN) {
-    try {
-      Sentry.init({
-        attachStacktrace: true,
-        dsn: SENTRY_PUBLIC_DSN,
-        integrations: integrations => {
-          // remove dedupe plugin
-          return integrations.filter(integration => integration.name !== "Dedupe");
-        }
-        //tags: { git_commit: "c0deb10c4" }
-      });
-    } catch (error) {
-      /* eslint-disable no-console */
-      console.log(error);
-      /* eslint-enable no-console */
-    }
-  }
-}
