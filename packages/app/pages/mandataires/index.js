@@ -7,16 +7,15 @@ import { LayoutMandataire } from "../../src/components/Layout";
 import { MandataireFilters } from "../../src/components/MandataireFilters";
 import { FiltersContextProvider } from "../../src/components/MandataireFilters/context";
 import { MandataireMesures } from "../../src/components/MandataireMesures";
-import { MESURE_STATUS_LABEL_VALUE } from "../../src/constants/mesures";
+import { DEFAULT_MESURE_TYPE, MESURE_STATUS_LABEL_VALUE } from "../../src/constants/mesures";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mandataires = () => {
-  const mesureStatus = MESURE_STATUS_LABEL_VALUE[MESURE_STATUS_LABEL_VALUE.length - 1];
-
   return (
     <FiltersContextProvider
       initialValues={{
-        mesureStatus
+        mesureStatus: MESURE_STATUS_LABEL_VALUE[0],
+        mesureType: DEFAULT_MESURE_TYPE
       }}
     >
       <LayoutMandataire>

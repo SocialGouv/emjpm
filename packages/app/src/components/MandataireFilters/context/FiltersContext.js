@@ -6,7 +6,7 @@ export const Context = createContext({});
 
 export const Provider = props => {
   // Initial values are obtained from the props
-  const { children, initialValues } = props;
+  const { children, initialValues = {} } = props;
 
   // Use State to keep the values
   const [mesureType, changeMesureType] = useState(initialValues.mesureType);
