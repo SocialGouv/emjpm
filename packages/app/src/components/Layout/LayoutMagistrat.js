@@ -7,6 +7,7 @@ import { Box } from "rebass";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { Navigation } from "../Navigation";
+import { SatisfactionCampaign } from "../SatisfactionCampaign";
 
 const navigationLinks = [
   {
@@ -58,6 +59,7 @@ const LayoutMagistrat = props => {
           <Footer />
         </BoxWrapper>
       </Box>
+      <SatisfactionCampaign />
     </Fragment>
   );
 };
