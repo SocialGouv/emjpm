@@ -53,9 +53,9 @@ const boxStyle = {
 };
 
 const topTextStyle = {
-  color: "mediumGray",
+  color: "black",
   fontWeight: "600",
-  mt: "2"
+  mb: "5px"
 };
 
 const MagistratMesureAntennesStyle = {

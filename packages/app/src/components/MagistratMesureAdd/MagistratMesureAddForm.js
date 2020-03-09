@@ -1,14 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import {
-  Button,
-  Field,
-  Heading3,
-  Heading5,
-  InlineError,
-  Input,
-  Select,
-  Text
-} from "@socialgouv/emjpm-ui-core";
+import { Button, Field, InlineError, Input, Select, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -17,13 +8,11 @@ import { Box, Flex } from "rebass";
 
 import { CIVILITY, IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { magistratMandataireSchema } from "../../lib/validationSchemas";
-import { MagistratMandataireComments } from "../MagistratMandataireComments";
 import { UserContext } from "../UserContext";
 import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
-import { MagistratCommentsStyle } from "./style";
 
 export const MagistratMesureAddForm = props => {
-  const { serviceId, mandataireId } = props;
+  const { serviceId, mandataireId, cancelActionRoute } = props;
   const {
     cabinet,
     magistrat: { ti_id: tiId }
@@ -94,25 +83,14 @@ export const MagistratMesureAddForm = props => {
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" sx={{ flexGrow: 1, flexBasis: 380 }}>
-        <Heading5 mb="1">Réserver une mesures</Heading5>
         <Text lineHeight="1.5">
           {`Le formulaire ci-contre vous permet de réserver une mesure aupres d'un mandataire.`}
         </Text>
         <Text lineHeight="1.5" mt=" 2">
           {`Une fois les informations souhaitées remplies, cliquer sur "Enregistrer".`}
         </Text>
-        <Box sx={MagistratCommentsStyle}>
-          <MagistratMandataireComments
-            tiId={tiId}
-            serviceId={serviceId}
-            mandataireId={mandataireId}
-          />
-        </Box>
       </Box>
       <Box p="5" sx={{ flexGrow: 99999, flexBasis: 0, minWidth: 320 }}>
-        <Box mb="3">
-          <Heading3>Réserver une mesure</Heading3>
-        </Box>
         <form onSubmit={formik.handleSubmit}>
           <Field>
             <Select
@@ -201,7 +179,9 @@ export const MagistratMesureAddForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/magistrats`);
+                  if (cancelActionRoute) {
+                    Router.push(cancelActionRoute);
+                  }
                 }}
               >
                 Annuler
@@ -221,5 +201,6 @@ export const MagistratMesureAddForm = props => {
 
 MagistratMesureAddForm.propTypes = {
   antenneId: PropTypes.number,
-  mandataireId: PropTypes.number
+  mandataireId: PropTypes.string,
+  cancelActionRoute: PropTypes.string
 };
