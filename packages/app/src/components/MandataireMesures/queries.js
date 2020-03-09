@@ -4,7 +4,7 @@ export const MANDATAIRE_MESURES = gql`
   query MandataireMesures(
     $limit: Int
     $type: String
-    $status: String
+    $status: String!
     $searchText: String
     $excludeStatus: String
     $offset: Int

@@ -17,11 +17,11 @@ const MandataireMesures = props => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { mesureType, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
 
-  let currentMesureType = null;
+  let currentMesureStatus = null;
   if (isOnlyWaiting) {
-    currentMesureType = "Mesure en attente";
+    currentMesureStatus = "Mesure en attente";
   } else {
-    currentMesureType = mesureStatus ? mesureStatus.value : null;
+    currentMesureStatus = mesureStatus ? mesureStatus.value : null;
   }
 
   const queryVariables = {
@@ -29,7 +29,7 @@ const MandataireMesures = props => {
     offset: currentOffset,
     searchText:
       debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
-    status: currentMesureType,
+    status: currentMesureStatus,
     excludeStatus: isOnlyWaiting ? "" : "Mesure en attente",
     type: mesureType ? mesureType.value : null
   };

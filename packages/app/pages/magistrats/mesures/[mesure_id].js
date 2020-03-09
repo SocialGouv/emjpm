@@ -6,12 +6,13 @@ import { LayoutMagistrat } from "../../../src/components/Layout";
 import { MagistratMesure } from "../../../src/components/MagistratMesure";
 import { MagistratMesureMandataire } from "../../../src/components/MagistratMesureMandataire";
 import { MesureProvider } from "../../../src/components/MesureContext";
+import { DEFAULT_MESURE_TYPE } from "../../../src/constants/mesures";
 import { withAuthSync } from "../../../src/util/auth";
 
 const Mandataires = props => {
   const { mesureId } = props;
   return (
-    <LayoutMagistrat>
+    <LayoutMagistrat initialValues={{ mesureType: DEFAULT_MESURE_TYPE }}>
       <BoxWrapper mt={6} px="1">
         <Flex
           sx={{

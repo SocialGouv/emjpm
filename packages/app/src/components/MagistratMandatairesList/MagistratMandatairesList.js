@@ -11,8 +11,10 @@ import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";
 import { formatMandatairesList } from "./utils";
 
+const DEFAULT_VALUE = { label: "Tous les types", value: null };
+
 const optionsType = [
-  { label: "Tous les types", value: null },
+  DEFAULT_VALUE,
   { label: "Préposé", value: "MANDATAIRE_PRE" },
   { label: "Individuel", value: "MANDATAIRE_IND" },
   { label: "Service", value: "SERVICE" }
@@ -29,7 +31,7 @@ const MagistratMandatairesList = props => {
   const {
     magistrat: { ti_id }
   } = props;
-  const [selectedType, setType] = useState(false);
+  const [selectedType, setType] = useState(DEFAULT_VALUE);
   const [selectedCapacity, setCapacity] = useState({
     label: "Du plus disponible au moins disponible",
     value: "desc_nulls_last"
