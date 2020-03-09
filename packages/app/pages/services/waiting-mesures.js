@@ -8,6 +8,7 @@ import { FiltersContextProvider } from "../../src/components/ServiceFilters/cont
 import { ServiceMesures } from "../../src/components/ServiceMesures";
 import { UserContext } from "../../src/components/UserContext";
 import { UserInformations } from "../../src/components/UserInformations";
+import { DEFAULT_MESURE_TYPE } from "../../src/constants/mesures";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {
@@ -19,7 +20,11 @@ const Mesures = () => {
   ] = service_members;
 
   return (
-    <FiltersContextProvider>
+    <FiltersContextProvider
+      initialValues={{
+        mesureType: DEFAULT_MESURE_TYPE
+      }}
+    >
       <LayoutServices>
         <BoxWrapper mt={6} px="1">
           <Heading1>Toutes vos mesures en attente</Heading1>

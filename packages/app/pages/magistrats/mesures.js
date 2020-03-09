@@ -6,11 +6,12 @@ import { LayoutMagistrat } from "../../src/components/Layout";
 import { MagistratFilters } from "../../src/components/MagistratFilters";
 import { FiltersContextProvider } from "../../src/components/MagistratFilters/context";
 import { MagistratMesures } from "../../src/components/MagistratMesures";
+import { DEFAULT_MESURE_TYPE } from "../../src/constants/mesures";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {
   return (
-    <FiltersContextProvider>
+    <FiltersContextProvider initialValues={{ mesureType: DEFAULT_MESURE_TYPE }}>
       <LayoutMagistrat>
         <BoxWrapper mt={6} px="1">
           <Heading1>Toutes vos mesures</Heading1>
