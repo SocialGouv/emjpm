@@ -3,7 +3,6 @@ import React from "react";
 
 import { EditPassword } from "../../src/components/EditPassword";
 import { LayoutMagistrat } from "../../src/components/Layout";
-import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const EditInformations = () => {
@@ -11,11 +10,7 @@ const EditInformations = () => {
     <LayoutMagistrat>
       <BoxWrapper mt={6} px="1">
         <Heading1>Modifier votre mot de passe</Heading1>
-        <UserInformations
-          Component={props => {
-            return <EditPassword {...props} mt="3" />;
-          }}
-        />
+        <EditPassword mt="3" />
       </BoxWrapper>
     </LayoutMagistrat>
   );
