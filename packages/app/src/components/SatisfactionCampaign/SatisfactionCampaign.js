@@ -31,11 +31,11 @@ const SatisfactionCampaign = () => {
     return null;
   }
 
-  if (loading) {
+  if (error) {
     return null;
   }
 
-  if (error) {
+  if (loading && !data) {
     return null;
   }
 
@@ -73,7 +73,9 @@ const SatisfactionCampaign = () => {
         la plateforme eMJPM.
       </Text>
       {isDone ? (
-        <Text fontSize={2}>Merci de votre participation.</Text>
+        <Text mt={6} fontSize={2}>
+          Merci de votre participation.
+        </Text>
       ) : (
         <Flex alignItems="center">
           <Box sx={buttonStyle} onClick={() => handleClick(1)}>
