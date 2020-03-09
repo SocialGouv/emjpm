@@ -1,20 +1,19 @@
-import getRegionCode from "@emjpm/api/src/utils/getRegionCode";
+const getRegionCode = require("@emjpm/api/src/utils/getRegionCode");
 
 exports.up = async knex => {
-  const departements = knex.select("id", "code").from("departements");
+  const departements = await knex("departements").select("id", "code");
   if (departements) {
-    const tis = await knex.select("id", "code").from("tis");
+    const tis = await knex.select("id", "code_postal").from("tis");
     if (tis) {
-      await knex.transaction(async trx => {
-        tis.forEach(async ti => {
-          const { id, code_postal } = ti;
-          const regionCode = getRegionCode(code_postal);
-          const departement = departements.find(d => d.code === regionCode);
-          await knex("departements")
-            .where({ id: id })
-            .update({ departement_id: departement.id })
-            .transacting(trx);
-        });
+      tis.forEach(async ti => {
+        const { id, code_postal } = ti;
+        const regionCode = getRegionCode(code_postal);
+        const departement = departements.find(d => d.code === regionCode);
+        if (departement) {
+          await knex("tis")
+            .where({ id })
+            .update({ departement_id: departement.id });
+        }
       });
     }
   }
