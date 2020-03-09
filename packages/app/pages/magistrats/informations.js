@@ -5,7 +5,6 @@ import { Box, Flex } from "rebass";
 import { LayoutMagistrat } from "../../src/components/Layout";
 import { MagistratInformations } from "../../src/components/MagistratInformations";
 import { MagistratTribunalInformations } from "../../src/components/MagistratTribunalInformations";
-import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {
@@ -26,11 +25,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Informations générales</Heading2>
-            <UserInformations
-              Component={props => {
-                return <MagistratInformations {...props} mt="3" />;
-              }}
-            />
+            <MagistratInformations mt="3" />
           </Box>
           <Box
             sx={{
@@ -40,9 +35,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Votre tribunal</Heading2>
-            <UserInformations
-              Component={props => <MagistratTribunalInformations {...props} mt="3" />}
-            />
+            <MagistratTribunalInformations mt="3" />
           </Box>
         </Flex>
       </BoxWrapper>

@@ -1,14 +1,15 @@
 import { useMutation } from "@apollo/react-hooks";
 import { Card, Heading4, Text } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { ServiceAntenneForm } from "../ServiceAntenneForms";
+import { UserContext } from "../UserContext";
 import { CREATE_ANTENNE } from "./mutations";
 
-const ServiceCreateAntenne = props => {
-  const { service_members } = props;
+const ServiceCreateAntenne = () => {
+  const { service_members } = useContext(UserContext);
   const [currentUserService] = service_members;
   const { service_id } = currentUserService;
 

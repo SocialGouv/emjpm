@@ -1,14 +1,15 @@
 import { Card, Heading3 } from "@socialgouv/emjpm-ui-core";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline, Smartphone } from "styled-icons/material";
 
+import { UserContext } from "../UserContext";
 import { boxStyle, iconTextStyle, innerTextStyle } from "./style";
 
 const MagistratTribunalInformations = props => {
   const {
     magistrat: { ti }
-  } = props;
+  } = useContext(UserContext);
   return (
     <Box {...props}>
       <Card p="5">

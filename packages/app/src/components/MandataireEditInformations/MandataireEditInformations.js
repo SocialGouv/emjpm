@@ -1,20 +1,21 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import { Card, Heading4, Text } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { PATH } from "../../constants/basePath";
 import { getDepartementByCodePostal } from "../../query-service/DepartementQueryService";
 import { isEmailExists } from "../../query-service/EmailQueryService";
 import { isSiretExists } from "../../query-service/SiretQueryService";
+import { UserContext } from "../UserContext";
 import { MandataireEditInformationsForm } from "./MandataireEditInformationsForm";
 import { EDIT_USER } from "./mutations";
 import { MANDATAIRE } from "./queries";
 import { grayBox } from "./style";
 
 const MandataireEditInformations = props => {
-  const { id, type } = props;
+  const { id, type } = useContext(UserContext);
 
   const { data, error, loading } = useQuery(MANDATAIRE, {
     fetchPolicy: "network-only",
