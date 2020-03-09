@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import { Card } from "@socialgouv/emjpm-ui-core";
 import React, { useContext, useEffect, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -64,7 +65,7 @@ const SatisfactionCampaign = () => {
   };
 
   return (
-    <Box sx={containerStyle}>
+    <Card sx={containerStyle}>
       <Text fontSize={3} fontWeight="bold" mb={2}>
         Campagne de satisfaction
       </Text>
@@ -95,7 +96,7 @@ const SatisfactionCampaign = () => {
           </Box>
         </Flex>
       )}
-    </Box>
+    </Card>
   );
 };
 
