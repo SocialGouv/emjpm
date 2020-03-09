@@ -3,9 +3,9 @@ import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 import { Edit, XCircle } from "styled-icons/boxicons-regular";
 
-import { topTextStyle } from "../MagistratMandataire/style";
 import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
 import { REMOVE_COMMENT } from "./mutations";
+import { topTextStyle } from "./style";
 
 const MagistratMandataireComment = props => {
   const {
@@ -29,7 +29,7 @@ const MagistratMandataireComment = props => {
           comment={comment}
         />
       ) : (
-        <Text sx={topTextStyle} fontSize="1" lineHeight="1.5" key={id}>
+        <Text sx={topTextStyle} key={id}>
           <Flex>
             <Box
               sx={{
@@ -37,7 +37,7 @@ const MagistratMandataireComment = props => {
                 flexGrow: 1
               }}
             >
-              - {comment}
+              {`- ${comment}`}
             </Box>
             <Box
               sx={{ cursor: "pointer", mr: "1", width: "16px" }}

@@ -1,9 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { formatGestionnaireId } from "../../../src/util/mandataires";
+import { MagistratMandataireComments } from "../MagistratMandataireComments";
 import { MagistratServiceAntennes } from "../MagistratServiceAntennes";
 import { GESTIONNAIRES } from "./queries";
 import {
@@ -20,8 +23,9 @@ const MagistratMandataireMap = dynamic(
   { ssr: false }
 );
 
-const MagistratMandataire = props => {
-  const { serviceId, mandataireId } = props;
+export const MagistratMandataire = props => {
+  const { gestionnaireId, tiId } = props;
+  const { mandataireId, serviceId } = formatGestionnaireId(gestionnaireId);
   const { data, error, loading } = useQuery(GESTIONNAIRES, {
     variables: {
       mandataire_id: mandataireId,
@@ -72,8 +76,20 @@ const MagistratMandataire = props => {
   } = formatedGestionnaire;
 
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
+
   return (
     <Box {...props} width="100%" mb={6}>
+      <Flex alignItems="center" justifyContent="space-between">
+        {serviceId && <Heading2>{etablissement}</Heading2>}
+        {mandataireId && <Heading2>{`${prenom} ${nom}`}</Heading2>}
+
+        <Link href={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
+          <a>
+            <Button>Réserver une mesure</Button>
+          </a>
+        </Link>
+      </Flex>
+
       <Flex sx={MagistratMandataireStyle} flexDirection="column">
         <Flex>
           <Box width="50%">
@@ -101,7 +117,7 @@ const MagistratMandataire = props => {
                 {lastLogin}
               </Text>
             </Box>
-            <Box>
+            <Box mb={4}>
               <Text sx={MagistratTitleMandataireStyle}>Tribunaux d’instance</Text>
               {tis.map(ti => {
                 return (
@@ -110,6 +126,12 @@ const MagistratMandataire = props => {
                   </Text>
                 );
               })}
+            </Box>
+            <Box>
+              <Text sx={MagistratTitleMandataireStyle}>
+                Informations (Préférences géographiques, compétences, ...)
+              </Text>
+              <pre style={{ whiteSpace: "pre-wrap" }}>{competences}</pre>
             </Box>
           </Box>
           <Box width="50%">
@@ -133,14 +155,16 @@ const MagistratMandataire = props => {
               <Text sx={MagistratTitleMandataireStyle}>Mesure en cours</Text>
               <Text sx={MagistratContentMandataireStyle}>{mesuresInProgress}</Text>
             </Box>
+            <Box>
+              <Text sx={MagistratTitleMandataireStyle}>Observations sur le mandataire</Text>
+              <MagistratMandataireComments
+                tiId={tiId}
+                serviceId={serviceId}
+                mandataireId={mandataireId}
+              />
+            </Box>
           </Box>
         </Flex>
-        <Box>
-          <Text sx={MagistratTitleMandataireStyle}>
-            Informations (Préférences géographiques, compétences, ...)
-          </Text>
-          <pre style={{ whiteSpace: "pre-wrap" }}>{competences}</pre>
-        </Box>
       </Flex>
 
       <Box height="400px" mt="5" sx={MagistratSideMandataireStyle}>
@@ -156,4 +180,4 @@ const MagistratMandataire = props => {
   );
 };
 
-export { MagistratMandataire };
+export default MagistratMandataire;
