@@ -2,7 +2,11 @@ import { Card, Input, Select } from "@socialgouv/emjpm-ui-core";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { MESURE_STATUS_LABEL_VALUE, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
+import {
+  DEFAULT_MESURE_TYPE,
+  MESURE_STATUS_LABEL_VALUE,
+  MESURE_TYPE_LABEL_VALUE
+} from "../../constants/mesures";
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
@@ -27,7 +31,7 @@ const MandataireFilters = props => {
             <Box width="200px" mr={1}>
               <Select
                 size="small"
-                options={MESURE_TYPE_LABEL_VALUE}
+                options={[DEFAULT_MESURE_TYPE].concat(MESURE_TYPE_LABEL_VALUE)}
                 placeholder={"type de la mesure"}
                 value={mesureType}
                 onChange={option => changeMesureType(option)}

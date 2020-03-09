@@ -1,17 +1,18 @@
 export const MESURE_STATUS_LABEL_VALUE = [
   {
-    label: "Toutes les mesures",
-    value: null
+    label: "Mesure en cours",
+    value: "Mesure en cours"
   },
   {
     label: "Mesure éteinte",
     value: "Eteindre mesure"
-  },
-  {
-    label: "Mesure en cours",
-    value: "Mesure en cours"
   }
 ];
+
+export const DEFAULT_MESURE_TYPE = {
+  label: "Tous les types",
+  value: null
+};
 
 export const MESURE_TYPE_LABEL_VALUE = [
   {
