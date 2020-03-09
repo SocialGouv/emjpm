@@ -3,7 +3,7 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex, Link } from "rebass";
 
-import { LayoutSignup } from "../../src/components/Layout";
+import { LayoutPublic } from "../../src/components/Layout";
 
 const backLogin = () => {
   Router.push("/login");
@@ -13,7 +13,7 @@ const cardStyle = { m: "1", mt: "5", p: "5" };
 
 const CongratulationPage = () => {
   return (
-    <LayoutSignup>
+    <LayoutPublic>
       <BoxWrapper mt={6} px="1" p={"150px"}>
         <Card sx={cardStyle}>
           <Heading2>{"Votre demande d'inscription est terminée"}</Heading2>
@@ -32,7 +32,7 @@ const CongratulationPage = () => {
           </Flex>
         </Card>
       </BoxWrapper>
-    </LayoutSignup>
+    </LayoutPublic>
   );
 };
 

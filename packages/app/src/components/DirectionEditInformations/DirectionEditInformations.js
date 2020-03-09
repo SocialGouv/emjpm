@@ -2,14 +2,16 @@ import { useMutation } from "@apollo/react-hooks";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
+import { UserContext } from "../../../src/components/UserContext";
 import { directionEditSchema } from "../../lib/validationSchemas/directionEditSchema";
 import { EDIT_USER } from "./mutations";
 
-const DirectionEditInformations = props => {
-  const { prenom, nom, email, id } = props;
+const DirectionEditInformations = () => {
+  const { prenom, nom, email, id } = useContext(UserContext);
+
   const [editUser] = useMutation(EDIT_USER, {
     update() {
       Router.push("/direction/informations", `/direction/informations`, {

@@ -6,7 +6,6 @@ import React, { Fragment } from "react";
 import { Box } from "rebass";
 
 import { Footer } from "../Footer";
-import { dropDownLinks } from "./dropDownLink";
 
 const LayoutPublic = props => {
   const { children } = props;
@@ -29,7 +28,7 @@ const LayoutPublic = props => {
         `}
       />
       <Box sx={{ height: "66px", position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <Header {...props} dropDownLinks={dropDownLinks} isDisconnected />
+        <Header isDisconnected />
       </Box>
       {children}
       <Box bg="cardPrimary">

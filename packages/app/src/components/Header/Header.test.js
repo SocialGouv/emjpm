@@ -1,9 +1,9 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import { UserInformations } from "./UserInformations";
+import { Header } from "./Header";
 
 it("renders correctly", () => {
-  const tree = renderer.create(<UserInformations />).toJSON();
+  const tree = renderer.create(<Header />).toJSON();
   expect(tree).toMatchSnapshot();
 });

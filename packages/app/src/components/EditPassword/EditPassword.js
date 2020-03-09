@@ -2,13 +2,14 @@ import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@social
 import { useFormik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { PATH } from "../../constants/basePath";
 import { passwordSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
+import { UserContext } from "../UserContext";
 
 const {
   publicRuntimeConfig: { API_URL }
@@ -33,8 +34,8 @@ const checkStatus = async (response, setSubmitting, setStatus, type) => {
   return json;
 };
 
-const EditPassword = props => {
-  const { username, type } = props;
+const EditPassword = () => {
+  const { username, type } = useContext(UserContext);
   const url = `${API_URL}/api/auth/reset-password`;
 
   const handleSubmit = async (values, setSubmitting, setStatus, type) => {

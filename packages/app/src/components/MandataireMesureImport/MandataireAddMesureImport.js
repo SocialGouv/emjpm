@@ -1,13 +1,14 @@
 import { useMutation } from "@apollo/react-hooks";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { csvToJson, validateImportData, xlsToJson } from "../../util/import/index";
+import { UserContext } from "../UserContext";
 import { MandataireMesureImportFilepicker } from "./MandataireMesureImportFilepicker";
 import { MandataireMesureImportResult } from "./MandataireMesureImportResult";
 import { ADD_IMPORT } from "./mutations";
 
-export const MandataireAddMesureImport = props => {
-  const { userId } = props;
+export const MandataireAddMesureImport = () => {
+  const { userId } = useContext(UserContext);
   const [result, setResult] = useState(null);
   const [addImport] = useMutation(ADD_IMPORT);
 
