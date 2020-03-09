@@ -23,6 +23,14 @@ export const SATISFACTION_CAMPAIGN = gql`
       name
       started_at
       ended_at
+      answers: satisfaction_campaign_answers_aggregate {
+        aggregate {
+          count
+          avg {
+            value
+          }
+        }
+      }
     }
   }
 `;

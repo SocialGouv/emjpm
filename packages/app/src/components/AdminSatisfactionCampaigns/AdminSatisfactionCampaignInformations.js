@@ -54,6 +54,24 @@ const AdminSatisfactionCampaignInformations = props => {
           <Text>{format(new Date(satisfactionCampaign.ended_at), "dd/MM/yyyy")}</Text>
         </Box>
       </Flex>
+      <Flex mb={4}>
+        <Box width={1 / 3} p={2} bg="cardSecondary">
+          Nombre de réponses
+        </Box>
+        <Box width={2 / 3} px={4} py={2}>
+          <Text>{satisfactionCampaign.answers.aggregate.count}</Text>
+        </Box>
+      </Flex>
+      <Flex mb={4}>
+        <Box width={1 / 3} p={2} bg="cardSecondary">
+          Note moyenne des réponses (1 à 3)
+        </Box>
+        <Box width={2 / 3} px={4} py={2}>
+          {satisfactionCampaign.answers.aggregate.count && (
+            <Text>{satisfactionCampaign.answers.aggregate.avg.value.toFixed(2)}</Text>
+          )}
+        </Box>
+      </Flex>
     </Box>
   );
 };
