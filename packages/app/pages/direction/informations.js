@@ -4,7 +4,6 @@ import { Box, Flex } from "rebass";
 
 import { DirectionInformations } from "../../src/components/DirectionInformations";
 import { LayoutDirection } from "../../src/components/Layout";
-import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {
@@ -25,11 +24,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Informations générales</Heading2>
-            <UserInformations
-              Component={props => {
-                return <DirectionInformations {...props} mt="3" />;
-              }}
-            />
+            <DirectionInformations mt="3" />
           </Box>
         </Flex>
       </BoxWrapper>
