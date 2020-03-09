@@ -6,11 +6,11 @@ export const Context = createContext({});
 
 export const Provider = props => {
   // Initial values are obtained from the props
-  const { children } = props;
+  const { children, initialValues = {} } = props;
 
   // Use State to keep the values
-  const [mesureType, changeMesureType] = useState(false);
-  const [searchText, changeSearchText] = useState("");
+  const [mesureType, changeMesureType] = useState(initialValues.mesureType);
+  const [searchText, changeSearchText] = useState(initialValues.searchText || "");
 
   const debouncedSearchText = useDebounce(searchText, 1000);
 
