@@ -7,6 +7,7 @@ import { Box } from "rebass";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { Navigation } from "../Navigation";
+import { SatisfactionCampaign } from "../SatisfactionCampaign";
 import { ServiceInformationsSidebar } from "../ServiceInformationsSidebar";
 
 const LayoutServices = props => {
@@ -82,6 +83,7 @@ const LayoutServices = props => {
       >
         <ServiceInformationsSidebar />
       </Box>
+      <SatisfactionCampaign />
     </Fragment>
   );
 };

@@ -8,6 +8,8 @@ import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { MandataireInformationsSidebar } from "../MandataireInformationsSidebar";
 import { Navigation } from "../Navigation";
+import { SatisfactionCampaign } from "../SatisfactionCampaign";
+
 const navigationLinks = [
   {
     title: "Vos mesures",
@@ -80,6 +82,7 @@ const LayoutMandataire = props => {
       >
         <MandataireInformationsSidebar />
       </Box>
+      <SatisfactionCampaign />
     </Fragment>
   );
 };
