@@ -1,12 +1,14 @@
 import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline } from "styled-icons/material";
 
 import { LinkButton } from "../Commons";
+import { UserContext } from "../UserContext";
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
+
 const MagistratInformations = props => {
-  const { email, cabinet, nom, prenom } = props;
+  const { email, cabinet, nom, prenom } = useContext(UserContext);
 
   return (
     <Box {...props}>

@@ -2,11 +2,12 @@ import { useQuery } from "@apollo/react-hooks";
 import { MandataireContextProvider, MandataireListItem } from "@socialgouv/emjpm-ui-components";
 import { Card, Heading4, Input, Select, Spinner, Text } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { useDebounce } from "../../lib/hooks";
+import { UserContext } from "../UserContext";
 import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";
 import { formatMandatairesList } from "./utils";
@@ -30,7 +31,7 @@ const RESULT_PER_PAGE = 20;
 const MagistratMandatairesList = props => {
   const {
     magistrat: { ti_id }
-  } = props;
+  } = useContext(UserContext);
   const [selectedType, setType] = useState(DEFAULT_VALUE);
   const [selectedCapacity, setCapacity] = useState({
     label: "Du plus disponible au moins disponible",
