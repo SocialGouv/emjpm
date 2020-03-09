@@ -12,7 +12,7 @@ import { SATISFACTION_CAMPAIGNS } from "./queries";
 import { descriptionStyle, labelStyle } from "./style";
 
 const RowItem = ({ item }) => {
-  const { id, name, started_at, ended_at } = item;
+  const { id, name, started_at, ended_at, answers } = item;
   const [removeSatisfactionCampaign] = useMutation(REMOVE_SATISFACTION_CAMPAIGN);
 
   const removeSatisfactionCampaignFromList = async id => {
@@ -47,6 +47,16 @@ const RowItem = ({ item }) => {
           <Flex width="100px" flexDirection="column">
             <Text sx={labelStyle}>Date de fin</Text>
             <Text sx={descriptionStyle}>{format(new Date(ended_at), "dd/MM/yyyy")}</Text>
+          </Flex>
+          <Flex width="100px" flexDirection="column">
+            <Text sx={labelStyle}>Réponses</Text>
+            <Text sx={descriptionStyle}>{answers.aggregate.count}</Text>
+          </Flex>
+          <Flex width="100px" flexDirection="column">
+            <Text sx={labelStyle}>Note moyenne</Text>
+            <Text sx={descriptionStyle}>
+              {answers.aggregate.avg && answers.aggregate.avg.value}
+            </Text>
           </Flex>
         </Flex>
 
