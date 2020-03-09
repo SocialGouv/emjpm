@@ -13,6 +13,7 @@ import { mandataireMesureSchema } from "./mandataireMesureSchema";
 import { mandataireSignupSchema } from "./mandataireSignupSchema";
 import { passwordSchema } from "./passwordSchema";
 import { resetPasswordSchema } from "./resetPasswordSchema";
+import { satisfactionCampaignSchema } from "./satisfactionCampaignSchema";
 import { serviceAcceptMesureSchema } from "./serviceAcceptMesureSchema";
 import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMemberInvitationSchema } from "./serviceMemberInvitationSchema";
@@ -45,5 +46,6 @@ export {
   signupMagistratSchema,
   signupSchema,
   signupServiceSchema,
-  editorTokenSchema
+  editorTokenSchema,
+  satisfactionCampaignSchema
 };

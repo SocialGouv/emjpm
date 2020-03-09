@@ -7,6 +7,7 @@ import { Box } from "rebass";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { Navigation } from "../Navigation";
+import { SatisfactionCampaign } from "../SatisfactionCampaign";
 
 const navigationLinks = [
   {
@@ -54,6 +55,7 @@ const LayoutDirection = props => {
           <Footer />
         </BoxWrapper>
       </Box>
+      <SatisfactionCampaign />
     </Fragment>
   );
 };
