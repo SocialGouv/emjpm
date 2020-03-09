@@ -8,8 +8,8 @@ import { ServiceFilters } from "../../src/components/ServiceFilters";
 import { FiltersContextProvider } from "../../src/components/ServiceFilters/context";
 import { ServiceMesures } from "../../src/components/ServiceMesures";
 import { UserContext } from "../../src/components/UserContext";
-import { withAuthSync } from "../../src/util/auth";
 import { DEFAULT_MESURE_TYPE, MESURE_STATUS_LABEL_VALUE } from "../../src/constants/mesures";
+import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {
   const { service_members } = useContext(UserContext);

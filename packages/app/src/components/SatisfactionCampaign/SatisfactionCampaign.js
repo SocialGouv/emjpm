@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Card } from "@socialgouv/emjpm-ui-core";
-import React, { useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { UserContext } from "../UserContext";
@@ -66,35 +66,36 @@ const SatisfactionCampaign = () => {
 
   return (
     <Card sx={containerStyle}>
-      <Text fontSize={3} fontWeight="bold" mb={2}>
-        Campagne de satisfaction
-      </Text>
-      <Text lineHeight={1.3} fontSize={2} mb={4}>
-        Vous êtes invité à renseigner votre niveau de satisfaction concernant votre utilisation de
-        la plateforme eMJPM.
-      </Text>
       {isDone ? (
-        <Text mt={6} fontSize={2}>
+        <Text mt={6} fontSize={4}>
           Merci de votre participation.
         </Text>
       ) : (
-        <Flex alignItems="center">
-          <Box sx={buttonStyle} onClick={() => handleClick(1)}>
-            <span role="img" aria-label="Non satisfait">
-              &#128577;
-            </span>
-          </Box>
-          <Box sx={buttonStyle} onClick={() => handleClick(2)}>
-            <span role="img" aria-label="Satisfait">
-              &#128528;
-            </span>
-          </Box>
-          <Box sx={buttonStyle} onClick={() => handleClick(3)}>
-            <span role="img" aria-label="Très satisfait">
-              &#128578;
-            </span>
-          </Box>
-        </Flex>
+        <Fragment>
+          <Text fontSize={3} fontWeight="bold" mb={2}>
+            Donnez-nous votre avis
+          </Text>
+          <Text lineHeight={1.3} fontSize={2} mb={4}>
+            Etes-vous satisfait de la plateforme e-MJPM?
+          </Text>
+          <Flex alignItems="center">
+            <Box sx={buttonStyle} onClick={() => handleClick(1)}>
+              <span role="img" aria-label="Non satisfait">
+                &#128577;
+              </span>
+            </Box>
+            <Box sx={buttonStyle} onClick={() => handleClick(2)}>
+              <span role="img" aria-label="Satisfait">
+                &#128528;
+              </span>
+            </Box>
+            <Box sx={buttonStyle} onClick={() => handleClick(3)}>
+              <span role="img" aria-label="Très satisfait">
+                &#128578;
+              </span>
+            </Box>
+          </Flex>
+        </Fragment>
       )}
     </Card>
   );
