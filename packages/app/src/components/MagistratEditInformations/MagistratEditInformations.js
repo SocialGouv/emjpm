@@ -2,16 +2,17 @@ import { useMutation } from "@apollo/react-hooks";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import Router from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { PATH } from "../../constants/basePath";
 import { magistratEditSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
+import { UserContext } from "../UserContext";
 import { EDIT_USER } from "./mutations";
 
-const MagistratEditInformations = props => {
-  const { cabinet, prenom, nom, email, id, type } = props;
+const MagistratEditInformations = () => {
+  const { cabinet, prenom, nom, email, id, type } = useContext(UserContext);
 
   const [editUser] = useMutation(EDIT_USER, {
     update() {

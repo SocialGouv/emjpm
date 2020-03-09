@@ -7,14 +7,12 @@ import { LayoutMandataireMap } from "./LayoutMandataireMap";
 import { LayoutPublic } from "./LayoutPublic";
 import { LayoutServices } from "./LayoutServices";
 import { LayoutServicesMap } from "./LayoutServicesMap";
-import { LayoutSignup } from "./LayoutSignup";
 
 export {
   LayoutDirection,
   LayoutServices,
   LayoutMagistrat,
   LayoutAdmin,
-  LayoutSignup,
   LayoutMandataire,
   LayoutPublic,
   LayoutMagistratMap,
