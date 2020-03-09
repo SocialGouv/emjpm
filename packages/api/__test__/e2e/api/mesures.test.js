@@ -9,7 +9,7 @@ process.env.APP_URL = "https://emjpm.gouv.fr";
 
 const { knex } = global;
 jest.setMock("@emjpm/api/src/db/knex", knex);
-jest.setTimeout(30000);
+
 const server = require("@emjpm/api/src/app");
 
 beforeAll(async () => {
