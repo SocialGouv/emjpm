@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Button, Card, Heading4, Heading5, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
 import { Box, Text } from "rebass";
@@ -42,7 +42,6 @@ const MagistratMandataireComments = props => {
   const { commentaires } = data;
   return (
     <Fragment>
-      <Heading5>Observations sur le mandataire</Heading5>
       {commentaires.length > 0 ? (
         <Box width="100%">
           {commentaires.map(commentaire => {
