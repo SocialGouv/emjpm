@@ -1,3 +1,5 @@
+import getRegionCode from "@emjpm/api/src/utils/getRegionCode";
+
 exports.up = async knex => {
   const departements = knex.select("id", "code").from("departements");
   if (departements) {
@@ -6,13 +8,8 @@ exports.up = async knex => {
       await knex.transaction(async trx => {
         tis.forEach(async ti => {
           const { id, code_postal } = ti;
-          const twoDigitsZipCode = code_postal.substr(0, 2);
-
-          // TODO: traiter le cas de la corse (2A & 2B)
-          const departement = departements.find(
-            d => d.code === twoDigitsZipCode
-          );
-
+          const regionCode = getRegionCode(code_postal);
+          const departement = departements.find(d => d.code === regionCode);
           await knex("departements")
             .where({ id: id })
             .update({ departement_id: departement.id })
