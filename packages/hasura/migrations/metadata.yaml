@@ -1542,6 +1542,15 @@ tables:
       - satisfaction_campaign_id
       - user_id
       - value
+  - role: ti
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - satisfaction_campaign_id
+      - user_id
+      - value
   select_permissions:
   - role: direction
     permission:
