@@ -7,7 +7,6 @@ import { ServiceAntennes } from "../../src/components/ServiceAntennes";
 import { ServiceInformations } from "../../src/components/ServiceInformations";
 import { ServiceSidebar } from "../../src/components/ServiceSidebar";
 import { UserContext } from "../../src/components/UserContext";
-import { UserInformations } from "../../src/components/UserInformations";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {
@@ -31,7 +30,7 @@ const Informations = () => {
             }}
           >
             <Heading2>Informations générales de votre service</Heading2>
-            <UserInformations Component={props => <ServiceInformations {...props} mt="3" />} />
+            <ServiceInformations mt="3" />
           </Box>
           <Box
             sx={{
