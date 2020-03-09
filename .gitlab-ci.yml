@@ -241,7 +241,7 @@ Test @emjpm/api:
     PGUSER: postgres
     TZ: Europe/Paris
   before_script:
-    - apk add --update --no-cache postgresql=~11
+    - apk add --update --no-cache postgresql=~12
     - psql --version
     #
     - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
