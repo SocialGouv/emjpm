@@ -48,11 +48,7 @@ const RowItem = ({ item }) => {
           </Box>
         </Flex>
       </Card>
-      {editMode && (
-        <Card overflow="hidden" p="0" pt="1" m="1" mt="-20px">
-          <AdminEditTribunal tribunal={item} closePanel={toogleEditMode} />
-        </Card>
-      )}
+      {editMode && <AdminEditTribunal tribunal={item} closePanel={toogleEditMode} />}
     </>
   );
 };
