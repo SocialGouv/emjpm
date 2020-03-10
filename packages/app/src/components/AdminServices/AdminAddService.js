@@ -27,7 +27,7 @@ export const AdminAddService = () => {
 
   const handleSubmit = async (values, { setErrors, setSubmitting }) => {
     const { depcode } = values.geocode;
-    const department = departements.find(d => d.id === depcode);
+    const department = departements.find(d => d.code === depcode);
 
     if (!department) {
       setErrors({ geocode: "L'adresse est invalide, veuillez la resaisir" });

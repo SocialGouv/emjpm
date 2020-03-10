@@ -34,8 +34,7 @@ export const geocode = async q => {
     const { city, postcode, label, context } = properties;
     const { coordinates } = geometry;
     const [longitude, latitude] = coordinates;
-    const [depcodeString] = context.split(", ");
-    const depcode = parseInt(depcodeString);
+    const [depcode] = context.split(", ");
 
     return {
       city,

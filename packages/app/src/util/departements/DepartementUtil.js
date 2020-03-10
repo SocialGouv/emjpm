@@ -1,19 +1,16 @@
-export const getRegionCode = codePostal => {
-  if (!codePostal) {
-    return;
+export const getRegionCode = zipcode => {
+  if (!zipcode || zipcode.length !== 5) {
+    throw "zip code is invalid";
   }
-
-  codePostal = `${codePostal}`;
-
-  let code;
-  if (codePostal.startsWith("201")) {
-    code = "2A";
-  } else if (codePostal.startsWith("202")) {
-    code = "2B";
+  if (zipcode.startsWith("20")) {
+    // Corse
+    return parseInt(zipcode) < 20200 ? "2A" : "2B";
+  } else if (zipcode.startsWith("97") || zipcode.startsWith("98")) {
+    // Dom-Tom
+    return zipcode.substring(0, 3);
   } else {
-    code = codePostal.substring(0, 2);
+    return zipcode.substring(0, 2);
   }
-  return code;
 };
 
 export const findDepartement = (codePostal, departements) => {

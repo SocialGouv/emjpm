@@ -1372,6 +1372,12 @@ Object {
     "nullable": false,
     "type": "timestamp with time zone",
   },
+  "departement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "email": Object {
     "defaultValue": null,
     "maxLength": 255,
