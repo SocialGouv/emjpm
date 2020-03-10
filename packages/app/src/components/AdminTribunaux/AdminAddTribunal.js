@@ -20,9 +20,7 @@ export const AdminAddTribunal = () => {
     <AdminTribunalForm
       onCancel={() => Router.push("/admin/tribunaux")}
       onSubmit={async values => {
-        // TODO: il faudrait passer ca côté server-side
         const departement = data.departements.find(({ code }) => code === values.geocode.depcode);
-
         await addTribunal({
           variables: {
             address: values.geocode.label,
