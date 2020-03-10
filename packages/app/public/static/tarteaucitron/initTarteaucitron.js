@@ -27,7 +27,7 @@ tarteaucitron.init({
 });
 
 tarteaucitron.user.matomoId = 13;
-tarteaucitron.user.matomoHost = "matomo.fabrique.social.gouv.fr";
+tarteaucitron.user.matomoHost = "https://matomo.fabrique.social.gouv.fr/";
 tarteaucitron.user.hotjarId = 1487525;
 tarteaucitron.user.HotjarSv = 6;
 
