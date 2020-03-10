@@ -6,7 +6,7 @@ import { IndicatorListTotal } from "../../src/components/IndicatorList";
 import { IndicatorsMenu } from "../../src/components/IndicatorsMenu";
 import { LayoutPublic } from "../../src/components/Layout";
 
-const IndicatorPage = () => {
+const StatsPage = () => {
   return (
     <LayoutPublic>
       <BoxWrapper>
@@ -41,4 +41,4 @@ const IndicatorPage = () => {
   );
 };
 
-export default IndicatorPage;
+export default StatsPage;
