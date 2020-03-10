@@ -11,8 +11,8 @@ import { ThemeProvider } from "theme-ui";
 import { UserProvider } from "../src/components/UserContext";
 import { withApolloClient } from "../src/lib/apollo";
 import { piwikSetup } from "../src/piwik";
-import Sentry from "../src/sentry";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
+import Sentry from "../src/util/sentry";
 
 new ReactPiwik({
   siteId: 13,
