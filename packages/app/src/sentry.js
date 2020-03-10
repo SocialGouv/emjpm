@@ -1,12 +1,10 @@
-import * as Sentry from "@sentry/browser";
+import * as Sentry from "@sentry/node";
 import getConfig from "next/config";
 
 const {
   publicRuntimeConfig: { SENTRY_PUBLIC_DSN }
 } = getConfig();
 
-// if SENTRY_PUBLIC_DSN does not exist, it will just not send any events.
-// see https://docs.sentry.io/error-reporting/configuration/?platform=javascript#dsn
 try {
   Sentry.init({
     attachStacktrace: true,
@@ -16,4 +14,19 @@ try {
   console.log(`SENTRY: ${error.message}`);
 }
 
-export default Sentry;
+const captureException = (error, context = {}) => {
+  Sentry.configureScope(scope => {
+    if (error.message) {
+      scope.setFingerprint([error.message]);
+    }
+
+    scope.setTag("context", JSON.stringify(context));
+    scope.setTag("ssr", typeof window === "undefined");
+  });
+
+  Sentry.captureException(error);
+};
+
+export default {
+  captureException
+};

@@ -26,18 +26,17 @@ class MyApp extends App {
 
     let pageProps = {};
 
-    try {
-      if (Component.getInitialProps) {
-        pageProps = await Component.getInitialProps(ctx);
-      }
-    } catch (e) {
-      Sentry.captureException(e, ctx);
-      //throw e; // you can also skip re-throwing and set property on pageProps
+    if (!Component.getInitialProps) {
+      return { pageProps };
     }
 
-    return {
-      pageProps
-    };
+    try {
+      pageProps = await Component.getInitialProps(ctx);
+    } catch (e) {
+      Sentry.captureException(e, ctx);
+    }
+
+    return { pageProps };
   }
 
   componentDidMount() {
@@ -50,7 +49,9 @@ class MyApp extends App {
     const currentUser = token ? jwtDecode(token) : null;
     const data = { currentUser: formatUserFromToken(currentUser) };
     const user = formatUserFromToken(currentUser);
+
     apolloClient.cache.writeData({ data });
+
     return (
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
