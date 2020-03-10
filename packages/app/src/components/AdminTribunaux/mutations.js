@@ -12,6 +12,7 @@ export const UPDATE_TRIBUNAL = gql`
     $address: String!
     $latitude: Float!
     $longitude: Float!
+    $departement_id: Int!
   ) {
     update_tis(
       where: { id: { _eq: $id } }
@@ -25,6 +26,7 @@ export const UPDATE_TRIBUNAL = gql`
         address: $address
         latitude: $latitude
         longitude: $longitude
+        departement_id: $departement_id
       }
     ) {
       affected_rows
@@ -43,6 +45,7 @@ export const ADD_TRIBUNAL = gql`
     $email: String!
     $telephone: String!
     $siret: String!
+    $departement_id: Int!
   ) {
     insert_tis(
       objects: {
@@ -55,6 +58,7 @@ export const ADD_TRIBUNAL = gql`
         address: $address
         latitude: $latitude
         longitude: $longitude
+        departement_id: $departement_id
       }
     ) {
       returning {
