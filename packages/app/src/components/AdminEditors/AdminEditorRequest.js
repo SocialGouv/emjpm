@@ -3,6 +3,7 @@ import { Button, Card, Heading5 } from "@socialgouv/emjpm-ui-core";
 import React, { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import Sentry from "../../util/sentry";
 import { PaginatedList } from "../PaginatedList";
 import { ADD_EDITOR_FROM_REQUEST } from "./mutations";
 import { EDITOR_REQUESTS } from "./queries";
@@ -25,7 +26,8 @@ const RowItem = ({ item }) => {
         }
       });
     } catch (error) {
-      // TODO(paullaunay): log error in sentry and form
+      Sentry.captureException(error);
+      // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
   };
   const { id, name, email } = item;

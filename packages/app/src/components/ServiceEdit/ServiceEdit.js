@@ -4,6 +4,7 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 
+import Sentry from "../../util/sentry";
 import { EDIT_ANTENNE } from "./mutations";
 import { GET_SERVICES } from "./queries";
 import { ServiceEditForm } from "./ServiceEditForm";
@@ -50,7 +51,8 @@ const ServiceEdit = () => {
         }
       });
     } catch (error) {
-      // TODO(paullaunay): log in sentry and handle in form
+      Sentry.captureException(error);
+      // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
 
     setSubmitting(false);

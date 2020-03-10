@@ -4,6 +4,7 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 
+import Sentry from "../../util/sentry";
 import { ServiceAntenneForm } from "../ServiceAntenneForms";
 import { EDIT_ANTENNE } from "./mutations";
 
@@ -38,7 +39,8 @@ const ServiceAntenneEdit = props => {
         }
       });
     } catch (error) {
-      // TODO(paullaunay): log in sentry and handle in form
+      Sentry.captureException(error);
+      // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
 
     setSubmitting(false);

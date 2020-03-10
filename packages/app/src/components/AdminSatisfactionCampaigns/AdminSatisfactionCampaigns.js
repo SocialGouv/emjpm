@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import Sentry from "../../util/sentry";
 import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
 import { REMOVE_SATISFACTION_CAMPAIGN } from "./mutations";
@@ -24,7 +25,8 @@ const RowItem = ({ item }) => {
         }
       });
     } catch (error) {
-      // TODO(paullaunay): log error in sentry and form
+      Sentry.captureException(error);
+      // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
   };
 

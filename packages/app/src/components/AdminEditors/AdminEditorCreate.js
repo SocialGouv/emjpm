@@ -3,6 +3,7 @@ import { Card } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
 import React from "react";
 
+import Sentry from "../../util/sentry";
 import { AdminEditorForm } from "./AdminEditorForm";
 import { ADD_EDITOR } from "./mutations";
 import { cardStyle } from "./style";
@@ -10,7 +11,7 @@ import { cardStyle } from "./style";
 export const AdminEditorCreate = () => {
   const [addEditor] = useMutation(ADD_EDITOR);
 
-  const handleSubmit = async (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     // TODO(paullaunay): generate key on server-side via hasura webhook or postgres func
     const api_token = Math.random()
       .toString(36)
@@ -24,7 +25,8 @@ export const AdminEditorCreate = () => {
         }
       });
     } catch (error) {
-      // TODO(paullaunay): log error in sentry and form
+      Sentry.captureException(error);
+      setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
     }
 
     setSubmitting(false);
