@@ -13,7 +13,8 @@ const filterArrays = arrays => {
     const [service] = filterArray(array, "service");
     const [prepose] = filterArray(array, "prepose");
     const [individuel] = filterArray(array, "individuel");
-    return { service, prepose, individuel };
+    const [ti] = filterArray(array, "ti");
+    return { service, prepose, individuel, ti };
   });
 };
 
@@ -51,8 +52,8 @@ const IndicatorList = props => {
       <Box
         sx={{
           display: "grid",
-          gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(3, 1fr)"]
+          gridGap: 4,
+          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(4, 1fr)"]
         }}
       >
         <Indicator
@@ -76,6 +77,12 @@ const IndicatorList = props => {
         <Indicator
           error={false}
           loading={false}
+          title="Magistrats inscrits"
+          indicator={inscritData.ti ? inscritData.ti.count : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
           title="Services mandataires connectés dans le dernier mois"
           indicator={loginData.service ? loginData.service.count : 0}
         />
@@ -90,6 +97,12 @@ const IndicatorList = props => {
           loading={false}
           title="Mandataires individuels connectés dans le dernier mois"
           indicator={loginData.individuel ? loginData.individuel.count : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Magistrats connectés dans le dernier mois"
+          indicator={loginData.ti ? loginData.ti.count : 0}
         />
       </Box>
     </Box>

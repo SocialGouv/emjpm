@@ -5,9 +5,8 @@ import { Box, Flex } from "rebass";
 import { IndicatorList } from "../../src/components/IndicatorList";
 import { IndicatorsMenu } from "../../src/components/IndicatorsMenu";
 import { LayoutPublic } from "../../src/components/Layout";
-import { withAuthSync } from "../../src/util/auth";
 
-const IndicatorPage = props => {
+const DepartmentStatsPage = props => {
   const { departementCode } = props;
   return (
     <LayoutPublic>
@@ -43,8 +42,8 @@ const IndicatorPage = props => {
   );
 };
 
-IndicatorPage.getInitialProps = async ({ query }) => {
+DepartmentStatsPage.getInitialProps = async ({ query }) => {
   return { departementCode: query.departement_code };
 };
 
-export default withAuthSync(IndicatorPage);
+export default DepartmentStatsPage;
