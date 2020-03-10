@@ -224,30 +224,30 @@ Lint @emjpm/graphql-server:
 #   script:
 #     - yarn workspace @emjpm/knex lint
 
-# Test @emjpm/api:
-#   extends: .quality_stage
-#   image: node:12-alpine
-#   dependencies:
-#     - Install api
-#   needs:
-#     - Install api
-#   services:
-#     - name: postgres:10-alpine
-#   allow_failure: true
-#   retry: 1
-#   variables:
-#     DATABASE_URL: psql://postgres:@localhost/emjpm
-#     PGHOST: localhost
-#     PGUSER: postgres
-#     TZ: Europe/Paris
-#   before_script:
-#     - apk add --update --no-cache postgresql=~11
-#     - psql --version
-#     #
-#     - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
-#   script:
-#     - sh -x docker/postgres/postgres-init.sh
-#     - yarn workspace @emjpm/api test
+Test @emjpm/api:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install api
+  needs:
+    - Install api
+  services:
+    - name: postgres:10-alpine
+  allow_failure: true
+  retry: 1
+  variables:
+    DATABASE_URL: psql://postgres:@localhost/emjpm
+    PGHOST: localhost
+    PGUSER: postgres
+    TZ: Europe/Paris
+  before_script:
+    - apk add --update --no-cache postgresql=~12
+    - psql --version
+    #
+    - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
+  script:
+    - sh -x docker/postgres/postgres-init.sh
+    - yarn workspace @emjpm/api test
 
 # Test @emjpm/app:
 #   extends: .quality_stage
