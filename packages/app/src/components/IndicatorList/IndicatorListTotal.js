@@ -42,6 +42,11 @@ const IndicatorListTotal = () => {
         sum: { count: preposeLoginCount }
       }
     },
+    magistratLoginCount: {
+      aggregate: {
+        sum: { count: magistratLoginCount }
+      }
+    },
     serviceInscritCount: {
       aggregate: {
         sum: { count: serviceInscritCount }
@@ -56,6 +61,11 @@ const IndicatorListTotal = () => {
       aggregate: {
         sum: { count: preposeInscritCount }
       }
+    },
+    magistratInscritCount: {
+      aggregate: {
+        sum: { count: magistratInscritCount }
+      }
     }
   } = data;
   return (
@@ -64,8 +74,8 @@ const IndicatorListTotal = () => {
       <Box
         sx={{
           display: "grid",
-          gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(3, 1fr)"]
+          gridGap: 4,
+          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(4, 1fr)"]
         }}
       >
         <Indicator
@@ -89,6 +99,12 @@ const IndicatorListTotal = () => {
         <Indicator
           error={false}
           loading={false}
+          title="Magistrats inscrits"
+          indicator={magistratInscritCount ? magistratInscritCount : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
           title="Services mandataires connectés dans le dernier mois"
           indicator={serviceLoginCount ? serviceLoginCount : 0}
         />
@@ -103,6 +119,12 @@ const IndicatorListTotal = () => {
           loading={false}
           title="Mandataires individuels connectés dans le dernier mois"
           indicator={individuelLoginCount ? individuelLoginCount : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Magistrats connectés dans le dernier mois"
+          indicator={magistratLoginCount ? magistratLoginCount : 0}
         />
       </Box>
     </Box>
