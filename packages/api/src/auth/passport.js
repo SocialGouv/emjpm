@@ -1,4 +1,6 @@
 const passport = require("passport");
+
+const logger = require("../utils/logger");
 const knex = require("../db/knex");
 
 module.exports = () => {
@@ -14,6 +16,7 @@ module.exports = () => {
         done(null, user);
       })
       .catch(err => {
+        logger.error(err);
         done(err, null);
       });
   });

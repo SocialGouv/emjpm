@@ -1,18 +1,23 @@
 const passport = require("passport");
 const { Strategy: LocalStrategy } = require("passport-local");
-
 const jwtDecode = require("jwt-decode");
 const passportJWT = require("passport-jwt");
 const passportBearer = require("passport-http-bearer");
-const JWTStrategy = passportJWT.Strategy;
-const BearerStrategy = passportBearer.Strategy;
-const ExtractJWT = passportJWT.ExtractJwt;
+
+const logger = require("../utils/logger");
 const knex = require("../db/knex");
 const jwtConfig = require("../config/jwt");
 const { AccessToken } = require("../models/AccessToken");
 const { User } = require("../models/User");
-
 const init = require("./passport");
+
+const JWTStrategy = passportJWT.Strategy;
+const BearerStrategy = passportBearer.Strategy;
+const ExtractJWT = passportJWT.ExtractJwt;
+
+if (jwtConfig.publicKey) {
+  logger.error("Invalid jwtConfig.publicKey, check process.env.JWT_KEY");
+}
 
 init();
 
@@ -32,16 +37,20 @@ passport.use(
           if (!user) {
             return done("Unknown user");
           }
+
           if (!user.active) {
             return done("User is inactive");
           }
+
           user.verifyPassword(password, function(err, passwordCorrect) {
             if (err) {
               return done(err);
             }
+
             if (!passwordCorrect) {
               return done("Invalid password");
             }
+
             return done(null, user);
           });
         })
@@ -85,12 +94,7 @@ passport.use(
   new JWTStrategy(
     {
       jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-      secretOrKey:
-        jwtConfig.publicKey ||
-        /* eslint-disable no-console */
-        console.log("WARN: no process.env.JWT_KEY defined") ||
-        /* eslint-enable no-console */
-        "emjpm-jwtkey"
+      secretOrKey: jwtConfig.publicKey || "emjpm-jwtkey"
     },
     function(jwtPayload, cb) {
       //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
@@ -102,9 +106,7 @@ passport.use(
           return cb(null, JSON.parse(JSON.stringify(user)));
         })
         .catch(err => {
-          /* eslint-disable no-console */
-          console.log("err");
-          /* eslint-enable no-console */
+          logger.error(err);
           return cb(err);
         });
     }

@@ -1,4 +1,7 @@
 const { format } = require("date-fns");
+
+const sentry = require("../utils/sentry");
+const logger = require("../utils/logger");
 const { sendEmail } = require(".");
 
 const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
@@ -22,15 +25,16 @@ Pour rappel, à ce jour, vous avez déclaré prendre en charge "${
 L’équipe e-mjpm.`;
 
 const cancelReservationEmail = async (ti, mesure, user) => {
-  sendEmail(
-    user.email,
-    "e-MJPM : Annulation d'une reservation de mesure",
-    EMAIL_RESERVATION_TEXT(ti, user, mesure)
-  ).catch(e => {
-    /* eslint-disable no-console */
-    console.log(e);
-    /* eslint-enable no-console */
-  });
+  try {
+    await sendEmail(
+      user.email,
+      "e-MJPM : Annulation d'une reservation de mesure",
+      EMAIL_RESERVATION_TEXT(ti, user, mesure)
+    );
+  } catch (error) {
+    sentry.captureException(error);
+    logger.error(error);
+  }
 };
 
 module.exports = {
