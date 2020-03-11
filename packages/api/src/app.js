@@ -93,7 +93,7 @@ app.use(function(err, req, res, next) {
     type: err.type
   };
 
-  if (isProduction) {
+  if (!isProduction) {
     body.stack = err.stack;
   }
 
