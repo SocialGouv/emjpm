@@ -3,6 +3,7 @@ import { Card } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
 import React from "react";
 
+import Sentry from "../../util/sentry";
 import { AdminSatisfactionCampaignForm } from "./AdminSatisfactionCampaignForm";
 import { ADD_SATISFACTION_CAMPAIGN } from "./mutations";
 import { cardStyle } from "./style";
@@ -20,7 +21,7 @@ export const AdminSatisfactionCampaignCreate = () => {
         }
       });
     } catch (error) {
-      // TODO(paullaunay): log error in sentry
+      Sentry.captureException(error);
       setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard" });
     }
 

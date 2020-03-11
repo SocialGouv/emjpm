@@ -1,6 +1,9 @@
+const flow = require("lodash.flow");
 const webpack = require("webpack");
 const withCSS = require("@zeit/next-css");
 const withImages = require("next-images");
+
+require("dotenv").config({ path: "../../.env" });
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true"
@@ -9,10 +12,6 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const withSourceMaps = require("@zeit/next-source-maps")({
   devtool: "hidden-source-map"
 });
-
-const flow = require("lodash.flow");
-
-require("dotenv").config();
 
 module.exports = flow(
   withCSS,
@@ -27,8 +26,13 @@ module.exports = flow(
     PACKAGE_VERSION: process.env.VERSION || require("./package.json").version,
     SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN
   },
-  webpack: config => {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.alias["@sentry/node"] = "@sentry/browser";
+    }
+
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
+
     return config;
   }
 });

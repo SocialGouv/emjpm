@@ -4,6 +4,7 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
+import Sentry from "../../util/sentry";
 import { ServiceAntenneForm } from "../ServiceAntenneForms";
 import { UserContext } from "../UserContext";
 import { CREATE_ANTENNE } from "./mutations";
@@ -35,7 +36,8 @@ const ServiceCreateAntenne = () => {
         }
       });
     } catch (error) {
-      // TODO(paullaunay): log in sentry and handle in form
+      Sentry.captureException(error);
+      // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
 
     setSubmitting(false);
