@@ -2,12 +2,12 @@ import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { IndicatorListTotal } from "../../src/components/IndicatorList";
+import { IndicatorList } from "../../src/components/IndicatorList";
 import { IndicatorsMenu } from "../../src/components/IndicatorsMenu";
 import { LayoutPublic } from "../../src/components/Layout";
-import { withAuthSync } from "../../src/util/auth";
 
-const IndicatorPage = () => {
+const DepartmentStatsPage = props => {
+  const { departementCode } = props;
   return (
     <LayoutPublic>
       <BoxWrapper>
@@ -33,7 +33,7 @@ const IndicatorPage = () => {
               p: 3
             }}
           >
-            <IndicatorListTotal />
+            <IndicatorList departementCode={departementCode} />
           </Box>
         </Flex>
         <Box />
@@ -42,4 +42,8 @@ const IndicatorPage = () => {
   );
 };
 
-export default withAuthSync(IndicatorPage);
+DepartmentStatsPage.getInitialProps = async ({ query }) => {
+  return { departementCode: query.departement_code };
+};
+
+export default DepartmentStatsPage;

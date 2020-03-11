@@ -1,10 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Indicator } from "@socialgouv/emjpm-ui-components";
-import { Card, Heading1, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading1, Heading2, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
 import React from "react";
 import { Box } from "rebass";
 
 import { FRANCE_INDICATORS } from "./queries";
+import { IndicatorBoxStyle } from "./style";
 
 const IndicatorListTotal = () => {
   const { data, error, loading } = useQuery(FRANCE_INDICATORS);
@@ -42,6 +43,11 @@ const IndicatorListTotal = () => {
         sum: { count: preposeLoginCount }
       }
     },
+    magistratLoginCount: {
+      aggregate: {
+        sum: { count: magistratLoginCount }
+      }
+    },
     serviceInscritCount: {
       aggregate: {
         sum: { count: serviceInscritCount }
@@ -56,53 +62,68 @@ const IndicatorListTotal = () => {
       aggregate: {
         sum: { count: preposeInscritCount }
       }
+    },
+    magistratInscritCount: {
+      aggregate: {
+        sum: { count: magistratInscritCount }
+      }
     }
   } = data;
   return (
     <Box>
       <Heading1 py="4">{`France entière`}</Heading1>
-      <Box
-        sx={{
-          display: "grid",
-          gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(3, 1fr)"]
-        }}
-      >
+      <Heading2>Inscrits</Heading2>
+      <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
           loading={false}
-          title="Services mandataires inscrits"
+          title="Services mandataires"
           indicator={serviceInscritCount ? serviceInscritCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Préposés à un établissement inscrits"
+          title="Préposés à un établissement"
           indicator={preposeInscritCount ? preposeInscritCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Mandataires individuels inscrits"
+          title="Mandataires individuels"
           indicator={individuelInscritCount ? individuelInscritCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Services mandataires connectés dans le dernier mois"
+          title="Magistrats"
+          indicator={magistratInscritCount ? magistratInscritCount : 0}
+        />
+      </Box>
+      <Heading2>Connectés dans le dernier mois</Heading2>
+      <Box my={4} sx={IndicatorBoxStyle}>
+        <Indicator
+          error={false}
+          loading={false}
+          title="Services mandataires"
           indicator={serviceLoginCount ? serviceLoginCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Préposés à un établissement connectés dans le dernier mois"
+          title="Préposés à un établissement"
           indicator={preposeLoginCount ? preposeLoginCount : 0}
         />
         <Indicator
           error={false}
           loading={false}
-          title="Mandataires individuels connectés dans le dernier mois"
+          title="Mandataires individuels"
           indicator={individuelLoginCount ? individuelLoginCount : 0}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Magistrats"
+          indicator={magistratLoginCount ? magistratLoginCount : 0}
         />
       </Box>
     </Box>

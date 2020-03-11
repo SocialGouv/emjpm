@@ -44,6 +44,13 @@ export const FRANCE_INDICATORS = gql`
         }
       }
     }
+    magistratLoginCount: view_indicateur_login_aggregate(where: { type: { _eq: "ti" } }) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
     serviceInscritCount: view_indicateur_inscrit_aggregate(where: { type: { _eq: "service" } }) {
       aggregate {
         sum {
@@ -61,6 +68,13 @@ export const FRANCE_INDICATORS = gql`
       }
     }
     preposeInscritCount: view_indicateur_inscrit_aggregate(where: { type: { _eq: "prepose" } }) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    magistratInscritCount: view_indicateur_inscrit_aggregate(where: { type: { _eq: "ti" } }) {
       aggregate {
         sum {
           count
