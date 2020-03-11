@@ -70,9 +70,6 @@ app.get("/json/version", function(req, res) {
 });
 
 app.get("/json", function(req, res) {
-  const r = null;
-  console.log(r.id);
-
   res.json({
     title: "API eMJPM",
     version: pkg.version,
