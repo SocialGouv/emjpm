@@ -1,3 +1,4 @@
+const logger = require("../../utils/logger");
 const { AccessToken } = require("../../models/AccessToken");
 const jwtConfig = require("../../config/jwt");
 const jwt = require("jsonwebtoken");
@@ -24,10 +25,13 @@ const generateToken = (editorId, editorToken, redirectUrl, userId, uid) => {
 const authorize = async (req, res) => {
   const errors = validationResult(req);
   const uid = getUid(128);
+
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors });
   }
+
   const { editorId, editorToken, redirectUrl, userId } = req.body;
+
   try {
     const editorApiToken = await Editors.query()
       .where("id", editorId)
@@ -36,6 +40,7 @@ const authorize = async (req, res) => {
       return res.status(400).json({ errorMsg: "Identifiants editeur inconnu" });
     }
   } catch (error) {
+    logger.error(error);
     return res.status(400).json({ errorMsg: "Identifiants editeur inconnu" });
   }
 
@@ -46,8 +51,8 @@ const authorize = async (req, res) => {
       editor_url: redirectUrl,
       access_token: uid
     });
-  } catch (e) {
-    console.log(e);
+  } catch (error) {
+    logger.error(error);
   }
 
   // This is the public key we'll decode later when an app make a request on our api's
@@ -59,7 +64,7 @@ const authorize = async (req, res) => {
     uid
   );
 
-  res.status(200).json({ publicToken: publicToken, redirectUrl: redirectUrl });
+  res.status(200).json({ publicToken, redirectUrl });
 };
 
 module.exports = authorize;

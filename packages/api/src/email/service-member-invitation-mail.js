@@ -1,3 +1,5 @@
+const sentry = require("../utils/sentry");
+const logger = require("../utils/logger");
 const { sendEmail } = require(".");
 
 const text = (service, url) =>
@@ -25,16 +27,17 @@ const html = (service, url) =>
 const serviceMemberInvitationMail = async (invitation, service) => {
   const url = `${process.env.APP_URL}/signup/invitation?token=${invitation.token}`;
 
-  sendEmail(
-    invitation.email,
-    "Vous êtes invité à vous inscrire sur la plateforme e-mjpm",
-    text(service, url),
-    html(service, url)
-  ).catch(e => {
-    /* eslint-disable no-console */
-    console.log(e);
-    /* eslint-enable no-console */
-  });
+  try {
+    await sendEmail(
+      invitation.email,
+      "Vous êtes invité à vous inscrire sur la plateforme e-mjpm",
+      text(service, url),
+      html(service, url)
+    );
+  } catch (error) {
+    sentry.captureException(error);
+    logger.error(error);
+  }
 };
 
 module.exports = { serviceMemberInvitationMail };

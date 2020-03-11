@@ -1,3 +1,5 @@
+const sentry = require("../utils/sentry");
+const logger = require("../utils/logger");
 const { sendEmail } = require(".");
 
 const EMAIL_EDITOR_CONFIRMATION = () =>
@@ -11,15 +13,16 @@ const EMAIL_EDITOR_CONFIRMATION = () =>
 L’équipe e-mjpm.`;
 
 const editorConfirmationEmail = async email => {
-  sendEmail(
-    email,
-    "e-MJPM : confirmation de la demande d'accès à l'api e-MJPM",
-    EMAIL_EDITOR_CONFIRMATION()
-  ).catch(e => {
-    /* eslint-disable no-console */
-    console.log(e);
-    /* eslint-enable no-console */
-  });
+  try {
+    await sendEmail(
+      email,
+      "e-MJPM : confirmation de la demande d'accès à l'api e-MJPM",
+      EMAIL_EDITOR_CONFIRMATION()
+    );
+  } catch (error) {
+    sentry.captureException(error);
+    logger.error(error);
+  }
 };
 
 module.exports = {
