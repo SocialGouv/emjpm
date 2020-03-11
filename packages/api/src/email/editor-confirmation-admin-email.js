@@ -1,3 +1,5 @@
+const sentry = require("../utils/sentry");
+const logger = require("../utils/logger");
 const { sendEmail } = require(".");
 
 const EMAIL_EDITOR_ADMIN_CONFIRMATION = (email, name) =>
@@ -7,7 +9,7 @@ Nous avons reçu une nouvelle demande d'accès à l'api e-MJPM pour les éditeur
 
 avec le mail suivant: ${email}
 avec le nom suivant: ${name}
-  
+
   Veuillez prendre en compte cette demain au plus vite et vérifier si cet email correspond bien à un éditeur.
 
 À bientôt
@@ -15,15 +17,16 @@ avec le nom suivant: ${name}
 L’équipe e-mjpm.`;
 
 const editorConfirmationAdminEmail = async (email, name) => {
-  sendEmail(
-    "support.emjpm@fabrique.social.gouv.fr",
-    "e-MJPM : confirmation de la demande d'accès à l'api e-MJPM",
-    EMAIL_EDITOR_ADMIN_CONFIRMATION(email, name)
-  ).catch(e => {
-    /* eslint-disable no-console */
-    console.log(e);
-    /* eslint-enable no-console */
-  });
+  try {
+    await sendEmail(
+      "support.emjpm@fabrique.social.gouv.fr",
+      "e-MJPM : confirmation de la demande d'accès à l'api e-MJPM",
+      EMAIL_EDITOR_ADMIN_CONFIRMATION(email, name)
+    );
+  } catch (error) {
+    sentry.captureException(error);
+    logger.error(error);
+  }
 };
 
 module.exports = {
