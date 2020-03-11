@@ -7,13 +7,13 @@ const expressPinoLogger = require("express-pino-logger");
 const logger = require("./utils/logger");
 const Sentry = require("./utils/sentry");
 const apiLog = require("./middlewares/apiLog");
+const errorHandler = require("./middlewares/error-handler");
 const pkg = require("../package.json");
 const authRoutes = require("./routes/auth");
 const oauth2Routes = require("./routes/oauth2");
 const editorsRoutes = require("./routes/editors");
 
 const env = process.env.NODE_ENV || "development";
-const isProduction = env === "production";
 const host = "0.0.0.0";
 const port = process.env.PORT || 4000;
 const corsOptions = {
@@ -70,6 +70,9 @@ app.get("/json/version", function(req, res) {
 });
 
 app.get("/json", function(req, res) {
+  const r = null;
+  console.log(r.id);
+
   res.json({
     title: "API eMJPM",
     version: pkg.version,
@@ -77,36 +80,22 @@ app.get("/json", function(req, res) {
   });
 });
 
-// error handlers
-app.use(function(err, req, res, next) {
-  Sentry.captureException(err);
-
-  if (res.headersSent) {
-    return next(err);
-  }
-
-  const body = {
-    code: err.code,
-    message: err.message,
-    name: err.name,
-    status: err.status,
-    type: err.type
-  };
-
-  if (!isProduction) {
-    body.stack = err.stack;
-  }
-
-  res.status(err.status || 500).json(body);
-});
+// error handler
+app.use(errorHandler);
 
 app.listen(port, host, () => {
-  logger.info(`Starting ${env} server on http://${host}:${port}`);
+  logger.info(`Starting ${env} server at http://${host}:${port}`);
 });
 
-process.on("unhandledRejection", r => {
-  Sentry.captureException(r);
-  logger.info("unhandledRejection", r);
+process.on("unhandledRejection", error => {
+  logger.error("unhandledRejection", error);
+  Sentry.captureException(error);
+});
+
+process.on("uncaughtException", async error => {
+  logger.error("unhandledRejection", error);
+  Sentry.captureException(error);
+  process.exit(1);
 });
 
 module.exports = app;
