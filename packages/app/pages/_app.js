@@ -1,10 +1,8 @@
 import "../src/polyfills";
 
-import * as Sentry from "@sentry/browser";
 import theme from "@socialgouv/emjpm-ui-theme";
 import jwtDecode from "jwt-decode";
 import App from "next/app";
-import getConfig from "next/config";
 import React from "react";
 import { ApolloProvider } from "react-apollo";
 import ReactPiwik from "react-piwik";
@@ -14,10 +12,7 @@ import { UserProvider } from "../src/components/UserContext";
 import { withApolloClient } from "../src/lib/apollo";
 import { piwikSetup } from "../src/piwik";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
-
-const {
-  publicRuntimeConfig: { SENTRY_PUBLIC_DSN }
-} = getConfig();
+import Sentry from "../src/util/sentry";
 
 new ReactPiwik({
   siteId: 13,
@@ -31,23 +26,21 @@ class MyApp extends App {
 
     let pageProps = {};
 
-    try {
-      if (Component.getInitialProps) {
-        pageProps = await Component.getInitialProps(ctx);
-      }
-    } catch (e) {
-      Sentry.captureException(e, ctx);
-      //throw e; // you can also skip re-throwing and set property on pageProps
+    if (!Component.getInitialProps) {
+      return { pageProps };
     }
 
-    return {
-      pageProps
-    };
+    try {
+      pageProps = await Component.getInitialProps(ctx);
+    } catch (e) {
+      Sentry.captureException(e, ctx);
+    }
+
+    return { pageProps };
   }
 
   componentDidMount() {
     piwikSetup();
-    sentrySetup();
   }
 
   render() {
@@ -56,7 +49,9 @@ class MyApp extends App {
     const currentUser = token ? jwtDecode(token) : null;
     const data = { currentUser: formatUserFromToken(currentUser) };
     const user = formatUserFromToken(currentUser);
+
     apolloClient.cache.writeData({ data });
+
     return (
       <ApolloProvider client={apolloClient}>
         <ThemeProvider theme={theme}>
@@ -70,29 +65,3 @@ class MyApp extends App {
 }
 
 export default withApolloClient(MyApp);
-
-//
-
-function sentrySetup() {
-  const isBrowser = typeof document !== undefined;
-  if (!isBrowser) {
-    return;
-  }
-  if (SENTRY_PUBLIC_DSN) {
-    try {
-      Sentry.init({
-        attachStacktrace: true,
-        dsn: SENTRY_PUBLIC_DSN,
-        integrations: integrations => {
-          // remove dedupe plugin
-          return integrations.filter(integration => integration.name !== "Dedupe");
-        }
-        //tags: { git_commit: "c0deb10c4" }
-      });
-    } catch (error) {
-      /* eslint-disable no-console */
-      console.log(error);
-      /* eslint-enable no-console */
-    }
-  }
-}

@@ -3,6 +3,7 @@ import { Card } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
 import React from "react";
 
+import Sentry from "../../util/sentry";
 import { AdminServiceForm } from "./AdminServiceForm";
 import { ADD_SERVICE } from "./mutations";
 import { DEPARTEMENTS } from "./queries";
@@ -50,7 +51,8 @@ export const AdminAddService = () => {
         }
       });
     } catch (error) {
-      // TODO(paullaunay): log error in sentry and form
+      Sentry.captureException(error);
+      // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
 
     setSubmitting(false);

@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
+import Sentry from "../../util/sentry";
 import { AdminServiceForm } from "./AdminServiceForm";
 import { UPDATE_SERVICE } from "./mutations";
 import { DEPARTEMENTS, SERVICE } from "./queries";
@@ -51,7 +52,8 @@ export const AdminEditService = props => {
         }
       });
     } catch (error) {
-      // TODO(paullaunay): log error in sentry and form
+      Sentry.captureException(error);
+      // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
 
     setSubmitting(false);
