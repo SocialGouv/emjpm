@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const pino = require("pino");
+const expressPino = require("express-pino-logger");
 
 const Sentry = require("./utils/sentry");
 const apiLog = require("./middlewares/apiLog");
@@ -10,14 +12,10 @@ const authRoutes = require("./routes/auth");
 const oauth2Routes = require("./routes/oauth2");
 const editorsRoutes = require("./routes/editors");
 
-const app = express();
-
-process.on("unhandledRejection", r => {
-  Sentry.captureException(r);
-  /* eslint-disable no-console */
-  console.log("unhandledRejection", r);
-  /* eslint-enable no-console */
-});
+const env = process.env.NODE_ENV || "development";
+const isProduction = env === "production";
+const port = process.env.PORT || 4000;
+const host = "0.0.0.0";
 
 const corsOptions = {
   credentials: true,
@@ -28,6 +26,15 @@ const bodyParserOptions = {
   limit: "10mb"
 };
 
+const loggerOptions = {
+  prettyPrint: !isProduction
+};
+
+const logger = pino(loggerOptions);
+const expressLogger = expressPino({ logger });
+const app = express();
+
+app.use(expressLogger);
 app.use(cors(corsOptions));
 app.use(bodyParser.json(bodyParserOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -56,7 +63,7 @@ app.get("/", function(req, res) {
   res.json({
     title: "API eMJPM",
     version: pkg.version,
-    NODE_ENV: process.env.NODE_ENV || "development"
+    NODE_ENV: env
   });
 });
 
@@ -64,7 +71,7 @@ app.get("/json/version", function(req, res) {
   res.json({
     title: "API eMJPM",
     version: pkg.version,
-    NODE_ENV: process.env.NODE_ENV || "development"
+    NODE_ENV: env
   });
 });
 
@@ -72,52 +79,48 @@ app.get("/json", function(req, res) {
   res.json({
     title: "API eMJPM",
     version: pkg.version,
-    NODE_ENV: process.env.NODE_ENV || "development"
+    NODE_ENV: env
   });
 });
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  /* eslint-disable no-console */
-  console.log(`404 Not Found : ${req.method} ${req.url}`);
-  /* eslint-enable no-console */
-  var err = new Error(`404 Not Found : ${req.method} ${req.url}`);
+  logger.info(`404 Not Found : ${req.method} ${req.url}`);
+  const err = new Error(`404 Not Found : ${req.method} ${req.url}`);
   err.status = 404;
+
   next(err);
 });
 
 // error handlers
-
-app.use(function(err, req, res, next) {
-  Sentry.captureException(err);
-
+app.use(function(error, req, res, next) {
   if (res.headersSent) {
-    return next(err);
+    return next(error);
   }
-  // console.error(err);
 
   const body = {
-    code: err.code,
-    message: err.message,
-    name: err.name,
-    status: err.status,
-    type: err.type
+    code: error.code,
+    message: error.message,
+    name: error.name,
+    status: error.status,
+    type: error.type
   };
-  if (process.env.NODE_ENV !== "production") body.stack = err.stack;
-  res.status(err.status || 500).json(body);
+
+  if (!isProduction) {
+    body.stack = error.stack;
+  }
+
+  Sentry.captureException(error);
+
+  res.status(error.status || 500).json(body);
 });
 
-const port = process.env.PORT || 4000;
+app.listen(port, host, () => {
+  logger.info(`[${env}] Listening on http://${host}:${port}`);
+});
 
-if (require.main === module) {
-  app.listen(port, "0.0.0.0", () => {
-    /* eslint-disable no-console */
-    console.log(
-      `Listening on http://127.0.0.1:${port} [${process.env.NODE_ENV ||
-        "development"}]`
-    );
-    /* eslint-enable no-console */
-  });
-}
+process.on("unhandledRejection", error => {
+  Sentry.captureException(error);
+  logger.error(error);
+});
 
 module.exports = app;
