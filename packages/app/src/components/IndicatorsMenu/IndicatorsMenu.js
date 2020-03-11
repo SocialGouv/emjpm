@@ -42,14 +42,14 @@ const IndicatorsMenu = props => {
     <Scrollbar style={{ height: "100%", width: "100%" }}>
       <Box {...props} mr="1">
         <Card p="1" mb="1" sx={{ borderRadius: "15px" }}>
-          <Link prefetch={false} href={`/indicateurs`}>
+          <Link prefetch={false} href={`/stats`}>
             <StyledLink sx={linkStyle}>France entière</StyledLink>
           </Link>
         </Card>
         {departements.map((departement, index) => {
           return (
             <Card key={`${index}-${departement.code}`} p="1" mb="1" sx={{ borderRadius: "15px" }}>
-              <Link prefetch={false} href={`/indicateurs/${departement.code}`}>
+              <Link prefetch={false} href={`/stats/${departement.code}`}>
                 <StyledLink sx={linkStyle}>{`${departement.code} - ${departement.nom}`}</StyledLink>
               </Link>
             </Card>

@@ -3,4 +3,10 @@ const IndicatorListStyle = {
   mr: "20px"
 };
 
-export { IndicatorListStyle };
+const IndicatorBoxStyle = {
+  display: "grid",
+  gridGap: 4,
+  gridTemplateColumns: ["repeat(1, 1fr)", "repeat(4, 1fr)"]
+};
+
+export { IndicatorListStyle, IndicatorBoxStyle };
