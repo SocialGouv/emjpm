@@ -2718,6 +2718,9 @@ tables:
       allow_aggregations: true
 - table:
     schema: public
+    name: view_indicateur_satisfaction_campaign
+- table:
+    schema: public
     name: view_mesure_gestionnaire
   object_relationships:
   - name: departement
