@@ -1,3 +1,5 @@
+const sentry = require("../utils/sentry");
+const logger = require("../utils/logger");
 const { sendEmail } = require(".");
 
 const EMAIL_TEXT = (
@@ -22,28 +24,28 @@ Bien à vous.
 eMJPM Team
 `;
 
-const mesuresImportEmail = (
+const mesuresImportEmail = async (
   { email, mesures_en_cours, dispo_max },
   { creationNumber, updateNumber, errors }
 ) => {
-  sendEmail(
-    email,
-    "eMJPM > Résultat de l'import de vos mesures",
-    EMAIL_TEXT(
-      creationNumber,
-      updateNumber,
-      errors,
-      mesures_en_cours,
-      dispo_max
-    ),
-    null,
-    "support.emjpm@fabrique.social.gouv.fr"
-  ).catch(e => {
-    // todo: sentry
-    /* eslint-disable no-console */
-    console.log(e);
-    /* eslint-enable no-console */
-  });
+  try {
+    await sendEmail(
+      email,
+      "eMJPM > Résultat de l'import de vos mesures",
+      EMAIL_TEXT(
+        creationNumber,
+        updateNumber,
+        errors,
+        mesures_en_cours,
+        dispo_max
+      ),
+      null,
+      "support.emjpm@fabrique.social.gouv.fr"
+    );
+  } catch (error) {
+    sentry.captureException(error);
+    logger.error(error);
+  }
 };
 
 module.exports = {

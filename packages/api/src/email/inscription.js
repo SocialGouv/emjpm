@@ -1,3 +1,5 @@
+const sentry = require("../utils/sentry");
+const logger = require("../utils/logger");
 const { sendEmail } = require(".");
 
 const EMAIL_RELANCE_TEXT = (nom, prenom, email, codePostal, type, tis) => `
@@ -32,18 +34,19 @@ Merci de vérifier cette nouvelle demande et de la valider.
 Bonne journée :)
 `;
 
-const inscriptionEmail = (nom, prenom, email, codePostal, type, tis) =>
-  sendEmail(
-    "support.emjpm@fabrique.social.gouv.fr",
-    "Nouvelle inscription",
-    EMAIL_RELANCE_TEXT(nom, prenom, email, codePostal, type, tis),
-    EMAIL_RELANCE_HTML(nom, prenom, email, codePostal, type, tis)
-  ).catch(e => {
-    // todo: sentry
-    /* eslint-disable no-console */
-    console.log(e);
-    /* eslint-enable no-console */
-  });
+const inscriptionEmail = async (nom, prenom, email, codePostal, type, tis) => {
+  try {
+    await sendEmail(
+      "support.emjpm@fabrique.social.gouv.fr",
+      "Nouvelle inscription",
+      EMAIL_RELANCE_TEXT(nom, prenom, email, codePostal, type, tis),
+      EMAIL_RELANCE_HTML(nom, prenom, email, codePostal, type, tis)
+    );
+  } catch (error) {
+    sentry.captureException(error);
+    logger.error(error);
+  }
+};
 
 module.exports = {
   inscriptionEmail
