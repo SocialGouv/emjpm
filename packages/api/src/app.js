@@ -2,22 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const expressPinoLogger = require("express-pino-logger");
 
+const logger = require("./utils/logger");
 const Sentry = require("./utils/sentry");
 const apiLog = require("./middlewares/apiLog");
 const pkg = require("../package.json");
 const authRoutes = require("./routes/auth");
 const oauth2Routes = require("./routes/oauth2");
 const editorsRoutes = require("./routes/editors");
-
-const app = express();
-
-process.on("unhandledRejection", r => {
-  Sentry.captureException(r);
-  /* eslint-disable no-console */
-  console.log("unhandledRejection", r);
-  /* eslint-enable no-console */
-});
 
 const corsOptions = {
   credentials: true,
@@ -28,6 +21,9 @@ const bodyParserOptions = {
   limit: "10mb"
 };
 
+const app = express();
+
+app.use(expressPinoLogger({ logger }));
 app.use(cors(corsOptions));
 app.use(bodyParser.json(bodyParserOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -119,5 +115,12 @@ if (require.main === module) {
     /* eslint-enable no-console */
   });
 }
+
+process.on("unhandledRejection", r => {
+  Sentry.captureException(r);
+  /* eslint-disable no-console */
+  console.log("unhandledRejection", r);
+  /* eslint-enable no-console */
+});
 
 module.exports = app;
