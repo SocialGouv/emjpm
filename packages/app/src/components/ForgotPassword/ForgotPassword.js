@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/browser";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import getConfig from "next/config";
@@ -7,6 +6,7 @@ import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { forgotPasswordSchema } from "../../lib/validationSchemas";
+import Sentry from "../../util/sentry";
 import { Link } from "../Commons";
 
 const {
