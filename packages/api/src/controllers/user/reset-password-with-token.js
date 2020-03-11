@@ -1,3 +1,4 @@
+const logger = require("../../utils/logger");
 const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const createError = require("http-errors");
@@ -38,6 +39,7 @@ const resetPasswordWithToken = async (req, res) => {
       res.status(200).json({ status: "ok" });
       return confirmationPasswordEmail(user.email);
     } catch (err) {
+      logger.error(err);
       return res.status(400).json({ err });
     }
   } catch (err) {
