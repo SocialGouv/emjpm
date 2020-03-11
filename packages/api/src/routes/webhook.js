@@ -2,7 +2,8 @@ const express = require("express");
 const uid = require("rand-token").uid;
 const { raw } = require("objection");
 
-const router = express.Router();
+const sentry = require("../utils/sentry");
+const logger = require("../utils/logger");
 const { Service } = require("../models/Service");
 const { ServiceMember } = require("../models/ServiceMember");
 const {
@@ -30,6 +31,8 @@ const tokenRequest = require("../controllers/webhook/token-request");
 // ----------------------------------
 // -------EMAIL ACCOUNT VALIDATION---
 // ----------------------------------
+
+const router = express.Router();
 
 router.post("/token-request", tokenRequest);
 
@@ -206,6 +209,7 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
   const ville = mesureDatas.ville;
 
   let department = await getMesureDepartment(code_postal, department_id);
+
   if (!department) {
     department = await Department.query().findById(department_id);
   }
@@ -215,10 +219,12 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
   const ti = await Tis.query().findOne({
     siret: mesureDatas.tribunal_siret
   });
+
   if (!ti) {
     importSummary.errors.push(
       `Aucun tribunal ne correspond au SIRET ${mesureDatas.tribunal_siret}`
     );
+
     return;
   }
 
@@ -245,6 +251,7 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     numero_rg: data.numero_rg,
     ti_id: ti.id
   });
+
   if (!mesure) {
     await Mesure.query().insert(data);
     ++importSummary.creationNumber;
@@ -268,8 +275,10 @@ const toDate = dateStr => {
 router.post("/mesures-import", async function(req, res) {
   const importId = req.body.event.data.new.id;
   const mesuresImport = await MesuresImport.query().findById(importId);
+
   if (!mesuresImport) {
-    throw new Error(`mesures_import with id ${importId} does not exist.`);
+    logger.error("mesures_import ${importId} not found");
+    sentry.captureException(new Error("mesures_import ${importId} not found"));
   }
 
   let mandataire;
