@@ -12,17 +12,21 @@ const authRoutes = require("./routes/auth");
 const oauth2Routes = require("./routes/oauth2");
 const editorsRoutes = require("./routes/editors");
 
+const env = process.env.NODE_ENV || "development";
+const isProduction = env === "production";
+const host = "0.0.0.0";
+const port = process.env.PORT || 4000;
 const corsOptions = {
   credentials: true,
   origin: true
 };
-
 const bodyParserOptions = {
   limit: "10mb"
 };
 
 const app = express();
 
+// middlewares
 app.use(expressPinoLogger({ logger }));
 app.use(cors(corsOptions));
 app.use(bodyParser.json(bodyParserOptions));
@@ -30,6 +34,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// routes
 app.use("/api/auth", authRoutes);
 app.use("/api/oauth", oauth2Routes);
 app.use(
@@ -72,25 +77,13 @@ app.get("/json", function(req, res) {
   });
 });
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  /* eslint-disable no-console */
-  console.log(`404 Not Found : ${req.method} ${req.url}`);
-  /* eslint-enable no-console */
-  var err = new Error(`404 Not Found : ${req.method} ${req.url}`);
-  err.status = 404;
-  next(err);
-});
-
 // error handlers
-
 app.use(function(err, req, res, next) {
   Sentry.captureException(err);
 
   if (res.headersSent) {
     return next(err);
   }
-  // console.error(err);
 
   const body = {
     code: err.code,
@@ -99,28 +92,21 @@ app.use(function(err, req, res, next) {
     status: err.status,
     type: err.type
   };
-  if (process.env.NODE_ENV !== "production") body.stack = err.stack;
+
+  if (isProduction) {
+    body.stack = err.stack;
+  }
+
   res.status(err.status || 500).json(body);
 });
 
-const port = process.env.PORT || 4000;
-
-if (require.main === module) {
-  app.listen(port, "0.0.0.0", () => {
-    /* eslint-disable no-console */
-    console.log(
-      `Listening on http://127.0.0.1:${port} [${process.env.NODE_ENV ||
-        "development"}]`
-    );
-    /* eslint-enable no-console */
-  });
-}
+app.listen(port, host, () => {
+  logger.info(`Starting ${env} server on http://${host}:${port}`);
+});
 
 process.on("unhandledRejection", r => {
   Sentry.captureException(r);
-  /* eslint-disable no-console */
-  console.log("unhandledRejection", r);
-  /* eslint-enable no-console */
+  logger.info("unhandledRejection", r);
 });
 
 module.exports = app;
