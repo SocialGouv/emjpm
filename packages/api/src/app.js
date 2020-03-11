@@ -2,38 +2,39 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const expressPinoLogger = require("express-pino-logger");
 
+const logger = require("./utils/logger");
 const Sentry = require("./utils/sentry");
 const apiLog = require("./middlewares/apiLog");
+const errorHandler = require("./middlewares/error-handler");
 const pkg = require("../package.json");
 const authRoutes = require("./routes/auth");
 const oauth2Routes = require("./routes/oauth2");
 const editorsRoutes = require("./routes/editors");
 
-const app = express();
-
-process.on("unhandledRejection", r => {
-  Sentry.captureException(r);
-  /* eslint-disable no-console */
-  console.log("unhandledRejection", r);
-  /* eslint-enable no-console */
-});
-
+const env = process.env.NODE_ENV || "development";
+const host = "0.0.0.0";
+const port = process.env.PORT || 4000;
 const corsOptions = {
   credentials: true,
   origin: true
 };
-
 const bodyParserOptions = {
   limit: "10mb"
 };
 
+const app = express();
+
+// middlewares
+app.use(expressPinoLogger({ logger }));
 app.use(cors(corsOptions));
 app.use(bodyParser.json(bodyParserOptions));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// routes
 app.use("/api/auth", authRoutes);
 app.use("/api/oauth", oauth2Routes);
 app.use(
@@ -76,48 +77,22 @@ app.get("/json", function(req, res) {
   });
 });
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  /* eslint-disable no-console */
-  console.log(`404 Not Found : ${req.method} ${req.url}`);
-  /* eslint-enable no-console */
-  var err = new Error(`404 Not Found : ${req.method} ${req.url}`);
-  err.status = 404;
-  next(err);
+// error handler
+app.use(errorHandler);
+
+app.listen(port, host, () => {
+  logger.info(`Starting ${env} server at http://${host}:${port}`);
 });
 
-// error handlers
-
-app.use(function(err, req, res, next) {
-  Sentry.captureException(err);
-
-  if (res.headersSent) {
-    return next(err);
-  }
-  // console.error(err);
-
-  const body = {
-    code: err.code,
-    message: err.message,
-    name: err.name,
-    status: err.status,
-    type: err.type
-  };
-  if (process.env.NODE_ENV !== "production") body.stack = err.stack;
-  res.status(err.status || 500).json(body);
+process.on("unhandledRejection", error => {
+  logger.error("unhandledRejection", error);
+  Sentry.captureException(error);
 });
 
-const port = process.env.PORT || 4000;
-
-if (require.main === module) {
-  app.listen(port, "0.0.0.0", () => {
-    /* eslint-disable no-console */
-    console.log(
-      `Listening on http://127.0.0.1:${port} [${process.env.NODE_ENV ||
-        "development"}]`
-    );
-    /* eslint-enable no-console */
-  });
-}
+process.on("uncaughtException", async error => {
+  logger.error("unhandledRejection", error);
+  Sentry.captureException(error);
+  process.exit(1);
+});
 
 module.exports = app;

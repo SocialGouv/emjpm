@@ -1,3 +1,5 @@
+const sentry = require("../utils/sentry");
+const logger = require("../utils/logger");
 const { sendEmail } = require(".");
 
 const EMAIL_RELANCE_TEXT = url => `
@@ -28,18 +30,18 @@ Bien à vous.
 eMJPM Team
 `;
 
-const validationEmail = (email, url) => {
-  sendEmail(
-    email,
-    "Validation du compte",
-    EMAIL_RELANCE_TEXT(url),
-    EMAIL_RELANCE_HTML(url)
-  ).catch(e => {
-    // todo: sentry
-    /* eslint-disable no-console */
-    console.log(e);
-    /* eslint-enable no-console */
-  });
+const validationEmail = async (email, url) => {
+  try {
+    await sendEmail(
+      email,
+      "Validation du compte",
+      EMAIL_RELANCE_TEXT(url),
+      EMAIL_RELANCE_HTML(url)
+    );
+  } catch (error) {
+    sentry.captureException(error);
+    logger.error(error);
+  }
 };
 
 module.exports = {

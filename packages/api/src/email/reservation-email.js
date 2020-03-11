@@ -1,3 +1,5 @@
+const sentry = require("../utils/sentry");
+const logger = require("../utils/logger");
 const { format } = require("date-fns");
 const { sendEmail } = require(".");
 
@@ -74,16 +76,17 @@ Le magistrat a précisé le caractère urgent lors de la réservation de cette m
 L’équipe e-mjpm.`;
 
 const reservationEmail = async (ti = {}, mesure, user) => {
-  sendEmail(
-    user.email,
-    "e-MJPM : une nouvelle mesure vous a été attribuée",
-    EMAIL_RESERVATION_TEXT(ti, user, mesure),
-    EMAIL_RESERVATION_HTML(ti, user, mesure)
-  ).catch(e => {
-    /* eslint-disable no-console */
-    console.log(e);
-    /* eslint-enable no-console */
-  });
+  try {
+    await sendEmail(
+      user.email,
+      "e-MJPM : une nouvelle mesure vous a été attribuée",
+      EMAIL_RESERVATION_TEXT(ti, user, mesure),
+      EMAIL_RESERVATION_HTML(ti, user, mesure)
+    );
+  } catch (error) {
+    sentry.captureException(error);
+    logger.error(error);
+  }
 };
 
 module.exports = {
