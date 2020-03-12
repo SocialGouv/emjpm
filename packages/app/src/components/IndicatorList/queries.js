@@ -18,6 +18,12 @@ export const INDICATORS = gql`
       type
       code
     }
+    view_indicateur_satisfaction_campaign(where: { code: { _eq: $code } }) {
+      value
+      nom
+      type
+      code
+    }
   }
 `;
 
