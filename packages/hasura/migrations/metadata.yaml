@@ -2703,6 +2703,51 @@ tables:
       - type
       filter: {}
       allow_aggregations: true
+  - role: direction
+    permission:
+      columns:
+      - code
+      - nom
+      - type
+      - count
+      filter: {}
+      allow_aggregations: true
+  - role: individuel
+    permission:
+      columns:
+      - count
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: prepose
+    permission:
+      columns:
+      - count
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: service
+    permission:
+      columns:
+      - count
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: ti
+    permission:
+      columns:
+      - count
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
 - table:
     schema: public
     name: view_indicateur_login
@@ -2712,6 +2757,51 @@ tables:
       columns:
       - code
       - count
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: direction
+    permission:
+      columns:
+      - code
+      - nom
+      - type
+      - count
+      filter: {}
+      allow_aggregations: true
+  - role: individuel
+    permission:
+      columns:
+      - count
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: prepose
+    permission:
+      columns:
+      - count
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: service
+    permission:
+      columns:
+      - count
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: ti
+    permission:
+      columns:
+      - count
+      - code
       - nom
       - type
       filter: {}
