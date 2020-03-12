@@ -79,17 +79,17 @@ const SatisfactionCampaign = () => {
             Etes-vous satisfait de la plateforme e-MJPM?
           </Text>
           <Flex alignItems="center">
-            <Box sx={buttonStyle} onClick={() => handleClick(1)}>
+            <Box sx={buttonStyle} onClick={() => handleClick(0)}>
               <span role="img" aria-label="Non satisfait">
                 &#128577;
               </span>
             </Box>
-            <Box sx={buttonStyle} onClick={() => handleClick(2)}>
+            <Box sx={buttonStyle} onClick={() => handleClick(1)}>
               <span role="img" aria-label="Satisfait">
                 &#128528;
               </span>
             </Box>
-            <Box sx={buttonStyle} onClick={() => handleClick(3)}>
+            <Box sx={buttonStyle} onClick={() => handleClick(2)}>
               <span role="img" aria-label="Très satisfait">
                 &#128578;
               </span>

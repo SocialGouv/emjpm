@@ -2808,6 +2808,64 @@ tables:
       allow_aggregations: true
 - table:
     schema: public
+    name: view_indicateur_satisfaction_campaign
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - value
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: direction
+    permission:
+      columns:
+      - code
+      - nom
+      - type
+      - value
+      filter: {}
+      allow_aggregations: true
+  - role: individuel
+    permission:
+      columns:
+      - value
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: prepose
+    permission:
+      columns:
+      - value
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: service
+    permission:
+      columns:
+      - value
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+  - role: ti
+    permission:
+      columns:
+      - value
+      - code
+      - nom
+      - type
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
     name: view_mesure_gestionnaire
   object_relationships:
   - name: departement
