@@ -67,7 +67,7 @@ const AdminSatisfactionCampaignInformations = props => {
           Note moyenne des réponses (1 à 3)
         </Box>
         <Box width={2 / 3} px={4} py={2}>
-          {satisfactionCampaign.answers.aggregate.avg && (
+          {satisfactionCampaign.answers.aggregate.avg.value && (
             <Text>{satisfactionCampaign.answers.aggregate.avg.value.toFixed(2)}</Text>
           )}
         </Box>
