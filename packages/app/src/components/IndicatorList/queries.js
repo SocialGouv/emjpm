@@ -18,6 +18,12 @@ export const INDICATORS = gql`
       type
       code
     }
+    view_indicateur_satisfaction_campaign(where: { code: { _eq: $code } }) {
+      value
+      nom
+      type
+      code
+    }
   }
 `;
 
@@ -79,6 +85,44 @@ export const FRANCE_INDICATORS = gql`
         sum {
           count
         }
+      }
+    }
+    magistratStatisfaction: view_indicateur_satisfaction_campaign_aggregate(where: {}) {
+      aggregate {
+        avg {
+          value
+        }
+        count
+      }
+    }
+    serviceStatisfaction: view_indicateur_satisfaction_campaign_aggregate(
+      where: { type: { _eq: "service" } }
+    ) {
+      aggregate {
+        avg {
+          value
+        }
+        count
+      }
+    }
+    preposeStatisfaction: view_indicateur_satisfaction_campaign_aggregate(
+      where: { type: { _eq: "prepose" } }
+    ) {
+      aggregate {
+        avg {
+          value
+        }
+        count
+      }
+    }
+    individuelStatisfaction: view_indicateur_satisfaction_campaign_aggregate(
+      where: { type: { _eq: "individuel" } }
+    ) {
+      aggregate {
+        avg {
+          value
+        }
+        count
       }
     }
   }
