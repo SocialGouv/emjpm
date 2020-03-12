@@ -1347,6 +1347,7 @@ Array [
   "view_department_availability",
   "view_indicateur_inscrit",
   "view_indicateur_login",
+  "view_indicateur_satisfaction_campaign",
   "view_mesure_gestionnaire",
   "view_mesure_gestionnaire_tis",
 ]
