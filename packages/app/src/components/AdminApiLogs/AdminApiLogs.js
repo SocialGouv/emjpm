@@ -215,7 +215,7 @@ const AdminApiLogs = () => {
                   justifyContent: "flex-end"
                 }}
               >
-                <Link href={`/admin/api_logs/${log.id}`}>
+                <Link href={`/admin/api_logs/[api_log_id]`} as={`/admin/api_logs/${log.id}`}>
                   <a>
                     <Button>Voir</Button>
                   </a>

@@ -57,7 +57,13 @@ const MagistratMandatairesMapPopup = () => {
       </Text>
       <Text sx={labelStyle}>Ville</Text>
       <Text sx={descriptionStyle}>{ville}</Text>
-      <LinkButton mt="2" width="100%" textAlign="center" href={`/magistrats/gestionnaires/${id}`}>
+      <LinkButton
+        mt="2"
+        width="100%"
+        textAlign="center"
+        href={`/magistrats/gestionnaires/[gestionnaire_id]`}
+        as={`/magistrats/gestionnaires/${id}`}
+      >
         Réserver une mesure
       </LinkButton>
     </Box>

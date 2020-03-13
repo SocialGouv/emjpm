@@ -27,7 +27,10 @@ const ServiceMesureSidebar = props => {
         </Link>
         {status === MESURE_TYPE.IN_PROGRESS && (
           <Fragment>
-            <Link href={`/services/mesures/${mesureId}/edit`}>
+            <Link
+              href={`/services/mesures/[mesure_id]/edit`}
+              as={`/services/mesures/${mesureId}/edit`}
+            >
               <StyledLink sx={linkStyle} display="block">
                 <Flex>
                   <Edit size="16" />
@@ -35,7 +38,10 @@ const ServiceMesureSidebar = props => {
                 </Flex>
               </StyledLink>
             </Link>
-            <Link href={`/services/mesures/${mesureId}/close`}>
+            <Link
+              href={`/services/mesures/[mesure_id]/close`}
+              as={`/services/mesures/${mesureId}/close`}
+            >
               <StyledLink sx={linkStyle} display="block">
                 <Flex>
                   <WindowClose size="16" />
@@ -47,7 +53,10 @@ const ServiceMesureSidebar = props => {
         )}
         {status === MESURE_TYPE.CLOSED && (
           <Fragment>
-            <Link href={`/services/mesures/${mesureId}/delete`}>
+            <Link
+              href={`/services/mesures/[mesure_id]/delete`}
+              as={`/services/mesures/${mesureId}/delete`}
+            >
               <StyledLink sx={linkStyle} display="block">
                 <Flex>
                   <RemoveCircleOutline size="16" />
@@ -55,7 +64,10 @@ const ServiceMesureSidebar = props => {
                 </Flex>
               </StyledLink>
             </Link>
-            <Link href={`/services/mesures/${mesureId}/reactivate`}>
+            <Link
+              href={`/services/mesures/[mesure_id]/reactivate`}
+              as={`/services/mesures/${mesureId}/reactivate`}
+            >
               <StyledLink sx={linkStyle} display="block">
                 <Flex>
                   <FolderAdd size="16" />
@@ -66,7 +78,10 @@ const ServiceMesureSidebar = props => {
           </Fragment>
         )}
         {status === MESURE_TYPE.WAITING && (
-          <Link href={`/services/mesures/${mesureId}/accept`}>
+          <Link
+            href={`/services/mesures/[mesure_id]/accept`}
+            as={`/services/mesures/${mesureId}/accept`}
+          >
             <StyledLink sx={linkStyle} display="block">
               <Flex>
                 <FileAdd size="16" />
