@@ -33,7 +33,7 @@ const LinkButtonStyle = (isActive, disabled) => {
 const LinkButton = ({ router, ...props }) => {
   const isActive = router && router.pathname === props.href;
   return (
-    <NextLink as={props.href} href={props.disabled ? "" : props.href}>
+    <NextLink as={props.as} href={props.disabled ? "" : props.href}>
       <RebassLink
         href={props.disabled ? "" : props.href}
         sx={LinkButtonStyle(isActive, props.disabled)}
