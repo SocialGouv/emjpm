@@ -58,7 +58,6 @@
     "react-dom": "^16.8.6",
     "react-mapbox-gl": "^4.6.1",
     "react-paginate": "^6.3.2",
-    "react-piwik": "^1.6.0",
     "react-scrollbars-custom": "^4.0.21",
     "react-svgmt": "^1.1.8",
     "rebass": "^4.0.2",
