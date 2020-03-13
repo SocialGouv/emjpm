@@ -46,7 +46,6 @@ const MagistratMandatairesMapPopup = () => {
 
   const ville = discriminator === "SERVICE" ? service.ville : mandataire.ville;
   const type = TYPES[discriminator];
-
   return (
     <Box p="1">
       <Text sx={titleStyle}>{nom}</Text>
@@ -62,7 +61,7 @@ const MagistratMandatairesMapPopup = () => {
         width="100%"
         textAlign="center"
         href={`/magistrats/gestionnaires/[gestionnaire_id]`}
-        as={`/magistrats/gestionnaires/${id}`}
+        asLink={`/magistrats/gestionnaires/${id}`}
       >
         Réserver une mesure
       </LinkButton>
