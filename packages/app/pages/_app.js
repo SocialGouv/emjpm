@@ -34,7 +34,6 @@ class MyApp extends App {
 
   componentDidMount() {
     initMatomo();
-    sentrySetup();
   }
 
   render() {
