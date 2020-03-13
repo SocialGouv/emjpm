@@ -5,20 +5,13 @@ import jwtDecode from "jwt-decode";
 import App from "next/app";
 import React from "react";
 import { ApolloProvider } from "react-apollo";
-import ReactPiwik from "react-piwik";
 import { ThemeProvider } from "theme-ui";
 
 import { UserProvider } from "../src/components/UserContext";
 import { withApolloClient } from "../src/lib/apollo";
-import { piwikSetup } from "../src/piwik";
+import { initMatomo } from "../src/matomo";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
 import Sentry from "../src/util/sentry";
-
-new ReactPiwik({
-  siteId: 13,
-  trackErrors: true,
-  url: "matomo.fabrique.social.gouv.fr"
-});
 
 class MyApp extends App {
   static async getInitialProps(appContext) {
@@ -40,7 +33,7 @@ class MyApp extends App {
   }
 
   componentDidMount() {
-    piwikSetup();
+    initMatomo();
   }
 
   render() {

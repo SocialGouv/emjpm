@@ -3,12 +3,11 @@ import { useFormik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
 import React from "react";
-import ReactPiwik from "react-piwik";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { loginSchema } from "../../lib/validationSchemas";
-import { trackUser } from "../../piwik";
+import { matopush } from "../../matomo";
 import { login } from "../../util/auth";
 import { Link } from "../Commons";
 
@@ -25,15 +24,15 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
     setStatus({ errorMsg: errors.msg });
   }
   if (!response.ok) {
-    ReactPiwik.push(["trackEvent", "login", "error"]);
+    matopush(["trackEvent", "login", "error"]);
     setStatus({ errorMsg: json.errors.msg });
     return json;
   }
   const params = location.search;
   login({ token: json.token });
   Router.push(`/application/authorization${params}`);
-  ReactPiwik.push(["trackEvent", "login", "success"]);
-  trackUser();
+  matopush(["trackEvent", "login", "success"]);
+  // trackUser();
   return json;
 };
 

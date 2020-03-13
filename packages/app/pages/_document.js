@@ -14,12 +14,6 @@ export default class MyDocument extends Document {
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
           <meta name="description" content="" />
           <meta name="author" content="" />
-          <script
-            type="text/javascript"
-            dangerouslySetInnerHTML={{
-              __html: hotjar
-            }}
-          />
           <style>{`
           html {
             font-size: 14px;
@@ -38,6 +32,8 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="/static/css/font.css" />
           <link rel="stylesheet" href="/static/css/pagination.css" />
           {this.props.styleTags}
+          <script type="text/javascript" src="/static/tarteaucitron/tarteaucitron.js" />
+          <script type="text/javascript" src="/static/tarteaucitron/initTarteaucitron.js" />
         </Head>
         <body>
           <Main />
@@ -47,14 +43,3 @@ export default class MyDocument extends Document {
     );
   }
 }
-
-const hotjar = `
-(function(h,o,t,j,a,r){
-  h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-  h._hjSettings={hjid:1487525,hjsv:6};
-  a=o.getElementsByTagName('head')[0];
-  r=o.createElement('script');r.async=1;
-  r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-  a.appendChild(r);
-})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-`;

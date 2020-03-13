@@ -14196,11 +14196,6 @@ react-paginate@^6.3.2:
   dependencies:
     prop-types "^15.6.1"
 
-react-piwik@^1.6.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/react-piwik/-/react-piwik-1.8.0.tgz#f0ff0d54c4923c80c9497b728a1863c4d2609cfc"
-  integrity sha512-ZpT7oPcdSIXt1yZvRWU/qq/EX7rXZELkwEJq2cDDejFlVYq7NKXtiMpuAvkO6QNeFwOmkO/820MHgmJ+fDug/Q==
-
 react-popper-tooltip@^2.8.3:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/react-popper-tooltip/-/react-popper-tooltip-2.10.1.tgz#e10875f31916297c694d64a677d6f8fa0a48b4d1"

@@ -65,7 +65,7 @@ spec:
             #
 
             - name: postgres
-              image: postgres:10-alpine
+              image: ${CI_REGISTRY_IMAGE}/postgres:${IMAGE_TAG}
               command:
                 - sh
               args:
