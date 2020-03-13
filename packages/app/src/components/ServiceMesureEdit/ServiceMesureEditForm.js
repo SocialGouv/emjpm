@@ -19,6 +19,7 @@ import { getRegionCode } from "../../util/departements";
 import { formatAntenneOptions } from "../../util/services";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 import { EDIT_MESURE, UPDATE_ANTENNE_COUTERS } from "../ServiceMesures/mutations";
+import TribunalAutoComplete from "../TribunalAutoComplete";
 
 export const ServiceMesureEditForm = props => {
   const {
@@ -151,14 +152,13 @@ export const ServiceMesureEditForm = props => {
             />
           </Field>
           <Field>
-            <Select
+            <TribunalAutoComplete
               id="tribunal"
-              name="tribunal"
-              placeholder="Tribunal"
               value={formik.values.tribunal}
-              options={tribunalList}
+              name="tribunal"
               hasError={formik.errors.tribunal && formik.touched.tribunal}
               onChange={option => formik.setFieldValue("tribunal", option)}
+              defaultOptions={tribunalList}
             />
             <InlineError message={formik.errors.tribunal} fieldId="tribunal" />
           </Field>

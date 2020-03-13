@@ -7,6 +7,7 @@ import { Box, Flex } from "rebass";
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { Geocode, geocodeInitialValue } from "../Geocode";
+import TribunalAutoComplete from "../TribunalAutoComplete";
 
 const initialValues = {
   annee: "",
@@ -16,7 +17,7 @@ const initialValues = {
   date_ouverture: "",
   numero_dossier: "",
   numero_rg: "",
-  tribunal: "",
+  tribunal: undefined,
   geocode: geocodeInitialValue()
 };
 
@@ -44,14 +45,13 @@ export const ServiceMesureCreateForm = props => {
         )}
       </Field>
       <Field>
-        <Select
+        <TribunalAutoComplete
           id="tribunal"
-          name="tribunal"
-          placeholder="Tribunal"
           value={formik.values.tribunal}
-          options={tribunalList}
+          name="tribunal"
           hasError={formik.errors.tribunal && formik.touched.tribunal}
           onChange={option => formik.setFieldValue("tribunal", option)}
+          defaultOptions={tribunalList}
         />
         {formik.touched.tribunal && (
           <InlineError message={formik.errors.tribunal} fieldId="tribunal" />
