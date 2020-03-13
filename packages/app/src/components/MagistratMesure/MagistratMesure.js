@@ -36,13 +36,13 @@ const MagistratMesure = props => {
           <Link
             mr="1"
             href={`/magistrats/mesures/[mesure_id]/edit`}
-            as={`/magistrats/mesures/${id}/edit`}
+            asLink={`/magistrats/mesures/${id}/edit`}
           >
             Éditer la mesure
           </Link>
           <Link
             href={`/magistrats/mesures/[mesure_id]/delete`}
-            as={`/magistrats/mesures/${id}/delete`}
+            asLink={`/magistrats/mesures/${id}/delete`}
           >
             Supprimer la mesure
           </Link>
