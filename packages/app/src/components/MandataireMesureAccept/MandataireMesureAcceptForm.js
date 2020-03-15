@@ -63,7 +63,9 @@ export const MandataireMesureAcceptForm = props => {
       });
 
       setSubmitting(false);
-      Router.push(`/mandataires/mesures/${mesure.id}`);
+      Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
+        shallow: true
+      });
     },
     validationSchema: mandataireAcceptMesureSchema,
     initialValues: {
@@ -124,7 +126,13 @@ export const MandataireMesureAcceptForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/mandataires/mesures/${mesure.id}`);
+                  Router.push(
+                    "/mandataires/mesures/[mesure_id]",
+                    `/mandataires/mesures/${mesure.id}`,
+                    {
+                      shallow: true
+                    }
+                  );
                 }}
               >
                 Annuler

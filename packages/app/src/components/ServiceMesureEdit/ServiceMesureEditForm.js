@@ -101,7 +101,9 @@ export const ServiceMesureEditForm = props => {
       }
 
       setSubmitting(false);
-      Router.push(`/services/mesures/${id}`);
+      Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
+        shallow: true
+      });
     },
     validationSchema: serviceMesureSchema,
     initialValues: {
@@ -259,7 +261,9 @@ export const ServiceMesureEditForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/services/mesures/${id}`);
+                  Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
+                    shallow: true
+                  });
                 }}
               >
                 Annuler
