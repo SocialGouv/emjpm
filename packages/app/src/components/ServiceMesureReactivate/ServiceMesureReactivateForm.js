@@ -49,7 +49,9 @@ export const ServiceMesureReactivateForm = props => {
       }
 
       setSubmitting(false);
-      Router.push(`/services/mesures/${mesure.id}`);
+      Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
+        shallow: true
+      });
     },
     validationSchema: Yup.object().shape({
       reason_extinction: Yup.string().required("Required")
@@ -90,7 +92,9 @@ export const ServiceMesureReactivateForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/services/mesures/${mesure.id}`);
+                  Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
+                    shallow: true
+                  });
                 }}
               >
                 Annuler

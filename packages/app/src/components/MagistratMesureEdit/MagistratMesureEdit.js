@@ -24,7 +24,9 @@ export const MagistratMesureEdit = () => {
   const { id, age, civilite, numeroRg, type, cabinet } = useContext(MesureContext);
   const [updateMesure] = useMutation(EDIT_MESURE, {
     onCompleted() {
-      Router.push(`/magistrats/mesures/${id}`);
+      Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${id}`, {
+        shallow: true
+      });
     }
   });
 
@@ -132,7 +134,9 @@ export const MagistratMesureEdit = () => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/magistrats/mesures/${id}`);
+                  Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${id}`, {
+                    shallow: true
+                  });
                 }}
               >
                 Annuler

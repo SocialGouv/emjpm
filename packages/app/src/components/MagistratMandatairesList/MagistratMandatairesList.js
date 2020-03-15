@@ -114,7 +114,13 @@ const MagistratMandatairesList = props => {
           return (
             <MandataireListItem
               key={gestionnaire.id}
-              onClick={() => Router.push(`/magistrats/gestionnaires/${gestionnaire.id}`)}
+              onClick={() =>
+                Router.push(
+                  "/magistrats/gestionnaires/[gestionnaire_id]",
+                  `/magistrats/gestionnaires/${gestionnaire.id}`,
+                  { shallow: true }
+                )
+              }
               gestionnaire={gestionnaire}
             />
           );

@@ -77,7 +77,9 @@ export const MandataireMesureEditForm = props => {
       }
 
       setSubmitting(false);
-      Router.push(`/mandataires/mesures/${id}`);
+      Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
+        shallow: true
+      });
     },
     validationSchema: mandataireMesureSchema,
     initialValues: {
@@ -223,7 +225,13 @@ export const MandataireMesureEditForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/mandataires/mesures/${id}`);
+                  Router.push(
+                    "/mandataires/mesures/[mesure_id]",
+                    `/mandataires/mesures/${id}`,
+                    {
+                      shallow: true
+                    }
+                  );
                 }}
               >
                 Annuler
