@@ -59,7 +59,9 @@ export const ServiceMesureCloseForm = props => {
       }
 
       setSubmitting(false);
-      Router.push(`/services/mesures/${mesure.id}`);
+      Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
+        shallow: true
+      });
     },
     validationSchema: Yup.object().shape({
       extinction: Yup.date().required("Required"),
@@ -109,7 +111,9 @@ export const ServiceMesureCloseForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/services/mesures/${mesure.id}`);
+                  Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
+                    shallow: true
+                  });
                 }}
               >
                 Annuler

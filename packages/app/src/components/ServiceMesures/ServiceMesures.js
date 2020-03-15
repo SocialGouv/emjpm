@@ -39,7 +39,9 @@ const ServiceMesures = props => {
   });
 
   const selectMesure = ({ id }) => {
-    Router.push(`/services/mesures/${id}`);
+    Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
+      shallow: true
+    });
   };
 
   if (loading) {

@@ -11,8 +11,14 @@ const MagistratMesureAdd = props => {
   const { gestionnaireId } = props;
   const { mandataireId, serviceId } = formatGestionnaireId(gestionnaireId);
   const cancelActionRoute = gestionnaireId
-    ? `/magistrats/gestionnaires/${gestionnaireId}`
-    : `/magistrats`;
+    ? {
+        href: "/magistrats/gestionnaires/[gestionnaire_id]",
+        as: `/magistrats/gestionnaires/${gestionnaireId}`
+      }
+    : {
+        href: `/magistrats`,
+        as: `/magistrats`
+      };
 
   return (
     <Box>

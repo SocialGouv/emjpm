@@ -33,10 +33,19 @@ const MagistratMesure = props => {
       </Heading3>
       <Flex sx={MagistratMesureStyle} {...props}>
         <Box sx={MagistratMesureLinksStyle}>
-          <Link mr="1" href={`/magistrats/mesures/${id}/edit`}>
+          <Link
+            mr="1"
+            href={`/magistrats/mesures/[mesure_id]/edit`}
+            asLink={`/magistrats/mesures/${id}/edit`}
+          >
             Éditer la mesure
           </Link>
-          <Link href={`/magistrats/mesures/${id}/delete`}>Supprimer la mesure</Link>
+          <Link
+            href={`/magistrats/mesures/[mesure_id]/delete`}
+            asLink={`/magistrats/mesures/${id}/delete`}
+          >
+            Supprimer la mesure
+          </Link>
         </Box>
         <Box sx={MagistratMesureSideStyle} />
         <Flex sx={MagistratMesureMainStyle}>

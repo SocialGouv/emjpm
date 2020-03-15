@@ -30,7 +30,7 @@ const MagistratMesures = () => {
   });
 
   const selectMesure = ({ id }) => {
-    Router.push({ pathname: `/magistrats/mesures/${id}` });
+    Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${id}`, { shallow: true });
   };
 
   if (loading) {
