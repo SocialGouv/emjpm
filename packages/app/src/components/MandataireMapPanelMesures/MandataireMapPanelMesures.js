@@ -22,7 +22,9 @@ const MandataireMapPanelMesures = props => {
   });
 
   const selectMesure = ({ id }) => {
-    Router.push(`/mandataires/mesures/${id}`);
+    Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
+      shallow: true
+    });
   };
 
   if (loading) {
@@ -36,7 +38,7 @@ const MandataireMapPanelMesures = props => {
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
   const mesures = formatMesureList(data.mesures);
-  console.log(currentOffset);
+
   return (
     <Box sx={MandataireMapPanelMesuresStyle} {...props}>
       <Scrollbar style={{ width: "100%", height: "100%" }}>

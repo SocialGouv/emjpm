@@ -75,7 +75,11 @@ export const MagistratMesureDeleteForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/magistrats/mesures/${mesure.id}`);
+                  Router.push(
+                    "/magistrats/mesures/[mesure_id]",
+                    `/magistrats/mesures/${mesure.id}`,
+                    { shallow: true }
+                  );
                 }}
               >
                 Annuler

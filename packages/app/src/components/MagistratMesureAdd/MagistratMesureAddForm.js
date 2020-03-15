@@ -21,14 +21,18 @@ export const MagistratMesureAddForm = props => {
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
     onCompleted({ insert_mesures }) {
       const [mesure] = insert_mesures.returning;
-      Router.push(`/magistrats/mesures/${mesure.id}`);
+      Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
+        shallow: true
+      });
     }
   });
 
   const [chooseService] = useMutation(CHOOSE_SERVICE, {
     onCompleted({ insert_mesures }) {
       const [mesure] = insert_mesures.returning;
-      Router.push(`/magistrats/mesures/${mesure.id}`);
+      Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
+        shallow: true
+      });
     }
   });
 
@@ -180,7 +184,7 @@ export const MagistratMesureAddForm = props => {
                 variant="outline"
                 onClick={() => {
                   if (cancelActionRoute) {
-                    Router.push(cancelActionRoute);
+                    Router.push(cancelActionRoute.href, cancelActionRoute.as, { shallow: true });
                   }
                 }}
               >

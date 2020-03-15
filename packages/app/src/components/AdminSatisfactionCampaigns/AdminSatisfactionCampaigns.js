@@ -63,7 +63,10 @@ const RowItem = ({ item }) => {
         </Flex>
 
         <Box mr="1" width="220px">
-          <Link href={`/admin/satisfaction_campaigns/${id}`}>
+          <Link
+            href={`/admin/satisfaction_campaigns/[satisfaction_campaign_id]`}
+            as={`/admin/satisfaction_campaigns/${id}`}
+          >
             <a>
               <Button>Voir</Button>
             </a>

@@ -83,7 +83,10 @@ export const MagistratMandataire = props => {
         {serviceId && <Heading2>{etablissement}</Heading2>}
         {mandataireId && <Heading2>{`${prenom} ${nom}`}</Heading2>}
 
-        <Link href={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
+        <Link
+          href={`/magistrats/gestionnaires/[gestionnaire_id]/reservation`}
+          as={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}
+        >
           <a>
             <Button>Réserver une mesure</Button>
           </a>

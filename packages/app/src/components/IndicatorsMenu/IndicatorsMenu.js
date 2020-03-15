@@ -49,7 +49,11 @@ const IndicatorsMenu = props => {
         {departements.map((departement, index) => {
           return (
             <Card key={`${index}-${departement.code}`} p="1" mb="1" sx={{ borderRadius: "15px" }}>
-              <Link prefetch={false} href={`/stats/${departement.code}`}>
+              <Link
+                prefetch={false}
+                href={`/stats/[departement_code]`}
+                as={`/stats/${departement.code}`}
+              >
                 <StyledLink sx={linkStyle}>{`${departement.code} - ${departement.nom}`}</StyledLink>
               </Link>
             </Card>
