@@ -35,7 +35,9 @@ export const MandataireMesureReactivateForm = props => {
       });
 
       setSubmitting(false);
-      Router.push({ pathname: `/mandataires/mesures/${mesure.id}` });
+      Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
+        shallow: true
+      });
     },
     validationSchema: Yup.object().shape({
       reason_extinction: Yup.string().required("Required")
@@ -76,7 +78,13 @@ export const MandataireMesureReactivateForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(`/mandataires/mesures/${mesure.id}`);
+                  Router.push(
+                    "/mandataires/mesures/[mesure_id]",
+                    `/mandataires/mesures/${mesure.id}`,
+                    {
+                      shallow: true
+                    }
+                  );
                 }}
               >
                 Annuler

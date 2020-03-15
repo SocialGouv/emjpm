@@ -31,7 +31,9 @@ export const ServiceMesureCreate = props => {
     options: { refetchQueries: ["mesures", "mesures_aggregate"] },
     onCompleted({ insert_mesures }) {
       const [mesure] = insert_mesures.returning;
-      Router.push(`/services/mesures/${mesure.id}`);
+      Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
+        shallow: true
+      });
     },
     update(
       cache,

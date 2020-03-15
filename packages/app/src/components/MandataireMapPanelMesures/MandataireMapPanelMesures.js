@@ -22,7 +22,9 @@ const MandataireMapPanelMesures = props => {
   });
 
   const selectMesure = ({ id }) => {
-    Router.push(`/mandataires/mesures/${id}`);
+    Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
+      shallow: true
+    });
   };
 
   if (loading) {
