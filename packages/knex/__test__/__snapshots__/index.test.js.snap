@@ -1652,6 +1652,35 @@ Object {
 }
 `;
 
+exports[`view_indicateur_satisfaction_campaign table schema 1`] = `
+Object {
+  "code": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "value": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "numeric",
+  },
+}
+`;
+
 exports[`view_mesure_gestionnaire table schema 1`] = `
 Object {
   "dep_nom": Object {

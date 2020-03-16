@@ -18,6 +18,7 @@ import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/me
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
+import TribunalAutoComplete from "../TribunalAutoComplete";
 import { EDIT_MESURE } from "./mutations";
 
 export const MandataireMesureEditForm = props => {
@@ -89,7 +90,7 @@ export const MandataireMesureEditForm = props => {
       numero_dossier: numeroDossier,
       numero_rg: numeroRg,
       residence: { label: residence, value: residence },
-      tribunal: tiId ? { label: tribunal, value: tiId } : "",
+      tribunal: tiId ? { label: tribunal, value: tiId } : undefined,
       type: { label: type, value: type },
       geocode
     }
@@ -129,14 +130,13 @@ export const MandataireMesureEditForm = props => {
             <InlineError message={formik.errors.numero_rg} fieldId="numero_rg" />
           </Field>
           <Field>
-            <Select
+            <TribunalAutoComplete
               id="tribunal"
-              name="tribunal"
-              placeholder="Tribunal"
               value={formik.values.tribunal}
-              options={tribunalList}
+              name="tribunal"
               hasError={formik.errors.tribunal && formik.touched.tribunal}
               onChange={option => formik.setFieldValue("tribunal", option)}
+              defaultOptions={tribunalList}
             />
             <InlineError message={formik.errors.tribunal} fieldId="tribunal" />
           </Field>
