@@ -36,6 +36,7 @@ export const ADD_MESURE = gql`
     $mandataireId: Int!
     $latitude: Float!
     $longitude: Float!
+    $pays: String!
   ) {
     insert_mesures(
       objects: {
@@ -54,6 +55,7 @@ export const ADD_MESURE = gql`
         mandataire_id: $mandataireId
         latitude: $latitude
         longitude: $longitude
+        pays: $pays
       }
     ) {
       returning {
@@ -83,6 +85,7 @@ export const ADD_MESURE = gql`
         ville
         latitude
         longitude
+        pays
         departement {
           id
           nom

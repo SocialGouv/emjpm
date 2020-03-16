@@ -63,7 +63,8 @@ export const MandataireAddMesure = props => {
             residence: values.residence.value,
             ti_id: values.tribunal.value,
             type: values.type.value,
-            mandataireId: id
+            mandataireId: id,
+            pays: values.country.value
           }
         });
       }
@@ -78,7 +79,8 @@ export const MandataireAddMesure = props => {
       numero_dossier: "",
       numero_rg: "",
       tribunal: undefined,
-      geocode
+      geocode,
+      country: { value: "FR", label: "France" }
     }
   });
 
@@ -257,9 +259,33 @@ export const MandataireAddMesure = props => {
               </Field>
 
               <Field>
-                <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
+                <Select
+                  id="country"
+                  name="country"
+                  placeholder="Pays"
+                  value={formik.values.country}
+                  hasError={formik.errors.country && formik.touched.country}
+                  onChange={option => formik.setFieldValue("country", option)}
+                  options={[
+                    {
+                      label: "France",
+                      value: "FR"
+                    },
+                    {
+                      label: "Belgique",
+                      value: "BE"
+                    }
+                  ]}
+                />
+                {formik.errors.country && formik.touched.country && (
+                  <Text>{formik.errors.country}</Text>
+                )}
               </Field>
-
+              {formik.values.country && formik.values.country.value === "FR" && (
+                <Field>
+                  <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
+                </Field>
+              )}
               <Flex justifyContent="flex-end">
                 <Box>
                   <Button mr="2" variant="outline">

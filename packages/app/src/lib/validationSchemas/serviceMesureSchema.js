@@ -8,11 +8,10 @@ const serviceMesureSchema = yup.object().shape({
     .max(2019, "l'année choisi doit être au maximum 2019"),
   antenne: yup.string(),
   civilite: yup.string().required(),
+  country: yup.object().shape({
+    value: yup.string().required()
+  }),
   date_ouverture: yup.date().required(),
-  geocode: yup
-    .object()
-    .nullable()
-    .required(),
   numero_dossier: yup.string().required(),
   numero_rg: yup.string().required(),
   residence: yup.string().required(),

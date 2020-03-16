@@ -2,6 +2,7 @@ import { Card, Heading2, Heading3 } from "@socialgouv/emjpm-ui-core";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { COUNTRIES } from "../../constants/mesures";
 import { MesureContext } from "../MesureContext";
 import { boxStyle, content, flexStyle, statusStyle, subtitle } from "./style";
 
@@ -18,6 +19,7 @@ const ServiceMesure = props => {
     tribunal,
     type,
     ville,
+    pays,
     antenne
   } = useContext(MesureContext);
 
@@ -44,6 +46,8 @@ const ServiceMesure = props => {
             <Text sx={content}>{type}</Text>
             <Text sx={subtitle}>Commune</Text>
             <Text sx={content}>{ville}</Text>
+            <Text sx={subtitle}>Pays</Text>
+            <Text sx={content}>{COUNTRIES[pays]}</Text>
             <Text sx={subtitle}>Age</Text>
             <Text sx={content}>{`${realAge} ans`}</Text>
           </Box>

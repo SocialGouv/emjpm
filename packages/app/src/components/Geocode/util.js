@@ -1,6 +1,6 @@
 const geocodeInitialValue = (resource = {}) => {
   if (!resource.latitude || !resource.longitude) {
-    return null;
+    return {};
   }
 
   return {

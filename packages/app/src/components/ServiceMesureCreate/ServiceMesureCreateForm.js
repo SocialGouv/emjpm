@@ -2,7 +2,7 @@ import { Button, Field, InlineError, Input, Select } from "@socialgouv/emjpm-ui-
 import { useFormik } from "formik";
 import Link from "next/link";
 import React from "react";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
@@ -18,7 +18,8 @@ const initialValues = {
   numero_dossier: "",
   numero_rg: "",
   tribunal: undefined,
-  geocode: geocodeInitialValue()
+  geocode: geocodeInitialValue(),
+  country: { value: "FR", label: "France" }
 };
 
 export const ServiceMesureCreateForm = props => {
@@ -150,12 +151,38 @@ export const ServiceMesureCreateForm = props => {
           <InlineError message={formik.errors.residence} fieldId="residence" />
         )}
       </Field>
+
       <Field>
-        <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-        {formik.errors.geocode && formik.touched.geocode && (
-          <InlineError message={formik.errors.geocode} fieldId="geocode" />
-        )}
+        <Select
+          id="country"
+          name="country"
+          placeholder="Pays"
+          value={formik.values.country}
+          hasError={formik.errors.country && formik.touched.country}
+          onChange={option => formik.setFieldValue("country", option)}
+          options={[
+            {
+              label: "France",
+              value: "FR"
+            },
+            {
+              label: "Belgique",
+              value: "BE"
+            }
+          ]}
+        />
+        {formik.errors.country && formik.touched.country && <Text>{formik.errors.country}</Text>}
       </Field>
+
+      {formik.values.country && formik.values.country.value === "FR" && (
+        <Field>
+          <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
+
+          {formik.errors.geocode && formik.touched.geocode && (
+            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+          )}
+        </Field>
+      )}
       <Flex justifyContent="flex-end">
         <Box>
           <Button mr="2" variant="outline">

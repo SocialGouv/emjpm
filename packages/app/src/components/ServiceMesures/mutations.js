@@ -42,7 +42,7 @@ export const CLOSE_MESURE = gql`
 export const EDIT_MESURE = gql`
   mutation EditMesure(
     $id: Int!
-    $department_id: Int!
+    $department_id: Int
     $antenne_id: Int
     $date_ouverture: date
     $type: String
@@ -54,8 +54,9 @@ export const EDIT_MESURE = gql`
     $numero_dossier: String
     $numero_rg: String
     $ti_id: Int!
-    $latitude: Float!
-    $longitude: Float!
+    $latitude: Float
+    $longitude: Float
+    $pays: String!
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -74,6 +75,7 @@ export const EDIT_MESURE = gql`
         numero_rg: $numero_rg
         latitude: $latitude
         longitude: $longitude
+        pays: $pays
       }
     ) {
       returning {
@@ -101,6 +103,7 @@ export const EDIT_MESURE = gql`
         etablissement
         annee
         date_ouverture
+        pays
       }
     }
   }
@@ -207,6 +210,7 @@ export const ADD_MESURE = gql`
     $ti_id: Int!
     $latitude: Float!
     $longitude: Float!
+    $pays: String!
   ) {
     insert_mesures(
       objects: {
@@ -225,6 +229,7 @@ export const ADD_MESURE = gql`
         antenne_id: $antenne_id
         latitude: $latitude
         longitude: $longitude
+        pays: $pays
       }
     ) {
       returning {
@@ -253,6 +258,7 @@ export const ADD_MESURE = gql`
         etablissement
         annee
         date_ouverture
+        pays
       }
     }
   }

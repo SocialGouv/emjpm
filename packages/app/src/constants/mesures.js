@@ -14,6 +14,11 @@ export const DEFAULT_MESURE_TYPE = {
   value: null
 };
 
+export const COUNTRIES = {
+  BE: "Belgique",
+  FR: "France"
+};
+
 export const MESURE_TYPE_LABEL_VALUE = [
   {
     label: "Curatelle",

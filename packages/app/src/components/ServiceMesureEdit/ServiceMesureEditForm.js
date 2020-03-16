@@ -13,7 +13,7 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { formatAntenneOptions } from "../../util/services";
@@ -34,7 +34,8 @@ export const ServiceMesureEditForm = props => {
       residence,
       type,
       tribunal,
-      tiId
+      tiId,
+      pays
     },
     departementsData,
     tribunalList,
@@ -50,55 +51,64 @@ export const ServiceMesureEditForm = props => {
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
-      const regionCode = getRegionCode(values.geocode.postcode);
-      const departements = departementsData.departements;
-      const departement = departements.find(dep => dep.code === regionCode);
+      var variables = {};
 
-      if (!departement) {
-        setErrors({
-          codePostal: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
-        });
-      } else {
-        await editMesure({
-          awaitRefetchQueries: true,
+      if (values.country.value === "FR") {
+        const regionCode = getRegionCode(values.geocode.postcode);
+        const departements = departementsData.departements;
+        const departement = departements.find(dep => dep.code === regionCode);
+
+        if (!departement) {
+          setErrors({
+            codePostal: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
+          });
+
+          return setSubmitting(false);
+        } else {
+          variables.department_id = departement.id;
+          variables.code_postal = values.geocode.postcode;
+          variables.ville = values.geocode.city;
+          variables.latitude = values.geocode.latitude;
+          variables.longitude = values.geocode.longitude;
+        }
+      }
+
+      await editMesure({
+        awaitRefetchQueries: true,
+        variables: {
+          ...variables,
+          annee: values.annee,
+          antenne_id: values.antenne_id ? values.antenne_id.value : null,
+          civilite: values.civilite.value,
+          date_ouverture: values.date_ouverture,
+          id: id,
+          numero_dossier: values.numero_dossier,
+          numero_rg: values.numero_rg,
+          residence: values.residence.value,
+          ti_id: values.tribunal.value,
+          type: values.type.value,
+          pays: values.country.value
+        }
+      });
+
+      if (values.antenne_id) {
+        await updateAntenneCounters({
           variables: {
-            annee: values.annee,
-            antenne_id: values.antenne_id ? values.antenne_id.value : null,
-            civilite: values.civilite.value,
-            code_postal: values.geocode.postcode,
-            date_ouverture: values.date_ouverture,
-            department_id: departement.id,
-            id: id,
-            numero_dossier: values.numero_dossier,
-            numero_rg: values.numero_rg,
-            residence: values.residence.value,
-            ti_id: values.tribunal.value,
-            type: values.type.value,
-            ville: values.geocode.city,
-            latitude: values.geocode.latitude,
-            longitude: values.geocode.longitude
+            antenne_id: values.antenne_id.value,
+            inc_mesures_awaiting: 0,
+            inc_mesures_in_progress: 1
           }
         });
+      }
 
-        if (values.antenne_id) {
-          await updateAntenneCounters({
-            variables: {
-              antenne_id: values.antenne_id.value,
-              inc_mesures_awaiting: 0,
-              inc_mesures_in_progress: 1
-            }
-          });
-        }
-
-        if (antenneId) {
-          await updateAntenneCounters({
-            variables: {
-              antenne_id: antenneId,
-              inc_mesures_awaiting: 0,
-              inc_mesures_in_progress: -1
-            }
-          });
-        }
+      if (antenneId) {
+        await updateAntenneCounters({
+          variables: {
+            antenne_id: antenneId,
+            inc_mesures_awaiting: 0,
+            inc_mesures_in_progress: -1
+          }
+        });
       }
 
       setSubmitting(false);
@@ -117,7 +127,8 @@ export const ServiceMesureEditForm = props => {
       residence: { label: residence, value: residence },
       tribunal: { label: tribunal, value: tiId },
       type: { label: type, value: type },
-      geocode
+      geocode,
+      country: { value: pays, label: COUNTRIES[pays] }
     }
   });
 
@@ -248,13 +259,41 @@ export const ServiceMesureEditForm = props => {
             />
             <InlineError message={formik.errors.residence} fieldId="residence" />
           </Field>
+
           <Field>
-            <Geocode
-              resource={props.mesure}
-              onChange={geocode => formik.setFieldValue("geocode", geocode)}
+            <Select
+              id="country"
+              name="country"
+              placeholder="Pays"
+              value={formik.values.country}
+              hasError={formik.errors.country && formik.touched.country}
+              onChange={option => formik.setFieldValue("country", option)}
+              options={[
+                {
+                  label: "France",
+                  value: "FR"
+                },
+                {
+                  label: "Belgique",
+                  value: "BE"
+                }
+              ]}
             />
-            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+            {formik.errors.country && formik.touched.country && (
+              <Text>{formik.errors.country}</Text>
+            )}
           </Field>
+
+          {formik.values.country && formik.values.country.value === "FR" && (
+            <Field>
+              <Geocode
+                resource={props.mesure}
+                onChange={geocode => formik.setFieldValue("geocode", geocode)}
+              />
+              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+            </Field>
+          )}
+
           <Flex justifyContent="flex-end">
             <Box>
               <Button
