@@ -29,6 +29,7 @@ export const ServiceMesureAcceptForm = props => {
   const [updateMesure] = useMutation(ACCEPT_MESURE);
 
   const antenneOptions = formatAntenneOptions(service_antennes);
+  const geocode = geocodeInitialValue();
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
@@ -93,7 +94,8 @@ export const ServiceMesureAcceptForm = props => {
       antenne_id: "",
       date_ouverture: "",
       residence: "",
-      geocode: geocodeInitialValue()
+      address: geocode.label,
+      geocode
     }
   });
   return (
@@ -163,8 +165,13 @@ export const ServiceMesureAcceptForm = props => {
 
           {formik.values.country && formik.values.country.value === "FR" && (
             <Field>
-              <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+              <Geocode
+                onChange={async geocode => {
+                  await formik.setFieldValue("geocode", geocode);
+                  await formik.setFieldValue("address", geocode ? geocode.label : "");
+                }}
+              />
+              <InlineError message={formik.errors.address} fieldId="geocode" />
             </Field>
           )}
           {service_antennes.length >= 2 && (

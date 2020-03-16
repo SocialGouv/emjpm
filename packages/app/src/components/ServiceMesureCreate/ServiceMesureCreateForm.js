@@ -4,10 +4,12 @@ import Link from "next/link";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
+
+const geocode = geocodeInitialValue();
 
 const initialValues = {
   annee: "",
@@ -18,8 +20,9 @@ const initialValues = {
   numero_dossier: "",
   numero_rg: "",
   tribunal: undefined,
-  geocode: geocodeInitialValue(),
-  country: { value: "FR", label: "France" }
+  address: geocode.label,
+  geocode: geocode,
+  country: { value: "FR", label: COUNTRIES["FR"] }
 };
 
 export const ServiceMesureCreateForm = props => {
@@ -176,11 +179,13 @@ export const ServiceMesureCreateForm = props => {
 
       {formik.values.country && formik.values.country.value === "FR" && (
         <Field>
-          <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-
-          {formik.errors.geocode && formik.touched.geocode && (
-            <InlineError message={formik.errors.geocode} fieldId="geocode" />
-          )}
+          <Geocode
+            onChange={async geocode => {
+              await formik.setFieldValue("geocode", geocode);
+              await formik.setFieldValue("address", geocode ? geocode.label : "");
+            }}
+          />
+          <InlineError message={formik.errors.address} fieldId="geocode" />
         </Field>
       )}
       <Flex justifyContent="flex-end">

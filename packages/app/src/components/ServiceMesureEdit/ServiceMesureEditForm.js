@@ -128,7 +128,8 @@ export const ServiceMesureEditForm = props => {
       tribunal: { label: tribunal, value: tiId },
       type: { label: type, value: type },
       geocode,
-      country: { value: pays, label: COUNTRIES[pays] }
+      country: { value: pays, label: COUNTRIES[pays] },
+      address: geocode.label
     }
   });
 
@@ -288,9 +289,12 @@ export const ServiceMesureEditForm = props => {
             <Field>
               <Geocode
                 resource={props.mesure}
-                onChange={geocode => formik.setFieldValue("geocode", geocode)}
+                onChange={async geocode => {
+                  await formik.setFieldValue("geocode", geocode);
+                  await formik.setFieldValue("address", geocode ? geocode.label : "");
+                }}
               />
-              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+              <InlineError message={formik.errors.address} fieldId="address" />
             </Field>
           )}
 

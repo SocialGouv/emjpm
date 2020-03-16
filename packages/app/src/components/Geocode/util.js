@@ -1,6 +1,13 @@
 const geocodeInitialValue = (resource = {}) => {
   if (!resource.latitude || !resource.longitude) {
-    return {};
+    return {
+      city: "",
+      depcode: "",
+      postcode: "",
+      label: "",
+      latitude: "",
+      longitude: ""
+    };
   }
 
   return {

@@ -1,6 +1,10 @@
 import yup from "./yup";
 
 const serviceMesureSchema = yup.object().shape({
+  address: yup.string().when("country", {
+    is: country => country.value && country.value === "FR",
+    then: yup.string().required()
+  }),
   annee: yup
     .number()
     .required()

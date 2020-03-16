@@ -23,7 +23,7 @@ import { ACCEPT_MESURE } from "./mutations";
 
 export const MandataireMesureAcceptForm = props => {
   const { mesure, departementsData } = props;
-
+  const geocode = geocodeInitialValue();
   const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
   const [updateMesure] = useMutation(ACCEPT_MESURE);
 
@@ -78,7 +78,8 @@ export const MandataireMesureAcceptForm = props => {
     initialValues: {
       date_ouverture: "",
       residence: "",
-      geocode: geocodeInitialValue(),
+      geocode,
+      address: geocode.label,
       country: { value: "FR", label: COUNTRIES["FR"] }
     }
   });
@@ -150,8 +151,13 @@ export const MandataireMesureAcceptForm = props => {
           </Field>
           {formik.values.country && formik.values.country.value === "FR" && (
             <Field>
-              <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+              <Geocode
+                onChange={async geocode => {
+                  await formik.setFieldValue("geocode", geocode);
+                  await formik.setFieldValue("address", geocode ? geocode.label : "");
+                }}
+              />
+              <InlineError message={formik.errors.address} fieldId="geocode" />
             </Field>
           )}
           <Flex justifyContent="flex-end">

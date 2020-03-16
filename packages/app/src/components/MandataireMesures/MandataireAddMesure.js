@@ -7,7 +7,7 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
@@ -80,7 +80,8 @@ export const MandataireAddMesure = props => {
       numero_rg: "",
       tribunal: undefined,
       geocode,
-      country: { value: "FR", label: "France" }
+      address: geocode.label,
+      country: { value: "FR", label: COUNTRIES["FR"] }
     }
   });
 
@@ -283,7 +284,12 @@ export const MandataireAddMesure = props => {
               </Field>
               {formik.values.country && formik.values.country.value === "FR" && (
                 <Field>
-                  <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
+                  <Geocode
+                    onChange={async geocode => {
+                      await formik.setFieldValue("geocode", geocode);
+                      await formik.setFieldValue("address", geocode ? geocode.label : "");
+                    }}
+                  />
                 </Field>
               )}
               <Flex justifyContent="flex-end">
