@@ -111,7 +111,7 @@ const MesureImportService = props => {
         </Box>
       ) : (
         <Box>
-          {errors.length && (
+          {!!errors.length && (
             <Box mb={4}>
               <Text color="warning" fontSize={2} fontWeight="bold" mb={1}>
                 {`${errors.length} mesures ne peuvent pas être importées ou mises à jour`}
@@ -129,7 +129,7 @@ const MesureImportService = props => {
               ))}
             </Box>
           )}
-          {mesures.length && (
+          {!!mesures.length && (
             <Box mb={2}>
               <form onSubmit={handleSubmit}>
                 <Box mb={2}>
@@ -137,7 +137,7 @@ const MesureImportService = props => {
                     {`${mesures.length} mesures peuvent être importées ou mises à jour`}
                   </Text>
                 </Box>
-                {invalidAntenneNames.length && (
+                {!!invalidAntenneNames.length && (
                   <Box mb={4}>
                     <Text color="textSecondary" mb={4} width="50%" lineHeight={1.5}>
                       {`Certaines antennes ne sont pas reconnues, associez les à des antennes eMJPM existantes pour continuer l'import.`}
