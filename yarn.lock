@@ -2880,14 +2880,14 @@
     "@sentry/types" "5.14.0"
     tslib "^1.9.3"
 
-"@socialgouv/emjpm-ui-components@0.54.10":
-  version "0.54.10"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.54.10.tgz#64b868812de79faeaef4f44e5afbe6e86ad7b030"
-  integrity sha512-y8WzqQ223dPFo1S4IkqtVXgxEqgnE4chi/ckBpiqEv3wlL9hHTxeG8bnvXup8hKkHUo6sT5knp76xPzOgFabEw==
+"@socialgouv/emjpm-ui-components@0.54.13":
+  version "0.54.13"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-components/-/emjpm-ui-components-0.54.13.tgz#ab8379cb29f35e77b1257e6263d7aaa2d57cf350"
+  integrity sha512-oF3L1cBod56ZOTMf6VS3ILhwCyiZp1hJPqb4EQaVDVrYsFcsueY6XL52MN0CJGw6PQo7BlNLCVIWlozRoLVqew==
   dependencies:
     "@emotion/core" "^10.0.22"
     "@emotion/styled" "^10.0.23"
-    "@socialgouv/emjpm-ui-core" "^1.19.1"
+    "@socialgouv/emjpm-ui-core" "^1.20.2"
     "@storybook/addon-actions" "^5.2.8"
     prop-types "^15.7.2"
     react "^16.12.0"
@@ -2896,10 +2896,10 @@
     styled-icons "^9.1.0"
     theme-ui "^0.2.52"
 
-"@socialgouv/emjpm-ui-core@^1.19.0":
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.19.0.tgz#d4a6811d4304a18781351db4574d90ee1352556a"
-  integrity sha512-stBh978a9MYM3uYgtilusyc1xlJgVYJz4fVsv4+JZz3WjqEfhYqWYYbE4KzOaQ/mvj4JPDJolQkLVSQPNA6ZeQ==
+"@socialgouv/emjpm-ui-core@^1.20.2":
+  version "1.20.2"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.20.2.tgz#4d155ed8994209d344644852bb71b2e9a899da4a"
+  integrity sha512-dEWMS2s8w+3QM2foXHRSsIqzYQLIZbzRjoUdRm02+kv8eZ96A2OdcFahdxyfKrsqEc83XIp6cjCp1oPtRcHvLA==
   dependencies:
     "@emotion/core" "^10.0.22"
     "@emotion/styled" "^10.0.23"
@@ -2911,35 +2911,20 @@
     styled-icons "^9.1.0"
     theme-ui "^0.2.52"
 
-"@socialgouv/emjpm-ui-core@^1.19.1":
-  version "1.19.1"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-core/-/emjpm-ui-core-1.19.1.tgz#ef934779de6ace2420768ef27e9c01174474e098"
-  integrity sha512-pjoPsy2H/6wbXkxK/nAXfeSIU7OGKWnD1maNcU3doCWjEbTlMHGC9w4bX7fq4ct1NtUtk3ZUfvtgdH5i2it2ow==
-  dependencies:
-    "@emotion/core" "^10.0.22"
-    "@emotion/styled" "^10.0.23"
-    prop-types "^15.7.2"
-    react "^16.12.0"
-    react-select "^3.0.8"
-    react-tabs "^3.1.0"
-    rebass "^4.0.7"
-    styled-icons "^9.1.0"
-    theme-ui "^0.2.52"
-
-"@socialgouv/emjpm-ui-global-style@^1.3.2":
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-global-style/-/emjpm-ui-global-style-1.3.2.tgz#d7ee4e8d3ea4189634c7ab4eaa5fa2d726265f3b"
-  integrity sha512-3d5/GKrZsD8T6+hcjrzHFYkp7YpuPnkcw/nmVuK7GUYn1NySZVZ1M0QHSVGldn+lW3wkrzNoaPILWJ5vOHgtoQ==
+"@socialgouv/emjpm-ui-global-style@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-global-style/-/emjpm-ui-global-style-1.3.4.tgz#1fc471b5b0eb99677f5ca5e33cb7e2a9eb83da2a"
+  integrity sha512-n7GV/ATQw0lCFkUvRWuUqnJ9sYdkhPrCyJmSBKd/naq+Iav0majwyI6z9YyY0Xy/Wy7e8ub0UvF7a9AKrEmg/w==
   dependencies:
     "@emotion/core" "^10.0.22"
     emotion-normalize "^10.1.0"
     normalize.css "^8.0.1"
     react "^16.12.0"
 
-"@socialgouv/emjpm-ui-theme@^1.9.2":
-  version "1.9.2"
-  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-theme/-/emjpm-ui-theme-1.9.2.tgz#73ad36f13d47dba04bbc9016273f45d00fc7c450"
-  integrity sha512-BHK9JKN8EEVbQ46nDEGUxgssDs6Yqp1Ip5j3kklA58nlsZdEErpKL90wAuXbGZtEyjFKf7/DOkStv2GxAfySqw==
+"@socialgouv/emjpm-ui-theme@^1.9.4":
+  version "1.9.4"
+  resolved "https://registry.yarnpkg.com/@socialgouv/emjpm-ui-theme/-/emjpm-ui-theme-1.9.4.tgz#01eb9683a2d88f0b63f263beb4ab8781c0275355"
+  integrity sha512-BUc3uMpy0ewW1pRqSP+mTvvXdjRFIfq5F0I6PxIPLsrOqDtbq7dCwpk9Kzmn6omLX5CCoRMMH2xCe/vF3hpFYA==
   dependencies:
     "@emotion/styled" "^10.0.23"
     react "^16.12.0"
@@ -14292,7 +14277,7 @@ react-clientside-effect@^1.2.0:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-react-dom@^16.13:
+react-dom@^16.12.0:
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.0.tgz#cdde54b48eb9e8a0ca1b3dc9943d9bb409b81866"
   integrity sha512-y09d2c4cG220DzdlFkPTnVvGTszVvNpC73v+AaLGLHbkpy3SSgvYq8x0rNwPJ/Rk/CicTNgk0hbHNw1gMEZAXg==
@@ -14544,15 +14529,6 @@ react@^16.12.0, react@^16.8.3:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.12.0.tgz#0c0a9c6a142429e3614834d5a778e18aa78a0b83"
   integrity sha512-fglqy3k5E+81pA8s+7K0/T3DBCF0ZDOher1elBFzF7O6arXJgzyu/FW+COxFvAWXJoJN9KIZbT2LXlukwphYTA==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-
-react@^16.13.0:
-  version "16.13.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.13.0.tgz#d046eabcdf64e457bbeed1e792e235e1b9934cf7"
-  integrity sha512-TSavZz2iSLkq5/oiE7gnFzmURKZMltmi193rm5HEoUDAXpzT9Kzw6oNZnGoai/4+fUnm7FqS5dwgUL34TujcWQ==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
