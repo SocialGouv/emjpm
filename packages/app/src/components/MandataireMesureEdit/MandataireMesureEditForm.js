@@ -225,13 +225,9 @@ export const MandataireMesureEditForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(
-                    "/mandataires/mesures/[mesure_id]",
-                    `/mandataires/mesures/${id}`,
-                    {
-                      shallow: true
-                    }
-                  );
+                  Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
+                    shallow: true
+                  });
                 }}
               >
                 Annuler
