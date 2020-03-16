@@ -25,6 +25,7 @@ export default class MyDocument extends Document {
             height: 100%;
           }
           `}</style>
+          <link rel="shortcut icon" href="/static/favicon.ico" />
           <link
             href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css"
             rel="stylesheet"
