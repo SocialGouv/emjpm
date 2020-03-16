@@ -11,6 +11,7 @@ import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/me
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
+import TribunalAutoComplete from "../TribunalAutoComplete";
 import { UserContext } from "../UserContext";
 import { ADD_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
 import { DEPARTEMENTS, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
@@ -76,7 +77,7 @@ export const MandataireAddMesure = props => {
       date_ouverture: "",
       numero_dossier: "",
       numero_rg: "",
-      tribunal: "",
+      tribunal: undefined,
       geocode
     }
   });
@@ -162,14 +163,13 @@ export const MandataireAddMesure = props => {
                 )}
               </Field>
               <Field>
-                <Select
+                <TribunalAutoComplete
                   id="tribunal"
-                  name="tribunal"
-                  placeholder="Tribunal"
                   value={formik.values.tribunal}
-                  options={tribunalList}
+                  name="tribunal"
                   hasError={formik.errors.tribunal && formik.touched.tribunal}
                   onChange={option => formik.setFieldValue("tribunal", option)}
+                  defaultOptions={tribunalList}
                 />
                 {formik.errors.tribunal && formik.touched.tribunal && (
                   <Text>{formik.errors.tribunal}</Text>
