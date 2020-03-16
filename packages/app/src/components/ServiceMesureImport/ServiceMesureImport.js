@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Text } from "@socialgouv/emjpm-ui-core";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
@@ -10,9 +11,23 @@ import {
 } from "../../constants/import";
 import { MesureImportService } from "../MesureImport";
 import { DocumentLink } from "../MesureImport/DocumentLink";
+import { SERVICE_ANTENNES } from "./queries";
 
 const ServiceMesureImport = props => {
-  const { id } = props;
+  const { serviceId } = props;
+  const { data, loading, error } = useQuery(SERVICE_ANTENNES, {
+    variables: { service_id: serviceId }
+  });
+
+  if (loading) {
+    return "Loading...";
+  }
+
+  if (error) {
+    return "Error...";
+  }
+
+  const { antennes } = data;
 
   return (
     <Fragment>
@@ -49,7 +64,7 @@ const ServiceMesureImport = props => {
             <Text mb="1" lineHeight="2">
               {`Utilisez le cadre ci-dessous pour nous transmettre votre tableau csv ou excel de mesures. Si vous rencontrez des difficultés, vous pouvez nous envoyer un mail avec votre tableau en pièce-jointe à contact@emjpm.beta.gouv.fr. Nous le vérifierons, le mettrons en page et nous vous le renverrons pour que vous puissiez l’importer.`}
             </Text>
-            <MesureImportService id={id} />
+            <MesureImportService serviceId={serviceId} serviceAntennes={antennes} />
           </Box>
         </Flex>
       </Card>
