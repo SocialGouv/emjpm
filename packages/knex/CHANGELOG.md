@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.24.0](https://github.com/SocialGouv/emjpm/compare/v25.23.0...v25.24.0) (2020-03-17)
+
+
+### Features
+
+* **indicateurs:** create magistrat metrics ([#1553](https://github.com/SocialGouv/emjpm/issues/1553)) ([2e79023](https://github.com/SocialGouv/emjpm/commit/2e790231fc25a152fc74fe712b0c3330018f4506))
+* **mesure:** add country field ([#1589](https://github.com/SocialGouv/emjpm/issues/1589)) ([5139c6a](https://github.com/SocialGouv/emjpm/commit/5139c6a5939ef88d9cfd93d227ed59d224531eda))
+* **mesure:** gestion des tribunaux hors agrément ([#1581](https://github.com/SocialGouv/emjpm/issues/1581)) ([3960cba](https://github.com/SocialGouv/emjpm/commit/3960cba0f17ac5fa490e5e2492d57a96c2b6f1bd))
+* **satisfaction-campaigns:** add satisfaction campaigns ([#1549](https://github.com/SocialGouv/emjpm/issues/1549)) ([61964db](https://github.com/SocialGouv/emjpm/commit/61964db222a82944db83f8cf5ee6daf0eeac634b))
+* **satisfaction-campaigns:** display admin satisfaction campaign answer informations ([#1559](https://github.com/SocialGouv/emjpm/issues/1559)) ([43af4c8](https://github.com/SocialGouv/emjpm/commit/43af4c89288de53f29f49af0997ae651a71a8755))
+* **stats:** display metrics of satisfaction campaigns ([#1575](https://github.com/SocialGouv/emjpm/issues/1575)) ([c7f2370](https://github.com/SocialGouv/emjpm/commit/c7f237008efc3f66031cc33d5f760b137575ee40))
+* **tribunal:** create relation between "tribunal" and "departement" ([#1557](https://github.com/SocialGouv/emjpm/issues/1557)) ([82db06e](https://github.com/SocialGouv/emjpm/commit/82db06ebc9d02f50edcfd38afab04b806aec2421))
+
+
+
+
+
 # [25.23.0](https://github.com/SocialGouv/emjpm/compare/v25.22.3...v25.23.0) (2020-02-28)
 
 **Note:** Version bump only for package @emjpm/knex
