@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.24.1](https://github.com/SocialGouv/emjpm/compare/v25.24.0...v25.24.1) (2020-03-17)
+
+
+### Bug Fixes
+
+* **migration:** remove pkg import and duplicate util function ([#1599](https://github.com/SocialGouv/emjpm/issues/1599)) ([2dcf07f](https://github.com/SocialGouv/emjpm/commit/2dcf07f948f7c838d5a0016720ec17a622adf15e))
+
+
+
+
+
 # [25.24.0](https://github.com/SocialGouv/emjpm/compare/v25.23.0...v25.24.0) (2020-03-17)
 
 
