@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.24.0](https://github.com/SocialGouv/emjpm/compare/v25.23.0...v25.24.0) (2020-03-17)
+
+
+### Bug Fixes
+
+* **forgot-password:** handle forgot password user notfound and add tests ([#1528](https://github.com/SocialGouv/emjpm/issues/1528)) ([1097e48](https://github.com/SocialGouv/emjpm/commit/1097e48a6f5f9201adfa8caeb949b5cb25046d83))
+* **hasura:** view permissions ([#1578](https://github.com/SocialGouv/emjpm/issues/1578)) ([590a663](https://github.com/SocialGouv/emjpm/commit/590a6635a580e1731ccbba9414e0fb5475eff16d))
+* **import:** test if ville is defined ([#1539](https://github.com/SocialGouv/emjpm/issues/1539)) ([9a93f38](https://github.com/SocialGouv/emjpm/commit/9a93f388c737d2f5318813e617ef0d3cec35984c))
+
+
+### Features
+
+* **cookies:** install tarte au citron ([#1565](https://github.com/SocialGouv/emjpm/issues/1565)) ([c637b40](https://github.com/SocialGouv/emjpm/commit/c637b40d3979cfadc0456d2913f3a926e8c755f6))
+* **favicon:** add favicon ([#1594](https://github.com/SocialGouv/emjpm/issues/1594)) ([6cffb57](https://github.com/SocialGouv/emjpm/commit/6cffb57ecd34f2daf8d163c06a851b49adea6508))
+* **indicateurs:** create magistrat metrics ([#1553](https://github.com/SocialGouv/emjpm/issues/1553)) ([2e79023](https://github.com/SocialGouv/emjpm/commit/2e790231fc25a152fc74fe712b0c3330018f4506))
+* **magistrat:** wordings and style modifications ([#1595](https://github.com/SocialGouv/emjpm/issues/1595)) ([549ea3e](https://github.com/SocialGouv/emjpm/commit/549ea3e82c040516d523c667e2730a51e2febc72))
+* **mesure:** add country field ([#1589](https://github.com/SocialGouv/emjpm/issues/1589)) ([5139c6a](https://github.com/SocialGouv/emjpm/commit/5139c6a5939ef88d9cfd93d227ed59d224531eda))
+* **mesure:** gestion des tribunaux hors agrément ([#1581](https://github.com/SocialGouv/emjpm/issues/1581)) ([3960cba](https://github.com/SocialGouv/emjpm/commit/3960cba0f17ac5fa490e5e2492d57a96c2b6f1bd))
+* **mesure-import-antenne:** add service mesure import antenne ([#1591](https://github.com/SocialGouv/emjpm/issues/1591)) ([515ffaf](https://github.com/SocialGouv/emjpm/commit/515ffaff59daae42f28988dda0fcb700bde90e14))
+* **mesures:** set initial filter ([#1552](https://github.com/SocialGouv/emjpm/issues/1552)) ([25a9ebd](https://github.com/SocialGouv/emjpm/commit/25a9ebd2b106b79520597f116030fc84ab6560ac))
+* **next-link:** add as prop tset on every link ([#1585](https://github.com/SocialGouv/emjpm/issues/1585)) ([5df8b01](https://github.com/SocialGouv/emjpm/commit/5df8b01b98c4de578656a6893bb92ae07e84643d))
+* **next-link:** use correct params for dynamic link ([e7a108c](https://github.com/SocialGouv/emjpm/commit/e7a108c5cb42b0888b3d1cac912da18d799147f5))
+* **robots:** add robots.txt ([#1538](https://github.com/SocialGouv/emjpm/issues/1538)) ([633c8ac](https://github.com/SocialGouv/emjpm/commit/633c8acd822b85a7ed9201a50ab3ccc67e4508d6))
+* **satisfaction-campaigns:** add satisfaction campaigns ([#1549](https://github.com/SocialGouv/emjpm/issues/1549)) ([61964db](https://github.com/SocialGouv/emjpm/commit/61964db222a82944db83f8cf5ee6daf0eeac634b))
+* **satisfaction-campaigns:** display admin satisfaction campaign answer informations ([#1559](https://github.com/SocialGouv/emjpm/issues/1559)) ([43af4c8](https://github.com/SocialGouv/emjpm/commit/43af4c89288de53f29f49af0997ae651a71a8755))
+* **sentry:** improve sentry ([#1570](https://github.com/SocialGouv/emjpm/issues/1570)) ([e3fe8b9](https://github.com/SocialGouv/emjpm/commit/e3fe8b983784114d61995a46f1484050e57eeeeb))
+* **stats:** display metrics of satisfaction campaigns ([#1575](https://github.com/SocialGouv/emjpm/issues/1575)) ([c7f2370](https://github.com/SocialGouv/emjpm/commit/c7f237008efc3f66031cc33d5f760b137575ee40))
+* **token-request-mail:** add editor and admin email send ([#1542](https://github.com/SocialGouv/emjpm/issues/1542)) ([1bd7ebb](https://github.com/SocialGouv/emjpm/commit/1bd7ebb7262e72a4b27f98cf067235b046d6722d))
+* **tribunal:** create relation between "tribunal" and "departement" ([#1557](https://github.com/SocialGouv/emjpm/issues/1557)) ([82db06e](https://github.com/SocialGouv/emjpm/commit/82db06ebc9d02f50edcfd38afab04b806aec2421))
+
+
+
+
+
 # [25.23.0](https://github.com/SocialGouv/emjpm/compare/v25.22.3...v25.23.0) (2020-02-28)
 
 

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.24.0](https://github.com/SocialGouv/emjpm/compare/v25.23.0...v25.24.0) (2020-03-17)
+
+
+### Bug Fixes
+
+* **forgot-password:** handle forgot password user notfound and add tests ([#1528](https://github.com/SocialGouv/emjpm/issues/1528)) ([1097e48](https://github.com/SocialGouv/emjpm/commit/1097e48a6f5f9201adfa8caeb949b5cb25046d83))
+* **import:** test if ville is defined ([#1539](https://github.com/SocialGouv/emjpm/issues/1539)) ([9a93f38](https://github.com/SocialGouv/emjpm/commit/9a93f388c737d2f5318813e617ef0d3cec35984c))
+
+
+### Features
+
+* **mesure-import-antenne:** add service mesure import antenne ([#1591](https://github.com/SocialGouv/emjpm/issues/1591)) ([515ffaf](https://github.com/SocialGouv/emjpm/commit/515ffaff59daae42f28988dda0fcb700bde90e14))
+* **token-request-mail:** add editor and admin email send ([#1542](https://github.com/SocialGouv/emjpm/issues/1542)) ([1bd7ebb](https://github.com/SocialGouv/emjpm/commit/1bd7ebb7262e72a4b27f98cf067235b046d6722d))
+* **tribunal:** create relation between "tribunal" and "departement" ([#1557](https://github.com/SocialGouv/emjpm/issues/1557)) ([82db06e](https://github.com/SocialGouv/emjpm/commit/82db06ebc9d02f50edcfd38afab04b806aec2421))
+
+
+
+
+
 # [25.23.0](https://github.com/SocialGouv/emjpm/compare/v25.22.3...v25.23.0) (2020-02-28)
 
 **Note:** Version bump only for package @emjpm/api
