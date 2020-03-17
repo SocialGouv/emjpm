@@ -21,11 +21,6 @@ const optionsType = [
   { label: "Service", value: "SERVICE" }
 ];
 
-const optionsCapacity = [
-  { label: "Du moins disponible au plus disponible", value: "asc_nulls_last" },
-  { label: "Du plus disponible au moins disponible", value: "desc_nulls_last" }
-];
-
 const RESULT_PER_PAGE = 20;
 
 const MagistratMandatairesList = props => {
@@ -33,10 +28,6 @@ const MagistratMandatairesList = props => {
     magistrat: { ti_id }
   } = useContext(UserContext);
   const [selectedType, setType] = useState(DEFAULT_VALUE);
-  const [selectedCapacity, setCapacity] = useState({
-    label: "Du plus disponible au moins disponible",
-    value: "desc_nulls_last"
-  });
   const [searchText, changeSearchText] = useState(null);
   const [currentOffset, setCurrentOffset] = useState(0);
   const debouncedSearchText = useDebounce(searchText, 2000);
@@ -46,7 +37,7 @@ const MagistratMandatairesList = props => {
       discriminator: selectedType ? selectedType.value : null,
       limit: RESULT_PER_PAGE,
       offset: currentOffset,
-      order: selectedCapacity ? selectedCapacity.value : null,
+      order: "desc_nulls_last",
       tribunal: ti_id,
       searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null
     }
@@ -97,15 +88,6 @@ const MagistratMandatairesList = props => {
                 name="search"
                 size="small"
                 placeholder="mandataire / service"
-              />
-            </Box>
-            <Box width="200px">
-              <Select
-                size="small"
-                placeholder="Trier par capacité"
-                onChange={capacity => setCapacity(capacity)}
-                value={selectedCapacity}
-                options={optionsCapacity}
               />
             </Box>
           </Flex>
