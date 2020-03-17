@@ -52,7 +52,6 @@ const IndicatorList = props => {
   const [department] = departements;
   const [loginData, inscritData, satisfactionData] = filterArrays([login, inscrit, satisfaction]);
 
-  console.log("=> satisfactionData", satisfactionData);
   return (
     <Box sx={IndicatorListStyle} {...props}>
       <Heading1 py="4">{`${department.code} - ${department.nom}`}</Heading1>
