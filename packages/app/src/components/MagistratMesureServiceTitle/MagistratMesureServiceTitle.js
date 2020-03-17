@@ -7,7 +7,6 @@ import { SERVICE } from "./queries";
 
 const MagistratMesureServiceTitle = props => {
   const { id } = props;
-
   const { data, loading } = useQuery(SERVICE, {
     variables: {
       id

@@ -14,7 +14,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { RESIDENCE } from "../../constants/mesures";
+import { COUNTRIES, RESIDENCE } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
@@ -23,34 +23,41 @@ import { ACCEPT_MESURE } from "./mutations";
 
 export const MandataireMesureAcceptForm = props => {
   const { mesure, departementsData } = props;
-
+  const geocode = geocodeInitialValue();
   const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
   const [updateMesure] = useMutation(ACCEPT_MESURE);
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
-      const regionCode = getRegionCode(values.geocode.postcode);
-      const departements = departementsData.departements;
-      const departement = departements.find(dep => dep.code === regionCode);
+      const variables = {};
 
-      if (!departement) {
-        setErrors({
-          geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
-        });
-        return;
+      if (values.country.value === "FR") {
+        const regionCode = getRegionCode(values.geocode.postcode);
+        const departements = departementsData.departements;
+        const departement = departements.find(dep => dep.code === regionCode);
+
+        if (!departement) {
+          setErrors({
+            geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
+          });
+          return setSubmitting(false);
+        } else {
+          variables.department_id = departement.id;
+          variables.code_postal = values.geocode.postcode;
+          variables.ville = values.geocode.city;
+          variables.latitude = values.geocode.latitude;
+          variables.longitude = values.geocode.longitude;
+        }
       }
 
       await updateMesure({
         refetchQueries: ["mesures", "mesures_aggregate"],
         variables: {
+          ...variables,
           date_ouverture: values.date_ouverture,
-          department_id: departement.id,
           id: mesure.id,
           residence: values.residence.value,
-          code_postal: values.geocode.postcode,
-          ville: values.geocode.city,
-          latitude: values.geocode.latitude,
-          longitude: values.geocode.longitude
+          pays: values.country.value
         }
       });
 
@@ -71,7 +78,9 @@ export const MandataireMesureAcceptForm = props => {
     initialValues: {
       date_ouverture: "",
       residence: "",
-      geocode: geocodeInitialValue()
+      geocode,
+      address: geocode.label,
+      country: { value: "FR", label: COUNTRIES["FR"] }
     }
   });
 
@@ -116,10 +125,41 @@ export const MandataireMesureAcceptForm = props => {
             />
             <InlineError message={formik.errors.residence} fieldId="residence" />
           </Field>
+
           <Field>
-            <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+            <Select
+              id="country"
+              name="country"
+              placeholder="Pays"
+              value={formik.values.country}
+              hasError={formik.errors.country && formik.touched.country}
+              onChange={option => formik.setFieldValue("country", option)}
+              options={[
+                {
+                  label: "France",
+                  value: "FR"
+                },
+                {
+                  label: "Belgique",
+                  value: "BE"
+                }
+              ]}
+            />
+            {formik.errors.country && formik.touched.country && (
+              <Text>{formik.errors.country}</Text>
+            )}
           </Field>
+          {formik.values.country && formik.values.country.value === "FR" && (
+            <Field>
+              <Geocode
+                onChange={async geocode => {
+                  await formik.setFieldValue("geocode", geocode);
+                  await formik.setFieldValue("address", geocode ? geocode.label : "");
+                }}
+              />
+              <InlineError message={formik.errors.address} fieldId="geocode" />
+            </Field>
+          )}
           <Flex justifyContent="flex-end">
             <Box>
               <Button
