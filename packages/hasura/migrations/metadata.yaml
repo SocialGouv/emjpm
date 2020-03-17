@@ -1374,7 +1374,9 @@ tables:
       - file_type
       - id
       - processed_at
+      - service_id
       - status
+      - user_id
   select_permissions:
   - role: service
     permission:

@@ -85,12 +85,12 @@ app.listen(port, host, () => {
 });
 
 process.on("unhandledRejection", error => {
-  logger.error("unhandledRejection", error);
+  logger.error("unhandledRejection", error.message);
   Sentry.captureException(error);
 });
 
 process.on("uncaughtException", async error => {
-  logger.error("unhandledRejection", error);
+  logger.error("uncaughtException", error.message);
   Sentry.captureException(error);
   process.exit(1);
 });
