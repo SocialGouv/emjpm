@@ -284,7 +284,6 @@ export const ServiceMesureEditForm = props => {
               <Text>{formik.errors.country}</Text>
             )}
           </Field>
-
           {formik.values.country && formik.values.country.value === "FR" && (
             <Field>
               <Geocode

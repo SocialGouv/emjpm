@@ -13,7 +13,7 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { RESIDENCE } from "../../constants/mesures";
+import { COUNTRIES, RESIDENCE } from "../../constants/mesures";
 import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { formatAntenneOptions } from "../../util/services";
@@ -84,9 +84,7 @@ export const ServiceMesureAcceptForm = props => {
         });
       }
 
-      Router.push(`/services/mesures/${mesure.id}`, {
-        shallow: true
-      });
+      Router.push(`/services/mesures/${mesure.id}`);
       setSubmitting(false);
     },
     validationSchema: serviceAcceptMesureSchema,
@@ -95,7 +93,8 @@ export const ServiceMesureAcceptForm = props => {
       date_ouverture: "",
       residence: "",
       address: geocode.label,
-      geocode
+      geocode,
+      country: { value: "FR", label: COUNTRIES["FR"] }
     }
   });
   return (
