@@ -50,7 +50,7 @@ const MagistratMandatairesMapPopup = () => {
     <Box p="1">
       <Text sx={titleStyle}>{nom}</Text>
       <Text sx={subtitleStyle}>{type}</Text>
-      <Text sx={labelStyle}>En cours / souhaitée</Text>
+      <Text sx={labelStyle}>En cours / souhaitées</Text>
       <Text sx={dispoDescriptionStyle(remaining_capacity > 0)}>
         {!mesures_max ? "NC" : mesures_in_progress}/{mesures_max || "NC"}
       </Text>
