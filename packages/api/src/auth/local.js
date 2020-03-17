@@ -15,7 +15,7 @@ const JWTStrategy = passportJWT.Strategy;
 const BearerStrategy = passportBearer.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 
-if (jwtConfig.publicKey) {
+if (!jwtConfig.publicKey) {
   logger.error("Invalid jwtConfig.publicKey, check process.env.JWT_KEY");
 }
 
