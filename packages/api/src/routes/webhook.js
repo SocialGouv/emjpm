@@ -198,6 +198,11 @@ const getGeoDatas = async (code_postal, ville) => {
   return geoData;
 };
 
+const toDate = dateStr => {
+  const [day, month, year] = dateStr.split("/");
+  return new Date(year, month - 1, day);
+};
+
 // TODO(tglatt): move db queries in other file
 const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
   const mandataire = mesureDatas.mandataire;
@@ -299,6 +304,7 @@ router.post("/mesures-import", async function(req, res) {
     await saveOrUpdateMesure(
       {
         ...data,
+        date_ouverture: toDate(data.date_ouverture),
         mandataire,
         service,
         status: "Mesure en cours"

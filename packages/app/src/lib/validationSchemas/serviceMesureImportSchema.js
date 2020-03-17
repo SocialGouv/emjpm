@@ -1,6 +1,6 @@
-import { parse } from "date-fns";
-
 import yup from "./yup";
+
+const REGEX_DATE_OUVERTURE = /^([0-2][0-9]|(3)[0-1])(\/)((0[0-9])|(1[0-2]))(\/)(([12][0-9]{3}))$/;
 
 const serviceMesureImportSchema = yup.object().shape({
   annee: yup
@@ -12,11 +12,8 @@ const serviceMesureImportSchema = yup.object().shape({
   civilite: yup.string().required("doit être rempli"),
   code_postal: yup.number().required("doit être rempli"),
   date_ouverture: yup
-    .date()
-    .transform(function(value, originalValue) {
-      return parse(originalValue, "dd/MM/yyyy", new Date());
-    })
-    .typeError("doit être au format 'jj/mm/aaaa'")
+    .string()
+    .matches(REGEX_DATE_OUVERTURE, "doit être au formats 'jj/mm/aaaa'")
     .required("doit être rempli"),
   numero_dossier: yup.string(),
   numero_rg: yup.string().required("doit être rempli"),

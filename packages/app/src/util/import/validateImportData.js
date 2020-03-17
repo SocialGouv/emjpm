@@ -10,8 +10,7 @@ export const HEADERS = [
   "numero_rg",
   "numero_dossier",
   "residence",
-  "tribunal_siret",
-  "antenne"
+  "tribunal_siret"
 ];
 
 const validateHeaders = row => {
