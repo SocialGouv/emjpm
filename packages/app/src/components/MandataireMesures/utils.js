@@ -21,7 +21,8 @@ export const formatMesureList = mesureList => {
       cabinet,
       ti,
       latitude,
-      longitude
+      longitude,
+      pays
     } = mesure;
 
     return {
@@ -47,7 +48,8 @@ export const formatMesureList = mesureList => {
       type: type ? type : "type de mesure non renseigné",
       ville: ville ? ville : "ville non renseigné",
       latitude: latitude || 45.5,
-      longitude: longitude || 0.5
+      longitude: longitude || 0.5,
+      pays
     };
   });
   return mesures;

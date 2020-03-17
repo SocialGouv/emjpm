@@ -21,7 +21,8 @@ export const formatMesureList = mesureList => {
       cabinet,
       ti,
       latitude,
-      longitude
+      longitude,
+      pays
     } = mesure;
 
     return {
@@ -42,6 +43,7 @@ export const formatMesureList = mesureList => {
       longitude: longitude || 0.5,
       numeroDossier: numero_dossier ? numero_dossier : "non renseigné",
       numeroRg: numero_rg ? numero_rg : "RG-00000000",
+      pays,
       residence: residence ? residence : "non renseigné",
       status: status ? status : "non renseigné",
       tiId: ti ? ti.id : null,

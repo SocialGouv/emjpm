@@ -23,19 +23,20 @@ export const UPDATE_MANDATAIRES_COUTERS = gql`
 export const ADD_MESURE = gql`
   mutation addMesure(
     $date_ouverture: date!
-    $department_id: Int!
+    $department_id: Int
     $type: String!
     $residence: String!
-    $code_postal: String!
-    $ville: String!
+    $code_postal: String
+    $ville: String
     $civilite: String!
     $annee: String!
     $numero_dossier: String!
     $numero_rg: String!
     $ti_id: Int!
     $mandataireId: Int!
-    $latitude: Float!
-    $longitude: Float!
+    $latitude: Float
+    $longitude: Float
+    $pays: String!
   ) {
     insert_mesures(
       objects: {
@@ -54,6 +55,7 @@ export const ADD_MESURE = gql`
         mandataire_id: $mandataireId
         latitude: $latitude
         longitude: $longitude
+        pays: $pays
       }
     ) {
       returning {
@@ -83,6 +85,7 @@ export const ADD_MESURE = gql`
         ville
         latitude
         longitude
+        pays
         departement {
           id
           nom

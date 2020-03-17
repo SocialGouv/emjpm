@@ -41,6 +41,7 @@ export const EDIT_MESURE = gql`
         etablissement
         annee
         date_ouverture
+        pays
       }
     }
   }
