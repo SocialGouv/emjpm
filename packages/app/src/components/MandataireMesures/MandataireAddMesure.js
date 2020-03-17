@@ -16,7 +16,13 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import {
+  CIVILITY,
+  COUNTRIES,
+  MESURE_STATUS_LABEL_VALUE,
+  MESURE_TYPE_LABEL_VALUE,
+  RESIDENCE
+} from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
@@ -35,48 +41,55 @@ export const MandataireAddMesure = props => {
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
-      const regionCode = getRegionCode(values.geocode.postcode);
-      const departements = departementsData.departements;
-      const departement = departements.find(dep => dep.code === regionCode);
+      const variables = {};
 
-      if (!departement) {
-        setErrors({
-          code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
-        });
-      } else {
-        await addMesure({
-          refetchQueries: [
-            {
-              query: MANDATAIRE_MESURES,
-              variables: {
-                limit: 20,
-                offset: 0,
-                searchText: null,
-                status: null,
-                type: null,
-                excludeStatus: "Mesure en attente"
-              }
-            }
-          ],
-          variables: {
-            annee: values.annee.toString(),
-            civilite: values.civilite.value,
-            code_postal: values.geocode.postcode,
-            ville: values.geocode.city,
-            latitude: values.geocode.latitude,
-            longitude: values.geocode.longitude,
-            date_ouverture: values.date_ouverture,
-            department_id: departement.id,
-            numero_dossier: values.numero_dossier,
-            numero_rg: values.numero_rg,
-            residence: values.residence.value,
-            ti_id: values.tribunal.value,
-            type: values.type.value,
-            mandataireId: id,
-            pays: values.country.value
-          }
-        });
+      if (values.country.value === "FR") {
+        const regionCode = getRegionCode(values.geocode.postcode);
+        const departements = departementsData.departements;
+        const departement = departements.find(dep => dep.code === regionCode);
+
+        if (!departement) {
+          setErrors({
+            code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
+          });
+          return setSubmitting(false);
+        } else {
+          variables.code_postal = values.geocode.postcode;
+          variables.ville = values.geocode.city;
+          variables.latitude = values.geocode.latitude;
+          variables.longitude = values.geocode.longitude;
+          variables.department_id = departement.id;
+        }
       }
+
+      await addMesure({
+        refetchQueries: [
+          {
+            query: MANDATAIRE_MESURES,
+            variables: {
+              limit: 20,
+              offset: 0,
+              searchText: null,
+              status: MESURE_STATUS_LABEL_VALUE[0].value,
+              type: null,
+              excludeStatus: "Mesure en attente"
+            }
+          }
+        ],
+        variables: {
+          ...variables,
+          annee: values.annee.toString(),
+          civilite: values.civilite.value,
+          date_ouverture: values.date_ouverture,
+          numero_dossier: values.numero_dossier,
+          numero_rg: values.numero_rg,
+          residence: values.residence.value,
+          ti_id: values.tribunal.value,
+          type: values.type.value,
+          mandataireId: id,
+          pays: values.country.value
+        }
+      });
 
       setSubmitting(false);
     },

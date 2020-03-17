@@ -64,7 +64,7 @@ export const ServiceMesureCreate = props => {
   });
 
   const handleSubmit = (values, { setSubmitting, setErrors }) => {
-    var variables = {};
+    const variables = {};
 
     if (values.country.value === "FR") {
       const regionCode = getRegionCode(values.geocode.postcode);

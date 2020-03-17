@@ -197,19 +197,19 @@ export const DELETE_MESURE = gql`
 export const ADD_MESURE = gql`
   mutation addMesure(
     $date_ouverture: date!
-    $department_id: Int!
+    $department_id: Int
     $type: String!
     $residence: String!
-    $code_postal: String!
-    $ville: String!
+    $code_postal: String
+    $ville: String
     $civilite: String!
     $annee: String!
     $numero_dossier: String
     $numero_rg: String!
     $antenne_id: Int
     $ti_id: Int!
-    $latitude: Float!
-    $longitude: Float!
+    $latitude: Float
+    $longitude: Float
     $pays: String!
   ) {
     insert_mesures(
