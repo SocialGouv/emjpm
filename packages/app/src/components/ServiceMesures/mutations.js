@@ -204,7 +204,7 @@ export const ADD_MESURE = gql`
     $ville: String!
     $civilite: String!
     $annee: String!
-    $numero_dossier: String!
+    $numero_dossier: String
     $numero_rg: String!
     $antenne_id: Int
     $ti_id: Int!
