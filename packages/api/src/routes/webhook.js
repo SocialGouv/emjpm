@@ -198,6 +198,11 @@ const getGeoDatas = async (code_postal, ville) => {
   return geoData;
 };
 
+const toDate = dateStr => {
+  const [day, month, year] = dateStr.split("/");
+  return new Date(year, month - 1, day);
+};
+
 // TODO(tglatt): move db queries in other file
 const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
   const mandataire = mesureDatas.mandataire;
@@ -267,29 +272,25 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
   }
 };
 
-const toDate = dateStr => {
-  const [day, month, year] = dateStr.split("/");
-  return new Date(year, month - 1, day);
-};
-
 router.post("/mesures-import", async function(req, res) {
-  const importId = req.body.event.data.new.id;
-  const mesuresImport = await MesuresImport.query().findById(importId);
+  const { id } = req.body.event.data.new;
+  const mesuresImport = await MesuresImport.query().findById(id);
 
   if (!mesuresImport) {
-    logger.error("mesures_import ${importId} not found");
-    sentry.captureException(new Error("mesures_import ${importId} not found"));
+    logger.error(`[WEBHOOKS] mesures_import ${id} not found`);
+    sentry.captureException(new Error(`mesures_import ${id} not found`));
+
+    return res.status(400).json();
   }
 
+  const { user_id, service_id } = mesuresImport;
   let mandataire;
   let service;
 
-  if (mesuresImport.user_id) {
-    mandataire = await Mandataire.query().findOne({
-      user_id: mesuresImport.user_id
-    });
-  } else if (mesuresImport.service_id) {
-    service = await Service.query().findById(mesuresImport.service_id);
+  if (service_id) {
+    service = await Service.query().findById(service_id);
+  } else if (user_id) {
+    mandataire = await Mandataire.query().findOne({ user_id });
   }
 
   const importSummary = {
@@ -320,7 +321,7 @@ router.post("/mesures-import", async function(req, res) {
 
   // mark mesures_import as completed
   await MesuresImport.query()
-    .findById(importId)
+    .findById(id)
     .patch({ status: "IMPORT", processed_at: new Date() });
 
   const userEmails = await getEmailUserDatas(
