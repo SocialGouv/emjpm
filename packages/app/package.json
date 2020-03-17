@@ -26,7 +26,7 @@
     "@next/bundle-analyzer": "^9.2.2",
     "@sentry/browser": "^5.10.2",
     "@sentry/node": "^5.14.0",
-    "@socialgouv/emjpm-ui-components": "0.54.13",
+    "@socialgouv/emjpm-ui-components": "0.55.0",
     "@socialgouv/emjpm-ui-core": "^1.20.2",
     "@socialgouv/emjpm-ui-global-style": "^1.3.4",
     "@socialgouv/emjpm-ui-theme": "^1.9.4",
