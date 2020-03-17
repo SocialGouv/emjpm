@@ -30,6 +30,7 @@ export const MESURES = gql`
       is_urgent
       mandataire_id
       service_id
+      pays
       departement {
         id
         nom

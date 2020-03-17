@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 export const EDIT_MESURE = gql`
   mutation EditMesure(
     $id: Int!
-    $department_id: Int!
+    $department_id: Int
     $date_ouverture: date
     $type: String
     $residence: String
@@ -14,8 +14,9 @@ export const EDIT_MESURE = gql`
     $numero_dossier: String
     $numero_rg: String
     $ti_id: Int!
-    $latitude: Float!
-    $longitude: Float!
+    $latitude: Float
+    $longitude: Float
+    $pays: String!
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -33,6 +34,7 @@ export const EDIT_MESURE = gql`
         numero_rg: $numero_rg
         latitude: $latitude
         longitude: $longitude
+        pays: $pays
       }
     ) {
       returning {
@@ -64,6 +66,7 @@ export const EDIT_MESURE = gql`
           id
           etablissement
         }
+        pays
       }
     }
   }

@@ -854,6 +854,7 @@ tables:
       - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
       - service_id
@@ -868,30 +869,31 @@ tables:
           user_id:
             _eq: X-Hasura-User-Id
       columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - latitude
-      - longitude
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
       - annee
+      - antenne_id
       - cabinet
       - civilite
       - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
       - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
+      - service_id
       - status
+      - ti_id
       - type
       - ville
   - role: service
@@ -921,6 +923,7 @@ tables:
       - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
       - service_id
@@ -932,60 +935,62 @@ tables:
     permission:
       check: {}
       columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
       - annee
+      - antenne_id
       - cabinet
       - civilite
       - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
       - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
+      - service_id
       - status
+      - ti_id
       - type
       - ville
   select_permissions:
   - role: direction
     permission:
       columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
       - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
       - antenne_id
-      - service_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
       - is_urgent
       - judgment_date
       - latitude
       - longitude
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - pays
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
       filter: {}
       allow_aggregations: true
   - role: individuel
@@ -1010,6 +1015,7 @@ tables:
       - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
       - service_id
@@ -1026,30 +1032,31 @@ tables:
   - role: prepose
     permission:
       columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - latitude
-      - longitude
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
       - annee
+      - antenne_id
       - cabinet
       - civilite
       - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
       - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
+      - service_id
       - status
+      - ti_id
       - type
       - ville
       filter:
@@ -1060,32 +1067,33 @@ tables:
   - role: service
     permission:
       columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
       - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
       - antenne_id
-      - service_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
       - is_urgent
       - judgment_date
       - latitude
       - longitude
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - pays
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
@@ -1093,32 +1101,33 @@ tables:
   - role: ti
     permission:
       columns:
-      - id
-      - code_postal
-      - ville
-      - etablissement
-      - mandataire_id
-      - created_at
       - annee
-      - type
-      - date_ouverture
-      - residence
-      - civilite
-      - status
-      - extinction
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - reason_extinction
-      - numero_rg
-      - department_id
       - antenne_id
-      - service_id
+      - cabinet
+      - civilite
+      - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
+      - etablissement
+      - etablissement_id
+      - extinction
+      - id
       - is_urgent
       - judgment_date
       - latitude
       - longitude
+      - mandataire_id
+      - numero_dossier
+      - numero_rg
+      - pays
+      - reason_extinction
+      - residence
+      - service_id
+      - status
+      - ti_id
+      - type
+      - ville
       filter:
         ti:
           magistrats:
@@ -1148,6 +1157,7 @@ tables:
       - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
       - service_id
@@ -1163,30 +1173,31 @@ tables:
   - role: prepose
     permission:
       columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - latitude
-      - longitude
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
       - annee
+      - antenne_id
       - cabinet
       - civilite
       - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
       - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - latitude
+      - longitude
+      - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
+      - service_id
       - status
+      - ti_id
       - type
       - ville
       filter:
@@ -1215,6 +1226,7 @@ tables:
       - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
       - service_id
@@ -1228,28 +1240,29 @@ tables:
   - role: ti
     permission:
       columns:
-      - is_urgent
-      - date_ouverture
-      - extinction
-      - judgment_date
-      - antenne_id
-      - department_id
-      - etablissement_id
-      - id
-      - mandataire_id
-      - service_id
-      - ti_id
-      - created_at
       - annee
+      - antenne_id
       - cabinet
       - civilite
       - code_postal
+      - created_at
+      - date_ouverture
+      - department_id
       - etablissement
+      - etablissement_id
+      - extinction
+      - id
+      - is_urgent
+      - judgment_date
+      - mandataire_id
       - numero_dossier
       - numero_rg
+      - pays
       - reason_extinction
       - residence
+      - service_id
       - status
+      - ti_id
       - type
       - ville
       filter:

@@ -198,6 +198,7 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                     placeholder="Téléphone portable"
                   />
                 </Field>
+
                 <Field>
                   <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
                   {formik.touched.geocode && (

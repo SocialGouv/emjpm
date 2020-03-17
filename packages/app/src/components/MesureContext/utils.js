@@ -23,7 +23,8 @@ export const formatMesure = mesure => {
     longitude,
     service_antenne,
     service_id,
-    mandataire_id
+    mandataire_id,
+    pays
   } = mesure;
 
   let currentStatus;
@@ -66,6 +67,7 @@ export const formatMesure = mesure => {
     tiId: ti ? ti.id : null,
     tribunal: ti ? ti.etablissement : "Tribunal non renseigné",
     type: type ? type : "type de mesure non renseigné",
-    ville: ville ? ville : "ville non renseigné"
+    ville: ville ? ville : "ville non renseigné",
+    pays
   };
 };
