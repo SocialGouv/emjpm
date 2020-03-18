@@ -5,6 +5,7 @@ const { raw } = require("objection");
 const sentry = require("../utils/sentry");
 const logger = require("../utils/logger");
 const { Service } = require("../models/Service");
+const { ServiceAntenne } = require("../models/ServiceAntenne");
 const { ServiceMember } = require("../models/ServiceMember");
 const {
   ServiceMemberInvitation
@@ -127,19 +128,39 @@ const countMesuresInState = (mesures, state) => {
   return fileredMesures ? fileredMesures.count : 0;
 };
 
-const getMesureStates = async (mandataire_id, service_id) => {
+const getMesureStates = async (mandataire_id, service_id, antenne_id) => {
+  const filter = {};
+  if (antenne_id) {
+    filter.antenne_id = antenne_id;
+  }
+  if (mandataire_id) {
+    filter.mandataire_id = mandataire_id;
+  }
+  if (service_id) {
+    filter.service_id = service_id;
+  }
   return Mesure.query()
-    .where({
-      mandataire_id,
-      service_id
-    })
+    .where(filter)
     .groupBy("status")
     .select(raw("status, count(*)"));
 };
 
+const updateAntenneMesureState = async antenne => {
+  const counters = await getMesureStates(null, antenne.service_id, antenne.id);
+  const mesures_in_progress = countMesuresInState(counters, "Mesure en cours");
+  const mesures_awaiting = countMesuresInState(counters, "Mesure en attente");
+
+  await ServiceAntenne.query()
+    .findById(antenne.id)
+    .patch({
+      mesures_in_progress,
+      mesures_awaiting
+    });
+};
+
 // TODO(tglatt): move db queries in other file
 const updateServiceMesureStates = async service_id => {
-  const counters = await getMesureStates(null, service_id);
+  const counters = await getMesureStates(null, service_id, null);
 
   const mesures_in_progress = countMesuresInState(counters, "Mesure en cours");
   const mesures_awaiting = countMesuresInState(counters, "Mesure en attente");
@@ -150,11 +171,19 @@ const updateServiceMesureStates = async service_id => {
       mesures_in_progress,
       mesures_awaiting
     });
+
+  const antennes = await ServiceAntenne.query().where({
+    service_id
+  });
+
+  for (const antenne of antennes) {
+    updateAntenneMesureState(antenne);
+  }
 };
 
 // TODO(tglatt): move db queries in other file
 const updateMandataireMesureStates = async mandataire_id => {
-  const counters = await getMesureStates(mandataire_id, null);
+  const counters = await getMesureStates(mandataire_id, null, null);
 
   const mesures_en_cours = countMesuresInState(counters, "Mesure en cours");
   const mesures_en_attente = countMesuresInState(counters, "Mesure en attente");
@@ -245,6 +274,7 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     numero_dossier: mesureDatas.numero_dossier,
     mandataire_id: mandataire ? mandataire.id : null,
     service_id: service ? service.id : null,
+    antenne_id: mesureDatas.antenne_id,
     residence: mesureDatas.residence,
     department_id: department.id,
     ti_id: ti ? ti.id : null,
@@ -272,16 +302,12 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
   }
 };
 
-router.post("/mesures-import", async function(req, res) {
-  const { id } = req.body.event.data.new;
-  const mesuresImport = await MesuresImport.query().findById(id);
-
-  if (!mesuresImport) {
-    logger.error(`[WEBHOOKS] mesures_import ${id} not found`);
-    sentry.captureException(new Error(`mesures_import ${id} not found`));
-
-    return res.status(400).json();
-  }
+const importMesures = async mesuresImport => {
+  const importSummary = {
+    creationNumber: 0,
+    updateNumber: 0,
+    errors: []
+  };
 
   const { user_id, service_id } = mesuresImport;
   let mandataire;
@@ -293,14 +319,12 @@ router.post("/mesures-import", async function(req, res) {
     mandataire = await Mandataire.query().findOne({ user_id });
   }
 
-  const importSummary = {
-    creationNumber: 0,
-    updateNumber: 0,
-    errors: []
-  };
-
   // save or update mesures
+
+  let counter = 1;
+  const size = mesuresImport.content.length;
   for (const data of mesuresImport.content) {
+    logger.info(`[IMPORT] mesure ${counter} / ${size}`);
     await saveOrUpdateMesure(
       {
         ...data,
@@ -311,6 +335,7 @@ router.post("/mesures-import", async function(req, res) {
       },
       importSummary
     );
+    counter++;
   }
 
   if (mandataire) {
@@ -321,7 +346,7 @@ router.post("/mesures-import", async function(req, res) {
 
   // mark mesures_import as completed
   await MesuresImport.query()
-    .findById(id)
+    .findById(mesuresImport.id)
     .patch({ status: "IMPORT", processed_at: new Date() });
 
   const userEmails = await getEmailUserDatas(
@@ -332,6 +357,24 @@ router.post("/mesures-import", async function(req, res) {
   for (const userEmail of userEmails) {
     mesuresImportEmail(userEmail, importSummary);
   }
+};
+
+router.post("/mesures-import", async function(req, res) {
+  const { id } = req.body.event.data.new;
+  const mesuresImport = await MesuresImport.query().findById(id);
+
+  if (!mesuresImport) {
+    logger.error(`[WEBHOOKS] mesures_import ${id} not found`);
+    sentry.captureException(new Error(`mesures_import ${id} not found`));
+
+    return res.status(400).json();
+  }
+
+  // Import mesures asynchronously
+  importMesures(mesuresImport).catch(function(error) {
+    sentry.captureException(error);
+    logger.error(error);
+  });
 
   res.json({ success: true });
 });
