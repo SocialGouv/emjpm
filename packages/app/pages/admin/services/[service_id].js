@@ -6,7 +6,7 @@ import { Link as StyledLink } from "rebass";
 import { AdminEditService } from "../../../src/components/AdminServices/AdminEditService";
 import { AdminServiceInformations } from "../../../src/components/AdminServices/AdminServiceInformations";
 import { LayoutAdmin } from "../../../src/components/Layout";
-import { MesureImportService } from "../../../src/components/MesureImport";
+import { MesureImportServiceWrapper } from "../../../src/components/MesureImport";
 import { withAuthSync } from "../../../src/util/auth";
 
 const Service = props => {
@@ -34,7 +34,7 @@ const Service = props => {
           </TabPanel>
           <TabPanel>
             <Heading4 mb={2}>Selectionnez le fichier</Heading4>
-            <MesureImportService id={serviceId} />
+            <MesureImportServiceWrapper serviceId={serviceId} />
           </TabPanel>
         </Tabs>
       </BoxWrapper>
