@@ -58,11 +58,13 @@ const MesureImportService = props => {
 
     // associate mesures antenne_id
     const mesureWithAntenneIds = mesures.map(mesure => {
+      const antenneName = mesure.antenne;
       const antenne = serviceAntennes.find(a => {
-        const name = invalidAntenneNames.includes(a.name)
-          ? invalidAntenneAssociations[mesure.antenne]
-          : mesure.antenne;
-        return a.name === name;
+        if (invalidAntenneNames.includes(antenneName)) {
+          const antenneIdAsString = invalidAntenneAssociations[antenneName];
+          return parseInt(antenneIdAsString) === a.id;
+        }
+        return a.name === mesure.antenne;
       });
 
       const { id: antenne_id } = antenne || {};
