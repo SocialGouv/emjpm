@@ -272,16 +272,12 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
   }
 };
 
-router.post("/mesures-import", async function(req, res) {
-  const { id } = req.body.event.data.new;
-  const mesuresImport = await MesuresImport.query().findById(id);
-
-  if (!mesuresImport) {
-    logger.error(`[WEBHOOKS] mesures_import ${id} not found`);
-    sentry.captureException(new Error(`mesures_import ${id} not found`));
-
-    return res.status(400).json();
-  }
+const importMesures = async mesuresImport => {
+  const importSummary = {
+    creationNumber: 0,
+    updateNumber: 0,
+    errors: []
+  };
 
   const { user_id, service_id } = mesuresImport;
   let mandataire;
@@ -293,14 +289,12 @@ router.post("/mesures-import", async function(req, res) {
     mandataire = await Mandataire.query().findOne({ user_id });
   }
 
-  const importSummary = {
-    creationNumber: 0,
-    updateNumber: 0,
-    errors: []
-  };
-
   // save or update mesures
+
+  let counter = 1;
+  const size = mesuresImport.content.length;
   for (const data of mesuresImport.content) {
+    logger.info(`[IMPORT] mesure ${counter} / ${size}`);
     await saveOrUpdateMesure(
       {
         ...data,
@@ -311,6 +305,7 @@ router.post("/mesures-import", async function(req, res) {
       },
       importSummary
     );
+    counter++;
   }
 
   if (mandataire) {
@@ -321,7 +316,7 @@ router.post("/mesures-import", async function(req, res) {
 
   // mark mesures_import as completed
   await MesuresImport.query()
-    .findById(id)
+    .findById(mesuresImport.id)
     .patch({ status: "IMPORT", processed_at: new Date() });
 
   const userEmails = await getEmailUserDatas(
@@ -332,6 +327,24 @@ router.post("/mesures-import", async function(req, res) {
   for (const userEmail of userEmails) {
     mesuresImportEmail(userEmail, importSummary);
   }
+};
+
+router.post("/mesures-import", async function(req, res) {
+  const { id } = req.body.event.data.new;
+  const mesuresImport = await MesuresImport.query().findById(id);
+
+  if (!mesuresImport) {
+    logger.error(`[WEBHOOKS] mesures_import ${id} not found`);
+    sentry.captureException(new Error(`mesures_import ${id} not found`));
+
+    return res.status(400).json();
+  }
+
+  // Import mesures asynchronously
+  importMesures(mesuresImport).catch(function(error) {
+    sentry.captureException(error);
+    logger.error(error);
+  });
 
   res.json({ success: true });
 });
