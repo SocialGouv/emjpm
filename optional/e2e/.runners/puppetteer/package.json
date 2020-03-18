@@ -1,6 +1,6 @@
 {
   "name": "@optional/e2e.runner.puppetteer",
-  "version": "25.24.1",
+  "version": "25.24.2",
   "description": "",
   "main": "codecept.conf.js",
   "scripts": {
