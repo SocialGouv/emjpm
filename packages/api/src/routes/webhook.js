@@ -5,6 +5,7 @@ const { raw } = require("objection");
 const sentry = require("../utils/sentry");
 const logger = require("../utils/logger");
 const { Service } = require("../models/Service");
+const { ServiceAntenne } = require("../models/ServiceAntenne");
 const { ServiceMember } = require("../models/ServiceMember");
 const {
   ServiceMemberInvitation
@@ -127,19 +128,39 @@ const countMesuresInState = (mesures, state) => {
   return fileredMesures ? fileredMesures.count : 0;
 };
 
-const getMesureStates = async (mandataire_id, service_id) => {
+const getMesureStates = async (mandataire_id, service_id, antenne_id) => {
+  const filter = {};
+  if (antenne_id) {
+    filter.antenne_id = antenne_id;
+  }
+  if (mandataire_id) {
+    filter.mandataire_id = mandataire_id;
+  }
+  if (service_id) {
+    filter.service_id = service_id;
+  }
   return Mesure.query()
-    .where({
-      mandataire_id,
-      service_id
-    })
+    .where(filter)
     .groupBy("status")
     .select(raw("status, count(*)"));
 };
 
+const updateAntenneMesureState = async antenne => {
+  const counters = await getMesureStates(null, antenne.service_id, antenne.id);
+  const mesures_in_progress = countMesuresInState(counters, "Mesure en cours");
+  const mesures_awaiting = countMesuresInState(counters, "Mesure en attente");
+
+  await ServiceAntenne.query()
+    .findById(antenne.id)
+    .patch({
+      mesures_in_progress,
+      mesures_awaiting
+    });
+};
+
 // TODO(tglatt): move db queries in other file
 const updateServiceMesureStates = async service_id => {
-  const counters = await getMesureStates(null, service_id);
+  const counters = await getMesureStates(null, service_id, null);
 
   const mesures_in_progress = countMesuresInState(counters, "Mesure en cours");
   const mesures_awaiting = countMesuresInState(counters, "Mesure en attente");
@@ -150,11 +171,19 @@ const updateServiceMesureStates = async service_id => {
       mesures_in_progress,
       mesures_awaiting
     });
+
+  const antennes = await ServiceAntenne.query().where({
+    service_id
+  });
+
+  for (const antenne of antennes) {
+    updateAntenneMesureState(antenne);
+  }
 };
 
 // TODO(tglatt): move db queries in other file
 const updateMandataireMesureStates = async mandataire_id => {
-  const counters = await getMesureStates(mandataire_id, null);
+  const counters = await getMesureStates(mandataire_id, null, null);
 
   const mesures_en_cours = countMesuresInState(counters, "Mesure en cours");
   const mesures_en_attente = countMesuresInState(counters, "Mesure en attente");
@@ -245,6 +274,7 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     numero_dossier: mesureDatas.numero_dossier,
     mandataire_id: mandataire ? mandataire.id : null,
     service_id: service ? service.id : null,
+    antenne_id: mesureDatas.antenne_id,
     residence: mesureDatas.residence,
     department_id: department.id,
     ti_id: ti ? ti.id : null,
