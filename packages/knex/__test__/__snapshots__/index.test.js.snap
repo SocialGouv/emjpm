@@ -772,6 +772,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "pays": Object {
+    "defaultValue": "'FR'::character varying",
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
   "reason_extinction": Object {
     "defaultValue": null,
     "maxLength": 255,
