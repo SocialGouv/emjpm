@@ -21,8 +21,16 @@ const navigationLinks = [
     url: "/services/map"
   },
   {
+    title: "Importez vos mesures",
+    url: "/services/mesures/import"
+  },
+  {
     title: "Vos informations",
     url: "/services/informations"
+  },
+  {
+    title: "Gestion des comptes",
+    url: "/services/members"
   }
 ];
 
