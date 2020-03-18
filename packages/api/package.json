@@ -29,6 +29,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
     "knex": "^0.20.4",
+    "node-fetch": "^2.6.0",
     "nodemailer": "^6.3.0",
     "objection": "^2.0.7",
     "objection-db-errors": "^1.1.2",
@@ -38,6 +39,7 @@
     "passport-local": "^1.0.0",
     "passport-stub": "^1.1.1",
     "pino": "^5.17.0",
+    "query-string": "^6.11.1",
     "rand-token": "^0.4.0",
     "rasha": "^1.2.5"
   },
