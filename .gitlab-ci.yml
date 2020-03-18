@@ -473,7 +473,8 @@ Backup PG before production (incubateur):
   extends:
     - .base_docker_kubectl_image_stage
     - .incubateur_stage
-    - .register_stage
+  stage: "Registration"
+  interruptible: true
   script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
