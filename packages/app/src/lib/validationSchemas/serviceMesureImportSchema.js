@@ -10,10 +10,7 @@ const serviceMesureImportSchema = yup.object().shape({
     .max(2020, "doit être au maximum 2020"),
   antenne: yup.string(),
   civilite: yup.string().required("doit être rempli"),
-  code_postal: yup
-    .string()
-    .matches(/^[0-9]{5}$/, "Doit être exactement 5 chiffres")
-    .required("doit être rempli"),
+  code_postal: yup.string().matches(/^[0-9]{4}|[0-9]{5}$/, "4 ou 5 chiffres"),
   date_ouverture: yup
     .string()
     .matches(REGEX_DATE_OUVERTURE, "doit être au formats 'jj/mm/aaaa'")

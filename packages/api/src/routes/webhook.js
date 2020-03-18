@@ -196,9 +196,16 @@ const updateMandataireMesureStates = async mandataire_id => {
     });
 };
 
+const getMesurePays = code_postal => {
+  if (code_postal && code_postal.length === 4) {
+    return "BE";
+  }
+  return "FR";
+};
+
 const getMesureDepartment = async code_postal => {
   let department = null;
-  if (code_postal) {
+  if (code_postal && code_postal.length === 5) {
     const regionCode = getRegionCode(code_postal);
     department = await Department.query().findOne({
       code: regionCode
@@ -248,6 +255,8 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     department = await Department.query().findById(department_id);
   }
 
+  const pays = getMesurePays(code_postal);
+
   const { latitude, longitude } = await getGeoDatas(code_postal, ville);
 
   const ti = await Tis.query().findOne({
@@ -278,6 +287,7 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     residence: mesureDatas.residence,
     department_id: department.id,
     ti_id: ti ? ti.id : null,
+    pays,
     longitude,
     latitude
   };
