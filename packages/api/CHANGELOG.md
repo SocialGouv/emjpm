@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.24.2](https://github.com/SocialGouv/emjpm/compare/v25.24.1...v25.24.2) (2020-03-18)
+
+
+### Bug Fixes
+
+* **import:** update headers and import async ([#1603](https://github.com/SocialGouv/emjpm/issues/1603)) ([101b44d](https://github.com/SocialGouv/emjpm/commit/101b44ddc8f3d27bb0662b1a23c3d733725c47b4))
+
+
+
+
+
 ## [25.24.1](https://github.com/SocialGouv/emjpm/compare/v25.24.0...v25.24.1) (2020-03-17)
 
 **Note:** Version bump only for package @emjpm/api
