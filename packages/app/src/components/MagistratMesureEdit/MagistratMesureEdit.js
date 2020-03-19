@@ -102,7 +102,7 @@ export const MagistratMesureEdit = () => {
               name="annee"
               hasError={formik.errors.annee && formik.touched.annee}
               onChange={formik.handleChange}
-              placeholder="année de naissance"
+              placeholder="Année de naissance"
             />
             <InlineError message={formik.errors.annee} fieldId="annee" />
           </Field>
@@ -113,7 +113,7 @@ export const MagistratMesureEdit = () => {
               name="numero_rg"
               hasError={formik.errors.numero_rg && formik.touched.numero_rg}
               onChange={formik.handleChange}
-              placeholder="numero rg"
+              placeholder="Numéro RG"
             />
             <InlineError message={formik.errors.numero_rg} fieldId="numero_rg" />
           </Field>

@@ -52,7 +52,7 @@ const MandataireMesure = props => {
             <Text sx={content}>{residence}</Text>
             <Text sx={subtitle}>Decision du</Text>
             <Text sx={content}>{dateOuvertureFormated}</Text>
-            <Text sx={subtitle}>Numero de dossier</Text>
+            <Text sx={subtitle}>Numéro de dossier</Text>
             <Text sx={content}>{numeroDossier}</Text>
             {cabinet && (
               <Fragment>
