@@ -1,6 +1,6 @@
 import { Button, Field, InlineError, Input, Select, Textarea } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React from "react";
 import { Box, Flex } from "rebass";
 
 import { SECRETARIAT_OPTIONS } from "../../constants/mandataire";
@@ -11,10 +11,11 @@ import { Geocode, geocodeInitialValue } from "../Geocode";
 
 const MandataireEditInformationsForm = props => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
-
-  const [isSecretariat, setSecretariat] = useState(mandataire.secretariat);
-
   const geocode = geocodeInitialValue(mandataire);
+
+  const secretariat = mandataire.secretariat
+    ? SECRETARIAT_OPTIONS.find(el => el.value === mandataire.secretariat)
+    : undefined;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -29,7 +30,7 @@ const MandataireEditInformationsForm = props => {
       siret: mandataire.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
-      secretariat: SECRETARIAT_OPTIONS.find(el => el.value === mandataire.secretariat),
+      secretariat: secretariat,
       nb_secretariat: mandataire.nb_secretariat || "",
       competences: mandataire.competences || "",
       geocode
@@ -122,7 +123,10 @@ const MandataireEditInformationsForm = props => {
           resource={mandataire}
           onChange={geocode => formik.setFieldValue("geocode", geocode)}
         />
-        <InlineError message={formik.errors.geocode} fieldId="geocode" />
+        <InlineError
+          message={formik.errors.geocode ? formik.errors.geocode.postcode : ""}
+          fieldId="geocode"
+        />
       </Field>
       <Field>
         <Input
@@ -141,12 +145,10 @@ const MandataireEditInformationsForm = props => {
           id="secretariat"
           name="secretariat"
           hasError={formik.errors.secretariat && formik.touched.secretariat}
-          onChange={option => {
-            const isSecretariat = option ? option.value : false;
-            setSecretariat(isSecretariat);
-            formik.setFieldValue("secretariat", option);
-            if (!isSecretariat) {
-              formik.setFieldValue("nb_secretariat", "");
+          onChange={async option => {
+            await formik.setFieldValue("secretariat", option);
+            if (option && option.value) {
+              await formik.setFieldValue("nb_secretariat", "");
             }
           }}
           placeholder="Secretariat spécialisé"
@@ -154,7 +156,8 @@ const MandataireEditInformationsForm = props => {
         />
         <InlineError message={formik.errors.secretariat} fieldId="secretariat" />
       </Field>
-      {isSecretariat && (
+
+      {formik.values.secretariat && formik.values.secretariat.value && (
         <Field>
           <Input
             value={formik.values.nb_secretariat}
