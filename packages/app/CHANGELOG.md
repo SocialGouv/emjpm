@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.24.3](https://github.com/SocialGouv/emjpm/compare/v25.24.2...v25.24.3) (2020-03-19)
+
+
+### Bug Fixes
+
+* **import:** handle pays ([851feb1](https://github.com/SocialGouv/emjpm/commit/851feb19e8f90f9bcf630f4bbec0ff1352cfee69))
+
+
+
+
+
 ## [25.24.2](https://github.com/SocialGouv/emjpm/compare/v25.24.1...v25.24.2) (2020-03-18)
 
 
