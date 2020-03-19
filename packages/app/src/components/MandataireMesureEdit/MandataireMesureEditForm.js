@@ -14,7 +14,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { CIVILITY, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
@@ -36,7 +36,8 @@ export const MandataireMesureEditForm = props => {
       residence,
       type,
       tribunal,
-      tiId
+      tiId,
+      pays
     }
   } = props;
 
@@ -101,7 +102,8 @@ export const MandataireMesureEditForm = props => {
       tribunal: tiId ? { label: tribunal, value: tiId } : undefined,
       type: { label: type, value: type },
       geocode,
-      address: geocode.label
+      address: geocode.label,
+      country: { label: COUNTRIES[pays], value: pays }
     }
   });
 
