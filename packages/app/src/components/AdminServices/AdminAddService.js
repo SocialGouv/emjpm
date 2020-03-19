@@ -47,7 +47,8 @@ export const AdminAddService = () => {
           telephone: values.telephone,
           ville: values.geocode.city,
           latitude: values.geocode.latitude,
-          longitude: values.geocode.longitude
+          longitude: values.geocode.longitude,
+          siret: values.siret
         }
       });
     } catch (error) {

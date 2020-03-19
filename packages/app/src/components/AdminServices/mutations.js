@@ -43,6 +43,7 @@ export const ADD_SERVICE = gql`
     $adresse: String!
     $latitude: Float!
     $longitude: Float!
+    $siret: String!
   ) {
     insert_services(
       objects: {
@@ -55,6 +56,7 @@ export const ADD_SERVICE = gql`
         adresse: $adresse
         latitude: $latitude
         longitude: $longitude
+        siret: $siret
       }
     ) {
       returning {
@@ -67,6 +69,7 @@ export const ADD_SERVICE = gql`
         adresse
         latitude
         longitude
+        siret
       }
     }
   }
