@@ -336,7 +336,9 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
 
   const [mesure] = await Mesure.query().where({
     numero_rg: data.numero_rg,
-    ti_id: ti.id
+    ti_id: ti.id,
+    service_id: service ? service.id : null,
+    mandataire_id: mandataire ? mandataire.id : null
   });
 
   if (!mesure) {
