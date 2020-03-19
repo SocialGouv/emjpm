@@ -292,9 +292,13 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
       codePostalEtablissement,
       libelleCommuneEtablissement
     } = adresseEtablissement;
-
     const periode = periodesEtablissement.find(p => !p.dateFin);
     const { enseigne1Etablissement } = periode || {};
+
+    const tiGeoDatas = await getGeoDatas(
+      codePostalEtablissement,
+      libelleCommuneEtablissement
+    );
 
     // create new ti
     ti = await Tis.query().insert({
@@ -303,7 +307,9 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
       departement_id: department.id,
       etablissement: enseigne1Etablissement,
       ville: libelleCommuneEtablissement,
-      siret: tribunal_siret
+      siret: tribunal_siret,
+      latitude: tiGeoDatas.latitude,
+      longitude: tiGeoDatas.longitude
     });
   }
 
