@@ -23,7 +23,12 @@ export const SERVICES = gql`
 `;
 
 export const SERVICE = gql`
-  query service($serviceId: Int) {
+  query admin_service($serviceId: Int) {
+    tis {
+      id
+      etablissement
+      code_postal
+    }
     services(where: { id: { _eq: $serviceId } }) {
       id
       etablissement
@@ -35,6 +40,13 @@ export const SERVICE = gql`
       longitude
       email
       telephone
+      service_tis {
+        id
+        ti {
+          id
+          etablissement
+        }
+      }
     }
   }
 `;
