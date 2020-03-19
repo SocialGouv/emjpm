@@ -57,6 +57,7 @@ export const EDIT_MESURE = gql`
     $latitude: Float
     $longitude: Float
     $pays: String!
+    $cabinet: String
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -76,6 +77,7 @@ export const EDIT_MESURE = gql`
         latitude: $latitude
         longitude: $longitude
         pays: $pays
+        cabinet: $cabinet
       }
     ) {
       returning {
@@ -104,6 +106,7 @@ export const EDIT_MESURE = gql`
         annee
         date_ouverture
         pays
+        cabinet
       }
     }
   }

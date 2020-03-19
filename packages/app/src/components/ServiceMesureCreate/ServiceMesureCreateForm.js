@@ -22,7 +22,8 @@ const initialValues = {
   tribunal: undefined,
   address: geocode.label,
   geocode: geocode,
-  country: { value: "FR", label: COUNTRIES["FR"] }
+  country: { value: "FR", label: COUNTRIES["FR"] },
+  cabinet: ""
 };
 
 export const ServiceMesureCreateForm = props => {
@@ -63,12 +64,25 @@ export const ServiceMesureCreateForm = props => {
       </Field>
       <Field>
         <Input
+          value={formik.values.cabinet}
+          id="cabinet"
+          name="cabinet"
+          hasError={formik.errors.cabinet && formik.touched.cabinet}
+          onChange={formik.handleChange}
+          placeholder="Cabinet"
+        />
+        {formik.touched.cabinet && (
+          <InlineError message={formik.errors.cabinet} fieldId="cabinet" />
+        )}
+      </Field>
+      <Field>
+        <Input
           value={formik.values.numero_dossier}
           id="numero_dossier"
           name="numero_dossier"
           hasError={formik.errors.numero_dossier && formik.touched.numero_dossier}
           onChange={formik.handleChange}
-          placeholder="Numero de dossier"
+          placeholder="Numéro de dossier"
         />
         {formik.touched.numero_dossier && (
           <InlineError message={formik.errors.numero_dossier} fieldId="numero_dossier" />
@@ -136,7 +150,7 @@ export const ServiceMesureCreateForm = props => {
           type="number"
           hasError={formik.errors.annee && formik.touched.annee}
           onChange={formik.handleChange}
-          placeholder="année de naissance"
+          placeholder="Année de naissance"
         />
         {formik.touched.annee && <InlineError message={formik.errors.annee} fieldId="type" />}
       </Field>
