@@ -23,6 +23,42 @@ export const USERS = gql`
   }
 `;
 
+export const USER_TIS = gql`
+  query admin_user_tis($userId: Int!) {
+    tis {
+      id
+      etablissement
+      code_postal
+    }
+    user_tis(where: { user_id: { _eq: $userId } }) {
+      id
+      ti {
+        id
+        etablissement
+        code_postal
+      }
+    }
+  }
+`;
+
+export const MAGISTRAT = gql`
+  query admin_magistrat($userId: Int!) {
+    tis {
+      id
+      etablissement
+      code_postal
+    }
+    magistrat(where: { user_id: { _eq: $userId } }) {
+      id
+      ti {
+        id
+        etablissement
+        code_postal
+      }
+    }
+  }
+`;
+
 export const USER = gql`
   query user($userId: Int) {
     users(where: { id: { _eq: $userId } }) {
