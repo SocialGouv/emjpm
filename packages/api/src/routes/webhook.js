@@ -28,6 +28,7 @@ const {
 } = require("../email/service-member-invitation-mail");
 const getRegionCode = require("../utils/getRegionCode");
 const tokenRequest = require("../controllers/webhook/token-request");
+const siret = require("../utils/siret");
 
 // ----------------------------------
 // -------EMAIL ACCOUNT VALIDATION---
@@ -241,14 +242,18 @@ const toDate = dateStr => {
 
 // TODO(tglatt): move db queries in other file
 const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
-  const mandataire = mesureDatas.mandataire;
-  const service = mesureDatas.service;
+  const {
+    mandataire,
+    service,
+    code_postal,
+    ville,
+    tribunal_siret
+  } = mesureDatas;
   const department_id = mandataire
     ? mandataire.department_id
     : service.department_id;
-  const code_postal = mesureDatas.code_postal;
-  const ville = mesureDatas.ville;
 
+  // department
   let department = await getMesureDepartment(code_postal, department_id);
 
   if (!department) {
@@ -259,16 +264,45 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
 
   const { latitude, longitude } = await getGeoDatas(code_postal, ville);
 
-  const ti = await Tis.query().findOne({
-    siret: mesureDatas.tribunal_siret
+  // ti
+  let ti = await Tis.query().findOne({
+    siret: tribunal_siret
   });
 
   if (!ti) {
-    importSummary.errors.push(
-      `Aucun tribunal ne correspond au SIRET ${mesureDatas.tribunal_siret}`
-    );
+    const { error, data } = await siret.find(tribunal_siret);
 
-    return;
+    if (error) {
+      logger.error(error);
+      sentry.captureException(new Error(error));
+    }
+
+    if (!data) {
+      importSummary.errors.push(
+        `Aucun tribunal ne correspond au SIRET ${tribunal_siret}`
+      );
+      return;
+    }
+
+    const { uniteLegale, adresseEtablissement } = data;
+    const { denominationUniteLegale } = uniteLegale;
+    const {
+      numeroVoieEtablissement,
+      typeVoieEtablissement,
+      libelleVoieEtablissement,
+      codePostalEtablissement,
+      libelleCommuneEtablissement
+    } = adresseEtablissement;
+
+    // create new ti
+    ti = await Tis.query().insert({
+      address: `${numeroVoieEtablissement} ${typeVoieEtablissement} ${libelleVoieEtablissement}`,
+      code_postal: codePostalEtablissement,
+      departement_id: department.id,
+      etablissement: denominationUniteLegale,
+      ville: libelleCommuneEtablissement,
+      siret: tribunal_siret
+    });
   }
 
   const data = {
