@@ -87,7 +87,8 @@ export const MandataireAddMesure = props => {
           ti_id: values.tribunal.value,
           type: values.type.value,
           mandataireId: id,
-          pays: values.country.value
+          pays: values.country.value,
+          cabinet: values.cabinet
         }
       });
 
@@ -103,7 +104,8 @@ export const MandataireAddMesure = props => {
       tribunal: undefined,
       geocode,
       address: geocode.label,
-      country: { value: "FR", label: COUNTRIES["FR"] }
+      country: { value: "FR", label: COUNTRIES["FR"] },
+      cabinet: ""
     }
   });
 
@@ -202,12 +204,25 @@ export const MandataireAddMesure = props => {
               </Field>
               <Field>
                 <Input
+                  value={formik.values.cabinet}
+                  id="cabinet"
+                  name="cabinet"
+                  hasError={formik.errors.cabinet && formik.touched.cabinet}
+                  onChange={formik.handleChange}
+                  placeholder="Cabinet"
+                />
+                {formik.errors.cabinet && formik.touched.cabinet && (
+                  <Text>{formik.errors.cabinet}</Text>
+                )}
+              </Field>
+              <Field>
+                <Input
                   value={formik.values.numero_dossier}
                   id="numero_dossier"
                   name="numero_dossier"
                   hasError={formik.errors.numero_dossier && formik.touched.numero_dossier}
                   onChange={formik.handleChange}
-                  placeholder="Numero de dossier"
+                  placeholder="Numéro de dossier"
                 />
                 {formik.errors.numero_dossier && formik.touched.numero_dossier && (
                   <Text>{formik.errors.numero_dossier}</Text>
@@ -262,7 +277,7 @@ export const MandataireAddMesure = props => {
                   type="number"
                   hasError={formik.errors.annee && formik.touched.annee}
                   onChange={formik.handleChange}
-                  placeholder="année de naissance"
+                  placeholder="Année de naissance"
                 />
                 {formik.errors.annee && formik.touched.annee && <Text>{formik.errors.annee}</Text>}
               </Field>

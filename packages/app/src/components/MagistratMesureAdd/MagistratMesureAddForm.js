@@ -112,7 +112,7 @@ export const MagistratMesureAddForm = props => {
             <Select
               id="civilite"
               name="civilite"
-              placeholder="civilité"
+              placeholder="Civilité"
               value={formik.values.civilite}
               hasError={formik.errors.civilite && formik.touched.civilite}
               onChange={option => formik.setFieldValue("civilite", option)}
@@ -127,7 +127,7 @@ export const MagistratMesureAddForm = props => {
               name="annee"
               hasError={formik.errors.annee && formik.touched.annee}
               onChange={formik.handleChange}
-              placeholder="année de naissance"
+              placeholder="Année de naissance"
             />
             <InlineError message={formik.errors.annee} fieldId="annee" />
           </Field>
@@ -138,7 +138,7 @@ export const MagistratMesureAddForm = props => {
               name="numero_rg"
               hasError={formik.errors.numero_rg && formik.touched.numero_rg}
               onChange={formik.handleChange}
-              placeholder="numero rg"
+              placeholder="Numéro RG"
             />
             <InlineError message={formik.errors.numero_rg} fieldId="numero_rg" />
           </Field>
@@ -149,7 +149,7 @@ export const MagistratMesureAddForm = props => {
               name="cabinet"
               hasError={formik.errors.cabinet && formik.touched.cabinet}
               onChange={formik.handleChange}
-              placeholder="cabinet (optionnel)"
+              placeholder="Cabinet (optionnel)"
             />
             <InlineError message={formik.errors.cabinet} fieldId="cabinet" />
           </Field>
