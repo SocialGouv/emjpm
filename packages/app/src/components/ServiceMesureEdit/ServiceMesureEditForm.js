@@ -35,7 +35,8 @@ export const ServiceMesureEditForm = props => {
       type,
       tribunal,
       tiId,
-      pays
+      pays,
+      cabinet
     },
     departementsData,
     tribunalList,
@@ -87,7 +88,8 @@ export const ServiceMesureEditForm = props => {
           residence: values.residence.value,
           ti_id: values.tribunal.value,
           type: values.type.value,
-          pays: values.country.value
+          pays: values.country.value,
+          cabinet: values.cabinet
         }
       });
 
@@ -129,7 +131,8 @@ export const ServiceMesureEditForm = props => {
       type: { label: type, value: type },
       geocode,
       country: { value: pays, label: COUNTRIES[pays] },
-      address: geocode.label
+      address: geocode.label,
+      cabinet
     }
   });
 
@@ -162,7 +165,7 @@ export const ServiceMesureEditForm = props => {
               name="numero_rg"
               hasError={formik.errors.numero_rg && formik.touched.numero_rg}
               onChange={formik.handleChange}
-              placeholder="numero rg"
+              placeholder="Numéro RG"
             />
           </Field>
           <Field>
@@ -178,12 +181,23 @@ export const ServiceMesureEditForm = props => {
           </Field>
           <Field>
             <Input
+              value={formik.values.cabinet}
+              id="cabinet"
+              name="cabinet"
+              hasError={formik.errors.cabinet && formik.touched.cabinet}
+              onChange={formik.handleChange}
+              placeholder="Cabinet -"
+            />
+            <InlineError message={formik.errors.cabinet} fieldId="cabinet" />
+          </Field>
+          <Field>
+            <Input
               value={formik.values.numero_dossier}
               id="numero_dossier"
               name="numero_dossier"
               hasError={formik.errors.numero_dossier && formik.touched.numero_dossier}
               onChange={formik.handleChange}
-              placeholder="numero de dossier"
+              placeholder="Numéro de dossier"
             />
             <InlineError message={formik.errors.numero_dossier} fieldId="numero_dossier" />
           </Field>
@@ -244,7 +258,7 @@ export const ServiceMesureEditForm = props => {
               name="annee"
               hasError={formik.errors.annee && formik.touched.annee}
               onChange={formik.handleChange}
-              placeholder="année de naissance"
+              placeholder="Année de naissance"
             />
             <InlineError message={formik.errors.annee} fieldId="annee" />
           </Field>

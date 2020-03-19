@@ -99,7 +99,8 @@ export const ServiceMesureCreate = props => {
         residence: values.residence.value,
         ti_id: values.tribunal.value,
         type: values.type.value,
-        pays: values.country.value
+        pays: values.country.value,
+        cabinet: values.cabinet
       }
     });
 
