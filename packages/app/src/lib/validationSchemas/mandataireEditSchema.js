@@ -11,17 +11,13 @@ const mandataireEditSchema = yup.object().shape({
   geocode: yup
     .object()
     .nullable()
-    .required(),
+    .shape({
+      postcode: yup.string().required()
+    }),
   nb_secretariat: yup.number(),
   nom: yup.string().required(),
   prenom: yup.string().required(),
-  secretariat: yup
-    .object()
-    .shape({
-      label: yup.string(),
-      value: yup.boolean()
-    })
-    .required(),
+  secretariat: yup.object().required(),
   siret: yup
     .string()
     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
