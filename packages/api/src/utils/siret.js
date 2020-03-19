@@ -9,6 +9,7 @@ const INSEE_API_BASIC_TOKEN = Buffer.from(
   `${INSEE_API_KEY}:${INSEE_API_SECRET}`
 ).toString("base64");
 
+const cache = {};
 let accessToken = null;
 
 const refreshAccessToken = async () => {
@@ -53,6 +54,10 @@ const checkAccessToken = async () => {
 };
 
 const find = async siret => {
+  if (cache[siret]) {
+    return cache[siret];
+  }
+
   const { error } = await checkAccessToken();
 
   if (error) {
@@ -79,6 +84,8 @@ const find = async siret => {
   }
 
   const { etablissement } = json;
+
+  cache[siret] = etablissement;
 
   return { data: etablissement };
 };
