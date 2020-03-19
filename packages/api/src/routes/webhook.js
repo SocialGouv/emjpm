@@ -284,8 +284,7 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
       return;
     }
 
-    const { uniteLegale, adresseEtablissement } = data;
-    const { denominationUniteLegale } = uniteLegale;
+    const { adresseEtablissement, periodesEtablissement } = data;
     const {
       numeroVoieEtablissement,
       typeVoieEtablissement,
@@ -294,12 +293,15 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
       libelleCommuneEtablissement
     } = adresseEtablissement;
 
+    const periode = periodesEtablissement.find(p => !p.dateFin);
+    const { enseigne1Etablissement } = periode || {};
+
     // create new ti
     ti = await Tis.query().insert({
       address: `${numeroVoieEtablissement} ${typeVoieEtablissement} ${libelleVoieEtablissement}`,
       code_postal: codePostalEtablissement,
       departement_id: department.id,
-      etablissement: denominationUniteLegale,
+      etablissement: enseigne1Etablissement,
       ville: libelleCommuneEtablissement,
       siret: tribunal_siret
     });
