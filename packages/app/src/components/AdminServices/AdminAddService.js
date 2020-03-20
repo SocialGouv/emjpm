@@ -1,15 +1,18 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import { Card } from "@socialgouv/emjpm-ui-core";
 import Router from "next/router";
 import React from "react";
 
 import Sentry from "../../util/sentry";
+import serviceSiretExists from "../../util/serviceSiretExists";
 import { AdminServiceForm } from "./AdminServiceForm";
 import { ADD_SERVICE } from "./mutations";
 import { DEPARTEMENTS } from "./queries";
 import { cardStyle } from "./style";
 
 export const AdminAddService = () => {
+  const client = useApolloClient();
+
   const [addService] = useMutation(ADD_SERVICE, {
     onCompleted: () => Router.push("/admin/services")
   });
@@ -29,9 +32,14 @@ export const AdminAddService = () => {
   const handleSubmit = async (values, { setErrors, setSubmitting }) => {
     const { depcode } = values.geocode;
     const department = departements.find(d => d.code === depcode);
+    const siretExists = await serviceSiretExists(client, values.siret);
 
     if (!department) {
       setErrors({ geocode: "L'adresse est invalide, veuillez la resaisir" });
+      setSubmitting(false);
+      return;
+    } else if (siretExists) {
+      setErrors({ siret: "Le siret est déjà utilisé" });
       setSubmitting(false);
       return;
     }
