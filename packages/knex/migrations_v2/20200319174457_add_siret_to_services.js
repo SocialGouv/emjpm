@@ -1,6 +1,6 @@
 exports.up = async function(knex) {
   await knex.schema.alterTable("services", function(table) {
-    table.string("siret");
+    table.string("siret").unique();
   });
 };
 
