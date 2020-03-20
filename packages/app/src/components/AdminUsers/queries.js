@@ -23,6 +23,20 @@ export const USERS = gql`
   }
 `;
 
+export const MESURES = gql`
+  query mesures($userId: Int!) {
+    mesures(where: { mandataire_id: { _eq: $userId } }) {
+      id
+      etablissement
+      numero_dossier
+      residence
+      numero_rg
+      status
+      date_ouverture
+    }
+  }
+`;
+
 export const USER_TIS = gql`
   query admin_user_tis($userId: Int!) {
     tis {
