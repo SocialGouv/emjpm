@@ -3,6 +3,11 @@ exports.up = function(knex) {
     table.increments();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
+      .integer("mandataire_id")
+      .references("id")
+      .inTable("mandataires")
+      .onDelete("CASCADE");
+    table
       .boolean("debut_activite_avant_2009")
       .defaultTo(false)
       .notNullable();
