@@ -1302,6 +1302,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "siret": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "telephone": Object {
     "defaultValue": null,
     "maxLength": 255,
