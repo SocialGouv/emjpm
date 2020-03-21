@@ -16,7 +16,8 @@ export const AdminServiceForm = props => {
       email: service ? service.email : "",
       etablissement: service ? service.etablissement : "",
       telephone: service ? service.telephone : "",
-      geocode: geocodeInitialValue(service)
+      geocode: geocodeInitialValue(service),
+      siret: service ? service.siret : ""
     }
   });
 
@@ -41,6 +42,19 @@ export const AdminServiceForm = props => {
           <form onSubmit={formik.handleSubmit}>
             <Field>
               <Input
+                value={formik.values.siret}
+                id="siret"
+                name="siret"
+                hasError={formik.errors.siret && formik.touched.siret}
+                onChange={formik.handleChange}
+                placeholder="SIRET"
+              />
+              {formik.touched.siret && (
+                <InlineError message={formik.errors.siret} fieldId="siret" />
+              )}
+            </Field>
+            <Field>
+              <Input
                 value={formik.values.etablissement}
                 id="etablissement"
                 name="etablissement"
@@ -48,7 +62,9 @@ export const AdminServiceForm = props => {
                 onChange={formik.handleChange}
                 placeholder="Nom du service"
               />
-              <InlineError message={formik.errors.etablissement} fieldId="etablissement" />
+              {formik.touched.etablissement && (
+                <InlineError message={formik.errors.etablissement} fieldId="etablissement" />
+              )}
             </Field>
             <Field>
               <Input
