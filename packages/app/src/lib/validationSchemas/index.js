@@ -8,6 +8,7 @@ import { magistratMandataireSchema } from "./magistratMandataireSchema";
 import { magistratMesureDeleteSchema } from "./magistratMesureDeleteSchema";
 import { magistratMesureEditSchema } from "./magistratMesureEditSchema";
 import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
+import { mandataireAgrementSchema } from "./mandataireAgrementSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
 import { mandataireMesureSchema } from "./mandataireMesureSchema";
 import { mandataireSignupSchema } from "./mandataireSignupSchema";
@@ -39,6 +40,7 @@ export {
   serviceAntenneSchema,
   serviceMesureSchema,
   mandataireSignupSchema,
+  mandataireAgrementSchema,
   serviceAcceptMesureSchema,
   serviceMemberInvitationSchema,
   mandataireAcceptMesureSchema,
