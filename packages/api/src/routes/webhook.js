@@ -28,7 +28,9 @@ const {
 } = require("../email/service-member-invitation-mail");
 const getRegionCode = require("../utils/getRegionCode");
 const tokenRequest = require("../controllers/webhook/token-request");
-const siret = require("../utils/siret");
+
+const configuration = require("../env");
+const inseeAPI = require("./insee-api");
 
 // ----------------------------------
 // -------EMAIL ACCOUNT VALIDATION---
@@ -204,7 +206,7 @@ const getMesurePays = code_postal => {
   return "FR";
 };
 
-const getMesureDepartment = async code_postal => {
+const findDepartment = async code_postal => {
   let department = null;
   if (code_postal && code_postal.length === 5) {
     const regionCode = getRegionCode(code_postal);
@@ -254,7 +256,7 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     : service.department_id;
 
   // department
-  let department = await getMesureDepartment(code_postal, department_id);
+  let department = await findDepartment(code_postal);
 
   if (!department) {
     department = await Department.query().findById(department_id);
@@ -269,48 +271,25 @@ const saveOrUpdateMesure = async (mesureDatas, importSummary) => {
     siret: tribunal_siret
   });
 
+  if (!ti && configuration.inseeAPITribunal) {
+    const tiDatas = await inseeAPI.fetchTribunalDatas(tribunal_siret);
+    if (tiDatas) {
+      const tiGeoDatas = await getGeoDatas(tiDatas.code_postal, tiDatas.ville);
+      const tiDepartment = await findDepartment(tiDatas.code_postal);
+      ti = await Tis.query().insert({
+        ...tiDatas,
+        departement_id: tiDepartment.id,
+        latitude: tiGeoDatas ? tiGeoDatas.latitude : null,
+        longitude: tiGeoDatas ? tiGeoDatas.longitude : null
+      });
+    }
+  }
+
   if (!ti) {
-    const { error, data } = await siret.find(tribunal_siret);
-
-    if (error) {
-      logger.error(error);
-      sentry.captureException(new Error(error));
-    }
-
-    if (!data) {
-      importSummary.errors.push(
-        `Aucun tribunal ne correspond au SIRET ${tribunal_siret}`
-      );
-      return;
-    }
-
-    const { adresseEtablissement, periodesEtablissement } = data;
-    const {
-      numeroVoieEtablissement,
-      typeVoieEtablissement,
-      libelleVoieEtablissement,
-      codePostalEtablissement,
-      libelleCommuneEtablissement
-    } = adresseEtablissement;
-    const periode = periodesEtablissement.find(p => !p.dateFin);
-    const { enseigne1Etablissement } = periode || {};
-
-    const tiGeoDatas = await getGeoDatas(
-      codePostalEtablissement,
-      libelleCommuneEtablissement
+    importSummary.errors.push(
+      `Aucun tribunal ne correspond au SIRET ${tribunal_siret}`
     );
-
-    // create new ti
-    ti = await Tis.query().insert({
-      address: `${numeroVoieEtablissement} ${typeVoieEtablissement} ${libelleVoieEtablissement}`,
-      code_postal: codePostalEtablissement,
-      departement_id: department.id,
-      etablissement: enseigne1Etablissement,
-      ville: libelleCommuneEtablissement,
-      siret: tribunal_siret,
-      latitude: tiGeoDatas.latitude,
-      longitude: tiGeoDatas.longitude
-    });
+    return;
   }
 
   const data = {
