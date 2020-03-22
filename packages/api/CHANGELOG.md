@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.25.0](https://github.com/SocialGouv/emjpm/compare/v25.24.3...v25.25.0) (2020-03-22)
+
+
+### Bug Fixes
+
+* **import:** try finding mesure with mandataire or service id ([#1615](https://github.com/SocialGouv/emjpm/issues/1615)) ([2c578fd](https://github.com/SocialGouv/emjpm/commit/2c578fd113f3b2148547c513cf79f0659b2cb844))
+* **mesure import:** get ti etablissement and geocode ([#1616](https://github.com/SocialGouv/emjpm/issues/1616)) ([1eaff6d](https://github.com/SocialGouv/emjpm/commit/1eaff6dc1c35b144fff8fa5605c3b30d39105bd1))
+
+
+### Features
+
+* **import:** handle INSEE_API_TRIBUNAL ([#1625](https://github.com/SocialGouv/emjpm/issues/1625)) ([0ab2520](https://github.com/SocialGouv/emjpm/commit/0ab252071ea5d6ad82d4ee7b826e723ca0edd0cc))
+* **siret-api:** use insee siret api ([#1606](https://github.com/SocialGouv/emjpm/issues/1606)) ([73fc317](https://github.com/SocialGouv/emjpm/commit/73fc317c49b14cfce8a322242b91c6b164e06a6c))
+
+
+
+
+
 ## [25.24.3](https://github.com/SocialGouv/emjpm/compare/v25.24.2...v25.24.3) (2020-03-19)
 
 
