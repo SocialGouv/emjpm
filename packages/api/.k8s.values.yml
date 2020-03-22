@@ -65,6 +65,11 @@ deployment:
         secretKeyRef:
           name: emjpm-secret
           key: INSEE_API_SECRET
+    - name: INSEE_API_TRIBUNAL
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: INSEE_API_TRIBUNAL
     - name: SENTRY_ENV
       value: "${NODE_ENV}"
 
