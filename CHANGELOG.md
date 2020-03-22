@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.25.0](https://github.com/SocialGouv/emjpm/compare/v25.24.3...v25.25.0) (2020-03-22)
+
+
+### Bug Fixes
+
+* **import:** try finding mesure with mandataire or service id ([#1615](https://github.com/SocialGouv/emjpm/issues/1615)) ([2c578fd](https://github.com/SocialGouv/emjpm/commit/2c578fd113f3b2148547c513cf79f0659b2cb844))
+* **mesure:** edit form ([#1608](https://github.com/SocialGouv/emjpm/issues/1608)) ([801732c](https://github.com/SocialGouv/emjpm/commit/801732cc19d92d07830fa52207771aaada78c531))
+* **mesure import:** get ti etablissement and geocode ([#1616](https://github.com/SocialGouv/emjpm/issues/1616)) ([1eaff6d](https://github.com/SocialGouv/emjpm/commit/1eaff6dc1c35b144fff8fa5605c3b30d39105bd1))
+
+
+### Features
+
+* **admin:** manage tribunaux ([#1604](https://github.com/SocialGouv/emjpm/issues/1604)) ([ba6f3c4](https://github.com/SocialGouv/emjpm/commit/ba6f3c4af894dfaf4f6fe6f5be824af3ad71f5e6))
+* **import:** handle INSEE_API_TRIBUNAL ([#1625](https://github.com/SocialGouv/emjpm/issues/1625)) ([0ab2520](https://github.com/SocialGouv/emjpm/commit/0ab252071ea5d6ad82d4ee7b826e723ca0edd0cc))
+* **mandataire:** edit informations form ([#1614](https://github.com/SocialGouv/emjpm/issues/1614)) ([952f113](https://github.com/SocialGouv/emjpm/commit/952f1137fedf26e826e9d7755e409e5a5dc5905d))
+* **mesure:** add cabinet field ([#1612](https://github.com/SocialGouv/emjpm/issues/1612)) ([d9eeb2f](https://github.com/SocialGouv/emjpm/commit/d9eeb2f7487e1ddf7854988924979bcad643f8df))
+* **service:** add service siret ([#1617](https://github.com/SocialGouv/emjpm/issues/1617)) ([f0416a5](https://github.com/SocialGouv/emjpm/commit/f0416a57576f984d0296277f42b60520a04a3843))
+* **siret-api:** use insee siret api ([#1606](https://github.com/SocialGouv/emjpm/issues/1606)) ([73fc317](https://github.com/SocialGouv/emjpm/commit/73fc317c49b14cfce8a322242b91c6b164e06a6c))
+
+
+
+
+
 ## [25.24.3](https://github.com/SocialGouv/emjpm/compare/v25.24.2...v25.24.3) (2020-03-19)
 
 
