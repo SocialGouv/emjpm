@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.25.0](https://github.com/SocialGouv/emjpm/compare/v25.24.3...v25.25.0) (2020-03-22)
+
+
+### Features
+
+* **service:** add service siret ([#1617](https://github.com/SocialGouv/emjpm/issues/1617)) ([f0416a5](https://github.com/SocialGouv/emjpm/commit/f0416a57576f984d0296277f42b60520a04a3843))
+
+
+
+
+
 ## [25.24.3](https://github.com/SocialGouv/emjpm/compare/v25.24.2...v25.24.3) (2020-03-19)
 
 **Note:** Version bump only for package @emjpm/knex
