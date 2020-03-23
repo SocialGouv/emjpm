@@ -2,7 +2,9 @@ import gql from "graphql-tag";
 
 export const USERS = gql`
   query services($limit: Int, $searchText: String, $offset: Int) {
-    users_aggregate(where: { nom: { _ilike: $searchText } }) {
+    users_aggregate(
+      where: { _or: [{ email: { _ilike: $searchText } }, { nom: { _ilike: $searchText } }] }
+    ) {
       aggregate {
         count
       }
@@ -11,7 +13,7 @@ export const USERS = gql`
       limit: $limit
       order_by: { active: asc, id: desc }
       offset: $offset
-      where: { nom: { _ilike: $searchText } }
+      where: { _or: [{ email: { _ilike: $searchText } }, { nom: { _ilike: $searchText } }] }
     ) {
       id
       nom
