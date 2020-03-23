@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import React, { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { PaginationTable } from "../PaginationTable";
+import { DynamicTable } from "../DynamicTable";
 import { DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
@@ -96,7 +96,7 @@ const AdminUsersMesures = props => {
       {mesures.length === 0 ? (
         <Text>Aucune mesure pour le mandataire sélectionné</Text>
       ) : (
-        <PaginationTable
+        <DynamicTable
           columns={columns}
           data={mesures}
           selectedRows={selectedRows}

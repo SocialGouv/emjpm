@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { Box, Flex, Text } from "rebass";
 
-import PaginationTableFooter from "./PaginationTableFooter";
+import DynamicTableFooter from "./DynamicTableFooter";
 
-const PaginationTable = props => {
+const DynamicTable = props => {
   const { columns, data, selectedRows, setSelectedRows } = props;
 
   const table = useTable(
@@ -113,7 +113,7 @@ const PaginationTable = props => {
       </Box>
 
       <Box mt={3}>
-        <PaginationTableFooter
+        <DynamicTableFooter
           gotoPage={gotoPage}
           canPreviousPage={canPreviousPage}
           previousPage={previousPage}
@@ -130,4 +130,4 @@ const PaginationTable = props => {
   );
 };
 
-export default PaginationTable;
+export default DynamicTable;
