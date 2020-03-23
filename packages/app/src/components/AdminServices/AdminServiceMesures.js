@@ -11,7 +11,7 @@ import ErrorBox from "../ErrorBox";
 import { CALCULATE_SERVICE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
-function getMesuresCount(mesures) {
+function getMesuresStatusCount(mesures) {
   let awaitingMesuresCount = 0;
   let inProgressMesuresCount = 0;
   for (const mesure of mesures) {
@@ -64,7 +64,7 @@ const AdminServiceMesures = props => {
       },
       {
         Header: "Date de création",
-        accessor: data => format(new Date(data.created_at), "dd/MM/yyy")
+        accessor: data => format(new Date(data.created_at), "dd/MM/yyy hh:mm")
       },
       {
         Header: "Tribunal",
@@ -90,7 +90,7 @@ const AdminServiceMesures = props => {
   }
 
   const { mesures, services } = data;
-  const { awaitingMesuresCount, inProgressMesuresCount } = getMesuresCount(mesures);
+  const { awaitingMesuresCount, inProgressMesuresCount } = getMesuresStatusCount(mesures);
   const [service] = services;
   const mustBeRecalculated =
     service &&

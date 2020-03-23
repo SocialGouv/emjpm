@@ -11,6 +11,23 @@ import ErrorBox from "../ErrorBox";
 import { CALCULATE_MANDATAIRE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
+function getMesuresStatusCount(mesures) {
+  let awaitingMesuresCount = 0;
+  let inProgressMesuresCount = 0;
+  for (const mesure of mesures) {
+    const { status } = mesure;
+    if (status === "Mesure en cours") {
+      ++inProgressMesuresCount;
+    } else if (status === "Mesure en attente") {
+      ++awaitingMesuresCount;
+    }
+  }
+  return {
+    awaitingMesuresCount,
+    inProgressMesuresCount
+  };
+}
+
 const AdminUsersMesures = props => {
   const { userId } = props;
   const [selectedRows, setSelectedRows] = useState([]);
@@ -47,7 +64,7 @@ const AdminUsersMesures = props => {
       },
       {
         Header: "Date de création",
-        accessor: data => format(new Date(data.created_at), "dd/MM/yyy")
+        accessor: data => format(new Date(data.created_at), "dd/MM/yyy hh:mm")
       },
       {
         Header: "Tribunal",
@@ -74,26 +91,19 @@ const AdminUsersMesures = props => {
 
   const { mesures, mandataires } = data;
   const [mandataire] = mandataires;
-
-  const statusEnCours = mesures.length
-    ? mesures.filter(m => m.status === "Mesure en cours").length
-    : 0;
-
-  const statusEnAttente = mesures.length
-    ? mesures.filter(m => m.status === "Mesure en attente").length
-    : 0;
+  const { awaitingMesuresCount, inProgressMesuresCount } = getMesuresStatusCount(mesures);
 
   const mustBeRecalculated =
     mandataire &&
-    (statusEnCours !== mandataire.mesures_en_cours ||
-      statusEnAttente !== mandataire.mesures_en_attente);
+    (inProgressMesuresCount !== mandataire.mesures_en_cours ||
+      awaitingMesuresCount !== mandataire.mesures_en_attente);
 
   return (
     <Box>
       {mustBeRecalculated && (
         <ErrorBox
           title="Oups, le nombre de mesures ne semble pas être à jour."
-          message={`Mesures en cours: ${statusEnCours} • Mesures en attente: ${statusEnAttente}`}
+          message={`Mesures en cours: ${inProgressMesuresCount} • Mesures en attente: ${awaitingMesuresCount}`}
           buttonText="Recalculer"
           isLoading={calculateMandataireMesuresLoading}
           onClick={() =>
@@ -108,8 +118,8 @@ const AdminUsersMesures = props => {
               ],
               variables: {
                 id: userId,
-                mesuresEnCours: statusEnCours,
-                mesuresEnAttente: statusEnAttente
+                inProgressMesuresCount,
+                awaitingMesuresCount
               }
             })
           }

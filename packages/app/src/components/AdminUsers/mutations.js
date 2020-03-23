@@ -62,10 +62,14 @@ export const DELETE_MESURES = gql`
 `;
 
 export const CALCULATE_MANDATAIRE_MESURES = gql`
-  mutation updateMandataireMesures($id: Int!, $mesuresEnCours: Int!, $mesuresEnAttente: Int!) {
+  mutation updateMandataireMesures(
+    $id: Int!
+    $inProgressMesuresCount: Int!
+    $awaitingMesuresCount: Int!
+  ) {
     update_mandataires(
       where: { id: { _eq: $id } }
-      _set: { mesures_en_cours: $mesuresEnCours, mesures_en_attente: $mesuresEnAttente }
+      _set: { mesures_en_cours: $inProgressMesuresCount, mesures_en_attente: $awaitingMesuresCount }
     ) {
       affected_rows
     }
