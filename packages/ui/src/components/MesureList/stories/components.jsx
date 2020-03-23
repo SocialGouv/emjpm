@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { Box, Flex, Text } from 'rebass';
 
-import { Button } from '../../../../core/src/Button';
+import { Button } from '../../../core/Button';
 import { PANEL_TYPE } from '../constants/type';
 import { MesureContext } from '../context';
 

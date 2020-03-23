@@ -2,10 +2,10 @@ import React, { Fragment } from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { ThemeProvider } from 'theme-ui';
-import preset from '../theme/src';
+import preset from '../src/theme';
 import 'storybook-chromatic';
 import { Global, css } from '@emotion/core';
-import { GlobalStyle } from '../globalStyle/src';
+import { GlobalStyle } from '../src/globalStyle';
 
 const ThemeDecorator = (storyFn) => {
   return (
@@ -30,4 +30,4 @@ const ThemeDecorator = (storyFn) => {
 addDecorator(withA11y);
 addDecorator(ThemeDecorator);
 
-configure(require.context('../packages', true, /\.stories\.(jsx|mdx)$/), module);
+configure(require.context('../src', true, /\.stories\.(jsx|mdx)$/), module);

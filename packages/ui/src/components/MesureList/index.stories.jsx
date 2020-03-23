@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BoxWrapper } from '../../../core/src/Grid';
+import { BoxWrapper } from '../../core/Grid';
 import { MesureList } from '.';
 import { MesureContextProvider } from './context';
 import {

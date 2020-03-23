@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BoxWrapper } from '../../../core/src/Grid';
+import { BoxWrapper } from '../../core/Grid';
 import { Mandatairelist } from '.';
 import { MandataireContextProvider } from './context';
 import { ChooseComponent } from './stories/components';
