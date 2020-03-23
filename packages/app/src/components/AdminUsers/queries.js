@@ -34,6 +34,10 @@ export const MESURES = gql`
       status
       date_ouverture
       created_at
+      ti {
+        etablissement
+        ville
+      }
     }
   }
 `;

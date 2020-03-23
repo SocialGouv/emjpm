@@ -37,10 +37,6 @@ const AdminUsersMesures = props => {
         accessor: "numero_dossier"
       },
       {
-        Header: "Résidence",
-        accessor: "residence"
-      },
-      {
         Header: "Statuts",
         accessor: "status"
       },
@@ -51,6 +47,10 @@ const AdminUsersMesures = props => {
       {
         Header: "Date de création",
         accessor: data => format(new Date(data.created_at), "dd/MM/yyy")
+      },
+      {
+        Header: "Tribunal",
+        accessor: data => (data.ti ? data.ti.ville : "")
       }
     ],
     []
