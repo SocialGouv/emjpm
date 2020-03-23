@@ -81,7 +81,10 @@ const AdminUsersMesures = props => {
               isLoading={mutationLoading}
               onClick={async () => {
                 const ids = selectedRows.map(({ id }) => id);
-                await deleteMesures({ variables: { ids } });
+                await deleteMesures({
+                  refetchQueries: [{ query: MESURES, variables: { userId } }],
+                  variables: { ids }
+                });
               }}
             >
               Supprimer

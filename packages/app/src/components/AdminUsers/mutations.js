@@ -54,8 +54,8 @@ export const ADD_USER_TIS = gql`
 `;
 
 export const DELETE_MESURES = gql`
-  mutation deleteMesures($ids: [Int]!) {
-    delete_magistrat(where: { id: { _in: $ids } }) {
+  mutation deleteMesures($ids: [Int!]) {
+    delete_mesures(where: { id: { _in: $ids } }) {
       affected_rows
     }
   }

@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { Box, Flex, Text } from "rebass";
 
-import PaginationFooter from "./PaginationFooter";
+import PaginationTableFooter from "./PaginationTableFooter";
 
 const PaginationTable = props => {
   const { columns, data, selectedRows, setSelectedRows } = props;
+
   const table = useTable(
     {
       columns,
@@ -112,7 +113,7 @@ const PaginationTable = props => {
       </Box>
 
       <Box mt={3}>
-        <PaginationFooter
+        <PaginationTableFooter
           gotoPage={gotoPage}
           canPreviousPage={canPreviousPage}
           previousPage={previousPage}

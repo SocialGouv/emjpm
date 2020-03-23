@@ -2,7 +2,7 @@ import { Select } from "@rebass/forms";
 import React from "react";
 import { Button, Flex, Text } from "rebass";
 
-const PaginationFooter = props => {
+const PaginationTableFooter = props => {
   const {
     canPreviousPage,
     previousPage,
@@ -45,4 +45,4 @@ const PaginationFooter = props => {
   );
 };
 
-export default PaginationFooter;
+export default PaginationTableFooter;
