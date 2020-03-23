@@ -60,3 +60,14 @@ export const DELETE_MESURES = gql`
     }
   }
 `;
+
+export const CALCULATE_MANDATAIRE_MESURES = gql`
+  mutation updateMandataireMesures($id: Int!, $mesuresEnCours: Int!, $mesuresEnAttente: Int!) {
+    update_mandataires(
+      where: { id: { _eq: $id } }
+      _set: { mesures_en_cours: $mesuresEnCours, mesures_en_attente: $mesuresEnAttente }
+    ) {
+      affected_rows
+    }
+  }
+`;

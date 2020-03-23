@@ -7,7 +7,8 @@ import React, { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { DynamicTable } from "../DynamicTable";
-import { DELETE_MESURES } from "./mutations";
+import AdminUsersMesuresError from "./AdminUsersMesuresError";
+import { CALCULATE_MANDATAIRE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
 const AdminUsersMesures = props => {
@@ -63,20 +64,66 @@ const AdminUsersMesures = props => {
   });
 
   const [deleteMesures, { loading: mutationLoading }] = useMutation(DELETE_MESURES);
+  const [calculateMandataireMesures, { loading: calculateMandataireMesuresLoading }] = useMutation(
+    CALCULATE_MANDATAIRE_MESURES
+  );
 
   if (!data || loading) {
     return null;
   }
 
-  const { mesures } = data;
+  const { mesures, mandataires } = data;
+  const [mandataire] = mandataires;
+
+  const statusEnCours = mesures.length
+    ? mesures.filter(m => m.status === "Mesure en cours").length
+    : 0;
+
+  const statusEnAttente = mesures.length
+    ? mesures.filter(m => m.status === "Mesure en attente").length
+    : 0;
+
+  const mustBeRecalculated =
+    mandataire &&
+    (statusEnCours !== mandataire.mesures_en_cours ||
+      statusEnAttente !== mandataire.mesures_en_attente);
+
   return (
     <Box>
-      <Flex justifyContent="space-between" alignItems="center">
+      {mustBeRecalculated && (
+        <AdminUsersMesuresError
+          title="Oups, le nombre de mesures ne semble pas être à jour."
+          message={`Mesures en cours: ${statusEnCours} • Mesures en attente: ${statusEnAttente}`}
+          buttonText="Recalculer"
+          isLoading={calculateMandataireMesuresLoading}
+          onClick={() =>
+            calculateMandataireMesures({
+              refetchQueries: [
+                {
+                  query: MESURES,
+                  variables: {
+                    userId
+                  }
+                }
+              ],
+              variables: {
+                id: userId,
+                mesuresEnCours: statusEnCours,
+                mesuresEnAttente: statusEnAttente
+              }
+            })
+          }
+        />
+      )}
+
+      <Flex my={3} justifyContent="space-between" alignItems="center">
         <Box>
-          <Heading3 mb={3}>Mesures</Heading3>
+          <Heading3
+            mb={3}
+          >{`Mesures (${mandataire.mesures_en_cours} en cours • ${mandataire.mesures_en_attente} en attente)`}</Heading3>
         </Box>
-        <Box>
-          {mesures.length !== 0 && (
+        {mesures.length !== 0 && (
+          <Box>
             <Button
               isLoading={mutationLoading}
               onClick={async () => {
@@ -89,8 +136,8 @@ const AdminUsersMesures = props => {
             >
               Supprimer
             </Button>
-          )}
-        </Box>
+          </Box>
+        )}
       </Flex>
 
       {mesures.length === 0 ? (
