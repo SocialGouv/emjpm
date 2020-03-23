@@ -65,7 +65,7 @@ spec:
             #
 
             - name: postgres
-              image: postgres:10-alpine
+              image: postgres:10
               command:
                 - sh
               args:
