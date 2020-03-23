@@ -121,7 +121,7 @@ spec:
                 - name: CRONJOB_STATUS_DIR
                   value: /var/lib/cronjob/status
                 - name: PGDATABASE
-                  value: emjpm
+                  value: postgres
                 - name: PGHOST
                   value: localhost
                 - name: PGUSER
