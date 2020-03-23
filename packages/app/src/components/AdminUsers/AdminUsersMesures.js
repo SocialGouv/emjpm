@@ -2,6 +2,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Checkbox, Label } from "@rebass/forms";
 import { Button, Heading3 } from "@socialgouv/emjpm-ui-core";
+import { format } from "date-fns";
 import React, { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -45,7 +46,11 @@ const AdminUsersMesures = props => {
       },
       {
         Header: "Date ouverture",
-        accessor: "date_ouverture"
+        accessor: data => format(new Date(data.date_ouverture), "dd/MM/yyy")
+      },
+      {
+        Header: "Date de création",
+        accessor: data => format(new Date(data.created_at), "dd/MM/yyy")
       }
     ],
     []
@@ -71,15 +76,17 @@ const AdminUsersMesures = props => {
           <Heading3 mb={3}>Mesures</Heading3>
         </Box>
         <Box>
-          <Button
-            isLoading={mutationLoading}
-            onClick={async () => {
-              const ids = selectedRows.map(({ id }) => id);
-              await deleteMesures({ variables: { ids } });
-            }}
-          >
-            Supprimer
-          </Button>
+          {mesures.length !== 0 && (
+            <Button
+              isLoading={mutationLoading}
+              onClick={async () => {
+                const ids = selectedRows.map(({ id }) => id);
+                await deleteMesures({ variables: { ids } });
+              }}
+            >
+              Supprimer
+            </Button>
+          )}
         </Box>
       </Flex>
 
