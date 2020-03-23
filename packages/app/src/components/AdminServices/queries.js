@@ -22,6 +22,30 @@ export const SERVICES = gql`
   }
 `;
 
+export const MESURES = gql`
+  query mesures($serviceId: Int!) {
+    services(where: { id: { _eq: $serviceId } }) {
+      id
+      mesures_awaiting
+      mesures_in_progress
+    }
+    mesures(where: { service_id: { _eq: $serviceId } }) {
+      id
+      etablissement
+      numero_dossier
+      residence
+      numero_rg
+      status
+      date_ouverture
+      created_at
+      ti {
+        etablissement
+        ville
+      }
+    }
+  }
+`;
+
 export const SERVICE = gql`
   query admin_service($serviceId: Int) {
     tis {

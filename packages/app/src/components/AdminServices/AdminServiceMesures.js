@@ -8,11 +8,28 @@ import { Box, Flex, Text } from "rebass";
 
 import { DynamicTable } from "../DynamicTable";
 import ErrorBox from "../ErrorBox";
-import { CALCULATE_MANDATAIRE_MESURES, DELETE_MESURES } from "./mutations";
+import { CALCULATE_SERVICE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
-const AdminUsersMesures = props => {
-  const { userId } = props;
+function getMesuresCount(mesures) {
+  let awaitingMesuresCount = 0;
+  let inProgressMesuresCount = 0;
+  for (const mesure of mesures) {
+    const { status } = mesure;
+    if (status === "Mesure en cours") {
+      ++inProgressMesuresCount;
+    } else if (status === "Mesure en attente") {
+      ++awaitingMesuresCount;
+    }
+  }
+  return {
+    awaitingMesuresCount,
+    inProgressMesuresCount
+  };
+}
+
+const AdminServiceMesures = props => {
+  const { serviceId } = props;
   const [selectedRows, setSelectedRows] = useState([]);
 
   const columns = useMemo(
@@ -59,68 +76,60 @@ const AdminUsersMesures = props => {
 
   const { data, loading } = useQuery(MESURES, {
     variables: {
-      userId
+      serviceId
     }
   });
 
   const [deleteMesures, { loading: mutationLoading }] = useMutation(DELETE_MESURES);
-  const [calculateMandataireMesures, { loading: calculateMandataireMesuresLoading }] = useMutation(
-    CALCULATE_MANDATAIRE_MESURES
+  const [calculateServiceMesures, { loading: calculateServiceMesuresLoading }] = useMutation(
+    CALCULATE_SERVICE_MESURES
   );
 
   if (!data || loading) {
     return null;
   }
 
-  const { mesures, mandataires } = data;
-  const [mandataire] = mandataires;
-
-  const statusEnCours = mesures.length
-    ? mesures.filter(m => m.status === "Mesure en cours").length
-    : 0;
-
-  const statusEnAttente = mesures.length
-    ? mesures.filter(m => m.status === "Mesure en attente").length
-    : 0;
-
+  const { mesures, services } = data;
+  const { awaitingMesuresCount, inProgressMesuresCount } = getMesuresCount(mesures);
+  const [service] = services;
   const mustBeRecalculated =
-    mandataire &&
-    (statusEnCours !== mandataire.mesures_en_cours ||
-      statusEnAttente !== mandataire.mesures_en_attente);
+    service &&
+    (awaitingMesuresCount !== service.mesures_awaiting ||
+      inProgressMesuresCount !== service.mesures_in_progress);
 
   return (
     <Box>
       {mustBeRecalculated && (
         <ErrorBox
           title="Oups, le nombre de mesures ne semble pas être à jour."
-          message={`Mesures en cours: ${statusEnCours} • Mesures en attente: ${statusEnAttente}`}
+          message={`Mesures en cours: ${inProgressMesuresCount} • Mesures en attente: ${awaitingMesuresCount}`}
           buttonText="Recalculer"
-          isLoading={calculateMandataireMesuresLoading}
-          onClick={() =>
-            calculateMandataireMesures({
+          isLoading={calculateServiceMesuresLoading}
+          onClick={() => {
+            calculateServiceMesures({
               refetchQueries: [
                 {
                   query: MESURES,
                   variables: {
-                    userId
+                    serviceId: service.id
                   }
                 }
               ],
               variables: {
-                id: userId,
-                mesuresEnCours: statusEnCours,
-                mesuresEnAttente: statusEnAttente
+                id: service.id,
+                inProgressMesuresCount,
+                awaitingMesuresCount
               }
-            })
-          }
+            });
+          }}
         />
       )}
 
-      <Flex my={3} justifyContent="space-between" alignItems="center">
+      <Flex mb={3} justifyContent="space-between" alignItems="center">
         <Box>
           <Heading3
             mb={3}
-          >{`Mesures (${mandataire.mesures_en_cours} en cours • ${mandataire.mesures_en_attente} en attente)`}</Heading3>
+          >{`Mesures (${service.mesures_in_progress} en cours • ${service.mesures_awaiting} en attente)`}</Heading3>
         </Box>
         {mesures.length !== 0 && (
           <Box>
@@ -129,7 +138,7 @@ const AdminUsersMesures = props => {
               onClick={async () => {
                 const ids = selectedRows.map(({ id }) => id);
                 await deleteMesures({
-                  refetchQueries: [{ query: MESURES, variables: { userId } }],
+                  refetchQueries: [{ query: MESURES, variables: { serviceId } }],
                   variables: { ids }
                 });
               }}
@@ -154,4 +163,4 @@ const AdminUsersMesures = props => {
   );
 };
 
-export default AdminUsersMesures;
+export default AdminServiceMesures;
