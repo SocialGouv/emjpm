@@ -3,6 +3,7 @@ import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { Box, Flex, Text } from "rebass";
 
 import DynamicTableFooter from "./DynamicTableFooter";
+import { TableRowStyle } from "./style";
 
 const DynamicTable = props => {
   const { columns, data, selectedRows, setSelectedRows } = props;
@@ -49,7 +50,6 @@ const DynamicTable = props => {
           <Flex
             key={`header-row-${rowIndex}`}
             py={10}
-            mb={10}
             justifyContent="center"
             alignItems="center"
             flexDirection="row"
@@ -59,11 +59,11 @@ const DynamicTable = props => {
             {headerGroup.headers.map((column, columnIndex) => {
               return (
                 <Flex
-                  justifyContent="center"
                   key={`header-${rowIndex}-column-${columnIndex}`}
                   {...column.getHeaderProps(column.getSortByToggleProps())}
                   width={1 / headerGroup.headers.length}
                   sx={{ fontWeight: "bold" }}
+                  p={10}
                 >
                   <Box>{column.render("Header")}</Box>
                   <Text ml={10}>
@@ -81,25 +81,18 @@ const DynamicTable = props => {
 
             return (
               <Flex
-                py={10}
-                justifyContent="center"
-                alignItems="center"
-                flexDirection="row"
-                flexWrap="wrap"
                 key={`row-${rowIndex}`}
                 {...row.getRowProps()}
+                sx={TableRowStyle}
                 bg={rowIndex % 2 === 0 ? "cardSecondary" : "inherit"}
               >
                 {row.cells.map((cell, columnIndex) => {
                   return (
                     <Flex
-                      sx={{
-                        textAlign: "center"
-                      }}
+                      key={`${rowIndex}-column-${columnIndex}`}
                       alignItems="center"
                       justifyContent="center"
                       width={1 / row.cells.length}
-                      key={`${rowIndex}-column-${columnIndex}`}
                       {...cell.getCellProps()}
                     >
                       {cell.render("Cell")}

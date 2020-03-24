@@ -62,16 +62,22 @@ export const DELETE_MESURES = gql`
 `;
 
 export const CALCULATE_MANDATAIRE_MESURES = gql`
-  mutation updateMandataireMesures(
-    $id: Int!
+  mutation admin_update_mandataire_mesures(
+    $userId: Int!
     $inProgressMesuresCount: Int!
     $awaitingMesuresCount: Int!
   ) {
     update_mandataires(
-      where: { id: { _eq: $id } }
+      where: { user_id: { _eq: $userId } }
       _set: { mesures_en_cours: $inProgressMesuresCount, mesures_en_attente: $awaitingMesuresCount }
     ) {
       affected_rows
+      returning {
+        id
+        user_id
+        mesures_en_cours
+        mesures_en_attente
+      }
     }
   }
 `;

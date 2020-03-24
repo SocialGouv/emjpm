@@ -11,23 +11,6 @@ import ErrorBox from "../ErrorBox";
 import { CALCULATE_MANDATAIRE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
-function getMesuresStatusCount(mesures) {
-  let awaitingMesuresCount = 0;
-  let inProgressMesuresCount = 0;
-  for (const mesure of mesures) {
-    const { status } = mesure;
-    if (status === "Mesure en cours") {
-      ++inProgressMesuresCount;
-    } else if (status === "Mesure en attente") {
-      ++awaitingMesuresCount;
-    }
-  }
-  return {
-    awaitingMesuresCount,
-    inProgressMesuresCount
-  };
-}
-
 const AdminUsersMesures = props => {
   const { userId } = props;
   const [selectedRows, setSelectedRows] = useState([]);
@@ -36,7 +19,13 @@ const AdminUsersMesures = props => {
     () => [
       {
         id: "selection",
-        Header: () => null,
+        Header: ({ getToggleAllRowsSelectedProps }) => {
+          return (
+            <Label>
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            </Label>
+          );
+        },
         Cell: ({ row }) => {
           const { checked, onChange } = row.getToggleRowSelectedProps();
           return (
@@ -53,10 +42,6 @@ const AdminUsersMesures = props => {
       {
         Header: "Numéro de dossier",
         accessor: "numero_dossier"
-      },
-      {
-        Header: "Statuts",
-        accessor: "status"
       },
       {
         Header: "Date ouverture",
@@ -89,17 +74,19 @@ const AdminUsersMesures = props => {
     return null;
   }
 
-  const { mesures, mandataires } = data;
+  const { mesures, mandataires, mesures_aggregate } = data;
   const [mandataire] = mandataires;
-  const { awaitingMesuresCount, inProgressMesuresCount } = getMesuresStatusCount(mesures);
-
+  const {
+    aggregate: { count: awaitingMesuresCount }
+  } = mesures_aggregate;
+  const inProgressMesuresCount = mesures.length;
   const mustBeRecalculated =
     mandataire &&
     (inProgressMesuresCount !== mandataire.mesures_en_cours ||
       awaitingMesuresCount !== mandataire.mesures_en_attente);
 
   return (
-    <Box>
+    <Box p={2}>
       {mustBeRecalculated && (
         <ErrorBox
           title="Oups, le nombre de mesures ne semble pas être à jour."
@@ -117,7 +104,7 @@ const AdminUsersMesures = props => {
                 }
               ],
               variables: {
-                id: userId,
+                userId,
                 inProgressMesuresCount,
                 awaitingMesuresCount
               }
@@ -132,8 +119,9 @@ const AdminUsersMesures = props => {
             mb={3}
           >{`Mesures (${mandataire.mesures_en_cours} en cours • ${mandataire.mesures_en_attente} en attente)`}</Heading3>
         </Box>
-        {mesures.length !== 0 && (
-          <Box>
+        {mesures.length !== 0 && Object.keys(selectedRows).length > 0 && (
+          <Flex justifyContent="center" alignItems="center">
+            <Text mr={20}>{Object.keys(selectedRows).length} éléments sélectionnés</Text>
             <Button
               isLoading={mutationLoading}
               onClick={async () => {
@@ -146,7 +134,7 @@ const AdminUsersMesures = props => {
             >
               Supprimer
             </Button>
-          </Box>
+          </Flex>
         )}
       </Flex>
 

@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Checkbox, Label } from "@rebass/forms";
-import { Button, Heading3 } from "@socialgouv/emjpm-ui-core";
+import { Button, Heading3, Heading4 } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
 import React, { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -11,23 +11,6 @@ import ErrorBox from "../ErrorBox";
 import { CALCULATE_SERVICE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
-function getMesuresStatusCount(mesures) {
-  let awaitingMesuresCount = 0;
-  let inProgressMesuresCount = 0;
-  for (const mesure of mesures) {
-    const { status } = mesure;
-    if (status === "Mesure en cours") {
-      ++inProgressMesuresCount;
-    } else if (status === "Mesure en attente") {
-      ++awaitingMesuresCount;
-    }
-  }
-  return {
-    awaitingMesuresCount,
-    inProgressMesuresCount
-  };
-}
-
 const AdminServiceMesures = props => {
   const { serviceId } = props;
   const [selectedRows, setSelectedRows] = useState([]);
@@ -36,7 +19,13 @@ const AdminServiceMesures = props => {
     () => [
       {
         id: "selection",
-        Header: () => null,
+        Header: ({ getToggleAllRowsSelectedProps }) => {
+          return (
+            <Label>
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            </Label>
+          );
+        },
         Cell: ({ row }) => {
           const { checked, onChange } = row.getToggleRowSelectedProps();
           return (
@@ -55,10 +44,6 @@ const AdminServiceMesures = props => {
         accessor: "numero_dossier"
       },
       {
-        Header: "Statuts",
-        accessor: "status"
-      },
-      {
         Header: "Date ouverture",
         accessor: data => format(new Date(data.date_ouverture), "dd/MM/yyy")
       },
@@ -69,6 +54,10 @@ const AdminServiceMesures = props => {
       {
         Header: "Tribunal",
         accessor: data => (data.ti ? data.ti.ville : "")
+      },
+      {
+        Header: "Antenne",
+        accessor: data => (data.service_antenne ? data.service_antenne.name : "")
       }
     ],
     []
@@ -89,8 +78,12 @@ const AdminServiceMesures = props => {
     return null;
   }
 
-  const { mesures, services } = data;
-  const { awaitingMesuresCount, inProgressMesuresCount } = getMesuresStatusCount(mesures);
+  const { mesures, services, service_antenne_aggregate, mesures_aggregate } = data;
+  const { nodes: antennes } = service_antenne_aggregate;
+  const {
+    aggregate: { count: awaitingMesuresCount }
+  } = mesures_aggregate;
+  const inProgressMesuresCount = mesures.length;
   const [service] = services;
   const mustBeRecalculated =
     service &&
@@ -98,7 +91,7 @@ const AdminServiceMesures = props => {
       inProgressMesuresCount !== service.mesures_in_progress);
 
   return (
-    <Box>
+    <Box p={2}>
       {mustBeRecalculated && (
         <ErrorBox
           title="Oups, le nombre de mesures ne semble pas être à jour."
@@ -116,7 +109,7 @@ const AdminServiceMesures = props => {
                 }
               ],
               variables: {
-                id: service.id,
+                serviceId: service.id,
                 inProgressMesuresCount,
                 awaitingMesuresCount
               }
@@ -131,8 +124,9 @@ const AdminServiceMesures = props => {
             mb={3}
           >{`Mesures (${service.mesures_in_progress} en cours • ${service.mesures_awaiting} en attente)`}</Heading3>
         </Box>
-        {mesures.length !== 0 && (
-          <Box>
+        {mesures.length !== 0 && Object.keys(selectedRows).length > 0 && (
+          <Flex justifyContent="center" alignItems="center">
+            <Text mr={20}>{Object.keys(selectedRows).length} éléments sélectionnés</Text>
             <Button
               isLoading={mutationLoading}
               onClick={async () => {
@@ -145,9 +139,25 @@ const AdminServiceMesures = props => {
             >
               Supprimer
             </Button>
-          </Box>
+          </Flex>
         )}
       </Flex>
+
+      {antennes.length > 0 && (
+        <Box mb={4}>
+          <Heading4 mb={3}>Antennes</Heading4>
+          {antennes.map((antenne, index) => {
+            return (
+              <Flex key={`antenne-${index}`}>
+                <Text fontWeight="bold">{`- ${antenne.name}`}</Text>
+                <Text ml={2}>
+                  {`(${antenne.mesures_in_progress} en cours • ${antenne.mesures_awaiting} en attente)`}
+                </Text>
+              </Flex>
+            );
+          })}
+        </Box>
+      )}
 
       {mesures.length === 0 ? (
         <Text>Aucune mesure pour le mandataire sélectionné</Text>

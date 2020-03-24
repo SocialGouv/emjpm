@@ -106,12 +106,12 @@ export const DELETE_MESURES = gql`
 
 export const CALCULATE_SERVICE_MESURES = gql`
   mutation admin_update_service_mesures(
-    $id: Int!
+    $serviceId: Int!
     $inProgressMesuresCount: Int!
     $awaitingMesuresCount: Int!
   ) {
     update_services(
-      where: { id: { _eq: $id } }
+      where: { id: { _eq: $serviceId } }
       _set: {
         mesures_in_progress: $inProgressMesuresCount
         mesures_awaiting: $awaitingMesuresCount
