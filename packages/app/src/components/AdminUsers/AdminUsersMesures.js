@@ -1,12 +1,11 @@
 /* eslint-disable react/display-name */
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Checkbox, Label } from "@rebass/forms";
-import { Button, Heading3 } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
 import React, { useMemo, useState } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Text } from "rebass";
 
-import { DynamicTable } from "../DynamicTable";
+import { DynamicTable, DynamicTableHeader } from "../DynamicTable";
 import ErrorBox from "../ErrorBox";
 import { CALCULATE_MANDATAIRE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
@@ -113,30 +112,19 @@ const AdminUsersMesures = props => {
         />
       )}
 
-      <Flex my={3} justifyContent="space-between" alignItems="center">
-        <Box>
-          <Heading3
-            mb={3}
-          >{`Mesures (${mandataire.mesures_en_cours} en cours • ${mandataire.mesures_en_attente} en attente)`}</Heading3>
-        </Box>
-        {mesures.length !== 0 && Object.keys(selectedRows).length > 0 && (
-          <Flex justifyContent="center" alignItems="center">
-            <Text mr={20}>{Object.keys(selectedRows).length} éléments sélectionnés</Text>
-            <Button
-              isLoading={mutationLoading}
-              onClick={async () => {
-                const ids = selectedRows.map(({ id }) => id);
-                await deleteMesures({
-                  refetchQueries: [{ query: MESURES, variables: { userId } }],
-                  variables: { ids }
-                });
-              }}
-            >
-              Supprimer
-            </Button>
-          </Flex>
-        )}
-      </Flex>
+      <DynamicTableHeader
+        onClick={() =>
+          deleteMesures({
+            refetchQueries: [{ query: MESURES, variables: { userId } }],
+            variables: { ids: selectedRows.map(({ id }) => id) }
+          })
+        }
+        buttonText="Supprimer"
+        isLoading={mutationLoading}
+        selectedItemsCount={Object.keys(selectedRows).length}
+        buttonEnable={mesures.length !== 0 && Object.keys(selectedRows).length > 0}
+        title={`Mesures (${mandataire.mesures_en_cours} en cours • ${mandataire.mesures_en_attente} en attente)`}
+      />
 
       {mesures.length === 0 ? (
         <Text>Aucune mesure pour le mandataire sélectionné</Text>

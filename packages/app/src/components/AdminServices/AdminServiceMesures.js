@@ -1,12 +1,12 @@
 /* eslint-disable react/display-name */
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Checkbox, Label } from "@rebass/forms";
-import { Button, Heading3, Heading4 } from "@socialgouv/emjpm-ui-core";
+import { Heading4 } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
 import React, { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { DynamicTable } from "../DynamicTable";
+import { DynamicTable, DynamicTableHeader } from "../DynamicTable";
 import ErrorBox from "../ErrorBox";
 import { CALCULATE_SERVICE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
@@ -118,30 +118,19 @@ const AdminServiceMesures = props => {
         />
       )}
 
-      <Flex mb={3} justifyContent="space-between" alignItems="center">
-        <Box>
-          <Heading3
-            mb={3}
-          >{`Mesures (${service.mesures_in_progress} en cours • ${service.mesures_awaiting} en attente)`}</Heading3>
-        </Box>
-        {mesures.length !== 0 && Object.keys(selectedRows).length > 0 && (
-          <Flex justifyContent="center" alignItems="center">
-            <Text mr={20}>{Object.keys(selectedRows).length} éléments sélectionnés</Text>
-            <Button
-              isLoading={mutationLoading}
-              onClick={async () => {
-                const ids = selectedRows.map(({ id }) => id);
-                await deleteMesures({
-                  refetchQueries: [{ query: MESURES, variables: { serviceId } }],
-                  variables: { ids }
-                });
-              }}
-            >
-              Supprimer
-            </Button>
-          </Flex>
-        )}
-      </Flex>
+      <DynamicTableHeader
+        onClick={() =>
+          deleteMesures({
+            refetchQueries: [{ query: MESURES, variables: { serviceId } }],
+            variables: { ids: selectedRows.map(({ id }) => id) }
+          })
+        }
+        buttonText="Supprimer"
+        isLoading={mutationLoading}
+        selectedItemsCount={Object.keys(selectedRows).length}
+        buttonEnable={mesures.length !== 0 && Object.keys(selectedRows).length > 0}
+        title={`Mesures (${service.mesures_in_progress} en cours • ${service.mesures_awaiting} en attente)`}
+      />
 
       {antennes.length > 0 && (
         <Box mb={4}>
