@@ -4,6 +4,7 @@ import React, { Fragment } from "react";
 import { Link as StyledLink } from "rebass";
 
 import { AdminUserInformations } from "../../../src/components/AdminUsers/AdminUserInformations";
+import AdminUsersMesures from "../../../src/components/AdminUsers/AdminUsersMesures";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { MesureImportMandataire } from "../../../src/components/MesureImport";
 import { isMandataire } from "../../../src/util";
@@ -26,6 +27,15 @@ const getTabInfos = (type, active) => {
     createPanel: UserInformationTabPanel,
     title: "Information"
   });
+
+  tabInfos.push({
+    // eslint-disable-next-line react/display-name
+    createPanel: id => {
+      return <AdminUsersMesures userId={id} />;
+    },
+    title: "Mesures"
+  });
+
   if (active && isMandataire(type)) {
     tabInfos.push({
       createPanel: MandataireImportTabPanel,
@@ -37,7 +47,6 @@ const getTabInfos = (type, active) => {
 
 const User = props => {
   const { userId, type, active } = props;
-
   const tabInfos = getTabInfos(type, active);
 
   return (
