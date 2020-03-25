@@ -2,6 +2,7 @@ import { BoxWrapper, Tab, TabList, TabPanel, Tabs } from "@emjpm/ui";
 import React from "react";
 
 import { IndividuelInformationAgrement } from "../../src/components/IndividuelInformationAgrement";
+import { IndividuelInformationExercice } from "../../src/components/IndividuelInformationExercice";
 import { LayoutMandataire } from "../../src/components/Layout";
 import { MandataireInformations } from "../../src/components/MandataireInformations";
 import { withAuthSync } from "../../src/util/auth";
@@ -22,9 +23,10 @@ const Informations = () => (
         <TabPanel>
           <IndividuelInformationAgrement />
         </TabPanel>
-        {/* <TabPanel>
-          <MandataireInformationModalite />
+        <TabPanel>
+          <IndividuelInformationExercice />
         </TabPanel>
+        {/*
         <TabPanel>
           <MandataireInformationFormation />
         </TabPanel> */}

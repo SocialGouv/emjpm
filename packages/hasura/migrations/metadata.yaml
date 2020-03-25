@@ -501,6 +501,31 @@ tables:
             _eq: X-Hasura-User-Id
 - table:
     schema: public
+    name: individuel_exercices
+  object_relationships:
+  - name: mandataire
+    using:
+      foreign_key_constraint_on: mandataire_id
+  select_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - created_at
+      - mandataire_id
+      - estimation_etp
+      - secretaire_specialise
+      - secretaire_specialise_etp
+      - cumul_prepose
+      - cumul_prepose_etp
+      - cumul_delegue_service
+      - cumul_delegue_service_etp
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+- table:
+    schema: public
     name: magistrat
   object_relationships:
   - name: ti
