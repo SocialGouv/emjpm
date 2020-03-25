@@ -21,11 +21,11 @@ const IndividuelInformationFormation = () => {
     return null;
   }
 
-  if (loading || !data || !data.mandataire_formations) {
+  if (loading || !data || !data.individuel_formations) {
     return null;
   }
 
-  const [formation] = data.mandataire_formations;
+  const [formation] = data.individuel_formations;
 
   return (
     <Box>

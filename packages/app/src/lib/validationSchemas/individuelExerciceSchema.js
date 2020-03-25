@@ -1,9 +1,34 @@
 import yup from "./yup";
 
 const individuelExerciceSchema = yup.object().shape({
-  // anneeAgrement: yup.string().required(),
-  // anneeDebutActivite: yup.number(),
-  // debutActiviteAvant2009: yup.boolean().required()
+  cumulDelegueService: yup.object().shape({
+    label: yup.string().required(),
+    value: yup.boolean().required()
+  }),
+  cumulDelegueServiceEtp: yup.object().shape({
+    label: yup.string().required(),
+    value: yup.string().required()
+  }),
+  cumulPrepose: yup.object().shape({
+    label: yup.string().required(),
+    value: yup.boolean().required()
+  }),
+  cumulPreposeEtp: yup.object().shape({
+    label: yup.string().required(),
+    value: yup.string().required()
+  }),
+  estimationEtp: yup.object().shape({
+    label: yup.string().required(),
+    value: yup.string().required()
+  }),
+  secretaireSpecialise: yup.object().shape({
+    label: yup.string().required(),
+    value: yup.boolean().required()
+  }),
+  secretaireSpecialiseEtp: yup.object().shape({
+    label: yup.string().required(),
+    value: yup.string().required()
+  })
 });
 
 export { individuelExerciceSchema };

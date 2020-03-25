@@ -21,11 +21,11 @@ const IndividuelInformationExercice = () => {
     return null;
   }
 
-  if (loading || !data || !data.mandataire_exercices) {
+  if (loading || !data || !data.individuel_exercices) {
     return null;
   }
 
-  const [exercice] = data.mandataire_exercices;
+  const [exercice] = data.individuel_exercices;
 
   return (
     <Box>
