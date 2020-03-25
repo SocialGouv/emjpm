@@ -462,6 +462,45 @@ tables:
       filter: {}
 - table:
     schema: public
+    name: individuel_agrement_departements
+  object_relationships:
+  - name: departement
+    using:
+      foreign_key_constraint_on: departement_id
+  - name: mandataire
+    using:
+      foreign_key_constraint_on: mandataire_id
+- table:
+    schema: public
+    name: individuel_agrements
+  object_relationships:
+  - name: mandataire
+    using:
+      foreign_key_constraint_on: mandataire_id
+  array_relationships:
+  - name: individuel_agrement_departements
+    using:
+      foreign_key_constraint_on:
+        column: agrement_id
+        table:
+          schema: public
+          name: individuel_agrement_departements
+  select_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - created_at
+      - mandataire_id
+      - debut_activite_avant_2009
+      - annee_debut_activite
+      - annee_agrement
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+- table:
+    schema: public
     name: magistrat
   object_relationships:
   - name: ti

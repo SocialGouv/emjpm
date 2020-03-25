@@ -3,14 +3,14 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { mandataireAgrementSchema } from "../../lib/validationSchemas";
+import { individuelAgrementSchema } from "../../lib/validationSchemas";
 
-const MandataireAgrementForm = props => {
+const IndividuelInformationAgrementForm = props => {
   const { agrement, handleSubmit } = props;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
-    validationSchema: mandataireAgrementSchema,
+    validationSchema: individuelAgrementSchema,
     initialValues: {
       debutAactiviteAvant2009: agrement.debut_activite_avant_2009 || "",
       anneeDebutActivite: agrement.annee_debut_activite || "",
@@ -57,4 +57,4 @@ const MandataireAgrementForm = props => {
   );
 };
 
-export { MandataireAgrementForm };
+export { IndividuelInformationAgrementForm };

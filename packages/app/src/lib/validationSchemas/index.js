@@ -2,13 +2,13 @@ import { adminEditorSchema } from "./adminEditorSchema";
 import { adminTribunalSchema } from "./adminTribunalSchema";
 import { editorTokenSchema } from "./editorTokenSchema";
 import { forgotPasswordSchema } from "./forgotPasswordSchema";
+import { individuelAgrementSchema } from "./individuelAgrementSchema";
 import { loginSchema } from "./loginSchema";
 import { magistratEditSchema } from "./magistratEditSchema";
 import { magistratMandataireSchema } from "./magistratMandataireSchema";
 import { magistratMesureDeleteSchema } from "./magistratMesureDeleteSchema";
 import { magistratMesureEditSchema } from "./magistratMesureEditSchema";
 import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
-import { mandataireAgrementSchema } from "./mandataireAgrementSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
 import { mandataireMesureSchema } from "./mandataireMesureSchema";
 import { mandataireSignupSchema } from "./mandataireSignupSchema";
@@ -40,7 +40,7 @@ export {
   serviceAntenneSchema,
   serviceMesureSchema,
   mandataireSignupSchema,
-  mandataireAgrementSchema,
+  individuelAgrementSchema,
   serviceAcceptMesureSchema,
   serviceMemberInvitationSchema,
   mandataireAcceptMesureSchema,

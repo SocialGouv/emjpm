@@ -3,10 +3,10 @@ import React, { Fragment, useContext } from "react";
 import { Box, Text } from "rebass";
 
 import { UserContext } from "../UserContext";
-import { MandataireAgrementForm } from "./MandataireAgrementForm";
+import { IndividuelInformationAgrementForm } from "./IndividuelInformationAgrementForm";
 import { MANDATAIRE_AGREMENT } from "./queries";
 
-const MandataireAgrement = () => {
+const IndividuelInformationAgrement = () => {
   const { mandataire } = useContext(UserContext);
 
   const handleSubmit = values => {
@@ -30,7 +30,7 @@ const MandataireAgrement = () => {
   return (
     <Box>
       {agrement ? (
-        <MandataireAgrementForm agrement={agrement} handleSubmit={handleSubmit} />
+        <IndividuelInformationAgrementForm agrement={agrement} handleSubmit={handleSubmit} />
       ) : (
         <Fragment>
           <Text>Agrément non disponible.</Text>
@@ -41,4 +41,4 @@ const MandataireAgrement = () => {
   );
 };
 
-export { MandataireAgrement };
+export { IndividuelInformationAgrement };
