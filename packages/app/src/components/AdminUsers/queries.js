@@ -2,7 +2,9 @@ import gql from "graphql-tag";
 
 export const USERS = gql`
   query services($limit: Int, $searchText: String, $offset: Int) {
-    users_aggregate(where: { nom: { _ilike: $searchText } }) {
+    users_aggregate(
+      where: { _or: [{ email: { _ilike: $searchText } }, { nom: { _ilike: $searchText } }] }
+    ) {
       aggregate {
         count
       }
@@ -11,7 +13,7 @@ export const USERS = gql`
       limit: $limit
       order_by: { active: asc, id: desc }
       offset: $offset
-      where: { nom: { _ilike: $searchText } }
+      where: { _or: [{ email: { _ilike: $searchText } }, { nom: { _ilike: $searchText } }] }
     ) {
       id
       nom
@@ -19,6 +21,39 @@ export const USERS = gql`
       type
       email
       active
+    }
+  }
+`;
+
+export const MESURES = gql`
+  query mesures($userId: Int!) {
+    mandataires(where: { user_id: { _eq: $userId } }) {
+      mesures_en_attente
+      mesures_en_cours
+      id
+    }
+    mesures_aggregate(
+      where: { mandataire: { user_id: { _eq: $userId } }, status: { _eq: "Mesure en attente" } }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    mesures(
+      where: { mandataire: { user_id: { _eq: $userId } }, status: { _eq: "Mesure en cours" } }
+    ) {
+      id
+      etablissement
+      numero_dossier
+      residence
+      numero_rg
+      status
+      date_ouverture
+      created_at
+      ti {
+        etablissement
+        ville
+      }
     }
   }
 `;
