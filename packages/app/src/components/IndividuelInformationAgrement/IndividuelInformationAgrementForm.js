@@ -1,9 +1,20 @@
-import { Button, Field, InlineError, Input } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, InlineError, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
-import { Box, Flex } from "rebass";
+import { Flex } from "rebass";
 
 import { individuelAgrementSchema } from "../../lib/validationSchemas";
+
+const DEBUT_ACTIVITE_OPTIONS = [
+  {
+    label: "Oui, mon activité a débuté avant 2009",
+    value: true
+  },
+  {
+    label: "Non, mon activité n'a pas débuté avant 2009",
+    value: false
+  }
+];
 
 const IndividuelInformationAgrementForm = props => {
   const { agrement, handleSubmit } = props;
@@ -12,7 +23,9 @@ const IndividuelInformationAgrementForm = props => {
     onSubmit: handleSubmit,
     validationSchema: individuelAgrementSchema,
     initialValues: {
-      debutAactiviteAvant2009: agrement.debut_activite_avant_2009 || "",
+      debutActiviteAvant2009: DEBUT_ACTIVITE_OPTIONS.find(
+        elm => elm.value === agrement.debut_activite_avant_2009
+      ),
       anneeDebutActivite: agrement.annee_debut_activite || "",
       anneeAgrement: agrement.annee_agrement || ""
     }
@@ -21,30 +34,41 @@ const IndividuelInformationAgrementForm = props => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Field>
-        <Flex>
-          <Box width={["100%", "50%"]}>
-            {`L'activité du mandataire individuel a-t-elle débuté avant 2009?`}
-          </Box>
-          <Box width={["100%", "50%"]}>
-            <Input
-              value={formik.values.debut_activite_avant_2009}
-              type="debut_activite_avant_2009"
-              id="debut_activite_avant_2009"
-              name="debut_activite_avant_2009"
-              hasError={
-                formik.errors.debut_activite_avant_2009 && formik.touched.debut_activite_avant_2009
-              }
-              onChange={formik.handleChange}
-              placeholder="Début d'activité avant 2009"
-            />
-            {formik.touched.debut_activite_avant_2009 && (
-              <InlineError
-                message={formik.errors.debut_activite_avant_2009}
-                fieldId="debut_activite_avant_2009"
-              />
-            )}
-          </Box>
-        </Flex>
+        <Select
+          id="debutActiviteAvant2009"
+          name="debutActiviteAvant2009"
+          placeholder="L'activité du mandataire individuel a-t-elle débuté avant 2009?"
+          value={formik.values.debutActiviteAvant2009}
+          hasError={formik.errors.debutActiviteAvant2009 && formik.touched.debutActiviteAvant2009}
+          onChange={option => formik.setFieldValue("debutActiviteAvant2009", option)}
+          options={DEBUT_ACTIVITE_OPTIONS}
+        />
+        <InlineError
+          message={formik.errors.debutActiviteAvant2009}
+          fieldId="debutActiviteAvant2009"
+        />
+      </Field>
+      <Field>
+        <Input
+          value={formik.values.anneeDebutActivite}
+          id="anneeDebutActivite"
+          name="anneeDebutActivite"
+          hasError={formik.errors.anneeDebutActivite && formik.touched.anneeDebutActivite}
+          onChange={formik.handleChange}
+          placeholder="Année de début de votre activité"
+        />
+        <InlineError message={formik.errors.anneeDebutActivite} fieldId="anneeDebutActivite" />
+      </Field>
+      <Field>
+        <Input
+          value={formik.values.anneeAgrement}
+          id="anneeAgrement"
+          name="anneeAgrement"
+          hasError={formik.errors.anneeAgrement && formik.touched.anneeAgrement}
+          onChange={formik.handleChange}
+          placeholder="Année d'obtention de votre agrément"
+        />
+        <InlineError message={formik.errors.anneeAgrement} fieldId="anneeAgrement" />
       </Field>
       <Flex>
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
