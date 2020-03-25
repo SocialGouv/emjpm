@@ -14,9 +14,7 @@ const IndividuelInformationAgrementForm = props => {
     initialValues: {
       debutAactiviteAvant2009: agrement.debut_activite_avant_2009 || "",
       anneeDebutActivite: agrement.annee_debut_activite || "",
-      anneeAgrement: agrement.annee_agrement || "",
-      departementFinanceur: agrement.departement_financeur || "",
-      departementsAgrement: agrement.departements_agrement || []
+      anneeAgrement: agrement.annee_agrement || ""
     }
   });
 

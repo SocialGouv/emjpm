@@ -3,6 +3,7 @@ import React from "react";
 
 import { IndividuelInformationAgrement } from "../../src/components/IndividuelInformationAgrement";
 import { IndividuelInformationExercice } from "../../src/components/IndividuelInformationExercice";
+import { IndividuelInformationFormation } from "../../src/components/IndividuelInformationFormation";
 import { LayoutMandataire } from "../../src/components/Layout";
 import { MandataireInformations } from "../../src/components/MandataireInformations";
 import { withAuthSync } from "../../src/util/auth";
@@ -26,10 +27,9 @@ const Informations = () => (
         <TabPanel>
           <IndividuelInformationExercice />
         </TabPanel>
-        {/*
         <TabPanel>
-          <MandataireInformationFormation />
-        </TabPanel> */}
+          <IndividuelInformationFormation />
+        </TabPanel>
       </Tabs>
     </BoxWrapper>
   </LayoutMandataire>
