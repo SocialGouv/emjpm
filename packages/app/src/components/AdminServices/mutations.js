@@ -95,3 +95,29 @@ export const DELETE_SERVICE_TIS = gql`
     }
   }
 `;
+
+export const DELETE_MESURES = gql`
+  mutation admin_delete_service_mesures($ids: [Int!]) {
+    delete_mesures(where: { id: { _in: $ids } }) {
+      affected_rows
+    }
+  }
+`;
+
+export const CALCULATE_SERVICE_MESURES = gql`
+  mutation admin_update_service_mesures(
+    $serviceId: Int!
+    $inProgressMesuresCount: Int!
+    $awaitingMesuresCount: Int!
+  ) {
+    update_services(
+      where: { id: { _eq: $serviceId } }
+      _set: {
+        mesures_in_progress: $inProgressMesuresCount
+        mesures_awaiting: $awaitingMesuresCount
+      }
+    ) {
+      affected_rows
+    }
+  }
+`;
