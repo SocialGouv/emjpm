@@ -17,13 +17,13 @@ export enum CacheControlScope {
 }
 
 export type Department = {
-  __typename?: 'Department',
+   __typename?: 'Department',
   code: Scalars['String'],
   nom: Scalars['String'],
 };
 
 export type DepartmentAvailibility = {
-  __typename?: 'DepartmentAvailibility',
+   __typename?: 'DepartmentAvailibility',
   department: Department,
   inProgress: Scalars['Int'],
   available: Scalars['Int'],
@@ -40,7 +40,7 @@ export enum MesureTypeCategory {
 }
 
 export type MesureTypeCategoryEvolution = {
-  __typename?: 'MesureTypeCategoryEvolution',
+   __typename?: 'MesureTypeCategoryEvolution',
   start: Scalars['String'],
   end: Scalars['String'],
   mesureTypeCategory: MesureTypeCategory,
@@ -48,20 +48,36 @@ export type MesureTypeCategoryEvolution = {
 };
 
 export type MesureTypeCategoryStatistic = {
-  __typename?: 'MesureTypeCategoryStatistic',
+   __typename?: 'MesureTypeCategoryStatistic',
   mesureTypeCategory: MesureTypeCategory,
   number: Scalars['Int'],
 };
 
 export type MonthlyNumber = {
-  __typename?: 'MonthlyNumber',
+   __typename?: 'MonthlyNumber',
   month: Scalars['Int'],
   year: Scalars['Int'],
   number: Scalars['Int'],
 };
 
+export type Mutation = {
+   __typename?: 'Mutation',
+  recalculateMandataireMesuresCount?: Maybe<UpdatedRows>,
+  recalculateServiceMesuresCount?: Maybe<UpdatedRows>,
+};
+
+
+export type MutationRecalculateMandataireMesuresCountArgs = {
+  userId: Scalars['Int']
+};
+
+
+export type MutationRecalculateServiceMesuresCountArgs = {
+  serviceId: Scalars['Int']
+};
+
 export type Query = {
-  __typename?: 'Query',
+   __typename?: 'Query',
   newMesureNumber: Scalars['Int'],
   closedMesureNumber: Scalars['Int'],
   openMesureNumber: Scalars['Int'],
@@ -117,5 +133,11 @@ export type QueryMesureTypeCategoryEvolutionArgs = {
   region?: Maybe<Scalars['Int']>,
   department?: Maybe<Scalars['Int']>,
   court?: Maybe<Scalars['Int']>
+};
+
+export type UpdatedRows = {
+   __typename?: 'UpdatedRows',
+  success: Scalars['Boolean'],
+  updatedRows?: Maybe<Scalars['Int']>,
 };
 

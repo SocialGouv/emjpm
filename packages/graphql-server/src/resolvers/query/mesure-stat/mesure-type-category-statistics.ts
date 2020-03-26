@@ -1,5 +1,5 @@
 import { DataSource } from "../../../datasource";
-import { SearchMesureResult } from "../../../datasource/mesure.api";
+import { SearchMesureResult } from "../../../types";
 import {
   MesureTypeCategoryStatistic,
   QueryMesureTypeCategoryStatisticsArgs
