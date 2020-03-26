@@ -1,5 +1,7 @@
 import yup from "./yup";
 
+const year = new Date().getFullYear();
+
 const individuelAgrementSchema = yup.object().shape({
   anneeAgrement: yup
     .number()
@@ -11,7 +13,7 @@ const individuelAgrementSchema = yup.object().shape({
       .number()
       .required()
       .min(1950)
-      .max(2025)
+      .max(year)
   }),
   debutActiviteAvant2009: yup.object().shape({
     label: yup.string().required(),

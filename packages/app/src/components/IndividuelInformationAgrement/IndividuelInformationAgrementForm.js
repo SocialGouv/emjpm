@@ -30,7 +30,7 @@ const IndividuelInformationAgrementForm = props => {
           name="debutActiviteAvant2009"
           placeholder="L'activité du mandataire individuel a-t-elle débuté avant 2009?"
           value={formik.values.debutActiviteAvant2009}
-          hasError={formik.errors.debutActiviteAvant2009 && formik.touched.debutActiviteAvant2009}
+          hasError={formik.errors.debutActiviteAvant2009}
           onChange={option => {
             formik.setFieldValue("debutActiviteAvant2009", option);
             if (!option) {
@@ -50,7 +50,7 @@ const IndividuelInformationAgrementForm = props => {
             value={formik.values.anneeDebutActivite}
             id="anneeDebutActivite"
             name="anneeDebutActivite"
-            hasError={formik.errors.anneeDebutActivite && formik.touched.anneeDebutActivite}
+            hasError={formik.errors.anneeDebutActivite}
             onChange={formik.handleChange}
             placeholder="Année de début de votre activité"
           />
@@ -62,7 +62,7 @@ const IndividuelInformationAgrementForm = props => {
           value={formik.values.anneeAgrement}
           id="anneeAgrement"
           name="anneeAgrement"
-          hasError={formik.errors.anneeAgrement && formik.touched.anneeAgrement}
+          hasError={formik.errors.anneeAgrement}
           onChange={formik.handleChange}
           placeholder="Année d'obtention de votre agrément"
         />

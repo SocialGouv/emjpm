@@ -1,11 +1,29 @@
 import yup from "./yup";
 
+const year = new Date().getFullYear();
+
 const individuelFormationSchema = yup.object().shape({
-  cncDpfAnneeObtention: yup.number(),
-  cncDpfHeureFormation: yup.number(),
-  cncMajAnneeObtention: yup.number(),
-  cncMajHeureFormation: yup.number(),
-  cncMjpmAnneeObtention: yup.number().required(),
+  cncDpfAnneeObtention: yup
+    .number()
+    .min(1950)
+    .max(year),
+  cncDpfHeureFormation: yup.number().when("cncDpfAnneeObtention", {
+    is: cncDpfAnneeObtention => cncDpfAnneeObtention,
+    then: yup.number().required()
+  }),
+  cncMajAnneeObtention: yup
+    .number()
+    .min(1950)
+    .max(year),
+  cncMajHeureFormation: yup.number().when("cncMajAnneeObtention", {
+    is: cncMajAnneeObtention => cncMajAnneeObtention,
+    then: yup.number().required()
+  }),
+  cncMjpmAnneeObtention: yup
+    .number()
+    .required()
+    .min(1950)
+    .max(year),
   cncMjpmHeureFormation: yup.number().required(),
   niveauQualification: yup
     .number()

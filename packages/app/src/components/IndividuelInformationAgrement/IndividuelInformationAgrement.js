@@ -29,7 +29,6 @@ const IndividuelInformationAgrement = () => {
         }
       });
     } catch (error) {
-      console.log(error);
       Sentry.captureException(error);
       setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
     }
