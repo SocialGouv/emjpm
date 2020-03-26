@@ -1,33 +1,24 @@
 import yup from "./yup";
 
 const individuelExerciceSchema = yup.object().shape({
-  cumulDelegueService: yup.object().shape({
-    label: yup.string().required(),
-    value: yup.boolean().required()
+  cumulDelegueService: yup.object().required(),
+  cumulDelegueServiceEtp: yup.object().when("cumulDelegueService", {
+    is: cumulDelegueService => cumulDelegueService.value,
+    then: yup.object().required()
   }),
-  cumulDelegueServiceEtp: yup.object().shape({
-    label: yup.string().required(),
-    value: yup.string().required()
-  }),
-  cumulPrepose: yup.object().shape({
-    label: yup.string().required(),
-    value: yup.boolean().required()
-  }),
-  cumulPreposeEtp: yup.object().shape({
-    label: yup.string().required(),
-    value: yup.string().required()
+  cumulPrepose: yup.object().required(),
+  cumulPreposeEtp: yup.object().when("cumulPrepose", {
+    is: cumulPrepose => cumulPrepose.value,
+    then: yup.object().required()
   }),
   estimationEtp: yup.object().shape({
-    label: yup.string().required(),
+    label: yup.string(),
     value: yup.string().required()
   }),
-  secretaireSpecialise: yup.object().shape({
-    label: yup.string().required(),
-    value: yup.boolean().required()
-  }),
-  secretaireSpecialiseEtp: yup.object().shape({
-    label: yup.string().required(),
-    value: yup.string().required()
+  secretaireSpecialise: yup.object().required(),
+  secretaireSpecialiseEtp: yup.object().when("secretaireSpecialise", {
+    is: secretaireSpecialise => secretaireSpecialise.value,
+    then: yup.object().required()
   })
 });
 
