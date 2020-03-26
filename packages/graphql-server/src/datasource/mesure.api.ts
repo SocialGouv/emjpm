@@ -43,7 +43,7 @@ export class MesureAPI extends AuthDataSource {
     serviceId: number
   ): Promise<CountServiceMesuresQueryResult> {
     const query = `
-    query mandataire_mesures($serviceId: Int!) {
+    query service_mesures($serviceId: Int!) {
       inprogressMesures: mesures_aggregate(
         where: { status: { _eq: "Mesure en attente" }, service_id: { _eq: $serviceId } }
       ) {
@@ -59,17 +59,23 @@ export class MesureAPI extends AuthDataSource {
         }
       }
       services(where: { id: { _eq: $serviceId } }) {
+        id
+        mesures_awaiting
+        mesures_in_progress
+      }
+      service_antenne(where: { service_id: { _eq: $serviceId } }) {
+        service_id
         mesures_awaiting
         mesures_in_progress
       }
     }`;
 
-    const body = JSON.stringify({
-      operationName: "mandataire_mesures",
+    const response = await this.post<CountServiceMesuresQueryResult>("/", {
+      operationName: "service_mesures",
       query,
       variables: { serviceId }
     });
-    const response = await this.post<CountServiceMesuresQueryResult>("/", body);
+
     return response;
   }
 

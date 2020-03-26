@@ -5,6 +5,9 @@ export interface UpdateServiceMesuresResponse {
     update_services: {
       affected_rows: number;
     };
+    update_service_antenne: {
+      affected_rows: number;
+    }
   };
 }
 
@@ -48,6 +51,12 @@ export interface CountServiceMesuresQueryResult {
       };
     };
     services: {
+      id: number;
+      mesures_awaiting: number;
+      mesures_in_progress: number;
+    }[];
+    service_antenne: {
+      service_id: number;
       mesures_awaiting: number;
       mesures_in_progress: number;
     }[];

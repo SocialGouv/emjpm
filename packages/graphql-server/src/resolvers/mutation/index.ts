@@ -11,11 +11,12 @@ export const recalculateMandataireMesuresCount = async (
   args: MutationRecalculateMandataireMesuresCountArgs,
   { dataSources }: { dataSources: DataSource }
 ): Promise<UpdatedRows> => {
+  logger.info(`Calculating the total number of "mesures" by "mandataire"...`);
   const { userId } = args;
   try {
     const { data } = await dataSources.mesureAPI.countMandataireMesures(userId);
     if (!data) {
-      throw new Error("graphql request return wrong result");
+      throw new Error("Graphql request return wrong result");
     }
     const {
       awaitingMesures: {
@@ -28,6 +29,18 @@ export const recalculateMandataireMesuresCount = async (
     } = data;
 
     const [mandataire] = mandataires;
+
+    logger.info({
+      awaitingMesures: {
+        actual: mandataire.mesures_awaiting,
+        real: awaitingMesuresCount
+      },
+      inprogressMesures: {
+        actual: mandataire.mesures_in_progress,
+        real: inprogressMesuresCount
+      },
+      userId
+    });
 
     if (
       mandataire.mesures_awaiting === awaitingMesuresCount &&
@@ -67,13 +80,13 @@ export const recalculateServiceMesuresCount = async (
   args: MutationRecalculateServiceMesuresCountArgs,
   { dataSources }: { dataSources: DataSource }
 ): Promise<UpdatedRows> => {
+  logger.info(`Calculating the total number of "mesures" by "service"...`);
   const { serviceId } = args;
   try {
     const { data } = await dataSources.mesureAPI.countServiceMesures(serviceId);
     if (!data) {
-      throw new Error("graphql request return wrong result");
+      throw new Error("Graphql request return wrong result");
     }
-
     const {
       awaitingMesures: {
         aggregate: { count: awaitingMesuresCount }
@@ -81,14 +94,37 @@ export const recalculateServiceMesuresCount = async (
       inprogressMesures: {
         aggregate: { count: inprogressMesuresCount }
       },
-      services
+      services,
+      service_antenne
     } = data;
 
     const [service] = services;
 
+    const serviceAntenneShouldBeUpdated = service_antenne.some(
+      sa =>
+        sa.mesures_awaiting !== awaitingMesuresCount ||
+        sa.mesures_in_progress !== inprogressMesuresCount
+    );
+
+    logger.info({
+      service: {
+        awaitingMesures: {
+          actual: service.mesures_awaiting,
+          real: awaitingMesuresCount
+        },
+        inprogressMesures: {
+          actual: service.mesures_in_progress,
+          real: inprogressMesuresCount
+        }
+      },
+      serviceAntenneShouldBeUpdated,
+      serviceId: service.id
+    });
+
     if (
       service.mesures_awaiting === awaitingMesuresCount &&
-      service.mesures_in_progress === inprogressMesuresCount
+      service.mesures_in_progress === inprogressMesuresCount &&
+      !serviceAntenneShouldBeUpdated
     ) {
       return {
         success: true,
@@ -98,7 +134,8 @@ export const recalculateServiceMesuresCount = async (
 
     const {
       data: {
-        update_services: { affected_rows: updatedRows }
+        update_services: { affected_rows: updatedRowsServices },
+        update_service_antenne: { affected_rows: updatedRowsServiceAntenne }
       }
     } = await dataSources.serviceAPI.updateServiceMesures(
       serviceId,
@@ -106,9 +143,13 @@ export const recalculateServiceMesuresCount = async (
       inprogressMesuresCount
     );
 
+    logger.info(
+      `services: ${updatedRowsServices} updated rows | service_antenne: ${updatedRowsServiceAntenne} updated rows`
+    );
+
     return {
       success: true,
-      updatedRows
+      updatedRows: updatedRowsServices + updatedRowsServiceAntenne
     };
   } catch (err) {
     logger.error(err.message);
