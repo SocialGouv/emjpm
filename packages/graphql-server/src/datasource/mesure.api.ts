@@ -1,5 +1,9 @@
-import { Mesures, MesureStatus } from "../model/mesures.model";
-import { NullableNumber } from "../utils/types.util";
+import {
+  CountMandataireMesuresQueryResult,
+  CountServiceMesuresQueryResult,
+  SearchMesureResult,
+  SearchMesuresParam
+} from "../types";
 import { AuthDataSource } from "./auth-datasource";
 
 const convertDates = (mesure: SearchMesureResult) => {
@@ -9,46 +13,6 @@ const convertDates = (mesure: SearchMesureResult) => {
   mesure.extinction = mesure.extinction ? new Date(mesure.extinction) : null;
   return mesure;
 };
-
-export interface SearchMesureResultWrapper {
-  mesures: SearchMesureResult[];
-}
-
-export interface SearchMesuresParam {
-  closed?: {
-    between?: {
-      start: string;
-      end: string;
-    };
-    gt_or_null?: string;
-  };
-  court?: NullableNumber;
-  created?: {
-    between?: {
-      start: string;
-      end: string;
-    };
-    lt?: string;
-  };
-  department?: NullableNumber;
-  opening?: {
-    between?: {
-      start: string;
-      end: string;
-    };
-    lt?: string;
-  };
-  region?: NullableNumber;
-  status?: MesureStatus;
-  type?: {
-    _in: string[];
-  };
-}
-
-export type SearchMesureResult = Pick<
-  Mesures,
-  "date_ouverture" | "cabinet" | "civilite" | "status" | "type" | "extinction"
->;
 
 export class MesureAPI extends AuthDataSource {
   constructor() {
@@ -73,6 +37,79 @@ export class MesureAPI extends AuthDataSource {
     return this.post("/", { query }).then(response => {
       return response.data.mesures.map(convertDates);
     });
+  }
+
+  public async countServiceMesures(
+    serviceId: number
+  ): Promise<CountServiceMesuresQueryResult> {
+    const query = `
+    query service_mesures($serviceId: Int!) {
+      inprogressMesures: mesures_aggregate(
+        where: { status: { _eq: "Mesure en attente" }, service_id: { _eq: $serviceId } }
+      ) {
+        aggregate {
+          count(columns: id)
+        }
+      }
+      awaitingMesures: mesures_aggregate(
+        where: { status: { _eq: "Mesure en cours" }, service_id: { _eq: $serviceId } }
+      ) {
+        aggregate {
+          count(columns: id)
+        }
+      }
+      services(where: { id: { _eq: $serviceId } }) {
+        id
+        mesures_awaiting
+        mesures_in_progress
+      }
+      service_antenne(where: { service_id: { _eq: $serviceId } }) {
+        service_id
+        mesures_awaiting
+        mesures_in_progress
+      }
+    }`;
+
+    const response = await this.post<CountServiceMesuresQueryResult>("/", {
+      operationName: "service_mesures",
+      query,
+      variables: { serviceId }
+    });
+
+    return response;
+  }
+
+  public async countMandataireMesures(
+    userId: number
+  ): Promise<CountMandataireMesuresQueryResult> {
+    const query = `
+    query mandataire_mesures($userId: Int!) {
+      inprogressMesures: mesures_aggregate(
+        where: { status: { _eq: "Mesure en attente" }, mandataire: { user_id: { _eq: $userId } } }
+      ) {
+        aggregate {
+          count(columns: id)
+        }
+      }
+      awaitingMesures: mesures_aggregate(
+        where: { status: { _eq: "Mesure en cours" }, mandataire: { user_id: { _eq: $userId } } }
+      ) {
+        aggregate {
+          count(columns: id)
+        }
+      }
+      mandataires(where: { user_id: { _eq: $userId } }) {
+        mesures_awaiting
+        mesures_in_progress
+      }
+    }`;
+
+    const response = await this.post<CountMandataireMesuresQueryResult>("/", {
+      operationName: "mandataire_mesures",
+      query,
+      variables: { userId }
+    });
+    return response;
   }
 
   public countMesures(params: SearchMesuresParam) {
