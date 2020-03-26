@@ -6,11 +6,16 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { DELETE_MESURE } from "../ServiceMesures/mutations";
+import { DELETE_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
 
 export const ServiceDeleteMesureForm = props => {
   const { mesure } = props;
-  const [deleteMesure] = useMutation(DELETE_MESURE);
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES);
+  const [deleteMesure] = useMutation(DELETE_MESURE, {
+    onCompleted: async () => {
+      await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
+    }
+  });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {

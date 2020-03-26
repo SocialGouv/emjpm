@@ -10,14 +10,18 @@ import { COUNTRIES, RESIDENCE } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
-import { UPDATE_MANDATAIRES_COUTERS } from "../MandataireMesures/mutations";
-import { ACCEPT_MESURE } from "./mutations";
+import { ACCEPT_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 
 export const MandataireMesureAcceptForm = props => {
   const { mesure, departementsData } = props;
   const geocode = geocodeInitialValue();
-  const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
-  const [updateMesure] = useMutation(ACCEPT_MESURE);
+
+  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
+  const [updateMesure] = useMutation(ACCEPT_MESURE, {
+    onCompleted: async () => {
+      await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataire_id } });
+    }
+  });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
@@ -53,16 +57,8 @@ export const MandataireMesureAcceptForm = props => {
         }
       });
 
-      await updateMandatairesCounter({
-        variables: {
-          mandataireId: mesure.mandataireId,
-          mesures_awaiting: -1,
-          mesures_in_progress: 1
-        }
-      });
-
       setSubmitting(false);
-      Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
+      await Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
         shallow: true
       });
     },

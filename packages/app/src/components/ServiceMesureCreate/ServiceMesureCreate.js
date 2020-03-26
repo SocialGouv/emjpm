@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 
 import { getRegionCode } from "../../util/departements";
 import { formatServiceTribunalList } from "../../util/services";
-import { ADD_MESURE, UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "./mutations";
+import { ADD_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
 import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
 import { ServiceMesureCreateForm } from "./ServiceMesureCreateForm";
 
@@ -24,42 +24,15 @@ export const ServiceMesureCreate = props => {
     error: departementsError
   } = useQuery(DEPARTEMENTS);
 
-  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
-  const [updateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
-
+  const [recalculateServiceMesure] = useMutation(RECALCULATE_SERVICE_MESURES);
   const [addMesure] = useMutation(ADD_MESURE, {
     options: { refetchQueries: ["mesures", "mesures_aggregate"] },
-    onCompleted({ insert_mesures }) {
+    onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
-      Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
+      await recalculateServiceMesure({ variables: { service_id: mesure.service_id } });
+      await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
         shallow: true
       });
-    },
-    update(
-      cache,
-      {
-        data: {
-          insert_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      updateServicesCounter({
-        variables: {
-          mesures_awaiting: 0,
-          mesures_in_progress: 1,
-          service_id: mesure.service_id
-        }
-      });
-      if (mesure.antenne_id) {
-        updateAntenneCounters({
-          variables: {
-            antenne_id: mesure.antenne_id,
-            inc_mesures_awaiting: 0,
-            inc_mesures_in_progress: 1
-          }
-        });
-      }
     }
   });
 

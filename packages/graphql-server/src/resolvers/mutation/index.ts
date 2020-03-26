@@ -11,8 +11,10 @@ export const recalculateMandataireMesuresCount = async (
   args: MutationRecalculateMandataireMesuresCountArgs,
   { dataSources }: { dataSources: DataSource }
 ): Promise<UpdatedRows> => {
-  logger.info(`Calculating the total number of mesures by mandataire...`);
   const { mandataireId } = args;
+  logger.info(
+    `Calculating the total number of mesures by mandataire (id: ${mandataireId})...`
+  );
   try {
     const { data } = await dataSources.mesureAPI.countMandataireMesures(
       mandataireId

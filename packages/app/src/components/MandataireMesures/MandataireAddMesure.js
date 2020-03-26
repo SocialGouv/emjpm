@@ -19,7 +19,7 @@ import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 import { UserContext } from "../UserContext";
-import { ADD_MESURE, UPDATE_MANDATAIRES_COUTERS } from "./mutations";
+import { ADD_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { DEPARTEMENTS, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
 import { formatUserTribunalList } from "./utils";
 
@@ -108,31 +108,15 @@ export const MandataireAddMesure = props => {
     error: departementsError
   } = useQuery(DEPARTEMENTS);
 
-  const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
+  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
 
   const [addMesure] = useMutation(ADD_MESURE, {
-    onCompleted() {
-      Router.push("/mandataires");
-    },
-    options: {
-      refetchQueries: ["mesures", "mesures_aggregate"]
-    },
-    update(
-      cache,
-      {
-        data: {
-          insert_mesures: { returning }
-        }
-      }
-    ) {
-      const [mesure] = returning;
-      updateMandatairesCounter({
-        variables: {
-          mandataireId: mesure.mandataire_id,
-          mesures_awaiting: 0,
-          mesures_in_progress: 1
-        }
+    onCompleted: async () => {
+      await recalculateMandataireMesures({
+        variables: { mandataire_id: id },
+        refetchQueries: ["mesures", "mesures_aggregate", "users"]
       });
+      await Router.push("/mandataires", { shallow: true });
     }
   });
 

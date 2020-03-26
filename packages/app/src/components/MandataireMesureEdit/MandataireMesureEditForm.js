@@ -11,7 +11,7 @@ import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
-import { EDIT_MESURE } from "./mutations";
+import { EDIT_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 
 export const MandataireMesureEditForm = props => {
   const { mesure } = props;
@@ -36,7 +36,12 @@ export const MandataireMesureEditForm = props => {
 
   const geocode = geocodeInitialValue(mesure);
 
-  const [editMesure] = useMutation(EDIT_MESURE);
+  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
+  const [editMesure] = useMutation(EDIT_MESURE, {
+    onCompleted: async () => {
+      await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
+    }
+  });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
