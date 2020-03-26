@@ -11,10 +11,12 @@ export const recalculateMandataireMesuresCount = async (
   args: MutationRecalculateMandataireMesuresCountArgs,
   { dataSources }: { dataSources: DataSource }
 ): Promise<UpdatedRows> => {
-  logger.info(`Calculating the total number of "mesures" by "mandataire"...`);
-  const { userId } = args;
+  logger.info(`Calculating the total number of mesures by mandataire...`);
+  const { mandataireId } = args;
   try {
-    const { data } = await dataSources.mesureAPI.countMandataireMesures(userId);
+    const { data } = await dataSources.mesureAPI.countMandataireMesures(
+      mandataireId
+    );
     if (!data) {
       throw new Error("Graphql request return wrong result");
     }
@@ -32,19 +34,19 @@ export const recalculateMandataireMesuresCount = async (
 
     logger.info({
       awaitingMesures: {
-        actual: mandataire.mesures_awaiting,
+        actual: mandataire.mesures_en_attente,
         real: awaitingMesuresCount
       },
       inprogressMesures: {
-        actual: mandataire.mesures_in_progress,
+        actual: mandataire.mesures_en_cours,
         real: inprogressMesuresCount
       },
-      userId
+      mandataireId
     });
 
     if (
-      mandataire.mesures_awaiting === awaitingMesuresCount &&
-      mandataire.mesures_in_progress === inprogressMesuresCount
+      mandataire.mesures_en_attente === awaitingMesuresCount &&
+      mandataire.mesures_en_cours === inprogressMesuresCount
     ) {
       return {
         success: true,
@@ -57,7 +59,7 @@ export const recalculateMandataireMesuresCount = async (
         update_mandataires: { affected_rows: updatedRows }
       }
     } = await dataSources.mandataireAPI.updateMandataireMesures(
-      userId,
+      mandataireId,
       awaitingMesuresCount,
       inprogressMesuresCount
     );
@@ -80,7 +82,7 @@ export const recalculateServiceMesuresCount = async (
   args: MutationRecalculateServiceMesuresCountArgs,
   { dataSources }: { dataSources: DataSource }
 ): Promise<UpdatedRows> => {
-  logger.info(`Calculating the total number of "mesures" by "service"...`);
+  logger.info(`Calculating the total number of mesures by service...`);
   const { serviceId } = args;
   try {
     const { data } = await dataSources.mesureAPI.countServiceMesures(serviceId);
