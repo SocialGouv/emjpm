@@ -11,7 +11,7 @@ export const TRIBUNAUX = gql`
       limit: $limit
       order_by: { code_postal: asc }
       offset: $offset
-      where: { ville: { _ilike: $searchText } }
+      where: { _or: [{ ville: { _ilike: $searchText } }, { siret: { _ilike: $searchText } }] }
     ) {
       id
       etablissement
