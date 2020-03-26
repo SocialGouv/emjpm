@@ -1,7 +1,7 @@
 import { Button, Field, InlineError, Input, Select } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
-import { Flex } from "rebass";
+import { Flex, Text } from "rebass";
 
 import { YES_NO_OPTIONS } from "../../constants/mandataire";
 import { individuelAgrementSchema } from "../../lib/validationSchemas";
@@ -25,6 +25,7 @@ const IndividuelInformationAgrementForm = props => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Field>
+        <Text>{"L'activité du mandataire individuel a-t-elle débuté avant 2009?"}</Text>
         <Select
           id="debutActiviteAvant2009"
           name="debutActiviteAvant2009"
@@ -46,6 +47,7 @@ const IndividuelInformationAgrementForm = props => {
       </Field>
       {getOptionValue(formik.values.debutActiviteAvant2009) && (
         <Field>
+          <Text>{"Année de début de votre activité"}</Text>
           <Input
             value={formik.values.anneeDebutActivite}
             id="anneeDebutActivite"
@@ -58,6 +60,7 @@ const IndividuelInformationAgrementForm = props => {
         </Field>
       )}
       <Field>
+        <Text>{"Année d'obtention de votre agrément"}</Text>
         <Input
           value={formik.values.anneeAgrement}
           id="anneeAgrement"

@@ -1,7 +1,7 @@
 import { Button, Field, InlineError, Select } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
-import { Flex } from "rebass";
+import { Flex, Text } from "rebass";
 
 import {
   INTERVALLE_ETP_OPTIONS,
@@ -33,6 +33,7 @@ const IndividuelInformationExerciceForm = props => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Field>
+        <Text>{"Estimation de l'activité de mandataire individuel en ETP"}</Text>
         <Select
           id="estimationEtp"
           name="estimationEtp"
@@ -45,6 +46,7 @@ const IndividuelInformationExerciceForm = props => {
         <InlineError message={formik.errors.estimationEtp} fieldId="estimationEtp" />
       </Field>
       <Field>
+        <Text>{"Estimation de l'activité de mandataire individuel en ETP"}</Text>
         <Select
           id="secretaireSpecialise"
           name="secretaireSpecialise"
@@ -63,6 +65,7 @@ const IndividuelInformationExerciceForm = props => {
       </Field>
       {getOptionValue(formik.values.secretaireSpecialise) && (
         <Field>
+          <Text>{"Estimation de l'activité en ETP du secrétaire spécialisé"}</Text>
           <Select
             id="secretaireSpecialiseEtp"
             name="secretaireSpecialiseEtp"
@@ -79,6 +82,7 @@ const IndividuelInformationExerciceForm = props => {
         </Field>
       )}
       <Field>
+        <Text>{"Situation de cumul en tant que préposé d'établissement"}</Text>
         <Select
           id="cumulPrepose"
           name="cumulPrepose"
@@ -97,10 +101,11 @@ const IndividuelInformationExerciceForm = props => {
       </Field>
       {getOptionValue(formik.values.cumulPrepose) && (
         <Field>
+          <Text>{"ETP consacré au cumul en tant que préposé"}</Text>
           <Select
             id="cumulPreposeEtp"
             name="cumulPreposeEtp"
-            placeholder="Si cumul en tant que préposé, ETP consacré au cumul"
+            placeholder="ETP consacré au cumul en tant que préposé"
             value={formik.values.cumulPreposeEtp}
             hasError={formik.errors.cumulPreposeEtp}
             onChange={option => formik.setFieldValue("cumulPreposeEtp", option)}
@@ -111,6 +116,7 @@ const IndividuelInformationExerciceForm = props => {
       )}
 
       <Field>
+        <Text>{"Situation de cumul en tant que délégué d'une service"}</Text>
         <Select
           id="cumulDelegueService"
           name="cumulDelegueService"
@@ -129,10 +135,11 @@ const IndividuelInformationExerciceForm = props => {
       </Field>
       {getOptionValue(formik.values.cumulDelegueService) && (
         <Field>
+          <Text>{"ETP consacré au cumul en tant que délégué d'un service mandataire"}</Text>
           <Select
             id="cumulDelegueServiceEtp"
             name="cumulDelegueServiceEtp"
-            placeholder="Si cumul en tant que délégué d'un service mandataire, ETP consacré au cumul"
+            placeholder="ETP consacré au cumul en tant que délégué d'un service mandataire"
             value={formik.values.cumulDelegueServiceEtp}
             hasError={formik.errors.cumulDelegueServiceEtp}
             onChange={option => formik.setFieldValue("cumulDelegueServiceEtp", option)}

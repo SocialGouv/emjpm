@@ -1,12 +1,13 @@
 import { Button, Field, InlineError, Input } from "@socialgouv/emjpm-ui-core";
 import { useFormik } from "formik";
 import React from "react";
-import { Flex } from "rebass";
+import { Flex, Text } from "rebass";
 
 import { individuelFormationSchema } from "../../lib/validationSchemas";
 
 const InputField = ({ formik, property, placeholder, onChange }) => (
   <Field>
+    <Text>{placeholder}</Text>
     <Input
       value={formik.values[property]}
       id={property}
