@@ -1,4 +1,5 @@
 import { DataSource } from "../../datasource";
+import { logger } from "../../logger";
 import {
   MutationRecalculateMandataireMesuresCountArgs,
   MutationRecalculateServiceMesuresCountArgs,
@@ -53,8 +54,7 @@ export const recalculateMandataireMesuresCount = async (
       updatedRows
     };
   } catch (err) {
-    // TODO(remiroyc): logger ?
-    // console.error("recalculateMandataireMesuresCount: " + err.message);
+    logger.error(err.message);
     return {
       success: false,
       updatedRows: 0
@@ -111,8 +111,7 @@ export const recalculateServiceMesuresCount = async (
       updatedRows
     };
   } catch (err) {
-    // TODO(remiroyc): logger ?
-    // console.error("recalculateServiceMesuresCount: " + err.message);
+    logger.error(err.message);
     return {
       success: false,
       updatedRows: 0
