@@ -39,6 +39,16 @@ export default gql`
     departmentAvailabilities: [DepartmentAvailibility!]!
   }
 
+  type Mutation {
+    recalculateMandataireMesuresCount(userId: Int!): UpdatedRows
+    recalculateServiceMesuresCount(serviceId: Int!): UpdatedRows
+  }
+
+  type UpdatedRows {
+    success: Boolean!
+    updatedRows: Int
+  }
+
   type DepartmentAvailibility {
     department: Department!
     inProgress: Int!
