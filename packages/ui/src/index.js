@@ -1,17 +1,5 @@
-export * from './core/Button';
-export * from './core/Grid';
-export * from './core/Card';
-export * from './core/Checkbox';
-export * from './core/Heading';
-export * from './core/InlineError';
-export * from './core/Input';
-export * from './core/Radio';
-export * from './core/RadioGroup';
-export * from './core/Select';
-export * from './core/Spinner';
-export * from './core/Type';
-export * from './core/Hooks';
-export * from './core/Tabs';
-export * from './core/Logo';
-export * from './core/Field';
-export * from './core/Textarea';
+// Core
+export * from './core';
+
+// Components
+export * from './components';
