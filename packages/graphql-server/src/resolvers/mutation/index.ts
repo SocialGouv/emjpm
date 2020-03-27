@@ -1,3 +1,5 @@
+import { AuthenticationError } from "apollo-server-koa";
+
 import { DataSource } from "../../datasource";
 import { logger } from "../../logger";
 import {
@@ -66,16 +68,15 @@ export const recalculateMandataireMesuresCount = async (
       inprogressMesuresCount
     );
 
+    logger.info(`mandataire: ${updatedRows} updated rows`);
+
     return {
       success: true,
       updatedRows
     };
   } catch (err) {
     logger.error(err.message);
-    return {
-      success: false,
-      updatedRows: 0
-    };
+    throw new AuthenticationError("Oups, recalculate failed.");
   }
 };
 
@@ -157,9 +158,6 @@ export const recalculateServiceMesuresCount = async (
     };
   } catch (err) {
     logger.error(err.message);
-    return {
-      success: false,
-      updatedRows: 0
-    };
+    throw new AuthenticationError("Oups, recalculate failed.");
   }
 };
