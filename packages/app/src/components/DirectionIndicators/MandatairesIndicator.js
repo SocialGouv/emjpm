@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Indicator } from "@socialgouv/emjpm-ui-components";
+import { Indicator } from "@emjpm/ui";
 import React, { useContext } from "react";
 
 import { FiltersContext } from "../DirectionFilters/context";

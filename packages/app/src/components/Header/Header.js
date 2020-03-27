@@ -1,4 +1,4 @@
-import { DropDownMenu, Header as HeaderComponent } from "@socialgouv/emjpm-ui-components";
+import { DropDownMenu, Header as HeaderComponent } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React, { Fragment, useContext } from "react";
 
