@@ -72,8 +72,8 @@ Input.propTypes = {
 Input.defaultProps = {
   hasError: false,
   isValid: false,
-  onChange: (e) => {
-    console.log(e.target.value);
+  onChange: () => {
+    return null
   },
   required: false,
   size: 'large',

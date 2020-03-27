@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Flex, Text } from 'rebass';
 import { Check } from 'styled-icons/fa-solid';
 

@@ -9,7 +9,6 @@ module.exports = (api) => {
     },
     plugins: [
       '@babel/plugin-proposal-object-rest-spread',
-      '@babel/transform-runtime'
     ],
     presets: ['@babel/env', '@babel/react']
   };

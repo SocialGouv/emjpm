@@ -7,7 +7,7 @@ import { InnerRadioStyle, RadioInputStyle, RadioStyle, RadioWrapperStyle } from 
 const BaseRadio = (props) => {
   return (
     <Box sx={RadioStyle(props)}>
-      <Box sx={InnerRadioStyle(props)}></Box>
+      <Box sx={InnerRadioStyle(props)} />
     </Box>
   );
 };

@@ -37,9 +37,9 @@ export const Spinner = (props) => {
   const { variant } = props;
   return (
     <Box sx={SpinnerStyle}>
-      <Box sx={Bounce('0', variant)} variant={variant}></Box>
-      <Box sx={Bounce('-0.16s', variant)} variant={variant}></Box>
-      <Box sx={Bounce('-0.32s', variant)} variant={variant}></Box>
+      <Box sx={Bounce('0', variant)} variant={variant} />
+      <Box sx={Bounce('-0.16s', variant)} variant={variant} />
+      <Box sx={Bounce('-0.32s', variant)} variant={variant} />
     </Box>
   );
 };
