@@ -1,4 +1,4 @@
-import { Card, Heading4 } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading4 } from "@emjpm/ui";
 import React from "react";
 import { Box, Button, Text } from "rebass";
 import { XCircle } from "styled-icons/boxicons-regular";

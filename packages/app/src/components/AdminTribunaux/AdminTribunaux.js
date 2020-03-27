@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Button, Card, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Text } from "@emjpm/ui";
 import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 

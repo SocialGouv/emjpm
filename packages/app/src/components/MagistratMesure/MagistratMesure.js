@@ -1,4 +1,4 @@
-import { Heading3 } from "@socialgouv/emjpm-ui-core";
+import { Heading3 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 

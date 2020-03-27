@@ -1,5 +1,5 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { AsyncSelect } from "@socialgouv/emjpm-ui-core";
+import { AsyncSelect } from "@emjpm/ui";
 import debounce from "p-debounce";
 import PropTypes from "prop-types";
 import React from "react";

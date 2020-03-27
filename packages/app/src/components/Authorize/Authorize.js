@@ -1,4 +1,4 @@
-import { Button, Card, Heading4, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading4, Text } from "@emjpm/ui";
 import getConfig from "next/config";
 import React, { useContext, useState } from "react";
 import { Box } from "rebass";

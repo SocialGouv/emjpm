@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading3, Text } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading3, Text } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 import { FileExcel } from "styled-icons/fa-regular/FileExcel";

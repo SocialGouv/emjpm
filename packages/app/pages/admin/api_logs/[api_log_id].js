@@ -1,4 +1,4 @@
-import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper } from "@emjpm/ui";
 import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";

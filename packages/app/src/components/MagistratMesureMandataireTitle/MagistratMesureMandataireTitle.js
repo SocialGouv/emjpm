@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Heading2 } from "@socialgouv/emjpm-ui-core";
+import { Heading2 } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React from "react";
 

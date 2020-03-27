@@ -1,5 +1,5 @@
+import { BoxWrapper } from "@emjpm/ui";
 import { css, Global } from "@emotion/core";
-import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
 import { GlobalStyle } from "@socialgouv/emjpm-ui-global-style";
 import React, { Fragment } from "react";
 import { Box } from "rebass";

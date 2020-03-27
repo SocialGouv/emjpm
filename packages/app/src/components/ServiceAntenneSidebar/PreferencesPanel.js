@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading3 } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading3 } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Text } from "rebass";

@@ -1,4 +1,4 @@
-import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React from "react";
 

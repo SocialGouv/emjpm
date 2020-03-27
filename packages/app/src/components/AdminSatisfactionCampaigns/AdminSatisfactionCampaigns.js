@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Button, Card } from "@socialgouv/emjpm-ui-core";
+import { Button, Card } from "@emjpm/ui";
 import { format } from "date-fns";
 import Link from "next/link";
 import React, { useContext, useState } from "react";

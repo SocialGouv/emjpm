@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Heading5 } from "@socialgouv/emjpm-ui-core";
+import { Heading5 } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
