@@ -19,7 +19,7 @@ export const MandataireMesureAcceptForm = props => {
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
-      await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataire_id } });
+      await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
     }
   });
 
