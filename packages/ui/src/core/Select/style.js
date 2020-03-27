@@ -7,7 +7,7 @@ const getBorderColor = (state, colors) => {
 };
 
 export const getStyle = (props) => {
-  const { size = 'large' } = props;
+  const { size } = props
   const context = useThemeUI();
   const { fontSizes, fonts, colors } = context.theme;
 
