@@ -1,6 +1,6 @@
 // default theme preset
 
-export const preset = {
+export const presetEmjpm = {
   breakpoints: ['40em', '52em', '64em'],
   buttons: {
     outline: {
@@ -158,5 +158,3 @@ export const preset = {
     },
   },
 };
-
-export default preset;
