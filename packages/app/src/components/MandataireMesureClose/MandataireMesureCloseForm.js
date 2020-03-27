@@ -8,6 +8,7 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { CLOSE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
+import { MANDATAIRE } from "./queries";
 
 const EXTINCTION_LABEL_VALUE = [
   { label: "caducité", value: "caducité" },
@@ -26,7 +27,13 @@ export const MandataireMesureCloseForm = props => {
   const [updateMesure] = useMutation(CLOSE_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    }
+    },
+    refetchQueries: [
+      {
+        query: MANDATAIRE,
+        variables: { id: mesure.mandataireId }
+      }
+    ]
   });
 
   const formik = useFormik({

@@ -38,7 +38,7 @@ export const DELETE_SERVICE_MESURE = gql`
     delete_mesures(where: { id: { _eq: $id } }) {
       affected_rows
     }
-    update_services(where: { id: { _eq: $service_id } } {
+    update_services(where: { id: { _eq: $service_id } }) {
       affected_rows
       returning {
         id

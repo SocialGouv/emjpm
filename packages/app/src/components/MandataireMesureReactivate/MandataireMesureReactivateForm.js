@@ -7,7 +7,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { REACTIVATE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
+import { MANDATAIRE, REACTIVATE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 
 export const MandataireMesureReactivateForm = props => {
   const { mesure } = props;
@@ -16,7 +16,13 @@ export const MandataireMesureReactivateForm = props => {
   const [updateMesure] = useMutation(REACTIVATE_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    }
+    },
+    refetchQueries: [
+      {
+        query: MANDATAIRE,
+        variables: { id: mesure.mandataireId }
+      }
+    ]
   });
 
   const formik = useFormik({

@@ -7,10 +7,18 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { REACTIVATE_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
+import { SERVICE } from "../ServiceMesures/queries";
 
 export const ServiceMesureReactivateForm = props => {
   const { mesure } = props;
-  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES);
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: mesure.serviceId }
+      }
+    ]
+  });
   const [updateMesure] = useMutation(REACTIVATE_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });

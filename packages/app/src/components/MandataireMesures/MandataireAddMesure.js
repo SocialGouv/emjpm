@@ -20,7 +20,7 @@ import { Geocode, geocodeInitialValue } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 import { UserContext } from "../UserContext";
 import { ADD_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
-import { DEPARTEMENTS, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
+import { DEPARTEMENTS, MANDATAIRE, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
 import { formatUserTribunalList } from "./utils";
 
 export const MandataireAddMesure = props => {
@@ -109,12 +109,18 @@ export const MandataireAddMesure = props => {
   } = useQuery(DEPARTEMENTS);
 
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
-
   const [addMesure] = useMutation(ADD_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({
         variables: { mandataire_id: id },
-        refetchQueries: ["mesures", "mesures_aggregate", "users"]
+        refetchQueries: [
+          "mesures",
+          "mesures_aggregate",
+          {
+            query: MANDATAIRE,
+            variables: { id }
+          }
+        ]
       });
       await Router.push("/mandataires", { shallow: true });
     }

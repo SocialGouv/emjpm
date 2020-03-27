@@ -12,6 +12,7 @@ import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 import { EDIT_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
+import { MANDATAIRE } from "./queries";
 
 export const MandataireMesureEditForm = props => {
   const { mesure } = props;
@@ -40,7 +41,13 @@ export const MandataireMesureEditForm = props => {
   const [editMesure] = useMutation(EDIT_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    }
+    },
+    refetchQueries: [
+      {
+        query: MANDATAIRE,
+        variables: { id: mesure.mandataireId }
+      }
+    ]
   });
 
   const formik = useFormik({

@@ -11,6 +11,7 @@ import { getRegionCode } from "../../util/departements";
 import { formatAntenneOptions } from "../../util/services";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 import { EDIT_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
+import { SERVICE } from "../ServiceMesures/queries";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 
 export const ServiceMesureEditForm = props => {
@@ -38,7 +39,14 @@ export const ServiceMesureEditForm = props => {
 
   const geocode = geocodeInitialValue(props.mesure);
 
-  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES);
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: serviceId }
+      }
+    ]
+  });
   const [editMesure] = useMutation(EDIT_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesures({ variables: { service_id: serviceId } });

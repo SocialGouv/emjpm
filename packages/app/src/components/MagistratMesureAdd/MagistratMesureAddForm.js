@@ -15,6 +15,7 @@ import {
   RECALCULATE_MANDATAIRE_MESURES,
   RECALCULATE_SERVICE_MESURES
 } from "./mutations";
+import { MANDATAIRE, SERVICE } from "./queries";
 
 export const MagistratMesureAddForm = props => {
   const { serviceId, mandataireId, cancelActionRoute } = props;
@@ -27,9 +28,19 @@ export const MagistratMesureAddForm = props => {
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
+
       await recalculateMandataireMesures({
-        variables: { mandataire_id: mandataireId, refetchQueries: ["users"] }
+        variables: {
+          mandataire_id: mandataireId,
+          refetchQueries: [
+            {
+              query: MANDATAIRE,
+              variables: { id: mandataireId }
+            }
+          ]
+        }
       });
+
       await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
         shallow: true
       });
@@ -40,7 +51,15 @@ export const MagistratMesureAddForm = props => {
   const [chooseService] = useMutation(CHOOSE_SERVICE, {
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
-      await recalculateServiceMesures({ variables: { service_id: mesure.service_id } });
+      await recalculateServiceMesures({
+        variables: { service_id: mesure.service_id },
+        refetchQueries: [
+          {
+            query: SERVICE,
+            variables: { id: mesure.service_id }
+          }
+        ]
+      });
       await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
         shallow: true
       });

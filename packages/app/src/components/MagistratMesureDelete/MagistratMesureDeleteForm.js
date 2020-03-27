@@ -12,6 +12,7 @@ import {
   RECALCULATE_MANDATAIRE_MESURES,
   RECALCULATE_SERVICE_MESURES
 } from "./mutations";
+import { MANDATAIRE, SERVICE } from "./queries";
 import { MagistratMesureRemoveStyle } from "./style";
 
 export const MagistratMesureDeleteForm = props => {
@@ -20,10 +21,23 @@ export const MagistratMesureDeleteForm = props => {
   const [deleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    }
+    },
+    refetchQueries: [
+      {
+        query: MANDATAIRE,
+        variables: { id: mesure.mandataireId }
+      }
+    ]
   });
 
-  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES);
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: mesure.serviceId }
+      }
+    ]
+  });
   const [deleteServiceMesure] = useMutation(DELETE_SERVICE_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });

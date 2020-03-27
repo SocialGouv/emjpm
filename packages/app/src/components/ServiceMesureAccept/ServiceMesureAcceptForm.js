@@ -11,10 +11,18 @@ import { getRegionCode } from "../../util/departements";
 import { formatAntenneOptions } from "../../util/services";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 import { ACCEPT_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
+import { SERVICE } from "./queries";
 
 export const ServiceMesureAcceptForm = props => {
   const { mesure, service_antennes, departementsData } = props;
-  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES);
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: mesure.serviceId }
+      }
+    ]
+  });
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });

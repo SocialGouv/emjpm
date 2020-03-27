@@ -88,7 +88,7 @@ export const CHOOSE_SERVICE = gql`
         id
       }
     }
-    update_services(where: { id: { _eq: $service_id } } {
+    update_services(where: { id: { _eq: $service_id } }) {
       affected_rows
       returning {
         id

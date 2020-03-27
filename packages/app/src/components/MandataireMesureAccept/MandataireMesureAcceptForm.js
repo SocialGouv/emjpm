@@ -10,7 +10,7 @@ import { COUNTRIES, RESIDENCE } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { Geocode, geocodeInitialValue } from "../Geocode";
-import { ACCEPT_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
+import { ACCEPT_MESURE, MANDATAIRE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 
 export const MandataireMesureAcceptForm = props => {
   const { mesure, departementsData } = props;
@@ -20,7 +20,13 @@ export const MandataireMesureAcceptForm = props => {
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    }
+    },
+    refetchQueries: [
+      {
+        query: MANDATAIRE,
+        variables: { id: mesure.mandataireId }
+      }
+    ]
   });
 
   const formik = useFormik({

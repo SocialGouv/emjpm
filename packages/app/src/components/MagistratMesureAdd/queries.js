@@ -1,17 +1,7 @@
 import gql from "graphql-tag";
 
-export const DEPARTEMENTS = gql`
-  {
-    departements {
-      id
-      code
-      nom
-    }
-  }
-`;
-
 export const SERVICE = gql`
-  query service($id: Int) {
+  query service($id: Int!) {
     services(where: { id: { _eq: $id } }) {
       id
       mesures_awaiting
@@ -21,6 +11,16 @@ export const SERVICE = gql`
         mesures_awaiting
         mesures_in_progress
       }
+    }
+  }
+`;
+
+export const MANDATAIRE = gql`
+  query mandataire($id: Int!) {
+    mandataires(where: { id: { _eq: $id } }) {
+      id
+      mesures_en_attente
+      mesures_en_cours
     }
   }
 `;
