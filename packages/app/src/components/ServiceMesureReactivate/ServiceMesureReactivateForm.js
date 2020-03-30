@@ -6,18 +6,24 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import {
-  REACTIVATE_MESURE,
-  UPDATE_ANTENNE_COUTERS,
-  UPDATE_SERVICES_COUTERS
-} from "../ServiceMesures/mutations";
+import { REACTIVATE_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
+import { SERVICE } from "../ServiceMesures/queries";
 
 export const ServiceMesureReactivateForm = props => {
   const { mesure } = props;
-
-  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
-  const [updateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
-  const [updateMesure] = useMutation(REACTIVATE_MESURE);
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: mesure.serviceId }
+      }
+    ]
+  });
+  const [updateMesure] = useMutation(REACTIVATE_MESURE, {
+    onCompleted: async () => {
+      await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
+    }
+  });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
@@ -29,29 +35,10 @@ export const ServiceMesureReactivateForm = props => {
           service_id: mesure.serviceId
         }
       });
-
-      await updateServicesCounter({
-        variables: {
-          mesures_awaiting: 0,
-          mesures_in_progress: 1,
-          service_id: mesure.serviceId
-        }
-      });
-
-      if (mesure.antenneId) {
-        await updateAntenneCounters({
-          variables: {
-            antenne_id: mesure.antenneId,
-            inc_mesures_awaiting: 0,
-            inc_mesures_in_progress: 1
-          }
-        });
-      }
-
-      setSubmitting(false);
-      Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
+      await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
         shallow: true
       });
+      setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
       reason_extinction: Yup.string().required("Required")

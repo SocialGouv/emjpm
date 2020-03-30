@@ -7,14 +7,14 @@ export class MandataireAPI extends AuthDataSource {
   }
 
   public async updateMandataireMesures(
-    userId: number,
+    mandataireId: number,
     awaitingMesures: number,
     inprogressMesures: number
   ) {
     const query = `
-    mutation update_mandataires($userId: Int!, $awaitingMesures: Int!, $inprogressMesures: Int!) {
+    mutation update_mandataires($mandataireId: Int!, $awaitingMesures: Int!, $inprogressMesures: Int!) {
         update_mandataires(
-          where: { user_id: { _eq: $userId } }
+          where: { id: { _eq: $mandataireId } }
           _set: { mesures_en_attente: $awaitingMesures, mesures_en_cours: $inprogressMesures }
         ) {
           affected_rows
@@ -23,7 +23,7 @@ export class MandataireAPI extends AuthDataSource {
     const response = await this.post<UpdateMandataireMesuresResponse>("/", {
       operationName: "update_mandataires",
       query,
-      variables: { userId, awaitingMesures, inprogressMesures }
+      variables: { mandataireId, awaitingMesures, inprogressMesures }
     });
 
     return response;

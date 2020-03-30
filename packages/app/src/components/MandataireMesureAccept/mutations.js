@@ -11,6 +11,7 @@ export const ACCEPT_MESURE = gql`
     $latitude: Float
     $longitude: Float
     $pays: String!
+    $mandataire_id: Int!
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -51,6 +52,25 @@ export const ACCEPT_MESURE = gql`
         date_ouverture
         pays
       }
+    }
+  }
+`;
+
+export const RECALCULATE_MANDATAIRE_MESURES = gql`
+  mutation update_mandataire_mesures($mandataire_id: Int!) {
+    recalculateMandataireMesuresCount(mandataireId: $mandataire_id) {
+      success
+      updatedRows
+    }
+  }
+`;
+
+export const MANDATAIRE = gql`
+  query mandataire($id: Int) {
+    mandataires(where: { id: { _eq: $id } }) {
+      id
+      mesures_en_attente
+      mesures_en_cours
     }
   }
 `;

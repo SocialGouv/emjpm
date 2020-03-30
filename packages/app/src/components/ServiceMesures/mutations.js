@@ -112,28 +112,6 @@ export const EDIT_MESURE = gql`
   }
 `;
 
-export const UPDATE_ANTENNE_COUTERS = gql`
-  mutation updateAntenneCounters(
-    $antenne_id: Int!
-    $inc_mesures_in_progress: Int!
-    $inc_mesures_awaiting: Int!
-  ) {
-    update_service_antenne(
-      where: { id: { _eq: $antenne_id } }
-      _inc: {
-        mesures_in_progress: $inc_mesures_in_progress
-        mesures_awaiting: $inc_mesures_awaiting
-      }
-    ) {
-      affected_rows
-      returning {
-        id
-        mesures_in_progress
-      }
-    }
-  }
-`;
-
 export const REACTIVATE_MESURE = gql`
   mutation reactivateMesure($id: Int!, $service_id: Int!, $reason_extinction: String!) {
     update_mesures(
@@ -169,30 +147,19 @@ export const REACTIVATE_MESURE = gql`
   }
 `;
 
-export const UPDATE_SERVICES_COUTERS = gql`
-  mutation UpdateServicesCounter(
-    $service_id: Int!
-    $mesures_in_progress: Int!
-    $mesures_awaiting: Int!
-  ) {
-    update_services(
-      where: { id: { _eq: $service_id } }
-      _inc: { mesures_in_progress: $mesures_in_progress, mesures_awaiting: $mesures_awaiting }
-    ) {
-      affected_rows
-      returning {
-        id
-        mesures_in_progress
-        mesures_awaiting
-      }
-    }
-  }
-`;
-
 export const DELETE_MESURE = gql`
   mutation deleteMesure($id: Int!) {
     delete_mesures(where: { id: { _eq: $id } }) {
       affected_rows
+    }
+  }
+`;
+
+export const RECALCULATE_SERVICE_MESURES = gql`
+  mutation update_service_mesures($service_id: Int!) {
+    recalculateServiceMesuresCount(serviceId: $service_id) {
+      success
+      updatedRows
     }
   }
 `;

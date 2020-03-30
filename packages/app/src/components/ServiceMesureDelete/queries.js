@@ -1,15 +1,5 @@
 import gql from "graphql-tag";
 
-export const DEPARTEMENTS = gql`
-  {
-    departements {
-      id
-      code
-      nom
-    }
-  }
-`;
-
 export const SERVICE = gql`
   query service($id: Int) {
     services(where: { id: { _eq: $id } }) {
