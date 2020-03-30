@@ -1,4 +1,4 @@
-import { NullableNumber } from "../utils/types.util";
+import { NullableNumber } from "../types";
 
 export interface DepartmentAvailability {
   department_id: number;
