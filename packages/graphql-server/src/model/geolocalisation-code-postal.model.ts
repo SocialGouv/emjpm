@@ -1,4 +1,4 @@
-import { NullableNumber, NullableString } from "../utils/types.util";
+import { NullableNumber, NullableString } from "../types";
 
 export interface GeolocalisationCodePostal {
   id: number;

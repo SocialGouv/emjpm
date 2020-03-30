@@ -1,8 +1,4 @@
-import {
-  NullableDate,
-  NullableNumber,
-  NullableString
-} from "../utils/types.util";
+import { NullableDate, NullableNumber, NullableString } from "../types";
 
 export interface Commentaires {
   id: number;
