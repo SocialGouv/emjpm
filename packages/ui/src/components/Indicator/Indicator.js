@@ -1,8 +1,8 @@
-import { Card, Heading0, Heading4, Spinner } from '@socialgouv/emjpm-ui-core';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Box } from 'rebass';
 
+import { Card, Heading0, Heading4, Spinner } from '../../core';
 import { IndicatorTextStyle } from './style';
 
 const Indicator = (props) => {
