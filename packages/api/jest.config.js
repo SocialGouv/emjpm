@@ -1,5 +1,5 @@
 module.exports = {
-  collectCoverageFrom: ["auth/**/*.js", "email/**/*.js", "routes/**/*.js"],
+  collectCoverageFrom: ["src/auth/**/*.js", "src/email/**/*.js", "src/routes/**/*.js"],
   coverageDirectory: process.env.JEST_COVERAGE_DIRECTORY,
   roots: ["<rootDir>/__test__/"],
   testTimeout: 30000,
