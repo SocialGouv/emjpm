@@ -15,7 +15,8 @@ _environments:
 _steps:
   - &node_stage
     language: node_js
-    node_js: "10"
+    node_js:
+      - 'lts/*'
     env:
       - JWT_KEY=JWT_KEY
     before_install:
