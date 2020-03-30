@@ -386,6 +386,224 @@ Object {
 }
 `;
 
+exports[`individuel_agrement_departements table schema 1`] = `
+Object {
+  "agrement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "departement_financeur": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "departement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "id": Object {
+    "defaultValue": "nextval('individuel_agrement_departements_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+}
+`;
+
+exports[`individuel_agrements table schema 1`] = `
+Object {
+  "annee_agrement": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "annee_debut_activite": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "debut_activite_avant_2009": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "id": Object {
+    "defaultValue": "nextval('individuel_agrements_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+}
+`;
+
+exports[`individuel_exercices table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "cumul_delegue_service": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "cumul_delegue_service_etp": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "cumul_prepose": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "cumul_prepose_etp": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "estimation_etp": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('individuel_exercices_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "secretaire_specialise": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "secretaire_specialise_etp": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`individuel_formations table schema 1`] = `
+Object {
+  "cnc_dpf_annee_obtention": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "cnc_dpf_heure_formation": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "cnc_maj_annee_obtention": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "cnc_maj_heure_formation": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "cnc_mjpm_annee_obtention": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "cnc_mjpm_heure_formation": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('individuel_formations_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "niveau_qualification": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "niveau_qualification_secretaire_spe": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`knex_migrations_v2 table schema 1`] = `
 Object {
   "batch": Object {
