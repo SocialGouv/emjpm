@@ -22,13 +22,14 @@ const InputField = ({ formik, property, placeholder, onChange }) => (
       name={property}
       hasError={formik.errors[property]}
       onChange={onChange}
+      type="number"
     />
     <InlineError message={formik.errors[property]} fieldId={property} />
   </Field>
 );
 
 const IndividuelInformationFormationForm = props => {
-  const { formation, handleSubmit } = props;
+  const { formation, handleSubmit, handleCancel } = props;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -121,10 +122,17 @@ const IndividuelInformationFormationForm = props => {
           onChange={formik.handleChange}
         />
       </Box>
-      <Flex>
-        <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
-          Modifier
-        </Button>
+      <Flex alignItems="center" justifyContent="flex-end">
+        <Box mr="2">
+          <Button type="button" mr="2" variant="outline" onClick={handleCancel}>
+            Annuler
+          </Button>
+        </Box>
+        <Box>
+          <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+            Enregistrer
+          </Button>
+        </Box>
       </Flex>
     </form>
   );
