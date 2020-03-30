@@ -10,7 +10,8 @@ import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { formatAntenneOptions } from "../../util/services";
 import { Geocode, geocodeInitialValue } from "../Geocode";
-import { EDIT_MESURE, UPDATE_ANTENNE_COUTERS } from "../ServiceMesures/mutations";
+import { EDIT_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
+import { SERVICE } from "../ServiceMesures/queries";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 
 export const ServiceMesureEditForm = props => {
@@ -28,7 +29,8 @@ export const ServiceMesureEditForm = props => {
       tribunal,
       tiId,
       pays,
-      cabinet
+      cabinet,
+      serviceId
     },
     departementsData,
     tribunalList,
@@ -37,8 +39,19 @@ export const ServiceMesureEditForm = props => {
 
   const geocode = geocodeInitialValue(props.mesure);
 
-  const [editMesure] = useMutation(EDIT_MESURE);
-  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: serviceId }
+      }
+    ]
+  });
+  const [editMesure] = useMutation(EDIT_MESURE, {
+    onCompleted: async () => {
+      await recalculateServiceMesures({ variables: { service_id: serviceId } });
+    }
+  });
 
   const antenneOptions = formatAntenneOptions(service_antennes);
 
@@ -84,31 +97,10 @@ export const ServiceMesureEditForm = props => {
           cabinet: values.cabinet
         }
       });
-
-      if (values.antenne_id) {
-        await updateAntenneCounters({
-          variables: {
-            antenne_id: values.antenne_id.value,
-            inc_mesures_awaiting: 0,
-            inc_mesures_in_progress: 1
-          }
-        });
-      }
-
-      if (antenneId) {
-        await updateAntenneCounters({
-          variables: {
-            antenne_id: antenneId,
-            inc_mesures_awaiting: 0,
-            inc_mesures_in_progress: -1
-          }
-        });
-      }
-
-      setSubmitting(false);
-      Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
+      await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
         shallow: true
       });
+      setSubmitting(false);
     },
     validationSchema: serviceMesureSchema,
     initialValues: {

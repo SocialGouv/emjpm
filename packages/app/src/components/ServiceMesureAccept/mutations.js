@@ -57,3 +57,12 @@ export const ACCEPT_MESURE = gql`
     }
   }
 `;
+
+export const RECALCULATE_SERVICE_MESURES = gql`
+  mutation update_service_mesures($service_id: Int!) {
+    recalculateServiceMesuresCount(serviceId: $service_id) {
+      success
+      updatedRows
+    }
+  }
+`;

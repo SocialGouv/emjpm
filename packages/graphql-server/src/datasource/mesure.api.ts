@@ -80,34 +80,34 @@ export class MesureAPI extends AuthDataSource {
   }
 
   public async countMandataireMesures(
-    userId: number
+    mandataireId: number
   ): Promise<CountMandataireMesuresQueryResult> {
     const query = `
-    query mandataire_mesures($userId: Int!) {
+    query mandataire_mesures($mandataireId: Int!) {
       inprogressMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en attente" }, mandataire: { user_id: { _eq: $userId } } }
+        where: { status: { _eq: "Mesure en attente" }, mandataire: { id: { _eq: $mandataireId } } }
       ) {
         aggregate {
           count(columns: id)
         }
       }
       awaitingMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en cours" }, mandataire: { user_id: { _eq: $userId } } }
+        where: { status: { _eq: "Mesure en cours" }, mandataire: { id: { _eq: $mandataireId } } }
       ) {
         aggregate {
           count(columns: id)
         }
       }
-      mandataires(where: { user_id: { _eq: $userId } }) {
-        mesures_awaiting
-        mesures_in_progress
+      mandataires(where: { id: { _eq: $mandataireId } }) {
+        mesures_en_cours
+        mesures_en_attente
       }
     }`;
 
     const response = await this.post<CountMandataireMesuresQueryResult>("/", {
       operationName: "mandataire_mesures",
       query,
-      variables: { userId }
+      variables: { mandataireId }
     });
     return response;
   }
