@@ -16,7 +16,7 @@ const FieldLabel = ({ label }) => {
 };
 
 const IndividuelInformationAgrementForm = props => {
-  const { agrement, handleSubmit } = props;
+  const { agrement, handleSubmit, handleCancel } = props;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -82,10 +82,17 @@ const IndividuelInformationAgrementForm = props => {
           <InlineError message={formik.errors.anneeAgrement} fieldId="anneeAgrement" />
         </Field>
       </Box>
-      <Flex>
-        <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
-          Modifier
-        </Button>
+      <Flex alignItems="center" justifyContent="flex-end">
+        <Box mr="2">
+          <Button type="button" mr="2" variant="outline" onClick={handleCancel}>
+            Annuler
+          </Button>
+        </Box>
+        <Box>
+          <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+            Enregistrer
+          </Button>
+        </Box>
       </Flex>
     </form>
   );

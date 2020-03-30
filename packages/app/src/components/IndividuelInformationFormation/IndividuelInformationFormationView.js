@@ -12,25 +12,14 @@ const getLabel = (model, property) => {
   return res;
 };
 
-const FieldLabel = ({ label }) => {
-  return (
+const FieldLabelValue = ({ label, value }) => (
+  <Field>
     <Text lineHeight="1.5" color="textSecondary">
       {label}
     </Text>
-  );
-};
-const FieldValue = ({ value }) => {
-  return (
     <Text lineHeight="1.5" sx={content}>
       {value}
     </Text>
-  );
-};
-
-const FieldLabelValue = ({ property, label, model }) => (
-  <Field>
-    <FieldLabel label={label} />
-    <FieldValue value={getLabel(model, property)} />
   </Field>
 );
 
@@ -43,28 +32,24 @@ const IndividuelInformationFormationView = props => {
         <Heading4 mb={1}>{"CNC MJPM"}</Heading4>
         <FieldLabelValue
           label="Année d'obtention du CNC MJPM"
-          property="cnc_mjpm_annee_obtention"
-          model={formation}
+          value={getLabel(formation, "cnc_mjpm_annee_obtention")}
         />
         <FieldLabelValue
           label="Nombre d'heures de formation dans le cadre du CNC MJPM (hors stage)"
-          property="cnc_mjpm_heure_formation"
-          model={formation}
+          value={getLabel(formation, "cnc_mjpm_heure_formation")}
         />
       </Box>
       <Box>
         <Heading4 mb={1}>{"CNC MAJ"}</Heading4>
         <FieldLabelValue
           label="Année d'obtention du CNC MAJ"
-          property="cnc_maj_annee_obtention"
-          model={formation}
+          value={getLabel(formation, "cnc_maj_annee_obtention")}
         />
 
         {formation.cnc_mjpm_annee_obtention && (
           <FieldLabelValue
             label="Nombre d'heures de formation dans le cadre du CNC MAJ (hors stage)"
-            property="cnc_maj_heure_formation"
-            model={formation}
+            value={getLabel(formation, "cnc_maj_heure_formation")}
           />
         )}
       </Box>
@@ -72,14 +57,12 @@ const IndividuelInformationFormationView = props => {
         <Heading4 mb={1}>{"CNC DPF"}</Heading4>
         <FieldLabelValue
           label="Année d'obtention du CNC DPF"
-          property="cnc_dpf_annee_obtention"
-          model={formation}
+          value={getLabel(formation, "cnc_dpf_annee_obtention")}
         />
         {formation.cnc_dpf_annee_obtention && (
           <FieldLabelValue
             label="Nombre d'heures de formation dans le cadre du CNC DPF"
-            property="cnc_dpf_heure_formation"
-            model={formation}
+            value={getLabel(formation, "cnc_dpf_heure_formation")}
           />
         )}
       </Box>
@@ -87,14 +70,12 @@ const IndividuelInformationFormationView = props => {
         <Heading4 mb={1}>{"Niveau de qualification"}</Heading4>
         <FieldLabelValue
           label="Niveau de qualification de 1 à 5"
-          property="niveau_qualification"
-          model={formation}
+          value={getLabel(formation, "niveau_qualification")}
         />
 
         <FieldLabelValue
           label="Niveau de qualification du secrétaire spécialisé de 1 à 5"
-          property="niveau_qualification_secretaire_spe"
-          model={formation}
+          value={getLabel(formation, "niveau_qualification_secretaire_spe")}
         />
       </Box>
       <Flex mt="5">

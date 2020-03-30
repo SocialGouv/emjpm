@@ -18,6 +18,9 @@ export const UPDATE_INDIVIDUEL_AGREMENT = gql`
       affected_rows
       returning {
         id
+        debut_activite_avant_2009
+        annee_debut_activite
+        annee_agrement
       }
     }
   }

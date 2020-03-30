@@ -1,22 +1,28 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React, { Fragment, useContext } from "react";
-import { Box, Text } from "rebass";
+import React, { useContext, useState } from "react";
+import { Box } from "rebass";
 
 import Sentry from "../../util/sentry";
 import { UserContext } from "../UserContext";
 import { IndividuelInformationAgrementForm } from "./IndividuelInformationAgrementForm";
+import { IndividuelInformationAgrementView } from "./IndividuelInformationAgrementView";
 import { UPDATE_INDIVIDUEL_AGREMENT } from "./mutations";
 import { INDIVDUEL_AGREMENT } from "./queries";
 
 const IndividuelInformationAgrement = () => {
   const { mandataire } = useContext(UserContext);
 
+  const [edit, setEdit] = useState(false);
+
   const { data, error, loading } = useQuery(INDIVDUEL_AGREMENT, {
-    fetchPolicy: "network-only",
     variable: { mandataire_id: mandataire.id }
   });
 
   const [updateIndividuelAgrement] = useMutation(UPDATE_INDIVIDUEL_AGREMENT);
+
+  const handleEdit = () => {
+    setEdit(!edit);
+  };
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     try {
@@ -28,6 +34,7 @@ const IndividuelInformationAgrement = () => {
           annee_agrement: values.anneeAgrement
         }
       });
+      setEdit(false);
     } catch (error) {
       Sentry.captureException(error);
       setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
@@ -48,13 +55,14 @@ const IndividuelInformationAgrement = () => {
 
   return (
     <Box>
-      {agrement ? (
-        <IndividuelInformationAgrementForm agrement={agrement} handleSubmit={handleSubmit} />
+      {edit ? (
+        <IndividuelInformationAgrementForm
+          agrement={agrement}
+          handleSubmit={handleSubmit}
+          handleCancel={() => setEdit(false)}
+        />
       ) : (
-        <Fragment>
-          <Text>Agrément non disponible.</Text>
-          <Text color="textSecondary">.</Text>
-        </Fragment>
+        <IndividuelInformationAgrementView agrement={agrement} handleEdit={handleEdit} />
       )}
     </Box>
   );
