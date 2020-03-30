@@ -18,10 +18,9 @@ import { Box, Flex } from "rebass";
 
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireSignupSchema } from "../../lib/validationSchemas";
+import { getLocation } from "../../query-service/DepartementQueryService";
 import { isSiretExists } from "../../query-service/SiretQueryService";
-import { findDepartement } from "../../util/departements/DepartementUtil";
 import { SignupContext } from "./context";
-import { LOCATIONS } from "./queries";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
@@ -39,26 +38,15 @@ const SignupMandataireForm = ({ tiDatas }) => {
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
-      const {
-        data: { geolocalisation_code_postal: geolocations, departements: departments }
-      } = await client.query({
-        query: LOCATIONS,
-        variables: { zipcode: values.zipcode }
-      });
-
-      const department = findDepartement(values.zipcode, departments);
-      let geolocation = geolocations.find(
-        ({ ville }) => ville === values.city.toUpperCase().trim()
-      );
-      if (!geolocation) {
-        geolocation = geolocations[0];
-      }
-
-      if (!department) {
-        setErrors({ code_postal: "Merci de renseigner un code postal valide" });
+      const location = await getLocation(client, { zipcode: values.zipcode, city: values.city });
+      if (!location || !location.department) {
+        setErrors({
+          code_postal: "Merci de renseigner un code postal valide"
+        });
       } else if (await isSiretExists(client, values.siret)) {
         setErrors({ siret: "Ce SIRET existe déjà" });
       } else {
+        const { department, geolocation } = location;
         const body = {
           mandataire: {
             adresse: values.address,
@@ -71,8 +59,8 @@ const SignupMandataireForm = ({ tiDatas }) => {
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
             ville: values.city,
-            latitude: geolocation.latitude,
-            longitude: geolocation.longitude
+            latitude: geolocation ? geolocation.latitude : null,
+            longitude: geolocation ? geolocation.longitude : null
           },
           tis: values.tis.map(ti => ti.value),
           user: {

@@ -38,8 +38,6 @@ const MandataireEditInformationsForm = props => {
     }
   });
 
-  console.log("=> errors", formik.errors);
-
   return (
     <form onSubmit={formik.handleSubmit}>
       <Field>

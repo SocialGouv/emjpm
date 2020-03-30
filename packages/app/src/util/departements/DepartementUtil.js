@@ -12,8 +12,3 @@ export const getRegionCode = zipcode => {
     return zipcode.substring(0, 2);
   }
 };
-
-export const findDepartement = (codePostal, departements) => {
-  const regionCode = getRegionCode(codePostal);
-  return departements.find(data => data.code === regionCode);
-};
