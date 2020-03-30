@@ -1,4 +1,4 @@
-import { Select } from "@socialgouv/emjpm-ui-core";
+import { Select } from "@emjpm/ui";
 import React, { Fragment, useState } from "react";
 import { Box } from "rebass";
 import {

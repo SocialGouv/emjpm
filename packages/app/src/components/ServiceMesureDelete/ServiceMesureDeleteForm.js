@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, Input } from "@socialgouv/emjpm-ui-core";
+import { Button, Heading3, Heading5, Input } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";

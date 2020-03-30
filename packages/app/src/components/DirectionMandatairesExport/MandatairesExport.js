@@ -1,4 +1,4 @@
-import { Button } from "@socialgouv/emjpm-ui-core";
+import { Button } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { ApolloConsumer } from "react-apollo";
 

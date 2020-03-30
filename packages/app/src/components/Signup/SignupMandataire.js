@@ -9,7 +9,7 @@ import {
   Input,
   Select,
   Text
-} from "@socialgouv/emjpm-ui-core";
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";

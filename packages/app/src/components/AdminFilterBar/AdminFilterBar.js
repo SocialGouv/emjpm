@@ -1,4 +1,4 @@
-import { Button, Card, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Input, Text } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 

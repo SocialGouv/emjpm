@@ -1,4 +1,4 @@
-import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper } from "@emjpm/ui";
 import React, { useContext } from "react";
 
 import { LayoutMagistrat } from "../../../../src/components/Layout";

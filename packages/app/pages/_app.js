@@ -1,6 +1,6 @@
 import "../src/polyfills";
 
-import theme from "@socialgouv/emjpm-ui-theme";
+import { presetEmjpm } from "@emjpm/ui";
 import jwtDecode from "jwt-decode";
 import App from "next/app";
 import React from "react";
@@ -47,7 +47,7 @@ class MyApp extends App {
 
     return (
       <ApolloProvider client={apolloClient}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={presetEmjpm}>
           <UserProvider user={user}>
             <Component {...pageProps} />
           </UserProvider>

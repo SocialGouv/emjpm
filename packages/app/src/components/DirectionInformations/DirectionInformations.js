@@ -1,4 +1,4 @@
-import { Card, Heading3, Heading5 } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading3, Heading5 } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import { MailOutline } from "styled-icons/material";

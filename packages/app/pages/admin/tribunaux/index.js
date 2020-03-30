@@ -1,4 +1,4 @@
-import { BoxWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, Heading1 } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";

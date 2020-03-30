@@ -1,4 +1,4 @@
-import { Card } from "@socialgouv/emjpm-ui-core";
+import { Card } from "@emjpm/ui";
 import Link from "next/link";
 import React from "react";
 

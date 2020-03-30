@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Button, Card, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading4, Spinner } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React, { Fragment, useState } from "react";
 import { Box, Text } from "rebass";

@@ -1,5 +1,5 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { Button, Card, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Heading4, Spinner } from "@emjpm/ui";
 import { format } from "date-fns";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";

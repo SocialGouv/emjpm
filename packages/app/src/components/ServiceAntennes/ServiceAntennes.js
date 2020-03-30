@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Antenne } from "@socialgouv/emjpm-ui-components";
-import { BoxWrapper, Card, Heading2, Heading4, Spinner, Text } from "@socialgouv/emjpm-ui-core";
+import { Antenne, BoxWrapper, Card, Heading2, Heading4, Spinner, Text } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";

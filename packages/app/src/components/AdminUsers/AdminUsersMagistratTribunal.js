@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Select } from "@socialgouv/emjpm-ui-core";
+import { Select } from "@emjpm/ui";
 import React, { useState } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 

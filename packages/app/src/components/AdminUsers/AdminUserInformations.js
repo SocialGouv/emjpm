@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Button, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Text } from "@emjpm/ui";
 import Link from "next/link";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
