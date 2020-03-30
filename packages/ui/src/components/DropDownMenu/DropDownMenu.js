@@ -1,7 +1,8 @@
-import { Card } from '@socialgouv/emjpm-ui-core';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Box, Button } from 'rebass';
+
+import { Card } from '../../core';
 
 const menuItemStyle = {
   '&:hover': {
