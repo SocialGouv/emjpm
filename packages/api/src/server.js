@@ -13,9 +13,6 @@ const authRoutes = require("./routes/auth");
 const oauth2Routes = require("./routes/oauth2");
 const editorsRoutes = require("./routes/editors");
 
-const env = process.env.NODE_ENV || "development";
-const host = "0.0.0.0";
-const port = process.env.PORT || 4000;
 const corsOptions = {
   credentials: true,
   origin: true
@@ -79,10 +76,6 @@ app.get("/json", function(req, res) {
 
 // error handler
 app.use(errorHandler);
-
-app.listen(port, host, () => {
-  logger.info(`Starting ${env} server at http://${host}:${port}`);
-});
 
 process.on("unhandledRejection", error => {
   logger.error("unhandledRejection", error.message);
