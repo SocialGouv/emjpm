@@ -2,11 +2,7 @@ import { Button, Heading4 } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
-import {
-  INTERVALLE_ETP_OPTIONS,
-  SECRETARIAT_OPTIONS,
-  YES_NO_OPTIONS
-} from "../../constants/mandataire";
+import { INTERVALLE_ETP_OPTIONS, YES_NO_OPTIONS } from "../../constants/mandataire";
 import { FieldLabelValue, getLabel } from "../IndividuelInformationCommon";
 
 const IndividuelInformationExerciceView = props => {
@@ -25,12 +21,12 @@ const IndividuelInformationExerciceView = props => {
         <Heading4 mb={1}>{"Secretariat spécialisé"}</Heading4>
         <FieldLabelValue
           label="Exercez-vous avec un secretariat spécialisé?"
-          value={getLabel(exercice.secretaire_specialise, SECRETARIAT_OPTIONS)}
+          value={getLabel(exercice.secretariat_specialise, YES_NO_OPTIONS)}
         />
-        {exercice.secretaire_specialise && (
+        {exercice.secretariat_specialise && (
           <FieldLabelValue
-            label="Estimation de l'activité en ETP du secrétaire spécialisé"
-            value={getLabel(exercice.secretaire_specialise_etp, INTERVALLE_ETP_OPTIONS)}
+            label="Estimation de l'activité en ETP du secretariat spécialisé"
+            value={getLabel(exercice.secretariat_specialise_etp)}
           />
         )}
       </Box>

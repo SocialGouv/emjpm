@@ -55,7 +55,7 @@ const IndividuelInformationFormationView = props => {
         />
 
         <FieldLabelValue
-          label="Niveau de qualification du secrétaire spécialisé de 1 à 5"
+          label="Niveau de qualification du secretariat spécialisé de 1 à 5"
           value={getLabel(formation.niveau_qualification_secretaire_spe)}
         />
       </Box>

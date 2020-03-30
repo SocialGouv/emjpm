@@ -5,8 +5,8 @@ export const INDIVIDUEL_EXERCICE = gql`
     individuel_exercices(where: { mandataire_id: { _eq: $mandataire_id } }) {
       id
       estimation_etp
-      secretaire_specialise
-      secretaire_specialise_etp
+      secretariat_specialise
+      secretariat_specialise_etp
       cumul_prepose
       cumul_prepose_etp
       cumul_delegue_service

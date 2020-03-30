@@ -62,7 +62,7 @@ const IndividuelInformationFormation = () => {
   const [formation] = data.individuel_formations;
 
   return (
-    <Box>
+    <Box p={5}>
       {edit ? (
         <IndividuelInformationFormationForm
           formation={formation}

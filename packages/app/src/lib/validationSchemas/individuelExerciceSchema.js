@@ -15,10 +15,10 @@ const individuelExerciceSchema = yup.object().shape({
     label: yup.string(),
     value: yup.string().required()
   }),
-  secretaireSpecialise: yup.object().required(),
-  secretaireSpecialiseEtp: yup.object().when("secretaireSpecialise", {
-    is: secretaireSpecialise => secretaireSpecialise && secretaireSpecialise.value,
-    then: yup.object().required()
+  secretariatSpecialise: yup.object().required(),
+  secretariatSpecialiseEtp: yup.number().when("secretariatSpecialise", {
+    is: secretariatSpecialise => secretariatSpecialise && secretariatSpecialise.value,
+    then: yup.number().required()
   })
 });
 

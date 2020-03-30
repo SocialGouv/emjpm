@@ -1,13 +1,9 @@
-import { Button, Field, Heading4, InlineError, Select } from "@emjpm/ui";
+import { Button, Field, Heading4, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import {
-  INTERVALLE_ETP_OPTIONS,
-  SECRETARIAT_OPTIONS,
-  YES_NO_OPTIONS
-} from "../../constants/mandataire";
+import { INTERVALLE_ETP_OPTIONS, YES_NO_OPTIONS } from "../../constants/mandataire";
 import { individuelExerciceSchema } from "../../lib/validationSchemas";
 import { findOption, getOptionValue } from "../../util/option/OptionUtil";
 import { FieldLabel } from "../IndividuelInformationCommon";
@@ -20,9 +16,8 @@ const IndividuelInformationExerciceForm = props => {
     validationSchema: individuelExerciceSchema,
     initialValues: {
       estimationEtp: findOption(INTERVALLE_ETP_OPTIONS, exercice.estimation_etp) || "",
-      secretaireSpecialise: findOption(SECRETARIAT_OPTIONS, exercice.secretaire_specialise) || "",
-      secretaireSpecialiseEtp:
-        findOption(INTERVALLE_ETP_OPTIONS, exercice.secretaire_specialise_etp) || "",
+      secretariatSpecialise: findOption(YES_NO_OPTIONS, exercice.secretariat_specialise) || "",
+      secretariatSpecialiseEtp: exercice.secretariat_specialise_etp || "",
       cumulPrepose: findOption(YES_NO_OPTIONS, exercice.cumul_prepose) || "",
       cumulPreposeEtp: findOption(INTERVALLE_ETP_OPTIONS, exercice.cumul_prepose_etp) || "",
       cumulDelegueService: findOption(YES_NO_OPTIONS, exercice.cumul_delegue_service) || "",
@@ -53,37 +48,37 @@ const IndividuelInformationExerciceForm = props => {
         <Field>
           <FieldLabel label="Exercez-vous avec un secretariat spécialisé?" />
           <Select
-            id="secretaireSpecialise"
-            name="secretaireSpecialise"
-            value={formik.values.secretaireSpecialise}
-            hasError={formik.errors.secretaireSpecialise}
+            id="secretariatSpecialise"
+            name="secretariatSpecialise"
+            value={formik.values.secretariatSpecialise}
+            hasError={formik.errors.secretariatSpecialise}
             onChange={option => {
-              formik.setFieldValue("secretaireSpecialise", option);
+              formik.setFieldValue("secretariatSpecialise", option);
               if (!option.value) {
-                formik.setFieldValue("secretaireSpecialiseEtp", "");
+                formik.setFieldValue("secretariatSpecialiseEtp", "");
               }
             }}
-            options={SECRETARIAT_OPTIONS}
+            options={YES_NO_OPTIONS}
           />
           <InlineError
-            message={formik.errors.secretaireSpecialise}
-            fieldId="secretaireSpecialise"
+            message={formik.errors.secretariatSpecialise}
+            fieldId="secretariatSpecialise"
           />
         </Field>
-        {getOptionValue(formik.values.secretaireSpecialise) && (
+        {getOptionValue(formik.values.secretariatSpecialise) && (
           <Field>
-            <FieldLabel label="Estimation de l'activité en ETP du secrétaire spécialisé" />
-            <Select
-              id="secretaireSpecialiseEtp"
-              name="secretaireSpecialiseEtp"
-              value={formik.values.secretaireSpecialiseEtp}
-              hasError={formik.errors.secretaireSpecialiseEtp}
-              onChange={option => formik.setFieldValue("secretaireSpecialiseEtp", option)}
-              options={INTERVALLE_ETP_OPTIONS}
+            <FieldLabel label="Estimation de l'activité en ETP du secrétariat spécialisé" />
+            <Input
+              id="secretariatSpecialiseEtp"
+              name="secretariatSpecialiseEtp"
+              value={formik.values.secretariatSpecialiseEtp}
+              hasError={formik.errors.secretariatSpecialiseEtp}
+              onChange={formik.handleChange}
+              type="number"
             />
             <InlineError
-              message={formik.errors.secretaireSpecialiseEtp}
-              fieldId="secretaireSpecialiseEtp"
+              message={formik.errors.secretariatSpecialiseEtp}
+              fieldId="secretariatSpecialiseEtp"
             />
           </Field>
         )}

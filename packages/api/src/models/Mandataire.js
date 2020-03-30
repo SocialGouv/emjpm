@@ -31,9 +31,6 @@ class Mandataire extends Model {
         dispo_max: {
           type: "integer"
         },
-        secretariat: {
-          type: "boolean"
-        },
         zip: {
           type: "string"
         }

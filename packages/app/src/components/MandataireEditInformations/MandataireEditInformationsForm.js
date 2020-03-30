@@ -3,18 +3,12 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { SECRETARIAT_OPTIONS } from "../../constants/mandataire";
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
 
 const MandataireEditInformationsForm = props => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
-
-  const secretariat =
-    mandataire.secretariat !== undefined
-      ? SECRETARIAT_OPTIONS.find(el => el.value === mandataire.secretariat)
-      : undefined;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -29,8 +23,6 @@ const MandataireEditInformationsForm = props => {
       siret: mandataire.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
-      secretariat: secretariat,
-      nb_secretariat: mandataire.nb_secretariat || "",
       competences: mandataire.competences || "",
       address: mandataire.adresse || "",
       city: mandataire.ville || "",
@@ -166,37 +158,6 @@ const MandataireEditInformationsForm = props => {
         />
         <InlineError message={formik.errors.dispo_max} fieldId="dispo_max" />
       </Field>
-      <Field>
-        <Select
-          value={formik.values.secretariat}
-          id="secretariat"
-          name="secretariat"
-          hasError={formik.errors.secretariat && formik.touched.secretariat}
-          onChange={async option => {
-            await formik.setFieldValue("secretariat", option);
-            if (option && option.value) {
-              await formik.setFieldValue("nb_secretariat", "");
-            }
-          }}
-          placeholder="Secretariat spécialisé"
-          options={SECRETARIAT_OPTIONS}
-        />
-        <InlineError message={formik.errors.secretariat} fieldId="secretariat" />
-      </Field>
-
-      {formik.values.secretariat && formik.values.secretariat.value && (
-        <Field>
-          <Input
-            value={formik.values.nb_secretariat}
-            id="nb_secretariat"
-            name="nb_secretariat"
-            hasError={formik.errors.nb_secretariat && formik.touched.nb_secretariat}
-            onChange={formik.handleChange}
-            placeholder="Nombre ETP dédié (x.xx)"
-          />
-          <InlineError message={formik.errors.nb_secretariat} fieldId="nb_secretariat" />
-        </Field>
-      )}
       <Field>
         <Textarea
           value={formik.values.competences}

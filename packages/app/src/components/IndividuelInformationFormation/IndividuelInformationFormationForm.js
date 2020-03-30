@@ -110,7 +110,7 @@ const IndividuelInformationFormationForm = props => {
         />
         <InputField
           formik={formik}
-          placeholder="Niveau de qualification du secrétaire spécialisé de 1 à 5"
+          placeholder="Niveau de qualification du secretariat spécialisé de 1 à 5"
           property="niveauQualificationSecretaireSpe"
           onChange={formik.handleChange}
         />

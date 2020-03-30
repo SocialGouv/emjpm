@@ -569,8 +569,8 @@ tables:
       - created_at
       - mandataire_id
       - estimation_etp
-      - secretaire_specialise
-      - secretaire_specialise_etp
+      - secretariat_specialise
+      - secretariat_specialise_etp
       - cumul_prepose
       - cumul_prepose_etp
       - cumul_delegue_service
@@ -587,8 +587,8 @@ tables:
       - created_at
       - mandataire_id
       - estimation_etp
-      - secretaire_specialise
-      - secretaire_specialise_etp
+      - secretariat_specialise
+      - secretariat_specialise_etp
       - cumul_prepose
       - cumul_prepose_etp
       - cumul_delegue_service
@@ -774,8 +774,6 @@ tables:
       - longitude
       - mesures_en_attente
       - mesures_en_cours
-      - nb_secretariat
-      - secretariat
       - siret
       - telephone
       - telephone_portable
@@ -801,8 +799,6 @@ tables:
       - longitude
       - mesures_en_attente
       - mesures_en_cours
-      - nb_secretariat
-      - secretariat
       - siret
       - telephone
       - telephone_portable
@@ -832,8 +828,6 @@ tables:
       - dispo_max
       - user_id
       - telephone_portable
-      - secretariat
-      - nb_secretariat
       - created_at
       - date_mesure_update
       - email_send
@@ -855,8 +849,6 @@ tables:
       - dispo_max
       - user_id
       - telephone_portable
-      - secretariat
-      - nb_secretariat
       - created_at
       - date_mesure_update
       - email_send
@@ -873,10 +865,8 @@ tables:
   - role: prepose
     permission:
       columns:
-      - secretariat
       - latitude
       - longitude
-      - nb_secretariat
       - department_id
       - dispo_max
       - id
@@ -911,8 +901,6 @@ tables:
       - dispo_max
       - user_id
       - telephone_portable
-      - secretariat
-      - nb_secretariat
       - created_at
       - date_mesure_update
       - email_send
@@ -942,8 +930,6 @@ tables:
       - longitude
       - mesures_en_attente
       - mesures_en_cours
-      - nb_secretariat
-      - secretariat
       - siret
       - telephone
       - telephone_portable
@@ -970,8 +956,6 @@ tables:
       - longitude
       - mesures_en_attente
       - mesures_en_cours
-      - nb_secretariat
-      - secretariat
       - siret
       - telephone
       - telephone_portable

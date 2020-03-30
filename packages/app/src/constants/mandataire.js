@@ -1,8 +1,3 @@
-export const SECRETARIAT_OPTIONS = [
-  { label: "Non, je n'exerce pas avec un secretariat spécialisé", value: false },
-  { label: "Oui, j'exerce avec un secretariat spécialisé", value: true }
-];
-
 export const INTERVALLE_ETP_OPTIONS = [
   { label: "jusqu'à 30% d'un ETP", value: "inf_30" },
   { label: "supérieure à 30% jusqu'à 50%", value: "sup_30__inf_50" },

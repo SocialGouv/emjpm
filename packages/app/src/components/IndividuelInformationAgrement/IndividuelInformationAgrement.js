@@ -54,7 +54,7 @@ const IndividuelInformationAgrement = () => {
   const [agrement] = data.individuel_agrements;
 
   return (
-    <Box>
+    <Box p={5}>
       {edit ? (
         <IndividuelInformationAgrementForm
           agrement={agrement}

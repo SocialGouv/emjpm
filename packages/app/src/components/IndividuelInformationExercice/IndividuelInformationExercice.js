@@ -31,8 +31,8 @@ const IndividuelInformationExercice = () => {
         variables: {
           mandataire_id: mandataire.id,
           estimation_etp: values.estimationEtp.value,
-          secretaire_specialise: values.secretaireSpecialise.value,
-          secretaire_specialise_etp: getOptionValue(values.secretaireSpecialiseEtp),
+          secretariat_specialise: values.secretariatSpecialise.value,
+          secretariat_specialise_etp: values.secretariatSpecialiseEtp || null,
           cumul_prepose: values.cumulPrepose.value,
           cumul_prepose_etp: getOptionValue(values.cumulPreposeEtp),
           cumul_delegue_service: values.cumulDelegueService.value,
@@ -59,7 +59,7 @@ const IndividuelInformationExercice = () => {
   const [exercice] = data.individuel_exercices;
 
   return (
-    <Box>
+    <Box p={5}>
       {edit ? (
         <IndividuelInformationExerciceForm
           exercice={exercice}

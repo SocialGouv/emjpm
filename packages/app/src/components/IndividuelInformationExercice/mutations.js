@@ -4,8 +4,8 @@ export const UPDATE_INDIVIDUEL_EXERCICE = gql`
   mutation UpdateIndividuelExercice(
     $mandataire_id: Int!
     $estimation_etp: String!
-    $secretaire_specialise: Boolean!
-    $secretaire_specialise_etp: String
+    $secretariat_specialise: Boolean!
+    $secretariat_specialise_etp: Float
     $cumul_prepose: Boolean!
     $cumul_prepose_etp: String
     $cumul_delegue_service: Boolean!
@@ -14,8 +14,8 @@ export const UPDATE_INDIVIDUEL_EXERCICE = gql`
     update_individuel_exercices(
       _set: {
         estimation_etp: $estimation_etp
-        secretaire_specialise: $secretaire_specialise
-        secretaire_specialise_etp: $secretaire_specialise_etp
+        secretariat_specialise: $secretariat_specialise
+        secretariat_specialise_etp: $secretariat_specialise_etp
         cumul_prepose: $cumul_prepose
         cumul_prepose_etp: $cumul_prepose_etp
         cumul_delegue_service: $cumul_delegue_service
@@ -27,8 +27,8 @@ export const UPDATE_INDIVIDUEL_EXERCICE = gql`
       returning {
         id
         estimation_etp
-        secretaire_specialise
-        secretaire_specialise_etp
+        secretariat_specialise
+        secretariat_specialise_etp
         cumul_prepose
         cumul_prepose_etp
         cumul_delegue_service
