@@ -26,6 +26,13 @@ export const UPDATE_INDIVIDUEL_EXERCICE = gql`
       affected_rows
       returning {
         id
+        estimation_etp
+        secretaire_specialise
+        secretaire_specialise_etp
+        cumul_prepose
+        cumul_prepose_etp
+        cumul_delegue_service
+        cumul_delegue_service_etp
       }
     }
   }

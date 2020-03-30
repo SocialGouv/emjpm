@@ -1,23 +1,29 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React, { Fragment, useContext } from "react";
-import { Box, Text } from "rebass";
+import React, { useContext, useState } from "react";
+import { Box } from "rebass";
 
 import { getOptionValue } from "../../util/option/OptionUtil";
 import Sentry from "../../util/sentry";
 import { UserContext } from "../UserContext";
 import { IndividuelInformationExerciceForm } from "./IndividuelInformationExerciceForm";
+import { IndividuelInformationExerciceView } from "./IndividuelInformationExerciceView";
 import { UPDATE_INDIVIDUEL_EXERCICE } from "./mutations";
 import { INDIVIDUEL_EXERCICE } from "./queries";
 
 const IndividuelInformationExercice = () => {
   const { mandataire } = useContext(UserContext);
 
+  const [edit, setEdit] = useState(false);
+
   const { data, error, loading } = useQuery(INDIVIDUEL_EXERCICE, {
-    fetchPolicy: "network-only",
     variable: { mandataire_id: mandataire.id }
   });
 
   const [updateIndividuelExercice] = useMutation(UPDATE_INDIVIDUEL_EXERCICE);
+
+  const handleEdit = () => {
+    setEdit(!edit);
+  };
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     try {
@@ -33,6 +39,7 @@ const IndividuelInformationExercice = () => {
           cumul_delegue_service_etp: getOptionValue(values.cumulDelegueServiceEtp)
         }
       });
+      setEdit(false);
     } catch (error) {
       Sentry.captureException(error);
       setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
@@ -53,13 +60,14 @@ const IndividuelInformationExercice = () => {
 
   return (
     <Box>
-      {exercice ? (
-        <IndividuelInformationExerciceForm exercice={exercice} handleSubmit={handleSubmit} />
+      {edit ? (
+        <IndividuelInformationExerciceForm
+          exercice={exercice}
+          handleSubmit={handleSubmit}
+          handleCancel={() => setEdit(false)}
+        />
       ) : (
-        <Fragment>
-          <Text>values.{`Modalité d'exercice non disponible`}</Text>,
-          <Text color="textSecondary">.</Text>
-        </Fragment>
+        <IndividuelInformationExerciceView exercice={exercice} handleEdit={handleEdit} />
       )}
     </Box>
   );
