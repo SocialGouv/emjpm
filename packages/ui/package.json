@@ -30,7 +30,6 @@
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
-    "@socialgouv/emjpm-ui-core": "^1.20.1",
     "emotion-normalize": "^10.1.0",
     "microbundle": "^0.12.0-next",
     "normalize.css": "^8.0.1",

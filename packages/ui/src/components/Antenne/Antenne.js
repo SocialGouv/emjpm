@@ -1,8 +1,8 @@
-import { Card, Heading4, Text } from '@socialgouv/emjpm-ui-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { Box, Flex } from 'rebass';
 
+import { Card, Heading4, Text } from '../../core';
 import {
   antenneTitleStyle,
   availabilityIndicatorStyle,
