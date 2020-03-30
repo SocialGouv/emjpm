@@ -1,4 +1,4 @@
-import { NullableDate, NullableNumber } from "../utils/types.util";
+import { NullableDate, NullableNumber } from "../types";
 
 export interface UserTis {
   id: number;
