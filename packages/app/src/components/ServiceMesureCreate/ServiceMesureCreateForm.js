@@ -1,4 +1,4 @@
-import { Button, Field, InlineError, Input, Select } from "@socialgouv/emjpm-ui-core";
+import { Button, Field, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React from "react";

@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MandataireListItem } from "@socialgouv/emjpm-ui-components";
-import { Card, Heading2, Heading4, Select, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading2, Heading4, MandataireListItem, Select, Spinner } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";

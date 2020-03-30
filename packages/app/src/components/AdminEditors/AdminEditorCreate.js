@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Card } from "@socialgouv/emjpm-ui-core";
+import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
 

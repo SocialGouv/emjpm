@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MesureContextProvider, MesureListItem } from "@socialgouv/emjpm-ui-components";
+import { MesureContextProvider, MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
 import React, { Fragment, useContext, useState } from "react";
 import ReactPaginate from "react-paginate";

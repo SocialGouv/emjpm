@@ -1,5 +1,5 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
-import { Card, Heading4, Text } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading4, Text } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";

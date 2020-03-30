@@ -1,5 +1,5 @@
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
-import { Heading2 } from "@socialgouv/emjpm-ui-core";
+import { Heading2 } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 

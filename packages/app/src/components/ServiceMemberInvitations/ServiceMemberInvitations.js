@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Heading2, Text } from "@socialgouv/emjpm-ui-core";
+import { Heading2, Text } from "@emjpm/ui";
 import { format } from "date-fns";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";

@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MandataireListItem } from "@socialgouv/emjpm-ui-components";
+import { MandataireListItem } from "@emjpm/ui";
 import React, { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";

@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";

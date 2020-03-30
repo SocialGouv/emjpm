@@ -1,4 +1,4 @@
-import { Card, Heading3, Heading4 } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading3, Heading4 } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 

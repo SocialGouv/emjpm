@@ -1,4 +1,4 @@
-import { AsyncSelect } from "@socialgouv/emjpm-ui-core";
+import { AsyncSelect } from "@emjpm/ui";
 import React from "react";
 
 import { debouncedGeocode } from "../../util/geocode";

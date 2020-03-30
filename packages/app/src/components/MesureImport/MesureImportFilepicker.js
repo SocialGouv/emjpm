@@ -1,4 +1,4 @@
-import { Input } from "@socialgouv/emjpm-ui-core";
+import { Input } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
