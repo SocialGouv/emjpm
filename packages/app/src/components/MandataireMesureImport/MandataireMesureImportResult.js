@@ -1,5 +1,4 @@
-import { Button, Heading2 } from "@socialgouv/emjpm-ui-core";
-import { Text } from "@socialgouv/emjpm-ui-core/dist/Type";
+import { Button, Heading2, Text } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Flex } from "rebass";
 

@@ -1,4 +1,4 @@
-import { BoxWrapper } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 
 import { AdminApiLogs } from "../../../src/components/AdminApiLogs";

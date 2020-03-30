@@ -1,0 +1,76 @@
+import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
+
+import { Mesure } from './Mesure';
+
+const MesureList = (props) => {
+  const {
+    mesures,
+    onPanelOpen,
+    AcceptComponent,
+    CloseComponent,
+    EditComponent,
+    ReactivateComponent,
+    RemoveComponent,
+    isMagistrat,
+  } = props;
+  return (
+    <Fragment>
+      {mesures.map((item) => {
+        return (
+          <Mesure
+            isMagistrat={isMagistrat}
+            EditComponent={EditComponent}
+            RemoveComponent={RemoveComponent}
+            AcceptComponent={AcceptComponent}
+            CloseComponent={CloseComponent}
+            ReactivateComponent={ReactivateComponent}
+            onPanelOpen={onPanelOpen}
+            key={item.id}
+            {...item}
+          />
+        );
+      })}
+    </Fragment>
+  );
+};
+
+MesureList.defaultProps = {
+  AcceptComponent: null,
+  CloseComponent: null,
+  EditComponent: null,
+  ReactivateComponent: null,
+  RemoveComponent: null,
+  isMagistrat: false,
+  onPanelOpen: null,
+};
+
+MesureList.propTypes = {
+  AcceptComponent: PropTypes.elementType,
+  CloseComponent: PropTypes.elementType,
+  EditComponent: PropTypes.elementType,
+  ReactivateComponent: PropTypes.elementType,
+  RemoveComponent: PropTypes.elementType,
+  isMagistrat: PropTypes.bool,
+  mesures: PropTypes.arrayOf(
+    PropTypes.shape({
+      age: PropTypes.string.isRequired,
+      cabinet: PropTypes.string,
+      civilite: PropTypes.string.isRequired,
+      dateOuverture: PropTypes.string.isRequired,
+      dateOuvertureFormated: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      isUrgent: PropTypes.bool,
+      judgmentDate: PropTypes.date,
+      numeroDossier: PropTypes.string.isRequired,
+      numeroRg: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+      tiId: PropTypes.number,
+      type: PropTypes.string.isRequired,
+      ville: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  onPanelOpen: PropTypes.func,
+};
+
+export { MesureList };

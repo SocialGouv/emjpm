@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Text } from "@socialgouv/emjpm-ui-core";
+import { Card, Text } from "@emjpm/ui";
 import { format } from "date-fns";
 import React from "react";
 import { Box, Flex } from "rebass";

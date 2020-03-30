@@ -1,4 +1,4 @@
-import { BoxWrapper, Heading4, Tab, TabList, TabPanel, Tabs } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, Heading4, Tab, TabList, TabPanel, Tabs } from "@emjpm/ui";
 import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";

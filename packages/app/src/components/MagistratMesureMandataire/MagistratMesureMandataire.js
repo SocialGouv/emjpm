@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading3, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading3, Heading4, Spinner } from "@emjpm/ui";
 import dynamic from "next/dynamic";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
