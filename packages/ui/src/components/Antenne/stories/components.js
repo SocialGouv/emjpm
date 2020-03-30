@@ -1,6 +1,7 @@
-import { Button } from '@socialgouv/emjpm-ui-core';
 import PropTypes from 'prop-types';
 import React from 'react';
+
+import { Button } from '../../../core';
 
 export const Link = (props) => {
   const { href, children } = props;

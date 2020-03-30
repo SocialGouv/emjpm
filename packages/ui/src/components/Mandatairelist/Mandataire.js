@@ -1,10 +1,10 @@
-import { Card, Text } from '@socialgouv/emjpm-ui-core';
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { Box, Flex } from 'rebass';
 import { BuildingHouse } from 'styled-icons/boxicons-solid';
 import { Female, Male } from 'styled-icons/fa-solid';
 
+import { Card, Text } from '../../core';
 import {
   availabilityIndicatorStyle,
   cardStyle,

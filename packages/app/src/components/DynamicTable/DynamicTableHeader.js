@@ -1,4 +1,4 @@
-import { Button, Heading3 } from "@socialgouv/emjpm-ui-core";
+import { Button, Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 

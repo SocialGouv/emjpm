@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
-import { Logo, useOnClickOutside } from '@socialgouv/emjpm-ui-core';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { Box, Flex, Text } from 'rebass';
 import { ChevronDown } from 'styled-icons/evil';
 import { UserCircle } from 'styled-icons/fa-regular';
+
+import { Logo, useOnClickOutside } from '../../core';
 
 const BlueUserCircle = styled(UserCircle)`
   color: #006be6;
