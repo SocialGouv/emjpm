@@ -10,15 +10,24 @@ import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { formatAntenneOptions } from "../../util/services";
 import { Geocode, geocodeInitialValue } from "../Geocode";
-import { UPDATE_ANTENNE_COUTERS, UPDATE_SERVICES_COUTERS } from "../ServiceMesures/mutations";
-import { ACCEPT_MESURE } from "./mutations";
+import { ACCEPT_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
+import { SERVICE } from "./queries";
 
 export const ServiceMesureAcceptForm = props => {
   const { mesure, service_antennes, departementsData } = props;
-
-  const [updateAntenneCounters] = useMutation(UPDATE_ANTENNE_COUTERS);
-  const [updateServicesCounter] = useMutation(UPDATE_SERVICES_COUTERS);
-  const [updateMesure] = useMutation(ACCEPT_MESURE);
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: mesure.serviceId }
+      }
+    ]
+  });
+  const [updateMesure] = useMutation(ACCEPT_MESURE, {
+    onCompleted: async () => {
+      await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
+    }
+  });
 
   const antenneOptions = formatAntenneOptions(service_antennes);
   const geocode = geocodeInitialValue();
@@ -58,25 +67,7 @@ export const ServiceMesureAcceptForm = props => {
         }
       });
 
-      await updateServicesCounter({
-        variables: {
-          mesures_awaiting: -1,
-          mesures_in_progress: 1,
-          service_id: mesure.serviceId
-        }
-      });
-
-      if (mesure.antenneId) {
-        await updateAntenneCounters({
-          variables: {
-            antenne_id: mesure.antenneId,
-            inc_mesures_awaiting: -1,
-            inc_mesures_in_progress: 1
-          }
-        });
-      }
-
-      Router.push(`/services/mesures/${mesure.id}`);
+      await Router.push(`/services/mesures/${mesure.id}`);
       setSubmitting(false);
     },
     validationSchema: serviceAcceptMesureSchema,

@@ -32,8 +32,8 @@ export interface CountMandataireMesuresQueryResult {
       };
     };
     mandataires: {
-      mesures_awaiting: number;
-      mesures_in_progress: number;
+      mesures_en_attente: number;
+      mesures_en_cours: number;
     }[];
   };
 }

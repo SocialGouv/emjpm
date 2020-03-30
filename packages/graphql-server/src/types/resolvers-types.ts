@@ -68,7 +68,7 @@ export type Mutation = {
 
 
 export type MutationRecalculateMandataireMesuresCountArgs = {
-  userId: Scalars['Int']
+  mandataireId: Scalars['Int']
 };
 
 
