@@ -1,7 +1,7 @@
-import { Button, Field, InlineError, Select } from "@emjpm/ui";
+import { Button, Field, Heading4, InlineError, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
-import { Flex, Text } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import {
   INTERVALLE_ETP_OPTIONS,
@@ -10,6 +10,14 @@ import {
 } from "../../constants/mandataire";
 import { individuelExerciceSchema } from "../../lib/validationSchemas";
 import { findOption, getOptionValue } from "../../util/option/OptionUtil";
+
+const FieldLabel = ({ label }) => {
+  return (
+    <Text lineHeight="1.5" color="textSecondary">
+      {label}
+    </Text>
+  );
+};
 
 const IndividuelInformationExerciceForm = props => {
   const { exercice, handleSubmit } = props;
@@ -32,125 +40,133 @@ const IndividuelInformationExerciceForm = props => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Field>
-        <Text>{"Estimation de l'activité de mandataire individuel en ETP"}</Text>
-        <Select
-          id="estimationEtp"
-          name="estimationEtp"
-          placeholder="Estimation de l'activité de mandataire individuel en ETP"
-          value={formik.values.estimationEtp}
-          hasError={formik.errors.estimationEtp}
-          onChange={option => formik.setFieldValue("estimationEtp", option)}
-          options={INTERVALLE_ETP_OPTIONS}
-        />
-        <InlineError message={formik.errors.estimationEtp} fieldId="estimationEtp" />
-      </Field>
-      <Field>
-        <Text>{"Estimation de l'activité de mandataire individuel en ETP"}</Text>
-        <Select
-          id="secretaireSpecialise"
-          name="secretaireSpecialise"
-          placeholder="Estimation de l'activité de mandataire individuel en ETP"
-          value={formik.values.secretaireSpecialise}
-          hasError={formik.errors.secretaireSpecialise}
-          onChange={option => {
-            formik.setFieldValue("secretaireSpecialise", option);
-            if (!option.value) {
-              formik.setFieldValue("secretaireSpecialiseEtp", "");
-            }
-          }}
-          options={SECRETARIAT_OPTIONS}
-        />
-        <InlineError message={formik.errors.secretaireSpecialise} fieldId="secretaireSpecialise" />
-      </Field>
-      {getOptionValue(formik.values.secretaireSpecialise) && (
+      <Box>
+        <Heading4 mb={1}>{"Activité de mandataire individuel"}</Heading4>
         <Field>
-          <Text>{"Estimation de l'activité en ETP du secrétaire spécialisé"}</Text>
+          <FieldLabel label="Estimation de l'activité de mandataire individuel en ETP" />
           <Select
-            id="secretaireSpecialiseEtp"
-            name="secretaireSpecialiseEtp"
-            placeholder="Estimation de l'activité en ETP du secrétaire spécialisé"
-            value={formik.values.secretaireSpecialiseEtp}
-            hasError={formik.errors.secretaireSpecialise_etp}
-            onChange={option => formik.setFieldValue("secretaireSpecialiseEtp", option)}
+            id="estimationEtp"
+            name="estimationEtp"
+            value={formik.values.estimationEtp}
+            hasError={formik.errors.estimationEtp}
+            onChange={option => formik.setFieldValue("estimationEtp", option)}
             options={INTERVALLE_ETP_OPTIONS}
+          />
+          <InlineError message={formik.errors.estimationEtp} fieldId="estimationEtp" />
+        </Field>
+      </Box>
+      <Box>
+        <Heading4 mb={1}>{"Secretariat spécialisé"}</Heading4>
+        <Field>
+          <FieldLabel label="Exercez-vous avec un secretariat spécialisé?" />
+          <Select
+            id="secretaireSpecialise"
+            name="secretaireSpecialise"
+            value={formik.values.secretaireSpecialise}
+            hasError={formik.errors.secretaireSpecialise}
+            onChange={option => {
+              formik.setFieldValue("secretaireSpecialise", option);
+              if (!option.value) {
+                formik.setFieldValue("secretaireSpecialiseEtp", "");
+              }
+            }}
+            options={SECRETARIAT_OPTIONS}
           />
           <InlineError
-            message={formik.errors.secretaireSpecialiseEtp}
-            fieldId="secretaireSpecialiseEtp"
+            message={formik.errors.secretaireSpecialise}
+            fieldId="secretaireSpecialise"
           />
         </Field>
-      )}
-      <Field>
-        <Text>{"Situation de cumul en tant que préposé d'établissement"}</Text>
-        <Select
-          id="cumulPrepose"
-          name="cumulPrepose"
-          placeholder="Situation de cumul en tant que préposé d'établissement"
-          value={formik.values.cumulPrepose}
-          hasError={formik.errors.cumulPrepose}
-          onChange={option => {
-            formik.setFieldValue("cumulPrepose", option);
-            if (!option.value) {
-              formik.setFieldValue("cumulPreposeEtp", "");
-            }
-          }}
-          options={YES_NO_OPTIONS}
-        />
-        <InlineError message={formik.errors.cumulPrepose} fieldId="cumulPrepose" />
-      </Field>
-      {getOptionValue(formik.values.cumulPrepose) && (
+        {getOptionValue(formik.values.secretaireSpecialise) && (
+          <Field>
+            <FieldLabel label="Estimation de l'activité en ETP du secrétaire spécialisé" />
+            <Select
+              id="secretaireSpecialiseEtp"
+              name="secretaireSpecialiseEtp"
+              value={formik.values.secretaireSpecialiseEtp}
+              hasError={formik.errors.secretaireSpecialiseEtp}
+              onChange={option => formik.setFieldValue("secretaireSpecialiseEtp", option)}
+              options={INTERVALLE_ETP_OPTIONS}
+            />
+            <InlineError
+              message={formik.errors.secretaireSpecialiseEtp}
+              fieldId="secretaireSpecialiseEtp"
+            />
+          </Field>
+        )}
+      </Box>
+      <Box>
+        <Heading4 mb={1}>{"Cumul en tant que préposé d'établissement"}</Heading4>
         <Field>
-          <Text>{"ETP consacré au cumul en tant que préposé"}</Text>
+          <FieldLabel label="Situation de cumul en tant que préposé d'établissement" />
           <Select
-            id="cumulPreposeEtp"
-            name="cumulPreposeEtp"
-            placeholder="ETP consacré au cumul en tant que préposé"
-            value={formik.values.cumulPreposeEtp}
-            hasError={formik.errors.cumulPreposeEtp}
-            onChange={option => formik.setFieldValue("cumulPreposeEtp", option)}
-            options={INTERVALLE_ETP_OPTIONS}
+            id="cumulPrepose"
+            name="cumulPrepose"
+            value={formik.values.cumulPrepose}
+            hasError={formik.errors.cumulPrepose}
+            onChange={option => {
+              formik.setFieldValue("cumulPrepose", option);
+              if (!option.value) {
+                formik.setFieldValue("cumulPreposeEtp", "");
+              }
+            }}
+            options={YES_NO_OPTIONS}
           />
-          <InlineError message={formik.errors.cumulPreposeEtp} fieldId="cumulPreposeEtp" />
+          <InlineError message={formik.errors.cumulPrepose} fieldId="cumulPrepose" />
         </Field>
-      )}
-
-      <Field>
-        <Text>{"Situation de cumul en tant que délégué d'une service"}</Text>
-        <Select
-          id="cumulDelegueService"
-          name="cumulDelegueService"
-          placeholder="Situation de cumul en tant que délégué d'une service"
-          value={formik.values.cumulDelegueService}
-          hasError={formik.errors.cumulDelegueService}
-          onChange={option => {
-            formik.setFieldValue("cumulDelegueService", option);
-            if (!option.value) {
-              formik.setFieldValue("cumulDelegueServiceEtp", "");
-            }
-          }}
-          options={YES_NO_OPTIONS}
-        />
-        <InlineError message={formik.errors.cumulDelegueService} fieldId="cumulDelegueService" />
-      </Field>
-      {getOptionValue(formik.values.cumulDelegueService) && (
+        {getOptionValue(formik.values.cumulPrepose) && (
+          <Field>
+            <FieldLabel label="ETP consacré au cumul en tant que préposé" />
+            <Select
+              id="cumulPreposeEtp"
+              name="cumulPreposeEtp"
+              placeholder="ETP consacré au cumul en tant que préposé"
+              value={formik.values.cumulPreposeEtp}
+              hasError={formik.errors.cumulPreposeEtp}
+              onChange={option => formik.setFieldValue("cumulPreposeEtp", option)}
+              options={INTERVALLE_ETP_OPTIONS}
+            />
+            <InlineError message={formik.errors.cumulPreposeEtp} fieldId="cumulPreposeEtp" />
+          </Field>
+        )}
+      </Box>
+      <Box>
+        <Heading4 mb={1}>{"Cumul en tant que délégué d'une service"}</Heading4>
         <Field>
-          <Text>{"ETP consacré au cumul en tant que délégué d'un service mandataire"}</Text>
+          <FieldLabel label="Situation de cumul en tant que délégué d'une service" />
           <Select
-            id="cumulDelegueServiceEtp"
-            name="cumulDelegueServiceEtp"
-            placeholder="ETP consacré au cumul en tant que délégué d'un service mandataire"
-            value={formik.values.cumulDelegueServiceEtp}
-            hasError={formik.errors.cumulDelegueServiceEtp}
-            onChange={option => formik.setFieldValue("cumulDelegueServiceEtp", option)}
-            options={INTERVALLE_ETP_OPTIONS}
+            id="cumulDelegueService"
+            name="cumulDelegueService"
+            value={formik.values.cumulDelegueService}
+            hasError={formik.errors.cumulDelegueService}
+            onChange={option => {
+              formik.setFieldValue("cumulDelegueService", option);
+              if (!option.value) {
+                formik.setFieldValue("cumulDelegueServiceEtp", "");
+              }
+            }}
+            options={YES_NO_OPTIONS}
           />
-          <InlineError
-            message={formik.errors.cumulDelegueServiceEtp}
-            fieldId="cumulDelegueServiceEtp"
-          />
+          <InlineError message={formik.errors.cumulDelegueService} fieldId="cumulDelegueService" />
         </Field>
-      )}
+        {getOptionValue(formik.values.cumulDelegueService) && (
+          <Field>
+            <FieldLabel label="ETP consacré au cumul en tant que délégué d'un service mandataire" />
+            <Select
+              id="cumulDelegueServiceEtp"
+              name="cumulDelegueServiceEtp"
+              value={formik.values.cumulDelegueServiceEtp}
+              hasError={formik.errors.cumulDelegueServiceEtp}
+              onChange={option => formik.setFieldValue("cumulDelegueServiceEtp", option)}
+              options={INTERVALLE_ETP_OPTIONS}
+            />
+            <InlineError
+              message={formik.errors.cumulDelegueServiceEtp}
+              fieldId="cumulDelegueServiceEtp"
+            />
+          </Field>
+        )}
+      </Box>
       <Flex>
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
           Modifier

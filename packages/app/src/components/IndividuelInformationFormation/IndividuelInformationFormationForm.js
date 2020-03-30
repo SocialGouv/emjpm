@@ -1,20 +1,27 @@
-import { Button, Field, InlineError, Input } from "@emjpm/ui";
+import { Button, Field, Heading4, InlineError, Input } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
-import { Flex, Text } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import { individuelFormationSchema } from "../../lib/validationSchemas";
 
+const FieldLabel = ({ label }) => {
+  return (
+    <Text lineHeight="1.5" color="textSecondary">
+      {label}
+    </Text>
+  );
+};
+
 const InputField = ({ formik, property, placeholder, onChange }) => (
   <Field>
-    <Text>{placeholder}</Text>
+    <FieldLabel label={placeholder} />
     <Input
       value={formik.values[property]}
       id={property}
       name={property}
       hasError={formik.errors[property]}
       onChange={onChange}
-      placeholder={placeholder}
     />
     <InlineError message={formik.errors[property]} fieldId={property} />
   </Field>
@@ -40,68 +47,80 @@ const IndividuelInformationFormationForm = props => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <InputField
-        formik={formik}
-        placeholder="Année d'obtention du CNC MJPM"
-        property="cncMjpmAnneeObtention"
-        onChange={formik.handleChange}
-      />
-      <InputField
-        formik={formik}
-        placeholder="Nombre d'heures de formation dans le cadre du CNC MJPM (hors stage)"
-        property="cncMjpmHeureFormation"
-        onChange={formik.handleChange}
-      />
-      <InputField
-        formik={formik}
-        placeholder="Année d'obtention du CNC MAJ"
-        property="cncMajAnneeObtention"
-        onChange={ev => {
-          formik.handleChange(ev);
-          if (!formik.values.cncMajAnneeObtention) {
-            formik.setFieldValue("cncMajHeureFormation", "");
-          }
-        }}
-      />
-      {formik.values.cncMajAnneeObtention && !formik.errors.cncMajAnneeObtention && (
+      <Box>
+        <Heading4 mb={1}>{"CNC MJPM"}</Heading4>
         <InputField
           formik={formik}
-          placeholder="Nombre d'heures de formation dans le cadre du CNC MAJ (hors stage)"
-          property="cncMajHeureFormation"
+          placeholder="Année d'obtention du CNC MJPM"
+          property="cncMjpmAnneeObtention"
           onChange={formik.handleChange}
         />
-      )}
-      <InputField
-        formik={formik}
-        placeholder="Année d'obtention du CNC DPF"
-        property="cncDpfAnneeObtention"
-        onChange={ev => {
-          formik.handleChange(ev);
-          if (!formik.values.cncDpfAnneeObtention) {
-            formik.setFieldValue("cncDpfHeureFormation", "");
-          }
-        }}
-      />
-      {formik.values.cncDpfAnneeObtention && !formik.errors.cncDpfAnneeObtention && (
         <InputField
           formik={formik}
-          placeholder="Nombre d'heures de formation dans le cadre du CNC DPF"
-          property="cncDpfHeureFormation"
+          placeholder="Nombre d'heures de formation dans le cadre du CNC MJPM (hors stage)"
+          property="cncMjpmHeureFormation"
           onChange={formik.handleChange}
         />
-      )}
-      <InputField
-        formik={formik}
-        placeholder="Niveau de qualification de 1 à 5"
-        property="niveauQualification"
-        onChange={formik.handleChange}
-      />
-      <InputField
-        formik={formik}
-        placeholder="Niveau de qualification du secrétaire spécialisé de 1 à 5"
-        property="niveauQualificationSecretaireSpe"
-        onChange={formik.handleChange}
-      />
+      </Box>
+      <Box>
+        <Heading4 mb={1}>{"CNC MAJ"}</Heading4>
+        <InputField
+          formik={formik}
+          placeholder="Année d'obtention du CNC MAJ"
+          property="cncMajAnneeObtention"
+          onChange={ev => {
+            formik.handleChange(ev);
+            if (!formik.values.cncMajAnneeObtention) {
+              formik.setFieldValue("cncMajHeureFormation", "");
+            }
+          }}
+        />
+        {formik.values.cncMajAnneeObtention && !formik.errors.cncMajAnneeObtention && (
+          <InputField
+            formik={formik}
+            placeholder="Nombre d'heures de formation dans le cadre du CNC MAJ (hors stage)"
+            property="cncMajHeureFormation"
+            onChange={formik.handleChange}
+          />
+        )}
+      </Box>
+      <Box>
+        <Heading4 mb={1}>{"CNC DPF"}</Heading4>
+        <InputField
+          formik={formik}
+          placeholder="Année d'obtention du CNC DPF"
+          property="cncDpfAnneeObtention"
+          onChange={ev => {
+            formik.handleChange(ev);
+            if (!formik.values.cncDpfAnneeObtention) {
+              formik.setFieldValue("cncDpfHeureFormation", "");
+            }
+          }}
+        />
+        {formik.values.cncDpfAnneeObtention && !formik.errors.cncDpfAnneeObtention && (
+          <InputField
+            formik={formik}
+            placeholder="Nombre d'heures de formation dans le cadre du CNC DPF"
+            property="cncDpfHeureFormation"
+            onChange={formik.handleChange}
+          />
+        )}
+      </Box>
+      <Box>
+        <Heading4 mb={1}>{"Niveau de qualification"}</Heading4>
+        <InputField
+          formik={formik}
+          placeholder="Niveau de qualification de 1 à 5"
+          property="niveauQualification"
+          onChange={formik.handleChange}
+        />
+        <InputField
+          formik={formik}
+          placeholder="Niveau de qualification du secrétaire spécialisé de 1 à 5"
+          property="niveauQualificationSecretaireSpe"
+          onChange={formik.handleChange}
+        />
+      </Box>
       <Flex>
         <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
           Modifier

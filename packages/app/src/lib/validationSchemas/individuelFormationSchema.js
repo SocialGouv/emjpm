@@ -32,7 +32,6 @@ const individuelFormationSchema = yup.object().shape({
     .max(5),
   niveauQualificationSecretaireSpe: yup
     .number()
-    .required()
     .min(1)
     .max(5)
 });
