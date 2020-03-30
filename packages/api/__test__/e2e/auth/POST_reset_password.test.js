@@ -12,7 +12,7 @@ process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 const { knex } = global;
 jest.setMock("@emjpm/api/src/db/knex", knex);
 
-const server = require("@emjpm/api/src/app");
+const server = require("@emjpm/api/src/server");
 
 //
 
