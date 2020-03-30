@@ -1,30 +1,49 @@
 import gql from "graphql-tag";
 
 export const SIGNUP_DATA = gql`
-  {
+  query signup_data {
     tis {
       id
       etablissement
       code_postal
       ville
     }
+    services(order_by: { etablissement: asc }) {
+      id
+      etablissement
+      code_postal
+    }
+    role {
+      id
+      name
+    }
+  }
+`;
 
+export const DEPARTMENTS = gql`
+  query departments {
     departements(order_by: { nom: asc }) {
       id
       id_region
       nom
       code
     }
+  }
+`;
 
-    services(order_by: { etablissement: asc }) {
-      id
-      etablissement
+export const LOCATIONS = gql`
+  query locations($zipcode: String!) {
+    geolocalisation_code_postal(where: { code_postal: { _eq: $zipcode } }) {
       code_postal
+      latitude
+      longitude
+      cities
     }
-
-    role {
+    departements(order_by: { nom: asc }) {
       id
-      name
+      id_region
+      nom
+      code
     }
   }
 `;

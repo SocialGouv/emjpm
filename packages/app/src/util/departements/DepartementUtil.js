@@ -1,6 +1,6 @@
 export const getRegionCode = zipcode => {
   if (!zipcode || zipcode.length !== 5) {
-    throw "zip code is invalid";
+    throw new Error("zip code is invalid");
   }
   if (zipcode.startsWith("20")) {
     // Corse
