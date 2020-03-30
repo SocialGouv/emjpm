@@ -1,19 +1,12 @@
 import { Button, Field, Heading4, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
 import { YES_NO_OPTIONS } from "../../constants/mandataire";
 import { individuelAgrementSchema } from "../../lib/validationSchemas";
 import { getOptionValue } from "../../util/option/OptionUtil";
-
-const FieldLabel = ({ label }) => {
-  return (
-    <Text lineHeight="1.5" color="textSecondary">
-      {label}
-    </Text>
-  );
-};
+import { FieldLabel } from "../IndividuelInformationCommon";
 
 const IndividuelInformationAgrementForm = props => {
   const { agrement, handleSubmit, handleCancel } = props;

@@ -1,17 +1,10 @@
 import { Button, Field, Heading4, InlineError, Input } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
 import { individuelFormationSchema } from "../../lib/validationSchemas";
-
-const FieldLabel = ({ label }) => {
-  return (
-    <Text lineHeight="1.5" color="textSecondary">
-      {label}
-    </Text>
-  );
-};
+import { FieldLabel } from "../IndividuelInformationCommon";
 
 const InputField = ({ formik, property, placeholder, onChange }) => (
   <Field>

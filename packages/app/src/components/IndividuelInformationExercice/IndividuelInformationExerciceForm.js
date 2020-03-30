@@ -1,7 +1,7 @@
 import { Button, Field, Heading4, InlineError, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
 import {
   INTERVALLE_ETP_OPTIONS,
@@ -10,14 +10,7 @@ import {
 } from "../../constants/mandataire";
 import { individuelExerciceSchema } from "../../lib/validationSchemas";
 import { findOption, getOptionValue } from "../../util/option/OptionUtil";
-
-const FieldLabel = ({ label }) => {
-  return (
-    <Text lineHeight="1.5" color="textSecondary">
-      {label}
-    </Text>
-  );
-};
+import { FieldLabel } from "../IndividuelInformationCommon";
 
 const IndividuelInformationExerciceForm = props => {
   const { exercice, handleSubmit, handleCancel } = props;
