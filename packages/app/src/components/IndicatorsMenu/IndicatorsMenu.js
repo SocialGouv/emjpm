@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading4, Spinner } from "@socialgouv/emjpm-ui-core";
+import { Card, Heading4, Spinner } from "@emjpm/ui";
 import Link from "next/link";
 import React from "react";
 import { Scrollbar } from "react-scrollbars-custom";

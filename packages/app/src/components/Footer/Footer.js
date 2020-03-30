@@ -1,4 +1,4 @@
-import { BoxWrapper, Logo } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, Logo } from "@emjpm/ui";
 import getConfig from "next/config";
 import React from "react";
 import { Box, Flex } from "rebass";

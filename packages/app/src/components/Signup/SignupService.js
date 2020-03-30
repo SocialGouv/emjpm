@@ -1,13 +1,4 @@
-import {
-  Button,
-  Card,
-  Field,
-  Heading1,
-  Heading4,
-  InlineError,
-  Select,
-  Text
-} from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading1, Heading4, InlineError, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";

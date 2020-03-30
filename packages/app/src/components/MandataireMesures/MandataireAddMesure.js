@@ -1,15 +1,6 @@
 // TODO move me on a proper folder
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import {
-  Button,
-  Card,
-  Field,
-  Heading4,
-  InlineError,
-  Input,
-  Select,
-  Text
-} from "@socialgouv/emjpm-ui-core";
+import { Button, Card, Field, Heading4, InlineError, Input, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";

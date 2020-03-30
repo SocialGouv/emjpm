@@ -1,4 +1,4 @@
-import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@socialgouv/emjpm-ui-core";
+import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 

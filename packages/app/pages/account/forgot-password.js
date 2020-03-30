@@ -1,4 +1,4 @@
-import { FlexWrapper, Heading1 } from "@socialgouv/emjpm-ui-core";
+import { FlexWrapper, Heading1 } from "@emjpm/ui";
 import React from "react";
 
 import { ForgotPassword } from "../../src/components/ForgotPassword";

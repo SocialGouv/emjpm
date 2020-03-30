@@ -1,3 +1,5 @@
+import { GlobalStyle } from "@emjpm/ui";
+import { css, Global } from "@emotion/core";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 
@@ -37,6 +39,21 @@ export default class MyDocument extends Document {
           <script type="text/javascript" src="/static/tarteaucitron/initTarteaucitron.js" />
         </Head>
         <body>
+          {/* @socialgouv global style */}
+          <GlobalStyle />
+          {/* custom global style */}
+          <Global
+            styles={css`
+              body,
+              html,
+              div#__next {
+                font-size: 14px;
+                font-family: "Open Sans", sans-serif;
+                background: #f2f5f9;
+                -webkit-font-smoothing: antialiased;
+              }
+            `}
+          />
           <Main />
           <NextScript />
         </body>
