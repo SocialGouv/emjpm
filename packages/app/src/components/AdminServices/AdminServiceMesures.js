@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import { Heading4 } from "@emjpm/ui";
 import { Checkbox, Label } from "@rebass/forms";
-import { Heading4 } from "@socialgouv/emjpm-ui-core";
 import { format } from "date-fns";
 import React, { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
