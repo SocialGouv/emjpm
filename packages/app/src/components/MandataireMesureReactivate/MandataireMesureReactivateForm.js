@@ -7,14 +7,23 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { UPDATE_MANDATAIRES_COUTERS } from "../MandataireMesures/mutations";
-import { REACTIVATE_MESURE } from "./mutations";
+import { MANDATAIRE, REACTIVATE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 
 export const MandataireMesureReactivateForm = props => {
   const { mesure } = props;
 
-  const [updateMandatairesCounter] = useMutation(UPDATE_MANDATAIRES_COUTERS);
-  const [updateMesure] = useMutation(REACTIVATE_MESURE);
+  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
+  const [updateMesure] = useMutation(REACTIVATE_MESURE, {
+    onCompleted: async () => {
+      await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
+    },
+    refetchQueries: [
+      {
+        query: MANDATAIRE,
+        variables: { id: mesure.mandataireId }
+      }
+    ]
+  });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
@@ -25,19 +34,10 @@ export const MandataireMesureReactivateForm = props => {
           reason_extinction: values.reason_extinction
         }
       });
-
-      await updateMandatairesCounter({
-        variables: {
-          mandataireId: mesure.mandataireId,
-          mesures_awaiting: 0,
-          mesures_in_progress: 1
-        }
-      });
-
-      setSubmitting(false);
-      Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
+      await Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
         shallow: true
       });
+      setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
       reason_extinction: Yup.string().required("Required")

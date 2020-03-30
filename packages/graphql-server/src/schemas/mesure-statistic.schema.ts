@@ -40,7 +40,7 @@ export default gql`
   }
 
   type Mutation {
-    recalculateMandataireMesuresCount(userId: Int!): UpdatedRows
+    recalculateMandataireMesuresCount(mandataireId: Int!): UpdatedRows
     recalculateServiceMesuresCount(serviceId: Int!): UpdatedRows
   }
 

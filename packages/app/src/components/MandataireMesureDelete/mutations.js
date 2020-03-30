@@ -10,3 +10,12 @@ export const DELETE_MESURE = gql`
     }
   }
 `;
+
+export const RECALCULATE_MANDATAIRE_MESURES = gql`
+  mutation update_mandataire_mesures($mandataire_id: Int!) {
+    recalculateMandataireMesuresCount(mandataireId: $mandataire_id) {
+      success
+      updatedRows
+    }
+  }
+`;

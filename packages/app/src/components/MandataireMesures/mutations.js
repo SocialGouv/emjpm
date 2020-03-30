@@ -1,25 +1,5 @@
 import gql from "graphql-tag";
 
-export const UPDATE_MANDATAIRES_COUTERS = gql`
-  mutation UpdateMandatairesCounter(
-    $mesures_in_progress: Int!
-    $mandataireId: Int!
-    $mesures_awaiting: Int!
-  ) {
-    update_mandataires(
-      where: { id: { _eq: $mandataireId } }
-      _inc: { mesures_en_cours: $mesures_in_progress, mesures_en_attente: $mesures_awaiting }
-    ) {
-      affected_rows
-      returning {
-        id
-        mesures_en_cours
-        mesures_en_attente
-      }
-    }
-  }
-`;
-
 export const ADD_MESURE = gql`
   mutation addMesure(
     $date_ouverture: date!
@@ -102,6 +82,15 @@ export const ADD_MESURE = gql`
           etablissement
         }
       }
+    }
+  }
+`;
+
+export const RECALCULATE_MANDATAIRE_MESURES = gql`
+  mutation update_mandataire_mesures($mandataire_id: Int!) {
+    recalculateMandataireMesuresCount(mandataireId: $mandataire_id) {
+      success
+      updatedRows
     }
   }
 `;

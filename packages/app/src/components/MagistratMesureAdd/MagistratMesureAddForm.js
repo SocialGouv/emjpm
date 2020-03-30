@@ -9,7 +9,13 @@ import { Box, Flex } from "rebass";
 import { CIVILITY, IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { magistratMandataireSchema } from "../../lib/validationSchemas";
 import { UserContext } from "../UserContext";
-import { CHOOSE_MANDATAIRE, CHOOSE_SERVICE } from "./mutations";
+import {
+  CHOOSE_MANDATAIRE,
+  CHOOSE_SERVICE,
+  RECALCULATE_MANDATAIRE_MESURES,
+  RECALCULATE_SERVICE_MESURES
+} from "./mutations";
+import { MANDATAIRE, SERVICE } from "./queries";
 
 export const MagistratMesureAddForm = props => {
   const { serviceId, mandataireId, cancelActionRoute } = props;
@@ -18,19 +24,43 @@ export const MagistratMesureAddForm = props => {
     magistrat: { ti_id: tiId }
   } = useContext(UserContext);
 
+  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
-    onCompleted({ insert_mesures }) {
+    onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
-      Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
+
+      await recalculateMandataireMesures({
+        variables: {
+          mandataire_id: mandataireId,
+          refetchQueries: [
+            {
+              query: MANDATAIRE,
+              variables: { id: mandataireId }
+            }
+          ]
+        }
+      });
+
+      await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
         shallow: true
       });
     }
   });
 
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES);
   const [chooseService] = useMutation(CHOOSE_SERVICE, {
-    onCompleted({ insert_mesures }) {
+    onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
-      Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
+      await recalculateServiceMesures({
+        variables: { service_id: mesure.service_id },
+        refetchQueries: [
+          {
+            query: SERVICE,
+            variables: { id: mesure.service_id }
+          }
+        ]
+      });
+      await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
         shallow: true
       });
     }

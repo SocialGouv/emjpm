@@ -52,7 +52,7 @@ export const DELETE_MANDATAIRE_MESURE = gql`
     delete_mesures(where: { id: { _eq: $id } }) {
       affected_rows
     }
-    update_mandataires(where: { id: { _eq: $mandataire_id } }, _inc: { mesures_en_attente: -1 }) {
+    update_mandataires(where: { id: { _eq: $mandataire_id } }) {
       affected_rows
       returning {
         id
@@ -67,7 +67,7 @@ export const DELETE_SERVICE_MESURE = gql`
     delete_mesures(where: { id: { _eq: $id } }) {
       affected_rows
     }
-    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_awaiting: -1 }) {
+    update_services(where: { id: { _eq: $service_id } }) {
       affected_rows
       returning {
         id
