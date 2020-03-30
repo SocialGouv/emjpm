@@ -518,17 +518,17 @@ Object {
     "nullable": false,
     "type": "integer",
   },
-  "secretaire_specialise": Object {
+  "secretariat_specialise": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "boolean",
   },
-  "secretaire_specialise_etp": Object {
+  "secretariat_specialise_etp": Object {
     "defaultValue": null,
-    "maxLength": 255,
+    "maxLength": null,
     "nullable": true,
-    "type": "character varying",
+    "type": "real",
   },
 }
 `;
@@ -828,18 +828,6 @@ Object {
     "maxLength": null,
     "nullable": false,
     "type": "integer",
-  },
-  "nb_secretariat": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "real",
-  },
-  "secretariat": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "boolean",
   },
   "siret": Object {
     "defaultValue": null,
