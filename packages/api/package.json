@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
-    "build": "ncc build src/app.js --source-map -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
-    "dev": "nodemon src/app.js --inspect",
+    "build": "ncc build src/start.js --source-map -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
+    "dev": "nodemon src/start.js --inspect",
     "test": "NODE_ENV=test jest --maxWorkers=2",
     "lint": "eslint __test__ src",
     "lint:fix": "eslint . --fix",
