@@ -13,8 +13,8 @@ const label = value => {
 
 const MandataireInformations = () => {
   const user = useContext(UserContext);
-
   const { email, nom, prenom, user_tis, mandataire } = user;
+
   return (
     <Box p="5">
       <Heading3>
@@ -55,6 +55,14 @@ const MandataireInformations = () => {
               <Box mr={4}>
                 <Text sx={subtitle}>{"Adresse"}</Text>
                 <Text sx={content}>{label(mandataire.adresse)}</Text>
+              </Box>
+              <Box mr={4}>
+                <Text sx={subtitle}>{"Code postal"}</Text>
+                <Text sx={content}>{label(mandataire.code_postal)}</Text>
+              </Box>
+              <Box mr={4}>
+                <Text sx={subtitle}>{"Ville"}</Text>
+                <Text sx={content}>{label(mandataire.ville)}</Text>
               </Box>
               <Box mr={4}>
                 <Text sx={subtitle}>{"Téléphone"}</Text>
