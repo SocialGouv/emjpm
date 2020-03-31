@@ -84,8 +84,6 @@ const MandataireEditInformations = props => {
           ville: values.city,
           latitude: geolocation ? geolocation.latitude : null,
           longitude: geolocation ? geolocation.longitude : null,
-          secretariat: values.secretariat.value,
-          nb_secretariat: parseFloat(values.nb_secretariat),
           competences: values.competences
         }
       });

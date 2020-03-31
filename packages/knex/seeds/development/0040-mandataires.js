@@ -14,8 +14,6 @@ exports.seed = function(knex) {
           adresse: "21 rue de houx",
           mesures_en_cours: 1,
           dispo_max: 5,
-          secretariat: false,
-          nb_secretariat: 2,
           user_id: 1,
           latitude: 48.840356,
           longitude: 2.27154
@@ -33,8 +31,6 @@ exports.seed = function(knex) {
           adresse: "21 rue monge",
           mesures_en_cours: 2,
           dispo_max: 3,
-          secretariat: true,
-          nb_secretariat: 2,
           user_id: 2,
           latitude: 48.8359,
           longitude: 2.27154
@@ -53,8 +49,6 @@ exports.seed = function(knex) {
           adresse: "67 rue saint martin",
           mesures_en_cours: 22,
           dispo_max: 38,
-          secretariat: false,
-          nb_secretariat: 0,
           user_id: 42,
           latitude: 48.840359,
           longitude: 2.27154
@@ -72,8 +66,6 @@ exports.seed = function(knex) {
           adresse: "67 rue saint martin",
           mesures_en_cours: 22,
           dispo_max: 38,
-          secretariat: false,
-          nb_secretariat: 0,
           user_id: 52,
           latitude: 48.858483,
           longitude: 2.27154
@@ -92,8 +84,6 @@ exports.seed = function(knex) {
           adresse: "67 rue saint louis",
           mesures_en_cours: 12,
           dispo_max: 55,
-          secretariat: true,
-          nb_secretariat: 1,
           user_id: 3,
           latitude: 48.85843,
           longitude: 2.27154

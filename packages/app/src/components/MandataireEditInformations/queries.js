@@ -16,8 +16,6 @@ export const MANDATAIRE = gql`
         dispo_max
         etablissement
         genre
-        nb_secretariat
-        secretariat
         siret
         telephone
         telephone_portable

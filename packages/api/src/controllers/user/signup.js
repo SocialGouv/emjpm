@@ -1,6 +1,9 @@
 const { validationResult } = require("express-validator");
 const { User } = require("../../models/User");
 const { Mandataire } = require("../../models/Mandataire");
+const { IndividuelAgrement } = require("../../models/IndividuelAgrement");
+const { IndividuelExercice } = require("../../models/IndividuelExercice");
+const { IndividuelFormation } = require("../../models/IndividuelFormation");
 const { Magistrat } = require("../../models/Magistrat");
 const { UserTis } = require("../../models/UserTis");
 const { UserRole } = require("../../models/UserRole");
@@ -29,7 +32,7 @@ const createMagistrat = async (magistrat, user) => {
     });
 };
 
-const createMandataire = async (mandataire, user_id) => {
+const createMandataire = async (mandataireDatas, user_id) => {
   const {
     etablissement,
     telephone,
@@ -42,9 +45,9 @@ const createMandataire = async (mandataire, user_id) => {
     siret,
     latitude,
     longitude
-  } = mandataire;
+  } = mandataireDatas;
 
-  return Mandataire.query()
+  const mandataire = await Mandataire.query()
     .allowInsert(
       "[etablissement,siret, telephone,user_id,telephone_portable,adresse,code_postal,ville, department_id, dispo_max]"
     )
@@ -62,6 +65,24 @@ const createMandataire = async (mandataire, user_id) => {
       latitude,
       longitude
     });
+
+  await IndividuelAgrement.query()
+    .allowInsert("[mandataire_id]")
+    .insert({
+      mandataire_id: mandataire.id
+    });
+  await IndividuelExercice.query()
+    .allowInsert("[mandataire_id]")
+    .insert({
+      mandataire_id: mandataire.id
+    });
+  await IndividuelFormation.query()
+    .allowInsert("[mandataire_id]")
+    .insert({
+      mandataire_id: mandataire.id
+    });
+
+  return mandataire;
 };
 
 const createUserTis = (tis, user_id) => {
