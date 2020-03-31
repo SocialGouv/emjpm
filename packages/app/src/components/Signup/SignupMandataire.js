@@ -18,16 +18,15 @@ import { Box, Flex } from "rebass";
 
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireSignupSchema } from "../../lib/validationSchemas";
+import { getLocation } from "../../query-service/DepartementQueryService";
 import { isSiretExists } from "../../query-service/SiretQueryService";
-import { findDepartement } from "../../util/departements/DepartementUtil";
-import { Geocode, geocodeInitialValue } from "../Geocode";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 import { grayBox } from "./style";
 
-const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
+const SignupMandataireForm = ({ tiDatas }) => {
   const { user, mandataire, setMandataire, validateStepOne } = useContext(SignupContext);
 
   const tiOptions = tiDatas.map(ti => ({
@@ -39,17 +38,19 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
-      const department = findDepartement(values.geocode.postcode, departementDatas);
-
-      if (!department) {
-        setErrors({ code_postal: "Merci de renseigner un code postal valide" });
+      const location = await getLocation(client, { zipcode: values.zipcode, city: values.city });
+      if (!location || !location.department) {
+        setErrors({
+          code_postal: "Merci de renseigner un code postal valide"
+        });
       } else if (await isSiretExists(client, values.siret)) {
         setErrors({ siret: "Ce SIRET existe déjà" });
       } else {
+        const { department, geolocation } = location;
         const body = {
           mandataire: {
-            adresse: values.geocode.label,
-            code_postal: values.geocode.postcode,
+            adresse: values.address,
+            code_postal: values.zipcode,
             department_id: department.id,
             dispo_max: parseInt(values.dispo_max),
             etablissement: "",
@@ -57,9 +58,9 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             siret: values.siret,
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
-            ville: values.geocode.city,
-            latitude: values.geocode.latitude,
-            longitude: values.geocode.longitude
+            ville: values.city,
+            latitude: geolocation ? geolocation.latitude : null,
+            longitude: geolocation ? geolocation.longitude : null
           },
           tis: values.tis.map(ti => ti.value),
           user: {
@@ -67,7 +68,8 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
             ...user
           }
         };
-        signup({
+
+        await signup({
           body,
           onComplete: () => setSubmitting(false),
           onError: errors => setErrors(errors),
@@ -78,10 +80,11 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
     },
     validationSchema: mandataireSignupSchema,
     initialValues: {
-      adresse: mandataire ? mandataire.adresse : "",
+      address: mandataire ? mandataire.adresse : "",
       dispo_max: mandataire ? mandataire.dispo_max : "",
       genre: mandataire ? mandataire.genre : "",
-      geocode: geocodeInitialValue(),
+      city: mandataire ? mandataire.city : "",
+      zipcode: mandataire ? mandataire.code_postal : "",
       siret: mandataire ? mandataire.siret : "",
       telephone: mandataire ? mandataire.telephone : "",
       telephone_portable: mandataire ? mandataire.telephone_portable : "",
@@ -200,11 +203,44 @@ const SignupMandataireForm = ({ tiDatas, departementDatas }) => {
                 </Field>
 
                 <Field>
-                  <Geocode onChange={geocode => formik.setFieldValue("geocode", geocode)} />
-                  {formik.touched.geocode && (
-                    <InlineError message={formik.errors.geocode} fieldId="geocode" />
-                  )}
+                  <Input
+                    value={formik.values.address}
+                    id="address"
+                    name="address"
+                    onChange={formik.handleChange}
+                    placeholder="Adresse"
+                  />
+                  <InlineError message={formik.errors.address} fieldId="address" />
                 </Field>
+
+                <Flex justifyContent="space-between">
+                  <Box mr={1} flex={1 / 2}>
+                    <Field>
+                      <Input
+                        value={formik.values.zipcode}
+                        id="zipcode"
+                        name="zipcode"
+                        onChange={formik.handleChange}
+                        placeholder="Code postal"
+                      />
+                      <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
+                    </Field>
+                  </Box>
+
+                  <Box ml={1} flex={1 / 2}>
+                    <Field>
+                      <Input
+                        value={formik.values.city}
+                        id="city"
+                        name="city"
+                        onChange={formik.handleChange}
+                        placeholder="Ville"
+                      />
+                      <InlineError message={formik.errors.city} fieldId="city" />
+                    </Field>
+                  </Box>
+                </Flex>
+
                 <Field>
                   <Input
                     value={formik.values.dispo_max}
