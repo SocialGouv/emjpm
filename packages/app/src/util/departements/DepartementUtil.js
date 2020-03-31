@@ -1,6 +1,6 @@
 export const getRegionCode = zipcode => {
   if (!zipcode || zipcode.length !== 5) {
-    throw "zip code is invalid";
+    throw new Error("zip code is invalid");
   }
   if (zipcode.startsWith("20")) {
     // Corse
@@ -11,9 +11,4 @@ export const getRegionCode = zipcode => {
   } else {
     return zipcode.substring(0, 2);
   }
-};
-
-export const findDepartement = (codePostal, departements) => {
-  const regionCode = getRegionCode(codePostal);
-  return departements.find(data => data.code === regionCode);
 };

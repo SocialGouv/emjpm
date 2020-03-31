@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { PATH } from "../../constants/basePath";
-import { getDepartementByCodePostal } from "../../query-service/DepartementQueryService";
+import { getLocation } from "../../query-service/DepartementQueryService";
 import { isEmailExists } from "../../query-service/EmailQueryService";
 import { isSiretExists } from "../../query-service/SiretQueryService";
 import { UserContext } from "../UserContext";
@@ -47,13 +47,17 @@ const MandataireEditInformations = props => {
   const mandataire = user.mandataire;
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-    const department = await getDepartementByCodePostal(client, values.geocode.postcode);
+    const location = await getLocation(client, { zipcode: values.zipcode, city: values.city });
 
-    if (!department) {
+    if (!location || !location.department) {
       setErrors({
         code_postal: "Merci de renseigner un code postal valide"
       });
-    } else if (values.siret != mandataire.siret && (await isSiretExists(client, values.siret))) {
+    }
+
+    const { department, geolocation } = location;
+
+    if (values.siret != mandataire.siret && (await isSiretExists(client, values.siret))) {
       setErrors({
         siret: "Ce SIRET existe déjà"
       });
@@ -69,17 +73,17 @@ const MandataireEditInformations = props => {
           nom: values.nom,
           prenom: values.prenom,
           email: values.email,
-          adresse: values.geocode.label,
-          code_postal: values.geocode.postcode,
+          adresse: values.address,
+          code_postal: values.zipcode,
           department_id: department.id,
           dispo_max: parseInt(values.dispo_max),
           genre: values.genre.value,
           siret: values.siret,
           telephone: values.telephone,
           telephone_portable: values.telephone_portable,
-          ville: values.geocode.city,
-          latitude: values.geocode.latitude,
-          longitude: values.geocode.longitude,
+          ville: values.city,
+          latitude: geolocation ? geolocation.latitude : null,
+          longitude: geolocation ? geolocation.longitude : null,
           secretariat: values.secretariat.value,
           nb_secretariat: parseFloat(values.nb_secretariat),
           competences: values.competences

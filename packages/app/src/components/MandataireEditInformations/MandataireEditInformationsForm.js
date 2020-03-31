@@ -7,15 +7,14 @@ import { SECRETARIAT_OPTIONS } from "../../constants/mandataire";
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
-import { Geocode, geocodeInitialValue } from "../Geocode";
 
 const MandataireEditInformationsForm = props => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
-  const geocode = geocodeInitialValue(mandataire);
 
-  const secretariat = mandataire.secretariat
-    ? SECRETARIAT_OPTIONS.find(el => el.value === mandataire.secretariat)
-    : undefined;
+  const secretariat =
+    mandataire.secretariat !== undefined
+      ? SECRETARIAT_OPTIONS.find(el => el.value === mandataire.secretariat)
+      : undefined;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -33,7 +32,9 @@ const MandataireEditInformationsForm = props => {
       secretariat: secretariat,
       nb_secretariat: mandataire.nb_secretariat || "",
       competences: mandataire.competences || "",
-      geocode
+      address: mandataire.adresse || "",
+      city: mandataire.ville || "",
+      zipcode: mandataire.code_postal || ""
     }
   });
 
@@ -119,15 +120,41 @@ const MandataireEditInformationsForm = props => {
         <InlineError message={formik.errors.telephone_portable} fieldId="telephone_portable" />
       </Field>
       <Field>
-        <Geocode
-          resource={mandataire}
-          onChange={geocode => formik.setFieldValue("geocode", geocode)}
+        <Input
+          value={formik.values.address}
+          id="address"
+          name="address"
+          onChange={formik.handleChange}
+          placeholder="Adresse"
         />
-        <InlineError
-          message={formik.errors.geocode ? formik.errors.geocode.postcode : ""}
-          fieldId="geocode"
-        />
+        <InlineError message={formik.errors.address} fieldId="address" />
       </Field>
+      <Flex justifyContent="space-between">
+        <Box mr={1} flex={1 / 2}>
+          <Field>
+            <Input
+              value={formik.values.zipcode}
+              id="zipcode"
+              name="zipcode"
+              onChange={formik.handleChange}
+              placeholder="Code postal"
+            />
+            <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
+          </Field>
+        </Box>
+        <Box ml={1} flex={1 / 2}>
+          <Field>
+            <Input
+              value={formik.values.city}
+              id="city"
+              name="city"
+              onChange={formik.handleChange}
+              placeholder="Ville"
+            />
+            <InlineError message={formik.errors.city} fieldId="city" />
+          </Field>
+        </Box>
+      </Flex>
       <Field>
         <Input
           value={formik.values.dispo_max}

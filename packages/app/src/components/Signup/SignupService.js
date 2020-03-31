@@ -1,41 +1,45 @@
+import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Field, Heading1, Heading4, InlineError, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { signupServiceSchema } from "../../lib/validationSchemas";
 import { getRegionCode } from "../../util/departements";
 import { SignupContext } from "./context";
+import { DEPARTMENTS } from "./queries";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 import { cardStyle, grayBox } from "./style";
 
-const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
+function getServiceOptions(services, departments, selectedValue) {
+  const department = departments.find(data => data.id === selectedValue);
+  if (!department) {
+    return [];
+  }
+
+  const { code } = department;
+  return services
+    .filter(({ code_postal }) => {
+      // Permet de gérer les code postaux invalides en base de données
+      try {
+        return getRegionCode(code_postal) === code;
+      } catch (err) {
+        return false;
+      }
+    })
+    .map(({ etablissement, id }) => ({
+      label: etablissement,
+      value: id
+    }));
+}
+
+const SignupServiceForm = ({ serviceDatas }) => {
   const { user, service, setService, validateStepOne } = useContext(SignupContext);
-
-  const [serviceOptions, setServiceOptions] = useState([]);
-
-  const departementOptions = departementDatas.map(departement => ({
-    label: departement.nom,
-    value: departement.id
-  }));
-
-  const selectDepartement = option => {
-    const selectedDepartement = departementDatas.find(data => data.id === option.value);
-    const departementalServices = serviceDatas.filter(data => {
-      const regionCode = getRegionCode(data.code_postal);
-      return regionCode === selectedDepartement.code;
-    });
-    setServiceOptions(
-      departementalServices.map(data => ({
-        label: data.etablissement,
-        value: data.id
-      }))
-    );
-  };
+  const { data, loading } = useQuery(DEPARTMENTS);
 
   const formik = useFormik({
     onSubmit: (values, { setSubmitting, setErrors }) => {
@@ -62,6 +66,18 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
     }
   });
 
+  if (loading) {
+    return null;
+  }
+
+  const { departements: departments = [] } = data;
+  const selectedValue = formik.values.departement ? formik.values.departement.value : undefined;
+  const serviceOptions = getServiceOptions(serviceDatas, departments, selectedValue);
+  const departmentsOptions = departments.map(({ nom, id }) => ({
+    label: nom,
+    value: id
+  }));
+
   return (
     <Fragment>
       <Heading1 px="1">{`Création d'un compte de service mandataire`}</Heading1>
@@ -85,11 +101,8 @@ const SignupServiceForm = ({ departementDatas, serviceDatas }) => {
                   placeholder="Département de votre service"
                   value={formik.values.departement}
                   hasError={formik.errors.departement && formik.touched.departement}
-                  onChange={option => {
-                    selectDepartement(option);
-                    formik.setFieldValue("departement", option);
-                  }}
-                  options={departementOptions}
+                  onChange={option => formik.setFieldValue("departement", option)}
+                  options={departmentsOptions}
                 />
                 {formik.touched.departement && (
                   <InlineError message={formik.errors.departement} fieldId="departement" />
