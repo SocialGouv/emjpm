@@ -9,7 +9,6 @@ import { SignupService } from "./SignupService";
 
 const Signup = props => {
   const { user, isStepOneValidate } = useContext(SignupContext);
-
   return (
     <>
       {!isStepOneValidate && <SignupForm {...props} />}

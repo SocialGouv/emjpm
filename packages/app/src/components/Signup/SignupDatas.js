@@ -17,18 +17,11 @@ const SignupDatas = props => {
   }
 
   const tiDatas = data.tis;
-  const departementDatas = data.departements;
   const serviceDatas = data.services;
   const roleDatas = data.role;
 
   return (
-    <Component
-      tiDatas={tiDatas}
-      departementDatas={departementDatas}
-      serviceDatas={serviceDatas}
-      roleDatas={roleDatas}
-      {...props}
-    />
+    <Component tiDatas={tiDatas} serviceDatas={serviceDatas} roleDatas={roleDatas} {...props} />
   );
 };
 

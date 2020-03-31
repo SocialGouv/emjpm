@@ -1,6 +1,8 @@
 import yup from "./yup";
 
 const mandataireEditSchema = yup.object().shape({
+  address: yup.string(),
+  city: yup.string().required(),
   competences: yup.string(),
   dispo_max: yup.number().required(),
   email: yup
@@ -8,12 +10,6 @@ const mandataireEditSchema = yup.object().shape({
     .email()
     .required(),
   genre: yup.string().required(),
-  geocode: yup
-    .object()
-    .nullable()
-    .shape({
-      postcode: yup.string().required()
-    }),
   nb_secretariat: yup.number(),
   nom: yup.string().required(),
   prenom: yup.string().required(),
@@ -23,7 +19,8 @@ const mandataireEditSchema = yup.object().shape({
     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
     .required(),
   telephone: yup.string().required(),
-  telephone_portable: yup.string()
+  telephone_portable: yup.string(),
+  zipcode: yup.string().required()
 });
 
 export { mandataireEditSchema };
