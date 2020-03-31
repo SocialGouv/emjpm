@@ -11,8 +11,6 @@ export interface Mandataires {
   dispo_max: NullableNumber;
   user_id: NullableNumber;
   telephone_portable: NullableString;
-  secretariat: boolean | null;
-  nb_secretariat: NullableNumber;
   created_at: NullableDate;
   date_mesure_update: NullableDate;
   email_send: NullableDate;
