@@ -1,11 +1,12 @@
 import { Button, Card, Field, Heading4, InlineError, Input, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
-import React, { Fragment, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
+import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 import { formatUserTribunalList } from "./utils";
 
@@ -198,28 +199,36 @@ export const MandataireAddMesureForm = props => {
                 )}
               </Field>
               {formik.values.country && formik.values.country.value === "FR" && (
-                <Fragment>
-                  <Field>
-                    <Input
-                      value={formik.values.zipcode}
-                      id="zipcode"
-                      name="zipcode"
-                      onChange={formik.handleChange}
-                      placeholder="Code postal"
-                    />
-                    <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
-                  </Field>
-                  <Field>
-                    <Input
-                      value={formik.values.city}
-                      id="city"
-                      name="city"
-                      onChange={formik.handleChange}
-                      placeholder="Ville"
-                    />
-                    <InlineError message={formik.errors.city} fieldId="city" />
-                  </Field>
-                </Fragment>
+                <Flex justifyContent="space-between">
+                  <Box mr={1} flex={1 / 2}>
+                    <Field>
+                      <Input
+                        value={formik.values.zipcode}
+                        id="zipcode"
+                        name="zipcode"
+                        onChange={async e => {
+                          const { value } = e.target;
+                          await formik.setFieldValue("zipcode", value);
+                          await formik.setFieldValue("city", "");
+                        }}
+                        placeholder="Code postal"
+                      />
+                      <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
+                    </Field>
+                  </Box>
+                  <Box ml={1} flex={1 / 2}>
+                    <Field>
+                      <GeocodeCities
+                        name="city"
+                        id="city"
+                        zipcode={formik.values.zipcode}
+                        onChange={value => formik.setFieldValue("city", value)}
+                        value={formik.values.city}
+                      />
+                      <InlineError message={formik.errors.city} fieldId="city" />
+                    </Field>
+                  </Box>
+                </Flex>
               )}
               <Flex justifyContent="flex-end">
                 <Box>
