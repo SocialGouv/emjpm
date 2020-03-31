@@ -18,7 +18,7 @@ import { Box, Flex } from "rebass";
 
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireSignupSchema } from "../../lib/validationSchemas";
-import { getLocation } from "../../query-service/DepartementQueryService";
+import { getLocation } from "../../query-service/LocationQueryService";
 import { isSiretExists } from "../../query-service/SiretQueryService";
 import { SignupContext } from "./context";
 import signup from "./signup";
@@ -38,7 +38,11 @@ const SignupMandataireForm = ({ tiDatas }) => {
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setErrors }) => {
-      const location = await getLocation(client, { zipcode: values.zipcode, city: values.city });
+      const location = await getLocation(client, {
+        address: values.address,
+        zipcode: values.zipcode,
+        city: values.city
+      });
       if (!location || !location.department) {
         setErrors({
           code_postal: "Merci de renseigner un code postal valide"
@@ -58,7 +62,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
             siret: values.siret,
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
-            ville: values.city,
+            ville: values.city.toUpperCase(),
             latitude: geolocation ? geolocation.latitude : null,
             longitude: geolocation ? geolocation.longitude : null
           },
