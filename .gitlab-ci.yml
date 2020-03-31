@@ -138,6 +138,7 @@ Install app:
     paths:
       - node_modules
       - packages/app/node_modules
+      - packages/ui/node_modules
 
 #
 
@@ -200,6 +201,7 @@ Lint @emjpm/app:
   needs:
     - Install app
   script:
+    - yarn workspace @emjpm/ui build
     - yarn workspace @emjpm/app lint
 
 #
