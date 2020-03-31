@@ -12,8 +12,10 @@
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'"
   },
+  "peerDependencies": {
+    "@emjpm/knex": "^25.25.0"
+  },
   "dependencies": {
-    "@emjpm/knex": "^25.25.0",
     "@sentry/node": "5.10.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
