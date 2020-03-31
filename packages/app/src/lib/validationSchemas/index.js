@@ -2,6 +2,9 @@ import { adminEditorSchema } from "./adminEditorSchema";
 import { adminTribunalSchema } from "./adminTribunalSchema";
 import { editorTokenSchema } from "./editorTokenSchema";
 import { forgotPasswordSchema } from "./forgotPasswordSchema";
+import { individuelAgrementSchema } from "./individuelAgrementSchema";
+import { individuelExerciceSchema } from "./individuelExerciceSchema";
+import { individuelFormationSchema } from "./individuelFormationSchema";
 import { loginSchema } from "./loginSchema";
 import { magistratEditSchema } from "./magistratEditSchema";
 import { magistratMandataireSchema } from "./magistratMandataireSchema";
@@ -39,6 +42,9 @@ export {
   serviceAntenneSchema,
   serviceMesureSchema,
   mandataireSignupSchema,
+  individuelAgrementSchema,
+  individuelExerciceSchema,
+  individuelFormationSchema,
   serviceAcceptMesureSchema,
   serviceMemberInvitationSchema,
   mandataireAcceptMesureSchema,

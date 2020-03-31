@@ -28,3 +28,11 @@ export const toOptions = (datas, idKey, labelKey) =>
     label: data[labelKey],
     value: data[idKey]
   }));
+
+export const findOption = (options, value) => {
+  return options.find(option => option.value === value);
+};
+
+export const getOptionValue = option => {
+  return option ? option.value : null;
+};

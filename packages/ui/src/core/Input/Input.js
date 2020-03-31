@@ -22,7 +22,7 @@ const InputLabel = (props) => {
 };
 
 const Input = (props) => {
-  const { onChange, placeholder, isValid, hasError, name, required, size, value } = props;
+  const { onChange, placeholder, isValid, hasError, name, required, size, value, type } = props;
   const [isFocus, toggleFocus] = useState(false);
   const [hasValue, toogleValue] = useState(false);
   const isActive = isFocus || hasValue || value;
@@ -34,6 +34,7 @@ const Input = (props) => {
       </InputLabel>
       <InputElement
         size={size}
+        type={type}
         aria-label={name}
         aria-required={required}
         placeholder={null}
@@ -63,20 +64,19 @@ Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
   required: PropTypes.bool,
   size: PropTypes.string,
-  value: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  type: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 Input.defaultProps = {
   hasError: false,
   isValid: false,
   onChange: () => {
-    return null
+    return null;
   },
   required: false,
   size: 'large',
+  type: null,
   value: null,
 };
 
