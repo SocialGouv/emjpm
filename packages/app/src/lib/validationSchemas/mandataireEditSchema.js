@@ -10,10 +10,8 @@ const mandataireEditSchema = yup.object().shape({
     .email()
     .required(),
   genre: yup.string().required(),
-  nb_secretariat: yup.number(),
   nom: yup.string().required(),
   prenom: yup.string().required(),
-  secretariat: yup.object().required(),
   siret: yup
     .string()
     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")

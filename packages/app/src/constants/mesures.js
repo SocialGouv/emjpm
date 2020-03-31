@@ -155,26 +155,6 @@ export const CIVILITY = [
   { label: "Homme", value: "H" }
 ];
 
-export const CABINET = [
-  "1",
-  "1A",
-  "1B",
-  "1C",
-  "2",
-  "2A",
-  "2B",
-  "3",
-  "3A",
-  "3B",
-  "4",
-  "4A",
-  "4B",
-  "5A",
-  "5B",
-  "6A",
-  "6B"
-];
-
 export const IS_URGENT = [
   { label: "oui, c'est une demande urgente", value: true },
   { label: "non, ce n'est pas une demande urgente", value: false }

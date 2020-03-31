@@ -46,9 +46,24 @@ afterEach(async () => {
     // Not all users have a `user_tis` relation.
   }
 
-  await knex("mandataires")
+  const mandataire = await knex("mandataires")
     .where({ user_id: user.id })
-    .delete();
+    .first();
+
+  if (mandataire) {
+    await knex("individuel_agrements")
+      .where({ mandataire_id: mandataire.id })
+      .delete();
+    await knex("individuel_formations")
+      .where({ mandataire_id: mandataire.id })
+      .delete();
+    await knex("individuel_exercices")
+      .where({ mandataire_id: mandataire.id })
+      .delete();
+    await knex("mandataires")
+      .where({ id: mandataire.id })
+      .delete();
+  }
 
   await knex("magistrat")
     .where({ user_id: user.id })
