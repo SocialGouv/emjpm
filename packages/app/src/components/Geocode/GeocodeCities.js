@@ -10,7 +10,7 @@ export const GeocodeCities = props => {
   const options = useAsyncMemo(
     async () => {
       const results = await debouncedGeocode({
-        q: zipcode,
+        query: zipcode,
         postcode: zipcode,
         type: "municipality"
       });
