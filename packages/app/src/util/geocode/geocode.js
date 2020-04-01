@@ -4,18 +4,18 @@ import fetch from "unfetch";
 const API_URL = "https://api-adresse.data.gouv.fr/search";
 
 export const geocode = async options => {
-  const { q, postcode, type } = options;
+  const { query, postcode, type } = options;
 
-  if (!q) {
+  if (!query) {
     return [];
   }
 
-  const query = queryString.stringify({ postcode, q, type });
+  const queryParameters = queryString.stringify({ postcode, q: query, type });
 
   let response;
 
   try {
-    response = await fetch(`${API_URL}?${query}`);
+    response = await fetch(`${API_URL}?${queryParameters}`);
   } catch (error) {
     return [];
   }
