@@ -1,25 +1,8 @@
 import { Select } from "@emjpm/ui";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
+import { useAsyncMemo } from "../../lib/hooks/useAsyncMemo";
 import { debouncedGeocode } from "../../util/geocode";
-
-export function useAsyncMemo(factory, deps, initial) {
-  const [val, setVal] = useState(initial);
-  useEffect(() => {
-    let cancel = false;
-    const promise = factory();
-    if (promise === undefined || promise === null) return;
-    promise.then(val => {
-      if (!cancel) {
-        setVal(val);
-      }
-    });
-    return () => {
-      cancel = true;
-    };
-  }, deps);
-  return val;
-}
 
 export const GeocodeCities = props => {
   const { onChange, placeholder, zipcode, value } = props;
