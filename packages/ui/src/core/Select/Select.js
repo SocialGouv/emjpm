@@ -9,9 +9,11 @@ export const Select = (props) => {
 };
 
 Select.propTypes = {
-  size: PropTypes.string,
+  hasError: PropTypes.bool,
+  size: PropTypes.string
 };
 
 Select.defaultProps = {
-  size: 'large',
+  hasError: false,
+  size: 'large'
 };

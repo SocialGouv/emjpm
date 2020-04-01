@@ -1,23 +1,33 @@
 import { useThemeUI } from 'theme-ui';
 
-const getBorderColor = (state, colors) => {
+const getBorderColor = (hasError, state, colors) => {
+  if (hasError) {
+    return colors.error;
+  }
   if (state.isDisabled) return colors.muted;
   if (state.isFocused) return colors.primary;
   return colors.border;
 };
 
+const getHoverBorderColor = (hasError, state, colors) => {
+  if (hasError) {
+    return colors.error;
+  }
+  return state.isFocused ? colors.primary : colors.border;
+};
+
 export const getStyle = (props) => {
-  const { size } = props
+  const { size, hasError = false } = props;
   const context = useThemeUI();
   const { fontSizes, fonts, colors } = context.theme;
 
   return {
     control: (provided, state) => {
-      const currentBorderColor = getBorderColor(state, colors);
+      const currentBorderColor = getBorderColor(hasError, state, colors);
       return {
         ...provided,
         '&:hover': {
-          borderColor: state.isFocused ? colors.primary : colors.border,
+          borderColor: getHoverBorderColor(hasError, state, colors),
         },
         borderColor: currentBorderColor,
         boxShadow: '0',
