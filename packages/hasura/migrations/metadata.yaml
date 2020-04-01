@@ -458,7 +458,12 @@ tables:
       filter: {}
   - role: service
     permission:
-      columns: []
+      columns:
+      - cities
+      - code_postal
+      - id
+      - latitude
+      - longitude
       filter: {}
   - role: ti
     permission:

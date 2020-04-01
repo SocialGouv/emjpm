@@ -5,7 +5,7 @@ import { useAsyncMemo } from "../../lib/hooks/useAsyncMemo";
 import { debouncedGeocode } from "../../util/geocode";
 
 export const GeocodeCities = props => {
-  const { onChange, placeholder, zipcode, value } = props;
+  const { onChange, hasError, zipcode, value } = props;
 
   const options = useAsyncMemo(
     async () => {
@@ -23,8 +23,9 @@ export const GeocodeCities = props => {
   return (
     <Select
       isClearable={false}
-      value={{ label: value, value }}
-      placeholder={placeholder}
+      value={value ? { label: value, value } : undefined}
+      placeholder="Ville"
+      hasError={hasError}
       onChange={({ city }) => onChange(city)}
       options={options}
     />

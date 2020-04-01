@@ -225,6 +225,7 @@ export const MandataireAddMesureForm = props => {
                         zipcode={formik.values.zipcode}
                         onChange={value => formik.setFieldValue("city", value)}
                         value={formik.values.city}
+                        hasError={formik.errors.city && formik.touched.city}
                       />
                       <InlineError message={formik.errors.city} fieldId="city" />
                     </Field>

@@ -18,7 +18,6 @@ const MandataireEditInformationsForm = props => {
       email: user.email || "",
       nom: user.nom || "",
       prenom: user.prenom || "",
-      adresse: mandataire.adresse || "",
       dispo_max: mandataire.dispo_max || "",
       genre: GENDER_OPTIONS.find(el => el.value === mandataire.genre),
       siret: mandataire.siret || "",
@@ -142,12 +141,12 @@ const MandataireEditInformationsForm = props => {
         <Box ml={1} flex={1 / 2}>
           <Field>
             <GeocodeCities
-              placeholder="Ville"
               name="city"
               id="city"
               zipcode={formik.values.zipcode}
               onChange={value => formik.setFieldValue("city", value)}
               value={formik.values.city}
+              hasError={!!formik.errors.city}
             />
             <InlineError message={formik.errors.city} fieldId="city" />
           </Field>
