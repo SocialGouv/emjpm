@@ -142,6 +142,7 @@ const MandataireEditInformationsForm = props => {
         <Box ml={1} flex={1 / 2}>
           <Field>
             <GeocodeCities
+              placeholder="Ville"
               name="city"
               id="city"
               zipcode={formik.values.zipcode}

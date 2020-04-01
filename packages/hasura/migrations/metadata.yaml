@@ -420,6 +420,15 @@ tables:
     schema: public
     name: geolocalisation_code_postal
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - cities
+      - code_postal
+      - id
+      - latitude
+      - longitude
+      filter: {}
   - role: direction
     permission:
       columns:
