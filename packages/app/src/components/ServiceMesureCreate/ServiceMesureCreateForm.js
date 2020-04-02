@@ -6,10 +6,8 @@ import { Box, Flex, Text } from "rebass";
 
 import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
-import { Geocode, geocodeInitialValue } from "../Geocode";
+import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
-
-const geocode = geocodeInitialValue();
 
 const initialValues = {
   annee: "",
@@ -20,8 +18,8 @@ const initialValues = {
   numero_dossier: "",
   numero_rg: "",
   tribunal: undefined,
-  address: geocode.label,
-  geocode: geocode,
+  city: "",
+  zipcode: "",
   country: { value: "FR", label: COUNTRIES["FR"] },
   cabinet: ""
 };
@@ -160,7 +158,7 @@ export const ServiceMesureCreateForm = props => {
           name="residence"
           placeholder="Type de residence"
           value={formik.values.residence}
-          hasError={formik.errors.residence && formik.touched.residence}
+          hasError={!!formik.errors.residence}
           onChange={option => formik.setFieldValue("residence", option)}
           options={RESIDENCE}
         />
@@ -192,15 +190,39 @@ export const ServiceMesureCreateForm = props => {
       </Field>
 
       {formik.values.country && formik.values.country.value === "FR" && (
-        <Field>
-          <Geocode
-            onChange={async geocode => {
-              await formik.setFieldValue("geocode", geocode);
-              await formik.setFieldValue("address", geocode ? geocode.label : "");
-            }}
-          />
-          <InlineError message={formik.errors.address} fieldId="geocode" />
-        </Field>
+        <Flex justifyContent="space-between">
+          <Box mr={1} flex={1 / 2}>
+            <Field>
+              <Input
+                value={formik.values.zipcode}
+                id="zipcode"
+                name="zipcode"
+                onChange={async e => {
+                  const { value } = e.target;
+                  await formik.setFieldValue("zipcode", value);
+                  await formik.setFieldValue("city", "");
+                }}
+                hasError={!!formik.errors.zipcode}
+                placeholder="Code postal"
+              />
+              <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
+            </Field>
+          </Box>
+          <Box ml={1} flex={1 / 2}>
+            <Field>
+              <GeocodeCities
+                placeholder="Ville"
+                name="city"
+                id="city"
+                zipcode={formik.values.zipcode}
+                onChange={value => formik.setFieldValue("city", value)}
+                value={formik.values.city}
+                hasError={!!formik.errors.city}
+              />
+              <InlineError message={formik.errors.city} fieldId="city" />
+            </Field>
+          </Box>
+        </Flex>
       )}
       <Flex justifyContent="flex-end">
         <Box>

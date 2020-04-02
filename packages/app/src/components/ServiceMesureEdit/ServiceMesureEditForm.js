@@ -1,4 +1,3 @@
-import { useMutation } from "@apollo/react-hooks";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -7,15 +6,13 @@ import { Box, Flex, Text } from "rebass";
 
 import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
-import { getRegionCode } from "../../util/departements";
 import { formatAntenneOptions } from "../../util/services";
-import { Geocode, geocodeInitialValue } from "../Geocode";
-import { EDIT_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
-import { SERVICE } from "../ServiceMesures/queries";
+import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 
 export const ServiceMesureEditForm = props => {
   const {
+    onSubmit,
     mesure: {
       age,
       antenneId,
@@ -30,78 +27,17 @@ export const ServiceMesureEditForm = props => {
       tiId,
       pays,
       cabinet,
-      serviceId
+      codePostal,
+      ville
     },
-    departementsData,
     tribunalList,
     service_antennes
   } = props;
 
-  const geocode = geocodeInitialValue(props.mesure);
-
-  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
-    refetchQueries: [
-      {
-        query: SERVICE,
-        variables: { id: serviceId }
-      }
-    ]
-  });
-  const [editMesure] = useMutation(EDIT_MESURE, {
-    onCompleted: async () => {
-      await recalculateServiceMesures({ variables: { service_id: serviceId } });
-    }
-  });
-
   const antenneOptions = formatAntenneOptions(service_antennes);
 
   const formik = useFormik({
-    onSubmit: async (values, { setSubmitting, setErrors }) => {
-      const variables = {};
-
-      if (values.country.value === "FR") {
-        const regionCode = getRegionCode(values.geocode.postcode);
-        const departements = departementsData.departements;
-        const departement = departements.find(dep => dep.code === regionCode);
-
-        if (!departement) {
-          setErrors({
-            codePostal: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
-          });
-
-          return setSubmitting(false);
-        } else {
-          variables.department_id = departement.id;
-          variables.code_postal = values.geocode.postcode;
-          variables.ville = values.geocode.city;
-          variables.latitude = values.geocode.latitude;
-          variables.longitude = values.geocode.longitude;
-        }
-      }
-
-      await editMesure({
-        awaitRefetchQueries: true,
-        variables: {
-          ...variables,
-          annee: values.annee,
-          antenne_id: values.antenne_id ? values.antenne_id.value : null,
-          civilite: values.civilite.value,
-          date_ouverture: values.date_ouverture,
-          id: id,
-          numero_dossier: values.numero_dossier,
-          numero_rg: values.numero_rg,
-          residence: values.residence.value,
-          ti_id: values.tribunal.value,
-          type: values.type.value,
-          pays: values.country.value,
-          cabinet: values.cabinet
-        }
-      });
-      await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
-        shallow: true
-      });
-      setSubmitting(false);
-    },
+    onSubmit,
     validationSchema: serviceMesureSchema,
     initialValues: {
       annee: age,
@@ -113,9 +49,9 @@ export const ServiceMesureEditForm = props => {
       residence: { label: residence, value: residence },
       tribunal: { label: tribunal, value: tiId },
       type: { label: type, value: type },
-      geocode,
       country: { value: pays, label: COUNTRIES[pays] },
-      address: geocode.label,
+      city: ville,
+      zipcode: codePostal,
       cabinet
     }
   });
@@ -283,16 +219,37 @@ export const ServiceMesureEditForm = props => {
             )}
           </Field>
           {formik.values.country && formik.values.country.value === "FR" && (
-            <Field>
-              <Geocode
-                resource={props.mesure}
-                onChange={async geocode => {
-                  await formik.setFieldValue("geocode", geocode);
-                  await formik.setFieldValue("address", geocode ? geocode.label : "");
-                }}
-              />
-              <InlineError message={formik.errors.address} fieldId="address" />
-            </Field>
+            <Flex justifyContent="space-between">
+              <Box mr={1} flex={1 / 2}>
+                <Field>
+                  <Input
+                    value={formik.values.zipcode}
+                    id="zipcode"
+                    name="zipcode"
+                    onChange={async e => {
+                      const { value } = e.target;
+                      await formik.setFieldValue("zipcode", value);
+                      await formik.setFieldValue("city", "");
+                    }}
+                    placeholder="Code postal"
+                  />
+                  <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
+                </Field>
+              </Box>
+              <Box ml={1} flex={1 / 2}>
+                <Field>
+                  <GeocodeCities
+                    placeholder="Ville"
+                    name="city"
+                    id="city"
+                    zipcode={formik.values.zipcode}
+                    onChange={value => formik.setFieldValue("city", value)}
+                    value={formik.values.city}
+                  />
+                  <InlineError message={formik.errors.city} fieldId="city" />
+                </Field>
+              </Box>
+            </Flex>
           )}
 
           <Flex justifyContent="flex-end">
