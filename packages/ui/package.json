@@ -30,6 +30,11 @@
   "dependencies": {
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
+    "@styled-icons/boxicons-solid": "^10.0.0",
+    "@styled-icons/evil": "^10.0.0",
+    "@styled-icons/fa-regular": "^10.0.0",
+    "@styled-icons/fa-solid": "^10.0.0",
+    "@styled-icons/material": "^10.0.0",
     "emotion-normalize": "^10.1.0",
     "microbundle": "^0.12.0-next",
     "normalize.css": "^8.0.1",
@@ -41,7 +46,6 @@
     "react-tabs": "^3.1.0",
     "rebass": "^4.0.7",
     "styled-components": "^4.4.1",
-    "styled-icons": "^9.1.0",
     "theme-ui": "^0.2.52"
   },
   "devDependencies": {

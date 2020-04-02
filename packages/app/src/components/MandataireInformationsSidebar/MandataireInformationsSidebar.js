@@ -1,7 +1,7 @@
+import { InfoCircle } from "@styled-icons/boxicons-regular";
+import { BuildingHouse } from "@styled-icons/boxicons-solid";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
-import { InfoCircle } from "styled-icons/boxicons-regular";
-import { BuildingHouse } from "styled-icons/boxicons-solid";
 
 import { UserContext } from "../UserContext";
 import { CardStyle, description, icon, partTitle, SidebarStyle, title } from "./style";
