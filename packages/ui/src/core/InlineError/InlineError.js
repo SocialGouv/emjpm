@@ -1,7 +1,7 @@
+import { Exclamation } from "@styled-icons/evil/Exclamation";
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Flex, Text } from 'rebass';
-import { Exclamation } from "styled-icons/evil/Exclamation";
 
 const InlineError = ({ message, fieldId }) => {
   if (!message) {

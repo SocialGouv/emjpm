@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
+import { XCircle } from "@styled-icons/boxicons-regular";
 import React from "react";
 import { Box } from "rebass";
-import { XCircle } from "styled-icons/boxicons-regular";
 
 import { REMOVE_ACCESS_TOKEN } from "./Mutation";
 
