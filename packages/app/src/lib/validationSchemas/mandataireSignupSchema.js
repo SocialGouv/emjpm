@@ -1,7 +1,7 @@
 import yup from "./yup";
 
 const mandataireSignupSchema = yup.object().shape({
-  address: yup.string(),
+  address: yup.string().required(),
   city: yup.string().required(),
   dispo_max: yup.number().required(),
   genre: yup.string().required(),
@@ -12,7 +12,10 @@ const mandataireSignupSchema = yup.object().shape({
   telephone: yup.string().required(),
   telephone_portable: yup.string(),
   tis: yup.mixed().required(),
-  zipcode: yup.string().required()
+  zipcode: yup
+    .string()
+    .length(5)
+    .required()
 });
 
 export { mandataireSignupSchema };

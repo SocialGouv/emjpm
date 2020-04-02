@@ -1,4 +1,3 @@
-import { useMutation } from "@apollo/react-hooks";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -8,16 +7,12 @@ import { Box, Flex, Text } from "rebass";
 
 import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
-import { getRegionCode } from "../../util/departements";
-import { Geocode, geocodeInitialValue } from "../Geocode";
+import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
-import { EDIT_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
-import { MANDATAIRE } from "./queries";
 
 export const MandataireMesureEditForm = props => {
-  const { mesure } = props;
   const {
-    departementsData,
+    onSubmit,
     tribunalList,
     mesure: {
       id,
@@ -31,72 +26,14 @@ export const MandataireMesureEditForm = props => {
       tribunal,
       tiId,
       pays,
-      cabinet
+      cabinet,
+      ville,
+      codePostal
     }
   } = props;
 
-  const geocode = geocodeInitialValue(mesure);
-
-  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
-  const [editMesure] = useMutation(EDIT_MESURE, {
-    onCompleted: async () => {
-      await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    },
-    refetchQueries: [
-      {
-        query: MANDATAIRE,
-        variables: { id: mesure.mandataireId }
-      }
-    ]
-  });
-
   const formik = useFormik({
-    onSubmit: async (values, { setSubmitting, setErrors }) => {
-      const variables = {};
-
-      if (values.country.value === "FR") {
-        const regionCode = getRegionCode(values.geocode.postcode);
-        const departements = departementsData.departements;
-        const departement = departements.find(dep => dep.code === regionCode);
-
-        if (!departement) {
-          setErrors({
-            code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
-          });
-          return setSubmitting(false);
-        } else {
-          variables.department_id = departement.id;
-          variables.code_postal = values.geocode.postcode;
-          variables.ville = values.geocode.city;
-          variables.latitude = values.geocode.latitude;
-          variables.longitude = values.geocode.longitude;
-        }
-      }
-
-      await editMesure({
-        awaitRefetchQueries: true,
-        refetchQueries: ["mesures", "mesures_aggregate", "user_tis", "ti"],
-        variables: {
-          ...variables,
-          annee: values.annee,
-          civilite: values.civilite.value,
-          date_ouverture: values.date_ouverture,
-          id,
-          numero_dossier: values.numero_dossier,
-          numero_rg: values.numero_rg,
-          residence: values.residence.value,
-          ti_id: values.tribunal.value,
-          type: values.type.value,
-          pays: values.country.value,
-          cabinet: values.cabinet
-        }
-      });
-
-      setSubmitting(false);
-      Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
-        shallow: true
-      });
-    },
+    onSubmit,
     validationSchema: mandataireMesureSchema,
     initialValues: {
       annee: age,
@@ -107,8 +44,8 @@ export const MandataireMesureEditForm = props => {
       residence: { label: residence, value: residence },
       tribunal: tiId ? { label: tribunal, value: tiId } : undefined,
       type: { label: type, value: type },
-      geocode,
-      address: geocode.label,
+      city: ville,
+      zipcode: codePostal,
       country: { label: COUNTRIES[pays], value: pays },
       cabinet
     }
@@ -265,16 +202,37 @@ export const MandataireMesureEditForm = props => {
           </Field>
 
           {formik.values.country && formik.values.country.value === "FR" && (
-            <Field>
-              <Geocode
-                resource={mesure}
-                onChange={async geocode => {
-                  await formik.setFieldValue("geocode", geocode);
-                  await formik.setFieldValue("address", geocode ? geocode.label : "");
-                }}
-              />
-              <InlineError message={formik.errors.address} fieldId="geocode" />
-            </Field>
+            <Flex justifyContent="space-between">
+              <Box mr={1} flex={1 / 2}>
+                <Field>
+                  <Input
+                    value={formik.values.zipcode}
+                    id="zipcode"
+                    name="zipcode"
+                    onChange={async e => {
+                      const { value } = e.target;
+                      await formik.setFieldValue("zipcode", value);
+                      await formik.setFieldValue("city", "");
+                    }}
+                    placeholder="Code postal"
+                  />
+                  <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
+                </Field>
+              </Box>
+              <Box ml={1} flex={1 / 2}>
+                <Field>
+                  <GeocodeCities
+                    placeholder="Ville"
+                    name="city"
+                    id="city"
+                    zipcode={formik.values.zipcode}
+                    onChange={value => formik.setFieldValue("city", value)}
+                    value={formik.values.city}
+                  />
+                  <InlineError message={formik.errors.city} fieldId="city" />
+                </Field>
+              </Box>
+            </Flex>
           )}
 
           <Flex justifyContent="flex-end">
@@ -306,3 +264,5 @@ export const MandataireMesureEditForm = props => {
 MandataireMesureEditForm.propTypes = {
   mesure: PropTypes.object.isRequired
 };
+
+export default MandataireMesureEditForm;

@@ -6,6 +6,7 @@ import { Box, Flex } from "rebass";
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
+import { GeocodeCities } from "../Geocode";
 
 const MandataireEditInformationsForm = props => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
@@ -17,7 +18,6 @@ const MandataireEditInformationsForm = props => {
       email: user.email || "",
       nom: user.nom || "",
       prenom: user.prenom || "",
-      adresse: mandataire.adresse || "",
       dispo_max: mandataire.dispo_max || "",
       genre: GENDER_OPTIONS.find(el => el.value === mandataire.genre),
       siret: mandataire.siret || "",
@@ -128,7 +128,11 @@ const MandataireEditInformationsForm = props => {
               value={formik.values.zipcode}
               id="zipcode"
               name="zipcode"
-              onChange={formik.handleChange}
+              onChange={async e => {
+                const { value } = e.target;
+                await formik.setFieldValue("zipcode", value);
+                await formik.setFieldValue("city", "");
+              }}
               placeholder="Code postal"
             />
             <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
@@ -136,12 +140,13 @@ const MandataireEditInformationsForm = props => {
         </Box>
         <Box ml={1} flex={1 / 2}>
           <Field>
-            <Input
-              value={formik.values.city}
-              id="city"
+            <GeocodeCities
               name="city"
-              onChange={formik.handleChange}
-              placeholder="Ville"
+              id="city"
+              zipcode={formik.values.zipcode}
+              onChange={value => formik.setFieldValue("city", value)}
+              value={formik.values.city}
+              hasError={!!formik.errors.city}
             />
             <InlineError message={formik.errors.city} fieldId="city" />
           </Field>
