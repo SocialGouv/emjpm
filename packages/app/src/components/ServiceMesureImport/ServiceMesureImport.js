@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Text } from "@emjpm/ui";
+import { FileExcel } from "@styled-icons/fa-regular/FileExcel";
+import { FilePdf } from "@styled-icons/fa-regular/FilePdf";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
-import { FileExcel } from "styled-icons/fa-regular/FileExcel";
-import { FilePdf } from "styled-icons/fa-regular/FilePdf";
 
 import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,

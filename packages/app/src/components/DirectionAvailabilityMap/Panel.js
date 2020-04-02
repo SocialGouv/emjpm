@@ -1,7 +1,7 @@
 import { Card, Heading4 } from "@emjpm/ui";
+import { XCircle } from "@styled-icons/boxicons-regular";
 import React from "react";
 import { Box, Button, Text } from "rebass";
-import { XCircle } from "styled-icons/boxicons-regular";
 
 const ButtonStyle = {
   bg: "cardSecondary",
