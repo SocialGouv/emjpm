@@ -1,7 +1,7 @@
 import { Card, Heading3 } from "@emjpm/ui";
+import { MailOutline, Smartphone } from "@styled-icons/material";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
-import { MailOutline, Smartphone } from "styled-icons/material";
 
 import { UserContext } from "../UserContext";
 import { boxStyle, iconTextStyle, innerTextStyle } from "./style";

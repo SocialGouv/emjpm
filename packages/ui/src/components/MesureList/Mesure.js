@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
+import { Female, Male } from '@styled-icons/fa-solid';
+import { Warning } from '@styled-icons/material';
 import PropTypes from 'prop-types';
 import React, { Fragment, useContext } from 'react';
 import { Box, Flex } from 'rebass';
-import { Female, Male } from 'styled-icons/fa-solid';
-import { Warning } from 'styled-icons/material';
 
 import { Button, Card, Text } from '../../core';
 import { MESURE_TYPE, PANEL_TYPE } from './constants/type';

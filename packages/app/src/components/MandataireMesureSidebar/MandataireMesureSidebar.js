@@ -1,11 +1,11 @@
 import { Card } from "@emjpm/ui";
+import { ArrowBack, WindowClose } from "@styled-icons/boxicons-regular";
+import { Edit } from "@styled-icons/boxicons-solid";
+import { RemoveCircleOutline } from "@styled-icons/material";
+import { FileAdd, FolderAdd } from "@styled-icons/remix-line";
 import Link from "next/link";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Link as StyledLink, Text } from "rebass";
-import { ArrowBack, WindowClose } from "styled-icons/boxicons-regular";
-import { Edit } from "styled-icons/boxicons-solid";
-import { RemoveCircleOutline } from "styled-icons/material";
-import { FileAdd, FolderAdd } from "styled-icons/remix-line";
 
 import { MesureContext } from "../MesureContext";
 import { MESURE_TYPE } from "./constants";
