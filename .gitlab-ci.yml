@@ -100,8 +100,10 @@ stages:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
     paths:
       - $CI_PROJECT_DIR/.cache
-      - node_modules
-      - packages/${CONTEXT}/node_modules
+      # HACK(douglasduteil): remove node_modules cache
+      # Or minio can't handle the size of it...
+      # - node_modules
+      # - packages/${CONTEXT}/node_modules
   script:
     - "[[ type jq ]] || apk add jq=~1"
 
@@ -113,7 +115,6 @@ stages:
       rm {}/package.json ;
       jq 'del(.dependencies) | del(.devDependencies)' > {}/package.json
       ; } < {}/package.json"
-
 
     # NOTE(dougladuteil): remove dependencies and devDependencies
     # As we only install one package, we do not need the cross packages dependencies
