@@ -154,6 +154,8 @@ export const MANDATAIRE_USERS = gql`
         telephone_portable
         siret
         adresse
+        ville
+        code_postal
         competences
       }
     }

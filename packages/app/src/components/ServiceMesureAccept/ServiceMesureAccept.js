@@ -1,14 +1,17 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import Router from "next/router";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
+import { getLocation } from "../../query-service/LocationQueryService";
 import { MesureContext } from "../MesureContext";
 import { UserContext } from "../UserContext";
-import { DEPARTEMENTS } from "./queries";
+import { ACCEPT_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
+import { SERVICE } from "./queries";
 import { ServiceMesureAcceptForm } from "./ServiceMesureAcceptForm";
 import { ServiceMesureAcceptStyle } from "./style";
 
-const ServiceMesureAccept = props => {
+export const ServiceMesureAccept = props => {
   const { service_members } = useContext(UserContext);
   const [
     {
@@ -16,26 +19,65 @@ const ServiceMesureAccept = props => {
     }
   ] = service_members;
   const mesure = useContext(MesureContext);
+  const client = useApolloClient();
 
-  const {
-    data: departementsData,
-    loading: departementsLoading,
-    error: departementsError
-  } = useQuery(DEPARTEMENTS);
-
-  if (departementsLoading) {
-    return <div>Chargement...</div>;
-  }
-
-  if (departementsError) {
-    return <div>Erreur...</div>;
-  }
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: mesure.serviceId }
+      }
+    ]
+  });
+  const [updateMesure] = useMutation(ACCEPT_MESURE, {
+    onCompleted: async () => {
+      await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
+    }
+  });
 
   return (
     <Box sx={ServiceMesureAcceptStyle} {...props}>
       <ServiceMesureAcceptForm
+        onSubmit={async (values, { setSubmitting, setErrors }) => {
+          const variables = {};
+
+          if (values.country.value === "FR") {
+            const location = await getLocation(client, {
+              zipcode: values.zipcode,
+              city: values.city
+            });
+
+            if (!location || !location.department) {
+              setErrors({
+                zipcode: `Le code postal semble invalide.`
+              });
+              return setSubmitting(false);
+            } else {
+              const { department, geolocation } = location;
+              variables.code_postal = values.zipcode;
+              variables.ville = values.city.toUpperCase();
+              variables.latitude = geolocation ? geolocation.latitude : "";
+              variables.longitude = geolocation ? geolocation.longitude : "";
+              variables.department_id = department.id;
+            }
+          }
+
+          await updateMesure({
+            refetchQueries: ["mesures", "mesures_aggregate"],
+            variables: {
+              ...variables,
+              antenne_id: values.antenne_id ? values.antenne_id.value : null,
+              date_ouverture: values.date_ouverture,
+              id: mesure.id,
+              residence: values.residence.value,
+              pays: values.country.value
+            }
+          });
+
+          await Router.push(`/services/mesures/${mesure.id}`);
+          setSubmitting(false);
+        }}
         mt="3"
-        departementsData={departementsData}
         service_antennes={service_antennes}
         mesure={mesure}
       />
@@ -43,4 +85,4 @@ const ServiceMesureAccept = props => {
   );
 };
 
-export { ServiceMesureAccept };
+export default ServiceMesureAccept;
