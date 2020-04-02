@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Heading5 } from "@emjpm/ui";
+import { MailOutline, Smartphone } from "@styled-icons/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-import { MailOutline, Smartphone } from "styled-icons/material";
 
 import { AccessToken } from "../AccessToken";
 import { LinkButton, ServiceEditLinkButton } from "../Commons";

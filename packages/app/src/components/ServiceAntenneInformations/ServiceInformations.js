@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Heading5 } from "@emjpm/ui";
+import { MailOutline, Smartphone } from "@styled-icons/material";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-import { MailOutline, Smartphone } from "styled-icons/material";
 
 import { AntenneEditLinkButton } from "../Commons";
 import { GET_SERVICES_ANTENNE } from "./queries";

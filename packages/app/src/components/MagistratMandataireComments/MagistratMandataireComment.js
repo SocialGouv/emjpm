@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
+import { Edit, XCircle } from "@styled-icons/boxicons-regular";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
-import { Edit, XCircle } from "styled-icons/boxicons-regular";
 
 import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
 import { REMOVE_COMMENT } from "./mutations";
