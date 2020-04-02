@@ -1,4 +1,3 @@
-import { useMutation } from "@apollo/react-hooks";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -7,76 +6,22 @@ import { Box, Flex, Text } from "rebass";
 
 import { COUNTRIES, RESIDENCE } from "../../constants/mesures";
 import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
-import { getRegionCode } from "../../util/departements";
 import { formatAntenneOptions } from "../../util/services";
-import { Geocode, geocodeInitialValue } from "../Geocode";
-import { ACCEPT_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
-import { SERVICE } from "./queries";
+import { GeocodeCities } from "../Geocode";
 
 export const ServiceMesureAcceptForm = props => {
-  const { mesure, service_antennes, departementsData } = props;
-  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
-    refetchQueries: [
-      {
-        query: SERVICE,
-        variables: { id: mesure.serviceId }
-      }
-    ]
-  });
-  const [updateMesure] = useMutation(ACCEPT_MESURE, {
-    onCompleted: async () => {
-      await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
-    }
-  });
-
+  const { mesure, service_antennes, onSubmit } = props;
   const antenneOptions = formatAntenneOptions(service_antennes);
-  const geocode = geocodeInitialValue();
 
   const formik = useFormik({
-    onSubmit: async (values, { setSubmitting, setErrors }) => {
-      const variables = {};
-
-      if (values.country.value === "FR") {
-        const regionCode = getRegionCode(values.geocode.postcode);
-        const departements = departementsData.departements;
-        const departement = departements.find(dep => dep.code === regionCode);
-        if (!departement) {
-          setErrors({
-            geocode: `Aucun département trouvé pour le code postal ${values.geocode.postcode}`
-          });
-
-          return setSubmitting(false);
-        } else {
-          variables.department_id = departement.id;
-          variables.code_postal = values.geocode.postcode;
-          variables.ville = values.geocode.city;
-          variables.latitude = values.geocode.latitude;
-          variables.longitude = values.geocode.longitude;
-        }
-      }
-
-      await updateMesure({
-        refetchQueries: ["mesures", "mesures_aggregate"],
-        variables: {
-          ...variables,
-          antenne_id: values.antenne_id ? values.antenne_id.value : null,
-          date_ouverture: values.date_ouverture,
-          id: mesure.id,
-          residence: values.residence.value,
-          pays: values.country.value
-        }
-      });
-
-      await Router.push(`/services/mesures/${mesure.id}`);
-      setSubmitting(false);
-    },
+    onSubmit,
     validationSchema: serviceAcceptMesureSchema,
     initialValues: {
       antenne_id: "",
       date_ouverture: "",
       residence: "",
-      address: geocode.label,
-      geocode,
+      city: "",
+      zipcode: "",
       country: { value: "FR", label: COUNTRIES["FR"] }
     }
   });
@@ -146,16 +91,39 @@ export const ServiceMesureAcceptForm = props => {
           </Field>
 
           {formik.values.country && formik.values.country.value === "FR" && (
-            <Field>
-              <Geocode
-                onChange={async geocode => {
-                  await formik.setFieldValue("geocode", geocode);
-                  await formik.setFieldValue("address", geocode ? geocode.label : "");
-                }}
-              />
-              <InlineError message={formik.errors.address} fieldId="geocode" />
-            </Field>
+            <Flex justifyContent="space-between">
+              <Box mr={1} flex={1 / 2}>
+                <Field>
+                  <Input
+                    value={formik.values.zipcode}
+                    id="zipcode"
+                    name="zipcode"
+                    onChange={async e => {
+                      const { value } = e.target;
+                      await formik.setFieldValue("zipcode", value);
+                      await formik.setFieldValue("city", "");
+                    }}
+                    placeholder="Code postal"
+                  />
+                  <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
+                </Field>
+              </Box>
+              <Box ml={1} flex={1 / 2}>
+                <Field>
+                  <GeocodeCities
+                    placeholder="Ville"
+                    name="city"
+                    id="city"
+                    zipcode={formik.values.zipcode}
+                    onChange={value => formik.setFieldValue("city", value)}
+                    value={formik.values.city}
+                  />
+                  <InlineError message={formik.errors.city} fieldId="city" />
+                </Field>
+              </Box>
+            </Flex>
           )}
+
           {service_antennes.length >= 2 && (
             <Field>
               <Select

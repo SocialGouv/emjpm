@@ -5,8 +5,8 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { PATH } from "../../constants/basePath";
-import { getLocation } from "../../query-service/DepartementQueryService";
 import { isEmailExists } from "../../query-service/EmailQueryService";
+import { getLocation } from "../../query-service/LocationQueryService";
 import { isSiretExists } from "../../query-service/SiretQueryService";
 import { UserContext } from "../UserContext";
 import { MandataireEditInformationsForm } from "./MandataireEditInformationsForm";
@@ -47,7 +47,11 @@ const MandataireEditInformations = props => {
   const mandataire = user.mandataire;
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-    const location = await getLocation(client, { zipcode: values.zipcode, city: values.city });
+    const location = await getLocation(client, {
+      address: values.address,
+      zipcode: values.zipcode,
+      city: values.city
+    });
 
     if (!location || !location.department) {
       setErrors({
@@ -81,7 +85,7 @@ const MandataireEditInformations = props => {
           siret: values.siret,
           telephone: values.telephone,
           telephone_portable: values.telephone_portable,
-          ville: values.city,
+          ville: values.city.toUpperCase(),
           latitude: geolocation ? geolocation.latitude : null,
           longitude: geolocation ? geolocation.longitude : null,
           competences: values.competences

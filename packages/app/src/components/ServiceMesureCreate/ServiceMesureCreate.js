@@ -1,28 +1,23 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import { Card, Heading4, Text } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { getRegionCode } from "../../util/departements";
+import { getLocation } from "../../query-service/LocationQueryService";
 import { formatServiceTribunalList } from "../../util/services";
 import { ADD_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
-import { DEPARTEMENTS, SERVICE_TRIBUNAL } from "./queries";
+import { SERVICE_TRIBUNAL } from "./queries";
 import { ServiceMesureCreateForm } from "./ServiceMesureCreateForm";
 
 export const ServiceMesureCreate = props => {
   const { service } = props;
   const { service_antennes } = service;
+  const client = useApolloClient();
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
     variables: { serviceId: service.id }
   });
-
-  const {
-    data: departementsData,
-    loading: departementsLoading,
-    error: departementsError
-  } = useQuery(DEPARTEMENTS);
 
   const [recalculateServiceMesure] = useMutation(RECALCULATE_SERVICE_MESURES);
   const [addMesure] = useMutation(ADD_MESURE, {
@@ -36,25 +31,27 @@ export const ServiceMesureCreate = props => {
     }
   });
 
-  const handleSubmit = (values, { setSubmitting, setErrors }) => {
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const variables = {};
 
     if (values.country.value === "FR") {
-      const regionCode = getRegionCode(values.geocode.postcode);
-      const departements = departementsData.departements;
-      const departement = departements.find(dep => dep.code === regionCode);
+      const location = await getLocation(client, {
+        zipcode: values.zipcode,
+        city: values.city
+      });
 
-      if (!departement) {
+      if (!location || !location.department) {
         setErrors({
-          code_postal: `Aucun département trouvé pour le code postal ${values.code_postal}`
+          zipcode: `Le code postal semble invalide.`
         });
         return setSubmitting(false);
       } else {
-        variables.code_postal = values.geocode.postcode;
-        variables.ville = values.geocode.city;
-        variables.latitude = values.geocode.latitude;
-        variables.longitude = values.geocode.longitude;
-        variables.department_id = departement.id;
+        const { department, geolocation } = location;
+        variables.code_postal = values.zipcode;
+        variables.ville = values.city.toUpperCase();
+        variables.latitude = geolocation ? geolocation.latitude : "";
+        variables.longitude = geolocation ? geolocation.longitude : "";
+        variables.department_id = department.id;
       }
     }
 
@@ -80,12 +77,12 @@ export const ServiceMesureCreate = props => {
     setSubmitting(false);
   };
 
-  if (loading || departementsLoading) {
-    return <div>Chargement...</div>;
+  if (loading) {
+    return <Box p={1}>Chargement...</Box>;
   }
 
-  if (error || departementsError) {
-    return <div>Erreur...</div>;
+  if (error) {
+    return <Box p={1}>Erreur...</Box>;
   }
 
   const antenneOptions = service_antennes.map(antenne => ({

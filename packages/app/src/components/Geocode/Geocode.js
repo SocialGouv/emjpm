@@ -35,7 +35,7 @@ const Geocode = props => {
       defaultValue={defaultValue}
       hasError={hasError}
       isClearable
-      loadOptions={value => debouncedGeocode({ q: value })}
+      loadOptions={value => debouncedGeocode({ query: value })}
       placeholder={placeholder || "Adresse, ville, ..."}
       noOptionsMessage={() => "Pas de résultats"}
       onChange={onChange}
