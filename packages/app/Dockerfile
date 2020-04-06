@@ -25,6 +25,7 @@ RUN set -ex \
 RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
 
 COPY ./packages/ui/dist /home/app/packages/ui/dist/
+COPY ./packages/app/public /home/app/packages/app/public/
 COPY ./packages/app/.next /home/app/packages/app/.next/
 
 ENTRYPOINT ["yarn", "workspace", "@emjpm/app", "next", "start"]
