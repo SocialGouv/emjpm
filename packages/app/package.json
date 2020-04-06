@@ -18,7 +18,7 @@
     "generate": "hygen component new"
   },
   "keywords": [],
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "@emjpm/ui": "1.0.0",
     "@emotion/core": "^10.0.15",
@@ -38,7 +38,6 @@
     "apollo-boost": "^0.4.7",
     "apollo-client": "^2.6.8",
     "apollo-link-context": "^1.0.19",
-    "babel-plugin-polished": "^1.1.0",
     "core-js": "^3.6.4",
     "date-fns": "^2.8.1",
     "dotenv": "^8.2.0",
@@ -53,7 +52,6 @@
     "next-cookies": "^2.0.3",
     "next-images": "^1.3.0",
     "p-debounce": "^2.1.0",
-    "polished": "^3.4.2",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.1",
     "react": "^16.12.0",
@@ -78,6 +76,7 @@
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "babel-eslint": "^10.0.3",
+    "babel-plugin-styled-components": "^1.10.7",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.7.2",
