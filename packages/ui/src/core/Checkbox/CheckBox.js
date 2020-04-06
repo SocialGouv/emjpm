@@ -1,9 +1,10 @@
-import { Check } from '@styled-icons/fa-solid';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Box, Flex, Text } from 'rebass';
 
 import { CheckboxInputStyle, CheckboxStyle, CheckboxWrapperStyle, IconWrapperStyle } from './style';
+
+export { Check } from '@styled-icons/fa-solid/Check';
 
 const BaseCheckBox = (props) => {
   return (
