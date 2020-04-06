@@ -478,10 +478,11 @@ Register app image:
     - Install ui
     - Build @emjpm/ui
     - Build @emjpm/app
-  before_script:
-    - cp yarn.lock packages/app/yarn.lock
   variables:
-    CONTEXT: packages/app
+    CONTEXT: .
+    DOCKER_BUILD_ARGS: >-
+      --shm-size 128M
+      -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
 ################### Register GRAPHQL SERVER ##################
