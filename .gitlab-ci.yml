@@ -638,7 +638,7 @@ Deploy api (prod):
   variables:
     CONTEXT: app
     IMAGE_TAG: $CI_COMMIT_SHA
-    PORT: 80
+    PORT: 3000
     VALUES_FILE: ./packages/app/.k8s.values.yml
   before_script:
     - source ./.gitlab-ci/env.sh
