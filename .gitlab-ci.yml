@@ -89,7 +89,7 @@ stages:
 
 .prepare_stage:
   extends: .base_stage
-  stage: "Prepare"
+  stage: Prepare
   dependencies: []
 
 .base_yarn_workspace_install:
@@ -195,7 +195,7 @@ Install ui:
 
 .quality_stage:
   extends: .base_stage
-  stage: "Code Quality"
+  stage: Code Quality
   dependencies: []
 
 #
@@ -341,7 +341,7 @@ Test @emjpm/api:
 
 .build_stage:
   extends: .base_stage
-  stage: "Build Image"
+  stage: Build Image
   dependencies: []
 
 Build @emjpm/api:
@@ -424,7 +424,7 @@ Build @emjpm/ui:
 
 .register_stage:
   extends: .base_stage
-  stage: "Registration"
+  stage: Registration
   interruptible: true
   dependencies: []
 
@@ -535,7 +535,7 @@ Backup PG before production (incubateur):
   extends:
     - .base_docker_kubectl_image_stage
     - .incubateur_stage
-  stage: "Registration"
+  stage: Registration
   interruptible: true
   script:
     - source ./.gitlab-ci/env.sh
@@ -586,7 +586,7 @@ Init Managed Database:
 ################################################################################################
 
 .deploy_stage:
-  stage: "Deploy"
+  stage: Deploy
   dependencies: []
   services:
     - docker:dind
@@ -832,6 +832,7 @@ Notify Starting Deployment:
   extends:
     - .base_notify_pending_stage
     - .base_stage
+  stage: Deploy
 
 Notify Fail:
   extends:
@@ -865,7 +866,7 @@ Delete useless k8s namespaces:
 ############ Release #################
 
 Release:
-  stage: "Notify Finished Deployment"
+  stage: Notify Finished Deployment
   dependencies: []
   image: node:12.14-alpine3.10
   variables:
@@ -920,7 +921,7 @@ Release:
 
 Trigger production:
   extends: .base_stage
-  stage: "Notify Finished Deployment"
+  stage: Notify Finished Deployment
   image: curlimages/curl:7.67.0
   when: manual
   variables:
@@ -939,7 +940,7 @@ Trigger production:
 
 Trigger release:
   extends: .base_stage
-  stage: "Notify Finished Deployment"
+  stage: Notify Finished Deployment
   image: curlimages/curl:7.67.0
   when: manual
   variables:
