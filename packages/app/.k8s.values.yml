@@ -13,7 +13,7 @@ deployment:
 
   env:
   - name: PORT
-    value: "3000"
+    value: "80"
   - name: NODE_ENV
     value: "production"
   - name: API_URL
