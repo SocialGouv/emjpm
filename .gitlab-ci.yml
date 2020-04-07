@@ -371,6 +371,10 @@ Build @emjpm/app:
     - Install app
     - Build @emjpm/ui
   image: node:12-alpine
+  cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+    paths:
+      - packages/app/.next/cache
   script:
     - yarn workspace @emjpm/app build
   artifacts:
