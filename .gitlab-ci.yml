@@ -601,10 +601,8 @@ Init Managed Database:
     - .base_deploy_nodejs_chart_stage
     - .deploy_stage
   dependencies: []
-  stage: Deploy
   variables:
     CONTEXT: api
-    IMAGE_TAG: $CI_COMMIT_SHA
     PORT: 80
     VALUES_FILE: ./packages/api/.k8s.values.yml
   before_script:
@@ -635,13 +633,12 @@ Deploy api (prod):
 
 ############### Deploy APP ###############################
 
-.deploy_app_stage: &deploy_app_stage
-  dependencies: []
-  stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
+.deploy_app_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
   variables:
     CONTEXT: app
-    IMAGE_TAG: $CI_COMMIT_SHA
     PORT: 80
     VALUES_FILE: ./packages/app/.k8s.values.yml
   before_script:
@@ -667,13 +664,12 @@ Deploy app (prod):
 
 ################ Deploy GRAPHQL SERVER ###########################
 
-.deploy_graphql-server_stage: &deploy_graphql-server_stage
-  dependencies: []
-  stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
+.deploy_graphql-server_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
   variables:
     CONTEXT: graphql-server
-    IMAGE_TAG: $CI_COMMIT_SHA
     PORT: 80
     VALUES_FILE: ./packages/graphql-server/.k8s.values.yml
   before_script:
@@ -697,13 +693,13 @@ Deploy graphql-server (prod):
 
 ################ Deploy KNEX #################################
 
-.deploy_knex_stage: &deploy_knex_stage
+.deploy_knex_stage:
+  extends:
+    - .base_docker_kubectl_image_stage
+    - .deploy_stage
   dependencies: []
-  stage: Deploy
-  extends: .base_docker_kubectl_image_stage
   variables:
     CONTEXT: knex
-    IMAGE_TAG: $CI_COMMIT_SHA
   script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -747,12 +743,12 @@ Deploy knex (prod):
 
 ################ Deploy HASURA #################################
 
-.deploy_hasura_stage: &deploy_hasura_stage # dependencies: []
-  stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
+.deploy_hasura_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
   variables:
     CONTEXT: hasura
-    IMAGE_TAG: $CI_COMMIT_SHA
     PORT: 80
     VALUES_FILE: ./packages/hasura/.k8s.values.yml
   before_script:
@@ -836,7 +832,6 @@ Notify Starting Deployment:
   extends:
     - .base_notify_pending_stage
     - .base_stage
-  stage: Deploy
 
 Notify Fail:
   extends:
