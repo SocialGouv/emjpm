@@ -74,7 +74,12 @@ const AdminUsersMesures = props => {
   }
 
   const { mesures, mandataires, mesures_aggregate } = data;
-  const [mandataire] = mandataires;
+  const [mandataire] = (mandataires.length && mandataires) || [
+    {
+      mesures_en_attente: 0,
+      mesures_en_cours: 0
+    }
+  ];
   const {
     aggregate: { count: awaitingMesuresCount }
   } = mesures_aggregate;
