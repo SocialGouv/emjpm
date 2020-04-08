@@ -15,6 +15,6 @@ module.exports = {
     'sort-keys-fix/sort-keys-fix': [error, 'asc'],
     'react/jsx-fragments': [error, 'element'],
     'import/prefer-default-export': ignore,
-    'import/no-extraneous-dependencies': [error, { devDependencies: ['**/*.stories.js'] }],
+    'import/no-extraneous-dependencies': [error, { devDependencies: ['rollup.config.js', '**/*.stories.js'] }],
   },
 };

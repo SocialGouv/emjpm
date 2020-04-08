@@ -1,10 +1,7 @@
-
 ---
-
 #
 
 include:
-
   - project: SocialGouv/gitlab-ci-yml
     file: /base_deploy_nodejs_chart_stage.yml
     ref: v8.0.0
@@ -50,12 +47,12 @@ variables:
 #
 
 stages:
-- "Prepare"
-- "Code Quality"
-- "Build Image"
-- "Registration"
-- "Deploy"
-- "Notify Finished Deployment"
+  - "Prepare"
+  - "Code Quality"
+  - "Build Image"
+  - "Registration"
+  - "Deploy"
+  - "Notify Finished Deployment"
 
 #
 
@@ -70,7 +67,6 @@ stages:
       - $RELEASE
 
 # #
-
 
 .incubateur_stage:
   environment:
@@ -93,13 +89,32 @@ stages:
 
 .prepare_stage:
   extends: .base_stage
-  stage: "Prepare"
+  stage: Prepare
   dependencies: []
 
 .base_yarn_workspace_install:
   extends: .prepare_stage
   image: node:12-alpine
   interruptible: true
+  cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+    paths:
+      - $CI_PROJECT_DIR/.cache
+      # HACK(douglasduteil): remove node_modules cache
+      # Or minio can't handle the size of it...
+      # - node_modules
+      # - packages/${CONTEXT}/node_modules
+  before_script:
+    - "[[ type jq ]] || apk add jq=~1"
+
+    # HACK(douglasduteil): remove all packages dependencies
+    # To make the installation blazing fast, we remove all packages dependencies
+    # Only the root package.json dependencies will be installed
+    - find packages -maxdepth 1 -type d -not -name ${CONTEXT} | tail -n +2 |
+      xargs -I {} sh -c "[[ -f "{}/package.json" ]] || exit 0 ; {
+      rm {}/package.json ;
+      jq 'del(.dependencies) | del(.devDependencies)' > {}/package.json
+      ; } < {}/package.json"
   script:
     - "[[ type jq ]] || apk add jq=~1"
 
@@ -108,8 +123,13 @@ stages:
     # like lerna or husky...
     - "{ rm package.json; jq 'del(.dependencies) | del(.devDependencies)' > package.json; } < package.json"
 
-    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
-    - yarn --frozen-lockfile
+    - yarn config set cache-folder $CI_PROJECT_DIR/.cache/yarn
+    - yarn --frozen-lockfile --prefer-offline
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - node_modules
+      - packages/${CONTEXT}/node_modules
 
 #
 
@@ -117,13 +137,6 @@ Install api:
   extends: .base_yarn_workspace_install
   variables:
     CONTEXT: api
-  before_script:
-    - find packages -maxdepth 1 -type d -not -name api -not -name knex | tail -n +2 | xargs rm -rf
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - node_modules
-      - packages/api/node_modules
 
 #
 
@@ -132,13 +145,26 @@ Install app:
   variables:
     CONTEXT: app
   before_script:
-    - find packages -maxdepth 1 -type d -not -name app -not -name ui | tail -n +2 | xargs rm -rf
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - node_modules
-      - packages/app/node_modules
-      - packages/ui/node_modules
+    - "[[ type jq ]] || apk add jq=~1"
+
+    # HACK(douglasduteil): remove all packages dependencies
+    # To make the installation blazing fast, we remove all packages dependencies
+    # Only the root package.json dependencies will be installed
+    - find packages -maxdepth 1
+      -not -name ${CONTEXT}
+      -not -name ui
+      -type d | tail -n +2 |
+      xargs -I {} rm -rf {}
+
+    # HACK(douglasduteil): remove all linked dependencies
+    # To make the installation blazing fast, we remove all packages dependencies
+    # Only the root package.json dependencies will be installed
+    - find packages -maxdepth 1 -type d -not -name ${CONTEXT} | tail -n +2 |
+      xargs -I {} sh -c "[[ -f "{}/package.json" ]] || exit 0 ; {
+      rm {}/package.json ;
+      jq 'del(.devDependencies)' > {}/package.json
+      ; } < {}/package.json"
+
 
 #
 
@@ -146,13 +172,6 @@ Install graphql-server:
   extends: .base_yarn_workspace_install
   variables:
     CONTEXT: graphql-server
-  before_script:
-    - find packages -maxdepth 1 -type d -not -name graphql-server | tail -n +2 | xargs rm -rf
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - node_modules
-      - packages/graphql-server/node_modules
 
 #
 
@@ -160,13 +179,13 @@ Install knex:
   extends: .base_yarn_workspace_install
   variables:
     CONTEXT: knex
-  before_script:
-    - find packages -maxdepth 1 -type d -not -name knex | tail -n +2 | xargs rm -rf
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - node_modules
-      - packages/knex/node_modules
+
+#
+
+Install ui:
+  extends: .base_yarn_workspace_install
+  variables:
+    CONTEXT: ui
 
 ################################################################################################
 ###################################                    #########################################
@@ -176,7 +195,7 @@ Install knex:
 
 .quality_stage:
   extends: .base_stage
-  stage: "Code Quality"
+  stage: Code Quality
   dependencies: []
 
 #
@@ -194,15 +213,28 @@ Lint @emjpm/api:
 #
 
 Lint @emjpm/app:
-  extends: .quality_stage
+  extends: .build_stage
   image: node:12-alpine
   dependencies:
     - Install app
+    - Build @emjpm/ui
   needs:
     - Install app
+    - Build @emjpm/ui
   script:
-    - yarn workspace @emjpm/ui build
     - yarn workspace @emjpm/app lint
+
+#
+
+Lint @emjpm/ui:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install ui
+  needs:
+    - Install ui
+  script:
+    - yarn workspace @emjpm/ui lint
 
 #
 
@@ -301,7 +333,6 @@ Test @emjpm/api:
 #     - sh -x docker/postgres/postgres-init.sh
 #     - yarn workspace @emjpm/knex test
 
-
 ################################################################################################
 ###################################                    #########################################
 ###################################     BUILD IMAGE    #########################################
@@ -310,7 +341,7 @@ Test @emjpm/api:
 
 .build_stage:
   extends: .base_stage
-  stage: "Build Image"
+  stage: Build Image
   dependencies: []
 
 Build @emjpm/api:
@@ -326,7 +357,8 @@ Build @emjpm/api:
     expire_in: 1 day
     paths:
       - packages/api/dist
-  #
+
+#
 
 Build @emjpm/app:
   extends: .build_stage
@@ -334,9 +366,15 @@ Build @emjpm/app:
     INVALID_GIT_FILES_CHANGES: "true"
   dependencies:
     - Install app
+    - Build @emjpm/ui
   needs:
     - Install app
+    - Build @emjpm/ui
   image: node:12-alpine
+  cache:
+    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+    paths:
+      - packages/app/.next/cache
   script:
     - yarn workspace @emjpm/app build
   artifacts:
@@ -360,6 +398,24 @@ Build @emjpm/graphql-server:
     paths:
       - packages/graphql-server/dist
 
+#
+
+Build @emjpm/ui:
+  extends: .quality_stage
+  dependencies:
+    - Install ui
+  needs:
+    - Install ui
+  variables:
+    CONTEXT: ui
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/${CONTEXT} build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - packages/${CONTEXT}/dist
+
 ################################################################################################
 ###################################                    #########################################
 ###################################     REGISTRATION   #########################################
@@ -368,7 +424,7 @@ Build @emjpm/graphql-server:
 
 .register_stage:
   extends: .base_stage
-  stage: "Registration"
+  stage: Registration
   interruptible: true
   dependencies: []
 
@@ -419,14 +475,18 @@ Register app image:
     - .base_register_stage
     - .register_stage
   dependencies:
+    - Build @emjpm/ui
     - Build @emjpm/app
   needs:
     - Install app
+    - Install ui
+    - Build @emjpm/ui
     - Build @emjpm/app
-  before_script:
-    - cp yarn.lock packages/app/yarn.lock
   variables:
-    CONTEXT: packages/app
+    CONTEXT: .
+    DOCKER_BUILD_ARGS: >-
+      --shm-size 512M
+      -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
 ################### Register GRAPHQL SERVER ##################
@@ -475,7 +535,7 @@ Backup PG before production (incubateur):
   extends:
     - .base_docker_kubectl_image_stage
     - .incubateur_stage
-  stage: "Registration"
+  stage: Registration
   interruptible: true
   script:
     - source ./.gitlab-ci/env.sh
@@ -526,7 +586,7 @@ Init Managed Database:
 ################################################################################################
 
 .deploy_stage:
-  stage: "Deploy"
+  stage: Deploy
   dependencies: []
   services:
     - docker:dind
@@ -541,10 +601,8 @@ Init Managed Database:
     - .base_deploy_nodejs_chart_stage
     - .deploy_stage
   dependencies: []
-  stage: Deploy
   variables:
     CONTEXT: api
-    IMAGE_TAG: $CI_COMMIT_SHA
     PORT: 80
     VALUES_FILE: ./packages/api/.k8s.values.yml
   before_script:
@@ -575,13 +633,12 @@ Deploy api (prod):
 
 ############### Deploy APP ###############################
 
-.deploy_app_stage: &deploy_app_stage
-  dependencies: []
-  stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
+.deploy_app_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
   variables:
     CONTEXT: app
-    IMAGE_TAG: $CI_COMMIT_SHA
     PORT: 80
     VALUES_FILE: ./packages/app/.k8s.values.yml
   before_script:
@@ -607,13 +664,12 @@ Deploy app (prod):
 
 ################ Deploy GRAPHQL SERVER ###########################
 
-.deploy_graphql-server_stage: &deploy_graphql-server_stage
-  dependencies: []
-  stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
+.deploy_graphql-server_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
   variables:
     CONTEXT: graphql-server
-    IMAGE_TAG: $CI_COMMIT_SHA
     PORT: 80
     VALUES_FILE: ./packages/graphql-server/.k8s.values.yml
   before_script:
@@ -635,16 +691,15 @@ Deploy graphql-server (prod):
     - .deploy_graphql-server_stage
     - .incubateur_stage
 
-
 ################ Deploy KNEX #################################
 
-.deploy_knex_stage: &deploy_knex_stage
+.deploy_knex_stage:
+  extends:
+    - .base_docker_kubectl_image_stage
+    - .deploy_stage
   dependencies: []
-  stage: Deploy
-  extends: .base_docker_kubectl_image_stage
   variables:
     CONTEXT: knex
-    IMAGE_TAG: $CI_COMMIT_SHA
   script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -656,7 +711,7 @@ Deploy graphql-server (prod):
     # Dataset job
     - kubectl delete configmap dataset-configmap || true;
     - kubectl create configmap dataset-configmap
-        --from-file=./.k8s/postgres/dataset/configmap
+      --from-file=./.k8s/postgres/dataset/configmap
     #
     - kubectl delete job dataset || true;
     - cat ./.k8s/postgres/dataset/job-inject-dataset.yml | envsubst | kubectl apply -f -
@@ -667,11 +722,11 @@ Deploy graphql-server (prod):
 
     - kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} || true;
     - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
-        --from-file=./.k8s/postgres/backup/configmap
+      --from-file=./.k8s/postgres/backup/configmap
     #
     - if [ -n "${PRODUCTION+x}" ]; then
-        kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
-        cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
+      kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
+      cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
       fi
 
 #
@@ -688,13 +743,12 @@ Deploy knex (prod):
 
 ################ Deploy HASURA #################################
 
-.deploy_hasura_stage: &deploy_hasura_stage
-  # dependencies: []
-  stage: Deploy
-  extends: .base_deploy_nodejs_chart_stage
+.deploy_hasura_stage:
+  extends:
+    - .base_deploy_nodejs_chart_stage
+    - .deploy_stage
   variables:
     CONTEXT: hasura
-    IMAGE_TAG: $CI_COMMIT_SHA
     PORT: 80
     VALUES_FILE: ./packages/hasura/.k8s.values.yml
   before_script:
@@ -766,14 +820,11 @@ Restore postgres data:
     - kubectl wait --for=condition=complete job/migrate-job  --timeout=600s
     - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
 
-
-
 #######################################################################################################
 ##########################################               ##############################################
 ##########################################     NOTIFY    ##############################################
 ##########################################               ##############################################
 #######################################################################################################
-
 
 ############### NOTIFY ################################
 
@@ -812,11 +863,10 @@ Delete useless k8s namespaces:
     - .base_delete_useless_k8s_ns_stage
     - .base_stage
 
-
 ############ Release #################
 
 Release:
-  stage: "Notify Finished Deployment"
+  stage: Notify Finished Deployment
   dependencies: []
   image: node:12.14-alpine3.10
   variables:
@@ -849,8 +899,8 @@ Release:
     # Only the root package.json dependencies will be installed
     - find packages -maxdepth 1 -type d | tail -n +2 |
       xargs -I {} sh -c "[[ -f "{}/package.json" ]] || exit 0 ; {
-        rm {}/package.json ;
-        jq 'del(.dependencies) | del(.devDependencies)' > {}/package.json
+      rm {}/package.json ;
+      jq 'del(.dependencies) | del(.devDependencies)' > {}/package.json
       ; } < {}/package.json"
 
     # Use local yarn cache
@@ -871,7 +921,7 @@ Release:
 
 Trigger production:
   extends: .base_stage
-  stage: "Notify Finished Deployment"
+  stage: Notify Finished Deployment
   image: curlimages/curl:7.67.0
   when: manual
   variables:
@@ -890,7 +940,7 @@ Trigger production:
 
 Trigger release:
   extends: .base_stage
-  stage: "Notify Finished Deployment"
+  stage: Notify Finished Deployment
   image: curlimages/curl:7.67.0
   when: manual
   variables:
@@ -904,4 +954,3 @@ Trigger release:
       --form token="${CI_JOB_TOKEN}"
       --form variables[RELEASE]="true"
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
-
