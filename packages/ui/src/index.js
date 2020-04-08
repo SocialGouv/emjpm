@@ -1,4 +1,4 @@
-// theme 
+// theme
 export * from './preset';
 
 // globalStyle
