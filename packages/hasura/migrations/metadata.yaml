@@ -2146,6 +2146,51 @@ tables:
           _eq: X-Hasura-Service-Id
 - table:
     schema: public
+    name: service_personnels
+  object_relationships:
+  - name: service
+    using:
+      foreign_key_constraint_on: service_id
+  select_permissions:
+  - role: service
+    permission:
+      columns:
+      - id
+      - created_at
+      - service_id
+      - nombre_postes_delegues_etp
+      - nombre_delegues
+      - nombre_poste_autre_personnel_etp
+      - nombre_delegues_cnc
+      - nombre_delegues_cnc_pjm
+      - nombre_delegues_cnc_maj
+      - nombre_delegues_cnc_dpf
+      - nombre_delegues_en_formation
+      - nombre_delegues_non_formes
+      filter:
+        service_id:
+          _eq: x-hasura-service-id
+  update_permissions:
+  - role: service
+    permission:
+      columns:
+      - nombre_poste_autre_personnel_etp
+      - nombre_postes_delegues_etp
+      - id
+      - nombre_delegues
+      - nombre_delegues_cnc
+      - nombre_delegues_cnc_dpf
+      - nombre_delegues_cnc_maj
+      - nombre_delegues_cnc_pjm
+      - nombre_delegues_en_formation
+      - nombre_delegues_non_formes
+      - service_id
+      - created_at
+      filter:
+        service_id:
+          _eq: x-hasura-service-id
+- table:
+    schema: public
     name: service_tis
   object_relationships:
   - name: service
@@ -2184,6 +2229,13 @@ tables:
         table:
           schema: public
           name: service_members
+  - name: service_personnels
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table:
+          schema: public
+          name: service_personnels
   - name: service_tis
     using:
       foreign_key_constraint_on:
