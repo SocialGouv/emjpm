@@ -20,6 +20,6 @@ exports.up = async function(knex) {
   `);
 };
 
-exports.down = async function(knex) {
-  await knex.raw("DROP TABLE individuel_exercices");
+exports.down = function(knex) {
+  return knex.raw("DROP TABLE individuel_exercices");
 };
