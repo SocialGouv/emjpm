@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { ChevronDown } from '@styled-icons/evil';
-import { UserCircle } from '@styled-icons/fa-regular';
+import { ChevronDown } from '@styled-icons/evil/ChevronDown';
+import { UserCircle } from '@styled-icons/fa-regular/UserCircle';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { Box, Flex, Text } from 'rebass';
