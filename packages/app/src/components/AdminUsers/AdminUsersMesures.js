@@ -123,7 +123,11 @@ const AdminUsersMesures = props => {
         isLoading={mutationLoading}
         selectedItemsCount={Object.keys(selectedRows).length}
         buttonEnable={mesures.length !== 0 && Object.keys(selectedRows).length > 0}
-        title={`Mesures (${mandataire.mesures_en_cours} en cours • ${mandataire.mesures_en_attente} en attente)`}
+        title={
+          mandataire
+            ? `Mesures (${mandataire.mesures_en_cours} en cours • ${mandataire.mesures_en_attente} en attente)`
+            : "Mesures"
+        }
       />
 
       {mesures.length === 0 ? (

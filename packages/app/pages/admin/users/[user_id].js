@@ -28,13 +28,15 @@ const getTabInfos = (type, active) => {
     title: "Information"
   });
 
-  tabInfos.push({
-    // eslint-disable-next-line react/display-name
-    createPanel: id => {
-      return <AdminUsersMesures userId={id} />;
-    },
-    title: "Mesures"
-  });
+  if (isMandataire(type) || type === "service") {
+    tabInfos.push({
+      // eslint-disable-next-line react/display-name
+      createPanel: id => {
+        return <AdminUsersMesures userId={id} />;
+      },
+      title: "Mesures"
+    });
+  }
 
   if (active && isMandataire(type)) {
     tabInfos.push({
