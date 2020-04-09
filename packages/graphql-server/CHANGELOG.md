@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.26.0](https://github.com/SocialGouv/emjpm/compare/v25.25.0...v25.26.0) (2020-04-09)
+
+
+### Bug Fixes
+
+* **graphql-server:** path import ([#1634](https://github.com/SocialGouv/emjpm/issues/1634)) ([58461a8](https://github.com/SocialGouv/emjpm/commit/58461a820f7a9543e9710c615e3a9052acbdfc15))
+
+
+### Features
+
+* **app:** modify queries to recalculate mesures count ([#1632](https://github.com/SocialGouv/emjpm/issues/1632)) ([61d57af](https://github.com/SocialGouv/emjpm/commit/61d57af366a2a5e1fee5eb2c346e4b05f2435eb0))
+* **enquete:** add individual information forms ([#1622](https://github.com/SocialGouv/emjpm/issues/1622)) ([fa8cd07](https://github.com/SocialGouv/emjpm/commit/fa8cd07a595ff363053bd78144390f76b8eb217b))
+* **remote-schema:** recalculate mesures count ([#1629](https://github.com/SocialGouv/emjpm/issues/1629)) ([fb61fe7](https://github.com/SocialGouv/emjpm/commit/fb61fe780c22997fd4e5081108856a59dad3887f))
+
+
+
+
+
 # [25.25.0](https://github.com/SocialGouv/emjpm/compare/v25.24.3...v25.25.0) (2020-03-22)
 
 **Note:** Version bump only for package @emjpm/graphql-server

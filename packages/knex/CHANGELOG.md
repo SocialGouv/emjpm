@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.26.0](https://github.com/SocialGouv/emjpm/compare/v25.25.0...v25.26.0) (2020-04-09)
+
+
+### Features
+
+* **enquete:** add individual information forms ([#1622](https://github.com/SocialGouv/emjpm/issues/1622)) ([fa8cd07](https://github.com/SocialGouv/emjpm/commit/fa8cd07a595ff363053bd78144390f76b8eb217b))
+* **service-enquete:** add enquete personnel forms ([#1652](https://github.com/SocialGouv/emjpm/issues/1652)) ([f439251](https://github.com/SocialGouv/emjpm/commit/f439251ee1e5a83864886993807d3d5b10668c0c))
+
+
+
+
+
 # [25.25.0](https://github.com/SocialGouv/emjpm/compare/v25.24.3...v25.25.0) (2020-03-22)
 
 
