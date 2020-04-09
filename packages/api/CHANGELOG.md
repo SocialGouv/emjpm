@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.26.0](https://github.com/SocialGouv/emjpm/compare/v25.25.0...v25.26.0) (2020-04-09)
+
+
+### Bug Fixes
+
+* **test:** move express server in its own file ([#1633](https://github.com/SocialGouv/emjpm/issues/1633)) ([fc0f9d0](https://github.com/SocialGouv/emjpm/commit/fc0f9d039a4550491c9658d92dd8cf822bf3bf3d))
+
+
+### Features
+
+* **enquete:** add individual information forms ([#1622](https://github.com/SocialGouv/emjpm/issues/1622)) ([fa8cd07](https://github.com/SocialGouv/emjpm/commit/fa8cd07a595ff363053bd78144390f76b8eb217b))
+
+
+
+
+
 # [25.25.0](https://github.com/SocialGouv/emjpm/compare/v25.24.3...v25.25.0) (2020-03-22)
 
 
