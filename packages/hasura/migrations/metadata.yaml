@@ -345,6 +345,60 @@ tables:
       filter: {}
 - table:
     schema: public
+    name: enquiries
+  array_relationships:
+  - name: enquiry_answers
+    using:
+      foreign_key_constraint_on:
+        column: enquiry_id
+        table:
+          schema: public
+          name: enquiry_answers
+  insert_permissions:
+  - role: direction
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - status
+      - year
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - year
+      - status
+      filter: {}
+  update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - created_at
+      - id
+      - status
+      - year
+      filter: {}
+- table:
+    schema: public
+    name: enquiry_answers
+  object_relationships:
+  - name: enquiry
+    using:
+      foreign_key_constraint_on: enquiry_id
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - type
+      - enquiry_id
+      - content
+      filter: {}
+- table:
+    schema: public
     name: etablissements
   array_relationships:
   - name: mandataire_etablissements
