@@ -28,7 +28,7 @@ const getTabInfos = (type, active) => {
     title: "Information"
   });
 
-  if (isMandataire(type) || type === "service") {
+  if (active && isMandataire(type)) {
     tabInfos.push({
       // eslint-disable-next-line react/display-name
       createPanel: id => {
