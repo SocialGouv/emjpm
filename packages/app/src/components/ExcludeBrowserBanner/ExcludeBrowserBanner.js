@@ -22,7 +22,7 @@ export const ExcludeBrowserBanner = () => {
             target="_blank"
             href="https://www.google.com/intl/fr_fr/chrome"
           >
-            {`Votre navigateur (${currentBrowser.name} ${currentBrowser.version}) n'est pas compatible avec emjpm. Cliquez ici pour mettre à jour votre navigateur`}
+            {`La plateforme e-MJPM n'est pas compatible avec votre navigateur (${currentBrowser.name} ${currentBrowser.version}). Nous vous conseillons d'utiliser une version récente de Chrome pour profiter pleinement des fonctionnalités d'eMJPM. Veuillez cliquer ici pour installer ou mettre à jour ce navigateur.`}
           </a>
         </Text>
       </Card>
