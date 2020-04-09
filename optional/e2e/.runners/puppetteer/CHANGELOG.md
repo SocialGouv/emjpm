@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.26.0](https://github.com/SocialGouv/emjpm/compare/v25.25.0...v25.26.0) (2020-04-09)
+
+**Note:** Version bump only for package @optional/e2e.runner.puppetteer
+
+
+
+
+
 # [25.25.0](https://github.com/SocialGouv/emjpm/compare/v25.24.3...v25.25.0) (2020-03-22)
 
 **Note:** Version bump only for package @optional/e2e.runner.puppetteer
