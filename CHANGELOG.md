@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.26.0](https://github.com/SocialGouv/emjpm/compare/v25.25.0...v25.26.0) (2020-04-09)
+
+
+### Bug Fixes
+
+* **admin:** enable mesures tab for mandataires only ([#1662](https://github.com/SocialGouv/emjpm/issues/1662)) ([567b32d](https://github.com/SocialGouv/emjpm/commit/567b32dc34730004cae363048230c96262b11556))
+* **app:** components unit tests ([#1649](https://github.com/SocialGouv/emjpm/issues/1649)) ([1caf219](https://github.com/SocialGouv/emjpm/commit/1caf2198837d5d5360d18cefb90979b932732380))
+* **backup:** update PGDATABASE ([3cb0c75](https://github.com/SocialGouv/emjpm/commit/3cb0c7533d9b4856d4790559a73b55cf4d3f8ffc))
+* **backup:** use docker image postgres:10 ([314b0e0](https://github.com/SocialGouv/emjpm/commit/314b0e0516015b8d48e09256a0a0da89b3133ad3))
+* **graphql-server:** path import ([#1634](https://github.com/SocialGouv/emjpm/issues/1634)) ([58461a8](https://github.com/SocialGouv/emjpm/commit/58461a820f7a9543e9710c615e3a9052acbdfc15))
+* **lint:** build ui before launching app lint ([#1638](https://github.com/SocialGouv/emjpm/issues/1638)) ([bf51b70](https://github.com/SocialGouv/emjpm/commit/bf51b7091cd58c33c21b66622fd99b675ab9f17c))
+* **test:** move express server in its own file ([#1633](https://github.com/SocialGouv/emjpm/issues/1633)) ([fc0f9d0](https://github.com/SocialGouv/emjpm/commit/fc0f9d039a4550491c9658d92dd8cf822bf3bf3d))
+
+
+### Features
+
+* **admin:** create admin pages to manage mesures ([#1623](https://github.com/SocialGouv/emjpm/issues/1623)) ([1b5efbc](https://github.com/SocialGouv/emjpm/commit/1b5efbc9aa5bea11a89b51c8536a1afcd3d98bc2))
+* **app:** add parameters to geocode service ([#1640](https://github.com/SocialGouv/emjpm/issues/1640)) ([0b5ad14](https://github.com/SocialGouv/emjpm/commit/0b5ad14e188068d7fd2335935b61b2ed7734423b))
+* **app:** add warning message in mandataire reservation page ([#1647](https://github.com/SocialGouv/emjpm/issues/1647)) ([1f08859](https://github.com/SocialGouv/emjpm/commit/1f0885947480ff7318d2a4e583f257e422467d75))
+* **app:** create exclude browser banner ([#1657](https://github.com/SocialGouv/emjpm/issues/1657)) ([8c05a2b](https://github.com/SocialGouv/emjpm/commit/8c05a2b1d9428e6cbff32d4edaf797563e6a6968))
+* **app:** create select field to show all cities by postcode ([#1641](https://github.com/SocialGouv/emjpm/issues/1641)) ([d1ac2dc](https://github.com/SocialGouv/emjpm/commit/d1ac2dcf4767568a339e441f00fe8900411edf88))
+* **app:** modify queries to recalculate mesures count ([#1632](https://github.com/SocialGouv/emjpm/issues/1632)) ([61d57af](https://github.com/SocialGouv/emjpm/commit/61d57af366a2a5e1fee5eb2c346e4b05f2435eb0))
+* **app:** split address field into three fields ([#1637](https://github.com/SocialGouv/emjpm/issues/1637)) ([f3254d6](https://github.com/SocialGouv/emjpm/commit/f3254d6b8c75f9299dffbcb7a2edf9972b1358a4))
+* **app:** split service address fields ([#1644](https://github.com/SocialGouv/emjpm/issues/1644)) ([bee993f](https://github.com/SocialGouv/emjpm/commit/bee993f726b963b4e756c5d4c169f9f9742927e7))
+* **enquete:** add individual information forms ([#1622](https://github.com/SocialGouv/emjpm/issues/1622)) ([fa8cd07](https://github.com/SocialGouv/emjpm/commit/fa8cd07a595ff363053bd78144390f76b8eb217b))
+* **remote-schema:** recalculate mesures count ([#1629](https://github.com/SocialGouv/emjpm/issues/1629)) ([fb61fe7](https://github.com/SocialGouv/emjpm/commit/fb61fe780c22997fd4e5081108856a59dad3887f))
+* **service-enquete:** add enquete personnel forms ([#1652](https://github.com/SocialGouv/emjpm/issues/1652)) ([f439251](https://github.com/SocialGouv/emjpm/commit/f439251ee1e5a83864886993807d3d5b10668c0c))
+* **ui:** add 'hasError' parameter to select component ([#1646](https://github.com/SocialGouv/emjpm/issues/1646)) ([cf3d5e5](https://github.com/SocialGouv/emjpm/commit/cf3d5e58ba033dc8800403213ad110102d17f951))
+* **ui:** move ui packages in main repository ([#1627](https://github.com/SocialGouv/emjpm/issues/1627)) ([301b0f5](https://github.com/SocialGouv/emjpm/commit/301b0f5b0053d4c67a32002aa651d494118caf7e))
+
+
+
+
+
 # [25.25.0](https://github.com/SocialGouv/emjpm/compare/v25.24.3...v25.25.0) (2020-03-22)
 
 
