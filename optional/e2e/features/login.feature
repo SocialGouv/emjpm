@@ -1,12 +1,12 @@
 @login
-Feature: Login to EMJJM
-  In order use EMJJM
+Feature: Login to EMJPM
+  In order use EMJPM
   As a user
   I want to be able to login
 
   Background: Navigate to HomePage
     Given a clean test database
-    Given a web browser is on EMJJM
+    Given a web browser is on EMJPM
 
   @login_individuel
   Scenario: Individuel login

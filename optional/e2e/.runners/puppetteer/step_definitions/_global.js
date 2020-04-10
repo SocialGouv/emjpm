@@ -13,7 +13,7 @@ if (process.env.DEBUG) {
 
 //
 
-Given("a web browser is on EMJJM", () => {
+Given("a web browser is on EMJPM", () => {
   I.amOnPage("/");
 });
 

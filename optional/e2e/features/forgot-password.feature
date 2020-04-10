@@ -6,7 +6,7 @@ Feature: Forgot password
 
   Background: Navigate to HomePage
     Given a clean test database
-    Given a web browser is on EMJJM
+    Given a web browser is on EMJPM
     And an empty inbox
 
   Scenario: Adrien (ud@ud.com) forgot his password
@@ -40,7 +40,7 @@ Feature: Forgot password
       | from[0].address | support.emjpm@fabrique.social.gouv.fr   |
       | to[0].address   | ud@ud.com                    |
 
-    Given a web browser is on EMJJM
+    Given a web browser is on EMJPM
     When I enter "jeremy" as "Votre nom d'utilisateur"
     When I enter "JaimeLesChips123456?" as "Votre mot de passe"
     And I click on "Se connecter"

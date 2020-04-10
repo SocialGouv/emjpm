@@ -1,12 +1,12 @@
 @inscription
 Feature: Inscription
-  In order use EMJJM
+  In order use EMJPM
   As a visitor
   I want to sign up
 
   Background: Navigate to HomePage
     Given a clean test database
-    Given a web browser is on EMJJM
+    Given a web browser is on EMJPM
     And I click on "Créer votre compte emjpm"
 
   Scenario: Mandataire individuel
