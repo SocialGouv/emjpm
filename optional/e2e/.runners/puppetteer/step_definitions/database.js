@@ -1,6 +1,6 @@
 const execa = require("execa");
 
-Given("a clean test database", async () => {
+async function cleanDatabase() {
   const { output } = require("codeceptjs");
   await execa(
     "psql",
@@ -46,4 +46,7 @@ Given("a clean test database", async () => {
     }
   );
   stdout && output.log("  #[" + stdout + "]");
-});
+}
+
+Given("la base de donnée est initialisée", cleanDatabase)
+Given("a clean test database", cleanDatabase);

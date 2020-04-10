@@ -13,9 +13,31 @@ if (process.env.DEBUG) {
 
 //
 
+Given("la page est totalement chargée", () => {
+  I.wait(5);
+})
+
+Given("je suis connecté en tant que tribunal", () => {
+  I.amOnPage("/login");
+  I.fillField("Votre nom d'utilisateur", "sylvie.houen@justice.fr");
+  I.fillField("Votre mot de passe", "emjpm2019");
+  I.click("Se connecter");
+});
+
 Given("a web browser is on EMJPM", () => {
   I.amOnPage("/");
 });
+
+Given("je suis redirigé sur la page {string}", (url) => {
+  I.waitInUrl(url, 5);
+})
+
+Given("je navigue sur la page {string}", url => {
+  I.amOnPage(url);
+  I.wait(5);
+})
+
+//
 
 When("I enter {string} as {string}", (value, placeholder) => {
   I.fillField(placeholder, value);
@@ -23,10 +45,6 @@ When("I enter {string} as {string}", (value, placeholder) => {
 
 When("pause", () => {
   pause();
-});
-
-Then("I should redirected to {string} page", url => {
-  I.waitInUrl(url, 5);
 });
 
 When("I click on {string}", text => {
@@ -51,10 +69,6 @@ When("I fill in the following", table => {
   });
 });
 
-Then("I wait for text {string}", text => {
-  I.waitForText(text);
-});
-
 When("I click on {string} on the line with {string}", (buttonName, text) => {
   within(locate("[role=row]").withText(text).locator, () => {
     I.click(buttonName);
@@ -67,4 +81,14 @@ When("I am accepting popups", () => {
 
 When("I accept the popup", () => {
   I.acceptPopup();
+});
+
+//
+
+Then("I should redirected to {string} page", url => {
+  I.waitInUrl(url, 5);
+});
+
+Then("I wait for text {string}", text => {
+  I.waitForText(text);
 });

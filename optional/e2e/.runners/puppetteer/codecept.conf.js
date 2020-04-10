@@ -29,7 +29,8 @@ exports.config = {
     steps: [
       "./step_definitions/_global.js",
       "./step_definitions/database.js",
-      "./step_definitions/email.js"
+      "./step_definitions/email.js",
+      "./step_definitions/mesure.js"
     ]
   },
   plugins: {
