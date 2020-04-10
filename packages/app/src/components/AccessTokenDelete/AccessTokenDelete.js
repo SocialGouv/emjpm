@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { XCircle } from "@styled-icons/boxicons-regular";
+import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import React from "react";
 import { Box } from "rebass";
 
