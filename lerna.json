@@ -6,10 +6,7 @@
       "message": "chore(release): version %v"
     }
   },
-  "packages": [
-    "optional/e2e/.runners/*",
-    "packages/*"
-  ],
   "npmClient": "yarn",
+  "useWorkspaces": true,
   "version": "25.26.0"
 }

@@ -77,7 +77,7 @@ $ docker-compose up maildev
 # Install the e2e runner env
 $ yarn e2e
 # short for
-$ yarn run -- lerna --scope @optional/e2e.runner.puppetteer exec yarn
+$ yarn --cwd optional/e2e/.runners/puppetteer
 
 # Run the test
 $ yarn e2e test
@@ -122,7 +122,7 @@ $ docker-compose -f ./docker-compose.yaml -f ./docker-compose.built.yaml up
 # Install the e2e runner env
 $ yarn e2e
 # short for
-$ yarn run -- lerna --scope @optional/e2e.runner.puppetteer exec yarn
+$ yarn --cwd optional/e2e/.runners/puppetteer
 
 # Run the test
 $ yarn e2e test

@@ -3,10 +3,10 @@
   "scripts": {
     "build": "lerna run build",
     "dev": "lerna run dev --parallel",
-    "e2e": "yarn run -- lerna --scope @optional/e2e.runner.puppetteer exec yarn --",
+    "e2e": "yarn --cwd optional/e2e/.runners/puppetteer",
     "lint": "lerna run lint --parallel",
     "start": "lerna run start --parallel",
-    "test": "lerna run test --parallel --ignore @optional/e2e"
+    "test": "lerna run test --parallel"
   },
   "license": "Apache-2.0",
   "devDependencies": {
