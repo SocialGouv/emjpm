@@ -1,10 +1,11 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import Router from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 
 import { UserContext } from "../../components/UserContext";
 import { MESURE_STATUS_LABEL_VALUE } from "../../constants/mesures";
 import { getLocation } from "../../query-service/LocationQueryService";
+import { formatTribunauxOptions } from "../../util";
 import { MandataireAddMesureForm } from "./MandataireAddMesureForm";
 import { ADD_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { MANDATAIRE, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
@@ -17,6 +18,7 @@ export const MandataireAddMesure = () => {
   } = useContext(UserContext);
 
   const { loading, error, data } = useQuery(USER_TRIBUNAL);
+  const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.user_tis) : []), [data]);
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
   const [addMesure] = useMutation(ADD_MESURE, {
     onCompleted: async () => {
@@ -42,8 +44,6 @@ export const MandataireAddMesure = () => {
   if (error) {
     return <div>Erreur...</div>;
   }
-
-  const { user_tis: tribunaux } = data;
 
   return (
     <MandataireAddMesureForm

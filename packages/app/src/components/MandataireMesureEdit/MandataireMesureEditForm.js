@@ -13,7 +13,7 @@ import TribunalAutoComplete from "../TribunalAutoComplete";
 export const MandataireMesureEditForm = props => {
   const {
     onSubmit,
-    tribunalList,
+    tribunaux,
     mesure: {
       id,
       age,
@@ -91,7 +91,7 @@ export const MandataireMesureEditForm = props => {
               name="tribunal"
               hasError={formik.errors.tribunal && formik.touched.tribunal}
               onChange={option => formik.setFieldValue("tribunal", option)}
-              defaultOptions={tribunalList}
+              defaultOptions={tribunaux}
             />
             <InlineError message={formik.errors.tribunal} fieldId="tribunal" />
           </Field>
