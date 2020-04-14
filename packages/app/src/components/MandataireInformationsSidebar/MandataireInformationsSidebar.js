@@ -1,5 +1,5 @@
-import { InfoCircle } from "@styled-icons/boxicons-regular";
-import { BuildingHouse } from "@styled-icons/boxicons-solid";
+import { InfoCircle } from "@styled-icons/boxicons-regular/InfoCircle";
+import { BuildingHouse } from "@styled-icons/boxicons-solid/BuildingHouse";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 

@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Heading5 } from "@emjpm/ui";
-import { MailOutline, Smartphone } from "@styled-icons/material";
+import { MailOutline } from "@styled-icons/material/MailOutline";
+import { Smartphone } from "@styled-icons/material/Smartphone";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
