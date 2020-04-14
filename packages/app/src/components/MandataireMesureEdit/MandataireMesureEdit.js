@@ -6,6 +6,7 @@ import { Box } from "rebass";
 import { getLocation } from "../../query-service/LocationQueryService";
 import { formatTribunauxOptions } from "../../util";
 import { MesureContext } from "../MesureContext";
+import { UserContext } from "../UserContext";
 import { MandataireMesureEditForm } from "./MandataireMesureEditForm";
 import { EDIT_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { MANDATAIRE, USER_TRIBUNAL } from "./queries";
@@ -13,9 +14,18 @@ import { ServiceMesureEditStyle } from "./style";
 
 const MandataireMesureEdit = props => {
   const client = useApolloClient();
+
+  const user = useContext(UserContext);
   const mesure = useContext(MesureContext);
+
   const { id, mandataireId } = mesure;
-  const { loading, error, data } = useQuery(USER_TRIBUNAL);
+
+  const { loading, error, data } = useQuery(USER_TRIBUNAL, {
+    variables: {
+      id: user.id
+    }
+  });
+
   const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.user_tis) : []), [data]);
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
   const [editMesure] = useMutation(EDIT_MESURE, {

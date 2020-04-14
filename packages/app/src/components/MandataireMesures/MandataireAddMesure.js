@@ -13,23 +13,26 @@ import { MANDATAIRE, MANDATAIRE_MESURES, USER_TRIBUNAL } from "./queries";
 export const MandataireAddMesure = () => {
   const client = useApolloClient();
 
-  const {
-    mandataire: { id }
-  } = useContext(UserContext);
+  const user = useContext(UserContext);
+  const { id, mandataire } = user;
 
-  const { loading, error, data } = useQuery(USER_TRIBUNAL);
+  const { loading, error, data } = useQuery(USER_TRIBUNAL, {
+    variables: {
+      id
+    }
+  });
   const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.user_tis) : []), [data]);
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
   const [addMesure] = useMutation(ADD_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({
-        variables: { mandataire_id: id },
+        variables: { mandataire_id: mandataire.id },
         refetchQueries: [
           "mesures",
           "mesures_aggregate",
           {
             query: MANDATAIRE,
-            variables: { id }
+            variables: { id: mandataire.id }
           }
         ]
       });
@@ -96,7 +99,7 @@ export const MandataireAddMesure = () => {
             residence: values.residence.value,
             ti_id: values.tribunal.value,
             type: values.type.value,
-            mandataireId: id,
+            mandataireId: mandataire.id,
             pays: values.country.value,
             cabinet: values.cabinet
           }
