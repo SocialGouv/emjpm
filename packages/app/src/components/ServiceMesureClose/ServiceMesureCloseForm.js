@@ -7,6 +7,7 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { CLOSE_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
+import { MESURE, SERVICE } from "./queries";
 
 const EXTINCTION_LABEL_VALUE = [
   { label: "caducité", value: "caducité" },
@@ -20,7 +21,13 @@ const EXTINCTION_LABEL_VALUE = [
 
 export const ServiceMesureCloseForm = props => {
   const { mesure } = props;
-  const [recalculateServiceMesure] = useMutation(RECALCULATE_SERVICE_MESURES);
+  const [recalculateServiceMesure] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      { query: MESURE, variables: { id: mesure.id } },
+      "mesures_aggregate",
+      { query: SERVICE, variables: { id: mesure.serviceId } }
+    ]
+  });
   const [updateMesure] = useMutation(CLOSE_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesure({ variables: { service_id: mesure.serviceId } });
@@ -30,7 +37,6 @@ export const ServiceMesureCloseForm = props => {
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await updateMesure({
-        refetchQueries: ["mesures", "mesures_aggregate"],
         variables: {
           extinction: values.extinction,
           id: mesure.id,
