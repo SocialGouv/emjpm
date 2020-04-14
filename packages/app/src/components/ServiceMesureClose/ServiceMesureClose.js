@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { MesureContext } from "../MesureContext";
-import { ServiceMesureCloseForm } from "./ServiceMesureCloseForm";
+import ServiceMesureCloseForm from "./ServiceMesureCloseForm";
 import { ServiceMesureCloseStyle } from "./style";
 
 const ServiceMesureClose = props => {
