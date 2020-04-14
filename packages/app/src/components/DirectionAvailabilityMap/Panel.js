@@ -1,5 +1,5 @@
 import { Card, Heading4 } from "@emjpm/ui";
-import { XCircle } from "@styled-icons/boxicons-regular";
+import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import React from "react";
 import { Box, Button, Text } from "rebass";
 
