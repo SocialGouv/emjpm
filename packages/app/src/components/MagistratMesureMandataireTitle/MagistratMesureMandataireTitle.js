@@ -35,7 +35,7 @@ const MagistratMesureMandataireTitle = props => {
 };
 
 MagistratMesureMandataireTitle.propTypes = {
-  id: PropTypes.string
+  id: PropTypes.number
 };
 
 export default MagistratMesureMandataireTitle;

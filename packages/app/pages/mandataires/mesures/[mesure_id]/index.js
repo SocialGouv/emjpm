@@ -2,11 +2,11 @@ import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { LayoutMandataire } from "../../../src/components/Layout";
-import { MandataireMesure } from "../../../src/components/MandataireMesure";
-import { MandataireMesureSidebar } from "../../../src/components/MandataireMesureSidebar";
-import { MesureProvider } from "../../../src/components/MesureContext";
-import { withAuthSync } from "../../../src/util/auth";
+import { LayoutMandataire } from "../../../../src/components/Layout";
+import { MandataireMesure } from "../../../../src/components/MandataireMesure";
+import { MandataireMesureSidebar } from "../../../../src/components/MandataireMesureSidebar";
+import { MesureProvider } from "../../../../src/components/MesureContext";
+import { withAuthSync } from "../../../../src/util/auth";
 
 const MandataireMesurePage = props => {
   const { mesureId } = props;
