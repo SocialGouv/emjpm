@@ -123,9 +123,9 @@ export const formatGestionnaireId = gestionnaireId => {
   let mandataireId = null;
   let serviceId = null;
   if (discriminator === "service") {
-    serviceId = id;
+    serviceId = Number(id);
   } else {
-    mandataireId = id;
+    mandataireId = Number(id);
   }
   return { mandataireId, serviceId };
 };

@@ -30,13 +30,6 @@ export const CHOOSE_MANDATAIRE = gql`
         id
       }
     }
-    update_mandataires(where: { id: { _eq: $mandataire_id } }) {
-      affected_rows
-      returning {
-        id
-        mesures_en_attente
-      }
-    }
   }
 `;
 
