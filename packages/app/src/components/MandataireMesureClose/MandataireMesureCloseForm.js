@@ -2,7 +2,6 @@ import { useMutation } from "@apollo/react-hooks";
 import { Button, Field, Heading3, Heading5, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
-import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
@@ -23,30 +22,28 @@ const EXTINCTION_LABEL_VALUE = [
 export const MandataireMesureCloseForm = props => {
   const { mesure } = props;
 
-  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
+  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
+    refetchQueries: [
+      "mesures",
+      "mesures_aggregate",
+      { query: MANDATAIRE, variables: { id: mesure.mandataireId } }
+    ]
+  });
   const [updateMesure] = useMutation(CLOSE_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    },
-    refetchQueries: [
-      {
-        query: MANDATAIRE,
-        variables: { id: mesure.mandataireId }
-      }
-    ]
+    }
   });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await updateMesure({
-        refetchQueries: ["mesures", "mesures_aggregate"],
         variables: {
           extinction: values.extinction,
           id: mesure.id,
           reason_extinction: values.reason_extinction.value
         }
       });
-
       Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
         shallow: true
       });
@@ -122,8 +119,4 @@ export const MandataireMesureCloseForm = props => {
       </Box>
     </Flex>
   );
-};
-
-MandataireMesureCloseForm.propTypes = {
-  currentMesure: PropTypes.number.isRequired
 };
