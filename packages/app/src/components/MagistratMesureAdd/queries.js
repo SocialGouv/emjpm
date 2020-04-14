@@ -24,3 +24,14 @@ export const MANDATAIRE = gql`
     }
   }
 `;
+
+export const MESURES = gql`
+  query mesures($serviceId: Int, $mandataireId: Int) {
+    mesures(where: { mandataire_id: { _eq: $mandataireId }, service_id: { _eq: $serviceId } }) {
+      id
+      code_postal
+      longitude
+      latitude
+    }
+  }
+`;

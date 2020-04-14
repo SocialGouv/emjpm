@@ -15,7 +15,7 @@ import {
   RECALCULATE_MANDATAIRE_MESURES,
   RECALCULATE_SERVICE_MESURES
 } from "./mutations";
-import { MANDATAIRE, SERVICE } from "./queries";
+import { MANDATAIRE, MESURES, SERVICE } from "./queries";
 
 export const MagistratMesureAddForm = props => {
   const { serviceId, mandataireId, cancelActionRoute } = props;
@@ -70,7 +70,11 @@ export const MagistratMesureAddForm = props => {
     onSubmit: async (values, { setSubmitting }) => {
       if (mandataireId) {
         await chooseMandataire({
-          refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
+          refetchQueries: [
+            { query: MESURES, variables: { serviceId, mandataireId } },
+            "mesures_aggregate",
+            "view_mesure_gestionnaire"
+          ],
           variables: {
             annee: values.annee,
             cabinet: values.cabinet,
@@ -235,6 +239,6 @@ export const MagistratMesureAddForm = props => {
 
 MagistratMesureAddForm.propTypes = {
   antenneId: PropTypes.number,
-  mandataireId: PropTypes.string,
-  cancelActionRoute: PropTypes.string
+  mandataireId: PropTypes.number,
+  cancelActionRoute: PropTypes.object
 };
