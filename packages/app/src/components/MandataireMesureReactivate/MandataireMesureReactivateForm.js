@@ -12,11 +12,7 @@ import { MANDATAIRE, REACTIVATE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from ".
 export const MandataireMesureReactivateForm = props => {
   const { mesure } = props;
 
-  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
-  const [updateMesure] = useMutation(REACTIVATE_MESURE, {
-    onCompleted: async () => {
-      await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    },
+  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
     refetchQueries: [
       {
         query: MANDATAIRE,
@@ -24,11 +20,15 @@ export const MandataireMesureReactivateForm = props => {
       }
     ]
   });
+  const [updateMesure] = useMutation(REACTIVATE_MESURE, {
+    onCompleted: async () => {
+      await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
+    }
+  });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await updateMesure({
-        refetchQueries: ["mesures", "mesures_aggregate"],
         variables: {
           id: mesure.id,
           reason_extinction: values.reason_extinction

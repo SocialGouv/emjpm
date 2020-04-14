@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { Button, Field, Heading3, Heading5, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
+import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
@@ -21,16 +22,23 @@ const EXTINCTION_LABEL_VALUE = [
 
 export const ServiceMesureCloseForm = props => {
   const { mesure } = props;
+  const { id, serviceId } = mesure;
+
   const [recalculateServiceMesure] = useMutation(RECALCULATE_SERVICE_MESURES, {
     refetchQueries: [
-      { query: MESURE, variables: { id: mesure.id } },
-      "mesures_aggregate",
-      { query: SERVICE, variables: { id: mesure.serviceId } }
+      {
+        query: MESURE,
+        variables: { id }
+      },
+      {
+        query: SERVICE,
+        variables: { serviceId }
+      }
     ]
   });
   const [updateMesure] = useMutation(CLOSE_MESURE, {
     onCompleted: async () => {
-      await recalculateServiceMesure({ variables: { service_id: mesure.serviceId } });
+      await recalculateServiceMesure({ variables: { service_id: serviceId } });
     }
   });
 
@@ -39,12 +47,12 @@ export const ServiceMesureCloseForm = props => {
       await updateMesure({
         variables: {
           extinction: values.extinction,
-          id: mesure.id,
+          id,
           reason_extinction: values.reason_extinction.value
         }
       });
 
-      await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
+      await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
         shallow: true
       });
       setSubmitting(false);
@@ -97,7 +105,7 @@ export const ServiceMesureCloseForm = props => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
+                  Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
                     shallow: true
                   });
                 }}
@@ -116,3 +124,12 @@ export const ServiceMesureCloseForm = props => {
     </Flex>
   );
 };
+
+ServiceMesureCloseForm.propTypes = {
+  mesure: PropTypes.object({
+    id: PropTypes.number,
+    serviceId: PropTypes.number
+  })
+};
+
+export default ServiceMesureCloseForm;

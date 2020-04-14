@@ -45,14 +45,14 @@ export class MesureAPI extends AuthDataSource {
     const query = `
     query service_mesures($serviceId: Int!) {
       inprogressMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en attente" }, service_id: { _eq: $serviceId } }
+        where: { status: { _eq: "Mesure en cours" }, service_id: { _eq: $serviceId } }
       ) {
         aggregate {
           count(columns: id)
         }
       }
       awaitingMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en cours" }, service_id: { _eq: $serviceId } }
+        where: { status: { _eq: "Mesure en attente" }, service_id: { _eq: $serviceId } }
       ) {
         aggregate {
           count(columns: id)
@@ -85,14 +85,14 @@ export class MesureAPI extends AuthDataSource {
     const query = `
     query mandataire_mesures($mandataireId: Int!) {
       inprogressMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en attente" }, mandataire: { id: { _eq: $mandataireId } } }
+        where: { status: { _eq: "Mesure en cours" }, mandataire: { id: { _eq: $mandataireId } } }
       ) {
         aggregate {
           count(columns: id)
         }
       }
       awaitingMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en cours" }, mandataire: { id: { _eq: $mandataireId } } }
+        where: { status: { _eq: "Mesure en attente" }, mandataire: { id: { _eq: $mandataireId } } }
       ) {
         aggregate {
           count(columns: id)
