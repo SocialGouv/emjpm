@@ -8,7 +8,7 @@ import { individuelAgrementSchema } from "../../lib/validationSchemas";
 import { getOptionValue } from "../../util/option/OptionUtil";
 import { FieldLabel } from "../IndividuelInformationCommon";
 
-const IndividuelInformationAgrementForm = props => {
+export const MandataireEnqueteInformationAgrementForm = props => {
   const { agrement, handleSubmit, handleCancel } = props;
 
   const formik = useFormik({
@@ -30,6 +30,7 @@ const IndividuelInformationAgrementForm = props => {
         <Field>
           <FieldLabel label="Votre activité de mandataire a-t-elle a-t-elle débuté avant 2009?" />
           <Select
+            placeholder=""
             id="debutActiviteAvant2009"
             name="debutActiviteAvant2009"
             value={formik.values.debutActiviteAvant2009}
@@ -51,6 +52,7 @@ const IndividuelInformationAgrementForm = props => {
           <Field>
             <FieldLabel label="Année de début de votre activité" />
             <Input
+              placeholder=""
               value={formik.values.anneeDebutActivite}
               id="anneeDebutActivite"
               name="anneeDebutActivite"
@@ -66,6 +68,7 @@ const IndividuelInformationAgrementForm = props => {
         <Field>
           <FieldLabel label="Année d'obtention de votre agrément" />
           <Input
+            placeholder=""
             value={formik.values.anneeAgrement}
             id="anneeAgrement"
             name="anneeAgrement"
@@ -91,4 +94,4 @@ const IndividuelInformationAgrementForm = props => {
   );
 };
 
-export { IndividuelInformationAgrementForm };
+export default MandataireEnqueteInformationAgrementForm;
