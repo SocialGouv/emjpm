@@ -1,5 +1,6 @@
 import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
+import { resetIdCounter } from "react-tabs";
 
 import { LayoutMandataire } from "../../../src/components/Layout";
 import { MandataireEnquete } from "../../../src/components/MandataireEnquete";
@@ -16,7 +17,9 @@ const EnquetePage = ({ id }) => {
 };
 
 EnquetePage.getInitialProps = async ({ query }) => {
-  return { id: query.id };
+  resetIdCounter();
+  console.log("=> resetIdCounter");
+  return { id: Number(query.id) };
 };
 
 export default withAuthSync(EnquetePage);

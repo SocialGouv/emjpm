@@ -4,6 +4,9 @@ import React, { Fragment } from "react";
 import { useQuery } from "react-apollo";
 import { Box } from "rebass";
 
+import { MandataireEnqueteInformationAgrement } from "./MandataireEnqueteInformationAgrement";
+import { MandataireEnqueteInformationExercice } from "./MandataireEnqueteInformationExercice";
+import { MandataireEnqueteInformationFormation } from "./MandataireEnqueteInformationFormation";
 import { MandataireEnqueteInformations } from "./MandataireEnqueteInformations";
 import { ENQUETE } from "./queries";
 
@@ -16,12 +19,16 @@ export const MandataireEnquete = ({ id }) => {
     return <Box>Chargement...</Box>;
   }
 
-  const { enquiries_by_pk: enquete } = data;
-  const { year } = enquete;
+  const { enquetes_by_pk: enquete } = data;
+  if (!enquete) {
+    return null;
+  }
+
+  const { annee } = enquete;
 
   return (
     <Fragment>
-      <Heading1 mb={5}>Enquête {year}</Heading1>
+      <Heading1 mb={5}>Enquête {annee}</Heading1>
       <Tabs p={0}>
         <TabList>
           <Tab>{`Informations générales`}</Tab>
@@ -32,9 +39,15 @@ export const MandataireEnquete = ({ id }) => {
         <TabPanel>
           <MandataireEnqueteInformations />
         </TabPanel>
-        <TabPanel>{/* <IndividuelInformationAgrement /> */}</TabPanel>
-        <TabPanel>{/* <IndividuelInformationExercice /> */}</TabPanel>
-        <TabPanel>{/* <IndividuelInformationFormation /> */}</TabPanel>
+        <TabPanel>
+          <MandataireEnqueteInformationAgrement />
+        </TabPanel>
+        <TabPanel>
+          <MandataireEnqueteInformationExercice />
+        </TabPanel>
+        <TabPanel>
+          <MandataireEnqueteInformationFormation />
+        </TabPanel>
       </Tabs>
     </Fragment>
   );

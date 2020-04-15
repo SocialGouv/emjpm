@@ -5,11 +5,10 @@ import { Box, Flex } from "rebass";
 
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
-import { Link } from "../Commons";
 import { GeocodeCities } from "../Geocode";
 
 export const MandataireEnqueteInformationsForm = props => {
-  const { cancelLink, mandataire, handleSubmit, user } = props;
+  const { mandataire, handleSubmit, user } = props;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -177,12 +176,9 @@ export const MandataireEnqueteInformationsForm = props => {
       </Field>
 
       <Flex alignItems="center" justifyContent="flex-end">
-        <Box mr="2">
-          <Link href={cancelLink}>Annuler</Link>
-        </Box>
         <Box>
           <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
-            Enregistrer
+            Valider
           </Button>
         </Box>
       </Flex>
