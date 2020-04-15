@@ -1,14 +1,13 @@
 import { Button, Card, Field, Heading4, InlineError, Input, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
-import React, { useMemo } from "react";
+import React from "react";
 import { Box, Flex } from "rebass";
 
 import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
-import { formatUserTribunalList } from "./utils";
 
 export const MandataireAddMesureForm = props => {
   const { onSubmit, tribunaux } = props;
@@ -29,10 +28,6 @@ export const MandataireAddMesureForm = props => {
       cabinet: ""
     }
   });
-
-  const tribunauxOptions = useMemo(() => {
-    formatUserTribunalList(tribunaux);
-  }, [tribunaux]);
 
   return (
     <Card m="1" mt="5" p="0">
@@ -75,7 +70,7 @@ export const MandataireAddMesureForm = props => {
                   name="tribunal"
                   hasError={formik.errors.tribunal && formik.touched.tribunal}
                   onChange={option => formik.setFieldValue("tribunal", option)}
-                  defaultOptions={tribunauxOptions}
+                  defaultOptions={tribunaux}
                 />
                 {formik.errors.tribunal && formik.touched.tribunal && (
                   <Text>{formik.errors.tribunal}</Text>

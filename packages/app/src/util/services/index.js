@@ -62,10 +62,3 @@ export const formatAntenneOptions = antennes => {
     value: antenne.id
   }));
 };
-
-export const formatServiceTribunalList = tribunalList => {
-  return tribunalList.map(tribunal => ({
-    label: tribunal.ti.etablissement,
-    value: tribunal.ti.id
-  }));
-};

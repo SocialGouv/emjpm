@@ -1,10 +1,10 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import Router from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { Box } from "rebass";
 
 import { getLocation } from "../../query-service/LocationQueryService";
-import { formatServiceTribunalList } from "../../util/services";
+import { formatTribunauxOptions } from "../../util";
 import { MesureContext } from "../MesureContext";
 import { EDIT_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
 import { SERVICE, SERVICE_TRIBUNAL } from "../ServiceMesures/queries";
@@ -26,6 +26,7 @@ const ServiceMesureEdit = props => {
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
     variables: { serviceId }
   });
+  const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.service_tis) : []), [data]);
   const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
     refetchQueries: [
       {
@@ -47,8 +48,6 @@ const ServiceMesureEdit = props => {
   if (error) {
     return <Box p={1}>Erreur...</Box>;
   }
-
-  const tribunalList = formatServiceTribunalList(data.service_tis);
 
   return (
     <Box sx={ServiceMesureEditStyle} {...props}>
@@ -101,7 +100,7 @@ const ServiceMesureEdit = props => {
           });
           setSubmitting(false);
         }}
-        tribunalList={tribunalList}
+        tribunaux={tribunaux}
         service_antennes={service_antennes}
         mesure={mesure}
       />
