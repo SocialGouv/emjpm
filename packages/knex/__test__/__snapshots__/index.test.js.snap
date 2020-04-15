@@ -650,6 +650,164 @@ Object {
 }
 `;
 
+exports[`lb_departements table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "departement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "id": Object {
+    "defaultValue": "nextval('lb_departements_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "individuel": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "lb_user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "prepose": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "service": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "ti": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+}
+`;
+
+exports[`lb_structures table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('lb_structures_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "lb_departement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`lb_tribunaux table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('lb_tribunaux_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "lb_departement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "ville": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`lb_users table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "email": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('lb_users_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "nom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "prenom": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`logs_data table schema 1`] = `
 Object {
   "action": Object {
@@ -1624,6 +1782,10 @@ Array [
   "individuel_formations",
   "knex_migrations_v2",
   "knex_migrations_v2_lock",
+  "lb_departements",
+  "lb_structures",
+  "lb_tribunaux",
+  "lb_users",
   "logs_data",
   "magistrat",
   "mandataire_etablissements",
