@@ -16,7 +16,7 @@ const MandataireInformations = () => {
   const { email, nom, prenom, user_tis, mandataire } = user;
 
   return (
-    <Box p="5">
+    <Box>
       <Heading3>
         {nom ? nom : "Nom non renseigné"} {prenom ? prenom : "Prénom non renseigné"}
       </Heading3>
