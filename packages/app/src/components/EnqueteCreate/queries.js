@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
-export const ENQUIRIES = gql`
-  query enquete {
-    enquiries {
+export const ENQUETES = gql`
+  query enquetes {
+    enquetes {
       created_at
       id
       status

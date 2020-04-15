@@ -5,26 +5,26 @@ import Router from "next/router";
 import React from "react";
 
 import yup from "../../lib/validationSchemas/yup";
-import { CREATE_ENQUIRY } from "./mutations";
-import { ENQUIRIES } from "./queries";
+import { CREATE_ENQUETE } from "./mutations";
+import { ENQUETES } from "./queries";
 
-export const EnquiryCreate = () => {
+export const EnqueteCreate = () => {
   const client = useApolloClient();
-  const [createEnquiry] = useMutation(CREATE_ENQUIRY, {
+  const [createEnquete] = useMutation(CREATE_ENQUETE, {
     onCompleted: () => Router.push("/direction/enquetes"),
-    refetchQueries: [{ query: ENQUIRIES }]
+    refetchQueries: [{ query: ENQUETES }]
   });
   const formik = useFormik({
     initialValues: {
       year: new Date().getFullYear() - 1
     },
     onSubmit: async (values, formikHelpers) => {
-      const { data } = await client.query({ query: ENQUIRIES });
-      if (data && data.enquiries.some(e => e.year === values.year)) {
+      const { data } = await client.query({ query: ENQUETES });
+      if (data && data.enquetes.some(e => e.year === values.year)) {
         Router.push("/direction/enquetes");
       }
 
-      await createEnquiry({ variables: { year: `${values.year}` } });
+      await createEnquete({ variables: { year: `${values.year}` } });
       formikHelpers.setSubmitting(false);
     },
     validationSchema: yup.object().shape({
@@ -55,4 +55,4 @@ export const EnquiryCreate = () => {
   );
 };
 
-export default EnquiryCreate;
+export default EnqueteCreate;
