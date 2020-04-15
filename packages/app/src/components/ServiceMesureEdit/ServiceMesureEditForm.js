@@ -30,7 +30,7 @@ export const ServiceMesureEditForm = props => {
       codePostal,
       ville
     },
-    tribunalList,
+    tribunaux,
     service_antennes
   } = props;
 
@@ -95,7 +95,7 @@ export const ServiceMesureEditForm = props => {
               name="tribunal"
               hasError={formik.errors.tribunal && formik.touched.tribunal}
               onChange={option => formik.setFieldValue("tribunal", option)}
-              defaultOptions={tribunalList}
+              defaultOptions={tribunaux}
             />
             <InlineError message={formik.errors.tribunal} fieldId="tribunal" />
           </Field>

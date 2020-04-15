@@ -1,11 +1,11 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import { Card, Heading4, Text } from "@emjpm/ui";
 import Router from "next/router";
-import React from "react";
+import React, { useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { getLocation } from "../../query-service/LocationQueryService";
-import { formatServiceTribunalList } from "../../util/services";
+import { formatTribunauxOptions } from "../../util";
 import { ADD_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
 import { ServiceMesureCreateForm } from "./ServiceMesureCreateForm";
@@ -19,6 +19,7 @@ export const ServiceMesureCreate = props => {
     variables: { serviceId: service.id }
   });
 
+  const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.service_tis) : []), [data]);
   const [recalculateServiceMesure] = useMutation(RECALCULATE_SERVICE_MESURES);
   const [addMesure] = useMutation(ADD_MESURE, {
     options: { refetchQueries: ["mesures", "mesures_aggregate"] },
@@ -90,8 +91,6 @@ export const ServiceMesureCreate = props => {
     value: antenne.id
   }));
 
-  const tribunalList = formatServiceTribunalList(data.service_tis);
-
   return (
     <Card m="1" mt="5" p="0">
       <Flex flexWrap="wrap" {...props}>
@@ -113,7 +112,7 @@ export const ServiceMesureCreate = props => {
         <Box p="5" width={[1, 3 / 5]}>
           <ServiceMesureCreateForm
             handleSubmit={handleSubmit}
-            tribunalList={tribunalList}
+            tribunaux={tribunaux}
             antenneOptions={antenneOptions}
           />
         </Box>

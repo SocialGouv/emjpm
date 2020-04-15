@@ -109,15 +109,6 @@ export const formatMandataire = (
   };
 };
 
-export const formatUserTribunalList = tribunalList => {
-  return tribunalList.map(tribunal => {
-    return {
-      label: tribunal.ti.etablissement,
-      value: tribunal.ti.id
-    };
-  });
-};
-
 export const formatGestionnaireId = gestionnaireId => {
   const [discriminator, id] = gestionnaireId.split("-");
   let mandataireId = null;

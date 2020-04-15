@@ -16,7 +16,7 @@ const TribunalAutoComplete = props => {
       value={value}
       defaultOptions={defaultOptions}
       hasError={hasError}
-      isClearable
+      isClearable={false}
       loadOptions={debounce(async query => {
         const { data } = await client.query({
           query: TRIBUNAL,

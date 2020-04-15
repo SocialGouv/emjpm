@@ -25,7 +25,7 @@ const initialValues = {
 };
 
 export const ServiceMesureCreateForm = props => {
-  const { tribunalList, antenneOptions, handleSubmit } = props;
+  const { tribunaux, antenneOptions, handleSubmit } = props;
   const formik = useFormik({
     onSubmit: handleSubmit,
     initialValues,
@@ -54,7 +54,7 @@ export const ServiceMesureCreateForm = props => {
           name="tribunal"
           hasError={formik.errors.tribunal && formik.touched.tribunal}
           onChange={option => formik.setFieldValue("tribunal", option)}
-          defaultOptions={tribunalList}
+          defaultOptions={tribunaux}
         />
         {formik.touched.tribunal && (
           <InlineError message={formik.errors.tribunal} fieldId="tribunal" />
