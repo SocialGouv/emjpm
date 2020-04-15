@@ -13,7 +13,7 @@
     "lint:fix": "eslint pages src --fix",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write 'pages/**/*.js'",
-    "build": "NODE_OPTIONS=--max-old-space-size=4096 next build",
+    "build": "next build",
     "start:build": "next start -p 80",
     "generate": "hygen component new"
   },
