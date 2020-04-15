@@ -1,0 +1,1 @@
+export { MandataireEnquete } from "./MandataireEnquete";
