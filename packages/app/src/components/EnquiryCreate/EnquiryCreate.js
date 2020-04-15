@@ -3,7 +3,6 @@ import { Button, Field, InlineError, Input } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
-import { Flex } from "rebass";
 
 import yup from "../../lib/validationSchemas/yup";
 import { CREATE_ENQUIRY } from "./mutations";
