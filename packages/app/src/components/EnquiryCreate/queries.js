@@ -1,12 +1,12 @@
 import gql from "graphql-tag";
 
 export const ENQUIRIES = gql`
-  query enquiries {
+  query enquete {
     enquiries {
       created_at
       id
       status
-      year
+      annee
     }
   }
 `;

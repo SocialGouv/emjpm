@@ -1774,6 +1774,11 @@ Array [
   "direction",
   "editor_token_requests",
   "editors",
+  "enquete_individuels",
+  "enquete_preposes",
+  "enquete_reponses",
+  "enquete_services",
+  "enquetes",
   "etablissements",
   "geolocalisation_code_postal",
   "individuel_agrement_departements",
@@ -1823,6 +1828,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "address2": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "code_postal": Object {
     "defaultValue": null,
     "maxLength": 255,
@@ -1834,6 +1845,24 @@ Object {
     "maxLength": null,
     "nullable": false,
     "type": "timestamp with time zone",
+  },
+  "date_fermeture": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "date",
+  },
+  "date_modification": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "date",
+  },
+  "date_ouverture": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "date",
   },
   "departement_id": Object {
     "defaultValue": null,
@@ -1859,6 +1888,12 @@ Object {
     "nullable": false,
     "type": "integer",
   },
+  "immutable": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": false,
+    "type": "boolean",
+  },
   "latitude": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -1882,6 +1917,18 @@ Object {
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
+  },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "updated_at": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
   },
   "ville": Object {
     "defaultValue": null,
