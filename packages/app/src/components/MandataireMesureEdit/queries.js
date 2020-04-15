@@ -11,14 +11,14 @@ export const DEPARTEMENTS = gql`
 `;
 
 export const USER_TRIBUNAL = gql`
-  query UserTribunal {
-    user_tis {
+  query user_tribunal($id: Int!) {
+    user_tis(where: { id: { _eq: $id } }) {
       id
       ti_id
       user_id
       ti {
-        id
         etablissement
+        id
       }
     }
   }
