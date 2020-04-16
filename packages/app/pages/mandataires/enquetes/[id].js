@@ -18,7 +18,6 @@ const EnquetePage = ({ id }) => {
 
 EnquetePage.getInitialProps = async ({ query }) => {
   resetIdCounter();
-  console.log("=> resetIdCounter");
   return { id: Number(query.id) };
 };
 
