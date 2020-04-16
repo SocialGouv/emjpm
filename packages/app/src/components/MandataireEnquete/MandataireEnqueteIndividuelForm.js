@@ -9,28 +9,27 @@ import { mandataireEnqueteIndividuelSchema } from "../../lib/validationSchemas";
 import { findOption } from "../../util/option/OptionUtil";
 
 export const MandataireEnqueteIndividuelForm = props => {
+  const { enquete = {} } = props;
   const {
-    enquete: {
-      estimation_etp,
-      secretaire_specialise,
-      secretaire_specialise_etp,
-      cumul_prepose,
-      cumul_prepose_etp,
-      cumul_delegue_service,
-      cumul_delegue_service_etp,
-      debut_activite_avant_2009,
-      annee_debut_activite,
-      annee_agrement,
-      cnc_mjpm_annee_obtention,
-      cnc_mjpm_heure_formation,
-      cnc_maj_annee_obtention,
-      cnc_maj_heure_formation,
-      cnc_dpf_annee_obtention,
-      cnc_dpf_heure_formation,
-      niveau_qualification,
-      niveau_qualification_secretaire_spe
-    }
-  } = props;
+    estimation_etp,
+    secretaire_specialise,
+    secretaire_specialise_etp,
+    cumul_prepose,
+    cumul_prepose_etp,
+    cumul_delegue_service,
+    cumul_delegue_service_etp,
+    debut_activite_avant_2009,
+    annee_debut_activite,
+    annee_agrement,
+    cnc_mjpm_annee_obtention,
+    cnc_mjpm_heure_formation,
+    cnc_maj_annee_obtention,
+    cnc_maj_heure_formation,
+    cnc_dpf_annee_obtention,
+    cnc_dpf_heure_formation,
+    niveau_qualification,
+    niveau_qualification_secretaire_spe
+  } = enquete;
 
   const { isSubmitting, handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
@@ -41,7 +40,7 @@ export const MandataireEnqueteIndividuelForm = props => {
     initialValues: {
       estimationEtp: estimation_etp,
       secretaireSpecialise: secretaire_specialise,
-      secretaireSpecialiseEtp: secretaire_specialise_etp,
+      secretaireSpecialiseEtp: secretaire_specialise_etp || "",
       cumulPrepose: cumul_prepose,
       cumulPreposeEtp: cumul_prepose_etp || "",
       cumulDelegueService: cumul_delegue_service,
@@ -96,7 +95,7 @@ export const MandataireEnqueteIndividuelForm = props => {
             onChange={({ value }) => {
               setFieldValue("secretaireSpecialise", value);
               if (!value) {
-                setFieldValue("secretaireSpecialiseEtp", undefined);
+                setFieldValue("secretaireSpecialiseEtp", "");
               }
             }}
             options={YES_NO_OPTIONS}
@@ -138,9 +137,9 @@ export const MandataireEnqueteIndividuelForm = props => {
             name="cumulPrepose"
             value={findOption(YES_NO_OPTIONS, values.cumulPrepose)}
             hasError={!!errors.cumulPrepose}
-            onChange={option => {
-              setFieldValue("cumulPrepose", option.value);
-              if (!option.value) {
+            onChange={({ value }) => {
+              setFieldValue("cumulPrepose", value);
+              if (!value) {
                 setFieldValue("cumulPreposeEtp", "");
               }
             }}
@@ -180,9 +179,9 @@ export const MandataireEnqueteIndividuelForm = props => {
             name="cumulDelegueService"
             value={findOption(YES_NO_OPTIONS, values.cumulDelegueService)}
             hasError={!!errors.cumulDelegueService}
-            onChange={option => {
-              setFieldValue("cumulDelegueService", option.value);
-              if (!option.value) {
+            onChange={({ value }) => {
+              setFieldValue("cumulDelegueService", value);
+              if (!value) {
                 setFieldValue("cumulDelegueServiceEtp", "");
               }
             }}
@@ -226,7 +225,7 @@ export const MandataireEnqueteIndividuelForm = props => {
               console.log("change debutActiviteAvant2009", value);
               setFieldValue("debutActiviteAvant2009", value);
               if (!value) {
-                setFieldValue("anneeDebutActivite", undefined);
+                setFieldValue("anneeDebutActivite", "");
               }
             }}
             options={YES_NO_OPTIONS}

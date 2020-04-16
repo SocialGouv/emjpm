@@ -8,7 +8,7 @@ export const mandataireEnqueteIndividuelSchema = yup.object().shape({
     .nullable()
     .min(2010),
   anneeDebutActivite: yup.number().when("debutActiviteAvant2009", {
-    is: debutActiviteAvant2009 => debutActiviteAvant2009 && debutActiviteAvant2009.value,
+    is: debutActiviteAvant2009 => debutActiviteAvant2009 === true,
     then: yup
       .number()
       .required()
@@ -38,14 +38,14 @@ export const mandataireEnqueteIndividuelSchema = yup.object().shape({
     .max(year),
   cncMjpmHeureFormation: yup.number().nullable(),
   cumulDelegueService: yup.boolean().required(),
-  cumulDelegueServiceEtp: yup.object().when("cumulDelegueService", {
-    is: cumulDelegueService => cumulDelegueService && cumulDelegueService.value,
-    then: yup.object().required()
+  cumulDelegueServiceEtp: yup.string().when("cumulDelegueService", {
+    is: cumulDelegueService => cumulDelegueService === true,
+    then: yup.string().required()
   }),
   cumulPrepose: yup.boolean().required(),
-  cumulPreposeEtp: yup.object().when("cumulPrepose", {
-    is: cumulPrepose => cumulPrepose && cumulPrepose.value,
-    then: yup.object().required()
+  cumulPreposeEtp: yup.string().when("cumulPrepose", {
+    is: cumulPrepose => cumulPrepose === true,
+    then: yup.string().required()
   }),
   debutActiviteAvant2009: yup.boolean().required(),
   estimationEtp: yup.string().required(),
@@ -57,7 +57,7 @@ export const mandataireEnqueteIndividuelSchema = yup.object().shape({
     .number()
     .min(1)
     .max(5),
-  secretaireSpecialise: yup.boolean().required(),
+  secretaireSpecialise: yup.boolean(),
   secretaireSpecialiseEtp: yup.string().when("secretaireSpecialise", {
     is: secretariatSpecialise => secretariatSpecialise === true,
     then: yup.string().required()
