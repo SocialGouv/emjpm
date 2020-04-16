@@ -4,8 +4,8 @@ import { useQuery } from "react-apollo";
 import { Box } from "rebass";
 
 import { MandataireEnqueteIndividuelForm } from "./MandataireEnqueteIndividuelForm";
-import { CREATE_ENQUETE, UPDATE_ENQUETE } from "./mutations";
-import { ENQUETE_INDIVIDUEL } from "./queries";
+import { CREATE_ENQUETE_INDIVIDUEL, UPDATE_ENQUETE } from "./mutations";
+import { ENQUETE_INDIVIDUEL_RESPONSE } from "./queries";
 
 const formatNumber = value => (value ? Number(value) : undefined);
 
@@ -34,40 +34,52 @@ function formatValues(values) {
 
 export const MandataireEnqueteIndividuel = props => {
   const { enqueteId, mandataireId } = props;
-  const { data, loading } = useQuery(ENQUETE_INDIVIDUEL, {
+
+  const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_RESPONSE, {
     variables: { id: enqueteId }
   });
 
-  const [createEnquete] = useMutation(CREATE_ENQUETE);
+  const [createEnquete] = useMutation(CREATE_ENQUETE_INDIVIDUEL);
   const [updateEnquete] = useMutation(UPDATE_ENQUETE);
 
   if (loading) {
     return <Box>Chargement...</Box>;
   }
 
-  const { enquete_individuels_by_pk: enquete = {} } = data;
-  return (
-    <MandataireEnqueteIndividuelForm
-      enquete={enquete}
-      handleSubmit={async values => {
-        if (enquete && enquete.id) {
-          await updateEnquete({
-            variables: {
-              id: enquete.id,
-              ...formatValues(values)
-            }
-          });
-        } else {
+  const { enquete_reponses } = data;
+
+  if (enquete_reponses.length > 0) {
+    const [{ enquete_individuel: enquete = {} }] = enquete_reponses;
+    return (
+      <MandataireEnqueteIndividuelForm
+        enquete={enquete}
+        handleSubmit={async values => {
+          if (enquete && enquete.id) {
+            await updateEnquete({
+              variables: {
+                id: enquete.id,
+                ...formatValues(values)
+              }
+            });
+          }
+        }}
+      />
+    );
+  } else {
+    return (
+      <MandataireEnqueteIndividuelForm
+        handleSubmit={async values => {
           await createEnquete({
             variables: {
+              enqueteId,
               mandataireId,
               ...formatValues(values)
             }
           });
-        }
-      }}
-    />
-  );
+        }}
+      />
+    );
+  }
 };
 
 export default MandataireEnqueteIndividuel;
