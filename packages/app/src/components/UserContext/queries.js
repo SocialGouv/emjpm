@@ -76,6 +76,11 @@ export const DIRECTION_USERS = gql`
       prenom
       type
       username
+      user_roles {
+        role {
+          name
+        }
+      }
     }
   }
 `;
