@@ -1808,6 +1808,7 @@ Array [
   "service_tis",
   "services",
   "tis",
+  "tis_mapping",
   "user_role",
   "user_tis",
   "users",
@@ -1934,6 +1935,59 @@ Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": false,
+    "type": "character varying",
+  },
+}
+`;
+
+exports[`tis_mapping table schema 1`] = `
+Object {
+  "new_cp": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "new_nom": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "new_ti": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "new_ville": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "old_cp": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "old_nom": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "old_ti": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "old_ville": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
     "type": "character varying",
   },
 }
