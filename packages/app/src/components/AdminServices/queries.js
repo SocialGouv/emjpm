@@ -68,7 +68,7 @@ export const MESURES = gql`
 
 export const SERVICE = gql`
   query admin_service($serviceId: Int) {
-    tis {
+    tis(where: { immutable: { _eq: true } }) {
       id
       etablissement
       code_postal
