@@ -60,7 +60,7 @@ export const MESURES = gql`
 
 export const USER_TIS = gql`
   query admin_user_tis($userId: Int!) {
-    tis {
+    tis(where: { immutable: { _eq: true } }) {
       id
       etablissement
       code_postal
@@ -78,7 +78,7 @@ export const USER_TIS = gql`
 
 export const MAGISTRAT = gql`
   query admin_magistrat($userId: Int!) {
-    tis {
+    tis(where: { immutable: { _eq: true } }) {
       id
       etablissement
       code_postal
