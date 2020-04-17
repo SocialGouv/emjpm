@@ -37,17 +37,17 @@ export const mandataireEnqueteIndividuelSchema = yup.object().shape({
     .min(1950)
     .max(year),
   cncMjpmHeureFormation: yup.number().nullable(),
-  cumulDelegueService: yup.boolean().required(),
+  cumulDelegueService: yup.boolean(),
   cumulDelegueServiceEtp: yup.string().when("cumulDelegueService", {
     is: cumulDelegueService => cumulDelegueService === true,
     then: yup.string().required()
   }),
-  cumulPrepose: yup.boolean().required(),
+  cumulPrepose: yup.boolean(),
   cumulPreposeEtp: yup.string().when("cumulPrepose", {
     is: cumulPrepose => cumulPrepose === true,
     then: yup.string().required()
   }),
-  debutActiviteAvant2009: yup.boolean().required(),
+  debutActiviteAvant2009: yup.boolean(),
   estimationEtp: yup.string().required(),
   niveauQualification: yup
     .number()
