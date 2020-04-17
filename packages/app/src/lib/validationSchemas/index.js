@@ -1,6 +1,7 @@
 import { adminEditorSchema } from "./adminEditorSchema";
 import { adminTribunalSchema } from "./adminTribunalSchema";
 import { editorTokenSchema } from "./editorTokenSchema";
+import { enqueteServicesSchema } from "./enqueteServicesSchema";
 import { forgotPasswordSchema } from "./forgotPasswordSchema";
 import { individuelAgrementSchema } from "./individuelAgrementSchema";
 import { individuelExerciceSchema } from "./individuelExerciceSchema";
@@ -35,6 +36,7 @@ export {
   loginSchema,
   magistratEditSchema,
   magistratMesureEditSchema,
+  enqueteServicesSchema,
   magistratMesureDeleteSchema,
   magistratMandataireSchema,
   mandataireEditSchema,
