@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const SIGNUP_DATA = gql`
   query signup_data {
-    tis {
+    tis(where: { immutable: { _eq: true } }) {
       id
       etablissement
       code_postal

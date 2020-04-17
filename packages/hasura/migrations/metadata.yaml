@@ -2388,70 +2388,139 @@ tables:
   - role: anonymous
     permission:
       columns:
+      - address
+      - address2
       - code_postal
+      - created_at
+      - date_fermeture
+      - date_modification
+      - date_ouverture
+      - departement_id
+      - email
       - etablissement
       - id
+      - immutable
+      - latitude
+      - longitude
+      - siret
+      - telephone
+      - type
+      - updated_at
       - ville
       filter: {}
   - role: direction
     permission:
       columns:
+      - immutable
+      - date_fermeture
+      - date_modification
+      - date_ouverture
+      - latitude
+      - longitude
+      - departement_id
       - id
-      - etablissement
-      - email
-      - code_postal
-      - ville
-      - telephone
       - created_at
+      - updated_at
+      - address
+      - address2
+      - code_postal
+      - email
+      - etablissement
+      - siret
+      - telephone
+      - type
+      - ville
       filter: {}
   - role: individuel
     permission:
       columns:
+      - immutable
+      - date_fermeture
+      - date_modification
+      - date_ouverture
+      - latitude
+      - longitude
+      - departement_id
       - id
-      - etablissement
-      - email
-      - code_postal
-      - ville
-      - telephone
       - created_at
+      - updated_at
+      - address
+      - address2
+      - code_postal
+      - email
+      - etablissement
       - siret
+      - telephone
+      - type
+      - ville
       filter: {}
   - role: prepose
     permission:
       columns:
-      - code_postal
+      - immutable
+      - date_fermeture
+      - date_modification
+      - date_ouverture
+      - latitude
+      - longitude
+      - departement_id
+      - id
       - created_at
+      - updated_at
+      - address
+      - address2
+      - code_postal
       - email
       - etablissement
-      - id
       - siret
       - telephone
+      - type
       - ville
       filter: {}
   - role: service
     permission:
       columns:
+      - immutable
+      - date_fermeture
+      - date_modification
+      - date_ouverture
+      - latitude
+      - longitude
+      - departement_id
       - id
-      - etablissement
-      - email
-      - code_postal
-      - ville
-      - telephone
       - created_at
+      - updated_at
+      - address
+      - address2
+      - code_postal
+      - email
+      - etablissement
+      - siret
+      - telephone
+      - type
+      - ville
       filter: {}
   - role: ti
     permission:
       columns:
-      - address
-      - code_postal
-      - created_at
-      - email
-      - etablissement
-      - id
+      - immutable
+      - date_fermeture
+      - date_modification
+      - date_ouverture
       - latitude
       - longitude
+      - departement_id
+      - id
+      - created_at
+      - updated_at
+      - address
+      - address2
+      - code_postal
+      - email
+      - etablissement
       - siret
       - telephone
+      - type
       - ville
       filter: {}
 - table:
