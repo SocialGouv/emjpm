@@ -39,13 +39,13 @@ export const MandataireEnqueteIndividuelForm = props => {
     validationSchema: mandataireEnqueteIndividuelSchema,
     initialValues: {
       estimationEtp: estimation_etp,
-      secretaireSpecialise: secretaire_specialise,
+      secretaireSpecialise: secretaire_specialise || false,
       secretaireSpecialiseEtp: secretaire_specialise_etp || "",
-      cumulPrepose: cumul_prepose,
+      cumulPrepose: cumul_prepose || false,
       cumulPreposeEtp: cumul_prepose_etp || "",
-      cumulDelegueService: cumul_delegue_service,
+      cumulDelegueService: cumul_delegue_service || false,
       cumulDelegueServiceEtp: cumul_delegue_service_etp,
-      debutActiviteAvant2009: debut_activite_avant_2009,
+      debutActiviteAvant2009: debut_activite_avant_2009 || false,
       anneeDebutActivite: annee_debut_activite || "",
       anneeAgrement: annee_agrement || "",
       cncMjpmAnneeObtention: cnc_mjpm_annee_obtention || "",
@@ -58,6 +58,9 @@ export const MandataireEnqueteIndividuelForm = props => {
       niveauQualificationSecretaireSpe: niveau_qualification_secretaire_spe || ""
     }
   });
+
+  console.log("errors", errors);
+  console.log("values", values);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -172,6 +175,7 @@ export const MandataireEnqueteIndividuelForm = props => {
           <Label mb={1} htmlFor="cumulDelegueService">
             {"Situation de cumul en tant que délégué d'une service"}
           </Label>
+
           <Select
             instanceId={"cumulDelegueService"}
             placeholder=""
@@ -180,6 +184,7 @@ export const MandataireEnqueteIndividuelForm = props => {
             value={findOption(YES_NO_OPTIONS, values.cumulDelegueService)}
             hasError={!!errors.cumulDelegueService}
             onChange={({ value }) => {
+              console.log("value", value);
               setFieldValue("cumulDelegueService", value);
               if (!value) {
                 setFieldValue("cumulDelegueServiceEtp", "");
@@ -195,6 +200,7 @@ export const MandataireEnqueteIndividuelForm = props => {
               {"ETP consacré au cumul en tant que délégué d'un service mandataire"}
             </Label>
             <Select
+              placeholder=""
               instanceId={"cumulDelegueServiceEtp"}
               id="cumulDelegueServiceEtp"
               name="cumulDelegueServiceEtp"
