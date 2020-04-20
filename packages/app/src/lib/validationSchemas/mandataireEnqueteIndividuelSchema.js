@@ -3,10 +3,6 @@ import yup from "./yup";
 const year = new Date().getFullYear();
 
 export const mandataireEnqueteIndividuelSchema = yup.object().shape({
-  anneeAgrement: yup
-    .number()
-    .nullable()
-    .min(2010),
   anneeDebutActivite: yup.number().when("debutActiviteAvant2009", {
     is: debutActiviteAvant2009 => debutActiviteAvant2009 === true,
     then: yup
@@ -15,6 +11,31 @@ export const mandataireEnqueteIndividuelSchema = yup.object().shape({
       .min(1950)
       .max(year)
   }),
+  cumulDelegueService: yup.boolean(),
+  cumulDelegueServiceEtp: yup.string().when("cumulDelegueService", {
+    is: cumulDelegueService => cumulDelegueService === true,
+    then: yup.string().required()
+  }),
+  cumulPrepose: yup.boolean(),
+  cumulPreposeEtp: yup.string().when("cumulPrepose", {
+    is: cumulPrepose => cumulPrepose === true,
+    then: yup.string().required()
+  }),
+  debutActiviteAvant2009: yup.boolean(),
+  estimationEtp: yup.string().nullable(),
+
+  secretaireSpecialise: yup.boolean(),
+  secretaireSpecialiseEtp: yup.string().when("secretaireSpecialise", {
+    is: secretariatSpecialise => secretariatSpecialise === true,
+    then: yup.string().required()
+  })
+});
+
+export const mandataireEnqueteIndividuelAgrementFormationSchema = yup.object().shape({
+  anneeAgrement: yup
+    .number()
+    .nullable()
+    .min(2010),
   cncDpfAnneeObtention: yup
     .number()
     .min(1950)
@@ -37,18 +58,6 @@ export const mandataireEnqueteIndividuelSchema = yup.object().shape({
     .min(1950)
     .max(year),
   cncMjpmHeureFormation: yup.number().nullable(),
-  cumulDelegueService: yup.boolean(),
-  cumulDelegueServiceEtp: yup.string().when("cumulDelegueService", {
-    is: cumulDelegueService => cumulDelegueService === true,
-    then: yup.string().required()
-  }),
-  cumulPrepose: yup.boolean(),
-  cumulPreposeEtp: yup.string().when("cumulPrepose", {
-    is: cumulPrepose => cumulPrepose === true,
-    then: yup.string().required()
-  }),
-  debutActiviteAvant2009: yup.boolean(),
-  estimationEtp: yup.string().required(),
   niveauQualification: yup
     .number()
     .min(1)
@@ -56,10 +65,5 @@ export const mandataireEnqueteIndividuelSchema = yup.object().shape({
   niveauQualificationSecretaireSpe: yup
     .number()
     .min(1)
-    .max(5),
-  secretaireSpecialise: yup.boolean(),
-  secretaireSpecialiseEtp: yup.string().when("secretaireSpecialise", {
-    is: secretariatSpecialise => secretariatSpecialise === true,
-    then: yup.string().required()
-  })
+    .max(5)
 });
