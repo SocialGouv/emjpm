@@ -88,7 +88,7 @@ export class EnqueteAPI extends AuthDataSource {
       return null;
     }
 
-    return data.insert_enquete_reponses;
+    return data.insert_enquete_reponses_one;
   }
 
   public async getEnqueteIndividuel(enqueteId: number) {

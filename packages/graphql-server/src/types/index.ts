@@ -125,7 +125,7 @@ export interface EnqueteIndividuel {
 export interface CreateEnqueteIndividuelReponseQueryProps {
   errors: ApolloError[];
   data: {
-    insert_enquete_reponses: EnqueteReponse;
+    insert_enquete_reponses_one: EnqueteReponse;
   };
 }
 
