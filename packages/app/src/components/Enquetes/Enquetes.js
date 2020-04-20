@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
-import React from "react";
-import { Box, Text } from "rebass";
+import { Card } from "@emjpm/ui";
+import React, { Fragment } from "react";
+import { Box, Flex, Text } from "rebass";
 
 import { ENQUETES } from "./queries";
 
@@ -12,13 +13,23 @@ export const Enquetes = () => {
   }
 
   const { enquetes } = data;
-
   return (
-    <Box>
+    <Fragment>
       {enquetes.map(enquete => {
-        return <Text key={enquete.id}>{enquete.year}</Text>;
+        return (
+          <Card mb={1} key={enquete.id}>
+            <Flex alignItems="center" justifyContent="space-between">
+              <Text>{enquete.annee}</Text>
+              {enquete.date_fin && (
+                <Text>{`Du ${new Date(enquete.created_at).toLocaleDateString()} au ${new Date(
+                  enquete.date_fin
+                ).toLocaleDateString()}`}</Text>
+              )}
+            </Flex>
+          </Card>
+        );
       })}
-    </Box>
+    </Fragment>
   );
 };
 

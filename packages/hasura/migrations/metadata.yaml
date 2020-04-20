@@ -345,6 +345,170 @@ tables:
       filter: {}
 - table:
     schema: public
+    name: enquete_individuels
+  object_relationships:
+  - name: mandataire
+    using:
+      foreign_key_constraint_on: mandataire_id
+  array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: individuel_id
+        table:
+          schema: public
+          name: enquete_reponses
+  insert_permissions:
+  - role: individuel
+    permission:
+      check:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      columns:
+      - id
+      - mandataire_id
+      - estimation_etp
+      - secretaire_specialise
+      - secretaire_specialise_etp
+      - cumul_prepose
+      - cumul_prepose_etp
+      - cumul_delegue_service
+      - cumul_delegue_service_etp
+      - debut_activite_avant_2009
+      - annee_debut_activite
+      - annee_agrement
+      - cnc_mjpm_annee_obtention
+      - cnc_mjpm_heure_formation
+      - cnc_maj_annee_obtention
+      - cnc_maj_heure_formation
+      - cnc_dpf_annee_obtention
+      - cnc_dpf_heure_formation
+      - niveau_qualification
+      - niveau_qualification_secretaire_spe
+  select_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - mandataire_id
+      - estimation_etp
+      - secretaire_specialise
+      - secretaire_specialise_etp
+      - cumul_prepose
+      - cumul_prepose_etp
+      - cumul_delegue_service
+      - cumul_delegue_service_etp
+      - debut_activite_avant_2009
+      - annee_debut_activite
+      - annee_agrement
+      - cnc_mjpm_annee_obtention
+      - cnc_mjpm_heure_formation
+      - cnc_maj_annee_obtention
+      - cnc_maj_heure_formation
+      - cnc_dpf_annee_obtention
+      - cnc_dpf_heure_formation
+      - niveau_qualification
+      - niveau_qualification_secretaire_spe
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - annee_agrement
+      - annee_debut_activite
+      - cnc_dpf_annee_obtention
+      - cnc_dpf_heure_formation
+      - cnc_maj_annee_obtention
+      - cnc_maj_heure_formation
+      - cnc_mjpm_annee_obtention
+      - cnc_mjpm_heure_formation
+      - cumul_delegue_service
+      - cumul_delegue_service_etp
+      - cumul_prepose
+      - cumul_prepose_etp
+      - debut_activite_avant_2009
+      - estimation_etp
+      - niveau_qualification
+      - niveau_qualification_secretaire_spe
+      - secretaire_specialise
+      - secretaire_specialise_etp
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: enquete_reponses
+  object_relationships:
+  - name: enquete
+    using:
+      foreign_key_constraint_on: enquete_id
+  - name: enquete_individuel
+    using:
+      foreign_key_constraint_on: individuel_id
+  select_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - type
+      - enquete_id
+      - individuel_id
+      - service_id
+      - prepose_id
+      filter:
+        enquete_individuel:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+- table:
+    schema: public
+    name: enquetes
+  insert_permissions:
+  - role: direction
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - date_fin
+      - annee
+      - status
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - annee
+      - status
+      - date_fin
+      filter: {}
+  - role: individuel
+    permission:
+      columns:
+      - annee
+      - created_at
+      - date_fin
+      - id
+      - status
+      filter: {}
+  update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - date_fin
+      - annee
+      - status
+      filter: {}
+- table:
+    schema: public
     name: etablissements
   array_relationships:
   - name: mandataire_etablissements
