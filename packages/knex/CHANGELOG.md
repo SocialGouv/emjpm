@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.27.1](https://github.com/SocialGouv/emjpm/compare/v25.27.0...v25.27.1) (2020-04-20)
+
+
+### Bug Fixes
+
+* **codacy:** define base for parseInt ([#1690](https://github.com/SocialGouv/emjpm/issues/1690)) ([5e57a5e](https://github.com/SocialGouv/emjpm/commit/5e57a5e0c12b0e95156c8ad70c1771803577f3f2))
+* **direction:** create enquetes form ([#1688](https://github.com/SocialGouv/emjpm/issues/1688)) ([aa84f0e](https://github.com/SocialGouv/emjpm/commit/aa84f0ee30f38594d17e667ee2cc3229ef9a3a76))
+* **knex:** tis migrations ([#1689](https://github.com/SocialGouv/emjpm/issues/1689)) ([2e43c7b](https://github.com/SocialGouv/emjpm/commit/2e43c7b34b3745ae56df30d8f7f06ddebdb075dd))
+
+
+
+
+
 # [25.27.0](https://github.com/SocialGouv/emjpm/compare/v25.26.0...v25.27.0) (2020-04-20)
 
 
