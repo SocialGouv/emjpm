@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.27.0](https://github.com/SocialGouv/emjpm/compare/v25.26.0...v25.27.0) (2020-04-20)
+
+
+### Bug Fixes
+
+* **mesure:** refresh mesures count ([#1677](https://github.com/SocialGouv/emjpm/issues/1677)) ([ed0a614](https://github.com/SocialGouv/emjpm/commit/ed0a6142d63b5c13dd3dfa32cc9e2e25c1b589d7))
+
+
+
+
+
 # [25.26.0](https://github.com/SocialGouv/emjpm/compare/v25.25.0...v25.26.0) (2020-04-09)
 
 

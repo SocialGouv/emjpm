@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.27.0](https://github.com/SocialGouv/emjpm/compare/v25.26.0...v25.27.0) (2020-04-20)
+
+
+### Features
+
+* **enquetes:** create new enquetes with direction role ([#1683](https://github.com/SocialGouv/emjpm/issues/1683)) ([56e24eb](https://github.com/SocialGouv/emjpm/commit/56e24ebf5784417b8c407c27e61381cea6e8796b))
+* **knex:** new migration to update tis rows ([#1654](https://github.com/SocialGouv/emjpm/issues/1654)) ([ac10d33](https://github.com/SocialGouv/emjpm/commit/ac10d33d845dbb6093fd03ed7b1332d8a5af59a6))
+* **liste-blanche:** add sql scripts ([#1680](https://github.com/SocialGouv/emjpm/issues/1680)) ([ea79402](https://github.com/SocialGouv/emjpm/commit/ea79402925a90d1b5b00866f9f85a38e4db87f78))
+
+
+
+
+
 # [25.26.0](https://github.com/SocialGouv/emjpm/compare/v25.25.0...v25.26.0) (2020-04-09)
 
 
