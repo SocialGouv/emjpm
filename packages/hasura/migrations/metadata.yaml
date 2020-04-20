@@ -507,6 +507,15 @@ tables:
       - annee
       - status
       filter: {}
+  update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - annee
+      - status
+      filter: {}
 - table:
     schema: public
     name: etablissements
