@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.27.1](https://github.com/SocialGouv/emjpm/compare/v25.27.0...v25.27.1) (2020-04-20)
+
+
+### Bug Fixes
+
+* **direction:** create enquetes form ([#1688](https://github.com/SocialGouv/emjpm/issues/1688)) ([aa84f0e](https://github.com/SocialGouv/emjpm/commit/aa84f0ee30f38594d17e667ee2cc3229ef9a3a76))
+
+
+
+
+
 # [25.27.0](https://github.com/SocialGouv/emjpm/compare/v25.26.0...v25.27.0) (2020-04-20)
 
 
