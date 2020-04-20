@@ -16,22 +16,24 @@ export const EnqueteCreate = () => {
   });
   const formik = useFormik({
     initialValues: {
-      year: new Date().getFullYear() - 1
+      year: new Date().getFullYear() - 1,
+      endedAt: ""
     },
     onSubmit: async (values, formikHelpers) => {
       const { data } = await client.query({ query: ENQUETES });
-      if (data && data.enquetes.some(e => e.year === values.year)) {
+      if (data && data.enquetes.some(e => Number(e.annee) === Number(values.year))) {
         Router.push("/direction/enquetes");
       }
 
-      await createEnquete({ variables: { year: `${values.year}` } });
+      await createEnquete({ variables: { year: `${values.year}`, endedAt: `${values.endedAt}` } });
       formikHelpers.setSubmitting(false);
     },
     validationSchema: yup.object().shape({
       year: yup
         .string()
         .matches(/^[0-9]{4}$/, "L'année doit comporter 4 chiffres.")
-        .required()
+        .required(),
+      endedAt: yup.date().required()
     })
   });
 
@@ -44,11 +46,23 @@ export const EnqueteCreate = () => {
           value={values.year}
           id="year"
           name="year"
-          hasError={errors.year && touched.year}
+          hasError={!!errors.year}
           onChange={handleChange}
           placeholder="Année"
         />
         {touched.year && <InlineError message={errors.year} fieldId="year" />}
+      </Field>
+      <Field>
+        <Input
+          value={values.endedAt}
+          id="endedAt"
+          name="endedAt"
+          hasError={!!errors.endedAt}
+          onChange={handleChange}
+          placeholder="Date de fin"
+          type="date"
+        />
+        {touched.endedAt && <InlineError message={errors.endedAt} fieldId="endedAt" />}
       </Field>
       <Button type="submit">Créer</Button>
     </form>
