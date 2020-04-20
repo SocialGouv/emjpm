@@ -35,7 +35,8 @@
     "react-dom": "16.x",
     "rebass": "4.x",
     "styled-components": "4.x",
-    "theme-ui": "0.x"
+    "theme-ui": "0.x",
+    "@rebass/forms": "^4.0.6"
   },
   "dependencies": {
     "@styled-icons/boxicons-solid": "^10.0.0",

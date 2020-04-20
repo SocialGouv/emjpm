@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
 import React from 'react';
 
-import { preset } from '.';
+import { presetEmjpm } from '.';
 
-const { colors } = preset;
+const { colors } = presetEmjpm;
 
 const Swatch = styled.div`
   width: 100px;
