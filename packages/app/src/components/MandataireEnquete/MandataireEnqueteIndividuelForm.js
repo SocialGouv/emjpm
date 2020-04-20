@@ -59,9 +59,6 @@ export const MandataireEnqueteIndividuelForm = props => {
     }
   });
 
-  console.log("errors", errors);
-  console.log("values", values);
-
   return (
     <form onSubmit={handleSubmit}>
       <Box>
