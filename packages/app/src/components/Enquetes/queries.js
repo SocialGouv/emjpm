@@ -7,6 +7,7 @@ export const ENQUETES = gql`
       id
       status
       annee
+      date_fin
     }
   }
 `;
