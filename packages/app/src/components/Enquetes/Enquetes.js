@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
-import React from "react";
+import { Card } from "@emjpm/ui";
+import React, { Fragment } from "react";
 import { Box, Text } from "rebass";
 
 import { ENQUETES } from "./queries";
@@ -12,13 +13,16 @@ export const Enquetes = () => {
   }
 
   const { enquetes } = data;
-
   return (
-    <Box>
+    <Fragment>
       {enquetes.map(enquete => {
-        return <Text key={enquete.id}>{enquete.year}</Text>;
+        return (
+          <Card mb={1} key={enquete.id}>
+            <Text>{enquete.annee}</Text>
+          </Card>
+        );
       })}
-    </Box>
+    </Fragment>
   );
 };
 
