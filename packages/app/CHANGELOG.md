@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.27.0](https://github.com/SocialGouv/emjpm/compare/v25.26.0...v25.27.0) (2020-04-20)
+
+
+### Bug Fixes
+
+* **form:** city autocomplete ([#1679](https://github.com/SocialGouv/emjpm/issues/1679)) ([86b7ebd](https://github.com/SocialGouv/emjpm/commit/86b7ebdb6975d8f9692e383bb06cbae8c6e321c9))
+* **mesure:** close mesure and refresh count ([#1676](https://github.com/SocialGouv/emjpm/issues/1676)) ([7e83123](https://github.com/SocialGouv/emjpm/commit/7e83123ec988c84e1c3ccd578769e2040734a158))
+* **mesure:** refresh mesures count ([#1677](https://github.com/SocialGouv/emjpm/issues/1677)) ([ed0a614](https://github.com/SocialGouv/emjpm/commit/ed0a6142d63b5c13dd3dfa32cc9e2e25c1b589d7))
+* **mesure:** reservation query ([#1675](https://github.com/SocialGouv/emjpm/issues/1675)) ([8039392](https://github.com/SocialGouv/emjpm/commit/803939284c3ace02bb980de71c6a31aed3eeb3ec))
+* **tribunaux:** autocomplete field ([#1678](https://github.com/SocialGouv/emjpm/issues/1678)) ([29bcbc5](https://github.com/SocialGouv/emjpm/commit/29bcbc56fd5a38686f56ac3c0934436f8be6b002))
+
+
+### Features
+
+* **enquete-form:** hide enquete forms for individuel and service ([#1682](https://github.com/SocialGouv/emjpm/issues/1682)) ([84ef331](https://github.com/SocialGouv/emjpm/commit/84ef331263a0384c333479ecd3f274b6385c5bb8))
+* **enquetes:** create new enquetes with direction role ([#1683](https://github.com/SocialGouv/emjpm/issues/1683)) ([56e24eb](https://github.com/SocialGouv/emjpm/commit/56e24ebf5784417b8c407c27e61381cea6e8796b))
+* **tribunaux:** affiche uniquement les tribunaux immutables ([#1686](https://github.com/SocialGouv/emjpm/issues/1686)) ([7b40ea3](https://github.com/SocialGouv/emjpm/commit/7b40ea35e5ec5987aa6f941477bf2bcfdad66e9f))
+
+
+### Performance Improvements
+
+* **ui:** use explicit subfolder to import [@styled-icons](https://github.com/styled-icons) ([#1666](https://github.com/SocialGouv/emjpm/issues/1666)) ([4d70aa9](https://github.com/SocialGouv/emjpm/commit/4d70aa9ab98d53ad19ea11d1c7d1c472758d8be8))
+
+
+
+
+
 # [25.26.0](https://github.com/SocialGouv/emjpm/compare/v25.25.0...v25.26.0) (2020-04-09)
 
 
