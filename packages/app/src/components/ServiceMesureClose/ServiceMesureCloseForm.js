@@ -90,6 +90,7 @@ export const ServiceMesureCloseForm = props => {
           </Field>
           <Field>
             <Select
+              instanceId={"reason_extinction"}
               id="reason_extinction"
               name="reason_extinction"
               placeholder="Raison de la fin de mandat"
@@ -126,7 +127,7 @@ export const ServiceMesureCloseForm = props => {
 };
 
 ServiceMesureCloseForm.propTypes = {
-  mesure: PropTypes.object({
+  mesure: PropTypes.shape({
     id: PropTypes.number,
     serviceId: PropTypes.number
   })

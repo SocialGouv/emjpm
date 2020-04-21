@@ -33,7 +33,7 @@ const MagistratMesureServiceTitle = props => {
 };
 
 MagistratMesureServiceTitle.propTypes = {
-  id: PropTypes.string
+  id: PropTypes.number
 };
 
 export default MagistratMesureServiceTitle;
