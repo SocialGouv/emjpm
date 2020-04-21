@@ -131,6 +131,7 @@ export const MandataireMesureEditForm = props => {
           </Field>
           <Field>
             <Select
+              instanceId="type"
               id="type"
               name="type"
               placeholder="Type de mesure"
@@ -143,6 +144,7 @@ export const MandataireMesureEditForm = props => {
           </Field>
           <Field>
             <Select
+              instanceId="civilite"
               id="civilite"
               name="civilite"
               placeholder="civilité"
@@ -166,6 +168,7 @@ export const MandataireMesureEditForm = props => {
           </Field>
           <Field>
             <Select
+              instanceId={"residence"}
               id="residence"
               name="residence"
               placeholder="Type de residence"
@@ -179,6 +182,7 @@ export const MandataireMesureEditForm = props => {
 
           <Field>
             <Select
+              instanceId={"country"}
               id="country"
               name="country"
               placeholder="Pays"
