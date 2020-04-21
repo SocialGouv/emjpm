@@ -22,7 +22,7 @@ export const GeocodeCities = props => {
   return (
     <Select
       isClearable={false}
-      value={value ? { label: value, value } : { label: "", value: undefined }}
+      value={value ? { label: value, value } : { label: "", value: "" }}
       placeholder="Ville"
       hasError={hasError}
       onChange={({ city }) => onChange(city)}
