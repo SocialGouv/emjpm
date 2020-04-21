@@ -11,7 +11,6 @@ export const ACCEPT_MESURE = gql`
     $latitude: Float
     $longitude: Float
     $pays: String!
-    $mandataire_id: Int!
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
