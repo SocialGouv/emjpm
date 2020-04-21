@@ -11,6 +11,7 @@ const TribunalAutoComplete = props => {
   const { defaultOptions, hasError, value, name, id, onChange } = props;
   return (
     <AsyncSelect
+      instanceId={name}
       name={name}
       id={id}
       value={value}
