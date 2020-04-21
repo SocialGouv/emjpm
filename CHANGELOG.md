@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.27.2](https://github.com/SocialGouv/emjpm/compare/v25.27.1...v25.27.2) (2020-04-21)
+
+
+### Bug Fixes
+
+* **form:** field selection of geocode component ([#1697](https://github.com/SocialGouv/emjpm/issues/1697)) ([4180196](https://github.com/SocialGouv/emjpm/commit/41801965cab052892eb80654276983919520335c))
+* **mesures:** accept form ([#1696](https://github.com/SocialGouv/emjpm/issues/1696)) ([2e3b397](https://github.com/SocialGouv/emjpm/commit/2e3b397bc27091dee063a5ba5a8002abd6d8e7ad))
+* **mesures:** reservation by magistrat ([#1694](https://github.com/SocialGouv/emjpm/issues/1694)) ([a17e669](https://github.com/SocialGouv/emjpm/commit/a17e66946bc12f226bada30a88c140ed3d68a5ea))
+
+
+
+
+
 ## [25.27.1](https://github.com/SocialGouv/emjpm/compare/v25.27.0...v25.27.1) (2020-04-20)
 
 
