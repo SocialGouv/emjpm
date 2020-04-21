@@ -2508,6 +2508,7 @@ tables:
       - latitude
       - longitude
       - mesures_awaiting
+      - mesures_in_progress
       filter: {}
 - table:
     schema: public

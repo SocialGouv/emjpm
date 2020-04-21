@@ -52,11 +52,11 @@ export const MagistratMesureAddForm = props => {
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
       await recalculateServiceMesures({
-        variables: { service_id: mesure.service_id },
+        variables: { service_id: serviceId },
         refetchQueries: [
           {
             query: SERVICE,
-            variables: { id: mesure.service_id }
+            variables: { id: serviceId }
           }
         ]
       });
