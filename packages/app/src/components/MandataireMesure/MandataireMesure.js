@@ -1,11 +1,20 @@
-import { Card, Heading2, Heading3 } from "@emjpm/ui";
+import { Card, Heading2 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { LinkButton } from "../../components/Commons";
 import { MesureContext } from "../MesureContext";
-import { boxStyle, content, flexStyle, statusStyle, subtitle } from "./style";
+import { MESURE_TYPE } from "./constants";
+import { content, statusBox, subtitle } from "./style";
 
-const MandataireMesure = props => {
+function formatMajeurProtege(civilite, realAge) {
+  if (!civilite) {
+    return `${realAge} ans`;
+  }
+  return `${civilite === "F" ? "Femme de" : "Homme de"} ${realAge} ans`;
+}
+
+export const MandataireMesure = props => {
   const {
     realAge,
     cabinet,
@@ -18,59 +27,136 @@ const MandataireMesure = props => {
     tribunal,
     type,
     ville,
-    antenne
+    antenne,
+    id
   } = useContext(MesureContext);
 
   return (
     <Box {...props}>
-      <Card p="5">
-        <Heading2 mb="3">Informations de votre mesure</Heading2>
-        <Heading3>{numeroRg}</Heading3>
-        <Text sx={statusStyle(status)}>{status}</Text>
-        <Text sx={content}>{tribunal}</Text>
-        <Flex sx={flexStyle}>
-          <Box sx={boxStyle}>
-            {civilite && (
-              <Fragment>
-                <Text sx={subtitle}>Civilité</Text>
-                {civilite === "F" ? (
-                  <Text sx={content}>Femme</Text>
-                ) : (
-                  <Text sx={content}>Homme</Text>
-                )}
-              </Fragment>
-            )}
-            <Text sx={subtitle}>Type de mesure</Text>
-            <Text sx={content}>{type}</Text>
-            <Text sx={subtitle}>Commune</Text>
-            <Text sx={content}>{ville}</Text>
-            <Text sx={subtitle}>Age</Text>
-            <Text sx={content}>{`${realAge} ans`}</Text>
+      <Box textAlign="center">
+        <Heading2 mb="3">{`Mesure ${numeroRg}`}</Heading2>
+      </Box>
+
+      <Card p={4}>
+        <Box textAlign="center">
+          <Text mx="auto" sx={statusBox}>
+            {status}
+          </Text>
+        </Box>
+        <Flex p="5">
+          <Box flex="1">
+            <Box mb={4}>
+              <Text sx={subtitle}>Type de mesure</Text>
+              <Text sx={content}>{type}</Text>
+            </Box>
+
+            <Box mb={4}>
+              <Text sx={subtitle}>Type de résidence</Text>
+              <Text sx={content}>{residence}</Text>
+            </Box>
+
+            <Box mb={4}>
+              <Text sx={subtitle}>Majeur protégé</Text>
+              <Text sx={content}>{formatMajeurProtege(civilite, realAge)}</Text>
+            </Box>
+
+            <Box mb={4}>
+              <Text sx={subtitle}>Commune</Text>
+              <Text sx={content}>{ville}</Text>
+            </Box>
           </Box>
-          <Box sx={boxStyle}>
-            <Text sx={subtitle}>Type de résidence</Text>
-            <Text sx={content}>{residence}</Text>
-            <Text sx={subtitle}>Decision du</Text>
-            <Text sx={content}>{dateOuvertureFormated}</Text>
-            <Text sx={subtitle}>Numéro de dossier</Text>
-            <Text sx={content}>{numeroDossier}</Text>
-            {cabinet && (
-              <Fragment>
-                <Text sx={subtitle}>Cabinet</Text>
-                <Text sx={content}>{cabinet}</Text>
-              </Fragment>
-            )}
+
+          <Box flex="1">
+            <Box mb={4}>
+              <Text sx={subtitle}>Tribunal</Text>
+              <Text sx={content}>{tribunal}</Text>
+            </Box>
+
             {antenne && (
-              <Fragment>
+              <Box mb={4}>
                 <Text sx={subtitle}>Antenne</Text>
                 <Text sx={content}>{antenne}</Text>
-              </Fragment>
+              </Box>
             )}
+
+            {cabinet && (
+              <Box mb={4}>
+                <Text sx={subtitle}>Cabinet</Text>
+                <Text sx={content}>{cabinet}</Text>
+              </Box>
+            )}
+
+            <Box mb={4}>
+              <Text sx={subtitle}>Decision du</Text>
+              <Text sx={content}>{dateOuvertureFormated}</Text>
+            </Box>
+
+            <Box mb={4}>
+              <Text sx={subtitle}>Numéro de dossier</Text>
+              <Text sx={content}>{numeroDossier}</Text>
+            </Box>
           </Box>
         </Flex>
+
+        <Box textAlign="center">
+          {status === MESURE_TYPE.WAITING && (
+            <LinkButton
+              outline={true}
+              href="/mandataires/mesures/[mesure_id]/accept"
+              asLink={`/mandataires/mesures/${id}/accept`}
+            >
+              Accepter la mesure
+            </LinkButton>
+          )}
+
+          {status === MESURE_TYPE.CLOSED && (
+            <Fragment>
+              <LinkButton
+                outline={true}
+                bg="red"
+                color="white"
+                href="/mandataires/mesures/[mesure_id]/delete"
+                asLink={`/mandataires/mesures/${id}/delete`}
+              >
+                Supprimer la mesure
+              </LinkButton>
+              <LinkButton
+                ml={3}
+                outline={true}
+                href="/mandataires/mesures/[mesure_id]/reactivate"
+                asLink={`/mandataires/mesures/${id}/reactivate`}
+              >
+                Réouvrir la mesure
+              </LinkButton>
+            </Fragment>
+          )}
+
+          {status === MESURE_TYPE.IN_PROGRESS && (
+            <Fragment>
+              <LinkButton
+                bg="red"
+                color="white"
+                outline={true}
+                href="/mandataires/mesures/[mesure_id]/close"
+                asLink={`/mandataires/mesures/${id}/close`}
+              >
+                Cloturer la mesure
+              </LinkButton>
+
+              <LinkButton
+                ml={3}
+                outline={true}
+                href="/mandataires/mesures/[mesure_id]/edit"
+                asLink={`/mandataires/mesures/${id}/edit`}
+              >
+                Modifier la mesure
+              </LinkButton>
+            </Fragment>
+          )}
+        </Box>
       </Card>
     </Box>
   );
 };
 
-export { MandataireMesure };
+export default MandataireMesure;
