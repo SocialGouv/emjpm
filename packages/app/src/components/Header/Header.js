@@ -5,16 +5,20 @@ import React, { Fragment, useContext } from "react";
 import { logout } from "../../util/auth";
 import { Link } from "../Commons";
 import { UserContext } from "../UserContext";
-import { dropDownLinks } from "./dropDownLink";
 
-const Header = () => {
+export const defaultLinks = [
+  { title: "Centre d'assistance", url: "https://emjpm-blog.azurewebsites.net" }
+];
+
+const Header = props => {
   const { username } = useContext(UserContext);
+  const { dropDownLinks } = props;
   return (
     <Fragment>
       <HeaderComponent
         username={username}
         Link={Link}
-        dropDownLinks={dropDownLinks}
+        dropDownLinks={defaultLinks.concat(dropDownLinks)}
         disconnect={logout}
         DropDownMenu={DropDownMenu}
       />
@@ -23,10 +27,17 @@ const Header = () => {
 };
 
 Header.defaultProps = {
-  isDisconnected: false
+  isDisconnected: false,
+  dropDownLinks: []
 };
 
 Header.propTypes = {
+  dropDownLinks: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      url: PropTypes.string.isRequired
+    })
+  ),
   isDisconnected: PropTypes.bool
 };
 
