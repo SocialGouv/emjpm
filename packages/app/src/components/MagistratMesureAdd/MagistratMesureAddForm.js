@@ -8,6 +8,7 @@ import { Box, Flex } from "rebass";
 
 import { CIVILITY, IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { magistratMandataireSchema } from "../../lib/validationSchemas";
+import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
 import { UserContext } from "../UserContext";
 import {
   CHOOSE_MANDATAIRE,
@@ -24,20 +25,28 @@ export const MagistratMesureAddForm = props => {
     magistrat: { ti_id: tiId }
   } = useContext(UserContext);
 
-  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
+  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
+    refetchQueries: [
+      {
+        query: MANDATAIRE,
+        variables: { id: mandataireId }
+      },
+      {
+        query: GESTIONNAIRES,
+        variables: {
+          mandataire_id: mandataireId,
+          service_id: serviceId
+        }
+      }
+    ]
+  });
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
 
       await recalculateMandataireMesures({
         variables: {
-          mandataire_id: mandataireId,
-          refetchQueries: [
-            {
-              query: MANDATAIRE,
-              variables: { id: mandataireId }
-            }
-          ]
+          mandataire_id: mandataireId
         }
       });
 
@@ -47,18 +56,26 @@ export const MagistratMesureAddForm = props => {
     }
   });
 
-  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES);
+  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: serviceId }
+      },
+      {
+        query: GESTIONNAIRES,
+        variables: {
+          mandataire_id: mandataireId,
+          service_id: serviceId
+        }
+      }
+    ]
+  });
   const [chooseService] = useMutation(CHOOSE_SERVICE, {
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
       await recalculateServiceMesures({
-        variables: { service_id: serviceId },
-        refetchQueries: [
-          {
-            query: SERVICE,
-            variables: { id: serviceId }
-          }
-        ]
+        variables: { service_id: serviceId }
       });
       await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
         shallow: true
