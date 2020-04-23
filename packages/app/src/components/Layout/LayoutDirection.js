@@ -22,10 +22,6 @@ const LayoutDirection = ({ children }) => {
     {
       title: "Mesures",
       url: "/direction/mesures"
-    },
-    {
-      title: "Vos informations",
-      url: "/direction/informations"
     }
   ];
 
@@ -36,7 +32,7 @@ const LayoutDirection = ({ children }) => {
   return (
     <Fragment>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <Header />
+        <Header dropDownLinks={[{ title: "Vos informations", url: "/direction/informations" }]} />
         <BoxWrapper>
           <Navigation links={navigationLinks} />
         </BoxWrapper>
