@@ -29,10 +29,6 @@ const LayoutServices = props => {
       url: "/services/mesures/import"
     },
     {
-      title: "Vos informations",
-      url: "/services/informations"
-    },
-    {
       title: "Gestion des comptes",
       url: "/services/members"
     }
@@ -42,7 +38,7 @@ const LayoutServices = props => {
     <Fragment>
       <Box sx={{ mr: "300px", position: "relative", "z-index": "1000" }}>
         <Box sx={{ bg: "white" }}>
-          <Header />
+          <Header dropDownLinks={[{ title: "Vos informations", url: "/services/informations" }]} />
           {hasNavigation && (
             <BoxWrapper>
               <Navigation links={navigationLinks} />

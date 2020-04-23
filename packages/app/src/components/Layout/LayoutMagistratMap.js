@@ -17,10 +17,6 @@ const navigationLinks = [
   {
     title: "Vos mesures",
     url: "/magistrats/mesures"
-  },
-  {
-    title: "Vos informations",
-    url: "/magistrats/informations"
   }
 ];
 
@@ -29,7 +25,10 @@ const LayoutMagistratMap = props => {
   return (
     <Fragment>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <Header {...props} />
+        <Header
+          {...props}
+          dropDownLinks={[{ title: "Vos informations", url: "/magistrats/informations" }]}
+        />
         <BoxWrapper>
           <Navigation links={navigationLinks} />
         </BoxWrapper>
