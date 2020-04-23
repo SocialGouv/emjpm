@@ -1,10 +1,10 @@
-import PropTypes from 'prop-types';
 import React, { createContext, useState } from 'react';
 
 export const Context = createContext({});
 
 export const Provider = (props) => {
   // Initial values are obtained from the props
+  // eslint-disable-next-line react/prop-types
   const { children } = props;
 
   // Use State to keep the values
@@ -21,10 +21,6 @@ export const Provider = (props) => {
 
   // pass the value in provider and return
   return <Context.Provider value={mesureContext}>{children}</Context.Provider>;
-};
-
-Provider.propTypes = {
-  children: PropTypes.elementType.isRequired,
 };
 
 export const { Consumer } = Context;
