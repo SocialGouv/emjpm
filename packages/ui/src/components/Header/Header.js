@@ -53,7 +53,7 @@ Header.defaultProps = {
   DropDownMenu: null,
   Link: null,
   disconnect: null,
-  dropDownLinks: null,
+  dropDownLinks: [],
   isDisconnected: false,
   username: null,
 };
@@ -64,8 +64,8 @@ Header.propTypes = {
   disconnect: PropTypes.func,
   dropDownLinks: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
+      title: PropTypes.string,
+      url: PropTypes.string,
     }),
   ),
   isDisconnected: PropTypes.bool,

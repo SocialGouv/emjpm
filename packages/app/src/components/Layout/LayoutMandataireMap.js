@@ -21,10 +21,6 @@ const navigationLinks = [
   {
     title: "Importez vos mesures",
     url: "/mandataires/import-mesures"
-  },
-  {
-    title: "Vos informations",
-    url: "/mandataires/informations"
   }
 ];
 
@@ -33,7 +29,7 @@ const LayoutMandataireMap = props => {
   return (
     <Fragment>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <Header />
+        <Header dropDownLinks={[{ title: "Vos informations", url: "/mandataires/informations" }]} />
         <BoxWrapper>
           <Navigation links={navigationLinks} />
         </BoxWrapper>
