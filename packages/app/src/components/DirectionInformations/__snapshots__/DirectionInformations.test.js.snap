@@ -30,7 +30,7 @@ exports[`renders correctly 1`] = `
         >
           <svg
             aria-hidden="true"
-            className="sc-bdVaJa iJCmgd"
+            className="sc-bwzfXH bqgLxe"
             fill="currentColor"
             focusable="false"
             height="16"
@@ -70,7 +70,7 @@ exports[`renders correctly 1`] = `
         className="css-vurnku"
       >
         <a
-          className="css-sc68v3"
+          className="css-5xn953"
           href="/direction/edit-informations"
           onClick={[Function]}
           onMouseEnter={[Function]}
@@ -83,7 +83,7 @@ exports[`renders correctly 1`] = `
       className="css-arxxmz"
     >
       <a
-        className="css-sc68v3"
+        className="css-5xn953"
         href="/direction/edit-password"
         onClick={[Function]}
         onMouseEnter={[Function]}
