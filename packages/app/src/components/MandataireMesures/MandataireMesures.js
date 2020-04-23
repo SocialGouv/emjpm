@@ -45,11 +45,11 @@ const MandataireMesures = props => {
   };
 
   if (loading) {
-    return <div>loading</div>;
+    return <Box mt={3}>{"Chargement..."}</Box>;
   }
 
   if (error) {
-    return <div>error</div>;
+    return <Box mt={3}>{"Une erreur s'est produite. Veuillez réessayer ultérieurement."}</Box>;
   }
 
   const { count } = data.mesures_aggregate.aggregate;

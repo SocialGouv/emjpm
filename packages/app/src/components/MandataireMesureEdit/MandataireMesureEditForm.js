@@ -47,7 +47,7 @@ export const MandataireMesureEditForm = props => {
       city: ville,
       zipcode: codePostal,
       country: { label: COUNTRIES[pays], value: pays },
-      cabinet
+      cabinet: cabinet || ""
     }
   });
 
@@ -131,7 +131,7 @@ export const MandataireMesureEditForm = props => {
           </Field>
           <Field>
             <Select
-              instanceId="type"
+              instanceId={"type"}
               id="type"
               name="type"
               placeholder="Type de mesure"
@@ -144,7 +144,7 @@ export const MandataireMesureEditForm = props => {
           </Field>
           <Field>
             <Select
-              instanceId="civilite"
+              instanceId={"civilite"}
               id="civilite"
               name="civilite"
               placeholder="civilité"

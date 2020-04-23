@@ -31,6 +31,7 @@ const MandataireFilters = props => {
             <Box width="200px" mr={1}>
               <Select
                 size="small"
+                instanceId={"mesureType"}
                 options={[DEFAULT_MESURE_TYPE].concat(MESURE_TYPE_LABEL_VALUE)}
                 placeholder={"type de la mesure"}
                 value={mesureType}
@@ -41,6 +42,7 @@ const MandataireFilters = props => {
               <Box width="200px" mr={1}>
                 <Select
                   size="small"
+                  instanceId={"mesureStatus"}
                   options={MESURE_STATUS_LABEL_VALUE}
                   placeholder={"état de la mesure"}
                   value={mesureStatus}
