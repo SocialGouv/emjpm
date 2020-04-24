@@ -41,7 +41,9 @@
     "pino": "^5.17.0",
     "query-string": "^6.11.1",
     "rand-token": "^0.4.0",
-    "rasha": "^1.2.5"
+    "rasha": "^1.2.5",
+    "tmp": "^0.1.0",
+    "xlsx": "^0.15.6"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

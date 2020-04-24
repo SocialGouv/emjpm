@@ -170,6 +170,7 @@ tables:
             user:
               id:
                 _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: ti
     permission:
@@ -295,6 +296,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
       set:
         user_id: x-hasura-User-Id
 - table:
@@ -440,6 +442,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: enquete_reponses
@@ -507,6 +510,7 @@ tables:
       - annee
       - status
       filter: {}
+      check: null
 - table:
     schema: public
     name: etablissements
@@ -682,6 +686,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: individuel
     permission:
@@ -732,6 +737,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: individuel_exercices
@@ -775,6 +781,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: individuel_formations
@@ -820,6 +827,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: magistrat
@@ -894,6 +902,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: prepose
     permission:
@@ -1117,6 +1126,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -1143,12 +1153,14 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: ti
     permission:
       columns:
       - mesures_en_attente
       - mesures_en_cours
       filter: {}
+      check: null
 - table:
     schema: public
     name: mesures
@@ -1514,6 +1526,7 @@ tables:
           user:
             id:
               _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -1548,6 +1561,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   - role: service
     permission:
       columns:
@@ -1581,6 +1595,7 @@ tables:
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -1614,6 +1629,7 @@ tables:
           magistrats:
             user_id:
               _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: individuel
     permission:
@@ -1747,6 +1763,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   event_triggers:
   - name: import
     definition:
@@ -2198,12 +2215,14 @@ tables:
       - name
       - service_id
       filter: {}
+      check: null
   - role: ti
     permission:
       columns:
       - mesures_awaiting
       - mesures_in_progress
       filter: {}
+      check: null
   delete_permissions:
   - role: service
     permission:
@@ -2302,6 +2321,7 @@ tables:
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
+      check: null
   delete_permissions:
   - role: service
     permission:
@@ -2353,6 +2373,7 @@ tables:
       filter:
         service_id:
           _eq: x-hasura-service-id
+      check: null
 - table:
     schema: public
     name: service_tis
@@ -2502,6 +2523,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-Service-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -2510,6 +2532,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       filter: {}
+      check: null
 - table:
     schema: public
     name: tis
@@ -3030,6 +3053,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: individuel
     permission:
       columns:
@@ -3049,6 +3073,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -3068,6 +3093,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: service
     permission:
       columns:
@@ -3087,6 +3113,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -3106,6 +3133,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   event_triggers:
   - name: email-account-validation
     definition:
@@ -3493,3 +3521,30 @@ remote_schemas:
     url_from_env: WHATEVER_URL
     timeout_seconds: 60
     forward_client_headers: true
+actions:
+- name: fileUpload
+  definition:
+    handler: http://host.docker.internal:4000/api/fileUpload
+    output_type: FileOutput
+    arguments:
+    - name: name
+      type: String!
+    - name: type
+      type: String!
+    - name: base64str
+      type: String!
+    type: mutation
+    kind: synchronous
+  permissions:
+  - role: anonymous
+  - role: direction
+  - role: individuel
+  - role: prepose
+  - role: service
+  - role: ti
+custom_types:
+  objects:
+  - name: FileOutput
+    fields:
+    - name: data
+      type: String!

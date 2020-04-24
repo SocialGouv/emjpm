@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const passport = require("passport");
+const fs = require("fs");
 const expressPinoLogger = require("express-pino-logger");
+const tmp = require("tmp");
 
 const logger = require("./utils/logger");
 const Sentry = require("./utils/sentry");
@@ -12,6 +14,7 @@ const pkg = require("../package.json");
 const authRoutes = require("./routes/auth");
 const oauth2Routes = require("./routes/oauth2");
 const editorsRoutes = require("./routes/editors");
+const { convertExcelFileToJson } = require("./services/enquetes");
 
 const corsOptions = {
   credentials: true,
@@ -41,6 +44,20 @@ app.use(
 );
 
 app.use("/webhook", require("./routes/webhook"));
+
+app.post("/api/fileUpload", (req, res) => {
+  const { name, type, base64str } = req.body.input;
+
+  const tmpobj = tmp.dirSync();
+  const fileBuffer = Buffer.from(base64str, "base64");
+  const path = tmpobj.name + "/" + name;
+
+  fs.writeFileSync(path, fileBuffer, "base64");
+  const data = convertExcelFileToJson(path);
+
+  tmpobj.removeCallback();
+  res.status(200).json(data);
+});
 
 app.get("/ping", function(req, res) {
   if (!req.user) {
