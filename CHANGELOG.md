@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.28.0](https://github.com/SocialGouv/emjpm/compare/v25.27.2...v25.28.0) (2020-04-24)
+
+
+### Bug Fixes
+
+* **app:** warning messages ([#1700](https://github.com/SocialGouv/emjpm/issues/1700)) ([2df9dd1](https://github.com/SocialGouv/emjpm/commit/2df9dd16290a79d8ca2774999442d7953c600822))
+
+
+### Features
+
+* **mesure:** refresh gestionaire data ([#1701](https://github.com/SocialGouv/emjpm/issues/1701)) ([747f72b](https://github.com/SocialGouv/emjpm/commit/747f72bbe6888e01d97c0781ca44e62bb2b23d86))
+* **mesure:** visualize mesure ([#1698](https://github.com/SocialGouv/emjpm/issues/1698)) ([8900d52](https://github.com/SocialGouv/emjpm/commit/8900d52d1b8399544b8c63db43f87932c4f0edcf))
+* **user:** move header account link ([#1699](https://github.com/SocialGouv/emjpm/issues/1699)) ([5cbd815](https://github.com/SocialGouv/emjpm/commit/5cbd8155e705e50dd263c80c772664b7cfa75e8c))
+
+
+
+
+
 ## [25.27.2](https://github.com/SocialGouv/emjpm/compare/v25.27.1...v25.27.2) (2020-04-21)
 
 
