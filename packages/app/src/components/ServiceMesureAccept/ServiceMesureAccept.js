@@ -6,13 +6,14 @@ import { Box } from "rebass";
 import { getLocation } from "../../query-service/LocationQueryService";
 import { MesureContext } from "../MesureContext";
 import { UserContext } from "../UserContext";
+import { GET_SERVICE_USERS } from "../UserContext/queries";
 import { ACCEPT_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
 import { SERVICE } from "./queries";
 import { ServiceMesureAcceptForm } from "./ServiceMesureAcceptForm";
 import { ServiceMesureAcceptStyle } from "./style";
 
 export const ServiceMesureAccept = props => {
-  const { service_members } = useContext(UserContext);
+  const { service_members, id } = useContext(UserContext);
   const [
     {
       service: { service_antennes }
@@ -26,6 +27,10 @@ export const ServiceMesureAccept = props => {
       {
         query: SERVICE,
         variables: { id: mesure.serviceId }
+      },
+      {
+        query: GET_SERVICE_USERS,
+        variables: { userId: id }
       }
     ]
   });
@@ -74,7 +79,7 @@ export const ServiceMesureAccept = props => {
             }
           });
 
-          await Router.push(`/services/mesures/${mesure.id}`);
+          await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`);
           setSubmitting(false);
         }}
         mt="3"
