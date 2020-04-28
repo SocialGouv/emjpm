@@ -7,7 +7,7 @@ import { Link } from "../Commons";
 import { UserContext } from "../UserContext";
 
 export const defaultLinks = [
-  { title: "Centre d'assistance", url: "https://emjpm-blog.azurewebsites.net" }
+  // { title: "Centre d'assistance", url: "https://emjpm-blog.azurewebsites.net" }
 ];
 
 const Header = props => {
