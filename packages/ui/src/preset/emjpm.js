@@ -38,12 +38,13 @@ export const presetEmjpm = {
     link: '#007AD9',
     mediumGray: '#818181',
     muted: '#f6f6f9',
-    primary: '#0067EA',
+    primary: '#007AD9',
     secondary: '#30c',
     success: '#70D54F',
     text: '#404040',
     textSecondary: '#818181',
     textTertiary: '#C1C1C1',
+    titleSecondary: '#595959',
     warning: '#FFA447',
     whiteGray: '#EBEFF5',
     yellow: '#F4AF00',
@@ -59,6 +60,19 @@ export const presetEmjpm = {
     body: '"Open Sans", sans-serif',
     heading: 'Quicksand',
     monospace: '"Input Mono", monospace',
+  },
+  input: {
+    backgroundColor: '#FFFFFF',
+    border: '1px solid #D4D4D4',
+    color: '#595959',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  label: {
+    color: '#555555',
+    fontSize: "13px",
+    fontWeight: 'bold',
+    width: 'auto'
   },
   lineHeights: {
     body: 1.5,
@@ -129,6 +143,10 @@ export const presetEmjpm = {
       borderRadius: 'default',
       boxShadow: 'card',
       p: 2,
+    },
+    input_small: {
+      padding: 'inherit',
+      width: '50px',
     },
     link: {
       color: 'primary',

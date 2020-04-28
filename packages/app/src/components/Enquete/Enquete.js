@@ -1,14 +1,14 @@
-import { Card, Heading1 } from "@emjpm/ui";
+import Error from "next/error";
 import PropTypes from "prop-types";
 import React, { Fragment, useContext } from "react";
 import { useQuery } from "react-apollo";
 import { Box } from "rebass";
 
 import { UserContext } from "../../../src/components/UserContext";
-import { MandataireEnqueteIndividuel } from "./MandataireEnqueteIndividuel";
+import { EnqueteIndividuel } from "./EnqueteIndividuel";
 import { ENQUETE } from "./queries";
 
-export const MandataireEnquete = ({ id }) => {
+export const Enquete = ({ id }) => {
   const { mandataire, type } = useContext(UserContext);
 
   const { data, loading } = useQuery(ENQUETE, {
@@ -21,23 +21,19 @@ export const MandataireEnquete = ({ id }) => {
 
   const { enquetes_by_pk: enquete } = data;
   if (!enquete) {
-    return null;
+    return <Error code={404} />;
   }
 
   return (
     <Fragment>
-      <Heading1 mb={5}>Enquête {enquete.annee}</Heading1>
-      <Card p={4}>
-        {type === "individuel" && (
-          <MandataireEnqueteIndividuel mandataireId={mandataire.id} enqueteId={id} />
-        )}
-      </Card>
+      {/* <Heading1 mb={5}>Enquête {enquete.annee}</Heading1> */}
+      {type === "individuel" && <EnqueteIndividuel mandataireId={mandataire.id} enqueteId={id} />}
     </Fragment>
   );
 };
 
-MandataireEnquete.propTypes = {
+Enquete.propTypes = {
   id: PropTypes.number.isRequired
 };
 
-export default MandataireEnquete;
+export default Enquete;
