@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.28.1](https://github.com/SocialGouv/emjpm/compare/v25.28.0...v25.28.1) (2020-04-28)
+
+**Note:** Version bump only for package @emjpm/knex
+
+
+
+
+
 # [25.28.0](https://github.com/SocialGouv/emjpm/compare/v25.27.2...v25.28.0) (2020-04-24)
 
 **Note:** Version bump only for package @emjpm/knex
