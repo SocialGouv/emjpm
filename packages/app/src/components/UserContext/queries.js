@@ -41,7 +41,7 @@ export const GET_SERVICE_USERS = gql`
           etablissement
           longitude
           latitude
-          service_antennes {
+          service_antennes(order_by: { name: asc }) {
             name
             mesures_max
             mesures_in_progress
