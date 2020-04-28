@@ -92,6 +92,7 @@ export const recalculateServiceMesuresCount = async (
     if (!data) {
       throw new Error("Graphql request return wrong result");
     }
+
     const {
       awaitingMesures: {
         aggregate: { count: awaitingMesuresCount }
@@ -105,12 +106,6 @@ export const recalculateServiceMesuresCount = async (
 
     const [service] = services;
 
-    const serviceAntenneShouldBeUpdated = service_antenne.some(
-      sa =>
-        sa.mesures_awaiting !== awaitingMesuresCount ||
-        sa.mesures_in_progress !== inprogressMesuresCount
-    );
-
     logger.info({
       service: {
         awaitingMesures: {
@@ -122,31 +117,34 @@ export const recalculateServiceMesuresCount = async (
           real: inprogressMesuresCount
         }
       },
-      serviceAntenneShouldBeUpdated,
       serviceId: service.id
     });
 
-    if (
-      service.mesures_awaiting === awaitingMesuresCount &&
-      service.mesures_in_progress === inprogressMesuresCount &&
-      !serviceAntenneShouldBeUpdated
-    ) {
-      return {
-        success: true,
-        updatedRows: 0
-      };
-    }
-
     const {
       data: {
-        update_services: { affected_rows: updatedRowsServices },
-        update_service_antenne: { affected_rows: updatedRowsServiceAntenne }
+        update_services: { affected_rows: updatedRowsServices }
       }
     } = await dataSources.serviceAPI.updateServiceMesures(
       serviceId,
       awaitingMesuresCount,
       inprogressMesuresCount
     );
+
+    let updatedRowsServiceAntenne = 0;
+    for (const antenne of service_antenne) {
+      const { id, mesures_awaiting, mesures_in_progress } = antenne;
+      const response = await dataSources.serviceAPI.updateAntenneServiceMesures(
+        id,
+        mesures_awaiting.aggregate.count,
+        mesures_in_progress.aggregate.count
+      );
+      const {
+        data: {
+          update_service_antenne: { affected_rows }
+        }
+      } = response;
+      updatedRowsServiceAntenne += affected_rows;
+    }
 
     logger.info(
       `services: ${updatedRowsServices} updated rows | service_antenne: ${updatedRowsServiceAntenne} updated rows`
