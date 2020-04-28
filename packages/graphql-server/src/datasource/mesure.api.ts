@@ -63,10 +63,18 @@ export class MesureAPI extends AuthDataSource {
         mesures_awaiting
         mesures_in_progress
       }
-      service_antenne(where: { service_id: { _eq: $serviceId } }) {
-        service_id
-        mesures_awaiting
-        mesures_in_progress
+      service_antenne(where: {service_id: {_eq: 57}}) {
+        id
+        mesures_awaiting: mesures_aggregate(where: { status: { _eq: "Mesure en attente" } }) {
+          aggregate {
+            count(columns: antenne_id)
+          }
+        }
+        mesures_in_progress: mesures_aggregate(where: { status: { _eq: "Mesure en cours" } }) {
+          aggregate {
+            count(columns: antenne_id)
+          }
+        }
       }
     }`;
 

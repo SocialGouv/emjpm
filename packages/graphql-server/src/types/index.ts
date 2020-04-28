@@ -5,9 +5,14 @@ export interface UpdateServiceMesuresResponse {
     update_services: {
       affected_rows: number;
     };
+  };
+}
+
+export interface UpdateAntenneServiceMesuresResponse {
+  data: {
     update_service_antenne: {
       affected_rows: number;
-    }
+    };
   };
 }
 
@@ -16,6 +21,20 @@ export interface UpdateMandataireMesuresResponse {
     update_mandataires: {
       affected_rows: number;
     };
+  };
+}
+
+export interface CountAntenneMesuresQueryResult {
+  data?: {
+    service_antenne: {
+      service_id: number;
+      id: number;
+      mesures_aggregate: {
+        aggregate: {
+          count: number;
+        };
+      };
+    }[];
   };
 }
 
@@ -56,9 +75,17 @@ export interface CountServiceMesuresQueryResult {
       mesures_in_progress: number;
     }[];
     service_antenne: {
-      service_id: number;
-      mesures_awaiting: number;
-      mesures_in_progress: number;
+      id: number;
+      mesures_awaiting: {
+        aggregate: {
+          count: number;
+        };
+      };
+      mesures_in_progress: {
+        aggregate: {
+          count: number;
+        };
+      };
     }[];
   };
 }

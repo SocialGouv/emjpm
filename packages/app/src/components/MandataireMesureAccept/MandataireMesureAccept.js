@@ -14,17 +14,18 @@ export const MandataireMesureAccept = props => {
   const mesure = useContext(MesureContext);
   const { mandataireId, id } = mesure;
 
-  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
-  const [updateMesure] = useMutation(ACCEPT_MESURE, {
-    onCompleted: async () => {
-      await recalculateMandataireMesures({ variables: { mandataire_id: mandataireId } });
-    },
+  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
     refetchQueries: [
       {
         query: MANDATAIRE,
         variables: { id: mandataireId }
       }
     ]
+  });
+  const [updateMesure] = useMutation(ACCEPT_MESURE, {
+    onCompleted: async () => {
+      await recalculateMandataireMesures({ variables: { mandataire_id: mandataireId } });
+    }
   });
 
   return (

@@ -3,10 +3,12 @@ import { Button, Field, Heading3, Heading5, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
+import { UserContext } from "../../components/UserContext";
+import { GET_SERVICE_USERS } from "../../components/UserContext/queries";
 import { CLOSE_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
 import { MESURE, SERVICE } from "./queries";
 
@@ -23,6 +25,7 @@ const EXTINCTION_LABEL_VALUE = [
 export const ServiceMesureCloseForm = props => {
   const { mesure } = props;
   const { id, serviceId } = mesure;
+  const user = useContext(UserContext);
 
   const [recalculateServiceMesure] = useMutation(RECALCULATE_SERVICE_MESURES, {
     refetchQueries: [
@@ -33,6 +36,10 @@ export const ServiceMesureCloseForm = props => {
       {
         query: SERVICE,
         variables: { serviceId }
+      },
+      {
+        query: GET_SERVICE_USERS,
+        variables: { userId: user.id }
       }
     ]
   });
