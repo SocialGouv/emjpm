@@ -1,4 +1,7 @@
-import { UpdateServiceMesuresResponse } from "../types";
+import {
+  UpdateAntenneServiceMesuresResponse,
+  UpdateServiceMesuresResponse
+} from "../types";
 import { AuthDataSource } from "./auth-datasource";
 
 export class ServiceAPI extends AuthDataSource {
@@ -19,17 +22,30 @@ export class ServiceAPI extends AuthDataSource {
         ) {
           affected_rows
         }
-        update_service_antenne(
-          where: { service_id: { _eq: $serviceId } }
-          _set: { mesures_awaiting: $awaitingMesures, mesures_in_progress: $inprogressMesures }
-        ) {
-          affected_rows
-        }
     }`;
     const response = await this.post<UpdateServiceMesuresResponse>("/", {
       operationName: "update_service_mesures",
       query,
       variables: { serviceId, awaitingMesures, inprogressMesures }
+    });
+    return response;
+  }
+
+  public async updateAntenneServiceMesures(
+    id: number,
+    awaitingMesures: number,
+    inprogressMesures: number
+  ): Promise<UpdateAntenneServiceMesuresResponse> {
+    const query = `
+    mutation update_service_antenne($id: Int!, $awaitingMesures: Int!, $inprogressMesures: Int!) {
+      update_service_antenne(where: {id: {_eq: $id}}, _set: {mesures_awaiting: $awaitingMesures, mesures_in_progress: $inprogressMesures}) {
+        affected_rows
+      }
+    }`;
+    const response = await this.post<UpdateAntenneServiceMesuresResponse>("/", {
+      operationName: "update_service_antenne",
+      query,
+      variables: { id, awaitingMesures, inprogressMesures }
     });
     return response;
   }
