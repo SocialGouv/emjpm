@@ -2,11 +2,11 @@ import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { LayoutServices } from "../../../src/components/Layout";
-import { MesureProvider } from "../../../src/components/MesureContext";
-import { ServiceMesure } from "../../../src/components/ServiceMesure";
-import { ServiceMesureSidebar } from "../../../src/components/ServiceMesureSidebar";
-import { withAuthSync } from "../../../src/util/auth";
+import { LayoutServices } from "../../../../src/components/Layout";
+import { MesureProvider } from "../../../../src/components/MesureContext";
+import { ServiceMesure } from "../../../../src/components/ServiceMesure";
+import { ServiceMesureSidebar } from "../../../../src/components/ServiceMesureSidebar";
+import { withAuthSync } from "../../../../src/util/auth";
 
 const ServiceMesurePage = props => {
   const { mesureId } = props;
