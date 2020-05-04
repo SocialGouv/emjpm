@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.29.0](https://github.com/SocialGouv/emjpm/compare/v25.28.1...v25.29.0) (2020-05-04)
+
+
+### Bug Fixes
+
+* **geocode:** search on geolocalisation_code_postal table ([#1713](https://github.com/SocialGouv/emjpm/issues/1713)) ([710ec5e](https://github.com/SocialGouv/emjpm/commit/710ec5e4ca9f8b9ee9afe50d517808862c7cf3c3))
+* **service-mesure:** page services/mesure/:id similaire a mandataires ([#1717](https://github.com/SocialGouv/emjpm/issues/1717)) ([924ea56](https://github.com/SocialGouv/emjpm/commit/924ea5672e36bf97afe58fe78c35a0af6d7cce27))
+
+
+### Features
+
+* **blog-link:** remove blog link ([c56240a](https://github.com/SocialGouv/emjpm/commit/c56240a243107edcc28d1238599f63b96b97c8e0))
+* **service-info:** order service antennes by name ([cf6b9ab](https://github.com/SocialGouv/emjpm/commit/cf6b9ab390425510bfaa5b0320d38443df98f678))
+
+
+
+
+
 ## [25.28.1](https://github.com/SocialGouv/emjpm/compare/v25.28.0...v25.28.1) (2020-04-28)
 
 
