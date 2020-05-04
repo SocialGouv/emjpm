@@ -1,23 +1,23 @@
-const TYPES = {
+export const TYPES = {
   "Mesure éteinte": "#7EA3AA",
   "Mesure en attente": "#F4AF00",
   "Mesure en cours": "#2DA0FB"
 };
 
-const titleStyle = {
+export const titleStyle = {
   color: "mediumGray",
   fontSize: "2",
   fontStyle: "italic"
 };
 
-const subtitle = {
+export const subtitle = {
   color: "mediumGray",
   fontWeight: "500",
   fontSize: "12px",
   lineHeight: "1.4"
 };
 
-const content = {
+export const content = {
   color: "black",
   fontSize: 1,
   fontWeight: "600",
@@ -26,16 +26,16 @@ const content = {
   mb: 1
 };
 
-const boxStyle = {
+export const boxStyle = {
   width: "50%"
 };
 
-const flexStyle = {
+export const flexStyle = {
   flexWrap: "wrap",
   mt: 5
 };
 
-const statusStyle = status => {
+export const statusStyle = status => {
   return {
     color: TYPES[status],
     display: "inline-block",
@@ -43,4 +43,12 @@ const statusStyle = status => {
   };
 };
 
-export { titleStyle, content, subtitle, boxStyle, flexStyle, statusStyle };
+export const statusBox = {
+  padding: "4px 10px",
+  margin: "auto",
+  display: "inline-block",
+  borderRadius: "2px",
+  color: "#ffffff",
+  fontWeight: "bold",
+  backgroundColor: "#2DA0FB"
+};
