@@ -30,8 +30,15 @@ const Mesures = () => {
         <BoxWrapper mt={6} px="1">
           <Flex flexDirection="row" justifyContent="space-between">
             <Heading1>Toutes vos mesures</Heading1>
-            <Box>
-              <LinkButton href="/services/add-mesures">Ajouter une mesure</LinkButton>
+            <Box flexDirection="row">
+              <Flex flexDirection="row">
+                <Box>
+                  <LinkButton href="/services/add-mesures">Ajouter une mesure</LinkButton>
+                </Box>
+                <Box ml={1}>
+                  <LinkButton href="/services/mesures/import">Importez vos mesures</LinkButton>
+                </Box>
+              </Flex>
             </Box>
           </Flex>
 
