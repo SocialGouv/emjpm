@@ -3,16 +3,9 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "../../components/Commons";
-import { MesureContext } from "../MesureContext";
+import { MesureContext, mesureFormatter } from "../MesureContext";
 import { MESURE_TYPE } from "./constants";
 import { content, statusBox, subtitle } from "./style";
-
-function formatMajeurProtege(civilite, realAge) {
-  if (!civilite) {
-    return `${realAge} ans`;
-  }
-  return `${civilite === "F" ? "Femme de" : "Homme de"} ${realAge} ans`;
-}
 
 const ServiceMesure = props => {
   const {
@@ -27,6 +20,7 @@ const ServiceMesure = props => {
     tribunal,
     type,
     ville,
+    pays,
     antenne,
     id
   } = useContext(MesureContext);
@@ -56,12 +50,16 @@ const ServiceMesure = props => {
 
             <Box mb={4}>
               <Text sx={subtitle}>Majeur protégé</Text>
-              <Text sx={content}>{formatMajeurProtege(civilite, realAge)}</Text>
+              <Text sx={content}>{mesureFormatter.formatMajeurProtege(civilite, realAge)}</Text>
             </Box>
 
             <Box mb={4}>
               <Text sx={subtitle}>Commune</Text>
               <Text sx={content}>{ville}</Text>
+            </Box>
+            <Box mb={4}>
+              <Text sx={subtitle}>Pays</Text>
+              <Text sx={content}>{mesureFormatter.formatPays(pays)}</Text>
             </Box>
           </Box>
 
