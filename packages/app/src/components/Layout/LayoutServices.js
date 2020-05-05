@@ -25,10 +25,6 @@ const LayoutServices = props => {
       url: "/services/map"
     },
     {
-      title: "Importez vos mesures",
-      url: "/services/mesures/import"
-    },
-    {
       title: "Gestion des comptes",
       url: "/services/members"
     }

@@ -22,8 +22,15 @@ const Mandataires = () => {
         <BoxWrapper mt={6} px="1">
           <Flex flexDirection="row" justifyContent="space-between">
             <Heading1>Toutes vos mesures</Heading1>
-            <Box>
-              <LinkButton href="/mandataires/add-mesures">Ajouter une mesure</LinkButton>
+            <Box flexDirection="row">
+              <Flex flexDirection="row">
+                <Box>
+                  <LinkButton href="/mandataires/add-mesures">Ajouter une mesure</LinkButton>
+                </Box>
+                <Box ml={1}>
+                  <LinkButton href="/mandataires/import-mesures">Importez vos mesures</LinkButton>
+                </Box>
+              </Flex>
             </Box>
           </Flex>
           <MandataireFilters />
