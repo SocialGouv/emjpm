@@ -23,10 +23,6 @@ const LayoutServices = props => {
     {
       title: "La carte de vos mesures",
       url: "/services/map"
-    },
-    {
-      title: "Gestion des comptes",
-      url: "/services/members"
     }
   ];
 
@@ -34,7 +30,18 @@ const LayoutServices = props => {
     <Fragment>
       <Box sx={{ mr: "300px", position: "relative", "z-index": "1000" }}>
         <Box sx={{ bg: "white" }}>
-          <Header dropDownLinks={[{ title: "Vos informations", url: "/services/informations" }]} />
+          <Header
+            dropDownLinks={[
+              {
+                title: "Vos informations",
+                url: "/services/informations"
+              },
+              {
+                title: "Gestion des comptes",
+                url: "/services/members"
+              }
+            ]}
+          />
           {hasNavigation && (
             <BoxWrapper>
               <Navigation links={navigationLinks} />
