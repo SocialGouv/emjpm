@@ -32,16 +32,7 @@ export const MESURES = gql`
       mesures_en_cours
       id
     }
-    mesures_aggregate(
-      where: { mandataire: { user_id: { _eq: $userId } }, status: { _eq: "Mesure en attente" } }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    mesures(
-      where: { mandataire: { user_id: { _eq: $userId } }, status: { _eq: "Mesure en cours" } }
-    ) {
+    mesures(where: { mandataire: { user_id: { _eq: $userId } } }) {
       id
       etablissement
       numero_dossier
