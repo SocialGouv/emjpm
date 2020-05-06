@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useMemo, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
@@ -11,11 +11,13 @@ import { MESURES } from "./queries";
 import { ServiceMapPanelMesuresStyle } from "./style";
 const RESULT_PER_PAGE = 20;
 
-const ServiceMapPanelMesures = props => {
+const ServiceMapPanelMesures = ({ mesuresIds }) => {
   const [currentOffset, setCurrentOffset] = useState(0);
+
   const queryVariables = {
     limit: RESULT_PER_PAGE,
-    offset: currentOffset
+    offset: currentOffset,
+    ids: mesuresIds
   };
 
   const { data, error, loading } = useQuery(MESURES, {
@@ -29,6 +31,11 @@ const ServiceMapPanelMesures = props => {
     });
   };
 
+  const mesures = useMemo(() => (data ? formatMesureList(data.mesures) : []), [data]);
+
+  const count = useMemo(() => (data ? data.mesures_aggregate.aggregate.count : 0), [data]);
+  const totalPage = useMemo(() => Math.ceil(count / RESULT_PER_PAGE), [count]);
+
   if (loading) {
     return <Box p="2">Chargement</Box>;
   }
@@ -36,13 +43,8 @@ const ServiceMapPanelMesures = props => {
   if (error) {
     return <div>Erreur</div>;
   }
-
-  const { count } = data.mesures_aggregate.aggregate;
-  const totalPage = count / RESULT_PER_PAGE;
-  const mesures = formatMesureList(data.mesures);
-
   return (
-    <Box sx={ServiceMapPanelMesuresStyle} {...props}>
+    <Box sx={ServiceMapPanelMesuresStyle}>
       <Scrollbar style={{ width: "100%", height: "100%" }}>
         <Box p="2">
           {mesures.length > 0 ? (
