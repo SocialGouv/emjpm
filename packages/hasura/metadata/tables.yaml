@@ -1,5 +1,3 @@
-version: 2
-tables:
 - table:
     schema: public
     name: access_tokens
@@ -170,6 +168,7 @@ tables:
             user:
               id:
                 _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: ti
     permission:
@@ -295,6 +294,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
       set:
         user_id: x-hasura-User-Id
 - table:
@@ -440,6 +440,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: enquete_reponses
@@ -507,6 +508,7 @@ tables:
       - annee
       - status
       filter: {}
+      check: null
 - table:
     schema: public
     name: etablissements
@@ -682,6 +684,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: individuel
     permission:
@@ -732,6 +735,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: individuel_exercices
@@ -775,6 +779,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: individuel_formations
@@ -820,6 +825,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: magistrat
@@ -894,6 +900,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: prepose
     permission:
@@ -1117,6 +1124,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -1143,12 +1151,14 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: ti
     permission:
       columns:
       - mesures_en_attente
       - mesures_en_cours
       filter: {}
+      check: null
 - table:
     schema: public
     name: mesures
@@ -1514,6 +1524,7 @@ tables:
           user:
             id:
               _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -1548,6 +1559,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   - role: service
     permission:
       columns:
@@ -1581,6 +1593,7 @@ tables:
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -1614,6 +1627,7 @@ tables:
           magistrats:
             user_id:
               _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: individuel
     permission:
@@ -1747,6 +1761,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   event_triggers:
   - name: import
     definition:
@@ -2198,12 +2213,14 @@ tables:
       - name
       - service_id
       filter: {}
+      check: null
   - role: ti
     permission:
       columns:
       - mesures_awaiting
       - mesures_in_progress
       filter: {}
+      check: null
   delete_permissions:
   - role: service
     permission:
@@ -2302,6 +2319,7 @@ tables:
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
+      check: null
   delete_permissions:
   - role: service
     permission:
@@ -2353,6 +2371,7 @@ tables:
       filter:
         service_id:
           _eq: x-hasura-service-id
+      check: null
 - table:
     schema: public
     name: service_tis
@@ -2502,6 +2521,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-Service-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -2510,6 +2530,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       filter: {}
+      check: null
 - table:
     schema: public
     name: tis
@@ -3030,6 +3051,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: individuel
     permission:
       columns:
@@ -3049,6 +3071,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -3068,6 +3091,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: service
     permission:
       columns:
@@ -3087,6 +3111,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -3106,6 +3131,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   event_triggers:
   - name: email-account-validation
     definition:
@@ -3487,9 +3513,3 @@ tables:
       - ti_id
       filter: {}
       allow_aggregations: true
-remote_schemas:
-- name: remote_schema
-  definition:
-    url_from_env: WHATEVER_URL
-    timeout_seconds: 60
-    forward_client_headers: true
