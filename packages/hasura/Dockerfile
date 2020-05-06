@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v1.1.0.cli-migrations
+FROM hasura/graphql-engine:v1.2.1.cli-migrations
 
 ENV HASURA_GRAPHQL_ENABLE_TELEMETRY false
 
