@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Text } from "@emjpm/ui";
+import { Lock } from "@styled-icons/boxicons-solid/Lock";
 import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
@@ -10,7 +11,7 @@ import { TRIBUNAUX } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 const RowItem = ({ item }) => {
-  const { id, etablissement, code_postal, ville, siret } = item;
+  const { id, etablissement, code_postal, ville, siret, immutable } = item;
   const [editMode, setEditMode] = useState(false);
 
   const toogleEditMode = () => setEditMode(!editMode);
@@ -41,10 +42,14 @@ const RowItem = ({ item }) => {
               </Flex>
             </Flex>
           </Box>
-          <Box mr="1" width="120px">
-            <Button width="120px" onClick={toogleEditMode} variant="outline">
-              Modifier
-            </Button>
+          <Box mr="1" width="120px" textAlign="center">
+            {immutable ? (
+              <Lock size="16" />
+            ) : (
+              <Button width="120px" onClick={toogleEditMode} variant="outline">
+                Modifier
+              </Button>
+            )}
           </Box>
         </Flex>
       </Card>
