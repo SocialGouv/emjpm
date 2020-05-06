@@ -30,23 +30,12 @@ export const CHOOSE_MANDATAIRE = gql`
         id
       }
     }
-  }
-`;
-
-export const RECALCULATE_MANDATAIRE_MESURES = gql`
-  mutation update_mandataire_mesures($mandataire_id: Int!) {
-    recalculateMandataireMesuresCount(mandataireId: $mandataire_id) {
-      success
-      updatedRows
-    }
-  }
-`;
-
-export const RECALCULATE_SERVICE_MESURES = gql`
-  mutation update_service_mesures($service_id: Int!) {
-    recalculateServiceMesuresCount(serviceId: $service_id) {
-      success
-      updatedRows
+    update_mandataires(where: { id: { _eq: $mandataire_id } }, _inc: { mesures_en_attente: 1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_en_attente
+      }
     }
   }
 `;
@@ -79,6 +68,13 @@ export const CHOOSE_SERVICE = gql`
     ) {
       returning {
         id
+      }
+    }
+    update_services(where: { id: { _eq: $service_id } }, _inc: { mesures_awaiting: 1 }) {
+      affected_rows
+      returning {
+        id
+        mesures_awaiting
       }
     }
   }
