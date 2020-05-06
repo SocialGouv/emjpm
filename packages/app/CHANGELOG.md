@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.30.0](https://github.com/SocialGouv/emjpm/compare/v25.29.0...v25.30.0) (2020-05-06)
+
+
+### Bug Fixes
+
+* **magistrat:** decrement mesures counter ([46bc96c](https://github.com/SocialGouv/emjpm/commit/46bc96c9473c4c0d1bb2b1691a49068681fcbc5f))
+* **menu:** individuel/service menu ui [#1708](https://github.com/SocialGouv/emjpm/issues/1708) ([#1719](https://github.com/SocialGouv/emjpm/issues/1719)) ([e070100](https://github.com/SocialGouv/emjpm/commit/e0701003369866459e17ff4f370f77786c24c319))
+* **service:** menu ui [#1707](https://github.com/SocialGouv/emjpm/issues/1707) ([#1718](https://github.com/SocialGouv/emjpm/issues/1718)) ([2d8ca28](https://github.com/SocialGouv/emjpm/commit/2d8ca28e7453d9a7d8139341f84eb27f5649649a))
+
+
+### Features
+
+* **admin:** [#1704](https://github.com/SocialGouv/emjpm/issues/1704) gestion tribunaux immutable ([#1727](https://github.com/SocialGouv/emjpm/issues/1727)) ([595ae61](https://github.com/SocialGouv/emjpm/commit/595ae614ccbba78c1b6a04fc322c71be2c8bba8c))
+* **admin:** [#1714](https://github.com/SocialGouv/emjpm/issues/1714) affichage des mesures ([#1724](https://github.com/SocialGouv/emjpm/issues/1724)) ([a05cd57](https://github.com/SocialGouv/emjpm/commit/a05cd575319d8c0cf1a2aab1cffd0ac4a89621ef))
+* **map:** affichage des clusters sur la carte fix [#1716](https://github.com/SocialGouv/emjpm/issues/1716) ([#1722](https://github.com/SocialGouv/emjpm/issues/1722)) ([e122c29](https://github.com/SocialGouv/emjpm/commit/e122c29092576440f71f481803be6e62141cfe87))
+* **pays:** affichage pays service/individuel ([#1721](https://github.com/SocialGouv/emjpm/issues/1721)) ([c07b747](https://github.com/SocialGouv/emjpm/commit/c07b747efa6d234c10158a30b2d061b783175cce))
+* **service:** move links into top menu ([6c886e5](https://github.com/SocialGouv/emjpm/commit/6c886e548e4014ea1fd52a2ff6ff6fb4c949ca09))
+
+
+
+
+
 # [25.29.0](https://github.com/SocialGouv/emjpm/compare/v25.28.1...v25.29.0) (2020-05-04)
 
 
