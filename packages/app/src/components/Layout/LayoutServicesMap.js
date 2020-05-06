@@ -17,14 +17,6 @@ const navigationLinks = [
   {
     title: "La carte de vos mesures",
     url: "/services/map"
-  },
-  {
-    title: "Importez vos mesures",
-    url: "/services/mesures/import"
-  },
-  {
-    title: "Gestion des comptes",
-    url: "/services/members"
   }
 ];
 
@@ -33,7 +25,18 @@ const LayoutServicesMap = props => {
   return (
     <Fragment>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <Header dropDownLinks={[{ title: "Vos informations", url: "/services/informations" }]} />
+        <Header
+          dropDownLinks={[
+            {
+              title: "Vos informations",
+              url: "/services/informations"
+            },
+            {
+              title: "Gestion des comptes",
+              url: "/services/members"
+            }
+          ]}
+        />
         <BoxWrapper>
           <Navigation links={navigationLinks} />
         </BoxWrapper>
