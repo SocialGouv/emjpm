@@ -31,15 +31,22 @@ export const MESURE_RESIDENCES = [
 
 export const MESURE_CIVILITIES = ["F", "H"];
 
+export const MESURE_STATUS_LABEL_VALUE_EN_COURS = {
+  label: "Mesure en cours",
+  value: "Mesure en cours"
+};
+export const MESURE_STATUS_LABEL_VALUE_ETEINTE = {
+  label: "Mesure éteinte",
+  value: "Eteindre mesure"
+};
+export const MESURE_STATUS_LABEL_VALUE_ATTENTE = {
+  label: "Mesure en attente",
+  value: "Mesure en attente"
+};
+
 export const MESURE_STATUS_LABEL_VALUE = [
-  {
-    label: "Mesure en cours",
-    value: "Mesure en cours"
-  },
-  {
-    label: "Mesure éteinte",
-    value: "Eteindre mesure"
-  }
+  MESURE_STATUS_LABEL_VALUE_EN_COURS,
+  MESURE_STATUS_LABEL_VALUE_ETEINTE
 ];
 
 export const DEFAULT_MESURE_TYPE = {
