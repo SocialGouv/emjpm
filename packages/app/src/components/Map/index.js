@@ -1,6 +1,5 @@
-import { MapContainer } from "./MapContainer";
-import { MapLayer } from "./MapLayer";
-import { MapPopup } from "./MapPopup";
-import { mapMarkersIcons } from "./utils";
-
-export { MapLayer, MapContainer, MapPopup, mapMarkersIcons };
+export { MapContainer } from "./MapContainer";
+export { MapCluster } from "./MapCluster";
+export { MapLayer } from "./MapLayer";
+export { MapPopup } from "./MapPopup";
+export { mapMarkersIcons } from "./utils";
