@@ -23,6 +23,7 @@ export const TRIBUNAUX = gql`
       address
       latitude
       longitude
+      immutable
     }
   }
 `;
