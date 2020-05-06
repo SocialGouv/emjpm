@@ -36,19 +36,13 @@ export const MESURES = gql`
       mesures_awaiting
       mesures_in_progress
     }
-    mesures_aggregate(
-      where: { service_id: { _eq: $serviceId }, status: { _eq: "Mesure en attente" } }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    mesures(where: { service_id: { _eq: $serviceId }, status: { _eq: "Mesure en cours" } }) {
+    mesures(where: { service_id: { _eq: $serviceId } }) {
       id
       etablissement
       numero_dossier
       residence
       numero_rg
+      status
       date_ouverture
       created_at
       ti {
