@@ -31,7 +31,6 @@ spec:
                 - -c
                 - |
                   sh -x /mnt/script/backup.sh ;
-                  sh -x /mnt/script/status.sh backup ;
               resources:
                 requests:
                   cpu: 10m
@@ -57,90 +56,7 @@ spec:
                   name: data
                 - mountPath: "/mnt/script"
                   name: script
-                - mountPath: "/var/lib/cronjob/status"
-                  name: cronjob-config
 
-            #
-            #
-            #
-
-            - name: postgres
-              image: postgres:10
-              command:
-                - sh
-              args:
-                - -c
-                - |
-                  (
-                    sh -x /mnt/script/wait_for_status.sh anonymize &&
-                    gosu postgres pg_ctl stop
-                  ) &
-                  gosu postgres docker-entrypoint.sh postgres ;
-              resources:
-                requests:
-                  cpu: 10m
-                  memory: 32Mi
-                limits:
-                  cpu: 100m
-                  memory: 128Mi
-              ports:
-                - containerPort: 5432
-              env:
-                - name: CRONJOB_STATUS_DIR
-                  value: /var/lib/cronjob/status
-                - name: PGUSER
-                  value: postgres
-              volumeMounts:
-                - mountPath: "/mnt/script"
-                  name: script
-                - mountPath: "/var/lib/cronjob/status"
-                  name: cronjob-config
-
-            #
-            #
-            #
-
-            - name: anonymize
-              image: postgres:10-alpine
-              command:
-                - sh
-              args:
-                - -c
-                - |
-                  sh -x /mnt/script/wait_for_status.sh backup ;
-                  sh -x /mnt/script/anonymous.sh ;
-                  sh -x /mnt/script/status.sh anonymize ;
-              resources:
-                requests:
-                  cpu: 10m
-                  memory: 32Mi
-                limits:
-                  cpu: 100m
-                  memory: 64Mi
-              env:
-                - name: CRONJOB_STATUS_DIR
-                  value: /var/lib/cronjob/status
-                - name: PGDATABASE
-                  value: postgres
-                - name: PGHOST
-                  value: localhost
-                - name: PGUSER
-                  value: postgres
-                - name: SAFE_DUMP_DIR
-                  value: /mnt/anonymous
-                - name: UNSAFE_DUMP_DIR
-                  value: /mnt/data
-              volumeMounts:
-                - mountPath: "/mnt/data"
-                  name: data
-                - mountPath: "/mnt/anonymous"
-                  name: anonymous
-                - mountPath: "/mnt/script"
-                  name: script
-                - mountPath: "/var/lib/cronjob/status"
-                  name: cronjob-config
-
-            #
             #
             #
 
@@ -149,15 +65,8 @@ spec:
             - name: script
               configMap:
                 name: ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
-            - name: cronjob-config
-              emptyDir: {}
             - name: data
               azureFile:
                 secretName: ${K8S_PROJECT}-azure-storage-${BRANCH_HASH}
-                shareName: ${K8S_PROJECT}-backup-restore
-                readOnly: false
-            - name: anonymous
-              azureFile:
-                secretName: ${K8S_PROJECT}-azure-storage-dev
                 shareName: ${K8S_PROJECT}-backup-restore
                 readOnly: false
