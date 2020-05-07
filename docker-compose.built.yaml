@@ -31,6 +31,8 @@ services:
     env_file: .env.build
     ports:
       - 4001:4001
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: secret
 
   frontend:
     image: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app:master

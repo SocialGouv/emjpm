@@ -20,11 +20,17 @@ export class MandataireAPI extends AuthDataSource {
           affected_rows
         }
     }`;
-    const response = await this.post<UpdateMandataireMesuresResponse>("/", {
-      operationName: "update_mandataires",
-      query,
-      variables: { mandataireId, awaitingMesures, inprogressMesures }
-    });
+    const response = await this.post<UpdateMandataireMesuresResponse>(
+      "/",
+      {
+        operationName: "update_mandataires",
+        query,
+        variables: { mandataireId, awaitingMesures, inprogressMesures }
+      },
+      {
+        headers: this.adminHeader
+      }
+    );
 
     return response;
   }
