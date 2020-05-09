@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/knex",
-  "version": "25.31.0",
+  "version": "25.31.1",
   "private": true,
   "scripts": {
     "lint": "eslint __test__ migrations seeds knexfile.js",
