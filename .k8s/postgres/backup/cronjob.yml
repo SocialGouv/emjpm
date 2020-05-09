@@ -138,6 +138,7 @@ spec:
                 - mountPath: "/var/lib/cronjob/status"
                   name: cronjob-config
 
+          restartPolicy: Never
           volumes:
             - name: script
               configMap:
