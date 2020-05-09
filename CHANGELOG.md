@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.31.0](https://github.com/SocialGouv/emjpm/compare/v25.30.0...v25.31.0) (2020-05-09)
+
+
+### Bug Fixes
+
+* **backup:** remove backup anonymise ([ce71467](https://github.com/SocialGouv/emjpm/commit/ce71467b4e0db7c46e3c376edd39f1e55f320ed1))
+
+
+### Features
+
+* **remove-link:** remove import mesure link ([f5be193](https://github.com/SocialGouv/emjpm/commit/f5be1932d8bf7185fbd2d43460d284f4f5e86ef6))
+
+
+
+
+
 # [25.30.0](https://github.com/SocialGouv/emjpm/compare/v25.29.0...v25.30.0) (2020-05-06)
 
 
