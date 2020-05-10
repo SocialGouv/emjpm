@@ -818,6 +818,10 @@ Restore postgres data:
     - cat ./.k8s/postgres/restore/migrate-job.yml | envsubst | kubectl apply -f -
 
     - kubectl wait --for=condition=complete job/migrate-job  --timeout=600s
+    - kubectl delete job anonymise-job || true
+    - cat ./.k8s/postgres/restore/anonymise-job.yml | envsubst | kubectl apply -f -
+
+    - kubectl wait --for=condition=complete job/anonymise-job  --timeout=600s
     - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
 
 #######################################################################################################
