@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/ui",
-  "version": "25.31.1",
+  "version": "25.31.2",
   "private": true,
   "description": "",
   "source": "src/index.js",
