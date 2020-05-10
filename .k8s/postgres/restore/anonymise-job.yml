@@ -1,0 +1,63 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: anonymise-job
+  labels:
+    app: anonymise-job
+    git/branch: ${BRANCH_NAME}
+    git/commit: ${COMMIT}
+    gitlab/job: "${JOB_ID}"
+spec:
+  template:
+    metadata:
+      labels:
+        app: anonymise-job
+        git/branch: ${BRANCH_NAME}
+        git/commit: ${COMMIT}
+        gitlab/job: "${JOB_ID}"
+    spec:
+      containers:
+        - name: anonymise-job
+          image: postgres:10-alpine
+          command:
+            - sh
+          args:
+            - -c
+            - |
+              sh -x /mnt/script/anonymous.sh
+          resources:
+            requests:
+              cpu: 0m
+              memory: 0Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: PGSSLMODE
+              value: "require"
+            - name: PGUSER
+              value: ${EMJPM_PG_USER}
+            - name: POSTGRES_DATABASE_EMJPM
+              value: ${POSTGRES_DATABASE_EMJPM}
+            - name: PGPASSWORD
+              value: "${EMJPM_PG_PASSWORD}"
+            - name: PGHOST
+              value: ${PG_HOST}
+            - name: BRANCH_HASH
+              value: ${BRANCH_HASH}
+          volumeMounts:
+            - mountPath: "/mnt/data"
+              name: volume
+            - mountPath: "/mnt/script"
+              name: script
+      restartPolicy: Never
+      volumes:
+        - name: script
+          configMap:
+            name: ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
+        - name: volume
+          azureFile:
+            secretName: ${K8S_PROJECT}-azure-storage-${BRANCH_HASH}
+            shareName: emjpm-backup-restore
+            readOnly: false
