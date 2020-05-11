@@ -35,7 +35,7 @@ export const ServiceMesureCloseForm = props => {
       },
       {
         query: SERVICE,
-        variables: { serviceId }
+        variables: { id: serviceId }
       },
       {
         query: GET_SERVICE_USERS,

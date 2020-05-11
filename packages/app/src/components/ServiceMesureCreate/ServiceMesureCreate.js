@@ -6,12 +6,13 @@ import { Box, Flex } from "rebass";
 
 import { getLocation } from "../../query-service/LocationQueryService";
 import { formatTribunauxOptions } from "../../util";
+import { GET_SERVICE_USERS } from "../UserContext/queries";
 import { ADD_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
 import { ServiceMesureCreateForm } from "./ServiceMesureCreateForm";
 
 export const ServiceMesureCreate = props => {
-  const { service } = props;
+  const { service, userId } = props;
   const { service_antennes } = service;
   const client = useApolloClient();
 
@@ -25,7 +26,17 @@ export const ServiceMesureCreate = props => {
     options: { refetchQueries: ["mesures", "mesures_aggregate"] },
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
-      await recalculateServiceMesure({ variables: { service_id: mesure.service_id } });
+      await recalculateServiceMesure({
+        variables: { service_id: mesure.service_id },
+        refetchQueries: [
+          {
+            query: GET_SERVICE_USERS,
+            variables: {
+              userId
+            }
+          }
+        ]
+      });
       await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
         shallow: true
       });
