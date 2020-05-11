@@ -9,6 +9,7 @@ import { MesureContext } from "../MesureContext";
 import { EDIT_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
 import { SERVICE, SERVICE_TRIBUNAL } from "../ServiceMesures/queries";
 import { UserContext } from "../UserContext";
+import { GET_SERVICE_USERS } from "../UserContext/queries";
 import { ServiceMesureEditForm } from "./ServiceMesureEditForm";
 import { ServiceMesureEditStyle } from "./style";
 
@@ -16,7 +17,7 @@ const ServiceMesureEdit = props => {
   const client = useApolloClient();
   const mesure = useContext(MesureContext);
   const { serviceId, id } = mesure;
-  const { service_members } = useContext(UserContext);
+  const { service_members, id: userId } = useContext(UserContext);
   const [
     {
       service: { service_antennes }
@@ -32,6 +33,12 @@ const ServiceMesureEdit = props => {
       {
         query: SERVICE,
         variables: { id: serviceId }
+      },
+      {
+        query: GET_SERVICE_USERS,
+        variables: {
+          userId
+        }
       }
     ]
   });
