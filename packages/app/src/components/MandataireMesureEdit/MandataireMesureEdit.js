@@ -30,7 +30,11 @@ const MandataireMesureEdit = props => {
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
   const [editMesure] = useMutation(EDIT_MESURE, {
     onCompleted: async () => {
-      await recalculateMandataireMesures({ variables: { mandataire_id: mandataireId } });
+      await recalculateMandataireMesures({
+        variables: {
+          mandataire_id: mandataireId
+        }
+      });
     },
     refetchQueries: [
       {
