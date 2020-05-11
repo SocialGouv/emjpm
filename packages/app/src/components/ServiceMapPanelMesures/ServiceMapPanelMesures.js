@@ -32,7 +32,6 @@ const ServiceMapPanelMesures = ({ mesuresIds }) => {
   };
 
   const mesures = useMemo(() => (data ? formatMesureList(data.mesures) : []), [data]);
-
   const count = useMemo(() => (data ? data.mesures_aggregate.aggregate.count : 0), [data]);
   const totalPage = useMemo(() => Math.ceil(count / RESULT_PER_PAGE), [count]);
 
@@ -41,7 +40,7 @@ const ServiceMapPanelMesures = ({ mesuresIds }) => {
   }
 
   if (error) {
-    return <div>Erreur</div>;
+    return <Box p="2">Erreur</Box>;
   }
   return (
     <Box sx={ServiceMapPanelMesuresStyle}>
