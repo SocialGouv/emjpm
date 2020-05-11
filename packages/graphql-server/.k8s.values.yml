@@ -17,6 +17,11 @@ deployment:
     path: /health-check
 
   env:
+    - name: HASURA_GRAPHQL_ADMIN_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: HASURA_GRAPHQL_ADMIN_SECRET
     - name: HASURA_GRAPHQL_URI
       value: "http://${HASURA_SRV_HOST}/v1/graphql"
     - name: PORT

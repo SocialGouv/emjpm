@@ -78,11 +78,17 @@ export class MesureAPI extends AuthDataSource {
       }
     }`;
 
-    const response = await this.post<CountServiceMesuresQueryResult>("/", {
-      operationName: "service_mesures",
-      query,
-      variables: { serviceId }
-    });
+    const response = await this.post<CountServiceMesuresQueryResult>(
+      "/",
+      {
+        operationName: "service_mesures",
+        query,
+        variables: { serviceId }
+      },
+      {
+        headers: this.adminHeader
+      }
+    );
 
     return response;
   }
@@ -112,11 +118,17 @@ export class MesureAPI extends AuthDataSource {
       }
     }`;
 
-    const response = await this.post<CountMandataireMesuresQueryResult>("/", {
-      operationName: "mandataire_mesures",
-      query,
-      variables: { mandataireId }
-    });
+    const response = await this.post<CountMandataireMesuresQueryResult>(
+      "/",
+      {
+        operationName: "mandataire_mesures",
+        query,
+        variables: { mandataireId }
+      },
+      {
+        headers: this.adminHeader
+      }
+    );
     return response;
   }
 
