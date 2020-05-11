@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useMemo, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
@@ -11,13 +11,14 @@ import { MESURES } from "./queries";
 import { MandataireMapPanelMesuresStyle } from "./style";
 const RESULT_PER_PAGE = 20;
 
-const MandataireMapPanelMesures = props => {
+const MandataireMapPanelMesures = ({ mesuresIds }) => {
   const [currentOffset, setCurrentOffset] = useState(0);
 
   const { data, error, loading } = useQuery(MESURES, {
     variables: {
       limit: RESULT_PER_PAGE,
-      offset: currentOffset
+      offset: currentOffset,
+      ids: mesuresIds
     }
   });
 
@@ -27,6 +28,10 @@ const MandataireMapPanelMesures = props => {
     });
   };
 
+  const mesures = useMemo(() => (data ? formatMesureList(data.mesures) : []), [data]);
+  const count = useMemo(() => (data ? data.mesures_aggregate.aggregate.count : 0), [data]);
+  const totalPage = useMemo(() => Math.ceil(count / RESULT_PER_PAGE), [count]);
+
   if (loading) {
     return <Box p="2">Chargement</Box>;
   }
@@ -35,12 +40,8 @@ const MandataireMapPanelMesures = props => {
     return <Box p="2">Erreur</Box>;
   }
 
-  const { count } = data.mesures_aggregate.aggregate;
-  const totalPage = count / RESULT_PER_PAGE;
-  const mesures = formatMesureList(data.mesures);
-
   return (
-    <Box sx={MandataireMapPanelMesuresStyle} {...props}>
+    <Box sx={MandataireMapPanelMesuresStyle}>
       <Scrollbar style={{ width: "100%", height: "100%" }}>
         <Box p="2">
           {mesures.length > 0 ? (

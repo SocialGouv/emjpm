@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const MESURES = gql`
-  query MesuresList($limit: Int, $offset: Int) {
-    mesures_aggregate(where: { status: { _eq: "Mesure en cours" } }) {
+  query MesuresList($limit: Int, $offset: Int, $ids: [Int!]) {
+    mesures_aggregate(where: { id: { _in: $ids } }) {
       aggregate {
         count
       }
@@ -11,7 +11,7 @@ export const MESURES = gql`
       offset: $offset
       limit: $limit
       order_by: { date_ouverture: desc_nulls_first }
-      where: { status: { _eq: "Mesure en cours" } }
+      where: { id: { _in: $ids } }
     ) {
       id
       annee
