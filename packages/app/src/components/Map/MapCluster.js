@@ -11,7 +11,9 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    color: "white",
+    color: "white"
+  },
+  clickable: {
     cursor: "pointer"
   },
   selected: {
@@ -31,14 +33,11 @@ const MapCluster = props => {
       <Marker
         key={coordinates.toString()}
         coordinates={coordinates}
-        style={
-          isSelected
-            ? {
-                ...styles.marker,
-                ...styles.selected
-              }
-            : styles.marker
-        }
+        style={{
+          ...styles.marker,
+          ...(isSelected ? styles.selected : {}),
+          ...(onClusterClick ? styles.clickable : {})
+        }}
         onClick={() => {
           if (onMarkerClick !== undefined) {
             const markers = getLeaves().map(x => ({
@@ -61,14 +60,11 @@ const MapCluster = props => {
       {items.map(({ id, isSelected, longitude, latitude }) => (
         <Marker
           className={isSelected ? "selected" : null}
-          style={
-            isSelected
-              ? {
-                  ...styles.marker,
-                  ...styles.selected
-                }
-              : styles.marker
-          }
+          style={{
+            ...styles.marker,
+            ...(isSelected ? styles.selected : {}),
+            ...(onMarkerClick ? styles.clickable : {})
+          }}
           coordinates={[longitude, latitude]}
           onClick={() => {
             if (onMarkerClick !== undefined) {
