@@ -1,24 +1,29 @@
 import { useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 
-import { MapContainer, MapLayer } from "../Map";
-import { mapImages } from "../Map/utils";
+import { MapCluster, MapContainer } from "../Map";
 import { UserContext } from "../UserContext";
 import { MESURES } from "./queries";
 
-const MandataireMap = () => {
+const MandataireMap = ({ selectMesures, selectedMesuresIds }) => {
   const {
     mandataire: { longitude, latitude }
   } = useContext(UserContext);
 
   const { data, loading, error } = useQuery(MESURES);
 
-  const selectMesure = ({ id }) => {
-    Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
-      shallow: true
-    });
-  };
+  const mesuresMarkers = useMemo(
+    () =>
+      !data
+        ? []
+        : data.mesures.map(mesure => ({
+            id: mesure.id,
+            longitude: mesure.longitude,
+            latitude: mesure.latitude,
+            isSelected: selectedMesuresIds.includes(mesure.id)
+          })),
+    [data, selectedMesuresIds]
+  );
 
   if (loading) {
     return <div>loading...</div>;
@@ -28,14 +33,12 @@ const MandataireMap = () => {
     return <div>error</div>;
   }
 
-  const { mesures: mesuresMarkers } = data;
-
   return (
     <MapContainer latitude={latitude} longitude={longitude}>
-      <MapLayer
+      <MapCluster
         items={mesuresMarkers}
-        image={mapImages["MESURE"]}
-        onMarkerClick={data => selectMesure(data)}
+        onMarkerClick={marker => selectMesures([marker.id])}
+        onClusterClick={markers => selectMesures(markers.map(({ id }) => id))}
         type="MESURE"
       />
     </MapContainer>
