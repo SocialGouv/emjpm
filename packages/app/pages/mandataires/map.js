@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataireMap } from "../../src/components/Layout";
@@ -12,17 +12,20 @@ const MandataireMap = dynamic(
 );
 
 const Map = () => {
+  const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
   return (
     <LayoutMandataireMap>
       <Flex sx={{ height: "100%", position: "absolute", pt: "115px", top: "0", width: "100%" }}>
-        <Box
-          sx={{
-            flexBasis: 600,
-            flexGrow: 1
-          }}
-        >
-          <MandataireMapPanelMesures />
-        </Box>
+        {selectedMesuresIds.length ? (
+          <Box
+            sx={{
+              flexBasis: 600,
+              flexGrow: 1
+            }}
+          >
+            <MandataireMapPanelMesures mesuresIds={selectedMesuresIds} />
+          </Box>
+        ) : null}
         <Box
           height="100%"
           sx={{
@@ -31,7 +34,10 @@ const Map = () => {
             minWidth: 320
           }}
         >
-          <MandataireMap />
+          <MandataireMap
+            selectMesures={ids => setSelectedMesuresIds(ids)}
+            selectedMesuresIds={selectedMesuresIds}
+          />
         </Box>
       </Flex>
     </LayoutMandataireMap>
