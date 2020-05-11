@@ -45,6 +45,8 @@ services:
     env_file: .env.build
     ports:
       - 4001:4001
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: secret
   frontend:
     env_file: .env.build
     build:
