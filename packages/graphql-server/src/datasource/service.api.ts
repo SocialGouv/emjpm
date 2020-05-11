@@ -23,11 +23,17 @@ export class ServiceAPI extends AuthDataSource {
           affected_rows
         }
     }`;
-    const response = await this.post<UpdateServiceMesuresResponse>("/", {
-      operationName: "update_service_mesures",
-      query,
-      variables: { serviceId, awaitingMesures, inprogressMesures }
-    });
+    const response = await this.post<UpdateServiceMesuresResponse>(
+      "/",
+      {
+        operationName: "update_service_mesures",
+        query,
+        variables: { serviceId, awaitingMesures, inprogressMesures }
+      },
+      {
+        headers: this.adminHeader
+      }
+    );
     return response;
   }
 
@@ -42,11 +48,17 @@ export class ServiceAPI extends AuthDataSource {
         affected_rows
       }
     }`;
-    const response = await this.post<UpdateAntenneServiceMesuresResponse>("/", {
-      operationName: "update_service_antenne",
-      query,
-      variables: { id, awaitingMesures, inprogressMesures }
-    });
+    const response = await this.post<UpdateAntenneServiceMesuresResponse>(
+      "/",
+      {
+        operationName: "update_service_antenne",
+        query,
+        variables: { id, awaitingMesures, inprogressMesures }
+      },
+      {
+        headers: this.adminHeader
+      }
+    );
     return response;
   }
 }
