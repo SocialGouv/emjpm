@@ -170,6 +170,7 @@ tables:
             user:
               id:
                 _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: ti
     permission:
@@ -295,6 +296,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
       set:
         user_id: x-hasura-User-Id
 - table:
@@ -366,26 +368,33 @@ tables:
           user_id:
             _eq: X-Hasura-User-Id
       columns:
-      - id
-      - mandataire_id
-      - estimation_etp
-      - secretaire_specialise
-      - secretaire_specialise_etp
-      - cumul_prepose
-      - cumul_prepose_etp
       - cumul_delegue_service
-      - cumul_delegue_service_etp
+      - cumul_prepose
       - debut_activite_avant_2009
-      - annee_debut_activite
+      - secretaire_specialise
       - annee_agrement
-      - cnc_mjpm_annee_obtention
-      - cnc_mjpm_heure_formation
-      - cnc_maj_annee_obtention
-      - cnc_maj_heure_formation
+      - annee_debut_activite
       - cnc_dpf_annee_obtention
       - cnc_dpf_heure_formation
+      - cnc_maj_annee_obtention
+      - cnc_maj_heure_formation
+      - cnc_mjpm_annee_obtention
+      - cnc_mjpm_heure_formation
+      - id
+      - mandataire_id
       - niveau_qualification
       - niveau_qualification_secretaire_spe
+      - ps_aah
+      - ps_als_apl
+      - ps_apa
+      - ps_asi
+      - ps_aspa
+      - ps_pch
+      - ps_rsa
+      - cumul_delegue_service_etp
+      - cumul_prepose_etp
+      - estimation_etp
+      - secretaire_specialise_etp
   select_permissions:
   - role: individuel
     permission:
@@ -410,6 +419,13 @@ tables:
       - cnc_dpf_heure_formation
       - niveau_qualification
       - niveau_qualification_secretaire_spe
+      - ps_aah
+      - ps_pch
+      - ps_asi
+      - ps_rsa
+      - ps_als_apl
+      - ps_aspa
+      - ps_apa
       filter:
         mandataire:
           user_id:
@@ -418,30 +434,38 @@ tables:
   - role: individuel
     permission:
       columns:
-      - id
-      - mandataire_id
-      - estimation_etp
-      - secretaire_specialise
-      - secretaire_specialise_etp
-      - cumul_prepose
-      - cumul_prepose_etp
       - cumul_delegue_service
-      - cumul_delegue_service_etp
+      - cumul_prepose
       - debut_activite_avant_2009
-      - annee_debut_activite
+      - secretaire_specialise
       - annee_agrement
-      - cnc_mjpm_annee_obtention
-      - cnc_mjpm_heure_formation
-      - cnc_maj_annee_obtention
-      - cnc_maj_heure_formation
+      - annee_debut_activite
       - cnc_dpf_annee_obtention
       - cnc_dpf_heure_formation
+      - cnc_maj_annee_obtention
+      - cnc_maj_heure_formation
+      - cnc_mjpm_annee_obtention
+      - cnc_mjpm_heure_formation
+      - id
+      - mandataire_id
       - niveau_qualification
       - niveau_qualification_secretaire_spe
+      - ps_aah
+      - ps_als_apl
+      - ps_apa
+      - ps_asi
+      - ps_aspa
+      - ps_pch
+      - ps_rsa
+      - cumul_delegue_service_etp
+      - cumul_prepose_etp
+      - estimation_etp
+      - secretaire_specialise_etp
       filter:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: enquete_preposes
@@ -674,6 +698,7 @@ tables:
       - last_update
       - type
       filter: {}
+      check: null
 - table:
     schema: public
     name: enquete_services
@@ -739,6 +764,7 @@ tables:
       - annee
       - status
       filter: {}
+      check: null
 - table:
     schema: public
     name: etablissements
@@ -914,6 +940,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: individuel
     permission:
@@ -964,6 +991,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: individuel_exercices
@@ -1007,6 +1035,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: individuel_formations
@@ -1052,6 +1081,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: magistrat
@@ -1126,6 +1156,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: prepose
     permission:
@@ -1349,6 +1380,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -1375,12 +1407,14 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: ti
     permission:
       columns:
       - mesures_en_attente
       - mesures_en_cours
       filter: {}
+      check: null
 - table:
     schema: public
     name: mesures
@@ -1746,6 +1780,7 @@ tables:
           user:
             id:
               _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -1780,6 +1815,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   - role: service
     permission:
       columns:
@@ -1813,6 +1849,7 @@ tables:
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -1846,6 +1883,7 @@ tables:
           magistrats:
             user_id:
               _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: individuel
     permission:
@@ -1979,6 +2017,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   event_triggers:
   - name: import
     definition:
@@ -2430,12 +2469,14 @@ tables:
       - name
       - service_id
       filter: {}
+      check: null
   - role: ti
     permission:
       columns:
       - mesures_awaiting
       - mesures_in_progress
       filter: {}
+      check: null
   delete_permissions:
   - role: service
     permission:
@@ -2534,6 +2575,7 @@ tables:
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
+      check: null
   delete_permissions:
   - role: service
     permission:
@@ -2585,6 +2627,7 @@ tables:
       filter:
         service_id:
           _eq: x-hasura-service-id
+      check: null
 - table:
     schema: public
     name: service_tis
@@ -2734,6 +2777,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-Service-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -2742,6 +2786,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       filter: {}
+      check: null
 - table:
     schema: public
     name: tis
@@ -3262,6 +3307,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: individuel
     permission:
       columns:
@@ -3281,6 +3327,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -3300,6 +3347,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: service
     permission:
       columns:
@@ -3319,6 +3367,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -3338,6 +3387,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   event_triggers:
   - name: email-account-validation
     definition:

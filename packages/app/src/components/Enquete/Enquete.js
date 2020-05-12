@@ -26,7 +26,6 @@ export const Enquete = ({ id }) => {
 
   return (
     <Fragment>
-      {/* <Heading1 mb={5}>Enquête {enquete.annee}</Heading1> */}
       {type === "individuel" && <EnqueteIndividuel mandataireId={mandataire.id} enqueteId={id} />}
     </Fragment>
   );
