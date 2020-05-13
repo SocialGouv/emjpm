@@ -1,5 +1,5 @@
 {
-  "extends": ["github>SocialGouv/renovate-config", "group:all"],
+  "extends": ["github>SocialGouv/renovate-config", "group:allNonMajor"],
   "gitlabci": {
     "fileMatch": ["\\.gitlab-ci.yml$", "\\.gitlab-ci/stages/notify.yml"]
   }
