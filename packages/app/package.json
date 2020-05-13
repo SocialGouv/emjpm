@@ -66,7 +66,7 @@
     "react-table": "^7.0.0",
     "rebass": "^4.0.7",
     "recharts": "^1.7.1",
-    "styled-components": "^4.4.1",
+    "styled-components": "^5.1.0",
     "theme-ui": "^0.2.33",
     "xlsx": "^0.14.3",
     "yup": "^0.27.0"
