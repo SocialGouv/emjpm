@@ -56,7 +56,7 @@
     "jest-cli": "^24.9.0",
     "jest-environment-knex": "^1.1.5",
     "nodemailer-mock": "^1.4.4",
-    "nodemon": "^1.19.4",
+    "nodemon": "^2.0.3",
     "pg": "^7.11.0",
     "pg-query-stream": "^2.0.1",
     "pino-pretty": "^3.6.1",
