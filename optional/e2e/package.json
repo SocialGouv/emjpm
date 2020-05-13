@@ -11,7 +11,7 @@
   "keywords": [],
   "license": "Apache-2.0",
   "dependencies": {
-    "cypress": "^3.8.0"
+    "cypress": "^4.5.0"
   },
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^0.11.1",
