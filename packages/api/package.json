@@ -39,7 +39,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "passport-stub": "^1.1.1",
-    "pino": "^5.17.0",
+    "pino": "^6.2.1",
     "query-string": "^6.12.1",
     "rand-token": "^0.4.0",
     "rasha": "^1.2.5",

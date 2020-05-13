@@ -21,7 +21,7 @@
     "koa-bodyparser": "^4.3.0",
     "lodash": "^4.17.15",
     "node-fetch": "^2.6.0",
-    "pino": "^5.17.0"
+    "pino": "^6.2.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.13.5",
@@ -37,7 +37,7 @@
     "@types/lodash": "^4.14.150",
     "@types/node": "^12.12.39",
     "@types/node-fetch": "^2.5.7",
-    "@types/pino": "^5.20.0",
+    "@types/pino": "^6.0.1",
     "@zeit/ncc": "^0.22.1",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
