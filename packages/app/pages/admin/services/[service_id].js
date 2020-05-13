@@ -7,7 +7,7 @@ import { AdminServiceMesures } from "../../../src/components/AdminServices";
 import { AdminEditService } from "../../../src/components/AdminServices/AdminEditService";
 import { AdminServiceInformations } from "../../../src/components/AdminServices/AdminServiceInformations";
 import { LayoutAdmin } from "../../../src/components/Layout";
-import { MesureImportServiceWrapper } from "../../../src/components/MesureImport";
+import { MesureImportPanel } from "../../../src/components/MesureImport";
 import { withAuthSync } from "../../../src/util/auth";
 
 const Service = props => {
@@ -39,7 +39,7 @@ const Service = props => {
           </TabPanel>
           <TabPanel>
             <Heading4 mb={2}>Selectionnez le fichier</Heading4>
-            <MesureImportServiceWrapper serviceId={serviceId} />
+            <MesureImportPanel serviceId={serviceId} />
           </TabPanel>
         </Tabs>
       </BoxWrapper>

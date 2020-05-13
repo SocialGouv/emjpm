@@ -170,6 +170,7 @@ tables:
             user:
               id:
                 _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: ti
     permission:
@@ -295,6 +296,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
       set:
         user_id: x-hasura-User-Id
 - table:
@@ -440,6 +442,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: enquete_reponses
@@ -507,6 +510,7 @@ tables:
       - annee
       - status
       filter: {}
+      check: null
 - table:
     schema: public
     name: etablissements
@@ -682,6 +686,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: individuel
     permission:
@@ -732,6 +737,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: individuel_exercices
@@ -775,6 +781,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: individuel_formations
@@ -820,6 +827,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: magistrat
@@ -894,6 +902,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: prepose
     permission:
@@ -1117,6 +1126,7 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -1143,12 +1153,14 @@ tables:
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: ti
     permission:
       columns:
       - mesures_en_attente
       - mesures_en_cours
       filter: {}
+      check: null
 - table:
     schema: public
     name: mesures
@@ -1514,6 +1526,7 @@ tables:
           user:
             id:
               _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -1548,6 +1561,7 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
   - role: service
     permission:
       columns:
@@ -1581,6 +1595,7 @@ tables:
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -1614,6 +1629,7 @@ tables:
           magistrats:
             user_id:
               _eq: X-Hasura-User-Id
+      check: null
   delete_permissions:
   - role: individuel
     permission:
@@ -1661,103 +1677,6 @@ tables:
       interval_sec: 10
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
-- table:
-    schema: public
-    name: mesures_import
-  object_relationships:
-  - name: service_antenne
-    using:
-      foreign_key_constraint_on: antenne_id
-  - name: user
-    using:
-      foreign_key_constraint_on: user_id
-  insert_permissions:
-  - role: individuel
-    permission:
-      check: {}
-      set:
-        user_id: x-hasura-User-Id
-      columns:
-      - id
-      - created_at
-      - processed_at
-      - content
-      - file_name
-      - file_size
-      - file_type
-      - status
-      - user_id
-      - antenne_id
-  - role: prepose
-    permission:
-      check: {}
-      set:
-        user_id: x-hasura-User-Id
-      columns:
-      - antenne_id
-      - file_size
-      - id
-      - user_id
-      - content
-      - created_at
-      - processed_at
-      - file_name
-      - file_type
-      - status
-  - role: service
-    permission:
-      check: {}
-      set:
-        user_id: x-hasura-User-Id
-      columns:
-      - antenne_id
-      - content
-      - created_at
-      - file_name
-      - file_size
-      - file_type
-      - id
-      - processed_at
-      - service_id
-      - status
-      - user_id
-  select_permissions:
-  - role: service
-    permission:
-      columns:
-      - antenne_id
-      - file_size
-      - id
-      - user_id
-      - content
-      - created_at
-      - processed_at
-      - file_name
-      - file_type
-      - status
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-  update_permissions:
-  - role: service
-    permission:
-      columns:
-      - processed_at
-      - status
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-  event_triggers:
-  - name: import
-    definition:
-      enable_manual: false
-      insert:
-        columns: '*'
-    retry_conf:
-      num_retries: 0
-      interval_sec: 10
-      timeout_sec: 60
-    webhook_from_env: WEB_HOOK_URL_MESURES_IMPORT
 - table:
     schema: public
     name: regions
@@ -2198,12 +2117,14 @@ tables:
       - name
       - service_id
       filter: {}
+      check: null
   - role: ti
     permission:
       columns:
       - mesures_awaiting
       - mesures_in_progress
       filter: {}
+      check: null
   delete_permissions:
   - role: service
     permission:
@@ -2302,6 +2223,7 @@ tables:
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
+      check: null
   delete_permissions:
   - role: service
     permission:
@@ -2353,6 +2275,7 @@ tables:
       filter:
         service_id:
           _eq: x-hasura-service-id
+      check: null
 - table:
     schema: public
     name: service_tis
@@ -2502,6 +2425,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-Service-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -2510,6 +2434,7 @@ tables:
       - mesures_awaiting
       - mesures_in_progress
       filter: {}
+      check: null
 - table:
     schema: public
     name: tis
@@ -3030,6 +2955,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: individuel
     permission:
       columns:
@@ -3049,6 +2975,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: prepose
     permission:
       columns:
@@ -3068,6 +2995,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: service
     permission:
       columns:
@@ -3087,6 +3015,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   - role: ti
     permission:
       columns:
@@ -3106,6 +3035,7 @@ tables:
       filter:
         id:
           _eq: X-Hasura-User-Id
+      check: null
   event_triggers:
   - name: email-account-validation
     definition:
@@ -3493,3 +3423,33 @@ remote_schemas:
     url_from_env: WHATEVER_URL
     timeout_seconds: 60
     forward_client_headers: true
+actions:
+- name: upload_mesures_file
+  definition:
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/upload'
+    output_type: FileOutput
+    forward_client_headers: true
+    arguments:
+    - name: name
+      type: String!
+    - name: type
+      type: String!
+    - name: base64str
+      type: String!
+    - name: antennesMap
+      type: String
+    - name: serviceId
+      type: Int
+    - name: mandataireUserId
+      type: Int
+    type: mutation
+    kind: synchronous
+  permissions:
+  - role: individuel
+  - role: service
+custom_types:
+  objects:
+  - name: FileOutput
+    fields:
+    - name: data
+      type: String!

@@ -8,7 +8,7 @@ import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,
   MANDATAIRE_MESURE_IMPORT_TEMPLATE
 } from "../../constants/import";
-import { MandataireAddMesureImport } from "./MandataireAddMesureImport";
+import { MesureImportPanel } from "../MesureImport";
 
 const DocumentLink = props => {
   const { children, document } = props;
@@ -34,7 +34,7 @@ const DocumentLink = props => {
   );
 };
 
-const MandataireMesureImport = () => {
+const MandataireMesureImport = ({ mandataireUserId }) => {
   return (
     <Fragment>
       <Card mb="5">
@@ -70,7 +70,7 @@ const MandataireMesureImport = () => {
             <Text mb="1" lineHeight="2">
               {`Utilisez le cadre ci-dessous pour nous transmettre votre tableau csv ou excel de mesures. Si vous rencontrez des difficultés, vous pouvez nous envoyer un mail avec votre tableau en pièce-jointe à contact@emjpm.beta.gouv.fr. Nous le vérifierons, le mettrons en page et nous vous le renverrons pour que vous puissiez l’importer.`}
             </Text>
-            <MandataireAddMesureImport />
+            <MesureImportPanel mandataireUserId={mandataireUserId} />
           </Box>
         </Flex>
       </Card>
