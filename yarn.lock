@@ -15814,15 +15814,6 @@ objection-db-errors@^1.1.2:
   dependencies:
     db-errors "^0.2.1"
 
-objection@^1.6.11:
-  version "1.6.11"
-  resolved "https://registry.yarnpkg.com/objection/-/objection-1.6.11.tgz#6755c15300277eee76c44faf4295704d8e2e02e2"
-  integrity sha512-/W6iR6+YvFg1U4k5DyX1MrY+xqodDM8AAOU1J0b3HlptsNw8V3uDHjZgTi1cFPPe5+ZeTTMvhIFhNiUP6+nqYQ==
-  dependencies:
-    ajv "^6.10.0"
-    bluebird "^3.5.5"
-    lodash "^4.17.11"
-
 objection@^2.1.3:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/objection/-/objection-2.1.3.tgz#ca90675d4f6489766bbbf806af973d86aaf6036f"
