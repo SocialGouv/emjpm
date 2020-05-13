@@ -6,6 +6,7 @@
     "start": "node dist/index.js",
     "build": "ncc build src/start.js --source-map -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
     "dev": "nodemon src/start.js --inspect",
+    "dev:knex-debug-query": "DEBUG=knex:query nodemon src/start.js --inspect",
     "test": "NODE_ENV=test jest --maxWorkers=2",
     "lint": "eslint __test__ src",
     "lint:fix": "eslint . --fix",
@@ -41,7 +42,10 @@
     "pino": "^5.17.0",
     "query-string": "^6.11.1",
     "rand-token": "^0.4.0",
-    "rasha": "^1.2.5"
+    "rasha": "^1.2.5",
+    "tmp": "^0.2.1",
+    "xlsx": "^0.16.0",
+    "yup": "^0.28.5"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
