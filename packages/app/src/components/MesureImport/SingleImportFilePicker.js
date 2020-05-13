@@ -2,7 +2,7 @@ import { Input } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
-const MandataireMesureImportFilepicker = props => {
+const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
   return (
     <Box mb="2">
       <Input
@@ -11,12 +11,13 @@ const MandataireMesureImportFilepicker = props => {
         name="file"
         value=""
         onChange={event => {
-          props.handleFileChosen(event.currentTarget.files[0]);
+          const file = event.currentTarget.files[0];
+          onFileChosen(file);
         }}
-        placeholder="Sélectionner votre fichier excel"
+        placeholder={placeholder}
       />
     </Box>
   );
 };
 
-export { MandataireMesureImportFilepicker };
+export { SingleImportFilePicker };

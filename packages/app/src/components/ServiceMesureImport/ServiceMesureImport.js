@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Text } from "@emjpm/ui";
 import { FileExcel } from "@styled-icons/fa-regular/FileExcel";
 import { FilePdf } from "@styled-icons/fa-regular/FilePdf";
@@ -9,26 +8,10 @@ import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,
   MANDATAIRE_MESURE_IMPORT_TEMPLATE
 } from "../../constants/import";
-import { MesureImportService } from "../MesureImport";
+import { MesureImportPanel } from "../MesureImport";
 import { DocumentLink } from "../MesureImport/DocumentLink";
-import { SERVICE_ANTENNES } from "./queries";
 
-const ServiceMesureImport = props => {
-  const { serviceId } = props;
-  const { data, loading, error } = useQuery(SERVICE_ANTENNES, {
-    variables: { service_id: serviceId }
-  });
-
-  if (loading) {
-    return "Loading...";
-  }
-
-  if (error) {
-    return "Error...";
-  }
-
-  const { antennes } = data;
-
+const ServiceMesureImport = ({ serviceId }) => {
   return (
     <Fragment>
       <Card mb="5">
@@ -64,7 +47,7 @@ const ServiceMesureImport = props => {
             <Text mb="1" lineHeight="2">
               {`Utilisez le cadre ci-dessous pour nous transmettre votre tableau csv ou excel de mesures. Si vous rencontrez des difficultés, vous pouvez nous envoyer un mail avec votre tableau en pièce-jointe à contact@emjpm.beta.gouv.fr. Nous le vérifierons, le mettrons en page et nous vous le renverrons pour que vous puissiez l’importer.`}
             </Text>
-            <MesureImportService serviceId={serviceId} serviceAntennes={antennes} />
+            <MesureImportPanel serviceId={serviceId} />
           </Box>
         </Flex>
       </Card>
