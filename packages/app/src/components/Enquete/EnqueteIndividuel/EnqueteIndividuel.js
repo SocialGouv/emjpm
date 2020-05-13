@@ -16,6 +16,7 @@ import {
   EnqueteIndividuelInformations,
   EnqueteIndividuelInformationsAgrementFormation
 } from "../EnqueteIndividuelInformations";
+import { EnqueteIndividuelPrestationsSociales } from "../EnqueteIndividuelPrestationsSociales";
 import { EnquetePopulationsCuratelle } from "../EnquetePopulations/EnquetePopulationsCuratelle";
 import { EnqueteIndividuelWelcome } from "./EnqueteIndividuelWelcome";
 import { ENQUETE_INDIVIDUEL_RESPONSE } from "./queries";
@@ -86,8 +87,8 @@ const MENU_SECTIONS = [
     ]
   },
   {
-    label: "Prestation sociale",
-    steps: [{ label: "Prestation sociale", component: EnquetePopulationsCuratelle }]
+    label: "Prestations sociales",
+    steps: [{ label: "Prestations sociales", component: EnqueteIndividuelPrestationsSociales }]
   },
   {
     steps: [{ label: "Envoi de vos réponses", component: null }]

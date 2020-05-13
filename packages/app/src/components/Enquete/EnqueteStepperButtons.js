@@ -13,11 +13,11 @@ export const EnqueteStepperButtons = props => {
           Suivant
         </Button>
       </Flex>
-      <Box mt={3}>
+      {/* <Box mt={3}>
         <Text color="#404040" sx={{ textDecoration: "underline" }} fontWeight="bold" mr={4}>
           {"Enregistrer et revenir plus tard"}
         </Text>
-      </Box>
+      </Box> */}
     </Flex>
   );
 };

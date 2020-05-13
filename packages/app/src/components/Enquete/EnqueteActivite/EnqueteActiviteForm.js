@@ -9,8 +9,7 @@ import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 const strongStyle = {
   display: "inline-block",
   fontWeight: "bold",
-  color: "#007AD9",
-  fontSize: "20px"
+  color: "#007AD9"
 };
 
 export const EnqueteActiviteForm = props => {

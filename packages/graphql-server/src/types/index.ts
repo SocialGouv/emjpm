@@ -123,39 +123,9 @@ export interface EnqueteIndividuel {
 }
 
 export interface CreateEnqueteIndividuelReponseQueryProps {
-  errors: ApolloError[],
+  errors: ApolloError[];
   data: {
-    insert_enquete_reponses: {
-      returning: {
-        id: number;
-        enquete_id: number;
-        enquete_individuel: EnqueteIndividuel;
-        activite_curatelle_renforcee_etablissement_debut_annee?: number;
-        activite_curatelle_renforcee_etablissement_fin_annee?: number;
-        activite_curatelle_renforcee_domicile_debut_annee?: number;
-        activite_curatelle_renforcee_domicile_fin_annee?: number;
-        activite_curatelle_simple_etablissement_debut_annee?: number;
-        activite_curatelle_simple_etablissement_fin_annee?: number;
-        activite_curatelle_simple_domicile_debut_annee?: number;
-        activite_curatelle_simple_domicile_fin_annee?: number;
-        activite_tutelle_etablissement?: number;
-        activite_tutelle_domicile?: number;
-        activite_accompagnement_judiciaire_etablissement?: number;
-        activite_accompagnement_judiciaire_domicile?: number;
-        activite_curatelle_biens_etablissement?: number;
-        activite_curatelle_biens_domicile?: number;
-        activite_curatelle_personne_etablissement?: number;
-        activite_curatelle_personne_domicile?: number;
-        activite_revisions_main_levee?: number;
-        activite_revisions_masp?: number;
-        activite_revisions_reconduction?: number;
-        activite_revisions_changement?: number;
-        activite_revisions_autre?: number;
-        activite_sorties_main_levee?: number;
-        activite_sorties_deces?: number;
-        activite_sorties_masp?: number;
-      }[];
-    };
+    insert_enquete_reponses: EnqueteReponse;
   };
 }
 
@@ -190,7 +160,7 @@ export interface EnqueteReponse {
 }
 
 export interface EnqueteIndividuelQueryProps {
-  error: ApolloError,
+  error: ApolloError;
   data: {
     enquete_reponses: EnqueteReponse[];
   };
