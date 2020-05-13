@@ -6,7 +6,7 @@ exports.up = async knex => {
       table.timestamp("created_at").defaultTo(knex.fn.now());
       table.timestamp("last_update").defaultTo(knex.fn.now());
 
-      table.integer("annee_agrement".nullable());
+      table.integer("annee_agrement").nullable();
       table.integer("annee_debut_activite").nullable();
       table.integer("cnc_maj_heure_formation").nullable();
       table.integer("cnc_mjpm_heure_formation").nullable();
