@@ -434,46 +434,38 @@ tables:
   - role: individuel
     permission:
       columns:
-      - id
-      - mandataire_id
-      - estimation_etp
-      - secretaire_specialise
-      - secretaire_specialise_etp
-      - cumul_prepose
-      - cumul_prepose_etp
       - cumul_delegue_service
-      - cumul_delegue_service_etp
+      - cumul_prepose
       - debut_activite_avant_2009
-      - annee_debut_activite
+      - secretaire_specialise
       - annee_agrement
-      - cnc_mjpm_annee_obtention
-      - cnc_mjpm_heure_formation
-      - cnc_maj_annee_obtention
-      - cnc_maj_heure_formation
+      - annee_debut_activite
       - cnc_dpf_annee_obtention
       - cnc_dpf_heure_formation
+      - cnc_maj_annee_obtention
+      - cnc_maj_heure_formation
+      - cnc_mjpm_annee_obtention
+      - cnc_mjpm_heure_formation
+      - id
+      - mandataire_id
       - niveau_qualification
       - niveau_qualification_secretaire_spe
+      - ps_aah
+      - ps_als_apl
+      - ps_apa
+      - ps_asi
+      - ps_aspa
+      - ps_pch
+      - ps_rsa
+      - cumul_delegue_service_etp
+      - cumul_prepose_etp
+      - estimation_etp
+      - secretaire_specialise_etp
       filter:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
       check: null
-- table:
-    schema: public
-    name: enquete_preposes
-  object_relationships:
-  - name: mandataire
-    using:
-      foreign_key_constraint_on: mandataire_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: prepose_id
-        table:
-          schema: public
-          name: enquete_reponses
 - table:
     schema: public
     name: enquete_preposes
