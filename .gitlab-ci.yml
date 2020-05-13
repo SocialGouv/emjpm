@@ -94,7 +94,7 @@ stages:
 
 .base_yarn_workspace_install:
   extends: .prepare_stage
-  image: node:12-alpine
+  image: node:14-alpine
   interruptible: true
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
@@ -202,7 +202,7 @@ Install ui:
 
 Lint @emjpm/api:
   extends: .quality_stage
-  image: node:12-alpine
+  image: node:14-alpine
   dependencies:
     - Install api
   needs:
@@ -214,7 +214,7 @@ Lint @emjpm/api:
 
 Lint @emjpm/app:
   extends: .build_stage
-  image: node:12-alpine
+  image: node:14-alpine
   dependencies:
     - Install app
     - Build @emjpm/ui
@@ -228,7 +228,7 @@ Lint @emjpm/app:
 
 Lint @emjpm/ui:
   extends: .quality_stage
-  image: node:12-alpine
+  image: node:14-alpine
   dependencies:
     - Install ui
   needs:
@@ -244,7 +244,7 @@ Lint @emjpm/graphql-server:
     - Install graphql-server
   needs:
     - Install graphql-server
-  image: node:12-alpine
+  image: node:14-alpine
   script:
     - yarn workspace @emjpm/graphql-server lint
 
@@ -260,7 +260,7 @@ Lint @emjpm/graphql-server:
 
 Test @emjpm/api:
   extends: .quality_stage
-  image: node:12-alpine
+  image: node:14-alpine
   dependencies:
     - Install api
   needs:
@@ -350,7 +350,7 @@ Build @emjpm/api:
     - Install api
   needs:
     - Install api
-  image: node:12-alpine
+  image: node:14-alpine
   script:
     - yarn workspace @emjpm/api build
   artifacts:
@@ -370,7 +370,7 @@ Build @emjpm/app:
   needs:
     - Install app
     - Build @emjpm/ui
-  image: node:12-alpine
+  image: node:14-alpine
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
     paths:
@@ -390,7 +390,7 @@ Build @emjpm/graphql-server:
     - Install graphql-server
   needs:
     - Install graphql-server
-  image: node:12-alpine
+  image: node:14-alpine
   script:
     - yarn workspace @emjpm/graphql-server build
   artifacts:
@@ -408,7 +408,7 @@ Build @emjpm/ui:
     - Install ui
   variables:
     CONTEXT: ui
-  image: node:12-alpine
+  image: node:14-alpine
   script:
     - yarn workspace @emjpm/${CONTEXT} build
   artifacts:
@@ -872,7 +872,7 @@ Delete useless k8s namespaces:
 Release:
   stage: Notify Finished Deployment
   dependencies: []
-  image: node:12.16-alpine3.10
+  image: node:14.2-alpine3.10
   variables:
     LERNA_ARGS: --force-publish --yes
     #
