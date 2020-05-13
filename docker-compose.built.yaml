@@ -53,10 +53,10 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: secret
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/api/v2/auth/jwks"}'
       WHATEVER_URL: http://graphql-server:4001/graphql
+      HASURA_WEB_HOOK_BASE_URL: http://api:4000
       WEB_HOOK_URL_EMAIL_RESERVATION: http://api:4000/webhook/email-reservation
       WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION: http://api:4000/webhook/email-cancel-reservation
       WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION: http://api:4000/webhook/email-account-validation
-      WEB_HOOK_URL_MESURES_IMPORT: http://api:4000/webhook/mesures-import
       WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION: http://api:4000/webhook/email-service-member-invitation
       WEB_HOOK_URL_TOKEN_REQUEST: http://api:4000/webhook/token-request
 

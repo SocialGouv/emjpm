@@ -74,6 +74,11 @@ app.get("/json", function(req, res) {
   });
 });
 
+app.use(
+  "/hasura/actions",
+  require("./routes/hasura/hasura-action-handlers.routes.js")
+);
+
 // error handler
 app.use(errorHandler);
 
