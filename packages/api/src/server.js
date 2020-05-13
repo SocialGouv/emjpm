@@ -76,6 +76,7 @@ app.get("/json", function(req, res) {
 
 app.use(
   "/hasura/actions",
+  [passport.authenticate("jwt", { session: false })],
   require("./routes/hasura/hasura-action-handlers.routes.js")
 );
 

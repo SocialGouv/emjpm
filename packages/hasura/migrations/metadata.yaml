@@ -3428,6 +3428,7 @@ actions:
   definition:
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/upload'
     output_type: FileOutput
+    forward_client_headers: true
     arguments:
     - name: name
       type: String!
