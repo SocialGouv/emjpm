@@ -347,19 +347,17 @@ tables:
       filter: {}
 - table:
     schema: public
-    name: enquete_individuels
+    name: enquete_reponses
   object_relationships:
+  - name: enquete
+    using:
+      foreign_key_constraint_on: enquete_id
+  - name: enquete_service
+    using:
+      foreign_key_constraint_on: service_id
   - name: mandataire
     using:
       foreign_key_constraint_on: mandataire_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: individuel_id
-        table:
-          schema: public
-          name: enquete_reponses
   insert_permissions:
   - role: individuel
     permission:
@@ -368,64 +366,42 @@ tables:
           user_id:
             _eq: X-Hasura-User-Id
       columns:
-      - cumul_delegue_service
-      - cumul_prepose
-      - debut_activite_avant_2009
-      - secretaire_specialise
-      - annee_agrement
-      - annee_debut_activite
-      - cnc_dpf_annee_obtention
-      - cnc_dpf_heure_formation
-      - cnc_maj_annee_obtention
-      - cnc_maj_heure_formation
-      - cnc_mjpm_annee_obtention
-      - cnc_mjpm_heure_formation
-      - id
+      - enquete_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_prestations_sociale_id
       - mandataire_id
-      - niveau_qualification
-      - niveau_qualification_secretaire_spe
-      - ps_aah
-      - ps_als_apl
-      - ps_apa
-      - ps_asi
-      - ps_aspa
-      - ps_pch
-      - ps_rsa
-      - cumul_delegue_service_etp
-      - cumul_prepose_etp
-      - estimation_etp
-      - secretaire_specialise_etp
+      - service_id
+      - submitted_at
+      backend_only: false
   select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - enquete_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_prestations_sociale_id
+      - mandataire_id
+      - service_id
+      - submitted_at
+      filter: {}
   - role: individuel
     permission:
       columns:
-      - id
+      - submitted_at
+      - enquete_id
       - mandataire_id
-      - estimation_etp
-      - secretaire_specialise
-      - secretaire_specialise_etp
-      - cumul_prepose
-      - cumul_prepose_etp
-      - cumul_delegue_service
-      - cumul_delegue_service_etp
-      - debut_activite_avant_2009
-      - annee_debut_activite
-      - annee_agrement
-      - cnc_mjpm_annee_obtention
-      - cnc_mjpm_heure_formation
-      - cnc_maj_annee_obtention
-      - cnc_maj_heure_formation
-      - cnc_dpf_annee_obtention
-      - cnc_dpf_heure_formation
-      - niveau_qualification
-      - niveau_qualification_secretaire_spe
-      - ps_aah
-      - ps_pch
-      - ps_asi
-      - ps_rsa
-      - ps_als_apl
-      - ps_aspa
-      - ps_apa
+      - service_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_prestations_sociale_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_populations_id
       filter:
         mandataire:
           user_id:
@@ -434,33 +410,15 @@ tables:
   - role: individuel
     permission:
       columns:
-      - cumul_delegue_service
-      - cumul_prepose
-      - debut_activite_avant_2009
-      - secretaire_specialise
-      - annee_agrement
-      - annee_debut_activite
-      - cnc_dpf_annee_obtention
-      - cnc_dpf_heure_formation
-      - cnc_maj_annee_obtention
-      - cnc_maj_heure_formation
-      - cnc_mjpm_annee_obtention
-      - cnc_mjpm_heure_formation
-      - id
+      - enquete_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_prestations_sociale_id
       - mandataire_id
-      - niveau_qualification
-      - niveau_qualification_secretaire_spe
-      - ps_aah
-      - ps_als_apl
-      - ps_apa
-      - ps_asi
-      - ps_aspa
-      - ps_pch
-      - ps_rsa
-      - cumul_delegue_service_etp
-      - cumul_prepose_etp
-      - estimation_etp
-      - secretaire_specialise_etp
+      - service_id
+      - submitted_at
       filter:
         mandataire:
           user_id:
@@ -468,237 +426,161 @@ tables:
       check: null
 - table:
     schema: public
-    name: enquete_preposes
-  object_relationships:
-  - name: mandataire
-    using:
-      foreign_key_constraint_on: mandataire_id
+    name: enquete_reponses_activite
   array_relationships:
   - name: enquete_reponses
     using:
       foreign_key_constraint_on:
-        column: prepose_id
+        column: enquete_reponses_activite_id
         table:
           schema: public
           name: enquete_reponses
-- table:
-    schema: public
-    name: enquete_reponses
-  object_relationships:
-  - name: enquete
-    using:
-      foreign_key_constraint_on: enquete_id
-  - name: enquete_individuel
-    using:
-      foreign_key_constraint_on: individuel_id
-  - name: enquete_prepose
-    using:
-      foreign_key_constraint_on: prepose_id
-  - name: enquete_service
-    using:
-      foreign_key_constraint_on: service_id
   insert_permissions:
   - role: individuel
     permission:
-      check: {}
+      check:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
       columns:
-      - activite_accompagnement_judiciaire_domicile_debut_annee
-      - activite_accompagnement_judiciaire_domicile_fin_annee
-      - activite_accompagnement_judiciaire_etablissement_debut_annee
-      - activite_accompagnement_judiciaire_etablissement_fin_annee
-      - activite_curatelle_biens_domicile_debut_annee
-      - activite_curatelle_biens_domicile_fin_annee
-      - activite_curatelle_biens_etablissement_debut_annee
-      - activite_curatelle_biens_etablissement_fin_annee
-      - activite_curatelle_personne_domicile_debut_annee
-      - activite_curatelle_personne_domicile_fin_annee
-      - activite_curatelle_personne_etablissement_debut_annee
-      - activite_curatelle_personne_etablissement_fin_annee
-      - activite_curatelle_renforcee_domicile_debut_annee
-      - activite_curatelle_renforcee_domicile_fin_annee
-      - activite_curatelle_renforcee_etablissement_debut_annee
-      - activite_curatelle_renforcee_etablissement_fin_annee
-      - activite_curatelle_simple_domicile_debut_annee
-      - activite_curatelle_simple_domicile_fin_annee
-      - activite_curatelle_simple_etablissement_debut_annee
-      - activite_curatelle_simple_etablissement_fin_annee
-      - activite_revisions_autre
-      - activite_revisions_changement
-      - activite_revisions_main_levee
-      - activite_revisions_masp
-      - activite_revisions_reconduction
-      - activite_sorties_deces
-      - activite_sorties_main_levee
-      - activite_sorties_masp
-      - activite_tutelle_domicile_debut_annee
-      - activite_tutelle_domicile_fin_annee
-      - activite_tutelle_etablissement_debut_annee
-      - activite_tutelle_etablissement_fin_annee
-      - enquete_id
+      - accompagnement_judiciaire_domicile_debut_annee
+      - accompagnement_judiciaire_domicile_fin_annee
+      - accompagnement_judiciaire_etablissement_debut_annee
+      - accompagnement_judiciaire_etablissement_fin_annee
+      - curatelle_biens_domicile_debut_annee
+      - curatelle_biens_domicile_fin_annee
+      - curatelle_biens_etablissement_debut_annee
+      - curatelle_biens_etablissement_fin_annee
+      - curatelle_personne_domicile_debut_annee
+      - curatelle_personne_domicile_fin_annee
+      - curatelle_personne_etablissement_debut_annee
+      - curatelle_personne_etablissement_fin_annee
+      - curatelle_renforcee_domicile_debut_annee
+      - curatelle_renforcee_domicile_fin_annee
+      - curatelle_renforcee_etablissement_debut_annee
+      - curatelle_renforcee_etablissement_fin_annee
+      - curatelle_simple_domicile_debut_annee
+      - curatelle_simple_domicile_fin_annee
+      - curatelle_simple_etablissement_debut_annee
+      - curatelle_simple_etablissement_fin_annee
       - id
-      - individuel_id
-      - populations_repartition_age_autre_femme
-      - populations_repartition_age_autre_homme
-      - populations_repartition_age_curatelle_femme
-      - populations_repartition_age_curatelle_homme
-      - populations_repartition_age_sauvegarde_justice_femme
-      - populations_repartition_age_sauvegarde_justice_homme
-      - populations_repartition_age_tpsa_femme
-      - populations_repartition_age_tpsa_homme
-      - populations_repartition_age_tutelle_femme
-      - populations_repartition_age_tutelle_homme
-      - populations_repartition_anciennete_autre_femme
-      - populations_repartition_anciennete_autre_homme
-      - populations_repartition_anciennete_curatelle_femme
-      - populations_repartition_anciennete_curatelle_homme
-      - populations_repartition_anciennete_sauvegarde_justice_femme
-      - populations_repartition_anciennete_sauvegarde_justice_homme
-      - populations_repartition_anciennete_tpsa_femme
-      - populations_repartition_anciennete_tpsa_homme
-      - populations_repartition_anciennete_tutelle_femme
-      - populations_repartition_anciennete_tutelle_homme
-      - populations_repartition_nature_ehpad
-      - populations_repartition_nature_etablissements
-      - populations_repartition_nature_services
-      - prepose_id
-      - service_id
+      - revisions_autre
+      - revisions_changement
+      - revisions_main_levee
+      - revisions_masp
+      - revisions_reconduction
+      - sorties_deces
+      - sorties_main_levee
+      - sorties_masp
+      - tutelle_domicile_debut_annee
+      - tutelle_domicile_fin_annee
+      - tutelle_etablissement_debut_annee
+      - tutelle_etablissement_fin_annee
+      - created_at
       - last_update
-      - type
+      backend_only: false
   select_permissions:
   - role: individuel
     permission:
       columns:
       - id
-      - type
-      - enquete_id
-      - individuel_id
-      - service_id
-      - prepose_id
+      - created_at
       - last_update
-      - activite_curatelle_renforcee_etablissement_debut_annee
-      - activite_curatelle_renforcee_etablissement_fin_annee
-      - activite_curatelle_renforcee_domicile_debut_annee
-      - activite_curatelle_renforcee_domicile_fin_annee
-      - activite_curatelle_simple_etablissement_debut_annee
-      - activite_curatelle_simple_etablissement_fin_annee
-      - activite_curatelle_simple_domicile_debut_annee
-      - activite_curatelle_simple_domicile_fin_annee
-      - activite_tutelle_etablissement_debut_annee
-      - activite_tutelle_etablissement_fin_annee
-      - activite_tutelle_domicile_debut_annee
-      - activite_tutelle_domicile_fin_annee
-      - activite_accompagnement_judiciaire_etablissement_debut_annee
-      - activite_accompagnement_judiciaire_etablissement_fin_annee
-      - activite_accompagnement_judiciaire_domicile_debut_annee
-      - activite_accompagnement_judiciaire_domicile_fin_annee
-      - activite_curatelle_biens_etablissement_debut_annee
-      - activite_curatelle_biens_etablissement_fin_annee
-      - activite_curatelle_biens_domicile_debut_annee
-      - activite_curatelle_biens_domicile_fin_annee
-      - activite_curatelle_personne_etablissement_debut_annee
-      - activite_curatelle_personne_etablissement_fin_annee
-      - activite_curatelle_personne_domicile_debut_annee
-      - activite_curatelle_personne_domicile_fin_annee
-      - activite_revisions_main_levee
-      - activite_revisions_masp
-      - activite_revisions_reconduction
-      - activite_revisions_changement
-      - activite_revisions_autre
-      - activite_sorties_main_levee
-      - activite_sorties_deces
-      - activite_sorties_masp
-      - populations_repartition_age_tutelle_homme
-      - populations_repartition_age_tutelle_femme
-      - populations_repartition_age_curatelle_homme
-      - populations_repartition_age_curatelle_femme
-      - populations_repartition_age_tpsa_homme
-      - populations_repartition_age_tpsa_femme
-      - populations_repartition_age_sauvegarde_justice_homme
-      - populations_repartition_age_sauvegarde_justice_femme
-      - populations_repartition_age_autre_homme
-      - populations_repartition_age_autre_femme
-      - populations_repartition_anciennete_tutelle_homme
-      - populations_repartition_anciennete_tutelle_femme
-      - populations_repartition_anciennete_curatelle_homme
-      - populations_repartition_anciennete_curatelle_femme
-      - populations_repartition_anciennete_tpsa_homme
-      - populations_repartition_anciennete_tpsa_femme
-      - populations_repartition_anciennete_sauvegarde_justice_homme
-      - populations_repartition_anciennete_sauvegarde_justice_femme
-      - populations_repartition_anciennete_autre_homme
-      - populations_repartition_anciennete_autre_femme
-      - populations_repartition_nature_etablissements
-      - populations_repartition_nature_services
-      - populations_repartition_nature_ehpad
-      filter: {}
+      - curatelle_renforcee_etablissement_debut_annee
+      - curatelle_renforcee_etablissement_fin_annee
+      - curatelle_renforcee_domicile_debut_annee
+      - curatelle_renforcee_domicile_fin_annee
+      - curatelle_simple_etablissement_debut_annee
+      - curatelle_simple_etablissement_fin_annee
+      - curatelle_simple_domicile_debut_annee
+      - curatelle_simple_domicile_fin_annee
+      - tutelle_etablissement_debut_annee
+      - tutelle_etablissement_fin_annee
+      - tutelle_domicile_debut_annee
+      - tutelle_domicile_fin_annee
+      - accompagnement_judiciaire_etablissement_debut_annee
+      - accompagnement_judiciaire_etablissement_fin_annee
+      - accompagnement_judiciaire_domicile_debut_annee
+      - accompagnement_judiciaire_domicile_fin_annee
+      - curatelle_biens_etablissement_debut_annee
+      - curatelle_biens_etablissement_fin_annee
+      - curatelle_biens_domicile_debut_annee
+      - curatelle_biens_domicile_fin_annee
+      - curatelle_personne_etablissement_debut_annee
+      - curatelle_personne_etablissement_fin_annee
+      - curatelle_personne_domicile_debut_annee
+      - curatelle_personne_domicile_fin_annee
+      - revisions_main_levee
+      - revisions_masp
+      - revisions_reconduction
+      - revisions_changement
+      - revisions_autre
+      - sorties_main_levee
+      - sorties_deces
+      - sorties_masp
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
   update_permissions:
   - role: individuel
     permission:
       columns:
-      - activite_accompagnement_judiciaire_domicile_debut_annee
-      - activite_accompagnement_judiciaire_domicile_fin_annee
-      - activite_accompagnement_judiciaire_etablissement_debut_annee
-      - activite_accompagnement_judiciaire_etablissement_fin_annee
-      - activite_curatelle_biens_domicile_debut_annee
-      - activite_curatelle_biens_domicile_fin_annee
-      - activite_curatelle_biens_etablissement_debut_annee
-      - activite_curatelle_biens_etablissement_fin_annee
-      - activite_curatelle_personne_domicile_debut_annee
-      - activite_curatelle_personne_domicile_fin_annee
-      - activite_curatelle_personne_etablissement_debut_annee
-      - activite_curatelle_personne_etablissement_fin_annee
-      - activite_curatelle_renforcee_domicile_debut_annee
-      - activite_curatelle_renforcee_domicile_fin_annee
-      - activite_curatelle_renforcee_etablissement_debut_annee
-      - activite_curatelle_renforcee_etablissement_fin_annee
-      - activite_curatelle_simple_domicile_debut_annee
-      - activite_curatelle_simple_domicile_fin_annee
-      - activite_curatelle_simple_etablissement_debut_annee
-      - activite_curatelle_simple_etablissement_fin_annee
-      - activite_revisions_autre
-      - activite_revisions_changement
-      - activite_revisions_main_levee
-      - activite_revisions_masp
-      - activite_revisions_reconduction
-      - activite_sorties_deces
-      - activite_sorties_main_levee
-      - activite_sorties_masp
-      - activite_tutelle_domicile_debut_annee
-      - activite_tutelle_domicile_fin_annee
-      - activite_tutelle_etablissement_debut_annee
-      - activite_tutelle_etablissement_fin_annee
-      - enquete_id
+      - accompagnement_judiciaire_domicile_debut_annee
+      - accompagnement_judiciaire_domicile_fin_annee
+      - accompagnement_judiciaire_etablissement_debut_annee
+      - accompagnement_judiciaire_etablissement_fin_annee
+      - curatelle_biens_domicile_debut_annee
+      - curatelle_biens_domicile_fin_annee
+      - curatelle_biens_etablissement_debut_annee
+      - curatelle_biens_etablissement_fin_annee
+      - curatelle_personne_domicile_debut_annee
+      - curatelle_personne_domicile_fin_annee
+      - curatelle_personne_etablissement_debut_annee
+      - curatelle_personne_etablissement_fin_annee
+      - curatelle_renforcee_domicile_debut_annee
+      - curatelle_renforcee_domicile_fin_annee
+      - curatelle_renforcee_etablissement_debut_annee
+      - curatelle_renforcee_etablissement_fin_annee
+      - curatelle_simple_domicile_debut_annee
+      - curatelle_simple_domicile_fin_annee
+      - curatelle_simple_etablissement_debut_annee
+      - curatelle_simple_etablissement_fin_annee
       - id
-      - individuel_id
-      - populations_repartition_age_autre_femme
-      - populations_repartition_age_autre_homme
-      - populations_repartition_age_curatelle_femme
-      - populations_repartition_age_curatelle_homme
-      - populations_repartition_age_sauvegarde_justice_femme
-      - populations_repartition_age_sauvegarde_justice_homme
-      - populations_repartition_age_tpsa_femme
-      - populations_repartition_age_tpsa_homme
-      - populations_repartition_age_tutelle_femme
-      - populations_repartition_age_tutelle_homme
-      - populations_repartition_anciennete_autre_femme
-      - populations_repartition_anciennete_autre_homme
-      - populations_repartition_anciennete_curatelle_femme
-      - populations_repartition_anciennete_curatelle_homme
-      - populations_repartition_anciennete_sauvegarde_justice_femme
-      - populations_repartition_anciennete_sauvegarde_justice_homme
-      - populations_repartition_anciennete_tpsa_femme
-      - populations_repartition_anciennete_tpsa_homme
-      - populations_repartition_anciennete_tutelle_femme
-      - populations_repartition_anciennete_tutelle_homme
-      - populations_repartition_nature_ehpad
-      - populations_repartition_nature_etablissements
-      - populations_repartition_nature_services
-      - prepose_id
-      - service_id
+      - revisions_autre
+      - revisions_changement
+      - revisions_main_levee
+      - revisions_masp
+      - revisions_reconduction
+      - sorties_deces
+      - sorties_main_levee
+      - sorties_masp
+      - tutelle_domicile_debut_annee
+      - tutelle_domicile_fin_annee
+      - tutelle_etablissement_debut_annee
+      - tutelle_etablissement_fin_annee
+      - created_at
       - last_update
-      - type
-      filter: {}
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
       check: null
+- table:
+    schema: public
+    name: enquete_reponses_agrements_formations
+- table:
+    schema: public
+    name: enquete_reponses_informations_mandataire
+- table:
+    schema: public
+    name: enquete_reponses_populations
+- table:
+    schema: public
+    name: enquete_reponses_prestations_sociales
 - table:
     schema: public
     name: enquete_services
@@ -706,14 +588,6 @@ tables:
   - name: service
     using:
       foreign_key_constraint_on: service_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: service_id
-        table:
-          schema: public
-          name: enquete_reponses
 - table:
     schema: public
     name: enquetes
