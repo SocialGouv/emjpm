@@ -41,7 +41,7 @@
     "passport-stub": "^1.1.1",
     "pino": "^5.17.0",
     "query-string": "^6.12.1",
-    "rand-token": "^0.4.0",
+    "rand-token": "^1.0.1",
     "rasha": "^1.2.5",
     "tmp": "^0.2.1",
     "xlsx": "^0.16.0",
