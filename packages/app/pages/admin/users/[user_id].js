@@ -6,7 +6,7 @@ import { Link as StyledLink } from "rebass";
 import { AdminUserInformations } from "../../../src/components/AdminUsers/AdminUserInformations";
 import AdminUsersMesures from "../../../src/components/AdminUsers/AdminUsersMesures";
 import { LayoutAdmin } from "../../../src/components/Layout";
-import { MesureImportMandataire } from "../../../src/components/MesureImport";
+import { MesureImportPanel } from "../../../src/components/MesureImport";
 import { isMandataire } from "../../../src/util";
 import { withAuthSync } from "../../../src/util/auth";
 
@@ -17,7 +17,7 @@ const UserInformationTabPanel = userId => {
 const MandataireImportTabPanel = userId => (
   <Fragment>
     <Heading4 mb={2}>Selectionnez le fichier</Heading4>
-    <MesureImportMandataire id={userId} />
+    <MesureImportPanel mandataireUserId={userId} />
   </Fragment>
 );
 

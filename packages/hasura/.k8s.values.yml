@@ -32,10 +32,10 @@ deployment:
       value: "${PORT}"
     - name: WHATEVER_URL
       value: "http://${GQL_SERVER_SRV_HOST}/graphql"
+    - name: HASURA_WEB_HOOK_BASE_URL
+      value: "http://${API_SRV_HOST}"
     - name: WEB_HOOK_URL_EMAIL_RESERVATION
       value: "http://${API_SRV_HOST}/webhook/email-reservation"
-    - name: WEB_HOOK_URL_MESURES_IMPORT
-      value: "http://${API_SRV_HOST}/webhook/mesures-import"
     - name: WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION
       value: "http://${API_SRV_HOST}/webhook/email-account-validation"
     - name: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
