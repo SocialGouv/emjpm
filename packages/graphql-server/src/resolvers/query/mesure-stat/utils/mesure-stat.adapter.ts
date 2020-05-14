@@ -24,7 +24,7 @@ export const mesureStatAdapter = {
         return [
           "MAJ",
           "mandat de protection future",
-          "Mesure ad hoc",
+          "mesure ad hoc",
           "Subrogé curateur",
           "Subrogé tuteur"
         ];
@@ -60,7 +60,7 @@ export const mesureStatAdapter = {
         return MesureTypeCategory.CuratelleSimple;
       case "MAJ":
       case "mandat de protection future":
-      case "Mesure ad hoc":
+      case "mesure ad hoc":
       case "Subrogé curateur":
       case "Subrogé tuteur":
         return MesureTypeCategory.Other;

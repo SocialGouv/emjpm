@@ -13,7 +13,7 @@ const MESURE_TYPES = [
   "curatelle simple aux biens et à la personne",
   "MAJ",
   "mandat de protection future",
-  "Mesure ad hoc",
+  "mesure ad hoc",
   "Sauvegarde de justice",
   "Sauvegarde de justice avec mandat spécial",
   "Subrogé curateur",
