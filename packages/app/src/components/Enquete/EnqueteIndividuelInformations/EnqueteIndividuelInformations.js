@@ -8,7 +8,7 @@ import { ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE } from "./queries";
 
 export const EnqueteIndividuelInformations = props => {
   const { goToNextPage, goToPrevPage, enqueteReponse } = props;
-  const { id, enquete_reponses_informations_mandataire_id } = enqueteReponse;
+  const { enquete_reponses_informations_mandataire_id } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE, {
     variables: {
