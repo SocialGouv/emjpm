@@ -1,9 +1,3 @@
-const titleStyle = {
-  color: "mediumGray",
-  fontSize: "2",
-  fontStyle: "italic"
-};
-
 const topTextStyle = {
   color: "mediumGray",
   fontWeight: "600",
@@ -33,4 +27,4 @@ const flexStyle = {
   mt: 5
 };
 
-export { titleStyle, innerTextStyle, topTextStyle, iconTextStyle, boxStyle, flexStyle };
+export { innerTextStyle, topTextStyle, iconTextStyle, boxStyle, flexStyle };
