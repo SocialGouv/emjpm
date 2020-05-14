@@ -24,7 +24,7 @@ export type MesureType =
   | "Sauvegarde de justice"
   | "Sauvegarde de justice avec mandat spécial"
   | "subrogé curateur"
-  | "Subrogé tuteur"
+  | "subrogé tuteur"
   | "Tutelle"
   | "Tutelle à la personne"
   | "Tutelle aux biens"
