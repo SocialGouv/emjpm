@@ -30,8 +30,8 @@ export const mesureStatAdapter = {
         ];
       case MesureTypeCategory.SauvegardeJustice:
         return [
-          "Sauvegarde de justice",
-          "Sauvegarde de justice avec mandat spécial"
+          "sauvegarde de justice",
+          "sauvegarde de justice avec mandat spécial"
         ];
       case MesureTypeCategory.Tutelle:
         return [
@@ -64,8 +64,8 @@ export const mesureStatAdapter = {
       case "subrogé curateur":
       case "subrogé tuteur":
         return MesureTypeCategory.Other;
-      case "Sauvegarde de justice":
-      case "Sauvegarde de justice avec mandat spécial":
+      case "sauvegarde de justice":
+      case "sauvegarde de justice avec mandat spécial":
         return MesureTypeCategory.SauvegardeJustice;
       case "Tutelle":
       case "Tutelle aux biens":

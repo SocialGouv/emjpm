@@ -63,7 +63,7 @@ exports.seed = function(knex) {
         mandataire_id: 1,
         created_at: "2010-10-05",
         annee: "2010-10-05",
-        type: "Sauvegarde de justice",
+        type: "sauvegarde de justice",
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "H",

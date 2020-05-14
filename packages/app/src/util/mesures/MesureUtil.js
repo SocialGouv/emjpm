@@ -20,7 +20,7 @@ const VALUE_LABEL = {
   CURATELLE_RENFORCEE: "curatelle renforcée",
   CURATELLE_SIMPLE: "curatelle simple",
   OTHER: "Autre",
-  SAUVEGARDE_JUSTICE: "Sauvegarde de justice",
+  SAUVEGARDE_JUSTICE: "sauvegarde de justice",
   TOTAL: "Total",
   TUTELLE: "Tutelle"
 };

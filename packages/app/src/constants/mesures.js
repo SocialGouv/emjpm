@@ -12,8 +12,8 @@ export const MESURE_TYPES = [
   "MAJ",
   "mandat de protection future",
   "mesure ad hoc",
-  "Sauvegarde de justice",
-  "Sauvegarde de justice avec mandat spécial",
+  "sauvegarde de justice",
+  "sauvegarde de justice avec mandat spécial",
   "subrogé curateur",
   "subrogé tuteur",
   "Tutelle",
@@ -113,12 +113,12 @@ export const MESURE_TYPE_LABEL_VALUE = [
     value: "mesure ad hoc"
   },
   {
-    label: "Sauvegarde de justice",
-    value: "Sauvegarde de justice"
+    label: "sauvegarde de justice",
+    value: "sauvegarde de justice"
   },
   {
-    label: "Sauvegarde de justice avec mandat spécial",
-    value: "Sauvegarde de justice avec mandat spécial"
+    label: "sauvegarde de justice avec mandat spécial",
+    value: "sauvegarde de justice avec mandat spécial"
   },
   {
     label: "subrogé curateur",
