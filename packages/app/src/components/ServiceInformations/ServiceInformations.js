@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Heading5 } from "@emjpm/ui";
 import { MailOutline } from "@styled-icons/material/MailOutline";
+import { MyLocation } from "@styled-icons/material/MyLocation";
 import { Smartphone } from "@styled-icons/material/Smartphone";
 import PropTypes from "prop-types";
 import React from "react";
@@ -9,14 +10,7 @@ import { Box, Flex, Text } from "rebass";
 import { AccessToken } from "../AccessToken";
 import { LinkButton, ServiceEditLinkButton } from "../Commons";
 import { GET_SERVICES } from "./queries";
-import {
-  boxStyle,
-  flexStyle,
-  iconTextStyle,
-  innerTextStyle,
-  titleStyle,
-  topTextStyle
-} from "./style";
+import { boxStyle, flexStyle, iconTextStyle, innerTextStyle, topTextStyle } from "./style";
 
 const ServiceInformations = props => {
   const { data, error, loading } = useQuery(GET_SERVICES, { fetchPolicy: "cache-and-network" });
@@ -31,20 +25,10 @@ const ServiceInformations = props => {
 
   // first of the array because it should be only one
   const [service] = data.services;
-  const {
-    adresse,
-    competences,
-    code_postal,
-    email,
-    etablissement,
-    service_tis,
-    telephone,
-    ville
-  } = service;
+  const { adresse, competences, email, etablissement, service_tis, telephone } = service;
   return (
     <Box {...props}>
       <Card p="5">
-        <Text sx={titleStyle}>Service</Text>
         <Heading3>{etablissement}</Heading3>
         <Flex sx={flexStyle}>
           <Box sx={boxStyle}>
@@ -53,16 +37,14 @@ const ServiceInformations = props => {
               <MailOutline size="16" />
               <Text sx={iconTextStyle}>{email || "Email non renseigné"}</Text>
             </Flex>
-            <Flex mt="1">
+            <Flex mt="2">
+              <MyLocation size="16" />
+              <Text sx={iconTextStyle}>{adresse}</Text>
+            </Flex>
+            <Flex mt="2">
               <Smartphone size="16" />
               <Text sx={iconTextStyle}>{telephone || "Numero de téléphone non renseigné"}</Text>
             </Flex>
-            <Heading5 mt="5" mb="3">
-              Informations
-            </Heading5>
-            <Text sx={topTextStyle}>{adresse}</Text>
-            <Text sx={innerTextStyle}>{code_postal}</Text>
-            <Text sx={innerTextStyle}>{ville}</Text>
           </Box>
           <Box sx={boxStyle}>
             <Heading5 mb="3">Tribunaux d’instance</Heading5>
