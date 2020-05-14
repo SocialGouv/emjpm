@@ -1,32 +1,32 @@
 export const MESURE_TYPES = [
-  "Curatelle",
-  "Curatelle renforcée",
-  "Curatelle renforcée à la personne",
-  "Curatelle renforcée aux biens",
-  "Curatelle renforcée aux biens et à la personne",
-  "Curatelle simple",
-  "Curatelle simple à la personne",
-  "Curatelle simple aux biens",
-  "Curatelle simple à la personne",
-  "Curatelle simple aux biens et à la personne",
-  "MAJ",
-  "Mandat de protection future",
-  "Mesure ad hoc",
-  "Sauvegarde de justice",
-  "Sauvegarde de justice avec mandat spécial",
-  "Subrogé curateur",
-  "Subrogé tuteur",
-  "Tutelle",
-  "Tutelle à la personne",
-  "Tutelle aux biens",
-  "Tutelle aux biens et à la personne"
+  "curatelle",
+  "curatelle renforcée",
+  "curatelle renforcée à la personne",
+  "curatelle renforcée aux biens",
+  "curatelle renforcée aux biens et à la personne",
+  "curatelle simple",
+  "curatelle simple à la personne",
+  "curatelle simple aux biens",
+  "curatelle simple à la personne",
+  "curatelle simple aux biens et à la personne",
+  "maj",
+  "mandat de protection future",
+  "mesure ad hoc",
+  "sauvegarde de justice",
+  "sauvegarde de justice avec mandat spécial",
+  "subrogé curateur",
+  "subrogé tuteur",
+  "tutelle",
+  "tutelle à la personne",
+  "tutelle aux biens",
+  "tutelle aux biens et à la personne"
 ];
 
 export const MESURE_RESIDENCES = [
-  "A domicile",
-  "En établissement",
-  "En établissement avec conservation du domicile",
-  "SDF"
+  "domicile",
+  "en établissement",
+  "en établissement avec conservation du domicile",
+  "sdf"
 ];
 
 export const MESURE_CIVILITIES = ["F", "H"];
@@ -61,100 +61,100 @@ export const COUNTRIES = {
 
 export const MESURE_TYPE_LABEL_VALUE = [
   {
-    label: "Curatelle",
-    value: "Curatelle"
+    label: "curatelle",
+    value: "curatelle"
   },
   {
-    label: "Curatelle renforcée",
-    value: "Curatelle renforcée"
+    label: "curatelle renforcée",
+    value: "curatelle renforcée"
   },
   {
-    label: "Curatelle renforcée à la personne",
-    value: "Curatelle renforcée à la personne"
+    label: "curatelle renforcée à la personne",
+    value: "curatelle renforcée à la personne"
   },
   {
-    label: "Curatelle renforcée aux biens",
-    value: "Curatelle renforcée aux biens"
+    label: "curatelle renforcée aux biens",
+    value: "curatelle renforcée aux biens"
   },
   {
-    label: "Curatelle renforcée aux biens et à la personne",
-    value: "Curatelle renforcée aux biens et à la personne"
+    label: "curatelle renforcée aux biens et à la personne",
+    value: "curatelle renforcée aux biens et à la personne"
   },
   {
-    label: "Curatelle simple",
-    value: "Curatelle simple"
+    label: "curatelle simple",
+    value: "curatelle simple"
   },
   {
-    label: "Curatelle simple à la personne",
-    value: "Curatelle simple à la personne"
+    label: "curatelle simple à la personne",
+    value: "curatelle simple à la personne"
   },
   {
-    label: "Curatelle simple aux biens",
-    value: "Curatelle simple aux biens"
+    label: "curatelle simple aux biens",
+    value: "curatelle simple aux biens"
   },
   {
-    label: "Curatelle simple à la personne",
-    value: "Curatelle simple à la personne"
+    label: "curatelle simple à la personne",
+    value: "curatelle simple à la personne"
   },
   {
-    label: "Curatelle simple aux biens et à la personne",
-    value: "Curatelle simple aux biens et à la personne"
+    label: "curatelle simple aux biens et à la personne",
+    value: "curatelle simple aux biens et à la personne"
   },
   {
-    label: "MAJ",
-    value: "MAJ"
+    label: "maj",
+    value: "maj"
   },
   {
-    label: "Mandat de protection future",
-    value: "Mandat de protection future"
+    label: "mandat de protection future",
+    value: "mandat de protection future"
   },
   {
-    label: "Mesure ad hoc",
-    value: "Mesure ad hoc"
+    label: "mesure ad hoc",
+    value: "mesure ad hoc"
   },
   {
-    label: "Sauvegarde de justice",
-    value: "Sauvegarde de justice"
+    label: "sauvegarde de justice",
+    value: "sauvegarde de justice"
   },
   {
-    label: "Sauvegarde de justice avec mandat spécial",
-    value: "Sauvegarde de justice avec mandat spécial"
+    label: "sauvegarde de justice avec mandat spécial",
+    value: "sauvegarde de justice avec mandat spécial"
   },
   {
-    label: "Subrogé curateur",
-    value: "Subrogé curateur"
+    label: "subrogé curateur",
+    value: "subrogé curateur"
   },
   {
-    label: "Subrogé tuteur",
-    value: "Subrogé tuteur"
+    label: "subrogé tuteur",
+    value: "subrogé tuteur"
   },
   {
-    label: "Tutelle",
-    value: "Tutelle"
+    label: "tutelle",
+    value: "tutelle"
   },
   {
-    label: "Tutelle à la personne",
-    value: "Tutelle à la personne"
+    label: "tutelle à la personne",
+    value: "tutelle à la personne"
   },
   {
-    label: "Tutelle aux biens",
-    value: "Tutelle aux biens"
+    label: "tutelle aux biens",
+    value: "tutelle aux biens"
   },
   {
-    label: "Tutelle aux biens et à la personne",
-    value: "Tutelle aux biens et à la personne"
+    label: "tutelle aux biens et à la personne",
+    value: "tutelle aux biens et à la personne"
   }
 ];
 
 export const RESIDENCE = [
-  { label: "A Domicile", value: "A Domicile" },
-  { label: "En établissement", value: "En établissement" },
+  { label: "domicile", value: "domicile" },
+  { label: "en établissement", value: "en établissement" },
   {
-    label: "En établissement avec conservation du domicile",
-    value: "En établissement avec conservation du domicile"
+    label: "en établissement avec conservation du domicile",
+    value: "en établissement avec conservation du domicile"
   },
-  { label: "SDF", value: "SDF" },
-  { label: "Autres", value: "Autres" }
+  { label: "sdf", value: "sdf" },
+  { label: "autres", value: "autres" }
 ];
 
 export const CIVILITY = [

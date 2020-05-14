@@ -101,9 +101,9 @@ describe("POST /api/editors/mesures", () => {
         department_id: "75",
         numero_dossier: "123123123",
         numero_rg: "RGXXXX123",
-        residence: "En établissement",
+        residence: "en établissement",
         ti_id: global.ti.id,
-        type: "Curatelle renforcée aux biens et à la personne"
+        type: "curatelle renforcée aux biens et à la personne"
       });
 
     expect(response.status).toBe(201);
@@ -146,9 +146,9 @@ describe("POST /api/editors/mesures/batch", () => {
             department_id: "75",
             numero_dossier: "123123123",
             numero_rg: "RGXXXX123",
-            residence: "En établissement",
+            residence: "en établissement",
             ti_id: global.ti.id,
-            type: "Curatelle renforcée aux biens et à la personne"
+            type: "curatelle renforcée aux biens et à la personne"
           }
         ]
       });
