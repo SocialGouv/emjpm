@@ -51,7 +51,7 @@ exports.up = async knex => {
 exports.down = async knex => {
   await knex.raw("DROP TABLE IF EXISTS enquete_reponses");
 
-  knex.schema.createTable("enquete_reponses", table => {
+  return knex.schema.createTable("enquete_reponses", table => {
     table.increments();
     table.string("type").notNullable();
     table

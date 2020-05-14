@@ -32,6 +32,14 @@ exports.down = async function(knex) {
     table.integer("cnc_dpf_heure_formation");
     table.integer("niveau_qualification");
     table.integer("niveau_qualification_secretaire_spe");
+
+    table.integer("ps_aah").nullable();
+    table.integer("ps_pch").nullable();
+    table.integer("ps_asi").nullable();
+    table.integer("ps_rsa").nullable();
+    table.integer("ps_als_apl").nullable();
+    table.integer("ps_aspa").nullable();
+    table.integer("ps_apa").nullable();
   });
   await knex.schema.createTable("enquete_preposes", table => {
     table.increments();
