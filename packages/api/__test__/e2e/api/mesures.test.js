@@ -103,7 +103,7 @@ describe("POST /api/editors/mesures", () => {
         numero_rg: "RGXXXX123",
         residence: "En établissement",
         ti_id: global.ti.id,
-        type: "Curatelle renforcée aux biens et à la personne"
+        type: "curatelle renforcée aux biens et à la personne"
       });
 
     expect(response.status).toBe(201);
@@ -148,7 +148,7 @@ describe("POST /api/editors/mesures/batch", () => {
             numero_rg: "RGXXXX123",
             residence: "En établissement",
             ti_id: global.ti.id,
-            type: "Curatelle renforcée aux biens et à la personne"
+            type: "curatelle renforcée aux biens et à la personne"
           }
         ]
       });

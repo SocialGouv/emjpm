@@ -40,7 +40,7 @@ export const datas = [
     numeroRg: '651654654',
     status: 'Mesure en attente',
     tribunal: 'test',
-    type: 'Curatelle renforcée aux biens et à la personne',
+    type: 'curatelle renforcée aux biens et à la personne',
     ville: 'PARIS',
   },
   {

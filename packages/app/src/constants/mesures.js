@@ -1,14 +1,14 @@
 export const MESURE_TYPES = [
-  "Curatelle",
-  "Curatelle renforcée",
-  "Curatelle renforcée à la personne",
-  "Curatelle renforcée aux biens",
-  "Curatelle renforcée aux biens et à la personne",
-  "Curatelle simple",
-  "Curatelle simple à la personne",
-  "Curatelle simple aux biens",
-  "Curatelle simple à la personne",
-  "Curatelle simple aux biens et à la personne",
+  "curatelle",
+  "curatelle renforcée",
+  "curatelle renforcée à la personne",
+  "curatelle renforcée aux biens",
+  "curatelle renforcée aux biens et à la personne",
+  "curatelle simple",
+  "curatelle simple à la personne",
+  "curatelle simple aux biens",
+  "curatelle simple à la personne",
+  "curatelle simple aux biens et à la personne",
   "MAJ",
   "Mandat de protection future",
   "Mesure ad hoc",
@@ -61,44 +61,44 @@ export const COUNTRIES = {
 
 export const MESURE_TYPE_LABEL_VALUE = [
   {
-    label: "Curatelle",
-    value: "Curatelle"
+    label: "curatelle",
+    value: "curatelle"
   },
   {
-    label: "Curatelle renforcée",
-    value: "Curatelle renforcée"
+    label: "curatelle renforcée",
+    value: "curatelle renforcée"
   },
   {
-    label: "Curatelle renforcée à la personne",
-    value: "Curatelle renforcée à la personne"
+    label: "curatelle renforcée à la personne",
+    value: "curatelle renforcée à la personne"
   },
   {
-    label: "Curatelle renforcée aux biens",
-    value: "Curatelle renforcée aux biens"
+    label: "curatelle renforcée aux biens",
+    value: "curatelle renforcée aux biens"
   },
   {
-    label: "Curatelle renforcée aux biens et à la personne",
-    value: "Curatelle renforcée aux biens et à la personne"
+    label: "curatelle renforcée aux biens et à la personne",
+    value: "curatelle renforcée aux biens et à la personne"
   },
   {
-    label: "Curatelle simple",
-    value: "Curatelle simple"
+    label: "curatelle simple",
+    value: "curatelle simple"
   },
   {
-    label: "Curatelle simple à la personne",
-    value: "Curatelle simple à la personne"
+    label: "curatelle simple à la personne",
+    value: "curatelle simple à la personne"
   },
   {
-    label: "Curatelle simple aux biens",
-    value: "Curatelle simple aux biens"
+    label: "curatelle simple aux biens",
+    value: "curatelle simple aux biens"
   },
   {
-    label: "Curatelle simple à la personne",
-    value: "Curatelle simple à la personne"
+    label: "curatelle simple à la personne",
+    value: "curatelle simple à la personne"
   },
   {
-    label: "Curatelle simple aux biens et à la personne",
-    value: "Curatelle simple aux biens et à la personne"
+    label: "curatelle simple aux biens et à la personne",
+    value: "curatelle simple aux biens et à la personne"
   },
   {
     label: "MAJ",

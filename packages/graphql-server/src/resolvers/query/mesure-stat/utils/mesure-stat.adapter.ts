@@ -7,18 +7,18 @@ export const mesureStatAdapter = {
       case MesureTypeCategory.CuratelleRenforcee:
         return [
           "curatelle renforcée",
-          "Curatelle renforcée",
-          "Curatelle renforcée aux biens",
-          "Curatelle renforcée aux biens et à la personne",
-          "Curatelle renforcée à la personne"
+          "curatelle renforcée",
+          "curatelle renforcée aux biens",
+          "curatelle renforcée aux biens et à la personne",
+          "curatelle renforcée à la personne"
         ];
       case MesureTypeCategory.CuratelleSimple:
         return [
-          "Curatelle",
-          "Curatelle simple",
-          "Curatelle simple aux biens",
-          "Curatelle simple à la personne",
-          "Curatelle simple aux biens et à la personne"
+          "curatelle",
+          "curatelle simple",
+          "curatelle simple aux biens",
+          "curatelle simple à la personne",
+          "curatelle simple aux biens et à la personne"
         ];
       case MesureTypeCategory.Other:
         return [
@@ -48,16 +48,15 @@ export const mesureStatAdapter = {
     }
     switch (type) {
       case "curatelle renforcée":
-      case "Curatelle renforcée":
-      case "Curatelle renforcée aux biens":
-      case "Curatelle renforcée aux biens et à la personne":
-      case "Curatelle renforcée à la personne":
+      case "curatelle renforcée aux biens":
+      case "curatelle renforcée aux biens et à la personne":
+      case "curatelle renforcée à la personne":
         return MesureTypeCategory.CuratelleRenforcee;
-      case "Curatelle":
-      case "Curatelle simple":
-      case "Curatelle simple aux biens":
-      case "Curatelle simple à la personne":
-      case "Curatelle simple aux biens et à la personne":
+      case "curatelle":
+      case "curatelle simple":
+      case "curatelle simple aux biens":
+      case "curatelle simple à la personne":
+      case "curatelle simple aux biens et à la personne":
         return MesureTypeCategory.CuratelleSimple;
       case "MAJ":
       case "Mandat de protection future":
