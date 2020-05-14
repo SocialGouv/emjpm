@@ -18,7 +18,7 @@ export type MesureType =
   | "curatelle simple aux biens"
   | "curatelle simple à la personne"
   | "curatelle simple aux biens et à la personne"
-  | "MAJ"
+  | "maj"
   | "mandat de protection future"
   | "mesure ad hoc"
   | "sauvegarde de justice"
