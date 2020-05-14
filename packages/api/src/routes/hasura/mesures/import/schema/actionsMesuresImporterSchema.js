@@ -1,34 +1,34 @@
 const yup = require("yup");
 
 const MESURE_TYPES = [
-  "Curatelle",
-  "Curatelle renforcée",
-  "Curatelle renforcée à la personne",
-  "Curatelle renforcée aux biens",
-  "Curatelle renforcée aux biens et à la personne",
-  "Curatelle simple",
-  "Curatelle simple à la personne",
-  "Curatelle simple aux biens",
-  "Curatelle simple à la personne",
-  "Curatelle simple aux biens et à la personne",
-  "MAJ",
-  "Mandat de protection future",
-  "Mesure ad hoc",
-  "Sauvegarde de justice",
-  "Sauvegarde de justice avec mandat spécial",
-  "Subrogé curateur",
-  "Subrogé tuteur",
-  "Tutelle",
-  "Tutelle à la personne",
-  "Tutelle aux biens",
-  "Tutelle aux biens et à la personne"
+  "curatelle",
+  "curatelle renforcée",
+  "curatelle renforcée à la personne",
+  "curatelle renforcée aux biens",
+  "curatelle renforcée aux biens et à la personne",
+  "curatelle simple",
+  "curatelle simple à la personne",
+  "curatelle simple aux biens",
+  "curatelle simple à la personne",
+  "curatelle simple aux biens et à la personne",
+  "maj",
+  "mandat de protection future",
+  "mesure ad hoc",
+  "sauvegarde de justice",
+  "sauvegarde de justice avec mandat spécial",
+  "subrogé curateur",
+  "subrogé tuteur",
+  "tutelle",
+  "tutelle à la personne",
+  "tutelle aux biens",
+  "tutelle aux biens et à la personne"
 ];
 
 const MESURE_RESIDENCES = [
-  "A domicile",
-  "En établissement",
-  "En établissement avec conservation du domicile",
-  "SDF"
+  "domicile",
+  "en établissement",
+  "en établissement avec conservation du domicile",
+  "sdf"
 ];
 
 // 20/11/2015 or 20/11/15

@@ -17,12 +17,12 @@ const MESURE_CATEGORY_TYPE_COLORS = {
 };
 
 const VALUE_LABEL = {
-  CURATELLE_RENFORCEE: "Curatelle renforcée",
-  CURATELLE_SIMPLE: "Curatelle simple",
+  CURATELLE_RENFORCEE: "curatelle renforcée",
+  CURATELLE_SIMPLE: "curatelle simple",
   OTHER: "Autre",
-  SAUVEGARDE_JUSTICE: "Sauvegarde de justice",
+  SAUVEGARDE_JUSTICE: "sauvegarde de justice",
   TOTAL: "Total",
-  TUTELLE: "Tutelle"
+  TUTELLE: "tutelle"
 };
 
 export const getMesureCategoryTypeColor = type => MESURE_CATEGORY_TYPE_COLORS[type];

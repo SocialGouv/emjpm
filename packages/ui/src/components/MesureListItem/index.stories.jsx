@@ -25,11 +25,11 @@ const dataProgress = {
   longitude: 7.23827,
   numeroDossier: 'AMBLPIE',
   numeroRg: 'RG-00000000',
-  residence: 'A Domicile',
+  residence: 'domicile',
   status: 'Mesure en cours',
   tiId: null,
   tribunal: 'Tribunal non reseigné',
-  type: 'Sauvegarde de justice',
+  type: 'sauvegarde de justice',
   ville: 'NICE',
 };
 
@@ -49,11 +49,11 @@ const dataWaiting = {
   longitude: 7.23827,
   numeroDossier: 'AMBLPIE',
   numeroRg: 'RG-00000000',
-  residence: 'A Domicile',
+  residence: 'domicile',
   status: 'Mesure en attente',
   tiId: null,
   tribunal: 'Tribunal non reseigné',
-  type: 'Sauvegarde de justice',
+  type: 'sauvegarde de justice',
   ville: 'NICE',
 };
 
@@ -73,11 +73,11 @@ const dataWaitingUrgent = {
   longitude: 7.23827,
   numeroDossier: 'AMBLPIE',
   numeroRg: '19/00519',
-  residence: 'A Domicile',
+  residence: 'domicile',
   status: 'Mesure en attente',
   tiId: null,
   tribunal: 'Tribunal non reseigné',
-  type: 'Sauvegarde de justice',
+  type: 'sauvegarde de justice',
   ville: 'NICE',
 };
 
@@ -97,11 +97,11 @@ const dataClose = {
   longitude: 7.23827,
   numeroDossier: 'AMBLPIE',
   numeroRg: '19/00519',
-  residence: 'A Domicile',
+  residence: 'domicile',
   status: 'Eteindre mesure',
   tiId: null,
   tribunal: 'Tribunal non reseigné',
-  type: 'Sauvegarde de justice',
+  type: 'sauvegarde de justice',
   ville: 'NICE',
 };
 
@@ -121,11 +121,11 @@ const dataMagistratUrgent = {
   longitude: 7.23827,
   numeroDossier: 'AMBLPIE',
   numeroRg: '19/00519',
-  residence: 'A Domicile',
+  residence: 'domicile',
   status: 'Mesure en attente',
   tiId: null,
   tribunal: 'Tribunal non reseigné',
-  type: 'Sauvegarde de justice',
+  type: 'sauvegarde de justice',
   ville: 'NICE',
 };
 
@@ -145,11 +145,11 @@ const dataMagistrat = {
   longitude: 7.23827,
   numeroDossier: 'AMBLPIE',
   numeroRg: '19/00519',
-  residence: 'A Domicile',
+  residence: 'domicile',
   status: 'Mesure en attente',
   tiId: null,
   tribunal: 'Tribunal non reseigné',
-  type: 'Sauvegarde de justice',
+  type: 'sauvegarde de justice',
   ville: 'NICE',
 };
 
