@@ -7,13 +7,22 @@ import { UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE } from "./mutations";
 import { ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE } from "./queries";
 
 export const EnqueteActiviteAccompagnementJudiciaire = props => {
-  const { goToPrevPage, goToNextPage, enquete } = props;
-  const { enqueteReponseId } = enquete;
+  const { goToPrevPage, goToNextPage, enqueteReponse } = props;
+  const { enquete_reponses_activite_id } = enqueteReponse;
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE);
+  const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE, {
+    refetchQueries: [
+      {
+        query: ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE,
+        variables: {
+          id: enquete_reponses_activite_id
+        }
+      }
+    ]
+  });
   const { data, loading } = useQuery(ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE, {
     variables: {
-      id: enqueteReponseId
+      id: enquete_reponses_activite_id
     }
   });
 
@@ -21,25 +30,21 @@ export const EnqueteActiviteAccompagnementJudiciaire = props => {
     return <Box p={4}>Chargement...</Box>;
   }
 
-  const { enquete_reponses } = data;
-  const [
-    {
-      activite_accompagnement_judiciaire_domicile_debut_annee,
-      activite_accompagnement_judiciaire_domicile_fin_annee,
-      activite_accompagnement_judiciaire_etablissement_debut_annee,
-      activite_accompagnement_judiciaire_etablissement_fin_annee
-    }
-  ] = enquete_reponses;
+  const { enquete_reponses_activite_by_pk: activite } = data;
+  const {
+    accompagnement_judiciaire_domicile_debut_annee,
+    accompagnement_judiciaire_domicile_fin_annee,
+    accompagnement_judiciaire_etablissement_debut_annee,
+    accompagnement_judiciaire_etablissement_fin_annee
+  } = activite;
 
   return (
     <Box>
       <EnqueteActiviteForm
-        nbMesureEtablissementDebutAnnee={
-          activite_accompagnement_judiciaire_etablissement_debut_annee
-        }
-        nbMesureEtablissementFinAnnee={activite_accompagnement_judiciaire_etablissement_fin_annee}
-        nbMesureDomicileDebutAnnee={activite_accompagnement_judiciaire_domicile_debut_annee}
-        nbMesureDomicileFinAnnee={activite_accompagnement_judiciaire_domicile_fin_annee}
+        nbMesureEtablissementDebutAnnee={accompagnement_judiciaire_etablissement_debut_annee}
+        nbMesureEtablissementFinAnnee={accompagnement_judiciaire_etablissement_fin_annee}
+        nbMesureDomicileDebutAnnee={accompagnement_judiciaire_domicile_debut_annee}
+        nbMesureDomicileFinAnnee={accompagnement_judiciaire_domicile_fin_annee}
         handleSubmit={async values => {
           const {
             nbMesureDomicileDebutAnnee,
@@ -49,7 +54,7 @@ export const EnqueteActiviteAccompagnementJudiciaire = props => {
           } = values;
           await updateEnquete({
             variables: {
-              id: enqueteReponseId,
+              id: enquete_reponses_activite_id,
               etablissementDebutAnnee: nbMesureEtablissementDebutAnnee || null,
               etablissementFinAnnee: nbMesureEtablissementFinAnnee || null,
               domicileDebutAnnee: nbMesureDomicileDebutAnnee || null,

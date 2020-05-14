@@ -17,6 +17,7 @@ export const EnqueteActiviteForm = props => {
   const {
     goToPrevPage,
     title,
+
     nbMesureEtablissementDebutAnnee,
     nbMesureEtablissementFinAnnee,
     nbMesureDomicileDebutAnnee,

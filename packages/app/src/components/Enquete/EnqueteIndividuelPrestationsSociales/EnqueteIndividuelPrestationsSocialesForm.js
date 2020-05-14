@@ -9,7 +9,8 @@ import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 export const EnqueteIndividuelPrestationsSocialesForm = props => {
   const { data = {}, goToPrevPage } = props;
-  const { ps_aah, ps_pch, ps_asi, ps_rsa, ps_als_apl, ps_aspa, ps_apa } = data;
+  console.log("data", data);
+  const { aah = "", pch = "", asi = "", rsa = "", als_apl = "", aspa = "", apa = "" } = data;
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
@@ -17,13 +18,13 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
       setSubmitting(false);
     },
     initialValues: {
-      aah: ps_aah || "",
-      pch: ps_pch || "",
-      asi: ps_asi || "",
-      rsa: ps_rsa || "",
-      als: ps_als_apl || "",
-      aspa: ps_aspa || "",
-      apa: ps_apa || ""
+      aah: aah,
+      pch: pch,
+      asi: asi,
+      rsa: rsa,
+      als: als_apl,
+      aspa: aspa,
+      apa: apa
     }
   });
 
@@ -115,8 +116,8 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 name="als"
                 placeholder=""
                 type="number"
-                value={values.rsa}
-                hasError={!!errors.rsa}
+                value={values.als}
+                hasError={!!errors.als}
                 onChange={handleChange}
               />
               <InlineError message={errors.als} fieldId="als" />

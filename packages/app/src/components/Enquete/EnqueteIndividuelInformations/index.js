@@ -1,2 +1,3 @@
 export { EnqueteIndividuelInformations } from "./EnqueteIndividuelInformations";
-export { EnqueteIndividuelInformationsAgrementFormation } from "./EnqueteIndividuelInformationsAgrementFormation";
+export { EnqueteIndividuelInformationsFormation } from "./EnqueteIndividuelInformationsFormation";
+export { EnqueteIndividuelInformationsAgrements } from "./EnqueteIndividuelInformationsAgrements";

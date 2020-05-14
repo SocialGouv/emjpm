@@ -9,7 +9,7 @@ exports.up = async knex => {
       table.boolean("benevole").nullable();
       table.string("forme_juridique").nullable();
       table.string("sexe").nullable();
-      table.string("ancienete").nullable();
+      table.string("anciennete").nullable();
 
       table.string("estimation_etp").nullable();
       table.string("secretaire_specialise_etp").nullable();

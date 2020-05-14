@@ -2,7 +2,7 @@ import {
   recalculateMandataireMesuresCount,
   recalculateServiceMesuresCount
 } from "./mutation";
-import { enqueteIndividuel } from "./query/enquetes";
+import { enqueteIndividuelReponse } from "./query/enquetes";
 import {
   availableMesureNumber,
   closedMesureNumber,
@@ -22,7 +22,7 @@ export const resolvers = {
     availableMesureNumber,
     closedMesureNumber,
     departmentAvailabilities,
-    enqueteIndividuel,
+    enqueteIndividuelReponse,
     mesureTypeCategoryEvolution,
     mesureTypeCategoryStatistics,
     newMesureNumber,

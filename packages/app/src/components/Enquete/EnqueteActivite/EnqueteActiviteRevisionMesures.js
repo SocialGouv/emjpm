@@ -7,13 +7,22 @@ import { UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES } from "./mutations";
 import { ENQUETE_REVISION_MESURES } from "./queries";
 
 export const EnqueteActiviteRevisionMesures = props => {
-  const { goToPrevPage, goToNextPage, enquete } = props;
-  const { enqueteReponseId } = enquete;
+  const { goToPrevPage, goToNextPage, enqueteReponse } = props;
+  const { enquete_reponses_activite_id } = enqueteReponse;
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES);
+  const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES, {
+    refetchQueries: [
+      {
+        query: ENQUETE_REVISION_MESURES,
+        variables: {
+          id: enquete_reponses_activite_id
+        }
+      }
+    ]
+  });
   const { data, loading } = useQuery(ENQUETE_REVISION_MESURES, {
     variables: {
-      id: enqueteReponseId
+      id: enquete_reponses_activite_id
     }
   });
 
@@ -21,29 +30,27 @@ export const EnqueteActiviteRevisionMesures = props => {
     return <Box p={4}>Chargement...</Box>;
   }
 
-  const { enquete_reponses } = data;
-  const [
-    {
-      activite_revisions_main_levee,
-      activite_revisions_masp,
-      activite_revisions_reconduction,
-      activite_revisions_changement,
-      activite_revisions_autre
-    }
-  ] = enquete_reponses;
+  const { enquete_reponses_activite_by_pk: activite } = data;
+  const {
+    revisions_main_levee,
+    revisions_masp,
+    revisions_reconduction,
+    revisions_changement,
+    revisions_autre
+  } = activite;
 
   return (
     <Box>
       <EnqueteActiviteRevisionMesuresForm
-        revisionsMainLevee={activite_revisions_main_levee}
-        revisionsMasp={activite_revisions_masp}
-        revisionsReconduction={activite_revisions_reconduction}
-        revisionsChangement={activite_revisions_changement}
-        revisionsAutre={activite_revisions_autre}
+        revisionsMainLevee={revisions_main_levee}
+        revisionsMasp={revisions_masp}
+        revisionsReconduction={revisions_reconduction}
+        revisionsChangement={revisions_changement}
+        revisionsAutre={revisions_autre}
         handleSubmit={async values => {
           await updateEnquete({
             variables: {
-              id: enqueteReponseId,
+              id: enquete_reponses_activite_id,
               revisionsMainLevee: values.revisionsMainLevee || null,
               revisionsMasp: values.revisionsMasp || null,
               revisionsReconduction: values.revisionsReconduction || null,

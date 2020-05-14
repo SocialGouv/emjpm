@@ -8,23 +8,20 @@ export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_RENFORCEE = gql`
     $domicileDebutAnnee: Int
     $domicileFinAnnee: Int
   ) {
-    update_enquete_reponses(
-      where: { id: { _eq: $id } }
+    update_enquete_reponses_activite_by_pk(
+      pk_columns: { id: $id }
       _set: {
-        activite_curatelle_renforcee_etablissement_debut_annee: $etablissementDebutAnnee
-        activite_curatelle_renforcee_etablissement_fin_annee: $etablissementFinAnnee
-        activite_curatelle_renforcee_domicile_debut_annee: $domicileDebutAnnee
-        activite_curatelle_renforcee_domicile_fin_annee: $domicileFinAnnee
+        curatelle_renforcee_etablissement_debut_annee: $etablissementDebutAnnee
+        curatelle_renforcee_etablissement_fin_annee: $etablissementFinAnnee
+        curatelle_renforcee_domicile_debut_annee: $domicileDebutAnnee
+        curatelle_renforcee_domicile_fin_annee: $domicileFinAnnee
       }
     ) {
-      affected_rows
-      returning {
-        id
-        activite_curatelle_renforcee_etablissement_debut_annee
-        activite_curatelle_renforcee_etablissement_fin_annee
-        activite_curatelle_renforcee_domicile_debut_annee
-        activite_curatelle_renforcee_domicile_fin_annee
-      }
+      id
+      curatelle_renforcee_etablissement_debut_annee
+      curatelle_renforcee_etablissement_fin_annee
+      curatelle_renforcee_domicile_debut_annee
+      curatelle_renforcee_domicile_fin_annee
     }
   }
 `;
@@ -37,23 +34,19 @@ export const UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE = gql`
     $domicileDebutAnnee: Int
     $domicileFinAnnee: Int
   ) {
-    update_enquete_reponses(
-      where: { id: { _eq: $id } }
+    update_enquete_reponses_activite_by_pk(
+      pk_columns: { id: $id }
       _set: {
-        activite_accompagnement_judiciaire_etablissement_debut_annee: $etablissementDebutAnnee
-        activite_accompagnement_judiciaire_etablissement_fin_annee: $etablissementFinAnnee
-        activite_accompagnement_judiciaire_domicile_debut_annee: $domicileDebutAnnee
-        activite_accompagnement_judiciaire_domicile_fin_annee: $domicileFinAnnee
+        accompagnement_judiciaire_etablissement_debut_annee: $etablissementDebutAnnee
+        accompagnement_judiciaire_etablissement_fin_annee: $etablissementFinAnnee
+        accompagnement_judiciaire_domicile_debut_annee: $domicileDebutAnnee
+        accompagnement_judiciaire_domicile_fin_annee: $domicileFinAnnee
       }
     ) {
-      affected_rows
-      returning {
-        id
-        activite_accompagnement_judiciaire_etablissement_debut_annee
-        activite_accompagnement_judiciaire_etablissement_fin_annee
-        activite_accompagnement_judiciaire_domicile_debut_annee
-        activite_accompagnement_judiciaire_domicile_fin_annee
-      }
+      accompagnement_judiciaire_etablissement_debut_annee
+      accompagnement_judiciaire_etablissement_fin_annee
+      accompagnement_judiciaire_domicile_debut_annee
+      accompagnement_judiciaire_domicile_fin_annee
     }
   }
 `;
@@ -67,25 +60,22 @@ export const UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES = gql`
     $revisionsChangement: Int
     $revisionsAutre: Int
   ) {
-    update_enquete_reponses(
-      where: { id: { _eq: $id } }
+    update_enquete_reponses_activite_by_pk(
+      pk_columns: { id: $id }
       _set: {
-        activite_revisions_main_levee: $revisionsMainLevee
-        activite_revisions_masp: $revisionsMasp
-        activite_revisions_reconduction: $revisionsReconduction
-        activite_revisions_changement: $revisionsChangement
-        activite_revisions_autre: $revisionsAutre
+        revisions_main_levee: $revisionsMainLevee
+        revisions_masp: $revisionsMasp
+        revisions_reconduction: $revisionsReconduction
+        revisions_changement: $revisionsChangement
+        revisions_autre: $revisionsAutre
       }
     ) {
-      affected_rows
-      returning {
-        id
-        activite_revisions_main_levee
-        activite_revisions_masp
-        activite_revisions_reconduction
-        activite_revisions_changement
-        activite_revisions_autre
-      }
+      id
+      revisions_main_levee
+      revisions_masp
+      revisions_reconduction
+      revisions_changement
+      revisions_autre
     }
   }
 `;
@@ -98,23 +88,20 @@ export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS = gql`
     $domicileDebutAnnee: Int
     $domicileFinAnnee: Int
   ) {
-    update_enquete_reponses(
-      where: { id: { _eq: $id } }
+    update_enquete_reponses_activite_by_pk(
+      pk_columns: { id: $id }
       _set: {
-        activite_curatelle_biens_etablissement_debut_annee: $etablissementDebutAnnee
-        activite_curatelle_biens_etablissement_fin_annee: $etablissementFinAnnee
-        activite_curatelle_biens_domicile_debut_annee: $domicileDebutAnnee
-        activite_curatelle_biens_domicile_fin_annee: $domicileFinAnnee
+        curatelle_biens_etablissement_debut_annee: $etablissementDebutAnnee
+        curatelle_biens_etablissement_fin_annee: $etablissementFinAnnee
+        curatelle_biens_domicile_debut_annee: $domicileDebutAnnee
+        curatelle_biens_domicile_fin_annee: $domicileFinAnnee
       }
     ) {
-      affected_rows
-      returning {
-        id
-        activite_curatelle_biens_etablissement_debut_annee
-        activite_curatelle_biens_etablissement_fin_annee
-        activite_curatelle_biens_domicile_debut_annee
-        activite_curatelle_biens_domicile_fin_annee
-      }
+      id
+      curatelle_biens_etablissement_debut_annee
+      curatelle_biens_etablissement_fin_annee
+      curatelle_biens_domicile_debut_annee
+      curatelle_biens_domicile_fin_annee
     }
   }
 `;
@@ -127,23 +114,20 @@ export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_PERSONNE = gql`
     $domicileDebutAnnee: Int
     $domicileFinAnnee: Int
   ) {
-    update_enquete_reponses(
-      where: { id: { _eq: $id } }
+    update_enquete_reponses_activite_by_pk(
+      pk_columns: { id: $id }
       _set: {
-        activite_curatelle_personne_etablissement_debut_annee: $etablissementDebutAnnee
-        activite_curatelle_personne_etablissement_fin_annee: $etablissementFinAnnee
-        activite_curatelle_personne_domicile_debut_annee: $domicileDebutAnnee
-        activite_curatelle_personne_domicile_fin_annee: $domicileFinAnnee
+        curatelle_personne_etablissement_debut_annee: $etablissementDebutAnnee
+        curatelle_personne_etablissement_fin_annee: $etablissementFinAnnee
+        curatelle_personne_domicile_debut_annee: $domicileDebutAnnee
+        curatelle_personne_domicile_fin_annee: $domicileFinAnnee
       }
     ) {
-      affected_rows
-      returning {
-        id
-        activite_curatelle_personne_etablissement_debut_annee
-        activite_curatelle_personne_etablissement_fin_annee
-        activite_curatelle_personne_domicile_debut_annee
-        activite_curatelle_personne_domicile_fin_annee
-      }
+      id
+      curatelle_personne_etablissement_debut_annee
+      curatelle_personne_etablissement_fin_annee
+      curatelle_personne_domicile_debut_annee
+      curatelle_personne_domicile_fin_annee
     }
   }
 `;
@@ -156,23 +140,20 @@ export const UPDATE_ENQUETE_ACTIVITE_TUTELLE = gql`
     $domicileDebutAnnee: Int
     $domicileFinAnnee: Int
   ) {
-    update_enquete_reponses(
-      where: { id: { _eq: $id } }
+    update_enquete_reponses_activite_by_pk(
+      pk_columns: { id: $id }
       _set: {
-        activite_tutelle_etablissement_debut_annee: $etablissementDebutAnnee
-        activite_tutelle_etablissement_fin_annee: $etablissementFinAnnee
-        activite_tutelle_domicile_debut_annee: $domicileDebutAnnee
-        activite_tutelle_domicile_fin_annee: $domicileFinAnnee
+        tutelle_etablissement_debut_annee: $etablissementDebutAnnee
+        tutelle_etablissement_fin_annee: $etablissementFinAnnee
+        tutelle_domicile_debut_annee: $domicileDebutAnnee
+        tutelle_domicile_fin_annee: $domicileFinAnnee
       }
     ) {
-      affected_rows
-      returning {
-        id
-        activite_tutelle_etablissement_debut_annee
-        activite_tutelle_etablissement_fin_annee
-        activite_tutelle_domicile_debut_annee
-        activite_tutelle_domicile_fin_annee
-      }
+      id
+      tutelle_etablissement_debut_annee
+      tutelle_etablissement_fin_annee
+      tutelle_domicile_debut_annee
+      tutelle_domicile_fin_annee
     }
   }
 `;
@@ -185,23 +166,20 @@ export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_SIMPLE = gql`
     $domicileDebutAnnee: Int
     $domicileFinAnnee: Int
   ) {
-    update_enquete_reponses(
-      where: { id: { _eq: $id } }
+    update_enquete_reponses_activite_by_pk(
+      pk_columns: { id: $id }
       _set: {
-        activite_curatelle_simple_etablissement_debut_annee: $etablissementDebutAnnee
-        activite_curatelle_simple_etablissement_fin_annee: $etablissementFinAnnee
-        activite_curatelle_simple_domicile_debut_annee: $domicileDebutAnnee
-        activite_curatelle_simple_domicile_fin_annee: $domicileFinAnnee
+        curatelle_simple_domicile_debut_annee: $domicileDebutAnnee
+        curatelle_simple_domicile_fin_annee: $domicileFinAnnee
+        curatelle_simple_etablissement_debut_annee: $etablissementDebutAnnee
+        curatelle_simple_etablissement_fin_annee: $etablissementFinAnnee
       }
     ) {
-      affected_rows
-      returning {
-        id
-        activite_curatelle_simple_etablissement_debut_annee
-        activite_curatelle_simple_etablissement_fin_annee
-        activite_curatelle_simple_domicile_debut_annee
-        activite_curatelle_simple_domicile_fin_annee
-      }
+      id
+      curatelle_simple_domicile_debut_annee
+      curatelle_simple_domicile_fin_annee
+      curatelle_simple_etablissement_debut_annee
+      curatelle_simple_etablissement_fin_annee
     }
   }
 `;

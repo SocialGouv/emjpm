@@ -14,7 +14,8 @@ import {
 } from "../EnqueteActivite";
 import {
   EnqueteIndividuelInformations,
-  EnqueteIndividuelInformationsAgrementFormation
+  EnqueteIndividuelInformationsAgrements,
+  EnqueteIndividuelInformationsFormation
 } from "../EnqueteIndividuelInformations";
 import { EnqueteIndividuelPrestationsSociales } from "../EnqueteIndividuelPrestationsSociales";
 import { EnquetePopulationsCuratelle } from "../EnquetePopulations/EnquetePopulationsCuratelle";
@@ -38,8 +39,12 @@ const MENU_SECTIONS = [
         component: EnqueteIndividuelInformations
       },
       {
-        label: "Agréments et formations",
-        component: EnqueteIndividuelInformationsAgrementFormation
+        label: "Agréments",
+        component: EnqueteIndividuelInformationsAgrements
+      },
+      {
+        label: "Formation",
+        component: EnqueteIndividuelInformationsFormation
       }
     ]
   },
@@ -106,17 +111,15 @@ export const EnqueteIndividuel = props => {
     return <Box>Chargement...</Box>;
   }
 
-  const {
-    enqueteIndividuel: { enquete_reponse_id, enquete_individuel_id }
-  } = data;
+  const { enqueteIndividuelReponse } = data;
 
-  const enquete = {
-    id: enqueteId,
-    enqueteReponseId: enquete_reponse_id,
-    enqueteIndividuelId: enquete_individuel_id
-  };
-
-  return <MenuStepper enquete={enquete} mandataireId={mandataireId} sections={MENU_SECTIONS} />;
+  return (
+    <MenuStepper
+      enqueteReponse={enqueteIndividuelReponse}
+      mandataireId={mandataireId}
+      sections={MENU_SECTIONS}
+    />
+  );
 };
 
 export default EnqueteIndividuel;

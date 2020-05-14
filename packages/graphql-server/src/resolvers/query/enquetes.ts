@@ -1,23 +1,21 @@
 import { DataSource } from "../../datasource";
-import { mapEnqueteIndividuelProperties } from "../../utils/enquetes";
 
-export const enqueteIndividuel = async (
+export const enqueteIndividuelReponse = async (
   _: any,
   { enqueteId, mandataireId }: { enqueteId: number; mandataireId: number },
   { dataSources }: { dataSources: DataSource }
 ) => {
-  const {
-    enquete_reponses
-  } = await dataSources.enqueteAPI.getEnqueteIndividuel(enqueteId);
-  if (enquete_reponses.length) {
-    return mapEnqueteIndividuelProperties(enquete_reponses[0]);
-  }
-  const enqueteReponse = await dataSources.enqueteAPI.createEnqueteIndividuelReponse(
-    enqueteId,
-    mandataireId
+  const enqueteResponse = await dataSources.enqueteAPI.getEnqueteReponse(
+    enqueteId
   );
-  if (enqueteReponse) {
-    return mapEnqueteIndividuelProperties(enqueteReponse);
+
+  if (!enqueteResponse) {
+    const createdEnqueteReponse = await dataSources.enqueteAPI.createEnqueteReponse(
+      enqueteId,
+      mandataireId
+    );
+    return createdEnqueteReponse;
+  } else {
+    return enqueteResponse;
   }
-  return null;
 };

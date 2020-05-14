@@ -18,7 +18,10 @@ export default gql`
       court: Int
     ): Int!
 
-    enqueteIndividuel(enqueteId: Int!, mandataireId: Int!): EnqueteIndividuel!
+    enqueteIndividuelReponse(
+      enqueteId: Int!
+      mandataireId: Int!
+    ): EnqueteReponse!
 
     openMesureNumber(region: Int, department: Int, court: Int): Int!
 
@@ -67,13 +70,18 @@ export default gql`
     niveau_qualification_secretaire_spe: Int
   }
 
-  type EnqueteIndividuel {
+  type EnqueteReponse {
+    id: Int!
+    enquete_reponses_activite_id: Int
+    enquete_reponses_agrements_formations_id: Int
+    enquete_reponses_informations_mandataire_id: Int
+    enquete_reponses_populations_id: Int
+    enquete_reponses_prestations_sociale_id: Int
     mandataire_id: Int
-    enquete_id: Int
-    enquete_reponse_id: Int
-    enquete_individuel_id: Int
-    informations: EnqueteIndividuelInformations
-    activite: EnqueteActivite
+    service_id: Int
+    submitted_at: String
+    created_at: String
+    enquete_id: Int!
   }
 
   type EnqueteActivite {

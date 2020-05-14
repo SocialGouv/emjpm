@@ -7,12 +7,22 @@ import { UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS } from "./mutations";
 import { ENQUETE_CURATELLE_BIENS } from "./queries";
 
 export const EnqueteActiviteCuratelleBiens = props => {
-  const { goToPrevPage, goToNextPage, enquete } = props;
-  const { enqueteReponseId } = enquete;
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS);
+  const { goToPrevPage, goToNextPage, enqueteReponse } = props;
+  const { enquete_reponses_activite_id } = enqueteReponse;
+
+  const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS, {
+    refetchQueries: [
+      {
+        query: ENQUETE_CURATELLE_BIENS,
+        variables: {
+          id: enquete_reponses_activite_id
+        }
+      }
+    ]
+  });
   const { data, loading } = useQuery(ENQUETE_CURATELLE_BIENS, {
     variables: {
-      id: enqueteReponseId
+      id: enquete_reponses_activite_id
     }
   });
 
@@ -20,23 +30,21 @@ export const EnqueteActiviteCuratelleBiens = props => {
     return <Box p={4}>Chargement...</Box>;
   }
 
-  const { enquete_reponses } = data;
-  const [
-    {
-      activite_curatelle_biens_domicile_debut_annee,
-      activite_curatelle_biens_domicile_fin_annee,
-      activite_curatelle_biens_etablissement_debut_annee,
-      activite_curatelle_biens_etablissement_fin_annee
-    }
-  ] = enquete_reponses;
+  const { enquete_reponses_activite_by_pk: activite } = data;
+  const {
+    curatelle_biens_domicile_debut_annee,
+    curatelle_biens_domicile_fin_annee,
+    curatelle_biens_etablissement_debut_annee,
+    curatelle_biens_etablissement_fin_annee
+  } = activite;
 
   return (
     <Box>
       <EnqueteActiviteForm
-        nbMesureEtablissementDebutAnnee={activite_curatelle_biens_etablissement_debut_annee}
-        nbMesureEtablissementFinAnnee={activite_curatelle_biens_etablissement_fin_annee}
-        nbMesureDomicileDebutAnnee={activite_curatelle_biens_domicile_debut_annee}
-        nbMesureDomicileFinAnnee={activite_curatelle_biens_domicile_fin_annee}
+        nbMesureEtablissementDebutAnnee={curatelle_biens_etablissement_debut_annee}
+        nbMesureEtablissementFinAnnee={curatelle_biens_etablissement_fin_annee}
+        nbMesureDomicileDebutAnnee={curatelle_biens_domicile_debut_annee}
+        nbMesureDomicileFinAnnee={curatelle_biens_domicile_fin_annee}
         handleSubmit={async values => {
           const {
             nbMesureDomicileDebutAnnee,
@@ -46,7 +54,7 @@ export const EnqueteActiviteCuratelleBiens = props => {
           } = values;
           await updateEnquete({
             variables: {
-              id: enqueteReponseId,
+              id: enquete_reponses_activite_id,
               etablissementDebutAnnee: nbMesureEtablissementDebutAnnee || null,
               etablissementFinAnnee: nbMesureEtablissementFinAnnee || null,
               domicileDebutAnnee: nbMesureDomicileDebutAnnee || null,

@@ -4,21 +4,24 @@ import { Box } from "rebass";
 
 import { EnqueteIndividuelPrestationsSocialesForm } from "./EnqueteIndividuelPrestationsSocialesForm";
 import { UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES } from "./mutations";
-import { ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES } from "./queries";
+import { ENQUETE_REPONSE_PRESTATIONS_SOCIALES } from "./queries";
 
 export const EnqueteIndividuelPrestationsSociales = props => {
-  const { goToNextPage, goToPrevPage, enquete } = props;
-  const { enqueteIndividuelId } = enquete;
+  const { goToNextPage, goToPrevPage, enqueteReponse } = props;
+  const { enquete_reponses_prestations_sociale_id } = enqueteReponse;
 
-  const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES, {
+  const { data, loading } = useQuery(ENQUETE_REPONSE_PRESTATIONS_SOCIALES, {
     variables: {
-      id: enqueteIndividuelId
+      id: enquete_reponses_prestations_sociale_id
     }
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES, {
     refetchQueries: [
-      { query: ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES, variables: { id: enqueteIndividuelId } }
+      {
+        query: ENQUETE_REPONSE_PRESTATIONS_SOCIALES,
+        variables: { id: enquete_reponses_prestations_sociale_id }
+      }
     ]
   });
 
@@ -26,7 +29,7 @@ export const EnqueteIndividuelPrestationsSociales = props => {
     return <Box p={4}>Chargement...</Box>;
   }
 
-  const { enquete_individuels_by_pk: prestationSociales = {} } = data;
+  const { enquete_reponses_prestations_sociales_by_pk: prestationSociales = {} } = data;
 
   return (
     <EnqueteIndividuelPrestationsSocialesForm
@@ -35,7 +38,7 @@ export const EnqueteIndividuelPrestationsSociales = props => {
       handleSubmit={async values => {
         await updateEnquete({
           variables: {
-            id: enqueteIndividuelId,
+            id: enquete_reponses_prestations_sociale_id,
             aah: values.aah || null,
             pch: values.pch || null,
             asi: values.asi || null,

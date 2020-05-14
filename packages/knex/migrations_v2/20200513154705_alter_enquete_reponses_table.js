@@ -2,6 +2,8 @@ exports.up = async knex => {
   await knex.raw("DROP TABLE IF EXISTS enquete_reponses");
 
   await knex.schema.createTable("enquete_reponses", table => {
+    table.increments();
+    table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("submitted_at").defaultTo(knex.fn.now());
 
     table

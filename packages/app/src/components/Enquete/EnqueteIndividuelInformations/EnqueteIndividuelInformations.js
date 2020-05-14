@@ -6,45 +6,20 @@ import { EnqueteIndividuelInformationsForm } from "./EnqueteIndividuelInformatio
 import { UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE } from "./queries";
 
-const formatNumber = value => (value ? Number(value) : undefined);
-
-function formatValues(values) {
-  return {
-    estimationEtp: values.estimationEtp,
-    secretaireSpecialise: values.secretaireSpecialise,
-    secretaireSpecialiseEtp: `${values.secretaireSpecialiseEtp}`,
-    cumulPrepose: values.cumulPrepose,
-    cumulPreposeEtp: values.cumulPreposeEtp,
-    cumulDelegueService: values.cumulDelegueService,
-    cumulDelegueServiceEtp: values.cumulDelegueServiceEtp,
-    debutActiviteAvant2009: values.debutActiviteAvant2009,
-    anneeDebutActivite: formatNumber(values.anneeDebutActivite),
-    anneeAgrement: formatNumber(values.anneeAgrement),
-    cncMjpmAnneeObtention: formatNumber(values.cncMjpmAnneeObtention),
-    cncMjpmHeureFormation: formatNumber(values.cncMjpmHeureFormation),
-    cncMajAnneeObtention: formatNumber(values.cncMajAnneeObtention),
-    cncMajHeureFormation: formatNumber(values.cncMajHeureFormation),
-    cncDpfAnneeObtention: formatNumber(values.cncDpfAnneeObtention),
-    cncDpfHeureFormation: formatNumber(values.cncDpfHeureFormation),
-    niveauQualification: formatNumber(values.niveauQualification),
-    niveauQualificationSecretaireSpe: formatNumber(values.niveauQualificationSecretaireSpe)
-  };
-}
-
 export const EnqueteIndividuelInformations = props => {
-  const { goToNextPage, goToPrevPage, enquete } = props;
-  const { enqueteIndividuelId } = enquete;
+  const { goToNextPage, goToPrevPage, enqueteReponse } = props;
+  const { id, enquete_reponses_informations_mandataire_id } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE, {
     variables: {
-      id: enqueteIndividuelId
+      id: enquete_reponses_informations_mandataire_id
     }
   });
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS, {
     refetchQueries: [
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE,
-        variables: { id: enqueteIndividuelId }
+        variables: { id: enquete_reponses_informations_mandataire_id }
       }
     ]
   });
@@ -53,18 +28,24 @@ export const EnqueteIndividuelInformations = props => {
     return <Box p={4}>Chargement...</Box>;
   }
 
-  const { enquete_individuels_by_pk: informations = {} } = data;
+  const { enquete_reponses_informations_mandataire_by_pk: informations = {} } = data;
 
   return (
     <EnqueteIndividuelInformationsForm
       data={informations}
       goToPrevPage={goToPrevPage}
       handleSubmit={async values => {
-        const formattedValues = formatValues(values);
         await updateEnquete({
           variables: {
-            id: enqueteIndividuelId,
-            ...formattedValues
+            id: enquete_reponses_informations_mandataire_id,
+            anciennete: values.anciennete ? `${values.anciennete}` : null,
+            benevole: values.benevole,
+            estimation_etp: values.estimation_etp || null,
+            forme_juridique: values.forme_juridique || null,
+            local_professionnel: values.local_professionnel || null,
+            secretaire_specialise_etp: values.secretaire_specialise_etp
+              ? `${values.secretaire_specialise_etp}`
+              : null
           }
         });
         await goToNextPage();

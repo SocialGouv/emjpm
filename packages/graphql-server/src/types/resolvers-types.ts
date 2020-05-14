@@ -57,16 +57,6 @@ export type EnqueteActivite = {
   sorties_masp?: Maybe<Scalars['Int']>,
 };
 
-export type EnqueteIndividuel = {
-   __typename?: 'EnqueteIndividuel',
-  mandataire_id?: Maybe<Scalars['Int']>,
-  enquete_id?: Maybe<Scalars['Int']>,
-  enquete_reponse_id?: Maybe<Scalars['Int']>,
-  enquete_individuel_id?: Maybe<Scalars['Int']>,
-  informations?: Maybe<EnqueteIndividuelInformations>,
-  activite?: Maybe<EnqueteActivite>,
-};
-
 export type EnqueteIndividuelInformations = {
    __typename?: 'EnqueteIndividuelInformations',
   estimation_etp?: Maybe<Scalars['String']>,
@@ -87,6 +77,21 @@ export type EnqueteIndividuelInformations = {
   cnc_dpf_heure_formation?: Maybe<Scalars['Int']>,
   niveau_qualification?: Maybe<Scalars['Int']>,
   niveau_qualification_secretaire_spe?: Maybe<Scalars['Int']>,
+};
+
+export type EnqueteReponse = {
+   __typename?: 'EnqueteReponse',
+  id: Scalars['Int'],
+  enquete_reponses_activite_id?: Maybe<Scalars['Int']>,
+  enquete_reponses_agrements_formations_id?: Maybe<Scalars['Int']>,
+  enquete_reponses_informations_mandataire_id?: Maybe<Scalars['Int']>,
+  enquete_reponses_populations_id?: Maybe<Scalars['Int']>,
+  enquete_reponses_prestations_sociale_id?: Maybe<Scalars['Int']>,
+  mandataire_id?: Maybe<Scalars['Int']>,
+  service_id?: Maybe<Scalars['Int']>,
+  submitted_at?: Maybe<Scalars['String']>,
+  created_at?: Maybe<Scalars['String']>,
+  enquete_id: Scalars['Int'],
 };
 
 export enum MesureTypeCategory {
@@ -138,7 +143,7 @@ export type Query = {
    __typename?: 'Query',
   newMesureNumber: Scalars['Int'],
   closedMesureNumber: Scalars['Int'],
-  enqueteIndividuel: EnqueteIndividuel,
+  enqueteIndividuelReponse: EnqueteReponse,
   openMesureNumber: Scalars['Int'],
   availableMesureNumber: Scalars['Int'],
   mesureTypeCategoryStatistics: Array<MesureTypeCategoryStatistic>,
@@ -165,7 +170,7 @@ export type QueryClosedMesureNumberArgs = {
 };
 
 
-export type QueryEnqueteIndividuelArgs = {
+export type QueryEnqueteIndividuelReponseArgs = {
   enqueteId: Scalars['Int'],
   mandataireId: Scalars['Int']
 };
