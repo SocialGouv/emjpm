@@ -25,7 +25,7 @@ export const mesureStatAdapter = {
           "MAJ",
           "mandat de protection future",
           "mesure ad hoc",
-          "Subrogé curateur",
+          "subrogé curateur",
           "Subrogé tuteur"
         ];
       case MesureTypeCategory.SauvegardeJustice:
@@ -61,7 +61,7 @@ export const mesureStatAdapter = {
       case "MAJ":
       case "mandat de protection future":
       case "mesure ad hoc":
-      case "Subrogé curateur":
+      case "subrogé curateur":
       case "Subrogé tuteur":
         return MesureTypeCategory.Other;
       case "Sauvegarde de justice":

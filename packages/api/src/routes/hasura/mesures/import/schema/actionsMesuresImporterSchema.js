@@ -16,7 +16,7 @@ const MESURE_TYPES = [
   "mesure ad hoc",
   "Sauvegarde de justice",
   "Sauvegarde de justice avec mandat spécial",
-  "Subrogé curateur",
+  "subrogé curateur",
   "Subrogé tuteur",
   "Tutelle",
   "Tutelle à la personne",
