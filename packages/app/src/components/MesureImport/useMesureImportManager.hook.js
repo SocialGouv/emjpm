@@ -28,7 +28,7 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
           serviceId,
           antennesMap: antennesMap ? JSON.stringify(antennesMap) : undefined,
           type,
-          mandataireUserId // TODO ajouter cette variable optionnelle dans l'action
+          mandataireUserId
         }
       })
         .then(
