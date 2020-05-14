@@ -1,9 +1,10 @@
-import { Field, Heading1, Heading3, InlineError, SmallInput } from "@emjpm/ui";
+import { Field, Heading1, Heading3, InlineError } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 export const EnqueteIndividuelPrestationsSocialesForm = props => {

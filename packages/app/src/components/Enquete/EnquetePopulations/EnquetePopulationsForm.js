@@ -1,9 +1,10 @@
-import { Heading1, Heading3, SmallInput } from "@emjpm/ui";
+import { Heading1, Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import styles from "./style";
 
