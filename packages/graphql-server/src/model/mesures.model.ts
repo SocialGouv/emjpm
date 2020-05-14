@@ -32,11 +32,11 @@ export type MesureType =
   | null;
 
 export type MesureResidence =
-  | "A Domicile"
-  | "En établissement"
-  | "En établissement avec conservation du domicile"
-  | "SDF"
-  | "Autres"
+  | "domicile"
+  | "en établissement"
+  | "en établissement avec conservation du domicile"
+  | "sdf"
+  | "autres"
   | null;
 
 export interface Mesures {

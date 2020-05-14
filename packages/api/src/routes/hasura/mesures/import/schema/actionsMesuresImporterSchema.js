@@ -25,10 +25,10 @@ const MESURE_TYPES = [
 ];
 
 const MESURE_RESIDENCES = [
-  "A domicile",
-  "En établissement",
-  "En établissement avec conservation du domicile",
-  "SDF"
+  "domicile",
+  "en établissement",
+  "en établissement avec conservation du domicile",
+  "sdf"
 ];
 
 // 20/11/2015 or 20/11/15

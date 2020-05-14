@@ -23,10 +23,10 @@ export const MESURE_TYPES = [
 ];
 
 export const MESURE_RESIDENCES = [
-  "A domicile",
-  "En établissement",
-  "En établissement avec conservation du domicile",
-  "SDF"
+  "domicile",
+  "en établissement",
+  "en établissement avec conservation du domicile",
+  "sdf"
 ];
 
 export const MESURE_CIVILITIES = ["F", "H"];
@@ -147,14 +147,14 @@ export const MESURE_TYPE_LABEL_VALUE = [
 ];
 
 export const RESIDENCE = [
-  { label: "A Domicile", value: "A Domicile" },
-  { label: "En établissement", value: "En établissement" },
+  { label: "domicile", value: "domicile" },
+  { label: "en établissement", value: "en établissement" },
   {
-    label: "En établissement avec conservation du domicile",
-    value: "En établissement avec conservation du domicile"
+    label: "en établissement avec conservation du domicile",
+    value: "en établissement avec conservation du domicile"
   },
-  { label: "SDF", value: "SDF" },
-  { label: "Autres", value: "Autres" }
+  { label: "sdf", value: "sdf" },
+  { label: "autres", value: "autres" }
 ];
 
 export const CIVILITY = [
