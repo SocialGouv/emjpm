@@ -8,22 +8,13 @@ const toJson = ({ base64str, type }) => {
   const [worksheetName] = workbook.SheetNames;
   const worksheet = workbook.Sheets[worksheetName];
 
-  return XLSX.utils
-    .sheet_to_json(
-      worksheet,
-      type === "csv"
-        ? // csv
-          { dateNF: "dd/mm/yyyy" }
-        : // excel
-          { raw: false }
-    )
-    .map(row => {
-      return Object.keys(row).reduce((acc, key) => {
-        acc[key] = row[key].toString().trim();
+  return XLSX.utils.sheet_to_json(worksheet, { raw: true }).map(row => {
+    return Object.keys(row).reduce((acc, key) => {
+      acc[key] = row[key].toString().trim();
 
-        return acc;
-      }, {});
-    });
+      return acc;
+    }, {});
+  });
 };
 
 const excelParser = {
