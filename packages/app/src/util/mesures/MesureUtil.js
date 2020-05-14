@@ -22,7 +22,7 @@ const VALUE_LABEL = {
   OTHER: "Autre",
   SAUVEGARDE_JUSTICE: "sauvegarde de justice",
   TOTAL: "Total",
-  TUTELLE: "Tutelle"
+  TUTELLE: "tutelle"
 };
 
 export const getMesureCategoryTypeColor = type => MESURE_CATEGORY_TYPE_COLORS[type];

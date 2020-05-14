@@ -16,10 +16,10 @@ export const MESURE_TYPES = [
   "sauvegarde de justice avec mandat spécial",
   "subrogé curateur",
   "subrogé tuteur",
-  "Tutelle",
-  "Tutelle à la personne",
-  "Tutelle aux biens",
-  "Tutelle aux biens et à la personne"
+  "tutelle",
+  "tutelle à la personne",
+  "tutelle aux biens",
+  "tutelle aux biens et à la personne"
 ];
 
 export const MESURE_RESIDENCES = [
@@ -129,20 +129,20 @@ export const MESURE_TYPE_LABEL_VALUE = [
     value: "subrogé tuteur"
   },
   {
-    label: "Tutelle",
-    value: "Tutelle"
+    label: "tutelle",
+    value: "tutelle"
   },
   {
-    label: "Tutelle à la personne",
-    value: "Tutelle à la personne"
+    label: "tutelle à la personne",
+    value: "tutelle à la personne"
   },
   {
-    label: "Tutelle aux biens",
-    value: "Tutelle aux biens"
+    label: "tutelle aux biens",
+    value: "tutelle aux biens"
   },
   {
-    label: "Tutelle aux biens et à la personne",
-    value: "Tutelle aux biens et à la personne"
+    label: "tutelle aux biens et à la personne",
+    value: "tutelle aux biens et à la personne"
   }
 ];
 

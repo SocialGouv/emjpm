@@ -35,10 +35,10 @@ export const mesureStatAdapter = {
         ];
       case MesureTypeCategory.Tutelle:
         return [
-          "Tutelle",
-          "Tutelle aux biens",
-          "Tutelle aux biens et à la personne",
-          "Tutelle à la personne"
+          "tutelle",
+          "tutelle aux biens",
+          "tutelle aux biens et à la personne",
+          "tutelle à la personne"
         ];
     }
   },
@@ -67,10 +67,10 @@ export const mesureStatAdapter = {
       case "sauvegarde de justice":
       case "sauvegarde de justice avec mandat spécial":
         return MesureTypeCategory.SauvegardeJustice;
-      case "Tutelle":
-      case "Tutelle aux biens":
-      case "Tutelle aux biens et à la personne":
-      case "Tutelle à la personne":
+      case "tutelle":
+      case "tutelle aux biens":
+      case "tutelle aux biens et à la personne":
+      case "tutelle à la personne":
         return MesureTypeCategory.Tutelle;
       default:
         throw new Error(

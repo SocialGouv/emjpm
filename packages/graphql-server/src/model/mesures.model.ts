@@ -25,10 +25,10 @@ export type MesureType =
   | "sauvegarde de justice avec mandat spécial"
   | "subrogé curateur"
   | "subrogé tuteur"
-  | "Tutelle"
-  | "Tutelle à la personne"
-  | "Tutelle aux biens"
-  | "Tutelle aux biens et à la personne"
+  | "tutelle"
+  | "tutelle à la personne"
+  | "tutelle aux biens"
+  | "tutelle aux biens et à la personne"
   | null;
 
 export type MesureResidence =

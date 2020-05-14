@@ -17,7 +17,7 @@ export const datas = [
     numeroDossier: '315126646',
     numeroRg: '651654654',
     status: 'Eteindre mesure',
-    type: 'Tutelle aux biens et à la personne',
+    type: 'tutelle aux biens et à la personne',
     ville: 'PARIS',
   },
   {
@@ -63,7 +63,7 @@ export const datas = [
     numeroRg: '651654654',
     status: 'Mesure en cours',
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
   {
@@ -87,7 +87,7 @@ export const datas = [
     status: 'Mesure en cours',
 
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
   {
@@ -110,7 +110,7 @@ export const datas = [
     numeroRg: '651654654',
     status: 'Mesure en cours',
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
   {
@@ -133,7 +133,7 @@ export const datas = [
     numeroRg: '651654654',
     status: 'Mesure en cours',
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
   {
@@ -156,7 +156,7 @@ export const datas = [
     numeroRg: '651654654',
     status: 'Mesure en cours',
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
 ];
@@ -182,7 +182,7 @@ export const mandataireDatas = [
     numeroRg: '651654654',
     status: 'Mesure en attente',
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
   {
@@ -205,7 +205,7 @@ export const mandataireDatas = [
     numeroRg: '651654654',
     status: 'Mesure en attente',
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
   {
@@ -228,7 +228,7 @@ export const mandataireDatas = [
     numeroRg: '651654654',
     status: 'Mesure en attente',
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
   {
@@ -251,7 +251,7 @@ export const mandataireDatas = [
     numeroRg: '651654654',
     status: 'Mesure en attente',
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
   {
@@ -274,7 +274,7 @@ export const mandataireDatas = [
     numeroRg: '651654654',
     status: 'Mesure en attente',
     tribunal: 'test',
-    type: 'Tutelle',
+    type: 'tutelle',
     ville: 'PARIS',
   },
 ];
