@@ -17,15 +17,15 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
     cnc_maj_heure_formation = "",
     cnc_mjpm_annee_obtention = "",
     cnc_mjpm_heure_formation = "",
-    cumul_delegue_service = "",
-    cumul_delegue_service_etp = "",
-    cumul_prepose = "",
-    cumul_prepose_etp = "",
-    debut_activite_avant_2009 = "",
-    last_update = "",
+    // cumul_delegue_service = "",
+    // cumul_delegue_service_etp = "",
+    // cumul_prepose = "",
+    // cumul_prepose_etp = "",
+    // debut_activite_avant_2009 = "",
+    // last_update = "",
     niveau_qualification = "",
-    niveau_qualification_secretaire_spe = "",
-    secretaire_specialise = ""
+    niveau_qualification_secretaire_spe = ""
+    // secretaire_specialise = ""
   } = data;
 
   const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
