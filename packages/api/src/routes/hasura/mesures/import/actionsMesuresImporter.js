@@ -30,6 +30,16 @@ async function importMesuresFile({
 
   const mesuresToImport = excelParser.toJson({ base64str, type });
 
+  mesuresToImport.forEach(data => {
+    if (data.type) {
+      data.type = data.type.toLowerCase();
+    }
+    if (data.residence) {
+      data.residence = data.residence.toLowerCase();
+      data.residence = data.residence.replace("a domicile", "domicile");
+    }
+  });
+
   logger.info(`[IMPORT] mesuresToImport: ${mesuresToImport.length}`);
 
   const {

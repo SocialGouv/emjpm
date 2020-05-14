@@ -7,38 +7,38 @@ export const mesureStatAdapter = {
       case MesureTypeCategory.CuratelleRenforcee:
         return [
           "curatelle renforcée",
-          "Curatelle renforcée",
-          "Curatelle renforcée aux biens",
-          "Curatelle renforcée aux biens et à la personne",
-          "Curatelle renforcée à la personne"
+          "curatelle renforcée",
+          "curatelle renforcée aux biens",
+          "curatelle renforcée aux biens et à la personne",
+          "curatelle renforcée à la personne"
         ];
       case MesureTypeCategory.CuratelleSimple:
         return [
-          "Curatelle",
-          "Curatelle simple",
-          "Curatelle simple aux biens",
-          "Curatelle simple à la personne",
-          "Curatelle simple aux biens et à la personne"
+          "curatelle",
+          "curatelle simple",
+          "curatelle simple aux biens",
+          "curatelle simple à la personne",
+          "curatelle simple aux biens et à la personne"
         ];
       case MesureTypeCategory.Other:
         return [
-          "MAJ",
-          "Mandat de protection future",
-          "Mesure ad hoc",
-          "Subrogé curateur",
-          "Subrogé tuteur"
+          "maj",
+          "mandat de protection future",
+          "mesure ad hoc",
+          "subrogé curateur",
+          "subrogé tuteur"
         ];
       case MesureTypeCategory.SauvegardeJustice:
         return [
-          "Sauvegarde de justice",
-          "Sauvegarde de justice avec mandat spécial"
+          "sauvegarde de justice",
+          "sauvegarde de justice avec mandat spécial"
         ];
       case MesureTypeCategory.Tutelle:
         return [
-          "Tutelle",
-          "Tutelle aux biens",
-          "Tutelle aux biens et à la personne",
-          "Tutelle à la personne"
+          "tutelle",
+          "tutelle aux biens",
+          "tutelle aux biens et à la personne",
+          "tutelle à la personne"
         ];
     }
   },
@@ -48,30 +48,29 @@ export const mesureStatAdapter = {
     }
     switch (type) {
       case "curatelle renforcée":
-      case "Curatelle renforcée":
-      case "Curatelle renforcée aux biens":
-      case "Curatelle renforcée aux biens et à la personne":
-      case "Curatelle renforcée à la personne":
+      case "curatelle renforcée aux biens":
+      case "curatelle renforcée aux biens et à la personne":
+      case "curatelle renforcée à la personne":
         return MesureTypeCategory.CuratelleRenforcee;
-      case "Curatelle":
-      case "Curatelle simple":
-      case "Curatelle simple aux biens":
-      case "Curatelle simple à la personne":
-      case "Curatelle simple aux biens et à la personne":
+      case "curatelle":
+      case "curatelle simple":
+      case "curatelle simple aux biens":
+      case "curatelle simple à la personne":
+      case "curatelle simple aux biens et à la personne":
         return MesureTypeCategory.CuratelleSimple;
-      case "MAJ":
-      case "Mandat de protection future":
-      case "Mesure ad hoc":
-      case "Subrogé curateur":
-      case "Subrogé tuteur":
+      case "maj":
+      case "mandat de protection future":
+      case "mesure ad hoc":
+      case "subrogé curateur":
+      case "subrogé tuteur":
         return MesureTypeCategory.Other;
-      case "Sauvegarde de justice":
-      case "Sauvegarde de justice avec mandat spécial":
+      case "sauvegarde de justice":
+      case "sauvegarde de justice avec mandat spécial":
         return MesureTypeCategory.SauvegardeJustice;
-      case "Tutelle":
-      case "Tutelle aux biens":
-      case "Tutelle aux biens et à la personne":
-      case "Tutelle à la personne":
+      case "tutelle":
+      case "tutelle aux biens":
+      case "tutelle aux biens et à la personne":
+      case "tutelle à la personne":
         return MesureTypeCategory.Tutelle;
       default:
         throw new Error(
