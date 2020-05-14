@@ -10,7 +10,7 @@ export const MESURE_TYPES = [
   "curatelle simple à la personne",
   "curatelle simple aux biens et à la personne",
   "MAJ",
-  "Mandat de protection future",
+  "mandat de protection future",
   "Mesure ad hoc",
   "Sauvegarde de justice",
   "Sauvegarde de justice avec mandat spécial",
@@ -105,8 +105,8 @@ export const MESURE_TYPE_LABEL_VALUE = [
     value: "MAJ"
   },
   {
-    label: "Mandat de protection future",
-    value: "Mandat de protection future"
+    label: "mandat de protection future",
+    value: "mandat de protection future"
   },
   {
     label: "Mesure ad hoc",

@@ -29,7 +29,7 @@ exports.seed = function(knex) {
         mandataire_id: 2,
         created_at: "2010-10-05",
         annee: "2010-10-05",
-        type: "Mandat de protection future",
+        type: "mandat de protection future",
         date_ouverture: "2010-10-05",
         residence: "oui",
         civilite: "F",
