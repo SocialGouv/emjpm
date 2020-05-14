@@ -32,10 +32,10 @@ async function importMesuresFile({
 
   mesuresToImport.forEach(data => {
     if (data.type) {
-      data.type = data.type.lower();
+      data.type = data.type.toLowerCase();
     }
     if (data.residence) {
-      data.residence = data.residence.lower();
+      data.residence = data.residence.toLowerCase();
       data.residence = data.residence.replace("a domicile", "domicile");
     }
   });
