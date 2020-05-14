@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Flex, Text } from "rebass";
+import { Button, Flex } from "rebass";
 
 export const EnqueteStepperButtons = props => {
   const { goToPrevPage } = props;
