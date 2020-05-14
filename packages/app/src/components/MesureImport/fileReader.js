@@ -1,7 +1,14 @@
 function readFileAsBinaryString(file, cb, err) {
   if (file) {
     const reader = new FileReader();
-    reader.readAsBinaryString(file);
+
+    const isExcel = file.name.endsWith(".xls") || file.name.endsWith(".xlsx");
+
+    if (isExcel) {
+      reader.readAsBinaryString(file);
+    } else {
+      reader.readAsText(file);
+    }
     reader.onload = () => {
       const base64str = btoa(reader.result);
       if (cb) {
