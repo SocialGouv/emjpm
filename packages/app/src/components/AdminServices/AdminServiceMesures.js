@@ -13,7 +13,7 @@ import {
 } from "../../constants/mesures";
 import { DynamicTable, DynamicTableHeader } from "../DynamicTable";
 import ErrorBox from "../ErrorBox";
-import { CALCULATE_SERVICE_MESURES, DELETE_MESURES } from "./mutations";
+import { DELETE_MESURES, RECALCULATE_SERVICE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
 export const MESURES_OPTIONS = [
@@ -23,7 +23,7 @@ export const MESURES_OPTIONS = [
 ];
 
 const AdminServiceMesures = props => {
-  const { serviceId } = props;
+  const serviceId = Number(props.serviceId);
   const [selectedRows, setSelectedRows] = useState([]);
 
   const [selectedMesureStatus, setSelectedMesureStatus] = useState(
@@ -38,10 +38,29 @@ const AdminServiceMesures = props => {
     }
   });
 
-  const [deleteMesures, { loading: mutationLoading }] = useMutation(DELETE_MESURES);
-  const [calculateServiceMesures, { loading: calculateServiceMesuresLoading }] = useMutation(
-    CALCULATE_SERVICE_MESURES
+  const [recalculateServiceMesures, { loading: recalculateServiceMesuresLoading }] = useMutation(
+    RECALCULATE_SERVICE_MESURES,
+    {
+      refetchQueries: [
+        {
+          query: MESURES,
+          variables: {
+            serviceId
+          }
+        }
+      ]
+    }
   );
+
+  const [deleteMesures, { loading: mutationLoading }] = useMutation(DELETE_MESURES, {
+    onCompleted: async () => {
+      await recalculateServiceMesures({
+        variables: {
+          serviceId
+        }
+      });
+    }
+  });
 
   const allMesures = data ? data.mesures : [];
 
@@ -75,21 +94,11 @@ const AdminServiceMesures = props => {
           title="Oups, le nombre de mesures ne semble pas être à jour."
           message={`Mesures en cours: ${inProgressMesuresCount} • Mesures en attente: ${awaitingMesuresCount}`}
           buttonText="Recalculer"
-          isLoading={calculateServiceMesuresLoading}
-          onClick={() => {
-            calculateServiceMesures({
-              refetchQueries: [
-                {
-                  query: MESURES,
-                  variables: {
-                    serviceId: service.id
-                  }
-                }
-              ],
+          isLoading={recalculateServiceMesuresLoading}
+          onClick={async () => {
+            await recalculateServiceMesures({
               variables: {
-                serviceId: service.id,
-                inProgressMesuresCount,
-                awaitingMesuresCount
+                serviceId
               }
             });
           }}
@@ -99,7 +108,12 @@ const AdminServiceMesures = props => {
       <DynamicTableHeader
         onClick={() =>
           deleteMesures({
-            refetchQueries: [{ query: MESURES, variables: { serviceId } }],
+            refetchQueries: [
+              {
+                query: MESURES,
+                variables: { serviceId }
+              }
+            ],
             variables: { ids: selectedRows.map(({ id }) => id) }
           })
         }
