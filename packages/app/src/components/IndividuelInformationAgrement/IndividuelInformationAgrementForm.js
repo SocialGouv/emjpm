@@ -26,7 +26,7 @@ const IndividuelInformationAgrementForm = props => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box>
-        <Heading4 pb={1}>{`Début de votre activtié`}</Heading4>
+        <Heading4 pb={1}>{`Début de votre activité`}</Heading4>
         <Field>
           <FieldLabel label="Votre activité de mandataire a-t-elle a-t-elle débuté avant 2009?" />
           <Select
