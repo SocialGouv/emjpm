@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.32.0](https://github.com/SocialGouv/emjpm/compare/v25.31.2...v25.32.0) (2020-05-15)
+
+
+### Bug Fixes
+
+* **admin:** recalculate service mesures count ([#1794](https://github.com/SocialGouv/emjpm/issues/1794)) ([ace00e0](https://github.com/SocialGouv/emjpm/commit/ace00e04986335583d050d064c74a61b17bd7a66))
+* **excel-parser:** read csv as text ([#1790](https://github.com/SocialGouv/emjpm/issues/1790)) ([d5fb313](https://github.com/SocialGouv/emjpm/commit/d5fb313432e3393d61bc04ec01bdc35d1677e0f8))
+* **mesure:** count ([#1741](https://github.com/SocialGouv/emjpm/issues/1741)) ([557f15c](https://github.com/SocialGouv/emjpm/commit/557f15cb55070d9deba6098adb64b25267836d72))
+* **mesure:** refresh mesures count ([#1735](https://github.com/SocialGouv/emjpm/issues/1735)) ([96212eb](https://github.com/SocialGouv/emjpm/commit/96212ebd63f4468f670a04c82eda0e315a34e8a9))
+* **service-edit:** update yup schema ([#1789](https://github.com/SocialGouv/emjpm/issues/1789)) ([ea43840](https://github.com/SocialGouv/emjpm/commit/ea43840a621c96593645e53d4a2be8cb5de2e4a0))
+
+
+### Features
+
+* **chore:** revert postgres 10=>12 version upgrade ([#1765](https://github.com/SocialGouv/emjpm/issues/1765)) ([0ccac48](https://github.com/SocialGouv/emjpm/commit/0ccac4821d9bb9f7a3036b035415e13df85bca6b))
+* **magistrats/map:** affichage du cluster de mesures sur la carte [#1739](https://github.com/SocialGouv/emjpm/issues/1739) ([#1740](https://github.com/SocialGouv/emjpm/issues/1740)) ([30643c6](https://github.com/SocialGouv/emjpm/commit/30643c632c8b3fcb6726871bbc47149e7b44db82))
+* **mandataires/map:** affichage des clusters sur la carte [#1716](https://github.com/SocialGouv/emjpm/issues/1716) ([#1738](https://github.com/SocialGouv/emjpm/issues/1738)) ([4847d11](https://github.com/SocialGouv/emjpm/commit/4847d114f52ab72196f03996a8f06e76518dfa4c))
+* **mesure:** use lowercase for type and residence ([#1791](https://github.com/SocialGouv/emjpm/issues/1791)) ([9105b23](https://github.com/SocialGouv/emjpm/commit/9105b234b3a5e4ac07924aef46a42589f515b477))
+* **mesures:** refactoring import mesures fix [#1695](https://github.com/SocialGouv/emjpm/issues/1695) [#1664](https://github.com/SocialGouv/emjpm/issues/1664) ([#1734](https://github.com/SocialGouv/emjpm/issues/1734)) ([9c24e13](https://github.com/SocialGouv/emjpm/commit/9c24e13d3f2737ca72ee0fe3ebca4f0a63b408e0)), closes [#1748](https://github.com/SocialGouv/emjpm/issues/1748) [#1748](https://github.com/SocialGouv/emjpm/issues/1748)
+
+
+
+
+
 ## [25.31.2](https://github.com/SocialGouv/emjpm/compare/v25.31.1...v25.31.2) (2020-05-10)
 
 **Note:** Version bump only for package emjpm
