@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.32.0](https://github.com/SocialGouv/emjpm/compare/v25.31.2...v25.32.0) (2020-05-15)
+
+
+### Bug Fixes
+
+* **mesure:** count ([#1741](https://github.com/SocialGouv/emjpm/issues/1741)) ([557f15c](https://github.com/SocialGouv/emjpm/commit/557f15cb55070d9deba6098adb64b25267836d72))
+* **mesure:** refresh mesures count ([#1735](https://github.com/SocialGouv/emjpm/issues/1735)) ([96212eb](https://github.com/SocialGouv/emjpm/commit/96212ebd63f4468f670a04c82eda0e315a34e8a9))
+
+
+### Features
+
+* **mesure:** use lowercase for type and residence ([#1791](https://github.com/SocialGouv/emjpm/issues/1791)) ([9105b23](https://github.com/SocialGouv/emjpm/commit/9105b234b3a5e4ac07924aef46a42589f515b477))
+
+
+
+
+
 ## [25.31.2](https://github.com/SocialGouv/emjpm/compare/v25.31.1...v25.31.2) (2020-05-10)
 
 **Note:** Version bump only for package @emjpm/graphql-server

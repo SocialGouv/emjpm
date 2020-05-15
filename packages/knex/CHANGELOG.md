@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.32.0](https://github.com/SocialGouv/emjpm/compare/v25.31.2...v25.32.0) (2020-05-15)
+
+
+### Features
+
+* **mesure:** use lowercase for type and residence ([#1791](https://github.com/SocialGouv/emjpm/issues/1791)) ([9105b23](https://github.com/SocialGouv/emjpm/commit/9105b234b3a5e4ac07924aef46a42589f515b477))
+* **mesures:** refactoring import mesures fix [#1695](https://github.com/SocialGouv/emjpm/issues/1695) [#1664](https://github.com/SocialGouv/emjpm/issues/1664) ([#1734](https://github.com/SocialGouv/emjpm/issues/1734)) ([9c24e13](https://github.com/SocialGouv/emjpm/commit/9c24e13d3f2737ca72ee0fe3ebca4f0a63b408e0)), closes [#1748](https://github.com/SocialGouv/emjpm/issues/1748) [#1748](https://github.com/SocialGouv/emjpm/issues/1748)
+
+
+
+
+
 ## [25.31.2](https://github.com/SocialGouv/emjpm/compare/v25.31.1...v25.31.2) (2020-05-10)
 
 **Note:** Version bump only for package @emjpm/knex

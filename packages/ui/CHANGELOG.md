@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.32.0](https://github.com/SocialGouv/emjpm/compare/v25.31.2...v25.32.0) (2020-05-15)
+
+
+### Features
+
+* **mesure:** use lowercase for type and residence ([#1791](https://github.com/SocialGouv/emjpm/issues/1791)) ([9105b23](https://github.com/SocialGouv/emjpm/commit/9105b234b3a5e4ac07924aef46a42589f515b477))
+
+
+
+
+
 ## [25.31.2](https://github.com/SocialGouv/emjpm/compare/v25.31.1...v25.31.2) (2020-05-10)
 
 **Note:** Version bump only for package @emjpm/ui
