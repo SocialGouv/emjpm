@@ -13,7 +13,7 @@ import {
 } from "../../constants/mesures";
 import { DynamicTable, DynamicTableHeader } from "../DynamicTable";
 import ErrorBox from "../ErrorBox";
-import { CALCULATE_SERVICE_MESURES, DELETE_MESURES } from "./mutations";
+import { DELETE_MESURES, RECALCULATE_SERVICE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
 export const MESURES_OPTIONS = [
@@ -40,7 +40,7 @@ const AdminServiceMesures = props => {
 
   const [deleteMesures, { loading: mutationLoading }] = useMutation(DELETE_MESURES);
   const [calculateServiceMesures, { loading: calculateServiceMesuresLoading }] = useMutation(
-    CALCULATE_SERVICE_MESURES
+    RECALCULATE_SERVICE_MESURES
   );
 
   const allMesures = data ? data.mesures : [];
@@ -87,9 +87,7 @@ const AdminServiceMesures = props => {
                 }
               ],
               variables: {
-                serviceId: service.id,
-                inProgressMesuresCount,
-                awaitingMesuresCount
+                service_id: service.id
               }
             });
           }}
