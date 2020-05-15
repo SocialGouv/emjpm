@@ -12,6 +12,7 @@ import { magistratMesureDeleteSchema } from "./magistratMesureDeleteSchema";
 import { magistratMesureEditSchema } from "./magistratMesureEditSchema";
 import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
+import { mandataireEnqueteIndividuelSchema } from "./mandataireEnqueteIndividuelSchema";
 import { mandataireMesureSchema } from "./mandataireMesureSchema";
 import { mandataireSignupSchema } from "./mandataireSignupSchema";
 import { passwordSchema } from "./passwordSchema";
@@ -57,5 +58,6 @@ export {
   editorTokenSchema,
   satisfactionCampaignSchema,
   serviceMesureImportSchema,
-  servicePersonnelSchema
+  servicePersonnelSchema,
+  mandataireEnqueteIndividuelSchema
 };

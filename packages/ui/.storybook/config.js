@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { configure, addDecorator } from '@storybook/react';
 import { withA11y } from '@storybook/addon-a11y';
 import { ThemeProvider } from 'theme-ui';
-import preset from '../src/theme';
+import { presetEmjpm } from '../src/preset';
 import 'storybook-chromatic';
 import { Global, css } from '@emotion/core';
 import { GlobalStyle } from '../src/globalStyle';
@@ -22,7 +22,7 @@ const ThemeDecorator = (storyFn) => {
           }
         `}
       />
-      <ThemeProvider theme={preset}>{storyFn()}</ThemeProvider>
+      <ThemeProvider theme={presetEmjpm}>{storyFn()}</ThemeProvider>
     </Fragment>
   );
 };

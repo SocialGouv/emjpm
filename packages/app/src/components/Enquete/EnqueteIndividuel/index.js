@@ -1,0 +1,1 @@
+export { EnqueteIndividuel } from "./EnqueteIndividuel";
