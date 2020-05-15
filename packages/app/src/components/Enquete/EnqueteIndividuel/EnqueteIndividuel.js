@@ -18,7 +18,7 @@ import {
   EnqueteIndividuelInformationsFormation
 } from "../EnqueteIndividuelInformations";
 import { EnqueteIndividuelPrestationsSociales } from "../EnqueteIndividuelPrestationsSociales";
-import { EnquetePopulationsCuratelle } from "../EnquetePopulations/EnquetePopulationsCuratelle";
+import { EnquetePopulationsCuratelle, EnquetePopulationsTutelle } from "../EnquetePopulations";
 import { EnqueteIndividuelWelcome } from "./EnqueteIndividuelWelcome";
 import { ENQUETE_INDIVIDUEL_RESPONSE } from "./queries";
 
@@ -85,10 +85,10 @@ const MENU_SECTIONS = [
     label: "Populations",
     steps: [
       { label: "Curatelle", component: EnquetePopulationsCuratelle },
-      { label: "Tutelle", component: EnquetePopulationsCuratelle },
-      { label: "Mesure d'accompagnement de justice", component: EnquetePopulationsCuratelle },
-      { label: "Sauvegarde de justice", component: EnquetePopulationsCuratelle },
-      { label: "Autre", component: EnquetePopulationsCuratelle }
+      { label: "Tutelle", component: EnquetePopulationsTutelle },
+      { label: "Mesure d'accompagnement de justice", component: EnquetePopulationsTutelle },
+      { label: "Sauvegarde de justice", component: EnquetePopulationsTutelle },
+      { label: "Autre", component: EnquetePopulationsTutelle }
     ]
   },
   {

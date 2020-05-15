@@ -13,36 +13,63 @@ function calculateTotal(firstProperty, secondProperty) {
 }
 
 export const EnquetePopulationsForm = props => {
-  const { title, goToPrevPage } = props;
+  const { title, goToPrevPage, data } = props;
+
+  const {
+    age_inf_25_ans_homme = "",
+    age_inf_25_ans_femme = "",
+    age_25_39_ans_homme = "",
+    age_25_39_ans_femme = "",
+    age_40_59_ans_homme = "",
+    age_40_59_ans_femme = "",
+    age_60_74_ans_homme = "",
+    age_60_74_ans_femme = "",
+    age_sup_75_ans_homme = "",
+    age_sup_75_ans_femme = "",
+    anciennete_inf_1_an = "",
+    anciennete_1_3_ans = "",
+    anciennete_3_5_ans = "",
+    anciennete_5_10_ans = "",
+    anciennete_sup_10_ans = "",
+    type_etablissement_personne_handicapee = "",
+    type_service_personne_handicapee = "",
+    type_ehpad = "",
+    type_autre_etablissement_personne_agee = "",
+    type_chrs = "",
+    type_service_hospitalier_soins_longue_duree = "",
+    type_service_psychiatrique = "",
+    type_autre_service = ""
+  } = data;
+
   const { handleSubmit, handleChange, values, errors } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
     initialValues: {
-      age_inf_25_ans_homme: "",
-      age_inf_25_ans_femme: "",
-      age_25_39_ans_homme: "",
-      age_25_39_ans_femme: "",
-      age_40_59_ans_homme: "",
-      age_40_59_ans_femme: "",
-      age_60_74_ans_homme: "",
-      age_60_74_ans_femme: "",
-      age_sup_75_ans_homme: "",
-      age_sup_75_ans_femme: "",
-      anciennete_inf_1_an: "",
-      anciennete_1_3_ans: "",
-      anciennete_3_5_ans: "",
-      anciennete_5_10_ans: "",
-      anciennete_sup_10_ans: "",
-      type_etablissement_personne_handicapee: "",
-      type_service_personne_handicapee: "",
-      type_ehpad: "",
-      type_autre_etablissement_personne_agee: "",
-      type_chrs: "",
-      type_service_hospitalier_soins_longue_duree: "",
-      type_service_psychiatrique: "",
-      type_autre_service: ""
+      age_inf_25_ans_homme,
+      age_inf_25_ans_femme,
+      age_25_39_ans_homme,
+      age_25_39_ans_femme,
+      age_40_59_ans_homme,
+      age_40_59_ans_femme,
+      age_60_74_ans_homme,
+      age_60_74_ans_femme,
+      age_sup_75_ans_homme,
+      age_sup_75_ans_femme,
+      anciennete_inf_1_an,
+      anciennete_1_3_ans,
+      anciennete_3_5_ans,
+      anciennete_5_10_ans,
+      anciennete_sup_10_ans,
+      type_etablissement_personne_handicapee,
+      type_service_personne_handicapee,
+      type_ehpad,
+      type_autre_etablissement_personne_agee,
+      type_chrs,
+      type_service_hospitalier_soins_longue_duree,
+      type_service_psychiatrique,
+      type_autre_service
     }
   });
 
@@ -312,6 +339,146 @@ export const EnquetePopulationsForm = props => {
           name="anciennete_sup_10_ans"
           value={values.anciennete_sup_10_ans}
           hasError={!!errors.anciennete_sup_10_ans}
+          onChange={handleChange}
+          type="number"
+        />
+        <Label width="auto">personnes</Label>
+      </Flex>
+
+      <Text my={4} fontWeight="bold" color="titleSecondary">
+        {"PAR CATEGORIE D'ETABLISSEMENT"}
+      </Text>
+
+      <Flex mb={4} alignItems="center">
+        <Label htmlFor={"type_etablissement_personne_handicapee"} width="300px">
+          Etablissements pour personnes handicapées
+        </Label>
+        <SmallInput
+          mx={1}
+          min={0}
+          id="type_etablissement_personne_handicapee"
+          name="type_etablissement_personne_handicapee"
+          value={values.type_etablissement_personne_handicapee}
+          hasError={!!errors.type_etablissement_personne_handicapee}
+          onChange={handleChange}
+          type="number"
+        />
+        <Label width="auto">personnes</Label>
+      </Flex>
+
+      <Flex mb={4} alignItems="center">
+        <Label width="300px" htmlFor={"type_service_personne_handicapee"}>
+          Services pour personnes handicapées
+        </Label>
+        <SmallInput
+          mx={1}
+          min={0}
+          id="type_service_personne_handicapee"
+          name="type_service_personne_handicapee"
+          value={values.type_service_personne_handicapee}
+          hasError={!!errors.type_service_personne_handicapee}
+          onChange={handleChange}
+          type="number"
+        />
+        <Label width="auto">personnes</Label>
+      </Flex>
+
+      <Flex mb={4} alignItems="center">
+        <Label width="300px" htmlFor={"type_ehpad"}>
+          EHPAD
+        </Label>
+        <SmallInput
+          mx={1}
+          min={0}
+          id="type_ehpad"
+          name="type_ehpad"
+          value={values.type_ehpad}
+          hasError={!!errors.type_ehpad}
+          onChange={handleChange}
+          type="number"
+        />
+        <Label width="auto">personnes</Label>
+      </Flex>
+
+      <Flex mb={4} alignItems="center">
+        <Label width="300px" htmlFor={"type_autre_etablissement_personne_agee"}>
+          Autres établissements pour personnes âgées
+        </Label>
+        <SmallInput
+          mx={1}
+          min={0}
+          id="type_autre_etablissement_personne_agee"
+          name="type_autre_etablissement_personne_agee"
+          value={values.type_autre_etablissement_personne_agee}
+          hasError={!!errors.type_autre_etablissement_personne_agee}
+          onChange={handleChange}
+          type="number"
+        />
+        <Label width="auto">personnes</Label>
+      </Flex>
+
+      <Flex mb={4} alignItems="center">
+        <Label width="300px" htmlFor={"type_chrs"}>
+          {"Centre d'hébergement et de réinsertion sociale (CHRS)"}
+        </Label>
+        <SmallInput
+          mx={1}
+          min={0}
+          id="type_chrs"
+          name="type_chrs"
+          value={values.type_chrs}
+          hasError={!!errors.type_chrs}
+          onChange={handleChange}
+          type="number"
+        />
+        <Label width="auto">personnes</Label>
+      </Flex>
+
+      <Flex mb={4} alignItems="center">
+        <Label width="300px" htmlFor={"type_service_hospitalier_soins_longue_duree"}>
+          {"Service de soins de longue durée"}
+        </Label>
+        <SmallInput
+          mx={1}
+          min={0}
+          id="type_service_hospitalier_soins_longue_duree"
+          name="type_service_hospitalier_soins_longue_duree"
+          value={values.type_service_hospitalier_soins_longue_duree}
+          hasError={!!errors.type_service_hospitalier_soins_longue_duree}
+          onChange={handleChange}
+          type="number"
+        />
+        <Label width="auto">personnes</Label>
+      </Flex>
+
+      <Flex mb={4} alignItems="center">
+        <Label width="300px" htmlFor={"type_service_psychiatrique"}>
+          {"Service psychiatrique"}
+        </Label>
+        <SmallInput
+          mx={1}
+          min={0}
+          id="type_service_psychiatrique"
+          name="type_service_psychiatrique"
+          value={values.type_service_psychiatrique}
+          hasError={!!errors.type_service_psychiatrique}
+          onChange={handleChange}
+          type="number"
+        />
+        <Label width="auto">personnes</Label>
+      </Flex>
+
+      <Flex mb={4} alignItems="center">
+        <Label width="300px" htmlFor={"type_autre_service"}>
+          {"Service psychiatrique"}
+        </Label>
+        <SmallInput
+          mx={1}
+          min={0}
+          id="type_autre_service"
+          name="type_autre_service"
+          value={values.type_autre_service}
+          hasError={!!errors.type_autre_service}
           onChange={handleChange}
           type="number"
         />
