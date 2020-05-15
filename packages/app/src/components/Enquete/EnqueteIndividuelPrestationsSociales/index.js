@@ -1,0 +1,1 @@
+export { EnqueteIndividuelPrestationsSociales } from "./EnqueteIndividuelPrestationsSociales";

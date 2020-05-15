@@ -4,6 +4,7 @@ import { Link } from "./Link";
 import LinkButton from "./LinkButton";
 import { List, ListItem, ListTitle } from "./List";
 import ServiceEditLinkButton from "./ServiceEditLinkButton";
+import { YesNoComboBox } from "./YesNoComboBox";
 
 export {
   List,
@@ -13,5 +14,6 @@ export {
   Link,
   LinkButton,
   AntenneLinkButton,
-  AntenneEditLinkButton
+  AntenneEditLinkButton,
+  YesNoComboBox
 };
