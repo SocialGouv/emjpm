@@ -12,7 +12,6 @@ import { withAuthSync } from "../../../src/util/auth";
 
 const Service = props => {
   const { serviceId } = props;
-
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
