@@ -320,6 +320,9 @@ tables:
       interval_sec: 10
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_TOKEN_REQUEST
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - table:
     schema: public
     name: editors
@@ -2535,6 +2538,9 @@ tables:
       interval_sec: 10
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_EMAIL_RESERVATION
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
   - name: email-cancel-reservation
     definition:
       enable_manual: false
@@ -2545,6 +2551,9 @@ tables:
       interval_sec: 10
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - table:
     schema: public
     name: regions
@@ -3055,6 +3064,9 @@ tables:
       interval_sec: 10
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - table:
     schema: public
     name: service_members
@@ -3916,6 +3928,9 @@ tables:
       interval_sec: 10
       timeout_sec: 60
     webhook_from_env: WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - table:
     schema: public
     name: view_department_availability
@@ -4297,6 +4312,9 @@ actions:
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/upload'
     output_type: FileOutput
     forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
     arguments:
     - name: name
       type: String!

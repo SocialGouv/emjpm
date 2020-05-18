@@ -33,13 +33,13 @@ afterEach(async () => {
   nodemailerMock.mock.reset();
 });
 
-describe("POST /webhook/email-reservation", () => {
+describe("POST /hasura/events/email-reservation", () => {
   describe("when ti_id is not *already* set or ti not found", () => {
     test("it returns 200", async () => {
       const mesureWithInvalidTi = { ...global.mesure, ti_id: null };
 
       const response = await request(server)
-        .post("/webhook/email-reservation")
+        .post("/hasura/events/email-reservation")
         .set("Accept", "application/json")
         .send(createHasuraTriggerEvent(mesureWithInvalidTi));
 
@@ -49,7 +49,7 @@ describe("POST /webhook/email-reservation", () => {
 
   test("it returns 200", async () => {
     const response = await request(server)
-      .post("/webhook/email-reservation")
+      .post("/hasura/events/email-reservation")
       .set("Accept", "application/json")
       .send(createHasuraTriggerEvent(global.mesure));
 

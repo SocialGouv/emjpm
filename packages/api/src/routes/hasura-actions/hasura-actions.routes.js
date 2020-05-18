@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const actionsMesuresImporter = require("./mesures/import/actionsMesuresImporter");
+const actionsMesuresImporter = require("./mesures-import/actionsMesuresImporter");
 const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
 const HttpError = require("../../utils/error/HttpError");
 const {
   parseHasuraSessionVariables
-} = require("./hasura-action-session-variable-parser");
+} = require("../../utils/hasura/hasura-action-session-variable-parser");
 const { Service } = require("../../models/Service");
 
 // Hasura handler associated to `upload_mesures_file` hasura action
