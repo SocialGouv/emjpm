@@ -50,22 +50,6 @@ app.get("/ping", function(req, res) {
   }
 });
 
-app.get("/", function(req, res) {
-  res.json({
-    title: "API eMJPM",
-    version: pkg.version,
-    NODE_ENV: process.env.NODE_ENV || "development"
-  });
-});
-
-app.get("/json/version", function(req, res) {
-  res.json({
-    title: "API eMJPM",
-    version: pkg.version,
-    NODE_ENV: process.env.NODE_ENV || "development"
-  });
-});
-
 app.get("/json", function(req, res) {
   res.json({
     title: "API eMJPM",
