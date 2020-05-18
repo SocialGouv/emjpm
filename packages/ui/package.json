@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/ui",
-  "version": "25.32.0",
+  "version": "25.33.0",
   "private": true,
   "description": "",
   "source": "src/index.js",
@@ -30,13 +30,13 @@
   "peerDependencies": {
     "@emotion/core": "10.x",
     "@emotion/styled": "10.x",
+    "@rebass/forms": "^4.0.6",
     "prop-types": "15.x",
     "react": "16.x",
     "react-dom": "16.x",
     "rebass": "4.x",
     "styled-components": "4.x",
-    "theme-ui": "0.x",
-    "@rebass/forms": "^4.0.6"
+    "theme-ui": "0.x"
   },
   "dependencies": {
     "@styled-icons/boxicons-solid": "^10.0.0",
