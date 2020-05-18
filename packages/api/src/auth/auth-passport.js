@@ -2,7 +2,10 @@ const passport = require("passport");
 const authLoginPasswordStrategy = require("./strategies/authLoginPasswordStrategy");
 const authEditorJwtStrategy = require("./strategies/authEditorJwtStrategy");
 const authUserJwtStrategy = require("./strategies/authUserJwtStrategy");
-const authHasuraWebHookHeaderSecretStrategy = require("./strategies/authHasuraWebHookHeaderSecretStrategy");
+const {
+  strategy: authHasuraWebHookHeaderSecretStrategy,
+  userSerializer: authHasuraUserSerializer
+} = require("./strategies/authHasuraWebHookHeaderSecretStrategy");
 
 const logger = require("../utils/logger");
 const jwtConfig = require("../config/jwt");
@@ -17,21 +20,20 @@ function init() {
   passport.serializeUser((user, done) => {
     if (user && user.id) {
       done(null, user.id);
-    } else if (user.hasura === true) {
+    } else if (user.__auth_type__ === "hasura") {
       // hasura webhook strategy
-      done(null, "hasura");
+      done(null, authHasuraUserSerializer.serialize(user));
     } else {
       // unknown
       done(new Error("Invalid user"));
     }
   });
 
-  passport.deserializeUser((id, done) => {
-    if (id === "hasura") {
-      done(null, {
-        hasura: true
-      });
+  passport.deserializeUser((str, done) => {
+    if (str.startsWith(authHasuraUserSerializer.PREFIX)) {
+      done(null, authHasuraUserSerializer.deserialize(str));
     }
+    const id = str;
     knex("users")
       .where({ id })
       .first()

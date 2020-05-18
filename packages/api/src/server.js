@@ -48,10 +48,7 @@ app.use(
 
 app.use(
   "/hasura/actions",
-  [
-    passport.authenticate("hasura-webhook-header-secret"),
-    passport.authenticate("user-jwt", { session: false })
-  ],
+  [passport.authenticate("hasura-webhook-header-secret")],
   require("./routes/hasura-actions/hasura-actions.routes.js")
 );
 
