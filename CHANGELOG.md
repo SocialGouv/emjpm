@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.33.0](https://github.com/SocialGouv/emjpm/compare/v25.32.0...v25.33.0) (2020-05-18)
+
+
+### Bug Fixes
+
+* **ingress-api:** update ingress path ([#1795](https://github.com/SocialGouv/emjpm/issues/1795)) ([ac68e15](https://github.com/SocialGouv/emjpm/commit/ac68e1577cdb1ab99a1d4dfe7484cd234d6c2d4b))
+
+
+### Features
+
+* **enquete:** individuel form ([#1792](https://github.com/SocialGouv/emjpm/issues/1792)) ([a657d0a](https://github.com/SocialGouv/emjpm/commit/a657d0a24c8e46210f5a858e67d7c6917a4d8ad6)), closes [#1746](https://github.com/SocialGouv/emjpm/issues/1746) [#1746](https://github.com/SocialGouv/emjpm/issues/1746)
+
+
+
+
+
 # [25.32.0](https://github.com/SocialGouv/emjpm/compare/v25.31.2...v25.32.0) (2020-05-15)
 
 
