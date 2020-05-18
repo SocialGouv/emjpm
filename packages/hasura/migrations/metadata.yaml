@@ -4307,6 +4307,20 @@ remote_schemas:
     timeout_seconds: 60
     forward_client_headers: true
 actions:
+- name: enquete_individuel
+  definition:
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/individuel'
+    output_type: EnqueteIndividuelReponse
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+    arguments:
+    - name: mandataireId
+      type: Int!
+    - name: enqueteId
+      type: Int!
+    type: query
 - name: upload_mesures_file
   definition:
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/upload'
@@ -4339,3 +4353,29 @@ custom_types:
     fields:
     - name: data
       type: String!
+  - name: EnqueteIndividuelReponse
+    fields:
+    - name: enquete_id
+      type: Int!
+    - name: enquete_reponses_id
+      type: Int!
+    - name: enquete_reponses_informations_mandataire_id
+      type: Int
+    - name: enquete_reponses_informations_mandataire_status
+      type: Int!
+    - name: enquete_reponses_prestations_sociale_id
+      type: Int
+    - name: enquete_reponses_prestations_sociale_status
+      type: Int!
+    - name: enquete_reponses_agrements_formations_id
+      type: Int
+    - name: enquete_reponses_agrements_formations_status
+      type: Int!
+    - name: enquete_reponses_activite_id
+      type: Int
+    - name: enquete_reponses_activite_status
+      type: Int!
+    - name: enquete_reponses_populations_id
+      type: Int
+    - name: enquete_reponses_populations_status
+      type: Int!

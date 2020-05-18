@@ -1,9 +1,13 @@
 const express = require("express");
+
 const router = express.Router();
 const actionsMesuresImporter = require("./mesures-import/actionsMesuresImporter");
 const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
 const HttpError = require("../../utils/error/HttpError");
 const { Service } = require("../../models/Service");
+const enqueteIndividuelController = require("../../controllers/enquetes/mandataire-individuel");
+
+router.post("/enquetes/individuel", enqueteIndividuelController);
 
 // Hasura handler associated to `upload_mesures_file` hasura action
 router.post(
