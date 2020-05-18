@@ -42,15 +42,7 @@ app.use(
 
 app.use("/webhook", require("./routes/webhook"));
 
-app.get("/ping", function(req, res) {
-  if (!req.user) {
-    res.status(401).json({ success: false });
-  } else {
-    res.json({ success: true });
-  }
-});
-
-app.get("/json", function(req, res) {
+app.get("/", function(req, res) {
   res.json({
     title: "API eMJPM",
     version: pkg.version,

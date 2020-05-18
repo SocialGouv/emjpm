@@ -85,7 +85,7 @@ ingress:
   hosts:
     - host: api-emjpm.dev.fabrique.social.gouv.fr
       paths:
-        - path: /json
+        - path: /
           servicePort: ${PORT}
   tls:
     - hosts:
