@@ -51,7 +51,11 @@ export const EnqueteIndividuelInformationsForm = props => {
           <Label mb={1} htmlFor="benevole">
             {"Exercez-vous cette activité à titre bénévole ?"}
           </Label>
-          <YesNoComboBox name="benevole" onChange={value => setFieldValue("benevole", value)} />
+          <YesNoComboBox
+            defaultValue={values.benevole}
+            name="benevole"
+            onChange={value => setFieldValue("benevole", value)}
+          />
           <InlineError message={errors.benevole} fieldId="benevole" />
         </Field>
 
@@ -110,6 +114,7 @@ export const EnqueteIndividuelInformationsForm = props => {
         <Field>
           <Label mb={1}>{"Exercez-vous avec un secretariat spécialisé ?"}</Label>
           <YesNoComboBox
+            defaultValue={values.secretaire_specialise}
             name="secretaire_specialise"
             onChange={value => {
               setFieldValue("secretaire_specialise", value);
@@ -145,6 +150,7 @@ export const EnqueteIndividuelInformationsForm = props => {
         <Field>
           <Label mb={1}>{"Exercez-vous votre activité dans un local professionnnel ?"}</Label>
           <YesNoComboBox
+            defaultValue={"local_professionnel"}
             name="local_professionnel"
             onChange={value => setFieldValue("local_professionnel", value)}
           />
