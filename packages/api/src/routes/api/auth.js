@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const { check, body } = require("express-validator");
-const login = require("../controllers/user/login");
-const signup = require("../controllers/user/signup");
-const resetPassword = require("../controllers/user/reset-password");
-const forgotPassword = require("../controllers/user/forgot-password");
-const resetPasswordWithToken = require("../controllers/user/reset-password-with-token");
-const jwkController = require("../controllers/jwk");
+const login = require("../../controllers/user/login");
+const signup = require("../../controllers/user/signup");
+const resetPassword = require("../../controllers/user/reset-password");
+const forgotPassword = require("../../controllers/user/forgot-password");
+const resetPasswordWithToken = require("../../controllers/user/reset-password-with-token");
+const jwkController = require("../../controllers/jwk");
 
 router.post(
   "/login",

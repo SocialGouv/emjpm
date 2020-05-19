@@ -1,26 +1,45 @@
 const express = require("express");
 const uid = require("rand-token").uid;
-const { Service } = require("../models/Service");
+const { Service } = require("../../models/Service");
 const {
   ServiceMemberInvitation
-} = require("../models/ServiceMemberInvitation");
-const { Tis } = require("../models/Tis");
-const { reservationEmail } = require("../email/reservation-email");
-const { cancelReservationEmail } = require("../email/cancel-reservation-email");
-const { validationEmail } = require("../email/validation-email");
+} = require("../../models/ServiceMemberInvitation");
+const { Tis } = require("../../models/Tis");
+const { reservationEmail } = require("../../email/reservation-email");
+const {
+  cancelReservationEmail
+} = require("../../email/cancel-reservation-email");
+const { validationEmail } = require("../../email/validation-email");
 const {
   serviceMemberInvitationMail
-} = require("../email/service-member-invitation-mail");
-const tokenRequest = require("../controllers/webhook/token-request");
-const { getEmailUserDatas } = require("../email/email-user-data");
-
+} = require("../../email/service-member-invitation-mail");
+const { getEmailUserDatas } = require("../../email/email-user-data");
+const {
+  editorConfirmationEmail
+} = require("../../email/editor-confirmation-email");
+const {
+  editorConfirmationAdminEmail
+} = require("../../email/editor-confirmation-admin-email");
 // ----------------------------------
 // -------EMAIL ACCOUNT VALIDATION---
 // ----------------------------------
 
 const router = express.Router();
 
-router.post("/token-request", tokenRequest);
+router.post("/token-request", function(req, res) {
+  const {
+    body: {
+      event: {
+        data: {
+          new: { email, name }
+        }
+      }
+    }
+  } = req;
+  editorConfirmationEmail(email);
+  editorConfirmationAdminEmail(email, name);
+  res.json({ success: true });
+});
 
 router.post("/email-account-validation", function(req, res) {
   const newUser = req.body.event.data.new;

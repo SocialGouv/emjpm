@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 
-const authorize = require("../controllers/user/oauth");
+const authorize = require("../../controllers/user/oauth");
 
 router.post(
   "/authorize",

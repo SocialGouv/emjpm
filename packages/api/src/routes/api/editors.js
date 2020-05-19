@@ -8,7 +8,7 @@ const {
   mesureUpdate,
   mesureBatch,
   mesureDelete
-} = require("../../src/controllers/editor");
+} = require("../../../src/controllers/editor");
 
 router.get("/mesures", mesures);
 router.post(
