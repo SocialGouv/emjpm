@@ -4307,6 +4307,24 @@ remote_schemas:
     timeout_seconds: 60
     forward_client_headers: true
 actions:
+- name: upload_enquete_file
+  definition:
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/upload'
+    output_type: FileOutput
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+    arguments:
+    - name: base64str
+      type: String!
+    - name: enqueteId
+      type: Int!
+    - name: serviceId
+      type: Int
+    - name: mandataireUserId
+      type: Int
+    type: mutation
+    kind: synchronous
 - name: upload_mesures_file
   definition:
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/upload'

@@ -61,6 +61,7 @@ describe("POST /hasura/events/email-reservation", () => {
     const response = await request(server)
       .post("/hasura/events/email-reservation")
       .set("hasura_web_hook_secret", process.env.HASURA_WEB_HOOK_SECRET)
+      .set("Accept", "application/json")
       .send(createHasuraTriggerEvent(global.mesure));
 
     expect(response.status).toBe(200);
