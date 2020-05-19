@@ -17,19 +17,22 @@ const strategy = new CustomStrategy(function(req, done) {
 });
 
 function buildHasuraUser(req) {
-  const {
-    "x-hasura-role": role,
-    "x-hasura-user-id": userId,
-    "x-hasura-service-id": serviceId
-  } = req.body.session_variables;
+  if (req && req.body && req.body.session_variables) {
+    const {
+      "x-hasura-role": role,
+      "x-hasura-user-id": userId,
+      "x-hasura-service-id": serviceId
+    } = req.body.session_variables;
 
-  const hasuraUser = {
-    __auth_type__: "hasura",
-    role,
-    userId: userId !== "null" ? parseInt(userId) : undefined,
-    serviceId: serviceId !== "null" ? parseInt(serviceId) : undefined
-  };
-  return hasuraUser;
+    const hasuraUser = {
+      __auth_type__: "hasura",
+      role,
+      userId: userId !== "null" ? parseInt(userId) : undefined,
+      serviceId: serviceId !== "null" ? parseInt(serviceId) : undefined
+    };
+    return hasuraUser;
+  }
+  return false;
 }
 
 const SERIALIZED_PREFIX = "__hasura__;";

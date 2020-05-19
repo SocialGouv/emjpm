@@ -8,6 +8,7 @@
     "dev": "nodemon src/start.js --inspect",
     "dev:knex-debug-query": "DEBUG=knex:query nodemon src/start.js --inspect",
     "test": "NODE_ENV=test jest --maxWorkers=2",
+    "test:watch": "NODE_ENV=test npx jest --maxWorkers=2 --watch",
     "lint": "eslint __test__ src",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check '**/*.js'",
