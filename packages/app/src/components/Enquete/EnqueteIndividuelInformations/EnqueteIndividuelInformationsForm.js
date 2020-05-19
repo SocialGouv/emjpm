@@ -13,12 +13,12 @@ import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 export const EnqueteIndividuelInformationsForm = props => {
   const { data = {}, goToPrevPage } = props;
   const {
-    anciennete = "",
+    anciennete,
     benevole = false,
-    estimation_etp = "",
-    forme_juridique = "",
-    local_professionnel = "",
-    secretaire_specialise_etp = ""
+    estimation_etp,
+    forme_juridique,
+    local_professionnel,
+    secretaire_specialise_etp
   } = data;
 
   const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
@@ -28,15 +28,17 @@ export const EnqueteIndividuelInformationsForm = props => {
     },
     // validationSchema: mandataireEnqueteIndividuelSchema,
     initialValues: {
-      benevole,
-      anciennete,
-      estimation_etp,
-      forme_juridique,
+      benevole: benevole || false,
+      anciennete: anciennete || "",
+      estimation_etp: estimation_etp || "",
+      forme_juridique: forme_juridique || "",
       secretaire_specialise: secretaire_specialise_etp ? secretaire_specialise_etp > 0 : false,
-      secretaire_specialise_etp,
-      local_professionnel
+      secretaire_specialise_etp: secretaire_specialise_etp || "",
+      local_professionnel: local_professionnel || false
     }
   });
+
+  console.log("values", values);
 
   return (
     <form onSubmit={handleSubmit}>

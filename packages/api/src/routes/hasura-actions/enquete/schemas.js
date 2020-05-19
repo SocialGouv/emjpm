@@ -2,10 +2,15 @@ const yup = require("yup");
 
 const informationsGeneralesMandataireSchema = yup.object().shape({
   benevole: yup.boolean().required(),
+  forme_juridique: yup.string().when("benevole", {
+    is: false,
+    then: yup.string().required(),
+    otherwise: yup.string().nullable()
+  }),
   anciennete: yup.string().required(),
   estimation_etp: yup.string().required(),
-  secretaire_specialise_etp: yup.string(),
-  local_professionnel: yup.string().required()
+  secretaire_specialise_etp: yup.string().nullable(),
+  local_professionnel: yup.boolean().required()
 });
 
 const informationsAgrementsMandataireSchema = yup.object().shape({
