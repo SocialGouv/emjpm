@@ -26,9 +26,19 @@ async function importMesuresFile({
   antennesMap
 }) {
   const start = Date.now();
-  logger.info(`[IMPORT] START`);
+  logger.info(`[IMPORT MESURES] START`);
 
-  const mesuresToImport = excelParser.toJson({ base64str, type });
+  const mesuresToImport = excelParser.parseSheetByIndex({
+    sheetIndex: 0,
+    base64str,
+    parseOptions: {
+      cellDates: true,
+      dateNF: "dd/mm/yyyy",
+      locale: "fr-FR",
+      type: "base64",
+      raw: type === "csv" ? true : false
+    }
+  });
 
   mesuresToImport.forEach(data => {
     if (data.type) {
@@ -40,7 +50,7 @@ async function importMesuresFile({
     }
   });
 
-  logger.info(`[IMPORT] mesuresToImport: ${mesuresToImport.length}`);
+  logger.info(`[IMPORT MESURES] mesuresToImport: ${mesuresToImport.length}`);
 
   const {
     errors,
@@ -61,15 +71,15 @@ async function importMesuresFile({
 
   if (errors.length) {
     logger.info(
-      `[IMPORT] ERROR (duration: ${durationInSeconds}s, errors: ${errors.length}, to create: ${importSummary.create.length}, to update:  ${importSummary.update.length})`
+      `[IMPORT MESURES] ERROR (duration: ${durationInSeconds}s, errors: ${errors.length}, to create: ${importSummary.create.length}, to update:  ${importSummary.update.length})`
     );
   } else if (importSummary.invalidAntenneNames.length) {
     logger.info(
-      `[IMPORT] WARNING (duration: ${durationInSeconds}s, invalid antennes: ${importSummary.invalidAntenneNames.length}, to create: ${importSummary.create.length}, to update:  ${importSummary.update.length})`
+      `[IMPORT MESURES] WARNING (duration: ${durationInSeconds}s, invalid antennes: ${importSummary.invalidAntenneNames.length}, to create: ${importSummary.create.length}, to update:  ${importSummary.update.length})`
     );
   } else {
     logger.info(
-      `[IMPORT] SUCCESS (duration: ${durationInSeconds}s, created: ${importSummary.create.length}, updated:  ${importSummary.update.length})`
+      `[IMPORT MESURES] SUCCESS (duration: ${durationInSeconds}s, created: ${importSummary.create.length}, updated:  ${importSummary.update.length})`
     );
   }
 
@@ -119,7 +129,7 @@ const importMesures = async ({
   const size = mesuresWithLine.length;
   for (const { mesure, line } of mesuresWithLine) {
     if (counter === 1 || counter === size || counter % 100 === 0) {
-      logger.info(`[IMPORT] mesure ${counter} / ${size}`);
+      logger.info(`[IMPORT MESURES] mesure ${counter} / ${size}`);
     }
     const mesureDatas = {
       ...mesure,
@@ -145,7 +155,7 @@ const importMesures = async ({
     // persist changes
     if (importSummary.create.length) {
       logger.info(
-        `[IMPORT] creating ${importSummary.create.length} mesures...`
+        `[IMPORT MESURES] creating ${importSummary.create.length} mesures...`
       );
       // batch insert
       await Mesure.query().insert(importSummary.create);
@@ -153,7 +163,7 @@ const importMesures = async ({
 
     if (importSummary.update.length) {
       logger.info(
-        `[IMPORT] updating ${importSummary.update.length} mesures...`
+        `[IMPORT MESURES] updating ${importSummary.update.length} mesures...`
       );
       for (const { id, data } of importSummary.update) {
         await Mesure.query()
