@@ -8,18 +8,10 @@ const checkImportEnqueteParameters = require("./enquete-import/checkImportEnquet
 const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
 const {
   initEnqueteMandataireIndividuel
-} = require("./enquetes/enqueteMandataireIndividuel");
+} = require("./enquete/enqueteMandataireIndividuel");
+const checkEnqueteIndividuelParameters = require("./enquete/checkEnqueteIndividuelParameters");
 
 const router = express.Router();
-
-async function checkEnqueteIndividuelParameters(req, res) {
-  const { enqueteId, mandataireId } = req.body.input;
-  if (!enqueteId || !mandataireId) {
-    res.status(422).json({
-      message: "Invalid parameters: enqueteId or mandataireId is required"
-    });
-  }
-}
 
 router.post("/enquetes/individuel", async (req, res, next) => {
   await checkEnqueteIndividuelParameters(req, res);
