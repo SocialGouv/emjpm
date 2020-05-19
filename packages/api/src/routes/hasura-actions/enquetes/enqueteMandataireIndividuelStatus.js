@@ -9,15 +9,11 @@ const {
 } = require("./schemas");
 
 async function enqueteMandataireIndividuelStatus(enqueteReponse) {
-  console.log(
-    "enqueteReponse.enquete_reponses_informations_mandataire",
-    enqueteReponse.enquete_reponses_informations_mandataire
-  );
-
   const informationsGeneralesMandataireIsValid = await informationsGeneralesMandataireSchema.isValid(
     enqueteReponse.enquete_reponses_informations_mandataire
   );
 
+  // TODO
   const informationsAgrementsMandataireIsValid = await informationsAgrementsMandataireSchema.isValid(
     {}
   );
@@ -261,16 +257,12 @@ async function enqueteMandataireIndividuelStatus(enqueteReponse) {
   });
 
   return {
-    informationsGeneralesMandataireStatus: informationsGeneralesMandataireIsValid
-      ? 2
-      : 1,
-    informationsFormationMandataireStatus: informationsFormationMandataireIsValid
-      ? 2
-      : 1,
-    informationsAgrementsMandataireStatus: informationsAgrementsMandataireIsValid
-      ? 2
-      : 1,
-
+    informationsGeneralesMandataireStatus:
+      informationsGeneralesMandataireIsValid === true ? 2 : 1,
+    informationsFormationMandataireStatus:
+      informationsFormationMandataireIsValid === true ? 2 : 1,
+    informationsAgrementsMandataireStatus:
+      informationsAgrementsMandataireIsValid === true ? 2 : 1,
     prestationsSocialesStatus: prestationsSocialesIsValid === true ? 2 : 1,
     agrementsFormationsStatus: formationsIsValid === true ? 2 : 1,
     activiteStatus: activiteIsValid === true ? 2 : 1,

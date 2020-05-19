@@ -1,5 +1,6 @@
 import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
+import { resetIdCounter } from "react-tabs";
 
 import { Enquete } from "../../../../src/components/Enquete";
 import { LayoutMandataire } from "../../../../src/components/Layout";
@@ -16,6 +17,7 @@ const EnquetePage = ({ enqueteId }) => {
 };
 
 EnquetePage.getInitialProps = async ({ query }) => {
+  resetIdCounter();
   return { enqueteId: Number(query.enquete_id) };
 };
 

@@ -2,9 +2,10 @@ const express = require("express");
 
 const logger = require("../../utils/logger");
 const actionsMesuresImporter = require("./mesures-import/actionsMesuresImporter");
+const checkImportMesuresParameters = require("./mesures-import/checkImportMesuresParameters");
+const actionsEnqueteImporter = require("./enquete-import/actionsEnqueteImporter");
+const checkImportEnqueteParameters = require("./enquete-import/checkImportEnqueteParameters");
 const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
-const HttpError = require("../../utils/error/HttpError");
-const { Service } = require("../../models/Service");
 const {
   initEnqueteMandataireIndividuel
 } = require("./enquetes/enqueteMandataireIndividuel");
@@ -35,7 +36,7 @@ router.post("/enquetes/individuel", async (req, res, next) => {
   }
 });
 
-// Hasura handler associated to `upload_mesures_file` hasura action
+// hasura action: `upload_mesures_file`
 router.post(
   "/mesures/upload",
   async (req, res, next) => {
@@ -56,65 +57,25 @@ router.post(
   hasuraActionErrorHandler("Unexpected error processing file")
 );
 
-async function checkImportMesuresParameters(req) {
-  const { role, userId } = req.user;
+// hasura action: `upload_enquete_file`
+router.post(
+  "/enquetes/upload",
+  async (req, res, next) => {
+    try {
+      const importEnqueteParameters = await checkImportEnqueteParameters(req);
 
-  const inputParameters = req.body.input;
-
-  const {
-    name,
-    base64str,
-    serviceId,
-    mandataireUserId,
-    antennesMap
-  } = inputParameters;
-
-  if (!serviceId && !mandataireUserId) {
-    throw new HttpError(
-      422,
-      "Invalid parameters: serviceId or mandataireUserId is required"
-    );
-  }
-
-  let importContext;
-  if (role === "admin") {
-    // ADMIN
-    importContext = serviceId ? { serviceId } : { mandataireUserId };
-  } else if (role === "service") {
-    // SERVICE
-    if (!serviceId) {
-      throw new HttpError(422, "Invalid parameters: serviceId is required");
-    }
-    const service = await Service.query().findById(serviceId);
-    if (!service || service.id !== serviceId) {
-      throw new HttpError(403, "Access denied: invalid serviceId");
-    }
-    importContext = { serviceId };
-  } else if (role === "individuel") {
-    // MANDATAIRE INDIVIDUEL
-    if (!mandataireUserId) {
-      throw new HttpError(
-        422,
-        "Invalid parameters: mandataireUserId is required"
+      const importSummary = await actionsEnqueteImporter.importEnqueteFile(
+        importEnqueteParameters
       );
-    }
-    if (userId !== mandataireUserId) {
-      throw new HttpError(403, "Access denied: invalid mandataireUserId");
-    }
-    importContext = { mandataireUserId };
-  } else {
-    throw new HttpError(403, "Unexpected user");
-  }
 
-  const importMesuresParameters = {
-    file: {
-      base64str,
-      type: name.endsWith(".xls") || name.endsWith(".xlsx") ? "xls" : "csv"
-    },
-    importContext,
-    antennesMap: antennesMap ? JSON.parse(antennesMap) : undefined
-  };
-  return importMesuresParameters;
-}
+      return res.status(201).json({
+        data: JSON.stringify(importSummary)
+      });
+    } catch (err) {
+      return next(err);
+    }
+  },
+  hasuraActionErrorHandler("Unexpected error processing file")
+);
 
 module.exports = router;
