@@ -1,11 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const actionsMesuresImporter = require("./mesures/import/actionsMesuresImporter");
+const actionsMesuresImporter = require("./mesures-import/actionsMesuresImporter");
 const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
 const HttpError = require("../../utils/error/HttpError");
-const {
-  parseHasuraSessionVariables
-} = require("./hasura-action-session-variable-parser");
 const { Service } = require("../../models/Service");
 
 // Hasura handler associated to `upload_mesures_file` hasura action
@@ -30,11 +27,7 @@ router.post(
 );
 
 async function checkImportMesuresParameters(req) {
-  const { id: authUserId, type: role } = req.user;
-
-  // NOTE: don't trust hasura session variables for now
-  // eslint-disable-next-line no-unused-vars
-  const hasuraSessionVariables = parseHasuraSessionVariables(req);
+  const { role, userId } = req.user;
 
   const inputParameters = req.body.input;
 
@@ -75,7 +68,7 @@ async function checkImportMesuresParameters(req) {
         "Invalid parameters: mandataireUserId is required"
       );
     }
-    if (authUserId !== mandataireUserId) {
+    if (userId !== mandataireUserId) {
       throw new HttpError(403, "Access denied: invalid mandataireUserId");
     }
     importContext = { mandataireUserId };
