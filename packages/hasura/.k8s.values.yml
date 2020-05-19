@@ -34,16 +34,21 @@ deployment:
       value: "http://${GQL_SERVER_SRV_HOST}/graphql"
     - name: HASURA_WEB_HOOK_BASE_URL
       value: "http://${API_SRV_HOST}"
+    - name: HASURA_WEB_HOOK_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: HASURA_WEB_HOOK_SECRET
     - name: WEB_HOOK_URL_EMAIL_RESERVATION
-      value: "http://${API_SRV_HOST}/webhook/email-reservation"
+      value: "http://${API_SRV_HOST}/hasura/events/email-reservation"
     - name: WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION
-      value: "http://${API_SRV_HOST}/webhook/email-account-validation"
+      value: "http://${API_SRV_HOST}/hasura/events/email-account-validation"
     - name: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
-      value: "http://${API_SRV_HOST}/webhook/email-cancel-reservation"
+      value: "http://${API_SRV_HOST}/hasura/events/email-cancel-reservation"
     - name: WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION
-      value: "http://${API_SRV_HOST}/webhook/email-service-member-invitation"
+      value: "http://${API_SRV_HOST}/hasura/events/email-service-member-invitation"
     - name: WEB_HOOK_URL_TOKEN_REQUEST
-      value: "http://${API_SRV_HOST}/webhook/token-request"      
+      value: "http://${API_SRV_HOST}/hasura/events/token-request"      
 
 service:
   port: ${PORT}

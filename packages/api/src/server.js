@@ -9,9 +9,9 @@ const Sentry = require("./utils/sentry");
 const apiLog = require("./middlewares/apiLog");
 const errorHandler = require("./middlewares/error-handler");
 const pkg = require("../package.json");
-const authRoutes = require("./routes/auth");
-const oauth2Routes = require("./routes/oauth2");
-const editorsRoutes = require("./routes/editors");
+const authRoutes = require("./routes/api/auth");
+const oauth2Routes = require("./routes/api/oauth2");
+const editorsRoutes = require("./routes/api/editors");
 
 const corsOptions = {
   credentials: true,
@@ -36,11 +36,21 @@ app.use("/api/auth", authRoutes);
 app.use("/api/oauth", oauth2Routes);
 app.use(
   "/api/editors",
-  [apiLog, passport.authenticate("bearer", { session: false })],
+  [apiLog, passport.authenticate("editor-jwt", { session: false })],
   editorsRoutes
 );
 
-app.use("/webhook", require("./routes/webhook"));
+app.use(
+  "/hasura/events",
+  [passport.authenticate("hasura-webhook-header-secret")],
+  require("./routes/hasura-events/hasura-events.routes.js")
+);
+
+app.use(
+  "/hasura/actions",
+  [passport.authenticate("hasura-webhook-header-secret")],
+  require("./routes/hasura-actions/hasura-actions.routes.js")
+);
 
 app.get("/", function(req, res) {
   res.json({
@@ -49,12 +59,6 @@ app.get("/", function(req, res) {
     NODE_ENV: process.env.NODE_ENV || "development"
   });
 });
-
-app.use(
-  "/hasura/actions",
-  [passport.authenticate("jwt", { session: false })],
-  require("./routes/hasura/hasura-action-handlers.routes.js")
-);
 
 // error handler
 app.use(errorHandler);
