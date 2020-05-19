@@ -37,8 +37,8 @@ services:
     image: djfarrelly/maildev
     command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
     ports:
-      - '1025:1025'
-      - '1080:1080'
+      - "1025:1025"
+      - "1080:1080"
 
   graphql-engine:
     build:
@@ -49,11 +49,11 @@ services:
       - db
     # network_mode: "host"
     environment:
-      HASURA_GRAPHQL_ADMIN_SECRET: secret
+      HASURA_GRAPHQL_ADMIN_SECRET: $HASURA_GRAPHQL_ADMIN_SECRET
       HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/auth/jwks"}'
-      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'anonymous'
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "anonymous"
       WHATEVER_URL: $WHATEVER_URL
       HASURA_WEB_HOOK_BASE_URL: $HASURA_WEB_HOOK_BASE_URL
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
