@@ -30,6 +30,7 @@
     "@sentry/node": "^5.15.5",
     "@styled-icons/boxicons-regular": "^10.0.0",
     "@styled-icons/boxicons-solid": "^10.0.0",
+    "@styled-icons/entypo": "^10.0.0",
     "@styled-icons/fa-regular": "^10.0.0",
     "@styled-icons/material": "^10.0.0",
     "@styled-icons/remix-line": "^10.0.0",
