@@ -17,8 +17,15 @@ deployment:
         secretKeyRef:
           name: emjpm-secret
           key: APP_URL
+    - name: HASURA_GRAPHQL_ADMIN_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: HASURA_GRAPHQL_ADMIN_SECRET
     - name: PGSSLMODE
       value: "require"
+    - name: GRAPHQL_SERVER_URI
+      value: "//${HASURA_HOST}/v1/graphql"
     - name: DATABASE_URL
       value: "psql://${EMJPM_PG_USER_ENCODED}:${EMJPM_PG_PASSWORD_ENCODED}@${PG_HOST}/${POSTGRES_DATABASE_EMJPM}"
     - name: PORT

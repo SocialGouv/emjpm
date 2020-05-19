@@ -8,10 +8,8 @@ function useEnqueteImportManager({ enqueteId, mandataireUserId, serviceId }) {
   const [importSummary, setImportSummary] = useState();
   const [uploadFile, { loading: enqueteImportLoading }] = useMutation(UPLOAD_ENQUETE_EXCEL_FILE);
 
-  function importEnqueteFile({ file }) {
-    console.log("xxx importEnqueteFile file:", file);
+  function importEnqueteFile(file) {
     fileReader.readFileAsBinaryString(file, ({ base64str }) => {
-      console.log("xxx readFileAsBinaryString");
       uploadFile({
         variables: {
           base64str,
