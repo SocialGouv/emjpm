@@ -12,7 +12,7 @@ export const DEPARTEMENTS = gql`
 
 export const USER_TRIBUNAL = gql`
   query user_tribunal($id: Int!) {
-    user_tis(where: { id: { _eq: $id } }) {
+    user_tis(order_by: { ti: { ville: asc } }, where: { user_id: { _eq: $id } }) {
       id
       ti_id
       user_id
