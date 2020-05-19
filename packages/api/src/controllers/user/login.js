@@ -1,4 +1,4 @@
-const passport = require("../../auth/local");
+const passport = require("../../auth/auth-passport");
 const { validationResult } = require("express-validator");
 const { User } = require("../../models/User");
 const { Logs } = require("../../models/Logs");
@@ -13,7 +13,7 @@ const login = async (req, res, next) => {
     return res.status(400).json({ errors });
   }
 
-  passport.authenticate("local", async (err, user) => {
+  passport.authenticate("login-password", async (err, user) => {
     if (err) {
       return res.status(401).json({
         errors: {

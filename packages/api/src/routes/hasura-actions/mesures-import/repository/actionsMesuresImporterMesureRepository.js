@@ -1,9 +1,9 @@
-const { Service } = require("../../../../../models/Service");
-const { Mandataire } = require("../../../../../models/Mandataire");
+const { Service } = require("../../../../models/Service");
+const { Mandataire } = require("../../../../models/Mandataire");
 const { raw } = require("objection");
-const { Mesure } = require("../../../../../models/Mesure");
-const { ServiceAntenne } = require("../../../../../models/ServiceAntenne");
-const { Tis } = require("../../../../../models/Tis");
+const { Mesure } = require("../../../../models/Mesure");
+const { ServiceAntenne } = require("../../../../models/ServiceAntenne");
+const { Tis } = require("../../../../models/Tis");
 
 const getMesureStates = async (mandataire_id, service_id, antenne_id) => {
   const filter = {};

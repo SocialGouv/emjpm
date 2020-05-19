@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
-    "dev": "nodemon --watch 'src/**/*' -e ts --exec ts-node src/index.ts",
+    "dev": "PORT=4001 nodemon --watch 'src/**/*' -e ts --exec ts-node src/index.ts",
     "build": "ncc build --source-map src/index.ts",
     "lint": "tslint -p tsconfig.json -t stylish",
     "generate": "graphql-codegen --config codegen.yml"
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^1.13.5",
     "@graphql-codegen/introspection": "1.13.5",
-    "@graphql-codegen/typescript": "1.13.5",
+    "@graphql-codegen/typescript": "1.13.5",  
     "@graphql-codegen/typescript-resolvers": "1.13.5",
     "@socialgouv/tslint-config-recommended": "^0.21.0",
     "@types/graphql": "^14.2.3",

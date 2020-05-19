@@ -64,7 +64,7 @@ exports.up = async knex => {
       };
 
       if (!position) {
-        console.error("<!> code insee does not match", tribunal.insee);
+        // console.error("<!> code insee does not match", tribunal.insee);
       } else {
         const { code_postal, latitude, longitude, cities } = position;
         tribunalToCreate.latitude = latitude;
