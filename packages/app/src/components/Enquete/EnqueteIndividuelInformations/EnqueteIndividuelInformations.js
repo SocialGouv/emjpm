@@ -41,8 +41,8 @@ export const EnqueteIndividuelInformations = props => {
             anciennete: values.anciennete ? `${values.anciennete}` : null,
             benevole: values.benevole,
             estimation_etp: values.estimation_etp || null,
-            forme_juridique: values.forme_juridique || null,
-            local_professionnel: values.local_professionnel || null,
+            forme_juridique: values.forme_juridique ? values.forme_juridique : null,
+            local_professionnel: values.local_professionnel,
             secretaire_specialise_etp: values.secretaire_specialise_etp
               ? `${values.secretaire_specialise_etp}`
               : null

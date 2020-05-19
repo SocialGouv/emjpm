@@ -1,3 +1,5 @@
+import { Cross } from "@styled-icons/entypo/Cross";
+import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
 import React, { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -37,6 +39,7 @@ export const MenuStepper = props => {
         {sections.map((menuSection, index) => {
           const hasSubSections = menuSection.steps && menuSection.steps.length > 1;
           const activeSection = currentStep.step === index;
+          const hasError = menuSection.steps.some(s => s.isValid === false);
 
           return (
             <Box key={`step-${index}`} mb={4}>
@@ -63,10 +66,31 @@ export const MenuStepper = props => {
                     (menuSection.steps.length > 0 ? menuSection.steps[0].label : "")}
                 </Text>
               </Flex>
+
+              {hasError && (
+                <Flex
+                  sx={{
+                    marginTop: 1,
+                    borderRadius: "5px",
+                    fontWeight: "bold",
+                    paddingX: 2,
+                    paddingY: 1,
+                    alignItems: "center",
+                    backgroundColor: "#1D2649",
+                    color: "white"
+                  }}
+                >
+                  <Box width={"30px"}>
+                    <Cross />
+                  </Box>
+                  <Text ml={2}>Réponses manquantes</Text>
+                </Flex>
+              )}
+
               {hasSubSections && (
                 <Box
                   sx={{
-                    marginTop: 3,
+                    marginTop: 2,
                     marginLeft: "40px",
                     fontSize: "14px",
                     lineHeight: "30px"
@@ -76,6 +100,7 @@ export const MenuStepper = props => {
                     const active =
                       activeSection &&
                       (currentStep.substep ? currentStep.substep : 0) === subsectionIndex;
+
                     return (
                       <Flex
                         alignItems="center"
@@ -93,6 +118,18 @@ export const MenuStepper = props => {
                         </Box>
 
                         <Text>{step.label}</Text>
+
+                        {step.isValid === false && (
+                          <Box
+                            sx={{
+                              marginLeft: 3,
+                              color: "#1D2649",
+                              width: "30px"
+                            }}
+                          >
+                            <SquaredCross />
+                          </Box>
+                        )}
                       </Flex>
                     );
                   })}

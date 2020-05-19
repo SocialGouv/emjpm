@@ -9,30 +9,17 @@ const {
 } = require("./schemas");
 
 async function enqueteMandataireIndividuelStatus(enqueteReponse) {
+  console.log(
+    "enqueteReponse.enquete_reponses_informations_mandataire",
+    enqueteReponse.enquete_reponses_informations_mandataire
+  );
+
   const informationsGeneralesMandataireIsValid = await informationsGeneralesMandataireSchema.isValid(
-    {
-      last_update: enqueteReponse.last_update,
-      benevole: enqueteReponse.benevole,
-      forme_juridique: enqueteReponse.forme_juridique,
-      sexe: enqueteReponse.sexe,
-      anciennete: enqueteReponse.anciennete,
-      estimation_etp: enqueteReponse.estimation_etp,
-      secretaire_specialise_etp: enqueteReponse.secretaire_specialise_etp,
-      local_professionnel: enqueteReponse.local_professionnel
-    }
+    enqueteReponse.enquete_reponses_informations_mandataire
   );
 
   const informationsAgrementsMandataireIsValid = await informationsAgrementsMandataireSchema.isValid(
-    {
-      last_update: enqueteReponse.last_update,
-      benevole: enqueteReponse.benevole,
-      forme_juridique: enqueteReponse.forme_juridique,
-      sexe: enqueteReponse.sexe,
-      anciennete: enqueteReponse.anciennete,
-      estimation_etp: enqueteReponse.estimation_etp,
-      secretaire_specialise_etp: enqueteReponse.secretaire_specialise_etp,
-      local_professionnel: enqueteReponse.local_professionnel
-    }
+    {}
   );
 
   // TODO
@@ -284,10 +271,10 @@ async function enqueteMandataireIndividuelStatus(enqueteReponse) {
       ? 2
       : 1,
 
-    prestationsSocialesStatus: prestationsSocialesIsValid ? 2 : 1,
-    agrementsFormationsStatus: formationsIsValid ? 2 : 1,
-    activiteStatus: activiteIsValid ? 2 : 1,
-    populationsStatus: populationsIsValid ? 2 : 1
+    prestationsSocialesStatus: prestationsSocialesIsValid === true ? 2 : 1,
+    agrementsFormationsStatus: formationsIsValid === true ? 2 : 1,
+    activiteStatus: activiteIsValid === true ? 2 : 1,
+    populationsStatus: populationsIsValid === true ? 2 : 1
   };
 }
 
