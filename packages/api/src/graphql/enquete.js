@@ -27,12 +27,12 @@ module.exports = {
     }
   },
 
-  getEnqueteReponse: async ({ enqueteId, userId }) => {
+  getEnqueteReponse: async ({ enqueteId, mandataireId }) => {
     try {
       const { data, errors } = await execute(
         {
           enqueteId,
-          userId
+          mandataireId
         },
         ENQUETE_REPONSE,
         backendAuthHeaders
@@ -42,13 +42,9 @@ module.exports = {
         errors.map(error => logger.error(error));
       }
 
-      const { enquete_reponses, mandataires } = data;
-      const [mandataire] = mandataires;
+      const { enquete_reponses } = data;
       const [enqueteReponse] = enquete_reponses;
-      return {
-        mandataireId: mandataire.id,
-        enqueteReponse
-      };
+      return enqueteReponse;
     } catch (err) {
       logger.error(err);
       return null;

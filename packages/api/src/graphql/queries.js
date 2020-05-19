@@ -1,10 +1,7 @@
 module.exports = {
   ENQUETE_REPONSE: `
-  query enquete_reponses($enqueteId: Int!, $userId: Int!) {
-    mandataires(where: {user_id: {_eq: $userId}}) {
-      id
-    }
-    enquete_reponses(where: {enquete_id: {_eq: $enqueteId}, mandataire: {user_id: {_eq: $userId}}}) {
+  query enquete_reponses($enqueteId: Int!, $mandataireId: Int!) {
+    enquete_reponses(where: {enquete_id: {_eq: $enqueteId}, mandataire_id: { _eq: $mandataireId }}) {
       id
       enquete_id
       enquete_reponses_activite_id

@@ -4318,9 +4318,11 @@ actions:
     arguments:
     - name: enqueteId
       type: Int!
-    - name: userId
+    - name: mandataireId
       type: Int!
     type: query
+  permissions:
+  - role: individuel
 - name: upload_mesures_file
   definition:
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/upload'
@@ -4361,7 +4363,11 @@ custom_types:
       type: Int!
     - name: enquete_reponses_informations_mandataire_id
       type: Int
-    - name: enquete_reponses_informations_mandataire_status
+    - name: enquete_reponses_informations_mandataire_generales_status
+      type: Int!
+    - name: enquete_reponses_informations_mandataire_agrements_status
+      type: Int!
+    - name: enquete_reponses_informations_mandataire_formation_status
       type: Int!
     - name: enquete_reponses_prestations_sociale_id
       type: Int
