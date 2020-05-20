@@ -8,12 +8,12 @@ const checkImportEnqueteParameters = require("./enquete-import/checkImportEnquet
 const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
 const {
   initEnqueteMandataireIndividuel
-} = require("./enquete/enqueteMandataireIndividuel");
-const checkEnqueteIndividuelParameters = require("./enquete/checkEnqueteIndividuelParameters");
+} = require("./enquete-mandataire-individuel/enqueteMandataireIndividuel");
+const checkEnqueteIndividuelParameters = require("./enquete-mandataire-individuel/checkEnqueteIndividuelParameters");
 
 const router = express.Router();
 
-router.post("/enquetes/individuel", async (req, res, next) => {
+router.post("/enquetes/mandataire-individuel", async (req, res, next) => {
   await checkEnqueteIndividuelParameters(req, res);
   try {
     const { enqueteId, mandataireId } = req.body.input;

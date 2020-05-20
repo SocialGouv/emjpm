@@ -1,7 +1,4 @@
-const {
-  getEnqueteReponse,
-  createEmptyEnqueteReponse
-} = require("../../../graphql/enquete");
+const { getEnqueteReponse, createEmptyEnqueteReponse } = require("./requests");
 const enqueteMandataireIndividuelStatus = require("./enqueteMandataireIndividuelStatus");
 
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
