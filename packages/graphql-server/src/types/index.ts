@@ -99,56 +99,6 @@ export interface SearchMesureResultWrapper {
   mesures: SearchMesureResult[];
 }
 
-export interface EnqueteIndividuel {
-  id: number;
-  mandataire_id: number;
-  estimation_etp?: string;
-  secretaire_specialise?: string;
-  secretaire_specialise_etp?: string;
-  cumul_prepose?: boolean;
-  cumul_prepose_etp?: string;
-  cumul_delegue_service?: boolean;
-  cumul_delegue_service_etp?: string;
-  debut_activite_avant_2009?: boolean;
-  annee_debut_activite?: number;
-  annee_agrement?: number;
-  cnc_mjpm_annee_obtention?: number;
-  cnc_mjpm_heure_formation?: number;
-  cnc_maj_annee_obtention?: number;
-  cnc_maj_heure_formation?: number;
-  cnc_dpf_annee_obtention?: number;
-  cnc_dpf_heure_formation?: number;
-  niveau_qualification?: number;
-  niveau_qualification_secretaire_spe?: number;
-}
-
-export interface CreateEnqueteIndividuelReponseQueryProps {
-  errors: ApolloError[];
-  data: {
-    insert_enquete_reponses_one: EnqueteReponse;
-  };
-}
-
-export interface EnqueteReponse {
-  id: number;
-  enquete_reponses_activite_id?: number;
-  enquete_reponses_agrements_formations_id?: number;
-  enquete_reponses_informations_mandataire_id?: number;
-  enquete_reponses_populations_id?: number;
-  enquete_reponses_prestations_sociale_id?: number;
-  mandataire_id?: number;
-  service_id?: number;
-  submitted_at: string;
-  created_at: string;
-}
-
-export interface EnqueteReponseQueryProps {
-  error: ApolloError;
-  data: {
-    enquete_reponses: EnqueteReponse[];
-  };
-}
-
 export interface SearchMesuresParam {
   closed?: {
     between?: {
