@@ -22,6 +22,11 @@ deployment:
         secretKeyRef:
           name: emjpm-secret
           key: HASURA_GRAPHQL_ADMIN_SECRET
+    - name: HASURA_WEB_HOOK_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: HASURA_WEB_HOOK_SECRET
     - name: PGSSLMODE
       value: "require"
     - name: GRAPHQL_SERVER_URI
