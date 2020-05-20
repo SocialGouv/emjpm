@@ -2,7 +2,7 @@ const {
   getEnqueteReponse,
   createEmptyEnqueteReponse
 } = require("../enquete-mandataire-individuel/requests");
-const enqueteExcelParser = require("./enqueteExcelParser");
+const enqueteExcelParser = require("./parser/enqueteExcelParser");
 const logger = require("../../../utils/logger");
 const enqueteImportRepository = require("./repository/enqueteImportRepository");
 
@@ -31,13 +31,6 @@ async function importEnqueteFile({
     mandataireId: mandataireUserId
   });
 
-  logger.info(
-    `[IMPORT ENQUETE] enqueteReponse: ${JSON.stringify(
-      enqueteReponse,
-      undefined,
-      2
-    )}`
-  );
   // save data to database
   const informationsMandataireDb = await enqueteImportRepository.saveInformationsMandataire(
     enqueteReponse.enquete_reponses_informations_mandataire_id,

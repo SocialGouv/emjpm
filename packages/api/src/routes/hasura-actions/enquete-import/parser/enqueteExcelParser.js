@@ -1,7 +1,8 @@
 var XLSX = require("xlsx");
-var { enqueteExcelSchemas } = require("./enqueteExcelSchemas");
-var HttpError = require("../../../utils/error/HttpError");
-const logger = require("../../../utils/logger");
+var parserAgrementsFormations = require("./enqueteExcelParserAgrementsFormations");
+var parserInformationsMandataire = require("./enqueteExcelParserInformationsMandataire");
+var HttpError = require("../../../../utils/error/HttpError");
+const logger = require("../../../../utils/logger");
 
 const parse = async ({ base64str }) => {
   const workbook = XLSX.read(base64str, {
@@ -25,7 +26,8 @@ const parse = async ({ base64str }) => {
   const worksheet = workbook.Sheets["Données à exporter"];
 
   const res = {
-    informationsMandataire: parseInformationsMandataireData(worksheet)
+    informationsMandataire: parserInformationsMandataire.parse(worksheet),
+    agrementsFormations: parserAgrementsFormations.parse(worksheet)
   };
 
   logger.info(
@@ -47,40 +49,6 @@ function checkRequiredTabs(workbook, tabNames) {
       throw new HttpError(422, `Onglet "${tabName}" manquant`);
     }
   });
-}
-
-function parseInformationsMandataireData(worksheet) {
-  const rawData = {
-    departement: rawValue(worksheet["A4"]),
-    region: rawValue(worksheet["B4"]),
-    nom: rawValue(worksheet["C4"]),
-    benevole: rawValue(worksheet["D4"]),
-    forme_juridique: rawValue(worksheet["E4"]),
-    sexe: rawValue(worksheet["F4"]),
-    anciennete: rawValue(worksheet["H4"]),
-    tranche_age: rawValue(worksheet["J4"]),
-    exerce_seul_activite: rawValue(worksheet["L4"]),
-    estimation_etp: rawValue(worksheet["M4"]),
-    exerce_secretaires_specialises: rawValue(worksheet["N4"]),
-    secretaire_specialise_etp: rawValue(worksheet["N4"]),
-    local_professionnel: rawValue(worksheet["O4"])
-  };
-  try {
-    return enqueteExcelSchemas.informationsGeneralesMandataireSchema.validateSync(
-      rawData
-    );
-  } catch (err) {
-    logger.warn('[IMPORT ENQUETE] Données "informations mandataire" invalide');
-    logger.err(err);
-    throw new HttpError(422, 'Données "informations mandataire" invalide');
-  }
-}
-
-function rawValue(cell) {
-  if (cell) {
-    return cell.v;
-  }
-  return undefined;
 }
 
 const enqueteExcelParser = {

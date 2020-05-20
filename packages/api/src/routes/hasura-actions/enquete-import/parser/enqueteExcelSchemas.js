@@ -1,5 +1,5 @@
 const yup = require("yup");
-const { ENQ_REP_INFO_MANDATAIRE } = require("./constants");
+const { ENQ_REP_INFO_MANDATAIRE } = require("../constants");
 
 const informationsGeneralesMandataireSchema = yup.object().shape({
   departement: yup.string(),
@@ -17,8 +17,17 @@ const informationsGeneralesMandataireSchema = yup.object().shape({
   local_professionnel: excelBoolean()
 });
 
+const agrementsFormationsSchema = yup.object().shape({
+  debut_activite_avant_2009: excelBoolean(),
+  annee_agrement: excelInteger()
+    .min(2009)
+    .max(2018),
+  nb_departements: excelSelect(ENQ_REP_INFO_MANDATAIRE.NB_DEPARTEMENTS.byValue)
+});
+
 const enqueteExcelSchemas = {
-  informationsGeneralesMandataireSchema
+  informationsGeneralesMandataireSchema,
+  agrementsFormationsSchema
 };
 
 module.exports = {
