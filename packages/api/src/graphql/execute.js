@@ -6,7 +6,7 @@ const backendAuthHeaders = {
 };
 
 const execute = async (variables, operation, headers = {}) => {
-  const fetchResponse = await fetch(process.env.GRAPHQL_SERVER_URI, {
+  const fetchResponse = await fetch(process.env.HASURA_GRAPHQL_URI, {
     headers,
     method: "POST",
     body: JSON.stringify({
