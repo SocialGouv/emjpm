@@ -1,5 +1,10 @@
+const {
+  getEnqueteReponse,
+  createEmptyEnqueteReponse
+} = require("../enquete-mandataire-individuel/requests");
 const enqueteExcelParser = require("./enqueteExcelParser");
 const logger = require("../../../utils/logger");
+const enqueteImportRepository = require("./repository/enqueteImportRepository");
 
 const actionsEnqueteImporter = {
   importEnqueteFile
@@ -17,14 +22,38 @@ async function importEnqueteFile({
   const start = Date.now();
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);
 
-  const enqueteToImport = enqueteExcelParser.parse({
+  const { informationsMandataire } = await enqueteExcelParser.parse({
     base64str
   });
 
-  logger.info(`[IMPORT ENQUETE] enqueteToImport: ${enqueteToImport.length}`);
+  const enqueteReponse = await initEnqueteMandataireIndividuel({
+    enqueteId,
+    mandataireId: mandataireUserId
+  });
 
+  logger.info(
+    `[IMPORT ENQUETE] enqueteReponse: ${JSON.stringify(
+      enqueteReponse,
+      undefined,
+      2
+    )}`
+  );
+  // save data to database
+  const informationsMandataireDb = await enqueteImportRepository.saveInformationsMandataire(
+    enqueteReponse.enquete_reponses_informations_mandataire_id,
+    informationsMandataire
+  );
+  logger.info(
+    `[IMPORT ENQUETE] informationsMandataireDb: ${JSON.stringify(
+      informationsMandataireDb,
+      undefined,
+      2
+    )}`
+  );
   const importSummary = {
     errors: [],
+    create: [],
+    update: [],
     mandataireUserId,
     serviceId
   };
@@ -50,5 +79,19 @@ async function importEnqueteFile({
       importSummary.errors.length === 0 ? importSummary.invalidAntenneNames : []
   };
 }
+async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
+  let enqueteReponse = await getEnqueteReponse({
+    enqueteId,
+    mandataireId
+  });
 
+  if (!enqueteReponse) {
+    const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
+      enqueteId,
+      mandataireId
+    });
+    enqueteReponse = insert_enquete_reponses_one;
+  }
+  return enqueteReponse;
+}
 module.exports = actionsEnqueteImporter;
