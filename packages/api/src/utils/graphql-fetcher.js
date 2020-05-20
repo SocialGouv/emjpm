@@ -5,7 +5,7 @@ const backendAuthHeaders = {
   "x-hasura-use-backend-only-permissions": true
 };
 
-const execute = async (variables, operation, headers = {}) => {
+const graphqlFetch = async (variables, operation, headers = {}) => {
   const fetchResponse = await fetch(process.env.HASURA_GRAPHQL_URI, {
     headers,
     method: "POST",
@@ -17,4 +17,4 @@ const execute = async (variables, operation, headers = {}) => {
   return await fetchResponse.json();
 };
 
-module.exports = { execute, backendAuthHeaders };
+module.exports = { graphqlFetch, backendAuthHeaders };
