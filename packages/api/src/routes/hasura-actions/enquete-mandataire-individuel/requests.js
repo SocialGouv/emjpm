@@ -1,13 +1,16 @@
 /* eslint-disable no-unused-vars */
 const logger = require("../utils/logger");
-const { execute, backendAuthHeaders } = require("./execute");
+const {
+  graphqlFetch,
+  backendAuthHeaders
+} = require("../../../utils/graphql-fetcher");
 const { ENQUETE_REPONSE } = require("./queries");
 const { INIT_ENQUETE_REPONSE } = require("./mutations");
 
 module.exports = {
   createEmptyEnqueteReponse: async ({ enqueteId, mandataireId }) => {
     try {
-      const { data, errors } = await execute(
+      const { data, errors } = await graphqlFetch(
         {
           enqueteId,
           mandataireId
@@ -29,7 +32,7 @@ module.exports = {
 
   getEnqueteReponse: async ({ enqueteId, mandataireId }) => {
     try {
-      const { data, errors } = await execute(
+      const { data, errors } = await graphqlFetch(
         {
           enqueteId,
           mandataireId
