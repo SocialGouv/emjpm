@@ -1,18 +1,18 @@
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
+import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
 
-import { EnqueteImportResult } from "./EnqueteImportResult";
 import { SingleImportFilePicker } from "./SingleImportFilePicker";
 import { useEnqueteImportManager } from "./useEnqueteImportManager.hook";
 
 export const EnqueteImportPanel = ({ enqueteId, userId }) => {
-  const { importEnqueteFile, importSummary, reset, enqueteImportLoading } = useEnqueteImportManager(
-    {
-      enqueteId,
-      userId
-    }
-  );
+  const router = useRouter();
+
+  const { importEnqueteFile, importSummary, enqueteImportLoading } = useEnqueteImportManager({
+    enqueteId,
+    userId
+  });
 
   if (enqueteImportLoading) {
     return (
@@ -24,7 +24,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   }
 
   if (importSummary && !importSummary.unexpectedError) {
-    return <EnqueteImportResult reset={() => reset()} importSummary={importSummary} />;
+    router.push("/mandataires/enquetes/[enquete_id]", `/mandataires/enquetes/${enqueteId}`);
   }
 
   return (
