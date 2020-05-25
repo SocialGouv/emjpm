@@ -22,7 +22,7 @@ test("it should display initial values", () => {
     estimation_etp: INTERVALLE_ETP_OPTIONS[1].value,
     forme_juridique: "SASU",
     local_professionnel: true,
-    secretaire_specialise_etp: "5"
+    secretaire_specialise_etp: 5
   };
 
   const { getByLabelText } = render(
@@ -35,7 +35,7 @@ test("it should display initial values", () => {
   const secretaireSpecialiseEtp = getByLabelText(
     /Estimation de l'activité en ETP du secrétariat spécialisé/i
   );
-  expect(secretaireSpecialiseEtp.value).toEqual("5");
+  expect(secretaireSpecialiseEtp.value).toEqual(5);
 });
 
 test('it should display "forme juridique" field when "benevole" field is not selected', () => {
