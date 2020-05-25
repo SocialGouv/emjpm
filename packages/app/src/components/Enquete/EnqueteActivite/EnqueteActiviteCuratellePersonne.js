@@ -25,25 +25,23 @@ export const EnqueteActiviteCuratellePersonne = props => {
     }
   });
 
-  if (loading) {
-    return <Box p={4}>Chargement...</Box>;
-  }
-
-  const { enquete_reponses_activite_by_pk: activite } = data;
   const {
     curatelle_personne_domicile_debut_annee,
     curatelle_personne_domicile_fin_annee,
     curatelle_personne_etablissement_debut_annee,
     curatelle_personne_etablissement_fin_annee
-  } = activite;
+  } = data ? data.enquete_reponses_activite_by_pk || {} : {};
 
   return (
     <Box>
       <EnqueteActiviteForm
-        nbMesureEtablissementDebutAnnee={curatelle_personne_etablissement_debut_annee}
-        nbMesureEtablissementFinAnnee={curatelle_personne_etablissement_fin_annee}
-        nbMesureDomicileDebutAnnee={curatelle_personne_domicile_debut_annee}
-        nbMesureDomicileFinAnnee={curatelle_personne_domicile_fin_annee}
+        loading={loading}
+        data={{
+          nbMesureDomicileDebutAnnee: curatelle_personne_domicile_debut_annee,
+          nbMesureDomicileFinAnnee: curatelle_personne_domicile_fin_annee,
+          nbMesureEtablissementDebutAnnee: curatelle_personne_etablissement_debut_annee,
+          nbMesureEtablissementFinAnnee: curatelle_personne_etablissement_fin_annee
+        }}
         handleSubmit={async values => {
           const {
             nbMesureDomicileDebutAnnee,

@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
-import { Box } from "rebass";
 
 import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
 import { EnqueteIndividuelInformationsFormationForm } from "./EnqueteIndividuelInformationsFormationForm";
@@ -30,15 +29,11 @@ export const EnqueteIndividuelInformationsFormation = props => {
     ]
   });
 
-  if (loading) {
-    return <Box p={4}>Chargement...</Box>;
-  }
-
-  const { enquete_reponses_agrements_formations_by_pk: agrementsFormations = {} } = data;
   return (
     <EnqueteIndividuelInformationsFormationForm
       goToPrevPage={goToPrevPage}
-      data={agrementsFormations}
+      loading={loading}
+      data={data ? data.agrementsFormations || {} : {}}
       handleSubmit={async values => {
         await updateEnquete({
           variables: {
