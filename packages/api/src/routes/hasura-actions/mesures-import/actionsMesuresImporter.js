@@ -35,7 +35,7 @@ async function importMesuresFile({
       cellDates: true,
       dateNF: "dd/mm/yyyy",
       locale: "fr-FR",
-      type: "base64",
+      type: type === "csv" ? "string" : "base64",
       raw: type === "csv" ? true : false
     }
   });
