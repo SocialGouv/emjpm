@@ -29,7 +29,6 @@ export const EnqueteIndividuelInformationsForm = props => {
 
   const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
-      console.log("xxx values:", values);
       await props.handleSubmit(values);
       setSubmitting(false);
     },
