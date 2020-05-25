@@ -1,0 +1,9 @@
+const { ENQ_REP_INFO_MANDATAIRE } = require("./ENQ_REP_INFO_MANDATAIRE.const");
+const {
+  ENQ_REP_AGREMENTS_FORMATIONS
+} = require("./ENQ_REP_AGREMENTS_FORMATIONS.const");
+
+module.exports = {
+  ENQ_REP_INFO_MANDATAIRE,
+  ENQ_REP_AGREMENTS_FORMATIONS
+};
