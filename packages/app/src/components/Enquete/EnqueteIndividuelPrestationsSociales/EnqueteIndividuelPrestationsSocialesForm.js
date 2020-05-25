@@ -9,7 +9,6 @@ import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 export const EnqueteIndividuelPrestationsSocialesForm = props => {
   const { data = {}, goToPrevPage } = props;
-  console.log("data", data);
   const { aah = "", pch = "", asi = "", rsa = "", als_apl = "", aspa = "", apa = "" } = data;
 
   const { handleSubmit, handleChange, values, errors } = useFormik({

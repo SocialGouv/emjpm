@@ -6,7 +6,7 @@ export const CREATE_ENQUETE_INDIVIDUEL = gql`
     $mandataireId: Int!
     $estimationEtp: String
     $secretaireSpecialise: Boolean
-    $secretaireSpecialiseEtp: String
+    $secretaireSpecialiseEtp: Float
     $cumulPrepose: Boolean
     $cumulPreposeEtp: String
     $cumulDelegueService: Boolean
