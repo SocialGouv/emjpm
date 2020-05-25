@@ -81,8 +81,12 @@ export const UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS = gql`
     $estimation_etp: String
     $forme_juridique: String
     $local_professionnel: Boolean
-    $secretaire_specialise_etp: String
+    $secretaire_specialise_etp: Float
     $sexe: String
+    $tranche_age: String
+    $departement: String
+    $region: String
+    $nom: String
   ) {
     update_enquete_reponses_informations_mandataire_by_pk(
       pk_columns: { id: $id }
@@ -94,6 +98,10 @@ export const UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS = gql`
         local_professionnel: $local_professionnel
         secretaire_specialise_etp: $secretaire_specialise_etp
         sexe: $sexe
+        tranche_age: $tranche_age
+        departement: $departement
+        region: $region
+        nom: $nom
       }
     ) {
       sexe
@@ -106,6 +114,10 @@ export const UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS = gql`
       created_at
       benevole
       anciennete
+      tranche_age
+      departement
+      region
+      nom
     }
   }
 `;

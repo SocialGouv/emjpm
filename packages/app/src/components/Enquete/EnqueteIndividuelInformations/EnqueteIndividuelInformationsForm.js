@@ -13,13 +13,18 @@ import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 export const EnqueteIndividuelInformationsForm = props => {
   const { data = {}, goToPrevPage } = props;
   const {
+    departement,
+    region,
+    nom,
     anciennete,
     benevole,
     estimation_etp,
     forme_juridique,
     local_professionnel,
     exerce_secretaires_specialises,
-    secretaire_specialise_etp
+    secretaire_specialise_etp,
+    tranche_age,
+    sexe
   } = data;
 
   const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
@@ -29,13 +34,18 @@ export const EnqueteIndividuelInformationsForm = props => {
     },
     // validationSchema: mandataireEnqueteIndividuelSchema,
     initialValues: {
+      departement: departement || "",
+      region: region || "",
+      nom: nom || "",
       benevole: benevole || false,
       anciennete: anciennete || "",
       estimation_etp: estimation_etp || "",
       forme_juridique: forme_juridique || "",
       exerce_secretaires_specialises: exerce_secretaires_specialises || false,
       secretaire_specialise_etp: secretaire_specialise_etp || "",
-      local_professionnel: local_professionnel || false
+      local_professionnel: local_professionnel || false,
+      tranche_age,
+      sexe
     }
   });
 
@@ -46,6 +56,54 @@ export const EnqueteIndividuelInformationsForm = props => {
       </Heading1>
       <Heading3>Informations générales</Heading3>
       <Box mt={4}>
+        <Field>
+          <Label mb={1} htmlFor="departement">
+            {"Département"}
+          </Label>
+          <Input
+            placeholder=""
+            id="departement"
+            name="departement"
+            value={values.departement}
+            hasError={!!errors.departement}
+            onChange={handleChange}
+            type="text"
+          />
+          <InlineError message={errors.departement} fieldId="departement" />
+        </Field>
+
+        <Field>
+          <Label mb={1} htmlFor="region">
+            {"Région"}
+          </Label>
+          <Input
+            placeholder=""
+            id="region"
+            name="region"
+            value={values.region}
+            hasError={!!errors.region}
+            onChange={handleChange}
+            type="text"
+          />
+          <InlineError message={errors.region} fieldId="region" />
+        </Field>
+
+        <Field>
+          <Label mb={1} htmlFor="nom">
+            {"Nom du mandataire"}
+          </Label>
+          <Input
+            placeholder=""
+            id="nom"
+            name="nom"
+            value={values.nom}
+            hasError={!!errors.nom}
+            onChange={handleChange}
+            type="text"
+          />
+          <InlineError message={errors.nom} fieldId="nom" />
+        </Field>
+
         <Field>
           <Label mb={1} htmlFor="benevole">
             {"Exercez-vous cette activité à titre bénévole ?"}
@@ -81,6 +139,23 @@ export const EnqueteIndividuelInformationsForm = props => {
         )}
 
         <Field>
+          <Label mb={1} htmlFor="sexe">
+            {"Sexe"}
+          </Label>
+          <Select
+            placeholder=""
+            id="sexe"
+            instanceId={"sexe"}
+            name="sexe"
+            value={findOption(ENQ_REP_INFO_MANDATAIRE_FORM.SEXE, values.sexe)}
+            hasError={!!errors.sexe}
+            onChange={option => setFieldValue("sexe", option.value)}
+            options={ENQ_REP_INFO_MANDATAIRE_FORM.SEXE}
+          />
+          <InlineError message={errors.sexe} fieldId="sexe" />
+        </Field>
+
+        <Field>
           <Label mb={1} htmlFor="forme_juridique">
             {"Ancienneté dans la fonction de MJPM"}
           </Label>
@@ -95,6 +170,23 @@ export const EnqueteIndividuelInformationsForm = props => {
             options={ENQ_REP_INFO_MANDATAIRE_FORM.ANCIENNETE}
           />
           <InlineError message={errors.anciennete} fieldId="anciennete" />
+        </Field>
+
+        <Field>
+          <Label mb={1} htmlFor="tranche_age">
+            {"Tranche d'âge dans laquelle vous vous situez"}
+          </Label>
+          <Select
+            placeholder=""
+            id="tranche_age"
+            instanceId={"tranche_age"}
+            name="tranche_age"
+            value={findOption(ENQ_REP_INFO_MANDATAIRE_FORM.TRANCHE_AGE, values.tranche_age)}
+            hasError={!!errors.tranche_age}
+            onChange={option => setFieldValue("tranche_age", option.value)}
+            options={ENQ_REP_INFO_MANDATAIRE_FORM.TRANCHE_AGE}
+          />
+          <InlineError message={errors.tranche_age} fieldId="tranche_age" />
         </Field>
 
         <Field>
