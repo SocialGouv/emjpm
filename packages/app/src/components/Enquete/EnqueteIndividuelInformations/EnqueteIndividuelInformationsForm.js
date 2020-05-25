@@ -38,8 +38,6 @@ export const EnqueteIndividuelInformationsForm = props => {
     }
   });
 
-  console.log("values", values);
-
   return (
     <form onSubmit={handleSubmit}>
       <Heading1 textAlign="center" mb={"80px"}>
