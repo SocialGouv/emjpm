@@ -193,6 +193,7 @@ export const EnqueteIndividuel = props => {
   return (
     <MenuStepper
       enqueteReponse={enquete_individuel}
+      enqueteId={enqueteId}
       mandataireId={mandataireId}
       sections={MENU_SECTIONS}
     />

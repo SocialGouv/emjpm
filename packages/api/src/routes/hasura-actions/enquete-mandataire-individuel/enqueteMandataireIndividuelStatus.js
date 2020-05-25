@@ -22,12 +22,12 @@ async function enqueteMandataireIndividuelStatus(enqueteReponse) {
 
   const informationsFormationMandataireStatus = await getValidationStatus(
     enqueteReponse.enquete_reponses_agrements_formation,
-    informationsAgrementsMandataireSchema
+    informationsFormationMandataireSchema
   );
 
   const informationsAgrementsMandataireStatus = await getValidationStatus(
     enqueteReponse.enquete_reponses_agrements_formation,
-    informationsFormationMandataireSchema
+    informationsAgrementsMandataireSchema
   );
 
   // TODO
