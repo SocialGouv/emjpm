@@ -1,8 +1,10 @@
+import { Heading1 } from "@emjpm/ui";
 import { Cross } from "@styled-icons/entypo/Cross";
 import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
 import React, { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { LinkButton } from "../../components/Commons";
 import styles from "./style";
 
 function goToNextPage(sections, currentStep, setCurrentStep) {
@@ -27,7 +29,7 @@ function goToPrevPage(sections, currentStep, setCurrentStep) {
 }
 
 export const MenuStepper = props => {
-  const { sections, ...otherProps } = props;
+  const { sections, enqueteId, ...otherProps } = props;
 
   const [currentStep, setCurrentStep] = useState({ step: 0, substep: 0 });
   const section = sections[currentStep.step];
@@ -140,6 +142,13 @@ export const MenuStepper = props => {
         })}
       </Box>
       <Box py={"50px"} pl={"35px"} flex={1}>
+        <Flex flexDirection="row" justifyContent="flex-end">
+          <Box mr={1}>
+            <LinkButton href={`/mandataires/enquetes/${enqueteId}/import`}>
+              Importez votre enquête
+            </LinkButton>
+          </Box>
+        </Flex>
         {ComponentForm && (
           <ComponentForm
             {...otherProps}

@@ -32,6 +32,7 @@ async function importEnqueteFile({
     enqueteReponse.enquete_reponses_informations_mandataire_id,
     informationsMandataire
   );
+
   logger.info(
     `[IMPORT ENQUETE] informationsMandataireDb: ${JSON.stringify(
       informationsMandataireDb,
