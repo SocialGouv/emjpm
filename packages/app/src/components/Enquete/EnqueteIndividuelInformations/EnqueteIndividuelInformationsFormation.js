@@ -2,12 +2,13 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { Box } from "rebass";
 
+import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
 import { EnqueteIndividuelInformationsFormationForm } from "./EnqueteIndividuelInformationsFormationForm";
 import { UPDATE_ENQUETE_INFORMATIONS_FORMATION } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION } from "./queries";
 
 export const EnqueteIndividuelInformationsFormation = props => {
-  const { goToNextPage, goToPrevPage, enqueteReponse } = props;
+  const { goToNextPage, goToPrevPage, enqueteReponse, mandataireId, enqueteId } = props;
   const { enquete_reponses_agrements_formations_id } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION, {
@@ -18,6 +19,10 @@ export const EnqueteIndividuelInformationsFormation = props => {
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INFORMATIONS_FORMATION, {
     refetchQueries: [
+      {
+        query: ENQUETE_MANDATAIRE_INDIVIDUEL,
+        variables: { enqueteId, mandataireId }
+      },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION,
         variables: { id: enquete_reponses_agrements_formations_id }
