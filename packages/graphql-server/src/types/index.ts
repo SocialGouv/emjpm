@@ -1,5 +1,4 @@
 import { Mesures, MesureStatus } from "../model/mesures.model";
-import { ApolloError } from "apollo-server-koa";
 
 export interface UpdateServiceMesuresResponse {
   data: {
