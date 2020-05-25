@@ -68,9 +68,6 @@ const activiteSchema = yup.object({});
 const prestationsSocialesSchema = yup.object({});
 
 // TODO
-const formationsSchema = yup.object({});
-
-// TODO
 const populationsSchema = yup.object({});
 
 module.exports = {
@@ -79,6 +76,5 @@ module.exports = {
   informationsFormationMandataireSchema,
   activiteSchema,
   prestationsSocialesSchema,
-  formationsSchema,
   populationsSchema
 };

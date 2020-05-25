@@ -52,7 +52,6 @@ export const EnqueteIndividuel = props => {
   }
 
   const { enquete_individuel } = data;
-
   const MENU_SECTIONS = [
     {
       steps: [
@@ -94,44 +93,92 @@ export const EnqueteIndividuel = props => {
         {
           label: "Curatelle renforcée",
           component: EnqueteActiviteCuratelleRenforcee,
-          isValid: false
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_activite_curatelle_renforcee_status
+          )
         },
         {
           label: "Curatelle simple",
           component: EnqueteActiviteCuratelleSimple,
-          isValid: false
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_activite_curatelle_simple_status
+          )
         },
         {
           label: "Tutelle",
           component: EnqueteActiviteTutelle,
-          isValid: false
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_activite_tutelle_status
+          )
         },
         {
           label: "Mesure d'accompagnement judiciaire",
-          component: EnqueteActiviteAccompagnementJudiciaire
+          component: EnqueteActiviteAccompagnementJudiciaire,
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_activite_accompagnement_judiciaire_status
+          )
         },
         {
           label: "Tutelle ou curatelle aux biens",
-          component: EnqueteActiviteCuratelleBiens
+          component: EnqueteActiviteCuratelleBiens,
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_activite_curatelle_biens_status
+          )
         },
         {
           label: "Tutelle ou curatelle à la personne",
-          component: EnqueteActiviteCuratellePersonne
+          component: EnqueteActiviteCuratellePersonne,
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_activite_curatelle_personne_status
+          )
         },
         {
           label: "Révision de mesures",
-          component: EnqueteActiviteRevisionMesures
+          component: EnqueteActiviteRevisionMesures,
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_activite_revision_mesures_status
+          )
         }
       ]
     },
     {
       label: "Populations",
       steps: [
-        { label: "Curatelle", component: EnquetePopulationsCuratelle, isValid: false },
-        { label: "Tutelle", component: EnquetePopulationsTutelle },
-        { label: "Mesure d'accompagnement de justice", component: EnquetePopulationsTutelle },
-        { label: "Sauvegarde de justice", component: EnquetePopulationsTutelle },
-        { label: "Autre", component: EnquetePopulationsTutelle }
+        {
+          label: "Curatelle",
+          component: EnquetePopulationsCuratelle,
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_populations_curatelle_status
+          )
+        },
+        {
+          label: "Tutelle",
+          component: EnquetePopulationsTutelle,
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_populations_tutelle_status
+          )
+        },
+        {
+          label: "Mesure d'accompagnement de justice",
+          component: EnquetePopulationsTutelle,
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_populations_accompagnement_judiciaire_status
+          )
+        },
+        {
+          label: "Sauvegarde de justice",
+          component: EnquetePopulationsTutelle,
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_populations_sauvegarde_justice_status
+          )
+        },
+        {
+          label: "Autre",
+          component: EnquetePopulationsTutelle,
+          isValid: transformStatusToIsValidProperty(
+            enquete_individuel.enquete_reponses_populations_autre_status
+          )
+        }
       ]
     },
     {
