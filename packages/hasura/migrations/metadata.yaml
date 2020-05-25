@@ -1395,6 +1395,15 @@ tables:
       - id
       - status
       filter: {}
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - created_at
+      - annee
+      - status
+      - date_fin
+      filter: {}
   update_permissions:
   - role: direction
     permission:
@@ -4419,13 +4428,37 @@ custom_types:
       type: Int!
     - name: enquete_reponses_agrements_formations_id
       type: Int
-    - name: enquete_reponses_agrements_formations_status
-      type: Int!
     - name: enquete_reponses_activite_id
       type: Int
-    - name: enquete_reponses_activite_status
+    - name: enquete_reponses_activite_curatelle_renforcee_status
+      type: Int!
+    - name: enquete_reponses_activite_curatelle_simple_status
+      type: Int!
+    - name: enquete_reponses_activite_tutelle_status
+      type: Int!
+    - name: enquete_reponses_activite_accompagnement_judiciaire_status
+      type: Int!
+    - name: enquete_reponses_activite_curatelle_biens_status
+      type: Int!
+    - name: enquete_reponses_activite_curatelle_personne_status
+      type: Int!
+    - name: enquete_reponses_activite_revision_mesures_status
       type: Int!
     - name: enquete_reponses_populations_id
       type: Int
-    - name: enquete_reponses_populations_status
+    - name: enquete_reponses_populations_curatelle_status
       type: Int!
+    - name: enquete_reponses_populations_tutelle_status
+      type: Int!
+    - name: enquete_reponses_populations_accompagnement_judiciaire_status
+      type: Int!
+    - name: enquete_reponses_populations_sauvegarde_justice_status
+      type: Int!
+    - name: enquete_reponses_populations_autre_status
+      type: Int!
+  - name: SubmittedEnqueteReponse
+    fields:
+    - name: id
+      type: Int!
+    - name: submitted_at
+      type: timestamptz!
