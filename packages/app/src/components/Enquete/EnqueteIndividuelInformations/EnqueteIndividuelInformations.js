@@ -38,13 +38,18 @@ export const EnqueteIndividuelInformations = props => {
         await updateEnquete({
           variables: {
             id: enquete_reponses_informations_mandataire_id,
+            nom: values.nom || null,
+            departement: values.departement || null,
+            region: values.region || null,
+            sexe: values.sexe ? `${values.sexe}` : null,
+            tranche_age: values.tranche_age ? `${values.tranche_age}` : null,
             anciennete: values.anciennete ? `${values.anciennete}` : null,
             benevole: values.benevole,
             estimation_etp: values.estimation_etp || null,
             forme_juridique: values.forme_juridique ? values.forme_juridique : null,
             local_professionnel: values.local_professionnel,
             secretaire_specialise_etp: values.secretaire_specialise_etp
-              ? `${values.secretaire_specialise_etp}`
+              ? Number(values.secretaire_specialise_etp)
               : null
           }
         });

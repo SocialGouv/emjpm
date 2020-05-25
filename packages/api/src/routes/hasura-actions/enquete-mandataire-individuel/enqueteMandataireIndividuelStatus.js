@@ -3,8 +3,7 @@ const {
   informationsAgrementsMandataireSchema,
   informationsFormationMandataireSchema,
   prestationsSocialesSchema,
-  activiteSchema,
-  populationsSchema
+  activiteSchema
 } = require("./schemas");
 
 async function getValidationStatus(data, validationSchema) {
