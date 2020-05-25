@@ -1,7 +1,7 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { SmallInput } from "../../Commons/SmallInput";
@@ -13,29 +13,29 @@ const strongStyle = {
   color: "#007AD9"
 };
 
+function mapDataPropsToFormValues(data) {
+  return {
+    nbMesureEtablissementDebutAnnee: data.nbMesureEtablissementDebutAnnee || "",
+    nbMesureEtablissementFinAnnee: data.nbMesureEtablissementFinAnnee || "",
+    nbMesureDomicileDebutAnnee: data.nbMesureDomicileDebutAnnee || "",
+    nbMesureDomicileFinAnnee: data.nbMesureDomicileFinAnnee || ""
+  };
+}
+
 export const EnqueteActiviteForm = props => {
-  const {
-    goToPrevPage,
-    title,
+  const { goToPrevPage, title, loading, data = {} } = props;
 
-    nbMesureEtablissementDebutAnnee,
-    nbMesureEtablissementFinAnnee,
-    nbMesureDomicileDebutAnnee,
-    nbMesureDomicileFinAnnee
-  } = props;
-
-  const { handleSubmit, handleChange, values, errors } = useFormik({
+  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    initialValues: {
-      nbMesureEtablissementDebutAnnee: nbMesureEtablissementDebutAnnee || "",
-      nbMesureEtablissementFinAnnee: nbMesureEtablissementFinAnnee || "",
-      nbMesureDomicileDebutAnnee: nbMesureDomicileDebutAnnee || "",
-      nbMesureDomicileFinAnnee: nbMesureDomicileFinAnnee || ""
-    }
+    initialValues: mapDataPropsToFormValues(data)
   });
+
+  useEffect(() => {
+    setValues(mapDataPropsToFormValues(data));
+  }, [data, setValues]);
 
   const totalDebutAnnee =
     (values.nbMesureEtablissementDebutAnnee || 0) + (values.nbMesureDomicileDebutAnnee || 0);
@@ -196,7 +196,7 @@ export const EnqueteActiviteForm = props => {
           de <Text sx={strongStyle}>{totalFinAnnee}</Text> mesures au 31/12/2019.
         </Box>
 
-        <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
       </Box>
     </form>
   );

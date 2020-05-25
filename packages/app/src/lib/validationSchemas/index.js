@@ -1,6 +1,11 @@
 import { adminEditorSchema } from "./adminEditorSchema";
 import { adminTribunalSchema } from "./adminTribunalSchema";
 import { editorTokenSchema } from "./editorTokenSchema";
+import {
+  enqueteMandataireIndividuelAgrementsSchema,
+  enqueteMandataireIndividuelFormationSchema,
+  enqueteMandataireIndividuelInformationsGeneralesSchema
+} from "./enqueteMandataireIndividuelSchema";
 import { forgotPasswordSchema } from "./forgotPasswordSchema";
 import { individuelAgrementSchema } from "./individuelAgrementSchema";
 import { individuelExerciceSchema } from "./individuelExerciceSchema";
@@ -12,7 +17,6 @@ import { magistratMesureDeleteSchema } from "./magistratMesureDeleteSchema";
 import { magistratMesureEditSchema } from "./magistratMesureEditSchema";
 import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
-import { mandataireEnqueteIndividuelSchema } from "./mandataireEnqueteIndividuelSchema";
 import { mandataireMesureSchema } from "./mandataireMesureSchema";
 import { mandataireSignupSchema } from "./mandataireSignupSchema";
 import { passwordSchema } from "./passwordSchema";
@@ -59,5 +63,7 @@ export {
   satisfactionCampaignSchema,
   serviceMesureImportSchema,
   servicePersonnelSchema,
-  mandataireEnqueteIndividuelSchema
+  enqueteMandataireIndividuelInformationsGeneralesSchema,
+  enqueteMandataireIndividuelAgrementsSchema,
+  enqueteMandataireIndividuelFormationSchema
 };

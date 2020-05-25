@@ -2,14 +2,14 @@ import React from "react";
 import { Button, Flex } from "rebass";
 
 export const EnqueteStepperButtons = props => {
-  const { goToPrevPage } = props;
+  const { goToPrevPage, disabled = false } = props;
   return (
     <Flex mt={"80px"} alignItems="center" flexDirection="column">
       <Flex justifyContent>
-        <Button onClick={() => goToPrevPage()} variant="outline">
+        <Button disabled={disabled} onClick={() => goToPrevPage()} variant="outline">
           Précédent
         </Button>
-        <Button ml={4} type="submit">
+        <Button disabled={disabled} ml={4} type="submit">
           Suivant
         </Button>
       </Flex>
