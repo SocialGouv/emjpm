@@ -1,7 +1,7 @@
 var XLSX = require("xlsx");
 
 const parseSheets = ({ base64str, parseOptions }) => {
-  const workbook = _openWorkbook(base64str, parseOptions);
+  const workbook = XLSX.read(base64str, parseOptions);
 
   return workbook.Sheets.reduce((acc, worksheetName) => {
     const worksheet = workbook.Sheets[worksheetName];
@@ -11,7 +11,7 @@ const parseSheets = ({ base64str, parseOptions }) => {
 };
 
 const parseSheetByIndex = ({ base64str, parseOptions, sheetIndex }) => {
-  const workbook = _openWorkbook(base64str, parseOptions);
+  const workbook = XLSX.read(base64str, parseOptions);
 
   const worksheetNames = workbook.SheetNames;
   if (sheetIndex < worksheetNames.length) {
@@ -22,10 +22,6 @@ const parseSheetByIndex = ({ base64str, parseOptions, sheetIndex }) => {
     `Invalid sheet index ${sheetIndex} (nb of sheets: ${worksheetNames.length})`
   );
 };
-
-function _openWorkbook(base64str, parseOptions) {
-  return XLSX.read(base64str, parseOptions);
-}
 
 function _parseSheetByName(worksheet) {
   return XLSX.utils.sheet_to_json(worksheet, { raw: false }).map(row => {
