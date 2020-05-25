@@ -32,17 +32,17 @@
     "@types/graphql": "^14.2.3",
     "@types/koa": "^2.11.3",
     "@types/koa-bodyparser": "^4.3.0",
-    "@types/koa-router": "^7.4.0",
+    "@types/koa-router": "^7.4.1",
     "@types/koa__cors": "^2.2.3",
-    "@types/lodash": "^4.14.150",
-    "@types/node": "^12.12.39",
+    "@types/lodash": "^4.14.152",
+    "@types/node": "^12.12.42",
     "@types/node-fetch": "^2.5.7",
     "@types/pino": "^5.20.0",
-    "@zeit/ncc": "^0.22.1",
+    "@zeit/ncc": "^0.22.3",
     "nodemon": "^1.19.4",
     "prettier": "^1.19.1",
     "ts-node": "^8.10.1",
     "tslint": "^5.20.1",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.3"
   }
 }
