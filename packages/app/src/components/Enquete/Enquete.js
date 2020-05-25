@@ -12,12 +12,17 @@ import { ENQUETE } from "./queries";
 export const Enquete = ({ id, currentStep }) => {
   const { mandataire, type } = useContext(UserContext);
 
-  const { data, loading } = useQuery(ENQUETE, {
+  const { data, loading, error } = useQuery(ENQUETE, {
     variables: { id }
   });
 
   if (loading) {
     return <Box>Chargement...</Box>;
+  }
+
+  if (error) {
+    console.error(error);
+    return null;
   }
 
   const { enquetes_by_pk: enquete } = data;

@@ -7,15 +7,32 @@ const actionsEnqueteImporter = require("./enquete-import/actionsEnqueteImporter"
 const checkImportEnqueteParameters = require("./enquete-import/checkImportEnqueteParameters");
 const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
 const {
+  initEnqueteMandatairePrepose
+} = require("./enquete-mandataire-prepose/enqueteMandatairePrepose");
+const {
   initEnqueteMandataireIndividuel
 } = require("./enquete-mandataire-individuel/enqueteMandataireIndividuel");
-const checkEnqueteIndividuelParameters = require("./enquete-mandataire-individuel/checkEnqueteIndividuelParameters");
+const { checkEnqueteMandataireParameters } = require("./utils");
 
 const router = express.Router();
 
-router.post("/enquetes/mandataire-individuel", async (req, res, next) => {
-  await checkEnqueteIndividuelParameters(req, res);
+router.post("/enquetes/mandataire-prepose", async (req, res, next) => {
+  await checkEnqueteMandataireParameters(req, res);
+  try {
+    const { enqueteId, mandataireId } = req.body.input;
+    const result = await initEnqueteMandatairePrepose({
+      enqueteId,
+      mandataireId
+    });
+    return res.json(result);
+  } catch (err) {
+    logger.error(err);
+    next(err);
+  }
+});
 
+router.post("/enquetes/mandataire-individuel", async (req, res, next) => {
+  await checkEnqueteMandataireParameters(req, res);
   try {
     const { enqueteId, mandataireId } = req.body.input;
     const result = await initEnqueteMandataireIndividuel({

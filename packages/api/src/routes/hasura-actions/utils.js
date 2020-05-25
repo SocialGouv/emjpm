@@ -1,4 +1,4 @@
-async function checkEnqueteIndividuelParameters(req, res) {
+async function checkEnqueteMandataireParameters(req, res) {
   const { enqueteId, mandataireId } = req.body.input;
   if (!enqueteId || !mandataireId) {
     res.status(422).json({
@@ -7,4 +7,4 @@ async function checkEnqueteIndividuelParameters(req, res) {
   }
 }
 
-module.exports = checkEnqueteIndividuelParameters;
+module.exports = { checkEnqueteMandataireParameters };
