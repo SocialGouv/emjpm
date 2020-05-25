@@ -69,6 +69,7 @@ module.exports = {
         sexe
         anciennete
         estimation_etp
+        exerce_secretaires_specialises
         secretaire_specialise_etp
         local_professionnel
       }
