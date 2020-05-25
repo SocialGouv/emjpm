@@ -6,10 +6,10 @@ plugins:
   - simple-import-sort
 
 rules:
-  react/self-closing-comp: 
-  - error
-  - component: true
-    html: true
+  react/self-closing-comp:
+    - error
+    - component: true
+      html: true
   prefer-const: 2
   jsx-a11y/anchor-is-valid: off
   jsx-a11y/label-has-for: off
@@ -18,12 +18,12 @@ rules:
   jsx-a11y/no-static-element-interactions: off
   jsx-a11y/no-noninteractive-tabindex: off
   simple-import-sort/sort: error
-  sort-keys-fix/sort-keys-fix: 
-  - error
-  - asc
+  sort-keys-fix/sort-keys-fix:
+    - error
+    - asc
 
 overrides:
   - files:
-    - src/components/**/*.js
+      - src/components/**/*.js
     rules:
       sort-keys-fix/sort-keys-fix: off
