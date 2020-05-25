@@ -4,7 +4,7 @@ import { useState } from "react";
 import { UPLOAD_ENQUETE_EXCEL_FILE } from "../EnqueteImport/mutations";
 import { fileReader } from "./fileReader";
 
-function useEnqueteImportManager({ enqueteId, mandataireUserId, serviceId }) {
+function useEnqueteImportManager({ enqueteId, userId }) {
   const [importSummary, setImportSummary] = useState();
   const [uploadFile, { loading: enqueteImportLoading }] = useMutation(UPLOAD_ENQUETE_EXCEL_FILE);
 
@@ -13,9 +13,8 @@ function useEnqueteImportManager({ enqueteId, mandataireUserId, serviceId }) {
       uploadFile({
         variables: {
           base64str,
-          serviceId,
           enqueteId,
-          mandataireUserId
+          userId
         }
       })
         .then(

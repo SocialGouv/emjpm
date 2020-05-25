@@ -11,7 +11,7 @@ const ImportEnquetePage = ({ enqueteId }) => {
   return (
     <LayoutMandataire>
       <BoxWrapper mt={6} px="1">
-        <EnqueteImportPanel enqueteId={enqueteId} mandataireUserId={user.id} />
+        <EnqueteImportPanel enqueteId={enqueteId} userId={user.id} />
       </BoxWrapper>
     </LayoutMandataire>
   );
