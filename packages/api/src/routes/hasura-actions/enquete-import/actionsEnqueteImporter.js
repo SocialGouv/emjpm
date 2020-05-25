@@ -12,12 +12,8 @@ const actionsEnqueteImporter = {
 
 async function importEnqueteFile({
   file: { base64str },
-  importContext: {
-    enqueteId,
-    // mandataireUserId & serviceId are mutually exclusive
-    mandataireUserId,
-    serviceId
-  }
+  // eslint-disable-next-line no-unused-vars
+  importContext: { enqueteId, userId, service, mandataire }
 }) {
   const start = Date.now();
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);
@@ -28,7 +24,7 @@ async function importEnqueteFile({
 
   const enqueteReponse = await initEnqueteMandataireIndividuel({
     enqueteId,
-    mandataireId: mandataireUserId
+    mandataireId: mandataire.id
   });
 
   // save data to database
@@ -46,9 +42,7 @@ async function importEnqueteFile({
   const importSummary = {
     errors: [],
     create: [],
-    update: [],
-    mandataireUserId,
-    serviceId
+    update: []
   };
 
   const durationInSeconds = Math.ceil((Date.now() - start) / 1000);

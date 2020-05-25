@@ -14,10 +14,17 @@ function excelInteger() {
     .transform(x => (x && !isNaN(parseInt(x)) ? parseInt(x) : undefined));
 }
 
+function excelFloat() {
+  return yup
+    .number()
+    .transform(x => (x && !isNaN(parseFloat(x)) ? parseFloat(x) : undefined));
+}
+
 const enqueteExcelSchemaUtil = {
   excelSelect,
   excelBoolean,
-  excelInteger
+  excelInteger,
+  excelFloat
 };
 
 module.exports = enqueteExcelSchemaUtil;

@@ -8,6 +8,10 @@ exports.up = function(knex) {
       table.boolean("exerce_seul_activite").nullable();
       table.boolean("exerce_secretaires_specialises").nullable();
       table.string("tranche_age").nullable();
+      table
+        .float("secretaire_specialise_etp")
+        .nullable()
+        .alter(); // string=>number
     }
   );
 };
@@ -22,6 +26,10 @@ exports.down = function(knex) {
       table.dropColumn("tranche_age");
       table.dropColumn("exerce_seul_activite");
       table.dropColumn("exerce_secretaires_specialises");
+      table
+        .string("secretaire_specialise_etp")
+        .nullable()
+        .alter(); // number=>string
     }
   );
 };

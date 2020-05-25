@@ -1,5 +1,5 @@
 const ENQ_REP_AGREMENTS_FORMATIONS = {
-  NB_DEPARTEMENTS: buildMaps({
+  NB_DEPARTEMENTS: buildKeys({
     "1": "1",
     "2": "2",
     "3": "3",
@@ -12,7 +12,7 @@ module.exports = {
   ENQ_REP_AGREMENTS_FORMATIONS
 };
 
-function buildMaps(byKey) {
+function buildKeys(byKey) {
   return {
     byKey,
     byValue: revertMapKeysValues(byKey)

@@ -6,17 +6,11 @@ import { EnqueteImportResult } from "./EnqueteImportResult";
 import { SingleImportFilePicker } from "./SingleImportFilePicker";
 import { useEnqueteImportManager } from "./useEnqueteImportManager.hook";
 
-export const EnqueteImportPanel = ({
-  enqueteId,
-  // mandataireUserId & serviceId are mutually exclusive
-  mandataireUserId,
-  serviceId
-}) => {
+export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   const { importEnqueteFile, importSummary, reset, enqueteImportLoading } = useEnqueteImportManager(
     {
       enqueteId,
-      mandataireUserId,
-      serviceId
+      userId
     }
   );
 
@@ -30,13 +24,7 @@ export const EnqueteImportPanel = ({
   }
 
   if (importSummary && !importSummary.unexpectedError) {
-    return (
-      <EnqueteImportResult
-        reset={() => reset()}
-        importSummary={importSummary}
-        serviceId={serviceId}
-      />
-    );
+    return <EnqueteImportResult reset={() => reset()} importSummary={importSummary} />;
   }
 
   return (

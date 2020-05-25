@@ -25,7 +25,7 @@ const informationsGeneralesMandataireSchema = yup.object().shape({
     ENQ_REP_INFO_MANDATAIRE.ESTIMATION_ETP.byValue
   ),
   exerce_secretaires_specialises: schemaValidator.excelBoolean(),
-  secretaire_specialise_etp: schemaValidator.excelInteger(),
+  secretaire_specialise_etp: schemaValidator.excelFloat(),
   local_professionnel: schemaValidator.excelBoolean()
 });
 

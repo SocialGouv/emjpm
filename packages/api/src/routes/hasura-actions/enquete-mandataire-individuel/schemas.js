@@ -9,7 +9,8 @@ const informationsGeneralesMandataireSchema = yup.object().shape({
   }),
   anciennete: yup.string().required(),
   estimation_etp: yup.string().required(),
-  secretaire_specialise_etp: yup.string().nullable(),
+  exerce_secretaires_specialises: yup.boolean().nullable(),
+  secretaire_specialise_etp: yup.number().nullable(),
   local_professionnel: yup.boolean().required()
 });
 
