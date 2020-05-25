@@ -24,6 +24,7 @@ export const EnqueteIndividuelInformationsForm = props => {
 
   const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
+      console.log("xxx values:", values);
       await props.handleSubmit(values);
       setSubmitting(false);
     },
@@ -157,7 +158,7 @@ export const EnqueteIndividuelInformationsForm = props => {
         <Field>
           <Label mb={1}>{"Exercez-vous votre activité dans un local professionnnel ?"}</Label>
           <YesNoComboBox
-            defaultValue={"local_professionnel"}
+            defaultValue={values.local_professionnel}
             name="local_professionnel"
             onChange={value => setFieldValue("local_professionnel", value)}
           />

@@ -81,7 +81,7 @@ export const UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS = gql`
     $estimation_etp: String
     $forme_juridique: String
     $local_professionnel: Boolean
-    $secretaire_specialise_etp: String
+    $secretaire_specialise_etp: Float
     $sexe: String
   ) {
     update_enquete_reponses_informations_mandataire_by_pk(
