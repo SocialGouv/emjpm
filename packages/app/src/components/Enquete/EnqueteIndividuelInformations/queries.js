@@ -14,6 +14,10 @@ export const ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE = gql`
       exerce_secretaires_specialises
       secretaire_specialise_etp
       sexe
+      region
+      departement
+      nom
+      tranche_age
     }
   }
 `;
