@@ -711,11 +711,29 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
+  "departement": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "estimation_etp": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
+  },
+  "exerce_secretaires_specialises": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "exerce_seul_activite": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
   },
   "forme_juridique": Object {
     "defaultValue": null,
@@ -741,13 +759,31 @@ Object {
     "nullable": true,
     "type": "boolean",
   },
-  "secretaire_specialise_etp": Object {
+  "nom": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
   },
+  "region": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "secretaire_specialise_etp": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
   "sexe": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "tranche_age": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": true,
