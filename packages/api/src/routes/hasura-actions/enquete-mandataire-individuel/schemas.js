@@ -1,6 +1,9 @@
 const yup = require("yup");
 
 const informationsGeneralesMandataireSchema = yup.object().shape({
+  nom: yup.string().required(),
+  departement: yup.string().required(),
+  region: yup.string().required(),
   benevole: yup.boolean().required(),
   forme_juridique: yup.string().when("benevole", {
     is: false,

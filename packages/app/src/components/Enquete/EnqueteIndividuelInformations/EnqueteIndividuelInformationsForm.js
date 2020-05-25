@@ -5,7 +5,7 @@ import React from "react";
 import { Box } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
-// import { mandataireEnqueteIndividuelSchema } from "../../../lib/validationSchemas";
+import { enqueteMandataireIndividuelInformationsGeneralesSchema } from "../../../lib/validationSchemas";
 import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_INFO_MANDATAIRE_FORM } from "../constants/ENQ_REP_INFO_MANDATAIRE_FORM.const";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -32,7 +32,7 @@ export const EnqueteIndividuelInformationsForm = props => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    // validationSchema: mandataireEnqueteIndividuelSchema,
+    validationSchema: enqueteMandataireIndividuelInformationsGeneralesSchema,
     initialValues: {
       departement: departement || "",
       region: region || "",

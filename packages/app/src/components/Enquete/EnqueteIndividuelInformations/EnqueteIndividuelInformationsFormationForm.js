@@ -4,8 +4,8 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box } from "rebass";
 
+import { enqueteMandataireIndividuelFormationSchema } from "../../../lib/validationSchemas";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
-// import { mandataireEnqueteIndividuelAgrementFormationSchema } from "../../../lib/validationSchemas/mandataireEnqueteIndividuelSchema";
 
 export const EnqueteIndividuelInformationsFormationForm = props => {
   const { data = {}, goToPrevPage } = props;
@@ -33,7 +33,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    // validationSchema: mandataireEnqueteIndividuelAgrementFormationSchema,
+    validationSchema: enqueteMandataireIndividuelFormationSchema,
     initialValues: {
       cnc_mjpm_annee_obtention,
       cnc_mjpm_heure_formation,

@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box } from "rebass";
 
+import { enqueteMandataireIndividuelAgrementsSchema } from "../../../lib/validationSchemas";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 export const EnqueteIndividuelInformationsAgrementsForm = props => {
@@ -16,6 +17,7 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
+    validationSchema: enqueteMandataireIndividuelAgrementsSchema,
     initialValues: {
       annee_agrement,
       nb_departements
