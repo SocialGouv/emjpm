@@ -26,27 +26,25 @@ export const EnqueteActiviteRevisionMesures = props => {
     }
   });
 
-  if (loading) {
-    return <Box p={4}>Chargement...</Box>;
-  }
-
-  const { enquete_reponses_activite_by_pk: activite } = data;
   const {
     revisions_main_levee,
     revisions_masp,
     revisions_reconduction,
     revisions_changement,
     revisions_autre
-  } = activite;
+  } = data ? data.enquete_reponses_activite_by_pk || {} : {};
 
   return (
     <Box>
       <EnqueteActiviteRevisionMesuresForm
-        revisionsMainLevee={revisions_main_levee}
-        revisionsMasp={revisions_masp}
-        revisionsReconduction={revisions_reconduction}
-        revisionsChangement={revisions_changement}
-        revisionsAutre={revisions_autre}
+        loading={loading}
+        data={{
+          revisionsMainLevee: revisions_main_levee,
+          revisionsMasp: revisions_masp,
+          revisionsReconduction: revisions_reconduction,
+          revisionsChangement: revisions_changement,
+          revisionsAutre: revisions_autre
+        }}
         handleSubmit={async values => {
           await updateEnquete({
             variables: {

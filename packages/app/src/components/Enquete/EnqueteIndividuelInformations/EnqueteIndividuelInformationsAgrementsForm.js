@@ -1,28 +1,33 @@
 import { Field, Heading1, Heading3, InlineError, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { Box } from "rebass";
 
 import { enqueteMandataireIndividuelAgrementsSchema } from "../../../lib/validationSchemas";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
+function mapDataPropsToFormValues(data) {
+  return {
+    annee_agrement: data.annee_agrement || "",
+    nb_departements: data.nb_departements || ""
+  };
+}
+
 export const EnqueteIndividuelInformationsAgrementsForm = props => {
-  const { data = {}, goToPrevPage } = props;
-
-  const { annee_agrement = "", nb_departements = "" } = data;
-
-  const { handleSubmit, handleChange, values, errors } = useFormik({
+  const { data = {}, goToPrevPage, loading = false } = props;
+  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
     validationSchema: enqueteMandataireIndividuelAgrementsSchema,
-    initialValues: {
-      annee_agrement,
-      nb_departements
-    }
+    initialValues: mapDataPropsToFormValues(data)
   });
+
+  useEffect(() => {
+    setValues(mapDataPropsToFormValues(data));
+  }, [data, setValues]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -63,7 +68,7 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
           />
           <InlineError message={errors.nb_departements} fieldId="nb_departements" />
         </Field>
-        <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
       </Box>
     </form>
   );

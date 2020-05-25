@@ -1,33 +1,34 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Input, Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Flex } from "rebass";
 
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
+function mapDataPropsToFormValues(data) {
+  return {
+    revisionsMainLevee: data.revisionsMainLevee || "",
+    revisionsMasp: data.revisionsMasp || "",
+    revisionsReconduction: data.revisionsReconduction || "",
+    revisionsChangement: data.revisionsChangement || "",
+    revisionsAutre: data.revisionsAutre || ""
+  };
+}
+
 export const EnqueteActiviteRevisionMesuresForm = props => {
-  const {
-    goToPrevPage,
-    revisionsMainLevee,
-    revisionsMasp,
-    revisionsReconduction,
-    revisionsChangement,
-    revisionsAutre
-  } = props;
-  const { handleSubmit, handleChange, values, errors } = useFormik({
+  const { goToPrevPage, data, loading = false } = props;
+  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    initialValues: {
-      revisionsMainLevee: revisionsMainLevee || "",
-      revisionsMasp: revisionsMasp || "",
-      revisionsReconduction: revisionsReconduction || "",
-      revisionsChangement: revisionsChangement || "",
-      revisionsAutre: revisionsAutre || ""
-    }
+    initialValues: mapDataPropsToFormValues(data)
   });
+
+  useEffect(() => {
+    setValues(mapDataPropsToFormValues(data));
+  }, [data, setValues]);
 
   return (
     <Box>
@@ -119,7 +120,7 @@ export const EnqueteActiviteRevisionMesuresForm = props => {
           <Flex flex={1 / 2} />
         </Flex>
 
-        <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
       </form>
     </Box>
   );

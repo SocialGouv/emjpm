@@ -1,8 +1,8 @@
 import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React from "react";
-import { Box } from "rebass";
+import React, { useEffect } from "react";
+import { Box, Text } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
 import { enqueteMandataireIndividuelInformationsGeneralesSchema } from "../../../lib/validationSchemas";
@@ -10,44 +10,38 @@ import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_INFO_MANDATAIRE_FORM } from "../constants/ENQ_REP_INFO_MANDATAIRE_FORM.const";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
-export const EnqueteIndividuelInformationsForm = props => {
-  const { data = {}, goToPrevPage } = props;
-  const {
-    departement,
-    region,
-    nom,
-    anciennete,
-    benevole,
-    estimation_etp,
-    forme_juridique,
-    local_professionnel,
-    exerce_secretaires_specialises,
-    secretaire_specialise_etp,
-    tranche_age,
-    sexe
-  } = data;
+function mapDataPropsToFormValues(data) {
+  return {
+    departement: data.departement || "",
+    region: data.region || "",
+    nom: data.nom || "",
+    benevole: data.benevole || false,
+    anciennete: data.anciennete || "",
+    estimation_etp: data.estimation_etp || "",
+    forme_juridique: data.forme_juridique || "",
+    exerce_secretaires_specialises: data.exerce_secretaires_specialises || false,
+    secretaire_specialise_etp: data.secretaire_specialise_etp || "",
+    local_professionnel: data.local_professionnel || false,
+    tranche_age: data.tranche_age,
+    sexe: data.sexe
+  };
+}
 
-  const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
+export const EnqueteIndividuelInformationsForm = props => {
+  const { data = {}, goToPrevPage, loading = false } = props;
+
+  const { handleSubmit, handleChange, values, errors, setFieldValue, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
     validationSchema: enqueteMandataireIndividuelInformationsGeneralesSchema,
-    initialValues: {
-      departement: departement || "",
-      region: region || "",
-      nom: nom || "",
-      benevole: benevole || false,
-      anciennete: anciennete || "",
-      estimation_etp: estimation_etp || "",
-      forme_juridique: forme_juridique || "",
-      exerce_secretaires_specialises: exerce_secretaires_specialises || false,
-      secretaire_specialise_etp: secretaire_specialise_etp || "",
-      local_professionnel: local_professionnel || false,
-      tranche_age,
-      sexe
-    }
+    initialValues: mapDataPropsToFormValues(data)
   });
+
+  useEffect(() => {
+    setValues(mapDataPropsToFormValues(data));
+  }, [data, setValues]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -103,6 +97,10 @@ export const EnqueteIndividuelInformationsForm = props => {
           />
           <InlineError message={errors.nom} fieldId="nom" />
         </Field>
+
+        <Text mt={7} mb={4} fontWeight="bold" color="#595959">
+          STATUT
+        </Text>
 
         <Field>
           <Label mb={1} htmlFor="benevole">
@@ -189,6 +187,10 @@ export const EnqueteIndividuelInformationsForm = props => {
           <InlineError message={errors.tranche_age} fieldId="tranche_age" />
         </Field>
 
+        <Text mt={7} mb={4} fontWeight="bold" color="#595959">
+          {"CONDITIONS D'EXERCICE DE L'ACTIVITE"}
+        </Text>
+
         <Field>
           <Label mb={1} htmlFor="estimation_etp">
             {"Estimation de l'activité en équivalent temps plein (ETP)"}
@@ -257,7 +259,7 @@ export const EnqueteIndividuelInformationsForm = props => {
         </Field>
       </Box>
 
-      <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+      <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
     </form>
   );
 };
