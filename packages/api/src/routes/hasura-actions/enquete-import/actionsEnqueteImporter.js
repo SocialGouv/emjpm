@@ -1,5 +1,10 @@
-const enqueteExcelParser = require("./enqueteExcelParser");
+const {
+  getEnqueteReponse,
+  createEmptyEnqueteReponse
+} = require("../enquete-mandataire-individuel/requests");
+const enqueteExcelParser = require("./parser/enqueteExcelParser");
 const logger = require("../../../utils/logger");
+const enqueteImportRepository = require("./repository/enqueteImportRepository");
 
 const actionsEnqueteImporter = {
   importEnqueteFile
@@ -7,26 +12,37 @@ const actionsEnqueteImporter = {
 
 async function importEnqueteFile({
   file: { base64str },
-  importContext: {
-    enqueteId,
-    // mandataireUserId & serviceId are mutually exclusive
-    mandataireUserId,
-    serviceId
-  }
+  // eslint-disable-next-line no-unused-vars
+  importContext: { enqueteId, userId, service, mandataire }
 }) {
   const start = Date.now();
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);
 
-  const enqueteToImport = enqueteExcelParser.parse({
+  const { informationsMandataire } = await enqueteExcelParser.parse({
     base64str
   });
 
-  logger.info(`[IMPORT ENQUETE] enqueteToImport: ${enqueteToImport.length}`);
+  const enqueteReponse = await initEnqueteMandataireIndividuel({
+    enqueteId,
+    mandataireId: mandataire.id
+  });
 
+  // save data to database
+  const informationsMandataireDb = await enqueteImportRepository.saveInformationsMandataire(
+    enqueteReponse.enquete_reponses_informations_mandataire_id,
+    informationsMandataire
+  );
+  logger.info(
+    `[IMPORT ENQUETE] informationsMandataireDb: ${JSON.stringify(
+      informationsMandataireDb,
+      undefined,
+      2
+    )}`
+  );
   const importSummary = {
     errors: [],
-    mandataireUserId,
-    serviceId
+    create: [],
+    update: []
   };
 
   const durationInSeconds = Math.ceil((Date.now() - start) / 1000);
@@ -50,5 +66,19 @@ async function importEnqueteFile({
       importSummary.errors.length === 0 ? importSummary.invalidAntenneNames : []
   };
 }
+async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
+  let enqueteReponse = await getEnqueteReponse({
+    enqueteId,
+    mandataireId
+  });
 
+  if (!enqueteReponse) {
+    const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
+      enqueteId,
+      mandataireId
+    });
+    enqueteReponse = insert_enquete_reponses_one;
+  }
+  return enqueteReponse;
+}
 module.exports = actionsEnqueteImporter;

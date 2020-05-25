@@ -5,19 +5,20 @@ import React from "react";
 import { Box } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
-import { INTERVALLE_ETP_OPTIONS } from "../../../constants/mandataire";
 // import { mandataireEnqueteIndividuelSchema } from "../../../lib/validationSchemas";
 import { findOption } from "../../../util/option/OptionUtil";
+import { ENQ_REP_INFO_MANDATAIRE_FORM } from "../constants/ENQ_REP_INFO_MANDATAIRE_FORM.const";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 export const EnqueteIndividuelInformationsForm = props => {
   const { data = {}, goToPrevPage } = props;
   const {
     anciennete,
-    benevole = false,
+    benevole,
     estimation_etp,
     forme_juridique,
     local_professionnel,
+    exerce_secretaires_specialises,
     secretaire_specialise_etp
   } = data;
 
@@ -32,7 +33,7 @@ export const EnqueteIndividuelInformationsForm = props => {
       anciennete: anciennete || "",
       estimation_etp: estimation_etp || "",
       forme_juridique: forme_juridique || "",
-      secretaire_specialise: secretaire_specialise_etp ? secretaire_specialise_etp > 0 : false,
+      exerce_secretaires_specialises: exerce_secretaires_specialises || false,
       secretaire_specialise_etp: secretaire_specialise_etp || "",
       local_professionnel: local_professionnel || false
     }
@@ -62,14 +63,18 @@ export const EnqueteIndividuelInformationsForm = props => {
             <Label mb={1} htmlFor="forme_juridique">
               {"Forme juridique de votre entreprise"}
             </Label>
-            <Input
+            <Select
               placeholder=""
               id="forme_juridique"
+              instanceId={"forme_juridique"}
               name="forme_juridique"
-              value={values.forme_juridique}
+              value={findOption(
+                ENQ_REP_INFO_MANDATAIRE_FORM.FORME_JURIDIQUE,
+                values.forme_juridique
+              )}
               hasError={!!errors.forme_juridique}
-              onChange={handleChange}
-              type="text"
+              onChange={option => setFieldValue("forme_juridique", option.value)}
+              options={ENQ_REP_INFO_MANDATAIRE_FORM.FORME_JURIDIQUE}
             />
             <InlineError message={errors.forme_juridique} fieldId="forme_juridique" />
           </Field>
@@ -79,14 +84,15 @@ export const EnqueteIndividuelInformationsForm = props => {
           <Label mb={1} htmlFor="forme_juridique">
             {"Ancienneté dans la fonction de MJPM"}
           </Label>
-          <Input
+          <Select
             placeholder=""
             id="anciennete"
+            instanceId={"anciennete"}
             name="anciennete"
-            value={values.anciennete}
+            value={findOption(ENQ_REP_INFO_MANDATAIRE_FORM.ANCIENNETE, values.anciennete)}
             hasError={!!errors.anciennete}
-            onChange={handleChange}
-            type="number"
+            onChange={option => setFieldValue("anciennete", option.value)}
+            options={ENQ_REP_INFO_MANDATAIRE_FORM.ANCIENNETE}
           />
           <InlineError message={errors.anciennete} fieldId="anciennete" />
         </Field>
@@ -100,10 +106,10 @@ export const EnqueteIndividuelInformationsForm = props => {
             id="estimation_etp"
             instanceId={"estimation_etp"}
             name="estimation_etp"
-            value={findOption(INTERVALLE_ETP_OPTIONS, values.estimation_etp)}
+            value={findOption(ENQ_REP_INFO_MANDATAIRE_FORM.ESTIMATION_ETP, values.estimation_etp)}
             hasError={!!errors.estimation_etp}
             onChange={option => setFieldValue("estimation_etp", option.value)}
-            options={INTERVALLE_ETP_OPTIONS}
+            options={ENQ_REP_INFO_MANDATAIRE_FORM.ESTIMATION_ETP}
           />
           <InlineError message={errors.estimation_etp} fieldId="estimation_etp" />
         </Field>
@@ -112,19 +118,22 @@ export const EnqueteIndividuelInformationsForm = props => {
         <Field>
           <Label mb={1}>{"Exercez-vous avec un secretariat spécialisé ?"}</Label>
           <YesNoComboBox
-            defaultValue={values.secretaire_specialise}
-            name="secretaire_specialise"
+            defaultValue={values.exerce_secretaires_specialises}
+            name="exerce_secretaires_specialises"
             onChange={value => {
-              setFieldValue("secretaire_specialise", value);
+              setFieldValue("exerce_secretaires_specialises", value);
               if (!value) {
-                setFieldValue("secretaire_specialise_etp", "");
+                setFieldValue("exerce_secretaires_specialises", "");
               }
             }}
           />
-          <InlineError message={errors.secretaire_specialise} fieldId="secretaire_specialise" />
+          <InlineError
+            message={errors.exerce_secretaires_specialises}
+            fieldId="exerce_secretaires_specialises"
+          />
         </Field>
 
-        {values.secretaire_specialise && (
+        {values.exerce_secretaires_specialises && (
           <Field>
             <Label mb={1} htmlFor="secretaire_specialise_etp">
               {"Estimation de l'activité en ETP du secrétariat spécialisé"}
