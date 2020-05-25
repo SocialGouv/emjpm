@@ -1,5 +1,10 @@
-const { getEnqueteReponse, createEmptyEnqueteReponse } = require("./requests");
+const {
+  getEnqueteReponse,
+  createEmptyEnqueteReponse,
+  submitEnqueteReponse
+} = require("./requests");
 const enqueteMandataireIndividuelStatus = require("./enqueteMandataireIndividuelStatus");
+const HttpError = require("../../../utils/error/HttpError");
 
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   let enqueteReponse = await getEnqueteReponse({
@@ -49,4 +54,30 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   };
 }
 
-module.exports = { initEnqueteMandataireIndividuel };
+async function submitEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
+  const enqueteReponse = await getEnqueteReponse({
+    enqueteId,
+    mandataireId
+  });
+
+  console.log("submitEnqueteMandataireIndividuel", enqueteReponse);
+
+  if (!enqueteReponse) {
+    throw new HttpError(404, "enquete reponse does not exists");
+  }
+
+  const statuses = await enqueteMandataireIndividuelStatus(enqueteReponse);
+  const hasError = Object.values(statuses).some(status => status !== 2);
+
+  if (hasError) {
+    throw new HttpError(400, "form contains errors");
+  } else {
+    const result = await submitEnqueteReponse(enqueteReponse.id);
+    return result;
+  }
+}
+
+module.exports = {
+  initEnqueteMandataireIndividuel,
+  submitEnqueteMandataireIndividuel
+};

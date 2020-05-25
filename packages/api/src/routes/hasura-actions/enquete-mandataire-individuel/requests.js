@@ -5,7 +5,7 @@ const {
   backendAuthHeaders
 } = require("../../../utils/graphql-fetcher");
 const { ENQUETE_REPONSE } = require("./queries");
-const { INIT_ENQUETE_REPONSE } = require("./mutations");
+const { INIT_ENQUETE_REPONSE, SUBMIT_ENQUETE_REPONSE } = require("./mutations");
 
 module.exports = {
   createEmptyEnqueteReponse: async ({ enqueteId, mandataireId }) => {
@@ -48,6 +48,26 @@ module.exports = {
       const { enquete_reponses } = data;
       const [enqueteReponse] = enquete_reponses;
       return enqueteReponse;
+    } catch (err) {
+      logger.error(err);
+      return null;
+    }
+  },
+
+  submitEnqueteReponse: async id => {
+    try {
+      const { data, errors } = await graphqlFetch(
+        { id, submitDate: new Date() },
+        SUBMIT_ENQUETE_REPONSE,
+        backendAuthHeaders
+      );
+
+      if (errors && errors.length) {
+        errors.map(error => logger.error(error));
+      }
+
+      const { update_enquete_reponses_by_pk } = data;
+      return update_enquete_reponses_by_pk;
     } catch (err) {
       logger.error(err);
       return null;

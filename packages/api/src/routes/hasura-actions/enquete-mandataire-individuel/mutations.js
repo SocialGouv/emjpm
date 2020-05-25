@@ -15,5 +15,13 @@ module.exports = {
       enquete_id
     }
   }    
-`
+`,
+  SUBMIT_ENQUETE_REPONSE: `
+  mutation submit_enquete_reponse($id: Int!, $submitDate: timestamptz!) {
+    update_enquete_reponses_by_pk(pk_columns: {id: $id}, _set: {submitted_at: $submitDate}) {
+      id
+      submitted_at
+    }
+  }  
+ `
 };
