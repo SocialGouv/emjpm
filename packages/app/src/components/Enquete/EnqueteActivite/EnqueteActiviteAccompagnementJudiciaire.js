@@ -26,25 +26,23 @@ export const EnqueteActiviteAccompagnementJudiciaire = props => {
     }
   });
 
-  if (loading) {
-    return <Box p={4}>Chargement...</Box>;
-  }
-
-  const { enquete_reponses_activite_by_pk: activite } = data;
   const {
     accompagnement_judiciaire_domicile_debut_annee,
     accompagnement_judiciaire_domicile_fin_annee,
     accompagnement_judiciaire_etablissement_debut_annee,
     accompagnement_judiciaire_etablissement_fin_annee
-  } = activite;
+  } = data ? data.enquete_reponses_activite_by_pk || {} : {};
 
   return (
     <Box>
       <EnqueteActiviteForm
-        nbMesureEtablissementDebutAnnee={accompagnement_judiciaire_etablissement_debut_annee}
-        nbMesureEtablissementFinAnnee={accompagnement_judiciaire_etablissement_fin_annee}
-        nbMesureDomicileDebutAnnee={accompagnement_judiciaire_domicile_debut_annee}
-        nbMesureDomicileFinAnnee={accompagnement_judiciaire_domicile_fin_annee}
+        loading={loading}
+        data={{
+          nbMesureEtablissementDebutAnnee: accompagnement_judiciaire_etablissement_debut_annee,
+          nbMesureEtablissementFinAnnee: accompagnement_judiciaire_etablissement_fin_annee,
+          nbMesureDomicileDebutAnnee: accompagnement_judiciaire_domicile_debut_annee,
+          nbMesureDomicileFinAnnee: accompagnement_judiciaire_domicile_fin_annee
+        }}
         handleSubmit={async values => {
           const {
             nbMesureDomicileDebutAnnee,

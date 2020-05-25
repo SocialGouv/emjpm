@@ -1,50 +1,38 @@
 import { Field, Heading1, Heading3, InlineError, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { Box } from "rebass";
 
+import { enqueteMandataireIndividuelFormationSchema } from "../../../lib/validationSchemas";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
-// import { mandataireEnqueteIndividuelAgrementFormationSchema } from "../../../lib/validationSchemas/mandataireEnqueteIndividuelSchema";
+
+function mapDataPropsToFormValues(data) {
+  return {
+    cnc_mjpm_annee_obtention: data.cnc_mjpm_annee_obtention || "",
+    cnc_mjpm_heure_formation: data.cnc_mjpm_heure_formation || "",
+    cnc_maj_annee_obtention: data.cnc_maj_annee_obtention || "",
+    cnc_maj_heure_formation: data.cnc_maj_heure_formation || "",
+    cnc_dpf_annee_obtention: data.cnc_dpf_annee_obtention || "",
+    cnc_dpf_heure_formation: data.cnc_dpf_heure_formation || "",
+    niveau_qualification: data.niveau_qualification || "",
+    niveau_qualification_secretaire_spe: data.niveau_qualification_secretaire_spe || ""
+  };
+}
 
 export const EnqueteIndividuelInformationsFormationForm = props => {
-  const { data = {}, goToPrevPage } = props;
-
-  const {
-    cnc_dpf_annee_obtention = "",
-    cnc_dpf_heure_formation,
-    cnc_maj_annee_obtention = "",
-    cnc_maj_heure_formation = "",
-    cnc_mjpm_annee_obtention = "",
-    cnc_mjpm_heure_formation = "",
-    // cumul_delegue_service = "",
-    // cumul_delegue_service_etp = "",
-    // cumul_prepose = "",
-    // cumul_prepose_etp = "",
-    // debut_activite_avant_2009 = "",
-    // last_update = "",
-    niveau_qualification = "",
-    niveau_qualification_secretaire_spe = ""
-    // secretaire_specialise = ""
-  } = data;
-
-  const { handleSubmit, handleChange, values, errors, setFieldValue } = useFormik({
+  const { data = {}, goToPrevPage, loading = false } = props;
+  const { handleSubmit, handleChange, values, errors, setFieldValue, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    // validationSchema: mandataireEnqueteIndividuelAgrementFormationSchema,
-    initialValues: {
-      cnc_mjpm_annee_obtention,
-      cnc_mjpm_heure_formation,
-      cnc_maj_annee_obtention,
-      cnc_maj_heure_formation,
-      cnc_dpf_annee_obtention,
-      cnc_dpf_heure_formation,
-      niveau_qualification,
-      niveau_qualification_secretaire_spe
-    }
+    validationSchema: enqueteMandataireIndividuelFormationSchema,
+    initialValues: mapDataPropsToFormValues(data)
   });
+  useEffect(() => {
+    setValues(mapDataPropsToFormValues(data));
+  }, [data, setValues]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -212,7 +200,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
           />
         </Field>
 
-        <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
       </Box>
     </form>
   );

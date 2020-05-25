@@ -51,7 +51,7 @@ export const EnqueteIndividuel = props => {
     );
   }
 
-  const { enquete_individuel } = data;
+  const enquete_individuel = data ? data.enquete_individuel || {} : {};
   const MENU_SECTIONS = [
     {
       steps: [

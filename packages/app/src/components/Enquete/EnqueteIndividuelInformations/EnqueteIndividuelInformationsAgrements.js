@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
-import { Box } from "rebass";
 
 import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
 import { EnqueteIndividuelInformationsAgrementsForm } from "./EnqueteIndividuelInformationsAgrementsForm";
@@ -16,6 +15,7 @@ export const EnqueteIndividuelInformationsAgrements = props => {
       id: enquete_reponses_informations_mandataire_id
     }
   });
+
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INFORMATIONS_AGREMENTS, {
     refetchQueries: [
       {
@@ -29,16 +29,12 @@ export const EnqueteIndividuelInformationsAgrements = props => {
     ]
   });
 
-  if (loading) {
-    return <Box p={4}>Chargement...</Box>;
-  }
-
-  const { enquete_reponses_agrements_formations_by_pk: agrements = {} } = data;
-
+  const agrements = data ? data.enquete_reponses_agrements_formations_by_pk || {} : {};
   return (
     <EnqueteIndividuelInformationsAgrementsForm
       data={agrements}
       goToPrevPage={goToPrevPage}
+      loading={loading}
       handleSubmit={async values => {
         await updateEnquete({
           variables: {

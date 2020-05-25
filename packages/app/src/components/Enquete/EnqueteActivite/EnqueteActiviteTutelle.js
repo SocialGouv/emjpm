@@ -26,24 +26,23 @@ export const EnqueteActiviteTutelle = props => {
     }
   });
 
-  if (loading) {
-    return <Box p={4}>Chargement...</Box>;
-  }
-  const { enquete_reponses_activite_by_pk: activite } = data;
   const {
     tutelle_domicile_debut_annee,
     tutelle_domicile_fin_annee,
     tutelle_etablissement_debut_annee,
     tutelle_etablissement_fin_annee
-  } = activite;
+  } = data ? data.enquete_reponses_activite_by_pk || {} : {};
 
   return (
     <Box>
       <EnqueteActiviteForm
-        nbMesureEtablissementDebutAnnee={tutelle_etablissement_debut_annee}
-        nbMesureEtablissementFinAnnee={tutelle_etablissement_fin_annee}
-        nbMesureDomicileDebutAnnee={tutelle_domicile_debut_annee}
-        nbMesureDomicileFinAnnee={tutelle_domicile_fin_annee}
+        loading={loading}
+        data={{
+          nbMesureEtablissementDebutAnnee: tutelle_etablissement_debut_annee,
+          nbMesureEtablissementFinAnnee: tutelle_etablissement_fin_annee,
+          nbMesureDomicileDebutAnnee: tutelle_domicile_debut_annee,
+          nbMesureDomicileFinAnnee: tutelle_domicile_fin_annee
+        }}
         handleSubmit={async values => {
           const {
             nbMesureDomicileDebutAnnee,
