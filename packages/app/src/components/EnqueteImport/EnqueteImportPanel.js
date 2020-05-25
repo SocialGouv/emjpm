@@ -24,7 +24,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   }
 
   if (importSummary && !importSummary.unexpectedError) {
-    router.push(`/mandataires/enquetes/${enqueteId}`);
+    router.push("/mandataires/enquetes/[enquete_id]", `/mandataires/enquetes/${enqueteId}`);
   }
 
   return (
