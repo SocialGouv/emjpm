@@ -53,9 +53,11 @@ export const EnqueteIndividuelInformations = props => {
             estimation_etp: values.estimation_etp || null,
             forme_juridique: values.forme_juridique ? values.forme_juridique : null,
             local_professionnel: values.local_professionnel,
-            secretaire_specialise_etp: values.secretaire_specialise_etp
-              ? Number(values.secretaire_specialise_etp)
-              : null
+            secretaire_specialise_etp:
+              values.secretaire_specialise_etp &&
+              !isNaN(parseFloat(values.secretaire_specialise_etp))
+                ? parseFloat(values.secretaire_specialise_etp)
+                : null
           }
         });
         await goToNextPage();

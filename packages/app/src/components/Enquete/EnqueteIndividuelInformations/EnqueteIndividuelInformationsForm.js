@@ -249,7 +249,7 @@ export const EnqueteIndividuelInformationsForm = props => {
         <Field>
           <Label mb={1}>{"Exercez-vous votre activité dans un local professionnnel ?"}</Label>
           <YesNoComboBox
-            defaultValue={"local_professionnel"}
+            defaultValue={values.local_professionnel}
             name="local_professionnel"
             onChange={value => setFieldValue("local_professionnel", value)}
           />

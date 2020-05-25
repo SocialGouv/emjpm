@@ -40,8 +40,6 @@ export const EnqueteIndividuelInformationsAgrements = props => {
       data={agrements}
       goToPrevPage={goToPrevPage}
       handleSubmit={async values => {
-        console.log(values);
-
         await updateEnquete({
           variables: {
             id: enquete_reponses_informations_mandataire_id,
