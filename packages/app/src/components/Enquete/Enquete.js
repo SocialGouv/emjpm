@@ -6,6 +6,7 @@ import { Box } from "rebass";
 
 import { UserContext } from "../../../src/components/UserContext";
 import { EnqueteIndividuel } from "./EnqueteIndividuel";
+import { EnquetePrepose } from "./EnquetePrepose";
 import { ENQUETE } from "./queries";
 
 export const Enquete = ({ id, currentStep }) => {
@@ -32,6 +33,10 @@ export const Enquete = ({ id, currentStep }) => {
           enquete={enquete}
           currentStep={currentStep}
         />
+      )}
+
+      {type === "prepose" && (
+        <EnquetePrepose mandataireId={mandataire.id} enqueteId={id} currentStep={currentStep} />
       )}
     </Fragment>
   );
