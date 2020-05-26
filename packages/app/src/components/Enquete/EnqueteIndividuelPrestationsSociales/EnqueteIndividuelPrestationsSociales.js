@@ -8,7 +8,13 @@ import { UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES } from "./mutations";
 import { ENQUETE_REPONSE_PRESTATIONS_SOCIALES } from "./queries";
 
 export const EnqueteIndividuelPrestationsSociales = props => {
-  const { goToNextPage, goToPrevPage, enqueteReponse, mandataireId, enqueteId } = props;
+  const {
+    goToNextPage,
+    goToPrevPage,
+    enqueteReponse,
+    mandataireId,
+    enquete: { id: enqueteId }
+  } = props;
   const { enquete_reponses_prestations_sociale_id } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_REPONSE_PRESTATIONS_SOCIALES, {

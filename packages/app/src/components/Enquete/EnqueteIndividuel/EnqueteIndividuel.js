@@ -10,7 +10,8 @@ import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "./queries";
 export const EnqueteIndividuel = props => {
   const router = useRouter();
 
-  const { enqueteId, mandataireId, currentStep } = props;
+  const { enquete, mandataireId, currentStep } = props;
+  const { id: enqueteId } = enquete;
 
   const { data, loading, error } = useQuery(ENQUETE_MANDATAIRE_INDIVIDUEL, {
     variables: { enqueteId, mandataireId }
@@ -29,7 +30,7 @@ export const EnqueteIndividuel = props => {
     );
   }
 
-  const enqueteReponse = data ? data.enqueteReponse || {} : {};
+  const enqueteReponse = data ? data.enquete_individuel || {} : {};
 
   const sections = enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse);
 
@@ -43,7 +44,7 @@ export const EnqueteIndividuel = props => {
       </Box>
       <Box py={"50px"} pl={"35px"} flex={1}>
         <ComponentForm
-          enqueteId={enqueteId}
+          enquete={enquete}
           enqueteReponse={enqueteReponse}
           mandataireId={mandataireId}
           goToPrevPage={() => goToPrevPage(sections, currentStep)}

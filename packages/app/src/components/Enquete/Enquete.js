@@ -27,7 +27,11 @@ export const Enquete = ({ id, currentStep }) => {
   return (
     <Fragment>
       {type === "individuel" && (
-        <EnqueteIndividuel mandataireId={mandataire.id} enqueteId={id} currentStep={currentStep} />
+        <EnqueteIndividuel
+          mandataireId={mandataire.id}
+          enquete={enquete}
+          currentStep={currentStep}
+        />
       )}
     </Fragment>
   );
