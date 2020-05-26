@@ -17,7 +17,7 @@ const actionsMesuresImporter = {
 };
 
 async function importMesuresFile({
-  file: { base64str, type },
+  file: { content, type },
   importContext: {
     // mandataireUserId & serviceId are mutually exclusive
     mandataireUserId,
@@ -30,7 +30,7 @@ async function importMesuresFile({
 
   const mesuresToImport = excelParser.parseSheetByIndex({
     sheetIndex: 0,
-    base64str,
+    content,
     parseOptions: {
       cellDates: true,
       dateNF: "dd/mm/yyyy",
