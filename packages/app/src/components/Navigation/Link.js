@@ -35,7 +35,7 @@ const BoxStyle = {
 };
 
 const ActiveLink = props => {
-  const { router, isNestedLinks, href } = props;
+  const { router, isNestedLinks, href, as } = props;
   if (!router) return null;
   const { pathname } = router;
   let isActive;
@@ -48,7 +48,7 @@ const ActiveLink = props => {
 
   return (
     <Box sx={BoxStyle}>
-      <NextLink href={href}>
+      <NextLink href={href} as={as}>
         <Link href={href} sx={LinkStyle(isActive)}>
           {props.children}
           {isActive && <Box sx={LineStyle} />}
