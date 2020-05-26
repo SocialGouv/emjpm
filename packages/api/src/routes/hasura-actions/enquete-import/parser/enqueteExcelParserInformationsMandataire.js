@@ -31,21 +31,26 @@ const informationsGeneralesMandataireSchema = yup.object().shape({
 
 function parse(worksheet) {
   const rawData = {
-    departement: excelParser.rawValue(worksheet["A4"]),
-    region: excelParser.rawValue(worksheet["B4"]),
-    nom: excelParser.rawValue(worksheet["C4"]),
-    benevole: excelParser.rawValue(worksheet["D4"]),
-    forme_juridique: excelParser.rawValue(worksheet["E4"]),
-    sexe: excelParser.rawValue(worksheet["F4"]),
-    anciennete: excelParser.rawValue(worksheet["H4"]),
-    tranche_age: excelParser.rawValue(worksheet["J4"]),
-    exerce_seul_activite: excelParser.rawValue(worksheet["L4"]),
-    estimation_etp: excelParser.rawValue(worksheet["M4"]),
-    exerce_secretaires_specialises: excelParser.rawValue(worksheet["N4"]),
-    secretaire_specialise_etp: excelParser.rawValue(worksheet["N4"]),
-    local_professionnel: excelParser.rawValue(worksheet["P4"])
+    departement: excelParser.rawValue(worksheet["B2"]),
+    region: excelParser.rawValue(worksheet["B3"]),
+    nom: excelParser.rawValue(worksheet["B4"]),
+    benevole: excelParser.rawValue(worksheet["B11"]),
+    forme_juridique: excelParser.rawValue(worksheet["B13"]),
+    sexe: excelParser.rawValue(worksheet["C15"]),
+    anciennete: excelParser.rawValue(worksheet["C17"]),
+    tranche_age: excelParser.rawValue(worksheet["C19"]),
+    exerce_seul_activite: excelParser.rawValue(worksheet["B23"]),
+    estimation_etp: excelParser.rawValue(worksheet["B25"]),
+    exerce_secretaires_specialises: excelParser.rawValue(worksheet["B27"]),
+    secretaire_specialise_etp: excelParser.rawValue(worksheet["D28"]),
+    local_professionnel: excelParser.rawValue(worksheet["D31"])
   };
   try {
+    logger.warn(
+      '[IMPORT ENQUETE] Données "informations mandataire" rawData:',
+      rawData
+    );
+
     return informationsGeneralesMandataireSchema.validateSync(rawData);
   } catch (err) {
     logger.warn('[IMPORT ENQUETE] Données "informations mandataire" invalide');
