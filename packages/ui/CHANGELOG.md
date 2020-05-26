@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.34.0](https://github.com/SocialGouv/emjpm/compare/v25.33.0...v25.34.0) (2020-05-26)
+
+
+### Features
+
+* **enquete:** informations generales validation ([#1830](https://github.com/SocialGouv/emjpm/issues/1830)) ([6fe6fb6](https://github.com/SocialGouv/emjpm/commit/6fe6fb6300bd2e316daebc1f54c2960a1b19a17f))
+
+
+
+
+
 # [25.33.0](https://github.com/SocialGouv/emjpm/compare/v25.32.0...v25.33.0) (2020-05-18)
 
 
