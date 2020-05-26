@@ -1,8 +1,9 @@
 import { Heading1 } from "@emjpm/ui";
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-apollo";
-import { Box } from "rebass";
+import { Box, Flex } from "rebass";
 
+import { LinkButton } from "../../../components/Commons";
 import { MenuStepper } from "../../MenuStepper";
 import {
   EnqueteActiviteAccompagnementJudiciaire,
@@ -22,17 +23,10 @@ import { EnqueteIndividuelPrestationsSociales } from "../EnqueteIndividuelPresta
 import { EnquetePopulationsCuratelle, EnquetePopulationsTutelle } from "../EnquetePopulations";
 import { EnqueteIndividuelWelcome } from "./EnqueteIndividuelWelcome";
 import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "./queries";
-
-function transformStatusToIsValidProperty(status) {
-  if (status === 0) {
-    return null;
-  }
-
-  return status === 2 ? true : false;
-}
-
 export const EnqueteIndividuel = props => {
   const { enqueteId, mandataireId } = props;
+
+  const [currentStep, setCurrentStep] = useState({ step: 0, substep: 0 });
 
   const { data, loading, error } = useQuery(ENQUETE_MANDATAIRE_INDIVIDUEL, {
     variables: { enqueteId, mandataireId }
@@ -52,7 +46,76 @@ export const EnqueteIndividuel = props => {
   }
 
   const enquete_individuel = data ? data.enquete_individuel || {} : {};
-  const MENU_SECTIONS = [
+
+  const sections = buildMenuSections(enquete_individuel);
+
+  const section = sections[currentStep.step];
+  const ComponentForm = section.steps[currentStep.substep || 0].component;
+
+  return (
+    <Flex>
+      <Box py={"50px"} px={4}>
+        <MenuStepper
+          sections={sections}
+          currentStep={currentStep}
+          setCurrentStep={setCurrentStep}
+        />
+      </Box>
+      <Box py={"50px"} pl={"35px"} flex={1}>
+        <Flex flexDirection="row" justifyContent="flex-end">
+          <Box mr={1}>
+            <LinkButton
+              href={`/mandataires/enquetes/[enquete_id]/import`}
+              asLink={`/mandataires/enquetes/${enqueteId}/import`}
+            >
+              Importez votre enquête
+            </LinkButton>
+          </Box>
+        </Flex>
+
+        <ComponentForm
+          enqueteId={enqueteId}
+          goToPrevPage={() => goToPrevPage(sections, currentStep, setCurrentStep)}
+          goToNextPage={() => goToNextPage(sections, currentStep, setCurrentStep)}
+        />
+      </Box>
+    </Flex>
+  );
+};
+
+export default EnqueteIndividuel;
+
+function goToNextPage(sections, currentStep, setCurrentStep) {
+  const { step, substep } = currentStep;
+  const currentSection = sections[step];
+
+  if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
+    setCurrentStep({ step: step + 1, substep: 0 });
+  } else {
+    setCurrentStep({ step, substep: substep + 1 });
+  }
+}
+
+function goToPrevPage(sections, currentStep, setCurrentStep) {
+  const { step, substep } = currentStep;
+  if (substep > 0) {
+    setCurrentStep({ step, substep: substep - 1 });
+  } else if (currentStep.step - 1 >= 0) {
+    const substep = sections[currentStep.step - 1].steps.length;
+    setCurrentStep({ step: currentStep.step - 1, substep: substep - 1 });
+  }
+}
+
+function transformStatusToIsValidProperty(status) {
+  if (status === 0) {
+    return null;
+  }
+
+  return status === 2 ? true : false;
+}
+
+function buildMenuSections(enquete_individuel) {
+  return [
     {
       steps: [
         {
@@ -189,15 +252,4 @@ export const EnqueteIndividuel = props => {
       steps: [{ label: "Envoi de vos réponses", component: null }]
     }
   ];
-
-  return (
-    <MenuStepper
-      enqueteReponse={enquete_individuel}
-      enqueteId={enqueteId}
-      mandataireId={mandataireId}
-      sections={MENU_SECTIONS}
-    />
-  );
-};
-
-export default EnqueteIndividuel;
+}
