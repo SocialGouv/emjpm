@@ -7,7 +7,13 @@ import { UPDATE_ENQUETE_INFORMATIONS_FORMATION } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION } from "./queries";
 
 export const EnqueteIndividuelInformationsFormation = props => {
-  const { goToNextPage, goToPrevPage, enqueteReponse, mandataireId, enqueteId } = props;
+  const {
+    goToNextPage,
+    goToPrevPage,
+    enqueteReponse,
+    mandataireId,
+    enquete: { id: enqueteId }
+  } = props;
   const { enquete_reponses_agrements_formations_id } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION, {

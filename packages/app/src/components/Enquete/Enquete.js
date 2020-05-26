@@ -8,7 +8,7 @@ import { UserContext } from "../../../src/components/UserContext";
 import { EnqueteIndividuel } from "./EnqueteIndividuel";
 import { ENQUETE } from "./queries";
 
-export const Enquete = ({ id }) => {
+export const Enquete = ({ id, currentStep }) => {
   const { mandataire, type } = useContext(UserContext);
 
   const { data, loading } = useQuery(ENQUETE, {
@@ -26,7 +26,13 @@ export const Enquete = ({ id }) => {
 
   return (
     <Fragment>
-      {type === "individuel" && <EnqueteIndividuel mandataireId={mandataire.id} enqueteId={id} />}
+      {type === "individuel" && (
+        <EnqueteIndividuel
+          mandataireId={mandataire.id}
+          enquete={enquete}
+          currentStep={currentStep}
+        />
+      )}
     </Fragment>
   );
 };

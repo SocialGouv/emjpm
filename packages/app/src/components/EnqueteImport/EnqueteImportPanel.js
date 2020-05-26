@@ -17,14 +17,16 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   if (enqueteImportLoading) {
     return (
       <Box p={4}>
-        <LoaderCircle size="16" /> Traitement du fichier en cours, veuillez patienter (cela peut
-        prendre jusqu&apos;à 2mn pour les gros fichiers)...
+        <LoaderCircle size="16" /> Traitement du fichier en cours, veuillez patienter...
       </Box>
     );
   }
 
   if (importSummary && !importSummary.unexpectedError) {
-    router.push("/mandataires/enquetes/[enquete_id]", `/mandataires/enquetes/${enqueteId}`);
+    router.push("/mandataires/enquetes/[enquete_id]", {
+      pathname: `/mandataires/enquetes/${enqueteId}`,
+      query: { step: 1, substep: 0 }
+    });
   }
 
   return (
