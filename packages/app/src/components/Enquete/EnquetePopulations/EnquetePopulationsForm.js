@@ -470,7 +470,7 @@ export const EnquetePopulationsForm = props => {
 
       <Flex mb={4} alignItems="center">
         <Label width="300px" htmlFor={"type_autre_service"}>
-          {"Service psychiatrique"}
+          {"Autre service"}
         </Label>
         <SmallInput
           mx={1}
