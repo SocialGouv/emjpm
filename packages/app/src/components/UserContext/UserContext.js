@@ -29,10 +29,14 @@ const UserProvider = props => {
   });
 
   if (!data) {
-    return <Fragment>loading</Fragment>;
+    return <Fragment>Chargement...</Fragment>;
   }
 
-  const [currentUser] = data.users;
+  const [currentEnquete] = data.enquetes;
+  const currentUser = {
+    ...data.users_by_pk,
+    enquete: currentEnquete
+  };
 
   return <Context.Provider value={currentUser}>{children}</Context.Provider>;
 };
