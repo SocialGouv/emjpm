@@ -1,38 +1,17 @@
 import { Heading1 } from "@emjpm/ui";
+import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-apollo";
-import { Box } from "rebass";
+import { Box, Flex } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
-import {
-  EnqueteActiviteAccompagnementJudiciaire,
-  EnqueteActiviteCuratelleBiens,
-  EnqueteActiviteCuratellePersonne,
-  EnqueteActiviteCuratelleRenforcee,
-  EnqueteActiviteCuratelleSimple,
-  EnqueteActiviteRevisionMesures,
-  EnqueteActiviteTutelle
-} from "../EnqueteActivite";
-import {
-  EnqueteIndividuelInformations,
-  EnqueteIndividuelInformationsAgrements,
-  EnqueteIndividuelInformationsFormation
-} from "../EnqueteIndividuelInformations";
-import { EnqueteIndividuelPrestationsSociales } from "../EnqueteIndividuelPrestationsSociales";
-import { EnquetePopulationsCuratelle, EnquetePopulationsTutelle } from "../EnquetePopulations";
-import { EnqueteIndividuelWelcome } from "./EnqueteIndividuelWelcome";
+import { enqueteIndividuelMenuBuilder } from "./enqueteIndividuelMenuBuilder.service";
 import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "./queries";
-
-function transformStatusToIsValidProperty(status) {
-  if (status === 0) {
-    return null;
-  }
-
-  return status === 2 ? true : false;
-}
-
 export const EnqueteIndividuel = props => {
-  const { enqueteId, mandataireId } = props;
+  const router = useRouter();
+
+  const { enquete, mandataireId, currentStep } = props;
+  const { id: enqueteId } = enquete;
 
   const { data, loading, error } = useQuery(ENQUETE_MANDATAIRE_INDIVIDUEL, {
     variables: { enqueteId, mandataireId }
@@ -51,153 +30,57 @@ export const EnqueteIndividuel = props => {
     );
   }
 
-  const enquete_individuel = data ? data.enquete_individuel || {} : {};
-  const MENU_SECTIONS = [
-    {
-      steps: [
-        {
-          label: "Bienvenue",
-          component: EnqueteIndividuelWelcome
-        }
-      ]
-    },
-    {
-      label: "Vos informations",
-      steps: [
-        {
-          label: "Informations générales",
-          component: EnqueteIndividuelInformations,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_informations_mandataire_generales_status
-          )
-        },
-        {
-          label: "Agréments",
-          component: EnqueteIndividuelInformationsAgrements,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_informations_mandataire_agrements_status
-          )
-        },
-        {
-          label: "Formation",
-          component: EnqueteIndividuelInformationsFormation,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_informations_mandataire_formation_status
-          )
-        }
-      ]
-    },
-    {
-      label: "Votre activité",
-      steps: [
-        {
-          label: "Curatelle renforcée",
-          component: EnqueteActiviteCuratelleRenforcee,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_activite_curatelle_renforcee_status
-          )
-        },
-        {
-          label: "Curatelle simple",
-          component: EnqueteActiviteCuratelleSimple,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_activite_curatelle_simple_status
-          )
-        },
-        {
-          label: "Tutelle",
-          component: EnqueteActiviteTutelle,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_activite_tutelle_status
-          )
-        },
-        {
-          label: "Mesure d'accompagnement judiciaire",
-          component: EnqueteActiviteAccompagnementJudiciaire,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_activite_accompagnement_judiciaire_status
-          )
-        },
-        {
-          label: "Tutelle ou curatelle aux biens",
-          component: EnqueteActiviteCuratelleBiens,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_activite_curatelle_biens_status
-          )
-        },
-        {
-          label: "Tutelle ou curatelle à la personne",
-          component: EnqueteActiviteCuratellePersonne,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_activite_curatelle_personne_status
-          )
-        },
-        {
-          label: "Révision de mesures",
-          component: EnqueteActiviteRevisionMesures,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_activite_revision_mesures_status
-          )
-        }
-      ]
-    },
-    {
-      label: "Populations",
-      steps: [
-        {
-          label: "Curatelle",
-          component: EnquetePopulationsCuratelle,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_populations_curatelle_status
-          )
-        },
-        {
-          label: "Tutelle",
-          component: EnquetePopulationsTutelle,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_populations_tutelle_status
-          )
-        },
-        {
-          label: "Mesure d'accompagnement de justice",
-          component: EnquetePopulationsTutelle,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_populations_accompagnement_judiciaire_status
-          )
-        },
-        {
-          label: "Sauvegarde de justice",
-          component: EnquetePopulationsTutelle,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_populations_sauvegarde_justice_status
-          )
-        },
-        {
-          label: "Autre",
-          component: EnquetePopulationsTutelle,
-          isValid: transformStatusToIsValidProperty(
-            enquete_individuel.enquete_reponses_populations_autre_status
-          )
-        }
-      ]
-    },
-    {
-      label: "Prestations sociales",
-      steps: [{ label: "Prestations sociales", component: EnqueteIndividuelPrestationsSociales }]
-    },
-    {
-      steps: [{ label: "Envoi de vos réponses", component: null }]
-    }
-  ];
+  const enqueteReponse = data ? data.enquete_individuel || {} : {};
+
+  const sections = enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse);
+
+  const section = sections[currentStep.step];
+  const ComponentForm = section.steps[currentStep.substep || 0].component;
 
   return (
-    <MenuStepper
-      enqueteReponse={enquete_individuel}
-      enqueteId={enqueteId}
-      mandataireId={mandataireId}
-      sections={MENU_SECTIONS}
-    />
+    <Flex>
+      <Box>
+        <MenuStepper sections={sections} currentStep={currentStep} goToStep={goToStep} />
+      </Box>
+      <Box py={"50px"} pl={"35px"} flex={1}>
+        <ComponentForm
+          enquete={enquete}
+          enqueteReponse={enqueteReponse}
+          mandataireId={mandataireId}
+          goToPrevPage={() => goToPrevPage(sections, currentStep)}
+          goToNextPage={() => goToNextPage(sections, currentStep)}
+        />
+      </Box>
+    </Flex>
   );
+
+  function goToStep({ step, substep }) {
+    router.push("/mandataires/enquetes/[enquete_id]", {
+      pathname: `/mandataires/enquetes/${enqueteId}`,
+      query: { step, substep }
+    });
+  }
+
+  function goToNextPage(sections, currentStep) {
+    const { step, substep } = currentStep;
+    const currentSection = sections[step];
+
+    if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
+      goToStep({ step: step + 1, substep: 0 });
+    } else {
+      goToStep({ step, substep: substep + 1 });
+    }
+  }
+
+  function goToPrevPage(sections, currentStep) {
+    const { step, substep } = currentStep;
+    if (substep > 0) {
+      goToStep({ step, substep: substep - 1 });
+    } else if (currentStep.step - 1 >= 0) {
+      const substep = sections[currentStep.step - 1].steps.length;
+      goToStep({ step: currentStep.step - 1, substep: substep - 1 });
+    }
+  }
 };
 
 export default EnqueteIndividuel;
