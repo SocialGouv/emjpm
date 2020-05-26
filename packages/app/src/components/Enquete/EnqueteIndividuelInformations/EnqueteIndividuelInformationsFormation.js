@@ -39,7 +39,7 @@ export const EnqueteIndividuelInformationsFormation = props => {
     <EnqueteIndividuelInformationsFormationForm
       goToPrevPage={goToPrevPage}
       loading={loading}
-      data={data ? data.agrementsFormations || {} : {}}
+      data={data ? data.enquete_reponses_agrements_formations_by_pk || {} : {}}
       handleSubmit={async values => {
         await updateEnquete({
           variables: {
