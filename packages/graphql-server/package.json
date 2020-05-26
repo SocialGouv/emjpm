@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/graphql-server",
-  "version": "25.33.0",
+  "version": "25.34.0",
   "main": "index.js",
   "author": "Incubateur des Ministères Sociaux <dsi-incubateur@sg.social.gouv.fr> (https://incubateur.social.gouv.fr)",
   "license": "Apache-2.0",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@graphql-codegen/cli": "^1.13.5",
     "@graphql-codegen/introspection": "1.13.5",
-    "@graphql-codegen/typescript": "1.13.5",  
+    "@graphql-codegen/typescript": "1.13.5",
     "@graphql-codegen/typescript-resolvers": "1.13.5",
     "@socialgouv/tslint-config-recommended": "^0.21.0",
     "@types/graphql": "^14.2.3",
