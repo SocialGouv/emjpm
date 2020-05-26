@@ -31,17 +31,13 @@ async function importEnqueteFile({
   });
 
   // save data to database
-  const informationsMandataireDb = await enqueteImportRepository.saveInformationsMandataire(
+  await enqueteImportRepository.saveInformationsMandataire(
     enqueteReponse.enquete_reponses_informations_mandataire_id,
     informationsMandataire
   );
-
-  logger.info(
-    `[IMPORT ENQUETE] informationsMandataireDb: ${JSON.stringify(
-      informationsMandataireDb,
-      undefined,
-      2
-    )}`
+  await enqueteImportRepository.saveEnqueteReponsesAgrementsFormations(
+    enqueteReponse.enquete_reponses_informations_mandataire_id,
+    informationsMandataire
   );
 
   const populationsDb = await enqueteImportRepository.savePopulations(
