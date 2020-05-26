@@ -7,7 +7,7 @@ async function checkImportEnqueteParameters(req) {
 
   const inputParameters = req.body.input;
 
-  const { base64str, enqueteId, userId } = inputParameters;
+  const { content, enqueteId, userId } = inputParameters;
 
   if (!userId) {
     throw new HttpError(422, "Invalid parameters: 'userId' is required");
@@ -43,7 +43,7 @@ async function checkImportEnqueteParameters(req) {
 
   const importEnqueteParameters = {
     file: {
-      base64str
+      content
     },
     importContext
   };

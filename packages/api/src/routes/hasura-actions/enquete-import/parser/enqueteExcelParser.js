@@ -4,8 +4,8 @@ var parserInformationsMandataire = require("./enqueteExcelParserInformationsMand
 var HttpError = require("../../../../utils/error/HttpError");
 const logger = require("../../../../utils/logger");
 
-const parse = async ({ base64str }) => {
-  const workbook = XLSX.read(base64str, {
+const parse = async ({ content }) => {
+  const workbook = XLSX.read(content, {
     cellDates: true,
     dateNF: "dd/mm/yyyy",
     locale: "fr-FR",
