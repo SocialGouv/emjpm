@@ -9,7 +9,7 @@ export const MenuStepper = props => {
   const { sections, currentStep, setCurrentStep } = props;
 
   return (
-    <Box sx={styles.menu}>
+    <Box py={"50px"} px={4} sx={styles.menu}>
       {sections.map((menuSection, index) => {
         const hasSubSections = menuSection.steps && menuSection.steps.length > 1;
         const activeSection = currentStep.step === index;

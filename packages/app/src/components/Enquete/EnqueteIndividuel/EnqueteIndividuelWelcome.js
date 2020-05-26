@@ -2,8 +2,10 @@ import { Heading1 } from "@emjpm/ui";
 import React from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
+import { LinkButton } from "../../../components/Commons";
+
 export const EnqueteIndividuelWelcome = props => {
-  const { goToNextPage } = props;
+  const { goToNextPage, enqueteId } = props;
   return (
     <Flex flexDirection="column" justifyContent="center">
       <Heading1 textAlign="center">Bienvenue,</Heading1>
@@ -13,9 +15,19 @@ export const EnqueteIndividuelWelcome = props => {
         <Text>Vous pouvez appuyer sur la touche tab d’une cellule à une autre.</Text>
       </Box>
 
-      <Button onClick={() => goToNextPage()} mx="auto" mt="80px">
-        Répondre
-      </Button>
+      <Flex flexDirection="row" justifyContent="space-between" mt="80px">
+        <Button onClick={() => goToNextPage()} mx="auto">
+          Répondre
+        </Button>
+        <LinkButton
+          mx="auto"
+          pt={15}
+          href={`/mandataires/enquetes/[enquete_id]/import`}
+          asLink={`/mandataires/enquetes/${enqueteId}/import`}
+        >
+          Importez votre enquête
+        </LinkButton>
+      </Flex>
     </Flex>
   );
 };

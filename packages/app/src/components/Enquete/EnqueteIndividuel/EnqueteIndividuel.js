@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useQuery } from "react-apollo";
 import { Box, Flex } from "rebass";
 
-import { LinkButton } from "../../../components/Commons";
 import { MenuStepper } from "../../MenuStepper";
 import {
   EnqueteActiviteAccompagnementJudiciaire,
@@ -54,7 +53,7 @@ export const EnqueteIndividuel = props => {
 
   return (
     <Flex>
-      <Box py={"50px"} px={4}>
+      <Box>
         <MenuStepper
           sections={sections}
           currentStep={currentStep}
@@ -62,17 +61,6 @@ export const EnqueteIndividuel = props => {
         />
       </Box>
       <Box py={"50px"} pl={"35px"} flex={1}>
-        <Flex flexDirection="row" justifyContent="flex-end">
-          <Box mr={1}>
-            <LinkButton
-              href={`/mandataires/enquetes/[enquete_id]/import`}
-              asLink={`/mandataires/enquetes/${enqueteId}/import`}
-            >
-              Importez votre enquête
-            </LinkButton>
-          </Box>
-        </Flex>
-
         <ComponentForm
           enqueteId={enqueteId}
           goToPrevPage={() => goToPrevPage(sections, currentStep, setCurrentStep)}
