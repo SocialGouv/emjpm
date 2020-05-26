@@ -8,7 +8,13 @@ import { UPDATE_ENQUETE_POPULATIONS_CURATELLE } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_CURATELLE } from "./queries";
 
 export const EnquetePopulationsCuratelle = props => {
-  const { goToPrevPage, goToNextPage, enqueteReponse, mandataireId, enqueteId } = props;
+  const {
+    goToPrevPage,
+    goToNextPage,
+    enqueteReponse,
+    mandataireId,
+    enquete: { id: enqueteId }
+  } = props;
   const { enquete_reponses_populations_id } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_CURATELLE, {
