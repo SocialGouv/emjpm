@@ -21,7 +21,11 @@ const captureException = (error, context = {}) => {
       scope.setFingerprint([error.message]);
     }
 
-    scope.setTag("context", JSON.stringify(context));
+    try {
+      scope.setTag("context", JSON.stringify(context));
+    } catch (e) {
+      // JSON.stringify will crash if context is circular
+    }
     scope.setTag("ssr", typeof window === "undefined");
   });
 
