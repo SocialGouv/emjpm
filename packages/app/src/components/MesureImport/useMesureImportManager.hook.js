@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/react-hooks";
 import { useState } from "react";
 
+import { fileReader } from "../../util/fileReader";
 import { UPLOAD_MESURES_EXCEL_FILE } from "../MesureImport/mutations";
-import { fileReader } from "./fileReader";
 
 function useMesureImportManager({ mandataireUserId, serviceId }) {
   const [importSummary, setImportSummary] = useState();
@@ -18,12 +18,24 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
     launchImport({ file });
   }
 
+  function readFile(file, cb, err) {
+    if (file) {
+      const isExcel = file.name.endsWith(".xls") || file.name.endsWith(".xlsx");
+
+      if (isExcel) {
+        fileReader.readBinaryFileAsBase64(file, cb, err);
+      } else {
+        fileReader.readTextFile(file, cb, err);
+      }
+    }
+  }
+
   function launchImport({ file, antennesMap }) {
-    fileReader.readFileAsBinaryString(file, ({ file, base64str }) => {
+    readFile(file, ({ file, content }) => {
       const { name, type } = file;
       uploadFile({
         variables: {
-          base64str,
+          content,
           name,
           serviceId,
           antennesMap: antennesMap ? JSON.stringify(antennesMap) : undefined,
