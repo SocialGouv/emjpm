@@ -1,18 +1,24 @@
 import { useMutation } from "@apollo/react-hooks";
 import { useState } from "react";
 
+import { fileReader } from "../../util/fileReader";
 import { UPLOAD_ENQUETE_EXCEL_FILE } from "../EnqueteImport/mutations";
-import { fileReader } from "./fileReader";
 
 function useEnqueteImportManager({ enqueteId, userId }) {
   const [importSummary, setImportSummary] = useState();
   const [uploadFile, { loading: enqueteImportLoading }] = useMutation(UPLOAD_ENQUETE_EXCEL_FILE);
 
+  function readFile(file, cb, err) {
+    if (file) {
+      fileReader.readBinaryFileAsBase64(file, cb, err);
+    }
+  }
+
   function importEnqueteFile(file) {
-    fileReader.readFileAsBinaryString(file, ({ base64str }) => {
+    readFile(file, ({ content }) => {
       uploadFile({
         variables: {
-          base64str,
+          content,
           enqueteId,
           userId
         }
