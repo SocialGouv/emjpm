@@ -1,25 +1,25 @@
 import { BoxWrapper } from "@emjpm/ui";
-import { useRouter } from "next/router";
-import React, { useMemo } from "react";
+import React from "react";
 import { resetIdCounter } from "react-tabs";
 
 import { Enquete } from "../../../../src/components/Enquete";
 import { LayoutMandataire } from "../../../../src/components/Layout";
 import { withAuthSync } from "../../../../src/util/auth";
-import { urlQueryParser } from "../../../../src/util/urlQueryParser.service";
+import { useUrlQueryValues } from "../../../../src/util/url";
 
 const EnquetePage = ({ enqueteId }) => {
-  const router = useRouter();
-
-  const { step, substep } = useMemo(
-    () =>
-      urlQueryParser.parseQueryValues(["step", "substep"], {
-        defaultValue: 0,
-        path: router.asPath,
-        transform: x => parseInt(x)
-      }),
-    [router.asPath]
-  );
+  const { step, substep } = useUrlQueryValues([
+    {
+      defaultValue: 0,
+      name: "step",
+      type: "integer"
+    },
+    {
+      defaultValue: 0,
+      name: "substep",
+      type: "integer"
+    }
+  ]);
 
   const currentStep = { step, substep };
 
