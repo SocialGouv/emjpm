@@ -32,10 +32,9 @@ const UserProvider = props => {
     return <Fragment>Chargement...</Fragment>;
   }
 
-  const [currentEnquete] = data.enquetes;
   const currentUser = {
     ...data.users_by_pk,
-    enquete: currentEnquete
+    enquete: data.enquetes && data.enquetes.length ? data.enquetes[0] : null
   };
 
   return <Context.Provider value={currentUser}>{children}</Context.Provider>;
