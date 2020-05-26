@@ -11,8 +11,8 @@ export const CURRENT_USER = gql`
 `;
 
 export const GET_SERVICE_USERS = gql`
-  query users($userId: Int) {
-    users(where: { id: { _eq: $userId } }) {
+  query users($userId: Int!) {
+    users_by_pk(id: $userId) {
       email
       created_at
       cabinet
@@ -65,8 +65,8 @@ export const GET_SERVICE_USERS = gql`
 `;
 
 export const DIRECTION_USERS = gql`
-  query users($userId: Int) {
-    users(where: { id: { _eq: $userId } }) {
+  query users($userId: Int!) {
+    users_by_pk(id: $userId) {
       email
       created_at
       cabinet
@@ -86,8 +86,8 @@ export const DIRECTION_USERS = gql`
 `;
 
 export const MAGISTRAT_USERS = gql`
-  query users($userId: Int) {
-    users(where: { id: { _eq: $userId } }) {
+  query users($userId: Int!) {
+    users_by_pk(id: $userId) {
       email
       created_at
       cabinet
@@ -132,8 +132,19 @@ export const ADMIN_USERS = gql`
 `;
 
 export const MANDATAIRE_USERS = gql`
-  query users($userId: Int) {
-    users(where: { id: { _eq: $userId } }) {
+  query users($userId: Int!, $endDate: timestamptz) {
+    enquetes(
+      where: {
+        status: { _eq: "created" }
+        _or: [{ date_fin: { _lt: $endDate } }, { date_fin: { _is_null: true } }]
+      }
+    ) {
+      annee
+      status
+      date_fin
+      id
+    }
+    users_by_pk(id: $userId) {
       email
       created_at
       id

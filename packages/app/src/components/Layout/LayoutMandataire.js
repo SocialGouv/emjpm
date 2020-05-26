@@ -1,5 +1,5 @@
 import { BoxWrapper } from "@emjpm/ui";
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Box } from "rebass";
 
 import { Footer } from "../Footer";
@@ -7,6 +7,7 @@ import { Header } from "../Header";
 import { MandataireInformationsSidebar } from "../MandataireInformationsSidebar";
 import { Navigation } from "../Navigation";
 import { SatisfactionCampaign } from "../SatisfactionCampaign";
+import { UserContext } from "../UserContext";
 
 const navigationLinks = [
   {
@@ -25,6 +26,16 @@ const navigationLinks = [
 
 const LayoutMandataire = props => {
   const { children, hasNavigation = true } = props;
+  const user = useContext(UserContext);
+
+  const links = user.enquete
+    ? navigationLinks.concat({
+        title: `Enquête ${user.enquete.annee}`,
+        url: "/mandataires/enquetes/[enquete_id]",
+        as: `/mandataires/enquetes/${user.enquete.id}`
+      })
+    : navigationLinks;
+
   return (
     <Fragment>
       <Box sx={{ mr: "300px", position: "relative", "z-index": "1000" }}>
@@ -34,7 +45,7 @@ const LayoutMandataire = props => {
           />
           {hasNavigation && (
             <BoxWrapper>
-              <Navigation links={navigationLinks} />
+              <Navigation links={links} />
             </BoxWrapper>
           )}
         </Box>
