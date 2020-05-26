@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.34.0](https://github.com/SocialGouv/emjpm/compare/v25.33.0...v25.34.0) (2020-05-26)
+
+
+### Bug Fixes
+
+* **k8s:** set HASURA_WEB_HOOK_SECRET ([#1814](https://github.com/SocialGouv/emjpm/issues/1814)) ([a88bdf2](https://github.com/SocialGouv/emjpm/commit/a88bdf2525547b605bd4ca0610ac9e597403e16a))
+* **k8s:** use HASURA_GRAPHQL_URI ([#1815](https://github.com/SocialGouv/emjpm/issues/1815)) ([787d5c8](https://github.com/SocialGouv/emjpm/commit/787d5c8fdc0da86af252eb07b3adaf5328a80d77))
+* **upload:** replace binary upload and encoding method ([#1822](https://github.com/SocialGouv/emjpm/issues/1822)) ([7d1c389](https://github.com/SocialGouv/emjpm/commit/7d1c3895e1d3c09bbd0d699fdaaef5254ff45c7f))
+
+
+### Features
+
+* **api:** hasura trigger & actions refactoring ([#1798](https://github.com/SocialGouv/emjpm/issues/1798)) ([83dfcd9](https://github.com/SocialGouv/emjpm/commit/83dfcd9ff3b55b31ea97947b4d83fc0861886913)), closes [#1799](https://github.com/SocialGouv/emjpm/issues/1799)
+* **enquete:** backend validators ([#1826](https://github.com/SocialGouv/emjpm/issues/1826)) ([abbaa13](https://github.com/SocialGouv/emjpm/commit/abbaa13b15937de1ec9b2d8357cc7c4139a009b2))
+* **enquete:** import individuel excel parsing [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1808](https://github.com/SocialGouv/emjpm/issues/1808)) ([156a198](https://github.com/SocialGouv/emjpm/commit/156a198f2676fa22b0c82d6fcf5972649217cd64)), closes [#1811](https://github.com/SocialGouv/emjpm/issues/1811)
+* **enquete:** informations generales validation ([#1830](https://github.com/SocialGouv/emjpm/issues/1830)) ([6fe6fb6](https://github.com/SocialGouv/emjpm/commit/6fe6fb6300bd2e316daebc1f54c2960a1b19a17f))
+* **enquete:** link import to form page [#1801](https://github.com/SocialGouv/emjpm/issues/1801) [#1811](https://github.com/SocialGouv/emjpm/issues/1811) ([#1829](https://github.com/SocialGouv/emjpm/issues/1829)) ([92a4bb3](https://github.com/SocialGouv/emjpm/commit/92a4bb3e3c4da14c59044e997b9462246108b318))
+* **enquete:** refresh validation after mutation ([#1823](https://github.com/SocialGouv/emjpm/issues/1823)) ([c1702d8](https://github.com/SocialGouv/emjpm/commit/c1702d8dc69cac949e6bcd955c40b6f1674040dd))
+* **enquete:** validation indicators ([#1807](https://github.com/SocialGouv/emjpm/issues/1807)) ([fc3df5d](https://github.com/SocialGouv/emjpm/commit/fc3df5d6ba1f0d26d6dc7fbc1f745f0aeb12546c)), closes [#1799](https://github.com/SocialGouv/emjpm/issues/1799) [#1803](https://github.com/SocialGouv/emjpm/issues/1803)
+* **import:** refactor excels imports ([#1831](https://github.com/SocialGouv/emjpm/issues/1831)) ([943497e](https://github.com/SocialGouv/emjpm/commit/943497e0a38272faaff8ee7394f25ccb34375752))
+
+
+
+
+
 # [25.33.0](https://github.com/SocialGouv/emjpm/compare/v25.32.0...v25.33.0) (2020-05-18)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.34.0](https://github.com/SocialGouv/emjpm/compare/v25.33.0...v25.34.0) (2020-05-26)
+
+
+### Features
+
+* **api:** hasura trigger & actions refactoring ([#1798](https://github.com/SocialGouv/emjpm/issues/1798)) ([83dfcd9](https://github.com/SocialGouv/emjpm/commit/83dfcd9ff3b55b31ea97947b4d83fc0861886913)), closes [#1799](https://github.com/SocialGouv/emjpm/issues/1799)
+
+
+
+
+
 # [25.33.0](https://github.com/SocialGouv/emjpm/compare/v25.32.0...v25.33.0) (2020-05-18)
 
 
