@@ -6,7 +6,7 @@ import { Box, Flex, Text } from "rebass";
 import styles from "./style";
 
 export const MenuStepper = props => {
-  const { sections, currentStep, setCurrentStep } = props;
+  const { sections, currentStep, goToStep } = props;
 
   return (
     <Box py={"50px"} px={4} sx={styles.menu}>
@@ -24,7 +24,7 @@ export const MenuStepper = props => {
                 cursor: "pointer"
               }}
               alignItems="center"
-              onClick={() => setCurrentStep({ step: index, substep: 0 })}
+              onClick={() => goToStep({ step: index, substep: 0 })}
             >
               <Flex
                 sx={{
@@ -78,7 +78,7 @@ export const MenuStepper = props => {
                   return (
                     <Flex
                       alignItems="center"
-                      onClick={() => setCurrentStep({ step: index, substep: subsectionIndex })}
+                      onClick={() => goToStep({ step: index, substep: subsectionIndex })}
                       color={active ? "#007AD9" : "#979797"}
                       fontWeight={active ? "bold" : "normal"}
                       key={`${step.label}_${index}`}

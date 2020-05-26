@@ -1,5 +1,6 @@
 import { Heading1 } from "@emjpm/ui";
-import React, { useState } from "react";
+import { useRouter } from "next/router";
+import React from "react";
 import { useQuery } from "react-apollo";
 import { Box, Flex } from "rebass";
 
@@ -7,9 +8,9 @@ import { MenuStepper } from "../../MenuStepper";
 import { enqueteIndividuelMenuBuilder } from "./enqueteIndividuelMenuBuilder.service";
 import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "./queries";
 export const EnqueteIndividuel = props => {
-  const { enqueteId, mandataireId } = props;
+  const router = useRouter();
 
-  const [currentStep, setCurrentStep] = useState({ step: 0, substep: 0 });
+  const { enqueteId, mandataireId, currentStep } = props;
 
   const { data, loading, error } = useQuery(ENQUETE_MANDATAIRE_INDIVIDUEL, {
     variables: { enqueteId, mandataireId }
@@ -38,44 +39,47 @@ export const EnqueteIndividuel = props => {
   return (
     <Flex>
       <Box>
-        <MenuStepper
-          sections={sections}
-          currentStep={currentStep}
-          setCurrentStep={setCurrentStep}
-        />
+        <MenuStepper sections={sections} currentStep={currentStep} goToStep={goToStep} />
       </Box>
       <Box py={"50px"} pl={"35px"} flex={1}>
         <ComponentForm
           enqueteId={enqueteId}
-          goToPrevPage={() => goToPrevPage(sections, currentStep, setCurrentStep)}
-          goToNextPage={() => goToNextPage(sections, currentStep, setCurrentStep)}
           enqueteReponse={enqueteReponse}
           mandataireId={mandataireId}
+          goToPrevPage={() => goToPrevPage(sections, currentStep)}
+          goToNextPage={() => goToNextPage(sections, currentStep)}
         />
       </Box>
     </Flex>
   );
+
+  function goToStep({ step, substep }) {
+    router.push("/mandataires/enquetes/[enquete_id]", {
+      pathname: `/mandataires/enquetes/${enqueteId}`,
+      query: { step, substep }
+    });
+  }
+
+  function goToNextPage(sections, currentStep) {
+    const { step, substep } = currentStep;
+    const currentSection = sections[step];
+
+    if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
+      goToStep({ step: step + 1, substep: 0 });
+    } else {
+      goToStep({ step, substep: substep + 1 });
+    }
+  }
+
+  function goToPrevPage(sections, currentStep) {
+    const { step, substep } = currentStep;
+    if (substep > 0) {
+      goToStep({ step, substep: substep - 1 });
+    } else if (currentStep.step - 1 >= 0) {
+      const substep = sections[currentStep.step - 1].steps.length;
+      goToStep({ step: currentStep.step - 1, substep: substep - 1 });
+    }
+  }
 };
 
 export default EnqueteIndividuel;
-
-function goToNextPage(sections, currentStep, setCurrentStep) {
-  const { step, substep } = currentStep;
-  const currentSection = sections[step];
-
-  if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
-    setCurrentStep({ step: step + 1, substep: 0 });
-  } else {
-    setCurrentStep({ step, substep: substep + 1 });
-  }
-}
-
-function goToPrevPage(sections, currentStep, setCurrentStep) {
-  const { step, substep } = currentStep;
-  if (substep > 0) {
-    setCurrentStep({ step, substep: substep - 1 });
-  } else if (currentStep.step - 1 >= 0) {
-    const substep = sections[currentStep.step - 1].steps.length;
-    setCurrentStep({ step: currentStep.step - 1, substep: substep - 1 });
-  }
-}
