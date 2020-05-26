@@ -8,7 +8,7 @@ async function checkImportMesuresParameters(req) {
 
   const {
     name,
-    base64str,
+    content,
     serviceId,
     mandataireUserId,
     antennesMap
@@ -53,7 +53,7 @@ async function checkImportMesuresParameters(req) {
 
   const importMesuresParameters = {
     file: {
-      base64str,
+      content,
       type: name.endsWith(".xls") || name.endsWith(".xlsx") ? "xls" : "csv"
     },
     importContext,

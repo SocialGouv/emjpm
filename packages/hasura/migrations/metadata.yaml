@@ -4364,7 +4364,7 @@ actions:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
     arguments:
-    - name: base64str
+    - name: content
       type: String!
     - name: enqueteId
       type: Int!
@@ -4389,7 +4389,7 @@ actions:
       type: String!
     - name: type
       type: String!
-    - name: base64str
+    - name: content
       type: String!
     - name: antennesMap
       type: String

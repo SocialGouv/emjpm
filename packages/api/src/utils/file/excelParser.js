@@ -1,7 +1,7 @@
 var XLSX = require("xlsx");
 
-const parseSheets = ({ base64str, parseOptions }) => {
-  const workbook = XLSX.read(base64str, parseOptions);
+const parseSheets = ({ content, parseOptions }) => {
+  const workbook = XLSX.read(content, parseOptions);
 
   return workbook.Sheets.reduce((acc, worksheetName) => {
     const worksheet = workbook.Sheets[worksheetName];
@@ -10,8 +10,8 @@ const parseSheets = ({ base64str, parseOptions }) => {
   }, {});
 };
 
-const parseSheetByIndex = ({ base64str, parseOptions, sheetIndex }) => {
-  const workbook = XLSX.read(base64str, parseOptions);
+const parseSheetByIndex = ({ content, parseOptions, sheetIndex }) => {
+  const workbook = XLSX.read(content, parseOptions);
 
   const worksheetNames = workbook.SheetNames;
   if (sheetIndex < worksheetNames.length) {

@@ -11,7 +11,7 @@ const actionsEnqueteImporter = {
 };
 
 async function importEnqueteFile({
-  file: { base64str },
+  file: { content },
   // eslint-disable-next-line no-unused-vars
   importContext: { enqueteId, userId, service, mandataire }
 }) {
@@ -19,7 +19,7 @@ async function importEnqueteFile({
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);
 
   const { informationsMandataire } = await enqueteExcelParser.parse({
-    base64str
+    content
   });
 
   const enqueteReponse = await initEnqueteMandataireIndividuel({
