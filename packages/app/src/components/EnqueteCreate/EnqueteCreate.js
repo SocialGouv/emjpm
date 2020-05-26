@@ -16,7 +16,7 @@ export const EnqueteCreate = () => {
   });
   const formik = useFormik({
     initialValues: {
-      year: new Date().getFullYear() - 1,
+      year: new Date().getFullYear(),
       endedAt: ""
     },
     onSubmit: async (values, formikHelpers) => {
@@ -48,7 +48,7 @@ export const EnqueteCreate = () => {
           name="year"
           hasError={!!errors.year}
           onChange={handleChange}
-          placeholder="Année"
+          placeholder="Année de l'enquête"
         />
         {touched.year && <InlineError message={errors.year} fieldId="year" />}
       </Field>
