@@ -44,21 +44,24 @@ module.exports = {
         last_update
         annee_agrement
         annee_debut_activite
-        cnc_maj_heure_formation
-        cnc_mjpm_heure_formation
-        cnc_maj_annee_obtention
-        cnc_dpf_annee_obtention
-        cnc_dpf_heure_formation
-        cnc_mjpm_annee_obtention
         cumul_delegue_service
         cumul_delegue_service_etp
         cumul_prepose
         cumul_prepose_etp
+        cnc_annee_obtention
+        cnc_heures_formation
         debut_activite_avant_2009
         niveau_qualification
-        niveau_qualification_secretaire_spe
-        secretaire_specialise
         nb_departements
+        nb_mesures_dep_finance
+        nb_mesures_dep_autres
+        secretaire_specialise_etp_n1
+        secretaire_specialise_etp_n2
+        secretaire_specialise_etp_n3
+        secretaire_specialise_etp_n4
+        secretaire_specialise_etp_n5
+        secretaire_specialise_etp_n6
+        secretaire_specialise
       }
       enquete_reponses_informations_mandataire_id
       enquete_reponses_informations_mandataire {

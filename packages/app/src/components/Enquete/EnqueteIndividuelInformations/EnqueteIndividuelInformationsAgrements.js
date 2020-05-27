@@ -36,17 +36,16 @@ export const EnqueteIndividuelInformationsAgrements = props => {
   });
 
   const agrements = data ? data.enquete_reponses_agrements_formations_by_pk || {} : {};
-  return (
+  return loading ? null : (
     <EnqueteIndividuelInformationsAgrementsForm
       data={agrements}
       goToPrevPage={goToPrevPage}
-      loading={loading}
       handleSubmit={async values => {
         await updateEnquete({
           variables: {
             id: enquete_reponses_informations_mandataire_id,
             annee_agrement: values.annee_agrement ? Number(values.annee_agrement) : null,
-            nb_departements: values.nb_departements ? Number(values.nb_departements) : null
+            nb_departements: values.nb_departements
           }
         });
         await goToNextPage();
