@@ -3,8 +3,9 @@
   "version": "25.34.0",
   "private": true,
   "scripts": {
+    "lint:pre-commit": "npm run lint:fix",
     "lint": "eslint __test__ migrations seeds knexfile.js",
-    "lint:fix": "yarn lint --fix",
+    "lint:fix": "eslint --cache --fix __test__ migrations seeds knexfile.js",
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "seeds": "knex seed:run",

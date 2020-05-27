@@ -6,3 +6,5 @@ dist
 docker-compose.override.yaml
 dump
 .vscode
+*.log
+.eslintcache
