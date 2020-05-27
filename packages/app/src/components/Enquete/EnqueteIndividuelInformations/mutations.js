@@ -3,16 +3,31 @@ import gql from "graphql-tag";
 export const UPDATE_ENQUETE_INFORMATIONS_AGREMENTS = gql`
   mutation update_enquete_individuel_agrements(
     $id: Int!
+    $debut_activite_avant_2009: Bolean
     $annee_agrement: Int
-    $nb_departements: Int
+    $annee_debut_activite: Int
+    $nb_departements: String
+    $nb_mesures_dep_finance: Int
+    $nb_mesures_dep_autres: Int
   ) {
     update_enquete_reponses_agrements_formations_by_pk(
       pk_columns: { id: $id }
-      _set: { annee_agrement: $annee_agrement, nb_departements: $nb_departements }
+      _set: {
+        debut_activite_avant_2009: $debut_activite_avant_2009
+        annee_agrement: $annee_agrement
+        nb_departements: $nb_departements
+        annee_debut_activite: $nb_mesures_dep_finance
+        te: $nb_mesures_dep_finance
+        nb_mesures_dep_autres: $nb_mesures_dep_autres
+      }
     ) {
       id
+      debut_activite_avant_2009
       annee_agrement
+      annee_debut_activite
       nb_departements
+      nb_mesures_dep_finance
+      nb_mesures_dep_autres
     }
   }
 `;

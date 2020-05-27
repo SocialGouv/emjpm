@@ -50,7 +50,7 @@ module.exports = {
       return enqueteReponse;
     } catch (err) {
       logger.error(err);
-      return null;
+      throw err;
     }
   }
 };

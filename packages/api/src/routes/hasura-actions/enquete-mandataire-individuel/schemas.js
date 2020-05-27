@@ -1,4 +1,5 @@
 const yup = require("yup");
+const { ENQ_REP_AGREMENTS_FORMATIONS } = require("../enquete-import/constants");
 
 const informationsGeneralesMandataireSchema = yup.object().shape({
   nom: yup.string().required(),
@@ -23,10 +24,9 @@ const informationsAgrementsMandataireSchema = yup.object().shape({
     .min(1900)
     .required(),
   nb_departements: yup
-    .number()
+    .mixed()
+    .oneOf(ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.keys)
     .required()
-    .positive()
-    .integer()
 });
 
 const informationsFormationMandataireSchema = yup.object().shape({
