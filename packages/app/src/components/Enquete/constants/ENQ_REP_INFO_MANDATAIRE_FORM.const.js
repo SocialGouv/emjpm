@@ -1,6 +1,8 @@
+import { enqueteKeysBuilder } from "./enqueteKeysBuilder.service";
+
 // constantes synchronisées avec le fichier api/ENQ_REP_INFO_MANDATAIRE.const.js
 export const ENQ_REP_INFO_MANDATAIRE_FORM = {
-  ANCIENNETE: buildKeys({
+  ANCIENNETE: enqueteKeysBuilder.buildKeys({
     "0-2": "Moins de 2 ans",
     "10-20": "10 ans à moins de 20 ans",
     "2-5": "2 ans à moins de 5 ans",
@@ -8,7 +10,7 @@ export const ENQ_REP_INFO_MANDATAIRE_FORM = {
     "30+": "30 ans et plus",
     "5-10": "5 ans à moins de 10 ans"
   }),
-  ESTIMATION_ETP: buildKeys({
+  ESTIMATION_ETP: enqueteKeysBuilder.buildKeys({
     "0-30": "jusqu'à 30% d'un ETP",
     "30-50": "supérieure à 30% jusqu'à 50%",
     "50-70": "supérieure à 50% jusqu'à 70%",
@@ -16,7 +18,7 @@ export const ENQ_REP_INFO_MANDATAIRE_FORM = {
     "90-100": "A temps plein"
   }),
 
-  FORME_JURIDIQUE: buildKeys({
+  FORME_JURIDIQUE: enqueteKeysBuilder.buildKeys({
     EI: "Entreprise individuelle",
     EURL: "EURL",
     SA: "SA",
@@ -27,11 +29,11 @@ export const ENQ_REP_INFO_MANDATAIRE_FORM = {
     SEL: "SEL",
     SNC: "SNC"
   }),
-  SEXE: buildKeys({
+  SEXE: enqueteKeysBuilder.buildKeys({
     F: "Femme",
     H: "Homme"
   }),
-  TRANCHE_AGE: buildKeys({
+  TRANCHE_AGE: enqueteKeysBuilder.buildKeys({
     "0-25": "Inférieur à 25 ans",
     "25-35": "25 ans à moins de 35 ans",
     "35-50": "35 ans à moins de 50 ans",
@@ -39,13 +41,3 @@ export const ENQ_REP_INFO_MANDATAIRE_FORM = {
     "65+": "Plus de 65 ans"
   })
 };
-
-function buildKeys(map) {
-  return Object.keys(map).map(value => {
-    const label = map[value];
-    return {
-      label,
-      value
-    };
-  });
-}

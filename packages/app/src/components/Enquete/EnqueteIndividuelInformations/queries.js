@@ -26,9 +26,12 @@ export const ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS = gql`
   query enquete_reponses_agrements($id: Int!) {
     enquete_reponses_agrements_formations_by_pk(id: $id) {
       id
+      debut_activite_avant_2009
       annee_agrement
       annee_debut_activite
       nb_departements
+      nb_mesures_dep_finance
+      nb_mesures_dep_autres
     }
   }
 `;

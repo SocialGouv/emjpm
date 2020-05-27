@@ -7,7 +7,7 @@ import { Box, Text } from "rebass";
 import { YesNoComboBox } from "../../../components/Commons";
 import { enqueteMandataireIndividuelInformationsGeneralesSchema } from "../../../lib/validationSchemas";
 import { findOption } from "../../../util/option/OptionUtil";
-import { ENQ_REP_INFO_MANDATAIRE_FORM } from "../constants/ENQ_REP_INFO_MANDATAIRE_FORM.const";
+import { ENQ_REP_INFO_MANDATAIRE_FORM } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 function mapDataPropsToFormValues(data) {

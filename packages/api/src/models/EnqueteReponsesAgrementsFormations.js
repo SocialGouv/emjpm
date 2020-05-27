@@ -17,7 +17,7 @@ class EnqueteReponsesAgrementsFormations extends Model {
       type: "object",
       properties: {
         annee_agrement: { type: "number" },
-        nb_departements: { type: "number" },
+        nb_departements: { type: "string" },
         annee_debut_activite: { type: "date" },
         cnc_maj_heure_formation: { type: "number" },
         cnc_mjpm_heure_formation: { type: "number" },

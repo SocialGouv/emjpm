@@ -20,7 +20,8 @@ async function importEnqueteFile({
 
   const {
     informationsMandataire,
-    populations
+    populations,
+    agrementsFormations
   } = await enqueteExcelParser.parse({
     content
   });
@@ -36,8 +37,8 @@ async function importEnqueteFile({
     informationsMandataire
   );
   await enqueteImportRepository.saveEnqueteReponsesAgrementsFormations(
-    enqueteReponse.enquete_reponses_informations_mandataire_id,
-    informationsMandataire
+    enqueteReponse.enquete_reponses_agrements_formations_id,
+    agrementsFormations
   );
 
   const populationsDb = await enqueteImportRepository.savePopulations(
