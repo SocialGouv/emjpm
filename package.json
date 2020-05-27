@@ -5,6 +5,7 @@
     "dev": "lerna run dev --parallel",
     "e2e": "yarn --cwd optional/e2e/.runners/puppetteer",
     "lint": "lerna run lint --parallel",
+    "lint:pre-commit": "lerna run lint:pre-commit",
     "start": "lerna run start --parallel",
     "test": "lerna run test --parallel"
   },
@@ -17,7 +18,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint",
+      "pre-commit": "yarn lint:pre-commit",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },

@@ -9,8 +9,9 @@
     "dev:knex-debug-query": "DEBUG=knex:query nodemon src/start.js --inspect",
     "test": "NODE_ENV=test jest --maxWorkers=2",
     "test:watch": "NODE_ENV=test npx jest --maxWorkers=2 --watch",
+    "lint:pre-commit": "npm run lint:fix",
     "lint": "eslint __test__ src",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint --cache __test__ src --fix",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'"
   },
