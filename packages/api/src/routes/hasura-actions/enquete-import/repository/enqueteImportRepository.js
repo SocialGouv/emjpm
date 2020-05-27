@@ -4,11 +4,38 @@ const {
 const {
   EnqueteReponsesPopulations
 } = require("../../../../models/EnqueteReponsesPopulations");
+const {
+  EnqueteReponsesAgrementsFormations
+} = require("../../../../models/EnqueteReponsesAgrementsFormations");
+const logger = require("../../../../utils/logger");
 
 async function saveInformationsMandataire(id, data) {
-  return await EnqueteReponsesInformationsMandataire.query()
+  const entity = await EnqueteReponsesInformationsMandataire.query()
     .findById(id)
     .patch(data);
+
+  logger.info(
+    `[IMPORT ENQUETE] informationsMandataire: ${JSON.stringify(
+      entity,
+      undefined,
+      2
+    )}`
+  );
+  return entity;
+}
+async function saveEnqueteReponsesAgrementsFormations(id, data) {
+  const entity = await EnqueteReponsesAgrementsFormations.query()
+    .findById(id)
+    .patch(data);
+
+  logger.info(
+    `[IMPORT ENQUETE] agrementsFormations: ${JSON.stringify(
+      entity,
+      undefined,
+      2
+    )}`
+  );
+  return entity;
 }
 
 async function savePopulations(id, data) {
@@ -19,7 +46,8 @@ async function savePopulations(id, data) {
 
 const enqueteImportRepository = {
   saveInformationsMandataire,
-  savePopulations
+  savePopulations,
+  saveEnqueteReponsesAgrementsFormations
 };
 
 module.exports = enqueteImportRepository;

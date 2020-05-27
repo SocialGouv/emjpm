@@ -25,14 +25,14 @@ const parse = async ({ content }) => {
     "Données à exporter"
   ]);
 
-  const worksheet = workbook.Sheets["Données à exporter"];
-
   const res = {
     informationsMandataire: parserInformationsMandataire.parse(
       workbook.Sheets["info mandataire-exerc. activité"]
     ),
-    agrementsFormations: parserAgrementsFormations.parse(worksheet),
-    populations: parserPopulations.parse(workbook.Sheets["Populations "])
+    populations: parserPopulations.parse(workbook.Sheets["Populations "]),
+    agrementsFormations: parserAgrementsFormations.parse(
+      workbook.Sheets["info mandataire-exerc. activité"]
+    )
   };
 
   logger.info(
