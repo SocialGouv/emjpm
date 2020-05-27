@@ -17,6 +17,10 @@ rules:
   jsx-a11y/click-events-have-key-events: off
   jsx-a11y/no-static-element-interactions: off
   jsx-a11y/no-noninteractive-tabindex: off
+  # prettier/prettier: off
+  # import/namespace: off
+  # react/no-unknown-property: off
+  # import/named: off
   simple-import-sort/sort: warn
   sort-keys-fix/sort-keys-fix:
     - error
