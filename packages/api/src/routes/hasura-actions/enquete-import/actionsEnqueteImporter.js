@@ -18,7 +18,10 @@ async function importEnqueteFile({
   const start = Date.now();
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);
 
-  const { informationsMandataire } = await enqueteExcelParser.parse({
+  const {
+    informationsMandataire,
+    populations
+  } = await enqueteExcelParser.parse({
     content
   });
 
@@ -40,6 +43,20 @@ async function importEnqueteFile({
       2
     )}`
   );
+
+  const populationsDb = await enqueteImportRepository.savePopulations(
+    enqueteReponse.enquete_reponses_populations_id,
+    populations
+  );
+
+  logger.info(
+    `[IMPORT ENQUETE] populationsDb: ${JSON.stringify(
+      populationsDb,
+      undefined,
+      2
+    )}`
+  );
+
   const importSummary = {
     errors: [],
     create: [],

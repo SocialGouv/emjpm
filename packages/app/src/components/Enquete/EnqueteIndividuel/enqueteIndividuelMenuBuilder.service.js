@@ -13,7 +13,13 @@ import {
   EnqueteIndividuelInformationsFormation
 } from "../EnqueteIndividuelInformations";
 import { EnqueteIndividuelPrestationsSociales } from "../EnqueteIndividuelPrestationsSociales";
-import { EnquetePopulationsCuratelle, EnquetePopulationsTutelle } from "../EnquetePopulations";
+import {
+  EnquetePopulationsAutreMesures,
+  EnquetePopulationsCuratelle,
+  EnquetePopulationsMAJ,
+  EnquetePopulationsSauvegardeJustice,
+  EnquetePopulationsTutelle
+} from "../EnquetePopulations";
 import { EnqueteIndividuelWelcome } from "./EnqueteIndividuelWelcome";
 
 export const enqueteIndividuelMenuBuilder = {
@@ -129,21 +135,21 @@ function buildMenuSections(enqueteReponse) {
         },
         {
           label: "Mesure d'accompagnement de justice",
-          component: EnquetePopulationsTutelle,
+          component: EnquetePopulationsMAJ,
           isValid: transformStatusToIsValidProperty(
             enqueteReponse.enquete_reponses_populations_accompagnement_judiciaire_status
           )
         },
         {
           label: "Sauvegarde de justice",
-          component: EnquetePopulationsTutelle,
+          component: EnquetePopulationsSauvegardeJustice,
           isValid: transformStatusToIsValidProperty(
             enqueteReponse.enquete_reponses_populations_sauvegarde_justice_status
           )
         },
         {
           label: "Autre",
-          component: EnquetePopulationsTutelle,
+          component: EnquetePopulationsAutreMesures,
           isValid: transformStatusToIsValidProperty(
             enqueteReponse.enquete_reponses_populations_autre_status
           )
