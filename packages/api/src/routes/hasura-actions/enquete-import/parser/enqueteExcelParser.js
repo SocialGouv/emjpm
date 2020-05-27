@@ -32,7 +32,7 @@ const parse = async ({ content }) => {
       workbook.Sheets["info mandataire-exerc. activité"]
     ),
     agrementsFormations: parserAgrementsFormations.parse(worksheet),
-    populations: parserPopulations.parse(workbook.Sheets["Populations"])
+    populations: parserPopulations.parse(workbook.Sheets["Populations "])
   };
 
   logger.info(

@@ -3,6 +3,8 @@ const logger = require("../../../../utils/logger");
 const excelParser = require("./enqueteExcelParserUtil");
 
 function parse(worksheet) {
+  console.log('worksheet["G9"]', worksheet["G9"]);
+
   try {
     const rawData = {
       tutelle_age_inf_25_ans_homme: excelParser.number(worksheet["C8"]),
@@ -69,16 +71,16 @@ function parse(worksheet) {
         worksheet["G15"]
       ),
 
-      autre_age_inf_25_ans_homme: excelParser.number(worksheet["C16"]),
-      autre_age_inf_25_ans_femme: excelParser.number(worksheet["C17"]),
-      autre_age_25_39_ans_homme: excelParser.number(worksheet["D16"]),
-      autre_age_25_39_ans_femme: excelParser.number(worksheet["D17"]),
-      autre_age_40_59_ans_homme: excelParser.number(worksheet["E16"]),
-      autre_age_40_59_ans_femme: excelParser.number(worksheet["E17"]),
-      autre_age_60_74_ans_homme: excelParser.number(worksheet["F16"]),
-      autre_age_60_74_ans_femme: excelParser.number(worksheet["F17"]),
-      autre_age_sup_75_ans_homme: excelParser.number(worksheet["G16"]),
-      autre_age_sup_75_ans_femme: excelParser.number(worksheet["G17"]),
+      autre_mesures_age_inf_25_ans_homme: excelParser.number(worksheet["C16"]),
+      autre_mesures_age_inf_25_ans_femme: excelParser.number(worksheet["C17"]),
+      autre_mesures_age_25_39_ans_homme: excelParser.number(worksheet["D16"]),
+      autre_mesures_age_25_39_ans_femme: excelParser.number(worksheet["D17"]),
+      autre_mesures_age_40_59_ans_homme: excelParser.number(worksheet["E16"]),
+      autre_mesures_age_40_59_ans_femme: excelParser.number(worksheet["E17"]),
+      autre_mesures_age_60_74_ans_homme: excelParser.number(worksheet["F16"]),
+      autre_mesures_age_60_74_ans_femme: excelParser.number(worksheet["F17"]),
+      autre_mesures_age_sup_75_ans_homme: excelParser.number(worksheet["G16"]),
+      autre_mesures_age_sup_75_ans_femme: excelParser.number(worksheet["G17"]),
 
       tutelle_anciennete_inf_1_an: excelParser.number(worksheet["B26"]),
       tutelle_anciennete_1_3_ans: excelParser.number(worksheet["C26"]),
@@ -114,11 +116,11 @@ function parse(worksheet) {
         worksheet["F29"]
       ),
 
-      autre_anciennete_inf_1_an: excelParser.number(worksheet["B30"]),
-      autre_justice_anciennete_1_3_ans: excelParser.number(worksheet["C30"]),
-      autre_justice_anciennete_3_5_ans: excelParser.number(worksheet["D30"]),
-      autre_justice_anciennete_5_10_ans: excelParser.number(worksheet["E30"]),
-      autre_justice_anciennete_sup_10_ans: excelParser.number(worksheet["F30"]),
+      autre_mesures_anciennete_inf_1_an: excelParser.number(worksheet["B30"]),
+      autre_mesures_anciennete_1_3_ans: excelParser.number(worksheet["C30"]),
+      autre_mesures_anciennete_3_5_ans: excelParser.number(worksheet["D30"]),
+      autre_mesures_anciennete_5_10_ans: excelParser.number(worksheet["E30"]),
+      autre_mesures_anciennete_sup_10_ans: excelParser.number(worksheet["F30"]),
 
       tutelle_etablissement_personne_handicapee: excelParser.number(
         worksheet["C37"]
@@ -206,7 +208,7 @@ function parse(worksheet) {
     return rawData;
   } catch (err) {
     logger.warn('[IMPORT ENQUETE] Données "populations" invalide');
-    logger.err(err);
+    logger.error(err);
     throw new HttpError(422, 'Données "populations" invalide');
   }
 }
