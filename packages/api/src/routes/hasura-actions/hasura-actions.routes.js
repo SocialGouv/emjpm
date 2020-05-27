@@ -15,6 +15,7 @@ const router = express.Router();
 
 router.post("/enquetes/mandataire-individuel", async (req, res, next) => {
   await checkEnqueteIndividuelParameters(req, res);
+
   try {
     const { enqueteId, mandataireId } = req.body.input;
     const result = await initEnqueteMandataireIndividuel({
@@ -55,7 +56,6 @@ router.post(
   async (req, res, next) => {
     try {
       const importEnqueteParameters = await checkImportEnqueteParameters(req);
-
       const importSummary = await actionsEnqueteImporter.importEnqueteFile(
         importEnqueteParameters
       );
