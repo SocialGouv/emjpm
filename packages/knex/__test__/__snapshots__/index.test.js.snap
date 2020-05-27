@@ -794,91 +794,139 @@ Object {
 
 exports[`enquete_reponses_populations table schema 1`] = `
 Object {
-  "autre_age_25_39_ans_femme": Object {
+  "autre_mesures_age_25_39_ans_femme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_age_25_39_ans_homme": Object {
+  "autre_mesures_age_25_39_ans_homme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_age_40_59_ans_femme": Object {
+  "autre_mesures_age_40_59_ans_femme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_age_40_59_ans_homme": Object {
+  "autre_mesures_age_40_59_ans_homme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_age_60_74_ans_femme": Object {
+  "autre_mesures_age_60_74_ans_femme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_age_60_74_ans_homme": Object {
+  "autre_mesures_age_60_74_ans_homme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_age_inf_25_ans_femme": Object {
+  "autre_mesures_age_inf_25_ans_femme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_age_inf_25_ans_homme": Object {
+  "autre_mesures_age_inf_25_ans_homme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_age_sup_75_ans_femme": Object {
+  "autre_mesures_age_sup_75_ans_femme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_age_sup_75_ans_homme": Object {
+  "autre_mesures_age_sup_75_ans_homme": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_anciennete_inf_1_an": Object {
+  "autre_mesures_anciennete_1_3_ans": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_justice_anciennete_1_3_ans": Object {
+  "autre_mesures_anciennete_3_5_ans": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_justice_anciennete_3_5_ans": Object {
+  "autre_mesures_anciennete_5_10_ans": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_justice_anciennete_5_10_ans": Object {
+  "autre_mesures_anciennete_inf_1_an": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "autre_justice_anciennete_sup_10_ans": Object {
+  "autre_mesures_anciennete_sup_10_ans": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "autre_mesures_autre_etablissement_personne_agee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "autre_mesures_autre_service": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "autre_mesures_chrs": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "autre_mesures_ehpad": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "autre_mesures_etablissement_personne_handicapee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "autre_mesures_service_hospitalier_soins_longue_duree": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "autre_mesures_service_personne_handicapee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "autre_mesures_service_psychiatrique": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,

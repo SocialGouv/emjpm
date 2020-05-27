@@ -121,16 +121,6 @@ module.exports = {
         sauvegarde_justice_age_60_74_ans_femme
         sauvegarde_justice_age_sup_75_ans_homme
         sauvegarde_justice_age_sup_75_ans_femme
-        autre_age_inf_25_ans_homme
-        autre_age_inf_25_ans_femme
-        autre_age_25_39_ans_homme
-        autre_age_25_39_ans_femme
-        autre_age_40_59_ans_homme
-        autre_age_40_59_ans_femme
-        autre_age_60_74_ans_homme
-        autre_age_60_74_ans_femme
-        autre_age_sup_75_ans_homme
-        autre_age_sup_75_ans_femme
         tutelle_anciennete_inf_1_an
         tutelle_anciennete_1_3_ans
         tutelle_anciennete_3_5_ans
@@ -151,11 +141,21 @@ module.exports = {
         sauvegarde_justice_anciennete_3_5_ans
         sauvegarde_justice_anciennete_5_10_ans
         sauvegarde_justice_anciennete_sup_10_ans
-        autre_anciennete_inf_1_an
-        autre_justice_anciennete_1_3_ans
-        autre_justice_anciennete_3_5_ans
-        autre_justice_anciennete_5_10_ans
-        autre_justice_anciennete_sup_10_ans
+        autre_mesures_age_inf_25_ans_homme
+        autre_mesures_age_inf_25_ans_femme
+        autre_mesures_age_25_39_ans_homme
+        autre_mesures_age_25_39_ans_femme
+        autre_mesures_age_40_59_ans_homme
+        autre_mesures_age_40_59_ans_femme
+        autre_mesures_age_60_74_ans_homme
+        autre_mesures_age_60_74_ans_femme
+        autre_mesures_age_sup_75_ans_homme
+        autre_mesures_age_sup_75_ans_femme
+        autre_mesures_anciennete_inf_1_an
+        autre_mesures_anciennete_1_3_ans
+        autre_mesures_anciennete_3_5_ans
+        autre_mesures_anciennete_5_10_ans
+        autre_mesures_anciennete_sup_10_ans
         tutelle_etablissement_personne_handicapee
         tutelle_service_personne_handicapee
         tutelle_ehpad
