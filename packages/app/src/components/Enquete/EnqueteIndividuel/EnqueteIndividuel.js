@@ -54,31 +54,32 @@ export const EnqueteIndividuel = props => {
     </Flex>
   );
 
-  function goToStep({ step, substep }) {
-    router.push("/mandataires/enquetes/[enquete_id]", {
+  async function goToStep({ step, substep }) {
+    await router.push("/mandataires/enquetes/[enquete_id]", {
       pathname: `/mandataires/enquetes/${enqueteId}`,
       query: { step, substep }
     });
+    window.scrollTo(0, 0);
   }
 
-  function goToNextPage(sections, currentStep) {
+  async function goToNextPage(sections, currentStep) {
     const { step, substep } = currentStep;
     const currentSection = sections[step];
 
     if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
-      goToStep({ step: step + 1, substep: 0 });
+      await goToStep({ step: step + 1, substep: 0 });
     } else {
-      goToStep({ step, substep: substep + 1 });
+      await goToStep({ step, substep: substep + 1 });
     }
   }
 
-  function goToPrevPage(sections, currentStep) {
+  async function goToPrevPage(sections, currentStep) {
     const { step, substep } = currentStep;
     if (substep > 0) {
-      goToStep({ step, substep: substep - 1 });
+      await goToStep({ step, substep: substep - 1 });
     } else if (currentStep.step - 1 >= 0) {
       const substep = sections[currentStep.step - 1].steps.length;
-      goToStep({ step: currentStep.step - 1, substep: substep - 1 });
+      await goToStep({ step: currentStep.step - 1, substep: substep - 1 });
     }
   }
 };
