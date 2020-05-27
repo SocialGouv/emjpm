@@ -5,7 +5,7 @@ function excelSelect(map) {
 }
 
 function excelBoolean() {
-  return yup.boolean().transform(x => !!(x & (x === "Oui")));
+  return yup.boolean().transform(x => x === "Oui");
 }
 
 function excelInteger() {

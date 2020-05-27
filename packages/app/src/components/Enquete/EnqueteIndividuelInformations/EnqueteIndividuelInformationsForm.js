@@ -28,7 +28,7 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsForm = props => {
-  const { data = {}, goToPrevPage, loading = false } = props;
+  const { data = {}, goToPrevPage, loading } = props;
 
   const { handleSubmit, handleChange, values, errors, setFieldValue, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
@@ -43,7 +43,7 @@ export const EnqueteIndividuelInformationsForm = props => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
-  return (
+  return loading ? null : (
     <form onSubmit={handleSubmit}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Vos informations"}
