@@ -5,7 +5,7 @@
     "dev": "lerna run dev --parallel",
     "e2e": "yarn --cwd optional/e2e/.runners/puppetteer",
     "lint": "lerna run lint --parallel",
-    "lint:pre-commit": "lerna run lint:pre-commit",
+    "lint:pre-commit": "lerna run lint:pre-commit --parallel",
     "start": "lerna run start --parallel",
     "test": "lerna run test --parallel"
   },

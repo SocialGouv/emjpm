@@ -1,6 +1,0 @@
-{
-  "extends": ["@socialgouv/tslint-config-recommended"],
-  "linterOptions": {
-    "exclude": ["./src/types/*"]
-  }
-}
