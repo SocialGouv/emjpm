@@ -97,13 +97,12 @@ stages:
   image: node:12-alpine
   interruptible: true
   cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+    key:
+      files:
+        - yarn.lock
+      prefix: ${CI_JOB_NAME}
     paths:
       - $CI_PROJECT_DIR/.cache
-      # HACK(douglasduteil): remove node_modules cache
-      # Or minio can't handle the size of it...
-      # - node_modules
-      # - packages/${CONTEXT}/node_modules
   before_script:
     - "[[ type jq ]] || apk add jq=~1"
 
