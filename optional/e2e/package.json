@@ -6,6 +6,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:api-reset": "cd ../.. && NODE_ENV=test yarn lerna run --scope @emjpm/knex --stream seeds",
+    "lint:pre-commit": "npm run lint",
     "lint": "eslint cypress"
   },
   "keywords": [],
