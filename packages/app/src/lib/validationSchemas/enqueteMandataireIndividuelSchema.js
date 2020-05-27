@@ -18,11 +18,8 @@ export const enqueteMandataireIndividuelAgrementsSchema = yup.object().shape({
     .number()
     .min(1900)
     .nullable(),
-  nb_departements: yup
-    .number()
-    .nullable()
-    .positive()
-    .integer()
+  debut_activite_avant_2009: yup.boolean().nullable(),
+  nb_departements: yup.string().nullable()
 });
 
 export const enqueteMandataireIndividuelFormationSchema = yup.object().shape({

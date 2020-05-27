@@ -20,7 +20,8 @@ async function importEnqueteFile({
 
   const {
     informationsMandataire,
-    populations
+    populations,
+    agrementsFormations
   } = await enqueteExcelParser.parse({
     content
   });
@@ -31,17 +32,13 @@ async function importEnqueteFile({
   });
 
   // save data to database
-  const informationsMandataireDb = await enqueteImportRepository.saveInformationsMandataire(
+  await enqueteImportRepository.saveInformationsMandataire(
     enqueteReponse.enquete_reponses_informations_mandataire_id,
     informationsMandataire
   );
-
-  logger.info(
-    `[IMPORT ENQUETE] informationsMandataireDb: ${JSON.stringify(
-      informationsMandataireDb,
-      undefined,
-      2
-    )}`
+  await enqueteImportRepository.saveEnqueteReponsesAgrementsFormations(
+    enqueteReponse.enquete_reponses_agrements_formations_id,
+    agrementsFormations
   );
 
   const populationsDb = await enqueteImportRepository.savePopulations(
