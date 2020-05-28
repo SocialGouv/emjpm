@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading4, Spinner, Text } from "@emjpm/ui";
-import React from "react";
-// import ReactPaginate from "react-paginate";
+import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
+import { PaginatedList } from "../PaginatedList";
 import { LB_USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
@@ -21,8 +21,57 @@ const getTypes = lbDep => {
   return res.join(res, ",");
 };
 
+const ListBlancheItem = ({ item }) => (
+  <Card key={item.id} sx={cardStyle(item.user_id)} mb="2">
+    <Flex justifyContent="flex-start">
+      <Flex width="25%" flexDirection="column">
+        <Text sx={labelStyle}>{`Prénom`}</Text>
+        <Text sx={descriptionStyle}>
+          {item.prenom} {item.nom ? item.nom.toUpperCase() : ""}
+        </Text>
+      </Flex>
+      <Flex width="25%" flexDirection="column">
+        <Text sx={labelStyle}>Email</Text>
+        <Text sx={descriptionStyle}>{item.email}</Text>
+      </Flex>
+      <Flex width="50%" flexDirection="column">
+        {item.lb_departements.map(lbDep => (
+          <Flex
+            key={lbDep.id}
+            mb="1"
+            pl="2"
+            sx={{
+              borderLeft: "1px solid"
+            }}
+            justifyContent="flex-start"
+          >
+            <Flex width="20%" flexDirection="column">
+              <Text sx={labelStyle}>{`Département`}</Text>
+              <Text sx={descriptionStyle}>
+                {lbDep.departement ? lbDep.departement.nom : "Inconnu"}
+              </Text>
+            </Flex>
+            <Flex flexDirection="column">
+              <Text sx={labelStyle}>{`Type`}</Text>
+              <Text sx={descriptionStyle}>{getTypes(lbDep)}</Text>
+            </Flex>
+          </Flex>
+        ))}
+      </Flex>
+    </Flex>
+  </Card>
+);
+
 const ListeBlanche = () => {
-  const { data, error, loading } = useQuery(LB_USERS);
+  const resultPerPage = 50;
+  const [currentOffset, setCurrentOffset] = useState(0);
+
+  const { data, error, loading } = useQuery(LB_USERS, {
+    variables: {
+      limit: resultPerPage,
+      offset: currentOffset
+    }
+  });
 
   if (loading) {
     return (
@@ -41,50 +90,18 @@ const ListeBlanche = () => {
       </Card>
     );
   }
-  const members = data.lb_users;
+  const { count } = data.lb_users_aggregate.aggregate;
+  const users = data.lb_users;
+
   return (
-    <Flex flexDirection="column">
-      {members.map(member => (
-        <Card key={member.id} sx={cardStyle(member.user_id)} mb="2">
-          <Flex justifyContent="flex-start">
-            <Flex width="25%" flexDirection="column">
-              <Text sx={labelStyle}>{`Prénom`}</Text>
-              <Text sx={descriptionStyle}>
-                {member.prenom} {member.nom ? member.nom.toUpperCase() : ""}
-              </Text>
-            </Flex>
-            <Flex width="25%" flexDirection="column">
-              <Text sx={labelStyle}>Email</Text>
-              <Text sx={descriptionStyle}>{member.email}</Text>
-            </Flex>
-            <Flex width="50%" flexDirection="column">
-              {member.lb_departements.map(lbDep => (
-                <Flex
-                  key={lbDep.id}
-                  mb="1"
-                  pl="2"
-                  sx={{
-                    borderLeft: "1px solid"
-                  }}
-                  justifyContent="flex-start"
-                >
-                  <Flex width="20%" flexDirection="column">
-                    <Text sx={labelStyle}>{`Département`}</Text>
-                    <Text sx={descriptionStyle}>
-                      {lbDep.departement ? lbDep.departement.nom : "Inconnu"}
-                    </Text>
-                  </Flex>
-                  <Flex flexDirection="column">
-                    <Text sx={labelStyle}>{`Type`}</Text>
-                    <Text sx={descriptionStyle}>{getTypes(lbDep)}</Text>
-                  </Flex>
-                </Flex>
-              ))}
-            </Flex>
-          </Flex>
-        </Card>
-      ))}
-    </Flex>
+    <PaginatedList
+      entries={users}
+      RowItem={ListBlancheItem}
+      count={count}
+      resultPerPage={resultPerPage}
+      currentOffset={currentOffset}
+      setCurrentOffset={setCurrentOffset}
+    />
   );
 };
 
