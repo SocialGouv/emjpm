@@ -6,6 +6,7 @@ export const UPDATE_SERVICE = gql`
     $etablissement: String!
     $code_postal: String!
     $ville: String!
+    $siret: String!
     $email: String
     $telephone: String
     $department_id: Int!
@@ -17,6 +18,7 @@ export const UPDATE_SERVICE = gql`
       where: { id: { _eq: $id } }
       _set: {
         etablissement: $etablissement
+        siret: $siret
         code_postal: $code_postal
         department_id: $department_id
         ville: $ville
