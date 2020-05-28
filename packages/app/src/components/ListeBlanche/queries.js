@@ -12,6 +12,7 @@ export const LB_USERS = gql`
       nom
       prenom
       email
+      type
       user_id
       lb_departements {
         ti

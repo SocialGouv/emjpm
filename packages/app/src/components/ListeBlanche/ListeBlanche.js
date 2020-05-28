@@ -7,28 +7,33 @@ import { PaginatedList } from "../PaginatedList";
 import { LB_USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
-const getTypes = lbDep => {
-  const res = [];
-  if (lbDep.individuel) {
-    res.push("Mandataire individuel");
+const getType = type => {
+  if (type === "individuel") {
+    return "Mandataire individuel";
   }
-  if (lbDep.prepose) {
-    res.push("Mandataire préposé d'établissement");
+  if (type === "prepose") {
+    return "Mandataire préposé d'établissement";
   }
-  if (lbDep.service) {
-    res.push("Membre d'un service mandataire");
+  if (type === "service") {
+    return "Membre d'un service mandataire";
   }
-  return res.join(res, ",");
+  if (type === "ti") {
+    return "Magistrat";
+  }
 };
 
 const ListBlancheItem = ({ item }) => (
   <Card key={item.id} sx={cardStyle(item.user_id)} mb="2">
     <Flex justifyContent="flex-start">
       <Flex width="25%" flexDirection="column">
-        <Text sx={labelStyle}>{`Prénom`}</Text>
+        <Text sx={labelStyle}>{"Nom"}</Text>
         <Text sx={descriptionStyle}>
           {item.prenom} {item.nom ? item.nom.toUpperCase() : ""}
         </Text>
+      </Flex>
+      <Flex width="15%" flexDirection="column">
+        <Text sx={labelStyle}>Type</Text>
+        <Text sx={descriptionStyle}>{getType(item.type)}</Text>
       </Flex>
       <Flex width="25%" flexDirection="column">
         <Text sx={labelStyle}>Email</Text>
@@ -45,15 +50,11 @@ const ListBlancheItem = ({ item }) => (
             }}
             justifyContent="flex-start"
           >
-            <Flex width="20%" flexDirection="column">
+            <Flex width="100%" flexDirection="column">
               <Text sx={labelStyle}>{`Département`}</Text>
               <Text sx={descriptionStyle}>
                 {lbDep.departement ? lbDep.departement.nom : "Inconnu"}
               </Text>
-            </Flex>
-            <Flex flexDirection="column">
-              <Text sx={labelStyle}>{`Type`}</Text>
-              <Text sx={descriptionStyle}>{getTypes(lbDep)}</Text>
             </Flex>
           </Flex>
         ))}
