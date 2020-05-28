@@ -72,6 +72,7 @@ export const SERVICE = gql`
     services(where: { id: { _eq: $serviceId } }) {
       id
       etablissement
+      siret
       code_postal
       ville
       department_id

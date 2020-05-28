@@ -8,7 +8,7 @@ import { DEPARTEMENTS, SERVICE } from "./queries";
 
 export const AdminEditService = props => {
   const { serviceId } = props;
-  const serviceQuery = useQuery(SERVICE, { variables: { serviceId } });
+  const serviceQuery = useQuery(SERVICE, { fetchPolicy: "network-only", variables: { serviceId } });
   const departmentsQuery = useQuery(DEPARTEMENTS);
   const [updateService] = useMutation(UPDATE_SERVICE);
 
@@ -45,6 +45,7 @@ export const AdminEditService = props => {
           department_id: department.id,
           email: values.email,
           etablissement: values.etablissement,
+          siret: values.siret,
           telephone: values.telephone,
           ville: city,
           latitude: latitude,
