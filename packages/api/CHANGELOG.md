@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.35.0](https://github.com/SocialGouv/emjpm/compare/v25.34.0...v25.35.0) (2020-05-28)
+
+
+### Features
+
+* **enquete:** import individuel tab agrements formations [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1846](https://github.com/SocialGouv/emjpm/issues/1846)) ([ca4dc5e](https://github.com/SocialGouv/emjpm/commit/ca4dc5e10067e212f90d6426ed77a0536f26126c))
+* **enquete:** import individuel tab infos generales [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1844](https://github.com/SocialGouv/emjpm/issues/1844)) ([0974c83](https://github.com/SocialGouv/emjpm/commit/0974c83f7b3b85cf2f04053b0123aca106816396))
+* **enquete:** populations form ([#1842](https://github.com/SocialGouv/emjpm/issues/1842)) ([1323b38](https://github.com/SocialGouv/emjpm/commit/1323b389c26d64c8683be5d13198f2550efc55b5))
+* **enquete:** prestations sociales import ([#1854](https://github.com/SocialGouv/emjpm/issues/1854)) ([a562e31](https://github.com/SocialGouv/emjpm/commit/a562e31baae1de19cd2a2c3a85542b78d84d879f))
+
+
+
+
+
 # [25.34.0](https://github.com/SocialGouv/emjpm/compare/v25.33.0...v25.34.0) (2020-05-26)
 
 
