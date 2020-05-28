@@ -24,6 +24,6 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.raw(`
-  alter table lb_users drop column;
+  alter table lb_users drop column type;
   `);
 };
