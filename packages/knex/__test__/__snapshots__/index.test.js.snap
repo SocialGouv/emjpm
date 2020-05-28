@@ -2213,6 +2213,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "character varying",
+  },
   "user_id": Object {
     "defaultValue": null,
     "maxLength": null,
