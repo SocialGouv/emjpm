@@ -159,12 +159,20 @@ function buildTableColumns() {
       }
     },
     {
-      Header: "Numéro RG",
+      Header: "n° RG",
       accessor: "numero_rg"
     },
     {
-      Header: "Numéro de dossier",
+      Header: "n°  dossier",
       accessor: "numero_dossier"
+    },
+    {
+      Header: "Type",
+      accessor: "type"
+    },
+    {
+      Header: "Année",
+      accessor: "annee"
     },
     {
       Header: "Date ouverture",

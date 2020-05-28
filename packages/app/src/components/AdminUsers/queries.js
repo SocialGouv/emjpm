@@ -35,6 +35,8 @@ export const MESURES = gql`
     mesures(where: { mandataire: { user_id: { _eq: $userId } } }) {
       id
       etablissement
+      annee
+      type
       numero_dossier
       residence
       numero_rg
