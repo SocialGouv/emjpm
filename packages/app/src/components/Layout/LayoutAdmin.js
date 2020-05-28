@@ -20,6 +20,10 @@ const navigationLinks = [
     url: "/admin/tribunaux"
   },
   {
+    title: "Liste blanche",
+    url: "/admin/liste_blanche"
+  },
+  {
     title: "Editeurs",
     url: "/admin/editors"
   },
