@@ -1761,6 +1761,24 @@ tables:
       check: null
 - table:
     schema: public
+    name: lb_departements
+  object_relationships:
+  - name: departement
+    using:
+      foreign_key_constraint_on: departement_id
+- table:
+    schema: public
+    name: lb_users
+  array_relationships:
+  - name: lb_departements
+    using:
+      foreign_key_constraint_on:
+        column: lb_user_id
+        table:
+          schema: public
+          name: lb_departements
+- table:
+    schema: public
     name: magistrat
   object_relationships:
   - name: ti
