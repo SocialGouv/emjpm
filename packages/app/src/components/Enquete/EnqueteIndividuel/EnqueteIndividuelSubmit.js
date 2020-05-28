@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 export const EnqueteIndividuelWelcome = props => {
-  const { enquete, enqueteReponse, mandataireId } = props;
+  const { enquete, enqueteReponse } = props;
 
   const hasError = useMemo(() => {
     const keys = Object.keys(enqueteReponse);
