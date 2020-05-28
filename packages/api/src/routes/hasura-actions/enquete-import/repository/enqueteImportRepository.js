@@ -5,6 +5,9 @@ const {
   EnqueteReponsesPopulations
 } = require("../../../../models/EnqueteReponsesPopulations");
 const {
+  EnqueteReponsesPrestationsSociales
+} = require("../../../../models/EnqueteReponsesPrestationsSociales");
+const {
   EnqueteReponsesAgrementsFormations
 } = require("../../../../models/EnqueteReponsesAgrementsFormations");
 const logger = require("../../../../utils/logger");
@@ -44,10 +47,17 @@ async function savePopulations(id, data) {
     .patch(data);
 }
 
+async function savePrestationsSociales(id, data) {
+  return await EnqueteReponsesPrestationsSociales.query()
+    .findById(id)
+    .patch(data);
+}
+
 const enqueteImportRepository = {
   saveInformationsMandataire,
   savePopulations,
-  saveEnqueteReponsesAgrementsFormations
+  saveEnqueteReponsesAgrementsFormations,
+  savePrestationsSociales
 };
 
 module.exports = enqueteImportRepository;

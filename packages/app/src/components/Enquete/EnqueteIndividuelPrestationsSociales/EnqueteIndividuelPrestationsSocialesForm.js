@@ -1,31 +1,40 @@
-import { Field, Heading1, Heading3, InlineError } from "@emjpm/ui";
+import { Field, Heading1, Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { enquetePrestationsSocialesSchema } from "../../../lib/validationSchemas/enquetePrestationsSocialesSchema";
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
-export const EnqueteIndividuelPrestationsSocialesForm = props => {
-  const { data = {}, goToPrevPage } = props;
-  const { aah = "", pch = "", asi = "", rsa = "", als_apl = "", aspa = "", apa = "" } = data;
+function mapDataPropsToFormValues(data) {
+  return {
+    aah: data.aah || "",
+    pch: data.pch || "",
+    asi: data.asi || "",
+    rsa: data.rsa || "",
+    als_apl: data.als_apl || "",
+    aspa: data.aspa || "",
+    apa: data.apa || ""
+  };
+}
 
-  const { handleSubmit, handleChange, values, errors } = useFormik({
+export const EnqueteIndividuelPrestationsSocialesForm = props => {
+  const { data = {}, goToPrevPage, loading = false } = props;
+
+  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    initialValues: {
-      aah: aah,
-      pch: pch,
-      asi: asi,
-      rsa: rsa,
-      als: als_apl,
-      aspa: aspa,
-      apa: apa
-    }
+    initialValues: mapDataPropsToFormValues(data),
+    validationSchema: enquetePrestationsSocialesSchema
   });
+
+  useEffect(() => {
+    setValues(mapDataPropsToFormValues(data));
+  }, [data, setValues]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -54,7 +63,6 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 hasError={!!errors.aah}
                 onChange={handleChange}
               />
-              <InlineError message={errors.aah} fieldId="aah" />
             </Field>
 
             <Field>
@@ -70,7 +78,6 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 onChange={handleChange}
                 hasError={!!errors.pch}
               />
-              <InlineError message={errors.pch} fieldId="pch" />
             </Field>
 
             <Field>
@@ -86,7 +93,6 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 onChange={handleChange}
                 hasError={!!errors.asi}
               />
-              <InlineError message={errors.asi} fieldId="asi" />
             </Field>
 
             <Field>
@@ -102,7 +108,6 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 hasError={!!errors.rsa}
                 onChange={handleChange}
               />
-              <InlineError message={errors.rsa} fieldId="rsa" />
             </Field>
           </Box>
           <Box>
@@ -111,15 +116,14 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 {"ALS ou APL"}
               </Label>
               <SmallInput
-                id="als"
-                name="als"
+                id="als_apl"
+                name="als_apl"
                 placeholder=""
                 type="number"
-                value={values.als}
-                hasError={!!errors.als}
+                value={values.als_apl}
+                hasError={!!errors.als_apl}
                 onChange={handleChange}
               />
-              <InlineError message={errors.als} fieldId="als" />
             </Field>
             <Field>
               <Label mb={1} htmlFor={"aspa"}>
@@ -134,7 +138,6 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 hasError={!!errors.aspa}
                 onChange={handleChange}
               />
-              <InlineError message={errors.aspa} fieldId="aspa" />
             </Field>
 
             <Field>
@@ -150,13 +153,12 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 hasError={!!errors.apa}
                 onChange={handleChange}
               />
-              <InlineError message={errors.apa} fieldId="apa" />
             </Field>
           </Box>
         </Flex>
 
         <Box mt={4}>
-          <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+          <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
         </Box>
       </Box>
     </form>
