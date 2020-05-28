@@ -62,12 +62,6 @@ const ServiceEdit = () => {
     <Card m="1" mt="5" p="0">
       <Flex flexWrap="wrap">
         <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
-          <Box height="80px">
-            <Heading4>{`Information de votre service`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Information du service`}
-            </Text>
-          </Box>
           <Box height="220px">
             <Heading4>{`Information du responsable`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
