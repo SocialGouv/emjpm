@@ -2,6 +2,7 @@ var XLSX = require("xlsx");
 var parserAgrementsFormations = require("./enqueteExcelParserAgrementsFormations");
 var parserInformationsMandataire = require("./enqueteExcelParserInformationsMandataire");
 var parserPopulations = require("./enqueteExcelParserPopulations");
+var parserPrestationsSociales = require("./enqueteExcelParserPrestationsSociales");
 
 var HttpError = require("../../../../utils/error/HttpError");
 const logger = require("../../../../utils/logger");
@@ -32,6 +33,9 @@ const parse = async ({ content }) => {
     populations: parserPopulations.parse(workbook.Sheets["Populations "]),
     agrementsFormations: parserAgrementsFormations.parse(
       workbook.Sheets["info mandataire-exerc. activité"]
+    ),
+    prestationsSociales: parserPrestationsSociales.parse(
+      workbook.Sheets["Prestations sociales "]
     )
   };
 
