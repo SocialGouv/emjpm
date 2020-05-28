@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
-export const EnqueteIndividuelWelcome = props => {
+export const EnquetePreposeSubmit = props => {
   const { enquete, enqueteReponse } = props;
 
   const hasError = useMemo(() => {
@@ -32,4 +32,4 @@ export const EnqueteIndividuelWelcome = props => {
   );
 };
 
-export default EnqueteIndividuelWelcome;
+export default EnquetePreposeSubmit;

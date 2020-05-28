@@ -1,99 +1,90 @@
+// import { Heading1 } from "@emjpm/ui";
+import { useRouter } from "next/router";
 import React from "react";
+// import { useQuery } from "react-apollo";
+import { Box, Flex } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
-import {
-  EnqueteActiviteAccompagnementJudiciaire,
-  EnqueteActiviteCuratelleBiens,
-  EnqueteActiviteCuratellePersonne,
-  EnqueteActiviteCuratelleRenforcee,
-  EnqueteActiviteCuratelleSimple,
-  EnqueteActiviteRevisionMesures,
-  EnqueteActiviteTutelle
-} from "../EnqueteActivite";
-import { EnquetePopulationsCuratelle, EnquetePopulationsTutelle } from "../EnquetePopulations";
-import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
+// import { EnquetePopulationsCuratelle, EnquetePopulationsTutelle } from "../EnquetePopulations";
+// import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
+import { enquetePreposeMenuBuilder } from "./enquetePreposeMenuBuilder.service";
 
 export const EnquetePrepose = props => {
-  const { mandataireId } = props;
+  const router = useRouter();
+  const { enquete, mandataireId, currentStep } = props;
+  const { id: enqueteId } = enquete;
 
-  //   const { data, loading, error } = useQuery(ENQUETE_MANDATAIRE_PREPOSE, {
-  //     variables: { enqueteId, mandataireId }
-  //   });
+  const data = {};
 
-  //   if (loading) {
-  //     return <Box mt={4}>Chargement...</Box>;
-  //   }
+  // const { data, loading, error } = useQuery(ENQUETE_MANDATAIRE_PREPOSE, {
+  //   variables: { enqueteId, mandataireId }
+  // });
 
-  //   if (error) {
-  //     return (
-  //       <Box mt={4}>
-  //         <Heading1 mb={4}>Oups</Heading1>
-  //         <Box>Une erreur est survenue. Merci de réessayer ultérieurement.</Box>
-  //       </Box>
-  //     );
-  //   }
+  // if (loading) {
+  //   return <Box mt={4}>Chargement...</Box>;
+  // }
 
-  const MENU_SECTIONS = [
-    {
-      steps: [
-        {
-          label: "Bienvenue",
-          component: EnquetePreposeWelcome
-        }
-      ]
-    },
-    {
-      label: "Votre activité",
-      steps: [
-        {
-          label: "Curatelle renforcée",
-          component: EnqueteActiviteCuratelleRenforcee,
-          isValid: false
-        },
-        {
-          label: "Curatelle simple",
-          component: EnqueteActiviteCuratelleSimple,
-          isValid: false
-        },
-        {
-          label: "Tutelle",
-          component: EnqueteActiviteTutelle,
-          isValid: false
-        },
-        {
-          label: "Mesure d'accompagnement judiciaire",
-          component: EnqueteActiviteAccompagnementJudiciaire
-        },
-        {
-          label: "Tutelle ou curatelle aux biens",
-          component: EnqueteActiviteCuratelleBiens
-        },
-        {
-          label: "Tutelle ou curatelle à la personne",
-          component: EnqueteActiviteCuratellePersonne
-        },
-        {
-          label: "Révision de mesures",
-          component: EnqueteActiviteRevisionMesures
-        }
-      ]
-    },
-    {
-      label: "Populations",
-      steps: [
-        { label: "Curatelle", component: EnquetePopulationsCuratelle, isValid: false },
-        { label: "Tutelle", component: EnquetePopulationsTutelle },
-        { label: "Mesure d'accompagnement de justice", component: EnquetePopulationsTutelle },
-        { label: "Sauvegarde de justice", component: EnquetePopulationsTutelle },
-        { label: "Autre", component: EnquetePopulationsTutelle }
-      ]
-    },
-    {
-      steps: [{ label: "Envoi de vos réponses", component: null }]
+  // if (error) {
+  //   return (
+  //     <Box mt={4}>
+  //       <Heading1 mb={4}>Oups</Heading1>
+  //       <Box>Une erreur est survenue. Merci de réessayer ultérieurement.</Box>
+  //     </Box>
+  //   );
+  // }
+
+  const enqueteReponse = data ? data.enquete_individuel || {} : {};
+
+  const sections = enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse);
+
+  const section = sections[currentStep.step];
+  const ComponentForm = section.steps[currentStep.substep || 0].component;
+
+  return (
+    <Flex>
+      <Box>
+        <MenuStepper sections={sections} currentStep={currentStep} goToStep={goToStep} />
+      </Box>
+      <Box py={"50px"} pl={"35px"} flex={1}>
+        <ComponentForm
+          enquete={enquete}
+          enqueteReponse={enqueteReponse}
+          mandataireId={mandataireId}
+          goToPrevPage={() => goToPrevPage(sections, currentStep)}
+          goToNextPage={() => goToNextPage(sections, currentStep)}
+        />
+      </Box>
+    </Flex>
+  );
+
+  async function goToStep({ step, substep }) {
+    await router.push("/mandataires/enquetes/[enquete_id]", {
+      pathname: `/mandataires/enquetes/${enqueteId}`,
+      query: { step, substep }
+    });
+    window.scrollTo(0, 0);
+  }
+
+  async function goToNextPage(sections, currentStep) {
+    const { step, substep } = currentStep;
+    const currentSection = sections[step];
+
+    if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
+      await goToStep({ step: step + 1, substep: 0 });
+    } else {
+      await goToStep({ step, substep: substep + 1 });
     }
-  ];
+  }
 
-  return <MenuStepper enqueteReponse={{}} mandataireId={mandataireId} sections={MENU_SECTIONS} />;
+  async function goToPrevPage(sections, currentStep) {
+    const { step, substep } = currentStep;
+    if (substep > 0) {
+      await goToStep({ step, substep: substep - 1 });
+    } else if (currentStep.step - 1 >= 0) {
+      const substep = sections[currentStep.step - 1].steps.length;
+      await goToStep({ step: currentStep.step - 1, substep: substep - 1 });
+    }
+  }
 };
 
 export default EnquetePrepose;

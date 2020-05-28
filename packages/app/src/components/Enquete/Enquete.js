@@ -41,7 +41,7 @@ export const Enquete = ({ id, currentStep }) => {
       )}
 
       {type === "prepose" && (
-        <EnquetePrepose mandataireId={mandataire.id} enqueteId={id} currentStep={currentStep} />
+        <EnquetePrepose mandataireId={mandataire.id} enquete={enquete} currentStep={currentStep} />
       )}
     </Fragment>
   );
