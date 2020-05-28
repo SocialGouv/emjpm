@@ -36,15 +36,11 @@ export const EnqueteIndividuelPrestationsSociales = props => {
     ]
   });
 
-  if (loading) {
-    return <Box p={4}>Chargement...</Box>;
-  }
-
-  const { enquete_reponses_prestations_sociales_by_pk: prestationSociales = {} } = data;
-
+  const prestationsSociales = data ? data.enquete_reponses_prestations_sociales_by_pk || {} : {};
   return (
     <EnqueteIndividuelPrestationsSocialesForm
-      data={prestationSociales}
+      loading={loading}
+      data={prestationsSociales}
       goToPrevPage={goToPrevPage}
       handleSubmit={async values => {
         await updateEnquete({
