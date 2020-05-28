@@ -8,6 +8,6 @@ exports.up = async function(knex) {
 };
 
 exports.down = async function(knex) {
-  await knex.raw("CREATE UNIQUE INDEX enquete_reponses_mandataire;");
-  await knex.raw("CREATE UNIQUE INDEX enquete_reponses_service;");
+  await knex.raw("DROP INDEX enquete_reponses_mandataire;");
+  await knex.raw("DROP INDEX enquete_reponses_service;");
 };

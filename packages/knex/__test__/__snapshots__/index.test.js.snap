@@ -580,37 +580,13 @@ Object {
     "nullable": true,
     "type": "integer",
   },
-  "cnc_dpf_annee_obtention": Object {
+  "cnc_annee_obtention": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "cnc_dpf_heure_formation": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "cnc_maj_annee_obtention": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "cnc_maj_heure_formation": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "cnc_mjpm_annee_obtention": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "cnc_mjpm_heure_formation": Object {
+  "cnc_heures_formation": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
@@ -666,27 +642,69 @@ Object {
   },
   "nb_departements": Object {
     "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "nb_mesures_dep_autres": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "nb_mesures_dep_finance": Object {
+    "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
   "niveau_qualification": Object {
     "defaultValue": null,
-    "maxLength": null,
+    "maxLength": 255,
     "nullable": true,
-    "type": "integer",
-  },
-  "niveau_qualification_secretaire_spe": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
+    "type": "character varying",
   },
   "secretaire_specialise": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "boolean",
+  },
+  "secretaire_specialise_etp_n1": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "secretaire_specialise_etp_n2": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "secretaire_specialise_etp_n3": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "secretaire_specialise_etp_n4": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "secretaire_specialise_etp_n5": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "secretaire_specialise_etp_n6": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
   },
 }
 `;
