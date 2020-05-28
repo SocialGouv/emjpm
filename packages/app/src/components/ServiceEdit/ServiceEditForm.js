@@ -15,7 +15,6 @@ const ServiceEditForm = props => {
       competences: service.competences || "",
       dispo_max: service.dispo_max || "",
       email: service.email || "",
-      etablissement: service.etablissement || "",
       information: service.information || "",
       nom: service.nom || "",
       prenom: service.prenom || "",
@@ -26,17 +25,6 @@ const ServiceEditForm = props => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Field>
-        <Input
-          value={formik.values.etablissement}
-          id="etablissement"
-          name="etablissement"
-          hasError={formik.errors.etablissement && formik.touched.etablissement}
-          onChange={formik.handleChange}
-          placeholder="Nom du service"
-        />
-        <InlineError message={formik.errors.etablissement} fieldId="etablissement" />
-      </Field>
       <Field>
         <Input
           value={formik.values.nom}
