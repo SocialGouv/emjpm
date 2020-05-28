@@ -20,6 +20,7 @@ import {
   EnquetePopulationsSauvegardeJustice,
   EnquetePopulationsTutelle
 } from "../EnquetePopulations";
+import EnqueteIndividuelSubmit from "./EnqueteIndividuelSubmit";
 import { EnqueteIndividuelWelcome } from "./EnqueteIndividuelWelcome";
 
 export const enqueteIndividuelMenuBuilder = {
@@ -161,7 +162,7 @@ function buildMenuSections(enqueteReponse) {
       steps: [{ label: "Prestations sociales", component: EnqueteIndividuelPrestationsSociales }]
     },
     {
-      steps: [{ label: "Envoi de vos réponses", component: null }]
+      steps: [{ label: "Envoi de vos réponses", component: EnqueteIndividuelSubmit }]
     }
   ];
 }
