@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.35.0](https://github.com/SocialGouv/emjpm/compare/v25.34.0...v25.35.0) (2020-05-28)
+
+
+### Bug Fixes
+
+* **test:** fix sql down script and update snap ([9d940d1](https://github.com/SocialGouv/emjpm/commit/9d940d1b006a062c7a3868cf95323c45c6b81da4))
+
+
+### Features
+
+* **enquete:** import individuel tab agrements formations [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1846](https://github.com/SocialGouv/emjpm/issues/1846)) ([ca4dc5e](https://github.com/SocialGouv/emjpm/commit/ca4dc5e10067e212f90d6426ed77a0536f26126c))
+* **enquete:** populations form ([#1842](https://github.com/SocialGouv/emjpm/issues/1842)) ([1323b38](https://github.com/SocialGouv/emjpm/commit/1323b389c26d64c8683be5d13198f2550efc55b5))
+* **liste-blanche:** add liste blanche view for admin ([#1856](https://github.com/SocialGouv/emjpm/issues/1856)) ([0b110e3](https://github.com/SocialGouv/emjpm/commit/0b110e3bd794725e00254d6b23091bcb12d36684))
+
+
+
+
+
 # [25.34.0](https://github.com/SocialGouv/emjpm/compare/v25.33.0...v25.34.0) (2020-05-26)
 
 
