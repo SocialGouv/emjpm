@@ -34,9 +34,7 @@ export const EnquetePrepose = props => {
   // }
 
   const enqueteReponse = data ? data.enquete_individuel || {} : {};
-
   const sections = enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse);
-
   const section = sections[currentStep.step];
   const ComponentForm = section.steps[currentStep.substep || 0].component;
 

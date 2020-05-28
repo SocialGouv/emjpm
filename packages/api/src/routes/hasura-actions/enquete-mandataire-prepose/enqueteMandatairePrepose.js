@@ -4,6 +4,7 @@ const {
 } = require("../../../utils/graphql-fetcher");
 const { ENQUETE_REPONSE_MANDATAIRE_PREPOSE } = require("./queries");
 const logger = require("../../../utils/logger");
+const { createEmptyEnqueteReponse } = require("./requests");
 
 async function getEnqueteReponseMandatairePrepose({ enqueteId, mandataireId }) {
   try {
@@ -30,18 +31,20 @@ async function getEnqueteReponseMandatairePrepose({ enqueteId, mandataireId }) {
 }
 
 async function initEnqueteMandatairePrepose({ enqueteId, mandataireId }) {
-  const enqueteReponseMandatairePrepose = await getEnqueteReponseMandatairePrepose(
-    {
+  let enqueteReponse = await getEnqueteReponseMandatairePrepose({
+    enqueteId,
+    mandataireId
+  });
+
+  if (!enqueteReponse) {
+    const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
       enqueteId,
       mandataireId
-    }
-  );
-
-  if (!enqueteReponseMandatairePrepose) {
-    // TODO(remiroyc): create empty enquete reponse
+    });
+    enqueteReponse = insert_enquete_reponses_one;
   }
 
-  return enqueteReponseMandatairePrepose;
+  return enqueteReponse;
 }
 
 module.exports = { initEnqueteMandatairePrepose };
