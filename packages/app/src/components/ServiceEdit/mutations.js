@@ -7,7 +7,6 @@ export const EDIT_ANTENNE = gql`
     $dispo_max: Int
     $email: String
     $competences: String
-    $etablissement: String
     $nom: String
     $prenom: String
     $service_id: Int
@@ -26,7 +25,6 @@ export const EDIT_ANTENNE = gql`
         prenom: $prenom
         telephone: $telephone
         code_postal: $code_postal
-        etablissement: $etablissement
         competences: $competences
         ville: $ville
         latitude: $latitude
