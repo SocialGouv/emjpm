@@ -17,21 +17,35 @@ const strategy = new CustomStrategy(function(req, done) {
 });
 
 function buildHasuraUser(req) {
-  if (req && req.body && req.body.session_variables) {
+  const buildHasuraUser = session_variables => {
     const {
       "x-hasura-role": role,
       "x-hasura-user-id": userId,
       "x-hasura-service-id": serviceId
-    } = req.body.session_variables;
+    } = session_variables;
 
-    const hasuraUser = {
+    return {
       __auth_type__: "hasura",
       role,
       userId: userId !== "null" ? parseInt(userId) : undefined,
       serviceId: serviceId !== "null" ? parseInt(serviceId) : undefined
     };
-    return hasuraUser;
+  };
+  if (!req) {
+    return false;
   }
+  if (!req.body) {
+    return false;
+  }
+
+  const body = req.body;
+
+  if (body.session_variables) {
+    return buildHasuraUser(req.body.session_variables);
+  } else if (body.event && body.event.session_variables) {
+    return buildHasuraUser(body.event.session_variables);
+  }
+
   return false;
 }
 
