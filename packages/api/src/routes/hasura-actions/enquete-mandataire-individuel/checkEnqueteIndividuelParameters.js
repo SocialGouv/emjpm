@@ -7,4 +7,16 @@ async function checkEnqueteIndividuelParameters(req, res) {
   }
 }
 
-module.exports = checkEnqueteIndividuelParameters;
+async function checkEnqueteIndividuelSubmitParameters(req, res) {
+  const { id } = req.body.input;
+  if (!id) {
+    res.status(422).json({
+      message: "Invalid parameters: id is required"
+    });
+  }
+}
+
+module.exports = {
+  checkEnqueteIndividuelParameters,
+  checkEnqueteIndividuelSubmitParameters
+};

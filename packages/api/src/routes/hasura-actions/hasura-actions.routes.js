@@ -7,11 +7,35 @@ const actionsEnqueteImporter = require("./enquete-import/actionsEnqueteImporter"
 const checkImportEnqueteParameters = require("./enquete-import/checkImportEnqueteParameters");
 const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
 const {
-  initEnqueteMandataireIndividuel
+  initEnqueteMandataireIndividuel,
+  submitEnqueteMandataireIndividuel
 } = require("./enquete-mandataire-individuel/enqueteMandataireIndividuel");
-const checkEnqueteIndividuelParameters = require("./enquete-mandataire-individuel/checkEnqueteIndividuelParameters");
+const {
+  checkEnqueteIndividuelParameters,
+  checkEnqueteIndividuelSubmitParameters
+} = require("./enquete-mandataire-individuel/checkEnqueteIndividuelParameters");
 
 const router = express.Router();
+
+router.post(
+  "/enquetes/mandataire-individuel/submit",
+  async (req, res, next) => {
+    await checkEnqueteIndividuelSubmitParameters(req, res);
+    try {
+      const { id } = req.body.input;
+      const enqueteReponse = await submitEnqueteMandataireIndividuel(id);
+
+      return res.json({
+        enquete_id: enqueteReponse.enquete_id,
+        enquete_reponses_id: enqueteReponse.id,
+        submitted_at: enqueteReponse.submitted_at
+      });
+    } catch (err) {
+      logger.error(err);
+      next(err);
+    }
+  }
+);
 
 router.post("/enquetes/mandataire-individuel", async (req, res, next) => {
   await checkEnqueteIndividuelParameters(req, res);
