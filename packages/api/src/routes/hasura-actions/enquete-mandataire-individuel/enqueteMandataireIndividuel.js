@@ -1,5 +1,16 @@
-const { getEnqueteReponse, createEmptyEnqueteReponse } = require("./requests");
+const {
+  getEnqueteReponse,
+  createEmptyEnqueteReponse,
+  submitEnqueteReponse
+} = require("./requests");
 const enqueteMandataireIndividuelStatus = require("./enqueteMandataireIndividuelStatus");
+
+async function submitEnqueteMandataireIndividuel(id) {
+  // TODO(remiroyc): check if all form sections are valids
+
+  const enqueteReponse = await submitEnqueteReponse(id);
+  return enqueteReponse;
+}
 
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   let enqueteReponse = await getEnqueteReponse({
@@ -74,6 +85,7 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
 
   return {
     ...validations,
+    submitted_at: enqueteReponse.submitted_at,
     enquete_id: enqueteReponse.enquete_id,
     enquete_reponses_id: enqueteReponse.id,
     enquete_reponses_informations_mandataire_id:
@@ -88,4 +100,7 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   };
 }
 
-module.exports = { initEnqueteMandataireIndividuel };
+module.exports = {
+  initEnqueteMandataireIndividuel,
+  submitEnqueteMandataireIndividuel
+};

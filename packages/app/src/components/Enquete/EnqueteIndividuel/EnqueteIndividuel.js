@@ -2,7 +2,7 @@ import { Heading1 } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-apollo";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
 import { enqueteIndividuelMenuBuilder } from "./enqueteIndividuelMenuBuilder.service";
@@ -32,8 +32,24 @@ export const EnqueteIndividuel = props => {
 
   const enqueteReponse = data ? data.enquete_individuel || {} : {};
 
-  const sections = enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse);
+  if (enqueteReponse.submitted_at) {
+    return (
+      <Box py={"50px"}>
+        <Heading1 textAlign="center">
+          {enqueteReponse.submitted_at
+            ? `Vos réponses à l’enquête ${enquete.annee} ont bien été envoyées.`
+            : "Envoi de vos réponses"}
+        </Heading1>
+        <Box sx={{ textAlign: "center", lineHeight: "30px", marginTop: 4 }}>
+          <Text>Nous vous remercions pour le temps que vous nous avez accordé.</Text>
+          <Text>À bientôt,</Text>
+          <Text>Votre direction régionale</Text>
+        </Box>
+      </Box>
+    );
+  }
 
+  const sections = enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse);
   const section = sections[currentStep.step];
   const ComponentForm = section.steps[currentStep.substep || 0].component;
 
