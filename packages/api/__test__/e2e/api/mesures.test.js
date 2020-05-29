@@ -118,9 +118,6 @@ describe("PUT /api/editors/mesures", () => {
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` })
       .send({ annee: "1983" });
-
-    console.log(response.body);
-
     expect(response.status).toBe(200);
   });
 });
