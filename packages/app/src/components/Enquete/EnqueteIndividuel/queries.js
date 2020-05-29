@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const ENQUETE_MANDATAIRE_INDIVIDUEL = gql`
   query enquete_mandataire_individuel($enqueteId: Int!, $mandataireId: Int!) {
     enquete_individuel(enqueteId: $enqueteId, mandataireId: $mandataireId) {
+      submitted_at
       enquete_id
       enquete_reponses_id
       enquete_reponses_informations_mandataire_id
