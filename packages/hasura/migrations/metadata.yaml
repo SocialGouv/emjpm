@@ -4401,6 +4401,21 @@ actions:
     type: query
   permissions:
   - role: individuel
+- name: submit_enquete_individuel
+  definition:
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/mandataire-individuel/submit'
+    output_type: EnqueteReponseSubmitted
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+    arguments:
+    - name: id
+      type: Int!
+    type: mutation
+    kind: synchronous
+  permissions:
+  - role: individuel
 - name: upload_enquete_file
   definition:
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/upload'
@@ -4457,6 +4472,8 @@ custom_types:
     fields:
     - name: enquete_id
       type: Int!
+    - name: submitted_at
+      type: timestamptz
     - name: enquete_reponses_id
       type: Int!
     - name: enquete_reponses_informations_mandataire_id
@@ -4507,3 +4524,11 @@ custom_types:
       type: Int!
     - name: submitted_at
       type: timestamptz!
+  - name: EnqueteReponseSubmitted
+    fields:
+    - name: enquete_id
+      type: Int!
+    - name: enquete_reponses_id
+      type: Int!
+    - name: submitted_at
+      type: timestamptz

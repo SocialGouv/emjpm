@@ -3,8 +3,6 @@ const logger = require("../../../../utils/logger");
 const excelParser = require("./enqueteExcelParserUtil");
 
 function parse(worksheet) {
-  console.log('worksheet["G9"]', worksheet["G9"]);
-
   try {
     const rawData = {
       aah: excelParser.number(worksheet["D7"]),
