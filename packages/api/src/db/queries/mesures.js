@@ -1,9 +1,10 @@
-const { Service } = require("../../../../models/Service");
-const { Mandataire } = require("../../../../models/Mandataire");
 const { raw } = require("objection");
-const { Mesure } = require("../../../../models/Mesure");
-const { ServiceAntenne } = require("../../../../models/ServiceAntenne");
-const { Tis } = require("../../../../models/Tis");
+
+const { Service } = require("../../models/Service");
+const { Mandataire } = require("../../models/Mandataire");
+const { Mesure } = require("../../models/Mesure");
+const { ServiceAntenne } = require("../../models/ServiceAntenne");
+const { Tis } = require("../../models/Tis");
 
 const getMesureStates = async (mandataire_id, service_id, antenne_id) => {
   const filter = {};
@@ -101,12 +102,10 @@ async function findAntenne({ service_id, antenne_name }, cache) {
   return antenne;
 }
 
-const actionsMesuresImporterMesureRepository = {
+module.exports = {
   getMesureStates,
   updateServiceMesureStates,
   updateMandataireMesureStates,
   findTribunalBySiret,
   findAntenne
 };
-
-module.exports = actionsMesuresImporterMesureRepository;

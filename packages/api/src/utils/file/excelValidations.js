@@ -20,11 +20,9 @@ function excelFloat() {
     .transform(x => (x && !isNaN(parseFloat(x)) ? parseFloat(x) : undefined));
 }
 
-const enqueteExcelSchemaUtil = {
+module.exports = {
   excelSelect,
   excelBoolean,
   excelInteger,
   excelFloat
 };
-
-module.exports = enqueteExcelSchemaUtil;

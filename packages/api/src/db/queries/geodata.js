@@ -1,8 +1,8 @@
 const {
   GeolocalisationCodePostal
-} = require("../../../../models/GeolocalisationCodePostal");
-const getRegionCode = require("../../../../utils/getRegionCode");
-const { Department } = require("../../../../models/Departments");
+} = require("../../models/GeolocalisationCodePostal");
+const getRegionCode = require("../../utils/getRegionCode");
+const { Department } = require("../../models/Departments");
 
 const getGeoDatas = async (code_postal, ville) => {
   if (!code_postal) {
@@ -70,9 +70,7 @@ async function findDepartment({
   return department;
 }
 
-const actionsMesuresImporterGeoRepository = {
+module.exports = {
   getGeoDatas,
   findDepartment
 };
-
-module.exports = actionsMesuresImporterGeoRepository;

@@ -1,14 +1,12 @@
 const excelParser = require("../../../utils/file/excelParser");
 const logger = require("../../../utils/logger");
-
 const { Service } = require("../../../models/Service");
-const actionsMesuresImporterGeoRepository = require("./repository/actionsMesuresImporterGeoRepository");
-const actionsMesuresImporterMesureRepository = require("./repository/actionsMesuresImporterMesureRepository");
+const geodataRepository = require("../../../db/queries/geodata");
+const mesuresRepository = require("../../../db/queries/mesures");
 const { Mandataire } = require("../../../models/Mandataire");
-const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresImporterSchemaValidator");
+const actionsMesuresImporterSchemaValidator = require("./validation-schemas/actionsMesuresImporterSchemaValidator");
 const { Tis } = require("../../../models/Tis");
 const { Mesure } = require("../../../models/Mesure");
-
 const configuration = require("../../../env");
 const inseeAPI = require("../../../utils/insee-api");
 
@@ -173,13 +171,9 @@ const importMesures = async ({
     }
 
     if (mandataire) {
-      await actionsMesuresImporterMesureRepository.updateMandataireMesureStates(
-        mandataire.id
-      );
+      await mesuresRepository.updateMandataireMesureStates(mandataire.id);
     } else if (service) {
-      await actionsMesuresImporterMesureRepository.updateServiceMesureStates(
-        service.id
-      );
+      await mesuresRepository.updateServiceMesureStates(service.id);
     }
   }
 
@@ -198,7 +192,7 @@ const prepareMesure = async (
     tribunal_siret
   } = mesureDatas;
 
-  const department = await actionsMesuresImporterGeoRepository.findDepartment({
+  const department = await geodataRepository.findDepartment({
     mandataire,
     service,
     code_postal,
@@ -207,13 +201,13 @@ const prepareMesure = async (
 
   const pays = getMesurePays(code_postal);
 
-  const {
-    latitude,
-    longitude
-  } = await actionsMesuresImporterGeoRepository.getGeoDatas(code_postal, ville);
+  const { latitude, longitude } = await geodataRepository.getGeoDatas(
+    code_postal,
+    ville
+  );
 
   // ti
-  let ti = await actionsMesuresImporterMesureRepository.findTribunalBySiret(
+  let ti = await mesuresRepository.findTribunalBySiret(
     tribunal_siret,
     cache.tribunalBySiret
   );
@@ -221,11 +215,11 @@ const prepareMesure = async (
   if (!ti && configuration.inseeAPITribunal) {
     const tiDatas = await inseeAPI.fetchTribunalDatas(tribunal_siret);
     if (tiDatas) {
-      const tiGeoDatas = await actionsMesuresImporterGeoRepository.getGeoDatas(
+      const tiGeoDatas = await geodataRepository.getGeoDatas(
         tiDatas.code_postal,
         tiDatas.ville
       );
-      const tiDepartment = await actionsMesuresImporterGeoRepository.findDepartmentFromPostalCode(
+      const tiDepartment = await geodataRepository.findDepartmentFromPostalCode(
         tiDatas.code_postal,
         cache.departmentByRegionCode
       );
@@ -250,7 +244,7 @@ const prepareMesure = async (
     // if any arror yet: not necessary to provide invalid antennes names
     const antenne_name = mesureDatas.antenne;
     if (antenne_name) {
-      const antenne = await actionsMesuresImporterMesureRepository.findAntenne(
+      const antenne = await mesuresRepository.findAntenne(
         {
           antenne_name,
           service_id: serviceId

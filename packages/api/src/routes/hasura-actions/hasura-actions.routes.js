@@ -1,15 +1,24 @@
 const express = require("express");
 
 const logger = require("../../utils/logger");
-const actionsMesuresImporter = require("./mesures-import/actionsMesuresImporter");
-const checkImportMesuresParameters = require("./mesures-import/checkImportMesuresParameters");
-const actionsEnqueteImporter = require("./enquete-import/actionsEnqueteImporter");
-const checkImportEnqueteParameters = require("./enquete-import/checkImportEnqueteParameters");
+const { importMesuresFile } = require("./mesures-import");
+const {
+  checkEnqueteIndividuelParameters,
+  checkImportMesuresParameters,
+  checkImportEnqueteParameters
+} = require("./checkParameters");
+
+const {
+  importEnqueteMandatairePreposeFile
+} = require("./enquete-mandataire-prepose/import");
+const {
+  importEnqueteMandataireIndividuelFile
+} = require("./enquete-mandataire-individuel/import");
+
 const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
 const {
   initEnqueteMandataireIndividuel
 } = require("./enquete-mandataire-individuel/enqueteMandataireIndividuel");
-const checkEnqueteIndividuelParameters = require("./enquete-mandataire-individuel/checkEnqueteIndividuelParameters");
 
 const router = express.Router();
 
@@ -36,9 +45,24 @@ router.post(
     try {
       const importMesuresParameters = await checkImportMesuresParameters(req);
 
-      const importSummary = await actionsMesuresImporter.importMesuresFile(
-        importMesuresParameters
-      );
+      const importSummary = await importMesuresFile(importMesuresParameters);
+
+      return res.status(201).json({
+        data: JSON.stringify(importSummary)
+      });
+    } catch (err) {
+      return next(err);
+    }
+  },
+  hasuraActionErrorHandler("Unexpected error processing file")
+);
+
+router.post(
+  "/enquetes/mandataire-prepose/upload",
+  async (req, res, next) => {
+    try {
+      // const importEnqueteParameters = await checkImportEnqueteParameters(req);
+      const importSummary = await importEnqueteMandatairePreposeFile();
 
       return res.status(201).json({
         data: JSON.stringify(importSummary)
@@ -56,7 +80,7 @@ router.post(
   async (req, res, next) => {
     try {
       const importEnqueteParameters = await checkImportEnqueteParameters(req);
-      const importSummary = await actionsEnqueteImporter.importEnqueteFile(
+      const importSummary = await importEnqueteMandataireIndividuelFile(
         importEnqueteParameters
       );
 

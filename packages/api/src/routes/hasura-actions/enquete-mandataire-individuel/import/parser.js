@@ -1,8 +1,9 @@
 var XLSX = require("xlsx");
-var parserAgrementsFormations = require("./enqueteExcelParserAgrementsFormations");
-var parserInformationsMandataire = require("./enqueteExcelParserInformationsMandataire");
-var parserPopulations = require("./enqueteExcelParserPopulations");
-var parserPrestationsSociales = require("./enqueteExcelParserPrestationsSociales");
+
+var parserAgrementsFormations = require("./tabs/agrementsFormations");
+var parserInformations = require("./tabs/informationsGenerales");
+var parserPopulations = require("./tabs/populations");
+var parserPrestationsSociales = require("./tabs/prestationsSociales");
 
 var HttpError = require("../../../../utils/error/HttpError");
 const logger = require("../../../../utils/logger");
@@ -27,7 +28,7 @@ const parse = async ({ content }) => {
   ]);
 
   const res = {
-    informationsMandataire: parserInformationsMandataire.parse(
+    informationsMandataire: parserInformations.parse(
       workbook.Sheets["info mandataire-exerc. activité"]
     ),
     populations: parserPopulations.parse(workbook.Sheets["Populations "]),
@@ -60,8 +61,6 @@ function checkRequiredTabs(workbook, tabNames) {
   });
 }
 
-const enqueteExcelParser = {
+module.exports = {
   parse
 };
-
-module.exports = enqueteExcelParser;

@@ -1,16 +1,17 @@
 const {
   getEnqueteReponse,
   createEmptyEnqueteReponse
-} = require("../enquete-mandataire-individuel/requests");
-const enqueteExcelParser = require("./parser/enqueteExcelParser");
-const logger = require("../../../utils/logger");
-const enqueteImportRepository = require("./repository/enqueteImportRepository");
+} = require("../../enquete-mandataire-individuel/requests");
+const parser = require("./parser");
+const logger = require("../../../../utils/logger");
+const {
+  saveInformationsMandataire,
+  saveEnqueteReponsesAgrementsFormations,
+  savePopulations,
+  savePrestationsSociales
+} = require("../../../../db/queries/enquete-reponses");
 
-const actionsEnqueteImporter = {
-  importEnqueteFile
-};
-
-async function importEnqueteFile({
+async function importEnqueteMandataireIndividuelFile({
   file: { content },
   // eslint-disable-next-line no-unused-vars
   importContext: { enqueteId, userId, service, mandataire }
@@ -23,7 +24,7 @@ async function importEnqueteFile({
     populations,
     agrementsFormations,
     prestationsSociales
-  } = await enqueteExcelParser.parse({
+  } = await parser.parse({
     content
   });
 
@@ -33,21 +34,21 @@ async function importEnqueteFile({
   });
 
   // save data to database
-  await enqueteImportRepository.saveInformationsMandataire(
+  await saveInformationsMandataire(
     enqueteReponse.enquete_reponses_informations_mandataire_id,
     informationsMandataire
   );
-  await enqueteImportRepository.saveEnqueteReponsesAgrementsFormations(
+  await saveEnqueteReponsesAgrementsFormations(
     enqueteReponse.enquete_reponses_agrements_formations_id,
     agrementsFormations
   );
 
-  const populationsDb = await enqueteImportRepository.savePopulations(
+  const populationsDb = await savePopulations(
     enqueteReponse.enquete_reponses_populations_id,
     populations
   );
 
-  await enqueteImportRepository.savePrestationsSociales(
+  await savePrestationsSociales(
     enqueteReponse.enquete_reponses_prestations_sociale_id,
     prestationsSociales
   );
@@ -87,6 +88,7 @@ async function importEnqueteFile({
       importSummary.errors.length === 0 ? importSummary.invalidAntenneNames : []
   };
 }
+
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   let enqueteReponse = await getEnqueteReponse({
     enqueteId,
@@ -102,4 +104,5 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   }
   return enqueteReponse;
 }
-module.exports = actionsEnqueteImporter;
+
+module.exports = importEnqueteMandataireIndividuelFile;
