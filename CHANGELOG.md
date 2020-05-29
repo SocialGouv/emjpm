@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.35.1](https://github.com/SocialGouv/emjpm/compare/v25.35.0...v25.35.1) (2020-05-29)
+
+
+### Bug Fixes
+
+* **auth-hasura-webhook-strat:** look up session-variables ([#1857](https://github.com/SocialGouv/emjpm/issues/1857)) ([b054f37](https://github.com/SocialGouv/emjpm/commit/b054f37aec538ed6e66e3ddd826bbe3f688bd195))
+* **mesure-cancel:** remove unseless gql mutation ([5ccd750](https://github.com/SocialGouv/emjpm/commit/5ccd750111fd26786b097532070649d46762d641))
+
+
+
+
+
 # [25.35.0](https://github.com/SocialGouv/emjpm/compare/v25.34.0...v25.35.0) (2020-05-28)
 
 
