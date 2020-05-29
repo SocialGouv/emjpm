@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.35.1](https://github.com/SocialGouv/emjpm/compare/v25.35.0...v25.35.1) (2020-05-29)
+
+
+### Bug Fixes
+
+* **mesure-cancel:** remove unseless gql mutation ([5ccd750](https://github.com/SocialGouv/emjpm/commit/5ccd750111fd26786b097532070649d46762d641))
+
+
+
+
+
 # [25.35.0](https://github.com/SocialGouv/emjpm/compare/v25.34.0...v25.35.0) (2020-05-28)
 
 
