@@ -11,6 +11,9 @@ const {
   EnqueteReponsesInformationsMandataire
 } = require("../../../../models/EnqueteReponsesInformationsMandataire");
 const {
+  EnqueteReponsesActivite
+} = require("../../../../models/EnqueteReponsesActivite");
+const {
   getEnqueteReponse,
   createEmptyEnqueteReponse
 } = require("../mandataire-individuel/requests");
@@ -20,7 +23,8 @@ async function update(enqueteId, { tabs, mandataireId }) {
     informationsMandataire,
     agrementsFormations,
     populations,
-    prestationsSociales
+    prestationsSociales,
+    activite
   } = tabs;
 
   const enqueteReponse = await initEnqueteMandataireIndividuel({
@@ -43,6 +47,10 @@ async function update(enqueteId, { tabs, mandataireId }) {
   await EnqueteReponsesPrestationsSociales.query()
     .findById(enqueteReponse.enquete_reponses_prestations_sociale_id)
     .patch(prestationsSociales);
+
+  await EnqueteReponsesActivite.query()
+    .findById(enqueteReponse.enquete_reponses_activite_id)
+    .patch(activite);
 }
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   let enqueteReponse = await getEnqueteReponse({
