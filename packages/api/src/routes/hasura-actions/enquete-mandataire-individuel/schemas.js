@@ -30,22 +30,12 @@ const informationsAgrementsMandataireSchema = yup.object().shape({
 });
 
 const informationsFormationMandataireSchema = yup.object().shape({
-  cnc_mjpm_annee_obtention: yup
+  cnc_annee_obtention: yup
     .number()
     .required()
     .positive()
     .integer(),
-  cnc_mjpm_heure_formation: yup
-    .number()
-    .required()
-    .positive()
-    .integer(),
-  cnc_maj_annee_obtention: yup
-    .number()
-    .required()
-    .positive()
-    .integer(),
-  cnc_dpf_annee_obtention: yup
+  cnc_heures_formation: yup
     .number()
     .required()
     .positive()
@@ -54,13 +44,7 @@ const informationsFormationMandataireSchema = yup.object().shape({
     .number()
     .required()
     .min(1)
-    .max(5)
-    .integer(),
-  niveau_qualification_secretaire_spe: yup
-    .number()
-    .required()
-    .min(1)
-    .max(5)
+    .max(6)
     .integer()
 });
 

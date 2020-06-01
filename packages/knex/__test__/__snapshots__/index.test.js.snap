@@ -1949,37 +1949,13 @@ Object {
 
 exports[`individuel_formations table schema 1`] = `
 Object {
-  "cnc_dpf_annee_obtention": Object {
+  "cnc_annee_obtention": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
   },
-  "cnc_dpf_heure_formation": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "cnc_maj_annee_obtention": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "cnc_maj_heure_formation": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "cnc_mjpm_annee_obtention": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "cnc_mjpm_heure_formation": Object {
+  "cnc_heures_formation": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
