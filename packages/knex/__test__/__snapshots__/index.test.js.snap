@@ -371,6 +371,18 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "accompagnement_judiciaire_domicile_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "accompagnement_judiciaire_domicile_sortie_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "accompagnement_judiciaire_etablissement_debut_annee": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -378,6 +390,18 @@ Object {
     "type": "integer",
   },
   "accompagnement_judiciaire_etablissement_fin_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "accompagnement_judiciaire_etablissement_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "accompagnement_judiciaire_etablissement_sortie_mesures": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
@@ -401,6 +425,18 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "curatelle_biens_domicile_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_biens_domicile_sortie_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "curatelle_biens_etablissement_debut_annee": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -408,6 +444,18 @@ Object {
     "type": "integer",
   },
   "curatelle_biens_etablissement_fin_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_biens_etablissement_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_biens_etablissement_sortie_mesures": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
@@ -425,6 +473,18 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "curatelle_personne_domicile_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_personne_domicile_sortie_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "curatelle_personne_etablissement_debut_annee": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -432,6 +492,18 @@ Object {
     "type": "integer",
   },
   "curatelle_personne_etablissement_fin_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_personne_etablissement_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_personne_etablissement_sortie_mesures": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
@@ -449,6 +521,18 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "curatelle_renforcee_domicile_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_renforcee_domicile_sortie_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "curatelle_renforcee_etablissement_debut_annee": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -456,6 +540,18 @@ Object {
     "type": "integer",
   },
   "curatelle_renforcee_etablissement_fin_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_renforcee_etablissement_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_renforcee_etablissement_sortie_mesures": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
@@ -473,6 +569,18 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "curatelle_simple_domicile_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_simple_domicile_sortie_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "curatelle_simple_etablissement_debut_annee": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -480,6 +588,18 @@ Object {
     "type": "integer",
   },
   "curatelle_simple_etablissement_fin_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_simple_etablissement_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "curatelle_simple_etablissement_sortie_mesures": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
@@ -496,6 +616,30 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "timestamp with time zone",
+  },
+  "mandat_adhoc_majeur_debut_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "mandat_adhoc_majeur_fin_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "mandat_adhoc_majeur_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "mandat_adhoc_majeur_sortie_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
   },
   "revisions_autre": Object {
     "defaultValue": null,
@@ -527,6 +671,30 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "sauvegarde_justice_debut_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "sauvegarde_justice_fin_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "sauvegarde_justice_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "sauvegarde_justice_sortie_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "sorties_deces": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -545,6 +713,30 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "subroge_tuteur_createur_debut_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "subroge_tuteur_createur_fin_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "subroge_tuteur_createur_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "subroge_tuteur_createur_sortie_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "tutelle_domicile_debut_annee": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -557,6 +749,18 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "tutelle_domicile_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "tutelle_domicile_sortie_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "tutelle_etablissement_debut_annee": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -564,6 +768,18 @@ Object {
     "type": "integer",
   },
   "tutelle_etablissement_fin_annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "tutelle_etablissement_mesures_nouvelles": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "tutelle_etablissement_sortie_mesures": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
