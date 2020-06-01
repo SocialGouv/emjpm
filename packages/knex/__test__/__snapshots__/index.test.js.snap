@@ -660,9 +660,9 @@ Object {
   },
   "niveau_qualification": Object {
     "defaultValue": null,
-    "maxLength": 255,
+    "maxLength": null,
     "nullable": true,
-    "type": "character varying",
+    "type": "integer",
   },
   "secretaire_specialise": Object {
     "defaultValue": null,

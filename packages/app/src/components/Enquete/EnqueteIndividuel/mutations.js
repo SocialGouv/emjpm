@@ -24,12 +24,8 @@ export const CREATE_ENQUETE_INDIVIDUEL = gql`
     $debutActiviteAvant2009: Boolean
     $anneeDebutActivite: Int
     $anneeAgrement: Int
-    $cncMjpmAnneeObtention: Int
-    $cncMjpmHeureFormation: Int
-    $cncMajAnneeObtention: Int
-    $cncMajHeureFormation: Int
-    $cncDpfAnneeObtention: Int
-    $cncDpfHeureFormation: Int
+    $cnc_annee_obtention: Int
+    $cnc_heures_formation: Int
     $niveauQualification: Int
     $niveauQualificationSecretaireSpe: Int
   ) {
@@ -40,12 +36,8 @@ export const CREATE_ENQUETE_INDIVIDUEL = gql`
           data: {
             annee_agrement: $anneeAgrement
             annee_debut_activite: $anneeDebutActivite
-            cnc_maj_heure_formation: $cncMajHeureFormation
-            cnc_mjpm_heure_formation: $cncMjpmHeureFormation
-            cnc_maj_annee_obtention: $cncMajAnneeObtention
-            cnc_dpf_annee_obtention: $cncDpfAnneeObtention
-            cnc_dpf_heure_formation: $cncDpfHeureFormation
-            cnc_mjpm_annee_obtention: $cncMjpmAnneeObtention
+            cnc_annee_obtention: $cnc_annee_obtention
+            cnc_heures_formation: $cnc_heures_formation
             cumul_delegue_service: $cumulDelegueService
             cumul_delegue_service_etp: $cumulDelegueServiceEtp
             cumul_prepose: $cumulPrepose
@@ -69,12 +61,8 @@ export const CREATE_ENQUETE_INDIVIDUEL = gql`
           id
           annee_agrement
           annee_debut_activite
-          cnc_maj_heure_formation
-          cnc_mjpm_heure_formation
-          cnc_maj_annee_obtention
-          cnc_dpf_annee_obtention
-          cnc_dpf_heure_formation
-          cnc_mjpm_annee_obtention
+          cnc_annee_obtention
+          cnc_heures_formation
           cumul_delegue_service
           cumul_delegue_service_etp
           cumul_prepose
