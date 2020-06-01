@@ -13,7 +13,7 @@ const Editor = props => {
   return (
     <LayoutAdmin>
       <BoxWrapper>
-        <Link href="/admin/satisfaction_campaigns" passHref>
+        <Link href="/admin/satisfaction-campaigns" passHref>
           <StyledLink my={4} display="block">
             &larr; Retour
           </StyledLink>
