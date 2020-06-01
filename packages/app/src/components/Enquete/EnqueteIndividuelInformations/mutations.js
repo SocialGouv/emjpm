@@ -32,55 +32,40 @@ export const UPDATE_ENQUETE_INFORMATIONS_AGREMENTS = gql`
 export const UPDATE_ENQUETE_INFORMATIONS_FORMATION = gql`
   mutation update_enquete_individuel_formation(
     $id: Int!
-    $cnc_dpf_annee_obtention: Int
-    $cnc_dpf_heure_formation: Int
-    $cnc_maj_annee_obtention: Int
-    $cnc_maj_heure_formation: Int
-    $cnc_mjpm_annee_obtention: Int
-    $cnc_mjpm_heure_formation: Int
-    $cumul_delegue_service: Boolean
-    $cumul_delegue_service_etp: String
-    $cumul_prepose: Boolean
-    $cumul_prepose_etp: String
-    $debut_activite_avant_2009: Boolean
+    $cnc_annee_obtention: Int
+    $cnc_heures_formation: Int
     $niveau_qualification: Int
-    $niveau_qualification_secretaire_spe: Int
-    $secretaire_specialise: Boolean
+    $secretaire_specialise_etp_n1: Float
+    $secretaire_specialise_etp_n2: Float
+    $secretaire_specialise_etp_n3: Float
+    $secretaire_specialise_etp_n4: Float
+    $secretaire_specialise_etp_n5: Float
+    $secretaire_specialise_etp_n6: Float
   ) {
     update_enquete_reponses_agrements_formations_by_pk(
       pk_columns: { id: $id }
       _set: {
-        cnc_dpf_annee_obtention: $cnc_dpf_annee_obtention
-        cnc_dpf_heure_formation: $cnc_dpf_heure_formation
-        cnc_maj_annee_obtention: $cnc_maj_annee_obtention
-        cnc_maj_heure_formation: $cnc_maj_heure_formation
-        cnc_mjpm_annee_obtention: $cnc_mjpm_annee_obtention
-        cnc_mjpm_heure_formation: $cnc_mjpm_heure_formation
-        cumul_delegue_service: $cumul_delegue_service
-        cumul_delegue_service_etp: $cumul_delegue_service_etp
-        cumul_prepose: $cumul_prepose
-        cumul_prepose_etp: $cumul_prepose_etp
-        debut_activite_avant_2009: $debut_activite_avant_2009
+        cnc_annee_obtention: $cnc_annee_obtention
+        cnc_heures_formation: $cnc_heures_formation
         niveau_qualification: $niveau_qualification
-        niveau_qualification_secretaire_spe: $niveau_qualification_secretaire_spe
-        secretaire_specialise: $secretaire_specialise
+        secretaire_specialise_etp_n1: $secretaire_specialise_etp_n1
+        secretaire_specialise_etp_n2: $secretaire_specialise_etp_n2
+        secretaire_specialise_etp_n3: $secretaire_specialise_etp_n3
+        secretaire_specialise_etp_n4: $secretaire_specialise_etp_n4
+        secretaire_specialise_etp_n5: $secretaire_specialise_etp_n5
+        secretaire_specialise_etp_n6: $secretaire_specialise_etp_n6
       }
     ) {
       id
-      cnc_dpf_annee_obtention
-      cnc_dpf_heure_formation
-      cnc_maj_annee_obtention
-      cnc_maj_heure_formation
-      cnc_mjpm_annee_obtention
-      cnc_mjpm_heure_formation
-      cumul_delegue_service
-      cumul_delegue_service_etp
-      cumul_prepose
-      cumul_prepose_etp
-      debut_activite_avant_2009
+      cnc_annee_obtention
+      cnc_heures_formation
       niveau_qualification
-      niveau_qualification_secretaire_spe
-      secretaire_specialise
+      secretaire_specialise_etp_n1
+      secretaire_specialise_etp_n2
+      secretaire_specialise_etp_n3
+      secretaire_specialise_etp_n4
+      secretaire_specialise_etp_n5
+      secretaire_specialise_etp_n6
     }
   }
 `;
