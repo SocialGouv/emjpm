@@ -21,7 +21,7 @@ const navigationLinks = [
   },
   {
     title: "Liste blanche",
-    url: "/admin/liste_blanche"
+    url: "/admin/liste-blanche"
   },
   {
     title: "Editeurs",
@@ -29,11 +29,11 @@ const navigationLinks = [
   },
   {
     title: "API Logs",
-    url: "/admin/api_logs"
+    url: "/admin/api-logs"
   },
   {
     title: "Campagnes de satisfaction",
-    url: "/admin/satisfaction_campaigns"
+    url: "/admin/satisfaction-campaigns"
   }
 ];
 
