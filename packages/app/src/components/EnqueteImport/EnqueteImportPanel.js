@@ -1,3 +1,4 @@
+import { useApolloClient } from "@apollo/react-hooks";
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
@@ -9,6 +10,7 @@ import { useEnqueteImportManager } from "./useEnqueteImportManager.hook";
 export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   const router = useRouter();
 
+  const apolloClient = useApolloClient();
   const { importEnqueteFile, importSummary, enqueteImportLoading } = useEnqueteImportManager({
     enqueteId,
     userId
@@ -23,6 +25,9 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   }
 
   if (importSummary && !importSummary.unexpectedError) {
+    // clear cache after import
+    apolloClient.clearStore();
+
     router.push("/mandataires/enquetes/[enquete_id]", {
       pathname: `/mandataires/enquetes/${enqueteId}`,
       query: { step: 1, substep: 0 }
