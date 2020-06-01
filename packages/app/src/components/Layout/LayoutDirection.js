@@ -22,6 +22,10 @@ const LayoutDirection = ({ children }) => {
     {
       title: "Mesures",
       url: "/direction/mesures"
+    },
+    {
+      title: "Liste blanche",
+      url: "/direction/liste-blanche"
     }
   ];
 
