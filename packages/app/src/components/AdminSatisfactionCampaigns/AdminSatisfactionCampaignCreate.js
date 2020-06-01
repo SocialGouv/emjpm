@@ -26,11 +26,11 @@ export const AdminSatisfactionCampaignCreate = () => {
     }
 
     setSubmitting(false);
-    Router.push("/admin/satisfaction_campaigns");
+    Router.push("/admin/satisfaction-campaigns");
   };
 
   const handleCancel = () => {
-    Router.push("/admin/satisfaction_campaigns");
+    Router.push("/admin/satisfaction-campaigns");
   };
 
   return (
