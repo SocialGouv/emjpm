@@ -22,12 +22,12 @@ const agrementsFormationsSchema = yup.object().shape({
     .excelInteger()
     .min(1)
     .max(6),
-  secretaire_specialise_etp_n1: schemaValidator.excelFloat().positive(),
-  secretaire_specialise_etp_n2: schemaValidator.excelFloat().positive(),
-  secretaire_specialise_etp_n3: schemaValidator.excelFloat().positive(),
-  secretaire_specialise_etp_n4: schemaValidator.excelFloat().positive(),
-  secretaire_specialise_etp_n5: schemaValidator.excelFloat().positive(),
-  secretaire_specialise_etp_n6: schemaValidator.excelFloat().positive()
+  secretaire_specialise_etp_n1: schemaValidator.excelFloat().min(0),
+  secretaire_specialise_etp_n2: schemaValidator.excelFloat().min(0),
+  secretaire_specialise_etp_n3: schemaValidator.excelFloat().min(0),
+  secretaire_specialise_etp_n4: schemaValidator.excelFloat().min(0),
+  secretaire_specialise_etp_n5: schemaValidator.excelFloat().min(0),
+  secretaire_specialise_etp_n6: schemaValidator.excelFloat().min(0)
 });
 
 function parse(worksheet) {
