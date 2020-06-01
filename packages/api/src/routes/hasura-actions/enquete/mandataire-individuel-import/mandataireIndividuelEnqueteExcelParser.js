@@ -1,8 +1,10 @@
 var XLSX = require("xlsx");
-var parserAgrementsFormations = require("./enqueteExcelParserAgrementsFormations");
-var parserInformationsMandataire = require("./enqueteExcelParserInformationsMandataire");
-var parserPopulations = require("./enqueteExcelParserPopulations");
-var parserPrestationsSociales = require("./enqueteExcelParserPrestationsSociales");
+var {
+  enqueteExcelParserAgrementsFormations,
+  enqueteExcelParserAgrementsPopulations,
+  enqueteExcelParserInformationsMandataire,
+  enqueteExcelParserPrestationsSociales
+} = require("../common/excel-parser");
 
 var HttpError = require("../../../../utils/error/HttpError");
 const logger = require("../../../../utils/logger");
@@ -27,14 +29,16 @@ const parse = async ({ content }) => {
   ]);
 
   const res = {
-    informationsMandataire: parserInformationsMandataire.parse(
+    informationsMandataire: enqueteExcelParserInformationsMandataire.parse(
       workbook.Sheets["info mandataire-exerc. activité"]
     ),
-    populations: parserPopulations.parse(workbook.Sheets["Populations "]),
-    agrementsFormations: parserAgrementsFormations.parse(
+    populations: enqueteExcelParserAgrementsPopulations.parse(
+      workbook.Sheets["Populations "]
+    ),
+    agrementsFormations: enqueteExcelParserAgrementsFormations.parse(
       workbook.Sheets["info mandataire-exerc. activité"]
     ),
-    prestationsSociales: parserPrestationsSociales.parse(
+    prestationsSociales: enqueteExcelParserPrestationsSociales.parse(
       workbook.Sheets["Prestations sociales "]
     )
   };
@@ -60,8 +64,8 @@ function checkRequiredTabs(workbook, tabNames) {
   });
 }
 
-const enqueteExcelParser = {
+const mandataireIndividuelEnqueteExcelParser = {
   parse
 };
 
-module.exports = enqueteExcelParser;
+module.exports = mandataireIndividuelEnqueteExcelParser;

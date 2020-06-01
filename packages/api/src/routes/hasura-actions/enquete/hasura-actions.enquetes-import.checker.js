@@ -14,6 +14,7 @@ async function checkImportEnqueteParameters(req) {
   }
 
   const importContext = {
+    role,
     enqueteId,
     userId,
     service: undefined,
