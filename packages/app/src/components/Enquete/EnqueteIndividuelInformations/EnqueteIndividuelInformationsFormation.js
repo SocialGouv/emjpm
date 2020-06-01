@@ -44,36 +44,33 @@ export const EnqueteIndividuelInformationsFormation = props => {
         await updateEnquete({
           variables: {
             id: enquete_reponses_agrements_formations_id,
-            cnc_dpf_annee_obtention: values.cnc_dpf_annee_obtention
-              ? Number(values.cnc_dpf_annee_obtention)
+            cnc_annee_obtention: values.cnc_annee_obtention
+              ? Number(values.cnc_annee_obtention)
               : null,
-            cnc_dpf_heure_formation: values.cnc_dpf_heure_formation
-              ? Number(values.cnc_dpf_heure_formation)
+            cnc_heures_formation: values.cnc_heures_formation
+              ? Number(values.cnc_heures_formation)
               : null,
-            cnc_maj_annee_obtention: values.cnc_maj_annee_obtention
-              ? Number(values.cnc_maj_annee_obtention)
-              : null,
-            cnc_maj_heure_formation: values.cnc_maj_heure_formation
-              ? Number(values.cnc_maj_heure_formation)
-              : null,
-            cnc_mjpm_annee_obtention: values.cnc_mjpm_annee_obtention
-              ? Number(values.cnc_mjpm_annee_obtention)
-              : null,
-            cnc_mjpm_heure_formation: values.cnc_mjpm_heure_formation
-              ? Number(values.cnc_mjpm_heure_formation)
-              : null,
-            cumul_delegue_service: values.cumul_delegue_service || null,
-            cumul_delegue_service_etp: values.cumul_delegue_service_etp || null,
-            cumul_prepose: values.cumul_prepose || null,
-            cumul_prepose_etp: values.cumul_prepose_etp || null,
-            debut_activite_avant_2009: values.debut_activite_avant_2009 || null,
             niveau_qualification: values.niveau_qualification
               ? Number(values.niveau_qualification)
               : null,
-            niveau_qualification_secretaire_spe: values.niveau_qualification_secretaire_spe
-              ? Number(values.niveau_qualification_secretaire_spe)
+            secretaire_specialise_etp_n1: values.secretaire_specialise_etp_n1
+              ? Number(values.secretaire_specialise_etp_n1)
               : null,
-            secretaire_specialise: values.secretaire_specialise || null
+            secretaire_specialise_etp_n2: values.secretaire_specialise_etp_n2
+              ? Number(values.secretaire_specialise_etp_n2)
+              : null,
+            secretaire_specialise_etp_n3: values.secretaire_specialise_etp_n3
+              ? Number(values.secretaire_specialise_etp_n3)
+              : null,
+            secretaire_specialise_etp_n4: values.secretaire_specialise_etp_n4
+              ? Number(values.secretaire_specialise_etp_n4)
+              : null,
+            secretaire_specialise_etp_n5: values.secretaire_specialise_etp_n5
+              ? Number(values.secretaire_specialise_etp_n5)
+              : null,
+            secretaire_specialise_etp_n6: values.secretaire_specialise_etp_n6
+              ? Number(values.secretaire_specialise_etp_n6)
+              : null
           }
         });
         await goToNextPage();

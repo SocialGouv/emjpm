@@ -23,36 +23,43 @@ export const enqueteMandataireIndividuelAgrementsSchema = yup.object().shape({
 });
 
 export const enqueteMandataireIndividuelFormationSchema = yup.object().shape({
-  cnc_dpf_annee_obtention: yup
+  cnc_annee_obtention: yup
     .number()
     .nullable()
     .positive()
     .integer(),
-  cnc_maj_annee_obtention: yup
+  cnc_heures_formation: yup
     .number()
     .nullable()
-    .positive()
-    .integer(),
-  cnc_mjpm_annee_obtention: yup
-    .number()
-    .nullable()
-    .positive()
-    .integer(),
-  cnc_mjpm_heure_formation: yup
-    .number()
-    .nullable()
-    .positive()
-    .integer(),
+    .positive(),
   niveau_qualification: yup
     .number()
     .nullable()
     .min(1)
     .max(5)
     .integer(),
-  niveau_qualification_secretaire_spe: yup
+  secretaire_specialise_etp_n1: yup
     .number()
     .nullable()
-    .min(1)
-    .max(5)
-    .integer()
+    .positive(),
+  secretaire_specialise_etp_spe_n2: yup
+    .number()
+    .nullable()
+    .positive(),
+  secretaire_specialise_etp_spe_n3: yup
+    .number()
+    .nullable()
+    .positive(),
+  secretaire_specialise_etp_spe_n4: yup
+    .number()
+    .nullable()
+    .positive(),
+  secretaire_specialise_etp_spe_n5: yup
+    .number()
+    .nullable()
+    .positive(),
+  secretaire_specialise_etp_spe_n6: yup
+    .number()
+    .nullable()
+    .positive()
 });
