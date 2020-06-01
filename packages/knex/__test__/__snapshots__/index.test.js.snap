@@ -2173,6 +2173,12 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
+  "departement_financeur": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
   "departement_id": Object {
     "defaultValue": null,
     "maxLength": null,

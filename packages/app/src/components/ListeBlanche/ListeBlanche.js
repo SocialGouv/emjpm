@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading4, Spinner, Text } from "@emjpm/ui";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
+import { FiltersContext } from "../ListeBlancheFilter/context";
 import { PaginatedList } from "../PaginatedList";
 import { LB_USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
@@ -27,9 +28,12 @@ const ListBlancheItem = ({ item }) => (
     <Flex justifyContent="flex-start">
       <Flex width="25%" flexDirection="column">
         <Text sx={labelStyle}>{"Nom"}</Text>
-        <Text sx={descriptionStyle}>
-          {item.prenom} {item.nom ? item.nom.toUpperCase() : ""}
-        </Text>
+        <Flex>
+          <Text sx={descriptionStyle}>{item.nom ? item.nom.toUpperCase() : ""}</Text>
+          <Text pl="1" sx={descriptionStyle}>
+            {item.prenom}
+          </Text>
+        </Flex>
       </Flex>
       <Flex width="15%" flexDirection="column">
         <Text sx={labelStyle}>Type</Text>
@@ -52,9 +56,14 @@ const ListBlancheItem = ({ item }) => (
           >
             <Flex width="100%" flexDirection="column">
               <Text sx={labelStyle}>{`Département`}</Text>
-              <Text sx={descriptionStyle}>
-                {lbDep.departement ? lbDep.departement.nom : "Inconnu"}
-              </Text>
+              <Flex>
+                <Text sx={descriptionStyle}>
+                  {lbDep.departement ? lbDep.departement.nom : "Inconnu"}
+                </Text>
+                <Text sx={descriptionStyle} pl="1">
+                  {lbDep.departement_financeur ? "(Financeur)" : ""}
+                </Text>
+              </Flex>
             </Flex>
           </Flex>
         ))}
@@ -64,13 +73,18 @@ const ListBlancheItem = ({ item }) => (
 );
 
 const ListeBlanche = () => {
+  const { selectedDepartement, selectedType, debouncedSearchText } = useContext(FiltersContext);
+
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
 
   const { data, error, loading } = useQuery(LB_USERS, {
     variables: {
       limit: resultPerPage,
-      offset: currentOffset
+      offset: currentOffset,
+      type: selectedType ? selectedType.value : null,
+      departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null,
+      searchText: debouncedSearchText ? `${debouncedSearchText}%` : null
     }
   });
 
