@@ -1,6 +1,6 @@
-const HttpError = require("../../../utils/error/HttpError");
-const { Service } = require("../../../models/Service");
-const { Mandataire } = require("../../../models/Mandataire");
+const HttpError = require("../../../../utils/error/HttpError");
+const { Service } = require("../../../../models/Service");
+const { Mandataire } = require("../../../../models/Mandataire");
 
 async function checkImportEnqueteParameters(req) {
   const { role, userId: authUserId } = req.user;
