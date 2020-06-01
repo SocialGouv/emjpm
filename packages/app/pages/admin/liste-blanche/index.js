@@ -5,6 +5,7 @@ import { Box, Flex } from "rebass";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { ListeBlanche } from "../../../src/components/ListeBlanche";
 import { ListeBlancheFilter } from "../../../src/components/ListeBlancheFilter";
+import { ListeBlancheSummary } from "../../../src/components/ListeBlancheSummary";
 import { FiltersContextProvider } from "../../../src/components/ListeBlancheFilter/context";
 import { withAuthSync } from "../../../src/util/auth";
 
@@ -17,9 +18,12 @@ const ListBlanchePage = () => {
             <Box mb="2">
               <ListeBlancheFilter />
             </Box>
-            <Flex>
+            <Box mb="2">
+              <ListeBlancheSummary />
+            </Box>
+            <Box mb="2">
               <ListeBlanche />
-            </Flex>
+            </Box>
           </Flex>
         </BoxWrapper>
       </LayoutAdmin>
