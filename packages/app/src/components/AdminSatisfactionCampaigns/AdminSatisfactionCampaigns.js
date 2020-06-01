@@ -64,8 +64,8 @@ const RowItem = ({ item }) => {
 
         <Box mr="1" width="220px">
           <Link
-            href={`/admin/satisfaction_campaigns/[satisfaction_campaign_id]`}
-            as={`/admin/satisfaction_campaigns/${id}`}
+            href={`/admin/satisfaction-campaigns/[satisfaction_campaign_id]`}
+            as={`/admin/satisfaction-campaigns/${id}`}
           >
             <a>
               <Button>Voir</Button>

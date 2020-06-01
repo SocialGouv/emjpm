@@ -17,7 +17,7 @@ const AdminSatisfactionCampaignsPage = () => {
           <Heading1>Liste des campagnes de satisfaction</Heading1>
           <Flex flexWrap="wrap" mt="2">
             <AdminFilterBar
-              onAddButtonClick={() => Router.push("/admin/satisfaction_campaigns/create ")}
+              onAddButtonClick={() => Router.push("/admin/satisfaction-campaigns/create ")}
             />
             <AdminSatisfactionCampaigns />
           </Flex>
