@@ -1,8 +1,8 @@
 const {
   GeolocalisationCodePostal
-} = require("../../../../models/GeolocalisationCodePostal");
-const getRegionCode = require("../../../../utils/getRegionCode");
-const { Department } = require("../../../../models/Departments");
+} = require("../../../../../models/GeolocalisationCodePostal");
+const getRegionCode = require("../../../../../utils/getRegionCode");
+const { Department } = require("../../../../../models/Departments");
 
 const getGeoDatas = async (code_postal, ville) => {
   if (!code_postal) {

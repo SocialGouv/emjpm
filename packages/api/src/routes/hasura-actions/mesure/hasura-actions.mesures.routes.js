@@ -1,8 +1,8 @@
 const express = require("express");
 
 const actionsMesuresImporter = require("./mesures-import/actionsMesuresImporter");
-const checkImportMesuresParameters = require("./mesures-import/checkImportMesuresParameters");
-const hasuraActionErrorHandler = require("../../middlewares/hasura-error-handler");
+const checkImportMesuresParameters = require("./hasura-actions.mesures-import.checker");
+const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
 
 const router = express.Router();
 
