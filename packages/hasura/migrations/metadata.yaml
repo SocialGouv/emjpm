@@ -1766,6 +1766,21 @@ tables:
   - name: departement
     using:
       foreign_key_constraint_on: departement_id
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - lb_user_id
+      - departement_id
+      - individuel
+      - prepose
+      - service
+      - ti
+      - departement_financeur
+      filter: {}
+      allow_aggregations: true
 - table:
     schema: public
     name: lb_users
@@ -1777,6 +1792,19 @@ tables:
         table:
           schema: public
           name: lb_departements
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - user_id
+      - email
+      - nom
+      - prenom
+      - type
+      filter: {}
+      allow_aggregations: true
 - table:
     schema: public
     name: magistrat
