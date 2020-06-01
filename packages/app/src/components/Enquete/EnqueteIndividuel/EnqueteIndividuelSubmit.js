@@ -23,7 +23,7 @@ export const EnqueteIndividuelWelcome = props => {
     refetchQueries: [
       {
         query: ENQUETE_MANDATAIRE_INDIVIDUEL,
-        variables: { enqueteId: enquete.id, mandataireId }
+        variables: { enqueteId: enquete.id }
       }
     ]
   });
