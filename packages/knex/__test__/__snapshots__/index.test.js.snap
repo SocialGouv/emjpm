@@ -312,6 +312,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "enquete_reponses_modalite_exercice_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "enquete_reponses_populations_id": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -3127,6 +3133,7 @@ Array [
   "enquete_reponses_activite",
   "enquete_reponses_agrements_formations",
   "enquete_reponses_informations_mandataire",
+  "enquete_reponses_modalite_exercice",
   "enquete_reponses_populations",
   "enquete_reponses_prestations_sociales",
   "enquete_services",
