@@ -1,10 +1,12 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React from "react";
+import React, { useMemo } from "react";
 import { Box } from "rebass";
 
 import { EnqueteActiviteForm } from "./EnqueteActiviteForm";
 import { UPDATE_ENQUETE_ACTIVITE_TUTELLE } from "./mutations";
 import { ENQUETE_TUTELLE } from "./queries";
+
+const PREFIX = "tutelle";
 
 export const EnqueteActiviteTutelle = props => {
   const { goToPrevPage, goToNextPage, enqueteReponse } = props;
@@ -26,37 +28,31 @@ export const EnqueteActiviteTutelle = props => {
     }
   });
 
-  const {
-    tutelle_domicile_debut_annee,
-    tutelle_domicile_fin_annee,
-    tutelle_etablissement_debut_annee,
-    tutelle_etablissement_fin_annee
-  } = data ? data.enquete_reponses_activite_by_pk || {} : {};
+  const normalizedData = useMemo(() => {
+    const r = data ? data.enquete_reponses_activite_by_pk || {} : {};
+
+    return {
+      etablissementDebutAnnee: r[`${PREFIX}_etablissement_debut_annee`],
+      etablissementFinAnnee: r[`${PREFIX}_etablissement_fin_annee`],
+      domicileDebutAnnee: r[`${PREFIX}_domicile_debut_annee`],
+      domicileFinAnnee: r[`${PREFIX}_domicile_fin_annee`],
+      etablissementMesuresNouvelles: r[`${PREFIX}_etablissement_mesures_nouvelles`],
+      etablissementSortieMesures: r[`${PREFIX}_etablissement_sortie_mesures`],
+      domicileMesuresNouvelles: r[`${PREFIX}_domicile_mesures_nouvelles`],
+      domicileSortieMesures: r[`${PREFIX}_domicile_sortie_mesures`]
+    };
+  }, [data]);
 
   return (
     <Box>
       <EnqueteActiviteForm
         loading={loading}
-        data={{
-          nbMesureEtablissementDebutAnnee: tutelle_etablissement_debut_annee,
-          nbMesureEtablissementFinAnnee: tutelle_etablissement_fin_annee,
-          nbMesureDomicileDebutAnnee: tutelle_domicile_debut_annee,
-          nbMesureDomicileFinAnnee: tutelle_domicile_fin_annee
-        }}
+        data={normalizedData}
         handleSubmit={async values => {
-          const {
-            nbMesureDomicileDebutAnnee,
-            nbMesureDomicileFinAnnee,
-            nbMesureEtablissementDebutAnnee,
-            nbMesureEtablissementFinAnnee
-          } = values;
           await updateEnquete({
             variables: {
               id: enquete_reponses_activite_id,
-              etablissementDebutAnnee: nbMesureEtablissementDebutAnnee || null,
-              etablissementFinAnnee: nbMesureEtablissementFinAnnee || null,
-              domicileDebutAnnee: nbMesureDomicileDebutAnnee || null,
-              domicileFinAnnee: nbMesureDomicileFinAnnee || null
+              ...values
             }
           });
           await goToNextPage();

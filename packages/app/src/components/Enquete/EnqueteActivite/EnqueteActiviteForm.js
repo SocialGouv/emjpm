@@ -1,10 +1,9 @@
-import { Heading1, Heading3 } from "@emjpm/ui";
+import { Field, Heading1, Heading3, InlineError, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 const strongStyle = {
@@ -15,11 +14,32 @@ const strongStyle = {
 
 function mapDataPropsToFormValues(data) {
   return {
-    nbMesureEtablissementDebutAnnee: data.nbMesureEtablissementDebutAnnee || "",
-    nbMesureEtablissementFinAnnee: data.nbMesureEtablissementFinAnnee || "",
-    nbMesureDomicileDebutAnnee: data.nbMesureDomicileDebutAnnee || "",
-    nbMesureDomicileFinAnnee: data.nbMesureDomicileFinAnnee || ""
+    etablissementDebutAnnee: data.etablissementDebutAnnee || "",
+    etablissementFinAnnee: data.etablissementFinAnnee || "",
+    domicileDebutAnnee: data.domicileDebutAnnee || "",
+    domicileFinAnnee: data.domicileFinAnnee || "",
+    etablissementMesuresNouvelles: data.etablissementMesuresNouvelles || "",
+    etablissementSortieMesures: data.etablissementSortieMesures || "",
+    domicileMesuresNouvelles: data.domicileMesuresNouvelles || "",
+    domicileSortieMesures: data.domicileSortieMesures || ""
   };
+}
+
+function mapFormValuesToSubmit(data) {
+  return {
+    etablissementDebutAnnee: parseIntToSubmit(data.etablissementDebutAnnee),
+    etablissementFinAnnee: parseIntToSubmit(data.etablissementFinAnnee),
+    domicileDebutAnnee: parseIntToSubmit(data.domicileDebutAnnee),
+    domicileFinAnnee: parseIntToSubmit(data.domicileFinAnnee),
+    etablissementMesuresNouvelles: parseIntToSubmit(data.etablissementMesuresNouvelles),
+    etablissementSortieMesures: parseIntToSubmit(data.etablissementSortieMesures),
+    domicileMesuresNouvelles: parseIntToSubmit(data.domicileMesuresNouvelles),
+    domicileSortieMesures: parseIntToSubmit(data.domicileSortieMesures)
+  };
+
+  function parseIntToSubmit(value) {
+    return value ? parseInt(value) : undefined;
+  }
 }
 
 export const EnqueteActiviteForm = props => {
@@ -27,7 +47,7 @@ export const EnqueteActiviteForm = props => {
 
   const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
+      await props.handleSubmit(mapFormValuesToSubmit(values));
       setSubmitting(false);
     },
     initialValues: mapDataPropsToFormValues(data)
@@ -37,11 +57,9 @@ export const EnqueteActiviteForm = props => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
-  const totalDebutAnnee =
-    (values.nbMesureEtablissementDebutAnnee || 0) + (values.nbMesureDomicileDebutAnnee || 0);
+  const totalDebutAnnee = (values.etablissementDebutAnnee || 0) + (values.domicileDebutAnnee || 0);
 
-  const totalFinAnnee =
-    (values.nbMesureEtablissementFinAnnee || 0) + (values.nbMesureDomicileFinAnnee || 0);
+  const totalFinAnnee = (values.etablissementFinAnnee || 0) + (values.domicileFinAnnee || 0);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -55,149 +73,195 @@ export const EnqueteActiviteForm = props => {
         EN ÉTABLISSEMENT
       </Text>
 
-      <Box py={4}>
-        <Flex alignItems="center">
-          <Label width="auto">Il y avait</Label>
-          <SmallInput
-            mx={1}
-            min={0}
-            id="nbMesureEtablissementDebutAnnee"
-            name="nbMesureEtablissementDebutAnnee"
-            value={values.nbMesureEtablissementDebutAnnee}
-            // hasError={!!errors.nbMesureEtablissementDebutAnnee}
-            onChange={handleChange}
-            type="number"
-          />
-          <Label width="auto">mesures au 1er janvier et</Label>
-          <SmallInput
-            mx={1}
-            min={0}
-            id="nbMesureEtablissementFinAnnee"
-            name="nbMesureEtablissementFinAnnee"
-            value={values.nbMesureEtablissementFinAnnee}
-            hasError={!!errors.nbMesureEtablissementFinAnnee}
-            onChange={handleChange}
-            type="number"
-          />
-          <Box sx={{ color: "#595959", fontSize: "13px", fontWeight: "bold" }}>
-            {"mesures au 31 décembre, soit une différence de  "}
-            <Text sx={strongStyle}>
-              {(values.nbMesureEtablissementDebutAnnee || 0) -
-                (values.nbMesureEtablissementFinAnnee || 0)}
-            </Text>
-            {" ."}
-          </Box>
-        </Flex>
-
-        {/* 
-        <Flex mt={5} alignItems="center">
-          <Label width="auto">Il y avait</Label>
-          <Input
-            mx={1}
-            width={"50px"}
-            min={0}
-            placeholder=""
-            id="nbMesureEtablissementDebutAnnee"
-            name="nbMesureEtablissementDebutAnnee"
-            value={values.nbMesureEtablissementDebutAnnee}
-            hasError={!!errors.nbMesureEtablissementDebutAnnee}
-            onChange={handleChange}
-            type="number"
-          />
-          <Label width="auto">mesures au 1er janvier et</Label>
-          <Input
-            mx={1}
-            width={"50px"}
-            min={0}
-            placeholder=""
-            id="nbMesureEtablissementFinAnnee"
-            name="nbMesureEtablissementFinAnnee"
-            value={values.nbMesureEtablissementFinAnnee}
-            hasError={!!errors.nbMesureEtablissementFinAnnee}
-            onChange={handleChange}
-            type="number"
-          />
-          <Label width="auto">{`mesures au 31 décembre, soit une différence de ${(values.nbMesureEtablissementDebutAnnee ||
-            0) - (values.nbMesureEtablissementFinAnnee || 0)}.`}</Label>
-        </Flex> */}
+      <Flex>
+        <Box width="50%">
+          <Field>
+            <Label width="auto">Mesures au 1er janvier</Label>
+            <Box width="200px">
+              <Input
+                placeholder=""
+                min={0}
+                id="etablissementDebutAnnee"
+                name="etablissementDebutAnnee"
+                value={values.etablissementDebutAnnee}
+                hasError={!!errors.etablissementDebutAnnee}
+                onChange={handleChange}
+                type="number"
+              />
+            </Box>
+            <InlineError
+              message={errors.etablissementDebutAnnee}
+              fieldId="etablissementDebutAnnee"
+            />
+          </Field>
+        </Box>
+        <Box width="50%">
+          <Field>
+            <Label width="auto">Mesures au 31 décembre</Label>
+            <Box width="200px">
+              <Input
+                placeholder=""
+                min={0}
+                id="etablissementFinAnnee"
+                name="etablissementFinAnnee"
+                value={values.etablissementFinAnnee}
+                hasError={!!errors.etablissementFinAnnee}
+                onChange={handleChange}
+                type="number"
+              />
+            </Box>
+            <InlineError message={errors.etablissementFinAnnee} fieldId="etablissementFinAnnee" />
+          </Field>
+        </Box>
+      </Flex>
+      <Flex>
+        <Box width="50%">
+          <Field>
+            <Label width="auto">Nouvelles mesures</Label>
+            <Box width="200px">
+              <Input
+                placeholder=""
+                min={0}
+                id="etablissementMesuresNouvelles"
+                name="etablissementMesuresNouvelles"
+                value={values.etablissementMesuresNouvelles}
+                hasError={!!errors.etablissementMesuresNouvelles}
+                onChange={handleChange}
+                type="number"
+              />
+            </Box>
+            <InlineError
+              message={errors.etablissementMesuresNouvelles}
+              fieldId="etablissementMesuresNouvelles"
+            />
+          </Field>
+        </Box>
+        <Box width="50%">
+          <Field>
+            <Label width="auto">Sortie de mesures</Label>
+            <Box width="200px">
+              <Input
+                placeholder=""
+                min={0}
+                id="etablissementSortieMesures"
+                name="etablissementSortieMesures"
+                value={values.etablissementSortieMesures}
+                hasError={!!errors.etablissementSortieMesures}
+                onChange={handleChange}
+                type="number"
+              />
+            </Box>
+            <InlineError
+              message={errors.etablissementSortieMesures}
+              fieldId="etablissementSortieMesures"
+            />
+          </Field>
+        </Box>
+      </Flex>
+      <Box sx={{ color: "#595959", fontSize: "13px", fontWeight: "bold" }}>
+        {"Soit une différence de  "}
+        <Text sx={strongStyle}>
+          {(values.etablissementDebutAnnee || 0) - (values.etablissementFinAnnee || 0)}
+        </Text>
+        {" ."}
       </Box>
 
       <Text my={4} fontWeight="bold" color="#595959">
         À DOMICILE
       </Text>
 
-      <Box>
-        <Flex alignItems="center">
-          <Label width="auto">Il y avait</Label>
-          <SmallInput
-            mx={1}
-            min={0}
-            id="nbMesureDomicileDebutAnnee"
-            name="nbMesureDomicileDebutAnnee"
-            value={values.nbMesureDomicileDebutAnnee}
-            hasError={!!errors.nbMesureDomicileDebutAnnee}
-            onChange={handleChange}
-            type="number"
-          />
-          <Label width="auto">mesures au 1er janvier et</Label>
-          <SmallInput
-            mx={1}
-            min={0}
-            placeholder=""
-            id="nbMesureDomicileFinAnnee"
-            name="nbMesureDomicileFinAnnee"
-            value={values.nbMesureDomicileFinAnnee}
-            hasError={!!errors.nbMesureDomicileFinAnnee}
-            onChange={handleChange}
-            type="number"
-          />
-          <Box sx={{ color: "#595959", fontSize: "13px", fontWeight: "bold" }}>
-            {"mesures au 31 décembre, soit une différence de  "}
-            <Text sx={strongStyle}>
-              {(values.nbMesureDomicileDebutAnnee || 0) - (values.nbMesureDomicileFinAnnee || 0)}
-            </Text>
-            {" ."}
-          </Box>
-        </Flex>
-
-        {/* <Flex mt={5} alignItems="center">
-          <Label width="auto">Il y avait</Label>
-          <Input
-            mx={1}
-            width={"50px"}
-            min={0}
-            placeholder=""
-            id="nbMesureDomicileFinAnnee"
-            name="nbMesureDomicileFinAnnee"
-            value={values.nbMesureDomicileFinAnnee}
-            hasError={!!errors.nbMesureDomicileFinAnnee}
-            onChange={handleChange}
-            type="number"
-          />
-          <Label width="auto">mesures au 1er janvier et</Label>
-          <Input
-            mx={1}
-            width={"50px"}
-            min={0}
-            placeholder=""
-            id="nbMesureDomicileFinAnnee"
-            name="nbMesureDomicileFinAnnee"
-            value={values.nbMesureEtablissementFinAnnee}
-            hasError={!!errors.nbMesureEtablissementFinAnnee}
-            onChange={handleChange}
-            type="number"
-          />
-          <Label width="auto">{`mesures au 31 décembre, soit une différence de ${(values.nbMesureEtablissementDebutAnnee ||
-            0) - (values.nbMesureEtablissementFinAnnee || 0)}.`}</Label>
-        </Flex> */}
-
-        <Box sx={{ color: "#595959", fontWeight: "bold" }} mt={"50px"}>
-          Soit un total de <Text sx={strongStyle}>{totalDebutAnnee}</Text> mesures au 01/01/2019 et
-          de <Text sx={strongStyle}>{totalFinAnnee}</Text> mesures au 31/12/2019.
+      <Flex>
+        <Box width="50%">
+          <Field>
+            <Label width="auto">Mesures au 1er janvier</Label>
+            <Box width="200px">
+              <Input
+                placeholder=""
+                min={0}
+                id="domicileDebutAnnee"
+                name="domicileDebutAnnee"
+                value={values.domicileDebutAnnee}
+                hasError={!!errors.domicileDebutAnnee}
+                onChange={handleChange}
+                type="number"
+              />
+            </Box>
+            <InlineError message={errors.domicileDebutAnnee} fieldId="domicileDebutAnnee" />
+          </Field>
         </Box>
-
-        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+        <Box width="50%">
+          <Field>
+            <Label width="auto">Mesures au 31 décembre</Label>
+            <Box width="200px">
+              <Input
+                placeholder=""
+                min={0}
+                id="domicileFinAnnee"
+                name="domicileFinAnnee"
+                value={values.domicileFinAnnee}
+                hasError={!!errors.domicileFinAnnee}
+                onChange={handleChange}
+                type="number"
+              />
+            </Box>
+            <InlineError message={errors.domicileFinAnnee} fieldId="domicileFinAnnee" />
+          </Field>
+        </Box>
+      </Flex>
+      <Flex>
+        <Box width="50%">
+          <Field>
+            <Label width="auto">Nouvelles mesures</Label>
+            <Box width="200px">
+              <Input
+                placeholder=""
+                min={0}
+                id="domicileMesuresNouvelles"
+                name="domicileMesuresNouvelles"
+                value={values.domicileMesuresNouvelles}
+                hasError={!!errors.domicileMesuresNouvelles}
+                onChange={handleChange}
+                type="number"
+              />
+            </Box>
+            <InlineError
+              message={errors.domicileMesuresNouvelles}
+              fieldId="domicileMesuresNouvelles"
+            />
+          </Field>
+        </Box>
+        <Box width="50%">
+          <Field>
+            <Label width="auto">Sortie de mesures</Label>
+            <Box width="200px">
+              <Input
+                placeholder=""
+                min={0}
+                id="domicileSortieMesures"
+                name="domicileSortieMesures"
+                value={values.domicileSortieMesures}
+                hasError={!!errors.domicileSortieMesures}
+                onChange={handleChange}
+                type="number"
+              />
+            </Box>
+            <InlineError message={errors.domicileSortieMesures} fieldId="domicileSortieMesures" />
+          </Field>
+        </Box>
+      </Flex>
+      <Box sx={{ color: "#595959", fontSize: "13px", fontWeight: "bold" }}>
+        {"Soit une différence de  "}
+        <Text sx={strongStyle}>
+          {(values.domicileDebutAnnee || 0) - (values.domicileFinAnnee || 0)}
+        </Text>
+        {" ."}
       </Box>
+      <Box sx={{ color: "#595959", fontWeight: "bold" }} mt={"50px"}>
+        Soit un total de <Text sx={strongStyle}>{totalDebutAnnee}</Text> mesures au 01/01/2019 et de{" "}
+        <Text sx={strongStyle}>{totalFinAnnee}</Text> mesures au 31/12/2019.
+      </Box>
+
+      <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
     </form>
   );
 };
