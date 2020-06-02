@@ -22,6 +22,7 @@ export const EnqueteActiviteAccompagnementJudiciaire = props => {
       }
     ]
   });
+
   const { data, loading } = useQuery(ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE, {
     variables: {
       id: enquete_reponses_activite_id

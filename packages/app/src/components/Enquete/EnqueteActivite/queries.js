@@ -36,18 +36,6 @@ export const ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE = buildEnqueteEtablissementDomici
 
 export const ENQUETE_TUTELLE = buildEnqueteEtablissementDomicileQuery("tutelle");
 
-export const ENQUETE_REVISION_MESURES = gql`
-  query enquete_reponses_activite_revision_mesures($id: Int!) {
-    enquete_reponses_activite_by_pk(id: $id) {
-      revisions_main_levee
-      revisions_masp
-      revisions_reconduction
-      revisions_changement
-      revisions_autre
-    }
-  }
-`;
-
 // prefix: 'subroge_tuteur_createur' | 'sauvegarde_justice' | 'mandat_adhoc_majeur'
 function buildEnqueteMesuresQuery(prefix) {
   return gql`
@@ -64,3 +52,25 @@ function buildEnqueteMesuresQuery(prefix) {
 export const ENQUETE_SUBROGE_TUTEUR_CREATEUR = buildEnqueteMesuresQuery("subroge_tuteur_createur");
 export const ENQUETE_MANDAT_ADHOC_MAJEUR = buildEnqueteMesuresQuery("mandat_adhoc_majeur");
 export const ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresQuery("sauvegarde_justice");
+
+export const ENQUETE_REVISION_MESURES = gql`
+  query enquete_reponses_activite_revision_mesures($id: Int!) {
+    enquete_reponses_activite_by_pk(id: $id) {
+      revisions_main_levee
+      revisions_masp
+      revisions_reconduction
+      revisions_changement
+      revisions_autre
+    }
+  }
+`;
+
+export const ENQUETE_CAUSES_SORTIE_DISPOSITIF = gql`
+  query enquete_reponses_activite_causes_sortie_dispositif($id: Int!) {
+    enquete_reponses_activite_by_pk(id: $id) {
+      sorties_main_levee
+      sorties_deces
+      sorties_masp
+    }
+  }
+`;

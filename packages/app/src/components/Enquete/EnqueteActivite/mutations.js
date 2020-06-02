@@ -65,35 +65,6 @@ export const UPDATE_ENQUETE_ACTIVITE_TUTELLE = buildEnqueteEtablissementDomicile
   "tutelle"
 );
 
-export const UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES = gql`
-  mutation update_enquete_activite_curatelle_biens(
-    $id: Int!
-    $revisionsMainLevee: Int
-    $revisionsMasp: Int
-    $revisionsReconduction: Int
-    $revisionsChangement: Int
-    $revisionsAutre: Int
-  ) {
-    update_enquete_activite_reponses_activite_by_pk(
-      pk_columns: { id: $id }
-      _set: {
-        revisions_main_levee: $revisionsMainLevee
-        revisions_masp: $revisionsMasp
-        revisions_reconduction: $revisionsReconduction
-        revisions_changement: $revisionsChangement
-        revisions_autre: $revisionsAutre
-      }
-    ) {
-      id
-      revisions_main_levee
-      revisions_masp
-      revisions_reconduction
-      revisions_changement
-      revisions_autre
-    }
-  }
-`;
-
 // prefix: 'subroge_tuteur_createur' | 'sauvegarde_justice' | 'mandat_adhoc_majeur'
 function buildEnqueteMesuresUpdateMutation(prefix) {
   return gql`
@@ -131,3 +102,55 @@ export const UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR = buildEnqueteMesuresUpdateMutat
 export const UPDATE_ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresUpdateMutation(
   "sauvegarde_justice"
 );
+
+export const UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES = gql`
+  mutation update_enquete_activite_revision_mesures(
+    $id: Int!
+    $revisionsMainLevee: Int
+    $revisionsMasp: Int
+    $revisionsReconduction: Int
+    $revisionsChangement: Int
+    $revisionsAutre: Int
+  ) {
+    update_enquete_reponses_activite_by_pk(
+      pk_columns: { id: $id }
+      _set: {
+        revisions_main_levee: $revisionsMainLevee
+        revisions_masp: $revisionsMasp
+        revisions_reconduction: $revisionsReconduction
+        revisions_changement: $revisionsChangement
+        revisions_autre: $revisionsAutre
+      }
+    ) {
+      id
+      revisions_main_levee
+      revisions_masp
+      revisions_reconduction
+      revisions_changement
+      revisions_autre
+    }
+  }
+`;
+
+export const UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF = gql`
+  mutation update_enquete_causes_sortie_dispositif(
+    $id: Int!
+    $sortiesMainLevee: Int
+    $sortiesDeces: Int
+    $sortiesMasp: Int
+  ) {
+    update_enquete_reponses_activite_by_pk(
+      pk_columns: { id: $id }
+      _set: {
+        sorties_main_levee: $sortiesMainLevee
+        sorties_deces: $sortiesDeces
+        sorties_masp: $sortiesMasp
+      }
+    ) {
+      id
+      sorties_main_levee
+      sorties_deces
+      sorties_masp
+    }
+  }
+`;

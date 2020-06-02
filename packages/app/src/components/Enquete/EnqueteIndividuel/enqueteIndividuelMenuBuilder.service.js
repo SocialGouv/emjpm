@@ -1,5 +1,6 @@
 import {
   EnqueteActiviteAccompagnementJudiciaire,
+  EnqueteActiviteCausesSortiesDispositif,
   EnqueteActiviteCuratelleBiens,
   EnqueteActiviteCuratellePersonne,
   EnqueteActiviteCuratelleRenforcee,
@@ -133,10 +134,17 @@ function buildMenuSections(enqueteReponse) {
           )
         },
         {
-          label: "Révision de mesures",
+          label: "Issues des révisions de mesures",
           component: EnqueteActiviteRevisionMesures,
           isValid: transformStatusToIsValidProperty(
-            enqueteReponse.enquete_reponses_activite_revision_mesures_status
+            enqueteReponse.enquete_reponses_activite_revision_mesures_status // FIXME
+          )
+        },
+        {
+          label: "Causes des sorties du dispositif",
+          component: EnqueteActiviteCausesSortiesDispositif,
+          isValid: transformStatusToIsValidProperty(
+            enqueteReponse.enquete_reponses_activite_revision_mesures_status // FIXME
           )
         }
       ]
