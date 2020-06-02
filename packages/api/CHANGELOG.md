@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.36.0](https://github.com/SocialGouv/emjpm/compare/v25.35.1...v25.36.0) (2020-06-02)
+
+
+### Features
+
+* **enquete:** import individuel activite [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1875](https://github.com/SocialGouv/emjpm/issues/1875)) ([9dc6703](https://github.com/SocialGouv/emjpm/commit/9dc67036fa8f1c9a6cefc1e842f4237c16c7356e))
+* **enquete:** import individuel activite refactor nvx champs [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1877](https://github.com/SocialGouv/emjpm/issues/1877)) ([a1df5bc](https://github.com/SocialGouv/emjpm/commit/a1df5bcf460b33f86a4de2682a42693b4c4a7deb))
+* **enquete:** import individuel formation [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1867](https://github.com/SocialGouv/emjpm/issues/1867)) ([442cb13](https://github.com/SocialGouv/emjpm/commit/442cb13cb0f6fccc9894644527e4350fc7e091c7))
+* **enquete:** initialize prepose form ([#1880](https://github.com/SocialGouv/emjpm/issues/1880)) ([2beb779](https://github.com/SocialGouv/emjpm/commit/2beb7791c02aef59003e4b058284c29421d47c74))
+* **enquete:** submit enquete form for mandataire individuel ([#1858](https://github.com/SocialGouv/emjpm/issues/1858)) ([b3f87cd](https://github.com/SocialGouv/emjpm/commit/b3f87cdcf0d96036477439abb058ad3dc06636fe))
+
+
+
+
+
 ## [25.35.1](https://github.com/SocialGouv/emjpm/compare/v25.35.0...v25.35.1) (2020-05-29)
 
 

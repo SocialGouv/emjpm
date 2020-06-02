@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.36.0](https://github.com/SocialGouv/emjpm/compare/v25.35.1...v25.36.0) (2020-06-02)
+
+
+### Bug Fixes
+
+* **enquete:** remove submitted_at default value ([2d8f1f9](https://github.com/SocialGouv/emjpm/commit/2d8f1f9486443a77efb57cd613bfa6a7a14b2bda))
+* **knex:** update snapshots ([#1868](https://github.com/SocialGouv/emjpm/issues/1868)) ([8111e30](https://github.com/SocialGouv/emjpm/commit/8111e30580d3e2245b8700c902fd739fed4f601c))
+
+
+### Features
+
+* **enquete:** import individuel activite [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1875](https://github.com/SocialGouv/emjpm/issues/1875)) ([9dc6703](https://github.com/SocialGouv/emjpm/commit/9dc67036fa8f1c9a6cefc1e842f4237c16c7356e))
+* **enquete:** import individuel formation [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1867](https://github.com/SocialGouv/emjpm/issues/1867)) ([442cb13](https://github.com/SocialGouv/emjpm/commit/442cb13cb0f6fccc9894644527e4350fc7e091c7))
+* **knex:** new migration to create enquete_reponses_modalite_exercice ([#1859](https://github.com/SocialGouv/emjpm/issues/1859)) ([5f386e2](https://github.com/SocialGouv/emjpm/commit/5f386e2518997bb496429104ef17f78b11ee351d))
+* **liste-blanche:** add filter bar ([#1872](https://github.com/SocialGouv/emjpm/issues/1872)) ([eca5e85](https://github.com/SocialGouv/emjpm/commit/eca5e85b55bde01f0ea23261350821f42f849059))
+* **liste-blanche:** add siret ([#1883](https://github.com/SocialGouv/emjpm/issues/1883)) ([402735d](https://github.com/SocialGouv/emjpm/commit/402735d62f56122ff73af5e475292718c956a2f8))
+* **mesure:** add magistrat ([bea15c5](https://github.com/SocialGouv/emjpm/commit/bea15c56eae595b7ee11b9fd5a1d82b1323be161))
+
+
+
+
+
 ## [25.35.1](https://github.com/SocialGouv/emjpm/compare/v25.35.0...v25.35.1) (2020-05-29)
 
 **Note:** Version bump only for package @emjpm/knex
