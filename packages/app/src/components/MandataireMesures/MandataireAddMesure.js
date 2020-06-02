@@ -69,8 +69,8 @@ export const MandataireAddMesure = () => {
             const { department, geolocation } = location;
             variables.code_postal = values.zipcode;
             variables.ville = values.city.toUpperCase();
-            variables.latitude = geolocation ? geolocation.latitude : "";
-            variables.longitude = geolocation ? geolocation.longitude : "";
+            variables.latitude = geolocation ? geolocation.latitude : null;
+            variables.longitude = geolocation ? geolocation.longitude : null;
             variables.department_id = department.id;
           }
         }
