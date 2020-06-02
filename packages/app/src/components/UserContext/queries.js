@@ -98,6 +98,7 @@ export const MAGISTRAT_USERS = gql`
       type
       username
       magistrat {
+        id
         ti_id
         ti {
           id
