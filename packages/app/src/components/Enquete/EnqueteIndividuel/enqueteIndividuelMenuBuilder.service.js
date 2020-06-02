@@ -1,10 +1,14 @@
 import {
   EnqueteActiviteAccompagnementJudiciaire,
+  EnqueteActiviteCausesSortiesDispositif,
   EnqueteActiviteCuratelleBiens,
   EnqueteActiviteCuratellePersonne,
   EnqueteActiviteCuratelleRenforcee,
   EnqueteActiviteCuratelleSimple,
+  EnqueteActiviteMandatHadocMajeur,
   EnqueteActiviteRevisionMesures,
+  EnqueteActiviteSauvegardeJustice,
+  EnqueteActiviteSubrogeTuteurCreateur,
   EnqueteActiviteTutelle
 } from "../EnqueteActivite";
 import {
@@ -109,10 +113,38 @@ function buildMenuSections(enqueteReponse) {
           )
         },
         {
-          label: "Révision de mesures",
+          label: "Subrogé tuteur ou curateur",
+          component: EnqueteActiviteSubrogeTuteurCreateur,
+          isValid: transformStatusToIsValidProperty(
+            enqueteReponse.enquete_reponses_activite_curatelle_personne_status // FIXME
+          )
+        },
+        {
+          label: "Sauvegarde de justice",
+          component: EnqueteActiviteSauvegardeJustice,
+          isValid: transformStatusToIsValidProperty(
+            enqueteReponse.enquete_reponses_activite_curatelle_personne_status // FIXME
+          )
+        },
+        {
+          label: "Mandat ad hoc majeur",
+          component: EnqueteActiviteMandatHadocMajeur,
+          isValid: transformStatusToIsValidProperty(
+            enqueteReponse.enquete_reponses_activite_curatelle_personne_status // FIXME
+          )
+        },
+        {
+          label: "Issues des révisions de mesures",
           component: EnqueteActiviteRevisionMesures,
           isValid: transformStatusToIsValidProperty(
-            enqueteReponse.enquete_reponses_activite_revision_mesures_status
+            enqueteReponse.enquete_reponses_activite_revision_mesures_status // FIXME
+          )
+        },
+        {
+          label: "Causes des sorties du dispositif",
+          component: EnqueteActiviteCausesSortiesDispositif,
+          isValid: transformStatusToIsValidProperty(
+            enqueteReponse.enquete_reponses_activite_revision_mesures_status // FIXME
           )
         }
       ]

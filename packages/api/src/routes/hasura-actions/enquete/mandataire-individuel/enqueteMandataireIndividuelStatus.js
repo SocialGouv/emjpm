@@ -38,6 +38,7 @@ async function enqueteMandataireIndividuelStatus(enqueteReponse) {
   const activiteCuratelleBiensStatus = 0;
   const activiteCuratellePersonneStatus = 0;
   const activiteRevisionMesuresStatus = 0;
+  const activiteSubrogeTuteurCreateurStatus = 0;
 
   const prestationsSocialesStatus = await getValidationStatus(
     enqueteReponse.enquete_reponses_prestations_sociale,
@@ -72,6 +73,7 @@ async function enqueteMandataireIndividuelStatus(enqueteReponse) {
     populationsTutelleStatus,
     populationsAccompagnementJudiciaireStatus,
     populationsSauvegardeJusticeStatus,
+    activiteSubrogeTuteurCreateurStatus,
     populationsAutreStatus
   };
 }

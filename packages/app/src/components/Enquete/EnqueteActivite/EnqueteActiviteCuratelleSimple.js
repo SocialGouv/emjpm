@@ -1,10 +1,12 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React from "react";
+import React, { useMemo } from "react";
 import { Box } from "rebass";
 
-import { EnqueteActiviteForm } from "./EnqueteActiviteForm";
+import { EnqueteActiviteEtablissementDomicileForm } from "./common";
 import { UPDATE_ENQUETE_ACTIVITE_CURATELLE_SIMPLE } from "./mutations";
 import { ENQUETE_CURATELLE_SIMPLE } from "./queries";
+
+const PREFIX = "curatelle_simple";
 
 export const EnqueteActiviteCuratelleSimple = props => {
   const { goToPrevPage, goToNextPage, enqueteReponse } = props;
@@ -26,37 +28,31 @@ export const EnqueteActiviteCuratelleSimple = props => {
     }
   });
 
-  const {
-    curatelle_simple_domicile_debut_annee,
-    curatelle_simple_domicile_fin_annee,
-    curatelle_simple_etablissement_debut_annee,
-    curatelle_simple_etablissement_fin_annee
-  } = data ? data.enquete_reponses_activite_by_pk || {} : {};
+  const normalizedData = useMemo(() => {
+    const r = data ? data.enquete_reponses_activite_by_pk || {} : {};
+
+    return {
+      etablissementDebutAnnee: r[`${PREFIX}_etablissement_debut_annee`],
+      etablissementFinAnnee: r[`${PREFIX}_etablissement_fin_annee`],
+      domicileDebutAnnee: r[`${PREFIX}_domicile_debut_annee`],
+      domicileFinAnnee: r[`${PREFIX}_domicile_fin_annee`],
+      etablissementMesuresNouvelles: r[`${PREFIX}_etablissement_mesures_nouvelles`],
+      etablissementSortieMesures: r[`${PREFIX}_etablissement_sortie_mesures`],
+      domicileMesuresNouvelles: r[`${PREFIX}_domicile_mesures_nouvelles`],
+      domicileSortieMesures: r[`${PREFIX}_domicile_sortie_mesures`]
+    };
+  }, [data]);
 
   return (
     <Box>
-      <EnqueteActiviteForm
+      <EnqueteActiviteEtablissementDomicileForm
         loading={loading}
-        data={{
-          nbMesureEtablissementDebutAnnee: curatelle_simple_etablissement_debut_annee,
-          nbMesureEtablissementFinAnnee: curatelle_simple_etablissement_fin_annee,
-          nbMesureDomicileDebutAnnee: curatelle_simple_domicile_debut_annee,
-          nbMesureDomicileFinAnnee: curatelle_simple_domicile_fin_annee
-        }}
+        data={normalizedData}
         handleSubmit={async values => {
-          const {
-            nbMesureDomicileDebutAnnee,
-            nbMesureDomicileFinAnnee,
-            nbMesureEtablissementDebutAnnee,
-            nbMesureEtablissementFinAnnee
-          } = values;
           await updateEnquete({
             variables: {
               id: enquete_reponses_activite_id,
-              etablissementDebutAnnee: nbMesureEtablissementDebutAnnee || null,
-              etablissementFinAnnee: nbMesureEtablissementFinAnnee || null,
-              domicileDebutAnnee: nbMesureDomicileDebutAnnee || null,
-              domicileFinAnnee: nbMesureDomicileFinAnnee || null
+              ...values
             }
           });
           await goToNextPage();
