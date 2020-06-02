@@ -349,7 +349,7 @@ Object {
     "type": "integer",
   },
   "submitted_at": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
+    "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "timestamp with time zone",
