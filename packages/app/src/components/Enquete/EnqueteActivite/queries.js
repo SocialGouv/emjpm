@@ -62,3 +62,5 @@ function buildEnqueteMesuresQuery(prefix) {
   `;
 }
 export const ENQUETE_SUBROGE_TUTEUR_CREATEUR = buildEnqueteMesuresQuery("subroge_tuteur_createur");
+export const ENQUETE_MANDAT_ADHOC_MAJEUR = buildEnqueteMesuresQuery("mandat_adhoc_majeur");
+export const ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresQuery("sauvegarde_justice");

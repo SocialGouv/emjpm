@@ -4,7 +4,9 @@ import {
   EnqueteActiviteCuratellePersonne,
   EnqueteActiviteCuratelleRenforcee,
   EnqueteActiviteCuratelleSimple,
+  EnqueteActiviteMandatHadocMajeur,
   EnqueteActiviteRevisionMesures,
+  EnqueteActiviteSauvegardeJustice,
   EnqueteActiviteSubrogeTuteurCreateur,
   EnqueteActiviteTutelle
 } from "../EnqueteActivite";
@@ -110,10 +112,24 @@ function buildMenuSections(enqueteReponse) {
           )
         },
         {
-          label: "Subroge tuteur/createur",
+          label: "Subrogé tuteur ou curateur",
           component: EnqueteActiviteSubrogeTuteurCreateur,
           isValid: transformStatusToIsValidProperty(
-            enqueteReponse.enquete_reponses_activite_curatelle_personne_status
+            enqueteReponse.enquete_reponses_activite_curatelle_personne_status // FIXME
+          )
+        },
+        {
+          label: "Sauvegarde de justice",
+          component: EnqueteActiviteSauvegardeJustice,
+          isValid: transformStatusToIsValidProperty(
+            enqueteReponse.enquete_reponses_activite_curatelle_personne_status // FIXME
+          )
+        },
+        {
+          label: "Mandat ad hoc majeur",
+          component: EnqueteActiviteMandatHadocMajeur,
+          isValid: transformStatusToIsValidProperty(
+            enqueteReponse.enquete_reponses_activite_curatelle_personne_status // FIXME
           )
         },
         {

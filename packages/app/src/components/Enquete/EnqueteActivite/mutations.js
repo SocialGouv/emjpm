@@ -125,3 +125,9 @@ function buildEnqueteMesuresUpdateMutation(prefix) {
 export const UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR = buildEnqueteMesuresUpdateMutation(
   "subroge_tuteur_createur"
 );
+export const UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR = buildEnqueteMesuresUpdateMutation(
+  "mandat_adhoc_majeur"
+);
+export const UPDATE_ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresUpdateMutation(
+  "sauvegarde_justice"
+);

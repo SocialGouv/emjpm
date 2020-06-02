@@ -5,4 +5,6 @@ export { EnqueteActiviteTutelle } from "./EnqueteActiviteTutelle";
 export { EnqueteActiviteCuratelleBiens } from "./EnqueteActiviteCuratelleBiens";
 export { EnqueteActiviteCuratellePersonne } from "./EnqueteActiviteCuratellePersonne";
 export { EnqueteActiviteAccompagnementJudiciaire } from "./EnqueteActiviteAccompagnementJudiciaire";
+export { EnqueteActiviteMandatHadocMajeur } from "./EnqueteActiviteMandatHadocMajeur";
+export { EnqueteActiviteSauvegardeJustice } from "./EnqueteActiviteSauvegardeJustice";
 export { EnqueteActiviteRevisionMesures } from "./EnqueteActiviteRevisionMesures";

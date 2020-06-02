@@ -53,7 +53,7 @@ export const EnqueteActiviteSubrogeTuteurCreateur = props => {
           await goToNextPage();
         }}
         goToPrevPage={goToPrevPage}
-        title="Subrogé tuteur créateur"
+        title="Subrogé tuteur ou curateur"
       />
     </Box>
   );
