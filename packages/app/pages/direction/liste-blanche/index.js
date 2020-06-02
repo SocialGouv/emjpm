@@ -5,8 +5,8 @@ import { Box, Flex } from "rebass";
 import { LayoutDirection } from "../../../src/components/Layout";
 import { ListeBlanche } from "../../../src/components/ListeBlanche";
 import { ListeBlancheFilter } from "../../../src/components/ListeBlancheFilter";
-import { ListeBlancheSummary } from "../../../src/components/ListeBlancheSummary";
 import { FiltersContextProvider } from "../../../src/components/ListeBlancheFilter/context";
+import { ListeBlancheSummary } from "../../../src/components/ListeBlancheSummary";
 import { withAuthSync } from "../../../src/util/auth";
 
 const ListBlanchePage = () => {
