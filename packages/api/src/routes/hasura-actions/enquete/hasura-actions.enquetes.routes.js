@@ -3,15 +3,37 @@ const HttpError = require("../../../utils/error/HttpError");
 
 const logger = require("../../../utils/logger");
 const mandataireIndividuelEnqueteImporter = require("./mandataire-individuel-import/mandataireIndividuelEnqueteImporter");
-const preposeEnqueteImporter = require("./prepose-import/preposeEnqueteImporter");
+const preposeEnqueteImporter = require("./mandataire-prepose-import/preposeEnqueteImporter");
 const checkImportEnqueteParameters = require("./hasura-actions.enquetes-import.checker");
 const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
 const {
   initEnqueteMandataireIndividuel,
   submitEnqueteMandataireIndividuel
 } = require("./mandataire-individuel/enqueteMandataireIndividuel");
+const {
+  initEnqueteMandatairePrepose
+} = require("./mandataire-prepose/enqueteMandatairePrepose");
 
 const router = express.Router();
+
+router.post("/mandataire-prepose", async (req, res, next) => {
+  try {
+    const { enqueteId, mandataireId } = req.body.input;
+    if (!enqueteId || !mandataireId) {
+      return res.status(422).json({
+        message: "Invalid parameters: enqueteId or mandataireId is required"
+      });
+    }
+    const result = await initEnqueteMandatairePrepose({
+      enqueteId,
+      mandataireId
+    });
+    return res.json(result);
+  } catch (err) {
+    logger.error(err);
+    next(err);
+  }
+});
 
 router.post(
   "/mandataire-individuel/submit",
