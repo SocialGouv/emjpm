@@ -85,10 +85,10 @@ const ListeBlancheSummary = () => {
         {selectedDepartement ? selectedDepartement.label : "Tous les départements"}
       </Heading2>
       <Flex flexDirection="column" pt={1}>
-        <LabelValue label="Mandataire individuel" value={individuelCount}></LabelValue>
-        <LabelValue label="Mandataire préposé à un établissement" value={preposeCount}></LabelValue>
-        <LabelValue label="Membre d'un service mandataire" value={serviceCount}></LabelValue>
-        <LabelValue label="Magistrat" value={tiCount}></LabelValue>
+        <LabelValue label="Mandataire individuel" value={individuelCount} />
+        <LabelValue label="Mandataire préposé à un établissement" value={preposeCount} />
+        <LabelValue label="Membre d'un service mandataire" value={serviceCount} />
+        <LabelValue label="Magistrat" value={tiCount} />
       </Flex>
     </Card>
   );
