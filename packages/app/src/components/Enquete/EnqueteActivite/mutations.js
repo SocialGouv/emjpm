@@ -1,58 +1,110 @@
 import gql from "graphql-tag";
 
-export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_RENFORCEE = gql`
-  mutation update_enquete_activite_curatelle_renforcee(
-    $id: Int!
-    $etablissementDebutAnnee: Int
-    $etablissementFinAnnee: Int
-    $domicileDebutAnnee: Int
-    $domicileFinAnnee: Int
-  ) {
-    update_enquete_reponses_activite_by_pk(
-      pk_columns: { id: $id }
-      _set: {
-        curatelle_renforcee_etablissement_debut_annee: $etablissementDebutAnnee
-        curatelle_renforcee_etablissement_fin_annee: $etablissementFinAnnee
-        curatelle_renforcee_domicile_debut_annee: $domicileDebutAnnee
-        curatelle_renforcee_domicile_fin_annee: $domicileFinAnnee
-      }
+// prefix: 'curatelle_simple' | 'curatelle_renforcee' | 'curatelle_personne' | 'tutelle' | 'curatelle_biens' | 'accompagnement_judiciaire
+function buildEnqueteEtablissementDomicileUpdateMutation(prefix) {
+  return gql`
+    mutation update_enquete_activite_${prefix}(
+      $id: Int!
+      $etablissementDebutAnnee: Int
+      $etablissementFinAnnee: Int
+      $domicileDebutAnnee: Int
+      $domicileFinAnnee: Int
+      $etablissementMesuresNouvelles: Int
+      $etablissementSortieMesures: Int
+      $domicileMesuresNouvelles: Int
+      $domicileSortieMesures: Int
     ) {
-      id
-      curatelle_renforcee_etablissement_debut_annee
-      curatelle_renforcee_etablissement_fin_annee
-      curatelle_renforcee_domicile_debut_annee
-      curatelle_renforcee_domicile_fin_annee
+      update_enquete_reponses_activite_by_pk(
+        pk_columns: { id: $id }
+        _set: {
+          ${prefix}_etablissement_debut_annee: $etablissementDebutAnnee
+          ${prefix}_etablissement_fin_annee: $etablissementFinAnnee
+          ${prefix}_domicile_debut_annee: $domicileDebutAnnee
+          ${prefix}_domicile_fin_annee: $domicileFinAnnee
+          ${prefix}_etablissement_mesures_nouvelles: $etablissementMesuresNouvelles
+          ${prefix}_etablissement_sortie_mesures: $etablissementSortieMesures
+          ${prefix}_domicile_mesures_nouvelles: $domicileMesuresNouvelles
+          ${prefix}_domicile_sortie_mesures: $domicileSortieMesures
+        }
+      ) {
+        id
+        ${prefix}_etablissement_debut_annee
+        ${prefix}_etablissement_fin_annee
+        ${prefix}_domicile_debut_annee
+        ${prefix}_domicile_fin_annee
+        ${prefix}_etablissement_mesures_nouvelles
+        ${prefix}_etablissement_sortie_mesures
+        ${prefix}_domicile_mesures_nouvelles
+        ${prefix}_domicile_sortie_mesures
+      }
     }
-  }
-`;
+  `;
+}
 
-export const UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE = gql`
-  mutation update_enquete_activite_tutelle(
-    $id: Int!
-    $etablissementDebutAnnee: Int
-    $etablissementFinAnnee: Int
-    $domicileDebutAnnee: Int
-    $domicileFinAnnee: Int
-  ) {
-    update_enquete_reponses_activite_by_pk(
-      pk_columns: { id: $id }
-      _set: {
-        accompagnement_judiciaire_etablissement_debut_annee: $etablissementDebutAnnee
-        accompagnement_judiciaire_etablissement_fin_annee: $etablissementFinAnnee
-        accompagnement_judiciaire_domicile_debut_annee: $domicileDebutAnnee
-        accompagnement_judiciaire_domicile_fin_annee: $domicileFinAnnee
-      }
+export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_SIMPLE = buildEnqueteEtablissementDomicileUpdateMutation(
+  "curatelle_simple"
+);
+
+export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_RENFORCEE = buildEnqueteEtablissementDomicileUpdateMutation(
+  "curatelle_renforcee"
+);
+
+export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_PERSONNE = buildEnqueteEtablissementDomicileUpdateMutation(
+  "curatelle_personne"
+);
+
+export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS = buildEnqueteEtablissementDomicileUpdateMutation(
+  "curatelle_biens"
+);
+
+export const UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE = buildEnqueteEtablissementDomicileUpdateMutation(
+  "accompagnement_judiciaire"
+);
+
+export const UPDATE_ENQUETE_ACTIVITE_TUTELLE = buildEnqueteEtablissementDomicileUpdateMutation(
+  "tutelle"
+);
+
+// prefix: 'subroge_tuteur_createur' | 'sauvegarde_justice' | 'mandat_adhoc_majeur'
+function buildEnqueteMesuresUpdateMutation(prefix) {
+  return gql`
+    mutation update_enquete_activite_${prefix}(
+      $id: Int!
+      $debutAnnee: Int
+      $finAnnee: Int
+      $mesuresNouvelles: Int
+      $sortieMesures: Int
     ) {
-      accompagnement_judiciaire_etablissement_debut_annee
-      accompagnement_judiciaire_etablissement_fin_annee
-      accompagnement_judiciaire_domicile_debut_annee
-      accompagnement_judiciaire_domicile_fin_annee
+      update_enquete_reponses_activite_by_pk(
+        pk_columns: { id: $id }
+        _set: {
+          ${prefix}_debut_annee: $debutAnnee
+          ${prefix}_fin_annee: $finAnnee
+          ${prefix}_mesures_nouvelles: $mesuresNouvelles
+          ${prefix}_sortie_mesures: $sortieMesures
+        }
+      ) {
+        id
+        ${prefix}_debut_annee
+        ${prefix}_fin_annee
+        ${prefix}_mesures_nouvelles
+        ${prefix}_sortie_mesures
+      }
     }
-  }
-`;
+  `;
+}
+export const UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR = buildEnqueteMesuresUpdateMutation(
+  "subroge_tuteur_createur"
+);
+export const UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR = buildEnqueteMesuresUpdateMutation(
+  "mandat_adhoc_majeur"
+);
+export const UPDATE_ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresUpdateMutation(
+  "sauvegarde_justice"
+);
 
 export const UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES = gql`
-  mutation update_enquete_activite_curatelle_biens(
+  mutation update_enquete_activite_revision_mesures(
     $id: Int!
     $revisionsMainLevee: Int
     $revisionsMasp: Int
@@ -80,106 +132,25 @@ export const UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES = gql`
   }
 `;
 
-export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS = gql`
-  mutation update_enquete_activite_curatelle_biens(
+export const UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF = gql`
+  mutation update_enquete_causes_sortie_dispositif(
     $id: Int!
-    $etablissementDebutAnnee: Int
-    $etablissementFinAnnee: Int
-    $domicileDebutAnnee: Int
-    $domicileFinAnnee: Int
+    $sortiesMainLevee: Int
+    $sortiesDeces: Int
+    $sortiesMasp: Int
   ) {
     update_enquete_reponses_activite_by_pk(
       pk_columns: { id: $id }
       _set: {
-        curatelle_biens_etablissement_debut_annee: $etablissementDebutAnnee
-        curatelle_biens_etablissement_fin_annee: $etablissementFinAnnee
-        curatelle_biens_domicile_debut_annee: $domicileDebutAnnee
-        curatelle_biens_domicile_fin_annee: $domicileFinAnnee
+        sorties_main_levee: $sortiesMainLevee
+        sorties_deces: $sortiesDeces
+        sorties_masp: $sortiesMasp
       }
     ) {
       id
-      curatelle_biens_etablissement_debut_annee
-      curatelle_biens_etablissement_fin_annee
-      curatelle_biens_domicile_debut_annee
-      curatelle_biens_domicile_fin_annee
-    }
-  }
-`;
-
-export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_PERSONNE = gql`
-  mutation update_enquete_activite_curatelle_personne(
-    $id: Int!
-    $etablissementDebutAnnee: Int
-    $etablissementFinAnnee: Int
-    $domicileDebutAnnee: Int
-    $domicileFinAnnee: Int
-  ) {
-    update_enquete_reponses_activite_by_pk(
-      pk_columns: { id: $id }
-      _set: {
-        curatelle_personne_etablissement_debut_annee: $etablissementDebutAnnee
-        curatelle_personne_etablissement_fin_annee: $etablissementFinAnnee
-        curatelle_personne_domicile_debut_annee: $domicileDebutAnnee
-        curatelle_personne_domicile_fin_annee: $domicileFinAnnee
-      }
-    ) {
-      id
-      curatelle_personne_etablissement_debut_annee
-      curatelle_personne_etablissement_fin_annee
-      curatelle_personne_domicile_debut_annee
-      curatelle_personne_domicile_fin_annee
-    }
-  }
-`;
-
-export const UPDATE_ENQUETE_ACTIVITE_TUTELLE = gql`
-  mutation update_enquete_activite_tutelle(
-    $id: Int!
-    $etablissementDebutAnnee: Int
-    $etablissementFinAnnee: Int
-    $domicileDebutAnnee: Int
-    $domicileFinAnnee: Int
-  ) {
-    update_enquete_reponses_activite_by_pk(
-      pk_columns: { id: $id }
-      _set: {
-        tutelle_etablissement_debut_annee: $etablissementDebutAnnee
-        tutelle_etablissement_fin_annee: $etablissementFinAnnee
-        tutelle_domicile_debut_annee: $domicileDebutAnnee
-        tutelle_domicile_fin_annee: $domicileFinAnnee
-      }
-    ) {
-      id
-      tutelle_etablissement_debut_annee
-      tutelle_etablissement_fin_annee
-      tutelle_domicile_debut_annee
-      tutelle_domicile_fin_annee
-    }
-  }
-`;
-
-export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_SIMPLE = gql`
-  mutation update_enquete_activite_curatelle_simple(
-    $id: Int!
-    $etablissementDebutAnnee: Int
-    $etablissementFinAnnee: Int
-    $domicileDebutAnnee: Int
-    $domicileFinAnnee: Int
-  ) {
-    update_enquete_reponses_activite_by_pk(
-      pk_columns: { id: $id }
-      _set: {
-        curatelle_simple_domicile_debut_annee: $domicileDebutAnnee
-        curatelle_simple_domicile_fin_annee: $domicileFinAnnee
-        curatelle_simple_etablissement_debut_annee: $etablissementDebutAnnee
-        curatelle_simple_etablissement_fin_annee: $etablissementFinAnnee
-      }
-    ) {
-      id
-      curatelle_simple_domicile_debut_annee
-      curatelle_simple_domicile_fin_annee
-      curatelle_simple_etablissement_debut_annee
-      curatelle_simple_etablissement_fin_annee
+      sorties_main_levee
+      sorties_deces
+      sorties_masp
     }
   }
 `;
