@@ -2536,6 +2536,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "siret": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "type": Object {
     "defaultValue": null,
     "maxLength": null,
