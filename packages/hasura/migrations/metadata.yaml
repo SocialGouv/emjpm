@@ -1904,13 +1904,14 @@ tables:
   - role: direction
     permission:
       columns:
-      - id
       - created_at
-      - user_id
       - email
+      - id
       - nom
       - prenom
+      - siret
       - type
+      - user_id
       filter: {}
       allow_aggregations: true
 - table:
