@@ -22,7 +22,7 @@ export const MagistratMesureAddForm = props => {
   const { serviceId, mandataireId, cancelActionRoute } = props;
   const {
     cabinet,
-    magistrat: { ti_id: tiId }
+    magistrat: { id: magistratId, ti_id: tiId }
   } = useContext(UserContext);
 
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
@@ -98,6 +98,7 @@ export const MagistratMesureAddForm = props => {
             civilite: values.civilite.value,
             judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
             mandataire_id: mandataireId,
+            magistrat_id: magistratId,
             numero_rg: values.numero_rg,
             ti: tiId,
             type: values.type.value,
@@ -114,6 +115,7 @@ export const MagistratMesureAddForm = props => {
             judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
             numero_rg: values.numero_rg,
             service_id: serviceId,
+            magistrat_id: magistratId,
             ti: tiId,
             type: values.type.value,
             urgent: values.urgent.value
