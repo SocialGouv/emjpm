@@ -2861,6 +2861,12 @@ Object {
     "nullable": true,
     "type": "real",
   },
+  "magistrat_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "mandataire_id": Object {
     "defaultValue": null,
     "maxLength": null,

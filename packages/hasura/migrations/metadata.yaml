@@ -2282,6 +2282,7 @@ tables:
       - id
       - is_urgent
       - judgment_date
+      - magistrat_id
       - mandataire_id
       - numero_dossier
       - numero_rg
@@ -2450,6 +2451,7 @@ tables:
       - judgment_date
       - latitude
       - longitude
+      - magistrat_id
       - mandataire_id
       - numero_dossier
       - numero_rg
