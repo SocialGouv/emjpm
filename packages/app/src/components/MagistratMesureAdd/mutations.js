@@ -4,6 +4,7 @@ export const CHOOSE_MANDATAIRE = gql`
   mutation chooseMandataire(
     $ti: Int!
     $mandataire_id: Int!
+    $magistrat_id: Int!
     $type: String!
     $civilite: String!
     $annee: String!
@@ -19,6 +20,7 @@ export const CHOOSE_MANDATAIRE = gql`
         cabinet: $cabinet
         ti_id: $ti
         mandataire_id: $mandataire_id
+        magistrat_id: $magistrat_id
         type: $type
         civilite: $civilite
         annee: $annee
@@ -55,6 +57,7 @@ export const CHOOSE_SERVICE = gql`
   mutation chooseService(
     $ti: Int!
     $service_id: Int!
+    $magistrat_id: Int!
     $type: String!
     $civilite: String!
     $annee: String!
@@ -69,6 +72,7 @@ export const CHOOSE_SERVICE = gql`
         is_urgent: $urgent
         cabinet: $cabinet
         service_id: $service_id
+        magistrat_id: $magistrat_id
         type: $type
         civilite: $civilite
         annee: $annee
