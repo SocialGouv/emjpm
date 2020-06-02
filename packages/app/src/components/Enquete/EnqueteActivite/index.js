@@ -1,5 +1,6 @@
 export { EnqueteActiviteCuratelleSimple } from "./EnqueteActiviteCuratelleSimple";
 export { EnqueteActiviteCuratelleRenforcee } from "./EnqueteActiviteCuratelleRenforcee";
+export { EnqueteActiviteSubrogeTuteurCreateur } from "./EnqueteActiviteSubrogeTuteurCreateur";
 export { EnqueteActiviteTutelle } from "./EnqueteActiviteTutelle";
 export { EnqueteActiviteCuratelleBiens } from "./EnqueteActiviteCuratelleBiens";
 export { EnqueteActiviteCuratellePersonne } from "./EnqueteActiviteCuratellePersonne";

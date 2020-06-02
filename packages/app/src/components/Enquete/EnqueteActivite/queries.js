@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
-// prefix: 'curatelle_simple' | 'curatelle_renforcee' | 'curatelle_personne' | 'tutelle' | 'curatelle_biens' | 'accompagnement_judiciaire
-function buildEnqueteQuery(prefix) {
+// prefix: 'curatelle_simple' | 'curatelle_renforcee' | 'curatelle_personne' | 'tutelle' | 'curatelle_biens' | 'accompagnement_judiciaire'
+function buildEnqueteEtablissementDomicileQuery(prefix) {
   return gql`
     query enquete_reponses_activite_${prefix}($id: Int!) {
       enquete_reponses_activite_by_pk(id: $id) {
@@ -18,17 +18,23 @@ function buildEnqueteQuery(prefix) {
   `;
 }
 
-export const ENQUETE_CURATELLE_SIMPLE = buildEnqueteQuery("curatelle_simple");
+export const ENQUETE_CURATELLE_SIMPLE = buildEnqueteEtablissementDomicileQuery("curatelle_simple");
 
-export const ENQUETE_CURATELLE_RENFORCEE = buildEnqueteQuery("curatelle_renforcee");
+export const ENQUETE_CURATELLE_RENFORCEE = buildEnqueteEtablissementDomicileQuery(
+  "curatelle_renforcee"
+);
 
-export const ENQUETE_CURATELLE_PERSONNE = buildEnqueteQuery("curatelle_personne");
+export const ENQUETE_CURATELLE_PERSONNE = buildEnqueteEtablissementDomicileQuery(
+  "curatelle_personne"
+);
 
-export const ENQUETE_CURATELLE_BIENS = buildEnqueteQuery("curatelle_biens");
+export const ENQUETE_CURATELLE_BIENS = buildEnqueteEtablissementDomicileQuery("curatelle_biens");
 
-export const ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE = buildEnqueteQuery("accompagnement_judiciaire");
+export const ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE = buildEnqueteEtablissementDomicileQuery(
+  "accompagnement_judiciaire"
+);
 
-export const ENQUETE_TUTELLE = buildEnqueteQuery("tutelle");
+export const ENQUETE_TUTELLE = buildEnqueteEtablissementDomicileQuery("tutelle");
 
 export const ENQUETE_REVISION_MESURES = gql`
   query enquete_reponses_activite_revision_mesures($id: Int!) {
@@ -41,3 +47,18 @@ export const ENQUETE_REVISION_MESURES = gql`
     }
   }
 `;
+
+// prefix: 'subroge_tuteur_createur' | 'sauvegarde_justice' | 'mandat_adhoc_majeur'
+function buildEnqueteMesuresQuery(prefix) {
+  return gql`
+    query enquete_reponses_activite_${prefix}($id: Int!) {
+      enquete_reponses_activite_by_pk(id: $id) {
+        ${prefix}_debut_annee
+        ${prefix}_fin_annee
+        ${prefix}_mesures_nouvelles
+        ${prefix}_sortie_mesures
+      }
+    }
+  `;
+}
+export const ENQUETE_SUBROGE_TUTEUR_CREATEUR = buildEnqueteMesuresQuery("subroge_tuteur_createur");

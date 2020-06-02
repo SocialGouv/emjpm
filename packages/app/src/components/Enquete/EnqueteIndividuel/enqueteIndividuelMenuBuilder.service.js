@@ -5,6 +5,7 @@ import {
   EnqueteActiviteCuratelleRenforcee,
   EnqueteActiviteCuratelleSimple,
   EnqueteActiviteRevisionMesures,
+  EnqueteActiviteSubrogeTuteurCreateur,
   EnqueteActiviteTutelle
 } from "../EnqueteActivite";
 import {
@@ -104,6 +105,13 @@ function buildMenuSections(enqueteReponse) {
         {
           label: "Tutelle ou curatelle à la personne",
           component: EnqueteActiviteCuratellePersonne,
+          isValid: transformStatusToIsValidProperty(
+            enqueteReponse.enquete_reponses_activite_curatelle_personne_status
+          )
+        },
+        {
+          label: "Subroge tuteur/createur",
+          component: EnqueteActiviteSubrogeTuteurCreateur,
           isValid: transformStatusToIsValidProperty(
             enqueteReponse.enquete_reponses_activite_curatelle_personne_status
           )

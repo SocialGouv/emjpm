@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useMemo } from "react";
 import { Box } from "rebass";
 
-import { EnqueteActiviteForm } from "./EnqueteActiviteForm";
+import { EnqueteActiviteEtablissementDomicileForm } from "./common";
 import { UPDATE_ENQUETE_ACTIVITE_CURATELLE_SIMPLE } from "./mutations";
 import { ENQUETE_CURATELLE_SIMPLE } from "./queries";
 
@@ -45,7 +45,7 @@ export const EnqueteActiviteCuratelleSimple = props => {
 
   return (
     <Box>
-      <EnqueteActiviteForm
+      <EnqueteActiviteEtablissementDomicileForm
         loading={loading}
         data={normalizedData}
         handleSubmit={async values => {
