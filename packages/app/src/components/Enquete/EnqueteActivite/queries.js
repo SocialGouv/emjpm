@@ -1,48 +1,57 @@
 import gql from "graphql-tag";
 
-export const ENQUETE_CURATELLE_SIMPLE = gql`
-  query enquete_reponses_activite_curatelle_simple($id: Int!) {
-    enquete_reponses_activite_by_pk(id: $id) {
-      curatelle_simple_domicile_debut_annee
-      curatelle_simple_domicile_fin_annee
-      curatelle_simple_etablissement_debut_annee
-      curatelle_simple_etablissement_fin_annee
+// prefix: 'curatelle_simple' | 'curatelle_renforcee' | 'curatelle_personne' | 'tutelle' | 'curatelle_biens' | 'accompagnement_judiciaire'
+function buildEnqueteEtablissementDomicileQuery(prefix) {
+  return gql`
+    query enquete_reponses_activite_${prefix}($id: Int!) {
+      enquete_reponses_activite_by_pk(id: $id) {
+        ${prefix}_domicile_debut_annee
+        ${prefix}_domicile_fin_annee
+        ${prefix}_etablissement_debut_annee
+        ${prefix}_etablissement_fin_annee
+        ${prefix}_etablissement_mesures_nouvelles
+        ${prefix}_etablissement_sortie_mesures
+        ${prefix}_domicile_mesures_nouvelles
+        ${prefix}_domicile_sortie_mesures
+      }
     }
-  }
-`;
+  `;
+}
 
-export const ENQUETE_CURATELLE_RENFORCEE = gql`
-  query enquete_reponses_activite_curatelle_renforcee($id: Int!) {
-    enquete_reponses_activite_by_pk(id: $id) {
-      curatelle_renforcee_domicile_debut_annee
-      curatelle_renforcee_domicile_fin_annee
-      curatelle_renforcee_etablissement_debut_annee
-      curatelle_renforcee_etablissement_fin_annee
-    }
-  }
-`;
+export const ENQUETE_CURATELLE_SIMPLE = buildEnqueteEtablissementDomicileQuery("curatelle_simple");
 
-export const ENQUETE_CURATELLE_PERSONNE = gql`
-  query enquete_reponses_activite_curatelle_personne($id: Int!) {
-    enquete_reponses_activite_by_pk(id: $id) {
-      curatelle_personne_domicile_debut_annee
-      curatelle_personne_domicile_fin_annee
-      curatelle_personne_etablissement_debut_annee
-      curatelle_personne_etablissement_fin_annee
-    }
-  }
-`;
+export const ENQUETE_CURATELLE_RENFORCEE = buildEnqueteEtablissementDomicileQuery(
+  "curatelle_renforcee"
+);
 
-export const ENQUETE_TUTELLE = gql`
-  query enquete_reponses_activite_tutelle($id: Int!) {
-    enquete_reponses_activite_by_pk(id: $id) {
-      tutelle_domicile_debut_annee
-      tutelle_domicile_fin_annee
-      tutelle_etablissement_debut_annee
-      tutelle_etablissement_fin_annee
+export const ENQUETE_CURATELLE_PERSONNE = buildEnqueteEtablissementDomicileQuery(
+  "curatelle_personne"
+);
+
+export const ENQUETE_CURATELLE_BIENS = buildEnqueteEtablissementDomicileQuery("curatelle_biens");
+
+export const ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE = buildEnqueteEtablissementDomicileQuery(
+  "accompagnement_judiciaire"
+);
+
+export const ENQUETE_TUTELLE = buildEnqueteEtablissementDomicileQuery("tutelle");
+
+// prefix: 'subroge_tuteur_createur' | 'sauvegarde_justice' | 'mandat_adhoc_majeur'
+function buildEnqueteMesuresQuery(prefix) {
+  return gql`
+    query enquete_reponses_activite_${prefix}($id: Int!) {
+      enquete_reponses_activite_by_pk(id: $id) {
+        ${prefix}_debut_annee
+        ${prefix}_fin_annee
+        ${prefix}_mesures_nouvelles
+        ${prefix}_sortie_mesures
+      }
     }
-  }
-`;
+  `;
+}
+export const ENQUETE_SUBROGE_TUTEUR_CREATEUR = buildEnqueteMesuresQuery("subroge_tuteur_createur");
+export const ENQUETE_MANDAT_ADHOC_MAJEUR = buildEnqueteMesuresQuery("mandat_adhoc_majeur");
+export const ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresQuery("sauvegarde_justice");
 
 export const ENQUETE_REVISION_MESURES = gql`
   query enquete_reponses_activite_revision_mesures($id: Int!) {
@@ -56,24 +65,12 @@ export const ENQUETE_REVISION_MESURES = gql`
   }
 `;
 
-export const ENQUETE_CURATELLE_BIENS = gql`
-  query enquetes_reponses_activite_curatelle_biens($id: Int!) {
+export const ENQUETE_CAUSES_SORTIE_DISPOSITIF = gql`
+  query enquete_reponses_activite_causes_sortie_dispositif($id: Int!) {
     enquete_reponses_activite_by_pk(id: $id) {
-      curatelle_biens_domicile_debut_annee
-      curatelle_biens_domicile_fin_annee
-      curatelle_biens_etablissement_debut_annee
-      curatelle_biens_etablissement_fin_annee
-    }
-  }
-`;
-
-export const ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE = gql`
-  query enquete_reponses_activite_accompagnement_judiciaire($id: Int!) {
-    enquete_reponses_activite_by_pk(id: $id) {
-      accompagnement_judiciaire_domicile_debut_annee
-      accompagnement_judiciaire_domicile_fin_annee
-      accompagnement_judiciaire_etablissement_debut_annee
-      accompagnement_judiciaire_etablissement_fin_annee
+      sorties_main_levee
+      sorties_deces
+      sorties_masp
     }
   }
 `;
