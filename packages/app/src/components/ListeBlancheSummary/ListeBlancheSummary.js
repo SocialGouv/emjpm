@@ -7,16 +7,16 @@ import { FiltersContext } from "../ListeBlancheFilter/context";
 import { LB_SUMMARY } from "./queries";
 
 const boxStyle = {
-  borderBottom: "1px solid",
-  borderBottomColor: "mediumGray",
+  // borderBottom: "1px solid",
+  // borderBottomColor: "mediumGray",
   mb: "1"
 };
 
 const labelStyle = {
   color: "mediumGray",
   fontFamily: "body",
-  fontSize: "11px",
-  fontWeight: "600"
+  fontSize: "12px",
+  fontWeight: "700"
 };
 
 const valueStyle = {
