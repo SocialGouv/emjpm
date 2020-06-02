@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.36.0](https://github.com/SocialGouv/emjpm/compare/v25.35.1...v25.36.0) (2020-06-02)
+
+
+### Bug Fixes
+
+* **enquete:** remove submitted_at default value ([2d8f1f9](https://github.com/SocialGouv/emjpm/commit/2d8f1f9486443a77efb57cd613bfa6a7a14b2bda))
+* **geoloc-update:** use null instead of empty string ([#1882](https://github.com/SocialGouv/emjpm/issues/1882)) ([36d12ae](https://github.com/SocialGouv/emjpm/commit/36d12ae5eb6f25d374fd05edd0ba963906c8461b))
+* **knex:** update snapshots ([#1868](https://github.com/SocialGouv/emjpm/issues/1868)) ([8111e30](https://github.com/SocialGouv/emjpm/commit/8111e30580d3e2245b8700c902fd739fed4f601c))
+
+
+### Features
+
+* **enquete:** add link in LayoutMap ([5c683ac](https://github.com/SocialGouv/emjpm/commit/5c683ac14f7e81ef877599cec830ad0f9c41ede1))
+* **enquete:** import individuel activite [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1875](https://github.com/SocialGouv/emjpm/issues/1875)) ([9dc6703](https://github.com/SocialGouv/emjpm/commit/9dc67036fa8f1c9a6cefc1e842f4237c16c7356e))
+* **enquete:** import individuel activite refactor nvx champs [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1877](https://github.com/SocialGouv/emjpm/issues/1877)) ([a1df5bc](https://github.com/SocialGouv/emjpm/commit/a1df5bcf460b33f86a4de2682a42693b4c4a7deb))
+* **enquete:** import individuel formation [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1867](https://github.com/SocialGouv/emjpm/issues/1867)) ([442cb13](https://github.com/SocialGouv/emjpm/commit/442cb13cb0f6fccc9894644527e4350fc7e091c7))
+* **enquete:** import individuel tab agrements [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1866](https://github.com/SocialGouv/emjpm/issues/1866)) ([7ea95c0](https://github.com/SocialGouv/emjpm/commit/7ea95c0df189c36a41ac6e35cdf61ab9f24f34eb))
+* **enquete:** initialize prepose form ([#1880](https://github.com/SocialGouv/emjpm/issues/1880)) ([2beb779](https://github.com/SocialGouv/emjpm/commit/2beb7791c02aef59003e4b058284c29421d47c74))
+* **enquete:** submit enquete form for mandataire individuel ([#1858](https://github.com/SocialGouv/emjpm/issues/1858)) ([b3f87cd](https://github.com/SocialGouv/emjpm/commit/b3f87cdcf0d96036477439abb058ad3dc06636fe))
+* **enquete:** update text ([971f510](https://github.com/SocialGouv/emjpm/commit/971f510177bb45514dbd548362c228759488182b))
+* **enquetes:** clear apollo store after import ([#1871](https://github.com/SocialGouv/emjpm/issues/1871)) ([6b24a6f](https://github.com/SocialGouv/emjpm/commit/6b24a6f23814c4de0c64c1616d41cfd960f05fa7))
+* **hasura:** update metadata for liste blanche ([#1874](https://github.com/SocialGouv/emjpm/issues/1874)) ([928ea77](https://github.com/SocialGouv/emjpm/commit/928ea77180408020e819ad7e86d9463ef2bb04ef))
+* **knex:** new migration to create enquete_reponses_modalite_exercice ([#1859](https://github.com/SocialGouv/emjpm/issues/1859)) ([5f386e2](https://github.com/SocialGouv/emjpm/commit/5f386e2518997bb496429104ef17f78b11ee351d))
+* **lint:** apply auto fix ([#1878](https://github.com/SocialGouv/emjpm/issues/1878)) ([e159e47](https://github.com/SocialGouv/emjpm/commit/e159e4751b5213658ec3b465c8d80ec5ab499698))
+* **liste-blanche:** add filter bar ([#1872](https://github.com/SocialGouv/emjpm/issues/1872)) ([eca5e85](https://github.com/SocialGouv/emjpm/commit/eca5e85b55bde01f0ea23261350821f42f849059))
+* **liste-blanche:** add siret ([#1883](https://github.com/SocialGouv/emjpm/issues/1883)) ([402735d](https://github.com/SocialGouv/emjpm/commit/402735d62f56122ff73af5e475292718c956a2f8))
+* **liste-blanche:** add summary ([#1876](https://github.com/SocialGouv/emjpm/issues/1876)) ([61a28e9](https://github.com/SocialGouv/emjpm/commit/61a28e9e069a0136c5f545fa07a7f9edc2ef2357))
+* **mesure:** add magistrat ([bea15c5](https://github.com/SocialGouv/emjpm/commit/bea15c56eae595b7ee11b9fd5a1d82b1323be161))
+
+
+
+
+
 ## [25.35.1](https://github.com/SocialGouv/emjpm/compare/v25.35.0...v25.35.1) (2020-05-29)
 
 
