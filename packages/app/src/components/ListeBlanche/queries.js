@@ -11,10 +11,7 @@ export const LB_USERS = gql`
     lb_users_aggregate(
       where: {
         type: { _eq: $type }
-        lb_departements: {
-          departement_id: { _eq: $departementId }
-          departement_financeur: { _eq: true }
-        }
+        lb_departements: { departement_id: { _eq: $departementId } }
         nom: { _ilike: $searchText }
       }
     ) {
@@ -27,10 +24,7 @@ export const LB_USERS = gql`
       offset: $offset
       where: {
         type: { _eq: $type }
-        lb_departements: {
-          departement_id: { _eq: $departementId }
-          departement_financeur: { _eq: true }
-        }
+        lb_departements: { departement_id: { _eq: $departementId } }
         nom: { _ilike: $searchText }
       }
       order_by: { nom: asc_nulls_last }
@@ -39,11 +33,10 @@ export const LB_USERS = gql`
       nom
       prenom
       email
+      siret
       type
       user_id
-      lb_departements(
-        where: { departement_id: { _eq: $departementId }, departement_financeur: { _eq: true } }
-      ) {
+      lb_departements {
         id
         departement_financeur
         ti

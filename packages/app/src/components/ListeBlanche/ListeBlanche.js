@@ -27,7 +27,7 @@ const ListBlancheItem = ({ item }) => (
   <Card key={item.id} sx={cardStyle(item.user_id)} mb="2">
     <Flex justifyContent="flex-start">
       <Flex width="25%" flexDirection="column">
-        <Text sx={labelStyle}>{"Nom"}</Text>
+        <Text sx={labelStyle}>{getType(item.type)}</Text>
         <Flex>
           <Text sx={descriptionStyle}>{item.nom ? item.nom.toUpperCase() : ""}</Text>
           <Text pl="1" sx={descriptionStyle}>
@@ -36,8 +36,8 @@ const ListBlancheItem = ({ item }) => (
         </Flex>
       </Flex>
       <Flex width="15%" flexDirection="column">
-        <Text sx={labelStyle}>Type</Text>
-        <Text sx={descriptionStyle}>{getType(item.type)}</Text>
+        <Text sx={labelStyle}>SIRET</Text>
+        <Text sx={descriptionStyle}>{item.siret}</Text>
       </Flex>
       <Flex width="25%" flexDirection="column">
         <Text sx={labelStyle}>Email</Text>
