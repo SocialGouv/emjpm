@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.37.0](https://github.com/SocialGouv/emjpm/compare/v25.36.0...v25.37.0) (2020-06-03)
+
+
+### Features
+
+* **enquete:** enquete for prepose (modalite exercice) ([#1888](https://github.com/SocialGouv/emjpm/issues/1888)) ([0252f8d](https://github.com/SocialGouv/emjpm/commit/0252f8d06c6604d58b57a1b4912c23e40a7004ba))
+* **enquete:** modalite exercice form for prepose ([#1869](https://github.com/SocialGouv/emjpm/issues/1869)) ([086cbc6](https://github.com/SocialGouv/emjpm/commit/086cbc66307e878857c501e93d5dc02dfe8670da))
+* **enquete:** rework upload data page ([#1887](https://github.com/SocialGouv/emjpm/issues/1887)) ([45ad1e3](https://github.com/SocialGouv/emjpm/commit/45ad1e3f2203bd0d2bdaf927c71f228f43b3b628))
+* **enquete-import:** style import button ([#1885](https://github.com/SocialGouv/emjpm/issues/1885)) ([9993860](https://github.com/SocialGouv/emjpm/commit/99938608aec69464f4969251141482c7d41fee36))
+
+
+
+
+
 # [25.36.0](https://github.com/SocialGouv/emjpm/compare/v25.35.1...v25.36.0) (2020-06-02)
 
 
