@@ -14,4 +14,5 @@ export * from './Hooks';
 export * from './Tabs';
 export * from './Logo';
 export * from './Field';
+export * from './FilePicker';
 export * from './Textarea';
