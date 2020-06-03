@@ -24,11 +24,27 @@ router.post("/mandataire-prepose", async (req, res, next) => {
         message: "Invalid parameters: enqueteId or mandataireId is required"
       });
     }
-    const result = await initEnqueteMandatairePrepose({
+
+    const enqueteReponsePrepose = await initEnqueteMandatairePrepose({
       enqueteId,
       mandataireId
     });
-    return res.json(result);
+
+    return res.json({
+      enquete_id: enqueteReponsePrepose.enquete_id,
+      submitted_at: enqueteReponsePrepose.submitted_at,
+      enquete_reponses_id: enqueteReponsePrepose.id,
+      enquete_reponses_modalites_exercice_id:
+        enqueteReponsePrepose.enquete_reponses_modalites_exercice_id,
+      enquete_reponses_modalites_exercice_status: 0,
+      enquete_reponses_populations_id:
+        enqueteReponsePrepose.enquete_reponses_populations_id,
+      enquete_reponses_populations_curatelle_status: 0,
+      enquete_reponses_populations_tutelle_status: 0,
+      enquete_reponses_populations_accompagnement_judiciaire_status: 0,
+      enquete_reponses_populations_sauvegarde_justice_status: 0,
+      enquete_reponses_populations_autre_status: 0
+    });
   } catch (err) {
     logger.error(err);
     next(err);
