@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useMemo } from "react";
 import { Box } from "rebass";
 
+import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
 import { EnqueteActiviteEtablissementDomicileForm } from "./common";
 import { UPDATE_ENQUETE_ACTIVITE_CURATELLE_SIMPLE } from "./mutations";
 import { ENQUETE_CURATELLE_SIMPLE } from "./queries";
@@ -9,10 +10,22 @@ import { ENQUETE_CURATELLE_SIMPLE } from "./queries";
 const PREFIX = "curatelle_simple";
 
 export const EnqueteActiviteCuratelleSimple = props => {
-  const { goToPrevPage, goToNextPage, enqueteReponse } = props;
+  const {
+    goToPrevPage,
+    goToNextPage,
+    enqueteReponse,
+    section,
+    step,
+    mandataireId,
+    enquete: { id: enqueteId }
+  } = props;
   const { enquete_reponses_activite_id } = enqueteReponse;
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_CURATELLE_SIMPLE, {
     refetchQueries: [
+      {
+        query: ENQUETE_MANDATAIRE_INDIVIDUEL,
+        variables: { enqueteId, mandataireId }
+      },
       {
         query: ENQUETE_CURATELLE_SIMPLE,
         variables: {
@@ -48,6 +61,8 @@ export const EnqueteActiviteCuratelleSimple = props => {
       <EnqueteActiviteEtablissementDomicileForm
         loading={loading}
         data={normalizedData}
+        section={section}
+        step={step}
         handleSubmit={async values => {
           await updateEnquete({
             variables: {

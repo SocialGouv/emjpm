@@ -9,16 +9,19 @@ function buildMesureGroupsAttributes(mesureGroups) {
     acc[debutAnnee] = yup
       .number()
       .min(0)
-      .integer();
+      .integer()
+      .nullable();
 
     acc[mesuresNouvelles] = yup
       .number()
       .min(0)
-      .integer();
+      .integer()
+      .nullable();
     acc[sortieMesures] = yup
       .number()
       .min(0)
-      .integer();
+      .integer()
+      .nullable();
 
     acc[finAnnee] = yup
       .number()
@@ -32,8 +35,13 @@ function buildMesureGroupsAttributes(mesureGroups) {
           const nbSortieMesures = this.parent[sortieMesures] | 0;
           const nbMesuresNouvelles = this.parent[mesuresNouvelles] | 0;
           const expectedFinAnnee =
-            nbDebutAnnee + nbSortieMesures - nbMesuresNouvelles;
+            nbDebutAnnee + nbMesuresNouvelles - nbSortieMesures;
           value = value | 0;
+
+          if (expectedFinAnnee !== value) {
+            console.log("xxx  expectedFinAnnee: ", expectedFinAnnee);
+            console.log("xxx  value: ", value);
+          }
 
           return expectedFinAnnee === value;
         }

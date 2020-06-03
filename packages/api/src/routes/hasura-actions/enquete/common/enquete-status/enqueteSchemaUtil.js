@@ -1,18 +1,21 @@
-async function getValidationStatus(data, validationSchema) {
-  if (isEmptyData(data, validationSchema)) {
+const logger = require("../../../../../utils/logger");
+
+async function getValidationStatus(data, schema, debugName) {
+  if (isEmptyData(data, schema, debugName)) {
     return "empty";
   }
-  const isValid = await validationSchema.isValid(data);
+  const isValid = await schema.isValid(data);
 
   return isValid ? "valid" : "invalid";
 }
-function isEmptyData(data, validationSchema) {
+function isEmptyData(data, schema, debugName) {
   if (!data) {
+    logger.warn(`[Validation] [${debugName}] data is missing`);
     return true;
   }
-  const isEmpty = !validationSchema._nodes.some(attr => {
+  const isEmpty = !schema._nodes.some(attr => {
     const value = data[attr];
-    const isValueSet = value !== undefined && value !== null;
+    const isValueSet = value !== undefined && value !== null && value !== "";
     return isValueSet;
   });
   return isEmpty;

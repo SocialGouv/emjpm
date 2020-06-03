@@ -12,6 +12,8 @@ export const EnqueteIndividuelInformations = props => {
     goToPrevPage,
     enqueteReponse,
     mandataireId,
+    section,
+    step,
     enquete: { id: enqueteId }
   } = props;
   const { enquete_reponses_informations_mandataire_id } = enqueteReponse;
@@ -36,9 +38,11 @@ export const EnqueteIndividuelInformations = props => {
   });
 
   const informations = data ? data.enquete_reponses_informations_mandataire_by_pk || {} : {};
-  return (
+  return loading ? null : (
     <EnqueteIndividuelInformationsForm
       data={informations}
+      section={section}
+      step={step}
       goToPrevPage={goToPrevPage}
       loading={loading}
       handleSubmit={async values => {

@@ -1,7 +1,7 @@
 import { enqueteKeysBuilder } from "./enqueteKeysBuilder.service";
 
 // constantes synchronisées avec le fichier api/ENQ_REP_INFO_MANDATAIRE.const.js
-export const ENQ_REP_INFO_MANDATAIRE_FORM = {
+export const ENQ_REP_INFO_MANDATAIRE = {
   ANCIENNETE: enqueteKeysBuilder.buildKeys({
     "0-2": "Moins de 2 ans",
     "10-20": "10 ans à moins de 20 ans",

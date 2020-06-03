@@ -33,13 +33,16 @@ export const enqueteIndividuelMenuBuilder = {
 
 function buildMenuSections(enqueteReponse) {
   const status = enqueteReponse.enquete_reponses_status;
+
+  console.log("xxx status:", status);
   return [
     {
       status: "valid",
       steps: [
         {
           label: "Bienvenue",
-          component: EnqueteIndividuelWelcome
+          component: EnqueteIndividuelWelcome,
+          status: "valid"
         }
       ]
     },
@@ -159,11 +162,23 @@ function buildMenuSections(enqueteReponse) {
     {
       label: "Prestations sociales",
       status: status.prestationsSociales.global,
-      steps: [{ label: "Prestations sociales", component: EnqueteIndividuelPrestationsSociales }]
+      steps: [
+        {
+          label: "Prestations sociales",
+          component: EnqueteIndividuelPrestationsSociales,
+          status: status.prestationsSociales.global
+        }
+      ]
     },
     {
       status: status.global === "valid" ? "valid" : "empty",
-      steps: [{ label: "Envoi de vos réponses", component: EnqueteIndividuelSubmit }]
+      steps: [
+        {
+          label: "Envoi de vos réponses",
+          component: EnqueteIndividuelSubmit,
+          status: status.global === "valid" ? "valid" : "empty"
+        }
+      ]
     }
   ];
 }

@@ -1,21 +1,17 @@
 import { Field, InlineError, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
-const strongStyle = {
-  display: "inline-block",
-  fontWeight: "bold",
-  color: "#007AD9"
-};
 export const EnqueteActiviteFormGroupMesures = props => {
   // prefix: 'etablissement' | 'domicile' | ''
-  const { values, errors, handleChange, prefix } = props;
+  const { values, errors, handleChange, prefix, showError } = props;
 
   const idDebutAnnee = prefix ? `${prefix}DebutAnnee` : "debutAnnee";
   const idFinAnnee = prefix ? `${prefix}FinAnnee` : "finAnnee";
   const idMesuresNouvelles = prefix ? `${prefix}MesuresNouvelles` : "mesuresNouvelles";
   const idSortieMesures = prefix ? `${prefix}SortieMesures` : "sortieMesures";
+  const idSomme = prefix ? `${prefix}Somme` : "somme";
 
   return (
     <Box mt={2}>
@@ -30,12 +26,16 @@ export const EnqueteActiviteFormGroupMesures = props => {
                 id={idDebutAnnee}
                 name={idDebutAnnee}
                 value={values[idDebutAnnee]}
-                hasError={!!errors[idDebutAnnee]}
+                hasError={showError && !!errors[idDebutAnnee]}
                 onChange={handleChange}
                 type="number"
               />
             </Box>
-            <InlineError message={errors[idDebutAnnee]} fieldId={idDebutAnnee} />
+            <InlineError
+              showError={showError}
+              message={errors[idDebutAnnee]}
+              fieldId={idDebutAnnee}
+            />
           </Field>
         </Box>
         <Box width="50%">
@@ -48,12 +48,12 @@ export const EnqueteActiviteFormGroupMesures = props => {
                 id={idFinAnnee}
                 name={idFinAnnee}
                 value={values[idFinAnnee]}
-                hasError={!!errors[idFinAnnee]}
+                hasError={showError && (!!errors[idFinAnnee] || !!errors[idSomme])}
                 onChange={handleChange}
                 type="number"
               />
             </Box>
-            <InlineError message={errors[idFinAnnee]} fieldId={idFinAnnee} />
+            <InlineError showError={showError} message={errors[idFinAnnee]} fieldId={idFinAnnee} />
           </Field>
         </Box>
       </Flex>
@@ -68,12 +68,16 @@ export const EnqueteActiviteFormGroupMesures = props => {
                 id={idMesuresNouvelles}
                 name={idMesuresNouvelles}
                 value={values[idMesuresNouvelles]}
-                hasError={!!errors[idMesuresNouvelles]}
+                hasError={showError && !!errors[idMesuresNouvelles]}
                 onChange={handleChange}
                 type="number"
               />
             </Box>
-            <InlineError message={errors[idMesuresNouvelles]} fieldId={idMesuresNouvelles} />
+            <InlineError
+              showError={showError}
+              message={errors[idMesuresNouvelles]}
+              fieldId={idMesuresNouvelles}
+            />
           </Field>
         </Box>
         <Box width="50%">
@@ -86,20 +90,20 @@ export const EnqueteActiviteFormGroupMesures = props => {
                 id={idSortieMesures}
                 name={idSortieMesures}
                 value={values[idSortieMesures]}
-                hasError={!!errors[idSortieMesures]}
+                hasError={showError && !!errors[idSortieMesures]}
                 onChange={handleChange}
                 type="number"
               />
             </Box>
-            <InlineError message={errors[idSortieMesures]} fieldId={idSortieMesures} />
+            <InlineError
+              showError={showError}
+              message={errors[idSortieMesures]}
+              fieldId={idSortieMesures}
+            />
           </Field>
         </Box>
       </Flex>
-      <Box sx={{ color: "#595959", fontSize: "13px", fontWeight: "bold" }}>
-        {"Soit une différence de  "}
-        <Text sx={strongStyle}>{(values[idDebutAnnee] || 0) - (values[idFinAnnee] || 0)}</Text>
-        {" ."}
-      </Box>
+      <InlineError showError={showError} message={errors[idSomme]} fieldId={idSomme} />
     </Box>
   );
 };

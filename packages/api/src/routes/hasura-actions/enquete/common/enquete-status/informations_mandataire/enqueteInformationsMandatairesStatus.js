@@ -24,10 +24,17 @@ module.exports = async enqueteReponse => {
         exerce_secretaires_specialises: yup.boolean().nullable(),
         secretaire_specialise_etp: yup.number().nullable(),
         local_professionnel: yup.boolean().required()
-      })
+      }),
+      "informationsGenerales/agrementsStatus"
     ),
-    agrements: enqueteAgrementsFormationsStatus.agrementsStatus(enqueteReponse),
-    formation: enqueteAgrementsFormationsStatus.formationStatus(enqueteReponse)
+    agrements: enqueteAgrementsFormationsStatus.agrementsStatus(
+      enqueteReponse,
+      "informationsGenerales"
+    ),
+    formation: enqueteAgrementsFormationsStatus.formationStatus(
+      enqueteReponse,
+      "informationsGenerales"
+    )
   };
 
   status.global = getGlobalStatus(status);

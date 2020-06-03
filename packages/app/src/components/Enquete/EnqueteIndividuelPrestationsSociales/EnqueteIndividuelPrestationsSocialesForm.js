@@ -1,7 +1,7 @@
 import { Field, Heading1, Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { enquetePrestationsSocialesSchema } from "../../../lib/validationSchemas/enquetePrestationsSocialesSchema";
@@ -21,9 +21,9 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelPrestationsSocialesForm = props => {
-  const { data = {}, goToPrevPage, loading = false } = props;
+  const { data = {}, step, goToPrevPage, loading = false } = props;
 
-  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
+  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
@@ -35,6 +35,11 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
   useEffect(() => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
+
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -60,7 +65,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 value={values.aah}
                 id="aah"
                 name="aah"
-                hasError={!!errors.aah}
+                hasError={showError && !!errors.aah}
                 onChange={handleChange}
               />
             </Field>
@@ -76,7 +81,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 type="number"
                 value={values.pch}
                 onChange={handleChange}
-                hasError={!!errors.pch}
+                hasError={showError && !!errors.pch}
               />
             </Field>
 
@@ -91,7 +96,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 type="number"
                 value={values.asi}
                 onChange={handleChange}
-                hasError={!!errors.asi}
+                hasError={showError && !!errors.asi}
               />
             </Field>
 
@@ -105,7 +110,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 placeholder=""
                 type="number"
                 value={values.rsa}
-                hasError={!!errors.rsa}
+                hasError={showError && !!errors.rsa}
                 onChange={handleChange}
               />
             </Field>
@@ -121,7 +126,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 placeholder=""
                 type="number"
                 value={values.als_apl}
-                hasError={!!errors.als_apl}
+                hasError={showError && !!errors.als_apl}
                 onChange={handleChange}
               />
             </Field>
@@ -135,7 +140,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 placeholder=""
                 type="number"
                 value={values.aspa}
-                hasError={!!errors.aspa}
+                hasError={showError && !!errors.aspa}
                 onChange={handleChange}
               />
             </Field>
@@ -150,7 +155,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
                 placeholder=""
                 type="number"
                 value={values.apa}
-                hasError={!!errors.apa}
+                hasError={showError && !!errors.apa}
                 onChange={handleChange}
               />
             </Field>

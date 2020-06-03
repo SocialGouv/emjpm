@@ -26,7 +26,6 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
     enqueteReponse = insert_enquete_reponses_one;
   }
   const status = await enqueteMandataireIndividuelStatus(enqueteReponse);
-
   return {
     submitted_at: enqueteReponse.submitted_at,
     enquete_id: enqueteReponse.enquete_id,

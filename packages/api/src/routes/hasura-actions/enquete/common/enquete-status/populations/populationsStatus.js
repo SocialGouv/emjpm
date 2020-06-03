@@ -7,24 +7,29 @@ const yup = require("yup");
 module.exports = async enqueteReponse => {
   const status = {
     curatelle: await getValidationStatus(
-      enqueteReponse.populations,
-      yup.object({})
+      enqueteReponse.enquete_reponses_population,
+      yup.object({}),
+      "populations/curatelle"
     ),
     tutelle: await getValidationStatus(
-      enqueteReponse.populations,
-      yup.object({})
+      enqueteReponse.enquete_reponses_population,
+      yup.object({}),
+      "populations/tutelle"
     ),
     accompagnementJudiciaire: await getValidationStatus(
-      enqueteReponse.populations,
-      yup.object({})
+      enqueteReponse.enquete_reponses_population,
+      yup.object({}),
+      "populations/accompagnementJudiciaire"
     ),
     sauvegardeJustice: await getValidationStatus(
-      enqueteReponse.populations,
-      yup.object({})
+      enqueteReponse.enquete_reponses_population,
+      yup.object({}),
+      "populations/sauvegardeJustice"
     ),
     autresMesures: await getValidationStatus(
-      enqueteReponse.populations,
-      yup.object({})
+      enqueteReponse.enquete_reponses_population,
+      yup.object({}),
+      "populations/autresMesures"
     )
   };
 

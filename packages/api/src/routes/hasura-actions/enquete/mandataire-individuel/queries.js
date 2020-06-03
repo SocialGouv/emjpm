@@ -1,3 +1,39 @@
+function build2Combinaisons(prefixes, suffixes, separator) {
+  if (separator === undefined) {
+    separator = "_";
+  }
+  return prefixes
+    .reduce(
+      (acc, prefix) =>
+        suffixes.reduce((acc, suffix) => {
+          acc.push(`${prefix}${separator}${suffix}`);
+          return acc;
+        }, acc),
+
+      []
+    )
+    .join("\n");
+}
+function build3Combinaisons(prefixes, middles, suffixes, separator) {
+  if (separator === undefined) {
+    separator = "_";
+  }
+  return prefixes
+    .reduce(
+      (acc, prefix) =>
+        middles.reduce(
+          (acc, middle) =>
+            suffixes.reduce((acc, suffix) => {
+              acc.push(`${prefix}${separator}${middle}${separator}${suffix}`);
+              return acc;
+            }, acc),
+          acc
+        ),
+      []
+    )
+    .join("\n");
+}
+
 module.exports = {
   ENQUETE_REPONSE: `
   query enquete_reponses($enqueteId: Int!, $mandataireId: Int!) {
@@ -9,35 +45,37 @@ module.exports = {
       enquete_reponses_activite {
         created_at
         last_update
-        accompagnement_judiciaire_domicile_debut_annee
-        accompagnement_judiciaire_domicile_fin_annee
-        accompagnement_judiciaire_etablissement_debut_annee
-        accompagnement_judiciaire_etablissement_fin_annee
-        curatelle_biens_domicile_debut_annee
-        curatelle_biens_domicile_fin_annee
-        curatelle_biens_etablissement_debut_annee
-        curatelle_biens_etablissement_fin_annee
+        ${build3Combinaisons(
+          [
+            "accompagnement_judiciaire",
+            "curatelle_biens",
+            "tutelle",
+            "curatelle_personne",
+            "curatelle_renforcee",
+            "curatelle_simple"
+          ],
+          ["domicile", "etablissement"],
+          ["debut_annee", "fin_annee", "mesures_nouvelles", "sortie_mesures"],
+          "_"
+        )}
+        ${build2Combinaisons(
+          [
+            "subroge_tuteur_createur",
+            "sauvegarde_justice",
+            "mandat_adhoc_majeur"
+          ],
+          ["debut_annee", "fin_annee", "mesures_nouvelles", "sortie_mesures"],
+          "_"
+        )}
         revisions_main_levee
         revisions_masp
         revisions_reconduction
         revisions_changement
         revisions_autre
-        tutelle_domicile_debut_annee
-        tutelle_domicile_fin_annee
-        tutelle_etablissement_debut_annee
-        tutelle_etablissement_fin_annee
-        curatelle_personne_domicile_debut_annee
-        curatelle_personne_domicile_fin_annee
-        curatelle_personne_etablissement_debut_annee
-        curatelle_personne_etablissement_fin_annee
-        curatelle_renforcee_domicile_debut_annee
-        curatelle_renforcee_domicile_fin_annee
-        curatelle_renforcee_etablissement_debut_annee
-        curatelle_renforcee_etablissement_fin_annee
-        curatelle_simple_domicile_debut_annee
-        curatelle_simple_domicile_fin_annee
-        curatelle_simple_etablissement_debut_annee
-        curatelle_simple_etablissement_fin_annee
+        sorties_main_levee
+        sorties_deces
+        sorties_masp
+       
       }
       enquete_reponses_agrements_formations_id
       enquete_reponses_agrements_formation {

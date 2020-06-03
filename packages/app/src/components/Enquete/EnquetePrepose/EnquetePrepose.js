@@ -33,7 +33,8 @@ export const EnquetePrepose = props => {
   const enqueteReponse = data ? data.enquete_prepose || {} : {};
   const sections = enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse);
   const section = sections[currentStep.step];
-  const ComponentForm = section.steps[currentStep.substep || 0].component;
+  const step = section.steps[currentStep.substep || 0];
+  const ComponentForm = step.component;
 
   return (
     <Flex>
@@ -44,6 +45,8 @@ export const EnquetePrepose = props => {
         <ComponentForm
           enquete={enquete}
           enqueteReponse={enqueteReponse}
+          section={section}
+          step={step}
           mandataireId={mandataireId}
           goToPrevPage={() => goToPrevPage(sections, currentStep)}
           goToNextPage={() => goToNextPage(sections, currentStep)}

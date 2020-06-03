@@ -12,7 +12,9 @@ export const EnqueteIndividuelPrestationsSociales = props => {
     goToPrevPage,
     enqueteReponse,
     mandataireId,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
+    section,
+    step
   } = props;
   const { enquete_reponses_prestations_sociale_id } = enqueteReponse;
 
@@ -40,6 +42,8 @@ export const EnqueteIndividuelPrestationsSociales = props => {
     <EnqueteIndividuelPrestationsSocialesForm
       loading={loading}
       data={prestationsSociales}
+      section={section}
+      step={step}
       goToPrevPage={goToPrevPage}
       handleSubmit={async values => {
         await updateEnquete({

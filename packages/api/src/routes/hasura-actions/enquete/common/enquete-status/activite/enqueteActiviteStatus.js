@@ -16,7 +16,8 @@ module.exports = async enqueteReponse => {
           "curatelle_renforcee_etablissement",
           "curatelle_renforcee_domicile"
         ])
-      )
+      ),
+      "activite/curatelleRenforcee"
     ),
     curatelleSimple: await getValidationStatus(
       data,
@@ -25,7 +26,8 @@ module.exports = async enqueteReponse => {
           "curatelle_simple_etablissement",
           "curatelle_simple_domicile"
         ])
-      )
+      ),
+      "activite/curatelleSimple"
     ),
     tutelle: await getValidationStatus(
       data,
@@ -34,7 +36,8 @@ module.exports = async enqueteReponse => {
           "tutelle_etablissement",
           "tutelle_domicile"
         ])
-      )
+      ),
+      "activite/tutelle"
     ),
     accompagnementJudiciaire: await getValidationStatus(
       data,
@@ -44,7 +47,7 @@ module.exports = async enqueteReponse => {
           "accompagnement_judiciaire_domicile"
         ])
       ),
-      "accompagnementJudiciaire"
+      "activite/accompagnementJudiciaire"
     ),
     curatelleBiens: await getValidationStatus(
       data,
@@ -54,7 +57,7 @@ module.exports = async enqueteReponse => {
           "curatelle_biens_domicile"
         ])
       ),
-      "curatelle_biens"
+      "activite/curatelleBiens"
     ),
     curatellePersonne: await getValidationStatus(
       data,
@@ -63,34 +66,23 @@ module.exports = async enqueteReponse => {
           "curatelle_personne_etablissement",
           "curatelle_personne_domicile"
         ])
-      )
+      ),
+      "activite/curatellePersonne"
     ),
     subrogeTuteurCreateur: await getValidationStatus(
       data,
-      yup.object(
-        buildMesureGroupsAttributes([
-          "subroge_tuteur_createur_etablissement",
-          "subroge_tuteur_createur_domicile"
-        ])
-      )
+      yup.object(buildMesureGroupsAttributes(["subroge_tuteur_createur"])),
+      "activite/subrogeTuteurCreateur"
     ),
     sauvegardeJustice: await getValidationStatus(
       data,
-      yup.object(
-        buildMesureGroupsAttributes([
-          "sauvegarde_justice_etablissement",
-          "sauvegarde_justice_etablissement"
-        ])
-      )
+      yup.object(buildMesureGroupsAttributes(["sauvegarde_justice"])),
+      "activite/sauvegardeJustice"
     ),
     mandatHadocMajeur: await getValidationStatus(
       data,
-      yup.object(
-        buildMesureGroupsAttributes([
-          "mandat_adhoc_majeur_domicile",
-          "mandat_adhoc_majeur_domicile"
-        ])
-      )
+      yup.object(buildMesureGroupsAttributes(["mandat_adhoc_majeur"])),
+      "activite/mandatHadocMajeur"
     ),
     revisionMesures: await getValidationStatus(
       data,
@@ -108,7 +100,8 @@ module.exports = async enqueteReponse => {
             .integer();
           return acc;
         }, [])
-      )
+      ),
+      "activite/revisionMesures"
     ),
     causesSortiesDispositif: await getValidationStatus(
       data,
@@ -123,7 +116,8 @@ module.exports = async enqueteReponse => {
           },
           []
         )
-      )
+      ),
+      "activite/causesSortiesDispositif"
     )
   };
 

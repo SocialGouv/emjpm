@@ -812,7 +812,7 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "integer",
+    "type": "real",
   },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
