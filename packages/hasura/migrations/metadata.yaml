@@ -415,16 +415,17 @@ tables:
   - role: individuel
     permission:
       columns:
+      - created_at
       - enquete_id
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
       - enquete_reponses_prestations_sociale_id
       - id
       - mandataire_id
       - service_id
-      - created_at
       - submitted_at
       filter:
         mandataire:
@@ -4728,6 +4729,8 @@ custom_types:
       type: timestamptz
     - name: enquete_reponses_id
       type: Int!
+    - name: enquete_reponses_status
+      type: json!
     - name: enquete_reponses_modalites_exercice_id
       type: Int
     - name: enquete_reponses_modalites_exercice_status

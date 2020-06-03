@@ -31,6 +31,7 @@ router.post("/mandataire-prepose", async (req, res, next) => {
     });
 
     return res.json({
+      enquete_reponses_status: enqueteReponsePrepose.status,
       enquete_id: enqueteReponsePrepose.enquete_id,
       submitted_at: enqueteReponsePrepose.submitted_at,
       enquete_reponses_id: enqueteReponsePrepose.id,
