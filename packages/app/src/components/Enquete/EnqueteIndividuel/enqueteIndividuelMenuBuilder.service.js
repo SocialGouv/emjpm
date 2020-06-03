@@ -36,6 +36,7 @@ function buildMenuSections(enqueteReponse) {
   console.log("xxx status:", status);
   return [
     {
+      status: "valid",
       steps: [
         {
           label: "Bienvenue",

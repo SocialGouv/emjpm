@@ -4,8 +4,11 @@ const {
   informationsFormationMandataireSchema,
   prestationsSocialesSchema
 } = require("./schemas");
-const enqueteMandataireIndividuelActiviteStatus = require("./activite");
-const { getValidationStatus, getGlobalStatus } = require("../../common");
+const {
+  getValidationStatus,
+  getGlobalStatus,
+  enqueteMandataireIndividuelActiviteStatus
+} = require("../common/enquete-status");
 
 async function enqueteMandataireIndividuelStatus(enqueteReponse) {
   const informationsGeneralesMandataireStatus = await getValidationStatus(

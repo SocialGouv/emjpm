@@ -1,5 +1,8 @@
 const { buildMesureGroupsAttributes } = require("./activiteSchemaUtil");
-const { getValidationStatus, getGlobalStatus } = require("../../common");
+const {
+  getValidationStatus,
+  getGlobalStatus
+} = require("../enqueteSchemaUtil");
 const yup = require("yup");
 
 async function enqueteMandataireIndividuelActiviteStatus(enqueteReponse) {
