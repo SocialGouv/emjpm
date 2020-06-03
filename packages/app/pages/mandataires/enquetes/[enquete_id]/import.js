@@ -10,7 +10,7 @@ const ImportEnquetePage = ({ enqueteId }) => {
   const user = useContext(UserContext);
   return (
     <LayoutMandataire>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper>
         <EnqueteImportPanel enqueteId={enqueteId} userId={user.id} />
       </BoxWrapper>
     </LayoutMandataire>

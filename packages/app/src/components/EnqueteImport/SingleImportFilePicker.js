@@ -1,11 +1,21 @@
-import { Input } from "@emjpm/ui";
+import { FilePicker } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
+
+const inputStyle = {
+  display: "0.1px",
+  height: "0.1px",
+  opacity: "0",
+  overflow: "hidden",
+  position: "absolute",
+  zIndex: "-1"
+};
 
 const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
   return (
     <Box mb="2">
-      <Input
+      <FilePicker
+        sx={inputStyle}
         id="file"
         type="file"
         name="file"
