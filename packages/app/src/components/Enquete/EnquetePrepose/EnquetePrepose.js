@@ -1,39 +1,36 @@
-// import { Heading1 } from "@emjpm/ui";
+import { Heading1 } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React from "react";
-// import { useQuery } from "react-apollo";
+import { useQuery } from "react-apollo";
 import { Box, Flex } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
-// import { EnquetePopulationsCuratelle, EnquetePopulationsTutelle } from "../EnquetePopulations";
-// import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 import { enquetePreposeMenuBuilder } from "./enquetePreposeMenuBuilder.service";
+import { ENQUETE_MANDATAIRE_PREPOSE } from "./queries";
 
 export const EnquetePrepose = props => {
   const router = useRouter();
   const { enquete, mandataireId, currentStep } = props;
   const { id: enqueteId } = enquete;
 
-  const data = {};
+  const { data, loading, error } = useQuery(ENQUETE_MANDATAIRE_PREPOSE, {
+    variables: { enqueteId, mandataireId }
+  });
 
-  // const { data, loading, error } = useQuery(ENQUETE_MANDATAIRE_PREPOSE, {
-  //   variables: { enqueteId, mandataireId }
-  // });
+  if (loading) {
+    return <Box mt={4}>Chargement...</Box>;
+  }
 
-  // if (loading) {
-  //   return <Box mt={4}>Chargement...</Box>;
-  // }
+  if (error) {
+    return (
+      <Box mt={4}>
+        <Heading1 mb={4}>Oups</Heading1>
+        <Box>Une erreur est survenue. Merci de réessayer ultérieurement.</Box>
+      </Box>
+    );
+  }
 
-  // if (error) {
-  //   return (
-  //     <Box mt={4}>
-  //       <Heading1 mb={4}>Oups</Heading1>
-  //       <Box>Une erreur est survenue. Merci de réessayer ultérieurement.</Box>
-  //     </Box>
-  //   );
-  // }
-
-  const enqueteReponse = data ? data.enquete_individuel || {} : {};
+  const enqueteReponse = data ? data.enquete_prepose || {} : {};
   const sections = enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse);
   const section = sections[currentStep.step];
   const ComponentForm = section.steps[currentStep.substep || 0].component;

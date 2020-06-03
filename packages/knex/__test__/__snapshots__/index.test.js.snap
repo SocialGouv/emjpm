@@ -312,7 +312,7 @@ Object {
     "nullable": true,
     "type": "integer",
   },
-  "enquete_reponses_modalite_exercice_id": Object {
+  "enquete_reponses_modalites_exercice_id": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
@@ -1032,7 +1032,7 @@ Object {
 }
 `;
 
-exports[`enquete_reponses_modalite_exercice table schema 1`] = `
+exports[`enquete_reponses_modalites_exercice table schema 1`] = `
 Object {
   "actions_information_tuteurs_familiaux": Object {
     "defaultValue": null,
@@ -1088,12 +1088,6 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
-  "nom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
   "nombre_etablissements": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -1107,6 +1101,12 @@ Object {
     "type": "jsonb",
   },
   "personnalite_juridique_etablissement": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "raison_sociale": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": true,
@@ -3462,7 +3462,7 @@ Array [
   "enquete_reponses_activite",
   "enquete_reponses_agrements_formations",
   "enquete_reponses_informations_mandataire",
-  "enquete_reponses_modalite_exercice",
+  "enquete_reponses_modalites_exercice",
   "enquete_reponses_populations",
   "enquete_reponses_prestations_sociales",
   "enquete_services",

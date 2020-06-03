@@ -364,6 +364,9 @@ tables:
   - name: enquete_reponses_informations_mandataire
     using:
       foreign_key_constraint_on: enquete_reponses_informations_mandataire_id
+  - name: enquete_reponses_modalites_exercice
+    using:
+      foreign_key_constraint_on: enquete_reponses_modalites_exercice_id
   - name: enquete_reponses_population
     using:
       foreign_key_constraint_on: enquete_reponses_populations_id
@@ -899,6 +902,66 @@ tables:
       - secretaire_specialise_etp
       - sexe
       - tranche_age
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+      check: null
+- table:
+    schema: public
+    name: enquete_reponses_modalites_exercice
+  array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: enquete_reponses_modalites_exercice_id
+        table:
+          schema: public
+          name: enquete_reponses
+  select_permissions:
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - departement
+      - region
+      - raison_sociale
+      - personnalite_juridique_etablissement
+      - activite_personne_physique
+      - activite_service
+      - etablissement_personne_morale
+      - etablissement_convention_groupement
+      - nombre_etablissements
+      - total_mesures_etablissements
+      - nombre_lits_journee_hospitalisation
+      - actions_information_tuteurs_familiaux
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: prepose
+    permission:
+      columns:
+      - actions_information_tuteurs_familiaux
+      - activite_personne_physique
+      - activite_service
+      - etablissement_convention_groupement
+      - etablissement_personne_morale
+      - id
+      - nombre_etablissements
+      - total_mesures_etablissements
+      - nombre_lits_journee_hospitalisation
+      - created_at
+      - last_update
+      - departement
+      - personnalite_juridique_etablissement
+      - raison_sociale
+      - region
       filter:
         enquete_reponses:
           mandataire:
@@ -4540,6 +4603,22 @@ actions:
     type: query
   permissions:
   - role: individuel
+- name: enquete_prepose
+  definition:
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/mandataire-prepose'
+    output_type: EnquetePreposeReponse
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+    arguments:
+    - name: enqueteId
+      type: Int!
+    - name: mandataireId
+      type: Int!
+    type: query
+  permissions:
+  - role: prepose
 - name: submit_enquete_individuel
   definition:
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/mandataire-individuel/submit'
@@ -4671,3 +4750,27 @@ custom_types:
       type: Int!
     - name: submitted_at
       type: timestamptz
+  - name: EnquetePreposeReponse
+    fields:
+    - name: enquete_id
+      type: Int!
+    - name: submitted_at
+      type: timestamptz
+    - name: enquete_reponses_id
+      type: Int!
+    - name: enquete_reponses_modalites_exercice_id
+      type: Int
+    - name: enquete_reponses_modalites_exercice_status
+      type: Int!
+    - name: enquete_reponses_populations_id
+      type: Int
+    - name: enquete_reponses_populations_curatelle_status
+      type: Int!
+    - name: enquete_reponses_populations_tutelle_status
+      type: Int!
+    - name: enquete_reponses_populations_accompagnement_judiciaire_status
+      type: Int!
+    - name: enquete_reponses_populations_sauvegarde_justice_status
+      type: Int!
+    - name: enquete_reponses_populations_autre_status
+      type: Int!
