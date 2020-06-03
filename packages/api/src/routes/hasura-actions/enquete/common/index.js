@@ -1,5 +1,6 @@
-const checkImportEnqueteParameters = require("./checkImportEnqueteParameters");
+const { getGlobalStatus, getValidationStatus } = require("./enqueteSchemaUtil");
 
 module.exports = {
-  checkImportEnqueteParameters
+  getGlobalStatus,
+  getValidationStatus
 };

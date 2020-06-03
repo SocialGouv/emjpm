@@ -3,7 +3,7 @@ const {
   createEmptyEnqueteReponse,
   submitEnqueteReponse
 } = require("./requests");
-const enqueteMandataireIndividuelStatus = require("./enqueteMandataireIndividuelStatus");
+const enqueteMandataireIndividuelStatus = require("../mandataire-individuel-status");
 
 async function submitEnqueteMandataireIndividuel(id) {
   // TODO(remiroyc): check if all form sections are valids
@@ -19,18 +19,11 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   });
 
   const validations = {
+    enquete_reponses_status: 0,
     enquete_reponses_informations_mandataire_generales_status: 0,
     enquete_reponses_informations_mandataire_formation_status: 0,
     enquete_reponses_informations_mandataire_agrements_status: 0,
     enquete_reponses_prestations_sociale_status: 0,
-
-    enquete_reponses_activite_curatelle_renforcee_status: 0,
-    enquete_reponses_activite_curatelle_simple_status: 0,
-    enquete_reponses_activite_tutelle_status: 0,
-    enquete_reponses_activite_accompagnement_judiciaire_status: 0,
-    enquete_reponses_activite_curatelle_biens_status: 0,
-    enquete_reponses_activite_curatelle_personne_status: 0,
-    enquete_reponses_activite_revision_mesures_status: 0,
 
     enquete_reponses_populations_curatelle_status: 0,
     enquete_reponses_populations_tutelle_status: 0,
@@ -45,37 +38,33 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
       mandataireId
     });
     enqueteReponse = insert_enquete_reponses_one;
+    const status = await enqueteMandataireIndividuelStatus(enqueteReponse);
+
+    console.log("xxx xxxxxxxxxx status", status);
+
+    validations.enquete_reponses_status = status;
   } else {
     const {
       informationsGeneralesMandataireStatus,
       informationsFormationMandataireStatus,
       informationsAgrementsMandataireStatus,
       prestationsSocialesStatus,
-      activiteCuratelleRenforceeStatus,
-      activiteCuratelleSimpleStatus,
-      activiteTutelleStatus,
-      activiteAccompagnementJudiciaireStatus,
-      activiteCuratelleBiensStatus,
-      activiteCuratellePersonneStatus,
-      activiteRevisionMesuresStatus,
       populationsCuratelleStatus,
       populationsTutelleStatus,
       populationsAccompagnementJudiciaireStatus,
       populationsSauvegardeJusticeStatus,
-      populationsAutreStatus
+      populationsAutreStatus,
+      activite
     } = await enqueteMandataireIndividuelStatus(enqueteReponse);
+    console.log("xxx xxxxxxxxxx activite", activite);
 
+    validations.enquete_reponses_status = {
+      activite
+    };
     validations.enquete_reponses_informations_mandataire_generales_status = informationsGeneralesMandataireStatus;
     validations.enquete_reponses_informations_mandataire_formation_status = informationsFormationMandataireStatus;
     validations.enquete_reponses_informations_mandataire_agrements_status = informationsAgrementsMandataireStatus;
     validations.enquete_reponses_prestations_sociale_status = prestationsSocialesStatus;
-    validations.enquete_reponses_activite_curatelle_renforcee_status = activiteCuratelleRenforceeStatus;
-    validations.enquete_reponses_activite_curatelle_simple_status = activiteCuratelleSimpleStatus;
-    validations.enquete_reponses_activite_tutelle_status = activiteTutelleStatus;
-    validations.enquete_reponses_activite_accompagnement_judiciaire_status = activiteAccompagnementJudiciaireStatus;
-    validations.enquete_reponses_activite_curatelle_biens_status = activiteCuratelleBiensStatus;
-    validations.enquete_reponses_activite_curatelle_personne_status = activiteCuratellePersonneStatus;
-    validations.enquete_reponses_activite_revision_mesures_status = activiteRevisionMesuresStatus;
     validations.enquete_reponses_populations_curatelle_status = populationsCuratelleStatus;
     validations.enquete_reponses_populations_tutelle_status = populationsTutelleStatus;
     validations.enquete_reponses_populations_accompagnement_judiciaire_status = populationsAccompagnementJudiciaireStatus;

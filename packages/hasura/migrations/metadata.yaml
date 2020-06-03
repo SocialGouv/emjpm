@@ -4694,6 +4694,8 @@ custom_types:
       type: timestamptz
     - name: enquete_reponses_id
       type: Int!
+    - name: enquete_reponses_status
+      type: jsonb!
     - name: enquete_reponses_informations_mandataire_id
       type: Int
     - name: enquete_reponses_informations_mandataire_generales_status
@@ -4710,20 +4712,6 @@ custom_types:
       type: Int
     - name: enquete_reponses_activite_id
       type: Int
-    - name: enquete_reponses_activite_curatelle_renforcee_status
-      type: Int!
-    - name: enquete_reponses_activite_curatelle_simple_status
-      type: Int!
-    - name: enquete_reponses_activite_tutelle_status
-      type: Int!
-    - name: enquete_reponses_activite_accompagnement_judiciaire_status
-      type: Int!
-    - name: enquete_reponses_activite_curatelle_biens_status
-      type: Int!
-    - name: enquete_reponses_activite_curatelle_personne_status
-      type: Int!
-    - name: enquete_reponses_activite_revision_mesures_status
-      type: Int!
     - name: enquete_reponses_populations_id
       type: Int
     - name: enquete_reponses_populations_curatelle_status
