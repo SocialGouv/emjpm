@@ -142,8 +142,6 @@ function parse(ws) {
   };
 }
 
-const parserAgrementsPopulations = {
+module.exports = {
   parse
 };
-
-module.exports = parserAgrementsPopulations;

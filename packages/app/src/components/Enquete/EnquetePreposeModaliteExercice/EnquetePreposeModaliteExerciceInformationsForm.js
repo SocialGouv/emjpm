@@ -1,13 +1,26 @@
 import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import yup from "../../../lib/validationSchemas/yup";
 import { findOption } from "../../../util/option/OptionUtil";
 import { SmallInput } from "../../Commons/SmallInput";
 import { PERSONNALITE_JURIDIQUE } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+
+const validationSchema = yup.object().shape({
+  departement: yup.string().required(),
+  region: yup.string().required(),
+  raison_sociale: yup.string().required(),
+  personnalite_juridique_etablissement: yup.string().required(),
+  activite_personne_physique: yup.number().min(0),
+  activite_service: yup.number().min(0),
+  total_mesures_etablissements: yup.number().min(0),
+  etablissement_personne_morale: yup.number().min(0),
+  etablissement_convention_groupement: yup.number().min(0)
+});
 
 function mapDataPropsToFormValues(data) {
   return {
@@ -15,11 +28,19 @@ function mapDataPropsToFormValues(data) {
     region: data.region || "",
     raison_sociale: data.raison_sociale || "",
     personnalite_juridique_etablissement: data.personnalite_juridique_etablissement || "",
-    activite_personne_physique: data.activite_personne_physique || "",
-    activite_service: data.activite_service || "",
-    total_mesures_etablissements: data.total_mesures_etablissements || "",
-    etablissement_personne_morale: data.etablissement_personne_morale || "",
-    etablissement_convention_groupement: data.etablissement_convention_groupement || ""
+    activite_personne_physique: data.activite_personne_physique
+      ? parseFloat(data.activite_personne_physique)
+      : "",
+    activite_service: data.activite_service ? parseFloat(data.activite_service) : "",
+    total_mesures_etablissements: data.total_mesures_etablissements
+      ? parseFloat(data.total_mesures_etablissements)
+      : "",
+    etablissement_personne_morale: data.etablissement_personne_morale
+      ? parseFloat(data.etablissement_personne_morale)
+      : "",
+    etablissement_convention_groupement: data.etablissement_convention_groupement
+      ? parseFloat(data.etablissement_convention_groupement)
+      : ""
   };
 }
 
@@ -30,14 +51,32 @@ function getEtablissementsCount(values) {
 }
 
 export const EnquetePreposeModaliteExerciceInformationsForm = props => {
-  const { goToPrevPage, loading = false, data = {} } = props;
-  const { handleSubmit, handleChange, values, errors, setValues, setFieldValue } = useFormik({
+  const { goToPrevPage, loading = false, data = {}, step } = props;
+  const {
+    handleSubmit,
+    submitCount,
+    handleChange,
+    values,
+    errors,
+    setValues,
+    setFieldValue
+  } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    initialValues: mapDataPropsToFormValues(data)
+    initialValues: mapDataPropsToFormValues(data),
+    validationSchema
   });
+
+  console.log(values);
+
+  const showError = true;
+
+  // const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+  //   step.status,
+  //   submitCount
+  // ]);
 
   useEffect(() => {
     setValues(mapDataPropsToFormValues(data));
@@ -61,9 +100,9 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
                 id="region"
                 name="region"
                 value={values.region}
-                hasError={!!errors.region}
                 onChange={handleChange}
                 type="text"
+                hasError={showError && !!errors.region}
               />
               <InlineError message={errors.region} fieldId="region" />
             </Field>
@@ -78,9 +117,9 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
                 id="departement"
                 name="departement"
                 value={values.departement}
-                hasError={!!errors.departement}
                 onChange={handleChange}
                 type="text"
+                hasError={showError && !!errors.departement}
               />
               <InlineError message={errors.departement} fieldId="departement" />
             </Field>
@@ -96,9 +135,9 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
             id="raison_sociale"
             name="raison_sociale"
             value={values.raison_sociale}
-            hasError={!!errors.raison_sociale}
             onChange={handleChange}
             type="text"
+            hasError={showError && !!errors.raison_sociale}
           />
           <InlineError message={errors.raison_sociale} fieldId="raison_sociale" />
         </Field>
@@ -110,7 +149,10 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
           </Label>
 
           <Select
+            id="personnalite_juridique_etablissement"
+            instanceId="personnalite_juridique_etablissement"
             placeholder=""
+            hasError={showError && !!errors.personnalite_juridique_etablissement}
             onChange={({ value }) => setFieldValue("personnalite_juridique_etablissement", value)}
             value={findOption(
               PERSONNALITE_JURIDIQUE.byKey,

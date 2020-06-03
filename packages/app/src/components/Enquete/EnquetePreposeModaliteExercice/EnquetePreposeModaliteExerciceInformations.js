@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 import { Box } from "rebass";
 
+import { parseFloatValue } from "../../../util";
 import { EnquetePreposeModaliteExerciceInformationsForm } from "./EnquetePreposeModaliteExerciceInformationsForm";
 import { UPDATE_ENQUETE_PREPOSE_INFORMATIONS } from "./mutations";
 import { ENQUETE_PREPOSE_INFORMATIONS } from "./queries";
@@ -35,12 +36,13 @@ export const EnquetePreposeModaliteExerciceInformations = props => {
               raison_sociale: values.raison_sociale || null,
               personnalite_juridique_etablissement:
                 values.personnalite_juridique_etablissement || null,
-              activite_personne_physique: values.activite_personne_physique || null,
-              activite_service: values.activite_service || null,
-              total_mesures_etablissements: values.total_mesures_etablissements || null,
-              etablissement_personne_morale: values.etablissement_personne_morale || null,
-              etablissement_convention_groupement:
-                values.etablissement_convention_groupement || null
+              activite_personne_physique: parseFloatValue(values.activite_personne_physique),
+              activite_service: parseFloatValue(values.activite_service),
+              total_mesures_etablissements: parseFloatValue(values.total_mesures_etablissements),
+              etablissement_personne_morale: parseFloatValue(values.etablissement_personne_morale),
+              etablissement_convention_groupement: parseFloatValue(
+                values.etablissement_convention_groupement
+              )
             }
           });
           await goToNextPage();

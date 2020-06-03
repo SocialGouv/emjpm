@@ -4,17 +4,14 @@ const {
 const {
   EnqueteReponsesModalitesExercice
 } = require("../../../../models/EnqueteReponsesModalitesExercice");
-const { getEnqueteReponse, createEmptyEnqueteReponse } = {
-  getEnqueteReponse: undefined,
-  createEmptyEnqueteReponse: undefined
-};
-// const {
-//   getEnqueteReponse,
-//   createEmptyEnqueteReponse
-// } = require("../prepose/requests");
+
+const {
+  getEnqueteReponseMandatairePrepose,
+  createEmptyEnqueteReponse
+} = require("../mandataire-prepose/requests");
 
 async function update(enqueteId, { tabs, mandataireId }) {
-  if (!getEnqueteReponse) {
+  if (!getEnqueteReponseMandatairePrepose) {
     throw new Error("NOT IMPLEMENTED");
   }
 
@@ -35,10 +32,10 @@ async function update(enqueteId, { tabs, mandataireId }) {
 }
 
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
-  if (!getEnqueteReponse) {
+  if (!getEnqueteReponseMandatairePrepose) {
     throw new Error("NOT IMPLEMENTED");
   }
-  let enqueteReponse = await getEnqueteReponse({
+  let enqueteReponse = await getEnqueteReponseMandatairePrepose({
     enqueteId,
     mandataireId
   });

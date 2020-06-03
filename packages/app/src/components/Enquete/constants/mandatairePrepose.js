@@ -12,3 +12,8 @@ export const PERSONNALITE_JURIDIQUE = enqueteKeysBuilder.buildKeys({
   organisme_prive_non_lucratif: "Organisme privé à but non lucratif (dont CG privés)",
   organisme_prive_commercial: "Organisme privé à caractère commercial"
 });
+
+export const STATUT = enqueteKeysBuilder.buildKeys({
+  public: "Public",
+  private: "Privé"
+});
