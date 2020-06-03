@@ -1,41 +1,21 @@
-async function getValidationStatus(data, validationSchema, debugName) {
-  if (!data) {
-    return "empty";
-  }
-  const isEmpty = !validationSchema._nodes.some(attr => {
-    const value = data[attr];
-    const isValueSet = value !== undefined && value !== null;
-    if (isValueSet) {
-      if (debugName) {
-        console.log(`xxx [${debugName}] isValueSet:`, attr, value);
-      }
-    }
-    return isValueSet;
-  });
-  if (debugName) {
-    console.log(`xxx [${debugName}] data:`, data);
-  }
-  if (debugName) {
-    console.log(
-      `xxx [${debugName}] validationSchema._nodes:`,
-      validationSchema._nodes
-    );
-  }
-  if (debugName) {
-    console.log(`xxx [${debugName}] IS EMPTY:`, isEmpty);
-  }
-  if (isEmpty) {
+async function getValidationStatus(data, validationSchema) {
+  if (isEmptyData(data, validationSchema)) {
     return "empty";
   }
   const isValid = await validationSchema.isValid(data);
 
-  if (isValid) {
-    return "valid";
+  return isValid ? "valid" : "invalid";
+}
+function isEmptyData(data, validationSchema) {
+  if (!data) {
+    return true;
   }
-  if (debugName) {
-    console.log(`xxx [${debugName}] INVALID:`);
-  }
-  return "invalid";
+  const isEmpty = !validationSchema._nodes.some(attr => {
+    const value = data[attr];
+    const isValueSet = value !== undefined && value !== null;
+    return isValueSet;
+  });
+  return isEmpty;
 }
 
 function getGlobalStatus(status) {

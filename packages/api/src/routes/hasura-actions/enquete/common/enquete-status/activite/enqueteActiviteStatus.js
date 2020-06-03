@@ -5,7 +5,7 @@ const {
 } = require("../enqueteSchemaUtil");
 const yup = require("yup");
 
-async function enqueteMandataireIndividuelActiviteStatus(enqueteReponse) {
+module.exports = async enqueteReponse => {
   const data = enqueteReponse.enquete_reponses_activite;
 
   const activiteStatus = {
@@ -129,9 +129,5 @@ async function enqueteMandataireIndividuelActiviteStatus(enqueteReponse) {
 
   activiteStatus.global = getGlobalStatus(activiteStatus);
 
-  console.log("xxx =>>>>>>>>> activiteStatus:", activiteStatus);
-
   return activiteStatus;
-}
-
-module.exports = enqueteMandataireIndividuelActiviteStatus;
+};

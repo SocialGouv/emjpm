@@ -43,6 +43,8 @@ export const EnqueteIndividuelInformationsForm = props => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
+  console.log("xxx errors:", errors);
+
   return loading ? null : (
     <form onSubmit={handleSubmit}>
       <Heading1 textAlign="center" mb={"80px"}>

@@ -1,8 +1,14 @@
 const { getGlobalStatus, getValidationStatus } = require("./enqueteSchemaUtil");
-const enqueteMandataireIndividuelActiviteStatus = require("./enqueteMandataireIndividuelActiviteStatus");
+const enqueteActiviteStatus = require("./activite/enqueteActiviteStatus");
+const enqueteInformationsMandatairesStatus = require("./informations_mandataire/enqueteInformationsMandatairesStatus");
+const populationsStatus = require("./populations/populationsStatus");
+const prestationsSocialesStatus = require("./prestations-sociales/prestationsSocialesStatus");
 
 module.exports = {
   getGlobalStatus,
   getValidationStatus,
-  enqueteMandataireIndividuelActiviteStatus
+  enqueteActiviteStatus,
+  enqueteInformationsMandatairesStatus,
+  populationsStatus,
+  prestationsSocialesStatus
 };

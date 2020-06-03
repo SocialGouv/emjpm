@@ -33,7 +33,6 @@ export const enqueteIndividuelMenuBuilder = {
 
 function buildMenuSections(enqueteReponse) {
   const status = enqueteReponse.enquete_reponses_status;
-  console.log("xxx status:", status);
   return [
     {
       status: "valid",
@@ -46,22 +45,22 @@ function buildMenuSections(enqueteReponse) {
     },
     {
       label: "Vos informations",
-      status: "valid", // TODO
+      status: status.informations.global,
       steps: [
         {
           label: "Informations générales",
           component: EnqueteIndividuelInformations,
-          status: enqueteReponse.enquete_reponses_informations_mandataire_generales_status
+          status: status.informations.informationsGenerales
         },
         {
           label: "Agréments",
           component: EnqueteIndividuelInformationsAgrements,
-          status: enqueteReponse.enquete_reponses_informations_mandataire_agrements_status
+          status: status.informations.agrements
         },
         {
           label: "Formation",
           component: EnqueteIndividuelInformationsFormation,
-          status: enqueteReponse.enquete_reponses_informations_mandataire_formation_status
+          status: status.informations.formation
         }
       ]
     },
@@ -128,38 +127,38 @@ function buildMenuSections(enqueteReponse) {
     },
     {
       label: "Populations",
-      status: "valid", // TODO
+      status: status.populations.global,
       steps: [
         {
           label: "Curatelle",
           component: EnquetePopulationsCuratelle,
-          status: enqueteReponse.enquete_reponses_populations_curatelle_status
+          status: status.populations.curatelle
         },
         {
           label: "Tutelle",
           component: EnquetePopulationsTutelle,
-          status: enqueteReponse.enquete_reponses_populations_tutelle_status
+          status: status.populations.tutelle
         },
         {
           label: "Mesure d'accompagnement de justice",
           component: EnquetePopulationsMAJ,
-          status: enqueteReponse.enquete_reponses_populations_accompagnement_judiciaire_status
+          status: status.populations.accompagnementJudiciaire
         },
         {
           label: "Sauvegarde de justice",
           component: EnquetePopulationsSauvegardeJustice,
-          status: enqueteReponse.enquete_reponses_populations_sauvegarde_justice_status
+          status: status.populations.sauvegardeJustice
         },
         {
           label: "Autre",
           component: EnquetePopulationsAutreMesures,
-          status: enqueteReponse.enquete_reponses_populations_autre_status
+          status: status.populations.autresMesures
         }
       ]
     },
     {
       label: "Prestations sociales",
-      status: "valid", // TODO
+      status: status.prestationsSociales.global,
       steps: [{ label: "Prestations sociales", component: EnqueteIndividuelPrestationsSociales }]
     },
     {

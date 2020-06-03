@@ -3,7 +3,7 @@ import yup from "./yup";
 export const enqueteMandataireIndividuelInformationsGeneralesSchema = yup.object().shape({
   anciennete: yup.string().nullable(),
   benevole: yup.boolean().nullable(),
-  departement: yup.string().nullable(),
+  departement: yup.string().required(),
   estimation_etp: yup.string().nullable(),
   exerce_secretaires_specialises: yup.boolean().nullable(),
   forme_juridique: yup.string().nullable(),
