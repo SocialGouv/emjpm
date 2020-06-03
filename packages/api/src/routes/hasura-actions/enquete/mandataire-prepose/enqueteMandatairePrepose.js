@@ -20,7 +20,7 @@ async function initEnqueteMandatairePrepose({ enqueteId, mandataireId }) {
   }
   const status = await enqueteMandatairePreposeStatus(enqueteReponse);
   return {
-    ...enqueteReponse,
+    enqueteReponse,
     status
   };
 }

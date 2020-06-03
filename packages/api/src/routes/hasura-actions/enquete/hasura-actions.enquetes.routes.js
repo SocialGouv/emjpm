@@ -25,13 +25,18 @@ router.post("/mandataire-prepose", async (req, res, next) => {
       });
     }
 
-    const enqueteReponsePrepose = await initEnqueteMandatairePrepose({
+    const {
+      enqueteReponsePrepose,
+      status
+    } = await initEnqueteMandatairePrepose({
       enqueteId,
       mandataireId
     });
 
+    console.log("xxx status:", status);
+
     return res.json({
-      enquete_reponses_status: enqueteReponsePrepose.status,
+      enquete_reponses_status: status,
       enquete_id: enqueteReponsePrepose.enquete_id,
       submitted_at: enqueteReponsePrepose.submitted_at,
       enquete_reponses_id: enqueteReponsePrepose.id,

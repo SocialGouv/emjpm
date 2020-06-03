@@ -17,7 +17,12 @@ export const enqueteIndividuelMenuBuilder = {
 };
 
 function buildMenuSections(enqueteReponse) {
-  const status = enqueteReponse.enquete_reponses_status;
+  const status =
+    enqueteReponse.enquete_reponses_status |
+    {
+      modalitesExercice: {},
+      populations: {}
+    };
   console.log("xxx status:", status);
 
   return [
