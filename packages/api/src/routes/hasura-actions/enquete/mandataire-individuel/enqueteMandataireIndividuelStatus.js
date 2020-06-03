@@ -14,9 +14,6 @@ async function enqueteMandataireIndividuelStatus(enqueteReponse) {
     prestationsSociales: await prestationsSocialesStatus(enqueteReponse)
   };
 
-  console.log("xxx enqueteReponse:", enqueteReponse);
-  console.log("xxx status:", status);
-
   status.global = getGlobalStatus(status);
 
   return status;

@@ -2,6 +2,7 @@ const {
   getEnqueteReponseMandatairePrepose,
   createEmptyEnqueteReponse
 } = require("./requests");
+const enqueteMandatairePreposeStatus = require("./enqueteMandatairePreposeStatus");
 
 async function initEnqueteMandatairePrepose({ enqueteId, mandataireId }) {
   let enqueteReponse = await getEnqueteReponseMandatairePrepose({
@@ -17,8 +18,11 @@ async function initEnqueteMandatairePrepose({ enqueteId, mandataireId }) {
 
     enqueteReponse = insert_enquete_reponses_one;
   }
-
-  return enqueteReponse;
+  const status = await enqueteMandatairePreposeStatus(enqueteReponse);
+  return {
+    ...enqueteReponse,
+    enquete_reponses_status: status
+  };
 }
 
 module.exports = { initEnqueteMandatairePrepose };
