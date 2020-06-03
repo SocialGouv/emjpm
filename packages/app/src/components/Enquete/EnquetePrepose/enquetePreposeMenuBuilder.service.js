@@ -5,6 +5,10 @@ import {
   EnquetePopulationsSauvegardeJustice,
   EnquetePopulationsTutelle
 } from "../EnquetePopulations";
+import {
+  EnquetePreposeModaliteExerciceEtablissements,
+  EnquetePreposeModaliteExerciceInformations
+} from "../EnquetePreposeModaliteExercice";
 import { EnquetePreposeSubmit } from "./EnquetePreposeSubmit";
 import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 
@@ -19,6 +23,19 @@ function buildMenuSections(enqueteReponse) {
         {
           label: "Bienvenue",
           component: EnquetePreposeWelcome
+        }
+      ]
+    },
+    {
+      label: "Modalité d'exercice",
+      steps: [
+        {
+          label: "Informations générales",
+          component: EnquetePreposeModaliteExerciceInformations
+        },
+        {
+          label: "Etablissements",
+          component: EnquetePreposeModaliteExerciceEtablissements
         }
       ]
     },
