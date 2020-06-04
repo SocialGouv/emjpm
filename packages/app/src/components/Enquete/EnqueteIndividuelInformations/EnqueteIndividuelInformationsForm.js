@@ -249,7 +249,7 @@ export const EnqueteIndividuelInformationsForm = props => {
       </Box>
       <Box>
         <Field>
-          <Label mb={1}>{"Exercez-vous avec un secretariat spécialisé ?"}</Label>
+          <Label mb={1}>{"Exercez-vous avec un secrétariat spécialisé ?"}</Label>
           <YesNoComboBox
             defaultValue={values.exerce_secretaires_specialises}
             name="exerce_secretaires_specialises"
