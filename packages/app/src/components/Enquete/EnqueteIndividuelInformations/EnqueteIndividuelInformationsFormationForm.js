@@ -1,11 +1,36 @@
 import { Field, Heading1, Heading3, InlineError, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box, Text } from "rebass";
 
-import { enqueteMandataireIndividuelFormationSchema } from "../../../lib/validationSchemas";
+import yup from "../../../lib/validationSchemas/yup";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+
+// schema identique à enqueteAgrementsFormationsStatus
+export const validationSchema = yup.object().shape({
+  cnc_annee_obtention: yup
+    .number()
+    .positive()
+    .integer()
+    .required(),
+  cnc_heures_formation: yup
+    .number()
+    .positive()
+    .required(),
+  niveau_qualification: yup
+    .number()
+    .min(1)
+    .max(6)
+    .integer()
+    .required(),
+  secretaire_specialise_etp_n1: yup.number().positive(),
+  secretaire_specialise_etp_spe_n2: yup.number().positive(),
+  secretaire_specialise_etp_spe_n3: yup.number().positive(),
+  secretaire_specialise_etp_spe_n4: yup.number().positive(),
+  secretaire_specialise_etp_spe_n5: yup.number().positive(),
+  secretaire_specialise_etp_spe_n6: yup.number().positive()
+});
 
 function mapDataPropsToFormValues(data) {
   return {
@@ -34,19 +59,23 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsFormationForm = props => {
-  const { data = {}, goToPrevPage, loading = false } = props;
-  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
+  const { data = {}, step, goToPrevPage } = props;
+  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    validationSchema: enqueteMandataireIndividuelFormationSchema,
+    validationSchema,
     initialValues: mapDataPropsToFormValues(data)
   });
   useEffect(() => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
   return (
     <form onSubmit={handleSubmit}>
       <Heading1 textAlign="center" mb={"80px"}>
@@ -65,9 +94,13 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             type="text"
             value={values.cnc_annee_obtention}
             onChange={handleChange}
-            hasError={!!errors.cnc_annee_obtention}
+            hasError={showError && !!errors.cnc_annee_obtention}
           />
-          <InlineError message={errors.cnc_annee_obtention} fieldId="cnc_annee_obtention" />
+          <InlineError
+            showError={showError}
+            message={errors.cnc_annee_obtention}
+            fieldId="cnc_annee_obtention"
+          />
         </Field>
         <Field>
           <Label mb={1} htmlFor={"cnc_heures_formation"}>
@@ -80,9 +113,13 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             type="text"
             value={values.cnc_heures_formation}
             onChange={handleChange}
-            hasError={!!errors.cnc_heures_formation}
+            hasError={showError && !!errors.cnc_heures_formation}
           />
-          <InlineError message={errors.cnc_heures_formation} fieldId="cnc_heures_formation" />
+          <InlineError
+            showError={showError}
+            message={errors.cnc_heures_formation}
+            fieldId="cnc_heures_formation"
+          />
         </Field>
 
         <Field>
@@ -97,10 +134,14 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             min={1}
             max={5}
             value={values.niveau_qualification}
-            hasError={!!errors.niveau_qualification}
+            hasError={showError && !!errors.niveau_qualification}
             onChange={handleChange}
           />
-          <InlineError message={errors.niveau_qualification} fieldId="niveau_qualification" />
+          <InlineError
+            showError={showError}
+            message={errors.niveau_qualification}
+            fieldId="niveau_qualification"
+          />
         </Field>
         <Text mt={7} mb={4} fontWeight="bold" color="#595959">
           {"Activité des secrétaires spécialisés par niveau en équivalent temps plein (ETP)"}
@@ -115,10 +156,11 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             placeholder=""
             type="number"
             value={values.secretaire_specialise_etp_n1}
-            hasError={!!errors.secretaire_specialise_etp_n1}
+            hasError={showError && !!errors.secretaire_specialise_etp_n1}
             onChange={handleChange}
           />
           <InlineError
+            showError={showError}
             message={errors.secretaire_specialise_etp_n1}
             fieldId="secretaire_specialise_etp_n1"
           />
@@ -133,10 +175,11 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             placeholder=""
             type="number"
             value={values.secretaire_specialise_etp_n2}
-            hasError={!!errors.secretaire_specialise_etp_n2}
+            hasError={showError && !!errors.secretaire_specialise_etp_n2}
             onChange={handleChange}
           />
           <InlineError
+            showError={showError}
             message={errors.secretaire_specialise_etp_n2}
             fieldId="secretaire_specialise_etp_n2"
           />
@@ -151,10 +194,11 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             placeholder=""
             type="number"
             value={values.secretaire_specialise_etp_n3}
-            hasError={!!errors.secretaire_specialise_etp_n3}
+            hasError={showError && !!errors.secretaire_specialise_etp_n3}
             onChange={handleChange}
           />
           <InlineError
+            showError={showError}
             message={errors.secretaire_specialise_etp_n3}
             fieldId="secretaire_specialise_etp_n3"
           />
@@ -169,10 +213,11 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             placeholder=""
             type="number"
             value={values.secretaire_specialise_etp_n4}
-            hasError={!!errors.secretaire_specialise_etp_n4}
+            hasError={showError && !!errors.secretaire_specialise_etp_n4}
             onChange={handleChange}
           />
           <InlineError
+            showError={showError}
             message={errors.secretaire_specialise_etp_n4}
             fieldId="secretaire_specialise_etp_n4"
           />
@@ -187,10 +232,11 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             placeholder=""
             type="number"
             value={values.secretaire_specialise_etp_n5}
-            hasError={!!errors.secretaire_specialise_etp_n5}
+            hasError={showError && !!errors.secretaire_specialise_etp_n5}
             onChange={handleChange}
           />
           <InlineError
+            showError={showError}
             message={errors.secretaire_specialise_etp_n5}
             fieldId="secretaire_specialise_etp_n5"
           />
@@ -205,15 +251,16 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             placeholder=""
             type="number"
             value={values.secretaire_specialise_etp_n6}
-            hasError={!!errors.secretaire_specialise_etp_n6}
+            hasError={showError && !!errors.secretaire_specialise_etp_n6}
             onChange={handleChange}
           />
           <InlineError
+            showError={showError}
             message={errors.secretaire_specialise_etp_n6}
             fieldId="secretaire_specialise_etp_n6"
           />
         </Field>
-        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
       </Box>
     </form>
   );

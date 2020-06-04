@@ -1,14 +1,36 @@
 import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
-import { enqueteMandataireIndividuelAgrementsSchema } from "../../../lib/validationSchemas";
+import yup from "../../../lib/validationSchemas/yup";
 import { findOption } from "../../../util/option/OptionUtil";
-import { ENQ_REP_AGREMENTS_FORMATIONS_FORM } from "../constants";
+import { ENQ_REP_AGREMENTS_FORMATIONS } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+
+// schema identique à enqueteAgrementsFormationsStatus
+export const validationSchema = yup.object().shape({
+  debut_activite_avant_2009: yup.boolean().required(),
+  annee_agrement: yup
+    .number()
+    .integer()
+    .min(2009)
+    .required(),
+  nb_departements: yup
+    .mixed()
+    .oneOf(ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.keys)
+    .required(),
+  nb_mesures_dep_finance: yup
+    .number()
+    .integer()
+    .required(),
+  nb_mesures_dep_autres: yup
+    .number()
+    .integer()
+    .required()
+});
 
 function mapDataPropsToFormValues(data) {
   return {
@@ -21,13 +43,21 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsAgrementsForm = props => {
-  const { data = {}, goToPrevPage } = props;
-  const { handleSubmit, handleChange, values, errors, setValues, setFieldValue } = useFormik({
+  const { data = {}, step, goToPrevPage } = props;
+  const {
+    handleSubmit,
+    submitCount,
+    handleChange,
+    values,
+    errors,
+    setValues,
+    setFieldValue
+  } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    validationSchema: enqueteMandataireIndividuelAgrementsSchema,
+    validationSchema,
     initialValues: mapDataPropsToFormValues(data)
   });
 
@@ -35,6 +65,10 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
   return (
     <form onSubmit={handleSubmit}>
       <Heading1 textAlign="center" mb={"80px"}>
@@ -58,6 +92,7 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
             }}
           />
           <InlineError
+            showError={showError}
             message={errors.debut_activite_avant_2009}
             fieldId="debut_activite_avant_2009"
           />
@@ -74,10 +109,14 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
             value={values.annee_agrement}
             id="annee_agrement"
             name="annee_agrement"
-            hasError={!!errors.annee_agrement}
+            hasError={showError && !!errors.annee_agrement}
             onChange={handleChange}
           />
-          <InlineError message={errors.annee_agrement} fieldId="annee_agrement" />
+          <InlineError
+            showError={showError}
+            message={errors.annee_agrement}
+            fieldId="annee_agrement"
+          />
         </Field>
 
         <Field>
@@ -90,14 +129,18 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
             instanceId={"nb_departements"}
             name="nb_departements"
             value={findOption(
-              ENQ_REP_AGREMENTS_FORMATIONS_FORM.NB_DEPARTEMENTS,
+              ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.byKey,
               values.nb_departements
             )}
-            hasError={!!errors.nb_departements}
+            hasError={showError && !!errors.nb_departements}
             onChange={option => setFieldValue("nb_departements", option.value)}
-            options={ENQ_REP_AGREMENTS_FORMATIONS_FORM.NB_DEPARTEMENTS}
+            options={ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.byKey}
           />
-          <InlineError message={errors.nb_departements} fieldId="nb_departements" />
+          <InlineError
+            showError={showError}
+            message={errors.nb_departements}
+            fieldId="nb_departements"
+          />
         </Field>
         <Field>
           <Label mb={1} htmlFor={"nb_mesures_dep_finance"}>
@@ -111,10 +154,14 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
             value={values.nb_mesures_dep_finance}
             id="nb_mesures_dep_finance"
             name="nb_mesures_dep_finance"
-            hasError={!!errors.nb_mesures_dep_finance}
+            hasError={showError && !!errors.nb_mesures_dep_finance}
             onChange={handleChange}
           />
-          <InlineError message={errors.nb_mesures_dep_finance} fieldId="nb_mesures_dep_finance" />
+          <InlineError
+            showError={showError}
+            message={errors.nb_mesures_dep_finance}
+            fieldId="nb_mesures_dep_finance"
+          />
         </Field>
         <Field>
           <Label mb={1} htmlFor={"nb_mesures_dep_autres"}>
@@ -126,10 +173,14 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
             value={values.nb_mesures_dep_autres}
             id="nb_mesures_dep_autres"
             name="nb_mesures_dep_autres"
-            hasError={!!errors.nb_mesures_dep_autres}
+            hasError={showError && !!errors.nb_mesures_dep_autres}
             onChange={handleChange}
           />
-          <InlineError message={errors.nb_mesures_dep_autres} fieldId="nb_mesures_dep_autres" />
+          <InlineError
+            showError={showError}
+            message={errors.nb_mesures_dep_autres}
+            fieldId="nb_mesures_dep_autres"
+          />
         </Field>
         <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
       </Box>

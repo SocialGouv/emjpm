@@ -3,11 +3,15 @@ export const enqueteKeysBuilder = {
 };
 
 function buildKeys(map) {
-  return Object.keys(map).map(value => {
+  const byKey = Object.keys(map).map(value => {
     const label = map[value];
     return {
       label,
       value
     };
   });
+  return {
+    byKey,
+    keys: Object.keys(byKey)
+  };
 }

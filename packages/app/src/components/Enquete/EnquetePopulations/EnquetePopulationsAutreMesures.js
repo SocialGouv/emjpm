@@ -13,7 +13,9 @@ export const EnquetePopulationsAutreMesures = props => {
     goToNextPage,
     enqueteReponse,
     mandataireId,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
+    section,
+    step
   } = props;
   const { enquete_reponses_populations_id } = enqueteReponse;
 
@@ -71,6 +73,8 @@ export const EnquetePopulationsAutreMesures = props => {
       <EnquetePopulationsForm
         loading={loading}
         data={reponsePopulations}
+        section={section}
+        step={step}
         handleSubmit={async values => {
           const data = Object.keys(values).reduce((acc, key) => {
             if (values[key]) {

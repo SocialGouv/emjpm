@@ -3,7 +3,7 @@ function buildKeys(byKey) {
     byKey,
     byValue: revertMapKeysValues(byKey),
     keys: Object.keys(byKey),
-    values: Object.keys(byKey)
+    values: Object.values(byKey)
   };
 }
 
