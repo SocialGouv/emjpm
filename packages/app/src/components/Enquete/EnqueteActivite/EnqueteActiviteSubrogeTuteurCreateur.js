@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { useMutation, useQuery } from "react-apollo";
 import { Box } from "rebass";
 
+import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
 import { EnqueteActiviteMesuresForm } from "./common";
 import { UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR } from "./mutations";
 import { ENQUETE_SUBROGE_TUTEUR_CREATEUR } from "./queries";
@@ -9,10 +10,22 @@ import { ENQUETE_SUBROGE_TUTEUR_CREATEUR } from "./queries";
 const PREFIX = "subroge_tuteur_createur";
 
 export const EnqueteActiviteSubrogeTuteurCreateur = props => {
-  const { goToPrevPage, goToNextPage, enqueteReponse } = props;
+  const {
+    goToPrevPage,
+    goToNextPage,
+    enqueteReponse,
+    section,
+    step,
+    mandataireId,
+    enquete: { id: enqueteId }
+  } = props;
   const { enquete_reponses_activite_id } = enqueteReponse;
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR, {
     refetchQueries: [
+      {
+        query: ENQUETE_MANDATAIRE_INDIVIDUEL,
+        variables: { enqueteId, mandataireId }
+      },
       {
         query: ENQUETE_SUBROGE_TUTEUR_CREATEUR,
         variables: {
@@ -43,6 +56,8 @@ export const EnqueteActiviteSubrogeTuteurCreateur = props => {
       <EnqueteActiviteMesuresForm
         loading={loading}
         data={normalizedData}
+        section={section}
+        step={step}
         handleSubmit={async values => {
           await updateEnquete({
             variables: {

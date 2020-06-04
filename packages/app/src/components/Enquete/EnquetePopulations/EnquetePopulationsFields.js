@@ -11,15 +11,17 @@ export function calculateTotal(firstProperty, secondProperty) {
 }
 
 export const EnquetePopulationTrancheAgeField = props => {
-  const { values, errors, menFieldId, womenFieldId, label, handleChange } = props;
+  const { values, errors, menFieldId, womenFieldId, label, handleChange, showError } = props;
   const men = { value: values[menFieldId], error: errors[menFieldId], field: menFieldId };
   const women = { value: values[womenFieldId], error: errors[womenFieldId], field: womenFieldId };
 
   return (
     <Fragment>
       <Box mb={2}>
-        <InlineError message={men.error} fieldId={men.field} />
-        {!men.error && <InlineError message={women.error} fieldId={women.field} />}
+        <InlineError showError={showError} message={men.error} fieldId={men.field} />
+        {!men.error && (
+          <InlineError showError={showError} message={women.error} fieldId={women.field} />
+        )}
       </Box>
       <Flex mb={4} alignItems="center">
         <Label width="210px">{label}</Label>

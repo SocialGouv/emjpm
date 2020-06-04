@@ -33,7 +33,7 @@ export const UPDATE_ENQUETE_INFORMATIONS_FORMATION = gql`
   mutation update_enquete_individuel_formation(
     $id: Int!
     $cnc_annee_obtention: Int
-    $cnc_heures_formation: Int
+    $cnc_heures_formation: Float
     $niveau_qualification: Int
     $secretaire_specialise_etp_n1: Float
     $secretaire_specialise_etp_n2: Float

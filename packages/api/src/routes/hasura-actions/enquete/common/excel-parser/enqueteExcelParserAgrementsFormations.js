@@ -16,7 +16,7 @@ function parse(ws) {
     nb_mesures_dep_autres: parser.integer(ws["C43"]),
     // formation
     cnc_annee_obtention: parser.integer(ws["B47"]),
-    cnc_heures_formation: parser.integer(ws["B48"]),
+    cnc_heures_formation: parser.float(ws["B48"]),
     niveau_qualification: parseNiveauQualification(ws),
     secretaire_specialise_etp_n1: parser.float(ws["B53"], { min: 0 }),
     secretaire_specialise_etp_n2: parser.float(ws["C53"], { min: 0 }),

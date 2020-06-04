@@ -1,7 +1,7 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Input, Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -17,8 +17,8 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteActiviteRevisionMesuresForm = props => {
-  const { goToPrevPage, data, loading = false } = props;
-  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
+  const { goToPrevPage, data, step, loading = false } = props;
+  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
@@ -29,6 +29,11 @@ export const EnqueteActiviteRevisionMesuresForm = props => {
   useEffect(() => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
+
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
 
   return (
     <Box>
@@ -49,7 +54,7 @@ export const EnqueteActiviteRevisionMesuresForm = props => {
               placeholder=""
               name="revisionsMainLevee"
               value={values.revisionsMainLevee}
-              hasError={!!errors.revisionsMainLevee}
+              hasError={showError && !!errors.revisionsMainLevee}
               onChange={handleChange}
               type="number"
             />
@@ -64,7 +69,7 @@ export const EnqueteActiviteRevisionMesuresForm = props => {
               placeholder=""
               name="revisionsChangement"
               value={values.revisionsChangement}
-              hasError={!!errors.revisionsChangement}
+              hasError={showError && !!errors.revisionsChangement}
               onChange={handleChange}
               type="number"
             />
@@ -80,7 +85,7 @@ export const EnqueteActiviteRevisionMesuresForm = props => {
               placeholder=""
               name="revisionsMasp"
               value={values.revisionsMasp}
-              hasError={!!errors.revisionsMasp}
+              hasError={showError && !!errors.revisionsMasp}
               onChange={handleChange}
               type="number"
             />
@@ -95,7 +100,7 @@ export const EnqueteActiviteRevisionMesuresForm = props => {
               placeholder=""
               name="revisionsAutre"
               value={values.revisionsAutre}
-              hasError={!!errors.revisionsAutre}
+              hasError={showError && !!errors.revisionsAutre}
               onChange={handleChange}
               type="number"
             />
@@ -111,7 +116,7 @@ export const EnqueteActiviteRevisionMesuresForm = props => {
               placeholder=""
               name="revisionsReconduction"
               value={values.revisionsReconduction}
-              hasError={!!errors.revisionsReconduction}
+              hasError={showError && !!errors.revisionsReconduction}
               onChange={handleChange}
               type="number"
             />

@@ -1,6 +1,7 @@
 import { enqueteKeysBuilder } from "./enqueteKeysBuilder.service";
 
-export const ENQ_REP_AGREMENTS_FORMATIONS_FORM = {
+// constantes synchronisées avec le fichier api/ENQ_REP_AGREMENTS_FORMATIONS.const.js
+export const ENQ_REP_AGREMENTS_FORMATIONS = {
   NB_DEPARTEMENTS: enqueteKeysBuilder.buildKeys({
     "1": "1",
     "2": "2",

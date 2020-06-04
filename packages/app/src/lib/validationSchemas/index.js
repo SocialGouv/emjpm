@@ -1,11 +1,6 @@
 import { adminEditorSchema } from "./adminEditorSchema";
 import { adminTribunalSchema } from "./adminTribunalSchema";
 import { editorTokenSchema } from "./editorTokenSchema";
-import {
-  enqueteMandataireIndividuelAgrementsSchema,
-  enqueteMandataireIndividuelFormationSchema,
-  enqueteMandataireIndividuelInformationsGeneralesSchema
-} from "./enqueteMandataireIndividuelSchema";
 import { forgotPasswordSchema } from "./forgotPasswordSchema";
 import { individuelAgrementSchema } from "./individuelAgrementSchema";
 import { individuelExerciceSchema } from "./individuelExerciceSchema";
@@ -62,8 +57,5 @@ export {
   editorTokenSchema,
   satisfactionCampaignSchema,
   serviceMesureImportSchema,
-  servicePersonnelSchema,
-  enqueteMandataireIndividuelInformationsGeneralesSchema,
-  enqueteMandataireIndividuelAgrementsSchema,
-  enqueteMandataireIndividuelFormationSchema
+  servicePersonnelSchema
 };
