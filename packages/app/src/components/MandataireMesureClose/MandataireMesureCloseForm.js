@@ -1,11 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Field, Heading3, Heading5, Input, Select } from "@emjpm/ui";
+import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
+import { Label } from "@rebass/forms";
+import { parse } from "date-fns";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-import * as Yup from "yup";
 
+import yup from "../../lib/validationSchemas/yup";
 import { CLOSE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { MANDATAIRE, MESURE } from "./queries";
 
@@ -42,9 +44,10 @@ export const MandataireMesureCloseForm = props => {
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
+      const extinctionDate = parse(values.extinction, "dd/MM/yyyy", new Date());
       await updateMesure({
         variables: {
-          extinction: values.extinction,
+          extinction: extinctionDate,
           id: mesure.id,
           reason_extinction: values.reason_extinction.value
         }
@@ -54,9 +57,15 @@ export const MandataireMesureCloseForm = props => {
       });
       setSubmitting(false);
     },
-    validationSchema: Yup.object().shape({
-      extinction: Yup.date().required("Required"),
-      reason_extinction: Yup.string().required("Required")
+    validationSchema: yup.object().shape({
+      extinction: yup
+        .string()
+        .matches(
+          /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i,
+          "Doit être du format dd/mm/yyyy"
+        )
+        .required(),
+      reason_extinction: yup.string().required()
     }),
     initialValues: { extinction: "", reason_extinction: "" }
   });
@@ -75,6 +84,7 @@ export const MandataireMesureCloseForm = props => {
         </Box>
         <form onSubmit={formik.handleSubmit}>
           <Field>
+            <Label mb={1}>Date de fin de mandat</Label>
             <Input
               value={formik.values.extinction}
               id="extinction"
@@ -82,18 +92,31 @@ export const MandataireMesureCloseForm = props => {
               hasError={formik.errors.extinction && formik.touched.extinction}
               type="date"
               onChange={formik.handleChange}
-              placeholder="Date de fin de mandat"
+              placeholder=""
+            />
+            <InlineError
+              message={formik.errors.extinction}
+              fieldId="extinction"
+              showError={!!formik.touched.extinction}
             />
           </Field>
+
           <Field>
+            <Label mb={1}>Raison de la fin de mandat</Label>
             <Select
               id="reason_extinction"
               name="reason_extinction"
-              placeholder="Raison de la fin de mandat"
-              value={formik.values.type}
-              hasError={formik.errors.type && formik.touched.type}
+              placeholder=""
+              value={formik.values.reason_extinction}
+              hasError={!!formik.errors.reason_extinction}
               onChange={option => formik.setFieldValue("reason_extinction", option)}
               options={EXTINCTION_LABEL_VALUE}
+              instanceId={"reason_extinction"}
+            />
+            <InlineError
+              message={formik.errors.reason_extinction}
+              fieldId="reason_extinction"
+              showError={!!formik.touched.reason_extinction}
             />
           </Field>
           <Flex justifyContent="flex-end">
