@@ -12,18 +12,8 @@ import {
 import { EnquetePreposeSubmit } from "./EnquetePreposeSubmit";
 import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 
-export const enqueteIndividuelMenuBuilder = {
-  buildMenuSections
-};
-
 function buildMenuSections(enqueteReponse) {
-  const status =
-    enqueteReponse.enquete_reponses_status |
-    {
-      modalitesExercice: {},
-      populations: {}
-    };
-  console.log("xxx status:", status);
+  const status = enqueteReponse.enquete_reponses_status;
 
   return [
     {

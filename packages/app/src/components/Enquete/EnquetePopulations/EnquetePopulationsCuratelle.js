@@ -17,7 +17,6 @@ export const EnquetePopulationsCuratelle = props => {
     section,
     step
   } = props;
-  console.log("xxx step:", step);
 
   const { enquete_reponses_populations_id } = enqueteReponse;
 

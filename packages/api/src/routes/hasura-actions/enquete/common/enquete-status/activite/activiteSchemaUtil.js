@@ -38,11 +38,6 @@ function buildMesureGroupsAttributes(mesureGroups) {
             nbDebutAnnee + nbMesuresNouvelles - nbSortieMesures;
           value = value | 0;
 
-          if (expectedFinAnnee !== value) {
-            console.log("xxx  expectedFinAnnee: ", expectedFinAnnee);
-            console.log("xxx  value: ", value);
-          }
-
           return expectedFinAnnee === value;
         }
       );

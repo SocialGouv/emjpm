@@ -4696,7 +4696,7 @@ custom_types:
     - name: enquete_reponses_id
       type: Int!
     - name: enquete_reponses_status
-      type: jsonb!
+      type: json!
     - name: enquete_reponses_informations_mandataire_id
       type: Int
     - name: enquete_reponses_prestations_sociale_id

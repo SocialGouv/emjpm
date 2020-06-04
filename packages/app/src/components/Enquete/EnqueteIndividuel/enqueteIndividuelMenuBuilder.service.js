@@ -34,7 +34,6 @@ export const enqueteIndividuelMenuBuilder = {
 function buildMenuSections(enqueteReponse) {
   const status = enqueteReponse.enquete_reponses_status;
 
-  console.log("xxx status:", status);
   return [
     {
       status: "valid",

@@ -25,32 +25,12 @@ router.post("/mandataire-prepose", async (req, res, next) => {
       });
     }
 
-    const {
-      enqueteReponsePrepose,
-      status
-    } = await initEnqueteMandatairePrepose({
+    const result = await initEnqueteMandatairePrepose({
       enqueteId,
       mandataireId
     });
 
-    console.log("xxx status:", status);
-
-    return res.json({
-      enquete_reponses_status: status,
-      enquete_id: enqueteReponsePrepose.enquete_id,
-      submitted_at: enqueteReponsePrepose.submitted_at,
-      enquete_reponses_id: enqueteReponsePrepose.id,
-      enquete_reponses_modalites_exercice_id:
-        enqueteReponsePrepose.enquete_reponses_modalites_exercice_id,
-      enquete_reponses_modalites_exercice_status: 0,
-      enquete_reponses_populations_id:
-        enqueteReponsePrepose.enquete_reponses_populations_id,
-      enquete_reponses_populations_curatelle_status: 0,
-      enquete_reponses_populations_tutelle_status: 0,
-      enquete_reponses_populations_accompagnement_judiciaire_status: 0,
-      enquete_reponses_populations_sauvegarde_justice_status: 0,
-      enquete_reponses_populations_autre_status: 0
-    });
+    return res.json(result);
   } catch (err) {
     logger.error(err);
     next(err);

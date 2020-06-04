@@ -1,6 +1,6 @@
 import { Heading1 } from "@emjpm/ui";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useMemo } from "react";
 import { useQuery } from "react-apollo";
 import { Box, Flex } from "rebass";
 
@@ -17,6 +17,13 @@ export const EnquetePrepose = props => {
     variables: { enqueteId, mandataireId }
   });
 
+  const enqueteReponse = data ? data.enquete_prepose || {} : {};
+
+  const sections = useMemo(
+    () => (!data ? undefined : enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse)),
+    [enqueteReponse, data]
+  );
+
   if (loading) {
     return <Box mt={4}>Chargement...</Box>;
   }
@@ -30,8 +37,6 @@ export const EnquetePrepose = props => {
     );
   }
 
-  const enqueteReponse = data ? data.enquete_prepose || {} : {};
-  const sections = enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse);
   const section = sections[currentStep.step];
   const step = section.steps[currentStep.substep || 0];
   const ComponentForm = step.component;
