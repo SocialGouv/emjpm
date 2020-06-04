@@ -14,7 +14,7 @@ export const MenuStepper = props => {
           const hasSubSections = menuSection.steps && menuSection.steps.length > 1;
           const isActiveSesion = currentStep.step === index;
 
-          const hasSessionError = hasAnyStepError(menuSection);
+          const hasSectionError = menuSection.status === "invalid";
           return (
             <Box key={`step-${index}`} mb={4}>
               {renderSectionTitle({
@@ -22,7 +22,7 @@ export const MenuStepper = props => {
                 index,
                 isActiveSesion,
                 goToStep,
-                hasSessionError
+                hasSectionError
               })}
 
               {hasSubSections && isActiveSesion && (
@@ -55,16 +55,16 @@ export const MenuStepper = props => {
     </Fragment>
   );
 };
-function hasAnyStepError(menuSection) {
-  return menuSection.steps.some(s => s.isValid === false);
-}
-
-function renderSectionTitle({ menuSection, index, isActiveSesion, goToStep, hasSessionError }) {
+function renderSectionTitle({ menuSection, index, isActiveSesion, goToStep, hasSectionError }) {
   return (
     <Fragment>
       <Flex
         sx={{
-          color: isActiveSesion ? "#007AD9" : "#979797",
+          color: isActiveSesion
+            ? "#007AD9"
+            : menuSection.status === "empty"
+            ? "#979797"
+            : "#555555",
           fontWeight: isActiveSesion ? "bold" : "normal",
           cursor: "pointer"
         }}
@@ -85,7 +85,7 @@ function renderSectionTitle({ menuSection, index, isActiveSesion, goToStep, hasS
         </Text>
 
         <Box display="flex" flexGrow={1} />
-        {hasSessionError && !isActiveSesion && renderErrorBox()}
+        {hasSectionError && !isActiveSesion && renderErrorBox()}
       </Flex>
     </Fragment>
   );
@@ -97,7 +97,7 @@ function renderSubSection({ index, subsectionIndex, isActiveSubSection, step, go
       onClick={() => goToStep({ step: index, substep: subsectionIndex })}
       key={`${step.label}_${index}`}
       sx={{
-        color: isActiveSubSection ? "#007AD9" : "#979797",
+        color: isActiveSubSection ? "#007AD9" : step.status === "empty" ? "#979797" : "#555555",
         fontWeight: isActiveSubSection ? "bold" : "normal",
         cursor: "pointer"
       }}
@@ -114,7 +114,7 @@ function renderSubSection({ index, subsectionIndex, isActiveSubSection, step, go
 
       <Box display="flex" flexGrow={1} />
 
-      {step.isValid === false && renderErrorBox()}
+      {step.status === "invalid" && renderErrorBox()}
     </Flex>
   );
 }

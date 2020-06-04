@@ -1,14 +1,32 @@
 import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box, Text } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
-import { enqueteMandataireIndividuelInformationsGeneralesSchema } from "../../../lib/validationSchemas";
+import yup from "../../../lib/validationSchemas/yup";
 import { findOption } from "../../../util/option/OptionUtil";
-import { ENQ_REP_INFO_MANDATAIRE_FORM } from "../constants";
+import { ENQ_REP_INFO_MANDATAIRE } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+
+// schema identique à enqueteInformationsMandatairesStatus
+const validationSchema = yup.object().shape({
+  nom: yup.string().required(),
+  departement: yup.string().required(),
+  region: yup.string().required(),
+  benevole: yup.boolean().required(),
+  forme_juridique: yup.string().when("benevole", {
+    is: false,
+    then: yup.string().required(),
+    otherwise: yup.string().nullable()
+  }),
+  anciennete: yup.string().required(),
+  estimation_etp: yup.string().required(),
+  exerce_secretaires_specialises: yup.boolean().nullable(),
+  secretaire_specialise_etp: yup.number().nullable(),
+  local_professionnel: yup.boolean().required()
+});
 
 function mapDataPropsToFormValues(data) {
   return {
@@ -28,14 +46,22 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsForm = props => {
-  const { data = {}, goToPrevPage, loading } = props;
+  const { data = {}, step, goToPrevPage } = props;
 
-  const { handleSubmit, handleChange, values, errors, setFieldValue, setValues } = useFormik({
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    errors,
+    setFieldValue,
+    setValues,
+    submitCount
+  } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    validationSchema: enqueteMandataireIndividuelInformationsGeneralesSchema,
+    validationSchema,
     initialValues: mapDataPropsToFormValues(data)
   });
 
@@ -43,7 +69,12 @@ export const EnqueteIndividuelInformationsForm = props => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
-  return loading ? null : (
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
+
+  return (
     <form onSubmit={handleSubmit}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Vos informations"}
@@ -59,11 +90,11 @@ export const EnqueteIndividuelInformationsForm = props => {
             id="departement"
             name="departement"
             value={values.departement}
-            hasError={!!errors.departement}
+            hasError={showError && !!errors.departement}
             onChange={handleChange}
             type="text"
           />
-          <InlineError message={errors.departement} fieldId="departement" />
+          <InlineError showError={showError} message={errors.departement} fieldId="departement" />
         </Field>
 
         <Field>
@@ -75,11 +106,11 @@ export const EnqueteIndividuelInformationsForm = props => {
             id="region"
             name="region"
             value={values.region}
-            hasError={!!errors.region}
+            hasError={showError && !!errors.region}
             onChange={handleChange}
             type="text"
           />
-          <InlineError message={errors.region} fieldId="region" />
+          <InlineError showError={showError} message={errors.region} fieldId="region" />
         </Field>
 
         <Field>
@@ -91,11 +122,11 @@ export const EnqueteIndividuelInformationsForm = props => {
             id="nom"
             name="nom"
             value={values.nom}
-            hasError={!!errors.nom}
+            hasError={showError && !!errors.nom}
             onChange={handleChange}
             type="text"
           />
-          <InlineError message={errors.nom} fieldId="nom" />
+          <InlineError showError={showError} message={errors.nom} fieldId="nom" />
         </Field>
 
         <Text mt={7} mb={4} fontWeight="bold" color="#595959">
@@ -111,7 +142,7 @@ export const EnqueteIndividuelInformationsForm = props => {
             name="benevole"
             onChange={value => setFieldValue("benevole", value)}
           />
-          <InlineError message={errors.benevole} fieldId="benevole" />
+          <InlineError showError={showError} message={errors.benevole} fieldId="benevole" />
         </Field>
 
         {values.benevole === false && (
@@ -125,14 +156,18 @@ export const EnqueteIndividuelInformationsForm = props => {
               instanceId={"forme_juridique"}
               name="forme_juridique"
               value={findOption(
-                ENQ_REP_INFO_MANDATAIRE_FORM.FORME_JURIDIQUE,
+                ENQ_REP_INFO_MANDATAIRE.FORME_JURIDIQUE.byKey,
                 values.forme_juridique
               )}
-              hasError={!!errors.forme_juridique}
+              hasError={showError && !!errors.forme_juridique}
               onChange={option => setFieldValue("forme_juridique", option.value)}
-              options={ENQ_REP_INFO_MANDATAIRE_FORM.FORME_JURIDIQUE}
+              options={ENQ_REP_INFO_MANDATAIRE.FORME_JURIDIQUE.byKey}
             />
-            <InlineError message={errors.forme_juridique} fieldId="forme_juridique" />
+            <InlineError
+              showError={showError}
+              message={errors.forme_juridique}
+              fieldId="forme_juridique"
+            />
           </Field>
         )}
 
@@ -145,12 +180,12 @@ export const EnqueteIndividuelInformationsForm = props => {
             id="sexe"
             instanceId={"sexe"}
             name="sexe"
-            value={findOption(ENQ_REP_INFO_MANDATAIRE_FORM.SEXE, values.sexe)}
-            hasError={!!errors.sexe}
+            value={findOption(ENQ_REP_INFO_MANDATAIRE.SEXE.byKey, values.sexe)}
+            hasError={showError && !!errors.sexe}
             onChange={option => setFieldValue("sexe", option.value)}
-            options={ENQ_REP_INFO_MANDATAIRE_FORM.SEXE}
+            options={ENQ_REP_INFO_MANDATAIRE.SEXE.byKey}
           />
-          <InlineError message={errors.sexe} fieldId="sexe" />
+          <InlineError showError={showError} message={errors.sexe} fieldId="sexe" />
         </Field>
 
         <Field>
@@ -162,12 +197,12 @@ export const EnqueteIndividuelInformationsForm = props => {
             id="anciennete"
             instanceId={"anciennete"}
             name="anciennete"
-            value={findOption(ENQ_REP_INFO_MANDATAIRE_FORM.ANCIENNETE, values.anciennete)}
-            hasError={!!errors.anciennete}
+            value={findOption(ENQ_REP_INFO_MANDATAIRE.ANCIENNETE.byKey, values.anciennete)}
+            hasError={showError && !!errors.anciennete}
             onChange={option => setFieldValue("anciennete", option.value)}
-            options={ENQ_REP_INFO_MANDATAIRE_FORM.ANCIENNETE}
+            options={ENQ_REP_INFO_MANDATAIRE.ANCIENNETE.byKey}
           />
-          <InlineError message={errors.anciennete} fieldId="anciennete" />
+          <InlineError showError={showError} message={errors.anciennete} fieldId="anciennete" />
         </Field>
 
         <Field>
@@ -179,12 +214,12 @@ export const EnqueteIndividuelInformationsForm = props => {
             id="tranche_age"
             instanceId={"tranche_age"}
             name="tranche_age"
-            value={findOption(ENQ_REP_INFO_MANDATAIRE_FORM.TRANCHE_AGE, values.tranche_age)}
-            hasError={!!errors.tranche_age}
+            value={findOption(ENQ_REP_INFO_MANDATAIRE.TRANCHE_AGE.byKey, values.tranche_age)}
+            hasError={showError && !!errors.tranche_age}
             onChange={option => setFieldValue("tranche_age", option.value)}
-            options={ENQ_REP_INFO_MANDATAIRE_FORM.TRANCHE_AGE}
+            options={ENQ_REP_INFO_MANDATAIRE.TRANCHE_AGE.byKey}
           />
-          <InlineError message={errors.tranche_age} fieldId="tranche_age" />
+          <InlineError showError={showError} message={errors.tranche_age} fieldId="tranche_age" />
         </Field>
 
         <Text mt={7} mb={4} fontWeight="bold" color="#595959">
@@ -200,12 +235,16 @@ export const EnqueteIndividuelInformationsForm = props => {
             id="estimation_etp"
             instanceId={"estimation_etp"}
             name="estimation_etp"
-            value={findOption(ENQ_REP_INFO_MANDATAIRE_FORM.ESTIMATION_ETP, values.estimation_etp)}
-            hasError={!!errors.estimation_etp}
+            value={findOption(ENQ_REP_INFO_MANDATAIRE.ESTIMATION_ETP.byKey, values.estimation_etp)}
+            hasError={showError && !!errors.estimation_etp}
             onChange={option => setFieldValue("estimation_etp", option.value)}
-            options={ENQ_REP_INFO_MANDATAIRE_FORM.ESTIMATION_ETP}
+            options={ENQ_REP_INFO_MANDATAIRE.ESTIMATION_ETP.byKey}
           />
-          <InlineError message={errors.estimation_etp} fieldId="estimation_etp" />
+          <InlineError
+            showError={showError}
+            message={errors.estimation_etp}
+            fieldId="estimation_etp"
+          />
         </Field>
       </Box>
       <Box>
@@ -222,6 +261,7 @@ export const EnqueteIndividuelInformationsForm = props => {
             }}
           />
           <InlineError
+            showError={showError}
             message={errors.exerce_secretaires_specialises}
             fieldId="exerce_secretaires_specialises"
           />
@@ -237,11 +277,12 @@ export const EnqueteIndividuelInformationsForm = props => {
               id="secretaire_specialise_etp"
               name="secretaire_specialise_etp"
               value={values.secretaire_specialise_etp}
-              hasError={!!errors.secretaire_specialise_etp}
+              hasError={showError && !!errors.secretaire_specialise_etp}
               onChange={handleChange}
               type="number"
             />
             <InlineError
+              showError={showError}
               message={errors.secretaire_specialise_etp}
               fieldId="secretaire_specialise_etp"
             />
@@ -255,11 +296,15 @@ export const EnqueteIndividuelInformationsForm = props => {
             name="local_professionnel"
             onChange={value => setFieldValue("local_professionnel", value)}
           />
-          <InlineError message={errors.local_professionnel} fieldId="local_professionnel" />
+          <InlineError
+            showError={showError}
+            message={errors.local_professionnel}
+            fieldId="local_professionnel"
+          />
         </Field>
       </Box>
 
-      <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+      <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
     </form>
   );
 };

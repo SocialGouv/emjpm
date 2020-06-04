@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Flex, Text } from 'rebass';
 
-const InlineError = ({ message, fieldId }) => {
+const InlineError = ({ message, fieldId, showError }) => {
   if (!message) {
     return null;
   }
 
-  return (
+  return (showError !== false &&
     <Flex id={fieldId} alignItems="center" pt="1" color="error" >
       <Exclamation size="20" />
       <Text mx="1" fontSize="1">{message}</Text>
@@ -17,12 +17,14 @@ const InlineError = ({ message, fieldId }) => {
 };
 
 InlineError.defaultProps = {
-  message: ""
+  message: "",
+  showError: false
 };
 
 InlineError.propTypes = {
   fieldId: PropTypes.string.isRequired,
-  message: PropTypes.string
+  message: PropTypes.string,
+  showError: PropTypes.bool,
 };
 
 export { InlineError };

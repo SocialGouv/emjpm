@@ -1,9 +1,11 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box, Text } from "rebass";
 
+import yup from "../../../../lib/validationSchemas/yup";
 import { EnqueteStepperButtons } from "../../EnqueteStepperButtons";
+import { buildMesureGroupsAttributes } from "./buildMesureGroupsAttributes";
 import { EnqueteActiviteFormGroupMesures } from "./EnqueteActiviteFormGroupMesures";
 
 const strongStyle = {
@@ -11,6 +13,9 @@ const strongStyle = {
   fontWeight: "bold",
   color: "#007AD9"
 };
+
+// validation identique à celle de enqueteActiviteStatus
+const validationSchema = yup.object(buildMesureGroupsAttributes(["etablissement", "domicile"]));
 
 function mapDataPropsToFormValues(data) {
   return {
@@ -43,14 +48,15 @@ function mapFormValuesToSubmit(data) {
 }
 
 export const EnqueteActiviteEtablissementDomicileForm = props => {
-  const { goToPrevPage, title, loading, data = {} } = props;
+  const { goToPrevPage, title, loading, step, data = {} } = props;
 
-  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
+  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(mapFormValuesToSubmit(values));
       setSubmitting(false);
     },
-    initialValues: mapDataPropsToFormValues(data)
+    initialValues: mapDataPropsToFormValues(data),
+    validationSchema
   });
 
   useEffect(() => {
@@ -60,6 +66,11 @@ export const EnqueteActiviteEtablissementDomicileForm = props => {
   const totalDebutAnnee = (values.etablissementDebutAnnee || 0) + (values.domicileDebutAnnee || 0);
 
   const totalFinAnnee = (values.etablissementFinAnnee || 0) + (values.domicileFinAnnee || 0);
+
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -76,6 +87,7 @@ export const EnqueteActiviteEtablissementDomicileForm = props => {
       <EnqueteActiviteFormGroupMesures
         values={values}
         errors={errors}
+        showError={showError}
         handleChange={handleChange}
         prefix="etablissement"
       />
@@ -87,6 +99,7 @@ export const EnqueteActiviteEtablissementDomicileForm = props => {
       <EnqueteActiviteFormGroupMesures
         values={values}
         errors={errors}
+        showError={showError}
         handleChange={handleChange}
         prefix="domicile"
       />

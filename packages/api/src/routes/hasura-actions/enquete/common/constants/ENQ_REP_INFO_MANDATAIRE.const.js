@@ -1,5 +1,5 @@
 const enqueteKeysBuilder = require("./enqueteKeysBuilder.service");
-// constantes synchronisées avec le fichier app/ENQ_REP_INFO_MANDATAIRE_FORM.const.js
+// constantes synchronisées avec le fichier app/ENQ_REP_INFO_MANDATAIRE.const.js
 const ENQ_REP_INFO_MANDATAIRE = {
   ANCIENNETE: enqueteKeysBuilder.buildKeys({
     "0-2": "Moins de 2 ans",

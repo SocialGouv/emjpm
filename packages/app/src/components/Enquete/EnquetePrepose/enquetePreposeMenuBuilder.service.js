@@ -12,85 +12,78 @@ import {
 import { EnquetePreposeSubmit } from "./EnquetePreposeSubmit";
 import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 
-export const enqueteIndividuelMenuBuilder = {
-  buildMenuSections
-};
-
 function buildMenuSections(enqueteReponse) {
+  const status = enqueteReponse.enquete_reponses_status;
+
   return [
     {
+      status: "valid",
       steps: [
         {
           label: "Bienvenue",
-          component: EnquetePreposeWelcome
+          component: EnquetePreposeWelcome,
+          status: "valid"
         }
       ]
     },
     {
       label: "Modalité d'exercice",
+      status: status.modalitesExercice.global,
       steps: [
         {
           label: "Informations générales",
-          component: EnquetePreposeModaliteExerciceInformations
+          component: EnquetePreposeModaliteExerciceInformations,
+          status: status.modalitesExercice.informationsGenerales
         },
         {
           label: "Etablissements",
-          component: EnquetePreposeModaliteExerciceEtablissements
+          component: EnquetePreposeModaliteExerciceEtablissements,
+          status: status.modalitesExercice.etablissements
         }
       ]
     },
     {
       label: "Populations",
+      status: status.populations.global,
       steps: [
         {
           label: "Curatelle",
           component: EnquetePopulationsCuratelle,
-          isValid: transformStatusToIsValidProperty(
-            enqueteReponse.enquete_reponses_populations_curatelle_status
-          )
+          status: status.populations.curatelle
         },
         {
           label: "Tutelle",
           component: EnquetePopulationsTutelle,
-          isValid: transformStatusToIsValidProperty(
-            enqueteReponse.enquete_reponses_populations_tutelle_status
-          )
+          status: status.populations.tutelle
         },
         {
           label: "Mesure d'accompagnement de justice",
           component: EnquetePopulationsMAJ,
-          isValid: transformStatusToIsValidProperty(
-            enqueteReponse.enquete_reponses_populations_accompagnement_judiciaire_status
-          )
+          status: status.populations.accompagnementJudiciaire
         },
         {
           label: "Sauvegarde de justice",
           component: EnquetePopulationsSauvegardeJustice,
-          isValid: transformStatusToIsValidProperty(
-            enqueteReponse.enquete_reponses_populations_sauvegarde_justice_status
-          )
+          status: status.populations.sauvegardeJustice
         },
         {
           label: "Autre",
           component: EnquetePopulationsAutreMesures,
-          isValid: transformStatusToIsValidProperty(
-            enqueteReponse.enquete_reponses_populations_autre_status
-          )
+          status: status.populations.autresMesures
         }
       ]
     },
     {
-      steps: [{ label: "Envoi de vos réponses", component: EnquetePreposeSubmit }]
+      status: status.global === "valid" ? "valid" : "empty",
+      steps: [
+        {
+          label: "Envoi de vos réponses",
+          component: EnquetePreposeSubmit,
+          status: status.global === "valid" ? "valid" : "empty"
+        }
+      ]
     }
   ];
-}
-
-function transformStatusToIsValidProperty(status) {
-  if (status === 0) {
-    return null;
-  }
-
-  return status === 2 ? true : false;
 }
 
 export const enquetePreposeMenuBuilder = {
