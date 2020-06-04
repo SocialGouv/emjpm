@@ -1,7 +1,7 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Input, Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -27,8 +27,8 @@ function mapFormValuesToSubmit(data) {
 }
 
 export const EnqueteActiviteCausesSortiesDispositifForm = props => {
-  const { goToPrevPage, data, loading = false } = props;
-  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
+  const { goToPrevPage, data, step, loading = false } = props;
+  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(mapFormValuesToSubmit(values));
       setSubmitting(false);
@@ -39,6 +39,11 @@ export const EnqueteActiviteCausesSortiesDispositifForm = props => {
   useEffect(() => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
+
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
 
   return (
     <Box>
@@ -59,7 +64,7 @@ export const EnqueteActiviteCausesSortiesDispositifForm = props => {
               placeholder=""
               name="sortiesMainLevee"
               value={values.sortiesMainLevee}
-              hasError={!!errors.sortiesMainLevee}
+              hasError={showError && !!errors.sortiesMainLevee}
               onChange={handleChange}
               type="number"
             />
@@ -74,7 +79,7 @@ export const EnqueteActiviteCausesSortiesDispositifForm = props => {
               placeholder=""
               name="sortiesDeces"
               value={values.sortiesDeces}
-              hasError={!!errors.sortiesDeces}
+              hasError={showError && !!errors.sortiesDeces}
               onChange={handleChange}
               type="number"
             />
@@ -90,7 +95,7 @@ export const EnqueteActiviteCausesSortiesDispositifForm = props => {
               placeholder=""
               name="sortiesMasp"
               value={values.sortiesMasp}
-              hasError={!!errors.sortiesMasp}
+              hasError={showError && !!errors.sortiesMasp}
               onChange={handleChange}
               type="number"
             />

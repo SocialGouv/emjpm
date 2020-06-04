@@ -1,6 +1,6 @@
 import { Heading1 } from "@emjpm/ui";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useMemo } from "react";
 import { useQuery } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
@@ -17,6 +17,13 @@ export const EnqueteIndividuel = props => {
     variables: { enqueteId, mandataireId }
   });
 
+  const enqueteReponse = data ? data.enquete_individuel || {} : {};
+
+  const sections = useMemo(
+    () => (!data ? undefined : enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse)),
+    [enqueteReponse, data]
+  );
+
   if (loading) {
     return <Box mt={4}>Chargement...</Box>;
   }
@@ -29,8 +36,6 @@ export const EnqueteIndividuel = props => {
       </Box>
     );
   }
-
-  const enqueteReponse = data ? data.enquete_individuel || {} : {};
 
   if (enqueteReponse.submitted_at) {
     return (
@@ -48,10 +53,9 @@ export const EnqueteIndividuel = props => {
       </Box>
     );
   }
-
-  const sections = enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse);
   const section = sections[currentStep.step];
-  const ComponentForm = section.steps[currentStep.substep || 0].component;
+  const step = section.steps[currentStep.substep || 0];
+  const ComponentForm = step.component;
 
   return (
     <Flex>
@@ -63,6 +67,8 @@ export const EnqueteIndividuel = props => {
           enquete={enquete}
           enqueteReponse={enqueteReponse}
           mandataireId={mandataireId}
+          section={section}
+          step={step}
           goToPrevPage={() => goToPrevPage(sections, currentStep)}
           goToNextPage={() => goToNextPage(sections, currentStep)}
         />

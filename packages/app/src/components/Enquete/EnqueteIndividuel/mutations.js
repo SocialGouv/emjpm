@@ -25,7 +25,7 @@ export const CREATE_ENQUETE_INDIVIDUEL = gql`
     $anneeDebutActivite: Int
     $anneeAgrement: Int
     $cnc_annee_obtention: Int
-    $cnc_heures_formation: Int
+    $cnc_heures_formation: Float
     $niveauQualification: Int
     $niveauQualificationSecretaireSpe: Int
   ) {

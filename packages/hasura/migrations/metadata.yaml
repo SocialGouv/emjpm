@@ -415,16 +415,17 @@ tables:
   - role: individuel
     permission:
       columns:
+      - created_at
       - enquete_id
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
       - enquete_reponses_prestations_sociale_id
       - id
       - mandataire_id
       - service_id
-      - created_at
       - submitted_at
       filter:
         mandataire:
@@ -4694,48 +4695,18 @@ custom_types:
       type: timestamptz
     - name: enquete_reponses_id
       type: Int!
+    - name: enquete_reponses_status
+      type: json!
     - name: enquete_reponses_informations_mandataire_id
       type: Int
-    - name: enquete_reponses_informations_mandataire_generales_status
-      type: Int!
-    - name: enquete_reponses_informations_mandataire_agrements_status
-      type: Int!
-    - name: enquete_reponses_informations_mandataire_formation_status
-      type: Int!
     - name: enquete_reponses_prestations_sociale_id
       type: Int
-    - name: enquete_reponses_prestations_sociale_status
-      type: Int!
     - name: enquete_reponses_agrements_formations_id
       type: Int
     - name: enquete_reponses_activite_id
       type: Int
-    - name: enquete_reponses_activite_curatelle_renforcee_status
-      type: Int!
-    - name: enquete_reponses_activite_curatelle_simple_status
-      type: Int!
-    - name: enquete_reponses_activite_tutelle_status
-      type: Int!
-    - name: enquete_reponses_activite_accompagnement_judiciaire_status
-      type: Int!
-    - name: enquete_reponses_activite_curatelle_biens_status
-      type: Int!
-    - name: enquete_reponses_activite_curatelle_personne_status
-      type: Int!
-    - name: enquete_reponses_activite_revision_mesures_status
-      type: Int!
     - name: enquete_reponses_populations_id
       type: Int
-    - name: enquete_reponses_populations_curatelle_status
-      type: Int!
-    - name: enquete_reponses_populations_tutelle_status
-      type: Int!
-    - name: enquete_reponses_populations_accompagnement_judiciaire_status
-      type: Int!
-    - name: enquete_reponses_populations_sauvegarde_justice_status
-      type: Int!
-    - name: enquete_reponses_populations_autre_status
-      type: Int!
   - name: SubmittedEnqueteReponse
     fields:
     - name: id
@@ -4758,6 +4729,8 @@ custom_types:
       type: timestamptz
     - name: enquete_reponses_id
       type: Int!
+    - name: enquete_reponses_status
+      type: json!
     - name: enquete_reponses_modalites_exercice_id
       type: Int
     - name: enquete_reponses_modalites_exercice_status

@@ -1,7 +1,7 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { enquetePopulationsSchema } from "../../../lib/validationSchemas/enquetePopulationsSchema";
@@ -43,9 +43,9 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnquetePopulationsForm = props => {
-  const { title, goToPrevPage, data, loading = false } = props;
+  const { title, goToPrevPage, data, step, loading = false } = props;
 
-  const { handleSubmit, handleChange, values, errors, setValues } = useFormik({
+  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
@@ -58,6 +58,10 @@ export const EnquetePopulationsForm = props => {
     setValues(mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
   return (
     <Box
       sx={{
@@ -89,6 +93,7 @@ export const EnquetePopulationsForm = props => {
       <EnquetePopulationTrancheAgeField
         label="Personnes de moins de 25 ans :"
         errors={errors}
+        showError={showError}
         menFieldId="age_inf_25_ans_homme"
         womenFieldId="age_inf_25_ans_femme"
         handleChange={handleChange}
@@ -97,6 +102,7 @@ export const EnquetePopulationsForm = props => {
 
       <EnquetePopulationTrancheAgeField
         errors={errors}
+        showError={showError}
         label="Personnes entre 25 et 39 ans :"
         menFieldId="age_25_39_ans_homme"
         womenFieldId="age_25_39_ans_femme"
@@ -106,6 +112,7 @@ export const EnquetePopulationsForm = props => {
 
       <EnquetePopulationTrancheAgeField
         errors={errors}
+        showError={showError}
         label="Personnes entre 40 et 59 ans :"
         menFieldId="age_40_59_ans_homme"
         womenFieldId="age_40_59_ans_femme"
@@ -115,6 +122,7 @@ export const EnquetePopulationsForm = props => {
 
       <EnquetePopulationTrancheAgeField
         errors={errors}
+        showError={showError}
         label="Personnes entre 60 et 74 ans :"
         menFieldId="age_60_74_ans_homme"
         womenFieldId="age_60_74_ans_femme"
@@ -124,6 +132,7 @@ export const EnquetePopulationsForm = props => {
 
       <EnquetePopulationTrancheAgeField
         errors={errors}
+        showError={showError}
         label="Personnes de plus de 75 ans :"
         menFieldId="age_sup_75_ans_homme"
         womenFieldId="age_sup_75_ans_femme"
@@ -143,7 +152,7 @@ export const EnquetePopulationsForm = props => {
           id="anciennete_inf_1_an"
           name="anciennete_inf_1_an"
           value={values.anciennete_inf_1_an}
-          hasError={!!errors.anciennete_inf_1_an}
+          hasError={showError && !!errors.anciennete_inf_1_an}
           onChange={handleChange}
           type="number"
         />
@@ -158,7 +167,7 @@ export const EnquetePopulationsForm = props => {
           id="anciennete_1_3_ans"
           name="anciennete_1_3_ans"
           value={values.anciennete_1_3_ans}
-          hasError={!!errors.anciennete_1_3_ans}
+          hasError={showError && !!errors.anciennete_1_3_ans}
           onChange={handleChange}
           type="number"
         />
@@ -173,7 +182,7 @@ export const EnquetePopulationsForm = props => {
           id="anciennete_3_5_ans"
           name="anciennete_3_5_ans"
           value={values.anciennete_3_5_ans}
-          hasError={!!errors.anciennete_3_5_ans}
+          hasError={showError && !!errors.anciennete_3_5_ans}
           onChange={handleChange}
           type="number"
         />
@@ -188,7 +197,7 @@ export const EnquetePopulationsForm = props => {
           id="anciennete_5_10_ans"
           name="anciennete_5_10_ans"
           value={values.anciennete_5_10_ans}
-          hasError={!!errors.anciennete_5_10_ans}
+          hasError={showError && !!errors.anciennete_5_10_ans}
           onChange={handleChange}
           type="number"
         />
@@ -203,7 +212,7 @@ export const EnquetePopulationsForm = props => {
           id="anciennete_sup_10_ans"
           name="anciennete_sup_10_ans"
           value={values.anciennete_sup_10_ans}
-          hasError={!!errors.anciennete_sup_10_ans}
+          hasError={showError && !!errors.anciennete_sup_10_ans}
           onChange={handleChange}
           type="number"
         />
@@ -224,7 +233,7 @@ export const EnquetePopulationsForm = props => {
           id="type_etablissement_personne_handicapee"
           name="type_etablissement_personne_handicapee"
           value={values.type_etablissement_personne_handicapee}
-          hasError={!!errors.type_etablissement_personne_handicapee}
+          hasError={showError && !!errors.type_etablissement_personne_handicapee}
           onChange={handleChange}
           type="number"
         />
@@ -241,7 +250,7 @@ export const EnquetePopulationsForm = props => {
           id="type_service_personne_handicapee"
           name="type_service_personne_handicapee"
           value={values.type_service_personne_handicapee}
-          hasError={!!errors.type_service_personne_handicapee}
+          hasError={showError && !!errors.type_service_personne_handicapee}
           onChange={handleChange}
           type="number"
         />
@@ -258,7 +267,7 @@ export const EnquetePopulationsForm = props => {
           id="type_ehpad"
           name="type_ehpad"
           value={values.type_ehpad}
-          hasError={!!errors.type_ehpad}
+          hasError={showError && !!errors.type_ehpad}
           onChange={handleChange}
           type="number"
         />
@@ -275,7 +284,7 @@ export const EnquetePopulationsForm = props => {
           id="type_autre_etablissement_personne_agee"
           name="type_autre_etablissement_personne_agee"
           value={values.type_autre_etablissement_personne_agee}
-          hasError={!!errors.type_autre_etablissement_personne_agee}
+          hasError={showError && !!errors.type_autre_etablissement_personne_agee}
           onChange={handleChange}
           type="number"
         />
@@ -292,7 +301,7 @@ export const EnquetePopulationsForm = props => {
           id="type_chrs"
           name="type_chrs"
           value={values.type_chrs}
-          hasError={!!errors.type_chrs}
+          hasError={showError && !!errors.type_chrs}
           onChange={handleChange}
           type="number"
         />
@@ -309,7 +318,7 @@ export const EnquetePopulationsForm = props => {
           id="type_service_hospitalier_soins_longue_duree"
           name="type_service_hospitalier_soins_longue_duree"
           value={values.type_service_hospitalier_soins_longue_duree}
-          hasError={!!errors.type_service_hospitalier_soins_longue_duree}
+          hasError={showError && !!errors.type_service_hospitalier_soins_longue_duree}
           onChange={handleChange}
           type="number"
         />
@@ -326,7 +335,7 @@ export const EnquetePopulationsForm = props => {
           id="type_service_psychiatrique"
           name="type_service_psychiatrique"
           value={values.type_service_psychiatrique}
-          hasError={!!errors.type_service_psychiatrique}
+          hasError={showError && !!errors.type_service_psychiatrique}
           onChange={handleChange}
           type="number"
         />
@@ -343,7 +352,7 @@ export const EnquetePopulationsForm = props => {
           id="type_autre_service"
           name="type_autre_service"
           value={values.type_autre_service}
-          hasError={!!errors.type_autre_service}
+          hasError={showError && !!errors.type_autre_service}
           onChange={handleChange}
           type="number"
         />
