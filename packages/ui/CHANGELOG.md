@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.38.0](https://github.com/SocialGouv/emjpm/compare/v25.37.0...v25.38.0) (2020-06-04)
+
+
+### Features
+
+* **enquete:** refactor enquete validation ([#1886](https://github.com/SocialGouv/emjpm/issues/1886)) ([2abcb9a](https://github.com/SocialGouv/emjpm/commit/2abcb9a7a85e3989a8b6112d54930034727416a6))
+
+
+
+
+
 # [25.37.0](https://github.com/SocialGouv/emjpm/compare/v25.36.0...v25.37.0) (2020-06-03)
 
 
