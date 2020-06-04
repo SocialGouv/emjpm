@@ -361,6 +361,9 @@ tables:
   - name: enquete_reponses_agrements_formation
     using:
       foreign_key_constraint_on: enquete_reponses_agrements_formations_id
+  - name: enquete_reponses_financement
+    using:
+      foreign_key_constraint_on: enquete_reponses_financement_id
   - name: enquete_reponses_informations_mandataire
     using:
       foreign_key_constraint_on: enquete_reponses_informations_mandataire_id
@@ -431,6 +434,26 @@ tables:
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - created_at
+      - submitted_at
+      - enquete_id
+      - mandataire_id
+      - service_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_prestations_sociale_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_financement_id
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
   update_permissions:
   - role: individuel
     permission:
@@ -445,6 +468,15 @@ tables:
       - mandataire_id
       - service_id
       - created_at
+      - submitted_at
+      filter:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+      check: null
+  - role: prepose
+    permission:
+      columns:
       - submitted_at
       filter:
         mandataire:
@@ -799,6 +831,76 @@ tables:
       - cumul_prepose_etp
       - nb_departements
       - niveau_qualification
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+      check: null
+- table:
+    schema: public
+    name: enquete_reponses_financement
+  array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: enquete_reponses_financement_id
+        table:
+          schema: public
+          name: enquete_reponses
+  insert_permissions:
+  - role: prepose
+    permission:
+      check:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+      columns:
+      - aide_sociale_conseil_departemental
+      - autre_produits
+      - charges_fonctionnement
+      - charges_personnel
+      - charges_preposes
+      - financement_public
+      - produits_bareme_prelevements
+      - id
+      - created_at
+      - last_update
+      backend_only: false
+  select_permissions:
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - charges_personnel
+      - charges_preposes
+      - charges_fonctionnement
+      - produits_bareme_prelevements
+      - autre_produits
+      - financement_public
+      - aide_sociale_conseil_departemental
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: prepose
+    permission:
+      columns:
+      - aide_sociale_conseil_departemental
+      - autre_produits
+      - charges_fonctionnement
+      - charges_personnel
+      - charges_preposes
+      - financement_public
+      - produits_bareme_prelevements
+      - id
+      - created_at
+      - last_update
       filter:
         enquete_reponses:
           mandataire:
@@ -4746,4 +4848,6 @@ custom_types:
     - name: enquete_reponses_populations_sauvegarde_justice_status
       type: Int!
     - name: enquete_reponses_populations_autre_status
+      type: Int!
+    - name: enquete_reponses_financement_id
       type: Int!
