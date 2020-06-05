@@ -34,7 +34,9 @@ async function initEnqueteMandatairePrepose({ enqueteId, mandataireId }) {
     enquete_reponses_populations_tutelle_status: 0,
     enquete_reponses_populations_accompagnement_judiciaire_status: 0,
     enquete_reponses_populations_sauvegarde_justice_status: 0,
-    enquete_reponses_populations_autre_status: 0
+    enquete_reponses_populations_autre_status: 0,
+    enquete_reponses_financement_id:
+      enqueteReponse.enquete_reponses_financement_id
   };
 }
 
