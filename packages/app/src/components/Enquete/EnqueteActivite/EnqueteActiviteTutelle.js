@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useMemo } from "react";
 import { Box } from "rebass";
 
-import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
+// import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
 import { EnqueteActiviteEtablissementDomicileForm } from "./common";
 import { UPDATE_ENQUETE_ACTIVITE_TUTELLE } from "./mutations";
 import { ENQUETE_TUTELLE } from "./queries";
@@ -15,18 +15,18 @@ export const EnqueteActiviteTutelle = props => {
     goToNextPage,
     enqueteReponse,
     section,
-    step,
-    mandataireId,
-    enquete: { id: enqueteId }
+    step
+    // mandataireId,
+    // enquete: { id: enqueteId }
   } = props;
   const { enquete_reponses_activite_id } = enqueteReponse;
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_TUTELLE, {
     refetchQueries: [
-      {
-        query: ENQUETE_MANDATAIRE_INDIVIDUEL,
-        variables: { enqueteId, mandataireId }
-      },
+      // {
+      //   query: ENQUETE_MANDATAIRE_INDIVIDUEL,
+      //   variables: { enqueteId, mandataireId }
+      // },
       {
         query: ENQUETE_TUTELLE,
         variables: {

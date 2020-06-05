@@ -8,6 +8,7 @@ module.exports = {
       enquete_reponses_modalites_exercice_id
       enquete_reponses_populations_id
       enquete_reponses_financement_id
+      enquete_reponses_activite_id
     }
   }  
   `
