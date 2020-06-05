@@ -1,7 +1,7 @@
 module.exports = {
   INIT_ENQUETE_REPONSE: `
     mutation create_enquete_individuel_reponse($enqueteId: Int!, $mandataireId: Int!) {
-      insert_enquete_reponses_one(object: {enquete_id: $enqueteId, mandataire_id: $mandataireId, enquete_reponses_financement: {data:{}}, enquete_reponses_modalites_exercice: {data:{}}, enquete_reponses_population: {data: {}}}) {
+      insert_enquete_reponses_one(object: {enquete_id: $enqueteId, mandataire_id: $mandataireId, enquete_reponses_activite: {data:{}}, enquete_reponses_financement: {data:{}}, enquete_reponses_modalites_exercice: {data:{}}, enquete_reponses_population: {data: {}}}) {
         id
         enquete_reponses_activite_id
         enquete_reponses_agrements_formations_id
