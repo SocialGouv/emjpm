@@ -158,6 +158,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n1}
             hasError={showError && !!errors.secretaire_specialise_etp_n1}
             onChange={handleChange}
+            min={0}
           />
           <InlineError
             showError={showError}
@@ -177,6 +178,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n2}
             hasError={showError && !!errors.secretaire_specialise_etp_n2}
             onChange={handleChange}
+            min={0}
           />
           <InlineError
             showError={showError}
@@ -196,6 +198,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n3}
             hasError={showError && !!errors.secretaire_specialise_etp_n3}
             onChange={handleChange}
+            min={0}
           />
           <InlineError
             showError={showError}
@@ -215,6 +218,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n4}
             hasError={showError && !!errors.secretaire_specialise_etp_n4}
             onChange={handleChange}
+            min={0}
           />
           <InlineError
             showError={showError}
@@ -234,6 +238,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n5}
             hasError={showError && !!errors.secretaire_specialise_etp_n5}
             onChange={handleChange}
+            min={0}
           />
           <InlineError
             showError={showError}
@@ -253,6 +258,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n6}
             hasError={showError && !!errors.secretaire_specialise_etp_n6}
             onChange={handleChange}
+            min={0}
           />
           <InlineError
             showError={showError}
