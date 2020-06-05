@@ -77,15 +77,15 @@ function parse(ws) {
     subroge_tuteur_createur_sortie_mesures: parser.integer(ws["F24"]),
     subroge_tuteur_createur_fin_annee: parser.integer(ws["G24"]),
 
-    sauvegarde_justice_debut_annee: parser.integer(ws["D24"]),
-    sauvegarde_justice_mesures_nouvelles: parser.integer(ws["E24"]),
-    sauvegarde_justice_sortie_mesures: parser.integer(ws["F24"]),
-    sauvegarde_justice_fin_annee: parser.integer(ws["G24"]),
+    sauvegarde_justice_debut_annee: parser.integer(ws["D27"]),
+    sauvegarde_justice_mesures_nouvelles: parser.integer(ws["E27"]),
+    sauvegarde_justice_sortie_mesures: parser.integer(ws["F27"]),
+    sauvegarde_justice_fin_annee: parser.integer(ws["G27"]),
 
-    mandat_adhoc_majeur_debut_annee: parser.integer(ws["D24"]),
-    mandat_adhoc_majeur_mesures_nouvelles: parser.integer(ws["E24"]),
-    mandat_adhoc_majeur_sortie_mesures: parser.integer(ws["F24"]),
-    mandat_adhoc_majeur_fin_annee: parser.integer(ws["G24"]),
+    mandat_adhoc_majeur_debut_annee: parser.integer(ws["D28"]),
+    mandat_adhoc_majeur_mesures_nouvelles: parser.integer(ws["E28"]),
+    mandat_adhoc_majeur_sortie_mesures: parser.integer(ws["F28"]),
+    mandat_adhoc_majeur_fin_annee: parser.integer(ws["G28"]),
 
     revisions_main_levee: parser.integer(ws["C39"]),
     revisions_masp: parser.integer(ws["C40"]),
