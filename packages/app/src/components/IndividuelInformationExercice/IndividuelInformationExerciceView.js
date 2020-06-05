@@ -18,14 +18,14 @@ const IndividuelInformationExerciceView = props => {
         />
       </Box>
       <Box>
-        <Heading4 mb={1}>{"Secretariat spécialisé"}</Heading4>
+        <Heading4 mb={1}>{"Secrétariat spécialisé"}</Heading4>
         <FieldLabelValue
-          label="Exercez-vous avec un secretariat spécialisé?"
+          label="Exercez-vous avec un secrétariat spécialisé?"
           value={getLabel(exercice.secretariat_specialise, YES_NO_OPTIONS)}
         />
         {exercice.secretariat_specialise && (
           <FieldLabelValue
-            label="Estimation de l'activité en ETP du secretariat spécialisé"
+            label="Estimation de l'activité en ETP du secrétariat spécialisé"
             value={getLabel(exercice.secretariat_specialise_etp)}
           />
         )}

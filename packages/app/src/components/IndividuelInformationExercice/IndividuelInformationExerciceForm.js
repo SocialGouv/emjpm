@@ -44,9 +44,9 @@ const IndividuelInformationExerciceForm = props => {
         </Field>
       </Box>
       <Box>
-        <Heading4 mb={1}>{"Secretariat spécialisé"}</Heading4>
+        <Heading4 mb={1}>{"Secrétariat spécialisé"}</Heading4>
         <Field>
-          <FieldLabel label="Exercez-vous avec un secretariat spécialisé?" />
+          <FieldLabel label="Exercez-vous avec un secrétariat spécialisé?" />
           <Select
             id="secretariatSpecialise"
             name="secretariatSpecialise"
