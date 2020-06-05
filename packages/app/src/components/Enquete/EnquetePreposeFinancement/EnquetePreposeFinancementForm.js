@@ -21,7 +21,7 @@ function mapDataPropsToFormValues(data) {
 
 export const EnquetePreposeFinancementForm = props => {
   const { goToPrevPage, data = {}, loading = false } = props;
-  const { values, errors, handleSubmit, handleBlur, handleChange, setValues } = useFormik({
+  const { values, handleSubmit, handleBlur, handleChange, setValues } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await props.handleSubmit(values);
       setSubmitting(false);
