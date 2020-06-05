@@ -306,6 +306,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "enquete_reponses_financement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "enquete_reponses_informations_mandataire_id": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -923,6 +929,71 @@ Object {
     "type": "real",
   },
   "secretaire_specialise_etp_n6": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+}
+`;
+
+exports[`enquete_reponses_financement table schema 1`] = `
+Object {
+  "aide_sociale_conseil_departemental": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "autre_produits": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "charges_fonctionnement": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "charges_personnel": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "charges_preposes": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "financement_public": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "id": Object {
+    "defaultValue": "nextval('enquete_reponses_financement_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "last_update": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "produits_bareme_prelevements": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
@@ -3461,6 +3532,7 @@ Array [
   "enquete_reponses",
   "enquete_reponses_activite",
   "enquete_reponses_agrements_formations",
+  "enquete_reponses_financement",
   "enquete_reponses_informations_mandataire",
   "enquete_reponses_modalites_exercice",
   "enquete_reponses_populations",

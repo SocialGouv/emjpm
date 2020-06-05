@@ -5,6 +5,7 @@ import {
   EnquetePopulationsSauvegardeJustice,
   EnquetePopulationsTutelle
 } from "../EnquetePopulations";
+import { EnquetePreposeFinancement } from "../EnquetePreposeFinancement";
 import {
   EnquetePreposeModaliteExerciceEtablissements,
   EnquetePreposeModaliteExerciceInformations
@@ -70,6 +71,14 @@ function buildMenuSections(enqueteReponse) {
           label: "Autre",
           component: EnquetePopulationsAutreMesures,
           status: status.populations.autresMesures
+        }
+      ]
+    },
+    {
+      steps: [
+        {
+          label: "Financement",
+          component: EnquetePreposeFinancement
         }
       ]
     },
