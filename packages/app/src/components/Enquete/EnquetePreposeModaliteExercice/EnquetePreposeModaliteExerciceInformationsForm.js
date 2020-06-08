@@ -112,8 +112,11 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
           <Select
             placeholder=""
             onChange={({ value }) => setFieldValue("personnalite_juridique_etablissement", value)}
-            value={findOption(PERSONNALITE_JURIDIQUE, values.personnalite_juridique_etablissement)}
-            options={PERSONNALITE_JURIDIQUE}
+            value={findOption(
+              PERSONNALITE_JURIDIQUE.byKey,
+              values.personnalite_juridique_etablissement
+            )}
+            options={PERSONNALITE_JURIDIQUE.byKey}
           />
 
           <InlineError

@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
-import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
+import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnqueteIndividuelInformationsFormationForm } from "./EnqueteIndividuelInformationsFormationForm";
 import { UPDATE_ENQUETE_INFORMATIONS_FORMATION } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION } from "./queries";
@@ -11,28 +11,30 @@ export const EnqueteIndividuelInformationsFormation = props => {
     goToNextPage,
     goToPrevPage,
     enqueteReponse,
-    mandataireId,
+    userId,
     section,
     step,
     enquete: { id: enqueteId }
   } = props;
-  const { enquete_reponses_agrements_formations_id } = enqueteReponse;
+  const {
+    enquete_reponse_ids: { agrements_formations_id }
+  } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION, {
     variables: {
-      id: enquete_reponses_agrements_formations_id
+      id: agrements_formations_id
     }
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INFORMATIONS_FORMATION, {
     refetchQueries: [
       {
-        query: ENQUETE_MANDATAIRE_INDIVIDUEL,
-        variables: { enqueteId, mandataireId }
+        query: ENQUETE_REPONSE_STATUS,
+        variables: { enqueteId, userId }
       },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION,
-        variables: { id: enquete_reponses_agrements_formations_id }
+        variables: { id: agrements_formations_id }
       }
     ]
   });
@@ -46,7 +48,7 @@ export const EnqueteIndividuelInformationsFormation = props => {
       handleSubmit={async values => {
         await updateEnquete({
           variables: {
-            id: enquete_reponses_agrements_formations_id,
+            id: agrements_formations_id,
             cnc_annee_obtention: values.cnc_annee_obtention
               ? Number(values.cnc_annee_obtention)
               : null,

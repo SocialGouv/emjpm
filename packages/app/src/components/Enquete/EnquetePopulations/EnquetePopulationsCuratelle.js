@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, useQuery } from "react-apollo";
 import { Box } from "rebass";
 
-import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
+import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePopulationsForm } from "./EnquetePopulationsForm";
 import { UPDATE_ENQUETE_POPULATIONS_CURATELLE } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_CURATELLE } from "./queries";
@@ -12,29 +12,31 @@ export const EnquetePopulationsCuratelle = props => {
     goToPrevPage,
     goToNextPage,
     enqueteReponse,
-    mandataireId,
+    userId,
     enquete: { id: enqueteId },
     section,
     step
   } = props;
 
-  const { enquete_reponses_populations_id } = enqueteReponse;
+  const {
+    enquete_reponse_ids: { populations_id }
+  } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_CURATELLE, {
     variables: {
-      id: enquete_reponses_populations_id
+      id: populations_id
     }
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_POPULATIONS_CURATELLE, {
     refetchQueries: [
       {
-        query: ENQUETE_MANDATAIRE_INDIVIDUEL,
-        variables: { enqueteId, mandataireId }
+        query: ENQUETE_REPONSE_STATUS,
+        variables: { enqueteId, userId }
       },
       {
         query: ENQUETE_REPONSE_POPULATIONS_CURATELLE,
-        variables: { id: enquete_reponses_populations_id }
+        variables: { id: populations_id }
       }
     ]
   });
@@ -89,7 +91,7 @@ export const EnquetePopulationsCuratelle = props => {
 
           await updateEnquete({
             variables: {
-              id: enquete_reponses_populations_id,
+              id: populations_id,
               ...data
             }
           });
