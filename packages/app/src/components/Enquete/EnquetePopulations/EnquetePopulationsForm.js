@@ -4,10 +4,10 @@ import { useFormik } from "formik";
 import React, { useEffect, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { enquetePopulationsSchema } from "../../../lib/validationSchemas/enquetePopulationsSchema";
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { EnquetePopulationTrancheAgeField } from "./EnquetePopulationsFields";
+import { enquetePopulationsSchema } from "./enquetePopulationsSchema";
 
 export function calculateTotal(firstProperty, secondProperty) {
   return Number(firstProperty || 0) + Number(secondProperty || 0);
