@@ -79,6 +79,7 @@ export const UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS = gql`
     $forme_juridique: String
     $exerce_seul_activite: Boolean
     $local_professionnel: Boolean
+    $exerce_secretaires_specialises: Boolean
     $secretaire_specialise_etp: Float
     $sexe: String
     $tranche_age: String
@@ -95,6 +96,7 @@ export const UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS = gql`
         forme_juridique: $forme_juridique
         local_professionnel: $local_professionnel
         exerce_seul_activite: $exerce_seul_activite
+        exerce_secretaires_specialises: $exerce_secretaires_specialises
         secretaire_specialise_etp: $secretaire_specialise_etp
         sexe: $sexe
         tranche_age: $tranche_age
@@ -110,6 +112,7 @@ export const UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS = gql`
       last_update
       id
       forme_juridique
+      exerce_secretaires_specialises
       estimation_etp
       created_at
       benevole
