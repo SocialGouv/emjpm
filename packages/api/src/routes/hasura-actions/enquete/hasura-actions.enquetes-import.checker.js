@@ -18,7 +18,8 @@ async function checkImportEnqueteParameters(req) {
     enqueteId,
     userId,
     service: undefined,
-    mandataire: undefined
+    mandataire: undefined,
+    prepose: undefined
   };
 
   if (role === "service") {
@@ -36,6 +37,14 @@ async function checkImportEnqueteParameters(req) {
       throw new HttpError(403, "Access denied: invalid 'userId'");
     }
     importContext.mandataire = await Mandataire.query().findOne({
+      user_id: userId
+    });
+  } else if (role === "prepose") {
+    // MANDATAIRE PREPOSE
+    if (userId !== authUserId) {
+      throw new HttpError(403, "Access denied: invalid 'userId'");
+    }
+    importContext.prepose = await Mandataire.query().findOne({
       user_id: userId
     });
   } else {
