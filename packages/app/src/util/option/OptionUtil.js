@@ -30,6 +30,9 @@ export const toOptions = (datas, idKey, labelKey) =>
   }));
 
 export const findOption = (options, value) => {
+  if (!options || !options.length) {
+    return undefined;
+  }
   return options.find(option => option.value === value);
 };
 

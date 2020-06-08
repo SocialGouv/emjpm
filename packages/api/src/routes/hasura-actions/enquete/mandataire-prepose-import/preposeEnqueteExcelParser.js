@@ -58,8 +58,6 @@ function checkRequiredTabs(workbook, tabNames) {
   });
 }
 
-const preposeEnqueteExcelParser = {
+module.exports = {
   parse
 };
-
-module.exports = preposeEnqueteExcelParser;
