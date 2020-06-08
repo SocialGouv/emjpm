@@ -24,12 +24,12 @@ export const validationSchema = yup.object().shape({
     .max(6)
     .integer()
     .required(),
-  secretaire_specialise_etp_n1: yup.number().positive(),
-  secretaire_specialise_etp_spe_n2: yup.number().positive(),
-  secretaire_specialise_etp_spe_n3: yup.number().positive(),
-  secretaire_specialise_etp_spe_n4: yup.number().positive(),
-  secretaire_specialise_etp_spe_n5: yup.number().positive(),
-  secretaire_specialise_etp_spe_n6: yup.number().positive()
+  secretaire_specialise_etp_n1: yup.number().min(0),
+  secretaire_specialise_etp_spe_n2: yup.number().min(0),
+  secretaire_specialise_etp_spe_n3: yup.number().min(0),
+  secretaire_specialise_etp_spe_n4: yup.number().min(0),
+  secretaire_specialise_etp_spe_n5: yup.number().min(0),
+  secretaire_specialise_etp_spe_n6: yup.number().min(0)
 });
 
 function mapDataPropsToFormValues(data) {
@@ -158,7 +158,6 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n1}
             hasError={showError && !!errors.secretaire_specialise_etp_n1}
             onChange={handleChange}
-            min={0}
           />
           <InlineError
             showError={showError}
@@ -178,7 +177,6 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n2}
             hasError={showError && !!errors.secretaire_specialise_etp_n2}
             onChange={handleChange}
-            min={0}
           />
           <InlineError
             showError={showError}
@@ -198,7 +196,6 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n3}
             hasError={showError && !!errors.secretaire_specialise_etp_n3}
             onChange={handleChange}
-            min={0}
           />
           <InlineError
             showError={showError}
@@ -218,7 +215,6 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n4}
             hasError={showError && !!errors.secretaire_specialise_etp_n4}
             onChange={handleChange}
-            min={0}
           />
           <InlineError
             showError={showError}
@@ -238,7 +234,6 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n5}
             hasError={showError && !!errors.secretaire_specialise_etp_n5}
             onChange={handleChange}
-            min={0}
           />
           <InlineError
             showError={showError}
@@ -258,7 +253,6 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             value={values.secretaire_specialise_etp_n6}
             hasError={showError && !!errors.secretaire_specialise_etp_n6}
             onChange={handleChange}
-            min={0}
           />
           <InlineError
             showError={showError}
