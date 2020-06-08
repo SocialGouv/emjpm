@@ -2,11 +2,11 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
 import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
-import { EnqueteIndividuelInformationsForm } from "./EnqueteIndividuelInformationsForm";
+import { EnqueteIndividuelInformationsMandataireForm } from "./EnqueteIndividuelInformationsMandataireForm";
 import { UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE } from "./queries";
 
-export const EnqueteIndividuelInformations = props => {
+export const EnqueteIndividuelInformationsMandataire = props => {
   const {
     goToNextPage,
     goToPrevPage,
@@ -39,7 +39,7 @@ export const EnqueteIndividuelInformations = props => {
 
   const informations = data ? data.enquete_reponses_informations_mandataire_by_pk || {} : {};
   return loading ? null : (
-    <EnqueteIndividuelInformationsForm
+    <EnqueteIndividuelInformationsMandataireForm
       data={informations}
       section={section}
       step={step}
@@ -59,6 +59,7 @@ export const EnqueteIndividuelInformations = props => {
             estimation_etp: values.estimation_etp || null,
             forme_juridique: values.forme_juridique ? values.forme_juridique : null,
             local_professionnel: values.local_professionnel,
+            exerce_seul_activite: values.exerce_seul_activite,
             secretaire_specialise_etp:
               values.secretaire_specialise_etp &&
               !isNaN(parseFloat(values.secretaire_specialise_etp))
@@ -72,4 +73,4 @@ export const EnqueteIndividuelInformations = props => {
   );
 };
 
-export default EnqueteIndividuelInformations;
+export default EnqueteIndividuelInformationsMandataire;
