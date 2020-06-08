@@ -68,35 +68,37 @@ export const EnquetePopulationsMAJ = props => {
   };
 
   return (
-    <Box>
-      <EnquetePopulationsForm
-        loading={loading}
-        data={reponsePopulations}
-        section={section}
-        step={step}
-        handleSubmit={async values => {
-          const data = Object.keys(values).reduce((acc, key) => {
-            if (values[key]) {
-              return {
-                ...acc,
-                [key]: parseInt(values[key], 10)
-              };
-            }
-            return acc;
-          }, {});
+    !loading && (
+      <Box>
+        <EnquetePopulationsForm
+          loading={loading}
+          data={reponsePopulations}
+          section={section}
+          step={step}
+          handleSubmit={async values => {
+            const data = Object.keys(values).reduce((acc, key) => {
+              if (values[key]) {
+                return {
+                  ...acc,
+                  [key]: parseInt(values[key], 10)
+                };
+              }
+              return acc;
+            }, {});
 
-          await updateEnquete({
-            variables: {
-              id: populations_id,
-              ...data
-            }
-          });
-          await goToNextPage();
-        }}
-        goToPrevPage={goToPrevPage}
-        title={"Mesure d'accompagnement de justice"}
-      />
-    </Box>
+            await updateEnquete({
+              variables: {
+                id: populations_id,
+                ...data
+              }
+            });
+            await goToNextPage();
+          }}
+          goToPrevPage={goToPrevPage}
+          title={"Mesure d'accompagnement de justice"}
+        />
+      </Box>
+    )
   );
 };
 
