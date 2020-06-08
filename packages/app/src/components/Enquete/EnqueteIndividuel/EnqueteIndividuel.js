@@ -5,19 +5,19 @@ import { useQuery } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
+import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { enqueteIndividuelMenuBuilder } from "./enqueteIndividuelMenuBuilder.service";
-import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "./queries";
 export const EnqueteIndividuel = props => {
   const router = useRouter();
 
-  const { enquete, mandataireId, currentStep } = props;
+  const { enquete, userId, currentStep } = props;
   const { id: enqueteId } = enquete;
 
-  const { data, loading, error } = useQuery(ENQUETE_MANDATAIRE_INDIVIDUEL, {
-    variables: { enqueteId, mandataireId }
+  const { data, loading, error } = useQuery(ENQUETE_REPONSE_STATUS, {
+    variables: { enqueteId, userId }
   });
 
-  const enqueteReponse = data ? data.enquete_individuel || {} : {};
+  const enqueteReponse = data ? data.enquete_reponse_status || {} : {};
 
   const sections = useMemo(
     () => (!data ? undefined : enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse)),
@@ -66,7 +66,7 @@ export const EnqueteIndividuel = props => {
         <ComponentForm
           enquete={enquete}
           enqueteReponse={enqueteReponse}
-          mandataireId={mandataireId}
+          userId={userId}
           section={section}
           step={step}
           goToPrevPage={() => goToPrevPage(sections, currentStep)}

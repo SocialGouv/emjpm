@@ -4,7 +4,7 @@ const HttpError = require("../../../utils/error/HttpError");
 const logger = require("../../../utils/logger");
 const mandataireIndividuelEnqueteImporter = require("./mandataire-individuel-import/mandataireIndividuelEnqueteImporter");
 const preposeEnqueteImporter = require("./mandataire-prepose-import/preposeEnqueteImporter");
-const checkImportEnqueteParameters = require("./hasura-actions.enquetes-import.checker");
+const checkEnqueteContext = require("./hasura-actions.enquetes.checker");
 const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
 const {
   initEnqueteMandataireIndividuel,
@@ -15,27 +15,6 @@ const {
 } = require("./mandataire-prepose/enqueteMandatairePrepose");
 
 const router = express.Router();
-
-router.post("/mandataire-prepose", async (req, res, next) => {
-  try {
-    const { enqueteId, mandataireId } = req.body.input;
-    if (!enqueteId || !mandataireId) {
-      return res.status(422).json({
-        message: "Invalid parameters: enqueteId or mandataireId is required"
-      });
-    }
-
-    const result = await initEnqueteMandatairePrepose({
-      enqueteId,
-      mandataireId
-    });
-
-    return res.json(result);
-  } catch (err) {
-    logger.error(err);
-    next(err);
-  }
-});
 
 router.post(
   "/mandataire-individuel/submit",
@@ -64,25 +43,23 @@ router.post(
 );
 
 router.post(
-  "/mandataire-individuel",
+  "/reponse-status",
   async (req, res, next) => {
-    const { enqueteId, mandataireId } = req.body.input;
-    if (!enqueteId || !mandataireId) {
-      return res.status(422).json({
-        message: "Invalid parameters: enqueteId or mandataireId is required"
-      });
-    }
-
     try {
-      const { enqueteId, mandataireId } = req.body.input;
-      const result = await initEnqueteMandataireIndividuel({
-        enqueteId,
-        mandataireId
-      });
+      const enqueteContext = await checkEnqueteContext(req);
+
+      let result;
+      if (enqueteContext.role === "individuel") {
+        result = await initEnqueteMandataireIndividuel({ enqueteContext });
+      } else if (enqueteContext.role === "prepose") {
+        result = await initEnqueteMandatairePrepose({ enqueteContext });
+      } else {
+        logger.error("Unexpected role", enqueteContext.role);
+        return next(new HttpError(500, "Undexpected role"));
+      }
       return res.json(result);
     } catch (err) {
-      logger.error(err);
-      next(err);
+      return next(err);
     }
   },
   hasuraActionErrorHandler("Unexpected error processing file")
@@ -93,22 +70,22 @@ router.post(
   "/upload",
   async (req, res, next) => {
     try {
-      const importEnqueteParameters = await checkImportEnqueteParameters(req);
+      const enqueteContext = await checkEnqueteContext(req);
+      const file = { content: req.body.input.content };
 
       let result;
-      if (importEnqueteParameters.importContext.role === "individuel") {
-        result = await mandataireIndividuelEnqueteImporter.importEnqueteFile(
-          importEnqueteParameters
-        );
-      } else if (importEnqueteParameters.importContext.role === "prepose") {
-        result = await preposeEnqueteImporter.importEnqueteFile(
-          importEnqueteParameters
-        );
+      if (enqueteContext.role === "individuel") {
+        result = await mandataireIndividuelEnqueteImporter.importEnqueteFile({
+          file,
+          enqueteContext
+        });
+      } else if (enqueteContext.role === "prepose") {
+        result = await preposeEnqueteImporter.importEnqueteFile({
+          file,
+          enqueteContext
+        });
       } else {
-        logger.error(
-          "Unexpected role",
-          importEnqueteParameters.importContext.role
-        );
+        logger.error("Unexpected role", enqueteContext.role);
         return next(new HttpError(500, "Undexpected role"));
       }
 
