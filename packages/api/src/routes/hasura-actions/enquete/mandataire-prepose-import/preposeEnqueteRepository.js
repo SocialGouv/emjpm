@@ -11,10 +11,6 @@ const {
 } = require("../mandataire-prepose/requests");
 
 async function update(enqueteId, { tabs, mandataireId }) {
-  if (!getEnqueteReponseMandatairePrepose) {
-    throw new Error("NOT IMPLEMENTED");
-  }
-
   const { populations, modaliteExercice } = tabs;
 
   const enqueteReponse = await initEnqueteMandataireIndividuel({
@@ -32,9 +28,6 @@ async function update(enqueteId, { tabs, mandataireId }) {
 }
 
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
-  if (!getEnqueteReponseMandatairePrepose) {
-    throw new Error("NOT IMPLEMENTED");
-  }
   let enqueteReponse = await getEnqueteReponseMandatairePrepose({
     enqueteId,
     mandataireId
