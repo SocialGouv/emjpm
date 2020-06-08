@@ -18,7 +18,7 @@ const InlineError = ({ message, fieldId, showError }) => {
 
 InlineError.defaultProps = {
   message: "",
-  showError: false
+  showError: true
 };
 
 InlineError.propTypes = {
