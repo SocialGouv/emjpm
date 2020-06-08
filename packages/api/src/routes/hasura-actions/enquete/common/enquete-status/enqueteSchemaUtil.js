@@ -2,9 +2,18 @@ const logger = require("../../../../../utils/logger");
 
 async function getValidationStatus(
   data,
-  { schema, debugName, logDataWithErrors }
+  { schema, debugName, logDataWithErrors, logDataIfEmpty }
 ) {
   if (isEmptyData(data, schema, debugName)) {
+    if (logDataIfEmpty) {
+      logger.error(
+        `[Validation] [${debugName}] EMPTY DATA ${JSON.stringify(
+          data,
+          undefined,
+          2
+        )}`
+      );
+    }
     return "empty";
   }
   const isValid = await schema.isValid(data);
