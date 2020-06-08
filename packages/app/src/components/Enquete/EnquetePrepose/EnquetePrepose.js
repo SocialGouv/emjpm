@@ -46,7 +46,7 @@ export const EnquetePrepose = props => {
       <Box>
         <MenuStepper sections={sections} currentStep={currentStep} goToStep={goToStep} />
       </Box>
-      <Box py={"50px"} pl={"35px"} flex={1}>
+      <Box py={"50px"} px={"35px"} flex={1}>
         <ComponentForm
           enquete={enquete}
           enqueteReponse={enqueteReponse}

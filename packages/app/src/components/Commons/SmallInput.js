@@ -4,10 +4,10 @@ import React from "react";
 
 function getBorderProps({ hasError, hasWarning }) {
   if (hasWarning) {
-    return { border: "3px solid #1D2649" };
+    return { border: "1px solid #1D2649" };
   }
   if (hasError) {
-    return { border: "3px solid #FF6862" };
+    return { border: "1px solid #FF6862" };
   }
   return {};
 }

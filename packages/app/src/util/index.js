@@ -9,3 +9,7 @@ export const formatTribunauxOptions = tribunaux => {
     };
   });
 };
+
+export function parseFloatValue(value) {
+  return value && !isNaN(parseFloat(value)) ? parseFloat(value) : null;
+}
