@@ -4,11 +4,11 @@ import { enqueteKeysBuilder } from "./enqueteKeysBuilder.service";
 export const ENQ_REP_INFO_MANDATAIRE = {
   ANCIENNETE: enqueteKeysBuilder.buildKeys({
     "0-2": "Moins de 2 ans",
-    "10-20": "10 ans à moins de 20 ans",
     "2-5": "2 ans à moins de 5 ans",
+    "5-10": "5 ans à moins de 10 ans",
+    "10-20": "10 ans à moins de 20 ans",
     "20-30": "20 ans à moins de 30 ans",
-    "30+": "30 ans et plus",
-    "5-10": "5 ans à moins de 10 ans"
+    "30+": "30 ans et plus"
   }),
   ESTIMATION_ETP: enqueteKeysBuilder.buildKeys({
     "0-30": "jusqu'à 30% d'un ETP",

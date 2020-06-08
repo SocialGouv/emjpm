@@ -1,6 +1,6 @@
-import yup from "./yup";
+const yup = require("yup");
 
-export const enquetePopulationsSchema = yup.object().shape({
+const rules = {
   age_25_39_ans_femme: yup
     .number()
     .min(0)
@@ -93,6 +93,18 @@ export const enquetePopulationsSchema = yup.object().shape({
     .number()
     .min(0)
     .nullable()
-});
+};
 
-export default enquetePopulationsSchema;
+// prefix: 'curatelle' | 'tutelle' | 'maj' | 'sauvegarde_justice' | 'autre_mesures'
+const buildPopulationValidator = ({ prefix }) => {
+  return yup.object(
+    Object.keys(rules).reduce((acc, attr) => {
+      acc[`${prefix}_${attr}`] = rules[attr];
+      return acc;
+    }, {})
+  );
+};
+
+module.exports = {
+  buildPopulationValidator
+};
