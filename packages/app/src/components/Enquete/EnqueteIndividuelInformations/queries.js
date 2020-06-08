@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE = gql`
-  query enquete_individuel_informations($id: Int!) {
+  query enquete_reponses_informations_mandataire($id: Int!) {
     enquete_reponses_informations_mandataire_by_pk(id: $id) {
       anciennete
       benevole

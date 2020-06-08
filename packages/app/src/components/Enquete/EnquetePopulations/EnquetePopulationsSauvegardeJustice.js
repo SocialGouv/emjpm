@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, useQuery } from "react-apollo";
 import { Box } from "rebass";
 
-import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
+import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePopulationsForm } from "./EnquetePopulationsForm";
 import { UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE } from "./queries";
@@ -12,28 +12,30 @@ export const EnquetePopulationsSauvegardeJustice = props => {
     goToPrevPage,
     goToNextPage,
     enqueteReponse,
-    mandataireId,
+    userId,
     enquete: { id: enqueteId },
     section,
     step
   } = props;
-  const { enquete_reponses_populations_id } = enqueteReponse;
+  const {
+    enquete_reponse_ids: { populations_id }
+  } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE, {
     variables: {
-      id: enquete_reponses_populations_id
+      id: populations_id
     }
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE, {
     refetchQueries: [
       {
-        query: ENQUETE_MANDATAIRE_INDIVIDUEL,
-        variables: { enqueteId, mandataireId }
+        query: ENQUETE_REPONSE_STATUS,
+        variables: { enqueteId, userId }
       },
       {
         query: ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE,
-        variables: { id: enquete_reponses_populations_id }
+        variables: { id: populations_id }
       }
     ]
   });
@@ -89,7 +91,7 @@ export const EnquetePopulationsSauvegardeJustice = props => {
 
           await updateEnquete({
             variables: {
-              id: enquete_reponses_populations_id,
+              id: populations_id,
               ...data
             }
           });

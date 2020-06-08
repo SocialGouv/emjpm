@@ -12,11 +12,13 @@ function convertToFloat(str) {
 
 export const EnquetePreposeFinancement = props => {
   const { goToNextPage, goToPrevPage, enqueteReponse } = props;
-  const { enquete_reponses_financement_id } = enqueteReponse;
+  const {
+    enquete_reponse_ids: { financement_id }
+  } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_REPONSES_FINANCEMENT, {
     variables: {
-      id: enquete_reponses_financement_id
+      id: financement_id
     }
   });
   const [updateFinancement] = useMutation(UPDATE_ENQUETE_REPONSES_FINANCEMENT);
@@ -30,7 +32,7 @@ export const EnquetePreposeFinancement = props => {
       handleSubmit={async values => {
         await updateFinancement({
           variables: {
-            id: enquete_reponses_financement_id,
+            id: financement_id,
             aide_sociale_conseil_departemental: convertToFloat(
               values.aide_sociale_conseil_departemental
             ),

@@ -1,12 +1,14 @@
 const {
   getGlobalStatus,
   populationsStatus,
-  enqueteModalitesExerciceStatus
+  enqueteModalitesExerciceStatus,
+  enqueteActiviteStatus
 } = require("../common/enquete-status");
 
 async function enqueteMandatairePreposeStatus(enqueteReponse) {
   const status = {
     modalitesExercice: await enqueteModalitesExerciceStatus(enqueteReponse),
+    activite: await enqueteActiviteStatus(enqueteReponse),
     populations: await populationsStatus(enqueteReponse)
   };
 
