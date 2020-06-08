@@ -4,42 +4,59 @@ const {
 } = require("../enqueteSchemaUtil");
 const yup = require("yup");
 
+const debugGroupName = "populations";
+
 module.exports = async enqueteReponse => {
   const status = {
     curatelle: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
-      yup.object({
-        // TODO
-      }),
-      "populations/curatelle"
+      {
+        schema: yup.object({
+          // TODO
+        }),
+        debugName: `${debugGroupName}/curatelle`,
+        logDataWithErrors: false
+      }
     ),
     tutelle: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
-      yup.object({
-        // TODO
-      }),
-      "populations/tutelle"
+      {
+        schema: yup.object({
+          // TODO
+        }),
+        debugName: `${debugGroupName}/tutelle`,
+        logDataWithErrors: false
+      }
     ),
     accompagnementJudiciaire: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
-      yup.object({
-        // TODO
-      }),
-      "populations/accompagnementJudiciaire"
+      {
+        schema: yup.object({
+          // TODO
+        }),
+        debugName: `${debugGroupName}/accompagnementJudiciaire`,
+        logDataWithErrors: false
+      }
     ),
     sauvegardeJustice: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
-      yup.object({
-        // TODO
-      }),
-      "populations/sauvegardeJustice"
+      {
+        schema: yup.object({
+          // TODO
+        }),
+        debugName: `${debugGroupName}/sauvegardeJustice`,
+        logDataWithErrors: false
+      }
     ),
     autresMesures: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
-      yup.object({
-        // TODO
-      }),
-      "populations/autresMesures"
+      {
+        schema: yup.object({
+          // TODO
+        }),
+        debugName: `${debugGroupName}/autresMesures`,
+        logDataWithErrors: false
+      }
     )
   };
 
