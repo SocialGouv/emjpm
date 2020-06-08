@@ -21,8 +21,21 @@ module.exports = async enqueteReponse => {
         }),
         anciennete: yup.string().required(),
         estimation_etp: yup.string().required(),
-        exerce_secretaires_specialises: yup.boolean().nullable(),
-        secretaire_specialise_etp: yup.number().nullable(),
+        exerce_seul_activite: yup.boolean().required(),
+        exerce_secretaires_specialises: yup.boolean().required(),
+        secretaire_specialise_etp: yup
+          .number()
+          .when("exerce_secretaires_specialises", {
+            is: true,
+            then: yup
+              .number()
+              .positive()
+              .required(), // > 0
+            otherwise: yup
+              .number()
+              .oneOf([0])
+              .nullable() // 0 or empty
+          }),
         local_professionnel: yup.boolean().required()
       }),
       "informationsGenerales/agrementsStatus"
