@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
-import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "../EnqueteIndividuel/queries";
+import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnqueteIndividuelInformationsMandataireForm } from "./EnqueteIndividuelInformationsMandataireForm";
 import { UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE } from "./queries";
@@ -11,28 +11,30 @@ export const EnqueteIndividuelInformationsMandataire = props => {
     goToNextPage,
     goToPrevPage,
     enqueteReponse,
-    mandataireId,
+    userId,
     section,
     step,
     enquete: { id: enqueteId }
   } = props;
-  const { enquete_reponses_informations_mandataire_id } = enqueteReponse;
+  const {
+    enquete_reponse_ids: { informations_mandataire_id }
+  } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE, {
     variables: {
-      id: enquete_reponses_informations_mandataire_id
+      id: informations_mandataire_id
     }
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS, {
     refetchQueries: [
       {
-        query: ENQUETE_MANDATAIRE_INDIVIDUEL,
-        variables: { enqueteId, mandataireId }
+        query: ENQUETE_REPONSE_STATUS,
+        variables: { enqueteId, userId }
       },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE,
-        variables: { id: enquete_reponses_informations_mandataire_id }
+        variables: { id: informations_mandataire_id }
       }
     ]
   });
@@ -48,7 +50,7 @@ export const EnqueteIndividuelInformationsMandataire = props => {
       handleSubmit={async values => {
         await updateEnquete({
           variables: {
-            id: enquete_reponses_informations_mandataire_id,
+            id: informations_mandataire_id,
             nom: values.nom || null,
             departement: values.departement || null,
             region: values.region || null,

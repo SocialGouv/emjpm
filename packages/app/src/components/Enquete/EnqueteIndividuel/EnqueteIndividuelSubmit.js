@@ -4,11 +4,11 @@ import React, { useMemo } from "react";
 import { useMutation } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
+import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { SUBMIT_ENQUETE_INDIVIDUEL } from "./mutations";
-import { ENQUETE_MANDATAIRE_INDIVIDUEL } from "./queries";
 
 export const EnqueteIndividuelWelcome = props => {
-  const { enquete, enqueteReponse } = props;
+  const { enquete, enqueteReponse, userId } = props;
 
   const hasError = useMemo(() => {
     const keys = Object.keys(enqueteReponse);
@@ -22,8 +22,8 @@ export const EnqueteIndividuelWelcome = props => {
   const [submitEnqueteIndividuel, { loading }] = useMutation(SUBMIT_ENQUETE_INDIVIDUEL, {
     refetchQueries: [
       {
-        query: ENQUETE_MANDATAIRE_INDIVIDUEL,
-        variables: { enqueteId: enquete.id }
+        query: ENQUETE_REPONSE_STATUS,
+        variables: { enqueteId: enquete.id, userId }
       }
     ]
   });

@@ -8,11 +8,13 @@ import { ENQUETE_PREPOSE_INFORMATIONS } from "./queries";
 
 export const EnquetePreposeModaliteExerciceInformations = props => {
   const { goToNextPage, goToPrevPage, enqueteReponse } = props; /* mandataireId, enquete */
-  const { enquete_reponses_modalites_exercice_id } = enqueteReponse;
+  const {
+    enquete_reponse_ids: { modalites_exercice_id }
+  } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_PREPOSE_INFORMATIONS, {
     variables: {
-      id: enquete_reponses_modalites_exercice_id
+      id: modalites_exercice_id
     }
   });
 
@@ -27,7 +29,7 @@ export const EnquetePreposeModaliteExerciceInformations = props => {
         handleSubmit={async values => {
           await sendEnqueteReponseInformations({
             variables: {
-              id: enquete_reponses_modalites_exercice_id,
+              id: modalites_exercice_id,
               departement: values.departement || null,
               region: values.region || null,
               raison_sociale: values.raison_sociale || null,

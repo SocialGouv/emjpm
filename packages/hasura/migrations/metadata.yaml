@@ -4933,10 +4933,10 @@ remote_schemas:
     timeout_seconds: 60
     forward_client_headers: true
 actions:
-- name: enquete_individuel
+- name: enquete_reponse_status
   definition:
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/mandataire-individuel'
-    output_type: EnqueteIndividuelReponse
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/reponse-status'
+    output_type: EnqueteReponseStatus
     forward_client_headers: true
     headers:
     - name: HASURA_WEB_HOOK_SECRET
@@ -4944,27 +4944,13 @@ actions:
     arguments:
     - name: enqueteId
       type: Int!
-    - name: mandataireId
+    - name: userId
       type: Int!
     type: query
   permissions:
   - role: individuel
-- name: enquete_prepose
-  definition:
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/mandataire-prepose'
-    output_type: EnquetePreposeReponse
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-    arguments:
-    - name: enqueteId
-      type: Int!
-    - name: mandataireId
-      type: Int!
-    type: query
-  permissions:
   - role: prepose
+  - role: service
 - name: submit_enquete_individuel
   definition:
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/mandataire-individuel/submit'
@@ -5096,3 +5082,13 @@ custom_types:
       type: Int!
     - name: enquete_reponses_activite_id
       type: Int!
+  - name: EnqueteReponseStatus
+    fields:
+    - name: enquete_id
+      type: Int!
+    - name: submitted_at
+      type: timestamptz
+    - name: enquete_reponse_ids
+      type: json!
+    - name: enquete_reponse_status
+      type: json!
