@@ -4,10 +4,41 @@ import { useFormik } from "formik";
 import React, { useEffect, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { enquetePrestationsSocialesSchema } from "../../../lib/validationSchemas/enquetePrestationsSocialesSchema";
+import yup from "../../../lib/validationSchemas/yup";
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
+// schema identique à prestationsSocialesStatus (côté hasura actions)
+export const enquetePrestationsSocialesSchema = yup.object().shape({
+  aah: yup
+    .number()
+    .min(0)
+    .nullable(),
+  als_apl: yup
+    .number()
+    .min(0)
+    .nullable(),
+  apa: yup
+    .number()
+    .min(0)
+    .nullable(),
+  asi: yup
+    .number()
+    .min(0)
+    .nullable(),
+  aspa: yup
+    .number()
+    .min(0)
+    .nullable(),
+  pch: yup
+    .number()
+    .min(0)
+    .nullable(),
+  rsa: yup
+    .number()
+    .min(0)
+    .nullable()
+});
 function mapDataPropsToFormValues(data) {
   return {
     aah: data.aah || "",

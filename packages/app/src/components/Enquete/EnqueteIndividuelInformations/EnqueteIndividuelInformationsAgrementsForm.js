@@ -10,7 +10,7 @@ import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_AGREMENTS_FORMATIONS } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
-// schema identique à enqueteAgrementsFormationsStatus
+// schema identique à enqueteAgrementsFormationsStatus (côté hasura actions)
 export const validationSchema = yup.object().shape({
   debut_activite_avant_2009: yup.boolean().required(),
   annee_agrement: yup

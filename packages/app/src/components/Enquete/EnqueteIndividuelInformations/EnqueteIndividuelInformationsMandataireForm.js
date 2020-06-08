@@ -10,7 +10,7 @@ import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_INFO_MANDATAIRE } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
-// schema identique à enqueteInformationsMandatairesStatus
+// schema identique à enqueteInformationsMandatairesStatus (côté hasura actions)
 const validationSchema = yup.object().shape({
   nom: yup.string().required(),
   departement: yup.string().required(),

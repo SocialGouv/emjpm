@@ -2,7 +2,7 @@ const {
   getValidationStatus,
   getGlobalStatus
 } = require("../enqueteSchemaUtil");
-const yup = require("yup");
+const { buildPopulationValidator } = require("./enquetePopulationsValidator");
 
 const debugGroupName = "populations";
 
@@ -11,29 +11,25 @@ module.exports = async enqueteReponse => {
     curatelle: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
       {
-        schema: yup.object({
-          // TODO
-        }),
+        schema: buildPopulationValidator({ prefix: "curatelle" }),
         debugName: `${debugGroupName}/curatelle`,
-        logDataWithErrors: false
+        logDataWithErrors: false,
+        logDataIfEmpty: false
       }
     ),
     tutelle: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
       {
-        schema: yup.object({
-          // TODO
-        }),
+        schema: buildPopulationValidator({ prefix: "tutelle" }),
         debugName: `${debugGroupName}/tutelle`,
-        logDataWithErrors: false
+        logDataWithErrors: false,
+        logDataIfEmpty: false
       }
     ),
     accompagnementJudiciaire: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
       {
-        schema: yup.object({
-          // TODO
-        }),
+        schema: buildPopulationValidator({ prefix: "maj" }),
         debugName: `${debugGroupName}/accompagnementJudiciaire`,
         logDataWithErrors: false
       }
@@ -41,9 +37,7 @@ module.exports = async enqueteReponse => {
     sauvegardeJustice: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
       {
-        schema: yup.object({
-          // TODO
-        }),
+        schema: buildPopulationValidator({ prefix: "sauvegarde_justice" }),
         debugName: `${debugGroupName}/sauvegardeJustice`,
         logDataWithErrors: false
       }
@@ -51,9 +45,7 @@ module.exports = async enqueteReponse => {
     autresMesures: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
       {
-        schema: yup.object({
-          // TODO
-        }),
+        schema: buildPopulationValidator({ prefix: "autre_mesures" }),
         debugName: `${debugGroupName}/autresMesures`,
         logDataWithErrors: false
       }
@@ -61,6 +53,5 @@ module.exports = async enqueteReponse => {
   };
 
   status.global = getGlobalStatus(status);
-
   return status;
 };
