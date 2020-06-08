@@ -11,6 +11,7 @@ export const ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE = gql`
       id
       last_update
       local_professionnel
+      exerce_seul_activite
       exerce_secretaires_specialises
       secretaire_specialise_etp
       sexe
