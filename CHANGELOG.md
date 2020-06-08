@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.39.0](https://github.com/SocialGouv/emjpm/compare/v25.38.0...v25.39.0) (2020-06-08)
+
+
+### Bug Fixes
+
+* **enquete:** import file for individuel ([#1893](https://github.com/SocialGouv/emjpm/issues/1893)) ([b2552ce](https://github.com/SocialGouv/emjpm/commit/b2552cef342e2c90093a583343cf4e8bb5dbb5cc))
+* **form:** show inline error by default ([#1900](https://github.com/SocialGouv/emjpm/issues/1900)) ([ceccc67](https://github.com/SocialGouv/emjpm/commit/ceccc67d805c022472c5377711ad6f214ebc410a))
+
+
+### Features
+
+* **enquete:** activite for prepose ([#1896](https://github.com/SocialGouv/emjpm/issues/1896)) ([9aa5402](https://github.com/SocialGouv/emjpm/commit/9aa540263ec8990669a6dcb1a8120bf14f95d76d))
+* **enquete:** financement for prepose ([#1895](https://github.com/SocialGouv/emjpm/issues/1895)) ([1281a9d](https://github.com/SocialGouv/emjpm/commit/1281a9d79e2160721db4098d13f708b3134854bd))
+* **enquete:** fix mandataire infos generales + formation ([#1901](https://github.com/SocialGouv/emjpm/issues/1901)) ([c15916f](https://github.com/SocialGouv/emjpm/commit/c15916f2cb962224e10b6b5eb653d0bfc5d0ad6c))
+* **enquete:** validation fix + log validation errors on server side ([#1902](https://github.com/SocialGouv/emjpm/issues/1902)) ([60663cc](https://github.com/SocialGouv/emjpm/commit/60663ccf091ca36ade345d2322883a0eb9b2a3d7))
+
+
+
+
+
 # [25.38.0](https://github.com/SocialGouv/emjpm/compare/v25.37.0...v25.38.0) (2020-06-04)
 
 
