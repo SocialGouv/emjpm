@@ -27,6 +27,7 @@ function buildMesureGroupsAttributes(mesureGroups) {
       .number()
       .min(0)
       .integer()
+      .nullable()
       .test(
         "diff-match",
         "La valeur de fin d'année n'est pas cohérente avec les autres données.",
@@ -36,9 +37,8 @@ function buildMesureGroupsAttributes(mesureGroups) {
           const nbMesuresNouvelles = this.parent[mesuresNouvelles] | 0;
           const expectedFinAnnee =
             nbDebutAnnee + nbMesuresNouvelles - nbSortieMesures;
-          value = value | 0;
 
-          return expectedFinAnnee === value;
+          return expectedFinAnnee === (value | 0);
         }
       );
 
