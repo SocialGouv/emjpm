@@ -23,8 +23,19 @@ const validationSchema = yup.object().shape({
   }),
   anciennete: yup.string().required(),
   estimation_etp: yup.string().required(),
-  exerce_secretaires_specialises: yup.boolean().nullable(),
-  secretaire_specialise_etp: yup.number().nullable(),
+  exerce_seul_activite: yup.boolean().required(),
+  exerce_secretaires_specialises: yup.boolean().required(),
+  secretaire_specialise_etp: yup.number().when("exerce_secretaires_specialises", {
+    is: true,
+    then: yup
+      .number()
+      .positive()
+      .required(), // > 0
+    otherwise: yup
+      .number()
+      .oneOf([0], 'Vous avez répondu "non" à la question précédente, donc ce champ doit être vide.')
+      .nullable() // 0 or empty
+  }),
   local_professionnel: yup.boolean().required()
 });
 
@@ -37,6 +48,7 @@ function mapDataPropsToFormValues(data) {
     anciennete: data.anciennete || "",
     estimation_etp: data.estimation_etp || "",
     forme_juridique: data.forme_juridique || "",
+    exerce_seul_activite: data.exerce_seul_activite || false,
     exerce_secretaires_specialises: data.exerce_secretaires_specialises || false,
     secretaire_specialise_etp: data.secretaire_specialise_etp || "",
     local_professionnel: data.local_professionnel || false,
@@ -45,7 +57,7 @@ function mapDataPropsToFormValues(data) {
   };
 }
 
-export const EnqueteIndividuelInformationsForm = props => {
+export const EnqueteIndividuelInformationsMandataireForm = props => {
   const { data = {}, step, goToPrevPage } = props;
 
   const {
@@ -225,7 +237,19 @@ export const EnqueteIndividuelInformationsForm = props => {
         <Text mt={7} mb={4} fontWeight="bold" color="#595959">
           {"CONDITIONS D'EXERCICE DE L'ACTIVITE"}
         </Text>
-
+        <Field>
+          <Label mb={1}>{"Exercez-vous seul l'activité ?"}</Label>
+          <YesNoComboBox
+            defaultValue={values.exerce_seul_activite}
+            name="exerce_seul_activite"
+            onChange={value => setFieldValue("exerce_seul_activite", value)}
+          />
+          <InlineError
+            showError={showError}
+            message={errors.exerce_seul_activite}
+            fieldId="exerce_seul_activite"
+          />
+        </Field>
         <Field>
           <Label mb={1} htmlFor="estimation_etp">
             {"Estimation de l'activité en équivalent temps plein (ETP)"}
@@ -253,12 +277,7 @@ export const EnqueteIndividuelInformationsForm = props => {
           <YesNoComboBox
             defaultValue={values.exerce_secretaires_specialises}
             name="exerce_secretaires_specialises"
-            onChange={value => {
-              setFieldValue("exerce_secretaires_specialises", value);
-              if (!value) {
-                setFieldValue("exerce_secretaires_specialises", "");
-              }
-            }}
+            onChange={value => setFieldValue("exerce_secretaires_specialises", value)}
           />
           <InlineError
             showError={showError}
@@ -267,7 +286,7 @@ export const EnqueteIndividuelInformationsForm = props => {
           />
         </Field>
 
-        {values.exerce_secretaires_specialises && (
+        {(values.exerce_secretaires_specialises || !!errors.secretaire_specialise_etp) && (
           <Field>
             <Label mb={1} htmlFor="secretaire_specialise_etp">
               {"Estimation de l'activité en ETP du secrétariat spécialisé"}
@@ -309,4 +328,4 @@ export const EnqueteIndividuelInformationsForm = props => {
   );
 };
 
-export default EnqueteIndividuelInformationsForm;
+export default EnqueteIndividuelInformationsMandataireForm;
