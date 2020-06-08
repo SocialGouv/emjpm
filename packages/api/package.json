@@ -34,7 +34,7 @@
     "knex": "^0.21.1",
     "node-fetch": "^2.6.0",
     "nodemailer": "^6.4.8",
-    "objection": "^2.1.5",
+    "objection": "^2.1.6",
     "objection-db-errors": "^1.1.2",
     "passport": "^0.4.1",
     "passport-custom": "^1.1.1",
@@ -47,7 +47,7 @@
     "rand-token": "^0.4.0",
     "rasha": "^1.2.5",
     "tmp": "^0.2.1",
-    "xlsx": "^0.16.1",
+    "xlsx": "^0.16.2",
     "yup": "^0.28.5"
   },
   "devDependencies": {
