@@ -69,14 +69,10 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
     validationSchema
   });
 
-  console.log(values);
-
-  const showError = true;
-
-  // const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-  //   step.status,
-  //   submitCount
-  // ]);
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
 
   useEffect(() => {
     setValues(mapDataPropsToFormValues(data));
@@ -89,7 +85,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
       </Heading1>
       <Heading3>{"Informations générales"}</Heading3>
       <Box mt={4}>
-        <Flex alignItems="center">
+        <Flex alignItems="start">
           <Box mr={1} flex={1 / 2}>
             <Field>
               <Label mb={1} htmlFor="region">
@@ -104,7 +100,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
                 type="text"
                 hasError={showError && !!errors.region}
               />
-              <InlineError message={errors.region} fieldId="region" />
+              <InlineError showError={showError} message={errors.region} fieldId="region" />
             </Field>
           </Box>
           <Box ml={1} flex={1 / 2}>
@@ -121,7 +117,11 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
                 type="text"
                 hasError={showError && !!errors.departement}
               />
-              <InlineError message={errors.departement} fieldId="departement" />
+              <InlineError
+                showError={showError}
+                message={errors.departement}
+                fieldId="departement"
+              />
             </Field>
           </Box>
         </Flex>
@@ -139,7 +139,11 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
             type="text"
             hasError={showError && !!errors.raison_sociale}
           />
-          <InlineError message={errors.raison_sociale} fieldId="raison_sociale" />
+          <InlineError
+            showError={showError}
+            message={errors.raison_sociale}
+            fieldId="raison_sociale"
+          />
         </Field>
         <Field>
           <Label mb={1} htmlFor="personnalite_juridique_etablissement">
@@ -162,6 +166,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
           />
 
           <InlineError
+            showError={showError}
             message={errors.personnalite_juridique_etablissement}
             fieldId="personnalite_juridique_etablissement"
           />

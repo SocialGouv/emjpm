@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Button, Card, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
@@ -6,22 +7,30 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { findOption } from "../../../util/option/OptionUtil";
-import { STATUT } from "../constants";
+import { STATUTS, TYPES } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
-  const { goToPrevPage, loading = false } = props;
+  const { goToPrevPage, loading = false, data } = props;
+  const { nombre_lits_journee_hospitalisation } = data;
+
+  const etablissements = nombre_lits_journee_hospitalisation.length
+    ? nombre_lits_journee_hospitalisation
+    : [
+        {
+          finess: "",
+          nombre_journees_hospitalisation: "",
+          nombre_lits: "",
+          raison_sociale: "",
+          status: "",
+          type: ""
+        }
+      ];
+
   const formik = useFormik({
     onSubmit: async () => {},
     initialValues: {
-      etablissements: [
-        {
-          finess: "",
-          raison_sociale: "",
-          statut: "",
-          type: ""
-        }
-      ]
+      etablissements
     }
   });
 
@@ -122,38 +131,38 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                         <Label mb={1} htmlFor="finess">
                           {"Statut de l'établissement"}
                         </Label>
-
                         <Select
                           placeholder=""
                           instanceId={`etablissements.${index}.statut`}
                           id={`etablissements.${index}.statut`}
                           name={`etablissements.${index}.statut`}
-                          value={findOption(STATUT.byKey, value.statut)}
+                          value={findOption(STATUTS.byKey, value.statut)}
                           hasError={error ? error.statut : false}
                           onChange={option =>
                             formik.setFieldValue(`etablissements[${index}].statut`, option.value)
                           }
-                          options={STATUT.byKey}
+                          options={STATUTS.byKey}
                         />
-
                         <InlineError
                           message={error ? error.statut : ""}
                           fieldId={`etablissements.${index}.statut`}
                         />
                       </Box>
                       <Box ml={2} flex={1 / 2}>
-                        <Label mb={1} htmlFor="finess">
+                        <Label mb={1} htmlFor="type">
                           {"Type d'établissement"}
                         </Label>
-                        <Input
+                        <Select
                           placeholder=""
+                          instanceId={`etablissements.${index}.type`}
                           id={`etablissements.${index}.type`}
                           name={`etablissements.${index}.type`}
-                          value={value.type}
+                          value={findOption(TYPES.byKey, value.type)}
                           hasError={error ? error.type : false}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
-                          type="text"
+                          onChange={option =>
+                            formik.setFieldValue(`etablissements[${index}].type`, option.value)
+                          }
+                          options={TYPES.byKey}
                         />
                         <InlineError
                           message={formik.errors.type}

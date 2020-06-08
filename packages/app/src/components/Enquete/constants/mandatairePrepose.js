@@ -13,7 +13,16 @@ export const PERSONNALITE_JURIDIQUE = enqueteKeysBuilder.buildKeys({
   organisme_prive_commercial: "Organisme privé à caractère commercial"
 });
 
-export const STATUT = enqueteKeysBuilder.buildKeys({
+export const STATUTS = enqueteKeysBuilder.buildKeys({
   public: "Public",
   private: "Privé"
+});
+
+export const TYPES = enqueteKeysBuilder.buildKeys({
+  etablissement_personnes_agees: "Etablissement pour personnes âgées",
+  etablissement_personnes_handicapees: "Etablissement pour personnes handicapées",
+  etablissement_autre_social: "Autre type d'établissement social ou médico-social",
+  etablissement_specialise_psychiatrie: "Etablissement spécialisé en psychiatrie",
+  etablissement_soins_longue_duree: "Etablissement assurant des soins de longue durée",
+  etablissement_autre: "Autre type d'établissement hospitalier"
 });
