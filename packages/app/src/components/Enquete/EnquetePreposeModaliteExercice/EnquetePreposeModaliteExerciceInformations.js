@@ -3,7 +3,7 @@ import React from "react";
 
 import { parseFloatValue } from "../../../util";
 import { EnquetePreposeModaliteExerciceInformationsForm } from "./EnquetePreposeModaliteExerciceInformationsForm";
-import { UPDATE_ENQUETE_PREPOSE_INFORMATIONS } from "./mutations";
+import { UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS } from "./mutations";
 import { ENQUETE_PREPOSE_INFORMATIONS } from "./queries";
 
 export const EnquetePreposeModaliteExerciceInformations = props => {
@@ -18,7 +18,9 @@ export const EnquetePreposeModaliteExerciceInformations = props => {
     }
   });
 
-  const [sendEnqueteReponseInformations] = useMutation(UPDATE_ENQUETE_PREPOSE_INFORMATIONS);
+  const [sendEnqueteReponseInformations] = useMutation(
+    UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS
+  );
   return (
     <EnquetePreposeModaliteExerciceInformationsForm
       data={data ? data.enquete_reponses_modalites_exercice_by_pk || {} : {}}

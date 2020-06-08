@@ -1,7 +1,19 @@
 import gql from "graphql-tag";
 
-export const UPDATE_ENQUETE_PREPOSE_INFORMATIONS = gql`
-  mutation update_enquete_prepose_informations(
+export const UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_ETABLISSEMENTS = gql`
+  mutation update_enquete_prepose_modalite_exercice($data: jsonb!) {
+    update_enquete_reponses_modalites_exercice_by_pk(
+      pk_columns: { id: $id }
+      _set: { nombre_lits_journee_hospitalisation: $data }
+    ) {
+      id
+      nombre_lits_journee_hospitalisation
+    }
+  }
+`;
+
+export const UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS = gql`
+  mutation update_enquete_prepose_modalite_exercice(
     $id: Int!
     $actions_information_tuteurs_familiaux: Int
     $activite_personne_physique: Int
