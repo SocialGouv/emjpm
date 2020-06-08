@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.39.0](https://github.com/SocialGouv/emjpm/compare/v25.38.0...v25.39.0) (2020-06-08)
+
+
+### Bug Fixes
+
+* **form:** show inline error by default ([#1900](https://github.com/SocialGouv/emjpm/issues/1900)) ([ceccc67](https://github.com/SocialGouv/emjpm/commit/ceccc67d805c022472c5377711ad6f214ebc410a))
+
+
+
+
+
 # [25.38.0](https://github.com/SocialGouv/emjpm/compare/v25.37.0...v25.38.0) (2020-06-04)
 
 

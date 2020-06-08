@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.39.0](https://github.com/SocialGouv/emjpm/compare/v25.38.0...v25.39.0) (2020-06-08)
+
+
+### Features
+
+* **enquete:** financement for prepose ([#1895](https://github.com/SocialGouv/emjpm/issues/1895)) ([1281a9d](https://github.com/SocialGouv/emjpm/commit/1281a9d79e2160721db4098d13f708b3134854bd))
+
+
+
+
+
 # [25.38.0](https://github.com/SocialGouv/emjpm/compare/v25.37.0...v25.38.0) (2020-06-04)
 
 
