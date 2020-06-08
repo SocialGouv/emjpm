@@ -7,7 +7,7 @@ import { Box, Text } from "rebass";
 import yup from "../../../lib/validationSchemas/yup";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
-// schema identique à enqueteAgrementsFormationsStatus
+// schema identique à enqueteAgrementsFormationsStatus (côté hasura actions)
 export const validationSchema = yup.object().shape({
   cnc_annee_obtention: yup
     .number()
