@@ -9,84 +9,85 @@ module.exports = async enqueteReponse => {
   const data = enqueteReponse.enquete_reponses_activite;
 
   const activiteStatus = {
-    curatelleRenforcee: await getValidationStatus(
-      data,
-      yup.object(
+    curatelleRenforcee: await getValidationStatus(data, {
+      schema: yup.object(
         buildMesureGroupsAttributes([
           "curatelle_renforcee_etablissement",
           "curatelle_renforcee_domicile"
         ])
       ),
-      "activite/curatelleRenforcee"
-    ),
-    curatelleSimple: await getValidationStatus(
-      data,
-      yup.object(
+      debugName: "activite/curatelleRenforcee",
+      logDataWithErrors: false
+    }),
+    curatelleSimple: await getValidationStatus(data, {
+      schema: yup.object(
         buildMesureGroupsAttributes([
           "curatelle_simple_etablissement",
           "curatelle_simple_domicile"
         ])
       ),
-      "activite/curatelleSimple"
-    ),
-    tutelle: await getValidationStatus(
-      data,
-      yup.object(
+      debugName: "activite/curatelleSimple",
+      logDataWithErrors: false
+    }),
+    tutelle: await getValidationStatus(data, {
+      schema: yup.object(
         buildMesureGroupsAttributes([
           "tutelle_etablissement",
           "tutelle_domicile"
         ])
       ),
-      "activite/tutelle"
-    ),
-    accompagnementJudiciaire: await getValidationStatus(
-      data,
-      yup.object(
+      debugName: "activite/tutelle",
+      logDataWithErrors: false
+    }),
+    accompagnementJudiciaire: await getValidationStatus(data, {
+      schema: yup.object(
         buildMesureGroupsAttributes([
           "accompagnement_judiciaire_etablissement",
           "accompagnement_judiciaire_domicile"
         ])
       ),
-      "activite/accompagnementJudiciaire"
-    ),
-    curatelleBiens: await getValidationStatus(
-      data,
-      yup.object(
+      debugName: "activite/accompagnementJudiciaire",
+      logDataWithErrors: false
+    }),
+    curatelleBiens: await getValidationStatus(data, {
+      schema: yup.object(
         buildMesureGroupsAttributes([
           "curatelle_biens_etablissement",
           "curatelle_biens_domicile"
         ])
       ),
-      "activite/curatelleBiens"
-    ),
-    curatellePersonne: await getValidationStatus(
-      data,
-      yup.object(
+      debugName: "activite/curatelleBiens",
+      logDataWithErrors: false
+    }),
+    curatellePersonne: await getValidationStatus(data, {
+      schema: yup.object(
         buildMesureGroupsAttributes([
           "curatelle_personne_etablissement",
           "curatelle_personne_domicile"
         ])
       ),
-      "activite/curatellePersonne"
-    ),
-    subrogeTuteurCreateur: await getValidationStatus(
-      data,
-      yup.object(buildMesureGroupsAttributes(["subroge_tuteur_createur"])),
-      "activite/subrogeTuteurCreateur"
-    ),
-    sauvegardeJustice: await getValidationStatus(
-      data,
-      yup.object(buildMesureGroupsAttributes(["sauvegarde_justice"])),
-      "activite/sauvegardeJustice"
-    ),
-    mandatHadocMajeur: await getValidationStatus(
-      data,
-      yup.object(buildMesureGroupsAttributes(["mandat_adhoc_majeur"])),
-      "activite/mandatHadocMajeur"
-    ),
-    revisionMesures: await getValidationStatus(
-      data,
-      yup.object(
+      debugName: "activite/curatellePersonne",
+      logDataWithErrors: false
+    }),
+    subrogeTuteurCreateur: await getValidationStatus(data, {
+      schema: yup.object(
+        buildMesureGroupsAttributes(["subroge_tuteur_createur"])
+      ),
+      debugName: "activite/subrogeTuteurCreateur",
+      logDataWithErrors: false
+    }),
+    sauvegardeJustice: await getValidationStatus(data, {
+      schema: yup.object(buildMesureGroupsAttributes(["sauvegarde_justice"])),
+      debugName: "activite/sauvegardeJustice",
+      logDataWithErrors: false
+    }),
+    mandatHadocMajeur: await getValidationStatus(data, {
+      schema: yup.object(buildMesureGroupsAttributes(["mandat_adhoc_majeur"])),
+      debugName: "activite/mandatHadocMajeur",
+      logDataWithErrors: false
+    }),
+    revisionMesures: await getValidationStatus(data, {
+      schema: yup.object(
         [
           "revisions_main_levee",
           "revisions_masp",
@@ -101,11 +102,11 @@ module.exports = async enqueteReponse => {
           return acc;
         }, [])
       ),
-      "activite/revisionMesures"
-    ),
-    causesSortiesDispositif: await getValidationStatus(
-      data,
-      yup.object(
+      debugName: "activite/revisionMesures",
+      logDataWithErrors: false
+    }),
+    causesSortiesDispositif: await getValidationStatus(data, {
+      schema: yup.object(
         ["sorties_main_levee", "sorties_deces", "sorties_masp"].reduce(
           (acc, attrName) => {
             acc[attrName] = yup
@@ -117,8 +118,9 @@ module.exports = async enqueteReponse => {
           []
         )
       ),
-      "activite/causesSortiesDispositif"
-    )
+      debugName: "activite/causesSortiesDispositif",
+      logDataWithErrors: false
+    })
   };
 
   activiteStatus.global = getGlobalStatus(activiteStatus);
