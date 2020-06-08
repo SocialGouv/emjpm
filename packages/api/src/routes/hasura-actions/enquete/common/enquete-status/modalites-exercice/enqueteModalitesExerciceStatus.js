@@ -4,21 +4,29 @@ const {
 } = require("../enqueteSchemaUtil");
 const yup = require("yup");
 
+const debugGroupName = "modalitesExercice";
+
 module.exports = async enqueteReponse => {
   const status = {
     informationsGenerales: await getValidationStatus(
       enqueteReponse.enquete_reponses_modalites_exercice,
-      yup.object({
-        // TODO
-      }),
-      "modalitesExercice/informationsGenerales"
+      {
+        schema: yup.object({
+          // TODO
+        }),
+        debugName: `${debugGroupName}/informationsGenerales`,
+        logDataWithErrors: false
+      }
     ),
     etablissements: await getValidationStatus(
       enqueteReponse.enquete_reponses_modalites_exercice,
-      yup.object({
-        // TODO
-      }),
-      "modalitesExercice/etablissements"
+      {
+        schema: yup.object({
+          // TODO
+        }),
+        debugName: `${debugGroupName}/etablissements`,
+        logDataWithErrors: false
+      }
     )
   };
 

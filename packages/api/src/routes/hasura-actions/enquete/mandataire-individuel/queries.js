@@ -110,6 +110,7 @@ module.exports = {
         forme_juridique
         sexe
         anciennete
+        exerce_seul_activite
         estimation_etp
         exerce_secretaires_specialises
         secretaire_specialise_etp

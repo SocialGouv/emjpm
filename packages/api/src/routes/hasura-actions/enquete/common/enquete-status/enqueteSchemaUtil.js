@@ -1,13 +1,50 @@
 const logger = require("../../../../../utils/logger");
 
-async function getValidationStatus(data, schema, debugName) {
+async function getValidationStatus(
+  data,
+  { schema, debugName, logDataWithErrors }
+) {
   if (isEmptyData(data, schema, debugName)) {
     return "empty";
   }
   const isValid = await schema.isValid(data);
 
+  if (!isValid) {
+    await logValidationErrors(data, { schema, debugName, logDataWithErrors });
+  }
+
   return isValid ? "valid" : "invalid";
 }
+
+async function logValidationErrors(
+  data,
+  { schema, debugName, logDataWithErrors }
+) {
+  try {
+    await schema.validate(data);
+  } catch (err) {
+    if (err.name === "ValidationError" && err.errors) {
+      if (logDataWithErrors) {
+        logger.warn(
+          `[Validation] [${debugName}] ${
+            err.errors.length
+          } errors in : ${JSON.stringify(data, undefined, 2)}`
+        );
+      } else {
+        logger.warn(`[Validation] [${debugName}] ${err.errors.length} errors`);
+      }
+      err.errors.forEach(msg => {
+        logger.info(`[Validation] [${debugName}] ${msg}`);
+      });
+    } else {
+      logger.error(
+        `[Validation] [${debugName}] undexpected error during validation`,
+        err
+      );
+    }
+  }
+}
+
 function isEmptyData(data, schema, debugName) {
   if (!data) {
     logger.warn(`[Validation] [${debugName}] data is missing`);
