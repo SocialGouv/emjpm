@@ -3,12 +3,12 @@ import React from "react";
 
 import { INTERVALLE_ETP_OPTIONS } from "../../../constants/mandataire";
 import { render } from "../../../util/test-utils";
-import { EnqueteIndividuelInformationsForm } from "./EnqueteIndividuelInformationsForm";
+import { EnqueteIndividuelInformationsMandataireForm } from "./EnqueteIndividuelInformationsMandataireForm";
 
 test("it should naviguate to previous step", async () => {
   var goToPrevPageMock = jest.fn();
   const { getByText } = render(
-    <EnqueteIndividuelInformationsForm goToPrevPage={goToPrevPageMock} />
+    <EnqueteIndividuelInformationsMandataireForm goToPrevPage={goToPrevPageMock} />
   );
   const prevButton = getByText("Précédent");
   userEvent.click(prevButton);
@@ -26,7 +26,7 @@ test("it should display initial values", () => {
   };
 
   const { getByLabelText } = render(
-    <EnqueteIndividuelInformationsForm data={data} handleSubmit={() => jest.fn()} />
+    <EnqueteIndividuelInformationsMandataireForm data={data} handleSubmit={() => jest.fn()} />
   );
 
   const formeJuridique = getByLabelText(/Forme juridique de votre entreprise/i);
@@ -44,13 +44,13 @@ test('it should display "forme juridique" field when "benevole" field is not sel
     forme_juridique: "Autoentrepreneur"
   };
 
-  const { getByLabelText } = render(<EnqueteIndividuelInformationsForm data={data} />);
+  const { getByLabelText } = render(<EnqueteIndividuelInformationsMandataireForm data={data} />);
   expect(getByLabelText(/Forme juridique de votre entreprise/i)).toHaveValue("Autoentrepreneur");
 });
 
 test('it should hide "forme juridique" field when "benevole" field is selected', () => {
   const { queryByLabelText } = render(
-    <EnqueteIndividuelInformationsForm data={{ benevole: true }} />
+    <EnqueteIndividuelInformationsMandataireForm data={{ benevole: true }} />
   );
   expect(queryByLabelText(/Forme juridique de votre entreprise/i)).toBeNull();
 });

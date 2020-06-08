@@ -48,7 +48,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
           <Heading1 textAlign="center">Import des données</Heading1>
           <Flex flexDirection="column" mt="4" mb="3" sx={textStyle}>
             <Text>
-              {`Vous pouvez sélectionner la tableur excel envoyé par votre direction départementale
+              {`Vous pouvez sélectionner le tableur excel envoyé par votre direction départementale
               pour importer les données de l'enquête.`}
             </Text>
           </Flex>

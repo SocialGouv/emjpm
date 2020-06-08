@@ -12,9 +12,9 @@ import {
   EnqueteActiviteTutelle
 } from "../EnqueteActivite";
 import {
-  EnqueteIndividuelInformations,
   EnqueteIndividuelInformationsAgrements,
-  EnqueteIndividuelInformationsFormation
+  EnqueteIndividuelInformationsFormation,
+  EnqueteIndividuelInformationsMandataire
 } from "../EnqueteIndividuelInformations";
 import { EnqueteIndividuelPrestationsSociales } from "../EnqueteIndividuelPrestationsSociales";
 import {
@@ -51,7 +51,7 @@ function buildMenuSections(enqueteReponse) {
       steps: [
         {
           label: "Informations générales",
-          component: EnqueteIndividuelInformations,
+          component: EnqueteIndividuelInformationsMandataire,
           status: status.informations.informationsGenerales
         },
         {
