@@ -9,7 +9,7 @@ const preposeEnqueteImporter = {
 async function importEnqueteFile({
   file: { content },
   // eslint-disable-next-line no-unused-vars
-  importContext: { enqueteId, userId, service, mandataire }
+  enqueteContext: { enqueteId, userId, service, mandataire }
 }) {
   const start = Date.now();
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);

@@ -10,7 +10,7 @@ import { EnquetePrepose } from "./EnquetePrepose";
 import { ENQUETE } from "./queries";
 
 export const Enquete = ({ id, currentStep }) => {
-  const { mandataire, type } = useContext(UserContext);
+  const { id: userId, type } = useContext(UserContext);
 
   const { data, loading } = useQuery(ENQUETE, {
     variables: { id }
@@ -28,15 +28,11 @@ export const Enquete = ({ id, currentStep }) => {
   return (
     <Fragment>
       {type === "individuel" && (
-        <EnqueteIndividuel
-          mandataireId={mandataire.id}
-          enquete={enquete}
-          currentStep={currentStep}
-        />
+        <EnqueteIndividuel userId={userId} enquete={enquete} currentStep={currentStep} />
       )}
 
       {type === "prepose" && (
-        <EnquetePrepose mandataireId={mandataire.id} enquete={enquete} currentStep={currentStep} />
+        <EnquetePrepose userId={userId} enquete={enquete} currentStep={currentStep} />
       )}
     </Fragment>
   );
