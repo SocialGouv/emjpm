@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
-import { Box } from "rebass";
 
 import { parseFloatValue } from "../../../util";
 import { EnquetePreposeModaliteExerciceInformationsForm } from "./EnquetePreposeModaliteExerciceInformationsForm";
