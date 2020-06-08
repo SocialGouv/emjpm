@@ -22,6 +22,7 @@ function integer(cell, options) {
   if (value) {
     const parsed = parseInt(value, 10);
     const result = !isNaN(parsed) ? parsed : undefined;
+
     return _validateMinMax(result, options);
   }
   return undefined;
