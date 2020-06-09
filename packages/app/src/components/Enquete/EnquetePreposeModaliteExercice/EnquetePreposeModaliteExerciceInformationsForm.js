@@ -56,6 +56,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
     handleSubmit,
     submitCount,
     handleChange,
+    handleBlur,
     values,
     errors,
     setValues,
@@ -97,6 +98,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
                 name="region"
                 value={values.region}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 type="text"
                 hasError={showError && !!errors.region}
               />
