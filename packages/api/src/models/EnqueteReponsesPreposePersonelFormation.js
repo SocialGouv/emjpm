@@ -20,7 +20,7 @@ class EnqueteReponsesPreposePersonelFormation extends Model {
         nb_preposes_mjpm: { type: "number" },
         nb_preposes_mjpm_etp: { type: "number" },
         formation_preposes_mjpm: { type: "jsonb" },
-        autres_informations: { type: "jsonb" },
+        niveaux_qualification: { type: "jsonb" },
         nb_preposes_homme: { type: "number" },
         nb_preposes_femme: { type: "number" },
         nb_autre_personnel: { type: "number" },

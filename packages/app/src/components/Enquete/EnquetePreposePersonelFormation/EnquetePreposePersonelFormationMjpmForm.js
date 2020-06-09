@@ -4,71 +4,9 @@ import { useFormik } from "formik";
 import React, { Fragment, useEffect, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
-import yup from "../../../lib/validationSchemas/yup";
-import { parseFloatValue, parseIntValue } from "../../../util";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
-
-function validate_nb_preposes_heures_formation() {
-  return yup.object({
-    nb_preposes: yup
-      .number()
-      .integer()
-      .min(0)
-      .nullable(),
-    heures_formation: yup
-      .number()
-      .min(0)
-      .nullable()
-  });
-}
-// schema identique à enquetePreposePersonelFormationStatus
-const validationSchema = yup.object().shape({
-  nb_preposes_mjpm: yup
-    .number()
-    .integer()
-    .min(0)
-    .required(),
-  nb_preposes_mjpm_etp: yup
-    .number()
-    .integer()
-    .min(0)
-    .required(),
-  formation_preposes_mjpm: yup.object({
-    en_poste_cnc: validate_nb_preposes_heures_formation(),
-    embauches_cnc: validate_nb_preposes_heures_formation(),
-    formation_non_cnc: validate_nb_preposes_heures_formation()
-  })
-});
-
-function mapFormation_preposes_mjpm_nb_prepose_heures_formation(data) {
-  return {
-    nb_preposes: !data ? "" : parseIntValue(data.nb_preposes),
-    heures_formation: !data ? "" : parseFloatValue(data.heures_formation)
-  };
-}
-function mapFormation_preposes_mjpm(data) {
-  return {
-    en_poste_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
-      data ? data.en_poste_cnc : null
-    ),
-    embauches_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
-      data ? data.embauches_cnc : null
-    ),
-    formation_non_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
-      data ? data.formation_non_cnc : null
-    )
-  };
-}
-
-function mapDataPropsToFormValues(data) {
-  return {
-    nb_preposes_mjpm: data.nb_preposes_mjpm ? parseIntValue(data.nb_preposes_mjpm) : "",
-    nb_preposes_mjpm_etp: data.nb_preposes_mjpm_etp
-      ? parseFloatValue(data.nb_preposes_mjpm_etp)
-      : "",
-    formation_preposes_mjpm: mapFormation_preposes_mjpm(data.formation_preposes_mjpm)
-  };
-}
+import { enquetePreposePersonelFormationMjpmFormMapper } from "./EnquetePreposePersonelFormationMjpmFormMapper";
+import { enquetePreposePersonelFormationMjpmFormSchema } from "./EnquetePreposePersonelFormationMjpmFormSchema";
 
 export const EnquetePreposePersonelFormationMjpmForm = props => {
   const { goToPrevPage, loading = false, data = {}, step } = props;
@@ -85,8 +23,8 @@ export const EnquetePreposePersonelFormationMjpmForm = props => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    initialValues: mapDataPropsToFormValues(data),
-    validationSchema
+    initialValues: enquetePreposePersonelFormationMjpmFormMapper.mapDataPropsToFormValues(data),
+    validationSchema: enquetePreposePersonelFormationMjpmFormSchema
   });
 
   const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
@@ -95,7 +33,7 @@ export const EnquetePreposePersonelFormationMjpmForm = props => {
   ]);
 
   useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
+    setValues(enquetePreposePersonelFormationMjpmFormMapper.mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
   return (
@@ -104,7 +42,7 @@ export const EnquetePreposePersonelFormationMjpmForm = props => {
         <Heading1 textAlign="center" mb={"80px"}>
           {"Personel et formation"}
         </Heading1>
-        <Heading3>{"Informations relatifes aux préposés MJPM"}</Heading3>
+        <Heading3>{"Informations relatives aux préposés MJPM"}</Heading3>
 
         <Box mt={1}>
           <Heading5 mt={1} mb="2">
