@@ -2,12 +2,20 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
 import { parseFloatValue, parseIntValue } from "../../../util";
+import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePersonelFormationMjpmForm } from "./EnquetePreposePersonelFormationMjpmForm";
 import { UPDATE_ENQUETE_PREPOSE_PERSONEL_FORMATION_MJPM } from "./mutations";
 import { ENQUETE_PREPOSE_PERSONEL_FORMATION } from "./queries";
 
 export const EnquetePreposePersonelFormationMjpm = props => {
-  const { goToNextPage, goToPrevPage, enqueteReponse, step } = props; /* mandataireId, enquete */
+  const {
+    goToNextPage,
+    goToPrevPage,
+    enqueteReponse,
+    step,
+    enquete: { id: enqueteId },
+    userId
+  } = props; /* mandataireId, enquete */
   const {
     enquete_reponse_ids: { personel_formation_id }
   } = enqueteReponse;
@@ -19,7 +27,19 @@ export const EnquetePreposePersonelFormationMjpm = props => {
   });
 
   const [sendEnqueteReponseInformations] = useMutation(
-    UPDATE_ENQUETE_PREPOSE_PERSONEL_FORMATION_MJPM
+    UPDATE_ENQUETE_PREPOSE_PERSONEL_FORMATION_MJPM,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_REPONSE_STATUS,
+          variables: { enqueteId, userId }
+        },
+        {
+          query: ENQUETE_PREPOSE_PERSONEL_FORMATION,
+          variables: { id: personel_formation_id }
+        }
+      ]
+    }
   );
 
   const initialData = data ? data.enquete_reponses_prepose_personel_formation_by_pk || {} : {};

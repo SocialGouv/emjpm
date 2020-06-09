@@ -4,6 +4,7 @@ const {
   submitEnqueteReponse
 } = require("./requests");
 const enqueteMandataireIndividuelStatus = require("./enqueteMandataireIndividuelStatus");
+const logger = require("../../../../utils/logger");
 
 async function submitEnqueteMandataireIndividuel(id) {
   // TODO(remiroyc): check if all form sections are valids
@@ -22,6 +23,9 @@ async function initEnqueteMandataireIndividuel({
   });
 
   if (!enqueteReponse) {
+    logger.warn(
+      `EnqueteReponse does not exists for enqueteId ${enqueteId} and mandataireId ${mandataire.id}: create it`
+    );
     const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
       enqueteId,
       mandataireId: mandataire.id
