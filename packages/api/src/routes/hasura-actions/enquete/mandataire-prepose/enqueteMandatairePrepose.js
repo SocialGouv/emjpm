@@ -3,6 +3,7 @@ const {
   createEmptyEnqueteReponse
 } = require("./requests");
 const enqueteMandatairePreposeStatus = require("./enqueteMandatairePreposeStatus");
+const logger = require("../../../../utils/logger");
 
 async function initEnqueteMandatairePrepose({
   // eslint-disable-next-line no-unused-vars
@@ -14,6 +15,9 @@ async function initEnqueteMandatairePrepose({
   });
 
   if (!enqueteReponse) {
+    logger.warn(
+      `EnqueteReponse does not exists for enqueteId ${enqueteId} and mandataireId ${mandataire.id}: create it`
+    );
     const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
       enqueteId,
       mandataireId: mandataire.id

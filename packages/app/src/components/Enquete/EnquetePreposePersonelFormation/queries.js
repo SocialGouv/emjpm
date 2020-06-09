@@ -6,7 +6,7 @@ export const ENQUETE_PREPOSE_PERSONEL_FORMATION = gql`
       nb_preposes_mjpm
       nb_preposes_mjpm_etp
       formation_preposes_mjpm
-      autres_informations
+      niveaux_qualification
       nb_preposes_homme
       nb_preposes_femme
       nb_autre_personnel
