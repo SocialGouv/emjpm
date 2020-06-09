@@ -76,6 +76,13 @@ export const EnqueteIndividuel = props => {
           step={step}
           goToPrevPage={() => goToPrevPage(sections, currentStep)}
           goToNextPage={() => goToNextPage(sections, currentStep)}
+          submitWithContext={({ context }) => {
+            if (context && context.action === "prev") {
+              goToPrevPage();
+            } else {
+              goToNextPage();
+            }
+          }}
         />
       </Box>
     </Flex>

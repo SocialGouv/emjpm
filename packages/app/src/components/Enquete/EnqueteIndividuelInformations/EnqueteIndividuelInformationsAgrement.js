@@ -8,8 +8,7 @@ import { ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS } from "./queries";
 
 export const EnqueteIndividuelInformationsAgrement = props => {
   const {
-    goToNextPage,
-    goToPrevPage,
+    submitWithContext,
     enqueteReponse,
     userId,
     section,
@@ -45,8 +44,8 @@ export const EnqueteIndividuelInformationsAgrement = props => {
       data={agrements}
       section={section}
       step={step}
-      goToPrevPage={goToPrevPage}
-      handleSubmit={async values => {
+      submitWithContext={async submitProps => {
+        const { values } = submitProps;
         await updateEnquete({
           variables: {
             id: informations_mandataire_id,
@@ -61,7 +60,7 @@ export const EnqueteIndividuelInformationsAgrement = props => {
               : null
           }
         });
-        await goToNextPage();
+        submitWithContext(submitProps);
       }}
     />
   );

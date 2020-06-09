@@ -1,7 +1,7 @@
 import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Box } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
@@ -43,32 +43,24 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsAgrementForm = props => {
-  const { data = {}, step, goToPrevPage } = props;
+  const { data = {}, step, submitWithContext } = props;
+
   const {
     handleSubmit,
-    submitCount,
     handleChange,
     values,
     errors,
-    setValues,
-    setFieldValue
-  } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
+    setFieldValue,
+    showError,
+    submit
+  } = useEnqueteForm({
+    submitWithContext,
+    data,
+    step,
     validationSchema,
-    initialValues: mapDataPropsToFormValues(data)
+    mapDataPropsToFormValues
   });
 
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
   return (
     <form onSubmit={handleSubmit}>
       <Heading1 textAlign="center" mb={"80px"}>
@@ -183,10 +175,65 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
             fieldId="nb_mesures_dep_autres"
           />
         </Field>
-        <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons submit={submit} />
       </Box>
     </form>
   );
 };
 
 export default EnqueteIndividuelInformationsAgrementForm;
+
+function useEnqueteForm({
+  submitWithContext,
+  data,
+  step,
+  validationSchema,
+  mapDataPropsToFormValues
+}) {
+  const [submitContext, setSubmitContext] = useState();
+  const {
+    handleSubmit,
+    submitCount,
+    handleChange,
+    values,
+    errors,
+    setValues,
+    setFieldValue
+  } = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
+      await submitWithContext({ values, submitContext });
+      setSubmitting(false);
+    },
+    validationSchema,
+    initialValues: mapDataPropsToFormValues(data)
+  });
+
+  useEffect(() => {
+    setValues(mapDataPropsToFormValues(data));
+  }, [data, setValues, mapDataPropsToFormValues]);
+
+  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+    step.status,
+    submitCount
+  ]);
+
+  const submit = useMemo(
+    () => submitContext => {
+      setSubmitContext(submitContext);
+      handleSubmit();
+    },
+    [handleSubmit]
+  );
+
+  return {
+    handleSubmit,
+    submitCount,
+    handleChange,
+    values,
+    errors,
+    setValues,
+    setFieldValue,
+    showError,
+    submit
+  };
+}
