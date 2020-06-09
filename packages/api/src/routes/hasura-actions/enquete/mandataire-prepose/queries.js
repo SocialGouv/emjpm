@@ -9,6 +9,7 @@ module.exports = {
       enquete_reponses_populations_id
       enquete_reponses_financement_id
       enquete_reponses_activite_id
+      enquete_reponses_prepose_personel_formation_id
     }
   }  
   `

@@ -1,7 +1,8 @@
 var XLSX = require("xlsx");
 var {
   enqueteExcelParserAgrementsPopulations,
-  enqueteExcelParserModalitesExercice
+  enqueteExcelParserModalitesExercice,
+  enqueteExcelParserPreposePersonelFormation
 } = require("../common/excel-parser");
 
 var HttpError = require("../../../../utils/error/HttpError");
@@ -29,6 +30,9 @@ const parse = async ({ content }) => {
   ]);
 
   const res = {
+    preposePersonelFormation: enqueteExcelParserPreposePersonelFormation.parse(
+      workbook.Sheets["Personnel et formation "]
+    ),
     populations: enqueteExcelParserAgrementsPopulations.parse(
       workbook.Sheets["Populations "]
     ),

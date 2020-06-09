@@ -4,6 +4,7 @@ const enqueteExcelParserAgrementsPopulations = require("./enqueteExcelParserAgre
 const enqueteExcelParserInformationsMandataire = require("./enqueteExcelParserInformationsMandataire");
 const enqueteExcelParserPrestationsSociales = require("./enqueteExcelParserPrestationsSociales");
 const enqueteExcelParserModalitesExercice = require("./enqueteExcelParserModalitesExercice");
+const enqueteExcelParserPreposePersonelFormation = require("./enqueteExcelParserPreposePersonelFormation");
 
 module.exports = {
   enqueteExcelParserActivite,
@@ -11,5 +12,6 @@ module.exports = {
   enqueteExcelParserAgrementsPopulations,
   enqueteExcelParserInformationsMandataire,
   enqueteExcelParserPrestationsSociales,
-  enqueteExcelParserModalitesExercice
+  enqueteExcelParserModalitesExercice,
+  enqueteExcelParserPreposePersonelFormation
 };

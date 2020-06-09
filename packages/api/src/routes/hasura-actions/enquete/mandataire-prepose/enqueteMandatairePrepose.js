@@ -28,7 +28,9 @@ async function initEnqueteMandatairePrepose({
       enqueteReponse.enquete_reponses_modalites_exercice_id,
     populations_id: enqueteReponse.enquete_reponses_populations_id,
     financement_id: enqueteReponse.enquete_reponses_financement_id,
-    activite_id: enqueteReponse.enquete_reponses_activite_id
+    activite_id: enqueteReponse.enquete_reponses_activite_id,
+    personel_formation_id:
+      enqueteReponse.enquete_reponses_prepose_personel_formation_id
   };
   return {
     enquete_id: enqueteReponse.enquete_id,
