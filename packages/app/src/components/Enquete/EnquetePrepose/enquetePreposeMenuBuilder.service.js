@@ -23,7 +23,8 @@ import {
   EnquetePreposeModaliteExerciceEtablissements,
   EnquetePreposeModaliteExerciceInformations
 } from "../EnquetePreposeModaliteExercice";
-import EnquetePreposePersonelFormationMjpm from "../EnquetePreposePersonelFormation/EnquetePreposePersonelFormationMjpm";
+import { EnquetePreposePersonelFormationAutres } from "../EnquetePreposePersonelFormation/EnquetePreposePersonelFormationAutres";
+import { EnquetePreposePersonelFormationMjpm } from "../EnquetePreposePersonelFormation/EnquetePreposePersonelFormationMjpm";
 import { EnquetePreposeSubmit } from "./EnquetePreposeSubmit";
 import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 
@@ -65,6 +66,11 @@ function buildMenuSections(enqueteReponse) {
           label: "Préposés MJPM",
           component: EnquetePreposePersonelFormationMjpm,
           status: status.personelFormation.mjpm
+        },
+        {
+          label: "Autres informations",
+          component: EnquetePreposePersonelFormationAutres,
+          status: status.personelFormation.autres
         }
       ]
     },

@@ -1861,7 +1861,7 @@
       - nb_preposes_mjpm
       - nb_preposes_mjpm_etp
       - formation_preposes_mjpm
-      - autres_informations
+      - niveaux_qualification
       - nb_preposes_homme
       - nb_preposes_femme
       - nb_autre_personnel
@@ -1878,7 +1878,7 @@
       - nb_preposes_femme
       - nb_preposes_homme
       - nb_preposes_mjpm
-      - autres_informations
+      - niveaux_qualification
       - formation_preposes_mjpm
       - created_at
       - last_update
@@ -1898,7 +1898,7 @@
       - nb_preposes_femme
       - nb_preposes_homme
       - nb_preposes_mjpm
-      - autres_informations
+      - niveaux_qualification
       - formation_preposes_mjpm
       - created_at
       - last_update
