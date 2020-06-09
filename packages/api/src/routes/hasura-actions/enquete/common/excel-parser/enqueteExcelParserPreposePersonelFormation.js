@@ -9,7 +9,7 @@ function parse(ws) {
       embauches_cnc: parse_nb_preposes_heures_formation(ws, 12),
       formation_non_cnc: parse_nb_preposes_heures_formation(ws, 13)
     },
-    autres_informations: {
+    niveaux_qualification: {
       n1: parse_nb_preposes_nb_preposes_etp(ws, 21),
       n2: parse_nb_preposes_nb_preposes_etp(ws, 22),
       n3: parse_nb_preposes_nb_preposes_etp(ws, 23),
