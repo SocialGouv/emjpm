@@ -39,6 +39,11 @@ export const EnquetePrepose = props => {
 
   const section = sections[currentStep.step];
   const step = section.steps[currentStep.substep || 0];
+
+  if (!step || !section) {
+    goToStep({ step: 0, substep: 0 });
+    return <Box mt={4}>Redirection...</Box>;
+  }
   const ComponentForm = step.component;
 
   return (
