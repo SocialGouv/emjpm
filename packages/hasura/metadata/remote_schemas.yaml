@@ -1,0 +1,5 @@
+- name: remote_schema
+  definition:
+    url_from_env: WHATEVER_URL
+    timeout_seconds: 60
+    forward_client_headers: true

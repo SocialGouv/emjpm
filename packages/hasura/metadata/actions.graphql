@@ -1,0 +1,89 @@
+type Query {
+  enquete_reponse_status (
+    enqueteId: Int!
+    userId: Int!
+  ): EnqueteReponseStatus
+}
+
+
+type Mutation {
+  submit_enquete_individuel (
+    id: Int!
+  ): EnqueteReponseSubmitted
+}
+
+
+type Mutation {
+  upload_enquete_file (
+    content: String!
+    enqueteId: Int!
+    userId: Int
+  ): FileOutput
+}
+
+
+type Mutation {
+  upload_mesures_file (
+    name: String!
+    type: String!
+    content: String!
+    antennesMap: String
+    serviceId: Int
+    mandataireUserId: Int
+  ): FileOutput
+}
+
+
+
+
+type FileOutput {
+  data : String!
+}
+
+type EnqueteIndividuelReponse {
+  enquete_id : Int!
+  submitted_at : timestamptz
+  enquete_reponses_id : Int!
+  enquete_reponses_status : json!
+  enquete_reponses_informations_mandataire_id : Int
+  enquete_reponses_prestations_sociale_id : Int
+  enquete_reponses_agrements_formations_id : Int
+  enquete_reponses_activite_id : Int
+  enquete_reponses_populations_id : Int
+}
+
+type SubmittedEnqueteReponse {
+  id : Int!
+  submitted_at : timestamptz!
+}
+
+type EnqueteReponseSubmitted {
+  enquete_id : Int!
+  enquete_reponses_id : Int!
+  submitted_at : timestamptz
+}
+
+type EnquetePreposeReponse {
+  enquete_id : Int!
+  submitted_at : timestamptz
+  enquete_reponses_id : Int!
+  enquete_reponses_status : json!
+  enquete_reponses_modalites_exercice_id : Int
+  enquete_reponses_modalites_exercice_status : Int!
+  enquete_reponses_populations_id : Int
+  enquete_reponses_populations_curatelle_status : Int!
+  enquete_reponses_populations_tutelle_status : Int!
+  enquete_reponses_populations_accompagnement_judiciaire_status : Int!
+  enquete_reponses_populations_sauvegarde_justice_status : Int!
+  enquete_reponses_populations_autre_status : Int!
+  enquete_reponses_financement_id : Int!
+  enquete_reponses_activite_id : Int!
+}
+
+type EnqueteReponseStatus {
+  enquete_id : Int!
+  submitted_at : timestamptz
+  enquete_reponse_ids : json!
+  enquete_reponse_status : json!
+}
+
