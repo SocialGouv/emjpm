@@ -1,0 +1,56 @@
+actions:
+- name: enquete_reponse_status
+  definition:
+    kind: ""
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/reponse-status'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: individuel
+  - role: prepose
+  - role: service
+- name: submit_enquete_individuel
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/mandataire-individuel/submit'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: individuel
+- name: upload_enquete_file
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/upload'
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: individuel
+  - role: prepose
+  - role: service
+- name: upload_mesures_file
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/upload'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: individuel
+  - role: service
+custom_types:
+  enums: []
+  input_objects: []
+  objects:
+  - name: FileOutput
+  - name: EnqueteIndividuelReponse
+  - name: SubmittedEnqueteReponse
+  - name: EnqueteReponseSubmitted
+  - name: EnquetePreposeReponse
+  - name: EnqueteReponseStatus
+  scalars: []
