@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.40.0](https://github.com/SocialGouv/emjpm/compare/v25.39.0...v25.40.0) (2020-06-09)
+
+
+### Features
+
+* **enquete:** modalite exercice for prepose ([#1892](https://github.com/SocialGouv/emjpm/issues/1892)) ([69250d7](https://github.com/SocialGouv/emjpm/commit/69250d796014e3797c87e37fe241e43dd0943f8a)), closes [#1901](https://github.com/SocialGouv/emjpm/issues/1901)
+* **enquete:** modalite exercice for prepose ([#1910](https://github.com/SocialGouv/emjpm/issues/1910)) ([b20b400](https://github.com/SocialGouv/emjpm/commit/b20b400c782f79ab89fce207345f9a8478765cb3))
+* **enquete:** mut. mandataire individuel prepose ([#1905](https://github.com/SocialGouv/emjpm/issues/1905)) ([b818ca8](https://github.com/SocialGouv/emjpm/commit/b818ca85179be0c4ecbdb6c15e4a5ef605c02fcd))
+* **enquete:** retours partiel dgcs [#1907](https://github.com/SocialGouv/emjpm/issues/1907) ([#1908](https://github.com/SocialGouv/emjpm/issues/1908)) ([3af41ad](https://github.com/SocialGouv/emjpm/commit/3af41adb338085a27826f8074d7e173ab1f8bba8))
+* **enquete:** validation fix + log validation errors on server side ([#1904](https://github.com/SocialGouv/emjpm/issues/1904)) ([8f40172](https://github.com/SocialGouv/emjpm/commit/8f40172c89e833f8ee5e115031d5702922e53403))
+* **enquete:** validation mandataire populations ([#1906](https://github.com/SocialGouv/emjpm/issues/1906)) ([a103e3c](https://github.com/SocialGouv/emjpm/commit/a103e3c57e78c29d3b0abd3b75be6f611bbb894e))
+* **hasura:** upgrade to config v2 ([#1909](https://github.com/SocialGouv/emjpm/issues/1909)) ([231460d](https://github.com/SocialGouv/emjpm/commit/231460d4157d43bbb73b553b58a8fd86b41bccfe))
+
+
+
+
+
 # [25.39.0](https://github.com/SocialGouv/emjpm/compare/v25.38.0...v25.39.0) (2020-06-08)
 
 
