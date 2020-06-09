@@ -11,5 +11,9 @@ export const formatTribunauxOptions = tribunaux => {
 };
 
 export function parseFloatValue(value) {
-  return value && !isNaN(parseFloat(value)) ? parseFloat(value) : null;
+  return value !== "" && !isNaN(parseFloat(value)) ? parseFloat(value) : null;
+}
+
+export function parseIntValue(value) {
+  return value !== "" && !isNaN(parseInt(value, 10)) ? parseInt(value, 10) : null;
 }

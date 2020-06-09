@@ -23,6 +23,7 @@ import {
   EnquetePreposeModaliteExerciceEtablissements,
   EnquetePreposeModaliteExerciceInformations
 } from "../EnquetePreposeModaliteExercice";
+import EnquetePreposePersonelFormationMjpm from "../EnquetePreposePersonelFormation/EnquetePreposePersonelFormationMjpm";
 import { EnquetePreposeSubmit } from "./EnquetePreposeSubmit";
 import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 
@@ -53,6 +54,17 @@ function buildMenuSections(enqueteReponse) {
           label: "Etablissements",
           component: EnquetePreposeModaliteExerciceEtablissements,
           status: status.modalitesExercice.etablissements
+        }
+      ]
+    },
+    {
+      label: "Personel et formation",
+      status: status.personelFormation.global,
+      steps: [
+        {
+          label: "Préposés MJPM",
+          component: EnquetePreposePersonelFormationMjpm,
+          status: status.personelFormation.mjpm
         }
       ]
     },

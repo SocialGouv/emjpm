@@ -4,6 +4,7 @@ const enqueteInformationsMandatairesStatus = require("./informations_mandataire/
 const populationsStatus = require("./populations/populationsStatus");
 const enqueteModalitesExerciceStatus = require("./modalites-exercice/enqueteModalitesExerciceStatus");
 const prestationsSocialesStatus = require("./prestations-sociales/prestationsSocialesStatus");
+const preposePersonelFormationStatus = require("./prepose_personel_formation/enquetePreposePersonelFormationStatus");
 
 module.exports = {
   getGlobalStatus,
@@ -12,5 +13,6 @@ module.exports = {
   enqueteInformationsMandatairesStatus,
   populationsStatus,
   prestationsSocialesStatus,
-  enqueteModalitesExerciceStatus
+  enqueteModalitesExerciceStatus,
+  preposePersonelFormationStatus
 };
