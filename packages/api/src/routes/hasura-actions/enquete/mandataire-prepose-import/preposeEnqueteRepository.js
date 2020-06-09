@@ -4,6 +4,9 @@ const {
 const {
   EnqueteReponsesModalitesExercice
 } = require("../../../../models/EnqueteReponsesModalitesExercice");
+const {
+  EnqueteReponsesPreposePersonelFormation
+} = require("../../../../models/EnqueteReponsesPreposePersonelFormation");
 
 const {
   getEnqueteReponseMandatairePrepose,
@@ -11,7 +14,7 @@ const {
 } = require("../mandataire-prepose/requests");
 
 async function update(enqueteId, { tabs, mandataireId }) {
-  const { populations, modaliteExercice } = tabs;
+  const { populations, modaliteExercice, preposePersonelFormation } = tabs;
 
   const enqueteReponse = await initEnqueteMandataireIndividuel({
     enqueteId,
@@ -25,6 +28,10 @@ async function update(enqueteId, { tabs, mandataireId }) {
   await EnqueteReponsesModalitesExercice.query()
     .findById(enqueteReponse.enquete_reponses_modalites_exercice_id)
     .patch(modaliteExercice);
+
+  await EnqueteReponsesPreposePersonelFormation.query()
+    .findById(enqueteReponse.enquete_reponses_prepose_personel_formation_id)
+    .patch(preposePersonelFormation);
 }
 
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {

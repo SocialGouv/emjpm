@@ -371,6 +371,9 @@
   - name: enquete_reponses_population
     using:
       foreign_key_constraint_on: enquete_reponses_populations_id
+  - name: enquete_reponses_prepose_personel_formation
+    using:
+      foreign_key_constraint_on: enquete_reponses_prepose_personel_formation_id
   - name: enquete_reponses_prestations_sociale
     using:
       foreign_key_constraint_on: enquete_reponses_prestations_sociale_id
@@ -385,17 +388,20 @@
     permission:
       check: {}
       columns:
-      - id
-      - created_at
-      - submitted_at
       - enquete_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_financement_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_prepose_personel_formation_id
+      - enquete_reponses_prestations_sociale_id
+      - id
       - mandataire_id
       - service_id
-      - enquete_reponses_informations_mandataire_id
-      - enquete_reponses_prestations_sociale_id
-      - enquete_reponses_agrements_formations_id
-      - enquete_reponses_activite_id
-      - enquete_reponses_populations_id
+      - created_at
+      - submitted_at
       backend_only: false
   select_permissions:
   - role: direction
@@ -416,17 +422,19 @@
   - role: individuel
     permission:
       columns:
-      - created_at
       - enquete_id
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
+      - enquete_reponses_financement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
+      - enquete_reponses_prepose_personel_formation_id
       - enquete_reponses_prestations_sociale_id
       - id
       - mandataire_id
       - service_id
+      - created_at
       - submitted_at
       filter:
         mandataire:
@@ -435,19 +443,19 @@
   - role: prepose
     permission:
       columns:
-      - id
       - created_at
-      - submitted_at
       - enquete_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_financement_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_prepose_personel_formation_id
+      - enquete_reponses_prestations_sociale_id
+      - id
       - mandataire_id
       - service_id
-      - enquete_reponses_informations_mandataire_id
-      - enquete_reponses_prestations_sociale_id
-      - enquete_reponses_agrements_formations_id
-      - enquete_reponses_activite_id
-      - enquete_reponses_populations_id
-      - enquete_reponses_modalites_exercice_id
-      - enquete_reponses_financement_id
+      - submitted_at
       filter:
         mandataire:
           user_id:
@@ -459,8 +467,11 @@
       - enquete_id
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
+      - enquete_reponses_financement_id
       - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
+      - enquete_reponses_prepose_personel_formation_id
       - enquete_reponses_prestations_sociale_id
       - id
       - mandataire_id
@@ -1816,6 +1827,79 @@
       - tutelle_service_hospitalier_soins_longue_duree
       - tutelle_service_personne_handicapee
       - tutelle_service_psychiatrique
+      - created_at
+      - last_update
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+      check: null
+- table:
+    schema: public
+    name: enquete_reponses_prepose_personel_formation
+  array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: enquete_reponses_prepose_personel_formation_id
+        table:
+          schema: public
+          name: enquete_reponses
+  insert_permissions:
+  - role: prepose
+    permission:
+      check:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+      columns:
+      - id
+      - created_at
+      - last_update
+      - nb_preposes_mjpm
+      - nb_preposes_mjpm_etp
+      - formation_preposes_mjpm
+      - autres_informations
+      - nb_preposes_homme
+      - nb_preposes_femme
+      - nb_autre_personnel
+      - nb_autre_personnel_etp
+      backend_only: false
+  select_permissions:
+  - role: prepose
+    permission:
+      columns:
+      - nb_autre_personnel_etp
+      - nb_preposes_mjpm_etp
+      - id
+      - nb_autre_personnel
+      - nb_preposes_femme
+      - nb_preposes_homme
+      - nb_preposes_mjpm
+      - autres_informations
+      - formation_preposes_mjpm
+      - created_at
+      - last_update
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: prepose
+    permission:
+      columns:
+      - nb_autre_personnel_etp
+      - nb_preposes_mjpm_etp
+      - id
+      - nb_autre_personnel
+      - nb_preposes_femme
+      - nb_preposes_homme
+      - nb_preposes_mjpm
+      - autres_informations
+      - formation_preposes_mjpm
       - created_at
       - last_update
       filter:
