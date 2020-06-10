@@ -1,6 +1,6 @@
 import { Button, Heading1 } from "@emjpm/ui";
 import { format } from "date-fns";
-import React, { useMemo } from "react";
+import React from "react";
 import { useMutation } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
@@ -9,15 +9,8 @@ import { SUBMIT_ENQUETE_INDIVIDUEL } from "./mutations";
 
 export const EnqueteIndividuelWelcome = props => {
   const { enquete, enqueteReponse, userId } = props;
-
-  const hasError = useMemo(() => {
-    const keys = Object.keys(enqueteReponse);
-    return keys
-      .filter(key => key.indexOf("_status") !== -1)
-      .some(key => {
-        return keys[key] !== 2;
-      });
-  }, [enqueteReponse]);
+  const hasError = enqueteReponse.enquete_reponse_status.global !== "valid";
+  const { enquete_reponse_ids } = enqueteReponse;
 
   const [submitEnqueteIndividuel, { loading }] = useMutation(SUBMIT_ENQUETE_INDIVIDUEL, {
     refetchQueries: [
@@ -60,7 +53,7 @@ export const EnqueteIndividuelWelcome = props => {
               onClick={async () => {
                 await submitEnqueteIndividuel({
                   variables: {
-                    id: enqueteReponse.enquete_reponses_id
+                    id: enquete_reponse_ids.id
                   }
                 });
               }}

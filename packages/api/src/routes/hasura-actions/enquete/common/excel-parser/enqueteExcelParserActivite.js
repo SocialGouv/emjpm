@@ -9,7 +9,7 @@ function parse(ws) {
     curatelle_renforcee_etablissement_sortie_mesures: parser.integer(ws["F8"]),
     curatelle_renforcee_etablissement_fin_annee: parser.integer(ws["G8"]),
     curatelle_renforcee_domicile_debut_annee: parser.integer(ws["D9"]),
-    curatelle_renforcee_domicile_mesures_nouvelles: parser.integer(ws["E8"]),
+    curatelle_renforcee_domicile_mesures_nouvelles: parser.integer(ws["E9"]),
     curatelle_renforcee_domicile_sortie_mesures: parser.integer(ws["F9"]),
     curatelle_renforcee_domicile_fin_annee: parser.integer(ws["G9"]),
 
