@@ -1,5 +1,5 @@
 const {
-  getGlobalStatus,
+  getTopLevelGlobalStatus,
   enqueteActiviteStatus,
   enqueteInformationsMandatairesStatus,
   populationsStatus,
@@ -14,8 +14,7 @@ async function enqueteMandataireIndividuelStatus(enqueteReponse) {
     prestationsSociales: await prestationsSocialesStatus(enqueteReponse)
   };
 
-  status.global = getGlobalStatus(status);
-
+  status.global = getTopLevelGlobalStatus(status);
   return status;
 }
 

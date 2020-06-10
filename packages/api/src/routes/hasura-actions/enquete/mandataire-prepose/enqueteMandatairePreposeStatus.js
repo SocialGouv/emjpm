@@ -1,5 +1,5 @@
 const {
-  getGlobalStatus,
+  getTopLevelGlobalStatus,
   populationsStatus,
   enqueteModalitesExerciceStatus,
   enqueteActiviteStatus,
@@ -14,7 +14,9 @@ async function enqueteMandatairePreposeStatus(enqueteReponse) {
     personelFormation: await preposePersonelFormationStatus(enqueteReponse)
   };
 
-  status.global = getGlobalStatus(status);
+  status.global = getTopLevelGlobalStatus(
+    Object.values(status).map(x => x.global)
+  );
 
   return status;
 }
