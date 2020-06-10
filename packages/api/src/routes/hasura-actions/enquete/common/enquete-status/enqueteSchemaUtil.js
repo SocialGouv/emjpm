@@ -85,7 +85,17 @@ function getGlobalStatus(status) {
     : "valid";
 }
 
+function getTopLevelGlobalStatus(status) {
+  return getGlobalStatus(
+    Object.keys(status).reduce((acc, key) => {
+      acc[key] = status[key].global;
+      return acc;
+    }, {})
+  );
+}
+
 module.exports = {
   getValidationStatus,
-  getGlobalStatus
+  getGlobalStatus,
+  getTopLevelGlobalStatus
 };
