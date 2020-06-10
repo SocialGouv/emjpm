@@ -42,7 +42,7 @@ function mapDataPropsToFormValues(data) {
   };
 }
 
-export const EnqueteIndividuelInformationsAgrementsForm = props => {
+export const EnqueteIndividuelInformationsAgrementForm = props => {
   const { data = {}, step, goToPrevPage } = props;
   const {
     handleSubmit,
@@ -74,12 +74,12 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
       <Heading1 textAlign="center" mb={"80px"}>
         {"Vos informations"}
       </Heading1>
-      <Heading3>{"Agréments"}</Heading3>
+      <Heading3>{"Agrément"}</Heading3>
 
       <Box mt={4}>
         <Field>
           <Label mb={1} htmlFor="debut_activite_avant_2009">
-            {"Exerciez vous l'activité de mandataire avant le 1/01/2009 ?"}
+            {"Exerciez vous l'activité de mandataire avant le 01/01/2009 ?"}
           </Label>
           <YesNoComboBox
             defaultValue={values.debut_activite_avant_2009}
@@ -111,6 +111,7 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
             name="annee_agrement"
             hasError={showError && !!errors.annee_agrement}
             onChange={handleChange}
+            min={2009}
           />
           <InlineError
             showError={showError}
@@ -188,4 +189,4 @@ export const EnqueteIndividuelInformationsAgrementsForm = props => {
   );
 };
 
-export default EnqueteIndividuelInformationsAgrementsForm;
+export default EnqueteIndividuelInformationsAgrementForm;

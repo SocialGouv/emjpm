@@ -2,11 +2,11 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
 import { ENQUETE_REPONSE_STATUS } from "../queries";
-import { EnqueteIndividuelInformationsAgrementsForm } from "./EnqueteIndividuelInformationsAgrementsForm";
+import { EnqueteIndividuelInformationsAgrementForm } from "./EnqueteIndividuelInformationsAgrementForm";
 import { UPDATE_ENQUETE_INFORMATIONS_AGREMENTS } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS } from "./queries";
 
-export const EnqueteIndividuelInformationsAgrements = props => {
+export const EnqueteIndividuelInformationsAgrement = props => {
   const {
     goToNextPage,
     goToPrevPage,
@@ -41,7 +41,7 @@ export const EnqueteIndividuelInformationsAgrements = props => {
 
   const agrements = data ? data.enquete_reponses_agrements_formations_by_pk || {} : {};
   return loading ? null : (
-    <EnqueteIndividuelInformationsAgrementsForm
+    <EnqueteIndividuelInformationsAgrementForm
       data={agrements}
       section={section}
       step={step}
@@ -67,4 +67,4 @@ export const EnqueteIndividuelInformationsAgrements = props => {
   );
 };
 
-export default EnqueteIndividuelInformationsAgrements;
+export default EnqueteIndividuelInformationsAgrement;

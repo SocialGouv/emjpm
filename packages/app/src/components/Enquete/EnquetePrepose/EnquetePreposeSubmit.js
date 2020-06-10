@@ -1,19 +1,12 @@
 import { Heading1 } from "@emjpm/ui";
 import { format } from "date-fns";
-import React, { useMemo } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 export const EnquetePreposeSubmit = props => {
   const { enquete, enqueteReponse } = props;
-
-  const hasError = useMemo(() => {
-    const keys = Object.keys(enqueteReponse);
-    return keys
-      .filter(key => key.indexOf("_status") !== -1)
-      .some(key => {
-        return keys[key] !== 2;
-      });
-  }, [enqueteReponse]);
+  const hasError = enqueteReponse.enquete_reponse_status.global !== "valid";
+  // const { enquete_reponse_ids } = enqueteReponse;
 
   return (
     <Flex flexDirection="column" justifyContent="center">
