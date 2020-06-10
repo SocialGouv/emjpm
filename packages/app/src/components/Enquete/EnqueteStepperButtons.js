@@ -10,12 +10,22 @@ export const EnqueteStepperButtons = props => {
           <Fragment>
             <Button
               disabled={disabled}
-              onClick={() => submit({ action: "prev" })}
+              onClick={e => {
+                e.preventDefault();
+                submit({ action: "click-previous" });
+              }}
               variant="outline"
             >
               Précédent
             </Button>
-            <Button disabled={disabled} onClick={() => submit({ action: "next" })} ml={4}>
+            <Button
+              disabled={disabled}
+              onClick={e => {
+                e.preventDefault();
+                submit({ action: "click-next" });
+              }}
+              ml={4}
+            >
               Suivant
             </Button>
           </Fragment>

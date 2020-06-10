@@ -1,7 +1,6 @@
 import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import { Box } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
@@ -9,6 +8,7 @@ import yup from "../../../lib/validationSchemas/yup";
 import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_AGREMENTS_FORMATIONS } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 // schema identique à enqueteAgrementsFormationsStatus (côté hasura actions)
 export const validationSchema = yup.object().shape({
@@ -43,10 +43,10 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsAgrementForm = props => {
-  const { data = {}, step, submitWithContext } = props;
+  const { data = {}, step, onSubmit, enqueteContext, dispatchEnqueteContextEvent } = props;
 
   const {
-    handleSubmit,
+    submitForm,
     handleChange,
     values,
     errors,
@@ -54,7 +54,9 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
     showError,
     submit
   } = useEnqueteForm({
-    submitWithContext,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     data,
     step,
     validationSchema,
@@ -62,7 +64,7 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
   });
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Vos informations"}
       </Heading1>
@@ -182,58 +184,3 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
 };
 
 export default EnqueteIndividuelInformationsAgrementForm;
-
-function useEnqueteForm({
-  submitWithContext,
-  data,
-  step,
-  validationSchema,
-  mapDataPropsToFormValues
-}) {
-  const [submitContext, setSubmitContext] = useState();
-  const {
-    handleSubmit,
-    submitCount,
-    handleChange,
-    values,
-    errors,
-    setValues,
-    setFieldValue
-  } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await submitWithContext({ values, submitContext });
-      setSubmitting(false);
-    },
-    validationSchema,
-    initialValues: mapDataPropsToFormValues(data)
-  });
-
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues, mapDataPropsToFormValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
-
-  const submit = useMemo(
-    () => submitContext => {
-      setSubmitContext(submitContext);
-      handleSubmit();
-    },
-    [handleSubmit]
-  );
-
-  return {
-    handleSubmit,
-    submitCount,
-    handleChange,
-    values,
-    errors,
-    setValues,
-    setFieldValue,
-    showError,
-    submit
-  };
-}
