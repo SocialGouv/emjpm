@@ -12,6 +12,6 @@ function buildKeys(map) {
   });
   return {
     byKey,
-    keys: Object.keys(byKey)
+    keys: Object.keys(map)
   };
 }
