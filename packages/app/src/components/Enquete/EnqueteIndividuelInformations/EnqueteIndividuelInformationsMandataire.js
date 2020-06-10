@@ -62,6 +62,7 @@ export const EnqueteIndividuelInformationsMandataire = props => {
             forme_juridique: values.forme_juridique ? values.forme_juridique : null,
             local_professionnel: values.local_professionnel,
             exerce_seul_activite: values.exerce_seul_activite,
+            exerce_secretaires_specialises: values.exerce_secretaires_specialises,
             secretaire_specialise_etp:
               values.secretaire_specialise_etp &&
               !isNaN(parseFloat(values.secretaire_specialise_etp))
