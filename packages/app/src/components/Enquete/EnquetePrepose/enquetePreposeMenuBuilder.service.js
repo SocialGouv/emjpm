@@ -25,6 +25,13 @@ import {
 } from "../EnquetePreposeModaliteExercice";
 import { EnquetePreposePersonelFormationAutres } from "../EnquetePreposePersonelFormation/EnquetePreposePersonelFormationAutres";
 import { EnquetePreposePersonelFormationMjpm } from "../EnquetePreposePersonelFormation/EnquetePreposePersonelFormationMjpm";
+import {
+  EnquetePreposePrestationsSocialesAutresMesures,
+  EnquetePreposePrestationsSocialesCuratelleRenforcee,
+  EnquetePreposePrestationsSocialesCuratelleSimple,
+  EnquetePreposePrestationsSocialesMAJ,
+  EnquetePreposePrestationsSocialesTutelle
+} from "../EnquetePreposePrestationsSociales";
 import { EnquetePreposeSubmit } from "./EnquetePreposeSubmit";
 import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 
@@ -164,6 +171,35 @@ function buildMenuSections(enqueteReponse) {
           component: EnquetePopulationsAutreMesures,
           status: status.populations.autresMesures
         }
+      ]
+    },
+    {
+      label: "Revenus / Prestations sociales",
+      steps: [
+        {
+          label: "Revenus tutelle",
+          component: EnquetePreposePrestationsSocialesTutelle
+        },
+        {
+          label: "Revenus curatelle simple",
+          component: EnquetePreposePrestationsSocialesCuratelleSimple
+        },
+        {
+          label: "Revenus curatelle renforcée",
+          component: EnquetePreposePrestationsSocialesCuratelleRenforcee
+        },
+        {
+          label: "Revenus autres mesures",
+          component: EnquetePreposePrestationsSocialesAutresMesures
+        },
+        {
+          label: "Revenus MAJ",
+          component: EnquetePreposePrestationsSocialesMAJ
+        }
+        // {
+        //   label: "Prestations sociales",
+        //   component: EnquetePreposePrestationsSocialesTutelle
+        // }
       ]
     },
     {
