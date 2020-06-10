@@ -12,7 +12,7 @@ import {
   EnqueteActiviteTutelle
 } from "../EnqueteActivite";
 import {
-  EnqueteIndividuelInformationsAgrements,
+  EnqueteIndividuelInformationsAgrement,
   EnqueteIndividuelInformationsFormation,
   EnqueteIndividuelInformationsMandataire
 } from "../EnqueteIndividuelInformations";
@@ -55,8 +55,8 @@ function buildMenuSections(enqueteReponse) {
           status: status.informations.informationsGenerales
         },
         {
-          label: "Agréments",
-          component: EnqueteIndividuelInformationsAgrements,
+          label: "Agrément",
+          component: EnqueteIndividuelInformationsAgrement,
           status: status.informations.agrements
         },
         {
