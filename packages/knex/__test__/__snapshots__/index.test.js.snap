@@ -330,6 +330,18 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "enquete_reponses_prepose_personel_formation_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "enquete_reponses_prepose_prestations_sociales_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "enquete_reponses_prestations_sociale_id": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -1907,6 +1919,172 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "integer",
+  },
+}
+`;
+
+exports[`enquete_reponses_prepose_personel_formation table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "formation_preposes_mjpm": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+  "id": Object {
+    "defaultValue": "nextval('enquete_reponses_prepose_personel_formation_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "last_update": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "nb_autre_personnel": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "nb_autre_personnel_etp": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "nb_preposes_femme": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "nb_preposes_homme": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "nb_preposes_mjpm": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "nb_preposes_mjpm_etp": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "niveaux_qualification": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+}
+`;
+
+exports[`enquete_reponses_prepose_prestations_sociales table schema 1`] = `
+Object {
+  "aah": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "als_apl": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "apa": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "asi": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "aspa": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "created_at": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "curatelle_renforcee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+  "curatelle_simple": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+  "id": Object {
+    "defaultValue": "nextval('enquete_reponses_prepose_prestations_sociales_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "last_update": Object {
+    "defaultValue": "CURRENT_TIMESTAMP",
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "maj": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+  "pch": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "rsa": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "sauvegarde_autres_mesures": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
+  },
+  "tutelle": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
   },
 }
 `;
@@ -3536,6 +3714,8 @@ Array [
   "enquete_reponses_informations_mandataire",
   "enquete_reponses_modalites_exercice",
   "enquete_reponses_populations",
+  "enquete_reponses_prepose_personel_formation",
+  "enquete_reponses_prepose_prestations_sociales",
   "enquete_reponses_prestations_sociales",
   "enquete_services",
   "enquetes",
