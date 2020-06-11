@@ -18,6 +18,7 @@ export const EnquetePrepose = props => {
   });
 
   const enqueteReponse = data ? data.enquete_reponse_status || {} : {};
+  console.log("enqueteReponse", enqueteReponse);
 
   const sections = useMemo(
     () => (!data ? undefined : enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse)),

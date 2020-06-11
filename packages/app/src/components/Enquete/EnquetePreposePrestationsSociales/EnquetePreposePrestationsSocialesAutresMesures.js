@@ -25,13 +25,9 @@ export const EnquetePreposePrestationsSocialesAutresMesures = props => {
     ? data.enquete_reponses_prepose_prestations_sociales_by_pk || {}
     : {};
 
-  const autresMesures = prestationsSociales.sauvegarde_autres_mesures
-    ? JSON.parse(prestationsSociales.sauvegarde_autres_mesures)
-    : {};
-
   return (
     <EnquetePreposePrestationsSocialesRevenusForm
-      data={autresMesures}
+      data={prestationsSociales.sauvegarde_autres_mesures || {}}
       step={step}
       goToPrevPage={goToPrevPage}
       goToNextPage={goToNextPage}

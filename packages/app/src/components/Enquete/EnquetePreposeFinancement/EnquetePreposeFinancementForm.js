@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import React, { useEffect } from "react";
 import { Box, Flex } from "rebass";
 
+import yup from "../../../lib/validationSchemas/yup";
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
@@ -19,6 +20,37 @@ function mapDataPropsToFormValues(data) {
   };
 }
 
+const validationSchema = yup.object().shape({
+  charges_personnel: yup
+    .number()
+    .min(0)
+    .required(),
+  charges_preposes: yup
+    .number()
+    .min(0)
+    .required(),
+  charges_fonctionnement: yup
+    .number()
+    .min(0)
+    .required(),
+  produits_bareme_prelevements: yup
+    .number()
+    .min(0)
+    .required(),
+  autre_produits: yup
+    .number()
+    .min(0)
+    .required(),
+  financement_public: yup
+    .number()
+    .min(0)
+    .required(),
+  aide_sociale_conseil_departemental: yup
+    .number()
+    .min(0)
+    .required()
+});
+
 export const EnquetePreposeFinancementForm = props => {
   const { goToPrevPage, data = {}, loading = false } = props;
   const { values, handleSubmit, handleBlur, handleChange, setValues } = useFormik({
@@ -26,7 +58,8 @@ export const EnquetePreposeFinancementForm = props => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    initialValues: mapDataPropsToFormValues(data)
+    initialValues: mapDataPropsToFormValues(data),
+    validationSchema
   });
 
   useEffect(() => {

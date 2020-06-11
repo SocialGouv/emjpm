@@ -23,11 +23,9 @@ export const EnquetePreposePrestationsSocialesMAJ = props => {
     ? data.enquete_reponses_prepose_prestations_sociales_by_pk || {}
     : {};
 
-  const maj = prestationsSociales.maj ? JSON.parse(prestationsSociales.maj) : {};
-
   return (
     <EnquetePreposePrestationsSocialesRevenusForm
-      data={maj}
+      data={prestationsSociales.maj || {}}
       step={step}
       goToPrevPage={goToPrevPage}
       goToNextPage={goToNextPage}

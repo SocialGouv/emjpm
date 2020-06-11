@@ -25,13 +25,9 @@ export const EnquetePreposePrestationsSocialesCuratelleRenforcee = props => {
     ? data.enquete_reponses_prepose_prestations_sociales_by_pk || {}
     : {};
 
-  const curatelleRenforcee = prestationsSociales.curatelle_renforcee
-    ? JSON.parse(prestationsSociales.curatelle_renforcee)
-    : {};
-
   return (
     <EnquetePreposePrestationsSocialesRevenusForm
-      data={curatelleRenforcee}
+      data={prestationsSociales.curatelle_renforcee || {}}
       step={step}
       goToPrevPage={goToPrevPage}
       goToNextPage={goToNextPage}

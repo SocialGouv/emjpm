@@ -1,11 +1,11 @@
 import React from "react";
 import { useMutation, useQuery } from "react-apollo";
 
-import { EnquetePreposePrestationsSocialesRevenusForm } from "./EnquetePreposePrestationsSocialesRevenusForm";
-import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE } from "./mutations";
+import { EnquetePreposePrestationsSocialesRepartitionPersonnesForm } from "./EnquetePreposePrestationsSocialesRepartitionPersonnesForm";
+import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
-export const EnquetePreposePrestationsSocialesTutelle = props => {
+export const EnquetePreposePrestationsSocialesRepartitionPersonnes = props => {
   const { goToNextPage, goToPrevPage, enqueteReponse, step } = props;
   const {
     enquete_reponse_ids: { prestations_sociales_id }
@@ -17,33 +17,36 @@ export const EnquetePreposePrestationsSocialesTutelle = props => {
     }
   });
 
-  const [updatePrestationsSociales] = useMutation(
-    UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE
-  );
+  const [updateEnquete] = useMutation(UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION);
 
   const prestationsSociales = data
     ? data.enquete_reponses_prepose_prestations_sociales_by_pk || {}
     : {};
 
   return (
-    <EnquetePreposePrestationsSocialesRevenusForm
-      data={prestationsSociales.tutelle || {}}
+    <EnquetePreposePrestationsSocialesRepartitionPersonnesForm
+      data={prestationsSociales}
       step={step}
       goToPrevPage={goToPrevPage}
       goToNextPage={goToNextPage}
       loading={loading}
       handleSubmit={async values => {
-        await updatePrestationsSociales({
+        await updateEnquete({
           variables: {
             id: prestations_sociales_id,
-            tutelle: JSON.stringify(values)
+            aah: values.aah || "",
+            pch: values.pch || "",
+            asi: values.asi || "",
+            rsa: values.rsa || "",
+            als_apl: values.als_apl || "",
+            aspa: values.aspa || "",
+            apa: values.apa || ""
           }
         });
         await goToNextPage();
       }}
-      title="Tutelle"
     />
   );
 };
 
-export default EnquetePreposePrestationsSocialesTutelle;
+export default EnquetePreposePrestationsSocialesRepartitionPersonnes;

@@ -61,6 +61,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche1">Tranche 1</Label>
           <Text>{"Revenus annuels inférieurs ou égaux à l'AAH"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             name="tranche1"
@@ -75,6 +76,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche2">Tranche 2</Label>
           <Text>{"supérieurs à l'AAH et inférieurs au SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             id="tranche2"
@@ -92,6 +94,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche3">Tranche 3</Label>
           <Text>{"entre un SMIC brut et 1,2 SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             type="number"
@@ -106,6 +109,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche4">Tranche 4</Label>
           <Text>{"entre 1,2 SMIC brut et 1,4 SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             type="number"
@@ -123,6 +127,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche5">Tranche 5</Label>
           <Text>{"entre 1,4 SMIC brut et 1,6 SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             type="number"
@@ -137,6 +142,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche6">Tranche 6</Label>
           <Text>{"entre 1,6 SMIC brut et 1,8 SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             type="number"
@@ -154,6 +160,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche7">Tranche 7</Label>
           <Text>{"entre 1,8 SMIC brut et 2 SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             type="number"
@@ -168,6 +175,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche8">Tranche 8</Label>
           <Text>{"entre 2 SMIC brut et 2,5 SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             type="number"
@@ -185,6 +193,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche9">Tranche 9</Label>
           <Text>{"entre 2,5 SMIC brut et 4 SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             type="number"
@@ -199,6 +208,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche10">Tranche 10</Label>
           <Text>{"entre 4 SMIC brut et 6 SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             type="number"
@@ -216,6 +226,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
           <Label htmlFor="tranche11">Tranche 11</Label>
           <Text>{"supérieurs à 6 SMIC brut"}</Text>
           <Input
+            placeholder=""
             onChange={handleChange}
             onBlur={handleBlur}
             type="number"
