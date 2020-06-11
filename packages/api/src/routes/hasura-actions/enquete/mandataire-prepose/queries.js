@@ -5,6 +5,7 @@ module.exports = {
       id
       submitted_at
       enquete_id
+      enquete_reponses_prepose_prestations_sociales_id
       enquete_reponses_populations_id
       enquete_reponses_financement_id
       enquete_reponses_financement {

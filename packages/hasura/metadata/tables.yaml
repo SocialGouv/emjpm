@@ -374,6 +374,9 @@
   - name: enquete_reponses_prepose_personel_formation
     using:
       foreign_key_constraint_on: enquete_reponses_prepose_personel_formation_id
+  - name: enquete_reponses_prepose_prestations_sociale
+    using:
+      foreign_key_constraint_on: enquete_reponses_prepose_prestations_sociales_id
   - name: enquete_reponses_prestations_sociale
     using:
       foreign_key_constraint_on: enquete_reponses_prestations_sociale_id
@@ -1902,6 +1905,66 @@
       - formation_preposes_mjpm
       - created_at
       - last_update
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+      check: null
+- table:
+    schema: public
+    name: enquete_reponses_prepose_prestations_sociales
+  array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: enquete_reponses_prepose_prestations_sociales_id
+        table:
+          schema: public
+          name: enquete_reponses
+  select_permissions:
+  - role: prepose
+    permission:
+      columns:
+      - aah
+      - als_apl
+      - apa
+      - asi
+      - aspa
+      - pch
+      - rsa
+      - id
+      - curatelle_renforcee
+      - curatelle_simple
+      - maj
+      - sauvegarde_autres_mesures
+      - tutelle
+      - created_at
+      - last_update
+      filter:
+        enquete_reponses:
+          mandataire:
+            user_id:
+              _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - tutelle
+      - curatelle_simple
+      - curatelle_renforcee
+      - sauvegarde_autres_mesures
+      - maj
+      - aah
+      - pch
+      - asi
+      - rsa
+      - als_apl
+      - aspa
+      - apa
       filter:
         enquete_reponses:
           mandataire:

@@ -34,7 +34,9 @@ async function initEnqueteMandatairePrepose({
     financement_id: enqueteReponse.enquete_reponses_financement_id,
     activite_id: enqueteReponse.enquete_reponses_activite_id,
     personel_formation_id:
-      enqueteReponse.enquete_reponses_prepose_personel_formation_id
+      enqueteReponse.enquete_reponses_prepose_personel_formation_id,
+    prestations_sociales_id:
+      enqueteReponse.enquete_reponses_prepose_prestations_sociales_id
   };
   return {
     enquete_id: enqueteReponse.enquete_id,
