@@ -6,7 +6,7 @@ import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
 export const EnquetePreposePrestationsSocialesMAJ = props => {
-  const { goToNextPage, goToPrevPage, enqueteReponse } = props;
+  const { goToNextPage, goToPrevPage, enqueteReponse, step } = props;
   const {
     enquete_reponse_ids: { prestations_sociales_id }
   } = enqueteReponse;
@@ -28,6 +28,7 @@ export const EnquetePreposePrestationsSocialesMAJ = props => {
   return (
     <EnquetePreposePrestationsSocialesRevenusForm
       data={maj}
+      step={step}
       goToPrevPage={goToPrevPage}
       goToNextPage={goToNextPage}
       loading={loading}
