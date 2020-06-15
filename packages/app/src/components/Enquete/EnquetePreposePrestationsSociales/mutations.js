@@ -12,8 +12,43 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE = gql`
   }
 `;
 
+export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION = gql`
+  mutation update_enquete_reponses_prepose_prestations_sociales_repartition(
+    $id: Int!
+    $aah: Float
+    $pch: Float
+    $asi: Float
+    $rsa: Float
+    $als_apl: Float
+    $aspa: Float
+    $apa: Float
+  ) {
+    update_enquete_reponses_prepose_prestations_sociales_by_pk(
+      pk_columns: { id: $id }
+      _set: {
+        aah: $aah
+        pch: $pch
+        asi: $asi
+        rsa: $rsa
+        als_apl: $als_apl
+        aspa: $aspa
+        apa: $apa
+      }
+    ) {
+      id
+      aah
+      pch
+      asi
+      rsa
+      als_apl
+      aspa
+      apa
+    }
+  }
+`;
+
 export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_SIMPLE = gql`
-  mutation update_enquete_reponses_prestations_sociales_curatelle_simple(
+  mutation update_enquete_reponses_prepose_prestations_sociales_curatelle_simple(
     $id: Int!
     $curatelle_simple: jsonb!
   ) {
@@ -28,7 +63,7 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_SIMPLE = gql`
 `;
 
 export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_RENFORCEE = gql`
-  mutation update_enquete_reponses_prestations_sociales_curatelle_renforcee(
+  mutation update_enquete_reponses_prepose_prestations_sociales_curatelle_renforcee(
     $id: Int!
     $curatelle_renforcee: jsonb!
   ) {
@@ -43,7 +78,7 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_RENFORCEE = g
 `;
 
 export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_AUTRES_MESURES = gql`
-  mutation update_enquete_reponses_prestations_sociales_autres_mesures(
+  mutation update_enquete_reponses_prepose_prestations_sociales_autres_mesures(
     $id: Int!
     $sauvegarde_autres_mesures: jsonb!
   ) {
@@ -58,7 +93,7 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_AUTRES_MESURES = gql`
 `;
 
 export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ = gql`
-  mutation update_enquete_reponses_prestations_sociales_maj($id: Int!, $maj: jsonb!) {
+  mutation update_enquete_reponses_prepose_prestations_sociales_maj($id: Int!, $maj: jsonb!) {
     update_enquete_reponses_prepose_prestations_sociales_by_pk(
       pk_columns: { id: $id }
       _set: { maj: $maj }

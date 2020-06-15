@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
+import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePreposeFinancementForm } from "./EnquetePreposeFinancementForm";
 import { UPDATE_ENQUETE_REPONSES_FINANCEMENT } from "./mutations";
 import { ENQUETE_REPONSES_FINANCEMENT } from "./queries";
@@ -11,7 +12,14 @@ function convertToFloat(str) {
 }
 
 export const EnquetePreposeFinancement = props => {
-  const { goToNextPage, goToPrevPage, enqueteReponse } = props;
+  const {
+    goToNextPage,
+    goToPrevPage,
+    enqueteReponse,
+    step,
+    userId,
+    enquete: { id: enqueteId }
+  } = props;
   const {
     enquete_reponse_ids: { financement_id }
   } = enqueteReponse;
@@ -21,12 +29,26 @@ export const EnquetePreposeFinancement = props => {
       id: financement_id
     }
   });
-  const [updateFinancement] = useMutation(UPDATE_ENQUETE_REPONSES_FINANCEMENT);
+  const [updateFinancement] = useMutation(UPDATE_ENQUETE_REPONSES_FINANCEMENT, {
+    refetchQueries: [
+      {
+        query: ENQUETE_REPONSE_STATUS,
+        variables: { enqueteId, userId }
+      },
+      {
+        query: ENQUETE_REPONSES_FINANCEMENT,
+        variables: {
+          id: financement_id
+        }
+      }
+    ]
+  });
   const financement = data ? data.enquete_reponses_financement_by_pk || {} : {};
 
   return (
     <EnquetePreposeFinancementForm
       data={financement}
+      step={step}
       goToNextPage={goToNextPage}
       goToPrevPage={goToPrevPage}
       handleSubmit={async values => {
