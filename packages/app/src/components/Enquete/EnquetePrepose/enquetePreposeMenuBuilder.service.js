@@ -23,8 +23,8 @@ import {
   EnquetePreposeModaliteExerciceEtablissements,
   EnquetePreposeModaliteExerciceInformations
 } from "../EnquetePreposeModaliteExercice";
-import { EnquetePreposePersonelFormationAutres } from "../EnquetePreposePersonelFormation/EnquetePreposePersonelFormationAutres";
-import { EnquetePreposePersonelFormationMjpm } from "../EnquetePreposePersonelFormation/EnquetePreposePersonelFormationMjpm";
+import { EnquetePreposePersonnelFormationAutres } from "../EnquetePreposePersonnelFormation/EnquetePreposePersonnelFormationAutres";
+import { EnquetePreposePersonnelFormationMjpm } from "../EnquetePreposePersonnelFormation/EnquetePreposePersonnelFormationMjpm";
 import {
   EnquetePreposePrestationsSocialesAutresMesures,
   EnquetePreposePrestationsSocialesCuratelleRenforcee,
@@ -67,18 +67,18 @@ function buildMenuSections(enqueteReponse) {
       ]
     },
     {
-      label: "Personel et formation",
-      status: status.personelFormation.global,
+      label: "Personnel et formation",
+      status: status.personnelFormation.global,
       steps: [
         {
           label: "Préposés MJPM",
-          component: EnquetePreposePersonelFormationMjpm,
-          status: status.personelFormation.mjpm
+          component: EnquetePreposePersonnelFormationMjpm,
+          status: status.personnelFormation.mjpm
         },
         {
           label: "Autres informations",
-          component: EnquetePreposePersonelFormationAutres,
-          status: status.personelFormation.autres
+          component: EnquetePreposePersonnelFormationAutres,
+          status: status.personnelFormation.autres
         }
       ]
     },

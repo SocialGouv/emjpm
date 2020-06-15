@@ -3,7 +3,7 @@ const {
   populationsStatus,
   enqueteModalitesExerciceStatus,
   enqueteActiviteStatus,
-  preposePersonelFormationStatus,
+  preposePersonnelFormationStatus,
   preposePrestationsSocialesStatus,
   preposeFinancementStatus
 } = require("../common/enquete-status");
@@ -13,7 +13,7 @@ async function enqueteMandatairePreposeStatus(enqueteReponse) {
     modalitesExercice: await enqueteModalitesExerciceStatus(enqueteReponse),
     activite: await enqueteActiviteStatus(enqueteReponse),
     populations: await populationsStatus(enqueteReponse),
-    personelFormation: await preposePersonelFormationStatus(enqueteReponse),
+    personnelFormation: await preposePersonnelFormationStatus(enqueteReponse),
     prestationsSociales: await preposePrestationsSocialesStatus(enqueteReponse),
     financement: await preposeFinancementStatus(enqueteReponse)
   };

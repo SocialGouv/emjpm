@@ -5,10 +5,10 @@ import React, { Fragment, useEffect, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
-import { enquetePreposePersonelFormationAutresFormMapper } from "./EnquetePreposePersonelFormationAutresFormMapper";
-import { enquetePreposePersonelFormationAutresFormSchema } from "./EnquetePreposePersonelFormationAutresFormSchema";
+import { enquetePreposePersonnelFormationAutresFormMapper } from "./EnquetePreposePersonnelFormationAutresFormMapper";
+import { enquetePreposePersonnelFormationAutresFormSchema } from "./EnquetePreposePersonnelFormationAutresFormSchema";
 
-export const EnquetePreposePersonelFormationAutresForm = props => {
+export const EnquetePreposePersonnelFormationAutresForm = props => {
   const { goToPrevPage, loading = false, data = {}, step } = props;
   const {
     handleSubmit,
@@ -23,8 +23,8 @@ export const EnquetePreposePersonelFormationAutresForm = props => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    initialValues: enquetePreposePersonelFormationAutresFormMapper.mapDataPropsToFormValues(data),
-    validationSchema: enquetePreposePersonelFormationAutresFormSchema
+    initialValues: enquetePreposePersonnelFormationAutresFormMapper.mapDataPropsToFormValues(data),
+    validationSchema: enquetePreposePersonnelFormationAutresFormSchema
   });
 
   const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
@@ -33,14 +33,14 @@ export const EnquetePreposePersonelFormationAutresForm = props => {
   ]);
 
   useEffect(() => {
-    setValues(enquetePreposePersonelFormationAutresFormMapper.mapDataPropsToFormValues(data));
+    setValues(enquetePreposePersonnelFormationAutresFormMapper.mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
   return (
     <Box>
       <form onSubmit={handleSubmit}>
         <Heading1 textAlign="center" mb={"80px"}>
-          {"Personel et formation"}
+          {"Personnel et formation"}
         </Heading1>
         <Heading3>{"Autres informations relative aux préposés"}</Heading3>
 
@@ -269,4 +269,4 @@ export const EnquetePreposePersonelFormationAutresForm = props => {
   }
 };
 
-export default EnquetePreposePersonelFormationAutresForm;
+export default EnquetePreposePersonnelFormationAutresForm;

@@ -4,7 +4,7 @@ const knexConnection = require("../db/knex");
 
 Model.knex(knexConnection);
 
-class EnqueteReponsesPreposePersonelFormation extends Model {
+class EnqueteReponsesPreposePersonnelFormation extends Model {
   static get tableName() {
     return "enquete_reponses_prepose_personel_formation";
   }
@@ -30,4 +30,4 @@ class EnqueteReponsesPreposePersonelFormation extends Model {
   }
 }
 
-module.exports = { EnqueteReponsesPreposePersonelFormation };
+module.exports = { EnqueteReponsesPreposePersonnelFormation };

@@ -11,10 +11,37 @@ const {
   submitEnqueteMandataireIndividuel
 } = require("./mandataire-individuel/enqueteMandataireIndividuel");
 const {
-  initEnqueteMandatairePrepose
+  initEnqueteMandatairePrepose,
+  submitEnqueteMandatairePrepose
 } = require("./mandataire-prepose/enqueteMandatairePrepose");
 
 const router = express.Router();
+
+router.post(
+  "/mandataire-prepose/submit",
+  async (req, res, next) => {
+    const { id } = req.body.input;
+    if (!id) {
+      return res.status(422).json({
+        message: "Invalid parameters: id is required"
+      });
+    }
+    try {
+      const { id } = req.body.input;
+      const enqueteReponse = await submitEnqueteMandatairePrepose(id);
+
+      return res.json({
+        enquete_id: enqueteReponse.enquete_id,
+        enquete_reponses_id: enqueteReponse.id,
+        submitted_at: enqueteReponse.submitted_at
+      });
+    } catch (err) {
+      logger.error(err);
+      next(err);
+    }
+  },
+  hasuraActionErrorHandler("Unexpected error processing file")
+);
 
 router.post(
   "/mandataire-individuel/submit",

@@ -955,31 +955,31 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "real",
+    "type": "numeric",
   },
   "autre_produits": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "real",
+    "type": "numeric",
   },
   "charges_fonctionnement": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "real",
+    "type": "numeric",
   },
   "charges_personnel": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "real",
+    "type": "numeric",
   },
   "charges_preposes": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "real",
+    "type": "numeric",
   },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
@@ -991,7 +991,7 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "real",
+    "type": "numeric",
   },
   "id": Object {
     "defaultValue": "nextval('enquete_reponses_financement_id_seq'::regclass)",
@@ -1009,7 +1009,7 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "real",
+    "type": "numeric",
   },
 }
 `;
