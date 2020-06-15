@@ -2,7 +2,10 @@ var XLSX = require("xlsx");
 var {
   enqueteExcelParserAgrementsPopulations,
   enqueteExcelParserModalitesExercice,
-  enqueteExcelParserPreposePersonelFormation
+  enqueteExcelParserPreposePersonelFormation,
+  enqueteExcelParserPreposePrestationsSociales,
+  enqueteExcelParserFinancement,
+  enqueteExcelParserActivite
 } = require("../common/excel-parser");
 
 var HttpError = require("../../../../utils/error/HttpError");
@@ -30,14 +33,23 @@ const parse = async ({ content }) => {
   ]);
 
   const res = {
+    modaliteExercice: enqueteExcelParserModalitesExercice.parse(
+      workbook.Sheets["modalites d'exercice"]
+    ),
     preposePersonelFormation: enqueteExcelParserPreposePersonelFormation.parse(
       workbook.Sheets["Personnel et formation "]
+    ),
+    activite: enqueteExcelParserActivite.parse(
+      workbook.Sheets[workbook.SheetNames[3]]
     ),
     populations: enqueteExcelParserAgrementsPopulations.parse(
       workbook.Sheets["Populations "]
     ),
-    modaliteExercice: enqueteExcelParserModalitesExercice.parse(
-      workbook.Sheets["modalites d'exercice"]
+    prestationsSociales: enqueteExcelParserPreposePrestationsSociales.parse(
+      workbook.Sheets["Revenus- prestations sociales "]
+    ),
+    financement: enqueteExcelParserFinancement.parse(
+      workbook.Sheets["Financement"]
     )
   };
 
