@@ -1,17 +1,19 @@
 /* eslint-disable no-unused-vars */
 import { Button, Card, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
+import { Checkbox, Label } from "@rebass/forms";
 import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
-import { FieldArray, Form, FormikProvider, useFormik } from "formik";
+import { Field, FieldArray, Form, FormikProvider, useFormik } from "formik";
 import React, { useEffect } from "react";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { findOption } from "../../../util/option/OptionUtil";
+import { SmallInput } from "../../Commons/SmallInput";
 import { STATUTS, TYPES } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 const validationSchema = yup.object().shape({
+  actions_information_tuteurs_familiaux: yup.boolean().required(),
   etablissements: yup.array().of(
     yup.object().shape({
       finess: yup.string().required(),
@@ -39,8 +41,13 @@ const validationSchema = yup.object().shape({
 });
 
 function mapDataPropsToFormFields(data) {
+  const result = {
+    actions_information_tuteurs_familiaux: data.actions_information_tuteurs_familiaux || false
+  };
+
   if (!data.nombre_lits_journee_hospitalisation) {
     return {
+      ...result,
       etablissements: [
         {
           finess: "",
@@ -55,8 +62,10 @@ function mapDataPropsToFormFields(data) {
       ]
     };
   } else {
+    const items = JSON.parse(data.nombre_lits_journee_hospitalisation);
     return {
-      etablissements: data.nombre_lits_journee_hospitalisation.map(item => {
+      ...result,
+      etablissements: items.map(item => {
         return {
           finess: item.finess || "",
           nombre_journees_hospitalisation: item.nombre_journees_hospitalisation
@@ -77,10 +86,13 @@ function mapDataPropsToFormFields(data) {
 }
 
 export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
-  const { goToPrevPage, loading = false, data } = props;
+  const { goToPrevPage, loading = false, data, handleSubmit } = props;
 
   const formik = useFormik({
-    onSubmit: async () => {},
+    onSubmit: async (values, { setSubmitting }) => {
+      await handleSubmit(values);
+      setSubmitting(false);
+    },
     initialValues: mapDataPropsToFormFields(data),
     validationSchema
   });
@@ -92,10 +104,24 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
 
   return (
     <FormikProvider value={formik}>
-      <Form>
+      <form onReset={formik.handleReset} onSubmit={formik.handleSubmit}>
         <Heading1 textAlign="center" mb={"80px"}>
           {"Modalité d'exercice"}
         </Heading1>
+
+        <Box mb={4}>
+          <Label>
+            <Checkbox
+              id="actions_information_tuteurs_familiaux"
+              name="actions_information_tuteurs_familiaux"
+              onBlur={formik.handleBlur}
+              onChange={event => {
+                formik.setFieldValue("actions_information_tuteurs_familiaux", event.target.checked);
+              }}
+            />
+            {"vous menez des actions d'information des tuteurs familiaux"}
+          </Label>
+        </Box>
 
         <FieldArray
           name="etablissements"
@@ -321,7 +347,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
           )}
         />
         <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
-      </Form>
+      </form>
     </FormikProvider>
   );
 };
