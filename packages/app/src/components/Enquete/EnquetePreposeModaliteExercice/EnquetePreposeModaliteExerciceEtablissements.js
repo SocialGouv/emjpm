@@ -30,6 +30,9 @@ export const EnquetePreposeModaliteExerciceEtablissements = props => {
       handleSubmit={async values => {
         await updateEtablissements({
           variables: {
+            id: modalites_exercice_id,
+            actions_information_tuteurs_familiaux:
+              values.actions_information_tuteurs_familiaux === true ? 1 : 0,
             data: JSON.stringify(values.etablissements)
           }
         });
