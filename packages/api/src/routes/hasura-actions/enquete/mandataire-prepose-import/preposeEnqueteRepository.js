@@ -33,6 +33,12 @@ async function update(enqueteId, { tabs, mandataireId }) {
     mandataireId
   });
 
+  console.log(
+    "xxx enquete_reponses_populations_id:",
+    enqueteReponse.enquete_reponses_populations_id
+  );
+  console.log("xxx populations:", populations);
+
   await EnqueteReponsesPopulations.query()
     .findById(enqueteReponse.enquete_reponses_populations_id)
     .patch(populations);
