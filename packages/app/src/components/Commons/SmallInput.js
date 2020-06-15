@@ -23,7 +23,7 @@ export const SmallInput = props => {
         fontSize: "14px",
         padding: "15px 5px",
         textAlign: "center",
-        width: "60px"
+        width: props.width ? `${props.width}px` : "60px"
       }}
     />
   );

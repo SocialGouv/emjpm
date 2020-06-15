@@ -3,7 +3,9 @@ const {
   populationsStatus,
   enqueteModalitesExerciceStatus,
   enqueteActiviteStatus,
-  preposePersonelFormationStatus
+  preposePersonelFormationStatus,
+  preposePrestationsSocialesStatus,
+  preposeFinancementStatus
 } = require("../common/enquete-status");
 
 async function enqueteMandatairePreposeStatus(enqueteReponse) {
@@ -11,7 +13,9 @@ async function enqueteMandatairePreposeStatus(enqueteReponse) {
     modalitesExercice: await enqueteModalitesExerciceStatus(enqueteReponse),
     activite: await enqueteActiviteStatus(enqueteReponse),
     populations: await populationsStatus(enqueteReponse),
-    personelFormation: await preposePersonelFormationStatus(enqueteReponse)
+    personelFormation: await preposePersonelFormationStatus(enqueteReponse),
+    prestationsSociales: await preposePrestationsSocialesStatus(enqueteReponse),
+    financement: await preposeFinancementStatus(enqueteReponse)
   };
 
   status.global = getTopLevelGlobalStatus(

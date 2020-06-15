@@ -30,6 +30,7 @@ import {
   EnquetePreposePrestationsSocialesCuratelleRenforcee,
   EnquetePreposePrestationsSocialesCuratelleSimple,
   EnquetePreposePrestationsSocialesMAJ,
+  EnquetePreposePrestationsSocialesRepartitionPersonnes,
   EnquetePreposePrestationsSocialesTutelle
 } from "../EnquetePreposePrestationsSociales";
 import { EnquetePreposeSubmit } from "./EnquetePreposeSubmit";
@@ -175,40 +176,47 @@ function buildMenuSections(enqueteReponse) {
     },
     {
       label: "Revenus / Prestations sociales",
+      status: status.prestationsSociales.global,
       steps: [
         {
           label: "Revenus tutelle",
-          component: EnquetePreposePrestationsSocialesTutelle
+          component: EnquetePreposePrestationsSocialesTutelle,
+          status: status.prestationsSociales.tutelle
         },
         {
           label: "Revenus curatelle simple",
-          component: EnquetePreposePrestationsSocialesCuratelleSimple
+          component: EnquetePreposePrestationsSocialesCuratelleSimple,
+          status: status.prestationsSociales.curatelle_simple
         },
         {
           label: "Revenus curatelle renforcée",
-          component: EnquetePreposePrestationsSocialesCuratelleRenforcee
+          component: EnquetePreposePrestationsSocialesCuratelleRenforcee,
+          status: status.prestationsSociales.curatelle_renforcee
         },
         {
           label: "Revenus autres mesures",
-          component: EnquetePreposePrestationsSocialesAutresMesures
+          component: EnquetePreposePrestationsSocialesAutresMesures,
+          status: status.prestationsSociales.sauvegarde_autres_mesures
         },
         {
           label: "Revenus MAJ",
-          component: EnquetePreposePrestationsSocialesMAJ
+          component: EnquetePreposePrestationsSocialesMAJ,
+          status: status.prestationsSociales.maj
+        },
+        {
+          label: "Prestations sociales",
+          component: EnquetePreposePrestationsSocialesRepartitionPersonnes,
+          status: status.prestationsSociales.repartition
         }
-        // {
-        //   label: "Prestations sociales",
-        //   component: EnquetePreposePrestationsSocialesTutelle
-        // }
       ]
     },
     {
-      // status: status.financement.global,
+      status: status.financement.global,
       steps: [
         {
           label: "Financement",
-          component: EnquetePreposeFinancement
-          // status: status.financement.global,
+          component: EnquetePreposeFinancement,
+          status: status.financement.global
         }
       ]
     },

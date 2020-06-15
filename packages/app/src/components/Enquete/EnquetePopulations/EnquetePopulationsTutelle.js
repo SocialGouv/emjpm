@@ -40,6 +40,8 @@ export const EnquetePopulationsTutelle = props => {
     ]
   });
 
+  console.log("xxx data:", data);
+
   const populations = data ? data.enquete_reponses_populations_by_pk || {} : {};
   const reponsePopulations = {
     age_inf_25_ans_homme: populations.tutelle_age_inf_25_ans_homme || "",
