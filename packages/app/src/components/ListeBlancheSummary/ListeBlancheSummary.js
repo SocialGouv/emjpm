@@ -70,12 +70,6 @@ const ListeBlancheSummary = () => {
     },
     prepose: {
       aggregate: { count: preposeCount }
-    },
-    service: {
-      aggregate: { count: serviceCount }
-    },
-    ti: {
-      aggregate: { count: tiCount }
     }
   } = data;
 
@@ -87,8 +81,6 @@ const ListeBlancheSummary = () => {
       <Flex flexDirection="column" pt={1}>
         <LabelValue label="Mandataire individuel" value={individuelCount} />
         <LabelValue label="Mandataire préposé à un établissement" value={preposeCount} />
-        <LabelValue label="Membre d'un service mandataire" value={serviceCount} />
-        <LabelValue label="Magistrat" value={tiCount} />
       </Flex>
     </Card>
   );
