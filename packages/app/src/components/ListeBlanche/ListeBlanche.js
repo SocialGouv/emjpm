@@ -15,12 +15,6 @@ const getType = type => {
   if (type === "prepose") {
     return "Mandataire préposé d'établissement";
   }
-  if (type === "service") {
-    return "Membre d'un service mandataire";
-  }
-  if (type === "ti") {
-    return "Magistrat";
-  }
 };
 
 const ListBlancheItem = ({ item }) => (

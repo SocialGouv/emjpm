@@ -28,31 +28,5 @@ export const LB_SUMMARY = gql`
         count
       }
     }
-    service: lb_users_aggregate(
-      where: {
-        type: { _eq: "service" }
-        lb_departements: {
-          departement_id: { _eq: $departementId }
-          departement_financeur: { _eq: true }
-        }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    ti: lb_users_aggregate(
-      where: {
-        type: { _eq: "ti" }
-        lb_departements: {
-          departement_id: { _eq: $departementId }
-          departement_financeur: { _eq: true }
-        }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
   }
 `;
