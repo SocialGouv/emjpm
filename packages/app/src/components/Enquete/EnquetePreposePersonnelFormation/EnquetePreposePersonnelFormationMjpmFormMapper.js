@@ -29,6 +29,6 @@ function mapDataPropsToFormValues(data) {
     formation_preposes_mjpm: mapFormation_preposes_mjpm(data.formation_preposes_mjpm)
   };
 }
-export const enquetePreposePersonelFormationMjpmFormMapper = {
+export const enquetePreposePersonnelFormationMjpmFormMapper = {
   mapDataPropsToFormValues
 };

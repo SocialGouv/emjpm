@@ -2,7 +2,7 @@ var XLSX = require("xlsx");
 var {
   enqueteExcelParserAgrementsPopulations,
   enqueteExcelParserModalitesExercice,
-  enqueteExcelParserPreposePersonelFormation,
+  enqueteExcelParserPreposePersonnelFormation,
   enqueteExcelParserPreposePrestationsSociales,
   enqueteExcelParserFinancement,
   enqueteExcelParserActivite
@@ -36,7 +36,7 @@ const parse = async ({ content }) => {
     modaliteExercice: enqueteExcelParserModalitesExercice.parse(
       workbook.Sheets["modalites d'exercice"]
     ),
-    preposePersonelFormation: enqueteExcelParserPreposePersonelFormation.parse(
+    preposePersonnelFormation: enqueteExcelParserPreposePersonnelFormation.parse(
       workbook.Sheets["Personnel et formation "]
     ),
     activite: enqueteExcelParserActivite.parse(

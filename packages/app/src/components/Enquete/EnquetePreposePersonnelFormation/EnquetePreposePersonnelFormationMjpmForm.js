@@ -5,10 +5,10 @@ import React, { Fragment, useEffect, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
-import { enquetePreposePersonelFormationMjpmFormMapper } from "./EnquetePreposePersonelFormationMjpmFormMapper";
-import { enquetePreposePersonelFormationMjpmFormSchema } from "./EnquetePreposePersonelFormationMjpmFormSchema";
+import { enquetePreposePersonnelFormationMjpmFormMapper } from "./EnquetePreposePersonnelFormationMjpmFormMapper";
+import { enquetePreposePersonnelFormationMjpmFormSchema } from "./EnquetePreposePersonnelFormationMjpmFormSchema";
 
-export const EnquetePreposePersonelFormationMjpmForm = props => {
+export const EnquetePreposePersonnelFormationMjpmForm = props => {
   const { goToPrevPage, loading = false, data = {}, step } = props;
   const {
     handleSubmit,
@@ -23,8 +23,8 @@ export const EnquetePreposePersonelFormationMjpmForm = props => {
       await props.handleSubmit(values);
       setSubmitting(false);
     },
-    initialValues: enquetePreposePersonelFormationMjpmFormMapper.mapDataPropsToFormValues(data),
-    validationSchema: enquetePreposePersonelFormationMjpmFormSchema
+    initialValues: enquetePreposePersonnelFormationMjpmFormMapper.mapDataPropsToFormValues(data),
+    validationSchema: enquetePreposePersonnelFormationMjpmFormSchema
   });
 
   const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
@@ -33,14 +33,14 @@ export const EnquetePreposePersonelFormationMjpmForm = props => {
   ]);
 
   useEffect(() => {
-    setValues(enquetePreposePersonelFormationMjpmFormMapper.mapDataPropsToFormValues(data));
+    setValues(enquetePreposePersonnelFormationMjpmFormMapper.mapDataPropsToFormValues(data));
   }, [data, setValues]);
 
   return (
     <Box>
       <form onSubmit={handleSubmit}>
         <Heading1 textAlign="center" mb={"80px"}>
-          {"Personel et formation"}
+          {"Personnel et formation"}
         </Heading1>
         <Heading3>{"Informations relatives aux préposés MJPM"}</Heading3>
 
@@ -200,4 +200,4 @@ export const EnquetePreposePersonelFormationMjpmForm = props => {
   }
 };
 
-export default EnquetePreposePersonelFormationMjpmForm;
+export default EnquetePreposePersonnelFormationMjpmForm;

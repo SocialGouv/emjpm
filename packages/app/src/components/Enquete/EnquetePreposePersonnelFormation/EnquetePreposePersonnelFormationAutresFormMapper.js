@@ -28,6 +28,6 @@ function mapDataPropsToFormValues(data) {
     niveaux_qualification: mapNiveauQualifications(data.niveaux_qualification)
   };
 }
-export const enquetePreposePersonelFormationAutresFormMapper = {
+export const enquetePreposePersonnelFormationAutresFormMapper = {
   mapDataPropsToFormValues
 };
