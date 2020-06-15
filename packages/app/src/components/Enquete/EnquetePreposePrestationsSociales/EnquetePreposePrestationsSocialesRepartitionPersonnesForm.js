@@ -72,8 +72,6 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnesForm = props =
     submitCount
   ]);
 
-  console.log("showError", showError);
-
   return (
     <form onSubmit={handleSubmit}>
       <Heading1 textAlign="center" mb={"80px"}>

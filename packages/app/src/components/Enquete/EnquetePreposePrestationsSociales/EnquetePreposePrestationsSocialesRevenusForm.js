@@ -77,7 +77,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             name="tranche1"
             id="tranche1"
             type="number"
-            min={0}
             value={values.tranche1}
           />
           <InlineError showError={showError} message={errors.tranche1} fieldId="tranche1" />
@@ -92,7 +91,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             id="tranche2"
             name="tranche2"
             type="number"
-            min={0}
             value={values.tranche2}
           />
           <InlineError showError={showError} message={errors.tranche2} fieldId="tranche2" />
@@ -110,7 +108,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             type="number"
             id="tranche3"
             name="tranche3"
-            min={0}
             value={values.tranche3}
           />
           <InlineError showError={showError} message={errors.tranche3} fieldId="tranche3" />
@@ -125,7 +122,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             type="number"
             id="tranche4"
             name="tranche4"
-            min={0}
             value={values.tranche4}
           />
           <InlineError showError={showError} message={errors.tranche4} fieldId="tranche4" />
@@ -143,7 +139,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             type="number"
             id="tranche5"
             name="tranche5"
-            min={0}
             value={values.tranche5}
           />
           <InlineError showError={showError} message={errors.tranche5} fieldId="tranche5" />
@@ -158,7 +153,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             type="number"
             id="tranche6"
             name="tranche6"
-            min={0}
             value={values.tranche6}
           />
           <InlineError showError={showError} message={errors.tranche6} fieldId="tranche6" />
@@ -176,7 +170,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             type="number"
             id="tranche7"
             name="tranche7"
-            min={0}
             value={values.tranche7}
           />
           <InlineError showError={showError} message={errors.tranche7} fieldId="tranche7" />
@@ -191,7 +184,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             type="number"
             id="tranche8"
             name="tranche8"
-            min={0}
             value={values.tranche8}
           />
           <InlineError showError={showError} message={errors.tranche8} fieldId="tranche8" />
@@ -209,7 +201,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             type="number"
             id="tranche9"
             name="tranche9"
-            min={0}
             value={values.tranche9}
           />
           <InlineError showError={showError} message={errors.tranche9} fieldId="tranche9" />
@@ -224,7 +215,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             type="number"
             id="tranche10"
             name="tranche10"
-            min={0}
             value={values.tranche10}
           />
           <InlineError showError={showError} message={errors.tranche10} fieldId="tranche10" />
@@ -242,7 +232,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
             type="number"
             id="tranche11"
             name="tranche11"
-            min={0}
             value={values.tranche11}
           />
           <InlineError showError={showError} message={errors.tranche11} fieldId="tranche11" />

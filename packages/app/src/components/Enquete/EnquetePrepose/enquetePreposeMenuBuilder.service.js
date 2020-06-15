@@ -215,7 +215,8 @@ function buildMenuSections(enqueteReponse) {
       steps: [
         {
           label: "Financement",
-          component: EnquetePreposeFinancement
+          component: EnquetePreposeFinancement,
+          status: status.financement.global
         }
       ]
     },

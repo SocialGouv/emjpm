@@ -19,7 +19,15 @@ module.exports = async enqueteReponse => {
           charges_preposes: yup
             .number()
             .min(0)
-            .required(),
+            .required()
+            .test(
+              "charges-preposes-personnel",
+              "La valeur de charges préposés ne peut être supérieure à la charge personnel total.",
+              function(value) {
+                const chargePersonnel = this.parent["charges_personnel"] | 0;
+                return chargePersonnel >= (value | 0);
+              }
+            ),
           charges_fonctionnement: yup
             .number()
             .min(0)
