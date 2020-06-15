@@ -1,19 +1,26 @@
-import { useReducer } from "react";
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+
+import { useMemo, useReducer, useState } from "react";
 
 export const useEnqueteContext = props => {
+  const [openConfirmExitInvalidForm, setOpenConfirmExitInvalidForm] = useState(false);
+
   const { currentStep, navigateToStep, sections } = props;
 
-  const enqueteContextInitialValue = {
-    form: {
-      dirty: false,
-      valid: true,
-      value: undefined,
-      nextStep: undefined // {section, step} | 'previous' | 'next'
-    },
-    actions: {
-      autoSubmit: false
-    }
-  };
+  const enqueteContextInitialValue = useMemo(
+    () => ({
+      form: {
+        dirty: false,
+        valid: true,
+        value: undefined,
+        nextStep: getNextPageStep(sections, currentStep) // {section, step} | 'previous' | 'next'
+      },
+      actions: {
+        autoSubmit: false
+      }
+    }),
+    [currentStep, sections]
+  );
   function enqueteContextReducer(state, action) {
     switch (action.type) {
       case "set-next-step": {
@@ -80,7 +87,17 @@ export const useEnqueteContext = props => {
   return {
     enqueteContext,
     dispatchEnqueteContextEvent,
-    saveAndNavigate
+    saveAndNavigate,
+    confirmExitInvalidFormDialog: {
+      open: openConfirmExitInvalidForm,
+      onConfirm: () => {
+        setOpenConfirmExitInvalidForm(false);
+        dispatchEnqueteContextEvent({ type: "navigate-to-next-page" });
+      },
+      onCancel: () => {
+        setOpenConfirmExitInvalidForm(false);
+      }
+    }
   };
 
   async function saveAndNavigate({ step, substep }) {
@@ -91,11 +108,7 @@ export const useEnqueteContext = props => {
         dispatchEnqueteContextEvent({ type: "set-actions-autoSubmit", value: true });
         navigationConfirmed = false;
       } else {
-        console.log(
-          "xxx TODO message d'avertissement: vos modifications vont être perdues, voulez-vous continuer?",
-          enqueteContext.form
-        );
-        // TODO message d'avertissement: vos modifications vont être perdues, voulez-vous continuer?
+        setOpenConfirmExitInvalidForm(true);
         navigationConfirmed = false;
       }
     }
@@ -106,12 +119,14 @@ export const useEnqueteContext = props => {
 
   function getNextPageStep(sections, currentStep) {
     const { step, substep } = currentStep;
-    const currentSection = sections[step];
+    const currentSection = sections && sections.length > step ? sections[step] : undefined;
 
-    if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
-      return { step: step + 1, substep: 0 };
-    } else {
-      return { step, substep: substep + 1 };
+    if (currentSection) {
+      if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
+        return { step: step + 1, substep: 0 };
+      } else {
+        return { step, substep: substep + 1 };
+      }
     }
   }
 

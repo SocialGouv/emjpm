@@ -5,6 +5,7 @@ import { useQuery } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
+import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvalidFormDialog";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { useEnqueteContext } from "../useEnqueteContext.hook";
 import { enqueteIndividuelMenuBuilder } from "./enqueteIndividuelMenuBuilder.service";
@@ -31,8 +32,14 @@ export const EnqueteIndividuel = props => {
     return { section, step };
   }, [currentStep.step, currentStep.substep, sections]);
 
-  const { enqueteContext, dispatchEnqueteContextEvent, saveAndNavigate } = useEnqueteContext({
+  const {
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    saveAndNavigate,
+    confirmExitInvalidFormDialog
+  } = useEnqueteContext({
     currentStep,
+    section,
     navigateToStep,
     sections
   });
@@ -91,7 +98,9 @@ export const EnqueteIndividuel = props => {
           step={step}
           enqueteContext={enqueteContext}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
+          goToNextPage={() => dispatchEnqueteContextEvent({ type: "navigate-to-next-page" })}
         />
+        <EnqueteConfirmExitInvalidFormDialog {...confirmExitInvalidFormDialog} />
       </Box>
     </Flex>
   );
