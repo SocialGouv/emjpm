@@ -8,7 +8,17 @@ import yup from "../../../lib/validationSchemas/yup";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 const validationSchema = yup.object().shape({
-  tranche1: yup.number().min(0)
+  tranche1: yup.number().min(0),
+  tranche2: yup.number().min(0),
+  tranche3: yup.number().min(0),
+  tranche4: yup.number().min(0),
+  tranche5: yup.number().min(0),
+  tranche6: yup.number().min(0),
+  tranche7: yup.number().min(0),
+  tranche8: yup.number().min(0),
+  tranche9: yup.number().min(0),
+  tranche10: yup.number().min(0),
+  tranche11: yup.number().min(0)
 });
 
 function mapDataPropsToFormValues(data = {}) {
