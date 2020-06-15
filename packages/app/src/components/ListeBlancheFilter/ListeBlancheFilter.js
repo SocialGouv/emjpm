@@ -11,9 +11,7 @@ import { BoxStyle } from "./style";
 const TYPE_OPTIONS = [
   { label: "Tous les types", value: null },
   { label: "Mandataire individuel", value: "individuel" },
-  { label: "Mandataire préposé d'établissement", value: "prepose" },
-  { label: "Membre d'un service mandataire", value: "service" },
-  { label: "Magistrat", value: "ti" }
+  { label: "Mandataire préposé d'établissement", value: "prepose" }
 ];
 
 const ListeBlancheFilter = () => {
