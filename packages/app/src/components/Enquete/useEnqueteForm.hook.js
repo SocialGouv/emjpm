@@ -8,28 +8,47 @@ export function useEnqueteForm({
   enqueteContext,
   step,
   validationSchema,
-  mapDataPropsToFormValues
+  dataToForm,
+  formToData,
+  loading
 }) {
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
+      values = formToData ? formToData(values) : values;
+      await onSubmit(values);
+      dispatchEnqueteContextEvent({ type: "navigate-to-next-page" });
+      setSubmitting(false);
+    },
+    validationSchema,
+    initialValues: dataToForm ? dataToForm(data) : data,
+    onChange: () => {}
+  });
+
   const {
     submitForm,
     submitCount,
     handleChange,
+    handleBlur,
     values,
     errors,
     setValues,
     setFieldValue,
     isValid,
     dirty
-  } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await onSubmit(values);
-      dispatchEnqueteContextEvent({ type: "navigate-to-next-page" });
-      setSubmitting(false);
-    },
-    validationSchema,
-    initialValues: mapDataPropsToFormValues(data),
-    onChange: () => {}
-  });
+  } = formik
+    ? formik
+    : {
+        submitForm: undefined,
+        submitCount: undefined,
+        handleChange: undefined,
+        handleBlur: undefined,
+        values: undefined,
+        errors: undefined,
+        setValues: undefined,
+        setFieldValue: undefined,
+        isValid: undefined,
+        dirty: undefined
+      };
 
   useMemo(() => {
     setTimeout(() => {
@@ -60,12 +79,13 @@ export function useEnqueteForm({
   }, [enqueteContext.actions.autoSubmit, submitForm]);
 
   useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues, mapDataPropsToFormValues]);
+    setValues(dataToForm(data));
+  }, [data, setValues, dataToForm]);
 
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
+  const showError = useMemo(() => !loading && (step.status !== "empty" || submitCount !== 0), [
     step.status,
-    submitCount
+    submitCount,
+    loading
   ]);
 
   const submit = useMemo(
@@ -81,9 +101,11 @@ export function useEnqueteForm({
   );
 
   return {
+    formik,
     submitForm,
     submitCount,
     handleChange,
+    handleBlur,
     values,
     errors,
     setValues,

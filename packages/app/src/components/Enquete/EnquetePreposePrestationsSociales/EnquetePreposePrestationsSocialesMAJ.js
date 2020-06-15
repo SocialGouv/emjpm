@@ -8,8 +8,8 @@ import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
 export const EnquetePreposePrestationsSocialesMAJ = props => {
   const {
-    goToNextPage,
-    goToPrevPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
     userId,
@@ -48,17 +48,16 @@ export const EnquetePreposePrestationsSocialesMAJ = props => {
     <EnquetePreposePrestationsSocialesRevenusForm
       data={prestationsSociales.maj || {}}
       step={step}
-      goToPrevPage={goToPrevPage}
-      goToNextPage={goToNextPage}
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
-      handleSubmit={async values => {
+      onSubmit={async values => {
         await updatePrestationsSociales({
           variables: {
             id: prestations_sociales_id,
             maj: values
           }
         });
-        await goToNextPage();
       }}
       title="MAJ"
     />

@@ -9,8 +9,8 @@ import { ENQUETE_PREPOSE_PERSONNEL_FORMATION } from "./queries";
 
 export const EnquetePreposePersonnelFormationMjpm = props => {
   const {
-    goToNextPage,
-    goToPrevPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
     enquete: { id: enqueteId },
@@ -47,10 +47,11 @@ export const EnquetePreposePersonnelFormationMjpm = props => {
   return (
     <EnquetePreposePersonnelFormationMjpmForm
       data={initialData}
-      goToPrevPage={goToPrevPage}
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
       step={step}
-      handleSubmit={async values => {
+      onSubmit={async values => {
         const formation_preposes_mjpm = values.formation_preposes_mjpm
           ? {
               en_poste_cnc: parseNbPreposeHeuresFormationFromForm(
@@ -73,7 +74,6 @@ export const EnquetePreposePersonnelFormationMjpm = props => {
             formation_preposes_mjpm
           }
         });
-        await goToNextPage();
       }}
     />
   );

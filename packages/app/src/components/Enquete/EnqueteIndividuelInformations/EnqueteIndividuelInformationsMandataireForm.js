@@ -1,7 +1,6 @@
 import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Text } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
@@ -9,6 +8,7 @@ import yup from "../../../lib/validationSchemas/yup";
 import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_INFO_MANDATAIRE } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 // schema identique à enqueteInformationsMandatairesStatus (côté hasura actions)
 const validationSchema = yup.object().shape({
@@ -39,7 +39,7 @@ const validationSchema = yup.object().shape({
   local_professionnel: yup.boolean().required()
 });
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     departement: data.departement || "",
     region: data.region || "",
@@ -58,36 +58,36 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsMandataireForm = props => {
-  const { data = {}, step, goToPrevPage } = props;
+  const {
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
 
   const {
-    handleSubmit,
+    submitForm,
     handleChange,
+    setFieldValue,
     values,
     errors,
-    setFieldValue,
-    setValues,
-    submitCount
-  } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
+    showError,
+    submit
+  } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
     validationSchema,
-    initialValues: mapDataPropsToFormValues(data)
+    dataToForm,
+    loading
   });
 
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Vos informations"}
       </Heading1>
@@ -322,8 +322,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
           />
         </Field>
       </Box>
-
-      <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+      <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
 };

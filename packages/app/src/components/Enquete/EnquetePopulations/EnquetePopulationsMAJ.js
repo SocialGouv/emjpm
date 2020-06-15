@@ -9,8 +9,8 @@ import { ENQUETE_REPONSE_POPULATIONS_MAJ } from "./queries";
 
 export const EnquetePopulationsMAJ = props => {
   const {
-    goToPrevPage,
-    goToNextPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     userId,
     enquete: { id: enqueteId },
@@ -75,7 +75,7 @@ export const EnquetePopulationsMAJ = props => {
           data={reponsePopulations}
           section={section}
           step={step}
-          handleSubmit={async values => {
+          onSubmit={async values => {
             const data = Object.keys(values).reduce((acc, key) => {
               if (values[key]) {
                 return {
@@ -92,9 +92,9 @@ export const EnquetePopulationsMAJ = props => {
                 ...data
               }
             });
-            await goToNextPage();
           }}
-          goToPrevPage={goToPrevPage}
+          enqueteContext={enqueteContext}
+          dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           title={"Mesure d'accompagnement de justice"}
         />
       </Box>

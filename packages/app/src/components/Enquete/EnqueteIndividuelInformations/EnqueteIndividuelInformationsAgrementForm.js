@@ -32,7 +32,7 @@ export const validationSchema = yup.object().shape({
     .required()
 });
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     debut_activite_avant_2009: data.debut_activite_avant_2009 || false,
     annee_agrement: data.annee_agrement || "",
@@ -43,7 +43,14 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsAgrementForm = props => {
-  const { data = {}, step, onSubmit, enqueteContext, dispatchEnqueteContextEvent } = props;
+  const {
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
 
   const {
     submitForm,
@@ -60,7 +67,8 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
     data,
     step,
     validationSchema,
-    mapDataPropsToFormValues
+    dataToForm,
+    loading
   });
 
   return (
@@ -177,7 +185,7 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
             fieldId="nb_mesures_dep_autres"
           />
         </Field>
-        <EnqueteStepperButtons submit={submit} />
+        <EnqueteStepperButtons submit={submit} disabled={loading} />
       </Box>
     </form>
   );

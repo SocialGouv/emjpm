@@ -11,8 +11,8 @@ const PREFIX = "mandat_adhoc_majeur";
 
 export const EnqueteActiviteMandatHadocMajeur = props => {
   const {
-    goToPrevPage,
-    goToNextPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     section,
     step,
@@ -60,16 +60,16 @@ export const EnqueteActiviteMandatHadocMajeur = props => {
         data={normalizedData}
         section={section}
         step={step}
-        handleSubmit={async values => {
+        onSubmit={async values => {
           await updateEnquete({
             variables: {
               id: activite_id,
               ...values
             }
           });
-          await goToNextPage();
         }}
-        goToPrevPage={goToPrevPage}
+        enqueteContext={enqueteContext}
+        dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Mandat ad hoc majeur"
       />
     </Box>

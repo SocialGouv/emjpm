@@ -1,12 +1,12 @@
 import { Heading1, Heading3, InlineError, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { parseFloatValue } from "../../../util";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 const validationSchema = yup.object().shape({
   tranche1: yup
@@ -55,7 +55,7 @@ const validationSchema = yup.object().shape({
     .nullable()
 });
 
-function mapDataPropsToFormValues(data = {}) {
+function dataToForm(data = {}) {
   const result = {};
   for (var i = 1; i <= 11; ++i) {
     const key = `tranche${i}`;
@@ -64,41 +64,47 @@ function mapDataPropsToFormValues(data = {}) {
   return result;
 }
 
+function formToData(values) {
+  const data = Object.keys(values).reduce((acc, attr) => {
+    acc[attr] = parseFloatValue(values[attr]);
+    return acc;
+  }, {});
+  return data;
+}
+
 export const EnquetePreposePrestationsSocialesRevenusForm = props => {
-  const { title, goToPrevPage, loading = false, data = {}, step } = props;
+  const {
+    title,
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
 
   const {
-    handleSubmit,
-    errors,
-    handleBlur,
+    submitForm,
     handleChange,
-    submitCount,
+    handleBlur,
     values,
-    setValues
-  } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      // parse all attributes as "float"
-      Object.keys(values).forEach(attr => {
-        values[attr] = parseFloatValue(values[attr]);
-      });
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
+    errors,
+    showError,
+    submit
+  } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
     validationSchema,
-    initialValues: mapDataPropsToFormValues(data)
+    dataToForm,
+    formToData,
+    loading
   });
 
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Revenus / Prestation sociales"}
       </Heading1>
@@ -276,7 +282,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
         </Box>
         <Box ml={3} flex={1 / 2} />
       </Flex>
-      <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+      <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
 };

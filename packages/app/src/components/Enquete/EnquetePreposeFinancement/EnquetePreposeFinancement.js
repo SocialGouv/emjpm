@@ -13,8 +13,8 @@ function convertToFloat(str) {
 
 export const EnquetePreposeFinancement = props => {
   const {
-    goToNextPage,
-    goToPrevPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
     userId,
@@ -49,9 +49,9 @@ export const EnquetePreposeFinancement = props => {
     <EnquetePreposeFinancementForm
       data={financement}
       step={step}
-      goToNextPage={goToNextPage}
-      goToPrevPage={goToPrevPage}
-      handleSubmit={async values => {
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
+      onSubmit={async values => {
         await updateFinancement({
           variables: {
             id: financement_id,
@@ -66,7 +66,6 @@ export const EnquetePreposeFinancement = props => {
             produits_bareme_prelevements: convertToFloat(values.produits_bareme_prelevements)
           }
         });
-        await goToNextPage();
       }}
       loading={loading}
     />

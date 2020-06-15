@@ -11,6 +11,7 @@ import { findOption } from "../../../util/option/OptionUtil";
 import { SmallInput } from "../../Commons/SmallInput";
 import { STATUTS, TYPES } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 const validationSchema = yup.object().shape({
   actions_information_tuteurs_familiaux: yup.boolean().required(),
@@ -97,10 +98,9 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
     validationSchema
   });
 
-  const { setValues } = formik;
-  useEffect(() => {
-    setValues(mapDataPropsToFormFields(data));
-  }, [data, setValues]);
+  const { handleChange, handleBlur, setFieldValue } = formik;
+
+  // TODO se passer de FieldArray https://jaredpalmer.com/formik/docs/guides/arrays
 
   return (
     <FormikProvider value={formik}>
@@ -184,8 +184,8 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           value={value.finess}
                           placeholder=""
                           hasError={error ? !!error.finess : false}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
                           type="text"
                         />
                         <InlineError
@@ -203,8 +203,8 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           name={`etablissements.${index}.raison_sociale`}
                           value={value.raison_sociale}
                           hasError={error ? !!error.raison_sociale : false}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
                           type="text"
                         />
                         <InlineError
@@ -226,7 +226,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           value={findOption(STATUTS.byKey, value.statut)}
                           hasError={error ? !!error.statut : false}
                           onChange={option =>
-                            formik.setFieldValue(`etablissements[${index}].statut`, option.value)
+                            setFieldValue(`etablissements[${index}].statut`, option.value)
                           }
                           options={STATUTS.byKey}
                         />
@@ -247,7 +247,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           value={findOption(TYPES.byKey, value.type)}
                           hasError={error ? !!error.type : false}
                           onChange={option =>
-                            formik.setFieldValue(`etablissements[${index}].type`, option.value)
+                            setFieldValue(`etablissements[${index}].type`, option.value)
                           }
                           options={TYPES.byKey}
                         />
@@ -268,8 +268,8 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           name={`etablissements.${index}.nombre_lits`}
                           value={value.nombre_lits}
                           hasError={error ? !!error.nombre_lits : false}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
                           type="number"
                         />
                         <InlineError
@@ -290,8 +290,8 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           name={`etablissements.${index}.nombre_journees_hospitalisation`}
                           value={value.nombre_journees_hospitalisation}
                           hasError={error ? !!error.nombre_journees_hospitalisation : false}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
                           type="number"
                         />
                         <InlineError
@@ -311,8 +311,8 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           name={`etablissements.${index}.nombre_mesures`}
                           value={value.nombre_mesures}
                           hasError={error ? !!error.nombre_mesures : false}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
                           type="number"
                         />
                         <InlineError
@@ -330,8 +330,8 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           name={`etablissements.${index}.nombre_journees_esms`}
                           value={value.nombre_journees_esms}
                           hasError={error ? !!error.nombre_journees_esms : false}
-                          onChange={formik.handleChange}
-                          onBlur={formik.handleBlur}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
                           type="number"
                         />
                         <InlineError

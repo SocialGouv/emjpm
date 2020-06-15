@@ -8,8 +8,8 @@ import { ENQUETE_REPONSE_PRESTATIONS_SOCIALES } from "./queries";
 
 export const EnqueteIndividuelPrestationsSociales = props => {
   const {
-    goToNextPage,
-    goToPrevPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     userId,
     enquete: { id: enqueteId },
@@ -46,8 +46,9 @@ export const EnqueteIndividuelPrestationsSociales = props => {
       data={prestationsSociales}
       section={section}
       step={step}
-      goToPrevPage={goToPrevPage}
-      handleSubmit={async values => {
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
+      onSubmit={async values => {
         await updateEnquete({
           variables: {
             id: prestations_sociale_id,
@@ -60,7 +61,6 @@ export const EnqueteIndividuelPrestationsSociales = props => {
             apa: values.apa || null
           }
         });
-        await goToNextPage();
       }}
     />
   );
