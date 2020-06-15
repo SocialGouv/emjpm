@@ -2,7 +2,7 @@ import { Heading1 } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { useQuery } from "react-apollo";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
@@ -45,6 +45,23 @@ export const EnquetePrepose = props => {
     return <Box mt={4}>Redirection...</Box>;
   }
   const ComponentForm = step.component;
+
+  if (enqueteReponse.submitted_at) {
+    return (
+      <Box py={"50px"}>
+        <Heading1 textAlign="center">
+          {enqueteReponse.submitted_at
+            ? `Vos réponses à l’enquête ${enquete.annee} ont bien été envoyées.`
+            : "Envoi de vos réponses"}
+        </Heading1>
+        <Box sx={{ textAlign: "center", lineHeight: "30px", marginTop: 4 }}>
+          <Text>Nous vous remercions pour le temps que vous nous avez accordé.</Text>
+          <Text>À bientôt,</Text>
+          <Text>Votre direction régionale</Text>
+        </Box>
+      </Box>
+    );
+  }
 
   return (
     <Flex>
