@@ -15,39 +15,40 @@ module.exports = async enqueteReponse => {
           charges_personnel: yup
             .number()
             .min(0)
-            .required(),
+            .nullable(),
           charges_preposes: yup
             .number()
             .min(0)
-            .required()
+            .nullable()
             .test(
               "charges-preposes-personnel",
               "La valeur de charges préposés ne peut être supérieure à la charge personnel total.",
               function(value) {
-                const chargePersonnel = this.parent["charges_personnel"] | 0;
-                return chargePersonnel >= (value | 0);
+                const chargesPersonnel = this.parent["charges_personnel"] | 0;
+                const chargesPrepose = value | 0;
+                return chargesPersonnel >= chargesPrepose;
               }
             ),
           charges_fonctionnement: yup
             .number()
             .min(0)
-            .required(),
+            .nullable(),
           produits_bareme_prelevements: yup
             .number()
             .min(0)
-            .required(),
+            .nullable(),
           autre_produits: yup
             .number()
             .min(0)
-            .required(),
+            .nullable(),
           financement_public: yup
             .number()
             .min(0)
-            .required(),
+            .nullable(),
           aide_sociale_conseil_departemental: yup
             .number()
             .min(0)
-            .required()
+            .nullable()
         }),
         debugName: `${debugGroupName}`,
         logDataWithErrors: true

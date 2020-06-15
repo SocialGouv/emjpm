@@ -32,14 +32,14 @@ const parse = async ({ content }) => {
   ]);
 
   const res = {
+    modaliteExercice: enqueteExcelParserModalitesExercice.parse(
+      workbook.Sheets["modalites d'exercice"]
+    ),
     preposePersonelFormation: enqueteExcelParserPreposePersonelFormation.parse(
       workbook.Sheets["Personnel et formation "]
     ),
     populations: enqueteExcelParserAgrementsPopulations.parse(
       workbook.Sheets["Populations "]
-    ),
-    modaliteExercice: enqueteExcelParserModalitesExercice.parse(
-      workbook.Sheets["modalites d'exercice"]
     ),
     prestationsSociales: enqueteExcelParserPreposePrestationsSociales.parse(
       workbook.Sheets["Revenus- prestations sociales "]

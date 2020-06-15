@@ -196,7 +196,7 @@ function buildMenuSections(enqueteReponse) {
         {
           label: "Revenus autres mesures",
           component: EnquetePreposePrestationsSocialesAutresMesures,
-          status: status.prestationsSociales.autres_mesures
+          status: status.prestationsSociales.sauvegarde_autres_mesures
         },
         {
           label: "Revenus MAJ",

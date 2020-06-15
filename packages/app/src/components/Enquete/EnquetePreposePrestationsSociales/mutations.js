@@ -15,13 +15,13 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE = gql`
 export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION = gql`
   mutation update_enquete_reponses_prepose_prestations_sociales_repartition(
     $id: Int!
-    $aah: Float!
-    $pch: Float!
-    $asi: Float!
-    $rsa: Float!
-    $als_apl: Float!
-    $aspa: Float!
-    $apa: Float!
+    $aah: Float
+    $pch: Float
+    $asi: Float
+    $rsa: Float
+    $als_apl: Float
+    $aspa: Float
+    $apa: Float
   ) {
     update_enquete_reponses_prepose_prestations_sociales_by_pk(
       pk_columns: { id: $id }

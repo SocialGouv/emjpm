@@ -5,20 +5,54 @@ import React, { useEffect, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
+import { parseFloatValue } from "../../../util";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 
 const validationSchema = yup.object().shape({
-  tranche1: yup.number().min(0),
-  tranche2: yup.number().min(0),
-  tranche3: yup.number().min(0),
-  tranche4: yup.number().min(0),
-  tranche5: yup.number().min(0),
-  tranche6: yup.number().min(0),
-  tranche7: yup.number().min(0),
-  tranche8: yup.number().min(0),
-  tranche9: yup.number().min(0),
-  tranche10: yup.number().min(0),
-  tranche11: yup.number().min(0)
+  tranche1: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche2: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche3: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche4: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche5: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche6: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche7: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche8: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche9: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche10: yup
+    .number()
+    .min(0)
+    .nullable(),
+  tranche11: yup
+    .number()
+    .min(0)
+    .nullable()
 });
 
 function mapDataPropsToFormValues(data = {}) {
@@ -43,6 +77,10 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
     setValues
   } = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
+      // parse all attributes as "float"
+      Object.keys(values).forEach(attr => {
+        values[attr] = parseFloatValue(values[attr]);
+      });
       await props.handleSubmit(values);
       setSubmitting(false);
     },

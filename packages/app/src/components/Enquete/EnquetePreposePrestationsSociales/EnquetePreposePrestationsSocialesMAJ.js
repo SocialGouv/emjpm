@@ -1,12 +1,20 @@
 import React from "react";
 import { useMutation, useQuery } from "react-apollo";
 
+import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePrestationsSocialesRevenusForm } from "./EnquetePreposePrestationsSocialesRevenusForm";
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
 export const EnquetePreposePrestationsSocialesMAJ = props => {
-  const { goToNextPage, goToPrevPage, enqueteReponse, step } = props;
+  const {
+    goToNextPage,
+    goToPrevPage,
+    enqueteReponse,
+    step,
+    userId,
+    enquete: { id: enqueteId }
+  } = props;
   const {
     enquete_reponse_ids: { prestations_sociales_id }
   } = enqueteReponse;
@@ -17,7 +25,20 @@ export const EnquetePreposePrestationsSocialesMAJ = props => {
     }
   });
 
-  const [updatePrestationsSociales] = useMutation(UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ);
+  const [updatePrestationsSociales] = useMutation(UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ, {
+    refetchQueries: [
+      {
+        query: ENQUETE_REPONSE_STATUS,
+        variables: { enqueteId, userId }
+      },
+      {
+        query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
+        variables: {
+          id: prestations_sociales_id
+        }
+      }
+    ]
+  });
 
   const prestationsSociales = data
     ? data.enquete_reponses_prepose_prestations_sociales_by_pk || {}
@@ -34,7 +55,7 @@ export const EnquetePreposePrestationsSocialesMAJ = props => {
         await updatePrestationsSociales({
           variables: {
             id: prestations_sociales_id,
-            maj: JSON.stringify(values)
+            maj: values
           }
         });
         await goToNextPage();

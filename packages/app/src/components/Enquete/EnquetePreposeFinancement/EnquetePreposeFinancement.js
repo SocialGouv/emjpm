@@ -24,29 +24,25 @@ export const EnquetePreposeFinancement = props => {
     enquete_reponse_ids: { financement_id }
   } = enqueteReponse;
 
-  const { data, loading } = useQuery(
-    ENQUETE_REPONSES_FINANCEMENT,
-    {
-      variables: {
-        id: financement_id
-      }
-    },
-    {
-      refetchQueries: [
-        {
-          query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, userId }
-        },
-        {
-          query: ENQUETE_REPONSES_FINANCEMENT,
-          variables: {
-            id: financement_id
-          }
-        }
-      ]
+  const { data, loading } = useQuery(ENQUETE_REPONSES_FINANCEMENT, {
+    variables: {
+      id: financement_id
     }
-  );
-  const [updateFinancement] = useMutation(UPDATE_ENQUETE_REPONSES_FINANCEMENT);
+  });
+  const [updateFinancement] = useMutation(UPDATE_ENQUETE_REPONSES_FINANCEMENT, {
+    refetchQueries: [
+      {
+        query: ENQUETE_REPONSE_STATUS,
+        variables: { enqueteId, userId }
+      },
+      {
+        query: ENQUETE_REPONSES_FINANCEMENT,
+        variables: {
+          id: financement_id
+        }
+      }
+    ]
+  });
   const financement = data ? data.enquete_reponses_financement_by_pk || {} : {};
 
   return (
