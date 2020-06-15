@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const UPDATE_ENQUETE_PREPOSE_PERSONEL_FORMATION_MJPM = gql`
+export const UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_MJPM = gql`
   mutation update_enquete_prepose_personel_formation(
     $id: Int!
     $nb_preposes_mjpm: Int
@@ -27,7 +27,7 @@ export const UPDATE_ENQUETE_PREPOSE_PERSONEL_FORMATION_MJPM = gql`
   }
 `;
 
-export const UPDATE_ENQUETE_PREPOSE_PERSONEL_FORMATION_AUTRES = gql`
+export const UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_AUTRES = gql`
   mutation update_enquete_prepose_personel_formation(
     $id: Int!
     $niveaux_qualification: jsonb

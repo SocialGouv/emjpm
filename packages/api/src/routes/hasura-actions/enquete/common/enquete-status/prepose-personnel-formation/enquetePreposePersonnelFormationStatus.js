@@ -4,7 +4,7 @@ const {
 } = require("../enqueteSchemaUtil");
 const yup = require("yup");
 
-const debugGroupName = "preposePersonelFormation";
+const debugGroupName = "preposePersonnelFormation";
 
 module.exports = async enqueteReponse => {
   const status = {

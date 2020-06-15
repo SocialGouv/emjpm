@@ -1,6 +1,7 @@
 const {
   getEnqueteReponseMandatairePrepose,
-  createEmptyEnqueteReponse
+  createEmptyEnqueteReponse,
+  submitEnqueteReponse
 } = require("./requests");
 const enqueteMandatairePreposeStatus = require("./enqueteMandatairePreposeStatus");
 const logger = require("../../../../utils/logger");
@@ -46,4 +47,14 @@ async function initEnqueteMandatairePrepose({
   };
 }
 
-module.exports = { initEnqueteMandatairePrepose };
+async function submitEnqueteMandatairePrepose(id) {
+  // TODO(remiroyc): check if all form sections are valids
+
+  const enqueteReponse = await submitEnqueteReponse(id);
+  return enqueteReponse;
+}
+
+module.exports = {
+  initEnqueteMandatairePrepose,
+  submitEnqueteMandatairePrepose
+};

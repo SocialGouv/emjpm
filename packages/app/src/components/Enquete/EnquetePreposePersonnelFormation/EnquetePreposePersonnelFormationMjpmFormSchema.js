@@ -1,7 +1,7 @@
 import yup from "../../../lib/validationSchemas/yup";
 
-// schema identique à enquetePreposePersonelFormationStatus
-export const enquetePreposePersonelFormationMjpmFormSchema = yup.object().shape({
+// schema identique à enquetePreposePersonnelFormationStatus
+export const enquetePreposePersonnelFormationMjpmFormSchema = yup.object().shape({
   nb_preposes_mjpm: yup
     .number()
     .integer()
