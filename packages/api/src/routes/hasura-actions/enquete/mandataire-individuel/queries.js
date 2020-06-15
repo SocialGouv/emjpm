@@ -75,7 +75,6 @@ module.exports = {
         sorties_main_levee
         sorties_deces
         sorties_masp
-       
       }
       enquete_reponses_agrements_formations_id
       enquete_reponses_agrements_formation {
