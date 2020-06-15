@@ -5,8 +5,8 @@ const {
   EnqueteReponsesModalitesExercice
 } = require("../../../../models/EnqueteReponsesModalitesExercice");
 const {
-  EnqueteReponsesPreposePersonelFormation
-} = require("../../../../models/EnqueteReponsesPreposePersonelFormation");
+  EnqueteReponsesPreposePersonnelFormation
+} = require("../../../../models/EnqueteReponsesPreposePersonnelFormation");
 const {
   EnqueteReponsesPreposePrestationsSociales
 } = require("../../../../models/EnqueteReponsesPreposePrestationsSociales");
@@ -26,7 +26,7 @@ async function update(enqueteId, { tabs, mandataireId }) {
   const {
     populations,
     modaliteExercice,
-    preposePersonelFormation,
+    preposePersonnelFormation,
     prestationsSociales,
     financement,
     activite
@@ -45,9 +45,9 @@ async function update(enqueteId, { tabs, mandataireId }) {
     .findById(enqueteReponse.enquete_reponses_modalites_exercice_id)
     .patch(modaliteExercice);
 
-  await EnqueteReponsesPreposePersonelFormation.query()
+  await EnqueteReponsesPreposePersonnelFormation.query()
     .findById(enqueteReponse.enquete_reponses_prepose_personel_formation_id)
-    .patch(preposePersonelFormation);
+    .patch(preposePersonnelFormation);
 
   await EnqueteReponsesActivite.query()
     .findById(enqueteReponse.enquete_reponses_activite_id)

@@ -3,11 +3,11 @@ import React from "react";
 
 import { parseFloatValue, parseIntValue } from "../../../util";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
-import { EnquetePreposePersonelFormationAutresForm } from "./EnquetePreposePersonelFormationAutresForm";
-import { UPDATE_ENQUETE_PREPOSE_PERSONEL_FORMATION_AUTRES } from "./mutations";
-import { ENQUETE_PREPOSE_PERSONEL_FORMATION } from "./queries";
+import { EnquetePreposePersonnelFormationAutresForm } from "./EnquetePreposePersonnelFormationAutresForm";
+import { UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_AUTRES } from "./mutations";
+import { ENQUETE_PREPOSE_PERSONNEL_FORMATION } from "./queries";
 
-export const EnquetePreposePersonelFormationAutres = props => {
+export const EnquetePreposePersonnelFormationAutres = props => {
   const {
     goToNextPage,
     goToPrevPage,
@@ -20,14 +20,14 @@ export const EnquetePreposePersonelFormationAutres = props => {
     enquete_reponse_ids: { personel_formation_id }
   } = enqueteReponse;
 
-  const { data, loading } = useQuery(ENQUETE_PREPOSE_PERSONEL_FORMATION, {
+  const { data, loading } = useQuery(ENQUETE_PREPOSE_PERSONNEL_FORMATION, {
     variables: {
       id: personel_formation_id
     }
   });
 
   const [sendEnqueteReponseInformations] = useMutation(
-    UPDATE_ENQUETE_PREPOSE_PERSONEL_FORMATION_AUTRES,
+    UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_AUTRES,
     {
       refetchQueries: [
         {
@@ -35,7 +35,7 @@ export const EnquetePreposePersonelFormationAutres = props => {
           variables: { enqueteId, userId }
         },
         {
-          query: ENQUETE_PREPOSE_PERSONEL_FORMATION,
+          query: ENQUETE_PREPOSE_PERSONNEL_FORMATION,
           variables: { id: personel_formation_id }
         }
       ]
@@ -45,7 +45,7 @@ export const EnquetePreposePersonelFormationAutres = props => {
   const initialData = data ? data.enquete_reponses_prepose_personel_formation_by_pk || {} : {};
 
   return (
-    <EnquetePreposePersonelFormationAutresForm
+    <EnquetePreposePersonnelFormationAutresForm
       data={initialData}
       goToPrevPage={goToPrevPage}
       loading={loading}
@@ -90,7 +90,7 @@ export const EnquetePreposePersonelFormationAutres = props => {
   );
 };
 
-export default EnquetePreposePersonelFormationAutres;
+export default EnquetePreposePersonnelFormationAutres;
 function parseNbPreposeNombrePreposesParNiveauQualificationFromForm(val) {
   return {
     nb_preposes: val ? parseIntValue(val.nb_preposes, 10) : null,
