@@ -3,11 +3,12 @@ import { Button, Card, Heading1, Heading3, InlineError, Input, Select } from "@e
 import { Checkbox, Label } from "@rebass/forms";
 import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
 import { Field, FieldArray, Form, FormikProvider, useFormik } from "formik";
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { findOption } from "../../../util/option/OptionUtil";
+import { YesNoComboBox } from "../../Commons";
 import { SmallInput } from "../../Commons/SmallInput";
 import { STATUTS, TYPES } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -41,7 +42,7 @@ const validationSchema = yup.object().shape({
   )
 });
 
-function mapDataPropsToFormFields(data) {
+function dataToForm(data) {
   const result = {
     actions_information_tuteurs_familiaux: data.actions_information_tuteurs_familiaux || false
   };
@@ -63,7 +64,7 @@ function mapDataPropsToFormFields(data) {
       ]
     };
   } else {
-    const items = JSON.parse(data.nombre_lits_journee_hospitalisation);
+    const items = data.nombre_lits_journee_hospitalisation;
     return {
       ...result,
       etablissements: items.map(item => {
@@ -86,50 +87,62 @@ function mapDataPropsToFormFields(data) {
   }
 }
 
+// nested arrays: https://jaredpalmer.com/formik/docs/guides/arrays
 export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
-  const { goToPrevPage, loading = false, data, handleSubmit } = props;
+  const {
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
 
-  const formik = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await handleSubmit(values);
-      setSubmitting(false);
-    },
-    initialValues: mapDataPropsToFormFields(data),
-    validationSchema
+  const {
+    submitForm,
+    handleChange,
+    setFieldValue,
+    handleBlur,
+    values,
+    errors,
+    showError,
+    submit,
+    formik
+  } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    loading
   });
-
-  const { handleChange, handleBlur, setFieldValue } = formik;
-
-  // TODO se passer de FieldArray https://jaredpalmer.com/formik/docs/guides/arrays
-
   return (
     <FormikProvider value={formik}>
-      <form onReset={formik.handleReset} onSubmit={formik.handleSubmit}>
+      <form onSubmit={submitForm}>
         <Heading1 textAlign="center" mb={"80px"}>
           {"Modalité d'exercice"}
         </Heading1>
-
         <Box mb={4}>
-          <Label>
-            <Checkbox
-              id="actions_information_tuteurs_familiaux"
-              name="actions_information_tuteurs_familiaux"
-              onBlur={formik.handleBlur}
-              onChange={event => {
-                formik.setFieldValue("actions_information_tuteurs_familiaux", event.target.checked);
-              }}
-            />
-            {"vous menez des actions d'information des tuteurs familiaux"}
+          <Label mb={1} htmlFor="actions_information_tuteurs_familiaux">
+            {"Vous menez des actions d'information des tuteurs familiaux"}
           </Label>
+          <YesNoComboBox
+            defaultValue={values.actions_information_tuteurs_familiaux}
+            name="actions_information_tuteurs_familiaux"
+            onChange={value => {
+              setFieldValue("actions_information_tuteurs_familiaux", value);
+            }}
+          />
         </Box>
-
         <FieldArray
           name="etablissements"
           render={arrayHelpers => (
             <Box>
               <Flex mb={4} alignItems="center" justifyContent="space-between">
-                <Heading3>{`${formik.values.etablissements.length} établissement${
-                  formik.values.etablissements.length > 1 ? "s" : ""
+                <Heading3>{`${values.etablissements.length} établissement${
+                  values.etablissements.length > 1 ? "s" : ""
                 }`}</Heading3>
 
                 <Box>
@@ -152,14 +165,9 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                   </Button>
                 </Box>
               </Flex>
-
-              {formik.values.etablissements.map((etablissement, index) => {
-                const value = formik.values.etablissements
-                  ? formik.values.etablissements[index]
-                  : null;
-                const error = formik.errors.etablissements
-                  ? formik.errors.etablissements[index]
-                  : null;
+              {values.etablissements.map((etablissement, index) => {
+                const value = values.etablissements ? values.etablissements[index] : {};
+                const error = errors.etablissements ? errors.etablissements[index] : {};
 
                 return (
                   <Card mb={4} key={`etablissement-${index}`} sx={{ position: "relative" }}>
@@ -172,172 +180,86 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                     >
                       <SquaredCross width={"20px"} onClick={() => arrayHelpers.remove(index)} />
                     </Box>
-
                     <Flex mt={4} mb={4}>
                       <Box mr={2} flex={1 / 2}>
-                        <Label mb={1} htmlFor={`etablissements.${index}.finess`}>
-                          {"N° FINESS"}
-                        </Label>
-                        <Input
-                          id={`etablissements.${index}.finess`}
-                          name={`etablissements.${index}.finess`}
-                          value={value.finess}
-                          placeholder=""
-                          hasError={error ? !!error.finess : false}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          type="text"
-                        />
-                        <InlineError
-                          message={error ? error.finess : ""}
-                          fieldId={`etablissements.${index}.finess`}
-                        />
+                        {renderArrayInput({
+                          attr: "finess",
+                          label: "N° FINESS",
+                          index,
+                          value,
+                          error
+                        })}
                       </Box>
                       <Box ml={2} flex={1 / 2}>
-                        <Label mb={1} htmlFor={`etablissements.${index}.raison_sociale`}>
-                          {"Raison sociale"}
-                        </Label>
-                        <Input
-                          placeholder=""
-                          id={`etablissements.${index}.raison_sociale`}
-                          name={`etablissements.${index}.raison_sociale`}
-                          value={value.raison_sociale}
-                          hasError={error ? !!error.raison_sociale : false}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          type="text"
-                        />
-                        <InlineError
-                          message={error ? error.raison_sociale : ""}
-                          fieldId={`etablissements.${index}.raison_sociale`}
-                        />
+                        {renderArrayInput({
+                          attr: "raison_sociale",
+                          label: "Raison sociale",
+                          index,
+                          value,
+                          error
+                        })}
                       </Box>
                     </Flex>
                     <Flex mb={4}>
                       <Box mr={2} flex={1 / 2}>
-                        <Label mb={1} htmlFor={`etablissements.${index}.statut`}>
-                          {"Statut de l'établissement"}
-                        </Label>
-                        <Select
-                          placeholder=""
-                          instanceId={`etablissements.${index}.statut`}
-                          id={`etablissements.${index}.statut`}
-                          name={`etablissements.${index}.statut`}
-                          value={findOption(STATUTS.byKey, value.statut)}
-                          hasError={error ? !!error.statut : false}
-                          onChange={option =>
-                            setFieldValue(`etablissements[${index}].statut`, option.value)
-                          }
-                          options={STATUTS.byKey}
-                        />
-                        <InlineError
-                          message={error ? error.statut : ""}
-                          fieldId={`etablissements.${index}.statut`}
-                        />
+                        {renderArraySelect({
+                          attr: "statut",
+                          label: "Statut de l'établissement",
+                          options: STATUTS,
+                          index,
+                          value,
+                          error
+                        })}
                       </Box>
                       <Box ml={2} flex={1 / 2}>
-                        <Label mb={1} htmlFor="type">
-                          {"Type d'établissement"}
-                        </Label>
-                        <Select
-                          placeholder=""
-                          instanceId={`etablissements.${index}.type`}
-                          id={`etablissements.${index}.type`}
-                          name={`etablissements.${index}.type`}
-                          value={findOption(TYPES.byKey, value.type)}
-                          hasError={error ? !!error.type : false}
-                          onChange={option =>
-                            setFieldValue(`etablissements[${index}].type`, option.value)
-                          }
-                          options={TYPES.byKey}
-                        />
-                        <InlineError
-                          message={error ? error.type : ""}
-                          fieldId={`etablissements.${index}.type`}
-                        />
+                        {renderArraySelect({
+                          attr: "type",
+                          label: "Type d'établissement",
+                          options: TYPES,
+                          index,
+                          value,
+                          error
+                        })}
                       </Box>
                     </Flex>
                     <Flex mb={4}>
                       <Box mr={2} flex={1 / 2}>
-                        <Label mb={1} htmlFor={`etablissements.${index}.nombre_lits`}>
-                          {"Nombre de lits ou de places"}
-                        </Label>
-                        <Input
-                          placeholder=""
-                          id={`etablissements.${index}.nombre_lits`}
-                          name={`etablissements.${index}.nombre_lits`}
-                          value={value.nombre_lits}
-                          hasError={error ? !!error.nombre_lits : false}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          type="number"
-                        />
-                        <InlineError
-                          message={error ? error.nombre_lits : ""}
-                          fieldId={`etablissements.${index}.nombre_lits`}
-                        />
+                        {renderArrayInput({
+                          attr: "nombre_lits",
+                          label: "Nombre de lits ou de places",
+                          index,
+                          value,
+                          error
+                        })}
                       </Box>
                       <Box ml={2} flex={1 / 2}>
-                        <Label
-                          mb={1}
-                          htmlFor={`etablissements.${index}.nombre_journees_hospitalisation`}
-                        >
-                          {"Nombre de journées d'hospitalisation complètes"}
-                        </Label>
-                        <Input
-                          placeholder=""
-                          id={`etablissements.${index}.nombre_journees_hospitalisation`}
-                          name={`etablissements.${index}.nombre_journees_hospitalisation`}
-                          value={value.nombre_journees_hospitalisation}
-                          hasError={error ? !!error.nombre_journees_hospitalisation : false}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          type="number"
-                        />
-                        <InlineError
-                          message={error ? error.nombre_journees_hospitalisation : ""}
-                          fieldId={`etablissements.${index}.nombre_journees_hospitalisation`}
-                        />
+                        {renderArrayInput({
+                          attr: "nombre_journees_hospitalisation",
+                          label: "Nombre de journées d'hospitalisation complètes",
+                          index,
+                          value,
+                          error
+                        })}
                       </Box>
                     </Flex>
                     <Flex mb={4}>
                       <Box mr={2} flex={1 / 2}>
-                        <Label mb={1} htmlFor={`etablissements.${index}.nombre_mesures`}>
-                          {"Nombre de mesures au 31/12"}
-                        </Label>
-                        <Input
-                          placeholder=""
-                          id={`etablissements.${index}.nombre_mesures`}
-                          name={`etablissements.${index}.nombre_mesures`}
-                          value={value.nombre_mesures}
-                          hasError={error ? !!error.nombre_mesures : false}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          type="number"
-                        />
-                        <InlineError
-                          message={error ? error.nombre_mesures : ""}
-                          fieldId={`etablissements.${index}.nombre_mesures`}
-                        />
+                        {renderArrayInput({
+                          attr: "nombre_mesures",
+                          label: "Nombre de mesures au 31/12",
+                          index,
+                          value,
+                          error
+                        })}
                       </Box>
                       <Box ml={2} flex={1 / 2}>
-                        <Label mb={1} htmlFor={`etablissements.${index}.nombre_journees_esms`}>
-                          {"Nombre de journées pour les ESMS"}
-                        </Label>
-                        <Input
-                          placeholder=""
-                          id={`etablissements.${index}.nombre_journees_esms`}
-                          name={`etablissements.${index}.nombre_journees_esms`}
-                          value={value.nombre_journees_esms}
-                          hasError={error ? !!error.nombre_journees_esms : false}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          type="number"
-                        />
-                        <InlineError
-                          message={error ? error.nombre_journees_esms : ""}
-                          fieldId={`etablissements.${index}.nombre_journees_esms`}
-                        />
+                        {renderArrayInput({
+                          attr: "nombre_journees_esms",
+                          label: "Nombre de journées pour les ESMS",
+                          index,
+                          value,
+                          error
+                        })}
                       </Box>
                     </Flex>
                   </Card>
@@ -346,10 +268,52 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
             </Box>
           )}
         />
-        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons submit={submit} disabled={loading} />
       </form>
     </FormikProvider>
   );
+  function renderArrayInput({ index, label, attr, value, error }) {
+    const id = `etablissements[${index}].${attr}`;
+    return (
+      <Fragment>
+        <Label mb={1} htmlFor={id}>
+          {label}
+        </Label>
+        <Input
+          id={id}
+          name={id}
+          value={value[attr]}
+          placeholder=""
+          hasError={showError && error ? !!error[attr] : false}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          type="text"
+        />
+        {showError && <InlineError message={error ? error[attr] : ""} fieldId={id} />}
+      </Fragment>
+    );
+  }
+  function renderArraySelect({ index, label, attr, options, value, error }) {
+    const id = `etablissements[${index}].${attr}`;
+    return (
+      <Fragment>
+        <Label mb={1} htmlFor={id}>
+          {label}
+        </Label>
+        <Select
+          placeholder=""
+          instanceId={id}
+          id={id}
+          name={id}
+          value={findOption(options.byKey, value[attr])}
+          hasError={showError && error ? !!error[attr] : false}
+          onChange={option => setFieldValue(id, option.value)}
+          options={options.byKey}
+        />
+        {showError && <InlineError message={error ? error[attr] : ""} fieldId={id} />}
+      </Fragment>
+    );
+  }
 };
 
 export default EnquetePreposeModaliteExerciceEtablissementsForm;

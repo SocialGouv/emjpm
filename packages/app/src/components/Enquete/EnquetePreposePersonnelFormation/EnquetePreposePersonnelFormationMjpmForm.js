@@ -33,7 +33,7 @@ export const EnquetePreposePersonnelFormationMjpmForm = props => {
     data,
     step,
     validationSchema,
-    dataToForm: enquetePreposePersonnelFormationMjpmFormMapper.dataToForm(data),
+    dataToForm: enquetePreposePersonnelFormationMjpmFormMapper.dataToForm,
     loading
   });
 

@@ -56,7 +56,7 @@ function parse(ws) {
     nombre_lits_journee_hospitalisation: JSON.stringify(
       nombre_lits_journee_hospitalisation
     ),
-    actions_information_tuteurs_familiaux: parser.integer(ws["E52"])
+    actions_information_tuteurs_familiaux: parser.integerAsBoolean(ws["E52"])
   };
 }
 

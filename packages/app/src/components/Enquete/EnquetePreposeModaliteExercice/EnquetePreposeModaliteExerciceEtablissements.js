@@ -42,7 +42,7 @@ export const EnquetePreposeModaliteExerciceEtablissements = props => {
     }
   );
 
-  return (
+  return loading ? null : (
     <EnquetePreposeModaliteExerciceEtablissementsForm
       data={data ? data.enquete_reponses_modalites_exercice_by_pk || {} : {}}
       enqueteContext={enqueteContext}
@@ -53,9 +53,8 @@ export const EnquetePreposeModaliteExerciceEtablissements = props => {
         await updateEtablissements({
           variables: {
             id: modalites_exercice_id,
-            actions_information_tuteurs_familiaux:
-              values.actions_information_tuteurs_familiaux === true ? 1 : 0,
-            data: JSON.stringify(values.etablissements)
+            actions_information_tuteurs_familiaux: values.actions_information_tuteurs_familiaux,
+            data: values.etablissements
           }
         });
       }}
