@@ -5,6 +5,12 @@ export const useEnqueteContext = (props) => {
 
   const { currentStep, navigateToStep, sections } = props;
 
+  const { section, step } = useMemo(() => {
+    const section = !sections ? undefined : sections[currentStep.step];
+    const step = !section ? undefined : section.steps[currentStep.substep || 0];
+    return { section, step };
+  }, [currentStep.step, currentStep.substep, sections]);
+
   const enqueteContextInitialValue = useMemo(
     () => ({
       form: {
@@ -83,6 +89,8 @@ export const useEnqueteContext = (props) => {
   );
 
   return {
+    section,
+    step,
     enqueteContext,
     dispatchEnqueteContextEvent,
     saveAndNavigate,
