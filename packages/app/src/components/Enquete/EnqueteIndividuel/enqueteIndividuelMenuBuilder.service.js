@@ -24,7 +24,7 @@ import {
   EnquetePopulationsSauvegardeJustice,
   EnquetePopulationsTutelle,
 } from "../EnquetePopulations";
-import EnqueteIndividuelSubmit from "./EnqueteIndividuelSubmit";
+import { EnqueteIndividuelSubmit } from "./EnqueteIndividuelSubmit";
 import { EnqueteIndividuelWelcome } from "./EnqueteIndividuelWelcome";
 
 export const enqueteIndividuelMenuBuilder = {
