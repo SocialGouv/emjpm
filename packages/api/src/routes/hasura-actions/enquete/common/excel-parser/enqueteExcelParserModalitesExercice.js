@@ -53,10 +53,8 @@ function parse(ws) {
     etablissement_convention_groupement: parser.integer(ws["E20"]),
     nombre_etablissements: parser.integer(ws["B22"]),
     total_mesures_etablissements: parser.integer(ws["E22"]),
-    nombre_lits_journee_hospitalisation: JSON.stringify(
-      nombre_lits_journee_hospitalisation
-    ),
-    actions_information_tuteurs_familiaux: parser.integer(ws["E52"])
+    nombre_lits_journee_hospitalisation: nombre_lits_journee_hospitalisation,
+    actions_information_tuteurs_familiaux: parser.integerAsBoolean(ws["E52"])
   };
 }
 

@@ -28,7 +28,7 @@ class EnqueteReponsesModalitesExercice extends Model {
         nombre_etablissements: { type: "number" },
         total_mesures_etablissements: { type: "number" },
         nombre_lits_journee_hospitalisation: { type: "jsonb" },
-        actions_information_tuteurs_familiaux: { type: "number" }
+        actions_information_tuteurs_familiaux: { type: "boolean" }
       }
     };
   }

@@ -20,7 +20,7 @@ function mapFormation_preposes_mjpm(data) {
   };
 }
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     nb_preposes_mjpm: data.nb_preposes_mjpm ? parseIntValue(data.nb_preposes_mjpm) : "",
     nb_preposes_mjpm_etp: data.nb_preposes_mjpm_etp
@@ -30,5 +30,5 @@ function mapDataPropsToFormValues(data) {
   };
 }
 export const enquetePreposePersonnelFormationMjpmFormMapper = {
-  mapDataPropsToFormValues
+  dataToForm
 };

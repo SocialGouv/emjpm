@@ -5,7 +5,9 @@ import { useQuery } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
+import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvalidFormDialog";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
+import { useEnqueteContext } from "../useEnqueteContext.hook";
 import { enquetePreposeMenuBuilder } from "./enquetePreposeMenuBuilder.service";
 
 export const EnquetePrepose = props => {
@@ -23,6 +25,23 @@ export const EnquetePrepose = props => {
     () => (!data ? undefined : enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse)),
     [enqueteReponse, data]
   );
+  const { section, step } = useMemo(() => {
+    const section = !sections ? undefined : sections[currentStep.step];
+    const step = !section ? undefined : section.steps[currentStep.substep || 0];
+    return { section, step };
+  }, [currentStep.step, currentStep.substep, sections]);
+
+  const {
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    saveAndNavigate,
+    confirmExitInvalidFormDialog
+  } = useEnqueteContext({
+    currentStep,
+    section,
+    navigateToStep,
+    sections
+  });
 
   if (loading) {
     return <Box mt={4}>Chargement...</Box>;
@@ -37,11 +56,8 @@ export const EnquetePrepose = props => {
     );
   }
 
-  const section = sections[currentStep.step];
-  const step = section.steps[currentStep.substep || 0];
-
   if (!step || !section) {
-    goToStep({ step: 0, substep: 0 });
+    onClickLink({ step: 0, substep: 0 });
     return <Box mt={4}>Redirection...</Box>;
   }
   const ComponentForm = step.component;
@@ -66,23 +82,29 @@ export const EnquetePrepose = props => {
   return (
     <Flex>
       <Box>
-        <MenuStepper sections={sections} currentStep={currentStep} goToStep={goToStep} />
+        <MenuStepper
+          sections={sections}
+          currentStep={currentStep}
+          onClickLink={x => saveAndNavigate(x)}
+        />
       </Box>
       <Box py={"50px"} px={"35px"} flex={1}>
         <ComponentForm
           enquete={enquete}
           enqueteReponse={enqueteReponse}
+          userId={userId}
           section={section}
           step={step}
-          userId={userId}
-          goToPrevPage={() => goToPrevPage(sections, currentStep)}
-          goToNextPage={() => goToNextPage(sections, currentStep)}
+          enqueteContext={enqueteContext}
+          dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
+          goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}
         />
+        <EnqueteConfirmExitInvalidFormDialog {...confirmExitInvalidFormDialog} />
       </Box>
     </Flex>
   );
 
-  async function goToStep({ step, substep }) {
+  async function onClickLink({ step, substep }) {
     await router.push("/mandataires/enquetes/[enquete_id]", {
       pathname: `/mandataires/enquetes/${enqueteId}`,
       query: { step, substep }
@@ -90,24 +112,16 @@ export const EnquetePrepose = props => {
     window.scrollTo(0, 0);
   }
 
-  async function goToNextPage(sections, currentStep) {
-    const { step, substep } = currentStep;
-    const currentSection = sections[step];
-
-    if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
-      await goToStep({ step: step + 1, substep: 0 });
-    } else {
-      await goToStep({ step, substep: substep + 1 });
+  async function navigateToStep({ step, substep }) {
+    if (step === undefined || substep === undefined) {
+      return;
     }
-  }
-
-  async function goToPrevPage(sections, currentStep) {
-    const { step, substep } = currentStep;
-    if (substep > 0) {
-      await goToStep({ step, substep: substep - 1 });
-    } else if (currentStep.step - 1 >= 0) {
-      const substep = sections[currentStep.step - 1].steps.length;
-      await goToStep({ step: currentStep.step - 1, substep: substep - 1 });
+    if (step !== currentStep.step || substep !== currentStep.substep) {
+      await router.push("/mandataires/enquetes/[enquete_id]", {
+        pathname: `/mandataires/enquetes/${enqueteId}`,
+        query: { step, substep }
+      });
+      window.scrollTo(0, 0);
     }
   }
 };

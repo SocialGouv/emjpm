@@ -1,7 +1,6 @@
 import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
@@ -9,6 +8,7 @@ import { findOption } from "../../../util/option/OptionUtil";
 import { SmallInput } from "../../Commons/SmallInput";
 import { PERSONNALITE_JURIDIQUE } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 const validationSchema = yup.object().shape({
   departement: yup.string().required(),
@@ -22,7 +22,7 @@ const validationSchema = yup.object().shape({
   etablissement_convention_groupement: yup.number().min(0)
 });
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     departement: data.departement || "",
     region: data.region || "",
@@ -51,38 +51,37 @@ function getEtablissementsCount(values) {
 }
 
 export const EnquetePreposeModaliteExerciceInformationsForm = props => {
-  const { goToPrevPage, loading = false, data = {}, step } = props;
   const {
-    handleSubmit,
-    submitCount,
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
+
+  const {
+    submitForm,
     handleChange,
+    setFieldValue,
     handleBlur,
     values,
     errors,
-    setValues,
-    setFieldValue
-  } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
-    initialValues: mapDataPropsToFormValues(data),
-    validationSchema
+    showError,
+    submit
+  } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    loading
   });
 
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
-
-  console.log("errors", errors);
-
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Modalité d'exercice"}
       </Heading1>
@@ -294,7 +293,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
           </Flex>
         </Box>
 
-        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons submit={submit} disabled={loading} />
       </Box>
     </form>
   );

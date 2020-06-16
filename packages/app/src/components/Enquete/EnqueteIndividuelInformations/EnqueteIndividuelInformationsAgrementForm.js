@@ -1,7 +1,6 @@
 import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
@@ -9,6 +8,7 @@ import yup from "../../../lib/validationSchemas/yup";
 import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_AGREMENTS_FORMATIONS } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 // schema identique à enqueteAgrementsFormationsStatus (côté hasura actions)
 export const validationSchema = yup.object().shape({
@@ -32,7 +32,7 @@ export const validationSchema = yup.object().shape({
     .required()
 });
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     debut_activite_avant_2009: data.debut_activite_avant_2009 || false,
     annee_agrement: data.annee_agrement || "",
@@ -43,34 +43,36 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsAgrementForm = props => {
-  const { data = {}, step, goToPrevPage } = props;
   const {
-    handleSubmit,
-    submitCount,
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
+
+  const {
+    submitForm,
     handleChange,
     values,
     errors,
-    setValues,
-    setFieldValue
-  } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
+    setFieldValue,
+    showError,
+    submit
+  } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
     validationSchema,
-    initialValues: mapDataPropsToFormValues(data)
+    dataToForm,
+    loading
   });
 
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Vos informations"}
       </Heading1>
@@ -183,7 +185,7 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
             fieldId="nb_mesures_dep_autres"
           />
         </Field>
-        <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons submit={submit} disabled={loading} />
       </Box>
     </form>
   );

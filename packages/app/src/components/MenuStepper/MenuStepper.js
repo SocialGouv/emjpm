@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import styles from "./style";
 
 export const MenuStepper = props => {
-  const { sections, currentStep, goToStep } = props;
+  const { sections, currentStep, onClickLink } = props;
 
   return (
     <Fragment>
@@ -21,7 +21,7 @@ export const MenuStepper = props => {
                 menuSection,
                 index,
                 isActiveSesion,
-                goToStep,
+                onClickLink,
                 hasSectionError
               })}
 
@@ -43,7 +43,7 @@ export const MenuStepper = props => {
                       subsectionIndex,
                       isActiveSubSection,
                       step,
-                      goToStep
+                      onClickLink
                     });
                   })}
                 </Box>
@@ -55,7 +55,7 @@ export const MenuStepper = props => {
     </Fragment>
   );
 };
-function renderSectionTitle({ menuSection, index, isActiveSesion, goToStep, hasSectionError }) {
+function renderSectionTitle({ menuSection, index, isActiveSesion, onClickLink, hasSectionError }) {
   return (
     <Fragment>
       <Flex
@@ -69,7 +69,7 @@ function renderSectionTitle({ menuSection, index, isActiveSesion, goToStep, hasS
           cursor: "pointer"
         }}
         alignItems="center"
-        onClick={() => goToStep({ step: index, substep: 0 })}
+        onClick={() => onClickLink({ step: index, substep: 0 })}
       >
         <Flex
           sx={{
@@ -90,11 +90,11 @@ function renderSectionTitle({ menuSection, index, isActiveSesion, goToStep, hasS
     </Fragment>
   );
 }
-function renderSubSection({ index, subsectionIndex, isActiveSubSection, step, goToStep }) {
+function renderSubSection({ index, subsectionIndex, isActiveSubSection, step, onClickLink }) {
   return (
     <Flex
       alignItems="center"
-      onClick={() => goToStep({ step: index, substep: subsectionIndex })}
+      onClick={() => onClickLink({ step: index, substep: subsectionIndex })}
       key={`${step.label}_${index}`}
       sx={{
         color: isActiveSubSection ? "#007AD9" : step.status === "empty" ? "#979797" : "#555555",

@@ -1,10 +1,10 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Text } from "rebass";
 
 import yup from "../../../../lib/validationSchemas/yup";
 import { EnqueteStepperButtons } from "../../EnqueteStepperButtons";
+import { useEnqueteForm } from "../../useEnqueteForm.hook";
 import { buildMesureGroupsAttributes } from "./buildMesureGroupsAttributes";
 import { EnqueteActiviteFormGroupMesures } from "./EnqueteActiviteFormGroupMesures";
 
@@ -17,7 +17,7 @@ const strongStyle = {
 // validation identique à celle de enqueteActiviteStatus
 const validationSchema = yup.object(buildMesureGroupsAttributes(["etablissement", "domicile"]));
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     etablissementDebutAnnee: data.etablissementDebutAnnee || "",
     etablissementFinAnnee: data.etablissementFinAnnee || "",
@@ -30,7 +30,7 @@ function mapDataPropsToFormValues(data) {
   };
 }
 
-function mapFormValuesToSubmit(data) {
+function formToData(data) {
   return {
     etablissementDebutAnnee: parseIntToSubmit(data.etablissementDebutAnnee),
     etablissementFinAnnee: parseIntToSubmit(data.etablissementFinAnnee),
@@ -48,32 +48,34 @@ function mapFormValuesToSubmit(data) {
 }
 
 export const EnqueteActiviteEtablissementDomicileForm = props => {
-  const { goToPrevPage, title, loading, step, data = {} } = props;
+  const {
+    title,
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
 
-  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(mapFormValuesToSubmit(values));
-      setSubmitting(false);
-    },
-    initialValues: mapDataPropsToFormValues(data),
-    validationSchema
+  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    formToData,
+    loading
   });
-
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
 
   const totalDebutAnnee = (values.etablissementDebutAnnee || 0) + (values.domicileDebutAnnee || 0);
 
   const totalFinAnnee = (values.etablissementFinAnnee || 0) + (values.domicileFinAnnee || 0);
 
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Votre activité"}
       </Heading1>
@@ -109,7 +111,7 @@ export const EnqueteActiviteEtablissementDomicileForm = props => {
         <Text sx={strongStyle}>{totalFinAnnee}</Text> mesures au 31/12/2019.
       </Box>
 
-      <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+      <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
 };

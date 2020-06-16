@@ -17,7 +17,7 @@ function mapNiveauQualifications(data) {
   };
 }
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     nb_preposes_homme: data.nb_preposes_homme ? parseIntValue(data.nb_preposes_homme) : "",
     nb_preposes_femme: data.nb_preposes_femme ? parseIntValue(data.nb_preposes_femme) : "",
@@ -29,5 +29,5 @@ function mapDataPropsToFormValues(data) {
   };
 }
 export const enquetePreposePersonnelFormationAutresFormMapper = {
-  mapDataPropsToFormValues
+  dataToForm
 };
