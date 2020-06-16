@@ -44,19 +44,20 @@ export const EnquetePreposeSubmit = (props) => {
                 <strong>{format(new Date(enquete.date_fin), "dd/MM/yyyy")}</strong>.
               </Text>
             )}
-            <Button
-              marginTop={4}
-              loading={loading}
-              onClick={async () => {
-                await submitEnquetePrepose({
-                  variables: {
-                    id: enquete_reponse_ids.id,
-                  },
-                });
-              }}
-            >
-              Envoyer
-            </Button>
+            {loading === false && (
+              <Button
+                marginTop={4}
+                onClick={async () => {
+                  await submitEnquetePrepose({
+                    variables: {
+                      id: enquete_reponse_ids.id,
+                    },
+                  });
+                }}
+              >
+                Envoyer
+              </Button>
+            )}
           </Box>
         </Box>
       )}
