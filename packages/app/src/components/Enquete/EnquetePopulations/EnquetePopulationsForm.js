@@ -1,19 +1,19 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 import { EnquetePopulationTrancheAgeField } from "./EnquetePopulationsFields";
-import { enquetePopulationsSchema } from "./enquetePopulationsSchema";
+import { enquetePopulationsSchema as validationSchema } from "./enquetePopulationsSchema";
 
 export function calculateTotal(firstProperty, secondProperty) {
   return Number(firstProperty || 0) + Number(secondProperty || 0);
 }
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     age_inf_25_ans_homme: data.age_inf_25_ans_homme || "",
     age_inf_25_ans_femme: data.age_inf_25_ans_femme || "",
@@ -43,25 +43,27 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnquetePopulationsForm = props => {
-  const { title, goToPrevPage, data, step, loading = false } = props;
+  const {
+    title,
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
 
-  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
-    validationSchema: enquetePopulationsSchema,
-    initialValues: mapDataPropsToFormValues(data)
+  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    loading
   });
 
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
   return (
     <Box
       sx={{
@@ -70,7 +72,7 @@ export const EnquetePopulationsForm = props => {
         }
       }}
       as="form"
-      onSubmit={handleSubmit}
+      onSubmit={submitForm}
     >
       <Box textAlign="center" mb={"80px"}>
         <Heading1 mb={1}>{"Populations"}</Heading1>
@@ -360,7 +362,7 @@ export const EnquetePopulationsForm = props => {
       </Flex>
 
       <Box mt={4}>
-        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons submit={submit} disabled={loading} />
       </Box>
     </Box>
   );

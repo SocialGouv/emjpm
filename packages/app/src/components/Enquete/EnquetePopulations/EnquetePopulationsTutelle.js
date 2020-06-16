@@ -9,8 +9,8 @@ import { ENQUETE_REPONSE_POPULATIONS_TUTELLE } from "./queries";
 
 export const EnquetePopulationsTutelle = props => {
   const {
-    goToPrevPage,
-    goToNextPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     userId,
     enquete: { id: enqueteId },
@@ -39,8 +39,6 @@ export const EnquetePopulationsTutelle = props => {
       }
     ]
   });
-
-  console.log("xxx data:", data);
 
   const populations = data ? data.enquete_reponses_populations_by_pk || {} : {};
   const reponsePopulations = {
@@ -80,7 +78,7 @@ export const EnquetePopulationsTutelle = props => {
           data={reponsePopulations}
           section={section}
           step={step}
-          handleSubmit={async values => {
+          onSubmit={async values => {
             const data = Object.keys(values).reduce((acc, key) => {
               if (values[key]) {
                 return {
@@ -97,9 +95,9 @@ export const EnquetePopulationsTutelle = props => {
                 ...data
               }
             });
-            await goToNextPage();
           }}
-          goToPrevPage={goToPrevPage}
+          enqueteContext={enqueteContext}
+          dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           title={"Tutelle"}
         />
       </Box>

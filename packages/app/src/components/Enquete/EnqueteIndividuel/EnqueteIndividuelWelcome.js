@@ -11,7 +11,7 @@ const textStyle = {
 };
 
 export const EnqueteIndividuelWelcome = props => {
-  const { goToNextPage, enquete } = props;
+  const { goToFirstPage, enquete } = props;
   const { id: enqueteId } = enquete;
   return (
     <Flex flexDirection="column">
@@ -24,7 +24,7 @@ export const EnqueteIndividuelWelcome = props => {
           </Text>
           <Text>Vous pouvez appuyer sur la touche tab pour passer d’un champ à un autre.</Text>
         </Flex>
-        <Button onClick={() => goToNextPage()} mx="auto">
+        <Button onClick={() => goToFirstPage()} mx="auto">
           Répondre
         </Button>
       </Flex>

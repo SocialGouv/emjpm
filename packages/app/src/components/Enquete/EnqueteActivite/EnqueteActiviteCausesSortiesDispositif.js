@@ -9,8 +9,8 @@ import { ENQUETE_CAUSES_SORTIE_DISPOSITIF } from "./queries";
 
 export const EnqueteActiviteCausesSortiesDispositif = props => {
   const {
-    goToPrevPage,
-    goToNextPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     section,
     step,
@@ -56,16 +56,16 @@ export const EnqueteActiviteCausesSortiesDispositif = props => {
         }}
         section={section}
         step={step}
-        handleSubmit={async values => {
+        onSubmit={async values => {
           await updateEnquete({
             variables: {
               id: activite_id,
               ...values
             }
           });
-          await goToNextPage();
         }}
-        goToPrevPage={goToPrevPage}
+        enqueteContext={enqueteContext}
+        dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       />
     </Box>
   );

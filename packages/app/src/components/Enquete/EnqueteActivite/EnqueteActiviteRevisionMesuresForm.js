@@ -1,12 +1,30 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Input, Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Flex } from "rebass";
 
+import yup from "../../../lib/validationSchemas/yup";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
-function mapDataPropsToFormValues(data) {
+// schéma identique à enqueteActiviteStatus côté hasura action
+const validationSchema = yup.object(
+  [
+    "revisions_main_levee",
+    "revisions_masp",
+    "revisions_reconduction",
+    "revisions_changement",
+    "revisions_autre"
+  ].reduce((acc, attrName) => {
+    acc[attrName] = yup
+      .number()
+      .positive()
+      .integer();
+    return acc;
+  }, [])
+);
+
+function dataToForm(data) {
   return {
     revisionsMainLevee: data.revisionsMainLevee || "",
     revisionsMasp: data.revisionsMasp || "",
@@ -17,27 +35,29 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteActiviteRevisionMesuresForm = props => {
-  const { goToPrevPage, data, step, loading = false } = props;
-  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
-    initialValues: mapDataPropsToFormValues(data)
+  const {
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
+
+  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    loading
   });
-
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
 
   return (
     <Box>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submitForm}>
         <Heading1 textAlign="center" mb={"80px"}>
           {"Votre activité"}
         </Heading1>
@@ -125,7 +145,7 @@ export const EnqueteActiviteRevisionMesuresForm = props => {
           <Flex flex={1 / 2} />
         </Flex>
 
-        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons submit={submit} disabled={loading} />
       </form>
     </Box>
   );

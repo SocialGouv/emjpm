@@ -6,7 +6,7 @@ import { Box, Button, Flex, Text } from "rebass";
 import { LinkButton } from "../../../components/Commons";
 
 export const EnquetePreposeWelcome = props => {
-  const { goToNextPage, enquete } = props;
+  const { goToFirstPage, enquete } = props;
   const { id: enqueteId } = enquete;
   return (
     <Flex flexDirection="column" justifyContent="center">
@@ -24,7 +24,7 @@ export const EnquetePreposeWelcome = props => {
       </Box>
 
       <Flex flexDirection="row" justifyContent="space-between" mt="80px">
-        <Button onClick={() => goToNextPage()} mx="auto">
+        <Button onClick={() => goToFirstPage()} mx="auto">
           Répondre
         </Button>
         <LinkButton

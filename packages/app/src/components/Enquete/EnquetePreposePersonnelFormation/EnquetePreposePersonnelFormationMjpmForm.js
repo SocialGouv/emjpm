@@ -1,44 +1,45 @@
 import { Field, Heading1, Heading3, Heading5, InlineError, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { Fragment, useEffect, useMemo } from "react";
+import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 import { enquetePreposePersonnelFormationMjpmFormMapper } from "./EnquetePreposePersonnelFormationMjpmFormMapper";
-import { enquetePreposePersonnelFormationMjpmFormSchema } from "./EnquetePreposePersonnelFormationMjpmFormSchema";
+import { enquetePreposePersonnelFormationMjpmFormSchema as validationSchema } from "./EnquetePreposePersonnelFormationMjpmFormSchema";
 
 export const EnquetePreposePersonnelFormationMjpmForm = props => {
-  const { goToPrevPage, loading = false, data = {}, step } = props;
   const {
-    handleSubmit,
-    submitCount,
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
+
+  const {
+    submitForm,
     handleChange,
     handleBlur,
     values,
     errors,
-    setValues
-  } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
-    initialValues: enquetePreposePersonnelFormationMjpmFormMapper.mapDataPropsToFormValues(data),
-    validationSchema: enquetePreposePersonnelFormationMjpmFormSchema
+    showError,
+    submit
+  } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm: enquetePreposePersonnelFormationMjpmFormMapper.dataToForm,
+    loading
   });
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
-
-  useEffect(() => {
-    setValues(enquetePreposePersonnelFormationMjpmFormMapper.mapDataPropsToFormValues(data));
-  }, [data, setValues]);
 
   return (
     <Box>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submitForm}>
         <Heading1 textAlign="center" mb={"80px"}>
           {"Personnel et formation"}
         </Heading1>
@@ -116,7 +117,7 @@ export const EnquetePreposePersonnelFormationMjpmForm = props => {
           </Box>
         </Box>
 
-        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons submit={submit} disabled={loading} />
       </form>
     </Box>
   );

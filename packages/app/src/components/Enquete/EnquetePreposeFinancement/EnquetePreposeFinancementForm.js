@@ -1,14 +1,14 @@
 import { Heading1, Heading3, InlineError } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     charges_personnel: data.charges_personnel || "",
     charges_preposes: data.charges_preposes || "",
@@ -61,36 +61,36 @@ const validationSchema = yup.object().shape({
 });
 
 export const EnquetePreposeFinancementForm = props => {
-  const { goToPrevPage, data = {}, loading = false, step } = props;
   const {
-    values,
-    handleSubmit,
-    submitCount,
-    handleBlur,
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
+
+  const {
+    submitForm,
     handleChange,
-    setValues,
-    errors
-  } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
-    initialValues: mapDataPropsToFormValues(data),
-    validationSchema
+    handleBlur,
+    values,
+    errors,
+    showError,
+    submit
+  } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    loading
   });
 
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => (!loading && step.status !== "empty") || submitCount !== 0, [
-    step.status,
-    submitCount,
-    loading
-  ]);
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Financement"}
       </Heading1>
@@ -243,7 +243,7 @@ export const EnquetePreposeFinancementForm = props => {
         </Flex>
       </Box>
 
-      <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+      <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
 };

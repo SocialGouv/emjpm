@@ -1,12 +1,22 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Input, Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Flex } from "rebass";
 
+import yup from "../../../lib/validationSchemas/yup";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
-function mapDataPropsToFormValues(data) {
+const validationSchema = yup.object(
+  ["sorties_main_levee", "sorties_deces", "sorties_masp"].reduce((acc, attrName) => {
+    acc[attrName] = yup
+      .number()
+      .positive()
+      .integer();
+    return acc;
+  }, [])
+);
+function dataToForm(data) {
   return {
     sortiesMainLevee: data.sortiesMainLevee || "",
     sortiesDeces: data.sortiesDeces || "",
@@ -14,7 +24,7 @@ function mapDataPropsToFormValues(data) {
   };
 }
 
-function mapFormValuesToSubmit(data) {
+function formToData(data) {
   return {
     sortiesMainLevee: parseIntToSubmit(data.sortiesMainLevee),
     sortiesDeces: parseIntToSubmit(data.sortiesDeces),
@@ -27,27 +37,30 @@ function mapFormValuesToSubmit(data) {
 }
 
 export const EnqueteActiviteCausesSortiesDispositifForm = props => {
-  const { goToPrevPage, data, step, loading = false } = props;
-  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(mapFormValuesToSubmit(values));
-      setSubmitting(false);
-    },
-    initialValues: mapDataPropsToFormValues(data)
+  const {
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
+
+  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    formToData,
+    loading
   });
-
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
 
   return (
     <Box>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={submitForm}>
         <Heading1 textAlign="center" mb={"80px"}>
           {"Votre activité"}
         </Heading1>
@@ -104,7 +117,7 @@ export const EnqueteActiviteCausesSortiesDispositifForm = props => {
           <Flex flex={1 / 2} />
         </Flex>
 
-        <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons submit={submit} disabled={loading} />
       </form>
     </Box>
   );
