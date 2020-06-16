@@ -13,7 +13,7 @@ const ENQ_REP_MODALITE_EXERCICE = {
       "Etablissement public à caractère industriel et commercial",
     organisme_prive_non_lucratif:
       "Organisme privé à but non lucratif (dont CG privés)",
-    organisme_prive_commercial: "Organisme privé à caractère commercial"
+    organisme_prive_commercial: "Organisme privé à caractère commercial",
   }),
   TYPE_ETABLISSEMENT: enqueteKeysBuilder.buildKeys({
     etablissement_personnes_agees: "Etablissement pour personnes âgées",
@@ -25,14 +25,14 @@ const ENQ_REP_MODALITE_EXERCICE = {
       "Etablissement spécialisé en psychiatrie",
     etablissement_soins_longue_duree:
       "Etablissement assurant des soins de longue durée",
-    etablissement_autre: "Autre type d'établissement hospitalier"
+    etablissement_autre: "Autre type d'établissement hospitalier",
   }),
   STATUT_ETABLISSEMENT: enqueteKeysBuilder.buildKeys({
     public: "Public",
-    private: "Privé"
-  })
+    private: "Privé",
+  }),
 };
 
 module.exports = {
-  ENQ_REP_MODALITE_EXERCICE
+  ENQ_REP_MODALITE_EXERCICE,
 };

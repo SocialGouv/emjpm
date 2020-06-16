@@ -9,12 +9,12 @@ import {
   EnqueteActiviteRevisionMesures,
   EnqueteActiviteSauvegardeJustice,
   EnqueteActiviteSubrogeTuteurCreateur,
-  EnqueteActiviteTutelle
+  EnqueteActiviteTutelle,
 } from "../EnqueteActivite";
 import {
   EnqueteIndividuelInformationsAgrement,
   EnqueteIndividuelInformationsFormation,
-  EnqueteIndividuelInformationsMandataire
+  EnqueteIndividuelInformationsMandataire,
 } from "../EnqueteIndividuelInformations";
 import { EnqueteIndividuelPrestationsSociales } from "../EnqueteIndividuelPrestationsSociales";
 import {
@@ -22,13 +22,13 @@ import {
   EnquetePopulationsCuratelle,
   EnquetePopulationsMAJ,
   EnquetePopulationsSauvegardeJustice,
-  EnquetePopulationsTutelle
+  EnquetePopulationsTutelle,
 } from "../EnquetePopulations";
 import EnqueteIndividuelSubmit from "./EnqueteIndividuelSubmit";
 import { EnqueteIndividuelWelcome } from "./EnqueteIndividuelWelcome";
 
 export const enqueteIndividuelMenuBuilder = {
-  buildMenuSections
+  buildMenuSections,
 };
 
 function buildMenuSections(enqueteReponse) {
@@ -41,9 +41,9 @@ function buildMenuSections(enqueteReponse) {
         {
           label: "Bienvenue",
           component: EnqueteIndividuelWelcome,
-          status: "valid"
-        }
-      ]
+          status: "valid",
+        },
+      ],
     },
     {
       label: "Vos informations",
@@ -52,19 +52,19 @@ function buildMenuSections(enqueteReponse) {
         {
           label: "Informations générales",
           component: EnqueteIndividuelInformationsMandataire,
-          status: status.informations.informationsGenerales
+          status: status.informations.informationsGenerales,
         },
         {
           label: "Agrément",
           component: EnqueteIndividuelInformationsAgrement,
-          status: status.informations.agrements
+          status: status.informations.agrements,
         },
         {
           label: "Formation",
           component: EnqueteIndividuelInformationsFormation,
-          status: status.informations.formation
-        }
-      ]
+          status: status.informations.formation,
+        },
+      ],
     },
     {
       label: "Votre activité",
@@ -73,59 +73,59 @@ function buildMenuSections(enqueteReponse) {
         {
           label: "Curatelle renforcée",
           component: EnqueteActiviteCuratelleRenforcee,
-          status: status.activite.curatelleRenforcee
+          status: status.activite.curatelleRenforcee,
         },
         {
           label: "Curatelle simple",
           component: EnqueteActiviteCuratelleSimple,
-          status: status.activite.curatelleSimple
+          status: status.activite.curatelleSimple,
         },
         {
           label: "Tutelle",
           component: EnqueteActiviteTutelle,
-          status: status.activite.tutelle
+          status: status.activite.tutelle,
         },
         {
           label: "Mesure d'accompagnement judiciaire",
           component: EnqueteActiviteAccompagnementJudiciaire,
-          status: status.activite.accompagnementJudiciaire
+          status: status.activite.accompagnementJudiciaire,
         },
         {
           label: "Tutelle ou curatelle aux biens",
           component: EnqueteActiviteCuratelleBiens,
-          status: status.activite.curatelleBiens
+          status: status.activite.curatelleBiens,
         },
         {
           label: "Tutelle ou curatelle à la personne",
           component: EnqueteActiviteCuratellePersonne,
-          status: status.activite.curatellePersonne
+          status: status.activite.curatellePersonne,
         },
         {
           label: "Subrogé tuteur ou curateur",
           component: EnqueteActiviteSubrogeTuteurCreateur,
-          status: status.activite.subrogeTuteurCreateur
+          status: status.activite.subrogeTuteurCreateur,
         },
         {
           label: "Sauvegarde de justice",
           component: EnqueteActiviteSauvegardeJustice,
-          status: status.activite.sauvegardeJustice
+          status: status.activite.sauvegardeJustice,
         },
         {
           label: "Mandat ad hoc majeur",
           component: EnqueteActiviteMandatHadocMajeur,
-          status: status.activite.mandatHadocMajeur
+          status: status.activite.mandatHadocMajeur,
         },
         {
           label: "Issues des révisions de mesures",
           component: EnqueteActiviteRevisionMesures,
-          status: status.activite.revisionMesures
+          status: status.activite.revisionMesures,
         },
         {
           label: "Causes des sorties du dispositif",
           component: EnqueteActiviteCausesSortiesDispositif,
-          status: status.activite.causesSortiesDispositif
-        }
-      ]
+          status: status.activite.causesSortiesDispositif,
+        },
+      ],
     },
     {
       label: "Populations",
@@ -134,29 +134,29 @@ function buildMenuSections(enqueteReponse) {
         {
           label: "Curatelle",
           component: EnquetePopulationsCuratelle,
-          status: status.populations.curatelle
+          status: status.populations.curatelle,
         },
         {
           label: "Tutelle",
           component: EnquetePopulationsTutelle,
-          status: status.populations.tutelle
+          status: status.populations.tutelle,
         },
         {
           label: "Mesure d'accompagnement de justice",
           component: EnquetePopulationsMAJ,
-          status: status.populations.accompagnementJudiciaire
+          status: status.populations.accompagnementJudiciaire,
         },
         {
           label: "Sauvegarde de justice",
           component: EnquetePopulationsSauvegardeJustice,
-          status: status.populations.sauvegardeJustice
+          status: status.populations.sauvegardeJustice,
         },
         {
           label: "Autre",
           component: EnquetePopulationsAutreMesures,
-          status: status.populations.autresMesures
-        }
-      ]
+          status: status.populations.autresMesures,
+        },
+      ],
     },
     {
       label: "Prestations sociales",
@@ -165,9 +165,9 @@ function buildMenuSections(enqueteReponse) {
         {
           label: "Prestations sociales",
           component: EnqueteIndividuelPrestationsSociales,
-          status: status.prestationsSociales.global
-        }
-      ]
+          status: status.prestationsSociales.global,
+        },
+      ],
     },
     {
       status: status.global === "valid" ? "valid" : "empty",
@@ -175,9 +175,9 @@ function buildMenuSections(enqueteReponse) {
         {
           label: "Envoi de vos réponses",
           component: EnqueteIndividuelSubmit,
-          status: status.global === "valid" ? "valid" : "empty"
-        }
-      ]
-    }
+          status: status.global === "valid" ? "valid" : "empty",
+        },
+      ],
+    },
   ];
 }

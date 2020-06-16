@@ -1,4 +1,4 @@
-import { css,Global } from '@emotion/core';
+import { css, Global } from '@emotion/core';
 import emotionNormalize from 'emotion-normalize/src';
 import React from 'react';
 

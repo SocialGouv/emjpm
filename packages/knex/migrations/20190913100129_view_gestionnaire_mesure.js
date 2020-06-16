@@ -1,4 +1,4 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   await knex.raw(`
 DROP VIEW IF EXISTS view_department_availability
   `);
@@ -46,7 +46,7 @@ CREATE VIEW view_department_availability AS
     `);
 };
 
-exports.down = async function(knex) {
+exports.down = async function (knex) {
   await knex.raw(`
 DROP VIEW IF EXISTS view_department_availability
   `);

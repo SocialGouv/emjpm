@@ -5,7 +5,7 @@ var {
   enqueteExcelParserPreposePersonnelFormation,
   enqueteExcelParserPreposePrestationsSociales,
   enqueteExcelParserFinancement,
-  enqueteExcelParserActivite
+  enqueteExcelParserActivite,
 } = require("../common/excel-parser");
 
 var HttpError = require("../../../../utils/error/HttpError");
@@ -17,7 +17,7 @@ const parse = async ({ content }) => {
     dateNF: "dd/mm/yyyy",
     locale: "fr-FR",
     type: "base64",
-    raw: false
+    raw: false,
   });
 
   // vérification du nom des onglets
@@ -29,7 +29,7 @@ const parse = async ({ content }) => {
     "Populations ", // espace final dans le nom de l'onglet
     "Revenus- prestations sociales ", // espace final dans le nom de l'onglet
     "Financement",
-    "Données à exporter"
+    "Données à exporter",
   ]);
 
   const res = {
@@ -50,7 +50,7 @@ const parse = async ({ content }) => {
     ),
     financement: enqueteExcelParserFinancement.parse(
       workbook.Sheets["Financement"]
-    )
+    ),
   };
 
   logger.info(
@@ -61,12 +61,12 @@ const parse = async ({ content }) => {
 };
 
 function checkRequiredTabs(workbook, tabNames) {
-  tabNames.forEach(tabName => {
+  tabNames.forEach((tabName) => {
     if (!workbook.Sheets[tabName]) {
       logger.warn(
         `[IMPORT ENQUETE] Onglet "${tabName}" manquant - onglets présents: ${Object.keys(
           workbook.Sheets
-        ).map(x => `"${x}"`)}`
+        ).map((x) => `"${x}"`)}`
       );
 
       throw new HttpError(422, `Onglet "${tabName}" manquant`);
@@ -75,5 +75,5 @@ function checkRequiredTabs(workbook, tabNames) {
 }
 
 module.exports = {
-  parse
+  parse,
 };

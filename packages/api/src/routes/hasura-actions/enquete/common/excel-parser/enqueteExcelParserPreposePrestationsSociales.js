@@ -13,7 +13,7 @@ function parse(ws) {
     tranche8: parser.integer(ws["D13"]),
     tranche9: parser.integer(ws["D14"]),
     tranche10: parser.integer(ws["D15"]),
-    tranche11: parser.integer(ws["D16"])
+    tranche11: parser.integer(ws["D16"]),
   };
 
   const curatelle_simple = {
@@ -27,7 +27,7 @@ function parse(ws) {
     tranche8: parser.integer(ws["E13"]),
     tranche9: parser.integer(ws["E14"]),
     tranche10: parser.integer(ws["E15"]),
-    tranche11: parser.integer(ws["E16"])
+    tranche11: parser.integer(ws["E16"]),
   };
 
   const curatelle_renforcee = {
@@ -41,7 +41,7 @@ function parse(ws) {
     tranche8: parser.integer(ws["F13"]),
     tranche9: parser.integer(ws["F14"]),
     tranche10: parser.integer(ws["F15"]),
-    tranche11: parser.integer(ws["F16"])
+    tranche11: parser.integer(ws["F16"]),
   };
 
   const sauvegarde_autres_mesures = {
@@ -55,7 +55,7 @@ function parse(ws) {
     tranche8: parser.integer(ws["G13"]),
     tranche9: parser.integer(ws["G14"]),
     tranche10: parser.integer(ws["G15"]),
-    tranche11: parser.integer(ws["G16"])
+    tranche11: parser.integer(ws["G16"]),
   };
 
   const maj = {
@@ -69,7 +69,7 @@ function parse(ws) {
     tranche8: parser.integer(ws["H13"]),
     tranche9: parser.integer(ws["H14"]),
     tranche10: parser.integer(ws["H15"]),
-    tranche11: parser.integer(ws["H16"])
+    tranche11: parser.integer(ws["H16"]),
   };
 
   return {
@@ -84,10 +84,10 @@ function parse(ws) {
     rsa: parser.integer(ws["D25"]),
     als_apl: parser.integer(ws["D26"]),
     aspa: parser.integer(ws["D27"]),
-    apa: parser.integer(ws["D28"])
+    apa: parser.integer(ws["D28"]),
   };
 }
 
 module.exports = {
-  parse
+  parse,
 };

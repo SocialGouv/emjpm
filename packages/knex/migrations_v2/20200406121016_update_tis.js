@@ -16,22 +16,19 @@ function getRegionCode(zipcode) {
   }
 }
 
-exports.up = async knex => {
+exports.up = async (knex) => {
   const geoloc = await knex("geolocalisation_code_postal");
   const departments = await knex("departements");
   const tis = await knex("tis");
-  const existingTribunaux = tribunaux.filter(item =>
-    tis.some(t => t.siret == item.siret)
+  const existingTribunaux = tribunaux.filter((item) =>
+    tis.some((t) => t.siret == item.siret)
   );
   const missingTribunaux = tribunaux.filter(
-    item => !tis.some(t => t.siret == item.siret)
+    (item) => !tis.some((t) => t.siret == item.siret)
   );
 
-  await knex.schema.alterTable("tis", table => {
-    table
-      .boolean("immutable")
-      .defaultTo(false)
-      .notNullable();
+  await knex.schema.alterTable("tis", (table) => {
+    table.boolean("immutable").defaultTo(false).notNullable();
 
     table.string("address2").nullable();
     table.timestamp("updated_at").nullable();
@@ -41,11 +38,11 @@ exports.up = async knex => {
     table.string("type").nullable();
   });
 
-  await knex.transaction(async trx => {
+  await knex.transaction(async (trx) => {
     // INSERT MISSING TIS
 
     for (var tribunal of missingTribunaux) {
-      const position = geoloc.find(i => i.insee == tribunal.insee);
+      const position = geoloc.find((i) => i.insee == tribunal.insee);
 
       const tribunalToCreate = {
         etablissement: tribunal.name,
@@ -60,7 +57,7 @@ exports.up = async knex => {
         date_fermeture: tribunal.closingDate,
         date_modification: tribunal.modificationDate,
         immutable: true,
-        type: tribunal.type
+        type: tribunal.type,
       };
 
       if (!position) {
@@ -72,13 +69,10 @@ exports.up = async knex => {
         tribunalToCreate.ville = cities;
         tribunalToCreate.code_postal = code_postal;
         const regionCode = getRegionCode(code_postal);
-        const departement = departments.find(i => i.code == regionCode);
+        const departement = departments.find((i) => i.code == regionCode);
         tribunalToCreate.departement_id = departement ? departement.id : null;
 
-        await knex
-          .insert(tribunalToCreate)
-          .into("tis")
-          .transacting(trx);
+        await knex.insert(tribunalToCreate).into("tis").transacting(trx);
 
         console.log(`> Insertion tis`);
       }
@@ -95,7 +89,7 @@ exports.up = async knex => {
         address2: existingTribunal.address2,
         updated_at: knex.fn.now(),
         immutable: true,
-        type: existingTribunal.type
+        type: existingTribunal.type,
       };
 
       await knex("tis")
@@ -108,8 +102,8 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async knex => {
-  await knex.schema.alterTable("tis", table => {
+exports.down = async (knex) => {
+  await knex.schema.alterTable("tis", (table) => {
     table.dropColumn("immutable");
     table.dropColumn("address2");
     table.dropColumn("updated_at");

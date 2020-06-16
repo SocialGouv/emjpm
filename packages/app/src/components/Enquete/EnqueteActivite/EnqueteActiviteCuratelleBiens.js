@@ -9,7 +9,7 @@ import { ENQUETE_CURATELLE_BIENS } from "./queries";
 
 const PREFIX = "curatelle_biens";
 
-export const EnqueteActiviteCuratelleBiens = props => {
+export const EnqueteActiviteCuratelleBiens = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -17,30 +17,30 @@ export const EnqueteActiviteCuratelleBiens = props => {
     section,
     step,
     userId,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { activite_id }
+    enquete_reponse_ids: { activite_id },
   } = enqueteReponse;
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_CURATELLE_BIENS,
         variables: {
-          id: activite_id
-        }
-      }
-    ]
+          id: activite_id,
+        },
+      },
+    ],
   });
   const { data, loading } = useQuery(ENQUETE_CURATELLE_BIENS, {
     variables: {
-      id: activite_id
-    }
+      id: activite_id,
+    },
   });
 
   const normalizedData = useMemo(() => {
@@ -54,7 +54,7 @@ export const EnqueteActiviteCuratelleBiens = props => {
       etablissementMesuresNouvelles: r[`${PREFIX}_etablissement_mesures_nouvelles`],
       etablissementSortieMesures: r[`${PREFIX}_etablissement_sortie_mesures`],
       domicileMesuresNouvelles: r[`${PREFIX}_domicile_mesures_nouvelles`],
-      domicileSortieMesures: r[`${PREFIX}_domicile_sortie_mesures`]
+      domicileSortieMesures: r[`${PREFIX}_domicile_sortie_mesures`],
     };
   }, [data]);
 
@@ -65,12 +65,12 @@ export const EnqueteActiviteCuratelleBiens = props => {
         data={normalizedData}
         section={section}
         step={step}
-        onSubmit={async values => {
+        onSubmit={async (values) => {
           await updateEnquete({
             variables: {
               id: activite_id,
-              ...values
-            }
+              ...values,
+            },
           });
         }}
         enqueteContext={enqueteContext}

@@ -1,13 +1,13 @@
 const zipCodes = require("../seeds/postal_raw.json");
 
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   if (process.env.NODE_ENV === "test") {
     return Promise.resolve();
   }
   await knex.raw(`
 truncate geolocalisation_code_postal;
     `);
-  const newRows = zipCodes.map(row => {
+  const newRows = zipCodes.map((row) => {
     let lat = 48.8534;
     let long = 2.3488;
     if (row.fields.coordonnees_gps) {
@@ -20,7 +20,7 @@ truncate geolocalisation_code_postal;
       code_postal: row.fields.code_postal,
       latitude: lat,
       longitude: long,
-      cities: row.fields.nom_de_la_commune
+      cities: row.fields.nom_de_la_commune,
     };
   });
   for (const row of newRows) {
@@ -32,6 +32,6 @@ insert into geolocalisation_code_postal (code_postal, insee, latitude, longitude
   return Promise.resolve();
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

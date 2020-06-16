@@ -32,7 +32,7 @@ const LabelStyle = (props) => {
     },
     fontSize: '4',
     fontWeight: '600',
-    padding: "6",
+    padding: '6',
     textAlign: 'center',
     zIndex: 0,
   };

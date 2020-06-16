@@ -1,5 +1,5 @@
 const {
-  GeolocalisationCodePostal
+  GeolocalisationCodePostal,
 } = require("../../../../../models/GeolocalisationCodePostal");
 const getRegionCode = require("../../../../../utils/getRegionCode");
 const { Department } = require("../../../../../models/Departments");
@@ -12,12 +12,12 @@ const getGeoDatas = async (code_postal, ville) => {
     return {};
   }
   const geoDatas = await GeolocalisationCodePostal.query().where({
-    code_postal
+    code_postal,
   });
   if (!geoDatas.length) {
     return {};
   }
-  let geoData = geoDatas.find(el => el.ville === ville.toUpperCase().trim());
+  let geoData = geoDatas.find((el) => el.ville === ville.toUpperCase().trim());
   if (!geoData) {
     geoData = geoDatas[0];
   }
@@ -35,7 +35,7 @@ const findDepartmentFromPostalCode = async (
     department = departmentByRegionCode[regionCode];
     if (!department) {
       department = await Department.query().findOne({
-        code: regionCode
+        code: regionCode,
       });
     }
   }
@@ -46,7 +46,7 @@ async function findDepartment({
   mandataire,
   service,
   code_postal,
-  cache: { departmentById, departmentByRegionCode }
+  cache: { departmentById, departmentByRegionCode },
 }) {
   const department_id = mandataire
     ? mandataire.department_id
@@ -72,7 +72,7 @@ async function findDepartment({
 
 const actionsMesuresImporterGeoRepository = {
   getGeoDatas,
-  findDepartment
+  findDepartment,
 };
 
 module.exports = actionsMesuresImporterGeoRepository;

@@ -7,7 +7,7 @@ import { FiltersContextProvider } from "../../src/components/DirectionFilters/co
 import {
   ClosedMesureIndicator,
   NewMesureIndicator,
-  OpenMesureIndicator
+  OpenMesureIndicator,
 } from "../../src/components/DirectionIndicators";
 import { MesureAllocation } from "../../src/components/DirectionMesureAllocation";
 import { MesureEvolution } from "../../src/components/DirectionMesureEvolution";

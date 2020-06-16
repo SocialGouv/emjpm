@@ -30,5 +30,5 @@ const editorConfirmationAdminEmail = async (email, name) => {
 };
 
 module.exports = {
-  editorConfirmationAdminEmail
+  editorConfirmationAdminEmail,
 };

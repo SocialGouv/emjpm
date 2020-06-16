@@ -10,10 +10,10 @@ exports.getJwks = async (req, res) => {
     ...rasha.importSync({ pem: jwtConfig.publicKey }),
     alg: "RS256",
     use: "sig",
-    kid: jwtConfig.publicKey
+    kid: jwtConfig.publicKey,
   };
   const jwks = {
-    keys: [jwk]
+    keys: [jwk],
   };
   res.setHeader("Content-Type", "application/json");
   return res.status(200).json(jwks);

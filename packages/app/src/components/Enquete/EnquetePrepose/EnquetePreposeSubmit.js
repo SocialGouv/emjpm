@@ -7,7 +7,7 @@ import { Box, Flex, Text } from "rebass";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { SUBMIT_ENQUETE_PREPOSE } from "./mutations";
 
-export const EnquetePreposeSubmit = props => {
+export const EnquetePreposeSubmit = (props) => {
   const { enquete, enqueteReponse, userId } = props;
   const hasError = enqueteReponse.enquete_reponse_status.global !== "valid";
   const { enquete_reponse_ids } = enqueteReponse;
@@ -16,9 +16,9 @@ export const EnquetePreposeSubmit = props => {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId: enquete.id, userId }
-      }
-    ]
+        variables: { enqueteId: enquete.id, userId },
+      },
+    ],
   });
 
   return (
@@ -50,8 +50,8 @@ export const EnquetePreposeSubmit = props => {
               onClick={async () => {
                 await submitEnquetePrepose({
                   variables: {
-                    id: enquete_reponse_ids.id
-                  }
+                    id: enquete_reponse_ids.id,
+                  },
                 });
               }}
             >

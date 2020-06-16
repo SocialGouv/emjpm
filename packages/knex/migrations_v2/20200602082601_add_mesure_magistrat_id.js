@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.alterTable("mesures", function(table) {
+exports.up = function (knex) {
+  return knex.schema.alterTable("mesures", function (table) {
     table
       .integer("magistrat_id")
       .references("id")
@@ -8,8 +8,8 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
-  return knex.schema.alterTable("mesures", function(table) {
+exports.down = function (knex) {
+  return knex.schema.alterTable("mesures", function (table) {
     table.dropColumn("magistrat_id");
   });
 };

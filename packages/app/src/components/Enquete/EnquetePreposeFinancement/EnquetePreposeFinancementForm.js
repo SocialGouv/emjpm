@@ -16,16 +16,13 @@ function dataToForm(data) {
     produits_bareme_prelevements: data.produits_bareme_prelevements || "",
     autre_produits: data.autre_produits || "",
     financement_public: data.financement_public || "",
-    aide_sociale_conseil_departemental: data.aide_sociale_conseil_departemental || ""
+    aide_sociale_conseil_departemental: data.aide_sociale_conseil_departemental || "",
   };
 }
 
 // schéma identique à enquetePreposeFinancementStatus côté hasura action
 const validationSchema = yup.object().shape({
-  charges_personnel: yup
-    .number()
-    .min(0)
-    .nullable(),
+  charges_personnel: yup.number().min(0).nullable(),
   charges_preposes: yup
     .number()
     .min(0)
@@ -33,41 +30,26 @@ const validationSchema = yup.object().shape({
     .test(
       "charges-preposes-personnel",
       "La valeur de charges préposés ne peut être supérieure à la charge personnel total.",
-      function(value) {
+      function (value) {
         const chargePersonnel = this.parent["charges_personnel"] | 0;
         return chargePersonnel >= (value | 0);
       }
     ),
-  charges_fonctionnement: yup
-    .number()
-    .min(0)
-    .nullable(),
-  produits_bareme_prelevements: yup
-    .number()
-    .min(0)
-    .nullable(),
-  autre_produits: yup
-    .number()
-    .min(0)
-    .nullable(),
-  financement_public: yup
-    .number()
-    .min(0)
-    .nullable(),
-  aide_sociale_conseil_departemental: yup
-    .number()
-    .min(0)
-    .nullable()
+  charges_fonctionnement: yup.number().min(0).nullable(),
+  produits_bareme_prelevements: yup.number().min(0).nullable(),
+  autre_produits: yup.number().min(0).nullable(),
+  financement_public: yup.number().min(0).nullable(),
+  aide_sociale_conseil_departemental: yup.number().min(0).nullable(),
 });
 
-export const EnquetePreposeFinancementForm = props => {
+export const EnquetePreposeFinancementForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const {
@@ -77,7 +59,7 @@ export const EnquetePreposeFinancementForm = props => {
     values,
     errors,
     showError,
-    submit
+    submit,
   } = useEnqueteForm({
     onSubmit,
     enqueteContext,
@@ -86,7 +68,7 @@ export const EnquetePreposeFinancementForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
 
   return (

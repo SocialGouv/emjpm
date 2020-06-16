@@ -6,7 +6,7 @@ import { EnqueteIndividuelInformationsFormationForm } from "./EnqueteIndividuelI
 import { UPDATE_ENQUETE_INFORMATIONS_FORMATION } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION } from "./queries";
 
-export const EnqueteIndividuelInformationsFormation = props => {
+export const EnqueteIndividuelInformationsFormation = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -14,29 +14,29 @@ export const EnqueteIndividuelInformationsFormation = props => {
     userId,
     section,
     step,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { agrements_formations_id }
+    enquete_reponse_ids: { agrements_formations_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION, {
     variables: {
-      id: agrements_formations_id
-    }
+      id: agrements_formations_id,
+    },
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INFORMATIONS_FORMATION, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION,
-        variables: { id: agrements_formations_id }
-      }
-    ]
+        variables: { id: agrements_formations_id },
+      },
+    ],
   });
 
   return loading ? null : (
@@ -46,7 +46,7 @@ export const EnqueteIndividuelInformationsFormation = props => {
       data={data ? data.enquete_reponses_agrements_formations_by_pk || {} : {}}
       section={section}
       step={step}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         await updateEnquete({
           variables: {
             id: agrements_formations_id,
@@ -76,8 +76,8 @@ export const EnqueteIndividuelInformationsFormation = props => {
               : null,
             secretaire_specialise_etp_n6: values.secretaire_specialise_etp_n6
               ? Number(values.secretaire_specialise_etp_n6)
-              : null
-          }
+              : null,
+          },
         });
       }}
     />

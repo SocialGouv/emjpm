@@ -12,7 +12,7 @@ const AddUser = () => {
         <Heading1>Toutes vos mesures</Heading1>
         <Flex
           sx={{
-            flexWrap: "wrap"
+            flexWrap: "wrap",
           }}
         >
           <Box
@@ -20,7 +20,7 @@ const AddUser = () => {
               flexBasis: 0,
               flexGrow: 99999,
               minWidth: 320,
-              p: 3
+              p: 3,
             }}
           >
             Mesures list
@@ -29,7 +29,7 @@ const AddUser = () => {
             sx={{
               flexBasis: 256,
               flexGrow: 1,
-              p: 3
+              p: 3,
             }}
           >
             map and other stuff

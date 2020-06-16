@@ -1,8 +1,8 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.dropTable("mesures_import");
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
   CREATE TABLE public.mesures_import (
     id serial NOT NULL,

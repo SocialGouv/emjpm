@@ -9,14 +9,14 @@ import { LB_SUMMARY } from "./queries";
 const boxStyle = {
   // borderBottom: "1px solid",
   // borderBottomColor: "mediumGray",
-  mb: "1"
+  mb: "1",
 };
 
 const labelStyle = {
   color: "mediumGray",
   fontFamily: "body",
   fontSize: "12px",
-  fontWeight: "700"
+  fontWeight: "700",
 };
 
 const valueStyle = {
@@ -25,7 +25,7 @@ const valueStyle = {
   fontWeight: "600",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
 };
 
 const LabelValue = ({ label, value }) => (
@@ -42,8 +42,8 @@ const ListeBlancheSummary = () => {
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
-      departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null
-    }
+      departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null,
+    },
   });
 
   if (loading) {
@@ -66,11 +66,11 @@ const ListeBlancheSummary = () => {
 
   const {
     individuel: {
-      aggregate: { count: individuelCount }
+      aggregate: { count: individuelCount },
     },
     prepose: {
-      aggregate: { count: preposeCount }
-    }
+      aggregate: { count: preposeCount },
+    },
   } = data;
 
   return (

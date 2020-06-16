@@ -1,10 +1,7 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("api_logs", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("api_logs", function (table) {
     table.increments();
-    table
-      .integer("editor_id")
-      .references("id")
-      .inTable("editors");
+    table.integer("editor_id").references("id").inTable("editors");
     table.string("token", 1200);
     table.string("request_url");
     table.string("request_method");
@@ -14,6 +11,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("api_logs");
 };

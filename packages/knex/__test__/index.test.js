@@ -17,7 +17,7 @@ test("should list all tables", async () => {
     WHERE table_schema = current_schema() AND table_catalog = ?
   `;
   const results = await knex.raw(query, [knex.client.database()]);
-  expect(results.rows.map(row => row.table_name).sort()).toMatchSnapshot();
+  expect(results.rows.map((row) => row.table_name).sort()).toMatchSnapshot();
 });
 
 // !
@@ -38,7 +38,7 @@ const tables = JSON.parse(
     .replace(",\n]", "]") // 'cause snapshots have trailing comas and JSON.parse doesn't like it.
 );
 
-test.each(tables.map(name => [name]))("%s table schema", async name => {
+test.each(tables.map((name) => [name]))("%s table schema", async (name) => {
   expect(await knex.table(name).columnInfo()).toMatchSnapshot();
 });
 
@@ -50,7 +50,8 @@ test("should rollback to nothing", async () => {
     WHERE table_schema = current_schema() AND table_catalog = ?
   `;
   const results = await knex.raw(query, [knex.client.database()]);
-  expect(results.rows.map(row => row.table_name).sort()).toMatchInlineSnapshot(`
+  expect(results.rows.map((row) => row.table_name).sort())
+    .toMatchInlineSnapshot(`
 Array [
   "knex_migrations_v2",
   "knex_migrations_v2_lock",

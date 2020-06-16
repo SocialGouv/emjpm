@@ -1,5 +1,7 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("service_member_invitations", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("service_member_invitations", function (
+    table
+  ) {
     table.increments();
     table.string("email").notNullable();
     table.string("token");
@@ -14,6 +16,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw("DROP TABLE service_member_invitations CASCADE");
 };

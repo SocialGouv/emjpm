@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
 create view view_mesure_gestionnaire_tis AS
   select concat(u.type,'-',m.id) id
@@ -17,7 +17,7 @@ union
   `);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
 drop view view_mesure_gestionnaire_tis;
   `);

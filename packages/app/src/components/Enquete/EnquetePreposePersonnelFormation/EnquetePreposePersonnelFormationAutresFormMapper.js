@@ -2,7 +2,7 @@ import { parseFloatValue, parseIntValue } from "../../../util";
 function mapNbPreposeNombrePreposesParNiveauQualificationFromForm(data) {
   return {
     nb_preposes: !data ? "" : parseIntValue(data.nb_preposes),
-    nb_preposes_etp: !data ? "" : parseFloatValue(data.nb_preposes_etp)
+    nb_preposes_etp: !data ? "" : parseFloatValue(data.nb_preposes_etp),
   };
 }
 
@@ -13,7 +13,7 @@ function mapNiveauQualifications(data) {
     n3: mapNbPreposeNombrePreposesParNiveauQualificationFromForm(data ? data.n3 : null),
     n4: mapNbPreposeNombrePreposesParNiveauQualificationFromForm(data ? data.n4 : null),
     n5: mapNbPreposeNombrePreposesParNiveauQualificationFromForm(data ? data.n5 : null),
-    n6: mapNbPreposeNombrePreposesParNiveauQualificationFromForm(data ? data.n6 : null)
+    n6: mapNbPreposeNombrePreposesParNiveauQualificationFromForm(data ? data.n6 : null),
   };
 }
 
@@ -25,9 +25,9 @@ function dataToForm(data) {
     nb_autre_personnel_etp: data.nb_autre_personnel_etp
       ? parseFloatValue(data.nb_autre_personnel_etp)
       : "",
-    niveaux_qualification: mapNiveauQualifications(data.niveaux_qualification)
+    niveaux_qualification: mapNiveauQualifications(data.niveaux_qualification),
   };
 }
 export const enquetePreposePersonnelFormationAutresFormMapper = {
-  dataToForm
+  dataToForm,
 };

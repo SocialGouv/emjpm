@@ -18,8 +18,8 @@ class Magistrat extends Model {
       properties: {
         id: { type: "integer" },
         user_id: { type: "integer" },
-        ti_id: { type: "integer" }
-      }
+        ti_id: { type: "integer" },
+      },
     };
   }
 }

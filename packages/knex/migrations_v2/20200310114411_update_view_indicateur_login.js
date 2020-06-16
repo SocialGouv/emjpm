@@ -1,4 +1,4 @@
-exports.up = async knex => {
+exports.up = async (knex) => {
   await knex.raw(`
     CREATE OR REPLACE VIEW public.view_indicateur_login
     AS 
@@ -30,7 +30,7 @@ exports.up = async knex => {
     `);
 };
 
-exports.down = async knex => {
+exports.down = async (knex) => {
   await knex.raw(`
   CREATE OR REPLACE VIEW public.view_indicateur_login
   AS SELECT d.code,

@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("service_admin", table => {
+exports.up = function (knex) {
+  return knex.schema.createTable("service_admin", (table) => {
     table.increments("id").primary();
     table
       .integer("user_id")
@@ -16,6 +16,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("service_admin");
 };

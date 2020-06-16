@@ -8,11 +8,11 @@ const checkEnqueteContext = require("./hasura-actions.enquetes.checker");
 const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
 const {
   initEnqueteMandataireIndividuel,
-  submitEnqueteMandataireIndividuel
+  submitEnqueteMandataireIndividuel,
 } = require("./mandataire-individuel/enqueteMandataireIndividuel");
 const {
   initEnqueteMandatairePrepose,
-  submitEnqueteMandatairePrepose
+  submitEnqueteMandatairePrepose,
 } = require("./mandataire-prepose/enqueteMandatairePrepose");
 
 const router = express.Router();
@@ -23,7 +23,7 @@ router.post(
     const { id } = req.body.input;
     if (!id) {
       return res.status(422).json({
-        message: "Invalid parameters: id is required"
+        message: "Invalid parameters: id is required",
       });
     }
     try {
@@ -33,7 +33,7 @@ router.post(
       return res.json({
         enquete_id: enqueteReponse.enquete_id,
         enquete_reponses_id: enqueteReponse.id,
-        submitted_at: enqueteReponse.submitted_at
+        submitted_at: enqueteReponse.submitted_at,
       });
     } catch (err) {
       logger.error(err);
@@ -49,7 +49,7 @@ router.post(
     const { id } = req.body.input;
     if (!id) {
       return res.status(422).json({
-        message: "Invalid parameters: id is required"
+        message: "Invalid parameters: id is required",
       });
     }
     try {
@@ -59,7 +59,7 @@ router.post(
       return res.json({
         enquete_id: enqueteReponse.enquete_id,
         enquete_reponses_id: enqueteReponse.id,
-        submitted_at: enqueteReponse.submitted_at
+        submitted_at: enqueteReponse.submitted_at,
       });
     } catch (err) {
       logger.error(err);
@@ -104,12 +104,12 @@ router.post(
       if (enqueteContext.role === "individuel") {
         result = await mandataireIndividuelEnqueteImporter.importEnqueteFile({
           file,
-          enqueteContext
+          enqueteContext,
         });
       } else if (enqueteContext.role === "prepose") {
         result = await preposeEnqueteImporter.importEnqueteFile({
           file,
-          enqueteContext
+          enqueteContext,
         });
       } else {
         logger.error("Unexpected role", enqueteContext.role);
@@ -117,7 +117,7 @@ router.post(
       }
 
       return res.status(201).json({
-        data: JSON.stringify(result)
+        data: JSON.stringify(result),
       });
     } catch (err) {
       return next(err);

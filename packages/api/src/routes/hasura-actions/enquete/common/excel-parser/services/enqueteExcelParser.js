@@ -5,7 +5,7 @@ const enqueteExcelParser = {
   select,
   boolean,
   string,
-  integerAsBoolean
+  integerAsBoolean,
 };
 
 module.exports = enqueteExcelParser;

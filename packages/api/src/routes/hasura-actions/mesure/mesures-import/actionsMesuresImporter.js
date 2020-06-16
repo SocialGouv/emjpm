@@ -13,7 +13,7 @@ const configuration = require("../../../../env");
 const inseeAPI = require("../../../../utils/insee-api");
 
 const actionsMesuresImporter = {
-  importMesuresFile
+  importMesuresFile,
 };
 
 async function importMesuresFile({
@@ -21,9 +21,9 @@ async function importMesuresFile({
   importContext: {
     // mandataireUserId & serviceId are mutually exclusive
     mandataireUserId,
-    serviceId
+    serviceId,
   },
-  antennesMap
+  antennesMap,
 }) {
   const start = Date.now();
   logger.info(`[IMPORT MESURES] START`);
@@ -36,11 +36,11 @@ async function importMesuresFile({
       dateNF: "dd/mm/yyyy",
       locale: "fr-FR",
       type: type === "csv" ? "string" : "base64",
-      raw: type === "csv" ? true : false
-    }
+      raw: type === "csv" ? true : false,
+    },
   });
 
-  mesuresToImport.forEach(data => {
+  mesuresToImport.forEach((data) => {
     if (data.type) {
       data.type = data.type.toLowerCase();
     }
@@ -54,7 +54,7 @@ async function importMesuresFile({
 
   const {
     errors,
-    mesuresWithLine
+    mesuresWithLine,
   } = actionsMesuresImporterSchemaValidator.validateImportData(mesuresToImport);
 
   const importSummary = await importMesures({
@@ -62,7 +62,7 @@ async function importMesuresFile({
     mandataireUserId,
     serviceId,
     mesuresWithLine,
-    antennesMap
+    antennesMap,
   });
 
   importSummary.errors.sort((a, b) => a.line - b.line);
@@ -88,7 +88,9 @@ async function importMesuresFile({
     creationNumber: importSummary.create.length,
     updateNumber: importSummary.update.length,
     invalidAntenneNames:
-      importSummary.errors.length === 0 ? importSummary.invalidAntenneNames : []
+      importSummary.errors.length === 0
+        ? importSummary.invalidAntenneNames
+        : [],
   };
 }
 
@@ -97,13 +99,13 @@ const importMesures = async ({
   mandataireUserId,
   serviceId,
   mesuresWithLine,
-  antennesMap
+  antennesMap,
 }) => {
   const importSummary = {
     create: [],
     update: [],
     errors,
-    invalidAntenneNames: []
+    invalidAntenneNames: [],
   };
 
   let mandataire;
@@ -113,7 +115,7 @@ const importMesures = async ({
     service = await Service.query().findById(serviceId);
   } else if (mandataireUserId) {
     mandataire = await Mandataire.query().findOne({
-      user_id: mandataireUserId
+      user_id: mandataireUserId,
     });
   }
 
@@ -121,7 +123,7 @@ const importMesures = async ({
     tribunalBySiret: {},
     departmentById: {},
     departmentByRegionCode: {},
-    serviceAntenneByName: {}
+    serviceAntenneByName: {},
   };
 
   // save or update mesures
@@ -136,14 +138,14 @@ const importMesures = async ({
       date_ouverture: toDate(mesure.date_ouverture),
       mandataire,
       service,
-      status: "Mesure en cours"
+      status: "Mesure en cours",
     };
     await prepareMesure(mesureDatas, {
       line,
       cache,
       antennesMap,
       importSummary,
-      serviceId
+      serviceId,
     });
     counter++;
   }
@@ -166,9 +168,7 @@ const importMesures = async ({
         `[IMPORT MESURES] updating ${importSummary.update.length} mesures...`
       );
       for (const { id, data } of importSummary.update) {
-        await Mesure.query()
-          .findById(id)
-          .patch(data);
+        await Mesure.query().findById(id).patch(data);
       }
     }
 
@@ -195,21 +195,21 @@ const prepareMesure = async (
     service,
     code_postal,
     ville,
-    tribunal_siret
+    tribunal_siret,
   } = mesureDatas;
 
   const department = await actionsMesuresImporterGeoRepository.findDepartment({
     mandataire,
     service,
     code_postal,
-    cache
+    cache,
   });
 
   const pays = getMesurePays(code_postal);
 
   const {
     latitude,
-    longitude
+    longitude,
   } = await actionsMesuresImporterGeoRepository.getGeoDatas(code_postal, ville);
 
   // ti
@@ -233,7 +233,7 @@ const prepareMesure = async (
         ...tiDatas,
         departement_id: tiDepartment.id,
         latitude: tiGeoDatas ? tiGeoDatas.latitude : null,
-        longitude: tiGeoDatas ? tiGeoDatas.longitude : null
+        longitude: tiGeoDatas ? tiGeoDatas.longitude : null,
       });
     }
   }
@@ -241,7 +241,7 @@ const prepareMesure = async (
   if (!ti) {
     importSummary.errors.push({
       line: line,
-      message: `Aucun tribunal ne correspond au SIRET ${tribunal_siret}`
+      message: `Aucun tribunal ne correspond au SIRET ${tribunal_siret}`,
     });
     return;
   }
@@ -253,7 +253,7 @@ const prepareMesure = async (
       const antenne = await actionsMesuresImporterMesureRepository.findAntenne(
         {
           antenne_name,
-          service_id: serviceId
+          service_id: serviceId,
         },
         cache.serviceAntenneByName
       );
@@ -293,14 +293,14 @@ const prepareMesure = async (
     cabinet: mesureDatas.tribunal_cabinet,
     pays,
     longitude,
-    latitude
+    latitude,
   };
 
   const [mesure] = await Mesure.query().where({
     numero_rg: data.numero_rg,
     ti_id: ti.id,
     service_id: service ? service.id : null,
-    mandataire_id: mandataire ? mandataire.id : null
+    mandataire_id: mandataire ? mandataire.id : null,
   });
 
   if (!mesure) {
@@ -308,25 +308,25 @@ const prepareMesure = async (
   } else if (mesure.mandataire_id === data.mandataire_id) {
     importSummary.update.push({
       id: mesure.id,
-      data
+      data,
     });
   } else {
     importSummary.errors.push({
       line: line,
-      message: `La mesure avec le numéro RG ${mesure.numero_rg} et le tribunal de ${ti.ville} est gérée par un autre MJPM.`
+      message: `La mesure avec le numéro RG ${mesure.numero_rg} et le tribunal de ${ti.ville} est gérée par un autre MJPM.`,
     });
   }
 };
 
-const getMesurePays = code_postal => {
+const getMesurePays = (code_postal) => {
   if (code_postal && code_postal.length === 4) {
     return "BE";
   }
   return "FR";
 };
 
-const toDate = dateStr => {
-  const [day, month, year] = dateStr.split("/").map(x => parseInt(x));
+const toDate = (dateStr) => {
+  const [day, month, year] = dateStr.split("/").map((x) => parseInt(x));
   return new Date(year, month - 1, day);
 };
 

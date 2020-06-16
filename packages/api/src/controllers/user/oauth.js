@@ -9,14 +9,14 @@ const { Editors } = require("../../models/Editors");
 const generateToken = (editorId, editorToken, redirectUrl, userId, uid) => {
   const signOptions = {
     subject: uid,
-    algorithm: "RS256"
+    algorithm: "RS256",
   };
   const claim = {
     url: redirectUrl,
     uid: uid,
     userId: userId,
     editorId: editorId,
-    editorToken: editorToken
+    editorToken: editorToken,
   };
   return jwt.sign(claim, jwtConfig.key, signOptions);
 };
@@ -33,9 +33,7 @@ const authorize = async (req, res) => {
   const { editorId, editorToken, redirectUrl, userId } = req.body;
 
   try {
-    const editorApiToken = await Editors.query()
-      .where("id", editorId)
-      .first();
+    const editorApiToken = await Editors.query().where("id", editorId).first();
     if (editorApiToken.api_token !== editorToken) {
       return res.status(400).json({ errorMsg: "Identifiants editeur inconnu" });
     }
@@ -49,7 +47,7 @@ const authorize = async (req, res) => {
       user_id: userId,
       editor_id: editorId,
       editor_url: redirectUrl,
-      access_token: uid
+      access_token: uid,
     });
   } catch (error) {
     logger.error(error);

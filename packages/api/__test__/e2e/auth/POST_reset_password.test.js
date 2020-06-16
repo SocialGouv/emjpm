@@ -32,7 +32,7 @@ beforeEach(async () => {
       password: "ad123",
       reset_password_token: "LpWpzK4Jla9I87Aq",
       reset_password_expires: knex.raw(`now() + interval '1 second'`),
-      username: "ad"
+      username: "ad",
     });
 });
 
@@ -42,7 +42,7 @@ test("reset a password", async () => {
     .send({
       token: "LpWpzK4Jla9I87Aq",
       new_password: "test123456?",
-      new_password_confirmation: "test123456?"
+      new_password_confirmation: "test123456?",
     });
   expect(response.body).toMatchSnapshot();
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
@@ -55,7 +55,7 @@ test("fail because the inputs don't match", async () => {
     .send({
       token: "LpWpzK4Jla9I87Aq",
       new_password: "test123456?",
-      new_password_confirmation: "test123456"
+      new_password_confirmation: "test123456",
     });
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Object) },
@@ -75,7 +75,7 @@ test("fail because nekot is not a valid token", async () => {
     .send({
       token: "nekot",
       new_password: "test123456?",
-      new_password_confirmation: "test123456?"
+      new_password_confirmation: "test123456?",
     });
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Object) },
@@ -93,7 +93,7 @@ test("fail because the token has expired", async () => {
   await knex("users")
     .where({ id: 52 })
     .update({
-      reset_password_expires: knex.raw(`now() - interval '1 second'`)
+      reset_password_expires: knex.raw(`now() - interval '1 second'`),
     });
 
   const response = await request(server)
@@ -101,7 +101,7 @@ test("fail because the token has expired", async () => {
     .send({
       token: "LpWpzK4Jla9I87Aq",
       new_password: "test123456?",
-      new_password_confirmation: "test123456?"
+      new_password_confirmation: "test123456?",
     });
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Object) },
@@ -120,7 +120,7 @@ test("should empty user token+expiration on password reset", async () => {
     .where({ id: 52 })
     .update({
       reset_password_expires: knex.raw(`now() + interval '1 second'`),
-      reset_password_token: "abcdef"
+      reset_password_token: "abcdef",
     });
 
   const response = await request(server)
@@ -128,12 +128,10 @@ test("should empty user token+expiration on password reset", async () => {
     .send({
       token: "abcdef",
       new_password: "test123456?",
-      new_password_confirmation: "test123456?"
+      new_password_confirmation: "test123456?",
     });
 
-  const userData = await knex("users")
-    .where({ id: 52 })
-    .first();
+  const userData = await knex("users").where({ id: 52 }).first();
 
   expect(userData.reset_password_expires).toBeNull();
   expect(userData.reset_password_token).toBeNull();

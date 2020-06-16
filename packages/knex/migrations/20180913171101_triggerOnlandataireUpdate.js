@@ -1,14 +1,14 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema
-    .alterTable("mandataires", function() {})
+    .alterTable("mandataires", function () {})
     .then(() => knex.raw(onUpdateTrigger("mandataires")));
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };
 
-const onUpdateTrigger = table => `
+const onUpdateTrigger = (table) => `
     CREATE TRIGGER ${table}_updated_at
     BEFORE UPDATE ON ${table}
     FOR EACH ROW

@@ -28,9 +28,7 @@ export const presetMaterial = {
     secondary: '#03dac6',
     text: '#000',
   },
-  fontSizes: [
-    10, 12, 14, 16, 20, 24, 34, 48, 60, 96
-  ],
+  fontSizes: [10, 12, 14, 16, 20, 24, 34, 48, 60, 96],
   fontWeights: {
     body: 400,
     bold: 700,
@@ -78,7 +76,7 @@ export const presetMaterial = {
     },
     display: {
       fontFamily: 'heading',
-      fontSize: [ 6, 7 ],
+      fontSize: [6, 7],
       fontWeight: 'heading',
       lineHeight: 'heading',
     },
@@ -112,7 +110,7 @@ export const presetMaterial = {
       fontWeight: 'bold',
       p: 2,
       textDecoration: 'none',
-      variant: 'text.caps'
+      variant: 'text.caps',
     },
   },
-}
+};

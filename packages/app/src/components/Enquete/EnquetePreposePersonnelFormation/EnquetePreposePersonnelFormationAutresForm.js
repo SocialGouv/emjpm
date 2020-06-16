@@ -9,14 +9,14 @@ import { enquetePreposePersonnelFormationAutresFormMapper } from "./EnquetePrepo
 import { enquetePreposePersonnelFormationAutresFormSchema as validationSchema } from "./EnquetePreposePersonnelFormationAutresFormSchema";
 
 const dataToForm = enquetePreposePersonnelFormationAutresFormMapper.dataToForm;
-export const EnquetePreposePersonnelFormationAutresForm = props => {
+export const EnquetePreposePersonnelFormationAutresForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const {
@@ -26,7 +26,7 @@ export const EnquetePreposePersonnelFormationAutresForm = props => {
     values,
     errors,
     showError,
-    submit
+    submit,
   } = useEnqueteForm({
     onSubmit,
     enqueteContext,
@@ -35,7 +35,7 @@ export const EnquetePreposePersonnelFormationAutresForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
 
   return (
@@ -53,37 +53,37 @@ export const EnquetePreposePersonnelFormationAutresForm = props => {
           <Box>
             {renderNiveauxQualificationBox({
               niveau: "n1",
-              label: "Niveau 1"
+              label: "Niveau 1",
             })}
           </Box>
           <Box>
             {renderNiveauxQualificationBox({
               niveau: "n2",
-              label: "Niveau 2"
+              label: "Niveau 2",
             })}
           </Box>
           <Box>
             {renderNiveauxQualificationBox({
               niveau: "n3",
-              label: "Niveau 3"
+              label: "Niveau 3",
             })}
           </Box>
           <Box>
             {renderNiveauxQualificationBox({
               niveau: "n4",
-              label: "Niveau 4"
+              label: "Niveau 4",
             })}
           </Box>
           <Box>
             {renderNiveauxQualificationBox({
               niveau: "n5",
-              label: "Niveau 5"
+              label: "Niveau 5",
             })}
           </Box>
           <Box>
             {renderNiveauxQualificationBox({
               niveau: "n6",
-              label: "Niveau 6"
+              label: "Niveau 6",
             })}
           </Box>
         </Box>

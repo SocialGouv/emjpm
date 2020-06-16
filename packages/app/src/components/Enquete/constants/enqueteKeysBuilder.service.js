@@ -1,17 +1,17 @@
 export const enqueteKeysBuilder = {
-  buildKeys
+  buildKeys,
 };
 
 function buildKeys(map) {
-  const byKey = Object.keys(map).map(value => {
+  const byKey = Object.keys(map).map((value) => {
     const label = map[value];
     return {
       label,
-      value
+      value,
     };
   });
   return {
     byKey,
-    keys: Object.keys(map)
+    keys: Object.keys(map),
   };
 }

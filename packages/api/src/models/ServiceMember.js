@@ -19,8 +19,8 @@ class ServiceMember extends Model {
         id: { type: "integer" },
         service_id: { type: "integer" },
         user_id: { type: "integer" },
-        is_admin: { type: "boolean" }
-      }
+        is_admin: { type: "boolean" },
+      },
     };
   }
 }

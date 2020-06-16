@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("satisfaction_campaigns", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("satisfaction_campaigns", function (table) {
     table.increments();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.string("name").notNullable();
@@ -8,6 +8,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw("DROP TABLE satisfaction_campaigns");
 };

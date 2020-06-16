@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.alterTable("mandataires", function(table) {
+exports.up = function (knex) {
+  return knex.schema.alterTable("mandataires", function (table) {
     table.string("telephone_portable");
     table.string("nom");
     table.string("prenom");
@@ -8,6 +8,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

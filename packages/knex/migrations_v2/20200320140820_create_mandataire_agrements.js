@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.createTable("individuel_agrements", function(table) {
+exports.up = async function (knex) {
+  await knex.schema.createTable("individuel_agrements", function (table) {
     table.increments();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
@@ -11,7 +11,7 @@ exports.up = async function(knex) {
     table.integer("annee_debut_activite");
     table.integer("annee_agrement");
   });
-  await knex.schema.createTable("individuel_agrement_departements", function(
+  await knex.schema.createTable("individuel_agrement_departements", function (
     table
   ) {
     table.increments();
@@ -38,7 +38,7 @@ exports.up = async function(knex) {
   `);
 };
 
-exports.down = async function(knex) {
+exports.down = async function (knex) {
   await knex.raw("DROP TABLE individuel_agrement_departements");
   return knex.raw("DROP TABLE individuel_agrements");
 };

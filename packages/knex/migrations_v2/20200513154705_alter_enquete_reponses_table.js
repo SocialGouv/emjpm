@@ -1,25 +1,16 @@
-exports.up = async knex => {
+exports.up = async (knex) => {
   await knex.raw("DROP TABLE IF EXISTS enquete_reponses");
 
-  await knex.schema.createTable("enquete_reponses", table => {
+  await knex.schema.createTable("enquete_reponses", (table) => {
     table.increments();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("submitted_at").defaultTo(knex.fn.now());
 
-    table
-      .integer("enquete_id")
-      .references("id")
-      .inTable("enquetes");
+    table.integer("enquete_id").references("id").inTable("enquetes");
 
-    table
-      .integer("mandataire_id")
-      .references("id")
-      .inTable("mandataires");
+    table.integer("mandataire_id").references("id").inTable("mandataires");
 
-    table
-      .integer("service_id")
-      .references("id")
-      .inTable("services");
+    table.integer("service_id").references("id").inTable("services");
 
     table
       .integer("enquete_reponses_informations_mandataire_id")
@@ -48,28 +39,19 @@ exports.up = async knex => {
   });
 };
 
-exports.down = async knex => {
+exports.down = async (knex) => {
   await knex.raw("DROP TABLE IF EXISTS enquete_reponses");
 
-  return knex.schema.createTable("enquete_reponses", table => {
+  return knex.schema.createTable("enquete_reponses", (table) => {
     table.increments();
     table.string("type").notNullable();
-    table
-      .integer("enquete_id")
-      .references("id")
-      .inTable("enquetes");
+    table.integer("enquete_id").references("id").inTable("enquetes");
     table
       .integer("individuel_id")
       .references("id")
       .inTable("enquete_individuels");
-    table
-      .integer("service_id")
-      .references("id")
-      .inTable("enquete_services");
-    table
-      .integer("prepose_id")
-      .references("id")
-      .inTable("enquete_preposes");
+    table.integer("service_id").references("id").inTable("enquete_services");
+    table.integer("prepose_id").references("id").inTable("enquete_preposes");
 
     table.timestamp("last_update").defaultTo(knex.fn.now());
 
