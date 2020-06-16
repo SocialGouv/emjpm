@@ -32,6 +32,9 @@ async function update(enqueteId, { tabs, mandataireId }) {
     activite,
   } = tabs;
 
+  console.log("xxx preposePersonnelFormation:", preposePersonnelFormation);
+  console.log("xxx modaliteExercice:", modaliteExercice);
+
   const enqueteReponse = await initEnqueteMandataireIndividuel({
     enqueteId,
     mandataireId,
