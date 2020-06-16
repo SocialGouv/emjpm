@@ -98,7 +98,7 @@ export const EnqueteIndividuel = props => {
           step={step}
           enqueteContext={enqueteContext}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
-          goToNextPage={() => dispatchEnqueteContextEvent({ type: "navigate-to-next-page" })}
+          goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}
         />
         <EnqueteConfirmExitInvalidFormDialog {...confirmExitInvalidFormDialog} />
       </Box>
