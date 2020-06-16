@@ -91,13 +91,12 @@ export function useEnqueteForm({
   const submit = useMemo(
     () => ({ action }) => {
       if (action === "click-previous") {
-        dispatchEnqueteContextEvent({ type: "set-next-step", value: "previous" });
+        dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: "previous" });
       } else {
-        dispatchEnqueteContextEvent({ type: "set-next-step", value: "next" });
+        dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: "next" });
       }
-      submitForm();
     },
-    [submitForm, dispatchEnqueteContextEvent]
+    [dispatchEnqueteContextEvent]
   );
 
   return {

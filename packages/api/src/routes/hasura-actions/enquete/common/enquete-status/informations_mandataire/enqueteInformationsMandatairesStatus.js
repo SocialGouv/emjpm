@@ -31,12 +31,21 @@ module.exports = async (enqueteReponse) => {
             .when("exerce_secretaires_specialises", {
               is: true,
               then: yup.number().positive().required(), // > 0
-              otherwise: yup.number().oneOf([0]).nullable(), // 0 or empty
+              otherwise: yup
+                .number()
+                .test(
+                  "empty-or-0",
+                  'Vous avez répondu "non" à la question précédente, donc ce champ doit être vide.',
+                  function (value) {
+                    return value == null; // 0, null, undefined
+                  }
+                )
+                .nullable(), // 0 or empty
             }),
           local_professionnel: yup.boolean().required(),
         }),
         debugName: `${debugGroupName}/agrementsStatus`,
-        logDataWithErrors: false,
+        logDataWithErrors: true,
       }
     ),
     agrements: enqueteAgrementsFormationsStatus.agrementsStatus(
