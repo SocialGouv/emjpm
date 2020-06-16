@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useMutation, useQuery } from "react-apollo";
 import { Box } from "rebass";
 
@@ -6,6 +6,7 @@ import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePopulationsForm } from "./EnquetePopulationsForm";
 import { UPDATE_ENQUETE_POPULATIONS_MAJ } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_MAJ } from "./queries";
+import { removeAttributesPrefix } from "./removeAttributesPrefix.service";
 
 export const EnquetePopulationsMAJ = (props) => {
   const {
@@ -40,32 +41,9 @@ export const EnquetePopulationsMAJ = (props) => {
   });
 
   const populations = data ? data.enquete_reponses_populations_by_pk || {} : {};
-  const reponsePopulations = {
-    age_inf_25_ans_homme: populations.maj_age_inf_25_ans_homme || "",
-    age_inf_25_ans_femme: populations.maj_age_inf_25_ans_femme || "",
-    age_25_39_ans_homme: populations.maj_age_25_39_ans_homme || "",
-    age_25_39_ans_femme: populations.maj_age_25_39_ans_femme || "",
-    age_40_59_ans_homme: populations.maj_age_40_59_ans_homme || "",
-    age_40_59_ans_femme: populations.maj_age_40_59_ans_femme || "",
-    age_60_74_ans_homme: populations.maj_age_60_74_ans_homme || "",
-    age_60_74_ans_femme: populations.maj_age_60_74_ans_femme || "",
-    age_sup_75_ans_homme: populations.maj_age_sup_75_ans_homme || "",
-    age_sup_75_ans_femme: populations.maj_age_sup_75_ans_femme || "",
-    anciennete_inf_1_an: populations.maj_anciennete_inf_1_an || "",
-    anciennete_1_3_ans: populations.maj_anciennete_1_3_ans || "",
-    anciennete_3_5_ans: populations.maj_anciennete_3_5_ans || "",
-    anciennete_5_10_ans: populations.maj_anciennete_5_10_ans || "",
-    anciennete_sup_10_ans: populations.maj_anciennete_sup_10_ans || "",
-    type_etablissement_personne_handicapee: populations.maj_etablissement_personne_handicapee || "",
-    type_service_personne_handicapee: populations.maj_service_personne_handicapee || "",
-    type_ehpad: populations.maj_ehpad || "",
-    type_autre_etablissement_personne_agee: populations.maj_autre_etablissement_personne_agee || "",
-    type_chrs: populations.maj_chrs || "",
-    type_service_hospitalier_soins_longue_duree:
-      populations.maj_service_hospitalier_soins_longue_duree || "",
-    type_service_psychiatrique: populations.maj_service_psychiatrique || "",
-    type_autre_service: populations.maj_autre_service || "",
-  };
+  const reponsePopulations = useMemo(() => removeAttributesPrefix(populations, "maj_"), [
+    populations,
+  ]);
 
   return (
     !loading && (

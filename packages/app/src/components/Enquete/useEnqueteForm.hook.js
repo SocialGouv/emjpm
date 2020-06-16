@@ -12,18 +12,12 @@ export function useEnqueteForm({
   formToData,
   loading,
 }) {
-  const memoizedData = useMemo(
-    () => data,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    !data ? [] : Object.values(data) // if data reference changes, but not values, keep the same reference
-  );
+  useMemo(() => console.debug("[useEnqueteForm] input data changed", data), [data]);
 
-  const initialValues = dataToForm ? dataToForm(memoizedData) : memoizedData;
+  const initialValues = dataToForm ? dataToForm(data) : data;
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
-      console.log("xxx submit values:", values);
       values = formToData ? formToData(values) : values;
-      console.log("xxx submit values transformed:", values);
       await onSubmit(values);
       dispatchEnqueteContextEvent({ type: "navigate-to-next-page" });
       setSubmitting(false);
@@ -88,8 +82,8 @@ export function useEnqueteForm({
   }, [enqueteContext.actions.autoSubmit, submitForm]);
 
   useEffect(() => {
-    setValues(dataToForm(memoizedData));
-  }, [memoizedData, setValues, dataToForm]);
+    setValues(dataToForm(data));
+  }, [data, setValues, dataToForm]);
 
   const showError = useMemo(() => !loading && (step.status !== "empty" || submitCount !== 0), [
     step.status,
