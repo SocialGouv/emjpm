@@ -35,7 +35,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
     // clear cache after import
     apolloClient.clearStore();
 
-    goToStep(router, enqueteId);
+    goToFirstStep(router, enqueteId);
   }
 
   return (
@@ -67,7 +67,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   );
 };
 
-function goToStep(router, enqueteId) {
+function goToFirstStep(router, enqueteId) {
   router.push("/mandataires/enquetes/[enquete_id]", {
     pathname: `/mandataires/enquetes/${enqueteId}`,
     query: { step: 1, substep: 0 }
@@ -84,7 +84,7 @@ function renderSectionTitle(router, enqueteId) {
           cursor: "pointer"
         }}
         alignItems="center"
-        onClick={() => goToStep(router, enqueteId)}
+        onClick={() => goToFirstStep(router, enqueteId)}
       >
         <Flex
           sx={{

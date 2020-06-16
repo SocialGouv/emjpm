@@ -4,7 +4,8 @@ const enqueteExcelParser = {
   float,
   select,
   boolean,
-  string
+  string,
+  integerAsBoolean
 };
 
 module.exports = enqueteExcelParser;
@@ -56,6 +57,14 @@ function boolean(cell) {
     return value === "Oui";
   }
   return undefined;
+}
+
+function integerAsBoolean(cell) {
+  const value = raw(cell);
+  if (value) {
+    return value === 1;
+  }
+  return false;
 }
 
 function string(cell) {

@@ -9,8 +9,8 @@ import { ENQUETE_REVISION_MESURES } from "./queries";
 
 export const EnqueteActiviteRevisionMesures = props => {
   const {
-    goToPrevPage,
-    goToNextPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     section,
     step,
@@ -62,7 +62,7 @@ export const EnqueteActiviteRevisionMesures = props => {
         }}
         section={section}
         step={step}
-        handleSubmit={async values => {
+        onSubmit={async values => {
           await updateEnquete({
             variables: {
               id: activite_id,
@@ -73,9 +73,9 @@ export const EnqueteActiviteRevisionMesures = props => {
               revisionsAutre: values.revisionsAutre || null
             }
           });
-          await goToNextPage();
         }}
-        goToPrevPage={goToPrevPage}
+        enqueteContext={enqueteContext}
+        dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       />
     </Box>
   );

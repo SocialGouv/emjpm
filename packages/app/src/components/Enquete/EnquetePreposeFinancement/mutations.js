@@ -3,13 +3,13 @@ import gql from "graphql-tag";
 export const UPDATE_ENQUETE_REPONSES_FINANCEMENT = gql`
   mutation update_enquete_reponses_financement(
     $id: Int!
-    $aide_sociale_conseil_departemental: Float
-    $autre_produits: Float
-    $charges_fonctionnement: Float
-    $charges_personnel: Float
-    $charges_preposes: Float
-    $financement_public: Float
-    $produits_bareme_prelevements: Float
+    $aide_sociale_conseil_departemental: numeric
+    $autre_produits: numeric
+    $charges_fonctionnement: numeric
+    $charges_personnel: numeric
+    $charges_preposes: numeric
+    $financement_public: numeric
+    $produits_bareme_prelevements: numeric
   ) {
     update_enquete_reponses_financement_by_pk(
       pk_columns: { id: $id }

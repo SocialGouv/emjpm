@@ -8,8 +8,8 @@ import { ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION } from "./queries";
 
 export const EnqueteIndividuelInformationsFormation = props => {
   const {
-    goToNextPage,
-    goToPrevPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     userId,
     section,
@@ -41,11 +41,12 @@ export const EnqueteIndividuelInformationsFormation = props => {
 
   return loading ? null : (
     <EnqueteIndividuelInformationsFormationForm
-      goToPrevPage={goToPrevPage}
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       data={data ? data.enquete_reponses_agrements_formations_by_pk || {} : {}}
       section={section}
       step={step}
-      handleSubmit={async values => {
+      onSubmit={async values => {
         await updateEnquete({
           variables: {
             id: agrements_formations_id,
@@ -78,7 +79,6 @@ export const EnqueteIndividuelInformationsFormation = props => {
               : null
           }
         });
-        await goToNextPage();
       }}
     />
   );

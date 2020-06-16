@@ -9,8 +9,8 @@ import { ENQUETE_PREPOSE_PERSONNEL_FORMATION } from "./queries";
 
 export const EnquetePreposePersonnelFormationAutres = props => {
   const {
-    goToNextPage,
-    goToPrevPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
     enquete: { id: enqueteId },
@@ -47,10 +47,11 @@ export const EnquetePreposePersonnelFormationAutres = props => {
   return (
     <EnquetePreposePersonnelFormationAutresForm
       data={initialData}
-      goToPrevPage={goToPrevPage}
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
       step={step}
-      handleSubmit={async values => {
+      onSubmit={async values => {
         const niveaux_qualification = values.niveaux_qualification
           ? {
               n1: parseNbPreposeNombrePreposesParNiveauQualificationFromForm(
@@ -84,7 +85,6 @@ export const EnquetePreposePersonnelFormationAutres = props => {
             niveaux_qualification
           }
         });
-        await goToNextPage();
       }}
     />
   );

@@ -11,8 +11,8 @@ const PREFIX = "subroge_tuteur_createur";
 
 export const EnqueteActiviteSubrogeTuteurCreateur = props => {
   const {
-    goToPrevPage,
-    goToNextPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     section,
     step,
@@ -60,16 +60,16 @@ export const EnqueteActiviteSubrogeTuteurCreateur = props => {
         data={normalizedData}
         section={section}
         step={step}
-        handleSubmit={async values => {
+        onSubmit={async values => {
           await updateEnquete({
             variables: {
               id: activite_id,
               ...values
             }
           });
-          await goToNextPage();
         }}
-        goToPrevPage={goToPrevPage}
+        enqueteContext={enqueteContext}
+        dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Subrogé tuteur ou curateur"
       />
     </Box>

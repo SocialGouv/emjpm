@@ -11,8 +11,8 @@ const PREFIX = "tutelle";
 
 export const EnqueteActiviteTutelle = props => {
   const {
-    goToPrevPage,
-    goToNextPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     section,
     step,
@@ -65,16 +65,16 @@ export const EnqueteActiviteTutelle = props => {
         data={normalizedData}
         section={section}
         step={step}
-        handleSubmit={async values => {
+        onSubmit={async values => {
           await updateEnquete({
             variables: {
               id: activite_id,
               ...values
             }
           });
-          await goToNextPage();
         }}
-        goToPrevPage={goToPrevPage}
+        enqueteContext={enqueteContext}
+        dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Tutelle"
       />
     </Box>
