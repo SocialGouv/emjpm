@@ -25,20 +25,16 @@ export const EnquetePrepose = (props) => {
     () => (!data ? undefined : enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse)),
     [enqueteReponse, data]
   );
-  const { section, step } = useMemo(() => {
-    const section = !sections ? undefined : sections[currentStep.step];
-    const step = !section ? undefined : section.steps[currentStep.substep || 0];
-    return { section, step };
-  }, [currentStep.step, currentStep.substep, sections]);
 
   const {
+    section,
+    step,
     enqueteContext,
     dispatchEnqueteContextEvent,
     saveAndNavigate,
     confirmExitInvalidFormDialog,
   } = useEnqueteContext({
     currentStep,
-    section,
     navigateToStep,
     sections,
   });
