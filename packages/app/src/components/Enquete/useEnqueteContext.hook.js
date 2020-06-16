@@ -27,20 +27,47 @@ export const useEnqueteContext = (props) => {
   );
   function enqueteContextReducer(state, action) {
     switch (action.type) {
-      case "set-next-step": {
+      case "submit-and-navigate": {
         const nextStep =
           !action.value || action.value === "next"
             ? getNextPageStep(sections, currentStep)
             : action.value === "previous"
             ? getPrevPageStep(sections, currentStep)
             : action.value;
-        return {
-          ...state,
-          form: {
-            ...state.form,
-            nextStep,
-          },
-        };
+
+        if (state.form.dirty) {
+          if (state.form.valid) {
+            return {
+              ...state,
+              form: {
+                ...state.form,
+                nextStep,
+              },
+              actions: {
+                ...state.actions,
+                autoSubmit: true,
+              },
+            };
+          } else {
+            setOpenConfirmExitInvalidForm(true);
+            return {
+              ...state,
+              form: {
+                ...state.form,
+                nextStep,
+              },
+            };
+          }
+        } else {
+          navigateToStep(nextStep);
+          return {
+            ...state,
+            form: {
+              ...state.form,
+              nextStep,
+            },
+          };
+        }
       }
       case "navigate-to-next-page":
         navigateToStep(state.form.nextStep);
@@ -70,17 +97,10 @@ export const useEnqueteContext = (props) => {
             value: action.value,
           },
         };
-      case "set-actions-autoSubmit":
-        return {
-          ...state,
-          actions: {
-            ...state.form,
-            autoSubmit: true,
-          },
-        };
+
       default:
         console.warn(`Unexpected state action ${action}`, state);
-        throw new Error(`Unexpected state actio ${action.type}`);
+        throw new Error(`Unexpected state action ${action.type}`);
     }
   }
   const [enqueteContext, dispatchEnqueteContextEvent] = useReducer(
@@ -107,20 +127,7 @@ export const useEnqueteContext = (props) => {
   };
 
   async function saveAndNavigate({ step, substep }) {
-    dispatchEnqueteContextEvent({ type: "set-next-step", value: { step, substep } });
-    let navigationConfirmed = true;
-    if (enqueteContext.form.dirty) {
-      if (enqueteContext.form.valid) {
-        dispatchEnqueteContextEvent({ type: "set-actions-autoSubmit", value: true });
-        navigationConfirmed = false;
-      } else {
-        setOpenConfirmExitInvalidForm(true);
-        navigationConfirmed = false;
-      }
-    }
-    if (navigationConfirmed) {
-      dispatchEnqueteContextEvent({ type: "navigate-to-next-page" });
-    }
+    dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: { step, substep } });
   }
 
   function getNextPageStep(sections, currentStep) {

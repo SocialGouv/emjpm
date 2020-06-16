@@ -5,14 +5,14 @@ import { useMutation } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
 import { ENQUETE_REPONSE_STATUS } from "../queries";
-import { SUBMIT_ENQUETE_PREPOSE } from "./mutations";
+import { SUBMIT_ENQUETE_INDIVIDUEL } from "./mutations";
 
 export const EnquetePreposeSubmit = (props) => {
   const { enquete, enqueteReponse, userId } = props;
   const hasError = enqueteReponse.enquete_reponse_status.global !== "valid";
   const { enquete_reponse_ids } = enqueteReponse;
 
-  const [submitEnquetePrepose, { loading }] = useMutation(SUBMIT_ENQUETE_PREPOSE, {
+  const [submitEnquetePrepose, { loading }] = useMutation(SUBMIT_ENQUETE_INDIVIDUEL, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,

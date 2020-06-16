@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 export function useEnqueteForm({
   onSubmit,
@@ -12,6 +12,9 @@ export function useEnqueteForm({
   formToData,
   loading,
 }) {
+  useMemo(() => console.debug("[useEnqueteForm] input data changed", data), [data]);
+
+  const initialValues = dataToForm ? dataToForm(data) : data;
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       values = formToData ? formToData(values) : values;
@@ -20,7 +23,7 @@ export function useEnqueteForm({
       setSubmitting(false);
     },
     validationSchema,
-    initialValues: dataToForm ? dataToForm(data) : data,
+    initialValues,
     onChange: () => {},
   });
 
@@ -88,16 +91,15 @@ export function useEnqueteForm({
     loading,
   ]);
 
-  const submit = useMemo(
+  const submit = useCallback(
     () => ({ action }) => {
       if (action === "click-previous") {
-        dispatchEnqueteContextEvent({ type: "set-next-step", value: "previous" });
+        dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: "previous" });
       } else {
-        dispatchEnqueteContextEvent({ type: "set-next-step", value: "next" });
+        dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: "next" });
       }
-      submitForm();
     },
-    [submitForm, dispatchEnqueteContextEvent]
+    [dispatchEnqueteContextEvent]
   );
 
   return {
