@@ -15,11 +15,11 @@ const validationSchema = yup.object().shape({
   region: yup.string().required(),
   raison_sociale: yup.string().required(),
   personnalite_juridique_etablissement: yup.string().required(),
-  activite_personne_physique: yup.number().min(0),
-  activite_service: yup.number().min(0),
-  total_mesures_etablissements: yup.number().min(0),
-  etablissement_personne_morale: yup.number().min(0),
-  etablissement_convention_groupement: yup.number().min(0),
+  activite_personne_physique: yup.number().min(0).nullable(),
+  activite_service: yup.number().min(0).nullable(),
+  total_mesures_etablissements: yup.number().min(0).nullable(),
+  etablissement_personne_morale: yup.number().min(0).nullable(),
+  etablissement_convention_groupement: yup.number().min(0).nullable(),
 });
 
 function dataToForm(data) {
@@ -206,6 +206,23 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
               <Text ml={3}>{"service(s) au sens de l'article L312-1 du CASF"}</Text>
             </Flex>
           </Flex>
+
+          <Flex>
+            <Box flex={1 / 2}>
+              <InlineError
+                showError={showError}
+                message={errors.activite_personne_physique}
+                fieldId="activite_personne_physique"
+              />
+            </Box>
+            <Box flex={1 / 2}>
+              <InlineError
+                showError={showError}
+                message={errors.activite_service}
+                fieldId="activite_service"
+              />
+            </Box>
+          </Flex>
         </Box>
 
         <Box mt={4}>
@@ -247,6 +264,23 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
             </Flex>
           </Flex>
 
+          <Flex>
+            <Box flex={1 / 2}>
+              <InlineError
+                showError={showError}
+                message={errors.etablissement_personne_morale}
+                fieldId="etablissement_personne_morale"
+              />
+            </Box>
+            <Box flex={1 / 2}>
+              <InlineError
+                showError={showError}
+                message={errors.etablissement_convention_groupement}
+                fieldId="etablissement_convention_groupement"
+              />
+            </Box>
+          </Flex>
+
           <Flex mt={2} alignItems="center">
             <SmallInput
               type="number"
@@ -267,6 +301,16 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
                 }</strong> établissements`,
               }}
             />
+          </Flex>
+
+          <Flex>
+            <Box flex={1 / 2}>
+              <InlineError
+                showError={showError}
+                message={errors.total_mesures_etablissements}
+                fieldId="total_mesures_etablissements"
+              />
+            </Box>
           </Flex>
         </Box>
 
