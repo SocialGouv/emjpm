@@ -16,7 +16,7 @@ const validationSchema = yup.object(
     "revisions_changement",
     "revisions_autre",
   ].reduce((acc, attrName) => {
-    acc[attrName] = yup.number().positive().integer();
+    acc[attrName] = yup.number().min(0).integer().nullable();
     return acc;
   }, [])
 );

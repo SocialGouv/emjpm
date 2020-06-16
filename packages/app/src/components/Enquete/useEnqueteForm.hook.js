@@ -92,7 +92,7 @@ export function useEnqueteForm({
   ]);
 
   const submit = useCallback(
-    () => ({ action }) => {
+    ({ action }) => {
       if (action === "click-previous") {
         dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: "previous" });
       } else {
