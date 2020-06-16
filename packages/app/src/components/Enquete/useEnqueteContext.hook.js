@@ -1,5 +1,3 @@
-import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
-
 import { useMemo, useReducer, useState } from "react";
 
 export const useEnqueteContext = props => {
