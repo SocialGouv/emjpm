@@ -95,7 +95,7 @@ module.exports = async (enqueteReponse) => {
           "revisions_changement",
           "revisions_autre",
         ].reduce((acc, attrName) => {
-          acc[attrName] = yup.number().positive().integer();
+          acc[attrName] = yup.number().min(0).integer().nullable();
           return acc;
         }, [])
       ),
@@ -106,7 +106,7 @@ module.exports = async (enqueteReponse) => {
       schema: yup.object(
         ["sorties_main_levee", "sorties_deces", "sorties_masp"].reduce(
           (acc, attrName) => {
-            acc[attrName] = yup.number().positive().integer();
+            acc[attrName] = yup.number().min(0).integer().nullable();
             return acc;
           },
           []
