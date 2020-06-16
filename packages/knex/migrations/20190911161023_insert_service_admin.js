@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.alterTable("service_admin", function(table) {
+exports.up = async function (knex) {
+  await knex.schema.alterTable("service_admin", function (table) {
     table.unique(["user_id", "service_id"]);
   });
   return knex.raw(`
@@ -8,15 +8,12 @@ alter table users drop service_id CASCADE;
   `);
 };
 
-exports.down = async function(knex) {
-  await knex.schema.alterTable("service_admin", function(table) {
+exports.down = async function (knex) {
+  await knex.schema.alterTable("service_admin", function (table) {
     table.dropUnique(["user_id", "service_id"]);
   });
-  return knex.schema.alterTable("users", function(table) {
+  return knex.schema.alterTable("users", function (table) {
     table.integer("service_id").unique();
-    table
-      .foreign("service_id")
-      .references("id")
-      .inTable("services");
+    table.foreign("service_id").references("id").inTable("services");
   });
 };

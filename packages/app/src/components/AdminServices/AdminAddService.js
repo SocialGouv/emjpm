@@ -14,7 +14,7 @@ export const AdminAddService = () => {
   const client = useApolloClient();
 
   const [addService] = useMutation(ADD_SERVICE, {
-    onCompleted: () => Router.push("/admin/services")
+    onCompleted: () => Router.push("/admin/services"),
   });
 
   const { data, loading, error } = useQuery(DEPARTEMENTS);
@@ -31,7 +31,7 @@ export const AdminAddService = () => {
 
   const handleSubmit = async (values, { setErrors, setSubmitting }) => {
     const { depcode } = values.geocode;
-    const department = departements.find(d => d.code === depcode);
+    const department = departements.find((d) => d.code === depcode);
     const siretExists = await serviceSiretExists(client, values.siret);
 
     if (!department) {
@@ -56,8 +56,8 @@ export const AdminAddService = () => {
           ville: values.geocode.city,
           latitude: values.geocode.latitude,
           longitude: values.geocode.longitude,
-          siret: values.siret
-        }
+          siret: values.siret,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);

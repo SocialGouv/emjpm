@@ -7,7 +7,7 @@ import { ServiceInformations } from "../../../src/components/ServiceAntenneInfor
 import { PreferencesPanel } from "../../../src/components/ServiceAntenneSidebar";
 import { withAuthSync } from "../../../src/util/auth";
 
-const Antennes = props => {
+const Antennes = (props) => {
   const { antenneId } = props;
 
   return (
@@ -15,7 +15,7 @@ const Antennes = props => {
       <BoxWrapper mt={6} px="1">
         <Flex
           sx={{
-            flexWrap: "wrap"
+            flexWrap: "wrap",
           }}
         >
           <Box
@@ -23,7 +23,7 @@ const Antennes = props => {
               flexBasis: 0,
               flexGrow: 99999,
               minWidth: 320,
-              p: 1
+              p: 1,
             }}
           >
             <Heading2>Informations de votre antenne</Heading2>
@@ -33,7 +33,7 @@ const Antennes = props => {
             sx={{
               flexBasis: 320,
               flexGrow: 1,
-              p: 1
+              p: 1,
             }}
           >
             <Heading2>Mesures souhaitées</Heading2>

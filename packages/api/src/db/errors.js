@@ -6,10 +6,10 @@ const {
   NotNullViolationError,
   ForeignKeyViolationError,
   CheckViolationError,
-  DataError
+  DataError,
 } = require("objection-db-errors");
 
-const getErrorMessage = err => {
+const getErrorMessage = (err) => {
   switch (err.constraint) {
     case "users_email_unique":
       return "Cet email est déjà utilisé.";
@@ -31,9 +31,9 @@ function errorHandler(err, res) {
             {
               msg: err.message,
               type: "ModelValidation",
-              data: err.data
-            }
-          ]
+              data: err.data,
+            },
+          ],
         });
         break;
       case "RelationExpression":
@@ -42,9 +42,9 @@ function errorHandler(err, res) {
             {
               msg: err.message,
               type: "InvalidRelationExpression",
-              data: {}
-            }
-          ]
+              data: {},
+            },
+          ],
         });
         break;
       case "UnallowedRelation":
@@ -53,9 +53,9 @@ function errorHandler(err, res) {
             {
               msg: err.message,
               type: "UnallowedRelation",
-              data: {}
-            }
-          ]
+              data: {},
+            },
+          ],
         });
         break;
       case "InvalidGraph":
@@ -64,9 +64,9 @@ function errorHandler(err, res) {
             {
               msg: err.message,
               type: "InvalidGraph",
-              data: {}
-            }
-          ]
+              data: {},
+            },
+          ],
         });
         break;
       default:
@@ -75,9 +75,9 @@ function errorHandler(err, res) {
             {
               msg: err.message,
               type: "UnknownValidationError",
-              data: {}
-            }
-          ]
+              data: {},
+            },
+          ],
         });
         break;
     }
@@ -87,9 +87,9 @@ function errorHandler(err, res) {
         {
           msg: err.message,
           type: "NotFound",
-          data: {}
-        }
-      ]
+          data: {},
+        },
+      ],
     });
   } else if (err instanceof UniqueViolationError) {
     res.status(409).send({
@@ -100,10 +100,10 @@ function errorHandler(err, res) {
           data: {
             columns: err.columns,
             table: err.table,
-            constraint: err.constraint
-          }
-        }
-      ]
+            constraint: err.constraint,
+          },
+        },
+      ],
     });
   } else if (err instanceof NotNullViolationError) {
     res.status(400).send({
@@ -113,10 +113,10 @@ function errorHandler(err, res) {
           type: "NotNullViolation",
           data: {
             column: err.column,
-            table: err.table
-          }
-        }
-      ]
+            table: err.table,
+          },
+        },
+      ],
     });
   } else if (err instanceof ForeignKeyViolationError) {
     res.status(409).send({
@@ -126,10 +126,10 @@ function errorHandler(err, res) {
           type: "ForeignKeyViolation",
           data: {
             table: err.table,
-            constraint: err.constraint
-          }
-        }
-      ]
+            constraint: err.constraint,
+          },
+        },
+      ],
     });
   } else if (err instanceof CheckViolationError) {
     res.status(400).send({
@@ -139,10 +139,10 @@ function errorHandler(err, res) {
           type: "CheckViolation",
           data: {
             table: err.table,
-            constraint: err.constraint
-          }
-        }
-      ]
+            constraint: err.constraint,
+          },
+        },
+      ],
     });
   } else if (err instanceof DataError) {
     res.status(400).send({
@@ -150,9 +150,9 @@ function errorHandler(err, res) {
         {
           msg: err.message,
           type: "InvalidData",
-          data: {}
-        }
-      ]
+          data: {},
+        },
+      ],
     });
   } else if (err instanceof DBError) {
     res.status(500).send({
@@ -160,9 +160,9 @@ function errorHandler(err, res) {
         {
           msg: err.message,
           type: "UnknownDatabaseError",
-          data: {}
-        }
-      ]
+          data: {},
+        },
+      ],
     });
   } else if (err.code === "23505") {
     const message = getErrorMessage(err);
@@ -174,10 +174,10 @@ function errorHandler(err, res) {
           data: {
             columns: err.columns,
             table: err.table,
-            constraint: err.constraint
-          }
-        }
-      ]
+            constraint: err.constraint,
+          },
+        },
+      ],
     });
   } else {
     res.status(500).send({
@@ -185,9 +185,9 @@ function errorHandler(err, res) {
         {
           msg: err.message,
           type: "UnknownError",
-          data: err
-        }
-      ]
+          data: err,
+        },
+      ],
     });
   }
 }

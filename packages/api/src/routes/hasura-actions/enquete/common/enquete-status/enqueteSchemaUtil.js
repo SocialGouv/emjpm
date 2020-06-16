@@ -51,7 +51,7 @@ async function logValidationErrors(
       } else {
         logger.warn(`[Validation] [${debugName}] ${err.errors.length} errors`);
       }
-      err.errors.forEach(msg => {
+      err.errors.forEach((msg) => {
         logger.info(`[Validation] [${debugName}] ${msg}`);
       });
     } else {
@@ -68,7 +68,7 @@ function isEmptyData(data, schema, debugName) {
     logger.warn(`[Validation] [${debugName}] data is missing`);
     return true;
   }
-  const isEmpty = !schema._nodes.some(attr => {
+  const isEmpty = !schema._nodes.some((attr) => {
     const value = data[attr];
     const isValueSet = value !== undefined && value !== null && value !== "";
     return isValueSet;
@@ -78,9 +78,9 @@ function isEmptyData(data, schema, debugName) {
 
 function getGlobalStatus(status) {
   const statusArray = Object.values(status);
-  return statusArray.some(x => x === "invalid")
+  return statusArray.some((x) => x === "invalid")
     ? "invalid"
-    : statusArray.some(x => x === "empty")
+    : statusArray.some((x) => x === "empty")
     ? "empty"
     : "valid";
 }
@@ -97,5 +97,5 @@ function getTopLevelGlobalStatus(status) {
 module.exports = {
   getValidationStatus,
   getGlobalStatus,
-  getTopLevelGlobalStatus
+  getTopLevelGlobalStatus,
 };

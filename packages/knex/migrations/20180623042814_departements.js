@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("departements", table => {
+exports.up = function (knex) {
+  return knex.schema.createTable("departements", (table) => {
     table.increments("id");
     table.integer("id_region").unsigned();
     table.string("code").notNullable();
@@ -8,6 +8,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("departements");
 };

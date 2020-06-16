@@ -1,18 +1,18 @@
 const {
   getEnqueteReponseMandatairePrepose,
   createEmptyEnqueteReponse,
-  submitEnqueteReponse
+  submitEnqueteReponse,
 } = require("./requests");
 const enqueteMandatairePreposeStatus = require("./enqueteMandatairePreposeStatus");
 const logger = require("../../../../utils/logger");
 
 async function initEnqueteMandatairePrepose({
   // eslint-disable-next-line no-unused-vars
-  enqueteContext: { enqueteId, userId, service, mandataire }
+  enqueteContext: { enqueteId, userId, service, mandataire },
 }) {
   let enqueteReponse = await getEnqueteReponseMandatairePrepose({
     enqueteId,
-    mandataireId: mandataire.id
+    mandataireId: mandataire.id,
   });
 
   if (!enqueteReponse) {
@@ -21,7 +21,7 @@ async function initEnqueteMandatairePrepose({
     );
     const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
       enqueteId,
-      mandataireId: mandataire.id
+      mandataireId: mandataire.id,
     });
 
     enqueteReponse = insert_enquete_reponses_one;
@@ -37,13 +37,13 @@ async function initEnqueteMandatairePrepose({
     personel_formation_id:
       enqueteReponse.enquete_reponses_prepose_personel_formation_id,
     prestations_sociales_id:
-      enqueteReponse.enquete_reponses_prepose_prestations_sociales_id
+      enqueteReponse.enquete_reponses_prepose_prestations_sociales_id,
   };
   return {
     enquete_id: enqueteReponse.enquete_id,
     submitted_at: enqueteReponse.submitted_at,
     enquete_reponse_status: status,
-    enquete_reponse_ids: ids
+    enquete_reponse_ids: ids,
   };
 }
 
@@ -56,5 +56,5 @@ async function submitEnqueteMandatairePrepose(id) {
 
 module.exports = {
   initEnqueteMandatairePrepose,
-  submitEnqueteMandatairePrepose
+  submitEnqueteMandatairePrepose,
 };

@@ -14,31 +14,31 @@ import {
   CHOOSE_MANDATAIRE,
   CHOOSE_SERVICE,
   RECALCULATE_MANDATAIRE_MESURES,
-  RECALCULATE_SERVICE_MESURES
+  RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
 import { MANDATAIRE, MESURES, SERVICE } from "./queries";
 
-export const MagistratMesureAddForm = props => {
+export const MagistratMesureAddForm = (props) => {
   const { serviceId, mandataireId, cancelActionRoute } = props;
   const {
     cabinet,
-    magistrat: { id: magistratId, ti_id: tiId }
+    magistrat: { id: magistratId, ti_id: tiId },
   } = useContext(UserContext);
 
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
     refetchQueries: [
       {
         query: MANDATAIRE,
-        variables: { id: mandataireId }
+        variables: { id: mandataireId },
       },
       {
         query: GESTIONNAIRES,
         variables: {
           mandataire_id: mandataireId,
-          service_id: serviceId
-        }
-      }
-    ]
+          service_id: serviceId,
+        },
+      },
+    ],
   });
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
     onCompleted: async ({ insert_mesures }) => {
@@ -46,41 +46,41 @@ export const MagistratMesureAddForm = props => {
 
       await recalculateMandataireMesures({
         variables: {
-          mandataire_id: mandataireId
-        }
+          mandataire_id: mandataireId,
+        },
       });
 
       await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
-        shallow: true
+        shallow: true,
       });
-    }
+    },
   });
 
   const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
     refetchQueries: [
       {
         query: SERVICE,
-        variables: { id: serviceId }
+        variables: { id: serviceId },
       },
       {
         query: GESTIONNAIRES,
         variables: {
           mandataire_id: mandataireId,
-          service_id: serviceId
-        }
-      }
-    ]
+          service_id: serviceId,
+        },
+      },
+    ],
   });
   const [chooseService] = useMutation(CHOOSE_SERVICE, {
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
       await recalculateServiceMesures({
-        variables: { service_id: serviceId }
+        variables: { service_id: serviceId },
       });
       await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
-        shallow: true
+        shallow: true,
       });
-    }
+    },
   });
 
   const formik = useFormik({
@@ -90,7 +90,7 @@ export const MagistratMesureAddForm = props => {
           refetchQueries: [
             { query: MESURES, variables: { serviceId, mandataireId } },
             "mesures_aggregate",
-            "view_mesure_gestionnaire"
+            "view_mesure_gestionnaire",
           ],
           variables: {
             annee: values.annee,
@@ -102,8 +102,8 @@ export const MagistratMesureAddForm = props => {
             numero_rg: values.numero_rg,
             ti: tiId,
             type: values.type.value,
-            urgent: values.urgent.value
-          }
+            urgent: values.urgent.value,
+          },
         });
       } else {
         await chooseService({
@@ -118,8 +118,8 @@ export const MagistratMesureAddForm = props => {
             magistrat_id: magistratId,
             ti: tiId,
             type: values.type.value,
-            urgent: values.urgent.value
-          }
+            urgent: values.urgent.value,
+          },
         });
       }
 
@@ -133,8 +133,8 @@ export const MagistratMesureAddForm = props => {
       judgmentDate: "",
       numero_rg: "",
       type: "",
-      urgent: IS_URGENT.find(lv => lv.value == false)
-    }
+      urgent: IS_URGENT.find((lv) => lv.value == false),
+    },
   });
 
   return (
@@ -156,7 +156,7 @@ export const MagistratMesureAddForm = props => {
               placeholder="Type de mesure"
               value={formik.values.type}
               hasError={formik.errors.type && formik.touched.type}
-              onChange={option => formik.setFieldValue("type", option)}
+              onChange={(option) => formik.setFieldValue("type", option)}
               options={MESURE_TYPE_LABEL_VALUE}
             />
             <InlineError message={formik.errors.type} fieldId="type" />
@@ -168,7 +168,7 @@ export const MagistratMesureAddForm = props => {
               placeholder="Civilité"
               value={formik.values.civilite}
               hasError={formik.errors.civilite && formik.touched.civilite}
-              onChange={option => formik.setFieldValue("civilite", option)}
+              onChange={(option) => formik.setFieldValue("civilite", option)}
               options={CIVILITY}
             />
             <InlineError message={formik.errors.civilite} fieldId="civilite" />
@@ -213,7 +213,7 @@ export const MagistratMesureAddForm = props => {
               placeholder="Est-ce une demande urgente"
               value={formik.values.urgent}
               hasError={formik.errors.urgent && formik.touched.urgent}
-              onChange={option => formik.setFieldValue("urgent", option)}
+              onChange={(option) => formik.setFieldValue("urgent", option)}
               options={IS_URGENT}
             />
             <InlineError message={formik.errors.urgent} fieldId="urgent" />
@@ -259,5 +259,5 @@ export const MagistratMesureAddForm = props => {
 MagistratMesureAddForm.propTypes = {
   antenneId: PropTypes.number,
   mandataireId: PropTypes.number,
-  cancelActionRoute: PropTypes.object
+  cancelActionRoute: PropTypes.object,
 };

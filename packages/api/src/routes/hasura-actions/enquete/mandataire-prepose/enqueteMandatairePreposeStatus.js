@@ -5,7 +5,7 @@ const {
   enqueteActiviteStatus,
   preposePersonnelFormationStatus,
   preposePrestationsSocialesStatus,
-  preposeFinancementStatus
+  preposeFinancementStatus,
 } = require("../common/enquete-status");
 
 async function enqueteMandatairePreposeStatus(enqueteReponse) {
@@ -15,11 +15,11 @@ async function enqueteMandatairePreposeStatus(enqueteReponse) {
     populations: await populationsStatus(enqueteReponse),
     personnelFormation: await preposePersonnelFormationStatus(enqueteReponse),
     prestationsSociales: await preposePrestationsSocialesStatus(enqueteReponse),
-    financement: await preposeFinancementStatus(enqueteReponse)
+    financement: await preposeFinancementStatus(enqueteReponse),
   };
 
   status.global = getTopLevelGlobalStatus(
-    Object.values(status).map(x => x.global)
+    Object.values(status).map((x) => x.global)
   );
 
   return status;

@@ -3,7 +3,7 @@ const {
   enqueteActiviteStatus,
   enqueteInformationsMandatairesStatus,
   populationsStatus,
-  prestationsSocialesStatus
+  prestationsSocialesStatus,
 } = require("../common/enquete-status");
 
 async function enqueteMandataireIndividuelStatus(enqueteReponse) {
@@ -11,7 +11,7 @@ async function enqueteMandataireIndividuelStatus(enqueteReponse) {
     informations: await enqueteInformationsMandatairesStatus(enqueteReponse),
     activite: await enqueteActiviteStatus(enqueteReponse),
     populations: await populationsStatus(enqueteReponse),
-    prestationsSociales: await prestationsSocialesStatus(enqueteReponse)
+    prestationsSociales: await prestationsSocialesStatus(enqueteReponse),
   };
 
   status.global = getTopLevelGlobalStatus(status);

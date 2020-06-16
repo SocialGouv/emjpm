@@ -13,7 +13,7 @@ export const Enquete = ({ id, currentStep }) => {
   const { id: userId, type } = useContext(UserContext);
 
   const { data, loading } = useQuery(ENQUETE, {
-    variables: { id }
+    variables: { id },
   });
 
   if (loading) {
@@ -39,7 +39,7 @@ export const Enquete = ({ id, currentStep }) => {
 };
 
 Enquete.propTypes = {
-  id: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
 };
 
 export default Enquete;

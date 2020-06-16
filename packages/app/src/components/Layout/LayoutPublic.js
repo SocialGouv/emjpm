@@ -4,7 +4,7 @@ import { Box } from "rebass";
 
 import { Footer } from "../Footer";
 
-const LayoutPublic = props => {
+const LayoutPublic = (props) => {
   const { children } = props;
 
   return (

@@ -1,7 +1,7 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   await knex.schema.createTable(
     "enquete_reponses_prepose_prestations_sociales",
-    table => {
+    (table) => {
       table.increments();
       table.timestamp("created_at").defaultTo(knex.fn.now());
       table.timestamp("last_update").defaultTo(knex.fn.now());
@@ -21,7 +21,7 @@ exports.up = async function(knex) {
     }
   );
 
-  await knex.schema.alterTable("enquete_reponses", table => {
+  await knex.schema.alterTable("enquete_reponses", (table) => {
     table
       .integer("enquete_reponses_prepose_prestations_sociales_id")
       .references("id")
@@ -29,8 +29,8 @@ exports.up = async function(knex) {
   });
 };
 
-exports.down = async function(knex) {
-  await knex.schema.alterTable("enquete_reponses", table => {
+exports.down = async function (knex) {
+  await knex.schema.alterTable("enquete_reponses", (table) => {
     table.dropColumn("enquete_reponses_prepose_prestations_sociales_id");
   });
 

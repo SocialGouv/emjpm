@@ -13,7 +13,7 @@ const mesureUpdate = async (req, res) => {
   const {
     body,
     params: { id },
-    user: { user_id }
+    user: { user_id },
   } = req;
   let user;
   let serviceOrMandataire;

@@ -8,12 +8,12 @@ function parse(ws) {
     rsa: parser.integer(ws["D10"]),
     als_apl: parser.integer(ws["D11"]),
     aspa: parser.integer(ws["D12"]),
-    apa: parser.integer(ws["D13"])
+    apa: parser.integer(ws["D13"]),
   };
 }
 
 const enqueteExcelParserPrestationsSociales = {
-  parse
+  parse,
 };
 
 module.exports = enqueteExcelParserPrestationsSociales;

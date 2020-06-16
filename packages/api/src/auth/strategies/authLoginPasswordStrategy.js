@@ -4,15 +4,15 @@ const { User } = require("../../models/User");
 const authLoginPasswordStrategy = new LocalStrategy(
   {
     usernameField: "username",
-    passwordField: "password"
+    passwordField: "password",
   },
-  function(username, password, done) {
+  function (username, password, done) {
     User.query()
       .where("username", username)
       .orWhere("email", username.toLowerCase().trim())
       .first()
       .eager("[roles, service, tis]")
-      .then(function(user) {
+      .then(function (user) {
         if (!user) {
           return done("Unknown user");
         }
@@ -21,7 +21,7 @@ const authLoginPasswordStrategy = new LocalStrategy(
           return done("User is inactive");
         }
 
-        user.verifyPassword(password, function(err, passwordCorrect) {
+        user.verifyPassword(password, function (err, passwordCorrect) {
           if (err) {
             return done(err);
           }
@@ -33,7 +33,7 @@ const authLoginPasswordStrategy = new LocalStrategy(
           return done(null, user);
         });
       })
-      .catch(function(err) {
+      .catch(function (err) {
         done(err);
       });
   }

@@ -9,7 +9,7 @@ import { MesureProvider } from "../../../src/components/MesureContext";
 import { DEFAULT_MESURE_TYPE } from "../../../src/constants/mesures";
 import { withAuthSync } from "../../../src/util/auth";
 
-const Mandataires = props => {
+const Mandataires = (props) => {
   const { mesureId } = props;
   return (
     <LayoutMagistrat initialValues={{ mesureType: DEFAULT_MESURE_TYPE }}>
@@ -17,7 +17,7 @@ const Mandataires = props => {
         <Flex
           sx={{
             flexWrap: "wrap",
-            mt: "2"
+            mt: "2",
           }}
         >
           <MesureProvider mesureId={mesureId}>

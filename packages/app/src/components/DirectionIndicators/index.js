@@ -13,5 +13,5 @@ export {
   AvailableMesureIndicator,
   ServicesIndicator,
   MandatairesIndicator,
-  EtablissementIndicator
+  EtablissementIndicator,
 };

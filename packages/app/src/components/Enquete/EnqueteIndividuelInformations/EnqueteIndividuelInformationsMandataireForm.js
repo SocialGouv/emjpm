@@ -19,7 +19,7 @@ const validationSchema = yup.object().shape({
   forme_juridique: yup.string().when("benevole", {
     is: false,
     then: yup.string().required(),
-    otherwise: yup.string().nullable()
+    otherwise: yup.string().nullable(),
   }),
   anciennete: yup.string().required(),
   estimation_etp: yup.string().required(),
@@ -27,16 +27,13 @@ const validationSchema = yup.object().shape({
   exerce_secretaires_specialises: yup.boolean().required(),
   secretaire_specialise_etp: yup.number().when("exerce_secretaires_specialises", {
     is: true,
-    then: yup
-      .number()
-      .positive()
-      .required(), // > 0
+    then: yup.number().positive().required(), // > 0
     otherwise: yup
       .number()
       .oneOf([0], 'Vous avez répondu "non" à la question précédente, donc ce champ doit être vide.')
-      .nullable() // 0 or empty
+      .nullable(), // 0 or empty
   }),
-  local_professionnel: yup.boolean().required()
+  local_professionnel: yup.boolean().required(),
 });
 
 function dataToForm(data) {
@@ -53,18 +50,18 @@ function dataToForm(data) {
     secretaire_specialise_etp: data.secretaire_specialise_etp || "",
     local_professionnel: data.local_professionnel || false,
     tranche_age: data.tranche_age,
-    sexe: data.sexe
+    sexe: data.sexe,
   };
 }
 
-export const EnqueteIndividuelInformationsMandataireForm = props => {
+export const EnqueteIndividuelInformationsMandataireForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const {
@@ -74,7 +71,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
     values,
     errors,
     showError,
-    submit
+    submit,
   } = useEnqueteForm({
     onSubmit,
     enqueteContext,
@@ -83,7 +80,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
 
   return (
@@ -152,7 +149,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
           <YesNoComboBox
             defaultValue={values.benevole}
             name="benevole"
-            onChange={value => setFieldValue("benevole", value)}
+            onChange={(value) => setFieldValue("benevole", value)}
           />
           <InlineError showError={showError} message={errors.benevole} fieldId="benevole" />
         </Field>
@@ -172,7 +169,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
                 values.forme_juridique
               )}
               hasError={showError && !!errors.forme_juridique}
-              onChange={option => setFieldValue("forme_juridique", option.value)}
+              onChange={(option) => setFieldValue("forme_juridique", option.value)}
               options={ENQ_REP_INFO_MANDATAIRE.FORME_JURIDIQUE.byKey}
             />
             <InlineError
@@ -194,7 +191,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
             name="sexe"
             value={findOption(ENQ_REP_INFO_MANDATAIRE.SEXE.byKey, values.sexe)}
             hasError={showError && !!errors.sexe}
-            onChange={option => setFieldValue("sexe", option.value)}
+            onChange={(option) => setFieldValue("sexe", option.value)}
             options={ENQ_REP_INFO_MANDATAIRE.SEXE.byKey}
           />
           <InlineError showError={showError} message={errors.sexe} fieldId="sexe" />
@@ -211,7 +208,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
             name="anciennete"
             value={findOption(ENQ_REP_INFO_MANDATAIRE.ANCIENNETE.byKey, values.anciennete)}
             hasError={showError && !!errors.anciennete}
-            onChange={option => setFieldValue("anciennete", option.value)}
+            onChange={(option) => setFieldValue("anciennete", option.value)}
             options={ENQ_REP_INFO_MANDATAIRE.ANCIENNETE.byKey}
           />
           <InlineError showError={showError} message={errors.anciennete} fieldId="anciennete" />
@@ -228,7 +225,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
             name="tranche_age"
             value={findOption(ENQ_REP_INFO_MANDATAIRE.TRANCHE_AGE.byKey, values.tranche_age)}
             hasError={showError && !!errors.tranche_age}
-            onChange={option => setFieldValue("tranche_age", option.value)}
+            onChange={(option) => setFieldValue("tranche_age", option.value)}
             options={ENQ_REP_INFO_MANDATAIRE.TRANCHE_AGE.byKey}
           />
           <InlineError showError={showError} message={errors.tranche_age} fieldId="tranche_age" />
@@ -242,7 +239,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
           <YesNoComboBox
             defaultValue={values.exerce_seul_activite}
             name="exerce_seul_activite"
-            onChange={value => setFieldValue("exerce_seul_activite", value)}
+            onChange={(value) => setFieldValue("exerce_seul_activite", value)}
           />
           <InlineError
             showError={showError}
@@ -261,7 +258,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
             name="estimation_etp"
             value={findOption(ENQ_REP_INFO_MANDATAIRE.ESTIMATION_ETP.byKey, values.estimation_etp)}
             hasError={showError && !!errors.estimation_etp}
-            onChange={option => setFieldValue("estimation_etp", option.value)}
+            onChange={(option) => setFieldValue("estimation_etp", option.value)}
             options={ENQ_REP_INFO_MANDATAIRE.ESTIMATION_ETP.byKey}
           />
           <InlineError
@@ -277,7 +274,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
           <YesNoComboBox
             defaultValue={values.exerce_secretaires_specialises}
             name="exerce_secretaires_specialises"
-            onChange={value => setFieldValue("exerce_secretaires_specialises", value)}
+            onChange={(value) => setFieldValue("exerce_secretaires_specialises", value)}
           />
           <InlineError
             showError={showError}
@@ -313,7 +310,7 @@ export const EnqueteIndividuelInformationsMandataireForm = props => {
           <YesNoComboBox
             defaultValue={values.local_professionnel}
             name="local_professionnel"
-            onChange={value => setFieldValue("local_professionnel", value)}
+            onChange={(value) => setFieldValue("local_professionnel", value)}
           />
           <InlineError
             showError={showError}

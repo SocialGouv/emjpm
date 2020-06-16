@@ -7,7 +7,7 @@ import { MESURES } from "./queries";
 
 const MandataireMap = ({ selectMesures, selectedMesuresIds }) => {
   const {
-    mandataire: { longitude, latitude }
+    mandataire: { longitude, latitude },
   } = useContext(UserContext);
 
   const { data, loading, error } = useQuery(MESURES);
@@ -16,11 +16,11 @@ const MandataireMap = ({ selectMesures, selectedMesuresIds }) => {
     () =>
       !data
         ? []
-        : data.mesures.map(mesure => ({
+        : data.mesures.map((mesure) => ({
             id: mesure.id,
             longitude: mesure.longitude,
             latitude: mesure.latitude,
-            isSelected: selectedMesuresIds.includes(mesure.id)
+            isSelected: selectedMesuresIds.includes(mesure.id),
           })),
     [data, selectedMesuresIds]
   );
@@ -37,8 +37,8 @@ const MandataireMap = ({ selectMesures, selectedMesuresIds }) => {
     <MapContainer latitude={latitude} longitude={longitude}>
       <MapCluster
         items={mesuresMarkers}
-        onMarkerClick={marker => selectMesures([marker.id])}
-        onClusterClick={markers => selectMesures(markers.map(({ id }) => id))}
+        onMarkerClick={(marker) => selectMesures([marker.id])}
+        onClusterClick={(markers) => selectMesures(markers.map(({ id }) => id))}
         type="MESURE"
       />
     </MapContainer>

@@ -15,10 +15,10 @@ const editorsRoutes = require("./routes/api/editors");
 
 const corsOptions = {
   credentials: true,
-  origin: true
+  origin: true,
 };
 const bodyParserOptions = {
-  limit: "10mb"
+  limit: "10mb",
 };
 
 const app = express();
@@ -52,23 +52,23 @@ app.use(
   require("./routes/hasura-actions/hasura-actions.routes.js")
 );
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.json({
     title: "API eMJPM",
     version: pkg.version,
-    NODE_ENV: process.env.NODE_ENV || "development"
+    NODE_ENV: process.env.NODE_ENV || "development",
   });
 });
 
 // error handler
 app.use(errorHandler);
 
-process.on("unhandledRejection", error => {
+process.on("unhandledRejection", (error) => {
   logger.error("unhandledRejection", error.message);
   Sentry.captureException(error);
 });
 
-process.on("uncaughtException", async error => {
+process.on("uncaughtException", async (error) => {
   logger.error("uncaughtException", error.message);
   Sentry.captureException(error);
   process.exit(1);

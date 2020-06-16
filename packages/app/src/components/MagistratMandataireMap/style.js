@@ -1,5 +1,5 @@
 const MagistratMesureMapStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { MagistratMesureMapStyle };

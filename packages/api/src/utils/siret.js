@@ -20,9 +20,9 @@ const refreshAccessToken = async () => {
   const res = await fetch(INSEE_API_TOKEN_URL, {
     method: "post",
     headers: {
-      Authorization: `Basic ${INSEE_API_BASIC_TOKEN}`
+      Authorization: `Basic ${INSEE_API_BASIC_TOKEN}`,
     },
-    body: params
+    body: params,
   });
 
   let json;
@@ -53,7 +53,7 @@ const checkAccessToken = async () => {
   return {};
 };
 
-const find = async siret => {
+const find = async (siret) => {
   if (cache[siret]) {
     return cache[siret];
   }
@@ -67,8 +67,8 @@ const find = async siret => {
   const res = await fetch(`${INSEE_SIREN_API_URL}/siret/${siret}`, {
     method: "get",
     headers: {
-      Authorization: `Bearer ${accessToken}`
-    }
+      Authorization: `Bearer ${accessToken}`,
+    },
   });
 
   let json;
@@ -91,7 +91,7 @@ const find = async siret => {
 };
 
 const siret = {
-  find
+  find,
 };
 
 module.exports = siret;

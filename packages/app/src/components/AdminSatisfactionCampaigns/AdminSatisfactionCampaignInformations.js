@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 
 import { SATISFACTION_CAMPAIGN } from "./queries";
 
-const AdminSatisfactionCampaignInformations = props => {
+const AdminSatisfactionCampaignInformations = (props) => {
   const { id } = props;
   const { data, loading, error } = useQuery(SATISFACTION_CAMPAIGN, { variables: { id } });
 

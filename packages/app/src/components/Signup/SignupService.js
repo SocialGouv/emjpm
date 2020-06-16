@@ -16,7 +16,7 @@ import { SignupGeneralError } from "./SignupGeneralError";
 import { cardStyle, grayBox } from "./style";
 
 function getServiceOptions(services, departments, selectedValue) {
-  const department = departments.find(data => data.id === selectedValue);
+  const department = departments.find((data) => data.id === selectedValue);
   if (!department) {
     return [];
   }
@@ -33,7 +33,7 @@ function getServiceOptions(services, departments, selectedValue) {
     })
     .map(({ etablissement, id }) => ({
       label: etablissement,
-      value: id
+      value: id,
     }));
 }
 
@@ -45,25 +45,25 @@ const SignupServiceForm = ({ serviceDatas }) => {
     onSubmit: (values, { setSubmitting, setErrors }) => {
       const body = {
         service: {
-          service_id: values.service.value
+          service_id: values.service.value,
         },
         user: {
           username: user.email,
-          ...user
-        }
+          ...user,
+        },
       };
       signup({
         body,
         onComplete: () => setSubmitting(false),
-        onError: errors => setErrors(errors),
-        onSuccess: () => Router.push("/signup/congratulation")
+        onError: (errors) => setErrors(errors),
+        onSuccess: () => Router.push("/signup/congratulation"),
       });
     },
     validationSchema: signupServiceSchema,
     initialValues: {
       departement: service ? service.departement : null,
-      service: service ? service.service : null
-    }
+      service: service ? service.service : null,
+    },
   });
 
   if (loading) {
@@ -75,7 +75,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
   const serviceOptions = getServiceOptions(serviceDatas, departments, selectedValue);
   const departmentsOptions = departments.map(({ nom, id }) => ({
     label: nom,
-    value: id
+    value: id,
   }));
 
   return (
@@ -101,7 +101,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
                   placeholder="Département de votre service"
                   value={formik.values.departement}
                   hasError={formik.errors.departement && formik.touched.departement}
-                  onChange={option => formik.setFieldValue("departement", option)}
+                  onChange={(option) => formik.setFieldValue("departement", option)}
                   options={departmentsOptions}
                 />
                 {formik.touched.departement && (
@@ -115,7 +115,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
                   placeholder="Votre service"
                   value={formik.values.service}
                   hasError={formik.errors.service && formik.touched.service}
-                  onChange={option => formik.setFieldValue("service", option)}
+                  onChange={(option) => formik.setFieldValue("service", option)}
                   options={serviceOptions}
                 />
                 {formik.touched.service && (
@@ -160,8 +160,8 @@ const SignupServiceForm = ({ serviceDatas }) => {
   );
 };
 
-const SignupService = props => (
-  <SignupDatas {...props} Component={props => <SignupServiceForm {...props} />} />
+const SignupService = (props) => (
+  <SignupDatas {...props} Component={(props) => <SignupServiceForm {...props} />} />
 );
 
 export { SignupService };

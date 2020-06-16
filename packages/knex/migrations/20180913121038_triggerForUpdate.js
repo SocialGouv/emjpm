@@ -8,8 +8,8 @@ const ON_UPDATE_TIMESTAMP_FUNCTION = `
 $$ language 'plpgsql';
 `;
 
-exports.up = knex => knex.raw(ON_UPDATE_TIMESTAMP_FUNCTION);
+exports.up = (knex) => knex.raw(ON_UPDATE_TIMESTAMP_FUNCTION);
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

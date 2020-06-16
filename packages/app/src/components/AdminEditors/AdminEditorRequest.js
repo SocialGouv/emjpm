@@ -13,17 +13,15 @@ const RowItem = ({ item }) => {
   const [addEditor] = useMutation(ADD_EDITOR_FROM_REQUEST);
 
   const authorizeEditor = async (id, name) => {
-    const api_token = Math.random()
-      .toString(36)
-      .substring(2);
+    const api_token = Math.random().toString(36).substring(2);
     try {
       await addEditor({
         refetchQueries: ["editors", "editorRequests"],
         variables: {
           name: name,
           id: id,
-          api_token
-        }
+          api_token,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);
@@ -61,8 +59,8 @@ const AdminEditorRequest = () => {
   const { data, error, loading } = useQuery(EDITOR_REQUESTS, {
     variables: {
       limit: resultPerPage,
-      offset: currentOffset
-    }
+      offset: currentOffset,
+    },
   });
 
   if (loading) {

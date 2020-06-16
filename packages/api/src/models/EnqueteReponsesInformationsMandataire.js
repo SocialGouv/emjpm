@@ -28,8 +28,8 @@ class EnqueteReponsesInformationsMandataire extends Model {
         estimation_etp: { type: "string" },
         exerce_secretaires_specialises: { type: "boolean" },
         secretaire_specialise_etp: { type: "number" },
-        local_professionnel: { type: "boolean" }
-      }
+        local_professionnel: { type: "boolean" },
+      },
     };
   }
 }

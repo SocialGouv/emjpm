@@ -12,8 +12,8 @@ const ServicesIndicator = () => {
     variables: {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      type: "SERVICE"
-    }
+      type: "SERVICE",
+    },
   });
 
   return (

@@ -9,7 +9,7 @@ import { withAuthSync } from "../../src/util/auth";
 
 const SignupInvitationPage = () => {
   const {
-    query: { token }
+    query: { token },
   } = useRouter();
 
   return (

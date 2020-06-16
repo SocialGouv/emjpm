@@ -1,10 +1,10 @@
 var zipCodes = require("../postal_raw.json");
 
-exports.seed = knex => {
+exports.seed = (knex) => {
   if (process.env.NODE_ENV === "test") {
     return Promise.resolve();
   }
-  const newRows = zipCodes.map(row => {
+  const newRows = zipCodes.map((row) => {
     return {
       code_postal: row.fields.code_postal,
       ville: row.fields.nom_de_la_commune,
@@ -13,11 +13,11 @@ exports.seed = knex => {
         : "null",
       longitude: row.fields.coordonnees_gps
         ? row.fields.coordonnees_gps[1]
-        : "null"
+        : "null",
     };
   });
 
-  return knex.transaction(tr => {
+  return knex.transaction((tr) => {
     return knex
       .table("city")
       .del()

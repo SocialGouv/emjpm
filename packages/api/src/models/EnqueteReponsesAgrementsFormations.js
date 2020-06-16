@@ -30,8 +30,8 @@ class EnqueteReponsesAgrementsFormations extends Model {
         niveau_qualification_secretaire_spe: { type: "number" },
         secretaire_specialise: { type: "boolean" },
         nb_mesures_dep_finance: { type: "number" },
-        nb_mesures_dep_autres: { type: "number" }
-      }
+        nb_mesures_dep_autres: { type: "number" },
+      },
     };
   }
 }

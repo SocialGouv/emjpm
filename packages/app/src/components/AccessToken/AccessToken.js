@@ -10,19 +10,19 @@ import { USER_TOKEN } from "./queries";
 const innerTextStyle = {
   color: "mediumGray",
   fontWeight: "600",
-  mt: "1"
+  mt: "1",
 };
 
 const boxStyle = {
-  flexGrow: 1
+  flexGrow: 1,
 };
 
-const AccessToken = props => {
+const AccessToken = (props) => {
   const { userId, isAdmin } = props;
   const { data, loading, error } = useQuery(USER_TOKEN, {
     variables: {
-      userId: userId
-    }
+      userId: userId,
+    },
   });
 
   if (loading) {
@@ -46,7 +46,7 @@ const AccessToken = props => {
             )}
           </Heading5>
           <Box mr={4} mb="3">
-            {access_tokens.map(token => {
+            {access_tokens.map((token) => {
               return (
                 <Flex sx={innerTextStyle} alignItem="center" key={token.id}>
                   <Text>{token.editors.name}</Text>
@@ -62,11 +62,11 @@ const AccessToken = props => {
 };
 
 AccessToken.defaultProps = {
-  isAdmin: false
+  isAdmin: false,
 };
 
 AccessToken.propTypes = {
-  isAdmin: PropTypes.bool
+  isAdmin: PropTypes.bool,
 };
 
 export { AccessToken };

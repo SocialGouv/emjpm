@@ -7,7 +7,7 @@ import { MandataireMapPanelMesures } from "../../src/components/MandataireMapPan
 import { withAuthSync } from "../../src/util/auth";
 
 const MandataireMap = dynamic(
-  () => import("../../src/components/MandataireMap").then(mod => mod.MandataireMap),
+  () => import("../../src/components/MandataireMap").then((mod) => mod.MandataireMap),
   { ssr: false }
 );
 
@@ -20,7 +20,7 @@ const Map = () => {
           <Box
             sx={{
               flexBasis: 600,
-              flexGrow: 1
+              flexGrow: 1,
             }}
           >
             <MandataireMapPanelMesures mesuresIds={selectedMesuresIds} />
@@ -31,11 +31,11 @@ const Map = () => {
           sx={{
             flexBasis: 0,
             flexGrow: 99999,
-            minWidth: 320
+            minWidth: 320,
           }}
         >
           <MandataireMap
-            selectMesures={ids => setSelectedMesuresIds(ids)}
+            selectMesures={(ids) => setSelectedMesuresIds(ids)}
             selectedMesuresIds={selectedMesuresIds}
           />
         </Box>

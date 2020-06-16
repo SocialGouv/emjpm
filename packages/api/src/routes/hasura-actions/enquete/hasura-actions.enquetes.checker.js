@@ -18,7 +18,7 @@ async function checkEnqueteContext(req) {
     enqueteId,
     userId,
     service: undefined,
-    mandataire: undefined
+    mandataire: undefined,
   };
 
   if (role === "service") {
@@ -27,7 +27,7 @@ async function checkEnqueteContext(req) {
       throw new HttpError(403, "Access denied: invalid serviceId");
     }
     context.service = await Service.query().findOne({
-      user_id: userId
+      user_id: userId,
     });
     throw new HttpError(400, "Not supported yet (service)");
   } else if (role === "individuel") {
@@ -36,7 +36,7 @@ async function checkEnqueteContext(req) {
       throw new HttpError(403, "Access denied: invalid 'userId'");
     }
     context.mandataire = await Mandataire.query().findOne({
-      user_id: userId
+      user_id: userId,
     });
   } else if (role === "prepose") {
     // MANDATAIRE PREPOSE
@@ -44,7 +44,7 @@ async function checkEnqueteContext(req) {
       throw new HttpError(403, "Access denied: invalid 'userId'");
     }
     context.mandataire = await Mandataire.query().findOne({
-      user_id: userId
+      user_id: userId,
     });
   } else {
     throw new HttpError(403, "Invalid user");

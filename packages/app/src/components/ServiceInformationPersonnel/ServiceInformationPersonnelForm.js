@@ -21,7 +21,7 @@ const InputField = ({ formik, property, placeholder, onChange }) => (
   </Field>
 );
 
-const ServiceInformationPersonnelForm = props => {
+const ServiceInformationPersonnelForm = (props) => {
   const { personnel, handleSubmit, handleCancel } = props;
 
   const formik = useFormik({
@@ -36,8 +36,8 @@ const ServiceInformationPersonnelForm = props => {
       nombreDeleguesCncMaj: personnel.nombre_delegues_cnc_maj || "",
       nombreDeleguesCncDpf: personnel.nombre_delegues_cnc_dpf || "",
       nombreDeleguesEnFormation: personnel.nombre_delegues_en_formation || "",
-      nombreDeleguesNonFormes: personnel.nombre_delegues_non_formes || ""
-    }
+      nombreDeleguesNonFormes: personnel.nombre_delegues_non_formes || "",
+    },
   });
 
   return (

@@ -9,35 +9,35 @@ import { Navigation } from "../Navigation";
 const navigationLinks = [
   {
     title: "Utilisateurs",
-    url: "/admin"
+    url: "/admin",
   },
   {
     title: "Services",
-    url: "/admin/services"
+    url: "/admin/services",
   },
   {
     title: "Tribunaux",
-    url: "/admin/tribunaux"
+    url: "/admin/tribunaux",
   },
   {
     title: "Liste blanche",
-    url: "/admin/liste-blanche"
+    url: "/admin/liste-blanche",
   },
   {
     title: "Editeurs",
-    url: "/admin/editors"
+    url: "/admin/editors",
   },
   {
     title: "API Logs",
-    url: "/admin/api-logs"
+    url: "/admin/api-logs",
   },
   {
     title: "Campagnes de satisfaction",
-    url: "/admin/satisfaction-campaigns"
-  }
+    url: "/admin/satisfaction-campaigns",
+  },
 ];
 
-const LayoutAdmin = props => {
+const LayoutAdmin = (props) => {
   const { children, hasNavigation = true } = props;
 
   return (

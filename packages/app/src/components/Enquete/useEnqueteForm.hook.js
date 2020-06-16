@@ -10,7 +10,7 @@ export function useEnqueteForm({
   validationSchema,
   dataToForm,
   formToData,
-  loading
+  loading,
 }) {
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
@@ -21,7 +21,7 @@ export function useEnqueteForm({
     },
     validationSchema,
     initialValues: dataToForm ? dataToForm(data) : data,
-    onChange: () => {}
+    onChange: () => {},
   });
 
   const {
@@ -34,7 +34,7 @@ export function useEnqueteForm({
     setValues,
     setFieldValue,
     isValid,
-    dirty
+    dirty,
   } = formik
     ? formik
     : {
@@ -47,7 +47,7 @@ export function useEnqueteForm({
         setValues: undefined,
         setFieldValue: undefined,
         isValid: undefined,
-        dirty: undefined
+        dirty: undefined,
       };
 
   useMemo(() => {
@@ -85,7 +85,7 @@ export function useEnqueteForm({
   const showError = useMemo(() => !loading && (step.status !== "empty" || submitCount !== 0), [
     step.status,
     submitCount,
-    loading
+    loading,
   ]);
 
   const submit = useMemo(
@@ -111,6 +111,6 @@ export function useEnqueteForm({
     setValues,
     setFieldValue,
     showError,
-    submit
+    submit,
   };
 }

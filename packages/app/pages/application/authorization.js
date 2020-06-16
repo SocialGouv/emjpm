@@ -7,7 +7,7 @@ import { Authorize } from "../../src/components/Authorize";
 import { LayoutPublic } from "../../src/components/Layout";
 import { withAuthSync } from "../../src/util/auth";
 
-const AuthorizationPage = props => {
+const AuthorizationPage = (props) => {
   const { token, editorId, editorSecret, redirectUrl } = props;
   return (
     <LayoutPublic>
@@ -20,7 +20,7 @@ const AuthorizationPage = props => {
         <Box
           sx={{
             flexBasis: ["100%", "50%"],
-            p: "3"
+            p: "3",
           }}
         >
           <Image
@@ -28,14 +28,14 @@ const AuthorizationPage = props => {
             sx={{
               mt: "80px",
               p: "3",
-              width: ["100%"]
+              width: ["100%"],
             }}
           />
         </Box>
         <Box
           sx={{
             flexBasis: ["100%", "50%"],
-            p: "3"
+            p: "3",
           }}
         >
           {token ? (
@@ -54,7 +54,7 @@ AuthorizationPage.getInitialProps = async ({ token, query }) => {
     editorId: query["editor_id"],
     editorSecret: query["editor_secret"],
     redirectUrl: query["redirect_url"],
-    token
+    token,
   };
 };
 

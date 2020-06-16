@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Button, Flex } from "rebass";
 
-export const EnqueteStepperButtons = props => {
+export const EnqueteStepperButtons = (props) => {
   const { submit, disabled = false } = props;
   return (
     <Flex mt={"80px"} alignItems="center" flexDirection="column">
@@ -9,7 +9,7 @@ export const EnqueteStepperButtons = props => {
         <Fragment>
           <Button
             disabled={disabled}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               if (submit) {
                 submit({ action: "click-previous" });
@@ -21,7 +21,7 @@ export const EnqueteStepperButtons = props => {
           </Button>
           <Button
             disabled={disabled}
-            onClick={e => {
+            onClick={(e) => {
               e.preventDefault();
               if (submit) {
                 submit({ action: "click-next" });

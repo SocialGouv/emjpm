@@ -5,14 +5,14 @@ import { Box, Flex, Text } from "rebass";
 import DynamicTableFooter from "./DynamicTableFooter";
 import { TableRowStyle } from "./style";
 
-const DynamicTable = props => {
+const DynamicTable = (props) => {
   const { columns, data, selectedRows, setSelectedRows } = props;
 
   const table = useTable(
     {
       columns,
       data,
-      initialState: { pageIndex: 0, pageSize: 20, selectedRowPaths: selectedRows }
+      initialState: { pageIndex: 0, pageSize: 20, selectedRowPaths: selectedRows },
     },
     useSortBy,
     usePagination,
@@ -34,13 +34,13 @@ const DynamicTable = props => {
     previousPage,
     setPageSize,
     selectedFlatRows,
-    state: { selectedRowIds, pageIndex, pageSize }
+    state: { selectedRowIds, pageIndex, pageSize },
   } = table;
 
-  useEffect(() => setSelectedRows(selectedFlatRows.map(d => d.original)), [
+  useEffect(() => setSelectedRows(selectedFlatRows.map((d) => d.original)), [
     setSelectedRows,
     selectedRowIds,
-    selectedFlatRows
+    selectedFlatRows,
   ]);
 
   return (

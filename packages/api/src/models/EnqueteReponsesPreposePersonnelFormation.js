@@ -24,8 +24,8 @@ class EnqueteReponsesPreposePersonnelFormation extends Model {
         nb_preposes_homme: { type: "number" },
         nb_preposes_femme: { type: "number" },
         nb_autre_personnel: { type: "number" },
-        nb_autre_personnel_etp: { type: "number" }
-      }
+        nb_autre_personnel_etp: { type: "number" },
+      },
     };
   }
 }

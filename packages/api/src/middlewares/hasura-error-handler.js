@@ -3,13 +3,13 @@ const logger = require("../utils/logger");
 const HttpError = require("../utils/error/HttpError");
 
 // https://hasura.io/docs/1.0/graphql/manual/actions/action-handlers.html#returning-an-error-response
-const hasuraActionErrorHandler = message => (err, req, res, next) => {
+const hasuraActionErrorHandler = (message) => (err, req, res, next) => {
   if (err) {
     if (err instanceof HttpError) {
       logger.warn(err.message);
       // response format: {message!, code}
       return res.status(err.code).json({
-        message: err.message
+        message: err.message,
       });
     } else {
       if (!message) {
@@ -18,7 +18,7 @@ const hasuraActionErrorHandler = message => (err, req, res, next) => {
       logger.error(err);
       // response format: {message!, code}
       res.status(400).json({
-        message
+        message,
       });
       sentry.captureException(err);
     }

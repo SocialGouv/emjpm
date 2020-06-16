@@ -46,15 +46,15 @@ class EnqueteReponsesActivite extends Model {
 
         accompagnement_judiciaire_etablissement_debut_annee: { TYPE: "NUMBER" },
         accompagnement_judiciaire_etablissement_mesures_nouvelles: {
-          TYPE: "NUMBER"
+          TYPE: "NUMBER",
         },
         accompagnement_judiciaire_etablissement_sortie_mesures: {
-          TYPE: "NUMBER"
+          TYPE: "NUMBER",
         },
         accompagnement_judiciaire_etablissement_fin_annee: { TYPE: "NUMBER" },
         accompagnement_judiciaire_domicile_debut_annee: { TYPE: "NUMBER" },
         accompagnement_judiciaire_domicile_mesures_nouvelles: {
-          TYPE: "NUMBER"
+          TYPE: "NUMBER",
         },
         accompagnement_judiciaire_domicile_sortie_mesures: { TYPE: "NUMBER" },
         accompagnement_judiciaire_domicile_fin_annee: { TYPE: "NUMBER" },
@@ -100,8 +100,8 @@ class EnqueteReponsesActivite extends Model {
 
         sorties_main_levee: { TYPE: "NUMBER" },
         sorties_deces: { TYPE: "NUMBER" },
-        sorties_masp: { TYPE: "NUMBER" }
-      }
+        sorties_masp: { TYPE: "NUMBER" },
+      },
     };
   }
 }

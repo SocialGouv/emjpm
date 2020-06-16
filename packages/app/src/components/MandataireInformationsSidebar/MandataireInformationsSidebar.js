@@ -6,11 +6,11 @@ import { Box, Flex, Text } from "rebass";
 import { UserContext } from "../UserContext";
 import { CardStyle, description, icon, partTitle, SidebarStyle, title } from "./style";
 
-const MandataireInformationsSidebar = props => {
+const MandataireInformationsSidebar = (props) => {
   const {
     nom,
     prenom,
-    mandataire: { dispo_max, mesures_en_cours, mesures_en_attente }
+    mandataire: { dispo_max, mesures_en_cours, mesures_en_attente },
   } = useContext(UserContext);
   return (
     <Box sx={SidebarStyle} {...props}>

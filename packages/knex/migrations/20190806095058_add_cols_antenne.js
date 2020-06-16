@@ -1,9 +1,6 @@
-exports.up = function(knex) {
-  return knex.schema.alterTable("service_antenne", function(table) {
-    table
-      .boolean("headquarters")
-      .notNullable()
-      .defaultTo(false);
+exports.up = function (knex) {
+  return knex.schema.alterTable("service_antenne", function (table) {
+    table.boolean("headquarters").notNullable().defaultTo(false);
     table.string("address_street");
     table.string("address_zip_code");
     table.string("address_city");
@@ -11,24 +8,15 @@ exports.up = function(knex) {
     table.string("contact_firstname");
     table.string("contact_email");
     table.string("contact_phone");
-    table
-      .integer("mesures_awaiting")
-      .notNullable()
-      .defaultTo(0);
-    table
-      .integer("mesures_in_progress")
-      .notNullable()
-      .defaultTo(0);
-    table
-      .integer("mesures_max")
-      .notNullable()
-      .defaultTo(0);
+    table.integer("mesures_awaiting").notNullable().defaultTo(0);
+    table.integer("mesures_in_progress").notNullable().defaultTo(0);
+    table.integer("mesures_max").notNullable().defaultTo(0);
     table.timestamp("date_mesure_update");
   });
 };
 
-exports.down = function(knex) {
-  return knex.schema.alterTable("service_antenne", function(table) {
+exports.down = function (knex) {
+  return knex.schema.alterTable("service_antenne", function (table) {
     table.dropColumn("headquarters");
     table.dropColumn("address_street");
     table.dropColumn("address_zip_code");

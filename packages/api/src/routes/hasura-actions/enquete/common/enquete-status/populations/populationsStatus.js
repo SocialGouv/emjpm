@@ -1,12 +1,12 @@
 const {
   getValidationStatus,
-  getGlobalStatus
+  getGlobalStatus,
 } = require("../enqueteSchemaUtil");
 const { buildPopulationValidator } = require("./enquetePopulationsValidator");
 
 const debugGroupName = "populations";
 
-module.exports = async enqueteReponse => {
+module.exports = async (enqueteReponse) => {
   const status = {
     curatelle: await getValidationStatus(
       enqueteReponse.enquete_reponses_population,
@@ -14,7 +14,7 @@ module.exports = async enqueteReponse => {
         schema: buildPopulationValidator({ prefix: "curatelle" }),
         debugName: `${debugGroupName}/curatelle`,
         logDataWithErrors: false,
-        logDataIfEmpty: false
+        logDataIfEmpty: false,
       }
     ),
     tutelle: await getValidationStatus(
@@ -23,7 +23,7 @@ module.exports = async enqueteReponse => {
         schema: buildPopulationValidator({ prefix: "tutelle" }),
         debugName: `${debugGroupName}/tutelle`,
         logDataWithErrors: false,
-        logDataIfEmpty: false
+        logDataIfEmpty: false,
       }
     ),
     accompagnementJudiciaire: await getValidationStatus(
@@ -31,7 +31,7 @@ module.exports = async enqueteReponse => {
       {
         schema: buildPopulationValidator({ prefix: "maj" }),
         debugName: `${debugGroupName}/accompagnementJudiciaire`,
-        logDataWithErrors: false
+        logDataWithErrors: false,
       }
     ),
     sauvegardeJustice: await getValidationStatus(
@@ -39,7 +39,7 @@ module.exports = async enqueteReponse => {
       {
         schema: buildPopulationValidator({ prefix: "sauvegarde_justice" }),
         debugName: `${debugGroupName}/sauvegardeJustice`,
-        logDataWithErrors: false
+        logDataWithErrors: false,
       }
     ),
     autresMesures: await getValidationStatus(
@@ -47,9 +47,9 @@ module.exports = async enqueteReponse => {
       {
         schema: buildPopulationValidator({ prefix: "autre_mesures" }),
         debugName: `${debugGroupName}/autresMesures`,
-        logDataWithErrors: false
+        logDataWithErrors: false,
       }
-    )
+    ),
   };
 
   status.global = getGlobalStatus(status);

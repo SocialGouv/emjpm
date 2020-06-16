@@ -5,15 +5,15 @@ import { Box, Flex } from "rebass";
 
 import { adminEditorSchema } from "../../lib/validationSchemas";
 
-export const AdminEditorForm = props => {
+export const AdminEditorForm = (props) => {
   const { handleCancel, handleSubmit, editor } = props;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
     validationSchema: adminEditorSchema,
     initialValues: {
-      name: editor ? editor.name : ""
-    }
+      name: editor ? editor.name : "",
+    },
   });
 
   return (

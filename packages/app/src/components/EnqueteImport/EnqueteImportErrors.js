@@ -4,7 +4,7 @@ import { Flex, Text } from "rebass";
 
 import { importErrorsWrapperStyle } from "./style";
 
-const EnqueteImportErrors = props => {
+const EnqueteImportErrors = (props) => {
   const { errors } = props;
 
   return (

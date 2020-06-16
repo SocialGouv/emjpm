@@ -8,7 +8,7 @@ import {
   AvailableMesureIndicator,
   EtablissementIndicator,
   MandatairesIndicator,
-  ServicesIndicator
+  ServicesIndicator,
 } from "../../../src/components/DirectionIndicators";
 import { MandatairesList } from "../../../src/components/DirectionMandatairesList";
 import { MandatairesSubNavigation } from "../../../src/components/DirectionMandatairesSubNavigation";

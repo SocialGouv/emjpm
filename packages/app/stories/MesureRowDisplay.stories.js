@@ -6,7 +6,7 @@ import { linkTo } from "@storybook/addon-links";
 
 import {
   default as TableRowMesure,
-  TableRowMesureView
+  TableRowMesureView,
 } from "../src/components/mandataireComponents/TableRowMesure";
 
 storiesOf("MesuresCreation", module)

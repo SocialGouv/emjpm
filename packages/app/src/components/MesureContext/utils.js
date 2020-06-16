@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 
-export const formatMesure = mesure => {
+export const formatMesure = (mesure) => {
   const {
     residence,
     code_postal,
@@ -24,7 +24,7 @@ export const formatMesure = mesure => {
     service_antenne,
     service_id,
     mandataire_id,
-    pays
+    pays,
   } = mesure;
 
   let currentStatus;
@@ -68,6 +68,6 @@ export const formatMesure = mesure => {
     tribunal: ti ? ti.etablissement : "Tribunal non renseigné",
     type: type ? type : "type de mesure non renseigné",
     ville: ville ? ville : "ville non renseigné",
-    pays
+    pays,
   };
 };

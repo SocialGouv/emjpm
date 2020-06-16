@@ -2,25 +2,25 @@
 const logger = require("../../../../utils/logger");
 const {
   graphqlFetch,
-  backendAuthHeaders
+  backendAuthHeaders,
 } = require("../../../../utils/graphql-fetcher");
 const { ENQUETE_REPONSE } = require("./queries");
 const { INIT_ENQUETE_REPONSE, SUBMIT_ENQUETE_REPONSE } = require("./mutations");
 
 module.exports = {
-  submitEnqueteReponse: async id => {
+  submitEnqueteReponse: async (id) => {
     try {
       const { data, errors } = await graphqlFetch(
         {
           id,
-          submittedAt: new Date()
+          submittedAt: new Date(),
         },
         SUBMIT_ENQUETE_REPONSE,
         backendAuthHeaders
       );
 
       if (errors && errors.length) {
-        errors.map(error => logger.error(error));
+        errors.map((error) => logger.error(error));
       }
       return data.update_enquete_reponses_by_pk;
     } catch (err) {
@@ -34,14 +34,14 @@ module.exports = {
       const { data, errors } = await graphqlFetch(
         {
           enqueteId,
-          mandataireId
+          mandataireId,
         },
         INIT_ENQUETE_REPONSE,
         backendAuthHeaders
       );
 
       if (errors && errors.length) {
-        errors.map(error => logger.error(error));
+        errors.map((error) => logger.error(error));
       }
 
       return data;
@@ -56,14 +56,14 @@ module.exports = {
       const { data, errors } = await graphqlFetch(
         {
           enqueteId,
-          mandataireId
+          mandataireId,
         },
         ENQUETE_REPONSE,
         backendAuthHeaders
       );
 
       if (errors && errors.length) {
-        errors.map(error => logger.error(error));
+        errors.map((error) => logger.error(error));
       }
 
       const { enquete_reponses } = data;
@@ -73,5 +73,5 @@ module.exports = {
       logger.error(err);
       throw err;
     }
-  }
+  },
 };

@@ -9,31 +9,31 @@ import * as Yup from "yup";
 
 import { DELETE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 
-export const MandataireMesureDeleteForm = props => {
+export const MandataireMesureDeleteForm = (props) => {
   const { mesure } = props;
 
   const [calculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
   const [deleteMesure] = useMutation(DELETE_MESURE, {
     onCompleted: async () => {
       await calculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    }
+    },
   });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await deleteMesure({
         variables: {
-          id: mesure.id
-        }
+          id: mesure.id,
+        },
       });
 
       await Router.push(`/mandataires`);
       setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
-      reason_delete: Yup.string().required("Required")
+      reason_delete: Yup.string().required("Required"),
     }),
-    initialValues: { reason_delete: "" }
+    initialValues: { reason_delete: "" },
   });
 
   return (
@@ -89,5 +89,5 @@ export const MandataireMesureDeleteForm = props => {
 };
 
 MandataireMesureDeleteForm.propTypes = {
-  currentMesure: PropTypes.number.isRequired
+  currentMesure: PropTypes.number.isRequired,
 };

@@ -9,7 +9,7 @@ import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
 import { formatAntenneOptions } from "../../util/services";
 import { GeocodeCities } from "../Geocode";
 
-export const ServiceMesureAcceptForm = props => {
+export const ServiceMesureAcceptForm = (props) => {
   const { mesure, service_antennes, onSubmit } = props;
   const antenneOptions = formatAntenneOptions(service_antennes);
 
@@ -22,8 +22,8 @@ export const ServiceMesureAcceptForm = props => {
       residence: "",
       city: "",
       zipcode: "",
-      country: { value: "FR", label: COUNTRIES["FR"] }
-    }
+      country: { value: "FR", label: COUNTRIES["FR"] },
+    },
   });
   return (
     <Flex flexWrap="wrap">
@@ -60,7 +60,7 @@ export const ServiceMesureAcceptForm = props => {
               placeholder="Type de residence"
               value={formik.values.residence}
               hasError={formik.errors.residence && formik.touched.residence}
-              onChange={option => formik.setFieldValue("residence", option)}
+              onChange={(option) => formik.setFieldValue("residence", option)}
               options={RESIDENCE}
             />
             <InlineError message={formik.errors.residence} fieldId="residence" />
@@ -73,16 +73,16 @@ export const ServiceMesureAcceptForm = props => {
               placeholder="Pays"
               value={formik.values.country}
               hasError={formik.errors.country && formik.touched.country}
-              onChange={option => formik.setFieldValue("country", option)}
+              onChange={(option) => formik.setFieldValue("country", option)}
               options={[
                 {
                   label: "France",
-                  value: "FR"
+                  value: "FR",
                 },
                 {
                   label: "Belgique",
-                  value: "BE"
-                }
+                  value: "BE",
+                },
               ]}
             />
             {formik.errors.country && formik.touched.country && (
@@ -98,7 +98,7 @@ export const ServiceMesureAcceptForm = props => {
                     value={formik.values.zipcode}
                     id="zipcode"
                     name="zipcode"
-                    onChange={async e => {
+                    onChange={async (e) => {
                       const { value } = e.target;
                       await formik.setFieldValue("zipcode", value);
                       await formik.setFieldValue("city", "");
@@ -115,7 +115,7 @@ export const ServiceMesureAcceptForm = props => {
                     name="city"
                     id="city"
                     zipcode={formik.values.zipcode}
-                    onChange={value => formik.setFieldValue("city", value)}
+                    onChange={(value) => formik.setFieldValue("city", value)}
                     value={formik.values.city}
                   />
                   <InlineError message={formik.errors.city} fieldId="city" />
@@ -132,7 +132,7 @@ export const ServiceMesureAcceptForm = props => {
                 placeholder="Antenne"
                 value={formik.values.antenne_id}
                 hasError={formik.errors.antenne_id && formik.touched.antenne_id}
-                onChange={option => formik.setFieldValue("antenne_id", option)}
+                onChange={(option) => formik.setFieldValue("antenne_id", option)}
                 options={antenneOptions}
               />
               <InlineError message={formik.errors.antenne_id} fieldId="antenne_id" />
@@ -145,7 +145,7 @@ export const ServiceMesureAcceptForm = props => {
                 variant="outline"
                 onClick={() => {
                   Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
-                    shallow: true
+                    shallow: true,
                   });
                 }}
               >

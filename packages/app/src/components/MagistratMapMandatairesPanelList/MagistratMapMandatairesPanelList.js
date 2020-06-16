@@ -15,7 +15,7 @@ const RESULT_PER_PAGE = 20;
 
 const MagistratMapMandatairesPanelList = () => {
   const {
-    magistrat: { ti_id: tiId }
+    magistrat: { ti_id: tiId },
   } = useContext(UserContext);
 
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -27,11 +27,11 @@ const MagistratMapMandatairesPanelList = () => {
       variables: {
         tiId: tiId,
         offset: currentOffset,
-        limit: RESULT_PER_PAGE
-      }
+        limit: RESULT_PER_PAGE,
+      },
     },
     {
-      fetchPolicy: "network-only"
+      fetchPolicy: "network-only",
     }
   );
 
@@ -49,7 +49,7 @@ const MagistratMapMandatairesPanelList = () => {
       id: id,
       type: discriminator,
       longitude: longitude,
-      latitude: latitude
+      latitude: latitude,
     });
   };
 
@@ -60,7 +60,7 @@ const MagistratMapMandatairesPanelList = () => {
     <Box pt="2" px="2" sx={MagistratMapMandataireListStyle}>
       <Scrollbar style={{ width: "100%", height: "100%" }}>
         <Box mr="1" mb="4">
-          {gestionnaires.map(gestionnaire => {
+          {gestionnaires.map((gestionnaire) => {
             return (
               <MandataireListItem
                 key={gestionnaire.id}
@@ -82,7 +82,7 @@ const MagistratMapMandatairesPanelList = () => {
                 marginPagesDisplayed={2}
                 forcePage={currentOffset / RESULT_PER_PAGE}
                 pageRangeDisplayed={5}
-                onPageChange={data => {
+                onPageChange={(data) => {
                   setCurrentOffset(data.selected * RESULT_PER_PAGE);
                 }}
                 subContainerClassName={"pages pagination"}

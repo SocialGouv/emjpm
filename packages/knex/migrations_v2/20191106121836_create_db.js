@@ -1,4 +1,4 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   const res = await knex.raw(
     `select count(*) from pg_catalog.pg_tables where schemaname = 'public' and tablename = 'users'`
   );
@@ -989,7 +989,7 @@ ALTER TABLE ONLY public.user_tis
   `);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
 drop view view_department_availability;
 drop view view_mesure_gestionnaire;

@@ -18,7 +18,7 @@ const AuthorizationPage = () => {
         <Box
           sx={{
             flexBasis: ["100%", "50%"],
-            p: "3"
+            p: "3",
           }}
         >
           <Image
@@ -26,14 +26,14 @@ const AuthorizationPage = () => {
             sx={{
               mt: "80px",
               p: "3",
-              width: ["100%"]
+              width: ["100%"],
             }}
           />
         </Box>
         <Box
           sx={{
             flexBasis: ["100%", "50%"],
-            p: "3"
+            p: "3",
           }}
         >
           <TokenRequest />
@@ -48,7 +48,7 @@ AuthorizationPage.getInitialProps = async ({ token, query }) => {
     editorId: query["editor_id"],
     editorSecret: query["editor_secret"],
     redirectUrl: query["redirect_url"],
-    token
+    token,
   };
 };
 

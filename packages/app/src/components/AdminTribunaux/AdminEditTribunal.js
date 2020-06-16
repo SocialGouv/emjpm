@@ -8,7 +8,7 @@ import { DEPARTEMENTS } from "./queries";
 export const AdminEditTribunal = ({ tribunal, closePanel }) => {
   const { data, loading } = useQuery(DEPARTEMENTS);
   const [updateTribunal] = useMutation(UPDATE_TRIBUNAL, {
-    onCompleted: closePanel
+    onCompleted: closePanel,
   });
 
   if (loading && !data) {
@@ -19,7 +19,7 @@ export const AdminEditTribunal = ({ tribunal, closePanel }) => {
     <AdminTribunalForm
       tribunal={tribunal}
       onCancel={closePanel}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         const departement = data.departements.find(({ code }) => code === values.geocode.depcode);
         await updateTribunal({
           refetchQueries: ["tis", "tis_aggregate"],
@@ -34,8 +34,8 @@ export const AdminEditTribunal = ({ tribunal, closePanel }) => {
             ville: values.geocode.city,
             latitude: values.geocode.latitude,
             longitude: values.geocode.longitude,
-            departement_id: departement.id
-          }
+            departement_id: departement.id,
+          },
         });
       }}
     />

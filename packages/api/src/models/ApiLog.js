@@ -21,8 +21,8 @@ class ApiLog extends Model {
         request_method: { type: "string" },
         request_params: { type: "jsonb" },
         response: { type: "jsonb" },
-        token: { type: "string" }
-      }
+        token: { type: "string" },
+      },
     };
   }
 }

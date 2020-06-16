@@ -24,12 +24,12 @@ const Logo = (props) => {
 
 Logo.propTypes = {
   hasTitle: PropTypes.bool,
-  title: PropTypes.string
+  title: PropTypes.string,
 };
 
 Logo.defaultProps = {
   hasTitle: true,
-  title: "e-MJPM"
+  title: 'e-MJPM',
 };
 
 export { Logo };

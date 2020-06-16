@@ -18,7 +18,7 @@ const Filters = () => {
     startDateValue,
     changeStartDate,
     endDateValue,
-    changeEndDate
+    changeEndDate,
   } = useContext(FiltersContext);
 
   const [departmentOptions, setDepartmentOptions] = useState([]);
@@ -39,10 +39,10 @@ const Filters = () => {
   }, []);
   const allDepartmentOptions = departementToOptions(allDepartments);
 
-  const selectRegion = selectedOption => {
+  const selectRegion = (selectedOption) => {
     changeRegionalValue(selectedOption);
     if (selectedOption && selectedOption.value) {
-      const departments = regionsData.regions.find(region => region.id === selectedOption.value)
+      const departments = regionsData.regions.find((region) => region.id === selectedOption.value)
         .departements;
       setDepartmentOptions(departementToOptions(departments));
     } else {
@@ -64,7 +64,7 @@ const Filters = () => {
                 options={regionalOptions}
                 placeholder={"region"}
                 value={selectedRegionalValue}
-                onChange={selectedOption => selectRegion(selectedOption)}
+                onChange={(selectedOption) => selectRegion(selectedOption)}
               />
             </Box>
             <Box sx={BoxStyle}>
@@ -73,7 +73,7 @@ const Filters = () => {
                 options={departmentOptions.length > 0 ? departmentOptions : allDepartmentOptions}
                 placeholder={"departement"}
                 value={selectedDepartementValue}
-                onChange={selectedOption => changeDepartementValue(selectedOption)}
+                onChange={(selectedOption) => changeDepartementValue(selectedOption)}
               />
             </Box>
           </Flex>
@@ -85,7 +85,7 @@ const Filters = () => {
                 value={startDateValue}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={event => {
+                onChange={(event) => {
                   changeStartDate(event.target.value);
                 }}
                 name="startDate"
@@ -99,7 +99,7 @@ const Filters = () => {
                 value={endDateValue}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={event => {
+                onChange={(event) => {
                   changeEndDate(event.target.value);
                 }}
                 name="endDate"

@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.createTable("enquete_reponses_financement", table => {
+exports.up = async function (knex) {
+  await knex.schema.createTable("enquete_reponses_financement", (table) => {
     table.increments();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table.timestamp("last_update").defaultTo(knex.fn.now());
@@ -12,7 +12,7 @@ exports.up = async function(knex) {
     table.float("aide_sociale_conseil_departemental").nullable();
   });
 
-  await knex.schema.alterTable("enquete_reponses", table => {
+  await knex.schema.alterTable("enquete_reponses", (table) => {
     table
       .integer("enquete_reponses_financement_id")
       .references("id")
@@ -20,8 +20,8 @@ exports.up = async function(knex) {
   });
 };
 
-exports.down = async function(knex) {
-  await knex.schema.alterTable("enquete_reponses", table => {
+exports.down = async function (knex) {
+  await knex.schema.alterTable("enquete_reponses", (table) => {
     table.dropColumn("enquete_reponses_financement_id");
   });
 

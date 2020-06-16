@@ -12,14 +12,14 @@ export const isSiretExists = async (client, siret) => {
   const checkSiret = await client.query({
     context: {
       headers: {
-        "X-Hasura-Siret": siret
-      }
+        "X-Hasura-Siret": siret,
+      },
     },
     fetchPolicy: "network-only",
     query: CHECK_SIRET_UNICITY,
     variables: {
-      siret
-    }
+      siret,
+    },
   });
   return checkSiret.data.mandataires.length > 0;
 };

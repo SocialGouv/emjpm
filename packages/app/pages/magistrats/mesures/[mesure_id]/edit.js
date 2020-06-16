@@ -7,7 +7,7 @@ import { MagistratMesureEdit } from "../../../../src/components/MagistratMesureE
 import { MesureProvider } from "../../../../src/components/MesureContext";
 import { withAuthSync } from "../../../../src/util/auth";
 
-const MagistratMesureEditPage = props => {
+const MagistratMesureEditPage = (props) => {
   const { mesureId } = props;
   return (
     <LayoutMagistrat>
@@ -15,7 +15,7 @@ const MagistratMesureEditPage = props => {
         <Flex
           sx={{
             flexWrap: "wrap",
-            mt: "2"
+            mt: "2",
           }}
         >
           <MesureProvider mesureId={mesureId}>

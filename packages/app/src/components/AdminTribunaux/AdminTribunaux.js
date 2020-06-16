@@ -69,8 +69,8 @@ const AdminTribunaux = () => {
       limit: resultPerPage,
       offset: currentOffset,
       searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
-    }
+        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+    },
   });
 
   if (loading) {

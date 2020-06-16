@@ -19,7 +19,7 @@ const serviceMesureImportSchema = yup.object().shape({
   numero_rg: yup.string().required("doit être rempli"),
   residence: yup.string().required("doit être rempli"),
   tribunal_siret: yup.string().required("doit être rempli"),
-  type: yup.string().required("doit être rempli")
+  type: yup.string().required("doit être rempli"),
 });
 
 export { serviceMesureImportSchema };

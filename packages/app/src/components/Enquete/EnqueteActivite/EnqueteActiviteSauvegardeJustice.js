@@ -9,7 +9,7 @@ import { ENQUETE_SAUVEGARDE_JUSTICE } from "./queries";
 
 const PREFIX = "sauvegarde_justice";
 
-export const EnqueteActiviteSauvegardeJustice = props => {
+export const EnqueteActiviteSauvegardeJustice = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -17,29 +17,29 @@ export const EnqueteActiviteSauvegardeJustice = props => {
     section,
     step,
     userId,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { activite_id }
+    enquete_reponse_ids: { activite_id },
   } = enqueteReponse;
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_SAUVEGARDE_JUSTICE, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_SAUVEGARDE_JUSTICE,
         variables: {
-          id: activite_id
-        }
-      }
-    ]
+          id: activite_id,
+        },
+      },
+    ],
   });
   const { data, loading } = useQuery(ENQUETE_SAUVEGARDE_JUSTICE, {
     variables: {
-      id: activite_id
-    }
+      id: activite_id,
+    },
   });
 
   const normalizedData = useMemo(() => {
@@ -49,7 +49,7 @@ export const EnqueteActiviteSauvegardeJustice = props => {
       debutAnnee: r[`${PREFIX}_debut_annee`],
       finAnnee: r[`${PREFIX}_fin_annee`],
       mesuresNouvelles: r[`${PREFIX}_mesures_nouvelles`],
-      sortieMesures: r[`${PREFIX}_sortie_mesures`]
+      sortieMesures: r[`${PREFIX}_sortie_mesures`],
     };
   }, [data]);
 
@@ -60,12 +60,12 @@ export const EnqueteActiviteSauvegardeJustice = props => {
         data={normalizedData}
         section={section}
         step={step}
-        onSubmit={async values => {
+        onSubmit={async (values) => {
           await updateEnquete({
             variables: {
               id: activite_id,
-              ...values
-            }
+              ...values,
+            },
           });
         }}
         enqueteContext={enqueteContext}

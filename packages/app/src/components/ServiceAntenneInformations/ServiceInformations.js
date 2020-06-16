@@ -14,16 +14,16 @@ import {
   iconTextStyle,
   innerTextStyle,
   titleStyle,
-  topTextStyle
+  topTextStyle,
 } from "./style";
 
-const ServiceInformations = props => {
+const ServiceInformations = (props) => {
   const { antenne_id } = props;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     fetchPolicy: "cache-and-network",
     variables: {
-      antenneId: antenne_id
-    }
+      antenneId: antenne_id,
+    },
   });
 
   if (loading) {
@@ -73,11 +73,11 @@ const ServiceInformations = props => {
 };
 
 ServiceInformations.defaultProps = {
-  currentAntenne: null
+  currentAntenne: null,
 };
 
 ServiceInformations.propTypes = {
-  currentAntenne: PropTypes.string
+  currentAntenne: PropTypes.string,
 };
 
 export { ServiceInformations };

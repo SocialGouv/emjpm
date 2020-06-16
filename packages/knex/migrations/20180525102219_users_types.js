@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   /*
     - ajouter une colonne users.type :
       - admin
@@ -23,7 +23,7 @@ exports.up = function(knex) {
   return (
     knex.schema
       // ajoutes les colonnes necessaires
-      .alterTable("users", function(table) {
+      .alterTable("users", function (table) {
         table.string("type", 20);
         table.dateTime("last_login");
         table.boolean("active").defaultTo(false);
@@ -34,61 +34,46 @@ exports.up = function(knex) {
         return knex
           .select()
           .table("users")
-          .then(users => {
+          .then((users) => {
             return Promise.all(
-              users.map(user => {
+              users.map((user) => {
                 if (user.admin) {
                   // type=admin
-                  return knex
-                    .table("users")
-                    .where({ id: user.id })
-                    .update({
-                      type: "admin",
-                      active: true
-                    });
+                  return knex.table("users").where({ id: user.id }).update({
+                    type: "admin",
+                    active: true,
+                  });
                 } else if (!user.admin && !user.mandataire && user.service) {
                   // type=ti
-                  return knex
-                    .table("users")
-                    .where({ id: user.id })
-                    .update({
-                      type: "ti",
-                      active: true
-                    });
+                  return knex.table("users").where({ id: user.id }).update({
+                    type: "ti",
+                    active: true,
+                  });
                 } else if (!user.admin && user.mandataire && user.service) {
                   // type=service
-                  return knex
-                    .table("users")
-                    .where({ id: user.id })
-                    .update({
-                      type: "service",
-                      active: true
-                    });
+                  return knex.table("users").where({ id: user.id }).update({
+                    type: "service",
+                    active: true,
+                  });
                 } else if (!user.admin && user.mandataire && !user.service) {
                   // type=mandataire
-                  return knex
-                    .table("users")
-                    .where({ id: user.id })
-                    .update({
-                      type: "individuel",
-                      active: true
-                    });
+                  return knex.table("users").where({ id: user.id }).update({
+                    type: "individuel",
+                    active: true,
+                  });
                 } else if (!user.admin && !user.mandataire && !user.service) {
                   // type=ti
-                  return knex
-                    .table("users")
-                    .where({ id: user.id })
-                    .update({
-                      type: "ti",
-                      active: true
-                    });
+                  return knex.table("users").where({ id: user.id }).update({
+                    type: "ti",
+                    active: true,
+                  });
                 }
               })
             );
           });
       })
       .then(() => {
-        return knex.schema.alterTable("users", function(table) {
+        return knex.schema.alterTable("users", function (table) {
           table.dropColumn("admin");
           table.dropColumn("mandataire");
           table.dropColumn("service");
@@ -97,15 +82,15 @@ exports.up = function(knex) {
   );
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema
-    .alterTable("users", function(table) {
+    .alterTable("users", function (table) {
       table.dropColumn("type");
       table.dropColumn("last_login");
       table.dropColumn("active");
     })
     .then(() => {
-      knex.schema.alterTable("users", function(table) {
+      knex.schema.alterTable("users", function (table) {
         table.boolean("admin");
         table.boolean("mandataire");
         table.boolean("service");

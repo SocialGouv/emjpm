@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import { FieldLabelValue, getLabel } from "../ServiceInformationCommon";
 
-const ServiceInformationPersonnelView = props => {
+const ServiceInformationPersonnelView = (props) => {
   const { personnel, handleEdit } = props;
   return (
     <Fragment>

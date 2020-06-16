@@ -6,14 +6,14 @@ function getSize() {
       innerHeight: window.innerHeight,
       innerWidth: window.innerWidth,
       outerHeight: window.outerHeight,
-      outerWidth: window.outerWidth
+      outerWidth: window.outerWidth,
     };
   }
   return {
     innerHeight: "100%",
     innerWidth: "100%",
     outerHeight: 0,
-    outerWidth: 0
+    outerWidth: 0,
   };
 }
 

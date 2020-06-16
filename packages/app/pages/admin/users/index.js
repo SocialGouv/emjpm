@@ -17,7 +17,7 @@ const AdminUsersPage = () => {
           <Flex
             sx={{
               flexWrap: "wrap",
-              mt: "2"
+              mt: "2",
             }}
           >
             <AdminFilterBar />

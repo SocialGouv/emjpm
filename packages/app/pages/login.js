@@ -13,7 +13,7 @@ const ExcludeBrowserBanner = dynamic(
     return ExcludeBrowserBanner;
   },
   {
-    ssr: false
+    ssr: false,
   }
 );
 
@@ -30,14 +30,14 @@ const LoginPage = () => {
           <Box
             sx={{
               flexBasis: ["100%", "50%"],
-              p: "3"
+              p: "3",
             }}
           >
             <Image
               src="/static/images/login.png"
               sx={{
                 p: "3",
-                width: ["100%"]
+                width: ["100%"],
               }}
             />
             {/* <Box sx={{ p: "6" }}>
@@ -53,7 +53,7 @@ const LoginPage = () => {
           <Box
             sx={{
               flexBasis: ["100%", "50%"],
-              p: "3"
+              p: "3",
             }}
           >
             <ExcludeBrowserBanner />

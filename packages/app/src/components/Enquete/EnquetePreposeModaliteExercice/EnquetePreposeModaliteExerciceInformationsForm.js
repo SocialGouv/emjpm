@@ -19,7 +19,7 @@ const validationSchema = yup.object().shape({
   activite_service: yup.number().min(0),
   total_mesures_etablissements: yup.number().min(0),
   etablissement_personne_morale: yup.number().min(0),
-  etablissement_convention_groupement: yup.number().min(0)
+  etablissement_convention_groupement: yup.number().min(0),
 });
 
 function dataToForm(data) {
@@ -40,7 +40,7 @@ function dataToForm(data) {
       : "",
     etablissement_convention_groupement: data.etablissement_convention_groupement
       ? parseFloat(data.etablissement_convention_groupement)
-      : ""
+      : "",
   };
 }
 
@@ -50,14 +50,14 @@ function getEtablissementsCount(values) {
   return etablissementPersonneMorale + etablissement;
 }
 
-export const EnquetePreposeModaliteExerciceInformationsForm = props => {
+export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const {
@@ -68,7 +68,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
     values,
     errors,
     showError,
-    submit
+    submit,
   } = useEnqueteForm({
     onSubmit,
     enqueteContext,
@@ -77,7 +77,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
 
   return (
@@ -228,9 +228,9 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
             <Text
               ml={3}
               dangerouslySetInnerHTML={{
-                __html: ` mesure(s) prises en charge par ces <strong>${getEtablissementsCount(
-                  values
-                ) || ""}</strong> `
+                __html: ` mesure(s) prises en charge par ces <strong>${
+                  getEtablissementsCount(values) || ""
+                }</strong> `,
               }}
             />
           </Flex>
@@ -285,9 +285,9 @@ export const EnquetePreposeModaliteExerciceInformationsForm = props => {
             <Text
               ml={3}
               dangerouslySetInnerHTML={{
-                __html: ` mesure(s) prises en charge par ces <strong>${getEtablissementsCount(
-                  values
-                ) || ""}</strong> établissements`
+                __html: ` mesure(s) prises en charge par ces <strong>${
+                  getEtablissementsCount(values) || ""
+                }</strong> établissements`,
               }}
             />
           </Flex>

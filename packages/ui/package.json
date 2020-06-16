@@ -26,7 +26,9 @@
     "storybook": "start-storybook -p 6006",
     "dev": "rollup -c -w",
     "test": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom"
+    "test:watch": "react-scripts test --env=jsdom",
+    "prettier": "prettier --check '**/*.js'",
+    "prettier:fix": "prettier --write '**/*.js'"
   },
   "peerDependencies": {
     "@emotion/core": "10.x",
@@ -89,7 +91,7 @@
     "eslint-plugin-sort-keys-fix": "^1.1.1",
     "hygen": "^5.0.3",
     "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.5",
     "prettier-eslint": "^9.0.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",

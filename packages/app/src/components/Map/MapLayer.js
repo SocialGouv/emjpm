@@ -1,14 +1,14 @@
 import React from "react";
 import { Feature, Layer } from "react-mapbox-gl";
 
-const MapLayer = props => {
+const MapLayer = (props) => {
   const { items, type, image, onMarkerClick } = props;
   return (
     <Layer
-      onMouseEnter={e => {
+      onMouseEnter={(e) => {
         e.target.getCanvas().style.cursor = "pointer";
       }}
-      onMouseLeave={e => {
+      onMouseLeave={(e) => {
         e.target.getCanvas().style.cursor = "grab";
       }}
       type="symbol"
@@ -16,7 +16,7 @@ const MapLayer = props => {
       images={image}
       layout={{ "icon-image": type }}
     >
-      {items.map(item => {
+      {items.map((item) => {
         const { id, longitude, latitude } = item;
         return (
           <Feature

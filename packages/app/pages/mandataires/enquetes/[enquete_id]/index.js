@@ -12,13 +12,13 @@ const EnquetePage = ({ enqueteId }) => {
     {
       defaultValue: 0,
       name: "step",
-      type: "integer"
+      type: "integer",
     },
     {
       defaultValue: 0,
       name: "substep",
-      type: "integer"
-    }
+      type: "integer",
+    },
   ]);
 
   const currentStep = { step, substep };
@@ -32,7 +32,7 @@ const EnquetePage = ({ enqueteId }) => {
   );
 };
 
-EnquetePage.getInitialProps = async params => {
+EnquetePage.getInitialProps = async (params) => {
   const { query } = params;
   resetIdCounter();
   return { enqueteId: Number(query.enquete_id) };

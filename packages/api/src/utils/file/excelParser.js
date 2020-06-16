@@ -14,11 +14,11 @@ const parseSheets = ({ content, parseOptions }) => {
 function update_sheet_range(ws) {
   var range = { s: { r: 20000000, c: 20000000 }, e: { r: 0, c: 0 } };
   Object.keys(ws)
-    .filter(function(x) {
+    .filter(function (x) {
       return x.charAt(0) != "!";
     })
     .map(XLSX.utils.decode_cell)
-    .forEach(function(x) {
+    .forEach(function (x) {
       range.s.c = Math.min(range.s.c, x.c);
       range.s.r = Math.min(range.s.r, x.r);
       range.e.c = Math.max(range.e.c, x.c);
@@ -41,7 +41,7 @@ const parseSheetByIndex = ({ content, parseOptions, sheetIndex }) => {
 };
 
 function _parseSheetByName(worksheet) {
-  return XLSX.utils.sheet_to_json(worksheet, { raw: false }).map(row => {
+  return XLSX.utils.sheet_to_json(worksheet, { raw: false }).map((row) => {
     return Object.keys(row).reduce((acc, key) => {
       acc[key] = row[key].toString().trim();
       return acc;
@@ -51,7 +51,7 @@ function _parseSheetByName(worksheet) {
 
 const excelParser = {
   parseSheets,
-  parseSheetByIndex
+  parseSheetByIndex,
 };
 
 module.exports = excelParser;

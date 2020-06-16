@@ -1,5 +1,5 @@
 const MandatairesDisponibilityStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { MandatairesDisponibilityStyle };

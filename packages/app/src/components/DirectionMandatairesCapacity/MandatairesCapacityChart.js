@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis
+  YAxis,
 } from "recharts";
 
 const data = [
@@ -16,62 +16,62 @@ const data = [
     "Disponibilité actuelle": 800,
     "Disponibilité max": 590,
     name: "Page A",
-    overcapacity: true
+    overcapacity: true,
   },
   {
     "Disponibilité actuelle": 967,
     "Disponibilité max": 868,
     name: "Page B",
-    overcapacity: true
+    overcapacity: true,
   },
   {
     "Disponibilité actuelle": 1098,
     "Disponibilité max": 1397,
     name: "Page C",
-    overcapacity: true
+    overcapacity: true,
   },
   {
     "Disponibilité actuelle": 1200,
     "Disponibilité max": 1480,
     name: "Page D",
-    overcapacity: false
+    overcapacity: false,
   },
   {
     "Disponibilité actuelle": 1108,
     "Disponibilité max": 1520,
     name: "Page E",
-    overcapacity: false
+    overcapacity: false,
   },
   {
     "Disponibilité actuelle": 680,
     "Disponibilité max": 1400,
     name: "Page F",
-    overcapacity: true
+    overcapacity: true,
   },
   {
     "Disponibilité actuelle": 1098,
     "Disponibilité max": 1397,
     name: "Page C",
-    overcapacity: false
+    overcapacity: false,
   },
   {
     "Disponibilité actuelle": 1200,
     "Disponibilité max": 1480,
     name: "Page D",
-    overcapacity: true
+    overcapacity: true,
   },
   {
     "Disponibilité actuelle": 1108,
     "Disponibilité max": 1520,
     name: "Page E",
-    overcapacity: false
+    overcapacity: false,
   },
   {
     "Disponibilité actuelle": 680,
     "Disponibilité max": 1400,
     name: "Page F",
-    overcapacity: true
-  }
+    overcapacity: true,
+  },
 ];
 
 const MandatairesCapacityChart = () => {
@@ -88,7 +88,7 @@ const MandatairesCapacityChart = () => {
               bottom: 20,
               left: 0,
               right: 0,
-              top: 20
+              top: 20,
             }}
           >
             <CartesianGrid stroke="#f5f5f5" />
@@ -111,7 +111,7 @@ const MandatairesCapacityChart = () => {
           display: "grid",
           gridGap: 3,
           gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
-          ml: "6"
+          ml: "6",
         }}
       >
         <Box>

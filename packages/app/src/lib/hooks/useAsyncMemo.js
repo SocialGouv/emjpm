@@ -6,7 +6,7 @@ export function useAsyncMemo(factory, deps, initial) {
     let cancel = false;
     const promise = factory();
     if (promise === undefined || promise === null) return;
-    promise.then(val => {
+    promise.then((val) => {
       if (!cancel) {
         setVal(val);
       }

@@ -10,19 +10,19 @@ import { SatisfactionCampaign } from "../SatisfactionCampaign";
 const navigationLinks = [
   {
     title: "Vos mandataires",
-    url: "/magistrats"
+    url: "/magistrats",
   },
   {
     title: "La carte des mandataires",
-    url: "/magistrats/map"
+    url: "/magistrats/map",
   },
   {
     title: "Vos mesures",
-    url: "/magistrats/mesures"
-  }
+    url: "/magistrats/mesures",
+  },
 ];
 
-const LayoutMagistrat = props => {
+const LayoutMagistrat = (props) => {
   const { children } = props;
   return (
     <Fragment>

@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
 delete from direction;
 insert into direction (user_id) select id from users where "type" = 'direction';
@@ -8,6 +8,6 @@ delete from users where "type" = 'prepose' and id not in (select user_id from ma
   `);
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

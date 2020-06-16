@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactSelect from 'react-select';
 
-import { getStyle } from "./style";
+import { getStyle } from './style';
 
 export const Select = (props) => {
   return <ReactSelect styles={getStyle(props)} {...props} />;
@@ -10,10 +10,10 @@ export const Select = (props) => {
 
 Select.propTypes = {
   hasError: PropTypes.bool,
-  size: PropTypes.string
+  size: PropTypes.string,
 };
 
 Select.defaultProps = {
   hasError: false,
-  size: 'large'
+  size: 'large',
 };

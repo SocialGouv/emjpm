@@ -12,7 +12,7 @@ const resetPasswordSchema = yup.object().shape({
   newPasswordConfirmation: yup
     .string()
     .oneOf([yup.ref("newPassword"), null], "Les mots de passe ne sont pas égaux")
-    .required()
+    .required(),
 });
 
 export { resetPasswordSchema };

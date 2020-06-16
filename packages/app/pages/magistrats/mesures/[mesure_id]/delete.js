@@ -7,7 +7,7 @@ import { MagistratMesureDelete } from "../../../../src/components/MagistratMesur
 import { MesureProvider } from "../../../../src/components/MesureContext";
 import { withAuthSync } from "../../../../src/util/auth";
 
-const MagistratMesureDeletePage = props => {
+const MagistratMesureDeletePage = (props) => {
   const { mesureId } = props;
 
   return (

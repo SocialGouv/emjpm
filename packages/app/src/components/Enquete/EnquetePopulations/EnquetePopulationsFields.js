@@ -10,7 +10,7 @@ export function calculateTotal(firstProperty, secondProperty) {
   return Number(firstProperty || 0) + Number(secondProperty || 0);
 }
 
-export const EnquetePopulationTrancheAgeField = props => {
+export const EnquetePopulationTrancheAgeField = (props) => {
   const { values, errors, menFieldId, womenFieldId, label, handleChange, showError } = props;
   const men = { value: values[menFieldId], error: errors[menFieldId], field: menFieldId };
   const women = { value: values[womenFieldId], error: errors[womenFieldId], field: womenFieldId };

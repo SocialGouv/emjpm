@@ -2,10 +2,10 @@ const bcrypt = require("bcryptjs");
 
 // when creating test user
 const USER_DEFAULTS = {
-  active: true
+  active: true,
 };
 
-const getPasswordHash = clear => bcrypt.hashSync(clear, bcrypt.genSaltSync());
+const getPasswordHash = (clear) => bcrypt.hashSync(clear, bcrypt.genSaltSync());
 
 const getInsertData = (knex, { password, ...others }) => ({
   password: getPasswordHash(password),
@@ -13,7 +13,7 @@ const getInsertData = (knex, { password, ...others }) => ({
     ? { reset_password_expires: knex.raw(`now() + interval '5 minute'`) }
     : {}),
   ...USER_DEFAULTS,
-  ...others
+  ...others,
 });
 
 const USERS = [
@@ -22,14 +22,14 @@ const USERS = [
     password: "johnson123",
     prenom: "Adrien",
     type: "individuel",
-    username: "jeremy"
+    username: "jeremy",
   },
   {
     email: "panam@paris.com",
     password: "bryant123",
     prenom: "Julien",
     type: "prepose",
-    username: "kelly"
+    username: "kelly",
   },
   {
     active: true,
@@ -37,14 +37,14 @@ const USERS = [
     password: "service1",
     prenom: "Mélanie",
     type: "service",
-    username: "service1"
+    username: "service1",
   },
   {
     email: "admin@admin.com",
     password: "admin",
     prenom: "Dark Vador",
     type: "admin",
-    username: "admin"
+    username: "admin",
   },
   {
     cabinet: "6D",
@@ -52,21 +52,21 @@ const USERS = [
     password: "ti1",
     prenom: "Pierre",
     type: "ti",
-    username: "ti1"
+    username: "ti1",
   },
   {
     username: "inactive",
     password: "inactive",
     prenom: "Paul",
     type: "prepose",
-    active: false
+    active: false,
   },
   {
     username: "ti2",
     prenom: "Jack",
     password: "ti2",
     type: "ti",
-    active: false
+    active: false,
   },
   {
     id: 42,
@@ -75,7 +75,7 @@ const USERS = [
     type: "individuel",
     active: false,
     email: "panam2@paris.com",
-    prenom: "Doug"
+    prenom: "Doug",
   },
   {
     id: 32,
@@ -86,7 +86,7 @@ const USERS = [
     active: true,
     cabinet: "6D",
     email: "test@ti.com",
-    prenom: "Jean"
+    prenom: "Jean",
   },
   {
     id: 33,
@@ -96,7 +96,7 @@ const USERS = [
     cabinet: "6D",
     reset_password_token: "LpWpzK4Jla9I87Aqtry",
     email: "test3@ti.com",
-    prenom: "Momo"
+    prenom: "Momo",
   },
   {
     id: 52,
@@ -105,7 +105,7 @@ const USERS = [
     type: "individuel",
     reset_password_token: "LpWpzK4Jla9I87Aq",
     email: "marcel@paris.com",
-    prenom: "Marcel"
+    prenom: "Marcel",
   },
   {
     active: true,
@@ -113,11 +113,11 @@ const USERS = [
     password: "test123456?",
     prenom: "john",
     type: "direction",
-    username: "johnhenry"
-  }
+    username: "johnhenry",
+  },
 ];
 
-exports.seed = knex =>
+exports.seed = (knex) =>
   knex("users")
     .del()
-    .insert(USERS.map(user => getInsertData(knex, user)));
+    .insert(USERS.map((user) => getInsertData(knex, user)));

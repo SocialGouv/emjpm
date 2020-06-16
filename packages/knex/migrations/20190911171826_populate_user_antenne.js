@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.alterTable("user_antenne", function(table) {
+exports.up = async function (knex) {
+  await knex.schema.alterTable("user_antenne", function (table) {
     table.unique(["user_id", "antenne_id"]);
   });
   return knex.raw(`
@@ -7,8 +7,8 @@ insert into user_antenne (user_id, antenne_id) select sa.user_id, se.id from ser
   `);
 };
 
-exports.down = function(knex) {
-  return knex.schema.alterTable("user_antenne", function(table) {
+exports.down = function (knex) {
+  return knex.schema.alterTable("user_antenne", function (table) {
     table.dropUnique(["user_id", "antenne_id"]);
   });
 };

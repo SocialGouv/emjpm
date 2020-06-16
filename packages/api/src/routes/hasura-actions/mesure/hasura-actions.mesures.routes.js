@@ -18,7 +18,7 @@ router.post(
       );
 
       return res.status(201).json({
-        data: JSON.stringify(importSummary)
+        data: JSON.stringify(importSummary),
       });
     } catch (err) {
       return next(err);

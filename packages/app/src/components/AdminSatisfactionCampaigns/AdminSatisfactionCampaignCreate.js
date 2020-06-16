@@ -17,8 +17,8 @@ export const AdminSatisfactionCampaignCreate = () => {
         variables: {
           name: values.name,
           started_at: values.startedAt,
-          ended_at: values.endedAt
-        }
+          ended_at: values.endedAt,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);

@@ -6,24 +6,24 @@ import { EnquetePreposeModaliteExerciceEtablissementsForm } from "./EnquetePrepo
 import { UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_ETABLISSEMENTS } from "./mutations";
 import { ENQUETE_PREPOSE_INFORMATIONS } from "./queries";
 
-export const EnquetePreposeModaliteExerciceEtablissements = props => {
+export const EnquetePreposeModaliteExerciceEtablissements = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
     enqueteReponse,
     userId,
     step,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
 
   const {
-    enquete_reponse_ids: { modalites_exercice_id }
+    enquete_reponse_ids: { modalites_exercice_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_PREPOSE_INFORMATIONS, {
     variables: {
-      id: modalites_exercice_id
-    }
+      id: modalites_exercice_id,
+    },
   });
 
   const [updateEtablissements] = useMutation(
@@ -32,13 +32,13 @@ export const EnquetePreposeModaliteExerciceEtablissements = props => {
       refetchQueries: [
         {
           query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, userId }
+          variables: { enqueteId, userId },
         },
         {
           query: ENQUETE_PREPOSE_INFORMATIONS,
-          variables: { id: modalites_exercice_id }
-        }
-      ]
+          variables: { id: modalites_exercice_id },
+        },
+      ],
     }
   );
 
@@ -49,13 +49,13 @@ export const EnquetePreposeModaliteExerciceEtablissements = props => {
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
       step={step}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         await updateEtablissements({
           variables: {
             id: modalites_exercice_id,
             actions_information_tuteurs_familiaux: values.actions_information_tuteurs_familiaux,
-            data: values.etablissements
-          }
+            data: values.etablissements,
+          },
         });
       }}
     />

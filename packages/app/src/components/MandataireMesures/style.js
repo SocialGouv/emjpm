@@ -1,3 +1,3 @@
 export const MesureListStyle = {
-  width: "100%"
+  width: "100%",
 };

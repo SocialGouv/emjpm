@@ -7,7 +7,7 @@ import { Box, Flex, Text } from "rebass";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { SUBMIT_ENQUETE_PREPOSE } from "./mutations";
 
-export const EnquetePreposeSubmit = props => {
+export const EnquetePreposeSubmit = (props) => {
   const { enquete, enqueteReponse, userId } = props;
   const hasError = enqueteReponse.enquete_reponse_status.global !== "valid";
   const { enquete_reponse_ids } = enqueteReponse;
@@ -16,9 +16,9 @@ export const EnquetePreposeSubmit = props => {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId: enquete.id, userId }
-      }
-    ]
+        variables: { enqueteId: enquete.id, userId },
+      },
+    ],
   });
 
   return (
@@ -44,19 +44,20 @@ export const EnquetePreposeSubmit = props => {
                 <strong>{format(new Date(enquete.date_fin), "dd/MM/yyyy")}</strong>.
               </Text>
             )}
-            <Button
-              marginTop={4}
-              loading={loading}
-              onClick={async () => {
-                await submitEnquetePrepose({
-                  variables: {
-                    id: enquete_reponse_ids.id
-                  }
-                });
-              }}
-            >
-              Envoyer
-            </Button>
+            {loading === false && (
+              <Button
+                marginTop={4}
+                onClick={async () => {
+                  await submitEnquetePrepose({
+                    variables: {
+                      id: enquete_reponse_ids.id,
+                    },
+                  });
+                }}
+              >
+                Envoyer
+              </Button>
+            )}
           </Box>
         </Box>
       )}

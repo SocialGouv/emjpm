@@ -1,5 +1,5 @@
 const LoginStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { LoginStyle };

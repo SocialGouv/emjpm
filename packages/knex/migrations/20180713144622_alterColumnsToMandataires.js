@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.alterTable("mandataires", function(table) {
+exports.up = function (knex) {
+  return knex.schema.alterTable("mandataires", function (table) {
     table.renameColumn("postDate", "created_at");
     table.dropColumn("service_id");
     table.dropColumn("commentaire");
@@ -9,8 +9,8 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
-  return knex.schema.alterTable("mandataires", function(table) {
+exports.down = function (knex) {
+  return knex.schema.alterTable("mandataires", function (table) {
     table.renameColumn("created_at", "postDate");
   });
 };

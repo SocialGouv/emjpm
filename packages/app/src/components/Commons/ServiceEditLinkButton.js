@@ -7,12 +7,12 @@ const ServiceLinkButtonStyle = (isActive, disabled) => {
   return {
     "&:active": {
       color: "white",
-      opacity: "0.6"
+      opacity: "0.6",
     },
     "&:hover": {
       color: "white",
       opacity: "0.8",
-      textDecoration: "none"
+      textDecoration: "none",
     },
     bg: "primary",
     borderRadius: "default",
@@ -26,7 +26,7 @@ const ServiceLinkButtonStyle = (isActive, disabled) => {
     outline: "none",
     px: 3,
     py: 2,
-    transition: "150ms ease-in-out opacity"
+    transition: "150ms ease-in-out opacity",
   };
 };
 

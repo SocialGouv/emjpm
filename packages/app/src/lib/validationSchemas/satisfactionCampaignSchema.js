@@ -11,7 +11,7 @@ const satisfactionCampaignSchema = yup.object().shape({
     )
     .required(),
   name: yup.string().required(),
-  startedAt: yup.date().required()
+  startedAt: yup.date().required(),
 });
 
 export { satisfactionCampaignSchema };

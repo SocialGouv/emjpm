@@ -1,4 +1,4 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   await knex.raw(`
 		DROP VIEW IF EXISTS view_indicateur_inscrit
 	`);
@@ -27,7 +27,7 @@ select d.code, d.nom, u.type, count(distinct(sm.service_id)) from users u, depar
   `);
 };
 
-exports.down = async function(knex) {
+exports.down = async function (knex) {
   await knex.raw(`
 		DROP VIEW IF EXISTS view_indicateur_inscrit
 	`);

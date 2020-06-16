@@ -8,7 +8,7 @@ import { MESURES_GESTIONNAIRES } from "./queries";
 import { filterGestionnairesByDiscriminator } from "./utils";
 
 const MagistratMapMandataires = dynamic(
-  () => import("./MagistratMandatairesMap").then(mod => mod.MagistratMapMandataires),
+  () => import("./MagistratMandatairesMap").then((mod) => mod.MagistratMapMandataires),
   { ssr: false }
 );
 
@@ -18,9 +18,9 @@ const MagistratMandataires = () => {
 
   const { data, error, loading } = useQuery(MESURES_GESTIONNAIRES, {
     variables: {
-      tiId: ti_id
+      tiId: ti_id,
     },
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
   });
 
   if (loading) {

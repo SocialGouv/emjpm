@@ -1,7 +1,7 @@
 import compareVersions from "compare-versions";
 
 export function isUnsupportedBrowser(currentBrowser, excludedBrowsers) {
-  return excludedBrowsers.some(excludedBrowser => {
+  return excludedBrowsers.some((excludedBrowser) => {
     const isRestrictedBrowser = excludedBrowser.name.toLowerCase() === currentBrowser.name;
     const isUnsupportedVersion =
       !excludedBrowser.version ||

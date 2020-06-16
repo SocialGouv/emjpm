@@ -4,7 +4,7 @@ const { Mesure } = require("../../models/Mesure");
 const mesureDelete = async (req, res) => {
   const {
     params: { id },
-    user: { user_id }
+    user: { user_id },
   } = req;
 
   let user;

@@ -3,7 +3,7 @@ import React from "react";
 
 import { SIGNUP_DATA } from "./queries";
 
-const SignupDatas = props => {
+const SignupDatas = (props) => {
   const { Component } = props;
 
   const { data, loading, error } = useQuery(SIGNUP_DATA);

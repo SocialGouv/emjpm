@@ -15,7 +15,7 @@ if (!isBrowser()) {
   global.fetch = fetch;
 }
 
-const getToken = context => {
+const getToken = (context) => {
   let token = null;
   if (typeof document === "undefined") {
     const cookies = nextCookies(context.ctx);
@@ -30,7 +30,7 @@ const getToken = context => {
 };
 
 const {
-  publicRuntimeConfig: { GRAPHQL_SERVER_URI }
+  publicRuntimeConfig: { GRAPHQL_SERVER_URI },
 } = getConfig();
 
 function create(initialState, context) {
@@ -40,21 +40,21 @@ function create(initialState, context) {
       return {
         headers: {
           ...headers,
-          Authorization: token ? token : null
-        }
+          Authorization: token ? token : null,
+        },
       };
     }
     return {
       headers: {
         ...headers,
-        "X-Hasura-Role": "anonymous"
-      }
+        "X-Hasura-Role": "anonymous",
+      },
     };
   });
 
   const httpLink = createHttpLink({
     credentials: "same-origin",
-    uri: GRAPHQL_SERVER_URI
+    uri: GRAPHQL_SERVER_URI,
   });
 
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
@@ -63,7 +63,7 @@ function create(initialState, context) {
     connectToDevTools: isBrowser(),
     link: authLink.concat(httpLink),
     resolvers: {},
-    ssrMode: typeof window === "undefined"
+    ssrMode: typeof window === "undefined",
   });
 }
 

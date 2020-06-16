@@ -8,19 +8,19 @@ import { Navigation } from "../Navigation";
 const navigationLinks = [
   {
     title: "Vos mesures",
-    url: "/services"
+    url: "/services",
   },
   {
     title: "Vos mesures en attente",
-    url: "/services/waiting-mesures"
+    url: "/services/waiting-mesures",
   },
   {
     title: "La carte de vos mesures",
-    url: "/services/map"
-  }
+    url: "/services/map",
+  },
 ];
 
-const LayoutServicesMap = props => {
+const LayoutServicesMap = (props) => {
   const { children } = props;
   return (
     <Fragment>
@@ -29,12 +29,12 @@ const LayoutServicesMap = props => {
           dropDownLinks={[
             {
               title: "Vos informations",
-              url: "/services/informations"
+              url: "/services/informations",
             },
             {
               title: "Gestion des comptes",
-              url: "/services/members"
-            }
+              url: "/services/members",
+            },
           ]}
         />
         <BoxWrapper>

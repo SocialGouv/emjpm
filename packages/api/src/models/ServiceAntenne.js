@@ -18,33 +18,33 @@ class ServiceAntenne extends Model {
       properties: {
         id: { type: "integer" },
         name: {
-          type: "string"
+          type: "string",
         },
         contact_firstname: {
-          type: "string"
+          type: "string",
         },
         contact_lastname: {
-          type: "string"
+          type: "string",
         },
         contact_email: {
-          type: "string"
+          type: "string",
         },
         telephone: {
-          type: "string"
+          type: "string",
         },
         adresse: {
-          type: "string"
+          type: "string",
         },
         code_postal: {
-          type: "string"
+          type: "string",
         },
         ville: {
-          type: "string"
+          type: "string",
         },
         mesure_max: {
-          type: "integer"
-        }
-      }
+          type: "integer",
+        },
+      },
     };
   }
 
@@ -57,9 +57,9 @@ class ServiceAntenne extends Model {
         modelClass: Service,
         join: {
           from: "service_antenne.service_id",
-          to: "users.id"
-        }
-      }
+          to: "users.id",
+        },
+      },
     };
   }
 }
