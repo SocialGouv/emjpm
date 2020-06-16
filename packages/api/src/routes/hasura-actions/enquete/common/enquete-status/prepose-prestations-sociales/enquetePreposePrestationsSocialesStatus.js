@@ -13,7 +13,7 @@ module.exports = async (enqueteReponse) => {
       {
         schema: tranches1a11(),
         debugName: `${debugGroupName}/tutelle`,
-        logDataWithErrors: true,
+        logDataWithErrors: false,
         logDataIfEmpty: true,
         logData: true,
       }

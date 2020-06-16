@@ -33,7 +33,7 @@ module.exports = async (enqueteReponse) => {
           aide_sociale_conseil_departemental: yup.number().min(0).nullable(),
         }),
         debugName: `${debugGroupName}`,
-        logDataWithErrors: true,
+        logDataWithErrors: false,
       }
     ),
   };

@@ -21,6 +21,8 @@ actions:
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
   - role: individuel
+  - role: prepose
+  - role: service
 - name: upload_enquete_file
   definition:
     kind: synchronous
