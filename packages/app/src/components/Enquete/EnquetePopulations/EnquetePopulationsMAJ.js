@@ -77,7 +77,7 @@ export const EnquetePopulationsMAJ = (props) => {
           step={step}
           onSubmit={async (values) => {
             const data = Object.keys(values).reduce((acc, key) => {
-              if (values[key]) {
+              if (values[key] !== "") {
                 return {
                   ...acc,
                   [key]: parseInt(values[key], 10),

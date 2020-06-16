@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 
 export function useEnqueteForm({
   onSubmit,
@@ -12,15 +12,24 @@ export function useEnqueteForm({
   formToData,
   loading,
 }) {
+  const memoizedData = useMemo(
+    () => data,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    !data ? [] : Object.values(data) // if data reference changes, but not values, keep the same reference
+  );
+
+  const initialValues = dataToForm ? dataToForm(memoizedData) : memoizedData;
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
+      console.log("xxx submit values:", values);
       values = formToData ? formToData(values) : values;
+      console.log("xxx submit values transformed:", values);
       await onSubmit(values);
       dispatchEnqueteContextEvent({ type: "navigate-to-next-page" });
       setSubmitting(false);
     },
     validationSchema,
-    initialValues: dataToForm ? dataToForm(data) : data,
+    initialValues,
     onChange: () => {},
   });
 
@@ -79,8 +88,8 @@ export function useEnqueteForm({
   }, [enqueteContext.actions.autoSubmit, submitForm]);
 
   useEffect(() => {
-    setValues(dataToForm(data));
-  }, [data, setValues, dataToForm]);
+    setValues(dataToForm(memoizedData));
+  }, [memoizedData, setValues, dataToForm]);
 
   const showError = useMemo(() => !loading && (step.status !== "empty" || submitCount !== 0), [
     step.status,
@@ -88,7 +97,7 @@ export function useEnqueteForm({
     loading,
   ]);
 
-  const submit = useMemo(
+  const submit = useCallback(
     () => ({ action }) => {
       if (action === "click-previous") {
         dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: "previous" });

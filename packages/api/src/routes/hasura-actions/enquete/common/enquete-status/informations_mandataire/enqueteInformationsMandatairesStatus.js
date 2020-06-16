@@ -45,7 +45,7 @@ module.exports = async (enqueteReponse) => {
           local_professionnel: yup.boolean().required(),
         }),
         debugName: `${debugGroupName}/agrementsStatus`,
-        logDataWithErrors: true,
+        logDataWithErrors: false,
       }
     ),
     agrements: enqueteAgrementsFormationsStatus.agrementsStatus(
