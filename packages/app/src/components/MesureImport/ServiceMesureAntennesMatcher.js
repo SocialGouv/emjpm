@@ -7,13 +7,14 @@ import { SERVICE_ANTENNES } from "./queries";
 
 const ServiceMesureAntennesMatcher = ({ serviceId, invalidAntenneNames, onSubmitAntennesMap }) => {
   const { data, loading, error } = useQuery(SERVICE_ANTENNES, {
-    variables: { service_id: serviceId }
+    variables: { service_id: serviceId },
   });
 
   const serviceAntennes = useMemo(() => (data && data.antennes ? data.antennes : []), [data]);
-  const antenneOptions = useMemo(() => serviceAntennes.map(a => ({ label: a.name, value: a.id })), [
-    serviceAntennes
-  ]);
+  const antenneOptions = useMemo(
+    () => serviceAntennes.map((a) => ({ label: a.name, value: a.id })),
+    [serviceAntennes]
+  );
 
   if (loading) {
     return <div>loading...</div>;
@@ -23,7 +24,7 @@ const ServiceMesureAntennesMatcher = ({ serviceId, invalidAntenneNames, onSubmit
     return <div>error</div>;
   }
 
-  const handleSubmit = async event => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // get associations via select values
@@ -34,7 +35,7 @@ const ServiceMesureAntennesMatcher = ({ serviceId, invalidAntenneNames, onSubmit
 
     if (onSubmitAntennesMap) {
       onSubmitAntennesMap({
-        antennesMap
+        antennesMap,
       });
     }
   };

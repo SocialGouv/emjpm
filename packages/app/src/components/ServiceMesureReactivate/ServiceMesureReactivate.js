@@ -5,7 +5,7 @@ import { MesureContext } from "../MesureContext";
 import { ServiceMesureReactivateForm } from "./ServiceMesureReactivateForm";
 import { ServiceMesureReactivateStyle } from "./style";
 
-const ServiceMesureReactivate = props => {
+const ServiceMesureReactivate = (props) => {
   const mesure = useContext(MesureContext);
 
   return (

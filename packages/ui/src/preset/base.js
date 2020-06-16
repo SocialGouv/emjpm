@@ -30,9 +30,7 @@ export const presetBase = {
     secondary: '#30c',
     text: '#000',
   },
-  fontSizes: [
-    12, 14, 16, 20, 24, 32, 48, 64, 96
-  ],
+  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
   fontWeights: {
     body: 400,
     bold: 700,
@@ -73,7 +71,7 @@ export const presetBase = {
     },
     display: {
       fontFamily: 'heading',
-      fontSize: [ 5, 6, 7 ],
+      fontSize: [5, 6, 7],
       fontWeight: 'heading',
       lineHeight: 'heading',
     },
@@ -106,7 +104,7 @@ export const presetBase = {
       fontSize: 1,
       fontWeight: 'bold',
       p: 2,
-      textDecoration: 'none'
+      textDecoration: 'none',
     },
   },
-}
+};

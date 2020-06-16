@@ -4,7 +4,7 @@ export const MESURE_CATEGORY_TYPE_KEYS = [
   "CURATELLE_RENFORCEE",
   "CURATELLE_SIMPLE",
   "SAUVEGARDE_JUSTICE",
-  "OTHER"
+  "OTHER",
 ];
 
 const MESURE_CATEGORY_TYPE_COLORS = {
@@ -13,7 +13,7 @@ const MESURE_CATEGORY_TYPE_COLORS = {
   OTHER: "#CEA914",
   SAUVEGARDE_JUSTICE: "#362983",
   TOTAL: "red",
-  TUTELLE: "#9C0E68"
+  TUTELLE: "#9C0E68",
 };
 
 const VALUE_LABEL = {
@@ -22,9 +22,9 @@ const VALUE_LABEL = {
   OTHER: "Autre",
   SAUVEGARDE_JUSTICE: "sauvegarde de justice",
   TOTAL: "Total",
-  TUTELLE: "tutelle"
+  TUTELLE: "tutelle",
 };
 
-export const getMesureCategoryTypeColor = type => MESURE_CATEGORY_TYPE_COLORS[type];
+export const getMesureCategoryTypeColor = (type) => MESURE_CATEGORY_TYPE_COLORS[type];
 
-export const getMesureCategoryTypeLabel = type => VALUE_LABEL[type];
+export const getMesureCategoryTypeLabel = (type) => VALUE_LABEL[type];

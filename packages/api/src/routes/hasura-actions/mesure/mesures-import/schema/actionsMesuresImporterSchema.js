@@ -21,14 +21,14 @@ const MESURE_TYPES = [
   "tutelle",
   "tutelle à la personne",
   "tutelle aux biens",
-  "tutelle aux biens et à la personne"
+  "tutelle aux biens et à la personne",
 ];
 
 const MESURE_RESIDENCES = [
   "domicile",
   "en établissement",
   "en établissement avec conservation du domicile",
-  "sdf"
+  "sdf",
 ];
 
 // 20/11/2015 or 20/11/15
@@ -45,7 +45,7 @@ const actionsMesuresImporterSchema = yup.object().shape({
     .mixed()
     .oneOf(
       ["F", "H"],
-      field => `'${field.value}' n'est pas une valeur acceptée`
+      (field) => `'${field.value}' n'est pas une valeur acceptée`
     )
     .required("doit être rempli"),
   code_postal: yup.string().matches(/^[0-9]{4}|[0-9]{5}$/, "4 ou 5 chiffres"),
@@ -59,7 +59,7 @@ const actionsMesuresImporterSchema = yup.object().shape({
     .mixed()
     .oneOf(
       MESURE_RESIDENCES,
-      field => `'${field.value}' n'est pas une valeur acceptée`
+      (field) => `'${field.value}' n'est pas une valeur acceptée`
     )
     .required("doit être rempli"),
   tribunal_siret: yup.string().required("doit être rempli"),
@@ -67,9 +67,9 @@ const actionsMesuresImporterSchema = yup.object().shape({
     .mixed()
     .oneOf(
       MESURE_TYPES,
-      field => `'${field.value}' n'est pas une valeur acceptée`
+      (field) => `'${field.value}' n'est pas une valeur acceptée`
     )
-    .required("doit être rempli")
+    .required("doit être rempli"),
 });
 
 module.exports = { actionsMesuresImporterSchema };

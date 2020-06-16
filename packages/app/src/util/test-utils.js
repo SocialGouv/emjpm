@@ -9,7 +9,7 @@ function render(ui, { ...options } = {}) {
     return <ThemeProvider theme={presetEmjpm}>{children}</ThemeProvider>;
   }
   Wrapper.propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
   };
 
   return rtlRender(ui, { wrapper: Wrapper, ...options });

@@ -18,7 +18,7 @@ const PaginatedList = ({
   resultPerPage,
   currentOffset,
   setCurrentOffset,
-  count
+  count,
 }) => {
   const totalPage = count / resultPerPage;
   return (
@@ -37,7 +37,7 @@ const PaginatedList = ({
               marginPagesDisplayed={2}
               forcePage={currentOffset / resultPerPage}
               pageRangeDisplayed={5}
-              onPageChange={data => {
+              onPageChange={(data) => {
                 setCurrentOffset(data.selected * resultPerPage);
               }}
               subContainerClassName={"pages pagination"}

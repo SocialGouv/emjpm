@@ -28,21 +28,18 @@ const cols = [
   "telephone",
   "email",
   "latitude",
-  "longitude"
+  "longitude",
 ];
 
-const splitRow = row =>
+const splitRow = (row) =>
   row
     .split(";")
     .filter((r, i) => i < cols.length)
     .reduce((a, c, i) => ({ ...a, [cols[i]]: c }), {});
 
-const rows = data
-  .split("\n")
-  .filter(Boolean)
-  .map(splitRow);
+const rows = data.split("\n").filter(Boolean).map(splitRow);
 
-exports.seed = knex => {
+exports.seed = (knex) => {
   if (process.env.NODE_ENV === "test") {
     return Promise.resolve();
   }

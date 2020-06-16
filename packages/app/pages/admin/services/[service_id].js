@@ -10,7 +10,7 @@ import { LayoutAdmin } from "../../../src/components/Layout";
 import { MesureImportPanel } from "../../../src/components/MesureImport";
 import { withAuthSync } from "../../../src/util/auth";
 
-const Service = props => {
+const Service = (props) => {
   const { serviceId } = props;
   return (
     <LayoutAdmin>

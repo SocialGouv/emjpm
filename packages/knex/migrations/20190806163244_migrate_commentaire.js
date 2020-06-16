@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(
     `
     update commentaires c set antenne_id = (select id from service_antenne where bak_mandataire_id = c.mandataire_id);
@@ -7,6 +7,6 @@ exports.up = function(knex) {
   );
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

@@ -1,4 +1,4 @@
-export const getRegionCode = zipcode => {
+export const getRegionCode = (zipcode) => {
   if (!zipcode || zipcode.length !== 5) {
     throw new Error("zip code is invalid");
   }

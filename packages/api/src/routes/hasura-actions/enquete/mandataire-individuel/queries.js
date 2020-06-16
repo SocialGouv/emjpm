@@ -52,7 +52,7 @@ module.exports = {
             "tutelle",
             "curatelle_personne",
             "curatelle_renforcee",
-            "curatelle_simple"
+            "curatelle_simple",
           ],
           ["domicile", "etablissement"],
           ["debut_annee", "fin_annee", "mesures_nouvelles", "sortie_mesures"],
@@ -62,7 +62,7 @@ module.exports = {
           [
             "subroge_tuteur_createur",
             "sauvegarde_justice",
-            "mandat_adhoc_majeur"
+            "mandat_adhoc_majeur",
           ],
           ["debut_annee", "fin_annee", "mesures_nouvelles", "sortie_mesures"],
           "_"
@@ -246,5 +246,5 @@ module.exports = {
       }
     }
   }  
-`
+`,
 };

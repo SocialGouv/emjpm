@@ -1,8 +1,8 @@
 import { format } from "date-fns";
 
 // move me in the good folder
-export const formatMesureList = mesureList => {
-  const mesures = mesureList.map(mesure => {
+export const formatMesureList = (mesureList) => {
+  const mesures = mesureList.map((mesure) => {
     const {
       residence,
       code_postal,
@@ -22,7 +22,7 @@ export const formatMesureList = mesureList => {
       ti,
       latitude,
       longitude,
-      pays
+      pays,
     } = mesure;
 
     return {
@@ -49,16 +49,16 @@ export const formatMesureList = mesureList => {
       tiId: ti ? ti.id : null,
       tribunal: ti ? ti.etablissement : "Tribunal non renseigné",
       type: type ? type : "type de mesure non renseigné",
-      ville: ville ? ville : "ville non renseigné"
+      ville: ville ? ville : "ville non renseigné",
     };
   });
 
   return mesures;
 };
 
-export const formatAntenneOptions = antennes => {
-  return antennes.map(antenne => ({
+export const formatAntenneOptions = (antennes) => {
+  return antennes.map((antenne) => ({
     label: antenne.name,
-    value: antenne.id
+    value: antenne.id,
   }));
 };

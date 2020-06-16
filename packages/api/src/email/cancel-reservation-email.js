@@ -9,8 +9,9 @@ const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
 
 Le ${format(new Date(mesure.created_at), "dd/MM/yyyy")}, le ${
     ti.etablissement
-  } ${(mesure.cabinet && `cabinet ${mesure.cabinet}`) ||
-    ""}, vous a confié une nouvelle mesure :
+  } ${
+    (mesure.cabinet && `cabinet ${mesure.cabinet}`) || ""
+  }, vous a confié une nouvelle mesure :
 - "type de mesure": ${mesure.type}
 - "genre": ${mesure.civilite}
 - "année de naissance": ${mesure.annee}.
@@ -38,5 +39,5 @@ const cancelReservationEmail = async (ti, mesure, user) => {
 };
 
 module.exports = {
-  cancelReservationEmail
+  cancelReservationEmail,
 };

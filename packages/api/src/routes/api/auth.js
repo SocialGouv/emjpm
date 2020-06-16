@@ -10,39 +10,22 @@ const jwkController = require("../../controllers/jwk");
 
 router.post(
   "/login",
-  [
-    body("username")
-      .not()
-      .isEmpty(),
-    body("password")
-      .not()
-      .isEmpty()
-  ],
+  [body("username").not().isEmpty(), body("password").not().isEmpty()],
   login
 );
 
 router.post(
   "/forgot-password",
-  [
-    body("email")
-      .not()
-      .isEmpty()
-  ],
+  [body("email").not().isEmpty()],
   forgotPassword
 );
 
 router.post(
   "/reset-password-with-token",
   [
-    body("token")
-      .not()
-      .isEmpty(),
-    body("new_password_confirmation")
-      .not()
-      .isEmpty(),
-    body("new_password")
-      .not()
-      .isEmpty(),
+    body("token").not().isEmpty(),
+    body("new_password_confirmation").not().isEmpty(),
+    body("new_password").not().isEmpty(),
     check("new_password", "new_password_confirmation")
       .exists()
       .withMessage("Votre mot de passe doit ne doit pas être vide")
@@ -63,7 +46,7 @@ router.post(
           return value;
         }
       }
-    )
+    ),
   ],
   resetPasswordWithToken
 );
@@ -71,20 +54,12 @@ router.post(
 router.post(
   "/reset-password",
   [
-    body("username")
-      .not()
-      .isEmpty(),
-    body("password")
-      .not()
-      .isEmpty(),
-    body("new_password_confirmation")
-      .not()
-      .isEmpty(),
-    body("new_password")
-      .not()
-      .isEmpty(),
+    body("username").not().isEmpty(),
+    body("password").not().isEmpty(),
+    body("new_password_confirmation").not().isEmpty(),
+    body("new_password").not().isEmpty(),
     check("username", "username must be at least 3 characters long").isLength({
-      min: 3
+      min: 3,
     }),
     check("new_password", "new_password_confirmation")
       .exists()
@@ -106,7 +81,7 @@ router.post(
           return value;
         }
       }
-    )
+    ),
   ],
   resetPassword
 );
@@ -121,13 +96,13 @@ router.post(
       "user.username",
       "Votre nom d'utilisateur doit être de 3 caractères minimum"
     ).isLength({
-      min: 3
+      min: 3,
     }),
     check(
       "user.password",
       "Votre mot de passe doit être de 8 caractères minimum"
     ).isLength({
-      min: 8
+      min: 8,
     }),
     check("user.password")
       .exists()
@@ -139,7 +114,7 @@ router.post(
       )
       .withMessage(
         "Votre mot de passe doit contenir contenir au moins 1 chiffre et un caractère spécial"
-      )
+      ),
   ],
   signup
 );

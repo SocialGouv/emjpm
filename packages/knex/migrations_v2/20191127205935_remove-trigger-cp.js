@@ -1,11 +1,11 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
 DROP TRIGGER on_update_mesures_code_postal ON mesures;
 DROP FUNCTION update_mesures_departement;
   `);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
 CREATE OR REPLACE FUNCTION update_mesures_departement() RETURNS trigger AS $$
   BEGIN

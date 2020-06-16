@@ -49,5 +49,5 @@ const inscriptionEmail = async (nom, prenom, email, codePostal, type, tis) => {
 };
 
 module.exports = {
-  inscriptionEmail
+  inscriptionEmail,
 };

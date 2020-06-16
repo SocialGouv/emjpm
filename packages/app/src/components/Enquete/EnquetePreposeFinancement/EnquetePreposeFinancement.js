@@ -11,37 +11,37 @@ function convertToFloat(str) {
   return isNaN(value) ? null : value;
 }
 
-export const EnquetePreposeFinancement = props => {
+export const EnquetePreposeFinancement = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
     userId,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { financement_id }
+    enquete_reponse_ids: { financement_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_REPONSES_FINANCEMENT, {
     variables: {
-      id: financement_id
-    }
+      id: financement_id,
+    },
   });
   const [updateFinancement] = useMutation(UPDATE_ENQUETE_REPONSES_FINANCEMENT, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_REPONSES_FINANCEMENT,
         variables: {
-          id: financement_id
-        }
-      }
-    ]
+          id: financement_id,
+        },
+      },
+    ],
   });
   const financement = data ? data.enquete_reponses_financement_by_pk || {} : {};
 
@@ -51,7 +51,7 @@ export const EnquetePreposeFinancement = props => {
       step={step}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         await updateFinancement({
           variables: {
             id: financement_id,
@@ -63,8 +63,8 @@ export const EnquetePreposeFinancement = props => {
             charges_personnel: convertToFloat(values.charges_personnel),
             charges_preposes: convertToFloat(values.charges_preposes),
             financement_public: convertToFloat(values.financement_public),
-            produits_bareme_prelevements: convertToFloat(values.produits_bareme_prelevements)
-          }
+            produits_bareme_prelevements: convertToFloat(values.produits_bareme_prelevements),
+          },
         });
       }}
       loading={loading}

@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
 update mesures set "status" = 'Mesure en cours' where "status" = 'Mesure service';
 update mesures set "status" = 'Mesure en cours' where "status" = 'Mesure Service';
@@ -33,6 +33,6 @@ update service_antenne set mesures_in_progress = (
   `);
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

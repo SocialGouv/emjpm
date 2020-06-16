@@ -7,9 +7,9 @@ import { formatSatisfactionPourcent } from "./helpers";
 import { INDICATORS } from "./queries";
 import { IndicatorBoxStyle, IndicatorListStyle } from "./style";
 
-const filterArray = (array, type) => array.filter(element => element.type === type);
-const filterArrays = arrays => {
-  return arrays.map(array => {
+const filterArray = (array, type) => array.filter((element) => element.type === type);
+const filterArrays = (arrays) => {
+  return arrays.map((array) => {
     const [service] = filterArray(array, "service");
     const [prepose] = filterArray(array, "prepose");
     const [individuel] = filterArray(array, "individuel");
@@ -18,10 +18,10 @@ const filterArrays = arrays => {
   });
 };
 
-const IndicatorList = props => {
+const IndicatorList = (props) => {
   const { departementCode } = props;
   const { data, error, loading } = useQuery(INDICATORS, {
-    variables: { code: departementCode }
+    variables: { code: departementCode },
   });
 
   if (loading) {
@@ -46,7 +46,7 @@ const IndicatorList = props => {
     view_indicateur_login: login,
     view_indicateur_inscrit: inscrit,
     view_indicateur_satisfaction_campaign: satisfaction,
-    departements
+    departements,
   } = data;
   const [department] = departements;
   const [loginData, inscritData, satisfactionData] = filterArrays([login, inscrit, satisfaction]);

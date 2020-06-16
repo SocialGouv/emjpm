@@ -6,7 +6,7 @@ import { EnqueteIndividuelInformationsAgrementForm } from "./EnqueteIndividuelIn
 import { UPDATE_ENQUETE_INFORMATIONS_AGREMENTS } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS } from "./queries";
 
-export const EnqueteIndividuelInformationsAgrement = props => {
+export const EnqueteIndividuelInformationsAgrement = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -14,29 +14,29 @@ export const EnqueteIndividuelInformationsAgrement = props => {
     userId,
     section,
     step,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { informations_mandataire_id }
+    enquete_reponse_ids: { informations_mandataire_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS, {
     variables: {
-      id: informations_mandataire_id
-    }
+      id: informations_mandataire_id,
+    },
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INFORMATIONS_AGREMENTS, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS,
-        variables: { id: informations_mandataire_id }
-      }
-    ]
+        variables: { id: informations_mandataire_id },
+      },
+    ],
   });
 
   const agrements = data ? data.enquete_reponses_agrements_formations_by_pk || {} : {};
@@ -47,7 +47,7 @@ export const EnqueteIndividuelInformationsAgrement = props => {
       step={step}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         await updateEnquete({
           variables: {
             id: informations_mandataire_id,
@@ -59,8 +59,8 @@ export const EnqueteIndividuelInformationsAgrement = props => {
               : null,
             nb_mesures_dep_autres: values.nb_mesures_dep_autres
               ? Number(values.nb_mesures_dep_autres)
-              : null
-          }
+              : null,
+          },
         });
       }}
     />

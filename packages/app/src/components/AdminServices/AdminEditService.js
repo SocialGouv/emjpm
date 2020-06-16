@@ -6,7 +6,7 @@ import { AdminServiceForm } from "./AdminServiceForm";
 import { UPDATE_SERVICE } from "./mutations";
 import { DEPARTEMENTS, SERVICE } from "./queries";
 
-export const AdminEditService = props => {
+export const AdminEditService = (props) => {
   const { serviceId } = props;
   const serviceQuery = useQuery(SERVICE, { fetchPolicy: "network-only", variables: { serviceId } });
   const departmentsQuery = useQuery(DEPARTEMENTS);
@@ -21,13 +21,13 @@ export const AdminEditService = props => {
   }
 
   const {
-    services: [service]
+    services: [service],
   } = serviceQuery.data;
   const { departements } = departmentsQuery.data;
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const { city, depcode, label, longitude, latitude, postcode } = values.geocode;
-    const department = departements.find(d => d.code === depcode);
+    const department = departements.find((d) => d.code === depcode);
 
     if (!department) {
       setErrors({ geocode: "L'adresse est invalide, veuillez la resaisir" });
@@ -49,8 +49,8 @@ export const AdminEditService = props => {
           telephone: values.telephone,
           ville: city,
           latitude: latitude,
-          longitude: longitude
-        }
+          longitude: longitude,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);

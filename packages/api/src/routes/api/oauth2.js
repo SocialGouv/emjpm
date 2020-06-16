@@ -7,18 +7,10 @@ const authorize = require("../../controllers/user/oauth");
 router.post(
   "/authorize",
   [
-    body("editorToken")
-      .not()
-      .isEmpty(),
-    body("editorId")
-      .not()
-      .isEmpty(),
-    body("redirectUrl")
-      .not()
-      .isEmpty(),
-    body("userId")
-      .not()
-      .isEmpty()
+    body("editorToken").not().isEmpty(),
+    body("editorId").not().isEmpty(),
+    body("redirectUrl").not().isEmpty(),
+    body("userId").not().isEmpty(),
   ],
   authorize
 );

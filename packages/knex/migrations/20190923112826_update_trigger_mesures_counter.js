@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
 DROP TRIGGER on_update_mesures ON mesures;
 DROP FUNCTION update_gestionnaire_counters;
@@ -28,7 +28,7 @@ CREATE TRIGGER on_update_mesures
   `);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
 DROP TRIGGER on_update_mesures ON mesures;
 DROP FUNCTION update_gestionnaire_counters;

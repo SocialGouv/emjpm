@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 
 import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,
-  MANDATAIRE_MESURE_IMPORT_TEMPLATE
+  MANDATAIRE_MESURE_IMPORT_TEMPLATE,
 } from "../../constants/import";
 import { MesureImportPanel } from "../MesureImport";
 import { DocumentLink } from "../MesureImport/DocumentLink";

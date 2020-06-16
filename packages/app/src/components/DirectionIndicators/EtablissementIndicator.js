@@ -12,8 +12,8 @@ const EtablissementIndicator = () => {
     variables: {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      type: "MANDATAIRE_PRE"
-    }
+      type: "MANDATAIRE_PRE",
+    },
   });
 
   return (

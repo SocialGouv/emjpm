@@ -7,7 +7,7 @@ import { AdminSatisfactionCampaignInformations } from "../../../src/components/A
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
-const Editor = props => {
+const Editor = (props) => {
   const { id } = props;
 
   return (

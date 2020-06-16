@@ -1,5 +1,5 @@
 const ServiceEditAntenneStyle = {
-  flexWrap: "wrap"
+  flexWrap: "wrap",
 };
 
 export { ServiceEditAntenneStyle };

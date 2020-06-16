@@ -1,14 +1,14 @@
 const AdminUsersStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
-const cardStyle = active => {
+const cardStyle = (active) => {
   return {
     mb: "1",
     overflow: "hidden",
     pl: "16px",
     position: "relative",
-    borderLeft: active ? "2px solid green" : "2px solid red"
+    borderLeft: active ? "2px solid green" : "2px solid red",
   };
 };
 
@@ -18,7 +18,7 @@ const labelStyle = {
   fontSize: "11px",
   fontWeight: "600",
   mb: "5px",
-  mt: "7px"
+  mt: "7px",
 };
 
 const descriptionStyle = {
@@ -27,15 +27,15 @@ const descriptionStyle = {
   fontWeight: "600",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
 };
 
-const activateButtonStyle = active => {
+const activateButtonStyle = (active) => {
   return active
     ? {}
     : {
         borderColor: "success",
-        color: "success"
+        color: "success",
       };
 };
 

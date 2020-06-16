@@ -5,7 +5,7 @@ const { AccessToken } = require("../../models/AccessToken");
 
 const BearerStrategy = passportBearer.Strategy;
 
-const authEditorJwtStrategy = new BearerStrategy(async function(token, done) {
+const authEditorJwtStrategy = new BearerStrategy(async function (token, done) {
   try {
     const decoded = jwtDecode(token);
 

@@ -8,7 +8,7 @@ const geocodeInitialValue = (resource = {}) => {
       postcode: "",
       label: "",
       latitude: "",
-      longitude: ""
+      longitude: "",
     };
   }
 
@@ -20,7 +20,7 @@ const geocodeInitialValue = (resource = {}) => {
     postcode,
     label: resource.address || resource.adresse || resource.ville || resource.address_city,
     latitude: resource.latitude,
-    longitude: resource.longitude
+    longitude: resource.longitude,
   };
 };
 

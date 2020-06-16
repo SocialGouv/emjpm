@@ -9,21 +9,21 @@ import * as Yup from "yup";
 
 import { MANDATAIRE, REACTIVATE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 
-export const MandataireMesureReactivateForm = props => {
+export const MandataireMesureReactivateForm = (props) => {
   const { mesure } = props;
 
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
     refetchQueries: [
       {
         query: MANDATAIRE,
-        variables: { id: mesure.mandataireId }
-      }
-    ]
+        variables: { id: mesure.mandataireId },
+      },
+    ],
   });
   const [updateMesure] = useMutation(REACTIVATE_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    }
+    },
   });
 
   const formik = useFormik({
@@ -31,18 +31,18 @@ export const MandataireMesureReactivateForm = props => {
       await updateMesure({
         variables: {
           id: mesure.id,
-          reason_extinction: values.reason_extinction
-        }
+          reason_extinction: values.reason_extinction,
+        },
       });
       await Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
-        shallow: true
+        shallow: true,
       });
       setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
-      reason_extinction: Yup.string().required("Required")
+      reason_extinction: Yup.string().required("Required"),
     }),
-    initialValues: { reason_extinction: "" }
+    initialValues: { reason_extinction: "" },
   });
 
   return (
@@ -82,7 +82,7 @@ export const MandataireMesureReactivateForm = props => {
                     "/mandataires/mesures/[mesure_id]",
                     `/mandataires/mesures/${mesure.id}`,
                     {
-                      shallow: true
+                      shallow: true,
                     }
                   );
                 }}
@@ -103,5 +103,5 @@ export const MandataireMesureReactivateForm = props => {
 };
 
 MandataireMesureReactivateForm.propTypes = {
-  currentMesure: PropTypes.number.isRequired
+  currentMesure: PropTypes.number.isRequired,
 };

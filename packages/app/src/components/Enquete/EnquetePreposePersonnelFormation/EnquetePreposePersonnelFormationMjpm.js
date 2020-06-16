@@ -7,23 +7,23 @@ import { EnquetePreposePersonnelFormationMjpmForm } from "./EnquetePreposePerson
 import { UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_MJPM } from "./mutations";
 import { ENQUETE_PREPOSE_PERSONNEL_FORMATION } from "./queries";
 
-export const EnquetePreposePersonnelFormationMjpm = props => {
+export const EnquetePreposePersonnelFormationMjpm = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
     enquete: { id: enqueteId },
-    userId
+    userId,
   } = props; /* mandataireId, enquete */
   const {
-    enquete_reponse_ids: { personel_formation_id }
+    enquete_reponse_ids: { personel_formation_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_PREPOSE_PERSONNEL_FORMATION, {
     variables: {
-      id: personel_formation_id
-    }
+      id: personel_formation_id,
+    },
   });
 
   const [sendEnqueteReponseInformations] = useMutation(
@@ -32,13 +32,13 @@ export const EnquetePreposePersonnelFormationMjpm = props => {
       refetchQueries: [
         {
           query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, userId }
+          variables: { enqueteId, userId },
         },
         {
           query: ENQUETE_PREPOSE_PERSONNEL_FORMATION,
-          variables: { id: personel_formation_id }
-        }
-      ]
+          variables: { id: personel_formation_id },
+        },
+      ],
     }
   );
 
@@ -51,7 +51,7 @@ export const EnquetePreposePersonnelFormationMjpm = props => {
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
       step={step}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         const formation_preposes_mjpm = values.formation_preposes_mjpm
           ? {
               en_poste_cnc: parseNbPreposeHeuresFormationFromForm(
@@ -62,7 +62,7 @@ export const EnquetePreposePersonnelFormationMjpm = props => {
               ),
               formation_non_cnc: parseNbPreposeHeuresFormationFromForm(
                 values.formation_preposes_mjpm.formation_non_cnc
-              )
+              ),
             }
           : null;
 
@@ -71,8 +71,8 @@ export const EnquetePreposePersonnelFormationMjpm = props => {
             id: personel_formation_id,
             nb_preposes_mjpm: parseIntValue(values.nb_preposes_mjpm),
             nb_preposes_mjpm_etp: parseFloatValue(values.nb_preposes_mjpm_etp),
-            formation_preposes_mjpm
-          }
+            formation_preposes_mjpm,
+          },
         });
       }}
     />
@@ -83,6 +83,6 @@ export default EnquetePreposePersonnelFormationMjpm;
 function parseNbPreposeHeuresFormationFromForm(val) {
   return {
     nb_preposes: val ? parseIntValue(val.nb_preposes, 10) : null,
-    heures_formation: val ? parseFloatValue(val.heures_formation) : null
+    heures_formation: val ? parseFloatValue(val.heures_formation) : null,
   };
 }

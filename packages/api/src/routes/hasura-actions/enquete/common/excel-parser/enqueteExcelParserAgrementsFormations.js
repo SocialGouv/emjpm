@@ -7,10 +7,10 @@ function parse(ws) {
     debut_activite_avant_2009: parser.boolean(ws["C35"]),
     annee_agrement: parser.integer(ws["C37"], {
       min: 2009,
-      max: 2018
+      max: 2018,
     }),
     nb_departements: parser.select(ws["C39"], {
-      map: ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.byValue
+      map: ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.byValue,
     }),
     nb_mesures_dep_finance: parser.integer(ws["C41"]),
     nb_mesures_dep_autres: parser.integer(ws["C43"]),
@@ -23,7 +23,7 @@ function parse(ws) {
     secretaire_specialise_etp_n3: parser.float(ws["D53"], { min: 0 }),
     secretaire_specialise_etp_n4: parser.float(ws["E53"], { min: 0 }),
     secretaire_specialise_etp_n5: parser.float(ws["F53"], { min: 0 }),
-    secretaire_specialise_etp_n6: parser.float(ws["G53"], { min: 0 })
+    secretaire_specialise_etp_n6: parser.float(ws["G53"], { min: 0 }),
   };
 }
 
@@ -44,7 +44,7 @@ function parseNiveauQualification(ws) {
 }
 
 const enqueteExcelParserAgrementsFormations = {
-  parse
+  parse,
 };
 
 module.exports = enqueteExcelParserAgrementsFormations;

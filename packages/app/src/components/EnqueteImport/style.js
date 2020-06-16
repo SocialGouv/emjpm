@@ -2,7 +2,7 @@ const ServiceEnqueteImportStyle = {};
 
 const ServiceEnqueteImportResultStyle = {
   border: "1px solid",
-  borderRadius: "3px"
+  borderRadius: "3px",
 };
 
 const importErrorsWrapperStyle = {
@@ -11,7 +11,7 @@ const importErrorsWrapperStyle = {
   m: "2",
   p: "5",
   maxHeight: "500px",
-  overflow: "auto"
+  overflow: "auto",
 };
 
 export { ServiceEnqueteImportStyle, ServiceEnqueteImportResultStyle, importErrorsWrapperStyle };

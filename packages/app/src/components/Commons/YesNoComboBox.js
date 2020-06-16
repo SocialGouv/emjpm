@@ -4,7 +4,7 @@ import { Flex } from "rebass";
 
 // TODO: create a generic component and move it into ui folder
 
-export const YesNoComboBox = props => {
+export const YesNoComboBox = (props) => {
   const { onChange = () => {}, name = "", defaultValue = false } = props;
   return (
     <Flex width={1 / 2}>

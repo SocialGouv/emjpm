@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 
-export const formatMandatairesMesureList = mesureList => {
-  const mesures = mesureList.map(mesure => {
+export const formatMandatairesMesureList = (mesureList) => {
+  const mesures = mesureList.map((mesure) => {
     const {
       residence,
       code_postal,
@@ -18,7 +18,7 @@ export const formatMandatairesMesureList = mesureList => {
       is_urgent,
       judgment_date,
       numero_rg,
-      cabinet
+      cabinet,
     } = mesure;
 
     return {
@@ -39,7 +39,7 @@ export const formatMandatairesMesureList = mesureList => {
       residence: residence ? residence : null,
       status: status ? status : null,
       type: type ? type : null,
-      ville: ville ? ville : null
+      ville: ville ? ville : null,
     };
   });
   return mesures;

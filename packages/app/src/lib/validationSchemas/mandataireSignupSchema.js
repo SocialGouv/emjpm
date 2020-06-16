@@ -12,10 +12,7 @@ const mandataireSignupSchema = yup.object().shape({
   telephone: yup.string().required(),
   telephone_portable: yup.string(),
   tis: yup.mixed().required(),
-  zipcode: yup
-    .string()
-    .length(5)
-    .required()
+  zipcode: yup.string().length(5).required(),
 });
 
 export { mandataireSignupSchema };

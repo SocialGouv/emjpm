@@ -7,7 +7,7 @@ import {
   InlineError,
   Input,
   Select,
-  Text
+  Text,
 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -25,9 +25,9 @@ import { cardStyle, grayBox } from "./style";
 const SignupMagistratForm = ({ tiDatas }) => {
   const { user, magistrat, setMagistrat, validateStepOne } = useContext(SignupContext);
 
-  const tiOptions = tiDatas.map(ti => ({
+  const tiOptions = tiDatas.map((ti) => ({
     label: ti.etablissement,
-    value: ti.id
+    value: ti.id,
   }));
 
   const formik = useFormik({
@@ -35,26 +35,26 @@ const SignupMagistratForm = ({ tiDatas }) => {
       const body = {
         magistrat: {
           cabinet: values.cabinet,
-          ti: values.ti.value
+          ti: values.ti.value,
         },
         user: {
           username: user.email,
-          ...user
-        }
+          ...user,
+        },
       };
 
       signup({
         body,
         onComplete: () => setSubmitting(false),
-        onError: errors => setErrors(errors),
-        onSuccess: () => Router.push("/signup/congratulation")
+        onError: (errors) => setErrors(errors),
+        onSuccess: () => Router.push("/signup/congratulation"),
       });
     },
     validationSchema: signupMagistratSchema,
     initialValues: {
       cabinet: magistrat ? magistrat.cabinet : "",
-      ti: magistrat ? magistrat.ti : ""
-    }
+      ti: magistrat ? magistrat.ti : "",
+    },
   });
 
   return (
@@ -80,7 +80,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
                   placeholder="Tribunal d'instance"
                   value={formik.values.ti}
                   hasError={formik.errors.ti && formik.touched.ti}
-                  onChange={option => formik.setFieldValue("ti", option)}
+                  onChange={(option) => formik.setFieldValue("ti", option)}
                   options={tiOptions}
                 />
                 {formik.touched.ti && <InlineError message={formik.errors.ti} fieldId="ti" />}
@@ -136,8 +136,8 @@ const SignupMagistratForm = ({ tiDatas }) => {
   );
 };
 
-const SignupMagistrat = props => (
-  <SignupDatas {...props} Component={props => <SignupMagistratForm {...props} />} />
+const SignupMagistrat = (props) => (
+  <SignupDatas {...props} Component={(props) => <SignupMagistratForm {...props} />} />
 );
 
 export { SignupMagistrat };

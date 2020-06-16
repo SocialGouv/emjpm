@@ -12,7 +12,7 @@ import { LinkButton, ServiceEditLinkButton } from "../Commons";
 import { GET_SERVICES } from "./queries";
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle, topTextStyle } from "./style";
 
-const ServiceInformations = props => {
+const ServiceInformations = (props) => {
   const { data, error, loading } = useQuery(GET_SERVICES, { fetchPolicy: "cache-and-network" });
 
   if (loading) {
@@ -48,7 +48,7 @@ const ServiceInformations = props => {
           </Box>
           <Box sx={boxStyle}>
             <Heading5 mb="3">Tribunaux d’instance</Heading5>
-            {service_tis.map(ti => {
+            {service_tis.map((ti) => {
               return (
                 <Text key={ti.ti.id} sx={topTextStyle}>
                   {ti.ti.etablissement}
@@ -82,11 +82,11 @@ const ServiceInformations = props => {
 };
 
 ServiceInformations.defaultProps = {
-  currentAntenne: null
+  currentAntenne: null,
 };
 
 ServiceInformations.propTypes = {
-  currentAntenne: PropTypes.string
+  currentAntenne: PropTypes.string,
 };
 
 export { ServiceInformations };

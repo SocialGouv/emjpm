@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 
 import { API_LOG_BY_ID } from "./queries";
 
-const AdminApiLog = props => {
+const AdminApiLog = (props) => {
   const { id } = props;
 
   const { data, loading, error } = useQuery(API_LOG_BY_ID, { variables: { id } });

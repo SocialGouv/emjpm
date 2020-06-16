@@ -8,7 +8,7 @@ import {
   InlineError,
   Input,
   Select,
-  Text
+  Text,
 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -30,9 +30,9 @@ import { grayBox } from "./style";
 const SignupMandataireForm = ({ tiDatas }) => {
   const { user, mandataire, setMandataire, validateStepOne } = useContext(SignupContext);
 
-  const tiOptions = tiDatas.map(ti => ({
+  const tiOptions = tiDatas.map((ti) => ({
     label: ti.etablissement,
-    value: ti.id
+    value: ti.id,
   }));
 
   const client = useApolloClient();
@@ -42,11 +42,11 @@ const SignupMandataireForm = ({ tiDatas }) => {
       const location = await getLocation(client, {
         address: values.address,
         zipcode: values.zipcode,
-        city: values.city
+        city: values.city,
       });
       if (!location || !location.department) {
         setErrors({
-          code_postal: "Merci de renseigner un code postal valide"
+          code_postal: "Merci de renseigner un code postal valide",
         });
       } else if (await isSiretExists(client, values.siret)) {
         setErrors({ siret: "Ce SIRET existe déjà" });
@@ -65,20 +65,20 @@ const SignupMandataireForm = ({ tiDatas }) => {
             telephone_portable: values.telephone_portable,
             ville: values.city.toUpperCase(),
             latitude: geolocation ? geolocation.latitude : null,
-            longitude: geolocation ? geolocation.longitude : null
+            longitude: geolocation ? geolocation.longitude : null,
           },
-          tis: values.tis.map(ti => ti.value),
+          tis: values.tis.map((ti) => ti.value),
           user: {
             username: user.email,
-            ...user
-          }
+            ...user,
+          },
         };
 
         await signup({
           body,
           onComplete: () => setSubmitting(false),
-          onError: errors => setErrors(errors),
-          onSuccess: () => Router.push("/signup/congratulation")
+          onError: (errors) => setErrors(errors),
+          onSuccess: () => Router.push("/signup/congratulation"),
         });
       }
       setSubmitting(false);
@@ -93,8 +93,8 @@ const SignupMandataireForm = ({ tiDatas }) => {
       siret: mandataire ? mandataire.siret : "",
       telephone: mandataire ? mandataire.telephone : "",
       telephone_portable: mandataire ? mandataire.telephone_portable : "",
-      tis: mandataire ? mandataire.tis : ""
-    }
+      tis: mandataire ? mandataire.tis : "",
+    },
   });
 
   return (
@@ -151,7 +151,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
                     placeholder="Tribunaux dans lesquels vous exercez"
                     value={formik.values.tis}
                     hasError={formik.errors.tis && formik.touched.tis}
-                    onChange={option => formik.setFieldValue("tis", option)}
+                    onChange={(option) => formik.setFieldValue("tis", option)}
                     options={tiOptions}
                     isMulti
                   />
@@ -164,7 +164,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
                     placeholder="Titre de civilité"
                     value={formik.values.genre}
                     hasError={formik.errors.genre && formik.touched.genre}
-                    onChange={option => formik.setFieldValue("genre", option)}
+                    onChange={(option) => formik.setFieldValue("genre", option)}
                     options={GENDER_OPTIONS}
                   />
                   {formik.touched.genre && (
@@ -224,7 +224,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
                         value={formik.values.zipcode}
                         id="zipcode"
                         name="zipcode"
-                        onChange={async e => {
+                        onChange={async (e) => {
                           const { value } = e.target;
                           await formik.setFieldValue("zipcode", value);
                           await formik.setFieldValue("city", "");
@@ -241,7 +241,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
                         name="city"
                         id="city"
                         zipcode={formik.values.zipcode}
-                        onChange={value => formik.setFieldValue("city", value)}
+                        onChange={(value) => formik.setFieldValue("city", value)}
                         value={formik.values.city}
                       />
                       <InlineError message={formik.errors.city} fieldId="city" />
@@ -301,8 +301,8 @@ const SignupMandataireForm = ({ tiDatas }) => {
   );
 };
 
-const SignupMandataire = props => (
-  <SignupDatas {...props} Component={props => <SignupMandataireForm {...props} />} />
+const SignupMandataire = (props) => (
+  <SignupDatas {...props} Component={(props) => <SignupMandataireForm {...props} />} />
 );
 
 export { SignupMandataire };

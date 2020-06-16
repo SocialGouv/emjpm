@@ -1,5 +1,5 @@
 const AuthorizeStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { AuthorizeStyle };

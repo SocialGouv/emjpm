@@ -8,11 +8,11 @@ const iconsSrc = [
   { src: iconIndividuelMarker, name: MANDATAIRE_IND },
   { src: iconPreposeMarker, name: MANDATAIRE_PRE },
   { src: iconServiceMarker, name: SERVICE },
-  { src: iconMesureMarker, name: MESURE }
+  { src: iconMesureMarker, name: MESURE },
 ];
 
 export const mapMarkersIcons = () => {
-  return iconsSrc.map(icon => {
+  return iconsSrc.map((icon) => {
     const image = new Image(60, 72);
     image.src = icon.src;
     return [icon.name, image, { pixelRatio: 2 }];
@@ -25,5 +25,5 @@ export const mapImages = {
   MANDATAIRE_IND: iconIndividuel,
   MANDATAIRE_PRE: iconPrepose,
   SERVICE: iconService,
-  MESURE: mesure
+  MESURE: mesure,
 };

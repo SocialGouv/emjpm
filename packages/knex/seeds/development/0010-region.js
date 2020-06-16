@@ -1,4 +1,4 @@
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   // Inserts seed entries
   return knex("regions").insert([
     { id: 1, nom: "Guadeloupe" },
@@ -18,6 +18,6 @@ exports.seed = function(knex) {
     { id: 76, nom: "Occitanie" },
     { id: 84, nom: "Auvergne-Rhône-Alpes" },
     { id: 93, nom: "Provence-Alpes-Côte d'Azur" },
-    { id: 94, nom: "Corse" }
+    { id: 94, nom: "Corse" },
   ]);
 };

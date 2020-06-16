@@ -5,7 +5,7 @@ import React from "react";
 import { serviceSchema } from "../../lib/validationSchemas/serviceSchema";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 
-const ServiceEditForm = props => {
+const ServiceEditForm = (props) => {
   const { handleSubmit, service } = props;
 
   const formik = useFormik({
@@ -19,8 +19,8 @@ const ServiceEditForm = props => {
       nom: service.nom || "",
       prenom: service.prenom || "",
       telephone: service.telephone || "",
-      geocode: geocodeInitialValue(service)
-    }
+      geocode: geocodeInitialValue(service),
+    },
   });
 
   return (
@@ -83,7 +83,7 @@ const ServiceEditForm = props => {
       <Field>
         <Geocode
           resource={service}
-          onChange={geocode => formik.setFieldValue("geocode", geocode)}
+          onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
         />
         <InlineError message={formik.errors.geocode} fieldId="geocode" />
       </Field>

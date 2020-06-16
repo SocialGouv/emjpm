@@ -27,7 +27,7 @@ const LoginCreateAccount = () => {
         alignItems: "center",
         flexDirection: "column",
         justifyContent: "center",
-        mt: "6"
+        mt: "6",
       }}
     >
       <LineBox>
@@ -41,7 +41,7 @@ const LoginCreateAccount = () => {
             position: "relative",
             px: "2",
             textAlign: "center",
-            width: "50px"
+            width: "50px",
           }}
         >
           OU

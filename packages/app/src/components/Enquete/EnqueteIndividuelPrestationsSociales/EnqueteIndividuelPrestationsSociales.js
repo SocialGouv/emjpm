@@ -6,7 +6,7 @@ import { EnqueteIndividuelPrestationsSocialesForm } from "./EnqueteIndividuelPre
 import { UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES } from "./mutations";
 import { ENQUETE_REPONSE_PRESTATIONS_SOCIALES } from "./queries";
 
-export const EnqueteIndividuelPrestationsSociales = props => {
+export const EnqueteIndividuelPrestationsSociales = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -14,29 +14,29 @@ export const EnqueteIndividuelPrestationsSociales = props => {
     userId,
     enquete: { id: enqueteId },
     section,
-    step
+    step,
   } = props;
   const {
-    enquete_reponse_ids: { prestations_sociale_id }
+    enquete_reponse_ids: { prestations_sociale_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_REPONSE_PRESTATIONS_SOCIALES, {
     variables: {
-      id: prestations_sociale_id
-    }
+      id: prestations_sociale_id,
+    },
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_REPONSE_PRESTATIONS_SOCIALES,
-        variables: { id: prestations_sociale_id }
-      }
-    ]
+        variables: { id: prestations_sociale_id },
+      },
+    ],
   });
 
   const prestationsSociales = data ? data.enquete_reponses_prestations_sociales_by_pk || {} : {};
@@ -48,7 +48,7 @@ export const EnqueteIndividuelPrestationsSociales = props => {
       step={step}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         await updateEnquete({
           variables: {
             id: prestations_sociale_id,
@@ -58,8 +58,8 @@ export const EnqueteIndividuelPrestationsSociales = props => {
             rsa: values.rsa || null,
             als: values.als || null,
             aspa: values.aspa || null,
-            apa: values.apa || null
-          }
+            apa: values.apa || null,
+          },
         });
       }}
     />

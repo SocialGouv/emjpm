@@ -23,8 +23,8 @@ class EnqueteReponsesPrestationsSociales extends Model {
         rsa: { type: "number" },
         als_apl: { type: "number" },
         aspa: { type: "number" },
-        apa: { type: "number" }
-      }
+        apa: { type: "number" },
+      },
     };
   }
 }

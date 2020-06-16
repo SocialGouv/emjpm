@@ -13,7 +13,7 @@ const passwordSchema = yup.object().shape({
     .string()
     .oneOf([yup.ref("newPassword"), null], "Les mots de passe ne sont pas égaux")
     .required(),
-  password: yup.string().required()
+  password: yup.string().required(),
 });
 
 export { passwordSchema };

@@ -1,5 +1,5 @@
-exports.up = knex => {
-  return knex.schema.createTable("city", table => {
+exports.up = (knex) => {
+  return knex.schema.createTable("city", (table) => {
     table.increments();
     table.string("code_postal").notNullable();
     table.string("ville").notNullable();
@@ -8,6 +8,6 @@ exports.up = knex => {
   });
 };
 
-exports.down = knex => {
+exports.down = (knex) => {
   return knex.schema.dropTable("city");
 };

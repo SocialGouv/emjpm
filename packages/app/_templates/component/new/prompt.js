@@ -4,10 +4,10 @@ const questions = [
   {
     message: `what is the name of your component:`,
     name: "name",
-    type: "input"
-  }
+    type: "input",
+  },
 ];
 
 module.exports = {
-  prompt: promptArgs(questions)
+  prompt: promptArgs(questions),
 };

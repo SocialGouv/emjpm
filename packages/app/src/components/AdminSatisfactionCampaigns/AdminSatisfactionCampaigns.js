@@ -16,13 +16,13 @@ const RowItem = ({ item }) => {
   const { id, name, started_at, ended_at, answers } = item;
   const [removeSatisfactionCampaign] = useMutation(REMOVE_SATISFACTION_CAMPAIGN);
 
-  const removeSatisfactionCampaignFromList = async id => {
+  const removeSatisfactionCampaignFromList = async (id) => {
     try {
       await removeSatisfactionCampaign({
         refetchQueries: ["satisfactionCampaign", ""],
         variables: {
-          id: id
-        }
+          id: id,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);
@@ -91,8 +91,8 @@ const AdminSatisfactionCampaigns = () => {
       limit: resultPerPage,
       offset: currentOffset,
       searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
-    }
+        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+    },
   });
 
   if (loading) {

@@ -8,19 +8,19 @@ import { Navigation } from "../Navigation";
 const navigationLinks = [
   {
     title: "Vos mandataires",
-    url: "/magistrats"
+    url: "/magistrats",
   },
   {
     title: "La carte des mandataires",
-    url: "/magistrats/map"
+    url: "/magistrats/map",
   },
   {
     title: "Vos mesures",
-    url: "/magistrats/mesures"
-  }
+    url: "/magistrats/mesures",
+  },
 ];
 
-const LayoutMagistratMap = props => {
+const LayoutMagistratMap = (props) => {
   const { children } = props;
   return (
     <Fragment>

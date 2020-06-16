@@ -14,18 +14,18 @@ const optionsType = [
   { label: "Tous les types", value: null },
   { label: "Préposé", value: "MANDATAIRE_PRE" },
   { label: "Individuel", value: "MANDATAIRE_IND" },
-  { label: "Service", value: "SERVICE" }
+  { label: "Service", value: "SERVICE" },
 ];
 
 const optionsCapacity = [
   { label: "Aucun", value: null },
   { label: "Ascendant", value: "asc_nulls_last" },
-  { label: "Descendant", value: "desc_nulls_last" }
+  { label: "Descendant", value: "desc_nulls_last" },
 ];
 
 const RESULT_PER_PAGE = 30;
 
-const MandatairesList = props => {
+const MandatairesList = (props) => {
   const { selectedDepartementValue, selectedRegionalValue } = useContext(FiltersContext);
   const [selectedType, setType] = useState(false);
   const [selectedCapacity, setCapacity] = useState(false);
@@ -37,8 +37,8 @@ const MandatairesList = props => {
       offset: currentOffset,
       limit: RESULT_PER_PAGE,
       order: selectedCapacity ? selectedCapacity.value : null,
-      region: selectedRegionalValue ? selectedRegionalValue.value : null
-    }
+      region: selectedRegionalValue ? selectedRegionalValue.value : null,
+    },
   });
 
   if (loading) {
@@ -71,7 +71,7 @@ const MandatairesList = props => {
           <Select
             size="small"
             placeholder="Type de mandataire"
-            onChange={option => setType(option)}
+            onChange={(option) => setType(option)}
             value={selectedType}
             options={optionsType}
           />
@@ -80,13 +80,13 @@ const MandatairesList = props => {
           <Select
             size="small"
             placeholder="trier par capacité"
-            onChange={capacity => setCapacity(capacity)}
+            onChange={(capacity) => setCapacity(capacity)}
             value={selectedCapacity}
             options={optionsCapacity}
           />
         </Box>
       </Flex>
-      {list.map(gestionnaire => {
+      {list.map((gestionnaire) => {
         return (
           <MandataireListItem
             key={gestionnaire.id}
@@ -113,7 +113,7 @@ const MandatairesList = props => {
             marginPagesDisplayed={2}
             forcePage={currentOffset / RESULT_PER_PAGE}
             pageRangeDisplayed={5}
-            onPageChange={data => {
+            onPageChange={(data) => {
               setCurrentOffset(data.selected * RESULT_PER_PAGE);
             }}
             subContainerClassName={"pages pagination"}

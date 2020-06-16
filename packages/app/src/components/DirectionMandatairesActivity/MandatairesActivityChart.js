@@ -6,7 +6,7 @@ import { legendStyle, numberStyle, percentStyle, pieTextStyle, textStyle } from 
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
-const MandatairesActivityChart = props => {
+const MandatairesActivityChart = (props) => {
   const total = props.data.total;
 
   const serviceSum = props.data.service.sum;
@@ -21,7 +21,7 @@ const MandatairesActivityChart = props => {
   const pieChartData = [
     { name: "SERVICES MANDATAIRES", value: serviceSum },
     { name: "MANDATAIRES INDIVIDUELS", value: mandataireIndividuelSum },
-    { name: "PRÉPOSÉS D’ÉTABLISSEMENTS", value: mandatairePreposeSum }
+    { name: "PRÉPOSÉS D’ÉTABLISSEMENTS", value: mandatairePreposeSum },
   ];
 
   return (
@@ -53,7 +53,7 @@ const MandatairesActivityChart = props => {
           display: "grid",
           gridGap: 3,
           gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
-          mt: "1"
+          mt: "1",
         }}
       >
         <Box>

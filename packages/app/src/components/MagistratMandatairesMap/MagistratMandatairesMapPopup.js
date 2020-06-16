@@ -11,18 +11,18 @@ import {
   dispoDescriptionStyle,
   labelStyle,
   subtitleStyle,
-  titleStyle
+  titleStyle,
 } from "./style";
 
 const MagistratMandatairesMapPopup = () => {
   const {
-    currentMarker: { id }
+    currentMarker: { id },
   } = useContext(MapContext);
   const { data, error, loading } = useQuery(MESURES_GESTIONNAIRE, {
     variables: {
-      id: id
+      id: id,
     },
-    fetchPolicy: "network-only"
+    fetchPolicy: "network-only",
   });
 
   if (loading) {
@@ -41,7 +41,7 @@ const MagistratMandatairesMapPopup = () => {
     mandataire,
     service,
     discriminator,
-    remaining_capacity
+    remaining_capacity,
   } = currentGestionnaire;
 
   const ville = discriminator === "SERVICE" ? service.ville : mandataire.ville;

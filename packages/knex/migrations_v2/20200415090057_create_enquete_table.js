@@ -1,15 +1,12 @@
-exports.up = async function(knex) {
-  await knex.schema.createTable("enquetes", table => {
+exports.up = async function (knex) {
+  await knex.schema.createTable("enquetes", (table) => {
     table.increments();
     table.timestamp("created_at").defaultTo(knex.fn.now());
-    table
-      .string("annee")
-      .unique()
-      .notNullable();
+    table.string("annee").unique().notNullable();
     table.string("status").notNullable();
   });
 
-  await knex.schema.createTable("enquete_individuels", table => {
+  await knex.schema.createTable("enquete_individuels", (table) => {
     table.increments();
     table
       .integer("mandataire_id")
@@ -38,7 +35,7 @@ exports.up = async function(knex) {
     table.integer("niveau_qualification");
     table.integer("niveau_qualification_secretaire_spe");
   });
-  await knex.schema.createTable("enquete_services", table => {
+  await knex.schema.createTable("enquete_services", (table) => {
     table.increments();
     table
       .integer("service_id")
@@ -55,7 +52,7 @@ exports.up = async function(knex) {
     table.integer("nombre_delegues_en_formation");
     table.integer("nombre_delegues_non_formes");
   });
-  await knex.schema.createTable("enquete_preposes", table => {
+  await knex.schema.createTable("enquete_preposes", (table) => {
     table.increments();
     table
       .integer("mandataire_id")
@@ -64,29 +61,20 @@ exports.up = async function(knex) {
       .notNullable();
   });
 
-  return knex.schema.createTable("enquete_reponses", table => {
+  return knex.schema.createTable("enquete_reponses", (table) => {
     table.increments();
     table.string("type").notNullable();
-    table
-      .integer("enquete_id")
-      .references("id")
-      .inTable("enquetes");
+    table.integer("enquete_id").references("id").inTable("enquetes");
     table
       .integer("individuel_id")
       .references("id")
       .inTable("enquete_individuels");
-    table
-      .integer("service_id")
-      .references("id")
-      .inTable("enquete_services");
-    table
-      .integer("prepose_id")
-      .references("id")
-      .inTable("enquete_preposes");
+    table.integer("service_id").references("id").inTable("enquete_services");
+    table.integer("prepose_id").references("id").inTable("enquete_preposes");
   });
 };
 
-exports.down = async function(knex) {
+exports.down = async function (knex) {
   await knex.raw("DROP TABLE enquete_reponses");
   await knex.raw("DROP TABLE enquete_individuels");
   await knex.raw("DROP TABLE enquete_services");

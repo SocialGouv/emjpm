@@ -1,7 +1,7 @@
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   return knex("services")
     .del() // Deletes ALL existing entries
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("services").insert({
         etablissement: "UDAHF Siege",
@@ -10,7 +10,7 @@ exports.seed = function(knex) {
         ville: "Arras",
         telephone: "0237100000",
         adresse: "21 rue de houx",
-        dispo_max: 3
+        dispo_max: 3,
       });
     });
 };

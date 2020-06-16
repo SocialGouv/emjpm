@@ -23,12 +23,12 @@ class Service extends Model {
         code_postal: { type: "string" },
         ville: { type: "string" },
         dispo_max: {
-          type: "integer"
+          type: "integer",
         },
         competences: {
-          type: "string"
-        }
-      }
+          type: "string",
+        },
+      },
     };
   }
 }

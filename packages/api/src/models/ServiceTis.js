@@ -18,8 +18,8 @@ class ServiceTis extends Model {
       properties: {
         id: { type: "integer" },
         service_id: { type: "integer" },
-        ti_id: { type: "integer" }
-      }
+        ti_id: { type: "integer" },
+      },
     };
   }
 }

@@ -4,7 +4,7 @@ const { Mesure } = require("../../models/Mesure");
 const mesureBatch = async (req, res) => {
   const {
     body,
-    user: { user_id }
+    user: { user_id },
   } = req;
   let user;
   let serviceOrMandataire;
@@ -24,9 +24,9 @@ const mesureBatch = async (req, res) => {
     return res.status(422).json({ error: `${type} not found` });
   }
 
-  const payload = body.mesures.map(mesure => ({
+  const payload = body.mesures.map((mesure) => ({
     ...mesure,
-    [`${type}_id`]: serviceOrMandataire.id
+    [`${type}_id`]: serviceOrMandataire.id,
   }));
 
   try {

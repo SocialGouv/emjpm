@@ -18,7 +18,7 @@ const AdminServicesPage = () => {
           <Flex
             sx={{
               flexWrap: "wrap",
-              mt: "2"
+              mt: "2",
             }}
           >
             <AdminFilterBar onAddButtonClick={() => Router.push("/admin/services/add-service")} />

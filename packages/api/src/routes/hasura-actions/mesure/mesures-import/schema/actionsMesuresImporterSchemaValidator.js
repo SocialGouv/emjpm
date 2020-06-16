@@ -1,5 +1,5 @@
 const {
-  actionsMesuresImporterSchema
+  actionsMesuresImporterSchema,
 } = require("./actionsMesuresImporterSchema");
 
 const HEADERS = [
@@ -14,16 +14,16 @@ const HEADERS = [
   "residence",
   "tribunal_siret",
   "tribunal_cabinet",
-  "antenne"
+  "antenne",
 ];
 
-const validateHeaders = row => {
+const validateHeaders = (row) => {
   return Object.keys(row)
-    .map(key => {
+    .map((key) => {
       if (!HEADERS.includes(key)) {
         return {
           line: 1,
-          message: `Le titre de la colonne '${key}' n'est pas valide`
+          message: `Le titre de la colonne '${key}' n'est pas valide`,
         };
       }
     })
@@ -31,7 +31,7 @@ const validateHeaders = row => {
 };
 
 module.exports = {
-  validateImportData: rows => {
+  validateImportData: (rows) => {
     const [headers] = rows;
     const mesuresWithLine = [];
     const errors = [...validateHeaders(headers)];
@@ -45,17 +45,17 @@ module.exports = {
         actionsMesuresImporterSchema.validateSync(row);
         mesuresWithLine.push({
           mesure: row,
-          line: i + 2
+          line: i + 2,
         });
       } catch (error) {
         errors.push({
           line: i + 2,
           message: `${error.path} ${error.message}`,
-          row
+          row,
         });
       }
     });
 
     return { errors, mesuresWithLine };
-  }
+  },
 };

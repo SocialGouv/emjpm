@@ -8,12 +8,12 @@ import Sentry from "../../util/sentry";
 import { ServiceAntenneForm } from "../ServiceAntenneForms";
 import { EDIT_ANTENNE } from "./mutations";
 
-const ServiceAntenneEdit = props => {
+const ServiceAntenneEdit = (props) => {
   const { user, antenneId } = props;
   const { service_members } = user;
   const [{ service }] = service_members;
   const { service_antennes } = service;
-  const [antenne] = service_antennes.filter(s => s.id === antenneId);
+  const [antenne] = service_antennes.filter((s) => s.id === antenneId);
 
   const [editAntenne] = useMutation(EDIT_ANTENNE);
 
@@ -35,8 +35,8 @@ const ServiceAntenneEdit = props => {
           mesures_max: values.mesures_max,
           name: values.name,
           service_id: service.id,
-          user_id: user.id
-        }
+          user_id: user.id,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);
@@ -45,7 +45,7 @@ const ServiceAntenneEdit = props => {
 
     setSubmitting(false);
     Router.push("/services/antennes/[antenne_id]", `/services/antennes/${antenneId}`, {
-      shallow: true
+      shallow: true,
     });
   };
 

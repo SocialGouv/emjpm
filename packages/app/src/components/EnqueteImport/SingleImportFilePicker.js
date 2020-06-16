@@ -8,7 +8,7 @@ const inputStyle = {
   opacity: "0",
   overflow: "hidden",
   position: "absolute",
-  zIndex: "-1"
+  zIndex: "-1",
 };
 
 const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
@@ -20,7 +20,7 @@ const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
         type="file"
         name="file"
         value=""
-        onChange={event => {
+        onChange={(event) => {
           const file = event.currentTarget.files[0];
           onFileChosen(file);
         }}

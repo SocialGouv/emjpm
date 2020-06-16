@@ -1,7 +1,7 @@
 import { SERVICE } from "../../constants/discriminator";
 
-const formatGestionnaires = gestionnaires => {
-  return gestionnaires.map(gestionnaire => {
+const formatGestionnaires = (gestionnaires) => {
+  return gestionnaires.map((gestionnaire) => {
     const id = gestionnaire.id;
     const latitude =
       gestionnaire.discriminator === SERVICE
@@ -15,7 +15,7 @@ const formatGestionnaires = gestionnaires => {
       id,
       latitude,
       longitude,
-      discriminator: gestionnaire.discriminator
+      discriminator: gestionnaire.discriminator,
     };
   });
 };
@@ -23,7 +23,9 @@ const formatGestionnaires = gestionnaires => {
 // TODO Optimize that function duplication in memory
 const filterGestionnairesByDiscriminator = (gestionnaires, discriminator) => {
   const formatedGestionnaires = formatGestionnaires(gestionnaires);
-  return formatedGestionnaires.filter(gestionnaire => gestionnaire.discriminator === discriminator);
+  return formatedGestionnaires.filter(
+    (gestionnaire) => gestionnaire.discriminator === discriminator
+  );
 };
 
 export { formatGestionnaires, filterGestionnairesByDiscriminator };

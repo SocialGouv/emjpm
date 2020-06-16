@@ -18,8 +18,8 @@ class Editors extends Model {
       properties: {
         id: { type: "integer" },
         api_token: { type: "integrer" },
-        name: { type: "string" }
-      }
+        name: { type: "string" },
+      },
     };
   }
 }

@@ -4,13 +4,13 @@ const MagistratMandataireStyle = {
   overFlow: "hidden",
   flexWrap: "wrap",
   width: "100%",
-  position: "relative"
+  position: "relative",
 };
 
 const MagistratSideStyle = {
   flexGrow: 1,
   flexBasis: 380,
-  minHeight: "320px"
+  minHeight: "320px",
 };
 
 const MagistratMainStyle = {
@@ -18,14 +18,14 @@ const MagistratMainStyle = {
   pt: 5,
   flexGrow: 99999,
   flexBasis: 0,
-  minWidth: 320
+  minWidth: 320,
 };
 
 const MagistratTitleMandataireStyle = {
   fontSize: 0,
   color: "textSecondary",
   fontFamily: "heading",
-  mb: "4px"
+  mb: "4px",
 };
 
 const MagistratContentMandataireStyle = {
@@ -33,7 +33,7 @@ const MagistratContentMandataireStyle = {
   color: "text",
   fontFamily: "body",
   fontWeight: "600",
-  mb: 4
+  mb: 4,
 };
 
 const MagistratTribunal = {
@@ -41,7 +41,7 @@ const MagistratTribunal = {
   color: "text",
   fontFamily: "body",
   fontWeight: "600",
-  mb: "5px"
+  mb: "5px",
 };
 
 export {
@@ -50,5 +50,5 @@ export {
   MagistratContentMandataireStyle,
   MagistratTribunal,
   MagistratSideStyle,
-  MagistratMainStyle
+  MagistratMainStyle,
 };

@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import styles from "./style";
 
-export const MenuStepper = props => {
+export const MenuStepper = (props) => {
   const { sections, currentStep, onClickLink } = props;
 
   return (
@@ -22,7 +22,7 @@ export const MenuStepper = props => {
                 index,
                 isActiveSesion,
                 onClickLink,
-                hasSectionError
+                hasSectionError,
               })}
 
               {hasSubSections && isActiveSesion && (
@@ -31,7 +31,7 @@ export const MenuStepper = props => {
                     marginTop: 2,
                     marginLeft: "40px",
                     fontSize: "14px",
-                    lineHeight: "30px"
+                    lineHeight: "30px",
                   }}
                 >
                   {menuSection.steps.map((step, subsectionIndex) => {
@@ -43,7 +43,7 @@ export const MenuStepper = props => {
                       subsectionIndex,
                       isActiveSubSection,
                       step,
-                      onClickLink
+                      onClickLink,
                     });
                   })}
                 </Box>
@@ -66,7 +66,7 @@ function renderSectionTitle({ menuSection, index, isActiveSesion, onClickLink, h
             ? "#979797"
             : "#555555",
           fontWeight: isActiveSesion ? "bold" : "normal",
-          cursor: "pointer"
+          cursor: "pointer",
         }}
         alignItems="center"
         onClick={() => onClickLink({ step: index, substep: 0 })}
@@ -74,7 +74,7 @@ function renderSectionTitle({ menuSection, index, isActiveSesion, onClickLink, h
         <Flex
           sx={{
             ...styles.menuTag,
-            border: isActiveSesion ? "2px solid #007AD9" : "1px solid #979797"
+            border: isActiveSesion ? "2px solid #007AD9" : "1px solid #979797",
           }}
         >
           <Text>{index + 1}</Text>
@@ -99,7 +99,7 @@ function renderSubSection({ index, subsectionIndex, isActiveSubSection, step, on
       sx={{
         color: isActiveSubSection ? "#007AD9" : step.status === "empty" ? "#979797" : "#555555",
         fontWeight: isActiveSubSection ? "bold" : "normal",
-        cursor: "pointer"
+        cursor: "pointer",
       }}
     >
       <Box width={"15px"}>
@@ -124,7 +124,7 @@ function renderErrorBox() {
     <Box
       sx={{
         color: "#1D2649",
-        width: "24px"
+        width: "24px",
       }}
     >
       <SquaredCross />

@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 
 const backendAuthHeaders = {
   "x-hasura-admin-secret": process.env.HASURA_GRAPHQL_ADMIN_SECRET,
-  "x-hasura-use-backend-only-permissions": true
+  "x-hasura-use-backend-only-permissions": true,
 };
 
 const graphqlFetch = async (variables, operation, headers = {}) => {
@@ -11,8 +11,8 @@ const graphqlFetch = async (variables, operation, headers = {}) => {
     method: "POST",
     body: JSON.stringify({
       query: operation,
-      variables
-    })
+      variables,
+    }),
   });
   return await fetchResponse.json();
 };

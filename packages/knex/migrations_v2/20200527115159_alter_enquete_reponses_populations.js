@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.alterTable("enquete_reponses_populations", table => {
+exports.up = async function (knex) {
+  await knex.schema.alterTable("enquete_reponses_populations", (table) => {
     table.renameColumn(
       "autre_age_inf_25_ans_homme",
       "autre_mesures_age_inf_25_ans_homme"
@@ -77,8 +77,8 @@ exports.up = async function(knex) {
   });
 };
 
-exports.down = async function(knex) {
-  await knex.schema.alterTable("enquete_reponses_populations", table => {
+exports.down = async function (knex) {
+  await knex.schema.alterTable("enquete_reponses_populations", (table) => {
     table.renameColumn(
       "autre_mesures_age_inf_25_ans_homme",
       "autre_age_inf_25_ans_homme"

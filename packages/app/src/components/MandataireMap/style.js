@@ -1,5 +1,5 @@
 const MandataireMapStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { MandataireMapStyle };

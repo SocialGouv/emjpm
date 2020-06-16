@@ -25,5 +25,5 @@ function readFileAsBinaryString(file, cb, err) {
 }
 
 export const fileReader = {
-  readFileAsBinaryString
+  readFileAsBinaryString,
 };

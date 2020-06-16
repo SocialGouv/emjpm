@@ -7,7 +7,7 @@ import { AdminApiLog } from "../../../src/components/AdminApiLogs/AdminApiLog";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
-const ApiLogsViewPage = props => {
+const ApiLogsViewPage = (props) => {
   const { id } = props;
 
   return (
@@ -25,7 +25,7 @@ const ApiLogsViewPage = props => {
 };
 
 ApiLogsViewPage.getInitialProps = async ({ query }) => ({
-  id: query.api_log_id
+  id: query.api_log_id,
 });
 
 export default withAuthSync(ApiLogsViewPage);

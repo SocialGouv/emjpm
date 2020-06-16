@@ -18,7 +18,7 @@ const AdminFilterBar = ({ onAddButtonClick }) => {
                 value={searchText}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={event => changeSearchText(event.target.value)}
+                onChange={(event) => changeSearchText(event.target.value)}
                 name="search"
                 size="small"
                 placeholder="Filtre"

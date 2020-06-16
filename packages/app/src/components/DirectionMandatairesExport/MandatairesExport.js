@@ -11,8 +11,8 @@ const fetchMandatairesData = async (client, regionalValue, departementalValue) =
     query: MANDATAIRES,
     variables: {
       department: departementalValue ? parseInt(departementalValue.value) : undefined,
-      region: regionalValue ? parseInt(regionalValue.value) : undefined
-    }
+      region: regionalValue ? parseInt(regionalValue.value) : undefined,
+    },
   });
   return queryResult.data;
 };
@@ -33,7 +33,7 @@ const MandatairesExport = () => {
 
   return (
     <ApolloConsumer>
-      {client => (
+      {(client) => (
         <Button
           mr={0}
           onClick={() => exportFile(client, selectedRegionalValue, selectedDepartementValue)}

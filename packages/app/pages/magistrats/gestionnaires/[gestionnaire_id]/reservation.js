@@ -6,12 +6,12 @@ import { MagistratMesureAdd } from "../../../../src/components/MagistratMesureAd
 import { UserContext } from "../../../../src/components/UserContext";
 import { withAuthSync } from "../../../../src/util/auth";
 
-const Reservation = props => {
+const Reservation = (props) => {
   const { gestionnaireId } = props;
 
   const context = useContext(UserContext);
   const {
-    magistrat: { ti_id: tiId }
+    magistrat: { ti_id: tiId },
   } = context;
   return (
     <LayoutMagistrat>

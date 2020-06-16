@@ -14,22 +14,22 @@ import { EDIT_USER } from "./mutations";
 import { MANDATAIRE } from "./queries";
 import { grayBox } from "./style";
 
-const MandataireEditInformations = props => {
+const MandataireEditInformations = (props) => {
   const { id, type } = useContext(UserContext);
 
   const { data, error, loading } = useQuery(MANDATAIRE, {
     fetchPolicy: "network-only",
     variables: {
-      userId: id
-    }
+      userId: id,
+    },
   });
 
   const [editUser] = useMutation(EDIT_USER, {
     update() {
       Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
-        shallow: true
+        shallow: true,
       });
-    }
+    },
   });
 
   const client = useApolloClient();
@@ -50,12 +50,12 @@ const MandataireEditInformations = props => {
     const location = await getLocation(client, {
       address: values.address,
       zipcode: values.zipcode,
-      city: values.city
+      city: values.city,
     });
 
     if (!location || !location.department) {
       setErrors({
-        code_postal: "Merci de renseigner un code postal valide"
+        code_postal: "Merci de renseigner un code postal valide",
       });
     }
 
@@ -63,11 +63,11 @@ const MandataireEditInformations = props => {
 
     if (values.siret != mandataire.siret && (await isSiretExists(client, values.siret))) {
       setErrors({
-        siret: "Ce SIRET existe déjà"
+        siret: "Ce SIRET existe déjà",
       });
     } else if (values.email != user.email && (await isEmailExists(client, values.email))) {
       setErrors({
-        email: "Cet email existe déjà"
+        email: "Cet email existe déjà",
       });
     } else {
       editUser({
@@ -88,8 +88,8 @@ const MandataireEditInformations = props => {
           ville: values.city.toUpperCase(),
           latitude: geolocation ? geolocation.latitude : null,
           longitude: geolocation ? geolocation.longitude : null,
-          competences: values.competences
-        }
+          competences: values.competences,
+        },
       });
     }
 

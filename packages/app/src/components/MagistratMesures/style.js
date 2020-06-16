@@ -1,3 +1,3 @@
 export const MagistratListStyle = {
-  width: "100%"
+  width: "100%",
 };

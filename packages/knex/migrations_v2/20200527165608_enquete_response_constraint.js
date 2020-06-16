@@ -1,4 +1,4 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   await knex.raw(
     "CREATE UNIQUE INDEX enquete_reponses_mandataire ON enquete_reponses (enquete_id, mandataire_id) WHERE (mandataire_id is NOT null);"
   );
@@ -7,7 +7,7 @@ exports.up = async function(knex) {
   );
 };
 
-exports.down = async function(knex) {
+exports.down = async function (knex) {
   await knex.raw("DROP INDEX enquete_reponses_mandataire;");
   await knex.raw("DROP INDEX enquete_reponses_service;");
 };

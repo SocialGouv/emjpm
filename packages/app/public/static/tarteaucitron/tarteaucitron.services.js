@@ -13,7 +13,7 @@
  */
 tarteaucitron.services.matomo = {
   cookies: ["_pk_ref", "_pk_cvar", "_pk_id", "_pk_ses", "_pk_hsr", "piwik_ignore", "_pk_uid"],
-  js: function() {
+  js: function () {
     "use strict";
     if (tarteaucitron.user.matomoId === undefined) {
       return;
@@ -27,7 +27,7 @@ tarteaucitron.services.matomo = {
     window._paq.push(["setIgnoreClasses", ["no-tracking", "colorbox"]]);
     window._paq.push(["enableLinkTracking"]);
     window._paq.push([
-      function() {
+      function () {
         var self = this;
         function getOriginalVisitorCookieTimeout() {
           var now = new Date(),
@@ -39,7 +39,7 @@ tarteaucitron.services.matomo = {
           return originalTimeout;
         }
         this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout());
-      }
+      },
     ]);
 
     tarteaucitron.addScript(
@@ -52,7 +52,7 @@ tarteaucitron.services.matomo = {
     );
 
     // waiting for piwik to be ready to check first party cookies
-    var interval = setInterval(function() {
+    var interval = setInterval(function () {
       if (typeof Piwik === "undefined") return;
 
       clearInterval(interval);
@@ -77,7 +77,7 @@ tarteaucitron.services.matomo = {
   name: "Matomo (formerly known as Piwik)",
   needConsent: false,
   type: "analytic",
-  uri: "https://matomo.org/faq/general/faq_146/"
+  uri: "https://matomo.org/faq/general/faq_146/",
 };
 
 // Hotjar
@@ -99,21 +99,21 @@ tarteaucitron.services.hotjar = {
     "_hjMinimizedTestersWidgets",
     "_hjDoneSurveys",
     "_hjIncludedInSample",
-    "_hjShownFeedbackMessage"
+    "_hjShownFeedbackMessage",
   ],
-  js: function() {
+  js: function () {
     "use strict";
     if (tarteaucitron.user.hotjarId === undefined || tarteaucitron.user.HotjarSv === undefined) {
       return;
     }
     window.hj =
       window.hj ||
-      function() {
+      function () {
         (window.hj.q = window.hj.q || []).push(arguments);
       };
     window._hjSettings = {
       hjid: tarteaucitron.user.hotjarId,
-      hjsv: tarteaucitron.user.HotjarSv
+      hjsv: tarteaucitron.user.HotjarSv,
     };
     var uri = "https://static.hotjar.com/c/hotjar-";
     var extension = ".js?sv=";
@@ -123,5 +123,5 @@ tarteaucitron.services.hotjar = {
   name: "Hotjar",
   needConsent: true,
   type: "analytic",
-  uri: "https://help.hotjar.com/hc/en-us/categories/115001323967-About-Hotjar"
+  uri: "https://help.hotjar.com/hc/en-us/categories/115001323967-About-Hotjar",
 };

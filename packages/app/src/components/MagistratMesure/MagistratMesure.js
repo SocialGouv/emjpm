@@ -10,10 +10,10 @@ import {
   MagistratMesureMainStyle,
   MagistratMesureSideStyle,
   MagistratMesureStyle,
-  MagistratMesureTitleStyle
+  MagistratMesureTitleStyle,
 } from "./style";
 
-const MagistratMesure = props => {
+const MagistratMesure = (props) => {
   const {
     realAge,
     cabinet,
@@ -24,7 +24,7 @@ const MagistratMesure = props => {
     tribunal,
     isUrgent,
     type,
-    id
+    id,
   } = useContext(MesureContext);
   return (
     <Fragment>

@@ -10,7 +10,7 @@ import Sentry from "../../util/sentry";
 import { Link } from "../Commons";
 
 const {
-  publicRuntimeConfig: { API_URL }
+  publicRuntimeConfig: { API_URL },
 } = getConfig();
 
 const ForgotPassword = () => {
@@ -20,12 +20,12 @@ const ForgotPassword = () => {
   const handleSubmit = async (values, setSubmitting, setStatus) => {
     const response = await fetch(url, {
       body: JSON.stringify({
-        email: values.email
+        email: values.email,
       }),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      method: "POST"
+      method: "POST",
     });
 
     setSubmitting(false);
@@ -53,8 +53,8 @@ const ForgotPassword = () => {
     },
     validationSchema: forgotPasswordSchema,
     initialValues: {
-      email: ""
-    }
+      email: "",
+    },
   });
 
   return (
@@ -73,7 +73,7 @@ const ForgotPassword = () => {
                 color: "white",
                 lineHeight: "1.5",
                 mt: "1",
-                p: "1"
+                p: "1",
               }}
             >
               {`Un email avec un lien de réinitialisation vient de vous être envoyé.`}

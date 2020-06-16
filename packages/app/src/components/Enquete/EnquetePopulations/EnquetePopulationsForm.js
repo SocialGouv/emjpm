@@ -38,11 +38,11 @@ function dataToForm(data) {
     type_service_hospitalier_soins_longue_duree:
       data.type_service_hospitalier_soins_longue_duree || "",
     type_service_psychiatrique: data.type_service_psychiatrique || "",
-    type_autre_service: data.type_autre_service || ""
+    type_autre_service: data.type_autre_service || "",
   };
 }
 
-export const EnquetePopulationsForm = props => {
+export const EnquetePopulationsForm = (props) => {
   const {
     title,
     data = {},
@@ -50,7 +50,7 @@ export const EnquetePopulationsForm = props => {
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
@@ -61,15 +61,15 @@ export const EnquetePopulationsForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
 
   return (
     <Box
       sx={{
         strong: {
-          color: "primary"
-        }
+          color: "primary",
+        },
       }}
       as="form"
       onSubmit={submitForm}
@@ -79,7 +79,7 @@ export const EnquetePopulationsForm = props => {
         <Text
           sx={{
             color: "titleSecondary",
-            fontWeight: "bold"
+            fontWeight: "bold",
           }}
         >
           Les données à remplir ci-dessous sont celles au <strong>31/12/2019</strong>

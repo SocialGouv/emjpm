@@ -7,38 +7,38 @@ import { EnquetePreposePrestationsSocialesRepartitionPersonnesForm } from "./Enq
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
-export const EnquetePreposePrestationsSocialesRepartitionPersonnes = props => {
+export const EnquetePreposePrestationsSocialesRepartitionPersonnes = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
     userId,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { prestations_sociales_id }
+    enquete_reponse_ids: { prestations_sociales_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_PREPOSE_PRESTATIONS_SOCIALES, {
     variables: {
-      id: prestations_sociales_id
-    }
+      id: prestations_sociales_id,
+    },
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
         variables: {
-          id: prestations_sociales_id
-        }
-      }
-    ]
+          id: prestations_sociales_id,
+        },
+      },
+    ],
   });
 
   const prestationsSociales = data
@@ -52,7 +52,7 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnes = props => {
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         await updateEnquete({
           variables: {
             id: prestations_sociales_id,
@@ -62,8 +62,8 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnes = props => {
             rsa: parseFloatValue(values.rsa),
             als_apl: parseFloatValue(values.als_apl),
             aspa: parseFloatValue(values.aspa),
-            apa: parseFloatValue(values.apa)
-          }
+            apa: parseFloatValue(values.apa),
+          },
         });
       }}
     />

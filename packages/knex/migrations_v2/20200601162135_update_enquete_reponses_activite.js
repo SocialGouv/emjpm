@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.alterTable("enquete_reponses_activite", function(table) {
+exports.up = function (knex) {
+  return knex.schema.alterTable("enquete_reponses_activite", function (table) {
     table.integer("curatelle_renforcee_etablissement_mesures_nouvelles");
     table.integer("curatelle_renforcee_etablissement_sortie_mesures");
     table.integer("curatelle_renforcee_domicile_mesures_nouvelles");
@@ -47,8 +47,8 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
-  return knex.schema.alterTable("enquete_reponses_activite", function(table) {
+exports.down = function (knex) {
+  return knex.schema.alterTable("enquete_reponses_activite", function (table) {
     table.dropColumn("curatelle_renforcee_etablissement_mesures_nouvelles");
     table.dropColumn("curatelle_renforcee_etablissement_sortie_mesures");
     table.dropColumn("curatelle_renforcee_domicile_mesures_nouvelles");

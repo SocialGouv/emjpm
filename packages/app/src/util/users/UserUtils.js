@@ -1,3 +1,3 @@
-export const isMandataire = type => {
+export const isMandataire = (type) => {
   return type === "individuel" || type === "prepose";
 };

@@ -26,7 +26,7 @@ const LinkButtonStyle = (isActive, props) => {
     outline: "none",
     px: 3,
     py: 2,
-    transition: "150ms ease-in-out opacity"
+    transition: "150ms ease-in-out opacity",
   };
 
   if (!props.outline) {
@@ -34,13 +34,13 @@ const LinkButtonStyle = (isActive, props) => {
       ...properties,
       "&:active": {
         color: "white",
-        opacity: "0.6"
+        opacity: "0.6",
       },
       "&:hover": {
         color: "white",
         opacity: "0.8",
-        textDecoration: "none"
-      }
+        textDecoration: "none",
+      },
     };
   }
 

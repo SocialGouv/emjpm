@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
 alter table individuel_exercices add secretariat_specialise boolean;
 alter table individuel_exercices add secretariat_specialise_etp real;
@@ -18,7 +18,7 @@ alter table mandataires drop nb_secretariat;
 `);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
   alter table individuel_exercices drop secretariat_specialise;
   alter table individuel_exercices drop secretariat_specialise_etp;

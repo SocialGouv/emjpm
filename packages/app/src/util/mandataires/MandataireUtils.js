@@ -3,28 +3,28 @@ import { compareDesc, differenceInMonths, format } from "date-fns";
 const TYPES = {
   MANDATAIRE_IND: "individuel",
   MANDATAIRE_PRE: "préposé",
-  SERVICE: "service"
+  SERVICE: "service",
 };
 
-const capitalize = string => {
+const capitalize = (string) => {
   return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
 };
 
-const formatLastLogin = date => {
+const formatLastLogin = (date) => {
   return format(new Date(date), "dd/MM/yyyy");
 };
 
-const newestLastLogin = admins => {
+const newestLastLogin = (admins) => {
   const dates = admins
     .map(({ user: { last_login } }) => last_login)
     .filter(Boolean)
-    .map(val => new Date(val));
+    .map((val) => new Date(val));
   const [newest] = dates.sort(compareDesc);
 
   return newest;
 };
 
-const isCriticalDate = date => {
+const isCriticalDate = (date) => {
   return differenceInMonths(new Date(), new Date(date)) >= 1;
 };
 
@@ -49,7 +49,7 @@ export const formatMandataire = (
     mesuresAwaiting: mesures_awaiting,
     mesuresInProgress: mesures_in_progress,
     tis: gestionnaire_tis,
-    type: TYPES[discriminator]
+    type: TYPES[discriminator],
   };
 
   if (discriminator === "SERVICE") {
@@ -74,7 +74,7 @@ export const formatMandataire = (
       prenom: service.prenom ? service.prenom : null,
       serviceId: service.id,
       telephone: service.telephone ? service.telephone : "non renseigné",
-      ville: service.ville ? capitalize(service.ville) : "non renseigné"
+      ville: service.ville ? capitalize(service.ville) : "non renseigné",
     };
   } else {
     currentDiscriminator = {
@@ -100,16 +100,16 @@ export const formatMandataire = (
           ? capitalize(mandataire.user.prenom)
           : "non renseigné",
       telephone: mandataire.telephone,
-      ville: mandataire.ville ? capitalize(mandataire.ville) : "non renseigné"
+      ville: mandataire.ville ? capitalize(mandataire.ville) : "non renseigné",
     };
   }
   return {
     ...common,
-    ...currentDiscriminator
+    ...currentDiscriminator,
   };
 };
 
-export const formatGestionnaireId = gestionnaireId => {
+export const formatGestionnaireId = (gestionnaireId) => {
   const [discriminator, id] = gestionnaireId.split("-");
   let mandataireId = null;
   let serviceId = null;

@@ -21,7 +21,7 @@ const mandataires = [
     email: "contact@mandataire.com",
     ti: "Versailles",
     disponibilite: 5,
-    dispo_max: 20
+    dispo_max: 20,
   },
   {
     etablissement: "Test etablissement 2",
@@ -34,7 +34,7 @@ const mandataires = [
     email: "contact@mandataire2.com",
     ti: "Bobigny",
     disponibilite: 12,
-    dispo_max: 43
+    dispo_max: 43,
   },
   {
     etablissement: "Test etablissement 3",
@@ -47,7 +47,7 @@ const mandataires = [
     email: "contact@mandataire3.com",
     ti: "Charenton",
     disponibilite: 15,
-    dispo_max: 18
+    dispo_max: 18,
   },
   {
     etablissement: "Test etablissement 4",
@@ -60,8 +60,8 @@ const mandataires = [
     email: "contact@mandataire4.com",
     ti: "Paris",
     disponibilite: 18,
-    dispo_max: 18
-  }
+    dispo_max: 18,
+  },
 ];
 
 storiesOf("Tis", module)

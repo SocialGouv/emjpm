@@ -17,17 +17,17 @@ const ServiceMapPanelMesures = ({ mesuresIds }) => {
   const queryVariables = {
     limit: RESULT_PER_PAGE,
     offset: currentOffset,
-    ids: mesuresIds
+    ids: mesuresIds,
   };
 
   const { data, error, loading } = useQuery(MESURES, {
     variables: queryVariables,
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
 
   const selectMesure = ({ id }) => {
     Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
-      shallow: true
+      shallow: true,
     });
   };
 
@@ -48,7 +48,7 @@ const ServiceMapPanelMesures = ({ mesuresIds }) => {
         <Box p="2">
           {mesures.length > 0 ? (
             <Fragment>
-              {mesures.map(mesure => {
+              {mesures.map((mesure) => {
                 return (
                   <MesureListItem
                     key={mesure.id}
@@ -76,7 +76,7 @@ const ServiceMapPanelMesures = ({ mesuresIds }) => {
                 marginPagesDisplayed={1}
                 forcePage={currentOffset / RESULT_PER_PAGE}
                 pageRangeDisplayed={1}
-                onPageChange={data => {
+                onPageChange={(data) => {
                   setCurrentOffset(data.selected * RESULT_PER_PAGE);
                 }}
                 subContainerClassName={"pages pagination"}

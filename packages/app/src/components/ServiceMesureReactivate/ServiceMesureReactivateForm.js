@@ -9,20 +9,20 @@ import * as Yup from "yup";
 import { REACTIVATE_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
 import { SERVICE } from "../ServiceMesures/queries";
 
-export const ServiceMesureReactivateForm = props => {
+export const ServiceMesureReactivateForm = (props) => {
   const { mesure } = props;
   const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
     refetchQueries: [
       {
         query: SERVICE,
-        variables: { id: mesure.serviceId }
-      }
-    ]
+        variables: { id: mesure.serviceId },
+      },
+    ],
   });
   const [updateMesure] = useMutation(REACTIVATE_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
-    }
+    },
   });
 
   const formik = useFormik({
@@ -32,18 +32,18 @@ export const ServiceMesureReactivateForm = props => {
         variables: {
           id: mesure.id,
           reason_extinction: values.reason_extinction,
-          service_id: mesure.serviceId
-        }
+          service_id: mesure.serviceId,
+        },
       });
       await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
-        shallow: true
+        shallow: true,
       });
       setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
-      reason_extinction: Yup.string().required("Required")
+      reason_extinction: Yup.string().required("Required"),
     }),
-    initialValues: { reason_extinction: "" }
+    initialValues: { reason_extinction: "" },
   });
 
   return (
@@ -80,7 +80,7 @@ export const ServiceMesureReactivateForm = props => {
                 variant="outline"
                 onClick={() => {
                   Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
-                    shallow: true
+                    shallow: true,
                   });
                 }}
               >

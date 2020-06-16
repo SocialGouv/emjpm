@@ -1,7 +1,7 @@
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   return knex("role")
     .del()
-    .then(function() {
+    .then(function () {
       return knex("role").insert([
         { name: "admin" },
         { name: "individuel" },
@@ -11,7 +11,7 @@ exports.seed = function(knex) {
         { name: "direction" },
         { name: "direction_national" },
         { name: "direction_regional" },
-        { name: "direction_departemental" }
+        { name: "direction_departemental" },
       ]);
     });
 };

@@ -15,9 +15,9 @@ const DirectionEditInformations = () => {
   const [editUser] = useMutation(EDIT_USER, {
     update() {
       Router.push("/direction/informations", `/direction/informations`, {
-        shallow: true
+        shallow: true,
       });
-    }
+    },
   });
 
   const formik = useFormik({
@@ -29,8 +29,8 @@ const DirectionEditInformations = () => {
           email: values.email.toLowerCase(),
           id: id,
           nom: values.nom,
-          prenom: values.prenom
-        }
+          prenom: values.prenom,
+        },
       });
 
       setSubmitting(false);
@@ -39,8 +39,8 @@ const DirectionEditInformations = () => {
     initialValues: {
       email: email || "",
       nom: nom || "",
-      prenom: prenom || ""
-    }
+      prenom: prenom || "",
+    },
   });
 
   return (

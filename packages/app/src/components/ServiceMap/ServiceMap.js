@@ -9,7 +9,7 @@ const ServiceMap = ({ selectMesures, selectedMesuresIds }) => {
   const { service_members } = useContext(UserContext);
   const [service_member] = service_members;
   const {
-    service: { longitude, latitude }
+    service: { longitude, latitude },
   } = service_member;
 
   const { data, loading, error } = useQuery(MESURES_SERVICE);
@@ -18,11 +18,11 @@ const ServiceMap = ({ selectMesures, selectedMesuresIds }) => {
     () =>
       !data
         ? []
-        : data.mesures.map(mesure => ({
+        : data.mesures.map((mesure) => ({
             id: mesure.id,
             longitude: mesure.longitude,
             latitude: mesure.latitude,
-            isSelected: selectedMesuresIds.includes(mesure.id)
+            isSelected: selectedMesuresIds.includes(mesure.id),
           })),
     [data, selectedMesuresIds]
   );
@@ -39,8 +39,8 @@ const ServiceMap = ({ selectMesures, selectedMesuresIds }) => {
     <MapContainer latitude={latitude} longitude={longitude}>
       <MapCluster
         items={mesuresMarkers}
-        onMarkerClick={marker => selectMesures([marker.id])}
-        onClusterClick={markers => selectMesures(markers.map(({ id }) => id))}
+        onMarkerClick={(marker) => selectMesures([marker.id])}
+        onClusterClick={(markers) => selectMesures(markers.map(({ id }) => id))}
         type="MESURE"
       />
     </MapContainer>

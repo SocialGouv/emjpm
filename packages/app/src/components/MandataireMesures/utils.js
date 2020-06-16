@@ -1,8 +1,8 @@
 import { format } from "date-fns";
 
 // move me in the good folder
-export const formatMesureList = mesureList => {
-  const mesures = mesureList.map(mesure => {
+export const formatMesureList = (mesureList) => {
+  const mesures = mesureList.map((mesure) => {
     const {
       residence,
       code_postal,
@@ -22,7 +22,7 @@ export const formatMesureList = mesureList => {
       ti,
       latitude,
       longitude,
-      pays
+      pays,
     } = mesure;
 
     return {
@@ -49,7 +49,7 @@ export const formatMesureList = mesureList => {
       ville: ville ? ville : "ville non renseigné",
       latitude: latitude || 45.5,
       longitude: longitude || 0.5,
-      pays
+      pays,
     };
   });
   return mesures;

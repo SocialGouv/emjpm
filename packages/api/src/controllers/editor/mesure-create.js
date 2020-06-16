@@ -12,7 +12,7 @@ const mesureCreate = async (req, res) => {
 
   const {
     body,
-    user: { user_id }
+    user: { user_id },
   } = req;
   let user;
   let serviceOrMandataire;
@@ -35,7 +35,7 @@ const mesureCreate = async (req, res) => {
   try {
     mesure = await Mesure.query().insert({
       ...body,
-      [`${type}_id`]: serviceOrMandataire.id
+      [`${type}_id`]: serviceOrMandataire.id,
     });
   } catch (error) {
     return res.status(422).json({ error: error.message });

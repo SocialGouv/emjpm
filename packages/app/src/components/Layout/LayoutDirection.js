@@ -17,16 +17,16 @@ const LayoutDirection = ({ children }) => {
   const navigationLinks = [
     {
       title: "Mandataires",
-      url: "/direction"
+      url: "/direction",
     },
     {
       title: "Mesures",
-      url: "/direction/mesures"
+      url: "/direction/mesures",
     },
     {
       title: "Liste blanche",
-      url: "/direction/liste-blanche"
-    }
+      url: "/direction/liste-blanche",
+    },
   ];
 
   if (hasDirectionNationalRole(userRoles)) {

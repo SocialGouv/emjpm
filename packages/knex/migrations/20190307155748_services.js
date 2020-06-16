@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("services", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("services", function (table) {
     table.increments();
     table.string("etablissement");
     table.string("email");
@@ -14,6 +14,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("services");
 };

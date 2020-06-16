@@ -11,7 +11,7 @@ import { EnqueteActiviteFormGroupMesures } from "./EnqueteActiviteFormGroupMesur
 const strongStyle = {
   display: "inline-block",
   fontWeight: "bold",
-  color: "#007AD9"
+  color: "#007AD9",
 };
 
 // validation identique à celle de enqueteActiviteStatus
@@ -26,7 +26,7 @@ function dataToForm(data) {
     etablissementMesuresNouvelles: data.etablissementMesuresNouvelles || "",
     etablissementSortieMesures: data.etablissementSortieMesures || "",
     domicileMesuresNouvelles: data.domicileMesuresNouvelles || "",
-    domicileSortieMesures: data.domicileSortieMesures || ""
+    domicileSortieMesures: data.domicileSortieMesures || "",
   };
 }
 
@@ -39,7 +39,7 @@ function formToData(data) {
     etablissementMesuresNouvelles: parseIntToSubmit(data.etablissementMesuresNouvelles),
     etablissementSortieMesures: parseIntToSubmit(data.etablissementSortieMesures),
     domicileMesuresNouvelles: parseIntToSubmit(data.domicileMesuresNouvelles),
-    domicileSortieMesures: parseIntToSubmit(data.domicileSortieMesures)
+    domicileSortieMesures: parseIntToSubmit(data.domicileSortieMesures),
   };
 
   function parseIntToSubmit(value) {
@@ -47,7 +47,7 @@ function formToData(data) {
   }
 }
 
-export const EnqueteActiviteEtablissementDomicileForm = props => {
+export const EnqueteActiviteEtablissementDomicileForm = (props) => {
   const {
     title,
     data = {},
@@ -55,7 +55,7 @@ export const EnqueteActiviteEtablissementDomicileForm = props => {
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
@@ -67,7 +67,7 @@ export const EnqueteActiviteEtablissementDomicileForm = props => {
     validationSchema,
     dataToForm,
     formToData,
-    loading
+    loading,
   });
 
   const totalDebutAnnee = (values.etablissementDebutAnnee || 0) + (values.domicileDebutAnnee || 0);

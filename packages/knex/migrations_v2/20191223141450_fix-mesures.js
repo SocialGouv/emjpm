@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
   update mesures set "type" = 'Curatelle renforcée' where "type" = 'curatelle renforcée';
   update mesures set "type" = 'Curatelle renforcée aux biens et à la personne' where "type" = 'curatelle renforcée aux biens et à la personne';
@@ -23,6 +23,6 @@ exports.up = function(knex) {
   `);
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

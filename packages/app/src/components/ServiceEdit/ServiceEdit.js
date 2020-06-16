@@ -15,9 +15,9 @@ const ServiceEdit = () => {
   const [editAntenne] = useMutation(EDIT_ANTENNE, {
     update() {
       Router.push("/services/informations", `/services/informations`, {
-        shallow: true
+        shallow: true,
       });
-    }
+    },
   });
 
   if (loading) {
@@ -47,8 +47,8 @@ const ServiceEdit = () => {
           telephone: values.telephone,
           ville: values.geocode.city,
           latitude: values.geocode.latitude,
-          longitude: values.geocode.longitude
-        }
+          longitude: values.geocode.longitude,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);

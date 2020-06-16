@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 
 import { signupSchema } from "../../lib/validationSchemas";
 
-export const SignupServiceInvitationForm = props => {
+export const SignupServiceInvitationForm = (props) => {
   const { handleSubmit, invitation } = props;
 
   const formik = useFormik({
@@ -18,8 +18,8 @@ export const SignupServiceInvitationForm = props => {
       nom: "",
       password: "",
       prenom: "",
-      type: "service"
-    }
+      type: "service",
+    },
   });
 
   return (

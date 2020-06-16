@@ -16,7 +16,7 @@ const IndividuelInformationExercice = () => {
   const [edit, setEdit] = useState(false);
 
   const { data, error, loading } = useQuery(INDIVIDUEL_EXERCICE, {
-    variable: { mandataire_id: mandataire.id }
+    variable: { mandataire_id: mandataire.id },
   });
 
   const [updateIndividuelExercice] = useMutation(UPDATE_INDIVIDUEL_EXERCICE);
@@ -36,8 +36,8 @@ const IndividuelInformationExercice = () => {
           cumul_prepose: values.cumulPrepose.value,
           cumul_prepose_etp: getOptionValue(values.cumulPreposeEtp),
           cumul_delegue_service: values.cumulDelegueService.value,
-          cumul_delegue_service_etp: getOptionValue(values.cumulDelegueServiceEtp)
-        }
+          cumul_delegue_service_etp: getOptionValue(values.cumulDelegueServiceEtp),
+        },
       });
       setEdit(false);
     } catch (error) {

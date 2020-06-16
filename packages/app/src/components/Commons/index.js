@@ -15,5 +15,5 @@ export {
   LinkButton,
   AntenneLinkButton,
   AntenneEditLinkButton,
-  YesNoComboBox
+  YesNoComboBox,
 };

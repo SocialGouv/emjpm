@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("mandataires", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("mandataires", function (table) {
     table.increments();
     table.string("etablissement").notNullable();
     table.string("email").notNullable();
@@ -23,6 +23,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("mandataires");
 };

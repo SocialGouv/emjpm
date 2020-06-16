@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 
 import { satisfactionCampaignSchema } from "../../lib/validationSchemas";
 
-export const AdminSatisfactionCampaignForm = props => {
+export const AdminSatisfactionCampaignForm = (props) => {
   const { handleCancel, handleSubmit, satisfaction_campaign } = props;
   const { name, started_at, ended_at } = satisfaction_campaign || {};
 
@@ -15,8 +15,8 @@ export const AdminSatisfactionCampaignForm = props => {
     initialValues: {
       name: name || "",
       startedAt: started_at || "",
-      endedAt: ended_at || ""
-    }
+      endedAt: ended_at || "",
+    },
   });
 
   return (

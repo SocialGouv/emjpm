@@ -3,7 +3,7 @@ import React from "react";
 import ReactPaginate from "react-paginate";
 import { Flex } from "rebass";
 
-const DynamicTableFooter = props => {
+const DynamicTableFooter = (props) => {
   const { gotoPage, pageIndex, pageSize, pageCount, setPageSize } = props;
   return (
     <Flex justifyContent="flex-end" alignItems="center">
@@ -26,9 +26,9 @@ const DynamicTableFooter = props => {
         ml={20}
         width="200px"
         value={pageSize}
-        onChange={e => setPageSize(Number(e.target.value))}
+        onChange={(e) => setPageSize(Number(e.target.value))}
       >
-        {[10, 20, 30, 40, 50].map(pageSize => (
+        {[10, 20, 30, 40, 50].map((pageSize) => (
           <option key={pageSize} value={pageSize}>
             Afficher {pageSize}
           </option>

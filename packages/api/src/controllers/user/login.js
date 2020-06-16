@@ -19,8 +19,8 @@ const login = async (req, res, next) => {
         errors: {
           msg: "Vos informations de connexion sont erronées",
           location: "body",
-          error: err
-        }
+          error: err,
+        },
       });
     }
     if (user) {
@@ -31,7 +31,7 @@ const login = async (req, res, next) => {
           await Logs.query().insert({
             user_id: user.id,
             action: "connexion",
-            result: "success"
+            result: "success",
           })
         );
       return res.status(200).json(user.getUser());

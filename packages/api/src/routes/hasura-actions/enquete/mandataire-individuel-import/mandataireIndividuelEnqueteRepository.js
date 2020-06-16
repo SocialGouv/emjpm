@@ -1,21 +1,21 @@
 const {
-  EnqueteReponsesPopulations
+  EnqueteReponsesPopulations,
 } = require("../../../../models/EnqueteReponsesPopulations");
 const {
-  EnqueteReponsesPrestationsSociales
+  EnqueteReponsesPrestationsSociales,
 } = require("../../../../models/EnqueteReponsesPrestationsSociales");
 const {
-  EnqueteReponsesAgrementsFormations
+  EnqueteReponsesAgrementsFormations,
 } = require("../../../../models/EnqueteReponsesAgrementsFormations");
 const {
-  EnqueteReponsesInformationsMandataire
+  EnqueteReponsesInformationsMandataire,
 } = require("../../../../models/EnqueteReponsesInformationsMandataire");
 const {
-  EnqueteReponsesActivite
+  EnqueteReponsesActivite,
 } = require("../../../../models/EnqueteReponsesActivite");
 const {
   getEnqueteReponse,
-  createEmptyEnqueteReponse
+  createEmptyEnqueteReponse,
 } = require("../mandataire-individuel/requests");
 
 async function update(enqueteId, { tabs, mandataireId }) {
@@ -24,12 +24,12 @@ async function update(enqueteId, { tabs, mandataireId }) {
     agrementsFormations,
     populations,
     prestationsSociales,
-    activite
+    activite,
   } = tabs;
 
   const enqueteReponse = await initEnqueteMandataireIndividuel({
     enqueteId,
-    mandataireId
+    mandataireId,
   });
 
   await EnqueteReponsesInformationsMandataire.query()
@@ -55,13 +55,13 @@ async function update(enqueteId, { tabs, mandataireId }) {
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   let enqueteReponse = await getEnqueteReponse({
     enqueteId,
-    mandataireId
+    mandataireId,
   });
 
   if (!enqueteReponse) {
     const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
       enqueteId,
-      mandataireId
+      mandataireId,
     });
     enqueteReponse = insert_enquete_reponses_one;
   }
@@ -69,7 +69,7 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
 }
 
 const mandataireIndividuelEnqueteRepository = {
-  update
+  update,
 };
 
 module.exports = mandataireIndividuelEnqueteRepository;
