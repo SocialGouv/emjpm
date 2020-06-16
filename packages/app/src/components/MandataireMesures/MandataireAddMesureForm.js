@@ -9,7 +9,7 @@ import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 
-export const MandataireAddMesureForm = props => {
+export const MandataireAddMesureForm = (props) => {
   const { onSubmit, tribunaux } = props;
 
   const formik = useFormik({
@@ -25,8 +25,8 @@ export const MandataireAddMesureForm = props => {
       zipcode: "",
       city: "",
       country: { value: "FR", label: COUNTRIES["FR"] },
-      cabinet: ""
-    }
+      cabinet: "",
+    },
   });
 
   return (
@@ -69,7 +69,7 @@ export const MandataireAddMesureForm = props => {
                   value={formik.values.tribunal}
                   name="tribunal"
                   hasError={formik.errors.tribunal && formik.touched.tribunal}
-                  onChange={option => formik.setFieldValue("tribunal", option)}
+                  onChange={(option) => formik.setFieldValue("tribunal", option)}
                   defaultOptions={tribunaux}
                 />
                 {formik.errors.tribunal && formik.touched.tribunal && (
@@ -123,7 +123,7 @@ export const MandataireAddMesureForm = props => {
                   placeholder="Type de mesure"
                   value={formik.values.type}
                   hasError={formik.errors.type && formik.touched.type}
-                  onChange={option => formik.setFieldValue("type", option)}
+                  onChange={(option) => formik.setFieldValue("type", option)}
                   options={MESURE_TYPE_LABEL_VALUE}
                 />
                 {formik.errors.type && formik.touched.type && <Text>{formik.errors.type}</Text>}
@@ -135,7 +135,7 @@ export const MandataireAddMesureForm = props => {
                   placeholder="Civilité"
                   value={formik.values.civilite}
                   hasError={formik.errors.civilite && formik.touched.civilite}
-                  onChange={option => formik.setFieldValue("civilite", option)}
+                  onChange={(option) => formik.setFieldValue("civilite", option)}
                   options={CIVILITY}
                 />
                 {formik.errors.civilite && formik.touched.civilite && (
@@ -162,7 +162,7 @@ export const MandataireAddMesureForm = props => {
                   placeholder="Type de residence"
                   value={formik.values.residence}
                   hasError={formik.errors.residence && formik.touched.residence}
-                  onChange={option => formik.setFieldValue("residence", option)}
+                  onChange={(option) => formik.setFieldValue("residence", option)}
                   options={RESIDENCE}
                 />
                 {formik.errors.residence && formik.touched.residence && (
@@ -177,16 +177,16 @@ export const MandataireAddMesureForm = props => {
                   placeholder="Pays"
                   value={formik.values.country}
                   hasError={formik.errors.country && formik.touched.country}
-                  onChange={option => formik.setFieldValue("country", option)}
+                  onChange={(option) => formik.setFieldValue("country", option)}
                   options={[
                     {
                       label: "France",
-                      value: "FR"
+                      value: "FR",
                     },
                     {
                       label: "Belgique",
-                      value: "BE"
-                    }
+                      value: "BE",
+                    },
                   ]}
                 />
                 {formik.errors.country && formik.touched.country && (
@@ -201,7 +201,7 @@ export const MandataireAddMesureForm = props => {
                         value={formik.values.zipcode}
                         id="zipcode"
                         name="zipcode"
-                        onChange={async e => {
+                        onChange={async (e) => {
                           const { value } = e.target;
                           await formik.setFieldValue("zipcode", value);
                           await formik.setFieldValue("city", "");
@@ -218,7 +218,7 @@ export const MandataireAddMesureForm = props => {
                         name="city"
                         id="city"
                         zipcode={formik.values.zipcode}
-                        onChange={value => formik.setFieldValue("city", value)}
+                        onChange={(value) => formik.setFieldValue("city", value)}
                         value={formik.values.city}
                         hasError={formik.errors.city && formik.touched.city}
                       />

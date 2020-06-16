@@ -12,16 +12,16 @@ import {
   listAdminStyle,
   listDateStyle,
   listEmailStyle,
-  listStyle
+  listStyle,
 } from "./styles";
 
-const ServiceMembers = props => {
+const ServiceMembers = (props) => {
   const { isAdmin, service, userId } = props;
   const [deleteServiceMember] = useMutation(DELETE_SERVICE_MEMBER);
   const [updateServiceMemberIsAdmin] = useMutation(UPDATE_SERVICE_MEMBER_IS_ADMIN);
 
   const { loading, error, data } = useQuery(SERVICE_MEMBERS, {
-    variables: { serviceId: service.id }
+    variables: { serviceId: service.id },
   });
 
   if (loading) {
@@ -32,10 +32,10 @@ const ServiceMembers = props => {
     return "Error...";
   }
 
-  const handleDelete = async id => {
+  const handleDelete = async (id) => {
     await deleteServiceMember({
       refetchQueries: ["ServiceMembers"],
-      variables: { id }
+      variables: { id },
     });
   };
 
@@ -44,8 +44,8 @@ const ServiceMembers = props => {
       refetchQueries: ["ServiceMembers"],
       variables: {
         id,
-        is_admin: isAdmin
-      }
+        is_admin: isAdmin,
+      },
     });
   };
 

@@ -18,8 +18,8 @@ export const MandataireAddMesure = () => {
 
   const { loading, error, data } = useQuery(USER_TRIBUNAL, {
     variables: {
-      id
-    }
+      id,
+    },
   });
   const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.user_tis) : []), [data]);
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
@@ -32,12 +32,12 @@ export const MandataireAddMesure = () => {
           "mesures_aggregate",
           {
             query: MANDATAIRE,
-            variables: { id: mandataire.id }
-          }
-        ]
+            variables: { id: mandataire.id },
+          },
+        ],
       });
       await Router.push("/mandataires", { shallow: true });
-    }
+    },
   });
 
   if (loading) {
@@ -57,12 +57,12 @@ export const MandataireAddMesure = () => {
         if (values.country.value === "FR") {
           const location = await getLocation(client, {
             zipcode: values.zipcode,
-            city: values.city
+            city: values.city,
           });
 
           if (!location || !location.department) {
             setErrors({
-              zipcode: `Le code postal semble invalide.`
+              zipcode: `Le code postal semble invalide.`,
             });
             return setSubmitting(false);
           } else {
@@ -85,9 +85,9 @@ export const MandataireAddMesure = () => {
                 searchText: null,
                 status: MESURE_STATUS_LABEL_VALUE[0].value,
                 type: null,
-                excludeStatus: "Mesure en attente"
-              }
-            }
+                excludeStatus: "Mesure en attente",
+              },
+            },
           ],
           variables: {
             ...variables,
@@ -101,8 +101,8 @@ export const MandataireAddMesure = () => {
             type: values.type.value,
             mandataireId: mandataire.id,
             pays: values.country.value,
-            cabinet: values.cabinet
-          }
+            cabinet: values.cabinet,
+          },
         });
 
         setSubmitting(false);

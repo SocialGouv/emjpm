@@ -3,7 +3,7 @@ import fetch from "unfetch";
 
 const API_URL = "https://api-adresse.data.gouv.fr/search";
 
-export const geocode = async options => {
+export const geocode = async (options) => {
   const { query, postcode, type } = options;
 
   if (!query) {
@@ -44,7 +44,7 @@ export const geocode = async options => {
       label,
       latitude,
       longitude,
-      postcode
+      postcode,
     };
   });
 };

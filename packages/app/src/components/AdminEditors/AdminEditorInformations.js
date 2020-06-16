@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 
 import { EDITOR } from "./queries";
 
-const AdminEditorInformations = props => {
+const AdminEditorInformations = (props) => {
   const { userId } = props;
   const { data, loading, error } = useQuery(EDITOR, { variables: { userId } });
 

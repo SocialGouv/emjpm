@@ -12,14 +12,14 @@ export default async (client, siret) => {
   const { data } = await client.query({
     context: {
       headers: {
-        "X-Hasura-Siret": siret
-      }
+        "X-Hasura-Siret": siret,
+      },
     },
     fetchPolicy: "network-only",
     query: SERVICE_BY_SIRET,
     variables: {
-      siret
-    }
+      siret,
+    },
   });
 
   return data.services.length > 0;

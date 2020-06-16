@@ -5,14 +5,14 @@ export const TextStyle = {
   letterSpacing: ".76px",
   lineHeight: "44px",
   mr: 1,
-  textTransform: "uppercase"
+  textTransform: "uppercase",
 };
 
 export const BoxStyle = {
   mr: 1,
-  width: "170px"
+  width: "170px",
 };
 
 export const SimpleBoxStyle = {
-  width: "170px"
+  width: "170px",
 };

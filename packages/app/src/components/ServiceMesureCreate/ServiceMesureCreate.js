@@ -11,13 +11,13 @@ import { ADD_MESURE, RECALCULATE_SERVICE_MESURES } from "./mutations";
 import { SERVICE_TRIBUNAL } from "./queries";
 import { ServiceMesureCreateForm } from "./ServiceMesureCreateForm";
 
-export const ServiceMesureCreate = props => {
+export const ServiceMesureCreate = (props) => {
   const { service, userId } = props;
   const { service_antennes } = service;
   const client = useApolloClient();
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
-    variables: { serviceId: service.id }
+    variables: { serviceId: service.id },
   });
 
   const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.service_tis) : []), [data]);
@@ -32,15 +32,15 @@ export const ServiceMesureCreate = props => {
           {
             query: GET_SERVICE_USERS,
             variables: {
-              userId
-            }
-          }
-        ]
+              userId,
+            },
+          },
+        ],
       });
       await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
-        shallow: true
+        shallow: true,
       });
-    }
+    },
   });
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
@@ -49,12 +49,12 @@ export const ServiceMesureCreate = props => {
     if (values.country.value === "FR") {
       const location = await getLocation(client, {
         zipcode: values.zipcode,
-        city: values.city
+        city: values.city,
       });
 
       if (!location || !location.department) {
         setErrors({
-          zipcode: `Le code postal semble invalide.`
+          zipcode: `Le code postal semble invalide.`,
         });
         return setSubmitting(false);
       } else {
@@ -82,8 +82,8 @@ export const ServiceMesureCreate = props => {
         ti_id: values.tribunal.value,
         type: values.type.value,
         pays: values.country.value,
-        cabinet: values.cabinet
-      }
+        cabinet: values.cabinet,
+      },
     });
 
     setSubmitting(false);
@@ -97,9 +97,9 @@ export const ServiceMesureCreate = props => {
     return <Box p={1}>Erreur...</Box>;
   }
 
-  const antenneOptions = service_antennes.map(antenne => ({
+  const antenneOptions = service_antennes.map((antenne) => ({
     label: antenne.name,
-    value: antenne.id
+    value: antenne.id,
   }));
 
   return (

@@ -7,7 +7,7 @@ import { MesureContext, mesureFormatter } from "../MesureContext";
 import { MESURE_TYPE } from "./constants";
 import { content, statusBox, subtitle } from "./style";
 
-export const MandataireMesure = props => {
+export const MandataireMesure = (props) => {
   const {
     realAge,
     cabinet,
@@ -22,7 +22,7 @@ export const MandataireMesure = props => {
     ville,
     pays,
     antenne,
-    id
+    id,
   } = useContext(MesureContext);
 
   return (

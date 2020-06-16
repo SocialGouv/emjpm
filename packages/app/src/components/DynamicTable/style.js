@@ -9,6 +9,6 @@ export const TableRowStyle = {
   borderRight: "1px solid black",
   borderLeft: "1px solid black",
   "&:last-child": {
-    borderBottom: "1px solid black"
-  }
+    borderBottom: "1px solid black",
+  },
 };

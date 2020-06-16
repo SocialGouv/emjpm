@@ -1,5 +1,5 @@
 const ServiceMesureDeleteStyle = {
-  bg: "white"
+  bg: "white",
 };
 
 export { ServiceMesureDeleteStyle };

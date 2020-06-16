@@ -13,7 +13,7 @@ export const MesureAllocation = () => {
     selectedRegionalValue,
     startDateValue,
     selectedDepartementValue,
-    endDateValue
+    endDateValue,
   } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(GET_CATEGORY_STATS, {
@@ -21,8 +21,8 @@ export const MesureAllocation = () => {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       end: endDateValue,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      start: startDateValue
-    }
+      start: startDateValue,
+    },
   });
 
   if (loading) {
@@ -45,11 +45,11 @@ export const MesureAllocation = () => {
     );
   }
 
-  const mesures = data.mesureTypeCategoryStatistics.map(mesure => {
+  const mesures = data.mesureTypeCategoryStatistics.map((mesure) => {
     return {
       name: getMesureCategoryTypeLabel(mesure.mesureTypeCategory),
       "nombre de mesures": mesure.number,
-      type: mesure.mesureTypeCategory
+      type: mesure.mesureTypeCategory,
     };
   });
 

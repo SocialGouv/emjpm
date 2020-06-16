@@ -13,22 +13,22 @@ import {
   MagistratMandataireStyle,
   MagistratSideStyle,
   MagistratTitleMandataireStyle,
-  MagistratTribunal
+  MagistratTribunal,
 } from "./style";
 import { formatGestionnaire } from "./utils";
 
 const MagistratMandataireMap = dynamic(
-  () => import("../MagistratMandataireMap").then(mod => mod.MagistratMandataireMap),
+  () => import("../MagistratMandataireMap").then((mod) => mod.MagistratMandataireMap),
   { ssr: false }
 );
 
-const MagistratMesureMandataire = props => {
+const MagistratMesureMandataire = (props) => {
   const { serviceId, mandataireId } = useContext(MesureContext);
   const { data, error, loading } = useQuery(GESTIONNAIRES, {
     variables: {
       mandataire_id: mandataireId,
-      service_id: serviceId
-    }
+      service_id: serviceId,
+    },
   });
 
   if (loading) {
@@ -70,7 +70,7 @@ const MagistratMesureMandataire = props => {
     latitude,
     longitude,
     ville,
-    id
+    id,
   } = formatedGestionnaire;
 
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
@@ -117,7 +117,7 @@ const MagistratMesureMandataire = props => {
               </Box>
               <Box>
                 <Text sx={MagistratTitleMandataireStyle}>Tribunaux d’instance</Text>
-                {tis.map(ti => {
+                {tis.map((ti) => {
                   return (
                     <Text key={ti.tis.id} sx={MagistratTribunal}>
                       {ti.tis.etablissement}

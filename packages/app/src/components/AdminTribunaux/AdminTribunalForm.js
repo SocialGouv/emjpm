@@ -21,8 +21,8 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
       etablissement: tribunal ? tribunal.etablissement : "",
       siret: tribunal && tribunal.siret ? tribunal.siret : "",
       telephone: tribunal && tribunal.telephone ? tribunal.telephone : "",
-      geocode
-    }
+      geocode,
+    },
   });
 
   return (
@@ -92,7 +92,7 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
               <Field>
                 <Geocode
                   resource={tribunal}
-                  onChange={geocode => formik.setFieldValue("geocode", geocode)}
+                  onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
                 />
                 <InlineError message={formik.errors.geocode} fieldId="geocode" />
               </Field>

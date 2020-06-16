@@ -9,8 +9,8 @@ const magistratMandataireSchema = yup.object().shape({
   type: yup.string().required(),
   urgent: yup.object().shape({
     label: yup.string(),
-    value: yup.boolean()
-  })
+    value: yup.boolean(),
+  }),
 });
 
 export { magistratMandataireSchema };

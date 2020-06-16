@@ -2,7 +2,7 @@ import { isUnsupportedBrowser } from ".";
 
 const testBrowserObject = {
   name: "safari",
-  version: "11.0.3"
+  version: "11.0.3",
 };
 
 test("Does not exclude browsers not declared in exclusion list", () => {
@@ -38,7 +38,7 @@ test("Handles granular version arguments", () => {
 test("Handles multiple browsers", () => {
   const testExclusionObject = [
     { name: "chrome", version: "30" },
-    { name: "safari", version: "12" }
+    { name: "safari", version: "12" },
   ];
   expect(isUnsupportedBrowser(testBrowserObject, testExclusionObject)).toBe(true);
 });

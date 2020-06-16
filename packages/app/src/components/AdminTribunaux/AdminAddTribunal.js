@@ -9,7 +9,7 @@ import { DEPARTEMENTS } from "./queries";
 export const AdminAddTribunal = () => {
   const { data, loading } = useQuery(DEPARTEMENTS);
   const [addTribunal] = useMutation(ADD_TRIBUNAL, {
-    onCompleted: () => Router.push("/admin/tribunaux")
+    onCompleted: () => Router.push("/admin/tribunaux"),
   });
 
   if (loading && !data) {
@@ -19,7 +19,7 @@ export const AdminAddTribunal = () => {
   return (
     <AdminTribunalForm
       onCancel={() => Router.push("/admin/tribunaux")}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         const departement = data.departements.find(({ code }) => code === values.geocode.depcode);
         await addTribunal({
           variables: {
@@ -32,8 +32,8 @@ export const AdminAddTribunal = () => {
             ville: values.geocode.city,
             latitude: values.geocode.latitude,
             longitude: values.geocode.longitude,
-            departement_id: departement.id
-          }
+            departement_id: departement.id,
+          },
         });
       }}
     />

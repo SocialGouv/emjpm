@@ -7,7 +7,7 @@ import fetch from "unfetch";
 import { UserContext } from "../UserContext";
 
 const {
-  publicRuntimeConfig: { API_URL }
+  publicRuntimeConfig: { API_URL },
 } = getConfig();
 
 const grantAuthorization = async (editorId, editorSecret, redirectUrl, id, toggleErrorMessage) => {
@@ -18,12 +18,12 @@ const grantAuthorization = async (editorId, editorSecret, redirectUrl, id, toggl
         editorId: editorId,
         editorToken: editorSecret,
         redirectUrl: redirectUrl,
-        userId: id
+        userId: id,
       }),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      method: "POST"
+      method: "POST",
     });
     if (response.status !== 200) {
       const { errorMsg } = await response.json();
@@ -37,7 +37,7 @@ const grantAuthorization = async (editorId, editorSecret, redirectUrl, id, toggl
   }
 };
 
-const Authorize = props => {
+const Authorize = (props) => {
   const { editorId, editorSecret, redirectUrl } = props;
   const [errorMessage, toggleErrorMessage] = useState(false);
   const { id } = useContext(UserContext);

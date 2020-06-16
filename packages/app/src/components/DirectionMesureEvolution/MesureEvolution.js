@@ -12,7 +12,7 @@ export const MesureEvolution = () => {
     startDateValue,
     endDateValue,
     selectedRegionalValue,
-    selectedDepartementValue
+    selectedDepartementValue,
   } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(GET_CATEGORY_EVOLUTION, {
@@ -20,8 +20,8 @@ export const MesureEvolution = () => {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       end: endDateValue,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      start: startDateValue
-    }
+      start: startDateValue,
+    },
   });
 
   if (loading) {

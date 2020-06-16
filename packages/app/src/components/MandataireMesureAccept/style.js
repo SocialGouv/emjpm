@@ -1,5 +1,5 @@
 const ServiceMesureAcceptStyle = {
-  bg: "white"
+  bg: "white",
 };
 
 export { ServiceMesureAcceptStyle };

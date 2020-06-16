@@ -7,7 +7,7 @@ import { SignupMagistrat } from "./SignupMagistrat";
 import { SignupMandataire } from "./SignupMandataire";
 import { SignupService } from "./SignupService";
 
-const Signup = props => {
+const Signup = (props) => {
   const { user, isStepOneValidate } = useContext(SignupContext);
   return (
     <>

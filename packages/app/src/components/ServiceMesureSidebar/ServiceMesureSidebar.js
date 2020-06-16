@@ -5,7 +5,7 @@ import { Box, Flex, Link as StyledLink, Text } from "rebass";
 
 const linkStyle = { color: "black", fontSize: "1", my: "3" };
 
-const ServiceMesureSidebar = props => {
+const ServiceMesureSidebar = (props) => {
   return (
     <Box {...props}>
       <Link href="/services">

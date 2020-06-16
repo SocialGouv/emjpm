@@ -21,9 +21,9 @@ export const login = async ({ token }) => {
 };
 
 // Gets the display name of a JSX component for dev tools
-const getDisplayName = Component => Component.displayName || Component.name || "Component";
+const getDisplayName = (Component) => Component.displayName || Component.name || "Component";
 
-export const withAuthSync = WrappedComponent =>
+export const withAuthSync = (WrappedComponent) =>
   class extends Component {
     static displayName = `withAuthSync(${getDisplayName(WrappedComponent)})`;
 
@@ -69,10 +69,10 @@ const routes = {
   individuel: "/mandataires",
   prepose: "/mandataires",
   service: "/services",
-  ti: "/magistrats"
+  ti: "/magistrats",
 };
 
-export const auth = ctx => {
+export const auth = (ctx) => {
   const { token } = nextCookie(ctx);
   const { pathname } = ctx;
   const isPublic =

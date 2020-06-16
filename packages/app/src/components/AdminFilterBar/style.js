@@ -1,5 +1,5 @@
 const AdminFilterBarStyle = {
-  width: "100%"
+  width: "100%",
 };
 
 const FilterTextStyle = {
@@ -9,7 +9,7 @@ const FilterTextStyle = {
   letterSpacing: ".76px",
   lineHeight: "44px",
   mr: 1,
-  textTransform: "uppercase"
+  textTransform: "uppercase",
 };
 
 export { AdminFilterBarStyle, FilterTextStyle };

@@ -5,12 +5,12 @@ import { Box, Flex, Text } from "rebass";
 import {
   DEFAULT_MESURE_TYPE,
   MESURE_STATUS_LABEL_VALUE,
-  MESURE_TYPE_LABEL_VALUE
+  MESURE_TYPE_LABEL_VALUE,
 } from "../../constants/mesures";
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
-const ServiceFilters = props => {
+const ServiceFilters = (props) => {
   const { isStatusHidden, service_antennes } = props;
 
   const {
@@ -21,18 +21,18 @@ const ServiceFilters = props => {
     antenne,
     changeAntenne,
     searchText,
-    changeSearchText
+    changeSearchText,
   } = useContext(FiltersContext);
 
   const antenneOptions = [
     {
       label: "Toutes les antennes",
-      value: null
+      value: null,
     },
-    ...service_antennes.map(antenne => ({
+    ...service_antennes.map((antenne) => ({
       label: antenne.name,
-      value: antenne.id
-    }))
+      value: antenne.id,
+    })),
   ];
 
   return (
@@ -48,7 +48,7 @@ const ServiceFilters = props => {
                   options={antenneOptions}
                   placeholder={"Antenne"}
                   value={antenne}
-                  onChange={option => changeAntenne(option)}
+                  onChange={(option) => changeAntenne(option)}
                 />
               </Box>
             )}
@@ -58,7 +58,7 @@ const ServiceFilters = props => {
                 options={[DEFAULT_MESURE_TYPE].concat(MESURE_TYPE_LABEL_VALUE)}
                 placeholder={"Type de la mesure"}
                 value={mesureType}
-                onChange={option => changeMesureType(option)}
+                onChange={(option) => changeMesureType(option)}
               />
             </Box>
             {!isStatusHidden && (
@@ -68,7 +68,7 @@ const ServiceFilters = props => {
                   options={MESURE_STATUS_LABEL_VALUE}
                   placeholder={"État de la mesure"}
                   value={mesureStatus}
-                  onChange={option => changeMesureStatus(option)}
+                  onChange={(option) => changeMesureStatus(option)}
                 />
               </Box>
             )}
@@ -79,7 +79,7 @@ const ServiceFilters = props => {
             value={searchText}
             spellCheck="false"
             autoComplete="false"
-            onChange={event => changeSearchText(event.target.value)}
+            onChange={(event) => changeSearchText(event.target.value)}
             name="search"
             size="small"
             placeholder="Rechercher une mesure"

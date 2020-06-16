@@ -1,5 +1,5 @@
 const MandatairesCapacityStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { MandatairesCapacityStyle };

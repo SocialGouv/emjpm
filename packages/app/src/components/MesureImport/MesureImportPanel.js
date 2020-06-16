@@ -9,17 +9,17 @@ import { useMesureImportManager } from "./useMesureImportManager.hook";
 export const MesureImportPanel = ({
   // mandataireUserId & serviceId are mutually exclusive
   mandataireUserId,
-  serviceId
+  serviceId,
 }) => {
   const {
     importMesureFile,
     importSummary,
     importMesureFileWithAntennesMap,
     reset,
-    mesuresImportLoading
+    mesuresImportLoading,
   } = useMesureImportManager({
     mandataireUserId,
-    serviceId
+    serviceId,
   });
 
   if (mesuresImportLoading) {
@@ -51,7 +51,7 @@ export const MesureImportPanel = ({
       )}
       <SingleImportFilePicker
         placeholder="Sélectionner votre fichier excel"
-        onFileChosen={file => importMesureFile(file)}
+        onFileChosen={(file) => importMesureFile(file)}
       />
     </Fragment>
   );

@@ -1,5 +1,5 @@
 export {
   Context as MapContext,
   Provider as MapContextProvider,
-  Consumer as MapContextConsumer
+  Consumer as MapContextConsumer,
 } from "./MapContext";

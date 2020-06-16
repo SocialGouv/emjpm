@@ -6,11 +6,11 @@ import { Box, Flex } from "rebass";
 
 import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,
-  MANDATAIRE_MESURE_IMPORT_TEMPLATE
+  MANDATAIRE_MESURE_IMPORT_TEMPLATE,
 } from "../../constants/import";
 import { MesureImportPanel } from "../MesureImport";
 
-const DocumentLink = props => {
+const DocumentLink = (props) => {
   const { children, document } = props;
   return (
     <a href={document}>
@@ -25,7 +25,7 @@ const DocumentLink = props => {
         pl={2}
         m={2}
         sx={{
-          border: "1px solid"
+          border: "1px solid",
         }}
       >
         {children}

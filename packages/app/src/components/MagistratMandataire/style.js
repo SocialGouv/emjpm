@@ -6,7 +6,7 @@ const MagistratMandataireStyle = {
   width: "100%",
   position: "relative",
   mt: "6",
-  p: "3"
+  p: "3",
 };
 
 const MagistratMainMandataireStyle = {
@@ -14,7 +14,7 @@ const MagistratMainMandataireStyle = {
   pt: 5,
   flexGrow: 99999,
   flexBasis: 0,
-  minWidth: 320
+  minWidth: 320,
 };
 
 const MagistratSideMandataireStyle = {
@@ -22,14 +22,14 @@ const MagistratSideMandataireStyle = {
   flexBasis: 380,
   minHeight: "320px",
   bg: "white",
-  borderRadius: "6px"
+  borderRadius: "6px",
 };
 
 const MagistratTitleMandataireStyle = {
   fontSize: 0,
   color: "textSecondary",
   fontFamily: "heading",
-  mb: "4px"
+  mb: "4px",
 };
 
 const MagistratContentMandataireStyle = {
@@ -37,7 +37,7 @@ const MagistratContentMandataireStyle = {
   color: "text",
   fontFamily: "body",
   fontWeight: "600",
-  mb: 4
+  mb: 4,
 };
 
 const MagistratTribunal = {
@@ -45,17 +45,17 @@ const MagistratTribunal = {
   color: "text",
   fontFamily: "body",
   fontWeight: "600",
-  mb: "5px"
+  mb: "5px",
 };
 
 const boxStyle = {
-  flexGrow: 1
+  flexGrow: 1,
 };
 
 const topTextStyle = {
   color: "mediumGray",
   fontWeight: "600",
-  mt: "2"
+  mt: "2",
 };
 
 const MagistratAntennesStyle = {
@@ -66,7 +66,7 @@ const MagistratAntennesStyle = {
   flexBasis: 0,
   minWidth: 320,
   bg: "white",
-  borderRadius: "6px"
+  borderRadius: "6px",
 };
 
 export {
@@ -78,5 +78,5 @@ export {
   topTextStyle,
   boxStyle,
   MagistratAntennesStyle,
-  MagistratTribunal
+  MagistratTribunal,
 };

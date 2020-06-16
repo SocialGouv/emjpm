@@ -1,5 +1,5 @@
 const ServiceMesureEditStyle = {
-  bg: "white"
+  bg: "white",
 };
 
 export { ServiceMesureEditStyle };

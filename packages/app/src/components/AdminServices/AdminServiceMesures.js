@@ -9,7 +9,7 @@ import { Box, Flex, Text } from "rebass";
 import {
   MESURE_STATUS_LABEL_VALUE_ATTENTE,
   MESURE_STATUS_LABEL_VALUE_EN_COURS,
-  MESURE_STATUS_LABEL_VALUE_ETEINTE
+  MESURE_STATUS_LABEL_VALUE_ETEINTE,
 } from "../../constants/mesures";
 import { DynamicTable, DynamicTableHeader } from "../DynamicTable";
 import ErrorBox from "../ErrorBox";
@@ -19,10 +19,10 @@ import { MESURES } from "./queries";
 export const MESURES_OPTIONS = [
   MESURE_STATUS_LABEL_VALUE_EN_COURS,
   MESURE_STATUS_LABEL_VALUE_ATTENTE,
-  MESURE_STATUS_LABEL_VALUE_ETEINTE
+  MESURE_STATUS_LABEL_VALUE_ETEINTE,
 ];
 
-const AdminServiceMesures = props => {
+const AdminServiceMesures = (props) => {
   const serviceId = Number(props.serviceId);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -34,8 +34,8 @@ const AdminServiceMesures = props => {
 
   const { data, loading } = useQuery(MESURES, {
     variables: {
-      serviceId
-    }
+      serviceId,
+    },
   });
 
   const [recalculateServiceMesures, { loading: recalculateServiceMesuresLoading }] = useMutation(
@@ -45,10 +45,10 @@ const AdminServiceMesures = props => {
         {
           query: MESURES,
           variables: {
-            serviceId
-          }
-        }
-      ]
+            serviceId,
+          },
+        },
+      ],
     }
   );
 
@@ -56,10 +56,10 @@ const AdminServiceMesures = props => {
     onCompleted: async () => {
       await recalculateServiceMesures({
         variables: {
-          serviceId
-        }
+          serviceId,
+        },
       });
-    }
+    },
   });
 
   const allMesures = data ? data.mesures : [];
@@ -70,7 +70,7 @@ const AdminServiceMesures = props => {
   );
 
   const filteredMesures = useMemo(
-    () => allMesures.filter(mesure => mesure.status === selectedMesureStatus.value),
+    () => allMesures.filter((mesure) => mesure.status === selectedMesureStatus.value),
     [allMesures, selectedMesureStatus.value]
   );
 
@@ -98,8 +98,8 @@ const AdminServiceMesures = props => {
           onClick={async () => {
             await recalculateServiceMesures({
               variables: {
-                serviceId
-              }
+                serviceId,
+              },
             });
           }}
         />
@@ -111,10 +111,10 @@ const AdminServiceMesures = props => {
             refetchQueries: [
               {
                 query: MESURES,
-                variables: { serviceId }
-              }
+                variables: { serviceId },
+              },
             ],
-            variables: { ids: selectedRows.map(({ id }) => id) }
+            variables: { ids: selectedRows.map(({ id }) => id) },
           })
         }
         buttonText="Supprimer"
@@ -128,7 +128,7 @@ const AdminServiceMesures = props => {
           <Select
             size="small"
             placeholder="filter par statut"
-            onChange={status => setSelectedMesureStatus(status)}
+            onChange={(status) => setSelectedMesureStatus(status)}
             value={selectedMesureStatus}
             options={MESURES_OPTIONS}
           />
@@ -183,40 +183,40 @@ function buildTableColumns() {
             <Checkbox checked={checked} onChange={onChange} />
           </Label>
         );
-      }
+      },
     },
     {
       Header: "n° RG",
-      accessor: "numero_rg"
+      accessor: "numero_rg",
     },
     {
       Header: "n° dossier",
-      accessor: "numero_dossier"
+      accessor: "numero_dossier",
     },
     {
       Header: "Type",
-      accessor: "type"
+      accessor: "type",
     },
     {
       Header: "année",
-      accessor: "annee"
+      accessor: "annee",
     },
     {
       Header: "Date ouverture",
-      accessor: data => format(new Date(data.date_ouverture), "dd/MM/yyy")
+      accessor: (data) => format(new Date(data.date_ouverture), "dd/MM/yyy"),
     },
     {
       Header: "Date de création",
-      accessor: data => format(new Date(data.created_at), "dd/MM/yyy hh:mm")
+      accessor: (data) => format(new Date(data.created_at), "dd/MM/yyy hh:mm"),
     },
     {
       Header: "Tribunal",
-      accessor: data => (data.ti ? data.ti.ville : "")
+      accessor: (data) => (data.ti ? data.ti.ville : ""),
     },
     {
       Header: "Antenne",
-      accessor: data => (data.service_antenne ? data.service_antenne.name : "")
-    }
+      accessor: (data) => (data.service_antenne ? data.service_antenne.name : ""),
+    },
   ];
 }
 
@@ -237,7 +237,7 @@ function buildMesuresCounts(allMesures) {
     {
       inProgressMesuresCount: 0,
       extinctionMesuresCount: 0,
-      awaitingMesuresCount: 0
+      awaitingMesuresCount: 0,
     }
   );
 }

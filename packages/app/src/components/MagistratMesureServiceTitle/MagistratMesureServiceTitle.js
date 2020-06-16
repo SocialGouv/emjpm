@@ -6,12 +6,12 @@ import { Box } from "rebass";
 
 import { SERVICE } from "./queries";
 
-const MagistratMesureServiceTitle = props => {
+const MagistratMesureServiceTitle = (props) => {
   const { id } = props;
   const { data, loading } = useQuery(SERVICE, {
     variables: {
-      id
-    }
+      id,
+    },
   });
 
   if (loading) {
@@ -33,7 +33,7 @@ const MagistratMesureServiceTitle = props => {
 };
 
 MagistratMesureServiceTitle.propTypes = {
-  id: PropTypes.number
+  id: PropTypes.number,
 };
 
 export default MagistratMesureServiceTitle;

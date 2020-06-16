@@ -1,12 +1,12 @@
 const AdminServicesStyle = {
-  width: "100%"
+  width: "100%",
 };
 
 const cardStyle = {
   mb: "1",
   overflow: "hidden",
   pl: "16px",
-  position: "relative"
+  position: "relative",
 };
 
 const labelStyle = {
@@ -15,7 +15,7 @@ const labelStyle = {
   fontSize: "11px",
   fontWeight: "600",
   mb: "5px",
-  mt: "7px"
+  mt: "7px",
 };
 
 const descriptionStyle = {
@@ -24,7 +24,7 @@ const descriptionStyle = {
   fontWeight: "600",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
 };
 
 export { AdminServicesStyle, cardStyle, labelStyle, descriptionStyle };

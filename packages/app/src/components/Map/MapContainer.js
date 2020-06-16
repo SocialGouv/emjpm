@@ -5,7 +5,7 @@ import { MapError } from "./MapError";
 
 const Map = ReactMapboxGl({ accessToken: "" });
 
-const MapContainer = props => {
+const MapContainer = (props) => {
   const { children, latitude, longitude } = props;
 
   if (!latitude || !longitude) {
@@ -18,7 +18,7 @@ const MapContainer = props => {
       center={[longitude, latitude]}
       containerStyle={{
         height: "100%",
-        width: "100%"
+        width: "100%",
       }}
     >
       <ScaleControl />

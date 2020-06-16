@@ -4,7 +4,7 @@ export const listStyle = {
   bg: "white",
   px: 4,
   py: 3,
-  mb: 1
+  mb: 1,
 };
 
 export const listEmailStyle = {
@@ -13,14 +13,14 @@ export const listEmailStyle = {
   fontFamily: "heading",
   fontWeight: "bold",
   fontSize: 2,
-  width: 250
+  width: 250,
 };
 
 export const listDateStyle = {
   fontWeight: "600",
   fontSize: 1,
   color: "textSecondary",
-  width: 300
+  width: 300,
 };
 
 export const listActionStyle = {
@@ -29,16 +29,16 @@ export const listActionStyle = {
   cursor: "pointer",
   color: "primary",
   ":hover": {
-    textDecoration: "underline"
-  }
+    textDecoration: "underline",
+  },
 };
 
 export const listActionsStyle = {
-  marginLeft: "auto"
+  marginLeft: "auto",
 };
 
 export const listAdminStyle = {
   width: 200,
   cursor: "pointer",
-  mr: 4
+  mr: 4,
 };

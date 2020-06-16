@@ -1,4 +1,4 @@
-export const formatSatisfactionPourcent = value => {
+export const formatSatisfactionPourcent = (value) => {
   if (!value) {
     return "---";
   }

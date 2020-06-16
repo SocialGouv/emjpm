@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Button, Text } from "rebass";
 
 // TODO(remiroyc): create error box into emjpm-ui
-const ErrorBox = props => {
+const ErrorBox = (props) => {
   const { title, message, onClick, buttonText, isLoading } = props;
   return (
     <Box

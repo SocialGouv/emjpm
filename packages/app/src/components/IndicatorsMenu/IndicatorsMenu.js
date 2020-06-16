@@ -13,10 +13,10 @@ const linkStyle = {
   color: "black",
   mb: "0",
   fontFamily: "heading",
-  display: "block"
+  display: "block",
 };
 
-const IndicatorsMenu = props => {
+const IndicatorsMenu = (props) => {
   const { data, error, loading } = useQuery(INDICATORS);
 
   if (loading) {

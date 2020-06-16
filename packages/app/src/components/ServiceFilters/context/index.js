@@ -1,5 +1,5 @@
 export {
   Context as FiltersContext,
   Provider as FiltersContextProvider,
-  Consumer as FiltersContextConsumer
+  Consumer as FiltersContextConsumer,
 } from "./FiltersContext";

@@ -8,7 +8,7 @@ import {
   InlineError,
   Input,
   Select,
-  Text
+  Text,
 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -23,24 +23,24 @@ import { cardStyle, grayBox } from "./style";
 const TYPE_OPTIONS = [
   {
     label: "Mandataire individuel",
-    value: "individuel"
+    value: "individuel",
   },
   {
     label: "Mandataire préposé d'établissement",
-    value: "prepose"
+    value: "prepose",
   },
   {
     label: "Service mandataire",
-    value: "service"
+    value: "service",
   },
   {
     label: "Tribunal d'instance",
-    value: "ti"
+    value: "ti",
   },
   {
     label: "Agent de l'état",
-    value: "direction"
-  }
+    value: "direction",
+  },
 ];
 
 export const SignupForm = () => {
@@ -53,7 +53,7 @@ export const SignupForm = () => {
       const exists = await isEmailExists(client, values.email);
       if (exists) {
         setErrors({
-          email: "Cet email existe déjà"
+          email: "Cet email existe déjà",
         });
       } else {
         setUser({
@@ -62,7 +62,7 @@ export const SignupForm = () => {
           nom: values.nom,
           password: values.password,
           prenom: values.prenom,
-          type: values.type.value
+          type: values.type.value,
         });
         validateStepOne(true);
       }
@@ -76,8 +76,8 @@ export const SignupForm = () => {
       nom: user ? user.nom : "",
       password: user ? user.password : "",
       prenom: user ? user.prenom : "",
-      type: user ? TYPE_OPTIONS.find(val => user.type === val.value) : ""
-    }
+      type: user ? TYPE_OPTIONS.find((val) => user.type === val.value) : "",
+    },
   });
 
   return (
@@ -115,7 +115,7 @@ export const SignupForm = () => {
                   placeholder="Vous êtes..."
                   value={formik.values.type}
                   hasError={formik.errors.type && formik.touched.type}
-                  onChange={option => formik.setFieldValue("type", option)}
+                  onChange={(option) => formik.setFieldValue("type", option)}
                   options={TYPE_OPTIONS}
                 />
                 {formik.touched.type && <InlineError message={formik.errors.type} fieldId="type" />}

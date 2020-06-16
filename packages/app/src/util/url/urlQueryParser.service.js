@@ -1,6 +1,6 @@
 export const urlQueryParser = {
   parseQueryValue,
-  parseQueryValues
+  parseQueryValues,
 };
 
 function parseQueryValues(params, { path }) {

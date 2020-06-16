@@ -11,7 +11,7 @@ import { MESURES } from "./queries";
 
 const RESULT_PER_PAGE = 20;
 
-const ServiceMesures = props => {
+const ServiceMesures = (props) => {
   const { isOnlyWaiting } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { mesureType, mesureStatus, antenne, debouncedSearchText } = useContext(FiltersContext);
@@ -30,17 +30,17 @@ const ServiceMesures = props => {
       debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
     status: currentMesureType,
     excludeStatus: isOnlyWaiting ? "" : "Mesure en attente",
-    type: mesureType ? mesureType.value : null
+    type: mesureType ? mesureType.value : null,
   };
 
   const { data, error, loading } = useQuery(MESURES, {
     variables: queryVariables,
-    fetchPolicy: "cache-and-network"
+    fetchPolicy: "cache-and-network",
   });
 
   const selectMesure = ({ id }) => {
     Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
-      shallow: true
+      shallow: true,
     });
   };
 
@@ -62,7 +62,7 @@ const ServiceMesures = props => {
         <Fragment>
           {mesures.length > 0 ? (
             <Fragment>
-              {mesures.map(mesure => {
+              {mesures.map((mesure) => {
                 return (
                   <MesureListItem
                     key={mesure.id}
@@ -87,7 +87,7 @@ const ServiceMesures = props => {
                 marginPagesDisplayed={2}
                 forcePage={currentOffset / RESULT_PER_PAGE}
                 pageRangeDisplayed={5}
-                onPageChange={data => {
+                onPageChange={(data) => {
                   setCurrentOffset(data.selected * RESULT_PER_PAGE);
                 }}
                 subContainerClassName={"pages pagination"}

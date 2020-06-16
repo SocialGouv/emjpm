@@ -14,7 +14,7 @@ const DocumentLink = ({ children, document }) => (
       pl={2}
       m={2}
       sx={{
-        border: "1px solid"
+        border: "1px solid",
       }}
     >
       {children}

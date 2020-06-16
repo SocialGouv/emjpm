@@ -1,10 +1,10 @@
 const serviceDetail = ({ service_members }) => {
-  const values = service_members.map(val => val.service.etablissement);
+  const values = service_members.map((val) => val.service.etablissement);
   return { type: "Service", values };
 };
 
 const mandataireDetail = ({ user_tis }) => {
-  const values = user_tis.map(val => val.ti.ville);
+  const values = user_tis.map((val) => val.ti.ville);
   return { type: "Tribunaux", values };
 };
 
@@ -18,7 +18,7 @@ const directionDetail = () => {
   return { type: "direction", values: [] };
 };
 
-const getAdminUserDetails = props => {
+const getAdminUserDetails = (props) => {
   const { user } = props;
   const { type } = user;
 

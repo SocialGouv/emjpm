@@ -5,13 +5,13 @@ import { Box, Flex } from "rebass";
 
 import { serviceMemberInvitationSchema } from "../../lib/validationSchemas";
 
-const ServiceMemberInvitationForm = props => {
+const ServiceMemberInvitationForm = (props) => {
   const { handleSubmit } = props;
 
   const formik = useFormik({
     initialValues: { email: "" },
     onSubmit: handleSubmit,
-    validationSchema: serviceMemberInvitationSchema
+    validationSchema: serviceMemberInvitationSchema,
   });
 
   return (

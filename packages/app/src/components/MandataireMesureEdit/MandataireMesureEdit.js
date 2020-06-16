@@ -12,7 +12,7 @@ import { EDIT_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { MANDATAIRE, USER_TRIBUNAL } from "./queries";
 import { ServiceMesureEditStyle } from "./style";
 
-const MandataireMesureEdit = props => {
+const MandataireMesureEdit = (props) => {
   const client = useApolloClient();
 
   const user = useContext(UserContext);
@@ -22,8 +22,8 @@ const MandataireMesureEdit = props => {
 
   const { loading, error, data } = useQuery(USER_TRIBUNAL, {
     variables: {
-      id: user.id
-    }
+      id: user.id,
+    },
   });
 
   const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.user_tis) : []), [data]);
@@ -32,16 +32,16 @@ const MandataireMesureEdit = props => {
     onCompleted: async () => {
       await recalculateMandataireMesures({
         variables: {
-          mandataire_id: mandataireId
-        }
+          mandataire_id: mandataireId,
+        },
       });
     },
     refetchQueries: [
       {
         query: MANDATAIRE,
-        variables: { id: mesure.mandataireId }
-      }
-    ]
+        variables: { id: mesure.mandataireId },
+      },
+    ],
   });
 
   if (loading) {
@@ -61,12 +61,12 @@ const MandataireMesureEdit = props => {
           if (values.country.value === "FR") {
             const location = await getLocation(client, {
               zipcode: values.zipcode,
-              city: values.city
+              city: values.city,
             });
 
             if (!location || !location.department) {
               setErrors({
-                zipcode: `Le code postal semble invalide.`
+                zipcode: `Le code postal semble invalide.`,
               });
               return setSubmitting(false);
             } else {
@@ -94,13 +94,13 @@ const MandataireMesureEdit = props => {
               ti_id: values.tribunal.value,
               type: values.type.value,
               pays: values.country.value,
-              cabinet: values.cabinet
-            }
+              cabinet: values.cabinet,
+            },
           });
 
           setSubmitting(false);
           await Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
-            shallow: true
+            shallow: true,
           });
         }}
         mt="3"

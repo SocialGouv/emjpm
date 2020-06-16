@@ -5,5 +5,5 @@ export const TextStyle = {
   letterSpacing: ".76px",
   lineHeight: "44px",
   mr: 1,
-  textTransform: "uppercase"
+  textTransform: "uppercase",
 };

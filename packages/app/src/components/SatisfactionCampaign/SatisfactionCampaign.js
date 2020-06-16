@@ -18,8 +18,8 @@ const SatisfactionCampaign = () => {
   const { data, loading, error } = useQuery(CURRENT_SATISFACTION_CAMPAIGN, {
     variables: {
       now: new Date().toUTCString(),
-      user_id: id
-    }
+      user_id: id,
+    },
   });
 
   useEffect(() => {
@@ -52,13 +52,13 @@ const SatisfactionCampaign = () => {
     return null;
   }
 
-  const handleClick = async value => {
+  const handleClick = async (value) => {
     await addSatisfactionCampaignAnswer({
       variables: {
         satisfaction_campaign_id: satisfactionCampaign.id,
         user_id: id,
-        value
-      }
+        value,
+      },
     });
 
     setDone(true);

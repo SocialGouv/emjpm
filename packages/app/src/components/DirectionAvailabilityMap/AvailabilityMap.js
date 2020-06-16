@@ -34,12 +34,12 @@ const AvailabilityMap = () => {
   }
 
   const departements = data.view_department_availability
-    .filter(departement => departement.mesures_in_progress > 0)
-    .map(departement => {
+    .filter((departement) => departement.mesures_in_progress > 0)
+    .map((departement) => {
       if (departement.mesures_in_progress > 0) {
         return {
           ...departement,
-          isAbove: departement.mesures_in_progress > departement.mesures_max
+          isAbove: departement.mesures_in_progress > departement.mesures_max,
         };
       }
       return null;

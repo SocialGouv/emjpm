@@ -3,7 +3,7 @@ import { Box, Flex } from "rebass";
 
 import Link from "./Link";
 
-export const Navigation = props => {
+export const Navigation = (props) => {
   const { links } = props;
 
   return (

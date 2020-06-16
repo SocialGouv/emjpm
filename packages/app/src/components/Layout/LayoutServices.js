@@ -8,22 +8,22 @@ import { Navigation } from "../Navigation";
 import { SatisfactionCampaign } from "../SatisfactionCampaign";
 import { ServiceInformationsSidebar } from "../ServiceInformationsSidebar";
 
-const LayoutServices = props => {
+const LayoutServices = (props) => {
   const { children, hasNavigation = true } = props;
 
   const navigationLinks = [
     {
       title: "Vos mesures",
-      url: "/services"
+      url: "/services",
     },
     {
       title: "Vos mesures en attente",
-      url: "/services/waiting-mesures"
+      url: "/services/waiting-mesures",
     },
     {
       title: "La carte de vos mesures",
-      url: "/services/map"
-    }
+      url: "/services/map",
+    },
   ];
 
   return (
@@ -34,12 +34,12 @@ const LayoutServices = props => {
             dropDownLinks={[
               {
                 title: "Vos informations",
-                url: "/services/informations"
+                url: "/services/informations",
               },
               {
                 title: "Gestion des comptes",
-                url: "/services/members"
-              }
+                url: "/services/members",
+              },
             ]}
           />
           {hasNavigation && (
@@ -64,7 +64,7 @@ const LayoutServices = props => {
           position: "fixed",
           right: 0,
           top: 0,
-          width: "300px"
+          width: "300px",
         }}
       >
         <ServiceInformationsSidebar />

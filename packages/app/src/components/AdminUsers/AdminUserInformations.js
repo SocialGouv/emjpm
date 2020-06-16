@@ -10,7 +10,7 @@ import AdminUsersTribunaux from "./AdminUsersTribunaux";
 import { ACTIVATE_USER } from "./mutations";
 import { USER } from "./queries";
 
-const AdminUserInformations = props => {
+const AdminUserInformations = (props) => {
   const { userId } = props;
   const { data, loading, error } = useQuery(USER, { variables: { userId } });
   const [activateUser] = useMutation(ACTIVATE_USER);
@@ -21,8 +21,8 @@ const AdminUserInformations = props => {
     activateUser({
       variables: {
         active: !active,
-        id
-      }
+        id,
+      },
     });
   }, [activateUser, data]);
 
@@ -83,7 +83,7 @@ const AdminUserInformations = props => {
           </Box>
           <Box width={2 / 3} px={4} py={2}>
             {user.service_members &&
-              user.service_members.map(val => {
+              user.service_members.map((val) => {
                 const { etablissement, id } = val.service;
                 return (
                   <Link

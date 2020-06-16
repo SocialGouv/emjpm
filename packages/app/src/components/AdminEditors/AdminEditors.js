@@ -15,13 +15,13 @@ const RowItem = ({ item }) => {
   const { id, name, api_token } = item;
   const [removeEditor] = useMutation(REMOVE_EDITOR);
 
-  const removeEditorFromList = async id => {
+  const removeEditorFromList = async (id) => {
     try {
       await removeEditor({
         refetchQueries: ["editors", "editorRequests"],
         variables: {
-          id: id
-        }
+          id: id,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);
@@ -73,8 +73,8 @@ const AdminEditors = () => {
       limit: resultPerPage,
       offset: currentOffset,
       searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null
-    }
+        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+    },
   });
 
   if (loading) {

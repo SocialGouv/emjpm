@@ -12,7 +12,7 @@ import { login } from "../../util/auth";
 import { Link } from "../Commons";
 
 const {
-  publicRuntimeConfig: { API_URL }
+  publicRuntimeConfig: { API_URL },
 } = getConfig();
 
 const checkStatus = async (response, setSubmitting, setStatus) => {
@@ -36,7 +36,7 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
   return json;
 };
 
-const Login = props => {
+const Login = (props) => {
   const { token } = props;
   const url = `${API_URL}/api/auth/login`;
 
@@ -44,12 +44,12 @@ const Login = props => {
     const response = await fetch(url, {
       body: JSON.stringify({
         password: values.password,
-        username: values.username
+        username: values.username,
       }),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      method: "POST"
+      method: "POST",
     });
     checkStatus(response, setSubmitting, setStatus);
   };
@@ -61,8 +61,8 @@ const Login = props => {
     validationSchema: loginSchema,
     initialValues: {
       password: "",
-      username: ""
-    }
+      username: "",
+    },
   });
 
   return (

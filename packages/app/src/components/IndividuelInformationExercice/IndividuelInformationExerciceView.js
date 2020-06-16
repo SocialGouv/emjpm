@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 import { INTERVALLE_ETP_OPTIONS, YES_NO_OPTIONS } from "../../constants/mandataire";
 import { FieldLabelValue, getLabel } from "../IndividuelInformationCommon";
 
-const IndividuelInformationExerciceView = props => {
+const IndividuelInformationExerciceView = (props) => {
   const { exercice, handleEdit } = props;
 
   return (

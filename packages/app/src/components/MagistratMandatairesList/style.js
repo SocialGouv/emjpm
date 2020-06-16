@@ -1,17 +1,17 @@
 const MagistratMandatairesListStyle = {
-  width: "100%"
+  width: "100%",
 };
 
 const titleStyle = {
   color: "mediumGray",
   fontSize: "2",
-  fontStyle: "italic"
+  fontStyle: "italic",
 };
 
 const topTextStyle = {
   color: "mediumGray",
   fontWeight: "600",
-  mt: "2"
+  mt: "2",
 };
 
 const TextStyle = {
@@ -21,28 +21,28 @@ const TextStyle = {
   letterSpacing: ".76px",
   lineHeight: "44px",
   mr: 1,
-  textTransform: "uppercase"
+  textTransform: "uppercase",
 };
 
 const innerTextStyle = {
   color: "mediumGray",
   fontWeight: "600",
-  mt: "1"
+  mt: "1",
 };
 
 const iconTextStyle = {
   color: "mediumGray",
   fontWeight: "600",
-  ml: "1"
+  ml: "1",
 };
 
 const boxStyle = {
-  flexGrow: 1
+  flexGrow: 1,
 };
 
 const flexStyle = {
   flexWrap: "wrap",
-  mt: 2
+  mt: 2,
 };
 
 export {
@@ -53,5 +53,5 @@ export {
   boxStyle,
   flexStyle,
   TextStyle,
-  MagistratMandatairesListStyle
+  MagistratMandatairesListStyle,
 };

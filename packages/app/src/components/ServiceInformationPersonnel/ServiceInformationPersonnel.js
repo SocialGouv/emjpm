@@ -17,7 +17,7 @@ const ServiceInformationPersonnel = () => {
   const [edit, setEdit] = useState(false);
 
   const { data, error, loading } = useQuery(SERVICE_PERSONNEL, {
-    variable: { service_id: service.id }
+    variable: { service_id: service.id },
   });
 
   const [updateServicePersonnel] = useMutation(UPDATE_SERVICE_PERSONNEL);
@@ -39,8 +39,8 @@ const ServiceInformationPersonnel = () => {
           nombre_delegues_cnc_maj: values.nombreDeleguesCncMaj,
           nombre_delegues_cnc_dpf: values.nombreDeleguesCncDpf,
           nombre_delegues_en_formation: values.nombreDeleguesEnFormation,
-          nombre_delegues_non_formes: values.nombreDeleguesNonFormes
-        }
+          nombre_delegues_non_formes: values.nombreDeleguesNonFormes,
+        },
       });
       setEdit(false);
     } catch (error) {

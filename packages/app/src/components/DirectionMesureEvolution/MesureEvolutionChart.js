@@ -9,25 +9,25 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis
+  YAxis,
 } from "recharts";
 
 import {
   getMesureCategoryTypeColor,
   getMesureCategoryTypeLabel,
-  MESURE_CATEGORY_TYPE_KEYS
+  MESURE_CATEGORY_TYPE_KEYS,
 } from "../../util/mesures";
 import { getEvolution } from "./getEvolution";
 
-const MesureEvolutionChart = props => {
+const MesureEvolutionChart = (props) => {
   const [selectedMesures, setMesures] = useState([]);
   const { data } = props;
 
   const { evolutionDatas, evolutionFilters } = getEvolution(data.mesureTypeCategoryEvolution);
 
-  const selectMesures = selectedOptions => {
+  const selectMesures = (selectedOptions) => {
     if (selectedOptions) {
-      const active = selectedOptions.map(option => {
+      const active = selectedOptions.map((option) => {
         return option.value;
       });
       setMesures(active);
@@ -43,7 +43,7 @@ const MesureEvolutionChart = props => {
           isMulti={true}
           options={evolutionFilters}
           placeholder={"Affiner par type de mesures"}
-          onChange={selectedOptions => selectMesures(selectedOptions)}
+          onChange={(selectedOptions) => selectMesures(selectedOptions)}
         />
       </Box>
       <Box sx={{ height: 450, width: "100%" }}>
@@ -54,7 +54,7 @@ const MesureEvolutionChart = props => {
             <CartesianGrid stroke="#f5f5f5" />
             <Tooltip />
             <Legend />
-            {MESURE_CATEGORY_TYPE_KEYS.filter(key => {
+            {MESURE_CATEGORY_TYPE_KEYS.filter((key) => {
               return selectedMesures.includes(key) || selectedMesures.length === 0;
             }).map((key, index) => (
               <Line

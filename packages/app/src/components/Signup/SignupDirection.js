@@ -19,25 +19,25 @@ export const SignupDirection = () => {
     onSubmit: (values, { setSubmitting, setErrors }) => {
       const body = {
         direction: {
-          directionType: values.directionType.value
+          directionType: values.directionType.value,
         },
         user: {
           username: user.email,
-          ...user
-        }
+          ...user,
+        },
       };
 
       signup({
         body,
         onComplete: () => setSubmitting(false),
-        onError: errors => setErrors(errors),
-        onSuccess: () => Router.push("/signup/congratulation")
+        onError: (errors) => setErrors(errors),
+        onSuccess: () => Router.push("/signup/congratulation"),
       });
     },
     validationSchema: signupDirectionSchema,
     initialValues: {
-      directionType: direction ? direction.directionType : ""
-    }
+      directionType: direction ? direction.directionType : "",
+    },
   });
 
   return (
@@ -64,7 +64,7 @@ export const SignupDirection = () => {
                     placeholder="Type de direction"
                     value={formik.values.directionType}
                     hasError={formik.errors.directionType && formik.touched.directionType}
-                    onChange={option => formik.setFieldValue("directionType", option)}
+                    onChange={(option) => formik.setFieldValue("directionType", option)}
                     options={DIRECTION_TYPE_LABEL_VALUE}
                   />
                   {formik.touched.directionType && (

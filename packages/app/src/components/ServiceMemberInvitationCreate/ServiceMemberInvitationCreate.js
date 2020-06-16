@@ -7,7 +7,7 @@ import { CREATE_SERVICE_MEMBER_INVITATION } from "./mutations";
 import { USER_EMAIL_EXISTS } from "./queries";
 import { ServiceMemberInvitationForm } from "./ServiceMemberInvitationForm";
 
-const ServiceMemberInvitationCreate = props => {
+const ServiceMemberInvitationCreate = (props) => {
   const { service, isAdmin } = props;
 
   const client = useApolloClient();
@@ -16,7 +16,7 @@ const ServiceMemberInvitationCreate = props => {
   async function handleSubmit(values, { resetForm, setErrors }) {
     const { data } = await client.query({
       query: USER_EMAIL_EXISTS,
-      variables: { email: values.email }
+      variables: { email: values.email },
     });
 
     if (data.users.length) {
@@ -28,8 +28,8 @@ const ServiceMemberInvitationCreate = props => {
       refetchQueries: ["ServiceMemberInvitations"],
       variables: {
         email: values.email,
-        service_id: service.id
-      }
+        service_id: service.id,
+      },
     });
 
     resetForm();

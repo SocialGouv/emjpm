@@ -7,14 +7,14 @@ export const Context = createContext({});
 
 import { MESURES } from "./queries";
 
-export const Provider = props => {
+export const Provider = (props) => {
   const { children, mesureId } = props;
 
   const { data } = useQuery(MESURES, {
     fetchPolicy: "cache-and-network",
     variables: {
-      id: mesureId
-    }
+      id: mesureId,
+    },
   });
 
   if (!data) {

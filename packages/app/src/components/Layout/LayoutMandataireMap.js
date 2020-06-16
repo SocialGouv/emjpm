@@ -9,19 +9,19 @@ import { UserContext } from "../UserContext";
 const navigationLinks = [
   {
     title: "Vos mesures",
-    url: "/mandataires"
+    url: "/mandataires",
   },
   {
     title: "Vos mesures en attente",
-    url: "/mandataires/waiting-mesures"
+    url: "/mandataires/waiting-mesures",
   },
   {
     title: "La carte de vos mesures",
-    url: "/mandataires/map"
-  }
+    url: "/mandataires/map",
+  },
 ];
 
-const LayoutMandataireMap = props => {
+const LayoutMandataireMap = (props) => {
   const { children } = props;
 
   const user = useContext(UserContext);
@@ -30,7 +30,7 @@ const LayoutMandataireMap = props => {
     ? navigationLinks.concat({
         title: `Enquête ${user.enquete.annee}`,
         url: "/mandataires/enquetes/[enquete_id]",
-        as: `/mandataires/enquetes/${user.enquete.id}`
+        as: `/mandataires/enquetes/${user.enquete.id}`,
       })
     : navigationLinks;
 

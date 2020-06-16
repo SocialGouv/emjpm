@@ -4,7 +4,7 @@ import { useDebounce } from "../../../lib/hooks";
 
 export const Context = createContext({});
 
-export const Provider = props => {
+export const Provider = (props) => {
   // Initial values are obtained from the props
   const { children, initialValues = {} } = props;
 
@@ -23,7 +23,7 @@ export const Provider = props => {
     debouncedSearchText,
     mesureStatus,
     mesureType,
-    searchText
+    searchText,
   };
 
   // pass the value in provider and return

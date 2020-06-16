@@ -3,7 +3,7 @@ import React from "react";
 
 import { debouncedGeocode } from "../../util/geocode";
 
-const Geocode = props => {
+const Geocode = (props) => {
   const { hasError, onChange, placeholder, resource } = props;
 
   const {
@@ -15,7 +15,7 @@ const Geocode = props => {
     departement_id,
     latitude,
     longitude,
-    ville
+    ville,
   } = resource || {};
 
   const geocode = {
@@ -24,7 +24,7 @@ const Geocode = props => {
     postcode: code_postal || address_zip_code,
     label: address || adresse || ville || address_city,
     latitude,
-    longitude
+    longitude,
   };
 
   const isValid = !!latitude && !!longitude;
@@ -35,7 +35,7 @@ const Geocode = props => {
       defaultValue={defaultValue}
       hasError={hasError}
       isClearable
-      loadOptions={value => debouncedGeocode({ query: value })}
+      loadOptions={(value) => debouncedGeocode({ query: value })}
       placeholder={placeholder || "Adresse, ville, ..."}
       noOptionsMessage={() => "Pas de résultats"}
       onChange={onChange}
