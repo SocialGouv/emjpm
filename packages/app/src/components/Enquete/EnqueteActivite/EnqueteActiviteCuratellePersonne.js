@@ -11,8 +11,8 @@ const PREFIX = "curatelle_personne";
 
 export const EnqueteActiviteCuratellePersonne = props => {
   const {
-    goToPrevPage,
-    goToNextPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     section,
     step,
@@ -64,16 +64,16 @@ export const EnqueteActiviteCuratellePersonne = props => {
         data={normalizedData}
         section={section}
         step={step}
-        handleSubmit={async values => {
+        onSubmit={async values => {
           await updateEnquete({
             variables: {
               id: activite_id,
               ...values
             }
           });
-          await goToNextPage();
         }}
-        goToPrevPage={goToPrevPage}
+        enqueteContext={enqueteContext}
+        dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Tutelle ou curatelle à la personne"
       />
     </Box>

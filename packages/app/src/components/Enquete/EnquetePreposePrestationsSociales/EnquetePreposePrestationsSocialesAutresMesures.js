@@ -8,8 +8,8 @@ import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
 export const EnquetePreposePrestationsSocialesAutresMesures = props => {
   const {
-    goToNextPage,
-    goToPrevPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
     userId,
@@ -51,17 +51,16 @@ export const EnquetePreposePrestationsSocialesAutresMesures = props => {
     <EnquetePreposePrestationsSocialesRevenusForm
       data={prestationsSociales.sauvegarde_autres_mesures || {}}
       step={step}
-      goToPrevPage={goToPrevPage}
-      goToNextPage={goToNextPage}
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
-      handleSubmit={async values => {
+      onSubmit={async values => {
         await updatePrestationsSociales({
           variables: {
             id: prestations_sociales_id,
             sauvegarde_autres_mesures: values
           }
         });
-        await goToNextPage();
       }}
       title="Autres mesures"
     />

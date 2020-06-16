@@ -1121,7 +1121,7 @@ Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
-    "type": "integer",
+    "type": "boolean",
   },
   "activite_personne_physique": Object {
     "defaultValue": null,

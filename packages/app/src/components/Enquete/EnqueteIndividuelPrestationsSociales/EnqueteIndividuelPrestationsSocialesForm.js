@@ -1,15 +1,15 @@
 import { Field, Heading1, Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 // schema identique à prestationsSocialesStatus (côté hasura actions)
-export const enquetePrestationsSocialesSchema = yup.object().shape({
+export const validationSchema = yup.object().shape({
   aah: yup
     .number()
     .min(0)
@@ -39,7 +39,7 @@ export const enquetePrestationsSocialesSchema = yup.object().shape({
     .min(0)
     .nullable()
 });
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     aah: data.aah || "",
     pch: data.pch || "",
@@ -52,28 +52,28 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelPrestationsSocialesForm = props => {
-  const { data = {}, step, goToPrevPage, loading = false } = props;
+  const {
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
 
-  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
-    initialValues: mapDataPropsToFormValues(data),
-    validationSchema: enquetePrestationsSocialesSchema
+  const { submitForm, handleChange, values, showError, errors, submit } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    loading
   });
 
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Prestation sociales"}
       </Heading1>
@@ -194,7 +194,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
         </Flex>
 
         <Box mt={4}>
-          <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+          <EnqueteStepperButtons submit={submit} disabled={loading} />
         </Box>
       </Box>
     </form>

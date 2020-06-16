@@ -38,7 +38,6 @@ import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 
 function buildMenuSections(enqueteReponse) {
   const status = enqueteReponse.enquete_reponse_status;
-
   return [
     {
       status: "valid",

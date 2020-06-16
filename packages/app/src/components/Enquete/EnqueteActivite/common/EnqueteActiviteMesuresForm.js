@@ -1,16 +1,16 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 
 import yup from "../../../../lib/validationSchemas/yup";
 import { EnqueteStepperButtons } from "../../EnqueteStepperButtons";
+import { useEnqueteForm } from "../../useEnqueteForm.hook";
 import { buildMesureGroupsAttributes } from "./buildMesureGroupsAttributes";
 import { EnqueteActiviteFormGroupMesures } from "./EnqueteActiviteFormGroupMesures";
 
 // validation identique à celle de enqueteActiviteStatus
 const validationSchema = yup.object(buildMesureGroupsAttributes([""]));
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     debutAnnee: data.debutAnnee || "",
     finAnnee: data.finAnnee || "",
@@ -19,7 +19,7 @@ function mapDataPropsToFormValues(data) {
   };
 }
 
-function mapFormValuesToSubmit(data) {
+function formToData(data) {
   return {
     debutAnnee: parseIntToSubmit(data.debutAnnee),
     finAnnee: parseIntToSubmit(data.finAnnee),
@@ -33,27 +33,29 @@ function mapFormValuesToSubmit(data) {
 }
 
 export const EnqueteActiviteMesuresForm = props => {
-  const { goToPrevPage, title, loading, step, data = {} } = props;
+  const {
+    title,
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
 
-  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(mapFormValuesToSubmit(values));
-      setSubmitting(false);
-    },
-    initialValues: mapDataPropsToFormValues(data),
-    validationSchema
+  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    formToData,
+    loading
   });
-
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
-
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Votre activité"}
       </Heading1>
@@ -68,7 +70,7 @@ export const EnqueteActiviteMesuresForm = props => {
         prefix=""
       />
 
-      <EnqueteStepperButtons disabled={loading} goToPrevPage={goToPrevPage} />
+      <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
 };

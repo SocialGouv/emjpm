@@ -1,11 +1,11 @@
 import { Field, Heading1, Heading3, InlineError, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import { useFormik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React from "react";
 import { Box, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
+import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 // schema identique à enqueteAgrementsFormationsStatus (côté hasura actions)
 export const validationSchema = yup.object().shape({
@@ -32,7 +32,7 @@ export const validationSchema = yup.object().shape({
   secretaire_specialise_etp_spe_n6: yup.number().min(0)
 });
 
-function mapDataPropsToFormValues(data) {
+function dataToForm(data) {
   return {
     cnc_annee_obtention: data.cnc_annee_obtention || "",
     cnc_heures_formation: data.cnc_heures_formation || "",
@@ -59,25 +59,27 @@ function mapDataPropsToFormValues(data) {
 }
 
 export const EnqueteIndividuelInformationsFormationForm = props => {
-  const { data = {}, step, goToPrevPage } = props;
-  const { handleSubmit, submitCount, handleChange, values, errors, setValues } = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
-    },
-    validationSchema,
-    initialValues: mapDataPropsToFormValues(data)
-  });
-  useEffect(() => {
-    setValues(mapDataPropsToFormValues(data));
-  }, [data, setValues]);
+  const {
+    data = {},
+    loading = false,
+    step,
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent
+  } = props;
 
-  const showError = useMemo(() => step.status !== "empty" || submitCount !== 0, [
-    step.status,
-    submitCount
-  ]);
+  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+    onSubmit,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    data,
+    step,
+    validationSchema,
+    dataToForm,
+    loading
+  });
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Vos informations"}
       </Heading1>
@@ -260,7 +262,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
             fieldId="secretaire_specialise_etp_n6"
           />
         </Field>
-        <EnqueteStepperButtons goToPrevPage={goToPrevPage} />
+        <EnqueteStepperButtons submit={submit} disabled={loading} />
       </Box>
     </form>
   );

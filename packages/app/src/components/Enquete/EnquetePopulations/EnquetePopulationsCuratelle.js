@@ -9,8 +9,8 @@ import { ENQUETE_REPONSE_POPULATIONS_CURATELLE } from "./queries";
 
 export const EnquetePopulationsCuratelle = props => {
   const {
-    goToPrevPage,
-    goToNextPage,
+    enqueteContext,
+    dispatchEnqueteContextEvent,
     enqueteReponse,
     userId,
     enquete: { id: enqueteId },
@@ -79,7 +79,7 @@ export const EnquetePopulationsCuratelle = props => {
           data={reponsePopulations}
           section={section}
           step={step}
-          handleSubmit={async values => {
+          onSubmit={async values => {
             const data = Object.keys(values).reduce((acc, key) => {
               if (values[key]) {
                 return {
@@ -96,9 +96,9 @@ export const EnquetePopulationsCuratelle = props => {
                 ...data
               }
             });
-            await goToNextPage();
           }}
-          goToPrevPage={goToPrevPage}
+          enqueteContext={enqueteContext}
+          dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           title={"Curatelle"}
         />
       </Box>
