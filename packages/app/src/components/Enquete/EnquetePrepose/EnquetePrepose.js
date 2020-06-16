@@ -2,7 +2,7 @@ import { Heading1 } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { useQuery } from "react-apollo";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
 import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvalidFormDialog";
@@ -58,23 +58,6 @@ export const EnquetePrepose = (props) => {
   }
   const ComponentForm = step.component;
 
-  if (enqueteReponse.submitted_at) {
-    return (
-      <Box py={"50px"}>
-        <Heading1 textAlign="center">
-          {enqueteReponse.submitted_at
-            ? `Vos réponses à l’enquête ${enquete.annee} ont bien été envoyées.`
-            : "Envoi de vos réponses"}
-        </Heading1>
-        <Box sx={{ textAlign: "center", lineHeight: "30px", marginTop: 4 }}>
-          <Text>Nous vous remercions pour le temps que vous nous avez accordé.</Text>
-          <Text>À bientôt,</Text>
-          <Text>Votre direction régionale</Text>
-        </Box>
-      </Box>
-    );
-  }
-
   return (
     <Flex>
       <Box>
@@ -93,12 +76,16 @@ export const EnquetePrepose = (props) => {
           step={step}
           enqueteContext={enqueteContext}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
-          goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}
+          goToFirstPage={() => goToFirstPage()}
         />
         <EnqueteConfirmExitInvalidFormDialog {...confirmExitInvalidFormDialog} />
       </Box>
     </Flex>
   );
+
+  function goToFirstPage() {
+    navigateToStep({ step: 1, substep: 0 });
+  }
 
   async function onClickLink({ step, substep }) {
     await router.push("/mandataires/enquetes/[enquete_id]", {
