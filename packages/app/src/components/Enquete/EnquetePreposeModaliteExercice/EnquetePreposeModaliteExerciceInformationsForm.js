@@ -212,29 +212,6 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
           <Label>
             {"Nombre d'établissements auprès desquels est exercée l'activité de préposé MJPM :"}
           </Label>
-
-          <Flex mt={2} alignItems="center">
-            <SmallInput
-              type="number"
-              placeholder=""
-              value={values.total_mesures_etablissements}
-              id="total_mesures_etablissements"
-              name="total_mesures_etablissements"
-              hasError={!!errors.total_mesures_etablissements}
-              onChange={handleChange}
-              min={0}
-              minWidth={"60px"}
-            />
-            <Text
-              ml={3}
-              dangerouslySetInnerHTML={{
-                __html: ` mesure(s) prises en charge par ces <strong>${
-                  getEtablissementsCount(values) || ""
-                }</strong> `,
-              }}
-            />
-          </Flex>
-
           <Flex mt={2} alignItems="center">
             <Flex flex={1 / 2} alignItems="center">
               <SmallInput
