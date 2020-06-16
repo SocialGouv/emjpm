@@ -40,14 +40,14 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
           serviceId,
           antennesMap: antennesMap ? JSON.stringify(antennesMap) : undefined,
           type,
-          mandataireUserId
-        }
+          mandataireUserId,
+        },
       })
         .then(
           ({
             data: {
-              upload_mesures_file: { data }
-            }
+              upload_mesures_file: { data },
+            },
           }) => {
             const importSummary = JSON.parse(data);
             setImportSummary(importSummary);
@@ -55,7 +55,7 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
         )
         .catch(() => {
           setImportSummary({
-            unexpectedError: true
+            unexpectedError: true,
           });
         });
     });
@@ -70,7 +70,7 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
     importMesureFileWithAntennesMap,
     importSummary,
     mesuresImportLoading,
-    reset
+    reset,
   };
 }
 

@@ -13,23 +13,10 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 // schema identique à enqueteAgrementsFormationsStatus (côté hasura actions)
 export const validationSchema = yup.object().shape({
   debut_activite_avant_2009: yup.boolean().required(),
-  annee_agrement: yup
-    .number()
-    .integer()
-    .min(2009)
-    .required(),
-  nb_departements: yup
-    .mixed()
-    .oneOf(ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.keys)
-    .required(),
-  nb_mesures_dep_finance: yup
-    .number()
-    .integer()
-    .required(),
-  nb_mesures_dep_autres: yup
-    .number()
-    .integer()
-    .required()
+  annee_agrement: yup.number().integer().min(2009).required(),
+  nb_departements: yup.mixed().oneOf(ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.keys).required(),
+  nb_mesures_dep_finance: yup.number().integer().required(),
+  nb_mesures_dep_autres: yup.number().integer().required(),
 });
 
 function dataToForm(data) {
@@ -38,18 +25,18 @@ function dataToForm(data) {
     annee_agrement: data.annee_agrement || "",
     nb_departements: data.nb_departements || "",
     nb_mesures_dep_finance: data.nb_mesures_dep_finance || "",
-    nb_mesures_dep_autres: data.nb_mesures_dep_autres || ""
+    nb_mesures_dep_autres: data.nb_mesures_dep_autres || "",
   };
 }
 
-export const EnqueteIndividuelInformationsAgrementForm = props => {
+export const EnqueteIndividuelInformationsAgrementForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const {
@@ -59,7 +46,7 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
     errors,
     setFieldValue,
     showError,
-    submit
+    submit,
   } = useEnqueteForm({
     onSubmit,
     enqueteContext,
@@ -68,7 +55,7 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
 
   return (
@@ -86,7 +73,7 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
           <YesNoComboBox
             defaultValue={values.debut_activite_avant_2009}
             name="debut_activite_avant_2009"
-            onChange={value => {
+            onChange={(value) => {
               setFieldValue("debut_activite_avant_2009", value);
               if (!value) {
                 setFieldValue("debut_activite_avant_2009", "");
@@ -136,7 +123,7 @@ export const EnqueteIndividuelInformationsAgrementForm = props => {
               values.nb_departements
             )}
             hasError={showError && !!errors.nb_departements}
-            onChange={option => setFieldValue("nb_departements", option.value)}
+            onChange={(option) => setFieldValue("nb_departements", option.value)}
             options={ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.byKey}
           />
           <InlineError

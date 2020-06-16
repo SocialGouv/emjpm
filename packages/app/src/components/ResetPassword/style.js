@@ -1,5 +1,5 @@
 const ResetPasswordStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { ResetPasswordStyle };

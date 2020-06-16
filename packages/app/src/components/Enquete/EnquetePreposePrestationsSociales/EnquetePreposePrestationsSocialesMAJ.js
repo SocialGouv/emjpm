@@ -6,38 +6,38 @@ import { EnquetePreposePrestationsSocialesRevenusForm } from "./EnquetePreposePr
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
-export const EnquetePreposePrestationsSocialesMAJ = props => {
+export const EnquetePreposePrestationsSocialesMAJ = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
     userId,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { prestations_sociales_id }
+    enquete_reponse_ids: { prestations_sociales_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_PREPOSE_PRESTATIONS_SOCIALES, {
     variables: {
-      id: prestations_sociales_id
-    }
+      id: prestations_sociales_id,
+    },
   });
 
   const [updatePrestationsSociales] = useMutation(UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
         variables: {
-          id: prestations_sociales_id
-        }
-      }
-    ]
+          id: prestations_sociales_id,
+        },
+      },
+    ],
   });
 
   const prestationsSociales = data
@@ -51,12 +51,12 @@ export const EnquetePreposePrestationsSocialesMAJ = props => {
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         await updatePrestationsSociales({
           variables: {
             id: prestations_sociales_id,
-            maj: values
-          }
+            maj: values,
+          },
         });
       }}
       title="MAJ"

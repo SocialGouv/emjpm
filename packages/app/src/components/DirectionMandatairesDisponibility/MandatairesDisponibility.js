@@ -7,14 +7,14 @@ import { FiltersContext } from "../DirectionFilters/context";
 import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 
-const MandatairesDisponibility = props => {
+const MandatairesDisponibility = (props) => {
   const { selectedDepartementValue, selectedRegionalValue } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
-    }
+      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
+    },
   });
 
   if (loading) {
@@ -37,30 +37,30 @@ const MandatairesDisponibility = props => {
     );
   }
 
-  const remainingCapacity = data =>
+  const remainingCapacity = (data) =>
     data.mesures_max - data.mesures_awaiting - data.mesures_in_progress;
 
-  const overcapacity = data => remainingCapacity(data) < 0;
+  const overcapacity = (data) => remainingCapacity(data) < 0;
 
-  const getCapacity = data => ({
+  const getCapacity = (data) => ({
     "Disponibilité actuelle": remainingCapacity(data),
     "Disponibilité max": data.mesures_max,
-    overcapacity: overcapacity(data)
+    overcapacity: overcapacity(data),
   });
 
   const activityChartData = [
     {
       name: "SERVICES MANDATAIRES",
-      ...getCapacity(data.service.aggregate.sum)
+      ...getCapacity(data.service.aggregate.sum),
     },
     {
       name: "MANDATAIRES INDIVIDUELS",
-      ...getCapacity(data.mandataireIndividuel.aggregate.sum)
+      ...getCapacity(data.mandataireIndividuel.aggregate.sum),
     },
     {
       name: "PRÉPOSÉS D’ÉTABLISSEMENTS",
-      ...getCapacity(data.mandatairePrepose.aggregate.sum)
-    }
+      ...getCapacity(data.mandatairePrepose.aggregate.sum),
+    },
   ];
 
   return (

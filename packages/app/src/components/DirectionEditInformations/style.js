@@ -1,5 +1,5 @@
 const MagistratEditInformationsStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { MagistratEditInformationsStyle };

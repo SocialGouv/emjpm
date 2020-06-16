@@ -7,7 +7,7 @@ import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
 import { boxStyle, content, innerTextStyle, subtitle } from "./style";
 
-const label = value => {
+const label = (value) => {
   return value ? value : "non renseigné";
 };
 

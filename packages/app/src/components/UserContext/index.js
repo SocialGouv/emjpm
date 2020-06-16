@@ -1,6 +1,6 @@
 import {
   Consumer as UserConsumer,
   Context as UserContext,
-  Provider as UserProvider
+  Provider as UserProvider,
 } from "./UserContext";
 export { UserProvider, UserConsumer, UserContext };

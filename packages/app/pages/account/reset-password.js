@@ -5,7 +5,7 @@ import { LayoutPublic } from "../../src/components/Layout";
 import { ResetPassword } from "../../src/components/ResetPassword";
 import { withAuthSync } from "../../src/util/auth";
 
-const ResetPasswordPage = props => {
+const ResetPasswordPage = (props) => {
   const { resetToken } = props;
   return (
     <LayoutPublic>

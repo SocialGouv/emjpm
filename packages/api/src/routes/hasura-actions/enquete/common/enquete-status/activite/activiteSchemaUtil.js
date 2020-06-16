@@ -6,22 +6,10 @@ function buildMesureGroupsAttributes(mesureGroups) {
     const finAnnee = `${mesureGroup}_fin_annee`;
     const mesuresNouvelles = `${mesureGroup}_mesures_nouvelles`;
     const sortieMesures = `${mesureGroup}_sortie_mesures`;
-    acc[debutAnnee] = yup
-      .number()
-      .min(0)
-      .integer()
-      .nullable();
+    acc[debutAnnee] = yup.number().min(0).integer().nullable();
 
-    acc[mesuresNouvelles] = yup
-      .number()
-      .min(0)
-      .integer()
-      .nullable();
-    acc[sortieMesures] = yup
-      .number()
-      .min(0)
-      .integer()
-      .nullable();
+    acc[mesuresNouvelles] = yup.number().min(0).integer().nullable();
+    acc[sortieMesures] = yup.number().min(0).integer().nullable();
 
     acc[finAnnee] = yup
       .number()
@@ -31,7 +19,7 @@ function buildMesureGroupsAttributes(mesureGroups) {
       .test(
         "diff-match",
         "La valeur de fin d'année n'est pas cohérente avec les autres données.",
-        function(value) {
+        function (value) {
           const nbDebutAnnee = this.parent[debutAnnee] | 0;
           const nbSortieMesures = this.parent[sortieMesures] | 0;
           const nbMesuresNouvelles = this.parent[mesuresNouvelles] | 0;
@@ -48,5 +36,5 @@ function buildMesureGroupsAttributes(mesureGroups) {
 }
 
 module.exports = {
-  buildMesureGroupsAttributes
+  buildMesureGroupsAttributes,
 };

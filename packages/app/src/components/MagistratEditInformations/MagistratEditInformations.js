@@ -17,9 +17,9 @@ const MagistratEditInformations = () => {
   const [editUser] = useMutation(EDIT_USER, {
     update() {
       Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
-        shallow: true
+        shallow: true,
       });
-    }
+    },
   });
 
   const formik = useFormik({
@@ -31,8 +31,8 @@ const MagistratEditInformations = () => {
           email: values.email.toLowerCase(),
           id: id,
           nom: values.nom,
-          prenom: values.prenom
-        }
+          prenom: values.prenom,
+        },
       });
 
       setSubmitting(false);
@@ -42,8 +42,8 @@ const MagistratEditInformations = () => {
       cabinet: cabinet || "",
       email: email || "",
       nom: nom || "",
-      prenom: prenom || ""
-    }
+      prenom: prenom || "",
+    },
   });
 
   return (

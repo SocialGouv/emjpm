@@ -67,7 +67,7 @@
     "pg": "^7.18.2",
     "pg-query-stream": "^2.1.2",
     "pino-pretty": "^3.6.1",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.5",
     "rewiremock": "^3.14.2",
     "supertest": "^4.0.2"
   }

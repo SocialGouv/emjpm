@@ -10,7 +10,7 @@ const SignupGeneralError = ({ errors }) => {
           mb={3}
           sx={{
             border: "1px solid red",
-            padding: "10px"
+            padding: "10px",
           }}
         >
           {errors.general.map((error, index) => (

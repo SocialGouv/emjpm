@@ -11,7 +11,7 @@ import { withAuthSync } from "../../src/util/auth";
 const Map = () => {
   const { magistrat } = useContext(UserContext);
   const {
-    ti: { latitude, longitude }
+    ti: { latitude, longitude },
   } = magistrat;
   return (
     <MapContextProvider latitude={latitude} longitude={longitude}>
@@ -22,7 +22,7 @@ const Map = () => {
             position: "absolute",
             pt: "115px",
             top: "0",
-            width: "100%"
+            width: "100%",
           }}
         >
           <Box height="100%" flex="0 1 auto" width="600px">

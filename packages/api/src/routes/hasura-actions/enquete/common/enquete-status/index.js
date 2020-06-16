@@ -1,7 +1,7 @@
 const {
   getGlobalStatus,
   getValidationStatus,
-  getTopLevelGlobalStatus
+  getTopLevelGlobalStatus,
 } = require("./enqueteSchemaUtil");
 const enqueteActiviteStatus = require("./activite/enqueteActiviteStatus");
 const enqueteInformationsMandatairesStatus = require("./informations_mandataire/enqueteInformationsMandatairesStatus");
@@ -23,5 +23,5 @@ module.exports = {
   enqueteModalitesExerciceStatus,
   preposePersonnelFormationStatus,
   preposePrestationsSocialesStatus,
-  preposeFinancementStatus
+  preposeFinancementStatus,
 };

@@ -11,7 +11,7 @@ import { useEnqueteImportManager } from "./useEnqueteImportManager.hook";
 
 const textStyle = {
   textAlign: "center",
-  lineHeight: "30px"
+  lineHeight: "30px",
 };
 
 export const EnqueteImportPanel = ({ enqueteId, userId }) => {
@@ -20,7 +20,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   const apolloClient = useApolloClient();
   const { importEnqueteFile, importSummary, enqueteImportLoading } = useEnqueteImportManager({
     enqueteId,
-    userId
+    userId,
   });
 
   if (enqueteImportLoading) {
@@ -59,7 +59,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
           )}
           <SingleImportFilePicker
             placeholder="Cliquez ici pour sélectionner votre fichier excel"
-            onFileChosen={file => importEnqueteFile(file)}
+            onFileChosen={(file) => importEnqueteFile(file)}
           />
         </Flex>
       </Box>
@@ -70,7 +70,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
 function goToFirstStep(router, enqueteId) {
   router.push("/mandataires/enquetes/[enquete_id]", {
     pathname: `/mandataires/enquetes/${enqueteId}`,
-    query: { step: 1, substep: 0 }
+    query: { step: 1, substep: 0 },
   });
 }
 
@@ -81,7 +81,7 @@ function renderSectionTitle(router, enqueteId) {
         sx={{
           color: "#007AD9",
           fontWeight: "bold",
-          cursor: "pointer"
+          cursor: "pointer",
         }}
         alignItems="center"
         onClick={() => goToFirstStep(router, enqueteId)}
@@ -89,7 +89,7 @@ function renderSectionTitle(router, enqueteId) {
         <Flex
           sx={{
             ...menuStepperStyle.menuTag,
-            border: "2px solid #007AD9"
+            border: "2px solid #007AD9",
           }}
         >
           <Text>{"<"}</Text>

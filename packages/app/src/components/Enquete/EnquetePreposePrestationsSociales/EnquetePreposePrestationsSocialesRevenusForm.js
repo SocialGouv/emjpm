@@ -9,50 +9,17 @@ import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 const validationSchema = yup.object().shape({
-  tranche1: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche2: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche3: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche4: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche5: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche6: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche7: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche8: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche9: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche10: yup
-    .number()
-    .min(0)
-    .nullable(),
-  tranche11: yup
-    .number()
-    .min(0)
-    .nullable()
+  tranche1: yup.number().min(0).nullable(),
+  tranche2: yup.number().min(0).nullable(),
+  tranche3: yup.number().min(0).nullable(),
+  tranche4: yup.number().min(0).nullable(),
+  tranche5: yup.number().min(0).nullable(),
+  tranche6: yup.number().min(0).nullable(),
+  tranche7: yup.number().min(0).nullable(),
+  tranche8: yup.number().min(0).nullable(),
+  tranche9: yup.number().min(0).nullable(),
+  tranche10: yup.number().min(0).nullable(),
+  tranche11: yup.number().min(0).nullable(),
 });
 
 function dataToForm(data = {}) {
@@ -72,7 +39,7 @@ function formToData(values) {
   return data;
 }
 
-export const EnquetePreposePrestationsSocialesRevenusForm = props => {
+export const EnquetePreposePrestationsSocialesRevenusForm = (props) => {
   const {
     title,
     data = {},
@@ -80,7 +47,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const {
@@ -90,7 +57,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
     values,
     errors,
     showError,
-    submit
+    submit,
   } = useEnqueteForm({
     onSubmit,
     enqueteContext,
@@ -100,7 +67,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = props => {
     validationSchema,
     dataToForm,
     formToData,
-    loading
+    loading,
   });
 
   return (

@@ -1,5 +1,5 @@
 const ServiceMesureCloseStyle = {
-  bg: "white"
+  bg: "white",
 };
 
 export { ServiceMesureCloseStyle };

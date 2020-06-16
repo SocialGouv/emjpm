@@ -10,7 +10,7 @@ export const defaultLinks = [
   // { title: "Centre d'assistance", url: "https://emjpm-blog.azurewebsites.net" }
 ];
 
-const Header = props => {
+const Header = (props) => {
   const { username } = useContext(UserContext);
   const { dropDownLinks } = props;
   return (
@@ -28,17 +28,17 @@ const Header = props => {
 
 Header.defaultProps = {
   isDisconnected: false,
-  dropDownLinks: []
+  dropDownLinks: [],
 };
 
 Header.propTypes = {
   dropDownLinks: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired
+      url: PropTypes.string.isRequired,
     })
   ),
-  isDisconnected: PropTypes.bool
+  isDisconnected: PropTypes.bool,
 };
 
 export { Header };

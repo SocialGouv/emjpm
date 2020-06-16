@@ -20,14 +20,14 @@ function useEnqueteImportManager({ enqueteId, userId }) {
         variables: {
           content,
           enqueteId,
-          userId
-        }
+          userId,
+        },
       })
         .then(
           ({
             data: {
-              upload_enquete_file: { data }
-            }
+              upload_enquete_file: { data },
+            },
           }) => {
             const importSummary = JSON.parse(data);
             setImportSummary(importSummary);
@@ -35,7 +35,7 @@ function useEnqueteImportManager({ enqueteId, userId }) {
         )
         .catch(() => {
           setImportSummary({
-            unexpectedError: true
+            unexpectedError: true,
           });
         });
     });
@@ -49,7 +49,7 @@ function useEnqueteImportManager({ enqueteId, userId }) {
     importEnqueteFile,
     importSummary,
     enqueteImportLoading,
-    reset
+    reset,
   };
 }
 

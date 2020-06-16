@@ -1,5 +1,5 @@
 const AccessTokenStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { AccessTokenStyle };

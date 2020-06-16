@@ -3,7 +3,7 @@ function buildKeys(byKey) {
     byKey,
     byValue: revertMapKeysValues(byKey),
     keys: Object.keys(byKey),
-    values: Object.values(byKey)
+    values: Object.values(byKey),
   };
 }
 
@@ -16,7 +16,7 @@ function revertMapKeysValues(mapByKey) {
 }
 
 const enqueteKeysBuilder = {
-  buildKeys
+  buildKeys,
 };
 
 module.exports = enqueteKeysBuilder;

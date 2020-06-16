@@ -7,7 +7,7 @@ import { ServiceMapPanelMesures } from "../../src/components/ServiceMapPanelMesu
 import { withAuthSync } from "../../src/util/auth";
 
 const ServiceMap = dynamic(
-  () => import("../../src/components/ServiceMap").then(mod => mod.ServiceMap),
+  () => import("../../src/components/ServiceMap").then((mod) => mod.ServiceMap),
   { ssr: false }
 );
 
@@ -21,7 +21,7 @@ const Map = () => {
           <Box
             sx={{
               flexBasis: 600,
-              flexGrow: 1
+              flexGrow: 1,
             }}
           >
             <ServiceMapPanelMesures mesuresIds={selectedMesuresIds} />
@@ -32,11 +32,11 @@ const Map = () => {
           sx={{
             flexBasis: 0,
             flexGrow: 99999,
-            minWidth: 320
+            minWidth: 320,
           }}
         >
           <ServiceMap
-            selectMesures={ids => setSelectedMesuresIds(ids)}
+            selectMesures={(ids) => setSelectedMesuresIds(ids)}
             selectedMesuresIds={selectedMesuresIds}
           />
         </Box>

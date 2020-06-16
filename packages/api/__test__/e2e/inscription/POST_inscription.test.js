@@ -35,12 +35,8 @@ afterEach(async () => {
   }
 
   try {
-    await knex("user_role")
-      .where({ user_id: user.id })
-      .delete();
-    await knex("user_tis")
-      .where({ user_id: user.id })
-      .delete();
+    await knex("user_role").where({ user_id: user.id }).delete();
+    await knex("user_tis").where({ user_id: user.id }).delete();
   } catch (e) {
     // NOTE(douglasduteil): We ignore the error here.
     // Not all users have a `user_tis` relation.
@@ -60,21 +56,15 @@ afterEach(async () => {
     await knex("individuel_exercices")
       .where({ mandataire_id: mandataire.id })
       .delete();
-    await knex("mandataires")
-      .where({ id: mandataire.id })
-      .delete();
+    await knex("mandataires").where({ id: mandataire.id }).delete();
   }
 
-  await knex("magistrat")
-    .where({ user_id: user.id })
-    .delete();
+  await knex("magistrat").where({ user_id: user.id }).delete();
 
-  await knex("users")
-    .where({ id: user.id })
-    .delete();
+  await knex("users").where({ id: user.id }).delete();
 });
 
-const defaultRegister = params => ({
+const defaultRegister = (params) => ({
   user: {
     username: params && params.username != undefined ? params.username : "toto",
     nom: params && params.nom != undefined ? params.nom : "testAd",
@@ -86,7 +76,7 @@ const defaultRegister = params => ({
     passwordConfirmation:
       params && params.passwordConfirmation != undefined
         ? params.passwordConfirmation
-        : "test123456?"
+        : "test123456?",
   },
   mandataire: {
     etablissement: "",
@@ -94,8 +84,8 @@ const defaultRegister = params => ({
     code_postal: "75010",
     department_id: 1,
     ville: "",
-    telephone: ""
-  }
+    telephone: "",
+  },
 });
 
 test("should register with good values", async () => {
@@ -117,9 +107,7 @@ test("should register with good values", async () => {
 });
 
 test("should send an email with good values", async () => {
-  await request(server)
-    .post("/api/auth/signup")
-    .send(defaultRegister());
+  await request(server).post("/api/auth/signup").send(defaultRegister());
   expect(nodemailerMock.mock.sentMail().length).toBe(1);
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
 });
@@ -137,7 +125,7 @@ test("created user should NOT be active", async () => {
     .first();
   expect(lastInsert).toMatchSnapshot({
     created_at: expect.any(Object),
-    password: expect.any(String)
+    password: expect.any(String),
   });
 });
 
@@ -224,7 +212,7 @@ test("should add mandataire tis", async () => {
     .orderBy("created_at", "desc")
     .first();
   const tis = await getAllTisByMandataire(mandataire.id);
-  expect(tis.map(ti => ti.id)).toEqual([1, 2]);
+  expect(tis.map((ti) => ti.id)).toEqual([1, 2]);
 });
 
 test("should add user tis", async () => {
@@ -233,12 +221,12 @@ test("should add user tis", async () => {
     .send({
       ...defaultRegister({
         username: "user_ti",
-        type: "ti"
+        type: "ti",
       }),
       magistrat: {
         cabinet: "2A",
-        ti: 1
-      }
+        ti: 1,
+      },
     });
 
   expect(response.body).toMatchInlineSnapshot(`
@@ -249,10 +237,7 @@ test("should add user tis", async () => {
   expect(response.status).toBe(200);
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
 
-  const user = await knex
-    .table("users")
-    .orderBy("created_at", "desc")
-    .first();
+  const user = await knex.table("users").orderBy("created_at", "desc").first();
 
   expect(user.username).toEqual("user_ti");
   const magistrat = await knex

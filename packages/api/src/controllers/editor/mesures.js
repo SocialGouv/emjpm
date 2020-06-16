@@ -6,12 +6,10 @@ const DEFAULT_STATUS = "Mesure en attente";
 const mesures = async (req, res) => {
   const {
     query: { status = DEFAULT_STATUS },
-    user: { user_id }
+    user: { user_id },
   } = req;
 
-  const user = await User.query()
-    .where("id", user_id)
-    .first();
+  const user = await User.query().where("id", user_id).first();
 
   let mesures = null;
 

@@ -31,12 +31,10 @@ const forgotPassword = async (req, res) => {
   }
 
   try {
-    await User.query()
-      .where("id", user.id)
-      .update({
-        reset_password_token: token,
-        reset_password_expires: endOfTomorrow()
-      });
+    await User.query().where("id", user.id).update({
+      reset_password_token: token,
+      reset_password_expires: endOfTomorrow(),
+    });
   } catch (error) {
     Sentry.captureException(error);
     return res.status(422).json({ error: "Une erreur est survenue" });

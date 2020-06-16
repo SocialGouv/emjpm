@@ -33,5 +33,5 @@ module.exports = {
       enquete_id
     }
   }    
-`
+`,
 };

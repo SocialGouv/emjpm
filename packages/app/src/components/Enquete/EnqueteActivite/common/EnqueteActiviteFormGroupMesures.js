@@ -3,7 +3,7 @@ import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-export const EnqueteActiviteFormGroupMesures = props => {
+export const EnqueteActiviteFormGroupMesures = (props) => {
   // prefix: 'etablissement' | 'domicile' | ''
   const { values, errors, handleChange, prefix, showError } = props;
 

@@ -7,6 +7,6 @@ export const ENQ_REP_AGREMENTS_FORMATIONS = {
     "2": "2",
     "3": "3",
     "4": "4",
-    "5+": "Plus de 5"
-  })
+    "5+": "Plus de 5",
+  }),
 };

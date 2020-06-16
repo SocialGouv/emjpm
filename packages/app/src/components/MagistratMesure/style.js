@@ -6,7 +6,7 @@ const MagistratMesureStyle = {
   overFlow: "hidden",
   flexWrap: "wrap",
   width: "100%",
-  position: "relative"
+  position: "relative",
 };
 
 const MagistratMesureSideStyle = {
@@ -14,7 +14,7 @@ const MagistratMesureSideStyle = {
   backgroundSize: "cover",
   flexGrow: 1,
   flexBasis: 380,
-  minHeight: "320px"
+  minHeight: "320px",
 };
 
 const MagistratMesureMainStyle = {
@@ -22,14 +22,14 @@ const MagistratMesureMainStyle = {
   pt: 5,
   flexGrow: 99999,
   flexBasis: 0,
-  minWidth: 320
+  minWidth: 320,
 };
 
 const MagistratMesureTitleStyle = {
   fontSize: 0,
   color: "textSecondary",
   fontFamily: "heading",
-  mb: "4px"
+  mb: "4px",
 };
 
 const MagistratMesureContentStyle = {
@@ -37,13 +37,13 @@ const MagistratMesureContentStyle = {
   color: "text",
   fontFamily: "body",
   fontWeight: "600",
-  mb: 4
+  mb: 4,
 };
 
 const MagistratMesureLinksStyle = {
   position: "absolute",
   right: 2,
-  top: 2
+  top: 2,
 };
 
 export {
@@ -52,5 +52,5 @@ export {
   MagistratMesureSideStyle,
   MagistratMesureTitleStyle,
   MagistratMesureContentStyle,
-  MagistratMesureLinksStyle
+  MagistratMesureLinksStyle,
 };

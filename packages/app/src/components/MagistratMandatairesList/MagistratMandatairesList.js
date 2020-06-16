@@ -7,7 +7,7 @@ import {
   MandataireListItem,
   Select,
   Spinner,
-  Text
+  Text,
 } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useContext, useState } from "react";
@@ -26,14 +26,14 @@ const optionsType = [
   DEFAULT_VALUE,
   { label: "Préposé", value: "MANDATAIRE_PRE" },
   { label: "Individuel", value: "MANDATAIRE_IND" },
-  { label: "Service", value: "SERVICE" }
+  { label: "Service", value: "SERVICE" },
 ];
 
 const RESULT_PER_PAGE = 20;
 
-const MagistratMandatairesList = props => {
+const MagistratMandatairesList = (props) => {
   const {
-    magistrat: { ti_id }
+    magistrat: { ti_id },
   } = useContext(UserContext);
   const [selectedType, setType] = useState(DEFAULT_VALUE);
   const [searchText, changeSearchText] = useState(null);
@@ -47,8 +47,8 @@ const MagistratMandatairesList = props => {
       offset: currentOffset,
       order: "desc_nulls_last",
       tribunal: ti_id,
-      searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null
-    }
+      searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null,
+    },
   });
 
   if (loading) {
@@ -82,7 +82,7 @@ const MagistratMandatairesList = props => {
               <Select
                 size="small"
                 placeholder="Type de mandataire"
-                onChange={option => setType(option)}
+                onChange={(option) => setType(option)}
                 value={selectedType}
                 options={optionsType}
               />
@@ -92,7 +92,7 @@ const MagistratMandatairesList = props => {
                 value={searchText}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={event => changeSearchText(event.target.value)}
+                onChange={(event) => changeSearchText(event.target.value)}
                 name="search"
                 size="small"
                 placeholder="mandataire / service"
@@ -100,7 +100,7 @@ const MagistratMandatairesList = props => {
             </Box>
           </Flex>
         </Card>
-        {gestionnaires.map(gestionnaire => {
+        {gestionnaires.map((gestionnaire) => {
           return (
             <MandataireListItem
               key={gestionnaire.id}
@@ -127,7 +127,7 @@ const MagistratMandatairesList = props => {
               marginPagesDisplayed={2}
               forcePage={currentOffset / RESULT_PER_PAGE}
               pageRangeDisplayed={5}
-              onPageChange={data => {
+              onPageChange={(data) => {
                 setCurrentOffset(data.selected * RESULT_PER_PAGE);
               }}
               subContainerClassName={"pages pagination"}

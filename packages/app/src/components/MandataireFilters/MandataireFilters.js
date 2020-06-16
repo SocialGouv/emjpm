@@ -5,12 +5,12 @@ import { Box, Flex, Text } from "rebass";
 import {
   DEFAULT_MESURE_TYPE,
   MESURE_STATUS_LABEL_VALUE,
-  MESURE_TYPE_LABEL_VALUE
+  MESURE_TYPE_LABEL_VALUE,
 } from "../../constants/mesures";
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
-const MandataireFilters = props => {
+const MandataireFilters = (props) => {
   const { isStatusHidden } = props;
 
   const {
@@ -19,7 +19,7 @@ const MandataireFilters = props => {
     mesureStatus,
     changeMesureStatus,
     searchText,
-    changeSearchText
+    changeSearchText,
   } = useContext(FiltersContext);
 
   return (
@@ -35,7 +35,7 @@ const MandataireFilters = props => {
                 options={[DEFAULT_MESURE_TYPE].concat(MESURE_TYPE_LABEL_VALUE)}
                 placeholder={"type de la mesure"}
                 value={mesureType}
-                onChange={option => changeMesureType(option)}
+                onChange={(option) => changeMesureType(option)}
               />
             </Box>
             {!isStatusHidden && (
@@ -46,7 +46,7 @@ const MandataireFilters = props => {
                   options={MESURE_STATUS_LABEL_VALUE}
                   placeholder={"état de la mesure"}
                   value={mesureStatus}
-                  onChange={option => changeMesureStatus(option)}
+                  onChange={(option) => changeMesureStatus(option)}
                 />
               </Box>
             )}
@@ -57,7 +57,7 @@ const MandataireFilters = props => {
             value={searchText}
             spellCheck="false"
             autoComplete="false"
-            onChange={event => changeSearchText(event.target.value)}
+            onChange={(event) => changeSearchText(event.target.value)}
             name="search"
             size="small"
             placeholder="n° RG ou n° dossier"

@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.alterTable("mesures", function(table) {
+exports.up = function (knex) {
+  return knex.schema.alterTable("mesures", function (table) {
     table.date("annee");
     table.string("type");
     table.date("date_ouverture");
@@ -7,24 +7,15 @@ exports.up = function(knex) {
     table.string("civilite");
     table.float("latitude").alter();
     table.float("longitude").alter();
-    table
-      .dateTime("postDate")
-      .defaultTo(knex.fn.now())
-      .alter();
+    table.dateTime("postDate").defaultTo(knex.fn.now()).alter();
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   const alterTable = () =>
-    knex.schema.alterTable("mesures", function(table) {
-      table
-        .float("latitude")
-        .notNullable()
-        .alter();
-      table
-        .float("longitude")
-        .notNullable()
-        .alter();
+    knex.schema.alterTable("mesures", function (table) {
+      table.float("latitude").notNullable().alter();
+      table.float("longitude").notNullable().alter();
       table.dateTime("postDate").alter();
     });
 

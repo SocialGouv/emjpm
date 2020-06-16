@@ -7,24 +7,24 @@ import { EnquetePreposeModaliteExerciceInformationsForm } from "./EnquetePrepose
 import { UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS } from "./mutations";
 import { ENQUETE_PREPOSE_INFORMATIONS } from "./queries";
 
-export const EnquetePreposeModaliteExerciceInformations = props => {
+export const EnquetePreposeModaliteExerciceInformations = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
     enqueteReponse,
     userId,
     step,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
 
   const {
-    enquete_reponse_ids: { modalites_exercice_id }
+    enquete_reponse_ids: { modalites_exercice_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_PREPOSE_INFORMATIONS, {
     variables: {
-      id: modalites_exercice_id
-    }
+      id: modalites_exercice_id,
+    },
   });
 
   const [sendEnqueteReponseInformations] = useMutation(
@@ -33,13 +33,13 @@ export const EnquetePreposeModaliteExerciceInformations = props => {
       refetchQueries: [
         {
           query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, userId }
+          variables: { enqueteId, userId },
         },
         {
           query: ENQUETE_PREPOSE_INFORMATIONS,
-          variables: { id: modalites_exercice_id }
-        }
-      ]
+          variables: { id: modalites_exercice_id },
+        },
+      ],
     }
   );
   return (
@@ -49,7 +49,7 @@ export const EnquetePreposeModaliteExerciceInformations = props => {
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
       step={step}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         await sendEnqueteReponseInformations({
           variables: {
             id: modalites_exercice_id,
@@ -64,8 +64,8 @@ export const EnquetePreposeModaliteExerciceInformations = props => {
             etablissement_personne_morale: parseFloatValue(values.etablissement_personne_morale),
             etablissement_convention_groupement: parseFloatValue(
               values.etablissement_convention_groupement
-            )
-          }
+            ),
+          },
         });
       }}
     />

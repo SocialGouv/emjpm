@@ -10,7 +10,7 @@ const AddMesures = () => {
   const currentUser = useContext(UserContext);
   const {
     id,
-    service_members: [{ service }]
+    service_members: [{ service }],
   } = currentUser;
 
   return (

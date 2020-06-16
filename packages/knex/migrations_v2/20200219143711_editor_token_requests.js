@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("editor_token_requests", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("editor_token_requests", function (table) {
     table.increments();
     table.string("email").notNullable();
     table.string("name");
@@ -7,6 +7,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw("DROP TABLE editor_token_requests");
 };

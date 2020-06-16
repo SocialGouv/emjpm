@@ -10,12 +10,12 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
-  YAxis
+  YAxis,
 } from "recharts";
 
 import { getMesureCategoryTypeColor } from "../../util/mesures";
 
-const MesureAllocationChart = props => {
+const MesureAllocationChart = (props) => {
   const { mesures } = props;
   return (
     <Card p="4">
@@ -29,7 +29,7 @@ const MesureAllocationChart = props => {
               bottom: 20,
               left: 25,
               right: 20,
-              top: 20
+              top: 20,
             }}
           >
             <CartesianGrid stroke="#f5f5f5" />

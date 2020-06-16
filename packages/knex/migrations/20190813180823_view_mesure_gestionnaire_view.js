@@ -1,4 +1,4 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   return knex.raw(`
 CREATE VIEW view_mesure_gestionnaire AS
  SELECT dep.id department_id, dep.nom dep_nom, 'ANTENNE' discriminator, ser.id source_id, ser.mesures_awaiting, ser.mesures_in_progress, ser.mesures_max
@@ -11,7 +11,7 @@ union
   `);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
 DROP VIEW view_mesure_gestionnaire
   `);

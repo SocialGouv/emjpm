@@ -14,15 +14,15 @@ function getRegionCode(zipcode) {
   }
 }
 
-exports.up = async knex => {
+exports.up = async (knex) => {
   const departements = await knex("departements").select("id", "code");
   if (departements) {
     const tis = await knex.select("id", "code_postal").from("tis");
     if (tis) {
-      tis.forEach(async ti => {
+      tis.forEach(async (ti) => {
         const { id, code_postal } = ti;
         const regionCode = getRegionCode(code_postal);
-        const departement = departements.find(d => d.code === regionCode);
+        const departement = departements.find((d) => d.code === regionCode);
         if (departement) {
           await knex("tis")
             .where({ id })
@@ -33,6 +33,6 @@ exports.up = async knex => {
   }
 };
 
-exports.down = async knex => {
+exports.down = async (knex) => {
   await knex("tis").update({ departement_id: null });
 };

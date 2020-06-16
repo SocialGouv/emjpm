@@ -28,8 +28,8 @@ class EnqueteReponsesPreposePrestationsSociales extends Model {
         rsa: { type: "float" },
         als_apl: { type: "float" },
         aspa: { type: "float" },
-        apa: { type: "float" }
-      }
+        apa: { type: "float" },
+      },
     };
   }
 }

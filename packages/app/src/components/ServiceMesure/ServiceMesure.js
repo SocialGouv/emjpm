@@ -7,7 +7,7 @@ import { MesureContext, mesureFormatter } from "../MesureContext";
 import { MESURE_TYPE } from "./constants";
 import { content, statusBox, subtitle } from "./style";
 
-const ServiceMesure = props => {
+const ServiceMesure = (props) => {
   const {
     realAge,
     cabinet,
@@ -22,7 +22,7 @@ const ServiceMesure = props => {
     ville,
     pays,
     antenne,
-    id
+    id,
   } = useContext(MesureContext);
 
   return (

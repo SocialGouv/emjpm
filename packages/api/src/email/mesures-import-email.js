@@ -49,5 +49,5 @@ const mesuresImportEmail = async (
 };
 
 module.exports = {
-  mesuresImportEmail
+  mesuresImportEmail,
 };

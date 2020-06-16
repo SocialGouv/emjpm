@@ -60,7 +60,7 @@ const Mesure = (props) => {
     tribunal,
     tiId,
     latitude,
-    longitude
+    longitude,
   } = props;
 
   let currentStatus;

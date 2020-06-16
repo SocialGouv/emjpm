@@ -32,8 +32,8 @@ const ServiceCreateAntenne = () => {
           contact_phone: values.contact_phone,
           mesures_max: values.mesures_max,
           name: values.name,
-          service_id: service_id
-        }
+          service_id: service_id,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);

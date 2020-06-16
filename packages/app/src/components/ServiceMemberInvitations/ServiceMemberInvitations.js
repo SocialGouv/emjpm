@@ -11,15 +11,15 @@ import {
   listActionStyle,
   listDateStyle,
   listEmailStyle,
-  listStyle
+  listStyle,
 } from "./styles";
 
-const ServiceMemberInvitations = props => {
+const ServiceMemberInvitations = (props) => {
   const { service, isAdmin } = props;
 
   const [deleteServiceMemberInvitation] = useMutation(DELETE_SERVICE_MEMBER_INVITATION);
   const { loading, error, data } = useQuery(SERVICE_MEMBER_INVITATIONS, {
-    variables: { serviceId: service.id }
+    variables: { serviceId: service.id },
   });
 
   if (loading) {
@@ -30,10 +30,10 @@ const ServiceMemberInvitations = props => {
     return "Error...";
   }
 
-  const handleDelete = async id => {
+  const handleDelete = async (id) => {
     await deleteServiceMemberInvitation({
       refetchQueries: ["ServiceMemberInvitations"],
-      variables: { id }
+      variables: { id },
     });
   };
 

@@ -2,11 +2,11 @@ export default {
   label: {
     color: "#595959",
     fontSize: "13px",
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   strongLabel: {
     display: "inline-block",
     fontWeight: "bold",
-    color: "#007AD9"
-  }
+    color: "#007AD9",
+  },
 };

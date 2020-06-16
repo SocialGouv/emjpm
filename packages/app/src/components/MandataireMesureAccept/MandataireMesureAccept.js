@@ -9,7 +9,7 @@ import { MandataireMesureAcceptForm } from "./MandataireMesureAcceptForm";
 import { ACCEPT_MESURE, MANDATAIRE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { ServiceMesureAcceptStyle } from "./style";
 
-export const MandataireMesureAccept = props => {
+export const MandataireMesureAccept = (props) => {
   const client = useApolloClient();
   const mesure = useContext(MesureContext);
   const { mandataireId, id } = mesure;
@@ -18,14 +18,14 @@ export const MandataireMesureAccept = props => {
     refetchQueries: [
       {
         query: MANDATAIRE,
-        variables: { id: mandataireId }
-      }
-    ]
+        variables: { id: mandataireId },
+      },
+    ],
   });
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mandataireId } });
-    }
+    },
   });
 
   return (
@@ -37,12 +37,12 @@ export const MandataireMesureAccept = props => {
           if (values.country.value === "FR") {
             const location = await getLocation(client, {
               zipcode: values.zipcode,
-              city: values.city
+              city: values.city,
             });
 
             if (!location || !location.department) {
               setErrors({
-                zipcode: `Le code postal semble invalide.`
+                zipcode: `Le code postal semble invalide.`,
               });
               return setSubmitting(false);
             } else {
@@ -62,13 +62,13 @@ export const MandataireMesureAccept = props => {
               date_ouverture: values.date_ouverture,
               id,
               residence: values.residence.value,
-              pays: values.country.value
-            }
+              pays: values.country.value,
+            },
           });
 
           setSubmitting(false);
           await Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
-            shallow: true
+            shallow: true,
           });
         }}
         mt="3"

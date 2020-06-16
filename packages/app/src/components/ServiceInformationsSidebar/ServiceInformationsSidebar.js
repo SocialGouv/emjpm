@@ -13,7 +13,7 @@ import {
   icon,
   partTitle,
   sidebarStyle,
-  title
+  title,
 } from "./style";
 
 const ServiceInformationsSidebar = () => {
@@ -27,7 +27,7 @@ const ServiceInformationsSidebar = () => {
     etablissement,
     latitude,
     longitude,
-    service_antennes
+    service_antennes,
   } = service;
 
   const hasInvalidGeocode = !latitude || !longitude;
@@ -64,7 +64,7 @@ const ServiceInformationsSidebar = () => {
           <Text sx={description(true)}>{mesures_awaiting} en attente</Text>
         </Box>
       </Flex>
-      {service_antennes.map(antenne => (
+      {service_antennes.map((antenne) => (
         <Flex sx={cardStyle(false)} key={antenne.id} alignItems="center" mb="2">
           <Box sx={icon(false)}>
             <Buildings size="24" />

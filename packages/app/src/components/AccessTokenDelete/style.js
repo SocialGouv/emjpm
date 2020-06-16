@@ -1,5 +1,5 @@
 const AccessTokenDeleteStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { AccessTokenDeleteStyle };

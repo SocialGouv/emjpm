@@ -7,7 +7,7 @@ import { Box, Text } from "rebass";
 import { GET_SERVICES_DISPONIBILITY } from "./queries";
 import { PreferencesPanelStyle } from "./style";
 
-const ServiceSidebar = props => {
+const ServiceSidebar = (props) => {
   const { isDescriptionHidden } = props;
   const { data, error, loading } = useQuery(GET_SERVICES_DISPONIBILITY);
 
@@ -45,7 +45,7 @@ const ServiceSidebar = props => {
             fontWeight: 600,
             lineHeight: 1.6,
             mt: "5",
-            textAlign: "center"
+            textAlign: "center",
           }}
         >
           Ces informations sont indicatives et sont communiquées au juge des tutelles
@@ -57,12 +57,12 @@ const ServiceSidebar = props => {
 
 ServiceSidebar.defaultProps = {
   currentAntenne: null,
-  isDescriptionHidden: false
+  isDescriptionHidden: false,
 };
 
 ServiceSidebar.propTypes = {
   currentAntenne: PropTypes.string,
-  isDescriptionHidden: PropTypes.bool
+  isDescriptionHidden: PropTypes.bool,
 };
 
 export { ServiceSidebar };

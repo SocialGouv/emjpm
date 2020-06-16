@@ -1,9 +1,9 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.dropTable("service_antennes");
 };
 
-exports.down = function(knex) {
-  return knex.schema.createTable("service_antennes", table => {
+exports.down = function (knex) {
+  return knex.schema.createTable("service_antennes", (table) => {
     table.increments();
     table.string("etablissement");
     table.string("poste");
@@ -19,9 +19,6 @@ exports.down = function(knex) {
     table.string("nom");
     table.string("prenom");
     table.integer("mandataire_id");
-    table
-      .timestamp("created_at")
-      .notNullable()
-      .defaultTo(knex.fn.now());
+    table.timestamp("created_at").notNullable().defaultTo(knex.fn.now());
   });
 };

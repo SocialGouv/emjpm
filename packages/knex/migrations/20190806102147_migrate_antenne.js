@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.alterTable("mandataires", function(table) {
+exports.up = async function (knex) {
+  await knex.schema.alterTable("mandataires", function (table) {
     table.integer("service_id");
   });
 
@@ -10,13 +10,13 @@ exports.up = async function(knex) {
                         )`
   );
 
-  await knex.schema.alterTable("mandataires", function(table) {
+  await knex.schema.alterTable("mandataires", function (table) {
     table.dropColumn("antenne_id");
   });
 
   await knex("service_antenne").del();
 
-  await knex.schema.alterTable("service_antenne", function(table) {
+  await knex.schema.alterTable("service_antenne", function (table) {
     table.integer("bak_mandataire_id").unique();
   });
 
@@ -24,9 +24,7 @@ exports.up = async function(knex) {
   const users = await knex("users").where({ type: "service" });
   const mandataireIds = [];
   for (const user of users) {
-    const service = await knex("services")
-      .where("id", user.service_id)
-      .first();
+    const service = await knex("services").where("id", user.service_id).first();
     const mandataireList = await knex("mandataires").where("user_id", user.id);
 
     if (mandataireList.length > 0) {
@@ -48,7 +46,7 @@ exports.up = async function(knex) {
           mesures_awaiting: mandataire.mesures_en_attente || 0,
           mesures_in_progress: mandataire.mesures_en_cours || 0,
           mesures_max: mandataire.dispo_max || 0,
-          date_mesure_update: mandataire.date_mesure_update
+          date_mesure_update: mandataire.date_mesure_update,
         });
         headquarters = false;
       }
@@ -66,7 +64,7 @@ exports.up = async function(knex) {
         contact_phone: service.telephone,
         mesures_awaiting: 0,
         mesures_in_progress: 0,
-        mesures_max: service.dispo_max || 0
+        mesures_max: service.dispo_max || 0,
       });
     }
   }
@@ -74,7 +72,7 @@ exports.up = async function(knex) {
   // MIGRATION DES MANDATAIRES EN ANNTENNES
   const mandataires = await knex("mandataires")
     .whereNotIn("id", mandataireIds)
-    .andWhere(builder => builder.whereNotNull("service_id"));
+    .andWhere((builder) => builder.whereNotNull("service_id"));
 
   for (const mandataire of mandataires) {
     await knex("service_antenne").insert({
@@ -90,7 +88,7 @@ exports.up = async function(knex) {
       contact_email: mandataire.contact_email,
       contact_phone: mandataire.telephone,
       mesures_in_progress: mandataire.mesures_en_cours || 0,
-      mesures_max: mandataire.dispo_max || 0
+      mesures_max: mandataire.dispo_max || 0,
     });
   }
 
@@ -103,11 +101,11 @@ exports.up = async function(knex) {
   );
 };
 
-exports.down = async function(knex) {
-  await knex.schema.alterTable("service_antenne", function(table) {
+exports.down = async function (knex) {
+  await knex.schema.alterTable("service_antenne", function (table) {
     table.dropColumn("bak_mandataire_id");
   });
-  return knex.schema.alterTable("mandataires", function(table) {
+  return knex.schema.alterTable("mandataires", function (table) {
     table.integer("antenne_id");
     table.dropColumn("service_id");
   });

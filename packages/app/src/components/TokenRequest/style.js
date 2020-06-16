@@ -1,5 +1,5 @@
 const TokenRequestStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { TokenRequestStyle };

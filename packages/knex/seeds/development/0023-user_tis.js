@@ -1,46 +1,46 @@
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   return knex("user_tis")
     .del() // Deletes ALL existing entries
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("user_tis").insert({
         ti_id: 2,
-        user_id: 5
+        user_id: 5,
       });
     })
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("user_tis").insert({
         ti_id: 1,
-        user_id: 1
+        user_id: 1,
       });
     })
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("user_tis").insert({
         ti_id: 1,
-        user_id: 2
+        user_id: 2,
       });
     })
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("user_tis").insert({
         ti_id: 2,
-        user_id: 1
+        user_id: 1,
       });
     })
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("user_tis").insert({
         ti_id: 2,
-        user_id: 2
+        user_id: 2,
       });
     })
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("user_tis").insert({
         ti_id: 1,
-        user_id: 32
+        user_id: 32,
       });
     });
 };

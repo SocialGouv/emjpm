@@ -10,12 +10,12 @@ import {
   DELETE_MANDATAIRE_MESURE,
   DELETE_SERVICE_MESURE,
   RECALCULATE_MANDATAIRE_MESURES,
-  RECALCULATE_SERVICE_MESURES
+  RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
 import { MANDATAIRE, SERVICE } from "./queries";
 import { MagistratMesureRemoveStyle } from "./style";
 
-export const MagistratMesureDeleteForm = props => {
+export const MagistratMesureDeleteForm = (props) => {
   const { mesure } = props;
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
   const [deleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE, {
@@ -25,23 +25,23 @@ export const MagistratMesureDeleteForm = props => {
     refetchQueries: [
       {
         query: MANDATAIRE,
-        variables: { id: mesure.mandataireId }
-      }
-    ]
+        variables: { id: mesure.mandataireId },
+      },
+    ],
   });
 
   const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
     refetchQueries: [
       {
         query: SERVICE,
-        variables: { id: mesure.serviceId }
-      }
-    ]
+        variables: { id: mesure.serviceId },
+      },
+    ],
   });
   const [deleteServiceMesure] = useMutation(DELETE_SERVICE_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
-    }
+    },
   });
 
   const formik = useFormik({
@@ -50,15 +50,15 @@ export const MagistratMesureDeleteForm = props => {
         await deleteMandataireMesure({
           variables: {
             id: mesure.id,
-            mandataire_id: mesure.mandataireId
-          }
+            mandataire_id: mesure.mandataireId,
+          },
         });
       } else if (mesure.serviceId) {
         await deleteServiceMesure({
           variables: {
             id: mesure.id,
-            service_id: mesure.serviceId
-          }
+            service_id: mesure.serviceId,
+          },
         });
       }
 
@@ -67,8 +67,8 @@ export const MagistratMesureDeleteForm = props => {
     },
     validationSchema: magistratMesureDeleteSchema,
     initialValues: {
-      reason_delete: ""
-    }
+      reason_delete: "",
+    },
   });
 
   return (

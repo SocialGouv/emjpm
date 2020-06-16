@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.alterTable("services", function(table) {
+exports.up = async function (knex) {
+  await knex.schema.alterTable("services", function (table) {
     table.integer("mesures_in_progress");
     table.integer("mesures_awaiting");
   });
@@ -9,8 +9,8 @@ update services s set mesures_awaiting = (select count(m.id) from mesures m wher
   `);
 };
 
-exports.down = function(knex) {
-  return knex.schema.alterTable("services", function(table) {
+exports.down = function (knex) {
+  return knex.schema.alterTable("services", function (table) {
     table.dropColumn("mesures_in_progress");
     table.dropColumn("mesures_awaiting");
   });

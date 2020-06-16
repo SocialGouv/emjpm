@@ -15,7 +15,7 @@ export const Enquetes = () => {
   const { enquetes } = data;
   return (
     <Fragment>
-      {enquetes.map(enquete => {
+      {enquetes.map((enquete) => {
         return (
           <Card mb={1} key={enquete.id}>
             <Flex alignItems="center" justifyContent="flex-start">

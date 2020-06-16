@@ -1,11 +1,11 @@
-const cardStyle = userId => {
+const cardStyle = (userId) => {
   return {
     mb: "1",
     overflow: "hidden",
     pl: "16px",
     position: "relative",
     width: "100%",
-    borderLeft: userId ? "2px solid green" : "2px solid red"
+    borderLeft: userId ? "2px solid green" : "2px solid red",
   };
 };
 
@@ -15,7 +15,7 @@ const labelStyle = {
   fontSize: "11px",
   fontWeight: "600",
   mb: "5px",
-  mt: "7px"
+  mt: "7px",
 };
 
 const descriptionStyle = {
@@ -24,7 +24,7 @@ const descriptionStyle = {
   fontWeight: "600",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
 };
 
 export { cardStyle, labelStyle, descriptionStyle };

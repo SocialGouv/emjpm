@@ -8,14 +8,14 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 import { enquetePreposePersonnelFormationMjpmFormMapper } from "./EnquetePreposePersonnelFormationMjpmFormMapper";
 import { enquetePreposePersonnelFormationMjpmFormSchema as validationSchema } from "./EnquetePreposePersonnelFormationMjpmFormSchema";
 
-export const EnquetePreposePersonnelFormationMjpmForm = props => {
+export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const {
@@ -25,7 +25,7 @@ export const EnquetePreposePersonnelFormationMjpmForm = props => {
     values,
     errors,
     showError,
-    submit
+    submit,
   } = useEnqueteForm({
     onSubmit,
     enqueteContext,
@@ -34,7 +34,7 @@ export const EnquetePreposePersonnelFormationMjpmForm = props => {
     step,
     validationSchema,
     dataToForm: enquetePreposePersonnelFormationMjpmFormMapper.dataToForm,
-    loading
+    loading,
   });
 
   return (
@@ -100,19 +100,19 @@ export const EnquetePreposePersonnelFormationMjpmForm = props => {
           <Box>
             {renderFormationPreposeBox({
               prefix: "en_poste_cnc",
-              label: "Préposés CNC en poste au 01/01/2020"
+              label: "Préposés CNC en poste au 01/01/2020",
             })}
           </Box>
           <Box>
             {renderFormationPreposeBox({
               prefix: "embauches_cnc",
-              label: "Préposés CNC embauchés depuis le 01/01/2020"
+              label: "Préposés CNC embauchés depuis le 01/01/2020",
             })}
           </Box>
           <Box>
             {renderFormationPreposeBox({
               prefix: "formation_non_cnc",
-              label: "Préposés en cours de formation"
+              label: "Préposés en cours de formation",
             })}
           </Box>
         </Box>

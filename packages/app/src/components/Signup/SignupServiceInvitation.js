@@ -10,7 +10,7 @@ import signup from "./signup";
 import { SignupServiceInvitationForm } from "./SignupServiceInvitationForm";
 import { cardStyle, grayBox } from "./style";
 
-export const SignupServiceInvitation = props => {
+export const SignupServiceInvitation = (props) => {
   const { token } = props;
   const client = useApolloClient();
   const { data, loading, error } = useQuery(SERVICE_MEMBER_INVITATION, { variables: { token } });
@@ -41,23 +41,23 @@ export const SignupServiceInvitation = props => {
             password: values.password,
             prenom: values.prenom,
             type: "service",
-            username: values.email
+            username: values.email,
           },
           service: {
-            service_id: invitation.service_id
-          }
+            service_id: invitation.service_id,
+          },
         },
         onComplete: () => {
           setSubmitting(false);
         },
-        onError: errors => {
+        onError: (errors) => {
           console.log("error");
           console.log(errors);
           setErrors(errors);
         },
         onSuccess: () => {
           Router.push("/login");
-        }
+        },
       });
     }
   };

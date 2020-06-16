@@ -4,7 +4,7 @@ const authEditorJwtStrategy = require("./strategies/authEditorJwtStrategy");
 const authUserJwtStrategy = require("./strategies/authUserJwtStrategy");
 const {
   strategy: authHasuraWebHookHeaderSecretStrategy,
-  userSerializer: authHasuraUserSerializer
+  userSerializer: authHasuraUserSerializer,
 } = require("./strategies/authHasuraWebHookHeaderSecretStrategy");
 
 const logger = require("../utils/logger");
@@ -37,10 +37,10 @@ function init() {
     knex("users")
       .where({ id })
       .first()
-      .then(user => {
+      .then((user) => {
         done(null, user);
       })
-      .catch(err => {
+      .catch((err) => {
         logger.error(err);
         done(err, null);
       });

@@ -9,14 +9,14 @@ import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvali
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { useEnqueteContext } from "../useEnqueteContext.hook";
 import { enqueteIndividuelMenuBuilder } from "./enqueteIndividuelMenuBuilder.service";
-export const EnqueteIndividuel = props => {
+export const EnqueteIndividuel = (props) => {
   const router = useRouter();
 
   const { enquete, userId, currentStep } = props;
   const { id: enqueteId } = enquete;
 
   const { data, loading, error } = useQuery(ENQUETE_REPONSE_STATUS, {
-    variables: { enqueteId, userId }
+    variables: { enqueteId, userId },
   });
 
   const enqueteReponse = data ? data.enquete_reponse_status || {} : {};
@@ -36,12 +36,12 @@ export const EnqueteIndividuel = props => {
     enqueteContext,
     dispatchEnqueteContextEvent,
     saveAndNavigate,
-    confirmExitInvalidFormDialog
+    confirmExitInvalidFormDialog,
   } = useEnqueteContext({
     currentStep,
     section,
     navigateToStep,
-    sections
+    sections,
   });
 
   if (loading) {
@@ -86,7 +86,7 @@ export const EnqueteIndividuel = props => {
         <MenuStepper
           sections={sections}
           currentStep={currentStep}
-          onClickLink={x => saveAndNavigate(x)}
+          onClickLink={(x) => saveAndNavigate(x)}
         />
       </Box>
       <Box py={"50px"} pl={"35px"} flex={1}>
@@ -112,7 +112,7 @@ export const EnqueteIndividuel = props => {
     if (step !== currentStep.step || substep !== currentStep.substep) {
       await router.push("/mandataires/enquetes/[enquete_id]", {
         pathname: `/mandataires/enquetes/${enqueteId}`,
-        query: { step, substep }
+        query: { step, substep },
       });
       window.scrollTo(0, 0);
     }

@@ -39,7 +39,7 @@ export const getLocation = async (client, { address, zipcode, city }) => {
     const code = getRegionCode(zipcode);
     const { data } = await client.query({
       query: LOCATIONS,
-      variables: { code, zipcode }
+      variables: { code, zipcode },
     });
 
     // 3. If address parameter is not specified we get "geolocalisation_code_postal" rows and try to match via city name
@@ -51,14 +51,14 @@ export const getLocation = async (client, { address, zipcode, city }) => {
         const [{ latitude, longitude }] = geolocations;
         geolocation = {
           latitude,
-          longitude
+          longitude,
         };
       }
     }
 
     return {
       department: departments.length ? departments[0] : null,
-      geolocation
+      geolocation,
     };
   } catch (err) {
     console.error(err.message);

@@ -17,5 +17,5 @@ export {
   LayoutPublic,
   LayoutMagistratMap,
   LayoutServicesMap,
-  LayoutMandataireMap
+  LayoutMandataireMap,
 };

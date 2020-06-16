@@ -20,8 +20,8 @@ class AccessToken extends Model {
         user_id: { type: "integrer" },
         access_token: { type: "string" },
         editor_id: { type: "integrer" },
-        editor_url: { type: "string" }
-      }
+        editor_url: { type: "string" },
+      },
     };
   }
 }

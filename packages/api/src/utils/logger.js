@@ -4,7 +4,7 @@ const env = process.env.NODE_ENV || "development";
 const isDev = env === "development";
 
 const logger = pino({
-  prettyPrint: isDev
+  prettyPrint: isDev,
 });
 
 module.exports = logger;

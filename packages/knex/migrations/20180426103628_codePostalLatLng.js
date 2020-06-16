@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("codePostalLatLngs", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("codePostalLatLngs", function (table) {
     table.increments();
     table.string("code_postal");
     table.float("latitude");
@@ -7,6 +7,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("codePostalLatLngs");
 };

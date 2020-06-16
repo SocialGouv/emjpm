@@ -6,7 +6,7 @@ import React from "react";
 
 import { TRIBUNAL } from "./queries";
 
-const TribunalAutoComplete = props => {
+const TribunalAutoComplete = (props) => {
   const client = useApolloClient();
   const { defaultOptions, hasError, value, name, id, onChange } = props;
   return (
@@ -18,17 +18,17 @@ const TribunalAutoComplete = props => {
       defaultOptions={defaultOptions}
       hasError={hasError}
       isClearable={false}
-      loadOptions={debounce(async query => {
+      loadOptions={debounce(async (query) => {
         const { data } = await client.query({
           query: TRIBUNAL,
-          variables: { name: `%${query}%` }
+          variables: { name: `%${query}%` },
         });
 
         return !data.tis
           ? []
-          : data.tis.map(t => ({
+          : data.tis.map((t) => ({
               label: t.etablissement,
-              value: t.id
+              value: t.id,
             }));
       }, 500)}
       placeholder={"Tribunal"}
@@ -38,7 +38,7 @@ const TribunalAutoComplete = props => {
 };
 
 TribunalAutoComplete.defaultProps = {
-  hasError: false
+  hasError: false,
 };
 
 TribunalAutoComplete.propTypes = {
@@ -47,7 +47,7 @@ TribunalAutoComplete.propTypes = {
   id: PropTypes.string,
   hasError: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
-  defaultOptions: PropTypes.arrayOf(PropTypes.object)
+  defaultOptions: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default TribunalAutoComplete;

@@ -26,7 +26,7 @@ export const EnqueteConfirmExitInvalidFormDialog = ({ open, onConfirm, onCancel 
     <Box display={open ? "block" : "none"} onClick={onCancel}>
       <Modal>
         <ModalContent
-          onClick={e => {
+          onClick={(e) => {
             e.stopPropagation();
           }}
         >

@@ -23,8 +23,8 @@ class EnqueteReponsesFinancement extends Model {
         produits_bareme_prelevements: { type: "float" },
         autre_produits: { type: "float" },
         financement_public: { type: "float" },
-        aide_sociale_conseil_departemental: { type: "float" }
-      }
+        aide_sociale_conseil_departemental: { type: "float" },
+      },
     };
   }
 }

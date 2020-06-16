@@ -12,7 +12,7 @@ function getBorderProps({ hasError, hasWarning }) {
   return {};
 }
 
-export const SmallInput = props => {
+export const SmallInput = (props) => {
   return (
     <Input
       {...props}
@@ -23,18 +23,18 @@ export const SmallInput = props => {
         fontSize: "14px",
         padding: "15px 5px",
         textAlign: "center",
-        width: props.width ? `${props.width}px` : "60px"
+        width: props.width ? `${props.width}px` : "60px",
       }}
     />
   );
 };
 
 SmallInput.defaultProps = {
-  hasError: false
+  hasError: false,
 };
 
 SmallInput.propTypes = {
-  hasError: PropTypes.bool
+  hasError: PropTypes.bool,
 };
 
 export default SmallInput;

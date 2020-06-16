@@ -6,13 +6,13 @@ import { Box } from "rebass";
 
 import { MANDATAIRE } from "./queries";
 
-const MagistratMesureMandataireTitle = props => {
+const MagistratMesureMandataireTitle = (props) => {
   const { id } = props;
 
   const { data, loading } = useQuery(MANDATAIRE, {
     variables: {
-      id
-    }
+      id,
+    },
   });
 
   if (loading) {
@@ -35,7 +35,7 @@ const MagistratMesureMandataireTitle = props => {
 };
 
 MagistratMesureMandataireTitle.propTypes = {
-  id: PropTypes.number
+  id: PropTypes.number,
 };
 
 export default MagistratMesureMandataireTitle;

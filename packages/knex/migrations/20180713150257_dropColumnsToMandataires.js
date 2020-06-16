@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.alterTable("mandataires", function(table) {
+exports.up = function (knex) {
+  return knex.schema.alterTable("mandataires", function (table) {
     table.dropColumn("curatelle");
     table.dropColumn("sauvegarde");
     table.dropColumn("curatelle_renforce");
@@ -7,6 +7,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

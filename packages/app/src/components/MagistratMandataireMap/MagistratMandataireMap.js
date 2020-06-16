@@ -5,14 +5,14 @@ import { formatGestionnaireId } from "../../util/mandataires";
 import { MagistratMandataireMapContent } from "./MagistratMandataireMapContent";
 import { MESURES } from "./queries";
 
-const MagistratMandataireMap = props => {
+const MagistratMandataireMap = (props) => {
   const { latitude, longitude, id, discriminator } = props;
   const { mandataireId, serviceId } = formatGestionnaireId(id);
   const { data, loading, error } = useQuery(MESURES, {
     variables: {
       mandataireId: mandataireId,
-      serviceId: serviceId
-    }
+      serviceId: serviceId,
+    },
   });
 
   if (loading) {

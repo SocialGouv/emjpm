@@ -8,7 +8,7 @@ const { Magistrat } = require("../../models/Magistrat");
 const { UserTis } = require("../../models/UserTis");
 const { UserRole } = require("../../models/UserRole");
 const {
-  ServiceMemberInvitation
+  ServiceMemberInvitation,
 } = require("../../models/ServiceMemberInvitation");
 const { ServiceMember } = require("../../models/ServiceMember");
 const { Role } = require("../../models/Role");
@@ -24,12 +24,10 @@ const createMagistrat = async (magistrat, user) => {
       "Renseigner un tribunal est obligatoire pour un compte 'magistrat'"
     );
   }
-  return Magistrat.query()
-    .allowInsert("[user_id, ti_id]")
-    .insert({
-      user_id: user.id,
-      ti_id: ti
-    });
+  return Magistrat.query().allowInsert("[user_id, ti_id]").insert({
+    user_id: user.id,
+    ti_id: ti,
+  });
 };
 
 const createMandataire = async (mandataireDatas, user_id) => {
@@ -44,7 +42,7 @@ const createMandataire = async (mandataireDatas, user_id) => {
     dispo_max,
     siret,
     latitude,
-    longitude
+    longitude,
   } = mandataireDatas;
 
   const mandataire = await Mandataire.query()
@@ -63,24 +61,18 @@ const createMandataire = async (mandataireDatas, user_id) => {
       ville,
       dispo_max,
       latitude,
-      longitude
+      longitude,
     });
 
-  await IndividuelAgrement.query()
-    .allowInsert("[mandataire_id]")
-    .insert({
-      mandataire_id: mandataire.id
-    });
-  await IndividuelExercice.query()
-    .allowInsert("[mandataire_id]")
-    .insert({
-      mandataire_id: mandataire.id
-    });
-  await IndividuelFormation.query()
-    .allowInsert("[mandataire_id]")
-    .insert({
-      mandataire_id: mandataire.id
-    });
+  await IndividuelAgrement.query().allowInsert("[mandataire_id]").insert({
+    mandataire_id: mandataire.id,
+  });
+  await IndividuelExercice.query().allowInsert("[mandataire_id]").insert({
+    mandataire_id: mandataire.id,
+  });
+  await IndividuelFormation.query().allowInsert("[mandataire_id]").insert({
+    mandataire_id: mandataire.id,
+  });
 
   return mandataire;
 };
@@ -90,32 +82,28 @@ const createUserTis = (tis, user_id) => {
     return true;
   }
   Promise.all(
-    tis.map(ti_id =>
-      UserTis.query()
-        .allowInsert("[user_id, ti_id]")
-        .insert({
-          user_id,
-          ti_id
-        })
+    tis.map((ti_id) =>
+      UserTis.query().allowInsert("[user_id, ti_id]").insert({
+        user_id,
+        ti_id,
+      })
     )
   );
 };
 
-const createDirection = userId => {
+const createDirection = (userId) => {
   return Direction.query().insert({
-    user_id: userId
+    user_id: userId,
   });
 };
 
 const createRole = async (userId, type) => {
   const [role] = await Role.query().where("name", type);
   if (role && userId) {
-    return UserRole.query()
-      .allowInsert("[user_id,role_id]")
-      .insert({
-        user_id: userId,
-        role_id: role.id
-      });
+    return UserRole.query().allowInsert("[user_id,role_id]").insert({
+      user_id: userId,
+      role_id: role.id,
+    });
   }
 };
 
@@ -145,7 +133,7 @@ const signup = async (req, res) => {
         nom,
         prenom,
         active: invitation ? true : false,
-        email: email.toLowerCase().trim()
+        email: email.toLowerCase().trim(),
       });
 
     await createRole(user.id, type);
@@ -159,15 +147,13 @@ const signup = async (req, res) => {
       case "service": {
         const {
           invitation,
-          service: { service_id }
+          service: { service_id },
         } = body;
 
-        await ServiceMember.query()
-          .allowInsert("[user_id,service_id]")
-          .insert({
-            user_id: user.id,
-            service_id
-          });
+        await ServiceMember.query().allowInsert("[user_id,service_id]").insert({
+          user_id: user.id,
+          service_id,
+        });
 
         if (invitation) {
           await ServiceMemberInvitation.query()
@@ -179,9 +165,7 @@ const signup = async (req, res) => {
       }
       case "ti": {
         const { cabinet } = body.magistrat;
-        await User.query()
-          .update({ cabinet })
-          .where("id", user.id);
+        await User.query().update({ cabinet }).where("id", user.id);
         await createMagistrat(body.magistrat, user);
         break;
       }

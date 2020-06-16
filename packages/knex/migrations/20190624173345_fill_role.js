@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex("role").insert([
     { name: "admin" },
     { name: "individuel" },
@@ -8,10 +8,10 @@ exports.up = function(knex) {
     { name: "direction" },
     { name: "direction_national" },
     { name: "direction_regional" },
-    { name: "direction_departemental" }
+    { name: "direction_departemental" },
   ]);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex("role").del();
 };

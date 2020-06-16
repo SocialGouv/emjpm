@@ -8,7 +8,7 @@ import { PaginatedList } from "../PaginatedList";
 import { LB_USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
-const getType = type => {
+const getType = (type) => {
   if (type === "individuel") {
     return "Mandataire individuel";
   }
@@ -38,13 +38,13 @@ const ListBlancheItem = ({ item }) => (
         <Text sx={descriptionStyle}>{item.email}</Text>
       </Flex>
       <Flex width="50%" flexDirection="column">
-        {item.lb_departements.map(lbDep => (
+        {item.lb_departements.map((lbDep) => (
           <Flex
             key={lbDep.id}
             mb="1"
             pl="2"
             sx={{
-              borderLeft: "1px solid"
+              borderLeft: "1px solid",
             }}
             justifyContent="flex-start"
           >
@@ -78,8 +78,8 @@ const ListeBlanche = () => {
       offset: currentOffset,
       type: selectedType ? selectedType.value : null,
       departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null,
-      searchText: debouncedSearchText ? `${debouncedSearchText}%` : null
-    }
+      searchText: debouncedSearchText ? `${debouncedSearchText}%` : null,
+    },
   });
 
   if (loading) {

@@ -7,7 +7,7 @@ import { EnquetePopulationsForm } from "./EnquetePopulationsForm";
 import { UPDATE_ENQUETE_POPULATIONS_TUTELLE } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_TUTELLE } from "./queries";
 
-export const EnquetePopulationsTutelle = props => {
+export const EnquetePopulationsTutelle = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -15,29 +15,29 @@ export const EnquetePopulationsTutelle = props => {
     userId,
     enquete: { id: enqueteId },
     section,
-    step
+    step,
   } = props;
   const {
-    enquete_reponse_ids: { populations_id }
+    enquete_reponse_ids: { populations_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_TUTELLE, {
     variables: {
-      id: populations_id
-    }
+      id: populations_id,
+    },
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_POPULATIONS_TUTELLE, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_REPONSE_POPULATIONS_TUTELLE,
-        variables: { id: populations_id }
-      }
-    ]
+        variables: { id: populations_id },
+      },
+    ],
   });
 
   const populations = data ? data.enquete_reponses_populations_by_pk || {} : {};
@@ -67,7 +67,7 @@ export const EnquetePopulationsTutelle = props => {
     type_service_hospitalier_soins_longue_duree:
       populations.tutelle_service_hospitalier_soins_longue_duree || "",
     type_service_psychiatrique: populations.tutelle_service_psychiatrique || "",
-    type_autre_service: populations.tutelle_autre_service || ""
+    type_autre_service: populations.tutelle_autre_service || "",
   };
 
   return (
@@ -78,12 +78,12 @@ export const EnquetePopulationsTutelle = props => {
           data={reponsePopulations}
           section={section}
           step={step}
-          onSubmit={async values => {
+          onSubmit={async (values) => {
             const data = Object.keys(values).reduce((acc, key) => {
               if (values[key]) {
                 return {
                   ...acc,
-                  [key]: parseInt(values[key], 10)
+                  [key]: parseInt(values[key], 10),
                 };
               }
               return acc;
@@ -92,8 +92,8 @@ export const EnquetePopulationsTutelle = props => {
             await updateEnquete({
               variables: {
                 id: populations_id,
-                ...data
-              }
+                ...data,
+              },
             });
           }}
           enqueteContext={enqueteContext}

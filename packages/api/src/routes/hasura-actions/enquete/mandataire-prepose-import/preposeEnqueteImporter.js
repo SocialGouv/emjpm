@@ -3,26 +3,26 @@ const logger = require("../../../../utils/logger");
 const preposeEnqueteRepository = require("./preposeEnqueteRepository");
 
 const preposeEnqueteImporter = {
-  importEnqueteFile
+  importEnqueteFile,
 };
 
 async function importEnqueteFile({
   file: { content },
   // eslint-disable-next-line no-unused-vars
-  enqueteContext: { enqueteId, userId, service, mandataire }
+  enqueteContext: { enqueteId, userId, service, mandataire },
 }) {
   const start = Date.now();
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);
 
   // parse
   const tabs = await preposeEnqueteExcelParser.parse({
-    content
+    content,
   });
 
   // save data to database
   await preposeEnqueteRepository.update(enqueteId, {
     tabs,
-    mandataireId: mandataire.id
+    mandataireId: mandataire.id,
   });
 
   const durationInSeconds = Math.ceil((Date.now() - start) / 1000);

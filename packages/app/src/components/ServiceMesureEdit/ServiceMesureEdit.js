@@ -13,39 +13,39 @@ import { GET_SERVICE_USERS } from "../UserContext/queries";
 import { ServiceMesureEditForm } from "./ServiceMesureEditForm";
 import { ServiceMesureEditStyle } from "./style";
 
-const ServiceMesureEdit = props => {
+const ServiceMesureEdit = (props) => {
   const client = useApolloClient();
   const mesure = useContext(MesureContext);
   const { serviceId, id } = mesure;
   const { service_members, id: userId } = useContext(UserContext);
   const [
     {
-      service: { service_antennes }
-    }
+      service: { service_antennes },
+    },
   ] = service_members;
 
   const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
-    variables: { serviceId }
+    variables: { serviceId },
   });
   const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.service_tis) : []), [data]);
   const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
     refetchQueries: [
       {
         query: SERVICE,
-        variables: { id: serviceId }
+        variables: { id: serviceId },
       },
       {
         query: GET_SERVICE_USERS,
         variables: {
-          userId
-        }
-      }
-    ]
+          userId,
+        },
+      },
+    ],
   });
   const [editMesure] = useMutation(EDIT_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesures({ variables: { service_id: serviceId } });
-    }
+    },
   });
 
   if (loading) {
@@ -66,12 +66,12 @@ const ServiceMesureEdit = props => {
           if (values.country.value === "FR") {
             const location = await getLocation(client, {
               zipcode: values.zipcode,
-              city: values.city
+              city: values.city,
             });
 
             if (!location || !location.department) {
               setErrors({
-                zipcode: `Le code postal semble invalide.`
+                zipcode: `Le code postal semble invalide.`,
               });
               return setSubmitting(false);
             } else {
@@ -99,11 +99,11 @@ const ServiceMesureEdit = props => {
               ti_id: values.tribunal.value,
               type: values.type.value,
               pays: values.country.value,
-              cabinet: values.cabinet
-            }
+              cabinet: values.cabinet,
+            },
           });
           await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
-            shallow: true
+            shallow: true,
           });
           setSubmitting(false);
         }}

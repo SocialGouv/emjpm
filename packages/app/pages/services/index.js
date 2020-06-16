@@ -15,15 +15,15 @@ const Mesures = () => {
   const { service_members } = useContext(UserContext);
   const [
     {
-      service: { service_antennes }
-    }
+      service: { service_antennes },
+    },
   ] = service_members;
 
   return (
     <FiltersContextProvider
       initialValues={{
         mesureStatus: MESURE_STATUS_LABEL_VALUE[0],
-        mesureType: DEFAULT_MESURE_TYPE
+        mesureType: DEFAULT_MESURE_TYPE,
       }}
     >
       <LayoutServices>
@@ -46,7 +46,7 @@ const Mesures = () => {
           <Flex
             sx={{
               flexWrap: "wrap",
-              mt: "2"
+              mt: "2",
             }}
           >
             <ServiceMesures />

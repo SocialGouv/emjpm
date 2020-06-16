@@ -21,12 +21,12 @@ const MagistratMesures = () => {
     searchText:
       debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
     status: mesureStatus ? mesureStatus.value : null,
-    type: mesureType ? mesureType.value : null
+    type: mesureType ? mesureType.value : null,
   };
 
   const { data, error, loading } = useQuery(MESURES, {
     fetchPolicy: "cache-and-network",
-    variables: queryVariables
+    variables: queryVariables,
   });
 
   const selectMesure = ({ id }) => {
@@ -51,7 +51,7 @@ const MagistratMesures = () => {
         <Fragment>
           {mesures.length > 0 ? (
             <Fragment>
-              {mesures.map(mesure => {
+              {mesures.map((mesure) => {
                 return (
                   <MesureListItem
                     key={mesure.id}
@@ -74,7 +74,7 @@ const MagistratMesures = () => {
                     marginPagesDisplayed={2}
                     forcePage={currentOffset / RESULT_PER_PAGE}
                     pageRangeDisplayed={5}
-                    onPageChange={data => {
+                    onPageChange={(data) => {
                       setCurrentOffset(data.selected * RESULT_PER_PAGE);
                     }}
                     subContainerClassName={"pages pagination"}

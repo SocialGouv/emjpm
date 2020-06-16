@@ -16,8 +16,8 @@ const server = require("@emjpm/api/src/server");
 const createHasuraTriggerEvent = (data, session_variables) => ({
   event: {
     data: {
-      new: data
-    }
+      new: data,
+    },
   },
   session_variables: session_variables
     ? session_variables
@@ -25,8 +25,8 @@ const createHasuraTriggerEvent = (data, session_variables) => ({
         // default test authentication
         "x-hasura-role": "fake-role",
         "x-hasura-user-id": 0,
-        "x-hasura-service-id": 0
-      }
+        "x-hasura-service-id": 0,
+      },
 });
 
 beforeAll(async () => {

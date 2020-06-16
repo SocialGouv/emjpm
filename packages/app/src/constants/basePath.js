@@ -4,5 +4,5 @@ export const PATH = {
   individuel: "/mandataires",
   prepose: "/mandataires",
   service: "/services",
-  ti: "/magistrats"
+  ti: "/magistrats",
 };

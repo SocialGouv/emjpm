@@ -11,7 +11,9 @@
     "seeds": "knex seed:run",
     "migration:create": "knex migrate:make",
     "test": "jest",
-    "test:update": "npx jest -u"
+    "test:update": "npx jest -u",
+    "prettier": "prettier --check '**/*.js'",
+    "prettier:fix": "prettier --write '**/*.js'"
   },
   "keywords": [],
   "license": "Apache-2.0",
@@ -27,6 +29,6 @@
     "eslint": "^6.8.0",
     "jest": "^24.9.0",
     "jest-environment-knex": "^1.1.14",
-    "prettier": "^1.19.1"
+    "prettier": "^2.0.5"
   }
 }

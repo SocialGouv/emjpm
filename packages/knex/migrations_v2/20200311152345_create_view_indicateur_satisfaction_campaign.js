@@ -1,4 +1,4 @@
-exports.up = async knex => {
+exports.up = async (knex) => {
   await knex.raw(`
     CREATE VIEW public.view_indicateur_satisfaction_campaign AS
     SELECT d.code, d.nom, u.type, avg(sca.value) AS value
@@ -47,7 +47,7 @@ exports.up = async knex => {
 `);
 };
 
-exports.down = async knex => {
+exports.down = async (knex) => {
   await knex.raw(
     `DROP VIEW IF EXISTS public.view_indicateur_satisfaction_campaign`
   );

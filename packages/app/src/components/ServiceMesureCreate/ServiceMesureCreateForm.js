@@ -21,15 +21,15 @@ const initialValues = {
   city: "",
   zipcode: "",
   country: { value: "FR", label: COUNTRIES["FR"] },
-  cabinet: ""
+  cabinet: "",
 };
 
-export const ServiceMesureCreateForm = props => {
+export const ServiceMesureCreateForm = (props) => {
   const { tribunaux, antenneOptions, handleSubmit } = props;
   const formik = useFormik({
     onSubmit: handleSubmit,
     initialValues,
-    validationSchema: serviceMesureSchema
+    validationSchema: serviceMesureSchema,
   });
 
   return (
@@ -53,7 +53,7 @@ export const ServiceMesureCreateForm = props => {
           value={formik.values.tribunal}
           name="tribunal"
           hasError={formik.errors.tribunal && formik.touched.tribunal}
-          onChange={option => formik.setFieldValue("tribunal", option)}
+          onChange={(option) => formik.setFieldValue("tribunal", option)}
           defaultOptions={tribunaux}
         />
         {formik.touched.tribunal && (
@@ -93,7 +93,7 @@ export const ServiceMesureCreateForm = props => {
           placeholder="Antenne"
           value={formik.values.antenne}
           hasError={formik.errors.antenne_id && formik.touched.antenne_id}
-          onChange={option => formik.setFieldValue("antenne", option)}
+          onChange={(option) => formik.setFieldValue("antenne", option)}
           options={antenneOptions}
         />
         {formik.touched.antenne_id && (
@@ -121,7 +121,7 @@ export const ServiceMesureCreateForm = props => {
           placeholder="Type de mesure"
           value={formik.values.type}
           hasError={formik.errors.type && formik.touched.type}
-          onChange={option => formik.setFieldValue("type", option)}
+          onChange={(option) => formik.setFieldValue("type", option)}
           options={MESURE_TYPE_LABEL_VALUE}
         />
         {formik.touched.type && <InlineError message={formik.errors.type} fieldId="type" />}
@@ -133,7 +133,7 @@ export const ServiceMesureCreateForm = props => {
           placeholder="Civilité"
           value={formik.values.civilite}
           hasError={formik.errors.civilite && formik.touched.civilite}
-          onChange={option => formik.setFieldValue("civilite", option)}
+          onChange={(option) => formik.setFieldValue("civilite", option)}
           options={CIVILITY}
         />
         {formik.touched.civilite && (
@@ -159,7 +159,7 @@ export const ServiceMesureCreateForm = props => {
           placeholder="Type de residence"
           value={formik.values.residence}
           hasError={!!formik.errors.residence}
-          onChange={option => formik.setFieldValue("residence", option)}
+          onChange={(option) => formik.setFieldValue("residence", option)}
           options={RESIDENCE}
         />
         {formik.touched.residence && (
@@ -174,16 +174,16 @@ export const ServiceMesureCreateForm = props => {
           placeholder="Pays"
           value={formik.values.country}
           hasError={formik.errors.country && formik.touched.country}
-          onChange={option => formik.setFieldValue("country", option)}
+          onChange={(option) => formik.setFieldValue("country", option)}
           options={[
             {
               label: "France",
-              value: "FR"
+              value: "FR",
             },
             {
               label: "Belgique",
-              value: "BE"
-            }
+              value: "BE",
+            },
           ]}
         />
         {formik.errors.country && formik.touched.country && <Text>{formik.errors.country}</Text>}
@@ -197,7 +197,7 @@ export const ServiceMesureCreateForm = props => {
                 value={formik.values.zipcode}
                 id="zipcode"
                 name="zipcode"
-                onChange={async e => {
+                onChange={async (e) => {
                   const { value } = e.target;
                   await formik.setFieldValue("zipcode", value);
                   await formik.setFieldValue("city", "");
@@ -215,7 +215,7 @@ export const ServiceMesureCreateForm = props => {
                 name="city"
                 id="city"
                 zipcode={formik.values.zipcode}
-                onChange={value => formik.setFieldValue("city", value)}
+                onChange={(value) => formik.setFieldValue("city", value)}
                 value={formik.values.city}
                 hasError={!!formik.errors.city}
               />

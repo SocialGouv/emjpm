@@ -1,4 +1,4 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   return knex.raw(
     `
     delete from user_role where user_id = 2;
@@ -10,6 +10,6 @@ exports.up = async function(knex) {
   );
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

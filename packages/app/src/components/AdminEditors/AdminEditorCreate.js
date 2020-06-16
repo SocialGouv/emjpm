@@ -13,16 +13,14 @@ export const AdminEditorCreate = () => {
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     // TODO(paullaunay): generate key on server-side via hasura webhook or postgres func
-    const api_token = Math.random()
-      .toString(36)
-      .substring(2);
+    const api_token = Math.random().toString(36).substring(2);
 
     try {
       await addEditor({
         variables: {
           name: values.name,
-          api_token
-        }
+          api_token,
+        },
       });
     } catch (error) {
       Sentry.captureException(error);

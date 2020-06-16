@@ -18,7 +18,7 @@ const Informations = () => {
       <BoxWrapper mt={4}>
         <Flex
           sx={{
-            flexWrap: "wrap"
+            flexWrap: "wrap",
           }}
         >
           <Box
@@ -26,7 +26,7 @@ const Informations = () => {
               flexBasis: 0,
               flexGrow: 99999,
               minWidth: 320,
-              p: 1
+              p: 1,
             }}
           >
             <Heading2>Informations générales de votre service</Heading2>
@@ -36,7 +36,7 @@ const Informations = () => {
             sx={{
               flexBasis: 320,
               flexGrow: 1,
-              p: 1
+              p: 1,
             }}
           >
             <Heading2>Mesures souhaitées</Heading2>
@@ -45,7 +45,7 @@ const Informations = () => {
         </Flex>
         <Box
           sx={{
-            p: 1
+            p: 1,
           }}
         >
           <ServiceAntennes mt="1" />

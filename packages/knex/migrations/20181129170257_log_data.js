@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("logs_data", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("logs_data", function (table) {
     table.increments();
     table.integer("user_id");
     table.string("action");
@@ -8,6 +8,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("logs_data");
 };

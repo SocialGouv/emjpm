@@ -1,5 +1,5 @@
 export {
   Context as SignupContext,
   Provider as SignupContextProvider,
-  Consumer as SignupContextConsumer
+  Consumer as SignupContextConsumer,
 } from "./SignupContext";

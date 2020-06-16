@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.createTable("service_personnels", function(table) {
+exports.up = async function (knex) {
+  await knex.schema.createTable("service_personnels", function (table) {
     table.increments();
     table.timestamp("created_at").defaultTo(knex.fn.now());
     table
@@ -22,7 +22,7 @@ exports.up = async function(knex) {
   `);
 };
 
-exports.down = async function(knex) {
+exports.down = async function (knex) {
   await knex.raw(`
   DROP TABLE service_personnels;
   `);

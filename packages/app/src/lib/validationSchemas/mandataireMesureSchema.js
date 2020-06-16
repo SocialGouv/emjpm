@@ -7,12 +7,12 @@ const mandataireMesureSchema = yup.object().shape({
     .min(1900, "L'année choisi doit être au minimum 1900.")
     .max(2019, "L'année choisi doit être au maximum 2019."),
   city: yup.string().when("country", {
-    is: country => country.value && country.value === "FR",
-    then: yup.string().required()
+    is: (country) => country.value && country.value === "FR",
+    then: yup.string().required(),
   }),
   civilite: yup.string().required(),
   country: yup.object().shape({
-    value: yup.string().required()
+    value: yup.string().required(),
   }),
   date_ouverture: yup.date().required(),
   numero_dossier: yup.string(),
@@ -21,12 +21,9 @@ const mandataireMesureSchema = yup.object().shape({
   tribunal: yup.string().required(),
   type: yup.string().required(),
   zipcode: yup.string().when("country", {
-    is: country => country.value && country.value === "FR",
-    then: yup
-      .string()
-      .length(5)
-      .required()
-  })
+    is: (country) => country.value && country.value === "FR",
+    then: yup.string().length(5).required(),
+  }),
 });
 
 export { mandataireMesureSchema };

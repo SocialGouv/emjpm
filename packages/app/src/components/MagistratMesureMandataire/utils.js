@@ -9,7 +9,7 @@ export const formatGestionnaire = ({
   mesures_awaiting,
   remaining_capacity,
   service,
-  id
+  id,
 }) => {
   return formatMandataire(
     remaining_capacity,

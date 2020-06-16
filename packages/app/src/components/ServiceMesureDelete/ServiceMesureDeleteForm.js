@@ -9,37 +9,37 @@ import * as Yup from "yup";
 import { DELETE_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
 import { SERVICE } from "./queries";
 
-export const ServiceDeleteMesureForm = props => {
+export const ServiceDeleteMesureForm = (props) => {
   const { mesure } = props;
   const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
     refetchQueries: [
       {
         query: SERVICE,
-        variables: { id: mesure.serviceId }
-      }
-    ]
+        variables: { id: mesure.serviceId },
+      },
+    ],
   });
   const [deleteMesure] = useMutation(DELETE_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
-    }
+    },
   });
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await deleteMesure({
         variables: {
-          id: mesure.id
-        }
+          id: mesure.id,
+        },
       });
 
       setSubmitting(false);
       Router.push(`/services`);
     },
     validationSchema: Yup.object().shape({
-      reason_delete: Yup.string().required("Required")
+      reason_delete: Yup.string().required("Required"),
     }),
-    initialValues: { reason_delete: "" }
+    initialValues: { reason_delete: "" },
   });
 
   return (

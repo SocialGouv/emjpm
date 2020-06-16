@@ -8,7 +8,7 @@ import { ServiceMesureDelete } from "../../../../src/components/ServiceMesureDel
 import { ServiceMesureSidebar } from "../../../../src/components/ServiceMesureSidebar";
 import { withAuthSync } from "../../../../src/util/auth";
 
-const DeleteMesurePage = props => {
+const DeleteMesurePage = (props) => {
   const { mesureId } = props;
   return (
     <MesureProvider mesureId={mesureId}>
@@ -16,14 +16,14 @@ const DeleteMesurePage = props => {
         <BoxWrapper mt={6} px="0">
           <Flex
             sx={{
-              flexWrap: "wrap"
+              flexWrap: "wrap",
             }}
           >
             <Box
               sx={{
                 flexBasis: 250,
                 flexGrow: 1,
-                p: 1
+                p: 1,
               }}
             >
               <ServiceMesureSidebar mesureId={mesureId} />
@@ -33,7 +33,7 @@ const DeleteMesurePage = props => {
                 flexBasis: 0,
                 flexGrow: 99999,
                 minWidth: 320,
-                p: 1
+                p: 1,
               }}
             >
               <ServiceMesureDelete />

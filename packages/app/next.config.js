@@ -6,11 +6,11 @@ const withImages = require("next-images");
 require("dotenv").config({ path: "../../.env" });
 
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true"
+  enabled: process.env.ANALYZE === "true",
 });
 
 const withSourceMaps = require("@zeit/next-source-maps")({
-  devtool: "hidden-source-map"
+  devtool: "hidden-source-map",
 });
 
 module.exports = flow(
@@ -24,7 +24,7 @@ module.exports = flow(
     GRAPHQL_SERVER_URI: process.env.GRAPHQL_SERVER_URI || "http://localhost:5000/v1/graphql",
     NODE_ENV: process.env.NODE_ENV,
     PACKAGE_VERSION: process.env.VERSION || require("./package.json").version,
-    SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN
+    SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN,
   },
   webpack: (config, { isServer }) => {
     if (!isServer) {
@@ -34,5 +34,5 @@ module.exports = flow(
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
 
     return config;
-  }
+  },
 });

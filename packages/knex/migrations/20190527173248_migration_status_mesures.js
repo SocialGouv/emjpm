@@ -12,19 +12,17 @@ const typesMesure = {
   "sauvegarde de justice": "Sauvegarde de justice",
   "curatelle renforcée à la personne": "Curatelle renforcée à la personne",
   "sauvegarde de justice avec mandat spécial":
-    "Sauvegarde de justice avec mandat spécial"
+    "Sauvegarde de justice avec mandat spécial",
 };
 
-exports.up = function(knex) {
+exports.up = function (knex) {
   return Promise.all(
-    Object.keys(typesMesure).map(type =>
-      knex("mesures")
-        .where({ type })
-        .update({ type: typesMesure[type] })
+    Object.keys(typesMesure).map((type) =>
+      knex("mesures").where({ type }).update({ type: typesMesure[type] })
     )
   );
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

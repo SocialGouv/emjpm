@@ -1,5 +1,5 @@
 const ServiceMesureCreateStyle = {
-  bg: "blue"
+  bg: "blue",
 };
 
 export { ServiceMesureCreateStyle };

@@ -9,10 +9,7 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 const validationSchema = yup.object(
   ["sorties_main_levee", "sorties_deces", "sorties_masp"].reduce((acc, attrName) => {
-    acc[attrName] = yup
-      .number()
-      .positive()
-      .integer();
+    acc[attrName] = yup.number().positive().integer();
     return acc;
   }, [])
 );
@@ -20,7 +17,7 @@ function dataToForm(data) {
   return {
     sortiesMainLevee: data.sortiesMainLevee || "",
     sortiesDeces: data.sortiesDeces || "",
-    sortiesMasp: data.sortiesMasp || ""
+    sortiesMasp: data.sortiesMasp || "",
   };
 }
 
@@ -28,7 +25,7 @@ function formToData(data) {
   return {
     sortiesMainLevee: parseIntToSubmit(data.sortiesMainLevee),
     sortiesDeces: parseIntToSubmit(data.sortiesDeces),
-    sortiesMasp: parseIntToSubmit(data.sortiesMasp)
+    sortiesMasp: parseIntToSubmit(data.sortiesMasp),
   };
 
   function parseIntToSubmit(value) {
@@ -36,14 +33,14 @@ function formToData(data) {
   }
 }
 
-export const EnqueteActiviteCausesSortiesDispositifForm = props => {
+export const EnqueteActiviteCausesSortiesDispositifForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
@@ -55,7 +52,7 @@ export const EnqueteActiviteCausesSortiesDispositifForm = props => {
     validationSchema,
     dataToForm,
     formToData,
-    loading
+    loading,
   });
 
   return (

@@ -18,8 +18,8 @@ const TokenRequest = () => {
         await EditorTokenRequest({
           variables: {
             email: values.email,
-            name: values.name
-          }
+            name: values.name,
+          },
         });
         toggleMessage(true);
       } catch {
@@ -30,8 +30,8 @@ const TokenRequest = () => {
     validationSchema: editorTokenSchema,
     initialValues: {
       name: "",
-      email: ""
-    }
+      email: "",
+    },
   });
 
   return (
@@ -50,7 +50,7 @@ const TokenRequest = () => {
                 color: "white",
                 lineHeight: "1.5",
                 mt: "1",
-                p: "1"
+                p: "1",
               }}
             >
               {`Votre demande a bien été prise en compte`}
@@ -64,7 +64,7 @@ const TokenRequest = () => {
                 color: "white",
                 lineHeight: "1.5",
                 mt: "1",
-                p: "1"
+                p: "1",
               }}
             >
               {`Un problème est survenu, merci de ressayer`}

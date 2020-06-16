@@ -19,32 +19,20 @@ const validationSchema = yup.object().shape({
   etablissements: yup.array().of(
     yup.object().shape({
       finess: yup.string().required(),
-      nombre_journees_hospitalisation: yup
-        .number()
-        .min(0)
-        .required(),
-      nombre_lits: yup
-        .number()
-        .min(0)
-        .required(),
+      nombre_journees_hospitalisation: yup.number().min(0).required(),
+      nombre_lits: yup.number().min(0).required(),
       raison_sociale: yup.string().required(),
       statut: yup.string().required(),
       type: yup.string().required(),
-      nombre_journees_esms: yup
-        .number()
-        .min(0)
-        .required(),
-      nombre_mesures: yup
-        .number()
-        .min(0)
-        .required()
+      nombre_journees_esms: yup.number().min(0).required(),
+      nombre_mesures: yup.number().min(0).required(),
     })
-  )
+  ),
 });
 
 function dataToForm(data) {
   const result = {
-    actions_information_tuteurs_familiaux: data.actions_information_tuteurs_familiaux || false
+    actions_information_tuteurs_familiaux: data.actions_information_tuteurs_familiaux || false,
   };
 
   if (!data.nombre_lits_journee_hospitalisation) {
@@ -59,15 +47,15 @@ function dataToForm(data) {
           statut: "",
           type: "",
           nombre_journees_esms: "",
-          nombre_mesures: ""
-        }
-      ]
+          nombre_mesures: "",
+        },
+      ],
     };
   } else {
     const items = data.nombre_lits_journee_hospitalisation;
     return {
       ...result,
-      etablissements: items.map(item => {
+      etablissements: items.map((item) => {
         return {
           finess: item.finess || "",
           nombre_journees_hospitalisation: item.nombre_journees_hospitalisation
@@ -80,22 +68,22 @@ function dataToForm(data) {
           nombre_journees_esms: item.nombre_journees_esms
             ? parseFloat(item.nombre_journees_esms)
             : "",
-          nombre_mesures: item.nombre_mesures ? parseFloat(item.nombre_mesures) : ""
+          nombre_mesures: item.nombre_mesures ? parseFloat(item.nombre_mesures) : "",
         };
-      })
+      }),
     };
   }
 }
 
 // nested arrays: https://jaredpalmer.com/formik/docs/guides/arrays
-export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
+export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const {
@@ -107,7 +95,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
     errors,
     showError,
     submit,
-    formik
+    formik,
   } = useEnqueteForm({
     onSubmit,
     enqueteContext,
@@ -116,7 +104,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
   return (
     <FormikProvider value={formik}>
@@ -131,14 +119,14 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
           <YesNoComboBox
             defaultValue={values.actions_information_tuteurs_familiaux}
             name="actions_information_tuteurs_familiaux"
-            onChange={value => {
+            onChange={(value) => {
               setFieldValue("actions_information_tuteurs_familiaux", value);
             }}
           />
         </Box>
         <FieldArray
           name="etablissements"
-          render={arrayHelpers => (
+          render={(arrayHelpers) => (
             <Box>
               <Flex mb={4} alignItems="center" justifyContent="space-between">
                 <Heading3>{`${values.etablissements.length} établissement${
@@ -157,7 +145,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                         statut: "",
                         type: "",
                         nombre_journees_esms: "",
-                        nombre_mesures: ""
+                        nombre_mesures: "",
                       });
                     }}
                   >
@@ -175,7 +163,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                       sx={{
                         position: "absolute",
                         right: 2,
-                        cursor: "pointer"
+                        cursor: "pointer",
                       }}
                     >
                       <SquaredCross width={"20px"} onClick={() => arrayHelpers.remove(index)} />
@@ -187,7 +175,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           label: "N° FINESS",
                           index,
                           value,
-                          error
+                          error,
                         })}
                       </Box>
                       <Box ml={2} flex={1 / 2}>
@@ -196,7 +184,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           label: "Raison sociale",
                           index,
                           value,
-                          error
+                          error,
                         })}
                       </Box>
                     </Flex>
@@ -208,7 +196,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           options: STATUTS,
                           index,
                           value,
-                          error
+                          error,
                         })}
                       </Box>
                       <Box ml={2} flex={1 / 2}>
@@ -218,7 +206,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           options: TYPES,
                           index,
                           value,
-                          error
+                          error,
                         })}
                       </Box>
                     </Flex>
@@ -229,7 +217,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           label: "Nombre de lits ou de places",
                           index,
                           value,
-                          error
+                          error,
                         })}
                       </Box>
                       <Box ml={2} flex={1 / 2}>
@@ -238,7 +226,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           label: "Nombre de journées d'hospitalisation complètes",
                           index,
                           value,
-                          error
+                          error,
                         })}
                       </Box>
                     </Flex>
@@ -249,7 +237,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           label: "Nombre de mesures au 31/12",
                           index,
                           value,
-                          error
+                          error,
                         })}
                       </Box>
                       <Box ml={2} flex={1 / 2}>
@@ -258,7 +246,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
                           label: "Nombre de journées pour les ESMS",
                           index,
                           value,
-                          error
+                          error,
                         })}
                       </Box>
                     </Flex>
@@ -307,7 +295,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = props => {
           name={id}
           value={findOption(options.byKey, value[attr])}
           hasError={showError && error ? !!error[attr] : false}
-          onChange={option => setFieldValue(id, option.value)}
+          onChange={(option) => setFieldValue(id, option.value)}
           options={options.byKey}
         />
         {showError && <InlineError message={error ? error[attr] : ""} fieldId={id} />}

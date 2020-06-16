@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("access_tokens", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("access_tokens", function (table) {
     table.increments();
     table.integer("user_id").notNullable();
     table.string("access_token").notNullable();
@@ -8,6 +8,6 @@ exports.up = function(knex) {
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("access_tokens");
 };

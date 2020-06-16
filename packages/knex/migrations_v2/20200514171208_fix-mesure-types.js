@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
  update mesures set type = 'mesure ad hoc' where type = 'ad hoc';
  update mesures set type = 'mesure ad hoc' where type = 'curatelle ad hoc';
@@ -28,4 +28,4 @@ exports.up = function(knex) {
   `);
 };
 
-exports.down = function(knex) {};
+exports.down = function (knex) {};

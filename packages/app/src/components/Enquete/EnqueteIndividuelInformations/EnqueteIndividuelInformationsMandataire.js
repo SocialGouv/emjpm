@@ -6,7 +6,7 @@ import { EnqueteIndividuelInformationsMandataireForm } from "./EnqueteIndividuel
 import { UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE } from "./queries";
 
-export const EnqueteIndividuelInformationsMandataire = props => {
+export const EnqueteIndividuelInformationsMandataire = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -14,29 +14,29 @@ export const EnqueteIndividuelInformationsMandataire = props => {
     userId,
     section,
     step,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { informations_mandataire_id }
+    enquete_reponse_ids: { informations_mandataire_id },
   } = enqueteReponse;
 
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE, {
     variables: {
-      id: informations_mandataire_id
-    }
+      id: informations_mandataire_id,
+    },
   });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE,
-        variables: { id: informations_mandataire_id }
-      }
-    ]
+        variables: { id: informations_mandataire_id },
+      },
+    ],
   });
 
   const informations = data ? data.enquete_reponses_informations_mandataire_by_pk || {} : {};
@@ -48,7 +48,7 @@ export const EnqueteIndividuelInformationsMandataire = props => {
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
-      onSubmit={async values => {
+      onSubmit={async (values) => {
         await updateEnquete({
           variables: {
             id: informations_mandataire_id,
@@ -68,8 +68,8 @@ export const EnqueteIndividuelInformationsMandataire = props => {
               values.secretaire_specialise_etp &&
               !isNaN(parseFloat(values.secretaire_specialise_etp))
                 ? parseFloat(values.secretaire_specialise_etp)
-                : null
-          }
+                : null,
+          },
         });
       }}
     />

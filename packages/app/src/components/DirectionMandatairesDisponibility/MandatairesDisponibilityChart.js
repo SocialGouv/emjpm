@@ -17,7 +17,7 @@ const MandatairesDisponibilityChart = ({ data }) => {
               bottom: 20,
               left: 0,
               right: 0,
-              top: 20
+              top: 20,
             }}
           >
             <Tooltip cursor={{ fill: "#F1F5F9" }} />
@@ -42,7 +42,7 @@ const MandatairesDisponibilityChart = ({ data }) => {
           display: "grid",
           gridGap: 3,
           gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
-          mt: "1"
+          mt: "1",
         }}
       >
         <Box>
@@ -66,7 +66,7 @@ const MandatairesDisponibilityChart = ({ data }) => {
           display: "grid",
           gridGap: 3,
           gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
-          mt: "1"
+          mt: "1",
         }}
       >
         <Box>

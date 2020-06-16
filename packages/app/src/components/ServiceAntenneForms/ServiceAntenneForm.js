@@ -6,7 +6,7 @@ import { Box } from "rebass";
 import { serviceAntenneSchema } from "../../lib/validationSchemas";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 
-const ServiceAntenneForm = props => {
+const ServiceAntenneForm = (props) => {
   const { antenne = {}, handleSubmit } = props;
   const {
     contact_email,
@@ -14,7 +14,7 @@ const ServiceAntenneForm = props => {
     contact_lastname,
     contact_firstname,
     mesures_max,
-    name
+    name,
   } = antenne;
   const geocode = geocodeInitialValue(antenne);
 
@@ -28,8 +28,8 @@ const ServiceAntenneForm = props => {
       contact_phone: contact_phone || "",
       mesures_max: mesures_max || "",
       name: name || "",
-      geocode
-    }
+      geocode,
+    },
   });
 
   return (
@@ -102,7 +102,7 @@ const ServiceAntenneForm = props => {
       </Field>
       <Field>
         <Geocode
-          onChange={geocode => formik.setFieldValue("geocode", geocode)}
+          onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
           resource={antenne}
         />
         <InlineError message={formik.errors.geocode} fieldId="geocode" />

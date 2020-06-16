@@ -10,34 +10,13 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 // schema identique à prestationsSocialesStatus (côté hasura actions)
 export const validationSchema = yup.object().shape({
-  aah: yup
-    .number()
-    .min(0)
-    .nullable(),
-  als_apl: yup
-    .number()
-    .min(0)
-    .nullable(),
-  apa: yup
-    .number()
-    .min(0)
-    .nullable(),
-  asi: yup
-    .number()
-    .min(0)
-    .nullable(),
-  aspa: yup
-    .number()
-    .min(0)
-    .nullable(),
-  pch: yup
-    .number()
-    .min(0)
-    .nullable(),
-  rsa: yup
-    .number()
-    .min(0)
-    .nullable()
+  aah: yup.number().min(0).nullable(),
+  als_apl: yup.number().min(0).nullable(),
+  apa: yup.number().min(0).nullable(),
+  asi: yup.number().min(0).nullable(),
+  aspa: yup.number().min(0).nullable(),
+  pch: yup.number().min(0).nullable(),
+  rsa: yup.number().min(0).nullable(),
 });
 function dataToForm(data) {
   return {
@@ -47,18 +26,18 @@ function dataToForm(data) {
     rsa: data.rsa || "",
     als_apl: data.als_apl || "",
     aspa: data.aspa || "",
-    apa: data.apa || ""
+    apa: data.apa || "",
   };
 }
 
-export const EnqueteIndividuelPrestationsSocialesForm = props => {
+export const EnqueteIndividuelPrestationsSocialesForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const { submitForm, handleChange, values, showError, errors, submit } = useEnqueteForm({
@@ -69,7 +48,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
 
   return (

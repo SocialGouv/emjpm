@@ -16,28 +16,28 @@ const EXTINCTION_LABEL_VALUE = [
   { label: "décès", value: "décès" },
   { label: "main levée", value: "levée" },
   { label: "erreur de saisie", value: "saisie" },
-  { label: "autre", value: "autr" }
+  { label: "autre", value: "autr" },
 ];
 
-export const MandataireMesureCloseForm = props => {
+export const MandataireMesureCloseForm = (props) => {
   const { mesure } = props;
 
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
     refetchQueries: [
       {
         query: MESURE,
-        variables: { id: mesure.id }
+        variables: { id: mesure.id },
       },
       {
         query: MANDATAIRE,
-        variables: { id: mesure.mandataireId }
-      }
-    ]
+        variables: { id: mesure.mandataireId },
+      },
+    ],
   });
   const [updateMesure] = useMutation(CLOSE_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
-    }
+    },
   });
 
   const formik = useFormik({
@@ -46,19 +46,19 @@ export const MandataireMesureCloseForm = props => {
         variables: {
           extinction: values.extinction,
           id: mesure.id,
-          reason_extinction: values.reason_extinction.value
-        }
+          reason_extinction: values.reason_extinction.value,
+        },
       });
       Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
-        shallow: true
+        shallow: true,
       });
       setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
       extinction: Yup.date().required("Required"),
-      reason_extinction: Yup.string().required("Required")
+      reason_extinction: Yup.string().required("Required"),
     }),
-    initialValues: { extinction: "", reason_extinction: "" }
+    initialValues: { extinction: "", reason_extinction: "" },
   });
 
   return (
@@ -92,7 +92,7 @@ export const MandataireMesureCloseForm = props => {
               placeholder="Raison de la fin de mandat"
               value={formik.values.type}
               hasError={formik.errors.type && formik.touched.type}
-              onChange={option => formik.setFieldValue("reason_extinction", option)}
+              onChange={(option) => formik.setFieldValue("reason_extinction", option)}
               options={EXTINCTION_LABEL_VALUE}
             />
           </Field>
@@ -106,7 +106,7 @@ export const MandataireMesureCloseForm = props => {
                     "/mandataires/mesures/[mesure_id]",
                     `/mandataires/mesures/${mesure.id}`,
                     {
-                      shallow: true
+                      shallow: true,
                     }
                   );
                 }}

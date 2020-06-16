@@ -5,18 +5,18 @@ import { Link as RebassLink } from "rebass";
 const LinkStyle = () => {
   return {
     "&:hover": {
-      textDecoration: "underline"
+      textDecoration: "underline",
     },
     color: "#007AD9",
     cursor: "pointer",
     fontSize: "13px",
-    fontWeight: 600
+    fontWeight: 600,
   };
 };
 
-const isExternalLink = href => href && (href.startsWith("http") || href.startsWith("mailto"));
+const isExternalLink = (href) => href && (href.startsWith("http") || href.startsWith("mailto"));
 
-const Link = props => {
+const Link = (props) => {
   if (isExternalLink(props.href)) {
     return (
       <RebassLink sx={LinkStyle()} {...props}>

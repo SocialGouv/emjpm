@@ -1,4 +1,4 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
   alter table lb_users add type varchar null;
   update lb_users set type = 'ti' where email like '%@justice.fr';
@@ -22,7 +22,7 @@ exports.up = function(knex) {
   `);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
   alter table lb_users drop column type;
   `);

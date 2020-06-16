@@ -1,5 +1,5 @@
-exports.up = async function(knex) {
-  await knex.schema.alterTable("enquete_reponses_populations", table => {
+exports.up = async function (knex) {
+  await knex.schema.alterTable("enquete_reponses_populations", (table) => {
     table.integer("autre_mesures_etablissement_personne_handicapee").nullable();
     table.integer("autre_mesures_service_personne_handicapee").nullable();
     table.integer("autre_mesures_ehpad").nullable();
@@ -13,8 +13,8 @@ exports.up = async function(knex) {
   });
 };
 
-exports.down = async function(knex) {
-  await knex.schema.alterTable("enquete_reponses_populations", table => {
+exports.down = async function (knex) {
+  await knex.schema.alterTable("enquete_reponses_populations", (table) => {
     table.dropColumn("autre_mesures_etablissement_personne_handicapee");
     table.dropColumn("autre_mesures_service_personne_handicapee");
     table.dropColumn("autre_mesures_ehpad");

@@ -18,7 +18,7 @@ Votre nouveau mot de passe a bien été enregistré.
 Bien à vous.
 `;
 
-const confirmationPasswordEmail = async email => {
+const confirmationPasswordEmail = async (email) => {
   try {
     await sendEmail(
       email,
@@ -33,5 +33,5 @@ const confirmationPasswordEmail = async email => {
 };
 
 module.exports = {
-  confirmationPasswordEmail
+  confirmationPasswordEmail,
 };
